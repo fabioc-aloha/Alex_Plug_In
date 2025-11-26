@@ -5,10 +5,11 @@
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-green.svg)](LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-purple.svg)](https://code.visualstudio.com/)
+[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-007ACC.svg)](https://marketplace.visualstudio.com/items?itemName=AlexTeam.alex-cognitive-architecture)
 
 **Transform your development environment into a sophisticated AI learning partner**
 
-[Features](#-extension-features) • [Quick Start](#-quick-start) • [Commands](#-available-commands) • [Documentation](#-documentation)
+[Install Now](https://marketplace.visualstudio.com/items?itemName=AlexTeam.alex-cognitive-architecture) • [Features](#-extension-features) • [Quick Start](#-quick-start) • [Commands](#-available-commands) • [Documentation](#-documentation)
 
 </div>
 
