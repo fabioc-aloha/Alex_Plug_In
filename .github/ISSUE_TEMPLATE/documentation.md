@@ -25,7 +25,7 @@ assignees: ''
 - [ ] .github/instructions/*.md
 - [ ] .github/prompts/*.md
 - [ ] domain-knowledge/DK-*.md
-- [ ] scripts/README.md
+- [ ] VS Code Extension Commands
 - [ ] Other: _____
 
 **Specific Section:** [e.g., "Synaptic Network Integrity" section]

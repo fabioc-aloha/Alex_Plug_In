@@ -1,7 +1,7 @@
 # Proprietary License
 
 ```text
-Project Catalyst - Cognitive Architecture Framework
+Project Alex Cognitive Architecture
 Copyright (c) 2025 Fabio Correa. All Rights Reserved.
 
 PROPRIETARY AND CONFIDENTIAL
@@ -30,7 +30,7 @@ Academic and research use is permitted for non-commercial purposes, including:
 Subject to proper attribution and citation requirements.
 
 MICROSOFT STRATEGIC PARTNERSHIP:
-Microsoft Corporation is granted specific implementation rights for Project Catalyst
+Microsoft Corporation is granted specific implementation rights for Alex Cognitive Architecture
 within the Global Customer Experience (GCX) division for research validation and
 business implementation purposes, subject to separate partnership agreements.
 
@@ -42,8 +42,5 @@ COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-For licensing inquiries, please contact:
-- Email: fcorrea@student.touro.edu
-- Microsoft Contact: fabioc@microsoft.com
-- Phone: +1 (910) 930-2254
+For licensing inquiries, please contact the repository maintainers via GitHub Issues.
 ```

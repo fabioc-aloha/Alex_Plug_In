@@ -92,9 +92,9 @@ The brain stem - core cognitive architecture that transforms GitHub Copilot into
 - IUPAC version naming system documentation
 
 #### `scripts/` - Automation Tools
-- `neural-dream.ps1` - Automated neural maintenance and optimization
+- VS Code Extension - Automated neural maintenance via `Alex: Dream (Neural Maintenance)` command
 - `cognitive-config.json` - Alex-specific configuration
-- `validate-synapses.ps1` - Network integrity validation
+- VS Code Command - Network integrity validation via `Alex: Dream (Neural Maintenance)`
 - Visualization and analysis tools
 
 ## ⚡ Quick Integration Steps

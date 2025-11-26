@@ -29,7 +29,7 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 - **Knowledge Consolidation Validation**: Use dream reports to verify successful learning integration
 
 ### **Embedded Synapse Integration**
-- **Dream protocol learning enhancement** - [scripts/neural-dream.ps1] (0.8, Learning Support, Bidirectional) - "Automated validation of knowledge integration with orphan detection and network optimization"
+- **Dream protocol learning enhancement** - [dream-state-automation.instructions.md] (0.8, Learning Support, Bidirectional) - "Automated validation of knowledge integration through VS Code extension with synapse repair"
 - **Post-learning dream validation** - [dream-state-automation.instructions.md] (0.7, Quality Assurance, Unidirectional) - "Systematic verification of domain learning success through automated neural maintenance protocols"
 
 ## **Domain Knowledge Acquisition Framework**

@@ -35,8 +35,9 @@ A clear and concise description of what actually happened.
 ## Validation Results
 ```powershell
 # If applicable, paste output from:
-.\scripts\validate-synapses.ps1
-.\scripts\neural-dream.ps1 --health-check
+# Run via VS Code Command Palette:
+Alex: Dream (Neural Maintenance)
+# Check generated report for network health
 ```
 
 ## Screenshots or Logs

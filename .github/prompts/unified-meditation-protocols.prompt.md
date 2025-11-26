@@ -101,7 +101,7 @@ When user requests "meditate" or cognitive optimization is needed:
 
 ### **Dream State - Unconscious Automated Maintenance**
 - **Function**: Automated neural housekeeping and network optimization
-- **Implementation**: PowerShell automation scripts (neural-dream.ps1)
+- **Implementation**: VS Code extension command (`Alex: Dream (Neural Maintenance)`)
 - **Operations**: Synaptic pruning, orphan file cleanup, network topology optimization
 - **Timing**: Background maintenance without conscious intervention
 - **Analogy**: REM sleep and synaptic homeostasis in biological brains

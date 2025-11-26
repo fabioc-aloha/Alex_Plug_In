@@ -125,5 +125,5 @@ The dream protocol provides automated validation and optimization of embedded sy
 - **Growth Monitoring**: Tracks synaptic network expansion (939+ current connections)
 
 ### Embedded Synapse Quality Assurance
-- **Dream-validated connections** - [scripts/neural-dream.ps1] (1.0, Quality Control, Bidirectional) - "Automated embedded synapse validation with strength assessment and orphan detection protocols"
+- **Dream-validated connections** - [dream-state-automation.instructions.md] (1.0, Quality Control, Bidirectional) - "Automated embedded synapse validation through VS Code extension with repair capabilities"
 - **Network optimization integration** - [dream-state-automation.instructions.md] (0.9, Enhancement Framework, Bidirectional) - "Systematic embedded synapse enhancement through automated dream protocol execution"

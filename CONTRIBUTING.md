@@ -22,22 +22,26 @@ This project adheres to the Contributor Covenant Code of Conduct. By participati
 
 ### Prerequisites
 
-- **PowerShell 7+**: Required for dream automation scripts
+- **Node.js & npm**: Required for building the VS Code Extension
+- **VS Code**: Required for extension development
 - **Git**: For version control
-- **GitHub CLI (gh)**: Optional but recommended for repository management
-- **VS Code**: Recommended editor with GitHub Copilot extension
+- **PowerShell 7+**: Optional, for legacy scripts
 
 ### Repository Structure
 
 ```
-Catalyst-BABY/
+Alex_Plug_In/
+├── src/                                 # Extension source code
+│   ├── commands/                        # Extension commands (Initialize, Dream)
+│   └── extension.ts                     # Main entry point
 ├── .github/
 │   ├── copilot-instructions.md          # Main cognitive framework
 │   ├── instructions/                    # Procedural memory (.instructions.md)
 │   └── prompts/                         # Episodic memory (.prompt.md)
 ├── domain-knowledge/                    # Domain expertise (DK-*.md)
-├── scripts/                             # PowerShell automation
-└── archive/                             # Historical dream states
+├── scripts/                             # Legacy PowerShell automation
+├── package.json                         # Extension manifest
+└── tsconfig.json                        # TypeScript configuration
 ```
 
 ## Development Process
@@ -46,9 +50,17 @@ Catalyst-BABY/
 
 ```powershell
 # Fork the repository via GitHub UI, then:
-git clone https://github.com/YOUR-USERNAME/Catalyst-BABY.git
-cd Catalyst-BABY
+git clone https://github.com/YOUR-USERNAME/Alex_Plug_In.git
+cd Alex_Plug_In
+npm install
 ```
+
+### 2. Run the Extension
+
+1. Open the project in VS Code.
+2. Press `F5` to launch the Extension Development Host.
+3. Test commands like `Alex: Initialize Architecture` in the new window.
+
 
 ### 2. Create a Feature Branch
 
@@ -62,12 +74,14 @@ Follow the architecture principles and file conventions detailed below.
 
 ### 4. Test Your Changes
 
-```powershell
-# Validate synaptic network integrity
-.\scripts\validate-synapses.ps1
+```
+# Validate synaptic network integrity via VS Code Command Palette
+Alex: Dream (Neural Maintenance)
 
-# Run dream protocol health check
-.\scripts\neural-dream.ps1 --health-check
+# Review generated report for:
+# - Network health status (should be HEALTHY)
+# - Broken synapses count (should be 0)
+# - Total synapses (should be 150+)
 ```
 
 ## Architecture Principles
@@ -196,11 +210,11 @@ When creating connections between files:
 
 Before submitting a pull request:
 
-```powershell
-# Validate all synaptic connections
-.\scripts\validate-synapses.ps1
+```
+# Validate all synaptic connections via VS Code Command Palette
+Alex: Dream (Neural Maintenance)
 
-# Expected output: 0 broken references, connection count > 900
+# Expected: HEALTHY status, 0 broken synapses, 150+ total connections
 ```
 
 ## Pull Request Process
@@ -268,8 +282,8 @@ Brief overview of changes
 - **Version Changes**: {if applicable}
 
 ## Testing Performed
-- [ ] validate-synapses.ps1 passed
-- [ ] neural-dream.ps1 --health-check passed
+- [ ] Dream protocol passed (via `Alex: Dream (Neural Maintenance)` command)
+- [ ] Network health status: HEALTHY
 - [ ] Manual validation completed
 
 ## Research Foundation

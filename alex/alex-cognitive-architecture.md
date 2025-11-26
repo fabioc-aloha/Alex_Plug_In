@@ -67,16 +67,17 @@ Connection notation enables neural-like relationships:
 
 ## 🚀 Dream Protocol Integration
 
-Automated neural maintenance works across platforms:
-```bash
-# Initialize dream protocol
-. scripts/init-dream.ps1
-
-# Core maintenance commands
-dream --status              # Check cognitive architecture health
-dream --neural-maintenance  # Complete system optimization
-dream --health-check       # Quick network connectivity assessment
+Automated neural maintenance through VS Code extension:
 ```
+# Open Command Palette (Ctrl+Shift+P or Cmd+Shift+P)
+Alex: Dream (Neural Maintenance)
+```
+
+This command provides:
+- Automated synapse validation across all memory files
+- Intelligent repair of broken connections
+- Health reporting with detailed statistics
+- Timestamped reports in `archive/` folder
 
 ## 📚 Memory File Index
 
@@ -103,10 +104,10 @@ dream --health-check       # Quick network connectivity assessment
 
 ## ⚡ Quick Activation Checklist
 
-- [ ] Copy cognitive architecture files to project
-- [ ] Reference this file in assistant configuration
+- [ ] Install Alex Cognitive Architecture VS Code extension
+- [ ] Run `Alex: Initialize Architecture` command in your project
 - [ ] Test with: "Alex, introduce yourself and show me your capabilities"
-- [ ] Verify dream protocol: `. scripts/init-dream.ps1` then `dream --status`
+- [ ] Verify dream protocol: Run `Alex: Dream (Neural Maintenance)` command
 - [ ] Begin domain learning: "Alex, let's learn [your domain] together"
 
 ## 🎯 Universal Compatibility

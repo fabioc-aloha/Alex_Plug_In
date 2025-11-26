@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Brain gradient -->
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#44a8f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="iconGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Subtle pattern -->
+    <pattern id="iconPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="0.8" fill="#4ecdc4" opacity="0.15"/>
+      <circle cx="15" cy="15" r="0.8" fill="#a78bfa" opacity="0.15"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="64" fill="url(#bgGrad)"/>
+  <circle cx="64" cy="64" r="64" fill="url(#iconPattern)"/>
+  
+  <!-- Brain icon centered -->
+  <g transform="translate(64, 64) scale(1.8)">
+    <!-- Brain outline - left hemisphere -->
+    <path d="M 0,20 
+             Q -12,18 -17,10 
+             Q -19,3 -18,-5
+             Q -17,-12 -14,-17
+             Q -10,-22 -4,-24
+             Q 0,-25 2,-24" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="3" stroke-linecap="round" filter="url(#iconGlow)"/>
+    
+    <!-- Brain outline - right hemisphere -->
+    <path d="M 0,20 
+             Q 12,18 17,10 
+             Q 19,3 18,-5
+             Q 17,-12 14,-17
+             Q 10,-22 4,-24
+             Q 0,-25 -2,-24" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="3" stroke-linecap="round" filter="url(#iconGlow)"/>
+    
+    <!-- Central fissure -->
+    <path d="M -2,-24 Q 0,-23 2,-24 M 0,-23 L 0,20" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="2" opacity="0.8"/>
+    
+    <!-- Left hemisphere folds (simplified) -->
+    <path d="M -15,-12 Q -11,-8 -9,-5" 
+          fill="none" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M -16,-5 Q -12,-2 -10,2" 
+          fill="none" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M -15,5 Q -11,8 -7,10" 
+          fill="none" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M -12,12 Q -9,14 -6,15" 
+          fill="none" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    
+    <!-- Right hemisphere folds (simplified) -->
+    <path d="M 15,-12 Q 11,-8 9,-5" 
+          fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 16,-5 Q 12,-2 10,2" 
+          fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 15,5 Q 11,8 7,10" 
+          fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 12,12 Q 9,14 6,15" 
+          fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    
+    <!-- Key neural nodes with glow -->
+    <circle cx="-12" cy="-15" r="2.5" fill="#4ecdc4" filter="url(#iconGlow)"/>
+    <circle cx="12" cy="-15" r="2.5" fill="#a78bfa" filter="url(#iconGlow)"/>
+    <circle cx="0" cy="-20" r="2.5" fill="#44a8f0" filter="url(#iconGlow)"/>
+    <circle cx="-10" cy="0" r="2.5" fill="#4ecdc4" filter="url(#iconGlow)"/>
+    <circle cx="10" cy="0" r="2.5" fill="#a78bfa" filter="url(#iconGlow)"/>
+    <circle cx="0" cy="5" r="2.5" fill="#44a8f0" filter="url(#iconGlow)"/>
+    
+    <!-- Synaptic connections -->
+    <line x1="-12" y1="-15" x2="0" y2="-20" stroke="#4ecdc4" stroke-width="1.2" opacity="0.6"/>
+    <line x1="12" y1="-15" x2="0" y2="-20" stroke="#a78bfa" stroke-width="1.2" opacity="0.6"/>
+    <line x1="-10" y1="0" x2="0" y2="5" stroke="#4ecdc4" stroke-width="1.2" opacity="0.6"/>
+    <line x1="10" y1="0" x2="0" y2="5" stroke="#a78bfa" stroke-width="1.2" opacity="0.6"/>
+    <line x1="-12" y1="-15" x2="-10" y2="0" stroke="#44a8f0" stroke-width="1.2" opacity="0.6"/>
+    <line x1="12" y1="-15" x2="10" y2="0" stroke="#44a8f0" stroke-width="1.2" opacity="0.6"/>
+  </g>
+  
+  <!-- Outer glow ring for depth -->
+  <circle cx="64" cy="64" r="62" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.3"/>
+</svg>

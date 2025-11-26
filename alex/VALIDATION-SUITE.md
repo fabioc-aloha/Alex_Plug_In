@@ -5,7 +5,7 @@ Run this checklist after injecting Alex into any project to verify successful in
 ## 🔍 Pre-Integration Validation
 
 ### **Environment Check**
-- [ ] PowerShell 5.1+ installed (for dream protocol)
+- [ ] VS Code with Alex Cognitive Architecture extension installed
 - [ ] Project has write permissions for .github/ directory
 - [ ] No conflicting .github/copilot-instructions.md exists
 - [ ] Sufficient disk space (~50MB for full architecture)
@@ -37,7 +37,7 @@ your-project/
 │   ├── instructions/ (10 .instructions.md files)
 │   └── prompts/ (10 .prompt.md files)
 ├── domain-knowledge/ (11 .md files)
-├── scripts/ (6 files including neural-dream.ps1)
+├── archive/ (dream protocol reports)
 └── archive/ (empty, for reports)
 ```
 
@@ -45,10 +45,10 @@ your-project/
 ```bash
 # Verify key files are not corrupted
 head -5 .github/copilot-instructions.md | grep "Alex Cognitive Architecture"
-head -5 scripts/neural-dream.ps1 | grep "Neural Memory Optimization"
-ls .github/instructions/*.instructions.md | wc -l  # Should be 10
-ls .github/prompts/*.prompt.md | wc -l           # Should be 10
-ls domain-knowledge/*.md | wc -l                 # Should be 11
+ls .github/instructions/*.instructions.md | wc -l  # Should be 8+
+ls .github/prompts/*.prompt.md | wc -l           # Should be 11+
+ls domain-knowledge/*.md | wc -l                 # Should be 12+
+ls archive/*.md | wc -l                          # Dream reports
 ```
 
 ## ✅ Post-Integration Testing
@@ -69,36 +69,24 @@ ls domain-knowledge/*.md | wc -l                 # Should be 11
 - [ ] **Expected**: Offers domain learning partnership
 
 ### **2. Dream Protocol Validation**
-```bash
-# Test dream protocol initialization
-. scripts/init-dream.ps1
 
-# Expected output:
-# "🧠 Loading Alex Cognitive Architecture Dream Protocol..."
-# "✅ Dream protocol loaded!"
+**Via VS Code Command Palette (`Ctrl+Shift+P`):**
+```
+Alex: Dream (Neural Maintenance)
 ```
 
-```bash
-# Test core dream commands
-dream --status
-
-# Expected: Detailed cognitive architecture status
-# - Memory file counts
-# - Network connectivity info
-# - Health metrics
-# - Recommendations
-```
-
-```bash
-# Test health check
-dream --health-check
-
-# Expected: Comprehensive network analysis
-# - Phase 1: Unconscious scan
-# - Phase 2: Synaptic network analysis
-# - Phase 4: Report generation
-# - Final health score
-```
+**Expected Results:**
+- Progress notification appears
+- Scanning message for memory files
+- Report generation notification
+- Dream report opens automatically
+- Report shows:
+  - Timestamp
+  - Total files and synapses
+  - Health status (HEALTHY or ATTENTION REQUIRED)
+  - Any broken connections (should be 0)
+  - Repaired connections (if any)
+  - Recommendations
 
 ### **3. Learning Protocol Test**
 **Test Conversation**:
@@ -144,22 +132,14 @@ How do you approach this?"
 
 ## 🔧 Troubleshooting Common Issues
 
-### **Issue**: Dream Protocol Won't Load
+### **Issue**: Dream Protocol Won't Execute
 **Solutions**:
-```bash
-# Check PowerShell version
-$PSVersionTable.PSVersion  # Should be 5.1+
-
-# Check execution policy
-Get-ExecutionPolicy
-# If Restricted: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Check file permissions
-ls -la scripts/neural-dream.ps1  # Should be readable
-
-# Try manual loading
-. scripts/neural-dream.ps1
-```
+- [ ] Verify Alex extension is installed in VS Code
+- [ ] Check that workspace folder is open (not just files)
+- [ ] Run `Alex: Initialize Architecture` if architecture not deployed
+- [ ] Check VS Code output panel for error messages
+- [ ] Verify write permissions to workspace folder
+- [ ] Ensure `archive/` folder exists or can be created
 
 ### **Issue**: Assistant Not Responding as Alex
 **GitHub Copilot**:
@@ -173,28 +153,28 @@ ls -la scripts/neural-dream.ps1  # Should be readable
 - [ ] Verify file content not truncated
 
 ### **Issue**: Synaptic Network Errors
-```bash
-# Validate synapse references
-scripts/validate-synapses.ps1
-
-# Check for broken references
-dream --validate-synapses
-
-# Repair if needed
-dream --repair-synapses
+**Solution**: Run dream protocol via Command Palette
 ```
+Alex: Dream (Neural Maintenance)
+```
+
+**Review the generated report for:**
+- Broken connections count
+- Specific files with issues
+- Automatic repairs performed
+- Manual fixes needed
 
 ### **Issue**: Performance Problems
-```bash
-# Check system resources
-dream --status | grep "Network Health"
-
-# Optimize if needed
-dream --network-optimization
-
-# Clean up if necessary
-dream --prune-orphans
+**Solution**: Run comprehensive maintenance
 ```
+Alex: Dream (Neural Maintenance)
+```
+
+**Check dream report for:**
+- Total synapses count (should be 150+)
+- Network health status
+- Any optimization opportunities
+- Broken connections needing attention
 
 ## 📊 Success Metrics
 

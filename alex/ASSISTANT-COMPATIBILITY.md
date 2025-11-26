@@ -52,13 +52,13 @@ mkdir your-project/archive/
 # 1. Copy cognitive architecture to project
 cp -r .github/ your-project/
 cp -r domain-knowledge/ your-project/
-cp -r scripts/ your-project/
+cp -r config/ your-project/config/  # Architecture config files
 mkdir your-project/archive/
 
 # 2. Load cognitive architecture in conversation
 
-# 3. Initialize dream protocol (optional)
-. scripts/init-dream.ps1
+# 3. Dream protocol via VS Code extension
+# Command Palette: Alex: Dream (Neural Maintenance)
 ```
 
 ### **Method 3: API/Custom Integration**
@@ -108,31 +108,23 @@ assistant = YourLLM(system_instructions=system_prompt,
 
 ## 🔧 Platform-Specific Setup
 
-### **Windows**
-```powershell
-# Full dream protocol support
-. scripts/init-dream.ps1
-dream --status
+### **All Platforms (Windows/macOS/Linux)**
+```
+# Dream protocol via VS Code extension
+# Open Command Palette (Ctrl+Shift+P or Cmd+Shift+P)
+Alex: Dream (Neural Maintenance)
 ```
 
-### **macOS/Linux**
-```bash
-# Install PowerShell Core (if not present)
-# macOS: brew install powershell
-# Ubuntu: sudo apt install powershell
+**Prerequisites:**
+- VS Code installed
+- Alex Cognitive Architecture extension installed
+- Workspace folder open with Alex architecture
 
-# Then use dream protocol
-pwsh -c ". scripts/init-dream.ps1; dream --status"
-```
-
-### **Cloud Environments**
-```dockerfile
-# Docker example
-FROM mcr.microsoft.com/powershell:latest
-COPY cognitive-architecture/ /app/
-WORKDIR /app
-RUN pwsh -c ". scripts/init-dream.ps1"
-```
+### **Cloud Environments / CI/CD**
+Dream protocol requires VS Code and human interaction.
+For automated deployments, use `Alex: Initialize Architecture` command
+after workspace setup. Regular dream maintenance should be performed
+manually via VS Code during development.
 
 ## ⚠️ Limitations by Platform
 

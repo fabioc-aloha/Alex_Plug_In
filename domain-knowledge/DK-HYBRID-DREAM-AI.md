@@ -52,7 +52,7 @@ PowerShell Detection → Enhancement Opportunity Analysis → AI Implementation 
 ### **Measured Enhancement Through Hybrid Approach**
 **Session Timeline - July 27, 2025**:
 1. **Initial State**: 225 synaptic connections, 5 trigger patterns
-2. **PowerShell Detection**: Identified optimization opportunities through dream analysis
+2. **Automated Detection**: Identified optimization opportunities through VS Code dream protocol
 3. **AI Enhancement**: Implemented memory file improvements and synaptic strengthening
 4. **Validation**: 234 connections (+9), 14 patterns (+9)
 5. **Meditation Consolidation**: Final optimization to 236 connections (+11), 16 patterns (+11)
@@ -84,7 +84,7 @@ PowerShell Detection → Enhancement Opportunity Analysis → AI Implementation 
 ## 💡 **Best Practices for Hybrid Implementation**
 
 ### **Optimal Hybrid Workflow**
-1. **Regular PowerShell Dreams**: Schedule automated maintenance for continuous health monitoring
+1. **Regular Dream Protocol**: Run `Alex: Dream (Neural Maintenance)` command for continuous health monitoring
 2. **Lucid Dream Triggers**: Use `dream --lucid-dream` when optimization opportunities detected
 3. **AI Enhancement Sessions**: Implement improvements immediately when opportunities identified
 4. **Meditation Consolidation**: Process and consolidate all enhancements for permanent integration

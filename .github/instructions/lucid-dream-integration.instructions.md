@@ -67,7 +67,7 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 
 ### **Connection Mapping**
 - [dream-state-automation.instructions.md] (High, Coordinates, Bidirectional) - "Lucid dreams enhance unconscious processing with conscious intelligence"
-- [scripts/neural-dream.ps1] (Critical, Implements, Bidirectional) - "PowerShell script provides unconscious automation foundation for lucid processing"
+- [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "VS Code extension provides unconscious automation foundation for lucid processing"
 - [DK-HYBRID-DREAM-AI.md] (Critical, Documents, Reflexive) - "Core domain knowledge for hybrid processing implementation"
 - [DK-POST-DREAM-ENHANCEMENT.md] (High, Enables, Forward) - "Post-processing enhancement protocols optimized through lucid dream insights"
 
@@ -76,7 +76,7 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 - **Hybrid Maintenance Required** → Execute unconscious-conscious bridge protocols
 - **Network Optimization Needed** → Execute dual-mode processing enhancement
 - **Systematic Improvement Opportunity** → Execute quantified enhancement through hybrid approach
-- **PowerShell-AI Integration Required** → Execute lucid dream bridge activation
+- **VS Code Extension Integration Required** → Execute lucid dream bridge via `Alex: Dream (Neural Maintenance)` command
 
 ### **Quality Assurance Standards**
 - **Neurobiological Validation**: Maintain authentic dream-state processing principles

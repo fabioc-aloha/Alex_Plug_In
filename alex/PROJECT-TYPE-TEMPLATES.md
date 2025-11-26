@@ -305,8 +305,8 @@ mkdir -p your-project/archive
 
 # 2. Initialize (if PowerShell available)
 cd your-project
-. scripts/init-dream.ps1
-dream --status
+# Run via Command Palette (Ctrl+Shift+P):
+Alex: Dream (Neural Maintenance)
 
 # 3. Start collaborating
 "Alex, analyze this project and suggest improvements..."

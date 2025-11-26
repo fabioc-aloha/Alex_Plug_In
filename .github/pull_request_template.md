@@ -54,8 +54,7 @@ For changes involving cognitive science concepts, provide empirical backing:
 ## Testing Performed
 
 ### Automated Validation
-- [ ] `.\scripts\validate-synapses.ps1` - Passed (0 broken references)
-- [ ] `.\scripts\neural-dream.ps1 --health-check` - Passed (OPTIMAL status)
+- [ ] `Alex: Dream (Neural Maintenance)` - Passed (HEALTHY status, 0 broken synapses)
 - [ ] All existing tests pass
 
 ### Manual Validation

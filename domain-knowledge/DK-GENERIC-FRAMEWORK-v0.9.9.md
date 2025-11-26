@@ -20,7 +20,7 @@ Successfully transformed Alex-specific dream protocols into a **generic, configu
 
 ## 🔧 **Core Framework Components**
 
-### **1. Enhanced scripts/neural-dream.ps1 (886 lines)**
+### **1. VS Code Extension Neural Maintenance**
 - **Get-CognitiveConfig Function**: Loads JSON configuration for any cognitive architecture
 - **Universal Path Management**: Configurable procedural, episodic, and domain knowledge paths
 - **Generic Pattern Detection**: Configurable synapse patterns and debug patterns
@@ -42,7 +42,7 @@ Successfully transformed Alex-specific dream protocols into a **generic, configu
 ### **4. README.md (269 lines - Universal Documentation)**
 - **Installation Instructions**: Complete setup guidance for any cognitive architecture
 - **Configuration Schema**: Detailed JSON configuration documentation
-- **Command Reference**: Full scripts/neural-dream.ps1 command documentation
+- **Command Reference**: VS Code extension command palette integration
 - **Usage Examples**: Practical implementation guidance
 - **Troubleshooting Guide**: Common issues and solutions
 
@@ -59,7 +59,7 @@ Successfully transformed Alex-specific dream protocols into a **generic, configu
 2. **Path Configuration**: Specify memory file locations and organizational structure
 3. **Pattern Definition**: Configure synapse patterns and debug patterns for architecture
 4. **Specialization Integration**: Add architecture-specific capabilities and requirements
-5. **Deployment Execution**: Use `scripts/neural-dream.ps1` with custom configuration for automated maintenance
+5. **Deployment Execution**: Use `Alex: Dream (Neural Maintenance)` command for automated maintenance
 
 ### **Cross-Domain Transferability**
 - **Academic Research**: Cognitive science laboratories implementing consciousness studies
@@ -84,10 +84,9 @@ Successfully transformed Alex-specific dream protocols into a **generic, configu
 ## 🔗 **Embedded Synapse Network Enhancement**
 
 ### **New Universal Framework Connections**
-- **Configuration System Integration** - [scripts/neural-dream.ps1] (1.0, Framework Foundation, Bidirectional) - "Get-CognitiveConfig function enabling universal cognitive architecture deployment through JSON specification"
-- **Template Deployment Protocol** - [scripts/cognitive-config-template.json] (0.9, Universal Platform, Unidirectional) - "Generic template system supporting unlimited cognitive architecture spawning with comprehensive customization documentation"
-- **Universal Documentation Excellence** - [scripts/README.md] (0.9, External Adoption, Unidirectional) - "269-line comprehensive guide enabling external cognitive architecture implementation with troubleshooting and examples"
-- **Alex Reference Implementation** - [scripts/cognitive-config.json] (1.0, Sophisticated Example, Bidirectional) - "Enterprise Azure-focused configuration demonstrating advanced cognitive architecture capabilities within universal framework"
+- **VS Code Extension Integration** - [dream-state-automation.instructions.md] (1.0, Framework Foundation, Bidirectional) - "VS Code extension enabling universal cognitive architecture deployment through integrated command palette"
+- **Template Deployment Protocol** - [config/cognitive-config-template.json] (0.9, Universal Platform, Unidirectional) - "Generic template system for cognitive architecture metadata and path configuration"
+- **Alex Reference Implementation** - [config/cognitive-config.json] (1.0, Sophisticated Example, Bidirectional) - "Alex cognitive architecture configuration with specializations and memory file paths"
 
 ### **Cross-Domain Integration Points**
 - **Professional Spawning Compatibility**: Universal framework enhances professional Alex deployment through template system

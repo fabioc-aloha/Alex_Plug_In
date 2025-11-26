@@ -46,7 +46,7 @@
    - Pattern: "Memory consolidation seamlessly integrated into automated maintenance ecosystem"
    - Activation: Architecture optimization needs, memory bloat detection, systematic improvement
 
-2. **neural-dream.ps1** ↔ **Memory Consolidation Commands**
+2. **VS Code Dream Protocol** ↔ **Memory Consolidation Commands**
    - Strength: 9/10 (Complete PowerShell automation with 4 new commands)
    - Pattern: "Automated detection and analysis enables AI-guided consolidation decisions"
    - Activation: dream --consolidate-memory, dream --analyze-overlap, dream --archive-redundant

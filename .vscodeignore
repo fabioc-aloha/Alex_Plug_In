@@ -1,0 +1,34 @@
+# Development files
+.vscode/**
+.vscode-test/**
+src/**
+.git/**
+.gitignore
+
+# Build artifacts
+**/*.map
+**/*.ts
+!/.github/**/*.ts
+
+# Documentation for development
+vsc-extension-quickstart.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+
+# Config files
+tsconfig.json
+.eslintrc.json
+
+# GitHub templates (keep docs, exclude templates)
+.github/assets/
+.github/ISSUE_TEMPLATE/
+.github/pull_request_template.md
+
+# Extension documentation (exclude from package)
+alex/
+
+# Package files
+*.vsix
+
+# Node modules (handled by default but explicit)
+node_modules/**

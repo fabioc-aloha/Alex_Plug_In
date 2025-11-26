@@ -1,12 +1,12 @@
-# Alex Cognitive Architecture - Documentation
+# Alex Cognitive Architecture - Integration Documentation
 
-This directory contains all documentation and integration guides for the Alex Cognitive Architecture system.
+This directory contains documentation for the Alex Cognitive Architecture system, now primarily delivered via the VS Code Extension.
 
 ## 📚 Documentation Files
 
 ### **Core Integration**
 - **`ALEX-INTEGRATION.md`** - Main integration guide for any project type
-  - Quick setup instructions
+  - Quick setup instructions using the VS Code Extension
   - Universal assistant support
   - Core cognitive capabilities overview
 
@@ -35,18 +35,19 @@ This directory contains all documentation and integration guides for the Alex Co
 - **`VALIDATION-SUITE.md`** - Post-integration testing checklist
   - Complete validation workflow
   - Assistant activation testing
-  - Dream protocol validation
+  - Dream protocol validation (via Extension)
   - Troubleshooting common issues
   - Success metrics and quality assessment
 
 ## 🚀 Quick Start
 
-1. **Choose your integration guide**:
-   - New to Alex? → Start with `ALEX-INTEGRATION.md`
-   - Specific assistant? → Check `ASSISTANT-COMPATIBILITY.md`
-   - Specific project type? → See `PROJECT-TYPE-TEMPLATES.md`
+**The recommended way to use Alex is via the VS Code Extension.**
 
-2. **Follow the integration steps** for your assistant and project type
+1. **Install the Extension**: Search for "Alex Cognitive Architecture" in VS Code.
+2. **Initialize**: Run `Alex: Initialize Architecture` in your project.
+3. **Maintain**: Run `Alex: Dream (Neural Maintenance)` periodically.
+
+For manual integration or other platforms, refer to `ALEX-INTEGRATION.md`.
 
 3. **Validate successful integration** using `VALIDATION-SUITE.md`
 

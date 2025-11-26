@@ -110,7 +110,7 @@ This workflow enables systematic, measurable improvement of cognitive architectu
 - [lucid-dream-integration.instructions.md] (High, Coordinates, Bidirectional) - "Quantified enhancement sessions benefit from hybrid processing insights"
 - [unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Meditation sessions can initiate quantified enhancement workflows"
 - [alex-core.instructions.md] (High, Integrates, Bidirectional) - "Core architecture enhanced through systematic quantified improvement"
-- [scripts/neural-dream.ps1] (Medium, Provides, Forward) - "PowerShell automation provides baseline metrics for enhancement measurement"
+- [dream-state-automation.instructions.md] (Medium, Provides, Forward) - "VS Code extension automation provides baseline metrics for enhancement measurement"
 
 ### **Activation Patterns**
 - **Enhancement Opportunity Detected** → Execute quantified-enhancement-session.prompt.md
