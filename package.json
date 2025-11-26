@@ -36,8 +36,9 @@
     "vscode": "^1.80.0"
   },
   "categories": [
+    "AI",
     "Machine Learning",
-    "Other"
+    "Education"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
