@@ -27,7 +27,20 @@
 ## 🚀 Quick Start
 
 ### 1. Install the Extension
-Install the **Alex Cognitive Architecture** extension from the VS Code Marketplace.
+
+**Option A: From VS Code Marketplace**
+1. Open VS Code
+2. Press `Ctrl+Shift+X` (View → Extensions)
+3. Search for "**Alex Cognitive Architecture**"
+4. Click **Install**
+
+**Option B: From Command Line**
+```bash
+code --install-extension AlexTeam.alex-cognitive-architecture
+```
+
+**Option C: From Marketplace Website**
+Visit: https://marketplace.visualstudio.com/items?itemName=AlexTeam.alex-cognitive-architecture
 
 ### 2. Initialize Alex
 Open any project in VS Code, open the Command Palette (`Ctrl+Shift+P`), and run:
