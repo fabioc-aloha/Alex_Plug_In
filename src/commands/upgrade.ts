@@ -64,8 +64,13 @@ async function getInstalledVersion(rootPath: string): Promise<string | null> {
  * Gets the extension's bundled version
  */
 async function getExtensionVersion(extensionPath: string): Promise<string> {
-    const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
-    return packageJson.version;
+    try {
+        const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
+        return packageJson.version || '0.0.0';
+    } catch (error) {
+        console.error('Failed to read extension package.json:', error);
+        return '0.0.0';  // Fallback version
+    }
 }
 
 /**
@@ -74,7 +79,13 @@ async function getExtensionVersion(extensionPath: string): Promise<string> {
 async function loadManifest(rootPath: string): Promise<Manifest | null> {
     const manifestPath = path.join(rootPath, '.alex-manifest.json');
     if (await fs.pathExists(manifestPath)) {
-        return await fs.readJson(manifestPath);
+        try {
+            return await fs.readJson(manifestPath);
+        } catch (error) {
+            console.error('Failed to parse manifest (may be corrupted):', error);
+            // Return null to trigger fresh manifest creation
+            return null;
+        }
     }
     return null;
 }

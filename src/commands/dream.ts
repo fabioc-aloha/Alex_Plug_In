@@ -91,7 +91,13 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
         const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
 
         for (const file of allFiles) {
-            const content = await fs.readFile(file, 'utf-8');
+            let content: string;
+            try {
+                content = await fs.readFile(file, 'utf-8');
+            } catch (readError) {
+                console.error(`Failed to read file ${file}:`, readError);
+                continue;  // Skip unreadable files
+            }
             const lines = content.split('\n');
             
             let inCodeBlock = false;
