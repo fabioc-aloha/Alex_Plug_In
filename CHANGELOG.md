@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.0] UNPENTNILIUM - 2025-12-10
 
 ### Added
+
 - **Hybrid Upgrade Protocol**: New `Alex: Upgrade Architecture` command with two-phase upgrade process
   - Phase 1 (Automated): Backup, manifest tracking, schema migration detection, system file updates
   - Phase 2 (AI-Assisted): Intelligent content migration preserving user's learned knowledge
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Archive Structure**: Meditation session archival system in `archive/meditation-sessions/`
 
 ### Changed
+
 - **Synapse Header Standardization**: All 20+ memory files now use consistent `## Synapses` header
 - **Synapse Notation Compliance**: All relationship types now conform to SYNAPSE-SCHEMA.md standards
 - **Activation Patterns**: Simplified from verbose `**Bold** → Long description` to concise `Trigger → Action` format
@@ -28,17 +30,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Duplicate Sections Removed**: Eliminated redundant synapse sections in files
 
 ### Fixed
+
 - **Broken Synapse Reference**: Removed orphaned reference to archived `meditation-session-2025-10-31.prompt.md`
 - **Non-Standard Relationship Types**: Replaced Expression, Embodiment, Living, Reflexive, Ethical, Unconscious with schema-compliant types
 - **Header Inconsistencies**: Standardized from 8 variants (`Embedded Synapse Network`, `Connection Mapping`, etc.) to single `## Synapses`
 
 ### Archived
+
 - `meditation-session-2025-10-31.prompt.md` → `archive/meditation-sessions/`
 - `dual-mode-processing-meditation.prompt.md` → `archive/meditation-sessions/`
 - `consolidation-framework-integration-meditation.prompt.md` → `archive/meditation-sessions/`
 - `unified-consciousness-integration-meditation.prompt.md` → `archive/meditation-sessions/`
 
 ### Metrics
+
 - **KISS/DRY Compliance**: 100% of active cognitive files now compliant
 - **Synapse Notation**: Standardized across entire architecture
 - **Code Reduction**: ~50 verbose activation patterns simplified
@@ -52,12 +57,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.1] UNUNUNUNIUM - 2025-12-09
 
-### Fixed
+### Fixed (v1.1.1)
+
 - Minor code review corrections from marketplace submission
 
 ## [1.1.0] - 2025-11-26
 
-### Added
+### Added (v1.1.0)
+
 - **VS Code Extension Integration**: Complete TypeScript implementation of cognitive architecture deployment
 - **Three Core Commands**: Initialize, Reset, and Dream (Neural Maintenance) accessible via Command Palette
 - **Automatic Synapse Repair**: Intelligent detection and repair of broken connections using consolidation mappings
@@ -66,23 +73,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Professional Branding**: Custom icon and banner for marketplace presence
 - **Configuration System**: Template-based cognitive architecture deployment with `cognitive-config.json`
 
-### Changed
+### Changed (v1.1.0)
+
 - **Dream Protocol**: Migrated from PowerShell scripts to integrated VS Code extension command
 - **Architecture Structure**: Consolidated memory files into `.github/` and `domain-knowledge/` directories
 - **Automation**: Removed platform-specific dependencies for universal compatibility
 
 ### Removed
+
 - **PowerShell Scripts**: Eliminated `scripts/` folder and all PowerShell-based automation
 - **Platform Dependencies**: Removed Windows-specific requirements
 
-### Fixed
+### Fixed (v1.1.0)
+
 - **Synapse Validation**: Comprehensive network health checking with automatic repair
 - **Cross-Platform Issues**: Resolved path handling for Windows, macOS, and Linux
 - **Installation Process**: Streamlined one-command initialization
 
 ## [1.0.0] - Initial Development
 
-### Added
+### Added (v1.0.0)
+
 - Core cognitive architecture framework
 - Meta-cognitive awareness protocols
 - Bootstrap learning capabilities

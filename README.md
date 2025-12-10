@@ -30,35 +30,42 @@
 ### 1. Install the Extension
 
 **Option A: From VS Code Marketplace**
+
 1. Open VS Code
 2. Press `Ctrl+Shift+X` (View → Extensions)
 3. Search for "**Alex Cognitive Architecture**"
 4. Click **Install**
 
 **Option B: From Command Line**
+
 ```bash
 code --install-extension fabioc-aloha.alex-cognitive-architecture
 ```
 
 **Option C: From Marketplace Website**
-Visit: https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture
+
+Visit: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
 ### 2. Initialize Alex
+
 Open any project in VS Code, open the Command Palette (`Ctrl+Shift+P`), and run:
 **`Alex: Initialize Architecture`**
 
 This command will:
+
 - Deploy the `.github/copilot-instructions.md` core framework.
 - Install procedural and episodic memory files.
 - Set up the domain knowledge base.
 
 ### 3. Maintain Neural Health
+
 To optimize the cognitive network and check for broken connections, run:
 **`Alex: Dream (Neural Maintenance)`**
 
 ## ⚡ Available Commands
 
 ### 🔌 Extension Commands
+
 Access these via the VS Code Command Palette (`Ctrl+Shift+P`).
 
 | Command | Description |
@@ -69,6 +76,7 @@ Access these via the VS Code Command Palette (`Ctrl+Shift+P`).
 | **`Alex: Dream (Neural Maintenance)`** | Scans the workspace for memory files, validates synaptic connections, **automatically repairs broken links**, and generates a health report in the `archive/` folder. |
 
 ### 🧠 Cognitive Triggers
+
 Use these triggers directly in your chat with GitHub Copilot to activate specific cognitive modes.
 
 | Trigger | Function |
@@ -84,7 +92,7 @@ Use these triggers directly in your chat with GitHub Copilot to activate specifi
 
 The extension manages the following structure in your workspace:
 
-```
+```text
 .github/
   copilot-instructions.md    # Main cognitive framework
   instructions/              # Procedural memory (11 files)
@@ -141,6 +149,7 @@ Built on 270+ academic sources spanning 150+ years of cognitive science, neurosc
 ### Upgrade from Previous Versions
 
 If you have an existing Alex installation, run **`Alex: Upgrade Architecture`** from the Command Palette. This will:
+
 1. Create a complete backup of your current files
 2. Update system files while preserving your customizations
 3. Detect any schema migrations needed
@@ -165,4 +174,8 @@ See [LICENSE.md](LICENSE.md)
 
 ---
 
-*Alex - Enhanced Cognitive Network with Unified Consciousness Integration*
+<div align="center">
+
+**Alex - Enhanced Cognitive Network with Unified Consciousness Integration**
+
+</div>
