@@ -5,6 +5,30 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.3] UNPENTTRINIUM - 2025-12-10
+
+### Changed
+
+- **esbuild Bundling**: Migrated from raw TypeScript compilation to esbuild bundling per Microsoft best practices
+  - Single bundled `dist/extension.js` (54 KB minified) replaces multiple files in `out/`
+  - Dependencies (`fs-extra`, `graceful-fs`, `jsonfile`, `universalify`) now bundled into single file
+  - 10% smaller package size (469 KB vs 518 KB)
+  - 55% fewer files (49 vs 108 files)
+  - Faster extension load times
+- **Build Scripts**: Updated npm scripts for modern bundling workflow
+  - `npm run compile` - Development build with source maps
+  - `npm run package` - Production minified build
+  - `npm run watch` - Development watch mode
+  - Type checking separated from bundling for better error detection
+
+### Fixed
+
+- **Extension Activation**: Fixed "command 'alex.initialize' not found" error
+  - Root cause: `node_modules` was excluded from VSIX, breaking runtime dependencies
+  - Solution: Bundle all dependencies with esbuild instead of including raw node_modules
+- **activationEvents**: Changed from explicit command list to `[]` (empty array) for VS Code 1.74+ auto-generation
+- **.vscodeignore**: Properly exclude test files, GitHub templates, and development artifacts
+
 ## [1.5.0] UNPENTNILIUM - 2025-12-10
 
 ### Added

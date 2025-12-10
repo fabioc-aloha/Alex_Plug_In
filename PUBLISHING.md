@@ -50,6 +50,21 @@ Check if the extension is published and view its details:
 vsce show fabioc-aloha.alex-cognitive-architecture
 ```
 
+### Build the Extension
+
+The extension uses esbuild for bundling. Build commands:
+
+```powershell
+# Development build (with source maps)
+npm run compile
+
+# Production build (minified, no source maps)
+npm run package
+
+# Watch mode for development
+npm run watch
+```
+
 ### Package Extension Locally
 
 Create a `.vsix` file without publishing:
@@ -58,7 +73,9 @@ Create a `.vsix` file without publishing:
 vsce package
 ```
 
-This creates `alex-cognitive-architecture-<version>.vsix` in the current directory.
+This runs `npm run package` (production build) and creates `alex-cognitive-architecture-<version>.vsix` in the current directory.
+
+**Note:** The extension bundles all dependencies with esbuild. The `node_modules` folder is excluded from the VSIX.
 
 ### Publish to Marketplace
 

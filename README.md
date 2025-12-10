@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture Banner](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-1.5.3-blue.svg)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-green.svg)](LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-purple.svg)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-007ACC.svg)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)

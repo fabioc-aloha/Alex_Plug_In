@@ -5,10 +5,14 @@ src/**
 .git/**
 .gitignore
 
-# Build artifacts
+# Build artifacts - exclude source maps and old out folder
 **/*.map
+out/**
+
+# Exclude TypeScript source files EXCEPT .github instructions
 **/*.ts
-!/.github/**/*.ts
+!.github/instructions/**
+!.github/prompts/**
 
 # Documentation for development
 vsc-extension-quickstart.md
@@ -19,11 +23,13 @@ PUBLISHING.md
 # Config files
 tsconfig.json
 .eslintrc.json
+esbuild.js
 
-# GitHub templates (keep docs, exclude templates)
-.github/assets/
-.github/ISSUE_TEMPLATE/
+# GitHub templates (not needed for extension - these are for the repo)
+.github/assets/**
+.github/ISSUE_TEMPLATE/**
 .github/pull_request_template.md
+.github/workflows/**
 
 # Extension documentation (exclude from package)
 alex/
@@ -31,5 +37,5 @@ alex/
 # Package files
 *.vsix
 
-# Node modules (handled by default but explicit)
+# Node modules - excluded because we bundle with esbuild
 node_modules/**
