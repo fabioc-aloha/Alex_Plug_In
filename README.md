@@ -123,6 +123,11 @@ Built on 270+ academic sources spanning 150+ years of cognitive science, neurosc
 
 ## 🆕 What's New in v1.5.0 UNPENTNILIUM
 
+- **💰 30-40% Token Reduction**: Dramatically lower API costs through architecture optimization
+  - Eliminated redundant sections and duplicate synapse connections
+  - Simplified verbose patterns to concise trigger → action format
+  - Archived historical files out of active context
+  - **Result**: Same cognitive capabilities, significantly fewer tokens per request
 - **Hybrid Upgrade Protocol**: New `Alex: Upgrade Architecture` command with intelligent two-phase upgrade
   - Phase 1 (Automated): Full backup, system file updates, migration detection
   - Phase 2 (AI-Assisted): Schema migrations completed by your AI assistant preserving learned knowledge
@@ -132,7 +137,6 @@ Built on 270+ academic sources spanning 150+ years of cognitive science, neurosc
 - **KISS/DRY Architecture Optimization**: Comprehensive code review and simplification
 - **SYNAPSE-SCHEMA.md**: New single source of truth for synapse notation format
 - **Standardized Headers**: All 20+ memory files now use consistent `## Synapses` format
-- **Simplified Activation Patterns**: Verbose patterns reduced to concise trigger → action format
 
 ### Upgrade from Previous Versions
 
