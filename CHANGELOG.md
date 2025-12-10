@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.0] UNPENTNILIUM - 2025-12-10
 
 ### Added
+- **Upgrade Command**: New `Alex: Upgrade Architecture` command for safe version upgrades
+  - Preserves user customizations in domain-knowledge files
+  - Creates automatic backups before upgrading
+  - Generates detailed upgrade reports in `archive/upgrades/`
+  - Detects and compares installed vs. extension versions
 - **SYNAPSE-SCHEMA.md**: Single source of truth for synapse notation format with YAML front matter
 - **Archive Structure**: Meditation session archival system in `archive/meditation-sessions/`
 

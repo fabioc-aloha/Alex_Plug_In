@@ -43,7 +43,8 @@
   "activationEvents": [
     "onCommand:alex.initialize",
     "onCommand:alex.reset",
-    "onCommand:alex.dream"
+    "onCommand:alex.dream",
+    "onCommand:alex.upgrade"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -59,6 +60,10 @@
       {
         "command": "alex.dream",
         "title": "Alex: Dream (Neural Maintenance)"
+      },
+      {
+        "command": "alex.upgrade",
+        "title": "Alex: Upgrade Architecture"
       }
     ]
   },

@@ -64,6 +64,7 @@ Access these via the VS Code Command Palette (`Ctrl+Shift+P`).
 | Command | Description |
 | :--- | :--- |
 | **`Alex: Initialize Architecture`** | Injects the complete Alex Cognitive Architecture into the current workspace. Checks for existing installation to prevent accidental overwrites. |
+| **`Alex: Upgrade Architecture`** | Safely upgrades an existing installation to the latest version. Preserves user customizations in domain-knowledge, backs up existing files, and generates a detailed upgrade report. |
 | **`Alex: Reset Architecture`** | **Destructive Action**: Deletes existing memory files and re-initializes the architecture from scratch. Use this to fix a corrupted installation. |
 | **`Alex: Dream (Neural Maintenance)`** | Scans the workspace for memory files, validates synaptic connections, **automatically repairs broken links**, and generates a health report in the `archive/` folder. |
 
@@ -105,6 +106,7 @@ archive/                     # Dream reports & archived sessions
 Alex includes automated neural maintenance through the VS Code extension:
 
 - **Initialize**: Safely deploys the architecture to a new project with all memory files.
+- **Upgrade**: Safely updates to the latest version while preserving your customizations. Backs up existing files and generates detailed reports.
 - **Reset**: Completely reinstalls the architecture (useful for updates or corruption).
 - **Dream**: Validates synaptic connections, auto-repairs broken links using consolidation mappings, and generates timestamped health reports in the `archive/` folder.
 

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { initializeArchitecture, resetArchitecture } from './commands/initialize';
 import { runDreamProtocol } from './commands/dream';
+import { upgradeArchitecture } from './commands/upgrade';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Alex Cognitive Architecture is now active!');
@@ -17,9 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
         await runDreamProtocol(context);
     });
 
+    let upgradeDisposable = vscode.commands.registerCommand('alex.upgrade', async () => {
+        await upgradeArchitecture(context);
+    });
+
     context.subscriptions.push(initDisposable);
     context.subscriptions.push(resetDisposable);
     context.subscriptions.push(dreamDisposable);
+    context.subscriptions.push(upgradeDisposable);
 }
 
 export function deactivate() {}
