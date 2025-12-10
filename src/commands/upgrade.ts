@@ -1,13 +1,44 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as crypto from 'crypto';
+
+interface FileManifestEntry {
+    type: 'system' | 'hybrid' | 'user-created';
+    originalChecksum: string;
+    currentChecksum?: string;
+    modified?: boolean;
+    createdAt?: string;
+}
+
+interface Manifest {
+    version: string;
+    installedAt: string;
+    upgradedAt?: string;
+    files: Record<string, FileManifestEntry>;
+}
+
+interface MigrationTask {
+    file: string;
+    type: 'schema-migration' | 'merge-required' | 'review-recommended';
+    description: string;
+    details: string[];
+}
 
 interface UpgradeReport {
     updated: string[];
     added: string[];
     preserved: string[];
     backed_up: string[];
+    migrationTasks: MigrationTask[];
     errors: string[];
+}
+
+/**
+ * Calculate MD5 checksum of file content
+ */
+function calculateChecksum(content: string): string {
+    return crypto.createHash('md5').update(content.replace(/\r\n/g, '\n')).digest('hex');
 }
 
 /**
@@ -22,7 +53,6 @@ async function getInstalledVersion(rootPath: string): Promise<string | null> {
 
     try {
         const content = await fs.readFile(instructionsPath, 'utf8');
-        // Match pattern: **Version**: X.Y.Z
         const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);
         return versionMatch ? versionMatch[1] : null;
     } catch {
@@ -39,44 +69,98 @@ async function getExtensionVersion(extensionPath: string): Promise<string> {
 }
 
 /**
- * Creates a backup of a file before upgrading
+ * Load or create manifest
  */
-async function backupFile(filePath: string, backupDir: string): Promise<string | null> {
-    if (!await fs.pathExists(filePath)) {
-        return null;
+async function loadManifest(rootPath: string): Promise<Manifest | null> {
+    const manifestPath = path.join(rootPath, '.alex-manifest.json');
+    if (await fs.pathExists(manifestPath)) {
+        return await fs.readJson(manifestPath);
     }
-
-    const relativePath = path.basename(filePath);
-    const backupPath = path.join(backupDir, relativePath);
-    await fs.copy(filePath, backupPath);
-    return backupPath;
+    return null;
 }
 
 /**
- * Checks if a file has been customized by the user
- * by comparing with the extension's original version
+ * Save manifest
  */
-async function isCustomized(localPath: string, extensionPath: string): Promise<boolean> {
-    if (!await fs.pathExists(localPath) || !await fs.pathExists(extensionPath)) {
-        return false;
+async function saveManifest(rootPath: string, manifest: Manifest): Promise<void> {
+    const manifestPath = path.join(rootPath, '.alex-manifest.json');
+    await fs.writeJson(manifestPath, manifest, { spaces: 2 });
+}
+
+/**
+ * Scan file for old synapse patterns that need migration
+ */
+async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
+    const issues: string[] = [];
+    
+    if (!await fs.pathExists(filePath)) {
+        return issues;
     }
 
     try {
-        const localContent = await fs.readFile(localPath, 'utf8');
-        const extensionContent = await fs.readFile(extensionPath, 'utf8');
+        const content = await fs.readFile(filePath, 'utf8');
         
-        // Normalize line endings and compare
-        const normalizedLocal = localContent.replace(/\r\n/g, '\n').trim();
-        const normalizedExtension = extensionContent.replace(/\r\n/g, '\n').trim();
+        // Check for old headers
+        if (/## Embedded Synapse Network/i.test(content)) {
+            issues.push('Old header: "## Embedded Synapse Network" → should be "## Synapses"');
+        }
+        if (/### \*\*Connection Mapping\*\*/i.test(content)) {
+            issues.push('Old subheader: "### **Connection Mapping**" → should be "### Connection Mapping"');
+        }
+        if (/### \*\*Activation Patterns/i.test(content)) {
+            issues.push('Old subheader: "### **Activation Patterns" → should be "### Activation Patterns"');
+        }
         
-        return normalizedLocal !== normalizedExtension;
-    } catch {
-        return false;
+        // Check for old relationship types
+        const oldTypes = ['Expression', 'Embodiment', 'Living', 'Reflexive', 'Ethical', 'Unconscious', 'Application', 'Validation'];
+        for (const type of oldTypes) {
+            const regex = new RegExp(`\\(\\s*(Critical|High|Medium|Low)\\s*,\\s*${type}\\s*,`, 'i');
+            if (regex.test(content)) {
+                issues.push(`Old relationship type: "${type}" → needs migration to standard type`);
+            }
+        }
+        
+        // Check for verbose activation patterns with dates
+        if (/✅\s*(NEW|CRITICAL|ENHANCED).*20[0-9]{2}/.test(content)) {
+            issues.push('Verbose activation patterns with date stamps → should be simplified');
+        }
+        
+        // Check for bold activation triggers
+        if (/\*\*[A-Z][^*]+\*\*\s*→/.test(content)) {
+            issues.push('Bold activation triggers → should be plain text');
+        }
+        
+    } catch (error) {
+        issues.push(`Error scanning file: ${error}`);
     }
+    
+    return issues;
 }
 
 /**
- * Upgrades the cognitive architecture safely
+ * Scan for user-created files not in manifest
+ */
+async function findUserCreatedFiles(rootPath: string, manifest: Manifest | null): Promise<string[]> {
+    const userFiles: string[] = [];
+    const dkPath = path.join(rootPath, 'domain-knowledge');
+    
+    if (await fs.pathExists(dkPath)) {
+        const files = await fs.readdir(dkPath);
+        for (const file of files) {
+            if (file.endsWith('.md')) {
+                const relativePath = `domain-knowledge/${file}`;
+                if (!manifest?.files[relativePath]) {
+                    userFiles.push(relativePath);
+                }
+            }
+        }
+    }
+    
+    return userFiles;
+}
+
+/**
+ * Main upgrade function
  */
 export async function upgradeArchitecture(context: vscode.ExtensionContext) {
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -116,13 +200,13 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext) {
 
     // Confirm upgrade
     const confirm = await vscode.window.showInformationMessage(
-        `Upgrade Alex from v${installedVersion || 'unknown'} to v${extensionVersion}?\n\nYour customizations in domain-knowledge will be preserved.`,
+        `Upgrade Alex from v${installedVersion || 'unknown'} to v${extensionVersion}?\n\nThis is a hybrid upgrade process:\n1. Phase 1 (automated): Backup & system files\n2. Phase 2 (AI-assisted): Schema migration\n\nYour learned knowledge will be preserved.`,
         { modal: true },
-        'Upgrade',
+        'Start Upgrade',
         'Cancel'
     );
 
-    if (confirm !== 'Upgrade') {
+    if (confirm !== 'Start Upgrade') {
         return;
     }
 
@@ -141,56 +225,137 @@ async function performUpgrade(
         added: [],
         preserved: [],
         backed_up: [],
+        migrationTasks: [],
         errors: []
     };
 
-    // Create backup directory
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
     const backupDir = path.join(rootPath, 'archive', 'upgrades', `backup-${oldVersion || 'unknown'}-${timestamp}`);
 
     try {
         await vscode.window.withProgress({
             location: vscode.ProgressLocation.Notification,
-            title: "Upgrading Alex Cognitive Architecture...",
+            title: "Phase 1: Preparing Upgrade...",
             cancellable: false
         }, async (progress) => {
 
-            // Step 1: Backup copilot-instructions.md
-            progress.report({ message: "Creating backups...", increment: 10 });
+            // Step 1: Create full backup
+            progress.report({ message: "Creating complete backup...", increment: 15 });
             await fs.ensureDir(backupDir);
             
-            const mainInstructions = path.join(rootPath, '.github', 'copilot-instructions.md');
-            const backupPath = await backupFile(mainInstructions, backupDir);
-            if (backupPath) {
-                report.backed_up.push('copilot-instructions.md');
+            // Backup .github folder
+            const githubSrc = path.join(rootPath, '.github');
+            if (await fs.pathExists(githubSrc)) {
+                await fs.copy(githubSrc, path.join(backupDir, '.github'));
+                report.backed_up.push('.github/');
+            }
+            
+            // Backup domain-knowledge folder
+            const dkSrc = path.join(rootPath, 'domain-knowledge');
+            if (await fs.pathExists(dkSrc)) {
+                await fs.copy(dkSrc, path.join(backupDir, 'domain-knowledge'));
+                report.backed_up.push('domain-knowledge/');
             }
 
-            // Step 2: Upgrade core file (copilot-instructions.md) - always update
-            progress.report({ message: "Upgrading core framework...", increment: 20 });
-            const srcMainInstructions = path.join(extensionPath, '.github', 'copilot-instructions.md');
-            await fs.copy(srcMainInstructions, mainInstructions, { overwrite: true });
-            report.updated.push('copilot-instructions.md');
+            // Step 2: Load or create manifest
+            progress.report({ message: "Analyzing installed files...", increment: 10 });
+            let manifest = await loadManifest(rootPath);
+            
+            if (!manifest) {
+                manifest = {
+                    version: oldVersion || 'unknown',
+                    installedAt: new Date().toISOString(),
+                    files: {}
+                };
+            }
 
-            // Step 3: Upgrade .github/instructions/ - update all (these are system files)
-            progress.report({ message: "Upgrading instruction files...", increment: 20 });
+            // Step 3: Scan for migration needs in ALL markdown files
+            progress.report({ message: "Scanning for schema migration needs...", increment: 15 });
+            
+            const filesToScan: string[] = [];
+            
+            // Add copilot-instructions.md
+            const mainInstructions = path.join(rootPath, '.github', 'copilot-instructions.md');
+            if (await fs.pathExists(mainInstructions)) {
+                filesToScan.push(mainInstructions);
+            }
+            
+            // Add domain-knowledge files
+            const dkPath = path.join(rootPath, 'domain-knowledge');
+            if (await fs.pathExists(dkPath)) {
+                const dkFiles = await fs.readdir(dkPath);
+                for (const file of dkFiles) {
+                    if (file.endsWith('.md')) {
+                        filesToScan.push(path.join(dkPath, file));
+                    }
+                }
+            }
+            
+            for (const filePath of filesToScan) {
+                const issues = await scanForMigrationNeeds(filePath);
+                if (issues.length > 0) {
+                    const relativePath = path.relative(rootPath, filePath);
+                    report.migrationTasks.push({
+                        file: relativePath,
+                        type: 'schema-migration',
+                        description: `Synapse schema migration needed`,
+                        details: issues
+                    });
+                }
+            }
+
+            // Step 4: Find user-created files
+            progress.report({ message: "Identifying user-created files...", increment: 10 });
+            const userFiles = await findUserCreatedFiles(rootPath, manifest);
+            for (const file of userFiles) {
+                report.preserved.push(`${file} (user-created)`);
+                
+                // Scan user files for migration too
+                const fullPath = path.join(rootPath, file);
+                const issues = await scanForMigrationNeeds(fullPath);
+                if (issues.length > 0) {
+                    report.migrationTasks.push({
+                        file: file,
+                        type: 'schema-migration',
+                        description: 'User-created file needs schema migration',
+                        details: issues
+                    });
+                }
+            }
+
+            // Step 5: Add copilot-instructions.md merge task
+            progress.report({ message: "Preparing merge tasks...", increment: 10 });
+            report.migrationTasks.push({
+                file: '.github/copilot-instructions.md',
+                type: 'merge-required',
+                description: 'Core brain file requires intelligent merge',
+                details: [
+                    'UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands',
+                    'PRESERVE: Domain slot assignments (P5-P7), user-added memory file references',
+                    'REVIEW: Any custom sections added by user'
+                ]
+            });
+
+            // Step 6: Update system files (instructions and prompts)
+            progress.report({ message: "Updating system files...", increment: 20 });
+            
+            // Update instructions
             const instructionsSrc = path.join(extensionPath, '.github', 'instructions');
             const instructionsDest = path.join(rootPath, '.github', 'instructions');
-            
             if (await fs.pathExists(instructionsSrc)) {
-                // Backup existing instructions folder
-                if (await fs.pathExists(instructionsDest)) {
-                    await fs.copy(instructionsDest, path.join(backupDir, 'instructions'));
-                    report.backed_up.push('.github/instructions/');
-                }
-                
                 const files = await fs.readdir(instructionsSrc);
                 for (const file of files) {
                     const srcFile = path.join(instructionsSrc, file);
                     const destFile = path.join(instructionsDest, file);
-                    
                     if ((await fs.stat(srcFile)).isFile()) {
                         const existed = await fs.pathExists(destFile);
                         await fs.copy(srcFile, destFile, { overwrite: true });
+                        
+                        const content = await fs.readFile(srcFile, 'utf8');
+                        manifest.files[`.github/instructions/${file}`] = {
+                            type: 'system',
+                            originalChecksum: calculateChecksum(content)
+                        };
                         
                         if (existed) {
                             report.updated.push(`.github/instructions/${file}`);
@@ -200,27 +365,24 @@ async function performUpgrade(
                     }
                 }
             }
-
-            // Step 4: Upgrade .github/prompts/ - update all (these are system files)
-            progress.report({ message: "Upgrading prompt files...", increment: 20 });
+            
+            // Update prompts
             const promptsSrc = path.join(extensionPath, '.github', 'prompts');
             const promptsDest = path.join(rootPath, '.github', 'prompts');
-            
             if (await fs.pathExists(promptsSrc)) {
-                // Backup existing prompts folder
-                if (await fs.pathExists(promptsDest)) {
-                    await fs.copy(promptsDest, path.join(backupDir, 'prompts'));
-                    report.backed_up.push('.github/prompts/');
-                }
-                
                 const files = await fs.readdir(promptsSrc);
                 for (const file of files) {
                     const srcFile = path.join(promptsSrc, file);
                     const destFile = path.join(promptsDest, file);
-                    
                     if ((await fs.stat(srcFile)).isFile()) {
                         const existed = await fs.pathExists(destFile);
                         await fs.copy(srcFile, destFile, { overwrite: true });
+                        
+                        const content = await fs.readFile(srcFile, 'utf8');
+                        manifest.files[`.github/prompts/${file}`] = {
+                            type: 'system',
+                            originalChecksum: calculateChecksum(content)
+                        };
                         
                         if (existed) {
                             report.updated.push(`.github/prompts/${file}`);
@@ -231,35 +393,61 @@ async function performUpgrade(
                 }
             }
 
-            // Step 5: Upgrade domain-knowledge/ - PRESERVE user customizations, add new files only
-            progress.report({ message: "Upgrading domain knowledge (preserving customizations)...", increment: 20 });
-            const dkSrc = path.join(extensionPath, 'domain-knowledge');
-            const dkDest = path.join(rootPath, 'domain-knowledge');
+            // Step 7: Handle domain-knowledge files carefully
+            progress.report({ message: "Processing domain knowledge...", increment: 10 });
+            const extDkSrc = path.join(extensionPath, 'domain-knowledge');
+            const extDkDest = path.join(rootPath, 'domain-knowledge');
             
-            if (await fs.pathExists(dkSrc)) {
-                await fs.ensureDir(dkDest);
+            if (await fs.pathExists(extDkSrc)) {
+                await fs.ensureDir(extDkDest);
+                const files = await fs.readdir(extDkSrc);
                 
-                const files = await fs.readdir(dkSrc);
                 for (const file of files) {
-                    const srcFile = path.join(dkSrc, file);
-                    const destFile = path.join(dkDest, file);
+                    const srcFile = path.join(extDkSrc, file);
+                    const destFile = path.join(extDkDest, file);
                     
                     if ((await fs.stat(srcFile)).isFile()) {
+                        const srcContent = await fs.readFile(srcFile, 'utf8');
+                        const srcChecksum = calculateChecksum(srcContent);
+                        
                         if (!await fs.pathExists(destFile)) {
                             // New file - add it
                             await fs.copy(srcFile, destFile);
+                            manifest.files[`domain-knowledge/${file}`] = {
+                                type: 'system',
+                                originalChecksum: srcChecksum
+                            };
                             report.added.push(`domain-knowledge/${file}`);
                         } else {
-                            // Existing file - check if customized
-                            const customized = await isCustomized(destFile, srcFile);
-                            if (customized) {
-                                // Preserve user's version, but add new version with .new suffix for reference
-                                const newVersionPath = destFile.replace(/\.md$/, '.new.md');
+                            // Existing file - check if modified
+                            const destContent = await fs.readFile(destFile, 'utf8');
+                            const destChecksum = calculateChecksum(destContent);
+                            const originalChecksum = manifest.files[`domain-knowledge/${file}`]?.originalChecksum;
+                            
+                            if (originalChecksum && destChecksum !== originalChecksum) {
+                                // User modified - preserve and provide new version
+                                const newVersionPath = destFile.replace(/\.md$/, `.v${newVersion}.md`);
                                 await fs.copy(srcFile, newVersionPath);
-                                report.preserved.push(`domain-knowledge/${file} (new version saved as ${path.basename(newVersionPath)})`);
+                                report.preserved.push(`domain-knowledge/${file} (modified by user, new version: ${path.basename(newVersionPath)})`);
+                                
+                                // Add review task
+                                report.migrationTasks.push({
+                                    file: `domain-knowledge/${file}`,
+                                    type: 'review-recommended',
+                                    description: 'User-modified system file - review new version',
+                                    details: [
+                                        `Your version preserved: ${file}`,
+                                        `New version available: ${path.basename(newVersionPath)}`,
+                                        'Review and merge changes as needed'
+                                    ]
+                                });
                             } else {
-                                // Not customized - safe to update
+                                // Not modified - safe to update
                                 await fs.copy(srcFile, destFile, { overwrite: true });
+                                manifest.files[`domain-knowledge/${file}`] = {
+                                    type: 'system',
+                                    originalChecksum: srcChecksum
+                                };
                                 report.updated.push(`domain-knowledge/${file}`);
                             }
                         }
@@ -267,25 +455,33 @@ async function performUpgrade(
                 }
             }
 
-            // Step 6: Ensure archive directory exists
-            progress.report({ message: "Finalizing...", increment: 10 });
-            await fs.ensureDir(path.join(rootPath, 'archive'));
+            // Step 8: Update manifest
+            progress.report({ message: "Saving manifest...", increment: 5 });
+            manifest.version = newVersion;
+            manifest.upgradedAt = new Date().toISOString();
+            await saveManifest(rootPath, manifest);
+
+            // Step 9: Generate upgrade tasks and instructions
+            progress.report({ message: "Generating upgrade instructions...", increment: 5 });
+            await generateUpgradeInstructions(rootPath, oldVersion, newVersion, report, backupDir, timestamp);
         });
 
-        // Generate and show report
-        await generateUpgradeReport(rootPath, oldVersion, newVersion, report, backupDir);
+        // Show completion message with instructions
+        const result = await vscode.window.showWarningMessage(
+            `Phase 1 Complete! ${report.migrationTasks.length} tasks require AI assistance.\n\nPlease read UPGRADE-INSTRUCTIONS.md and ask your AI assistant to complete the upgrade.`,
+            'Open Instructions',
+            'View Full Report'
+        );
 
-        vscode.window.showInformationMessage(
-            `Alex upgraded to v${newVersion}! ${report.updated.length} files updated, ${report.added.length} added, ${report.preserved.length} preserved.`,
-            'View Report'
-        ).then(selection => {
-            if (selection === 'View Report') {
-                const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);
-                vscode.workspace.openTextDocument(reportPath).then(doc => {
-                    vscode.window.showTextDocument(doc);
-                });
-            }
-        });
+        if (result === 'Open Instructions') {
+            const instructionsPath = path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md');
+            const doc = await vscode.workspace.openTextDocument(instructionsPath);
+            await vscode.window.showTextDocument(doc);
+        } else if (result === 'View Full Report') {
+            const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);
+            const doc = await vscode.workspace.openTextDocument(reportPath);
+            await vscode.window.showTextDocument(doc);
+        }
 
     } catch (error: any) {
         vscode.window.showErrorMessage(`Failed to upgrade Alex: ${error.message}`);
@@ -293,23 +489,116 @@ async function performUpgrade(
     }
 }
 
-async function generateUpgradeReport(
+async function generateUpgradeInstructions(
     rootPath: string,
     oldVersion: string | null,
     newVersion: string,
     report: UpgradeReport,
-    backupDir: string
+    backupDir: string,
+    timestamp: string
 ) {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);
-    
-    await fs.ensureDir(path.dirname(reportPath));
+    // Generate user-facing instructions file
+    const instructionsContent = `# 🔄 Alex Upgrade: Phase 2 Required
 
-    const content = `# Alex Cognitive Architecture Upgrade Report
+**Upgrade**: v${oldVersion || 'unknown'} → v${newVersion}  
+**Date**: ${new Date().toISOString()}  
+**Status**: ⚠️ Phase 1 Complete - AI Assistance Required
 
-**Date**: ${new Date().toISOString()}
-**From Version**: ${oldVersion || 'unknown'}
-**To Version**: ${newVersion}
+---
+
+## What Just Happened (Phase 1 - Automated)
+
+✅ Full backup created: \`${path.relative(rootPath, backupDir)}\`  
+✅ System files updated: ${report.updated.length} files  
+✅ New files added: ${report.added.length} files  
+✅ User files preserved: ${report.preserved.length} files  
+✅ Migration tasks identified: ${report.migrationTasks.length} tasks  
+
+---
+
+## What You Need To Do (Phase 2 - AI Assisted)
+
+### Step 1: Ask Your AI Assistant
+
+Copy and paste this prompt to your AI assistant (GitHub Copilot, Claude, etc.):
+
+\`\`\`
+Alex, please complete the upgrade to v${newVersion} by:
+
+1. Reading the upgrade tasks in archive/upgrades/upgrade-report-${timestamp}.md
+2. Performing schema migrations on flagged files:
+   - Change "## Embedded Synapse Network" headers to "## Synapses"
+   - Migrate old relationship types (Expression→Enables, Embodiment→Enables, Living→Validates, etc.)
+   - Simplify verbose activation patterns (remove date stamps, bold formatting)
+3. For copilot-instructions.md, merge carefully:
+   - UPDATE: version number, system sections
+   - PRESERVE: my domain slot assignments, custom memory file references
+4. Run "Alex: Dream (Neural Maintenance)" to validate the upgrade
+5. Delete UPGRADE-INSTRUCTIONS.md when complete
+\`\`\`
+
+### Step 2: Review Changes
+
+After the AI completes migrations, review:
+- Check that your learned domains are still referenced
+- Verify any custom files you created are intact
+- Run \`Alex: Dream (Neural Maintenance)\` to validate synaptic network
+
+### Step 3: Clean Up
+
+Once satisfied:
+- Delete this file (UPGRADE-INSTRUCTIONS.md)
+- Delete any \`.v${newVersion}.md\` reference files after merging
+- The upgrade is complete!
+
+---
+
+## Migration Tasks Summary
+
+${report.migrationTasks.length > 0 ? report.migrationTasks.map((task, i) => `
+### Task ${i + 1}: ${task.file}
+
+**Type**: ${task.type}  
+**Description**: ${task.description}
+
+${task.details.map(d => `- ${d}`).join('\n')}
+`).join('\n') : 'No migration tasks required.'}
+
+---
+
+## Rollback Instructions
+
+If anything goes wrong:
+
+1. Delete current \`.github/\` and \`domain-knowledge/\` folders
+2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
+3. Delete \`.alex-manifest.json\`
+4. Run \`Alex: Dream (Neural Maintenance)\` to verify
+
+---
+
+## Need Help?
+
+- Full upgrade report: \`archive/upgrades/upgrade-report-${timestamp}.md\`
+- Upgrade protocol docs: \`UPGRADE-PROTOCOL.md\`
+- Backup location: \`${path.relative(rootPath, backupDir)}\`
+
+---
+
+*This file will be deleted after successful upgrade completion.*
+`;
+
+    await fs.writeFile(path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md'), instructionsContent, 'utf8');
+
+    // Generate detailed report
+    const reportContent = `# Alex Cognitive Architecture Upgrade Report
+
+**Date**: ${new Date().toISOString()}  
+**From Version**: ${oldVersion || 'unknown'}  
+**To Version**: ${newVersion}  
+**Backup Location**: \`${backupDir}\`
+
+---
 
 ## Summary
 
@@ -319,34 +608,58 @@ async function generateUpgradeReport(
 | Added | ${report.added.length} |
 | Preserved | ${report.preserved.length} |
 | Backed Up | ${report.backed_up.length} |
+| Migration Tasks | ${report.migrationTasks.length} |
 | Errors | ${report.errors.length} |
-
-## Backup Location
-
-\`${backupDir}\`
-
-## Updated Files
-
-${report.updated.length > 0 ? report.updated.map(f => `- ${f}`).join('\n') : '- None'}
-
-## Added Files
-
-${report.added.length > 0 ? report.added.map(f => `- ${f}`).join('\n') : '- None'}
-
-## Preserved (User Customizations)
-
-${report.preserved.length > 0 ? report.preserved.map(f => `- ${f}`).join('\n') : '- None'}
-
-## Backed Up
-
-${report.backed_up.length > 0 ? report.backed_up.map(f => `- ${f}`).join('\n') : '- None'}
-
-${report.errors.length > 0 ? `## Errors\n\n${report.errors.map(e => `- ${e}`).join('\n')}` : ''}
 
 ---
 
-*Upgrade completed successfully. Run \`Alex: Dream (Neural Maintenance)\` to validate synaptic connections.*
+## Updated Files (System)
+
+${report.updated.length > 0 ? report.updated.map(f => `- ✅ ${f}`).join('\n') : '- None'}
+
+## Added Files (New in this version)
+
+${report.added.length > 0 ? report.added.map(f => `- ➕ ${f}`).join('\n') : '- None'}
+
+## Preserved Files (User content protected)
+
+${report.preserved.length > 0 ? report.preserved.map(f => `- 🔒 ${f}`).join('\n') : '- None'}
+
+## Backed Up
+
+${report.backed_up.length > 0 ? report.backed_up.map(f => `- 📦 ${f}`).join('\n') : '- None'}
+
+---
+
+## Migration Tasks (Require AI Assistance)
+
+${report.migrationTasks.length > 0 ? report.migrationTasks.map((task, i) => `
+### ${i + 1}. ${task.file}
+
+**Type**: \`${task.type}\`  
+**Description**: ${task.description}
+
+**Details**:
+${task.details.map(d => `- ${d}`).join('\n')}
+`).join('\n---\n') : 'No migration tasks required.'}
+
+---
+
+${report.errors.length > 0 ? `## Errors\n\n${report.errors.map(e => `- ❌ ${e}`).join('\n')}` : ''}
+
+## Next Steps
+
+1. Read \`UPGRADE-INSTRUCTIONS.md\` in workspace root
+2. Ask AI assistant to complete Phase 2 migration
+3. Run \`Alex: Dream (Neural Maintenance)\` to validate
+4. Delete \`UPGRADE-INSTRUCTIONS.md\` when complete
+
+---
+
+*Report generated by Alex Cognitive Architecture v${newVersion}*
 `;
 
-    await fs.writeFile(reportPath, content, 'utf8');
+    const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);
+    await fs.ensureDir(path.dirname(reportPath));
+    await fs.writeFile(reportPath, reportContent, 'utf8');
 }
