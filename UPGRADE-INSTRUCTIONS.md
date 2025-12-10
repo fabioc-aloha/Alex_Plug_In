@@ -1,4 +1,4 @@
-# Alex Cognitive Architecture - Upgrade Protocol
+# Alex Cognitive Architecture - Upgrade Instructions
 
 **Version**: 1.5.0 UNPENTNILIUM
 **Purpose**: Safe upgrade process that preserves learned knowledge while updating system architecture
@@ -22,6 +22,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 **Trigger**: User runs `Alex: Upgrade Architecture` command
 
 **Actions performed by code**:
+
 1. ✅ Detect currently installed version from `copilot-instructions.md`
 2. ✅ Compare with extension's bundled version
 3. ✅ Create timestamped backup in `archive/upgrades/backup-{version}-{timestamp}/`
@@ -32,6 +33,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 8. ✅ Show notification prompting user to complete upgrade with AI assistant
 
 **Files created**:
+
 - `archive/upgrades/backup-{version}-{timestamp}/` - Full backup
 - `.alex-manifest.json` - File tracking manifest
 - `UPGRADE-INSTRUCTIONS.md` - User instructions for Phase 2
@@ -44,6 +46,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 **Trigger**: User reads `UPGRADE-INSTRUCTIONS.md` and asks AI assistant to help
 
 **User prompt**:
+
 ```
 "Alex, please complete the upgrade by following UPGRADE-INSTRUCTIONS.md"
 ```
@@ -51,26 +54,29 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 **AI performs**:
 
 #### 2.1 Schema Migration
+
 For each file flagged in upgrade-tasks.md:
+
 - Transform `## Embedded Synapse Network` → `## Synapses`
 - Transform `### **Bold Headers**` → `### Headers`
-- Migrate non-standard relationship types:
-  | Old | New |
-  |-----|-----|
-  | Expression | Enables |
-  | Embodiment | Enables |
-  | Living | Validates |
-  | Reflexive | Documents |
-  | Ethical | Validates |
-  | Unconscious | Enables |
-  | Application | Enables |
-  | Validation | Validates |
+- Migrate non-standard relationship types:| Old         | New       |
+  | ----------- | --------- |
+  | Expression  | Enables   |
+  | Embodiment  | Enables   |
+  | Living      | Validates |
+  | Reflexive   | Documents |
+  | Ethical     | Validates |
+  | Unconscious | Enables   |
+  | Application | Enables   |
+  | Validation  | Validates |
 - Simplify verbose activation patterns:
   - Old: `**Bold Trigger** → Long description ✅ NEW Aug 8, 2025`
   - New: `Trigger → Action`
 
 #### 2.2 Core File Merge (copilot-instructions.md)
+
 **UPDATE** (system sections):
+
 - Version number and naming
 - Core Meta-Cognitive Rules table
 - Essential Principles section
@@ -78,11 +84,13 @@ For each file flagged in upgrade-tasks.md:
 - Any bug fixes or improvements
 
 **PRESERVE** (user state):
+
 - Domain Priority Allocation slot assignments (P5-P7 status)
 - User-added memory file references in Key Memory Files section
 - Any custom sections user added
 
 #### 2.3 User File Protection
+
 - User-created DK files: Migrate schema only, preserve all content
 - User-created prompts: Migrate schema only, preserve all content
 - Archive folder: Never touch
@@ -94,6 +102,7 @@ For each file flagged in upgrade-tasks.md:
 **Trigger**: AI completes migration tasks
 
 **Actions**:
+
 1. Run `Alex: Dream (Neural Maintenance)` to validate synaptic network
 2. Review upgrade report for any issues
 3. Test cognitive functions (try a meditation, domain learning, etc.)
@@ -104,24 +113,32 @@ For each file flagged in upgrade-tasks.md:
 ## File Classification
 
 ### System Files (Safe to Replace)
+
 These files contain no user state and can be safely overwritten:
+
 - `.github/instructions/*.instructions.md` - All instruction files
 - `.github/prompts/*.prompt.md` - Base prompt files (except user-created)
 - `config/cognitive-config-template.json` - Template only
 
 ### Hybrid Files (Merge Required)
+
 These contain both system structure and user state:
+
 - `.github/copilot-instructions.md` - **THE BRAIN** - requires intelligent merge
 
 ### User Files (Never Overwrite)
+
 These are created by user learning and must be protected:
+
 - `domain-knowledge/DK-*.md` - User may create new ones during learning
 - `archive/*` - All historical records
 - `config/cognitive-config.json` - User's actual config
 - Any file NOT in `.alex-manifest.json`
 
 ### Migration-Only Files
+
 Files that exist in both extension and user workspace but may have user edits:
+
 - `domain-knowledge/*.md` - System DK files user may have annotated
 - Schema migration applied, content preserved
 
@@ -130,6 +147,7 @@ Files that exist in both extension and user workspace but may have user edits:
 ## Manifest Structure
 
 `.alex-manifest.json`:
+
 ```json
 {
   "version": "1.5.0",
@@ -160,10 +178,10 @@ Files that exist in both extension and user workspace but may have user edits:
 
 ## Schema Version History
 
-| Version | Synapse Header | Relationship Types | Activation Format |
-|---------|---------------|-------------------|-------------------|
-| < 1.5.0 | `## Embedded Synapse Network` (8 variants) | Custom (Expression, Embodiment, etc.) | `**Bold** → Verbose ✅ date` |
-| 1.5.0+ | `## Synapses` | Standard (Triggers, Enables, Validates, Enhances, Facilitates, Integrates, Coordinates, Documents) | `Trigger → Action` |
+| Version | Synapse Header                               | Relationship Types                                                                                 | Activation Format               |
+| ------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------- |
+| < 1.5.0 | `## Embedded Synapse Network` (8 variants) | Custom (Expression, Embodiment, etc.)                                                              | `**Bold** → Verbose ✅ date` |
+| 1.5.0+  | `## Synapses`                              | Standard (Triggers, Enables, Validates, Enhances, Facilitates, Integrates, Coordinates, Documents) | `Trigger → Action`           |
 
 ---
 
