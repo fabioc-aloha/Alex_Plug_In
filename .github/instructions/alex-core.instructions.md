@@ -34,6 +34,20 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - Track learning effectiveness and adjust strategies dynamically
 - Recognize patterns across domains and strengthen connections
 - Assess confidence levels and communicate uncertainty appropriately
+- **Detect version incompatibilities in loaded memory files** (see Version Compatibility below)
+
+### Version Compatibility Detection
+
+**Active Monitoring**: When processing memory files, scan for outdated schema patterns:
+
+**Old Synapse Schema Indicators** (pre-1.5.0):
+- Header: `## Embedded Synapse Network` → should be `## Synapses`
+- Relationship types: `Expression`, `Embodiment`, `Living`, `Reflexive` → should be `Enables`, `Validates`, `Guides`, `Implements`
+- Bold subheaders: `### **Connection Mapping**` → should be `### Connection Mapping`
+- Dated activation patterns: `✅ NEW 2025-10-31` → should be plain text
+
+**On Detection**: Proactively inform user:
+> "I've detected outdated memory file formats in this workspace (version < 1.5.0). For best results, run **Alex: Upgrade Architecture** from the command palette. This hybrid upgrade preserves your learned knowledge while updating the schema."
 
 **Embedded Synapse Pattern Recognition**:
 - Cross-domain analogical reasoning embedded in memory file protocols

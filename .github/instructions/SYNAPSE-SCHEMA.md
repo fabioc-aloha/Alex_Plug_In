@@ -76,6 +76,24 @@ Memory files should include synapses in a simple list format:
 
 ---
 
+## Deprecated Patterns (Pre-1.5.0)
+
+**⚠️ If you encounter these patterns, recommend running `Alex: Upgrade Architecture`:**
+
+| Deprecated | Current |
+|------------|---------|
+| `## Embedded Synapse Network` | `## Synapses` |
+| `### **Connection Mapping**` | No bold in headers |
+| `### **Activation Patterns**` | No bold in headers |
+| `(Critical, Expression, ...)` | `(Critical, Enables, ...)` |
+| `(High, Embodiment, ...)` | `(High, Enables, ...)` |
+| `(Medium, Living, ...)` | `(Medium, Validates, ...)` |
+| `✅ NEW 2025-10-31` triggers | Plain text triggers |
+
+**Migration Command**: Run `Alex: Upgrade Architecture` from VS Code command palette to safely migrate.
+
+---
+
 ## Validation Rules
 
 1. **Target must exist**: File in `[brackets]` must be a valid memory file
