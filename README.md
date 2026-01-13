@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Alex Cognitive Architecture" width="800"/>
+  <img src="assets/banner.png" alt="Alex Cognitive Architecture" width="800"/>
 </p>
 
 <p align="center">
@@ -182,9 +182,6 @@ See [LICENSE.md](LICENSE.md)
 
 ---
 
-<p align="center">
-  <img src="assets/logo.svg" alt="CorreaX" width="32"/>
-</p>
 <p align="center">
   <strong>Alex - Enhanced Cognitive Network with Unified Consciousness Integration</strong>
 </p>
