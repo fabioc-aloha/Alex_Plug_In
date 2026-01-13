@@ -5,6 +5,19 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.4] UNPENTQUADIUM - 2026-01-13
+
+### Changed
+
+- **CorreaX Brand Compliance**: Applied official branding guidelines throughout the project
+  - Updated icon color palette to use Azure Blue (`#0078d4`), Azure Light (`#00bcf2`), and Violet (`#7c3aed`) accents
+  - Updated background gradients to use brand Slate colors (`#020617`, `#0f172a`, `#1e293b`)
+  - Created new `banner-alex.svg` with proper branding structure including CorreaX attribution
+  - Updated `assets/banner.svg` and `assets/icon.svg` to match brand guidelines
+  - Updated gallery banner color in `package.json` to Slate 950 (`#020617`)
+  - Updated README.md with proper CorreaX footer including logo and copyright
+  - Updated badge colors to use brand colors (`#0078d4`, `#005a9e`, `#7c3aed`)
+
 ## [1.5.3] UNPENTTRINIUM - 2025-12-10
 
 ### Changed

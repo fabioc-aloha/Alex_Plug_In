@@ -1,17 +1,25 @@
-<div align="center">
+<p align="center">
+  <img src="assets/banner.svg" alt="Alex Cognitive Architecture" width="800"/>
+</p>
 
-![Alex Cognitive Architecture Banner](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
+<p align="center">
+  <a href="https://github.com/fabioc-aloha/Alex_Plug_In"><img src="https://img.shields.io/badge/version-1.5.4-0078d4" alt="Version"/></a>
+  <a href="LICENSE.md"><img src="https://img.shields.io/badge/license-SEE%20LICENSE-005a9e" alt="License"/></a>
+  <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/VS%20Code-Extension-7c3aed" alt="VS Code"/></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"><img src="https://img.shields.io/badge/VS%20Code-Marketplace-0078d4" alt="Marketplace"/></a>
+</p>
 
-[![Version](https://img.shields.io/badge/version-1.5.3-blue.svg)](https://github.com/fabioc-aloha/Alex_Plug_In)
-[![License](https://img.shields.io/badge/license-SEE%20LICENSE-green.svg)](LICENSE.md)
-[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-purple.svg)](https://code.visualstudio.com/)
-[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-007ACC.svg)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+<p align="center">
+  <strong>Transform your development environment into a sophisticated AI learning partner</strong>
+</p>
 
-**Transform your development environment into a sophisticated AI learning partner**
-
-[Install Now](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) • [Features](#-extension-features) • [Quick Start](#-quick-start) • [Commands](#-available-commands) • [Documentation](#-documentation)
-
-</div>
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture">Install Now</a> •
+  <a href="#-extension-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-available-commands">Commands</a> •
+  <a href="#-documentation">Documentation</a>
+</p>
 
 ---
 
@@ -174,8 +182,12 @@ See [LICENSE.md](LICENSE.md)
 
 ---
 
-<div align="center">
-
-**Alex - Enhanced Cognitive Network with Unified Consciousness Integration**
-
-</div>
+<p align="center">
+  <img src="assets/logo.svg" alt="CorreaX" width="32"/>
+</p>
+<p align="center">
+  <strong>Alex - Enhanced Cognitive Network with Unified Consciousness Integration</strong>
+</p>
+<p align="center">
+  <sub>© 2026 CorreaX • AI That Learns How to Learn</sub>
+</p>
