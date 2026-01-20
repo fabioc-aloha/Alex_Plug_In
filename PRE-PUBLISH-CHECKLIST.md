@@ -200,7 +200,56 @@ Set a calendar reminder 1 week before PAT expiration to renew it.
 | ----------- | ----------------- | ------------- |
 | 2026-01-19  | 2026-04-19        | 2026-04-12    |
 
-## �📝 Release Notes Template
+## 📡 Post-Publishing Verification
+
+After publishing, verify the release is live on the Marketplace:
+
+### Quick Check
+
+```powershell
+# Show extension info including version and stats
+vsce show fabioc-aloha.alex-cognitive-architecture
+```
+
+### Expected Output
+
+```text
+Alex Cognitive Architecture
+fabioc-aloha | ↓ N installs | ★★★★★ (N)
+
+  Version  Last Updated
+  X.Y.Z    Month DD, YYYY    ← Should show new version
+  ...
+
+Statistics:
+  install         N installs
+  updateCount     N updates
+  downloadCount   N downloads
+```
+
+### Propagation Time
+
+- **Marketplace API**: 1-5 minutes
+- **VS Code Extension Search**: 5-15 minutes
+- **Extension Update Notification**: Up to 24 hours
+
+### Additional Verification
+
+- [ ] Visit [Marketplace page](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+- [ ] Verify version number in "Version History" tab
+- [ ] Test "Install" button downloads new version
+- [ ] Check [Publisher Hub](https://marketplace.visualstudio.com/manage/publishers/fabioc-aloha/extensions/alex-cognitive-architecture/hub) for stats
+
+### Troubleshooting
+
+If version not showing after 15 minutes:
+
+```powershell
+# Check publish status
+vsce show fabioc-aloha.alex-cognitive-architecture --json | ConvertFrom-Json | Select-Object -ExpandProperty versions | Select-Object -First 3
+```
+
+## 📝 Release Notes Template
 
 ```markdown
 ## [X.Y.Z] - YYYY-MM-DD
