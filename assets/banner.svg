@@ -1,222 +1,196 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
   <defs>
-    <!-- Background gradient - deep space theme -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#020617"/>
-      <stop offset="50%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
+    <!-- Gradient for background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
     </linearGradient>
-
-    <!-- Logo gradient with Azure blue -->
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00bcf2"/>
-      <stop offset="50%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
-    </linearGradient>
-
-    <!-- Name gradient -->
-    <linearGradient id="nameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="50%" stop-color="#e2e8f0"/>
-      <stop offset="100%" stop-color="#f8fafc"/>
-    </linearGradient>
-
-    <!-- Accent text gradient -->
-    <linearGradient id="accentTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00bcf2"/>
-      <stop offset="50%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#00bcf2"/>
-    </linearGradient>
-
-    <!-- Brain gradient with violet accent -->
-    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00bcf2"/>
-      <stop offset="50%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#7c3aed"/>
-    </linearGradient>
-
-    <!-- Glow filter -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
-    <!-- Strong glow for brain -->
-    <filter id="brainGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="4" result="blur1"/>
-      <feGaussianBlur stdDeviation="8" result="blur2"/>
-      <feMerge>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
-    <!-- Radial glow behind brain -->
-    <radialGradient id="brainBackGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.4"/>
-      <stop offset="50%" stop-color="#0078d4" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    
+    <!-- Gradient for neural glow -->
+    <radialGradient id="neuralGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0"/>
     </radialGradient>
-
-    <!-- Grid pattern -->
-    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>
-    </pattern>
-
-    <!-- Dot pattern -->
-    <pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse">
-      <circle cx="15" cy="15" r="1" fill="#0078d4" opacity="0.2"/>
-    </pattern>
-
-    <!-- Gradient for accent line -->
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#005a9e"/>
-      <stop offset="25%" stop-color="#0078d4"/>
-      <stop offset="50%" stop-color="#00bcf2"/>
-      <stop offset="75%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
+    
+    <!-- Gradient for accent glow -->
+    <radialGradient id="accentGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:0"/>
+    </radialGradient>
+    
+    <!-- Text gradient -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#007ACC"/>
+      <stop offset="100%" style="stop-color:#00a8e8"/>
     </linearGradient>
-
-    <!-- Neural network gradient -->
-    <linearGradient id="neuralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7c3aed"/>
-      <stop offset="50%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#00bcf2"/>
+    
+    <!-- Synapse line gradient -->
+    <linearGradient id="synapseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.1"/>
+      <stop offset="50%" style="stop-color:#007ACC;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0.1"/>
     </linearGradient>
   </defs>
-
+  
   <!-- Background -->
-  <rect width="1200" height="300" fill="url(#bgGrad)"/>
-
-  <!-- Grid overlay -->
-  <rect width="1200" height="300" fill="url(#grid)"/>
-
-  <!-- Dot pattern overlay -->
-  <rect width="1200" height="300" fill="url(#dots)" opacity="0.5"/>
-
-  <!-- Large decorative orbs -->
-  <circle cx="150" cy="150" r="180" fill="url(#brainBackGlow)"/>
-  <circle cx="1050" cy="80" r="150" fill="#0078d4" opacity="0.05"/>
-  <circle cx="1150" cy="280" r="180" fill="#00bcf2" opacity="0.03"/>
-  <circle cx="50" cy="250" r="100" fill="#7c3aed" opacity="0.08"/>
-
-  <!-- Neural network nodes - cognitive theme -->
-  <g opacity="0.5">
-    <!-- Left side neural cluster -->
-    <circle cx="80" cy="60" r="4" fill="#7c3aed"/>
-    <circle cx="120" cy="40" r="3" fill="#0078d4"/>
-    <circle cx="60" cy="100" r="3" fill="#00bcf2"/>
-    <circle cx="140" cy="90" r="2" fill="#7c3aed"/>
-    <line x1="80" y1="60" x2="120" y2="40" stroke="#7c3aed" stroke-width="1"/>
-    <line x1="80" y1="60" x2="60" y2="100" stroke="#0078d4" stroke-width="1"/>
-    <line x1="120" y1="40" x2="140" y2="90" stroke="#00bcf2" stroke-width="0.5"/>
-
-    <!-- Right side neural cluster -->
-    <circle cx="1100" cy="70" r="3" fill="#00bcf2"/>
-    <circle cx="1140" cy="50" r="2" fill="#0078d4"/>
-    <circle cx="1080" cy="100" r="4" fill="#7c3aed"/>
-    <circle cx="1120" cy="120" r="2" fill="#0078d4"/>
-    <line x1="1100" y1="70" x2="1140" y2="50" stroke="#00bcf2" stroke-width="0.5"/>
-    <line x1="1100" y1="70" x2="1080" y2="100" stroke="#7c3aed" stroke-width="1"/>
-    <line x1="1080" y1="100" x2="1120" y2="120" stroke="#0078d4" stroke-width="0.5"/>
-
-    <!-- Synaptic connections extending from brain -->
-    <circle cx="260" cy="100" r="3" fill="#00bcf2"/>
-    <circle cx="280" cy="150" r="2" fill="#7c3aed"/>
-    <circle cx="255" cy="200" r="3" fill="#0078d4"/>
-    <line x1="200" y1="130" x2="260" y2="100" stroke="#00bcf2" stroke-width="1"/>
-    <line x1="210" y1="150" x2="280" y2="150" stroke="#7c3aed" stroke-width="0.8"/>
-    <line x1="195" y1="170" x2="255" y2="200" stroke="#0078d4" stroke-width="1"/>
+  <rect width="1280" height="640" fill="url(#bgGradient)"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#007ACC" stroke-width="0.5"/>
+    </pattern>
+    <rect width="1280" height="640" fill="url(#grid)"/>
   </g>
-
+  
+  <!-- Neural network background visualization -->
+  <!-- Large glow circles -->
+  <circle cx="200" cy="320" r="300" fill="url(#neuralGlow)"/>
+  <circle cx="1080" cy="320" r="250" fill="url(#accentGlow)"/>
+  
+  <!-- Neural nodes - left side -->
+  <g opacity="0.6">
+    <!-- Layer 1 -->
+    <circle cx="100" cy="180" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="280" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="380" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="480" r="8" fill="#007ACC"/>
+    
+    <!-- Layer 2 -->
+    <circle cx="220" cy="220" r="10" fill="#007ACC"/>
+    <circle cx="220" cy="320" r="10" fill="#007ACC"/>
+    <circle cx="220" cy="420" r="10" fill="#007ACC"/>
+    
+    <!-- Layer 3 -->
+    <circle cx="340" cy="270" r="12" fill="#4CAF50"/>
+    <circle cx="340" cy="370" r="12" fill="#4CAF50"/>
+    
+    <!-- Connections -->
+    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
+      <!-- Layer 1 to 2 -->
+      <line x1="108" y1="180" x2="210" y2="220"/>
+      <line x1="108" y1="180" x2="210" y2="320"/>
+      <line x1="108" y1="280" x2="210" y2="220"/>
+      <line x1="108" y1="280" x2="210" y2="320"/>
+      <line x1="108" y1="280" x2="210" y2="420"/>
+      <line x1="108" y1="380" x2="210" y2="320"/>
+      <line x1="108" y1="380" x2="210" y2="420"/>
+      <line x1="108" y1="480" x2="210" y2="420"/>
+      
+      <!-- Layer 2 to 3 -->
+      <line x1="230" y1="220" x2="328" y2="270"/>
+      <line x1="230" y1="320" x2="328" y2="270"/>
+      <line x1="230" y1="320" x2="328" y2="370"/>
+      <line x1="230" y1="420" x2="328" y2="370"/>
+    </g>
+  </g>
+  
+  <!-- Neural nodes - right side -->
+  <g opacity="0.6">
+    <!-- Layer 1 -->
+    <circle cx="1180" cy="200" r="8" fill="#4CAF50"/>
+    <circle cx="1180" cy="320" r="8" fill="#4CAF50"/>
+    <circle cx="1180" cy="440" r="8" fill="#4CAF50"/>
+    
+    <!-- Layer 2 -->
+    <circle cx="1060" cy="260" r="10" fill="#4CAF50"/>
+    <circle cx="1060" cy="380" r="10" fill="#4CAF50"/>
+    
+    <!-- Layer 3 -->
+    <circle cx="940" cy="320" r="12" fill="#007ACC"/>
+    
+    <!-- Connections -->
+    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
+      <line x1="1172" y1="200" x2="1070" y2="260"/>
+      <line x1="1172" y1="320" x2="1070" y2="260"/>
+      <line x1="1172" y1="320" x2="1070" y2="380"/>
+      <line x1="1172" y1="440" x2="1070" y2="380"/>
+      <line x1="1050" y1="260" x2="952" y2="320"/>
+      <line x1="1050" y1="380" x2="952" y2="320"/>
+    </g>
+  </g>
+  
   <!-- Floating particles -->
-  <circle cx="300" cy="30" r="1.5" fill="#0078d4" opacity="0.5"/>
-  <circle cx="500" cy="50" r="2" fill="#00bcf2" opacity="0.4"/>
-  <circle cx="750" cy="25" r="1" fill="#7c3aed" opacity="0.6"/>
-  <circle cx="950" cy="45" r="2.5" fill="#00bcf2" opacity="0.3"/>
-  <circle cx="400" cy="270" r="2" fill="#00bcf2" opacity="0.4"/>
-  <circle cx="700" cy="260" r="1.5" fill="#0078d4" opacity="0.5"/>
-  <circle cx="900" cy="275" r="2" fill="#7c3aed" opacity="0.3"/>
-  <circle cx="1050" cy="250" r="1" fill="#0078d4" opacity="0.6"/>
-
-  <!-- Brain icon glow backdrop -->
-  <ellipse cx="150" cy="150" rx="100" ry="95" fill="url(#brainBackGlow)"/>
-
-  <!-- Brain icon with glow -->
-  <g transform="translate(150, 150) scale(3.5)" filter="url(#brainGlow)">
-    <!-- Brain outline - left hemisphere -->
-    <path d="M 0,20 
-             Q -12,18 -17,10 
-             Q -19,3 -18,-5
-             Q -17,-12 -14,-17
-             Q -10,-22 -4,-24
-             Q 0,-25 2,-24" 
-          fill="none" stroke="url(#brainGrad)" stroke-width="2.5" stroke-linecap="round"/>
-    
-    <!-- Brain outline - right hemisphere -->
-    <path d="M 0,20 
-             Q 12,18 17,10 
-             Q 19,3 18,-5
-             Q 17,-12 14,-17
-             Q 10,-22 4,-24
-             Q 0,-25 -2,-24" 
-          fill="none" stroke="url(#brainGrad)" stroke-width="2.5" stroke-linecap="round"/>
-    
-    <!-- Brain folds - left -->
-    <path d="M -5,10 Q -10,5 -13,0" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M -3,0 Q -8,-5 -12,-8" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M -2,-10 Q -6,-14 -10,-16" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    
-    <!-- Brain folds - right -->
-    <path d="M 5,10 Q 10,5 13,0" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M 3,0 Q 8,-5 12,-8" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M 2,-10 Q 6,-14 10,-16" fill="none" stroke="url(#brainGrad)" stroke-width="1.5" stroke-linecap="round"/>
-    
-    <!-- Central connection (corpus callosum visualization) -->
-    <path d="M 0,-20 L 0,15" fill="none" stroke="url(#brainGrad)" stroke-width="1" stroke-dasharray="2,3" opacity="0.6"/>
-    
-    <!-- Neural sparkle points -->
-    <circle cx="-10" cy="-5" r="1.5" fill="#00bcf2" opacity="0.8"/>
-    <circle cx="10" cy="-5" r="1.5" fill="#00bcf2" opacity="0.8"/>
-    <circle cx="0" cy="-15" r="2" fill="#7c3aed" opacity="0.9"/>
-    <circle cx="-8" cy="8" r="1" fill="#0078d4" opacity="0.7"/>
-    <circle cx="8" cy="8" r="1" fill="#0078d4" opacity="0.7"/>
+  <g fill="#007ACC" opacity="0.4">
+    <circle cx="450" cy="150" r="3"/>
+    <circle cx="520" cy="500" r="2"/>
+    <circle cx="780" cy="120" r="4"/>
+    <circle cx="850" cy="520" r="3"/>
+    <circle cx="600" cy="80" r="2"/>
+    <circle cx="680" cy="560" r="3"/>
+    <circle cx="400" cy="450" r="2"/>
+    <circle cx="880" cy="180" r="2"/>
   </g>
-
+  <g fill="#4CAF50" opacity="0.3">
+    <circle cx="500" cy="100" r="2"/>
+    <circle cx="750" cy="540" r="3"/>
+    <circle cx="420" cy="520" r="2"/>
+    <circle cx="860" cy="100" r="2"/>
+  </g>
+  
+  <!-- Central brain/memory icon -->
+  <g transform="translate(640, 200)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#007ACC" stroke-width="2" opacity="0.3"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.2"/>
+    
+    <!-- Brain-like shape with memory nodes -->
+    <g fill="none" stroke="#007ACC" stroke-width="2.5" opacity="0.8">
+      <!-- Left hemisphere -->
+      <path d="M-30,-35 Q-50,-30 -45,-5 Q-50,20 -30,35 Q-15,45 0,40"/>
+      <!-- Right hemisphere -->
+      <path d="M30,-35 Q50,-30 45,-5 Q50,20 30,35 Q15,45 0,40"/>
+      <!-- Center connection -->
+      <path d="M0,-40 Q0,-20 0,0 Q0,20 0,40"/>
+      <!-- Cross connections -->
+      <path d="M-25,0 Q0,-10 25,0"/>
+      <path d="M-20,-20 Q0,-15 20,-20"/>
+      <path d="M-20,20 Q0,25 20,20"/>
+    </g>
+    
+    <!-- Memory nodes -->
+    <circle cx="-35" cy="-20" r="6" fill="#4CAF50"/>
+    <circle cx="35" cy="-20" r="6" fill="#4CAF50"/>
+    <circle cx="-35" cy="15" r="6" fill="#007ACC"/>
+    <circle cx="35" cy="15" r="6" fill="#007ACC"/>
+    <circle cx="0" cy="-35" r="6" fill="#4CAF50"/>
+    <circle cx="0" cy="35" r="6" fill="#007ACC"/>
+  </g>
+  
   <!-- Main title -->
-  <text x="320" y="125" font-family="Segoe UI, system-ui, sans-serif" font-size="68" font-weight="700" fill="url(#nameGrad)" filter="url(#glow)">Alex</text>
-
+  <text x="640" y="340" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
+    Alex
+  </text>
+  
   <!-- Subtitle -->
-  <text x="320" y="170" font-family="Segoe UI, system-ui, sans-serif" font-size="22" fill="#94a3b8" letter-spacing="1">Cognitive Architecture for GitHub Copilot</text>
-
-  <!-- Keywords -->
-  <text x="320" y="210" font-family="Segoe UI, system-ui, sans-serif" font-size="16" fill="url(#accentTextGrad)" letter-spacing="2">META-COGNITIVE • BOOTSTRAP LEARNING • NEURAL MAINTENANCE</text>
-
-  <!-- Decorative accent line -->
-  <line x1="320" y1="230" x2="900" y2="230" stroke="#334155" stroke-width="1"/>
-  <line x1="320" y1="233" x2="650" y2="233" stroke="url(#accentGrad)" stroke-width="2" opacity="0.6"/>
-
-  <!-- CorreaX branding badge -->
-  <g transform="translate(320, 255)">
-    <text font-family="Segoe UI, system-ui, sans-serif" font-size="12" fill="#64748b" letter-spacing="1">POWERED BY</text>
-    <text x="95" font-family="Segoe UI, system-ui, sans-serif" font-size="14" font-weight="600" fill="url(#accentTextGrad)">CORREAX</text>
+  <text x="640" y="400" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
+    Cognitive Architecture
+  </text>
+  
+  <!-- Tagline -->
+  <text x="640" y="460" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="20" font-weight="300" fill="#94a3b8" letter-spacing="2">
+    TRANSPARENT MEMORY YOU OWN
+  </text>
+  
+  <!-- VS Code badge -->
+  <g transform="translate(640, 520)">
+    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="#007ACC" opacity="0.2"/>
+    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="none" stroke="#007ACC" stroke-width="1.5" opacity="0.6"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#007ACC">
+      VS Code Extension
+    </text>
   </g>
-
-  <!-- Tech circuit decorations on right -->
-  <g opacity="0.25">
-    <path d="M1000 140 h80 v40 h40" stroke="#0078d4" stroke-width="1.5" fill="none"/>
-    <circle cx="1000" cy="140" r="3" fill="#0078d4"/>
-    <circle cx="1120" cy="180" r="4" fill="#00bcf2"/>
-    <path d="M1020 200 h60 v-25 h30" stroke="#7c3aed" stroke-width="1" fill="none"/>
-    <circle cx="1020" cy="200" r="2" fill="#7c3aed"/>
-    <path d="M980 100 h50 l20 20 h40" stroke="#00bcf2" stroke-width="1" fill="none"/>
-    <circle cx="980" cy="100" r="2" fill="#00bcf2"/>
+  
+  <!-- Decorative lines -->
+  <line x1="440" y1="430" x2="540" y2="430" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  <line x1="740" y1="430" x2="840" y2="430" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Corner accents -->
+  <g stroke="#007ACC" stroke-width="2" opacity="0.4" fill="none">
+    <path d="M30,30 L30,60 M30,30 L60,30"/>
+    <path d="M1250,30 L1250,60 M1250,30 L1220,30"/>
+    <path d="M30,610 L30,580 M30,610 L60,610"/>
+    <path d="M1250,610 L1250,580 M1250,610 L1220,610"/>
   </g>
-
-  <!-- Bottom accent bar with glow -->
-  <rect x="0" y="290" width="1200" height="10" fill="url(#accentGrad)" filter="url(#glow)"/>
 </svg>
