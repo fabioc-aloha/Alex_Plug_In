@@ -61,6 +61,8 @@ Already have Alex installed? Here's how to upgrade safely:
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+> ⚠️ **Important**: For detailed upgrade procedures, including Phase 2 AI-assisted migration and schema changes, see [UPGRADE-INSTRUCTIONS.md](UPGRADE-INSTRUCTIONS.md).
+
 ### What's New for Existing Users
 
 | Feature | v1.5.x | v2.0.0 |
@@ -426,7 +428,7 @@ Open settings with `Ctrl+Shift+P` → "Preferences: Open User Settings (JSON)":
 {
   // Control MCP autostart behavior
   "chat.mcp.autostart": "newAndOutdated",  // or "never" to disable all
-  
+
   // Keep Alex's memory enabled
   "github.copilot.chat.tools.memory.enabled": true
 }
