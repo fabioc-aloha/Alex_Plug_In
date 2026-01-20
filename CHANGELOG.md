@@ -5,6 +5,15 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] BINILBIUM - 2026-01-20
+
+### Changed
+
+- **Brand Refresh**: New neural network icon and banner design
+  - Rounded corners with memory nodes reflecting cognitive architecture
+  - VS Code Blue (#007ACC), Growth Green (#4CAF50), Deep Navy (#1a1a2e)
+  - Professional visual identity for marketplace presence
+
 ## [2.0.1] BINILUNIUM - 2026-01-19
 
 ### Fixed
