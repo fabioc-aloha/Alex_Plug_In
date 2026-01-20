@@ -236,3 +236,4 @@ This release transforms Alex from a passive context injector into an **active co
 ---
 
 **Note**: Version 1.1.0 marks the first public release as a VS Code extension. Previous development focused on establishing the cognitive architecture framework and memory systems.
+
