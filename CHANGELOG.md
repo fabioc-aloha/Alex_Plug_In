@@ -5,6 +5,23 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] BINILTRIUM - 2026-01-20
+
+### Added
+
+- **MCP Server Optimization Guide**: New documentation section for managing MCP servers
+  - Which MCP servers Alex can replace (memory, profile, recommendations)
+  - Which MCP servers to keep enabled (Azure, M365, CLI tools)
+  - Optional servers that can be safely disabled based on workflow
+  - Three configuration methods: extension disable, settings.json, per-server
+  - Recommended VS Code settings for optimal performance
+
+### Documentation
+
+- Added `⚡ MCP Server Optimization` section to README
+- Added `MCP Server Optimization` section to UPGRADE-INSTRUCTIONS.md
+- PowerShell commands for disabling optional MCP extensions
+
 ## [2.0.2] BINILBIUM - 2026-01-20
 
 ### Changed

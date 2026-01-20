@@ -197,6 +197,46 @@ If upgrade fails or causes issues:
 
 ---
 
+## MCP Server Optimization
+
+After upgrading, consider optimizing your MCP server configuration. Alex provides native alternatives to some MCP servers.
+
+### MCP Servers Alex Can Replace
+
+| Alex Tool | Replaces | Action |
+| --------- | -------- | ------ |
+| `alex_memory_search` | Generic memory/context MCPs | Can disable redundant memory servers |
+| `alex_user_profile` | Profile management MCPs | Alex manages preferences natively |
+| `alex_mcp_recommendations` | Generic MCP guidance tools | Alex provides scenario-based recommendations |
+
+### Optional MCP Servers to Disable
+
+```powershell
+# Disable if not using Power BI
+code --disable-extension analysis-services.powerbi-modeling-mcp
+```
+
+### Keep These MCP Servers Enabled
+
+- **Azure MCP Server** (`ms-azuretools.vscode-azure-mcp-server`) - Core Azure functionality
+- **Azure GitHub Copilot** (`ms-azuretools.vscode-azure-github-copilot`) - Azure best practices
+- **GitHub Copilot** extensions - Required for Alex
+
+### Recommended VS Code Settings
+
+Add to your `settings.json` for optimal performance:
+
+```json
+{
+  "chat.mcp.autostart": "newAndOutdated",
+  "github.copilot.chat.tools.memory.enabled": true
+}
+```
+
+See the [README MCP Optimization section](README.md#-mcp-server-optimization) for detailed configuration options.
+
+---
+
 ## Future Considerations
 
 - **Automated schema migrations**: As architecture stabilizes, more migrations can be automated

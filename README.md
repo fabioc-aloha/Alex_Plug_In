@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.0.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-2.0.3-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -364,6 +364,96 @@ When you ask `@alex /m365`, Alex guides you to:
 | `mcp_fabric-rti-mc_eventstream_create_simple` | Create Eventstreams in Microsoft Fabric |
 | `mcp_fabric-rti-mc_kusto_get_shots` | Semantic search in Kusto/Azure Data Explorer |
 | Activate Kusto tools | KQL query execution and schema retrieval |
+
+---
+
+## ⚡ MCP Server Optimization
+
+Alex provides native alternatives to some MCP servers, allowing you to **disable redundant servers** for better performance and reduced overhead.
+
+### MCP Servers Alex Can Replace
+
+Alex's built-in tools provide equivalent functionality:
+
+| Alex Tool | Replaces | Recommendation |
+| --------- | -------- | -------------- |
+| `alex_memory_search` | Generic memory/context MCP servers | ✅ Can disable if using Alex's memory architecture |
+| `alex_user_profile` | Profile management MCPs | ✅ Alex manages user preferences natively |
+| `alex_mcp_recommendations` | Generic MCP guidance tools | ✅ Alex provides scenario-based recommendations |
+
+### MCP Servers to Keep Enabled
+
+These provide unique capabilities Alex works **alongside**:
+
+| Category | MCP Servers | Why Keep |
+| -------- | ----------- | -------- |
+| **Azure Resources** | `azure_cosmos`, `azure_sql`, `azure_storage`, etc. | Direct Azure API access |
+| **Documentation** | `mcp_azure_mcp_documentation` | Microsoft Learn search |
+| **Best Practices** | `mcp_azure_mcp_get_bestpractices` | Azure-specific guidance |
+| **M365** | Teams, Outlook, SharePoint MCPs | M365 service integration |
+| **CLI Generation** | `mcp_azure_mcp_azd` | Azure CLI command generation |
+
+### Optional MCP Servers (Disable If Not Used)
+
+These can be safely disabled based on your workflow:
+
+| MCP Server/Extension | Disable If |
+| -------------------- | ---------- |
+| `analysis-services.powerbi-modeling-mcp` | Not working with Power BI models |
+| Microsoft Word MCP | Not creating Word documents programmatically |
+| Microsoft SharePoint Lists MCP | Not managing SharePoint lists |
+| Fabric Eventstream tools | Not using Microsoft Fabric real-time intelligence |
+
+### How to Disable MCP Servers
+
+#### Option 1: Disable VS Code Extension
+
+```powershell
+# Disable specific MCP extension
+code --disable-extension <extension-id>
+
+# Example: Disable Power BI MCP
+code --disable-extension analysis-services.powerbi-modeling-mcp
+```
+
+Or in VS Code: **Extensions** (`Ctrl+Shift+X`) → Find extension → Click **Disable**
+
+#### Option 2: VS Code Settings
+
+Open settings with `Ctrl+Shift+P` → "Preferences: Open User Settings (JSON)":
+
+```json
+{
+  // Control MCP autostart behavior
+  "chat.mcp.autostart": "newAndOutdated",  // or "never" to disable all
+  
+  // Keep Alex's memory enabled
+  "github.copilot.chat.tools.memory.enabled": true
+}
+```
+
+#### Option 3: Per-Server Configuration
+
+```json
+{
+  "chat.mcp.serverSampling": {
+    "Azure MCP Server Provider: Azure MCP": {
+      "allowedDuringChat": true
+    }
+  }
+}
+```
+
+### Recommended Configuration
+
+For most Alex users:
+
+| Setting | Value | Reason |
+| ------- | ----- | ------ |
+| `chat.mcp.autostart` | `"newAndOutdated"` | Only start MCPs when needed |
+| `github.copilot.chat.tools.memory.enabled` | `true` | Alex's memory system |
+| Power BI MCP | Disabled | Unless actively using Power BI |
+| Azure MCP Server | Enabled | Core Azure functionality |
 
 ---
 
