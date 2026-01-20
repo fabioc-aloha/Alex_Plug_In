@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "SEE LICENSE IN LICENSE.md",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -167,12 +167,19 @@
             },
             "memoryType": {
               "type": "string",
-              "enum": ["procedural", "episodic", "domain", "all"],
+              "enum": [
+                "procedural",
+                "episodic",
+                "domain",
+                "all"
+              ],
               "description": "Type of memory to search",
               "default": "all"
             }
           },
-          "required": ["query"]
+          "required": [
+            "query"
+          ]
         }
       },
       {
@@ -211,12 +218,18 @@
             },
             "platform": {
               "type": "string",
-              "enum": ["azure", "m365", "both"],
+              "enum": [
+                "azure",
+                "m365",
+                "both"
+              ],
               "description": "Target platform for recommendations",
               "default": "both"
             }
           },
-          "required": ["scenario"]
+          "required": [
+            "scenario"
+          ]
         }
       },
       {
@@ -232,7 +245,11 @@
           "properties": {
             "action": {
               "type": "string",
-              "enum": ["get", "update", "exists"],
+              "enum": [
+                "get",
+                "update",
+                "exists"
+              ],
               "description": "Action to perform: get profile, update a field, or check if profile exists"
             },
             "field": {
@@ -244,7 +261,9 @@
               "description": "The new value for the field (for update action)"
             }
           },
-          "required": ["action"]
+          "required": [
+            "action"
+          ]
         }
       }
     ],
@@ -261,7 +280,9 @@
             "media": {
               "markdown": "alex/README.md"
             },
-            "completionEvents": ["onCommand:alex.initialize"]
+            "completionEvents": [
+              "onCommand:alex.initialize"
+            ]
           },
           {
             "id": "alex.chat",
@@ -286,7 +307,9 @@
             "media": {
               "markdown": "alex/VALIDATION-SUITE.md"
             },
-            "completionEvents": ["onCommand:alex.dream"]
+            "completionEvents": [
+              "onCommand:alex.dream"
+            ]
           }
         ]
       }
