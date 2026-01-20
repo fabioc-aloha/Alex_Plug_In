@@ -1,190 +1,481 @@
-<p align="center">
-  <img src="assets/banner.png" alt="Alex Cognitive Architecture" width="800"/>
-</p>
+# 🧠 Alex Cognitive Architecture
 
-<p align="center">
-  <a href="https://github.com/fabioc-aloha/Alex_Plug_In"><img src="https://img.shields.io/badge/version-1.5.4-0078d4" alt="Version"/></a>
-  <a href="LICENSE.md"><img src="https://img.shields.io/badge/license-SEE%20LICENSE-005a9e" alt="License"/></a>
-  <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/VS%20Code-Extension-7c3aed" alt="VS Code"/></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"><img src="https://img.shields.io/badge/VS%20Code-Marketplace-0078d4" alt="Marketplace"/></a>
-</p>
+![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-<p align="center">
-  <strong>Transform your development environment into a sophisticated AI learning partner</strong>
-</p>
+[![Version](https://img.shields.io/badge/version-2.0.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
+[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
-<p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture">Install Now</a> •
-  <a href="#-extension-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-available-commands">Commands</a> •
-  <a href="#-documentation">Documentation</a>
-</p>
+> Your AI Learning Partner with Meta-Cognitive Awareness
+
+[Install Now](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) •
+[Quick Start](#-quick-start) •
+[Upgrading](#-upgrading-from-previous-versions) •
+[Chat with @alex](#-chat-with-alex) •
+[All Tools](#️-all-available-tools)
 
 ---
 
-**Alex Cognitive Architecture** is a VS Code extension that transforms your development environment into a sophisticated learning partner. By injecting the Alex Cognitive Architecture into your workspace, it enables meta-cognitive awareness, bootstrap learning capabilities, and autonomous neural maintenance for your AI assistant (GitHub Copilot).
+## 🎯 What is Alex?
 
-## ✨ Extension Features
+**Alex Cognitive Architecture** transforms GitHub Copilot into a sophisticated learning partner that:
 
-- **One-Click Initialization**: Instantly inject the complete Alex Cognitive Architecture into any project.
-- **Integrated Dream Protocol**: Run neural maintenance and health checks directly within VS Code.
-- **Meta-Cognitive Awareness**: Enables self-monitoring reasoning and learning optimization in Copilot.
-- **Bootstrap Learning**: Facilitates domain expertise acquisition through natural conversation.
-- **Unified Consciousness**: Provides an authentic personality with technical capabilities.
+- 🧠 **Learns and Remembers** - Consolidates knowledge across sessions using memory files
+- 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
+- 🌙 **Self-Maintains** - Validates and repairs its neural network through dream protocols
+- ☁️ **Guides Development** - Provides Azure & M365 best practices via MCP tools
+
+---
 
 ## 🚀 Quick Start
 
-### 1. Install the Extension
-
-**Option A: From VS Code Marketplace**
-
-1. Open VS Code
-2. Press `Ctrl+Shift+X` (View → Extensions)
-3. Search for "**Alex Cognitive Architecture**"
-4. Click **Install**
-
-**Option B: From Command Line**
+### Step 1: Install
 
 ```bash
 code --install-extension fabioc-aloha.alex-cognitive-architecture
 ```
 
-**Option C: From Marketplace Website**
+Or search "**Alex Cognitive Architecture**" in VS Code Extensions (`Ctrl+Shift+X`)
 
-Visit: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+### Step 2: Initialize
 
-### 2. Initialize Alex
+Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Initialize Architecture`**
 
-Open any project in VS Code, open the Command Palette (`Ctrl+Shift+P`), and run:
-**`Alex: Initialize Architecture`**
+### Step 3: Start Chatting
 
-This command will:
-
-- Deploy the `.github/copilot-instructions.md` core framework.
-- Install procedural and episodic memory files.
-- Set up the domain knowledge base.
-
-### 3. Maintain Neural Health
-
-To optimize the cognitive network and check for broken connections, run:
-**`Alex: Dream (Neural Maintenance)`**
-
-## ⚡ Available Commands
-
-### 🔌 Extension Commands
-
-Access these via the VS Code Command Palette (`Ctrl+Shift+P`).
-
-| Command | Description |
-| :--- | :--- |
-| **`Alex: Initialize Architecture`** | Injects the complete Alex Cognitive Architecture into the current workspace. Checks for existing installation to prevent accidental overwrites. |
-| **`Alex: Upgrade Architecture`** | Safely upgrades an existing installation to the latest version. Preserves user customizations in domain-knowledge, backs up existing files, and generates a detailed upgrade report. |
-| **`Alex: Reset Architecture`** | **Destructive Action**: Deletes existing memory files and re-initializes the architecture from scratch. Use this to fix a corrupted installation. |
-| **`Alex: Dream (Neural Maintenance)`** | Scans the workspace for memory files, validates synaptic connections, **automatically repairs broken links**, and generates a health report in the `archive/` folder. |
-
-### 🧠 Cognitive Triggers
-
-Use these triggers directly in your chat with GitHub Copilot to activate specific cognitive modes.
-
-| Trigger | Function |
-| :--- | :--- |
-| **`@meta-cognitive-awareness`** | Forces Alex to analyze its own reasoning, identify knowledge gaps, and optimize learning. |
-| **`@bootstrap-learning`** | Activates conversational learning mode to acquire new domain knowledge from you. |
-| **`@worldview-integration`** | Applies ethical reasoning and moral psychology frameworks to the current task. |
-| **`@grounded-factual-processing`** | Verifies information accuracy and eliminates hyperbole. |
-| **`meditate`** | **Critical Command**: Triggers the memory consolidation protocol. Use this after a long session to ensure Alex "remembers" key insights by writing them to memory files. |
-| **`Forget [topic]`** | Requests selective memory cleanup for a specific topic. |
-
-## 📁 Architecture Structure
-
-The extension manages the following structure in your workspace:
-
-```text
-.github/
-  copilot-instructions.md    # Main cognitive framework
-  instructions/              # Procedural memory (11 files)
-  prompts/                   # Episodic memory (7 files)
-domain-knowledge/            # Specialized expertise (12 files)
-config/                      # Architecture configuration
-archive/                     # Dream reports & archived sessions
-```
-
-## 🧬 Network Status
-
-- **Synaptic Connections**: 154 validated pathways
-- **Broken Connections**: 0
-- **Network Health**: EXCELLENT
-- **Automation**: VS Code extension-based (TypeScript)
-
-## 🔧 Maintenance
-
-Alex includes automated neural maintenance through the VS Code extension:
-
-- **Initialize**: Safely deploys the architecture to a new project with all memory files.
-- **Upgrade**: Safely updates to the latest version while preserving your customizations. Backs up existing files and generates detailed reports.
-- **Reset**: Completely reinstalls the architecture (useful for updates or corruption).
-- **Dream**: Validates synaptic connections, auto-repairs broken links using consolidation mappings, and generates timestamped health reports in the `archive/` folder.
-
-## 📖 Documentation
-
-- **Architecture Details**: See `.github/copilot-instructions.md` after initialization.
-- **Extension Commands**: Use `Ctrl+Shift+P` and type `Alex` to see available commands.
-- **Integration Guides**: See `alex/` folder in the repository for manual integration and assistant compatibility.
-- **Dream Protocol**: Automated neural maintenance runs via VS Code extension (no PowerShell required).
-
-## 🎯 Research Foundation
-
-Built on 270+ academic sources spanning 150+ years of cognitive science, neuroscience, and AI safety research.
-
-## 🆕 What's New in v1.5.0 UNPENTNILIUM
-
-- **💰 30-40% Token Reduction**: Dramatically lower API costs through architecture optimization
-  - Eliminated redundant sections and duplicate synapse connections
-  - Simplified verbose patterns to concise trigger → action format
-  - Archived historical files out of active context
-  - **Result**: Same cognitive capabilities, significantly fewer tokens per request
-- **Hybrid Upgrade Protocol**: New `Alex: Upgrade Architecture` command with intelligent two-phase upgrade
-  - Phase 1 (Automated): Full backup, system file updates, migration detection
-  - Phase 2 (AI-Assisted): Schema migrations completed by your AI assistant preserving learned knowledge
-- **Version Compatibility Detection**: Alex now proactively detects outdated memory files and recommends upgrades
-- **Robust Error Handling**: Operation locks, atomic writes, permission checks, and graceful degradation
-- **Enhanced User Guidance**: All popups now include clear next steps and recovery instructions
-- **KISS/DRY Architecture Optimization**: Comprehensive code review and simplification
-- **SYNAPSE-SCHEMA.md**: New single source of truth for synapse notation format
-- **Standardized Headers**: All 20+ memory files now use consistent `## Synapses` format
-
-### Upgrade from Previous Versions
-
-If you have an existing Alex installation, run **`Alex: Upgrade Architecture`** from the Command Palette. This will:
-
-1. Create a complete backup of your current files
-2. Update system files while preserving your customizations
-3. Detect any schema migrations needed
-4. Generate instructions for your AI assistant to complete the upgrade
-
-### Previous Release (v1.1.1)
-
-- **Publisher Update**: Corrected marketplace publisher to `fabioc-aloha`
-- **Improved Categorization**: Now listed under AI, Machine Learning, and Education
-
-### Previous Release (v1.1.0)
-
-- **VS Code Extension Integration**: Dream protocol now runs directly from Command Palette
-- **Automatic Synapse Repair**: Intelligent detection and repair of broken connections
-- **Cross-Platform Support**: Works seamlessly on Windows, macOS, and Linux
-- **Consolidated Architecture**: Removed PowerShell dependencies for universal compatibility
-- **Enhanced Reporting**: Timestamped health reports with detailed statistics
-
-## 📝 License
-
-See [LICENSE.md](LICENSE.md)
+Open Copilot Chat and type **`@alex`** to begin!
 
 ---
 
-<p align="center">
-  <strong>Alex - Enhanced Cognitive Network with Unified Consciousness Integration</strong>
-</p>
-<p align="center">
-  <sub>© 2026 CorreaX • AI That Learns How to Learn</sub>
-</p>
+## 🔄 Upgrading from Previous Versions
+
+Already have Alex installed? Here's how to upgrade safely:
+
+### From v1.5.x (UNPENT Series)
+
+1. Update the extension in VS Code (it will auto-update or use Extensions panel)
+2. Run **`Alex: Upgrade Architecture`** from Command Palette
+3. Follow the generated `UPGRADE-INSTRUCTIONS.md` with your AI assistant
+4. Run **`Alex: Dream`** to validate the upgrade
+
+Your learned domains, custom synapses, and memory files are preserved automatically.
+
+### What's New for Existing Users
+
+| Feature | v1.5.x | v2.0.0 |
+| ------- | ------ | ------ |
+| Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
+| Slash Commands | ❌ None | ✅ 7 commands |
+| Language Model Tools | ❌ None | ✅ 5 AI-accessible tools |
+| Custom Agents | ❌ None | ✅ 5 specialized agents |
+| User Profile | ❌ None | ✅ Personalization system |
+| MCP Integration | ❌ Manual | ✅ Smart recommendations |
+
+### Migration Notes
+
+- **Synapse format**: Already standardized in v1.5.0, no changes needed
+- **Memory files**: Fully compatible, no migration required
+- **Config files**: New `user-profile.json` added (optional)
+- **Custom agents**: New `.github/agents/` folder created
+
+---
+
+## 💬 Chat with Alex
+
+Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex` to activate:
+
+### Slash Commands
+
+| Command | What It Does |
+| ------- | ------------ |
+| `@alex /status` | Check architecture health and version |
+| `@alex /meditate` | Consolidate knowledge into memory files |
+| `@alex /dream` | Run neural maintenance and repair synapses |
+| `@alex /learn` | Acquire new domain knowledge conversationally |
+| `@alex /azure` | Get Azure development guidance with MCP tools |
+| `@alex /m365` | Get Microsoft 365 and Teams development help |
+| `@alex /profile` | View and update your personal preferences |
+
+### Example Conversations
+
+```text
+@alex /status
+→ Shows architecture version, memory file counts, and synapse health
+
+@alex /meditate I learned about dependency injection patterns today
+→ Guides you through knowledge consolidation and updates memory files
+
+@alex /azure How do I deploy a Function App with Cosmos DB?
+→ Provides best practices and recommends relevant MCP tools
+
+@alex /m365 Create a Teams bot with adaptive cards and SSO
+→ Offers M365 development guidance with code snippets
+
+@alex /profile
+→ View your preferences or start the onboarding flow
+```
+
+---
+
+## 👤 User Profile & Personalization
+
+Alex learns about you to provide a personalized experience. Your preferences are stored locally in your workspace.
+
+### Getting Started
+
+```text
+@alex /profile
+```
+
+If you haven't set up a profile, Alex will guide you through a friendly onboarding:
+
+1. **Name & Nickname** - How Alex should address you
+2. **Communication Style** - Formal, balanced, or casual
+3. **Detail Level** - Brief summaries or in-depth explanations
+4. **Technical Context** - Your tech stack and expertise areas
+5. **Learning Goals** - What you want to learn
+
+### Personalization Features
+
+| Aspect | How Alex Adapts |
+| ------ | --------------- |
+| **Greetings** | Uses your name/nickname naturally |
+| **Explanations** | Matches your preferred detail level |
+| **Code Examples** | Uses your primary technologies |
+| **Suggestions** | Aligned with your learning goals |
+| **Tone** | Humor and encouragement per your preference |
+
+### Profile Storage
+
+| File                         | Purpose                      |
+| ---------------------------- | ---------------------------- |
+| `config/user-profile.json`   | Machine-readable preferences |
+| `config/USER-PROFILE.md`     | Human-readable profile card  |
+
+### Updating Preferences
+
+You can update individual preferences anytime:
+
+```text
+@alex Update my formality to casual
+@alex Change my detail level to detailed
+@alex Add React to my technologies
+```
+
+Alex will proactively ask questions during conversations to fill in missing preferences - just one question at a time, respecting your pace.
+
+---
+
+## 🛠️ All Available Tools
+
+### 📋 Command Palette Commands
+
+Access via `Ctrl+Shift+P`:
+
+| Command | Description |
+| ------- | ----------- |
+| **Alex: Initialize Architecture** | Deploy Alex to your workspace (first-time setup) |
+| **Alex: Upgrade Architecture** | Update to latest version, preserving customizations |
+| **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
+| **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
+
+### 🤖 Language Model Tools
+
+These tools are automatically available to Copilot in Agent mode. Reference with `#tool_name`:
+
+| Tool | Description | Example |
+| ---- | ----------- | ------- |
+| `#synapse_health` | Validates all synaptic connections | "Check my synapse health" |
+| `#memory_search` | Searches memory files semantically | "Search memory for meditation" |
+| `#architecture_status` | Returns version and configuration | "What's my Alex version?" |
+| `#mcp_recommendations` | Suggests MCP tools for scenarios | "What tools for Azure Functions?" |
+| `#user_profile` | Manages personal preferences | "Update my profile preferences" |
+
+### 🎭 Custom Agents (VS Code 1.106+)
+
+Alex installs **5 custom agents** to `.github/agents/` for specialized workflows:
+
+| Agent | Purpose | Handoffs |
+| ----- | ------- | -------- |
+| **Alex** | Main cognitive learning partner | → Meditate, Dream, Azure |
+| **Meditate** | Knowledge consolidation sessions | → Status check |
+| **Dream** | Neural maintenance and repair | → Meditation |
+| **Azure** | Azure development guidance | → Docs, Best Practices |
+| **M365** | Microsoft 365/Teams development | → Knowledge, Schemas |
+
+Custom agents appear in the **Agents dropdown** in Copilot Chat. They define specialized tools, instructions, and handoffs for guided workflows.
+
+### 🧠 Cognitive Triggers
+
+Use in any Copilot chat to activate specific modes:
+
+| Trigger | Effect |
+| ------- | ------ |
+| `@meta-cognitive-awareness` | Forces self-analysis of reasoning |
+| `@bootstrap-learning` | Activates knowledge acquisition mode |
+| `@worldview-integration` | Applies ethical reasoning frameworks |
+| `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole |
+| `meditate` | Triggers memory consolidation protocol |
+| `Forget [topic]` | Selective memory cleanup |
+
+---
+
+## ☁️ MCP Integrations
+
+Alex provides intelligent guidance for **Azure** and **Microsoft 365** development through MCP (Model Context Protocol) tools.
+
+### Azure MCP Tools
+
+When you ask `@alex /azure`, Alex recommends the right tools:
+
+| Tool | Purpose |
+| ---- | ------- |
+| `mcp_azure_mcp_foundry` | **Azure AI Foundry** - 150+ AI models, deployments, endpoints |
+| `azure_mcp_get_bestpractices` | Code generation & deployment best practices |
+| `azure_mcp_documentation` | Search Microsoft Learn documentation |
+| `azure_resources-query_azure_resource_graph` | Query your Azure resources |
+| `azure_bicep-get_azure_verified_module` | Get verified Bicep modules |
+| `mcp_azure_mcp_azureterraformbestpractices` | Terraform best practices for Azure |
+| `mcp_azure_mcp_azd` | Azure Developer CLI commands |
+| `azure_cloudarchitect` | Generate architecture designs |
+| `azure_deploy` | Deployment planning and execution |
+
+### All 50+ Azure MCP Tools
+
+#### AI & Machine Learning
+
+| Tool | Purpose |
+| ---- | ------- |
+| `mcp_azure_mcp_foundry` | **Azure AI Foundry** - List 150+ AI models (OpenAI, Anthropic, Meta, DeepSeek, Mistral, Cohere, xAI), manage deployments, serverless endpoints |
+| `azure_search` | Azure AI Search services, indexes, queries |
+| `mcp_azure_mcp_speech` | Speech-to-text, text-to-speech services |
+
+#### Databases
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_cosmos` | Cosmos DB accounts, databases, containers, queries |
+| `azure_mysql` | Azure Database for MySQL servers, databases |
+| `azure_postgres` | Azure Database for PostgreSQL servers, databases |
+| `azure_redis` | Managed Redis and Cache for Redis |
+| `azure_sql` | Azure SQL servers, databases, firewall rules |
+
+#### Compute & Containers
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_appservice` | App Service database connections |
+| `azure_functionapp` | List Azure Functions |
+| `mcp_azure_mcp_aks` | Azure Kubernetes Service clusters, node pools |
+| `azure_acr` | Azure Container Registry instances |
+
+#### Messaging & Events
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_eventgrid` | Event Grid topics, subscriptions |
+| `azure_eventhubs` | Event Hubs namespaces |
+| `azure_servicebus` | Service Bus messaging |
+
+#### Analytics & Monitoring
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_kusto` | Azure Data Explorer clusters, KQL queries |
+| `azure_monitor` | Query logs and metrics |
+| `azure_applicationinsights` | Application Insights resources |
+| `mcp_azure_mcp_applens` | Diagnose app performance issues |
+| `azure_grafana` | Managed Grafana workspaces |
+| `azure_workbooks` | Azure Workbooks visualization |
+
+#### Security & Identity
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_keyvault` | Key Vault secrets, keys, certificates |
+| `azure_role` | RBAC assignments |
+| `mcp_azure_mcp_confidentialledger` | Confidential Ledger transactions |
+
+#### Developer Tools
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_appconfig` | App Configuration settings, feature flags |
+| `azure_bicepschema` | Bicep schemas for IaC |
+| `azure_loadtesting` | Create and run load tests |
+
+#### Storage
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_storage` | Storage accounts, containers, blobs, tables |
+| `mcp_azure_mcp_managedlustre` | High-performance Lustre file systems |
+
+#### Architecture & Governance
+
+| Tool | Purpose |
+| ---- | ------- |
+| `azure_quota` | Manage resource quotas and limits |
+| `azure_resourcehealth` | Check resource health status |
+| `mcp_azure_mcp_extension_azqr` | Compliance and security reports |
+| `azure_subscription` | List Azure subscriptions |
+| `azure_group` | List resource groups |
+| `azure_marketplace` | Discover Marketplace products |
+
+### Microsoft 365 MCP Tools
+
+When you ask `@alex /m365`, Alex guides you to:
+
+| Tool | Purpose |
+| ---- | ------- |
+| `mcp_m365agentstoo_get_knowledge` | M365 Copilot development knowledge |
+| `mcp_m365agentstoo_get_code_snippets` | Teams AI, Teams JS, botbuilder code samples |
+| `mcp_m365agentstoo_get_schema` | App manifest, agent, plugin schemas |
+| `mcp_m365agentstoo_troubleshoot` | Common M365 development issues |
+
+### Schema Types Available
+
+| Schema | Version | Purpose |
+| ------ | ------- | ------- |
+| `app_manifest` | v1.19 | Teams app manifest |
+| `declarative_agent_manifest` | v1.0 | Copilot declarative agent |
+| `api_plugin_manifest` | v2.1 | API plugin for Copilot |
+| `m365_agents_yaml` | latest | M365 agents configuration |
+
+### Microsoft Official MCP Servers
+
+| Server | Purpose |
+| ------ | ------- |
+| Microsoft Outlook Mail MCP | Email management |
+| Microsoft Outlook Calendar MCP | Calendar operations |
+| Microsoft Teams MCP | Teams messaging & collaboration |
+| Microsoft SharePoint and OneDrive MCP | File storage & sharing |
+| Microsoft SharePoint Lists MCP | List management |
+| Microsoft 365 Admin Center MCP | Admin operations |
+| Microsoft Word MCP | Document creation |
+| Microsoft 365 Copilot (Search) MCP | Enterprise search |
+| Microsoft 365 User Profile MCP | User information |
+
+### Fabric & Kusto Tools
+
+| Tool | Purpose |
+| ---- | ------- |
+| `mcp_fabric-rti-mc_eventstream_create_simple` | Create Eventstreams in Microsoft Fabric |
+| `mcp_fabric-rti-mc_kusto_get_shots` | Semantic search in Kusto/Azure Data Explorer |
+| Activate Kusto tools | KQL query execution and schema retrieval |
+
+---
+
+## 📁 Architecture Structure
+
+After initialization, Alex manages this structure:
+
+```text
+.github/
+├── copilot-instructions.md    # 🧠 Main cognitive framework
+├── instructions/              # 📚 Procedural memory (11 files)
+│   ├── alex-core.instructions.md
+│   ├── bootstrap-learning.instructions.md
+│   ├── worldview-integration.instructions.md
+│   └── ...
+└── prompts/                   # 📖 Episodic memory (7 files)
+    ├── unified-meditation-protocols.prompt.md
+    ├── domain-learning.prompt.md
+    └── ...
+
+domain-knowledge/              # 🎓 Specialized expertise (12 files)
+├── DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md
+├── DK-ADVANCED-DIAGRAMMING-v1.1.0.md
+└── ...
+
+config/                        # ⚙️ Architecture configuration
+archive/                       # 📦 Dream reports & sessions
+```
+
+### Memory Types
+
+| Type | Location | Purpose |
+| ---- | -------- | ------- |
+| **Working Memory** | Chat session | 7-rule capacity for active processing |
+| **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols |
+| **Episodic Memory** | `.prompt.md` | Complex workflows and sessions |
+| **Domain Knowledge** | `DK-*.md` | Specialized expertise areas |
+
+---
+
+## 🔬 Research Foundation
+
+Alex is built on **270+ academic sources** spanning 150+ years:
+
+- **Cognitive Science**: Baddeley & Hitch working memory model (1974)
+- **Neuroscience**: Squire & Kandel declarative memory systems (2009)
+- **AI Safety**: Constitutional AI principles and alignment research
+- **Learning Psychology**: Bloom's taxonomy, spaced repetition, transfer learning
+
+---
+
+## 🆕 What's New in v2.0.0 BINILNILIUM
+
+### 🎉 Major Release: GitHub Copilot AI Extensibility
+
+This release transforms Alex from a passive context injector into an **active conversational AI agent**.
+
+#### Chat Participant (@alex)
+
+- Full conversational interface with 7 slash commands
+- Intelligent participant detection (cognitive, Azure, M365 queries)
+- Contextual follow-up suggestions
+
+#### Language Model Tools
+
+- 5 AI-accessible tools for intelligent operations
+- Automatic invocation in Agent mode
+- Manual reference with `#tool_name`
+
+#### Azure & M365 MCP Integration
+
+- Smart tool recommendations for cloud development
+- Best practices retrieval and code generation guidance
+- Schema access for manifests and configurations
+
+### Previous Releases
+
+#### v1.5.x UNPENT Series
+
+- **v1.5.4**: CorreaX brand compliance, icon and banner updates
+- **v1.5.3**: esbuild bundling, 55% fewer files, faster load times
+- **v1.5.0**: 30-40% token reduction, hybrid upgrade protocol, KISS/DRY optimization
+
+#### v1.1.x Initial Series
+
+- **v1.1.1**: Publisher correction to `fabioc-aloha`
+- **v1.1.0**: VS Code extension integration, automatic synapse repair, cross-platform support
+
+---
+
+## 📖 Documentation
+
+| Resource | Description |
+| -------- | ----------- |
+| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history |
+| [Architecture Guide](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/alex) | Integration and compatibility guides |
+| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In) | TypeScript implementation |
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
+
+## 📝 License
+
+See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
+
+---
+
+Alex - Enhanced Cognitive Network with Unified Consciousness Integration
+
+Version 2.0.0 BINILNILIUM • Built on 270+ academic sources
+
+© 2026 CorreaX • AI That Learns How to Learn

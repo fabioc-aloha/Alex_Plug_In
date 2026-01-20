@@ -454,6 +454,59 @@ async function performUpgrade(
                 }
             }
 
+            // Step 6b: Add agents folder (new in v2.0.0)
+            const agentsSrc = path.join(extensionPath, '.github', 'agents');
+            const agentsDest = path.join(rootPath, '.github', 'agents');
+            if (await fs.pathExists(agentsSrc)) {
+                await fs.ensureDir(agentsDest);
+                const files = await fs.readdir(agentsSrc);
+                for (const file of files) {
+                    const srcFile = path.join(agentsSrc, file);
+                    const destFile = path.join(agentsDest, file);
+                    if ((await fs.stat(srcFile)).isFile()) {
+                        const existed = await fs.pathExists(destFile);
+                        await fs.copy(srcFile, destFile, { overwrite: true });
+                        
+                        const content = await fs.readFile(srcFile, 'utf8');
+                        manifest.files[`.github/agents/${file}`] = {
+                            type: 'system',
+                            originalChecksum: calculateChecksum(content)
+                        };
+                        
+                        if (existed) {
+                            report.updated.push(`.github/agents/${file}`);
+                        } else {
+                            report.added.push(`.github/agents/${file}`);
+                        }
+                    }
+                }
+            }
+
+            // Step 6c: Add config folder templates (new in v2.0.0)
+            const configSrc = path.join(extensionPath, 'config');
+            const configDest = path.join(rootPath, 'config');
+            if (await fs.pathExists(configSrc)) {
+                await fs.ensureDir(configDest);
+                const files = await fs.readdir(configSrc);
+                for (const file of files) {
+                    // Only copy templates and non-user files
+                    if (file.includes('template') || file === 'USER-PROFILE-TEMPLATE.md') {
+                        const srcFile = path.join(configSrc, file);
+                        const destFile = path.join(configDest, file);
+                        if ((await fs.stat(srcFile)).isFile()) {
+                            const existed = await fs.pathExists(destFile);
+                            await fs.copy(srcFile, destFile, { overwrite: true });
+                            
+                            if (existed) {
+                                report.updated.push(`config/${file}`);
+                            } else {
+                                report.added.push(`config/${file}`);
+                            }
+                        }
+                    }
+                }
+            }
+
             // Step 7: Handle domain-knowledge files carefully
             progress.report({ message: "Processing domain knowledge...", increment: 10 });
             const extDkSrc = path.join(extensionPath, 'domain-knowledge');

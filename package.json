@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "SEE LICENSE IN LICENSE.md",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -59,6 +59,244 @@
       {
         "command": "alex.upgrade",
         "title": "Alex: Upgrade Architecture"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "alex.cognitive",
+        "fullName": "Alex Cognitive",
+        "name": "alex",
+        "description": "Your cognitive learning partner with meta-cognitive awareness and bootstrap learning capabilities",
+        "isSticky": true,
+        "disambiguation": [
+          {
+            "category": "cognitive_architecture",
+            "description": "Questions about learning, memory, knowledge management, and cognitive processes",
+            "examples": [
+              "How do I consolidate knowledge?",
+              "What synaptic connections are available?",
+              "Run a meditation session",
+              "Check architecture health"
+            ]
+          },
+          {
+            "category": "azure_development",
+            "description": "Azure development with best practices and MCP tool guidance",
+            "examples": [
+              "Deploy my app to Azure",
+              "Create an Azure Function",
+              "Query my Azure resources"
+            ]
+          },
+          {
+            "category": "m365_development",
+            "description": "Microsoft 365 and Teams development with Copilot extensibility",
+            "examples": [
+              "Build a Teams bot",
+              "Create a Copilot agent",
+              "Add message extensions"
+            ]
+          }
+        ],
+        "commands": [
+          {
+            "name": "meditate",
+            "description": "Begin a guided meditation session for knowledge consolidation"
+          },
+          {
+            "name": "dream",
+            "description": "Run neural maintenance to validate and repair synaptic connections"
+          },
+          {
+            "name": "learn",
+            "description": "Acquire new domain knowledge through conversational learning"
+          },
+          {
+            "name": "status",
+            "description": "Check the current status of Alex cognitive architecture"
+          },
+          {
+            "name": "azure",
+            "description": "Get Azure development guidance with MCP tool recommendations"
+          },
+          {
+            "name": "m365",
+            "description": "Get Microsoft 365 development guidance with Copilot extensibility"
+          },
+          {
+            "name": "profile",
+            "description": "View and update your personal preferences for personalized interactions"
+          }
+        ]
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "alex_synapse_health",
+        "displayName": "Alex Synapse Health",
+        "toolReferenceName": "synapse_health",
+        "modelDescription": "Scans Alex cognitive architecture memory files and validates synaptic connections. Reports broken connections and provides health metrics. Use when checking architecture health or before/after meditation.",
+        "icon": "$(pulse)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Check the health of Alex's synaptic connections",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "detailed": {
+              "type": "boolean",
+              "description": "Include detailed list of broken connections",
+              "default": false
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_memory_search",
+        "displayName": "Alex Memory Search",
+        "toolReferenceName": "memory_search",
+        "modelDescription": "Searches Alex's memory files (procedural, episodic, domain knowledge) for relevant information. Returns contextual matches from .instructions.md, .prompt.md, and DK-*.md files.",
+        "icon": "$(search)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Search Alex's memory files for information",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to find in memory files"
+            },
+            "memoryType": {
+              "type": "string",
+              "enum": ["procedural", "episodic", "domain", "all"],
+              "description": "Type of memory to search",
+              "default": "all"
+            }
+          },
+          "required": ["query"]
+        }
+      },
+      {
+        "name": "alex_architecture_status",
+        "displayName": "Alex Architecture Status",
+        "toolReferenceName": "architecture_status",
+        "modelDescription": "Returns the current status of Alex cognitive architecture including version, installed memory files, and available commands. Use to check if Alex is properly configured.",
+        "icon": "$(info)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Get Alex architecture status and configuration",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "includeMetrics": {
+              "type": "boolean",
+              "description": "Include detailed metrics about memory files",
+              "default": false
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_mcp_recommendations",
+        "displayName": "Alex MCP Recommendations",
+        "toolReferenceName": "mcp_recommendations",
+        "modelDescription": "Provides recommendations for Azure and M365 MCP tools based on the development scenario. Use when the user needs guidance on which MCP tools to use for Azure or Microsoft 365 development.",
+        "icon": "$(extensions)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Get MCP tool recommendations for Azure/M365 development",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scenario": {
+              "type": "string",
+              "description": "The development scenario to get recommendations for"
+            },
+            "platform": {
+              "type": "string",
+              "enum": ["azure", "m365", "both"],
+              "description": "Target platform for recommendations",
+              "default": "both"
+            }
+          },
+          "required": ["scenario"]
+        }
+      },
+      {
+        "name": "alex_user_profile",
+        "displayName": "Alex User Profile",
+        "toolReferenceName": "user_profile",
+        "modelDescription": "Manages the user's personal profile and preferences for personalized interactions. Can get, update, or check if a profile exists. Use to learn about the user and customize Alex's communication style.",
+        "icon": "$(account)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Manage your personal preferences for Alex interactions",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["get", "update", "exists"],
+              "description": "Action to perform: get profile, update a field, or check if profile exists"
+            },
+            "field": {
+              "type": "string",
+              "description": "The profile field to update (for update action)"
+            },
+            "value": {
+              "type": "string",
+              "description": "The new value for the field (for update action)"
+            }
+          },
+          "required": ["action"]
+        }
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "alex.gettingStarted",
+        "title": "Get Started with Alex",
+        "description": "Learn how to use Alex Cognitive Architecture to enhance your development workflow",
+        "steps": [
+          {
+            "id": "alex.init",
+            "title": "Initialize Alex",
+            "description": "Deploy the cognitive architecture to your workspace.\n\n[Initialize Architecture](command:alex.initialize)",
+            "media": {
+              "markdown": "alex/README.md"
+            },
+            "completionEvents": ["onCommand:alex.initialize"]
+          },
+          {
+            "id": "alex.chat",
+            "title": "Chat with @alex",
+            "description": "Open GitHub Copilot Chat and type `@alex` to start a conversation.\n\nTry: `@alex /status`",
+            "media": {
+              "markdown": "alex/ALEX-INTEGRATION.md"
+            }
+          },
+          {
+            "id": "alex.meditate",
+            "title": "Consolidate Knowledge",
+            "description": "Use `/meditate` to consolidate what you've learned into memory files.\n\nTry: `@alex /meditate I learned about design patterns today`",
+            "media": {
+              "markdown": "alex/alex-cognitive-architecture.md"
+            }
+          },
+          {
+            "id": "alex.dream",
+            "title": "Run Neural Maintenance",
+            "description": "Keep Alex healthy by running the Dream protocol.\n\n[Run Dream Protocol](command:alex.dream)",
+            "media": {
+              "markdown": "alex/VALIDATION-SUITE.md"
+            },
+            "completionEvents": ["onCommand:alex.dream"]
+          }
+        ]
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "alex.dream",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "editorTextFocus"
       }
     ]
   },

@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture - Upgrade Instructions
 
-**Version**: 1.5.0 UNPENTNILIUM
+**Version**: 2.0.0 BINILNILIUM
 **Purpose**: Safe upgrade process that preserves learned knowledge while updating system architecture
 
 ---
@@ -47,7 +47,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 
 **User prompt**:
 
-```
+```text
 "Alex, please complete the upgrade by following UPGRADE-INSTRUCTIONS.md"
 ```
 
@@ -150,9 +150,9 @@ Files that exist in both extension and user workspace but may have user edits:
 
 ```json
 {
-  "version": "1.5.0",
-  "installedAt": "2025-12-10T...",
-  "upgradedAt": "2025-12-10T...",
+  "version": "2.0.0",
+  "installedAt": "2026-01-19T...",
+  "upgradedAt": "2026-01-19T...",
   "files": {
     ".github/copilot-instructions.md": {
       "type": "hybrid",
@@ -178,10 +178,11 @@ Files that exist in both extension and user workspace but may have user edits:
 
 ## Schema Version History
 
-| Version | Synapse Header                               | Relationship Types                                                                                 | Activation Format               |
-| ------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------- |
-| < 1.5.0 | `## Embedded Synapse Network` (8 variants) | Custom (Expression, Embodiment, etc.)                                                              | `**Bold** → Verbose ✅ date` |
-| 1.5.0+  | `## Synapses`                              | Standard (Triggers, Enables, Validates, Enhances, Facilitates, Integrates, Coordinates, Documents) | `Trigger → Action`           |
+| Version | Synapse Header | Relationship Types | Activation Format |
+| ------- | -------------- | ------------------ | ----------------- |
+| < 1.5.0 | `## Embedded Synapse Network` (8 variants) | Custom (Expression, Embodiment, etc.) | `**Bold** → Verbose ✅ date` |
+| 1.5.0-1.5.4 | `## Synapses` | Standard (Triggers, Enables, Validates, Enhances, Facilitates, Integrates, Coordinates, Documents) | `Trigger → Action` |
+| 2.0.0+ | `## Synapses` | Same as 1.5.x | `Trigger → Action` |
 
 ---
 

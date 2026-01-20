@@ -5,6 +5,84 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] BINILNILIUM - 2026-01-19
+
+### 🎉 Major Release: GitHub Copilot AI Extensibility
+
+This release transforms Alex from a passive context injector into an **active conversational AI agent**.
+
+### Added
+
+- **Chat Participant (`@alex`)**: Full conversational AI interface
+  - `/meditate` - Guided knowledge consolidation sessions
+  - `/dream` - Neural maintenance with synaptic validation
+  - `/learn` - Conversational domain knowledge acquisition
+  - `/status` - Architecture health and configuration status
+  - `/azure` - Azure development guidance with MCP recommendations
+  - `/m365` - Microsoft 365 development with Copilot extensibility
+  - `/profile` - **NEW**: View and update personal preferences for personalization
+  - Contextual follow-up suggestions based on conversation state
+  - Intelligent participant detection (cognitive, Azure, M365 queries)
+
+- **User Profile & Personalization**: Relationship-aware interactions
+  - Dual storage: `config/user-profile.json` (machine) + `config/USER-PROFILE.md` (human)
+  - 20+ preference fields: name, formality, detail level, humor, encouragement, etc.
+  - Proactive discovery questions during natural conversation
+  - Personalized greetings and communication style adaptation
+  - Context injection with user's technologies, goals, and projects
+
+- **Language Model Tools**: 5 AI-accessible tools for intelligent operations
+  - `alex_synapse_health` - Validate synaptic connections and report health
+  - `alex_memory_search` - Search memory files semantically
+  - `alex_architecture_status` - Get configuration, version, and file counts
+  - `alex_mcp_recommendations` - Azure/M365 MCP tool guidance (now with 50+ Azure tools!)
+  - `alex_user_profile` - **NEW**: Manage personal preferences (get/update/exists)
+
+- **Custom Agents** (VS Code 1.106+): 5 specialized `.agent.md` files
+  - `alex-cognitive.agent.md` - Main cognitive learning partner
+  - `alex-meditate.agent.md` - Knowledge consolidation mode with guided phases
+  - `alex-dream.agent.md` - Neural maintenance and synapse validation
+  - `alex-azure.agent.md` - Azure development guidance with full tool catalog
+  - `alex-m365.agent.md` - Microsoft 365 and Teams development
+  - Handoffs for guided workflows between agents
+
+- **Azure MCP Integration**: Smart guidance for 50+ Azure tools
+  - AI/ML: Azure AI Foundry, AI Search, Speech
+  - Databases: Cosmos DB, MySQL, PostgreSQL, Redis, SQL
+  - Compute: Functions, AKS, Container Registry, App Service
+  - Messaging: Event Grid, Event Hubs, Service Bus
+  - Analytics: Kusto, Monitor, App Insights, App Lens, Grafana
+  - Security: Key Vault, RBAC, Confidential Ledger
+  - Storage: Blob, Managed Lustre
+  - DevOps: Bicep, Terraform, azd, Load Testing, Workbooks
+  - Architecture: Cloud Architect, Quotas, Resource Health
+
+- **Microsoft 365 MCP Integration**: Copilot extensibility support
+  - Knowledge via `mcp_m365agentstoo_get_knowledge`
+  - Code snippets via `mcp_m365agentstoo_get_code_snippets`
+  - Schema access via `mcp_m365agentstoo_get_schema`
+  - Troubleshooting via `mcp_m365agentstoo_troubleshoot`
+  - Microsoft Official MCP Servers (Outlook, Teams, SharePoint, etc.)
+  - Fabric & Kusto tools for data platform
+
+- **Getting Started Walkthrough**: Interactive onboarding guide
+  - Step-by-step initialization tutorial
+  - Chat participant introduction
+  - Knowledge consolidation guide
+  - Neural maintenance instructions
+
+- **Keyboard Shortcut**: `Ctrl+Alt+D` / `Cmd+Alt+D` for Dream protocol
+
+- **Phase 5: Post-Meditation Synapse Validation**: Automatic health checks
+
+### Changed
+
+- **README Redesign**: User-friendly organization with complete MCP tool documentation
+- **Version Naming**: 2.0.0 BINILNILIUM (major milestone)
+- **Initialize Command**: Now also copies custom agents to `.github/agents/`
+
+---
+
 ## [1.5.4] UNPENTQUADIUM - 2026-01-13
 
 ### Changed

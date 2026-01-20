@@ -102,6 +102,7 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
         { src: path.join(extensionPath, '.github', 'copilot-instructions.md'), dest: path.join(rootPath, '.github', 'copilot-instructions.md') },
         { src: path.join(extensionPath, '.github', 'instructions'), dest: path.join(rootPath, '.github', 'instructions') },
         { src: path.join(extensionPath, '.github', 'prompts'), dest: path.join(rootPath, '.github', 'prompts') },
+        { src: path.join(extensionPath, '.github', 'agents'), dest: path.join(rootPath, '.github', 'agents') },
         { src: path.join(extensionPath, 'domain-knowledge'), dest: path.join(rootPath, 'domain-knowledge') }
     ];
 

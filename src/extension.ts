@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import { initializeArchitecture, resetArchitecture } from './commands/initialize';
 import { runDreamProtocol } from './commands/dream';
 import { upgradeArchitecture } from './commands/upgrade';
+import { registerChatParticipant } from './chat/participant';
+import { registerLanguageModelTools } from './chat/tools';
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
@@ -27,6 +29,12 @@ async function withOperationLock<T>(
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Alex Cognitive Architecture is now active!');
+
+    // Register chat participant for @alex conversations
+    registerChatParticipant(context);
+    
+    // Register language model tools for AI-powered operations
+    registerLanguageModelTools(context);
 
     let initDisposable = vscode.commands.registerCommand('alex.initialize', async () => {
         await withOperationLock('Initialize', () => initializeArchitecture(context));
