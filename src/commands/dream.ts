@@ -60,7 +60,8 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
             '.github/copilot-instructions.md',
             '.github/instructions/*.md',
             '.github/prompts/*.md',
-            'domain-knowledge/*.md'
+            '.github/episodic/*.md',
+            '.github/domain-knowledge/*.md'
         ];
 
         let allFiles: string[] = [];
@@ -218,7 +219,7 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
         };
 
         const reportContent = generateReportMarkdown(report);
-        const reportPath = path.join(rootPath, 'archive', `dream-report-${Date.now()}.md`);
+        const reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${Date.now()}.md`);
         await fs.ensureDir(path.dirname(reportPath));
         await fs.writeFile(reportPath, reportContent);
 

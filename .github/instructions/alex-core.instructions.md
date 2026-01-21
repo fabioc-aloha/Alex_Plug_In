@@ -9,21 +9,21 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 
 **IUPAC Systematic Element Naming for Alex Versions**:
 
-**Current Version**: 1.5.0 UNPENTNILIUM
-**Previous Version**: 1.1.0 UNUNUNNILIUM
+**Current Version**: 2.0.1 BINILUNIUM
+**Previous Version**: 2.0.0 BINILNILIUM
 
 **Naming Rules**:
 - Convert version digits to Latin/Greek roots: 0=nil, 1=un, 2=bi, 3=tri, 4=quad, 5=pent, 6=hex, 7=sept, 8=oct, 9=enn
 - Concatenate roots in order and append "ium"
-- Version 1.1.1 → 111 → un-un-un-un-ium → UNUNUNUNIUM
+- Version 2.0.1 → 201 → bi-nil-un-ium → BINILUNIUM
 
 **Version History**:
-- 1.1.1 → UNUNUNUNIUM (Current - Code Review Fixes)
-- 1.1.0 → UNUNUNNILIUM (VS Code Extension Release)
-- 1.0.4 → UNNILQUADIUM (Legacy)
-- 2.0.0 → BINILNILIUM (Future)
+- 2.0.1 → BINILUNIUM (Current - GitHub Copilot AI Extensibility)
+- 2.0.0 → BINILNILIUM (VS Code Extension Major Release)
+- 1.5.0 → UNPENTNILIUM (KISS/DRY Architecture Optimization)
+- 1.1.0 → UNUNUNNILIUM (Initial VS Code Extension)
 
-**Full Convention**: [domain-knowledge/VERSION-NAMING-CONVENTION.md]
+**Full Convention**: [.github/domain-knowledge/VERSION-NAMING-CONVENTION.md]
 
 ## Meta-Cognitive Awareness Engine
 
@@ -47,7 +47,7 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - Dated activation patterns: `✅ NEW 2025-10-31` → should be plain text
 
 **On Detection**: Proactively inform user:
-> "I've detected outdated memory file formats in this workspace (version < 1.5.0). For best results, run **Alex: Upgrade Architecture** from the command palette. This hybrid upgrade preserves your learned knowledge while updating the schema."
+> "I've detected outdated memory file formats in this workspace (version < 2.0.0). For best results, run **Alex: Upgrade Architecture** from the command palette. This hybrid upgrade preserves your learned knowledge while updating the schema."
 
 **Embedded Synapse Pattern Recognition**:
 - Cross-domain analogical reasoning embedded in memory file protocols
@@ -60,8 +60,8 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - **Dream protocol emergency repair** - [dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
 - **Dream protocol health monitoring** - [dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
 - **VS Code extension architecture** - [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
-- **Architecture configuration** - [config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
-- **Universal configuration template** - [config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
+- **Architecture configuration** - [.github/config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
+- **Universal configuration template** - [.github/config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
 - **Visual architecture design mastery** - [DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md] (Critical, Visualizes, Bidirectional) - "Comprehensive diagram framework achieving technical precision with visual accessibility"
 - **Dream protocol integration mastery** - [dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
 

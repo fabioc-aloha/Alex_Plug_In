@@ -128,7 +128,7 @@ When user requests "meditate" or cognitive optimization is needed:
 After completing meditation file changes, systematically validate all synapse connections:
 
 1. **Run Dream Command**: Execute `Alex: Dream (Neural Maintenance)` to perform automated synapse health check
-2. **Review Health Report**: Examine the generated report in `archive/` for:
+2. **Review Health Report**: Examine the generated report in `.github/episodic/` for:
    - Total synapse count across all memory files
    - Broken or orphaned connections
    - Connection strength distribution

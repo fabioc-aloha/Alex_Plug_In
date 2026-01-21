@@ -42,10 +42,12 @@ A made-up element name using IUPAC systematic naming rules.
 
 ## Current Version Mapping
 
-- **Version 1.5.3** → **UNPENTTRINIUM** (Current - esbuild Bundling & Activation Fix)
-- **Version 1.5.0** → **UNPENTNILIUM** (Previous - KISS/DRY Architecture Optimization)
-- **Version 1.1.1** → **UNUNUNUNIUM** (Code Review Fixes)
-- **Version 1.1.0** → **UNUNUNNILIUM** (VS Code Extension Release)
+- **Version 2.5.0** → **BIPENTNILIUM** (Current - Self-Actualization Enhanced)
+- **Version 2.0.1** → **BINILUNIUM** (Previous - GitHub Copilot AI Extensibility)
+- **Version 2.0.0** → **BINILNILIUM** (VS Code Extension Major Release)
+- **Version 1.5.3** → **UNPENTTRINIUM** (esbuild Bundling & Activation Fix)
+- **Version 1.5.0** → **UNPENTNILIUM** (KISS/DRY Architecture Optimization)
+- **Version 1.1.0** → **UNUNUNNILIUM** (Initial VS Code Extension)
 - **Version 1.0.4** → **UNNILQUADIUM** (Legacy)
 
 ## Version History
@@ -86,22 +88,25 @@ This systematic approach allows for:
 - **Fun factor** that makes version tracking engaging
 
 ### Current Version
+
 | Version | Element Name | Root Breakdown |
 |---------|--------------|----------------|
-| 1.0.3 | UNNILTRIUM | un-nil-tri-ium |
+| 2.5.0 | BIPENTNILIUM | bi-pent-nil-ium |
 
 ### Recent Versions
+
 | Version | Element Name | Root Breakdown |
 |---------|--------------|----------------|
-| 1.0.2 | UNNILBIUM | un-nil-bi-ium |
-| 1.0.1 | UNNILUNIUM | un-nil-un-ium |
-| 1.0.0 | UNNILNILIUM | un-nil-nil-ium |
+| 2.0.1 | BINILUNIUM | bi-nil-un-ium |
+| 2.0.0 | BINILNILIUM | bi-nil-nil-ium |
+| 1.5.3 | UNPENTTRINIUM | un-pent-tri-ium |
 
 ### Upcoming Versions
+
 | Version | Element Name | Root Breakdown |
 |---------|--------------|----------------|
-| 1.0.4 | UNNILQUADIUM | un-nil-quad-ium |
-| 2.0.0 | BINILNILIUM | bi-nil-nil-ium |
+| 2.5.1 | BIPENTUNIUM | bi-pent-un-ium |
+| 2.6.0 | BIHEXNILIUM | bi-hex-nil-ium |
 
 ---
 

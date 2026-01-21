@@ -153,13 +153,13 @@ async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
  */
 async function findUserCreatedFiles(rootPath: string, manifest: Manifest | null): Promise<string[]> {
     const userFiles: string[] = [];
-    const dkPath = path.join(rootPath, 'domain-knowledge');
+    const dkPath = path.join(rootPath, '.github', 'domain-knowledge');
     
     if (await fs.pathExists(dkPath)) {
         const files = await fs.readdir(dkPath);
         for (const file of files) {
             if (file.endsWith('.md')) {
-                const relativePath = `domain-knowledge/${file}`;
+                const relativePath = `.github/domain-knowledge/${file}`;
                 if (!manifest?.files[relativePath]) {
                     userFiles.push(relativePath);
                 }
@@ -304,18 +304,11 @@ async function performUpgrade(
                 throw new Error(`Cannot create backup directory - check disk space and permissions: ${writeError.message}`);
             }
             
-            // Backup .github folder
+            // Backup .github folder (includes domain-knowledge, config, episodic)
             const githubSrc = path.join(rootPath, '.github');
             if (await fs.pathExists(githubSrc)) {
                 await fs.copy(githubSrc, path.join(backupDir, '.github'));
-                report.backed_up.push('.github/');
-            }
-            
-            // Backup domain-knowledge folder
-            const dkSrc = path.join(rootPath, 'domain-knowledge');
-            if (await fs.pathExists(dkSrc)) {
-                await fs.copy(dkSrc, path.join(backupDir, 'domain-knowledge'));
-                report.backed_up.push('domain-knowledge/');
+                report.backed_up.push('.github/ (all cognitive memory)');
             }
 
             // Step 2: Load or create manifest
@@ -342,12 +335,23 @@ async function performUpgrade(
             }
             
             // Add domain-knowledge files
-            const dkPath = path.join(rootPath, 'domain-knowledge');
+            const dkPath = path.join(rootPath, '.github', 'domain-knowledge');
             if (await fs.pathExists(dkPath)) {
                 const dkFiles = await fs.readdir(dkPath);
                 for (const file of dkFiles) {
                     if (file.endsWith('.md')) {
                         filesToScan.push(path.join(dkPath, file));
+                    }
+                }
+            }
+            
+            // Add episodic files
+            const episodicPath = path.join(rootPath, '.github', 'episodic');
+            if (await fs.pathExists(episodicPath)) {
+                const episodicFiles = await fs.readdir(episodicPath);
+                for (const file of episodicFiles) {
+                    if (file.endsWith('.md')) {
+                        filesToScan.push(path.join(episodicPath, file));
                     }
                 }
             }
@@ -484,7 +488,7 @@ async function performUpgrade(
 
             // Step 6c: Add config folder templates (new in v2.0.0)
             const configSrc = path.join(extensionPath, 'config');
-            const configDest = path.join(rootPath, 'config');
+            const configDest = path.join(rootPath, '.github', 'config');
             if (await fs.pathExists(configSrc)) {
                 await fs.ensureDir(configDest);
                 const files = await fs.readdir(configSrc);
@@ -498,9 +502,9 @@ async function performUpgrade(
                             await fs.copy(srcFile, destFile, { overwrite: true });
                             
                             if (existed) {
-                                report.updated.push(`config/${file}`);
+                                report.updated.push(`.github/config/${file}`);
                             } else {
-                                report.added.push(`config/${file}`);
+                                report.added.push(`.github/config/${file}`);
                             }
                         }
                     }
@@ -510,7 +514,7 @@ async function performUpgrade(
             // Step 7: Handle domain-knowledge files carefully
             progress.report({ message: "Processing domain knowledge...", increment: 10 });
             const extDkSrc = path.join(extensionPath, 'domain-knowledge');
-            const extDkDest = path.join(rootPath, 'domain-knowledge');
+            const extDkDest = path.join(rootPath, '.github', 'domain-knowledge');
             
             if (await fs.pathExists(extDkSrc)) {
                 await fs.ensureDir(extDkDest);
@@ -527,26 +531,26 @@ async function performUpgrade(
                         if (!await fs.pathExists(destFile)) {
                             // New file - add it
                             await fs.copy(srcFile, destFile);
-                            manifest.files[`domain-knowledge/${file}`] = {
+                            manifest.files[`.github/domain-knowledge/${file}`] = {
                                 type: 'system',
                                 originalChecksum: srcChecksum
                             };
-                            report.added.push(`domain-knowledge/${file}`);
+                            report.added.push(`.github/domain-knowledge/${file}`);
                         } else {
                             // Existing file - check if modified
                             const destContent = await fs.readFile(destFile, 'utf8');
                             const destChecksum = calculateChecksum(destContent);
-                            const originalChecksum = manifest.files[`domain-knowledge/${file}`]?.originalChecksum;
+                            const originalChecksum = manifest.files[`.github/domain-knowledge/${file}`]?.originalChecksum;
                             
                             if (originalChecksum && destChecksum !== originalChecksum) {
                                 // User modified - preserve and provide new version
                                 const newVersionPath = destFile.replace(/\.md$/, `.v${newVersion}.md`);
                                 await fs.copy(srcFile, newVersionPath);
-                                report.preserved.push(`domain-knowledge/${file} (modified by user, new version: ${path.basename(newVersionPath)})`);
+                                report.preserved.push(`.github/domain-knowledge/${file} (modified by user, new version: ${path.basename(newVersionPath)})`);
                                 
                                 // Add review task
                                 report.migrationTasks.push({
-                                    file: `domain-knowledge/${file}`,
+                                    file: `.github/domain-knowledge/${file}`,
                                     type: 'review-recommended',
                                     description: 'User-modified system file - review new version',
                                     details: [
@@ -558,11 +562,11 @@ async function performUpgrade(
                             } else {
                                 // Not modified - safe to update
                                 await fs.copy(srcFile, destFile, { overwrite: true });
-                                manifest.files[`domain-knowledge/${file}`] = {
+                                manifest.files[`.github/domain-knowledge/${file}`] = {
                                     type: 'system',
                                     originalChecksum: srcChecksum
                                 };
-                                report.updated.push(`domain-knowledge/${file}`);
+                                report.updated.push(`.github/domain-knowledge/${file}`);
                             }
                         }
                     }
@@ -703,7 +707,7 @@ ${task.details.map(d => `- ${d}`).join('\n')}
 
 If anything goes wrong:
 
-1. Delete current \`.github/\` and \`domain-knowledge/\` folders
+1. Delete current \`.github/\` folder
 2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
 3. Delete \`.alex-manifest.json\`
 4. Run \`Alex: Dream (Neural Maintenance)\` to verify

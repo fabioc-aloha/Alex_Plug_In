@@ -62,7 +62,9 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
         path.join(rootPath, '.github', 'copilot-instructions.md'),
         path.join(rootPath, '.github', 'instructions'),
         path.join(rootPath, '.github', 'prompts'),
-        path.join(rootPath, 'domain-knowledge'),
+        path.join(rootPath, '.github', 'episodic'),
+        path.join(rootPath, '.github', 'domain-knowledge'),
+        path.join(rootPath, '.github', 'config'),
         path.join(rootPath, '.alex-manifest.json')  // Clean up manifest too
     ];
 
@@ -102,8 +104,10 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
         { src: path.join(extensionPath, '.github', 'copilot-instructions.md'), dest: path.join(rootPath, '.github', 'copilot-instructions.md') },
         { src: path.join(extensionPath, '.github', 'instructions'), dest: path.join(rootPath, '.github', 'instructions') },
         { src: path.join(extensionPath, '.github', 'prompts'), dest: path.join(rootPath, '.github', 'prompts') },
-        { src: path.join(extensionPath, '.github', 'agents'), dest: path.join(rootPath, '.github', 'agents') },
-        { src: path.join(extensionPath, 'domain-knowledge'), dest: path.join(rootPath, 'domain-knowledge') }
+        { src: path.join(extensionPath, '.github', 'episodic'), dest: path.join(rootPath, '.github', 'episodic') },
+        { src: path.join(extensionPath, '.github', 'domain-knowledge'), dest: path.join(rootPath, '.github', 'domain-knowledge') },
+        { src: path.join(extensionPath, '.github', 'config'), dest: path.join(rootPath, '.github', 'config') },
+        { src: path.join(extensionPath, '.github', 'agents'), dest: path.join(rootPath, '.github', 'agents') }
     ];
 
     try {

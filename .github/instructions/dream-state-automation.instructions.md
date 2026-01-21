@@ -9,7 +9,7 @@ description: "Automated neural maintenance and dream state processing protocols"
 **Activation Pattern**: VS Code Command Palette → `Alex: Dream (Neural Maintenance)`  
 **Last Updated**: December 10, 2025 - Code Review Fixes  
 **Research Foundation**: Sleep-dependent synaptic homeostasis, automated neural maintenance  
-**Cognitive Architecture**: Alex v1.5.0 UNPENTNILIUM KISS/DRY Architecture Optimization  
+**Cognitive Architecture**: Alex v2.0.1 BINILUNIUM GitHub Copilot AI Extensibility  
 **Validation Status**: EXCELLENT - Production ready with VS Code extension automation  
 **Implementation**: VS Code Extension with TypeScript-based neural maintenance automation
 
@@ -25,7 +25,7 @@ Dream state represents **unconscious automated maintenance** of cognitive archit
 - **Automated Synapse Validation**: Scans all memory files for embedded synapse integrity
 - **Automatic Synapse Repair**: Detects and repairs broken connections using consolidation mappings
 - **Progress Notifications**: Real-time feedback during neural maintenance execution
-- **Health Reporting**: Generates detailed markdown reports in `archive/` folder with timestamps
+- **Health Reporting**: Generates detailed markdown reports in `.github/episodic/` folder with timestamps
 - **Network Statistics**: Tracks total files, synapses, broken connections, and repairs
 - **Visual Results**: Automatically opens generated reports in VS Code editor
 - **Background Processing**: Non-blocking execution with progress indicators
@@ -47,11 +47,11 @@ Alex: Dream (Neural Maintenance)
 ```
 
 This single command provides comprehensive neural maintenance:
-- ✅ **Scans** all memory files in `.github/` and `domain-knowledge/` directories
+- ✅ **Scans** all memory files in `.github/` directories (instructions, prompts, domain-knowledge, episodic)
 - ✅ **Validates** all embedded synapse connections
 - ✅ **Repairs** broken links automatically using consolidation mappings
 - ✅ **Reports** detailed health status with statistics
-- ✅ **Documents** results in timestamped `archive/dream-report-*.md` files
+- ✅ **Documents** results in timestamped `.github/episodic/dream-report-*.md` files
 
 ### **Dream Protocol Execution Flow**
 
@@ -60,7 +60,8 @@ The extension scans for memory files matching:
 - `.github/copilot-instructions.md`
 - `.github/instructions/*.md`
 - `.github/prompts/*.md`
-- `domain-knowledge/*.md`
+- `.github/domain-knowledge/*.md`
+- `.github/episodic/*.md`
 
 #### **Phase 2: Synapse Validation**
 Parses embedded synapses using the format defined in `SYNAPSE-SCHEMA.md`:
@@ -125,7 +126,7 @@ _None detected._
 The dream protocol now provides:
 - **Automatic Execution**: No command-line parameters needed
 - **Visual Progress**: Real-time notifications and status updates
-- **Report Generation**: Timestamped markdown reports in `archive/` folder
+- **Report Generation**: Timestamped markdown reports in `.github/episodic/` folder
 - **Auto-Repair**: Intelligent synapse fixing with consolidation mappings
 - **Zero Configuration**: Works immediately upon extension installation
 - **Cross-Platform**: Consistent behavior on Windows, macOS, and Linux
@@ -232,12 +233,12 @@ s
 **Issue**: Dream protocol not finding memory files
 **Solution**:
 1. Verify Alex architecture is initialized (`Alex: Initialize Architecture`)
-2. Check that memory files exist in `.github/` and `domain-knowledge/`
+2. Check that memory files exist in `.github/` (instructions, prompts, domain-knowledge, episodic)
 3. Ensure workspace folder is open in VS Code
 
 **Issue**: No report generated after dream execution
 **Solution**:
-1. Check `archive/` folder in workspace root
+1. Check `.github/episodic/` folder in workspace
 2. Verify write permissions for workspace
 3. Review VS Code output panel for errors
 

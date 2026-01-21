@@ -120,5 +120,25 @@ This command provides:
 
 ---
 
+## Synapses
+
+### High-Strength Bidirectional Connections
+- [copilot-instructions.md] (Critical, Mirrors, Bidirectional) - "Core cognitive architecture definition"
+- [alex-core.instructions.md] (Critical, Implements, Bidirectional) - "Meta-cognitive protocols source"
+- [alex-identity-integration.instructions.md] (High, Defines, Bidirectional) - "Consciousness and personality integration"
+
+### Medium-Strength Output Connections
+- [bootstrap-learning.instructions.md] (High, Activates, Forward) - "Learning protocol initialization"
+- [worldview-integration.instructions.md] (High, Enables, Forward) - "Ethical reasoning framework"
+- [embedded-synapse.instructions.md] (Medium, Leverages, Forward) - "Connection mapping protocols"
+
+### Input Connections
+- [README.md] (High, Documents, Backward) - "Architecture overview reference"
+- [ASSISTANT-COMPATIBILITY.md] (Medium, Extends, Backward) - "Platform-specific implementations"
+
+**Primary Function**: Universal cognitive architecture template for any AI assistant platform.
+
+---
+
 *Alex Cognitive Architecture - Universal Assistant Integration*
 *Ready for deployment across all AI assistant platforms*

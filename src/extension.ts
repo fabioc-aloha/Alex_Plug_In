@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { initializeArchitecture, resetArchitecture } from './commands/initialize';
 import { runDreamProtocol } from './commands/dream';
 import { upgradeArchitecture } from './commands/upgrade';
+import { runSelfActualization } from './commands/self-actualization';
 import { registerChatParticipant } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 
@@ -52,10 +53,15 @@ export function activate(context: vscode.ExtensionContext) {
         await withOperationLock('Upgrade', () => upgradeArchitecture(context));
     });
 
+    let selfActualizeDisposable = vscode.commands.registerCommand('alex.selfActualize', async () => {
+        await withOperationLock('Self-Actualization', () => runSelfActualization(context));
+    });
+
     context.subscriptions.push(initDisposable);
     context.subscriptions.push(resetDisposable);
     context.subscriptions.push(dreamDisposable);
     context.subscriptions.push(upgradeDisposable);
+    context.subscriptions.push(selfActualizeDisposable);
 }
 
 export function deactivate() {}

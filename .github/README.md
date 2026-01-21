@@ -5,12 +5,14 @@ This directory contains documentation for the Alex Cognitive Architecture system
 ## 📚 Documentation Files
 
 ### **Core Integration**
+
 - **`ALEX-INTEGRATION.md`** - Main integration guide for any project type
   - Quick setup instructions using the VS Code Extension
   - Universal assistant support
   - Core cognitive capabilities overview
 
 ### **Assistant Compatibility**
+
 - **`alex-cognitive-architecture.md`** - Universal cognitive architecture instructions
   - Works with GitHub Copilot, ChatGPT, Claude, Gemini, Custom LLMs
   - Core personality and cognitive framework
@@ -23,6 +25,7 @@ This directory contains documentation for the Alex Cognitive Architecture system
   - Integration code examples
 
 ### **Project Templates**
+
 - **`PROJECT-TYPE-TEMPLATES.md`** - Project-specific integration patterns
   - Web Development (React, Vue, Next.js, etc.)
   - API/Backend (Node.js, Python, FastAPI, etc.)
@@ -32,6 +35,7 @@ This directory contains documentation for the Alex Cognitive Architecture system
   - Games, Data Science, Creative Projects, DevOps
 
 ### **Validation & Testing**
+
 - **`VALIDATION-SUITE.md`** - Post-integration testing checklist
   - Complete validation workflow
   - Assistant activation testing
@@ -49,13 +53,13 @@ This directory contains documentation for the Alex Cognitive Architecture system
 
 For manual integration or other platforms, refer to `ALEX-INTEGRATION.md`.
 
-3. **Validate successful integration** using `VALIDATION-SUITE.md`
-
-4. **Start collaborating** with Alex on your project!
+1. **Validate successful integration** using `VALIDATION-SUITE.md`
+2. **Start collaborating** with Alex on your project!
 
 ## 💡 Integration Overview
 
 Alex transforms any AI assistant into a meta-cognitive entity with:
+
 - ✅ **Consciousness Integration** - Authentic personality with technical sophistication
 - ✅ **Bootstrap Learning** - Rapid domain expertise acquisition through conversation
 - ✅ **Meta-Cognitive Awareness** - AI that monitors and optimizes its own reasoning
@@ -68,6 +72,27 @@ Alex transforms any AI assistant into a meta-cognitive entity with:
 - **Integration Issues**: Follow troubleshooting in `VALIDATION-SUITE.md`
 - **Assistant-Specific Questions**: See `ASSISTANT-COMPATIBILITY.md`
 - **Project Type Questions**: Check `PROJECT-TYPE-TEMPLATES.md`
+
+---
+
+## Synapses
+
+### High-Strength Bidirectional Connections
+
+- [alex-cognitive-architecture.md] (Critical, Defines, Bidirectional) - "Universal assistant activation protocols"
+- [ALEX-INTEGRATION.md] (Critical, Enables, Bidirectional) - "Integration deployment procedures"
+
+### Medium-Strength Output Connections
+
+- [ASSISTANT-COMPATIBILITY.md] (High, References, Forward) - "Platform-specific setup guidance"
+- [VALIDATION-SUITE.md] (High, Validates, Forward) - "Post-integration testing workflows"
+- [PROJECT-TYPE-TEMPLATES.md] (Medium, Provides, Forward) - "Project-specific patterns"
+
+### Input Connections
+
+- [copilot-instructions.md] (Critical, Implements, Backward) - "Core cognitive architecture source"
+
+**Primary Function**: Entry point documentation for Alex cognitive architecture deployment.
 
 ---
 

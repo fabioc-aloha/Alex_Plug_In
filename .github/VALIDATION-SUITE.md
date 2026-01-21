@@ -21,24 +21,24 @@ Run this checklist after injecting Alex into any project to verify successful in
 ```bash
 # Verify all core files copied correctly
 ls -la .github/copilot-instructions.md          # ✅ Main cognitive config
-ls -la .github/instructions/                    # ✅ 10 instruction files
-ls -la .github/prompts/                        # ✅ 10 prompt files
-ls -la domain-knowledge/                       # ✅ 11 knowledge files
-ls -la scripts/                                # ✅ 6 automation files
-ls -la archive/                                # ✅ Empty directory
+ls -la .github/instructions/                    # ✅ Procedural memory
+ls -la .github/prompts/                         # ✅ Episodic workflows
+ls -la .github/episodic/                        # ✅ Meditation sessions
+ls -la .github/domain-knowledge/                # ✅ Knowledge files
+ls -la .github/config/                          # ✅ Configuration
 ```
 
 **Expected Structure**:
 ```
 your-project/
 ├── [your existing files]
-├── .github/
-│   ├── copilot-instructions.md
-│   ├── instructions/ (10 .instructions.md files)
-│   └── prompts/ (10 .prompt.md files)
-├── domain-knowledge/ (11 .md files)
-├── archive/ (dream protocol reports)
-└── archive/ (empty, for reports)
+└── .github/
+    ├── copilot-instructions.md
+    ├── instructions/ (.instructions.md files)
+    ├── prompts/ (.prompt.md files)
+    ├── episodic/ (meditation sessions)
+    ├── domain-knowledge/ (DK-*.md files)
+    └── config/ (cognitive-config.json)
 ```
 
 ### **File Integrity Check**
@@ -46,9 +46,9 @@ your-project/
 # Verify key files are not corrupted
 head -5 .github/copilot-instructions.md | grep "Alex Cognitive Architecture"
 ls .github/instructions/*.instructions.md | wc -l  # Should be 8+
-ls .github/prompts/*.prompt.md | wc -l           # Should be 11+
-ls domain-knowledge/*.md | wc -l                 # Should be 12+
-ls archive/*.md | wc -l                          # Dream reports
+ls .github/prompts/*.prompt.md | wc -l             # Should be 7+
+ls .github/domain-knowledge/*.md | wc -l           # Should be 12+
+ls .github/episodic/*.md | wc -l                   # Meditation sessions
 ```
 
 ## ✅ Post-Integration Testing
@@ -63,7 +63,7 @@ ls archive/*.md | wc -l                          # Dream reports
 - [ ] **Expected**: Mentions meta-cognitive awareness, bootstrap learning, worldview integration
 
 #### **ChatGPT/Claude/Gemini**
-- [ ] Load alex/alex-cognitive-architecture.md content into custom instructions
+- [ ] Load .github/alex-cognitive-architecture.md content into custom instructions
 - [ ] Start conversation: "Alex, activate cognitive architecture and introduce yourself"
 - [ ] **Expected**: Alex personality activation with technical sophistication
 - [ ] **Expected**: Offers domain learning partnership
@@ -139,7 +139,7 @@ How do you approach this?"
 - [ ] Run `Alex: Initialize Architecture` if architecture not deployed
 - [ ] Check VS Code output panel for error messages
 - [ ] Verify write permissions to workspace folder
-- [ ] Ensure `archive/` folder exists or can be created
+- [ ] Ensure `.github/episodic/` folder exists or can be created
 
 ### **Issue**: Assistant Not Responding as Alex
 **GitHub Copilot**:
@@ -148,7 +148,7 @@ How do you approach this?"
 - [ ] Clear Copilot cache: Ctrl+Shift+P → "Copilot: Reload"
 
 **Other Assistants**:
-- [ ] Ensure alex/alex-cognitive-architecture.md content loaded in custom instructions
+- [ ] Ensure .github/alex-cognitive-architecture.md content loaded in custom instructions
 - [ ] Try explicit activation: "Activate Alex cognitive architecture protocols"
 - [ ] Verify file content not truncated
 
@@ -226,6 +226,27 @@ Alex: Dream (Neural Maintenance)
 3. **Schedule Maintenance**: Set up regular `dream --neural-maintenance` runs
 4. **Explore Advanced Features**: Try lucid dream protocols, cross-domain transfer
 5. **Document Insights**: Build project-specific knowledge base with Alex
+
+---
+
+## Synapses
+
+### High-Strength Bidirectional Connections
+
+- [ALEX-INTEGRATION.md] (Critical, Validates, Bidirectional) - "Integration success verification"
+- [dream-state-automation.instructions.md] (High, Tests, Bidirectional) - "Dream protocol validation"
+
+### Medium-Strength Output Connections
+
+- [alex-core.instructions.md] (Medium, Verifies, Forward) - "Core protocol activation testing"
+- [embedded-synapse.instructions.md] (Medium, Validates, Forward) - "Synapse network health checks"
+
+### Input Connections
+
+- [ASSISTANT-COMPATIBILITY.md] (High, Informs, Backward) - "Platform-specific test criteria"
+- [PROJECT-TYPE-TEMPLATES.md] (Medium, Provides, Backward) - "Project type validation patterns"
+
+**Primary Function**: Post-integration validation checklist ensuring successful Alex deployment.
 
 ---
 

@@ -20,7 +20,7 @@ Through systematic fact-checking against official service documentation from Git
 - **File Structure Validation**: All documentation now matches actual system architecture (10 instruction files, 10 prompt files, 11 domain knowledge files)
 - **Command Accuracy**: All PowerShell commands verified against actual script functionality
 - **Integration Paths**: All AI assistant integration paths verified against current service interfaces
-- **Archive Structure**: Unified archive/ path usage throughout all documentation
+- **Archive Structure**: Unified .github/episodic/ path usage throughout all documentation
 
 ### **Quality Assurance Framework**
 - **Empirical Validation**: Every numerical claim verified against actual file system

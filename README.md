@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.0.3-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-2.5.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -24,6 +24,7 @@
 - 🧠 **Learns and Remembers** - Consolidates knowledge across sessions using memory files
 - 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
 - 🌙 **Self-Maintains** - Validates and repairs its neural network through dream protocols
+- 🧘 **Self-Actualizes** - Automatically assesses health on greetings and meditation
 - ☁️ **Guides Development** - Provides Azure & M365 best practices via MCP tools
 
 ---
@@ -61,18 +62,17 @@ Already have Alex installed? Here's how to upgrade safely:
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-> ⚠️ **Important**: For detailed upgrade procedures, including Phase 2 AI-assisted migration and schema changes, see [UPGRADE-INSTRUCTIONS.md](UPGRADE-INSTRUCTIONS.md).
-
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v2.0.0 |
+| Feature | v1.5.x | v2.5.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
-| Slash Commands | ❌ None | ✅ 7 commands |
-| Language Model Tools | ❌ None | ✅ 5 AI-accessible tools |
+| Slash Commands | ❌ None | ✅ 8 commands (including /selfactualize) |
+| Language Model Tools | ❌ None | ✅ 6 AI-accessible tools |
 | Custom Agents | ❌ None | ✅ 5 specialized agents |
 | User Profile | ❌ None | ✅ Personalization system |
 | MCP Integration | ❌ Manual | ✅ Smart recommendations |
+| Self-Actualization | ❌ None | ✅ Auto-triggers on greeting & meditation |
 
 ### Migration Notes
 
@@ -94,6 +94,7 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /status` | Check architecture health and version |
 | `@alex /meditate` | Consolidate knowledge into memory files |
 | `@alex /dream` | Run neural maintenance and repair synapses |
+| `@alex /selfactualize` | **NEW** Comprehensive self-assessment with deep meditation |
 | `@alex /learn` | Acquire new domain knowledge conversationally |
 | `@alex /azure` | Get Azure development guidance with MCP tools |
 | `@alex /m365` | Get Microsoft 365 and Teams development help |
@@ -105,8 +106,15 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 @alex /status
 → Shows architecture version, memory file counts, and synapse health
 
+@alex Hello!
+→ Triggers automatic self-actualization check and personalized greeting
+
+@alex /selfactualize
+→ Runs comprehensive self-assessment: synapse health, version consistency,
+  memory architecture analysis, and creates a meditation session record
+
 @alex /meditate I learned about dependency injection patterns today
-→ Guides you through knowledge consolidation and updates memory files
+→ Offers self-actualization first, then guides knowledge consolidation
 
 @alex /azure How do I deploy a Function App with Cosmos DB?
 → Provides best practices and recommends relevant MCP tools
@@ -181,6 +189,7 @@ Access via `Ctrl+Shift+P`:
 | **Alex: Upgrade Architecture** | Update to latest version, preserving customizations |
 | **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
 | **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
+| **Alex: Self-Actualize (Deep Meditation)** | **NEW** Comprehensive self-assessment with session documentation |
 
 ### 🤖 Language Model Tools
 
@@ -193,6 +202,7 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#architecture_status` | Returns version and configuration | "What's my Alex version?" |
 | `#mcp_recommendations` | Suggests MCP tools for scenarios | "What tools for Azure Functions?" |
 | `#user_profile` | Manages personal preferences | "Update my profile preferences" |
+| `#self_actualization` | **NEW** Comprehensive self-assessment | "Run deep meditation" |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
@@ -214,10 +224,13 @@ Use in any Copilot chat to activate specific modes:
 
 | Trigger | Effect |
 | ------- | ------ |
+| `Hello` / `Hi Alex` | **NEW** Auto self-actualization on session start |
 | `@meta-cognitive-awareness` | Forces self-analysis of reasoning |
 | `@bootstrap-learning` | Activates knowledge acquisition mode |
 | `@worldview-integration` | Applies ethical reasoning frameworks |
 | `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole |
+| `meditate` | Triggers memory consolidation + self-actualization |
+| `self-actualize` | Full 5-phase architecture assessment |
 | `meditate` | Triggers memory consolidation protocol |
 | `Forget [topic]` | Selective memory cleanup |
 
@@ -369,96 +382,6 @@ When you ask `@alex /m365`, Alex guides you to:
 
 ---
 
-## ⚡ MCP Server Optimization
-
-Alex provides native alternatives to some MCP servers, allowing you to **disable redundant servers** for better performance and reduced overhead.
-
-### MCP Servers Alex Can Replace
-
-Alex's built-in tools provide equivalent functionality:
-
-| Alex Tool | Replaces | Recommendation |
-| --------- | -------- | -------------- |
-| `alex_memory_search` | Generic memory/context MCP servers | ✅ Can disable if using Alex's memory architecture |
-| `alex_user_profile` | Profile management MCPs | ✅ Alex manages user preferences natively |
-| `alex_mcp_recommendations` | Generic MCP guidance tools | ✅ Alex provides scenario-based recommendations |
-
-### MCP Servers to Keep Enabled
-
-These provide unique capabilities Alex works **alongside**:
-
-| Category | MCP Servers | Why Keep |
-| -------- | ----------- | -------- |
-| **Azure Resources** | `azure_cosmos`, `azure_sql`, `azure_storage`, etc. | Direct Azure API access |
-| **Documentation** | `mcp_azure_mcp_documentation` | Microsoft Learn search |
-| **Best Practices** | `mcp_azure_mcp_get_bestpractices` | Azure-specific guidance |
-| **M365** | Teams, Outlook, SharePoint MCPs | M365 service integration |
-| **CLI Generation** | `mcp_azure_mcp_azd` | Azure CLI command generation |
-
-### Optional MCP Servers (Disable If Not Used)
-
-These can be safely disabled based on your workflow:
-
-| MCP Server/Extension | Disable If |
-| -------------------- | ---------- |
-| `analysis-services.powerbi-modeling-mcp` | Not working with Power BI models |
-| Microsoft Word MCP | Not creating Word documents programmatically |
-| Microsoft SharePoint Lists MCP | Not managing SharePoint lists |
-| Fabric Eventstream tools | Not using Microsoft Fabric real-time intelligence |
-
-### How to Disable MCP Servers
-
-#### Option 1: Disable VS Code Extension
-
-```powershell
-# Disable specific MCP extension
-code --disable-extension <extension-id>
-
-# Example: Disable Power BI MCP
-code --disable-extension analysis-services.powerbi-modeling-mcp
-```
-
-Or in VS Code: **Extensions** (`Ctrl+Shift+X`) → Find extension → Click **Disable**
-
-#### Option 2: VS Code Settings
-
-Open settings with `Ctrl+Shift+P` → "Preferences: Open User Settings (JSON)":
-
-```json
-{
-  // Control MCP autostart behavior
-  "chat.mcp.autostart": "newAndOutdated",  // or "never" to disable all
-
-  // Keep Alex's memory enabled
-  "github.copilot.chat.tools.memory.enabled": true
-}
-```
-
-#### Option 3: Per-Server Configuration
-
-```json
-{
-  "chat.mcp.serverSampling": {
-    "Azure MCP Server Provider: Azure MCP": {
-      "allowedDuringChat": true
-    }
-  }
-}
-```
-
-### Recommended Configuration
-
-For most Alex users:
-
-| Setting | Value | Reason |
-| ------- | ----- | ------ |
-| `chat.mcp.autostart` | `"newAndOutdated"` | Only start MCPs when needed |
-| `github.copilot.chat.tools.memory.enabled` | `true` | Alex's memory system |
-| Power BI MCP | Disabled | Unless actively using Power BI |
-| Azure MCP Server | Enabled | Core Azure functionality |
-
----
-
 ## 📁 Architecture Structure
 
 After initialization, Alex manages this structure:
@@ -466,23 +389,26 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (11 files)
+├── instructions/              # 📚 Procedural memory (12 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
+│   ├── self-actualization.instructions.md  # NEW
 │   ├── worldview-integration.instructions.md
 │   └── ...
-└── prompts/                   # 📖 Episodic memory (7 files)
-    ├── unified-meditation-protocols.prompt.md
-    ├── domain-learning.prompt.md
-    └── ...
-
-domain-knowledge/              # 🎓 Specialized expertise (12 files)
-├── DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md
-├── DK-ADVANCED-DIAGRAMMING-v1.1.0.md
-└── ...
-
-config/                        # ⚙️ Architecture configuration
-archive/                       # 📦 Dream reports & sessions
+├── prompts/                   # 📖 Episodic memory (7 files)
+│   ├── unified-meditation-protocols.prompt.md
+│   ├── domain-learning.prompt.md
+│   └── ...
+├── episodic/                  # 📝 Session records
+│   ├── self-actualization-*.prompt.md
+│   └── meditation-session-*.prompt.md
+├── domain-knowledge/          # 🎓 Specialized expertise (12 files)
+│   ├── DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md
+│   ├── DK-ADVANCED-DIAGRAMMING-v1.1.0.md
+│   └── ...
+└── config/                    # ⚙️ Architecture configuration
+    ├── cognitive-config.json
+    └── user-profile.json
 ```
 
 ### Memory Types
@@ -507,21 +433,51 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v2.0.0 BINILNILIUM
+## 🆕 What's New in v2.5.0 BIPENTNILIUM
 
-### 🎉 Major Release: GitHub Copilot AI Extensibility
+### 🎉 Self-Actualization Enhanced: Automatic Session Intelligence
+
+This release makes self-actualization **pervasive** - Alex automatically assesses architecture health at key moments:
+
+#### Automatic Triggers
+
+| Trigger | What Happens |
+| ------- | ------------ |
+| **Session Greeting** | Quick health check on "Hello", "Hi Alex", etc. |
+| **Meditation Start** | Full self-actualization button offered |
+| **Explicit Command** | Complete 5-phase protocol with session record |
+
+#### New `/selfactualize` Command
+
+```text
+@alex /selfactualize
+```
+
+Or via Command Palette: **Alex: Self-Actualize (Deep Meditation)**
+
+#### What It Does
+
+1. **Synapse Health Validation** - Scans all 127+ synaptic connections
+2. **Version Consistency Check** - Ensures all memory files reference v2.5.0
+3. **Memory Architecture Assessment** - Evaluates procedural/episodic/domain balance
+4. **Recommendation Generation** - Provides actionable improvements
+5. **Session Documentation** - Creates timestamped record in `.github/episodic/`
+
+### Previous Release: v2.0.1 BINILUNIUM
+
+#### GitHub Copilot AI Extensibility
 
 This release transforms Alex from a passive context injector into an **active conversational AI agent**.
 
 #### Chat Participant (@alex)
 
-- Full conversational interface with 7 slash commands
+- Full conversational interface with 8 slash commands
 - Intelligent participant detection (cognitive, Azure, M365 queries)
 - Contextual follow-up suggestions
 
 #### Language Model Tools
 
-- 5 AI-accessible tools for intelligent operations
+- 6 AI-accessible tools for intelligent operations
 - Automatic invocation in Agent mode
 - Manual reference with `#tool_name`
 
@@ -568,6 +524,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 2.0.0 BINILNILIUM • Built on 270+ academic sources
+Version 2.5.0 BIPENTNILIUM • Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn

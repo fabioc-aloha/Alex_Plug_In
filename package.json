@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "SEE LICENSE IN LICENSE.md",
-  "version": "2.0.3",
+  "version": "2.5.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -59,6 +59,10 @@
       {
         "command": "alex.upgrade",
         "title": "Alex: Upgrade Architecture"
+      },
+      {
+        "command": "alex.selfActualize",
+        "title": "Alex: Self-Actualize (Deep Meditation)"
       }
     ],
     "chatParticipants": [
@@ -106,6 +110,10 @@
           {
             "name": "dream",
             "description": "Run neural maintenance to validate and repair synaptic connections"
+          },
+          {
+            "name": "selfactualize",
+            "description": "Run comprehensive self-assessment: synapse health, version consistency, memory architecture, and create meditation record"
           },
           {
             "name": "learn",
@@ -264,6 +272,30 @@
           "required": [
             "action"
           ]
+        }
+      },
+      {
+        "name": "alex_self_actualization",
+        "displayName": "Alex Self-Actualization",
+        "toolReferenceName": "self_actualization",
+        "modelDescription": "Runs comprehensive self-assessment of Alex cognitive architecture: validates synaptic connections, checks version consistency, assesses memory architecture balance, generates improvement recommendations, and creates meditation session documentation. Use when user asks to 'self-actualize', 'deep meditate', or wants comprehensive architecture assessment.",
+        "icon": "$(sparkle)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Run comprehensive self-assessment and deep meditation",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "createReport": {
+              "type": "boolean",
+              "description": "Create a meditation session record file",
+              "default": true
+            },
+            "autoFix": {
+              "type": "boolean",
+              "description": "Automatically fix minor issues if found",
+              "default": false
+            }
+          }
         }
       }
     ],

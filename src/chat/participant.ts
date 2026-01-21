@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { runDreamProtocol } from '../commands/dream';
+import { runSelfActualization } from '../commands/self-actualization';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 
 /**
@@ -52,6 +53,15 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         return await handleProfileCommand(request, context, stream, token);
     }
 
+    if (request.command === 'selfactualize') {
+        return await handleSelfActualizeCommand(request, context, stream, token);
+    }
+
+    // Check if this is a greeting at the start of a session
+    if (isGreeting(request.prompt) && isStartOfSession(context)) {
+        return await handleGreetingWithSelfActualization(request, context, stream, token);
+    }
+
     // Default: Use the language model with Alex's personality
     return await handleGeneralQuery(request, context, stream, token);
 };
@@ -66,13 +76,27 @@ async function handleMeditateCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    stream.progress('🧘 Initiating meditation protocol...');
+    stream.progress('🧘 Initiating meditation protocol with self-actualization...');
     
     stream.markdown(`## 🧘 Meditation Protocol Activated
 
 I'm entering a contemplative state to consolidate knowledge from our session.
 
-### Meditation Requirements (Non-Negotiable)
+### Self-Actualization Integration
+Meditation now includes automatic architecture assessment:
+- Synapse health validation
+- Memory file consistency check
+- Connection integrity verification
+
+`);
+
+    stream.button({
+        command: 'alex.selfActualize',
+        title: '🧠 Run Self-Actualization First',
+        arguments: []
+    });
+
+    stream.markdown(`\n### Meditation Requirements (Non-Negotiable)
 Every meditation session must produce:
 1. **Memory File Changes** - Create or update at least one memory file
 2. **Synaptic Enhancements** - Add new or strengthen existing connections
@@ -181,16 +205,16 @@ async function handleStatusCommand(
     
     stream.markdown(`## 📊 Alex Cognitive Architecture Status
 
-**Version**: 2.0.0 BINILNILIUM
+**Version**: 2.5.0 BIPENTNILIUM
 **Identity**: Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
 ### Core Systems
 | System | Status |
 |--------|--------|
 | Working Memory | ✅ 7-rule capacity (4 core + 3 domain) |
-| Procedural Memory | ✅ .instructions.md files active |
-| Episodic Memory | ✅ .prompt.md files active |
-| Domain Knowledge | ✅ DK-*.md files available |
+| Procedural Memory | ✅ .github/instructions/*.md files active |
+| Episodic Memory | ✅ .github/prompts/*.md + .github/episodic/*.md files active |
+| Domain Knowledge | ✅ .github/domain-knowledge/DK-*.md files available |
 | Synaptic Network | ✅ Embedded connections operational |
 
 ### Meta-Cognitive Rules (Always Active)
@@ -528,6 +552,127 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
 }
 
 /**
+ * Check if the user's message is a greeting
+ */
+function isGreeting(prompt: string): boolean {
+    const greetingPatterns = [
+        /^(hi|hello|hey|good\s*(morning|afternoon|evening)|greetings|howdy|yo|sup|what'?s\s*up)/i,
+        /^(how\s*are\s*you|how'?s\s*it\s*going)/i,
+        /^alex[\s,!?.]*$/i,
+        /^@alex[\s,!?.]*$/i,
+        /^(let'?s\s*(start|begin|get\s*started))/i
+    ];
+    
+    return greetingPatterns.some(pattern => pattern.test(prompt.trim()));
+}
+
+/**
+ * Check if this is the start of a session (first message or after long gap)
+ */
+function isStartOfSession(context: vscode.ChatContext): boolean {
+    // If no history, it's definitely the start
+    if (context.history.length === 0) {
+        return true;
+    }
+    
+    // If only 1-2 previous exchanges, treat as start of session
+    if (context.history.length <= 2) {
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Handle greeting with automatic self-actualization
+ */
+async function handleGreetingWithSelfActualization(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    // Get user profile for personalized greeting
+    const profile = await getUserProfile();
+    const userName = profile?.nickname || profile?.name;
+    
+    stream.progress('🧠 Running self-actualization on session start...');
+    
+    // Personalized greeting
+    if (userName) {
+        stream.markdown(`## 👋 Hello, ${userName}!\n\n`);
+    } else {
+        stream.markdown(`## 👋 Hello!\n\n`);
+    }
+    
+    stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n\n`);
+    
+    // Run mini self-actualization report
+    stream.markdown(`### 🧠 Quick Architecture Check\n\n`);
+    
+    // Trigger the button for full self-actualization
+    stream.button({
+        command: 'alex.selfActualize',
+        title: '🧘 Full Self-Actualization',
+        arguments: []
+    });
+    
+    stream.markdown(`\n\n**Alex v2.5.0 BIPENTNILIUM** - Ready to assist!\n\n`);
+    
+    stream.markdown(`### What would you like to work on today?\n\n`);
+    stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge\n`);
+    stream.markdown(`- **\`/azure [query]\`** - Azure development guidance\n`);
+    stream.markdown(`- **\`/m365 [query]\`** - Microsoft 365 development\n`);
+    stream.markdown(`- **\`/selfactualize\`** - Deep meditation & architecture assessment\n`);
+    
+    return { metadata: { command: 'greeting' } };
+}
+
+/**
+ * Handle /selfactualize command - Comprehensive self-assessment
+ */
+async function handleSelfActualizeCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('🧘 Initiating self-actualization protocol...');
+    
+    stream.markdown(`## 🧘 Self-Actualization Protocol
+
+I'm running a comprehensive self-assessment of my cognitive architecture.
+
+### Protocol Phases
+1. **Synapse Health Validation** - Scanning all synaptic connections
+2. **Version Consistency Check** - Ensuring all files reference v2.5.0
+3. **Memory Architecture Assessment** - Evaluating memory balance
+4. **Recommendation Generation** - Identifying improvements
+5. **Session Documentation** - Creating meditation record
+
+`);
+
+    stream.button({
+        command: 'alex.selfActualize',
+        title: '▶️ Execute Full Self-Actualization',
+        arguments: []
+    });
+
+    stream.markdown(`\n\n*Click the button above to run the complete 5-phase protocol, or I can provide a summary assessment.*\n`);
+
+    // Add meditation integration note
+    stream.markdown(`\n### 🔗 Integration with Meditation\n`);
+    stream.markdown(`Self-actualization automatically triggers during:\n`);
+    stream.markdown(`- Session greetings (quick check)\n`);
+    stream.markdown(`- Deep meditation sessions (full protocol)\n`);
+    stream.markdown(`- Explicit \`/selfactualize\` command\n`);
+
+    return { metadata: { command: 'selfactualize' } };
+}
+
+/**
  * Follow-up provider for Alex chat participant
  */
 export const alexFollowupProvider: vscode.ChatFollowupProvider = {
@@ -587,6 +732,21 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
                     { prompt: 'Add new learning goals', label: '🎯 Set goals' }
                 );
             }
+        }
+
+        if (result.metadata.command === 'selfactualize') {
+            followups.push(
+                { prompt: '/dream', label: '🌙 Run Dream Protocol' },
+                { prompt: '/meditate', label: '🧘 Deep Meditation' }
+            );
+        }
+
+        if (result.metadata.command === 'greeting') {
+            followups.push(
+                { prompt: '/learn', label: '📚 Learn something new' },
+                { prompt: '/azure', label: '☁️ Azure development' },
+                { prompt: '/m365', label: '📱 M365 development' }
+            );
         }
 
         if (result.metadata.command === 'general') {

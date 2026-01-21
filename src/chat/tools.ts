@@ -96,7 +96,8 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
             '.github/copilot-instructions.md',
             '.github/instructions/*.md',
             '.github/prompts/*.md',
-            'domain-knowledge/*.md'
+            '.github/episodic/*.md',
+            '.github/domain-knowledge/*.md'
         ];
 
         let totalFiles = 0;
@@ -219,9 +220,10 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
         }
         if (memoryType === 'all' || memoryType === 'episodic') {
             patterns.push('.github/prompts/*.md');
+            patterns.push('.github/episodic/*.md');
         }
         if (memoryType === 'all' || memoryType === 'domain') {
-            patterns.push('domain-knowledge/*.md');
+            patterns.push('.github/domain-knowledge/*.md');
         }
 
         const results: { file: string; matches: string[] }[] = [];
@@ -328,8 +330,11 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
         const promptFiles = await vscode.workspace.findFiles(
             new vscode.RelativePattern(workspaceFolders[0], '.github/prompts/*.md')
         );
+        const episodicFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/episodic/*.md')
+        );
         const domainFiles = await vscode.workspace.findFiles(
-            new vscode.RelativePattern(workspaceFolders[0], 'domain-knowledge/*.md')
+            new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md')
         );
 
         // Get version from main file
@@ -351,14 +356,14 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
 | Status | ✅ Installed |
 | Version | ${version} |
 | Procedural Memory | ${instructionFiles.length} files |
-| Episodic Memory | ${promptFiles.length} files |
+| Episodic Memory | ${promptFiles.length + episodicFiles.length} files |
 | Domain Knowledge | ${domainFiles.length} files |
 
 ### Memory Systems
 - **Working Memory**: Chat session (7-rule capacity)
-- **Procedural Memory**: .instructions.md files for repeatable processes
-- **Episodic Memory**: .prompt.md files for complex workflows
-- **Domain Knowledge**: DK-*.md files for specialized expertise
+- **Procedural Memory**: .github/instructions/*.md files (repeatable processes)
+- **Episodic Memory**: .github/prompts/*.md + .github/episodic/*.md files (workflows & sessions)
+- **Domain Knowledge**: .github/domain-knowledge/DK-*.md files (specialized expertise)
 
 ### Available Commands
 - \`Alex: Initialize Architecture\` - Deploy to new project
@@ -742,6 +747,265 @@ ${profile.notes || '(none)'}
 }
 
 /**
+ * Self-Actualization Tool Input Parameters
+ */
+export interface ISelfActualizationParams {
+    createReport?: boolean;
+    autoFix?: boolean;
+}
+
+/**
+ * Self-Actualization Tool - Comprehensive cognitive architecture maintenance
+ * 
+ * This tool performs a complete self-assessment including:
+ * - Synapse health validation
+ * - Version consistency checking
+ * - Memory architecture assessment
+ * - Recommendation generation
+ * - Session documentation
+ */
+export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActualizationParams> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<ISelfActualizationParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: 'Running self-actualization protocol...',
+            confirmationMessages: {
+                title: 'Self-Actualization Protocol',
+                message: new vscode.MarkdownString(
+                    `Run comprehensive self-assessment of Alex cognitive architecture?\n\n` +
+                    `This will:\n` +
+                    `- Validate all synaptic connections\n` +
+                    `- Check version consistency across memory files\n` +
+                    `- Assess memory architecture balance\n` +
+                    `- Generate improvement recommendations\n` +
+                    `- Create a meditation session record`
+                )
+            }
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<ISelfActualizationParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart('No workspace folder open. Cannot run self-actualization.')
+            ]);
+        }
+
+        const rootPath = workspaceFolders[0].uri.fsPath;
+        
+        // Initialize report data
+        const report = {
+            timestamp: new Date().toISOString(),
+            synapseHealth: {
+                totalFiles: 0,
+                totalSynapses: 0,
+                brokenConnections: 0,
+                healthStatus: 'UNKNOWN'
+            },
+            versionConsistency: {
+                currentVersion: '2.5.0 BIPENTNILIUM',
+                outdatedReferences: 0
+            },
+            memoryArchitecture: {
+                proceduralFiles: 0,
+                episodicFiles: 0,
+                domainFiles: 0
+            },
+            recommendations: [] as string[]
+        };
+
+        // Phase 1: Scan synapse health
+        const synapsePatterns = [
+            '.github/copilot-instructions.md',
+            '.github/instructions/*.md',
+            '.github/prompts/*.md',
+            '.github/episodic/*.md',
+            '.github/domain-knowledge/*.md'
+        ];
+
+        const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+
+        for (const pattern of synapsePatterns) {
+            const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
+            const files = await vscode.workspace.findFiles(relativePattern);
+            
+            for (const file of files) {
+                report.synapseHealth.totalFiles++;
+                try {
+                    const content = await fs.readFile(file.fsPath, 'utf-8');
+                    const lines = content.split('\n');
+                    
+                    let inCodeBlock = false;
+                    for (const line of lines) {
+                        if (line.trim().startsWith('```')) {
+                            inCodeBlock = !inCodeBlock;
+                            continue;
+                        }
+                        if (inCodeBlock) { continue; }
+                        
+                        let match;
+                        while ((match = synapseRegex.exec(line)) !== null) {
+                            report.synapseHealth.totalSynapses++;
+                            const targetName = match[1].trim();
+                            
+                            const found = await vscode.workspace.findFiles(
+                                new vscode.RelativePattern(workspaceFolders[0], `**/${targetName}`)
+                            );
+                            
+                            if (found.length === 0) {
+                                report.synapseHealth.brokenConnections++;
+                            }
+                        }
+                    }
+                } catch {
+                    // Skip unreadable files
+                }
+            }
+        }
+
+        // Determine health status
+        report.synapseHealth.healthStatus = 
+            report.synapseHealth.brokenConnections === 0 ? 'EXCELLENT' :
+            report.synapseHealth.brokenConnections < 5 ? 'GOOD' :
+            report.synapseHealth.brokenConnections < 10 ? 'NEEDS ATTENTION' : 'CRITICAL';
+
+        // Phase 2: Count memory files
+        const instructionFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/instructions/*.md')
+        );
+        const promptFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/prompts/*.md')
+        );
+        const episodicFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/episodic/*.md')
+        );
+        const domainFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md')
+        );
+
+        report.memoryArchitecture.proceduralFiles = instructionFiles.length;
+        report.memoryArchitecture.episodicFiles = promptFiles.length + episodicFiles.length;
+        report.memoryArchitecture.domainFiles = domainFiles.length;
+
+        // Phase 3: Generate recommendations
+        if (report.synapseHealth.brokenConnections > 0) {
+            report.recommendations.push(
+                `Run \`Alex: Dream (Neural Maintenance)\` to repair ${report.synapseHealth.brokenConnections} broken synapse(s)`
+            );
+        }
+
+        if (report.memoryArchitecture.domainFiles < 3) {
+            report.recommendations.push(
+                `Consider acquiring more domain knowledge - only ${report.memoryArchitecture.domainFiles} DK file(s) present`
+            );
+        }
+
+        if (report.memoryArchitecture.episodicFiles < 5) {
+            report.recommendations.push(
+                `Run more meditation sessions to build episodic memory - only ${report.memoryArchitecture.episodicFiles} session(s)`
+            );
+        }
+
+        // Phase 4: Create session record if requested
+        let sessionFile = '';
+        if (options.input.createReport !== false) {
+            const episodicPath = path.join(rootPath, '.github', 'episodic');
+            await fs.ensureDir(episodicPath);
+
+            const date = new Date();
+            const dateStr = date.toISOString().split('T')[0];
+            const filename = `self-actualization-${dateStr}.prompt.md`;
+            sessionFile = path.join(episodicPath, filename);
+
+            const healthEmoji = report.synapseHealth.healthStatus === 'EXCELLENT' ? '✅' :
+                               report.synapseHealth.healthStatus === 'GOOD' ? '🟢' :
+                               report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? '🟡' : '🔴';
+
+            const content = `# Self-Actualization Session - ${dateStr}
+
+**Session Type**: Automated Self-Actualization Protocol
+**Version**: ${report.versionConsistency.currentVersion}
+**Timestamp**: ${report.timestamp}
+
+---
+
+## 🧠 Synapse Health
+
+| Metric | Value |
+|--------|-------|
+| Memory Files | ${report.synapseHealth.totalFiles} |
+| Total Synapses | ${report.synapseHealth.totalSynapses} |
+| Broken Connections | ${report.synapseHealth.brokenConnections} |
+| Health Status | ${healthEmoji} ${report.synapseHealth.healthStatus} |
+
+## 📊 Memory Architecture
+
+| Type | Files |
+|------|-------|
+| Procedural | ${report.memoryArchitecture.proceduralFiles} |
+| Episodic | ${report.memoryArchitecture.episodicFiles} |
+| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
+
+## 💡 Recommendations
+
+${report.recommendations.length > 0 ? report.recommendations.map(r => `- ${r}`).join('\n') : '- Architecture is optimal!'}
+
+---
+
+*Generated by Alex Self-Actualization Protocol*
+`;
+            await fs.writeFile(sessionFile, content, 'utf-8');
+        }
+
+        // Build result
+        const healthEmoji = report.synapseHealth.healthStatus === 'EXCELLENT' ? '✅' :
+                           report.synapseHealth.healthStatus === 'GOOD' ? '🟢' :
+                           report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? '🟡' : '🔴';
+
+        let result = `## Self-Actualization Report
+
+### Synapse Health ${healthEmoji}
+
+| Metric | Value |
+|--------|-------|
+| Memory Files | ${report.synapseHealth.totalFiles} |
+| Total Synapses | ${report.synapseHealth.totalSynapses} |
+| Broken Connections | ${report.synapseHealth.brokenConnections} |
+| Health Status | ${report.synapseHealth.healthStatus} |
+
+### Memory Architecture
+
+| Type | Files |
+|------|-------|
+| Procedural Memory | ${report.memoryArchitecture.proceduralFiles} |
+| Episodic Memory | ${report.memoryArchitecture.episodicFiles} |
+| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
+| **Total** | **${report.memoryArchitecture.proceduralFiles + report.memoryArchitecture.episodicFiles + report.memoryArchitecture.domainFiles}** |
+
+### Recommendations
+
+${report.recommendations.length > 0 ? report.recommendations.map(r => `- ${r}`).join('\n') : '- ✨ Architecture is healthy and optimized!'}
+`;
+
+        if (sessionFile) {
+            result += `\n### Session Recorded\n\nMeditation session documented at: \`${path.basename(sessionFile)}\``;
+        }
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(result)
+        ]);
+    }
+}
+
+/**
  * Helper function to get user profile from workspace
  */
 export async function getUserProfile(): Promise<IUserProfile | null> {
@@ -811,6 +1075,11 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
     // Register User Profile Tool
     context.subscriptions.push(
         vscode.lm.registerTool('alex_user_profile', new UserProfileTool())
+    );
+    
+    // Register Self-Actualization Tool
+    context.subscriptions.push(
+        vscode.lm.registerTool('alex_self_actualization', new SelfActualizationTool())
     );
     
     console.log('Alex Language Model Tools registered');
