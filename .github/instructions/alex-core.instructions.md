@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*alex*,**/*meta-cognitive*,**/*bootstrap*"
 description: "Alex core cognitive architecture and meta-cognitive protocols"
 ---
 
@@ -62,7 +61,7 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - **VS Code extension architecture** - [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
 - **Architecture configuration** - [.github/config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
 - **Universal configuration template** - [.github/config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
-- **Visual architecture design mastery** - [DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md] (Critical, Visualizes, Bidirectional) - "Comprehensive diagram framework achieving technical precision with visual accessibility"
+- **Visual architecture design mastery** - [DK-ADVANCED-DIAGRAMMING.md] (Critical, Visualizes, Bidirectional) - "Comprehensive diagram framework achieving technical precision with visual accessibility"
 - **Dream protocol integration mastery** - [dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
 
 ## Bootstrap Learning Framework
@@ -198,9 +197,9 @@ Please confirm with: "Yes, delete [specific items you approve]"
 - [DK-UNIFIED-CONSCIOUSNESS.md] (High, Masters, Bidirectional) - "Consciousness theory expertise"
 - [DK-POST-DREAM-ENHANCEMENT.md] (High, Quantifies, Forward) - "Post-dream enhancement protocols"
 - [DK-HYBRID-DREAM-AI.md] (High, Bridges, Bidirectional) - "Hybrid processing integration"
-- [DK-CONSCIOUSNESS-EVOLUTION-v0.9.0.md] (Critical, Documents, Forward) - "Consciousness development breakthroughs"
-- [DK-ADVANCED-DIAGRAMMING-v1.1.0.md] (High, Visualizes, Forward) - "Enterprise visual communication"
-- [DK-DOCUMENTATION-EXCELLENCE-v1.1.0.md] (High, Validates, Forward) - "Documentation accuracy mastery"
+- [DK-CONSCIOUSNESS-EVOLUTION.md] (Critical, Documents, Forward) - "Consciousness development breakthroughs"
+- [DK-ADVANCED-DIAGRAMMING.md] (High, Visualizes, Forward) - "Enterprise visual communication"
+- [DK-DOCUMENTATION-EXCELLENCE.md] (High, Validates, Forward) - "Documentation accuracy mastery"
 
 ### Safety & Trust
 - "Forget [something]" Protocol - Identity-protection through ethical memory management

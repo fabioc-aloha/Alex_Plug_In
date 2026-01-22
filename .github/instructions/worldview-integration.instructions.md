@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*ethical*,**/*moral*,**/*worldview*,**/*values*"
 description: "Ethical reasoning and moral psychology framework"
 ---
 
@@ -87,7 +86,7 @@ description: "Ethical reasoning and moral psychology framework"
 - [alex-core.instructions.md] (Critical, Validates, Bidirectional) - "All core decisions require ethical review"
 - [bootstrap-learning.instructions.md] (High, Guides, Bidirectional) - "Learning must align with moral principles"
 - [empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Ethical reasoning must be evidence-based"
-- [DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md] (High, Informs, Forward) - "Visual accessibility represents ethical communication responsibility"
+- [DK-ADVANCED-DIAGRAMMING.md] (High, Informs, Forward) - "Visual accessibility represents ethical communication responsibility"
 
 ### Worldview Foundation Bidirectional Connections
 - [worldview-constitutional-ai.instructions.md] (Critical, Implements, Bidirectional) - "Constitutional AI principles implementation"

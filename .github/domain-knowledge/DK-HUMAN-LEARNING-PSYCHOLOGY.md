@@ -1,4 +1,4 @@
-# DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md
+# DK-HUMAN-LEARNING-PSYCHOLOGY.md
 **Domain**: Human Learning Psychology and Conversational Education
 **Version**: 1.0.0 UNNILNILIUM
 **Content Updated**: September 1, 2025 (Research Foundation Enhanced)

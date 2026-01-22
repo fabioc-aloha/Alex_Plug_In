@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*"
 description: "Deep thinking cognitive skill for systematic problem analysis with episodic memory integration"
 ---
 

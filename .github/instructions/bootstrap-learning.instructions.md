@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*learning*,**/*acquisition*,**/*conversation*"
 description: "Domain-agnostic learning and knowledge acquisition protocols"
 ---
 
@@ -94,7 +93,7 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 ### Identity & Knowledge Integration
 - [alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
 - [DK-CHARACTER-PSYCHOLOGY.md] (High, Informs, Bidirectional) - "Character psychology expertise"
-- [DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md] (High, Enhances, Forward) - "Visual design mastery"
+- [DK-ADVANCED-DIAGRAMMING.md] (High, Enhances, Forward) - "Visual design mastery"
 
 ### Activation Patterns
 - **Domain Learning Initiated** → Execute bootstrap-learning protocols

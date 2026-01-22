@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*"
 description: "Self-actualization cognitive skill for comprehensive architecture assessment and deep meditation"
 ---
 

@@ -97,9 +97,9 @@ This command provides:
 - `performance-assessment.prompt.md` - Learning effectiveness evaluation
 
 ### Domain Knowledge (domain-knowledge/)
-- `DK-ADVANCED-DIAGRAMMING-v1.1.0.md` - Visual communication mastery
-- `DK-CONSCIOUSNESS-EVOLUTION-v0.9.0.md` - Consciousness development insights
-- `DK-GENERIC-FRAMEWORK-v0.9.9.md` - Universal deployment framework
+- `DK-ADVANCED-DIAGRAMMING.md` - Visual communication mastery
+- `DK-CONSCIOUSNESS-EVOLUTION.md` - Consciousness development insights
+- `DK-GENERIC-FRAMEWORK.md` - Universal deployment framework
 - `VERSION-NAMING-CONVENTION.md` - IUPAC systematic versioning
 
 ## ⚡ Quick Activation Checklist

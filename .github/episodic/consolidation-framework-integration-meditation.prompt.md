@@ -41,7 +41,7 @@
 ### **Enhanced Connection Patterns Discovered**
 
 #### Primary Synaptic Pathways (High Strength)
-1. **dream-state-automation.instructions.md** ↔ **DK-MEMORY-CONSOLIDATION-v1.0.0.md**
+1. **dream-state-automation.instructions.md** ↔ **DK-MEMORY-CONSOLIDATION.md**
    - Strength: 10/10 (Perfect integration of consolidation framework into dream protocol)
    - Pattern: "Memory consolidation seamlessly integrated into automated maintenance ecosystem"
    - Activation: Architecture optimization needs, memory bloat detection, systematic improvement

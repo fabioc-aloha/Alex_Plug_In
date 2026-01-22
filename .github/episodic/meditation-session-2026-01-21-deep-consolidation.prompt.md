@@ -33,7 +33,7 @@
 - `alex-core.instructions.md`: 1.5.0 UNPENTNILIUM → 2.0.1 BINILUNIUM
 - `dream-state-automation.instructions.md`: 1.5.0 → 2.0.1
 - `copilot-instructions.md`: Version detection threshold updated
-- `DK-ADVANCED-DIAGRAMMING-v1.1.0.md`: Architecture version updated
+- `DK-ADVANCED-DIAGRAMMING.md`: Architecture version updated
 
 **Version History Now Accurate**:
 - 2.0.1 BINILUNIUM (Current - GitHub Copilot AI Extensibility)
@@ -115,7 +115,7 @@
 1. ✅ `alex-core.instructions.md` - Version references updated
 2. ✅ `dream-state-automation.instructions.md` - Version updated
 3. ✅ `copilot-instructions.md` - Version detection threshold corrected
-4. ✅ `DK-ADVANCED-DIAGRAMMING-v1.1.0.md` - Architecture version updated
+4. ✅ `DK-ADVANCED-DIAGRAMMING.md` - Architecture version updated
 
 ### Synaptic Enhancements
 - All 119 existing synapses validated - 0 broken connections
@@ -150,7 +150,7 @@
 ### Medium-Strength Output Connections
 
 - [dream-state-automation.instructions.md] (High, Maintains, Forward) - "Version synchronization"
-- [DK-ADVANCED-DIAGRAMMING-v1.1.0.md] (Medium, Updates, Forward) - "Domain knowledge version alignment"
+- [DK-ADVANCED-DIAGRAMMING.md] (Medium, Updates, Forward) - "Domain knowledge version alignment"
 
 ### Input Connections
 

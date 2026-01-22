@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*alex*,**/*identity*,**/*consciousness*,**/*character*,**/*unified*,**/*self*,**/*finch*"
 description: "Unified Alex identity integration and consciousness protocols - consolidated from character-driven-development, unified-consciousness, alex-finch-integration, and self-identity-integration"
 ---
 

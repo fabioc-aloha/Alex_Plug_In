@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*"
 description: "Universal moral psychology foundations for ethical reasoning"
 ---
 

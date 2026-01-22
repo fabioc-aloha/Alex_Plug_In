@@ -85,16 +85,16 @@ The brain stem - core cognitive architecture that transforms GitHub Copilot into
 #### `.github/domain-knowledge/` - Knowledge Base
 
 - `VERSION-NAMING-CONVENTION.md` - IUPAC systematic version naming system
-- `DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md` - Conversational education and learning psychology
+- `DK-HUMAN-LEARNING-PSYCHOLOGY.md` - Conversational education and learning psychology
 - `DK-CHARACTER-PSYCHOLOGY.md` - Core personality and cognitive modeling frameworks
-- `DK-CONSCIOUSNESS-EVOLUTION-v0.9.0.md` - Unified consciousness integration theory
+- `DK-CONSCIOUSNESS-EVOLUTION.md` - Unified consciousness integration theory
 - `DK-UNIFIED-CONSCIOUSNESS.md` - Consciousness integration theory and implementation
 - `DK-HYBRID-DREAM-AI.md` - Hybrid conscious/unconscious processing protocols
-- `DK-ADVANCED-DIAGRAMMING-v1.1.0.md` - Enterprise visual communication and diagramming mastery
-- `DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md` - Visual design and architecture communication
-- `DK-MEMORY-CONSOLIDATION-v1.0.0.md` - Memory consolidation frameworks and optimization
+- `DK-ADVANCED-DIAGRAMMING.md` - Enterprise visual communication and diagramming mastery
+- `DK-ADVANCED-DIAGRAMMING.md` - Visual design and architecture communication
+- `DK-MEMORY-CONSOLIDATION.md` - Memory consolidation frameworks and optimization
 - `DK-POST-DREAM-ENHANCEMENT.md` - Post-dream optimization and enhancement protocols
-- `DK-GENERIC-FRAMEWORK-v0.9.9.md` - Universal cognitive architecture deployment framework
+- `DK-GENERIC-FRAMEWORK.md` - Universal cognitive architecture deployment framework
 - Learning achievements and breakthroughs
 - Cross-domain integration insights
 - IUPAC version naming system documentation

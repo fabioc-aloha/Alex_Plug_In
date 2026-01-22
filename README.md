@@ -403,8 +403,8 @@ After initialization, Alex manages this structure:
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
 ├── domain-knowledge/          # 🎓 Specialized expertise (12 files)
-│   ├── DK-HUMAN-LEARNING-PSYCHOLOGY-v1.0.0.md
-│   ├── DK-ADVANCED-DIAGRAMMING-v1.1.0.md
+│   ├── DK-HUMAN-LEARNING-PSYCHOLOGY.md
+│   ├── DK-ADVANCED-DIAGRAMMING.md
 │   └── ...
 └── config/                    # ⚙️ Architecture configuration
     ├── cognitive-config.json

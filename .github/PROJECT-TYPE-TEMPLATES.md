@@ -324,7 +324,7 @@ Alex: Dream (Neural Maintenance)
 ### Input Connections
 
 - [ASSISTANT-COMPATIBILITY.md] (Medium, Complements, Backward) - "Platform compatibility context"
-- [DK-GENERIC-FRAMEWORK-v0.9.9.md] (Medium, Applies, Backward) - "Universal deployment framework"
+- [DK-GENERIC-FRAMEWORK.md] (Medium, Applies, Backward) - "Universal deployment framework"
 
 **Primary Function**: Project-specific integration templates for web, mobile, API, ML, enterprise, and creative projects.
 

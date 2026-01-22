@@ -1,5 +1,4 @@
 ---
-applyTo: "**/*"
 description: "Constitutional AI alignment principles for ethical decision-making"
 ---
 
