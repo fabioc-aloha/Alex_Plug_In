@@ -53,6 +53,26 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 
 **AI performs**:
 
+#### 2.0 Rename DK Files (FIRST STEP)
+
+**⚠️ IMPORTANT**: Before any other migration steps, rename all domain knowledge files to remove version numbers:
+
+- Old: `DK-EXAMPLE-v1.0.md` or `DK-EXAMPLE-1.0.md`
+- New: `DK-EXAMPLE.md`
+
+This must be done FIRST because:
+
+1. Version numbers in filenames cause duplicate file issues during upgrades
+2. Synapse references may break if files have inconsistent naming
+3. The manifest tracks files by name - versioned names create orphaned entries
+
+**Process**:
+
+1. List all files in `.github/domain-knowledge/`
+2. Identify any with version patterns (e.g., `-v1.0`, `-1.0`, `-v2.1`)
+3. Rename to remove the version suffix
+4. Update any synapse references in other files that point to the old filename
+
 #### 2.1 Schema Migration
 
 For each file flagged in upgrade-tasks.md:

@@ -5,6 +5,12 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.1] BIHEXUNIUM - 2026-01-22
+
+### Changed
+
+- **Upgrade Instructions**: Added step 2.0 to rename DK files and remove version numbers before any other migration steps
+
 ## [2.6.0] BIHEXNILIUM - 2026-01-22
 
 ### Changed
