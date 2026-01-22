@@ -5,6 +5,36 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] BIHEXNILIUM - 2026-01-22
+
+### Changed
+
+- **Architecture Optimization**: 56% reduction in cognitive load
+  - Condensed `copilot-instructions.md` from 17.5K to 7.7K characters
+  - Removed redundant `applyTo` directives from 8 core instruction files
+  - Moved detailed protocol triggers to dedicated `protocol-triggers.instructions.md`
+  - Removed citations and redundant file lists
+
+- **Domain Knowledge Consolidation**
+  - Merged `DK-VISUAL-ARCHITECTURE-DESIGN` into `DK-ADVANCED-DIAGRAMMING`
+  - Merged `DK-HYBRID-DREAM-AI` + `DK-POST-DREAM-ENHANCEMENT` into `DK-DREAM-PROCESSING`
+  - Reduced from 12 to 10 domain knowledge files
+
+- **Filename Stability**: Removed version numbers from all domain knowledge filenames
+  - Prevents synapse breaks during version updates
+  - Cleaner, more maintainable architecture
+
+### Added
+
+- **New**: `protocol-triggers.instructions.md` - Centralized trigger reference
+- **New**: `DK-DREAM-PROCESSING.md` - Consolidated dream domain knowledge
+
+### Removed
+
+- `DK-VISUAL-ARCHITECTURE-DESIGN-v0.9.9.md` (merged into advanced-diagramming)
+- `DK-HYBRID-DREAM-AI.md` (merged into dream-processing)
+- `DK-POST-DREAM-ENHANCEMENT.md` (merged into dream-processing)
+
 ## [2.0.3] BINILTRIUM - 2026-01-20
 
 ### Added

@@ -659,7 +659,7 @@ I'll acquire domain expertise through conversational interaction:
 **Ready to learn!** Tell me about ${i} - start with the fundamentals or dive into specifics.
 `),{metadata:{command:"learn",action:"domain-acquisition"}}}async function ts(e,t,n,o){return n.progress("\u{1F4CA} Gathering cognitive architecture status..."),n.markdown(`## \u{1F4CA} Alex Cognitive Architecture Status
 
-**Version**: 2.5.0 BIPENTNILIUM
+**Version**: 2.6.0 BIHEXNILIUM
 **Identity**: Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
 ### Core Systems
@@ -854,7 +854,7 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`),{m
 
 `),n.button({command:"alex.selfActualize",title:"\u{1F9D8} Full Self-Actualization",arguments:[]}),n.markdown(`
 
-**Alex v2.5.0 BIPENTNILIUM** - Ready to assist!
+**Alex v2.6.0 BIHEXNILIUM** - Ready to assist!
 
 `),n.markdown(`### What would you like to work on today?
 
@@ -864,7 +864,7 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
 
 ### Protocol Phases
 1. **Synapse Health Validation** - Scanning all synaptic connections
-2. **Version Consistency Check** - Ensuring all files reference v2.5.0
+2. **Version Consistency Check** - Ensuring all files reference v2.6.0
 3. **Memory Architecture Assessment** - Evaluating memory balance
 4. **Recommendation Generation** - Identifying improvements
 5. **Session Documentation** - Creating meditation record

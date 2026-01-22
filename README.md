@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.5.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-2.6.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -64,7 +64,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v2.5.0 |
+| Feature | v1.5.x | v2.6.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 8 commands (including /selfactualize) |
@@ -433,39 +433,31 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v2.5.0 BIPENTNILIUM
+## 🆕 What's New in v2.6.0 BIHEXNILIUM
 
-### 🎉 Self-Actualization Enhanced: Automatic Session Intelligence
+### 🌟 Architecture Optimization: 56% Token Reduction
 
-This release makes self-actualization **pervasive** - Alex automatically assesses architecture health at key moments:
+This release focuses on **cognitive efficiency** - reducing the context window overhead while preserving all capabilities:
 
-#### Automatic Triggers
+#### Key Improvements
 
-| Trigger | What Happens |
-| ------- | ------------ |
-| **Session Greeting** | Quick health check on "Hello", "Hi Alex", etc. |
-| **Meditation Start** | Full self-actualization button offered |
-| **Explicit Command** | Complete 5-phase protocol with session record |
+| Change | Impact |
+| ------ | ------ |
+| **Condensed copilot-instructions.md** | 17.5K → 7.7K chars (56% reduction) |
+| **Consolidated Domain Knowledge** | 12 → 10 files |
+| **Removed filename versions** | No more synapse breaks on updates |
+| **Centralized protocol triggers** | Single reference file |
 
-#### New `/selfactualize` Command
+#### What Changed
 
-```text
-@alex /selfactualize
-```
+- **Merged DK files**: visual-architecture → advanced-diagramming, dream files consolidated
+- **Removed redundant applyTo**: 8 core files now load via copilot-instructions only
+- **New protocol-triggers.instructions.md**: Detailed triggers moved here
+- **Stable filenames**: No more `-v1.0.0` suffixes causing broken synapses
 
-Or via Command Palette: **Alex: Self-Actualize (Deep Meditation)**
+### Previous Release: v2.5.0 BIPENTNILIUM
 
-#### What It Does
-
-1. **Synapse Health Validation** - Scans all 127+ synaptic connections
-2. **Version Consistency Check** - Ensures all memory files reference v2.5.0
-3. **Memory Architecture Assessment** - Evaluates procedural/episodic/domain balance
-4. **Recommendation Generation** - Provides actionable improvements
-5. **Session Documentation** - Creates timestamped record in `.github/episodic/`
-
-### Previous Release: v2.0.1 BINILUNIUM
-
-#### GitHub Copilot AI Extensibility
+#### Self-Actualization Enhanced
 
 This release transforms Alex from a passive context injector into an **active conversational AI agent**.
 
@@ -524,6 +516,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 2.5.0 BIPENTNILIUM • Built on 270+ academic sources
+Version 2.6.0 BIHEXNILIUM • Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn
