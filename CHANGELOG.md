@@ -5,6 +5,26 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] BIHEPTNILIUM - 2026-01-23
+
+### Added
+
+- **Procedural Memory: Release Management** - Deployment scripts, git workflow, MANDATORY pre-release assessment
+- **Procedural Memory: Technical Debt Tracking** - DEBT markers, severity classification, inventory protocol
+- **Procedural Memory: Architecture Decision Records** - ADR templates, workflow, storage conventions
+- **Procedural Memory: Dependency Management** - Security audits, outdated package protocol, major upgrade workflow
+- **Procedural Memory: Code Review Guidelines** - Review checklists, feedback conventions, self-review protocol
+- **Domain Knowledge: Skill Wish List** - ~60 skills for continuous growth with contextual acquisition protocol
+
+### Fixed
+
+- **Synapse Repairs** - Fixed 9 broken connections from v2.6.0 DK file consolidation
+- **Security** - Updated `diff` package to fix DoS vulnerability (CVE)
+
+### Changed
+
+- **Dependencies** - Updated esbuild 0.27.1→0.27.2, fs-extra 11.3.2→11.3.3, @types/vscode 1.106.1→1.108.1
+
 ## [2.6.1] BIHEXUNIUM - 2026-01-22
 
 ### Changed

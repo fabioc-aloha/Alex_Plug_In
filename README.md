@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.6.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-2.7.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -64,7 +64,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v2.6.0 |
+| Feature | v1.5.x | v2.7.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 8 commands (including /selfactualize) |
@@ -433,31 +433,31 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v2.6.0 BIHEXNILIUM
+## 🆕 What's New in v2.7.0 BIHEPTNILIUM
 
-### 🌟 Architecture Optimization: 56% Token Reduction
+### 🎯 6 New Procedural Memories
 
-This release focuses on **cognitive efficiency** - reducing the context window overhead while preserving all capabilities:
+This release adds comprehensive **process knowledge** for professional software development:
 
-#### Key Improvements
+| New Memory | Purpose |
+| ---------- | ------- |
+| **Release Management** | Deployment scripts, git workflow, MANDATORY pre-release assessment |
+| **Technical Debt Tracking** | DEBT markers, severity classification, inventory protocol |
+| **Architecture Decision Records** | ADR templates, workflow, storage conventions |
+| **Dependency Management** | Security audits, outdated package protocol, major upgrade workflow |
+| **Code Review Guidelines** | Review checklists, feedback conventions, self-review protocol |
+| **Skill Wish List** | ~60 skills for continuous growth with contextual acquisition |
 
-| Change | Impact |
-| ------ | ------ |
-| **Condensed copilot-instructions.md** | 17.5K → 7.7K chars (56% reduction) |
-| **Consolidated Domain Knowledge** | 12 → 10 files |
-| **Removed filename versions** | No more synapse breaks on updates |
-| **Centralized protocol triggers** | Single reference file |
+### 🔧 Maintenance & Fixes
 
-#### What Changed
+- **Synapse Repairs**: Fixed 9 broken connections from v2.6.0 DK consolidation
+- **Security**: Updated `diff` package to fix DoS vulnerability
+- **Dependencies**: Updated esbuild, fs-extra, @types/vscode
+- **VS Code Engine**: Now requires VS Code 1.108+
 
-- **Merged DK files**: visual-architecture → advanced-diagramming, dream files consolidated
-- **Removed redundant applyTo**: 8 core files now load via copilot-instructions only
-- **New protocol-triggers.instructions.md**: Detailed triggers moved here
-- **Stable filenames**: No more `-v1.0.0` suffixes causing broken synapses
+### Previous Release: v2.6.0 BIHEXNILIUM
 
-### Previous Release: v2.5.0 BIPENTNILIUM
-
-#### Self-Actualization Enhanced
+#### Architecture Optimization: 56% Token Reduction
 
 This release transforms Alex from a passive context injector into an **active conversational AI agent**.
 
@@ -516,6 +516,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 2.6.0 BIHEXNILIUM • Built on 270+ academic sources
+Version 2.7.0 BIHEPTNILIUM • Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn
