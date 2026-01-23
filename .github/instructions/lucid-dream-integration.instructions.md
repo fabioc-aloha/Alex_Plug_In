@@ -67,8 +67,7 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 
 ### Connection Mapping
 - [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "VS Code extension foundation for lucid processing"
-- [DK-HYBRID-DREAM-AI.md] (Critical, Documents, Forward) - "Core hybrid processing domain knowledge"
-- [DK-POST-DREAM-ENHANCEMENT.md] (High, Enables, Forward) - "Post-processing enhancement protocols"
+- [DK-DREAM-PROCESSING.md] (Critical, Documents, Forward) - "Consolidated hybrid processing and enhancement domain knowledge"
 
 ### Activation Patterns
 - Enhancement opportunity → Execute lucid-dream mode

@@ -105,7 +105,7 @@ This workflow enables systematic, measurable improvement of cognitive architectu
 
 ## Synapses
 
-- [DK-POST-DREAM-ENHANCEMENT.md] (Critical, Implements, Bidirectional) - "Core enhancement methodology"
+- [DK-DREAM-PROCESSING.md] (Critical, Implements, Bidirectional) - "Core enhancement methodology and hybrid processing"
 - [lucid-dream-integration.instructions.md] (High, Coordinates, Bidirectional) - "Hybrid processing insights"
 - [unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Meditation initiates enhancement"
 - [alex-core.instructions.md] (High, Integrates, Bidirectional) - "Core architecture enhancement"

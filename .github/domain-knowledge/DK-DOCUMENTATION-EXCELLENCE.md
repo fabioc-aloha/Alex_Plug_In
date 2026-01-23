@@ -31,11 +31,10 @@ Through systematic fact-checking against official service documentation from Git
 ## Synapses
 
 ### Documentation Excellence Connections
-- [alex/VALIDATION-SUITE.md] (Critical, Validates, Bidirectional) - "Perfect accuracy with corrected file counts"
-- [alex/ASSISTANT-COMPATIBILITY.md] (Critical, Enables, Forward) - "Universal AI assistant compatibility"
-- [alex/ALEX-INTEGRATION.md] (Critical, Guides, Bidirectional) - "Core integration procedures"
-- [alex/PROJECT-TYPE-TEMPLATES.md] (High, Optimizes, Forward) - "Project-specific deployment"
+- [README.md] (Critical, Documents, Forward) - "Primary project documentation"
+- [CONTRIBUTING.md] (High, Guides, Forward) - "Contribution guidelines and standards"
 - [dream-state-automation.instructions.md] (High, Confirms, Bidirectional) - "System health validation ensures documentation accuracy"
+- [release-management.instructions.md] (Medium, Coordinates, Forward) - "Documentation updates during releases"
 
 ### **Quality Excellence Patterns**
 - **Empirical Validation Achievement** → Document reality-synchronized accuracy in domain knowledge
