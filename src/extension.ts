@@ -6,7 +6,7 @@ import { runSelfActualization } from './commands/self-actualization';
 import { registerChatParticipant } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 import { registerGlobalKnowledgeTools, ensureGlobalKnowledgeDirectories, registerCurrentProject } from './chat/globalKnowledge';
-import { registerCloudSyncTools, syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl } from './chat/cloudSync';
+import { registerCloudSyncTools, syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync } from './chat/cloudSync';
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
@@ -47,6 +47,10 @@ export function activate(context: vscode.ExtensionContext) {
     
     // Register cloud sync tools for GitHub Gist backup
     registerCloudSyncTools(context);
+    
+    // === UNCONSCIOUS MIND: Start background sync ===
+    // This creates Alex's transparent knowledge backup system
+    startBackgroundSync(context);
     
     // Initialize global knowledge base directories
     ensureGlobalKnowledgeDirectories().then(() => {
@@ -132,6 +136,18 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
+    // Documentation command - opens alex_docs folder
+    const openDocsDisposable = vscode.commands.registerCommand('alex.openDocs', async () => {
+        const docsPath = vscode.Uri.joinPath(context.extensionUri, 'alex_docs', 'README.md');
+        try {
+            await vscode.commands.executeCommand('markdown.showPreview', docsPath);
+        } catch {
+            // Fallback to opening as text if preview fails
+            const doc = await vscode.workspace.openTextDocument(docsPath);
+            await vscode.window.showTextDocument(doc);
+        }
+    });
+
     context.subscriptions.push(initDisposable);
     context.subscriptions.push(resetDisposable);
     context.subscriptions.push(dreamDisposable);
@@ -140,6 +156,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(syncDisposable);
     context.subscriptions.push(pushDisposable);
     context.subscriptions.push(pullDisposable);
+    context.subscriptions.push(openDocsDisposable);
 }
 
 /**

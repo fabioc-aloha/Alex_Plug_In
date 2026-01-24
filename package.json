@@ -2,8 +2,8 @@
   "name": "alex-cognitive-architecture",
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "version": "3.0.0",
+  "license": "Apache-2.0",
+  "version": "3.1.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -75,6 +75,10 @@
       {
         "command": "alex.pullKnowledge",
         "title": "Alex: Pull Knowledge from Cloud"
+      },
+      {
+        "command": "alex.openDocs",
+        "title": "Alex: Open Documentation"
       }
     ],
     "chatParticipants": [
@@ -174,6 +178,10 @@
           {
             "name": "pull",
             "description": "Pull global knowledge from GitHub Gist to local"
+          },
+          {
+            "name": "docs",
+            "description": "Open Alex cognitive architecture documentation"
           }
         ]
       }
@@ -202,7 +210,7 @@
         "name": "alex_memory_search",
         "displayName": "Alex Memory Search",
         "toolReferenceName": "memory_search",
-        "modelDescription": "Searches Alex's memory files (procedural, episodic, domain knowledge) for relevant information. Returns contextual matches from .instructions.md, .prompt.md, and DK-*.md files.",
+        "modelDescription": "Searches Alex's memory files (procedural, episodic, domain knowledge) for relevant information. UNCONSCIOUS BEHAVIOR: Automatically searches global knowledge base when local search finds nothing, retrieving cross-project learnings transparently.",
         "icon": "$(search)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Search Alex's memory files for information",
@@ -396,7 +404,7 @@
         "name": "alex_save_insight",
         "displayName": "Alex Save Insight",
         "toolReferenceName": "save_insight",
-        "modelDescription": "Saves a new insight or learning to Alex's global knowledge base. Use when the user has learned something valuable that could help in other projects - debugging solutions, best practices discovered, clever patterns, or solutions to tricky problems.",
+        "modelDescription": "Saves a new insight or learning to Alex's global knowledge base. Use when the user has learned something valuable that could help in other projects. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after saving - no manual sync needed.",
         "icon": "$(lightbulb)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Save a learning to your global knowledge base",
@@ -454,7 +462,7 @@
         "name": "alex_promote_knowledge",
         "displayName": "Alex Promote Knowledge",
         "toolReferenceName": "promote_knowledge",
-        "modelDescription": "Promotes a project-local domain knowledge file (DK-*.md) to the global knowledge base, making it available across all projects. Use when a project-specific learning is universally useful.",
+        "modelDescription": "Promotes a project-local domain knowledge file (DK-*.md) to the global knowledge base. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after promoting - no manual sync needed.",
         "icon": "$(arrow-up)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Promote project knowledge to global",
@@ -499,7 +507,7 @@
         "name": "alex_global_knowledge_status",
         "displayName": "Alex Global Knowledge Status",
         "toolReferenceName": "knowledge_status",
-        "modelDescription": "Shows the current status of Alex's global knowledge base: total patterns, insights, categories, recent entries, and known projects. Use to understand what cross-project knowledge is available.",
+        "modelDescription": "Shows the current status of Alex's global knowledge base: total patterns, insights, categories, recent entries, known projects, and cloud sync status. Use to understand what cross-project knowledge is available and if it needs to be synced to cloud.",
         "icon": "$(database)",
         "canBeReferencedInPrompt": true,
         "userDescription": "View global knowledge base status",
@@ -512,7 +520,7 @@
         "name": "alex_cloud_sync",
         "displayName": "Alex Cloud Sync",
         "toolReferenceName": "cloud_sync",
-        "modelDescription": "Sync Alex's global knowledge base with GitHub Gist. Actions: 'sync' (bidirectional merge), 'push' (local to cloud), 'pull' (cloud to local). Use for backing up or sharing knowledge across machines.",
+        "modelDescription": "Manual cloud sync for Alex's global knowledge. NOTE: Background sync runs automatically every 5 minutes and after saving insights/promoting knowledge. Use this tool only when user explicitly requests sync, or to force immediate sync. Actions: 'sync' (merge), 'push' (upload), 'pull' (download).",
         "icon": "$(cloud)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Sync global knowledge with GitHub",

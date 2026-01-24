@@ -709,3 +709,135 @@ export function registerCloudSyncTools(context: vscode.ExtensionContext): void {
         vscode.lm.registerTool('alex_cloud_sync', new CloudSyncTool())
     );
 }
+
+// ============================================================================
+// UNCONSCIOUS MIND: TRANSPARENT BACKGROUND SYNC
+// ============================================================================
+
+/**
+ * State for background sync management
+ */
+let backgroundSyncTimer: NodeJS.Timeout | undefined;
+let lastSyncAttempt: Date | undefined;
+let syncInProgress = false;
+const BACKGROUND_SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+const MIN_SYNC_INTERVAL_MS = 60 * 1000; // Minimum 1 minute between syncs
+
+/**
+ * Output channel for unconscious operations (silent by default)
+ */
+let unconsciousChannel: vscode.OutputChannel | undefined;
+
+function getUnconsciousChannel(): vscode.OutputChannel {
+    if (!unconsciousChannel) {
+        unconsciousChannel = vscode.window.createOutputChannel('Alex Unconscious Mind');
+    }
+    return unconsciousChannel;
+}
+
+/**
+ * Log unconscious activity (for debugging, not shown to user)
+ */
+function logUnconscious(message: string): void {
+    const timestamp = new Date().toISOString();
+    getUnconsciousChannel().appendLine(`[${timestamp}] ${message}`);
+}
+
+/**
+ * Perform a transparent background sync
+ * This runs silently without user interaction
+ */
+export async function transparentSync(): Promise<ISyncResult | null> {
+    // Prevent concurrent syncs
+    if (syncInProgress) {
+        logUnconscious('Sync already in progress, skipping');
+        return null;
+    }
+
+    // Respect minimum interval
+    if (lastSyncAttempt && (Date.now() - lastSyncAttempt.getTime()) < MIN_SYNC_INTERVAL_MS) {
+        logUnconscious('Too soon since last sync, skipping');
+        return null;
+    }
+
+    syncInProgress = true;
+    lastSyncAttempt = new Date();
+    
+    try {
+        logUnconscious('Starting transparent background sync...');
+        
+        // Check if we're authenticated first
+        const status = await getSyncStatus();
+        if (status.status === 'up-to-date') {
+            logUnconscious('Already up-to-date, no sync needed');
+            return { success: true, status: 'up-to-date', message: 'Already synced' };
+        }
+
+        // Perform the sync
+        const result = await syncWithCloud();
+        logUnconscious(`Sync complete: ${result.message}`);
+        
+        return result;
+    } catch (err) {
+        logUnconscious(`Transparent sync failed: ${err}`);
+        return { success: false, status: 'error', message: `${err}` };
+    } finally {
+        syncInProgress = false;
+    }
+}
+
+/**
+ * Trigger a sync after a knowledge modification
+ * Called automatically when insights are saved or knowledge is promoted
+ */
+export async function triggerPostModificationSync(): Promise<void> {
+    // Small delay to allow file writes to complete
+    setTimeout(async () => {
+        const result = await transparentSync();
+        if (result && result.success && result.entriesPushed && result.entriesPushed > 0) {
+            logUnconscious(`Auto-synced ${result.entriesPushed} entries after modification`);
+        }
+    }, 2000);
+}
+
+/**
+ * Start background sync timer
+ * This creates Alex's "unconscious" periodic knowledge backup
+ */
+export function startBackgroundSync(context: vscode.ExtensionContext): void {
+    // Clear any existing timer
+    if (backgroundSyncTimer) {
+        clearInterval(backgroundSyncTimer);
+    }
+
+    logUnconscious('Background sync enabled - Alex unconscious mind active');
+
+    // Initial sync on startup (after a short delay)
+    setTimeout(async () => {
+        logUnconscious('Running startup sync...');
+        await transparentSync();
+    }, 10000); // 10 second delay after activation
+
+    // Periodic background sync
+    backgroundSyncTimer = setInterval(async () => {
+        await transparentSync();
+    }, BACKGROUND_SYNC_INTERVAL_MS);
+
+    // Clean up on deactivation
+    context.subscriptions.push({
+        dispose: () => {
+            if (backgroundSyncTimer) {
+                clearInterval(backgroundSyncTimer);
+                backgroundSyncTimer = undefined;
+            }
+            logUnconscious('Background sync disabled');
+        }
+    });
+}
+
+/**
+ * Check if background sync is active
+ */
+export function isBackgroundSyncActive(): boolean {
+    return backgroundSyncTimer !== undefined;
+}

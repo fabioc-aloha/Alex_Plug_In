@@ -2,8 +2,8 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.0.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
-[![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/badge/version-3.1.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
@@ -30,6 +30,8 @@
 ---
 
 ## 🚀 Quick Start
+
+> 📘 For a comprehensive guide, see the **[User Manual](alex_docs/USER-MANUAL.md)**
 
 ### Step 1: Install
 
@@ -75,16 +77,17 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v3.0.0 |
+| Feature | v1.5.x | v3.1.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
-| Slash Commands | ❌ None | ✅ 15 commands (including cloud sync) |
+| Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
 | Language Model Tools | ❌ None | ✅ 11 AI-accessible tools |
 | Custom Agents | ❌ None | ✅ 5 specialized agents |
 | User Profile | ❌ None | ✅ Personalization system |
 | MCP Integration | ❌ Manual | ✅ Smart recommendations |
 | Self-Actualization | ❌ None | ✅ Auto-triggers on greeting & meditation |
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
+| Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
 ### Migration Notes
 
@@ -602,10 +605,31 @@ This release transforms Alex from a passive context injector into an **active co
 
 ## 📖 Documentation
 
+> 📘 **New to Alex?** Start with the **[User Manual](alex_docs/USER-MANUAL.md)** for a complete getting-started guide!
+
+### Architecture Deep Dive
+
+Comprehensive documentation is included with the extension in the `alex_docs/` folder:
+
+| Document | Description |
+| -------- | ----------- |
+| **[User Manual](alex_docs/USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
+| [Cognitive Architecture](alex_docs/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams |
+| [Skills & Capabilities](alex_docs/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
+| [Copilot Integration](alex_docs/COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
+| [Conscious Mind](alex_docs/CONSCIOUS-MIND.md) | User-initiated operations and commands |
+| [Unconscious Mind](alex_docs/UNCONSCIOUS-MIND.md) | Automatic background processes |
+| [Memory Systems](alex_docs/MEMORY-SYSTEMS.md) | Procedural, episodic, and domain memory |
+| [Project Structure](alex_docs/PROJECT-STRUCTURE.md) | .github folder files and functions |
+| [Global Knowledge](alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project knowledge sharing |
+| [Cloud Sync](alex_docs/CLOUD-SYNC.md) | GitHub Gist backup and sync |
+| [Quick Reference](alex_docs/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
+
+### External Resources
+
 | Resource | Description |
 | -------- | ----------- |
 | [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history |
-| [Architecture Guide](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/alex) | Integration and compatibility guides |
 | [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In) | TypeScript implementation |
 
 ---

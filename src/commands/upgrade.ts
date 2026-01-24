@@ -99,6 +99,77 @@ async function saveManifest(rootPath: string, manifest: Manifest): Promise<void>
 }
 
 /**
+ * Auto-merge brain file (copilot-instructions.md)
+ * Preserves user customizations while updating system sections
+ */
+async function autoMergeBrainFile(
+    rootPath: string,
+    extensionPath: string,
+    newVersion: string
+): Promise<{ success: boolean; reason?: string }> {
+    const userFile = path.join(rootPath, '.github', 'copilot-instructions.md');
+    const newFile = path.join(extensionPath, '.github', 'copilot-instructions.md');
+    
+    if (!await fs.pathExists(userFile) || !await fs.pathExists(newFile)) {
+        return { success: false, reason: 'File not found' };
+    }
+    
+    try {
+        const userContent = await fs.readFile(userFile, 'utf8');
+        const newContent = await fs.readFile(newFile, 'utf8');
+        
+        // Extract user's domain slots (P5-P7 assignments)
+        const domainSlotsMatch = userContent.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/);
+        const userDomainSlots = domainSlotsMatch ? domainSlotsMatch[0] : null;
+        
+        // Extract user's custom synapses (any added by user beyond defaults)
+        const userSynapsesSection = userContent.match(/## Synapses[\s\S]*?(?=##|$)/);
+        
+        // Check for heavy user customization that requires manual merge
+        const userLines = userContent.split('\n').length;
+        const newLines = newContent.split('\n').length;
+        
+        // If user file is significantly different (>20% longer), require manual merge
+        if (userLines > newLines * 1.2) {
+            return { success: false, reason: 'User file has significant customizations' };
+        }
+        
+        // Check for custom sections (user added their own ## headers)
+        const userHeaders = (userContent.match(/^## [^\n]+/gm) || []) as string[];
+        const newHeaders = (newContent.match(/^## [^\n]+/gm) || []) as string[];
+        const customHeaders = userHeaders.filter(h => !newHeaders.includes(h));
+        
+        if (customHeaders.length > 2) {
+            return { success: false, reason: `User has ${customHeaders.length} custom sections` };
+        }
+        
+        // Safe to auto-merge: Start with new content
+        let mergedContent = newContent;
+        
+        // Preserve user's domain slots if they have customized them
+        if (userDomainSlots && userDomainSlots.includes('P5') && !userDomainSlots.includes('Available for')) {
+            const defaultDomainSlots = mergedContent.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/);
+            if (defaultDomainSlots) {
+                mergedContent = mergedContent.replace(defaultDomainSlots[0], userDomainSlots);
+            }
+        }
+        
+        // Update version number
+        mergedContent = mergedContent.replace(
+            /\*\*Version\*\*:\s*[\d.]+\s*[A-Z]*/,
+            `**Version**: ${newVersion}`
+        );
+        
+        // Write merged content
+        await fs.writeFile(userFile, mergedContent, 'utf8');
+        
+        return { success: true };
+    } catch (error: any) {
+        return { success: false, reason: error.message };
+    }
+}
+
+/**
  * Scan file for old synapse patterns that need migration
  */
 async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
@@ -388,18 +459,25 @@ async function performUpgrade(
                 }
             }
 
-            // Step 5: Add copilot-instructions.md merge task
-            progress.report({ message: "Preparing merge tasks...", increment: 10 });
-            report.migrationTasks.push({
-                file: '.github/copilot-instructions.md',
-                type: 'merge-required',
-                description: 'Core brain file requires intelligent merge',
-                details: [
-                    'UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands',
-                    'PRESERVE: Domain slot assignments (P5-P7), user-added memory file references',
-                    'REVIEW: Any custom sections added by user'
-                ]
-            });
+            // Step 5: Auto-merge copilot-instructions.md if possible
+            progress.report({ message: "Merging core brain file...", increment: 10 });
+            const brainMergeResult = await autoMergeBrainFile(rootPath, extensionPath, newVersion);
+            if (brainMergeResult.success) {
+                report.updated.push('.github/copilot-instructions.md (auto-merged)');
+            } else {
+                // Only add merge task if auto-merge failed
+                report.migrationTasks.push({
+                    file: '.github/copilot-instructions.md',
+                    type: 'merge-required',
+                    description: 'Core brain file requires manual merge',
+                    details: [
+                        `Auto-merge failed: ${brainMergeResult.reason}`,
+                        'UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands',
+                        'PRESERVE: Domain slot assignments (P5-P7), user-added memory file references',
+                        'REVIEW: Any custom sections added by user'
+                    ]
+                });
+            }
 
             // Step 6: Update system files (instructions and prompts)
             progress.report({ message: "Updating system files...", increment: 20 });

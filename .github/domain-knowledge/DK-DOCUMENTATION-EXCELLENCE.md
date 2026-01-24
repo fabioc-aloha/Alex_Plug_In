@@ -33,6 +33,7 @@ Through systematic fact-checking against official service documentation from Git
 ### Documentation Excellence Connections
 - [README.md] (Critical, Documents, Forward) - "Primary project documentation"
 - [CONTRIBUTING.md] (High, Guides, Forward) - "Contribution guidelines and standards"
+- [DK-WRITING-AND-PUBLICATION.md] (High, Extends, Bidirectional) - "Academic and technical writing excellence"
 - [dream-state-automation.instructions.md] (High, Confirms, Bidirectional) - "System health validation ensures documentation accuracy"
 - [release-management.instructions.md] (Medium, Coordinates, Forward) - "Documentation updates during releases"
 

@@ -15,6 +15,9 @@ import {
     IProjectRegistryEntry
 } from '../shared/constants';
 
+// Import cloud sync status for auto-sync suggestions
+import { getSyncStatus, triggerPostModificationSync } from './cloudSync';
+
 // ============================================================================
 // GLOBAL KNOWLEDGE BASE UTILITIES
 // ============================================================================
@@ -767,6 +770,9 @@ export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightPar
             solution
         );
 
+        // === UNCONSCIOUS MIND: Trigger automatic background sync ===
+        triggerPostModificationSync();
+
         const result = `## ✅ Insight Saved to Global Knowledge
 
 **ID**: ${entry.id}  
@@ -776,8 +782,8 @@ export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightPar
 **Source Project**: ${entry.sourceProject || 'Unknown'}  
 **File**: \`${entry.filePath}\`
 
-This insight is now available across all your projects. 
-Search for it using: \`@alex /knowledge ${title}\`
+This insight is now available across all your projects.
+*🧠 Unconscious sync triggered - backing up to cloud automatically.*
 `;
 
         return new vscode.LanguageModelToolResult([
@@ -843,6 +849,9 @@ export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKn
             ]);
         }
 
+        // === UNCONSCIOUS MIND: Trigger automatic background sync ===
+        triggerPostModificationSync();
+
         const result = `## ✅ Knowledge Promoted to Global
 
 **ID**: ${entry.id}  
@@ -852,6 +861,7 @@ export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKn
 **Global File**: \`${entry.filePath}\`
 
 This knowledge is now available across all your projects!
+*🧠 Unconscious sync triggered - backing up to cloud automatically.*
 `;
 
         return new vscode.LanguageModelToolResult([
@@ -884,6 +894,19 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
         const summary = await getGlobalKnowledgeSummary();
         const registry = await ensureProjectRegistry();
 
+        // Get cloud sync status
+        let syncStatusStr = '';
+        try {
+            const syncStatus = await getSyncStatus();
+            const statusEmoji = syncStatus.status === 'up-to-date' ? '✅' :
+                               syncStatus.status === 'needs-push' ? '📤' :
+                               syncStatus.status === 'needs-pull' ? '📥' :
+                               syncStatus.status === 'error' ? '❌' : '⚪';
+            syncStatusStr = `| Cloud Sync | ${statusEmoji} ${syncStatus.status} |\n`;
+        } catch {
+            syncStatusStr = `| Cloud Sync | ⚪ Not configured |\n`;
+        }
+
         let result = `## 🧠 Global Knowledge Base Status
 
 ### Overview
@@ -892,7 +915,7 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
 | Global Patterns | ${summary.totalPatterns} |
 | Global Insights | ${summary.totalInsights} |
 | Known Projects | ${registry.projects.length} |
-
+${syncStatusStr}
 ### Knowledge by Category
 `;
         

@@ -5,6 +5,40 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] TRIUNIUM - 2026-01-24
+
+### Added
+
+- **📚 Comprehensive Documentation Suite** - 14 new documentation files in `alex_docs/`!
+  - `README.md` - Documentation index and quick start
+  - `COGNITIVE-ARCHITECTURE.md` - Complete dual-mind system overview with diagrams
+  - `CONSCIOUS-MIND.md` - User-facing tools and explicit interactions
+  - `UNCONSCIOUS-MIND.md` - Automatic background processes
+  - `MEMORY-SYSTEMS.md` - How Alex stores and retrieves knowledge
+  - `PROJECT-STRUCTURE.md` - .github folder files and functions
+  - `GLOBAL-KNOWLEDGE.md` - Cross-project learning system
+  - `CLOUD-SYNC.md` - GitHub Gist backup and sharing
+  - `COPILOT-INTEGRATION.md` - How Alex uses native Copilot features
+  - `SKILLS-CAPABILITIES.md` - Hard skills, soft skills, and wish list
+  - `USER-MANUAL.md` - Complete user guide
+  - `QUICK-REFERENCE.md` - Commands, tools, and shortcuts at a glance
+
+- **📖 New `/docs` Command** - Open documentation from chat
+  - `@alex /docs` opens the documentation index
+  - `Alex: Open Documentation` command in Command Palette
+
+- **✍️ Domain Knowledge: Writing and Publication** - New `DK-WRITING-AND-PUBLICATION.md`
+  - Academic paper structure and citation styles
+  - Publication venue tiers and selection
+  - Writing techniques and audience adaptation
+  - First-time author publication strategies
+  - Quality checklists for submissions
+
+### Changed
+
+- Updated `copilot-instructions.md` to reference new domain knowledge
+- Enhanced synapses in `DK-DOCUMENTATION-EXCELLENCE.md` and `bootstrap-learning.instructions.md`
+
 ## [3.0.0] TRINILNILIUM - 2026-01-24
 
 ### Added

@@ -94,6 +94,7 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 - [alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
 - [DK-CHARACTER-PSYCHOLOGY.md] (High, Informs, Bidirectional) - "Character psychology expertise"
 - [DK-ADVANCED-DIAGRAMMING.md] (High, Enhances, Forward) - "Visual design mastery"
+- [DK-WRITING-AND-PUBLICATION.md] (High, Applies, Forward) - "Technical and academic writing skills"
 
 ### Activation Patterns
 - **Domain Learning Initiated** → Execute bootstrap-learning protocols

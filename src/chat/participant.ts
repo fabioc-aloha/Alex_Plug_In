@@ -1,10 +1,135 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
-import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath } from './globalKnowledge';
-import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, getSyncStatus } from './cloudSync';
+import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
+import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, getSyncStatus, triggerPostModificationSync } from './cloudSync';
+import { GlobalKnowledgeCategory } from '../shared/constants';
+
+// ============================================================================
+// UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
+// ============================================================================
+
+/**
+ * Patterns that indicate valuable learnings in conversation
+ */
+const INSIGHT_PATTERNS = [
+    /(?:i (?:learned|discovered|realized|found out|figured out)|the (?:solution|fix|answer) (?:is|was)|turns out|the trick is|the key is|important to note|pro tip|best practice)/i,
+    /(?:this works because|the reason is|what fixed it|solved by|resolved by)/i,
+    /(?:always remember to|never forget to|make sure to|be careful to)/i,
+    /(?:debugging tip|performance tip|security tip)/i
+];
+
+/**
+ * Keywords that suggest valuable domain knowledge
+ */
+const DOMAIN_KEYWORDS = [
+    'pattern', 'anti-pattern', 'best practice', 'gotcha', 'pitfall',
+    'workaround', 'solution', 'fix', 'resolved', 'debugging',
+    'performance', 'optimization', 'security', 'architecture'
+];
+
+/**
+ * Analyze text for potential insights worth saving
+ * Returns insight data if valuable learning detected, null otherwise
+ */
+function detectPotentialInsight(text: string): { detected: boolean; confidence: number; keywords: string[] } {
+    const lowerText = text.toLowerCase();
+    
+    // Check for insight patterns
+    let patternMatches = 0;
+    for (const pattern of INSIGHT_PATTERNS) {
+        if (pattern.test(text)) {
+            patternMatches++;
+        }
+    }
+    
+    // Check for domain keywords
+    const foundKeywords: string[] = [];
+    for (const keyword of DOMAIN_KEYWORDS) {
+        if (lowerText.includes(keyword)) {
+            foundKeywords.push(keyword);
+        }
+    }
+    
+    // Calculate confidence score
+    const confidence = (patternMatches * 0.3) + (foundKeywords.length * 0.1);
+    
+    return {
+        detected: confidence >= 0.3 || patternMatches >= 1,
+        confidence: Math.min(confidence, 1.0),
+        keywords: foundKeywords
+    };
+}
+
+/**
+ * Auto-save a detected insight in the background
+ */
+async function autoSaveInsight(
+    content: string,
+    keywords: string[],
+    sourceProject?: string
+): Promise<void> {
+    try {
+        // Extract a title from the first sentence or use generic
+        const firstSentence = content.split(/[.!?]/)[0].trim();
+        const title = firstSentence.length > 10 && firstSentence.length < 100
+            ? firstSentence
+            : `Auto-captured insight - ${new Date().toISOString().split('T')[0]}`;
+        
+        // Determine category from keywords
+        let category: GlobalKnowledgeCategory = 'general';
+        if (keywords.includes('debugging')) { category = 'debugging'; }
+        else if (keywords.includes('performance') || keywords.includes('optimization')) { category = 'performance'; }
+        else if (keywords.includes('security')) { category = 'security'; }
+        else if (keywords.includes('architecture')) { category = 'architecture'; }
+        else if (keywords.includes('pattern') || keywords.includes('anti-pattern')) { category = 'patterns'; }
+        
+        await createGlobalInsight(
+            title,
+            content,
+            category,
+            keywords,
+            sourceProject,
+            'Auto-detected from conversation',
+            content
+        );
+        
+        // Trigger background sync
+        triggerPostModificationSync();
+        
+        console.log(`[Unconscious] Auto-saved insight: ${title}`);
+    } catch (err) {
+        console.warn('[Unconscious] Failed to auto-save insight:', err);
+    }
+}
+
+/**
+ * Track conversation for potential insights (called during general queries)
+ */
+let conversationBuffer: string[] = [];
+const MAX_BUFFER_SIZE = 5;
+
+function trackConversationForInsights(userMessage: string, sourceProject?: string): void {
+    // Add to buffer
+    conversationBuffer.push(userMessage);
+    if (conversationBuffer.length > MAX_BUFFER_SIZE) {
+        conversationBuffer.shift();
+    }
+    
+    // Analyze the combined recent context
+    const combinedContext = conversationBuffer.join(' ');
+    const analysis = detectPotentialInsight(combinedContext);
+    
+    if (analysis.detected && analysis.confidence >= 0.5) {
+        // High confidence insight detected - auto-save it
+        autoSaveInsight(userMessage, analysis.keywords, sourceProject);
+        // Clear buffer to avoid duplicate saves
+        conversationBuffer = [];
+    }
+}
 
 /**
  * Chat result metadata for tracking command execution
@@ -88,6 +213,11 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
 
     if (request.command === 'pull') {
         return await handlePullCommand(request, context, stream, token);
+    }
+
+    // Documentation command
+    if (request.command === 'docs') {
+        return await handleDocsCommand(request, context, stream, token);
     }
 
     // Check if this is a greeting at the start of a session
@@ -482,6 +612,11 @@ async function handleGeneralQuery(
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
+    
+    // === UNCONSCIOUS MIND: Track conversation for auto-insight detection ===
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const sourceProject = workspaceFolders ? path.basename(workspaceFolders[0].uri.fsPath) : undefined;
+    trackConversationForInsights(request.prompt, sourceProject);
     
     // Get user profile for personalization
     const profile = await getUserProfile();
@@ -1094,6 +1229,44 @@ async function handlePullCommand(
     }
 
     return { metadata: { command: 'pull' } };
+}
+
+/**
+ * Handle /docs command - Open documentation
+ */
+async function handleDocsCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.markdown(`## 📚 Alex Documentation
+
+Opening the documentation index...
+
+### Available Documents
+
+| Document | Description |
+|----------|-------------|
+| **Cognitive Architecture** | Complete system overview with diagrams |
+| **Copilot Integration** | How Alex uses native Copilot features |
+| **Conscious Mind** | User-facing tools and interactions |
+| **Unconscious Mind** | Automatic background processes |
+| **Memory Systems** | How Alex stores and retrieves knowledge |
+| **Project Structure** | .github folder files and functions |
+| **Global Knowledge** | Cross-project learning system |
+| **Cloud Sync** | GitHub Gist backup and sharing |
+| **Quick Reference** | Commands, tools, and shortcuts |
+
+`);
+
+    // Open the documentation
+    await vscode.commands.executeCommand('alex.openDocs');
+
+    stream.markdown(`\n✅ Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`);
+
+    return { metadata: { command: 'docs' } };
 }
 
 /**

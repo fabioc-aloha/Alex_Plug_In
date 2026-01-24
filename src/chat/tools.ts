@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { searchGlobalKnowledge } from './globalKnowledge';
 
 /**
  * Tool input parameters interfaces
@@ -260,21 +261,55 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
             }
         }
 
+        // === UNCONSCIOUS MIND: Auto-fallback to Global Knowledge ===
+        // If local search found nothing, automatically search global knowledge
+        let globalResults: { entry: { title: string; type: string; category: string; tags: string[]; summary: string }; relevance: number }[] = [];
         if (results.length === 0) {
+            try {
+                globalResults = await searchGlobalKnowledge(options.input.query, { limit: 5 });
+            } catch {
+                // Silently continue if global search fails
+            }
+        }
+
+        if (results.length === 0 && globalResults.length === 0) {
             return new vscode.LanguageModelToolResult([
-                new vscode.LanguageModelTextPart(`No matches found for "${options.input.query}" in ${memoryType} memory files.`)
+                new vscode.LanguageModelTextPart(`No matches found for "${options.input.query}" in local ${memoryType} memory or global knowledge base.`)
             ]);
         }
 
-        let resultText = `## Memory Search Results for "${options.input.query}"\n\n`;
-        resultText += `Found ${results.length} file(s) with matches:\n\n`;
+        let resultText = '';
+        
+        // Local results
+        if (results.length > 0) {
+            resultText += `## Local Memory Results for "${options.input.query}"\n\n`;
+            resultText += `Found ${results.length} file(s) with matches:\n\n`;
 
-        for (const result of results.slice(0, 5)) { // Limit to 5 files
-            resultText += `### ${result.file}\n`;
-            for (const match of result.matches) {
-                resultText += `\`\`\`\n${match}\n\`\`\`\n`;
+            for (const result of results.slice(0, 5)) { // Limit to 5 files
+                resultText += `### ${result.file}\n`;
+                for (const match of result.matches) {
+                    resultText += `\`\`\`\n${match}\n\`\`\`\n`;
+                }
+                resultText += '\n';
             }
-            resultText += '\n';
+        }
+
+        // Global knowledge results (automatic fallback or supplement)
+        if (globalResults.length > 0) {
+            if (results.length === 0) {
+                resultText += `## 🌐 Global Knowledge Results (Unconscious Retrieval)\n\n`;
+                resultText += `*Local search found nothing. Automatically searched cross-project knowledge:*\n\n`;
+            } else {
+                resultText += `## 🌐 Related Global Knowledge\n\n`;
+            }
+            
+            for (const { entry } of globalResults.slice(0, 3)) {
+                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
+                resultText += `### ${typeEmoji} ${entry.title}\n`;
+                resultText += `- **Type**: ${entry.type} | **Category**: ${entry.category}\n`;
+                resultText += `- **Tags**: ${entry.tags.join(', ')}\n`;
+                resultText += `- **Summary**: ${entry.summary}\n\n`;
+            }
         }
 
         return new vscode.LanguageModelToolResult([

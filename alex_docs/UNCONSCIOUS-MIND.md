@@ -1,0 +1,383 @@
+# 🌙 Unconscious Mind
+
+> Automatic processes that run transparently without user intervention
+
+---
+
+## Overview
+
+The **Unconscious Mind** represents Alex's automatic, always-running processes. These are fast, effortless operations analogous to System 1 thinking in cognitive psychology. They handle routine tasks without requiring user attention.
+
+```mermaid
+graph TB
+    subgraph "🌙 Unconscious Mind"
+        subgraph "Background Processes"
+            BGS[Background Sync<br/>Every 5 minutes]
+            AID[Auto-Insight Detection<br/>Pattern matching in conversations]
+            AFS[Auto-Fallback Search<br/>Global knowledge when local empty]
+        end
+
+        subgraph "Triggers"
+            TIME[Timer Events]
+            MOD[Knowledge Modifications]
+            SEARCH[Empty Search Results]
+            CONV[Conversation Analysis]
+        end
+
+        subgraph "Actions"
+            SYNC[Cloud Sync]
+            SAVE[Save Insight]
+            AUGMENT[Augment Results]
+        end
+    end
+
+    TIME --> BGS
+    MOD --> BGS
+    BGS --> SYNC
+
+    CONV --> AID
+    AID --> SAVE
+    SAVE --> SYNC
+
+    SEARCH --> AFS
+    AFS --> AUGMENT
+```
+
+---
+
+## Background Cloud Sync
+
+### What It Does
+
+Automatically backs up your global knowledge to GitHub Gist without any user action.
+
+### When It Runs
+
+| Trigger | Timing |
+| --- | --- |
+| Startup | 10 seconds after VS Code activates |
+| Periodic | Every 5 minutes while VS Code is open |
+| Post-modification | 2 seconds after saving insight or promoting knowledge |
+
+### How It Works
+
+```mermaid
+sequenceDiagram
+    participant Timer
+    participant Sync as Background Sync
+    participant Local as Local Knowledge
+    participant Cloud as GitHub Gist
+
+    Timer->>Sync: Trigger (5 min interval)
+    Sync->>Sync: Check if sync needed
+
+    alt Already synced
+        Sync->>Sync: Skip (up-to-date)
+    else Changes detected
+        Sync->>Local: Read index
+        Sync->>Cloud: Bidirectional merge
+        Cloud-->>Sync: Updated entries
+        Sync->>Local: Update local
+        Sync->>Sync: Log to output channel
+    end
+```
+
+### Logging
+
+All unconscious activity is logged to the "Alex Unconscious Mind" output channel:
+
+```
+[2026-01-24T10:30:00.000Z] Background sync enabled - Alex unconscious mind active
+[2026-01-24T10:30:10.000Z] Running startup sync...
+[2026-01-24T10:30:12.000Z] Sync complete: 3 pushed, 0 pulled
+[2026-01-24T10:35:00.000Z] Already up-to-date, no sync needed
+```
+
+To view: **View → Output → Select "Alex Unconscious Mind"**
+
+---
+
+## Auto-Insight Detection
+
+### What It Does
+
+Monitors conversations for valuable learnings and automatically saves them to the global knowledge base.
+
+### Pattern Detection
+
+The system looks for phrases indicating valuable insights:
+
+**Learning Indicators:**
+
+- "I learned...", "I discovered...", "I realized..."
+- "The solution is...", "The fix is...", "What fixed it..."
+- "Turns out...", "The trick is...", "The key is..."
+
+**Domain Keywords:**
+
+- pattern, anti-pattern, best practice
+- gotcha, pitfall, workaround
+- debugging, performance, security
+- architecture, optimization
+
+### Confidence Scoring
+
+```mermaid
+graph LR
+    subgraph "Input Analysis"
+        TEXT[Conversation Text]
+    end
+
+    subgraph "Pattern Matching"
+        P1[Learning Phrases<br/>+0.3 per match]
+        P2[Domain Keywords<br/>+0.1 per keyword]
+    end
+
+    subgraph "Decision"
+        SCORE[Confidence Score]
+        THRESH{Score ≥ 0.5?}
+    end
+
+    subgraph "Action"
+        SAVE[Auto-Save Insight]
+        SKIP[Skip]
+    end
+
+    TEXT --> P1
+    TEXT --> P2
+    P1 --> SCORE
+    P2 --> SCORE
+    SCORE --> THRESH
+    THRESH -->|Yes| SAVE
+    THRESH -->|No| SKIP
+```
+
+### What Gets Saved
+
+When auto-insight detection triggers:
+
+1. **Title** - Extracted from first sentence
+2. **Content** - The valuable learning
+3. **Category** - Inferred from keywords (debugging, performance, etc.)
+4. **Tags** - Detected domain keywords
+5. **Source** - Current project name
+
+### Example
+
+User says:
+
+> "I finally figured it out! The React useEffect cleanup function runs before the next effect, not on unmount. This fixed my subscription memory leak."
+
+Auto-detection:
+
+- **Detected phrase**: "I finally figured it out", "This fixed"
+- **Keywords**: (none explicit, but context suggests debugging)
+- **Confidence**: 0.6 (above threshold)
+- **Action**: Auto-save to global knowledge
+
+---
+
+## Auto-Fallback Search
+
+### What It Does
+
+When you search local memory and find nothing, automatically searches the global knowledge base.
+
+### How It Works
+
+```mermaid
+flowchart TD
+    START[Memory Search Request]
+
+    START --> LOCAL[Search Local Memory<br/>.github/ files]
+    LOCAL --> CHECK{Results found?}
+
+    CHECK -->|Yes| RETURN[Return Local Results]
+    CHECK -->|No| GLOBAL[Search Global Knowledge<br/>~/.alex/ files]
+
+    GLOBAL --> GCHECK{Global results?}
+    GCHECK -->|Yes| AUGMENT[Return with<br/>"🌐 Global Knowledge Results<br/>(Unconscious Retrieval)"]
+    GCHECK -->|No| EMPTY[Return empty message]
+```
+
+### User Experience
+
+The user simply uses `alex_memory_search` or `/knowledge` and gets unified results:
+
+**Before (local only):**
+
+```
+No matches found for "error handling" in local memory.
+```
+
+**After (with auto-fallback):**
+
+```
+## 🌐 Global Knowledge Results (Unconscious Retrieval)
+
+*Local search found nothing. Automatically searched cross-project knowledge:*
+
+### 💡 Error Handling Best Practices
+- **Type**: insight | **Category**: error-handling
+- **Tags**: try-catch, async, typescript
+- **Summary**: Always wrap async operations in try-catch...
+```
+
+---
+
+## Configuration
+
+The unconscious mind has sensible defaults but can be observed:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| Background sync interval | 5 minutes | Time between automatic syncs |
+| Minimum sync interval | 1 minute | Prevents sync spam |
+| Startup delay | 10 seconds | Wait before first sync |
+| Post-modification delay | 2 seconds | Wait after changes |
+| Insight confidence threshold | 0.5 | Minimum score to auto-save |
+| Conversation buffer size | 5 messages | Recent messages analyzed |
+
+---
+
+## Observability
+
+### Output Channel
+
+View unconscious activity:
+
+1. Open **View → Output**
+2. Select **"Alex Unconscious Mind"** from dropdown
+
+### Status Indicators
+
+The `alex_global_knowledge_status` tool shows sync status:
+
+```
+| Cloud Sync | ✅ up-to-date |
+```
+
+Status values:
+
+- ✅ `up-to-date` - Fully synced
+- 📤 `needs-push` - Local changes not yet uploaded
+- 📥 `needs-pull` - Remote changes available
+- ⚪ `Not configured` - GitHub auth not set up
+- ❌ `error` - Sync failed
+
+---
+
+## Benefits of Unconscious Processing
+
+### 1. Zero Cognitive Load
+
+Users don't need to remember to:
+
+- Back up their knowledge
+- Sync across machines
+- Search multiple locations
+- Save every insight manually
+
+### 2. Continuous Protection
+
+Knowledge is automatically backed up:
+
+- Every 5 minutes
+- After every modification
+- Without user intervention
+
+### 3. Unified Knowledge Access
+
+Search once, get results from:
+
+- Current project
+- All past projects
+- Any machine (via cloud sync)
+
+### 4. Serendipitous Learning
+
+Auto-insight detection captures knowledge you might forget to save:
+
+- Debugging breakthroughs
+- Aha moments
+- Casual mentions of solutions
+
+---
+
+## Interaction with Conscious Mind
+
+The unconscious mind supports the conscious mind:
+
+```mermaid
+graph TB
+    subgraph "User Intent"
+        USER[User Action]
+    end
+
+    subgraph "Conscious Processing"
+        SAVE[Save Insight]
+        SEARCH[Search Memory]
+        PROMOTE[Promote Knowledge]
+    end
+
+    subgraph "Unconscious Support"
+        AUTOSYNC[Auto-Sync]
+        FALLBACK[Auto-Fallback]
+        DETECT[Auto-Detect]
+    end
+
+    USER --> SAVE
+    USER --> SEARCH
+    USER --> PROMOTE
+
+    SAVE --> AUTOSYNC
+    PROMOTE --> AUTOSYNC
+
+    SEARCH -->|Empty| FALLBACK
+
+    USER -->|Conversation| DETECT
+    DETECT --> SAVE
+```
+
+---
+
+## Failure Handling
+
+The unconscious mind is designed to fail silently:
+
+| Scenario | Behavior |
+| --- | --- |
+| No GitHub auth | Sync skipped, logged |
+| Network error | Retry on next interval |
+| Insight detection fails | Continue conversation |
+| Global search fails | Return local results only |
+
+No user notifications for routine failures - just logged for debugging.
+
+---
+
+## Privacy & Security
+
+### What's Synced
+
+Only knowledge **you explicitly create**:
+
+- Insights you save (or auto-detected from your conversations)
+- Knowledge files you promote
+- Pattern files you create
+
+### What's NOT Synced
+
+- Chat history
+- Source code
+- Personal information (unless you include it in insights)
+
+### Where It Goes
+
+- Private GitHub Gist (not public)
+- Linked to your GitHub account
+- Only accessible with your credentials
+
+---
+
+*The Unconscious Mind - Automatic, Effortless, Always-On*
