@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.7.2-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.0.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -51,9 +51,20 @@ Open Copilot Chat and type **`@alex`** to begin!
 
 ## 🔄 Upgrading from Previous Versions
 
-Already have Alex installed? Here's how to upgrade safely:
+Already have Alex installed? **You'll be notified automatically!**
 
-### From v1.5.x (UNPENT Series)
+When the extension updates, Alex detects the version change and shows a notification:
+
+- 🎉 **Major upgrades** (e.g., 2.x → 3.x) - Highlighted as significant releases
+- ✨ **Minor updates** - Quick sync prompt
+
+**Options in the notification:**
+
+- **Run Upgrade** - Updates your workspace files to the latest version
+- **View Changelog** - See what's new in markdown preview
+- **Dismiss** - Skip for now
+
+### Manual Upgrade Steps
 
 1. Update the extension in VS Code (it will auto-update or use Extensions panel)
 2. Run **`Alex: Upgrade Architecture`** from Command Palette
@@ -64,15 +75,16 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v2.7.0 |
+| Feature | v1.5.x | v3.0.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
-| Slash Commands | ❌ None | ✅ 8 commands (including /selfactualize) |
-| Language Model Tools | ❌ None | ✅ 6 AI-accessible tools |
+| Slash Commands | ❌ None | ✅ 15 commands (including cloud sync) |
+| Language Model Tools | ❌ None | ✅ 11 AI-accessible tools |
 | Custom Agents | ❌ None | ✅ 5 specialized agents |
 | User Profile | ❌ None | ✅ Personalization system |
 | MCP Integration | ❌ Manual | ✅ Smart recommendations |
 | Self-Actualization | ❌ None | ✅ Auto-triggers on greeting & meditation |
+| Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
 
 ### Migration Notes
 
@@ -94,11 +106,15 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /status` | Check architecture health and version |
 | `@alex /meditate` | Consolidate knowledge into memory files |
 | `@alex /dream` | Run neural maintenance and repair synapses |
-| `@alex /selfactualize` | **NEW** Comprehensive self-assessment with deep meditation |
+| `@alex /selfactualize` | Comprehensive self-assessment with deep meditation |
 | `@alex /learn` | Acquire new domain knowledge conversationally |
 | `@alex /azure` | Get Azure development guidance with MCP tools |
 | `@alex /m365` | Get Microsoft 365 and Teams development help |
 | `@alex /profile` | View and update your personal preferences |
+| `@alex /knowledge` | **NEW** Search global knowledge across all projects |
+| `@alex /saveinsight` | **NEW** Save a learning to global knowledge base |
+| `@alex /promote` | **NEW** Promote project knowledge to global |
+| `@alex /knowledgestatus` | **NEW** View global knowledge base status |
 
 ### Example Conversations
 
@@ -124,7 +140,92 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 @alex /profile
 → View your preferences or start the onboarding flow
+
+@alex /knowledge error handling patterns
+→ Searches knowledge learned from all your projects
+
+@alex /saveinsight I learned that React useEffect cleanup...
+→ Saves this insight for use in any future project
 ```
+
+---
+
+## 🌐 Global Knowledge Base (NEW)
+
+Alex now maintains a **centralized knowledge base** that persists across all your projects. Learn something valuable in Project A? It's automatically available when you're working on Project B!
+
+### How It Works
+
+```text
+~/.alex/                          # Your global Alex home
+├── global-knowledge/
+│   ├── patterns/                 # Reusable patterns (GK-*.md)
+│   │   ├── GK-error-handling-strategies.md
+│   │   └── GK-api-design-best-practices.md
+│   ├── insights/                 # Timestamped learnings (GI-*.md)
+│   │   ├── GI-react-state-bug-2026-01-24.md
+│   │   └── GI-azure-deployment-fix-2026-01-20.md
+│   └── index.json                # Searchable knowledge index
+└── project-registry.json         # Known projects with summaries
+```
+
+### Commands
+
+| Command | Description |
+| ------- | ----------- |
+| `/knowledge <query>` | Search across all projects' accumulated wisdom |
+| `/saveinsight` | Save a new learning with context, tags, and solution |
+| `/promote` | Promote a project's DK-*.md file to global knowledge |
+| `/knowledgestatus` | View patterns, insights, categories, and projects |
+| `/sync` | **NEW** Bidirectional sync with GitHub Gist |
+| `/push` | **NEW** Push local knowledge to cloud |
+| `/pull` | **NEW** Pull knowledge from cloud |
+
+### ☁️ Cloud Sync
+
+Sync your global knowledge across machines using **GitHub Gist**:
+
+```text
+@alex /sync
+→ Merges local and cloud knowledge (newer wins for conflicts)
+
+@alex /push
+→ Uploads all local knowledge to your private Gist
+
+@alex /pull
+→ Downloads cloud knowledge to a new machine
+```
+
+**How it works:**
+
+1. First push creates a **private Gist** in your GitHub account
+2. The Gist ID is stored in the index for automatic discovery
+3. On a new machine, just `/pull` - Alex finds your Gist automatically!
+4. `/sync` does bidirectional merge: local + cloud combined
+
+**Automatic prompts:**
+
+- **Session greeting** checks if cloud has new knowledge
+- **Meditation** reminds you to contribute reusable insights
+
+### Example Workflow
+
+```text
+# Working on Project A (React app)
+@alex /saveinsight title="useEffect cleanup pattern" insight="Always return a cleanup function in useEffect when using subscriptions or timers to prevent memory leaks" tags="react,hooks,useEffect,memory-leaks"
+
+# Later, working on Project B (Vue app)
+@alex /knowledge memory leak cleanup
+→ Returns the insight from Project A about cleanup patterns!
+```
+
+### Categories
+
+Knowledge is organized into categories for easy discovery:
+
+- `error-handling`, `api-design`, `testing`, `debugging`
+- `performance`, `architecture`, `security`, `deployment`
+- `documentation`, `refactoring`, `patterns`, `tooling`, `general`
 
 ---
 
@@ -202,7 +303,12 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#architecture_status` | Returns version and configuration | "What's my Alex version?" |
 | `#mcp_recommendations` | Suggests MCP tools for scenarios | "What tools for Azure Functions?" |
 | `#user_profile` | Manages personal preferences | "Update my profile preferences" |
-| `#self_actualization` | **NEW** Comprehensive self-assessment | "Run deep meditation" |
+| `#self_actualization` | Comprehensive self-assessment | "Run deep meditation" |
+| `#global_knowledge` | **NEW** Search cross-project knowledge | "Search knowledge for error handling" |
+| `#save_insight` | **NEW** Save learning to global base | "Save this insight" |
+| `#promote_knowledge` | **NEW** Promote project file to global | "Promote DK file" |
+| `#knowledge_status` | **NEW** View global knowledge stats | "Show knowledge status" |
+| `#cloud_sync` | **NEW** Sync knowledge with GitHub Gist | "Sync my knowledge to cloud" |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 

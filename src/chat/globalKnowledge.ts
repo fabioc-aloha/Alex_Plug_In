@@ -1,0 +1,943 @@
+import * as vscode from 'vscode';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import * as os from 'os';
+import * as lockfile from 'proper-lockfile';
+import {
+    ALEX_GLOBAL_HOME,
+    GLOBAL_KNOWLEDGE_PATHS,
+    GLOBAL_KNOWLEDGE_PREFIXES,
+    GLOBAL_KNOWLEDGE_CATEGORIES,
+    GlobalKnowledgeCategory,
+    IGlobalKnowledgeEntry,
+    IGlobalKnowledgeIndex,
+    IProjectRegistry,
+    IProjectRegistryEntry
+} from '../shared/constants';
+
+// ============================================================================
+// GLOBAL KNOWLEDGE BASE UTILITIES
+// ============================================================================
+
+/**
+ * Lock file options for concurrent access safety
+ */
+const LOCK_OPTIONS = {
+    stale: 10000,      // Consider lock stale after 10 seconds
+    retries: {
+        retries: 5,
+        factor: 2,
+        minTimeout: 100,
+        maxTimeout: 1000
+    }
+};
+
+/**
+ * Get the full path to the Alex global home directory
+ */
+export function getAlexGlobalPath(): string {
+    return path.join(os.homedir(), ALEX_GLOBAL_HOME);
+}
+
+/**
+ * Get the full path to a global knowledge subdirectory
+ */
+export function getGlobalKnowledgePath(subpath: keyof typeof GLOBAL_KNOWLEDGE_PATHS): string {
+    return path.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS[subpath]);
+}
+
+/**
+ * Ensure all global knowledge directories exist
+ */
+export async function ensureGlobalKnowledgeDirectories(): Promise<void> {
+    const paths = [
+        getGlobalKnowledgePath('root'),
+        getGlobalKnowledgePath('knowledge'),
+        getGlobalKnowledgePath('patterns'),
+        getGlobalKnowledgePath('insights')
+    ];
+
+    for (const dirPath of paths) {
+        await fs.ensureDir(dirPath);
+    }
+}
+
+/**
+ * Execute a function with file locking for safe concurrent access.
+ * This ensures only one Alex instance can modify a file at a time.
+ */
+async function withFileLock<T>(
+    filePath: string,
+    operation: () => Promise<T>
+): Promise<T> {
+    // Ensure the file exists before locking (lockfile requires existing file)
+    if (!await fs.pathExists(filePath)) {
+        // Create empty file to lock against
+        await fs.ensureFile(filePath);
+    }
+    
+    let release: (() => Promise<void>) | undefined;
+    try {
+        release = await lockfile.lock(filePath, LOCK_OPTIONS);
+        return await operation();
+    } finally {
+        if (release) {
+            await release();
+        }
+    }
+}
+
+/**
+ * Safely update the global knowledge index with locking.
+ * This prevents race conditions when multiple Alex instances are running.
+ */
+export async function updateGlobalKnowledgeIndex(
+    updater: (index: IGlobalKnowledgeIndex) => IGlobalKnowledgeIndex | Promise<IGlobalKnowledgeIndex>
+): Promise<IGlobalKnowledgeIndex> {
+    const indexPath = getGlobalKnowledgePath('index');
+    await ensureGlobalKnowledgeDirectories();
+    
+    return await withFileLock(indexPath, async () => {
+        // Read current index (or create new one)
+        let index: IGlobalKnowledgeIndex;
+        try {
+            if (await fs.pathExists(indexPath)) {
+                const content = await fs.readFile(indexPath, 'utf-8');
+                if (content.trim()) {
+                    index = JSON.parse(content);
+                } else {
+                    index = { version: '1.0.0', lastUpdated: new Date().toISOString(), entries: [] };
+                }
+            } else {
+                index = { version: '1.0.0', lastUpdated: new Date().toISOString(), entries: [] };
+            }
+        } catch (err) {
+            // Corrupted, create new
+            index = { version: '1.0.0', lastUpdated: new Date().toISOString(), entries: [] };
+        }
+        
+        // Apply the update
+        index = await updater(index);
+        index.lastUpdated = new Date().toISOString();
+        
+        // Write back atomically
+        await fs.writeJson(indexPath, index, { spaces: 2 });
+        
+        return index;
+    });
+}
+
+/**
+ * Safely update the project registry with locking.
+ */
+export async function updateProjectRegistry(
+    updater: (registry: IProjectRegistry) => IProjectRegistry | Promise<IProjectRegistry>
+): Promise<IProjectRegistry> {
+    const registryPath = getGlobalKnowledgePath('projectRegistry');
+    await ensureGlobalKnowledgeDirectories();
+    
+    return await withFileLock(registryPath, async () => {
+        // Read current registry (or create new one)
+        let registry: IProjectRegistry;
+        try {
+            if (await fs.pathExists(registryPath)) {
+                const content = await fs.readFile(registryPath, 'utf-8');
+                if (content.trim()) {
+                    registry = JSON.parse(content);
+                } else {
+                    registry = { version: '1.0.0', lastUpdated: new Date().toISOString(), projects: [] };
+                }
+            } else {
+                registry = { version: '1.0.0', lastUpdated: new Date().toISOString(), projects: [] };
+            }
+        } catch (err) {
+            registry = { version: '1.0.0', lastUpdated: new Date().toISOString(), projects: [] };
+        }
+        
+        // Apply the update
+        registry = await updater(registry);
+        registry.lastUpdated = new Date().toISOString();
+        
+        // Write back
+        await fs.writeJson(registryPath, registry, { spaces: 2 });
+        
+        return registry;
+    });
+}
+
+/**
+ * Initialize the global knowledge index if it doesn't exist
+ */
+export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeIndex> {
+    const indexPath = getGlobalKnowledgePath('index');
+    await ensureGlobalKnowledgeDirectories();
+    
+    return await withFileLock(indexPath, async () => {
+        try {
+            if (await fs.pathExists(indexPath)) {
+                const content = await fs.readFile(indexPath, 'utf-8');
+                if (content.trim()) {
+                    return JSON.parse(content);
+                }
+            }
+        } catch (err) {
+            // Index corrupted, recreate
+        }
+
+        const newIndex: IGlobalKnowledgeIndex = {
+            version: '1.0.0',
+            lastUpdated: new Date().toISOString(),
+            entries: []
+        };
+
+        await fs.writeJson(indexPath, newIndex, { spaces: 2 });
+        return newIndex;
+    });
+}
+
+/**
+ * Save the global knowledge index (with locking for concurrent safety)
+ */
+export async function saveGlobalKnowledgeIndex(index: IGlobalKnowledgeIndex): Promise<void> {
+    await updateGlobalKnowledgeIndex(() => index);
+}
+
+/**
+ * Get or initialize the project registry (with locking)
+ */
+export async function ensureProjectRegistry(): Promise<IProjectRegistry> {
+    const registryPath = getGlobalKnowledgePath('projectRegistry');
+    await ensureGlobalKnowledgeDirectories();
+    
+    return await updateProjectRegistry((registry) => registry);
+}
+
+/**
+ * Save the project registry (with locking for concurrent safety)
+ */
+export async function saveProjectRegistry(registry: IProjectRegistry): Promise<void> {
+    await updateProjectRegistry(() => registry);
+}
+
+/**
+ * Register or update the current project in the registry
+ */
+export async function registerCurrentProject(): Promise<IProjectRegistryEntry | undefined> {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+        return undefined;
+    }
+
+    const projectPath = workspaceFolders[0].uri.fsPath;
+    const projectName = path.basename(projectPath);
+    
+    // Count knowledge files
+    let knowledgeFileCount = 0;
+    const dkPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md');
+    const dkFiles = await vscode.workspace.findFiles(dkPattern);
+    knowledgeFileCount = dkFiles.length;
+
+    // Use atomic update with locking
+    let savedEntry: IProjectRegistryEntry | undefined;
+    await updateProjectRegistry((registry) => {
+        // Find existing entry or create new one
+        const existingIndex = registry.projects.findIndex(p => p.path === projectPath);
+        const entry: IProjectRegistryEntry = {
+            path: projectPath,
+            name: projectName,
+            lastAccessed: new Date().toISOString(),
+            knowledgeFiles: knowledgeFileCount
+        };
+
+        if (existingIndex >= 0) {
+            // Preserve existing data, update access time and file count
+            registry.projects[existingIndex] = {
+                ...registry.projects[existingIndex],
+                ...entry
+            };
+            savedEntry = registry.projects[existingIndex];
+        } else {
+            registry.projects.push(entry);
+            savedEntry = entry;
+        }
+
+        return registry;
+    });
+
+    return savedEntry;
+}
+
+/**
+ * Generate a unique ID for a knowledge entry
+ */
+function generateKnowledgeId(type: 'pattern' | 'insight', title: string): string {
+    const prefix = type === 'pattern' ? GLOBAL_KNOWLEDGE_PREFIXES.pattern : GLOBAL_KNOWLEDGE_PREFIXES.insight;
+    const slug = title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')
+        .substring(0, 40);
+    const timestamp = type === 'insight' ? `-${new Date().toISOString().split('T')[0]}` : '';
+    return `${prefix}${slug}${timestamp}`;
+}
+
+/**
+ * Create a new global knowledge pattern file (with concurrent-safe index update)
+ */
+export async function createGlobalPattern(
+    title: string,
+    content: string,
+    category: GlobalKnowledgeCategory,
+    tags: string[],
+    sourceProject?: string
+): Promise<IGlobalKnowledgeEntry> {
+    await ensureGlobalKnowledgeDirectories();
+    
+    const id = generateKnowledgeId('pattern', title);
+    const filename = `${id}.md`;
+    const filePath = path.join(getGlobalKnowledgePath('patterns'), filename);
+    
+    // Create the markdown file with frontmatter-style header
+    const fileContent = `# ${title}
+
+**ID**: ${id}  
+**Category**: ${category}  
+**Tags**: ${tags.join(', ')}  
+**Source**: ${sourceProject || 'Manual entry'}  
+**Created**: ${new Date().toISOString()}  
+
+---
+
+${content}
+
+---
+
+## Synapses
+
+*Add cross-references to related knowledge files here*
+
+`;
+
+    await fs.writeFile(filePath, fileContent, 'utf-8');
+
+    // Update the index atomically with locking
+    const entry: IGlobalKnowledgeEntry = {
+        id,
+        title,
+        type: 'pattern',
+        category,
+        tags,
+        sourceProject,
+        created: new Date().toISOString(),
+        modified: new Date().toISOString(),
+        summary: content.substring(0, 200) + (content.length > 200 ? '...' : ''),
+        filePath
+    };
+
+    await updateGlobalKnowledgeIndex((index) => {
+        index.entries.push(entry);
+        return index;
+    });
+
+    return entry;
+}
+
+/**
+ * Create a new global insight (timestamped learning) - with concurrent-safe index update
+ */
+export async function createGlobalInsight(
+    title: string,
+    content: string,
+    category: GlobalKnowledgeCategory,
+    tags: string[],
+    sourceProject?: string,
+    problemContext?: string,
+    solution?: string
+): Promise<IGlobalKnowledgeEntry> {
+    await ensureGlobalKnowledgeDirectories();
+    
+    const id = generateKnowledgeId('insight', title);
+    const filename = `${id}.md`;
+    const filePath = path.join(getGlobalKnowledgePath('insights'), filename);
+    
+    // Create the markdown file
+    const fileContent = `# ${title}
+
+**ID**: ${id}  
+**Category**: ${category}  
+**Tags**: ${tags.join(', ')}  
+**Source Project**: ${sourceProject || 'Unknown'}  
+**Date**: ${new Date().toISOString()}  
+
+---
+
+## Context
+
+${problemContext || 'No problem context provided.'}
+
+## Insight
+
+${content}
+
+## Solution
+
+${solution || 'See insight above.'}
+
+---
+
+## Applicability
+
+*When would this insight be useful again?*
+
+- Similar error messages
+- Same technology stack: ${tags.join(', ')}
+- Related patterns
+
+## Related Projects
+
+- ${sourceProject || 'Origin project'}
+
+`;
+
+    await fs.writeFile(filePath, fileContent, 'utf-8');
+
+    // Update the index atomically with locking
+    const entry: IGlobalKnowledgeEntry = {
+        id,
+        title,
+        type: 'insight',
+        category,
+        tags,
+        sourceProject,
+        relatedProjects: sourceProject ? [sourceProject] : [],
+        created: new Date().toISOString(),
+        modified: new Date().toISOString(),
+        summary: content.substring(0, 200) + (content.length > 200 ? '...' : ''),
+        filePath
+    };
+
+    await updateGlobalKnowledgeIndex((index) => {
+        index.entries.push(entry);
+        return index;
+    });
+
+    return entry;
+}
+
+/**
+ * Search global knowledge by query
+ */
+export async function searchGlobalKnowledge(
+    query: string,
+    options: {
+        type?: 'pattern' | 'insight' | 'all';
+        category?: GlobalKnowledgeCategory;
+        tags?: string[];
+        limit?: number;
+    } = {}
+): Promise<{ entry: IGlobalKnowledgeEntry; relevance: number; content?: string }[]> {
+    const index = await ensureGlobalKnowledgeIndex();
+    const queryLower = query.toLowerCase();
+    const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2);
+    
+    const results: { entry: IGlobalKnowledgeEntry; relevance: number; content?: string }[] = [];
+
+    for (const entry of index.entries) {
+        // Filter by type
+        if (options.type && options.type !== 'all' && entry.type !== options.type) {
+            continue;
+        }
+        
+        // Filter by category
+        if (options.category && entry.category !== options.category) {
+            continue;
+        }
+        
+        // Filter by tags
+        if (options.tags && options.tags.length > 0) {
+            const hasMatchingTag = options.tags.some(tag => 
+                entry.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
+            );
+            if (!hasMatchingTag) {
+                continue;
+            }
+        }
+
+        // Calculate relevance score
+        let relevance = 0;
+        
+        // Title match (highest weight)
+        if (entry.title.toLowerCase().includes(queryLower)) {
+            relevance += 10;
+        }
+        for (const word of queryWords) {
+            if (entry.title.toLowerCase().includes(word)) {
+                relevance += 3;
+            }
+        }
+
+        // Tag match
+        for (const tag of entry.tags) {
+            if (tag.toLowerCase().includes(queryLower) || queryLower.includes(tag.toLowerCase())) {
+                relevance += 5;
+            }
+            for (const word of queryWords) {
+                if (tag.toLowerCase().includes(word)) {
+                    relevance += 2;
+                }
+            }
+        }
+
+        // Summary match
+        if (entry.summary.toLowerCase().includes(queryLower)) {
+            relevance += 3;
+        }
+        for (const word of queryWords) {
+            if (entry.summary.toLowerCase().includes(word)) {
+                relevance += 1;
+            }
+        }
+
+        // Category match
+        if (entry.category.toLowerCase().includes(queryLower)) {
+            relevance += 2;
+        }
+
+        if (relevance > 0) {
+            // Read full content for top results
+            let content: string | undefined;
+            if (await fs.pathExists(entry.filePath)) {
+                try {
+                    content = await fs.readFile(entry.filePath, 'utf-8');
+                    // Additional relevance from content
+                    for (const word of queryWords) {
+                        const matches = (content.toLowerCase().match(new RegExp(word, 'g')) || []).length;
+                        relevance += Math.min(matches, 5) * 0.5;
+                    }
+                } catch (err) {
+                    // File read error, skip content
+                }
+            }
+            
+            results.push({ entry, relevance, content });
+        }
+    }
+
+    // Sort by relevance and apply limit
+    results.sort((a, b) => b.relevance - a.relevance);
+    return results.slice(0, options.limit || 10);
+}
+
+/**
+ * Promote a project-local DK file to global knowledge
+ */
+export async function promoteToGlobalKnowledge(
+    localFilePath: string,
+    category: GlobalKnowledgeCategory,
+    additionalTags: string[] = []
+): Promise<IGlobalKnowledgeEntry | null> {
+    try {
+        const content = await fs.readFile(localFilePath, 'utf-8');
+        const filename = path.basename(localFilePath, '.md');
+        
+        // Extract title from content (first H1) or use filename
+        const titleMatch = content.match(/^#\s+(.+)$/m);
+        const title = titleMatch ? titleMatch[1] : filename.replace(/^DK-/, '').replace(/-/g, ' ');
+        
+        // Extract existing tags if any
+        const tagsMatch = content.match(/\*\*Tags\*\*:\s*(.+)$/m);
+        const existingTags = tagsMatch 
+            ? tagsMatch[1].split(',').map(t => t.trim())
+            : [];
+        
+        const allTags = [...new Set([...existingTags, ...additionalTags])];
+        
+        // Get source project name
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        const sourceProject = workspaceFolders 
+            ? path.basename(workspaceFolders[0].uri.fsPath)
+            : undefined;
+
+        return await createGlobalPattern(title, content, category, allTags, sourceProject);
+    } catch (err) {
+        console.error('Failed to promote file to global knowledge:', err);
+        return null;
+    }
+}
+
+/**
+ * Find relevant global knowledge for the current project context
+ */
+export async function findRelevantKnowledge(
+    context: string,
+    technologies?: string[]
+): Promise<{ entry: IGlobalKnowledgeEntry; relevance: number; content?: string }[]> {
+    // Build search query from context and technologies
+    const searchTerms = [context];
+    if (technologies) {
+        searchTerms.push(...technologies);
+    }
+    
+    return searchGlobalKnowledge(searchTerms.join(' '), { limit: 5 });
+}
+
+/**
+ * Get summary of global knowledge base
+ */
+export async function getGlobalKnowledgeSummary(): Promise<{
+    totalPatterns: number;
+    totalInsights: number;
+    categories: Record<string, number>;
+    recentEntries: IGlobalKnowledgeEntry[];
+    topTags: { tag: string; count: number }[];
+}> {
+    const index = await ensureGlobalKnowledgeIndex();
+    
+    const categories: Record<string, number> = {};
+    const tagCounts: Record<string, number> = {};
+    
+    for (const entry of index.entries) {
+        // Count by category
+        categories[entry.category] = (categories[entry.category] || 0) + 1;
+        
+        // Count tags
+        for (const tag of entry.tags) {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        }
+    }
+
+    // Get top tags
+    const topTags = Object.entries(tagCounts)
+        .map(([tag, count]) => ({ tag, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+    // Get recent entries
+    const recentEntries = [...index.entries]
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+        .slice(0, 5);
+
+    return {
+        totalPatterns: index.entries.filter(e => e.type === 'pattern').length,
+        totalInsights: index.entries.filter(e => e.type === 'insight').length,
+        categories,
+        recentEntries,
+        topTags
+    };
+}
+
+// ============================================================================
+// VS CODE LANGUAGE MODEL TOOLS
+// ============================================================================
+
+/**
+ * Input parameters for Global Knowledge Search tool
+ */
+export interface IGlobalKnowledgeSearchParams {
+    query: string;
+    type?: 'pattern' | 'insight' | 'all';
+    category?: string;
+    tags?: string;
+}
+
+/**
+ * Global Knowledge Search Tool - Search across all projects' accumulated wisdom
+ */
+export class GlobalKnowledgeSearchTool implements vscode.LanguageModelTool<IGlobalKnowledgeSearchParams> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<IGlobalKnowledgeSearchParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: `Searching global knowledge for: ${options.input.query}`,
+            confirmationMessages: {
+                title: 'Search Global Knowledge',
+                message: new vscode.MarkdownString(
+                    `Search Alex's global knowledge base across all projects for: **${options.input.query}**?\n\n` +
+                    `This searches patterns and insights learned from all your projects.`
+                )
+            }
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<IGlobalKnowledgeSearchParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        await ensureGlobalKnowledgeDirectories();
+        
+        const { query, type, category, tags } = options.input;
+        
+        const results = await searchGlobalKnowledge(query, {
+            type: type as 'pattern' | 'insight' | 'all' | undefined,
+            category: category as GlobalKnowledgeCategory | undefined,
+            tags: tags ? tags.split(',').map(t => t.trim()) : undefined,
+            limit: 10
+        });
+
+        if (results.length === 0) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(
+                    `No global knowledge found matching "${query}".\n\n` +
+                    `You can save new knowledge using:\n` +
+                    `- \`@alex /saveinsight\` to save a learning from the current project\n` +
+                    `- \`@alex /promote\` to promote project-local knowledge to global`
+                )
+            ]);
+        }
+
+        let result = `## Global Knowledge Search Results\n\n`;
+        result += `Found **${results.length}** relevant entries for "${query}":\n\n`;
+
+        for (const { entry, relevance } of results) {
+            const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
+            result += `### ${typeEmoji} ${entry.title}\n`;
+            result += `- **Type**: ${entry.type} | **Category**: ${entry.category}\n`;
+            result += `- **Tags**: ${entry.tags.join(', ')}\n`;
+            if (entry.sourceProject) {
+                result += `- **Source**: ${entry.sourceProject}\n`;
+            }
+            result += `- **Summary**: ${entry.summary}\n`;
+            result += `- **File**: \`${entry.filePath}\`\n\n`;
+        }
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(result)
+        ]);
+    }
+}
+
+/**
+ * Input parameters for Save Insight tool
+ */
+export interface ISaveInsightParams {
+    title: string;
+    insight: string;
+    category?: string;
+    tags?: string;
+    problem?: string;
+    solution?: string;
+}
+
+/**
+ * Save Insight Tool - Save a new learning to global knowledge base
+ */
+export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightParams> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<ISaveInsightParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: `Saving insight: ${options.input.title}`,
+            confirmationMessages: {
+                title: 'Save Global Insight',
+                message: new vscode.MarkdownString(
+                    `Save this insight to Alex's global knowledge base?\n\n` +
+                    `**Title**: ${options.input.title}\n\n` +
+                    `This will be available across all your projects.`
+                )
+            }
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<ISaveInsightParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        await ensureGlobalKnowledgeDirectories();
+        
+        const { title, insight, category, tags, problem, solution } = options.input;
+        
+        // Get current project name
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        const sourceProject = workspaceFolders 
+            ? path.basename(workspaceFolders[0].uri.fsPath)
+            : undefined;
+
+        const entry = await createGlobalInsight(
+            title,
+            insight,
+            (category || 'general') as GlobalKnowledgeCategory,
+            tags ? tags.split(',').map(t => t.trim()) : [],
+            sourceProject,
+            problem,
+            solution
+        );
+
+        const result = `## ✅ Insight Saved to Global Knowledge
+
+**ID**: ${entry.id}  
+**Title**: ${entry.title}  
+**Category**: ${entry.category}  
+**Tags**: ${entry.tags.join(', ')}  
+**Source Project**: ${entry.sourceProject || 'Unknown'}  
+**File**: \`${entry.filePath}\`
+
+This insight is now available across all your projects. 
+Search for it using: \`@alex /knowledge ${title}\`
+`;
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(result)
+        ]);
+    }
+}
+
+/**
+ * Input parameters for Promote Knowledge tool
+ */
+export interface IPromoteKnowledgeParams {
+    filePath: string;
+    category?: string;
+    additionalTags?: string;
+}
+
+/**
+ * Promote Knowledge Tool - Promote project-local DK file to global knowledge
+ */
+export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKnowledgeParams> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<IPromoteKnowledgeParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: `Promoting ${path.basename(options.input.filePath)} to global knowledge`,
+            confirmationMessages: {
+                title: 'Promote to Global Knowledge',
+                message: new vscode.MarkdownString(
+                    `Promote this project-local knowledge file to global knowledge?\n\n` +
+                    `**File**: ${options.input.filePath}\n\n` +
+                    `This will make it searchable and available across all your projects.`
+                )
+            }
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<IPromoteKnowledgeParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        const { filePath, category, additionalTags } = options.input;
+        
+        // Verify file exists
+        if (!await fs.pathExists(filePath)) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(`❌ File not found: ${filePath}`)
+            ]);
+        }
+
+        const entry = await promoteToGlobalKnowledge(
+            filePath,
+            (category || 'general') as GlobalKnowledgeCategory,
+            additionalTags ? additionalTags.split(',').map(t => t.trim()) : []
+        );
+
+        if (!entry) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(`❌ Failed to promote file to global knowledge.`)
+            ]);
+        }
+
+        const result = `## ✅ Knowledge Promoted to Global
+
+**ID**: ${entry.id}  
+**Title**: ${entry.title}  
+**Category**: ${entry.category}  
+**Tags**: ${entry.tags.join(', ')}  
+**Global File**: \`${entry.filePath}\`
+
+This knowledge is now available across all your projects!
+`;
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(result)
+        ]);
+    }
+}
+
+/**
+ * Global Knowledge Status Tool - Show summary of the global knowledge base
+ */
+export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Record<string, never>> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<Record<string, never>>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: 'Retrieving global knowledge status...'
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<Record<string, never>>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        await ensureGlobalKnowledgeDirectories();
+        
+        const summary = await getGlobalKnowledgeSummary();
+        const registry = await ensureProjectRegistry();
+
+        let result = `## 🧠 Global Knowledge Base Status
+
+### Overview
+| Metric | Count |
+|--------|-------|
+| Global Patterns | ${summary.totalPatterns} |
+| Global Insights | ${summary.totalInsights} |
+| Known Projects | ${registry.projects.length} |
+
+### Knowledge by Category
+`;
+        
+        for (const [cat, count] of Object.entries(summary.categories)) {
+            result += `- **${cat}**: ${count}\n`;
+        }
+
+        if (summary.topTags.length > 0) {
+            result += `\n### Top Tags\n`;
+            for (const { tag, count } of summary.topTags) {
+                result += `- ${tag}: ${count}\n`;
+            }
+        }
+
+        if (summary.recentEntries.length > 0) {
+            result += `\n### Recent Entries\n`;
+            for (const entry of summary.recentEntries) {
+                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
+                result += `- ${typeEmoji} **${entry.title}** (${entry.category})\n`;
+            }
+        }
+
+        if (registry.projects.length > 0) {
+            result += `\n### Known Projects\n`;
+            for (const project of registry.projects.slice(0, 5)) {
+                result += `- **${project.name}** - ${project.knowledgeFiles} knowledge files\n`;
+            }
+        }
+
+        result += `\n### Global Knowledge Location\n\`${getAlexGlobalPath()}\`\n`;
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(result)
+        ]);
+    }
+}
+
+/**
+ * Register all global knowledge tools
+ */
+export function registerGlobalKnowledgeTools(context: vscode.ExtensionContext): void {
+    context.subscriptions.push(
+        vscode.lm.registerTool('alex_global_knowledge_search', new GlobalKnowledgeSearchTool()),
+        vscode.lm.registerTool('alex_save_insight', new SaveInsightTool()),
+        vscode.lm.registerTool('alex_promote_knowledge', new PromoteKnowledgeTool()),
+        vscode.lm.registerTool('alex_global_knowledge_status', new GlobalKnowledgeStatusTool())
+    );
+}

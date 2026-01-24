@@ -5,6 +5,60 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] TRINILNILIUM - 2026-01-24
+
+### Added
+
+- **🌐 Global Knowledge Base** - Cross-project learning system!
+  - `~/.alex/global-knowledge/` - Centralized knowledge in user's home directory
+  - **Global Patterns (GK-*)** - Reusable patterns across projects
+  - **Global Insights (GI-*)** - Timestamped learnings with context
+  - **Project Registry** - Tracks all Alex-enabled projects
+  - Searchable index with categories and tags
+  - Concurrent access safety with file locking
+
+- **☁️ Cloud Sync with GitHub Gist** - Sync knowledge across machines!
+  - Uses VS Code's built-in GitHub authentication
+  - Private Gist storage for secure backup
+  - Gist ID embedded in index for automatic discovery
+  - Bidirectional merge with conflict resolution
+
+- **7 New Chat Commands**:
+  - `/knowledge <query>` - Search cross-project knowledge
+  - `/saveinsight` - Save learning to global base
+  - `/promote` - Promote project DK file to global
+  - `/knowledgestatus` - View knowledge base stats
+  - `/sync` - Bidirectional sync with GitHub
+  - `/push` - Push local knowledge to cloud
+  - `/pull` - Pull knowledge from cloud
+
+- **3 New Command Palette Commands**:
+  - `Alex: Sync Global Knowledge (GitHub)`
+  - `Alex: Push Knowledge to Cloud`
+  - `Alex: Pull Knowledge from Cloud`
+
+- **5 New Language Model Tools**:
+  - `alex_global_knowledge_search` - AI-accessible cross-project search
+  - `alex_save_insight` - Save insights programmatically
+  - `alex_promote_knowledge` - Promote local to global
+  - `alex_global_knowledge_status` - Knowledge base metrics
+  - `alex_cloud_sync` - Cloud sync operations
+
+- **Session Integration**:
+  - Greeting checks cloud sync status automatically
+  - Meditation prompts for knowledge contribution
+  - `/knowledge` added to suggested commands
+
+### Changed
+
+- `IGlobalKnowledgeIndex` includes `cloudGistId` and `cloudGistUrl`
+- Extension activation initializes global knowledge directories
+- Projects auto-register in global registry
+
+### Dependencies
+
+- Added `proper-lockfile` for concurrent file access safety
+
 ## [2.7.2] BIHEPTBIUM - 2026-01-24
 
 ### Fixed

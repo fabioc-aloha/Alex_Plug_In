@@ -1,13 +1,21 @@
 # Alex Cognitive Architecture - Upgrade Instructions
 
-**Version**: 2.0.0 BINILNILIUM
+**Version**: 3.0.0 TRINILNILIUM
 **Purpose**: Safe upgrade process that preserves learned knowledge while updating system architecture
 
 ---
 
 ## Overview
 
-Upgrading Alex requires a **hybrid approach** combining automated code execution with AI-assisted content migration. This is necessary because:
+**Good news!** Starting with v3.0.0, Alex **automatically notifies you** when an upgrade is available. When the extension updates, you'll see a notification with options to:
+
+- **Run Upgrade** - Updates your workspace files immediately
+- **View Changelog** - See what's new before upgrading
+- **Dismiss** - Skip for now (you can always run manually later)
+
+### Why Upgrades Are Needed
+
+Upgrading Alex requires a **hybrid approach** combining automated code execution with AI-assisted content migration because:
 
 1. **User-created content must be preserved** (learned domains, custom synapses, insights)
 2. **Schema changes require intelligent migration** (synapse format standardization)
@@ -202,7 +210,32 @@ Files that exist in both extension and user workspace but may have user edits:
 | ------- | -------------- | ------------------ | ----------------- |
 | < 1.5.0 | `## Embedded Synapse Network` (8 variants) | Custom (Expression, Embodiment, etc.) | `**Bold** → Verbose ✅ date` |
 | 1.5.0-1.5.4 | `## Synapses` | Standard (Triggers, Enables, Validates, Enhances, Facilitates, Integrates, Coordinates, Documents) | `Trigger → Action` |
-| 2.0.0+ | `## Synapses` | Same as 1.5.x | `Trigger → Action` |
+| 2.0.0-2.7.x | `## Synapses` | Same as 1.5.x | `Trigger → Action` |
+| 3.0.0+ | `## Synapses` | Same as 1.5.x + Global Knowledge integration | `Trigger → Action` |
+
+---
+
+## What's New in 3.0.0
+
+### 🌐 Global Knowledge Base
+
+Alex now maintains a centralized knowledge base at `~/.alex/global-knowledge/` that persists across all your projects:
+
+- **Global Patterns (GK-*.md)** - Reusable patterns across projects
+- **Global Insights (GI-*.md)** - Timestamped learnings with context
+- **Project Registry** - Tracks all Alex-enabled projects
+
+### ☁️ Cloud Sync with GitHub Gist
+
+Sync your knowledge across machines:
+
+- `/sync` - Bidirectional merge with GitHub
+- `/push` - Upload local knowledge to cloud
+- `/pull` - Download from cloud to new machine
+
+### 🔔 Automatic Upgrade Notifications
+
+The extension now detects version changes and prompts you to upgrade.
 
 ---
 

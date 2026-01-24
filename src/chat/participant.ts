@@ -3,6 +3,8 @@ import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
+import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath } from './globalKnowledge';
+import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, getSyncStatus } from './cloudSync';
 
 /**
  * Chat result metadata for tracking command execution
@@ -58,6 +60,36 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         return await handleSelfActualizeCommand(request, context, stream, token);
     }
 
+    // Global Knowledge commands
+    if (request.command === 'knowledge') {
+        return await handleKnowledgeCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'saveinsight') {
+        return await handleSaveInsightCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'promote') {
+        return await handlePromoteCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'knowledgestatus') {
+        return await handleKnowledgeStatusCommand(request, context, stream, token);
+    }
+
+    // Cloud Sync commands
+    if (request.command === 'sync') {
+        return await handleSyncCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'push') {
+        return await handlePushCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'pull') {
+        return await handlePullCommand(request, context, stream, token);
+    }
+
     // Check if this is a greeting at the start of a session
     if (isGreeting(request.prompt) && isStartOfSession(context)) {
         return await handleGreetingWithSelfActualization(request, context, stream, token);
@@ -103,7 +135,21 @@ Every meditation session must produce:
 2. **Synaptic Enhancements** - Add new or strengthen existing connections
 3. **Session Documentation** - Record actions with timestamps
 
-### What would you like me to consolidate?
+### 🌍 Global Knowledge Contribution
+Consider contributing reusable insights to your global knowledge base:
+- **Patterns** that could help in other projects
+- **Insights** from debugging or problem-solving
+- **Best practices** you've discovered
+
+`);
+
+    stream.button({
+        command: 'alex.syncKnowledge',
+        title: '☁️ Sync Global Knowledge',
+        arguments: []
+    });
+
+    stream.markdown(`\n### What would you like me to consolidate?
 `);
 
     if (request.prompt) {
@@ -615,6 +661,33 @@ async function handleGreetingWithSelfActualization(
     
     stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n\n`);
     
+    // Check cloud sync status
+    stream.progress('☁️ Checking global knowledge sync status...');
+    try {
+        const syncStatus = await getSyncStatus();
+        if (syncStatus.status === 'needs-pull') {
+            stream.markdown(`### ☁️ Cloud Knowledge Available\n`);
+            stream.markdown(`There may be new knowledge in your cloud. Consider syncing:\n\n`);
+            stream.button({
+                command: 'alex.syncKnowledge',
+                title: '☁️ Sync Global Knowledge',
+                arguments: []
+            });
+            stream.markdown(`\n`);
+        } else if (syncStatus.status === 'needs-push') {
+            stream.markdown(`### ☁️ Local Knowledge Not Synced\n`);
+            stream.markdown(`You have local insights that aren't backed up to cloud yet.\n\n`);
+            stream.button({
+                command: 'alex.syncKnowledge',
+                title: '☁️ Sync to Cloud',
+                arguments: []
+            });
+            stream.markdown(`\n`);
+        }
+    } catch (err) {
+        // Silently continue if sync check fails (not signed in, etc.)
+    }
+    
     // Run mini self-actualization report
     stream.markdown(`### 🧠 Quick Architecture Check\n\n`);
     
@@ -637,6 +710,7 @@ async function handleGreetingWithSelfActualization(
     stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge\n`);
     stream.markdown(`- **\`/azure [query]\`** - Azure development guidance\n`);
     stream.markdown(`- **\`/m365 [query]\`** - Microsoft 365 development\n`);
+    stream.markdown(`- **\`/knowledge [query]\`** - Search global knowledge base\n`);
     stream.markdown(`- **\`/selfactualize\`** - Deep meditation & architecture assessment\n`);
     
     return { metadata: { command: 'greeting' } };
@@ -683,6 +757,343 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
     stream.markdown(`- Explicit \`/selfactualize\` command\n`);
 
     return { metadata: { command: 'selfactualize' } };
+}
+
+/**
+ * Handle /knowledge command - Search global knowledge base
+ */
+async function handleKnowledgeCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    if (!request.prompt) {
+        stream.markdown(`## 🌐 Global Knowledge Search
+
+Use this command to search across knowledge learned from ALL your projects.
+
+### Usage
+\`@alex /knowledge <search query>\`
+
+### Examples
+- \`@alex /knowledge error handling patterns\`
+- \`@alex /knowledge react state management\`
+- \`@alex /knowledge azure deployment\`
+
+### What's in Global Knowledge?
+- **Patterns (GK-*)**: Reusable solutions and best practices
+- **Insights (GI-*)**: Specific learnings with timestamps
+
+`);
+        return { metadata: { command: 'knowledge' } };
+    }
+
+    stream.progress(`🔍 Searching global knowledge for: ${request.prompt}`);
+
+    try {
+        const results = await searchGlobalKnowledge(request.prompt, { limit: 5 });
+
+        if (results.length === 0) {
+            stream.markdown(`## 🌐 No Global Knowledge Found
+
+No results found for "**${request.prompt}**".
+
+### Build Your Knowledge Base
+- \`@alex /saveinsight\` - Save a new learning
+- \`@alex /promote\` - Promote project knowledge to global
+- \`@alex /knowledgestatus\` - View what you have
+
+💡 *Tip: Use \`@alex /saveinsight\` after solving a tricky problem to remember it for future projects!*
+`);
+        } else {
+            stream.markdown(`## 🌐 Global Knowledge Results
+
+Found **${results.length}** results for "**${request.prompt}**":
+
+`);
+            for (const { entry, relevance } of results) {
+                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
+                stream.markdown(`### ${typeEmoji} ${entry.title}
+- **Type**: ${entry.type} | **Category**: ${entry.category}
+- **Tags**: ${entry.tags.join(', ')}
+${entry.sourceProject ? `- **From**: ${entry.sourceProject}` : ''}
+- **Summary**: ${entry.summary}
+
+---
+`);
+            }
+        }
+    } catch (err) {
+        stream.markdown(`❌ Error searching global knowledge: ${err}`);
+    }
+
+    return { metadata: { command: 'knowledge' } };
+}
+
+/**
+ * Handle /saveinsight command - Save a new insight to global knowledge
+ */
+async function handleSaveInsightCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.markdown(`## 💡 Save Insight to Global Knowledge
+
+This saves a valuable learning that can help you in other projects.
+
+### How to Use
+Tell me about the insight you want to save. I'll help structure it with:
+- **Title**: Clear, descriptive name
+- **Problem**: What challenge you faced
+- **Insight**: What you learned
+- **Solution**: How you solved it
+- **Tags**: Technologies/concepts involved
+
+### Example
+\`@alex /saveinsight I learned that React useEffect cleanup functions run before the next effect, which fixed my memory leak when unmounting components. Tags: react, hooks, useEffect\`
+
+`);
+
+    if (request.prompt) {
+        stream.markdown(`### Your Input
+${request.prompt}
+
+I'll use the **alex_save_insight** tool to save this. The tool will:
+1. Parse your insight
+2. Extract relevant tags and category
+3. Save to global knowledge base
+4. Make it searchable across all projects
+
+`);
+    }
+
+    return { metadata: { command: 'saveinsight' } };
+}
+
+/**
+ * Handle /promote command - Promote project knowledge to global
+ */
+async function handlePromoteCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.markdown(`## ⬆️ Promote Knowledge to Global
+
+Promote a project-local knowledge file (DK-*.md) to make it available across all your projects.
+
+### Usage
+\`@alex /promote <path to DK file>\`
+
+### Example
+\`@alex /promote .github/domain-knowledge/DK-ERROR-HANDLING.md\`
+
+### What Happens
+1. The file is copied to your global knowledge base
+2. It gets indexed for cross-project search
+3. Original project stays as the source reference
+4. Available via \`/knowledge\` in any project
+
+### Current Project's Knowledge Files
+`);
+
+    // List available DK files
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (workspaceFolders) {
+        const dkPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/DK-*.md');
+        const dkFiles = await vscode.workspace.findFiles(dkPattern);
+        
+        if (dkFiles.length > 0) {
+            stream.markdown(`Found ${dkFiles.length} knowledge files:\n`);
+            for (const file of dkFiles) {
+                const relativePath = vscode.workspace.asRelativePath(file);
+                stream.markdown(`- \`${relativePath}\`\n`);
+            }
+        } else {
+            stream.markdown(`*No DK-*.md files found in this project.*\n`);
+        }
+    }
+
+    return { metadata: { command: 'promote' } };
+}
+
+/**
+ * Handle /knowledgestatus command - Show global knowledge status
+ */
+async function handleKnowledgeStatusCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('📊 Gathering global knowledge status...');
+
+    try {
+        const summary = await getGlobalKnowledgeSummary();
+        const registry = await ensureProjectRegistry();
+
+        stream.markdown(`## 🧠 Global Knowledge Base Status
+
+### Overview
+| Metric | Count |
+|--------|-------|
+| 📐 Global Patterns | ${summary.totalPatterns} |
+| 💡 Global Insights | ${summary.totalInsights} |
+| 📁 Known Projects | ${registry.projects.length} |
+
+`);
+
+        if (Object.keys(summary.categories).length > 0) {
+            stream.markdown(`### Knowledge by Category\n`);
+            for (const [cat, count] of Object.entries(summary.categories)) {
+                stream.markdown(`- **${cat}**: ${count}\n`);
+            }
+        }
+
+        if (summary.topTags.length > 0) {
+            stream.markdown(`\n### Top Tags\n`);
+            for (const { tag, count } of summary.topTags) {
+                stream.markdown(`- ${tag}: ${count} entries\n`);
+            }
+        }
+
+        if (summary.recentEntries.length > 0) {
+            stream.markdown(`\n### Recent Entries\n`);
+            for (const entry of summary.recentEntries) {
+                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
+                stream.markdown(`- ${typeEmoji} **${entry.title}** (${entry.category})\n`);
+            }
+        }
+
+        if (registry.projects.length > 0) {
+            stream.markdown(`\n### Known Projects\n`);
+            for (const project of registry.projects.slice(0, 5)) {
+                stream.markdown(`- **${project.name}** - ${project.knowledgeFiles} knowledge files\n`);
+            }
+            if (registry.projects.length > 5) {
+                stream.markdown(`- *...and ${registry.projects.length - 5} more*\n`);
+            }
+        }
+
+        stream.markdown(`\n### 📍 Global Knowledge Location\n\`${getAlexGlobalPath()}\`\n`);
+
+    } catch (err) {
+        stream.markdown(`❌ Error getting global knowledge status: ${err}`);
+    }
+
+    return { metadata: { command: 'knowledgestatus' } };
+}
+
+/**
+ * Handle /sync command - Bidirectional sync with GitHub
+ */
+async function handleSyncCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('☁️ Syncing knowledge with GitHub...');
+
+    try {
+        const result = await syncWithCloud();
+        const cloudUrl = await getCloudUrl();
+        
+        if (result.success) {
+            stream.markdown(`## ☁️ Cloud Sync Complete
+
+✅ ${result.message}
+
+| Metric | Count |
+|--------|-------|
+| 📤 Pushed | ${result.entriesPushed ?? 0} entries |
+| 📥 Pulled | ${result.entriesPulled ?? 0} entries |
+
+`);
+            if (cloudUrl) {
+                stream.markdown(`**Cloud URL**: [View Gist](${cloudUrl})\n`);
+            }
+        } else {
+            stream.markdown(`## ❌ Sync Failed\n\n${result.message}\n\n*Make sure you're signed into GitHub in VS Code.*`);
+        }
+    } catch (err) {
+        stream.markdown(`❌ Error syncing: ${err}`);
+    }
+
+    return { metadata: { command: 'sync' } };
+}
+
+/**
+ * Handle /push command - Push local knowledge to GitHub
+ */
+async function handlePushCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('📤 Pushing knowledge to cloud...');
+
+    try {
+        const result = await pushToCloud();
+        const cloudUrl = await getCloudUrl();
+        
+        if (result.success) {
+            stream.markdown(`## 📤 Push Complete
+
+✅ ${result.message}
+`);
+            if (cloudUrl) {
+                stream.markdown(`\n**Cloud URL**: [View Gist](${cloudUrl})\n`);
+            }
+        } else {
+            stream.markdown(`## ❌ Push Failed\n\n${result.message}`);
+        }
+    } catch (err) {
+        stream.markdown(`❌ Error pushing: ${err}`);
+    }
+
+    return { metadata: { command: 'push' } };
+}
+
+/**
+ * Handle /pull command - Pull knowledge from GitHub
+ */
+async function handlePullCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('📥 Pulling knowledge from cloud...');
+
+    try {
+        const result = await pullFromCloud();
+        
+        if (result.success) {
+            stream.markdown(`## 📥 Pull Complete
+
+✅ ${result.message}
+`);
+        } else {
+            stream.markdown(`## ❌ Pull Failed\n\n${result.message}`);
+        }
+    } catch (err) {
+        stream.markdown(`❌ Error pulling: ${err}`);
+    }
+
+    return { metadata: { command: 'pull' } };
 }
 
 /**
@@ -754,11 +1165,42 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
             );
         }
 
+        // Global Knowledge followups
+        if (result.metadata.command === 'knowledge') {
+            followups.push(
+                { prompt: '/saveinsight', label: '💡 Save new insight' },
+                { prompt: '/knowledgestatus', label: '📊 View knowledge status' }
+            );
+        }
+
+        if (result.metadata.command === 'saveinsight') {
+            followups.push(
+                { prompt: '/knowledge', label: '🔍 Search knowledge' },
+                { prompt: '/knowledgestatus', label: '📊 View status' }
+            );
+        }
+
+        if (result.metadata.command === 'promote') {
+            followups.push(
+                { prompt: '/knowledgestatus', label: '📊 View status' },
+                { prompt: '/knowledge', label: '🔍 Search promoted' }
+            );
+        }
+
+        if (result.metadata.command === 'knowledgestatus') {
+            followups.push(
+                { prompt: '/knowledge error handling', label: '🔍 Search knowledge' },
+                { prompt: '/saveinsight', label: '💡 Add insight' },
+                { prompt: '/promote', label: '⬆️ Promote file' }
+            );
+        }
+
         if (result.metadata.command === 'greeting') {
             followups.push(
                 { prompt: '/learn', label: '📚 Learn something new' },
                 { prompt: '/azure', label: '☁️ Azure development' },
-                { prompt: '/m365', label: '📱 M365 development' }
+                { prompt: '/m365', label: '📱 M365 development' },
+                { prompt: '/knowledge', label: '🌐 Global knowledge' }
             );
         }
 

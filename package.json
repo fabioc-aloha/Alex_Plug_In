@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "SEE LICENSE IN LICENSE.md",
-  "version": "2.7.2",
+  "version": "3.0.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -63,6 +63,18 @@
       {
         "command": "alex.selfActualize",
         "title": "Alex: Self-Actualize (Deep Meditation)"
+      },
+      {
+        "command": "alex.syncKnowledge",
+        "title": "Alex: Sync Global Knowledge (GitHub)"
+      },
+      {
+        "command": "alex.pushKnowledge",
+        "title": "Alex: Push Knowledge to Cloud"
+      },
+      {
+        "command": "alex.pullKnowledge",
+        "title": "Alex: Pull Knowledge from Cloud"
       }
     ],
     "chatParticipants": [
@@ -134,6 +146,34 @@
           {
             "name": "profile",
             "description": "View and update your personal preferences for personalized interactions"
+          },
+          {
+            "name": "knowledge",
+            "description": "Search your global knowledge base for patterns and insights learned across all projects"
+          },
+          {
+            "name": "saveinsight",
+            "description": "Save a valuable learning or insight to your global knowledge base for use in other projects"
+          },
+          {
+            "name": "promote",
+            "description": "Promote a project-local knowledge file (DK-*.md) to the global knowledge base"
+          },
+          {
+            "name": "knowledgestatus",
+            "description": "View the status of your global knowledge base: patterns, insights, and known projects"
+          },
+          {
+            "name": "sync",
+            "description": "Sync your global knowledge base with GitHub (bidirectional merge)"
+          },
+          {
+            "name": "push",
+            "description": "Push local global knowledge to GitHub Gist"
+          },
+          {
+            "name": "pull",
+            "description": "Pull global knowledge from GitHub Gist to local"
           }
         ]
       }
@@ -297,6 +337,196 @@
             }
           }
         }
+      },
+      {
+        "name": "alex_global_knowledge_search",
+        "displayName": "Alex Global Knowledge Search",
+        "toolReferenceName": "global_knowledge",
+        "modelDescription": "Searches Alex's global knowledge base for patterns and insights learned across ALL projects. Use when looking for cross-project learnings, reusable patterns, or insights that might apply to the current problem. Returns relevant knowledge from any project the user has worked on.",
+        "icon": "$(globe)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Search knowledge learned from all your projects",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to find in global knowledge"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "pattern",
+                "insight",
+                "all"
+              ],
+              "description": "Type of knowledge to search: pattern (reusable), insight (specific learning), or all",
+              "default": "all"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Filter by knowledge category"
+            },
+            "tags": {
+              "type": "string",
+              "description": "Comma-separated tags to filter by (e.g., 'react,typescript,hooks')"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      },
+      {
+        "name": "alex_save_insight",
+        "displayName": "Alex Save Insight",
+        "toolReferenceName": "save_insight",
+        "modelDescription": "Saves a new insight or learning to Alex's global knowledge base. Use when the user has learned something valuable that could help in other projects - debugging solutions, best practices discovered, clever patterns, or solutions to tricky problems.",
+        "icon": "$(lightbulb)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Save a learning to your global knowledge base",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "A clear, descriptive title for this insight"
+            },
+            "insight": {
+              "type": "string",
+              "description": "The main insight or learning content"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Category for this insight",
+              "default": "general"
+            },
+            "tags": {
+              "type": "string",
+              "description": "Comma-separated tags (e.g., 'react,hooks,state-management')"
+            },
+            "problem": {
+              "type": "string",
+              "description": "The problem context that led to this insight"
+            },
+            "solution": {
+              "type": "string",
+              "description": "The solution or approach discovered"
+            }
+          },
+          "required": [
+            "title",
+            "insight"
+          ]
+        }
+      },
+      {
+        "name": "alex_promote_knowledge",
+        "displayName": "Alex Promote Knowledge",
+        "toolReferenceName": "promote_knowledge",
+        "modelDescription": "Promotes a project-local domain knowledge file (DK-*.md) to the global knowledge base, making it available across all projects. Use when a project-specific learning is universally useful.",
+        "icon": "$(arrow-up)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Promote project knowledge to global",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "filePath": {
+              "type": "string",
+              "description": "Full path to the DK-*.md file to promote"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Category for the promoted knowledge",
+              "default": "general"
+            },
+            "additionalTags": {
+              "type": "string",
+              "description": "Additional comma-separated tags to add"
+            }
+          },
+          "required": [
+            "filePath"
+          ]
+        }
+      },
+      {
+        "name": "alex_global_knowledge_status",
+        "displayName": "Alex Global Knowledge Status",
+        "toolReferenceName": "knowledge_status",
+        "modelDescription": "Shows the current status of Alex's global knowledge base: total patterns, insights, categories, recent entries, and known projects. Use to understand what cross-project knowledge is available.",
+        "icon": "$(database)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "View global knowledge base status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "alex_cloud_sync",
+        "displayName": "Alex Cloud Sync",
+        "toolReferenceName": "cloud_sync",
+        "modelDescription": "Sync Alex's global knowledge base with GitHub Gist. Actions: 'sync' (bidirectional merge), 'push' (local to cloud), 'pull' (cloud to local). Use for backing up or sharing knowledge across machines.",
+        "icon": "$(cloud)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Sync global knowledge with GitHub",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["sync", "push", "pull"],
+              "description": "Sync action: 'sync' (merge), 'push' (upload), or 'pull' (download)",
+              "default": "sync"
+            }
+          }
+        }
       }
     ],
     "walkthroughs": [
@@ -370,6 +600,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.10",
+    "@types/proper-lockfile": "^4.1.4",
     "@types/vscode": "^1.108.1",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
@@ -381,6 +612,7 @@
     "typescript": "^5.1.3"
   },
   "dependencies": {
-    "fs-extra": "^11.3.3"
+    "fs-extra": "^11.3.3",
+    "proper-lockfile": "^4.1.2"
   }
 }

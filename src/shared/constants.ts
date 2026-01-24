@@ -122,3 +122,103 @@ export const VERSION_EXTRACT_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/;
  * Regex to extract numeric version only (for comparisons)
  */
 export const VERSION_NUMBER_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/;
+
+// ============================================================================
+// GLOBAL KNOWLEDGE BASE CONFIGURATION
+// ============================================================================
+
+/**
+ * Global Alex home directory name (in user's home folder)
+ */
+export const ALEX_GLOBAL_HOME = '.alex';
+
+/**
+ * Global knowledge base subdirectories
+ */
+export const GLOBAL_KNOWLEDGE_PATHS = {
+    root: ALEX_GLOBAL_HOME,
+    knowledge: `${ALEX_GLOBAL_HOME}/global-knowledge`,
+    patterns: `${ALEX_GLOBAL_HOME}/global-knowledge/patterns`,
+    insights: `${ALEX_GLOBAL_HOME}/global-knowledge/insights`,
+    index: `${ALEX_GLOBAL_HOME}/global-knowledge/index.json`,
+    projectRegistry: `${ALEX_GLOBAL_HOME}/project-registry.json`,
+    globalProfile: `${ALEX_GLOBAL_HOME}/user-profile.json`
+} as const;
+
+/**
+ * File prefixes for global knowledge types
+ */
+export const GLOBAL_KNOWLEDGE_PREFIXES = {
+    pattern: 'GK-',      // Global Knowledge patterns
+    insight: 'GI-'       // Global Insights (timestamped learnings)
+} as const;
+
+/**
+ * Categories for global knowledge organization
+ */
+export const GLOBAL_KNOWLEDGE_CATEGORIES = [
+    'error-handling',
+    'api-design',
+    'testing',
+    'debugging',
+    'performance',
+    'architecture',
+    'security',
+    'deployment',
+    'documentation',
+    'refactoring',
+    'patterns',
+    'tooling',
+    'general'
+] as const;
+
+export type GlobalKnowledgeCategory = typeof GLOBAL_KNOWLEDGE_CATEGORIES[number];
+
+/**
+ * Interface for global knowledge file metadata
+ */
+export interface IGlobalKnowledgeEntry {
+    id: string;
+    title: string;
+    type: 'pattern' | 'insight';
+    category: GlobalKnowledgeCategory;
+    tags: string[];
+    sourceProject?: string;
+    relatedProjects?: string[];
+    created: string;
+    modified: string;
+    summary: string;
+    filePath: string;
+}
+
+/**
+ * Interface for the global knowledge index
+ */
+export interface IGlobalKnowledgeIndex {
+    version: string;
+    lastUpdated: string;
+    cloudGistId?: string;  // Stored in gist so other machines can find it
+    cloudGistUrl?: string; // Human-readable URL for reference
+    entries: IGlobalKnowledgeEntry[];
+}
+
+/**
+ * Interface for project registry entry
+ */
+export interface IProjectRegistryEntry {
+    path: string;
+    name: string;
+    lastAccessed: string;
+    knowledgeFiles: number;
+    primaryTechnologies?: string[];
+    summary?: string;
+}
+
+/**
+ * Interface for the project registry
+ */
+export interface IProjectRegistry {
+    version: string;
+    lastUpdated: string;
+    projects: IProjectRegistryEntry[];
+}
