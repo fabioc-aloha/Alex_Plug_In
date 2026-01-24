@@ -487,7 +487,7 @@ async function performUpgrade(
             }
 
             // Step 6c: Add config folder templates (new in v2.0.0)
-            const configSrc = path.join(extensionPath, 'config');
+            const configSrc = path.join(extensionPath, '.github', 'config');
             const configDest = path.join(rootPath, '.github', 'config');
             if (await fs.pathExists(configSrc)) {
                 await fs.ensureDir(configDest);
@@ -513,7 +513,7 @@ async function performUpgrade(
 
             // Step 7: Handle domain-knowledge files carefully
             progress.report({ message: "Processing domain knowledge...", increment: 10 });
-            const extDkSrc = path.join(extensionPath, 'domain-knowledge');
+            const extDkSrc = path.join(extensionPath, '.github', 'domain-knowledge');
             const extDkDest = path.join(rootPath, '.github', 'domain-knowledge');
             
             if (await fs.pathExists(extDkSrc)) {

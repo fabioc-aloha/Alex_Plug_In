@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-2.7.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-2.7.2-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-SEE%20LICENSE-005a9e)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -433,7 +433,7 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v2.7.0 BIHEPTNILIUM
+## 🆕 What's New in v2.7.2 BIHEPTBIUM
 
 ### 🎯 6 New Procedural Memories
 
@@ -516,6 +516,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 2.7.0 BIHEPTNILIUM • Built on 270+ academic sources
+Version 2.7.2 BIHEPTBIUM • Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn

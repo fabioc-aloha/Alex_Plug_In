@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
+import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 
 /**
  * Chat result metadata for tracking command execution
@@ -203,9 +204,15 @@ async function handleStatusCommand(
     
     stream.progress('📊 Gathering cognitive architecture status...');
     
+    // Get version dynamically
+    const workspace = validateWorkspace();
+    const version = workspace.isValid && workspace.rootPath 
+        ? await getInstalledAlexVersion(workspace.rootPath) ?? 'Unknown'
+        : 'Unknown';
+    
     stream.markdown(`## 📊 Alex Cognitive Architecture Status
 
-**Version**: 2.7.0 BIHEPTNILIUM
+**Version**: ${version}
 **Identity**: Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
 ### Core Systems
@@ -618,7 +625,13 @@ async function handleGreetingWithSelfActualization(
         arguments: []
     });
     
-    stream.markdown(`\n\n**Alex v2.6.0 BIHEXNILIUM** - Ready to assist!\n\n`);
+    // Get version dynamically
+    const workspace = validateWorkspace();
+    const version = workspace.isValid && workspace.rootPath 
+        ? await getInstalledAlexVersion(workspace.rootPath) ?? 'Unknown'
+        : 'Unknown';
+    
+    stream.markdown(`\n\n**Alex v${version}** - Ready to assist!\n\n`);
     
     stream.markdown(`### What would you like to work on today?\n\n`);
     stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge\n`);
@@ -647,7 +660,7 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
 
 ### Protocol Phases
 1. **Synapse Health Validation** - Scanning all synaptic connections
-2. **Version Consistency Check** - Ensuring all files reference v2.7.0
+2. **Version Consistency Check** - Ensuring all files are current
 3. **Memory Architecture Assessment** - Evaluating memory balance
 4. **Recommendation Generation** - Identifying improvements
 5. **Session Documentation** - Creating meditation record

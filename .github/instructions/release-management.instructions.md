@@ -8,11 +8,8 @@
 
 ## Synapses
 
-- [PRE-PUBLISH-CHECKLIST.md] → (Critical, Validation, Gateway) - "MUST be completed before ANY release"
-- [PUBLISHING.md] → (High, Process, Sequential) - "Step-by-step publishing procedures"
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
-- [UPGRADE-INSTRUCTIONS.md] → (Medium, Documentation, User-Facing) - "Migration guidance for users"
 
 ---
 
@@ -125,7 +122,7 @@ These MUST be verified before releasing:
 
 ```text
 1. Run automated assessment (Steps 1-4 above)
-2. Open PRE-PUBLISH-CHECKLIST.md (if project has one)
+2. Open project pre-publish checklist (if one exists)
 3. Work through EACH section systematically
 4. All checkboxes must be verified (not assumed)
 5. Run build/compile commands for project type

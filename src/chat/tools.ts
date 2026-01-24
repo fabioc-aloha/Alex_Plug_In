@@ -801,6 +801,21 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
 
         const rootPath = workspaceFolders[0].uri.fsPath;
         
+        // Read version from copilot-instructions.md
+        let currentVersion = 'Unknown';
+        try {
+            const mainInstructionsPath = path.join(rootPath, '.github', 'copilot-instructions.md');
+            if (await fs.pathExists(mainInstructionsPath)) {
+                const content = await fs.readFile(mainInstructionsPath, 'utf-8');
+                const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
+                if (versionMatch) {
+                    currentVersion = versionMatch[1];
+                }
+            }
+        } catch {
+            // Use default
+        }
+        
         // Initialize report data
         const report = {
             timestamp: new Date().toISOString(),
@@ -811,7 +826,7 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
                 healthStatus: 'UNKNOWN'
             },
             versionConsistency: {
-                currentVersion: '2.5.0 BIPENTNILIUM',
+                currentVersion: currentVersion,
                 outdatedReferences: 0
             },
             memoryArchitecture: {

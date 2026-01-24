@@ -57,7 +57,7 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
             healthStatus: 'UNKNOWN'
         },
         versionConsistency: {
-            currentVersion: '2.5.0 BIPENTNILIUM',
+            currentVersion: 'Unknown',
             outdatedReferences: 0,
             filesUpdated: []
         },

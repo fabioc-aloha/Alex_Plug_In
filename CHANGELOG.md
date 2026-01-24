@@ -5,6 +5,27 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.2] BIHEPTBIUM - 2026-01-24
+
+### Fixed
+
+- **Critical: Upgrade Path Bug** - Domain knowledge and config files weren't being copied during upgrade/install due to incorrect path construction
+- **Hardcoded Versions** - Removed hardcoded version strings from `participant.ts`, `tools.ts`, and `self-actualization.ts` - now read dynamically from `copilot-instructions.md`
+
+### Added
+
+- **Shared Module** (`src/shared/`) - New centralized module for constants and utilities:
+  - `constants.ts` - Memory file patterns, synapse regex, health thresholds
+  - `utils.ts` - Common functions: `validateWorkspace()`, `getInstalledAlexVersion()`, `scanSynapseHealth()`, etc.
+  - Eliminates code duplication and ensures consistency across commands
+
+### Changed
+
+- **Dynamic Version Reading** - `/status` command and self-actualization reports now read version from installed architecture rather than hardcoded strings
+- **Code Quality** - Consolidated duplicate regex patterns and file path constants into shared module
+- **Package Cleanup** - Excluded project-specific files (`PRE-PUBLISH-CHECKLIST.md`, `PUBLISHING.md`) from deployed cognitive architecture
+- **Generic Release Management** - Made release-management procedural memory generic (removed project-specific file references) so it works for any project
+
 ## [2.7.0] BIHEPTNILIUM - 2026-01-23
 
 ### Added

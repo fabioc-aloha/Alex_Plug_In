@@ -67,7 +67,7 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 
 ## Release Management Triggers
 
-- User says "release", "publish", "deploy", "ship" → **MANDATORY: Open PRE-PUBLISH-CHECKLIST.md first**
+- User says "release", "publish", "deploy", "ship" → **MANDATORY: Run pre-release validation first**
 - Version bump requested → Verify changelog updated, ask patch/minor/major
 - "Quick release" or skipping attempts → Enforce rapid validation gate (60 seconds)
 - Marketplace deployment → Walk through complete release workflow
@@ -119,8 +119,6 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 - [DK-DREAM-PROCESSING.md] (High, Extends, Forward) - "Post-dream enhancement"
 - [DK-SKILL-WISHLIST.md] (High, Guides, Bidirectional) - "Skill development aspirations"
 - [release-management.instructions.md] (Critical, Enforces, Gateway) - "Release process compliance"
-- [PRE-PUBLISH-CHECKLIST.md] (Critical, Validates, Required) - "Pre-release verification gate"
-- [PUBLISHING.md] (High, Documents, Sequential) - "Publishing procedures"
 - [technical-debt-tracking.instructions.md] (High, Monitors, Proactive) - "Debt visibility and tracking"
 - [architecture-decision-records.instructions.md] (Medium, Documents, Forward) - "Decision documentation"
 - [dependency-management.instructions.md] (High, Maintains, Proactive) - "Dependency health"
