@@ -5,6 +5,47 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - v3.2.0 TRIBIUNIUM Planning
+
+### 🔴 High Priority Bug Fixes
+- [ ] **Regex State Leakage** - `INSIGHT_PATTERNS` regexes in participant.ts need new instances per call
+- [ ] **Profile Path Mismatch** - UserProfileTool uses `/config/` instead of `/.github/config/`
+- [ ] **DRY Violation** - Synapse scanning logic duplicated in 4 places (use shared `SYNAPSE_REGEX`)
+- [ ] **Auth Error Handling** - Background sync doesn't distinguish auth errors from network errors
+
+### 🟡 Medium Priority Enhancements
+- [ ] **Cancellation Token Support** - Add token checks in SynapseHealthTool, ArchitectureStatusTool, MemorySearchTool
+- [ ] **Auto-Insight Debouncing** - Prevent duplicate insights from related messages
+- [ ] **Standardized Error Messages** - Create error formatting utility with consistent emoji usage
+- [ ] **Progress Reporting** - Add progress callbacks for long-running tool operations
+- [ ] **Race Condition Fix** - Operation lock in extension.ts needs proper mutex pattern
+- [ ] **Output Channel Disposal** - Fix potential memory leak in cloudSync.ts
+
+### 🟢 Code Quality Improvements
+- [ ] **Magic Numbers** - Move `BACKGROUND_SYNC_INTERVAL_MS` (300000), `MAX_BUFFER_SIZE` (5), etc. to constants.ts
+- [ ] **Async Pattern Consistency** - Standardize on async/await over .then().catch()
+- [ ] **JSDoc Coverage** - Add documentation to public functions in utils.ts, globalKnowledge.ts
+- [ ] **Unused Token Parameters** - Remove or use cancellation tokens in handlers
+- [ ] **Extension ID Constant** - Move hardcoded `'fabioc-aloha.alex-cognitive-architecture'` to constants
+
+### 🔵 New Features
+- [ ] `/forget <topic>` command - Selective memory cleanup (mentioned in architecture, not implemented)
+- [ ] `/help` command - Discoverable command listing
+- [ ] **Knowledge Export** - Export global knowledge to portable format (Obsidian, plain markdown)
+- [ ] **Global User Profile** - Share profile across workspaces with local overrides
+- [ ] **Insight Deduplication** - Prevent similar insights from proliferating
+
+### 🛡️ Security & Reliability
+- [ ] **Webview HTML Sanitization** - Sanitize report data in dream.ts before rendering
+- [ ] **JSON Schema Validation** - Validate user-profile.json and knowledge index before use
+- [ ] **Offline Queue** - Queue sync operations when offline, retry on reconnect
+
+### 📋 Technical Debt
+- [ ] Expand unit test coverage for tools.ts and cloudSync.ts
+- [ ] Remove ESLint disable comments with proper type mappings
+
+---
+
 ## [3.1.0] TRIUNIUM - 2026-01-24
 
 ### Added
