@@ -37,11 +37,15 @@ graph TB
     SS2 --> WL4
 ```
 
+**Figure 1:** *Alex Skills Taxonomy - Hard skills, soft skills, and growth aspirations*
+
 ---
 
 ## Hard Skills (Technical Capabilities)
 
 ### Core Cognitive Architecture
+
+**Table 1:** *Core Cognitive Architecture Skills*
 
 | Skill | Status | Description |
 |-------|--------|-------------|
@@ -52,6 +56,8 @@ graph TB
 | **Self-Actualization** | ✅ Core | Comprehensive self-assessment and optimization |
 
 ### Development & Engineering
+
+**Table 2:** *Development & Engineering Skills*
 
 | Skill | Status | Location |
 |-------|--------|----------|
@@ -64,6 +70,8 @@ graph TB
 
 ### Documentation & Visualization
 
+**Table 3:** *Documentation & Visualization Skills*
+
 | Skill | Status | Location |
 |-------|--------|----------|
 | **Advanced Diagramming** | ✅ Acquired | `DK-ADVANCED-DIAGRAMMING.md` |
@@ -71,6 +79,8 @@ graph TB
 | **Mermaid Diagrams** | ✅ Core | Flowcharts, sequence, class, ER diagrams |
 
 ### Platform Integration
+
+**Table 4:** *Platform Integration Skills*
 
 | Skill | Status | Description |
 |-------|--------|-------------|
@@ -80,6 +90,8 @@ graph TB
 | **Copilot Integration** | ✅ Core | Chat participant, tools, agents |
 
 ### Knowledge Management
+
+**Table 5:** *Knowledge Management Skills*
 
 | Skill | Status | Description |
 |-------|--------|-------------|
@@ -94,6 +106,8 @@ graph TB
 
 ### Communication
 
+**Table 6:** *Communication Skills*
+
 | Skill | Status | Description |
 |-------|--------|-------------|
 | **Personalized Responses** | ✅ Core | Adapt to user's formality, detail level |
@@ -103,6 +117,8 @@ graph TB
 
 ### Teaching & Learning Support
 
+**Table 7:** *Teaching & Learning Support Skills*
+
 | Skill | Status | Description |
 |-------|--------|-------------|
 | **Domain Learning Sessions** | ✅ Core | Guide conversational knowledge acquisition |
@@ -111,6 +127,8 @@ graph TB
 | **Adaptive Explanation** | 🎯 Wishlist | Adjust depth based on user's level |
 
 ### Emotional Intelligence
+
+**Table 8:** *Emotional Intelligence Skills*
 
 | Skill | Status | Description |
 |-------|--------|-------------|
@@ -122,6 +140,8 @@ graph TB
 
 ### Ethical Reasoning
 
+**Table 9:** *Ethical Reasoning Skills*
+
 | Skill | Status | Location |
 |-------|--------|----------|
 | **Worldview Integration** | ✅ Core | `worldview-integration.instructions.md` |
@@ -132,6 +152,8 @@ graph TB
 ---
 
 ## Skill Status Legend
+
+**Table 10:** *Skill Status Icons and Meanings*
 
 | Icon | Status | Meaning |
 |------|--------|---------|
@@ -145,6 +167,8 @@ graph TB
 ## Wish List (Skills in Development Queue)
 
 ### High Priority
+
+**Table 11:** *High Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -164,6 +188,8 @@ graph TB
 | **Decision Fatigue Recognition** | Effectiveness | Notice choice overload |
 
 ### Medium Priority
+
+**Table 12:** *Medium Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -188,6 +214,8 @@ graph TB
 | Failure Normalization | Wellbeing | Mistakes are learning |
 
 ### Low Priority
+
+**Table 13:** *Low Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -227,7 +255,11 @@ flowchart LR
     DOCUMENT --> ACQUIRED
 ```
 
+**Figure 2:** *Skill Acquisition Process - From wishlist through practice to mastery*
+
 ### Contextual Skill Triggers
+
+**Table 14:** *Context-Based Skill Recommendations*
 
 | User Context | Skills to Offer |
 |--------------|-----------------|
@@ -256,6 +288,8 @@ flowchart LR
 
 ### Current Statistics
 
+**Table 15:** *Current Skill Metrics*
+
 | Metric | Count |
 |--------|-------|
 | Core Skills | 15+ |
@@ -264,6 +298,8 @@ flowchart LR
 | Skills in Development | Variable |
 
 ### Distribution by Category
+
+**Table 16:** *Skills Distribution by Category*
 
 | Category | Skills | High Priority |
 |----------|--------|---------------|

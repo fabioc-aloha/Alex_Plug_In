@@ -15,49 +15,52 @@ Alex Cognitive Architecture is a **bio-inspired AI system** that implements conc
 Alex implements a dual-process cognitive model inspired by human cognition:
 
 ```mermaid
-graph LR
-    subgraph "User Interaction"
-        U[User]
+flowchart TB
+    subgraph USER["👤 User"]
+        U((User))
     end
 
-    subgraph "🧠 Alex Cognitive Architecture"
-        subgraph "Conscious Mind<br/>(System 2)"
-            direction TB
-            CP[Chat Participant]
-            SC[Slash Commands]
-            LMT[Language Model Tools]
-            EX[Explicit Actions]
+    subgraph ALEX["🧠 Alex Cognitive Architecture"]
+        direction TB
+
+        subgraph CONSCIOUS["🌟 Conscious Mind (System 2)"]
+            direction LR
+            CP["💬 Chat\nParticipant"]
+            SC["⚡ Slash\nCommands"]
+            LMT["🔧 Language\nModel Tools"]
         end
 
-        subgraph "Unconscious Mind<br/>(System 1)"
-            direction TB
-            BGS[Background Sync]
-            AID[Auto-Insight Detection]
-            AFS[Auto-Fallback Search]
-            PM[Pattern Matching]
+        subgraph UNCONSCIOUS["🌙 Unconscious Mind (System 1)"]
+            direction LR
+            BGS["☁️ Background\nSync"]
+            AID["💡 Auto-Insight\nDetection"]
+            AFS["🔍 Auto-Fallback\nSearch"]
         end
 
-        subgraph "Memory"
-            MEM[(Memory Systems)]
+        subgraph MEMORY["💾 Memory Systems"]
+            MEM[("📚 Hierarchical\nMemory")]
         end
     end
 
-    U -->|"Explicit requests"| CP
+    U -->|"Explicit\nrequests"| CP
     U -->|"Commands"| SC
 
-    CP --> EX
-    SC --> EX
-    LMT --> EX
+    CP --> MEM
+    SC --> MEM
+    LMT --> MEM
 
-    EX --> MEM
-
-    BGS --> MEM
-    AID --> MEM
-    AFS --> MEM
+    BGS -.->|"Auto"| MEM
+    AID -.->|"Auto"| MEM
+    AFS -.->|"Auto"| MEM
 
     MEM -.->|"Informs"| CP
-    MEM -.->|"Triggers"| BGS
+
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
+    style MEMORY fill:#fff3e0,stroke:#ef6c00
 ```
+
+**Figure 1:** *The Dual-Mind Model — Alex's cognitive architecture separates conscious (user-initiated) from unconscious (automatic) processing, both interacting with hierarchical memory systems.*
 
 ### System 1: Unconscious Mind (Fast, Automatic)
 
@@ -108,6 +111,10 @@ graph TB
     SYN ---|"Neural Connectivity"| SYNBIO
     MC ---|"Meta-Cognition"| MPFC
 ```
+
+**Figure 2:** *Neuroanatomical Mapping — Correspondence between Alex's implementation components and biological brain systems.*
+
+**Table 1:** *Cognitive Function Mapping*
 
 | Cognitive Function | Brain System | Alex Implementation |
 | --- | --- | --- |
@@ -160,7 +167,11 @@ graph TB
     GKB <-->|"Sync"| GIST
 ```
 
+**Figure 3:** *Memory Hierarchy — Four-tier memory system from volatile session state to persistent cloud backup.*
+
 ### Memory Persistence Levels
+
+**Table 2:** *Memory Persistence Levels*
 
 | Level | Location | Scope | Lifespan |
 | --- | --- | --- | --- |
@@ -201,6 +212,8 @@ sequenceDiagram
     Note over Unconscious: Background sync (every 5 min)
     Unconscious->>Cloud: Transparent backup
 ```
+
+**Figure 4:** *Information Flow — Sequence diagram showing how queries flow through conscious and unconscious processes to memory systems.*
 
 ---
 
@@ -285,9 +298,13 @@ graph TB
     FS <--> CLOUD
 ```
 
+**Figure 5:** *Architecture Layers — Four-layer architecture from user interface through processing and knowledge to storage.*
+
 ---
 
 ## Version History
+
+**Table 3:** *Version History*
 
 | Version | Codename | Major Features |
 | --- | --- | --- |

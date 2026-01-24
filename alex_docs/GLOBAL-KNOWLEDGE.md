@@ -9,31 +9,38 @@
 The **Global Knowledge Base** is Alex's long-term memory for insights and patterns that apply across multiple projects. Unlike project-local memory (in `.github/`), global knowledge lives in your home directory and is available everywhere.
 
 ```mermaid
-graph TB
-    subgraph "Projects"
-        P1[Project A<br/>.github/]
-        P2[Project B<br/>.github/]
-        P3[Project C<br/>.github/]
+flowchart TB
+    subgraph PROJECTS["\ud83d\udcc1 Projects"]
+        direction LR
+        P1["\ud83d\udce6 Project A<br/>.github/"]
+        P2["\ud83d\udce6 Project B<br/>.github/"]
+        P3["\ud83d\udce6 Project C<br/>.github/"]
     end
 
-    subgraph "Global Knowledge"
-        GK["~/.alex/<br/>Global Knowledge Base"]
+    subgraph GLOBAL["\ud83c\udf10 Global Knowledge"]
+        GK[("\ud83e\udde0 ~/.alex/<br/>Cross-Project Memory")]
     end
 
-    subgraph "Cloud"
-        GIST[GitHub Gist<br/>Backup & Sync]
+    subgraph CLOUD["\u2601\ufe0f Cloud"]
+        GIST[("\ud83d\udcdd GitHub Gist<br/>Backup & Sync")]
     end
 
-    P1 -->|"Promote"| GK
-    P2 -->|"Promote"| GK
-    P3 -->|"Promote"| GK
+    P1 -.->|"\u2b06\ufe0f Promote"| GK
+    P2 -.->|"\u2b06\ufe0f Promote"| GK
+    P3 -.->|"\u2b06\ufe0f Promote"| GK
 
-    GK -->|"Search"| P1
-    GK -->|"Search"| P2
-    GK -->|"Search"| P3
+    GK -->|"\ud83d\udd0d Search"| P1
+    GK -->|"\ud83d\udd0d Search"| P2
+    GK -->|"\ud83d\udd0d Search"| P3
 
-    GK <-->|"Sync"| GIST
+    GK <-->|"\ud83d\udd04 Sync"| GIST
+
+    style PROJECTS fill:#e8f5e9,stroke:#2e7d32
+    style GLOBAL fill:#e3f2fd,stroke:#1565c0
+    style CLOUD fill:#f3e5f5,stroke:#7b1fa2
 ```
+
+**Figure 1:** *Global Knowledge Architecture - Cross-project memory with cloud synchronization*
 
 ---
 
@@ -147,6 +154,8 @@ When would this insight be useful again?
 
 Knowledge is organized into categories:
 
+**Table 1:** *Global Knowledge Categories*
+
 | Category | Description |
 | --- | --- |
 | `error-handling` | Exception handling, error recovery |
@@ -210,6 +219,8 @@ flowchart LR
     INDEX -->|"Filter by type/category/tags"| FILES
     FILES -->|"Content search"| RESULTS
 ```
+
+**Figure 2:** *Global Knowledge Search Flow - Index filtering and content matching*
 
 **Via chat:**
 
@@ -313,6 +324,8 @@ Tracks all projects where Alex is installed:
 
 Results are ranked by relevance score:
 
+**Table 2:** *Search Relevance Scoring Weights*
+
 | Match Type | Weight |
 | --- | --- |
 | Title contains query | +10 |
@@ -341,6 +354,8 @@ flowchart TD
     GLOBAL --> AUGMENT[Augmented Results]
 ```
 
+**Figure 3:** *Auto-Fallback Search - Automatic transition to global knowledge when local is empty*
+
 ### Auto-Insight Detection
 
 Valuable learnings in conversations are auto-saved:
@@ -355,6 +370,8 @@ flowchart TD
     DETECT -->|Confidence ≥ 0.5| SAVE
 ```
 
+**Figure 4:** *Auto-Insight Detection - Confidence-based automatic knowledge capture*
+
 ### Auto-Sync
 
 Changes are automatically synced to cloud:
@@ -368,6 +385,8 @@ flowchart TD
     CHANGE --> SYNC
     SYNC --> CLOUD
 ```
+
+**Figure 5:** *Auto-Sync Flow - Automatic cloud backup after knowledge modifications*
 
 ---
 

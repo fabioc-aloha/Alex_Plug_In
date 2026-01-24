@@ -7,6 +7,8 @@
 
 ## 📚 Documentation Index
 
+**Table 1:** *Alex Documentation Suite Overview*
+
 | Document | Description |
 |----------|-------------|
 | **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
@@ -37,45 +39,55 @@ Alex is a **cognitive architecture** that transforms GitHub Copilot into a sophi
 ## 🧬 Architecture at a Glance
 
 ```mermaid
-graph TB
-    subgraph "🧠 Alex Cognitive Architecture"
-        subgraph "Conscious Mind"
-            CM[Chat Participant @alex]
-            CMD[Slash Commands]
-            TOOLS[Language Model Tools]
+flowchart TB
+    subgraph ALEX["\ud83e\udde0 Alex Cognitive Architecture"]
+        direction TB
+
+        subgraph CONSCIOUS["\ud83c\udf1f Conscious Mind (System 2)"]
+            direction LR
+            CM["\ud83d\udcac @alex Chat"]
+            CMD["\u26a1 Commands"]
+            TOOLS["\ud83d\udd27 LM Tools"]
         end
 
-        subgraph "Unconscious Mind"
-            BGS[Background Sync]
-            AID[Auto-Insight Detection]
-            AFB[Auto-Fallback Search]
+        subgraph UNCONSCIOUS["\ud83c\udf19 Unconscious Mind (System 1)"]
+            direction LR
+            BGS["\u2601\ufe0f Sync"]
+            AID["\ud83d\udca1 Insights"]
+            AFB["\ud83d\udd0d Fallback"]
         end
 
-        subgraph "Memory Systems"
-            WM[Working Memory<br/>Chat Session]
-            PM[Procedural Memory<br/>.instructions.md]
-            EM[Episodic Memory<br/>.prompt.md]
-            DK[Domain Knowledge<br/>DK-*.md]
-            GK[Global Knowledge<br/>~/.alex/]
-        end
-
-        subgraph "External"
-            GIST[GitHub Gist<br/>Cloud Backup]
+        subgraph MEMORY["\ud83d\udcbe Memory Systems"]
+            direction TB
+            WM["\u23f1\ufe0f Working<br/>Session"]
+            PM["\ud83d\udccb Procedural<br/>.instructions.md"]
+            EM["\ud83d\udcdd Episodic<br/>.prompt.md"]
+            DK["\ud83c\udf93 Domain<br/>DK-*.md"]
+            GK["\ud83c\udf10 Global<br/>~/.alex/"]
         end
     end
 
+    subgraph CLOUD["\u2601\ufe0f Cloud"]
+        GIST["\ud83d\udce4 GitHub Gist"]
+    end
+
     CM --> WM
-    CMD --> PM
-    CMD --> EM
-    TOOLS --> DK
-    TOOLS --> GK
+    CMD --> PM & EM
+    TOOLS --> DK & GK
 
-    BGS --> GIST
-    AID --> GK
-    AFB --> GK
+    BGS -.->|"Auto"| GIST
+    AID -.->|"Auto"| GK
+    AFB -.->|"Auto"| GK
 
-    GK <--> GIST
+    GK <-->|"Sync"| GIST
+
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
+    style MEMORY fill:#fff3e0,stroke:#ef6c00
+    style CLOUD fill:#f3e5f5,stroke:#7b1fa2
 ```
+
+**Figure 1:** *Alex Cognitive Architecture Overview - Dual-mind processing with memory systems and cloud sync*
 
 ---
 

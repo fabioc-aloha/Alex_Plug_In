@@ -6,6 +6,8 @@
 
 ## Chat Commands
 
+**Table 1:** *Chat Commands Quick Reference*
+
 | Command | Description | Example |
 | --- | --- | --- |
 | `/knowledge` | Search global knowledge | `@alex /knowledge error handling` |
@@ -20,6 +22,8 @@
 
 Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
+**Table 2:** *VS Code Command Palette Commands*
+
 | Command | Description |
 | --- | --- |
 | `Alex: Initialize Architecture` | Deploy Alex to current project |
@@ -33,6 +37,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 ### Memory & Search
 
+**Table 3:** *Memory and Search MCP Tools*
+
 | Tool | Purpose | Unconscious? |
 | --- | --- | --- |
 | `alex_memory_search` | Search memory files | ✅ Auto-fallback to global |
@@ -41,6 +47,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 ### Knowledge Management
 
+**Table 4:** *Knowledge Management MCP Tools*
+
 | Tool | Purpose | Unconscious? |
 | --- | --- | --- |
 | `alex_save_insight` | Save learning to global | ✅ Auto cloud sync |
@@ -48,6 +56,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | `alex_cloud_sync` | Sync with GitHub Gist | – |
 
 ### Architecture Health
+
+**Table 5:** *Architecture Health MCP Tools*
 
 | Tool | Purpose |
 | --- | --- |
@@ -58,6 +68,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 ---
 
 ## Memory File Types
+
+**Table 6:** *Memory File Types and Locations*
 
 | Type | Location | Pattern | Purpose |
 | --- | --- | --- | --- |
@@ -70,6 +82,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 ---
 
 ## Global Knowledge Categories
+
+**Table 7:** *Knowledge Category Definitions*
 
 | Category | For |
 | --- | --- |
@@ -90,6 +104,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 ---
 
 ## Unconscious Mind Quick Facts
+
+**Table 8:** *Unconscious Process Triggers and Timing*
 
 | Process | Trigger | Timing |
 | --- | --- | --- |
@@ -124,6 +140,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 ---
 
 ## Status Indicators
+
+**Table 9:** *Status Icon Meanings*
 
 | Icon | Meaning |
 | --- | --- |
@@ -165,6 +183,8 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 View in VS Code Output panel (`Ctrl+Shift+U`):
 
+**Table 10:** *VS Code Output Channels*
+
 | Channel | Content |
 | --- | --- |
 | Alex Cognitive Architecture | General extension logs |
@@ -173,6 +193,8 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 ---
 
 ## Keyboard Shortcuts
+
+**Table 11:** *Keyboard Shortcuts*
 
 | Action | Windows/Linux | macOS |
 | --- | --- | --- |
@@ -221,6 +243,8 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 ---
 
 ## Version Info
+
+**Table 12:** *Current Versions*
 
 | Component | Version |
 | --- | --- |

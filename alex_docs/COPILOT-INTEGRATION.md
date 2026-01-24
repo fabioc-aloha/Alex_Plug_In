@@ -36,6 +36,8 @@ graph TB
     AGENTS --> SPEC
 ```
 
+**Figure 1:** *Copilot Native Features to Alex Implementation Mapping*
+
 ---
 
 ## Native Feature: copilot-instructions.md
@@ -138,6 +140,8 @@ Extensions can register **chat participants** that respond to @mentions. Each pa
 
 Alex registers as `@alex` with 15 slash commands:
 
+**Table 2:** *Alex Slash Commands*
+
 | Command | Function |
 |---------|----------|
 | `/status` | Architecture health check |
@@ -181,6 +185,8 @@ Extensions can register **tools** that Copilot can invoke automatically in Agent
 ### How Alex Uses It
 
 Alex registers 11 tools via the MCP (Model Context Protocol):
+
+**Table 3:** *Alex MCP Tools*
 
 | Tool | Purpose |
 |------|---------|
@@ -257,6 +263,8 @@ Specialized instructions for guiding meditation sessions...
 
 ## Feature Comparison
 
+**Table 4:** *Native Copilot Features vs Alex Enhancement*
+
 | Feature | Native Copilot | Alex Enhancement |
 |---------|---------------|------------------|
 | Context injection | `copilot-instructions.md` | Full cognitive framework |
@@ -291,6 +299,8 @@ sequenceDiagram
     A->>M: Write to global knowledge
     A->>C: Confirm saved
 ```
+
+**Figure 2:** *Alex Integration Sequence - How chat, memory files, and tools work together*
 
 ---
 

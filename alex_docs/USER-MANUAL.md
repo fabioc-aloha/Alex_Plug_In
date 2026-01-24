@@ -74,6 +74,8 @@ Always start with `@alex` to activate Alex's cognitive framework:
 
 Quick actions via `/` commands:
 
+**Table 1:** *Essential Slash Commands*
+
 | Command | What It Does |
 |---------|--------------|
 | `/status` | Check Alex health and version |
@@ -107,6 +109,8 @@ Search across all your projects:
 
 ### Command Palette (Ctrl+Shift+P)
 
+**Table 2:** *VS Code Command Palette Commands*
+
 | Command | Description |
 |---------|-------------|
 | `Alex: Initialize Architecture` | First-time setup for a project |
@@ -119,6 +123,8 @@ Search across all your projects:
 | `Alex: Pull Knowledge from Cloud` | Download from GitHub |
 
 ### Chat Commands (@alex /command)
+
+**Table 3:** *Complete Chat Commands Reference*
 
 | Command | Purpose | Example |
 |---------|---------|---------|
@@ -144,6 +150,8 @@ Search across all your projects:
 ### Memory Types
 
 Alex has different types of memory:
+
+**Table 4:** *Alex Memory Types and Locations*
 
 | Type | Location | Purpose |
 |------|----------|---------|
@@ -391,6 +399,8 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 
 ## Keyboard Shortcuts
 
+**Table 5:** *Useful Keyboard Shortcuts*
+
 | Action | Shortcut |
 |--------|----------|
 | Open Chat | `Ctrl+Alt+I` |
@@ -401,6 +411,8 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 ---
 
 ## Version Information
+
+**Table 6:** *Version Information Locations*
 
 | Component | Location |
 |-----------|----------|

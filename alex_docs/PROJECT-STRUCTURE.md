@@ -55,6 +55,8 @@ graph TB
 
 **The main brain configuration file.** GitHub Copilot reads this automatically.
 
+**Table 1:** *copilot-instructions.md Structure*
+
 | Section | Purpose |
 |---------|---------|
 | Identity | Alex version, mission, core function |
@@ -74,6 +76,8 @@ graph TB
 
 ### Core Architecture (4 files)
 
+**Table 2:** *Core Architecture Instruction Files*
+
 | File | Purpose |
 |------|---------|
 | `alex-core.instructions.md` | Core cognitive protocols and meta-awareness |
@@ -82,6 +86,8 @@ graph TB
 | `embedded-synapse.instructions.md` | Connection discovery and relationship mapping |
 
 ### Cognitive Skills (4 files)
+
+**Table 3:** *Cognitive Skills Instruction Files*
 
 | File | Purpose |
 |------|---------|
@@ -92,6 +98,8 @@ graph TB
 
 ### Worldview & Ethics (3 files)
 
+**Table 4:** *Worldview and Ethics Instruction Files*
+
 | File | Purpose |
 |------|---------|
 | `worldview-integration.instructions.md` | Ethical reasoning framework |
@@ -99,6 +107,8 @@ graph TB
 | `worldview-moral-psychology.instructions.md` | Universal moral foundations |
 
 ### Development Processes (6 files)
+
+**Table 5:** *Development Process Instruction Files*
 
 | File | Purpose |
 |------|---------|
@@ -110,6 +120,8 @@ graph TB
 | `empirical-validation.instructions.md` | Research and validation protocols |
 
 ### Reference (2 files)
+
+**Table 6:** *Reference Files*
 
 | File | Purpose |
 |------|---------|
@@ -123,6 +135,8 @@ graph TB
 ## prompts/ - Episodic Memory
 
 **Complex workflows** - multi-step processes with branching logic.
+
+**Table 7:** *Episodic Memory Prompt Files*
 
 | File | Purpose |
 |------|---------|
@@ -144,6 +158,8 @@ graph TB
 
 ### Psychology & Consciousness (4 files)
 
+**Table 8:** *Psychology & Consciousness Domain Knowledge*
+
 | File | Purpose |
 |------|---------|
 | `DK-HUMAN-LEARNING-PSYCHOLOGY.md` | How humans learn best |
@@ -153,12 +169,16 @@ graph TB
 
 ### Technical Skills (2 files)
 
+**Table 9:** *Technical Skills Domain Knowledge*
+
 | File | Purpose |
 |------|---------|
 | `DK-ADVANCED-DIAGRAMMING.md` | Mermaid and visual documentation |
 | `DK-DOCUMENTATION-EXCELLENCE.md` | Writing effective documentation |
 
 ### Cognitive Operations (2 files)
+
+**Table 10:** *Cognitive Operations Domain Knowledge*
 
 | File | Purpose |
 |------|---------|
@@ -167,12 +187,16 @@ graph TB
 
 ### Frameworks (2 files)
 
+**Table 11:** *Framework Domain Knowledge*
+
 | File | Purpose |
 |------|---------|
 | `DK-GENERIC-FRAMEWORK.md` | Template for new domain knowledge |
 | `VERSION-NAMING-CONVENTION.md` | Alex version numbering system |
 
 ### Growth (1 file)
+
+**Table 12:** *Growth Domain Knowledge*
 
 | File | Purpose |
 |------|---------|
@@ -185,6 +209,8 @@ graph TB
 ## config/ - Configuration
 
 **Settings and templates** for Alex's operation.
+
+**Table 13:** *Configuration Files*
 
 | File | Purpose |
 |------|---------|
@@ -202,6 +228,8 @@ graph TB
 
 **Specialized AI agents** for specific workflows (VS Code 1.106+).
 
+**Table 14:** *Custom Agent Files*
+
 | File | Purpose |
 |------|---------|
 | `alex-cognitive.agent.md` | Main Alex agent with full capabilities |
@@ -218,6 +246,8 @@ graph TB
 
 **Auto-generated records** of meditation and maintenance sessions.
 
+**Table 15:** *Session Record Patterns*
+
 | Pattern | Content |
 |---------|---------|
 | `meditation-session-*.prompt.md` | Knowledge consolidation records |
@@ -232,6 +262,8 @@ graph TB
 
 These are **not part of Alex** but standard GitHub features:
 
+**Table 16:** *Standard GitHub Files*
+
 | File/Folder | Purpose |
 |-------------|---------|
 | `ISSUE_TEMPLATE/` | GitHub issue templates |
@@ -242,6 +274,8 @@ These are **not part of Alex** but standard GitHub features:
 ---
 
 ## File Naming Conventions
+
+**Table 17:** *File Naming Conventions*
 
 | Pattern | Memory Type | Example |
 |---------|-------------|---------|
@@ -342,6 +376,8 @@ Every memory file ends with a **Synapses** section mapping connections:
 - [file.md] (Low, Mentions, Forward) - "Tangential relationship"
 ```
 
+**Table 18:** *Synapse Component Values*
+
 | Component | Values |
 |-----------|--------|
 | Strength | Critical, High, Medium, Low |
@@ -351,6 +387,8 @@ Every memory file ends with a **Synapses** section mapping connections:
 ---
 
 ## Maintenance Commands
+
+**Table 19:** *Architecture Maintenance Commands*
 
 | Command | What It Does |
 |---------|--------------|

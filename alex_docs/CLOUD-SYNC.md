@@ -13,17 +13,22 @@
 - **Portability**: Take your learnings wherever you go
 
 ```mermaid
-graph LR
-    subgraph "Your Machine"
-        GK["~/.alex/<br/>Global Knowledge"]
+flowchart LR
+    subgraph LOCAL["\ud83d\udcbb Your Machine"]
+        GK[("\ud83c\udf10 Global Knowledge<br/>~/.alex/")]
     end
 
-    subgraph "GitHub"
-        GIST["Private Gist<br/>alex-global-knowledge"]
+    subgraph CLOUD["\u2601\ufe0f GitHub Cloud"]
+        GIST[("\ud83d\udcdd Private Gist<br/>alex-global-knowledge")]
     end
 
-    GK <-->|"Encrypted<br/>Connection"| GIST
+    GK <-->|"\ud83d\udd12 Secure Sync"| GIST
+
+    style LOCAL fill:#e8f5e9,stroke:#2e7d32
+    style CLOUD fill:#e3f2fd,stroke:#1565c0
 ```
+
+**Figure 1:** *Cloud Sync Architecture - Secure bidirectional sync between local and GitHub Gist*
 
 ---
 
@@ -32,6 +37,8 @@ graph LR
 ### Storage Format
 
 Knowledge is stored in a **private GitHub Gist** containing:
+
+**Table 1:** *GitHub Gist Storage Files*
 
 | File | Purpose |
 | --- | --- |
@@ -50,16 +57,30 @@ Cloud sync uses **VS Code's GitHub Authentication**:
 
 ```mermaid
 flowchart TD
-    VSCODE[VS Code]
-    AUTH[GitHub Auth]
-    API[GitHub API]
-    GIST[Private Gist]
+    subgraph VSCODE["\ud83d\udcbb VS Code"]
+        EXT["\ud83e\udde9 Alex Extension"]
+    end
 
-    VSCODE -->|"Request Token"| AUTH
-    AUTH -->|"OAuth Token"| VSCODE
-    VSCODE -->|"Authenticated<br/>Requests"| API
-    API <--> GIST
+    subgraph AUTH["\ud83d\udd10 Authentication"]
+        GH_AUTH["\ud83d\udc19 GitHub OAuth"]
+    end
+
+    subgraph GITHUB["\u2601\ufe0f GitHub"]
+        API["\ud83d\udd27 REST API"]
+        GIST["\ud83d\udcdd Private Gist"]
+    end
+
+    EXT -->|"1\ufe0f\u20e3 Request Token"| GH_AUTH
+    GH_AUTH -->|"2\ufe0f\u20e3 OAuth Token"| EXT
+    EXT -->|"3\ufe0f\u20e3 Authenticated Requests"| API
+    API <-->|"4\ufe0f\u20e3 CRUD"| GIST
+
+    style VSCODE fill:#f5f5f5,stroke:#424242
+    style AUTH fill:#fff3e0,stroke:#ef6c00
+    style GITHUB fill:#e3f2fd,stroke:#1565c0
 ```
+
+**Figure 2:** *Authentication Flow - VS Code OAuth integration with GitHub*
 
 ---
 
@@ -82,6 +103,8 @@ Alex: Sync Knowledge to Cloud
 ### Background Sync (Unconscious)
 
 Automatic sync running in the background:
+
+**Table 2:** *Background Sync Triggers and Timing*
 
 | Trigger | Timing | Type |
 | --- | --- | --- |
@@ -108,6 +131,8 @@ gantt
     Trigger sync : 202, 205
 ```
 
+**Figure 3:** *Background Sync Timeline - Startup, periodic, and modification-triggered syncs*
+
 ---
 
 ## Sync Algorithm
@@ -132,6 +157,8 @@ flowchart TD
     style MERGE fill:#f9f,stroke:#333
 ```
 
+**Figure 4:** *Full Sync Algorithm - Bidirectional merge with timestamp-based conflict resolution*
+
 **Merge Strategy:**
 
 1. **Both have entry**: Keep newer (by `modified` timestamp)
@@ -150,6 +177,8 @@ flowchart LR
 
     CHANGE --> DELAY --> PUSH
 ```
+
+**Figure 5:** *Push-Only Sync - Debounced upload after local modifications*
 
 ---
 
@@ -189,6 +218,8 @@ Detailed sync logs in **"Alex Unconscious Mind"** output channel:
 ```
 
 ### Status Indicators
+
+**Table 3:** *Cloud Sync Status Indicators*
 
 | Indicator | Meaning |
 | --- | --- |
@@ -267,6 +298,8 @@ stateDiagram-v2
     }
 ```
 
+**Figure 6:** *Offline Behavior State Diagram - Graceful degradation when network is unavailable*
+
 **When offline:**
 
 - All local operations work normally
@@ -290,6 +323,8 @@ flowchart TD
     TIMESTAMPS --> NEWER
 ```
 
+**Figure 7:** *Conflict Resolution - Timestamp-based last-write-wins strategy*
+
 **Strategy:** Newest wins (last-write-wins)
 
 - Compares `modified` timestamps
@@ -299,6 +334,8 @@ flowchart TD
 ---
 
 ## Commands Reference
+
+**Table 4:** *Cloud Sync Commands*
 
 | Command | Description | Trigger |
 | --- | --- | --- |
@@ -313,6 +350,8 @@ flowchart TD
   action: 'sync' | 'push' | 'pull'
 }
 ```
+
+**Table 5:** *Cloud Sync Tool Actions*
 
 | Action | Description |
 | --- | --- |

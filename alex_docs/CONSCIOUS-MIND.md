@@ -9,35 +9,42 @@
 The **Conscious Mind** represents all operations that require explicit user action. These are deliberate, attention-requiring processes analogous to System 2 thinking in cognitive psychology.
 
 ```mermaid
-graph LR
-    subgraph "🌟 Conscious Mind"
-        subgraph "Chat Interface"
-            CP["@alex Chat Participant"]
-            SC[Slash Commands]
+flowchart TB
+    subgraph CONSCIOUS["\ud83c\udf1f Conscious Mind (System 2)"]
+        direction TB
+
+        subgraph CHAT["\ud83d\udcac Chat Interface"]
+            direction LR
+            CP["\ud83e\udde0 @alex"]
+            SC["\u26a1 Slash Commands"]
         end
 
-        subgraph "VS Code Commands"
-            INIT["Alex: Initialize"]
-            DREAM["Alex: Dream"]
-            UPGRADE["Alex: Upgrade"]
-            SELF["Alex: Self-Actualize"]
-            SYNC["Alex: Sync Knowledge"]
+        subgraph COMMANDS["\ud83c\udfa8 VS Code Commands"]
+            direction LR
+            INIT["\ud83d\ude80 Initialize"]
+            DREAM["\ud83c\udf19 Dream"]
+            SYNC["\u2601\ufe0f Sync"]
         end
 
-        subgraph "Language Model Tools"
-            MEM[alex_memory_search]
-            GKS[alex_global_knowledge_search]
-            SAVE[alex_save_insight]
-            PROM[alex_promote_knowledge]
-            STAT[alex_architecture_status]
-            HLTH[alex_synapse_health]
+        subgraph TOOLS["\ud83d\udd27 Language Model Tools"]
+            direction LR
+            MEM["\ud83d\udd0d Memory Search"]
+            SAVE["\ud83d\udcbe Save Insight"]
+            STAT["\ud83d\udcca Status"]
         end
     end
 
-    CP --> SC
-    CP --> MEM
-    CP --> GKS
+    USER(("\ud83d\udc64 User")) -->|"Deliberate Action"| CHAT
+    USER -->|"Command Palette"| COMMANDS
+    CHAT --> TOOLS
+
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
+    style CHAT fill:#fff3e0,stroke:#ef6c00
+    style COMMANDS fill:#e3f2fd,stroke:#1565c0
+    style TOOLS fill:#f3e5f5,stroke:#7b1fa2
 ```
+
+**Figure 1:** *Conscious Mind Architecture - User-initiated operations via chat, commands, and tools*
 
 ---
 
@@ -52,6 +59,8 @@ The primary interface for conscious interaction:
 Alex responds with personality, context awareness, and access to all cognitive tools.
 
 ### Slash Commands
+
+**Table 1:** *Alex Chat Slash Commands*
 
 | Command | Purpose | Example |
 | --- | --- | --- |
@@ -100,6 +109,8 @@ flowchart LR
     E --> F
     F --> G[Save to Episodic]
 ```
+
+**Figure 2:** *Dream Maintenance Flow - Automated health check and repair process*
 
 ### Alex: Self-Actualize (Deep Meditation)
 
@@ -160,7 +171,11 @@ graph LR
     end
 ```
 
+**Figure 3:** *Language Model Tools - Available MCP tools grouped by function*
+
 ### Tool Descriptions
+
+**Table 2:** *Alex Language Model Tool Descriptions*
 
 | Tool | Purpose |
 | --- | --- |
@@ -204,6 +219,8 @@ flowchart TD
     Q4 -->|No| CHAT["Just chat with @alex"]
 ```
 
+**Figure 4:** *Decision Flow - Choosing the right conscious operation for your needs*
+
 ---
 
 ## Best Practices
@@ -245,6 +262,8 @@ When domain knowledge applies to other projects:
 ## Integration with Unconscious Mind
 
 The conscious mind works alongside the unconscious:
+
+**Table 3:** *Conscious Actions and Unconscious Responses*
 
 | Conscious Action | Unconscious Response |
 | --- | --- |

@@ -9,39 +9,49 @@
 The **Unconscious Mind** represents Alex's automatic, always-running processes. These are fast, effortless operations analogous to System 1 thinking in cognitive psychology. They handle routine tasks without requiring user attention.
 
 ```mermaid
-graph TB
-    subgraph "🌙 Unconscious Mind"
-        subgraph "Background Processes"
-            BGS[Background Sync<br/>Every 5 minutes]
-            AID[Auto-Insight Detection<br/>Pattern matching in conversations]
-            AFS[Auto-Fallback Search<br/>Global knowledge when local empty]
+flowchart TB
+    subgraph UNCONSCIOUS["\ud83c\udf19 Unconscious Mind (System 1)"]
+        direction TB
+
+        subgraph PROCESSES["\u2699\ufe0f Background Processes"]
+            direction LR
+            BGS["\u2601\ufe0f Background Sync<br/>Every 5 minutes"]
+            AID["\ud83d\udca1 Auto-Insight<br/>Pattern matching"]
+            AFS["\ud83d\udd0d Auto-Fallback<br/>Global when local empty"]
         end
 
-        subgraph "Triggers"
-            TIME[Timer Events]
-            MOD[Knowledge Modifications]
-            SEARCH[Empty Search Results]
-            CONV[Conversation Analysis]
-        end
-
-        subgraph "Actions"
-            SYNC[Cloud Sync]
-            SAVE[Save Insight]
-            AUGMENT[Augment Results]
+        subgraph TRIGGERS["\u26a1 Triggers"]
+            direction LR
+            TIME["\u23f0 Timer"]
+            MOD["\ud83d\udcdd Modifications"]
+            SEARCH["\u2753 Empty Results"]
         end
     end
 
-    TIME --> BGS
-    MOD --> BGS
+    subgraph ACTIONS["\ud83c\udfaf Automatic Actions"]
+        direction LR
+        SYNC["\ud83d\udd04 Sync to Cloud"]
+        SAVE["\ud83d\udcbe Save Insight"]
+        AUGMENT["\ud83d\udcc8 Augment Results"]
+    end
+
+    TIME -.->|"Auto"| BGS
+    MOD -.->|"Auto"| BGS
     BGS --> SYNC
 
-    CONV --> AID
+    SEARCH -.->|"Auto"| AFS
+    AFS --> AUGMENT
+
     AID --> SAVE
     SAVE --> SYNC
 
-    SEARCH --> AFS
-    AFS --> AUGMENT
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
+    style PROCESSES fill:#fff3e0,stroke:#ef6c00
+    style TRIGGERS fill:#f3e5f5,stroke:#7b1fa2
+    style ACTIONS fill:#e8f5e9,stroke:#2e7d32
 ```
+
+**Figure 1:** *Unconscious Mind Architecture - Automatic background processes and their triggers*
 
 ---
 
@@ -52,6 +62,8 @@ graph TB
 Automatically backs up your global knowledge to GitHub Gist without any user action.
 
 ### When It Runs
+
+**Table 1:** *Background Sync Triggers*
 
 | Trigger | Timing |
 | --- | --- |
@@ -81,6 +93,8 @@ sequenceDiagram
         Sync->>Sync: Log to output channel
     end
 ```
+
+**Figure 2:** *Background Sync Sequence - Timer-triggered synchronization with change detection*
 
 ### Logging
 
@@ -152,6 +166,8 @@ graph LR
     THRESH -->|No| SKIP
 ```
 
+**Figure 3:** *Auto-Insight Confidence Scoring - Pattern matching determines save threshold*
+
 ### What Gets Saved
 
 When auto-insight detection triggers:
@@ -200,6 +216,8 @@ flowchart TD
     GCHECK -->|No| EMPTY[Return empty message]
 ```
 
+**Figure 4:** *Auto-Fallback Search Flow - Seamless transition from local to global knowledge*
+
 ### User Experience
 
 The user simply uses `alex_memory_search` or `/knowledge` and gets unified results:
@@ -228,6 +246,8 @@ No matches found for "error handling" in local memory.
 ## Configuration
 
 The unconscious mind has sensible defaults but can be observed:
+
+**Table 2:** *Unconscious Mind Configuration Defaults*
 
 | Setting | Default | Description |
 | --- | --- | --- |
@@ -339,11 +359,15 @@ graph TB
     DETECT --> SAVE
 ```
 
+**Figure 5:** *Conscious-Unconscious Interaction - How automatic processes support user actions*
+
 ---
 
 ## Failure Handling
 
 The unconscious mind is designed to fail silently:
+
+**Table 3:** *Failure Scenarios and Behaviors*
 
 | Scenario | Behavior |
 | --- | --- |

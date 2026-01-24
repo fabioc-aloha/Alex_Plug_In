@@ -9,40 +9,50 @@
 Alex implements a **hierarchical memory system** inspired by human cognition. Different types of memory serve different purposes and have different lifespans.
 
 ```mermaid
-graph TB
-    subgraph "Memory Hierarchy"
-        WM["🧠 Working Memory<br/>Current session<br/>7±2 rules"]
-
-        subgraph "Long-Term Memory"
-            subgraph "Local (Project)"
-                PM["📋 Procedural<br/>.instructions.md<br/>How to do things"]
-                EM["📝 Episodic<br/>.prompt.md<br/>What happened"]
-                DK["🎓 Domain<br/>DK-*.md<br/>What I know"]
-            end
-
-            subgraph "Global (User)"
-                GK["🌐 Global Knowledge<br/>~/.alex/<br/>Cross-project wisdom"]
-            end
-        end
-
-        CLOUD["☁️ Cloud Backup<br/>GitHub Gist"]
+flowchart TB
+    subgraph WM_LAYER["⏱️ Volatile"]
+        WM["🧠 Working Memory\n7±2 rules | Session only"]
     end
 
-    WM -->|"Consolidation"| PM
-    WM -->|"Recording"| EM
-    WM -->|"Learning"| DK
+    subgraph LOCAL_LAYER["📁 Local (Project)"]
+        direction LR
+        PM["📋 Procedural\n.instructions.md"]
+        EM["📝 Episodic\n.prompt.md"]
+        DK["🎓 Domain\nDK-*.md"]
+    end
 
-    DK -->|"Promotion"| GK
-    PM -->|"Promotion"| GK
+    subgraph GLOBAL_LAYER["🌐 Global (User)"]
+        GK["🌍 Global Knowledge\n~/.alex/"]
+    end
 
-    GK <-->|"Sync"| CLOUD
+    subgraph CLOUD_LAYER["☁️ Cloud (Backup)"]
+        GIST["📤 GitHub Gist\nMulti-machine sync"]
+    end
+
+    WM ==>|"Consolidate"| PM
+    WM ==>|"Record"| EM
+    WM ==>|"Learn"| DK
+
+    PM -.->|"Promote"| GK
+    DK -.->|"Promote"| GK
+
+    GK <-->|"Sync"| GIST
+
+    style WM_LAYER fill:#ffebee,stroke:#c62828
+    style LOCAL_LAYER fill:#e8f5e9,stroke:#2e7d32
+    style GLOBAL_LAYER fill:#e3f2fd,stroke:#1565c0
+    style CLOUD_LAYER fill:#f3e5f5,stroke:#7b1fa2
 ```
+
+**Figure 1:** *Memory Hierarchy — Five-tier system from volatile working memory to cloud backup, showing consolidation and promotion paths.*
 
 ---
 
 ## Working Memory
 
 ### Characteristics
+
+**Table 1:** *Working Memory Characteristics*
 
 | Property | Value |
 | --- | --- |
@@ -85,6 +95,8 @@ flowchart LR
     DK -->|"DK-*.md"| FS
 ```
 
+**Figure 2:** *Memory Consolidation Flow — How working memory content is persisted to different memory types.*
+
 ---
 
 ## Procedural Memory
@@ -126,6 +138,8 @@ When to use this procedure
 ```
 
 ### Examples
+
+**Table 2:** *Procedural Memory Examples*
 
 | File | Purpose |
 | --- | --- |
@@ -175,6 +189,8 @@ Key learnings from this session
 ```
 
 ### Examples
+
+**Table 3:** *Episodic Memory Examples*
 
 | File | Purpose |
 | --- | --- |
