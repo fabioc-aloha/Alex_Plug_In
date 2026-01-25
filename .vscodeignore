@@ -4,6 +4,7 @@
 src/**
 .git/**
 .gitignore
+.env
 
 # Build artifacts - exclude source maps and old out folder
 **/*.map
