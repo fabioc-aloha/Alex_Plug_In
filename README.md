@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.1.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.2.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -77,7 +77,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v3.1.0 |
+| Feature | v1.5.x | v3.2.0 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
@@ -85,8 +85,9 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Custom Agents | ❌ None | ✅ 5 specialized agents |
 | User Profile | ❌ None | ✅ Personalization system |
 | MCP Integration | ❌ Manual | ✅ Smart recommendations |
-| Self-Actualization | ❌ None | ✅ Auto-triggers on greeting & meditation |
+| Self-Actualization | ❌ None | ✅ 6-phase assessment with auto-promotion |
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
+| Auto-Promotion | ❌ None | ✅ **NEW** Auto-promote DK files during meditation |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
 ### Migration Notes
@@ -339,8 +340,7 @@ Use in any Copilot chat to activate specific modes:
 | `@worldview-integration` | Applies ethical reasoning frameworks |
 | `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole |
 | `meditate` | Triggers memory consolidation + self-actualization |
-| `self-actualize` | Full 5-phase architecture assessment |
-| `meditate` | Triggers memory consolidation protocol |
+| `self-actualize` | Full 6-phase architecture assessment with auto-promotion |
 | `Forget [topic]` | Selective memory cleanup |
 
 ---
@@ -542,27 +542,36 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v2.7.2 BIHEPTBIUM
+## 🆕 What's New in v3.2.0 TRIBIUNIUM
 
-### 🎯 6 New Procedural Memories
+### 🌐 Auto-Promotion During Meditation
 
-This release adds comprehensive **process knowledge** for professional software development:
+Valuable domain knowledge is now **automatically promoted** to the global knowledge base during meditation and self-actualization sessions!
 
-| New Memory | Purpose |
-| ---------- | ------- |
-| **Release Management** | Deployment scripts, git workflow, MANDATORY pre-release assessment |
-| **Technical Debt Tracking** | DEBT markers, severity classification, inventory protocol |
-| **Architecture Decision Records** | ADR templates, workflow, storage conventions |
-| **Dependency Management** | Security audits, outdated package protocol, major upgrade workflow |
-| **Code Review Guidelines** | Review checklists, feedback conventions, self-review protocol |
-| **Skill Wish List** | ~60 skills for continuous growth with contextual acquisition |
+- **Smart Evaluation** - DK files are scored based on synapses, structure, tags, content richness, and examples
+- **Quality Gate** - Only files scoring 5+ points are promoted to ensure quality
+- **Exclusions** - Meta-files like DK-SKILL-WISHLIST are automatically excluded
+- **Integrated Reporting** - Results appear in meditation session reports and webview panels
+- **Auto-Sync** - Cloud sync triggers automatically after promotion
 
-### 🔧 Maintenance & Fixes
+### 📊 Enhanced Self-Actualization
 
-- **Synapse Repairs**: Fixed 9 broken connections from v2.6.0 DK consolidation
-- **Security**: Updated `diff` package to fix DoS vulnerability
-- **Dependencies**: Updated esbuild, fs-extra, @types/vscode
-- **VS Code Engine**: Now requires VS Code 1.108+
+Self-Actualization Protocol now has **6 phases** (was 5):
+
+| Phase | Description |
+| ----- | ----------- |
+| 1 | Architecture Status Check |
+| 2 | Synapse Health Validation |
+| 3 | Memory Architecture Analysis |
+| 4 | **NEW** Auto-promoting knowledge to global |
+| 5 | Generating recommendations |
+| 6 | Documenting session |
+
+### Previous Release: v3.1.0 TRIUNIUM
+
+- **📚 Comprehensive Documentation Suite** - 14 new documentation files in `alex_docs/`
+- **📖 New `/docs` Command** - Open documentation from chat
+- **✍️ Domain Knowledge: Writing and Publication** - New `DK-WRITING-AND-PUBLICATION.md`
 
 ### Previous Release: v2.6.0 BIHEXNILIUM
 
@@ -646,6 +655,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 2.7.2 BIHEPTBIUM • Built on 270+ academic sources
+Version 3.2.0 TRIBIUNIUM • Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn
