@@ -30,6 +30,7 @@ export interface WorkspaceValidation {
 
 /**
  * Validate workspace is open and return root path
+ * @deprecated Use getAlexWorkspaceFolder() for commands that require Alex to be installed
  */
 export function validateWorkspace(): WorkspaceValidation {
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -44,6 +45,135 @@ export function validateWorkspace(): WorkspaceValidation {
         isValid: true,
         rootPath: workspaceFolders[0].uri.fsPath,
         workspaceFolder: workspaceFolders[0]
+    };
+}
+
+/**
+ * Result of Alex workspace folder detection
+ */
+export interface AlexWorkspaceFolderResult {
+    found: boolean;
+    rootPath?: string;
+    workspaceFolder?: vscode.WorkspaceFolder;
+    error?: string;
+    /** True if user cancelled folder selection in multi-folder workspace */
+    cancelled?: boolean;
+}
+
+/**
+ * Find the workspace folder that has Alex installed.
+ * 
+ * In single-folder mode: returns that folder if Alex is installed
+ * In multi-folder workspace mode: 
+ *   - If only one folder has Alex, returns it automatically
+ *   - If multiple folders have Alex, prompts user to select
+ *   - If no folders have Alex, returns error
+ * 
+ * @param requireInstalled If true (default), returns error if Alex not installed.
+ *                         If false, returns first folder (for initialize command).
+ */
+export async function getAlexWorkspaceFolder(
+    requireInstalled: boolean = true
+): Promise<AlexWorkspaceFolderResult> {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+        return {
+            found: false,
+            error: 'No workspace folder open. Please open a project folder first (File → Open Folder).'
+        };
+    }
+
+    // Single folder mode - simple case
+    if (workspaceFolders.length === 1) {
+        const folder = workspaceFolders[0];
+        if (requireInstalled) {
+            const installed = await isAlexInstalled(folder.uri.fsPath);
+            if (!installed) {
+                return {
+                    found: false,
+                    error: 'Alex is not installed in this workspace. Run "Alex: Initialize Architecture" first.'
+                };
+            }
+        }
+        return {
+            found: true,
+            rootPath: folder.uri.fsPath,
+            workspaceFolder: folder
+        };
+    }
+
+    // Multi-folder workspace mode - check which folders have Alex installed
+    const foldersWithAlex: vscode.WorkspaceFolder[] = [];
+    for (const folder of workspaceFolders) {
+        if (await isAlexInstalled(folder.uri.fsPath)) {
+            foldersWithAlex.push(folder);
+        }
+    }
+
+    if (!requireInstalled) {
+        // For initialize command - prompt user to select any folder
+        const selected = await vscode.window.showQuickPick(
+            workspaceFolders.map(f => ({
+                label: f.name,
+                description: f.uri.fsPath,
+                folder: f
+            })),
+            {
+                placeHolder: 'Select a workspace folder to initialize Alex in',
+                title: 'Initialize Alex - Select Folder'
+            }
+        );
+
+        if (!selected) {
+            return { found: false, cancelled: true };
+        }
+
+        return {
+            found: true,
+            rootPath: selected.folder.uri.fsPath,
+            workspaceFolder: selected.folder
+        };
+    }
+
+    // Commands that require Alex to be installed
+    if (foldersWithAlex.length === 0) {
+        return {
+            found: false,
+            error: 'Alex is not installed in any workspace folder. Run "Alex: Initialize Architecture" first.'
+        };
+    }
+
+    if (foldersWithAlex.length === 1) {
+        // Only one folder has Alex - use it automatically
+        return {
+            found: true,
+            rootPath: foldersWithAlex[0].uri.fsPath,
+            workspaceFolder: foldersWithAlex[0]
+        };
+    }
+
+    // Multiple folders have Alex - prompt user to select
+    const selected = await vscode.window.showQuickPick(
+        foldersWithAlex.map(f => ({
+            label: f.name,
+            description: f.uri.fsPath,
+            folder: f
+        })),
+        {
+            placeHolder: 'Multiple folders have Alex installed. Select one:',
+            title: 'Alex - Select Workspace Folder'
+        }
+    );
+
+    if (!selected) {
+        return { found: false, cancelled: true };
+    }
+
+    return {
+        found: true,
+        rootPath: selected.folder.uri.fsPath,
+        workspaceFolder: selected.folder
     };
 }
 

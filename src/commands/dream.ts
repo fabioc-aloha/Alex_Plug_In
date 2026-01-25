@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { getAlexWorkspaceFolder } from '../shared/utils';
 
 interface Synapse {
     sourceFile: string;
@@ -39,14 +40,21 @@ const consolidatedMappings: { [key: string]: string } = {
 /* eslint-enable @typescript-eslint/naming-convention */
 
 export async function runDreamProtocol(context: vscode.ExtensionContext) {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
+    // Use smart workspace folder detection for multi-folder workspaces
+    const workspaceResult = await getAlexWorkspaceFolder(true); // true = require Alex installed
+    
+    if (!workspaceResult.found) {
+        if (workspaceResult.cancelled) {
+            return; // User cancelled folder selection
+        }
         vscode.window.showErrorMessage(
-            'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.'
+            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.'
         );
         return;
     }
-    const rootPath = workspaceFolders[0].uri.fsPath;
+
+    const rootPath = workspaceResult.rootPath!;
+    const workspaceFolder = workspaceResult.workspaceFolder!;
 
     await vscode.window.withProgress({
         location: vscode.ProgressLocation.Notification,
@@ -66,7 +74,7 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
 
         let allFiles: string[] = [];
         for (const pattern of patterns) {
-            const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
+            const relativePattern = new vscode.RelativePattern(workspaceFolder, pattern);
             const files = await vscode.workspace.findFiles(relativePattern);
             allFiles = allFiles.concat(files.map(uri => uri.fsPath));
         }
@@ -133,7 +141,7 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
                         } else {
                             // Use VS Code's findFiles to search recursively
                             // We use a glob pattern to find the file anywhere
-                            const found = await vscode.workspace.findFiles(new vscode.RelativePattern(workspaceFolders[0], `**/${targetName}`));
+                            const found = await vscode.workspace.findFiles(new vscode.RelativePattern(workspaceFolder, `**/${targetName}`));
                             if (found.length > 0) {
                                 targetExists = true;
                             }

@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
+import { getAlexWorkspaceFolder } from '../shared/utils';
 
 /**
  * Self-Actualization Protocol Results
@@ -47,15 +48,21 @@ interface SelfActualizationReport {
  * 5. Meditation session documentation
  */
 export async function runSelfActualization(context: vscode.ExtensionContext): Promise<SelfActualizationReport | undefined> {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
+    // Use smart workspace folder detection for multi-folder workspaces
+    const workspaceResult = await getAlexWorkspaceFolder(true); // true = require Alex installed
+    
+    if (!workspaceResult.found) {
+        if (workspaceResult.cancelled) {
+            return undefined; // User cancelled folder selection
+        }
         vscode.window.showErrorMessage(
-            'No workspace folder open. Please open a project with Alex installed.'
+            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed.'
         );
         return undefined;
     }
 
-    const rootPath = workspaceFolders[0].uri.fsPath;
+    const rootPath = workspaceResult.rootPath!;
+    const workspaceFolder = workspaceResult.workspaceFolder!;
     const report: SelfActualizationReport = {
         timestamp: new Date().toISOString(),
         synapseHealth: {
@@ -94,7 +101,7 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
 
         // Phase 1: Synapse Health Validation
         progress.report({ message: "Phase 1: Validating synaptic connections...", increment: 0 });
-        await scanSynapseHealth(workspaceFolders[0], report);
+        await scanSynapseHealth(workspaceFolder, report);
 
         // Phase 2: Version Consistency Check
         progress.report({ message: "Phase 2: Checking version consistency...", increment: 20 });
@@ -102,7 +109,7 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
 
         // Phase 3: Memory Architecture Assessment
         progress.report({ message: "Phase 3: Assessing memory architecture...", increment: 40 });
-        await assessMemoryArchitecture(workspaceFolders[0], report);
+        await assessMemoryArchitecture(workspaceFolder, report);
 
         // Phase 4: UNCONSCIOUS MIND - Auto-promote valuable knowledge to global
         progress.report({ message: "Phase 4: Auto-promoting knowledge to global...", increment: 55 });

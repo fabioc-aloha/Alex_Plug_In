@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as crypto from 'crypto';
+import { getAlexWorkspaceFolder } from '../shared/utils';
 
 interface FileManifestEntry {
     type: 'system' | 'hybrid' | 'user-created';
@@ -245,15 +246,21 @@ async function findUserCreatedFiles(rootPath: string, manifest: Manifest | null)
  * Main upgrade function
  */
 export async function upgradeArchitecture(context: vscode.ExtensionContext) {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
+    // Use smart workspace folder detection for multi-folder workspaces
+    const workspaceResult = await getAlexWorkspaceFolder(false); // false = don't require installed yet
+    
+    if (!workspaceResult.found) {
+        if (workspaceResult.cancelled) {
+            return; // User cancelled folder selection
+        }
         vscode.window.showErrorMessage(
-            'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Upgrade.'
+            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Upgrade.'
         );
         return;
     }
 
-    const rootPath = workspaceFolders[0].uri.fsPath;
+    const rootPath = workspaceResult.rootPath!;
+    const workspaceFolder = workspaceResult.workspaceFolder!;
     const extensionPath = context.extensionPath;
     const markerFile = path.join(rootPath, '.github', 'copilot-instructions.md');
 

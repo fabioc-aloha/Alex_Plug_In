@@ -1,17 +1,23 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { getAlexWorkspaceFolder, isAlexInstalled } from '../shared/utils';
 
 export async function initializeArchitecture(context: vscode.ExtensionContext) {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
+    // Use smart workspace folder detection - don't require Alex installed yet
+    const workspaceResult = await getAlexWorkspaceFolder(false);
+    
+    if (!workspaceResult.found) {
+        if (workspaceResult.cancelled) {
+            return; // User cancelled folder selection
+        }
         vscode.window.showErrorMessage(
-            'No workspace folder open. Please open a project folder first (File → Open Folder), then run this command again.'
+            workspaceResult.error || 'No workspace folder open. Please open a project folder first (File → Open Folder), then run this command again.'
         );
         return;
     }
 
-    const rootPath = workspaceFolders[0].uri.fsPath;
+    const rootPath = workspaceResult.rootPath!;
     const markerFile = path.join(rootPath, '.github', 'copilot-instructions.md');
 
     if (await fs.pathExists(markerFile)) {
@@ -34,12 +40,20 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
 }
 
 export async function resetArchitecture(context: vscode.ExtensionContext) {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-        vscode.window.showErrorMessage('Please open a workspace folder to reset Alex.');
+    // Use smart workspace folder detection - require Alex installed for reset
+    const workspaceResult = await getAlexWorkspaceFolder(true);
+    
+    if (!workspaceResult.found) {
+        if (workspaceResult.cancelled) {
+            return; // User cancelled folder selection
+        }
+        vscode.window.showErrorMessage(
+            workspaceResult.error || 'Please open a workspace folder with Alex installed to reset.'
+        );
         return;
     }
-    const rootPath = workspaceFolders[0].uri.fsPath;
+    
+    const rootPath = workspaceResult.rootPath!;
 
     const confirm = await vscode.window.showWarningMessage(
         '⚠️ RESET will permanently delete all Alex memory files!\n\nThis includes:\n• All learned domain knowledge\n• Custom instructions and prompts\n• Synaptic network connections\n\nConsider using "Alex: Upgrade" instead to preserve your knowledge.',
