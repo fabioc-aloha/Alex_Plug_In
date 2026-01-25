@@ -324,6 +324,113 @@ Auto-insight detection captures knowledge you might forget to save:
 
 ---
 
+## Auto-Promotion During Meditation
+
+### What It Does
+
+Automatically evaluates and promotes valuable domain knowledge (DK-*.md files) to the global knowledge base during meditation and self-actualization sessions.
+
+### When It Runs
+
+**Table 2.5:** *Auto-Promotion Triggers*
+
+| Trigger | Timing |
+| --- | --- |
+| Self-Actualization | Phase 4 of the protocol |
+| Meditation Sessions | During knowledge consolidation |
+
+### How It Works
+
+```mermaid
+flowchart TD
+    START[Meditation/Self-Actualization]
+
+    SCAN[Scan .github/domain-knowledge/<br/>for DK-*.md files]
+    EVAL[Evaluate each file]
+
+    subgraph SCORING["📊 Scoring Criteria (min 5 points)"]
+        S1["+3: Has synapses"]
+        S2["+2: Well-structured (3+ sections)"]
+        S3["+1: Has tags defined"]
+        S4["+1-3: Content size (1KB-5KB+)"]
+        S5["+2: Has code examples"]
+        S6["+1-3: General applicability"]
+    end
+
+    CHECK{Score ≥ 5?<br/>Not already global?}
+
+    PROMOTE[Promote to Global Knowledge]
+    SKIP[Skip - needs improvement]
+
+    SYNC[Trigger Cloud Sync]
+    REPORT[Include in Session Report]
+
+    START --> SCAN
+    SCAN --> EVAL
+    EVAL --> SCORING
+    SCORING --> CHECK
+    CHECK -->|Yes| PROMOTE
+    CHECK -->|No| SKIP
+    PROMOTE --> SYNC
+    SYNC --> REPORT
+    SKIP --> REPORT
+```
+
+**Figure 3.5:** *Auto-Promotion Flow - Evaluation and promotion of domain knowledge*
+
+### Scoring Criteria
+
+Files need a minimum score of **5 points** to be promoted:
+
+**Table 2.6:** *Auto-Promotion Scoring*
+
+| Criterion | Points | Description |
+| --- | --- | --- |
+| Has Synapses | +3 | Contains synapse connections to other files |
+| Well-Structured | +2 | Has 3+ H2 sections |
+| Has Tags | +1 | Tags defined in file header |
+| Substantial Content | +1 | File size > 1KB |
+| Rich Content | +2 | File size > 5KB |
+| Has Examples | +2 | Contains code blocks |
+| General Applicability | +1 to +3 | Contains pattern/best practice language |
+
+### Excluded Files
+
+Some files are intentionally excluded from auto-promotion:
+
+- `DK-SKILL-WISHLIST` - Personal growth tracking
+- `DK-GENERIC-FRAMEWORK` - Template file
+- `VERSION-NAMING-CONVENTION` - Project-specific naming
+
+### Session Report
+
+After each meditation, the report shows:
+
+```markdown
+## 🌐 Global Knowledge Promotion (Unconscious Mind)
+
+| Metric | Value |
+|--------|-------|
+| DK Files Evaluated | 11 |
+| Auto-Promoted | 3 |
+| Skipped (needs improvement) | 6 |
+| Already Global | 2 |
+
+### Newly Promoted Knowledge
+- 📐 **Advanced Diagramming**
+- 📐 **Documentation Excellence**
+- 📐 **Human Learning Psychology**
+```
+
+### Benefits
+
+1. **Knowledge Shares Itself** - Valuable learnings automatically become available across all projects
+2. **Quality Gate** - Only well-structured, connected knowledge gets promoted
+3. **Zero Manual Effort** - Happens during routine meditation
+4. **Cloud Backup** - Promoted knowledge immediately syncs to cloud
+
+---
+
 ## Interaction with Conscious Mind
 
 The unconscious mind supports the conscious mind:

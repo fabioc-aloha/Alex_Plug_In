@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
 
 /**
  * Self-Actualization Protocol Results
@@ -23,6 +24,12 @@ interface SelfActualizationReport {
         episodicFiles: number;
         domainFiles: number;
         totalConnections: number;
+    };
+    globalKnowledgePromotion: {
+        evaluated: number;
+        promoted: string[];
+        skipped: number;
+        alreadyGlobal: number;
     };
     recommendations: string[];
     sessionFile: string;
@@ -67,6 +74,12 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
             domainFiles: 0,
             totalConnections: 0
         },
+        globalKnowledgePromotion: {
+            evaluated: 0,
+            promoted: [],
+            skipped: 0,
+            alreadyGlobal: 0
+        },
         recommendations: [],
         sessionFile: ''
     };
@@ -82,19 +95,23 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
         await scanSynapseHealth(workspaceFolders[0], report);
 
         // Phase 2: Version Consistency Check
-        progress.report({ message: "Phase 2: Checking version consistency...", increment: 25 });
+        progress.report({ message: "Phase 2: Checking version consistency...", increment: 20 });
         await checkVersionConsistency(rootPath, report);
 
         // Phase 3: Memory Architecture Assessment
-        progress.report({ message: "Phase 3: Assessing memory architecture...", increment: 50 });
+        progress.report({ message: "Phase 3: Assessing memory architecture...", increment: 40 });
         await assessMemoryArchitecture(workspaceFolders[0], report);
 
-        // Phase 4: Generate Recommendations
-        progress.report({ message: "Phase 4: Generating recommendations...", increment: 75 });
+        // Phase 4: UNCONSCIOUS MIND - Auto-promote valuable knowledge to global
+        progress.report({ message: "Phase 4: Auto-promoting knowledge to global...", increment: 55 });
+        await autoPromoteKnowledge(rootPath, report);
+
+        // Phase 5: Generate Recommendations
+        progress.report({ message: "Phase 5: Generating recommendations...", increment: 75 });
         generateRecommendations(report);
 
-        // Phase 5: Create Meditation Session Record
-        progress.report({ message: "Phase 5: Documenting session...", increment: 90 });
+        // Phase 6: Create Meditation Session Record
+        progress.report({ message: "Phase 6: Documenting session...", increment: 90 });
         await createSessionRecord(rootPath, report);
 
         progress.report({ message: "Self-actualization complete!", increment: 100 });
@@ -279,6 +296,35 @@ async function assessMemoryArchitecture(
 }
 
 /**
+ * UNCONSCIOUS MIND: Auto-promote valuable domain knowledge to global knowledge base.
+ * This runs during meditation to share learnings across all projects.
+ */
+async function autoPromoteKnowledge(
+    rootPath: string,
+    report: SelfActualizationReport
+): Promise<void> {
+    try {
+        const result = await autoPromoteDuringMeditation(rootPath, { minScore: 5 });
+        
+        report.globalKnowledgePromotion = {
+            evaluated: result.evaluated,
+            promoted: result.promoted.map(e => e.title),
+            skipped: result.skipped.length,
+            alreadyGlobal: result.alreadyGlobal.length
+        };
+    } catch (err) {
+        // Log but don't fail the meditation
+        console.error('Auto-promotion failed:', err);
+        report.globalKnowledgePromotion = {
+            evaluated: 0,
+            promoted: [],
+            skipped: 0,
+            alreadyGlobal: 0
+        };
+    }
+}
+
+/**
  * Generate recommendations based on assessment
  */
 function generateRecommendations(report: SelfActualizationReport): void {
@@ -325,6 +371,19 @@ function generateRecommendations(report: SelfActualizationReport): void {
     if (report.synapseHealth.healthStatus === 'EXCELLENT') {
         report.recommendations.push(
             `✨ Architecture is healthy! Consider exploring new domains or creating cross-domain connections`
+        );
+    }
+
+    // Global knowledge recommendations
+    if (report.globalKnowledgePromotion.promoted.length > 0) {
+        report.recommendations.push(
+            `🌐 Auto-promoted ${report.globalKnowledgePromotion.promoted.length} domain knowledge file(s) to global knowledge base!`
+        );
+    }
+    
+    if (report.globalKnowledgePromotion.skipped > 0 && report.globalKnowledgePromotion.promoted.length === 0) {
+        report.recommendations.push(
+            `📖 ${report.globalKnowledgePromotion.skipped} DK file(s) not ready for promotion - add synapses, structure, and examples to qualify`
         );
     }
 }
@@ -387,6 +446,19 @@ ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations 
 
 - **Synapse Density**: ${(report.synapseHealth.totalSynapses / Math.max(report.synapseHealth.totalFiles, 1)).toFixed(1)} synapses per file
 - **Connection Integrity**: ${((1 - report.synapseHealth.brokenConnections / Math.max(report.synapseHealth.totalSynapses, 1)) * 100).toFixed(1)}%
+
+## 🌐 Global Knowledge Promotion (Unconscious Mind)
+
+| Metric | Value |
+|--------|-------|
+| DK Files Evaluated | ${report.globalKnowledgePromotion.evaluated} |
+| Auto-Promoted | ${report.globalKnowledgePromotion.promoted.length} |
+| Skipped (needs improvement) | ${report.globalKnowledgePromotion.skipped} |
+| Already Global | ${report.globalKnowledgePromotion.alreadyGlobal} |
+
+${report.globalKnowledgePromotion.promoted.length > 0 ? `### Newly Promoted Knowledge
+${report.globalKnowledgePromotion.promoted.map(title => `- 📐 **${title}**`).join('\n')}
+` : '*No new knowledge promoted this session.*'}
 
 ---
 
@@ -477,6 +549,24 @@ function showReportInPanel(report: SelfActualizationReport): void {
         <tr><td>Episodic Memory</td><td>${report.memoryConsolidation.episodicFiles}</td></tr>
         <tr><td>Domain Knowledge</td><td>${report.memoryConsolidation.domainFiles}</td></tr>
     </table>
+
+    <h2>🌐 Global Knowledge Promotion</h2>
+    <div class="metric">
+        <div class="metric-value">${report.globalKnowledgePromotion.evaluated}</div>
+        <div class="metric-label">Evaluated</div>
+    </div>
+    <div class="metric">
+        <div class="metric-value" style="color: #22c55e">${report.globalKnowledgePromotion.promoted.length}</div>
+        <div class="metric-label">Promoted</div>
+    </div>
+    <div class="metric">
+        <div class="metric-value">${report.globalKnowledgePromotion.alreadyGlobal}</div>
+        <div class="metric-label">Already Global</div>
+    </div>
+    ${report.globalKnowledgePromotion.promoted.length > 0 ? `
+    <p><strong>Newly Promoted:</strong></p>
+    <ul>${report.globalKnowledgePromotion.promoted.map(t => `<li>📐 ${t}</li>`).join('')}</ul>
+    ` : ''}
 
     <h2>Recommendations</h2>
     ${report.recommendations.length > 0 

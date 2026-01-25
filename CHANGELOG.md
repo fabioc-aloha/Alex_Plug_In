@@ -5,7 +5,32 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - v3.2.0 TRIBIUNIUM Planning
+## [3.2.0] TRIBIUNIUM - 2026-01-25
+
+### Added
+
+- **🌐 Auto-Promotion During Meditation** - Valuable domain knowledge is now automatically promoted to global knowledge base during meditation and self-actualization sessions!
+  - Evaluates DK files using a scoring system (synapses, structure, tags, content richness, examples)
+  - Only promotes files scoring 5+ points to ensure quality
+  - Excluded meta-files: DK-SKILL-WISHLIST, DK-GENERIC-FRAMEWORK, VERSION-NAMING-CONVENTION
+  - Results shown in meditation session report and webview panel
+  - Automatically triggers cloud sync after promotion
+
+### Changed
+
+- Self-Actualization Protocol now has 6 phases (was 5):
+  - Phase 4: Auto-promoting knowledge to global (NEW)
+  - Phase 5: Generating recommendations (was Phase 4)
+  - Phase 6: Documenting session (was Phase 5)
+- Session records now include Global Knowledge Promotion metrics
+
+### Documentation
+
+- Updated `UNCONSCIOUS-MIND.md` with comprehensive auto-promotion documentation
+
+---
+
+## [Unreleased] - v3.3.0 Planning
 
 ### 🔴 High Priority Bug Fixes
 - [ ] **Regex State Leakage** - `INSIGHT_PATTERNS` regexes in participant.ts need new instances per call

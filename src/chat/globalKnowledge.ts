@@ -583,6 +583,276 @@ export async function findRelevantKnowledge(
     return searchGlobalKnowledge(searchTerms.join(' '), { limit: 5 });
 }
 
+// ============================================================================
+// AUTO-PROMOTION DURING MEDITATION (UNCONSCIOUS MIND)
+// ============================================================================
+
+/**
+ * Evaluation criteria for DK files
+ */
+export interface DKFileEvaluation {
+    filePath: string;
+    filename: string;
+    title: string;
+    score: number;
+    reasons: string[];
+    category: GlobalKnowledgeCategory;
+    tags: string[];
+    isPromotionCandidate: boolean;
+    alreadyPromoted: boolean;
+}
+
+/**
+ * Result of auto-promotion during meditation
+ */
+export interface AutoPromotionResult {
+    evaluated: number;
+    promoted: IGlobalKnowledgeEntry[];
+    skipped: { filename: string; reason: string }[];
+    alreadyGlobal: string[];
+}
+
+/**
+ * Files that should NOT be auto-promoted (meta-files, skill lists, etc.)
+ */
+const EXCLUDED_FROM_PROMOTION = [
+    'DK-SKILL-WISHLIST',
+    'DK-GENERIC-FRAMEWORK',
+    'VERSION-NAMING-CONVENTION'
+];
+
+/**
+ * Evaluate a single DK file for promotion candidacy.
+ * Scores based on:
+ * - Has synapses (3 points)
+ * - Has clear structure with sections (2 points)
+ * - Has tags defined (1 point)
+ * - File size > 1KB (1 point) 
+ * - File size > 5KB (2 additional points)
+ * - Has examples or code blocks (2 points)
+ * - General applicability heuristics (1-3 points)
+ */
+export async function evaluateDKFile(filePath: string): Promise<DKFileEvaluation> {
+    const filename = path.basename(filePath, '.md');
+    const content = await fs.readFile(filePath, 'utf-8');
+    
+    let score = 0;
+    const reasons: string[] = [];
+    
+    // Extract title
+    const titleMatch = content.match(/^#\s+(.+)$/m);
+    const title = titleMatch ? titleMatch[1] : filename.replace(/^DK-/, '').replace(/-/g, ' ');
+    
+    // Check for synapses section with actual connections
+    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+    const synapseMatches = content.match(synapseRegex);
+    if (synapseMatches && synapseMatches.length > 0) {
+        score += 3;
+        reasons.push(`Has ${synapseMatches.length} synapse connection(s)`);
+    }
+    
+    // Check for clear structure (multiple H2 sections)
+    const h2Sections = content.match(/^##\s+.+$/gm);
+    if (h2Sections && h2Sections.length >= 3) {
+        score += 2;
+        reasons.push(`Well-structured with ${h2Sections.length} sections`);
+    }
+    
+    // Check for tags
+    const tagsMatch = content.match(/\*\*Tags\*\*:\s*(.+)$/m);
+    let tags: string[] = [];
+    if (tagsMatch) {
+        tags = tagsMatch[1].split(',').map(t => t.trim()).filter(t => t.length > 0);
+        if (tags.length > 0) {
+            score += 1;
+            reasons.push(`Has ${tags.length} tag(s)`);
+        }
+    }
+    
+    // Check file size (content richness indicator)
+    if (content.length > 1000) {
+        score += 1;
+        reasons.push('Substantial content (>1KB)');
+    }
+    if (content.length > 5000) {
+        score += 2;
+        reasons.push('Rich content (>5KB)');
+    }
+    
+    // Check for examples or code blocks
+    const codeBlocks = content.match(/```[\s\S]*?```/g);
+    if (codeBlocks && codeBlocks.length > 0) {
+        score += 2;
+        reasons.push(`Contains ${codeBlocks.length} code example(s)`);
+    }
+    
+    // General applicability heuristics
+    const generalTerms = [
+        /pattern/i, /best practice/i, /guideline/i, /framework/i,
+        /principle/i, /architecture/i, /design/i, /approach/i
+    ];
+    const generalMatchCount = generalTerms.filter(re => re.test(content)).length;
+    if (generalMatchCount >= 2) {
+        score += Math.min(generalMatchCount, 3);
+        reasons.push(`Contains general/reusable concepts`);
+    }
+    
+    // Determine category from content
+    const category = inferCategoryFromContent(content, filename);
+    
+    // Check if already promoted
+    const index = await ensureGlobalKnowledgeIndex();
+    const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const alreadyPromoted = index.entries.some(e => 
+        e.title.toLowerCase().replace(/[^a-z0-9]/g, '-') === normalizedTitle ||
+        e.id.includes(normalizedTitle)
+    );
+    
+    return {
+        filePath,
+        filename,
+        title,
+        score,
+        reasons,
+        category,
+        tags,
+        isPromotionCandidate: score >= 5 && !alreadyPromoted,
+        alreadyPromoted
+    };
+}
+
+/**
+ * Infer category from file content and name
+ */
+function inferCategoryFromContent(content: string, filename: string): GlobalKnowledgeCategory {
+    const contentLower = content.toLowerCase();
+    const filenameLower = filename.toLowerCase();
+    
+    const categoryPatterns: [RegExp, GlobalKnowledgeCategory][] = [
+        [/error|exception|fault|handling/i, 'error-handling'],
+        [/api|rest|graphql|endpoint/i, 'api-design'],
+        [/test|spec|jest|mocha|assertion/i, 'testing'],
+        [/debug|troubleshoot|diagnos/i, 'debugging'],
+        [/performance|optimi|cache|speed/i, 'performance'],
+        [/architecture|design|pattern|structure/i, 'architecture'],
+        [/security|auth|encrypt|vulnerab/i, 'security'],
+        [/deploy|ci\/cd|pipeline|docker|kubernetes/i, 'deployment'],
+        [/document|readme|comment|diagram/i, 'documentation'],
+        [/refactor|clean|improve|modernize/i, 'refactoring'],
+        [/tool|config|setup|environment/i, 'tooling'],
+    ];
+    
+    for (const [pattern, category] of categoryPatterns) {
+        if (pattern.test(contentLower) || pattern.test(filenameLower)) {
+            return category;
+        }
+    }
+    
+    return 'general';
+}
+
+/**
+ * UNCONSCIOUS MIND: Auto-promote valuable DK files during meditation.
+ * This runs during self-actualization and meditation sessions.
+ * 
+ * Criteria for auto-promotion (minimum score of 5):
+ * - Has synapses (+3)
+ * - Well-structured (+2)
+ * - Has tags (+1)
+ * - Substantial content (+1 to +3)
+ * - Has examples (+2)
+ * - General applicability (+1 to +3)
+ */
+export async function autoPromoteDuringMeditation(
+    workspacePath: string,
+    options: { dryRun?: boolean; minScore?: number } = {}
+): Promise<AutoPromotionResult> {
+    const { dryRun = false, minScore = 5 } = options;
+    
+    await ensureGlobalKnowledgeDirectories();
+    
+    const result: AutoPromotionResult = {
+        evaluated: 0,
+        promoted: [],
+        skipped: [],
+        alreadyGlobal: []
+    };
+    
+    // Find all DK files in the workspace
+    const dkPath = path.join(workspacePath, '.github', 'domain-knowledge');
+    if (!await fs.pathExists(dkPath)) {
+        return result;
+    }
+    
+    const files = await fs.readdir(dkPath);
+    const dkFiles = files.filter(f => f.startsWith('DK-') && f.endsWith('.md'));
+    
+    for (const file of dkFiles) {
+        const filePath = path.join(dkPath, file);
+        const filenameWithoutExt = file.replace('.md', '');
+        
+        // Skip excluded files
+        if (EXCLUDED_FROM_PROMOTION.some(excluded => filenameWithoutExt.includes(excluded))) {
+            result.skipped.push({ filename: file, reason: 'Excluded meta-file' });
+            continue;
+        }
+        
+        result.evaluated++;
+        
+        try {
+            const evaluation = await evaluateDKFile(filePath);
+            
+            if (evaluation.alreadyPromoted) {
+                result.alreadyGlobal.push(file);
+                continue;
+            }
+            
+            if (!evaluation.isPromotionCandidate || evaluation.score < minScore) {
+                result.skipped.push({ 
+                    filename: file, 
+                    reason: `Score ${evaluation.score}/${minScore} - ${evaluation.reasons.join(', ') || 'Needs more structure/content'}`
+                });
+                continue;
+            }
+            
+            // Promote the file
+            if (!dryRun) {
+                const entry = await promoteToGlobalKnowledge(
+                    filePath,
+                    evaluation.category,
+                    evaluation.tags
+                );
+                
+                if (entry) {
+                    result.promoted.push(entry);
+                }
+            } else {
+                // In dry run, create a mock entry for reporting
+                result.promoted.push({
+                    id: `[DRY-RUN] ${filenameWithoutExt}`,
+                    title: evaluation.title,
+                    type: 'pattern',
+                    category: evaluation.category,
+                    tags: evaluation.tags,
+                    created: new Date().toISOString(),
+                    modified: new Date().toISOString(),
+                    summary: `Would be promoted with score ${evaluation.score}`,
+                    filePath
+                });
+            }
+        } catch (err) {
+            result.skipped.push({ filename: file, reason: `Error: ${err}` });
+        }
+    }
+    
+    // Trigger cloud sync if we promoted anything
+    if (!dryRun && result.promoted.length > 0) {
+        triggerPostModificationSync();
+    }
+    
+    return result;
+}
+
 /**
  * Get summary of global knowledge base
  */
