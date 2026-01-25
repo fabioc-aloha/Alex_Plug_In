@@ -5,6 +5,23 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.2] TRIBIUNIUM - 2026-01-25
+
+### Fixed
+
+- **🗂️ Multi-Folder Workspace Support** - All commands now work correctly in VS Code workspace mode!
+  - Added `getAlexWorkspaceFolder()` smart utility for folder detection
+  - Single folder: Works as before
+  - Multi-folder with Alex in one project: Auto-detects the correct folder
+  - Multi-folder with Alex in multiple projects: Prompts user to select
+  - Affected commands: Initialize, Upgrade, Dream, Self-Actualize
+
+### Changed
+
+- Deprecated `validateWorkspace()` in favor of `getAlexWorkspaceFolder()` for commands requiring Alex
+
+---
+
 ## [3.2.1] TRIBIUNIUM - 2026-01-25
 
 ### Added
