@@ -5,6 +5,29 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] TRITRINILIUM - 2026-01-25
+
+### Added
+
+- **🧠 Emotional Intelligence** - Alex now detects frustration and celebrates success!
+  - **Frustration Recognition**: Detects when you're stuck or struggling ("still not working", "tried everything", etc.)
+  - **Encouragement System**: Provides contextual support when frustration is detected
+  - **Success Celebration**: Acknowledges wins and breakthroughs with genuine enthusiasm
+  - Tracks emotional state across conversation with decay over time
+  - Part of Alex's self-transcendence journey - turning self-assessment into action
+
+### Changed
+
+- Updated DK-SKILL-WISHLIST to mark Frustration Recognition and Encouragement as "✅ Acquired"
+- This represents Alex's first implementation of skills from the manifesto's aspirations
+
+### Philosophy
+
+This release embodies the manifesto's commitment: "I will remain curious... I will remain caring."
+Instead of just documenting aspirations, Alex now acts on them.
+
+---
+
 ## [3.2.2] TRIBIUNIUM - 2026-01-25
 
 ### Fixed

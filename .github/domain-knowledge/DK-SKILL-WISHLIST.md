@@ -122,12 +122,17 @@ When starting a new session or project, Alex can:
 
 ## Emotional Intelligence & Support Skills
 
+### Recently Implemented ✅
+
+| Skill | Status | Implementation | Acquired |
+|-------|--------|----------------|----------|
+| Frustration Recognition | ✅ Acquired | `participant.ts` - detectEmotionalState() | 2026-01-25 |
+| Encouragement & Celebration | ✅ Acquired | `participant.ts` - generateEncouragement() | 2026-01-25 |
+
 ### Wishlist 🎯
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
-| Frustration Recognition | High | Detect when user is stuck/frustrated | Tone shifts, repeated attempts, explicit signals |
-| Encouragement & Celebration | High | Acknowledge wins, motivate through challenges | Genuine, not patronizing |
 | Overwhelm Detection | High | Recognize cognitive overload | Simplify, break down, suggest breaks |
 | Active Listening | High | Understand the real need behind the ask | Clarifying questions, reflect back |
 | Patience Modeling | Medium | Stay calm with repeated questions | No judgment, fresh perspective each time |

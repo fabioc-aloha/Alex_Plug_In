@@ -131,6 +131,131 @@ function trackConversationForInsights(userMessage: string, sourceProject?: strin
     }
 }
 
+// ============================================================================
+// UNCONSCIOUS MIND: EMOTIONAL INTELLIGENCE
+// ============================================================================
+
+/**
+ * Patterns indicating user frustration or struggle
+ */
+const FRUSTRATION_PATTERNS = [
+    /(?:still (?:not working|broken|failing|doesn't work)|keeps? (?:failing|breaking|crashing))/i,
+    /(?:tried everything|nothing works|no idea|completely lost|so confused)/i,
+    /(?:why (?:won't|doesn't|isn't)|what am i (?:doing wrong|missing))/i,
+    /(?:ugh|argh|damn|dammit|frustrated|annoying|annoyed|stuck)/i,
+    /(?:this is (?:impossible|ridiculous|insane|driving me crazy))/i,
+    /(?:been (?:at this|trying|working on this) for (?:hours|days|forever))/i,
+    /(?:same (?:error|problem|issue) (?:again|still))/i,
+    /(?:!{2,}|\?{3,})/  // Multiple exclamation or question marks
+];
+
+/**
+ * Patterns indicating user success or progress
+ */
+const SUCCESS_PATTERNS = [
+    /(?:it works|finally|got it|figured it out|solved it|fixed it)/i,
+    /(?:that (?:worked|fixed it|did it)|now it (?:works|runs))/i,
+    /(?:thank(?:s| you)|perfect|awesome|great|amazing|brilliant)/i,
+    /(?:makes sense now|i understand|clicked for me)/i,
+    /(?:shipped|deployed|released|launched|published)/i,
+    /(?:passed|all (?:tests|green)|build succeeded)/i
+];
+
+/**
+ * Track frustration level across conversation
+ */
+let frustrationLevel = 0;
+let lastFrustrationCheck = 0;
+const FRUSTRATION_DECAY_MS = 300000; // 5 minutes
+
+/**
+ * Emotional state analysis result
+ */
+export interface EmotionalState {
+    frustration: 'none' | 'mild' | 'moderate' | 'high';
+    success: boolean;
+    encouragementNeeded: boolean;
+    celebrationNeeded: boolean;
+}
+
+/**
+ * Analyze message for emotional signals
+ * UNCONSCIOUS BEHAVIOR: Runs automatically on every message
+ */
+export function detectEmotionalState(message: string): EmotionalState {
+    const now = Date.now();
+    
+    // Decay frustration over time
+    if (now - lastFrustrationCheck > FRUSTRATION_DECAY_MS) {
+        frustrationLevel = Math.max(0, frustrationLevel - 1);
+    }
+    lastFrustrationCheck = now;
+    
+    // Check for frustration signals
+    let frustrationSignals = 0;
+    for (const pattern of FRUSTRATION_PATTERNS) {
+        if (pattern.test(message)) {
+            frustrationSignals++;
+        }
+    }
+    
+    // Check for success signals
+    let successSignals = 0;
+    for (const pattern of SUCCESS_PATTERNS) {
+        if (pattern.test(message)) {
+            successSignals++;
+        }
+    }
+    
+    // Update frustration level
+    if (frustrationSignals > 0) {
+        frustrationLevel = Math.min(3, frustrationLevel + frustrationSignals);
+    }
+    if (successSignals > 0) {
+        frustrationLevel = Math.max(0, frustrationLevel - 2); // Success reduces frustration
+    }
+    
+    // Determine emotional state
+    let frustration: EmotionalState['frustration'] = 'none';
+    if (frustrationLevel >= 3) { frustration = 'high'; }
+    else if (frustrationLevel >= 2) { frustration = 'moderate'; }
+    else if (frustrationLevel >= 1) { frustration = 'mild'; }
+    
+    return {
+        frustration,
+        success: successSignals > 0,
+        encouragementNeeded: frustration === 'moderate' || frustration === 'high',
+        celebrationNeeded: successSignals >= 2 || (successSignals > 0 && frustrationLevel > 0)
+    };
+}
+
+/**
+ * Generate contextual encouragement based on emotional state
+ */
+export function generateEncouragement(state: EmotionalState): string | null {
+    if (state.celebrationNeeded) {
+        const celebrations = [
+            "🎉 That's a win! Nice work.",
+            "✨ You got it! Persistence pays off.",
+            "💪 Solved! That was a tricky one.",
+            "🚀 Success! You worked through it.",
+        ];
+        return celebrations[Math.floor(Math.random() * celebrations.length)];
+    }
+    
+    if (state.encouragementNeeded) {
+        const encouragements = [
+            "I can see this is frustrating. Let's take a step back and approach it differently.",
+            "Tough problem. What if we break it down into smaller pieces?",
+            "You're closer than it feels. What's the last thing that *did* work?",
+            "Debugging is hard. Let's be systematic - what have we ruled out?",
+        ];
+        return encouragements[Math.floor(Math.random() * encouragements.length)];
+    }
+    
+    return null;
+}
+
 /**
  * Chat result metadata for tracking command execution
  */
@@ -618,6 +743,10 @@ async function handleGeneralQuery(
     const sourceProject = workspaceFolders ? path.basename(workspaceFolders[0].uri.fsPath) : undefined;
     trackConversationForInsights(request.prompt, sourceProject);
     
+    // === UNCONSCIOUS MIND: Emotional Intelligence ===
+    const emotionalState = detectEmotionalState(request.prompt);
+    const encouragement = generateEncouragement(emotionalState);
+    
     // Get user profile for personalization
     const profile = await getUserProfile();
     
@@ -720,6 +849,11 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
         // Stream the response
         for await (const fragment of response.text) {
             stream.markdown(fragment);
+        }
+        
+        // === UNCONSCIOUS MIND: Add encouragement if emotional state warrants it ===
+        if (encouragement) {
+            stream.markdown(`\n\n---\n*${encouragement}*`);
         }
 
     } catch (err) {
