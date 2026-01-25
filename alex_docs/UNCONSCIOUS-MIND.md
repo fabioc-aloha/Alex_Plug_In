@@ -357,10 +357,15 @@ flowchart TD
         S6["+1-3: General applicability"]
     end
 
-    CHECK{Score ≥ 5?<br/>Not already global?}
+    CHECK{Already in Global?}
+
+    CHECKUP{Has Local Changes?}
+    CHECKSCORE{Score ≥ 5?}
 
     PROMOTE[Promote to Global Knowledge]
+    UPDATE[Update Global Knowledge]
     SKIP[Skip - needs improvement]
+    UNCHANGED[Skip - unchanged]
 
     SYNC[Trigger Cloud Sync]
     REPORT[Include in Session Report]
@@ -369,14 +374,20 @@ flowchart TD
     SCAN --> EVAL
     EVAL --> SCORING
     SCORING --> CHECK
-    CHECK -->|Yes| PROMOTE
-    CHECK -->|No| SKIP
+    CHECK -->|No| CHECKSCORE
+    CHECK -->|Yes| CHECKUP
+    CHECKUP -->|Yes| UPDATE
+    CHECKUP -->|No| UNCHANGED
+    CHECKSCORE -->|Yes| PROMOTE
+    CHECKSCORE -->|No| SKIP
     PROMOTE --> SYNC
+    UPDATE --> SYNC
     SYNC --> REPORT
     SKIP --> REPORT
+    UNCHANGED --> REPORT
 ```
 
-**Figure 3.5:** *Auto-Promotion Flow - Evaluation and promotion of domain knowledge*
+**Figure 3.5:** *Auto-Promotion Flow - Evaluation, promotion, and update of domain knowledge*
 
 ### Scoring Criteria
 
@@ -413,14 +424,35 @@ After each meditation, the report shows:
 |--------|-------|
 | DK Files Evaluated | 11 |
 | Auto-Promoted | 3 |
-| Skipped (needs improvement) | 6 |
-| Already Global | 2 |
+| Updated | 2 |
+| Skipped (needs improvement) | 4 |
+| Already Global (unchanged) | 2 |
 
 ### Newly Promoted Knowledge
 - 📐 **Advanced Diagramming**
 - 📐 **Documentation Excellence**
 - 📐 **Human Learning Psychology**
+
+### Updated Global Knowledge
+- 🔄 **Memory Consolidation**
+- 🔄 **Dream Processing**
 ```
+
+### Update Detection
+
+When a DK file has already been promoted to global knowledge, Alex compares:
+
+1. **Local file modification time** - When the project's DK file was last saved
+2. **Global entry modified timestamp** - When the global version was last updated
+
+If the local file is newer, Alex updates the global knowledge file with:
+
+- Fresh content from the local file
+- Preserved original metadata (ID, creation date)
+- Updated modification timestamp
+- Merged tags (existing + new)
+
+This ensures improvements made to your project's domain knowledge automatically flow to the global knowledge base.
 
 ### Benefits
 

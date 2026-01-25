@@ -345,6 +345,70 @@ ${content}
 }
 
 /**
+ * Update an existing global knowledge pattern file with new content.
+ * Preserves the original creation date and ID, updates modified timestamp.
+ */
+export async function updateGlobalPattern(
+    existingEntry: IGlobalKnowledgeEntry,
+    newContent: string,
+    category: GlobalKnowledgeCategory,
+    tags: string[],
+    sourceProject?: string
+): Promise<IGlobalKnowledgeEntry> {
+    const filePath = existingEntry.filePath;
+    
+    if (!filePath || !await fs.pathExists(filePath)) {
+        throw new Error(`Global pattern file not found: ${filePath}`);
+    }
+    
+    // Merge tags (keep existing, add new)
+    const allTags = [...new Set([...(existingEntry.tags || []), ...tags])];
+    
+    // Create updated markdown file preserving original metadata
+    const fileContent = `# ${existingEntry.title}
+
+**ID**: ${existingEntry.id}  
+**Category**: ${category}  
+**Tags**: ${allTags.join(', ')}  
+**Source**: ${sourceProject || existingEntry.sourceProject || 'Manual entry'}  
+**Created**: ${existingEntry.created}  
+**Modified**: ${new Date().toISOString()}  
+
+---
+
+${newContent}
+
+---
+
+## Synapses
+
+*Add cross-references to related knowledge files here*
+
+`;
+
+    await fs.writeFile(filePath, fileContent, 'utf-8');
+
+    // Update the index entry
+    const updatedEntry: IGlobalKnowledgeEntry = {
+        ...existingEntry,
+        category,
+        tags: allTags,
+        modified: new Date().toISOString(),
+        summary: newContent.substring(0, 200) + (newContent.length > 200 ? '...' : '')
+    };
+
+    await updateGlobalKnowledgeIndex((index) => {
+        const entryIndex = index.entries.findIndex(e => e.id === existingEntry.id);
+        if (entryIndex >= 0) {
+            index.entries[entryIndex] = updatedEntry;
+        }
+        return index;
+    });
+
+    return updatedEntry;
+}
+
+/**
  * Create a new global insight (timestamped learning) - with concurrent-safe index update
  */
 export async function createGlobalInsight(
@@ -600,6 +664,10 @@ export interface DKFileEvaluation {
     tags: string[];
     isPromotionCandidate: boolean;
     alreadyPromoted: boolean;
+    /** The existing global entry if already promoted */
+    existingEntry?: IGlobalKnowledgeEntry;
+    /** True if local file has been modified since promotion */
+    hasLocalChanges: boolean;
 }
 
 /**
@@ -608,6 +676,8 @@ export interface DKFileEvaluation {
 export interface AutoPromotionResult {
     evaluated: number;
     promoted: IGlobalKnowledgeEntry[];
+    /** Files that were updated (already existed in global but had local changes) */
+    updated: IGlobalKnowledgeEntry[];
     skipped: { filename: string; reason: string }[];
     alreadyGlobal: string[];
 }
@@ -700,13 +770,29 @@ export async function evaluateDKFile(filePath: string): Promise<DKFileEvaluation
     // Determine category from content
     const category = inferCategoryFromContent(content, filename);
     
-    // Check if already promoted
+    // Check if already promoted and detect local changes
     const index = await ensureGlobalKnowledgeIndex();
     const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    const alreadyPromoted = index.entries.some(e => 
+    const existingEntry = index.entries.find(e => 
         e.title.toLowerCase().replace(/[^a-z0-9]/g, '-') === normalizedTitle ||
         e.id.includes(normalizedTitle)
     );
+    const alreadyPromoted = !!existingEntry;
+    
+    // Check if local file has changes since last promotion
+    let hasLocalChanges = false;
+    if (alreadyPromoted && existingEntry) {
+        try {
+            const localStats = await fs.stat(filePath);
+            const localModified = localStats.mtime;
+            const globalModified = new Date(existingEntry.modified);
+            // Local file modified after global entry was last updated
+            hasLocalChanges = localModified > globalModified;
+        } catch {
+            // If we can't check, assume no changes
+            hasLocalChanges = false;
+        }
+    }
     
     return {
         filePath,
@@ -717,7 +803,9 @@ export async function evaluateDKFile(filePath: string): Promise<DKFileEvaluation
         category,
         tags,
         isPromotionCandidate: score >= 5 && !alreadyPromoted,
-        alreadyPromoted
+        alreadyPromoted,
+        existingEntry,
+        hasLocalChanges
     };
 }
 
@@ -774,6 +862,7 @@ export async function autoPromoteDuringMeditation(
     const result: AutoPromotionResult = {
         evaluated: 0,
         promoted: [],
+        updated: [],
         skipped: [],
         alreadyGlobal: []
     };
@@ -802,8 +891,37 @@ export async function autoPromoteDuringMeditation(
         try {
             const evaluation = await evaluateDKFile(filePath);
             
+            // Handle already promoted files - check for updates
             if (evaluation.alreadyPromoted) {
-                result.alreadyGlobal.push(file);
+                if (evaluation.hasLocalChanges && evaluation.existingEntry) {
+                    // Local file has been modified - update the global version
+                    if (!dryRun) {
+                        const content = await fs.readFile(filePath, 'utf-8');
+                        const workspaceFolders = vscode.workspace.workspaceFolders;
+                        const sourceProject = workspaceFolders 
+                            ? path.basename(workspaceFolders[0].uri.fsPath)
+                            : undefined;
+                        
+                        const updatedEntry = await updateGlobalPattern(
+                            evaluation.existingEntry,
+                            content,
+                            evaluation.category,
+                            evaluation.tags,
+                            sourceProject
+                        );
+                        result.updated.push(updatedEntry);
+                    } else {
+                        // Dry run - mock update entry
+                        result.updated.push({
+                            ...evaluation.existingEntry,
+                            modified: new Date().toISOString(),
+                            summary: `[DRY-RUN] Would be updated from local changes`
+                        });
+                    }
+                } else {
+                    // No changes - skip
+                    result.alreadyGlobal.push(file);
+                }
                 continue;
             }
             
@@ -845,8 +963,8 @@ export async function autoPromoteDuringMeditation(
         }
     }
     
-    // Trigger cloud sync if we promoted anything
-    if (!dryRun && result.promoted.length > 0) {
+    // Trigger cloud sync if we promoted or updated anything
+    if (!dryRun && (result.promoted.length > 0 || result.updated.length > 0)) {
         triggerPostModificationSync();
     }
     

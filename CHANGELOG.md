@@ -5,6 +5,28 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.1] TRIBIUNIUM - 2026-01-25
+
+### Added
+
+- **🔄 Auto-Update for Global Knowledge** - Already-promoted DK files now get updated when local changes are detected!
+  - Compares local file modification time with global entry's modified timestamp
+  - Updates global knowledge file content while preserving original metadata (ID, creation date)
+  - Merges tags (existing + new) during update
+  - Cloud sync triggers after updates as well as promotions
+  - Session reports now show "Updated" count alongside "Promoted"
+
+### Changed
+
+- `AutoPromotionResult` interface now includes `updated` array for tracking updated files
+- Self-actualization webview now displays updated files with 🔄 icon
+
+### Documentation
+
+- Updated `UNCONSCIOUS-MIND.md` with update detection flow diagram and documentation
+
+---
+
 ## [3.2.0] TRIBIUNIUM - 2026-01-25
 
 ### Added
@@ -15,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Excluded meta-files: DK-SKILL-WISHLIST, DK-GENERIC-FRAMEWORK, VERSION-NAMING-CONVENTION
   - Results shown in meditation session report and webview panel
   - Automatically triggers cloud sync after promotion
+  - Updates global knowledge file content while preserving original metadata (ID, creation date)
+  - Merges tags (existing + new) during update
+  - Cloud sync triggers after updates as well as promotions
+  - Session reports now show "Updated" count alongside "Promoted"
 
 ### Changed
 
@@ -23,10 +49,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Phase 5: Generating recommendations (was Phase 4)
   - Phase 6: Documenting session (was Phase 5)
 - Session records now include Global Knowledge Promotion metrics
+- `AutoPromotionResult` interface now includes `updated` array for tracking updated files
 
 ### Documentation
 
-- Updated `UNCONSCIOUS-MIND.md` with comprehensive auto-promotion documentation
+- Updated `UNCONSCIOUS-MIND.md` with comprehensive auto-promotion and update documentation
 
 ---
 

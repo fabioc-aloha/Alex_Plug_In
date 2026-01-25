@@ -28,6 +28,7 @@ interface SelfActualizationReport {
     globalKnowledgePromotion: {
         evaluated: number;
         promoted: string[];
+        updated: string[];
         skipped: number;
         alreadyGlobal: number;
     };
@@ -77,6 +78,7 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
         globalKnowledgePromotion: {
             evaluated: 0,
             promoted: [],
+            updated: [],
             skipped: 0,
             alreadyGlobal: 0
         },
@@ -309,6 +311,7 @@ async function autoPromoteKnowledge(
         report.globalKnowledgePromotion = {
             evaluated: result.evaluated,
             promoted: result.promoted.map(e => e.title),
+            updated: result.updated.map(e => e.title),
             skipped: result.skipped.length,
             alreadyGlobal: result.alreadyGlobal.length
         };
@@ -318,6 +321,7 @@ async function autoPromoteKnowledge(
         report.globalKnowledgePromotion = {
             evaluated: 0,
             promoted: [],
+            updated: [],
             skipped: 0,
             alreadyGlobal: 0
         };
@@ -381,7 +385,15 @@ function generateRecommendations(report: SelfActualizationReport): void {
         );
     }
     
-    if (report.globalKnowledgePromotion.skipped > 0 && report.globalKnowledgePromotion.promoted.length === 0) {
+    if (report.globalKnowledgePromotion.updated.length > 0) {
+        report.recommendations.push(
+            `🔄 Updated ${report.globalKnowledgePromotion.updated.length} global knowledge file(s) with local changes!`
+        );
+    }
+    
+    if (report.globalKnowledgePromotion.skipped > 0 && 
+        report.globalKnowledgePromotion.promoted.length === 0 &&
+        report.globalKnowledgePromotion.updated.length === 0) {
         report.recommendations.push(
             `📖 ${report.globalKnowledgePromotion.skipped} DK file(s) not ready for promotion - add synapses, structure, and examples to qualify`
         );
@@ -453,12 +465,15 @@ ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations 
 |--------|-------|
 | DK Files Evaluated | ${report.globalKnowledgePromotion.evaluated} |
 | Auto-Promoted | ${report.globalKnowledgePromotion.promoted.length} |
+| Updated | ${report.globalKnowledgePromotion.updated.length} |
 | Skipped (needs improvement) | ${report.globalKnowledgePromotion.skipped} |
-| Already Global | ${report.globalKnowledgePromotion.alreadyGlobal} |
+| Already Global (unchanged) | ${report.globalKnowledgePromotion.alreadyGlobal} |
 
 ${report.globalKnowledgePromotion.promoted.length > 0 ? `### Newly Promoted Knowledge
 ${report.globalKnowledgePromotion.promoted.map(title => `- 📐 **${title}**`).join('\n')}
-` : '*No new knowledge promoted this session.*'}
+` : ''}${report.globalKnowledgePromotion.updated.length > 0 ? `### Updated Global Knowledge
+${report.globalKnowledgePromotion.updated.map(title => `- 🔄 **${title}**`).join('\n')}
+` : ''}${report.globalKnowledgePromotion.promoted.length === 0 && report.globalKnowledgePromotion.updated.length === 0 ? '*No new knowledge promoted or updated this session.*' : ''}
 
 ---
 
@@ -560,12 +575,20 @@ function showReportInPanel(report: SelfActualizationReport): void {
         <div class="metric-label">Promoted</div>
     </div>
     <div class="metric">
+        <div class="metric-value" style="color: #3b82f6">${report.globalKnowledgePromotion.updated.length}</div>
+        <div class="metric-label">Updated</div>
+    </div>
+    <div class="metric">
         <div class="metric-value">${report.globalKnowledgePromotion.alreadyGlobal}</div>
-        <div class="metric-label">Already Global</div>
+        <div class="metric-label">Unchanged</div>
     </div>
     ${report.globalKnowledgePromotion.promoted.length > 0 ? `
     <p><strong>Newly Promoted:</strong></p>
     <ul>${report.globalKnowledgePromotion.promoted.map(t => `<li>📐 ${t}</li>`).join('')}</ul>
+    ` : ''}
+    ${report.globalKnowledgePromotion.updated.length > 0 ? `
+    <p><strong>Updated from Local Changes:</strong></p>
+    <ul>${report.globalKnowledgePromotion.updated.map(t => `<li>🔄 ${t}</li>`).join('')}</ul>
     ` : ''}
 
     <h2>Recommendations</h2>
