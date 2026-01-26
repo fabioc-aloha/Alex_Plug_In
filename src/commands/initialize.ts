@@ -1,7 +1,34 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as crypto from 'crypto';
 import { getAlexWorkspaceFolder, isAlexInstalled } from '../shared/utils';
+
+interface FileManifestEntry {
+    type: 'system' | 'hybrid' | 'user-created';
+    originalChecksum: string;
+}
+
+interface Manifest {
+    version: string;
+    installedAt: string;
+    upgradedAt?: string;
+    files: Record<string, FileManifestEntry>;
+}
+
+/**
+ * Calculate MD5 checksum of file content
+ */
+function calculateChecksum(content: string): string {
+    return crypto.createHash('md5').update(content.replace(/\r\n/g, '\n')).digest('hex');
+}
+
+/**
+ * Get the manifest path
+ */
+function getManifestPath(rootPath: string): string {
+    return path.join(rootPath, '.github', 'config', 'alex-manifest.json');
+}
 
 export async function initializeArchitecture(context: vscode.ExtensionContext) {
     // Use smart workspace folder detection - don't require Alex installed yet
@@ -78,8 +105,8 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
         path.join(rootPath, '.github', 'prompts'),
         path.join(rootPath, '.github', 'episodic'),
         path.join(rootPath, '.github', 'domain-knowledge'),
-        path.join(rootPath, '.github', 'config'),
-        path.join(rootPath, '.alex-manifest.json')  // Clean up manifest too
+        path.join(rootPath, '.github', 'config'),  // Includes alex-manifest.json
+        path.join(rootPath, '.alex-manifest.json')  // Clean up legacy manifest location too
     ];
 
     try {
@@ -150,6 +177,10 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
                     console.warn(`Source not found: ${item.src}`);
                 }
             }
+
+            // Create manifest with checksums of all deployed files
+            progress.report({ message: "Creating manifest..." });
+            await createInitialManifest(context, rootPath);
         });
 
         const result = await vscode.window.showInformationMessage(
@@ -169,4 +200,80 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
     } catch (error: any) {
         vscode.window.showErrorMessage(`Failed to initialize Alex: ${error.message}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`);
     }
+}
+
+/**
+ * Get the legacy manifest path (old location)
+ */
+function getLegacyManifestPath(rootPath: string): string {
+    return path.join(rootPath, '.alex-manifest.json');
+}
+
+/**
+ * Create initial manifest with checksums of all deployed files
+ */
+async function createInitialManifest(context: vscode.ExtensionContext, rootPath: string): Promise<void> {
+    const extensionPath = context.extensionPath;
+    
+    // Clean up legacy manifest if it exists
+    const legacyPath = getLegacyManifestPath(rootPath);
+    if (await fs.pathExists(legacyPath)) {
+        await fs.remove(legacyPath);
+        console.log('Removed legacy manifest from root');
+    }
+    
+    // Get version from extension package.json
+    let version = '0.0.0';
+    try {
+        const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
+        version = packageJson.version || '0.0.0';
+    } catch {
+        console.warn('Could not read extension version');
+    }
+
+    const manifest: Manifest = {
+        version,
+        installedAt: new Date().toISOString(),
+        files: {}
+    };
+
+    // Directories to scan for manifest entries
+    const dirsToScan = [
+        { dir: path.join(rootPath, '.github', 'instructions'), prefix: '.github/instructions' },
+        { dir: path.join(rootPath, '.github', 'prompts'), prefix: '.github/prompts' },
+        { dir: path.join(rootPath, '.github', 'domain-knowledge'), prefix: '.github/domain-knowledge' },
+        { dir: path.join(rootPath, '.github', 'agents'), prefix: '.github/agents' }
+    ];
+
+    // Add copilot-instructions.md
+    const brainFile = path.join(rootPath, '.github', 'copilot-instructions.md');
+    if (await fs.pathExists(brainFile)) {
+        const content = await fs.readFile(brainFile, 'utf8');
+        manifest.files['.github/copilot-instructions.md'] = {
+            type: 'system',
+            originalChecksum: calculateChecksum(content)
+        };
+    }
+
+    // Scan directories
+    for (const { dir, prefix } of dirsToScan) {
+        if (await fs.pathExists(dir)) {
+            const files = await fs.readdir(dir);
+            for (const file of files) {
+                if (file.endsWith('.md')) {
+                    const filePath = path.join(dir, file);
+                    const content = await fs.readFile(filePath, 'utf8');
+                    manifest.files[`${prefix}/${file}`] = {
+                        type: 'system',
+                        originalChecksum: calculateChecksum(content)
+                    };
+                }
+            }
+        }
+    }
+
+    // Save manifest
+    const manifestPath = getManifestPath(rootPath);
+    await fs.ensureDir(path.dirname(manifestPath));
+    await fs.writeJson(manifestPath, manifest, { spaces: 2 });
 }

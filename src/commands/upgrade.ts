@@ -75,19 +75,52 @@ async function getExtensionVersion(extensionPath: string): Promise<string> {
 }
 
 /**
- * Load or create manifest
+ * Get the manifest path (new location)
+ */
+function getManifestPath(rootPath: string): string {
+    return path.join(rootPath, '.github', 'config', 'alex-manifest.json');
+}
+
+/**
+ * Get the legacy manifest path (old location)
+ */
+function getLegacyManifestPath(rootPath: string): string {
+    return path.join(rootPath, '.alex-manifest.json');
+}
+
+/**
+ * Load manifest, migrating from old location if needed
  */
 async function loadManifest(rootPath: string): Promise<Manifest | null> {
-    const manifestPath = path.join(rootPath, '.alex-manifest.json');
+    const manifestPath = getManifestPath(rootPath);
+    const legacyPath = getLegacyManifestPath(rootPath);
+    
+    // Check new location first
     if (await fs.pathExists(manifestPath)) {
         try {
             return await fs.readJson(manifestPath);
         } catch (error) {
             console.error('Failed to parse manifest (may be corrupted):', error);
-            // Return null to trigger fresh manifest creation
             return null;
         }
     }
+    
+    // Check legacy location and migrate if found
+    if (await fs.pathExists(legacyPath)) {
+        try {
+            const manifest = await fs.readJson(legacyPath);
+            // Migrate to new location
+            await fs.ensureDir(path.join(rootPath, '.github', 'config'));
+            await fs.writeJson(manifestPath, manifest, { spaces: 2 });
+            await fs.remove(legacyPath);
+            console.log('Migrated manifest from root to .github/config/');
+            return manifest;
+        } catch (error) {
+            console.error('Failed to parse/migrate legacy manifest:', error);
+            return null;
+        }
+    }
+    
     return null;
 }
 
@@ -95,7 +128,8 @@ async function loadManifest(rootPath: string): Promise<Manifest | null> {
  * Save manifest
  */
 async function saveManifest(rootPath: string, manifest: Manifest): Promise<void> {
-    const manifestPath = path.join(rootPath, '.alex-manifest.json');
+    const manifestPath = getManifestPath(rootPath);
+    await fs.ensureDir(path.dirname(manifestPath));
     await fs.writeJson(manifestPath, manifest, { spaces: 2 });
 }
 
@@ -247,39 +281,31 @@ async function findUserCreatedFiles(rootPath: string, manifest: Manifest | null)
  */
 export async function upgradeArchitecture(context: vscode.ExtensionContext) {
     // Use smart workspace folder detection for multi-folder workspaces
-    const workspaceResult = await getAlexWorkspaceFolder(false); // false = don't require installed yet
+    // Use requireInstalled=true since upgrade only works on existing installations
+    const workspaceResult = await getAlexWorkspaceFolder(true);
     
     if (!workspaceResult.found) {
         if (workspaceResult.cancelled) {
             return; // User cancelled folder selection
         }
-        vscode.window.showErrorMessage(
-            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Upgrade.'
-        );
-        return;
-    }
-
-    const rootPath = workspaceResult.rootPath!;
-    const workspaceFolder = workspaceResult.workspaceFolder!;
-    const extensionPath = context.extensionPath;
-    const markerFile = path.join(rootPath, '.github', 'copilot-instructions.md');
-
-    // Check if Alex is installed
-    if (!await fs.pathExists(markerFile)) {
+        
+        // Alex not installed - offer to initialize instead
         const result = await vscode.window.showWarningMessage(
-            'Alex is not installed in this workspace yet.\n\n' +
-            'To use Alex, you need to initialize it first. This will set up the cognitive architecture files.',
+            workspaceResult.error || 'Alex is not installed in this workspace.',
             'Initialize Alex Now',
             'Cancel'
         );
-
+        
         if (result === 'Initialize Alex Now') {
             await vscode.commands.executeCommand('alex.initialize');
         }
         return;
     }
 
-    // Get versions
+    const rootPath = workspaceResult.rootPath!;
+    const extensionPath = context.extensionPath;
+
+    // Get versions (Alex installation already verified by getAlexWorkspaceFolder)
     const installedVersion = await getInstalledVersion(rootPath);
     const extensionVersion = await getExtensionVersion(extensionPath);
 
@@ -664,7 +690,8 @@ async function performUpgrade(
             manifest.upgradedAt = new Date().toISOString();
             
             // Atomic write: write to temp file first, then rename
-            const manifestPath = path.join(rootPath, '.alex-manifest.json');
+            const manifestPath = getManifestPath(rootPath);
+            await fs.ensureDir(path.dirname(manifestPath));
             const tempManifestPath = manifestPath + '.tmp';
             await fs.writeJson(tempManifestPath, manifest, { spaces: 2 });
             await fs.move(tempManifestPath, manifestPath, { overwrite: true });
@@ -794,8 +821,7 @@ If anything goes wrong:
 
 1. Delete current \`.github/\` folder
 2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
-3. Delete \`.alex-manifest.json\`
-4. Run \`Alex: Dream (Neural Maintenance)\` to verify
+3. Run \`Alex: Dream (Neural Maintenance)\` to verify
 
 ---
 

@@ -550,8 +550,8 @@ var require_graceful_fs = __commonJS({
       fs10.createReadStream = createReadStream;
       fs10.createWriteStream = createWriteStream;
       var fs$readFile = fs10.readFile;
-      fs10.readFile = readFile8;
-      function readFile8(path10, options, cb) {
+      fs10.readFile = readFile9;
+      function readFile9(path10, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
         return go$readFile(path10, options, cb);
@@ -622,9 +622,9 @@ var require_graceful_fs = __commonJS({
         }
       }
       var fs$readdir = fs10.readdir;
-      fs10.readdir = readdir3;
+      fs10.readdir = readdir4;
       var noReaddirOptionVersions = /^v[0-5]\./;
-      function readdir3(path10, options, cb) {
+      function readdir4(path10, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
         var go$readdir = noReaddirOptionVersions.test(process.version) ? function go$readdir2(path11, options2, cb2, startTime) {
@@ -1918,7 +1918,7 @@ var require_jsonfile = __commonJS({
       }
       return obj;
     }
-    var readFile8 = universalify.fromPromise(_readFile);
+    var readFile9 = universalify.fromPromise(_readFile);
     function readFileSync(file, options = {}) {
       if (typeof options === "string") {
         options = { encoding: options };
@@ -1950,7 +1950,7 @@ var require_jsonfile = __commonJS({
       return fs9.writeFileSync(file, str, options);
     }
     module2.exports = {
-      readFile: readFile8,
+      readFile: readFile9,
       readFileSync,
       writeFile: writeFile8,
       writeFileSync
@@ -3000,6 +3000,7 @@ var vscode10 = __toESM(require("vscode"));
 var vscode2 = __toESM(require("vscode"));
 var fs2 = __toESM(require_lib());
 var path2 = __toESM(require("path"));
+var crypto = __toESM(require("crypto"));
 
 // src/shared/utils.ts
 var vscode = __toESM(require("vscode"));
@@ -3146,6 +3147,12 @@ async function isAlexInstalled(rootPath) {
 }
 
 // src/commands/initialize.ts
+function calculateChecksum(content) {
+  return crypto.createHash("md5").update(content.replace(/\r\n/g, "\n")).digest("hex");
+}
+function getManifestPath(rootPath) {
+  return path2.join(rootPath, ".github", "config", "alex-manifest.json");
+}
 async function initializeArchitecture(context) {
   const workspaceResult = await getAlexWorkspaceFolder(false);
   if (!workspaceResult.found) {
@@ -3208,8 +3215,9 @@ async function resetArchitecture(context) {
     path2.join(rootPath, ".github", "episodic"),
     path2.join(rootPath, ".github", "domain-knowledge"),
     path2.join(rootPath, ".github", "config"),
+    // Includes alex-manifest.json
     path2.join(rootPath, ".alex-manifest.json")
-    // Clean up manifest too
+    // Clean up legacy manifest location too
   ];
   try {
     await vscode2.window.withProgress({
@@ -3268,6 +3276,8 @@ async function performInitialization(context, rootPath, overwrite) {
           console.warn(`Source not found: ${item.src}`);
         }
       }
+      progress.report({ message: "Creating manifest..." });
+      await createInitialManifest(context, rootPath);
     });
     const result = await vscode2.window.showInformationMessage(
       '\u2705 Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open any file and start chatting with your AI assistant\n2. Run "Alex: Dream" periodically to maintain neural health\n3. Ask Alex to learn new domains as needed',
@@ -3287,6 +3297,61 @@ async function performInitialization(context, rootPath, overwrite) {
 
 Try closing VS Code, deleting the .github folder, and running initialize again.`);
   }
+}
+function getLegacyManifestPath(rootPath) {
+  return path2.join(rootPath, ".alex-manifest.json");
+}
+async function createInitialManifest(context, rootPath) {
+  const extensionPath = context.extensionPath;
+  const legacyPath = getLegacyManifestPath(rootPath);
+  if (await fs2.pathExists(legacyPath)) {
+    await fs2.remove(legacyPath);
+    console.log("Removed legacy manifest from root");
+  }
+  let version = "0.0.0";
+  try {
+    const packageJson = await fs2.readJson(path2.join(extensionPath, "package.json"));
+    version = packageJson.version || "0.0.0";
+  } catch {
+    console.warn("Could not read extension version");
+  }
+  const manifest = {
+    version,
+    installedAt: (/* @__PURE__ */ new Date()).toISOString(),
+    files: {}
+  };
+  const dirsToScan = [
+    { dir: path2.join(rootPath, ".github", "instructions"), prefix: ".github/instructions" },
+    { dir: path2.join(rootPath, ".github", "prompts"), prefix: ".github/prompts" },
+    { dir: path2.join(rootPath, ".github", "domain-knowledge"), prefix: ".github/domain-knowledge" },
+    { dir: path2.join(rootPath, ".github", "agents"), prefix: ".github/agents" }
+  ];
+  const brainFile = path2.join(rootPath, ".github", "copilot-instructions.md");
+  if (await fs2.pathExists(brainFile)) {
+    const content = await fs2.readFile(brainFile, "utf8");
+    manifest.files[".github/copilot-instructions.md"] = {
+      type: "system",
+      originalChecksum: calculateChecksum(content)
+    };
+  }
+  for (const { dir, prefix } of dirsToScan) {
+    if (await fs2.pathExists(dir)) {
+      const files = await fs2.readdir(dir);
+      for (const file of files) {
+        if (file.endsWith(".md")) {
+          const filePath = path2.join(dir, file);
+          const content = await fs2.readFile(filePath, "utf8");
+          manifest.files[`${prefix}/${file}`] = {
+            type: "system",
+            originalChecksum: calculateChecksum(content)
+          };
+        }
+      }
+    }
+  }
+  const manifestPath = getManifestPath(rootPath);
+  await fs2.ensureDir(path2.dirname(manifestPath));
+  await fs2.writeJson(manifestPath, manifest, { spaces: 2 });
 }
 
 // src/commands/dream.ts
@@ -3520,9 +3585,9 @@ ${report.brokenSynapses.length > 0 ? "- [ ] Repair remaining broken links manual
 var vscode4 = __toESM(require("vscode"));
 var fs4 = __toESM(require_lib());
 var path4 = __toESM(require("path"));
-var crypto = __toESM(require("crypto"));
-function calculateChecksum(content) {
-  return crypto.createHash("md5").update(content.replace(/\r\n/g, "\n")).digest("hex");
+var crypto2 = __toESM(require("crypto"));
+function calculateChecksum2(content) {
+  return crypto2.createHash("md5").update(content.replace(/\r\n/g, "\n")).digest("hex");
 }
 async function getInstalledVersion(rootPath) {
   const instructionsPath = path4.join(rootPath, ".github", "copilot-instructions.md");
@@ -3546,13 +3611,33 @@ async function getExtensionVersion(extensionPath) {
     return "0.0.0";
   }
 }
+function getManifestPath2(rootPath) {
+  return path4.join(rootPath, ".github", "config", "alex-manifest.json");
+}
+function getLegacyManifestPath2(rootPath) {
+  return path4.join(rootPath, ".alex-manifest.json");
+}
 async function loadManifest(rootPath) {
-  const manifestPath = path4.join(rootPath, ".alex-manifest.json");
+  const manifestPath = getManifestPath2(rootPath);
+  const legacyPath = getLegacyManifestPath2(rootPath);
   if (await fs4.pathExists(manifestPath)) {
     try {
       return await fs4.readJson(manifestPath);
     } catch (error) {
       console.error("Failed to parse manifest (may be corrupted):", error);
+      return null;
+    }
+  }
+  if (await fs4.pathExists(legacyPath)) {
+    try {
+      const manifest = await fs4.readJson(legacyPath);
+      await fs4.ensureDir(path4.join(rootPath, ".github", "config"));
+      await fs4.writeJson(manifestPath, manifest, { spaces: 2 });
+      await fs4.remove(legacyPath);
+      console.log("Migrated manifest from root to .github/config/");
+      return manifest;
+    } catch (error) {
+      console.error("Failed to parse/migrate legacy manifest:", error);
       return null;
     }
   }
@@ -3649,23 +3734,13 @@ async function findUserCreatedFiles(rootPath, manifest) {
   return userFiles;
 }
 async function upgradeArchitecture(context) {
-  const workspaceResult = await getAlexWorkspaceFolder(false);
+  const workspaceResult = await getAlexWorkspaceFolder(true);
   if (!workspaceResult.found) {
     if (workspaceResult.cancelled) {
       return;
     }
-    vscode4.window.showErrorMessage(
-      workspaceResult.error || "No workspace folder open. Please open a project with Alex installed (File \u2192 Open Folder), then run Upgrade."
-    );
-    return;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const workspaceFolder = workspaceResult.workspaceFolder;
-  const extensionPath = context.extensionPath;
-  const markerFile = path4.join(rootPath, ".github", "copilot-instructions.md");
-  if (!await fs4.pathExists(markerFile)) {
     const result = await vscode4.window.showWarningMessage(
-      "Alex is not installed in this workspace yet.\n\nTo use Alex, you need to initialize it first. This will set up the cognitive architecture files.",
+      workspaceResult.error || "Alex is not installed in this workspace.",
       "Initialize Alex Now",
       "Cancel"
     );
@@ -3674,6 +3749,8 @@ async function upgradeArchitecture(context) {
     }
     return;
   }
+  const rootPath = workspaceResult.rootPath;
+  const extensionPath = context.extensionPath;
   const installedVersion = await getInstalledVersion(rootPath);
   const extensionVersion = await getExtensionVersion(extensionPath);
   if (installedVersion === extensionVersion) {
@@ -3852,7 +3929,7 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
             const content = await fs4.readFile(srcFile, "utf8");
             manifest.files[`.github/instructions/${file}`] = {
               type: "system",
-              originalChecksum: calculateChecksum(content)
+              originalChecksum: calculateChecksum2(content)
             };
             if (existed) {
               report.updated.push(`.github/instructions/${file}`);
@@ -3875,7 +3952,7 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
             const content = await fs4.readFile(srcFile, "utf8");
             manifest.files[`.github/prompts/${file}`] = {
               type: "system",
-              originalChecksum: calculateChecksum(content)
+              originalChecksum: calculateChecksum2(content)
             };
             if (existed) {
               report.updated.push(`.github/prompts/${file}`);
@@ -3899,7 +3976,7 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
             const content = await fs4.readFile(srcFile, "utf8");
             manifest.files[`.github/agents/${file}`] = {
               type: "system",
-              originalChecksum: calculateChecksum(content)
+              originalChecksum: calculateChecksum2(content)
             };
             if (existed) {
               report.updated.push(`.github/agents/${file}`);
@@ -3941,7 +4018,7 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
           const destFile = path4.join(extDkDest, file);
           if ((await fs4.stat(srcFile)).isFile()) {
             const srcContent = await fs4.readFile(srcFile, "utf8");
-            const srcChecksum = calculateChecksum(srcContent);
+            const srcChecksum = calculateChecksum2(srcContent);
             if (!await fs4.pathExists(destFile)) {
               await fs4.copy(srcFile, destFile);
               manifest.files[`.github/domain-knowledge/${file}`] = {
@@ -3951,7 +4028,7 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
               report.added.push(`.github/domain-knowledge/${file}`);
             } else {
               const destContent = await fs4.readFile(destFile, "utf8");
-              const destChecksum = calculateChecksum(destContent);
+              const destChecksum = calculateChecksum2(destContent);
               const originalChecksum = manifest.files[`.github/domain-knowledge/${file}`]?.originalChecksum;
               if (originalChecksum && destChecksum !== originalChecksum) {
                 const newVersionPath = destFile.replace(/\.md$/, `.v${newVersion}.md`);
@@ -3982,7 +4059,8 @@ async function performUpgrade(context, rootPath, extensionPath, oldVersion, newV
       progress.report({ message: "Saving manifest...", increment: 5 });
       manifest.version = newVersion;
       manifest.upgradedAt = (/* @__PURE__ */ new Date()).toISOString();
-      const manifestPath = path4.join(rootPath, ".alex-manifest.json");
+      const manifestPath = getManifestPath2(rootPath);
+      await fs4.ensureDir(path4.dirname(manifestPath));
       const tempManifestPath = manifestPath + ".tmp";
       await fs4.writeJson(tempManifestPath, manifest, { spaces: 2 });
       await fs4.move(tempManifestPath, manifestPath, { overwrite: true });
@@ -4100,8 +4178,7 @@ If anything goes wrong:
 
 1. Delete current \`.github/\` folder
 2. Copy contents from: \`${path4.relative(rootPath, backupDir)}\`
-3. Delete \`.alex-manifest.json\`
-4. Run \`Alex: Dream (Neural Maintenance)\` to verify
+3. Run \`Alex: Dream (Neural Maintenance)\` to verify
 
 ---
 

@@ -5,6 +5,41 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.2] TRIBINILIUM - 2026-01-26
+
+### Improved
+
+- **📋 Manifest Location** - Moved `.alex-manifest.json` to `.github/config/alex-manifest.json`
+  - Groups logically with other config files (user-profile.json)
+  - Keeps project root cleaner
+  - Automatically migrates existing manifests from root location
+
+- **🆕 Manifest Created at Initialize** - Now creates manifest during `Alex: Initialize`
+  - Captures accurate `installedAt` timestamp at actual installation time
+  - Records original file checksums before any user modifications
+  - Enables accurate modification detection for future upgrades
+  - First upgrade no longer has to guess what was originally installed
+
+### Fixed
+
+- Legacy manifest cleanup - Initialize and Reset properly remove old root-level manifests
+- Updated UPGRADE-INSTRUCTIONS.md to reference new manifest location
+
+---
+
+## [3.3.1] TRITRIUNIUM - 2026-01-25
+
+### Fixed
+
+- **🔧 Upgrade Command Stalling** - Fixed upgrade command hanging in multi-folder workspaces
+  - Changed `getAlexWorkspaceFolder(false)` to `getAlexWorkspaceFolder(true)` in upgrade flow
+  - Upgrade now correctly requires Alex to be installed before attempting upgrade
+  - Auto-selects folder when only one workspace has Alex installed
+  - Shows proper error message and offers to initialize if Alex not found
+  - Removed redundant installation check that was unreachable
+
+---
+
 ## [3.3.0] TRITRINILIUM - 2026-01-25
 
 ### Added

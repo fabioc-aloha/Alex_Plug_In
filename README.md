@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.3.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.3.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -77,7 +77,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v3.3.0 |
+| Feature | v1.5.x | v3.3.1 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
@@ -88,7 +88,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Self-Actualization | ❌ None | ✅ 6-phase assessment with auto-promotion |
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
 | Auto-Promotion | ❌ None | ✅ Auto-promote DK files during meditation |
-| Emotional Intelligence | ❌ None | ✅ **NEW** Frustration detection & encouragement |
+| Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
 ### Migration Notes
@@ -129,7 +129,7 @@ Alex also notices when things go well:
 
 ### How It Works
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                 UNCONSCIOUS MIND                            │
 │                                                             │
@@ -229,7 +229,7 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 Alex now maintains a **centralized knowledge base** that persists across all your projects. Learn something valuable in Project A? It's automatically available when you're working on Project B!
 
-### How It Works
+### Global Knowledge Structure
 
 ```text
 ~/.alex/                          # Your global Alex home

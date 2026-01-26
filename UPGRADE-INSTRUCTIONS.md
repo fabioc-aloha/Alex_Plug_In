@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture - Upgrade Instructions
 
-**Version**: 3.0.0 TRINILNILIUM
+**Version**: 3.3.1 TRITRIUNIUM
 **Purpose**: Safe upgrade process that preserves learned knowledge while updating system architecture
 
 ---
@@ -34,7 +34,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 1. ✅ Detect currently installed version from `copilot-instructions.md`
 2. ✅ Compare with extension's bundled version
 3. ✅ Create timestamped backup in `archive/upgrades/backup-{version}-{timestamp}/`
-4. ✅ Generate `.alex-manifest.json` tracking all deployed files
+4. ✅ Update `.github/config/alex-manifest.json` tracking all deployed files
 5. ✅ Scan for files needing migration (old synapse format, etc.)
 6. ✅ Add NEW system files that don't exist yet
 7. ✅ Generate `UPGRADE-INSTRUCTIONS.md` in workspace root
@@ -43,7 +43,7 @@ Upgrading Alex requires a **hybrid approach** combining automated code execution
 **Files created**:
 
 - `archive/upgrades/backup-{version}-{timestamp}/` - Full backup
-- `.alex-manifest.json` - File tracking manifest
+- `.github/config/alex-manifest.json` - File tracking manifest
 - `UPGRADE-INSTRUCTIONS.md` - User instructions for Phase 2
 - `archive/upgrades/upgrade-tasks-{timestamp}.md` - Detailed migration tasks
 
@@ -161,7 +161,7 @@ These are created by user learning and must be protected:
 - `domain-knowledge/DK-*.md` - User may create new ones during learning
 - `archive/*` - All historical records
 - `config/cognitive-config.json` - User's actual config
-- Any file NOT in `.alex-manifest.json`
+- Any file NOT in `.github/config/alex-manifest.json`
 
 ### Migration-Only Files
 
@@ -174,7 +174,7 @@ Files that exist in both extension and user workspace but may have user edits:
 
 ## Manifest Structure
 
-`.alex-manifest.json`:
+`.github/config/alex-manifest.json`:
 
 ```json
 {
