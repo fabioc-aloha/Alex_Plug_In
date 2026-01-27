@@ -5,25 +5,15 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.3.6] TRITRHEXIUM - 2026-01-27
+## [3.3.7] TRITRSEPTIUM - 2026-01-27
 
 ### Fixed
-
-- **🔄 Operation Conflict Prevention** - Increased post-modification sync delay from 2s to 10s
-  - Prevents "Another Alex operation is already in progress" conflicts
-  - Gives ongoing operations more time to complete before auto-sync triggers
 
 - **🐛 Regex State Leakage** - Fixed insight detection patterns using global regex
   - Pattern regexes now created fresh on each call to avoid `lastIndex` state issues
   - Prevents inconsistent insight detection across calls
 
 ### Improved
-
-- **📝 Version Management Cleanup** - Reduced redundant version references
-  - Version now maintained only in: package.json, CHANGELOG.md, and copilot-instructions.md header
-  - Removed duplicate versions from Reference section and Version Compatibility section
-  - README uses "Latest" in comparison table instead of specific version
-  - Reduces maintenance overhead and prevents version drift
 
 - **⏹️ Cancellation Token Support** - Added proper cancellation handling in tools
   - SynapseHealthTool, MemorySearchTool, and SelfActualizationTool now check for cancellation
@@ -33,6 +23,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `resetSessionState()` function clears emotional tracking and conversation buffers
   - Prevents state bleeding between VS Code sessions
   - Proper logging on extension deactivation
+
+---
+
+## [3.3.6] TRITRHEXIUM - 2026-01-27
+
+### Fixed
+
+- **🔄 Operation Conflict Prevention** - Increased post-modification sync delay from 2s to 10s
+  - Prevents "Another Alex operation is already in progress" conflicts
+  - Gives ongoing operations more time to complete before auto-sync triggers
+
+### Improved
+
+- **📝 Version Management Cleanup** - Reduced redundant version references
+  - Version now maintained only in: package.json, CHANGELOG.md, and copilot-instructions.md header
+  - Removed duplicate versions from Reference section and Version Compatibility section
+  - README uses "Latest" in comparison table instead of specific version
+  - Reduces maintenance overhead and prevents version drift
 
 ---
 
