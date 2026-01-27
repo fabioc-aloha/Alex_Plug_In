@@ -1,140 +1,86 @@
 # Alex Cognitive Architecture - Upgrade Instructions
 
-**Version**: 3.3.1 TRITRIUNIUM
-**Purpose**: Safe upgrade process that preserves learned knowledge while updating system architecture
+**Version**: 3.3.3 TRITRITRIUM
+**Purpose**: Fully automated upgrade process that preserves learned knowledge while updating system architecture
 
 ---
 
 ## Overview
 
-**Good news!** Starting with v3.0.0, Alex **automatically notifies you** when an upgrade is available. When the extension updates, you'll see a notification with options to:
+**Good news!** Starting with v3.3.2, Alex performs **fully automated upgrades**. When the extension updates, you'll see a notification with options to:
 
-- **Run Upgrade** - Updates your workspace files immediately
+- **Run Upgrade** - Performs complete upgrade automatically
 - **View Changelog** - See what's new before upgrading
 - **Dismiss** - Skip for now (you can always run manually later)
 
-### Why Upgrades Are Needed
+### What Makes This Different
 
-Upgrading Alex requires a **hybrid approach** combining automated code execution with AI-assisted content migration because:
+Previous versions required a hybrid approach with manual AI assistance. **v3.3.3+ performs all migrations automatically**:
 
-1. **User-created content must be preserved** (learned domains, custom synapses, insights)
-2. **Schema changes require intelligent migration** (synapse format standardization)
-3. **The core brain file contains both system AND user state** (copilot-instructions.md)
+1. ✅ Creates complete backup
+2. ✅ Updates all system files
+3. ✅ **Auto-migrates schema changes** (headers, relationship types, activation patterns)
+4. ✅ Preserves user customizations
+5. ✅ Runs Dream validation
+6. ✅ Cleans up temporary files
 
----
-
-## Upgrade Phases
-
-### Phase 1: Automated Preparation (VS Code Extension)
-
-**Trigger**: User runs `Alex: Upgrade Architecture` command
-
-**Actions performed by code**:
-
-1. ✅ Detect currently installed version from `copilot-instructions.md`
-2. ✅ Compare with extension's bundled version
-3. ✅ Create timestamped backup in `archive/upgrades/backup-{version}-{timestamp}/`
-4. ✅ Update `.github/config/alex-manifest.json` tracking all deployed files
-5. ✅ Scan for files needing migration (old synapse format, etc.)
-6. ✅ Add NEW system files that don't exist yet
-7. ✅ Generate `UPGRADE-INSTRUCTIONS.md` in workspace root
-8. ✅ Show notification prompting user to complete upgrade with AI assistant
-
-**Files created**:
-
-- `archive/upgrades/backup-{version}-{timestamp}/` - Full backup
-- `.github/config/alex-manifest.json` - File tracking manifest
-- `UPGRADE-INSTRUCTIONS.md` - User instructions for Phase 2
-- `archive/upgrades/upgrade-tasks-{timestamp}.md` - Detailed migration tasks
+**No manual intervention required!**
 
 ---
 
-### Phase 2: AI-Assisted Migration (User + Copilot)
+## Upgrade Process (Fully Automated)
 
-**Trigger**: User reads `UPGRADE-INSTRUCTIONS.md` and asks AI assistant to help
+### Trigger
 
-**User prompt**:
+Run `Alex: Upgrade Architecture` command or click "Run Upgrade" on notification.
 
-```text
-"Alex, please complete the upgrade by following UPGRADE-INSTRUCTIONS.md"
-```
+### What Happens Automatically
 
-**AI performs**:
+1. **Backup Creation**
+   - Full backup to `archive/upgrades/backup-{version}-{timestamp}/`
+   - All cognitive memory preserved
 
-#### 2.0 Rename DK Files (FIRST STEP)
+2. **System File Updates**
+   - `.github/instructions/*.instructions.md` - All instruction files
+   - `.github/prompts/*.prompt.md` - Prompt templates
+   - `.github/agents/` - Agent definitions
+   - `.github/config/` - Configuration templates
 
-**⚠️ IMPORTANT**: Before any other migration steps, rename all domain knowledge files to remove version numbers:
+3. **Schema Migrations** (automatic)
+   - `## Embedded Synapse Network` → `## Synapses`
+   - `### **Bold Headers**` → `### Headers`
+   - Relationship type normalization:
 
-- Old: `DK-EXAMPLE-v1.0.md` or `DK-EXAMPLE-1.0.md`
-- New: `DK-EXAMPLE.md`
+     | Old | New |
+     | --- | --- |
+     | Expression | Enables |
+     | Embodiment | Enables |
+     | Living | Validates |
+     | Reflexive | Documents |
+     | Ethical | Validates |
+     | Unconscious | Enables |
+     | Application | Enables |
+     | Validation | Validates |
 
-This must be done FIRST because:
+   - Verbose activation patterns simplified (date stamps removed, bold removed)
 
-1. Version numbers in filenames cause duplicate file issues during upgrades
-2. Synapse references may break if files have inconsistent naming
-3. The manifest tracks files by name - versioned names create orphaned entries
+4. **Brain File Merge** (copilot-instructions.md)
+   - **Updates**: Version, system sections, command documentation
+   - **Preserves**: Domain slots (P5-P7), custom memory references, user sections
 
-**Process**:
+5. **Dream Validation**
+   - Automatically runs `Alex: Dream (Neural Maintenance)`
+   - Validates synaptic connections
+   - Reports any issues
 
-1. List all files in `.github/domain-knowledge/`
-2. Identify any with version patterns (e.g., `-v1.0`, `-1.0`, `-v2.1`)
-3. Rename to remove the version suffix
-4. Update any synapse references in other files that point to the old filename
+6. **Cleanup**
+   - Removes any leftover `UPGRADE-INSTRUCTIONS.md` from previous upgrades
+   - Generates upgrade report in `archive/upgrades/`
 
-#### 2.1 Schema Migration
+### Output
 
-For each file flagged in upgrade-tasks.md:
-
-- Transform `## Embedded Synapse Network` → `## Synapses`
-- Transform `### **Bold Headers**` → `### Headers`
-- Migrate non-standard relationship types:| Old         | New       |
-  | ----------- | --------- |
-  | Expression  | Enables   |
-  | Embodiment  | Enables   |
-  | Living      | Validates |
-  | Reflexive   | Documents |
-  | Ethical     | Validates |
-  | Unconscious | Enables   |
-  | Application | Enables   |
-  | Validation  | Validates |
-- Simplify verbose activation patterns:
-  - Old: `**Bold Trigger** → Long description ✅ NEW Aug 8, 2025`
-  - New: `Trigger → Action`
-
-#### 2.2 Core File Merge (copilot-instructions.md)
-
-**UPDATE** (system sections):
-
-- Version number and naming
-- Core Meta-Cognitive Rules table
-- Essential Principles section
-- VS Code Extension commands documentation
-- Any bug fixes or improvements
-
-**PRESERVE** (user state):
-
-- Domain Priority Allocation slot assignments (P5-P7 status)
-- User-added memory file references in Key Memory Files section
-- Any custom sections user added
-
-#### 2.3 User File Protection
-
-- User-created DK files: Migrate schema only, preserve all content
-- User-created prompts: Migrate schema only, preserve all content
-- Archive folder: Never touch
-
----
-
-### Phase 3: Validation
-
-**Trigger**: AI completes migration tasks
-
-**Actions**:
-
-1. Run `Alex: Dream (Neural Maintenance)` to validate synaptic network
-2. Review upgrade report for any issues
-3. Test cognitive functions (try a meditation, domain learning, etc.)
-4. Delete `UPGRADE-INSTRUCTIONS.md` when satisfied
+- Upgrade report: `archive/upgrades/upgrade-report-{timestamp}.md`
+- Backup location: `archive/upgrades/backup-{version}-{timestamp}/`
 
 ---
 
@@ -148,27 +94,20 @@ These files contain no user state and can be safely overwritten:
 - `.github/prompts/*.prompt.md` - Base prompt files (except user-created)
 - `config/cognitive-config-template.json` - Template only
 
-### Hybrid Files (Merge Required)
+### Hybrid Files (Auto-Merged)
 
-These contain both system structure and user state:
+These contain both system structure and user state - merged intelligently:
 
-- `.github/copilot-instructions.md` - **THE BRAIN** - requires intelligent merge
+- `.github/copilot-instructions.md` - **THE BRAIN** - auto-merged preserving user customizations
 
 ### User Files (Never Overwrite)
 
-These are created by user learning and must be protected:
+These are created by user learning and are fully protected:
 
-- `domain-knowledge/DK-*.md` - User may create new ones during learning
+- `domain-knowledge/DK-*.md` - User-created knowledge files
 - `archive/*` - All historical records
 - `config/cognitive-config.json` - User's actual config
 - Any file NOT in `.github/config/alex-manifest.json`
-
-### Migration-Only Files
-
-Files that exist in both extension and user workspace but may have user edits:
-
-- `domain-knowledge/*.md` - System DK files user may have annotated
-- Schema migration applied, content preserved
 
 ---
 
@@ -292,10 +231,10 @@ See the [README MCP Optimization section](README.md#-mcp-server-optimization) fo
 
 ## Future Considerations
 
-- **Automated schema migrations**: As architecture stabilizes, more migrations can be automated
 - **Version-specific migration scripts**: Each version bump could include specific transformations
-- **Conflict resolution UI**: VS Code webview showing side-by-side diffs for user approval
+- **Conflict resolution UI**: VS Code webview showing side-by-side diffs for user approval (for edge cases)
+- **Pre-upgrade compatibility checks**: Validate environment before starting
 
 ---
 
-*This protocol ensures safe upgrades that preserve the cognitive system's learned knowledge while incorporating architectural improvements.*
+*This protocol ensures safe, fully automated upgrades that preserve the cognitive system's learned knowledge while incorporating architectural improvements.*

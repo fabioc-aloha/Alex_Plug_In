@@ -299,22 +299,24 @@ Ctrl+Shift+P → "Alex: Upgrade Architecture"
 
 1. **Backup** - All files backed up to `archive/upgrades/`
 2. **Update** - System files updated automatically
-3. **Preserve** - Your custom knowledge preserved
-4. **Migrate** - Schema changes applied if needed
+3. **Migrate** - Schema changes applied automatically
+4. **Validate** - Dream protocol runs to verify health
+5. **Clean up** - Temporary files removed
 
 ### After Upgrade
 
-Run dream protocol to validate:
+The upgrade validates automatically with Dream protocol. You can verify with:
 
 ```text
-@alex /dream
+@alex /status
 ```
 
 ### Upgrade Tips
 
-- ✅ Upgrades are safe - backups are automatic
-- ✅ Your knowledge is preserved
-- ✅ Run `/dream` after upgrading
+- ✅ Upgrades are fully automated - just click "Run Upgrade"
+- ✅ Backups are created automatically
+- ✅ Your knowledge is always preserved
+- ✅ Schema migrations happen automatically
 - ❌ Don't interrupt the upgrade process
 
 ---

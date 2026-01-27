@@ -5,6 +5,33 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.3] TRITRITRIUM - 2026-01-26
+
+### Added
+
+- **🚀 Fully Automated Upgrades** - The upgrade process now completes entirely automatically!
+  - No more AI assistant prompts or manual intervention required
+  - Automatic schema migrations (headers, relationship types, activation patterns)
+  - Automatic Dream validation after upgrade
+  - Automatic cleanup of temporary files
+  - One-click upgrade from notification or command palette
+
+### Changed
+
+- Upgrade confirmation dialog now shows "~30 seconds" instead of "~2-5 minutes"
+- Removed generation of `UPGRADE-INSTRUCTIONS.md` (no longer needed)
+- Upgrade report now shows migration details in `archive/upgrades/`
+
+### Improved
+
+- Schema migration handles all legacy patterns automatically:
+  - `## Embedded Synapse Network` → `## Synapses`
+  - `### **Bold Headers**` → `### Headers`
+  - Old relationship types (Expression→Enables, Embodiment→Enables, etc.)
+  - Verbose activation patterns with date stamps simplified
+
+---
+
 ## [3.3.2] TRIBINILIUM - 2026-01-26
 
 ### Improved

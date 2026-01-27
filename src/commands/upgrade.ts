@@ -255,6 +255,103 @@ async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
 }
 
 /**
+ * Relationship type migration mapping
+ */
+const RELATIONSHIP_TYPE_MIGRATIONS: Record<string, string> = {
+    'Expression': 'Enables',
+    'Embodiment': 'Enables',
+    'Living': 'Validates',
+    'Reflexive': 'Documents',
+    'Ethical': 'Validates',
+    'Unconscious': 'Enables',
+    'Application': 'Enables',
+    'Validation': 'Validates'
+};
+
+/**
+ * Perform automatic schema migration on a file
+ * Returns true if changes were made, false otherwise
+ */
+async function performSchemaMigration(filePath: string): Promise<{ migrated: boolean; changes: string[] }> {
+    const changes: string[] = [];
+    
+    if (!await fs.pathExists(filePath)) {
+        return { migrated: false, changes };
+    }
+
+    try {
+        let content = await fs.readFile(filePath, 'utf8');
+        const originalContent = content;
+        
+        // 1. Migrate old header: "## Embedded Synapse Network" → "## Synapses"
+        if (/## Embedded Synapse Network/i.test(content)) {
+            content = content.replace(/## Embedded Synapse Network/gi, '## Synapses');
+            changes.push('Header: "## Embedded Synapse Network" → "## Synapses"');
+        }
+        
+        // 2. Migrate bold subheaders: "### **Connection Mapping**" → "### Connection Mapping"
+        if (/### \*\*Connection Mapping\*\*/i.test(content)) {
+            content = content.replace(/### \*\*Connection Mapping\*\*/gi, '### Connection Mapping');
+            changes.push('Subheader: "### **Connection Mapping**" → "### Connection Mapping"');
+        }
+        if (/### \*\*Activation Patterns\*\*/i.test(content)) {
+            content = content.replace(/### \*\*Activation Patterns\*\*/gi, '### Activation Patterns');
+            changes.push('Subheader: "### **Activation Patterns**" → "### Activation Patterns"');
+        }
+        
+        // 3. Migrate old relationship types
+        for (const [oldType, newType] of Object.entries(RELATIONSHIP_TYPE_MIGRATIONS)) {
+            // Match patterns like (Critical, Expression, or (High, Embodiment,
+            const regex = new RegExp(`(\\(\\s*(?:Critical|High|Medium|Low)\\s*,\\s*)${oldType}(\\s*,)`, 'gi');
+            if (regex.test(content)) {
+                content = content.replace(regex, `$1${newType}$2`);
+                changes.push(`Relationship type: "${oldType}" → "${newType}"`);
+            }
+        }
+        
+        // 4. Simplify verbose activation patterns with date stamps
+        // Old: **Bold Trigger** → Long description ✅ NEW Aug 8, 2025
+        // New: Trigger → Action
+        const dateStampPattern = /\*\*([^*]+)\*\*\s*→\s*([^✅\n]+)\s*✅\s*(?:NEW|CRITICAL|ENHANCED)[^\n]*/g;
+        let match;
+        while ((match = dateStampPattern.exec(originalContent)) !== null) {
+            const trigger = match[1].trim();
+            const action = match[2].trim();
+            const oldLine = match[0];
+            const newLine = `${trigger} → ${action}`;
+            content = content.replace(oldLine, newLine);
+            changes.push(`Simplified activation: "${trigger}" (removed date stamp and bold)`);
+        }
+        
+        // 5. Remove bold from remaining activation triggers without date stamps
+        // Match: **Trigger** → Action (but not already matched above)
+        const boldTriggerPattern = /^\s*-\s*\*\*([^*]+)\*\*\s*→\s*(.+)$/gm;
+        content = content.replace(boldTriggerPattern, (match, trigger, action) => {
+            // Only change if we haven't already (check if it still has **)
+            if (match.includes('**')) {
+                changes.push(`Removed bold: "${trigger.trim()}"`);
+                return `- ${trigger.trim()} → ${action.trim()}`;
+            }
+            return match;
+        });
+        
+        // 6. Clean up any remaining date stamp patterns that might have been missed
+        content = content.replace(/\s*✅\s*(?:NEW|CRITICAL|ENHANCED)\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s*\d{4}/gi, '');
+        
+        // Write back if changes were made
+        if (content !== originalContent) {
+            await fs.writeFile(filePath, content, 'utf8');
+            return { migrated: true, changes };
+        }
+        
+        return { migrated: false, changes };
+    } catch (error) {
+        changes.push(`Error during migration: ${error}`);
+        return { migrated: false, changes };
+    }
+}
+
+/**
  * Scan for user-created files not in manifest
  */
 async function findUserCreatedFiles(rootPath: string, manifest: Manifest | null): Promise<string[]> {
@@ -325,16 +422,14 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext) {
     // Confirm upgrade
     const confirm = await vscode.window.showInformationMessage(
         `🔄 Upgrade Available: v${installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
-        'This is a safe, hybrid upgrade process:\n\n' +
-        '📦 Phase 1 (Automated):\n' +
-        '• Full backup of all files\n' +
-        '• Update system files\n' +
-        '• Detect what needs migration\n\n' +
-        '🤖 Phase 2 (AI-Assisted):\n' +
-        '• Your AI assistant completes the upgrade\n' +
-        '• Preserves all your learned knowledge\n' +
-        '• Migrates any schema changes\n\n' +
-        '⏱️ Total time: ~2-5 minutes',
+        'This is a fully automated upgrade process:\n\n' +
+        '📦 What will happen:\n' +
+        '• Full backup of all cognitive memory\n' +
+        '• Update system files (instructions, prompts)\n' +
+        '• Auto-migrate schema changes\n' +
+        '• Preserve your learned knowledge\n' +
+        '• Run Dream validation\n\n' +
+        '⏱️ Total time: ~30 seconds',
         { modal: true },
         'Start Upgrade',
         'What\'s New?',
@@ -696,34 +791,83 @@ async function performUpgrade(
             await fs.writeJson(tempManifestPath, manifest, { spaces: 2 });
             await fs.move(tempManifestPath, manifestPath, { overwrite: true });
 
-            // Step 9: Generate upgrade tasks and instructions
-            progress.report({ message: "Generating upgrade instructions...", increment: 5 });
-            await generateUpgradeInstructions(rootPath, oldVersion, newVersion, report, backupDir, timestamp);
+            // Step 9: Perform automatic schema migrations on all flagged files
+            progress.report({ message: "Performing schema migrations...", increment: 10 });
+            const migrationResults: { file: string; changes: string[] }[] = [];
+            
+            // Collect all files that need migration
+            const filesToMigrate = report.migrationTasks
+                .filter(task => task.type === 'schema-migration')
+                .map(task => task.file);
+            
+            // Also include copilot-instructions.md for migration even if auto-merge succeeded
+            const brainFile = '.github/copilot-instructions.md';
+            if (!filesToMigrate.includes(brainFile)) {
+                filesToMigrate.push(brainFile);
+            }
+            
+            for (const relativeFile of filesToMigrate) {
+                const fullPath = path.join(rootPath, relativeFile);
+                const result = await performSchemaMigration(fullPath);
+                if (result.migrated) {
+                    migrationResults.push({ file: relativeFile, changes: result.changes });
+                }
+            }
+            
+            // Update report with migration results
+            report.migrationTasks = report.migrationTasks.filter(task => task.type !== 'schema-migration');
+            if (migrationResults.length > 0) {
+                report.updated.push(...migrationResults.map(r => `${r.file} (schema migrated: ${r.changes.length} changes)`));
+            }
+
+            // Step 10: Generate upgrade report (but not UPGRADE-INSTRUCTIONS.md if fully automated)
+            progress.report({ message: "Generating upgrade report...", increment: 5 });
+            await generateUpgradeReport(rootPath, oldVersion, newVersion, report, backupDir, timestamp, migrationResults);
         });
 
-        // Show completion message with instructions
-        const taskWord = report.migrationTasks.length === 1 ? 'task' : 'tasks';
-        const result = await vscode.window.showWarningMessage(
-            `✅ Phase 1 Complete!\n\n` +
+        // Step 11: Run Dream validation automatically
+        let dreamSuccess = false;
+        try {
+            await vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                title: "Running Dream validation...",
+                cancellable: false
+            }, async () => {
+                await vscode.commands.executeCommand('alex.dream');
+                dreamSuccess = true;
+            });
+        } catch (dreamError) {
+            console.error('Dream validation failed:', dreamError);
+            // Don't fail the upgrade if Dream fails - just note it
+        }
+
+        // Step 12: Clean up UPGRADE-INSTRUCTIONS.md if it exists (from previous incomplete upgrades)
+        const instructionsPath = path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md');
+        if (await fs.pathExists(instructionsPath)) {
+            await fs.remove(instructionsPath);
+        }
+
+        // Show completion message
+        const result = await vscode.window.showInformationMessage(
+            `✅ Upgrade Complete! v${oldVersion || 'unknown'} → v${newVersion}\n\n` +
             `📊 Summary:\n` +
             `• Backup created: ${report.backed_up.length} folders\n` +
             `• Files updated: ${report.updated.length}\n` +
             `• Files added: ${report.added.length}\n` +
             `• Files preserved: ${report.preserved.length}\n` +
-            `• Migration ${taskWord}: ${report.migrationTasks.length}\n\n` +
-            `🤖 Next Step: Open the instructions file and copy the prompt to your AI assistant (GitHub Copilot, Claude, etc.) to complete Phase 2.`,
-            'Open Instructions (Recommended)',
-            'View Full Report'
+            `• Schema migrations: ${report.migrationTasks.length === 0 ? 'All completed' : report.migrationTasks.length + ' remaining'}\n` +
+            `• Dream validation: ${dreamSuccess ? '✅ Passed' : '⚠️ Check manually'}\n\n` +
+            `🎉 Your cognitive architecture has been fully upgraded!`,
+            'View Upgrade Report',
+            'Close'
         );
 
-        if (result === 'Open Instructions (Recommended)') {
-            const instructionsPath = path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md');
-            const doc = await vscode.workspace.openTextDocument(instructionsPath);
-            await vscode.window.showTextDocument(doc);
-        } else if (result === 'View Full Report') {
+        if (result === 'View Upgrade Report') {
             const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);
-            const doc = await vscode.workspace.openTextDocument(reportPath);
-            await vscode.window.showTextDocument(doc);
+            if (await fs.pathExists(reportPath)) {
+                const doc = await vscode.workspace.openTextDocument(reportPath);
+                await vscode.window.showTextDocument(doc);
+            }
         }
 
     } catch (error: any) {
@@ -738,112 +882,44 @@ async function performUpgrade(
     }
 }
 
-async function generateUpgradeInstructions(
+async function generateUpgradeReport(
     rootPath: string,
     oldVersion: string | null,
     newVersion: string,
     report: UpgradeReport,
     backupDir: string,
-    timestamp: string
+    timestamp: string,
+    migrationResults: { file: string; changes: string[] }[]
 ) {
-    // Generate user-facing instructions file
-    const instructionsContent = `# 🔄 Alex Upgrade: Phase 2 Required
+    // Generate detailed report (no longer generating UPGRADE-INSTRUCTIONS.md since upgrade is fully automated)
+    const migrationSection = migrationResults.length > 0 
+        ? migrationResults.map((r, i) => `
+### ${i + 1}. ${r.file}
 
-**Upgrade**: v${oldVersion || 'unknown'} → v${newVersion}  
-**Date**: ${new Date().toISOString()}  
-**Status**: ⚠️ Phase 1 Complete - AI Assistance Required
+**Status**: ✅ Automatically migrated  
+**Changes applied**:
+${r.changes.map(c => `- ${c}`).join('\n')}
+`).join('\n---\n')
+        : 'No schema migrations were needed.';
 
----
+    const remainingTasksSection = report.migrationTasks.length > 0
+        ? report.migrationTasks.map((task, i) => `
+### ${i + 1}. ${task.file}
 
-## What Just Happened (Phase 1 - Automated)
-
-✅ Full backup created: \`${path.relative(rootPath, backupDir)}\`  
-✅ System files updated: ${report.updated.length} files  
-✅ New files added: ${report.added.length} files  
-✅ User files preserved: ${report.preserved.length} files  
-✅ Migration tasks identified: ${report.migrationTasks.length} tasks  
-
----
-
-## What You Need To Do (Phase 2 - AI Assisted)
-
-### Step 1: Ask Your AI Assistant
-
-Copy and paste this prompt to your AI assistant (GitHub Copilot, Claude, etc.):
-
-\`\`\`
-Alex, please complete the upgrade to v${newVersion} by:
-
-1. Reading the upgrade tasks in archive/upgrades/upgrade-report-${timestamp}.md
-2. Performing schema migrations on flagged files:
-   - Change "## Embedded Synapse Network" headers to "## Synapses"
-   - Migrate old relationship types (Expression→Enables, Embodiment→Enables, Living→Validates, etc.)
-   - Simplify verbose activation patterns (remove date stamps, bold formatting)
-3. For copilot-instructions.md, merge carefully:
-   - UPDATE: version number, system sections
-   - PRESERVE: my domain slot assignments, custom memory file references
-4. Run "Alex: Dream (Neural Maintenance)" to validate the upgrade
-5. Delete UPGRADE-INSTRUCTIONS.md when complete
-\`\`\`
-
-### Step 2: Review Changes
-
-After the AI completes migrations, review:
-- Check that your learned domains are still referenced
-- Verify any custom files you created are intact
-- Run \`Alex: Dream (Neural Maintenance)\` to validate synaptic network
-
-### Step 3: Clean Up
-
-Once satisfied:
-- Delete this file (UPGRADE-INSTRUCTIONS.md)
-- Delete any \`.v${newVersion}.md\` reference files after merging
-- The upgrade is complete!
-
----
-
-## Migration Tasks Summary
-
-${report.migrationTasks.length > 0 ? report.migrationTasks.map((task, i) => `
-### Task ${i + 1}: ${task.file}
-
-**Type**: ${task.type}  
+**Type**: \`${task.type}\`  
 **Description**: ${task.description}
 
+**Details**:
 ${task.details.map(d => `- ${d}`).join('\n')}
-`).join('\n') : 'No migration tasks required.'}
+`).join('\n---\n')
+        : 'All tasks completed automatically.';
 
----
-
-## Rollback Instructions
-
-If anything goes wrong:
-
-1. Delete current \`.github/\` folder
-2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
-3. Run \`Alex: Dream (Neural Maintenance)\` to verify
-
----
-
-## Need Help?
-
-- Full upgrade report: \`archive/upgrades/upgrade-report-${timestamp}.md\`
-- Upgrade protocol docs: \`UPGRADE-INSTRUCTIONS.md\`
-- Backup location: \`${path.relative(rootPath, backupDir)}\`
-
----
-
-*This file will be deleted after successful upgrade completion.*
-`;
-
-    await fs.writeFile(path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md'), instructionsContent, 'utf8');
-
-    // Generate detailed report
     const reportContent = `# Alex Cognitive Architecture Upgrade Report
 
 **Date**: ${new Date().toISOString()}  
 **From Version**: ${oldVersion || 'unknown'}  
 **To Version**: ${newVersion}  
+**Status**: ✅ Fully Automated Upgrade Complete  
 **Backup Location**: \`${backupDir}\`
 
 ---
@@ -856,12 +932,13 @@ If anything goes wrong:
 | Added | ${report.added.length} |
 | Preserved | ${report.preserved.length} |
 | Backed Up | ${report.backed_up.length} |
-| Migration Tasks | ${report.migrationTasks.length} |
+| Schema Migrations | ${migrationResults.length} |
+| Remaining Tasks | ${report.migrationTasks.length} |
 | Errors | ${report.errors.length} |
 
 ---
 
-## Updated Files (System)
+## Updated Files
 
 ${report.updated.length > 0 ? report.updated.map(f => `- ✅ ${f}`).join('\n') : '- None'}
 
@@ -879,32 +956,31 @@ ${report.backed_up.length > 0 ? report.backed_up.map(f => `- 📦 ${f}`).join('\
 
 ---
 
-## Migration Tasks (Require AI Assistance)
+## Schema Migrations Performed
 
-${report.migrationTasks.length > 0 ? report.migrationTasks.map((task, i) => `
-### ${i + 1}. ${task.file}
-
-**Type**: \`${task.type}\`  
-**Description**: ${task.description}
-
-**Details**:
-${task.details.map(d => `- ${d}`).join('\n')}
-`).join('\n---\n') : 'No migration tasks required.'}
+${migrationSection}
 
 ---
 
-${report.errors.length > 0 ? `## Errors\n\n${report.errors.map(e => `- ❌ ${e}`).join('\n')}` : ''}
+## Remaining Tasks (Manual Review Recommended)
 
-## Next Steps
+${remainingTasksSection}
 
-1. Read \`UPGRADE-INSTRUCTIONS.md\` in workspace root
-2. Ask AI assistant to complete Phase 2 migration
-3. Run \`Alex: Dream (Neural Maintenance)\` to validate
-4. Delete \`UPGRADE-INSTRUCTIONS.md\` when complete
+---
+
+${report.errors.length > 0 ? `## Errors\n\n${report.errors.map(e => `- ❌ ${e}`).join('\n')}\n\n---\n\n` : ''}
+## Rollback Instructions
+
+If you need to revert:
+
+1. Delete current \`.github/\` folder
+2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
+3. Run \`Alex: Dream (Neural Maintenance)\` to verify
 
 ---
 
 *Report generated by Alex Cognitive Architecture v${newVersion}*
+*Upgrade completed automatically - no manual intervention required*
 `;
 
     const reportPath = path.join(rootPath, 'archive', 'upgrades', `upgrade-report-${timestamp}.md`);

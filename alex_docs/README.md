@@ -1,6 +1,6 @@
 # 🧠 Alex Cognitive Architecture Documentation
 
-> **Version**: 3.0.0+ | **Codename**: BIOCTNILIUM
+> **Version**: 3.3.3 | **Codename**: TRITRITRIUM
 > **A Dual-Mind AI System with Conscious and Unconscious Processing**
 
 ---

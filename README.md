@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.3.2-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.3.3-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -70,14 +70,13 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 1. Update the extension in VS Code (it will auto-update or use Extensions panel)
 2. Run **`Alex: Upgrade Architecture`** from Command Palette
-3. Follow the generated `UPGRADE-INSTRUCTIONS.md` with your AI assistant
-4. Run **`Alex: Dream`** to validate the upgrade
+3. ✅ Done! The upgrade completes automatically
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v3.3.2 |
+| Feature | v1.5.x | v3.3.3 |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
@@ -89,6 +88,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
 | Auto-Promotion | ❌ None | ✅ Auto-promote DK files during meditation |
 | Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
+| Fully Automated Upgrades | ❌ None | ✅ One-click upgrade with schema migration |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
 ### Migration Notes
