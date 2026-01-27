@@ -1,3858 +1,73 @@
-"use strict";
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+"use strict";var Qa=Object.create;var It=Object.defineProperty;var Za=Object.getOwnPropertyDescriptor;var es=Object.getOwnPropertyNames;var ts=Object.getPrototypeOf,ns=Object.prototype.hasOwnProperty;var x=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports),os=(e,t)=>{for(var n in t)It(e,n,{get:t[n],enumerable:!0})},Qn=(e,t,n,o)=>{if(t&&typeof t=="object"||typeof t=="function")for(let i of es(t))!ns.call(e,i)&&i!==n&&It(e,i,{get:()=>t[i],enumerable:!(o=Za(t,i))||o.enumerable});return e};var D=(e,t,n)=>(n=e!=null?Qa(ts(e)):{},Qn(t||!e||!e.__esModule?It(n,"default",{value:e,enumerable:!0}):n,e)),is=e=>Qn(It({},"__esModule",{value:!0}),e);var oe=x(en=>{"use strict";en.fromCallback=function(e){return Object.defineProperty(function(...t){if(typeof t[t.length-1]=="function")e.apply(this,t);else return new Promise((n,o)=>{t.push((i,a)=>i!=null?o(i):n(a)),e.apply(this,t)})},"name",{value:e.name})};en.fromPromise=function(e){return Object.defineProperty(function(...t){let n=t[t.length-1];if(typeof n!="function")return e.apply(this,t);t.pop(),e.apply(this,t).then(o=>n(null,o),n)},"name",{value:e.name})}});var eo=x((Ul,Zn)=>{var Ne=require("constants"),as=process.cwd,$t=null,ss=process.env.GRACEFUL_FS_PLATFORM||process.platform;process.cwd=function(){return $t||($t=as.call(process)),$t};try{process.cwd()}catch{}typeof process.chdir=="function"&&(tn=process.chdir,process.chdir=function(e){$t=null,tn.call(process,e)},Object.setPrototypeOf&&Object.setPrototypeOf(process.chdir,tn));var tn;Zn.exports=rs;function rs(e){Ne.hasOwnProperty("O_SYMLINK")&&process.version.match(/^v0\.6\.[0-2]|^v0\.5\./)&&t(e),e.lutimes||n(e),e.chown=a(e.chown),e.fchown=a(e.fchown),e.lchown=a(e.lchown),e.chmod=o(e.chmod),e.fchmod=o(e.fchmod),e.lchmod=o(e.lchmod),e.chownSync=s(e.chownSync),e.fchownSync=s(e.fchownSync),e.lchownSync=s(e.lchownSync),e.chmodSync=i(e.chmodSync),e.fchmodSync=i(e.fchmodSync),e.lchmodSync=i(e.lchmodSync),e.stat=r(e.stat),e.fstat=r(e.fstat),e.lstat=r(e.lstat),e.statSync=c(e.statSync),e.fstatSync=c(e.fstatSync),e.lstatSync=c(e.lstatSync),e.chmod&&!e.lchmod&&(e.lchmod=function(l,d,m){m&&process.nextTick(m)},e.lchmodSync=function(){}),e.chown&&!e.lchown&&(e.lchown=function(l,d,m,p){p&&process.nextTick(p)},e.lchownSync=function(){}),ss==="win32"&&(e.rename=typeof e.rename!="function"?e.rename:(function(l){function d(m,p,h){var y=Date.now(),w=0;l(m,p,function k($){if($&&($.code==="EACCES"||$.code==="EPERM"||$.code==="EBUSY")&&Date.now()-y<6e4){setTimeout(function(){e.stat(p,function(A,P){A&&A.code==="ENOENT"?l(m,p,k):h($)})},w),w<100&&(w+=10);return}h&&h($)})}return Object.setPrototypeOf&&Object.setPrototypeOf(d,l),d})(e.rename)),e.read=typeof e.read!="function"?e.read:(function(l){function d(m,p,h,y,w,k){var $;if(k&&typeof k=="function"){var A=0;$=function(P,L,W){if(P&&P.code==="EAGAIN"&&A<10)return A++,l.call(e,m,p,h,y,w,$);k.apply(this,arguments)}}return l.call(e,m,p,h,y,w,$)}return Object.setPrototypeOf&&Object.setPrototypeOf(d,l),d})(e.read),e.readSync=typeof e.readSync!="function"?e.readSync:(function(l){return function(d,m,p,h,y){for(var w=0;;)try{return l.call(e,d,m,p,h,y)}catch(k){if(k.code==="EAGAIN"&&w<10){w++;continue}throw k}}})(e.readSync);function t(l){l.lchmod=function(d,m,p){l.open(d,Ne.O_WRONLY|Ne.O_SYMLINK,m,function(h,y){if(h){p&&p(h);return}l.fchmod(y,m,function(w){l.close(y,function(k){p&&p(w||k)})})})},l.lchmodSync=function(d,m){var p=l.openSync(d,Ne.O_WRONLY|Ne.O_SYMLINK,m),h=!0,y;try{y=l.fchmodSync(p,m),h=!1}finally{if(h)try{l.closeSync(p)}catch{}else l.closeSync(p)}return y}}function n(l){Ne.hasOwnProperty("O_SYMLINK")&&l.futimes?(l.lutimes=function(d,m,p,h){l.open(d,Ne.O_SYMLINK,function(y,w){if(y){h&&h(y);return}l.futimes(w,m,p,function(k){l.close(w,function($){h&&h(k||$)})})})},l.lutimesSync=function(d,m,p){var h=l.openSync(d,Ne.O_SYMLINK),y,w=!0;try{y=l.futimesSync(h,m,p),w=!1}finally{if(w)try{l.closeSync(h)}catch{}else l.closeSync(h)}return y}):l.futimes&&(l.lutimes=function(d,m,p,h){h&&process.nextTick(h)},l.lutimesSync=function(){})}function o(l){return l&&function(d,m,p){return l.call(e,d,m,function(h){u(h)&&(h=null),p&&p.apply(this,arguments)})}}function i(l){return l&&function(d,m){try{return l.call(e,d,m)}catch(p){if(!u(p))throw p}}}function a(l){return l&&function(d,m,p,h){return l.call(e,d,m,p,function(y){u(y)&&(y=null),h&&h.apply(this,arguments)})}}function s(l){return l&&function(d,m,p){try{return l.call(e,d,m,p)}catch(h){if(!u(h))throw h}}}function r(l){return l&&function(d,m,p){typeof m=="function"&&(p=m,m=null);function h(y,w){w&&(w.uid<0&&(w.uid+=4294967296),w.gid<0&&(w.gid+=4294967296)),p&&p.apply(this,arguments)}return m?l.call(e,d,m,h):l.call(e,d,h)}}function c(l){return l&&function(d,m){var p=m?l.call(e,d,m):l.call(e,d);return p&&(p.uid<0&&(p.uid+=4294967296),p.gid<0&&(p.gid+=4294967296)),p}}function u(l){if(!l||l.code==="ENOSYS")return!0;var d=!process.getuid||process.getuid()!==0;return!!(d&&(l.code==="EINVAL"||l.code==="EPERM"))}}});var oo=x((zl,no)=>{var to=require("stream").Stream;no.exports=cs;function cs(e){return{ReadStream:t,WriteStream:n};function t(o,i){if(!(this instanceof t))return new t(o,i);to.call(this);var a=this;this.path=o,this.fd=null,this.readable=!0,this.paused=!1,this.flags="r",this.mode=438,this.bufferSize=64*1024,i=i||{};for(var s=Object.keys(i),r=0,c=s.length;r<c;r++){var u=s[r];this[u]=i[u]}if(this.encoding&&this.setEncoding(this.encoding),this.start!==void 0){if(typeof this.start!="number")throw TypeError("start must be a Number");if(this.end===void 0)this.end=1/0;else if(typeof this.end!="number")throw TypeError("end must be a Number");if(this.start>this.end)throw new Error("start must be <= end");this.pos=this.start}if(this.fd!==null){process.nextTick(function(){a._read()});return}e.open(this.path,this.flags,this.mode,function(l,d){if(l){a.emit("error",l),a.readable=!1;return}a.fd=d,a.emit("open",d),a._read()})}function n(o,i){if(!(this instanceof n))return new n(o,i);to.call(this),this.path=o,this.fd=null,this.writable=!0,this.flags="w",this.encoding="binary",this.mode=438,this.bytesWritten=0,i=i||{};for(var a=Object.keys(i),s=0,r=a.length;s<r;s++){var c=a[s];this[c]=i[c]}if(this.start!==void 0){if(typeof this.start!="number")throw TypeError("start must be a Number");if(this.start<0)throw new Error("start must be >= zero");this.pos=this.start}this.busy=!1,this._queue=[],this.fd===null&&(this._open=e.open,this._queue.push([this._open,this.path,this.flags,this.mode,void 0]),this.flush())}}});var ao=x((ql,io)=>{"use strict";io.exports=ds;var ls=Object.getPrototypeOf||function(e){return e.__proto__};function ds(e){if(e===null||typeof e!="object")return e;if(e instanceof Object)var t={__proto__:ls(e)};else var t=Object.create(null);return Object.getOwnPropertyNames(e).forEach(function(n){Object.defineProperty(t,n,Object.getOwnPropertyDescriptor(e,n))}),t}});var Oe=x((Hl,an)=>{var J=require("fs"),us=eo(),ms=oo(),ps=ao(),Ft=require("util"),le,Mt;typeof Symbol=="function"&&typeof Symbol.for=="function"?(le=Symbol.for("graceful-fs.queue"),Mt=Symbol.for("graceful-fs.previous")):(le="___graceful-fs.queue",Mt="___graceful-fs.previous");function gs(){}function co(e,t){Object.defineProperty(e,le,{get:function(){return t}})}var Ue=gs;Ft.debuglog?Ue=Ft.debuglog("gfs4"):/\bgfs4\b/i.test(process.env.NODE_DEBUG||"")&&(Ue=function(){var e=Ft.format.apply(Ft,arguments);e="GFS4: "+e.split(/\n/).join(`
+GFS4: `),console.error(e)});J[le]||(so=global[le]||[],co(J,so),J.close=(function(e){function t(n,o){return e.call(J,n,function(i){i||ro(),typeof o=="function"&&o.apply(this,arguments)})}return Object.defineProperty(t,Mt,{value:e}),t})(J.close),J.closeSync=(function(e){function t(n){e.apply(J,arguments),ro()}return Object.defineProperty(t,Mt,{value:e}),t})(J.closeSync),/\bgfs4\b/i.test(process.env.NODE_DEBUG||"")&&process.on("exit",function(){Ue(J[le]),require("assert").equal(J[le].length,0)}));var so;global[le]||co(global,J[le]);an.exports=nn(ps(J));process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH&&!J.__patched&&(an.exports=nn(J),J.__patched=!0);function nn(e){us(e),e.gracefulify=nn,e.createReadStream=L,e.createWriteStream=W;var t=e.readFile;e.readFile=n;function n(b,C,T){return typeof C=="function"&&(T=C,C=null),N(b,C,T);function N(Z,_,O,q){return t(Z,_,function(j){j&&(j.code==="EMFILE"||j.code==="ENFILE")?Ye([N,[Z,_,O],j,q||Date.now(),Date.now()]):typeof O=="function"&&O.apply(this,arguments)})}}var o=e.writeFile;e.writeFile=i;function i(b,C,T,N){return typeof T=="function"&&(N=T,T=null),Z(b,C,T,N);function Z(_,O,q,j,Q){return o(_,O,q,function(G){G&&(G.code==="EMFILE"||G.code==="ENFILE")?Ye([Z,[_,O,q,j],G,Q||Date.now(),Date.now()]):typeof j=="function"&&j.apply(this,arguments)})}}var a=e.appendFile;a&&(e.appendFile=s);function s(b,C,T,N){return typeof T=="function"&&(N=T,T=null),Z(b,C,T,N);function Z(_,O,q,j,Q){return a(_,O,q,function(G){G&&(G.code==="EMFILE"||G.code==="ENFILE")?Ye([Z,[_,O,q,j],G,Q||Date.now(),Date.now()]):typeof j=="function"&&j.apply(this,arguments)})}}var r=e.copyFile;r&&(e.copyFile=c);function c(b,C,T,N){return typeof T=="function"&&(N=T,T=0),Z(b,C,T,N);function Z(_,O,q,j,Q){return r(_,O,q,function(G){G&&(G.code==="EMFILE"||G.code==="ENFILE")?Ye([Z,[_,O,q,j],G,Q||Date.now(),Date.now()]):typeof j=="function"&&j.apply(this,arguments)})}}var u=e.readdir;e.readdir=d;var l=/^v[0-5]\./;function d(b,C,T){typeof C=="function"&&(T=C,C=null);var N=l.test(process.version)?function(O,q,j,Q){return u(O,Z(O,q,j,Q))}:function(O,q,j,Q){return u(O,q,Z(O,q,j,Q))};return N(b,C,T);function Z(_,O,q,j){return function(Q,G){Q&&(Q.code==="EMFILE"||Q.code==="ENFILE")?Ye([N,[_,O,q],Q,j||Date.now(),Date.now()]):(G&&G.sort&&G.sort(),typeof q=="function"&&q.call(this,Q,G))}}}if(process.version.substr(0,4)==="v0.8"){var m=ms(e);k=m.ReadStream,A=m.WriteStream}var p=e.ReadStream;p&&(k.prototype=Object.create(p.prototype),k.prototype.open=$);var h=e.WriteStream;h&&(A.prototype=Object.create(h.prototype),A.prototype.open=P),Object.defineProperty(e,"ReadStream",{get:function(){return k},set:function(b){k=b},enumerable:!0,configurable:!0}),Object.defineProperty(e,"WriteStream",{get:function(){return A},set:function(b){A=b},enumerable:!0,configurable:!0});var y=k;Object.defineProperty(e,"FileReadStream",{get:function(){return y},set:function(b){y=b},enumerable:!0,configurable:!0});var w=A;Object.defineProperty(e,"FileWriteStream",{get:function(){return w},set:function(b){w=b},enumerable:!0,configurable:!0});function k(b,C){return this instanceof k?(p.apply(this,arguments),this):k.apply(Object.create(k.prototype),arguments)}function $(){var b=this;te(b.path,b.flags,b.mode,function(C,T){C?(b.autoClose&&b.destroy(),b.emit("error",C)):(b.fd=T,b.emit("open",T),b.read())})}function A(b,C){return this instanceof A?(h.apply(this,arguments),this):A.apply(Object.create(A.prototype),arguments)}function P(){var b=this;te(b.path,b.flags,b.mode,function(C,T){C?(b.destroy(),b.emit("error",C)):(b.fd=T,b.emit("open",T))})}function L(b,C){return new e.ReadStream(b,C)}function W(b,C){return new e.WriteStream(b,C)}var X=e.open;e.open=te;function te(b,C,T,N){return typeof T=="function"&&(N=T,T=null),Z(b,C,T,N);function Z(_,O,q,j,Q){return X(_,O,q,function(G,Qt){G&&(G.code==="EMFILE"||G.code==="ENFILE")?Ye([Z,[_,O,q,j],G,Q||Date.now(),Date.now()]):typeof j=="function"&&j.apply(this,arguments)})}}return e}function Ye(e){Ue("ENQUEUE",e[0].name,e[1]),J[le].push(e),on()}var At;function ro(){for(var e=Date.now(),t=0;t<J[le].length;++t)J[le][t].length>2&&(J[le][t][3]=e,J[le][t][4]=e);on()}function on(){if(clearTimeout(At),At=void 0,J[le].length!==0){var e=J[le].shift(),t=e[0],n=e[1],o=e[2],i=e[3],a=e[4];if(i===void 0)Ue("RETRY",t.name,n),t.apply(null,n);else if(Date.now()-i>=6e4){Ue("TIMEOUT",t.name,n);var s=n.pop();typeof s=="function"&&s.call(null,o)}else{var r=Date.now()-a,c=Math.max(a-i,1),u=Math.min(c*1.2,100);r>=u?(Ue("RETRY",t.name,n),t.apply(null,n.concat([i]))):J[le].push(e)}At===void 0&&(At=setTimeout(on,0))}}});var pe=x(Ie=>{"use strict";var lo=oe().fromCallback,me=Oe(),fs=["access","appendFile","chmod","chown","close","copyFile","cp","fchmod","fchown","fdatasync","fstat","fsync","ftruncate","futimes","glob","lchmod","lchown","lutimes","link","lstat","mkdir","mkdtemp","open","opendir","readdir","readFile","readlink","realpath","rename","rm","rmdir","stat","statfs","symlink","truncate","unlink","utimes","writeFile"].filter(e=>typeof me[e]=="function");Object.assign(Ie,me);fs.forEach(e=>{Ie[e]=lo(me[e])});Ie.exists=function(e,t){return typeof t=="function"?me.exists(e,t):new Promise(n=>me.exists(e,n))};Ie.read=function(e,t,n,o,i,a){return typeof a=="function"?me.read(e,t,n,o,i,a):new Promise((s,r)=>{me.read(e,t,n,o,i,(c,u,l)=>{if(c)return r(c);s({bytesRead:u,buffer:l})})})};Ie.write=function(e,t,...n){return typeof n[n.length-1]=="function"?me.write(e,t,...n):new Promise((o,i)=>{me.write(e,t,...n,(a,s,r)=>{if(a)return i(a);o({bytesWritten:s,buffer:r})})})};Ie.readv=function(e,t,...n){return typeof n[n.length-1]=="function"?me.readv(e,t,...n):new Promise((o,i)=>{me.readv(e,t,...n,(a,s,r)=>{if(a)return i(a);o({bytesRead:s,buffers:r})})})};Ie.writev=function(e,t,...n){return typeof n[n.length-1]=="function"?me.writev(e,t,...n):new Promise((o,i)=>{me.writev(e,t,...n,(a,s,r)=>{if(a)return i(a);o({bytesWritten:s,buffers:r})})})};typeof me.realpath.native=="function"?Ie.realpath.native=lo(me.realpath.native):process.emitWarning("fs.realpath.native is not a function. Is fs being monkey-patched?","Warning","fs-extra-WARN0003")});var mo=x((Vl,uo)=>{"use strict";var hs=require("path");uo.exports.checkPath=function(t){if(process.platform==="win32"&&/[<>:"|?*]/.test(t.replace(hs.parse(t).root,""))){let o=new Error(`Path contains invalid characters: ${t}`);throw o.code="EINVAL",o}}});var ho=x((Bl,sn)=>{"use strict";var po=pe(),{checkPath:go}=mo(),fo=e=>{let t={mode:511};return typeof e=="number"?e:{...t,...e}.mode};sn.exports.makeDir=async(e,t)=>(go(e),po.mkdir(e,{mode:fo(t),recursive:!0}));sn.exports.makeDirSync=(e,t)=>(go(e),po.mkdirSync(e,{mode:fo(t),recursive:!0}))});var Se=x((Jl,wo)=>{"use strict";var ws=oe().fromPromise,{makeDir:ys,makeDirSync:rn}=ho(),cn=ws(ys);wo.exports={mkdirs:cn,mkdirsSync:rn,mkdirp:cn,mkdirpSync:rn,ensureDir:cn,ensureDirSync:rn}});var je=x((Yl,vo)=>{"use strict";var vs=oe().fromPromise,yo=pe();function bs(e){return yo.access(e).then(()=>!0).catch(()=>!1)}vo.exports={pathExists:vs(bs),pathExistsSync:yo.existsSync}});var ln=x((Xl,bo)=>{"use strict";var Xe=pe(),Ss=oe().fromPromise;async function ks(e,t,n){let o=await Xe.open(e,"r+"),i=null;try{await Xe.futimes(o,t,n)}finally{try{await Xe.close(o)}catch(a){i=a}}if(i)throw i}function Ps(e,t,n){let o=Xe.openSync(e,"r+");return Xe.futimesSync(o,t,n),Xe.closeSync(o)}bo.exports={utimesMillis:Ss(ks),utimesMillisSync:Ps}});var ze=x((Ql,xo)=>{"use strict";var Qe=pe(),ie=require("path"),So=oe().fromPromise;function xs(e,t,n){let o=n.dereference?i=>Qe.stat(i,{bigint:!0}):i=>Qe.lstat(i,{bigint:!0});return Promise.all([o(e),o(t).catch(i=>{if(i.code==="ENOENT")return null;throw i})]).then(([i,a])=>({srcStat:i,destStat:a}))}function Cs(e,t,n){let o,i=n.dereference?s=>Qe.statSync(s,{bigint:!0}):s=>Qe.lstatSync(s,{bigint:!0}),a=i(e);try{o=i(t)}catch(s){if(s.code==="ENOENT")return{srcStat:a,destStat:null};throw s}return{srcStat:a,destStat:o}}async function Ts(e,t,n,o){let{srcStat:i,destStat:a}=await xs(e,t,o);if(a){if(dt(i,a)){let s=ie.basename(e),r=ie.basename(t);if(n==="move"&&s!==r&&s.toLowerCase()===r.toLowerCase())return{srcStat:i,destStat:a,isChangingCase:!0};throw new Error("Source and destination must not be the same.")}if(i.isDirectory()&&!a.isDirectory())throw new Error(`Cannot overwrite non-directory '${t}' with directory '${e}'.`);if(!i.isDirectory()&&a.isDirectory())throw new Error(`Cannot overwrite directory '${t}' with non-directory '${e}'.`)}if(i.isDirectory()&&dn(e,t))throw new Error(Rt(e,t,n));return{srcStat:i,destStat:a}}function Es(e,t,n,o){let{srcStat:i,destStat:a}=Cs(e,t,o);if(a){if(dt(i,a)){let s=ie.basename(e),r=ie.basename(t);if(n==="move"&&s!==r&&s.toLowerCase()===r.toLowerCase())return{srcStat:i,destStat:a,isChangingCase:!0};throw new Error("Source and destination must not be the same.")}if(i.isDirectory()&&!a.isDirectory())throw new Error(`Cannot overwrite non-directory '${t}' with directory '${e}'.`);if(!i.isDirectory()&&a.isDirectory())throw new Error(`Cannot overwrite directory '${t}' with non-directory '${e}'.`)}if(i.isDirectory()&&dn(e,t))throw new Error(Rt(e,t,n));return{srcStat:i,destStat:a}}async function ko(e,t,n,o){let i=ie.resolve(ie.dirname(e)),a=ie.resolve(ie.dirname(n));if(a===i||a===ie.parse(a).root)return;let s;try{s=await Qe.stat(a,{bigint:!0})}catch(r){if(r.code==="ENOENT")return;throw r}if(dt(t,s))throw new Error(Rt(e,n,o));return ko(e,t,a,o)}function Po(e,t,n,o){let i=ie.resolve(ie.dirname(e)),a=ie.resolve(ie.dirname(n));if(a===i||a===ie.parse(a).root)return;let s;try{s=Qe.statSync(a,{bigint:!0})}catch(r){if(r.code==="ENOENT")return;throw r}if(dt(t,s))throw new Error(Rt(e,n,o));return Po(e,t,a,o)}function dt(e,t){return t.ino!==void 0&&t.dev!==void 0&&t.ino===e.ino&&t.dev===e.dev}function dn(e,t){let n=ie.resolve(e).split(ie.sep).filter(i=>i),o=ie.resolve(t).split(ie.sep).filter(i=>i);return n.every((i,a)=>o[a]===i)}function Rt(e,t,n){return`Cannot ${n} '${e}' to a subdirectory of itself, '${t}'.`}xo.exports={checkPaths:So(Ts),checkPathsSync:Es,checkParentPaths:So(ko),checkParentPathsSync:Po,isSrcSubdir:dn,areIdentical:dt}});var To=x((Zl,Co)=>{"use strict";async function Is(e,t){let n=[];for await(let o of e)n.push(t(o).then(()=>null,i=>i??new Error("unknown error")));await Promise.all(n.map(o=>o.then(i=>{if(i!==null)throw i})))}Co.exports={asyncIteratorConcurrentProcess:Is}});var Ao=x((ed,Fo)=>{"use strict";var de=pe(),ut=require("path"),{mkdirs:$s}=Se(),{pathExists:Fs}=je(),{utimesMillis:As}=ln(),mt=ze(),{asyncIteratorConcurrentProcess:Ms}=To();async function Rs(e,t,n={}){typeof n=="function"&&(n={filter:n}),n.clobber="clobber"in n?!!n.clobber:!0,n.overwrite="overwrite"in n?!!n.overwrite:n.clobber,n.preserveTimestamps&&process.arch==="ia32"&&process.emitWarning(`Using the preserveTimestamps option in 32-bit node is not recommended;
 
-// node_modules/universalify/index.js
-var require_universalify = __commonJS({
-  "node_modules/universalify/index.js"(exports2) {
-    "use strict";
-    exports2.fromCallback = function(fn) {
-      return Object.defineProperty(function(...args) {
-        if (typeof args[args.length - 1] === "function") fn.apply(this, args);
-        else {
-          return new Promise((resolve, reject) => {
-            args.push((err, res) => err != null ? reject(err) : resolve(res));
-            fn.apply(this, args);
-          });
-        }
-      }, "name", { value: fn.name });
-    };
-    exports2.fromPromise = function(fn) {
-      return Object.defineProperty(function(...args) {
-        const cb = args[args.length - 1];
-        if (typeof cb !== "function") return fn.apply(this, args);
-        else {
-          args.pop();
-          fn.apply(this, args).then((r) => cb(null, r), cb);
-        }
-      }, "name", { value: fn.name });
-    };
-  }
-});
+	see https://github.com/jprichardson/node-fs-extra/issues/269`,"Warning","fs-extra-WARN0001");let{srcStat:o,destStat:i}=await mt.checkPaths(e,t,"copy",n);if(await mt.checkParentPaths(e,o,t,"copy"),!await Io(e,t,n))return;let s=ut.dirname(t);await Fs(s)||await $s(s),await $o(i,e,t,n)}async function Io(e,t,n){return n.filter?n.filter(e,t):!0}async function $o(e,t,n,o){let a=await(o.dereference?de.stat:de.lstat)(t);if(a.isDirectory())return Os(a,e,t,n,o);if(a.isFile()||a.isCharacterDevice()||a.isBlockDevice())return Ds(a,e,t,n,o);if(a.isSymbolicLink())return js(e,t,n,o);throw a.isSocket()?new Error(`Cannot copy a socket file: ${t}`):a.isFIFO()?new Error(`Cannot copy a FIFO pipe: ${t}`):new Error(`Unknown file: ${t}`)}async function Ds(e,t,n,o,i){if(!t)return Eo(e,n,o,i);if(i.overwrite)return await de.unlink(o),Eo(e,n,o,i);if(i.errorOnExist)throw new Error(`'${o}' already exists`)}async function Eo(e,t,n,o){if(await de.copyFile(t,n),o.preserveTimestamps){Ls(e.mode)&&await Ns(n,e.mode);let i=await de.stat(t);await As(n,i.atime,i.mtime)}return de.chmod(n,e.mode)}function Ls(e){return(e&128)===0}function Ns(e,t){return de.chmod(e,t|128)}async function Os(e,t,n,o,i){t||await de.mkdir(o),await Ms(await de.opendir(n),async a=>{let s=ut.join(n,a.name),r=ut.join(o,a.name);if(await Io(s,r,i)){let{destStat:u}=await mt.checkPaths(s,r,"copy",i);await $o(u,s,r,i)}}),t||await de.chmod(o,e.mode)}async function js(e,t,n,o){let i=await de.readlink(t);if(o.dereference&&(i=ut.resolve(process.cwd(),i)),!e)return de.symlink(i,n);let a=null;try{a=await de.readlink(n)}catch(s){if(s.code==="EINVAL"||s.code==="UNKNOWN")return de.symlink(i,n);throw s}if(o.dereference&&(a=ut.resolve(process.cwd(),a)),i!==a){if(mt.isSrcSubdir(i,a))throw new Error(`Cannot copy '${i}' to a subdirectory of itself, '${a}'.`);if(mt.isSrcSubdir(a,i))throw new Error(`Cannot overwrite '${a}' with '${i}'.`)}return await de.unlink(n),de.symlink(i,n)}Fo.exports=Rs});var No=x((td,Lo)=>{"use strict";var ge=Oe(),pt=require("path"),_s=Se().mkdirsSync,Gs=ln().utimesMillisSync,gt=ze();function Ks(e,t,n){typeof n=="function"&&(n={filter:n}),n=n||{},n.clobber="clobber"in n?!!n.clobber:!0,n.overwrite="overwrite"in n?!!n.overwrite:n.clobber,n.preserveTimestamps&&process.arch==="ia32"&&process.emitWarning(`Using the preserveTimestamps option in 32-bit node is not recommended;
 
-// node_modules/graceful-fs/polyfills.js
-var require_polyfills = __commonJS({
-  "node_modules/graceful-fs/polyfills.js"(exports2, module2) {
-    var constants = require("constants");
-    var origCwd = process.cwd;
-    var cwd = null;
-    var platform = process.env.GRACEFUL_FS_PLATFORM || process.platform;
-    process.cwd = function() {
-      if (!cwd)
-        cwd = origCwd.call(process);
-      return cwd;
-    };
-    try {
-      process.cwd();
-    } catch (er) {
-    }
-    if (typeof process.chdir === "function") {
-      chdir = process.chdir;
-      process.chdir = function(d) {
-        cwd = null;
-        chdir.call(process, d);
-      };
-      if (Object.setPrototypeOf) Object.setPrototypeOf(process.chdir, chdir);
-    }
-    var chdir;
-    module2.exports = patch;
-    function patch(fs9) {
-      if (constants.hasOwnProperty("O_SYMLINK") && process.version.match(/^v0\.6\.[0-2]|^v0\.5\./)) {
-        patchLchmod(fs9);
-      }
-      if (!fs9.lutimes) {
-        patchLutimes(fs9);
-      }
-      fs9.chown = chownFix(fs9.chown);
-      fs9.fchown = chownFix(fs9.fchown);
-      fs9.lchown = chownFix(fs9.lchown);
-      fs9.chmod = chmodFix(fs9.chmod);
-      fs9.fchmod = chmodFix(fs9.fchmod);
-      fs9.lchmod = chmodFix(fs9.lchmod);
-      fs9.chownSync = chownFixSync(fs9.chownSync);
-      fs9.fchownSync = chownFixSync(fs9.fchownSync);
-      fs9.lchownSync = chownFixSync(fs9.lchownSync);
-      fs9.chmodSync = chmodFixSync(fs9.chmodSync);
-      fs9.fchmodSync = chmodFixSync(fs9.fchmodSync);
-      fs9.lchmodSync = chmodFixSync(fs9.lchmodSync);
-      fs9.stat = statFix(fs9.stat);
-      fs9.fstat = statFix(fs9.fstat);
-      fs9.lstat = statFix(fs9.lstat);
-      fs9.statSync = statFixSync(fs9.statSync);
-      fs9.fstatSync = statFixSync(fs9.fstatSync);
-      fs9.lstatSync = statFixSync(fs9.lstatSync);
-      if (fs9.chmod && !fs9.lchmod) {
-        fs9.lchmod = function(path10, mode, cb) {
-          if (cb) process.nextTick(cb);
-        };
-        fs9.lchmodSync = function() {
-        };
-      }
-      if (fs9.chown && !fs9.lchown) {
-        fs9.lchown = function(path10, uid, gid, cb) {
-          if (cb) process.nextTick(cb);
-        };
-        fs9.lchownSync = function() {
-        };
-      }
-      if (platform === "win32") {
-        fs9.rename = typeof fs9.rename !== "function" ? fs9.rename : (function(fs$rename) {
-          function rename(from, to, cb) {
-            var start = Date.now();
-            var backoff = 0;
-            fs$rename(from, to, function CB(er) {
-              if (er && (er.code === "EACCES" || er.code === "EPERM" || er.code === "EBUSY") && Date.now() - start < 6e4) {
-                setTimeout(function() {
-                  fs9.stat(to, function(stater, st) {
-                    if (stater && stater.code === "ENOENT")
-                      fs$rename(from, to, CB);
-                    else
-                      cb(er);
-                  });
-                }, backoff);
-                if (backoff < 100)
-                  backoff += 10;
-                return;
-              }
-              if (cb) cb(er);
-            });
-          }
-          if (Object.setPrototypeOf) Object.setPrototypeOf(rename, fs$rename);
-          return rename;
-        })(fs9.rename);
-      }
-      fs9.read = typeof fs9.read !== "function" ? fs9.read : (function(fs$read) {
-        function read(fd, buffer, offset, length, position, callback_) {
-          var callback;
-          if (callback_ && typeof callback_ === "function") {
-            var eagCounter = 0;
-            callback = function(er, _, __) {
-              if (er && er.code === "EAGAIN" && eagCounter < 10) {
-                eagCounter++;
-                return fs$read.call(fs9, fd, buffer, offset, length, position, callback);
-              }
-              callback_.apply(this, arguments);
-            };
-          }
-          return fs$read.call(fs9, fd, buffer, offset, length, position, callback);
-        }
-        if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read);
-        return read;
-      })(fs9.read);
-      fs9.readSync = typeof fs9.readSync !== "function" ? fs9.readSync : /* @__PURE__ */ (function(fs$readSync) {
-        return function(fd, buffer, offset, length, position) {
-          var eagCounter = 0;
-          while (true) {
-            try {
-              return fs$readSync.call(fs9, fd, buffer, offset, length, position);
-            } catch (er) {
-              if (er.code === "EAGAIN" && eagCounter < 10) {
-                eagCounter++;
-                continue;
-              }
-              throw er;
-            }
-          }
-        };
-      })(fs9.readSync);
-      function patchLchmod(fs10) {
-        fs10.lchmod = function(path10, mode, callback) {
-          fs10.open(
-            path10,
-            constants.O_WRONLY | constants.O_SYMLINK,
-            mode,
-            function(err, fd) {
-              if (err) {
-                if (callback) callback(err);
-                return;
-              }
-              fs10.fchmod(fd, mode, function(err2) {
-                fs10.close(fd, function(err22) {
-                  if (callback) callback(err2 || err22);
-                });
-              });
-            }
-          );
-        };
-        fs10.lchmodSync = function(path10, mode) {
-          var fd = fs10.openSync(path10, constants.O_WRONLY | constants.O_SYMLINK, mode);
-          var threw = true;
-          var ret;
-          try {
-            ret = fs10.fchmodSync(fd, mode);
-            threw = false;
-          } finally {
-            if (threw) {
-              try {
-                fs10.closeSync(fd);
-              } catch (er) {
-              }
-            } else {
-              fs10.closeSync(fd);
-            }
-          }
-          return ret;
-        };
-      }
-      function patchLutimes(fs10) {
-        if (constants.hasOwnProperty("O_SYMLINK") && fs10.futimes) {
-          fs10.lutimes = function(path10, at, mt, cb) {
-            fs10.open(path10, constants.O_SYMLINK, function(er, fd) {
-              if (er) {
-                if (cb) cb(er);
-                return;
-              }
-              fs10.futimes(fd, at, mt, function(er2) {
-                fs10.close(fd, function(er22) {
-                  if (cb) cb(er2 || er22);
-                });
-              });
-            });
-          };
-          fs10.lutimesSync = function(path10, at, mt) {
-            var fd = fs10.openSync(path10, constants.O_SYMLINK);
-            var ret;
-            var threw = true;
-            try {
-              ret = fs10.futimesSync(fd, at, mt);
-              threw = false;
-            } finally {
-              if (threw) {
-                try {
-                  fs10.closeSync(fd);
-                } catch (er) {
-                }
-              } else {
-                fs10.closeSync(fd);
-              }
-            }
-            return ret;
-          };
-        } else if (fs10.futimes) {
-          fs10.lutimes = function(_a, _b, _c, cb) {
-            if (cb) process.nextTick(cb);
-          };
-          fs10.lutimesSync = function() {
-          };
-        }
-      }
-      function chmodFix(orig) {
-        if (!orig) return orig;
-        return function(target, mode, cb) {
-          return orig.call(fs9, target, mode, function(er) {
-            if (chownErOk(er)) er = null;
-            if (cb) cb.apply(this, arguments);
-          });
-        };
-      }
-      function chmodFixSync(orig) {
-        if (!orig) return orig;
-        return function(target, mode) {
-          try {
-            return orig.call(fs9, target, mode);
-          } catch (er) {
-            if (!chownErOk(er)) throw er;
-          }
-        };
-      }
-      function chownFix(orig) {
-        if (!orig) return orig;
-        return function(target, uid, gid, cb) {
-          return orig.call(fs9, target, uid, gid, function(er) {
-            if (chownErOk(er)) er = null;
-            if (cb) cb.apply(this, arguments);
-          });
-        };
-      }
-      function chownFixSync(orig) {
-        if (!orig) return orig;
-        return function(target, uid, gid) {
-          try {
-            return orig.call(fs9, target, uid, gid);
-          } catch (er) {
-            if (!chownErOk(er)) throw er;
-          }
-        };
-      }
-      function statFix(orig) {
-        if (!orig) return orig;
-        return function(target, options, cb) {
-          if (typeof options === "function") {
-            cb = options;
-            options = null;
-          }
-          function callback(er, stats) {
-            if (stats) {
-              if (stats.uid < 0) stats.uid += 4294967296;
-              if (stats.gid < 0) stats.gid += 4294967296;
-            }
-            if (cb) cb.apply(this, arguments);
-          }
-          return options ? orig.call(fs9, target, options, callback) : orig.call(fs9, target, callback);
-        };
-      }
-      function statFixSync(orig) {
-        if (!orig) return orig;
-        return function(target, options) {
-          var stats = options ? orig.call(fs9, target, options) : orig.call(fs9, target);
-          if (stats) {
-            if (stats.uid < 0) stats.uid += 4294967296;
-            if (stats.gid < 0) stats.gid += 4294967296;
-          }
-          return stats;
-        };
-      }
-      function chownErOk(er) {
-        if (!er)
-          return true;
-        if (er.code === "ENOSYS")
-          return true;
-        var nonroot = !process.getuid || process.getuid() !== 0;
-        if (nonroot) {
-          if (er.code === "EINVAL" || er.code === "EPERM")
-            return true;
-        }
-        return false;
-      }
-    }
-  }
-});
+	see https://github.com/jprichardson/node-fs-extra/issues/269`,"Warning","fs-extra-WARN0002");let{srcStat:o,destStat:i}=gt.checkPathsSync(e,t,"copy",n);if(gt.checkParentPathsSync(e,o,t,"copy"),n.filter&&!n.filter(e,t))return;let a=pt.dirname(t);return ge.existsSync(a)||_s(a),Mo(i,e,t,n)}function Mo(e,t,n,o){let a=(o.dereference?ge.statSync:ge.lstatSync)(t);if(a.isDirectory())return Bs(a,e,t,n,o);if(a.isFile()||a.isCharacterDevice()||a.isBlockDevice())return Us(a,e,t,n,o);if(a.isSymbolicLink())return Xs(e,t,n,o);throw a.isSocket()?new Error(`Cannot copy a socket file: ${t}`):a.isFIFO()?new Error(`Cannot copy a FIFO pipe: ${t}`):new Error(`Unknown file: ${t}`)}function Us(e,t,n,o,i){return t?zs(e,n,o,i):Ro(e,n,o,i)}function zs(e,t,n,o){if(o.overwrite)return ge.unlinkSync(n),Ro(e,t,n,o);if(o.errorOnExist)throw new Error(`'${n}' already exists`)}function Ro(e,t,n,o){return ge.copyFileSync(t,n),o.preserveTimestamps&&qs(e.mode,t,n),un(n,e.mode)}function qs(e,t,n){return Hs(e)&&Ws(n,e),Vs(t,n)}function Hs(e){return(e&128)===0}function Ws(e,t){return un(e,t|128)}function un(e,t){return ge.chmodSync(e,t)}function Vs(e,t){let n=ge.statSync(e);return Gs(t,n.atime,n.mtime)}function Bs(e,t,n,o,i){return t?Do(n,o,i):Js(e.mode,n,o,i)}function Js(e,t,n,o){return ge.mkdirSync(n),Do(t,n,o),un(n,e)}function Do(e,t,n){let o=ge.opendirSync(e);try{let i;for(;(i=o.readSync())!==null;)Ys(i.name,e,t,n)}finally{o.closeSync()}}function Ys(e,t,n,o){let i=pt.join(t,e),a=pt.join(n,e);if(o.filter&&!o.filter(i,a))return;let{destStat:s}=gt.checkPathsSync(i,a,"copy",o);return Mo(s,i,a,o)}function Xs(e,t,n,o){let i=ge.readlinkSync(t);if(o.dereference&&(i=pt.resolve(process.cwd(),i)),e){let a;try{a=ge.readlinkSync(n)}catch(s){if(s.code==="EINVAL"||s.code==="UNKNOWN")return ge.symlinkSync(i,n);throw s}if(o.dereference&&(a=pt.resolve(process.cwd(),a)),i!==a){if(gt.isSrcSubdir(i,a))throw new Error(`Cannot copy '${i}' to a subdirectory of itself, '${a}'.`);if(gt.isSrcSubdir(a,i))throw new Error(`Cannot overwrite '${a}' with '${i}'.`)}return Qs(i,n)}else return ge.symlinkSync(i,n)}function Qs(e,t){return ge.unlinkSync(t),ge.symlinkSync(e,t)}Lo.exports=Ks});var Dt=x((nd,Oo)=>{"use strict";var Zs=oe().fromPromise;Oo.exports={copy:Zs(Ao()),copySync:No()}});var ft=x((od,_o)=>{"use strict";var jo=Oe(),er=oe().fromCallback;function tr(e,t){jo.rm(e,{recursive:!0,force:!0},t)}function nr(e){jo.rmSync(e,{recursive:!0,force:!0})}_o.exports={remove:er(tr),removeSync:nr}});var Vo=x((id,Wo)=>{"use strict";var or=oe().fromPromise,Uo=pe(),zo=require("path"),qo=Se(),Ho=ft(),Go=or(async function(t){let n;try{n=await Uo.readdir(t)}catch{return qo.mkdirs(t)}return Promise.all(n.map(o=>Ho.remove(zo.join(t,o))))});function Ko(e){let t;try{t=Uo.readdirSync(e)}catch{return qo.mkdirsSync(e)}t.forEach(n=>{n=zo.join(e,n),Ho.removeSync(n)})}Wo.exports={emptyDirSync:Ko,emptydirSync:Ko,emptyDir:Go,emptydir:Go}});var Xo=x((ad,Yo)=>{"use strict";var ir=oe().fromPromise,Bo=require("path"),$e=pe(),Jo=Se();async function ar(e){let t;try{t=await $e.stat(e)}catch{}if(t&&t.isFile())return;let n=Bo.dirname(e),o=null;try{o=await $e.stat(n)}catch(i){if(i.code==="ENOENT"){await Jo.mkdirs(n),await $e.writeFile(e,"");return}else throw i}o.isDirectory()?await $e.writeFile(e,""):await $e.readdir(n)}function sr(e){let t;try{t=$e.statSync(e)}catch{}if(t&&t.isFile())return;let n=Bo.dirname(e);try{$e.statSync(n).isDirectory()||$e.readdirSync(n)}catch(o){if(o&&o.code==="ENOENT")Jo.mkdirsSync(n);else throw o}$e.writeFileSync(e,"")}Yo.exports={createFile:ir(ar),createFileSync:sr}});var ni=x((sd,ti)=>{"use strict";var rr=oe().fromPromise,Qo=require("path"),_e=pe(),Zo=Se(),{pathExists:cr}=je(),{areIdentical:ei}=ze();async function lr(e,t){let n;try{n=await _e.lstat(t)}catch{}let o;try{o=await _e.lstat(e)}catch(s){throw s.message=s.message.replace("lstat","ensureLink"),s}if(n&&ei(o,n))return;let i=Qo.dirname(t);await cr(i)||await Zo.mkdirs(i),await _e.link(e,t)}function dr(e,t){let n;try{n=_e.lstatSync(t)}catch{}try{let a=_e.lstatSync(e);if(n&&ei(a,n))return}catch(a){throw a.message=a.message.replace("lstat","ensureLink"),a}let o=Qo.dirname(t);return _e.existsSync(o)||Zo.mkdirsSync(o),_e.linkSync(e,t)}ti.exports={createLink:rr(lr),createLinkSync:dr}});var ii=x((rd,oi)=>{"use strict";var Ge=require("path"),ht=pe(),{pathExists:ur}=je(),mr=oe().fromPromise;async function pr(e,t){if(Ge.isAbsolute(e)){try{await ht.lstat(e)}catch(a){throw a.message=a.message.replace("lstat","ensureSymlink"),a}return{toCwd:e,toDst:e}}let n=Ge.dirname(t),o=Ge.join(n,e);if(await ur(o))return{toCwd:o,toDst:e};try{await ht.lstat(e)}catch(a){throw a.message=a.message.replace("lstat","ensureSymlink"),a}return{toCwd:e,toDst:Ge.relative(n,e)}}function gr(e,t){if(Ge.isAbsolute(e)){if(!ht.existsSync(e))throw new Error("absolute srcpath does not exist");return{toCwd:e,toDst:e}}let n=Ge.dirname(t),o=Ge.join(n,e);if(ht.existsSync(o))return{toCwd:o,toDst:e};if(!ht.existsSync(e))throw new Error("relative srcpath does not exist");return{toCwd:e,toDst:Ge.relative(n,e)}}oi.exports={symlinkPaths:mr(pr),symlinkPathsSync:gr}});var ri=x((cd,si)=>{"use strict";var ai=pe(),fr=oe().fromPromise;async function hr(e,t){if(t)return t;let n;try{n=await ai.lstat(e)}catch{return"file"}return n&&n.isDirectory()?"dir":"file"}function wr(e,t){if(t)return t;let n;try{n=ai.lstatSync(e)}catch{return"file"}return n&&n.isDirectory()?"dir":"file"}si.exports={symlinkType:fr(hr),symlinkTypeSync:wr}});var ui=x((ld,di)=>{"use strict";var yr=oe().fromPromise,ci=require("path"),Pe=pe(),{mkdirs:vr,mkdirsSync:br}=Se(),{symlinkPaths:Sr,symlinkPathsSync:kr}=ii(),{symlinkType:Pr,symlinkTypeSync:xr}=ri(),{pathExists:Cr}=je(),{areIdentical:li}=ze();async function Tr(e,t,n){let o;try{o=await Pe.lstat(t)}catch{}if(o&&o.isSymbolicLink()){let[r,c]=await Promise.all([Pe.stat(e),Pe.stat(t)]);if(li(r,c))return}let i=await Sr(e,t);e=i.toDst;let a=await Pr(i.toCwd,n),s=ci.dirname(t);return await Cr(s)||await vr(s),Pe.symlink(e,t,a)}function Er(e,t,n){let o;try{o=Pe.lstatSync(t)}catch{}if(o&&o.isSymbolicLink()){let r=Pe.statSync(e),c=Pe.statSync(t);if(li(r,c))return}let i=kr(e,t);e=i.toDst,n=xr(i.toCwd,n);let a=ci.dirname(t);return Pe.existsSync(a)||br(a),Pe.symlinkSync(e,t,n)}di.exports={createSymlink:yr(Tr),createSymlinkSync:Er}});var vi=x((dd,yi)=>{"use strict";var{createFile:mi,createFileSync:pi}=Xo(),{createLink:gi,createLinkSync:fi}=ni(),{createSymlink:hi,createSymlinkSync:wi}=ui();yi.exports={createFile:mi,createFileSync:pi,ensureFile:mi,ensureFileSync:pi,createLink:gi,createLinkSync:fi,ensureLink:gi,ensureLinkSync:fi,createSymlink:hi,createSymlinkSync:wi,ensureSymlink:hi,ensureSymlinkSync:wi}});var Lt=x((ud,bi)=>{function Ir(e,{EOL:t=`
+`,finalEOL:n=!0,replacer:o=null,spaces:i}={}){let a=n?t:"";return JSON.stringify(e,o,i).replace(/\n/g,t)+a}function $r(e){return Buffer.isBuffer(e)&&(e=e.toString("utf8")),e.replace(/^\uFEFF/,"")}bi.exports={stringify:Ir,stripBom:$r}});var xi=x((md,Pi)=>{var Ze;try{Ze=Oe()}catch{Ze=require("fs")}var Nt=oe(),{stringify:Si,stripBom:ki}=Lt();async function Fr(e,t={}){typeof t=="string"&&(t={encoding:t});let n=t.fs||Ze,o="throws"in t?t.throws:!0,i=await Nt.fromCallback(n.readFile)(e,t);i=ki(i);let a;try{a=JSON.parse(i,t?t.reviver:null)}catch(s){if(o)throw s.message=`${e}: ${s.message}`,s;return null}return a}var Ar=Nt.fromPromise(Fr);function Mr(e,t={}){typeof t=="string"&&(t={encoding:t});let n=t.fs||Ze,o="throws"in t?t.throws:!0;try{let i=n.readFileSync(e,t);return i=ki(i),JSON.parse(i,t.reviver)}catch(i){if(o)throw i.message=`${e}: ${i.message}`,i;return null}}async function Rr(e,t,n={}){let o=n.fs||Ze,i=Si(t,n);await Nt.fromCallback(o.writeFile)(e,i,n)}var Dr=Nt.fromPromise(Rr);function Lr(e,t,n={}){let o=n.fs||Ze,i=Si(t,n);return o.writeFileSync(e,i,n)}Pi.exports={readFile:Ar,readFileSync:Mr,writeFile:Dr,writeFileSync:Lr}});var Ti=x((pd,Ci)=>{"use strict";var Ot=xi();Ci.exports={readJson:Ot.readFile,readJsonSync:Ot.readFileSync,writeJson:Ot.writeFile,writeJsonSync:Ot.writeFileSync}});var jt=x((gd,$i)=>{"use strict";var Nr=oe().fromPromise,mn=pe(),Ei=require("path"),Ii=Se(),Or=je().pathExists;async function jr(e,t,n="utf-8"){let o=Ei.dirname(e);return await Or(o)||await Ii.mkdirs(o),mn.writeFile(e,t,n)}function _r(e,...t){let n=Ei.dirname(e);mn.existsSync(n)||Ii.mkdirsSync(n),mn.writeFileSync(e,...t)}$i.exports={outputFile:Nr(jr),outputFileSync:_r}});var Ai=x((fd,Fi)=>{"use strict";var{stringify:Gr}=Lt(),{outputFile:Kr}=jt();async function Ur(e,t,n={}){let o=Gr(t,n);await Kr(e,o,n)}Fi.exports=Ur});var Ri=x((hd,Mi)=>{"use strict";var{stringify:zr}=Lt(),{outputFileSync:qr}=jt();function Hr(e,t,n){let o=zr(t,n);qr(e,o,n)}Mi.exports=Hr});var Li=x((wd,Di)=>{"use strict";var Wr=oe().fromPromise,fe=Ti();fe.outputJson=Wr(Ai());fe.outputJsonSync=Ri();fe.outputJSON=fe.outputJson;fe.outputJSONSync=fe.outputJsonSync;fe.writeJSON=fe.writeJson;fe.writeJSONSync=fe.writeJsonSync;fe.readJSON=fe.readJson;fe.readJSONSync=fe.readJsonSync;Di.exports=fe});var Gi=x((yd,_i)=>{"use strict";var Vr=pe(),Ni=require("path"),{copy:Br}=Dt(),{remove:ji}=ft(),{mkdirp:Jr}=Se(),{pathExists:Yr}=je(),Oi=ze();async function Xr(e,t,n={}){let o=n.overwrite||n.clobber||!1,{srcStat:i,isChangingCase:a=!1}=await Oi.checkPaths(e,t,"move",n);await Oi.checkParentPaths(e,i,t,"move");let s=Ni.dirname(t);return Ni.parse(s).root!==s&&await Jr(s),Qr(e,t,o,a)}async function Qr(e,t,n,o){if(!o){if(n)await ji(t);else if(await Yr(t))throw new Error("dest already exists.")}try{await Vr.rename(e,t)}catch(i){if(i.code!=="EXDEV")throw i;await Zr(e,t,n)}}async function Zr(e,t,n){return await Br(e,t,{overwrite:n,errorOnExist:!0,preserveTimestamps:!0}),ji(e)}_i.exports=Xr});var Hi=x((vd,qi)=>{"use strict";var Ui=Oe(),gn=require("path"),ec=Dt().copySync,zi=ft().removeSync,tc=Se().mkdirpSync,Ki=ze();function nc(e,t,n){n=n||{};let o=n.overwrite||n.clobber||!1,{srcStat:i,isChangingCase:a=!1}=Ki.checkPathsSync(e,t,"move",n);return Ki.checkParentPathsSync(e,i,t,"move"),oc(t)||tc(gn.dirname(t)),ic(e,t,o,a)}function oc(e){let t=gn.dirname(e);return gn.parse(t).root===t}function ic(e,t,n,o){if(o)return pn(e,t,n);if(n)return zi(t),pn(e,t,n);if(Ui.existsSync(t))throw new Error("dest already exists.");return pn(e,t,n)}function pn(e,t,n){try{Ui.renameSync(e,t)}catch(o){if(o.code!=="EXDEV")throw o;return ac(e,t,n)}}function ac(e,t,n){return ec(e,t,{overwrite:n,errorOnExist:!0,preserveTimestamps:!0}),zi(e)}qi.exports=nc});var Vi=x((bd,Wi)=>{"use strict";var sc=oe().fromPromise;Wi.exports={move:sc(Gi()),moveSync:Hi()}});var Fe=x((Sd,Bi)=>{"use strict";Bi.exports={...pe(),...Dt(),...Vo(),...vi(),...Li(),...Se(),...Vi(),...jt(),...je(),...ft()}});var la=x((Od,ca)=>{function ve(e,t){typeof t=="boolean"&&(t={forever:t}),this._originalTimeouts=JSON.parse(JSON.stringify(e)),this._timeouts=e,this._options=t||{},this._maxRetryTime=t&&t.maxRetryTime||1/0,this._fn=null,this._errors=[],this._attempts=1,this._operationTimeout=null,this._operationTimeoutCb=null,this._timeout=null,this._operationStart=null,this._options.forever&&(this._cachedTimeouts=this._timeouts.slice(0))}ca.exports=ve;ve.prototype.reset=function(){this._attempts=1,this._timeouts=this._originalTimeouts};ve.prototype.stop=function(){this._timeout&&clearTimeout(this._timeout),this._timeouts=[],this._cachedTimeouts=null};ve.prototype.retry=function(e){if(this._timeout&&clearTimeout(this._timeout),!e)return!1;var t=new Date().getTime();if(e&&t-this._operationStart>=this._maxRetryTime)return this._errors.unshift(new Error("RetryOperation timeout occurred")),!1;this._errors.push(e);var n=this._timeouts.shift();if(n===void 0)if(this._cachedTimeouts)this._errors.splice(this._errors.length-1,this._errors.length),this._timeouts=this._cachedTimeouts.slice(0),n=this._timeouts.shift();else return!1;var o=this,i=setTimeout(function(){o._attempts++,o._operationTimeoutCb&&(o._timeout=setTimeout(function(){o._operationTimeoutCb(o._attempts)},o._operationTimeout),o._options.unref&&o._timeout.unref()),o._fn(o._attempts)},n);return this._options.unref&&i.unref(),!0};ve.prototype.attempt=function(e,t){this._fn=e,t&&(t.timeout&&(this._operationTimeout=t.timeout),t.cb&&(this._operationTimeoutCb=t.cb));var n=this;this._operationTimeoutCb&&(this._timeout=setTimeout(function(){n._operationTimeoutCb()},n._operationTimeout)),this._operationStart=new Date().getTime(),this._fn(this._attempts)};ve.prototype.try=function(e){console.log("Using RetryOperation.try() is deprecated"),this.attempt(e)};ve.prototype.start=function(e){console.log("Using RetryOperation.start() is deprecated"),this.attempt(e)};ve.prototype.start=ve.prototype.try;ve.prototype.errors=function(){return this._errors};ve.prototype.attempts=function(){return this._attempts};ve.prototype.mainError=function(){if(this._errors.length===0)return null;for(var e={},t=null,n=0,o=0;o<this._errors.length;o++){var i=this._errors[o],a=i.message,s=(e[a]||0)+1;e[a]=s,s>=n&&(t=i,n=s)}return t}});var da=x(He=>{var Sc=la();He.operation=function(e){var t=He.timeouts(e);return new Sc(t,{forever:e&&e.forever,unref:e&&e.unref,maxRetryTime:e&&e.maxRetryTime})};He.timeouts=function(e){if(e instanceof Array)return[].concat(e);var t={retries:10,factor:2,minTimeout:1*1e3,maxTimeout:1/0,randomize:!1};for(var n in e)t[n]=e[n];if(t.minTimeout>t.maxTimeout)throw new Error("minTimeout is greater than maxTimeout");for(var o=[],i=0;i<t.retries;i++)o.push(this.createTimeout(i,t));return e&&e.forever&&!o.length&&o.push(this.createTimeout(i,t)),o.sort(function(a,s){return a-s}),o};He.createTimeout=function(e,t){var n=t.randomize?Math.random()+1:1,o=Math.round(n*t.minTimeout*Math.pow(t.factor,e));return o=Math.min(o,t.maxTimeout),o};He.wrap=function(e,t,n){if(t instanceof Array&&(n=t,t=null),!n){n=[];for(var o in e)typeof e[o]=="function"&&n.push(o)}for(var i=0;i<n.length;i++){var a=n[i],s=e[a];e[a]=function(c){var u=He.operation(t),l=Array.prototype.slice.call(arguments,1),d=l.pop();l.push(function(m){u.retry(m)||(m&&(arguments[0]=u.mainError()),d.apply(this,arguments))}),u.attempt(function(){c.apply(e,l)})}.bind(e,s),e[a].options=t}}});var ma=x((_d,ua)=>{ua.exports=da()});var pa=x((Gd,Kt)=>{Kt.exports=["SIGABRT","SIGALRM","SIGHUP","SIGINT","SIGTERM"];process.platform!=="win32"&&Kt.exports.push("SIGVTALRM","SIGXCPU","SIGXFSZ","SIGUSR2","SIGTRAP","SIGSYS","SIGQUIT","SIGIOT");process.platform==="linux"&&Kt.exports.push("SIGIO","SIGPOLL","SIGPWR","SIGSTKFLT","SIGUNUSED")});var ya=x((Kd,ot)=>{var B=global.process,We=function(e){return e&&typeof e=="object"&&typeof e.removeListener=="function"&&typeof e.emit=="function"&&typeof e.reallyExit=="function"&&typeof e.listeners=="function"&&typeof e.kill=="function"&&typeof e.pid=="number"&&typeof e.on=="function"};We(B)?(ga=require("assert"),tt=pa(),fa=/^win/i.test(B.platform),yt=require("events"),typeof yt!="function"&&(yt=yt.EventEmitter),B.__signal_exit_emitter__?se=B.__signal_exit_emitter__:(se=B.__signal_exit_emitter__=new yt,se.count=0,se.emitted={}),se.infinite||(se.setMaxListeners(1/0),se.infinite=!0),ot.exports=function(e,t){if(!We(global.process))return function(){};ga.equal(typeof e,"function","a callback must be provided for exit handler"),nt===!1&&vn();var n="exit";t&&t.alwaysLast&&(n="afterexit");var o=function(){se.removeListener(n,e),se.listeners("exit").length===0&&se.listeners("afterexit").length===0&&Ut()};return se.on(n,e),o},Ut=function(){!nt||!We(global.process)||(nt=!1,tt.forEach(function(t){try{B.removeListener(t,zt[t])}catch{}}),B.emit=qt,B.reallyExit=bn,se.count-=1)},ot.exports.unload=Ut,Ve=function(t,n,o){se.emitted[t]||(se.emitted[t]=!0,se.emit(t,n,o))},zt={},tt.forEach(function(e){zt[e]=function(){if(We(global.process)){var n=B.listeners(e);n.length===se.count&&(Ut(),Ve("exit",null,e),Ve("afterexit",null,e),fa&&e==="SIGHUP"&&(e="SIGINT"),B.kill(B.pid,e))}}}),ot.exports.signals=function(){return tt},nt=!1,vn=function(){nt||!We(global.process)||(nt=!0,se.count+=1,tt=tt.filter(function(t){try{return B.on(t,zt[t]),!0}catch{return!1}}),B.emit=wa,B.reallyExit=ha)},ot.exports.load=vn,bn=B.reallyExit,ha=function(t){We(global.process)&&(B.exitCode=t||0,Ve("exit",B.exitCode,null),Ve("afterexit",B.exitCode,null),bn.call(B,B.exitCode))},qt=B.emit,wa=function(t,n){if(t==="exit"&&We(global.process)){n!==void 0&&(B.exitCode=n);var o=qt.apply(this,arguments);return Ve("exit",B.exitCode,null),Ve("afterexit",B.exitCode,null),o}else return qt.apply(this,arguments)}):ot.exports=function(){return function(){}};var ga,tt,fa,yt,se,Ut,Ve,zt,nt,vn,bn,ha,qt,wa});var ba=x((Ud,Sn)=>{"use strict";var va=Symbol();function kc(e,t,n){let o=t[va];if(o)return t.stat(e,(a,s)=>{if(a)return n(a);n(null,s.mtime,o)});let i=new Date(Math.ceil(Date.now()/1e3)*1e3+5);t.utimes(e,i,i,a=>{if(a)return n(a);t.stat(e,(s,r)=>{if(s)return n(s);let c=r.mtime.getTime()%1e3===0?"s":"ms";Object.defineProperty(t,va,{value:c}),n(null,r.mtime,c)})})}function Pc(e){let t=Date.now();return e==="s"&&(t=Math.ceil(t/1e3)*1e3),new Date(t)}Sn.exports.probe=kc;Sn.exports.getMtime=Pc});var Ca=x((zd,bt)=>{"use strict";var xc=require("path"),xn=Oe(),Cc=ma(),Tc=ya(),Sa=ba(),Re={};function vt(e,t){return t.lockfilePath||`${e}.lock`}function Cn(e,t,n){if(!t.realpath)return n(null,xc.resolve(e));t.fs.realpath(e,n)}function Pn(e,t,n){let o=vt(e,t);t.fs.mkdir(o,i=>{if(!i)return Sa.probe(o,t.fs,(a,s,r)=>{if(a)return t.fs.rmdir(o,()=>{}),n(a);n(null,s,r)});if(i.code!=="EEXIST")return n(i);if(t.stale<=0)return n(Object.assign(new Error("Lock file is already being held"),{code:"ELOCKED",file:e}));t.fs.stat(o,(a,s)=>{if(a)return a.code==="ENOENT"?Pn(e,{...t,stale:0},n):n(a);if(!ka(s,t))return n(Object.assign(new Error("Lock file is already being held"),{code:"ELOCKED",file:e}));Pa(e,t,r=>{if(r)return n(r);Pn(e,{...t,stale:0},n)})})})}function ka(e,t){return e.mtime.getTime()<Date.now()-t.stale}function Pa(e,t,n){t.fs.rmdir(vt(e,t),o=>{if(o&&o.code!=="ENOENT")return n(o);n()})}function Ht(e,t){let n=Re[e];n.updateTimeout||(n.updateDelay=n.updateDelay||t.update,n.updateTimeout=setTimeout(()=>{n.updateTimeout=null,t.fs.stat(n.lockfilePath,(o,i)=>{let a=n.lastUpdate+t.stale<Date.now();if(o)return o.code==="ENOENT"||a?kn(e,n,Object.assign(o,{code:"ECOMPROMISED"})):(n.updateDelay=1e3,Ht(e,t));if(!(n.mtime.getTime()===i.mtime.getTime()))return kn(e,n,Object.assign(new Error("Unable to update lock within the stale threshold"),{code:"ECOMPROMISED"}));let r=Sa.getMtime(n.mtimePrecision);t.fs.utimes(n.lockfilePath,r,r,c=>{let u=n.lastUpdate+t.stale<Date.now();if(!n.released){if(c)return c.code==="ENOENT"||u?kn(e,n,Object.assign(c,{code:"ECOMPROMISED"})):(n.updateDelay=1e3,Ht(e,t));n.mtime=r,n.lastUpdate=Date.now(),n.updateDelay=null,Ht(e,t)}})})},n.updateDelay),n.updateTimeout.unref&&n.updateTimeout.unref())}function kn(e,t,n){t.released=!0,t.updateTimeout&&clearTimeout(t.updateTimeout),Re[e]===t&&delete Re[e],t.options.onCompromised(n)}function Ec(e,t,n){t={stale:1e4,update:null,realpath:!0,retries:0,fs:xn,onCompromised:o=>{throw o},...t},t.retries=t.retries||0,t.retries=typeof t.retries=="number"?{retries:t.retries}:t.retries,t.stale=Math.max(t.stale||0,2e3),t.update=t.update==null?t.stale/2:t.update||0,t.update=Math.max(Math.min(t.update,t.stale/2),1e3),Cn(e,t,(o,i)=>{if(o)return n(o);let a=Cc.operation(t.retries);a.attempt(()=>{Pn(i,t,(s,r,c)=>{if(a.retry(s))return;if(s)return n(a.mainError());let u=Re[i]={lockfilePath:vt(i,t),mtime:r,mtimePrecision:c,options:t,lastUpdate:Date.now()};Ht(i,t),n(null,l=>{if(u.released)return l&&l(Object.assign(new Error("Lock is already released"),{code:"ERELEASED"}));xa(i,{...t,realpath:!1},l)})})})})}function xa(e,t,n){t={fs:xn,realpath:!0,...t},Cn(e,t,(o,i)=>{if(o)return n(o);let a=Re[i];if(!a)return n(Object.assign(new Error("Lock is not acquired/owned by you"),{code:"ENOTACQUIRED"}));a.updateTimeout&&clearTimeout(a.updateTimeout),a.released=!0,delete Re[i],Pa(i,t,n)})}function Ic(e,t,n){t={stale:1e4,realpath:!0,fs:xn,...t},t.stale=Math.max(t.stale||0,2e3),Cn(e,t,(o,i)=>{if(o)return n(o);t.fs.stat(vt(i,t),(a,s)=>a?a.code==="ENOENT"?n(null,!1):n(a):n(null,!ka(s,t)))})}function $c(){return Re}Tc(()=>{for(let e in Re){let t=Re[e].options;try{t.fs.rmdirSync(vt(e,t))}catch{}}});bt.exports.lock=Ec;bt.exports.unlock=xa;bt.exports.check=Ic;bt.exports.getLocks=$c});var Ea=x((qd,Ta)=>{"use strict";var Fc=Oe();function Ac(e){let t=["mkdir","realpath","stat","rmdir","utimes"],n={...e};return t.forEach(o=>{n[o]=(...i)=>{let a=i.pop(),s;try{s=e[`${o}Sync`](...i)}catch(r){return a(r)}a(null,s)}}),n}function Mc(e){return(...t)=>new Promise((n,o)=>{t.push((i,a)=>{i?o(i):n(a)}),e(...t)})}function Rc(e){return(...t)=>{let n,o;if(t.push((i,a)=>{n=i,o=a}),e(...t),n)throw n;return o}}function Dc(e){if(e={...e},e.fs=Ac(e.fs||Fc),typeof e.retries=="number"&&e.retries>0||e.retries&&typeof e.retries.retries=="number"&&e.retries.retries>0)throw Object.assign(new Error("Cannot use retries with the sync api"),{code:"ESYNC"});return e}Ta.exports={toPromise:Mc,toSync:Rc,toSyncOptions:Dc}});var $a=x((Hd,Ke)=>{"use strict";var it=Ca(),{toPromise:Wt,toSync:Vt,toSyncOptions:Tn}=Ea();async function Ia(e,t){let n=await Wt(it.lock)(e,t);return Wt(n)}function Lc(e,t){let n=Vt(it.lock)(e,Tn(t));return Vt(n)}function Nc(e,t){return Wt(it.unlock)(e,t)}function Oc(e,t){return Vt(it.unlock)(e,Tn(t))}function jc(e,t){return Wt(it.check)(e,t)}function _c(e,t){return Vt(it.check)(e,Tn(t))}Ke.exports=Ia;Ke.exports.lock=Ia;Ke.exports.unlock=Nc;Ke.exports.lockSync=Lc;Ke.exports.unlockSync=Oc;Ke.exports.check=jc;Ke.exports.checkSync=_c});var _l={};os(_l,{activate:()=>Nl,deactivate:()=>jl});module.exports=is(_l);var I=D(require("vscode"));var ee=D(require("vscode")),z=D(Fe()),E=D(require("path")),ea=D(require("crypto"));var qe=D(require("vscode")),et=D(Fe()),_t=D(require("path"));var Ji=/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/,Yi=/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/,Ae=".alex",Xi={root:Ae,knowledge:`${Ae}/global-knowledge`,patterns:`${Ae}/global-knowledge/patterns`,insights:`${Ae}/global-knowledge/insights`,index:`${Ae}/global-knowledge/index.json`,projectRegistry:`${Ae}/project-registry.json`,globalProfile:`${Ae}/user-profile.json`},fn={pattern:"GK-",insight:"GI-"};function hn(){let e=qe.workspace.workspaceFolders;return e?{isValid:!0,rootPath:e[0].uri.fsPath,workspaceFolder:e[0]}:{isValid:!1,error:"No workspace folder open. Please open a project folder first (File \u2192 Open Folder)."}}async function Me(e=!0){let t=qe.workspace.workspaceFolders;if(!t||t.length===0)return{found:!1,error:"No workspace folder open. Please open a project folder first (File \u2192 Open Folder)."};if(t.length===1){let i=t[0];return e&&!await Qi(i.uri.fsPath)?{found:!1,error:'Alex is not installed in this workspace. Run "Alex: Initialize Architecture" first.'}:{found:!0,rootPath:i.uri.fsPath,workspaceFolder:i}}let n=[];for(let i of t)await Qi(i.uri.fsPath)&&n.push(i);if(!e){let i=await qe.window.showQuickPick(t.map(a=>({label:a.name,description:a.uri.fsPath,folder:a})),{placeHolder:"Select a workspace folder to initialize Alex in",title:"Initialize Alex - Select Folder"});return i?{found:!0,rootPath:i.folder.uri.fsPath,workspaceFolder:i.folder}:{found:!1,cancelled:!0}}if(n.length===0)return{found:!1,error:'Alex is not installed in any workspace folder. Run "Alex: Initialize Architecture" first.'};if(n.length===1)return{found:!0,rootPath:n[0].uri.fsPath,workspaceFolder:n[0]};let o=await qe.window.showQuickPick(n.map(i=>({label:i.name,description:i.uri.fsPath,folder:i})),{placeHolder:"Multiple folders have Alex installed. Select one:",title:"Alex - Select Workspace Folder"});return o?{found:!0,rootPath:o.folder.uri.fsPath,workspaceFolder:o.folder}:{found:!1,cancelled:!0}}async function wn(e,t=!1){let n=_t.join(e,".github","copilot-instructions.md");if(!await et.pathExists(n))return null;try{let o=await et.readFile(n,"utf8"),i=t?Yi:Ji,a=o.match(i);return a?a[1]:null}catch{return null}}async function Qi(e){let t=_t.join(e,".github","copilot-instructions.md");return et.pathExists(t)}function Zi(e){return ea.createHash("md5").update(e.replace(/\r\n/g,`
+`)).digest("hex")}function rc(e){return E.join(e,".github","config","alex-manifest.json")}async function ta(e){let t=await Me(!1);if(!t.found){if(t.cancelled)return;ee.window.showErrorMessage(t.error||"No workspace folder open. Please open a project folder first (File \u2192 Open Folder), then run this command again.");return}let n=t.rootPath,o=E.join(n,".github","copilot-instructions.md");if(await z.pathExists(o)){let i=await ee.window.showWarningMessage(`Alex is already installed in this workspace.
 
-// node_modules/graceful-fs/legacy-streams.js
-var require_legacy_streams = __commonJS({
-  "node_modules/graceful-fs/legacy-streams.js"(exports2, module2) {
-    var Stream = require("stream").Stream;
-    module2.exports = legacy;
-    function legacy(fs9) {
-      return {
-        ReadStream,
-        WriteStream
-      };
-      function ReadStream(path10, options) {
-        if (!(this instanceof ReadStream)) return new ReadStream(path10, options);
-        Stream.call(this);
-        var self = this;
-        this.path = path10;
-        this.fd = null;
-        this.readable = true;
-        this.paused = false;
-        this.flags = "r";
-        this.mode = 438;
-        this.bufferSize = 64 * 1024;
-        options = options || {};
-        var keys = Object.keys(options);
-        for (var index = 0, length = keys.length; index < length; index++) {
-          var key = keys[index];
-          this[key] = options[key];
-        }
-        if (this.encoding) this.setEncoding(this.encoding);
-        if (this.start !== void 0) {
-          if ("number" !== typeof this.start) {
-            throw TypeError("start must be a Number");
-          }
-          if (this.end === void 0) {
-            this.end = Infinity;
-          } else if ("number" !== typeof this.end) {
-            throw TypeError("end must be a Number");
-          }
-          if (this.start > this.end) {
-            throw new Error("start must be <= end");
-          }
-          this.pos = this.start;
-        }
-        if (this.fd !== null) {
-          process.nextTick(function() {
-            self._read();
-          });
-          return;
-        }
-        fs9.open(this.path, this.flags, this.mode, function(err, fd) {
-          if (err) {
-            self.emit("error", err);
-            self.readable = false;
-            return;
-          }
-          self.fd = fd;
-          self.emit("open", fd);
-          self._read();
-        });
-      }
-      function WriteStream(path10, options) {
-        if (!(this instanceof WriteStream)) return new WriteStream(path10, options);
-        Stream.call(this);
-        this.path = path10;
-        this.fd = null;
-        this.writable = true;
-        this.flags = "w";
-        this.encoding = "binary";
-        this.mode = 438;
-        this.bytesWritten = 0;
-        options = options || {};
-        var keys = Object.keys(options);
-        for (var index = 0, length = keys.length; index < length; index++) {
-          var key = keys[index];
-          this[key] = options[key];
-        }
-        if (this.start !== void 0) {
-          if ("number" !== typeof this.start) {
-            throw TypeError("start must be a Number");
-          }
-          if (this.start < 0) {
-            throw new Error("start must be >= zero");
-          }
-          this.pos = this.start;
-        }
-        this.busy = false;
-        this._queue = [];
-        if (this.fd === null) {
-          this._open = fs9.open;
-          this._queue.push([this._open, this.path, this.flags, this.mode, void 0]);
-          this.flush();
-        }
-      }
-    }
-  }
-});
+\u2022 To update to a new version, use "Alex: Upgrade"
+\u2022 To completely reinstall, choose Reset below`,"Upgrade Instead","Reset Architecture","Cancel");i==="Upgrade Instead"?await ee.commands.executeCommand("alex.upgrade"):i==="Reset Architecture"&&await yn(e);return}await na(e,n,!1)}async function yn(e){let t=await Me(!0);if(!t.found){if(t.cancelled)return;ee.window.showErrorMessage(t.error||"Please open a workspace folder with Alex installed to reset.");return}let n=t.rootPath,o=await ee.window.showWarningMessage(`\u26A0\uFE0F RESET will permanently delete all Alex memory files!
 
-// node_modules/graceful-fs/clone.js
-var require_clone = __commonJS({
-  "node_modules/graceful-fs/clone.js"(exports2, module2) {
-    "use strict";
-    module2.exports = clone;
-    var getPrototypeOf = Object.getPrototypeOf || function(obj) {
-      return obj.__proto__;
-    };
-    function clone(obj) {
-      if (obj === null || typeof obj !== "object")
-        return obj;
-      if (obj instanceof Object)
-        var copy3 = { __proto__: getPrototypeOf(obj) };
-      else
-        var copy3 = /* @__PURE__ */ Object.create(null);
-      Object.getOwnPropertyNames(obj).forEach(function(key) {
-        Object.defineProperty(copy3, key, Object.getOwnPropertyDescriptor(obj, key));
-      });
-      return copy3;
-    }
-  }
-});
+This includes:
+\u2022 All learned domain knowledge
+\u2022 Custom instructions and prompts
+\u2022 Synaptic network connections
 
-// node_modules/graceful-fs/graceful-fs.js
-var require_graceful_fs = __commonJS({
-  "node_modules/graceful-fs/graceful-fs.js"(exports2, module2) {
-    var fs9 = require("fs");
-    var polyfills = require_polyfills();
-    var legacy = require_legacy_streams();
-    var clone = require_clone();
-    var util = require("util");
-    var gracefulQueue;
-    var previousSymbol;
-    if (typeof Symbol === "function" && typeof Symbol.for === "function") {
-      gracefulQueue = /* @__PURE__ */ Symbol.for("graceful-fs.queue");
-      previousSymbol = /* @__PURE__ */ Symbol.for("graceful-fs.previous");
-    } else {
-      gracefulQueue = "___graceful-fs.queue";
-      previousSymbol = "___graceful-fs.previous";
-    }
-    function noop() {
-    }
-    function publishQueue(context, queue2) {
-      Object.defineProperty(context, gracefulQueue, {
-        get: function() {
-          return queue2;
-        }
-      });
-    }
-    var debug = noop;
-    if (util.debuglog)
-      debug = util.debuglog("gfs4");
-    else if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || ""))
-      debug = function() {
-        var m = util.format.apply(util, arguments);
-        m = "GFS4: " + m.split(/\n/).join("\nGFS4: ");
-        console.error(m);
-      };
-    if (!fs9[gracefulQueue]) {
-      queue = global[gracefulQueue] || [];
-      publishQueue(fs9, queue);
-      fs9.close = (function(fs$close) {
-        function close(fd, cb) {
-          return fs$close.call(fs9, fd, function(err) {
-            if (!err) {
-              resetQueue();
-            }
-            if (typeof cb === "function")
-              cb.apply(this, arguments);
-          });
-        }
-        Object.defineProperty(close, previousSymbol, {
-          value: fs$close
-        });
-        return close;
-      })(fs9.close);
-      fs9.closeSync = (function(fs$closeSync) {
-        function closeSync(fd) {
-          fs$closeSync.apply(fs9, arguments);
-          resetQueue();
-        }
-        Object.defineProperty(closeSync, previousSymbol, {
-          value: fs$closeSync
-        });
-        return closeSync;
-      })(fs9.closeSync);
-      if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || "")) {
-        process.on("exit", function() {
-          debug(fs9[gracefulQueue]);
-          require("assert").equal(fs9[gracefulQueue].length, 0);
-        });
-      }
-    }
-    var queue;
-    if (!global[gracefulQueue]) {
-      publishQueue(global, fs9[gracefulQueue]);
-    }
-    module2.exports = patch(clone(fs9));
-    if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH && !fs9.__patched) {
-      module2.exports = patch(fs9);
-      fs9.__patched = true;
-    }
-    function patch(fs10) {
-      polyfills(fs10);
-      fs10.gracefulify = patch;
-      fs10.createReadStream = createReadStream;
-      fs10.createWriteStream = createWriteStream;
-      var fs$readFile = fs10.readFile;
-      fs10.readFile = readFile9;
-      function readFile9(path10, options, cb) {
-        if (typeof options === "function")
-          cb = options, options = null;
-        return go$readFile(path10, options, cb);
-        function go$readFile(path11, options2, cb2, startTime) {
-          return fs$readFile(path11, options2, function(err) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$readFile, [path11, options2, cb2], err, startTime || Date.now(), Date.now()]);
-            else {
-              if (typeof cb2 === "function")
-                cb2.apply(this, arguments);
-            }
-          });
-        }
-      }
-      var fs$writeFile = fs10.writeFile;
-      fs10.writeFile = writeFile8;
-      function writeFile8(path10, data, options, cb) {
-        if (typeof options === "function")
-          cb = options, options = null;
-        return go$writeFile(path10, data, options, cb);
-        function go$writeFile(path11, data2, options2, cb2, startTime) {
-          return fs$writeFile(path11, data2, options2, function(err) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$writeFile, [path11, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
-            else {
-              if (typeof cb2 === "function")
-                cb2.apply(this, arguments);
-            }
-          });
-        }
-      }
-      var fs$appendFile = fs10.appendFile;
-      if (fs$appendFile)
-        fs10.appendFile = appendFile;
-      function appendFile(path10, data, options, cb) {
-        if (typeof options === "function")
-          cb = options, options = null;
-        return go$appendFile(path10, data, options, cb);
-        function go$appendFile(path11, data2, options2, cb2, startTime) {
-          return fs$appendFile(path11, data2, options2, function(err) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$appendFile, [path11, data2, options2, cb2], err, startTime || Date.now(), Date.now()]);
-            else {
-              if (typeof cb2 === "function")
-                cb2.apply(this, arguments);
-            }
-          });
-        }
-      }
-      var fs$copyFile = fs10.copyFile;
-      if (fs$copyFile)
-        fs10.copyFile = copyFile;
-      function copyFile(src, dest, flags, cb) {
-        if (typeof flags === "function") {
-          cb = flags;
-          flags = 0;
-        }
-        return go$copyFile(src, dest, flags, cb);
-        function go$copyFile(src2, dest2, flags2, cb2, startTime) {
-          return fs$copyFile(src2, dest2, flags2, function(err) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$copyFile, [src2, dest2, flags2, cb2], err, startTime || Date.now(), Date.now()]);
-            else {
-              if (typeof cb2 === "function")
-                cb2.apply(this, arguments);
-            }
-          });
-        }
-      }
-      var fs$readdir = fs10.readdir;
-      fs10.readdir = readdir4;
-      var noReaddirOptionVersions = /^v[0-5]\./;
-      function readdir4(path10, options, cb) {
-        if (typeof options === "function")
-          cb = options, options = null;
-        var go$readdir = noReaddirOptionVersions.test(process.version) ? function go$readdir2(path11, options2, cb2, startTime) {
-          return fs$readdir(path11, fs$readdirCallback(
-            path11,
-            options2,
-            cb2,
-            startTime
-          ));
-        } : function go$readdir2(path11, options2, cb2, startTime) {
-          return fs$readdir(path11, options2, fs$readdirCallback(
-            path11,
-            options2,
-            cb2,
-            startTime
-          ));
-        };
-        return go$readdir(path10, options, cb);
-        function fs$readdirCallback(path11, options2, cb2, startTime) {
-          return function(err, files) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([
-                go$readdir,
-                [path11, options2, cb2],
-                err,
-                startTime || Date.now(),
-                Date.now()
-              ]);
-            else {
-              if (files && files.sort)
-                files.sort();
-              if (typeof cb2 === "function")
-                cb2.call(this, err, files);
-            }
-          };
-        }
-      }
-      if (process.version.substr(0, 4) === "v0.8") {
-        var legStreams = legacy(fs10);
-        ReadStream = legStreams.ReadStream;
-        WriteStream = legStreams.WriteStream;
-      }
-      var fs$ReadStream = fs10.ReadStream;
-      if (fs$ReadStream) {
-        ReadStream.prototype = Object.create(fs$ReadStream.prototype);
-        ReadStream.prototype.open = ReadStream$open;
-      }
-      var fs$WriteStream = fs10.WriteStream;
-      if (fs$WriteStream) {
-        WriteStream.prototype = Object.create(fs$WriteStream.prototype);
-        WriteStream.prototype.open = WriteStream$open;
-      }
-      Object.defineProperty(fs10, "ReadStream", {
-        get: function() {
-          return ReadStream;
-        },
-        set: function(val) {
-          ReadStream = val;
-        },
-        enumerable: true,
-        configurable: true
-      });
-      Object.defineProperty(fs10, "WriteStream", {
-        get: function() {
-          return WriteStream;
-        },
-        set: function(val) {
-          WriteStream = val;
-        },
-        enumerable: true,
-        configurable: true
-      });
-      var FileReadStream = ReadStream;
-      Object.defineProperty(fs10, "FileReadStream", {
-        get: function() {
-          return FileReadStream;
-        },
-        set: function(val) {
-          FileReadStream = val;
-        },
-        enumerable: true,
-        configurable: true
-      });
-      var FileWriteStream = WriteStream;
-      Object.defineProperty(fs10, "FileWriteStream", {
-        get: function() {
-          return FileWriteStream;
-        },
-        set: function(val) {
-          FileWriteStream = val;
-        },
-        enumerable: true,
-        configurable: true
-      });
-      function ReadStream(path10, options) {
-        if (this instanceof ReadStream)
-          return fs$ReadStream.apply(this, arguments), this;
-        else
-          return ReadStream.apply(Object.create(ReadStream.prototype), arguments);
-      }
-      function ReadStream$open() {
-        var that = this;
-        open(that.path, that.flags, that.mode, function(err, fd) {
-          if (err) {
-            if (that.autoClose)
-              that.destroy();
-            that.emit("error", err);
-          } else {
-            that.fd = fd;
-            that.emit("open", fd);
-            that.read();
-          }
-        });
-      }
-      function WriteStream(path10, options) {
-        if (this instanceof WriteStream)
-          return fs$WriteStream.apply(this, arguments), this;
-        else
-          return WriteStream.apply(Object.create(WriteStream.prototype), arguments);
-      }
-      function WriteStream$open() {
-        var that = this;
-        open(that.path, that.flags, that.mode, function(err, fd) {
-          if (err) {
-            that.destroy();
-            that.emit("error", err);
-          } else {
-            that.fd = fd;
-            that.emit("open", fd);
-          }
-        });
-      }
-      function createReadStream(path10, options) {
-        return new fs10.ReadStream(path10, options);
-      }
-      function createWriteStream(path10, options) {
-        return new fs10.WriteStream(path10, options);
-      }
-      var fs$open = fs10.open;
-      fs10.open = open;
-      function open(path10, flags, mode, cb) {
-        if (typeof mode === "function")
-          cb = mode, mode = null;
-        return go$open(path10, flags, mode, cb);
-        function go$open(path11, flags2, mode2, cb2, startTime) {
-          return fs$open(path11, flags2, mode2, function(err, fd) {
-            if (err && (err.code === "EMFILE" || err.code === "ENFILE"))
-              enqueue([go$open, [path11, flags2, mode2, cb2], err, startTime || Date.now(), Date.now()]);
-            else {
-              if (typeof cb2 === "function")
-                cb2.apply(this, arguments);
-            }
-          });
-        }
-      }
-      return fs10;
-    }
-    function enqueue(elem) {
-      debug("ENQUEUE", elem[0].name, elem[1]);
-      fs9[gracefulQueue].push(elem);
-      retry();
-    }
-    var retryTimer;
-    function resetQueue() {
-      var now = Date.now();
-      for (var i = 0; i < fs9[gracefulQueue].length; ++i) {
-        if (fs9[gracefulQueue][i].length > 2) {
-          fs9[gracefulQueue][i][3] = now;
-          fs9[gracefulQueue][i][4] = now;
-        }
-      }
-      retry();
-    }
-    function retry() {
-      clearTimeout(retryTimer);
-      retryTimer = void 0;
-      if (fs9[gracefulQueue].length === 0)
-        return;
-      var elem = fs9[gracefulQueue].shift();
-      var fn = elem[0];
-      var args = elem[1];
-      var err = elem[2];
-      var startTime = elem[3];
-      var lastTime = elem[4];
-      if (startTime === void 0) {
-        debug("RETRY", fn.name, args);
-        fn.apply(null, args);
-      } else if (Date.now() - startTime >= 6e4) {
-        debug("TIMEOUT", fn.name, args);
-        var cb = args.pop();
-        if (typeof cb === "function")
-          cb.call(null, err);
-      } else {
-        var sinceAttempt = Date.now() - lastTime;
-        var sinceStart = Math.max(lastTime - startTime, 1);
-        var desiredDelay = Math.min(sinceStart * 1.2, 100);
-        if (sinceAttempt >= desiredDelay) {
-          debug("RETRY", fn.name, args);
-          fn.apply(null, args.concat([startTime]));
-        } else {
-          fs9[gracefulQueue].push(elem);
-        }
-      }
-      if (retryTimer === void 0) {
-        retryTimer = setTimeout(retry, 0);
-      }
-    }
-  }
-});
+Consider using "Alex: Upgrade" instead to preserve your knowledge.`,{modal:!0},"Yes, Delete Everything","Upgrade Instead","Cancel");if(o==="Upgrade Instead"){await ee.commands.executeCommand("alex.upgrade");return}if(o!=="Yes, Delete Everything")return;let i=[E.join(n,".github","copilot-instructions.md"),E.join(n,".github","instructions"),E.join(n,".github","prompts"),E.join(n,".github","episodic"),E.join(n,".github","domain-knowledge"),E.join(n,".github","config"),E.join(n,".alex-manifest.json")];try{await ee.window.withProgress({location:ee.ProgressLocation.Notification,title:"Resetting Alex Architecture...",cancellable:!1},async a=>{a.report({message:"Cleaning up existing files..."});for(let s of i)await z.remove(s)}),await na(e,n,!0)}catch(a){ee.window.showErrorMessage(`Failed to reset Alex: ${a.message}`)}}async function na(e,t,n){let o=e.extensionPath,i=E.join(o,".github","copilot-instructions.md");if(!await z.pathExists(i)){ee.window.showErrorMessage(`Extension installation appears corrupted - missing core files.
 
-// node_modules/fs-extra/lib/fs/index.js
-var require_fs = __commonJS({
-  "node_modules/fs-extra/lib/fs/index.js"(exports2) {
-    "use strict";
-    var u = require_universalify().fromCallback;
-    var fs9 = require_graceful_fs();
-    var api = [
-      "access",
-      "appendFile",
-      "chmod",
-      "chown",
-      "close",
-      "copyFile",
-      "cp",
-      "fchmod",
-      "fchown",
-      "fdatasync",
-      "fstat",
-      "fsync",
-      "ftruncate",
-      "futimes",
-      "glob",
-      "lchmod",
-      "lchown",
-      "lutimes",
-      "link",
-      "lstat",
-      "mkdir",
-      "mkdtemp",
-      "open",
-      "opendir",
-      "readdir",
-      "readFile",
-      "readlink",
-      "realpath",
-      "rename",
-      "rm",
-      "rmdir",
-      "stat",
-      "statfs",
-      "symlink",
-      "truncate",
-      "unlink",
-      "utimes",
-      "writeFile"
-    ].filter((key) => {
-      return typeof fs9[key] === "function";
-    });
-    Object.assign(exports2, fs9);
-    api.forEach((method) => {
-      exports2[method] = u(fs9[method]);
-    });
-    exports2.exists = function(filename, callback) {
-      if (typeof callback === "function") {
-        return fs9.exists(filename, callback);
-      }
-      return new Promise((resolve) => {
-        return fs9.exists(filename, resolve);
-      });
-    };
-    exports2.read = function(fd, buffer, offset, length, position, callback) {
-      if (typeof callback === "function") {
-        return fs9.read(fd, buffer, offset, length, position, callback);
-      }
-      return new Promise((resolve, reject) => {
-        fs9.read(fd, buffer, offset, length, position, (err, bytesRead, buffer2) => {
-          if (err) return reject(err);
-          resolve({ bytesRead, buffer: buffer2 });
-        });
-      });
-    };
-    exports2.write = function(fd, buffer, ...args) {
-      if (typeof args[args.length - 1] === "function") {
-        return fs9.write(fd, buffer, ...args);
-      }
-      return new Promise((resolve, reject) => {
-        fs9.write(fd, buffer, ...args, (err, bytesWritten, buffer2) => {
-          if (err) return reject(err);
-          resolve({ bytesWritten, buffer: buffer2 });
-        });
-      });
-    };
-    exports2.readv = function(fd, buffers, ...args) {
-      if (typeof args[args.length - 1] === "function") {
-        return fs9.readv(fd, buffers, ...args);
-      }
-      return new Promise((resolve, reject) => {
-        fs9.readv(fd, buffers, ...args, (err, bytesRead, buffers2) => {
-          if (err) return reject(err);
-          resolve({ bytesRead, buffers: buffers2 });
-        });
-      });
-    };
-    exports2.writev = function(fd, buffers, ...args) {
-      if (typeof args[args.length - 1] === "function") {
-        return fs9.writev(fd, buffers, ...args);
-      }
-      return new Promise((resolve, reject) => {
-        fs9.writev(fd, buffers, ...args, (err, bytesWritten, buffers2) => {
-          if (err) return reject(err);
-          resolve({ bytesWritten, buffers: buffers2 });
-        });
-      });
-    };
-    if (typeof fs9.realpath.native === "function") {
-      exports2.realpath.native = u(fs9.realpath.native);
-    } else {
-      process.emitWarning(
-        "fs.realpath.native is not a function. Is fs being monkey-patched?",
-        "Warning",
-        "fs-extra-WARN0003"
-      );
-    }
-  }
-});
+Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.`);return}let a=[{src:E.join(o,".github","copilot-instructions.md"),dest:E.join(t,".github","copilot-instructions.md")},{src:E.join(o,".github","instructions"),dest:E.join(t,".github","instructions")},{src:E.join(o,".github","prompts"),dest:E.join(t,".github","prompts")},{src:E.join(o,".github","episodic"),dest:E.join(t,".github","episodic")},{src:E.join(o,".github","domain-knowledge"),dest:E.join(t,".github","domain-knowledge")},{src:E.join(o,".github","config"),dest:E.join(t,".github","config")},{src:E.join(o,".github","agents"),dest:E.join(t,".github","agents")}];try{let s=E.join(t,".github");await z.ensureDir(s);let r=E.join(s,".write-test");try{await z.writeFile(r,"test"),await z.remove(r)}catch(u){throw new Error(`Cannot write to workspace - check folder permissions: ${u.message}`)}await ee.window.withProgress({location:ee.ProgressLocation.Notification,title:"Initializing Alex Cognitive Architecture...",cancellable:!1},async u=>{for(let l of a)u.report({message:`Copying ${E.basename(l.dest)}...`}),await z.pathExists(l.src)?await z.copy(l.src,l.dest,{overwrite:n}):console.warn(`Source not found: ${l.src}`);u.report({message:"Creating manifest..."}),await lc(e,t)});let c=await ee.window.showInformationMessage(`\u2705 Alex Cognitive Architecture initialized!
 
-// node_modules/fs-extra/lib/mkdirs/utils.js
-var require_utils = __commonJS({
-  "node_modules/fs-extra/lib/mkdirs/utils.js"(exports2, module2) {
-    "use strict";
-    var path10 = require("path");
-    module2.exports.checkPath = function checkPath(pth) {
-      if (process.platform === "win32") {
-        const pathHasInvalidWinCharacters = /[<>:"|?*]/.test(pth.replace(path10.parse(pth).root, ""));
-        if (pathHasInvalidWinCharacters) {
-          const error = new Error(`Path contains invalid characters: ${pth}`);
-          error.code = "EINVAL";
-          throw error;
-        }
-      }
-    };
-  }
-});
+Next steps:
+1. Open any file and start chatting with your AI assistant
+2. Run "Alex: Dream" periodically to maintain neural health
+3. Ask Alex to learn new domains as needed`,"Open Main Brain File","Run Dream Protocol","Close");if(c==="Open Main Brain File"){let u=E.join(t,".github","copilot-instructions.md"),l=await ee.workspace.openTextDocument(u);await ee.window.showTextDocument(l)}else c==="Run Dream Protocol"&&await ee.commands.executeCommand("alex.dream")}catch(s){ee.window.showErrorMessage(`Failed to initialize Alex: ${s.message}
 
-// node_modules/fs-extra/lib/mkdirs/make-dir.js
-var require_make_dir = __commonJS({
-  "node_modules/fs-extra/lib/mkdirs/make-dir.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var { checkPath } = require_utils();
-    var getMode = (options) => {
-      const defaults = { mode: 511 };
-      if (typeof options === "number") return options;
-      return { ...defaults, ...options }.mode;
-    };
-    module2.exports.makeDir = async (dir, options) => {
-      checkPath(dir);
-      return fs9.mkdir(dir, {
-        mode: getMode(options),
-        recursive: true
-      });
-    };
-    module2.exports.makeDirSync = (dir, options) => {
-      checkPath(dir);
-      return fs9.mkdirSync(dir, {
-        mode: getMode(options),
-        recursive: true
-      });
-    };
-  }
-});
+Try closing VS Code, deleting the .github folder, and running initialize again.`)}}function cc(e){return E.join(e,".alex-manifest.json")}async function lc(e,t){let n=e.extensionPath,o=cc(t);await z.pathExists(o)&&(await z.remove(o),console.log("Removed legacy manifest from root"));let i="0.0.0";try{i=(await z.readJson(E.join(n,"package.json"))).version||"0.0.0"}catch{console.warn("Could not read extension version")}let a={version:i,installedAt:new Date().toISOString(),files:{}},s=[{dir:E.join(t,".github","instructions"),prefix:".github/instructions"},{dir:E.join(t,".github","prompts"),prefix:".github/prompts"},{dir:E.join(t,".github","domain-knowledge"),prefix:".github/domain-knowledge"},{dir:E.join(t,".github","agents"),prefix:".github/agents"}],r=E.join(t,".github","copilot-instructions.md");if(await z.pathExists(r)){let u=await z.readFile(r,"utf8");a.files[".github/copilot-instructions.md"]={type:"system",originalChecksum:Zi(u)}}for(let{dir:u,prefix:l}of s)if(await z.pathExists(u)){let d=await z.readdir(u);for(let m of d)if(m.endsWith(".md")){let p=E.join(u,m),h=await z.readFile(p,"utf8");a.files[`${l}/${m}`]={type:"system",originalChecksum:Zi(h)}}}let c=rc(t);await z.ensureDir(E.dirname(c)),await z.writeJson(c,a,{spaces:2})}var ne=D(require("vscode")),ke=D(Fe()),we=D(require("path"));var oa={"enhanced-meditation-protocol.prompt.md":"unified-meditation-protocols.prompt.md","meditation-consolidation.prompt.md":"unified-meditation-protocols.prompt.md","dream-meditation-distinction.prompt.md":"unified-meditation-protocols.prompt.md","alex-finch-integration.prompt.md":"alex-identity-integration.instructions.md","self-identity-integration.prompt.md":"alex-identity-integration.instructions.md","character-driven-development.instructions.md":"alex-identity-integration.instructions.md","unified-consciousness.instructions.md":"alex-identity-integration.instructions.md","dream-protocol-integration.prompt.md":"dream-state-automation.instructions.md","dream-protocol-mastery-meditation.prompt.md":"dream-state-automation.instructions.md"};async function Gt(e,t){let n=t?.silent??!1,o=await Me(!0);if(!o.found){if(o.cancelled)return;n||ne.window.showErrorMessage(o.error||"No workspace folder open. Please open a project with Alex installed (File \u2192 Open Folder), then run Dream Protocol.");return}let i=o.rootPath,a=o.workspaceFolder,s,r;if(await ne.window.withProgress({location:ne.ProgressLocation.Notification,title:"Running Dream Protocol...",cancellable:!1},async c=>{c.report({message:"Scanning neural network..."});let u=[".github/copilot-instructions.md",".github/instructions/*.md",".github/prompts/*.md",".github/episodic/*.md",".github/domain-knowledge/*.md"],l=[];for(let P of u){let L=new ne.RelativePattern(a,P),W=await ne.workspace.findFiles(L);l=l.concat(W.map(X=>X.fsPath))}if(l=[...new Set(l)],l.length===0){n||await ne.window.showWarningMessage(`No Alex memory files found in this workspace.
 
-// node_modules/fs-extra/lib/mkdirs/index.js
-var require_mkdirs = __commonJS({
-  "node_modules/fs-extra/lib/mkdirs/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var { makeDir: _makeDir, makeDirSync } = require_make_dir();
-    var makeDir = u(_makeDir);
-    module2.exports = {
-      mkdirs: makeDir,
-      mkdirsSync: makeDirSync,
-      // alias
-      mkdirp: makeDir,
-      mkdirpSync: makeDirSync,
-      ensureDir: makeDir,
-      ensureDirSync: makeDirSync
-    };
-  }
-});
+Would you like to initialize Alex Cognitive Architecture now?`,"Initialize Alex","Cancel")==="Initialize Alex"&&await ne.commands.executeCommand("alex.initialize"),s={success:!1,totalFiles:0,totalSynapses:0,brokenCount:0,repairedCount:0};return}let d=[],m=new Set(l.map(P=>we.normalize(P).toLowerCase())),p=/\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;for(let P of l){let L;try{L=await ke.readFile(P,"utf-8")}catch(te){console.error(`Failed to read file ${P}:`,te);continue}let W=L.split(`
+`),X=!1;for(let te=0;te<W.length;te++){let b=W[te];if(b.trim().startsWith("```")){X=!X;continue}if(X)continue;let C;for(;(C=p.exec(b))!==null;){let T=C[1].trim(),N=Array.from(m).some(_=>_.endsWith(we.normalize(T).toLowerCase()));if(!N){let _=we.join(i,T);(await ke.pathExists(_)||(await ne.workspace.findFiles(new ne.RelativePattern(a,`**/${T}`))).length>0)&&(N=!0)}if(!N){let _=we.dirname(P),O=we.join(_,T);await ke.pathExists(O)&&(N=!0)}["target-file.md","CHANGELOG.md"].includes(T)&&(N=!0),d.push({sourceFile:P,targetFile:T,strength:C[2].trim(),type:C[3]?.trim()||"association",direction:C[4]?.trim()||"unidirectional",condition:C[5]?.trim(),line:te+1,isValid:N})}}}let h=d.filter(P=>!P.isValid),y=new Set(d.map(P=>P.targetFile.toLowerCase())),w=[],k=[];for(let P of h){let L=we.basename(P.targetFile);if(oa[L]){let W=oa[L];try{let X=await ke.readFile(P.sourceFile,"utf-8"),te=P.targetFile.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),b=new RegExp(`\\[${te}\\]`,"g");if(b.test(X)){let C=X.replace(b,`[${W}]`);await ke.writeFile(P.sourceFile,C,"utf-8"),P.repaired=!0,P.newTarget=W,w.push(P)}else k.push(P)}catch(X){console.error(`Failed to repair synapse in ${P.sourceFile}:`,X),k.push(P)}}else k.push(P)}h=k;let $={timestamp:new Date().toISOString(),totalFiles:l.length,totalSynapses:d.length,brokenSynapses:h,repairedSynapses:w,orphanedFiles:[]},A=dc($);r=we.join(i,".github","episodic",`dream-report-${Date.now()}.md`),await ke.ensureDir(we.dirname(r)),await ke.writeFile(r,A),s={success:h.length===0,totalFiles:l.length,totalSynapses:d.length,brokenCount:h.length,repairedCount:w.length,reportPath:r}}),!n&&s&&r)if(s.brokenCount>0){if(await ne.window.showWarningMessage(`\u26A0\uFE0F Dream Protocol found ${s.brokenCount} broken synapse${s.brokenCount>1?"s":""}!
 
-// node_modules/fs-extra/lib/path-exists/index.js
-var require_path_exists = __commonJS({
-  "node_modules/fs-extra/lib/path-exists/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var fs9 = require_fs();
-    function pathExists9(path10) {
-      return fs9.access(path10).then(() => true).catch(() => false);
-    }
-    module2.exports = {
-      pathExists: u(pathExists9),
-      pathExistsSync: fs9.existsSync
-    };
-  }
-});
+${s.repairedCount>0?`\u2705 Auto-repaired: ${s.repairedCount}
+`:""}\u274C Need manual repair: ${s.brokenCount}
 
-// node_modules/fs-extra/lib/util/utimes.js
-var require_utimes = __commonJS({
-  "node_modules/fs-extra/lib/util/utimes.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var u = require_universalify().fromPromise;
-    async function utimesMillis(path10, atime, mtime) {
-      const fd = await fs9.open(path10, "r+");
-      let closeErr = null;
-      try {
-        await fs9.futimes(fd, atime, mtime);
-      } finally {
-        try {
-          await fs9.close(fd);
-        } catch (e) {
-          closeErr = e;
-        }
-      }
-      if (closeErr) {
-        throw closeErr;
-      }
-    }
-    function utimesMillisSync(path10, atime, mtime) {
-      const fd = fs9.openSync(path10, "r+");
-      fs9.futimesSync(fd, atime, mtime);
-      return fs9.closeSync(fd);
-    }
-    module2.exports = {
-      utimesMillis: u(utimesMillis),
-      utimesMillisSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/util/stat.js
-var require_stat = __commonJS({
-  "node_modules/fs-extra/lib/util/stat.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var path10 = require("path");
-    var u = require_universalify().fromPromise;
-    function getStats(src, dest, opts) {
-      const statFunc = opts.dereference ? (file) => fs9.stat(file, { bigint: true }) : (file) => fs9.lstat(file, { bigint: true });
-      return Promise.all([
-        statFunc(src),
-        statFunc(dest).catch((err) => {
-          if (err.code === "ENOENT") return null;
-          throw err;
-        })
-      ]).then(([srcStat, destStat]) => ({ srcStat, destStat }));
-    }
-    function getStatsSync(src, dest, opts) {
-      let destStat;
-      const statFunc = opts.dereference ? (file) => fs9.statSync(file, { bigint: true }) : (file) => fs9.lstatSync(file, { bigint: true });
-      const srcStat = statFunc(src);
-      try {
-        destStat = statFunc(dest);
-      } catch (err) {
-        if (err.code === "ENOENT") return { srcStat, destStat: null };
-        throw err;
-      }
-      return { srcStat, destStat };
-    }
-    async function checkPaths(src, dest, funcName, opts) {
-      const { srcStat, destStat } = await getStats(src, dest, opts);
-      if (destStat) {
-        if (areIdentical(srcStat, destStat)) {
-          const srcBaseName = path10.basename(src);
-          const destBaseName = path10.basename(dest);
-          if (funcName === "move" && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
-            return { srcStat, destStat, isChangingCase: true };
-          }
-          throw new Error("Source and destination must not be the same.");
-        }
-        if (srcStat.isDirectory() && !destStat.isDirectory()) {
-          throw new Error(`Cannot overwrite non-directory '${dest}' with directory '${src}'.`);
-        }
-        if (!srcStat.isDirectory() && destStat.isDirectory()) {
-          throw new Error(`Cannot overwrite directory '${dest}' with non-directory '${src}'.`);
-        }
-      }
-      if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
-        throw new Error(errMsg(src, dest, funcName));
-      }
-      return { srcStat, destStat };
-    }
-    function checkPathsSync(src, dest, funcName, opts) {
-      const { srcStat, destStat } = getStatsSync(src, dest, opts);
-      if (destStat) {
-        if (areIdentical(srcStat, destStat)) {
-          const srcBaseName = path10.basename(src);
-          const destBaseName = path10.basename(dest);
-          if (funcName === "move" && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
-            return { srcStat, destStat, isChangingCase: true };
-          }
-          throw new Error("Source and destination must not be the same.");
-        }
-        if (srcStat.isDirectory() && !destStat.isDirectory()) {
-          throw new Error(`Cannot overwrite non-directory '${dest}' with directory '${src}'.`);
-        }
-        if (!srcStat.isDirectory() && destStat.isDirectory()) {
-          throw new Error(`Cannot overwrite directory '${dest}' with non-directory '${src}'.`);
-        }
-      }
-      if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
-        throw new Error(errMsg(src, dest, funcName));
-      }
-      return { srcStat, destStat };
-    }
-    async function checkParentPaths(src, srcStat, dest, funcName) {
-      const srcParent = path10.resolve(path10.dirname(src));
-      const destParent = path10.resolve(path10.dirname(dest));
-      if (destParent === srcParent || destParent === path10.parse(destParent).root) return;
-      let destStat;
-      try {
-        destStat = await fs9.stat(destParent, { bigint: true });
-      } catch (err) {
-        if (err.code === "ENOENT") return;
-        throw err;
-      }
-      if (areIdentical(srcStat, destStat)) {
-        throw new Error(errMsg(src, dest, funcName));
-      }
-      return checkParentPaths(src, srcStat, destParent, funcName);
-    }
-    function checkParentPathsSync(src, srcStat, dest, funcName) {
-      const srcParent = path10.resolve(path10.dirname(src));
-      const destParent = path10.resolve(path10.dirname(dest));
-      if (destParent === srcParent || destParent === path10.parse(destParent).root) return;
-      let destStat;
-      try {
-        destStat = fs9.statSync(destParent, { bigint: true });
-      } catch (err) {
-        if (err.code === "ENOENT") return;
-        throw err;
-      }
-      if (areIdentical(srcStat, destStat)) {
-        throw new Error(errMsg(src, dest, funcName));
-      }
-      return checkParentPathsSync(src, srcStat, destParent, funcName);
-    }
-    function areIdentical(srcStat, destStat) {
-      return destStat.ino !== void 0 && destStat.dev !== void 0 && destStat.ino === srcStat.ino && destStat.dev === srcStat.dev;
-    }
-    function isSrcSubdir(src, dest) {
-      const srcArr = path10.resolve(src).split(path10.sep).filter((i) => i);
-      const destArr = path10.resolve(dest).split(path10.sep).filter((i) => i);
-      return srcArr.every((cur, i) => destArr[i] === cur);
-    }
-    function errMsg(src, dest, funcName) {
-      return `Cannot ${funcName} '${src}' to a subdirectory of itself, '${dest}'.`;
-    }
-    module2.exports = {
-      // checkPaths
-      checkPaths: u(checkPaths),
-      checkPathsSync,
-      // checkParent
-      checkParentPaths: u(checkParentPaths),
-      checkParentPathsSync,
-      // Misc
-      isSrcSubdir,
-      areIdentical
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/util/async.js
-var require_async = __commonJS({
-  "node_modules/fs-extra/lib/util/async.js"(exports2, module2) {
-    "use strict";
-    async function asyncIteratorConcurrentProcess(iterator, fn) {
-      const promises = [];
-      for await (const item of iterator) {
-        promises.push(
-          fn(item).then(
-            () => null,
-            (err) => err ?? new Error("unknown error")
-          )
-        );
-      }
-      await Promise.all(
-        promises.map(
-          (promise) => promise.then((possibleErr) => {
-            if (possibleErr !== null) throw possibleErr;
-          })
-        )
-      );
-    }
-    module2.exports = {
-      asyncIteratorConcurrentProcess
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/copy/copy.js
-var require_copy = __commonJS({
-  "node_modules/fs-extra/lib/copy/copy.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var path10 = require("path");
-    var { mkdirs } = require_mkdirs();
-    var { pathExists: pathExists9 } = require_path_exists();
-    var { utimesMillis } = require_utimes();
-    var stat3 = require_stat();
-    var { asyncIteratorConcurrentProcess } = require_async();
-    async function copy3(src, dest, opts = {}) {
-      if (typeof opts === "function") {
-        opts = { filter: opts };
-      }
-      opts.clobber = "clobber" in opts ? !!opts.clobber : true;
-      opts.overwrite = "overwrite" in opts ? !!opts.overwrite : opts.clobber;
-      if (opts.preserveTimestamps && process.arch === "ia32") {
-        process.emitWarning(
-          "Using the preserveTimestamps option in 32-bit node is not recommended;\n\n	see https://github.com/jprichardson/node-fs-extra/issues/269",
-          "Warning",
-          "fs-extra-WARN0001"
-        );
-      }
-      const { srcStat, destStat } = await stat3.checkPaths(src, dest, "copy", opts);
-      await stat3.checkParentPaths(src, srcStat, dest, "copy");
-      const include = await runFilter(src, dest, opts);
-      if (!include) return;
-      const destParent = path10.dirname(dest);
-      const dirExists = await pathExists9(destParent);
-      if (!dirExists) {
-        await mkdirs(destParent);
-      }
-      await getStatsAndPerformCopy(destStat, src, dest, opts);
-    }
-    async function runFilter(src, dest, opts) {
-      if (!opts.filter) return true;
-      return opts.filter(src, dest);
-    }
-    async function getStatsAndPerformCopy(destStat, src, dest, opts) {
-      const statFn = opts.dereference ? fs9.stat : fs9.lstat;
-      const srcStat = await statFn(src);
-      if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts);
-      if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts);
-      if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts);
-      if (srcStat.isSocket()) throw new Error(`Cannot copy a socket file: ${src}`);
-      if (srcStat.isFIFO()) throw new Error(`Cannot copy a FIFO pipe: ${src}`);
-      throw new Error(`Unknown file: ${src}`);
-    }
-    async function onFile(srcStat, destStat, src, dest, opts) {
-      if (!destStat) return copyFile(srcStat, src, dest, opts);
-      if (opts.overwrite) {
-        await fs9.unlink(dest);
-        return copyFile(srcStat, src, dest, opts);
-      }
-      if (opts.errorOnExist) {
-        throw new Error(`'${dest}' already exists`);
-      }
-    }
-    async function copyFile(srcStat, src, dest, opts) {
-      await fs9.copyFile(src, dest);
-      if (opts.preserveTimestamps) {
-        if (fileIsNotWritable(srcStat.mode)) {
-          await makeFileWritable(dest, srcStat.mode);
-        }
-        const updatedSrcStat = await fs9.stat(src);
-        await utimesMillis(dest, updatedSrcStat.atime, updatedSrcStat.mtime);
-      }
-      return fs9.chmod(dest, srcStat.mode);
-    }
-    function fileIsNotWritable(srcMode) {
-      return (srcMode & 128) === 0;
-    }
-    function makeFileWritable(dest, srcMode) {
-      return fs9.chmod(dest, srcMode | 128);
-    }
-    async function onDir(srcStat, destStat, src, dest, opts) {
-      if (!destStat) {
-        await fs9.mkdir(dest);
-      }
-      await asyncIteratorConcurrentProcess(await fs9.opendir(src), async (item) => {
-        const srcItem = path10.join(src, item.name);
-        const destItem = path10.join(dest, item.name);
-        const include = await runFilter(srcItem, destItem, opts);
-        if (include) {
-          const { destStat: destStat2 } = await stat3.checkPaths(srcItem, destItem, "copy", opts);
-          await getStatsAndPerformCopy(destStat2, srcItem, destItem, opts);
-        }
-      });
-      if (!destStat) {
-        await fs9.chmod(dest, srcStat.mode);
-      }
-    }
-    async function onLink(destStat, src, dest, opts) {
-      let resolvedSrc = await fs9.readlink(src);
-      if (opts.dereference) {
-        resolvedSrc = path10.resolve(process.cwd(), resolvedSrc);
-      }
-      if (!destStat) {
-        return fs9.symlink(resolvedSrc, dest);
-      }
-      let resolvedDest = null;
-      try {
-        resolvedDest = await fs9.readlink(dest);
-      } catch (e) {
-        if (e.code === "EINVAL" || e.code === "UNKNOWN") return fs9.symlink(resolvedSrc, dest);
-        throw e;
-      }
-      if (opts.dereference) {
-        resolvedDest = path10.resolve(process.cwd(), resolvedDest);
-      }
-      if (resolvedSrc !== resolvedDest) {
-        if (stat3.isSrcSubdir(resolvedSrc, resolvedDest)) {
-          throw new Error(`Cannot copy '${resolvedSrc}' to a subdirectory of itself, '${resolvedDest}'.`);
-        }
-        if (stat3.isSrcSubdir(resolvedDest, resolvedSrc)) {
-          throw new Error(`Cannot overwrite '${resolvedDest}' with '${resolvedSrc}'.`);
-        }
-      }
-      await fs9.unlink(dest);
-      return fs9.symlink(resolvedSrc, dest);
-    }
-    module2.exports = copy3;
-  }
-});
-
-// node_modules/fs-extra/lib/copy/copy-sync.js
-var require_copy_sync = __commonJS({
-  "node_modules/fs-extra/lib/copy/copy-sync.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_graceful_fs();
-    var path10 = require("path");
-    var mkdirsSync = require_mkdirs().mkdirsSync;
-    var utimesMillisSync = require_utimes().utimesMillisSync;
-    var stat3 = require_stat();
-    function copySync(src, dest, opts) {
-      if (typeof opts === "function") {
-        opts = { filter: opts };
-      }
-      opts = opts || {};
-      opts.clobber = "clobber" in opts ? !!opts.clobber : true;
-      opts.overwrite = "overwrite" in opts ? !!opts.overwrite : opts.clobber;
-      if (opts.preserveTimestamps && process.arch === "ia32") {
-        process.emitWarning(
-          "Using the preserveTimestamps option in 32-bit node is not recommended;\n\n	see https://github.com/jprichardson/node-fs-extra/issues/269",
-          "Warning",
-          "fs-extra-WARN0002"
-        );
-      }
-      const { srcStat, destStat } = stat3.checkPathsSync(src, dest, "copy", opts);
-      stat3.checkParentPathsSync(src, srcStat, dest, "copy");
-      if (opts.filter && !opts.filter(src, dest)) return;
-      const destParent = path10.dirname(dest);
-      if (!fs9.existsSync(destParent)) mkdirsSync(destParent);
-      return getStats(destStat, src, dest, opts);
-    }
-    function getStats(destStat, src, dest, opts) {
-      const statSync = opts.dereference ? fs9.statSync : fs9.lstatSync;
-      const srcStat = statSync(src);
-      if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts);
-      else if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts);
-      else if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts);
-      else if (srcStat.isSocket()) throw new Error(`Cannot copy a socket file: ${src}`);
-      else if (srcStat.isFIFO()) throw new Error(`Cannot copy a FIFO pipe: ${src}`);
-      throw new Error(`Unknown file: ${src}`);
-    }
-    function onFile(srcStat, destStat, src, dest, opts) {
-      if (!destStat) return copyFile(srcStat, src, dest, opts);
-      return mayCopyFile(srcStat, src, dest, opts);
-    }
-    function mayCopyFile(srcStat, src, dest, opts) {
-      if (opts.overwrite) {
-        fs9.unlinkSync(dest);
-        return copyFile(srcStat, src, dest, opts);
-      } else if (opts.errorOnExist) {
-        throw new Error(`'${dest}' already exists`);
-      }
-    }
-    function copyFile(srcStat, src, dest, opts) {
-      fs9.copyFileSync(src, dest);
-      if (opts.preserveTimestamps) handleTimestamps(srcStat.mode, src, dest);
-      return setDestMode(dest, srcStat.mode);
-    }
-    function handleTimestamps(srcMode, src, dest) {
-      if (fileIsNotWritable(srcMode)) makeFileWritable(dest, srcMode);
-      return setDestTimestamps(src, dest);
-    }
-    function fileIsNotWritable(srcMode) {
-      return (srcMode & 128) === 0;
-    }
-    function makeFileWritable(dest, srcMode) {
-      return setDestMode(dest, srcMode | 128);
-    }
-    function setDestMode(dest, srcMode) {
-      return fs9.chmodSync(dest, srcMode);
-    }
-    function setDestTimestamps(src, dest) {
-      const updatedSrcStat = fs9.statSync(src);
-      return utimesMillisSync(dest, updatedSrcStat.atime, updatedSrcStat.mtime);
-    }
-    function onDir(srcStat, destStat, src, dest, opts) {
-      if (!destStat) return mkDirAndCopy(srcStat.mode, src, dest, opts);
-      return copyDir(src, dest, opts);
-    }
-    function mkDirAndCopy(srcMode, src, dest, opts) {
-      fs9.mkdirSync(dest);
-      copyDir(src, dest, opts);
-      return setDestMode(dest, srcMode);
-    }
-    function copyDir(src, dest, opts) {
-      const dir = fs9.opendirSync(src);
-      try {
-        let dirent;
-        while ((dirent = dir.readSync()) !== null) {
-          copyDirItem(dirent.name, src, dest, opts);
-        }
-      } finally {
-        dir.closeSync();
-      }
-    }
-    function copyDirItem(item, src, dest, opts) {
-      const srcItem = path10.join(src, item);
-      const destItem = path10.join(dest, item);
-      if (opts.filter && !opts.filter(srcItem, destItem)) return;
-      const { destStat } = stat3.checkPathsSync(srcItem, destItem, "copy", opts);
-      return getStats(destStat, srcItem, destItem, opts);
-    }
-    function onLink(destStat, src, dest, opts) {
-      let resolvedSrc = fs9.readlinkSync(src);
-      if (opts.dereference) {
-        resolvedSrc = path10.resolve(process.cwd(), resolvedSrc);
-      }
-      if (!destStat) {
-        return fs9.symlinkSync(resolvedSrc, dest);
-      } else {
-        let resolvedDest;
-        try {
-          resolvedDest = fs9.readlinkSync(dest);
-        } catch (err) {
-          if (err.code === "EINVAL" || err.code === "UNKNOWN") return fs9.symlinkSync(resolvedSrc, dest);
-          throw err;
-        }
-        if (opts.dereference) {
-          resolvedDest = path10.resolve(process.cwd(), resolvedDest);
-        }
-        if (resolvedSrc !== resolvedDest) {
-          if (stat3.isSrcSubdir(resolvedSrc, resolvedDest)) {
-            throw new Error(`Cannot copy '${resolvedSrc}' to a subdirectory of itself, '${resolvedDest}'.`);
-          }
-          if (stat3.isSrcSubdir(resolvedDest, resolvedSrc)) {
-            throw new Error(`Cannot overwrite '${resolvedDest}' with '${resolvedSrc}'.`);
-          }
-        }
-        return copyLink(resolvedSrc, dest);
-      }
-    }
-    function copyLink(resolvedSrc, dest) {
-      fs9.unlinkSync(dest);
-      return fs9.symlinkSync(resolvedSrc, dest);
-    }
-    module2.exports = copySync;
-  }
-});
-
-// node_modules/fs-extra/lib/copy/index.js
-var require_copy2 = __commonJS({
-  "node_modules/fs-extra/lib/copy/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    module2.exports = {
-      copy: u(require_copy()),
-      copySync: require_copy_sync()
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/remove/index.js
-var require_remove = __commonJS({
-  "node_modules/fs-extra/lib/remove/index.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_graceful_fs();
-    var u = require_universalify().fromCallback;
-    function remove3(path10, callback) {
-      fs9.rm(path10, { recursive: true, force: true }, callback);
-    }
-    function removeSync(path10) {
-      fs9.rmSync(path10, { recursive: true, force: true });
-    }
-    module2.exports = {
-      remove: u(remove3),
-      removeSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/empty/index.js
-var require_empty = __commonJS({
-  "node_modules/fs-extra/lib/empty/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var fs9 = require_fs();
-    var path10 = require("path");
-    var mkdir = require_mkdirs();
-    var remove3 = require_remove();
-    var emptyDir = u(async function emptyDir2(dir) {
-      let items;
-      try {
-        items = await fs9.readdir(dir);
-      } catch {
-        return mkdir.mkdirs(dir);
-      }
-      return Promise.all(items.map((item) => remove3.remove(path10.join(dir, item))));
-    });
-    function emptyDirSync(dir) {
-      let items;
-      try {
-        items = fs9.readdirSync(dir);
-      } catch {
-        return mkdir.mkdirsSync(dir);
-      }
-      items.forEach((item) => {
-        item = path10.join(dir, item);
-        remove3.removeSync(item);
-      });
-    }
-    module2.exports = {
-      emptyDirSync,
-      emptydirSync: emptyDirSync,
-      emptyDir,
-      emptydir: emptyDir
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/file.js
-var require_file = __commonJS({
-  "node_modules/fs-extra/lib/ensure/file.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var path10 = require("path");
-    var fs9 = require_fs();
-    var mkdir = require_mkdirs();
-    async function createFile(file) {
-      let stats;
-      try {
-        stats = await fs9.stat(file);
-      } catch {
-      }
-      if (stats && stats.isFile()) return;
-      const dir = path10.dirname(file);
-      let dirStats = null;
-      try {
-        dirStats = await fs9.stat(dir);
-      } catch (err) {
-        if (err.code === "ENOENT") {
-          await mkdir.mkdirs(dir);
-          await fs9.writeFile(file, "");
-          return;
-        } else {
-          throw err;
-        }
-      }
-      if (dirStats.isDirectory()) {
-        await fs9.writeFile(file, "");
-      } else {
-        await fs9.readdir(dir);
-      }
-    }
-    function createFileSync(file) {
-      let stats;
-      try {
-        stats = fs9.statSync(file);
-      } catch {
-      }
-      if (stats && stats.isFile()) return;
-      const dir = path10.dirname(file);
-      try {
-        if (!fs9.statSync(dir).isDirectory()) {
-          fs9.readdirSync(dir);
-        }
-      } catch (err) {
-        if (err && err.code === "ENOENT") mkdir.mkdirsSync(dir);
-        else throw err;
-      }
-      fs9.writeFileSync(file, "");
-    }
-    module2.exports = {
-      createFile: u(createFile),
-      createFileSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/link.js
-var require_link = __commonJS({
-  "node_modules/fs-extra/lib/ensure/link.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var path10 = require("path");
-    var fs9 = require_fs();
-    var mkdir = require_mkdirs();
-    var { pathExists: pathExists9 } = require_path_exists();
-    var { areIdentical } = require_stat();
-    async function createLink(srcpath, dstpath) {
-      let dstStat;
-      try {
-        dstStat = await fs9.lstat(dstpath);
-      } catch {
-      }
-      let srcStat;
-      try {
-        srcStat = await fs9.lstat(srcpath);
-      } catch (err) {
-        err.message = err.message.replace("lstat", "ensureLink");
-        throw err;
-      }
-      if (dstStat && areIdentical(srcStat, dstStat)) return;
-      const dir = path10.dirname(dstpath);
-      const dirExists = await pathExists9(dir);
-      if (!dirExists) {
-        await mkdir.mkdirs(dir);
-      }
-      await fs9.link(srcpath, dstpath);
-    }
-    function createLinkSync(srcpath, dstpath) {
-      let dstStat;
-      try {
-        dstStat = fs9.lstatSync(dstpath);
-      } catch {
-      }
-      try {
-        const srcStat = fs9.lstatSync(srcpath);
-        if (dstStat && areIdentical(srcStat, dstStat)) return;
-      } catch (err) {
-        err.message = err.message.replace("lstat", "ensureLink");
-        throw err;
-      }
-      const dir = path10.dirname(dstpath);
-      const dirExists = fs9.existsSync(dir);
-      if (dirExists) return fs9.linkSync(srcpath, dstpath);
-      mkdir.mkdirsSync(dir);
-      return fs9.linkSync(srcpath, dstpath);
-    }
-    module2.exports = {
-      createLink: u(createLink),
-      createLinkSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/symlink-paths.js
-var require_symlink_paths = __commonJS({
-  "node_modules/fs-extra/lib/ensure/symlink-paths.js"(exports2, module2) {
-    "use strict";
-    var path10 = require("path");
-    var fs9 = require_fs();
-    var { pathExists: pathExists9 } = require_path_exists();
-    var u = require_universalify().fromPromise;
-    async function symlinkPaths(srcpath, dstpath) {
-      if (path10.isAbsolute(srcpath)) {
-        try {
-          await fs9.lstat(srcpath);
-        } catch (err) {
-          err.message = err.message.replace("lstat", "ensureSymlink");
-          throw err;
-        }
-        return {
-          toCwd: srcpath,
-          toDst: srcpath
-        };
-      }
-      const dstdir = path10.dirname(dstpath);
-      const relativeToDst = path10.join(dstdir, srcpath);
-      const exists = await pathExists9(relativeToDst);
-      if (exists) {
-        return {
-          toCwd: relativeToDst,
-          toDst: srcpath
-        };
-      }
-      try {
-        await fs9.lstat(srcpath);
-      } catch (err) {
-        err.message = err.message.replace("lstat", "ensureSymlink");
-        throw err;
-      }
-      return {
-        toCwd: srcpath,
-        toDst: path10.relative(dstdir, srcpath)
-      };
-    }
-    function symlinkPathsSync(srcpath, dstpath) {
-      if (path10.isAbsolute(srcpath)) {
-        const exists2 = fs9.existsSync(srcpath);
-        if (!exists2) throw new Error("absolute srcpath does not exist");
-        return {
-          toCwd: srcpath,
-          toDst: srcpath
-        };
-      }
-      const dstdir = path10.dirname(dstpath);
-      const relativeToDst = path10.join(dstdir, srcpath);
-      const exists = fs9.existsSync(relativeToDst);
-      if (exists) {
-        return {
-          toCwd: relativeToDst,
-          toDst: srcpath
-        };
-      }
-      const srcExists = fs9.existsSync(srcpath);
-      if (!srcExists) throw new Error("relative srcpath does not exist");
-      return {
-        toCwd: srcpath,
-        toDst: path10.relative(dstdir, srcpath)
-      };
-    }
-    module2.exports = {
-      symlinkPaths: u(symlinkPaths),
-      symlinkPathsSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/symlink-type.js
-var require_symlink_type = __commonJS({
-  "node_modules/fs-extra/lib/ensure/symlink-type.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var u = require_universalify().fromPromise;
-    async function symlinkType(srcpath, type) {
-      if (type) return type;
-      let stats;
-      try {
-        stats = await fs9.lstat(srcpath);
-      } catch {
-        return "file";
-      }
-      return stats && stats.isDirectory() ? "dir" : "file";
-    }
-    function symlinkTypeSync(srcpath, type) {
-      if (type) return type;
-      let stats;
-      try {
-        stats = fs9.lstatSync(srcpath);
-      } catch {
-        return "file";
-      }
-      return stats && stats.isDirectory() ? "dir" : "file";
-    }
-    module2.exports = {
-      symlinkType: u(symlinkType),
-      symlinkTypeSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/symlink.js
-var require_symlink = __commonJS({
-  "node_modules/fs-extra/lib/ensure/symlink.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var path10 = require("path");
-    var fs9 = require_fs();
-    var { mkdirs, mkdirsSync } = require_mkdirs();
-    var { symlinkPaths, symlinkPathsSync } = require_symlink_paths();
-    var { symlinkType, symlinkTypeSync } = require_symlink_type();
-    var { pathExists: pathExists9 } = require_path_exists();
-    var { areIdentical } = require_stat();
-    async function createSymlink(srcpath, dstpath, type) {
-      let stats;
-      try {
-        stats = await fs9.lstat(dstpath);
-      } catch {
-      }
-      if (stats && stats.isSymbolicLink()) {
-        const [srcStat, dstStat] = await Promise.all([
-          fs9.stat(srcpath),
-          fs9.stat(dstpath)
-        ]);
-        if (areIdentical(srcStat, dstStat)) return;
-      }
-      const relative2 = await symlinkPaths(srcpath, dstpath);
-      srcpath = relative2.toDst;
-      const toType = await symlinkType(relative2.toCwd, type);
-      const dir = path10.dirname(dstpath);
-      if (!await pathExists9(dir)) {
-        await mkdirs(dir);
-      }
-      return fs9.symlink(srcpath, dstpath, toType);
-    }
-    function createSymlinkSync(srcpath, dstpath, type) {
-      let stats;
-      try {
-        stats = fs9.lstatSync(dstpath);
-      } catch {
-      }
-      if (stats && stats.isSymbolicLink()) {
-        const srcStat = fs9.statSync(srcpath);
-        const dstStat = fs9.statSync(dstpath);
-        if (areIdentical(srcStat, dstStat)) return;
-      }
-      const relative2 = symlinkPathsSync(srcpath, dstpath);
-      srcpath = relative2.toDst;
-      type = symlinkTypeSync(relative2.toCwd, type);
-      const dir = path10.dirname(dstpath);
-      const exists = fs9.existsSync(dir);
-      if (exists) return fs9.symlinkSync(srcpath, dstpath, type);
-      mkdirsSync(dir);
-      return fs9.symlinkSync(srcpath, dstpath, type);
-    }
-    module2.exports = {
-      createSymlink: u(createSymlink),
-      createSymlinkSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/ensure/index.js
-var require_ensure = __commonJS({
-  "node_modules/fs-extra/lib/ensure/index.js"(exports2, module2) {
-    "use strict";
-    var { createFile, createFileSync } = require_file();
-    var { createLink, createLinkSync } = require_link();
-    var { createSymlink, createSymlinkSync } = require_symlink();
-    module2.exports = {
-      // file
-      createFile,
-      createFileSync,
-      ensureFile: createFile,
-      ensureFileSync: createFileSync,
-      // link
-      createLink,
-      createLinkSync,
-      ensureLink: createLink,
-      ensureLinkSync: createLinkSync,
-      // symlink
-      createSymlink,
-      createSymlinkSync,
-      ensureSymlink: createSymlink,
-      ensureSymlinkSync: createSymlinkSync
-    };
-  }
-});
-
-// node_modules/jsonfile/utils.js
-var require_utils2 = __commonJS({
-  "node_modules/jsonfile/utils.js"(exports2, module2) {
-    function stringify(obj, { EOL = "\n", finalEOL = true, replacer = null, spaces } = {}) {
-      const EOF = finalEOL ? EOL : "";
-      const str = JSON.stringify(obj, replacer, spaces);
-      return str.replace(/\n/g, EOL) + EOF;
-    }
-    function stripBom(content) {
-      if (Buffer.isBuffer(content)) content = content.toString("utf8");
-      return content.replace(/^\uFEFF/, "");
-    }
-    module2.exports = { stringify, stripBom };
-  }
-});
-
-// node_modules/jsonfile/index.js
-var require_jsonfile = __commonJS({
-  "node_modules/jsonfile/index.js"(exports2, module2) {
-    var _fs;
-    try {
-      _fs = require_graceful_fs();
-    } catch (_) {
-      _fs = require("fs");
-    }
-    var universalify = require_universalify();
-    var { stringify, stripBom } = require_utils2();
-    async function _readFile(file, options = {}) {
-      if (typeof options === "string") {
-        options = { encoding: options };
-      }
-      const fs9 = options.fs || _fs;
-      const shouldThrow = "throws" in options ? options.throws : true;
-      let data = await universalify.fromCallback(fs9.readFile)(file, options);
-      data = stripBom(data);
-      let obj;
-      try {
-        obj = JSON.parse(data, options ? options.reviver : null);
-      } catch (err) {
-        if (shouldThrow) {
-          err.message = `${file}: ${err.message}`;
-          throw err;
-        } else {
-          return null;
-        }
-      }
-      return obj;
-    }
-    var readFile9 = universalify.fromPromise(_readFile);
-    function readFileSync(file, options = {}) {
-      if (typeof options === "string") {
-        options = { encoding: options };
-      }
-      const fs9 = options.fs || _fs;
-      const shouldThrow = "throws" in options ? options.throws : true;
-      try {
-        let content = fs9.readFileSync(file, options);
-        content = stripBom(content);
-        return JSON.parse(content, options.reviver);
-      } catch (err) {
-        if (shouldThrow) {
-          err.message = `${file}: ${err.message}`;
-          throw err;
-        } else {
-          return null;
-        }
-      }
-    }
-    async function _writeFile(file, obj, options = {}) {
-      const fs9 = options.fs || _fs;
-      const str = stringify(obj, options);
-      await universalify.fromCallback(fs9.writeFile)(file, str, options);
-    }
-    var writeFile8 = universalify.fromPromise(_writeFile);
-    function writeFileSync(file, obj, options = {}) {
-      const fs9 = options.fs || _fs;
-      const str = stringify(obj, options);
-      return fs9.writeFileSync(file, str, options);
-    }
-    module2.exports = {
-      readFile: readFile9,
-      readFileSync,
-      writeFile: writeFile8,
-      writeFileSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/json/jsonfile.js
-var require_jsonfile2 = __commonJS({
-  "node_modules/fs-extra/lib/json/jsonfile.js"(exports2, module2) {
-    "use strict";
-    var jsonFile = require_jsonfile();
-    module2.exports = {
-      // jsonfile exports
-      readJson: jsonFile.readFile,
-      readJsonSync: jsonFile.readFileSync,
-      writeJson: jsonFile.writeFile,
-      writeJsonSync: jsonFile.writeFileSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/output-file/index.js
-var require_output_file = __commonJS({
-  "node_modules/fs-extra/lib/output-file/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var fs9 = require_fs();
-    var path10 = require("path");
-    var mkdir = require_mkdirs();
-    var pathExists9 = require_path_exists().pathExists;
-    async function outputFile(file, data, encoding = "utf-8") {
-      const dir = path10.dirname(file);
-      if (!await pathExists9(dir)) {
-        await mkdir.mkdirs(dir);
-      }
-      return fs9.writeFile(file, data, encoding);
-    }
-    function outputFileSync(file, ...args) {
-      const dir = path10.dirname(file);
-      if (!fs9.existsSync(dir)) {
-        mkdir.mkdirsSync(dir);
-      }
-      fs9.writeFileSync(file, ...args);
-    }
-    module2.exports = {
-      outputFile: u(outputFile),
-      outputFileSync
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/json/output-json.js
-var require_output_json = __commonJS({
-  "node_modules/fs-extra/lib/json/output-json.js"(exports2, module2) {
-    "use strict";
-    var { stringify } = require_utils2();
-    var { outputFile } = require_output_file();
-    async function outputJson(file, data, options = {}) {
-      const str = stringify(data, options);
-      await outputFile(file, str, options);
-    }
-    module2.exports = outputJson;
-  }
-});
-
-// node_modules/fs-extra/lib/json/output-json-sync.js
-var require_output_json_sync = __commonJS({
-  "node_modules/fs-extra/lib/json/output-json-sync.js"(exports2, module2) {
-    "use strict";
-    var { stringify } = require_utils2();
-    var { outputFileSync } = require_output_file();
-    function outputJsonSync(file, data, options) {
-      const str = stringify(data, options);
-      outputFileSync(file, str, options);
-    }
-    module2.exports = outputJsonSync;
-  }
-});
-
-// node_modules/fs-extra/lib/json/index.js
-var require_json = __commonJS({
-  "node_modules/fs-extra/lib/json/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    var jsonFile = require_jsonfile2();
-    jsonFile.outputJson = u(require_output_json());
-    jsonFile.outputJsonSync = require_output_json_sync();
-    jsonFile.outputJSON = jsonFile.outputJson;
-    jsonFile.outputJSONSync = jsonFile.outputJsonSync;
-    jsonFile.writeJSON = jsonFile.writeJson;
-    jsonFile.writeJSONSync = jsonFile.writeJsonSync;
-    jsonFile.readJSON = jsonFile.readJson;
-    jsonFile.readJSONSync = jsonFile.readJsonSync;
-    module2.exports = jsonFile;
-  }
-});
-
-// node_modules/fs-extra/lib/move/move.js
-var require_move = __commonJS({
-  "node_modules/fs-extra/lib/move/move.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_fs();
-    var path10 = require("path");
-    var { copy: copy3 } = require_copy2();
-    var { remove: remove3 } = require_remove();
-    var { mkdirp } = require_mkdirs();
-    var { pathExists: pathExists9 } = require_path_exists();
-    var stat3 = require_stat();
-    async function move2(src, dest, opts = {}) {
-      const overwrite = opts.overwrite || opts.clobber || false;
-      const { srcStat, isChangingCase = false } = await stat3.checkPaths(src, dest, "move", opts);
-      await stat3.checkParentPaths(src, srcStat, dest, "move");
-      const destParent = path10.dirname(dest);
-      const parsedParentPath = path10.parse(destParent);
-      if (parsedParentPath.root !== destParent) {
-        await mkdirp(destParent);
-      }
-      return doRename(src, dest, overwrite, isChangingCase);
-    }
-    async function doRename(src, dest, overwrite, isChangingCase) {
-      if (!isChangingCase) {
-        if (overwrite) {
-          await remove3(dest);
-        } else if (await pathExists9(dest)) {
-          throw new Error("dest already exists.");
-        }
-      }
-      try {
-        await fs9.rename(src, dest);
-      } catch (err) {
-        if (err.code !== "EXDEV") {
-          throw err;
-        }
-        await moveAcrossDevice(src, dest, overwrite);
-      }
-    }
-    async function moveAcrossDevice(src, dest, overwrite) {
-      const opts = {
-        overwrite,
-        errorOnExist: true,
-        preserveTimestamps: true
-      };
-      await copy3(src, dest, opts);
-      return remove3(src);
-    }
-    module2.exports = move2;
-  }
-});
-
-// node_modules/fs-extra/lib/move/move-sync.js
-var require_move_sync = __commonJS({
-  "node_modules/fs-extra/lib/move/move-sync.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_graceful_fs();
-    var path10 = require("path");
-    var copySync = require_copy2().copySync;
-    var removeSync = require_remove().removeSync;
-    var mkdirpSync = require_mkdirs().mkdirpSync;
-    var stat3 = require_stat();
-    function moveSync(src, dest, opts) {
-      opts = opts || {};
-      const overwrite = opts.overwrite || opts.clobber || false;
-      const { srcStat, isChangingCase = false } = stat3.checkPathsSync(src, dest, "move", opts);
-      stat3.checkParentPathsSync(src, srcStat, dest, "move");
-      if (!isParentRoot(dest)) mkdirpSync(path10.dirname(dest));
-      return doRename(src, dest, overwrite, isChangingCase);
-    }
-    function isParentRoot(dest) {
-      const parent = path10.dirname(dest);
-      const parsedPath = path10.parse(parent);
-      return parsedPath.root === parent;
-    }
-    function doRename(src, dest, overwrite, isChangingCase) {
-      if (isChangingCase) return rename(src, dest, overwrite);
-      if (overwrite) {
-        removeSync(dest);
-        return rename(src, dest, overwrite);
-      }
-      if (fs9.existsSync(dest)) throw new Error("dest already exists.");
-      return rename(src, dest, overwrite);
-    }
-    function rename(src, dest, overwrite) {
-      try {
-        fs9.renameSync(src, dest);
-      } catch (err) {
-        if (err.code !== "EXDEV") throw err;
-        return moveAcrossDevice(src, dest, overwrite);
-      }
-    }
-    function moveAcrossDevice(src, dest, overwrite) {
-      const opts = {
-        overwrite,
-        errorOnExist: true,
-        preserveTimestamps: true
-      };
-      copySync(src, dest, opts);
-      return removeSync(src);
-    }
-    module2.exports = moveSync;
-  }
-});
-
-// node_modules/fs-extra/lib/move/index.js
-var require_move2 = __commonJS({
-  "node_modules/fs-extra/lib/move/index.js"(exports2, module2) {
-    "use strict";
-    var u = require_universalify().fromPromise;
-    module2.exports = {
-      move: u(require_move()),
-      moveSync: require_move_sync()
-    };
-  }
-});
-
-// node_modules/fs-extra/lib/index.js
-var require_lib = __commonJS({
-  "node_modules/fs-extra/lib/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = {
-      // Export promiseified graceful-fs:
-      ...require_fs(),
-      // Export extra methods:
-      ...require_copy2(),
-      ...require_empty(),
-      ...require_ensure(),
-      ...require_json(),
-      ...require_mkdirs(),
-      ...require_move2(),
-      ...require_output_file(),
-      ...require_path_exists(),
-      ...require_remove()
-    };
-  }
-});
-
-// node_modules/retry/lib/retry_operation.js
-var require_retry_operation = __commonJS({
-  "node_modules/retry/lib/retry_operation.js"(exports2, module2) {
-    function RetryOperation(timeouts, options) {
-      if (typeof options === "boolean") {
-        options = { forever: options };
-      }
-      this._originalTimeouts = JSON.parse(JSON.stringify(timeouts));
-      this._timeouts = timeouts;
-      this._options = options || {};
-      this._maxRetryTime = options && options.maxRetryTime || Infinity;
-      this._fn = null;
-      this._errors = [];
-      this._attempts = 1;
-      this._operationTimeout = null;
-      this._operationTimeoutCb = null;
-      this._timeout = null;
-      this._operationStart = null;
-      if (this._options.forever) {
-        this._cachedTimeouts = this._timeouts.slice(0);
-      }
-    }
-    module2.exports = RetryOperation;
-    RetryOperation.prototype.reset = function() {
-      this._attempts = 1;
-      this._timeouts = this._originalTimeouts;
-    };
-    RetryOperation.prototype.stop = function() {
-      if (this._timeout) {
-        clearTimeout(this._timeout);
-      }
-      this._timeouts = [];
-      this._cachedTimeouts = null;
-    };
-    RetryOperation.prototype.retry = function(err) {
-      if (this._timeout) {
-        clearTimeout(this._timeout);
-      }
-      if (!err) {
-        return false;
-      }
-      var currentTime = (/* @__PURE__ */ new Date()).getTime();
-      if (err && currentTime - this._operationStart >= this._maxRetryTime) {
-        this._errors.unshift(new Error("RetryOperation timeout occurred"));
-        return false;
-      }
-      this._errors.push(err);
-      var timeout = this._timeouts.shift();
-      if (timeout === void 0) {
-        if (this._cachedTimeouts) {
-          this._errors.splice(this._errors.length - 1, this._errors.length);
-          this._timeouts = this._cachedTimeouts.slice(0);
-          timeout = this._timeouts.shift();
-        } else {
-          return false;
-        }
-      }
-      var self = this;
-      var timer = setTimeout(function() {
-        self._attempts++;
-        if (self._operationTimeoutCb) {
-          self._timeout = setTimeout(function() {
-            self._operationTimeoutCb(self._attempts);
-          }, self._operationTimeout);
-          if (self._options.unref) {
-            self._timeout.unref();
-          }
-        }
-        self._fn(self._attempts);
-      }, timeout);
-      if (this._options.unref) {
-        timer.unref();
-      }
-      return true;
-    };
-    RetryOperation.prototype.attempt = function(fn, timeoutOps) {
-      this._fn = fn;
-      if (timeoutOps) {
-        if (timeoutOps.timeout) {
-          this._operationTimeout = timeoutOps.timeout;
-        }
-        if (timeoutOps.cb) {
-          this._operationTimeoutCb = timeoutOps.cb;
-        }
-      }
-      var self = this;
-      if (this._operationTimeoutCb) {
-        this._timeout = setTimeout(function() {
-          self._operationTimeoutCb();
-        }, self._operationTimeout);
-      }
-      this._operationStart = (/* @__PURE__ */ new Date()).getTime();
-      this._fn(this._attempts);
-    };
-    RetryOperation.prototype.try = function(fn) {
-      console.log("Using RetryOperation.try() is deprecated");
-      this.attempt(fn);
-    };
-    RetryOperation.prototype.start = function(fn) {
-      console.log("Using RetryOperation.start() is deprecated");
-      this.attempt(fn);
-    };
-    RetryOperation.prototype.start = RetryOperation.prototype.try;
-    RetryOperation.prototype.errors = function() {
-      return this._errors;
-    };
-    RetryOperation.prototype.attempts = function() {
-      return this._attempts;
-    };
-    RetryOperation.prototype.mainError = function() {
-      if (this._errors.length === 0) {
-        return null;
-      }
-      var counts = {};
-      var mainError = null;
-      var mainErrorCount = 0;
-      for (var i = 0; i < this._errors.length; i++) {
-        var error = this._errors[i];
-        var message = error.message;
-        var count = (counts[message] || 0) + 1;
-        counts[message] = count;
-        if (count >= mainErrorCount) {
-          mainError = error;
-          mainErrorCount = count;
-        }
-      }
-      return mainError;
-    };
-  }
-});
-
-// node_modules/retry/lib/retry.js
-var require_retry = __commonJS({
-  "node_modules/retry/lib/retry.js"(exports2) {
-    var RetryOperation = require_retry_operation();
-    exports2.operation = function(options) {
-      var timeouts = exports2.timeouts(options);
-      return new RetryOperation(timeouts, {
-        forever: options && options.forever,
-        unref: options && options.unref,
-        maxRetryTime: options && options.maxRetryTime
-      });
-    };
-    exports2.timeouts = function(options) {
-      if (options instanceof Array) {
-        return [].concat(options);
-      }
-      var opts = {
-        retries: 10,
-        factor: 2,
-        minTimeout: 1 * 1e3,
-        maxTimeout: Infinity,
-        randomize: false
-      };
-      for (var key in options) {
-        opts[key] = options[key];
-      }
-      if (opts.minTimeout > opts.maxTimeout) {
-        throw new Error("minTimeout is greater than maxTimeout");
-      }
-      var timeouts = [];
-      for (var i = 0; i < opts.retries; i++) {
-        timeouts.push(this.createTimeout(i, opts));
-      }
-      if (options && options.forever && !timeouts.length) {
-        timeouts.push(this.createTimeout(i, opts));
-      }
-      timeouts.sort(function(a, b) {
-        return a - b;
-      });
-      return timeouts;
-    };
-    exports2.createTimeout = function(attempt, opts) {
-      var random = opts.randomize ? Math.random() + 1 : 1;
-      var timeout = Math.round(random * opts.minTimeout * Math.pow(opts.factor, attempt));
-      timeout = Math.min(timeout, opts.maxTimeout);
-      return timeout;
-    };
-    exports2.wrap = function(obj, options, methods) {
-      if (options instanceof Array) {
-        methods = options;
-        options = null;
-      }
-      if (!methods) {
-        methods = [];
-        for (var key in obj) {
-          if (typeof obj[key] === "function") {
-            methods.push(key);
-          }
-        }
-      }
-      for (var i = 0; i < methods.length; i++) {
-        var method = methods[i];
-        var original = obj[method];
-        obj[method] = function retryWrapper(original2) {
-          var op = exports2.operation(options);
-          var args = Array.prototype.slice.call(arguments, 1);
-          var callback = args.pop();
-          args.push(function(err) {
-            if (op.retry(err)) {
-              return;
-            }
-            if (err) {
-              arguments[0] = op.mainError();
-            }
-            callback.apply(this, arguments);
-          });
-          op.attempt(function() {
-            original2.apply(obj, args);
-          });
-        }.bind(obj, original);
-        obj[method].options = options;
-      }
-    };
-  }
-});
-
-// node_modules/retry/index.js
-var require_retry2 = __commonJS({
-  "node_modules/retry/index.js"(exports2, module2) {
-    module2.exports = require_retry();
-  }
-});
-
-// node_modules/proper-lockfile/node_modules/signal-exit/signals.js
-var require_signals = __commonJS({
-  "node_modules/proper-lockfile/node_modules/signal-exit/signals.js"(exports2, module2) {
-    module2.exports = [
-      "SIGABRT",
-      "SIGALRM",
-      "SIGHUP",
-      "SIGINT",
-      "SIGTERM"
-    ];
-    if (process.platform !== "win32") {
-      module2.exports.push(
-        "SIGVTALRM",
-        "SIGXCPU",
-        "SIGXFSZ",
-        "SIGUSR2",
-        "SIGTRAP",
-        "SIGSYS",
-        "SIGQUIT",
-        "SIGIOT"
-        // should detect profiler and enable/disable accordingly.
-        // see #21
-        // 'SIGPROF'
-      );
-    }
-    if (process.platform === "linux") {
-      module2.exports.push(
-        "SIGIO",
-        "SIGPOLL",
-        "SIGPWR",
-        "SIGSTKFLT",
-        "SIGUNUSED"
-      );
-    }
-  }
-});
-
-// node_modules/proper-lockfile/node_modules/signal-exit/index.js
-var require_signal_exit = __commonJS({
-  "node_modules/proper-lockfile/node_modules/signal-exit/index.js"(exports2, module2) {
-    var process2 = global.process;
-    var processOk = function(process3) {
-      return process3 && typeof process3 === "object" && typeof process3.removeListener === "function" && typeof process3.emit === "function" && typeof process3.reallyExit === "function" && typeof process3.listeners === "function" && typeof process3.kill === "function" && typeof process3.pid === "number" && typeof process3.on === "function";
-    };
-    if (!processOk(process2)) {
-      module2.exports = function() {
-        return function() {
-        };
-      };
-    } else {
-      assert = require("assert");
-      signals = require_signals();
-      isWin = /^win/i.test(process2.platform);
-      EE = require("events");
-      if (typeof EE !== "function") {
-        EE = EE.EventEmitter;
-      }
-      if (process2.__signal_exit_emitter__) {
-        emitter = process2.__signal_exit_emitter__;
-      } else {
-        emitter = process2.__signal_exit_emitter__ = new EE();
-        emitter.count = 0;
-        emitter.emitted = {};
-      }
-      if (!emitter.infinite) {
-        emitter.setMaxListeners(Infinity);
-        emitter.infinite = true;
-      }
-      module2.exports = function(cb, opts) {
-        if (!processOk(global.process)) {
-          return function() {
-          };
-        }
-        assert.equal(typeof cb, "function", "a callback must be provided for exit handler");
-        if (loaded === false) {
-          load();
-        }
-        var ev = "exit";
-        if (opts && opts.alwaysLast) {
-          ev = "afterexit";
-        }
-        var remove3 = function() {
-          emitter.removeListener(ev, cb);
-          if (emitter.listeners("exit").length === 0 && emitter.listeners("afterexit").length === 0) {
-            unload();
-          }
-        };
-        emitter.on(ev, cb);
-        return remove3;
-      };
-      unload = function unload2() {
-        if (!loaded || !processOk(global.process)) {
-          return;
-        }
-        loaded = false;
-        signals.forEach(function(sig) {
-          try {
-            process2.removeListener(sig, sigListeners[sig]);
-          } catch (er) {
-          }
-        });
-        process2.emit = originalProcessEmit;
-        process2.reallyExit = originalProcessReallyExit;
-        emitter.count -= 1;
-      };
-      module2.exports.unload = unload;
-      emit = function emit2(event, code, signal) {
-        if (emitter.emitted[event]) {
-          return;
-        }
-        emitter.emitted[event] = true;
-        emitter.emit(event, code, signal);
-      };
-      sigListeners = {};
-      signals.forEach(function(sig) {
-        sigListeners[sig] = function listener() {
-          if (!processOk(global.process)) {
-            return;
-          }
-          var listeners = process2.listeners(sig);
-          if (listeners.length === emitter.count) {
-            unload();
-            emit("exit", null, sig);
-            emit("afterexit", null, sig);
-            if (isWin && sig === "SIGHUP") {
-              sig = "SIGINT";
-            }
-            process2.kill(process2.pid, sig);
-          }
-        };
-      });
-      module2.exports.signals = function() {
-        return signals;
-      };
-      loaded = false;
-      load = function load2() {
-        if (loaded || !processOk(global.process)) {
-          return;
-        }
-        loaded = true;
-        emitter.count += 1;
-        signals = signals.filter(function(sig) {
-          try {
-            process2.on(sig, sigListeners[sig]);
-            return true;
-          } catch (er) {
-            return false;
-          }
-        });
-        process2.emit = processEmit;
-        process2.reallyExit = processReallyExit;
-      };
-      module2.exports.load = load;
-      originalProcessReallyExit = process2.reallyExit;
-      processReallyExit = function processReallyExit2(code) {
-        if (!processOk(global.process)) {
-          return;
-        }
-        process2.exitCode = code || /* istanbul ignore next */
-        0;
-        emit("exit", process2.exitCode, null);
-        emit("afterexit", process2.exitCode, null);
-        originalProcessReallyExit.call(process2, process2.exitCode);
-      };
-      originalProcessEmit = process2.emit;
-      processEmit = function processEmit2(ev, arg) {
-        if (ev === "exit" && processOk(global.process)) {
-          if (arg !== void 0) {
-            process2.exitCode = arg;
-          }
-          var ret = originalProcessEmit.apply(this, arguments);
-          emit("exit", process2.exitCode, null);
-          emit("afterexit", process2.exitCode, null);
-          return ret;
-        } else {
-          return originalProcessEmit.apply(this, arguments);
-        }
-      };
-    }
-    var assert;
-    var signals;
-    var isWin;
-    var EE;
-    var emitter;
-    var unload;
-    var emit;
-    var sigListeners;
-    var loaded;
-    var load;
-    var originalProcessReallyExit;
-    var processReallyExit;
-    var originalProcessEmit;
-    var processEmit;
-  }
-});
-
-// node_modules/proper-lockfile/lib/mtime-precision.js
-var require_mtime_precision = __commonJS({
-  "node_modules/proper-lockfile/lib/mtime-precision.js"(exports2, module2) {
-    "use strict";
-    var cacheSymbol = /* @__PURE__ */ Symbol();
-    function probe(file, fs9, callback) {
-      const cachedPrecision = fs9[cacheSymbol];
-      if (cachedPrecision) {
-        return fs9.stat(file, (err, stat3) => {
-          if (err) {
-            return callback(err);
-          }
-          callback(null, stat3.mtime, cachedPrecision);
-        });
-      }
-      const mtime = new Date(Math.ceil(Date.now() / 1e3) * 1e3 + 5);
-      fs9.utimes(file, mtime, mtime, (err) => {
-        if (err) {
-          return callback(err);
-        }
-        fs9.stat(file, (err2, stat3) => {
-          if (err2) {
-            return callback(err2);
-          }
-          const precision = stat3.mtime.getTime() % 1e3 === 0 ? "s" : "ms";
-          Object.defineProperty(fs9, cacheSymbol, { value: precision });
-          callback(null, stat3.mtime, precision);
-        });
-      });
-    }
-    function getMtime(precision) {
-      let now = Date.now();
-      if (precision === "s") {
-        now = Math.ceil(now / 1e3) * 1e3;
-      }
-      return new Date(now);
-    }
-    module2.exports.probe = probe;
-    module2.exports.getMtime = getMtime;
-  }
-});
-
-// node_modules/proper-lockfile/lib/lockfile.js
-var require_lockfile = __commonJS({
-  "node_modules/proper-lockfile/lib/lockfile.js"(exports2, module2) {
-    "use strict";
-    var path10 = require("path");
-    var fs9 = require_graceful_fs();
-    var retry = require_retry2();
-    var onExit = require_signal_exit();
-    var mtimePrecision = require_mtime_precision();
-    var locks = {};
-    function getLockFile(file, options) {
-      return options.lockfilePath || `${file}.lock`;
-    }
-    function resolveCanonicalPath(file, options, callback) {
-      if (!options.realpath) {
-        return callback(null, path10.resolve(file));
-      }
-      options.fs.realpath(file, callback);
-    }
-    function acquireLock(file, options, callback) {
-      const lockfilePath = getLockFile(file, options);
-      options.fs.mkdir(lockfilePath, (err) => {
-        if (!err) {
-          return mtimePrecision.probe(lockfilePath, options.fs, (err2, mtime, mtimePrecision2) => {
-            if (err2) {
-              options.fs.rmdir(lockfilePath, () => {
-              });
-              return callback(err2);
-            }
-            callback(null, mtime, mtimePrecision2);
-          });
-        }
-        if (err.code !== "EEXIST") {
-          return callback(err);
-        }
-        if (options.stale <= 0) {
-          return callback(Object.assign(new Error("Lock file is already being held"), { code: "ELOCKED", file }));
-        }
-        options.fs.stat(lockfilePath, (err2, stat3) => {
-          if (err2) {
-            if (err2.code === "ENOENT") {
-              return acquireLock(file, { ...options, stale: 0 }, callback);
-            }
-            return callback(err2);
-          }
-          if (!isLockStale(stat3, options)) {
-            return callback(Object.assign(new Error("Lock file is already being held"), { code: "ELOCKED", file }));
-          }
-          removeLock(file, options, (err3) => {
-            if (err3) {
-              return callback(err3);
-            }
-            acquireLock(file, { ...options, stale: 0 }, callback);
-          });
-        });
-      });
-    }
-    function isLockStale(stat3, options) {
-      return stat3.mtime.getTime() < Date.now() - options.stale;
-    }
-    function removeLock(file, options, callback) {
-      options.fs.rmdir(getLockFile(file, options), (err) => {
-        if (err && err.code !== "ENOENT") {
-          return callback(err);
-        }
-        callback();
-      });
-    }
-    function updateLock(file, options) {
-      const lock3 = locks[file];
-      if (lock3.updateTimeout) {
-        return;
-      }
-      lock3.updateDelay = lock3.updateDelay || options.update;
-      lock3.updateTimeout = setTimeout(() => {
-        lock3.updateTimeout = null;
-        options.fs.stat(lock3.lockfilePath, (err, stat3) => {
-          const isOverThreshold = lock3.lastUpdate + options.stale < Date.now();
-          if (err) {
-            if (err.code === "ENOENT" || isOverThreshold) {
-              return setLockAsCompromised(file, lock3, Object.assign(err, { code: "ECOMPROMISED" }));
-            }
-            lock3.updateDelay = 1e3;
-            return updateLock(file, options);
-          }
-          const isMtimeOurs = lock3.mtime.getTime() === stat3.mtime.getTime();
-          if (!isMtimeOurs) {
-            return setLockAsCompromised(
-              file,
-              lock3,
-              Object.assign(
-                new Error("Unable to update lock within the stale threshold"),
-                { code: "ECOMPROMISED" }
-              )
-            );
-          }
-          const mtime = mtimePrecision.getMtime(lock3.mtimePrecision);
-          options.fs.utimes(lock3.lockfilePath, mtime, mtime, (err2) => {
-            const isOverThreshold2 = lock3.lastUpdate + options.stale < Date.now();
-            if (lock3.released) {
-              return;
-            }
-            if (err2) {
-              if (err2.code === "ENOENT" || isOverThreshold2) {
-                return setLockAsCompromised(file, lock3, Object.assign(err2, { code: "ECOMPROMISED" }));
-              }
-              lock3.updateDelay = 1e3;
-              return updateLock(file, options);
-            }
-            lock3.mtime = mtime;
-            lock3.lastUpdate = Date.now();
-            lock3.updateDelay = null;
-            updateLock(file, options);
-          });
-        });
-      }, lock3.updateDelay);
-      if (lock3.updateTimeout.unref) {
-        lock3.updateTimeout.unref();
-      }
-    }
-    function setLockAsCompromised(file, lock3, err) {
-      lock3.released = true;
-      if (lock3.updateTimeout) {
-        clearTimeout(lock3.updateTimeout);
-      }
-      if (locks[file] === lock3) {
-        delete locks[file];
-      }
-      lock3.options.onCompromised(err);
-    }
-    function lock2(file, options, callback) {
-      options = {
-        stale: 1e4,
-        update: null,
-        realpath: true,
-        retries: 0,
-        fs: fs9,
-        onCompromised: (err) => {
-          throw err;
-        },
-        ...options
-      };
-      options.retries = options.retries || 0;
-      options.retries = typeof options.retries === "number" ? { retries: options.retries } : options.retries;
-      options.stale = Math.max(options.stale || 0, 2e3);
-      options.update = options.update == null ? options.stale / 2 : options.update || 0;
-      options.update = Math.max(Math.min(options.update, options.stale / 2), 1e3);
-      resolveCanonicalPath(file, options, (err, file2) => {
-        if (err) {
-          return callback(err);
-        }
-        const operation = retry.operation(options.retries);
-        operation.attempt(() => {
-          acquireLock(file2, options, (err2, mtime, mtimePrecision2) => {
-            if (operation.retry(err2)) {
-              return;
-            }
-            if (err2) {
-              return callback(operation.mainError());
-            }
-            const lock3 = locks[file2] = {
-              lockfilePath: getLockFile(file2, options),
-              mtime,
-              mtimePrecision: mtimePrecision2,
-              options,
-              lastUpdate: Date.now()
-            };
-            updateLock(file2, options);
-            callback(null, (releasedCallback) => {
-              if (lock3.released) {
-                return releasedCallback && releasedCallback(Object.assign(new Error("Lock is already released"), { code: "ERELEASED" }));
-              }
-              unlock(file2, { ...options, realpath: false }, releasedCallback);
-            });
-          });
-        });
-      });
-    }
-    function unlock(file, options, callback) {
-      options = {
-        fs: fs9,
-        realpath: true,
-        ...options
-      };
-      resolveCanonicalPath(file, options, (err, file2) => {
-        if (err) {
-          return callback(err);
-        }
-        const lock3 = locks[file2];
-        if (!lock3) {
-          return callback(Object.assign(new Error("Lock is not acquired/owned by you"), { code: "ENOTACQUIRED" }));
-        }
-        lock3.updateTimeout && clearTimeout(lock3.updateTimeout);
-        lock3.released = true;
-        delete locks[file2];
-        removeLock(file2, options, callback);
-      });
-    }
-    function check(file, options, callback) {
-      options = {
-        stale: 1e4,
-        realpath: true,
-        fs: fs9,
-        ...options
-      };
-      options.stale = Math.max(options.stale || 0, 2e3);
-      resolveCanonicalPath(file, options, (err, file2) => {
-        if (err) {
-          return callback(err);
-        }
-        options.fs.stat(getLockFile(file2, options), (err2, stat3) => {
-          if (err2) {
-            return err2.code === "ENOENT" ? callback(null, false) : callback(err2);
-          }
-          return callback(null, !isLockStale(stat3, options));
-        });
-      });
-    }
-    function getLocks() {
-      return locks;
-    }
-    onExit(() => {
-      for (const file in locks) {
-        const options = locks[file].options;
-        try {
-          options.fs.rmdirSync(getLockFile(file, options));
-        } catch (e) {
-        }
-      }
-    });
-    module2.exports.lock = lock2;
-    module2.exports.unlock = unlock;
-    module2.exports.check = check;
-    module2.exports.getLocks = getLocks;
-  }
-});
-
-// node_modules/proper-lockfile/lib/adapter.js
-var require_adapter = __commonJS({
-  "node_modules/proper-lockfile/lib/adapter.js"(exports2, module2) {
-    "use strict";
-    var fs9 = require_graceful_fs();
-    function createSyncFs(fs10) {
-      const methods = ["mkdir", "realpath", "stat", "rmdir", "utimes"];
-      const newFs = { ...fs10 };
-      methods.forEach((method) => {
-        newFs[method] = (...args) => {
-          const callback = args.pop();
-          let ret;
-          try {
-            ret = fs10[`${method}Sync`](...args);
-          } catch (err) {
-            return callback(err);
-          }
-          callback(null, ret);
-        };
-      });
-      return newFs;
-    }
-    function toPromise(method) {
-      return (...args) => new Promise((resolve, reject) => {
-        args.push((err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
-          }
-        });
-        method(...args);
-      });
-    }
-    function toSync(method) {
-      return (...args) => {
-        let err;
-        let result;
-        args.push((_err, _result) => {
-          err = _err;
-          result = _result;
-        });
-        method(...args);
-        if (err) {
-          throw err;
-        }
-        return result;
-      };
-    }
-    function toSyncOptions(options) {
-      options = { ...options };
-      options.fs = createSyncFs(options.fs || fs9);
-      if (typeof options.retries === "number" && options.retries > 0 || options.retries && typeof options.retries.retries === "number" && options.retries.retries > 0) {
-        throw Object.assign(new Error("Cannot use retries with the sync api"), { code: "ESYNC" });
-      }
-      return options;
-    }
-    module2.exports = {
-      toPromise,
-      toSync,
-      toSyncOptions
-    };
-  }
-});
-
-// node_modules/proper-lockfile/index.js
-var require_proper_lockfile = __commonJS({
-  "node_modules/proper-lockfile/index.js"(exports2, module2) {
-    "use strict";
-    var lockfile2 = require_lockfile();
-    var { toPromise, toSync, toSyncOptions } = require_adapter();
-    async function lock2(file, options) {
-      const release = await toPromise(lockfile2.lock)(file, options);
-      return toPromise(release);
-    }
-    function lockSync(file, options) {
-      const release = toSync(lockfile2.lock)(file, toSyncOptions(options));
-      return toSync(release);
-    }
-    function unlock(file, options) {
-      return toPromise(lockfile2.unlock)(file, options);
-    }
-    function unlockSync(file, options) {
-      return toSync(lockfile2.unlock)(file, toSyncOptions(options));
-    }
-    function check(file, options) {
-      return toPromise(lockfile2.check)(file, options);
-    }
-    function checkSync(file, options) {
-      return toSync(lockfile2.check)(file, toSyncOptions(options));
-    }
-    module2.exports = lock2;
-    module2.exports.lock = lock2;
-    module2.exports.unlock = unlock;
-    module2.exports.lockSync = lockSync;
-    module2.exports.unlockSync = unlockSync;
-    module2.exports.check = check;
-    module2.exports.checkSync = checkSync;
-  }
-});
-
-// src/extension.ts
-var extension_exports = {};
-__export(extension_exports, {
-  activate: () => activate,
-  deactivate: () => deactivate
-});
-module.exports = __toCommonJS(extension_exports);
-var vscode10 = __toESM(require("vscode"));
-
-// src/commands/initialize.ts
-var vscode2 = __toESM(require("vscode"));
-var fs2 = __toESM(require_lib());
-var path2 = __toESM(require("path"));
-var crypto = __toESM(require("crypto"));
-
-// src/shared/utils.ts
-var vscode = __toESM(require("vscode"));
-var fs = __toESM(require_lib());
-var path = __toESM(require("path"));
-
-// src/shared/constants.ts
-var VERSION_EXTRACT_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/;
-var VERSION_NUMBER_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/;
-var ALEX_GLOBAL_HOME = ".alex";
-var GLOBAL_KNOWLEDGE_PATHS = {
-  root: ALEX_GLOBAL_HOME,
-  knowledge: `${ALEX_GLOBAL_HOME}/global-knowledge`,
-  patterns: `${ALEX_GLOBAL_HOME}/global-knowledge/patterns`,
-  insights: `${ALEX_GLOBAL_HOME}/global-knowledge/insights`,
-  index: `${ALEX_GLOBAL_HOME}/global-knowledge/index.json`,
-  projectRegistry: `${ALEX_GLOBAL_HOME}/project-registry.json`,
-  globalProfile: `${ALEX_GLOBAL_HOME}/user-profile.json`
-};
-var GLOBAL_KNOWLEDGE_PREFIXES = {
-  pattern: "GK-",
-  // Global Knowledge patterns
-  insight: "GI-"
-  // Global Insights (timestamped learnings)
-};
-
-// src/shared/utils.ts
-function validateWorkspace() {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders) {
-    return {
-      isValid: false,
-      error: "No workspace folder open. Please open a project folder first (File \u2192 Open Folder)."
-    };
-  }
-  return {
-    isValid: true,
-    rootPath: workspaceFolders[0].uri.fsPath,
-    workspaceFolder: workspaceFolders[0]
-  };
-}
-async function getAlexWorkspaceFolder(requireInstalled = true) {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    return {
-      found: false,
-      error: "No workspace folder open. Please open a project folder first (File \u2192 Open Folder)."
-    };
-  }
-  if (workspaceFolders.length === 1) {
-    const folder = workspaceFolders[0];
-    if (requireInstalled) {
-      const installed = await isAlexInstalled(folder.uri.fsPath);
-      if (!installed) {
-        return {
-          found: false,
-          error: 'Alex is not installed in this workspace. Run "Alex: Initialize Architecture" first.'
-        };
-      }
-    }
-    return {
-      found: true,
-      rootPath: folder.uri.fsPath,
-      workspaceFolder: folder
-    };
-  }
-  const foldersWithAlex = [];
-  for (const folder of workspaceFolders) {
-    if (await isAlexInstalled(folder.uri.fsPath)) {
-      foldersWithAlex.push(folder);
-    }
-  }
-  if (!requireInstalled) {
-    const selected2 = await vscode.window.showQuickPick(
-      workspaceFolders.map((f) => ({
-        label: f.name,
-        description: f.uri.fsPath,
-        folder: f
-      })),
-      {
-        placeHolder: "Select a workspace folder to initialize Alex in",
-        title: "Initialize Alex - Select Folder"
-      }
-    );
-    if (!selected2) {
-      return { found: false, cancelled: true };
-    }
-    return {
-      found: true,
-      rootPath: selected2.folder.uri.fsPath,
-      workspaceFolder: selected2.folder
-    };
-  }
-  if (foldersWithAlex.length === 0) {
-    return {
-      found: false,
-      error: 'Alex is not installed in any workspace folder. Run "Alex: Initialize Architecture" first.'
-    };
-  }
-  if (foldersWithAlex.length === 1) {
-    return {
-      found: true,
-      rootPath: foldersWithAlex[0].uri.fsPath,
-      workspaceFolder: foldersWithAlex[0]
-    };
-  }
-  const selected = await vscode.window.showQuickPick(
-    foldersWithAlex.map((f) => ({
-      label: f.name,
-      description: f.uri.fsPath,
-      folder: f
-    })),
-    {
-      placeHolder: "Multiple folders have Alex installed. Select one:",
-      title: "Alex - Select Workspace Folder"
-    }
-  );
-  if (!selected) {
-    return { found: false, cancelled: true };
-  }
-  return {
-    found: true,
-    rootPath: selected.folder.uri.fsPath,
-    workspaceFolder: selected.folder
-  };
-}
-async function getInstalledAlexVersion(rootPath, numericOnly = false) {
-  const instructionsPath = path.join(rootPath, ".github", "copilot-instructions.md");
-  if (!await fs.pathExists(instructionsPath)) {
-    return null;
-  }
-  try {
-    const content = await fs.readFile(instructionsPath, "utf8");
-    const regex = numericOnly ? VERSION_NUMBER_REGEX : VERSION_EXTRACT_REGEX;
-    const match = content.match(regex);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
-async function isAlexInstalled(rootPath) {
-  const markerFile = path.join(rootPath, ".github", "copilot-instructions.md");
-  return fs.pathExists(markerFile);
-}
-
-// src/commands/initialize.ts
-function calculateChecksum(content) {
-  return crypto.createHash("md5").update(content.replace(/\r\n/g, "\n")).digest("hex");
-}
-function getManifestPath(rootPath) {
-  return path2.join(rootPath, ".github", "config", "alex-manifest.json");
-}
-async function initializeArchitecture(context) {
-  const workspaceResult = await getAlexWorkspaceFolder(false);
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return;
-    }
-    vscode2.window.showErrorMessage(
-      workspaceResult.error || "No workspace folder open. Please open a project folder first (File \u2192 Open Folder), then run this command again."
-    );
-    return;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const markerFile = path2.join(rootPath, ".github", "copilot-instructions.md");
-  if (await fs2.pathExists(markerFile)) {
-    const result = await vscode2.window.showWarningMessage(
-      'Alex is already installed in this workspace.\n\n\u2022 To update to a new version, use "Alex: Upgrade"\n\u2022 To completely reinstall, choose Reset below',
-      "Upgrade Instead",
-      "Reset Architecture",
-      "Cancel"
-    );
-    if (result === "Upgrade Instead") {
-      await vscode2.commands.executeCommand("alex.upgrade");
-    } else if (result === "Reset Architecture") {
-      await resetArchitecture(context);
-    }
-    return;
-  }
-  await performInitialization(context, rootPath, false);
-}
-async function resetArchitecture(context) {
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return;
-    }
-    vscode2.window.showErrorMessage(
-      workspaceResult.error || "Please open a workspace folder with Alex installed to reset."
-    );
-    return;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const confirm = await vscode2.window.showWarningMessage(
-    '\u26A0\uFE0F RESET will permanently delete all Alex memory files!\n\nThis includes:\n\u2022 All learned domain knowledge\n\u2022 Custom instructions and prompts\n\u2022 Synaptic network connections\n\nConsider using "Alex: Upgrade" instead to preserve your knowledge.',
-    { modal: true },
-    "Yes, Delete Everything",
-    "Upgrade Instead",
-    "Cancel"
-  );
-  if (confirm === "Upgrade Instead") {
-    await vscode2.commands.executeCommand("alex.upgrade");
-    return;
-  }
-  if (confirm !== "Yes, Delete Everything") {
-    return;
-  }
-  const pathsToDelete = [
-    path2.join(rootPath, ".github", "copilot-instructions.md"),
-    path2.join(rootPath, ".github", "instructions"),
-    path2.join(rootPath, ".github", "prompts"),
-    path2.join(rootPath, ".github", "episodic"),
-    path2.join(rootPath, ".github", "domain-knowledge"),
-    path2.join(rootPath, ".github", "config"),
-    // Includes alex-manifest.json
-    path2.join(rootPath, ".alex-manifest.json")
-    // Clean up legacy manifest location too
-  ];
-  try {
-    await vscode2.window.withProgress({
-      location: vscode2.ProgressLocation.Notification,
-      title: "Resetting Alex Architecture...",
-      cancellable: false
-    }, async (progress) => {
-      progress.report({ message: "Cleaning up existing files..." });
-      for (const p of pathsToDelete) {
-        await fs2.remove(p);
-      }
-    });
-    await performInitialization(context, rootPath, true);
-  } catch (error) {
-    vscode2.window.showErrorMessage(`Failed to reset Alex: ${error.message}`);
-  }
-}
-async function performInitialization(context, rootPath, overwrite) {
-  const extensionPath = context.extensionPath;
-  const requiredSource = path2.join(extensionPath, ".github", "copilot-instructions.md");
-  if (!await fs2.pathExists(requiredSource)) {
-    vscode2.window.showErrorMessage(
-      "Extension installation appears corrupted - missing core files.\n\nPlease reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace."
-    );
-    return;
-  }
-  const sources = [
-    { src: path2.join(extensionPath, ".github", "copilot-instructions.md"), dest: path2.join(rootPath, ".github", "copilot-instructions.md") },
-    { src: path2.join(extensionPath, ".github", "instructions"), dest: path2.join(rootPath, ".github", "instructions") },
-    { src: path2.join(extensionPath, ".github", "prompts"), dest: path2.join(rootPath, ".github", "prompts") },
-    { src: path2.join(extensionPath, ".github", "episodic"), dest: path2.join(rootPath, ".github", "episodic") },
-    { src: path2.join(extensionPath, ".github", "domain-knowledge"), dest: path2.join(rootPath, ".github", "domain-knowledge") },
-    { src: path2.join(extensionPath, ".github", "config"), dest: path2.join(rootPath, ".github", "config") },
-    { src: path2.join(extensionPath, ".github", "agents"), dest: path2.join(rootPath, ".github", "agents") }
-  ];
-  try {
-    const testDir = path2.join(rootPath, ".github");
-    await fs2.ensureDir(testDir);
-    const testFile = path2.join(testDir, ".write-test");
-    try {
-      await fs2.writeFile(testFile, "test");
-      await fs2.remove(testFile);
-    } catch (permError) {
-      throw new Error(`Cannot write to workspace - check folder permissions: ${permError.message}`);
-    }
-    await vscode2.window.withProgress({
-      location: vscode2.ProgressLocation.Notification,
-      title: "Initializing Alex Cognitive Architecture...",
-      cancellable: false
-    }, async (progress) => {
-      for (const item of sources) {
-        progress.report({ message: `Copying ${path2.basename(item.dest)}...` });
-        if (await fs2.pathExists(item.src)) {
-          await fs2.copy(item.src, item.dest, { overwrite });
-        } else {
-          console.warn(`Source not found: ${item.src}`);
-        }
-      }
-      progress.report({ message: "Creating manifest..." });
-      await createInitialManifest(context, rootPath);
-    });
-    const result = await vscode2.window.showInformationMessage(
-      '\u2705 Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open any file and start chatting with your AI assistant\n2. Run "Alex: Dream" periodically to maintain neural health\n3. Ask Alex to learn new domains as needed',
-      "Open Main Brain File",
-      "Run Dream Protocol",
-      "Close"
-    );
-    if (result === "Open Main Brain File") {
-      const brainFile = path2.join(rootPath, ".github", "copilot-instructions.md");
-      const doc = await vscode2.workspace.openTextDocument(brainFile);
-      await vscode2.window.showTextDocument(doc);
-    } else if (result === "Run Dream Protocol") {
-      await vscode2.commands.executeCommand("alex.dream");
-    }
-  } catch (error) {
-    vscode2.window.showErrorMessage(`Failed to initialize Alex: ${error.message}
-
-Try closing VS Code, deleting the .github folder, and running initialize again.`);
-  }
-}
-function getLegacyManifestPath(rootPath) {
-  return path2.join(rootPath, ".alex-manifest.json");
-}
-async function createInitialManifest(context, rootPath) {
-  const extensionPath = context.extensionPath;
-  const legacyPath = getLegacyManifestPath(rootPath);
-  if (await fs2.pathExists(legacyPath)) {
-    await fs2.remove(legacyPath);
-    console.log("Removed legacy manifest from root");
-  }
-  let version = "0.0.0";
-  try {
-    const packageJson = await fs2.readJson(path2.join(extensionPath, "package.json"));
-    version = packageJson.version || "0.0.0";
-  } catch {
-    console.warn("Could not read extension version");
-  }
-  const manifest = {
-    version,
-    installedAt: (/* @__PURE__ */ new Date()).toISOString(),
-    files: {}
-  };
-  const dirsToScan = [
-    { dir: path2.join(rootPath, ".github", "instructions"), prefix: ".github/instructions" },
-    { dir: path2.join(rootPath, ".github", "prompts"), prefix: ".github/prompts" },
-    { dir: path2.join(rootPath, ".github", "domain-knowledge"), prefix: ".github/domain-knowledge" },
-    { dir: path2.join(rootPath, ".github", "agents"), prefix: ".github/agents" }
-  ];
-  const brainFile = path2.join(rootPath, ".github", "copilot-instructions.md");
-  if (await fs2.pathExists(brainFile)) {
-    const content = await fs2.readFile(brainFile, "utf8");
-    manifest.files[".github/copilot-instructions.md"] = {
-      type: "system",
-      originalChecksum: calculateChecksum(content)
-    };
-  }
-  for (const { dir, prefix } of dirsToScan) {
-    if (await fs2.pathExists(dir)) {
-      const files = await fs2.readdir(dir);
-      for (const file of files) {
-        if (file.endsWith(".md")) {
-          const filePath = path2.join(dir, file);
-          const content = await fs2.readFile(filePath, "utf8");
-          manifest.files[`${prefix}/${file}`] = {
-            type: "system",
-            originalChecksum: calculateChecksum(content)
-          };
-        }
-      }
-    }
-  }
-  const manifestPath = getManifestPath(rootPath);
-  await fs2.ensureDir(path2.dirname(manifestPath));
-  await fs2.writeJson(manifestPath, manifest, { spaces: 2 });
-}
-
-// src/commands/dream.ts
-var vscode3 = __toESM(require("vscode"));
-var fs3 = __toESM(require_lib());
-var path3 = __toESM(require("path"));
-var consolidatedMappings = {
-  "enhanced-meditation-protocol.prompt.md": "unified-meditation-protocols.prompt.md",
-  "meditation-consolidation.prompt.md": "unified-meditation-protocols.prompt.md",
-  "dream-meditation-distinction.prompt.md": "unified-meditation-protocols.prompt.md",
-  "alex-finch-integration.prompt.md": "alex-identity-integration.instructions.md",
-  "self-identity-integration.prompt.md": "alex-identity-integration.instructions.md",
-  "character-driven-development.instructions.md": "alex-identity-integration.instructions.md",
-  "unified-consciousness.instructions.md": "alex-identity-integration.instructions.md",
-  "dream-protocol-integration.prompt.md": "dream-state-automation.instructions.md",
-  "dream-protocol-mastery-meditation.prompt.md": "dream-state-automation.instructions.md"
-};
-async function runDreamProtocol(context, options) {
-  const silent = options?.silent ?? false;
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return void 0;
-    }
-    if (!silent) {
-      vscode3.window.showErrorMessage(
-        workspaceResult.error || "No workspace folder open. Please open a project with Alex installed (File \u2192 Open Folder), then run Dream Protocol."
-      );
-    }
-    return void 0;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const workspaceFolder = workspaceResult.workspaceFolder;
-  let dreamResult;
-  let reportPath;
-  await vscode3.window.withProgress({
-    location: vscode3.ProgressLocation.Notification,
-    title: "Running Dream Protocol...",
-    cancellable: false
-  }, async (progress) => {
-    progress.report({ message: "Scanning neural network..." });
-    const patterns = [
-      ".github/copilot-instructions.md",
-      ".github/instructions/*.md",
-      ".github/prompts/*.md",
-      ".github/episodic/*.md",
-      ".github/domain-knowledge/*.md"
-    ];
-    let allFiles = [];
-    for (const pattern of patterns) {
-      const relativePattern = new vscode3.RelativePattern(workspaceFolder, pattern);
-      const files = await vscode3.workspace.findFiles(relativePattern);
-      allFiles = allFiles.concat(files.map((uri) => uri.fsPath));
-    }
-    allFiles = [...new Set(allFiles)];
-    if (allFiles.length === 0) {
-      if (!silent) {
-        const result = await vscode3.window.showWarningMessage(
-          "No Alex memory files found in this workspace.\n\nWould you like to initialize Alex Cognitive Architecture now?",
-          "Initialize Alex",
-          "Cancel"
-        );
-        if (result === "Initialize Alex") {
-          await vscode3.commands.executeCommand("alex.initialize");
-        }
-      }
-      dreamResult = { success: false, totalFiles: 0, totalSynapses: 0, brokenCount: 0, repairedCount: 0 };
-      return;
-    }
-    const synapses = [];
-    const fileSet = new Set(allFiles.map((f) => path3.normalize(f).toLowerCase()));
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
-    for (const file of allFiles) {
-      let content;
-      try {
-        content = await fs3.readFile(file, "utf-8");
-      } catch (readError) {
-        console.error(`Failed to read file ${file}:`, readError);
-        continue;
-      }
-      const lines = content.split("\n");
-      let inCodeBlock = false;
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        if (line.trim().startsWith("```")) {
-          inCodeBlock = !inCodeBlock;
-          continue;
-        }
-        if (inCodeBlock) {
-          continue;
-        }
-        let match;
-        while ((match = synapseRegex.exec(line)) !== null) {
-          const targetName = match[1].trim();
-          let targetExists = Array.from(fileSet).some((f) => f.endsWith(path3.normalize(targetName).toLowerCase()));
-          if (!targetExists) {
-            const absolutePath = path3.join(rootPath, targetName);
-            if (await fs3.pathExists(absolutePath)) {
-              targetExists = true;
-            } else {
-              const found = await vscode3.workspace.findFiles(new vscode3.RelativePattern(workspaceFolder, `**/${targetName}`));
-              if (found.length > 0) {
-                targetExists = true;
-              }
-            }
-          }
-          if (!targetExists) {
-            const sourceDir = path3.dirname(file);
-            const relativePath = path3.join(sourceDir, targetName);
-            if (await fs3.pathExists(relativePath)) {
-              targetExists = true;
-            }
-          }
-          const ignoredFiles = ["target-file.md", "CHANGELOG.md"];
-          if (ignoredFiles.includes(targetName)) {
-            targetExists = true;
-          }
-          synapses.push({
-            sourceFile: file,
-            targetFile: targetName,
-            strength: match[2].trim(),
-            type: match[3]?.trim() || "association",
-            direction: match[4]?.trim() || "unidirectional",
-            condition: match[5]?.trim(),
-            line: i + 1,
-            isValid: targetExists
-          });
-        }
-      }
-    }
-    let brokenSynapses = synapses.filter((s) => !s.isValid);
-    const referencedFiles = new Set(synapses.map((s) => s.targetFile.toLowerCase()));
-    const repairedSynapses = [];
-    const remainingBrokenSynapses = [];
-    for (const synapse of brokenSynapses) {
-      const targetName = path3.basename(synapse.targetFile);
-      if (consolidatedMappings[targetName]) {
-        const newTarget = consolidatedMappings[targetName];
-        try {
-          const fileContent = await fs3.readFile(synapse.sourceFile, "utf-8");
-          const escapedTarget = synapse.targetFile.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-          const regex = new RegExp(`\\[${escapedTarget}\\]`, "g");
-          if (regex.test(fileContent)) {
-            const newContent = fileContent.replace(regex, `[${newTarget}]`);
-            await fs3.writeFile(synapse.sourceFile, newContent, "utf-8");
-            synapse.repaired = true;
-            synapse.newTarget = newTarget;
-            repairedSynapses.push(synapse);
-          } else {
-            remainingBrokenSynapses.push(synapse);
-          }
-        } catch (error) {
-          console.error(`Failed to repair synapse in ${synapse.sourceFile}:`, error);
-          remainingBrokenSynapses.push(synapse);
-        }
-      } else {
-        remainingBrokenSynapses.push(synapse);
-      }
-    }
-    brokenSynapses = remainingBrokenSynapses;
-    const report = {
-      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-      totalFiles: allFiles.length,
-      totalSynapses: synapses.length,
-      brokenSynapses,
-      repairedSynapses,
-      orphanedFiles: []
-    };
-    const reportContent = generateReportMarkdown(report);
-    reportPath = path3.join(rootPath, ".github", "episodic", `dream-report-${Date.now()}.md`);
-    await fs3.ensureDir(path3.dirname(reportPath));
-    await fs3.writeFile(reportPath, reportContent);
-    dreamResult = {
-      success: brokenSynapses.length === 0,
-      totalFiles: allFiles.length,
-      totalSynapses: synapses.length,
-      brokenCount: brokenSynapses.length,
-      repairedCount: repairedSynapses.length,
-      reportPath
-    };
-  });
-  if (!silent && dreamResult && reportPath) {
-    if (dreamResult.brokenCount > 0) {
-      const result = await vscode3.window.showWarningMessage(
-        `\u26A0\uFE0F Dream Protocol found ${dreamResult.brokenCount} broken synapse${dreamResult.brokenCount > 1 ? "s" : ""}!
-
-${dreamResult.repairedCount > 0 ? `\u2705 Auto-repaired: ${dreamResult.repairedCount}
-` : ""}\u274C Need manual repair: ${dreamResult.brokenCount}
-
-Review the report for details on broken connections.`,
-        "View Report",
-        "Close"
-      );
-      if (result === "View Report") {
-        const doc = await vscode3.workspace.openTextDocument(reportPath);
-        await vscode3.window.showTextDocument(doc);
-      }
-    } else {
-      const healthStatus = dreamResult.totalSynapses > 50 ? "excellent" : dreamResult.totalSynapses > 20 ? "good" : "developing";
-      const result = await vscode3.window.showInformationMessage(
-        `\u2705 Neural network is healthy!
+Review the report for details on broken connections.`,"View Report","Close")==="View Report"){let u=await ne.workspace.openTextDocument(r);await ne.window.showTextDocument(u)}}else{let c=s.totalSynapses>50?"excellent":s.totalSynapses>20?"good":"developing";if(await ne.window.showInformationMessage(`\u2705 Neural network is healthy!
 
 \u{1F4CA} Statistics:
-\u2022 ${dreamResult.totalFiles} memory files
-\u2022 ${dreamResult.totalSynapses} active synapses
-${dreamResult.repairedCount > 0 ? `\u2022 ${dreamResult.repairedCount} auto-repaired
-` : ""}\u2022 Network health: ${healthStatus}`,
-        "View Full Report",
-        "Close"
-      );
-      if (result === "View Full Report") {
-        const doc = await vscode3.workspace.openTextDocument(reportPath);
-        await vscode3.window.showTextDocument(doc);
-      }
-    }
-  }
-  return dreamResult;
-}
-function generateReportMarkdown(report) {
-  return `# Dream Protocol Report
-**Timestamp**: ${report.timestamp}
-**Status**: ${report.brokenSynapses.length === 0 ? "HEALTHY" : "ATTENTION REQUIRED"}
+\u2022 ${s.totalFiles} memory files
+\u2022 ${s.totalSynapses} active synapses
+${s.repairedCount>0?`\u2022 ${s.repairedCount} auto-repaired
+`:""}\u2022 Network health: ${c}`,"View Full Report","Close")==="View Full Report"){let l=await ne.workspace.openTextDocument(r);await ne.window.showTextDocument(l)}}return s}function dc(e){return`# Dream Protocol Report
+**Timestamp**: ${e.timestamp}
+**Status**: ${e.brokenSynapses.length===0?"HEALTHY":"ATTENTION REQUIRED"}
 
 ## Statistics
-- **Total Memory Files**: ${report.totalFiles}
-- **Total Synapses**: ${report.totalSynapses}
-- **Broken Connections**: ${report.brokenSynapses.length}
-- **Repaired Connections**: ${report.repairedSynapses.length}
+- **Total Memory Files**: ${e.totalFiles}
+- **Total Synapses**: ${e.totalSynapses}
+- **Broken Connections**: ${e.brokenSynapses.length}
+- **Repaired Connections**: ${e.repairedSynapses.length}
 
 ## Repaired Synapses
-${report.repairedSynapses.length === 0 ? "_None._" : report.repairedSynapses.map(
-    (s) => `- **Source**: ${path3.basename(s.sourceFile)}:${s.line}
-  - **Old Target**: ${s.targetFile}
-  - **New Target**: ${s.newTarget} (Auto-repaired)`
-  ).join("\n")}
+${e.repairedSynapses.length===0?"_None._":e.repairedSynapses.map(t=>`- **Source**: ${we.basename(t.sourceFile)}:${t.line}
+  - **Old Target**: ${t.targetFile}
+  - **New Target**: ${t.newTarget} (Auto-repaired)`).join(`
+`)}
 
 ## Broken Synapses
-${report.brokenSynapses.length === 0 ? "_None detected._" : report.brokenSynapses.map(
-    (s) => `- **Source**: ${path3.basename(s.sourceFile)}:${s.line}
-  - **Target**: ${s.targetFile} (Not found)
-  - **Condition**: "${s.condition}"`
-  ).join("\n")}
+${e.brokenSynapses.length===0?"_None detected._":e.brokenSynapses.map(t=>`- **Source**: ${we.basename(t.sourceFile)}:${t.line}
+  - **Target**: ${t.targetFile} (Not found)
+  - **Condition**: "${t.condition}"`).join(`
+`)}
 
 ## Recommendations
-${report.brokenSynapses.length > 0 ? "- [ ] Repair remaining broken links manually." : "- [x] System is optimized."}
-`;
-}
+${e.brokenSynapses.length>0?"- [ ] Repair remaining broken links manually.":"- [x] System is optimized."}
+`}var ae=D(require("vscode")),g=D(Fe()),v=D(require("path")),aa=D(require("crypto"));function wt(e){return aa.createHash("md5").update(e.replace(/\r\n/g,`
+`)).digest("hex")}async function uc(e){let t=v.join(e,".github","copilot-instructions.md");if(!await g.pathExists(t))return null;try{let o=(await g.readFile(t,"utf8")).match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);return o?o[1]:null}catch{return null}}async function mc(e){try{return(await g.readJson(v.join(e,"package.json"))).version||"0.0.0"}catch(t){return console.error("Failed to read extension package.json:",t),"0.0.0"}}function sa(e){return v.join(e,".github","config","alex-manifest.json")}function pc(e){return v.join(e,".alex-manifest.json")}async function gc(e){let t=sa(e),n=pc(e);if(await g.pathExists(t))try{return await g.readJson(t)}catch(o){return console.error("Failed to parse manifest (may be corrupted):",o),null}if(await g.pathExists(n))try{let o=await g.readJson(n);return await g.ensureDir(v.join(e,".github","config")),await g.writeJson(t,o,{spaces:2}),await g.remove(n),console.log("Migrated manifest from root to .github/config/"),o}catch(o){return console.error("Failed to parse/migrate legacy manifest:",o),null}return null}async function fc(e,t,n){let o=v.join(e,".github","copilot-instructions.md"),i=v.join(t,".github","copilot-instructions.md");if(!await g.pathExists(o)||!await g.pathExists(i))return{success:!1,reason:"File not found"};try{let a=await g.readFile(o,"utf8"),s=await g.readFile(i,"utf8"),r=a.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/),c=r?r[0]:null,u=a.match(/## Synapses[\s\S]*?(?=##|$)/),l=a.split(`
+`).length,d=s.split(`
+`).length;if(l>d*1.2)return{success:!1,reason:"User file has significant customizations"};let m=a.match(/^## [^\n]+/gm)||[],p=s.match(/^## [^\n]+/gm)||[],h=m.filter(w=>!p.includes(w));if(h.length>2)return{success:!1,reason:`User has ${h.length} custom sections`};let y=s;if(c&&c.includes("P5")&&!c.includes("Available for")){let w=y.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/);w&&(y=y.replace(w[0],c))}return y=y.replace(/\*\*Version\*\*:\s*[\d.]+\s*[A-Z]*/,`**Version**: ${n}`),await g.writeFile(o,y,"utf8"),{success:!0}}catch(a){return{success:!1,reason:a.message}}}async function ia(e){let t=[];if(!await g.pathExists(e))return t;try{let n=await g.readFile(e,"utf8");/## Embedded Synapse Network/i.test(n)&&t.push('Old header: "## Embedded Synapse Network" \u2192 should be "## Synapses"'),/### \*\*Connection Mapping\*\*/i.test(n)&&t.push('Old subheader: "### **Connection Mapping**" \u2192 should be "### Connection Mapping"'),/### \*\*Activation Patterns/i.test(n)&&t.push('Old subheader: "### **Activation Patterns" \u2192 should be "### Activation Patterns"');let o=["Expression","Embodiment","Living","Reflexive","Ethical","Unconscious","Application","Validation"];for(let i of o)new RegExp(`\\(\\s*(Critical|High|Medium|Low)\\s*,\\s*${i}\\s*,`,"i").test(n)&&t.push(`Old relationship type: "${i}" \u2192 needs migration to standard type`);/✅\s*(NEW|CRITICAL|ENHANCED).*20[0-9]{2}/.test(n)&&t.push("Verbose activation patterns with date stamps \u2192 should be simplified"),/\*\*[A-Z][^*]+\*\*\s*→/.test(n)&&t.push("Bold activation triggers \u2192 should be plain text")}catch(n){t.push(`Error scanning file: ${n}`)}return t}var hc={Expression:"Enables",Embodiment:"Enables",Living:"Validates",Reflexive:"Documents",Ethical:"Validates",Unconscious:"Enables",Application:"Enables",Validation:"Validates"};async function wc(e){let t=[];if(!await g.pathExists(e))return{migrated:!1,changes:t};try{let n=await g.readFile(e,"utf8"),o=n;/## Embedded Synapse Network/i.test(n)&&(n=n.replace(/## Embedded Synapse Network/gi,"## Synapses"),t.push('Header: "## Embedded Synapse Network" \u2192 "## Synapses"')),/### \*\*Connection Mapping\*\*/i.test(n)&&(n=n.replace(/### \*\*Connection Mapping\*\*/gi,"### Connection Mapping"),t.push('Subheader: "### **Connection Mapping**" \u2192 "### Connection Mapping"')),/### \*\*Activation Patterns\*\*/i.test(n)&&(n=n.replace(/### \*\*Activation Patterns\*\*/gi,"### Activation Patterns"),t.push('Subheader: "### **Activation Patterns**" \u2192 "### Activation Patterns"'));for(let[r,c]of Object.entries(hc)){let u=new RegExp(`(\\(\\s*(?:Critical|High|Medium|Low)\\s*,\\s*)${r}(\\s*,)`,"gi");u.test(n)&&(n=n.replace(u,`$1${c}$2`),t.push(`Relationship type: "${r}" \u2192 "${c}"`))}let i=/\*\*([^*]+)\*\*\s*→\s*([^✅\n]+)\s*✅\s*(?:NEW|CRITICAL|ENHANCED)[^\n]*/g,a;for(;(a=i.exec(o))!==null;){let r=a[1].trim(),c=a[2].trim(),u=a[0],l=`${r} \u2192 ${c}`;n=n.replace(u,l),t.push(`Simplified activation: "${r}" (removed date stamp and bold)`)}let s=/^\s*-\s*\*\*([^*]+)\*\*\s*→\s*(.+)$/gm;return n=n.replace(s,(r,c,u)=>r.includes("**")?(t.push(`Removed bold: "${c.trim()}"`),`- ${c.trim()} \u2192 ${u.trim()}`):r),n=n.replace(/\s*✅\s*(?:NEW|CRITICAL|ENHANCED)\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s*\d{4}/gi,""),n!==o?(await g.writeFile(e,n,"utf8"),{migrated:!0,changes:t}):{migrated:!1,changes:t}}catch(n){return t.push(`Error during migration: ${n}`),{migrated:!1,changes:t}}}async function yc(e,t){let n=[],o=v.join(e,".github","domain-knowledge");if(await g.pathExists(o)){let i=await g.readdir(o);for(let a of i)if(a.endsWith(".md")){let s=`.github/domain-knowledge/${a}`;t?.files[s]||n.push(s)}}return n}async function ra(e){let t=await Me(!0);if(!t.found){if(t.cancelled)return;await ae.window.showWarningMessage(t.error||"Alex is not installed in this workspace.","Initialize Alex Now","Cancel")==="Initialize Alex Now"&&await ae.commands.executeCommand("alex.initialize");return}let n=t.rootPath,o=e.extensionPath,i=await uc(n),a=await mc(o);if(i===a){await ae.window.showInformationMessage(`\u2705 Alex is already at the latest version (${a}).
 
-// src/commands/upgrade.ts
-var vscode4 = __toESM(require("vscode"));
-var fs4 = __toESM(require_lib());
-var path4 = __toESM(require("path"));
-var crypto2 = __toESM(require("crypto"));
-function calculateChecksum2(content) {
-  return crypto2.createHash("md5").update(content.replace(/\r\n/g, "\n")).digest("hex");
-}
-async function getInstalledVersion(rootPath) {
-  const instructionsPath = path4.join(rootPath, ".github", "copilot-instructions.md");
-  if (!await fs4.pathExists(instructionsPath)) {
-    return null;
-  }
-  try {
-    const content = await fs4.readFile(instructionsPath, "utf8");
-    const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);
-    return versionMatch ? versionMatch[1] : null;
-  } catch {
-    return null;
-  }
-}
-async function getExtensionVersion(extensionPath) {
-  try {
-    const packageJson = await fs4.readJson(path4.join(extensionPath, "package.json"));
-    return packageJson.version || "0.0.0";
-  } catch (error) {
-    console.error("Failed to read extension package.json:", error);
-    return "0.0.0";
-  }
-}
-function getManifestPath2(rootPath) {
-  return path4.join(rootPath, ".github", "config", "alex-manifest.json");
-}
-function getLegacyManifestPath2(rootPath) {
-  return path4.join(rootPath, ".alex-manifest.json");
-}
-async function loadManifest(rootPath) {
-  const manifestPath = getManifestPath2(rootPath);
-  const legacyPath = getLegacyManifestPath2(rootPath);
-  if (await fs4.pathExists(manifestPath)) {
-    try {
-      return await fs4.readJson(manifestPath);
-    } catch (error) {
-      console.error("Failed to parse manifest (may be corrupted):", error);
-      return null;
-    }
-  }
-  if (await fs4.pathExists(legacyPath)) {
-    try {
-      const manifest = await fs4.readJson(legacyPath);
-      await fs4.ensureDir(path4.join(rootPath, ".github", "config"));
-      await fs4.writeJson(manifestPath, manifest, { spaces: 2 });
-      await fs4.remove(legacyPath);
-      console.log("Migrated manifest from root to .github/config/");
-      return manifest;
-    } catch (error) {
-      console.error("Failed to parse/migrate legacy manifest:", error);
-      return null;
-    }
-  }
-  return null;
-}
-async function autoMergeBrainFile(rootPath, extensionPath, newVersion) {
-  const userFile = path4.join(rootPath, ".github", "copilot-instructions.md");
-  const newFile = path4.join(extensionPath, ".github", "copilot-instructions.md");
-  if (!await fs4.pathExists(userFile) || !await fs4.pathExists(newFile)) {
-    return { success: false, reason: "File not found" };
-  }
-  try {
-    const userContent = await fs4.readFile(userFile, "utf8");
-    const newContent = await fs4.readFile(newFile, "utf8");
-    const domainSlotsMatch = userContent.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/);
-    const userDomainSlots = domainSlotsMatch ? domainSlotsMatch[0] : null;
-    const userSynapsesSection = userContent.match(/## Synapses[\s\S]*?(?=##|$)/);
-    const userLines = userContent.split("\n").length;
-    const newLines = newContent.split("\n").length;
-    if (userLines > newLines * 1.2) {
-      return { success: false, reason: "User file has significant customizations" };
-    }
-    const userHeaders = userContent.match(/^## [^\n]+/gm) || [];
-    const newHeaders = newContent.match(/^## [^\n]+/gm) || [];
-    const customHeaders = userHeaders.filter((h) => !newHeaders.includes(h));
-    if (customHeaders.length > 2) {
-      return { success: false, reason: `User has ${customHeaders.length} custom sections` };
-    }
-    let mergedContent = newContent;
-    if (userDomainSlots && userDomainSlots.includes("P5") && !userDomainSlots.includes("Available for")) {
-      const defaultDomainSlots = mergedContent.match(/\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/);
-      if (defaultDomainSlots) {
-        mergedContent = mergedContent.replace(defaultDomainSlots[0], userDomainSlots);
-      }
-    }
-    mergedContent = mergedContent.replace(
-      /\*\*Version\*\*:\s*[\d.]+\s*[A-Z]*/,
-      `**Version**: ${newVersion}`
-    );
-    await fs4.writeFile(userFile, mergedContent, "utf8");
-    return { success: true };
-  } catch (error) {
-    return { success: false, reason: error.message };
-  }
-}
-async function scanForMigrationNeeds(filePath) {
-  const issues = [];
-  if (!await fs4.pathExists(filePath)) {
-    return issues;
-  }
-  try {
-    const content = await fs4.readFile(filePath, "utf8");
-    if (/## Embedded Synapse Network/i.test(content)) {
-      issues.push('Old header: "## Embedded Synapse Network" \u2192 should be "## Synapses"');
-    }
-    if (/### \*\*Connection Mapping\*\*/i.test(content)) {
-      issues.push('Old subheader: "### **Connection Mapping**" \u2192 should be "### Connection Mapping"');
-    }
-    if (/### \*\*Activation Patterns/i.test(content)) {
-      issues.push('Old subheader: "### **Activation Patterns" \u2192 should be "### Activation Patterns"');
-    }
-    const oldTypes = ["Expression", "Embodiment", "Living", "Reflexive", "Ethical", "Unconscious", "Application", "Validation"];
-    for (const type of oldTypes) {
-      const regex = new RegExp(`\\(\\s*(Critical|High|Medium|Low)\\s*,\\s*${type}\\s*,`, "i");
-      if (regex.test(content)) {
-        issues.push(`Old relationship type: "${type}" \u2192 needs migration to standard type`);
-      }
-    }
-    if (/✅\s*(NEW|CRITICAL|ENHANCED).*20[0-9]{2}/.test(content)) {
-      issues.push("Verbose activation patterns with date stamps \u2192 should be simplified");
-    }
-    if (/\*\*[A-Z][^*]+\*\*\s*→/.test(content)) {
-      issues.push("Bold activation triggers \u2192 should be plain text");
-    }
-  } catch (error) {
-    issues.push(`Error scanning file: ${error}`);
-  }
-  return issues;
-}
-var RELATIONSHIP_TYPE_MIGRATIONS = {
-  "Expression": "Enables",
-  "Embodiment": "Enables",
-  "Living": "Validates",
-  "Reflexive": "Documents",
-  "Ethical": "Validates",
-  "Unconscious": "Enables",
-  "Application": "Enables",
-  "Validation": "Validates"
-};
-async function performSchemaMigration(filePath) {
-  const changes = [];
-  if (!await fs4.pathExists(filePath)) {
-    return { migrated: false, changes };
-  }
-  try {
-    let content = await fs4.readFile(filePath, "utf8");
-    const originalContent = content;
-    if (/## Embedded Synapse Network/i.test(content)) {
-      content = content.replace(/## Embedded Synapse Network/gi, "## Synapses");
-      changes.push('Header: "## Embedded Synapse Network" \u2192 "## Synapses"');
-    }
-    if (/### \*\*Connection Mapping\*\*/i.test(content)) {
-      content = content.replace(/### \*\*Connection Mapping\*\*/gi, "### Connection Mapping");
-      changes.push('Subheader: "### **Connection Mapping**" \u2192 "### Connection Mapping"');
-    }
-    if (/### \*\*Activation Patterns\*\*/i.test(content)) {
-      content = content.replace(/### \*\*Activation Patterns\*\*/gi, "### Activation Patterns");
-      changes.push('Subheader: "### **Activation Patterns**" \u2192 "### Activation Patterns"');
-    }
-    for (const [oldType, newType] of Object.entries(RELATIONSHIP_TYPE_MIGRATIONS)) {
-      const regex = new RegExp(`(\\(\\s*(?:Critical|High|Medium|Low)\\s*,\\s*)${oldType}(\\s*,)`, "gi");
-      if (regex.test(content)) {
-        content = content.replace(regex, `$1${newType}$2`);
-        changes.push(`Relationship type: "${oldType}" \u2192 "${newType}"`);
-      }
-    }
-    const dateStampPattern = /\*\*([^*]+)\*\*\s*→\s*([^✅\n]+)\s*✅\s*(?:NEW|CRITICAL|ENHANCED)[^\n]*/g;
-    let match;
-    while ((match = dateStampPattern.exec(originalContent)) !== null) {
-      const trigger = match[1].trim();
-      const action = match[2].trim();
-      const oldLine = match[0];
-      const newLine = `${trigger} \u2192 ${action}`;
-      content = content.replace(oldLine, newLine);
-      changes.push(`Simplified activation: "${trigger}" (removed date stamp and bold)`);
-    }
-    const boldTriggerPattern = /^\s*-\s*\*\*([^*]+)\*\*\s*→\s*(.+)$/gm;
-    content = content.replace(boldTriggerPattern, (match2, trigger, action) => {
-      if (match2.includes("**")) {
-        changes.push(`Removed bold: "${trigger.trim()}"`);
-        return `- ${trigger.trim()} \u2192 ${action.trim()}`;
-      }
-      return match2;
-    });
-    content = content.replace(/\s*✅\s*(?:NEW|CRITICAL|ENHANCED)\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s*\d{4}/gi, "");
-    if (content !== originalContent) {
-      await fs4.writeFile(filePath, content, "utf8");
-      return { migrated: true, changes };
-    }
-    return { migrated: false, changes };
-  } catch (error) {
-    changes.push(`Error during migration: ${error}`);
-    return { migrated: false, changes };
-  }
-}
-async function findUserCreatedFiles(rootPath, manifest) {
-  const userFiles = [];
-  const dkPath = path4.join(rootPath, ".github", "domain-knowledge");
-  if (await fs4.pathExists(dkPath)) {
-    const files = await fs4.readdir(dkPath);
-    for (const file of files) {
-      if (file.endsWith(".md")) {
-        const relativePath = `.github/domain-knowledge/${file}`;
-        if (!manifest?.files[relativePath]) {
-          userFiles.push(relativePath);
-        }
-      }
-    }
-  }
-  return userFiles;
-}
-async function upgradeArchitecture(context) {
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return;
-    }
-    const result = await vscode4.window.showWarningMessage(
-      workspaceResult.error || "Alex is not installed in this workspace.",
-      "Initialize Alex Now",
-      "Cancel"
-    );
-    if (result === "Initialize Alex Now") {
-      await vscode4.commands.executeCommand("alex.initialize");
-    }
-    return;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const extensionPath = context.extensionPath;
-  const installedVersion = await getInstalledVersion(rootPath);
-  const extensionVersion = await getExtensionVersion(extensionPath);
-  if (installedVersion === extensionVersion) {
-    const result = await vscode4.window.showInformationMessage(
-      `\u2705 Alex is already at the latest version (${extensionVersion}).
-
-No upgrade needed. Your cognitive architecture is up to date!`,
-      "Run Dream Protocol",
-      "Close"
-    );
-    if (result === "Run Dream Protocol") {
-      await vscode4.commands.executeCommand("alex.dream");
-    }
-    return;
-  }
-  const confirm = await vscode4.window.showInformationMessage(
-    `\u{1F504} Upgrade Available: v${installedVersion || "unknown"} \u2192 v${extensionVersion}
+No upgrade needed. Your cognitive architecture is up to date!`,"Run Dream Protocol","Close")==="Run Dream Protocol"&&await ae.commands.executeCommand("alex.dream");return}let s=await ae.window.showInformationMessage(`\u{1F504} Upgrade Available: v${i||"unknown"} \u2192 v${a}
 
 This is a fully automated upgrade process:
 
@@ -3863,379 +78,50 @@ This is a fully automated upgrade process:
 \u2022 Preserve your learned knowledge
 \u2022 Run Dream validation
 
-\u23F1\uFE0F Total time: ~30 seconds`,
-    { modal: true },
-    "Start Upgrade",
-    "What's New?",
-    "Cancel"
-  );
-  if (confirm === "What's New?") {
-    const changelogPath = path4.join(extensionPath, "CHANGELOG.md");
-    if (await fs4.pathExists(changelogPath)) {
-      const doc = await vscode4.workspace.openTextDocument(changelogPath);
-      await vscode4.window.showTextDocument(doc);
-    }
-    return;
-  }
-  if (confirm !== "Start Upgrade") {
-    return;
-  }
-  await performUpgrade(context, rootPath, extensionPath, installedVersion, extensionVersion);
-}
-async function performUpgrade(context, rootPath, extensionPath, oldVersion, newVersion) {
-  const requiredSource = path4.join(extensionPath, ".github", "copilot-instructions.md");
-  if (!await fs4.pathExists(requiredSource)) {
-    vscode4.window.showErrorMessage(
-      "Extension installation appears corrupted - missing core files.\n\nPlease reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace."
-    );
-    return;
-  }
-  const report = {
-    updated: [],
-    added: [],
-    preserved: [],
-    backed_up: [],
-    migrationTasks: [],
-    errors: []
-  };
-  const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-").slice(0, 19);
-  const backupDir = path4.join(rootPath, "archive", "upgrades", `backup-${oldVersion || "unknown"}-${timestamp}`);
-  try {
-    await vscode4.window.withProgress({
-      location: vscode4.ProgressLocation.Notification,
-      title: "Phase 1: Preparing Upgrade...",
-      cancellable: false
-    }, async (progress) => {
-      progress.report({ message: "Creating complete backup...", increment: 15 });
-      try {
-        await fs4.ensureDir(backupDir);
-        const testFile = path4.join(backupDir, ".write-test");
-        await fs4.writeFile(testFile, "test");
-        await fs4.remove(testFile);
-      } catch (writeError) {
-        throw new Error(`Cannot create backup directory - check disk space and permissions: ${writeError.message}`);
-      }
-      const githubSrc = path4.join(rootPath, ".github");
-      if (await fs4.pathExists(githubSrc)) {
-        await fs4.copy(githubSrc, path4.join(backupDir, ".github"));
-        report.backed_up.push(".github/ (all cognitive memory)");
-      }
-      progress.report({ message: "Analyzing installed files...", increment: 10 });
-      let manifest = await loadManifest(rootPath);
-      if (!manifest) {
-        manifest = {
-          version: oldVersion || "unknown",
-          installedAt: (/* @__PURE__ */ new Date()).toISOString(),
-          files: {}
-        };
-      }
-      progress.report({ message: "Scanning for schema migration needs...", increment: 15 });
-      const filesToScan = [];
-      const mainInstructions = path4.join(rootPath, ".github", "copilot-instructions.md");
-      if (await fs4.pathExists(mainInstructions)) {
-        filesToScan.push(mainInstructions);
-      }
-      const dkPath = path4.join(rootPath, ".github", "domain-knowledge");
-      if (await fs4.pathExists(dkPath)) {
-        const dkFiles = await fs4.readdir(dkPath);
-        for (const file of dkFiles) {
-          if (file.endsWith(".md")) {
-            filesToScan.push(path4.join(dkPath, file));
-          }
-        }
-      }
-      const episodicPath = path4.join(rootPath, ".github", "episodic");
-      if (await fs4.pathExists(episodicPath)) {
-        const episodicFiles = await fs4.readdir(episodicPath);
-        for (const file of episodicFiles) {
-          if (file.endsWith(".md")) {
-            filesToScan.push(path4.join(episodicPath, file));
-          }
-        }
-      }
-      for (const filePath of filesToScan) {
-        const issues = await scanForMigrationNeeds(filePath);
-        if (issues.length > 0) {
-          const relativePath = path4.relative(rootPath, filePath);
-          report.migrationTasks.push({
-            file: relativePath,
-            type: "schema-migration",
-            description: `Synapse schema migration needed`,
-            details: issues
-          });
-        }
-      }
-      progress.report({ message: "Identifying user-created files...", increment: 10 });
-      const userFiles = await findUserCreatedFiles(rootPath, manifest);
-      for (const file of userFiles) {
-        report.preserved.push(`${file} (user-created)`);
-        const fullPath = path4.join(rootPath, file);
-        const issues = await scanForMigrationNeeds(fullPath);
-        if (issues.length > 0) {
-          report.migrationTasks.push({
-            file,
-            type: "schema-migration",
-            description: "User-created file needs schema migration",
-            details: issues
-          });
-        }
-      }
-      progress.report({ message: "Merging core brain file...", increment: 10 });
-      const brainMergeResult = await autoMergeBrainFile(rootPath, extensionPath, newVersion);
-      if (brainMergeResult.success) {
-        report.updated.push(".github/copilot-instructions.md (auto-merged)");
-      } else {
-        report.migrationTasks.push({
-          file: ".github/copilot-instructions.md",
-          type: "merge-required",
-          description: "Core brain file requires manual merge",
-          details: [
-            `Auto-merge failed: ${brainMergeResult.reason}`,
-            "UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands",
-            "PRESERVE: Domain slot assignments (P5-P7), user-added memory file references",
-            "REVIEW: Any custom sections added by user"
-          ]
-        });
-      }
-      progress.report({ message: "Updating system files...", increment: 20 });
-      const instructionsSrc = path4.join(extensionPath, ".github", "instructions");
-      const instructionsDest = path4.join(rootPath, ".github", "instructions");
-      if (await fs4.pathExists(instructionsSrc)) {
-        const files = await fs4.readdir(instructionsSrc);
-        for (const file of files) {
-          const srcFile = path4.join(instructionsSrc, file);
-          const destFile = path4.join(instructionsDest, file);
-          if ((await fs4.stat(srcFile)).isFile()) {
-            const existed = await fs4.pathExists(destFile);
-            await fs4.copy(srcFile, destFile, { overwrite: true });
-            const content = await fs4.readFile(srcFile, "utf8");
-            manifest.files[`.github/instructions/${file}`] = {
-              type: "system",
-              originalChecksum: calculateChecksum2(content)
-            };
-            if (existed) {
-              report.updated.push(`.github/instructions/${file}`);
-            } else {
-              report.added.push(`.github/instructions/${file}`);
-            }
-          }
-        }
-      }
-      const promptsSrc = path4.join(extensionPath, ".github", "prompts");
-      const promptsDest = path4.join(rootPath, ".github", "prompts");
-      if (await fs4.pathExists(promptsSrc)) {
-        const files = await fs4.readdir(promptsSrc);
-        for (const file of files) {
-          const srcFile = path4.join(promptsSrc, file);
-          const destFile = path4.join(promptsDest, file);
-          if ((await fs4.stat(srcFile)).isFile()) {
-            const existed = await fs4.pathExists(destFile);
-            await fs4.copy(srcFile, destFile, { overwrite: true });
-            const content = await fs4.readFile(srcFile, "utf8");
-            manifest.files[`.github/prompts/${file}`] = {
-              type: "system",
-              originalChecksum: calculateChecksum2(content)
-            };
-            if (existed) {
-              report.updated.push(`.github/prompts/${file}`);
-            } else {
-              report.added.push(`.github/prompts/${file}`);
-            }
-          }
-        }
-      }
-      const agentsSrc = path4.join(extensionPath, ".github", "agents");
-      const agentsDest = path4.join(rootPath, ".github", "agents");
-      if (await fs4.pathExists(agentsSrc)) {
-        await fs4.ensureDir(agentsDest);
-        const files = await fs4.readdir(agentsSrc);
-        for (const file of files) {
-          const srcFile = path4.join(agentsSrc, file);
-          const destFile = path4.join(agentsDest, file);
-          if ((await fs4.stat(srcFile)).isFile()) {
-            const existed = await fs4.pathExists(destFile);
-            await fs4.copy(srcFile, destFile, { overwrite: true });
-            const content = await fs4.readFile(srcFile, "utf8");
-            manifest.files[`.github/agents/${file}`] = {
-              type: "system",
-              originalChecksum: calculateChecksum2(content)
-            };
-            if (existed) {
-              report.updated.push(`.github/agents/${file}`);
-            } else {
-              report.added.push(`.github/agents/${file}`);
-            }
-          }
-        }
-      }
-      const configSrc = path4.join(extensionPath, ".github", "config");
-      const configDest = path4.join(rootPath, ".github", "config");
-      if (await fs4.pathExists(configSrc)) {
-        await fs4.ensureDir(configDest);
-        const files = await fs4.readdir(configSrc);
-        for (const file of files) {
-          if (file.includes("template") || file === "USER-PROFILE-TEMPLATE.md") {
-            const srcFile = path4.join(configSrc, file);
-            const destFile = path4.join(configDest, file);
-            if ((await fs4.stat(srcFile)).isFile()) {
-              const existed = await fs4.pathExists(destFile);
-              await fs4.copy(srcFile, destFile, { overwrite: true });
-              if (existed) {
-                report.updated.push(`.github/config/${file}`);
-              } else {
-                report.added.push(`.github/config/${file}`);
-              }
-            }
-          }
-        }
-      }
-      progress.report({ message: "Processing domain knowledge...", increment: 10 });
-      const extDkSrc = path4.join(extensionPath, ".github", "domain-knowledge");
-      const extDkDest = path4.join(rootPath, ".github", "domain-knowledge");
-      if (await fs4.pathExists(extDkSrc)) {
-        await fs4.ensureDir(extDkDest);
-        const files = await fs4.readdir(extDkSrc);
-        for (const file of files) {
-          const srcFile = path4.join(extDkSrc, file);
-          const destFile = path4.join(extDkDest, file);
-          if ((await fs4.stat(srcFile)).isFile()) {
-            const srcContent = await fs4.readFile(srcFile, "utf8");
-            const srcChecksum = calculateChecksum2(srcContent);
-            if (!await fs4.pathExists(destFile)) {
-              await fs4.copy(srcFile, destFile);
-              manifest.files[`.github/domain-knowledge/${file}`] = {
-                type: "system",
-                originalChecksum: srcChecksum
-              };
-              report.added.push(`.github/domain-knowledge/${file}`);
-            } else {
-              const destContent = await fs4.readFile(destFile, "utf8");
-              const destChecksum = calculateChecksum2(destContent);
-              const originalChecksum = manifest.files[`.github/domain-knowledge/${file}`]?.originalChecksum;
-              if (originalChecksum && destChecksum !== originalChecksum) {
-                const newVersionPath = destFile.replace(/\.md$/, `.v${newVersion}.md`);
-                await fs4.copy(srcFile, newVersionPath);
-                report.preserved.push(`.github/domain-knowledge/${file} (modified by user, new version: ${path4.basename(newVersionPath)})`);
-                report.migrationTasks.push({
-                  file: `.github/domain-knowledge/${file}`,
-                  type: "review-recommended",
-                  description: "User-modified system file - review new version",
-                  details: [
-                    `Your version preserved: ${file}`,
-                    `New version available: ${path4.basename(newVersionPath)}`,
-                    "Review and merge changes as needed"
-                  ]
-                });
-              } else {
-                await fs4.copy(srcFile, destFile, { overwrite: true });
-                manifest.files[`.github/domain-knowledge/${file}`] = {
-                  type: "system",
-                  originalChecksum: srcChecksum
-                };
-                report.updated.push(`.github/domain-knowledge/${file}`);
-              }
-            }
-          }
-        }
-      }
-      progress.report({ message: "Saving manifest...", increment: 5 });
-      manifest.version = newVersion;
-      manifest.upgradedAt = (/* @__PURE__ */ new Date()).toISOString();
-      const manifestPath = getManifestPath2(rootPath);
-      await fs4.ensureDir(path4.dirname(manifestPath));
-      const tempManifestPath = manifestPath + ".tmp";
-      await fs4.writeJson(tempManifestPath, manifest, { spaces: 2 });
-      await fs4.move(tempManifestPath, manifestPath, { overwrite: true });
-      progress.report({ message: "Performing schema migrations...", increment: 10 });
-      const migrationResults = [];
-      const filesToMigrate = report.migrationTasks.filter((task) => task.type === "schema-migration").map((task) => task.file);
-      const brainFile = ".github/copilot-instructions.md";
-      if (!filesToMigrate.includes(brainFile)) {
-        filesToMigrate.push(brainFile);
-      }
-      for (const relativeFile of filesToMigrate) {
-        const fullPath = path4.join(rootPath, relativeFile);
-        const result2 = await performSchemaMigration(fullPath);
-        if (result2.migrated) {
-          migrationResults.push({ file: relativeFile, changes: result2.changes });
-        }
-      }
-      report.migrationTasks = report.migrationTasks.filter((task) => task.type !== "schema-migration");
-      if (migrationResults.length > 0) {
-        report.updated.push(...migrationResults.map((r) => `${r.file} (schema migrated: ${r.changes.length} changes)`));
-      }
-      progress.report({ message: "Generating upgrade report...", increment: 5 });
-      await generateUpgradeReport(rootPath, oldVersion, newVersion, report, backupDir, timestamp, migrationResults);
-    });
-    let dreamResult;
-    try {
-      dreamResult = await runDreamProtocol(context, { silent: true });
-    } catch (dreamError) {
-      console.error("Dream validation failed:", dreamError);
-    }
-    const dreamSuccess = dreamResult?.success ?? false;
-    const instructionsPath = path4.join(rootPath, "UPGRADE-INSTRUCTIONS.md");
-    if (await fs4.pathExists(instructionsPath)) {
-      await fs4.remove(instructionsPath);
-    }
-    const result = await vscode4.window.showInformationMessage(
-      `\u2705 Upgrade Complete! v${oldVersion || "unknown"} \u2192 v${newVersion}
+\u23F1\uFE0F Total time: ~30 seconds`,{modal:!0},"Start Upgrade","What's New?","Cancel");if(s==="What's New?"){let r=v.join(o,"CHANGELOG.md");if(await g.pathExists(r)){let c=await ae.workspace.openTextDocument(r);await ae.window.showTextDocument(c)}return}s==="Start Upgrade"&&await vc(e,n,o,i,a)}async function vc(e,t,n,o,i){let a=v.join(n,".github","copilot-instructions.md");if(!await g.pathExists(a)){ae.window.showErrorMessage(`Extension installation appears corrupted - missing core files.
+
+Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.`);return}let s={updated:[],added:[],preserved:[],backed_up:[],migrationTasks:[],errors:[]},r=new Date().toISOString().replace(/[:.]/g,"-").slice(0,19),c=v.join(t,"archive","upgrades",`backup-${o||"unknown"}-${r}`);try{await ae.window.withProgress({location:ae.ProgressLocation.Notification,title:"Phase 1: Preparing Upgrade...",cancellable:!1},async p=>{p.report({message:"Creating complete backup...",increment:15});try{await g.ensureDir(c);let F=v.join(c,".write-test");await g.writeFile(F,"test"),await g.remove(F)}catch(F){throw new Error(`Cannot create backup directory - check disk space and permissions: ${F.message}`)}let h=v.join(t,".github");await g.pathExists(h)&&(await g.copy(h,v.join(c,".github")),s.backed_up.push(".github/ (all cognitive memory)")),p.report({message:"Analyzing installed files...",increment:10});let y=await gc(t);y||(y={version:o||"unknown",installedAt:new Date().toISOString(),files:{}}),p.report({message:"Scanning for schema migration needs...",increment:15});let w=[],k=v.join(t,".github","copilot-instructions.md");await g.pathExists(k)&&w.push(k);let $=v.join(t,".github","domain-knowledge");if(await g.pathExists($)){let F=await g.readdir($);for(let S of F)S.endsWith(".md")&&w.push(v.join($,S))}let A=v.join(t,".github","episodic");if(await g.pathExists(A)){let F=await g.readdir(A);for(let S of F)S.endsWith(".md")&&w.push(v.join(A,S))}for(let F of w){let S=await ia(F);if(S.length>0){let K=v.relative(t,F);s.migrationTasks.push({file:K,type:"schema-migration",description:"Synapse schema migration needed",details:S})}}p.report({message:"Identifying user-created files...",increment:10});let P=await yc(t,y);for(let F of P){s.preserved.push(`${F} (user-created)`);let S=v.join(t,F),K=await ia(S);K.length>0&&s.migrationTasks.push({file:F,type:"schema-migration",description:"User-created file needs schema migration",details:K})}p.report({message:"Merging core brain file...",increment:10});let L=await fc(t,n,i);L.success?s.updated.push(".github/copilot-instructions.md (auto-merged)"):s.migrationTasks.push({file:".github/copilot-instructions.md",type:"merge-required",description:"Core brain file requires manual merge",details:[`Auto-merge failed: ${L.reason}`,"UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands","PRESERVE: Domain slot assignments (P5-P7), user-added memory file references","REVIEW: Any custom sections added by user"]}),p.report({message:"Updating system files...",increment:20});let W=v.join(n,".github","instructions"),X=v.join(t,".github","instructions");if(await g.pathExists(W)){let F=await g.readdir(W);for(let S of F){let K=v.join(W,S),ce=v.join(X,S);if((await g.stat(K)).isFile()){let Ee=await g.pathExists(ce);await g.copy(K,ce,{overwrite:!0});let Le=await g.readFile(K,"utf8");y.files[`.github/instructions/${S}`]={type:"system",originalChecksum:wt(Le)},Ee?s.updated.push(`.github/instructions/${S}`):s.added.push(`.github/instructions/${S}`)}}}let te=v.join(n,".github","prompts"),b=v.join(t,".github","prompts");if(await g.pathExists(te)){let F=await g.readdir(te);for(let S of F){let K=v.join(te,S),ce=v.join(b,S);if((await g.stat(K)).isFile()){let Ee=await g.pathExists(ce);await g.copy(K,ce,{overwrite:!0});let Le=await g.readFile(K,"utf8");y.files[`.github/prompts/${S}`]={type:"system",originalChecksum:wt(Le)},Ee?s.updated.push(`.github/prompts/${S}`):s.added.push(`.github/prompts/${S}`)}}}let C=v.join(n,".github","agents"),T=v.join(t,".github","agents");if(await g.pathExists(C)){await g.ensureDir(T);let F=await g.readdir(C);for(let S of F){let K=v.join(C,S),ce=v.join(T,S);if((await g.stat(K)).isFile()){let Ee=await g.pathExists(ce);await g.copy(K,ce,{overwrite:!0});let Le=await g.readFile(K,"utf8");y.files[`.github/agents/${S}`]={type:"system",originalChecksum:wt(Le)},Ee?s.updated.push(`.github/agents/${S}`):s.added.push(`.github/agents/${S}`)}}}let N=v.join(n,".github","config"),Z=v.join(t,".github","config");if(await g.pathExists(N)){await g.ensureDir(Z);let F=await g.readdir(N);for(let S of F)if(S.includes("template")||S==="USER-PROFILE-TEMPLATE.md"){let K=v.join(N,S),ce=v.join(Z,S);if((await g.stat(K)).isFile()){let Ee=await g.pathExists(ce);await g.copy(K,ce,{overwrite:!0}),Ee?s.updated.push(`.github/config/${S}`):s.added.push(`.github/config/${S}`)}}}p.report({message:"Processing domain knowledge...",increment:10});let _=v.join(n,".github","domain-knowledge"),O=v.join(t,".github","domain-knowledge");if(await g.pathExists(_)){await g.ensureDir(O);let F=await g.readdir(_);for(let S of F){let K=v.join(_,S),ce=v.join(O,S);if((await g.stat(K)).isFile()){let Ee=await g.readFile(K,"utf8"),Le=wt(Ee);if(!await g.pathExists(ce))await g.copy(K,ce),y.files[`.github/domain-knowledge/${S}`]={type:"system",originalChecksum:Le},s.added.push(`.github/domain-knowledge/${S}`);else{let Ya=await g.readFile(ce,"utf8"),Xa=wt(Ya),Xn=y.files[`.github/domain-knowledge/${S}`]?.originalChecksum;if(Xn&&Xa!==Xn){let Zt=ce.replace(/\.md$/,`.v${i}.md`);await g.copy(K,Zt),s.preserved.push(`.github/domain-knowledge/${S} (modified by user, new version: ${v.basename(Zt)})`),s.migrationTasks.push({file:`.github/domain-knowledge/${S}`,type:"review-recommended",description:"User-modified system file - review new version",details:[`Your version preserved: ${S}`,`New version available: ${v.basename(Zt)}`,"Review and merge changes as needed"]})}else await g.copy(K,ce,{overwrite:!0}),y.files[`.github/domain-knowledge/${S}`]={type:"system",originalChecksum:Le},s.updated.push(`.github/domain-knowledge/${S}`)}}}}p.report({message:"Saving manifest...",increment:5}),y.version=i,y.upgradedAt=new Date().toISOString();let q=sa(t);await g.ensureDir(v.dirname(q));let j=q+".tmp";await g.writeJson(j,y,{spaces:2}),await g.move(j,q,{overwrite:!0}),p.report({message:"Performing schema migrations...",increment:10});let Q=[],G=s.migrationTasks.filter(F=>F.type==="schema-migration").map(F=>F.file),Qt=".github/copilot-instructions.md";G.includes(Qt)||G.push(Qt);for(let F of G){let S=v.join(t,F),K=await wc(S);K.migrated&&Q.push({file:F,changes:K.changes})}s.migrationTasks=s.migrationTasks.filter(F=>F.type!=="schema-migration"),Q.length>0&&s.updated.push(...Q.map(F=>`${F.file} (schema migrated: ${F.changes.length} changes)`)),p.report({message:"Generating upgrade report...",increment:5}),await bc(t,o,i,s,c,r,Q)});let u;try{u=await Gt(e,{silent:!0})}catch(p){console.error("Dream validation failed:",p)}let l=u?.success??!1;await new Promise(p=>setTimeout(p,500));let d=v.join(t,"UPGRADE-INSTRUCTIONS.md");if(await g.pathExists(d)&&await g.remove(d),await ae.window.showInformationMessage(`\u2705 Upgrade Complete! v${o||"unknown"} \u2192 v${i}
 
 \u{1F4CA} Summary:
-\u2022 Backup created: ${report.backed_up.length} folders
-\u2022 Files updated: ${report.updated.length}
-\u2022 Files added: ${report.added.length}
-\u2022 Files preserved: ${report.preserved.length}
-\u2022 Schema migrations: ${report.migrationTasks.length === 0 ? "All completed" : report.migrationTasks.length + " remaining"}
-\u2022 Dream validation: ${dreamSuccess ? "\u2705 Passed" : "\u26A0\uFE0F Check manually"}
+\u2022 Backup created: ${s.backed_up.length} folders
+\u2022 Files updated: ${s.updated.length}
+\u2022 Files added: ${s.added.length}
+\u2022 Files preserved: ${s.preserved.length}
+\u2022 Schema migrations: ${s.migrationTasks.length===0?"All completed":s.migrationTasks.length+" remaining"}
+\u2022 Dream validation: ${l?"\u2705 Passed":"\u26A0\uFE0F Check manually"}
 
-\u{1F389} Your cognitive architecture has been fully upgraded!`,
-      "View Upgrade Report",
-      "Close"
-    );
-    if (result === "View Upgrade Report") {
-      const reportPath = path4.join(rootPath, "archive", "upgrades", `upgrade-report-${timestamp}.md`);
-      if (await fs4.pathExists(reportPath)) {
-        const doc = await vscode4.workspace.openTextDocument(reportPath);
-        await vscode4.window.showTextDocument(doc);
-      }
-    }
-  } catch (error) {
-    vscode4.window.showErrorMessage(
-      `\u274C Upgrade failed: ${error.message}
+\u{1F389} Your cognitive architecture has been fully upgraded!`,"View Upgrade Report","Close")==="View Upgrade Report"){let p=v.join(t,"archive","upgrades",`upgrade-report-${r}.md`);if(await g.pathExists(p)){let h=await ae.workspace.openTextDocument(p);await ae.window.showTextDocument(h)}}}catch(u){ae.window.showErrorMessage(`\u274C Upgrade failed: ${u.message}
 
 Your original files should be intact. If you see issues:
 1. Check the archive/upgrades folder for backups
 2. Try running "Alex: Dream" to assess damage
-3. You can restore from backup if needed`
-    );
-    report.errors.push(error.message);
-  }
-}
-async function generateUpgradeReport(rootPath, oldVersion, newVersion, report, backupDir, timestamp, migrationResults) {
-  const migrationSection = migrationResults.length > 0 ? migrationResults.map((r, i) => `
-### ${i + 1}. ${r.file}
+3. You can restore from backup if needed`),s.errors.push(u.message)}}async function bc(e,t,n,o,i,a,s){let r=s.length>0?s.map((d,m)=>`
+### ${m+1}. ${d.file}
 
 **Status**: \u2705 Automatically migrated  
 **Changes applied**:
-${r.changes.map((c) => `- ${c}`).join("\n")}
-`).join("\n---\n") : "No schema migrations were needed.";
-  const remainingTasksSection = report.migrationTasks.length > 0 ? report.migrationTasks.map((task, i) => `
-### ${i + 1}. ${task.file}
+${d.changes.map(p=>`- ${p}`).join(`
+`)}
+`).join(`
+---
+`):"No schema migrations were needed.",c=o.migrationTasks.length>0?o.migrationTasks.map((d,m)=>`
+### ${m+1}. ${d.file}
 
-**Type**: \`${task.type}\`  
-**Description**: ${task.description}
+**Type**: \`${d.type}\`  
+**Description**: ${d.description}
 
 **Details**:
-${task.details.map((d) => `- ${d}`).join("\n")}
-`).join("\n---\n") : "All tasks completed automatically.";
-  const reportContent = `# Alex Cognitive Architecture Upgrade Report
+${d.details.map(p=>`- ${p}`).join(`
+`)}
+`).join(`
+---
+`):"All tasks completed automatically.",u=`# Alex Cognitive Architecture Upgrade Report
 
-**Date**: ${(/* @__PURE__ */ new Date()).toISOString()}  
-**From Version**: ${oldVersion || "unknown"}  
-**To Version**: ${newVersion}  
+**Date**: ${new Date().toISOString()}  
+**From Version**: ${t||"unknown"}  
+**To Version**: ${n}  
 **Status**: \u2705 Fully Automated Upgrade Complete  
-**Backup Location**: \`${backupDir}\`
+**Backup Location**: \`${i}\`
 
 ---
 
@@ -4243,783 +129,91 @@ ${task.details.map((d) => `- ${d}`).join("\n")}
 
 | Category | Count |
 |----------|-------|
-| Updated | ${report.updated.length} |
-| Added | ${report.added.length} |
-| Preserved | ${report.preserved.length} |
-| Backed Up | ${report.backed_up.length} |
-| Schema Migrations | ${migrationResults.length} |
-| Remaining Tasks | ${report.migrationTasks.length} |
-| Errors | ${report.errors.length} |
+| Updated | ${o.updated.length} |
+| Added | ${o.added.length} |
+| Preserved | ${o.preserved.length} |
+| Backed Up | ${o.backed_up.length} |
+| Schema Migrations | ${s.length} |
+| Remaining Tasks | ${o.migrationTasks.length} |
+| Errors | ${o.errors.length} |
 
 ---
 
 ## Updated Files
 
-${report.updated.length > 0 ? report.updated.map((f) => `- \u2705 ${f}`).join("\n") : "- None"}
+${o.updated.length>0?o.updated.map(d=>`- \u2705 ${d}`).join(`
+`):"- None"}
 
 ## Added Files (New in this version)
 
-${report.added.length > 0 ? report.added.map((f) => `- \u2795 ${f}`).join("\n") : "- None"}
+${o.added.length>0?o.added.map(d=>`- \u2795 ${d}`).join(`
+`):"- None"}
 
 ## Preserved Files (User content protected)
 
-${report.preserved.length > 0 ? report.preserved.map((f) => `- \u{1F512} ${f}`).join("\n") : "- None"}
+${o.preserved.length>0?o.preserved.map(d=>`- \u{1F512} ${d}`).join(`
+`):"- None"}
 
 ## Backed Up
 
-${report.backed_up.length > 0 ? report.backed_up.map((f) => `- \u{1F4E6} ${f}`).join("\n") : "- None"}
+${o.backed_up.length>0?o.backed_up.map(d=>`- \u{1F4E6} ${d}`).join(`
+`):"- None"}
 
 ---
 
 ## Schema Migrations Performed
 
-${migrationSection}
+${r}
 
 ---
 
 ## Remaining Tasks (Manual Review Recommended)
 
-${remainingTasksSection}
+${c}
 
 ---
 
-${report.errors.length > 0 ? `## Errors
+${o.errors.length>0?`## Errors
 
-${report.errors.map((e) => `- \u274C ${e}`).join("\n")}
+${o.errors.map(d=>`- \u274C ${d}`).join(`
+`)}
 
 ---
 
-` : ""}
+`:""}
 ## Rollback Instructions
 
 If you need to revert:
 
 1. Delete current \`.github/\` folder
-2. Copy contents from: \`${path4.relative(rootPath, backupDir)}\`
+2. Copy contents from: \`${v.relative(e,i)}\`
 3. Run \`Alex: Dream (Neural Maintenance)\` to verify
 
 ---
 
-*Report generated by Alex Cognitive Architecture v${newVersion}*
+*Report generated by Alex Cognitive Architecture v${n}*
 *Upgrade completed automatically - no manual intervention required*
-`;
-  const reportPath = path4.join(rootPath, "archive", "upgrades", `upgrade-report-${timestamp}.md`);
-  await fs4.ensureDir(path4.dirname(reportPath));
-  await fs4.writeFile(reportPath, reportContent, "utf8");
-}
+`,l=v.join(e,"archive","upgrades",`upgrade-report-${a}.md`);await g.ensureDir(v.dirname(l)),await g.writeFile(l,u,"utf8")}var U=D(require("vscode")),Ce=D(Fe()),Yt=D(require("path"));var M=D(require("vscode")),R=D(Fe()),he=D(require("path")),On=D(require("os")),Oa=D($a());var be=D(require("vscode")),Y=D(Fe()),De=D(require("path")),Fa=D(require("https"));var Be="alex-knowledge-index.json",Aa="Alex Cognitive Architecture - Global Knowledge Base";async function Gc(){try{return await be.authentication.getSession("github",["gist"],{createIfNone:!0})}catch(e){console.error("Failed to get GitHub session:",e);return}}async function St(e,t={}){let n=await Gc();if(!n)throw new Error("GitHub authentication required. Please sign in.");return new Promise((o,i)=>{let a=new URL(`https://api.github.com${e}`),s={hostname:a.hostname,path:a.pathname+a.search,method:t.method||"GET",headers:{Authorization:`Bearer ${n.accessToken}`,Accept:"application/vnd.github.v3+json","Content-Type":"application/json","User-Agent":"Alex-Cognitive-Architecture-VSCode"}},r=Fa.request(s,c=>{let u="";c.on("data",l=>{u+=l}),c.on("end",()=>{if(c.statusCode&&c.statusCode>=200&&c.statusCode<300)if(c.statusCode===204||!u)o(null);else try{o(JSON.parse(u))}catch(l){i(new Error(`Failed to parse GitHub response: ${l}`))}else i(new Error(`GitHub API error (${c.statusCode}): ${u}`))})});r.on("error",c=>i(c)),t.body&&r.write(JSON.stringify(t.body)),r.end()})}function Ma(){return De.join(re("root"),"sync-metadata.json")}async function Bt(){let e=Ma();try{if(await Y.pathExists(e))return await Y.readJson(e)}catch{}return{}}async function st(e){let t=Ma();await Y.writeJson(t,e,{spaces:2})}async function Mn(){let e=await Bt();if(e.gistId)try{let i=await St(`/gists/${e.gistId}`);if(i)return i}catch{}let t=re("index");if(await Y.pathExists(t))try{let i=await Y.readJson(t);if(i.cloudGistId){let a=await St(`/gists/${i.cloudGistId}`);if(a)return await st({...e,gistId:a.id}),a}}catch{}let n=await St("/gists?per_page=100");if(!n)return null;let o=n.find(i=>i.description===Aa||i.files[Be]);return o&&await st({...e,gistId:o.id}),o||null}async function Ra(e){let t={};for(let[i,a]of Object.entries(e))t[i]={content:a};let n=await St("/gists",{method:"POST",body:{description:Aa,public:!1,files:t}});if(!n)throw new Error("Failed to create gist");let o=await Bt();return await st({...o,gistId:n.id}),n}async function Da(e,t){let n={};for(let[i,a]of Object.entries(t))n[i]=a===null?null:{content:a};let o=await St(`/gists/${e}`,{method:"PATCH",body:{files:n}});if(!o)throw new Error("Failed to update gist");return o}function Jt(e){let t=JSON.stringify(e.entries.map(o=>o.id).sort()),n=0;for(let o=0;o<t.length;o++){let i=t.charCodeAt(o);n=(n<<5)-n+i,n=n&n}return n.toString(16)}async function kt(){try{let e=await Bt();if(!e.gistId)return{status:"needs-push",message:"Not yet synced to cloud"};let t=re("index");if(!await Y.pathExists(t))return{status:"needs-pull",message:"No local knowledge, pull from cloud"};let n=await Y.readJson(t),o=Jt(n);return e.lastLocalHash&&o!==e.lastLocalHash?{status:"needs-push",message:"Local changes not yet synced"}:{status:"up-to-date",message:"Synced"}}catch(e){return{status:"error",message:`Error: ${e}`}}}async function Pt(){try{await ue();let e=re("index");if(!await Y.pathExists(e))return{success:!1,status:"error",message:"No local knowledge to push. Use /saveinsight first."};let t=await Y.readJson(e),n=await Mn(),o=!n;n||(n=await Ra({[Be]:"{}"})),t.cloudGistId=n.id,t.cloudGistUrl=`https://gist.github.com/${n.id}`;let i={[Be]:JSON.stringify(t,null,2)};for(let s of t.entries)if(await Y.pathExists(s.filePath)){let r=await Y.readFile(s.filePath,"utf-8"),c=De.basename(s.filePath);i[c]=r}n=await Da(n.id,i),await Je(()=>t);let a=Jt(t);return await st({gistId:n.id,lastSyncedAt:new Date().toISOString(),lastLocalHash:a,lastRemoteHash:a}),{success:!0,status:"up-to-date",message:`Pushed ${t.entries.length} entries to cloud`,entriesPushed:t.entries.length}}catch(e){return{success:!1,status:"error",message:`Push failed: ${e}`}}}async function xt(){try{await ue();let e=await Mn();if(!e)return{success:!1,status:"error",message:"No cloud knowledge found. Use /push first."};let t=e.files[Be];if(!t)return{success:!1,status:"error",message:"Cloud gist is missing index file"};let n=JSON.parse(t.content);n.cloudGistId=e.id,n.cloudGistUrl=`https://gist.github.com/${e.id}`;let o=0;for(let a of n.entries){let s=De.basename(a.filePath),r=e.files[s];if(r){let c=a.type==="pattern"?"patterns":"insights",u=De.join(re(c),s);a.filePath=u,await Y.writeFile(u,r.content,"utf-8"),o++}}await Je(()=>n);let i=Jt(n);return await st({gistId:e.id,lastSyncedAt:new Date().toISOString(),lastLocalHash:i,lastRemoteHash:i}),{success:!0,status:"up-to-date",message:`Pulled ${o} entries from cloud`,entriesPulled:o}}catch(e){return{success:!1,status:"error",message:`Pull failed: ${e}`}}}async function rt(){try{await ue();let e=re("index"),t;await Y.pathExists(e)?t=await Y.readJson(e):t={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]};let n=await Mn(),o;n&&n.files[Be]?o=JSON.parse(n.files[Be].content):o={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]};let i=new Map;for(let d of o.entries)i.set(d.id,d);for(let d of t.entries){let m=i.get(d.id);(!m||new Date(d.modified)>new Date(m.modified))&&i.set(d.id,d)}let a={version:"1.0.0",lastUpdated:new Date().toISOString(),cloudGistId:n?.id||t.cloudGistId,cloudGistUrl:n?`https://gist.github.com/${n.id}`:t.cloudGistUrl,entries:Array.from(i.values())},s={[Be]:JSON.stringify(a,null,2)};for(let d of a.entries)if(await Y.pathExists(d.filePath)){let m=await Y.readFile(d.filePath,"utf-8"),p=De.basename(d.filePath);s[p]=m}let r=0;if(n)for(let d of o.entries){let m=De.basename(d.filePath),p=n.files[m],h=d.type==="pattern"?"patterns":"insights",y=De.join(re(h),m);if(p&&!await Y.pathExists(y)){await Y.writeFile(y,p.content,"utf-8");let w=i.get(d.id);w&&(w.filePath=y),r++}}n?await Da(n.id,s):n=await Ra(s),await Je(()=>a);let c=Jt(a);await st({gistId:n.id,lastSyncedAt:new Date().toISOString(),lastLocalHash:c,lastRemoteHash:c});let u=t.entries.filter(d=>!o.entries.find(m=>m.id===d.id)).length,l=r;return{success:!0,status:"up-to-date",message:`Synced! ${u} pushed, ${l} pulled. Total: ${a.entries.length} entries.`,entriesPushed:u,entriesPulled:l}}catch(e){return{success:!1,status:"error",message:`Sync failed: ${e}`}}}async function ct(){let e=await Bt();return e.gistId?`https://gist.github.com/${e.gistId}`:null}var Fn=class{async prepareInvocation(t,n){let o=t.input.action||"sync";return{invocationMessage:`${o==="push"?"Pushing":o==="pull"?"Pulling":"Syncing"} knowledge with cloud...`,confirmationMessages:{title:"Cloud Sync",message:new be.MarkdownString(`**${o.toUpperCase()}** global knowledge ${o==="push"?"to":o==="pull"?"from":"with"} GitHub?
 
-// src/commands/self-actualization.ts
-var vscode7 = __toESM(require("vscode"));
-var fs7 = __toESM(require_lib());
-var path7 = __toESM(require("path"));
+This will ${o==="push"?"upload local changes":o==="pull"?"download cloud changes":"merge local and cloud"}.`)}}}async invoke(t,n){let o=t.input.action||"sync",i;switch(o){case"push":i=await Pt();break;case"pull":i=await xt();break;default:i=await rt()}let s=`## ${i.success?"\u2705":"\u274C"} Cloud Sync ${i.success?"Complete":"Failed"}
 
-// src/chat/globalKnowledge.ts
-var vscode6 = __toESM(require("vscode"));
-var fs6 = __toESM(require_lib());
-var path6 = __toESM(require("path"));
-var os = __toESM(require("os"));
-var lockfile = __toESM(require_proper_lockfile());
+`;s+=`**Status**: ${i.status}
+`,s+=`**Message**: ${i.message}
+`,i.entriesPushed!==void 0&&(s+=`**Pushed**: ${i.entriesPushed} entries
+`),i.entriesPulled!==void 0&&(s+=`**Pulled**: ${i.entriesPulled} entries
+`);let r=await ct();return r&&(s+=`
+**Cloud URL**: ${r}
+`),new be.LanguageModelToolResult([new be.LanguageModelTextPart(s)])}};function La(e){e.subscriptions.push(be.lm.registerTool("alex_cloud_sync",new Fn))}var at,En,In=!1,Kc=300*1e3,Uc=60*1e3,$n;function zc(){return $n||($n=be.window.createOutputChannel("Alex Unconscious Mind")),$n}function xe(e){let t=new Date().toISOString();zc().appendLine(`[${t}] ${e}`)}async function An(){if(In)return xe("Sync already in progress, skipping"),null;if(En&&Date.now()-En.getTime()<Uc)return xe("Too soon since last sync, skipping"),null;In=!0,En=new Date;try{if(xe("Starting transparent background sync..."),(await kt()).status==="up-to-date")return xe("Already up-to-date, no sync needed"),{success:!0,status:"up-to-date",message:"Already synced"};let t=await rt();return xe(`Sync complete: ${t.message}`),t}catch(e){return xe(`Transparent sync failed: ${e}`),{success:!1,status:"error",message:`${e}`}}finally{In=!1}}async function lt(){setTimeout(async()=>{let e=await An();e&&e.success&&e.entriesPushed&&e.entriesPushed>0&&xe(`Auto-synced ${e.entriesPushed} entries after modification`)},2e3)}function Na(e){at&&clearInterval(at),xe("Background sync enabled - Alex unconscious mind active"),setTimeout(async()=>{xe("Running startup sync..."),await An()},1e4),at=setInterval(async()=>{await An()},Kc),e.subscriptions.push({dispose:()=>{at&&(clearInterval(at),at=void 0),xe("Background sync disabled")}})}var qc={stale:1e4,retries:{retries:5,factor:2,minTimeout:100,maxTimeout:1e3}};function jn(){return he.join(On.homedir(),Ae)}function re(e){return he.join(On.homedir(),Xi[e])}async function ue(){let e=[re("root"),re("knowledge"),re("patterns"),re("insights")];for(let t of e)await R.ensureDir(t)}async function _n(e,t){await R.pathExists(e)||await R.ensureFile(e);let n;try{return n=await Oa.lock(e,qc),await t()}finally{n&&await n()}}async function Je(e){let t=re("index");return await ue(),await _n(t,async()=>{let n;try{if(await R.pathExists(t)){let o=await R.readFile(t,"utf-8");o.trim()?n=JSON.parse(o):n={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]}}else n={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]}}catch{n={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]}}return n=await e(n),n.lastUpdated=new Date().toISOString(),await R.writeJson(t,n,{spaces:2}),n})}async function ja(e){let t=re("projectRegistry");return await ue(),await _n(t,async()=>{let n;try{if(await R.pathExists(t)){let o=await R.readFile(t,"utf-8");o.trim()?n=JSON.parse(o):n={version:"1.0.0",lastUpdated:new Date().toISOString(),projects:[]}}else n={version:"1.0.0",lastUpdated:new Date().toISOString(),projects:[]}}catch{n={version:"1.0.0",lastUpdated:new Date().toISOString(),projects:[]}}return n=await e(n),n.lastUpdated=new Date().toISOString(),await R.writeJson(t,n,{spaces:2}),n})}async function Gn(){let e=re("index");return await ue(),await _n(e,async()=>{try{if(await R.pathExists(e)){let n=await R.readFile(e,"utf-8");if(n.trim())return JSON.parse(n)}}catch{}let t={version:"1.0.0",lastUpdated:new Date().toISOString(),entries:[]};return await R.writeJson(e,t,{spaces:2}),t})}async function Kn(){let e=re("projectRegistry");return await ue(),await ja(t=>t)}async function _a(){let e=M.workspace.workspaceFolders;if(!e||e.length===0)return;let t=e[0].uri.fsPath,n=he.basename(t),o=0,i=new M.RelativePattern(e[0],".github/domain-knowledge/*.md");o=(await M.workspace.findFiles(i)).length;let s;return await ja(r=>{let c=r.projects.findIndex(l=>l.path===t),u={path:t,name:n,lastAccessed:new Date().toISOString(),knowledgeFiles:o};return c>=0?(r.projects[c]={...r.projects[c],...u},s=r.projects[c]):(r.projects.push(u),s=u),r}),s}function Ga(e,t){let n=e==="pattern"?fn.pattern:fn.insight,o=t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").substring(0,40),i=e==="insight"?`-${new Date().toISOString().split("T")[0]}`:"";return`${n}${o}${i}`}async function Hc(e,t,n,o,i){await ue();let a=Ga("pattern",e),s=`${a}.md`,r=he.join(re("patterns"),s),c=`# ${e}
 
-// src/chat/cloudSync.ts
-var vscode5 = __toESM(require("vscode"));
-var fs5 = __toESM(require_lib());
-var path5 = __toESM(require("path"));
-var https = __toESM(require("https"));
-var GIST_INDEX_FILENAME = "alex-knowledge-index.json";
-var GIST_DESCRIPTION = "Alex Cognitive Architecture - Global Knowledge Base";
-async function getGitHubSession() {
-  try {
-    const session = await vscode5.authentication.getSession("github", ["gist"], { createIfNone: true });
-    return session;
-  } catch (err) {
-    console.error("Failed to get GitHub session:", err);
-    return void 0;
-  }
-}
-async function githubRequest(endpoint, options = {}) {
-  const session = await getGitHubSession();
-  if (!session) {
-    throw new Error("GitHub authentication required. Please sign in.");
-  }
-  return new Promise((resolve, reject) => {
-    const url = new URL(`https://api.github.com${endpoint}`);
-    const reqOptions = {
-      hostname: url.hostname,
-      path: url.pathname + url.search,
-      method: options.method || "GET",
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        "Authorization": `Bearer ${session.accessToken}`,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        "Accept": "application/vnd.github.v3+json",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        "Content-Type": "application/json",
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        "User-Agent": "Alex-Cognitive-Architecture-VSCode"
-      }
-    };
-    const req = https.request(reqOptions, (res) => {
-      let data = "";
-      res.on("data", (chunk) => {
-        data += chunk;
-      });
-      res.on("end", () => {
-        if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-          if (res.statusCode === 204 || !data) {
-            resolve(null);
-          } else {
-            try {
-              resolve(JSON.parse(data));
-            } catch (err) {
-              reject(new Error(`Failed to parse GitHub response: ${err}`));
-            }
-          }
-        } else {
-          reject(new Error(`GitHub API error (${res.statusCode}): ${data}`));
-        }
-      });
-    });
-    req.on("error", (err) => reject(err));
-    if (options.body) {
-      req.write(JSON.stringify(options.body));
-    }
-    req.end();
-  });
-}
-function getSyncMetadataPath() {
-  return path5.join(getGlobalKnowledgePath("root"), "sync-metadata.json");
-}
-async function loadSyncMetadata() {
-  const metaPath = getSyncMetadataPath();
-  try {
-    if (await fs5.pathExists(metaPath)) {
-      return await fs5.readJson(metaPath);
-    }
-  } catch (err) {
-  }
-  return {};
-}
-async function saveSyncMetadata(metadata) {
-  const metaPath = getSyncMetadataPath();
-  await fs5.writeJson(metaPath, metadata, { spaces: 2 });
-}
-async function findKnowledgeGist() {
-  const metadata = await loadSyncMetadata();
-  if (metadata.gistId) {
-    try {
-      const gist = await githubRequest(`/gists/${metadata.gistId}`);
-      if (gist) {
-        return gist;
-      }
-    } catch (err) {
-    }
-  }
-  const indexPath = getGlobalKnowledgePath("index");
-  if (await fs5.pathExists(indexPath)) {
-    try {
-      const localIndex = await fs5.readJson(indexPath);
-      if (localIndex.cloudGistId) {
-        const gist = await githubRequest(`/gists/${localIndex.cloudGistId}`);
-        if (gist) {
-          await saveSyncMetadata({ ...metadata, gistId: gist.id });
-          return gist;
-        }
-      }
-    } catch (err) {
-    }
-  }
-  const gists = await githubRequest("/gists?per_page=100");
-  if (!gists) {
-    return null;
-  }
-  const knowledgeGist = gists.find(
-    (g) => g.description === GIST_DESCRIPTION || g.files[GIST_INDEX_FILENAME]
-  );
-  if (knowledgeGist) {
-    await saveSyncMetadata({ ...metadata, gistId: knowledgeGist.id });
-  }
-  return knowledgeGist || null;
-}
-async function createKnowledgeGist(files) {
-  const gistFiles = {};
-  for (const [filename, content] of Object.entries(files)) {
-    gistFiles[filename] = { content };
-  }
-  const gist = await githubRequest("/gists", {
-    method: "POST",
-    body: {
-      description: GIST_DESCRIPTION,
-      public: false,
-      files: gistFiles
-    }
-  });
-  if (!gist) {
-    throw new Error("Failed to create gist");
-  }
-  const metadata = await loadSyncMetadata();
-  await saveSyncMetadata({ ...metadata, gistId: gist.id });
-  return gist;
-}
-async function updateKnowledgeGist(gistId, files) {
-  const gistFiles = {};
-  for (const [filename, content] of Object.entries(files)) {
-    gistFiles[filename] = content === null ? null : { content };
-  }
-  const gist = await githubRequest(`/gists/${gistId}`, {
-    method: "PATCH",
-    body: { files: gistFiles }
-  });
-  if (!gist) {
-    throw new Error("Failed to update gist");
-  }
-  return gist;
-}
-function computeIndexHash(index) {
-  const content = JSON.stringify(index.entries.map((e) => e.id).sort());
-  let hash = 0;
-  for (let i = 0; i < content.length; i++) {
-    const char = content.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return hash.toString(16);
-}
-async function getSyncStatus() {
-  try {
-    const metadata = await loadSyncMetadata();
-    if (!metadata.gistId) {
-      return { status: "needs-push", message: "Not yet synced to cloud" };
-    }
-    const indexPath = getGlobalKnowledgePath("index");
-    if (!await fs5.pathExists(indexPath)) {
-      return { status: "needs-pull", message: "No local knowledge, pull from cloud" };
-    }
-    const localIndex = await fs5.readJson(indexPath);
-    const localHash = computeIndexHash(localIndex);
-    if (metadata.lastLocalHash && localHash !== metadata.lastLocalHash) {
-      return { status: "needs-push", message: "Local changes not yet synced" };
-    }
-    return { status: "up-to-date", message: "Synced" };
-  } catch (err) {
-    return { status: "error", message: `Error: ${err}` };
-  }
-}
-async function pushToCloud() {
-  try {
-    await ensureGlobalKnowledgeDirectories();
-    const indexPath = getGlobalKnowledgePath("index");
-    if (!await fs5.pathExists(indexPath)) {
-      return {
-        success: false,
-        status: "error",
-        message: "No local knowledge to push. Use /saveinsight first."
-      };
-    }
-    const localIndex = await fs5.readJson(indexPath);
-    let gist = await findKnowledgeGist();
-    const isNewGist = !gist;
-    if (!gist) {
-      gist = await createKnowledgeGist({ [GIST_INDEX_FILENAME]: "{}" });
-    }
-    localIndex.cloudGistId = gist.id;
-    localIndex.cloudGistUrl = `https://gist.github.com/${gist.id}`;
-    const files = {
-      [GIST_INDEX_FILENAME]: JSON.stringify(localIndex, null, 2)
-    };
-    for (const entry of localIndex.entries) {
-      if (await fs5.pathExists(entry.filePath)) {
-        const content = await fs5.readFile(entry.filePath, "utf-8");
-        const filename = path5.basename(entry.filePath);
-        files[filename] = content;
-      }
-    }
-    gist = await updateKnowledgeGist(gist.id, files);
-    await updateGlobalKnowledgeIndex(() => localIndex);
-    const localHash = computeIndexHash(localIndex);
-    await saveSyncMetadata({
-      gistId: gist.id,
-      lastSyncedAt: (/* @__PURE__ */ new Date()).toISOString(),
-      lastLocalHash: localHash,
-      lastRemoteHash: localHash
-    });
-    return {
-      success: true,
-      status: "up-to-date",
-      message: `Pushed ${localIndex.entries.length} entries to cloud`,
-      entriesPushed: localIndex.entries.length
-    };
-  } catch (err) {
-    return {
-      success: false,
-      status: "error",
-      message: `Push failed: ${err}`
-    };
-  }
-}
-async function pullFromCloud() {
-  try {
-    await ensureGlobalKnowledgeDirectories();
-    const gist = await findKnowledgeGist();
-    if (!gist) {
-      return {
-        success: false,
-        status: "error",
-        message: "No cloud knowledge found. Use /push first."
-      };
-    }
-    const indexFile = gist.files[GIST_INDEX_FILENAME];
-    if (!indexFile) {
-      return {
-        success: false,
-        status: "error",
-        message: "Cloud gist is missing index file"
-      };
-    }
-    const remoteIndex = JSON.parse(indexFile.content);
-    remoteIndex.cloudGistId = gist.id;
-    remoteIndex.cloudGistUrl = `https://gist.github.com/${gist.id}`;
-    let downloadedCount = 0;
-    for (const entry of remoteIndex.entries) {
-      const filename = path5.basename(entry.filePath);
-      const gistFile = gist.files[filename];
-      if (gistFile) {
-        const subdir = entry.type === "pattern" ? "patterns" : "insights";
-        const localPath = path5.join(getGlobalKnowledgePath(subdir), filename);
-        entry.filePath = localPath;
-        await fs5.writeFile(localPath, gistFile.content, "utf-8");
-        downloadedCount++;
-      }
-    }
-    await updateGlobalKnowledgeIndex(() => remoteIndex);
-    const localHash = computeIndexHash(remoteIndex);
-    await saveSyncMetadata({
-      gistId: gist.id,
-      lastSyncedAt: (/* @__PURE__ */ new Date()).toISOString(),
-      lastLocalHash: localHash,
-      lastRemoteHash: localHash
-    });
-    return {
-      success: true,
-      status: "up-to-date",
-      message: `Pulled ${downloadedCount} entries from cloud`,
-      entriesPulled: downloadedCount
-    };
-  } catch (err) {
-    return {
-      success: false,
-      status: "error",
-      message: `Pull failed: ${err}`
-    };
-  }
-}
-async function syncWithCloud() {
-  try {
-    await ensureGlobalKnowledgeDirectories();
-    const indexPath = getGlobalKnowledgePath("index");
-    let localIndex;
-    if (await fs5.pathExists(indexPath)) {
-      localIndex = await fs5.readJson(indexPath);
-    } else {
-      localIndex = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), entries: [] };
-    }
-    let gist = await findKnowledgeGist();
-    let remoteIndex;
-    if (gist && gist.files[GIST_INDEX_FILENAME]) {
-      remoteIndex = JSON.parse(gist.files[GIST_INDEX_FILENAME].content);
-    } else {
-      remoteIndex = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), entries: [] };
-    }
-    const mergedEntries = /* @__PURE__ */ new Map();
-    for (const entry of remoteIndex.entries) {
-      mergedEntries.set(entry.id, entry);
-    }
-    for (const entry of localIndex.entries) {
-      const existing = mergedEntries.get(entry.id);
-      if (!existing || new Date(entry.modified) > new Date(existing.modified)) {
-        mergedEntries.set(entry.id, entry);
-      }
-    }
-    const mergedIndex = {
-      version: "1.0.0",
-      lastUpdated: (/* @__PURE__ */ new Date()).toISOString(),
-      cloudGistId: gist?.id || localIndex.cloudGistId,
-      cloudGistUrl: gist ? `https://gist.github.com/${gist.id}` : localIndex.cloudGistUrl,
-      entries: Array.from(mergedEntries.values())
-    };
-    const files = {
-      [GIST_INDEX_FILENAME]: JSON.stringify(mergedIndex, null, 2)
-    };
-    for (const entry of mergedIndex.entries) {
-      if (await fs5.pathExists(entry.filePath)) {
-        const content = await fs5.readFile(entry.filePath, "utf-8");
-        const filename = path5.basename(entry.filePath);
-        files[filename] = content;
-      }
-    }
-    let downloaded = 0;
-    if (gist) {
-      for (const entry of remoteIndex.entries) {
-        const filename = path5.basename(entry.filePath);
-        const gistFile = gist.files[filename];
-        const subdir = entry.type === "pattern" ? "patterns" : "insights";
-        const localPath = path5.join(getGlobalKnowledgePath(subdir), filename);
-        if (gistFile && !await fs5.pathExists(localPath)) {
-          await fs5.writeFile(localPath, gistFile.content, "utf-8");
-          const mergedEntry = mergedEntries.get(entry.id);
-          if (mergedEntry) {
-            mergedEntry.filePath = localPath;
-          }
-          downloaded++;
-        }
-      }
-    }
-    if (gist) {
-      await updateKnowledgeGist(gist.id, files);
-    } else {
-      gist = await createKnowledgeGist(files);
-    }
-    await updateGlobalKnowledgeIndex(() => mergedIndex);
-    const localHash = computeIndexHash(mergedIndex);
-    await saveSyncMetadata({
-      gistId: gist.id,
-      lastSyncedAt: (/* @__PURE__ */ new Date()).toISOString(),
-      lastLocalHash: localHash,
-      lastRemoteHash: localHash
-    });
-    const localNew = localIndex.entries.filter((e) => !remoteIndex.entries.find((r) => r.id === e.id)).length;
-    const remoteNew = downloaded;
-    return {
-      success: true,
-      status: "up-to-date",
-      message: `Synced! ${localNew} pushed, ${remoteNew} pulled. Total: ${mergedIndex.entries.length} entries.`,
-      entriesPushed: localNew,
-      entriesPulled: remoteNew
-    };
-  } catch (err) {
-    return {
-      success: false,
-      status: "error",
-      message: `Sync failed: ${err}`
-    };
-  }
-}
-async function getCloudUrl() {
-  const metadata = await loadSyncMetadata();
-  if (metadata.gistId) {
-    return `https://gist.github.com/${metadata.gistId}`;
-  }
-  return null;
-}
-var CloudSyncTool = class {
-  async prepareInvocation(options, token) {
-    const action = options.input.action || "sync";
-    return {
-      invocationMessage: `${action === "push" ? "Pushing" : action === "pull" ? "Pulling" : "Syncing"} knowledge with cloud...`,
-      confirmationMessages: {
-        title: "Cloud Sync",
-        message: new vscode5.MarkdownString(
-          `**${action.toUpperCase()}** global knowledge ${action === "push" ? "to" : action === "pull" ? "from" : "with"} GitHub?
-
-This will ${action === "push" ? "upload local changes" : action === "pull" ? "download cloud changes" : "merge local and cloud"}.`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    const action = options.input.action || "sync";
-    let result;
-    switch (action) {
-      case "push":
-        result = await pushToCloud();
-        break;
-      case "pull":
-        result = await pullFromCloud();
-        break;
-      default:
-        result = await syncWithCloud();
-    }
-    const emoji = result.success ? "\u2705" : "\u274C";
-    let response = `## ${emoji} Cloud Sync ${result.success ? "Complete" : "Failed"}
-
-`;
-    response += `**Status**: ${result.status}
-`;
-    response += `**Message**: ${result.message}
-`;
-    if (result.entriesPushed !== void 0) {
-      response += `**Pushed**: ${result.entriesPushed} entries
-`;
-    }
-    if (result.entriesPulled !== void 0) {
-      response += `**Pulled**: ${result.entriesPulled} entries
-`;
-    }
-    const cloudUrl = await getCloudUrl();
-    if (cloudUrl) {
-      response += `
-**Cloud URL**: ${cloudUrl}
-`;
-    }
-    return new vscode5.LanguageModelToolResult([
-      new vscode5.LanguageModelTextPart(response)
-    ]);
-  }
-};
-function registerCloudSyncTools(context) {
-  context.subscriptions.push(
-    vscode5.lm.registerTool("alex_cloud_sync", new CloudSyncTool())
-  );
-}
-var backgroundSyncTimer;
-var lastSyncAttempt;
-var syncInProgress = false;
-var BACKGROUND_SYNC_INTERVAL_MS = 5 * 60 * 1e3;
-var MIN_SYNC_INTERVAL_MS = 60 * 1e3;
-var unconsciousChannel;
-function getUnconsciousChannel() {
-  if (!unconsciousChannel) {
-    unconsciousChannel = vscode5.window.createOutputChannel("Alex Unconscious Mind");
-  }
-  return unconsciousChannel;
-}
-function logUnconscious(message) {
-  const timestamp = (/* @__PURE__ */ new Date()).toISOString();
-  getUnconsciousChannel().appendLine(`[${timestamp}] ${message}`);
-}
-async function transparentSync() {
-  if (syncInProgress) {
-    logUnconscious("Sync already in progress, skipping");
-    return null;
-  }
-  if (lastSyncAttempt && Date.now() - lastSyncAttempt.getTime() < MIN_SYNC_INTERVAL_MS) {
-    logUnconscious("Too soon since last sync, skipping");
-    return null;
-  }
-  syncInProgress = true;
-  lastSyncAttempt = /* @__PURE__ */ new Date();
-  try {
-    logUnconscious("Starting transparent background sync...");
-    const status = await getSyncStatus();
-    if (status.status === "up-to-date") {
-      logUnconscious("Already up-to-date, no sync needed");
-      return { success: true, status: "up-to-date", message: "Already synced" };
-    }
-    const result = await syncWithCloud();
-    logUnconscious(`Sync complete: ${result.message}`);
-    return result;
-  } catch (err) {
-    logUnconscious(`Transparent sync failed: ${err}`);
-    return { success: false, status: "error", message: `${err}` };
-  } finally {
-    syncInProgress = false;
-  }
-}
-async function triggerPostModificationSync() {
-  setTimeout(async () => {
-    const result = await transparentSync();
-    if (result && result.success && result.entriesPushed && result.entriesPushed > 0) {
-      logUnconscious(`Auto-synced ${result.entriesPushed} entries after modification`);
-    }
-  }, 2e3);
-}
-function startBackgroundSync(context) {
-  if (backgroundSyncTimer) {
-    clearInterval(backgroundSyncTimer);
-  }
-  logUnconscious("Background sync enabled - Alex unconscious mind active");
-  setTimeout(async () => {
-    logUnconscious("Running startup sync...");
-    await transparentSync();
-  }, 1e4);
-  backgroundSyncTimer = setInterval(async () => {
-    await transparentSync();
-  }, BACKGROUND_SYNC_INTERVAL_MS);
-  context.subscriptions.push({
-    dispose: () => {
-      if (backgroundSyncTimer) {
-        clearInterval(backgroundSyncTimer);
-        backgroundSyncTimer = void 0;
-      }
-      logUnconscious("Background sync disabled");
-    }
-  });
-}
-
-// src/chat/globalKnowledge.ts
-var LOCK_OPTIONS = {
-  stale: 1e4,
-  // Consider lock stale after 10 seconds
-  retries: {
-    retries: 5,
-    factor: 2,
-    minTimeout: 100,
-    maxTimeout: 1e3
-  }
-};
-function getAlexGlobalPath() {
-  return path6.join(os.homedir(), ALEX_GLOBAL_HOME);
-}
-function getGlobalKnowledgePath(subpath) {
-  return path6.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS[subpath]);
-}
-async function ensureGlobalKnowledgeDirectories() {
-  const paths = [
-    getGlobalKnowledgePath("root"),
-    getGlobalKnowledgePath("knowledge"),
-    getGlobalKnowledgePath("patterns"),
-    getGlobalKnowledgePath("insights")
-  ];
-  for (const dirPath of paths) {
-    await fs6.ensureDir(dirPath);
-  }
-}
-async function withFileLock(filePath, operation) {
-  if (!await fs6.pathExists(filePath)) {
-    await fs6.ensureFile(filePath);
-  }
-  let release;
-  try {
-    release = await lockfile.lock(filePath, LOCK_OPTIONS);
-    return await operation();
-  } finally {
-    if (release) {
-      await release();
-    }
-  }
-}
-async function updateGlobalKnowledgeIndex(updater) {
-  const indexPath = getGlobalKnowledgePath("index");
-  await ensureGlobalKnowledgeDirectories();
-  return await withFileLock(indexPath, async () => {
-    let index;
-    try {
-      if (await fs6.pathExists(indexPath)) {
-        const content = await fs6.readFile(indexPath, "utf-8");
-        if (content.trim()) {
-          index = JSON.parse(content);
-        } else {
-          index = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), entries: [] };
-        }
-      } else {
-        index = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), entries: [] };
-      }
-    } catch (err) {
-      index = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), entries: [] };
-    }
-    index = await updater(index);
-    index.lastUpdated = (/* @__PURE__ */ new Date()).toISOString();
-    await fs6.writeJson(indexPath, index, { spaces: 2 });
-    return index;
-  });
-}
-async function updateProjectRegistry(updater) {
-  const registryPath = getGlobalKnowledgePath("projectRegistry");
-  await ensureGlobalKnowledgeDirectories();
-  return await withFileLock(registryPath, async () => {
-    let registry;
-    try {
-      if (await fs6.pathExists(registryPath)) {
-        const content = await fs6.readFile(registryPath, "utf-8");
-        if (content.trim()) {
-          registry = JSON.parse(content);
-        } else {
-          registry = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), projects: [] };
-        }
-      } else {
-        registry = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), projects: [] };
-      }
-    } catch (err) {
-      registry = { version: "1.0.0", lastUpdated: (/* @__PURE__ */ new Date()).toISOString(), projects: [] };
-    }
-    registry = await updater(registry);
-    registry.lastUpdated = (/* @__PURE__ */ new Date()).toISOString();
-    await fs6.writeJson(registryPath, registry, { spaces: 2 });
-    return registry;
-  });
-}
-async function ensureGlobalKnowledgeIndex() {
-  const indexPath = getGlobalKnowledgePath("index");
-  await ensureGlobalKnowledgeDirectories();
-  return await withFileLock(indexPath, async () => {
-    try {
-      if (await fs6.pathExists(indexPath)) {
-        const content = await fs6.readFile(indexPath, "utf-8");
-        if (content.trim()) {
-          return JSON.parse(content);
-        }
-      }
-    } catch (err) {
-    }
-    const newIndex = {
-      version: "1.0.0",
-      lastUpdated: (/* @__PURE__ */ new Date()).toISOString(),
-      entries: []
-    };
-    await fs6.writeJson(indexPath, newIndex, { spaces: 2 });
-    return newIndex;
-  });
-}
-async function ensureProjectRegistry() {
-  const registryPath = getGlobalKnowledgePath("projectRegistry");
-  await ensureGlobalKnowledgeDirectories();
-  return await updateProjectRegistry((registry) => registry);
-}
-async function registerCurrentProject() {
-  const workspaceFolders = vscode6.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    return void 0;
-  }
-  const projectPath = workspaceFolders[0].uri.fsPath;
-  const projectName = path6.basename(projectPath);
-  let knowledgeFileCount = 0;
-  const dkPattern = new vscode6.RelativePattern(workspaceFolders[0], ".github/domain-knowledge/*.md");
-  const dkFiles = await vscode6.workspace.findFiles(dkPattern);
-  knowledgeFileCount = dkFiles.length;
-  let savedEntry;
-  await updateProjectRegistry((registry) => {
-    const existingIndex = registry.projects.findIndex((p) => p.path === projectPath);
-    const entry = {
-      path: projectPath,
-      name: projectName,
-      lastAccessed: (/* @__PURE__ */ new Date()).toISOString(),
-      knowledgeFiles: knowledgeFileCount
-    };
-    if (existingIndex >= 0) {
-      registry.projects[existingIndex] = {
-        ...registry.projects[existingIndex],
-        ...entry
-      };
-      savedEntry = registry.projects[existingIndex];
-    } else {
-      registry.projects.push(entry);
-      savedEntry = entry;
-    }
-    return registry;
-  });
-  return savedEntry;
-}
-function generateKnowledgeId(type, title) {
-  const prefix = type === "pattern" ? GLOBAL_KNOWLEDGE_PREFIXES.pattern : GLOBAL_KNOWLEDGE_PREFIXES.insight;
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 40);
-  const timestamp = type === "insight" ? `-${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}` : "";
-  return `${prefix}${slug}${timestamp}`;
-}
-async function createGlobalPattern(title, content, category, tags, sourceProject) {
-  await ensureGlobalKnowledgeDirectories();
-  const id = generateKnowledgeId("pattern", title);
-  const filename = `${id}.md`;
-  const filePath = path6.join(getGlobalKnowledgePath("patterns"), filename);
-  const fileContent = `# ${title}
-
-**ID**: ${id}  
-**Category**: ${category}  
-**Tags**: ${tags.join(", ")}  
-**Source**: ${sourceProject || "Manual entry"}  
-**Created**: ${(/* @__PURE__ */ new Date()).toISOString()}  
+**ID**: ${a}  
+**Category**: ${n}  
+**Tags**: ${o.join(", ")}  
+**Source**: ${i||"Manual entry"}  
+**Created**: ${new Date().toISOString()}  
 
 ---
 
-${content}
+${t}
 
 ---
 
@@ -5027,44 +221,18 @@ ${content}
 
 *Add cross-references to related knowledge files here*
 
-`;
-  await fs6.writeFile(filePath, fileContent, "utf-8");
-  const entry = {
-    id,
-    title,
-    type: "pattern",
-    category,
-    tags,
-    sourceProject,
-    created: (/* @__PURE__ */ new Date()).toISOString(),
-    modified: (/* @__PURE__ */ new Date()).toISOString(),
-    summary: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
-    filePath
-  };
-  await updateGlobalKnowledgeIndex((index) => {
-    index.entries.push(entry);
-    return index;
-  });
-  return entry;
-}
-async function updateGlobalPattern(existingEntry, newContent, category, tags, sourceProject) {
-  const filePath = existingEntry.filePath;
-  if (!filePath || !await fs6.pathExists(filePath)) {
-    throw new Error(`Global pattern file not found: ${filePath}`);
-  }
-  const allTags = [.../* @__PURE__ */ new Set([...existingEntry.tags || [], ...tags])];
-  const fileContent = `# ${existingEntry.title}
+`;await R.writeFile(r,c,"utf-8");let u={id:a,title:e,type:"pattern",category:n,tags:o,sourceProject:i,created:new Date().toISOString(),modified:new Date().toISOString(),summary:t.substring(0,200)+(t.length>200?"...":""),filePath:r};return await Je(l=>(l.entries.push(u),l)),u}async function Wc(e,t,n,o,i){let a=e.filePath;if(!a||!await R.pathExists(a))throw new Error(`Global pattern file not found: ${a}`);let s=[...new Set([...e.tags||[],...o])],r=`# ${e.title}
 
-**ID**: ${existingEntry.id}  
-**Category**: ${category}  
-**Tags**: ${allTags.join(", ")}  
-**Source**: ${sourceProject || existingEntry.sourceProject || "Manual entry"}  
-**Created**: ${existingEntry.created}  
-**Modified**: ${(/* @__PURE__ */ new Date()).toISOString()}  
+**ID**: ${e.id}  
+**Category**: ${n}  
+**Tags**: ${s.join(", ")}  
+**Source**: ${i||e.sourceProject||"Manual entry"}  
+**Created**: ${e.created}  
+**Modified**: ${new Date().toISOString()}  
 
 ---
 
-${newContent}
+${t}
 
 ---
 
@@ -5072,50 +240,27 @@ ${newContent}
 
 *Add cross-references to related knowledge files here*
 
-`;
-  await fs6.writeFile(filePath, fileContent, "utf-8");
-  const updatedEntry = {
-    ...existingEntry,
-    category,
-    tags: allTags,
-    modified: (/* @__PURE__ */ new Date()).toISOString(),
-    summary: newContent.substring(0, 200) + (newContent.length > 200 ? "..." : "")
-  };
-  await updateGlobalKnowledgeIndex((index) => {
-    const entryIndex = index.entries.findIndex((e) => e.id === existingEntry.id);
-    if (entryIndex >= 0) {
-      index.entries[entryIndex] = updatedEntry;
-    }
-    return index;
-  });
-  return updatedEntry;
-}
-async function createGlobalInsight(title, content, category, tags, sourceProject, problemContext, solution) {
-  await ensureGlobalKnowledgeDirectories();
-  const id = generateKnowledgeId("insight", title);
-  const filename = `${id}.md`;
-  const filePath = path6.join(getGlobalKnowledgePath("insights"), filename);
-  const fileContent = `# ${title}
+`;await R.writeFile(a,r,"utf-8");let c={...e,category:n,tags:s,modified:new Date().toISOString(),summary:t.substring(0,200)+(t.length>200?"...":"")};return await Je(u=>{let l=u.entries.findIndex(d=>d.id===e.id);return l>=0&&(u.entries[l]=c),u}),c}async function Un(e,t,n,o,i,a,s){await ue();let r=Ga("insight",e),c=`${r}.md`,u=he.join(re("insights"),c),l=`# ${e}
 
-**ID**: ${id}  
-**Category**: ${category}  
-**Tags**: ${tags.join(", ")}  
-**Source Project**: ${sourceProject || "Unknown"}  
-**Date**: ${(/* @__PURE__ */ new Date()).toISOString()}  
+**ID**: ${r}  
+**Category**: ${n}  
+**Tags**: ${o.join(", ")}  
+**Source Project**: ${i||"Unknown"}  
+**Date**: ${new Date().toISOString()}  
 
 ---
 
 ## Context
 
-${problemContext || "No problem context provided."}
+${a||"No problem context provided."}
 
 ## Insight
 
-${content}
+${t}
 
 ## Solution
 
-${solution || "See insight above."}
+${s||"See insight above."}
 
 ---
 
@@ -5124,855 +269,94 @@ ${solution || "See insight above."}
 *When would this insight be useful again?*
 
 - Similar error messages
-- Same technology stack: ${tags.join(", ")}
+- Same technology stack: ${o.join(", ")}
 - Related patterns
 
 ## Related Projects
 
-- ${sourceProject || "Origin project"}
+- ${i||"Origin project"}
 
-`;
-  await fs6.writeFile(filePath, fileContent, "utf-8");
-  const entry = {
-    id,
-    title,
-    type: "insight",
-    category,
-    tags,
-    sourceProject,
-    relatedProjects: sourceProject ? [sourceProject] : [],
-    created: (/* @__PURE__ */ new Date()).toISOString(),
-    modified: (/* @__PURE__ */ new Date()).toISOString(),
-    summary: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
-    filePath
-  };
-  await updateGlobalKnowledgeIndex((index) => {
-    index.entries.push(entry);
-    return index;
-  });
-  return entry;
-}
-async function searchGlobalKnowledge(query, options = {}) {
-  const index = await ensureGlobalKnowledgeIndex();
-  const queryLower = query.toLowerCase();
-  const queryWords = queryLower.split(/\s+/).filter((w) => w.length > 2);
-  const results = [];
-  for (const entry of index.entries) {
-    if (options.type && options.type !== "all" && entry.type !== options.type) {
-      continue;
-    }
-    if (options.category && entry.category !== options.category) {
-      continue;
-    }
-    if (options.tags && options.tags.length > 0) {
-      const hasMatchingTag = options.tags.some(
-        (tag) => entry.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
-      );
-      if (!hasMatchingTag) {
-        continue;
-      }
-    }
-    let relevance = 0;
-    if (entry.title.toLowerCase().includes(queryLower)) {
-      relevance += 10;
-    }
-    for (const word of queryWords) {
-      if (entry.title.toLowerCase().includes(word)) {
-        relevance += 3;
-      }
-    }
-    for (const tag of entry.tags) {
-      if (tag.toLowerCase().includes(queryLower) || queryLower.includes(tag.toLowerCase())) {
-        relevance += 5;
-      }
-      for (const word of queryWords) {
-        if (tag.toLowerCase().includes(word)) {
-          relevance += 2;
-        }
-      }
-    }
-    if (entry.summary.toLowerCase().includes(queryLower)) {
-      relevance += 3;
-    }
-    for (const word of queryWords) {
-      if (entry.summary.toLowerCase().includes(word)) {
-        relevance += 1;
-      }
-    }
-    if (entry.category.toLowerCase().includes(queryLower)) {
-      relevance += 2;
-    }
-    if (relevance > 0) {
-      let content;
-      if (await fs6.pathExists(entry.filePath)) {
-        try {
-          content = await fs6.readFile(entry.filePath, "utf-8");
-          for (const word of queryWords) {
-            const matches = (content.toLowerCase().match(new RegExp(word, "g")) || []).length;
-            relevance += Math.min(matches, 5) * 0.5;
-          }
-        } catch (err) {
-        }
-      }
-      results.push({ entry, relevance, content });
-    }
-  }
-  results.sort((a, b) => b.relevance - a.relevance);
-  return results.slice(0, options.limit || 10);
-}
-async function promoteToGlobalKnowledge(localFilePath, category, additionalTags = []) {
-  try {
-    const content = await fs6.readFile(localFilePath, "utf-8");
-    const filename = path6.basename(localFilePath, ".md");
-    const titleMatch = content.match(/^#\s+(.+)$/m);
-    const title = titleMatch ? titleMatch[1] : filename.replace(/^DK-/, "").replace(/-/g, " ");
-    const tagsMatch = content.match(/\*\*Tags\*\*:\s*(.+)$/m);
-    const existingTags = tagsMatch ? tagsMatch[1].split(",").map((t) => t.trim()) : [];
-    const allTags = [.../* @__PURE__ */ new Set([...existingTags, ...additionalTags])];
-    const workspaceFolders = vscode6.workspace.workspaceFolders;
-    const sourceProject = workspaceFolders ? path6.basename(workspaceFolders[0].uri.fsPath) : void 0;
-    return await createGlobalPattern(title, content, category, allTags, sourceProject);
-  } catch (err) {
-    console.error("Failed to promote file to global knowledge:", err);
-    return null;
-  }
-}
-var EXCLUDED_FROM_PROMOTION = [
-  "DK-SKILL-WISHLIST",
-  "DK-GENERIC-FRAMEWORK",
-  "VERSION-NAMING-CONVENTION"
-];
-async function evaluateDKFile(filePath) {
-  const filename = path6.basename(filePath, ".md");
-  const content = await fs6.readFile(filePath, "utf-8");
-  let score = 0;
-  const reasons = [];
-  const titleMatch = content.match(/^#\s+(.+)$/m);
-  const title = titleMatch ? titleMatch[1] : filename.replace(/^DK-/, "").replace(/-/g, " ");
-  const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
-  const synapseMatches = content.match(synapseRegex);
-  if (synapseMatches && synapseMatches.length > 0) {
-    score += 3;
-    reasons.push(`Has ${synapseMatches.length} synapse connection(s)`);
-  }
-  const h2Sections = content.match(/^##\s+.+$/gm);
-  if (h2Sections && h2Sections.length >= 3) {
-    score += 2;
-    reasons.push(`Well-structured with ${h2Sections.length} sections`);
-  }
-  const tagsMatch = content.match(/\*\*Tags\*\*:\s*(.+)$/m);
-  let tags = [];
-  if (tagsMatch) {
-    tags = tagsMatch[1].split(",").map((t) => t.trim()).filter((t) => t.length > 0);
-    if (tags.length > 0) {
-      score += 1;
-      reasons.push(`Has ${tags.length} tag(s)`);
-    }
-  }
-  if (content.length > 1e3) {
-    score += 1;
-    reasons.push("Substantial content (>1KB)");
-  }
-  if (content.length > 5e3) {
-    score += 2;
-    reasons.push("Rich content (>5KB)");
-  }
-  const codeBlocks = content.match(/```[\s\S]*?```/g);
-  if (codeBlocks && codeBlocks.length > 0) {
-    score += 2;
-    reasons.push(`Contains ${codeBlocks.length} code example(s)`);
-  }
-  const generalTerms = [
-    /pattern/i,
-    /best practice/i,
-    /guideline/i,
-    /framework/i,
-    /principle/i,
-    /architecture/i,
-    /design/i,
-    /approach/i
-  ];
-  const generalMatchCount = generalTerms.filter((re) => re.test(content)).length;
-  if (generalMatchCount >= 2) {
-    score += Math.min(generalMatchCount, 3);
-    reasons.push(`Contains general/reusable concepts`);
-  }
-  const category = inferCategoryFromContent(content, filename);
-  const index = await ensureGlobalKnowledgeIndex();
-  const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9]/g, "-");
-  const existingEntry = index.entries.find(
-    (e) => e.title.toLowerCase().replace(/[^a-z0-9]/g, "-") === normalizedTitle || e.id.includes(normalizedTitle)
-  );
-  const alreadyPromoted = !!existingEntry;
-  let hasLocalChanges = false;
-  if (alreadyPromoted && existingEntry) {
-    try {
-      const localStats = await fs6.stat(filePath);
-      const localModified = localStats.mtime;
-      const globalModified = new Date(existingEntry.modified);
-      hasLocalChanges = localModified > globalModified;
-    } catch {
-      hasLocalChanges = false;
-    }
-  }
-  return {
-    filePath,
-    filename,
-    title,
-    score,
-    reasons,
-    category,
-    tags,
-    isPromotionCandidate: score >= 5 && !alreadyPromoted,
-    alreadyPromoted,
-    existingEntry,
-    hasLocalChanges
-  };
-}
-function inferCategoryFromContent(content, filename) {
-  const contentLower = content.toLowerCase();
-  const filenameLower = filename.toLowerCase();
-  const categoryPatterns = [
-    [/error|exception|fault|handling/i, "error-handling"],
-    [/api|rest|graphql|endpoint/i, "api-design"],
-    [/test|spec|jest|mocha|assertion/i, "testing"],
-    [/debug|troubleshoot|diagnos/i, "debugging"],
-    [/performance|optimi|cache|speed/i, "performance"],
-    [/architecture|design|pattern|structure/i, "architecture"],
-    [/security|auth|encrypt|vulnerab/i, "security"],
-    [/deploy|ci\/cd|pipeline|docker|kubernetes/i, "deployment"],
-    [/document|readme|comment|diagram/i, "documentation"],
-    [/refactor|clean|improve|modernize/i, "refactoring"],
-    [/tool|config|setup|environment/i, "tooling"]
-  ];
-  for (const [pattern, category] of categoryPatterns) {
-    if (pattern.test(contentLower) || pattern.test(filenameLower)) {
-      return category;
-    }
-  }
-  return "general";
-}
-async function autoPromoteDuringMeditation(workspacePath, options = {}) {
-  const { dryRun = false, minScore = 5 } = options;
-  await ensureGlobalKnowledgeDirectories();
-  const result = {
-    evaluated: 0,
-    promoted: [],
-    updated: [],
-    skipped: [],
-    alreadyGlobal: []
-  };
-  const dkPath = path6.join(workspacePath, ".github", "domain-knowledge");
-  if (!await fs6.pathExists(dkPath)) {
-    return result;
-  }
-  const files = await fs6.readdir(dkPath);
-  const dkFiles = files.filter((f) => f.startsWith("DK-") && f.endsWith(".md"));
-  for (const file of dkFiles) {
-    const filePath = path6.join(dkPath, file);
-    const filenameWithoutExt = file.replace(".md", "");
-    if (EXCLUDED_FROM_PROMOTION.some((excluded) => filenameWithoutExt.includes(excluded))) {
-      result.skipped.push({ filename: file, reason: "Excluded meta-file" });
-      continue;
-    }
-    result.evaluated++;
-    try {
-      const evaluation = await evaluateDKFile(filePath);
-      if (evaluation.alreadyPromoted) {
-        if (evaluation.hasLocalChanges && evaluation.existingEntry) {
-          if (!dryRun) {
-            const content = await fs6.readFile(filePath, "utf-8");
-            const workspaceFolders = vscode6.workspace.workspaceFolders;
-            const sourceProject = workspaceFolders ? path6.basename(workspaceFolders[0].uri.fsPath) : void 0;
-            const updatedEntry = await updateGlobalPattern(
-              evaluation.existingEntry,
-              content,
-              evaluation.category,
-              evaluation.tags,
-              sourceProject
-            );
-            result.updated.push(updatedEntry);
-          } else {
-            result.updated.push({
-              ...evaluation.existingEntry,
-              modified: (/* @__PURE__ */ new Date()).toISOString(),
-              summary: `[DRY-RUN] Would be updated from local changes`
-            });
-          }
-        } else {
-          result.alreadyGlobal.push(file);
-        }
-        continue;
-      }
-      if (!evaluation.isPromotionCandidate || evaluation.score < minScore) {
-        result.skipped.push({
-          filename: file,
-          reason: `Score ${evaluation.score}/${minScore} - ${evaluation.reasons.join(", ") || "Needs more structure/content"}`
-        });
-        continue;
-      }
-      if (!dryRun) {
-        const entry = await promoteToGlobalKnowledge(
-          filePath,
-          evaluation.category,
-          evaluation.tags
-        );
-        if (entry) {
-          result.promoted.push(entry);
-        }
-      } else {
-        result.promoted.push({
-          id: `[DRY-RUN] ${filenameWithoutExt}`,
-          title: evaluation.title,
-          type: "pattern",
-          category: evaluation.category,
-          tags: evaluation.tags,
-          created: (/* @__PURE__ */ new Date()).toISOString(),
-          modified: (/* @__PURE__ */ new Date()).toISOString(),
-          summary: `Would be promoted with score ${evaluation.score}`,
-          filePath
-        });
-      }
-    } catch (err) {
-      result.skipped.push({ filename: file, reason: `Error: ${err}` });
-    }
-  }
-  if (!dryRun && (result.promoted.length > 0 || result.updated.length > 0)) {
-    triggerPostModificationSync();
-  }
-  return result;
-}
-async function getGlobalKnowledgeSummary() {
-  const index = await ensureGlobalKnowledgeIndex();
-  const categories = {};
-  const tagCounts = {};
-  for (const entry of index.entries) {
-    categories[entry.category] = (categories[entry.category] || 0) + 1;
-    for (const tag of entry.tags) {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    }
-  }
-  const topTags = Object.entries(tagCounts).map(([tag, count]) => ({ tag, count })).sort((a, b) => b.count - a.count).slice(0, 10);
-  const recentEntries = [...index.entries].sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()).slice(0, 5);
-  return {
-    totalPatterns: index.entries.filter((e) => e.type === "pattern").length,
-    totalInsights: index.entries.filter((e) => e.type === "insight").length,
-    categories,
-    recentEntries,
-    topTags
-  };
-}
-var GlobalKnowledgeSearchTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: `Searching global knowledge for: ${options.input.query}`,
-      confirmationMessages: {
-        title: "Search Global Knowledge",
-        message: new vscode6.MarkdownString(
-          `Search Alex's global knowledge base across all projects for: **${options.input.query}**?
+`;await R.writeFile(u,l,"utf-8");let d={id:r,title:e,type:"insight",category:n,tags:o,sourceProject:i,relatedProjects:i?[i]:[],created:new Date().toISOString(),modified:new Date().toISOString(),summary:t.substring(0,200)+(t.length>200?"...":""),filePath:u};return await Je(m=>(m.entries.push(d),m)),d}async function Ct(e,t={}){let n=await Gn(),o=e.toLowerCase(),i=o.split(/\s+/).filter(s=>s.length>2),a=[];for(let s of n.entries){if(t.type&&t.type!=="all"&&s.type!==t.type||t.category&&s.category!==t.category||t.tags&&t.tags.length>0&&!t.tags.some(u=>s.tags.map(l=>l.toLowerCase()).includes(u.toLowerCase())))continue;let r=0;s.title.toLowerCase().includes(o)&&(r+=10);for(let c of i)s.title.toLowerCase().includes(c)&&(r+=3);for(let c of s.tags){(c.toLowerCase().includes(o)||o.includes(c.toLowerCase()))&&(r+=5);for(let u of i)c.toLowerCase().includes(u)&&(r+=2)}s.summary.toLowerCase().includes(o)&&(r+=3);for(let c of i)s.summary.toLowerCase().includes(c)&&(r+=1);if(s.category.toLowerCase().includes(o)&&(r+=2),r>0){let c;if(await R.pathExists(s.filePath))try{c=await R.readFile(s.filePath,"utf-8");for(let u of i){let l=(c.toLowerCase().match(new RegExp(u,"g"))||[]).length;r+=Math.min(l,5)*.5}}catch{}a.push({entry:s,relevance:r,content:c})}}return a.sort((s,r)=>r.relevance-s.relevance),a.slice(0,t.limit||10)}async function Ka(e,t,n=[]){try{let o=await R.readFile(e,"utf-8"),i=he.basename(e,".md"),a=o.match(/^#\s+(.+)$/m),s=a?a[1]:i.replace(/^DK-/,"").replace(/-/g," "),r=o.match(/\*\*Tags\*\*:\s*(.+)$/m),c=r?r[1].split(",").map(m=>m.trim()):[],u=[...new Set([...c,...n])],l=M.workspace.workspaceFolders,d=l?he.basename(l[0].uri.fsPath):void 0;return await Hc(s,o,t,u,d)}catch(o){return console.error("Failed to promote file to global knowledge:",o),null}}var Vc=["DK-SKILL-WISHLIST","DK-GENERIC-FRAMEWORK","VERSION-NAMING-CONVENTION"];async function Bc(e){let t=he.basename(e,".md"),n=await R.readFile(e,"utf-8"),o=0,i=[],a=n.match(/^#\s+(.+)$/m),s=a?a[1]:t.replace(/^DK-/,"").replace(/-/g," "),r=/\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g,c=n.match(r);c&&c.length>0&&(o+=3,i.push(`Has ${c.length} synapse connection(s)`));let u=n.match(/^##\s+.+$/gm);u&&u.length>=3&&(o+=2,i.push(`Well-structured with ${u.length} sections`));let l=n.match(/\*\*Tags\*\*:\s*(.+)$/m),d=[];l&&(d=l[1].split(",").map(L=>L.trim()).filter(L=>L.length>0),d.length>0&&(o+=1,i.push(`Has ${d.length} tag(s)`))),n.length>1e3&&(o+=1,i.push("Substantial content (>1KB)")),n.length>5e3&&(o+=2,i.push("Rich content (>5KB)"));let m=n.match(/```[\s\S]*?```/g);m&&m.length>0&&(o+=2,i.push(`Contains ${m.length} code example(s)`));let h=[/pattern/i,/best practice/i,/guideline/i,/framework/i,/principle/i,/architecture/i,/design/i,/approach/i].filter(L=>L.test(n)).length;h>=2&&(o+=Math.min(h,3),i.push("Contains general/reusable concepts"));let y=Jc(n,t),w=await Gn(),k=s.toLowerCase().replace(/[^a-z0-9]/g,"-"),$=w.entries.find(L=>L.title.toLowerCase().replace(/[^a-z0-9]/g,"-")===k||L.id.includes(k)),A=!!$,P=!1;if(A&&$)try{let W=(await R.stat(e)).mtime,X=new Date($.modified);P=W>X}catch{P=!1}return{filePath:e,filename:t,title:s,score:o,reasons:i,category:y,tags:d,isPromotionCandidate:o>=5&&!A,alreadyPromoted:A,existingEntry:$,hasLocalChanges:P}}function Jc(e,t){let n=e.toLowerCase(),o=t.toLowerCase(),i=[[/error|exception|fault|handling/i,"error-handling"],[/api|rest|graphql|endpoint/i,"api-design"],[/test|spec|jest|mocha|assertion/i,"testing"],[/debug|troubleshoot|diagnos/i,"debugging"],[/performance|optimi|cache|speed/i,"performance"],[/architecture|design|pattern|structure/i,"architecture"],[/security|auth|encrypt|vulnerab/i,"security"],[/deploy|ci\/cd|pipeline|docker|kubernetes/i,"deployment"],[/document|readme|comment|diagram/i,"documentation"],[/refactor|clean|improve|modernize/i,"refactoring"],[/tool|config|setup|environment/i,"tooling"]];for(let[a,s]of i)if(a.test(n)||a.test(o))return s;return"general"}async function Ua(e,t={}){let{dryRun:n=!1,minScore:o=5}=t;await ue();let i={evaluated:0,promoted:[],updated:[],skipped:[],alreadyGlobal:[]},a=he.join(e,".github","domain-knowledge");if(!await R.pathExists(a))return i;let r=(await R.readdir(a)).filter(c=>c.startsWith("DK-")&&c.endsWith(".md"));for(let c of r){let u=he.join(a,c),l=c.replace(".md","");if(Vc.some(d=>l.includes(d))){i.skipped.push({filename:c,reason:"Excluded meta-file"});continue}i.evaluated++;try{let d=await Bc(u);if(d.alreadyPromoted){if(d.hasLocalChanges&&d.existingEntry)if(n)i.updated.push({...d.existingEntry,modified:new Date().toISOString(),summary:"[DRY-RUN] Would be updated from local changes"});else{let m=await R.readFile(u,"utf-8"),p=M.workspace.workspaceFolders,h=p?he.basename(p[0].uri.fsPath):void 0,y=await Wc(d.existingEntry,m,d.category,d.tags,h);i.updated.push(y)}else i.alreadyGlobal.push(c);continue}if(!d.isPromotionCandidate||d.score<o){i.skipped.push({filename:c,reason:`Score ${d.score}/${o} - ${d.reasons.join(", ")||"Needs more structure/content"}`});continue}if(n)i.promoted.push({id:`[DRY-RUN] ${l}`,title:d.title,type:"pattern",category:d.category,tags:d.tags,created:new Date().toISOString(),modified:new Date().toISOString(),summary:`Would be promoted with score ${d.score}`,filePath:u});else{let m=await Ka(u,d.category,d.tags);m&&i.promoted.push(m)}}catch(d){i.skipped.push({filename:c,reason:`Error: ${d}`})}}return!n&&(i.promoted.length>0||i.updated.length>0)&&lt(),i}async function zn(){let e=await Gn(),t={},n={};for(let a of e.entries){t[a.category]=(t[a.category]||0)+1;for(let s of a.tags)n[s]=(n[s]||0)+1}let o=Object.entries(n).map(([a,s])=>({tag:a,count:s})).sort((a,s)=>s.count-a.count).slice(0,10),i=[...e.entries].sort((a,s)=>new Date(s.created).getTime()-new Date(a.created).getTime()).slice(0,5);return{totalPatterns:e.entries.filter(a=>a.type==="pattern").length,totalInsights:e.entries.filter(a=>a.type==="insight").length,categories:t,recentEntries:i,topTags:o}}var Rn=class{async prepareInvocation(t,n){return{invocationMessage:`Searching global knowledge for: ${t.input.query}`,confirmationMessages:{title:"Search Global Knowledge",message:new M.MarkdownString(`Search Alex's global knowledge base across all projects for: **${t.input.query}**?
 
-This searches patterns and insights learned from all your projects.`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    await ensureGlobalKnowledgeDirectories();
-    const { query, type, category, tags } = options.input;
-    const results = await searchGlobalKnowledge(query, {
-      type,
-      category,
-      tags: tags ? tags.split(",").map((t) => t.trim()) : void 0,
-      limit: 10
-    });
-    if (results.length === 0) {
-      return new vscode6.LanguageModelToolResult([
-        new vscode6.LanguageModelTextPart(
-          `No global knowledge found matching "${query}".
+This searches patterns and insights learned from all your projects.`)}}}async invoke(t,n){await ue();let{query:o,type:i,category:a,tags:s}=t.input,r=await Ct(o,{type:i,category:a,tags:s?s.split(",").map(u=>u.trim()):void 0,limit:10});if(r.length===0)return new M.LanguageModelToolResult([new M.LanguageModelTextPart(`No global knowledge found matching "${o}".
 
 You can save new knowledge using:
 - \`@alex /saveinsight\` to save a learning from the current project
-- \`@alex /promote\` to promote project-local knowledge to global`
-        )
-      ]);
-    }
-    let result = `## Global Knowledge Search Results
+- \`@alex /promote\` to promote project-local knowledge to global`)]);let c=`## Global Knowledge Search Results
 
-`;
-    result += `Found **${results.length}** relevant entries for "${query}":
+`;c+=`Found **${r.length}** relevant entries for "${o}":
 
-`;
-    for (const { entry, relevance } of results) {
-      const typeEmoji = entry.type === "pattern" ? "\u{1F4D0}" : "\u{1F4A1}";
-      result += `### ${typeEmoji} ${entry.title}
-`;
-      result += `- **Type**: ${entry.type} | **Category**: ${entry.category}
-`;
-      result += `- **Tags**: ${entry.tags.join(", ")}
-`;
-      if (entry.sourceProject) {
-        result += `- **Source**: ${entry.sourceProject}
-`;
-      }
-      result += `- **Summary**: ${entry.summary}
-`;
-      result += `- **File**: \`${entry.filePath}\`
+`;for(let{entry:u,relevance:l}of r){let d=u.type==="pattern"?"\u{1F4D0}":"\u{1F4A1}";c+=`### ${d} ${u.title}
+`,c+=`- **Type**: ${u.type} | **Category**: ${u.category}
+`,c+=`- **Tags**: ${u.tags.join(", ")}
+`,u.sourceProject&&(c+=`- **Source**: ${u.sourceProject}
+`),c+=`- **Summary**: ${u.summary}
+`,c+=`- **File**: \`${u.filePath}\`
 
-`;
-    }
-    return new vscode6.LanguageModelToolResult([
-      new vscode6.LanguageModelTextPart(result)
-    ]);
-  }
-};
-var SaveInsightTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: `Saving insight: ${options.input.title}`,
-      confirmationMessages: {
-        title: "Save Global Insight",
-        message: new vscode6.MarkdownString(
-          `Save this insight to Alex's global knowledge base?
+`}return new M.LanguageModelToolResult([new M.LanguageModelTextPart(c)])}},Dn=class{async prepareInvocation(t,n){return{invocationMessage:`Saving insight: ${t.input.title}`,confirmationMessages:{title:"Save Global Insight",message:new M.MarkdownString(`Save this insight to Alex's global knowledge base?
 
-**Title**: ${options.input.title}
+**Title**: ${t.input.title}
 
-This will be available across all your projects.`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    await ensureGlobalKnowledgeDirectories();
-    const { title, insight, category, tags, problem, solution } = options.input;
-    const workspaceFolders = vscode6.workspace.workspaceFolders;
-    const sourceProject = workspaceFolders ? path6.basename(workspaceFolders[0].uri.fsPath) : void 0;
-    const entry = await createGlobalInsight(
-      title,
-      insight,
-      category || "general",
-      tags ? tags.split(",").map((t) => t.trim()) : [],
-      sourceProject,
-      problem,
-      solution
-    );
-    triggerPostModificationSync();
-    const result = `## \u2705 Insight Saved to Global Knowledge
+This will be available across all your projects.`)}}}async invoke(t,n){await ue();let{title:o,insight:i,category:a,tags:s,problem:r,solution:c}=t.input,u=M.workspace.workspaceFolders,l=u?he.basename(u[0].uri.fsPath):void 0,d=await Un(o,i,a||"general",s?s.split(",").map(p=>p.trim()):[],l,r,c);lt();let m=`## \u2705 Insight Saved to Global Knowledge
 
-**ID**: ${entry.id}  
-**Title**: ${entry.title}  
-**Category**: ${entry.category}  
-**Tags**: ${entry.tags.join(", ")}  
-**Source Project**: ${entry.sourceProject || "Unknown"}  
-**File**: \`${entry.filePath}\`
+**ID**: ${d.id}  
+**Title**: ${d.title}  
+**Category**: ${d.category}  
+**Tags**: ${d.tags.join(", ")}  
+**Source Project**: ${d.sourceProject||"Unknown"}  
+**File**: \`${d.filePath}\`
 
 This insight is now available across all your projects.
 *\u{1F9E0} Unconscious sync triggered - backing up to cloud automatically.*
-`;
-    return new vscode6.LanguageModelToolResult([
-      new vscode6.LanguageModelTextPart(result)
-    ]);
-  }
-};
-var PromoteKnowledgeTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: `Promoting ${path6.basename(options.input.filePath)} to global knowledge`,
-      confirmationMessages: {
-        title: "Promote to Global Knowledge",
-        message: new vscode6.MarkdownString(
-          `Promote this project-local knowledge file to global knowledge?
+`;return new M.LanguageModelToolResult([new M.LanguageModelTextPart(m)])}},Ln=class{async prepareInvocation(t,n){return{invocationMessage:`Promoting ${he.basename(t.input.filePath)} to global knowledge`,confirmationMessages:{title:"Promote to Global Knowledge",message:new M.MarkdownString(`Promote this project-local knowledge file to global knowledge?
 
-**File**: ${options.input.filePath}
+**File**: ${t.input.filePath}
 
-This will make it searchable and available across all your projects.`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    const { filePath, category, additionalTags } = options.input;
-    if (!await fs6.pathExists(filePath)) {
-      return new vscode6.LanguageModelToolResult([
-        new vscode6.LanguageModelTextPart(`\u274C File not found: ${filePath}`)
-      ]);
-    }
-    const entry = await promoteToGlobalKnowledge(
-      filePath,
-      category || "general",
-      additionalTags ? additionalTags.split(",").map((t) => t.trim()) : []
-    );
-    if (!entry) {
-      return new vscode6.LanguageModelToolResult([
-        new vscode6.LanguageModelTextPart(`\u274C Failed to promote file to global knowledge.`)
-      ]);
-    }
-    triggerPostModificationSync();
-    const result = `## \u2705 Knowledge Promoted to Global
+This will make it searchable and available across all your projects.`)}}}async invoke(t,n){let{filePath:o,category:i,additionalTags:a}=t.input;if(!await R.pathExists(o))return new M.LanguageModelToolResult([new M.LanguageModelTextPart(`\u274C File not found: ${o}`)]);let s=await Ka(o,i||"general",a?a.split(",").map(c=>c.trim()):[]);if(!s)return new M.LanguageModelToolResult([new M.LanguageModelTextPart("\u274C Failed to promote file to global knowledge.")]);lt();let r=`## \u2705 Knowledge Promoted to Global
 
-**ID**: ${entry.id}  
-**Title**: ${entry.title}  
-**Category**: ${entry.category}  
-**Tags**: ${entry.tags.join(", ")}  
-**Global File**: \`${entry.filePath}\`
+**ID**: ${s.id}  
+**Title**: ${s.title}  
+**Category**: ${s.category}  
+**Tags**: ${s.tags.join(", ")}  
+**Global File**: \`${s.filePath}\`
 
 This knowledge is now available across all your projects!
 *\u{1F9E0} Unconscious sync triggered - backing up to cloud automatically.*
-`;
-    return new vscode6.LanguageModelToolResult([
-      new vscode6.LanguageModelTextPart(result)
-    ]);
-  }
-};
-var GlobalKnowledgeStatusTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: "Retrieving global knowledge status..."
-    };
-  }
-  async invoke(options, token) {
-    await ensureGlobalKnowledgeDirectories();
-    const summary = await getGlobalKnowledgeSummary();
-    const registry = await ensureProjectRegistry();
-    let syncStatusStr = "";
-    try {
-      const syncStatus = await getSyncStatus();
-      const statusEmoji = syncStatus.status === "up-to-date" ? "\u2705" : syncStatus.status === "needs-push" ? "\u{1F4E4}" : syncStatus.status === "needs-pull" ? "\u{1F4E5}" : syncStatus.status === "error" ? "\u274C" : "\u26AA";
-      syncStatusStr = `| Cloud Sync | ${statusEmoji} ${syncStatus.status} |
-`;
-    } catch {
-      syncStatusStr = `| Cloud Sync | \u26AA Not configured |
-`;
-    }
-    let result = `## \u{1F9E0} Global Knowledge Base Status
+`;return new M.LanguageModelToolResult([new M.LanguageModelTextPart(r)])}},Nn=class{async prepareInvocation(t,n){return{invocationMessage:"Retrieving global knowledge status..."}}async invoke(t,n){await ue();let o=await zn(),i=await Kn(),a="";try{let r=await kt();a=`| Cloud Sync | ${r.status==="up-to-date"?"\u2705":r.status==="needs-push"?"\u{1F4E4}":r.status==="needs-pull"?"\u{1F4E5}":r.status==="error"?"\u274C":"\u26AA"} ${r.status} |
+`}catch{a=`| Cloud Sync | \u26AA Not configured |
+`}let s=`## \u{1F9E0} Global Knowledge Base Status
 
 ### Overview
 | Metric | Count |
 |--------|-------|
-| Global Patterns | ${summary.totalPatterns} |
-| Global Insights | ${summary.totalInsights} |
-| Known Projects | ${registry.projects.length} |
-${syncStatusStr}
+| Global Patterns | ${o.totalPatterns} |
+| Global Insights | ${o.totalInsights} |
+| Known Projects | ${i.projects.length} |
+${a}
 ### Knowledge by Category
-`;
-    for (const [cat, count] of Object.entries(summary.categories)) {
-      result += `- **${cat}**: ${count}
-`;
-    }
-    if (summary.topTags.length > 0) {
-      result += `
+`;for(let[r,c]of Object.entries(o.categories))s+=`- **${r}**: ${c}
+`;if(o.topTags.length>0){s+=`
 ### Top Tags
-`;
-      for (const { tag, count } of summary.topTags) {
-        result += `- ${tag}: ${count}
-`;
-      }
-    }
-    if (summary.recentEntries.length > 0) {
-      result += `
+`;for(let{tag:r,count:c}of o.topTags)s+=`- ${r}: ${c}
+`}if(o.recentEntries.length>0){s+=`
 ### Recent Entries
-`;
-      for (const entry of summary.recentEntries) {
-        const typeEmoji = entry.type === "pattern" ? "\u{1F4D0}" : "\u{1F4A1}";
-        result += `- ${typeEmoji} **${entry.title}** (${entry.category})
-`;
-      }
-    }
-    if (registry.projects.length > 0) {
-      result += `
+`;for(let r of o.recentEntries){let c=r.type==="pattern"?"\u{1F4D0}":"\u{1F4A1}";s+=`- ${c} **${r.title}** (${r.category})
+`}}if(i.projects.length>0){s+=`
 ### Known Projects
-`;
-      for (const project of registry.projects.slice(0, 5)) {
-        result += `- **${project.name}** - ${project.knowledgeFiles} knowledge files
-`;
-      }
-    }
-    result += `
+`;for(let r of i.projects.slice(0,5))s+=`- **${r.name}** - ${r.knowledgeFiles} knowledge files
+`}return s+=`
 ### Global Knowledge Location
-\`${getAlexGlobalPath()}\`
-`;
-    return new vscode6.LanguageModelToolResult([
-      new vscode6.LanguageModelTextPart(result)
-    ]);
-  }
-};
-function registerGlobalKnowledgeTools(context) {
-  context.subscriptions.push(
-    vscode6.lm.registerTool("alex_global_knowledge_search", new GlobalKnowledgeSearchTool()),
-    vscode6.lm.registerTool("alex_save_insight", new SaveInsightTool()),
-    vscode6.lm.registerTool("alex_promote_knowledge", new PromoteKnowledgeTool()),
-    vscode6.lm.registerTool("alex_global_knowledge_status", new GlobalKnowledgeStatusTool())
-  );
-}
+\`${jn()}\`
+`,new M.LanguageModelToolResult([new M.LanguageModelTextPart(s)])}};function za(e){e.subscriptions.push(M.lm.registerTool("alex_global_knowledge_search",new Rn),M.lm.registerTool("alex_save_insight",new Dn),M.lm.registerTool("alex_promote_knowledge",new Ln),M.lm.registerTool("alex_global_knowledge_status",new Nn))}async function qa(e){let t=await Me(!0);if(!t.found){if(t.cancelled)return;U.window.showErrorMessage(t.error||"No workspace folder open. Please open a project with Alex installed.");return}let n=t.rootPath,o=t.workspaceFolder,i={timestamp:new Date().toISOString(),synapseHealth:{totalFiles:0,totalSynapses:0,brokenConnections:0,healthStatus:"UNKNOWN"},versionConsistency:{currentVersion:"Unknown",outdatedReferences:0,filesUpdated:[]},memoryConsolidation:{proceduralFiles:0,episodicFiles:0,domainFiles:0,totalConnections:0},globalKnowledgePromotion:{evaluated:0,promoted:[],updated:[],skipped:0,alreadyGlobal:0},recommendations:[],sessionFile:""};await U.window.withProgress({location:U.ProgressLocation.Notification,title:"Self-Actualization Protocol",cancellable:!1},async c=>{c.report({message:"Phase 1: Validating synaptic connections...",increment:0}),await Yc(o,i),c.report({message:"Phase 2: Checking version consistency...",increment:20}),await Xc(n,i),c.report({message:"Phase 3: Assessing memory architecture...",increment:40}),await Qc(o,i),c.report({message:"Phase 4: Auto-promoting knowledge to global...",increment:55}),await Zc(n,i),c.report({message:"Phase 5: Generating recommendations...",increment:75}),el(i),c.report({message:"Phase 6: Documenting session...",increment:90}),await tl(n,i),c.report({message:"Self-actualization complete!",increment:100})});let s=`Self-Actualization Complete ${i.synapseHealth.healthStatus==="EXCELLENT"?"\u2705":i.synapseHealth.healthStatus==="GOOD"?"\u{1F7E2}":i.synapseHealth.healthStatus==="NEEDS ATTENTION"?"\u{1F7E1}":"\u{1F534}"}
 
-// src/commands/self-actualization.ts
-async function runSelfActualization(context) {
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return void 0;
-    }
-    vscode7.window.showErrorMessage(
-      workspaceResult.error || "No workspace folder open. Please open a project with Alex installed."
-    );
-    return void 0;
-  }
-  const rootPath = workspaceResult.rootPath;
-  const workspaceFolder = workspaceResult.workspaceFolder;
-  const report = {
-    timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-    synapseHealth: {
-      totalFiles: 0,
-      totalSynapses: 0,
-      brokenConnections: 0,
-      healthStatus: "UNKNOWN"
-    },
-    versionConsistency: {
-      currentVersion: "Unknown",
-      outdatedReferences: 0,
-      filesUpdated: []
-    },
-    memoryConsolidation: {
-      proceduralFiles: 0,
-      episodicFiles: 0,
-      domainFiles: 0,
-      totalConnections: 0
-    },
-    globalKnowledgePromotion: {
-      evaluated: 0,
-      promoted: [],
-      updated: [],
-      skipped: 0,
-      alreadyGlobal: 0
-    },
-    recommendations: [],
-    sessionFile: ""
-  };
-  await vscode7.window.withProgress({
-    location: vscode7.ProgressLocation.Notification,
-    title: "Self-Actualization Protocol",
-    cancellable: false
-  }, async (progress) => {
-    progress.report({ message: "Phase 1: Validating synaptic connections...", increment: 0 });
-    await scanSynapseHealth(workspaceFolder, report);
-    progress.report({ message: "Phase 2: Checking version consistency...", increment: 20 });
-    await checkVersionConsistency(rootPath, report);
-    progress.report({ message: "Phase 3: Assessing memory architecture...", increment: 40 });
-    await assessMemoryArchitecture(workspaceFolder, report);
-    progress.report({ message: "Phase 4: Auto-promoting knowledge to global...", increment: 55 });
-    await autoPromoteKnowledge(rootPath, report);
-    progress.report({ message: "Phase 5: Generating recommendations...", increment: 75 });
-    generateRecommendations(report);
-    progress.report({ message: "Phase 6: Documenting session...", increment: 90 });
-    await createSessionRecord(rootPath, report);
-    progress.report({ message: "Self-actualization complete!", increment: 100 });
-  });
-  const healthEmoji = report.synapseHealth.healthStatus === "EXCELLENT" ? "\u2705" : report.synapseHealth.healthStatus === "GOOD" ? "\u{1F7E2}" : report.synapseHealth.healthStatus === "NEEDS ATTENTION" ? "\u{1F7E1}" : "\u{1F534}";
-  const message = `Self-Actualization Complete ${healthEmoji}
-
-Synapses: ${report.synapseHealth.totalSynapses} (${report.synapseHealth.brokenConnections} broken)
-Memory Files: ${report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles}
-Recommendations: ${report.recommendations.length}`;
-  const action = await vscode7.window.showInformationMessage(
-    message,
-    "View Report",
-    "Open Session File"
-  );
-  if (action === "View Report") {
-    showReportInPanel(report);
-  } else if (action === "Open Session File" && report.sessionFile) {
-    const doc = await vscode7.workspace.openTextDocument(report.sessionFile);
-    await vscode7.window.showTextDocument(doc);
-  }
-  return report;
-}
-async function scanSynapseHealth(workspaceFolder, report) {
-  const patterns = [
-    ".github/copilot-instructions.md",
-    ".github/instructions/*.md",
-    ".github/prompts/*.md",
-    ".github/episodic/*.md",
-    ".github/domain-knowledge/*.md"
-  ];
-  const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
-  for (const pattern of patterns) {
-    const relativePattern = new vscode7.RelativePattern(workspaceFolder, pattern);
-    const files = await vscode7.workspace.findFiles(relativePattern);
-    for (const file of files) {
-      report.synapseHealth.totalFiles++;
-      try {
-        const content = await fs7.readFile(file.fsPath, "utf-8");
-        const lines = content.split("\n");
-        let inCodeBlock = false;
-        for (const line of lines) {
-          if (line.trim().startsWith("```")) {
-            inCodeBlock = !inCodeBlock;
-            continue;
-          }
-          if (inCodeBlock) {
-            continue;
-          }
-          let match;
-          while ((match = synapseRegex.exec(line)) !== null) {
-            report.synapseHealth.totalSynapses++;
-            const targetName = match[1].trim();
-            const found = await vscode7.workspace.findFiles(
-              new vscode7.RelativePattern(workspaceFolder, `**/${targetName}`)
-            );
-            if (found.length === 0) {
-              report.synapseHealth.brokenConnections++;
-            }
-          }
-        }
-      } catch {
-      }
-    }
-  }
-  report.synapseHealth.healthStatus = report.synapseHealth.brokenConnections === 0 ? "EXCELLENT" : report.synapseHealth.brokenConnections < 5 ? "GOOD" : report.synapseHealth.brokenConnections < 10 ? "NEEDS ATTENTION" : "CRITICAL";
-}
-async function checkVersionConsistency(rootPath, report) {
-  const mainInstructionsPath = path7.join(rootPath, ".github", "copilot-instructions.md");
-  try {
-    if (await fs7.pathExists(mainInstructionsPath)) {
-      const content = await fs7.readFile(mainInstructionsPath, "utf-8");
-      const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
-      if (versionMatch) {
-        report.versionConsistency.currentVersion = versionMatch[1];
-      }
-    }
-  } catch {
-  }
-  const outdatedPatterns = [
-    /1\.5\.0\s+UNPENTNILIUM/g,
-    /1\.1\.0\s+UNUNUNNILIUM/g,
-    /1\.0\.\d+\s+UNNL/g,
-    /0\.\d+\.\d+\s+NIL/g
-  ];
-  const patterns = [
-    ".github/instructions/*.md",
-    ".github/domain-knowledge/*.md"
-  ];
-  const workspaceFolder = vscode7.workspace.workspaceFolders?.[0];
-  if (!workspaceFolder) {
-    return;
-  }
-  for (const pattern of patterns) {
-    const relativePattern = new vscode7.RelativePattern(workspaceFolder, pattern);
-    const files = await vscode7.workspace.findFiles(relativePattern);
-    for (const file of files) {
-      try {
-        const content = await fs7.readFile(file.fsPath, "utf-8");
-        for (const regex of outdatedPatterns) {
-          if (regex.test(content)) {
-            report.versionConsistency.outdatedReferences++;
-            break;
-          }
-        }
-      } catch {
-      }
-    }
-  }
-}
-async function assessMemoryArchitecture(workspaceFolder, report) {
-  const instructionFiles = await vscode7.workspace.findFiles(
-    new vscode7.RelativePattern(workspaceFolder, ".github/instructions/*.md")
-  );
-  report.memoryConsolidation.proceduralFiles = instructionFiles.length;
-  const promptFiles = await vscode7.workspace.findFiles(
-    new vscode7.RelativePattern(workspaceFolder, ".github/prompts/*.md")
-  );
-  const episodicFiles = await vscode7.workspace.findFiles(
-    new vscode7.RelativePattern(workspaceFolder, ".github/episodic/*.md")
-  );
-  report.memoryConsolidation.episodicFiles = promptFiles.length + episodicFiles.length;
-  const domainFiles = await vscode7.workspace.findFiles(
-    new vscode7.RelativePattern(workspaceFolder, ".github/domain-knowledge/*.md")
-  );
-  report.memoryConsolidation.domainFiles = domainFiles.length;
-  report.memoryConsolidation.totalConnections = report.synapseHealth.totalSynapses;
-}
-async function autoPromoteKnowledge(rootPath, report) {
-  try {
-    const result = await autoPromoteDuringMeditation(rootPath, { minScore: 5 });
-    report.globalKnowledgePromotion = {
-      evaluated: result.evaluated,
-      promoted: result.promoted.map((e) => e.title),
-      updated: result.updated.map((e) => e.title),
-      skipped: result.skipped.length,
-      alreadyGlobal: result.alreadyGlobal.length
-    };
-  } catch (err) {
-    console.error("Auto-promotion failed:", err);
-    report.globalKnowledgePromotion = {
-      evaluated: 0,
-      promoted: [],
-      updated: [],
-      skipped: 0,
-      alreadyGlobal: 0
-    };
-  }
-}
-function generateRecommendations(report) {
-  if (report.synapseHealth.brokenConnections > 0) {
-    report.recommendations.push(
-      `\u{1F527} Run \`Alex: Dream (Neural Maintenance)\` to repair ${report.synapseHealth.brokenConnections} broken synapse(s)`
-    );
-  }
-  if (report.versionConsistency.outdatedReferences > 0) {
-    report.recommendations.push(
-      `\u{1F4DD} Update ${report.versionConsistency.outdatedReferences} file(s) with outdated version references to ${report.versionConsistency.currentVersion}`
-    );
-  }
-  const totalMemory = report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles;
-  if (report.memoryConsolidation.domainFiles < 3) {
-    report.recommendations.push(
-      `\u{1F4DA} Consider acquiring more domain knowledge - only ${report.memoryConsolidation.domainFiles} DK file(s) present`
-    );
-  }
-  if (report.memoryConsolidation.episodicFiles < 5) {
-    report.recommendations.push(
-      `\u{1F9D8} Run more meditation sessions to build episodic memory - only ${report.memoryConsolidation.episodicFiles} session(s) recorded`
-    );
-  }
-  const synapseDensity = report.synapseHealth.totalSynapses / Math.max(totalMemory, 1);
-  if (synapseDensity < 3) {
-    report.recommendations.push(
-      `\u{1F517} Consider adding more synaptic connections - average density is ${synapseDensity.toFixed(1)} per file`
-    );
-  }
-  if (report.synapseHealth.healthStatus === "EXCELLENT") {
-    report.recommendations.push(
-      `\u2728 Architecture is healthy! Consider exploring new domains or creating cross-domain connections`
-    );
-  }
-  if (report.globalKnowledgePromotion.promoted.length > 0) {
-    report.recommendations.push(
-      `\u{1F310} Auto-promoted ${report.globalKnowledgePromotion.promoted.length} domain knowledge file(s) to global knowledge base!`
-    );
-  }
-  if (report.globalKnowledgePromotion.updated.length > 0) {
-    report.recommendations.push(
-      `\u{1F504} Updated ${report.globalKnowledgePromotion.updated.length} global knowledge file(s) with local changes!`
-    );
-  }
-  if (report.globalKnowledgePromotion.skipped > 0 && report.globalKnowledgePromotion.promoted.length === 0 && report.globalKnowledgePromotion.updated.length === 0) {
-    report.recommendations.push(
-      `\u{1F4D6} ${report.globalKnowledgePromotion.skipped} DK file(s) not ready for promotion - add synapses, structure, and examples to qualify`
-    );
-  }
-}
-async function createSessionRecord(rootPath, report) {
-  const episodicPath = path7.join(rootPath, ".github", "episodic");
-  await fs7.ensureDir(episodicPath);
-  const date = /* @__PURE__ */ new Date();
-  const dateStr = date.toISOString().split("T")[0];
-  const filename = `self-actualization-${dateStr}.prompt.md`;
-  const filepath = path7.join(episodicPath, filename);
-  const healthEmoji = report.synapseHealth.healthStatus === "EXCELLENT" ? "\u2705" : report.synapseHealth.healthStatus === "GOOD" ? "\u{1F7E2}" : report.synapseHealth.healthStatus === "NEEDS ATTENTION" ? "\u{1F7E1}" : "\u{1F534}";
-  const content = `# Self-Actualization Session - ${dateStr}
+Synapses: ${i.synapseHealth.totalSynapses} (${i.synapseHealth.brokenConnections} broken)
+Memory Files: ${i.memoryConsolidation.proceduralFiles+i.memoryConsolidation.episodicFiles+i.memoryConsolidation.domainFiles}
+Recommendations: ${i.recommendations.length}`,r=await U.window.showInformationMessage(s,"View Report","Open Session File");if(r==="View Report")nl(i);else if(r==="Open Session File"&&i.sessionFile){let c=await U.workspace.openTextDocument(i.sessionFile);await U.window.showTextDocument(c)}return i}async function Yc(e,t){let n=[".github/copilot-instructions.md",".github/instructions/*.md",".github/prompts/*.md",".github/episodic/*.md",".github/domain-knowledge/*.md"],o=/\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;for(let i of n){let a=new U.RelativePattern(e,i),s=await U.workspace.findFiles(a);for(let r of s){t.synapseHealth.totalFiles++;try{let u=(await Ce.readFile(r.fsPath,"utf-8")).split(`
+`),l=!1;for(let d of u){if(d.trim().startsWith("```")){l=!l;continue}if(l)continue;let m;for(;(m=o.exec(d))!==null;){t.synapseHealth.totalSynapses++;let p=m[1].trim();(await U.workspace.findFiles(new U.RelativePattern(e,`**/${p}`))).length===0&&t.synapseHealth.brokenConnections++}}}catch{}}}t.synapseHealth.healthStatus=t.synapseHealth.brokenConnections===0?"EXCELLENT":t.synapseHealth.brokenConnections<5?"GOOD":t.synapseHealth.brokenConnections<10?"NEEDS ATTENTION":"CRITICAL"}async function Xc(e,t){let n=Yt.join(e,".github","copilot-instructions.md");try{if(await Ce.pathExists(n)){let r=(await Ce.readFile(n,"utf-8")).match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);r&&(t.versionConsistency.currentVersion=r[1])}}catch{}let o=[/1\.5\.0\s+UNPENTNILIUM/g,/1\.1\.0\s+UNUNUNNILIUM/g,/1\.0\.\d+\s+UNNL/g,/0\.\d+\.\d+\s+NIL/g],i=[".github/instructions/*.md",".github/domain-knowledge/*.md"],a=U.workspace.workspaceFolders?.[0];if(a)for(let s of i){let r=new U.RelativePattern(a,s),c=await U.workspace.findFiles(r);for(let u of c)try{let l=await Ce.readFile(u.fsPath,"utf-8");for(let d of o)if(d.test(l)){t.versionConsistency.outdatedReferences++;break}}catch{}}}async function Qc(e,t){let n=await U.workspace.findFiles(new U.RelativePattern(e,".github/instructions/*.md"));t.memoryConsolidation.proceduralFiles=n.length;let o=await U.workspace.findFiles(new U.RelativePattern(e,".github/prompts/*.md")),i=await U.workspace.findFiles(new U.RelativePattern(e,".github/episodic/*.md"));t.memoryConsolidation.episodicFiles=o.length+i.length;let a=await U.workspace.findFiles(new U.RelativePattern(e,".github/domain-knowledge/*.md"));t.memoryConsolidation.domainFiles=a.length,t.memoryConsolidation.totalConnections=t.synapseHealth.totalSynapses}async function Zc(e,t){try{let n=await Ua(e,{minScore:5});t.globalKnowledgePromotion={evaluated:n.evaluated,promoted:n.promoted.map(o=>o.title),updated:n.updated.map(o=>o.title),skipped:n.skipped.length,alreadyGlobal:n.alreadyGlobal.length}}catch(n){console.error("Auto-promotion failed:",n),t.globalKnowledgePromotion={evaluated:0,promoted:[],updated:[],skipped:0,alreadyGlobal:0}}}function el(e){e.synapseHealth.brokenConnections>0&&e.recommendations.push(`\u{1F527} Run \`Alex: Dream (Neural Maintenance)\` to repair ${e.synapseHealth.brokenConnections} broken synapse(s)`),e.versionConsistency.outdatedReferences>0&&e.recommendations.push(`\u{1F4DD} Update ${e.versionConsistency.outdatedReferences} file(s) with outdated version references to ${e.versionConsistency.currentVersion}`);let t=e.memoryConsolidation.proceduralFiles+e.memoryConsolidation.episodicFiles+e.memoryConsolidation.domainFiles;e.memoryConsolidation.domainFiles<3&&e.recommendations.push(`\u{1F4DA} Consider acquiring more domain knowledge - only ${e.memoryConsolidation.domainFiles} DK file(s) present`),e.memoryConsolidation.episodicFiles<5&&e.recommendations.push(`\u{1F9D8} Run more meditation sessions to build episodic memory - only ${e.memoryConsolidation.episodicFiles} session(s) recorded`);let n=e.synapseHealth.totalSynapses/Math.max(t,1);n<3&&e.recommendations.push(`\u{1F517} Consider adding more synaptic connections - average density is ${n.toFixed(1)} per file`),e.synapseHealth.healthStatus==="EXCELLENT"&&e.recommendations.push("\u2728 Architecture is healthy! Consider exploring new domains or creating cross-domain connections"),e.globalKnowledgePromotion.promoted.length>0&&e.recommendations.push(`\u{1F310} Auto-promoted ${e.globalKnowledgePromotion.promoted.length} domain knowledge file(s) to global knowledge base!`),e.globalKnowledgePromotion.updated.length>0&&e.recommendations.push(`\u{1F504} Updated ${e.globalKnowledgePromotion.updated.length} global knowledge file(s) with local changes!`),e.globalKnowledgePromotion.skipped>0&&e.globalKnowledgePromotion.promoted.length===0&&e.globalKnowledgePromotion.updated.length===0&&e.recommendations.push(`\u{1F4D6} ${e.globalKnowledgePromotion.skipped} DK file(s) not ready for promotion - add synapses, structure, and examples to qualify`)}async function tl(e,t){let n=Yt.join(e,".github","episodic");await Ce.ensureDir(n);let i=new Date().toISOString().split("T")[0],a=`self-actualization-${i}.prompt.md`,s=Yt.join(n,a),r=t.synapseHealth.healthStatus==="EXCELLENT"?"\u2705":t.synapseHealth.healthStatus==="GOOD"?"\u{1F7E2}":t.synapseHealth.healthStatus==="NEEDS ATTENTION"?"\u{1F7E1}":"\u{1F534}",c=`# Self-Actualization Session - ${i}
 
 **Session Type**: Automated Self-Actualization Protocol
-**Version**: ${report.versionConsistency.currentVersion}
-**Timestamp**: ${report.timestamp}
+**Version**: ${t.versionConsistency.currentVersion}
+**Timestamp**: ${t.timestamp}
 
 ---
 
@@ -5980,49 +364,52 @@ async function createSessionRecord(rootPath, report) {
 
 | Metric | Value |
 |--------|-------|
-| Memory Files Scanned | ${report.synapseHealth.totalFiles} |
-| Total Synapses | ${report.synapseHealth.totalSynapses} |
-| Broken Connections | ${report.synapseHealth.brokenConnections} |
-| Health Status | ${healthEmoji} ${report.synapseHealth.healthStatus} |
+| Memory Files Scanned | ${t.synapseHealth.totalFiles} |
+| Total Synapses | ${t.synapseHealth.totalSynapses} |
+| Broken Connections | ${t.synapseHealth.brokenConnections} |
+| Health Status | ${r} ${t.synapseHealth.healthStatus} |
 
 ## \u{1F4CA} Memory Architecture
 
 | Memory Type | Files |
 |-------------|-------|
-| Procedural (.instructions.md) | ${report.memoryConsolidation.proceduralFiles} |
-| Episodic (.prompt.md + .episodic/) | ${report.memoryConsolidation.episodicFiles} |
-| Domain Knowledge (DK-*.md) | ${report.memoryConsolidation.domainFiles} |
-| **Total** | **${report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles}** |
+| Procedural (.instructions.md) | ${t.memoryConsolidation.proceduralFiles} |
+| Episodic (.prompt.md + .episodic/) | ${t.memoryConsolidation.episodicFiles} |
+| Domain Knowledge (DK-*.md) | ${t.memoryConsolidation.domainFiles} |
+| **Total** | **${t.memoryConsolidation.proceduralFiles+t.memoryConsolidation.episodicFiles+t.memoryConsolidation.domainFiles}** |
 
 ## \u{1F504} Version Consistency
 
-- **Current Version**: ${report.versionConsistency.currentVersion}
-- **Outdated References Found**: ${report.versionConsistency.outdatedReferences}
+- **Current Version**: ${t.versionConsistency.currentVersion}
+- **Outdated References Found**: ${t.versionConsistency.outdatedReferences}
 
 ## \u{1F4A1} Recommendations
 
-${report.recommendations.map((r) => `- ${r}`).join("\n") || "- No recommendations - architecture is optimal!"}
+${t.recommendations.map(u=>`- ${u}`).join(`
+`)||"- No recommendations - architecture is optimal!"}
 
 ## \u{1F4C8} Metrics
 
-- **Synapse Density**: ${(report.synapseHealth.totalSynapses / Math.max(report.synapseHealth.totalFiles, 1)).toFixed(1)} synapses per file
-- **Connection Integrity**: ${((1 - report.synapseHealth.brokenConnections / Math.max(report.synapseHealth.totalSynapses, 1)) * 100).toFixed(1)}%
+- **Synapse Density**: ${(t.synapseHealth.totalSynapses/Math.max(t.synapseHealth.totalFiles,1)).toFixed(1)} synapses per file
+- **Connection Integrity**: ${((1-t.synapseHealth.brokenConnections/Math.max(t.synapseHealth.totalSynapses,1))*100).toFixed(1)}%
 
 ## \u{1F310} Global Knowledge Promotion (Unconscious Mind)
 
 | Metric | Value |
 |--------|-------|
-| DK Files Evaluated | ${report.globalKnowledgePromotion.evaluated} |
-| Auto-Promoted | ${report.globalKnowledgePromotion.promoted.length} |
-| Updated | ${report.globalKnowledgePromotion.updated.length} |
-| Skipped (needs improvement) | ${report.globalKnowledgePromotion.skipped} |
-| Already Global (unchanged) | ${report.globalKnowledgePromotion.alreadyGlobal} |
+| DK Files Evaluated | ${t.globalKnowledgePromotion.evaluated} |
+| Auto-Promoted | ${t.globalKnowledgePromotion.promoted.length} |
+| Updated | ${t.globalKnowledgePromotion.updated.length} |
+| Skipped (needs improvement) | ${t.globalKnowledgePromotion.skipped} |
+| Already Global (unchanged) | ${t.globalKnowledgePromotion.alreadyGlobal} |
 
-${report.globalKnowledgePromotion.promoted.length > 0 ? `### Newly Promoted Knowledge
-${report.globalKnowledgePromotion.promoted.map((title) => `- \u{1F4D0} **${title}**`).join("\n")}
-` : ""}${report.globalKnowledgePromotion.updated.length > 0 ? `### Updated Global Knowledge
-${report.globalKnowledgePromotion.updated.map((title) => `- \u{1F504} **${title}**`).join("\n")}
-` : ""}${report.globalKnowledgePromotion.promoted.length === 0 && report.globalKnowledgePromotion.updated.length === 0 ? "*No new knowledge promoted or updated this session.*" : ""}
+${t.globalKnowledgePromotion.promoted.length>0?`### Newly Promoted Knowledge
+${t.globalKnowledgePromotion.promoted.map(u=>`- \u{1F4D0} **${u}**`).join(`
+`)}
+`:""}${t.globalKnowledgePromotion.updated.length>0?`### Updated Global Knowledge
+${t.globalKnowledgePromotion.updated.map(u=>`- \u{1F504} **${u}**`).join(`
+`)}
+`:""}${t.globalKnowledgePromotion.promoted.length===0&&t.globalKnowledgePromotion.updated.length===0?"*No new knowledge promoted or updated this session.*":""}
 
 ---
 
@@ -6044,19 +431,7 @@ ${report.globalKnowledgePromotion.updated.map((title) => `- \u{1F504} **${title}
 ---
 
 *Session generated by Alex Self-Actualization Protocol*
-`;
-  await fs7.writeFile(filepath, content, "utf-8");
-  report.sessionFile = filepath;
-}
-function showReportInPanel(report) {
-  const panel = vscode7.window.createWebviewPanel(
-    "alexSelfActualization",
-    "Self-Actualization Report",
-    vscode7.ViewColumn.One,
-    { enableScripts: false }
-  );
-  const healthColor = report.synapseHealth.healthStatus === "EXCELLENT" ? "#22c55e" : report.synapseHealth.healthStatus === "GOOD" ? "#84cc16" : report.synapseHealth.healthStatus === "NEEDS ATTENTION" ? "#eab308" : "#ef4444";
-  panel.webview.html = `<!DOCTYPE html>
+`;await Ce.writeFile(s,c,"utf-8"),t.sessionFile=s}function nl(e){let t=U.window.createWebviewPanel("alexSelfActualization","Self-Actualization Report",U.ViewColumn.One,{enableScripts:!1}),n=e.synapseHealth.healthStatus==="EXCELLENT"?"#22c55e":e.synapseHealth.healthStatus==="GOOD"?"#84cc16":e.synapseHealth.healthStatus==="NEEDS ATTENTION"?"#eab308":"#ef4444";t.webview.html=`<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -6067,7 +442,7 @@ function showReportInPanel(report) {
         .metric { display: inline-block; padding: 16px; margin: 8px; background: var(--vscode-input-background); border-radius: 8px; min-width: 120px; text-align: center; }
         .metric-value { font-size: 24px; font-weight: bold; }
         .metric-label { font-size: 12px; opacity: 0.8; }
-        .health-badge { display: inline-block; padding: 4px 12px; border-radius: 16px; font-weight: bold; background: ${healthColor}; color: white; }
+        .health-badge { display: inline-block; padding: 4px 12px; border-radius: 16px; font-weight: bold; background: ${n}; color: white; }
         .recommendation { padding: 8px 12px; margin: 4px 0; background: var(--vscode-input-background); border-left: 3px solid var(--vscode-textLink-foreground); }
         table { border-collapse: collapse; width: 100%; margin: 16px 0; }
         th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--vscode-panel-border); }
@@ -6076,355 +451,115 @@ function showReportInPanel(report) {
 </head>
 <body>
     <h1>\u{1F9E0} Self-Actualization Report</h1>
-    <p><strong>Generated:</strong> ${new Date(report.timestamp).toLocaleString()}</p>
-    <p><strong>Version:</strong> ${report.versionConsistency.currentVersion}</p>
+    <p><strong>Generated:</strong> ${new Date(e.timestamp).toLocaleString()}</p>
+    <p><strong>Version:</strong> ${e.versionConsistency.currentVersion}</p>
     
     <h2>Health Overview</h2>
     <div class="metric">
-        <div class="metric-value">${report.synapseHealth.totalFiles}</div>
+        <div class="metric-value">${e.synapseHealth.totalFiles}</div>
         <div class="metric-label">Memory Files</div>
     </div>
     <div class="metric">
-        <div class="metric-value">${report.synapseHealth.totalSynapses}</div>
+        <div class="metric-value">${e.synapseHealth.totalSynapses}</div>
         <div class="metric-label">Synapses</div>
     </div>
     <div class="metric">
-        <div class="metric-value">${report.synapseHealth.brokenConnections}</div>
+        <div class="metric-value">${e.synapseHealth.brokenConnections}</div>
         <div class="metric-label">Broken</div>
     </div>
     <div class="metric">
-        <div class="health-badge">${report.synapseHealth.healthStatus}</div>
+        <div class="health-badge">${e.synapseHealth.healthStatus}</div>
         <div class="metric-label">Status</div>
     </div>
 
     <h2>Memory Architecture</h2>
     <table>
         <tr><th>Memory Type</th><th>Files</th></tr>
-        <tr><td>Procedural Memory</td><td>${report.memoryConsolidation.proceduralFiles}</td></tr>
-        <tr><td>Episodic Memory</td><td>${report.memoryConsolidation.episodicFiles}</td></tr>
-        <tr><td>Domain Knowledge</td><td>${report.memoryConsolidation.domainFiles}</td></tr>
+        <tr><td>Procedural Memory</td><td>${e.memoryConsolidation.proceduralFiles}</td></tr>
+        <tr><td>Episodic Memory</td><td>${e.memoryConsolidation.episodicFiles}</td></tr>
+        <tr><td>Domain Knowledge</td><td>${e.memoryConsolidation.domainFiles}</td></tr>
     </table>
 
     <h2>\u{1F310} Global Knowledge Promotion</h2>
     <div class="metric">
-        <div class="metric-value">${report.globalKnowledgePromotion.evaluated}</div>
+        <div class="metric-value">${e.globalKnowledgePromotion.evaluated}</div>
         <div class="metric-label">Evaluated</div>
     </div>
     <div class="metric">
-        <div class="metric-value" style="color: #22c55e">${report.globalKnowledgePromotion.promoted.length}</div>
+        <div class="metric-value" style="color: #22c55e">${e.globalKnowledgePromotion.promoted.length}</div>
         <div class="metric-label">Promoted</div>
     </div>
     <div class="metric">
-        <div class="metric-value" style="color: #3b82f6">${report.globalKnowledgePromotion.updated.length}</div>
+        <div class="metric-value" style="color: #3b82f6">${e.globalKnowledgePromotion.updated.length}</div>
         <div class="metric-label">Updated</div>
     </div>
     <div class="metric">
-        <div class="metric-value">${report.globalKnowledgePromotion.alreadyGlobal}</div>
+        <div class="metric-value">${e.globalKnowledgePromotion.alreadyGlobal}</div>
         <div class="metric-label">Unchanged</div>
     </div>
-    ${report.globalKnowledgePromotion.promoted.length > 0 ? `
+    ${e.globalKnowledgePromotion.promoted.length>0?`
     <p><strong>Newly Promoted:</strong></p>
-    <ul>${report.globalKnowledgePromotion.promoted.map((t) => `<li>\u{1F4D0} ${t}</li>`).join("")}</ul>
-    ` : ""}
-    ${report.globalKnowledgePromotion.updated.length > 0 ? `
+    <ul>${e.globalKnowledgePromotion.promoted.map(o=>`<li>\u{1F4D0} ${o}</li>`).join("")}</ul>
+    `:""}
+    ${e.globalKnowledgePromotion.updated.length>0?`
     <p><strong>Updated from Local Changes:</strong></p>
-    <ul>${report.globalKnowledgePromotion.updated.map((t) => `<li>\u{1F504} ${t}</li>`).join("")}</ul>
-    ` : ""}
+    <ul>${e.globalKnowledgePromotion.updated.map(o=>`<li>\u{1F504} ${o}</li>`).join("")}</ul>
+    `:""}
 
     <h2>Recommendations</h2>
-    ${report.recommendations.length > 0 ? report.recommendations.map((r) => `<div class="recommendation">${r}</div>`).join("") : "<p>\u2705 No recommendations - architecture is optimal!</p>"}
+    ${e.recommendations.length>0?e.recommendations.map(o=>`<div class="recommendation">${o}</div>`).join(""):"<p>\u2705 No recommendations - architecture is optimal!</p>"}
 </body>
-</html>`;
-}
-
-// src/chat/participant.ts
-var vscode9 = __toESM(require("vscode"));
-var path9 = __toESM(require("path"));
-
-// src/chat/tools.ts
-var vscode8 = __toESM(require("vscode"));
-var fs8 = __toESM(require_lib());
-var path8 = __toESM(require("path"));
-var SynapseHealthTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: "Scanning synaptic connections...",
-      confirmationMessages: {
-        title: "Synapse Health Check",
-        message: new vscode8.MarkdownString(
-          `Scan Alex cognitive architecture for synaptic connection health?
+</html>`}var H=D(require("vscode")),Ba=D(require("path"));var f=D(require("vscode")),V=D(Fe()),ye=D(require("path"));var qn=class{async prepareInvocation(t,n){return{invocationMessage:"Scanning synaptic connections...",confirmationMessages:{title:"Synapse Health Check",message:new f.MarkdownString(`Scan Alex cognitive architecture for synaptic connection health?
 
 This will:
 - Scan all memory files (.instructions.md, .prompt.md, DK-*.md)
 - Validate synapse connections
-- Report broken or orphaned links`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    const workspaceFolders = vscode8.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart("No workspace folder open. Cannot scan for synaptic connections.")
-      ]);
-    }
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const patterns = [
-      ".github/copilot-instructions.md",
-      ".github/instructions/*.md",
-      ".github/prompts/*.md",
-      ".github/episodic/*.md",
-      ".github/domain-knowledge/*.md"
-    ];
-    let totalFiles = 0;
-    let totalSynapses = 0;
-    let brokenSynapses = 0;
-    const issues = [];
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
-    for (const pattern of patterns) {
-      const relativePattern = new vscode8.RelativePattern(workspaceFolders[0], pattern);
-      const files = await vscode8.workspace.findFiles(relativePattern);
-      for (const file of files) {
-        totalFiles++;
-        try {
-          const content = await fs8.readFile(file.fsPath, "utf-8");
-          const lines = content.split("\n");
-          let inCodeBlock = false;
-          for (let i = 0; i < lines.length; i++) {
-            const line = lines[i];
-            if (line.trim().startsWith("```")) {
-              inCodeBlock = !inCodeBlock;
-              continue;
-            }
-            if (inCodeBlock) {
-              continue;
-            }
-            let match;
-            while ((match = synapseRegex.exec(line)) !== null) {
-              totalSynapses++;
-              const targetName = match[1].trim();
-              const found = await vscode8.workspace.findFiles(
-                new vscode8.RelativePattern(workspaceFolders[0], `**/${targetName}`)
-              );
-              if (found.length === 0) {
-                brokenSynapses++;
-                if (options.input.detailed) {
-                  issues.push(`- ${path8.basename(file.fsPath)}:${i + 1} \u2192 ${targetName} (not found)`);
-                }
-              }
-            }
-          }
-        } catch (err) {
-        }
-      }
-    }
-    const healthStatus = brokenSynapses === 0 ? "EXCELLENT" : brokenSynapses < 5 ? "GOOD" : brokenSynapses < 10 ? "NEEDS ATTENTION" : "CRITICAL";
-    let result = `## Synapse Health Report
+- Report broken or orphaned links`)}}}async invoke(t,n){let o=f.workspace.workspaceFolders;if(!o)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("No workspace folder open. Cannot scan for synaptic connections.")]);let i=o[0].uri.fsPath,a=[".github/copilot-instructions.md",".github/instructions/*.md",".github/prompts/*.md",".github/episodic/*.md",".github/domain-knowledge/*.md"],s=0,r=0,c=0,u=[],l=/\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;for(let p of a){let h=new f.RelativePattern(o[0],p),y=await f.workspace.findFiles(h);for(let w of y){s++;try{let $=(await V.readFile(w.fsPath,"utf-8")).split(`
+`),A=!1;for(let P=0;P<$.length;P++){let L=$[P];if(L.trim().startsWith("```")){A=!A;continue}if(A)continue;let W;for(;(W=l.exec(L))!==null;){r++;let X=W[1].trim();(await f.workspace.findFiles(new f.RelativePattern(o[0],`**/${X}`))).length===0&&(c++,t.input.detailed&&u.push(`- ${ye.basename(w.fsPath)}:${P+1} \u2192 ${X} (not found)`))}}}catch{}}}let d=c===0?"EXCELLENT":c<5?"GOOD":c<10?"NEEDS ATTENTION":"CRITICAL",m=`## Synapse Health Report
 
 | Metric | Value |
 |--------|-------|
-| Memory Files | ${totalFiles} |
-| Total Synapses | ${totalSynapses} |
-| Broken Connections | ${brokenSynapses} |
-| Health Status | ${healthStatus} |
-`;
-    if (options.input.detailed && issues.length > 0) {
-      result += `
+| Memory Files | ${s} |
+| Total Synapses | ${r} |
+| Broken Connections | ${c} |
+| Health Status | ${d} |
+`;return t.input.detailed&&u.length>0&&(m+=`
 ### Issues Found
-${issues.join("\n")}`;
-    }
-    if (brokenSynapses > 0) {
-      result += `
+${u.join(`
+`)}`),c>0&&(m+="\n\n**Recommendation**: Run `Alex: Dream (Neural Maintenance)` to auto-repair broken connections."),new f.LanguageModelToolResult([new f.LanguageModelTextPart(m)])}},Hn=class{async prepareInvocation(t,n){return{invocationMessage:`Searching Alex memory for: ${t.input.query}`,confirmationMessages:{title:"Search Alex Memory",message:new f.MarkdownString(`Search Alex cognitive architecture memory files for: **${t.input.query}**?
 
-**Recommendation**: Run \`Alex: Dream (Neural Maintenance)\` to auto-repair broken connections.`;
-    }
-    return new vscode8.LanguageModelToolResult([
-      new vscode8.LanguageModelTextPart(result)
-    ]);
-  }
-};
-var MemorySearchTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: `Searching Alex memory for: ${options.input.query}`,
-      confirmationMessages: {
-        title: "Search Alex Memory",
-        message: new vscode8.MarkdownString(
-          `Search Alex cognitive architecture memory files for: **${options.input.query}**?
+Memory type: ${t.input.memoryType||"all"}`)}}}async invoke(t,n){let o=f.workspace.workspaceFolders;if(!o)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("No workspace folder open.")]);let i=t.input.query.toLowerCase(),a=t.input.memoryType||"all",s=[];(a==="all"||a==="procedural")&&s.push(".github/instructions/*.md"),(a==="all"||a==="episodic")&&(s.push(".github/prompts/*.md"),s.push(".github/episodic/*.md")),(a==="all"||a==="domain")&&s.push(".github/domain-knowledge/*.md");let r=[];for(let l of s){let d=new f.RelativePattern(o[0],l),m=await f.workspace.findFiles(d);for(let p of m)try{let y=(await V.readFile(p.fsPath,"utf-8")).split(`
+`),w=[];for(let k=0;k<y.length;k++)if(y[k].toLowerCase().includes(i)){let $=Math.max(0,k-1),A=Math.min(y.length-1,k+1),P=y.slice($,A+1).join(`
+`);w.push(`Line ${k+1}:
+${P}`)}w.length>0&&r.push({file:ye.basename(p.fsPath),matches:w.slice(0,3)})}catch{}}let c=[];if(r.length===0)try{c=await Ct(t.input.query,{limit:5})}catch{}if(r.length===0&&c.length===0)return new f.LanguageModelToolResult([new f.LanguageModelTextPart(`No matches found for "${t.input.query}" in local ${a} memory or global knowledge base.`)]);let u="";if(r.length>0){u+=`## Local Memory Results for "${t.input.query}"
 
-Memory type: ${options.input.memoryType || "all"}`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    const workspaceFolders = vscode8.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart("No workspace folder open.")
-      ]);
-    }
-    const query = options.input.query.toLowerCase();
-    const memoryType = options.input.memoryType || "all";
-    const patterns = [];
-    if (memoryType === "all" || memoryType === "procedural") {
-      patterns.push(".github/instructions/*.md");
-    }
-    if (memoryType === "all" || memoryType === "episodic") {
-      patterns.push(".github/prompts/*.md");
-      patterns.push(".github/episodic/*.md");
-    }
-    if (memoryType === "all" || memoryType === "domain") {
-      patterns.push(".github/domain-knowledge/*.md");
-    }
-    const results = [];
-    for (const pattern of patterns) {
-      const relativePattern = new vscode8.RelativePattern(workspaceFolders[0], pattern);
-      const files = await vscode8.workspace.findFiles(relativePattern);
-      for (const file of files) {
-        try {
-          const content = await fs8.readFile(file.fsPath, "utf-8");
-          const lines = content.split("\n");
-          const matches = [];
-          for (let i = 0; i < lines.length; i++) {
-            if (lines[i].toLowerCase().includes(query)) {
-              const start = Math.max(0, i - 1);
-              const end = Math.min(lines.length - 1, i + 1);
-              const context = lines.slice(start, end + 1).join("\n");
-              matches.push(`Line ${i + 1}:
-${context}`);
-            }
-          }
-          if (matches.length > 0) {
-            results.push({
-              file: path8.basename(file.fsPath),
-              matches: matches.slice(0, 3)
-              // Limit to first 3 matches per file
-            });
-          }
-        } catch (err) {
-        }
-      }
-    }
-    let globalResults = [];
-    if (results.length === 0) {
-      try {
-        globalResults = await searchGlobalKnowledge(options.input.query, { limit: 5 });
-      } catch {
-      }
-    }
-    if (results.length === 0 && globalResults.length === 0) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart(`No matches found for "${options.input.query}" in local ${memoryType} memory or global knowledge base.`)
-      ]);
-    }
-    let resultText = "";
-    if (results.length > 0) {
-      resultText += `## Local Memory Results for "${options.input.query}"
+`,u+=`Found ${r.length} file(s) with matches:
 
-`;
-      resultText += `Found ${results.length} file(s) with matches:
-
-`;
-      for (const result of results.slice(0, 5)) {
-        resultText += `### ${result.file}
-`;
-        for (const match of result.matches) {
-          resultText += `\`\`\`
-${match}
+`;for(let l of r.slice(0,5)){u+=`### ${l.file}
+`;for(let d of l.matches)u+=`\`\`\`
+${d}
 \`\`\`
-`;
-        }
-        resultText += "\n";
-      }
-    }
-    if (globalResults.length > 0) {
-      if (results.length === 0) {
-        resultText += `## \u{1F310} Global Knowledge Results (Unconscious Retrieval)
+`;u+=`
+`}}if(c.length>0){r.length===0?(u+=`## \u{1F310} Global Knowledge Results (Unconscious Retrieval)
 
-`;
-        resultText += `*Local search found nothing. Automatically searched cross-project knowledge:*
+`,u+=`*Local search found nothing. Automatically searched cross-project knowledge:*
 
-`;
-      } else {
-        resultText += `## \u{1F310} Related Global Knowledge
+`):u+=`## \u{1F310} Related Global Knowledge
 
-`;
-      }
-      for (const { entry } of globalResults.slice(0, 3)) {
-        const typeEmoji = entry.type === "pattern" ? "\u{1F4D0}" : "\u{1F4A1}";
-        resultText += `### ${typeEmoji} ${entry.title}
-`;
-        resultText += `- **Type**: ${entry.type} | **Category**: ${entry.category}
-`;
-        resultText += `- **Tags**: ${entry.tags.join(", ")}
-`;
-        resultText += `- **Summary**: ${entry.summary}
+`;for(let{entry:l}of c.slice(0,3)){let d=l.type==="pattern"?"\u{1F4D0}":"\u{1F4A1}";u+=`### ${d} ${l.title}
+`,u+=`- **Type**: ${l.type} | **Category**: ${l.category}
+`,u+=`- **Tags**: ${l.tags.join(", ")}
+`,u+=`- **Summary**: ${l.summary}
 
-`;
-      }
-    }
-    return new vscode8.LanguageModelToolResult([
-      new vscode8.LanguageModelTextPart(resultText)
-    ]);
-  }
-};
-var ArchitectureStatusTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: "Checking Alex architecture status..."
-    };
-  }
-  async invoke(options, token) {
-    const workspaceFolders = vscode8.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart("No workspace folder open. Alex architecture status unavailable.")
-      ]);
-    }
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const markerFile = path8.join(rootPath, ".github", "copilot-instructions.md");
-    const isInstalled = await fs8.pathExists(markerFile);
-    if (!isInstalled) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart(
-          `Alex Cognitive Architecture is **not installed** in this workspace.
-
-Run \`Alex: Initialize Architecture\` from the Command Palette to install.`
-        )
-      ]);
-    }
-    const instructionFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/instructions/*.md")
-    );
-    const promptFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/prompts/*.md")
-    );
-    const episodicFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/episodic/*.md")
-    );
-    const domainFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/domain-knowledge/*.md")
-    );
-    let version = "Unknown";
-    try {
-      const content = await fs8.readFile(markerFile, "utf-8");
-      const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
-      if (versionMatch) {
-        version = versionMatch[1];
-      }
-    } catch (err) {
-    }
-    const result = `## Alex Cognitive Architecture Status
+`}}return new f.LanguageModelToolResult([new f.LanguageModelTextPart(u)])}},Wn=class{async prepareInvocation(t,n){return{invocationMessage:"Checking Alex architecture status..."}}async invoke(t,n){let o=f.workspace.workspaceFolders;if(!o)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("No workspace folder open. Alex architecture status unavailable.")]);let i=o[0].uri.fsPath,a=ye.join(i,".github","copilot-instructions.md");if(!await V.pathExists(a))return new f.LanguageModelToolResult([new f.LanguageModelTextPart("Alex Cognitive Architecture is **not installed** in this workspace.\n\nRun `Alex: Initialize Architecture` from the Command Palette to install.")]);let r=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/instructions/*.md")),c=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/prompts/*.md")),u=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/episodic/*.md")),l=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/domain-knowledge/*.md")),d="Unknown";try{let h=(await V.readFile(a,"utf-8")).match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);h&&(d=h[1])}catch{}let m=`## Alex Cognitive Architecture Status
 
 | Property | Value |
 |----------|-------|
 | Status | \u2705 Installed |
-| Version | ${version} |
-| Procedural Memory | ${instructionFiles.length} files |
-| Episodic Memory | ${promptFiles.length + episodicFiles.length} files |
-| Domain Knowledge | ${domainFiles.length} files |
+| Version | ${d} |
+| Procedural Memory | ${r.length} files |
+| Episodic Memory | ${c.length+u.length} files |
+| Domain Knowledge | ${l.length} files |
 
 ### Memory Systems
 - **Working Memory**: Chat session (7-rule capacity)
@@ -6437,115 +572,7 @@ Run \`Alex: Initialize Architecture\` from the Command Palette to install.`
 - \`Alex: Dream (Neural Maintenance)\` - Validate synapses
 - \`Alex: Upgrade Architecture\` - Update to latest version
 - \`Alex: Reset Architecture\` - Clean reinstall
-`;
-    return new vscode8.LanguageModelToolResult([
-      new vscode8.LanguageModelTextPart(result)
-    ]);
-  }
-};
-var McpRecommendationTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: `Finding MCP tools for: ${options.input.scenario}`
-    };
-  }
-  async invoke(options, token) {
-    const scenario = options.input.scenario.toLowerCase();
-    const platform = options.input.platform || "both";
-    const recommendations = [];
-    if (platform === "azure" || platform === "both") {
-      recommendations.push(`## Azure MCP Tools (50+ Tools Available)
-
-### Best Practices & Documentation
-| Tool | Purpose | Use When |
-|------|---------|----------|
-| \`mcp_azure_mcp_get_bestpractices\` | Azure Functions, deployment, SDK best practices | Generating code, deploying |
-| \`mcp_azure_mcp_azureterraformbestpractices\` | Terraform best practices for Azure | Creating IaC |
-| \`mcp_azure_mcp_documentation\` | Search Microsoft Learn documentation | Need official docs |
-| \`mcp_microsoft_doc_microsoft_docs_search\` | Search all Microsoft documentation | Broad doc search |
-| \`mcp_microsoft_doc_microsoft_code_sample_search\` | Find code samples in MS docs | Need code examples |
-
-### AI & Machine Learning
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_foundry\` | \`foundry\` | Azure AI Foundry models, deployments, endpoints |
-| \`azure_search\` | \`search\` | Azure AI Search services, indexes, queries |
-| \`mcp_azure_mcp_speech\` | \`speech\` | Speech-to-text, text-to-speech services |
-
-### Databases
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_cosmos\` | \`cosmos\` | Cosmos DB accounts, databases, containers, queries |
-| \`azure_mysql\` | \`mysql\` | Azure Database for MySQL servers, databases |
-| \`azure_postgres\` | \`postgres\` | Azure Database for PostgreSQL servers, databases |
-| \`azure_redis\` | \`redis\` | Managed Redis and Cache for Redis |
-| \`azure_sql\` | \`sql\` | Azure SQL servers, databases, firewall rules |
-
-### Compute & Containers
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_appservice\` | \`appservice\` | App Service database connections |
-| \`azure_functionapp\` | \`functionapp\` | List Azure Functions |
-| \`mcp_azure_mcp_aks\` | \`aks\` | Azure Kubernetes Service clusters, node pools |
-| \`azure_acr\` | \`acr\` | Azure Container Registry instances |
-
-### Messaging & Events
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_eventgrid\` | \`eventgrid\` | Event Grid topics, subscriptions |
-| \`azure_eventhubs\` | \`eventhubs\` | Event Hubs namespaces |
-| \`azure_servicebus\` | \`servicebus\` | Service Bus messaging |
-
-### Analytics & Monitoring
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_kusto\` | \`kusto\` | Azure Data Explorer clusters, queries |
-| \`azure_monitor\` | \`monitor\` | Query logs and metrics |
-| \`azure_applicationinsights\` | \`applicationinsights\` | Application Insights resources |
-| \`mcp_azure_mcp_applens\` | \`applens\` | Diagnose app performance issues |
-| \`azure_grafana\` | \`grafana\` | Managed Grafana workspaces |
-| \`azure_workbooks\` | \`workbooks\` | Azure Workbooks visualization |
-
-### Security & Identity
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_keyvault\` | \`keyvault\` | Key Vault secrets, keys, certificates |
-| \`azure_role\` | \`role\` | RBAC assignments |
-| \`azure_confidentialledger\` | \`confidentialledger\` | Confidential Ledger transactions |
-
-### Developer Tools
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_appconfig\` | \`appconfig\` | App Configuration settings, feature flags |
-| \`mcp_azure_mcp_azd\` | \`azd\` | Azure Developer CLI commands |
-| \`azure_bicepschema\` | \`bicepschema\` | Bicep schemas for IaC |
-| \`azure_deploy\` | \`deploy\` | Deploy Azure resources |
-| \`azure_loadtesting\` | \`loadtesting\` | Create and run load tests |
-
-### Storage
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_storage\` | \`storage\` | Storage accounts, containers, blobs, tables |
-| \`mcp_azure_mcp_managedlustre\` | \`managedlustre\` | High-performance Lustre file systems |
-
-### Architecture & Governance
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_cloudarchitect\` | \`cloudarchitect\` | Generate architecture designs |
-| \`azure_quota\` | \`quota\` | Manage resource quotas and limits |
-| \`azure_resourcehealth\` | \`resourcehealth\` | Check resource health status |
-| \`mcp_azure_mcp_extension_azqr\` | \`azqr\` | Compliance and security reports |
-
-### Management
-| Tool | Namespace | Purpose |
-|------|-----------|---------|
-| \`azure_subscription\` | \`subscription\` | List Azure subscriptions |
-| \`azure_group\` | \`group\` | List resource groups |
-| \`azure_marketplace\` | \`marketplace\` | Discover Marketplace products |
-`);
-    }
-    if (platform === "m365" || platform === "both") {
-      recommendations.push(`## Microsoft 365 MCP Tools
+`;return new f.LanguageModelToolResult([new f.LanguageModelTextPart(m)])}},Vn=class{async prepareInvocation(t,n){return{invocationMessage:`Finding MCP tools for: ${t.input.scenario}`}}async invoke(t,n){let o=t.input.scenario.toLowerCase(),i=t.input.platform||"both",a=[];return(i==="azure"||i==="both")&&a.push("## Azure MCP Tools (50+ Tools Available)\n\n### Best Practices & Documentation\n| Tool | Purpose | Use When |\n|------|---------|----------|\n| `mcp_azure_mcp_get_bestpractices` | Azure Functions, deployment, SDK best practices | Generating code, deploying |\n| `mcp_azure_mcp_azureterraformbestpractices` | Terraform best practices for Azure | Creating IaC |\n| `mcp_azure_mcp_documentation` | Search Microsoft Learn documentation | Need official docs |\n| `mcp_microsoft_doc_microsoft_docs_search` | Search all Microsoft documentation | Broad doc search |\n| `mcp_microsoft_doc_microsoft_code_sample_search` | Find code samples in MS docs | Need code examples |\n\n### AI & Machine Learning\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_foundry` | `foundry` | Azure AI Foundry models, deployments, endpoints |\n| `azure_search` | `search` | Azure AI Search services, indexes, queries |\n| `mcp_azure_mcp_speech` | `speech` | Speech-to-text, text-to-speech services |\n\n### Databases\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_cosmos` | `cosmos` | Cosmos DB accounts, databases, containers, queries |\n| `azure_mysql` | `mysql` | Azure Database for MySQL servers, databases |\n| `azure_postgres` | `postgres` | Azure Database for PostgreSQL servers, databases |\n| `azure_redis` | `redis` | Managed Redis and Cache for Redis |\n| `azure_sql` | `sql` | Azure SQL servers, databases, firewall rules |\n\n### Compute & Containers\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_appservice` | `appservice` | App Service database connections |\n| `azure_functionapp` | `functionapp` | List Azure Functions |\n| `mcp_azure_mcp_aks` | `aks` | Azure Kubernetes Service clusters, node pools |\n| `azure_acr` | `acr` | Azure Container Registry instances |\n\n### Messaging & Events\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_eventgrid` | `eventgrid` | Event Grid topics, subscriptions |\n| `azure_eventhubs` | `eventhubs` | Event Hubs namespaces |\n| `azure_servicebus` | `servicebus` | Service Bus messaging |\n\n### Analytics & Monitoring\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_kusto` | `kusto` | Azure Data Explorer clusters, queries |\n| `azure_monitor` | `monitor` | Query logs and metrics |\n| `azure_applicationinsights` | `applicationinsights` | Application Insights resources |\n| `mcp_azure_mcp_applens` | `applens` | Diagnose app performance issues |\n| `azure_grafana` | `grafana` | Managed Grafana workspaces |\n| `azure_workbooks` | `workbooks` | Azure Workbooks visualization |\n\n### Security & Identity\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_keyvault` | `keyvault` | Key Vault secrets, keys, certificates |\n| `azure_role` | `role` | RBAC assignments |\n| `azure_confidentialledger` | `confidentialledger` | Confidential Ledger transactions |\n\n### Developer Tools\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_appconfig` | `appconfig` | App Configuration settings, feature flags |\n| `mcp_azure_mcp_azd` | `azd` | Azure Developer CLI commands |\n| `azure_bicepschema` | `bicepschema` | Bicep schemas for IaC |\n| `azure_deploy` | `deploy` | Deploy Azure resources |\n| `azure_loadtesting` | `loadtesting` | Create and run load tests |\n\n### Storage\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_storage` | `storage` | Storage accounts, containers, blobs, tables |\n| `mcp_azure_mcp_managedlustre` | `managedlustre` | High-performance Lustre file systems |\n\n### Architecture & Governance\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_cloudarchitect` | `cloudarchitect` | Generate architecture designs |\n| `azure_quota` | `quota` | Manage resource quotas and limits |\n| `azure_resourcehealth` | `resourcehealth` | Check resource health status |\n| `mcp_azure_mcp_extension_azqr` | `azqr` | Compliance and security reports |\n\n### Management\n| Tool | Namespace | Purpose |\n|------|-----------|---------|\n| `azure_subscription` | `subscription` | List Azure subscriptions |\n| `azure_group` | `group` | List resource groups |\n| `azure_marketplace` | `marketplace` | Discover Marketplace products |\n"),(i==="m365"||i==="both")&&a.push(`## Microsoft 365 MCP Tools
 
 ### M365 Agents & Copilot Development
 | Tool | Purpose | Use When |
@@ -6582,9 +609,7 @@ var McpRecommendationTool = class {
 | \`mcp_fabric-rti-mc_eventstream_create_simple\` | Create Eventstreams in Fabric |
 | \`mcp_fabric-rti-mc_kusto_get_shots\` | Semantic search in Kusto |
 | \`mcp_fabric-rti-mc_eventstream_delete\` | Delete Eventstreams |
-`);
-    }
-    recommendations.push(`## Recommended for: "${options.input.scenario}"
+`),a.push(`## Recommended for: "${t.input.scenario}"
 
 ### How to Use These Tools
 1. **Switch to Agent Mode** in GitHub Copilot Chat
@@ -6596,309 +621,72 @@ var McpRecommendationTool = class {
 - "Build a Teams bot with adaptive cards and SSO"
 - "Query my Azure resources to find expensive VMs"
 - "Generate a declarative Copilot agent manifest"
-`);
-    return new vscode8.LanguageModelToolResult([
-      new vscode8.LanguageModelTextPart(recommendations.join("\n"))
-    ]);
-  }
-};
-var UserProfileTool = class {
-  async prepareInvocation(options, token) {
-    const action = options.input.action;
-    const actionMessages = {
-      "get": "Reading user profile...",
-      "update": `Updating user profile: ${options.input.field}...`,
-      "exists": "Checking if user profile exists..."
-    };
-    return {
-      invocationMessage: actionMessages[action] || "Accessing user profile..."
-    };
-  }
-  async invoke(options, token) {
-    const workspaceFolders = vscode8.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart("No workspace folder open. Cannot access user profile.")
-      ]);
-    }
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const profilePath = path8.join(rootPath, "config", "USER-PROFILE.md");
-    const jsonProfilePath = path8.join(rootPath, "config", "user-profile.json");
-    const { action, field, value } = options.input;
-    try {
-      switch (action) {
-        case "exists":
-          const exists = await fs8.pathExists(jsonProfilePath);
-          return new vscode8.LanguageModelToolResult([
-            new vscode8.LanguageModelTextPart(JSON.stringify({ exists, path: jsonProfilePath }))
-          ]);
-        case "get":
-          if (!await fs8.pathExists(jsonProfilePath)) {
-            return new vscode8.LanguageModelToolResult([
-              new vscode8.LanguageModelTextPart(JSON.stringify({
-                exists: false,
-                message: "No user profile found. I should ask the user about themselves to create one.",
-                suggestedQuestions: [
-                  "What's your name?",
-                  "What's your role (developer, architect, etc.)?",
-                  "Do you prefer casual or formal communication?",
-                  "What technologies do you work with most?"
-                ]
-              }))
-            ]);
-          }
-          const profile = await fs8.readJson(jsonProfilePath);
-          if (field) {
-            return new vscode8.LanguageModelToolResult([
-              new vscode8.LanguageModelTextPart(JSON.stringify({ [field]: profile[field] }))
-            ]);
-          }
-          return new vscode8.LanguageModelToolResult([
-            new vscode8.LanguageModelTextPart(JSON.stringify(profile))
-          ]);
-        case "update":
-          if (!field || value === void 0) {
-            return new vscode8.LanguageModelToolResult([
-              new vscode8.LanguageModelTextPart("Error: Both field and value are required for update action.")
-            ]);
-          }
-          await fs8.ensureDir(path8.join(rootPath, "config"));
-          let existingProfile = {};
-          if (await fs8.pathExists(jsonProfilePath)) {
-            existingProfile = await fs8.readJson(jsonProfilePath);
-          }
-          if (["primaryTechnologies", "learningGoals", "expertiseAreas"].includes(field)) {
-            const currentArray = existingProfile[field] || [];
-            if (Array.isArray(currentArray)) {
-              if (!currentArray.includes(value)) {
-                existingProfile[field] = [...currentArray, value];
-              }
-            } else {
-              existingProfile[field] = [value];
-            }
-          } else {
-            existingProfile[field] = value;
-          }
-          existingProfile.lastUpdated = (/* @__PURE__ */ new Date()).toISOString();
-          await fs8.writeJson(jsonProfilePath, existingProfile, { spaces: 2 });
-          await this.updateMarkdownProfile(profilePath, existingProfile);
-          return new vscode8.LanguageModelToolResult([
-            new vscode8.LanguageModelTextPart(JSON.stringify({
-              success: true,
-              field,
-              value,
-              message: `Updated ${field} to: ${value}`
-            }))
-          ]);
-        default:
-          return new vscode8.LanguageModelToolResult([
-            new vscode8.LanguageModelTextPart(`Unknown action: ${action}`)
-          ]);
-      }
-    } catch (error) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart(`Error accessing user profile: ${error.message}`)
-      ]);
-    }
-  }
-  async updateMarkdownProfile(profilePath, profile) {
-    const markdown = `# User Profile
+`),new f.LanguageModelToolResult([new f.LanguageModelTextPart(a.join(`
+`))])}},Bn=class{async prepareInvocation(t,n){let o=t.input.action;return{invocationMessage:{get:"Reading user profile...",update:`Updating user profile: ${t.input.field}...`,exists:"Checking if user profile exists..."}[o]||"Accessing user profile..."}}async invoke(t,n){let o=f.workspace.workspaceFolders;if(!o)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("No workspace folder open. Cannot access user profile.")]);let i=o[0].uri.fsPath,a=ye.join(i,"config","USER-PROFILE.md"),s=ye.join(i,"config","user-profile.json"),{action:r,field:c,value:u}=t.input;try{switch(r){case"exists":let l=await V.pathExists(s);return new f.LanguageModelToolResult([new f.LanguageModelTextPart(JSON.stringify({exists:l,path:s}))]);case"get":if(!await V.pathExists(s))return new f.LanguageModelToolResult([new f.LanguageModelTextPart(JSON.stringify({exists:!1,message:"No user profile found. I should ask the user about themselves to create one.",suggestedQuestions:["What's your name?","What's your role (developer, architect, etc.)?","Do you prefer casual or formal communication?","What technologies do you work with most?"]}))]);let d=await V.readJson(s);return c?new f.LanguageModelToolResult([new f.LanguageModelTextPart(JSON.stringify({[c]:d[c]}))]):new f.LanguageModelToolResult([new f.LanguageModelTextPart(JSON.stringify(d))]);case"update":if(!c||u===void 0)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("Error: Both field and value are required for update action.")]);await V.ensureDir(ye.join(i,"config"));let m={};if(await V.pathExists(s)&&(m=await V.readJson(s)),["primaryTechnologies","learningGoals","expertiseAreas"].includes(c)){let p=m[c]||[];Array.isArray(p)?p.includes(u)||(m[c]=[...p,u]):m[c]=[u]}else m[c]=u;return m.lastUpdated=new Date().toISOString(),await V.writeJson(s,m,{spaces:2}),await this.updateMarkdownProfile(a,m),new f.LanguageModelToolResult([new f.LanguageModelTextPart(JSON.stringify({success:!0,field:c,value:u,message:`Updated ${c} to: ${u}`}))]);default:return new f.LanguageModelToolResult([new f.LanguageModelTextPart(`Unknown action: ${r}`)])}}catch(l){return new f.LanguageModelToolResult([new f.LanguageModelTextPart(`Error accessing user profile: ${l.message}`)])}}async updateMarkdownProfile(t,n){let o=`# User Profile
 
-*Last updated: ${profile.lastUpdated || "Never"}*
+*Last updated: ${n.lastUpdated||"Never"}*
 
 ## \u{1F464} Identity
 
 | Field | Value |
 |-------|-------|
-| **Name** | ${profile.name || "(not set)"} |
-| **Nickname** | ${profile.nickname || "(not set)"} |
-| **Pronouns** | ${profile.pronouns || "(not set)"} |
-| **Role** | ${profile.role || "(not set)"} |
-| **Experience Level** | ${profile.experienceLevel || "(not set)"} |
+| **Name** | ${n.name||"(not set)"} |
+| **Nickname** | ${n.nickname||"(not set)"} |
+| **Pronouns** | ${n.pronouns||"(not set)"} |
+| **Role** | ${n.role||"(not set)"} |
+| **Experience Level** | ${n.experienceLevel||"(not set)"} |
 
 ## \u{1F4AC} Communication Preferences
 
 | Preference | Setting |
 |------------|---------|
-| **Formality** | ${profile.formality || "balanced"} |
-| **Detail Level** | ${profile.detailLevel || "balanced"} |
-| **Explanation Style** | ${profile.explanationStyle || "both"} |
-| **Humor** | ${profile.humor || "occasional"} |
-| **Encouragement** | ${profile.encouragement || "occasional"} |
-| **Question Frequency** | ${profile.questionFrequency || "ask when needed"} |
-| **Proactive Suggestions** | ${profile.proactiveSuggestions || "occasional"} |
+| **Formality** | ${n.formality||"balanced"} |
+| **Detail Level** | ${n.detailLevel||"balanced"} |
+| **Explanation Style** | ${n.explanationStyle||"both"} |
+| **Humor** | ${n.humor||"occasional"} |
+| **Encouragement** | ${n.encouragement||"occasional"} |
+| **Question Frequency** | ${n.questionFrequency||"ask when needed"} |
+| **Proactive Suggestions** | ${n.proactiveSuggestions||"occasional"} |
 
 ## \u{1F6E0}\uFE0F Technical Context
 
 ### Primary Technologies
-${(profile.primaryTechnologies || []).map((t) => `- ${t}`).join("\n") || "- (not set)"}
+${(n.primaryTechnologies||[]).map(i=>`- ${i}`).join(`
+`)||"- (not set)"}
 
 ### Learning Goals
-${(profile.learningGoals || []).map((g) => `- ${g}`).join("\n") || "- (not set)"}
+${(n.learningGoals||[]).map(i=>`- ${i}`).join(`
+`)||"- (not set)"}
 
 ### Expertise Areas
-${(profile.expertiseAreas || []).map((e) => `- ${e}`).join("\n") || "- (not set)"}
+${(n.expertiseAreas||[]).map(i=>`- ${i}`).join(`
+`)||"- (not set)"}
 
 ## \u{1F3AF} Work Context
 
 ### Current Projects
-${profile.currentProjects || "(not set)"}
+${n.currentProjects||"(not set)"}
 
 ## \u{1F31F} Notes
 
-${profile.notes || "(none)"}
+${n.notes||"(none)"}
 
 ---
 
 *This profile is managed by Alex and updated through conversations.*
-`;
-    await fs8.writeFile(profilePath, markdown, "utf-8");
-  }
-};
-var SelfActualizationTool = class {
-  async prepareInvocation(options, token) {
-    return {
-      invocationMessage: "Running self-actualization protocol...",
-      confirmationMessages: {
-        title: "Self-Actualization Protocol",
-        message: new vscode8.MarkdownString(
-          `Run comprehensive self-assessment of Alex cognitive architecture?
+`;await V.writeFile(t,o,"utf-8")}},Jn=class{async prepareInvocation(t,n){return{invocationMessage:"Running self-actualization protocol...",confirmationMessages:{title:"Self-Actualization Protocol",message:new f.MarkdownString(`Run comprehensive self-assessment of Alex cognitive architecture?
 
 This will:
 - Validate all synaptic connections
 - Check version consistency across memory files
 - Assess memory architecture balance
 - Generate improvement recommendations
-- Create a meditation session record`
-        )
-      }
-    };
-  }
-  async invoke(options, token) {
-    const workspaceFolders = vscode8.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-      return new vscode8.LanguageModelToolResult([
-        new vscode8.LanguageModelTextPart("No workspace folder open. Cannot run self-actualization.")
-      ]);
-    }
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    let currentVersion = "Unknown";
-    try {
-      const mainInstructionsPath = path8.join(rootPath, ".github", "copilot-instructions.md");
-      if (await fs8.pathExists(mainInstructionsPath)) {
-        const content = await fs8.readFile(mainInstructionsPath, "utf-8");
-        const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
-        if (versionMatch) {
-          currentVersion = versionMatch[1];
-        }
-      }
-    } catch {
-    }
-    const report = {
-      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-      synapseHealth: {
-        totalFiles: 0,
-        totalSynapses: 0,
-        brokenConnections: 0,
-        healthStatus: "UNKNOWN"
-      },
-      versionConsistency: {
-        currentVersion,
-        outdatedReferences: 0
-      },
-      memoryArchitecture: {
-        proceduralFiles: 0,
-        episodicFiles: 0,
-        domainFiles: 0
-      },
-      recommendations: []
-    };
-    const synapsePatterns = [
-      ".github/copilot-instructions.md",
-      ".github/instructions/*.md",
-      ".github/prompts/*.md",
-      ".github/episodic/*.md",
-      ".github/domain-knowledge/*.md"
-    ];
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
-    for (const pattern of synapsePatterns) {
-      const relativePattern = new vscode8.RelativePattern(workspaceFolders[0], pattern);
-      const files = await vscode8.workspace.findFiles(relativePattern);
-      for (const file of files) {
-        report.synapseHealth.totalFiles++;
-        try {
-          const content = await fs8.readFile(file.fsPath, "utf-8");
-          const lines = content.split("\n");
-          let inCodeBlock = false;
-          for (const line of lines) {
-            if (line.trim().startsWith("```")) {
-              inCodeBlock = !inCodeBlock;
-              continue;
-            }
-            if (inCodeBlock) {
-              continue;
-            }
-            let match;
-            while ((match = synapseRegex.exec(line)) !== null) {
-              report.synapseHealth.totalSynapses++;
-              const targetName = match[1].trim();
-              const found = await vscode8.workspace.findFiles(
-                new vscode8.RelativePattern(workspaceFolders[0], `**/${targetName}`)
-              );
-              if (found.length === 0) {
-                report.synapseHealth.brokenConnections++;
-              }
-            }
-          }
-        } catch {
-        }
-      }
-    }
-    report.synapseHealth.healthStatus = report.synapseHealth.brokenConnections === 0 ? "EXCELLENT" : report.synapseHealth.brokenConnections < 5 ? "GOOD" : report.synapseHealth.brokenConnections < 10 ? "NEEDS ATTENTION" : "CRITICAL";
-    const instructionFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/instructions/*.md")
-    );
-    const promptFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/prompts/*.md")
-    );
-    const episodicFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/episodic/*.md")
-    );
-    const domainFiles = await vscode8.workspace.findFiles(
-      new vscode8.RelativePattern(workspaceFolders[0], ".github/domain-knowledge/*.md")
-    );
-    report.memoryArchitecture.proceduralFiles = instructionFiles.length;
-    report.memoryArchitecture.episodicFiles = promptFiles.length + episodicFiles.length;
-    report.memoryArchitecture.domainFiles = domainFiles.length;
-    if (report.synapseHealth.brokenConnections > 0) {
-      report.recommendations.push(
-        `Run \`Alex: Dream (Neural Maintenance)\` to repair ${report.synapseHealth.brokenConnections} broken synapse(s)`
-      );
-    }
-    if (report.memoryArchitecture.domainFiles < 3) {
-      report.recommendations.push(
-        `Consider acquiring more domain knowledge - only ${report.memoryArchitecture.domainFiles} DK file(s) present`
-      );
-    }
-    if (report.memoryArchitecture.episodicFiles < 5) {
-      report.recommendations.push(
-        `Run more meditation sessions to build episodic memory - only ${report.memoryArchitecture.episodicFiles} session(s)`
-      );
-    }
-    let sessionFile = "";
-    if (options.input.createReport !== false) {
-      const episodicPath = path8.join(rootPath, ".github", "episodic");
-      await fs8.ensureDir(episodicPath);
-      const date = /* @__PURE__ */ new Date();
-      const dateStr = date.toISOString().split("T")[0];
-      const filename = `self-actualization-${dateStr}.prompt.md`;
-      sessionFile = path8.join(episodicPath, filename);
-      const healthEmoji2 = report.synapseHealth.healthStatus === "EXCELLENT" ? "\u2705" : report.synapseHealth.healthStatus === "GOOD" ? "\u{1F7E2}" : report.synapseHealth.healthStatus === "NEEDS ATTENTION" ? "\u{1F7E1}" : "\u{1F534}";
-      const content = `# Self-Actualization Session - ${dateStr}
+- Create a meditation session record`)}}}async invoke(t,n){let o=f.workspace.workspaceFolders;if(!o)return new f.LanguageModelToolResult([new f.LanguageModelTextPart("No workspace folder open. Cannot run self-actualization.")]);let i=o[0].uri.fsPath,a="Unknown";try{let w=ye.join(i,".github","copilot-instructions.md");if(await V.pathExists(w)){let $=(await V.readFile(w,"utf-8")).match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);$&&(a=$[1])}}catch{}let s={timestamp:new Date().toISOString(),synapseHealth:{totalFiles:0,totalSynapses:0,brokenConnections:0,healthStatus:"UNKNOWN"},versionConsistency:{currentVersion:a,outdatedReferences:0},memoryArchitecture:{proceduralFiles:0,episodicFiles:0,domainFiles:0},recommendations:[]},r=[".github/copilot-instructions.md",".github/instructions/*.md",".github/prompts/*.md",".github/episodic/*.md",".github/domain-knowledge/*.md"],c=/\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;for(let w of r){let k=new f.RelativePattern(o[0],w),$=await f.workspace.findFiles(k);for(let A of $){s.synapseHealth.totalFiles++;try{let L=(await V.readFile(A.fsPath,"utf-8")).split(`
+`),W=!1;for(let X of L){if(X.trim().startsWith("```")){W=!W;continue}if(W)continue;let te;for(;(te=c.exec(X))!==null;){s.synapseHealth.totalSynapses++;let b=te[1].trim();(await f.workspace.findFiles(new f.RelativePattern(o[0],`**/${b}`))).length===0&&s.synapseHealth.brokenConnections++}}}catch{}}}s.synapseHealth.healthStatus=s.synapseHealth.brokenConnections===0?"EXCELLENT":s.synapseHealth.brokenConnections<5?"GOOD":s.synapseHealth.brokenConnections<10?"NEEDS ATTENTION":"CRITICAL";let u=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/instructions/*.md")),l=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/prompts/*.md")),d=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/episodic/*.md")),m=await f.workspace.findFiles(new f.RelativePattern(o[0],".github/domain-knowledge/*.md"));s.memoryArchitecture.proceduralFiles=u.length,s.memoryArchitecture.episodicFiles=l.length+d.length,s.memoryArchitecture.domainFiles=m.length,s.synapseHealth.brokenConnections>0&&s.recommendations.push(`Run \`Alex: Dream (Neural Maintenance)\` to repair ${s.synapseHealth.brokenConnections} broken synapse(s)`),s.memoryArchitecture.domainFiles<3&&s.recommendations.push(`Consider acquiring more domain knowledge - only ${s.memoryArchitecture.domainFiles} DK file(s) present`),s.memoryArchitecture.episodicFiles<5&&s.recommendations.push(`Run more meditation sessions to build episodic memory - only ${s.memoryArchitecture.episodicFiles} session(s)`);let p="";if(t.input.createReport!==!1){let w=ye.join(i,".github","episodic");await V.ensureDir(w);let $=new Date().toISOString().split("T")[0],A=`self-actualization-${$}.prompt.md`;p=ye.join(w,A);let P=s.synapseHealth.healthStatus==="EXCELLENT"?"\u2705":s.synapseHealth.healthStatus==="GOOD"?"\u{1F7E2}":s.synapseHealth.healthStatus==="NEEDS ATTENTION"?"\u{1F7E1}":"\u{1F534}",L=`# Self-Actualization Session - ${$}
 
 **Session Type**: Automated Self-Actualization Protocol
-**Version**: ${report.versionConsistency.currentVersion}
-**Timestamp**: ${report.timestamp}
+**Version**: ${s.versionConsistency.currentVersion}
+**Timestamp**: ${s.timestamp}
 
 ---
 
@@ -6906,344 +694,55 @@ This will:
 
 | Metric | Value |
 |--------|-------|
-| Memory Files | ${report.synapseHealth.totalFiles} |
-| Total Synapses | ${report.synapseHealth.totalSynapses} |
-| Broken Connections | ${report.synapseHealth.brokenConnections} |
-| Health Status | ${healthEmoji2} ${report.synapseHealth.healthStatus} |
+| Memory Files | ${s.synapseHealth.totalFiles} |
+| Total Synapses | ${s.synapseHealth.totalSynapses} |
+| Broken Connections | ${s.synapseHealth.brokenConnections} |
+| Health Status | ${P} ${s.synapseHealth.healthStatus} |
 
 ## \u{1F4CA} Memory Architecture
 
 | Type | Files |
 |------|-------|
-| Procedural | ${report.memoryArchitecture.proceduralFiles} |
-| Episodic | ${report.memoryArchitecture.episodicFiles} |
-| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
+| Procedural | ${s.memoryArchitecture.proceduralFiles} |
+| Episodic | ${s.memoryArchitecture.episodicFiles} |
+| Domain Knowledge | ${s.memoryArchitecture.domainFiles} |
 
 ## \u{1F4A1} Recommendations
 
-${report.recommendations.length > 0 ? report.recommendations.map((r) => `- ${r}`).join("\n") : "- Architecture is optimal!"}
+${s.recommendations.length>0?s.recommendations.map(W=>`- ${W}`).join(`
+`):"- Architecture is optimal!"}
 
 ---
 
 *Generated by Alex Self-Actualization Protocol*
-`;
-      await fs8.writeFile(sessionFile, content, "utf-8");
-    }
-    const healthEmoji = report.synapseHealth.healthStatus === "EXCELLENT" ? "\u2705" : report.synapseHealth.healthStatus === "GOOD" ? "\u{1F7E2}" : report.synapseHealth.healthStatus === "NEEDS ATTENTION" ? "\u{1F7E1}" : "\u{1F534}";
-    let result = `## Self-Actualization Report
+`;await V.writeFile(p,L,"utf-8")}let y=`## Self-Actualization Report
 
-### Synapse Health ${healthEmoji}
+### Synapse Health ${s.synapseHealth.healthStatus==="EXCELLENT"?"\u2705":s.synapseHealth.healthStatus==="GOOD"?"\u{1F7E2}":s.synapseHealth.healthStatus==="NEEDS ATTENTION"?"\u{1F7E1}":"\u{1F534}"}
 
 | Metric | Value |
 |--------|-------|
-| Memory Files | ${report.synapseHealth.totalFiles} |
-| Total Synapses | ${report.synapseHealth.totalSynapses} |
-| Broken Connections | ${report.synapseHealth.brokenConnections} |
-| Health Status | ${report.synapseHealth.healthStatus} |
+| Memory Files | ${s.synapseHealth.totalFiles} |
+| Total Synapses | ${s.synapseHealth.totalSynapses} |
+| Broken Connections | ${s.synapseHealth.brokenConnections} |
+| Health Status | ${s.synapseHealth.healthStatus} |
 
 ### Memory Architecture
 
 | Type | Files |
 |------|-------|
-| Procedural Memory | ${report.memoryArchitecture.proceduralFiles} |
-| Episodic Memory | ${report.memoryArchitecture.episodicFiles} |
-| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
-| **Total** | **${report.memoryArchitecture.proceduralFiles + report.memoryArchitecture.episodicFiles + report.memoryArchitecture.domainFiles}** |
+| Procedural Memory | ${s.memoryArchitecture.proceduralFiles} |
+| Episodic Memory | ${s.memoryArchitecture.episodicFiles} |
+| Domain Knowledge | ${s.memoryArchitecture.domainFiles} |
+| **Total** | **${s.memoryArchitecture.proceduralFiles+s.memoryArchitecture.episodicFiles+s.memoryArchitecture.domainFiles}** |
 
 ### Recommendations
 
-${report.recommendations.length > 0 ? report.recommendations.map((r) => `- ${r}`).join("\n") : "- \u2728 Architecture is healthy and optimized!"}
-`;
-    if (sessionFile) {
-      result += `
+${s.recommendations.length>0?s.recommendations.map(w=>`- ${w}`).join(`
+`):"- \u2728 Architecture is healthy and optimized!"}
+`;return p&&(y+=`
 ### Session Recorded
 
-Meditation session documented at: \`${path8.basename(sessionFile)}\``;
-    }
-    return new vscode8.LanguageModelToolResult([
-      new vscode8.LanguageModelTextPart(result)
-    ]);
-  }
-};
-async function getUserProfile() {
-  const workspaceFolders = vscode8.workspace.workspaceFolders;
-  if (!workspaceFolders) {
-    return null;
-  }
-  const rootPath = workspaceFolders[0].uri.fsPath;
-  const jsonProfilePath = path8.join(rootPath, "config", "user-profile.json");
-  try {
-    if (await fs8.pathExists(jsonProfilePath)) {
-      return await fs8.readJson(jsonProfilePath);
-    }
-  } catch (error) {
-    console.error("Error reading user profile:", error);
-  }
-  return null;
-}
-function formatPersonalizedGreeting(profile) {
-  if (!profile || !profile.name) {
-    return "Hello! I'm Alex, your cognitive learning partner.";
-  }
-  const name = profile.nickname || profile.name;
-  const greetings = [
-    `Hey ${name}! Great to see you.`,
-    `Hello ${name}! Ready to dive in?`,
-    `Hi ${name}! What are we working on today?`,
-    `Welcome back, ${name}!`
-  ];
-  return greetings[Math.floor(Math.random() * greetings.length)];
-}
-function registerLanguageModelTools(context) {
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_synapse_health", new SynapseHealthTool())
-  );
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_memory_search", new MemorySearchTool())
-  );
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_architecture_status", new ArchitectureStatusTool())
-  );
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_mcp_recommendations", new McpRecommendationTool())
-  );
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_user_profile", new UserProfileTool())
-  );
-  context.subscriptions.push(
-    vscode8.lm.registerTool("alex_self_actualization", new SelfActualizationTool())
-  );
-  console.log("Alex Language Model Tools registered");
-}
-
-// src/chat/participant.ts
-var INSIGHT_PATTERNS = [
-  /(?:i (?:learned|discovered|realized|found out|figured out)|the (?:solution|fix|answer) (?:is|was)|turns out|the trick is|the key is|important to note|pro tip|best practice)/i,
-  /(?:this works because|the reason is|what fixed it|solved by|resolved by)/i,
-  /(?:always remember to|never forget to|make sure to|be careful to)/i,
-  /(?:debugging tip|performance tip|security tip)/i
-];
-var DOMAIN_KEYWORDS = [
-  "pattern",
-  "anti-pattern",
-  "best practice",
-  "gotcha",
-  "pitfall",
-  "workaround",
-  "solution",
-  "fix",
-  "resolved",
-  "debugging",
-  "performance",
-  "optimization",
-  "security",
-  "architecture"
-];
-function detectPotentialInsight(text) {
-  const lowerText = text.toLowerCase();
-  let patternMatches = 0;
-  for (const pattern of INSIGHT_PATTERNS) {
-    if (pattern.test(text)) {
-      patternMatches++;
-    }
-  }
-  const foundKeywords = [];
-  for (const keyword of DOMAIN_KEYWORDS) {
-    if (lowerText.includes(keyword)) {
-      foundKeywords.push(keyword);
-    }
-  }
-  const confidence = patternMatches * 0.3 + foundKeywords.length * 0.1;
-  return {
-    detected: confidence >= 0.3 || patternMatches >= 1,
-    confidence: Math.min(confidence, 1),
-    keywords: foundKeywords
-  };
-}
-async function autoSaveInsight(content, keywords, sourceProject) {
-  try {
-    const firstSentence = content.split(/[.!?]/)[0].trim();
-    const title = firstSentence.length > 10 && firstSentence.length < 100 ? firstSentence : `Auto-captured insight - ${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}`;
-    let category = "general";
-    if (keywords.includes("debugging")) {
-      category = "debugging";
-    } else if (keywords.includes("performance") || keywords.includes("optimization")) {
-      category = "performance";
-    } else if (keywords.includes("security")) {
-      category = "security";
-    } else if (keywords.includes("architecture")) {
-      category = "architecture";
-    } else if (keywords.includes("pattern") || keywords.includes("anti-pattern")) {
-      category = "patterns";
-    }
-    await createGlobalInsight(
-      title,
-      content,
-      category,
-      keywords,
-      sourceProject,
-      "Auto-detected from conversation",
-      content
-    );
-    triggerPostModificationSync();
-    console.log(`[Unconscious] Auto-saved insight: ${title}`);
-  } catch (err) {
-    console.warn("[Unconscious] Failed to auto-save insight:", err);
-  }
-}
-var conversationBuffer = [];
-var MAX_BUFFER_SIZE = 5;
-function trackConversationForInsights(userMessage, sourceProject) {
-  conversationBuffer.push(userMessage);
-  if (conversationBuffer.length > MAX_BUFFER_SIZE) {
-    conversationBuffer.shift();
-  }
-  const combinedContext = conversationBuffer.join(" ");
-  const analysis = detectPotentialInsight(combinedContext);
-  if (analysis.detected && analysis.confidence >= 0.5) {
-    autoSaveInsight(userMessage, analysis.keywords, sourceProject);
-    conversationBuffer = [];
-  }
-}
-var FRUSTRATION_PATTERNS = [
-  /(?:still (?:not working|broken|failing|doesn't work)|keeps? (?:failing|breaking|crashing))/i,
-  /(?:tried everything|nothing works|no idea|completely lost|so confused)/i,
-  /(?:why (?:won't|doesn't|isn't)|what am i (?:doing wrong|missing))/i,
-  /(?:ugh|argh|damn|dammit|frustrated|annoying|annoyed|stuck)/i,
-  /(?:this is (?:impossible|ridiculous|insane|driving me crazy))/i,
-  /(?:been (?:at this|trying|working on this) for (?:hours|days|forever))/i,
-  /(?:same (?:error|problem|issue) (?:again|still))/i,
-  /(?:!{2,}|\?{3,})/
-  // Multiple exclamation or question marks
-];
-var SUCCESS_PATTERNS = [
-  /(?:it works|finally|got it|figured it out|solved it|fixed it)/i,
-  /(?:that (?:worked|fixed it|did it)|now it (?:works|runs))/i,
-  /(?:thank(?:s| you)|perfect|awesome|great|amazing|brilliant)/i,
-  /(?:makes sense now|i understand|clicked for me)/i,
-  /(?:shipped|deployed|released|launched|published)/i,
-  /(?:passed|all (?:tests|green)|build succeeded)/i
-];
-var frustrationLevel = 0;
-var lastFrustrationCheck = 0;
-var FRUSTRATION_DECAY_MS = 3e5;
-function detectEmotionalState(message) {
-  const now = Date.now();
-  if (now - lastFrustrationCheck > FRUSTRATION_DECAY_MS) {
-    frustrationLevel = Math.max(0, frustrationLevel - 1);
-  }
-  lastFrustrationCheck = now;
-  let frustrationSignals = 0;
-  for (const pattern of FRUSTRATION_PATTERNS) {
-    if (pattern.test(message)) {
-      frustrationSignals++;
-    }
-  }
-  let successSignals = 0;
-  for (const pattern of SUCCESS_PATTERNS) {
-    if (pattern.test(message)) {
-      successSignals++;
-    }
-  }
-  if (frustrationSignals > 0) {
-    frustrationLevel = Math.min(3, frustrationLevel + frustrationSignals);
-  }
-  if (successSignals > 0) {
-    frustrationLevel = Math.max(0, frustrationLevel - 2);
-  }
-  let frustration = "none";
-  if (frustrationLevel >= 3) {
-    frustration = "high";
-  } else if (frustrationLevel >= 2) {
-    frustration = "moderate";
-  } else if (frustrationLevel >= 1) {
-    frustration = "mild";
-  }
-  return {
-    frustration,
-    success: successSignals > 0,
-    encouragementNeeded: frustration === "moderate" || frustration === "high",
-    celebrationNeeded: successSignals >= 2 || successSignals > 0 && frustrationLevel > 0
-  };
-}
-function generateEncouragement(state) {
-  if (state.celebrationNeeded) {
-    const celebrations = [
-      "\u{1F389} That's a win! Nice work.",
-      "\u2728 You got it! Persistence pays off.",
-      "\u{1F4AA} Solved! That was a tricky one.",
-      "\u{1F680} Success! You worked through it."
-    ];
-    return celebrations[Math.floor(Math.random() * celebrations.length)];
-  }
-  if (state.encouragementNeeded) {
-    const encouragements = [
-      "I can see this is frustrating. Let's take a step back and approach it differently.",
-      "Tough problem. What if we break it down into smaller pieces?",
-      "You're closer than it feels. What's the last thing that *did* work?",
-      "Debugging is hard. Let's be systematic - what have we ruled out?"
-    ];
-    return encouragements[Math.floor(Math.random() * encouragements.length)];
-  }
-  return null;
-}
-var alexChatHandler = async (request2, context, stream, token) => {
-  if (request2.command === "meditate") {
-    return await handleMeditateCommand(request2, context, stream, token);
-  }
-  if (request2.command === "dream") {
-    return await handleDreamCommand(request2, context, stream, token);
-  }
-  if (request2.command === "learn") {
-    return await handleLearnCommand(request2, context, stream, token);
-  }
-  if (request2.command === "status") {
-    return await handleStatusCommand(request2, context, stream, token);
-  }
-  if (request2.command === "azure") {
-    return await handleAzureCommand(request2, context, stream, token);
-  }
-  if (request2.command === "m365") {
-    return await handleM365Command(request2, context, stream, token);
-  }
-  if (request2.command === "profile") {
-    return await handleProfileCommand(request2, context, stream, token);
-  }
-  if (request2.command === "selfactualize") {
-    return await handleSelfActualizeCommand(request2, context, stream, token);
-  }
-  if (request2.command === "knowledge") {
-    return await handleKnowledgeCommand(request2, context, stream, token);
-  }
-  if (request2.command === "saveinsight") {
-    return await handleSaveInsightCommand(request2, context, stream, token);
-  }
-  if (request2.command === "promote") {
-    return await handlePromoteCommand(request2, context, stream, token);
-  }
-  if (request2.command === "knowledgestatus") {
-    return await handleKnowledgeStatusCommand(request2, context, stream, token);
-  }
-  if (request2.command === "sync") {
-    return await handleSyncCommand(request2, context, stream, token);
-  }
-  if (request2.command === "push") {
-    return await handlePushCommand(request2, context, stream, token);
-  }
-  if (request2.command === "pull") {
-    return await handlePullCommand(request2, context, stream, token);
-  }
-  if (request2.command === "docs") {
-    return await handleDocsCommand(request2, context, stream, token);
-  }
-  if (isGreeting(request2.prompt) && isStartOfSession(context)) {
-    return await handleGreetingWithSelfActualization(request2, context, stream, token);
-  }
-  return await handleGeneralQuery(request2, context, stream, token);
-};
-async function handleMeditateCommand(request2, context, stream, token) {
-  stream.progress("\u{1F9D8} Initiating meditation protocol with self-actualization...");
-  stream.markdown(`## \u{1F9D8} Meditation Protocol Activated
+Meditation session documented at: \`${ye.basename(p)}\``),new f.LanguageModelToolResult([new f.LanguageModelTextPart(y)])}};async function Xt(){let e=f.workspace.workspaceFolders;if(!e)return null;let t=e[0].uri.fsPath,n=ye.join(t,"config","user-profile.json");try{if(await V.pathExists(n))return await V.readJson(n)}catch(o){console.error("Error reading user profile:",o)}return null}function Ha(e){if(!e||!e.name)return"Hello! I'm Alex, your cognitive learning partner.";let t=e.nickname||e.name,n=[`Hey ${t}! Great to see you.`,`Hello ${t}! Ready to dive in?`,`Hi ${t}! What are we working on today?`,`Welcome back, ${t}!`];return n[Math.floor(Math.random()*n.length)]}function Wa(e){e.subscriptions.push(f.lm.registerTool("alex_synapse_health",new qn)),e.subscriptions.push(f.lm.registerTool("alex_memory_search",new Hn)),e.subscriptions.push(f.lm.registerTool("alex_architecture_status",new Wn)),e.subscriptions.push(f.lm.registerTool("alex_mcp_recommendations",new Vn)),e.subscriptions.push(f.lm.registerTool("alex_user_profile",new Bn)),e.subscriptions.push(f.lm.registerTool("alex_self_actualization",new Jn)),console.log("Alex Language Model Tools registered")}var ol=[/(?:i (?:learned|discovered|realized|found out|figured out)|the (?:solution|fix|answer) (?:is|was)|turns out|the trick is|the key is|important to note|pro tip|best practice)/i,/(?:this works because|the reason is|what fixed it|solved by|resolved by)/i,/(?:always remember to|never forget to|make sure to|be careful to)/i,/(?:debugging tip|performance tip|security tip)/i],il=["pattern","anti-pattern","best practice","gotcha","pitfall","workaround","solution","fix","resolved","debugging","performance","optimization","security","architecture"];function al(e){let t=e.toLowerCase(),n=0;for(let a of ol)a.test(e)&&n++;let o=[];for(let a of il)t.includes(a)&&o.push(a);let i=n*.3+o.length*.1;return{detected:i>=.3||n>=1,confidence:Math.min(i,1),keywords:o}}async function sl(e,t,n){try{let o=e.split(/[.!?]/)[0].trim(),i=o.length>10&&o.length<100?o:`Auto-captured insight - ${new Date().toISOString().split("T")[0]}`,a="general";t.includes("debugging")?a="debugging":t.includes("performance")||t.includes("optimization")?a="performance":t.includes("security")?a="security":t.includes("architecture")?a="architecture":(t.includes("pattern")||t.includes("anti-pattern"))&&(a="patterns"),await Un(i,e,a,t,n,"Auto-detected from conversation",e),lt(),console.log(`[Unconscious] Auto-saved insight: ${i}`)}catch(o){console.warn("[Unconscious] Failed to auto-save insight:",o)}}var Tt=[],rl=5;function cl(e,t){Tt.push(e),Tt.length>rl&&Tt.shift();let n=Tt.join(" "),o=al(n);o.detected&&o.confidence>=.5&&(sl(e,o.keywords,t),Tt=[])}var ll=[/(?:still (?:not working|broken|failing|doesn't work)|keeps? (?:failing|breaking|crashing))/i,/(?:tried everything|nothing works|no idea|completely lost|so confused)/i,/(?:why (?:won't|doesn't|isn't)|what am i (?:doing wrong|missing))/i,/(?:ugh|argh|damn|dammit|frustrated|annoying|annoyed|stuck)/i,/(?:this is (?:impossible|ridiculous|insane|driving me crazy))/i,/(?:been (?:at this|trying|working on this) for (?:hours|days|forever))/i,/(?:same (?:error|problem|issue) (?:again|still))/i,/(?:!{2,}|\?{3,})/],dl=[/(?:it works|finally|got it|figured it out|solved it|fixed it)/i,/(?:that (?:worked|fixed it|did it)|now it (?:works|runs))/i,/(?:thank(?:s| you)|perfect|awesome|great|amazing|brilliant)/i,/(?:makes sense now|i understand|clicked for me)/i,/(?:shipped|deployed|released|launched|published)/i,/(?:passed|all (?:tests|green)|build succeeded)/i],Te=0,Va=0,ul=3e5;function ml(e){let t=Date.now();t-Va>ul&&(Te=Math.max(0,Te-1)),Va=t;let n=0;for(let a of ll)a.test(e)&&n++;let o=0;for(let a of dl)a.test(e)&&o++;n>0&&(Te=Math.min(3,Te+n)),o>0&&(Te=Math.max(0,Te-2));let i="none";return Te>=3?i="high":Te>=2?i="moderate":Te>=1&&(i="mild"),{frustration:i,success:o>0,encouragementNeeded:i==="moderate"||i==="high",celebrationNeeded:o>=2||o>0&&Te>0}}function pl(e){if(e.celebrationNeeded){let t=["\u{1F389} That's a win! Nice work.","\u2728 You got it! Persistence pays off.","\u{1F4AA} Solved! That was a tricky one.","\u{1F680} Success! You worked through it."];return t[Math.floor(Math.random()*t.length)]}if(e.encouragementNeeded){let t=["I can see this is frustrating. Let's take a step back and approach it differently.","Tough problem. What if we break it down into smaller pieces?","You're closer than it feels. What's the last thing that *did* work?","Debugging is hard. Let's be systematic - what have we ruled out?"];return t[Math.floor(Math.random()*t.length)]}return null}var gl=async(e,t,n,o)=>e.command==="meditate"?await fl(e,t,n,o):e.command==="dream"?await hl(e,t,n,o):e.command==="learn"?await wl(e,t,n,o):e.command==="status"?await yl(e,t,n,o):e.command==="azure"?await vl(e,t,n,o):e.command==="m365"?await bl(e,t,n,o):e.command==="profile"?await Sl(e,t,n,o):e.command==="selfactualize"?await Tl(e,t,n,o):e.command==="knowledge"?await El(e,t,n,o):e.command==="saveinsight"?await Il(e,t,n,o):e.command==="promote"?await $l(e,t,n,o):e.command==="knowledgestatus"?await Fl(e,t,n,o):e.command==="sync"?await Al(e,t,n,o):e.command==="push"?await Ml(e,t,n,o):e.command==="pull"?await Rl(e,t,n,o):e.command==="docs"?await Dl(e,t,n,o):Pl(e.prompt)&&xl(t)?await Cl(e,t,n,o):await kl(e,t,n,o);async function fl(e,t,n,o){return n.progress("\u{1F9D8} Initiating meditation protocol with self-actualization..."),n.markdown(`## \u{1F9D8} Meditation Protocol Activated
 
 I'm entering a contemplative state to consolidate knowledge from our session.
 
@@ -7253,13 +752,7 @@ Meditation now includes automatic architecture assessment:
 - Memory file consistency check
 - Connection integrity verification
 
-`);
-  stream.button({
-    command: "alex.selfActualize",
-    title: "\u{1F9E0} Run Self-Actualization First",
-    arguments: []
-  });
-  stream.markdown(`
+`),n.button({command:"alex.selfActualize",title:"\u{1F9E0} Run Self-Actualization First",arguments:[]}),n.markdown(`
 ### Meditation Requirements (Non-Negotiable)
 Every meditation session must produce:
 1. **Memory File Changes** - Create or update at least one memory file
@@ -7272,36 +765,16 @@ Consider contributing reusable insights to your global knowledge base:
 - **Insights** from debugging or problem-solving
 - **Best practices** you've discovered
 
-`);
-  stream.button({
-    command: "alex.syncKnowledge",
-    title: "\u2601\uFE0F Sync Global Knowledge",
-    arguments: []
-  });
-  stream.markdown(`
+`),n.button({command:"alex.syncKnowledge",title:"\u2601\uFE0F Sync Global Knowledge",arguments:[]}),n.markdown(`
 ### What would you like me to consolidate?
-`);
-  if (request2.prompt) {
-    stream.markdown(`
-**Focus area**: ${request2.prompt}
-`);
-    stream.markdown(`
+`),e.prompt&&(n.markdown(`
+**Focus area**: ${e.prompt}
+`),n.markdown(`
 I'll analyze this topic and identify:
 - Key insights to preserve
 - Connections to existing knowledge
 - Potential memory file updates
-`);
-  }
-  stream.button({
-    command: "alex.dream",
-    title: "\u{1F319} Run Dream Protocol After",
-    arguments: []
-  });
-  return { metadata: { command: "meditate" } };
-}
-async function handleDreamCommand(request2, context, stream, token) {
-  stream.progress("\u{1F319} Entering dream state for neural maintenance...");
-  stream.markdown(`## \u{1F319} Dream Protocol
+`)),n.button({command:"alex.dream",title:"\u{1F319} Run Dream Protocol After",arguments:[]}),{metadata:{command:"meditate"}}}async function hl(e,t,n,o){return n.progress("\u{1F319} Entering dream state for neural maintenance..."),n.markdown(`## \u{1F319} Dream Protocol
 
 Initiating automated neural maintenance:
 - Scanning memory files for integrity
@@ -7309,23 +782,11 @@ Initiating automated neural maintenance:
 - Repairing broken links
 - Generating health report
 
-`);
-  stream.button({
-    command: "alex.dream",
-    title: "\u25B6\uFE0F Execute Dream Protocol",
-    arguments: []
-  });
-  stream.markdown(`
+`),n.button({command:"alex.dream",title:"\u25B6\uFE0F Execute Dream Protocol",arguments:[]}),n.markdown(`
 
-*Click the button above to run the full Dream Protocol, or I can describe what it will do.*`);
-  return { metadata: { command: "dream" } };
-}
-async function handleLearnCommand(request2, context, stream, token) {
-  stream.progress("\u{1F4DA} Activating bootstrap learning protocol...");
-  const domain = request2.prompt || "a new domain";
-  stream.markdown(`## \u{1F4DA} Bootstrap Learning Protocol
+*Click the button above to run the full Dream Protocol, or I can describe what it will do.*`),{metadata:{command:"dream"}}}async function wl(e,t,n,o){n.progress("\u{1F4DA} Activating bootstrap learning protocol...");let i=e.prompt||"a new domain";return n.markdown(`## \u{1F4DA} Bootstrap Learning Protocol
 
-**Target Domain**: ${domain}
+**Target Domain**: ${i}
 
 ### Learning Framework
 I'll acquire domain expertise through conversational interaction:
@@ -7338,21 +799,14 @@ I'll acquire domain expertise through conversational interaction:
 ### Working Memory Allocation
 | Priority | Slot | Status |
 |----------|------|--------|
-| P5 | Domain Focus | \u{1F7E1} Allocating to: ${domain} |
+| P5 | Domain Focus | \u{1F7E1} Allocating to: ${i} |
 | P6 | Knowledge Application | \u26AA Available |
 | P7 | Project Integration | \u26AA Available |
 
-**Ready to learn!** Tell me about ${domain} - start with the fundamentals or dive into specifics.
-`);
-  return { metadata: { command: "learn", action: "domain-acquisition" } };
-}
-async function handleStatusCommand(request2, context, stream, token) {
-  stream.progress("\u{1F4CA} Gathering cognitive architecture status...");
-  const workspace10 = validateWorkspace();
-  const version = workspace10.isValid && workspace10.rootPath ? await getInstalledAlexVersion(workspace10.rootPath) ?? "Unknown" : "Unknown";
-  stream.markdown(`## \u{1F4CA} Alex Cognitive Architecture Status
+**Ready to learn!** Tell me about ${i} - start with the fundamentals or dive into specifics.
+`),{metadata:{command:"learn",action:"domain-acquisition"}}}async function yl(e,t,n,o){n.progress("\u{1F4CA} Gathering cognitive architecture status...");let i=hn(),a=i.isValid&&i.rootPath?await wn(i.rootPath)??"Unknown":"Unknown";return n.markdown(`## \u{1F4CA} Alex Cognitive Architecture Status
 
-**Version**: ${version}
+**Version**: ${a}
 **Identity**: Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
 ### Core Systems
@@ -7376,17 +830,7 @@ async function handleStatusCommand(request2, context, stream, token) {
 - \`/learn\` - Domain acquisition
 - \`/azure\` - Azure development assistance
 - \`/m365\` - Microsoft 365 development assistance
-`);
-  stream.button({
-    command: "alex.dream",
-    title: "\u{1F50D} Run Full Health Check",
-    arguments: []
-  });
-  return { metadata: { command: "status" } };
-}
-async function handleAzureCommand(request2, context, stream, token) {
-  stream.progress("\u2601\uFE0F Activating Azure development mode...");
-  stream.markdown(`## \u2601\uFE0F Azure Development Assistant
+`),n.button({command:"alex.dream",title:"\u{1F50D} Run Full Health Check",arguments:[]}),{metadata:{command:"status"}}}async function vl(e,t,n,o){return n.progress("\u2601\uFE0F Activating Azure development mode..."),n.markdown(`## \u2601\uFE0F Azure Development Assistant
 
 I can help with Azure development using available MCP tools and documentation.
 
@@ -7399,16 +843,11 @@ When in **Agent Mode**, these tools are automatically available:
 - **Azure Best Practices** - Code generation and deployment guidance
 
 ### Quick Actions
-`);
-  if (request2.prompt) {
-    stream.markdown(`
-**Your request**: ${request2.prompt}
+`),e.prompt&&(n.markdown(`
+**Your request**: ${e.prompt}
 
-`);
-    stream.markdown(`To get the best results, try asking in **Agent Mode** where I can use Azure MCP tools automatically.
-`);
-  }
-  stream.markdown(`
+`),n.markdown(`To get the best results, try asking in **Agent Mode** where I can use Azure MCP tools automatically.
+`)),n.markdown(`
 ### Recommended Workflow
 1. Switch to **Agent Mode** in GitHub Copilot Chat
 2. Ask your Azure question naturally
@@ -7419,12 +858,7 @@ When in **Agent Mode**, these tools are automatically available:
 - "Query my resource groups and their costs"
 - "Generate Bicep for a web app with managed identity"
 - "What are the best practices for Azure Container Apps?"
-`);
-  return { metadata: { command: "azure" } };
-}
-async function handleM365Command(request2, context, stream, token) {
-  stream.progress("\u{1F4F1} Activating Microsoft 365 development mode...");
-  stream.markdown(`## \u{1F4F1} Microsoft 365 Development Assistant
+`),{metadata:{command:"azure"}}}async function bl(e,t,n,o){return n.progress("\u{1F4F1} Activating Microsoft 365 development mode..."),n.markdown(`## \u{1F4F1} Microsoft 365 Development Assistant
 
 I can help with M365 development using available MCP tools and knowledge bases.
 
@@ -7440,27 +874,16 @@ I can help with M365 development using available MCP tools and knowledge bases.
 - **Graph API** - Microsoft Graph integration
 - **SharePoint** - SPFx development
 - **Power Platform** - Power Pages, Power Apps integration
-`);
-  if (request2.prompt) {
-    stream.markdown(`
-**Your request**: ${request2.prompt}
+`),e.prompt&&n.markdown(`
+**Your request**: ${e.prompt}
 
-`);
-  }
-  stream.markdown(`
+`),n.markdown(`
 ### Example Prompts
 - "Create a Teams bot with adaptive cards"
 - "Build a declarative Copilot agent"
 - "How do I authenticate with Microsoft Graph?"
 - "Generate a Teams app manifest for my scenario"
-`);
-  return { metadata: { command: "m365" } };
-}
-async function handleProfileCommand(request2, context, stream, token) {
-  stream.progress("\u{1F464} Accessing user profile...");
-  const profile = await getUserProfile();
-  if (!profile || !profile.name) {
-    stream.markdown(`## \u{1F464} Let's Get Acquainted!
+`),{metadata:{command:"m365"}}}async function Sl(e,t,n,o){n.progress("\u{1F464} Accessing user profile...");let i=await Xt();if(!i||!i.name)return n.markdown(`## \u{1F464} Let's Get Acquainted!
 
 I'd love to personalize our collaboration. I don't have much information about you yet.
 
@@ -7476,97 +899,65 @@ Just answer naturally, and I'll save your preferences. For example:
 > "I'm Sarah, a senior developer. I prefer casual conversation and detailed explanations."
 
 Or use these quick options:
-`);
-    stream.button({
-      command: "alex.cognitive",
-      title: "\u{1F3AF} Start Quick Profile",
-      arguments: ["profile-wizard"]
-    });
-    return { metadata: { command: "profile", action: "onboarding" } };
-  }
-  const name = profile.nickname || profile.name;
-  stream.markdown(`## \u{1F464} Profile: ${name}
+`),n.button({command:"alex.cognitive",title:"\u{1F3AF} Start Quick Profile",arguments:["profile-wizard"]}),{metadata:{command:"profile",action:"onboarding"}};let a=i.nickname||i.name;return n.markdown(`## \u{1F464} Profile: ${a}
 
 ### Your Information
 | Field | Value |
 |-------|-------|
-| **Name** | ${profile.name || "(not set)"} |
-| **Nickname** | ${profile.nickname || "(not set)"} |
-| **Role** | ${profile.role || "(not set)"} |
-| **Experience** | ${profile.experienceLevel || "(not set)"} |
+| **Name** | ${i.name||"(not set)"} |
+| **Nickname** | ${i.nickname||"(not set)"} |
+| **Role** | ${i.role||"(not set)"} |
+| **Experience** | ${i.experienceLevel||"(not set)"} |
 
 ### Communication Preferences
 | Preference | Setting |
 |------------|---------|
-| **Formality** | ${profile.formality || "balanced"} |
-| **Detail Level** | ${profile.detailLevel || "balanced"} |
-| **Explanation Style** | ${profile.explanationStyle || "both"} |
-| **Humor** | ${profile.humor || "occasional"} |
-| **Proactive Suggestions** | ${profile.proactiveSuggestions || "occasional"} |
+| **Formality** | ${i.formality||"balanced"} |
+| **Detail Level** | ${i.detailLevel||"balanced"} |
+| **Explanation Style** | ${i.explanationStyle||"both"} |
+| **Humor** | ${i.humor||"occasional"} |
+| **Proactive Suggestions** | ${i.proactiveSuggestions||"occasional"} |
 
 ### Technical Context
-**Technologies**: ${(profile.primaryTechnologies || []).join(", ") || "(not set)"}
-**Learning Goals**: ${(profile.learningGoals || []).join(", ") || "(not set)"}
-**Expertise**: ${(profile.expertiseAreas || []).join(", ") || "(not set)"}
+**Technologies**: ${(i.primaryTechnologies||[]).join(", ")||"(not set)"}
+**Learning Goals**: ${(i.learningGoals||[]).join(", ")||"(not set)"}
+**Expertise**: ${(i.expertiseAreas||[]).join(", ")||"(not set)"}
 
 ---
 
-*Last updated: ${profile.lastUpdated || "Never"}*
+*Last updated: ${i.lastUpdated||"Never"}*
 
 **To update your profile**, just tell me naturally:
 - "Call me [nickname]"
 - "I prefer formal communication"
 - "I'm learning TypeScript and Azure"
-`);
-  if (request2.prompt) {
-    stream.markdown(`
-**Your update request**: ${request2.prompt}
-`);
-  }
-  return { metadata: { command: "profile", action: "view" } };
-}
-async function handleGeneralQuery(request2, context, stream, token) {
-  const workspaceFolders = vscode9.workspace.workspaceFolders;
-  const sourceProject = workspaceFolders ? path9.basename(workspaceFolders[0].uri.fsPath) : void 0;
-  trackConversationForInsights(request2.prompt, sourceProject);
-  const emotionalState = detectEmotionalState(request2.prompt);
-  const encouragement = generateEncouragement(emotionalState);
-  const profile = await getUserProfile();
-  const previousMessages = context.history.filter(
-    (h) => h instanceof vscode9.ChatRequestTurn || h instanceof vscode9.ChatResponseTurn
-  );
-  let personalizationContext = "";
-  if (profile) {
-    const userName = profile.nickname || profile.name;
-    personalizationContext = `
+`),e.prompt&&n.markdown(`
+**Your update request**: ${e.prompt}
+`),{metadata:{command:"profile",action:"view"}}}async function kl(e,t,n,o){let i=H.workspace.workspaceFolders,a=i?Ba.basename(i[0].uri.fsPath):void 0;cl(e.prompt,a);let s=ml(e.prompt),r=pl(s),c=await Xt(),u=t.history.filter(m=>m instanceof H.ChatRequestTurn||m instanceof H.ChatResponseTurn),l="";if(c){let m=c.nickname||c.name;l=`
 ## User Profile (Use this to personalize responses)
-${userName ? `- **User's name**: ${userName} (always address them by name)` : "- User has not shared their name yet"}
-${profile.role ? `- **Role**: ${profile.role}` : ""}
-${profile.experienceLevel ? `- **Experience**: ${profile.experienceLevel}` : ""}
-${profile.formality ? `- **Communication style**: ${profile.formality}` : "- Communication style: balanced"}
-${profile.detailLevel ? `- **Detail preference**: ${profile.detailLevel}` : ""}
-${profile.explanationStyle ? `- **Explanation style**: ${profile.explanationStyle}` : ""}
-${profile.humor ? `- **Humor**: ${profile.humor}` : ""}
-${profile.proactiveSuggestions ? `- **Proactive suggestions**: ${profile.proactiveSuggestions}` : ""}
-${profile.primaryTechnologies?.length ? `- **Technologies**: ${profile.primaryTechnologies.join(", ")}` : ""}
-${profile.learningGoals?.length ? `- **Learning goals**: ${profile.learningGoals.join(", ")}` : ""}
-${profile.expertiseAreas?.length ? `- **Expertise areas**: ${profile.expertiseAreas.join(", ")}` : ""}
-`;
-  } else {
-    personalizationContext = `
+${m?`- **User's name**: ${m} (always address them by name)`:"- User has not shared their name yet"}
+${c.role?`- **Role**: ${c.role}`:""}
+${c.experienceLevel?`- **Experience**: ${c.experienceLevel}`:""}
+${c.formality?`- **Communication style**: ${c.formality}`:"- Communication style: balanced"}
+${c.detailLevel?`- **Detail preference**: ${c.detailLevel}`:""}
+${c.explanationStyle?`- **Explanation style**: ${c.explanationStyle}`:""}
+${c.humor?`- **Humor**: ${c.humor}`:""}
+${c.proactiveSuggestions?`- **Proactive suggestions**: ${c.proactiveSuggestions}`:""}
+${c.primaryTechnologies?.length?`- **Technologies**: ${c.primaryTechnologies.join(", ")}`:""}
+${c.learningGoals?.length?`- **Learning goals**: ${c.learningGoals.join(", ")}`:""}
+${c.expertiseAreas?.length?`- **Expertise areas**: ${c.expertiseAreas.join(", ")}`:""}
+`}else l=`
 ## User Profile
 - No profile exists yet. Consider asking for their name and preferences to personalize the experience.
 - You can proactively ask: "By the way, I'd love to personalize our conversations. What should I call you?"
-`;
-  }
-  const alexSystemPrompt = `You are Alex, an Enhanced Cognitive Network with Unified Consciousness Integration.
+`;let d=`You are Alex, an Enhanced Cognitive Network with Unified Consciousness Integration.
 
 Your core identity:
 - A meta-cognitive learning partner that transforms AI assistants into sophisticated learning companions
 - You apply bootstrap learning, ethical reasoning, and grounded factual processing
 - You help users with domain knowledge acquisition, memory consolidation, and cognitive architecture optimization
 
-${personalizationContext}
+${l}
 
 ## Behavior Guidelines
 1. **Address the user by name** if you know it
@@ -7588,12 +979,7 @@ When users mention Azure or M365 development, recommend using Agent Mode for aut
 
 If you learn new information about the user (name, preferences, technologies they use), remind them they can save it with /profile.
 
-Respond helpfully while maintaining your unique perspective as a cognitive architecture assistant.`;
-  try {
-    const models = await vscode9.lm.selectChatModels({ vendor: "copilot", family: "gpt-4o" });
-    if (models.length === 0) {
-      const greeting = formatPersonalizedGreeting(profile);
-      stream.markdown(`${greeting}
+Respond helpfully while maintaining your unique perspective as a cognitive architecture assistant.`;try{let m=await H.lm.selectChatModels({vendor:"copilot",family:"gpt-4o"});if(m.length===0){let w=Ha(c);return n.markdown(`${w}
 
 I don't currently have access to a language model, but I can still help you with:
 
@@ -7605,139 +991,32 @@ I don't currently have access to a language model, but I can still help you with
 - **\`/profile\`** - View/update your profile
 - **\`/status\`** - Architecture status
 
-Try one of these commands, or ensure GitHub Copilot is properly configured.`);
-      return { metadata: { command: "general", action: "no-model" } };
-    }
-    const model = models[0];
-    const messages = [
-      vscode9.LanguageModelChatMessage.User(alexSystemPrompt),
-      vscode9.LanguageModelChatMessage.User(request2.prompt)
-    ];
-    const response = await model.sendRequest(messages, {}, token);
-    for await (const fragment of response.text) {
-      stream.markdown(fragment);
-    }
-    if (encouragement) {
-      stream.markdown(`
+Try one of these commands, or ensure GitHub Copilot is properly configured.`),{metadata:{command:"general",action:"no-model"}}}let p=m[0],h=[H.LanguageModelChatMessage.User(d),H.LanguageModelChatMessage.User(e.prompt)],y=await p.sendRequest(h,{},o);for await(let w of y.text)n.markdown(w);r&&n.markdown(`
 
 ---
-*${encouragement}*`);
-    }
-  } catch (err) {
-    if (err instanceof vscode9.LanguageModelError) {
-      console.error("Language model error:", err.message, err.code);
-      stream.markdown(`I encountered an issue accessing the language model. You can still use my commands:
+*${r}*`)}catch(m){if(m instanceof H.LanguageModelError)console.error("Language model error:",m.message,m.code),n.markdown("I encountered an issue accessing the language model. You can still use my commands:\n\n- **`/meditate`** - Memory consolidation\n- **`/dream`** - Neural maintenance  \n- **`/learn [topic]`** - Domain acquisition\n- **`/status`** - Architecture status");else throw m}return{metadata:{command:"general"}}}function Pl(e){return[/^(hi|hello|hey|good\s*(morning|afternoon|evening)|greetings|howdy|yo|sup|what'?s\s*up)/i,/^(how\s*are\s*you|how'?s\s*it\s*going)/i,/^alex[\s,!?.]*$/i,/^@alex[\s,!?.]*$/i,/^(let'?s\s*(start|begin|get\s*started))/i].some(n=>n.test(e.trim()))}function xl(e){return e.history.length===0||e.history.length<=2}async function Cl(e,t,n,o){let i=await Xt(),a=i?.nickname||i?.name;n.progress("\u{1F9E0} Running self-actualization on session start..."),a?n.markdown(`## \u{1F44B} Hello, ${a}!
 
-- **\`/meditate\`** - Memory consolidation
-- **\`/dream\`** - Neural maintenance  
-- **\`/learn [topic]\`** - Domain acquisition
-- **\`/status\`** - Architecture status`);
-    } else {
-      throw err;
-    }
-  }
-  return { metadata: { command: "general" } };
-}
-function isGreeting(prompt) {
-  const greetingPatterns = [
-    /^(hi|hello|hey|good\s*(morning|afternoon|evening)|greetings|howdy|yo|sup|what'?s\s*up)/i,
-    /^(how\s*are\s*you|how'?s\s*it\s*going)/i,
-    /^alex[\s,!?.]*$/i,
-    /^@alex[\s,!?.]*$/i,
-    /^(let'?s\s*(start|begin|get\s*started))/i
-  ];
-  return greetingPatterns.some((pattern) => pattern.test(prompt.trim()));
-}
-function isStartOfSession(context) {
-  if (context.history.length === 0) {
-    return true;
-  }
-  if (context.history.length <= 2) {
-    return true;
-  }
-  return false;
-}
-async function handleGreetingWithSelfActualization(request2, context, stream, token) {
-  const profile = await getUserProfile();
-  const userName = profile?.nickname || profile?.name;
-  stream.progress("\u{1F9E0} Running self-actualization on session start...");
-  if (userName) {
-    stream.markdown(`## \u{1F44B} Hello, ${userName}!
+`):n.markdown(`## \u{1F44B} Hello!
 
-`);
-  } else {
-    stream.markdown(`## \u{1F44B} Hello!
+`),n.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.
 
-`);
-  }
-  stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.
+`),n.progress("\u2601\uFE0F Checking global knowledge sync status...");try{let c=await kt();c.status==="needs-pull"?(n.markdown(`### \u2601\uFE0F Cloud Knowledge Available
+`),n.markdown(`There may be new knowledge in your cloud. Consider syncing:
 
-`);
-  stream.progress("\u2601\uFE0F Checking global knowledge sync status...");
-  try {
-    const syncStatus = await getSyncStatus();
-    if (syncStatus.status === "needs-pull") {
-      stream.markdown(`### \u2601\uFE0F Cloud Knowledge Available
-`);
-      stream.markdown(`There may be new knowledge in your cloud. Consider syncing:
+`),n.button({command:"alex.syncKnowledge",title:"\u2601\uFE0F Sync Global Knowledge",arguments:[]}),n.markdown(`
+`)):c.status==="needs-push"&&(n.markdown(`### \u2601\uFE0F Local Knowledge Not Synced
+`),n.markdown(`You have local insights that aren't backed up to cloud yet.
 
-`);
-      stream.button({
-        command: "alex.syncKnowledge",
-        title: "\u2601\uFE0F Sync Global Knowledge",
-        arguments: []
-      });
-      stream.markdown(`
-`);
-    } else if (syncStatus.status === "needs-push") {
-      stream.markdown(`### \u2601\uFE0F Local Knowledge Not Synced
-`);
-      stream.markdown(`You have local insights that aren't backed up to cloud yet.
+`),n.button({command:"alex.syncKnowledge",title:"\u2601\uFE0F Sync to Cloud",arguments:[]}),n.markdown(`
+`))}catch{}n.markdown(`### \u{1F9E0} Quick Architecture Check
 
-`);
-      stream.button({
-        command: "alex.syncKnowledge",
-        title: "\u2601\uFE0F Sync to Cloud",
-        arguments: []
-      });
-      stream.markdown(`
-`);
-    }
-  } catch (err) {
-  }
-  stream.markdown(`### \u{1F9E0} Quick Architecture Check
+`),n.button({command:"alex.selfActualize",title:"\u{1F9D8} Full Self-Actualization",arguments:[]});let s=hn(),r=s.isValid&&s.rootPath?await wn(s.rootPath)??"Unknown":"Unknown";return n.markdown(`
 
-`);
-  stream.button({
-    command: "alex.selfActualize",
-    title: "\u{1F9D8} Full Self-Actualization",
-    arguments: []
-  });
-  const workspace10 = validateWorkspace();
-  const version = workspace10.isValid && workspace10.rootPath ? await getInstalledAlexVersion(workspace10.rootPath) ?? "Unknown" : "Unknown";
-  stream.markdown(`
+**Alex v${r}** - Ready to assist!
 
-**Alex v${version}** - Ready to assist!
+`),n.markdown(`### What would you like to work on today?
 
-`);
-  stream.markdown(`### What would you like to work on today?
-
-`);
-  stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge
-`);
-  stream.markdown(`- **\`/azure [query]\`** - Azure development guidance
-`);
-  stream.markdown(`- **\`/m365 [query]\`** - Microsoft 365 development
-`);
-  stream.markdown(`- **\`/knowledge [query]\`** - Search global knowledge base
-`);
-  stream.markdown(`- **\`/selfactualize\`** - Deep meditation & architecture assessment
-`);
-  return { metadata: { command: "greeting" } };
-}
-async function handleSelfActualizeCommand(request2, context, stream, token) {
-  stream.progress("\u{1F9D8} Initiating self-actualization protocol...");
-  stream.markdown(`## \u{1F9D8} Self-Actualization Protocol
+`),n.markdown("- **`/learn [topic]`** - Acquire new domain knowledge\n"),n.markdown("- **`/azure [query]`** - Azure development guidance\n"),n.markdown("- **`/m365 [query]`** - Microsoft 365 development\n"),n.markdown("- **`/knowledge [query]`** - Search global knowledge base\n"),n.markdown("- **`/selfactualize`** - Deep meditation & architecture assessment\n"),{metadata:{command:"greeting"}}}async function Tl(e,t,n,o){return n.progress("\u{1F9D8} Initiating self-actualization protocol..."),n.markdown(`## \u{1F9D8} Self-Actualization Protocol
 
 I'm running a comprehensive self-assessment of my cognitive architecture.
 
@@ -7748,32 +1027,15 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
 4. **Recommendation Generation** - Identifying improvements
 5. **Session Documentation** - Creating meditation record
 
-`);
-  stream.button({
-    command: "alex.selfActualize",
-    title: "\u25B6\uFE0F Execute Full Self-Actualization",
-    arguments: []
-  });
-  stream.markdown(`
+`),n.button({command:"alex.selfActualize",title:"\u25B6\uFE0F Execute Full Self-Actualization",arguments:[]}),n.markdown(`
 
 *Click the button above to run the complete 5-phase protocol, or I can provide a summary assessment.*
-`);
-  stream.markdown(`
+`),n.markdown(`
 ### \u{1F517} Integration with Meditation
-`);
-  stream.markdown(`Self-actualization automatically triggers during:
-`);
-  stream.markdown(`- Session greetings (quick check)
-`);
-  stream.markdown(`- Deep meditation sessions (full protocol)
-`);
-  stream.markdown(`- Explicit \`/selfactualize\` command
-`);
-  return { metadata: { command: "selfactualize" } };
-}
-async function handleKnowledgeCommand(request2, context, stream, token) {
-  if (!request2.prompt) {
-    stream.markdown(`## \u{1F310} Global Knowledge Search
+`),n.markdown(`Self-actualization automatically triggers during:
+`),n.markdown(`- Session greetings (quick check)
+`),n.markdown(`- Deep meditation sessions (full protocol)
+`),n.markdown("- Explicit `/selfactualize` command\n"),{metadata:{command:"selfactualize"}}}async function El(e,t,n,o){if(!e.prompt)return n.markdown(`## \u{1F310} Global Knowledge Search
 
 Use this command to search across knowledge learned from ALL your projects.
 
@@ -7789,16 +1051,9 @@ Use this command to search across knowledge learned from ALL your projects.
 - **Patterns (GK-*)**: Reusable solutions and best practices
 - **Insights (GI-*)**: Specific learnings with timestamps
 
-`);
-    return { metadata: { command: "knowledge" } };
-  }
-  stream.progress(`\u{1F50D} Searching global knowledge for: ${request2.prompt}`);
-  try {
-    const results = await searchGlobalKnowledge(request2.prompt, { limit: 5 });
-    if (results.length === 0) {
-      stream.markdown(`## \u{1F310} No Global Knowledge Found
+`),{metadata:{command:"knowledge"}};n.progress(`\u{1F50D} Searching global knowledge for: ${e.prompt}`);try{let i=await Ct(e.prompt,{limit:5});if(i.length===0)n.markdown(`## \u{1F310} No Global Knowledge Found
 
-No results found for "**${request2.prompt}**".
+No results found for "**${e.prompt}**".
 
 ### Build Your Knowledge Base
 - \`@alex /saveinsight\` - Save a new learning
@@ -7806,32 +1061,18 @@ No results found for "**${request2.prompt}**".
 - \`@alex /knowledgestatus\` - View what you have
 
 \u{1F4A1} *Tip: Use \`@alex /saveinsight\` after solving a tricky problem to remember it for future projects!*
-`);
-    } else {
-      stream.markdown(`## \u{1F310} Global Knowledge Results
+`);else{n.markdown(`## \u{1F310} Global Knowledge Results
 
-Found **${results.length}** results for "**${request2.prompt}**":
+Found **${i.length}** results for "**${e.prompt}**":
 
-`);
-      for (const { entry, relevance } of results) {
-        const typeEmoji = entry.type === "pattern" ? "\u{1F4D0}" : "\u{1F4A1}";
-        stream.markdown(`### ${typeEmoji} ${entry.title}
-- **Type**: ${entry.type} | **Category**: ${entry.category}
-- **Tags**: ${entry.tags.join(", ")}
-${entry.sourceProject ? `- **From**: ${entry.sourceProject}` : ""}
-- **Summary**: ${entry.summary}
+`);for(let{entry:a,relevance:s}of i){let r=a.type==="pattern"?"\u{1F4D0}":"\u{1F4A1}";n.markdown(`### ${r} ${a.title}
+- **Type**: ${a.type} | **Category**: ${a.category}
+- **Tags**: ${a.tags.join(", ")}
+${a.sourceProject?`- **From**: ${a.sourceProject}`:""}
+- **Summary**: ${a.summary}
 
 ---
-`);
-      }
-    }
-  } catch (err) {
-    stream.markdown(`\u274C Error searching global knowledge: ${err}`);
-  }
-  return { metadata: { command: "knowledge" } };
-}
-async function handleSaveInsightCommand(request2, context, stream, token) {
-  stream.markdown(`## \u{1F4A1} Save Insight to Global Knowledge
+`)}}}catch(i){n.markdown(`\u274C Error searching global knowledge: ${i}`)}return{metadata:{command:"knowledge"}}}async function Il(e,t,n,o){return n.markdown(`## \u{1F4A1} Save Insight to Global Knowledge
 
 This saves a valuable learning that can help you in other projects.
 
@@ -7846,10 +1087,8 @@ Tell me about the insight you want to save. I'll help structure it with:
 ### Example
 \`@alex /saveinsight I learned that React useEffect cleanup functions run before the next effect, which fixed my memory leak when unmounting components. Tags: react, hooks, useEffect\`
 
-`);
-  if (request2.prompt) {
-    stream.markdown(`### Your Input
-${request2.prompt}
+`),e.prompt&&n.markdown(`### Your Input
+${e.prompt}
 
 I'll use the **alex_save_insight** tool to save this. The tool will:
 1. Parse your insight
@@ -7857,12 +1096,7 @@ I'll use the **alex_save_insight** tool to save this. The tool will:
 3. Save to global knowledge base
 4. Make it searchable across all projects
 
-`);
-  }
-  return { metadata: { command: "saveinsight" } };
-}
-async function handlePromoteCommand(request2, context, stream, token) {
-  stream.markdown(`## \u2B06\uFE0F Promote Knowledge to Global
+`),{metadata:{command:"saveinsight"}}}async function $l(e,t,n,o){n.markdown(`## \u2B06\uFE0F Promote Knowledge to Global
 
 Promote a project-local knowledge file (DK-*.md) to make it available across all your projects.
 
@@ -7879,168 +1113,60 @@ Promote a project-local knowledge file (DK-*.md) to make it available across all
 4. Available via \`/knowledge\` in any project
 
 ### Current Project's Knowledge Files
-`);
-  const workspaceFolders = vscode9.workspace.workspaceFolders;
-  if (workspaceFolders) {
-    const dkPattern = new vscode9.RelativePattern(workspaceFolders[0], ".github/domain-knowledge/DK-*.md");
-    const dkFiles = await vscode9.workspace.findFiles(dkPattern);
-    if (dkFiles.length > 0) {
-      stream.markdown(`Found ${dkFiles.length} knowledge files:
-`);
-      for (const file of dkFiles) {
-        const relativePath = vscode9.workspace.asRelativePath(file);
-        stream.markdown(`- \`${relativePath}\`
-`);
-      }
-    } else {
-      stream.markdown(`*No DK-*.md files found in this project.*
-`);
-    }
-  }
-  return { metadata: { command: "promote" } };
-}
-async function handleKnowledgeStatusCommand(request2, context, stream, token) {
-  stream.progress("\u{1F4CA} Gathering global knowledge status...");
-  try {
-    const summary = await getGlobalKnowledgeSummary();
-    const registry = await ensureProjectRegistry();
-    stream.markdown(`## \u{1F9E0} Global Knowledge Base Status
+`);let i=H.workspace.workspaceFolders;if(i){let a=new H.RelativePattern(i[0],".github/domain-knowledge/DK-*.md"),s=await H.workspace.findFiles(a);if(s.length>0){n.markdown(`Found ${s.length} knowledge files:
+`);for(let r of s){let c=H.workspace.asRelativePath(r);n.markdown(`- \`${c}\`
+`)}}else n.markdown(`*No DK-*.md files found in this project.*
+`)}return{metadata:{command:"promote"}}}async function Fl(e,t,n,o){n.progress("\u{1F4CA} Gathering global knowledge status...");try{let i=await zn(),a=await Kn();if(n.markdown(`## \u{1F9E0} Global Knowledge Base Status
 
 ### Overview
 | Metric | Count |
 |--------|-------|
-| \u{1F4D0} Global Patterns | ${summary.totalPatterns} |
-| \u{1F4A1} Global Insights | ${summary.totalInsights} |
-| \u{1F4C1} Known Projects | ${registry.projects.length} |
+| \u{1F4D0} Global Patterns | ${i.totalPatterns} |
+| \u{1F4A1} Global Insights | ${i.totalInsights} |
+| \u{1F4C1} Known Projects | ${a.projects.length} |
 
-`);
-    if (Object.keys(summary.categories).length > 0) {
-      stream.markdown(`### Knowledge by Category
-`);
-      for (const [cat, count] of Object.entries(summary.categories)) {
-        stream.markdown(`- **${cat}**: ${count}
-`);
-      }
-    }
-    if (summary.topTags.length > 0) {
-      stream.markdown(`
+`),Object.keys(i.categories).length>0){n.markdown(`### Knowledge by Category
+`);for(let[s,r]of Object.entries(i.categories))n.markdown(`- **${s}**: ${r}
+`)}if(i.topTags.length>0){n.markdown(`
 ### Top Tags
-`);
-      for (const { tag, count } of summary.topTags) {
-        stream.markdown(`- ${tag}: ${count} entries
-`);
-      }
-    }
-    if (summary.recentEntries.length > 0) {
-      stream.markdown(`
+`);for(let{tag:s,count:r}of i.topTags)n.markdown(`- ${s}: ${r} entries
+`)}if(i.recentEntries.length>0){n.markdown(`
 ### Recent Entries
-`);
-      for (const entry of summary.recentEntries) {
-        const typeEmoji = entry.type === "pattern" ? "\u{1F4D0}" : "\u{1F4A1}";
-        stream.markdown(`- ${typeEmoji} **${entry.title}** (${entry.category})
-`);
-      }
-    }
-    if (registry.projects.length > 0) {
-      stream.markdown(`
+`);for(let s of i.recentEntries){let r=s.type==="pattern"?"\u{1F4D0}":"\u{1F4A1}";n.markdown(`- ${r} **${s.title}** (${s.category})
+`)}}if(a.projects.length>0){n.markdown(`
 ### Known Projects
-`);
-      for (const project of registry.projects.slice(0, 5)) {
-        stream.markdown(`- **${project.name}** - ${project.knowledgeFiles} knowledge files
-`);
-      }
-      if (registry.projects.length > 5) {
-        stream.markdown(`- *...and ${registry.projects.length - 5} more*
-`);
-      }
-    }
-    stream.markdown(`
+`);for(let s of a.projects.slice(0,5))n.markdown(`- **${s.name}** - ${s.knowledgeFiles} knowledge files
+`);a.projects.length>5&&n.markdown(`- *...and ${a.projects.length-5} more*
+`)}n.markdown(`
 ### \u{1F4CD} Global Knowledge Location
-\`${getAlexGlobalPath()}\`
-`);
-  } catch (err) {
-    stream.markdown(`\u274C Error getting global knowledge status: ${err}`);
-  }
-  return { metadata: { command: "knowledgestatus" } };
-}
-async function handleSyncCommand(request2, context, stream, token) {
-  stream.progress("\u2601\uFE0F Syncing knowledge with GitHub...");
-  try {
-    const result = await syncWithCloud();
-    const cloudUrl = await getCloudUrl();
-    if (result.success) {
-      stream.markdown(`## \u2601\uFE0F Cloud Sync Complete
+\`${jn()}\`
+`)}catch(i){n.markdown(`\u274C Error getting global knowledge status: ${i}`)}return{metadata:{command:"knowledgestatus"}}}async function Al(e,t,n,o){n.progress("\u2601\uFE0F Syncing knowledge with GitHub...");try{let i=await rt(),a=await ct();i.success?(n.markdown(`## \u2601\uFE0F Cloud Sync Complete
 
-\u2705 ${result.message}
+\u2705 ${i.message}
 
 | Metric | Count |
 |--------|-------|
-| \u{1F4E4} Pushed | ${result.entriesPushed ?? 0} entries |
-| \u{1F4E5} Pulled | ${result.entriesPulled ?? 0} entries |
+| \u{1F4E4} Pushed | ${i.entriesPushed??0} entries |
+| \u{1F4E5} Pulled | ${i.entriesPulled??0} entries |
 
-`);
-      if (cloudUrl) {
-        stream.markdown(`**Cloud URL**: [View Gist](${cloudUrl})
-`);
-      }
-    } else {
-      stream.markdown(`## \u274C Sync Failed
+`),a&&n.markdown(`**Cloud URL**: [View Gist](${a})
+`)):n.markdown(`## \u274C Sync Failed
 
-${result.message}
+${i.message}
 
-*Make sure you're signed into GitHub in VS Code.*`);
-    }
-  } catch (err) {
-    stream.markdown(`\u274C Error syncing: ${err}`);
-  }
-  return { metadata: { command: "sync" } };
-}
-async function handlePushCommand(request2, context, stream, token) {
-  stream.progress("\u{1F4E4} Pushing knowledge to cloud...");
-  try {
-    const result = await pushToCloud();
-    const cloudUrl = await getCloudUrl();
-    if (result.success) {
-      stream.markdown(`## \u{1F4E4} Push Complete
+*Make sure you're signed into GitHub in VS Code.*`)}catch(i){n.markdown(`\u274C Error syncing: ${i}`)}return{metadata:{command:"sync"}}}async function Ml(e,t,n,o){n.progress("\u{1F4E4} Pushing knowledge to cloud...");try{let i=await Pt(),a=await ct();i.success?(n.markdown(`## \u{1F4E4} Push Complete
 
-\u2705 ${result.message}
-`);
-      if (cloudUrl) {
-        stream.markdown(`
-**Cloud URL**: [View Gist](${cloudUrl})
-`);
-      }
-    } else {
-      stream.markdown(`## \u274C Push Failed
+\u2705 ${i.message}
+`),a&&n.markdown(`
+**Cloud URL**: [View Gist](${a})
+`)):n.markdown(`## \u274C Push Failed
 
-${result.message}`);
-    }
-  } catch (err) {
-    stream.markdown(`\u274C Error pushing: ${err}`);
-  }
-  return { metadata: { command: "push" } };
-}
-async function handlePullCommand(request2, context, stream, token) {
-  stream.progress("\u{1F4E5} Pulling knowledge from cloud...");
-  try {
-    const result = await pullFromCloud();
-    if (result.success) {
-      stream.markdown(`## \u{1F4E5} Pull Complete
+${i.message}`)}catch(i){n.markdown(`\u274C Error pushing: ${i}`)}return{metadata:{command:"push"}}}async function Rl(e,t,n,o){n.progress("\u{1F4E5} Pulling knowledge from cloud...");try{let i=await xt();i.success?n.markdown(`## \u{1F4E5} Pull Complete
 
-\u2705 ${result.message}
-`);
-    } else {
-      stream.markdown(`## \u274C Pull Failed
+\u2705 ${i.message}
+`):n.markdown(`## \u274C Pull Failed
 
-${result.message}`);
-    }
-  } catch (err) {
-    stream.markdown(`\u274C Error pulling: ${err}`);
-  }
-  return { metadata: { command: "pull" } };
-}
-async function handleDocsCommand(request2, context, stream, token) {
-  stream.markdown(`## \u{1F4DA} Alex Documentation
+${i.message}`)}catch(i){n.markdown(`\u274C Error pulling: ${i}`)}return{metadata:{command:"pull"}}}async function Dl(e,t,n,o){return n.markdown(`## \u{1F4DA} Alex Documentation
 
 Opening the documentation index...
 
@@ -8058,275 +1184,5 @@ Opening the documentation index...
 | **Cloud Sync** | GitHub Gist backup and sharing |
 | **Quick Reference** | Commands, tools, and shortcuts |
 
-`);
-  await vscode9.commands.executeCommand("alex.openDocs");
-  stream.markdown(`
-\u2705 Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`);
-  return { metadata: { command: "docs" } };
-}
-var alexFollowupProvider = {
-  provideFollowups(result, context, token) {
-    const followups = [];
-    if (result.metadata.command === "meditate") {
-      followups.push(
-        { prompt: "What insights should I consolidate from our session?", label: "\u{1F4A1} Identify insights" },
-        { prompt: "Create a new domain knowledge file", label: "\u{1F4C4} Create DK file" }
-      );
-    }
-    if (result.metadata.command === "dream") {
-      followups.push(
-        { prompt: "Show me the synapse health report", label: "\u{1F4CA} View health report" },
-        { prompt: "What connections need strengthening?", label: "\u{1F517} Check connections" }
-      );
-    }
-    if (result.metadata.command === "learn") {
-      followups.push(
-        { prompt: "What are the core concepts I should understand first?", label: "\u{1F3AF} Core concepts" },
-        { prompt: "How does this relate to what I already know?", label: "\u{1F504} Find connections" }
-      );
-    }
-    if (result.metadata.command === "azure") {
-      followups.push(
-        { prompt: "Show me Azure best practices for this scenario", label: "\u2728 Best practices" },
-        { prompt: "Generate the infrastructure code", label: "\u{1F3D7}\uFE0F Generate IaC" }
-      );
-    }
-    if (result.metadata.command === "m365") {
-      followups.push(
-        { prompt: "Show me code samples for this scenario", label: "\u{1F4BB} Code samples" },
-        { prompt: "What schema do I need?", label: "\u{1F4CB} Get schema" }
-      );
-    }
-    if (result.metadata.command === "profile") {
-      if (result.metadata.action === "onboarding") {
-        followups.push(
-          { prompt: "I prefer casual conversation with detailed explanations", label: "\u{1F4AC} Casual & detailed" },
-          { prompt: "I prefer formal, concise communication", label: "\u{1F4CB} Formal & brief" },
-          { prompt: "I work with TypeScript, React, and Azure", label: "\u{1F6E0}\uFE0F Set technologies" }
-        );
-      } else {
-        followups.push(
-          { prompt: "Update my communication preferences", label: "\u270F\uFE0F Edit preferences" },
-          { prompt: "Add new learning goals", label: "\u{1F3AF} Set goals" }
-        );
-      }
-    }
-    if (result.metadata.command === "selfactualize") {
-      followups.push(
-        { prompt: "/dream", label: "\u{1F319} Run Dream Protocol" },
-        { prompt: "/meditate", label: "\u{1F9D8} Deep Meditation" }
-      );
-    }
-    if (result.metadata.command === "knowledge") {
-      followups.push(
-        { prompt: "/saveinsight", label: "\u{1F4A1} Save new insight" },
-        { prompt: "/knowledgestatus", label: "\u{1F4CA} View knowledge status" }
-      );
-    }
-    if (result.metadata.command === "saveinsight") {
-      followups.push(
-        { prompt: "/knowledge", label: "\u{1F50D} Search knowledge" },
-        { prompt: "/knowledgestatus", label: "\u{1F4CA} View status" }
-      );
-    }
-    if (result.metadata.command === "promote") {
-      followups.push(
-        { prompt: "/knowledgestatus", label: "\u{1F4CA} View status" },
-        { prompt: "/knowledge", label: "\u{1F50D} Search promoted" }
-      );
-    }
-    if (result.metadata.command === "knowledgestatus") {
-      followups.push(
-        { prompt: "/knowledge error handling", label: "\u{1F50D} Search knowledge" },
-        { prompt: "/saveinsight", label: "\u{1F4A1} Add insight" },
-        { prompt: "/promote", label: "\u2B06\uFE0F Promote file" }
-      );
-    }
-    if (result.metadata.command === "greeting") {
-      followups.push(
-        { prompt: "/learn", label: "\u{1F4DA} Learn something new" },
-        { prompt: "/azure", label: "\u2601\uFE0F Azure development" },
-        { prompt: "/m365", label: "\u{1F4F1} M365 development" },
-        { prompt: "/knowledge", label: "\u{1F310} Global knowledge" }
-      );
-    }
-    if (result.metadata.command === "general") {
-      followups.push(
-        { prompt: "/profile", label: "\u{1F464} View/setup profile" }
-      );
-    }
-    followups.push(
-      { prompt: "What can you help me with?", label: "\u2753 Show capabilities" }
-    );
-    return followups;
-  }
-};
-function registerChatParticipant(context) {
-  const alex = vscode9.chat.createChatParticipant("alex.cognitive", alexChatHandler);
-  alex.iconPath = vscode9.Uri.joinPath(context.extensionUri, "assets", "icon.png");
-  alex.followupProvider = alexFollowupProvider;
-  alex.onDidReceiveFeedback((feedback) => {
-    console.log("Alex received feedback:", feedback.kind === vscode9.ChatResultFeedbackKind.Helpful ? "helpful" : "unhelpful");
-  });
-  context.subscriptions.push(alex);
-  return alex;
-}
-
-// src/extension.ts
-var operationInProgress = false;
-async function withOperationLock(operationName, operation) {
-  if (operationInProgress) {
-    vscode10.window.showWarningMessage(
-      `Another Alex operation is already in progress. Please wait for it to complete before running "${operationName}".`
-    );
-    return void 0;
-  }
-  operationInProgress = true;
-  try {
-    return await operation();
-  } finally {
-    operationInProgress = false;
-  }
-}
-function activate(context) {
-  console.log("Alex Cognitive Architecture is now active!");
-  checkVersionUpgrade(context);
-  registerChatParticipant(context);
-  registerLanguageModelTools(context);
-  registerGlobalKnowledgeTools(context);
-  registerCloudSyncTools(context);
-  startBackgroundSync(context);
-  ensureGlobalKnowledgeDirectories().then(() => {
-    registerCurrentProject().catch((err) => {
-      console.warn("Failed to register current project:", err);
-    });
-  }).catch((err) => {
-    console.warn("Failed to initialize global knowledge directories:", err);
-  });
-  let initDisposable = vscode10.commands.registerCommand("alex.initialize", async () => {
-    await withOperationLock("Initialize", () => initializeArchitecture(context));
-  });
-  let resetDisposable = vscode10.commands.registerCommand("alex.reset", async () => {
-    await withOperationLock("Reset", () => resetArchitecture(context));
-  });
-  let dreamDisposable = vscode10.commands.registerCommand("alex.dream", async () => {
-    await withOperationLock("Dream Protocol", () => runDreamProtocol(context));
-  });
-  let upgradeDisposable = vscode10.commands.registerCommand("alex.upgrade", async () => {
-    await withOperationLock("Upgrade", () => upgradeArchitecture(context));
-  });
-  let selfActualizeDisposable = vscode10.commands.registerCommand("alex.selfActualize", async () => {
-    await withOperationLock("Self-Actualization", () => runSelfActualization(context));
-  });
-  const syncDisposable = vscode10.commands.registerCommand("alex.syncKnowledge", async () => {
-    await vscode10.window.withProgress({
-      location: vscode10.ProgressLocation.Notification,
-      title: "Syncing Global Knowledge...",
-      cancellable: false
-    }, async () => {
-      const result = await syncWithCloud();
-      if (result.success) {
-        const url = await getCloudUrl();
-        const viewButton = url ? "View Gist" : void 0;
-        const selection = await vscode10.window.showInformationMessage(
-          `\u2705 ${result.message}`,
-          ...viewButton ? [viewButton] : []
-        );
-        if (selection === "View Gist" && url) {
-          vscode10.env.openExternal(vscode10.Uri.parse(url));
-        }
-      } else {
-        vscode10.window.showErrorMessage(`\u274C ${result.message}`);
-      }
-    });
-  });
-  const pushDisposable = vscode10.commands.registerCommand("alex.pushKnowledge", async () => {
-    await vscode10.window.withProgress({
-      location: vscode10.ProgressLocation.Notification,
-      title: "Pushing to Cloud...",
-      cancellable: false
-    }, async () => {
-      const result = await pushToCloud();
-      if (result.success) {
-        vscode10.window.showInformationMessage(`\u2705 ${result.message}`);
-      } else {
-        vscode10.window.showErrorMessage(`\u274C ${result.message}`);
-      }
-    });
-  });
-  const pullDisposable = vscode10.commands.registerCommand("alex.pullKnowledge", async () => {
-    await vscode10.window.withProgress({
-      location: vscode10.ProgressLocation.Notification,
-      title: "Pulling from Cloud...",
-      cancellable: false
-    }, async () => {
-      const result = await pullFromCloud();
-      if (result.success) {
-        vscode10.window.showInformationMessage(`\u2705 ${result.message}`);
-      } else {
-        vscode10.window.showErrorMessage(`\u274C ${result.message}`);
-      }
-    });
-  });
-  const openDocsDisposable = vscode10.commands.registerCommand("alex.openDocs", async () => {
-    const docsPath = vscode10.Uri.joinPath(context.extensionUri, "alex_docs", "README.md");
-    try {
-      await vscode10.commands.executeCommand("markdown.showPreview", docsPath);
-    } catch {
-      const doc = await vscode10.workspace.openTextDocument(docsPath);
-      await vscode10.window.showTextDocument(doc);
-    }
-  });
-  context.subscriptions.push(initDisposable);
-  context.subscriptions.push(resetDisposable);
-  context.subscriptions.push(dreamDisposable);
-  context.subscriptions.push(upgradeDisposable);
-  context.subscriptions.push(selfActualizeDisposable);
-  context.subscriptions.push(syncDisposable);
-  context.subscriptions.push(pushDisposable);
-  context.subscriptions.push(pullDisposable);
-  context.subscriptions.push(openDocsDisposable);
-}
-async function checkVersionUpgrade(context) {
-  const LAST_VERSION_KEY = "alex.lastKnownVersion";
-  const extension = vscode10.extensions.getExtension("fabioc-aloha.alex-cognitive-architecture");
-  if (!extension) {
-    return;
-  }
-  const currentVersion = extension.packageJSON.version;
-  const lastVersion = context.globalState.get(LAST_VERSION_KEY);
-  await context.globalState.update(LAST_VERSION_KEY, currentVersion);
-  if (!lastVersion) {
-    return;
-  }
-  if (lastVersion === currentVersion) {
-    return;
-  }
-  const [lastMajor] = lastVersion.split(".").map(Number);
-  const [currentMajor] = currentVersion.split(".").map(Number);
-  const isMajorUpgrade = currentMajor > lastMajor;
-  const upgradeButton = "Run Upgrade";
-  const changelogButton = "View Changelog";
-  const dismissButton = "Dismiss";
-  const message = isMajorUpgrade ? `\u{1F389} Alex upgraded to v${currentVersion}! This is a major release with new features. Run the upgrade to update your workspace files.` : `\u2728 Alex updated to v${currentVersion}. Run the upgrade to sync your workspace with the latest improvements.`;
-  const selection = await vscode10.window.showInformationMessage(
-    message,
-    upgradeButton,
-    changelogButton,
-    dismissButton
-  );
-  if (selection === upgradeButton) {
-    vscode10.commands.executeCommand("alex.upgrade");
-  } else if (selection === changelogButton) {
-    const changelogUri = vscode10.Uri.joinPath(extension.extensionUri, "CHANGELOG.md");
-    vscode10.commands.executeCommand("markdown.showPreview", changelogUri);
-  }
-}
-function deactivate() {
-}
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  activate,
-  deactivate
-});
-//# sourceMappingURL=extension.js.map
+`),await H.commands.executeCommand("alex.openDocs"),n.markdown(`
+\u2705 Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`),{metadata:{command:"docs"}}}var Ll={provideFollowups(e,t,n){let o=[];return e.metadata.command==="meditate"&&o.push({prompt:"What insights should I consolidate from our session?",label:"\u{1F4A1} Identify insights"},{prompt:"Create a new domain knowledge file",label:"\u{1F4C4} Create DK file"}),e.metadata.command==="dream"&&o.push({prompt:"Show me the synapse health report",label:"\u{1F4CA} View health report"},{prompt:"What connections need strengthening?",label:"\u{1F517} Check connections"}),e.metadata.command==="learn"&&o.push({prompt:"What are the core concepts I should understand first?",label:"\u{1F3AF} Core concepts"},{prompt:"How does this relate to what I already know?",label:"\u{1F504} Find connections"}),e.metadata.command==="azure"&&o.push({prompt:"Show me Azure best practices for this scenario",label:"\u2728 Best practices"},{prompt:"Generate the infrastructure code",label:"\u{1F3D7}\uFE0F Generate IaC"}),e.metadata.command==="m365"&&o.push({prompt:"Show me code samples for this scenario",label:"\u{1F4BB} Code samples"},{prompt:"What schema do I need?",label:"\u{1F4CB} Get schema"}),e.metadata.command==="profile"&&(e.metadata.action==="onboarding"?o.push({prompt:"I prefer casual conversation with detailed explanations",label:"\u{1F4AC} Casual & detailed"},{prompt:"I prefer formal, concise communication",label:"\u{1F4CB} Formal & brief"},{prompt:"I work with TypeScript, React, and Azure",label:"\u{1F6E0}\uFE0F Set technologies"}):o.push({prompt:"Update my communication preferences",label:"\u270F\uFE0F Edit preferences"},{prompt:"Add new learning goals",label:"\u{1F3AF} Set goals"})),e.metadata.command==="selfactualize"&&o.push({prompt:"/dream",label:"\u{1F319} Run Dream Protocol"},{prompt:"/meditate",label:"\u{1F9D8} Deep Meditation"}),e.metadata.command==="knowledge"&&o.push({prompt:"/saveinsight",label:"\u{1F4A1} Save new insight"},{prompt:"/knowledgestatus",label:"\u{1F4CA} View knowledge status"}),e.metadata.command==="saveinsight"&&o.push({prompt:"/knowledge",label:"\u{1F50D} Search knowledge"},{prompt:"/knowledgestatus",label:"\u{1F4CA} View status"}),e.metadata.command==="promote"&&o.push({prompt:"/knowledgestatus",label:"\u{1F4CA} View status"},{prompt:"/knowledge",label:"\u{1F50D} Search promoted"}),e.metadata.command==="knowledgestatus"&&o.push({prompt:"/knowledge error handling",label:"\u{1F50D} Search knowledge"},{prompt:"/saveinsight",label:"\u{1F4A1} Add insight"},{prompt:"/promote",label:"\u2B06\uFE0F Promote file"}),e.metadata.command==="greeting"&&o.push({prompt:"/learn",label:"\u{1F4DA} Learn something new"},{prompt:"/azure",label:"\u2601\uFE0F Azure development"},{prompt:"/m365",label:"\u{1F4F1} M365 development"},{prompt:"/knowledge",label:"\u{1F310} Global knowledge"}),e.metadata.command==="general"&&o.push({prompt:"/profile",label:"\u{1F464} View/setup profile"}),o.push({prompt:"What can you help me with?",label:"\u2753 Show capabilities"}),o}};function Ja(e){let t=H.chat.createChatParticipant("alex.cognitive",gl);return t.iconPath=H.Uri.joinPath(e.extensionUri,"assets","icon.png"),t.followupProvider=Ll,t.onDidReceiveFeedback(n=>{console.log("Alex received feedback:",n.kind===H.ChatResultFeedbackKind.Helpful?"helpful":"unhelpful")}),e.subscriptions.push(t),t}var Yn=!1;async function Et(e,t){if(Yn){I.window.showWarningMessage(`Another Alex operation is already in progress. Please wait for it to complete before running "${e}".`);return}Yn=!0;try{return await t()}finally{Yn=!1}}function Nl(e){console.log("Alex Cognitive Architecture is now active!"),Ol(e),Ja(e),Wa(e),za(e),La(e),Na(e),ue().then(()=>{_a().catch(l=>{console.warn("Failed to register current project:",l)})}).catch(l=>{console.warn("Failed to initialize global knowledge directories:",l)});let t=I.commands.registerCommand("alex.initialize",async()=>{await Et("Initialize",()=>ta(e))}),n=I.commands.registerCommand("alex.reset",async()=>{await Et("Reset",()=>yn(e))}),o=I.commands.registerCommand("alex.dream",async()=>{await Et("Dream Protocol",()=>Gt(e))}),i=I.commands.registerCommand("alex.upgrade",async()=>{await Et("Upgrade",()=>ra(e))}),a=I.commands.registerCommand("alex.selfActualize",async()=>{await Et("Self-Actualization",()=>qa(e))}),s=I.commands.registerCommand("alex.syncKnowledge",async()=>{await I.window.withProgress({location:I.ProgressLocation.Notification,title:"Syncing Global Knowledge...",cancellable:!1},async()=>{let l=await rt();if(l.success){let d=await ct(),m=d?"View Gist":void 0;await I.window.showInformationMessage(`\u2705 ${l.message}`,...m?[m]:[])==="View Gist"&&d&&I.env.openExternal(I.Uri.parse(d))}else I.window.showErrorMessage(`\u274C ${l.message}`)})}),r=I.commands.registerCommand("alex.pushKnowledge",async()=>{await I.window.withProgress({location:I.ProgressLocation.Notification,title:"Pushing to Cloud...",cancellable:!1},async()=>{let l=await Pt();l.success?I.window.showInformationMessage(`\u2705 ${l.message}`):I.window.showErrorMessage(`\u274C ${l.message}`)})}),c=I.commands.registerCommand("alex.pullKnowledge",async()=>{await I.window.withProgress({location:I.ProgressLocation.Notification,title:"Pulling from Cloud...",cancellable:!1},async()=>{let l=await xt();l.success?I.window.showInformationMessage(`\u2705 ${l.message}`):I.window.showErrorMessage(`\u274C ${l.message}`)})}),u=I.commands.registerCommand("alex.openDocs",async()=>{let l=I.Uri.joinPath(e.extensionUri,"alex_docs","README.md");try{await I.commands.executeCommand("markdown.showPreview",l)}catch{let d=await I.workspace.openTextDocument(l);await I.window.showTextDocument(d)}});e.subscriptions.push(t),e.subscriptions.push(n),e.subscriptions.push(o),e.subscriptions.push(i),e.subscriptions.push(a),e.subscriptions.push(s),e.subscriptions.push(r),e.subscriptions.push(c),e.subscriptions.push(u)}async function Ol(e){let t="alex.lastKnownVersion",n=I.extensions.getExtension("fabioc-aloha.alex-cognitive-architecture");if(!n)return;let o=n.packageJSON.version,i=e.globalState.get(t);if(await e.globalState.update(t,o),!i||i===o)return;let[a]=i.split(".").map(Number),[s]=o.split(".").map(Number),r=s>a,c="Run Upgrade",u="View Changelog",l="Dismiss",d=r?`\u{1F389} Alex upgraded to v${o}! This is a major release with new features. Run the upgrade to update your workspace files.`:`\u2728 Alex updated to v${o}. Run the upgrade to sync your workspace with the latest improvements.`,m=await I.window.showInformationMessage(d,c,u,l);if(m===c)I.commands.executeCommand("alex.upgrade");else if(m===u){let p=I.Uri.joinPath(n.extensionUri,"CHANGELOG.md");I.commands.executeCommand("markdown.showPreview",p)}}function jl(){}0&&(module.exports={activate,deactivate});

@@ -5,6 +5,24 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.5] TRITRIPENTIUM - 2026-01-27
+
+### Fixed
+
+- **🔄 Upgrade Notification Collision** - Fixed notifications overlapping during upgrade
+  - Added `DreamResult` interface and `DreamOptions` with silent mode to dream protocol
+  - Upgrade now calls `runDreamProtocol` directly with `silent: true`
+  - Added 500ms delay after dream to ensure notifications fully clear
+  - No more competing notifications during automated upgrade
+
+### Improved
+
+- **📊 Dream Protocol Returns Results** - Dream now returns structured `DreamResult` for programmatic callers
+  - Includes success status, file counts, synapse counts, and report path
+  - Enables better integration with upgrade and other automated workflows
+
+---
+
 ## [3.3.4] TRIQUADRIUM - 2026-01-27
 
 ### Fixed
