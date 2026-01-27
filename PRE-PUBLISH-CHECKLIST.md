@@ -4,7 +4,21 @@ Use this checklist before each release to ensure quality and consistency.
 
 ---
 
-## 📋 Version & Metadata
+## � Authentication
+
+- [ ] **VSCE_PAT** in `.env` file is valid (not expired)
+  - Create PAT at: [Azure DevOps Tokens](https://dev.azure.com/fabioc-aloha/_usersSettings/tokens)
+  - Scopes: Marketplace (Manage)
+
+**Publish command** (loads PAT from .env):
+
+```powershell
+$env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { $_.Line.Split("=",2)[1] }) ; vsce publish
+```
+
+---
+
+## �📋 Version & Metadata
 
 **Version maintained in 3 locations only** (to reduce overhead):
 
