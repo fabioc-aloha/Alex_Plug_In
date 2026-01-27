@@ -826,16 +826,11 @@ async function performUpgrade(
         });
 
         // Step 11: Run Dream validation automatically
+        // Note: Don't wrap in withProgress - dream command has its own progress notification
         let dreamSuccess = false;
         try {
-            await vscode.window.withProgress({
-                location: vscode.ProgressLocation.Notification,
-                title: "Running Dream validation...",
-                cancellable: false
-            }, async () => {
-                await vscode.commands.executeCommand('alex.dream');
-                dreamSuccess = true;
-            });
+            await vscode.commands.executeCommand('alex.dream');
+            dreamSuccess = true;
         } catch (dreamError) {
             console.error('Dream validation failed:', dreamError);
             // Don't fail the upgrade if Dream fails - just note it

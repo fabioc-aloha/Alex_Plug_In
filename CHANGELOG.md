@@ -5,6 +5,17 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.4] TRIQUADRIUM - 2026-01-27
+
+### Fixed
+
+- **🔄 Upgrade Progress Notification** - Fixed nested progress notification conflict during upgrade
+  - Removed redundant `withProgress` wrapper around Dream validation call
+  - Dream command already has its own progress notification
+  - Eliminates "command being executed / second command discarded" warning
+
+---
+
 ## [3.3.3] TRITRITRIUM - 2026-01-26
 
 ### Added
