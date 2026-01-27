@@ -25,6 +25,26 @@ interface DreamReport {
     orphanedFiles: string[];
 }
 
+/**
+ * Result returned by runDreamProtocol for programmatic callers
+ */
+export interface DreamResult {
+    success: boolean;
+    totalFiles: number;
+    totalSynapses: number;
+    brokenCount: number;
+    repairedCount: number;
+    reportPath?: string;
+}
+
+/**
+ * Options for running dream protocol
+ */
+export interface DreamOptions {
+    /** If true, don't show result dialogs (for programmatic callers) */
+    silent?: boolean;
+}
+
 /* eslint-disable @typescript-eslint/naming-convention */
 const consolidatedMappings: { [key: string]: string } = {
     "enhanced-meditation-protocol.prompt.md": "unified-meditation-protocols.prompt.md",
@@ -39,22 +59,30 @@ const consolidatedMappings: { [key: string]: string } = {
 };
 /* eslint-enable @typescript-eslint/naming-convention */
 
-export async function runDreamProtocol(context: vscode.ExtensionContext) {
+export async function runDreamProtocol(context: vscode.ExtensionContext, options?: DreamOptions): Promise<DreamResult | undefined> {
+    const silent = options?.silent ?? false;
+    
     // Use smart workspace folder detection for multi-folder workspaces
     const workspaceResult = await getAlexWorkspaceFolder(true); // true = require Alex installed
     
     if (!workspaceResult.found) {
         if (workspaceResult.cancelled) {
-            return; // User cancelled folder selection
+            return undefined; // User cancelled folder selection
         }
-        vscode.window.showErrorMessage(
-            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.'
-        );
-        return;
+        if (!silent) {
+            vscode.window.showErrorMessage(
+                workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.'
+            );
+        }
+        return undefined;
     }
 
     const rootPath = workspaceResult.rootPath!;
     const workspaceFolder = workspaceResult.workspaceFolder!;
+
+    // Variables to capture result from within withProgress
+    let dreamResult: DreamResult | undefined;
+    let reportPath: string | undefined;
 
     await vscode.window.withProgress({
         location: vscode.ProgressLocation.Notification,
@@ -83,14 +111,17 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
         allFiles = [...new Set(allFiles)];
 
         if (allFiles.length === 0) {
-            const result = await vscode.window.showWarningMessage(
-                'No Alex memory files found in this workspace.\n\nWould you like to initialize Alex Cognitive Architecture now?',
-                'Initialize Alex',
-                'Cancel'
-            );
-            if (result === 'Initialize Alex') {
-                await vscode.commands.executeCommand('alex.initialize');
+            if (!silent) {
+                const result = await vscode.window.showWarningMessage(
+                    'No Alex memory files found in this workspace.\n\nWould you like to initialize Alex Cognitive Architecture now?',
+                    'Initialize Alex',
+                    'Cancel'
+                );
+                if (result === 'Initialize Alex') {
+                    await vscode.commands.executeCommand('alex.initialize');
+                }
             }
+            dreamResult = { success: false, totalFiles: 0, totalSynapses: 0, brokenCount: 0, repairedCount: 0 };
             return;
         }
 
@@ -227,43 +258,56 @@ export async function runDreamProtocol(context: vscode.ExtensionContext) {
         };
 
         const reportContent = generateReportMarkdown(report);
-        const reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${Date.now()}.md`);
+        reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${Date.now()}.md`);
         await fs.ensureDir(path.dirname(reportPath));
         await fs.writeFile(reportPath, reportContent);
 
-        // 5. Show result
-        if (brokenSynapses.length > 0) {
+        // Set result for return
+        dreamResult = {
+            success: brokenSynapses.length === 0,
+            totalFiles: allFiles.length,
+            totalSynapses: synapses.length,
+            brokenCount: brokenSynapses.length,
+            repairedCount: repairedSynapses.length,
+            reportPath: reportPath
+        };
+    });
+
+    // 5. Show result (only if not silent)
+    if (!silent && dreamResult && reportPath) {
+        if (dreamResult.brokenCount > 0) {
             const result = await vscode.window.showWarningMessage(
-                `⚠️ Dream Protocol found ${brokenSynapses.length} broken synapse${brokenSynapses.length > 1 ? 's' : ''}!\n\n` +
-                `${repairedSynapses.length > 0 ? `✅ Auto-repaired: ${repairedSynapses.length}\n` : ''}` +
-                `❌ Need manual repair: ${brokenSynapses.length}\n\n` +
+                `⚠️ Dream Protocol found ${dreamResult.brokenCount} broken synapse${dreamResult.brokenCount > 1 ? 's' : ''}!\n\n` +
+                `${dreamResult.repairedCount > 0 ? `✅ Auto-repaired: ${dreamResult.repairedCount}\n` : ''}` +
+                `❌ Need manual repair: ${dreamResult.brokenCount}\n\n` +
                 'Review the report for details on broken connections.',
                 'View Report',
                 'Close'
             );
-            if (result !== 'View Report') {
-                return;
+            if (result === 'View Report') {
+                const doc = await vscode.workspace.openTextDocument(reportPath);
+                await vscode.window.showTextDocument(doc);
             }
         } else {
-            const healthStatus = synapses.length > 50 ? 'excellent' : synapses.length > 20 ? 'good' : 'developing';
+            const healthStatus = dreamResult.totalSynapses > 50 ? 'excellent' : dreamResult.totalSynapses > 20 ? 'good' : 'developing';
             const result = await vscode.window.showInformationMessage(
                 `✅ Neural network is healthy!\n\n` +
                 `📊 Statistics:\n` +
-                `• ${allFiles.length} memory files\n` +
-                `• ${synapses.length} active synapses\n` +
-                `${repairedSynapses.length > 0 ? `• ${repairedSynapses.length} auto-repaired\n` : ''}` +
+                `• ${dreamResult.totalFiles} memory files\n` +
+                `• ${dreamResult.totalSynapses} active synapses\n` +
+                `${dreamResult.repairedCount > 0 ? `• ${dreamResult.repairedCount} auto-repaired\n` : ''}` +
                 `• Network health: ${healthStatus}`,
                 'View Full Report',
                 'Close'
             );
-            if (result !== 'View Full Report') {
-                return;
+            if (result === 'View Full Report') {
+                const doc = await vscode.workspace.openTextDocument(reportPath);
+                await vscode.window.showTextDocument(doc);
             }
         }
-        
-        const doc = await vscode.workspace.openTextDocument(reportPath);
-        await vscode.window.showTextDocument(doc);
-    });
+    }
+
+    return dreamResult;
 }
 
 function generateReportMarkdown(report: DreamReport): string {

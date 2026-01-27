@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { getAlexWorkspaceFolder } from '../shared/utils';
+import { runDreamProtocol, DreamResult } from './dream';
 
 interface FileManifestEntry {
     type: 'system' | 'hybrid' | 'user-created';
@@ -825,16 +826,18 @@ async function performUpgrade(
             await generateUpgradeReport(rootPath, oldVersion, newVersion, report, backupDir, timestamp, migrationResults);
         });
 
-        // Step 11: Run Dream validation automatically
-        // Note: Don't wrap in withProgress - dream command has its own progress notification
-        let dreamSuccess = false;
+        // Step 11: Run Dream validation automatically (in silent mode to avoid notification collision)
+        let dreamResult: DreamResult | undefined;
         try {
-            await vscode.commands.executeCommand('alex.dream');
-            dreamSuccess = true;
+            dreamResult = await runDreamProtocol(context, { silent: true });
         } catch (dreamError) {
             console.error('Dream validation failed:', dreamError);
             // Don't fail the upgrade if Dream fails - just note it
         }
+        const dreamSuccess = dreamResult?.success ?? false;
+
+        // Brief delay to ensure any lingering notifications are cleared
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         // Step 12: Clean up UPGRADE-INSTRUCTIONS.md if it exists (from previous incomplete upgrades)
         const instructionsPath = path.join(rootPath, 'UPGRADE-INSTRUCTIONS.md');
