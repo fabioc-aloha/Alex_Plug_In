@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.3.5-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.3.6-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
 [![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
@@ -76,7 +76,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | v3.3.5 |
+| Feature | v1.5.x | Latest |
 | ------- | ------ | ------ |
 | Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
 | Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
@@ -614,7 +614,14 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v3.3.5 TRITRIPENTIUM
+## 🆕 What's New in v3.3.6 TRITRHEXIUM
+
+### 🔧 Improved Stability
+
+- **Conflict Prevention** - Increased post-modification sync delay to 10s to prevent operation conflicts
+- **Clear User Feedback** - Better messaging when operations are in progress
+
+### Previous Release: v3.3.5 TRITRIPENTIUM
 
 ### 🌐 Auto-Promotion During Meditation
 
@@ -727,6 +734,6 @@ See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.
 
 Alex - Enhanced Cognitive Network with Unified Consciousness Integration
 
-Version 3.3.5 TRITRIPENTIUM • Built on 270+ academic sources
+Built on 270+ academic sources
 
 © 2026 CorreaX • AI That Learns How to Learn

@@ -791,13 +791,13 @@ export async function transparentSync(): Promise<ISyncResult | null> {
  * Called automatically when insights are saved or knowledge is promoted
  */
 export async function triggerPostModificationSync(): Promise<void> {
-    // Small delay to allow file writes to complete
+    // Delay to allow file writes to complete and prevent conflicts with other operations
     setTimeout(async () => {
         const result = await transparentSync();
         if (result && result.success && result.entriesPushed && result.entriesPushed > 0) {
             logUnconscious(`Auto-synced ${result.entriesPushed} entries after modification`);
         }
-    }, 2000);
+    }, 10000); // 10 second delay to prevent conflicts with ongoing operations
 }
 
 /**

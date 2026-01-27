@@ -6,11 +6,26 @@ Use this checklist before each release to ensure quality and consistency.
 
 ## 📋 Version & Metadata
 
-- [ ] **package.json version** matches release version
-- [ ] **CHANGELOG.md** has entry for new version with date
-- [ ] **README.md** badge shows correct version
-- [ ] **copilot-instructions.md** version matches (if applicable)
-- [ ] **participant.ts** `/status` command shows correct version
+**Version maintained in 3 locations only** (to reduce overhead):
+
+- [ ] **package.json** - `"version": "X.Y.Z"` (required for VS Code)
+- [ ] **CHANGELOG.md** - `## [X.Y.Z] CODENAME - YYYY-MM-DD` at top
+- [ ] **copilot-instructions.md** - Header line 4: `**Version**: X.Y.Z CODENAME`
+
+**Naming Convention**: 0=nil, 1=un, 2=bi, 3=tri, 4=quad, 5=pent, 6=hex, 7=sept, 8=oct, 9=enn
+
+- Example: 3.3.6 = TRITRHEXIUM (tri-tri-hex)
+
+**Verify NO version in these locations** (removed to prevent drift):
+
+- [ ] copilot-instructions.md "Version Compatibility" section - should have NO version
+- [ ] copilot-instructions.md "Reference" section - should have NO version (only naming convention)
+- [ ] README.md comparison table - should say "Latest" not specific version
+- [ ] README.md footer - should have NO version number
+
+**Auto-updated (verify after above changes):**
+
+- [ ] README.md badge - `version-X.Y.Z` in shield URL
 
 ## 🔧 Code Quality
 
