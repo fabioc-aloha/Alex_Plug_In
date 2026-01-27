@@ -106,13 +106,27 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
         let brokenSynapses = 0;
         const issues: string[] = [];
 
+        // Create fresh regex instance to avoid state leakage
         const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
 
         for (const pattern of patterns) {
+            // Check for cancellation
+            if (token.isCancellationRequested) {
+                return new vscode.LanguageModelToolResult([
+                    new vscode.LanguageModelTextPart('Operation cancelled.')
+                ]);
+            }
+
             const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
             const files = await vscode.workspace.findFiles(relativePattern);
             
             for (const file of files) {
+                // Check for cancellation before processing each file
+                if (token.isCancellationRequested) {
+                    return new vscode.LanguageModelToolResult([
+                        new vscode.LanguageModelTextPart('Operation cancelled.')
+                    ]);
+                }
                 totalFiles++;
                 try {
                     const content = await fs.readFile(file.fsPath, 'utf-8');
@@ -230,10 +244,23 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
         const results: { file: string; matches: string[] }[] = [];
 
         for (const pattern of patterns) {
+            // Check for cancellation
+            if (token.isCancellationRequested) {
+                return new vscode.LanguageModelToolResult([
+                    new vscode.LanguageModelTextPart('Operation cancelled.')
+                ]);
+            }
+
             const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
             const files = await vscode.workspace.findFiles(relativePattern);
             
             for (const file of files) {
+                // Check for cancellation before processing each file
+                if (token.isCancellationRequested) {
+                    return new vscode.LanguageModelToolResult([
+                        new vscode.LanguageModelTextPart('Operation cancelled.')
+                    ]);
+                }
                 try {
                     const content = await fs.readFile(file.fsPath, 'utf-8');
                     const lines = content.split('\n');
@@ -881,13 +908,27 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
             '.github/domain-knowledge/*.md'
         ];
 
+        // Create fresh regex instance to avoid state leakage
         const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
 
         for (const pattern of synapsePatterns) {
+            // Check for cancellation
+            if (token.isCancellationRequested) {
+                return new vscode.LanguageModelToolResult([
+                    new vscode.LanguageModelTextPart('Self-actualization cancelled.')
+                ]);
+            }
+
             const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
             const files = await vscode.workspace.findFiles(relativePattern);
             
             for (const file of files) {
+                // Check for cancellation before processing each file
+                if (token.isCancellationRequested) {
+                    return new vscode.LanguageModelToolResult([
+                        new vscode.LanguageModelTextPart('Self-actualization cancelled.')
+                    ]);
+                }
                 report.synapseHealth.totalFiles++;
                 try {
                     const content = await fs.readFile(file.fsPath, 'utf-8');

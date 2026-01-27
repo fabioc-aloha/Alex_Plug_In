@@ -14,13 +14,23 @@ import { GlobalKnowledgeCategory } from '../shared/constants';
 
 /**
  * Patterns that indicate valuable learnings in conversation
+ * NOTE: These are strings to avoid regex state leakage with /g flag
+ * Create new RegExp instances per call to prevent lastIndex issues
  */
-const INSIGHT_PATTERNS = [
-    /(?:i (?:learned|discovered|realized|found out|figured out)|the (?:solution|fix|answer) (?:is|was)|turns out|the trick is|the key is|important to note|pro tip|best practice)/i,
-    /(?:this works because|the reason is|what fixed it|solved by|resolved by)/i,
-    /(?:always remember to|never forget to|make sure to|be careful to)/i,
-    /(?:debugging tip|performance tip|security tip)/i
+const INSIGHT_PATTERN_STRINGS = [
+    '(?:i (?:learned|discovered|realized|found out|figured out)|the (?:solution|fix|answer) (?:is|was)|turns out|the trick is|the key is|important to note|pro tip|best practice)',
+    '(?:this works because|the reason is|what fixed it|solved by|resolved by)',
+    '(?:always remember to|never forget to|make sure to|be careful to)',
+    '(?:debugging tip|performance tip|security tip)'
 ];
+
+/**
+ * Get fresh regex instances for insight detection
+ * Avoids state leakage from lastIndex in global regexes
+ */
+function getInsightPatterns(): RegExp[] {
+    return INSIGHT_PATTERN_STRINGS.map(p => new RegExp(p, 'i'));
+}
 
 /**
  * Keywords that suggest valuable domain knowledge
@@ -38,9 +48,9 @@ const DOMAIN_KEYWORDS = [
 function detectPotentialInsight(text: string): { detected: boolean; confidence: number; keywords: string[] } {
     const lowerText = text.toLowerCase();
     
-    // Check for insight patterns
+    // Check for insight patterns (fresh instances to avoid regex state leakage)
     let patternMatches = 0;
-    for (const pattern of INSIGHT_PATTERNS) {
+    for (const pattern of getInsightPatterns()) {
         if (pattern.test(text)) {
             patternMatches++;
         }
@@ -167,6 +177,16 @@ const SUCCESS_PATTERNS = [
 let frustrationLevel = 0;
 let lastFrustrationCheck = 0;
 const FRUSTRATION_DECAY_MS = 300000; // 5 minutes
+
+/**
+ * Reset session state - call when chat participant is deactivated or on new session
+ * Prevents state bleeding between sessions
+ */
+export function resetSessionState(): void {
+    frustrationLevel = 0;
+    lastFrustrationCheck = 0;
+    conversationBuffer = [];
+}
 
 /**
  * Emotional state analysis result

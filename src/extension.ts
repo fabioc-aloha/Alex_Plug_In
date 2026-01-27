@@ -3,7 +3,7 @@ import { initializeArchitecture, resetArchitecture } from './commands/initialize
 import { runDreamProtocol } from './commands/dream';
 import { upgradeArchitecture } from './commands/upgrade';
 import { runSelfActualization } from './commands/self-actualization';
-import { registerChatParticipant } from './chat/participant';
+import { registerChatParticipant, resetSessionState } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 import { registerGlobalKnowledgeTools, ensureGlobalKnowledgeDirectories, registerCurrentProject } from './chat/globalKnowledge';
 import { registerCloudSyncTools, syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync } from './chat/cloudSync';
@@ -218,4 +218,12 @@ async function checkVersionUpgrade(context: vscode.ExtensionContext): Promise<vo
     }
 }
 
-export function deactivate() {}
+/**
+ * Clean up resources when extension is deactivated
+ * Note: Background sync timer cleanup is handled via context.subscriptions
+ */
+export function deactivate() {
+    // Reset chat participant session state to prevent state bleeding
+    resetSessionState();
+    console.log('Alex Cognitive Architecture deactivated');
+}

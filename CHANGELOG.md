@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Prevents "Another Alex operation is already in progress" conflicts
   - Gives ongoing operations more time to complete before auto-sync triggers
 
+- **🐛 Regex State Leakage** - Fixed insight detection patterns using global regex
+  - Pattern regexes now created fresh on each call to avoid `lastIndex` state issues
+  - Prevents inconsistent insight detection across calls
+
 ### Improved
 
 - **📝 Version Management Cleanup** - Reduced redundant version references
@@ -20,6 +24,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed duplicate versions from Reference section and Version Compatibility section
   - README uses "Latest" in comparison table instead of specific version
   - Reduces maintenance overhead and prevents version drift
+
+- **⏹️ Cancellation Token Support** - Added proper cancellation handling in tools
+  - SynapseHealthTool, MemorySearchTool, and SelfActualizationTool now check for cancellation
+  - Long-running operations can be interrupted cleanly
+
+- **🧹 Session State Cleanup** - Added proper deactivation handling
+  - `resetSessionState()` function clears emotional tracking and conversation buffers
+  - Prevents state bleeding between VS Code sessions
+  - Proper logging on extension deactivation
 
 ---
 
@@ -209,13 +222,15 @@ Instead of just documenting aspirations, Alex now acts on them.
 ## [Unreleased] - v3.3.0 Planning
 
 ### 🔴 High Priority Bug Fixes
-- [ ] **Regex State Leakage** - `INSIGHT_PATTERNS` regexes in participant.ts need new instances per call
+
+- [x] **Regex State Leakage** - ✅ Fixed in v3.3.6 - Pattern regexes now created fresh on each call
 - [ ] **Profile Path Mismatch** - UserProfileTool uses `/config/` instead of `/.github/config/`
 - [ ] **DRY Violation** - Synapse scanning logic duplicated in 4 places (use shared `SYNAPSE_REGEX`)
 - [ ] **Auth Error Handling** - Background sync doesn't distinguish auth errors from network errors
 
 ### 🟡 Medium Priority Enhancements
-- [ ] **Cancellation Token Support** - Add token checks in SynapseHealthTool, ArchitectureStatusTool, MemorySearchTool
+
+- [x] **Cancellation Token Support** - ✅ Fixed in v3.3.6 - Added checks in SynapseHealthTool, MemorySearchTool, SelfActualizationTool
 - [ ] **Auto-Insight Debouncing** - Prevent duplicate insights from related messages
 - [ ] **Standardized Error Messages** - Create error formatting utility with consistent emoji usage
 - [ ] **Progress Reporting** - Add progress callbacks for long-running tool operations
@@ -223,10 +238,11 @@ Instead of just documenting aspirations, Alex now acts on them.
 - [ ] **Output Channel Disposal** - Fix potential memory leak in cloudSync.ts
 
 ### 🟢 Code Quality Improvements
+
 - [ ] **Magic Numbers** - Move `BACKGROUND_SYNC_INTERVAL_MS` (300000), `MAX_BUFFER_SIZE` (5), etc. to constants.ts
 - [ ] **Async Pattern Consistency** - Standardize on async/await over .then().catch()
 - [ ] **JSDoc Coverage** - Add documentation to public functions in utils.ts, globalKnowledge.ts
-- [ ] **Unused Token Parameters** - Remove or use cancellation tokens in handlers
+- [x] **Unused Token Parameters** - ✅ Fixed in v3.3.6 - Cancellation tokens now used in tool handlers
 - [ ] **Extension ID Constant** - Move hardcoded `'fabioc-aloha.alex-cognitive-architecture'` to constants
 
 ### 🔵 New Features
