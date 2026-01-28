@@ -15,6 +15,50 @@
 
 This roadmap enables Alex Cognitive Architecture to communicate with **Microsoft 365 Copilot**, bringing Alex's unique personality, cross-project knowledge, and learning capabilities to Teams, Outlook, Word, and other M365 applications.
 
+**Key Value**: Your development learnings follow you everywhere in M365, not just VS Code.
+
+---
+
+## 🚀 Features by Phase
+
+### Phase 1: Declarative Agent (v3.4.0)
+
+| Feature | Description |
+|---|---|
+| Alex in Teams/Outlook/Word | Chat with Alex directly in M365 apps |
+| Cross-Project Knowledge Search | "What patterns have I learned about error handling?" |
+| Personalized Responses | Alex knows your name, preferences, learning goals |
+| Conversation Starters | Quick prompts for common tasks |
+| Web Search + Code Interpreter | Copilot's built-in capabilities with Alex's personality |
+| SharePoint Knowledge Grounding | Alex references your synced knowledge base |
+
+### Phase 2: API Plugin (v3.5.0)
+
+| Feature | Description |
+|---|---|
+| Real-time Knowledge Access | M365 Alex queries your live global knowledge |
+| Recent Insights Feed | "What did I learn this week across all projects?" |
+| Pattern Library | Access reusable patterns from any M365 app |
+| Profile Sync | Same personalization in VS Code and Teams |
+
+### Phase 3: Custom Engine (v3.6.0+)
+
+| Feature | Description |
+|---|---|
+| Bidirectional Sync | Learn in Teams, appears in VS Code |
+| Full Cognitive Protocols | Meditation sessions in M365 |
+| Teams Bot | Direct messages, proactive notifications |
+| Meeting Integration | Alex summarizes meetings, tracks action items |
+
+### Example Use Cases
+
+- **Teams meeting**: "Alex, what patterns do we have for API rate limiting?"
+- **Word document**: "Alex, find my notes on documentation best practices"
+- **Outlook email**: "Alex, help me draft a response about our architecture decision"
+- **Mobile**: Chat with Alex from Teams mobile app
+
+---
+
 ### Vision
 
 ```text
