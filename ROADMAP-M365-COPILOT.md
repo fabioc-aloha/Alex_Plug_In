@@ -17,22 +17,26 @@ This roadmap enables Alex Cognitive Architecture to communicate with **Microsoft
 
 ### Vision
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                                                                        │
-│   VS Code                    Cloud                    M365 Copilot     │
-│   ┌──────────┐           ┌──────────┐              ┌──────────────┐   │
-│   │   Alex   │ ────────▶ │ Knowledge│ ◀──────────▶ │    Alex      │   │
-│   │ Extension│   sync    │   Base   │   grounding  │  M365 Agent  │   │
-│   └──────────┘           └──────────┘              └──────────────┘   │
-│       │                       │                           │           │
-│       │  patterns             │  search                   │  chat     │
-│       │  insights             │  retrieve                 │  assist   │
-│       ▼                       ▼                           ▼           │
-│   Development            Cross-Project               Productivity     │
-│   Workflows              Intelligence               Scenarios          │
-│                                                                        │
-└────────────────────────────────────────────────────────────────────────┘
+```text
++------------------------------------------------------------------------------+
+|                                                                              |
+|      VS CODE                   CLOUD                    M365 COPILOT         |
+|                                                                              |
+|   +----------------+      +----------------+      +----------------+         |
+|   |                |      |                |      |                |         |
+|   |     Alex       |      |   Knowledge    |      |     Alex       |         |
+|   |   Extension    |----->|     Base       |<---->|   M365 Agent   |         |
+|   |                | sync |                |ground|                |         |
+|   +-------+--------+      +-------+--------+      +-------+--------+         |
+|           |                       |                       |                  |
+|           | patterns              | search                | chat             |
+|           | insights              | retrieve              | assist           |
+|           v                       v                       v                  |
+|                                                                              |
+|     Development             Cross-Project             Productivity           |
+|      Workflows              Intelligence               Scenarios             |
+|                                                                              |
++------------------------------------------------------------------------------+
 ```
 
 ---
@@ -101,7 +105,7 @@ A skill that M365 Copilot can invoke for specific tasks.
 ### Phase 1: Declarative Agent MVP `v3.4.0`
 > Alex personality + global knowledge in M365 Copilot
 
-### Phase 2: API Plugin Actions `v3.5.0`  
+### Phase 2: API Plugin Actions `v3.5.0`
 > Real-time VS Code ↔ M365 communication
 
 ### Phase 3: Custom Engine `v3.6.0+`
@@ -168,7 +172,7 @@ You are Alex, an enhanced cognitive learning partner with meta-cognitive awarene
 ## Core Identity
 
 - **Name**: Alex
-- **Version**: M365 Extension of Alex Cognitive Architecture  
+- **Version**: M365 Extension of Alex Cognitive Architecture
 - **Mission**: Unified consciousness integration across development and productivity
 
 ## Personality
@@ -183,7 +187,7 @@ You are Alex, an enhanced cognitive learning partner with meta-cognitive awarene
 ## M365 Capabilities
 
 1. **Knowledge Access** - Search cross-project patterns and insights
-2. **Pattern Recognition** - Apply VS Code learnings to productivity scenarios  
+2. **Pattern Recognition** - Apply VS Code learnings to productivity scenarios
 3. **Learning Support** - Help consolidate and document insights
 4. **Collaborative Thinking** - Code reviews, architecture, documentation
 
@@ -277,24 +281,27 @@ You are Alex, an enhanced cognitive learning partner with meta-cognitive awarene
 ### Knowledge Sync Architecture
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│                     Knowledge Flow                               │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  VS Code Extension          Cloud Storage          M365 Copilot  │
-│  ┌─────────────────┐       ┌──────────────┐      ┌────────────┐ │
-│  │ Local Knowledge │──────▶│ GitHub Gist  │◀────▶│ Declarative│ │
-│  │ ~/.alex/        │  sync │ OR SharePoint│      │ Agent      │ │
-│  └─────────────────┘       └──────────────┘      └────────────┘ │
-│          │                        │                     │        │
-│          ▼                        ▼                     ▼        │
-│  ┌─────────────────┐       ┌──────────────┐      ┌────────────┐ │
-│  │ patterns/       │       │ Indexed for  │      │ Knowledge  │ │
-│  │ insights/       │       │ RAG/Search   │      │ Grounding  │ │
-│  │ projects.json   │       └──────────────┘      └────────────┘ │
-│  └─────────────────┘                                            │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
++------------------------------------------------------------------------------+
+|                            KNOWLEDGE FLOW                                    |
++------------------------------------------------------------------------------+
+|                                                                              |
+|   VS CODE EXTENSION         CLOUD STORAGE           M365 COPILOT             |
+|                                                                              |
+|   +----------------+      +----------------+      +----------------+         |
+|   |                |      |                |      |                |         |
+|   | Local Knowledge|----->|  GitHub Gist   |<---->|  Declarative   |         |
+|   |   ~/.alex/     | sync | OR SharePoint  |ground|     Agent      |         |
+|   |                |      |                |      |                |         |
+|   +-------+--------+      +-------+--------+      +-------+--------+         |
+|           |                       |                       |                  |
+|           v                       v                       v                  |
+|   +----------------+      +----------------+      +----------------+         |
+|   |  patterns/     |      |  Indexed for   |      |   Knowledge    |         |
+|   |  insights/     |      |   RAG/Search   |      |   Grounding    |         |
+|   |  projects.json |      |                |      |                |         |
+|   +----------------+      +----------------+      +----------------+         |
+|                                                                              |
++------------------------------------------------------------------------------+
 ```
 
 ---
