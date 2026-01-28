@@ -40,7 +40,7 @@ This roadmap enables Alex Cognitive Architecture to communicate with **Microsoft
 ## 📊 Integration Options
 
 | Option | Complexity | Timeline | Best For |
-|--------|:----------:|:--------:|----------|
+|---|:---:|:---:|---|
 | **Declarative Agent** ⭐ | Medium | 2-4 weeks | MVP - Quick deployment with Copilot's AI |
 | **Custom Engine Agent** | High | 4-8 weeks | Full control over AI behavior |
 | **Message Extension** | Low | 1-2 weeks | Bounded, skill-based tasks |
