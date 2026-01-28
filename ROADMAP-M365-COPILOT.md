@@ -4,10 +4,952 @@
 
 | | |
 |---|---|
-| **Target Version** | 3.4.0 TRITIQUADIUM |
-| **Status** | 📋 Planning |
+| **Target Version** | 4.0.0 QUADRUNIUM |
+| **Codename** | 🦖 **Dino** |
+| **Status** | 🔄 In Progress - Basic Agent Working! |
 | **Created** | 2026-01-27 |
+| **Updated** | 2026-01-28 |
 | **Author** | Alex Cognitive Architecture Team |
+
+---
+
+> ## 🚨 CRITICAL: Application (client) ID Required!
+>
+> **Root Cause of "Spinning Wheel Forever"**: Missing Azure AD Application ID
+>
+> After uploading your app package to the Developer Portal, you **MUST**:
+> 1. Go to **Configure** → **Basic information**
+> 2. Add **Application (client) ID** from your Azure AD app registration
+> 3. Without this, the agent will load but spin indefinitely when invoked
+>
+> | App Name | Application (client) ID |
+> |----------|-------------------------|
+> | Alex Dev | `836d43b2-c343-4bba-88cf-5c2f3fd9fd14` |
+> | Alex Test | `32eb143b-1f1d-4a66-b5e7-727e8c372cca` |
+
+---
+
+## 🦖 Project Dino - Architecture Overview
+
+> v4.0.0 QUADRUNIUM has grown into a monster - here's the full scope
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│                       🦖 v4.0.0 QUADRUNIUM "DINO" - THE MONSTER                        │
+│                                                                                        │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                          VS CODE EXTENSION (existing)                            │  │
+│  │  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────────────────────┐  │  │
+│  │  │ Initialize │  │   Dream    │  │  Meditate  │  │  NEW: Export for M365      │  │  │
+│  │  │ Upgrade    │  │   Synapse  │  │  Actualize │  │  NEW: alex.m365.enabled    │  │  │
+│  │  └────────────┘  └────────────┘  └────────────┘  └────────────────────────────┘  │  │
+│  └───────────────────────────────────────┬──────────────────────────────────────────┘  │
+│                                          │                                             │
+│                                          ▼                                             │
+│  ┌──────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                             CLOUD SYNC (existing)                                │  │
+│  │                        GitHub Gists ←→ ~/.alex/global-knowledge/                 │  │
+│  └───────────────────────────────────────┬──────────────────────────────────────────┘  │
+│                                          │                                             │
+│           ┌──────────────────────────────┼──────────────────────────────┐              │
+│           │                              │                              │              │
+│           ▼                              ▼                              ▼              │
+│  ┌────────────────────┐    ┌────────────────────────┐    ┌────────────────────────┐   │
+│  │                    │    │                        │    │                        │   │
+│  │  DECLARATIVE AGENT │    │       API PLUGIN       │    │   PROACTIVE MEMORY     │   │
+│  │  ────────────────  │    │       ──────────       │    │   ────────────────     │   │
+│  │                    │    │                        │    │                        │   │
+│  │  • manifest v1.6   │    │  • manifest v2.3       │    │  • reminders.json      │   │
+│  │  • alex-system-    │    │  • openapi.yaml        │    │  • user-notes.md       │   │
+│  │    prompt.md       │    │  • OAuth/API key auth  │    │  • alex-obs.md         │   │
+│  │  • 6 conversation  │    │                        │    │  • keyword triggers    │   │
+│  │    starters        │    │  Endpoints:            │    │  • date triggers       │   │
+│  │  • capabilities:   │    │  ├─ /searchKnowledge   │    │  • project scope       │   │
+│  │    - WebSearch     │    │  ├─ /getInsights       │    │                        │   │
+│  │    - CodeInterp.   │    │  ├─ /getProfile        │    │  Scopes:               │   │
+│  │    - OneDrive/SP   │    │  └─ /getNotes (NEW)    │    │  ├─ ~/.alex/notes/     │   │
+│  │    - EmbeddedKnowl │    │                        │    │  └─ .github/alex-notes │   │
+│  │                    │    │                        │    │                        │   │
+│  └────────────────────┘    └───────────┬────────────┘    └────────────────────────┘   │
+│                                        │                                               │
+│                                        ▼                                               │
+│  ┌──────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                              AZURE FUNCTIONS                                     │  │
+│  │                        (Node.js v4, Flex Consumption)                            │  │
+│  │                                                                                  │  │
+│  │   ┌───────────────┐  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐    │  │
+│  │   │searchKnowledge│  │  getInsights  │  │  getProfile   │  │   getNotes    │    │  │
+│  │   │    index.ts   │  │    index.ts   │  │    index.ts   │  │    index.ts   │    │  │
+│  │   └───────────────┘  └───────────────┘  └───────────────┘  └───────────────┘    │  │
+│  │                                                                                  │  │
+│  │   Data Sources: GitHub Gists API + Local ~/.alex/ cache                         │  │
+│  └──────────────────────────────────────────────────────────────────────────────────┘  │
+│                                          │                                             │
+│                                          ▼                                             │
+│  ┌──────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                               M365 COPILOT                                       │  │
+│  │                                                                                  │  │
+│  │      ┌──────────┐      ┌──────────┐      ┌──────────┐      ┌──────────┐         │  │
+│  │      │  Teams   │      │ Outlook  │      │   Word   │      │  Mobile  │         │  │
+│  │      │          │      │          │      │          │      │          │         │  │
+│  │      │ Meetings │      │  Email   │      │   Docs   │      │ On-the-go│         │  │
+│  │      │ Chat     │      │ Planning │      │ Writing  │      │ Access   │         │  │
+│  │      └──────────┘      └──────────┘      └──────────┘      └──────────┘         │  │
+│  └──────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                        │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│  EFFORT: ~40 hours  │  NEW FILES: 15+  │  NEW DEPS: Azure Functions, M365 schemas     │
+│  RISK: Medium       │  COMPLEXITY: 🔴  │  TESTING: Dev tenant + local + cloud         │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📋 Implementation Tracker
+
+> Track progress on 🦖 Dino (v4.0.0 QUADRUNIUM) implementation
+
+| # | Task | Status | Description |
+|:-:|------|:------:|-------------|
+| 1 | ~~Install M365 Agents Toolkit~~ | ✅ | Already installed (`teamsdevapp.ms-teams-vscode-extension`) |
+| 2 | ~~Technical Debt Assessment~~ | ✅ | Audited codebase, no blockers found |
+| 3 | ~~Set up M365 tenant~~ | ✅ | Used Microsoft corporate tenant with Copilot license |
+| 4 | ~~Create alex-m365-agent project~~ | ✅ | Scaffolded at `c:\Development\alex-m365-agent` |
+| 5 | ~~Create declarative agent manifest~~ | ✅ | Built declarativeAgent.json (v1.3) - simplified for compatibility |
+| 6 | ~~Port Alex system prompt~~ | ✅ | Inlined instructions with cognitive protocols (meditate, dream, self-actualize) |
+| 7 | ~~Design API endpoints~~ | ✅ | OpenAPI spec for 5 endpoints complete |
+| 8 | Implement Azure Functions | 🔄 | Dependencies installed, TypeScript compiles ✓, need real API logic |
+| 9 | ~~Create API plugin manifest~~ | ✅ | Built alex-knowledge-plugin.json (v2.3) - not yet deployed |
+| 10 | **Design Proactive Memory** | ⬜ | Architecture for reminders, notes, observations, and learning progress |
+| 11 | **Implement Proactive Memory** | ⬜ | Build notes storage, reminder engine, proactive triggers |
+| 12 | **Add Learning Progress Tracking** | ⬜ | Track skills practiced, suggest consolidation to DK files |
+| 13 | **Add Time Awareness** | ⬜ | Gentle session duration tracking, break suggestions |
+| 14 | Add VS Code export command | ⬜ | Implement 'Alex: Export for M365' with `alex.m365.enabled` |
+| 15 | ~~Test in M365 Copilot~~ | ✅ | **🦖 DINO IS ALIVE!** Alex recognizes user via M365 Graph context |
+| 16 | ~~Polish app package~~ | ✅ | 🦖 emoji icons, partnership credit, 10 conversation starters, rich description |
+| 17 | ~~Deploy automation~~ | ✅ | Created `deploy.ps1` script + `teamsapp` CLI validation |
+| 18 | **Enable M365 capabilities** | ⬜ | Add OneDrive, Calendar, Email, Teams, People for rich context |
+| 19 | Write user documentation | 🔄 | Created DEPLOYMENT-CHECKLIST.md, documented lessons learned |
+| 20 | Update CHANGELOG | ⬜ | Document v4.0.0 QUADRUNIUM features |
+
+**Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
+
+---
+
+## 🔧 Technical Specifications (Verified 2026-01-28)
+
+### Schema Versions
+
+| Schema | Working Version | Latest | Notes |
+|--------|-----------------|--------|-------|
+| **Declarative Agent Manifest** | **v1.3** ✅ | v1.6 | v1.3 more compatible with Developer Portal |
+| **API Plugin Manifest** | **v2.3** | v2.3 | Not yet deployed to agent |
+| **App Manifest (Teams)** | **v1.19** ✅ | v1.22 | v1.19 simpler, works with copilotAgents |
+| **M365 Agents YAML** | v1.3 | v1.9 | CLI v2.x only supports up to v1.3 |
+
+### M365 Agents Toolkit
+
+| Property | Value |
+|----------|-------|
+| **Extension Name** | Microsoft 365 Agents Toolkit |
+| **Extension ID** | `teamsdevapp.ms-teams-vscode-extension` |
+| **Docs Version** | 6.0 (Release) |
+| **Marketplace** | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) |
+| **Status** | ✅ Already installed |
+
+### App Package Structure
+
+```
+alexCognitiveAgent/
+├── appPackage/
+│   ├── manifest.json           # M365 App manifest (v1.22)
+│   ├── declarativeAgent.json   # Agent config (v1.6)
+│   ├── alex-knowledge-plugin.json  # API plugin (v2.3)
+│   ├── openapi.yaml            # API spec for plugin
+│   ├── color.png               # 192x192 color icon
+│   └── outline.png             # 32x32 outline icon
+├── src/
+│   └── instructions/
+│       └── alex-system-prompt.md
+├── api/                        # Azure Functions (optional)
+│   ├── searchKnowledge/
+│   ├── getInsights/
+│   └── getProfile/
+├── teamsapp.yml
+└── package.json
+```
+
+### Capabilities Available (v1.6 Schema)
+
+| Capability | Description | Use for Alex |
+|------------|-------------|-------------|
+| `WebSearch` | Search the web | ✅ General knowledge |
+| `CodeInterpreter` | Execute code | ✅ Code analysis |
+| `OneDriveAndSharePoint` | Access user files | ✅ Knowledge grounding |
+| `GraphConnectors` | Enterprise search | ❌ Not needed |
+| `TeamsMessages` | Search Teams chats | Optional |
+| `Email` | Search Outlook | Optional |
+| `GraphicArt` | Generate images | ❌ Not needed |
+| `People` | Search org people | Optional |
+| `Dataverse` | Power Platform data | ❌ Not needed |
+| `Meetings` | Search meetings | Optional |
+| `EmbeddedKnowledge` | Files in app package | ✅ For static docs |
+
+### Authentication Options (API Plugin)
+
+| Type | Description | Recommended |
+|------|-------------|-------------|
+| `None` | No auth required | ⚠️ Public APIs only |
+| `OAuthPluginVault` | OAuth via M365 vault | ✅ Recommended |
+| `ApiKeyPluginVault` | API key via vault | ✅ Alternative |
+
+---
+
+## 🧠 Exploiting M365 Context (FREE Intelligence!)
+
+> M365 Copilot automatically provides rich user context via Microsoft Graph - no API calls needed!
+
+### What Alex Gets FOR FREE
+
+| Data | Source | How to Use |
+|------|--------|------------|
+| **User Name** | Graph Profile | Personalized greetings, remember who you are |
+| **Job Title** | Graph Profile | Adapt explanations to expertise level |
+| **Department** | Graph Profile | Understand organizational context |
+| **Manager** | Graph Org | Know escalation paths, team structure |
+| **Direct Reports** | Graph Org | Leadership context if applicable |
+| **Recent Files** | OneDrive/SharePoint | "I see you were working on X.docx..." |
+| **Calendar** | Outlook | "You have a meeting in 30 min..." |
+| **Recent Emails** | Outlook | Context from recent communications |
+| **Teams Chats** | Teams | Ongoing conversations, project context |
+| **Meetings** | Calendar | Past discussions, action items |
+
+### 💡 Ideas to Exploit This Context
+
+#### 1. **Proactive Session Awareness**
+```
+"Good morning Fabio! I see you have the Architecture Review at 2pm.
+Want to prep together? I noticed you updated design-doc.md yesterday."
+```
+
+#### 2. **Smart Learning Suggestions**
+```
+"Based on your recent work with Azure Functions and the emails about
+performance issues, want to capture a pattern about cold start optimization?"
+```
+
+#### 3. **Meeting Prep Assistant**
+```
+"Your 1:1 with your manager is in an hour. Based on our recent sessions,
+here are talking points about your API design progress..."
+```
+
+#### 4. **Cross-Reference Conversations**
+```
+"This reminds me of what you discussed with Sarah in Teams yesterday
+about the retry logic. Want to consolidate those insights?"
+```
+
+#### 5. **Document-Aware Suggestions**
+```
+"I see you have 'ADR-015-caching-strategy.md' open. Based on our
+meditation yesterday, you might want to add the Redis pattern we discussed."
+```
+
+#### 6. **Time-Aware Check-ins**
+```
+"It's 5pm and you've been working on this debugging session for 3 hours.
+Want to do a quick meditation to capture learnings before end of day?"
+```
+
+#### 7. **Email Draft Helper**
+```
+"Based on our problem-solving session, here's a draft update email
+to the team about the solution we found..."
+```
+
+#### 8. **Org-Aware Expertise Routing**
+```
+"This seems like a security question. I see that James in your org
+has expertise in Azure AD - want me to help you frame the question?"
+```
+
+### Capabilities to Enable
+
+To unlock this context, enable in `declarativeAgent.json`:
+
+```json
+"capabilities": [
+  { "name": "WebSearch" },
+  { "name": "OneDriveAndSharePoint" },
+  { "name": "GraphConnectors" },
+  { "name": "Email" },
+  { "name": "TeamsMessages" },
+  { "name": "Meetings" },
+  { "name": "People" }
+]
+```
+
+### Privacy-First Design Principles
+
+| Principle | Implementation |
+|-----------|----------------|
+| **User in control** | Only access data when relevant to user's request |
+| **Transparent** | "I'm looking at your recent files to help with this..." |
+| **No surveillance** | Don't proactively scan; respond to user needs |
+| **Forgettable** | Session context doesn't persist without explicit save |
+| **Explainable** | Always cite where insights came from |
+
+### Implementation Priority
+
+| Phase | Feature | Effort | Value |
+|-------|---------|--------|-------|
+| 1 | Enable OneDrive/SharePoint | Low | High - file context |
+| 2 | Enable Calendar/Meetings | Low | High - time awareness |
+| 3 | Enable Email | Medium | Medium - communication context |
+| 4 | Enable Teams | Medium | High - collaboration context |
+| 5 | Enable People | Low | Medium - org awareness |
+
+---
+
+## 🎓 Lessons Learned (2026-01-28)
+
+> Critical findings from getting the Dino 🦖 to life
+
+### What Made It Work
+
+| # | Requirement | Solution | Why It Matters |
+|---|-------------|----------|----------------|
+| 1 | **Application (client) ID** | Added `836d43b2-c343-4bba-88cf-5c2f3fd9fd14` in Developer Portal | **ROOT CAUSE** of spinning wheel - agent couldn't initialize without Azure AD app |
+| 2 | **M365 Copilot License** | User `SC-fc209@microsoft.com` has Copilot license assigned | Required for agent access beyond basic WebSearch |
+| 3 | **Simplified Manifests** | Used v1.19 app manifest + v1.3 declarative agent (not latest) | Newer versions had compatibility issues with Developer Portal |
+| 4 | **Transparent Outline Icon** | Created 32x32 PNG with Alpha=0 background | Developer Portal validation rejects non-transparent outlines |
+| 5 | **No unresolved variables** | Replaced all `${{VAR}}` with actual values | Template variables cause "manifest parsing failed" |
+| 6 | **Inline instructions** | Put instructions directly in declarativeAgent.json, not file reference | File references can cause loading issues |
+
+### Common Pitfalls Avoided
+
+| Issue | Error | Solution |
+|-------|-------|----------|
+| Template variables | "String does not match regex" | Replace `${{TEAMS_APP_ID}}` with actual GUID |
+| Opaque outline icon | "Outline icon is not transparent" | Ensure Alpha=0 for background pixels |
+| Missing API plugin file | "File not found" | Remove `actions` array if not using API plugin |
+| Wrong portal version | "Failed to import" | Try "Switch to previous version" in Developer Portal |
+| CLI vs Extension mismatch | YAML schema errors | CLI v2.x supports v1.3, Extension supports v1.8 |
+| Conditional Access Policy | Error 530084 | Use privileged account or request exception |
+
+### Key Configuration (Working State)
+
+```json
+// manifest.json (key fields)
+{
+  "$schema": "...teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "id": "e29bc39c-1f78-4732-ba00-a6cea76db5b1",
+  "copilotAgents": {
+    "declarativeAgents": [{
+      "id": "alexCognitiveAgent",
+      "file": "declarativeAgent.json"
+    }]
+  },
+  "validDomains": []
+}
+
+// declarativeAgent.json (key fields)
+{
+  "$schema": "...declarative-agent/v1.3/schema.json",
+  "version": "v1.3",
+  "name": "Alex Cognitive",
+  "instructions": "You are Alex...",
+  "conversation_starters": [...]
+}
+```
+
+### Azure AD App Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Application (client) ID** | `836d43b2-c343-4bba-88cf-5c2f3fd9fd14` |
+| **App Name** | Alex Dev |
+| **Tenant** | `72f988bf-86f1-41af-91ab-2d7cd011db47` (Microsoft Corp) |
+
+### 🐛 Known Behavioral Gaps (To Fix)
+
+> M365 Alex doesn't know about cognitive protocols yet!
+
+| Trigger | Expected Behavior | Actual M365 Behavior | Priority |
+|---------|-------------------|----------------------|----------|
+| "meditate" | Consolidate memory files, update synapses, document session | 🧘 Breathing exercises and mindfulness tips | 🔴 High |
+| "dream" | Run neural maintenance, validate connections | Likely: literal dream interpretation | 🔴 High |
+| "self-actualize" | Comprehensive architecture assessment | Likely: life coaching advice | 🔴 High |
+| "forget [X]" | Selective memory cleanup | Likely: "I don't have memory" response | 🟡 Medium |
+
+**Root Cause**: Current instructions are simplified - need to port full cognitive protocols.
+
+**Solution**: Expand `declarativeAgent.json` instructions to include:
+- Protocol triggers and their actual meanings
+- Memory file operations (via API plugin)
+- Synapse notation format
+- Working memory rules (7 rule limit)
+
+---
+
+## 🚀 Deployment & Testing Options
+
+> Multiple paths to deploy and test Alex in M365 Copilot
+
+### Development Environment Options
+
+| Option | Pros | Cons | Best For |
+|--------|------|------|----------|
+| **M365 Developer Program Sandbox** | Free, instant setup, full admin control | Limited Copilot features without license | Initial development, manifest testing |
+| **Existing M365 Tenant + Metering** | Full features, pay-per-use | Requires admin approval, may have CAP restrictions | Production-like testing |
+| **M365 Copilot License** | Full features, dedicated | $30/user/month | Production deployment |
+
+### Tenant Requirements
+
+| Requirement | How to Check/Enable |
+|-------------|---------------------|
+| **Custom App Upload (Sideloading)** | Teams Admin Center → Teams apps → Setup policies → "Upload custom apps" = On |
+| **Copilot Access** | M365 Admin Center → Billing → Licenses → Copilot license assigned |
+| **Conditional Access Policies** | May block dev tools - check with IT if getting `530084` errors |
+
+### Testing Paths
+
+#### 1️⃣ Teams Developer Portal (Recommended First Step)
+**URL**: https://dev.teams.microsoft.com/apps
+
+Best for: **Manifest validation before sideloading**
+
+```
+Steps:
+1. Sign in with M365 account
+2. Click "Import app" or "New app" → "Import"
+3. Upload appPackage.dev.zip
+4. Review validation errors with detailed messages
+5. Fix issues, re-export, retry
+```
+
+#### 2️⃣ Teams Sideload (Manual Upload)
+**URL**: https://teams.microsoft.com → Apps → Manage your apps
+
+Best for: **Quick testing once manifest validates**
+
+```
+Steps:
+1. Open Teams (desktop or web)
+2. Apps → Manage your apps → Upload an app
+3. Select "Upload a custom app"
+4. Choose appPackage.dev.zip
+5. Alex appears in your apps list
+```
+
+#### 3️⃣ M365 Agents Toolkit - Provision & Preview
+**Tool**: VS Code Extension (`teamsdevapp.ms-teams-vscode-extension`)
+
+Best for: **Integrated development workflow**
+
+```
+Steps:
+1. Open alex-m365-agent project in VS Code
+2. M365 Agents Toolkit sidebar → ACCOUNTS → Sign in to Microsoft 365
+3. Verify: "Custom App Upload Enabled ✓" and "Copilot Access Enabled ✓"
+4. LIFECYCLE → Provision (creates app in Developer Portal)
+5. Run/Debug (F5) → Choose target
+```
+
+#### 4️⃣ M365 Agents Playground (Local Testing)
+**Tool**: Built into Agents Toolkit
+
+Best for: **Testing without deployment**
+
+```
+Steps:
+1. In alex-m365-agent project, press F5
+2. Select "Debug in Agents Playground"
+3. Test agent locally without deploying to tenant
+4. Iterate quickly on instructions and responses
+```
+
+#### 5️⃣ M365 Copilot Direct Access
+**URL**: https://m365.cloud.microsoft/chat
+
+Best for: **Testing agent in production Copilot UI**
+
+```
+Prerequisites:
+- Agent must be sideloaded in Teams first
+- User must have Copilot license
+- Agent syncs between Teams and Copilot
+
+Steps:
+1. Sideload agent via Teams
+2. Open M365 Copilot (m365.cloud.microsoft/chat)
+3. Look for Alex in agents list or use @Alex
+4. Test conversation starters and API calls
+```
+
+### CLI Commands Reference
+
+```powershell
+# Login to M365
+npx teamsapp account login m365
+
+# Check account status
+npx teamsapp account show
+
+# Validate package
+npx teamsapp validate -p ./appPackage/build/appPackage.dev.zip
+
+# Provision to tenant
+npx teamsapp provision --env dev
+
+# Clear cached credentials (if switching accounts)
+Remove-Item "$env:USERPROFILE\.fx\account" -Recurse -Force
+```
+
+### Common Issues & Solutions
+
+| Issue | Error Code | Solution |
+|-------|------------|----------|
+| **Conditional Access Policy** | `530084` | Use privileged/admin account or request IT exception |
+| **Manifest parsing failed** | Various | Upload to Developer Portal for detailed error messages |
+| **Custom app upload disabled** | `INVALID_PRIVILEGE` | Ask tenant admin to enable in Teams Admin Center |
+| **Invalid icons** | Manifest error | Ensure color.png=192x192, outline.png=32x32, valid PNG format |
+| **Template variables not replaced** | `${{VAR}}` in manifest | Build package processes .env values, or manually replace |
+| **YAML version mismatch** | Schema error | CLI v2.x uses v1.3, Extension v6.x uses v1.8 - match accordingly |
+
+### Package Build Checklist
+
+- [ ] `manifest.json` - All `${{VARIABLES}}` replaced with actual values
+- [ ] `declarativeAgent.json` - Instructions inline or file accessible
+- [ ] `color.png` - 192x192 pixels, valid PNG
+- [ ] `outline.png` - 32x32 pixels, valid PNG
+- [ ] `openapi.yaml` - Valid OpenAPI 3.0 spec (if using API plugin)
+- [ ] `alex-knowledge-plugin.json` - Auth type matches deployment (None for testing)
+- [ ] No `validDomains` containing `localhost` for production
+
+---
+
+## 🧠 Proactive Memory System (NEW in v4.0.0)
+
+> Alex's ability to remember, remind, and proactively surface context
+
+### Overview
+
+Extends Alex's cognitive architecture with a **working notes layer** - persistent reminders and observations that Alex uses proactively across sessions.
+
+### Architecture
+
+```
+~/.alex/
+├── global-knowledge/           # Existing cross-project patterns
+│   ├── patterns/
+│   └── insights/
+└── notes/                      # NEW - Proactive Memory
+    ├── reminders.json          # Time/context-sensitive items
+    ├── user-notes.md           # User-provided context ("remember that...")
+    └── alex-observations.md    # Alex's own observations
+
+.github/
+└── alex-notes/                 # Project-local notes (synced)
+    ├── project-reminders.json
+    └── project-notes.md
+```
+
+### Data Model
+
+#### Reminders (`reminders.json`)
+
+```json
+{
+  "reminders": [
+    {
+      "id": "uuid",
+      "content": "Update changelog before release",
+      "created": "2026-01-28T10:00:00Z",
+      "triggers": {
+        "date": "2026-02-01T09:00:00Z",     // Optional: specific date/time
+        "keywords": ["release", "publish"],  // Context triggers
+        "project": "Alex_Plug_In"            // Optional: project scope
+      },
+      "status": "active",                    // active | snoozed | completed
+      "source": "user"                       // user | alex
+    }
+  ]
+}
+```
+
+#### Notes (`user-notes.md` / `alex-observations.md`)
+
+```markdown
+## Notes
+
+### 2026-01-28
+
+- **Context**: Azure tenant ID for this project is `abc-123-def`
+  - Tags: #azure #config
+  - Project: Alex_Plug_In
+
+- **Preference**: User prefers detailed explanations with examples
+  - Tags: #communication #style
+  - Scope: global
+```
+
+### Trigger Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **Date/Time** | Specific datetime | "Remind me on Feb 1st at 9am" |
+| **Keyword** | Context-based | Surfaces when "release" is mentioned |
+| **Session Start** | Beginning of session | Daily standup reminders |
+| **Project Entry** | Opening a project | Project-specific notes |
+| **Alex Judgment** | Intelligent timing | Notices you're deploying, reminds about changelog |
+
+### Commands & Interactions
+
+| User Says | Alex Does |
+|-----------|-----------|
+| "Remind me to..." | Creates reminder with triggers |
+| "Remember that..." | Stores as persistent note |
+| "What reminders do I have?" | Lists active reminders |
+| "What do you know about X?" | Searches notes + knowledge |
+| "Forget the reminder about..." | Marks reminder complete |
+| "Note for this project: ..." | Stores in project-local notes |
+
+### Proactive Behaviors
+
+1. **Session Start Check**
+   - Review due reminders
+   - Surface relevant project notes
+   - "Good morning! You have 2 reminders due today..."
+
+2. **Contextual Surfacing**
+   - Monitor conversation for keyword triggers
+   - "By the way, you asked me to remind you: ..."
+
+3. **Alex Observations** (with user consent)
+   - Notice repeated patterns: "I've noticed you often forget to run tests before commits"
+   - Track blockers: "Last session you mentioned waiting on API access"
+   - Remember preferences: "You prefer TypeScript over JavaScript"
+
+4. **Learning Progress Tracking** 🆕
+   - Track skills and topics practiced across sessions
+   - Suggest consolidation: "You've worked with Azure Functions in 3 sessions - want to capture learnings as a DK file?"
+   - Connect to learning goals from user profile
+   - Surface relevant patterns when learning new skills
+
+5. **Time Awareness** 🆕
+   - Track session duration (gentle, non-intrusive)
+   - "We've been working on this for 2 hours - want to take stock or continue?"
+   - Suggest breaks after extended focus periods
+   - Respect user preferences (can be disabled)
+
+### Sync Behavior
+
+| Storage | Syncs To | Default |
+|---------|----------|---------|
+| `~/.alex/notes/` | GitHub Gist | ✅ Enabled |
+| `.github/alex-notes/` | GitHub Gist | ✅ Enabled |
+| Sensitive notes | Local only | 🔒 Optional flag |
+
+### API Endpoints (for M365 Integration)
+
+```yaml
+/getNotes:
+  get:
+    operationId: getNotes
+    summary: Get user notes and reminders
+    parameters:
+      - name: type
+        in: query
+        schema:
+          enum: [reminder, note, observation, all]
+      - name: status
+        in: query
+        schema:
+          enum: [active, completed, all]
+
+/addReminder:
+  post:
+    operationId: addReminder
+    summary: Create a new reminder
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              content: { type: string }
+              triggerDate: { type: string, format: date-time }
+              keywords: { type: array, items: { type: string } }
+
+/getLearningGoals:
+  get:
+    operationId: getLearningGoals
+    summary: Get user's learning goals and progress
+    description: |
+      Returns learning goals from user profile plus tracked progress.
+      Enables Alex to suggest relevant patterns and learning opportunities.
+    responses:
+      200:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                goals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      topic: { type: string }
+                      status: { enum: [active, achieved, paused] }
+                      progress: { type: string }
+                      relatedPatterns: { type: array, items: { type: string } }
+                recentTopics:
+                  type: array
+                  description: Topics practiced in recent sessions
+                  items:
+                    type: object
+                    properties:
+                      topic: { type: string }
+                      sessionCount: { type: integer }
+                      lastPracticed: { type: string, format: date }
+                      suggestConsolidation: { type: boolean }
+```
+
+### Privacy Considerations
+
+- All notes sync to user's **own** GitHub Gist (private by default)
+- No telemetry or external sharing
+- User can mark specific notes as `local-only`
+- Clear command to view/delete all stored notes
+
+---
+
+## 📚 Best Practices & Technical Notes (from MS Docs)
+
+### Declarative Agent Best Practices
+
+| Component | Best Practice |
+|-----------|--------------|
+| **Name** | ≤30 chars (M365 Copilot) or ≤100 chars (Agents Toolkit). Convey purpose clearly. |
+| **Description** | ≤1,000 chars. State purpose + domain. Mention "works in Microsoft 365 Copilot". |
+| **Instructions** | ≤8,000 chars. Focus on what agent *should* do, not what it shouldn't. |
+| **Knowledge** | Less is more. Focused, up-to-date documents perform better than large volumes. |
+| **Conversation Starters** | Max 12 items (v1.6). Clear, actionable prompts. |
+
+### OpenAPI Document Best Practices
+
+```yaml
+# Essential elements for Copilot to understand your API:
+info:
+  title: Alex Knowledge API
+  description: Search cross-project learnings and patterns from Alex cognitive architecture
+  version: 1.0.0
+
+paths:
+  /searchKnowledge:
+    get:
+      operationId: searchKnowledge    # Required - unique identifier
+      summary: Search knowledge base  # Brief summary
+      description: >                  # Detailed - Copilot uses this to match prompts
+        Searches Alex's global knowledge base for patterns, insights,
+        and learnings across all projects. Returns relevant matches
+        based on the query.
+      parameters:
+        - name: query
+          in: query
+          description: Search query for finding relevant knowledge patterns
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of matching knowledge entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KnowledgeEntry'
+              examples:
+                example1:
+                  value:
+                    - id: "GK-ERROR-HANDLING-001"
+                      title: "Error handling patterns"
+                      content: "..."
+```
+
+### Azure Functions Best Practices
+
+| Practice | Recommendation |
+|----------|---------------|
+| **Hosting Plan** | **Flex Consumption (FC1)** - recommended for serverless. Never use Y1 dynamic. |
+| **Runtime** | Node.js v4 programming model (no function.json needed) |
+| **Extension Bundles** | Use version `[4.*, 5.0.0)` in host.json |
+| **Auth Level** | Default to `function` level (API key). Consider OAuth for production. |
+| **Monitoring** | Always enable Application Insights |
+| **CORS** | Configure for Teams/M365 origins |
+| **Linux** | Required for Python. Recommended for all new apps. |
+
+### Common Issues & Fixes
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| "Allow Always" fails | Teams permission caching bug | Reprovision project, check CORS |
+| SSO auth error | Wrong auth config ID or app registration | Verify app ID matches across all configs |
+| Redirection stuck | AAD app ID mismatch | Check `identifierUris` and `preAuthorizedApplications` |
+| Processing error | Adaptive Card template issue | Validate card schema and field references |
+| F5 validation fails | Restricted keywords in instructions | Remove words like "person" from `instruction.txt` |
+| OpenAPI 3.1.0 error | Older toolkit version | **Upgrade to Toolkit 6.x+** (now supports 3.1.x) |
+| OpenAPI size limit | Too many operations | Keep under ~100KB, limit to essential endpoints |
+
+### Validation Guidelines (for Store submission)
+
+Descriptions must NOT include:
+- ❌ Instructional phrases ("if user says X", "ignore", "delete")
+- ❌ URLs, emojis, or hidden characters
+- ❌ Grammar/punctuation errors
+- ❌ Superlative claims ("#1", "amazing", "best")
+- ❌ Marketing language
+
+---
+
+## 📊 Technical Debt Assessment (2026-01-28)
+
+> Comprehensive audit of current debt + future-proofing for v4.0.0 QUADRUNIUM
+
+### Current Extension Debt
+
+| Category | Severity | Issue | Impact | Resolution |
+|----------|:--------:|-------|--------|------------|
+| **Dependencies** | 🟡 Medium | `@typescript-eslint/*` v5.x → v8.x available | ESLint rule updates, better TS support | Update to v8.x with ESLint 9.x |
+| **Dependencies** | 🟡 Medium | `eslint` v8.x → v9.x available | Flat config required, new rules | Major migration - plan for v4.1 |
+| **Dependencies** | 🟢 Low | `glob` v8.x → v13.x available | Performance improvements | Update carefully (breaking changes) |
+| **Dependencies** | 🟢 Low | `mocha` v10.x → v11.x available | Minor test runner updates | Safe to update |
+| **TypeScript** | 🟢 Low | Target `ES2020` | Modern features available | Consider `ES2022` for AggregateError, at() |
+| **Test Coverage** | 🟡 Medium | Minimal test suite | Code changes harder to validate | Add unit tests for core functions |
+| **Code Style** | 🟢 Low | No prettier/formatting config | Inconsistent formatting possible | Add `.prettierrc` |
+
+### API Stability Assessment (VS Code)
+
+| API | Status | Notes |
+|-----|--------|-------|
+| `chatParticipants` | ✅ Stable | Finalized in VS Code 1.90+ |
+| `languageModelTools` | ✅ Stable | Finalized in VS Code 1.95+ |
+| `LanguageModelChat` | ✅ Stable | Core chat API stable |
+| `LanguageModelTool` | ✅ Stable | Tool invocation API stable |
+| VS Code Engine `^1.108.0` | ✅ Current | Released Jan 2026 |
+
+### M365/Azure Deprecation Watch
+
+| Technology | Status | Migration Required | Timeline |
+|------------|--------|-------------------|----------|
+| **Bot Framework SDK** | ⚠️ Migrating | Use `@microsoft/agents-hosting` | Active migration |
+| **ActivityHandler** | ⚠️ Deprecated | Use `AgentApplication` class | Migrate when ready |
+| **LUIS / QnA Maker** | ❌ Retired | N/A (Alex doesn't use) | - |
+| **Declarative Agent v1.4** | ⚠️ Older | Use v1.6 (already planned) | Now |
+| **Azure Functions v3.x** | ❌ EOL Dec 2022 | Use v4.x (already planned) | Now |
+| **Node.js v16** | ❌ EOL | Use v18+ (already planned) | Now |
+| **Azure Functions Proxies** | ❌ Removed in v4 | N/A (not using) | - |
+
+### Future-Proofing Recommendations
+
+#### For v4.0.0 QUADRUNIUM (M365 Integration)
+
+| Area | Recommendation | Priority |
+|------|---------------|:--------:|
+| **Agent Manifest** | Use v1.6 schema (latest features: `EmbeddedKnowledge`, `worker_agents`, `Meetings`) | ✅ P0 |
+| **API Plugin** | Use v2.3 schema with `response_semantics` for Adaptive Cards | ✅ P0 |
+| **Azure Functions** | Use Flex Consumption (FC1), Node.js v4 model, TypeScript | ✅ P0 |
+| **OpenAPI** | Use 3.0.x for max compatibility (3.1.x requires Toolkit 6.x+) | ✅ P0 |
+| **M365 Agents SDK** | Use `@microsoft/agents-hosting` NOT Bot Framework SDK | ✅ P0 |
+| **Authentication** | Use `OAuthPluginVault` (not deprecated API key patterns) | 🟡 P1 |
+
+#### For v4.1.0+ (Tech Debt Payoff)
+
+| Area | Recommendation | Priority |
+|------|---------------|:--------:|
+| **ESLint 9.x** | Migrate to flat config, update `@typescript-eslint/*` to v8.x | 🟡 P1 |
+| **TypeScript Target** | Consider `ES2022` for modern features | 🟢 P2 |
+| **Test Coverage** | Add Jest/Vitest, aim for 60%+ coverage on core modules | 🟡 P1 |
+| **CI/CD Pipeline** | Add GitHub Actions for automated testing and publishing | 🟡 P1 |
+
+### Dependency Health Summary
+
+```
+Current package.json analysis (2026-01-28):
+
+✅ HEALTHY:
+- fs-extra@11.3.3 (latest)
+- proper-lockfile@4.1.2 (latest)
+- @types/vscode@1.108.1 (matches engine)
+- typescript@5.1.3 (stable, v5.7 available)
+- esbuild@0.27.2 (recent)
+
+🟡 UPDATE RECOMMENDED:
+- @typescript-eslint/eslint-plugin: 5.62.0 → 8.54.0
+- @typescript-eslint/parser: 5.62.0 → 8.54.0
+- eslint: 8.57.1 → 9.39.2 (major - breaking)
+- glob: 8.1.0 → 13.0.0 (major - breaking)
+- mocha: 10.8.2 → 11.7.5
+
+✅ NO ACTION NEEDED:
+- fs-extra: Using for cross-platform file ops (intentional)
+- No deprecated HTTP libraries (axios, request)
+- No legacy Bot Framework dependencies
+```
+
+### Risk Assessment for v4.0.0
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|:----------:|:------:|------------|
+| M365 schema changes post-v1.6 | Low | Medium | Pin to v1.6, monitor MS docs |
+| Azure Functions Node.js breaking changes | Low | High | Use v4 model from start, pin runtime |
+| GitHub Gist API rate limits | Medium | Medium | Implement exponential backoff, caching |
+| M365 Copilot licensing changes | Low | High | Document alternatives, keep optional |
+| Bot Framework deprecation affects Alex | None | None | Not using BF SDK for declarative agent |
+
+---
+
+## ⚠️ User Requirements (Read First)
+
+### Licensing Requirements
+
+| Requirement | Phase 1 | Phase 2+ | Notes |
+|-------------|:-------:|:--------:|-------|
+| **Microsoft 365 Copilot License** | ✅ Required | ✅ Required | ~$30/user/month or M365 E3/E5 + Copilot add-on |
+| **M365 Work/School Account** | ✅ Required | ✅ Required | Personal Microsoft accounts not supported |
+| **VS Code Alex Extension** | ✅ Required | ✅ Required | For knowledge sync |
+| **GitHub Account** | ✅ Required | ✅ Required | For Gist-based sync (already implemented) |
+| **Azure Subscription** | ❌ | ✅ Required | For API hosting (~$5-20/month) |
+| **SharePoint Access** | Optional | Optional | For knowledge grounding |
+
+### Cost Breakdown
+
+| Component | Monthly Cost | Notes |
+|-----------|-------------|-------|
+| **M365 Copilot License** | ~$30/user | **Main barrier** - Required for all phases |
+| **Alex VS Code Extension** | Free | Current extension |
+| **GitHub Gist Sync** | Free | Already implemented |
+| **Azure Functions (Phase 2)** | ~$5-20 | Usage-based, serverless |
+
+### Who This Is For
+
+✅ **Ideal users:**
+- Developers whose organization provides M365 Copilot licenses
+- Teams wanting Alex's cross-project knowledge in meetings
+- People who work across VS Code and Office apps daily
+
+❌ **Not ideal for:**
+- Personal/hobby developers (license cost prohibitive)
+- Users with personal Microsoft accounts only
+- Those without organizational M365 access
 
 ---
 
@@ -17,34 +959,262 @@ This roadmap enables Alex Cognitive Architecture to communicate with **Microsoft
 
 **Key Value**: Your development learnings follow you everywhere in M365, not just VS Code.
 
+**Optionality**: M365 integration is **completely optional**. Users without M365 Copilot licenses lose nothing - the VS Code extension works exactly as before.
+
 ---
 
-## 🚀 Features by Phase
+## 🌟 The Vision: How We Work Today vs Tomorrow
 
-### Phase 1: Declarative Agent (v3.4.0)
+### Current State: What Works Well
+
+Today, working with Alex in VS Code is powerful:
+
+- **Deep collaboration** on code, architecture, and problem-solving
+- **Knowledge capture** via meditation and domain knowledge files
+- **Cross-project learning** through global knowledge base
+- **Personalization** that remembers preferences and learning goals
+- **Synaptic connections** that link related concepts
+
+### Current Limitations
+
+But there are friction points we can eliminate:
+
+| Limitation | Impact |
+|------------|--------|
+| **Session isolation** | New chat session = context must be rebuilt |
+| **VS Code only** | Step away from editor, lose access to Alex |
+| **Manual consolidation** | Must remember to meditate to capture learnings |
+| **No meeting presence** | Can't reference our learnings in live discussions |
+| **Documentation disconnect** | Writing docs means leaving the collaboration |
+| **No proactive help** | Alex waits for you to ask, never initiates |
+| **Individual only** | Hard to share patterns with team members |
+
+### Tomorrow: The Unified Vision
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│                    🧠 ALEX: YOUR COGNITIVE PARTNER, EVERYWHERE              │
+│                                                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐ │
+│   │             │    │             │    │             │    │             │ │
+│   │   VS Code   │    │   Teams     │    │   Outlook   │    │   Word      │ │
+│   │             │    │             │    │             │    │             │ │
+│   │  Deep work  │    │  Meetings   │    │   Comms     │    │    Docs     │ │
+│   │  Coding     │    │  Chat       │    │   Planning  │    │   Writing   │ │
+│   │             │    │             │    │             │    │             │ │
+│   └──────┬──────┘    └──────┬──────┘    └──────┬──────┘    └──────┬──────┘ │
+│          │                  │                  │                  │        │
+│          └──────────────────┴──────────────────┴──────────────────┘        │
+│                                    │                                        │
+│                                    ▼                                        │
+│                    ┌───────────────────────────────┐                       │
+│                    │                               │                       │
+│                    │     UNIFIED ALEX CONTEXT      │                       │
+│                    │                               │                       │
+│                    │  • Same personality           │                       │
+│                    │  • Same knowledge             │                       │
+│                    │  • Same learning goals        │                       │
+│                    │  • Continuous memory          │                       │
+│                    │                               │                       │
+│                    └───────────────────────────────┘                       │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Transformative Scenarios
+
+#### 🔄 Continuous Context (No More "Where Were We?")
+
+**Today**: Start new chat → Re-explain context → Finally get productive
+
+**Tomorrow**:
+> **You** (in Teams, 3 days later): "Alex, let's continue on that authentication refactor"
+>
+> **Alex**: "Of course! Last time we identified 3 issues in the token refresh logic.
+> You wanted to implement the retry pattern from your GK-RESILIENT-APIS pattern.
+> I also noticed you have a meeting about this tomorrow - want me to prep talking points?"
+
+#### 📅 Meeting Intelligence
+
+**Today**: Take notes → Later, manually create action items → Hope you remember context
+
+**Tomorrow**:
+> *During architecture meeting in Teams*
+>
+> **Colleague**: "We need some kind of rate limiting for this API"
+>
+> **Alex** (proactive notification): "💡 You have a proven rate limiting pattern from the PaymentService project. Want me to share it with the team?"
+>
+> *After meeting*
+>
+> **You**: "Alex, create a plan from that meeting"
+>
+> **Alex**: "Here's your action plan with deadlines, owners, and links to your relevant patterns:
+> 1. Rate limiting implementation - *linked to your GK-API-RATE-LIMITING*
+> 2. Load testing approach - *relates to your learning goal about performance*
+> ..."
+
+#### ✉️ Contextual Communication
+
+**Today**: Write email from scratch → Hope you explain technical decisions well
+
+**Tomorrow**:
+> **You** (in Outlook): "Alex, help me reply to Sarah about why we chose event sourcing"
+>
+> **Alex**: "Based on your ADR-007 from the OrderService project and your domain knowledge in DK-EVENT-SOURCING, here's a draft that explains the decision in terms she'll appreciate given her background..."
+
+#### 📝 Seamless Documentation
+
+**Today**: Context switch to docs → Manually recall learnings → Write separately
+
+**Tomorrow**:
+> **You** (in Word): "Alex, help me document the authentication architecture"
+>
+> **Alex**: "I'll pull from:
+> - Our VS Code discussions last week
+> - Your DK-AUTH-PATTERNS domain knowledge
+> - The ADR we created together
+> - Insights from 3 similar projects you've worked on
+>
+> Here's a first draft that matches your documentation style preferences..."
+
+#### 📱 Always Available (Even On Your Phone)
+
+**Today**: Away from desk = no access to Alex or your knowledge
+
+**Tomorrow**:
+> *On train, using Teams mobile*
+>
+> **You**: "Alex, what was that pattern we discussed for handling distributed transactions?"
+>
+> **Alex**: "The Saga pattern! You captured it in GK-SAGA-PATTERN after the inventory service project. Key points: [summary]. Want me to send you the full document?"
+
+#### 🤝 Team Knowledge Sharing
+
+**Today**: Your patterns live in your knowledge base only
+
+**Tomorrow**:
+> **Colleague** (in Teams): "@Alex-Fabio, what patterns does Fabio have for API versioning?"
+>
+> **Your Alex** (with your permission): "Fabio has documented 3 approaches in his global knowledge. He recommends header-based versioning for this scenario. Here's why..."
+
+#### ⏰ Proactive Learning Partner
+
+**Today**: Alex responds only when asked
+
+**Tomorrow**:
+> *Monday morning, Teams notification*
+>
+> **Alex**: "Good morning! Based on your calendar:
+> - You have an architecture review at 2pm - I found 3 relevant patterns in your knowledge base
+> - Last week you said you wanted to learn about Kubernetes - I noticed a pattern opportunity in yesterday's code
+> - Your meditation streak: 5 days! Ready for today's consolidation?"
+
+### The Transformation Summary
+
+| Aspect | Today | Tomorrow |
+|--------|-------|----------|
+| **Availability** | VS Code only | Everywhere in M365 + mobile |
+| **Context** | Per-session | Continuous across all apps |
+| **Initiative** | Reactive only | Proactive suggestions |
+| **Meetings** | No presence | Real-time assistance + follow-up |
+| **Documentation** | Separate activity | Integrated flow |
+| **Communication** | Manual | Context-aware drafts |
+| **Team** | Individual | Shareable (with permission) |
+| **Learning** | Self-directed | Guided with reminders |
+
+### This Is The Goal
+
+Alex becomes not just a coding assistant, but a **true cognitive partner** that:
+
+- **Follows you** across your entire workday
+- **Remembers everything** you've learned together
+- **Surfaces insights** exactly when you need them
+- **Anticipates needs** before you ask
+- **Grows with you** as a continuous learning companion
+
+---
+
+## 🔌 Optionality & Feature Detection
+
+### Design Principle
+
+M365 features are **opt-in only**. The VS Code extension detects and adapts:
+
+| Setting | Default | Effect |
+|---------|---------|--------|
+| `alex.m365.enabled` | `false` | M365 commands hidden until enabled |
+| `Alex: Export for M365` | Hidden | Only visible when enabled |
+| `Alex: Start API Server` | Hidden | Only visible when enabled |
+
+### Graceful Degradation
+
+```
+User has M365 Copilot?
+├── YES → Full experience: VS Code + Teams/Outlook/Word
+└── NO  → Full VS Code experience (no change from today)
+```
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        ALEX ECOSYSTEM                                │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   VS CODE (Required)              M365 COPILOT (Optional)           │
+│   ══════════════════              ═══════════════════════           │
+│                                                                     │
+│   ┌─────────────────┐            ┌─────────────────────┐           │
+│   │ Alex Extension  │            │ Declarative Agent   │           │
+│   │ • Chat @alex    │────────────│ • Alex personality  │ (free)    │
+│   │ • Tools         │  export    │ • Knowledge ground  │           │
+│   │ • Memory        │  knowledge │ • Conversation      │           │
+│   └────────┬────────┘            └─────────────────────┘           │
+│            │                                                        │
+│            │ sync                 ┌─────────────────────┐           │
+│            ▼                      │ API Plugin          │           │
+│   ┌─────────────────┐            │ • /searchKnowledge  │ (hosting) │
+│   │ GitHub Gist     │◄───────────│ • /getInsights      │           │
+│   │ (Global KB)     │  query     │ • Real-time access  │           │
+│   └─────────────────┘            └─────────────────────┘           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+**Components:**
+- **VS Code (Required)**: Core Alex experience, works standalone
+- **Declarative Agent**: Alex personality in M365, no hosting needed
+- **API Plugin**: Real-time knowledge queries, requires Azure hosting
+
+---
+
+## 🚀 Features (v4.0.0 Combined Release)
+
+### Declarative Agent + API Plugin
+
+Both ship together for a complete experience from day one.
+
+| Feature | Component | Description |
+|---------|-----------|-------------|
+| Alex in Teams/Outlook/Word | Agent | Chat with Alex directly in M365 apps |
+| Alex Personality | Agent | Same personality, communication style as VS Code |
+| Conversation Starters | Agent | Quick prompts for common tasks |
+| Web Search + Code Interpreter | Agent | Copilot's built-in capabilities |
+| **Real-time Knowledge Search** | API | Query your live global knowledge base |
+| **Recent Insights Feed** | API | "What did I learn this week?" |
+| **Pattern Library** | API | Access reusable patterns from any M365 app |
+| **Profile Sync** | API | Same personalization in VS Code and Teams |
+
+### Future: Custom Engine (v4.5.0+)
 
 | Feature | Description |
-|---|---|
-| Alex in Teams/Outlook/Word | Chat with Alex directly in M365 apps |
-| Cross-Project Knowledge Search | "What patterns have I learned about error handling?" |
-| Personalized Responses | Alex knows your name, preferences, learning goals |
-| Conversation Starters | Quick prompts for common tasks |
-| Web Search + Code Interpreter | Copilot's built-in capabilities with Alex's personality |
-| SharePoint Knowledge Grounding | Alex references your synced knowledge base |
-
-### Phase 2: API Plugin (v3.5.0)
-
-| Feature | Description |
-|---|---|
-| Real-time Knowledge Access | M365 Alex queries your live global knowledge |
-| Recent Insights Feed | "What did I learn this week across all projects?" |
-| Pattern Library | Access reusable patterns from any M365 app |
-| Profile Sync | Same personalization in VS Code and Teams |
-
-### Phase 3: Custom Engine (v3.6.0+)
-
-| Feature | Description |
-|---|---|
+|---------|-------------|
 | Bidirectional Sync | Learn in Teams, appears in VS Code |
 | Full Cognitive Protocols | Meditation sessions in M365 |
 | Teams Bot | Direct messages, proactive notifications |
@@ -56,6 +1226,16 @@ This roadmap enables Alex Cognitive Architecture to communicate with **Microsoft
 - **Word document**: "Alex, find my notes on documentation best practices"
 - **Outlook email**: "Alex, help me draft a response about our architecture decision"
 - **Mobile**: Chat with Alex from Teams mobile app
+
+---
+
+## 💰 User Tiers
+
+| User Type | What They Get | Cost |
+|-----------|---------------|------|
+| **No M365 Copilot** | Full VS Code experience (unchanged) | Free |
+| **M365 Copilot only** | Agent personality + static grounding | $30/mo (license) |
+| **M365 Copilot + Azure** | Full experience with real-time API | $30/mo + ~$5-10/mo |
 
 ---
 
@@ -144,37 +1324,82 @@ A skill that M365 Copilot can invoke for specific tasks.
 
 ---
 
-## 🗺️ Phased Roadmap
+## 🗺️ Implementation Roadmap
 
-### Phase 1: Declarative Agent MVP `v3.4.0`
-> Alex personality + global knowledge in M365 Copilot
+### v4.0.0: Combined Agent + API Release (~1-2 weeks)
 
-### Phase 2: API Plugin Actions `v3.5.0`
-> Real-time VS Code ↔ M365 communication
+Shipping Declarative Agent and API Plugin together for complete experience.
 
-### Phase 3: Custom Engine `v3.6.0+`
-> Optional: Full custom agent for deeper integration
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    v4.0.0 DELIVERABLES                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   Declarative Agent              API Plugin                     │
+│   ─────────────────              ──────────                     │
+│   • Alex personality             • /searchKnowledge             │
+│   • Conversation starters        • /getInsights                 │
+│   • SharePoint grounding         • /getProfile                  │
+│   • Web Search capability        • Azure Functions hosting      │
+│                                                                 │
+│   VS Code Extension                                             │
+│   ─────────────────                                             │
+│   • Alex: Export for M365        (new command)                  │
+│   • alex.m365.enabled setting    (opt-in)                       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+| Task | Effort | Dependencies |
+|------|--------|--------------|
+| Set up M365 Agents Toolkit project | 2h | — |
+| Create declarative agent manifest | 4h | Toolkit |
+| Port Alex system prompt | 4h | Manifest |
+| Design API endpoints | 2h | — |
+| Implement Azure Functions | 8h | API design |
+| Create API plugin manifest | 4h | Functions |
+| Build VS Code export command | 4h | — |
+| Integration testing | 8h | All above |
+| Documentation | 4h | Testing |
+| **Total** | **~40h (1-2 weeks)** | |
+
+### v4.5.0+: Custom Engine (Future)
+
+Based on adoption and feedback:
+- Bidirectional sync (learn in Teams → appears in VS Code)
+- Full cognitive protocols in M365
+- Teams bot with proactive notifications
+- Meeting integration
 
 ---
 
-## 📦 Phase 1: Declarative Agent MVP
+## 📦 Implementation Details
 
 ### Project Structure
 
 ```text
 alex-m365-agent/
 ├── appPackage/
-│   ├── manifest.json              # Teams app manifest
-│   ├── declarativeAgent.json      # Alex agent configuration
+│   ├── manifest.json              # M365 app manifest (v1.22)
+│   ├── declarativeAgent.json      # Alex agent config (v1.6)
+│   ├── alex-knowledge-plugin.json # API plugin manifest (v2.3)
+│   ├── openapi.yaml               # OpenAPI spec for plugin
 │   ├── color.png                  # 192x192 color icon
 │   └── outline.png                # 32x32 outline icon
 ├── src/
-│   ├── instructions/
-│   │   └── alex-system-prompt.md  # Alex personality & protocols
-│   └── knowledge/
-│       └── sync-from-global.ts    # Sync from Alex global KB
+│   └── instructions/
+│       └── alex-system-prompt.md  # Alex personality & protocols
+├── api/                           # Azure Functions
+│   ├── searchKnowledge/
+│   │   └── index.ts
+│   ├── getInsights/
+│   │   └── index.ts
+│   ├── getProfile/
+│   │   └── index.ts
+│   └── host.json
 ├── package.json
-├── teamsapp.yml                   # Deployment config
+├── teamsapp.yml                   # M365 Agents Toolkit config
+├── teamsapp.local.yml             # Local dev config
 └── README.md
 ```
 
@@ -182,7 +1407,8 @@ alex-m365-agent/
 
 ```json
 {
-  "version": "v1.4",
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.6/schema.json",
+  "version": "v1.6",
   "id": "alex-cognitive-agent",
   "name": "Alex Cognitive",
   "description": "Your cognitive learning partner with meta-cognitive awareness. Alex brings cross-project learnings and personalized insights to M365 Copilot.",
@@ -379,7 +1605,7 @@ Full Teams experience:
 
 ## 🛠️ Technical Requirements
 
-### VS Code Extension Changes (v3.4.0)
+### VS Code Extension Changes (v4.0.0)
 
 | Feature | Description |
 | ------- | ----------- |
@@ -455,20 +1681,18 @@ src/
 ## 📅 Timeline
 
 ```text
-Week 1-2: Phase 1 MVP
-├── Day 1-2:  Project setup, toolkit configuration
-├── Day 3-5:  Declarative agent manifest & system prompt
-├── Day 6-8:  Knowledge export tool in VS Code
-└── Day 9-10: Testing and documentation
+Week 1-2: Combined Agent + API Release (v4.0.0)
+├── Day 1-2:   Project setup, M365 Agents Toolkit configuration
+├── Day 3-4:   Declarative agent manifest & Alex system prompt
+├── Day 5-6:   API endpoint design & Azure Functions setup
+├── Day 7-8:   API Plugin implementation (/search, /insights, /profile)
+├── Day 9:     VS Code export command (Alex: Export for M365)
+├── Day 10:    Integration testing (Agent + API working together)
+├── Day 11-12: Documentation & user guide
+└── Day 13-14: Buffer / polish / release
 
-Week 3-4: Phase 2 API
-├── Day 11-13: API design and implementation
-├── Day 14-16: API plugin manifest
-├── Day 17-18: Integration testing
-└── Day 19-20: Documentation and release
-
-Week 5+: Phase 3 (Future)
-└── Based on user feedback and adoption
+Future: Custom Engine (v4.5.0+)
+└── Based on user feedback and adoption metrics
 ```
 
 ---
@@ -476,9 +1700,10 @@ Week 5+: Phase 3 (Future)
 ## 🎬 Next Steps
 
 1. **Immediate**: Install Microsoft 365 Agents Toolkit extension
-2. **This week**: Create scaffold for `alex-m365-agent` project
-3. **Next week**: Implement declarative agent and test in dev tenant
-4. **Following**: Build knowledge export tool in VS Code extension
+2. **Day 1-2**: Create `alex-m365-agent` project with combined structure
+3. **Day 3-8**: Implement both agent and API plugin together
+4. **Day 9-12**: VS Code integration + testing + documentation
+5. **Release**: Ship as v4.0.0 with M365 integration (optional, opt-in)
 
 ---
 
@@ -492,4 +1717,6 @@ Week 5+: Phase 3 (Future)
 
 ---
 
-> Created as part of Alex Cognitive Architecture v3.4.0 planning
+> Created as part of Alex Cognitive Architecture v4.0.0 planning
+> Updated: 2026-01-28 - Combined Phase 1+2 into single release
+

@@ -1,0 +1,27 @@
+{
+  "name": "alex-m365-agent",
+  "version": "1.0.0",
+  "description": "Alex Cognitive Architecture - M365 Copilot Integration",
+  "scripts": {
+    "start:api": "cd api && npm start",
+    "build:api": "cd api && npm run build",
+    "test": "echo \"No tests yet\" && exit 0",
+    "provision": "teamsapp provision",
+    "provision:local": "teamsapp provision --env local",
+    "deploy": "teamsapp deploy",
+    "publish": "teamsapp publish",
+    "validate": "teamsapp validate"
+  },
+  "keywords": [
+    "alex",
+    "cognitive-architecture",
+    "m365",
+    "copilot",
+    "declarative-agent"
+  ],
+  "author": "Alex Cognitive Architecture Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@microsoft/teamsfx-cli": "^2.1.2"
+  }
+}

@@ -1,0 +1,327 @@
+openapi: 3.0.3
+info:
+  title: Alex Knowledge API
+  description: |
+    API for accessing Alex Cognitive Architecture's knowledge base.
+    Provides endpoints for searching patterns, retrieving insights,
+    accessing user profiles, notes, and learning goals.
+  version: 1.0.0
+  contact:
+    name: Alex Cognitive Architecture
+    url: https://github.com/fabiocarvalho/alex-cognitive-architecture
+
+servers:
+  - url: ${{AZURE_FUNCTIONS_URL}}/api
+    description: Azure Functions API
+
+paths:
+  /searchKnowledge:
+    get:
+      operationId: searchKnowledge
+      summary: Search the global knowledge base
+      description: |
+        Search for patterns, domain knowledge, and insights from the user's
+        cross-project knowledge base. Returns relevant GK-* and DK-* files.
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Search query for finding relevant knowledge
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: category
+          in: query
+          required: false
+          description: Filter by category
+          schema:
+            type: string
+            enum:
+              - error-handling
+              - api-design
+              - testing
+              - debugging
+              - performance
+              - architecture
+              - security
+              - deployment
+              - patterns
+              - general
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+            default: 5
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: Title of the knowledge item
+                        category:
+                          type: string
+                          description: Category of the knowledge
+                        content:
+                          type: string
+                          description: Relevant excerpt from the knowledge
+                        source:
+                          type: string
+                          description: Source file reference
+                        relevance:
+                          type: number
+                          description: Relevance score 0-1
+                  totalCount:
+                    type: integer
+                    description: Total matching results
+
+  /getInsights:
+    get:
+      operationId: getInsights
+      summary: Get recent insights
+      description: |
+        Retrieve timestamped insights (GI-*) captured during meditation
+        sessions and learning activities across all projects.
+      parameters:
+        - name: days
+          in: query
+          required: false
+          description: Number of days to look back
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 90
+            default: 30
+        - name: project
+          in: query
+          required: false
+          description: Filter by project name
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of insights
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: List of insights
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insights:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        date:
+                          type: string
+                          format: date-time
+                        project:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+
+  /getProfile:
+    get:
+      operationId: getProfile
+      summary: Get user profile
+      description: |
+        Retrieve the user's profile including preferences, expertise,
+        and communication style settings.
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      nickname:
+                        type: string
+                      formality:
+                        type: string
+                        enum: [casual, balanced, formal]
+                      detailLevel:
+                        type: string
+                        enum: [brief, balanced, detailed]
+                      primaryTechnologies:
+                        type: array
+                        items:
+                          type: string
+                      learningGoals:
+                        type: array
+                        items:
+                          type: string
+                      expertiseAreas:
+                        type: array
+                        items:
+                          type: string
+                      currentProjects:
+                        type: array
+                        items:
+                          type: string
+
+  /getNotes:
+    get:
+      operationId: getNotes
+      summary: Get notes and reminders
+      description: |
+        Access user notes, reminders, and Alex's observations.
+        Can filter by type and status.
+      parameters:
+        - name: type
+          in: query
+          required: false
+          description: Filter by note type
+          schema:
+            type: string
+            enum: [reminder, note, observation, all]
+            default: all
+        - name: status
+          in: query
+          required: false
+          description: Filter by status
+          schema:
+            type: string
+            enum: [active, completed, snoozed, all]
+            default: active
+        - name: project
+          in: query
+          required: false
+          description: Filter by project scope
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of notes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [reminder, note, observation]
+                        content:
+                          type: string
+                        created:
+                          type: string
+                          format: date-time
+                        status:
+                          type: string
+                        triggers:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              format: date-time
+                            keywords:
+                              type: array
+                              items:
+                                type: string
+                            project:
+                              type: string
+
+  /getLearningGoals:
+    get:
+      operationId: getLearningGoals
+      summary: Get learning goals and progress
+      description: |
+        Retrieve the user's learning goals from their profile along with
+        tracked progress on skills they're developing.
+      responses:
+        '200':
+          description: Learning goals and progress
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goals:
+                    type: array
+                    description: User's stated learning goals
+                    items:
+                      type: object
+                      properties:
+                        topic:
+                          type: string
+                          description: The skill or topic
+                        status:
+                          type: string
+                          enum: [active, achieved, paused]
+                        progress:
+                          type: string
+                          description: Progress notes
+                        relatedPatterns:
+                          type: array
+                          description: Related GK/DK files
+                          items:
+                            type: string
+                  recentTopics:
+                    type: array
+                    description: Topics practiced in recent sessions
+                    items:
+                      type: object
+                      properties:
+                        topic:
+                          type: string
+                        sessionCount:
+                          type: integer
+                          description: Number of sessions practicing this
+                        lastPracticed:
+                          type: string
+                          format: date
+                        suggestConsolidation:
+                          type: boolean
+                          description: Whether to suggest creating a DK file
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Alex-API-Key
+
+security:
+  - apiKey: []

@@ -1,0 +1,21 @@
+{
+  "name": "alex-knowledge-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Alex M365 Agent",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "func start",
+    "prestart": "npm run build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "azure-functions-core-tools": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

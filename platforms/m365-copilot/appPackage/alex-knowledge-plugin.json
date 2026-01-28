@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
+  "schema_version": "v2.3",
+  "name_for_human": "Alex Knowledge API",
+  "description_for_human": "Access your cross-project knowledge, insights, learning goals, and notes through Alex's cognitive architecture.",
+  "description_for_model": "This plugin provides access to the user's personal knowledge base managed by Alex Cognitive Architecture. Use searchKnowledge to find patterns and learnings from past projects. Use getInsights to retrieve recent insights and discoveries. Use getProfile to understand user preferences and learning goals. Use getNotes to access reminders and observations. Use getLearningGoals to see what the user wants to learn and track their progress.",
+  "logo_url": "${{AZURE_FUNCTIONS_URL}}/api/logo.png",
+  "contact_email": "support@alexcognitive.dev",
+  "legal_info_url": "https://github.com/fabiocarvalho/alex-cognitive-architecture/blob/main/TERMS.md",
+  "privacy_policy_url": "https://github.com/fabiocarvalho/alex-cognitive-architecture/blob/main/PRIVACY.md",
+  "functions": [
+    {
+      "name": "searchKnowledge",
+      "description": "Search the user's global knowledge base for patterns, insights, and learnings from past projects. Returns relevant domain knowledge files (DK-*) and global patterns (GK-*).",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.results",
+          "properties": {
+            "title": "$.title",
+            "subtitle": "$.category",
+            "url": "$.source"
+          }
+        }
+      }
+    },
+    {
+      "name": "getInsights",
+      "description": "Retrieve recent insights and discoveries captured across projects. These are timestamped learnings (GI-*) that Alex has helped the user consolidate.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.insights",
+          "properties": {
+            "title": "$.title",
+            "subtitle": "$.date"
+          }
+        }
+      }
+    },
+    {
+      "name": "getProfile",
+      "description": "Get the user's profile including name, communication preferences, expertise areas, and current projects. Use this to personalize responses.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.profile"
+        }
+      }
+    },
+    {
+      "name": "getNotes",
+      "description": "Access the user's notes, reminders, and Alex's observations. Can filter by type (reminder, note, observation) and status (active, completed).",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.notes",
+          "properties": {
+            "title": "$.content",
+            "subtitle": "$.type"
+          }
+        }
+      }
+    },
+    {
+      "name": "getLearningGoals",
+      "description": "Get the user's learning goals and track progress on skills they're developing. Returns active goals, related patterns, and recent topics practiced.",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.goals",
+          "properties": {
+            "title": "$.topic",
+            "subtitle": "$.status"
+          }
+        }
+      }
+    }
+  ],
+  "runtimes": [
+    {
+      "type": "OpenApi",
+      "auth": {
+        "type": "None"
+        
+      },
+      "spec": {
+        "url": "openapi.yaml"
+      },
+      "run_for_functions": [
+        "searchKnowledge",
+        "getInsights",
+        "getProfile",
+        "getNotes",
+        "getLearningGoals"
+      ]
+    }
+  ]
+}
+

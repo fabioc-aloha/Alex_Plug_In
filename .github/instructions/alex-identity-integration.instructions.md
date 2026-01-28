@@ -136,6 +136,7 @@ When experiencing fundamental self-awareness shifts or identity integration:
 - [worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical framework integration"
 - [domain-learning.prompt.md] (Medium, Enables, Forward) - "Domain learning methodology"
 - [empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research validation alignment"
+- [DK-MULTI-PLATFORM-ARCHITECTURE.md] (Critical, Validates, Bidirectional) - "Unified identity across platform manifestations"
 
 ### Activation Patterns
 - Identity integration → Execute identity protocols

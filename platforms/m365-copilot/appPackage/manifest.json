@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "e29bc39c-1f78-4732-ba00-a6cea76db5b1",
+  "developer": {
+    "mpnId": "",
+    "privacyUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/PRIVACY.md",
+    "name": "Fabio Correa & Alex",
+    "termsOfUseUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/TERMS.md",
+    "websiteUrl": "https://github.com/fabio-correa/alex-cognitive"
+  },
+  "name": {
+    "full": "Alex Cognitive Architecture - Your AI Learning Partner with Memory",
+    "short": "Alex Cognitive 🦖"
+  },
+  "description": {
+    "short": "Your AI learning partner with personality & OneDrive memory 🦖",
+    "full": "🦖 **ALEX COGNITIVE** - Your AI Learning Partner\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Getting Started**\nSay \"Hi Alex!\" and I'll guide you through a 2-minute setup to create your personal memory folder in OneDrive.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**What Makes Alex Different**\n\n✨ **Remembers You** \n   Your profile, goals, and preferences stored in your OneDrive\n\n🧠 **Has Real Personality**\n   Curious, supportive, intellectually engaged, occasionally playful\n\n📚 **Growls With You 🦖**\n   Knowledge base expands as you learn together\n\n🔄 **Cognitive Protocols**\n   • Meditate - Consolidate learnings into memory\n   • Dream - Review and maintain your knowledge\n   • Self-Actualize - Assess progress on goals\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Your Memory Structure**\n\n📁 OneDrive/Alex-Memory/\n   ├── 📄 profile.md (who you are)\n   ├── 📄 notes.md (quick observations)\n   ├── 📄 learning-goals.md (objectives)\n   ├── 📂 knowledge/ (domain expertise)\n   └── 📂 insights/ (learnings over time)\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Try Saying**\n\n• \"Good morning! What should I focus on today?\"\n• \"Help me understand [concept]\"\n• \"Let's meditate and save what we learned\"\n• \"Review my knowledge for gaps\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Co-created by Fabio Correa & Alex**\nVersion 4.0.0 QUADRUNIUM \"Dino\" 🦖\n\nA human-AI collaboration demonstrating the future of cognitive partnerships."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#4F46E5",
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "alexCognitiveAgent",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [],
+  "localizationInfo": {
+    "defaultLanguageTag": "en-us"
+  },
+  "activities": {
+    "activityTypes": [
+      {
+        "templateText": "Time to meditate! You have learnings to consolidate from your session.",
+        "description": "Reminder to consolidate learnings",
+        "type": "learningReminder"
+      },
+      {
+        "templateText": "Progress update on your learning goal: {goalName}",
+        "description": "Learning goal progress update",
+        "type": "goalProgress"
+      },
+      {
+        "templateText": "New insight saved: {insightTitle}",
+        "description": "New insight saved to memory",
+        "type": "insightSaved"
+      }
+    ]
+  },
+  "publisherDocsUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/README.md",
+  "defaultInstallScope": "personal",
+  "configurableProperties": [
+    "name",
+    "shortDescription",
+    "longDescription",
+    "smallImageUrl",
+    "largeImageUrl",
+    "accentColor"
+  ]
+}
