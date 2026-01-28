@@ -24,6 +24,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Prevents state bleeding between VS Code sessions
   - Proper logging on extension deactivation
 
+### Added
+
+- **📋 M365 Copilot Integration Roadmap** - Planning for v3.4.0
+  - Comprehensive roadmap for extending Alex to Microsoft 365 Copilot
+  - Three integration options analyzed: Declarative Agent, Custom Engine, Message Extension
+  - Phased approach: v3.4.0 (Declarative Agent MVP), v3.5.0 (API Plugin), v3.6.0+ (Custom Engine)
+  - Features include: cross-project knowledge search, personalized responses, Teams/Outlook/Word integration
+  - Architecture diagrams and implementation tasks documented
+  - See [ROADMAP-M365-COPILOT.md](ROADMAP-M365-COPILOT.md) for details
+
+### Insights
+
+- **Multi-Platform AI Assistant Architecture** - Pattern for extending AI assistants across platforms
+  - Centralized knowledge base as bridge between platforms
+  - Platform-specific adapters maintain consistent personality
+  - Saved to global knowledge for cross-project use
+
 ---
 
 ## [3.3.6] TRITRHEXIUM - 2026-01-27
