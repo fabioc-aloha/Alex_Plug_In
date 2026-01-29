@@ -32,7 +32,20 @@ Version 3.5 is a **transition release** that:
 
 ---
 
-## 📋 Implementation Tracker
+## � Fact-Check Findings (2026-01-29)
+
+| Feature | Finding | Impact |
+|---------|---------|--------|
+| Follow-up Provider | **Already implemented** in `participant.ts` | -2 days |
+| Tool Confirmation | `prepareInvocation()` exists, extend only | -0.5 days |
+| Participant Detection | `disambiguation` exists, add epistemic category | -1.5 days |
+| Tool Annotations | `readOnlyHint` API needs verification | ⚠️ Risk |
+| Agent Skills | No `.github/skills/` exists yet | +1 day (creation vs validation) |
+| DOMPurify | Already in `package-lock.json` | ✅ Ready |
+
+---
+
+## �📋 Implementation Tracker
 
 ### 🔴 P0: Critical Fixes (Ship Immediately)
 
@@ -46,11 +59,11 @@ Version 3.5 is a **transition release** that:
 
 | # | Feature | Status | Effort | Description |
 |:-:|---------|:------:|:------:|-------------|
-| 4 | Tool Annotations | ⬜ | 1d | Add `readOnlyHint` to read-only tools for auto-approval |
-| 5 | Tool Confirmation Messages | ⬜ | 1d | Custom confirmations for dream, sync, promote |
-| 6 | Participant Detection | ⬜ | 2d | Auto-route queries to @alex via disambiguation config |
-| 7 | Follow-up Provider | ⬜ | 2d | Suggest contextual follow-up questions |
-| 8 | Agent Skills Validation | ⬜ | 1d | Ensure .github/skills/ format matches VS Code spec |
+| 4 | Tool Annotations | ⬜ | 1d | Add `readOnlyHint` to read-only tools for auto-approval ⚠️ *API verification needed* |
+| 5 | Tool Confirmation Messages | ⬜ | 0.5d | Extend existing `prepareInvocation()` to remaining tools |
+| 6 | Participant Detection | ⬜ | 0.5d | Add `epistemic` category to existing disambiguation config |
+| 7 | Follow-up Provider | ✅ | 0d | **Already implemented** in `participant.ts` (15+ command templates) |
+| 8 | Agent Skills Creation | ⬜ | 2d | Create `.github/skills/` with SKILL.md files for Alex capabilities |
 
 ### 🟡 P2: User-Requested Features
 
@@ -140,9 +153,16 @@ export function sanitizeHtml(dirty: string): string {
 
 ### 5. Tool Confirmation Messages (P1 - Quick Win)
 
-**Goal:** Provide custom confirmation dialogs for mutating tools.
+**Goal:** Extend existing `prepareInvocation()` to remaining mutating tools.
 
-**Implementation:**
+**Current State:** `SynapseHealthTool` already has confirmation. Need to add to:
+- `DreamMaintenanceTool`
+- `CloudSyncTool`
+- `PromoteKnowledgeTool`
+- `SaveInsightTool`
+- `SelfActualizationTool`
+
+**Implementation Pattern (already exists in tools.ts):**
 ```typescript
 // src/chat/tools.ts - prepareInvocation method
 async prepareInvocation(
@@ -165,13 +185,29 @@ async prepareInvocation(
 }
 ```
 
-### 6. Participant Detection (P1 - Quick Win)
+### 6. Participant Detection (P1 - Partial)
 
-**Goal:** Auto-route epistemic/cognitive queries to @alex without explicit mention.
+**Goal:** Add `epistemic` category to existing disambiguation config.
 
-**Implementation:**
+**Current State:** `package.json` already has `cognitive_architecture`, `azure_development`, `m365_development` categories.
+
+**What to Add:**
 ```json
-// package.json - chatParticipants section
+// package.json - ADD to existing disambiguation array
+{
+  "category": "epistemic",
+  "description": "Questions about confidence, verification, appropriate reliance",
+  "examples": [
+    "How confident should I be in this?",
+    "Should I verify this?",
+    "What's your confidence level?"
+  ]
+}
+```
+
+**Existing Implementation (for reference):**
+```json
+// package.json - chatParticipants section (ALREADY EXISTS)
 {
   "id": "alex-cognitive-architecture.alex",
   "name": "alex",
@@ -203,13 +239,18 @@ async prepareInvocation(
 }
 ```
 
-### 7. Follow-up Provider (P1 - Quick Win)
+### 7. Follow-up Provider (P1 - ✅ ALREADY COMPLETE)
 
-**Goal:** Suggest contextual follow-up questions after responses.
+**Status:** Fully implemented in `src/chat/participant.ts` lines 1607-1735.
 
-**Implementation:**
+**Existing Implementation:**
+- 15+ command-specific follow-up templates
+- Covers: meditate, dream, learn, azure, m365, profile, selfactualize, knowledge, saveinsight, promote, knowledgestatus, greeting, general
+- Already registered via `alex.followupProvider = alexFollowupProvider`
+
+**Reference (no changes needed):**
 ```typescript
-// src/chat/chatParticipant.ts
+// src/chat/participant.ts - ALREADY EXISTS
 alex.followupProvider = {
   provideFollowups(
     result: IAlexChatResult,
@@ -380,19 +421,21 @@ export async function handleForgetCommand(
 
 ## 📊 Effort Summary
 
-| Priority | Items | Total Effort |
-|----------|-------|--------------|
-| P0 Critical | 3 | 3 days |
-| P1 Quick Wins | 5 | 7 days |
-| P2 User Requests | 5 | 10 days |
-| P3 Tech Debt | 5 | 7 days |
-| P4 Documentation | 4 | 3.5 days |
-| **Total** | **22** | **~30.5 days** |
+| Priority | Items | Total Effort | Notes |
+|----------|-------|--------------|-------|
+| P0 Critical | 3 | 3 days | |
+| P1 Quick Wins | 5 | **4 days** | ⬇️ Reduced: Follow-up already done, others partially done |
+| P2 User Requests | 5 | 10 days | |
+| P3 Tech Debt | 5 | 7 days | |
+| P4 Documentation | 4 | 3.5 days | |
+| **Total** | **22** | **~27.5 days** | Saved 3 days from fact-check |
 
 **Suggested Release Timeline:**
-- **Week 1-2:** P0 + P1 (Critical fixes + Quick wins) → v3.5.0-beta.1
-- **Week 3-4:** P2 (User requests) → v3.5.0-beta.2
-- **Week 5:** P3 + P4 (Tech debt + Docs) → v3.5.0 Final
+- **Week 1:** P0 + P1 (Critical fixes + Quick wins) → v3.5.0-beta.1 *(7 days)*
+- **Week 2-3:** P2 (User requests) → v3.5.0-beta.2 *(10 days)*
+- **Week 4:** P3 + P4 (Tech debt + Docs) → v3.5.0 Final *(10.5 days)*
+
+> **Note:** Timeline reduced by ~1 week after fact-check discovered P1.7 already implemented.
 
 ---
 
