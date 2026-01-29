@@ -7,9 +7,12 @@
 | **Target Version** | 4.0.0 QUADRUNIUM |
 | **Codename** | 🛡️ **Trust** (Epistemic Integrity) |
 | **Status** | 📋 Planning |
+| **Prerequisite** | v3.5.0 TRITRSEPTIUM-PENT-HEX (Transition Release) |
 | **Foundation** | v3.4.3 TRITRSEPTIUM-PENT (Current) |
 | **Created** | 2026-01-29 |
 | **Author** | Alex Cognitive Architecture Team |
+
+> **Note:** See [ROADMAP-VSCODE-V3.5.md](ROADMAP-VSCODE-V3.5.md) for the transition release that must ship first.
 
 ---
 
@@ -116,20 +119,25 @@ Alex 4.0 addresses these challenges through architectural implementation of rese
 | 25 | Debug Memory | ⬜ | 2d | Context-aware debugging with knowledge |
 | 26 | Goal Sessions | ⬜ | 2d | Focused work mode with auto-tracking |
 
-### v4.0.0 Infrastructure & API Enhancements
+### Prerequisites from v3.5.0 (Must Ship First)
 
-| # | Feature | Status | Effort | Description |
-|:-:|---------|:------:|:------:|-------------|
-| 27 | Configurable Storage Paths | ⬜ | 3d | User-configurable global knowledge location (OneDrive, etc.) |
-| 28 | Agent Skills Validation | ⬜ | 1d | Verify Alex skills format matches VS Code 1.108 spec |
-| 29 | Tool Annotations | ⬜ | 1d | Add readOnlyHint to read-only tools for auto-approval |
-| 30 | Participant Detection | ⬜ | 2d | Auto-route epistemic queries via disambiguation config |
-| 31 | Follow-up Provider | ⬜ | 2d | Suggest verification prompts after responses |
-| 32 | Tool Confirmation Messages | ⬜ | 1d | Custom confirmation for dream, sync, promote tools |
+> The following features will be implemented in v3.5.0 and are prerequisites for v4.0.0.
+> See [ROADMAP-VSCODE-V3.5.md](ROADMAP-VSCODE-V3.5.md) for full details.
+
+| # | Feature | v3.5 Status | Description |
+|:-:|---------|:----------:|-------------|
+| - | Configurable Storage Paths | ⬜ | User-configurable global knowledge location |
+| - | Agent Skills Validation | ⬜ | Verify Alex skills format matches VS Code 1.108 spec |
+| - | Tool Annotations | ⬜ | Add readOnlyHint to read-only tools |
+| - | Participant Detection | ⬜ | Auto-route epistemic queries via disambiguation |
+| - | Follow-up Provider | ⬜ | Suggest contextual follow-up questions |
+| - | Tool Confirmation Messages | ⬜ | Custom confirmation dialogs |
+| - | `/forget <topic>` Command | ⬜ | Selective memory cleanup |
+| - | Webview HTML Sanitization | ⬜ | Security hardening |
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v4.0.0 Tasks: 0/32 complete**
+**v4.0.0 Core Tasks: 0/26 complete** (excludes v3.5 prerequisites)
 
 ---
 
