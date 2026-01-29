@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="90" fill="#2E7D32"/>
+  
+  <!-- Dino head profile -->
+  <path d="
+    M 50 60
+    Q 45 50, 60 45
+    L 120 45
+    Q 150 45, 155 70
+    L 155 90
+    Q 155 100, 145 105
+    L 130 110
+    L 130 130
+    Q 130 145, 115 150
+    L 70 150
+    Q 55 150, 50 135
+    L 50 60
+    Z
+  " fill="#4CAF50"/>
+  
+  <!-- Eye -->
+  <circle cx="100" cy="75" r="15" fill="white"/>
+  <circle cx="103" cy="75" r="8" fill="#1B5E20"/>
+  <circle cx="106" cy="72" r="3" fill="white"/>
+  
+  <!-- Nostril -->
+  <ellipse cx="140" cy="85" rx="4" ry="3" fill="#1B5E20"/>
+  
+  <!-- Mouth line -->
+  <path d="M 70 130 Q 100 140, 130 130" stroke="#1B5E20" stroke-width="3" fill="none"/>
+  
+  <!-- Teeth -->
+  <path d="M 80 130 L 85 140 L 90 130" fill="white"/>
+  <path d="M 100 132 L 105 142 L 110 132" fill="white"/>
+  <path d="M 118 130 L 123 140 L 128 130" fill="white"/>
+</svg>

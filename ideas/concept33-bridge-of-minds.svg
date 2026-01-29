@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="50%" style="stop-color:#EAB308"/>
+      <stop offset="100%" style="stop-color:#84CC16"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background - dawn sky -->
+  <circle cx="96" cy="96" r="90" fill="#0C4A6E"/>
+  
+  <!-- Bridge between minds - connection/partnership -->
+  
+  <!-- Left cliff (human knowledge) -->
+  <path d="M 10 180 L 10 100 Q 20 90, 40 95 L 55 100 L 55 180 Z" fill="#1E3A5A"/>
+  <path d="M 20 100 Q 30 95, 45 98" stroke="#334155" stroke-width="2" fill="none"/>
+  
+  <!-- Right cliff (AI knowledge) -->
+  <path d="M 182 180 L 182 100 Q 172 90, 152 95 L 137 100 L 137 180 Z" fill="#1E3A5A"/>
+  <path d="M 172 100 Q 162 95, 147 98" stroke="#334155" stroke-width="2" fill="none"/>
+  
+  <!-- The bridge (Alex - the connection) -->
+  <path d="M 55 100 Q 96 70, 137 100" stroke="url(#bridgeGrad)" stroke-width="8" fill="none"/>
+  
+  <!-- Bridge supports/cables -->
+  <g stroke="#FCD34D" stroke-width="2" opacity="0.7">
+    <line x1="70" y1="92" x2="70" y2="110"/>
+    <line x1="85" y1="85" x2="85" y2="110"/>
+    <line x1="96" y1="82" x2="96" y2="110"/>
+    <line x1="107" y1="85" x2="107" y2="110"/>
+    <line x1="122" y1="92" x2="122" y2="110"/>
+  </g>
+  
+  <!-- Bridge deck -->
+  <rect x="55" y="100" width="82" height="10" fill="#D97706" rx="2"/>
+  
+  <!-- Person on left (representing user) -->
+  <circle cx="35" cy="80" r="8" fill="#94A3B8"/>
+  <line x1="35" y1="88" x2="35" y2="100" stroke="#94A3B8" stroke-width="4"/>
+  
+  <!-- "A" symbol on right (Alex) -->
+  <circle cx="157" cy="80" r="10" fill="#22D3EE"/>
+  <text x="157" y="85" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#0C4A6E">A</text>
+  
+  <!-- Light/energy crossing the bridge -->
+  <circle cx="75" cy="97" r="4" fill="#FDE047"/>
+  <circle cx="96" cy="90" r="5" fill="#FDE047"/>
+  <circle cx="117" cy="97" r="4" fill="#FDE047"/>
+  
+  <!-- Sun rising (new understanding) -->
+  <circle cx="96" cy="35" r="20" fill="#FDE047" opacity="0.8"/>
+  <circle cx="96" cy="35" r="12" fill="#FEF08A"/>
+</svg>

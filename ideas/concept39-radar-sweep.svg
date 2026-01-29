@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#18181B"/>
+  
+  <!-- Radar Sweep trend - gradient rotation showing motion/progress -->
+  
+  <!-- Base circle -->
+  <circle cx="96" cy="96" r="70" fill="none" stroke="#27272A" stroke-width="2"/>
+  <circle cx="96" cy="96" r="50" fill="none" stroke="#27272A" stroke-width="1"/>
+  <circle cx="96" cy="96" r="30" fill="none" stroke="#27272A" stroke-width="1"/>
+  
+  <!-- Sweep gradient section -->
+  <path d="M 96 96 L 96 26 A 70 70 0 0 1 159 123 Z" fill="url(#radarGrad)"/>
+  
+  <defs>
+    <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22D3EE;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#22D3EE;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Sweep edge (the bright line) -->
+  <line x1="96" y1="96" x2="159" y2="123" stroke="#22D3EE" stroke-width="3"/>
+  
+  <!-- Detected "knowledge blips" -->
+  <circle cx="120" cy="60" r="5" fill="#22D3EE"/>
+  <circle cx="140" cy="95" r="4" fill="#22D3EE" opacity="0.7"/>
+  <circle cx="115" cy="110" r="3" fill="#22D3EE" opacity="0.5"/>
+  
+  <!-- Center - the "A" -->
+  <circle cx="96" cy="96" r="20" fill="#18181B"/>
+  <text x="96" y="103" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="#22D3EE">A</text>
+  
+  <!-- Center dot -->
+  <circle cx="96" cy="96" r="3" fill="#22D3EE"/>
+</svg>

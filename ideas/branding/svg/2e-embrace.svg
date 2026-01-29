@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="leftCurve" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8A80"/>
+      <stop offset="100%" style="stop-color:#E57373"/>
+    </linearGradient>
+    <linearGradient id="rightCurve" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8A80"/>
+      <stop offset="100%" style="stop-color:#E57373"/>
+    </linearGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFE4B5"/>
+      <stop offset="100%" style="stop-color:#FFD699"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Inner glow/protected space -->
+  <ellipse cx="50" cy="50" rx="20" ry="25" fill="url(#innerGlow)"/>
+  
+  <!-- Left embracing curve -->
+  <path d="M45 15 
+           Q15 15 15 50 
+           Q15 85 45 85 
+           Q35 70 35 50 
+           Q35 30 45 15" 
+        fill="url(#leftCurve)"/>
+  
+  <!-- Right embracing curve -->
+  <path d="M55 15 
+           Q85 15 85 50 
+           Q85 85 55 85 
+           Q65 70 65 50 
+           Q65 30 55 15" 
+        fill="url(#rightCurve)"/>
+  
+  <!-- Center accent -->
+  <circle cx="50" cy="50" r="6" fill="#4A3728"/>
+</svg>

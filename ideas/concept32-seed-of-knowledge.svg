@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="seedGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#92400E"/>
+      <stop offset="100%" style="stop-color:#D97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background - rich soil color -->
+  <circle cx="96" cy="96" r="90" fill="#1C1917"/>
+  
+  <!-- Seed of knowledge growing into understanding -->
+  
+  <!-- Soil/ground line -->
+  <ellipse cx="96" cy="145" rx="70" ry="15" fill="#44403C"/>
+  
+  <!-- Roots (foundation/prior knowledge) -->
+  <g stroke="#78716C" stroke-width="3" fill="none">
+    <path d="M 96 145 Q 80 160, 60 170"/>
+    <path d="M 96 145 Q 96 160, 96 175"/>
+    <path d="M 96 145 Q 112 160, 132 170"/>
+    <path d="M 80 155 Q 70 165, 55 165"/>
+    <path d="M 112 155 Q 122 165, 137 165"/>
+  </g>
+  
+  <!-- Seed body (in the ground) -->
+  <ellipse cx="96" cy="140" rx="15" ry="10" fill="url(#seedGrad)"/>
+  
+  <!-- Sprout emerging -->
+  <path d="M 96 130 Q 96 100, 96 70" stroke="#22C55E" stroke-width="5" fill="none"/>
+  
+  <!-- Leaves unfurling (new knowledge forming) -->
+  <path d="M 96 90 Q 70 80, 60 60 Q 75 75, 96 85" fill="#4ADE80"/>
+  <path d="M 96 90 Q 122 80, 132 60 Q 117 75, 96 85" fill="#22C55E"/>
+  
+  <path d="M 96 70 Q 78 55, 72 35 Q 82 50, 96 65" fill="#86EFAC"/>
+  <path d="M 96 70 Q 114 55, 120 35 Q 110 50, 96 65" fill="#4ADE80"/>
+  
+  <!-- Budding tip (potential) -->
+  <ellipse cx="96" cy="55" rx="8" ry="12" fill="#BBF7D0"/>
+  <ellipse cx="96" cy="52" rx="4" ry="6" fill="#DCFCE7"/>
+  
+  <!-- Light from above (learning input) -->
+  <g stroke="#FDE047" stroke-width="2" opacity="0.5">
+    <line x1="75" y1="15" x2="85" y2="35"/>
+    <line x1="96" y1="10" x2="96" y2="30"/>
+    <line x1="117" y1="15" x2="107" y2="35"/>
+  </g>
+  
+  <!-- Dewdrops (moments of clarity) -->
+  <ellipse cx="68" cy="65" rx="4" ry="5" fill="white" opacity="0.7"/>
+  <ellipse cx="124" cy="65" rx="4" ry="5" fill="white" opacity="0.7"/>
+</svg>

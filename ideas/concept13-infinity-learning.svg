@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="infinityGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7C4DFF"/>
+      <stop offset="50%" style="stop-color:#00BCD4"/>
+      <stop offset="100%" style="stop-color:#7C4DFF"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#1A1A2E"/>
+  
+  <!-- Infinity symbol / möbius strip -->
+  <path d="
+    M 96 96
+    C 96 70, 130 50, 150 70
+    C 170 90, 150 130, 120 115
+    C 100 105, 92 105, 72 115
+    C 42 130, 22 90, 42 70
+    C 62 50, 96 70, 96 96
+    C 96 122, 62 142, 42 122
+    C 22 102, 42 62, 72 77
+    C 92 87, 100 87, 120 77
+    C 150 62, 170 102, 150 122
+    C 130 142, 96 122, 96 96
+  " stroke="url(#infinityGrad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- Center glow -->
+  <circle cx="96" cy="96" r="15" fill="#00BCD4" opacity="0.3"/>
+  <circle cx="96" cy="96" r="8" fill="#00BCD4"/>
+  <circle cx="96" cy="96" r="4" fill="white"/>
+  
+  <!-- Sparkles -->
+  <circle cx="42" cy="70" r="4" fill="#7C4DFF"/>
+  <circle cx="150" cy="70" r="4" fill="#7C4DFF"/>
+  <circle cx="42" cy="122" r="4" fill="#7C4DFF"/>
+  <circle cx="150" cy="122" r="4" fill="#7C4DFF"/>
+</svg>

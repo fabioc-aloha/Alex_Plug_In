@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="mindGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0f0c29"/>
+  
+  <!-- Expanding consciousness rings -->
+  <circle cx="96" cy="96" r="80" fill="none" stroke="#764ba2" stroke-width="1" opacity="0.2"/>
+  <circle cx="96" cy="96" r="65" fill="none" stroke="#764ba2" stroke-width="1" opacity="0.3"/>
+  <circle cx="96" cy="96" r="50" fill="none" stroke="#764ba2" stroke-width="1" opacity="0.4"/>
+  <circle cx="96" cy="96" r="35" fill="none" stroke="#764ba2" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Stylized head silhouette -->
+  <path d="
+    M 65 150
+    L 65 120
+    Q 50 110, 50 90
+    Q 50 55, 96 45
+    Q 142 55, 142 90
+    Q 142 110, 127 120
+    L 127 150
+  " fill="url(#mindGrad)" opacity="0.8"/>
+  
+  <!-- Face indent (darker) -->
+  <ellipse cx="96" cy="115" rx="20" ry="25" fill="#0f0c29" opacity="0.5"/>
+  
+  <!-- Brain area glow -->
+  <ellipse cx="96" cy="75" rx="35" ry="25" fill="#667eea" opacity="0.3"/>
+  
+  <!-- Neural activity sparkles in brain area -->
+  <circle cx="75" cy="70" r="3" fill="white" opacity="0.9"/>
+  <circle cx="96" cy="65" r="4" fill="white" opacity="0.9"/>
+  <circle cx="117" cy="70" r="3" fill="white" opacity="0.9"/>
+  <circle cx="85" cy="80" r="2" fill="white" opacity="0.7"/>
+  <circle cx="107" cy="80" r="2" fill="white" opacity="0.7"/>
+  
+  <!-- Thought emanation lines -->
+  <path d="M 96 45 Q 96 30, 80 25" stroke="white" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 96 45 Q 96 25, 96 15" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 96 45 Q 96 30, 112 25" stroke="white" stroke-width="2" fill="none" opacity="0.4"/>
+  
+  <!-- Connection points floating above -->
+  <circle cx="80" cy="25" r="4" fill="#00E5FF"/>
+  <circle cx="96" cy="15" r="5" fill="#00E5FF"/>
+  <circle cx="112" cy="25" r="4" fill="#00E5FF"/>
+</svg>

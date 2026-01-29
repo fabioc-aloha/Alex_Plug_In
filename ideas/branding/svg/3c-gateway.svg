@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="archGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C2C2C"/>
+      <stop offset="100%" style="stop-color:#1C1C1C"/>
+    </linearGradient>
+    <radialGradient id="lightGlow" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD166;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#FFD166;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#FFD166;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="innerGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD166;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#FFD166;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#FFD166;stop-opacity:0.6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100" height="100" fill="#0A0A0A" rx="10"/>
+  
+  <!-- Inner glow through gateway -->
+  <path d="M35 95 L35 45 Q50 20 65 45 L65 95 Z" fill="url(#innerGlow)"/>
+  
+  <!-- Gateway arch -->
+  <path d="M20 95 
+           L20 40 
+           Q50 5 80 40 
+           L80 95 
+           L65 95 
+           L65 45 
+           Q50 25 35 45 
+           L35 95 
+           Z" 
+        fill="url(#archGradient)"/>
+  
+  <!-- Central light source -->
+  <circle cx="50" cy="55" r="20" fill="url(#lightGlow)"/>
+  <circle cx="50" cy="55" r="6" fill="#FFD166"/>
+</svg>

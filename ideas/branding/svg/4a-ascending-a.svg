@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="aStructure" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#1B263B"/>
+      <stop offset="100%" style="stop-color:#2A3F5F"/>
+    </linearGradient>
+    <linearGradient id="risingElement" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#00C9A7"/>
+      <stop offset="100%" style="stop-color:#FFD700"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main A structure -->
+  <path d="M50 25 L20 88 L32 88 L40 68 L45 68 L45 88 L55 88 L55 68 L60 68 L68 88 L80 88 L50 25 Z" 
+        fill="url(#aStructure)"/>
+  
+  <!-- Split crossbar left -->
+  <path d="M38 58 L45 58 L45 52 L42 52 Z" fill="url(#aStructure)"/>
+  
+  <!-- Split crossbar right -->
+  <path d="M55 58 L62 58 L58 52 L55 52 Z" fill="url(#aStructure)"/>
+  
+  <!-- Rising central element -->
+  <path d="M45 68 L50 5 L55 68 Z" fill="url(#risingElement)" filter="url(#goldGlow)"/>
+  
+  <!-- Top node -->
+  <circle cx="50" cy="5" r="4" fill="#FFD700" filter="url(#goldGlow)"/>
+  
+  <!-- Base nodes -->
+  <circle cx="20" cy="88" r="4" fill="#00C9A7"/>
+  <circle cx="80" cy="88" r="4" fill="#00C9A7"/>
+</svg>

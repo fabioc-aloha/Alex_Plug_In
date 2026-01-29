@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <radialGradient id="nodeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00E5FF"/>
+      <stop offset="100%" style="stop-color:#00B8D4"/>
+    </radialGradient>
+    <linearGradient id="connGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#7C4DFF;stop-opacity:0.8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0A0E27"/>
+  
+  <!-- Neural network connections -->
+  <g stroke="url(#connGrad)" stroke-width="2" fill="none">
+    <!-- Central hub connections -->
+    <line x1="96" y1="96" x2="45" y2="50"/>
+    <line x1="96" y1="96" x2="147" y2="50"/>
+    <line x1="96" y1="96" x2="35" y2="96"/>
+    <line x1="96" y1="96" x2="157" y2="96"/>
+    <line x1="96" y1="96" x2="45" y2="142"/>
+    <line x1="96" y1="96" x2="147" y2="142"/>
+    <line x1="96" y1="96" x2="96" y2="30"/>
+    <line x1="96" y1="96" x2="96" y2="162"/>
+    
+    <!-- Outer node connections -->
+    <line x1="45" y1="50" x2="96" y2="30"/>
+    <line x1="147" y1="50" x2="96" y2="30"/>
+    <line x1="45" y1="50" x2="35" y2="96"/>
+    <line x1="147" y1="50" x2="157" y2="96"/>
+    <line x1="35" y1="96" x2="45" y2="142"/>
+    <line x1="157" y1="96" x2="147" y2="142"/>
+    <line x1="45" y1="142" x2="96" y2="162"/>
+    <line x1="147" y1="142" x2="96" y2="162"/>
+  </g>
+  
+  <!-- Outer nodes -->
+  <circle cx="96" cy="30" r="12" fill="url(#nodeGrad)"/>
+  <circle cx="45" cy="50" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="147" cy="50" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="35" cy="96" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="157" cy="96" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="45" cy="142" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="147" cy="142" r="10" fill="url(#nodeGrad)"/>
+  <circle cx="96" cy="162" r="12" fill="url(#nodeGrad)"/>
+  
+  <!-- Central node (larger, prominent) -->
+  <circle cx="96" cy="96" r="22" fill="#7C4DFF"/>
+  <circle cx="96" cy="96" r="15" fill="#0A0E27"/>
+  <circle cx="96" cy="96" r="10" fill="#00E5FF"/>
+  
+  <!-- "A" in center -->
+  <text x="96" y="101" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#0A0E27">A</text>
+  
+  <!-- Signal pulses on connections -->
+  <circle cx="70" cy="73" r="4" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="122" cy="73" r="4" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="65" cy="96" r="3" fill="#00E5FF" opacity="0.7"/>
+  <circle cx="127" cy="96" r="3" fill="#00E5FF" opacity="0.7"/>
+  <circle cx="70" cy="119" r="4" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="122" cy="119" r="4" fill="#00E5FF" opacity="0.9"/>
+</svg>

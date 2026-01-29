@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#F1F5F9"/>
+  
+  <!-- Center Point trend - converging elements to a central focus -->
+  
+  <!-- Converging arrows/lines pointing to center -->
+  <g stroke="#64748B" stroke-width="2">
+    <!-- Top -->
+    <line x1="96" y1="20" x2="96" y2="55"/>
+    <!-- Top-right -->
+    <line x1="150" y1="42" x2="123" y2="69"/>
+    <!-- Right -->
+    <line x1="172" y1="96" x2="137" y2="96"/>
+    <!-- Bottom-right -->
+    <line x1="150" y1="150" x2="123" y2="123"/>
+    <!-- Bottom -->
+    <line x1="96" y1="172" x2="96" y2="137"/>
+    <!-- Bottom-left -->
+    <line x1="42" y1="150" x2="69" y2="123"/>
+    <!-- Left -->
+    <line x1="20" y1="96" x2="55" y2="96"/>
+    <!-- Top-left -->
+    <line x1="42" y1="42" x2="69" y2="69"/>
+  </g>
+  
+  <!-- Arrow tips (small triangles) -->
+  <polygon points="96,55 92,65 100,65" fill="#64748B"/>
+  <polygon points="123,69 128,77 120,80" fill="#64748B"/>
+  <polygon points="137,96 127,92 127,100" fill="#64748B"/>
+  <polygon points="123,123 128,115 120,112" fill="#64748B"/>
+  <polygon points="96,137 92,127 100,127" fill="#64748B"/>
+  <polygon points="69,123 64,115 72,112" fill="#64748B"/>
+  <polygon points="55,96 65,92 65,100" fill="#64748B"/>
+  <polygon points="69,69 64,77 72,80" fill="#64748B"/>
+  
+  <!-- Central hub - the "A" -->
+  <circle cx="96" cy="96" r="32" fill="#3B82F6"/>
+  <text x="96" y="106" text-anchor="middle" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="white">A</text>
+  
+  <!-- Outer nodes (knowledge sources) -->
+  <circle cx="96" cy="20" r="6" fill="#3B82F6"/>
+  <circle cx="150" cy="42" r="6" fill="#3B82F6"/>
+  <circle cx="172" cy="96" r="6" fill="#3B82F6"/>
+  <circle cx="150" cy="150" r="6" fill="#3B82F6"/>
+  <circle cx="96" cy="172" r="6" fill="#3B82F6"/>
+  <circle cx="42" cy="150" r="6" fill="#3B82F6"/>
+  <circle cx="20" cy="96" r="6" fill="#3B82F6"/>
+  <circle cx="42" cy="42" r="6" fill="#3B82F6"/>
+</svg>

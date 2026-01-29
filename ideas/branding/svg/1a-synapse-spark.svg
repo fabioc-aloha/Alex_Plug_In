@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <radialGradient id="sparkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A574;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#0D7377" opacity="0.1"/>
+  
+  <!-- Connection lines -->
+  <line x1="50" y1="25" x2="25" y2="68" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="25" x2="75" y2="68" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  <line x1="25" y1="68" x2="75" y2="68" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="25" x2="50" y2="50" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  <line x1="25" y1="68" x2="50" y2="50" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  <line x1="75" y1="68" x2="50" y2="50" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Outer nodes -->
+  <circle cx="50" cy="25" r="6" fill="#0D7377"/>
+  <circle cx="25" cy="68" r="6" fill="#0D7377"/>
+  <circle cx="75" cy="68" r="6" fill="#0D7377"/>
+  
+  <!-- Central spark glow -->
+  <circle cx="50" cy="50" r="15" fill="url(#sparkGlow)"/>
+  
+  <!-- Central spark -->
+  <polygon points="50,38 53,47 62,47 55,53 58,62 50,56 42,62 45,53 38,47 47,47" fill="#D4A574"/>
+</svg>

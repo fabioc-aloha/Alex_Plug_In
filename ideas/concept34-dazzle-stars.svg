@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0F172A"/>
+  
+  <!-- Four-pointed dazzle stars cluster - THE AI symbol of 2024-2026 -->
+  
+  <!-- Main large star (center) -->
+  <path d="M 96 55 Q 99 93, 137 96 Q 99 99, 96 137 Q 93 99, 55 96 Q 93 93, 96 55" fill="#60A5FA"/>
+  
+  <!-- Smaller supporting stars -->
+  <path d="M 55 50 Q 57 60, 67 62 Q 57 64, 55 74 Q 53 64, 43 62 Q 53 60, 55 50" fill="#818CF8" opacity="0.9"/>
+  
+  <path d="M 140 45 Q 142 53, 150 55 Q 142 57, 140 65 Q 138 57, 130 55 Q 138 53, 140 45" fill="#A78BFA" opacity="0.8"/>
+  
+  <path d="M 145 120 Q 147 130, 157 132 Q 147 134, 145 144 Q 143 134, 133 132 Q 143 130, 145 120" fill="#818CF8" opacity="0.7"/>
+  
+  <path d="M 50 130 Q 52 138, 60 140 Q 52 142, 50 150 Q 48 142, 40 140 Q 48 138, 50 130" fill="#A78BFA" opacity="0.7"/>
+  
+  <!-- Tiny accent stars -->
+  <path d="M 75 35 Q 76 40, 81 41 Q 76 42, 75 47 Q 74 42, 69 41 Q 74 40, 75 35" fill="#C4B5FD" opacity="0.6"/>
+  
+  <path d="M 125 155 Q 126 159, 130 160 Q 126 161, 125 165 Q 124 161, 120 160 Q 124 159, 125 155" fill="#C4B5FD" opacity="0.6"/>
+  
+  <!-- Central "A" integrated into main star -->
+  <text x="96" y="103" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#0F172A">A</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#E0E7FF"/>
+  
+  <!-- Smiley / Eyes trend - two dots create attentive, human quality -->
+  
+  <!-- Simple rounded shape body -->
+  <ellipse cx="96" cy="105" rx="60" ry="55" fill="#6366F1"/>
+  
+  <!-- Just two dots = eyes (the key smiley trend insight) -->
+  <circle cx="75" cy="90" r="10" fill="white"/>
+  <circle cx="117" cy="90" r="10" fill="white"/>
+  
+  <!-- Pupils (slightly looking up = attentive) -->
+  <circle cx="77" cy="88" r="5" fill="#1E1B4B"/>
+  <circle cx="119" cy="88" r="5" fill="#1E1B4B"/>
+  
+  <!-- Eye shine -->
+  <circle cx="79" cy="86" r="2" fill="white"/>
+  <circle cx="121" cy="86" r="2" fill="white"/>
+  
+  <!-- The "A" as a subtle detail on the body (like a badge) -->
+  <circle cx="96" cy="125" r="18" fill="#4F46E5"/>
+  <text x="96" y="132" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="white">A</text>
+  
+  <!-- Antenna/sensor (cognitive awareness indicator) -->
+  <line x1="96" y1="50" x2="96" y2="30" stroke="#6366F1" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="96" cy="25" r="8" fill="#F59E0B"/>
+  
+  <!-- Subtle gradient shine on body -->
+  <ellipse cx="80" cy="85" rx="20" ry="15" fill="white" opacity="0.1"/>
+</svg>

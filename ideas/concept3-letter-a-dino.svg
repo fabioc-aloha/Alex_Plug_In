@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#00695C"/>
+  
+  <!-- Letter A as dino body -->
+  <path d="
+    M 96 30
+    L 45 150
+    L 65 150
+    L 75 125
+    L 117 125
+    L 127 150
+    L 147 150
+    L 96 30
+    Z
+    M 82 108
+    L 96 70
+    L 110 108
+    Z
+  " fill="#4DB6AC"/>
+  
+  <!-- Dino eye in the A hole -->
+  <circle cx="96" cy="95" r="12" fill="white"/>
+  <circle cx="99" cy="95" r="7" fill="#004D40"/>
+  <circle cx="101" cy="93" r="2" fill="white"/>
+  
+  <!-- Dino feet at bottom -->
+  <ellipse cx="55" cy="160" rx="12" ry="8" fill="#4DB6AC"/>
+  <ellipse cx="137" cy="160" rx="12" ry="8" fill="#4DB6AC"/>
+  
+  <!-- Toes -->
+  <circle cx="48" cy="165" r="4" fill="#4DB6AC"/>
+  <circle cx="55" cy="168" r="4" fill="#4DB6AC"/>
+  <circle cx="62" cy="165" r="4" fill="#4DB6AC"/>
+  
+  <circle cx="130" cy="165" r="4" fill="#4DB6AC"/>
+  <circle cx="137" cy="168" r="4" fill="#4DB6AC"/>
+  <circle cx="144" cy="165" r="4" fill="#4DB6AC"/>
+  
+  <!-- Small horns/spikes on top -->
+  <polygon points="85,35 90,20 95,35" fill="#4DB6AC"/>
+  <polygon points="97,35 102,18 107,35" fill="#4DB6AC"/>
+</svg>

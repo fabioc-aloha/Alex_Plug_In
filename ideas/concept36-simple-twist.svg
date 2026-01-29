@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#F8FAFC"/>
+  
+  <!-- Simple Twist - Minimal A with one ownable quirk -->
+  
+  <!-- The "A" with a unique neural spark quirk -->
+  <path d="
+    M 96 35
+    L 55 155
+    L 72 155
+    L 80 132
+    L 112 132
+    L 120 155
+    L 137 155
+    L 96 35
+    Z
+    M 85 115
+    L 96 75
+    L 107 115
+    Z
+  " fill="#1E293B"/>
+  
+  <!-- The TWIST: A small dazzle star emerging from the apex -->
+  <path d="M 96 35 Q 100 25, 110 22 Q 100 19, 96 9 Q 92 19, 82 22 Q 92 25, 96 35" fill="#6366F1"/>
+  
+  <!-- Subtle secondary spark -->
+  <path d="M 115 22 Q 117 18, 122 17 Q 117 16, 115 12 Q 113 16, 108 17 Q 113 18, 115 22" fill="#A5B4FC" opacity="0.7"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background - warm cream (Toasty trend) -->
+  <circle cx="96" cy="96" r="90" fill="#FDF6E3"/>
+  
+  <!-- Toasty Logo trend - warm, handmade feel, approachable -->
+  
+  <!-- Slightly imperfect rounded badge -->
+  <path d="
+    M 96 25
+    Q 160 28, 165 96
+    Q 162 164, 96 167
+    Q 30 164, 27 96
+    Q 30 28, 96 25
+  " fill="none" stroke="#92400E" stroke-width="4"/>
+  
+  <!-- Inner warm shape -->
+  <ellipse cx="96" cy="96" rx="55" ry="52" fill="#FDE68A" opacity="0.5"/>
+  
+  <!-- Hand-drawn style "A" -->
+  <path d="
+    M 96 45
+    Q 94 45, 60 140
+    M 96 45
+    Q 98 45, 132 140
+    M 72 110
+    Q 96 105, 120 110
+  " fill="none" stroke="#78350F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Warm decorative elements -->
+  <circle cx="55" cy="55" r="4" fill="#F59E0B"/>
+  <circle cx="137" cy="55" r="4" fill="#F59E0B"/>
+  <circle cx="55" cy="137" r="4" fill="#F59E0B"/>
+  <circle cx="137" cy="137" r="4" fill="#F59E0B"/>
+  
+  <!-- Subtle texture dots (hand-touched feel) -->
+  <circle cx="96" cy="160" r="2" fill="#D97706"/>
+  <circle cx="88" cy="158" r="1.5" fill="#D97706" opacity="0.7"/>
+  <circle cx="104" cy="158" r="1.5" fill="#D97706" opacity="0.7"/>
+</svg>

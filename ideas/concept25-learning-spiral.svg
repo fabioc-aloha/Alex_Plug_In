@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="spiralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ECDC4"/>
+      <stop offset="100%" style="stop-color:#556270"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#2C3E50"/>
+  
+  <!-- Learning spiral - growth from center outward -->
+  <!-- Represents continuous learning, each loop builds on previous -->
+  
+  <path d="
+    M 96 96
+    Q 96 86, 106 86
+    Q 116 86, 116 96
+    Q 116 111, 96 111
+    Q 76 111, 76 91
+    Q 76 66, 101 66
+    Q 131 66, 131 96
+    Q 131 131, 96 131
+    Q 56 131, 56 91
+    Q 56 46, 101 46
+    Q 151 46, 151 96
+    Q 151 151, 96 151
+    Q 36 151, 36 91
+  " stroke="url(#spiralGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  
+  <!-- Growth nodes along the spiral -->
+  <circle cx="96" cy="96" r="8" fill="#4ECDC4"/>
+  <circle cx="116" cy="96" r="6" fill="#5CD6CF"/>
+  <circle cx="96" cy="111" r="6" fill="#6BE0D8"/>
+  <circle cx="76" cy="91" r="5" fill="#7AEAE1"/>
+  <circle cx="101" cy="66" r="5" fill="#89F4EA"/>
+  <circle cx="131" cy="96" r="4" fill="#98FEF3"/>
+  <circle cx="96" cy="131" r="4" fill="#A7FFFC"/>
+  
+  <!-- Center: seed of knowledge -->
+  <circle cx="96" cy="96" r="4" fill="white"/>
+  
+  <!-- Subtle outer glow suggesting infinite potential -->
+  <circle cx="36" cy="91" r="6" fill="#4ECDC4" opacity="0.4"/>
+</svg>

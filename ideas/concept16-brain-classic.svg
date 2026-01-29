@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="brainGrad16" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E91E63"/>
+      <stop offset="100%" style="stop-color:#9C27B0"/>
+    </linearGradient>
+    <radialGradient id="glowGrad16" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#E91E63;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#E91E63;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#1A1A2E"/>
+  
+  <!-- Glow -->
+  <circle cx="96" cy="96" r="75" fill="url(#glowGrad16)"/>
+  
+  <!-- Brain outline - left hemisphere -->
+  <path d="
+    M 96 35
+    Q 70 35, 55 50
+    Q 40 65, 40 85
+    Q 35 100, 45 115
+    Q 50 130, 60 140
+    Q 75 155, 96 155
+  " fill="url(#brainGrad16)" stroke="#F48FB1" stroke-width="2"/>
+  
+  <!-- Brain outline - right hemisphere -->
+  <path d="
+    M 96 35
+    Q 122 35, 137 50
+    Q 152 65, 152 85
+    Q 157 100, 147 115
+    Q 142 130, 132 140
+    Q 117 155, 96 155
+  " fill="url(#brainGrad16)" stroke="#F48FB1" stroke-width="2"/>
+  
+  <!-- Brain folds - left -->
+  <path d="M 55 60 Q 70 70, 60 85" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 50 85 Q 65 95, 55 110" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 60 110 Q 75 120, 70 135" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 70 55 Q 85 65, 80 80" stroke="#F48FB1" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Brain folds - right -->
+  <path d="M 137 60 Q 122 70, 132 85" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 142 85 Q 127 95, 137 110" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 132 110 Q 117 120, 122 135" stroke="#F48FB1" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 122 55 Q 107 65, 112 80" stroke="#F48FB1" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Central divide -->
+  <line x1="96" y1="40" x2="96" y2="150" stroke="#F48FB1" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Sparkle/activity points -->
+  <circle cx="65" cy="75" r="4" fill="#E1BEE7"/>
+  <circle cx="127" cy="75" r="4" fill="#E1BEE7"/>
+  <circle cx="55" cy="100" r="3" fill="#E1BEE7"/>
+  <circle cx="137" cy="100" r="3" fill="#E1BEE7"/>
+  <circle cx="75" cy="125" r="3" fill="#E1BEE7"/>
+  <circle cx="117" cy="125" r="3" fill="#E1BEE7"/>
+</svg>

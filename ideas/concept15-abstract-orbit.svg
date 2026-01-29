@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="abstractGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="abstractGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <linearGradient id="abstractGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0f0f23"/>
+  
+  <!-- Abstract flowing shapes -->
+  <path d="M 30 96 Q 50 50, 96 30 Q 142 50, 162 96 Q 142 142, 96 162 Q 50 142, 30 96" 
+        fill="none" stroke="url(#abstractGrad1)" stroke-width="3" opacity="0.8"/>
+  
+  <path d="M 45 96 Q 60 60, 96 45 Q 132 60, 147 96 Q 132 132, 96 147 Q 60 132, 45 96" 
+        fill="none" stroke="url(#abstractGrad2)" stroke-width="3" opacity="0.8"/>
+  
+  <path d="M 60 96 Q 70 70, 96 60 Q 122 70, 132 96 Q 122 122, 96 132 Q 70 122, 60 96" 
+        fill="none" stroke="url(#abstractGrad3)" stroke-width="3" opacity="0.8"/>
+  
+  <!-- Orbital dots -->
+  <circle cx="30" cy="96" r="5" fill="#667eea"/>
+  <circle cx="162" cy="96" r="5" fill="#667eea"/>
+  <circle cx="96" cy="30" r="5" fill="#f093fb"/>
+  <circle cx="96" cy="162" r="5" fill="#f093fb"/>
+  
+  <!-- Center element -->
+  <circle cx="96" cy="96" r="25" fill="url(#abstractGrad1)" opacity="0.9"/>
+  <circle cx="96" cy="96" r="15" fill="#0f0f23"/>
+  
+  <!-- Stylized "A" in center -->
+  <path d="M 96 82 L 88 105 M 96 82 L 104 105 M 91 97 L 101 97" 
+        stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

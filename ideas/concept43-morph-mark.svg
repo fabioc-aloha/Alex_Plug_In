@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="morphGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F472B6"/>
+      <stop offset="50%" style="stop-color:#A78BFA"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0F172A"/>
+  
+  <!-- Morph-marks trend - logo that appears to be mid-transformation -->
+  
+  <!-- Base "A" shape morphing/stretching -->
+  <path d="
+    M 96 25
+    Q 70 25, 50 80
+    Q 35 130, 45 155
+    Q 55 165, 70 155
+    Q 80 145, 85 135
+    L 85 110
+    L 107 110
+    L 107 135
+    Q 112 145, 122 155
+    Q 137 165, 147 155
+    Q 157 130, 142 80
+    Q 122 25, 96 25
+    Z
+  " fill="url(#morphGrad)"/>
+  
+  <!-- Inner cutout (morphing) -->
+  <ellipse cx="96" cy="85" rx="15" ry="12" fill="#0F172A"/>
+  
+  <!-- Motion lines suggesting transformation -->
+  <path d="M 35 60 Q 45 55, 55 60" stroke="#F472B6" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 30 80 Q 42 73, 52 80" stroke="#A78BFA" stroke-width="2" fill="none" opacity="0.4"/>
+  
+  <path d="M 157 60 Q 147 55, 137 60" stroke="#60A5FA" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 162 80 Q 150 73, 140 80" stroke="#A78BFA" stroke-width="2" fill="none" opacity="0.4"/>
+  
+  <!-- Particle effects (transformation residue) -->
+  <circle cx="40" cy="45" r="3" fill="#F472B6" opacity="0.6"/>
+  <circle cx="152" cy="45" r="3" fill="#60A5FA" opacity="0.6"/>
+  <circle cx="35" cy="100" r="2" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="157" cy="100" r="2" fill="#A78BFA" opacity="0.4"/>
+</svg>

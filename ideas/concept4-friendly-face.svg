@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#FF7043"/>
+  
+  <!-- Dino face - front view -->
+  <ellipse cx="96" cy="100" rx="65" ry="60" fill="#FFAB91"/>
+  
+  <!-- Snout/muzzle area -->
+  <ellipse cx="96" cy="130" rx="35" ry="25" fill="#FF8A65"/>
+  
+  <!-- Left eye -->
+  <ellipse cx="65" cy="80" rx="20" ry="22" fill="white"/>
+  <circle cx="70" cy="82" r="12" fill="#BF360C"/>
+  <circle cx="73" cy="79" r="4" fill="white"/>
+  
+  <!-- Right eye -->
+  <ellipse cx="127" cy="80" rx="20" ry="22" fill="white"/>
+  <circle cx="122" cy="82" r="12" fill="#BF360C"/>
+  <circle cx="119" cy="79" r="4" fill="white"/>
+  
+  <!-- Nostrils -->
+  <ellipse cx="85" cy="125" rx="5" ry="4" fill="#BF360C"/>
+  <ellipse cx="107" cy="125" rx="5" ry="4" fill="#BF360C"/>
+  
+  <!-- Happy smile -->
+  <path d="M 70 145 Q 96 165, 122 145" stroke="#BF360C" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Eyebrows (friendly) -->
+  <path d="M 50 65 Q 65 58, 80 65" stroke="#E64A19" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M 112 65 Q 127 58, 142 65" stroke="#E64A19" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Small horns -->
+  <ellipse cx="50" cy="50" rx="10" ry="15" fill="#FFAB91"/>
+  <ellipse cx="142" cy="50" rx="10" ry="15" fill="#FFAB91"/>
+</svg>

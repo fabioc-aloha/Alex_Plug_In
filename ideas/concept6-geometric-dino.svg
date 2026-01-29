@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="geoGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43A047"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="geoGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#66BB6A"/>
+      <stop offset="100%" style="stop-color:#43A047"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background hexagon -->
+  <polygon points="96,10 170,50 170,142 96,182 22,142 22,50" fill="#1B5E20"/>
+  
+  <!-- Geometric dino head - low poly style -->
+  <!-- Main head shape -->
+  <polygon points="60,65 96,45 132,65 140,95 130,125 96,140 62,125 52,95" fill="url(#geoGrad1)"/>
+  
+  <!-- Snout -->
+  <polygon points="96,95 140,95 145,110 130,125 96,115" fill="url(#geoGrad2)"/>
+  
+  <!-- Top of head highlight -->
+  <polygon points="60,65 96,45 96,75 70,85" fill="#81C784"/>
+  <polygon points="96,45 132,65 122,85 96,75" fill="#66BB6A"/>
+  
+  <!-- Jaw area -->
+  <polygon points="62,125 96,115 96,140 75,135" fill="#388E3C"/>
+  <polygon points="96,115 130,125 117,135 96,140" fill="#2E7D32"/>
+  
+  <!-- Eye socket area -->
+  <polygon points="70,85 96,75 96,95 75,95" fill="#4CAF50"/>
+  
+  <!-- Eye -->
+  <polygon points="80,82 95,78 95,92 82,90" fill="white"/>
+  <polygon points="85,84 92,82 92,88 86,88" fill="#1B5E20"/>
+  
+  <!-- Nostril -->
+  <circle cx="135" cy="100" r="4" fill="#1B5E20"/>
+  
+  <!-- Teeth (geometric) -->
+  <polygon points="100,125 105,135 110,125" fill="white"/>
+  <polygon points="115,123 120,133 125,123" fill="white"/>
+</svg>

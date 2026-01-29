@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="humanSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFCBA4"/>
+      <stop offset="100%" style="stop-color:#FFB88C"/>
+    </linearGradient>
+    <linearGradient id="aiSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#708090"/>
+      <stop offset="100%" style="stop-color:#5A6A7A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Human side container (organic) -->
+  <rect x="8" y="30" width="32" height="40" rx="10" fill="url(#humanSide)"/>
+  
+  <!-- Organic wave pattern inside human side -->
+  <path d="M14 50 Q20 44 26 50 Q32 56 34 50" 
+        fill="none" stroke="#CC8866" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- AI side container (geometric) -->
+  <rect x="60" y="30" width="32" height="40" rx="4" fill="url(#aiSide)"/>
+  
+  <!-- Geometric pattern inside AI side -->
+  <polygon points="76,40 82,50 76,60 70,50" fill="#506070" stroke="#8090A0" stroke-width="1"/>
+  
+  <!-- Bridge connection -->
+  <rect x="40" y="45" width="20" height="10" rx="3" fill="#20B2AA"/>
+  
+  <!-- Bridge flow indicators -->
+  <path d="M44 50 L48 47 L52 50 L48 53 Z" fill="#FFFFFF" opacity="0.7"/>
+  <path d="M52 50 L56 47 L60 50 L56 53 Z" fill="#FFFFFF" opacity="0.5"/>
+</svg>

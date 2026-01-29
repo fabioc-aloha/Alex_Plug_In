@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="companionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#06B6D4"/>
+      <stop offset="100%" style="stop-color:#0891B2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background - welcoming warm -->
+  <circle cx="96" cy="96" r="90" fill="#FEF3C7"/>
+  
+  <!-- Alex as a friendly guide character - abstract/geometric but warm -->
+  
+  <!-- Body - rounded friendly shape -->
+  <ellipse cx="96" cy="115" rx="45" ry="50" fill="url(#companionGrad)"/>
+  
+  <!-- Inner glow/warmth -->
+  <ellipse cx="96" cy="110" rx="30" ry="35" fill="#22D3EE" opacity="0.5"/>
+  
+  <!-- Face area -->
+  <ellipse cx="96" cy="85" rx="35" ry="30" fill="#67E8F9"/>
+  
+  <!-- Eyes - friendly and curious -->
+  <ellipse cx="80" cy="80" rx="10" ry="12" fill="white"/>
+  <ellipse cx="112" cy="80" rx="10" ry="12" fill="white"/>
+  
+  <!-- Pupils - looking slightly up (attentive) -->
+  <circle cx="82" cy="78" r="5" fill="#1E3A8A"/>
+  <circle cx="114" cy="78" r="5" fill="#1E3A8A"/>
+  
+  <!-- Eye sparkle -->
+  <circle cx="84" cy="76" r="2" fill="white"/>
+  <circle cx="116" cy="76" r="2" fill="white"/>
+  
+  <!-- Gentle smile -->
+  <path d="M 80 100 Q 96 115, 112 100" stroke="#0E7490" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Antenna/sensor (cognitive awareness) -->
+  <line x1="96" y1="55" x2="96" y2="35" stroke="#0891B2" stroke-width="4"/>
+  <circle cx="96" cy="30" r="8" fill="#FCD34D"/>
+  <circle cx="96" cy="30" r="4" fill="#FBBF24"/>
+  
+  <!-- Little arms reaching out (helpful) -->
+  <path d="M 55 105 Q 35 95, 30 110 Q 25 125, 40 120" stroke="#0891B2" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 137 105 Q 157 95, 162 110 Q 167 125, 152 120" stroke="#0891B2" stroke-width="6" fill="none" stroke-linecap="round"/>
+  
+  <!-- Small hand/helper circles -->
+  <circle cx="40" cy="120" r="8" fill="#06B6D4"/>
+  <circle cx="152" cy="120" r="8" fill="#06B6D4"/>
+</svg>

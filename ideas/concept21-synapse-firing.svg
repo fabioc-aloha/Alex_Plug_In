@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF4081"/>
+      <stop offset="50%" style="stop-color:#FFEB3B"/>
+      <stop offset="100%" style="stop-color:#00E676"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0D1117"/>
+  
+  <!-- Synapse firing visualization - electric pulse -->
+  
+  <!-- Pre-synaptic neuron (left) -->
+  <circle cx="35" cy="96" r="20" fill="#7C4DFF"/>
+  <circle cx="35" cy="96" r="12" fill="#0D1117"/>
+  <circle cx="35" cy="96" r="6" fill="#B388FF"/>
+  
+  <!-- Post-synaptic neuron (right) -->
+  <circle cx="157" cy="96" r="20" fill="#00BCD4"/>
+  <circle cx="157" cy="96" r="12" fill="#0D1117"/>
+  <circle cx="157" cy="96" r="6" fill="#84FFFF"/>
+  
+  <!-- Axon from pre-synaptic -->
+  <path d="M 55 96 L 75 96" stroke="#7C4DFF" stroke-width="4"/>
+  
+  <!-- Synaptic terminal (bulb) -->
+  <ellipse cx="85" cy="96" rx="12" ry="15" fill="#7C4DFF"/>
+  
+  <!-- Gap -->
+  <rect x="97" y="86" width="10" height="20" fill="#0D1117"/>
+  
+  <!-- Receptor on post-synaptic -->
+  <ellipse cx="117" cy="96" rx="12" ry="15" fill="#00BCD4"/>
+  
+  <!-- Dendrite to post-synaptic -->
+  <path d="M 129 96 L 137 96" stroke="#00BCD4" stroke-width="4"/>
+  
+  <!-- Electric pulse/signal crossing the gap -->
+  <path d="M 82 96 L 88 88 L 94 104 L 100 88 L 106 104 L 112 96 L 120 96" 
+        stroke="url(#pulseGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Energy burst effect -->
+  <circle cx="96" cy="96" r="25" fill="none" stroke="#FFEB3B" stroke-width="1" opacity="0.3"/>
+  <circle cx="96" cy="96" r="35" fill="none" stroke="#FFEB3B" stroke-width="1" opacity="0.2"/>
+  <circle cx="96" cy="96" r="45" fill="none" stroke="#FFEB3B" stroke-width="1" opacity="0.1"/>
+  
+  <!-- Neurotransmitter particles -->
+  <circle cx="92" cy="90" r="3" fill="#FFEB3B"/>
+  <circle cx="100" cy="102" r="3" fill="#FFEB3B"/>
+  <circle cx="96" cy="85" r="2" fill="#FFEB3B"/>
+  <circle cx="96" cy="107" r="2" fill="#FFEB3B"/>
+  
+  <!-- Spark lines -->
+  <line x1="96" y1="60" x2="96" y2="70" stroke="#FFEB3B" stroke-width="2" opacity="0.5"/>
+  <line x1="96" y1="122" x2="96" y2="132" stroke="#FFEB3B" stroke-width="2" opacity="0.5"/>
+  <line x1="70" y1="80" x2="75" y2="85" stroke="#FFEB3B" stroke-width="2" opacity="0.5"/>
+  <line x1="117" y1="107" x2="122" y2="112" stroke="#FFEB3B" stroke-width="2" opacity="0.5"/>
+</svg>

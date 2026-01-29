@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="passageGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#312E81"/>
+      <stop offset="100%" style="stop-color:#0F172A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0F172A"/>
+  
+  <!-- Passages trend - "A" as a portal/tunnel to knowledge -->
+  
+  <!-- Outer A frame -->
+  <path d="
+    M 96 20
+    L 35 170
+    L 55 170
+    L 70 130
+    L 122 130
+    L 137 170
+    L 157 170
+    L 96 20
+    Z
+  " fill="none" stroke="#4F46E5" stroke-width="3"/>
+  
+  <!-- Concentric passage layers creating depth -->
+  <path d="M 96 40 L 50 155 L 65 155 L 75 125 L 117 125 L 127 155 L 142 155 Z" 
+        fill="none" stroke="#6366F1" stroke-width="2"/>
+  
+  <path d="M 96 55 L 60 145 L 72 145 L 80 120 L 112 120 L 120 145 L 132 145 Z" 
+        fill="none" stroke="#818CF8" stroke-width="2"/>
+  
+  <path d="M 96 70 L 70 135 L 78 135 L 84 115 L 108 115 L 114 135 L 122 135 Z" 
+        fill="none" stroke="#A5B4FC" stroke-width="2"/>
+  
+  <!-- Inner illuminated opening (the destination) -->
+  <polygon points="96,85 80,125 88,125 92,112 100,112 104,125 112,125" fill="#C4B5FD"/>
+  <polygon points="96,92 86,118 92,118 94,110 98,110 100,118 106,118" fill="#E0E7FF"/>
+  
+  <!-- Light emanating from center -->
+  <circle cx="96" cy="105" r="5" fill="white"/>
+</svg>

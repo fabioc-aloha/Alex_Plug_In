@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="upperArc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#004D4D"/>
+      <stop offset="50%" style="stop-color:#006666"/>
+      <stop offset="100%" style="stop-color:#004D4D"/>
+    </linearGradient>
+    <linearGradient id="lowerArc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#CD853F"/>
+      <stop offset="50%" style="stop-color:#DEB887"/>
+      <stop offset="100%" style="stop-color:#CD853F"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Upper arc (conscious) -->
+  <path d="M15 50 Q50 10 85 50" 
+        fill="none" stroke="url(#upperArc)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Lower arc (unconscious) -->
+  <path d="M15 50 Q50 90 85 50" 
+        fill="none" stroke="url(#lowerArc)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Left endpoint node -->
+  <circle cx="15" cy="50" r="8" fill="#FAFAFA"/>
+  <circle cx="15" cy="50" r="5" fill="#004D4D"/>
+  
+  <!-- Right endpoint node -->
+  <circle cx="85" cy="50" r="8" fill="#FAFAFA"/>
+  <circle cx="85" cy="50" r="5" fill="#CD853F"/>
+</svg>

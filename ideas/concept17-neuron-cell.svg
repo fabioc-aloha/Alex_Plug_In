@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="synapseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BCD4"/>
+      <stop offset="100%" style="stop-color:#7C4DFF"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#0D1B2A"/>
+  
+  <!-- Neuron cell body (soma) - center -->
+  <circle cx="96" cy="96" r="25" fill="url(#synapseGrad)"/>
+  <circle cx="96" cy="96" r="15" fill="#1B263B"/>
+  <circle cx="96" cy="96" r="8" fill="#00BCD4"/>
+  
+  <!-- Dendrites (incoming signals) -->
+  <g stroke="#7C4DFF" stroke-width="3" fill="none" opacity="0.8">
+    <!-- Top dendrites -->
+    <path d="M 96 71 Q 80 50, 60 35"/>
+    <path d="M 96 71 Q 96 45, 96 25"/>
+    <path d="M 96 71 Q 112 50, 132 35"/>
+    
+    <!-- Side dendrites -->
+    <path d="M 71 96 Q 50 80, 30 70"/>
+    <path d="M 71 96 Q 45 96, 25 96"/>
+    <path d="M 71 96 Q 50 112, 30 122"/>
+    
+    <path d="M 121 96 Q 142 80, 162 70"/>
+    <path d="M 121 96 Q 147 96, 167 96"/>
+    <path d="M 121 96 Q 142 112, 162 122"/>
+  </g>
+  
+  <!-- Axon (outgoing signal) -->
+  <path d="M 96 121 Q 96 145, 96 165" stroke="#00BCD4" stroke-width="4" fill="none"/>
+  <path d="M 96 165 Q 80 170, 70 175" stroke="#00BCD4" stroke-width="2" fill="none"/>
+  <path d="M 96 165 Q 112 170, 122 175" stroke="#00BCD4" stroke-width="2" fill="none"/>
+  
+  <!-- Synaptic terminals (dendrite ends) -->
+  <circle cx="60" cy="35" r="5" fill="#7C4DFF"/>
+  <circle cx="96" cy="25" r="5" fill="#7C4DFF"/>
+  <circle cx="132" cy="35" r="5" fill="#7C4DFF"/>
+  <circle cx="30" cy="70" r="4" fill="#7C4DFF"/>
+  <circle cx="25" cy="96" r="4" fill="#7C4DFF"/>
+  <circle cx="30" cy="122" r="4" fill="#7C4DFF"/>
+  <circle cx="162" cy="70" r="4" fill="#7C4DFF"/>
+  <circle cx="167" cy="96" r="4" fill="#7C4DFF"/>
+  <circle cx="162" cy="122" r="4" fill="#7C4DFF"/>
+  
+  <!-- Axon terminals -->
+  <circle cx="70" cy="175" r="4" fill="#00BCD4"/>
+  <circle cx="96" cy="170" r="4" fill="#00BCD4"/>
+  <circle cx="122" cy="175" r="4" fill="#00BCD4"/>
+  
+  <!-- Signal pulses (animated feel) -->
+  <circle cx="78" cy="55" r="3" fill="#00E5FF" opacity="0.8"/>
+  <circle cx="114" cy="55" r="3" fill="#00E5FF" opacity="0.8"/>
+  <circle cx="45" cy="88" r="2" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="147" cy="88" r="2" fill="#00E5FF" opacity="0.6"/>
+</svg>

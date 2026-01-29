@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B1FA2"/>
+      <stop offset="100%" style="stop-color:#1976D2"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E91E63"/>
+      <stop offset="100%" style="stop-color:#9C27B0"/>
+    </linearGradient>
+  </defs>
+  
+  <circle cx="96" cy="96" r="90" fill="url(#bgGrad)"/>
+  
+  <!-- Brain shape as dino head -->
+  <path d="
+    M 55 70
+    Q 50 55, 70 50
+    Q 85 45, 95 50
+    Q 110 45, 125 50
+    Q 145 55, 150 75
+    Q 155 90, 145 105
+    L 135 115
+    Q 140 130, 130 145
+    Q 120 155, 100 155
+    Q 75 155, 65 145
+    Q 55 135, 55 115
+    Q 45 100, 50 85
+    Z
+  " fill="url(#brainGrad)" opacity="0.9"/>
+  
+  <!-- Brain folds/wrinkles -->
+  <path d="M 70 65 Q 85 75, 75 90" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none"/>
+  <path d="M 95 55 Q 100 70, 90 85" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none"/>
+  <path d="M 120 60 Q 130 75, 120 90" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none"/>
+  <path d="M 65 100 Q 80 110, 70 125" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+  <path d="M 130 100 Q 120 115, 125 130" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
+  
+  <!-- Dino eye -->
+  <circle cx="105" cy="95" r="18" fill="white"/>
+  <circle cx="108" cy="95" r="10" fill="#311B92"/>
+  <circle cx="112" cy="91" r="4" fill="white"/>
+  
+  <!-- Small smile -->
+  <path d="M 85 135 Q 100 145, 115 135" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="dnaGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E91E63"/>
+      <stop offset="100%" style="stop-color:#9C27B0"/>
+    </linearGradient>
+    <linearGradient id="dnaGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BCD4"/>
+      <stop offset="100%" style="stop-color:#3F51B5"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="96" cy="96" r="90" fill="#1A1A2E"/>
+  
+  <!-- DNA helix - left strand -->
+  <path d="
+    M 55 20
+    Q 96 45, 55 70
+    Q 14 95, 55 120
+    Q 96 145, 55 170
+  " stroke="url(#dnaGrad1)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- DNA helix - right strand -->
+  <path d="
+    M 137 20
+    Q 96 45, 137 70
+    Q 178 95, 137 120
+    Q 96 145, 137 170
+  " stroke="url(#dnaGrad2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- Base pairs (rungs) -->
+  <g stroke="#4DB6AC" stroke-width="3">
+    <line x1="62" y1="32" x2="130" y2="32"/>
+    <line x1="45" y1="52" x2="147" y2="52"/>
+    <line x1="55" y1="70" x2="137" y2="70"/>
+    <line x1="35" y1="90" x2="157" y2="90"/>
+    <line x1="55" y1="110" x2="137" y2="110"/>
+    <line x1="35" y1="130" x2="157" y2="130"/>
+    <line x1="55" y1="148" x2="137" y2="148"/>
+    <line x1="68" y1="165" x2="124" y2="165"/>
+  </g>
+  
+  <!-- Base pair nodes -->
+  <circle cx="96" cy="32" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="52" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="70" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="90" r="6" fill="#FFEB3B"/>
+  <circle cx="96" cy="110" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="130" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="148" r="5" fill="#FFEB3B"/>
+  <circle cx="96" cy="165" r="5" fill="#FFEB3B"/>
+  
+  <!-- Highlight central node -->
+  <circle cx="96" cy="90" r="12" fill="none" stroke="#FFEB3B" stroke-width="2" opacity="0.5"/>
+</svg>
