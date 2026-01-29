@@ -14,6 +14,8 @@
 | `/saveinsight` | Save a new insight | `@alex /saveinsight React useEffect cleanup...` |
 | `/promote` | Promote local DK to global | `@alex /promote .github/domain-knowledge/DK-API.md` |
 | `/knowledgestatus` | View knowledge base stats | `@alex /knowledgestatus` |
+| `/session` | Start/manage learning session | `@alex /session React hooks` |
+| `/goals` | View learning goals & streak | `@alex /goals` |
 | `/sync` | Sync with cloud | `@alex /sync` |
 
 ---
@@ -30,6 +32,12 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | `Alex: Dream (Neural Maintenance)` | Run health check and maintenance |
 | `Alex: Upgrade Architecture` | Update to latest Alex version |
 | `Alex: Sync Knowledge to Cloud` | Manual cloud sync |
+| `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
+| `Alex: Pause/Resume Session` | Pause or resume active session |
+| `Alex: Session Actions` | View/manage active session |
+| `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
+| `Alex: Create Learning Goal` | Create a new learning goal |
+| `Alex: Show Learning Goals` | View and manage learning goals |
 
 ---
 
@@ -198,6 +206,13 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 | Action | Windows/Linux | macOS |
 | --- | --- | --- |
+| Start Learning Session | `Ctrl+Alt+P` | `Cmd+Alt+P` |
+| Pause/Resume Session | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
+| Search Knowledge | `Ctrl+Shift+K` | `Cmd+Shift+K` |
+| Run Dream Protocol | `Ctrl+Alt+D` | `Cmd+Alt+D` |
+| Self-Actualize | `Ctrl+Alt+S` | `Cmd+Alt+S` |
+| Sync Knowledge | `Ctrl+Alt+K` | `Cmd+Alt+K` |
+| Open Documentation | `Ctrl+Alt+H` | `Cmd+Alt+H` |
 | Open Chat | `Ctrl+Alt+I` | `Cmd+Alt+I` |
 | Command Palette | `Ctrl+Shift+P` | `Cmd+Shift+P` |
 | Output Panel | `Ctrl+Shift+U` | `Cmd+Shift+U` |
@@ -248,8 +263,8 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 | Component | Version |
 | --- | --- |
-| Alex Extension | 3.0.0 |
-| Cognitive Architecture | 2.8.0 BIOCTNILIUM |
+| Alex Extension | 3.4.1 |
+| Cognitive Architecture | 3.3.7 TRITRSEPTIUM |
 | Global Knowledge Schema | 1.0.0 |
 
 ---

@@ -7,11 +7,22 @@ import { upgradeArchitecture } from './commands/upgrade';
 import { runSelfActualization } from './commands/self-actualization';
 import { runExportForM365 } from './commands/exportForM365';
 import { registerContextMenuCommands } from './commands/contextMenu';
+import { 
+    initializeSessionStatusBar, 
+    startSession, 
+    endSession, 
+    togglePauseSession, 
+    showSessionActions,
+    disposeSession 
+} from './commands/session';
+import { registerGoalsCommands } from './commands/goals';
 import { registerChatParticipant, resetSessionState } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 import { registerGlobalKnowledgeTools, ensureGlobalKnowledgeDirectories, registerCurrentProject } from './chat/globalKnowledge';
 import { registerCloudSyncTools, syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync } from './chat/cloudSync';
 import { checkHealth, getStatusBarDisplay, clearHealthCache, HealthStatus } from './shared/healthCheck';
+import { registerWelcomeView } from './views/welcomeView';
+import { registerHealthDashboard } from './views/healthDashboard';
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
@@ -58,6 +69,12 @@ export function activate(context: vscode.ExtensionContext) {
     
     // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
     registerContextMenuCommands(context);
+    
+    // Register welcome view in Activity Bar
+    const welcomeViewProvider = registerWelcomeView(context);
+    
+    // Register health dashboard webview
+    registerHealthDashboard(context);
     
     // === UNCONSCIOUS MIND: Start background sync ===
     // This creates Alex's transparent knowledge backup system
@@ -121,6 +138,28 @@ export function activate(context: vscode.ExtensionContext) {
     // M365 export command
     let exportM365Disposable = vscode.commands.registerCommand('alex.exportForM365', async () => {
         await runExportForM365(context);
+    });
+
+    // Session timer commands
+    initializeSessionStatusBar(context);
+    
+    // Register learning goals commands
+    registerGoalsCommands(context);
+    
+    const startSessionDisposable = vscode.commands.registerCommand('alex.startSession', async () => {
+        await startSession();
+    });
+    
+    const endSessionDisposable = vscode.commands.registerCommand('alex.endSession', async () => {
+        await endSession(true);
+    });
+    
+    const togglePauseDisposable = vscode.commands.registerCommand('alex.togglePauseSession', async () => {
+        await togglePauseSession();
+    });
+    
+    const sessionActionsDisposable = vscode.commands.registerCommand('alex.sessionActions', async () => {
+        await showSessionActions();
     });
 
     // Cloud sync commands
@@ -269,6 +308,10 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(upgradeDisposable);
     context.subscriptions.push(selfActualizeDisposable);
     context.subscriptions.push(exportM365Disposable);
+    context.subscriptions.push(startSessionDisposable);
+    context.subscriptions.push(endSessionDisposable);
+    context.subscriptions.push(togglePauseDisposable);
+    context.subscriptions.push(sessionActionsDisposable);
     context.subscriptions.push(syncDisposable);
     context.subscriptions.push(pushDisposable);
     context.subscriptions.push(pullDisposable);
@@ -379,5 +422,7 @@ async function checkVersionUpgrade(context: vscode.ExtensionContext): Promise<vo
 export function deactivate() {
     // Reset chat participant session state to prevent state bleeding
     resetSessionState();
+    // Clean up session timer
+    disposeSession();
     console.log('Alex Cognitive Architecture deactivated');
 }

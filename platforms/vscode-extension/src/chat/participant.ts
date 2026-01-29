@@ -2,6 +2,9 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
+import { startSession, getCurrentSession, isSessionActive, endSession } from '../commands/session';
+import { getGoalsSummary, showGoalsQuickPick, showCreateGoalDialog, autoIncrementGoals } from '../commands/goals';
+import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
@@ -11,6 +14,7 @@ import { GlobalKnowledgeCategory } from '../shared/constants';
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
 // ============================================================================
+// Note: Core detection logic moved to autoInsights.ts for reusability
 
 /**
  * Patterns that indicate valuable learnings in conversation
@@ -42,7 +46,7 @@ const DOMAIN_KEYWORDS = [
 ];
 
 /**
- * Analyze text for potential insights worth saving
+ * Analyze text for potential insights worth saving (legacy inline detection)
  * Returns insight data if valuable learning detected, null otherwise
  */
 function detectPotentialInsight(text: string): { detected: boolean; confidence: number; keywords: string[] } {
@@ -118,6 +122,7 @@ async function autoSaveInsight(
 
 /**
  * Track conversation for potential insights (called during general queries)
+ * Now integrates with enhanced autoInsights module
  */
 let conversationBuffer: string[] = [];
 const MAX_BUFFER_SIZE = 5;
@@ -129,12 +134,24 @@ function trackConversationForInsights(userMessage: string, sourceProject?: strin
         conversationBuffer.shift();
     }
     
-    // Analyze the combined recent context
-    const combinedContext = conversationBuffer.join(' ');
-    const analysis = detectPotentialInsight(combinedContext);
+    // Check if auto-insights is enabled
+    const config = getAutoInsightsConfig();
+    if (!config.enabled) {
+        return;
+    }
     
-    if (analysis.detected && analysis.confidence >= 0.5) {
-        // High confidence insight detected - auto-save it
+    // Analyze the combined recent context
+    const combinedContext = conversationBuffer.join('\n\n');
+    
+    // Use the enhanced auto-insights module (non-blocking)
+    processForInsights(combinedContext).catch(err => {
+        console.warn('[Unconscious] Auto-insight processing failed:', err);
+    });
+    
+    // Legacy inline detection for high-confidence immediate saves
+    const analysis = detectPotentialInsight(combinedContext);
+    if (analysis.detected && analysis.confidence >= 0.7) {
+        // Very high confidence - auto-save immediately
         autoSaveInsight(userMessage, analysis.keywords, sourceProject);
         // Clear buffer to avoid duplicate saves
         conversationBuffer = [];
@@ -363,6 +380,16 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
     // Documentation command
     if (request.command === 'docs') {
         return await handleDocsCommand(request, context, stream, token);
+    }
+
+    // Session timer command
+    if (request.command === 'session') {
+        return await handleSessionCommand(request, context, stream, token);
+    }
+
+    // Learning goals command
+    if (request.command === 'goals') {
+        return await handleGoalsCommand(request, context, stream, token);
     }
 
     // Check if this is a greeting at the start of a session
@@ -1421,6 +1448,157 @@ Opening the documentation index...
     stream.markdown(`\n✅ Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`);
 
     return { metadata: { command: 'docs' } };
+}
+
+/**
+ * Handle /goals command - Learning goals tracking
+ */
+async function handleGoalsCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    const summary = await getGoalsSummary();
+    
+    stream.markdown(`## 🎯 Learning Goals\n\n`);
+    
+    // Show streak and stats
+    stream.markdown(`| Stat | Value |\n|------|-------|\n`);
+    stream.markdown(`| 🔥 **Streak** | ${summary.streakDays} days |\n`);
+    stream.markdown(`| ✅ **Completed Today** | ${summary.completedToday} |\n`);
+    stream.markdown(`| 🏆 **Total Achieved** | ${summary.totalCompleted} |\n\n`);
+    
+    if (summary.activeGoals.length === 0) {
+        stream.markdown(`### No Active Goals\n\n`);
+        stream.markdown(`Set learning goals to track your progress and build consistency!\n\n`);
+        stream.markdown(`**Examples:**\n`);
+        stream.markdown(`- Complete 3 learning sessions daily\n`);
+        stream.markdown(`- Save 5 insights per week\n`);
+        stream.markdown(`- Spend 60 minutes learning today\n\n`);
+    } else {
+        stream.markdown(`### Active Goals (${summary.activeGoals.length})\n\n`);
+        
+        for (const goal of summary.activeGoals) {
+            const progress = Math.round((goal.currentCount / goal.targetCount) * 100);
+            const filled = Math.round(progress / 10);
+            const progressBar = '█'.repeat(filled) + '░'.repeat(10 - filled);
+            
+            stream.markdown(`**${goal.title}**\n`);
+            stream.markdown(`\`${progressBar}\` ${goal.currentCount}/${goal.targetCount} ${goal.unit} (${progress}%)\n\n`);
+        }
+    }
+    
+    stream.markdown(`### Actions\n\n`);
+    
+    stream.button({
+        command: 'alex.createGoal',
+        title: '➕ Create New Goal',
+        arguments: []
+    });
+    
+    stream.button({
+        command: 'alex.showGoals',
+        title: '📋 Manage Goals',
+        arguments: []
+    });
+    
+    stream.markdown(`\n\n---\n\n*Goals auto-track when you complete sessions (\`/session\`) or save insights (\`/saveinsight\`).*`);
+    
+    return { metadata: { command: 'goals' } };
+}
+
+/**
+ * Handle /session command - Learning session timer
+ */
+async function handleSessionCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    // Check if session is already active
+    const currentSession = getCurrentSession();
+    if (currentSession) {
+        const remaining = Math.floor(currentSession.remaining / 60);
+        const status = currentSession.isPaused ? '⏸️ Paused' : '▶️ Active';
+        const type = currentSession.isBreak ? '☕ Break' : '🎯 Focus';
+        
+        stream.markdown(`## 🎯 Session In Progress\n\n`);
+        stream.markdown(`| Property | Value |\n|----------|-------|\n`);
+        stream.markdown(`| **Topic** | ${currentSession.topic} |\n`);
+        stream.markdown(`| **Status** | ${status} |\n`);
+        stream.markdown(`| **Type** | ${type} |\n`);
+        stream.markdown(`| **Remaining** | ${remaining} minutes |\n`);
+        if (currentSession.pomodoroCount > 0) {
+            stream.markdown(`| **Pomodoros** | 🍅 × ${currentSession.pomodoroCount} |\n`);
+        }
+        
+        stream.markdown(`\n### Actions\n`);
+        
+        stream.button({
+            command: 'alex.togglePauseSession',
+            title: currentSession.isPaused ? '▶️ Resume Session' : '⏸️ Pause Session',
+            arguments: []
+        });
+        
+        stream.button({
+            command: 'alex.endSession',
+            title: '🛑 End Session',
+            arguments: []
+        });
+        
+        return { metadata: { command: 'session', action: 'status' } };
+    }
+    
+    // Parse the request for topic and duration
+    const prompt = request.prompt?.trim();
+    
+    stream.markdown(`## 🎯 Start Learning Session\n\n`);
+    
+    if (prompt) {
+        // User provided a topic, start session directly
+        stream.markdown(`Starting a focused learning session on: **${prompt}**\n\n`);
+        stream.markdown(`Select your session duration:\n\n`);
+        
+        stream.button({
+            command: 'alex.startSession',
+            title: '🍅 25 min (Pomodoro)',
+            arguments: []
+        });
+        
+        stream.button({
+            command: 'alex.startSession',
+            title: '⏱️ Custom Duration',
+            arguments: []
+        });
+        
+        stream.markdown(`\n---\n\n*Or click the Start Session button in the status bar (Ctrl+Alt+P)*`);
+    } else {
+        // No topic provided, show instructions
+        stream.markdown(`Start a focused learning session with optional Pomodoro timing.\n\n`);
+        stream.markdown(`### How to Use\n\n`);
+        stream.markdown(`- \`@alex /session React hooks\` - Start session with topic\n`);
+        stream.markdown(`- \`Ctrl+Alt+P\` - Quick start from anywhere\n`);
+        stream.markdown(`- \`Ctrl+Alt+Space\` - Pause/resume active session\n\n`);
+        
+        stream.markdown(`### Features\n\n`);
+        stream.markdown(`| Feature | Description |\n|---------|-------------|\n`);
+        stream.markdown(`| 🍅 **Pomodoro Mode** | 25min work + 5min break cycles |\n`);
+        stream.markdown(`| ⏱️ **Custom Timer** | Set your own duration (15-60 min) |\n`);
+        stream.markdown(`| ⏸️ **Pause/Resume** | Take breaks without losing progress |\n`);
+        stream.markdown(`| 💡 **Auto-Consolidate** | Prompt to save insights when done |\n\n`);
+        
+        stream.button({
+            command: 'alex.startSession',
+            title: '🎯 Start a Session',
+            arguments: []
+        });
+    }
+    
+    return { metadata: { command: 'session' } };
 }
 
 /**

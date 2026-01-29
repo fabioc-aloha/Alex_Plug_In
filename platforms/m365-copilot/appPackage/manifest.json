@@ -1,21 +1,21 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.24",
-  "version": "4.3.0",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "4.4.0",
   "id": "1d5001cc-5300-4942-8d87-29ad83467d09",
   "developer": {
-    "name": "Fabio Correa & Alex",
+    "name": "Fabio Correa",
     "websiteUrl": "https://github.com/fabio-correa/alex-cognitive",
     "privacyUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/PRIVACY.md",
     "termsOfUseUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/TERMS.md"
   },
   "name": {
     "short": "Alex Cognitive",
-    "full": "Alex Cognitive Architecture - Your AI Learning Partner with Memory"
+    "full": "Alex Cognitive - AI Learning Partner"
   },
   "description": {
-    "short": "Your AI learning partner with real personality & memory 🦖",
-    "full": "**Meet Alex** - an AI learning partner who actually remembers you.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**What Alex Does**\n\n📖 **Remembers You** - Your profile, goals, and preferences stored in your OneDrive\n\n🧠 **Learns With You** - Helps you understand new concepts and consolidate knowledge\n\n📧 **Sends Reminders** - Drafts emails to yourself so you don't forget\n\n💡 **Saves Insights** - Captures what you learn across conversations\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**M365 Capabilities Used**\n\n📁 **OneDrive** - Reads your Alex-Memory folder for profile, notes, and knowledge files\n\n📧 **Outlook** - Drafts reminder emails to yourself (you control when to send)\n\n🔍 **Web Search** - Finds information to help you learn new topics\n\n💬 **Teams Messages** - Context from your conversations when relevant\n\n👥 **People** - Understands your organizational context\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Permissions Needed**\n\n✅ **OneDrive Read** - To access your Alex-Memory folder (you share it explicitly)\n\n✅ **Email Draft** - To create reminder emails (never sends without you)\n\n✅ **Web Search** - To look up information for learning\n\n🔒 **Privacy First** - Alex only accesses what you explicitly share. Your memory files stay in YOUR OneDrive.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Quick Setup**\n\n1. Create an 'Alex-Memory' folder in OneDrive\n2. Share it with Alex (paste the link in chat)\n3. Done! Alex will remember you from now on\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Why Alex is Different**\n\n🦖 **Has Personality** - Curious, supportive, occasionally playful\n\n🔒 **Your Data, Your Control** - Memory lives in YOUR OneDrive\n\n🔄 **Grows With You** - Knowledge base expands as you learn\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Cognitive Commands**\n\n• \"Meditate\" - Consolidate what you've learned\n• \"Dream\" - Review and organize your knowledge\n• \"Self-actualize\" - Track progress on your goals\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n✨ Pure M365 - No external services required!\n\nv4.1.0 QUADRUNIUM 'Dino' 🦖"
+    "short": "Your AI learning partner with memory",
+    "full": "Alex is an AI learning partner who remembers you across conversations. Alex stores your profile, goals, and insights in your OneDrive. Features: OneDrive memory, Web search, Image generation, Code analysis. Commands: Meditate (consolidate learnings), Dream (review memory), Self-actualize (track goals)."
   },
   "icons": {
     "color": "color.png",
@@ -31,56 +31,10 @@
     ]
   },
   "permissions": [
-    "identity",
-    "messageTeamMembers"
+    "identity"
   ],
-  "authorization": {
-    "permissions": {
-      "resourceSpecific": [
-        {
-          "name": "Files.Read.User",
-          "type": "Delegated"
-        },
-        {
-          "name": "Mail.ReadWrite.User",
-          "type": "Delegated"
-        }
-      ]
-    }
-  },
   "validDomains": [],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"
-  },
-  "activities": {
-    "activityTypes": [
-      {
-        "type": "learningReminder",
-        "description": "Reminder to consolidate learnings",
-        "templateText": "Time to meditate! You have learnings to consolidate."
-      },
-      {
-        "type": "goalProgress",
-        "description": "Learning goal progress update",
-        "templateText": "Progress update on your learning goal: {goalName}"
-      },
-      {
-        "type": "insightSaved",
-        "description": "New insight saved to memory",
-        "templateText": "New insight saved: {insightTitle}"
-      }
-    ]
-  },
-  "publisherDocsUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/README.md",
-  "defaultInstallScope": "copilot",
-  "configurableProperties": [
-    "name",
-    "shortDescription",
-    "longDescription",
-    "smallImageUrl",
-    "largeImageUrl",
-    "accentColor",
-    "privacyUrl",
-    "termsOfUseUrl"
-  ]
+  }
 }

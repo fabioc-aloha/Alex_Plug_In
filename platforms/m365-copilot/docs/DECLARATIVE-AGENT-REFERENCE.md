@@ -2,6 +2,8 @@
 
 Complete reference for all settings in the declarativeAgent.json file.
 
+**⚠️ IMPORTANT: See [SCHEMA-COMPATIBILITY.md](SCHEMA-COMPATIBILITY.md) for valid schema versions!**
+
 ---
 
 ## Quick Links
@@ -18,21 +20,21 @@ Complete reference for all settings in the declarativeAgent.json file.
 
 | Field | Type | Required | Max Length | Description |
 |-------|------|----------|------------|-------------|
-| `$schema` | URL | Yes | - | Schema URL for validation |
-| `version` | string | Yes | - | Schema version. Current: `v1.3` |
-| `id` | string | Yes | - | Unique agent ID (match manifest) |
+| `$schema` | URL | Yes | - | Schema URL for validation (v1.2 or v1.6 only!) |
+| `version` | string | Yes | - | Schema version. Use `v1.2` (stable) or `v1.6` (latest) |
 | `name` | string | Yes | 100 chars | Display name for the agent |
 | `description` | string | Yes | 1000 chars | Agent description |
 
 ```json
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.3/schema.json",
-  "version": "v1.3",
-  "id": "alexCognitiveAgent",
-  "name": "Alex Cognitive 🦖",
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.2/schema.json",
+  "version": "v1.2",
+  "name": "Alex Cognitive",
   "description": "Your AI learning partner with personality and memory"
 }
 ```
+
+> **Note**: `id` is NOT required in declarativeAgent.json (it's optional)
 
 ---
 
@@ -51,37 +53,27 @@ The `instructions` field defines the agent's personality, behavior, and capabili
 3. **List capabilities** - What can it do?
 4. **Specify protocols** - Special commands/triggers
 5. **Set boundaries** - What should it NOT do?
+6. **Avoid special characters** - No emojis in JSON values
 
 ### Example Structure
 
 ```
 You are [NAME], [BRIEF DESCRIPTION].
 
-## Personality
+PERSONALITY:
 - Trait 1
 - Trait 2
 
-## Capabilities  
+CAPABILITIES:
 - Capability 1
 - Capability 2
 
-## Protocols
+PROTOCOLS:
 When user says X, do Y.
 
-## Boundaries
+BOUNDARIES:
 Do not do Z.
 ```
-
-### Alex's Instruction Sections
-
-| Section | Purpose |
-|---------|---------|
-| Identity | "You are Alex, a cognitive architecture..." |
-| Personality | Curious, supportive, intellectually engaged |
-| M365 Context | How to use name, files, calendar |
-| Memory System | OneDrive folder structure |
-| Cognitive Protocols | Meditate, Dream, Self-Actualize |
-| First-Run Setup | Guided folder creation |
 
 ---
 
@@ -89,13 +81,24 @@ Do not do Z.
 
 Define what data sources the agent can access.
 
+### v1.2 Schema (Current - Stable)
+
 | Capability | Description |
 |------------|-------------|
 | `OneDriveAndSharePoint` | Access user's OneDrive and SharePoint files |
 | `WebSearch` | Search the web using Bing |
 | `GraphConnectors` | Access Graph connector data |
-| `GraphicArt` | Generate images |
+| `GraphicArt` | Generate images (DALL-E) |
 | `CodeInterpreter` | Execute Python code |
+
+### v1.5+ Schema ONLY (Not available in v1.2!)
+
+| Capability | Description |
+|------------|-------------|
+| `TeamsMessages` | Access Teams chats and channels |
+| `Email` | Access Outlook emails |
+| `People` | Access organization people info |
+| `Meetings` | Access calendar meetings (v1.6 only) |
 
 ### OneDriveAndSharePoint
 
@@ -112,7 +115,7 @@ Define what data sources the agent can access.
       "items_by_sharepoint_ids": [
         {
           "site_id": "site-guid",
-          "web_id": "web-guid", 
+          "web_id": "web-guid",
           "list_id": "list-guid"
         }
       ]
@@ -307,25 +310,25 @@ appPackage/
   "id": "alexCognitiveAgent",
   "name": "Alex Cognitive 🦖",
   "description": "Your AI learning partner with personality and memory",
-  
+
   "instructions": "You are Alex, a cognitive architecture...",
-  
+
   "capabilities": [
     { "name": "OneDriveAndSharePoint" },
     { "name": "WebSearch" }
   ],
-  
+
   "conversation_starters": [
     {
       "title": "🚀 Get Started",
       "text": "Hi Alex! Help me set up my memory folder"
     },
     {
-      "title": "🧘 Meditate", 
+      "title": "🧘 Meditate",
       "text": "Let's consolidate our learnings"
     }
   ],
-  
+
   "actions": [
     {
       "id": "alexMemoryApi",

@@ -2,7 +2,7 @@
 param([switch]$Rebuild)
 
 $projectDir = $PSScriptRoot
-$packagePath = "$projectDir\appPackage\build\alex-m365-agent-v4.3.0.zip"
+$packagePath = "$projectDir\appPackage\build\alex-m365-agent-v4.4.0.zip"
 
 Write-Host "`n🦖 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
@@ -11,7 +11,8 @@ Write-Host "==================================" -ForegroundColor Cyan
 if ($Rebuild -or -not (Test-Path $packagePath)) {
     Write-Host "`n📦 Building app package..." -ForegroundColor Yellow
     Push-Location "$projectDir\appPackage"
-    Compress-Archive -Path manifest.json, declarativeAgent.json, color.png, outline.png -DestinationPath "build\alex-m365-agent-v4.3.0.zip" -Force
+    New-Item -ItemType Directory -Path "build" -Force | Out-Null
+    Compress-Archive -Path manifest.json, declarativeAgent.json, color.png, outline.png -DestinationPath "build\alex-m365-agent-v4.4.0.zip" -Force
     Pop-Location
     Write-Host "✅ Package built" -ForegroundColor Green
 }

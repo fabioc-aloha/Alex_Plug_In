@@ -81,7 +81,8 @@ Quick actions via `/` commands:
 | `/status` | Check Alex health and version |
 | `/meditate` | Consolidate knowledge from session |
 | `/dream` | Run neural maintenance |
-| `/learn` | Start a learning session |
+| `/session` | Start a focused learning session |
+| `/learn` | Start a learning conversation |
 | `/docs` | Open documentation |
 
 ### Learning Something New
@@ -240,6 +241,24 @@ First sync creates a private Gist automatically.
 ---
 
 ## Maintenance
+
+### Health Dashboard
+
+For a comprehensive view of Alex's cognitive architecture, open the Health Dashboard:
+
+```text
+Ctrl+Shift+P → "Alex: Open Health Dashboard"
+```
+
+The dashboard displays:
+
+- **Health Overview** - Overall status with synapse health indicator
+- **Synapse Network** - Visual representation of connections (healthy/broken)
+- **Memory Architecture** - File breakdown by category (instructions, prompts, domain knowledge)
+- **Global Knowledge** - Patterns and insights counts
+- **Active Goals** - Current learning goals with progress
+- **Session Status** - Current session timer (if active)
+- **Cloud Sync** - Sync status and last sync time
 
 ### Daily Maintenance
 
@@ -405,6 +424,13 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 
 | Action | Shortcut |
 |--------|----------|
+| Start Learning Session | `Ctrl+Alt+P` |
+| Pause/Resume Session | `Ctrl+Alt+Space` |
+| Search Knowledge | `Ctrl+Shift+K` |
+| Run Dream Protocol | `Ctrl+Alt+D` |
+| Self-Actualize | `Ctrl+Alt+S` |
+| Sync Knowledge | `Ctrl+Alt+K` |
+| Open Documentation | `Ctrl+Alt+H` |
 | Open Chat | `Ctrl+Alt+I` |
 | Command Palette | `Ctrl+Shift+P` |
 | Output Panel | `Ctrl+Shift+U` |

@@ -37,16 +37,16 @@
 | 1 | Status Bar Health Indicator | ✅ | 2h | 🟢/🟡/🔴 in status bar, click for diagnostics |
 | 2 | Context Menu Actions | ✅ | 2h | Right-click: "Save to Alex", "Ask Alex" |
 | 3 | Knowledge Quick Pick | ✅ | 3h | Ctrl+Shift+K to search & insert knowledge |
-| 4 | Session Timer | ⬜ | 3h | Track learning sessions with Pomodoro option |
-| 5 | Welcome View | ⬜ | 4h | Activity Bar panel with quick actions |
+| 4 | Session Timer | ✅ | 3h | Track learning sessions with Pomodoro option |
+| 5 | Welcome View | ✅ | 4h | Activity Bar panel with quick actions |
 
 ### v3.4.0 Medium Effort
 
 | # | Feature | Status | Effort | Description |
 |:-:|---------|:------:|:------:|-------------|
-| 6 | Learning Goals Widget | ⬜ | 1d | Track daily/weekly goals with visual progress |
-| 7 | Auto-Insights Detection | ⬜ | 2d | Detect patterns, offer to save insights |
-| 8 | Health Dashboard Webview | ⬜ | 2d | Rich visualization of architecture |
+| 6 | Learning Goals Widget | ✅ | 1d | Track daily/weekly goals with visual progress |
+| 7 | Auto-Insights Detection | ✅ | 2d | Detect patterns, offer to save insights |
+| 8 | Health Dashboard Webview | ✅ | 2d | Rich visualization of architecture |
 
 ### v3.5.0+ Future Features (from v5.0 Roadmap)
 
@@ -59,7 +59,7 @@
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v3.4.0 Tasks: 3/8 complete**
+**v3.4.0 Tasks: 8/8 complete** 🎉
 
 ---
 

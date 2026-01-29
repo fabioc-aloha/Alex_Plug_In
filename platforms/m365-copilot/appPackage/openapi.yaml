@@ -1,15 +1,8 @@
-# ==============================================================================
-# DORMANT - This file is not used in Alex v4.0.0 QUADRUNIUM (Pure M365 Edition)
-# Preserved for future use if API Plugin capability is needed.
-# See: platforms/m365-copilot/api/README.md for details
-# ==============================================================================
-
 openapi: 3.0.3
 info:
-  title: Alex Knowledge API [DORMANT]
+  title: Alex Knowledge API
   description: |
-    [DORMANT] API for accessing Alex Cognitive Architecture's knowledge base.
-    This API is not currently used - Alex v4.0.0 uses pure M365 native capabilities.
+    API for accessing Alex Cognitive Architecture's knowledge base.
     Provides endpoints for searching patterns, retrieving insights,
     accessing user profiles, notes, and learning goals.
   version: 1.0.0

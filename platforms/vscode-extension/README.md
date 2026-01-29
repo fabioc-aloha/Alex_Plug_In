@@ -2,9 +2,12 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.4.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.4.2-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/fabioc-aloha.alex-cognitive-architecture?label=VS%20Code%20Marketplace&color=0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
-[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Chat%20Participant-8957e5)](https://code.visualstudio.com/)
 
 > Your AI Learning Partner with Meta-Cognitive Awareness
 
@@ -57,6 +60,8 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /dream` | Run neural maintenance and repair synapses |
 | `@alex /selfactualize` | Comprehensive self-assessment with deep meditation |
 | `@alex /learn` | Acquire new domain knowledge conversationally |
+| `@alex /session` | Start or manage a focused learning session with Pomodoro timing |
+| `@alex /goals` | View and manage your learning goals with streak tracking |
 | `@alex /azure` | Get Azure development guidance with MCP tools |
 | `@alex /m365` | Get Microsoft 365 and Teams development help |
 | `@alex /profile` | View and update your personal preferences |
@@ -73,6 +78,9 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 @alex Hello!
 → Triggers automatic self-actualization check and personalized greeting
+
+@alex /session React hooks
+→ Starts a focused learning session with Pomodoro timing
 
 @alex /meditate I learned about dependency injection patterns today
 → Offers self-actualization first, then guides knowledge consolidation
@@ -142,6 +150,11 @@ Access via `Ctrl+Shift+P`:
 | **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
 | **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
 | **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation |
+| **Alex: Start Learning Session** | Begin a focused session with Pomodoro timer |
+| **Alex: Pause/Resume Session** | Pause or resume active learning session |
+| **Alex: Open Health Dashboard** | Rich webview visualization of architecture health |
+| **Alex: Create Learning Goal** | Create a new learning goal with category and timeframe |
+| **Alex: Show Learning Goals** | View and manage your learning goals |
 
 ### 🤖 Language Model Tools
 
@@ -224,9 +237,21 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ### Features
 
-- Latest cognitive architecture improvements
-- Enhanced MCP tool recommendations
-- Improved synapse health monitoring
+- 🎯 **Session Timer** - Pomodoro-style learning sessions with countdown, pause/resume, and auto-consolidation prompts
+- 🦖 **Welcome View** - Activity Bar sidebar with health status, knowledge stats, and quick actions
+- 🟢 **Status Bar Health Indicator** - Real-time architecture health (🟢/🟡/🔴) with click for diagnostics
+- 📋 **Context Menu Actions** - Right-click "Ask Alex", "Save to Knowledge", "Search Related"
+- ⌨️ **Knowledge Quick Pick** - `Ctrl+Shift+K` to search and insert knowledge
+
+### Keyboard Shortcuts
+
+| Action | Shortcut |
+| ------ | -------- |
+| Start Learning Session | `Ctrl+Alt+P` |
+| Pause/Resume Session | `Ctrl+Alt+Space` |
+| Search Knowledge | `Ctrl+Shift+K` |
+| Run Dream Protocol | `Ctrl+Alt+D` |
+| Sync Knowledge | `Ctrl+Alt+K` |
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history.
 

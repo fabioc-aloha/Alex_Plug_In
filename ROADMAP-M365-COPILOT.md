@@ -4,28 +4,31 @@
 
 | | |
 |---|---|
-| **Target Version** | 4.3.0 QUADRITRIUM |
+| **Target Version** | 4.4.0 QUADRIQUADIUM |
 | **Codename** | 🦖 **Dino** |
-| **Status** | ✅ **DEPLOYED!** v4.3.0 with Document Context Awareness! |
+| **Status** | 🔄 v4.4.0 - Schema v1.2 (stable, working) |
 | **Created** | 2026-01-27 |
-| **Updated** | 2026-01-28 |
+| **Updated** | 2026-01-29 |
 | **Author** | Alex Cognitive Architecture Team |
 
 ---
 
-> ## ✅ v4.2.0 QUADRIBIUM - Pure M365 Architecture
+> ## ⚠️ IMPORTANT: Schema Compatibility (Updated 2026-01-29)
 >
-> Alex now uses **native M365 capabilities only** with enhanced features!
+> **Only these declarative agent schema versions exist:**
+> - v1.0, v1.2, v1.5, v1.6 (v1.3, v1.4 DO NOT EXIST!)
 >
-> **Capabilities:**
-> - ✅ OneDrive (read Alex-Memory files)
-> - ✅ Email (send reminders to self)
-> - ✅ TeamsMessages (send messages to colleagues)
-> - ✅ Meetings (calendar integration for prep)
-> - ✅ People (organizational context)
+> **Current Stable (v1.2):**
+> - ✅ OneDriveAndSharePoint (read Alex-Memory files)
 > - ✅ WebSearch (research topics)
+> - ✅ GraphicArt (image generation)
+> - ✅ CodeInterpreter (Python execution)
+> - ✅ GraphConnectors (enterprise search)
 >
-> **Deployment:** Package → Validate → Upload to Developer Portal → Share OneDrive folder
+> **Requires v1.5+ (NOT in v1.2):**
+> - ❌ Email, TeamsMessages, People, Meetings
+>
+> **See:** [SCHEMA-COMPATIBILITY.md](platforms/m365-copilot/docs/SCHEMA-COMPATIBILITY.md)
 
 ---
 
@@ -437,95 +440,77 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 
 ---
 
-## 🔧 Technical Specifications (Verified 2026-01-28)
+## 🔧 Technical Specifications (Corrected 2026-01-29)
 
-### Schema Versions
+### ⚠️ Schema Versions - CRITICAL
 
-| Schema | Working Version | Latest Available | Portal Support | Notes |
-|--------|-----------------|------------------|----------------|-------|
-| **App Manifest (Teams)** | **v1.24** ✅ | v1.25 | v1.24 only | v1.25 not yet supported by Teams Toolkit/Portal |
-| **Declarative Agent** | **v1.3** ✅ | v1.6 | v1.3 | v1.3 more compatible with Developer Portal |
-| **M365 Agents YAML** | v1.8 | v1.9 | - | CLI v2.x supports v1.8 |
+| Schema | Exists? | Alex Status | Notes |
+|--------|:-------:|:-----------:|-------|
+| **v1.0** | ✅ | Not used | Original schema |
+| **v1.2** | ✅ | **CURRENT** | Stable, recommended for basic agents |
+| ~~v1.3~~ | ❌ | - | **DOES NOT EXIST** (we incorrectly used this!) |
+| ~~v1.4~~ | ❌ | - | **DOES NOT EXIST** |
+| **v1.5** | ✅ | Future | Adds TeamsMessages, Email, People |
+| **v1.6** | ✅ | Future | Adds Meetings, Dataverse, EmbeddedKnowledge |
 
-> **Schema v1.24 Features Used:**
-> - `defaultInstallScope: "copilot"` - Direct Copilot install
-> - `authorization.permissions.resourceSpecific` - RSC permissions (Files.Read.User, Mail.ReadWrite.User)
->
-> **Schema v1.24 Features NOT YET SUPPORTED by Portal:**
-> - `icons.color32x32` - 32x32 color icon for pinning
-> - `activities.activityIcons` - Custom notification icons
-> - `activityTypes[].allowedIconIds` - Icon mapping
->
-> **Schema v1.25 Features (Future):**
-> - `agenticUserTemplates` - Agent 365 blueprints with Entra Agent ID
-> - `supportsChannelFeatures: "tier1"` - Enhanced shared/private channel support
+> **ROOT CAUSE OF FAILURES**: We were using `v1.3` schema which doesn't exist!
+> Any unrecognized property makes the entire document invalid (per MS docs).
+
+### v1.2 Capabilities (What We Can Use NOW)
+
+| Capability | Description | Alex v4.4 |
+|------------|-------------|:---------:|
+| `OneDriveAndSharePoint` | Access user files | ✅ |
+| `WebSearch` | Search the web | ✅ |
+| `GraphConnectors` | Enterprise Graph connectors | Available |
+| `GraphicArt` | Generate images (DALL-E) | ✅ |
+| `CodeInterpreter` | Execute Python code | ✅ |
+
+### v1.5/v1.6 Capabilities (FUTURE - Not in v1.2!)
+
+| Capability | v1.5 | v1.6 | Description |
+|------------|:----:|:----:|-------------|
+| `TeamsMessages` | ✅ | ✅ | Search Teams chats |
+| `Email` | ✅ | ✅ | Search Outlook emails |
+| `People` | ✅ | ✅ | Search org people |
+| `Meetings` | ❌ | ✅ | Search calendar meetings |
+| `Dataverse` | ❌ | ✅ | Power Platform data |
+| `EmbeddedKnowledge` | ❌ | ✅ | Local files (NOT YET AVAILABLE) |
+
+### Teams App Manifest (manifest.json)
+
+| Version | Status | Notes |
+|---------|:------:|-------|
+| **v1.19** | ✅ Current | Stable, good compatibility |
+| v1.24 | Available | More features, may have issues |
+| v1.25 | Newer | Some features not yet supported |
+
+### Current Working Configuration (v4.4.0)
+
+```json
+// declarativeAgent.json
+{
+  "$schema": ".../declarative-agent/v1.2/schema.json",
+  "version": "v1.2",
+  "name": "Alex Cognitive",
+  "capabilities": [
+    { "name": "OneDriveAndSharePoint" },
+    { "name": "WebSearch" },
+    { "name": "GraphicArt" },
+    { "name": "CodeInterpreter" }
+  ],
+  "conversation_starters": [/* max 12 items in v1.2 */]
+}
+
+// manifest.json
+{
+  "$schema": ".../teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "4.4.0"
+}
+```
 
 > **Note**: No API Plugin needed - pure M365 native capabilities!
-
-### M365 Agents Toolkit
-
-| Property | Value |
-|----------|-------|
-| **Extension Name** | Microsoft 365 Agents Toolkit |
-| **Extension ID** | `teamsdevapp.ms-teams-vscode-extension` |
-| **Docs Version** | 6.0 (Release) |
-| **Marketplace** | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) |
-| **Status** | ✅ Already installed |
-
-### M365 Capabilities Used
-
-| Capability | What Alex Does With It |
-|------------|------------------------|
-| `OneDriveAndSharePoint` | READ user's Alex-Memory folder |
-| `Email` | Draft reminder emails to self |
-| `WebSearch` | Research topics online |
-| `TeamsMessages` | Access Teams context |
-| `People` | Know about colleagues |
-
-### App Package Structure (Simplified)
-
-```
-alexCognitiveAgent/
-├── appPackage/
-│   ├── manifest.json           # M365 App manifest (v1.24)
-│   ├── declarativeAgent.json   # Agent config (v1.3) with inline instructions
-│   ├── alex-knowledge-plugin.json  # DORMANT - API plugin (not used in Pure M365)
-│   ├── openapi.yaml            # DORMANT - API spec (not used in Pure M365)
-│   ├── color.png               # 192x192 color icon
-│   ├── color32x32.png          # 32x32 color icon (created, awaiting portal support)
-│   └── outline.png             # 32x32 outline icon
-├── api/                        # DORMANT - Azure Functions (v3.x hybrid mode)
-│   ├── README.md               # Explains dormant status
-│   └── src/functions/          # Preserved for future use
-├── teamsapp.yml
-├── teamsapp.local.yml
-├── deploy.ps1                  # Quick deploy script
-└── package.json                # v4.1.0
-```
-
-### Capabilities Available (v1.3 Schema - Current)
-
-| Capability | Description | Alex v4.2 Status |
-|------------|-------------|:----------------:|
-| `OneDriveAndSharePoint` | Access user files | ✅ Implemented |
-| `Email` | Search Outlook | ✅ Implemented |
-| `TeamsMessages` | Search Teams chats | ✅ Implemented |
-| `People` | Search org people | ✅ Implemented |
-| `WebSearch` | Search the web | ✅ Implemented |
-| `CodeInterpreter` | Execute code | ⬜ Available (not used) |
-| `GraphConnectors` | Enterprise search | ⬜ Available (not needed) |
-| `GraphicArt` | Generate images | ⬜ Available (not needed) |
-| `Dataverse` | Power Platform data | ⬜ Available (not needed) |
-
-> **Note**: `Meetings` capability and `send_email`/`send_message` permissions require schema v1.6+
-
-### Authentication Options (API Plugin)
-
-| Type | Description | Recommended |
-|------|-------------|-------------|
-| `None` | No auth required | ⚠️ Public APIs only |
-| `OAuthPluginVault` | OAuth via M365 vault | ✅ Recommended |
-| `ApiKeyPluginVault` | API key via vault | ✅ Alternative |
 
 ---
 

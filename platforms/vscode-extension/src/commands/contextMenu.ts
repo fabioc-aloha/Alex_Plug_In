@@ -6,6 +6,7 @@ import {
     getGlobalKnowledgeSummary
 } from '../chat/globalKnowledge';
 import { GlobalKnowledgeCategory } from '../shared/constants';
+import { autoIncrementGoals } from './goals';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
@@ -106,6 +107,14 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
                     `Captured from ${path.basename(editor.document.fileName)}`,
                     'Code pattern for reference'
                 );
+                
+                // Auto-increment insight goals
+                try {
+                    await autoIncrementGoals('insight');
+                } catch (err) {
+                    console.warn('Failed to auto-increment goals:', err);
+                }
+                
                 vscode.window.showInformationMessage(`✅ Saved insight: "${title}"`);
             } catch (err) {
                 vscode.window.showErrorMessage(`❌ Failed to save insight: ${err}`);

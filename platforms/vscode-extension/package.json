@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -118,8 +118,71 @@
         "command": "alex.knowledgeQuickPick",
         "title": "Alex: Search Knowledge",
         "icon": "$(search)"
+      },
+      {
+        "command": "alex.startSession",
+        "title": "Alex: Start Learning Session",
+        "icon": "$(play)"
+      },
+      {
+        "command": "alex.endSession",
+        "title": "Alex: End Session",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "alex.togglePauseSession",
+        "title": "Alex: Pause/Resume Session",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "alex.sessionActions",
+        "title": "Alex: Session Actions",
+        "icon": "$(clock)"
+      },
+      {
+        "command": "alex.refreshWelcomeView",
+        "title": "Alex: Refresh Welcome View",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "alex.createGoal",
+        "title": "Alex: Create Learning Goal",
+        "icon": "$(target)"
+      },
+      {
+        "command": "alex.showGoals",
+        "title": "Alex: Show Learning Goals",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "alex.incrementGoal",
+        "title": "Alex: Increment Goal Progress",
+        "icon": "$(add)"
+      },
+      {
+        "command": "alex.openHealthDashboard",
+        "title": "Alex: Health Dashboard",
+        "icon": "$(pulse)"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "alex-sidebar",
+          "title": "Alex Cognitive",
+          "icon": "$(brain)"
+        }
+      ]
+    },
+    "views": {
+      "alex-sidebar": [
+        {
+          "type": "webview",
+          "id": "alex.welcomeView",
+          "name": "Welcome"
+        }
+      ]
+    },
     "menus": {
       "editor/context": [
         {
@@ -162,6 +225,30 @@
           "type": "boolean",
           "default": false,
           "description": "Automatically sync knowledge to OneDrive on meditate/dream"
+        },
+        "alex.autoInsights.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic detection of insights from conversations"
+        },
+        "alex.autoInsights.minimumConfidence": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0.1,
+          "maximum": 1.0,
+          "description": "Minimum confidence level to suggest saving an insight (0.1-1.0)"
+        },
+        "alex.autoInsights.cooldownMinutes": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 60,
+          "description": "Minutes between auto-insight prompts to avoid notification fatigue"
+        },
+        "alex.autoInsights.autoSaveHighConfidence": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically save insights with very high confidence (>0.8) without prompting"
         }
       }
     },
@@ -266,6 +353,14 @@
           {
             "name": "docs",
             "description": "Open Alex cognitive architecture documentation"
+          },
+          {
+            "name": "session",
+            "description": "Start or manage a focused learning session with optional Pomodoro timing"
+          },
+          {
+            "name": "goals",
+            "description": "View and manage learning goals with streak tracking and progress visualization"
           },
           {
             "name": "exportm365",
@@ -699,6 +794,16 @@
         "command": "alex.knowledgeQuickPick",
         "key": "ctrl+shift+k",
         "mac": "cmd+shift+k"
+      },
+      {
+        "command": "alex.startSession",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p"
+      },
+      {
+        "command": "alex.togglePauseSession",
+        "key": "ctrl+alt+space",
+        "mac": "cmd+alt+space"
       }
     ]
   },

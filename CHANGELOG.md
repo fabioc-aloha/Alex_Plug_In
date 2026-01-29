@@ -5,11 +5,11 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.4.0] TRITRSEPTIUM-QUAD 🎯 - 2026-01-28 (VS Code Extension)
+## [3.4.2] TRITRSEPTIUM-QUAD 🎯 Focus - 2026-01-29 (VS Code Extension)
 
-### 🎯 Quick Actions & Visual Feedback
+### 🎯 Developer Productivity: Visual Feedback & Quick Actions
 
-This release focuses on developer productivity with enhanced visual feedback and quick actions right from the editor.
+This release completes the "Focus" roadmap with 8 new features for enhanced developer productivity.
 
 ### Added
 
@@ -32,15 +32,77 @@ This release focuses on developer productivity with enhanced visual feedback and
   - Quick access to Health Check and Sync
   - Instant file opening from search results
 
+- **⏱️ Session Timer** - Focused learning with Pomodoro
+  - `@alex /session <topic>` to start tracking
+  - Configurable work/break intervals (default: 25min/5min)
+  - Status bar integration showing elapsed time
+  - Auto-increment learning goals on session completion
+  - Pause, resume, and stop controls
+
+- **🏠 Welcome View** - Activity Bar panel
+  - Quick health status at a glance
+  - Learning goals with progress bars
+  - Active session display
+  - One-click quick actions (Dream, Meditate, Sync)
+  - Streak tracking visualization
+
+- **🎯 Learning Goals Widget** - Track daily/weekly progress
+  - Create goals with categories (coding, reading, practice, etc.)
+  - Daily and weekly goal types with auto-expiry
+  - Streak tracking (consecutive days with completed goals)
+  - Auto-increment on session completion and insight saves
+  - Persistent storage in `learning-goals.json`
+
+- **💡 Auto-Insights Detection** - Intelligent learning capture
+  - Detects valuable patterns in conversations
+  - Pattern matching for learnings, solutions, best practices
+  - Confidence scoring (0-1) with configurable threshold
+  - Duplicate detection to avoid redundant saves
+  - Automatic category inference
+  - Configurable via `alex.autoInsights.*` settings
+
+- **📊 Health Dashboard Webview** - Rich visualization
+  - Full-page webview with comprehensive architecture view
+  - Synapse network ASCII visualization
+  - Memory file breakdown by category
+  - Global knowledge statistics
+  - Active goals with progress bars
+  - Session status and cloud sync info
+  - Refresh and quick action buttons
+
 ### Changed
 
 - Status bar now uses shared health check module for consistency
 - File watcher triggers status refresh on memory file changes
 - Commands refresh status bar after operations complete
+- Welcome View integrates with learning goals system
+- `/goals` slash command added to chat participant
+
+### New Commands
+
+| Command | Description |
+|---------|-------------|
+| `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
+| `Alex: Pause/Resume Session` | Toggle session pause state |
+| `Alex: Session Actions` | Quick pick for session management |
+| `Alex: Create Learning Goal` | Create new goal with category |
+| `Alex: Show Learning Goals` | View and manage goals |
+| `Alex: Open Health Dashboard` | Open rich webview dashboard |
+
+### New Configuration
+
+```json
+{
+  "alex.autoInsights.enabled": true,
+  "alex.autoInsights.minimumConfidence": 0.6,
+  "alex.autoInsights.cooldownMinutes": 5,
+  "alex.autoInsights.autoSaveHighConfidence": false
+}
+```
 
 ---
 
-## [4.3.0] QUADRITRIUM 🦖 - 2026-01-28
+## [3.3.7] TRITRSEPTIUM - 2026-01-28 (VS Code Extension)
 
 ### 📄 Document Context Awareness
 

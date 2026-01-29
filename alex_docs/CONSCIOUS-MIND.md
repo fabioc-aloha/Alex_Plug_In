@@ -68,6 +68,7 @@ Alex responds with personality, context awareness, and access to all cognitive t
 | `/dream` | Run neural maintenance | `@alex /dream` |
 | `/selfactualize` | Deep architecture assessment | `@alex /selfactualize` |
 | `/learn [topic]` | Acquire domain knowledge | `@alex /learn TypeScript generics` |
+| `/session [topic]` | Start focused learning session | `@alex /session React hooks` |
 | `/status` | Check architecture health | `@alex /status` |
 | `/knowledge [query]` | Search global knowledge | `@alex /knowledge error handling` |
 | `/saveinsight` | Save a learning | `@alex /saveinsight React useEffect cleanup` |
