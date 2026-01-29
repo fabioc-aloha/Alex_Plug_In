@@ -23,6 +23,9 @@ PUBLISHING.md
 PRE-PUBLISH-CHECKLIST.md
 UPGRADE-INSTRUCTIONS.md
 
+# Build scripts (exclude from package)
+sync-architecture.ps1
+
 # NOTE: alex_docs/ folder IS included in package for user education
 
 # Private article drafts (exclude from package)

@@ -1,0 +1,288 @@
+{
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor",
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.csv": "default",
+    "*.xlsx": "default"
+  },
+  "[markdown]": {
+    "files.encoding": "utf8",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "files.trimTrailingWhitespace": true
+  },
+  "[plaintext]": {
+    "files.encoding": "utf8"
+  },
+  "[json]": {
+    "files.encoding": "utf8"
+  },
+  "[jsonc]": {
+    "files.encoding": "utf8"
+  },
+  "[javascript]": {
+    "files.encoding": "utf8",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "files.encoding": "utf8",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "files.encoding": "utf8"
+  },
+  "[yaml]": {
+    "files.encoding": "utf8"
+  },
+  "[xml]": {
+    "files.encoding": "utf8"
+  },
+  "python.defaultInterpreterPath": ".venv\\Scripts\\python.exe",
+  "@azure.argTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+  "mssql.connectionGroups": [
+    {
+      "name": "ROOT",
+      "id": "ROOT"
+    }
+  ],
+  "mssql.connections": [
+    {
+      "authenticationType": "AzureMFA",
+      "connectTimeout": 30,
+      "applicationName": "vscode-mssql",
+      "server": "cxmidl.database.windows.net",
+      "accountId": "1c6c90de-eb98-4df2-b9f8-4176bd90b1fe.72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "database": "Orchestration",
+      "user": "Fabio Correa - fabioc@microsoft.com",
+      "email": "fabioc@microsoft.com",
+      "azureAccountToken": "",
+      "expiresOn": 1746276145,
+      "groupId": "ROOT",
+      "id": "2909B0F1-9BBA-47FD-A935-61EC51352B7B",
+      "password": "",
+      "commandTimeout": 30,
+      "encrypt": "Mandatory",
+      "profileSource": 0
+    },
+    {
+      "authenticationType": "AzureMFA",
+      "connectTimeout": 30,
+      "applicationName": "vscode-mssql",
+      "server": "cpestaging.database.windows.net",
+      "database": "CPE_Predictor",
+      "accountId": "1c6c90de-eb98-4df2-b9f8-4176bd90b1fe.72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+      "user": "Fabio Correa - fabioc@microsoft.com",
+      "email": "fabioc@microsoft.com",
+      "azureAccountToken": "",
+      "expiresOn": 1760551074,
+      "groupId": "ROOT",
+      "id": "CB5BFE18-7589-4A2F-A64A-EA0054A7E2E0",
+      "commandTimeout": 30,
+      "encrypt": "Mandatory",
+      "profileSource": 0,
+      "password": ""
+    }
+  ],
+  "mssql.enableRichExperiences": true,
+  "azureResourceGroups.selectedSubscriptions": [
+    "72f988bf-86f1-41af-91ab-2d7cd011db47/f6ab5f6d-606a-4256-aba7-1feeeb53784f"
+  ],
+  "github.copilot.enable": {
+    "*.png": false
+  },
+  "files.saveConflictResolution": "overwriteFileOnDisk",
+  "git.autofetch": true,
+  "makefile.configureOnOpen": true,
+  "python.analysis.typeCheckingMode": "standard",
+  "telemetry.telemetryLevel": "off",
+  "vscode-office.openOutline": false,
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": false,
+  "files.defaultLanguage": "markdown",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.eol": "\n",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "editor.fontFamily": "'Cascadia Code', 'Segoe UI Emoji', 'Noto Color Emoji', 'Fira Code', 'Consolas', 'monospace'",
+  "editor.fontLigatures": true,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
+  "mssql.saveAsCsv.encoding": "UTF-8",
+  "terminal.integrated.fontFamily": "'Cascadia Code', 'Segoe UI Emoji', 'Consolas'",
+  "markdown.preview.fontFamily": "'Segoe UI', 'Segoe UI Emoji', -apple-system, BlinkMacSystemFont, sans-serif",
+  "editor.unicodeHighlight.allowedCharacters": {
+    "→": true,
+    "⭐": true,
+    "🎯": true,
+    "🚀": true,
+    "🧠": true,
+    "📊": true,
+    "🏢": true,
+    "🛡️": true,
+    "🔄": true,
+    "🏆": true,
+    "📋": true,
+    "📚": true,
+    "✅": true,
+    "⚡": true,
+    "🔧": true,
+    "📝": true,
+    "🎨": true,
+    "💡": true,
+    "🔍": true,
+    "🌟": true,
+    "💎": true,
+    "🚧": true,
+    "⚠️": true,
+    "❌": true,
+    "❗": true,
+    "├": true,
+    "│": true,
+    "└": true,
+    "┌": true,
+    "┐": true,
+    "┘": true,
+    "─": true,
+    "═": true,
+    "║": true,
+    "╔": true,
+    "╗": true,
+    "╚": true,
+    "╝": true
+  },
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 4,
+  "emmet.includeLanguages": {
+    "markdown": "html"
+  },
+  "vssolution.win32Encoding": {
+    "932": "Shift_JIS",
+    "936": "GBK",
+    "950": "BIG5"
+  },
+  "chat.mcp.serverSampling": {
+    "Azure MCP Server Provider: Azure MCP": {
+      "allowedDuringChat": true
+    }
+  },
+  "jupyter.jupyterLaunchTimeout": 600000,
+  "chat.mcp.autostart": "newAndOutdated",
+  "workbench.editor.enablePreview": false,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "chat.agent.maxRequests": 50,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "chat.tools.terminal.autoApprove": {
+    "git commit": true,
+    "git push": true,
+    "git pull": true,
+    "git status": true,
+    "git diff": true,
+    "git log": true,
+    "az": true,
+    "npm": true,
+    "npx": true,
+    "node": true,
+    "Copy-Item": true,
+    "Get-ChildItem": true,
+    "Get-Content": true,
+    "Test-Path": true,
+    "Write-Host": true,
+    "Select-String": true
+  },
+  "chat.agent.todoList": {
+    "position": "panel"
+  },
+  "chat.tools.terminal.ignoreDefaultAutoApproveRules": true,
+  "notebook.output.textLineLimit": 60,
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.restoreViewState": false,
+  "dataWrangler.experiments.copilot.enabled": true,
+  "github.copilot.chat.tools.memory.enabled": true,
+  "chat.tools.urls.autoApprove": {
+    "https://learn.microsoft.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://docs.github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://developer.mozilla.org": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://stackoverflow.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  },
+  "chat.tools.autoRun": true,
+  "chat.tools.fileSystem.autoApprove": true,
+  "github.copilot.chat.codeGeneration.instructions": [
+    "Use TypeScript for all new code",
+    "Prefer async/await over promises",
+    "Add JSDoc comments for public functions"
+  ],
+  "chat.useAgentSkills": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "files.autoSaveWorkspaceFilesOnly": false,
+  "nexus.workspaceName": "cpesynapse",
+  "nexus.subscriptionId": "f6ab5f6d-606a-4256-aba7-1feeeb53784f",
+  "nexus.resourceGroup": "Integration",
+  "synapse.localWorkFolderPath": "c:\\Development\\Fishbowl",
+  "chat.tools.terminal.preventShellHistory": false,
+  "youtubeMcp.apiKey": "AIzaSyCdBZU4yi5IZ8F_E9l_FRaXPeGsVHoM_o4",
+  "security.workspace.trust.untrustedFiles": "open",
+  "azureFunctions.showProjectWarning": false,
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.wordWrap": "on",
+  "breadcrumbs.enabled": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.accessibilitySupport": "off",
+  "extensions.autoUpdate": true,
+  "workbench.startupEditor": "none",
+  "search.followSymlinks": false,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "editor.minimap.enabled": false,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "chat.experimental.detectParticipant.enabled": true,
+  "github.copilot.chat.localeOverride": "en",
+  "github.copilot.chat.followUps": "always",
+  "chat.commandCenter.enabled": true
+}

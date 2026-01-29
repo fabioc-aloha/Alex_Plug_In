@@ -1,0 +1,322 @@
+import * as vscode from "vscode";
+
+/**
+ * Essential settings required for Alex to function properly
+ */
+const ESSENTIAL_SETTINGS: Record<string, unknown> = {
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+  },
+  "chat.useAgentSkills": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "github.copilot.chat.tools.memory.enabled": true,
+};
+
+/**
+ * Recommended settings that improve the Alex experience
+ */
+const RECOMMENDED_SETTINGS: Record<string, unknown> = {
+  "github.copilot.chat.agent.thinkingTool": true,
+  "chat.agent.maxRequests": 50,
+  "chat.experimental.detectParticipant.enabled": true,
+  "github.copilot.chat.followUps": "always",
+  "chat.agent.todoList": {
+    position: "panel",
+  },
+};
+
+/**
+ * Nice-to-have settings that reduce friction
+ */
+const NICE_TO_HAVE_SETTINGS: Record<string, unknown> = {
+  "chat.tools.autoRun": true,
+  "chat.tools.fileSystem.autoApprove": true,
+  "github.copilot.chat.localeOverride": "en",
+  "chat.commandCenter.enabled": true,
+};
+
+interface SettingCategory {
+  name: string;
+  description: string;
+  settings: Record<string, unknown>;
+  icon: string;
+}
+
+const SETTING_CATEGORIES: SettingCategory[] = [
+  {
+    name: "Essential",
+    description: "Required for full Alex functionality",
+    settings: ESSENTIAL_SETTINGS,
+    icon: "🔴",
+  },
+  {
+    name: "Recommended",
+    description: "Improves the Alex experience",
+    settings: RECOMMENDED_SETTINGS,
+    icon: "🟡",
+  },
+  {
+    name: "Nice-to-Have",
+    description: "Quality of life improvements",
+    settings: NICE_TO_HAVE_SETTINGS,
+    icon: "🟢",
+  },
+];
+
+/**
+ * Check which settings are already configured
+ */
+function getExistingSettings(settings: Record<string, unknown>): string[] {
+  const config = vscode.workspace.getConfiguration();
+  const existing: string[] = [];
+
+  for (const key of Object.keys(settings)) {
+    const currentValue = config.inspect(key);
+    if (currentValue?.globalValue !== undefined) {
+      existing.push(key);
+    }
+  }
+
+  return existing;
+}
+
+/**
+ * Apply settings to VS Code user configuration
+ */
+async function applySettings(
+  settings: Record<string, unknown>,
+): Promise<{ applied: string[]; skipped: string[] }> {
+  const config = vscode.workspace.getConfiguration();
+  const applied: string[] = [];
+  const skipped: string[] = [];
+
+  for (const [key, value] of Object.entries(settings)) {
+    try {
+      // Check if already set
+      const currentValue = config.inspect(key);
+      if (currentValue?.globalValue !== undefined) {
+        skipped.push(key);
+        continue;
+      }
+
+      await config.update(key, value, vscode.ConfigurationTarget.Global);
+      applied.push(key);
+    } catch (error) {
+      console.error(`Failed to apply setting ${key}:`, error);
+      skipped.push(key);
+    }
+  }
+
+  return { applied, skipped };
+}
+
+/**
+ * Format settings as JSON for preview
+ */
+function formatSettingsPreview(settings: Record<string, unknown>): string {
+  return JSON.stringify(settings, null, 2);
+}
+
+/**
+ * Main command: Setup Alex Environment
+ */
+export async function setupEnvironment(): Promise<void> {
+  // Check what's already configured
+  const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
+  const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
+  const niceToHaveExisting = getExistingSettings(NICE_TO_HAVE_SETTINGS);
+
+  const essentialNeeded =
+    Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
+  const recommendedNeeded =
+    Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
+  const niceToHaveNeeded =
+    Object.keys(NICE_TO_HAVE_SETTINGS).length - niceToHaveExisting.length;
+
+  // If everything is configured, let user know
+  if (
+    essentialNeeded === 0 &&
+    recommendedNeeded === 0 &&
+    niceToHaveNeeded === 0
+  ) {
+    vscode.window
+      .showInformationMessage(
+        "✅ Your VS Code environment is already optimized for Alex!",
+        "View Current Settings",
+      )
+      .then((choice) => {
+        if (choice === "View Current Settings") {
+          vscode.commands.executeCommand("workbench.action.openSettingsJson");
+        }
+      });
+    return;
+  }
+
+  // Build quick pick items
+  interface CategoryQuickPickItem extends vscode.QuickPickItem {
+    category: SettingCategory;
+    needed: number;
+    existing: number;
+  }
+
+  const items: CategoryQuickPickItem[] = [];
+
+  if (essentialNeeded > 0) {
+    items.push({
+      label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
+      description: `${essentialNeeded} settings to add`,
+      detail: SETTING_CATEGORIES[0].description,
+      category: SETTING_CATEGORIES[0],
+      needed: essentialNeeded,
+      existing: essentialExisting.length,
+      picked: true,
+    });
+  }
+
+  if (recommendedNeeded > 0) {
+    items.push({
+      label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
+      description: `${recommendedNeeded} settings to add`,
+      detail: SETTING_CATEGORIES[1].description,
+      category: SETTING_CATEGORIES[1],
+      needed: recommendedNeeded,
+      existing: recommendedExisting.length,
+      picked: false,
+    });
+  }
+
+  if (niceToHaveNeeded > 0) {
+    items.push({
+      label: `${SETTING_CATEGORIES[2].icon} Nice-to-Have Settings`,
+      description: `${niceToHaveNeeded} settings to add`,
+      detail: SETTING_CATEGORIES[2].description,
+      category: SETTING_CATEGORIES[2],
+      needed: niceToHaveNeeded,
+      existing: niceToHaveExisting.length,
+      picked: false,
+    });
+  }
+
+  // Show multi-select quick pick
+  const selected = await vscode.window.showQuickPick(items, {
+    canPickMany: true,
+    placeHolder:
+      "Select which settings to add (your existing settings will NOT be modified)",
+    title: "Alex Environment Setup",
+  });
+
+  if (!selected || selected.length === 0) {
+    return;
+  }
+
+  // Collect all settings to apply
+  const settingsToApply: Record<string, unknown> = {};
+  for (const item of selected) {
+    Object.assign(settingsToApply, item.category.settings);
+  }
+
+  // Show preview and ask for confirmation
+  const preview = formatSettingsPreview(settingsToApply);
+  const categoryNames = selected.map((s) => s.category.name).join(", ");
+
+  const confirm = await vscode.window.showInformationMessage(
+    `Add ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\nThis will only ADD new settings - your existing settings will NOT be changed.`,
+    { modal: true, detail: `Settings to add:\n${preview}` },
+    "Add Settings",
+    "Show Preview",
+    "Cancel",
+  );
+
+  if (confirm === "Show Preview") {
+    // Open a preview document
+    const doc = await vscode.workspace.openTextDocument({
+      content: `// Settings that will be ADDED to your VS Code configuration\n// Your existing settings will NOT be modified\n\n${preview}`,
+      language: "jsonc",
+    });
+    await vscode.window.showTextDocument(doc, { preview: true });
+
+    // Ask again after preview
+    const confirmAfterPreview = await vscode.window.showInformationMessage(
+      "Add these settings to your VS Code configuration?",
+      "Add Settings",
+      "Cancel",
+    );
+
+    if (confirmAfterPreview !== "Add Settings") {
+      return;
+    }
+  } else if (confirm !== "Add Settings") {
+    return;
+  }
+
+  // Apply settings
+  const result = await vscode.window.withProgress(
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Setting up Alex environment...",
+      cancellable: false,
+    },
+    async () => {
+      return await applySettings(settingsToApply);
+    },
+  );
+
+  // Show result
+  if (result.applied.length > 0) {
+    const message =
+      result.skipped.length > 0
+        ? `✅ Added ${result.applied.length} settings (${result.skipped.length} already configured)`
+        : `✅ Added ${result.applied.length} settings`;
+
+    vscode.window
+      .showInformationMessage(message, "View Settings")
+      .then((choice) => {
+        if (choice === "View Settings") {
+          vscode.commands.executeCommand("workbench.action.openSettingsJson");
+        }
+      });
+  } else {
+    vscode.window.showInformationMessage(
+      "All selected settings were already configured.",
+    );
+  }
+}
+
+/**
+ * Quick setup that applies essential settings with minimal prompts
+ * Used during initialization/upgrade flow
+ */
+export async function offerEnvironmentSetup(): Promise<boolean> {
+  const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
+  const essentialNeeded =
+    Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
+
+  // If essential settings are already configured, skip
+  if (essentialNeeded === 0) {
+    return false;
+  }
+
+  const choice = await vscode.window.showInformationMessage(
+    `Would you like to optimize VS Code for Alex?\n\nThis adds ${essentialNeeded} essential settings for full Alex functionality.\nYour existing settings will NOT be modified.`,
+    "Yes, Add Settings",
+    "Show Details",
+    "Skip",
+  );
+
+  if (choice === "Show Details") {
+    // Run the full setup flow
+    await setupEnvironment();
+    return true;
+  } else if (choice === "Yes, Add Settings") {
+    // Quick apply essential only
+    const result = await applySettings(ESSENTIAL_SETTINGS);
+    if (result.applied.length > 0) {
+      vscode.window.showInformationMessage(
+        `✅ Added ${result.applied.length} essential settings for Alex`,
+      );
+    }
+    return true;
+  }
+
+  return false;
+}

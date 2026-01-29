@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { searchGlobalKnowledge } from './globalKnowledge';
+import { validateUserProfile, safeJsonParse, createConfigBackup } from '../shared/sanitize';
 
 /**
  * Tool input parameters interfaces
@@ -683,10 +684,39 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                         ]);
                     }
                     
-                    const profile = await fs.readJson(jsonProfilePath);
+                    // P0: Safe JSON parsing with error recovery
+                    const profileContent = await fs.readFile(jsonProfilePath, 'utf-8');
+                    const parseResult = safeJsonParse<IUserProfile>(profileContent);
+                    
+                    if (!parseResult.success) {
+                        // Create backup before reporting error
+                        await createConfigBackup(jsonProfilePath, fs);
+                        return new vscode.LanguageModelToolResult([
+                            new vscode.LanguageModelTextPart(JSON.stringify({
+                                error: true,
+                                message: `Profile JSON is corrupted: ${parseResult.error}. A backup was created.`,
+                                suggestedAction: 'recreate'
+                            }))
+                        ]);
+                    }
+                    
+                    // P0: Validate profile schema
+                    const validation = validateUserProfile(parseResult.data);
+                    if (!validation.valid) {
+                        return new vscode.LanguageModelToolResult([
+                            new vscode.LanguageModelTextPart(JSON.stringify({
+                                warning: true,
+                                message: `Profile has validation issues: ${validation.errors.join(', ')}`,
+                                profile: parseResult.data, // Still return the data
+                                recovered: parseResult.recovered
+                            }))
+                        ]);
+                    }
+                    
+                    const profile = validation.sanitized || parseResult.data;
                     if (field) {
                         return new vscode.LanguageModelToolResult([
-                            new vscode.LanguageModelTextPart(JSON.stringify({ [field]: profile[field] }))
+                            new vscode.LanguageModelTextPart(JSON.stringify({ [field]: (profile as any)[field] }))
                         ]);
                     }
                     return new vscode.LanguageModelToolResult([

@@ -1,0 +1,51 @@
+{
+	"servers": {
+		"fabric-rti-mcp": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"microsoft-fabric-rti-mcp==0.1.0"
+			],
+			"env": {
+				"KUSTO_SERVICE_URI": "https://help.kusto.windows.net/",
+				"KUSTO_SERVICE_DEFAULT_DB": "Samples"
+			}
+		},
+		"github": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-github"],
+			"env": {
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
+			}
+		},
+		"filesystem": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-filesystem", "C:/Development"]
+		},
+		"memory": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-memory"]
+		},
+		"puppeteer": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+		},
+		"sqlite": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "C:/Development/data.db"]
+		}
+	},
+	"inputs": [
+		{
+			"id": "github_token",
+			"type": "promptString",
+			"description": "GitHub Personal Access Token",
+			"password": true
+		}
+	]
+}

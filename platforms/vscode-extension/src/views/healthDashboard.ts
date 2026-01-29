@@ -11,6 +11,7 @@ import { getSyncStatus } from '../chat/cloudSync';
 import { getGoalsSummary } from '../commands/goals';
 import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
+import { escapeHtml } from '../shared/sanitize';
 
 /**
  * Health Dashboard - Rich webview visualization of Alex cognitive architecture
@@ -674,7 +675,9 @@ function buildSynapseVisualization(health: HealthCheckResult): string {
         viz += `├${'─'.repeat(60)}┤\n`;
         viz += `│ ISSUES DETECTED:                                           │\n`;
         for (const issue of health.issues.slice(0, 5)) {
-            const shortIssue = issue.length > 54 ? issue.substring(0, 51) + '...' : issue;
+            // Sanitize issue text to prevent XSS
+            const sanitizedIssue = escapeHtml(issue);
+            const shortIssue = sanitizedIssue.length > 54 ? sanitizedIssue.substring(0, 51) + '...' : sanitizedIssue;
             viz += `│   ⚠ ${shortIssue.padEnd(54)} │\n`;
         }
         if (health.issues.length > 5) {
@@ -752,18 +755,6 @@ function formatTime(seconds: number): string {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
-
-/**
- * Escape HTML
- */
-function escapeHtml(text: string): string {
-    return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
 }
 
 /**

@@ -1,0 +1,42 @@
+{
+  "architecture_name": "Generic Cognitive System",
+  "version": "1.0.0",
+  "global_memory_files": [
+    "config/system-instructions.md",
+    "config/cognitive-core.md"
+  ],
+  "core_memory_files": [
+    "memory/core-instructions.md"
+  ],
+  "procedural_path": "memory/procedural/*.instructions.md",
+  "episodic_path": "memory/episodic/*.prompt.md",
+  "archive_path": "archive/*.md",
+  "domain_knowledge_path": "knowledge/*.md",
+  "report_path": "reports",
+  "synapse_patterns": [
+    "\\[.*\\.md\\].*\\(.*\\).*-.*\".*\"",
+    "\\[.*\\.md\\].*\\(",
+    "→.*\\.md",
+    "\\[.*\\]\\(.*\\)"
+  ],
+  "debug_patterns": [
+    "*core*",
+    "*critical*",
+    "*primary*"
+  ],
+  "architecture_specific": {
+    "system_type": "Generic AI Cognitive Architecture",
+    "capabilities": [
+      "Multi-domain knowledge processing",
+      "Synaptic network management",
+      "Automated neural maintenance",
+      "Cross-domain pattern recognition"
+    ],
+    "customization_notes": [
+      "Modify paths to match your directory structure",
+      "Update synapse_patterns for your connection notation",
+      "Adjust debug_patterns for your critical files",
+      "Add architecture_specific fields as needed"
+    ]
+  }
+}

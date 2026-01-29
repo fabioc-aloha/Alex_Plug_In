@@ -5,6 +5,68 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0-beta.1] TRITRSEPTIUM-PENT-HEX 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
+
+### 🔥 Phoenix: Stabilization & VS Code 1.108+ Quick Wins
+
+This beta release completes all P0 Critical Fixes and P1 Quick Wins from the v3.5 roadmap, preparing the foundation for v4.0's epistemic integrity paradigm.
+
+### Added
+
+- **🛡️ Webview HTML Sanitization** (P0) - Centralized XSS prevention
+  - New `src/shared/sanitize.ts` with `escapeHtml()`, `sanitizeAttribute()`, `sanitizeUrl()`, `sanitizeFilePath()`
+  - Applied to dream reports and welcome view to prevent injection attacks
+
+- **✅ JSON Schema Validation** (P0) - User profile and knowledge index validation
+  - `validateUserProfile()` with field-level type checking and sanitization
+  - `validateKnowledgeIndex()` for global knowledge integrity
+  - `safeJsonParse()` with auto-recovery for common JSON issues (BOM, trailing commas)
+
+- **🔧 Error Recovery Improvements** (P0) - Graceful handling of corrupted configs
+  - `createConfigBackup()` before destructive operations
+  - Automatic JSON repair attempts before failing
+
+- **🏷️ Tool Annotations** (P1) - VS Code 1.108+ `readOnlyHint` support
+  - Read-only tools (`alex_synapse_health`, `alex_memory_search`, etc.) marked for auto-approval in agent mode
+  - Mutating tools retain confirmation requirements
+
+- **🎯 Participant Detection** (P1) - Epistemic category for disambiguation
+  - Added `epistemic` category to chat participant
+  - Detects questions about confidence, verification, appropriate reliance
+  - Groundwork for v4.0 epistemic integrity features
+
+- **🧠 Agent Skills** (P1) - `.github/skills/` with SKILL.md files
+  - `architecture-health/` - Synapse validation and neural maintenance
+  - `bootstrap-learning/` - Domain-agnostic knowledge acquisition
+  - `global-knowledge/` - Cross-project pattern search
+  - `meditation/` - Knowledge consolidation guidance
+  - `self-actualization/` - Comprehensive architecture assessment
+
+- **⚙️ Setup Environment Command** (P1) - `Alex: Setup Environment`
+  - Tiered settings: Essential (required), Recommended (improves experience), Nice-to-Have
+  - Additive-only: never modifies or removes existing settings
+  - Preview before applying with explicit user approval
+  - Auto-offered during initialize/upgrade flows
+
+- **🔄 Architecture Sync Script** - `sync-architecture.ps1`
+  - Ensures all cognitive architecture files packaged with extension
+  - Fixed gap: 5 essential root-level docs now included
+  - Excludes session-specific files (dream reports, meditation sessions)
+
+### Changed
+
+- **Extension Architecture** - Full procedural memory synced (17 instruction files)
+- **Episodic Memory** - 7 prompt templates included for workflows
+- **Domain Knowledge** - All DK-*.md files synced for user deployment
+
+### Technical Notes
+
+- Requires VS Code 1.108+ for full tool annotation support
+- Lays groundwork for v4.0 QUADRUNIUM (Epistemic Integrity)
+- See `ROADMAP-VSCODE-V3.5.md` for complete implementation details
+
+---
+
 ## [3.4.3] TRITRSEPTIUM-PENT 🛡️ Robustness - 2026-01-29 (VS Code Extension)
 
 ### 🛡️ Stability: Improved Error Handling & User Feedback

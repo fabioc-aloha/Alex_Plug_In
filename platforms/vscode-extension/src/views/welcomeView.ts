@@ -4,6 +4,7 @@ import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
 import { getSyncStatus } from '../chat/cloudSync';
 import { getCurrentSession, isSessionActive } from '../commands/session';
 import { getGoalsSummary, LearningGoal } from '../commands/goals';
+import { escapeHtml } from '../shared/sanitize';
 
 /**
  * Welcome View Provider - Activity Bar panel with health, quick actions, and recent activity
@@ -488,12 +489,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     }
     
     private _escapeHtml(text: string): string {
-        return text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+        // Delegate to centralized sanitization
+        return escapeHtml(text);
     }
     
     private _formatTime(seconds: number): string {

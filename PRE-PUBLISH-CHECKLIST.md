@@ -48,6 +48,14 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 - [ ] No console.log statements in production code (except intentional logging)
 - [ ] All new features have corresponding package.json contributions
 
+## 🧠 Architecture Sync
+
+**IMPORTANT**: The cognitive architecture files live in the root `.github/` folder but must be synced to `platforms/vscode-extension/.github/` before packaging.
+
+- [ ] Run `npm run sync-architecture` in the extension folder
+- [ ] Verify `.github/` folder contains: instructions/, prompts/, episodic/, domain-knowledge/, config/, agents/, skills/
+- [ ] This sync runs automatically during `vscode:prepublish` but can be run manually
+
 ## 📖 Documentation
 
 ### README.md

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "3.4.3",
+  "version": "3.5.0-beta.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -163,6 +163,11 @@
         "command": "alex.openHealthDashboard",
         "title": "Alex: Health Dashboard",
         "icon": "$(pulse)"
+      },
+      {
+        "command": "alex.setupEnvironment",
+        "title": "Alex: Setup Environment",
+        "icon": "$(gear)"
       }
     ],
     "viewsContainers": {
@@ -170,7 +175,7 @@
         {
           "id": "alex-sidebar",
           "title": "Alex Cognitive",
-          "icon": "$(brain)"
+          "icon": "assets/logo-mono.svg"
         }
       ]
     },
@@ -287,6 +292,16 @@
               "Create a Copilot agent",
               "Add message extensions"
             ]
+          },
+          {
+            "category": "epistemic",
+            "description": "Questions about confidence, verification, appropriate reliance, or when to trust AI output",
+            "examples": [
+              "How confident should I be in this?",
+              "Should I verify this?",
+              "Is this something I should double-check?",
+              "What's your confidence level?"
+            ]
           }
         ],
         "commands": [
@@ -378,6 +393,9 @@
         "icon": "$(pulse)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Check the health of Alex's synaptic connections",
+        "annotations": {
+          "readOnlyHint": true
+        },
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -397,6 +415,9 @@
         "icon": "$(search)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Search Alex's memory files for information",
+        "annotations": {
+          "readOnlyHint": true
+        },
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -429,6 +450,9 @@
         "icon": "$(info)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Get Alex architecture status and configuration",
+        "annotations": {
+          "readOnlyHint": true
+        },
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -537,6 +561,9 @@
         "icon": "$(globe)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Search knowledge learned from all your projects",
+        "annotations": {
+          "readOnlyHint": true
+        },
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -694,6 +721,9 @@
         "icon": "$(database)",
         "canBeReferencedInPrompt": true,
         "userDescription": "View global knowledge base status",
+        "annotations": {
+          "readOnlyHint": true
+        },
         "inputSchema": {
           "type": "object",
           "properties": {}
@@ -808,7 +838,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
+    "vscode:prepublish": "npm run sync-architecture && npm run package",
+    "sync-architecture": "pwsh -ExecutionPolicy Bypass -File ./sync-architecture.ps1",
     "compile": "npm run check-types && node esbuild.js",
     "check-types": "tsc --noEmit",
     "watch": "npm run check-types && node esbuild.js --watch",

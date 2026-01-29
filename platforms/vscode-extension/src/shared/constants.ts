@@ -26,7 +26,8 @@ export const EXTENSION_SOURCE_PATHS = {
     episodic: '.github/episodic',
     domainKnowledge: '.github/domain-knowledge',
     config: '.github/config',
-    agents: '.github/agents'
+    agents: '.github/agents',
+    skills: '.github/skills'
 } as const;
 
 /**

@@ -1,13 +1,13 @@
-# Alex VS Code Extension → v3.5.0 TRITRSEPTIUM-PENT-HEX Roadmap
+# Alex VS Code Extension → v3.5.0 TRITRSEPTIUM-PENT Roadmap
 
-> **Transition Phase: Stabilization & Quick Wins Before v4.0**
+> **Phoenix Rising: Stabilization & Quick Wins Before v4.0**
 
 | | |
 |---|---|
-| **Target Version** | 3.5.0 TRITRSEPTIUM-PENT-HEX |
-| **Codename** | 🌉 **Bridge** (Transition to Epistemic Integrity) |
-| **Status** | 📋 Planning |
-| **Foundation** | v3.4.3 TRITRSEPTIUM-PENT (Current) |
+| **Target Version** | 3.5.0 TRITRSEPTIUM-PENT |
+| **Codename** | 🔥 **Phoenix** (Rising from the ashes of restructure) |
+| **Status** | � Beta 1 Released |
+| **Foundation** | v3.4.3 TRITRSEPTIUM-QUAD (Current) |
 | **Created** | 2026-01-29 |
 | **Target VS Code** | 1.108+ (confirmed compatible) |
 | **Next Major** | v4.0.0 QUADRUNIUM (Epistemic Integrity) |
@@ -32,7 +32,7 @@ Version 3.5 is a **transition release** that:
 
 ---
 
-## � Fact-Check Findings (2026-01-29)
+## 🔍 Fact-Check Findings (2026-01-29)
 
 | Feature | Finding | Impact |
 |---------|---------|--------|
@@ -45,25 +45,33 @@ Version 3.5 is a **transition release** that:
 
 ---
 
-## �📋 Implementation Tracker
+## 📋 Implementation Tracker
 
 ### 🔴 P0: Critical Fixes (Ship Immediately)
 
 | # | Feature | Status | Effort | Description |
 |:-:|---------|:------:|:------:|-------------|
-| 1 | Webview HTML Sanitization | ⬜ | 1d | Sanitize dream report data to prevent XSS |
-| 2 | JSON Schema Validation | ⬜ | 1d | Validate user-profile.json and knowledge index |
-| 3 | Error Recovery Improvements | ⬜ | 1d | Better handling of corrupted config files |
+| 1 | Webview HTML Sanitization | ✅ | 1d | Sanitize dream report data to prevent XSS |
+| 2 | JSON Schema Validation | ✅ | 1d | Validate user-profile.json and knowledge index |
+| 3 | Error Recovery Improvements | ✅ | 1d | Better handling of corrupted config files |
 
 ### 🟠 P1: High-Value Quick Wins (VS Code 1.108+ Features)
 
 | # | Feature | Status | Effort | Description |
 |:-:|---------|:------:|:------:|-------------|
-| 4 | Tool Annotations | ⬜ | 1d | Add `readOnlyHint` to read-only tools for auto-approval ⚠️ *API verification needed* |
+| 4 | Tool Annotations | ✅ | 1d | Add `readOnlyHint` to read-only tools for auto-approval |
 | 5 | Tool Confirmation Messages | ⬜ | 0.5d | Extend existing `prepareInvocation()` to remaining tools |
-| 6 | Participant Detection | ⬜ | 0.5d | Add `epistemic` category to existing disambiguation config |
+| 6 | Participant Detection | ✅ | 0.5d | Add `epistemic` category to existing disambiguation config |
 | 7 | Follow-up Provider | ✅ | 0d | **Already implemented** in `participant.ts` (15+ command templates) |
-| 8 | Agent Skills Creation | ⬜ | 2d | Create `.github/skills/` with SKILL.md files for Alex capabilities |
+| 8 | Agent Skills Creation | ✅ | 2d | Create `.github/skills/` with SKILL.md files for Alex capabilities |
+| 8b | Architecture Sync Gap Fix | ✅ | 0.5d | Fixed missing root-level docs in sync script (gap analysis verified) |
+| 8c | Setup Environment Command | ✅ | 1d | **NEW** UI command to optimize VS Code settings for Alex |
+
+> **Note on #8**: Also created `sync-architecture.ps1` script to fix packaging gap - architecture files from root `.github/` now sync to extension's `.github/` before publishing.
+>
+> **Note on #8b**: Gap analysis vs v3.3.7 revealed 5 essential docs missing from sync. Fixed: `alex-cognitive-architecture.md`, `ALEX-INTEGRATION.md`, `ASSISTANT-COMPATIBILITY.md`, `PROJECT-TYPE-TEMPLATES.md`, `VALIDATION-SUITE.md`. Extension now has 65 files with all essentials + 6 new enhancements.
+>
+> **Note on #8c**: New `alex.setupEnvironment` command with tiered settings (Essential/Recommended/Nice-to-Have). Auto-offered during initialize/upgrade. Additive-only, never modifies existing settings. Domain knowledge documented in `DK-RECOMMENDED-ENVIRONMENT.md`.
 
 ### 🟡 P2: User-Requested Features
 
@@ -96,32 +104,42 @@ Version 3.5 is a **transition release** that:
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v3.5.0 Tasks: 0/22 complete**
+**v3.5.0 Tasks: 8/22 complete** *(P0 complete, P1 #4, #6, #7, #8, #8b, #8c complete)*
 
 ---
 
 ## 🎯 Feature Specifications
 
-### 1. Webview HTML Sanitization (P0 - Security)
+### 1. Webview HTML Sanitization (P0 - Security) ✅ IMPLEMENTED
 
 **Problem:** Dream report data rendered directly in webview without sanitization.
 
-**Solution:**
-```typescript
-// src/shared/utils/sanitize.ts
-import DOMPurify from 'dompurify';
+**Solution:** Created centralized `src/shared/sanitize.ts` with:
+- `escapeHtml()` - HTML entity encoding for XSS prevention
+- `sanitizeAttribute()` - Safe attribute value encoding
+- `sanitizeUrl()` - Blocks javascript:/data: URLs
+- `sanitizeFilePath()` - Prevents path traversal
 
-export function sanitizeHtml(dirty: string): string {
-  return DOMPurify.sanitize(dirty, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'code', 'pre', 'span', 'div', 'p', 'br', 'ul', 'li'],
-    ALLOWED_ATTR: ['class']
-  });
-}
-```
+**Files Updated:**
+- `src/shared/sanitize.ts` (new)
+- `src/views/healthDashboard.ts` - Uses centralized escapeHtml
+- `src/views/welcomeView.ts` - Uses centralized escapeHtml
 
-**Files:** `src/commands/dream.ts`, `src/views/healthDashboard.ts`
+### 2-3. JSON Schema Validation & Error Recovery (P0) ✅ IMPLEMENTED
 
-### 4. Tool Annotations (P1 - Quick Win)
+**Solution:** Added to `src/shared/sanitize.ts`:
+- `validateUserProfile()` - Schema validation with sanitization
+- `validateKnowledgeIndex()` - Index entry validation
+- `safeJsonParse()` - JSON parsing with auto-recovery for:
+  - BOM removal
+  - Trailing comma cleanup
+  - Unquoted key repair
+- `createConfigBackup()` - Backup before destructive operations
+
+**Files Updated:**
+- `src/chat/tools.ts` - Profile loading now validates and recovers
+
+### 4. Tool Annotations (P1 - Quick Win) ✅ IMPLEMENTED
 
 **Goal:** Mark read-only tools for auto-approval in agent mode.
 
@@ -295,6 +313,68 @@ alex.followupProvider = {
   }
 };
 ```
+
+### 8c. Setup Environment Command (P1 - User Experience) ✅ IMPLEMENTED
+
+**Goal:** Provide a safe, opt-in way to optimize VS Code settings for Alex functionality.
+
+**Problem Addressed:**
+- New users often have suboptimal VS Code settings for AI/Copilot workflows
+- Essential settings like `chat.instructionsFilesLocations` must be enabled for Alex
+- Users don't want their existing settings modified without consent
+
+**Solution:** Created `src/commands/setupEnvironment.ts` with:
+
+**Tiered Settings:**
+```typescript
+// Essential (Required for Alex)
+const ESSENTIAL_SETTINGS = {
+  'chat.instructionsFilesLocations': { '.github/instructions': true },
+  'chat.useAgentSkills': true,
+  'chat.useNestedAgentsMdFiles': true,
+  'github.copilot.chat.tools.memory.enabled': true
+};
+
+// Recommended (Improves Experience)
+const RECOMMENDED_SETTINGS = {
+  'github.copilot.chat.agent.thinkingTool': true,
+  'chat.agent.maxRequests': 50,
+  'chat.experimental.detectParticipant.enabled': true,
+  'github.copilot.chat.followUps': 'always',
+  'chat.agent.todoList': { 'position': 'panel' }
+};
+
+// Nice-to-Have (Quality of Life)
+const NICE_TO_HAVE_SETTINGS = {
+  'chat.tools.autoRun': true,
+  'chat.tools.fileSystem.autoApprove': true,
+  'github.copilot.chat.localeOverride': 'en',
+  'chat.commandCenter.enabled': true
+};
+```
+
+**Safety Guarantees:**
+1. **Additive only** — Never modifies or removes existing settings
+2. **Preview first** — Shows exact JSON before applying
+3. **User choice** — Multi-select for which categories to apply
+4. **Skip detection** — Ignores settings already configured
+
+**Integration Points:**
+- Command Palette: `Alex: Setup Environment`
+- Status bar quick actions menu
+- Auto-offered during `alex.initialize` (after installation)
+- Auto-offered during `alex.upgrade` (after version upgrade)
+
+**Files Created/Updated:**
+- `src/commands/setupEnvironment.ts` (new)
+- `src/extension.ts` — Command registration + status bar menu
+- `src/commands/initialize.ts` — Offer after init
+- `src/commands/upgrade.ts` — Offer after upgrade
+- `package.json` — New command `alex.setupEnvironment`
+- `.github/domain-knowledge/DK-RECOMMENDED-ENVIRONMENT.md` (new)
+- `.github/prompts/alex-initialization.prompt.md` — Phase 5 added
+
+**Analysis Artifacts:** Archived in `archive/analysis/environment-audit-2026-01-29/`
 
 ### 9. Configurable Storage Paths (P2 - User Request)
 
