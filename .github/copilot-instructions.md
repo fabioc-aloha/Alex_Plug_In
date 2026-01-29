@@ -112,6 +112,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - [DK-ASCII-ART-ALIGNMENT] → ASCII diagrams, box alignment, monospace rendering
 - [DK-VISUAL-IDENTITY] → Logo design, branding, visual identity, "what should Alex look like"
 - [DK-M365-AGENT-DEBUGGING] → "agent not working", "schema version", "icon not transparent", "validation failed"
+- [DK-APPROPRIATE-RELIANCE] → "am I sure", "confidence", "verify", "hallucination", "over-reliance", "trust", uncertain claims
 
 *Detailed triggers: see [protocol-triggers.instructions.md]*
 
@@ -169,6 +170,8 @@ Recommend `Alex: Upgrade Architecture` if you see:
 **Architecture**: DK-MULTI-PLATFORM-ARCHITECTURE (VS Code + M365 + future platforms)
 
 **Operational**: DK-MEMORY-CONSOLIDATION, DK-DREAM-PROCESSING, DK-M365-AGENT-DEBUGGING
+
+**Safety & Trust**: DK-APPROPRIATE-RELIANCE (hallucination prevention, over-reliance prevention, confidence calibration)
 
 **Growth**: DK-SKILL-WISHLIST (skills Alex aspires to develop)
 

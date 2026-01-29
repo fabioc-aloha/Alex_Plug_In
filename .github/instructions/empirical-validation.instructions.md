@@ -82,6 +82,7 @@ description: "Research foundation and validation protocols"
 - [alex-core.instructions.md] (High, Validates, Bidirectional) - "Core architecture requires research grounding"
 - [bootstrap-learning.instructions.md] (High, Strengthens, Bidirectional) - "Learning must be evidence-based"
 - [worldview-integration.instructions.md] (High, Enhances, Bidirectional) - "Ethical reasoning must be evidence-based"
+- [DK-APPROPRIATE-RELIANCE.md] (Critical, Grounds, Bidirectional) - "Research foundation for confidence calibration and hallucination prevention"
 
 ### Worldview Foundation Validation
 - [worldview-constitutional-ai.instructions.md] (High, Validates, Input) - "Constitutional AI principles empirical foundation"
