@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| **Target Version** | 4.0.0 QUADRUNIUM |
+| **Target Version** | 4.1.0 QUADRUNIUM |
 | **Codename** | 🦖 **Dino** |
-| **Status** | ✅ **COMPLETE!** All 20 tasks finished! |
+| **Status** | ✅ **DEPLOYED!** Pure M365 Edition live! |
 | **Created** | 2026-01-27 |
 | **Updated** | 2026-01-28 |
 | **Author** | Alex Cognitive Architecture Team |
@@ -288,14 +288,17 @@ The architecture supports additional platforms:
 | 8 | ~~Implement reminder system~~ | ✅ | Generate for notes.md + offer email draft option |
 | 9 | ~~Test in M365 Copilot~~ | ✅ | **🦖 DINO IS ALIVE!** Working with OneDrive memory |
 | 10 | ~~Polish app package~~ | ✅ | 🦖 emoji icons, partnership credit, 10 conversation starters |
-| 11 | ~~Package validation~~ | ✅ | 52/52 validation checks pass |
+| 11 | ~~Package validation~~ | ✅ | 51/51 validation checks pass |
 | 12 | ~~OneDrive permission UX~~ | ✅ | Documented sharing workflow (paste link in chat) |
 | 13 | ~~Write user documentation~~ | ✅ | README.md, DEPLOYMENT-CHECKLIST.md updated |
 | 14 | ~~Update architecture docs~~ | ✅ | DK-MULTI-PLATFORM-ARCHITECTURE.md, ROADMAP updated |
+| 15 | ~~Upgrade manifest schema~~ | ✅ | v1.24 with RSC permissions, defaultInstallScope: copilot |
+| 16 | ~~Document v1.25 schema~~ | ✅ | MANIFEST-REFERENCE.md updated for v1.25 (future) |
+| 17 | ~~Deploy v4.1.0~~ | ✅ | Deployed to Developer Portal, validated, live! |
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**🦖 PROJECT DINO COMPLETE! Pure M365 - Zero External Dependencies!**
+**🦖 PROJECT DINO v4.1.0 DEPLOYED! Pure M365 - Zero External Dependencies!**
 
 ---
 
@@ -303,11 +306,24 @@ The architecture supports additional platforms:
 
 ### Schema Versions
 
-| Schema | Working Version | Latest | Notes |
-|--------|-----------------|--------|-------|
-| **Declarative Agent Manifest** | **v1.3** ✅ | v1.6 | v1.3 more compatible with Developer Portal |
-| **App Manifest (Teams)** | **v1.19** ✅ | v1.22 | v1.19 simpler, works with copilotAgents |
-| **M365 Agents YAML** | v1.3 | v1.9 | CLI v2.x only supports up to v1.3 |
+| Schema | Working Version | Latest Available | Portal Support | Notes |
+|--------|-----------------|------------------|----------------|-------|
+| **App Manifest (Teams)** | **v1.24** ✅ | v1.25 | v1.24 only | v1.25 not yet supported by Teams Toolkit/Portal |
+| **Declarative Agent** | **v1.3** ✅ | v1.6 | v1.3 | v1.3 more compatible with Developer Portal |
+| **M365 Agents YAML** | v1.8 | v1.9 | - | CLI v2.x supports v1.8 |
+
+> **Schema v1.24 Features Used:**
+> - `defaultInstallScope: "copilot"` - Direct Copilot install
+> - `authorization.permissions.resourceSpecific` - RSC permissions (Files.Read.User, Mail.ReadWrite.User)
+>
+> **Schema v1.24 Features NOT YET SUPPORTED by Portal:**
+> - `icons.color32x32` - 32x32 color icon for pinning
+> - `activities.activityIcons` - Custom notification icons
+> - `activityTypes[].allowedIconIds` - Icon mapping
+>
+> **Schema v1.25 Features (Future):**
+> - `agenticUserTemplates` - Agent 365 blueprints with Entra Agent ID
+> - `supportsChannelFeatures: "tier1"` - Enhanced shared/private channel support
 
 > **Note**: No API Plugin needed - pure M365 native capabilities!
 
@@ -336,21 +352,20 @@ The architecture supports additional platforms:
 ```
 alexCognitiveAgent/
 ├── appPackage/
-│   ├── manifest.json           # M365 App manifest (v1.22)
-│   ├── declarativeAgent.json   # Agent config (v1.6)
-│   ├── alex-knowledge-plugin.json  # API plugin (v2.3)
-│   ├── openapi.yaml            # API spec for plugin
+│   ├── manifest.json           # M365 App manifest (v1.24)
+│   ├── declarativeAgent.json   # Agent config (v1.3) with inline instructions
+│   ├── alex-knowledge-plugin.json  # DORMANT - API plugin (not used in Pure M365)
+│   ├── openapi.yaml            # DORMANT - API spec (not used in Pure M365)
 │   ├── color.png               # 192x192 color icon
+│   ├── color32x32.png          # 32x32 color icon (created, awaiting portal support)
 │   └── outline.png             # 32x32 outline icon
-├── src/
-│   └── instructions/
-│       └── alex-system-prompt.md
-├── api/                        # Azure Functions (optional)
-│   ├── searchKnowledge/
-│   ├── getInsights/
-│   └── getProfile/
+├── api/                        # DORMANT - Azure Functions (v3.x hybrid mode)
+│   ├── README.md               # Explains dormant status
+│   └── src/functions/          # Preserved for future use
 ├── teamsapp.yml
-└── package.json
+├── teamsapp.local.yml
+├── deploy.ps1                  # Quick deploy script
+└── package.json                # v4.1.0
 ```
 
 ### Capabilities Available (v1.6 Schema)
