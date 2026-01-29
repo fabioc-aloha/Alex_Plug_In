@@ -116,9 +116,20 @@ Alex 4.0 addresses these challenges through architectural implementation of rese
 | 25 | Debug Memory | ⬜ | 2d | Context-aware debugging with knowledge |
 | 26 | Goal Sessions | ⬜ | 2d | Focused work mode with auto-tracking |
 
+### v4.0.0 Infrastructure & API Enhancements
+
+| # | Feature | Status | Effort | Description |
+|:-:|---------|:------:|:------:|-------------|
+| 27 | Configurable Storage Paths | ⬜ | 3d | User-configurable global knowledge location (OneDrive, etc.) |
+| 28 | Agent Skills Validation | ⬜ | 1d | Verify Alex skills format matches VS Code 1.108 spec |
+| 29 | Tool Annotations | ⬜ | 1d | Add readOnlyHint to read-only tools for auto-approval |
+| 30 | Participant Detection | ⬜ | 2d | Auto-route epistemic queries via disambiguation config |
+| 31 | Follow-up Provider | ⬜ | 2d | Suggest verification prompts after responses |
+| 32 | Tool Confirmation Messages | ⬜ | 1d | Custom confirmation for dream, sync, promote tools |
+
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v4.0.0 Tasks: 0/26 complete**
+**v4.0.0 Tasks: 0/32 complete**
 
 ---
 
@@ -629,7 +640,7 @@ Features #23-26 (Test-Driven Learning, Code Review Assist, Debug Memory, Goal Se
 
 **Current (P1-P4c)**:
 - P1: meta-cognitive-awareness
-- P2: bootstrap-learning  
+- P2: bootstrap-learning
 - P3: worldview-integration
 - P4a: grounded-factual-processing
 - P4b: meditation-consolidation
@@ -736,7 +747,102 @@ DK-APPROPRIATE-RELIANCE
 
 ---
 
-## 🔄 Migration Path
+## � Options Under Evaluation
+
+### Configurable Storage Paths (Cloud Sync Enhancement)
+
+**Goal:** Enable Alex to store global knowledge in user-specified locations (OneDrive, Dropbox, iCloud, etc.) for cross-machine synchronization.
+
+**Background:** Currently `~/.alex/global-knowledge/` uses `os.homedir()`. Users want cross-machine access via cloud storage.
+
+| Option | Approach | Pros | Cons | Effort |
+|--------|----------|------|------|--------|
+| **A. User-Configurable Path** | New `alex.storagePath` VS Code setting | Full user control, any path | Manual configuration required | 2d |
+| **B. Symbolic Link** | User creates symlink from `~/.alex/` to cloud folder | No code changes, native OS feature | Requires terminal knowledge, platform-specific | 0d |
+| **C. Dual Storage** | Local `.alex/` + cloud backup with configurable sync path | Best of both (speed + portability) | More complex, potential conflicts | 3d |
+| **D. Cloud Provider Auto-Detection** | Auto-detect OneDrive/Dropbox/iCloud/GoogleDrive paths | Seamless UX, "just works" | Platform-specific code, privacy concerns | 4d |
+
+**Recommended:** Option A (User-Configurable Path) + Option D (Auto-Detection)
+- Provide `alex.storagePath` setting with sensible default (`~/.alex/`)
+- Offer auto-detection prompts: "OneDrive detected. Store Alex knowledge there?"
+- Maintain local cache for performance with cloud as primary
+
+**Implementation Notes:**
+```typescript
+// Example setting schema
+"alex.storagePath": {
+  "type": "string",
+  "default": "",  // Empty = use os.homedir()/.alex/
+  "description": "Custom path for Alex global knowledge storage. Leave empty for default (~/.alex/)."
+},
+"alex.storageAutoDetect": {
+  "type": "boolean",
+  "default": true,
+  "description": "Automatically detect and offer cloud storage locations."
+}
+```
+
+### New VS Code Copilot API Features (v1.108+)
+
+**Goal:** Evaluate and leverage latest GitHub Copilot extensibility APIs to enhance Alex capabilities.
+
+| Feature | API/Capability | Alex Use Case | Effort | Priority |
+|---------|---------------|---------------|--------|----------|
+| **Agent Skills (Experimental)** | `.github/skills/` folder with `SKILL.md` | Alex already has this! Our architecture is ahead of the curve. Validate compatibility. | 1d | High |
+| **Language Model Tools** | `vscode.lm.registerTool()` | Already implemented (11 tools). Consider new tools: `verify_claim`, `assess_confidence` | 2d | High |
+| **MCP Server Support** | `vscode.lm.registerMcpServerDefinitionProvider()` | Expose Alex knowledge as MCP server for other tools/agents | 3d | Medium |
+| **Tool Annotations** | `readOnlyHint`, `title` on tools | Mark read-only tools (synapse_health, memory_search) for auto-approval | 1d | High |
+| **Dynamic Tool Discovery** | Runtime tool registration | Context-aware tools: show confidence tools only when epistemic mode active | 2d | Medium |
+| **Participant Detection** | `disambiguation` in package.json | Auto-route epistemic queries to @alex without explicit mention | 2d | Medium |
+| **@vscode/chat-extension-utils** | Simplified tool calling | Evaluate library for cleaner tool implementation | 1d | Low |
+| **Sampling (MCP)** | LLM access for MCP servers | If Alex becomes MCP server, can perform own LLM calls | 3d | Low |
+| **Resource Templates (MCP)** | Parameterized resources | Expose knowledge by domain/date as queryable resources | 2d | Low |
+
+**Key Discoveries from VS Code 1.108:**
+
+1. **Agent Skills Already Aligned** — VS Code now officially supports `.github/skills/` folders with `SKILL.md`. Alex's cognitive architecture predates this feature. We should:
+   - Verify our skills follow the expected format
+   - Consider registering Alex protocols as official Agent Skills
+   - Update documentation to highlight this capability
+
+2. **Tool Confirmation Customization** — We can provide custom confirmation messages via `prepareInvocation()`. Should implement for:
+   - `dream_maintenance` (shows what will be validated)
+   - `cloud_sync` (shows what will be synced)
+   - `promote_knowledge` (shows what will be promoted)
+
+3. **When Clauses for Tools** — Tools can have `when` clauses to control availability:
+   ```json
+   "when": "alex.epistemicMode == 'verification'"
+   ```
+   This enables context-sensitive tool availability.
+
+4. **Follow-up Providers** — Chat participants can suggest follow-up questions:
+   ```typescript
+   cat.followupProvider = {
+     provideFollowups(result, context, token) {
+       return [{ prompt: 'Verify this claim?', label: 'Request verification' }];
+     }
+   };
+   ```
+   Perfect for epistemic integrity: "Would you like me to verify this?"
+
+5. **Terminal Tool Auto-Approval** — npm scripts are now auto-approved. Consider contributing workspace-specific approval rules for Alex commands.
+
+**Recommendation Matrix:**
+
+| Feature | Implement in v4.0? | Rationale |
+|---------|-------------------|-----------|
+| Agent Skills Validation | ✅ Yes | Quick win, we're already aligned |
+| Tool Annotations | ✅ Yes | Low effort, better UX |
+| Participant Detection | ✅ Yes | Better discoverability |
+| Follow-up Provider | ✅ Yes | Supports verification prompts |
+| MCP Server | 🔄 v4.1 | Higher effort, wait for MCP maturity |
+| Dynamic Tool Discovery | 🔄 v4.1 | Nice-to-have, not critical |
+| Configurable Storage | ✅ Yes | High user value, moderate effort |
+
+---
+
+## �🔄 Migration Path
 
 ### From v3.4.x to v4.0.0
 
