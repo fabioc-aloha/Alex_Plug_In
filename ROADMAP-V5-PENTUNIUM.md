@@ -950,7 +950,7 @@ flowchart TB
 
 ---
 
-## � Verified Graph API Reference
+## 📚 Verified Graph API Reference
 
 > **Last Verified**: 2026-01-28 | **Source**: [Microsoft Graph API Reference](https://learn.microsoft.com/en-us/graph/api/overview)
 
@@ -1026,7 +1026,7 @@ For real-time updates on transcripts, emails, and chats:
 
 ---
 
-## �🔧 Technical Implementation Plan
+## 🔧 Technical Implementation Plan
 
 ### Phase 1: Graph Deep Integration (v5.0.0)
 

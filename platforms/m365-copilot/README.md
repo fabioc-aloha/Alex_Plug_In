@@ -1,10 +1,20 @@
-# 🦖 Alex M365 Agent - Project Dino
+# 🧠 Alex M365 Copilot Agent
+
+![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
+
+[![Version](https://img.shields.io/badge/version-4.0.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+[![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 
 > Alex Cognitive Architecture extended to Microsoft 365 Copilot
 
-## Overview
+---
+
+## 🎯 Overview
 
 This project brings Alex's cognitive capabilities to Microsoft 365 Copilot using **pure M365 native capabilities** - no external APIs or Azure services required!
+
+Alex M365 is a **knowledge-only declarative agent** that uses M365 Copilot foundation models with custom instructions and knowledge sources.
 
 ### What Alex Can Do
 
@@ -113,7 +123,7 @@ npx teamsapp validate --package-file appPackage/build/appPackage.local.zip
 ## User Commands
 
 | User Says | Alex Does |
-|-----------|----------|
+| --------- | --------- |
 | "Remind me to..." | Generates for notes.md + offers email draft |
 | "Remember that..." | Generates for notes.md |
 | "Update my profile" | Generates for profile.md |
@@ -122,11 +132,32 @@ npx teamsapp validate --package-file appPackage/build/appPackage.local.zip
 | "Meditate" | Consolidates learnings |
 | "Dream" | Reviews memory for gaps |
 
-## Related
+---
 
-- [Alex VS Code Extension](../../platforms/vscode-extension)
-- [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md)
+## 📚 Documentation
+
+| Document | Description |
+| -------- | ----------- |
+| [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md) | Step-by-step deployment guide |
+| [Publication Guide](./PUBLICATION-GUIDE.md) | Internal M365 app store submission |
+| [Declarative Agent Reference](./docs/DECLARATIVE-AGENT-REFERENCE.md) | Agent manifest documentation |
+| [Manifest Reference](./docs/MANIFEST-REFERENCE.md) | M365 app manifest documentation |
+
+## 🔗 Related
+
+| Platform | Description |
+| -------- | ----------- |
+| [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) | Alex for VS Code + GitHub Copilot |
+| [Project Repository](https://github.com/fabioc-aloha/Alex_Plug_In) | Full source code and documentation |
 
 ---
 
-🦖 *Project Dino - v4.0.0 QUADRUNIUM - Pure M365 Edition*
+## 📝 License
+
+Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
+
+---
+
+**Alex M365** - v4.0.0 QUADRUNIUM - Pure M365 Edition
+
+© 2026 CorreaX • AI That Learns How to Learn

@@ -4,7 +4,7 @@ Use this checklist before each release to ensure quality and consistency.
 
 ---
 
-## � Authentication
+## 🔐 Authentication
 
 - [ ] **VSCE_PAT** in `.env` file is valid (not expired)
   - Create PAT at: [Azure DevOps Tokens](https://dev.azure.com/fabioc-aloha/_usersSettings/tokens)
@@ -18,7 +18,7 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 
 ---
 
-## �📋 Version & Metadata
+## 📋 Version & Metadata
 
 **Version maintained in 3 locations only** (to reduce overhead):
 
@@ -178,7 +178,7 @@ code --install-extension alex-cognitive-architecture-2.0.0.vsix
 #    - Dream protocol runs
 ```
 
-## � Personal Access Token (PAT)
+## 🔑 Personal Access Token (PAT)
 
 Before publishing, ensure your PAT is valid:
 

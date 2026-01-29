@@ -1,25 +1,18 @@
 # 🧠 Alex Cognitive Architecture
 
-![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
+![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.3.7-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
-[![VS Code](https://img.shields.io/badge/VS%20Code-Extension-7c3aed)](https://code.visualstudio.com/)
-[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![VS Code Version](https://img.shields.io/badge/VS%20Code-v3.4.0-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![M365 Version](https://img.shields.io/badge/M365%20Copilot-v4.0.0-7c3aed)](platforms/m365-copilot/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 > Your AI Learning Partner with Meta-Cognitive Awareness
-
-[Install Now](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) •
-[Quick Start](#-quick-start) •
-[Upgrading](#-upgrading-from-previous-versions) •
-[Chat with @alex](#-chat-with-alex) •
-[All Tools](#️-all-available-tools)
 
 ---
 
 ## 🎯 What is Alex?
 
-**Alex Cognitive Architecture** transforms GitHub Copilot into a sophisticated learning partner that:
+**Alex Cognitive Architecture** transforms AI assistants into sophisticated learning partners with:
 
 - 🧠 **Learns and Remembers** - Consolidates knowledge across sessions using memory files
 - 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
@@ -29,7 +22,47 @@
 
 ---
 
-## 🚀 Quick Start
+## 📦 Available Platforms
+
+| Platform | Version | Status | Get Started |
+| -------- | ------- | ------ | ----------- |
+| **VS Code Extension** | v3.4.0 | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | v4.0.0 | 🔄 Internal Review | [Documentation](platforms/m365-copilot/) |
+
+### VS Code Extension
+
+Transform GitHub Copilot into Alex with full cognitive capabilities:
+
+- Chat participant (`@alex`)
+- 12 slash commands
+- 11 Language Model tools
+- Dream/meditation protocols
+- Global knowledge base with cloud sync
+
+**Install:**
+
+```bash
+code --install-extension fabioc-aloha.alex-cognitive-architecture
+```
+
+Or search "**Alex Cognitive Architecture**" in VS Code Extensions (`Ctrl+Shift+X`)
+
+📘 **[VS Code Extension Documentation](platforms/vscode-extension/)**
+
+### M365 Copilot Agent
+
+Alex as a declarative agent for Microsoft 365 Copilot:
+
+- Pure M365 native capabilities (no Azure required)
+- OneDrive memory integration
+- Email drafting for reminders
+- Teams and People context
+
+📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
+
+---
+
+## 🚀 Quick Start (VS Code)
 
 > 📘 For a comprehensive guide, see the **[User Manual](alex_docs/USER-MANUAL.md)**
 
