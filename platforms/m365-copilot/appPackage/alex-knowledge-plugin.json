@@ -1,9 +1,10 @@
 {
+  "_DORMANT_NOTE": "This file is not used in Alex v4.0.0 QUADRUNIUM (Pure M365 Edition). Preserved for future use. See: platforms/m365-copilot/api/README.md",
   "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
   "schema_version": "v2.3",
-  "name_for_human": "Alex Knowledge API",
-  "description_for_human": "Access your cross-project knowledge, insights, learning goals, and notes through Alex's cognitive architecture.",
-  "description_for_model": "This plugin provides access to the user's personal knowledge base managed by Alex Cognitive Architecture. Use searchKnowledge to find patterns and learnings from past projects. Use getInsights to retrieve recent insights and discoveries. Use getProfile to understand user preferences and learning goals. Use getNotes to access reminders and observations. Use getLearningGoals to see what the user wants to learn and track their progress.",
+  "name_for_human": "Alex Knowledge API [DORMANT]",
+  "description_for_human": "[DORMANT] Access your cross-project knowledge, insights, learning goals, and notes through Alex's cognitive architecture.",
+  "description_for_model": "[DORMANT - NOT IN USE] This plugin provides access to the user's personal knowledge base managed by Alex Cognitive Architecture. Use searchKnowledge to find patterns and learnings from past projects. Use getInsights to retrieve recent insights and discoveries. Use getProfile to understand user preferences and learning goals. Use getNotes to access reminders and observations. Use getLearningGoals to see what the user wants to learn and track their progress.",
   "logo_url": "${{AZURE_FUNCTIONS_URL}}/api/logo.png",
   "contact_email": "support@alexcognitive.dev",
   "legal_info_url": "https://github.com/fabiocarvalho/alex-cognitive-architecture/blob/main/TERMS.md",
@@ -70,6 +71,33 @@
           }
         }
       }
+    },
+    {
+      "name": "addReminder",
+      "description": "Create a new reminder for the user. Reminders can be triggered by date/time, keywords mentioned in conversation, or project context. Use this when user says 'remind me to...' or 'don't let me forget...'",
+      "capabilities": {
+        "confirmation": {
+          "type": "AdaptiveCard",
+          "title": "Create Reminder",
+          "body": "Create a reminder: {{content}}"
+        }
+      }
+    },
+    {
+      "name": "addNote",
+      "description": "Save a persistent note or observation to the user's memory. Use 'note' type when user says 'remember that...' and 'observation' type for Alex's own insights about patterns.",
+      "capabilities": {
+        "confirmation": {
+          "type": "AdaptiveCard",
+          "title": "Save Note",
+          "body": "Save this note: {{content}}"
+        }
+      }
+    },
+    {
+      "name": "updateReminder",
+      "description": "Update a reminder's status - mark as completed, snooze, reactivate, or delete. Use when user says 'done with reminder' or 'forget the reminder about...'",
+      "capabilities": {}
     }
   ],
   "runtimes": [
@@ -87,9 +115,11 @@
         "getInsights",
         "getProfile",
         "getNotes",
-        "getLearningGoals"
+        "getLearningGoals",
+        "addReminder",
+        "addNote",
+        "updateReminder"
       ]
     }
   ]
 }
-

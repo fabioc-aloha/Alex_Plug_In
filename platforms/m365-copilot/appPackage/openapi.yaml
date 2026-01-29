@@ -1,8 +1,15 @@
+# ==============================================================================
+# DORMANT - This file is not used in Alex v4.0.0 QUADRUNIUM (Pure M365 Edition)
+# Preserved for future use if API Plugin capability is needed.
+# See: platforms/m365-copilot/api/README.md for details
+# ==============================================================================
+
 openapi: 3.0.3
 info:
-  title: Alex Knowledge API
+  title: Alex Knowledge API [DORMANT]
   description: |
-    API for accessing Alex Cognitive Architecture's knowledge base.
+    [DORMANT] API for accessing Alex Cognitive Architecture's knowledge base.
+    This API is not currently used - Alex v4.0.0 uses pure M365 native capabilities.
     Provides endpoints for searching patterns, retrieving insights,
     accessing user profiles, notes, and learning goals.
   version: 1.0.0
@@ -315,6 +322,321 @@ paths:
                         suggestConsolidation:
                           type: boolean
                           description: Whether to suggest creating a DK file
+
+  # ============================================================================
+  # PROACTIVE MEMORY SYSTEM - Write Operations
+  # ============================================================================
+
+  /addReminder:
+    post:
+      operationId: addReminder
+      summary: Create a new reminder
+      description: |
+        Add a reminder with optional triggers. Reminders can be triggered by:
+        - Specific date/time
+        - Keywords mentioned in conversation
+        - Project context
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                  description: The reminder text
+                triggerDate:
+                  type: string
+                  format: date-time
+                  description: When to trigger the reminder
+                keywords:
+                  type: array
+                  items:
+                    type: string
+                  description: Keywords that trigger the reminder
+                project:
+                  type: string
+                  description: Project scope for the reminder
+      responses:
+        '201':
+          description: Reminder created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  reminder:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      content:
+                        type: string
+                      created:
+                        type: string
+                        format: date-time
+
+  /addNote:
+    post:
+      operationId: addNote
+      summary: Save a note or observation
+      description: |
+        Store persistent notes that Alex remembers across sessions.
+        - Notes: User-provided context ("remember that...")
+        - Observations: Alex's own observations about patterns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                  description: The note content
+                type:
+                  type: string
+                  enum: [note, observation]
+                  default: note
+                project:
+                  type: string
+                  description: Optional project scope
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  description: Tags for categorization
+      responses:
+        '201':
+          description: Note created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  note:
+                    type: object
+
+  /updateReminder:
+    post:
+      operationId: updateReminder
+      summary: Update a reminder status
+      description: |
+        Mark a reminder as completed, snoozed, reactivated, or delete it.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - action
+              properties:
+                id:
+                  type: string
+                  description: The reminder ID
+                action:
+                  type: string
+                  enum: [complete, snooze, reactivate, delete]
+                  description: Action to perform
+      responses:
+        '200':
+          description: Reminder updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+
+  /getDueReminders:
+    get:
+      operationId: getDueReminders
+      summary: Get due reminders for proactive surfacing
+      description: |
+        Returns reminders that should be surfaced based on current context.
+        Checks date triggers, keyword matches, and project context.
+      parameters:
+        - name: keywords
+          in: query
+          required: false
+          description: Comma-separated keywords to check against triggers
+          schema:
+            type: string
+        - name: project
+          in: query
+          required: false
+          description: Current project context
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Due reminders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reminders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        content:
+                          type: string
+                        triggers:
+                          type: object
+                  count:
+                    type: integer
+
+  # ============================================================================
+  # TIME AWARENESS - Session Tracking
+  # ============================================================================
+
+  /getSessionStatus:
+    get:
+      operationId: getSessionStatus
+      summary: Get current session status and time-based suggestions
+      description: |
+        Returns the current work session status including duration and
+        gentle suggestions for breaks or meditation. Respects user preferences.
+      responses:
+        '200':
+          description: Session status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+                    description: Whether a session is currently active
+                  durationMinutes:
+                    type: integer
+                    description: How long the current session has been running
+                  session:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      startTime:
+                        type: string
+                        format: date-time
+                      topic:
+                        type: string
+                      project:
+                        type: string
+                      breaksTaken:
+                        type: integer
+                  suggestion:
+                    type: object
+                    description: Time-based suggestion (if applicable)
+                    properties:
+                      type:
+                        type: string
+                        enum: [break, meditate, wrap-up]
+                      message:
+                        type: string
+                  preferences:
+                    type: object
+                    properties:
+                      breakReminderMinutes:
+                        type: integer
+                        default: 90
+                      enableTimeTracking:
+                        type: boolean
+                        default: true
+
+  /startSession:
+    post:
+      operationId: startSession
+      summary: Start or resume a work session
+      description: |
+        Begins tracking a work session for time awareness features.
+        If a session already exists, updates its last activity time.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                  description: What you're working on
+                project:
+                  type: string
+                  description: Project context
+      responses:
+        '200':
+          description: Session started or resumed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  session:
+                    type: object
+
+  /sessionAction:
+    post:
+      operationId: sessionAction
+      summary: Perform session action (end, break, check-in)
+      description: |
+        Actions for managing the current session:
+        - end: End the session and get summary
+        - break: Record a break taken
+        - checkin: Acknowledge a suggestion was shown
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+              properties:
+                action:
+                  type: string
+                  enum: [end, break, checkin]
+                breakMinutes:
+                  type: integer
+                  description: Duration of break (for break action)
+      responses:
+        '200':
+          description: Action completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  summary:
+                    type: object
+                    description: Session summary (for end action)
+                    properties:
+                      totalMinutes:
+                        type: integer
+                      focusMinutes:
+                        type: integer
+                      breaks:
+                        type: integer
 
 components:
   securitySchemes:

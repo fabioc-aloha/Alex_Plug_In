@@ -7,46 +7,49 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLearningGoals = getLearningGoals;
+const gistService_1 = require("../services/gistService");
 async function getLearningGoals(request, context) {
     context.log('getLearningGoals triggered');
+    const status = request.query.get('status') || undefined;
     try {
-        // TODO: Implement actual learning goals retrieval
-        // This will:
-        // 1. Fetch user profile for stated learning goals
-        // 2. Scan recent session activity for practiced topics
-        // 3. Match practiced topics to learning goals
-        // 4. Calculate whether to suggest consolidation (3+ sessions)
-        // Placeholder response
+        // Get learning goals from Gist
+        const goals = await (0, gistService_1.getLearningGoals)(status, context);
+        // Get recent insights to derive practiced topics
+        const recentInsights = await (0, gistService_1.getInsightItems)(14, undefined, 50, context);
+        // Aggregate topics from recent insights
+        const topicCounts = new Map();
+        for (const insight of recentInsights) {
+            for (const tag of insight.tags) {
+                const existing = topicCounts.get(tag);
+                if (existing) {
+                    existing.count++;
+                    if (insight.date && insight.date > existing.lastDate) {
+                        existing.lastDate = insight.date;
+                    }
+                }
+                else {
+                    topicCounts.set(tag, {
+                        count: 1,
+                        lastDate: insight.date || new Date().toISOString()
+                    });
+                }
+            }
+        }
+        // Convert to recent topics array
+        const recentTopics = Array.from(topicCounts.entries())
+            .map(([topic, data]) => ({
+            topic,
+            sessionCount: data.count,
+            lastPracticed: data.lastDate.split('T')[0],
+            suggestConsolidation: data.count >= 3 // Suggest if 3+ sessions
+        }))
+            .sort((a, b) => b.sessionCount - a.sessionCount)
+            .slice(0, 10);
         const response = {
-            goals: [
-                {
-                    topic: 'Master Kubernetes',
-                    status: 'active',
-                    progress: 'Completed basic deployments, working on StatefulSets',
-                    relatedPatterns: ['GK-CONTAINER-PATTERNS', 'DK-K8S-BASICS']
-                },
-                {
-                    topic: 'Build resilient APIs',
-                    status: 'active',
-                    progress: 'Implemented retry patterns, exploring circuit breakers',
-                    relatedPatterns: ['GK-API-RATE-LIMITING', 'GK-RESILIENT-APIS']
-                }
-            ],
-            recentTopics: [
-                {
-                    topic: 'Azure Functions',
-                    sessionCount: 4,
-                    lastPracticed: '2026-01-28',
-                    suggestConsolidation: true
-                },
-                {
-                    topic: 'M365 Agents',
-                    sessionCount: 2,
-                    lastPracticed: '2026-01-28',
-                    suggestConsolidation: false
-                }
-            ]
+            goals,
+            recentTopics
         };
+        context.log(`Returning ${goals.length} goals and ${recentTopics.length} recent topics`);
         return {
             status: 200,
             jsonBody: response

@@ -7,41 +7,18 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getNotes = getNotes;
+const gistService_1 = require("../services/gistService");
 async function getNotes(request, context) {
     context.log('getNotes triggered');
     const type = request.query.get('type') || 'all';
     const status = request.query.get('status') || 'active';
-    const project = request.query.get('project');
+    const project = request.query.get('project') || undefined;
     try {
-        // TODO: Implement actual notes retrieval
-        // This will:
-        // 1. Fetch notes from GitHub Gist (~/.alex/notes/)
-        // 2. Filter by type (reminder, note, observation, all)
-        // 3. Filter by status (active, completed, snoozed, all)
-        // 4. Filter by project if provided
-        // Placeholder response
+        const notes = await (0, gistService_1.getNotes)(type, status, project, context);
         const response = {
-            notes: [
-                {
-                    id: 'note-001',
-                    type: 'reminder',
-                    content: 'Update changelog before release',
-                    created: '2026-01-28T09:00:00Z',
-                    status: 'active',
-                    triggers: {
-                        keywords: ['release', 'publish'],
-                        project: 'Alex_Plug_In'
-                    }
-                },
-                {
-                    id: 'note-002',
-                    type: 'observation',
-                    content: 'User prefers detailed explanations with code examples',
-                    created: '2026-01-25T14:30:00Z',
-                    status: 'active'
-                }
-            ]
+            notes
         };
+        context.log(`Returning ${notes.length} notes`);
         return {
             status: 200,
             jsonBody: response

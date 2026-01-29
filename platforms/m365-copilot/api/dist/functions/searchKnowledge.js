@@ -7,10 +7,11 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.searchKnowledge = searchKnowledge;
+const gistService_1 = require("../services/gistService");
 async function searchKnowledge(request, context) {
     context.log('searchKnowledge triggered');
     const query = request.query.get('query');
-    const category = request.query.get('category');
+    const category = request.query.get('category') || undefined;
     const limit = parseInt(request.query.get('limit') || '5');
     if (!query) {
         return {
@@ -19,25 +20,19 @@ async function searchKnowledge(request, context) {
         };
     }
     try {
-        // TODO: Implement actual knowledge search
-        // This will:
-        // 1. Fetch knowledge from GitHub Gist (using GITHUB_GIST_ID)
-        // 2. Search through GK-* (global patterns) and DK-* (domain knowledge) files
-        // 3. Rank by relevance to query
-        // 4. Filter by category if provided
-        // Placeholder response
+        const { results, totalCount } = await (0, gistService_1.searchKnowledgeItems)(query, category, limit, context);
+        // Transform to API response format
         const response = {
-            results: [
-                {
-                    title: 'API Rate Limiting Pattern',
-                    category: 'api-design',
-                    content: 'Token bucket implementation with exponential backoff...',
-                    source: 'GK-API-RATE-LIMITING.md',
-                    relevance: 0.92
-                }
-            ],
-            totalCount: 1
+            results: results.map(item => ({
+                title: item.title,
+                category: item.category,
+                content: item.content.substring(0, 500) + (item.content.length > 500 ? '...' : ''),
+                source: item.source,
+                relevance: item.relevance || 0.5
+            })),
+            totalCount
         };
+        context.log(`Found ${totalCount} results for query: ${query}`);
         return {
             status: 200,
             jsonBody: response

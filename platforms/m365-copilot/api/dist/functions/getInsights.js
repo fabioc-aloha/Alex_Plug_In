@@ -7,31 +7,25 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getInsights = getInsights;
+const gistService_1 = require("../services/gistService");
 async function getInsights(request, context) {
     context.log('getInsights triggered');
     const days = parseInt(request.query.get('days') || '30');
-    const project = request.query.get('project');
+    const project = request.query.get('project') || undefined;
     const limit = parseInt(request.query.get('limit') || '10');
     try {
-        // TODO: Implement actual insights retrieval
-        // This will:
-        // 1. Fetch insights from GitHub Gist
-        // 2. Filter by date range (days parameter)
-        // 3. Filter by project if provided
-        // 4. Sort by date descending
-        // Placeholder response
+        const items = await (0, gistService_1.getInsightItems)(days, project, limit, context);
         const response = {
-            insights: [
-                {
-                    id: 'gi-2026-01-28-001',
-                    title: 'Error Handling Pattern Discovery',
-                    content: 'Discovered a consistent pattern across multiple projects...',
-                    date: '2026-01-28T10:30:00Z',
-                    project: 'Alex_Plug_In',
-                    tags: ['error-handling', 'patterns', 'typescript']
-                }
-            ]
+            insights: items.map(item => ({
+                id: item.id,
+                title: item.title,
+                content: item.content.substring(0, 1000) + (item.content.length > 1000 ? '...' : ''),
+                date: item.date || new Date().toISOString(),
+                project: item.project,
+                tags: item.tags
+            }))
         };
+        context.log(`Returning ${response.insights.length} insights`);
         return {
             status: 200,
             jsonBody: response

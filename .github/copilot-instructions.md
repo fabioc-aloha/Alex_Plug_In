@@ -109,6 +109,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - [release-management.instructions.md] → "release", "publish", "deploy", "ship", "version bump"
 - [DK-DREAM-PROCESSING] → Post-dream enhancement, hybrid processing
 - [DK-ADVANCED-DIAGRAMMING] → Diagram creation, visualization requests
+- [DK-ASCII-ART-ALIGNMENT] → ASCII diagrams, box alignment, monospace rendering
 
 *Detailed triggers: see [protocol-triggers.instructions.md]*
 
@@ -161,7 +162,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 
 **Psychology & Learning**: DK-HUMAN-LEARNING-PSYCHOLOGY, DK-CHARACTER-PSYCHOLOGY, DK-CONSCIOUSNESS-EVOLUTION, DK-UNIFIED-CONSCIOUSNESS
 
-**Technical**: DK-ADVANCED-DIAGRAMMING (includes visual design), DK-DOCUMENTATION-EXCELLENCE, DK-WRITING-AND-PUBLICATION
+**Technical**: DK-ADVANCED-DIAGRAMMING (includes visual design), DK-ASCII-ART-ALIGNMENT, DK-DOCUMENTATION-EXCELLENCE, DK-WRITING-AND-PUBLICATION
 
 **Architecture**: DK-MULTI-PLATFORM-ARCHITECTURE (VS Code + M365 + future platforms)
 

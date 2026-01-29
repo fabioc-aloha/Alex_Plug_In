@@ -129,17 +129,19 @@ const rootPath = 'c:\\Development\\MyProject';  // Never do this!
 }
 ```
 
-### Memory via OneDrive
-- Store cognitive files in OneDrive folder
-- Agent can read via OneDriveAndSharePoint capability
-- Write requires Azure Functions API (optional)
+### Memory via OneDrive (Pure M365 - No API Required!)
+- Store cognitive files in OneDrive `Alex-Memory/` folder
+- Agent READs via OneDriveAndSharePoint capability
+- For writes: Alex generates content → user pastes into files
+- Reminders: Offer to draft email to self
+- **No Azure Functions, No API Plugin needed!**
 
 ### Deployment Flow
 ```
-1. teamsapp validate --app-package-file-path ./appPackage
-2. Package as .zip (manifest + agent + instructions + icons)
-3. Upload to Teams Admin Center / Developer Portal
-4. Test in M365 Copilot chat
+1. npx teamsapp package --env local
+2. npx teamsapp validate --package-file appPackage/build/*.zip
+3. Upload to Developer Portal → Preview in Teams
+4. User creates Alex-Memory folder, shares link in chat
 ```
 
 ---
@@ -184,14 +186,23 @@ const rootPath = 'c:\\Development\\MyProject';  // Never do this!
 
 ### What Worked Well
 1. **Monorepo Structure** - Clean separation with shared core
-2. **Declarative Agent Simplicity** - No code needed for M365 basic functionality
+2. **Declarative Agent Simplicity** - No code needed for M365 functionality
 3. **OneDrive as Memory** - Leverages existing M365 infrastructure
 4. **Cognitive Architecture Portability** - Same protocols work everywhere
+5. **Pure M365 Approach** - No external dependencies = simpler deployment!
 
 ### Challenges Encountered
-1. **M365 Write Operations** - OneDrive capability is read-only, needs Azure Functions for writes
-2. **Platform Feature Parity** - Not all features can exist on all platforms
-3. **Testing Complexity** - Each platform has different testing requirements
+1. **M365 Write Operations** - OneDrive capability is read-only; solved with generate+paste workflow
+2. **Calendar/Tasks** - Not available in v1.3 declarative agent schema; using email drafts for reminders
+3. **Permission UX** - Users must share OneDrive folder link IN chat for Copilot to access
+
+### Key Insight: Simplicity Wins
+Initially planned Azure Functions + API Plugin for write operations.
+**Better solution**: Generate content → user pastes. This:
+- Keeps data under user control (privacy feature!)
+- Zero external dependencies
+- No Azure costs
+- Simpler deployment and maintenance
 
 ### Future Considerations
 1. **CLI Platform** - Could add command-line Alex for terminal workflows

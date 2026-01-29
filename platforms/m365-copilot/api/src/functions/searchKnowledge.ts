@@ -6,6 +6,7 @@
  */
 
 import { HttpRequest, HttpResponseInit, InvocationContext } from '@azure/functions';
+import { searchKnowledgeItems } from '../services/gistService';
 
 interface KnowledgeResult {
     title: string;
@@ -27,7 +28,7 @@ export async function searchKnowledge(
     context.log('searchKnowledge triggered');
 
     const query = request.query.get('query');
-    const category = request.query.get('category');
+    const category = request.query.get('category') || undefined;
     const limit = parseInt(request.query.get('limit') || '5');
 
     if (!query) {
@@ -38,26 +39,26 @@ export async function searchKnowledge(
     }
 
     try {
-        // TODO: Implement actual knowledge search
-        // This will:
-        // 1. Fetch knowledge from GitHub Gist (using GITHUB_GIST_ID)
-        // 2. Search through GK-* (global patterns) and DK-* (domain knowledge) files
-        // 3. Rank by relevance to query
-        // 4. Filter by category if provided
+        const { results, totalCount } = await searchKnowledgeItems(
+            query,
+            category,
+            limit,
+            context
+        );
 
-        // Placeholder response
+        // Transform to API response format
         const response: SearchResponse = {
-            results: [
-                {
-                    title: 'API Rate Limiting Pattern',
-                    category: 'api-design',
-                    content: 'Token bucket implementation with exponential backoff...',
-                    source: 'GK-API-RATE-LIMITING.md',
-                    relevance: 0.92
-                }
-            ],
-            totalCount: 1
+            results: results.map(item => ({
+                title: item.title,
+                category: item.category,
+                content: item.content.substring(0, 500) + (item.content.length > 500 ? '...' : ''),
+                source: item.source,
+                relevance: (item as any).relevance || 0.5
+            })),
+            totalCount
         };
+
+        context.log(`Found ${totalCount} results for query: ${query}`);
 
         return {
             status: 200,

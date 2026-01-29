@@ -5,6 +5,7 @@ import { initializeArchitecture, resetArchitecture } from './commands/initialize
 import { runDreamProtocol } from './commands/dream';
 import { upgradeArchitecture } from './commands/upgrade';
 import { runSelfActualization } from './commands/self-actualization';
+import { runExportForM365 } from './commands/exportForM365';
 import { registerChatParticipant, resetSessionState } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 import { registerGlobalKnowledgeTools, ensureGlobalKnowledgeDirectories, registerCurrentProject } from './chat/globalKnowledge';
@@ -87,6 +88,11 @@ export function activate(context: vscode.ExtensionContext) {
         await withOperationLock('Self-Actualization', () => runSelfActualization(context));
     });
 
+    // M365 export command
+    let exportM365Disposable = vscode.commands.registerCommand('alex.exportForM365', async () => {
+        await runExportForM365(context);
+    });
+
     // Cloud sync commands
     const syncDisposable = vscode.commands.registerCommand('alex.syncKnowledge', async () => {
         await vscode.window.withProgress({
@@ -159,6 +165,7 @@ export function activate(context: vscode.ExtensionContext) {
             { label: '$(pulse) Run Dream Protocol', description: 'Neural maintenance and synapse validation', detail: 'Ctrl+Alt+D' },
             { label: '$(sparkle) Self-Actualize', description: 'Deep meditation and assessment', detail: 'Ctrl+Alt+S' },
             { label: '$(sync) Sync Knowledge', description: 'Sync global knowledge with GitHub', detail: 'Ctrl+Alt+K' },
+            { label: '$(package) Export for M365', description: 'Package memory for M365 Copilot' },
             { label: '$(book) Open Documentation', description: 'View Alex documentation', detail: 'Ctrl+Alt+H' },
             { label: '$(arrow-up) Upgrade Architecture', description: 'Update workspace to latest version' },
             { label: '$(comment-discussion) Chat with @alex', description: 'Open Copilot Chat' }
@@ -176,6 +183,8 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.commands.executeCommand('alex.selfActualize');
             } else if (selected.label.includes('Sync')) {
                 vscode.commands.executeCommand('alex.syncKnowledge');
+            } else if (selected.label.includes('Export for M365')) {
+                vscode.commands.executeCommand('alex.exportForM365');
             } else if (selected.label.includes('Documentation')) {
                 vscode.commands.executeCommand('alex.openDocs');
             } else if (selected.label.includes('Upgrade')) {
@@ -205,6 +214,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(dreamDisposable);
     context.subscriptions.push(upgradeDisposable);
     context.subscriptions.push(selfActualizeDisposable);
+    context.subscriptions.push(exportM365Disposable);
     context.subscriptions.push(syncDisposable);
     context.subscriptions.push(pushDisposable);
     context.subscriptions.push(pullDisposable);

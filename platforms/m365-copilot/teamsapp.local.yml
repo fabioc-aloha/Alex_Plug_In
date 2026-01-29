@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.8/yaml.schema.json
-# Local development configuration
+# Local development configuration - Pure M365 (no API required)
 
 version: v1.8
 
@@ -10,15 +10,6 @@ provision:
       name: Alex Cognitive-local
     writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
-
-  # Register API key for local development
-  - uses: apiKey/register
-    with:
-      name: alex-knowledge-api-key-local
-      appId: ${{TEAMS_APP_ID}}
-      apiSpecPath: ./appPackage/openapi.yaml
-    writeToEnvironmentFile:
-      registrationId: ALEX_API_KEY_REGISTRATION_ID
 
   # Build Teams app package
   - uses: teamsApp/zipAppPackage
@@ -38,8 +29,7 @@ provision:
       appPackagePath: ./appPackage/build/appPackage.local.zip
 
 deploy:
-  # For local development, API runs on localhost
-  # Start with: npm run start:api
+  # Pure M365 - no API deployment needed!
   - uses: script
     with:
-      run: echo "Start local API with 'npm run start:api'"
+      run: echo "Pure M365 agent - no API to deploy. Just upload the package to Developer Portal."

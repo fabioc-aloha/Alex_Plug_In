@@ -1,8 +1,8 @@
 # deploy.ps1 - Alex M365 Agent Quick Deploy
 param([switch]$Rebuild)
 
-$projectDir = "c:\Development\alex-m365-agent"
-$packagePath = "$projectDir\appPackage\build\appPackage.dev.zip"
+$projectDir = $PSScriptRoot
+$packagePath = "$projectDir\appPackage\build\alex-m365-agent-v4.1.0.zip"
 
 Write-Host "`n🦖 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
@@ -11,7 +11,7 @@ Write-Host "==================================" -ForegroundColor Cyan
 if ($Rebuild -or -not (Test-Path $packagePath)) {
     Write-Host "`n📦 Building app package..." -ForegroundColor Yellow
     Push-Location "$projectDir\appPackage"
-    Compress-Archive -Path manifest.json, declarativeAgent.json, color.png, outline.png -DestinationPath build\appPackage.dev.zip -Force
+    Compress-Archive -Path manifest.json, declarativeAgent.json, color.png, outline.png -DestinationPath "build\alex-m365-agent-v4.1.0.zip" -Force
     Pop-Location
     Write-Host "✅ Package built" -ForegroundColor Green
 }

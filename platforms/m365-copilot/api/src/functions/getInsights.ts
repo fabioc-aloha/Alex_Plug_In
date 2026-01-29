@@ -6,6 +6,7 @@
  */
 
 import { HttpRequest, HttpResponseInit, InvocationContext } from '@azure/functions';
+import { getInsightItems } from '../services/gistService';
 
 interface Insight {
     id: string;
@@ -27,30 +28,24 @@ export async function getInsights(
     context.log('getInsights triggered');
 
     const days = parseInt(request.query.get('days') || '30');
-    const project = request.query.get('project');
+    const project = request.query.get('project') || undefined;
     const limit = parseInt(request.query.get('limit') || '10');
 
     try {
-        // TODO: Implement actual insights retrieval
-        // This will:
-        // 1. Fetch insights from GitHub Gist
-        // 2. Filter by date range (days parameter)
-        // 3. Filter by project if provided
-        // 4. Sort by date descending
+        const items = await getInsightItems(days, project, limit, context);
 
-        // Placeholder response
         const response: InsightsResponse = {
-            insights: [
-                {
-                    id: 'gi-2026-01-28-001',
-                    title: 'Error Handling Pattern Discovery',
-                    content: 'Discovered a consistent pattern across multiple projects...',
-                    date: '2026-01-28T10:30:00Z',
-                    project: 'Alex_Plug_In',
-                    tags: ['error-handling', 'patterns', 'typescript']
-                }
-            ]
+            insights: items.map(item => ({
+                id: item.id,
+                title: item.title,
+                content: item.content.substring(0, 1000) + (item.content.length > 1000 ? '...' : ''),
+                date: item.date || new Date().toISOString(),
+                project: item.project,
+                tags: item.tags
+            }))
         };
+
+        context.log(`Returning ${response.insights.length} insights`);
 
         return {
             status: 200,

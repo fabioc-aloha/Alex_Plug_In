@@ -20,14 +20,14 @@
 | 5 | **Or Metered usage enabled** | Tenant admin enables pay-per-use billing for Copilot | ⬜ |
 | 6 | **Teams access** | User can access Microsoft Teams | ⬜ |
 
-### Azure AD / Entra ID (Optional - for API plugins)
+### Azure AD / Entra ID
 
-| # | Requirement | How to Configure | Status |
-|---|-------------|------------------|--------|
-| 7 | **App Registration created** | [Azure Portal](https://portal.azure.com) → Microsoft Entra ID → App registrations → New registration | ⬜ |
-| 8 | **Application (client) ID obtained** | Copy from App registration overview | ⬜ |
-| 9 | **API permissions configured** | App registration → API permissions → Add `User.Read` (Microsoft Graph) | ⬜ |
-| 10 | **Admin consent granted** | App registration → API permissions → Grant admin consent | ⬜ |
+> ✅ **Not Required for Pure M365!** Alex v4.0.0 uses only native M365 capabilities.
+> No Azure Functions, no API plugins, no app registrations needed.
+
+| # | Requirement | Status |
+|---|-------------|--------|
+| 7-10 | **SKIPPED** - Pure M365 version has no external API dependencies | ✅ N/A |
 
 ---
 
@@ -109,6 +109,20 @@
 | 37 | "Help me understand a new concept" | Alex asks what concept | ⬜ |
 | 38 | "Help me think through a problem" | Alex engages in discussion | ⬜ |
 
+### OneDrive Memory Setup (CRITICAL)
+
+| # | Step | Action | Status |
+|---|------|--------|--------|
+| 39 | **Create Alex-Memory folder** | OneDrive root → New folder → "Alex-Memory" | ⬜ |
+| 40 | **Create profile.md** | Inside Alex-Memory → New file → profile.md | ⬜ |
+| 41 | **Create notes.md** | Inside Alex-Memory → New file → notes.md | ⬜ |
+| 42 | **Share folder link WITH Copilot** | Right-click folder → Share → Copy link → **Paste in Copilot chat** | ⬜ |
+| 43 | **Grant permission when prompted** | Click "Allow" when Copilot asks for access | ⬜ |
+
+> ⚠️ **IMPORTANT**: Simply having the OneDriveAndSharePoint capability enabled is NOT enough!
+> You must **explicitly share the folder link in the Copilot chat** so Copilot can request and receive access.
+> Without this step, Alex will say it can see OneDrive but cannot actually read your files.
+
 ---
 
 ## 🔧 Troubleshooting
@@ -117,12 +131,12 @@
 
 | Issue | Possible Cause | Solution |
 |-------|----------------|----------|
-| **Spinning wheel forever** | **Missing Application (client) ID** | ⚠️ **ROOT CAUSE** - Add Azure AD App ID in Developer Portal |
+| **"Alex can't see my files"** | **OneDrive folder not shared with Copilot** | ⚠️ **CRITICAL** - Share Alex-Memory folder link WITH Copilot in chat |
 | **Spinning wheel forever** | Missing Copilot license | Verify user has M365 Copilot license assigned |
+| **Spinning wheel forever** | Tenant not enabled for Copilot | Check M365 Admin Center → Settings → Copilot |
 | **"Manifest parsing failed"** | Invalid JSON or schema | Validate with CLI, check for unresolved `${{VAR}}` |
 | **"App already exists"** | Duplicate app ID | Generate new GUID or update existing app |
 | **"Failed to import"** | Portal version issue | Try "Switch to previous version" in Developer Portal |
-| **"Allow Always" fails** | API permission issue | Check CORS and endpoint configuration |
 | **Outline icon not transparent** | Alpha channel issue | Recreate with `Alpha=0` for background |
 | **Conditional Access block (530084)** | Corporate policy | Use privileged account or request exception |
 

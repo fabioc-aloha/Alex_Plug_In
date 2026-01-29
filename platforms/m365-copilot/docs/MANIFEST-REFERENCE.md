@@ -2,6 +2,8 @@
 
 Complete reference for all configurable settings in the Teams/M365 app manifest.
 
+**Schema Version:** 1.25 (January 2026)
+
 ---
 
 ## Quick Links
@@ -9,8 +11,10 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 - [Core Identity](#core-identity)
 - [Developer Information](#developer-information)
 - [App Display](#app-display)
-- [Declarative Agent](#declarative-agent)
-- [Permissions & Domains](#permissions--domains)
+- [Copilot Agents](#copilot-agents)
+- [Agentic User Templates](#agentic-user-templates-v125-new) *(NEW in v1.25)*
+- [Channel Features](#channel-features-v125-new) *(NEW in v1.25)*
+- [Permissions & Authorization](#permissions--authorization)
 - [Localization](#localization)
 - [Activity Notifications](#activity-notifications)
 - [Install & Admin Settings](#install--admin-settings)
@@ -23,14 +27,15 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `$schema` | URL | Yes | Schema URL for validation |
-| `manifestVersion` | string | Yes | Schema version. Current: `1.19` |
-| `version` | semver | Yes | App version (e.g., `1.0.0`). Increment when updating |
+| `manifestVersion` | string | Yes | Schema version. Current: `1.25` |
+| `version` | semver | Yes | App version (e.g., `4.1.0`). Increment when updating |
 | `id` | GUID | Yes | Unique app ID. Generate once, never change |
 
 ```json
 {
-  "manifestVersion": "1.19",
-  "version": "1.0.0",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.25/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.25",
+  "version": "4.1.0",
   "id": "e29bc39c-1f78-4732-ba00-a6cea76db5b1"
 }
 ```
@@ -92,11 +97,23 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 |-------|------|----------|------|-------------|
 | `icons.color` | file path | Yes | 192x192 px | Full color icon (PNG) |
 | `icons.outline` | file path | Yes | 32x32 px | Transparent outline icon (PNG) |
+| `icons.color32x32` | file path | No | 32x32 px | Full color 32x32 icon for Outlook/M365 app pinning (v1.24+) |
 
 **Requirements:**
 - Color icon: 192x192 pixels, full color, can have background
 - Outline icon: 32x32 pixels, transparent background, white lines only
-- Both must be PNG format
+- Color32x32 icon: 32x32 pixels, full color, transparent background (optional but recommended)
+- All must be PNG format
+
+```json
+{
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png",
+    "color32x32": "color32x32.png"
+  }
+}
+```
 
 ### Accent Color
 
@@ -106,13 +123,19 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 
 ---
 
-## Declarative Agent
+## Copilot Agents
+
+### Declarative Agents (Alex uses this)
+
+Declarative agents run on the same M365 Copilot orchestrator and foundation models, customized with your instructions and capabilities.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `copilotAgents.declarativeAgents` | array | Yes | Agent references (max 1) |
+| `copilotAgents.declarativeAgents` | array | Yes* | Agent references (max 1) |
 | `copilotAgents.declarativeAgents[].id` | string | Yes | Unique agent ID |
 | `copilotAgents.declarativeAgents[].file` | file path | Yes | Path to declarativeAgent.json |
+
+*Required if `customEngineAgents` is not specified.
 
 ```json
 {
@@ -127,16 +150,127 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 }
 ```
 
+### Custom Engine Agents (v1.24+)
+
+Custom engine agents use your own AI models but appear in the Copilot side panel. Currently in public preview.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `copilotAgents.customEngineAgents` | array | Yes* | Custom agent references (max 1) |
+| `customEngineAgents[].id` | string | Yes | Unique agent ID |
+| `customEngineAgents[].type` | string | Yes | Must be `"bot"` |
+| `customEngineAgents[].disclaimer` | object | No | Custom disclaimer text |
+
+*Required if `declarativeAgents` is not specified.
+
+> **Note:** Alex uses declarative agents to leverage M365 Copilot's built-in capabilities.
+
 ---
 
-## Permissions & Domains
+## Agentic User Templates (v1.25+ NEW)
 
-### Permissions
+**NEW in v1.25:** Agentic user templates enable AI agents with their own Microsoft Entra Agent ID within your organization. These agents can have persistent identity for autonomous operations.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `agenticUserTemplates` | array | No | Agent 365 blueprint references (max 1) |
+| `agenticUserTemplates[].id` | string | Yes | Unique template ID (alphanumeric, dots, underscores, hyphens) |
+| `agenticUserTemplates[].file` | file path | Yes | Path to agentic user template file |
+
+```json
+{
+  "agenticUserTemplates": [
+    {
+      "id": "alex-agent-identity",
+      "file": "agenticUserTemplate.json"
+    }
+  ]
+}
+```
+
+**Template File Schema:**
+```json
+{
+  "id": "alex-agent-identity",
+  "schemaVersion": "1.0",
+  "agentIdentityBlueprintId": "00000000-0000-0000-0000-000000000000"
+}
+```
+
+> **Use Case:** Register an Agent 365 blueprint in Azure AD portal to give your agent a persistent identity for autonomous workflows, background processing, and proactive actions.
+
+---
+
+## Channel Features (v1.25+ NEW)
+
+**NEW in v1.25:** Opt your app into next-level channel features including shared and private channels.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `supportsChannelFeatures` | string | No | Channel feature tier support |
+
+| Value | Description |
+|-------|-------------|
+| `tier1` | Full support for shared and private channels |
+| (empty) | Standard channel support only |
+
+```json
+{
+  "supportsChannelFeatures": "tier1"
+}
+```
+
+> **Note:** This is separate from `supportedChannelTypes` which declares compatibility. `supportsChannelFeatures` enables enhanced channel features.
+
+---
+
+## Permissions & Authorization
+
+### Basic Permissions (Deprecated)
 
 | Value | Description |
 |-------|-------------|
 | `identity` | Access user identity (name, email) |
 | `messageTeamMembers` | Send messages to team members |
+
+### Authorization (Resource-Specific Consent)
+
+The `authorization` block defines granular permissions your app requests:
+
+```json
+{
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "Files.Read.User",
+          "type": "Delegated"
+        },
+        {
+          "name": "Mail.ReadWrite.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Permission Types
+
+| Type | Description |
+|------|-------------|
+| `Delegated` | Acts on behalf of the signed-in user |
+| `Application` | Acts with app-only permissions (no user context) |
+
+#### Common Permissions for Copilot Agents
+
+| Permission | Type | What It Enables |
+|------------|------|-----------------|
+| `Files.Read.User` | Delegated | Read user's OneDrive files |
+| `Mail.ReadWrite.User` | Delegated | Read/draft emails |
+| `ChannelSettings.Read.Group` | Application | Read channel settings |
+| `ChatMessage.Read.Chat` | Application | Read chat messages |
 
 ### Valid Domains
 
@@ -145,6 +279,8 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 | `validDomains` | array | Domains the app can navigate to (max 16) |
 
 Supports wildcards: `*.example.com`
+
+> **Note:** For Pure M365 agents using only native capabilities, `validDomains` can be empty.
 
 ---
 
@@ -174,14 +310,27 @@ Supports wildcards: `*.example.com`
 
 Define notification types the app can send to users.
 
+### Activity Types
+
 | Field | Type | Max | Description |
 |-------|------|-----|-------------|
 | `activities.activityTypes` | array | 128 | Notification definitions |
 | `activityTypes[].type` | string | 64 chars | Unique type identifier |
 | `activityTypes[].description` | string | 128 chars | Human-readable description |
 | `activityTypes[].templateText` | string | 128 chars | Notification template |
+| `activityTypes[].allowedIconIds` | array | - | Reference custom icons (v1.24+) |
 
 **Template Variables:** Use `{variableName}` for dynamic content.
+
+### Activity Icons (v1.24+)
+
+Custom icons for activity notifications:
+
+| Field | Type | Max | Description |
+|-------|------|-----|-------------|
+| `activities.activityIcons` | array | 50 | Custom icon definitions |
+| `activityIcons[].id` | string | - | Unique icon ID (referenced by allowedIconIds) |
+| `activityIcons[].iconFile` | file path | - | Path to icon file |
 
 ```json
 {
@@ -190,12 +339,19 @@ Define notification types the app can send to users.
       {
         "type": "learningReminder",
         "description": "Reminder to consolidate learnings",
-        "templateText": "Time to meditate! You have learnings to consolidate."
+        "templateText": "Time to meditate! You have learnings to consolidate.",
+        "allowedIconIds": ["meditateIcon"]
       },
       {
         "type": "goalProgress",
         "description": "Learning goal progress update",
         "templateText": "Progress update on your learning goal: {goalName}"
+      }
+    ],
+    "activityIcons": [
+      {
+        "id": "meditateIcon",
+        "iconFile": "meditate-icon.png"
       }
     ]
   }
@@ -210,10 +366,11 @@ Define notification types the app can send to users.
 
 | Value | Description |
 |-------|-------------|
-| `personal` | Install as personal app (default for Alex) |
+| `personal` | Install as personal app |
 | `team` | Install to a team |
 | `groupChat` | Install to group chat |
 | `meetings` | Install to meetings |
+| `copilot` | **Install as Copilot agent** (recommended for Alex) |
 
 ### Publisher Documentation
 
@@ -239,9 +396,9 @@ Allow tenant admins to customize these fields:
 
 ```json
 {
-  "defaultInstallScope": "personal",
+  "defaultInstallScope": "copilot",
   "publisherDocsUrl": "https://github.com/fabio-correa/alex-cognitive/README.md",
-  "configurableProperties": ["name", "shortDescription", "longDescription", "accentColor"]
+  "configurableProperties": ["name", "shortDescription", "longDescription", "accentColor", "privacyUrl", "termsOfUseUrl"]
 }
 ```
 
@@ -287,9 +444,12 @@ These are configured in **Teams Developer Portal UI**:
 ## See Also
 
 - [Declarative Agent Reference](./DECLARATIVE-AGENT-REFERENCE.md)
-- [Teams Manifest Schema](https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json)
-- [Microsoft Docs](https://learn.microsoft.com/microsoftteams/platform/resources/schema/manifest-schema)
+- [Teams Manifest Schema v1.25](https://developer.microsoft.com/json-schemas/teams/v1.25/MicrosoftTeams.schema.json)
+- [Microsoft Docs - Manifest Schema](https://learn.microsoft.com/microsoft-365/extensibility/schema/root?view=m365-app-1.25)
+- [Authorization Permissions](https://learn.microsoft.com/microsoft-365/extensibility/schema/root-authorization?view=m365-app-1.25)
+- [Agentic User Templates](https://learn.microsoft.com/microsoft-365/extensibility/schema/agentic-user-template-ref?view=m365-app-1.25) *(NEW in v1.25)*
+- [Agent 365 Blueprints](https://learn.microsoft.com/microsoft-agent-365/developer/registration)
 
 ---
 
-*Generated for Alex Cognitive v4.0.0 QUADRUNIUM "Dino" 🦖*
+*Updated for Alex Cognitive v4.1.0 QUADRUNIUM "Dino" - Pure M365 Edition 🦖*

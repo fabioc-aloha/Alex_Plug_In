@@ -93,8 +93,28 @@
         "command": "alex.showStatus",
         "title": "Alex: Status",
         "icon": "$(info)"
+      },
+      {
+        "command": "alex.exportForM365",
+        "title": "Alex: Export for M365 Copilot",
+        "icon": "$(package)"
       }
     ],
+    "configuration": {
+      "title": "Alex Cognitive Architecture",
+      "properties": {
+        "alex.m365.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable M365 Copilot integration features"
+        },
+        "alex.m365.autoSync": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically sync knowledge to OneDrive on meditate/dream"
+        }
+      }
+    },
     "chatParticipants": [
       {
         "id": "alex.cognitive",
@@ -196,6 +216,10 @@
           {
             "name": "docs",
             "description": "Open Alex cognitive architecture documentation"
+          },
+          {
+            "name": "exportm365",
+            "description": "Export your Alex memory for M365 Copilot integration"
           }
         ]
       }
