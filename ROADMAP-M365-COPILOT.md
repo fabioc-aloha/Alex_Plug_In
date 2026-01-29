@@ -348,7 +348,133 @@ Based on logo research:
 
 ---
 
-## �🔧 Technical Specifications (Verified 2026-01-28)
+## 🌐 M365 Copilot Surface Support
+
+> Alex works across ALL M365 Copilot surfaces - not just Teams!
+
+### Supported Surfaces
+
+| Surface | Status | Best Use Cases |
+|---------|:------:|----------------|
+| **Microsoft Teams** | ✅ Full | Chat, meeting prep, team messages |
+| **Outlook** | ✅ Full | Email reminders, meeting context, follow-ups |
+| **Word** | ✅ Full | Document knowledge capture, writing assistance |
+| **PowerPoint** | ✅ Full | Presentation prep, content from knowledge files |
+| **Excel** | ✅ Full | Data insights, knowledge about spreadsheets |
+| **Microsoft 365 App** | ✅ Full | Central hub for Alex on web/desktop |
+| **Microsoft 365 Mobile** | ✅ Full | On-the-go access to memory and reminders |
+| **OneNote** | ✅ Full | Note consolidation, knowledge capture |
+| **Loop** | ✅ Full | Collaborative knowledge building |
+
+### Surface-Specific Features
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                     │
+│                        ALEX ACROSS M365 COPILOT SURFACES                            │
+│                                                                                     │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  📧 OUTLOOK                              💬 TEAMS                                   │
+│  ────────                                ──────                                     │
+│  • Draft email reminders to self         • Meeting prep with attendee context       │
+│  • Meeting prep before calendar events   • Team message drafting                    │
+│  • Follow-up emails after meetings       • Channel knowledge sharing                │
+│  • Search knowledge for email context    • Quick status updates                     │
+│                                                                                     │
+│  📝 WORD                                 📊 POWERPOINT                              │
+│  ──────                                  ────────────                               │
+│  • Generate knowledge documents          • Prep talking points from memory          │
+│  • Capture learnings as you write        • Build slides from knowledge files        │
+│  • Reference past insights               • Presentation rehearsal tips              │
+│  • Documentation assistance              • Audience insights from People            │
+│                                                                                     │
+│  📈 EXCEL                                🗒️ ONENOTE                                 │
+│  ───────                                 ────────                                   │
+│  • Explain data patterns                 • Consolidate notes to knowledge           │
+│  • Save analysis insights                • Link meeting notes to memory             │
+│  • Reference past learnings              • Cross-reference knowledge files          │
+│  • Data documentation                    • Learning journal integration             │
+│                                                                                     │
+│  🔄 LOOP                                 📱 MOBILE                                  │
+│  ──────                                  ────────                                   │
+│  • Collaborative knowledge pages         • Quick reminders on the go                │
+│  • Team learning consolidation           • Voice-to-knowledge capture               │
+│  • Shared insight tracking               • Meeting prep while commuting             │
+│  • Real-time knowledge building          • Review learnings anywhere                │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### How It Works
+
+Declarative agents automatically appear in M365 Copilot across all supported surfaces. The same Alex instance with the same memory (OneDrive) works everywhere:
+
+```
+User in Outlook: "@Alex prep me for my 2pm meeting"
+   └──► Alex reads calendar, checks People, searches Alex-Memory
+   └──► Returns context-aware prep with attendee insights
+
+User in Word: "@Alex what do I know about API design patterns?"
+   └──► Alex searches Alex-Memory/knowledge/ folder
+   └──► Returns relevant DK-*.md content for the document
+
+User in PowerPoint: "@Alex help me build a slide about our architecture"
+   └──► Alex reads from knowledge files
+   └──► Suggests content structure and talking points
+```
+
+---
+
+## 🔮 v4.3.0+ Feature Roadmap
+
+> Future iterations: Proactive features, deeper M365 integration
+
+### v4.3.0 QUADRITRIUM (Planned)
+
+| # | Feature | Priority | Capability | Description |
+|:-:|---------|:--------:|------------|-------------|
+| 1 | **Weekly Digest Email** | P1 | Email (send) | Auto-generate weekly summary of learnings, reminders, and progress - send every Monday |
+| 2 | **Meeting Notes to OneDrive** | P1 | Meetings + OneDrive | After meetings, offer to generate structured notes and save to Alex-Memory |
+| 3 | **Proactive Learning Nudges** | P2 | Email (send) | Gentle email reminders when learning goals have been idle for a week |
+| 4 | **Team Kudos** | P2 | TeamsMessages (send) | Quick way to send appreciation messages to colleagues |
+| 5 | **Calendar Conflict Alerts** | P2 | Meetings | Proactively warn about scheduling conflicts or back-to-back meetings |
+| 6 | **Document Context Awareness** | P2 | OneDrive | When in Word/PowerPoint, automatically suggest relevant knowledge |
+
+### v4.4.0 QUADRIQUADIUM (Planned)
+
+| # | Feature | Priority | Capability | Description |
+|:-:|---------|:--------:|------------|-------------|
+| 1 | **Focus Time Guardian** | P1 | Meetings + Email | Suggest blocking focus time based on workload patterns |
+| 2 | **Smart Follow-ups** | P1 | Email + People | After meetings, draft follow-up emails to attendees with action items |
+| 3 | **Relationship Insights** | P2 | People + Meetings | Track interactions with colleagues, suggest reconnecting with dormant contacts |
+| 4 | **Document Summarization** | P2 | OneDrive | Summarize long documents and save key points to knowledge files |
+| 5 | **Cross-Team Knowledge Sharing** | P2 | OneDrive + TeamsMessages | Help draft knowledge shares for Teams channels |
+| 6 | **Excel Insight Capture** | P3 | OneDrive | Save data analysis insights to knowledge files |
+
+### v5.0.0 PENTUNIUM (Vision)
+
+| # | Feature | Priority | Capability | Description |
+|:-:|---------|:--------:|------------|-------------|
+| 1 | **Learning Path Generator** | P1 | OneDrive + WebSearch | Based on goals, create structured learning paths with web resources |
+| 2 | **Meeting Effectiveness Score** | P2 | Meetings | Rate meetings based on agenda clarity, attendee engagement patterns |
+| 3 | **Network Map** | P2 | People + Meetings | Visualize who you interact with most, identify collaboration silos |
+| 4 | **AI Research Assistant** | P1 | WebSearch + OneDrive | Deep research mode that saves findings to knowledge files |
+| 5 | **Goal Progress Dashboard** | P2 | OneDrive + Email | Weekly email with visual progress on learning goals |
+| 6 | **Voice Note Transcription** | P3 | (Future capability) | Transcribe voice notes to knowledge files |
+
+### Experimental Features (Requires New Capabilities)
+
+| Feature | Would Need | Description |
+|---------|------------|-------------|
+| **Planner/To-Do Integration** | Graph connector | Read tasks for richer context and goal tracking |
+| **Copilot Pages Integration** | Pages capability | Collaborative memory pages in Teams |
+| **Viva Insights Integration** | Viva connector | Productivity patterns for better recommendations |
+| **SharePoint Knowledge Base** | SharePoint connector | Team-wide knowledge repository |
+
+---
+
+## 🔧 Technical Specifications (Verified 2026-01-28)
 
 ### Schema Versions
 
