@@ -302,7 +302,7 @@ The architecture supports additional platforms:
 
 ---
 
-## � v4.2.0 QUADRIBIUM Roadmap
+## 🚀 v4.2.0 QUADRIBIUM Roadmap
 
 > Next iteration: Enhanced branding, visual identity, and UX improvements
 
@@ -314,9 +314,11 @@ The architecture supports additional platforms:
 | 2 | **Icon Concepts Finalized** | 📋 Pending | P0 | 62 SVG concepts created across 5 directions: Neural, Human-Centric, Bridge, Letterform, Dinosaur |
 | 3 | **Accent Color Update** | 📋 Pending | P1 | Update from `#4F46E5` to brand-aligned color (teal or amber based on final icon) |
 | 4 | **Remove 🦖 Emoji Branding** | 📋 Pending | P1 | If moving to professional design direction (decision pending) |
-| 5 | **Conversation Starters v2** | 📋 Pending | P2 | Add context-aware starters based on time of day |
-| 6 | **Calendar Integration** | 📋 Pending | P2 | Enable `Meetings` capability for meeting prep features |
-| 7 | **HTML Icon Preview Gallery** | ✅ Complete | - | Created for reviewing all 62 icon concepts |
+| 5 | **Conversation Starters v2** | ✅ Complete | P2 | Time-aware starters: Morning, Afternoon, Evening + Meeting prep |
+| 6 | **Calendar Integration** | ✅ Complete | P2 | `Meetings` capability enabled for meeting prep features |
+| 7 | **Send Email Capability** | ✅ Complete | P1 | Email with send_email permission for reminders |
+| 8 | **Send Teams Messages** | ✅ Complete | P1 | TeamsMessages with send_message permission for team comms |
+| 9 | **HTML Icon Preview Gallery** | ✅ Complete | - | Created for reviewing all 62 icon concepts |
 
 ### Icon Design Directions Under Consideration
 
