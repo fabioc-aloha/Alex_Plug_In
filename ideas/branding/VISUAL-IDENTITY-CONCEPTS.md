@@ -17,22 +17,39 @@
 
 Based on brand alignment, scalability, and competitive differentiation:
 
-| Rank | Concept | Image | Why It Works |
-|:----:|---------|:-----:|--------------|
-| 🥇 | **Teal Neural A** | [SVG](svg/1a-synapse-spark.svg) | Perfect blend of cognitive (nodes) + letterform. Unique teal color. Clean at small sizes. |
-| 🥈 | **Ascending A** | [SVG](svg/4a-ascending-a.svg) | Growth/learning metaphor. Upward arrow = progress. Professional yet dynamic. |
-| 🥉 | **Partnership Hands** | [SVG](svg/3b-handshake.svg) | Human-AI collaboration theme. Warm + cool colors = bridge. Highly memorable. |
-| 4 | **Orbital Planet** | *See nano boards* | Cosmic/knowledge universe feel. Clean, works on dark backgrounds. |
-| 5 | **Soft Green A** | [SVG](svg/2b-friendly-a.svg) | Minimal, friendly, modern. Golden ring adds warmth. Apple-esque simplicity. |
-| 6 | **AI Bloom (Lotus)** | *See nano boards* | Growth, learning, consciousness metaphor. Warm teal + coral. |
+### 🥇 Professional Logo Options
 
-### 🦖 Top Dino Picks
+| Rank | Concept | Images | Why It Works |
+|:----:|---------|:------:|--------------|
+| 🥇 | **Teal Neural A** | [PNG](nano/Gemini_Generated_Image_rqvrzfrqvrzfrqvr.png) · [SVG](svg/1a-synapse-spark.svg) | Perfect blend of cognitive (nodes) + letterform. Unique teal color. This IS Alex - synaptic connections, learning nodes, cognitive architecture made visual. |
+| 🥈 | **Ascending A** | [PNG](nano/Gemini_Generated_Image_pfny9ypfny9ypfny.png) · [SVG](svg/4a-ascending-a.svg) | Growth/learning metaphor. Upward arrow = progress. Professional yet dynamic. Says "I help you grow." |
+| 🥉 | **Partnership Hands** | [PNG](nano/Gemini_Generated_Image_yq1rozyq1rozyq1r.png) · [SVG](svg/3b-handshake.svg) | Human-AI collaboration theme. Warm hand (human) + cool hand (AI) nurturing knowledge. Unique in AI space. |
+| 4 | **Orbital Planet** | [PNG](nano/Gemini_Generated_Image_jsuq4djsuq4djsuq.png) | Cosmic/knowledge universe feel. Clean, works on dark backgrounds. Premium, sophisticated. |
+| 5 | **Soft Green A** | [PNG](nano/Gemini_Generated_Image_n3u4abn3u4abn3u4.png) · [SVG](svg/2b-friendly-a.svg) | Minimal, friendly, modern. Golden ring adds warmth. Apple-esque simplicity. Works at ANY size. |
+| 6 | **AI Bloom (Lotus)** | [Board 2](nano/Gemini_Generated_Image_aa59gnaa59gnaa59.png) · [Board 11](nano/Gemini_Generated_Image_xlbf9lxlbf9lxlbf.png) | Growth, learning, consciousness metaphor. Warm teal + coral. |
+| 7 | **Consciousness Constellation** | [Board 1](nano/Gemini_Generated_Image_4kauxb4kauxb4kau.png) · [Board 4](nano/Gemini_Generated_Image_e3xpbde3xpbde3xp.png) | Gold A with star network on navy. Premium feel. Great for dark mode. |
+| 8 | **Idea Filament** | [Board 5](nano/Gemini_Generated_Image_hussh5hussh5huss.png) | Golden tree on dark background. Elegant, represents knowledge growth. |
+| 9 | **Comparison Grid** | [PNG](nano/Gemini_Generated_Image_unib38unib38unib.png) | See top 6 concepts side-by-side for easy comparison. |
 
-| Rank | Concept | Why It's Great |
-|:----:|---------|----------------|
-| 🥇 | **Hatchling AI** | PERFECT metaphor - learning, growth, new beginnings. Could be THE mascot. |
-| 🥈 | **Star-Saurus** | Constellation T-Rex - elegant, professional, works on dark. |
-| 🥉 | **Hex-Rex** | Geometric style - modern, scalable, tech-forward. |
+### 🦖 Top Dino Picks (Mascot Direction)
+
+| Rank | Concept | Images | Why It's Great |
+|:----:|---------|:------:|----------------|
+| 🥇 | **Hatchling AI** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | PERFECT metaphor - learning, growth, "born" intelligence, new beginnings. Adorable yet meaningful. THE mascot candidate. |
+| 🥈 | **Star-Saurus** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Constellation T-Rex - elegant enough for enterprise, still has dino charm. Works on dark backgrounds. |
+| 🥉 | **Hex-Rex** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Geometric/low-poly style is modern, scalable, tech-forward. Hexagon blocks suggest data structure. |
+| 4 | **Cerebral-Rex** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Cute purple dino with brain orb and antenna. Clear cognitive theme, compact, works as avatar. |
+| 5 | **A-Saurus** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Clever! Long-neck dino naturally forms letter A. Built-in wordplay "A-Saurus." |
+| 6 | **Cyber T-Rex** | [Dino Board 1](nano/Gemini_Generated_Image_45b5ky45b5ky45b5.png) | Sleek mechanical T-Rex head. Premium, sophisticated, slightly intimidating. |
+| 7 | **Dream-Ankylo** | [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Cosmic/galaxy pattern stegosaurus. Dreamy, meditation theme, unique shape. |
+| 8 | **Neo-Stego** | [Dino Board 1](nano/Gemini_Generated_Image_45b5ky45b5ky45b5.png) · [Dino Board 2](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) | Neon/holographic stegosaurus. Eye-catching retro-future vibe. |
+
+### 🎯 Alex's Final Recommendation
+
+**Primary Logo:** [Teal Neural A](nano/Gemini_Generated_Image_rqvrzfrqvrzfrqvr.png) - Professional, cognitive, unique  
+**Mascot/Avatar:** [Hatchling AI](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) - Growth metaphor, memorable, lovable  
+**Dark Mode:** [Star-Saurus](nano/Gemini_Generated_Image_8snlnu8snlnu8snl.png) or [Orbital Planet](nano/Gemini_Generated_Image_jsuq4djsuq4djsuq.png)  
+**Minimal/Favicon:** [Soft Green A](nano/Gemini_Generated_Image_n3u4abn3u4abn3u4.png)
 
 ---
 
