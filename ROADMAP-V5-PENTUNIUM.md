@@ -7,7 +7,7 @@
 | **Target Version** | 5.0.0 PENTUNIUM |
 | **Codename** | 🌐 **Omni** (Omnipresent Alex) |
 | **Status** | 📋 Planning |
-| **Foundation** | v4.2.0 QUADRIBIUM 🦖 (M365 Enhanced Edition Complete) |
+| **Foundation** | v3.5.1 TRITRSEPTIUM-PENT-UN 🔥 Phoenix (M365 v1.2 Deployed) |
 | **Created** | 2026-01-28 |
 | **Author** | Alex Cognitive Architecture Team |
 
@@ -17,18 +17,34 @@
 
 > Track progress on 🌐 Omni (v5.0.0 PENTUNIUM) implementation
 
-### ✅ Foundation Complete (v4.0-v4.2)
+### ✅ Foundation Complete (v3.5.1 Phoenix)
 
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
-| - | M365 Declarative Agent | ✅ | Pure M365 edition deployed |
+| - | M365 Declarative Agent | ✅ | Pure M365 edition deployed (v1.2 schema) |
 | - | OneDrive memory storage | ✅ | Alex-Memory folder workflow |
-| - | Cognitive protocols in M365 | ✅ | meditate, dream, self-actualize |
-| - | Calendar/Meetings integration | ✅ | Meeting prep features |
-| - | Email send capability | ✅ | Reminder emails to self |
-| - | Teams message capability | ✅ | Message colleagues |
-| - | Time-aware greetings | ✅ | Morning/Afternoon/Evening/Night |
-| - | 12 conversation starters | ✅ | Including meeting prep, email, Teams |
+| - | WebSearch capability | ✅ | Research topics online |
+| - | GraphicArt capability | ✅ | Image generation (DALL-E) |
+| - | CodeInterpreter capability | ✅ | Python code execution |
+| - | Alex personality | ✅ | Enhanced instructions with anti-generic rules |
+| - | Visual identity | ✅ | Hatching Dino icons (color + outline) |
+| - | 5 conversation starters | ✅ | Meet, Memory, Meditate, Dream, Self-actualize |
+
+### 🔄 M365 Schema Upgrade (v1.5/v1.6 - Current Latest: v1.6)
+
+> **Fact-checked 2026-01-29**: Schema v1.5 and v1.6 ARE AVAILABLE NOW. v1.3/v1.4 don't exist.
+> MS recommends v1.6 for new agents. EmbeddedKnowledge marked "not yet available" in v1.6 docs.
+
+| # | Task | Status | Description |
+|:-:|------|:------:|-------------|
+| 1 | Upgrade to v1.5 schema | ⬜ | Unlock Email, TeamsMessages, People, Meetings, Dataverse |
+| 2 | Email capability | ⬜ | Search Outlook emails for context (v1.5+) |
+| 3 | TeamsMessages capability | ⬜ | Reference Teams conversations (v1.5+) |
+| 4 | People capability | ⬜ | Know about colleagues (v1.5+) |
+| 5 | Meetings capability | ⬜ | Calendar-aware meeting prep (v1.5+, enhanced in v1.6) |
+| 6 | Dataverse capability | ⬜ | Power Platform data access (v1.5+) |
+| 7 | Upgrade to v1.6 schema | ⬜ | For worker_agents, user_overrides, meeting filtering |
+| 8 | EmbeddedKnowledge | ⬜ | Local files as knowledge (v1.6 - NOT YET AVAILABLE per MS) |
 
 ### M365 Deep Integration (from v4.5 Custom Engine)
 
@@ -86,13 +102,13 @@
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v5.0 Tasks: 0/29 complete | Foundation (v4.0-v4.2): 8/8 complete**
+**v5.0 Tasks: 0/29 complete | Foundation (v3.5.1): 8/8 complete**
 
 ---
 
 ## 🛠️ Development Approach (MS Docs Verified)
 
-> **Last Verified**: 2026-01-28 | **Source**: [Microsoft Learn - M365 Copilot Extensibility](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
+> **Last Verified**: 2026-01-29 | **Source**: [Microsoft Learn - M365 Copilot Extensibility](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
 ### M365 Agent Development Options
 
@@ -100,24 +116,25 @@ Microsoft offers multiple approaches for building M365 Copilot agents. Here's ou
 
 | Approach | Orchestration | Best For | Alex Fit |
 | -------- | ------------- | -------- | -------- |
-| **Declarative Agent** | Microsoft (current v4.2) | API plugins, simple extensions | ✅ Already using |
+| **Declarative Agent** | Microsoft | API plugins, knowledge grounding | ✅ Current (v1.2, can upgrade to v1.6) |
 | **Custom Engine Agent** | Bring your own | Full cognitive control | ⭐ **v5.0 Target** |
 | **Copilot Studio** | Low-code SaaS | Non-developers | ❌ Too limited |
 | **Microsoft 365 Agents SDK** | Full code control | Multi-channel agents | ⭐ **Recommended** |
 | **Teams AI Library** | Built-in Action Planner | Teams-focused bots | 🟡 Alternative |
+| **Azure AI Foundry** | Agent Framework SDK | Foundry-first development | 🟡 Alternative |
 
 > **📚 MS Docs**: [Custom engine agents overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
 >
-> **📅 GA Status**: Custom Engine Agents reached **General Availability July 2025**
+> **📅 Status**: Custom Engine Agents are GA. M365 Agents SDK is in **preview**.
 
 ### Recommended: Microsoft 365 Agents SDK
 
 For v5.0, we recommend the **Microsoft 365 Agents SDK** because:
 
-1. **Multi-channel support**: Works across M365 Copilot, Teams, web, email, SMS
-2. **Full orchestration control**: Use our own cognitive protocols
-3. **Framework integration**: Supports Semantic Kernel and LangChain
-4. **Azure integration**: Deploys to Azure with Microsoft Foundry integration
+1. **Multi-channel support**: Works across M365 Copilot, Teams, third-party platforms, custom apps, websites
+2. **Full orchestration control**: Use our own cognitive protocols with Semantic Kernel or LangChain
+3. **Framework integration**: Integrates with Azure AI Foundry and orchestration frameworks
+4. **Flexibility**: Choose any AI model (Azure OpenAI, custom models, etc.)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -247,52 +264,59 @@ flowchart TB
 
 ---
 
-## 📦 v4.2.0 QUADRIBIUM Artifacts (Foundation)
+## 📦 v3.5.1 Phoenix Artifacts (Foundation)
 
-> What we built in v4.0-v4.2 that v5.0 extends
+> What we built in v3.5.1 that v5.0 extends
 
-### ✅ Implemented in v4.0-v4.2
+### ✅ Implemented in v3.5.1 Phoenix
 
 | Version | Feature | Status |
 |---------|---------|--------|
-| v4.0.0 | M365 Declarative Agent (Pure M365 Edition) | ✅ Complete |
-| v4.0.0 | OneDrive-based memory storage | ✅ Complete |
-| v4.0.0 | 12 Azure Functions API endpoints | ✅ Complete |
-| v4.0.0 | Cognitive protocols in M365 (meditate, dream, self-actualize) | ✅ Complete |
-| v4.1.0 | Package validation (51/51 checks pass) | ✅ Complete |
-| v4.1.0 | Manifest schema v1.24 with RSC permissions | ✅ Complete |
-| v4.2.0 | Calendar/Meetings integration | ✅ Complete |
-| v4.2.0 | Email with send_email permission | ✅ Complete |
-| v4.2.0 | TeamsMessages with send_message permission | ✅ Complete |
-| v4.2.0 | Time-aware greetings (Morning/Afternoon/Evening/Night) | ✅ Complete |
-| v4.2.0 | 12 conversation starters including meeting prep | ✅ Complete |
-| v4.2.0 | Visual identity research (62 icon concepts) | ✅ Complete |
+| v3.5.1 | M365 Declarative Agent (Schema v1.2) | ✅ Complete |
+| v3.5.1 | OneDrive-based memory storage | ✅ Complete |
+| v3.5.1 | OneDriveAndSharePoint capability | ✅ Complete |
+| v3.5.1 | WebSearch capability | ✅ Complete |
+| v3.5.1 | GraphicArt capability | ✅ Complete |
+| v3.5.1 | CodeInterpreter capability | ✅ Complete |
+| v3.5.1 | Enhanced Alex personality instructions | ✅ Complete |
+| v3.5.1 | Hatching Dino visual identity | ✅ Complete |
+| v3.5.1 | 5 emoji conversation starters | ✅ Complete |
+| v3.5.1 | Package validation (51/51 checks pass) | ✅ Complete |
+
+### ⏳ Deferred to v5.0 (Require Schema v1.5/v1.6)
+
+| Feature | Required Schema | Status |
+|---------|-----------------|--------|
+| Email capability | v1.5 | ⬜ Deferred |
+| TeamsMessages capability | v1.5 | ⬜ Deferred |
+| People capability | v1.5 | ⬜ Deferred |
+| Meetings capability | v1.6 | ⬜ Deferred |
+| Azure Functions API endpoints | Custom Engine | ⬜ Deferred |
+| send_email action | v1.5 | ⬜ Deferred |
+| send_message action | v1.5 | ⬜ Deferred |
 
 ### Declarative Agent (M365 Copilot)
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
-| `declarativeAgent.json` | `platforms/m365-copilot/appPackage/` | Agent manifest v1.3 |
-| `alex-knowledge-plugin.json` | `platforms/m365-copilot/appPackage/` | API Plugin v2.3 |
-| `openapi.yaml` | `platforms/m365-copilot/appPackage/` | 12 API endpoints |
-| `manifest.json` | `platforms/m365-copilot/appPackage/` | Teams app manifest |
+| `declarativeAgent.json` | `platforms/m365-copilot/appPackage/` | Agent manifest v1.2 |
+| `manifest.json` | `platforms/m365-copilot/appPackage/` | Teams app manifest v1.19 |
+| `color.png` | `platforms/m365-copilot/appPackage/` | 192x192 Hatching Dino icon |
+| `outline.png` | `platforms/m365-copilot/appPackage/` | 32x32 outline icon |
 
-### Azure Functions API
+### Azure Functions API (Deferred to v5.0)
 
-| Endpoint | Type | Purpose |
-|----------|------|---------|
-| `/searchKnowledge` | GET | Search global knowledge |
-| `/getInsights` | GET | Retrieve insights |
-| `/getProfile` | GET | User profile |
-| `/getNotes` | GET | Session notes |
-| `/getLearningGoals` | GET | Learning objectives |
-| `/addReminder` | POST | Create reminder |
-| `/addNote` | POST | Save note |
-| `/updateReminder` | POST | Update reminder status |
-| `/getDueReminders` | GET | Check due reminders |
-| `/getSessionStatus` | GET | Time awareness |
-| `/startSession` | POST | Begin work session |
-| `/sessionAction` | POST | End/break/checkin |
+> API endpoints require Custom Engine Agent approach - not available in Declarative Agent v1.2
+
+| Endpoint | Type | Status |
+|----------|------|--------|
+| `/searchKnowledge` | GET | ⬜ Deferred |
+| `/getInsights` | GET | ⬜ Deferred |
+| `/getProfile` | GET | ⬜ Deferred |
+| `/getNotes` | GET | ⬜ Deferred |
+| `/getLearningGoals` | GET | ⬜ Deferred |
+| `/addReminder` | POST | ⬜ Deferred |
+| `/addNote` | POST | ⬜ Deferred |
 
 ### VS Code Extension
 

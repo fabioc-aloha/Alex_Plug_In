@@ -1,7 +1,7 @@
 {
   "name": "alex-m365-agent",
-  "version": "4.3.0",
-  "description": "Alex Cognitive Architecture - M365 Copilot Integration (Pure M365 - No External Dependencies)",
+  "version": "3.5.1",
+  "description": "Alex Cognitive Architecture - M365 Copilot Declarative Agent with OneDrive memory",
   "scripts": {
     "package": "teamsapp package --env local",
     "package:dev": "teamsapp package --env dev",

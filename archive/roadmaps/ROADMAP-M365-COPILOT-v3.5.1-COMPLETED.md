@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| **Target Version** | 4.4.0 QUADRIQUADIUM |
+| **Current Version** | 3.5.1 TRITRSEPTIUM-PENT-UN 🔥 Phoenix |
 | **Codename** | 🦖 **Dino** |
-| **Status** | 🔄 v4.4.0 - Schema v1.2 (stable, working) |
+| **Status** | ✅ Deployed - Schema v1.2 (stable, working) |
 | **Created** | 2026-01-27 |
 | **Updated** | 2026-01-29 |
 | **Author** | Alex Cognitive Architecture Team |
@@ -18,14 +18,13 @@
 > **Only these declarative agent schema versions exist:**
 > - v1.0, v1.2, v1.5, v1.6 (v1.3, v1.4 DO NOT EXIST!)
 >
-> **Current Stable (v1.2):**
+> **Current Implementation (v1.2):**
 > - ✅ OneDriveAndSharePoint (read Alex-Memory files)
 > - ✅ WebSearch (research topics)
 > - ✅ GraphicArt (image generation)
 > - ✅ CodeInterpreter (Python execution)
-> - ✅ GraphConnectors (enterprise search)
 >
-> **Requires v1.5+ (NOT in v1.2):**
+> **Requires v1.5+ (NOT available in v1.2):**
 > - ❌ Email, TeamsMessages, People, Meetings
 >
 > **See:** [SCHEMA-COMPATIBILITY.md](platforms/m365-copilot/docs/SCHEMA-COMPATIBILITY.md)
@@ -276,44 +275,41 @@ The architecture supports additional platforms:
 
 ## 📋 Implementation Tracker
 
-> 🦖 Project Dino v4.x - Complete implementation history
+> 🦖 Project Dino - Current implementation status (v3.5.1)
 
-### ✅ v4.0.0 QUADRUNIUM - Foundation (Complete)
+### ✅ v3.5.1 Phoenix - Current Release (2026-01-29)
 
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
 | 1 | M365 Agents Toolkit setup | ✅ | Installed `teamsdevapp.ms-teams-vscode-extension` |
 | 2 | M365 tenant configuration | ✅ | Microsoft corporate tenant with Copilot license |
-| 3 | Declarative agent manifest | ✅ | Built declarativeAgent.json (v1.3) with embedded instructions |
+| 3 | Declarative agent manifest | ✅ | `declarativeAgent.json` (v1.2 schema - NOT v1.3!) |
 | 4 | Alex system prompt | ✅ | Cognitive protocols (meditate, dream, self-actualize) |
-| 5 | M365 capabilities | ✅ | OneDriveAndSharePoint, Email, WebSearch, TeamsMessages, People |
+| 5 | M365 capabilities | ✅ | OneDriveAndSharePoint, WebSearch, GraphicArt, CodeInterpreter |
 | 6 | OneDrive memory workflow | ✅ | READ from OneDrive, generate content for user to paste |
 | 7 | Package validation | ✅ | 51/51 validation checks pass |
 | 8 | Documentation | ✅ | README.md, DEPLOYMENT-CHECKLIST.md, architecture docs |
+| 9 | Visual identity | ✅ | Hatching Dino icons (192x192 color, 32x32 outline) |
+| 10 | Version sync with VS Code | ✅ | Both platforms at v3.5.1 Phoenix |
+| 11 | Manifest ID templating | ✅ | Fixed `${{TEAMS_APP_ID}}` (was hardcoded) |
+| 12 | Enhanced personality | ✅ | Genuine Alex identity, dinosaur quirk, anti-generic rules |
+| 13 | Conversation starters | ✅ | 5 emoji-enhanced starters (Meet, Memory, Meditate, Dream, Self-actualize) |
 
-### ✅ v4.1.0 QUADRUNIUM - Schema Upgrade (Complete)
+### ⚠️ Features NOT Implemented (Claimed in Previous Roadmap)
 
-| # | Task | Status | Description |
-|:-:|------|:------:|-------------|
-| 1 | Manifest schema v1.24 | ✅ | RSC permissions, defaultInstallScope: copilot |
-| 2 | Developer Portal deploy | ✅ | Validated and live |
-| 3 | v1.25 schema documentation | ✅ | MANIFEST-REFERENCE.md for future features |
+These were incorrectly marked as complete in v4.x roadmap but **require schema v1.5+**:
 
-### ✅ v4.2.0 QUADRIBIUM - Enhanced Capabilities (Complete)
+| Feature | Previous Status | Actual Status | Reason |
+|---------|:---------------:|:-------------:|--------|
+| Email capability | ~~✅~~ | ❌ | Requires v1.5+ schema |
+| TeamsMessages capability | ~~✅~~ | ❌ | Requires v1.5+ schema |
+| People capability | ~~✅~~ | ❌ | Requires v1.5+ schema |
+| Meetings capability | ~~✅~~ | ❌ | Requires v1.6+ schema |
+| 12 conversation starters | ~~✅~~ | 5 | Simplified for clarity |
+| send_email action | ~~✅~~ | ❌ | Not available in v1.2 |
+| send_message action | ~~✅~~ | ❌ | Not available in v1.2 |
 
-| # | Task | Status | Description |
-|:-:|------|:------:|-------------|
-| 1 | Calendar/Meetings integration | ✅ | Meeting prep features enabled |
-| 2 | Email with send_email | ✅ | Send reminder emails to self |
-| 3 | TeamsMessages with send_message | ✅ | Message colleagues directly |
-| 4 | Time-aware greetings | ✅ | Morning/Afternoon/Evening/Night adaptive |
-| 5 | 12 conversation starters | ✅ | Email reminder, Team message, Track progress |
-| 6 | Visual identity research | ✅ | 62 icon concepts across 5 directions |
-| 7 | Color palette defined | ✅ | Teal/amber options documented |
-
-**Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
-
-**🦖 v4.2.0 QUADRIBIUM DEPLOYED! All v4.x milestones complete.**
+**Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete | ❌ Not Available
 
 ### ✅ Visual Identity - FINALIZED
 
@@ -323,10 +319,9 @@ The architecture supports additional platforms:
 |-------|------|----------|
 | M365 Color Icon | 192x192 | `appPackage/color.png` |
 | M365 Outline Icon | 32x32 | `appPackage/outline.png` |
-| M365 Color 32x32 | 32x32 | `appPackage/color32x32.png` |
-| VS Code Icon | 128x128 | `assets/icon.png` |
+| VS Code Icon | 128x128 | `../vscode-extension/assets/icon.png` |
 
-**Design Concept:** A friendly baby dinosaur hatching from an egg - symbolizing growth, emergence, learning, and the awakening of cognitive consciousness. Teal dino with warm amber background.
+**Design Concept:** A friendly baby dinosaur hatching from an egg - symbolizing growth, emergence, learning, and the awakening of cognitive consciousness.
 
 **Source:** `ideas/branding/nano/Hatching.png`
 
@@ -334,21 +329,19 @@ The architecture supports additional platforms:
 
 ## 🌐 M365 Copilot Surface Support
 
-> Alex works across ALL M365 Copilot surfaces - not just Teams!
+> Alex works across M365 Copilot surfaces where declarative agents are supported
 
-### Supported Surfaces
+### Supported Surfaces (with v1.2 capabilities)
 
-| Surface | Status | Best Use Cases |
+| Surface | Status | Available Features |
 |---------|:------:|----------------|
-| **Microsoft Teams** | ✅ Full | Chat, meeting prep, team messages |
-| **Outlook** | ✅ Full | Email reminders, meeting context, follow-ups |
-| **Word** | ✅ Full | Document knowledge capture, writing assistance |
-| **PowerPoint** | ✅ Full | Presentation prep, content from knowledge files |
-| **Excel** | ✅ Full | Data insights, knowledge about spreadsheets |
-| **Microsoft 365 App** | ✅ Full | Central hub for Alex on web/desktop |
-| **Microsoft 365 Mobile** | ✅ Full | On-the-go access to memory and reminders |
-| **OneNote** | ✅ Full | Note consolidation, knowledge capture |
-| **Loop** | ✅ Full | Collaborative knowledge building |
+| **Microsoft Teams** | ✅ | Chat, OneDrive search, web research |
+| **M365 Copilot Chat** | ✅ | Full agent experience |
+| **Outlook** | ⚠️ Limited | No Email capability in v1.2 |
+| **Word/PowerPoint/Excel** | ⚠️ Limited | OneDrive only, no document context |
+| **Microsoft 365 Mobile** | ✅ | Same as desktop |
+
+> **Note**: Full surface integration (Email, Teams, People) requires schema v1.5+ which we'll adopt when stable.
 
 ### Surface-Specific Features
 
@@ -410,33 +403,34 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 
 ---
 
-## 🔮 v4.3.0+ Feature Roadmap
+## 🔮 Future Roadmap
 
-> Future iterations: Proactive features, deeper M365 integration
+> Planned features when schema v1.5/v1.6 becomes stable
 
-### v4.3.0 QUADRITRIUM (Current)
-
-| # | Feature | Priority | Capability | Status |
-|:-:|---------|:--------:|------------|:------:|
-| 1 | **Weekly Digest Email** | P1 | Email (send) | ⬜ Needs v1.6 schema |
-| 2 | **Meeting Notes to OneDrive** | P1 | Meetings + OneDrive | ⬜ Needs v1.6 schema |
-| 3 | **Proactive Learning Nudges** | P2 | Email (send) | ⬜ Needs v1.6 schema |
-| 4 | **Team Kudos** | P2 | TeamsMessages (send) | ⬜ Needs v1.6 schema |
-| 5 | **Calendar Conflict Alerts** | P2 | Meetings | ⬜ Needs v1.6 schema |
-| 6 | **Document Context Awareness** | P2 | OneDrive | ✅ **Implemented!** |
-
-### v4.4.0 QUADRIQUADIUM (Planned)
+### When v1.5 Schema is Stable
 
 | # | Feature | Priority | Capability | Description |
 |:-:|---------|:--------:|------------|-------------|
-| 1 | **Focus Time Guardian** | P1 | Meetings + Email | Suggest blocking focus time based on workload patterns |
-| 2 | **Smart Follow-ups** | P1 | Email + People | After meetings, draft follow-up emails to attendees with action items |
-| 3 | **Relationship Insights** | P2 | People + Meetings | Track interactions with colleagues, suggest reconnecting with dormant contacts |
-| 4 | **Document Summarization** | P2 | OneDrive | Summarize long documents and save key points to knowledge files |
-| 5 | **Cross-Team Knowledge Sharing** | P2 | OneDrive + TeamsMessages | Help draft knowledge shares for Teams channels |
-| 6 | **Excel Insight Capture** | P3 | OneDrive | Save data analysis insights to knowledge files |
+| 1 | **Email Integration** | P1 | Email | Search Outlook emails for context |
+| 2 | **Teams Message Search** | P1 | TeamsMessages | Reference Teams conversations |
+| 3 | **People Insights** | P2 | People | Know about colleagues |
 
-> **Note**: v5.0.0 PENTUNIUM features and experimental capabilities have been moved to [ROADMAP-V5-PENTUNIUM.md](ROADMAP-V5-PENTUNIUM.md)
+### When v1.6 Schema is Stable
+
+| # | Feature | Priority | Capability | Description |
+|:-:|---------|:--------:|------------|-------------|
+| 1 | **Meeting Prep** | P1 | Meetings | Calendar-aware context |
+| 2 | **Weekly Digest Email** | P2 | Email (send) | Proactive learning summaries |
+| 3 | **Meeting Notes to OneDrive** | P2 | Meetings + OneDrive | Auto-capture meeting insights |
+
+### v4.0.0 (Future Major Release)
+
+When M365 Copilot schema stabilizes, Alex will upgrade to v4.0.0 with:
+- Full M365 context (Email, Teams, People, Meetings)
+- Proactive notifications
+- Cross-platform memory sync with VS Code
+
+> **Note**: v5.0.0 PENTUNIUM features have been moved to [ROADMAP-V5-PENTUNIUM.md](ROADMAP-V5-PENTUNIUM.md)
 
 ---
 
@@ -448,25 +442,21 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 |--------|:-------:|:-----------:|-------|
 | **v1.0** | ✅ | Not used | Original schema |
 | **v1.2** | ✅ | **CURRENT** | Stable, recommended for basic agents |
-| ~~v1.3~~ | ❌ | - | **DOES NOT EXIST** (we incorrectly used this!) |
+| ~~v1.3~~ | ❌ | - | **DOES NOT EXIST** |
 | ~~v1.4~~ | ❌ | - | **DOES NOT EXIST** |
 | **v1.5** | ✅ | Future | Adds TeamsMessages, Email, People |
 | **v1.6** | ✅ | Future | Adds Meetings, Dataverse, EmbeddedKnowledge |
 
-> **ROOT CAUSE OF FAILURES**: We were using `v1.3` schema which doesn't exist!
-> Any unrecognized property makes the entire document invalid (per MS docs).
+### v1.2 Capabilities (Current Implementation)
 
-### v1.2 Capabilities (What We Can Use NOW)
-
-| Capability | Description | Alex v4.4 |
+| Capability | Description | Alex 3.5.1 |
 |------------|-------------|:---------:|
 | `OneDriveAndSharePoint` | Access user files | ✅ |
 | `WebSearch` | Search the web | ✅ |
-| `GraphConnectors` | Enterprise Graph connectors | Available |
 | `GraphicArt` | Generate images (DALL-E) | ✅ |
 | `CodeInterpreter` | Execute Python code | ✅ |
 
-### v1.5/v1.6 Capabilities (FUTURE - Not in v1.2!)
+### v1.5/v1.6 Capabilities (NOT AVAILABLE YET)
 
 | Capability | v1.5 | v1.6 | Description |
 |------------|:----:|:----:|-------------|
@@ -475,36 +465,30 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 | `People` | ✅ | ✅ | Search org people |
 | `Meetings` | ❌ | ✅ | Search calendar meetings |
 | `Dataverse` | ❌ | ✅ | Power Platform data |
-| `EmbeddedKnowledge` | ❌ | ✅ | Local files (NOT YET AVAILABLE) |
 
-### Teams App Manifest (manifest.json)
-
-| Version | Status | Notes |
-|---------|:------:|-------|
-| **v1.19** | ✅ Current | Stable, good compatibility |
-| v1.24 | Available | More features, may have issues |
-| v1.25 | Newer | Some features not yet supported |
-
-### Current Working Configuration (v4.4.0)
+### Current Working Configuration (v3.5.1)
 
 ```json
 // declarativeAgent.json
 {
   "$schema": ".../declarative-agent/v1.2/schema.json",
   "version": "v1.2",
-  "name": "Alex Cognitive",
+  "name": "Alex",
   "capabilities": [
     { "name": "OneDriveAndSharePoint" },
     { "name": "WebSearch" },
     { "name": "GraphicArt" },
     { "name": "CodeInterpreter" }
   ],
-  "conversation_starters": [/* max 12 items in v1.2 */]
+  "conversation_starters": [/* 5 starters */]
 }
 
 // manifest.json
 {
   "$schema": ".../teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "3.5.1"
+}
   "manifestVersion": "1.19",
   "version": "4.4.0"
 }

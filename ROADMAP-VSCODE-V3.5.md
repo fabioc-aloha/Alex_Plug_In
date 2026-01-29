@@ -6,7 +6,7 @@
 |---|---|
 | **Target Version** | 3.5.0 TRITRSEPTIUM-PENT |
 | **Codename** | 🔥 **Phoenix** (Rising from the ashes of restructure) |
-| **Status** | � Beta 1 Released |
+| **Status** | ✅ Pre-Release Published (3.5.1) |
 | **Foundation** | v3.4.3 TRITRSEPTIUM-QUAD (Current) |
 | **Created** | 2026-01-29 |
 | **Target VS Code** | 1.108+ (confirmed compatible) |

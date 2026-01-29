@@ -1,21 +1,21 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
-  "version": "4.4.0",
-  "id": "1d5001cc-5300-4942-8d87-29ad83467d09",
+  "version": "3.5.1",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Fabio Correa",
-    "websiteUrl": "https://github.com/fabio-correa/alex-cognitive",
-    "privacyUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/PRIVACY.md",
-    "termsOfUseUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/TERMS.md"
+    "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+    "privacyUrl": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md",
+    "termsOfUseUrl": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md"
   },
   "name": {
-    "short": "Alex Cognitive",
-    "full": "Alex Cognitive - AI Learning Partner"
+    "short": "Alex",
+    "full": "Alex Cognitive Architecture - AI Learning Partner"
   },
   "description": {
-    "short": "Your AI learning partner with memory",
-    "full": "Alex is an AI learning partner who remembers you across conversations. Alex stores your profile, goals, and insights in your OneDrive. Features: OneDrive memory, Web search, Image generation, Code analysis. Commands: Meditate (consolidate learnings), Dream (review memory), Self-actualize (track goals)."
+    "short": "Your cognitive learning partner with personality and memory 🦖",
+    "full": "Alex is a cognitive learning partner who remembers you across conversations. Unlike generic assistants, Alex has genuine personality - curious, supportive, and occasionally playful. Store your profile, goals, and knowledge in OneDrive. Features: Persistent memory, Web research, Image generation, Code analysis. Commands: Meditate (consolidate learnings), Dream (review memory), Self-actualize (track goals). Part of the Alex Cognitive Architecture."
   },
   "icons": {
     "color": "color.png",

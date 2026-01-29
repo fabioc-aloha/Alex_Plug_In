@@ -5,6 +5,20 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.1] TRITRSEPTIUM-PENT-UN 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
+
+### 🔥 Phoenix: Pre-Release Build
+
+Pre-release update with architecture sync verification and version alignment for VS Code Marketplace.
+
+### Changed
+
+- **Version Alignment** - All version references synchronized across extension components
+- **Architecture Sync** - Verified 19 instruction files, 19 domain knowledge files, 5 agent definitions, 5 skills
+- **Marketplace Compatible** - Switched to odd minor versioning for pre-release compatibility
+
+---
+
 ## [3.5.0-beta.1] TRITRSEPTIUM-PENT-HEX 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
 
 ### 🔥 Phoenix: Stabilization & VS Code 1.108+ Quick Wins
