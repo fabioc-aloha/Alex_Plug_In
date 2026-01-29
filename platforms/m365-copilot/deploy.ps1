@@ -50,11 +50,8 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "      $packagePath" -ForegroundColor Green
     Write-Host ""
     
-    # Offer to open browser
-    $response = Read-Host "Open Developer Portal in browser? (Y/n)"
-    if ($response -ne 'n') {
-        Start-Process "https://dev.teams.microsoft.com/apps"
-    }
+    # Open browser automatically
+    Start-Process "https://dev.teams.microsoft.com/apps"
     
     # Copy path to clipboard
     $packagePath | Set-Clipboard
