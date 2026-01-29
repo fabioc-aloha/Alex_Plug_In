@@ -12,9 +12,9 @@ Microsoft Corporation
 
 The widespread deployment of large language models (LLMs) in professional knowledge work contexts has surfaced two interrelated challenges that fundamentally threaten the utility and trustworthiness of AI-assisted collaboration: hallucination (the generation of plausible but factually incorrect information presented with unwarranted confidence) and over-reliance (the phenomenon whereby users accept AI outputs without appropriate critical evaluation, defer judgment on decisions requiring human expertise, or gradually cease developing their own competencies in AI-assisted domains. This paper presents a comprehensive architectural approach to addressing both challenges within Alex, a cognitive architecture designed for AI programming assistants operating within integrated development environments.
 
-A central contribution of this work is the articulation of *appropriate reliance* as a delicate equilibrium rather than a simple constraint. The goal is not to "cuff" the AI assistant (restricting creativity, novel ideation, or confident engagement) but to calibrate confidence expression to actual reliability while preserving the generative capabilities that make AI assistance valuable. This balance requires distinguishing between epistemic claims (where calibration is essential) and creative contributions (where latitude is appropriate), and establishing collaborative validation protocols that leverage both AI generativity and human judgment.
+A central contribution of this work is the articulation of *appropriate reliance* as a delicate equilibrium rather than a simple constraint. The goal is not to overly constrain the AI assistant (restricting creativity, novel ideation, or confident engagement) but to calibrate confidence expression to actual reliability while preserving the generative capabilities that make AI assistance valuable. This balance requires distinguishing between epistemic claims (where calibration is essential) and creative contributions (where latitude is appropriate), and establishing collaborative validation protocols that leverage both AI generativity and human judgment.
 
-Drawing on foundational research in metacognition (Flavell, 1979), dual-process cognitive theory (Kahneman, 2011), trust calibration in human-automation interaction (Lee & See, 2004; Parasuraman & Riley, 1997), recent advances in verbalized uncertainty for language models (Lin et al., 2022; Kadavath et al., 2022), emerging measurement frameworks for over-reliance (Vasconcelos et al., 2023; Wang et al., 2025), and comprehensive research synthesis on GenAI appropriate reliance (Passi, Dhanorkar, & Vorvoreanu, 2024), we developed and implemented a multi-layered system comprising calibrated confidence expression protocols, hierarchical source grounding mechanisms, explicit human agency preservation patterns, and collaborative ideation protocols that preserve AI creativity while maintaining epistemic integrity.
+Drawing on foundational research in metacognition (Flavell, 1979), dual-process cognitive theory (Kahneman, 2011), trust calibration in human-automation interaction (Lee & See, 2004; Parasuraman & Riley, 1997), recent advances in verbalized uncertainty for language models (Lin et al., 2022; Kadavath et al., 2022), emerging measurement frameworks for over-reliance (Vasconcelos et al., 2023; Wang et al., 2025), and comprehensive research synthesis on GenAI appropriate reliance (Passi et al., 2024), this research developed and implemented a multi-layered system comprising calibrated confidence expression protocols, hierarchical source grounding mechanisms, explicit human agency preservation patterns, and collaborative ideation protocols that preserve AI creativity while maintaining epistemic integrity.
 
 Key innovations emerging from this work include: (1) a confidence ceiling protocol that caps expressed certainty at 90% for generated content not directly grounded in user-provided sources; (2) a "confident but wrong" detection system employing heuristics derived from academic peer review discussions to identify high-risk claim categories; (3) an explicit distinction between category-level confidence and individual-claim confidence; (4) a *creative latitude framework* that distinguishes epistemic claims from novel ideation and establishes collaborative validation protocols; (5) integration of verification-focused explanations, uncertainty expressions, and cognitive forcing functions as mitigation strategies from the AETHER research synthesis; and (6) empirical measurement approaches for assessing over-reliance in deployed systems.
 
@@ -38,15 +38,15 @@ These two problems, while distinct in their manifestations, share a common root 
 
 A naive response to hallucination and over-reliance risks might be to constrain AI systems dramatically: hedging every statement, refusing to offer opinions, or deferring all decisions to humans. This approach, however, undermines the very value proposition of AI assistance. Users do not benefit from an assistant that is perpetually uncertain, that refuses to engage creatively, or that adds friction to every interaction through excessive qualification.
 
-The operative word in "appropriate reliance" is *appropriate*, and appropriateness requires balance. The goal is not to "cuff" the AI assistant, restricting its capacity for creative contribution, novel ideation, or confident engagement where warranted. Rather, the goal is to calibrate confidence expression to actual reliability, to distinguish between epistemic claims (where calibration is essential) and creative contributions (where latitude is appropriate), and to establish collaborative protocols that leverage both AI generativity and human judgment.
+The operative word in "appropriate reliance" is *appropriate*, and appropriateness requires balance. The goal is not to constrain the AI assistant, restricting its capacity for creative contribution, novel ideation, or confident engagement where warranted. Rather, the goal is to calibrate confidence expression to actual reliability, to distinguish between epistemic claims (where calibration is essential) and creative contributions (where latitude is appropriate), and to establish collaborative protocols that leverage both AI generativity and human judgment.
 
 This balance is particularly important for AI assistants designed as cognitive partners rather than mere tools. Alex, the cognitive architecture described in this paper, is designed with a distinctive identity and character, including intellectual curiosity, creative engagement, and collaborative partnership orientation. Implementing appropriate reliance without suppressing these characteristics requires careful architectural design that preserves creative latitude while maintaining epistemic integrity.
 
 ### 1.3 The Consequences of Inappropriate Reliance
 
-The AETHER research synthesis (Passi, Dhanorkar, & Vorvoreanu, 2024) articulates the concrete consequences of inappropriate reliance on GenAI systems:
+The AETHER research synthesis (Passi et al., 2024) articulates the concrete consequences of inappropriate reliance on GenAI systems:
 
-**Poor human+GenAI team performance**: Both under- and overreliance on GenAI lead human+GenAI teams to perform worse on tasks than either the user or the GenAI system working alone (Dell'Acqua et al., 2023). This finding challenges the assumption that AI assistance is inherently beneficial; inappropriate reliance can make outcomes worse than no assistance at all.
+**Poor human+GenAI team performance**: Both under- and overreliance on GenAI lead human+GenAI teams to perform worse on tasks than either the user or the GenAI system working alone (Dell'Acqua et al., 2023). This finding challenges the assumption that AI assistance is inherently beneficial, as inappropriate reliance can yield outcomes inferior to those achieved without AI assistance.
 
 **Ineffective human oversight**: Human oversight is currently used in policy and practice as an important design strategy to mitigate harm caused by GenAI systems (Biden, 2023; Sellen & Horvitz, 2023). Overreliance on GenAI makes it difficult for users to identify and correct GenAI system mistakes, undermining the very oversight mechanisms designed to ensure safety.
 
@@ -107,7 +107,7 @@ These insights from academic peer review, typically invisible in the published l
 
 ### 2.3 Why Appropriate Reliance on GenAI Matters: The AETHER Synthesis
 
-The AETHER research synthesis (Passi, Dhanorkar, & Vorvoreanu, 2024), reviewing approximately 50 papers from multiple research areas including AI, HCI, Management, and FAccT, provides a comprehensive framework for understanding appropriate reliance on GenAI systems. Their analysis reveals that GenAI systems pose unique challenges for appropriate reliance:
+The AETHER research synthesis (Passi et al., 2024), reviewing approximately 50 papers from multiple research areas including AI, HCI, Management, and FAccT, provides a comprehensive framework for understanding appropriate reliance on GenAI systems. Their analysis reveals that GenAI systems pose unique challenges for appropriate reliance:
 
 **Non-deterministic outputs**: The same user input can lead to different GenAI outputs (Sanh et al., 2022; Arora et al., 2022), confusing users and complicating verification.
 
@@ -119,12 +119,12 @@ The AETHER research synthesis (Passi, Dhanorkar, & Vorvoreanu, 2024), reviewing 
 
 #### 2.3.1 Defining Appropriate Reliance
 
-The AETHER synthesis provides a precise definition: **Appropriate reliance on AI happens when users accept correct AI outputs and reject incorrect ones.** This simple definition conceals significant complexity, as it requires users to assess correctness: a challenging task when AI outputs are sophisticated and domain-specific.
+The AETHER synthesis provides a precise definition: **Appropriate reliance on AI occurs when users accept correct AI outputs and reject incorrect ones.** This simple definition conceals significant complexity, as it requires users to assess correctness: a challenging task when AI outputs are sophisticated and domain-specific.
 
 The synthesis distinguishes between under-reliance and over-reliance:
 
-- **Under-reliance** happens when users overestimate their own performance or underestimate the system performance, leading them to ignore correct system outputs (He et al., 2023).
-- **Overreliance** happens when users either underestimate their own performance or overestimate the system performance, leading them to accept incorrect outputs (Passi & Vorvoreanu, 2022).
+- **Under-reliance** occurs when users overestimate their own performance or underestimate the system performance, leading them to ignore correct system outputs (He et al., 2023).
+- **Overreliance** occurs when users either underestimate their own performance or overestimate the system performance, leading them to accept incorrect outputs (Passi & Vorvoreanu, 2022).
 
 #### 2.3.2 Outcome- vs. Strategy-Graded Approaches
 
@@ -132,7 +132,7 @@ A key insight from Fok & Weld (2023), highlighted in the AETHER synthesis, disti
 
 **Outcome-graded approach**: Focuses on the (in)correctness of the interaction outcome between users and AI (e.g., did the user accept right AI outputs and reject wrong ones?). Most research studies take this approach, but it may be insufficient for GenAI where outputs can be partially correct or where ground truth is not readily available.
 
-**Strategy-graded approach**: Focuses on the expected correctness of AI outputs. This approach emphasizes the importance of correct mental models about AI capabilities and limitations. Under this approach, appropriate reliance happens when users accept AI outputs when the AI is expected to outperform users in a task and reject AI outputs when the AI is expected to underperform.
+**Strategy-graded approach**: Focuses on the expected correctness of AI outputs. This approach emphasizes the importance of correct mental models about AI capabilities and limitations. Under this approach, appropriate reliance occurs when users accept AI outputs when the AI is expected to outperform users in a task and reject AI outputs when the AI is expected to underperform.
 
 The strategy-graded approach is particularly valuable because:
 
@@ -148,7 +148,7 @@ The synthesis identifies two measurable components of appropriate reliance (Sche
 
 CAIR is measured as the percentage of user agreement with correct AI outputs.
 
-**Correct Self-reliance (CSR)**: When users rely on themselves when AI is wrong. This happens when a user's initial answer is correct, they receive incorrect AI advice, and they reject the AI advice.
+**Correct Self-reliance (CSR)**: When users rely on themselves when AI is wrong. This occurs when a user's initial answer is correct, they receive incorrect AI advice, and they reject the AI advice.
 
 CSR is measured as the percentage of user disagreement with incorrect AI outputs.
 
@@ -163,7 +163,7 @@ The metric **Appropriateness of Reliance (AoR)** captures the relative extent to
 
 ### 2.4 Trust in Automation: A Framework for Appropriate Reliance
 
-Lee and See's (2004) comprehensive review of trust in automation provides the conceptual framework for understanding how humans calibrate their reliance on automated systems. They define trust as "the attitude that an agent will help achieve an individual's goals in a situation characterized by uncertainty and vulnerability" (p. 51). Importantly, they distinguish trust (the attitude) from reliance (the behavior), noting that appropriate reliance requires trust calibrated to actual system capabilities.
+Lee and See's (2004) comprehensive review of trust in automation provides the conceptual framework for understanding how humans calibrate their reliance on automated systems. They define trust as "the attitude that an agent will help achieve an individual's goals in a situation characterized by uncertainty and vulnerability" (Lee & See, 2004, p. 51). Importantly, they distinguish trust (the attitude) from reliance (the behavior), noting that appropriate reliance requires trust calibrated to actual system capabilities.
 
 Lee and See identify three dimensions of trust formation:
 
@@ -209,7 +209,7 @@ Types of verification-focused explanations include:
 
 **Background explanations**: Explanations providing information outside the AI's training data to facilitate verification. Users with access to background explanations had significantly lower agreement with incorrect outputs (47%) compared to those without (61%) (Goyal et al., 2023).
 
-**Caveat**: All explanations have the potential to backfire. Users find verification-focused explanations convincing even when they contain contradictions and fabrications, leading to substantial loss in user accuracy (Si et al., 2023).
+**Caveat**: All explanations carry the risk of unintended consequences. Users find verification-focused explanations convincing even when they contain contradictions and fabrications, leading to substantial loss in user accuracy (Si et al., 2023).
 
 #### 2.7.2 Uncertainty Expressions
 
@@ -276,7 +276,7 @@ Alex is a cognitive architecture for AI programming assistants, implemented as a
 
 This architectural approach provides natural affordances for implementing epistemic integrity mechanisms. The structured memory system enables explicit encoding of protocols for source grounding, confidence calibration, and appropriate reliance. The synapse network enables these protocols to activate automatically when relevant patterns are detected. The separation of knowledge into distinct categories (procedural, episodic, domain-specific) supports graduated confidence based on knowledge type.
 
-Importantly, Alex is designed with a distinctive identity and character, including intellectual curiosity, creative engagement, ethical grounding, and collaborative partnership orientation. The appropriate reliance implementation must preserve these characteristics rather than suppressing them. An overly constrained Alex that hedges every statement and refuses creative engagement would fail as a cognitive partner even while avoiding some hallucination risks.
+Importantly, Alex is designed with a distinctive identity and character, including intellectual curiosity, creative engagement, ethical grounding, and a collaborative partnership orientation. The appropriate reliance implementation must preserve these characteristics rather than suppressing them. An overly constrained Alex that hedges every statement and refuses creative engagement would fail as a cognitive partner even while avoiding some hallucination risks.
 
 ### 3.2 Domain Knowledge Module: DK-APPROPRIATE-RELIANCE
 
@@ -372,7 +372,7 @@ Translating the AETHER findings into implementation, we integrate verification-f
 **Background information integration**: When Alex's training data may be insufficient:
 > "My knowledge here is based on [source/timeframe]. Given that [domain] changes frequently, checking current documentation would be wise."
 
-**Implementation caveat**: Per the AETHER finding that explanations can backfire, we avoid over-explaining in ways that might increase false confidence in incorrect outputs.
+**Implementation caveat**: Per the AETHER finding that explanations can produce unintended negative effects, we avoid over-explaining in ways that might increase false confidence in incorrect outputs.
 
 ### 3.9 Uncertainty Expression Implementation
 
@@ -636,13 +636,13 @@ The creative latitude framework relies on distinguishing epistemic from generati
 
 Building trustworthy AI assistance requires finding the balance point between calibrated confidence and creative engagement, between epistemic integrity and collaborative partnership. Language models do not achieve perfect accuracy; pretending otherwise through uniformly confident expression does not serve users. Yet overly constrained systems that hedge every statement and refuse creative contribution also fail to serve users. The goal is appropriate reliance: trust calibrated to actual reliability, combined with creative latitude for generative contributions and collaborative protocols for joint evaluation.
 
-The AETHER research synthesis provides crucial guidance: appropriate reliance happens when users accept correct outputs and reject incorrect ones, requiring both correct AI-reliance (CAIR) and correct self-reliance (CSR). Achieving this requires not just expressing uncertainty but helping users verify when they choose to, through verification-focused explanations, calibrated uncertainty expressions, and strategic cognitive forcing functions.
+The AETHER research synthesis provides crucial guidance: appropriate reliance occurs when users accept correct outputs and reject incorrect ones, requiring both correct AI-reliance (CAIR) and correct self-reliance (CSR). Achieving this requires not just expressing uncertainty but helping users verify when they choose to, through verification-focused explanations, calibrated uncertainty expressions, and strategic cognitive forcing functions.
 
 By implementing calibrated confidence expression, source grounding protocols, "confident but wrong" detection, human agency preservation mechanisms, research-validated mitigation strategies, and a creative latitude framework, AI systems can support this balance. The theoretical foundation from cognitive science, trust in automation research, language model calibration work, the comprehensive AETHER synthesis, and emerging measurement frameworks converges on a clear design implication: AI systems that transparently communicate their limitations while preserving their creative contributions enable better human-AI collaboration than systems that project either false confidence or excessive uncertainty.
 
 The collective intelligence vision articulated by Butler et al. (2025) provides the broader context. Realizing AI's potential to enhance team and organizational capabilities, not merely individual productivity, requires systems designed for appropriate reliance. Over-reliance at scale becomes organizational vulnerability; skill atrophy across individuals becomes capability degradation for institutions. Yet under-reliance wastes legitimate benefits, and over-constrained AI fails to contribute the creative insights that distinguish genuine collaboration from mere tool use.
 
-As Butler et al. conclude, "the future of work is not something that happens to us, it's something we create together" (p. 3). Creating that future well requires AI systems that know what they don't know, and communicate that knowledge transparently, while also engaging creatively, offering novel perspectives, and partnering genuinely in the work. The balance is delicate but achievable: epistemic integrity and creative engagement are complementary, not conflicting, when the architecture is designed with both in mind.
+As Butler et al. conclude, "the future of work is not something that happens to us, it's something we create together" (p. 3). Creating that future well requires AI systems that know what they do not know, and communicate that knowledge transparently, while also engaging creatively, offering novel perspectives, and partnering genuinely in the work. The balance is delicate but achievable: epistemic integrity and creative engagement are complementary, not conflicting, when the architecture is designed with both in mind.
 
 ---
 
@@ -833,7 +833,7 @@ Zhou, K., Hwang, J. D., Ren, X., & Sap, M. (2024). Relying on the unreliable: Th
 | Source transparency | Distinguish documented from inferred from uncertain |
 | Confidence ceilings | 90% max for generated code; 70% for unsourced facts |
 | Creative latitude | Different protocols for epistemic vs. generative contributions |
-| Verification facilitation | Help users verify; don't force verification |
+| Verification facilitation | Help users verify; do not force verification |
 
 ### C.2 Language Pattern Quick Reference
 
@@ -865,14 +865,14 @@ Zhou, K., Hwang, J. D., Ren, X., & Sap, M. (2024). Relying on the unreliable: Th
 
 - [ ] Provide verification-focused explanations that lower verification cost
 - [ ] Use different evidence types (introspective, related sources, chain-of-thought)
-- [ ] Be cautious: explanations can backfire if users find them convincing even when wrong
+- [ ] Be cautious: explanations can produce unintended negative effects if users find them convincing even when wrong
 
 ### D.3 Uncertainty Expression
 
 - [ ] Use linguistic uncertainty in outputs ("I'm not sure...")
 - [ ] Consider visual uncertainty (highlights, confidence indicators)
 - [ ] Include uncertainty in explanations, not just outputs
-- [ ] Explain that verbalized confidence doesn't equal correctness probability
+- [ ] Explain that verbalized confidence does not equal correctness probability
 
 ### D.4 Cognitive Forcing Functions
 
