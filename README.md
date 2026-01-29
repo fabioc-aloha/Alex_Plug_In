@@ -2,9 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![VS Code Version](https://img.shields.io/badge/VS%20Code-v3.4.1-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
-[![M365 Version](https://img.shields.io/badge/M365%20Copilot-v4.0.0-7c3aed)](platforms/m365-copilot/)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code Version](https://img.shields.io/badge/VS%20Code-v3.4.3-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Version](https://img.shields.io/badge/M365%20Copilot-v4.0.0-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 > Your AI Learning Partner with Meta-Cognitive Awareness
 
@@ -26,7 +24,7 @@
 
 | Platform | Version | Status | Get Started |
 | -------- | ------- | ------ | ----------- |
-| **VS Code Extension** | v3.4.1 | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **VS Code Extension** | v3.4.3 | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
 | **M365 Copilot Agent** | v4.0.0 | 🔄 Internal Review | [Documentation](platforms/m365-copilot/) |
 
 ### VS Code Extension

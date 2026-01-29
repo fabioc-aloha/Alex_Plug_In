@@ -5,6 +5,36 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.3] TRITRSEPTIUM-PENT 🛡️ Robustness - 2026-01-29 (VS Code Extension)
+
+### 🛡️ Stability: Improved Error Handling & User Feedback
+
+This patch release improves the reliability and user experience of core commands.
+
+### Fixed
+
+- **Modal Error Dialogs** - All error messages now use modal dialogs that require user acknowledgment
+  - Prevents errors from being auto-dismissed before users can read them
+  - Applies to: Initialize, Upgrade, Reset, Dream, and Self-Actualize commands
+
+- **Robust Error Message Extraction** - Properly handles all error types
+  - Fixed issue where `error.message` could be `undefined` causing "Failed: undefined" messages
+  - Now correctly extracts messages from Error objects, strings, and other error types
+  - Fallback to "Unknown error" when message cannot be extracted
+
+- **Enhanced Error Logging** - All errors now logged to console for debugging
+  - `console.error()` calls added to all catch blocks
+  - Full error details available in Developer Tools Output panel
+  - Helps users report and diagnose issues
+
+### Changed
+
+- Error messages are now more descriptive with clear next steps
+- Permission errors include specific troubleshooting guidance
+- Upgrade failures provide backup location for recovery
+
+---
+
 ## [3.4.2] TRITRSEPTIUM-QUAD 🎯 Focus - 2026-01-29 (VS Code Extension)
 
 ### 🎯 Developer Productivity: Visual Feedback & Quick Actions

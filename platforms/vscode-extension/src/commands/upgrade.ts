@@ -201,7 +201,9 @@ async function autoMergeBrainFile(
         
         return { success: true };
     } catch (error: any) {
-        return { success: false, reason: error.message };
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Auto-merge brain file failed:', error);
+        return { success: false, reason: errorMessage || 'Unknown error during merge' };
     }
 }
 
@@ -248,8 +250,10 @@ async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
             issues.push('Bold activation triggers → should be plain text');
         }
         
-    } catch (error) {
-        issues.push(`Error scanning file: ${error}`);
+    } catch (error: any) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Error scanning file for migration:', error);
+        issues.push(`Error scanning file: ${errorMessage || 'Unknown error'}`);
     }
     
     return issues;
@@ -346,8 +350,10 @@ async function performSchemaMigration(filePath: string): Promise<{ migrated: boo
         }
         
         return { migrated: false, changes };
-    } catch (error) {
-        changes.push(`Error during migration: ${error}`);
+    } catch (error: any) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Error during schema migration:', error);
+        changes.push(`Error during migration: ${errorMessage || 'Unknown error'}`);
         return { migrated: false, changes };
     }
 }
@@ -466,7 +472,8 @@ async function performUpgrade(
     if (!await fs.pathExists(requiredSource)) {
         vscode.window.showErrorMessage(
             'Extension installation appears corrupted - missing core files.\n\n' +
-            'Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.'
+            'Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.',
+            { modal: true }
         );
         return;
     }
@@ -501,7 +508,8 @@ async function performUpgrade(
                 await fs.writeFile(testFile, 'test');
                 await fs.remove(testFile);
             } catch (writeError: any) {
-                throw new Error(`Cannot create backup directory - check disk space and permissions: ${writeError.message}`);
+                const writeErrorMessage = writeError instanceof Error ? writeError.message : String(writeError);
+                throw new Error(`Cannot create backup directory - check disk space and permissions: ${writeErrorMessage || 'Write failed'}`);
             }
             
             // Backup .github folder (includes domain-knowledge, config, episodic)
@@ -986,14 +994,17 @@ async function performUpgrade(
         }
 
     } catch (error: any) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Upgrade failed:', error);
         vscode.window.showErrorMessage(
-            `❌ Upgrade failed: ${error.message}\n\n` +
+            `❌ Upgrade failed: ${errorMessage || 'Unknown error'}\n\n` +
             'Your original files should be intact. If you see issues:\n' +
             '1. Check the archive/upgrades folder for backups\n' +
             '2. Try running "Alex: Dream" to assess damage\n' +
-            '3. You can restore from backup if needed'
+            '3. You can restore from backup if needed',
+            { modal: true }
         );
-        report.errors.push(error.message);
+        report.errors.push(errorMessage || 'Unknown error');
     }
 }
 

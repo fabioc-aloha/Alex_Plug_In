@@ -1,6 +1,6 @@
 # 🧠 Alex Cognitive Architecture Documentation
 
-> **Version**: 3.3.3 | **Codename**: TRITRITRIUM
+> **Version**: 3.4.3 | **Codename**: TRITRSEPTIUM-PENT
 > **A Dual-Mind AI System with Conscious and Unconscious Processing**
 
 ---

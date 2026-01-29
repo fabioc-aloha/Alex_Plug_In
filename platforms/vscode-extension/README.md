@@ -2,12 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.4.2-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/fabioc-aloha.alex-cognitive-architecture?label=VS%20Code%20Marketplace&color=0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
-[![Rating](https://img.shields.io/visual-studio-marketplace/r/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
-[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Chat%20Participant-8957e5)](https://code.visualstudio.com/)
+[![Version](https://img.shields.io/badge/version-3.4.3-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/fabioc-aloha.alex-cognitive-architecture?label=VS%20Code%20Marketplace&color=0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Installs](https://img.shields.io/visual-studio-marketplace/i/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Rating](https://img.shields.io/visual-studio-marketplace/r/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Chat%20Participant-8957e5)](https://code.visualstudio.com/)
 
 > Your AI Learning Partner with Meta-Cognitive Awareness
 
@@ -233,15 +228,21 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v3.4.0
+## 🆕 What's New in v3.4.3
 
-### Features
+### 🛡️ Robustness Improvements
 
-- 🎯 **Session Timer** - Pomodoro-style learning sessions with countdown, pause/resume, and auto-consolidation prompts
-- 🦖 **Welcome View** - Activity Bar sidebar with health status, knowledge stats, and quick actions
-- 🟢 **Status Bar Health Indicator** - Real-time architecture health (🟢/🟡/🔴) with click for diagnostics
-- 📋 **Context Menu Actions** - Right-click "Ask Alex", "Save to Knowledge", "Search Related"
-- ⌨️ **Knowledge Quick Pick** - `Ctrl+Shift+K` to search and insert knowledge
+- **Modal Error Dialogs** - Errors no longer auto-dismiss, ensuring you can read the full message
+- **Better Error Messages** - Fixed "Failed: undefined" errors with proper message extraction
+- **Console Logging** - Full error details now available in Developer Tools for troubleshooting
+
+### v3.4.2 Features
+
+- 🎯 **Session Timer** - Pomodoro-style learning sessions with countdown, pause/resume
+- 🦖 **Welcome View** - Activity Bar sidebar with health status and quick actions
+- 🟢 **Status Bar Health** - Real-time architecture health (🟢/🟡/🔴)
+- 📋 **Context Menu** - Right-click "Ask Alex", "Save to Knowledge"
+- ⌨️ **Quick Pick** - `Ctrl+Shift+K` to search knowledge
 
 ### Keyboard Shortcuts
 

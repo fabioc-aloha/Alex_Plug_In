@@ -71,7 +71,8 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
         }
         if (!silent) {
             vscode.window.showErrorMessage(
-                workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.'
+                workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed (File → Open Folder), then run Dream Protocol.',
+                { modal: true }
             );
         }
         return undefined;

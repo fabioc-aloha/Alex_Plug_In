@@ -56,7 +56,8 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
             return undefined; // User cancelled folder selection
         }
         vscode.window.showErrorMessage(
-            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed.'
+            workspaceResult.error || 'No workspace folder open. Please open a project with Alex installed.',
+            { modal: true }
         );
         return undefined;
     }

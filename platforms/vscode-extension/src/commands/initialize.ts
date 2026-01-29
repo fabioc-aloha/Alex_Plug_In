@@ -39,7 +39,8 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
             return; // User cancelled folder selection
         }
         vscode.window.showErrorMessage(
-            workspaceResult.error || 'No workspace folder open. Please open a project folder first (File → Open Folder), then run this command again.'
+            workspaceResult.error || 'No workspace folder open. Please open a project folder first (File → Open Folder), then run this command again.',
+            { modal: true }
         );
         return;
     }
@@ -75,7 +76,8 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
             return; // User cancelled folder selection
         }
         vscode.window.showErrorMessage(
-            workspaceResult.error || 'Please open a workspace folder with Alex installed to reset.'
+            workspaceResult.error || 'Please open a workspace folder with Alex installed to reset.',
+            { modal: true }
         );
         return;
     }
@@ -123,7 +125,12 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
         
         await performInitialization(context, rootPath, true);
     } catch (error: any) {
-        vscode.window.showErrorMessage(`Failed to reset Alex: ${error.message}`);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Reset failed:', error);
+        vscode.window.showErrorMessage(
+            `Failed to reset Alex: ${errorMessage || 'Unknown error'}`,
+            { modal: true }
+        );
     }
 }
 
@@ -135,7 +142,8 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
     if (!await fs.pathExists(requiredSource)) {
         vscode.window.showErrorMessage(
             'Extension installation appears corrupted - missing core files.\n\n' +
-            'Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.'
+            'Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.',
+            { modal: true }
         );
         return;
     }
@@ -160,7 +168,8 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
             await fs.writeFile(testFile, 'test');
             await fs.remove(testFile);
         } catch (permError: any) {
-            throw new Error(`Cannot write to workspace - check folder permissions: ${permError.message}`);
+            const permErrorMessage = permError instanceof Error ? permError.message : String(permError);
+            throw new Error(`Cannot write to workspace - check folder permissions: ${permErrorMessage || 'Permission denied'}`);
         }
 
         await vscode.window.withProgress({
@@ -317,7 +326,12 @@ async function performInitialization(context: vscode.ExtensionContext, rootPath:
             await vscode.commands.executeCommand('alex.dream');
         }
     } catch (error: any) {
-        vscode.window.showErrorMessage(`Failed to initialize Alex: ${error.message}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Initialize failed:', error);
+        vscode.window.showErrorMessage(
+            `Failed to initialize Alex: ${errorMessage || 'Unknown error'}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`,
+            { modal: true }
+        );
     }
 }
 
