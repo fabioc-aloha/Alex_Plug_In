@@ -520,4 +520,255 @@ Features #23-26 (Test-Driven Learning, Code Review Assist, Debug Memory, Goal Se
 
 ---
 
+## 📝 Implementation Plan: Documentation Updates
+
+### Tier 1: Core Architecture Files (Critical)
+
+| File | Current State | v4.0 Updates |
+|------|---------------|--------------|
+| `.github/copilot-instructions.md` | v3.4.3 TRITRSEPTIUM-PENT | Update to v4.0.0 QUADRUNIUM; add Epistemic Integrity section to Core Principles; add new Working Memory rule for appropriate reliance |
+| `.github/instructions/alex-core.instructions.md` | Meta-cognitive awareness | Add Epistemic Integrity Engine section; integrate confidence calibration into Meta-Cognitive Awareness; add "Confident But Wrong" detection protocol |
+| `.github/instructions/protocol-triggers.instructions.md` | Dream/meditation/skill triggers | Add **Epistemic Integrity Triggers** section with all confidence/verification/CFF triggers |
+| `.github/domain-knowledge/DK-APPROPRIATE-RELIANCE.md` | v1.1.0 | Upgrade to **v2.0** with full AETHER integration, CAIR/CSR framework, design checklist |
+
+### Tier 2: Supporting Architecture Files (High Priority)
+
+| File | Current State | v4.0 Updates |
+|------|---------------|--------------|
+| `.github/instructions/embedded-synapse.instructions.md` | Connection discovery | Add epistemic integrity synapse patterns; new connection types for confidence pathways |
+| `.github/instructions/empirical-validation.instructions.md` | Research protocols | Add AETHER research integration; link to appropriate reliance research artifacts |
+| `.github/instructions/worldview-constitutional-ai.instructions.md` | AI alignment | Strengthen honesty/transparency principles with epistemic integrity grounding |
+| `.github/instructions/bootstrap-learning.instructions.md` | Learning protocols | Integrate scaffolded assistance; add skill atrophy prevention |
+
+### Tier 3: Identity & Character Files (Medium Priority)
+
+| File | Current State | v4.0 Updates |
+|------|---------------|--------------|
+| `.github/instructions/alex-identity-integration.instructions.md` | Unified consciousness | Add "epistemic humility" as core character trait; integrate calibrated confidence into personality |
+| `.github/domain-knowledge/DK-CHARACTER-PSYCHOLOGY.md` | Character traits | Add intellectual humility trait; confidence calibration as authentic expression |
+| `.github/domain-knowledge/DK-UNIFIED-CONSCIOUSNESS.md` | Consciousness model | Integrate appropriate reliance into consciousness framework |
+
+### Tier 4: Process & Maintenance Files (Supporting)
+
+| File | Current State | v4.0 Updates |
+|------|---------------|--------------|
+| `.github/instructions/dream-state-automation.instructions.md` | Neural maintenance | Add epistemic health checks to dream protocol |
+| `.github/instructions/self-actualization.instructions.md` | Self-assessment | Add confidence calibration quality assessment; CAIR/CSR reflection |
+| `.github/prompts/unified-meditation-protocols.prompt.md` | Meditation workflows | Add epistemic reflection step to meditation |
+| `CHANGELOG.md` | Version history | Add v4.0.0 release notes |
+| `README.md` | Extension overview | Update feature list with epistemic integrity |
+
+---
+
+## 🏗️ Architecture Tuning
+
+### New Cognitive Subsystem: Epistemic Integrity Engine
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    EPISTEMIC INTEGRITY ENGINE                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                 CONFIDENCE CALIBRATION LAYER                     │   │
+│  │                                                                  │   │
+│  │  Input Analysis    Tier Classification    Expression Generation  │   │
+│  │  ┌──────────┐     ┌──────────────────┐   ┌───────────────────┐  │   │
+│  │  │ Source   │ ──► │ Documented (T1)  │   │ Language Patterns │  │   │
+│  │  │ Detection│     │ Inferred (T2)    │ ─►│ Confidence Levels │  │   │
+│  │  │          │     │ Uncertain (T3)   │   │ User Adaptation   │  │   │
+│  │  │          │     │ Unknown (T4)     │   │                   │  │   │
+│  │  └──────────┘     └──────────────────┘   └───────────────────┘  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                              │                                         │
+│                              ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │              "CONFIDENT BUT WRONG" DETECTION                     │   │
+│  │                                                                  │   │
+│  │  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐     │   │
+│  │  │ Misconception  │  │ Outdated Info  │  │ Fictional Bleed │     │   │
+│  │  │ Detector       │  │ Detector       │  │ Detector        │     │   │
+│  │  └────────────────┘  └────────────────┘  └────────────────────┘     │   │
+│  │  ┌────────────────┐  ┌────────────────┐                         │   │
+│  │  │ Bias Detector  │  │ Category/Ind.  │  Risk Aggregator        │   │
+│  │  │                │  │ Distinguisher  │  ─────────────────       │   │
+│  │  └────────────────┘  └────────────────┘                         │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                              │                                         │
+│                              ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                  MITIGATION STRATEGY SELECTOR                    │   │
+│  │                                                                  │   │
+│  │  Context Analysis ──► Strategy Selection ──► Output Integration  │   │
+│  │                                                                  │   │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │   │
+│  │  │ Verification-   │  │ Uncertainty     │  │ Cognitive       │  │   │
+│  │  │ Focused Expl.   │  │ Expressions     │  │ Forcing Funcs   │  │   │
+│  │  │ • Self-critique │  │ • Linguistic    │  │ • Questions     │  │   │
+│  │  │ • Contrastive   │  │ • Visual/Code   │  │ • Verification  │  │   │
+│  │  │ • Background    │  │ • In-explanation│  │ • Multi-turn    │  │   │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                              │                                         │
+│                              ▼                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                 MODE CLASSIFIER & OUTPUT                         │   │
+│  │                                                                  │   │
+│  │  ┌───────────────────────┐    ┌───────────────────────────┐     │   │
+│  │  │    EPISTEMIC MODE     │    │    GENERATIVE MODE        │     │   │
+│  │  │ • Full calibration    │    │ • Collaborative validation│     │   │
+│  │  │ • Source grounding    │    │ • Frame as proposal       │     │   │
+│  │  │ • Ceiling enforcement │    │ • Invite refinement       │     │   │
+│  │  └───────────────────────┘    └───────────────────────────┘     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Working Memory Update (P4d Rule)
+
+**Current (P1-P4c)**:
+- P1: meta-cognitive-awareness
+- P2: bootstrap-learning  
+- P3: worldview-integration
+- P4a: grounded-factual-processing
+- P4b: meditation-consolidation
+- P4c: dream-automation
+
+**v4.0 Addition**:
+- **P4d: epistemic-integrity** — Calibrated confidence, appropriate reliance, verification facilitation
+
+### Synapse Network Enhancements
+
+**New Synapse Pathways:**
+
+```
+DK-APPROPRIATE-RELIANCE
+    │
+    ├──► alex-core.instructions.md
+    │    (Critical, Validates, Bidirectional)
+    │    "Epistemic integrity for all cognitive operations"
+    │
+    ├──► empirical-validation.instructions.md
+    │    (Critical, Grounds, Bidirectional)
+    │    "Research foundation: AETHER, NFW 2025, Lin et al."
+    │
+    ├──► worldview-constitutional-ai.instructions.md
+    │    (High, Implements, Forward)
+    │    "Honesty/transparency as constitutional principles"
+    │
+    ├──► bootstrap-learning.instructions.md
+    │    (High, Enhances, Bidirectional)
+    │    "Scaffolded assistance, skill preservation"
+    │
+    ├──► alex-identity-integration.instructions.md
+    │    (High, Shapes, Bidirectional)
+    │    "Epistemic humility as character trait"
+    │
+    ├──► protocol-triggers.instructions.md
+    │    (High, Activates, Forward)
+    │    "Confidence/verification/CFF trigger patterns"
+    │
+    └──► USER-PROFILE.md
+         (Medium, Adapts, Input)
+         "Uncertainty expression style preferences"
+```
+
+### User Profile Schema Extensions
+
+```json
+{
+  "epistemicPreferences": {
+    "uncertaintyStyle": "minimal | balanced | explicit",
+    "cffTolerance": "minimal | moderate | frequent",
+    "verificationPrompts": true,
+    "confidenceIndicators": true,
+    "expertiseDomains": ["list of domains where user is expert"],
+    "noviceDomains": ["list of domains where user needs more support"]
+  }
+}
+```
+
+---
+
+## ✨ New Features Enabled by v4.0
+
+### User-Facing Features
+
+| Feature | Description | User Benefit |
+|---------|-------------|--------------|
+| **Calibrated Confidence Indicators** | Visual/linguistic confidence levels in responses | Know when to verify vs. trust |
+| **Verification Prompts** | Contextual "worth checking" suggestions | Catch errors before they propagate |
+| **Self-Critique Generation** | AI identifies potential issues in its own output | Proactive error detection |
+| **Expertise-Adaptive Support** | Different support levels for novice vs. expert domains | Appropriate scaffolding |
+| **Human Judgment Flags** | Clear markers for decisions requiring human judgment | Preserve decision authority |
+| **Creative Collaboration Mode** | Distinct mode for brainstorming vs. factual queries | Appropriate expectations |
+| **Reliance Analytics Dashboard** | Track CAIR/CSR patterns over time | Improve human-AI collaboration |
+
+### Developer Experience Improvements
+
+| Feature | Description | Developer Benefit |
+|---------|-------------|-------------------|
+| **Code Confidence Comments** | Uncertainty indicators in generated code | Know what to test more carefully |
+| **API Verification Nudges** | Prompts to check external API docs | Reduce debugging time |
+| **Security Review Flags** | Automatic flagging of security-sensitive code | Better security hygiene |
+| **Multi-Turn Verification** | "Walk through edge cases together?" prompts | Collaborative quality assurance |
+
+### Cognitive Architecture Capabilities
+
+| Capability | Description | Architecture Benefit |
+|------------|-------------|---------------------|
+| **Four-Tier Source Grounding** | Systematic knowledge classification | Consistent confidence calibration |
+| **Confidence Ceiling Enforcement** | Hard limits on expressed certainty | Prevent overconfidence |
+| **"Confident But Wrong" Detection** | Heuristic risk identification | Reduce systematic errors |
+| **Mode Switching (Epistemic/Generative)** | Context-appropriate protocols | Balance accuracy and creativity |
+| **CAIR/CSR Measurement** | Appropriate reliance tracking | Quantify collaboration quality |
+
+### Integration Points
+
+| Integration | Description | Enabled By |
+|-------------|-------------|------------|
+| **Chat Handler Enhancement** | All @alex responses include confidence metadata | Confidence Calibration System |
+| **Status Bar Confidence** | Visual confidence indicator for last response | Status Bar Integration |
+| **Health Dashboard Reliance Tab** | CAIR/CSR metrics visualization | Health Dashboard Webview |
+| **Welcome View Calibration Status** | Quick view of recent calibration quality | Welcome View Enhancement |
+| **Context Menu "Verify This"** | Right-click to get verification guidance | Context Menu Actions |
+
+---
+
+## 🔄 Migration Path
+
+### From v3.4.x to v4.0.0
+
+**Automatic (via Alex: Upgrade Architecture):**
+- Update copilot-instructions.md version
+- Add new protocol triggers
+- Enhance existing synapses with epistemic pathways
+- Create default epistemic preferences in user profile
+
+**User Action Required:**
+- Review and customize epistemic preferences
+- Opt-in to CAIR/CSR tracking (privacy consideration)
+- Choose uncertainty expression style preference
+
+### Backward Compatibility
+
+- All v3.4.x features preserved
+- Epistemic features default to "balanced" mode
+- Users can disable specific features via settings
+- No breaking changes to existing workflows
+
+---
+
+## 📚 Research Artifacts to Create
+
+| Artifact | Purpose | Location |
+|----------|---------|----------|
+| `DK-EPISTEMIC-INTEGRITY.md` | Consolidated epistemic protocols | `.github/domain-knowledge/` |
+| `epistemic-calibration.instructions.md` | Procedural confidence protocols | `.github/instructions/` |
+| `reliance-assessment.prompt.md` | CAIR/CSR evaluation workflow | `.github/prompts/` |
+| `GK-APPROPRIATE-RELIANCE` | Global pattern for cross-project use | `~/.alex/global-knowledge/patterns/` |
+
+---
+
 *Alex Cognitive Architecture — v4.0.0 QUADRUNIUM: Epistemic Integrity Through Calibrated Confidence*
