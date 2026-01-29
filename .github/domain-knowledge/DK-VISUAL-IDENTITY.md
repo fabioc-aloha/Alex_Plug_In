@@ -1,8 +1,8 @@
 # Domain Knowledge: Alex Visual Identity & Branding
 
-**Created**: 2026-01-28  
-**Category**: Design, Branding, Identity  
-**Status**: Active Development  
+**Created**: 2026-01-28
+**Category**: Design, Branding, Identity
+**Status**: Active Development
 **Source**: Meditation consolidation from branding session
 
 ---
@@ -135,10 +135,10 @@ A good Alex logo should answer: *"Does this look like an AI that genuinely wants
 
 ### Must Feel
 
-✅ Intelligent but warm  
-✅ Professional but not sterile  
-✅ Memorable but not gimmicky  
-✅ Tech-forward but human-centered  
+✅ Intelligent but warm
+✅ Professional but not sterile
+✅ Memorable but not gimmicky
+✅ Tech-forward but human-centered
 
 ### Scalability Requirements
 

@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
   "manifestVersion": "1.24",
-  "version": "4.2.0",
-  "id": "e29bc39c-1f78-4732-ba00-a6cea76db5b1",
+  "version": "4.3.0",
+  "id": "1d5001cc-5300-4942-8d87-29ad83467d09",
   "developer": {
     "name": "Fabio Correa & Alex",
     "websiteUrl": "https://github.com/fabio-correa/alex-cognitive",
@@ -10,7 +10,7 @@
     "termsOfUseUrl": "https://github.com/fabio-correa/alex-cognitive/blob/main/TERMS.md"
   },
   "name": {
-    "short": "Alex Cognitive 🦖",
+    "short": "Alex Cognitive",
     "full": "Alex Cognitive Architecture - Your AI Learning Partner with Memory"
   },
   "description": {

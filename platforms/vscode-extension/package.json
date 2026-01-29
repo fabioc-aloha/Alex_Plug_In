@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "3.3.7",
+  "version": "3.4.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -98,6 +98,56 @@
         "command": "alex.exportForM365",
         "title": "Alex: Export for M365 Copilot",
         "icon": "$(package)"
+      },
+      {
+        "command": "alex.askAboutSelection",
+        "title": "Ask Alex about this",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "alex.saveSelectionAsInsight",
+        "title": "Save to Alex Knowledge",
+        "icon": "$(lightbulb)"
+      },
+      {
+        "command": "alex.searchRelatedKnowledge",
+        "title": "Search Alex for related",
+        "icon": "$(search)"
+      },
+      {
+        "command": "alex.knowledgeQuickPick",
+        "title": "Alex: Search Knowledge",
+        "icon": "$(search)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "alex.contextMenu",
+          "group": "alex@1",
+          "when": "editorHasSelection"
+        }
+      ],
+      "alex.contextMenu": [
+        {
+          "command": "alex.askAboutSelection",
+          "group": "1_ask@1"
+        },
+        {
+          "command": "alex.saveSelectionAsInsight",
+          "group": "2_save@1"
+        },
+        {
+          "command": "alex.searchRelatedKnowledge",
+          "group": "3_search@1"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "alex.contextMenu",
+        "label": "🦖 Alex",
+        "icon": "$(brain)"
       }
     ],
     "configuration": {
@@ -644,6 +694,11 @@
         "command": "alex.openDocs",
         "key": "ctrl+alt+h",
         "mac": "cmd+alt+h"
+      },
+      {
+        "command": "alex.knowledgeQuickPick",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
       }
     ]
   },

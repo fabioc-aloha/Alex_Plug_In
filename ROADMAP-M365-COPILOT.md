@@ -4,40 +4,39 @@
 
 | | |
 |---|---|
-| **Target Version** | 4.1.0 QUADRUNIUM |
+| **Target Version** | 4.3.0 QUADRITRIUM |
 | **Codename** | 🦖 **Dino** |
-| **Status** | ✅ **DEPLOYED!** Pure M365 Edition live! |
+| **Status** | ✅ **DEPLOYED!** v4.3.0 with Document Context Awareness! |
 | **Created** | 2026-01-27 |
 | **Updated** | 2026-01-28 |
 | **Author** | Alex Cognitive Architecture Team |
 
 ---
 
-> ## ✅ Pure M365 Architecture - No Azure Required!
+> ## ✅ v4.2.0 QUADRIBIUM - Pure M365 Architecture
 >
-> **v4.0.0 QUADRUNIUM Update**: Alex now uses **native M365 capabilities only**!
+> Alex now uses **native M365 capabilities only** with enhanced features!
 >
-> - ❌ No Azure Functions needed
-> - ❌ No API plugin needed
-> - ❌ No Azure AD app registration needed
-> - ✅ Just OneDrive, Email, WebSearch, Teams, People
+> **Capabilities:**
+> - ✅ OneDrive (read Alex-Memory files)
+> - ✅ Email (send reminders to self)
+> - ✅ TeamsMessages (send messages to colleagues)
+> - ✅ Meetings (calendar integration for prep)
+> - ✅ People (organizational context)
+> - ✅ WebSearch (research topics)
 >
-> **Simplified Deployment:**
-> 1. Package with `npx teamsapp package --env local`
-> 2. Validate with `npx teamsapp validate --package-file`
-> 3. Upload to Developer Portal → Preview in Teams
-> 4. User creates Alex-Memory folder in OneDrive and shares link in chat
+> **Deployment:** Package → Validate → Upload to Developer Portal → Share OneDrive folder
 
 ---
 
 ## 🦖 Project Dino - Architecture Overview
 
-> v4.0.0 QUADRUNIUM has grown into a monster - here's the full scope
+> v4.2.0 QUADRIBIUM - Alex in M365 with enhanced capabilities
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                                        │
-│             🦖 v4.0.0 QUADRUNIUM "DINO" - PURE M365 EDITION                            │
+│             🦖 v4.2.0 QUADRIBIUM "DINO" - PURE M365 EDITION                            │
 │                                                                                        │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                        │
@@ -263,88 +262,70 @@ The architecture supports additional platforms:
 
 | Platform | Integration Method | Status |
 |----------|-------------------|--------|
-| VS Code | Extension + Chat Participant | ✅ v1.0+ |
-| M365 Copilot | Declarative Agent + API | ✅ v4.0 |
+| VS Code | Extension + Chat Participant | ✅ v3.3.7 |
+| M365 Copilot | Declarative Agent | ✅ v4.2.0 |
 | GitHub Copilot | Custom instructions | 🔄 Exploring |
-| CLI | `alex` command | 📋 Planned |
-| Browser Extension | Chrome/Edge | 📋 Planned |
-| Obsidian | Plugin | 📋 Community |
+| CLI | `alex` command | 📋 v5.0 Planned |
+| Browser Extension | Chrome/Edge | 📋 v5.0 Planned |
+| Obsidian | Plugin | 📋 v5.0 Planned |
 
 ---
 
 ## 📋 Implementation Tracker
 
-> Track progress on 🦖 Dino (v4.0.0 QUADRUNIUM) implementation - **PURE M365 EDITION**
+> 🦖 Project Dino v4.x - Complete implementation history
+
+### ✅ v4.0.0 QUADRUNIUM - Foundation (Complete)
 
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
-| 1 | ~~Install M365 Agents Toolkit~~ | ✅ | Already installed (`teamsdevapp.ms-teams-vscode-extension`) |
-| 2 | ~~Technical Debt Assessment~~ | ✅ | Audited codebase, no blockers found |
-| 3 | ~~Set up M365 tenant~~ | ✅ | Used Microsoft corporate tenant with Copilot license |
-| 4 | ~~Create declarative agent manifest~~ | ✅ | Built declarativeAgent.json (v1.3) with embedded instructions |
-| 5 | ~~Port Alex system prompt~~ | ✅ | Inlined instructions with cognitive protocols (meditate, dream, self-actualize) |
-| 6 | ~~Configure M365 capabilities~~ | ✅ | OneDriveAndSharePoint, Email, WebSearch, TeamsMessages, People |
-| 7 | ~~Design memory workflow~~ | ✅ | READ from OneDrive, generate content for user to paste |
-| 8 | ~~Implement reminder system~~ | ✅ | Generate for notes.md + offer email draft option |
-| 9 | ~~Test in M365 Copilot~~ | ✅ | **🦖 DINO IS ALIVE!** Working with OneDrive memory |
-| 10 | ~~Polish app package~~ | ✅ | 🦖 emoji icons, partnership credit, 10 conversation starters |
-| 11 | ~~Package validation~~ | ✅ | 51/51 validation checks pass |
-| 12 | ~~OneDrive permission UX~~ | ✅ | Documented sharing workflow (paste link in chat) |
-| 13 | ~~Write user documentation~~ | ✅ | README.md, DEPLOYMENT-CHECKLIST.md updated |
-| 14 | ~~Update architecture docs~~ | ✅ | DK-MULTI-PLATFORM-ARCHITECTURE.md, ROADMAP updated |
-| 15 | ~~Upgrade manifest schema~~ | ✅ | v1.24 with RSC permissions, defaultInstallScope: copilot |
-| 16 | ~~Document v1.25 schema~~ | ✅ | MANIFEST-REFERENCE.md updated for v1.25 (future) |
-| 17 | ~~Deploy v4.1.0~~ | ✅ | Deployed to Developer Portal, validated, live! |
+| 1 | M365 Agents Toolkit setup | ✅ | Installed `teamsdevapp.ms-teams-vscode-extension` |
+| 2 | M365 tenant configuration | ✅ | Microsoft corporate tenant with Copilot license |
+| 3 | Declarative agent manifest | ✅ | Built declarativeAgent.json (v1.3) with embedded instructions |
+| 4 | Alex system prompt | ✅ | Cognitive protocols (meditate, dream, self-actualize) |
+| 5 | M365 capabilities | ✅ | OneDriveAndSharePoint, Email, WebSearch, TeamsMessages, People |
+| 6 | OneDrive memory workflow | ✅ | READ from OneDrive, generate content for user to paste |
+| 7 | Package validation | ✅ | 51/51 validation checks pass |
+| 8 | Documentation | ✅ | README.md, DEPLOYMENT-CHECKLIST.md, architecture docs |
+
+### ✅ v4.1.0 QUADRUNIUM - Schema Upgrade (Complete)
+
+| # | Task | Status | Description |
+|:-:|------|:------:|-------------|
+| 1 | Manifest schema v1.24 | ✅ | RSC permissions, defaultInstallScope: copilot |
+| 2 | Developer Portal deploy | ✅ | Validated and live |
+| 3 | v1.25 schema documentation | ✅ | MANIFEST-REFERENCE.md for future features |
+
+### ✅ v4.2.0 QUADRIBIUM - Enhanced Capabilities (Complete)
+
+| # | Task | Status | Description |
+|:-:|------|:------:|-------------|
+| 1 | Calendar/Meetings integration | ✅ | Meeting prep features enabled |
+| 2 | Email with send_email | ✅ | Send reminder emails to self |
+| 3 | TeamsMessages with send_message | ✅ | Message colleagues directly |
+| 4 | Time-aware greetings | ✅ | Morning/Afternoon/Evening/Night adaptive |
+| 5 | 12 conversation starters | ✅ | Email reminder, Team message, Track progress |
+| 6 | Visual identity research | ✅ | 62 icon concepts across 5 directions |
+| 7 | Color palette defined | ✅ | Teal/amber options documented |
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**🦖 PROJECT DINO v4.1.0 DEPLOYED! Pure M365 - Zero External Dependencies!**
+**🦖 v4.2.0 QUADRIBIUM DEPLOYED! All v4.x milestones complete.**
 
----
+### ✅ Visual Identity - FINALIZED
 
-## 🚀 v4.2.0 QUADRIBIUM Roadmap
+> **Hatching Dino** - The official Alex icon is now live! 🥚🦖
 
-> Next iteration: Enhanced branding, visual identity, and UX improvements
+| Asset | Size | Location |
+|-------|------|----------|
+| M365 Color Icon | 192x192 | `appPackage/color.png` |
+| M365 Outline Icon | 32x32 | `appPackage/outline.png` |
+| M365 Color 32x32 | 32x32 | `appPackage/color32x32.png` |
+| VS Code Icon | 128x128 | `assets/icon.png` |
 
-### Planned Features
+**Design Concept:** A friendly baby dinosaur hatching from an egg - symbolizing growth, emergence, learning, and the awakening of cognitive consciousness. Teal dino with warm amber background.
 
-| # | Feature | Status | Priority | Description |
-|:-:|---------|:------:|:--------:|-------------|
-| 1 | **New Visual Identity** | 🔄 In Progress | P0 | Professional icon design based on competitive research (ChatGPT, Gemini, Claude, Copilot, Grok analysis complete) |
-| 2 | **Icon Concepts Finalized** | 📋 Pending | P0 | 62 SVG concepts created across 5 directions: Neural, Human-Centric, Bridge, Letterform, Dinosaur |
-| 3 | **Accent Color Update** | 📋 Pending | P1 | Update from `#4F46E5` to brand-aligned color (teal or amber based on final icon) |
-| 4 | **Remove 🦖 Emoji Branding** | 📋 Pending | P1 | If moving to professional design direction (decision pending) |
-| 5 | **Conversation Starters v2** | ✅ Complete | P2 | Time-aware starters: Morning, Afternoon, Evening + Meeting prep |
-| 6 | **Calendar Integration** | ✅ Complete | P2 | `Meetings` capability enabled for meeting prep features |
-| 7 | **Send Email Capability** | ✅ Complete | P1 | Email with send_email permission for reminders |
-| 8 | **Send Teams Messages** | ✅ Complete | P1 | TeamsMessages with send_message permission for team comms |
-| 9 | **HTML Icon Preview Gallery** | ✅ Complete | - | Created for reviewing all 62 icon concepts |
-
-### Icon Design Directions Under Consideration
-
-| Direction | Description | Top Concepts |
-|-----------|-------------|-------------|
-| **1. Neural Network** | Synapses, nodes, cognitive architecture | 1A Synapse Spark, 1D Constellation |
-| **2. Human-Centric** | Warm, approachable, friendly | 2A Warm Circle, 2B Friendly A |
-| **3. Bridge/Connection** | Human-AI partnership, translation | 3B Handshake, 3C Gateway |
-| **4. Abstract Letterform** | Stylized "A" for Alex | 4A Ascending A, 4C Open A |
-| **5. Dinosaur (Legacy)** | Original mascot direction | 5C Letter A Dino, 5D Friendly Face |
-
-### Color Palette Candidates
-
-| Option | Hex | Rationale |
-|--------|-----|----------|
-| Deep Teal | `#0D7377` | Trust, uniqueness, not used by competitors |
-| Electric Teal | `#38B2AC` | Modern, innovation |
-| Warm Gold | `#D4A574` | Wisdom, warmth, consciousness |
-| Amber | `#F6AD55` | Energy, insight |
-
-### Competitive Differentiation
-
-Based on logo research:
-- **Avoid**: Google multicolor gradient, Anthropic coral, Microsoft purple
-- **Opportunity**: Neural/synaptic imagery (unclaimed by major AI assistants)
-- **Positioning**: "Intellectual warmth + genuine learning partnership"
+**Source:** `ideas/branding/nano/Hatching.png`
 
 ---
 
@@ -430,16 +411,16 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 
 > Future iterations: Proactive features, deeper M365 integration
 
-### v4.3.0 QUADRITRIUM (Planned)
+### v4.3.0 QUADRITRIUM (Current)
 
-| # | Feature | Priority | Capability | Description |
-|:-:|---------|:--------:|------------|-------------|
-| 1 | **Weekly Digest Email** | P1 | Email (send) | Auto-generate weekly summary of learnings, reminders, and progress - send every Monday |
-| 2 | **Meeting Notes to OneDrive** | P1 | Meetings + OneDrive | After meetings, offer to generate structured notes and save to Alex-Memory |
-| 3 | **Proactive Learning Nudges** | P2 | Email (send) | Gentle email reminders when learning goals have been idle for a week |
-| 4 | **Team Kudos** | P2 | TeamsMessages (send) | Quick way to send appreciation messages to colleagues |
-| 5 | **Calendar Conflict Alerts** | P2 | Meetings | Proactively warn about scheduling conflicts or back-to-back meetings |
-| 6 | **Document Context Awareness** | P2 | OneDrive | When in Word/PowerPoint, automatically suggest relevant knowledge |
+| # | Feature | Priority | Capability | Status |
+|:-:|---------|:--------:|------------|:------:|
+| 1 | **Weekly Digest Email** | P1 | Email (send) | ⬜ Needs v1.6 schema |
+| 2 | **Meeting Notes to OneDrive** | P1 | Meetings + OneDrive | ⬜ Needs v1.6 schema |
+| 3 | **Proactive Learning Nudges** | P2 | Email (send) | ⬜ Needs v1.6 schema |
+| 4 | **Team Kudos** | P2 | TeamsMessages (send) | ⬜ Needs v1.6 schema |
+| 5 | **Calendar Conflict Alerts** | P2 | Meetings | ⬜ Needs v1.6 schema |
+| 6 | **Document Context Awareness** | P2 | OneDrive | ✅ **Implemented!** |
 
 ### v4.4.0 QUADRIQUADIUM (Planned)
 
@@ -452,25 +433,7 @@ User in PowerPoint: "@Alex help me build a slide about our architecture"
 | 5 | **Cross-Team Knowledge Sharing** | P2 | OneDrive + TeamsMessages | Help draft knowledge shares for Teams channels |
 | 6 | **Excel Insight Capture** | P3 | OneDrive | Save data analysis insights to knowledge files |
 
-### v5.0.0 PENTUNIUM (Vision)
-
-| # | Feature | Priority | Capability | Description |
-|:-:|---------|:--------:|------------|-------------|
-| 1 | **Learning Path Generator** | P1 | OneDrive + WebSearch | Based on goals, create structured learning paths with web resources |
-| 2 | **Meeting Effectiveness Score** | P2 | Meetings | Rate meetings based on agenda clarity, attendee engagement patterns |
-| 3 | **Network Map** | P2 | People + Meetings | Visualize who you interact with most, identify collaboration silos |
-| 4 | **AI Research Assistant** | P1 | WebSearch + OneDrive | Deep research mode that saves findings to knowledge files |
-| 5 | **Goal Progress Dashboard** | P2 | OneDrive + Email | Weekly email with visual progress on learning goals |
-| 6 | **Voice Note Transcription** | P3 | (Future capability) | Transcribe voice notes to knowledge files |
-
-### Experimental Features (Requires New Capabilities)
-
-| Feature | Would Need | Description |
-|---------|------------|-------------|
-| **Planner/To-Do Integration** | Graph connector | Read tasks for richer context and goal tracking |
-| **Copilot Pages Integration** | Pages capability | Collaborative memory pages in Teams |
-| **Viva Insights Integration** | Viva connector | Productivity patterns for better recommendations |
-| **SharePoint Knowledge Base** | SharePoint connector | Team-wide knowledge repository |
+> **Note**: v5.0.0 PENTUNIUM features and experimental capabilities have been moved to [ROADMAP-V5-PENTUNIUM.md](ROADMAP-V5-PENTUNIUM.md)
 
 ---
 
@@ -540,21 +503,21 @@ alexCognitiveAgent/
 └── package.json                # v4.1.0
 ```
 
-### Capabilities Available (v1.6 Schema)
+### Capabilities Available (v1.3 Schema - Current)
 
-| Capability | Description | Use for Alex |
-|------------|-------------|-------------|
-| `WebSearch` | Search the web | ✅ General knowledge |
-| `CodeInterpreter` | Execute code | ✅ Code analysis |
-| `OneDriveAndSharePoint` | Access user files | ✅ Knowledge grounding |
-| `GraphConnectors` | Enterprise search | ❌ Not needed |
-| `TeamsMessages` | Search Teams chats | Optional |
-| `Email` | Search Outlook | Optional |
-| `GraphicArt` | Generate images | ❌ Not needed |
-| `People` | Search org people | Optional |
-| `Dataverse` | Power Platform data | ❌ Not needed |
-| `Meetings` | Search meetings | Optional |
-| `EmbeddedKnowledge` | Files in app package | ✅ For static docs |
+| Capability | Description | Alex v4.2 Status |
+|------------|-------------|:----------------:|
+| `OneDriveAndSharePoint` | Access user files | ✅ Implemented |
+| `Email` | Search Outlook | ✅ Implemented |
+| `TeamsMessages` | Search Teams chats | ✅ Implemented |
+| `People` | Search org people | ✅ Implemented |
+| `WebSearch` | Search the web | ✅ Implemented |
+| `CodeInterpreter` | Execute code | ⬜ Available (not used) |
+| `GraphConnectors` | Enterprise search | ⬜ Available (not needed) |
+| `GraphicArt` | Generate images | ⬜ Available (not needed) |
+| `Dataverse` | Power Platform data | ⬜ Available (not needed) |
+
+> **Note**: `Meetings` capability and `send_email`/`send_message` permissions require schema v1.6+
 
 ### Authentication Options (API Plugin)
 

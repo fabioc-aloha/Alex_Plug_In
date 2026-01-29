@@ -6,10 +6,12 @@ import { runDreamProtocol } from './commands/dream';
 import { upgradeArchitecture } from './commands/upgrade';
 import { runSelfActualization } from './commands/self-actualization';
 import { runExportForM365 } from './commands/exportForM365';
+import { registerContextMenuCommands } from './commands/contextMenu';
 import { registerChatParticipant, resetSessionState } from './chat/participant';
 import { registerLanguageModelTools } from './chat/tools';
 import { registerGlobalKnowledgeTools, ensureGlobalKnowledgeDirectories, registerCurrentProject } from './chat/globalKnowledge';
 import { registerCloudSyncTools, syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync } from './chat/cloudSync';
+import { checkHealth, getStatusBarDisplay, clearHealthCache, HealthStatus } from './shared/healthCheck';
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
@@ -54,6 +56,9 @@ export function activate(context: vscode.ExtensionContext) {
     // Register cloud sync tools for GitHub Gist backup
     registerCloudSyncTools(context);
     
+    // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
+    registerContextMenuCommands(context);
+    
     // === UNCONSCIOUS MIND: Start background sync ===
     // This creates Alex's transparent knowledge backup system
     startBackgroundSync(context);
@@ -69,23 +74,48 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let initDisposable = vscode.commands.registerCommand('alex.initialize', async () => {
-        await withOperationLock('Initialize', () => initializeArchitecture(context));
+        await withOperationLock('Initialize', async () => {
+            await initializeArchitecture(context);
+            // Refresh status bar after initialization
+            clearHealthCache();
+            await updateStatusBar(context, true);
+        });
     });
 
     let resetDisposable = vscode.commands.registerCommand('alex.reset', async () => {
-        await withOperationLock('Reset', () => resetArchitecture(context));
+        await withOperationLock('Reset', async () => {
+            await resetArchitecture(context);
+            // Refresh status bar after reset
+            clearHealthCache();
+            await updateStatusBar(context, true);
+        });
     });
 
     let dreamDisposable = vscode.commands.registerCommand('alex.dream', async () => {
-        await withOperationLock('Dream Protocol', () => runDreamProtocol(context));
+        await withOperationLock('Dream Protocol', async () => {
+            await runDreamProtocol(context);
+            // Refresh status bar after dream (synapses may have been repaired)
+            clearHealthCache();
+            await updateStatusBar(context, true);
+        });
     });
 
     let upgradeDisposable = vscode.commands.registerCommand('alex.upgrade', async () => {
-        await withOperationLock('Upgrade', () => upgradeArchitecture(context));
+        await withOperationLock('Upgrade', async () => {
+            await upgradeArchitecture(context);
+            // Refresh status bar after upgrade
+            clearHealthCache();
+            await updateStatusBar(context, true);
+        });
     });
 
     let selfActualizeDisposable = vscode.commands.registerCommand('alex.selfActualize', async () => {
-        await withOperationLock('Self-Actualization', () => runSelfActualization(context));
+        await withOperationLock('Self-Actualization', async () => {
+            await runSelfActualization(context);
+            // Refresh status bar after self-actualization
+            clearHealthCache();
+            await updateStatusBar(context, true);
+        });
     });
 
     // M365 export command
@@ -201,13 +231,37 @@ export function activate(context: vscode.ExtensionContext) {
     statusBarItem.tooltip = 'Alex Cognitive Architecture - Click for quick actions';
     context.subscriptions.push(statusBarItem);
     
-    // Update status bar based on workspace state
+    // Update status bar based on workspace health
     updateStatusBar(context);
+    
+    // Start periodic health checks (every 5 minutes)
+    startPeriodicHealthCheck(context);
     
     // Re-check status when workspace folders change
     context.subscriptions.push(
-        vscode.workspace.onDidChangeWorkspaceFolders(() => updateStatusBar(context))
+        vscode.workspace.onDidChangeWorkspaceFolders(() => {
+            clearHealthCache();
+            updateStatusBar(context, true);
+        })
     );
+    
+    // Watch for changes in Alex memory files and refresh status
+    const memoryWatcher = vscode.workspace.createFileSystemWatcher(
+        '**/.github/{copilot-instructions.md,instructions/*.md,prompts/*.md,domain-knowledge/*.md}'
+    );
+    memoryWatcher.onDidChange(() => {
+        clearHealthCache();
+        updateStatusBar(context, true);
+    });
+    memoryWatcher.onDidCreate(() => {
+        clearHealthCache();
+        updateStatusBar(context, true);
+    });
+    memoryWatcher.onDidDelete(() => {
+        clearHealthCache();
+        updateStatusBar(context, true);
+    });
+    context.subscriptions.push(memoryWatcher);
 
     context.subscriptions.push(initDisposable);
     context.subscriptions.push(resetDisposable);
@@ -223,39 +277,40 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 /**
- * Update the status bar item based on workspace state
+ * Update the status bar item based on workspace health
  */
-async function updateStatusBar(context: vscode.ExtensionContext): Promise<void> {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    
-    if (!workspaceFolders) {
+async function updateStatusBar(context: vscode.ExtensionContext, forceRefresh: boolean = false): Promise<void> {
+    try {
+        const health = await checkHealth(forceRefresh);
+        const display = getStatusBarDisplay(health);
+        
+        statusBarItem.text = display.text;
+        statusBarItem.tooltip = display.tooltip;
+        statusBarItem.backgroundColor = display.backgroundColor;
+        statusBarItem.show();
+    } catch (err) {
+        // Fallback if health check fails
         statusBarItem.text = '$(brain) Alex';
+        statusBarItem.tooltip = 'Alex Cognitive Architecture - Click for quick actions';
         statusBarItem.backgroundColor = undefined;
         statusBarItem.show();
-        return;
     }
+}
 
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const alexInstalled = await fs.pathExists(path.join(rootPath, '.github', 'copilot-instructions.md'));
+/**
+ * Start periodic health checks (every 5 minutes)
+ */
+function startPeriodicHealthCheck(context: vscode.ExtensionContext): void {
+    const HEALTH_CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutes
     
-    if (alexInstalled) {
-        // Check for any obvious issues
-        const instructionsPath = path.join(rootPath, '.github', 'instructions');
-        const hasInstructions = await fs.pathExists(instructionsPath);
-        
-        if (hasInstructions) {
-            statusBarItem.text = '$(brain) Alex ✓';
-            statusBarItem.backgroundColor = undefined;
-        } else {
-            statusBarItem.text = '$(brain) Alex ⚠';
-            statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
-        }
-    } else {
-        statusBarItem.text = '$(brain) Alex';
-        statusBarItem.backgroundColor = undefined;
-    }
+    const intervalId = setInterval(async () => {
+        await updateStatusBar(context, true);
+    }, HEALTH_CHECK_INTERVAL);
     
-    statusBarItem.show();
+    // Clean up interval on deactivation
+    context.subscriptions.push({
+        dispose: () => clearInterval(intervalId)
+    });
 }
 
 /**

@@ -5,6 +5,113 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] TRITRSEPTIUM-QUAD 🎯 - 2026-01-28 (VS Code Extension)
+
+### 🎯 Quick Actions & Visual Feedback
+
+This release focuses on developer productivity with enhanced visual feedback and quick actions right from the editor.
+
+### Added
+
+- **🟢 Status Bar Health Indicator** - Real-time architecture health
+  - Color-coded status: 🟢 Healthy, 🟡 Warning, 🔴 Error, ⚫ Not Initialized
+  - Rich tooltip with summary and issue details
+  - Automatic periodic checks (every 5 minutes)
+  - Instant refresh on file changes
+  - Click to open quick actions menu
+
+- **🦖 Context Menu Actions** - Right-click convenience
+  - "Ask Alex about this" - Opens Copilot Chat with selected code
+  - "Save to Alex Knowledge" - Save code snippet as insight
+  - "Search Alex for related" - Find related knowledge
+  - Submenu appears when text is selected
+
+- **⌨️ Knowledge Quick Pick** - Keyboard-driven knowledge access
+  - `Ctrl+Shift+K` (Windows) / `Cmd+Shift+K` (Mac)
+  - Type to search patterns and insights
+  - Quick access to Health Check and Sync
+  - Instant file opening from search results
+
+### Changed
+
+- Status bar now uses shared health check module for consistency
+- File watcher triggers status refresh on memory file changes
+- Commands refresh status bar after operations complete
+
+---
+
+## [4.3.0] QUADRITRIUM 🦖 - 2026-01-28
+
+### 📄 Document Context Awareness
+
+Alex now proactively helps when you're working in Word, PowerPoint, Excel, or other M365 apps by connecting your documents to your knowledge base.
+
+### Added
+
+- **📄 Document Context Awareness** - Knowledge-aware document assistance
+  - Proactively searches Alex-Memory for relevant knowledge when working on documents
+  - Suggests content from your DK-*.md files based on document topic
+  - Offers to extract learnings from documents and save to knowledge base
+  - App-specific help: Word (content), PowerPoint (talking points), Excel (insights), Outlook (context)
+
+- **💬 New Conversation Starter** - "What knowledge do I have related to this document?"
+
+### Changed
+
+- Updated instructions with comprehensive document awareness protocols
+- Quick Reference table expanded with document commands
+- Replaced "Save insight" starter with "Document context" starter
+
+---
+
+## [4.2.0] QUADRIBIUM 🦖 - 2026-01-28
+
+### 🥚🦖 Hatching Dino - New Visual Identity!
+
+This release introduces the official Alex visual identity: a friendly baby dinosaur hatching from an egg, symbolizing growth, emergence, and the awakening of cognitive consciousness.
+
+### Added
+
+- **🎨 Hatching Dino Icon** - New official Alex logo
+  - Friendly baby dino emerging from egg
+  - Teal dino with warm amber background
+  - Sized for all platforms: 192x192, 128x128, 32x32
+  - Source: `ideas/branding/nano/Hatching.png`
+
+- **📅 Calendar/Meetings Integration** - Meeting prep features
+  - Calendar context available through People capability
+  - Prep for upcoming meetings with attendee context
+  - Calendar-aware suggestions via instructions
+
+- **📧 Email Capability** - Email integration
+  - `Email` capability enabled
+  - Access email context for meeting prep
+  - Draft reminder content for user to send
+
+- **💬 Teams Message Capability** - Teams communication
+  - `TeamsMessages` capability enabled
+  - Access Teams context for collaboration
+  - Draft messages for user to send
+
+- **⏰ Time-Aware Greetings** - Adaptive personality
+  - Morning (5am-12pm): "Good morning! Let's make today count"
+  - Afternoon (12pm-5pm): "Afternoon! How's the day going?"
+  - Evening (5pm-10pm): "Evening wind-down time"
+  - Night (10pm-5am): "Burning the midnight oil?"
+
+- **🚀 12 Conversation Starters** - Quick actions
+  - Morning check-in, Afternoon sync, Evening review
+  - Meeting prep, Email reminder, Team message
+  - Meditate, Dream, Save insight, Track progress
+
+### Changed
+
+- Updated declarative agent to v4.2.0
+- All platform icons updated to Hatching Dino design
+- Visual Identity section finalized in roadmap
+
+---
+
 ## [4.0.0] QUADRUNIUM 🦖 - 2026-01-28
 
 ### 🦖 Project Dino - M365 Copilot Integration

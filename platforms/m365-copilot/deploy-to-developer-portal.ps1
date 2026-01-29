@@ -2,9 +2,14 @@
 # Automated deployment of Alex M365 Agent to Developer Portal
 
 param(
-    [string]$PackagePath = "c:\Development\alex-m365-agent\appPackage\build\appPackage.dev.zip",
+    [string]$PackagePath,
     [string]$AppId = "e29bc39c-1f78-4732-ba00-a6cea76db5b1"
 )
+
+# Default package path relative to script location
+if (-not $PackagePath) {
+    $PackagePath = Join-Path $PSScriptRoot "appPackage\build\appPackage.local.zip"
+}
 
 Write-Host "🦖 Alex M365 Agent Deployment Script" -ForegroundColor Cyan
 Write-Host "=====================================" -ForegroundColor Cyan
@@ -87,6 +92,9 @@ catch {
         Write-Host "   2. Find: Alex Cognitive (or import new)" -ForegroundColor White
         Write-Host "   3. App package → Import app package" -ForegroundColor White
         Write-Host "   4. Upload: $PackagePath" -ForegroundColor White
+        Write-Host ""
+        Write-Host "🌐 Opening Developer Portal..." -ForegroundColor Yellow
+        Start-Process "https://dev.teams.microsoft.com/apps"
         Write-Host ""
         Write-Host "Option 2: Install Teams Toolkit CLI" -ForegroundColor Cyan
         Write-Host "   npm install -g @microsoft/teamsapp-cli" -ForegroundColor White
