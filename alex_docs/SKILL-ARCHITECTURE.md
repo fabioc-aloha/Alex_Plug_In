@@ -378,35 +378,6 @@ Keep these as-is (don't migrate to skills):
 - Contains dated achievement with specific corrections? → Move to `alex_docs/` as milestone
 - Contains reusable patterns/templates? → Migrate to skill
 
-### Lint-First Writing
-
-**Pattern**: Write markdown that passes linting on first attempt.
-
-**Key Rules** (captured in `lint-clean-markdown` skill):
-
-- MD032: Blank lines around lists ("lists breathe")
-- MD031: Blank lines around code blocks ("code breathes")
-- MD036: No bold text as pseudo-headings (use `##` or `>`)
-- MD040: Always specify language on fenced code blocks
-
-**Anti-pattern**: Nested code blocks — you cannot show "wrong" examples inside fenced blocks. Use inline code or descriptions instead.
-
-### ASCII Art Character Strategy
-
-**Pattern**: Unicode boxes + ASCII arrows + obsessive line counting.
-
-**Use**:
-
-- Box drawing: `┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼`
-- Arrows: `v ^ < > ---> <-->`
-
-**Avoid**:
-
-- Unicode arrows: `▼ ▲ ◄ ►` (inconsistent width)
-- Emojis in boxes: `✅ ❌` (render as 2 chars)
-
-**Validation**: PowerShell line-width checking, not visual inspection.
-
 ---
 
 ## Maintenance Model
