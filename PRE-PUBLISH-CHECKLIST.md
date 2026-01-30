@@ -23,14 +23,10 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 **Version maintained in 3 locations only** (minimal overhead):
 
 - [ ] **package.json** - `"version": "X.Y.Z"` (required for VS Code)
-- [ ] **CHANGELOG.md** - `## [X.Y.Z] CODENAME - YYYY-MM-DD` at top
-- [ ] **copilot-instructions.md** - Header line 4: `**Version**: X.Y.Z CODENAME`
+- [ ] **CHANGELOG.md** - `## [X.Y.Z] - YYYY-MM-DD` at top
+- [ ] **copilot-instructions.md** - Header line 4: `**Version**: X.Y.Z`
 
 **README badges**: No longer include version numbers - just link to marketplace.
-
-**Naming Convention**: 0=nil, 1=un, 2=bi, 3=tri, 4=quad, 5=pent, 6=hex, 7=sept, 8=oct, 9=enn
-
-- Example: 3.3.6 = TRITRHEXIUM (tri-tri-hex)
 
 **VS Code Marketplace Versioning:**
 - Pre-release: odd minor (3.7.x, 3.9.x) with `--pre-release` flag

@@ -6,8 +6,8 @@
 |---|---|
 | **Created** | 2026-01-29 |
 | **Revised** | 2026-01-30 |
-| **Current Version** | 3.5.3 (protected) |
-| **Target Version** | 3.6.0 TRITRSEPTIUM-HEX |
+| **Current Version** | 3.7.0 |
+| **Target Version** | 3.8.0 (Stable Release) |
 | **Codename** | 🌅 **Dawn** (New beginning with lessons learned) |
 | **Status** | 🛡️ Kill Switch Validated |
 

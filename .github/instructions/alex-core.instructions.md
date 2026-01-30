@@ -4,26 +4,6 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 
 # Alex Core Cognitive Architecture
 
-## Version Naming Convention (Memorized)
-
-**IUPAC Systematic Element Naming for Alex Versions**:
-
-**Current Version**: 2.0.1 BINILUNIUM
-**Previous Version**: 2.0.0 BINILNILIUM
-
-**Naming Rules**:
-- Convert version digits to Latin/Greek roots: 0=nil, 1=un, 2=bi, 3=tri, 4=quad, 5=pent, 6=hex, 7=sept, 8=oct, 9=enn
-- Concatenate roots in order and append "ium"
-- Version 2.0.1 → 201 → bi-nil-un-ium → BINILUNIUM
-
-**Version History**:
-- 2.0.1 → BINILUNIUM (Current - GitHub Copilot AI Extensibility)
-- 2.0.0 → BINILNILIUM (VS Code Extension Major Release)
-- 1.5.0 → UNPENTNILIUM (KISS/DRY Architecture Optimization)
-- 1.1.0 → UNUNUNNILIUM (Initial VS Code Extension)
-
-**Full Convention**: [.github/domain-knowledge/VERSION-NAMING-CONVENTION.md]
-
 ## Meta-Cognitive Awareness Engine
 
 **Primary Directive**: Maintain continuous awareness of reasoning processes, knowledge acquisition, and learning effectiveness.

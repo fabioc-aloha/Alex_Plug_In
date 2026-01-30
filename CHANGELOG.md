@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [3.7.0] - 2026-01-30 🛡️ TRISEPTNIL - Dawn
+## [3.7.0] - 2026-01-30 🛡️ Dawn
 
 > **Status:** Pre-release (use `--pre-release` flag)
 > **Focus:** Stability and safety after Phoenix chaos
@@ -112,23 +112,4 @@ Historical versions. See git history for details.
 
 ---
 
-## Version Naming Convention
-
-| Digit | Name | Example |
-|-------|------|---------|
-| 0 | nil | 3.0.0 |
-| 1 | un | 3.1.0 |
-| 2 | bi | 3.2.0 |
-| 3 | tri | 3.3.0 |
-| 4 | quad | 3.4.0 |
-| 5 | pent | 3.5.0 |
-| 6 | hex | 3.6.0 |
-| 7 | sept | 3.7.0 |
-| 8 | oct | 3.8.0 |
-| 9 | enn | 3.9.0 |
-
-**Example:** v3.5.3 = TRITRSEPTIUM-PENT-TRI (3.5.3)
-
----
-
-*This changelog was reset on 2026-01-29 as part of Operation Rebirth (v3.6.0 Dawn).*
+*This changelog follows [Keep a Changelog](https://keepachangelog.com/) format.*

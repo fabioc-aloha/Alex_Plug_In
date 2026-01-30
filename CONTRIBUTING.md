@@ -108,24 +108,6 @@ Alex: Dream (Neural Maintenance)
 
 ## File Naming Conventions
 
-### Version Naming (IUPAC Systematic)
-Follow the IUPAC periodic table naming convention:
-- **0** = nil
-- **1** = un
-- **2** = bi
-- **3** = tri
-- **4** = quad
-- **5** = pent
-- **6** = hex
-- **7** = sept
-- **8** = oct
-- **9** = enn
-
-**Examples**:
-- v1.0.0 = UNNILNILIUM
-- v1.0.4 = UNNILQUADIUM
-- v2.3.5 = BITRIPENTIUM
-
 ### File Type Conventions
 
 | Type | Pattern | Purpose |

@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.3.7 TRITRSEPTIUM |
-| **Current Heirs** | VS Code (3.5.3 broken), M365 (v1.6 working) |
-| **Target** | 4.0.0 QUADRUNIUM (Trust/Epistemic Integrity) |
+| **Current Master Version** | 3.7.0 |
+| **Current Heirs** | VS Code (3.7.0), M365 (v1.6) |
+| **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
