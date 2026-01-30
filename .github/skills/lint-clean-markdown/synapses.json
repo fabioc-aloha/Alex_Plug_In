@@ -1,0 +1,40 @@
+{
+    "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
+    "skill": "lint-clean-markdown",
+    "version": "1.0.0",
+    "description": "Write markdown that passes linting on first attempt",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "type": "complements",
+            "strength": "strong",
+            "context": "Mermaid diagrams must also follow lint rules"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "enables",
+            "strength": "strong",
+            "context": "All architecture documentation must be lint-clean"
+        },
+        {
+            "target": "DK-DOCUMENTATION-EXCELLENCE.md",
+            "type": "implements",
+            "strength": "moderate",
+            "context": "Lint-clean is baseline for documentation excellence"
+        }
+    ],
+    "triggers": [
+        "creating markdown file",
+        "editing documentation",
+        "writing lists or tables",
+        "adding code blocks"
+    ],
+    "rules": {
+        "MD032": "Blank lines around lists",
+        "MD031": "Blank lines around code blocks",
+        "MD022": "Blank lines around headings",
+        "MD004": "Use dash for unordered lists",
+        "MD009": "No trailing whitespace",
+        "MD047": "Single newline at file end"
+    }
+}

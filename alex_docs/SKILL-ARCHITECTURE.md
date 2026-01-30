@@ -267,6 +267,8 @@ Keep these as-is (don't migrate to skills):
 | ------------- | --------- | ------ | ----- |
 | `DK-MARKDOWN-MERMAID-MASTERY.md` | `markdown-mermaid` | ✅ Complete | Initial skill |
 | `DK-ADVANCED-DIAGRAMMING.md` | `markdown-mermaid` | ✅ Consolidated | Merged into existing skill (KISS) |
+| *(new)* | `architecture-refinement` | ✅ Created | Meta-skill for maintaining alex_docs |
+| *(new)* | `lint-clean-markdown` | ✅ Created | Write markdown without lint errors |
 
 ### 📋 Candidates for Migration (Heir-Portable)
 
