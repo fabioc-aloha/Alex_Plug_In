@@ -755,7 +755,7 @@ DK-APPROPRIATE-RELIANCE
 
 ---
 
-## � Options Under Evaluation
+## 🔮 Options Under Evaluation
 
 ### Configurable Storage Paths (Cloud Sync Enhancement)
 
@@ -850,7 +850,7 @@ DK-APPROPRIATE-RELIANCE
 
 ---
 
-## �🔄 Migration Path
+## 🔄 Migration Path
 
 ### From v3.4.x to v4.0.0
 

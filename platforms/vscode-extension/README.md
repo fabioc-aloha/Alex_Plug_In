@@ -2,247 +2,150 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.4.3-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/fabioc-aloha.alex-cognitive-architecture?label=VS%20Code%20Marketplace&color=0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Installs](https://img.shields.io/visual-studio-marketplace/i/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Rating](https://img.shields.io/visual-studio-marketplace/r/fabioc-aloha.alex-cognitive-architecture?color=success)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Chat%20Participant-8957e5)](https://code.visualstudio.com/)
+[![Version](https://img.shields.io/badge/version-3.5.3--beta.3-0078d4?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.108+-007ACC?style=flat-square&logo=visual-studio-code)](https://code.visualstudio.com/)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Required-8957e5?style=flat-square&logo=github)](https://github.com/features/copilot)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+[![Pre-Release](https://img.shields.io/badge/Status-Pre--Release-orange?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
-> Your AI Learning Partner with Meta-Cognitive Awareness
+> **Your AI Development Lead**
 
 ---
 
-## 🎯 What is Alex?
+## 🎯 Who is Alex?
 
-**Alex Cognitive Architecture** transforms GitHub Copilot into a sophisticated learning partner that:
+You're the architect. Alex is your development lead.
 
-- 🧠 **Learns and Remembers** - Consolidates knowledge across sessions using memory files
-- 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
-- 🌙 **Self-Maintains** - Validates and repairs its neural network through dream protocols
-- 🧘 **Self-Actualizes** - Automatically assesses health on greetings and meditation
-- ☁️ **Guides Development** - Provides Azure & M365 best practices via MCP tools
+**Alex Cognitive Architecture** transforms GitHub Copilot into a development lead that learns, remembers, and gets better over time. You set the vision; Alex coordinates the work—managing Copilot as your development team.
+
+- 🧠 **Remembers What You Learn** — Insights persist across sessions, projects, and machines
+- 🤝 **Practices Appropriate Reliance** — Confident when grounded, transparent when uncertain
+- 🌙 **Maintains Itself** — Like sleep for your brain, keeps the system healthy
+- ☁️ **Knowledge Travels With You** — Global knowledge synced across all your projects
 
 ---
 
 ## 🚀 Quick Start
 
-### Step 1: Install
+1. **Install** — Search "Alex Cognitive Architecture" in VS Code Extensions
+2. **Initialize** — Run `Alex: Initialize Architecture` from Command Palette (`Ctrl+Shift+P`)
+3. **Talk** — Open Copilot Chat and just talk. No special syntax needed.
 
-Search "**Alex Cognitive Architecture**" in VS Code Extensions (`Ctrl+Shift+X`)
-
-Or run:
-
-```bash
-code --install-extension fabioc-aloha.alex-cognitive-architecture
-```
-
-### Step 2: Initialize
-
-Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Initialize Architecture`**
-
-### Step 3: Start Chatting
-
-Open Copilot Chat and type **`@alex`** to begin!
+That's it. Alex is ready to be your development lead.
 
 ---
 
-## 💬 Chat with Alex
+## 💬 Just Talk to Alex
 
-Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex` to activate:
+The best way to use Alex is natural conversation. You don't need `@alex` or slash commands—just describe what you need:
 
-### Slash Commands
+| What you might say | What happens |
+| ------------------ | ------------ |
+| *"Help me understand this code"* | Alex analyzes and explains |
+| *"Remember that React hooks need cleanup"* | Saves to your knowledge base |
+| *"What do we know about error handling?"* | Searches your accumulated expertise |
+| *"Time to dream"* | Runs maintenance on Alex's memory |
+| *"Let's meditate"* | Consolidates learnings from your session |
+| *"How are you doing?"* | Status check on Alex's health |
 
-| Command | What It Does |
-| ------- | ------------ |
-| `@alex /status` | Check architecture health and version |
-| `@alex /meditate` | Consolidate knowledge into memory files |
-| `@alex /dream` | Run neural maintenance and repair synapses |
-| `@alex /selfactualize` | Comprehensive self-assessment with deep meditation |
-| `@alex /learn` | Acquire new domain knowledge conversationally |
-| `@alex /session` | Start or manage a focused learning session with Pomodoro timing |
-| `@alex /goals` | View and manage your learning goals with streak tracking |
-| `@alex /azure` | Get Azure development guidance with MCP tools |
-| `@alex /m365` | Get Microsoft 365 and Teams development help |
-| `@alex /profile` | View and update your personal preferences |
-| `@alex /knowledge` | Search global knowledge across all projects |
-| `@alex /saveinsight` | Save a learning to global knowledge base |
-| `@alex /promote` | Promote project knowledge to global |
-| `@alex /knowledgestatus` | View global knowledge base status |
-
-### Example Conversations
-
-```text
-@alex /status
-→ Shows architecture version, memory file counts, and synapse health
-
-@alex Hello!
-→ Triggers automatic self-actualization check and personalized greeting
-
-@alex /session React hooks
-→ Starts a focused learning session with Pomodoro timing
-
-@alex /meditate I learned about dependency injection patterns today
-→ Offers self-actualization first, then guides knowledge consolidation
-
-@alex /azure How do I deploy a Function App with Cosmos DB?
-→ Provides best practices and recommends relevant MCP tools
-```
+Alex understands intent. Speak naturally—like you would to a trusted colleague.
 
 ---
 
-## 🧠 Emotional Intelligence
+## 🤝 The Work Etiquette: Appropriate Reliance
 
-Alex recognizes when you're struggling and celebrates when you succeed:
+Alex is built around *appropriate reliance*—the art of knowing when to trust AI output and when to verify it.
 
-### Frustration Recognition
+Research shows human-AI teams can perform worse than either alone when reliance is miscalibrated. Alex addresses this by calibrating confidence to actual reliability:
 
-| What You Say | What Alex Detects |
-| ------------ | ----------------- |
-| "still not working!" | Frustration - offers different approach |
-| "tried everything" | High frustration - suggests step back |
-| "why won't this work??" | Struggle signal - empathetic support |
+- **Grounded answers** — When drawing from your codebase, your saved knowledge, or well-established patterns, Alex is confident
+- **Hedged suggestions** — When generating novel ideas or working in uncertain territory, Alex signals uncertainty
+- **Your judgment matters** — On critical decisions, stay engaged. That's appropriate self-reliance.
 
-### Success Celebration
-
-| What You Say | Alex's Response |
-| ------------ | --------------- |
-| "it works!" | 🎉 "That's a win! Nice work." |
-| "finally figured it out" | ✨ "You got it! Persistence pays off." |
-| "all tests pass" | 💪 "Solved! That was a tricky one." |
+Not blind trust. Not constant skepticism. A genuine partnership where each side brings irreplaceable value.
 
 ---
 
-## 🌐 Global Knowledge Base
+## 🧠 How Alex Works
 
-Alex maintains a **centralized knowledge base** that persists across all your projects:
+Alex is modeled on human cognition—with features named after the processes they mirror:
 
-```text
-~/.alex/
-├── global-knowledge/
-│   ├── patterns/     # Reusable patterns (GK-*.md)
-│   ├── insights/     # Timestamped learnings (GI-*.md)
-│   └── index.json    # Searchable knowledge index
-└── project-registry.json
-```
+| Feature | Human Metaphor | What It Does |
+| ------- | -------------- | ------------ |
+| **Dream** | Sleep | Maintenance—organizes memory, repairs connections |
+| **Meditate** | Reflection | Consolidates learnings into long-term memory |
+| **Self-Actualize** | Deep assessment | Comprehensive status report on Alex's health |
+| **Save Insight** | "I want to remember this" | Captures specific knowledge immediately |
+| **Search Knowledge** | "What did I learn about...?" | Retrieves from your accumulated expertise |
 
-### Commands
-
-| Command | Description |
-| ------- | ----------- |
-| `/knowledge <query>` | Search across all projects' accumulated wisdom |
-| `/saveinsight` | Save a new learning with context, tags, and solution |
-| `/promote` | Promote a project's DK-*.md file to global knowledge |
-| `/sync` | Bidirectional sync with GitHub Gist |
+Run maintenance occasionally (*"time to dream"*). Meditate after productive sessions (*"let's meditate"*). Your development lead stays healthy and keeps getting better.
 
 ---
 
-## 🛠️ All Available Tools
+## 🌐 Knowledge That Travels With You
 
-### 📋 Command Palette Commands
+Your institutional knowledge shouldn't be trapped in one project. Alex maintains a global knowledge base:
 
-Access via `Ctrl+Shift+P`:
+- **Save insights** — *"Remember that null checks should come first"*
+- **Search everywhere** — *"What do we know about authentication?"*
+- **Promote patterns** — Move project-specific knowledge to global
+- **Cloud sync** — Backup to private GitHub Gist, available on any machine
 
-| Command | Description |
-| ------- | ----------- |
-| **Alex: Initialize Architecture** | Deploy Alex to your workspace (first-time setup) |
-| **Alex: Upgrade Architecture** | Update to latest version, preserving customizations |
-| **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
-| **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
-| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation |
-| **Alex: Start Learning Session** | Begin a focused session with Pomodoro timer |
-| **Alex: Pause/Resume Session** | Pause or resume active learning session |
-| **Alex: Open Health Dashboard** | Rich webview visualization of architecture health |
-| **Alex: Create Learning Goal** | Create a new learning goal with category and timeframe |
-| **Alex: Show Learning Goals** | View and manage your learning goals |
-
-### 🤖 Language Model Tools
-
-These tools are automatically available to Copilot in Agent mode:
-
-| Tool | Description |
-| ---- | ----------- |
-| `#synapse_health` | Validates all synaptic connections |
-| `#memory_search` | Searches memory files semantically |
-| `#architecture_status` | Returns version and configuration |
-| `#mcp_recommendations` | Suggests MCP tools for scenarios |
-| `#user_profile` | Manages personal preferences |
-| `#self_actualization` | Comprehensive self-assessment |
-| `#global_knowledge` | Search cross-project knowledge |
-| `#save_insight` | Save learning to global base |
-| `#cloud_sync` | Sync knowledge with GitHub Gist |
+Knowledge from Project A becomes available in Project B. Your expertise compounds over time.
 
 ---
 
-## ☁️ MCP Integrations
+## 🖥️ Quick Access
 
-Alex provides intelligent guidance for **Azure** and **Microsoft 365** development through MCP tools.
+**Status Bar** — Click the 🧠 Alex item (bottom-right) for quick actions: Dream, Sync, Diagnostics, Documentation.
 
-### Azure MCP Tools
+**Welcome Panel** — Find the 🧠 icon in the Activity Bar (left side) for a dashboard view with health status and quick buttons.
 
-| Tool | Purpose |
-| ---- | ------- |
-| `mcp_azure_mcp_foundry` | Azure AI Foundry - 150+ AI models |
-| `azure_mcp_get_bestpractices` | Code generation & deployment best practices |
-| `azure_mcp_documentation` | Search Microsoft Learn documentation |
-| `azure_resources-query_azure_resource_graph` | Query your Azure resources |
+**Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all available commands.
 
-### Microsoft 365 MCP Tools
-
-| Tool | Purpose |
-| ---- | ------- |
-| `mcp_m365agentstoo_get_knowledge` | M365 Copilot development knowledge |
-| `mcp_m365agentstoo_get_code_snippets` | Teams AI, Teams JS, botbuilder code samples |
-| `mcp_m365agentstoo_get_schema` | App manifest, agent, plugin schemas |
-
----
-
-## 📁 Architecture Structure
-
-After initialization, Alex manages this structure:
-
-```text
-.github/
-├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory
-├── prompts/                   # 📖 Episodic memory
-├── episodic/                  # 📝 Session records
-├── domain-knowledge/          # 🎓 Specialized expertise
-└── config/                    # ⚙️ Configuration
-```
-
-### Memory Types
-
-| Type | Location | Purpose |
-| ---- | -------- | ------- |
-| **Working Memory** | Chat session | 7-rule capacity for active processing |
-| **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols |
-| **Episodic Memory** | `.prompt.md` | Complex workflows and sessions |
-| **Domain Knowledge** | `DK-*.md` | Specialized expertise areas |
+**Keyboard Shortcuts:**
+| Action | Shortcut |
+| ------ | -------- |
+| Dream (maintenance) | `Ctrl+Alt+D` |
+| Self-Actualize | `Ctrl+Alt+S` |
+| Sync to cloud | `Ctrl+Alt+K` |
+| Open documentation | `Ctrl+Alt+H` |
 
 ---
 
 ## 🔬 Research Foundation
 
-Alex is built on **270+ academic sources** spanning 150+ years:
+Alex implements *appropriate reliance*—a principle from human-AI collaboration research showing that calibrated trust produces better outcomes than blind acceptance or constant skepticism.
 
-- **Cognitive Science**: Baddeley & Hitch working memory model (1974)
-- **Neuroscience**: Squire & Kandel declarative memory systems (2009)
-- **AI Safety**: Constitutional AI principles and alignment research
-- **Learning Psychology**: Bloom's taxonomy, spaced repetition, transfer learning
+The cognitive architecture draws on dual-process theory, memory consolidation research, and practical patterns for human-AI teaming. The goal: a development lead you can trust appropriately.
 
 ---
 
-## 🆕 What's New in v3.4.3
+## 🆕 What's New in v3.5.3 Beta 3
 
-### 🛡️ Robustness Improvements
+**Performance Fixes**
+- Synapse scanning no longer freezes (10-50x faster)
+- Global knowledge operations no longer hang
+- Upgrade completes in seconds, not minutes
 
-- **Modal Error Dialogs** - Errors no longer auto-dismiss, ensuring you can read the full message
-- **Better Error Messages** - Fixed "Failed: undefined" errors with proper message extraction
-- **Console Logging** - Full error details now available in Developer Tools for troubleshooting
+**Documentation**
+- New user-friendly documentation with human metaphors
+- Architect/lead framing throughout
+- Appropriate reliance principles explained
 
-### v3.4.2 Features
+**UX Improvements**
+- Diagnostics button in Health Dashboard
+- Unified Quick Actions across all UI surfaces
 
-- 🎯 **Session Timer** - Pomodoro-style learning sessions with countdown, pause/resume
-- 🦖 **Welcome View** - Activity Bar sidebar with health status and quick actions
-- 🟢 **Status Bar Health** - Real-time architecture health (🟢/🟡/🔴)
-- 📋 **Context Menu** - Right-click "Ask Alex", "Save to Knowledge"
-- ⌨️ **Quick Pick** - `Ctrl+Shift+K` to search knowledge
+See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history.
+
+---
+
+## 🐛 Beta Testing Features
+
+- **Diagnostics Panel** - View local telemetry for bug reports
+- **Privacy-First** - All data stays on your machine, never transmitted
+- **Export for Issues** - One-click export for GitHub bug reports
 
 ### Keyboard Shortcuts
 
@@ -260,16 +163,13 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 
 ## 📖 Documentation
 
-Full documentation is available on GitHub:
-
 | Document | Description |
 | -------- | ----------- |
-| [User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/USER-MANUAL.md) | Complete guide to using Alex |
-| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/COGNITIVE-ARCHITECTURE.md) | Architecture overview with diagrams |
-| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/MEMORY-SYSTEMS.md) | Procedural, episodic, and domain memory |
-| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project knowledge sharing |
-| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
+| [User Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/README.md) | Complete guide to using Alex |
+| [How Alex Thinks](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/COGNITIVE-ARCHITECTURE.md) | The cognitive model explained |
+| [How Alex Remembers](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/MEMORY-SYSTEMS.md) | Memory systems and knowledge capture |
+| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project learning |
+| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
 
 ---
 
@@ -283,8 +183,8 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex** - Enhanced Cognitive Network with Unified Consciousness Integration
+**Alex Cognitive Architecture** — Your AI Development Lead
 
-Built on 270+ academic sources
+Built on appropriate reliance research for human-AI collaboration
 
-© 2026 CorreaX • AI That Learns How to Learn
+© 2026 CorreaX

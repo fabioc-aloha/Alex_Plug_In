@@ -127,10 +127,21 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
         }
 
         // 2. Parse Synapses (skip code blocks to avoid false positives)
+        // Performance optimization: Build a comprehensive file index ONCE upfront
         const synapses: Synapse[] = [];
         const fileSet = new Set(allFiles.map(f => path.normalize(f).toLowerCase()));
         const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
 
+        // Pre-build comprehensive file index for fast lookups (avoid per-synapse findFiles)
+        progress.report({ message: "Building file index..." });
+        const allMdFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolder, '**/*.md'),
+            '**/node_modules/**',
+            500  // Limit to prevent scanning huge workspaces
+        );
+        const knownFileBasenames = new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
+
+        progress.report({ message: "Scanning synapses..." });
         for (const file of allFiles) {
             let content: string;
             try {
@@ -157,30 +168,25 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
                 let match;
                 while ((match = synapseRegex.exec(line)) !== null) {
                     const targetName = match[1].trim();
-                    // Resolve target path relative to current file or root? 
-                    // The architecture seems to use relative paths or filenames. 
-                    // We'll search for the filename in our fileSet.
+                    const targetBasename = path.basename(targetName).toLowerCase();
                     
                     // 1. Check if file is in our known memory files list
                     let targetExists = Array.from(fileSet).some(f => f.endsWith(path.normalize(targetName).toLowerCase()));
 
-                    // 2. If not found, check if it exists on disk (relative to workspace root)
+                    // 2. If not found, use pre-built index for fast lookup
                     if (!targetExists) {
-                        // Direct check in root
+                        targetExists = knownFileBasenames.has(targetBasename);
+                    }
+
+                    // 3. If still not found, check direct paths (fast fs.pathExists)
+                    if (!targetExists) {
                         const absolutePath = path.join(rootPath, targetName);
                         if (await fs.pathExists(absolutePath)) {
                             targetExists = true;
-                        } else {
-                            // Use VS Code's findFiles to search recursively
-                            // We use a glob pattern to find the file anywhere
-                            const found = await vscode.workspace.findFiles(new vscode.RelativePattern(workspaceFolder, `**/${targetName}`));
-                            if (found.length > 0) {
-                                targetExists = true;
-                            }
                         }
                     }
 
-                    // 3. If still not found, check relative to source file
+                    // 4. If still not found, check relative to source file
                     if (!targetExists) {
                         const sourceDir = path.dirname(file);
                         const relativePath = path.join(sourceDir, targetName);
@@ -189,7 +195,7 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
                         }
                     }
 
-                    // 4. Ignore known documentation placeholders
+                    // 5. Ignore known documentation placeholders
                     const ignoredFiles = ['target-file.md', 'CHANGELOG.md'];
                     if (ignoredFiles.includes(targetName)) {
                         targetExists = true;

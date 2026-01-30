@@ -100,5 +100,5 @@ functions_1.app.http('sessionAction', {
     route: 'sessionAction',
     handler: sessionAction_1.sessionActionHandler
 });
-console.log('🦖 Alex Knowledge API initialized with Proactive Memory & Time Awareness');
+console.log('Alex Knowledge API initialized with Proactive Memory & Time Awareness');
 //# sourceMappingURL=index.js.map

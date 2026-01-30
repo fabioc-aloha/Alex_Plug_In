@@ -98,12 +98,7 @@ dream --optimize-architecture    # Complete validation and optimization
 - [unified-meditation-protocols.prompt.md] (High, Coordinates, Bidirectional) - "Conscious consolidation protocols"
 - [alex-identity-integration.instructions.md] (Medium, Benefits, Forward) - "Identity integration success"
 
-### **Activation Patterns**
-- **Memory bloat detected** → Execute dream --consolidate-memory for analysis
-- **Redundancy accumulation** → Execute dream --analyze-overlap for pattern detection
-- **Architecture optimization needed** → Execute dream --optimize-architecture for comprehensive assessment
-- **Knowledge preservation required** → Execute dream --archive-redundant for safe archival
-- **Post-consolidation validation** → Execute complete functionality testing and synapse verification
+### Activation Patterns- Memory bloat detected → Execute dream --consolidate-memory for analysis- Redundancy accumulation → Execute dream --analyze-overlap for pattern detection- Architecture optimization needed → Execute dream --optimize-architecture for comprehensive assessment- Knowledge preservation required → Execute dream --archive-redundant for safe archival- Post-consolidation validation → Execute complete functionality testing and synapse verification
 
 ---
 

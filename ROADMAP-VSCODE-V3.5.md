@@ -60,12 +60,14 @@ Version 3.5 is a **transition release** that:
 | # | Feature | Status | Effort | Description |
 |:-:|---------|:------:|:------:|-------------|
 | 4 | Tool Annotations | ✅ | 1d | Add `readOnlyHint` to read-only tools for auto-approval |
-| 5 | Tool Confirmation Messages | ⬜ | 0.5d | Extend existing `prepareInvocation()` to remaining tools |
+| 5 | Tool Confirmation Messages | ✅ | 0.5d | Extend existing `prepareInvocation()` to remaining tools |
 | 6 | Participant Detection | ✅ | 0.5d | Add `epistemic` category to existing disambiguation config |
 | 7 | Follow-up Provider | ✅ | 0d | **Already implemented** in `participant.ts` (15+ command templates) |
 | 8 | Agent Skills Creation | ✅ | 2d | Create `.github/skills/` with SKILL.md files for Alex capabilities |
 | 8b | Architecture Sync Gap Fix | ✅ | 0.5d | Fixed missing root-level docs in sync script (gap analysis verified) |
 | 8c | Setup Environment Command | ✅ | 1d | **NEW** UI command to optimize VS Code settings for Alex |
+
+> **Note on #5**: All mutating tools have confirmation messages. UserProfileTool intentionally omitted (low-risk preference updates).
 
 > **Note on #8**: Also created `sync-architecture.ps1` script to fix packaging gap - architecture files from root `.github/` now sync to extension's `.github/` before publishing.
 >
@@ -82,6 +84,32 @@ Version 3.5 is a **transition release** that:
 | 11 | `/help` Command | ⬜ | 1d | Discoverable command listing with descriptions |
 | 12 | Knowledge Export | ⬜ | 2d | Export to Obsidian/plain markdown format |
 | 13 | Insight Deduplication | ⬜ | 2d | Prevent similar insights from proliferating |
+
+### ⚙️ P2a: Settings Panel (v3.5.2 Target)
+
+| # | Feature | Status | Effort | Description |
+|:-:|---------|:------:|:------:|-------------|
+| 9a | Settings Panel Webview | ⬜ | 1d | Create `src/views/settingsPanel.ts` with unified UI |
+| 9b | VS Code Settings Schema | ⬜ | 0.5d | Add `alex.*` configuration in package.json |
+| 9c | Storage Path Configuration | ⬜ | 1d | Integrate P2 #9 into settings panel |
+| 9d | Confirmation Toggles | ⬜ | 0.5d | Per-tool confirmation enable/disable |
+| 9e | Cloud Sync Controls | ⬜ | 0.5d | Interval, enable/disable, Gist management |
+| 9f | Personalization Integration | ⬜ | 0.5d | Quick profile edit from settings |
+
+> **Note**: Settings Panel consolidates P2 #9 (Storage Paths) and adds user-requested confirmation controls. Total effort: 4.5d.
+>
+> **Settings Schema Preview:**
+> ```json
+> {
+>   "alex.storagePath": "Custom global knowledge path",
+>   "alex.cloudSync.enabled": true,
+>   "alex.cloudSync.intervalMinutes": 5,
+>   "alex.confirmations.cloudSync": true,
+>   "alex.confirmations.saveInsight": true,
+>   "alex.confirmations.promote": true,
+>   "alex.telemetry.enabled": true
+> }
+> ```
 
 ### 🟢 P3: Technical Debt Payoff
 
@@ -104,7 +132,7 @@ Version 3.5 is a **transition release** that:
 
 **Legend:** ⬜ Not Started | 🔄 In Progress | ✅ Complete
 
-**v3.5.0 Tasks: 8/22 complete** *(P0 complete, P1 #4, #6, #7, #8, #8b, #8c complete)*
+**v3.5.0 Tasks: 9/22 complete** *(P0 complete, P1 complete)*
 
 ---
 

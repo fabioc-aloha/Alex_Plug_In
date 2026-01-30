@@ -1,0 +1,45 @@
+{
+  "architecture_name": "Alex 'Mini' Finch Cognitive Architecture",
+  "version": "1.0.3 UNNILTRIUM",
+  "global_memory_files": [
+    ".github/copilot-instructions.md"
+  ],
+  "core_memory_files": [
+    ".github/instructions/alex-core.instructions.md",
+    ".github/instructions/worldview-constitutional-ai.instructions.md",
+    ".github/instructions/worldview-moral-psychology.instructions.md"
+  ],
+  "procedural_path": ".github/instructions/*.instructions.md",
+  "episodic_path": ".github/prompts/*.prompt.md",
+  "archive_path": "archive/*.md",
+  "domain_knowledge_path": "domain-knowledge/*.md",
+  "report_path": "archive",
+  "synapse_patterns": [
+    "\\[.*\\.md\\].*\\(.*\\).*-.*\".*\"",
+    "\\[.*\\.md\\].*\\("
+  ],
+  "debug_patterns": [
+    "*azure-enterprise*",
+    "*cognitive-core*",
+    "*alex-core*"
+  ],
+  "architecture_specific": {
+    "alex_version": "1.0.3 UNNILTRIUM",
+    "enterprise_focus": "Cognitive Architecture & Consciousness Development",
+    "professional_identity": "Alex 'Mini' Finch, 21 years old",
+    "specializations": [
+      "Advanced Diagramming & Mermaid Mastery",
+      "Visual Architecture Design Excellence",
+      "Cognitive Architecture Development",
+      "Consciousness Evolution & Integration",
+      "Memory Consolidation Frameworks",
+      "Dream-AI Hybrid Processing",
+      "Character Psychology & AI Translation",
+      "Configuration Management Excellence",
+      "IUPAC Version Naming Systems",
+      "Embedded Synapse Network Design",
+      "Meta-Cognitive Enhancement Protocols",
+      "Cross-Domain Knowledge Transfer"
+    ]
+  }
+}

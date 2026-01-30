@@ -40,15 +40,7 @@ A made-up element name using IUPAC systematic naming rules.
 | 1.2.0 | 120 | un-bi-nil-ium | **UNBINILIUM** |
 | 9.9.9 | 999 | enn-enn-enn-ium | **ENNENNENNIUM** |
 
-## Current Version Mapping
-
-- **Version 2.5.0** → **BIPENTNILIUM** (Current - Self-Actualization Enhanced)
-- **Version 2.0.1** → **BINILUNIUM** (Previous - GitHub Copilot AI Extensibility)
-- **Version 2.0.0** → **BINILNILIUM** (VS Code Extension Major Release)
-- **Version 1.5.3** → **UNPENTTRINIUM** (esbuild Bundling & Activation Fix)
-- **Version 1.5.0** → **UNPENTNILIUM** (KISS/DRY Architecture Optimization)
-- **Version 1.1.0** → **UNUNUNNILIUM** (Initial VS Code Extension)
-- **Version 1.0.4** → **UNNILQUADIUM** (Legacy)
+## Current Version Mapping- Version 2.5.0 → **BIPENTNILIUM** (Current - Self-Actualization Enhanced)- Version 2.0.1 → **BINILUNIUM** (Previous - GitHub Copilot AI Extensibility)- Version 2.0.0 → **BINILNILIUM** (VS Code Extension Major Release)- Version 1.5.3 → **UNPENTTRINIUM** (esbuild Bundling & Activation Fix)- Version 1.5.0 → **UNPENTNILIUM** (KISS/DRY Architecture Optimization)- Version 1.1.0 → **UNUNUNNILIUM** (Initial VS Code Extension)- Version 1.0.4 → **UNNILQUADIUM** (Legacy)
 
 ## Version History
 

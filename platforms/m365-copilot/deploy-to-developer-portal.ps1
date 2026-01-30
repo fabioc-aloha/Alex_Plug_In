@@ -11,7 +11,7 @@ if (-not $PackagePath) {
     $PackagePath = Join-Path $PSScriptRoot "appPackage\build\appPackage.local.zip"
 }
 
-Write-Host "🦖 Alex M365 Agent Deployment Script" -ForegroundColor Cyan
+Write-Host "Alex M365 Agent Deployment Script" -ForegroundColor Cyan
 Write-Host "=====================================" -ForegroundColor Cyan
 
 # Step 1: Verify package exists

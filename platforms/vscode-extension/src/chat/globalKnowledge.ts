@@ -24,14 +24,15 @@ import { getSyncStatus, triggerPostModificationSync } from './cloudSync';
 
 /**
  * Lock file options for concurrent access safety
+ * Reduced timeouts to prevent freezes when locks are held by other processes
  */
 const LOCK_OPTIONS = {
-    stale: 10000,      // Consider lock stale after 10 seconds
+    stale: 5000,       // Consider lock stale after 5 seconds (reduced from 10)
     retries: {
-        retries: 5,
+        retries: 3,    // Reduced from 5 to fail faster
         factor: 2,
         minTimeout: 100,
-        maxTimeout: 1000
+        maxTimeout: 500  // Reduced from 1000
     }
 };
 
@@ -68,6 +69,7 @@ export async function ensureGlobalKnowledgeDirectories(): Promise<void> {
 /**
  * Execute a function with file locking for safe concurrent access.
  * This ensures only one Alex instance can modify a file at a time.
+ * Now includes better error handling and timeout protection.
  */
 async function withFileLock<T>(
     filePath: string,
@@ -83,9 +85,19 @@ async function withFileLock<T>(
     try {
         release = await lockfile.lock(filePath, LOCK_OPTIONS);
         return await operation();
+    } catch (lockError: any) {
+        // If lock fails (e.g., another process holds it), run without lock
+        // This is safer than hanging indefinitely
+        console.warn(`File lock failed for ${filePath}, proceeding without lock:`, lockError?.message || lockError);
+        return await operation();
     } finally {
         if (release) {
-            await release();
+            try {
+                await release();
+            } catch (releaseError) {
+                // Ignore release errors - file may have been deleted or lock already released
+                console.warn(`Failed to release lock for ${filePath}:`, releaseError);
+            }
         }
     }
 }

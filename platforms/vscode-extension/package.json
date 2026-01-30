@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "3.5.1",
+  "version": "3.5.3",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -168,6 +168,11 @@
         "command": "alex.setupEnvironment",
         "title": "Alex: Setup Environment",
         "icon": "$(gear)"
+      },
+      {
+        "command": "alex.viewBetaTelemetry",
+        "title": "Alex: Report Issue / View Diagnostics",
+        "icon": "$(bug)"
       }
     ],
     "viewsContainers": {
@@ -214,7 +219,7 @@
     "submenus": [
       {
         "id": "alex.contextMenu",
-        "label": "🦖 Alex",
+        "label": "� Alex",
         "icon": "$(brain)"
       }
     ],
@@ -240,7 +245,7 @@
           "type": "number",
           "default": 0.3,
           "minimum": 0.1,
-          "maximum": 1.0,
+          "maximum": 1,
           "description": "Minimum confidence level to suggest saving an insight (0.1-1.0)"
         },
         "alex.autoInsights.cooldownMinutes": {
@@ -742,7 +747,11 @@
           "properties": {
             "action": {
               "type": "string",
-              "enum": ["sync", "push", "pull"],
+              "enum": [
+                "sync",
+                "push",
+                "pull"
+              ],
               "description": "Sync action: 'sync' (merge), 'push' (upload), or 'pull' (download)",
               "default": "sync"
             }
@@ -838,8 +847,7 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run sync-architecture && npm run package",
-    "sync-architecture": "pwsh -ExecutionPolicy Bypass -File ./sync-architecture.ps1",
+    "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && node esbuild.js",
     "check-types": "tsc --noEmit",
     "watch": "npm run check-types && node esbuild.js --watch",
@@ -862,6 +870,7 @@
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.1.3"
   },
   "dependencies": {

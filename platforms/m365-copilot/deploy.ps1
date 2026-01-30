@@ -4,7 +4,7 @@ param([switch]$Rebuild)
 $projectDir = $PSScriptRoot
 $packagePath = "$projectDir\appPackage\build\alex-m365-agent-v4.4.0.zip"
 
-Write-Host "`n🦖 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
+Write-Host "`n🧠 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
 
 # Step 1: Rebuild package if requested or if files changed

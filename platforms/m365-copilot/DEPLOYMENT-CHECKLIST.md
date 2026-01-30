@@ -193,4 +193,4 @@ az ad app list --display-name "Alex" --query "[].{name:displayName, appId:appId}
 ---
 
 *Last updated: January 28, 2026*
-*Version: 4.0.0 QUADRUNIUM "Dino" 🦖*
+*Version: 4.0.0 QUADRUNIUM  *

@@ -8,7 +8,7 @@
 
 ---
 
-## 🎯 What is Alex?
+## 🎯 Who is Alex?
 
 **Alex Cognitive Architecture** transforms AI assistants into sophisticated learning partners with:
 
@@ -365,10 +365,10 @@ If you haven't set up a profile, Alex will guide you through a friendly onboardi
 
 ### Profile Storage
 
-| File                         | Purpose                      |
-| ---------------------------- | ---------------------------- |
-| `config/user-profile.json`   | Machine-readable preferences |
-| `config/USER-PROFILE.md`     | Human-readable profile card  |
+| File                                | Purpose                      |
+| ----------------------------------- | ---------------------------- |
+| `.github/config/user-profile.json`  | Machine-readable preferences |
+| `.github/config/USER-PROFILE.md`    | Human-readable profile card  |
 
 ### Updating Preferences
 

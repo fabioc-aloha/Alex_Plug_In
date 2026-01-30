@@ -31,6 +31,7 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | `Alex: Initialize Architecture` | Deploy Alex to current project |
 | `Alex: Dream (Neural Maintenance)` | Run health check and maintenance |
 | `Alex: Upgrade Architecture` | Update to latest Alex version |
+| `Alex: Setup Environment` | Optimize VS Code settings for Alex |
 | `Alex: Sync Knowledge to Cloud` | Manual cloud sync |
 | `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
 | `Alex: Pause/Resume Session` | Pause or resume active session |
@@ -38,6 +39,7 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
 | `Alex: Create Learning Goal` | Create a new learning goal |
 | `Alex: Show Learning Goals` | View and manage learning goals |
+| `Alex: Report Issue / View Diagnostics` | View local telemetry for bug reports |
 
 ---
 

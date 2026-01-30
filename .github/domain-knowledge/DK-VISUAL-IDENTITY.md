@@ -15,7 +15,7 @@
 |-----------|------------|
 | **Cognitive Architecture** | Learning, synapses, memory systems, growth |
 | **Human-AI Partnership** | Collaboration, not replacement. Growing *with* users |
-| **Authentic Personality** | Curious, supportive, occasionally playful (🦖) |
+| **Authentic Personality** | Curious, supportive, occasionally playful |
 | **Professional + Warm** | Intelligent but approachable, not cold or corporate |
 
 ### What Alex is NOT
@@ -60,11 +60,11 @@
 | Context | Logo | Rationale |
 |---------|------|-----------|
 | **Primary/Professional** | Teal Neural A | Cognitive, clean, scales well |
-| **Mascot/Avatar** | Hatchling AI 🥚 | Growth metaphor, memorable, lovable |
+| **Mascot/Avatar** | Geometric Logo | Growth metaphor, memorable, lovable |
 | **Dark Mode** | Star-Saurus or Orbital | Premium feel on dark backgrounds |
 | **Favicon/Small** | Soft Green A | Minimal, works at 16px |
-| **Fun/Social** | Full dino illustrations | Personality when appropriate |
-| **Text/Voice** | 🦖 emoji | Part of Alex's conversational voice |
+| **Fun/Social** | Professional illustrations | Personality when appropriate |
+| **Text/Voice** |  emoji | Part of Alex's conversational voice |
 
 ### Top Logo Concepts
 
@@ -105,7 +105,7 @@
 
 ---
 
-## The Dinosaur Question 🦖
+## The Dinosaur Question 
 
 ### Arguments FOR Keeping
 
@@ -123,7 +123,7 @@
 
 ### Resolution
 
-**Hybrid approach**: Use professional logo (Neural A) as primary, dinosaur (Hatchling) as mascot. Keep 🦖 in conversational tone.
+**Hybrid approach**: Use professional logo (Neural A) as primary, dinosaur (Hatchling) as mascot. Keep  in conversational tone.
 
 ---
 

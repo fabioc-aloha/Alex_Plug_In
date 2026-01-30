@@ -45,7 +45,7 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
     // Create a new panel
     currentPanel = vscode.window.createWebviewPanel(
         'alexHealthDashboard',
-        '🦖 Alex Health Dashboard',
+        '🧠 Alex Health Dashboard',
         column || vscode.ViewColumn.One,
         {
             enableScripts: true,
@@ -69,6 +69,9 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
                     break;
                 case 'syncKnowledge':
                     vscode.commands.executeCommand('alex.syncKnowledge');
+                    break;
+                case 'viewDiagnostics':
+                    vscode.commands.executeCommand('alex.viewBetaTelemetry');
                     break;
                 case 'openFile':
                     if (message.filePath) {
@@ -470,7 +473,7 @@ async function getWebviewContent(
     <div class="dashboard">
         <div class="header">
             <div class="header-left">
-                <span class="logo">🦖</span>
+                <span class="logo">🧠</span>
                 <div class="title-block">
                     <h1>Alex Health Dashboard</h1>
                     <span class="version">Version ${version || 'Unknown'}</span>
@@ -485,6 +488,9 @@ async function getWebviewContent(
                 </button>
                 <button class="btn btn-primary" onclick="cmd('selfActualize')">
                     🧠 Self-Actualize
+                </button>
+                <button class="btn btn-secondary" onclick="cmd('viewDiagnostics')">
+                    🐛 Diagnostics
                 </button>
             </div>
         </div>

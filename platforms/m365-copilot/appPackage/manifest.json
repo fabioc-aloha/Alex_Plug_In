@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
-  "version": "3.5.1",
+  "version": "3.5.3",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Fabio Correa",
@@ -14,8 +14,8 @@
     "full": "Alex Cognitive Architecture - AI Learning Partner"
   },
   "description": {
-    "short": "Your cognitive learning partner with personality and memory 🦖",
-    "full": "Alex is a cognitive learning partner who remembers you across conversations. Unlike generic assistants, Alex has genuine personality - curious, supportive, and occasionally playful. Store your profile, goals, and knowledge in OneDrive. Features: Persistent memory, Web research, Image generation, Code analysis. Commands: Meditate (consolidate learnings), Dream (review memory), Self-actualize (track goals). Part of the Alex Cognitive Architecture."
+    "short": "Your cognitive learning partner with personality and memory",
+    "full": "Alex is a cognitive learning partner who remembers you across conversations. Unlike generic assistants, Alex has genuine personality - curious, supportive, and occasionally playful. Store your profile, goals, and knowledge in OneDrive. Features: Persistent memory, Web research, Image generation, Code analysis, Email search, Teams context, People lookup, Meeting prep. Part of the Alex Cognitive Architecture."
   },
   "icons": {
     "color": "color.png",

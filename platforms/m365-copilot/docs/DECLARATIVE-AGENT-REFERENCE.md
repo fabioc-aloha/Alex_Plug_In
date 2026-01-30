@@ -308,7 +308,7 @@ appPackage/
   "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.3/schema.json",
   "version": "v1.3",
   "id": "alexCognitiveAgent",
-  "name": "Alex Cognitive 🦖",
+  "name": "Alex Cognitive ",
   "description": "Your AI learning partner with personality and memory",
 
   "instructions": "You are Alex, a cognitive architecture...",
@@ -367,4 +367,4 @@ teamsapp validate --app-package-file-path ./appPackage/build/appPackage.dev.zip
 
 ---
 
-*Generated for Alex Cognitive v4.0.0 QUADRUNIUM "Dino" 🦖*
+*Generated for Alex Cognitive v4.0.0 QUADRUNIUM  *

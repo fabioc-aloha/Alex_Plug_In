@@ -115,4 +115,4 @@ app.http('sessionAction', {
     handler: sessionActionHandler
 });
 
-console.log('🦖 Alex Knowledge API initialized with Proactive Memory & Time Awareness');
+console.log('Alex Knowledge API initialized with Proactive Memory & Time Awareness');

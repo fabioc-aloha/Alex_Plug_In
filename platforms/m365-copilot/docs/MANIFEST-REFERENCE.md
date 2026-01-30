@@ -76,7 +76,7 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 
 **Tips:**
 - Short name appears in most places - make it memorable
-- Emojis work great: `Alex Cognitive 🦖`
+- Emojis work great: `Alex Cognitive `
 
 ### Description
 
@@ -88,7 +88,7 @@ Complete reference for all configurable settings in the Teams/M365 app manifest.
 **Full Description Supports:**
 - `**bold**` and `*italic*`
 - Line breaks (`\n`)
-- Unicode symbols (━, ✨, 🦖, etc.)
+- Unicode symbols (━, ✨, , etc.)
 - Bulleted lists
 
 ### Icons
@@ -452,4 +452,4 @@ These are configured in **Teams Developer Portal UI**:
 
 ---
 
-*Updated for Alex Cognitive v4.1.0 QUADRUNIUM "Dino" - Pure M365 Edition 🦖*
+*Updated for Alex Cognitive v4.1.0 QUADRUNIUM "Dino" - Pure M365 Edition *

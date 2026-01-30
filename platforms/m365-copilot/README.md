@@ -7,7 +7,7 @@
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Schema](https://img.shields.io/badge/schema-v1.2-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
-> Alex Cognitive Architecture extended to Microsoft 365 Copilot 🦖
+> Alex Cognitive Architecture extended to Microsoft 365 Copilot 🧠
 
 ---
 
@@ -43,9 +43,9 @@ Your data stays under your control!
 m365-copilot/
 ├── appPackage/
 │   ├── manifest.json              # M365 App manifest (v1.19)
-│   ├── declarativeAgent.json      # Alex agent config (v1.2 schema)
-│   ├── color.png                  # 192x192 color icon (Hatching Dino)
-│   └── outline.png                # 32x32 outline icon
+│   ├── declarativeAgent.json      # Alex agent config (v1.6 schema)
+│   ├── color.png                  # 192x192 color icon (geometric logo)
+│   └── outline.png                # 32x32 outline icon (white on transparent)
 ├── env/
 │   ├── .env.dev
 │   └── .env.local
@@ -103,7 +103,7 @@ Or sideload manually:
 
 ## Conversation Starters
 
-- 🦖 **Meet Alex** - "Hey Alex! Tell me about yourself"
+- 🧠 **Meet Alex** - "Hey Alex! Tell me about yourself"
 - 📝 **Set up memory** - "Help me set up my OneDrive memory"
 - 🧠 **Meditate** - "Let's meditate - consolidate what I learned"
 - 💭 **Dream** - "Dream - review my memory and suggest updates"

@@ -282,7 +282,7 @@ function generateLearningGoalsTemplate(): string {
  * Generate README with M365 setup instructions
  */
 function generateM365ReadMe(fileCount: number): string {
-    return `# Alex Memory for M365 Copilot 🦖
+    return `# Alex Memory for M365 Copilot 🧠
 
 This folder contains your exported Alex memory, ready for M365 Copilot integration!
 
@@ -326,7 +326,7 @@ from OneDrive. For bi-directional sync:
 - Docs: https://github.com/fabioc-aloha/Alex_Plug_In
 
 ---
-*Exported by Alex Cognitive Architecture v4.0.0 QUADRUNIUM 🦖*
+*Exported by Alex Cognitive Architecture v4.0.0 🧠*
 `;
 }
 

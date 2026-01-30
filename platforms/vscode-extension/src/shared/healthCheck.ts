@@ -102,6 +102,15 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
     // Synapse pattern
     const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
 
+    // Pre-build a set of all known markdown files for fast lookup
+    // This avoids calling findFiles for each synapse (major performance fix)
+    const allMdFiles = await vscode.workspace.findFiles(
+        new vscode.RelativePattern(workspaceFolders[0], '**/*.md'),
+        '**/node_modules/**',
+        500  // Limit to prevent scanning huge workspaces
+    );
+    const knownFileBasenames = new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
+
     for (const pattern of patterns) {
         try {
             const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
@@ -129,15 +138,10 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
                         while ((match = synapseRegex.exec(line)) !== null) {
                             totalSynapses++;
                             const targetName = match[1].trim();
+                            const targetBasename = path.basename(targetName).toLowerCase();
                             
-                            // Quick existence check
-                            const found = await vscode.workspace.findFiles(
-                                `**/${targetName}`,
-                                '**/node_modules/**',
-                                1
-                            );
-                            
-                            if (found.length === 0) {
+                            // Fast lookup in pre-built file index instead of findFiles per synapse
+                            if (!knownFileBasenames.has(targetBasename)) {
                                 brokenSynapses++;
                                 if (issues.length < 5) {
                                     issues.push(`Broken: ${targetName} (from ${path.basename(file.fsPath)})`);

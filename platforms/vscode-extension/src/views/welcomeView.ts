@@ -1,109 +1,145 @@
-import * as vscode from 'vscode';
-import { checkHealth, HealthCheckResult, HealthStatus } from '../shared/healthCheck';
-import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { getSyncStatus } from '../chat/cloudSync';
-import { getCurrentSession, isSessionActive } from '../commands/session';
-import { getGoalsSummary, LearningGoal } from '../commands/goals';
-import { escapeHtml } from '../shared/sanitize';
+import * as vscode from "vscode";
+import {
+  checkHealth,
+  HealthCheckResult,
+  HealthStatus,
+} from "../shared/healthCheck";
+import { getGlobalKnowledgeSummary } from "../chat/globalKnowledge";
+import { getSyncStatus } from "../chat/cloudSync";
+import { getCurrentSession, isSessionActive } from "../commands/session";
+import { getGoalsSummary, LearningGoal } from "../commands/goals";
+import { escapeHtml } from "../shared/sanitize";
+import { isOperationInProgress } from "../extension";
 
 /**
  * Welcome View Provider - Activity Bar panel with health, quick actions, and recent activity
  */
 export class WelcomeViewProvider implements vscode.WebviewViewProvider {
-    public static readonly viewType = 'alex.welcomeView';
-    
-    private _view?: vscode.WebviewView;
-    private _extensionUri: vscode.Uri;
-    
-    constructor(extensionUri: vscode.Uri) {
-        this._extensionUri = extensionUri;
+  public static readonly viewType = "alex.welcomeView";
+
+  private _view?: vscode.WebviewView;
+  private _extensionUri: vscode.Uri;
+
+  constructor(extensionUri: vscode.Uri) {
+    this._extensionUri = extensionUri;
+  }
+
+  public resolveWebviewView(
+    webviewView: vscode.WebviewView,
+    context: vscode.WebviewViewResolveContext,
+    _token: vscode.CancellationToken,
+  ) {
+    this._view = webviewView;
+
+    webviewView.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [this._extensionUri],
+    };
+
+    webviewView.webview.html = this._getLoadingHtml();
+
+    // Handle messages from the webview
+    webviewView.webview.onDidReceiveMessage(async (message) => {
+      // Commands that use operation lock - check before executing
+      const lockedCommands = ["dream", "syncKnowledge", "setupEnvironment"];
+
+      if (lockedCommands.includes(message.command) && isOperationInProgress()) {
+        vscode.window.showWarningMessage(
+          "Another Alex operation is already in progress. Please wait for it to complete.",
+        );
+        return;
+      }
+
+      switch (message.command) {
+        case "startSession":
+          vscode.commands.executeCommand("alex.startSession");
+          break;
+        case "meditate":
+          vscode.commands.executeCommand(
+            "workbench.panel.chat.view.copilot.focus",
+          );
+          // Could auto-type @alex /meditate
+          break;
+        case "dream":
+          vscode.commands.executeCommand("alex.dream");
+          break;
+        case "selfActualize":
+          vscode.commands.executeCommand("alex.selfActualize");
+          break;
+        case "syncKnowledge":
+          vscode.commands.executeCommand("alex.syncKnowledge");
+          break;
+        case "exportM365":
+          vscode.commands.executeCommand("alex.exportForM365");
+          break;
+        case "openDocs":
+          vscode.commands.executeCommand("alex.openDocs");
+          break;
+        case "upgrade":
+          vscode.commands.executeCommand("alex.upgrade");
+          break;
+        case "showStatus":
+          vscode.commands.executeCommand("alex.showStatus");
+          break;
+        case "showGoals":
+          vscode.commands.executeCommand("alex.showGoals");
+          break;
+        case "createGoal":
+          vscode.commands.executeCommand("alex.createGoal");
+          break;
+        case "setupEnvironment":
+          vscode.commands.executeCommand("alex.setupEnvironment");
+          break;
+        case "reportIssue":
+          vscode.commands.executeCommand("alex.viewBetaTelemetry");
+          break;
+        case "openChat":
+          vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+          break;
+        case "refresh":
+          this.refresh();
+          break;
+      }
+    });
+
+    // Initial content load
+    this.refresh();
+  }
+
+  /**
+   * Refresh the welcome view content
+   */
+  public async refresh(): Promise<void> {
+    if (!this._view) {
+      return;
     }
-    
-    public resolveWebviewView(
-        webviewView: vscode.WebviewView,
-        context: vscode.WebviewViewResolveContext,
-        _token: vscode.CancellationToken,
-    ) {
-        this._view = webviewView;
-        
-        webviewView.webview.options = {
-            enableScripts: true,
-            localResourceRoots: [this._extensionUri]
-        };
-        
-        webviewView.webview.html = this._getLoadingHtml();
-        
-        // Handle messages from the webview
-        webviewView.webview.onDidReceiveMessage(async message => {
-            switch (message.command) {
-                case 'startSession':
-                    vscode.commands.executeCommand('alex.startSession');
-                    break;
-                case 'meditate':
-                    vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
-                    // Could auto-type @alex /meditate
-                    break;
-                case 'dream':
-                    vscode.commands.executeCommand('alex.dream');
-                    break;
-                case 'syncKnowledge':
-                    vscode.commands.executeCommand('alex.syncKnowledge');
-                    break;
-                case 'openDocs':
-                    vscode.commands.executeCommand('alex.openDocs');
-                    break;
-                case 'showStatus':
-                    vscode.commands.executeCommand('alex.showStatus');
-                    break;
-                case 'showGoals':
-                    vscode.commands.executeCommand('alex.showGoals');
-                    break;
-                case 'createGoal':
-                    vscode.commands.executeCommand('alex.createGoal');
-                    break;
-                case 'refresh':
-                    this.refresh();
-                    break;
-            }
-        });
-        
-        // Initial content load
-        this.refresh();
+
+    try {
+      // Gather all status data in parallel
+      const [health, knowledgeSummary, syncStatus, goalsSummary] =
+        await Promise.all([
+          checkHealth(false),
+          getGlobalKnowledgeSummary(),
+          getSyncStatus(),
+          getGoalsSummary(),
+        ]);
+
+      const session = getCurrentSession();
+
+      this._view.webview.html = this._getHtmlContent(
+        health,
+        knowledgeSummary,
+        syncStatus,
+        session,
+        goalsSummary,
+      );
+    } catch (err) {
+      this._view.webview.html = this._getErrorHtml(err);
     }
-    
-    /**
-     * Refresh the welcome view content
-     */
-    public async refresh(): Promise<void> {
-        if (!this._view) {
-            return;
-        }
-        
-        try {
-            // Gather all status data in parallel
-            const [health, knowledgeSummary, syncStatus, goalsSummary] = await Promise.all([
-                checkHealth(false),
-                getGlobalKnowledgeSummary(),
-                getSyncStatus(),
-                getGoalsSummary()
-            ]);
-            
-            const session = getCurrentSession();
-            
-            this._view.webview.html = this._getHtmlContent(
-                health,
-                knowledgeSummary,
-                syncStatus,
-                session,
-                goalsSummary
-            );
-        } catch (err) {
-            this._view.webview.html = this._getErrorHtml(err);
-        }
-    }
-    
-    private _getLoadingHtml(): string {
-        return `<!DOCTYPE html>
+  }
+
+  private _getLoadingHtml(): string {
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -130,10 +166,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     <div class="loading">Loading...</div>
 </body>
 </html>`;
-    }
-    
-    private _getErrorHtml(err: unknown): string {
-        return `<!DOCTYPE html>
+  }
+
+  private _getErrorHtml(err: unknown): string {
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -164,41 +200,59 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     </script>
 </body>
 </html>`;
-    }
-    
-    private _getHtmlContent(
-        health: HealthCheckResult,
-        knowledge: { totalPatterns: number; totalInsights: number } | null,
-        syncStatus: { status: string; message: string },
-        session: ReturnType<typeof getCurrentSession>,
-        goals: { activeGoals: LearningGoal[]; completedToday: number; streakDays: number; totalCompleted: number }
-    ): string {
-        // Health indicator
-        const isHealthy = health.status === HealthStatus.Healthy;
-        const healthIcon = isHealthy ? '🟢' : (health.brokenSynapses > 5 ? '🔴' : '🟡');
-        const healthText = isHealthy ? 'Healthy' : `${health.brokenSynapses} issues`;
-        
-        // Knowledge stats
-        const patterns = knowledge?.totalPatterns ?? 0;
-        const insights = knowledge?.totalInsights ?? 0;
-        
-        // Sync status
-        const syncIcon = syncStatus.status === 'up-to-date' ? '✅' : (syncStatus.status === 'error' ? '❌' : '🔄');
-        const lastSyncText = syncStatus.message;
-        
-        // Session status
-        const sessionHtml = session ? `
+  }
+
+  private _getHtmlContent(
+    health: HealthCheckResult,
+    knowledge: { totalPatterns: number; totalInsights: number } | null,
+    syncStatus: { status: string; message: string },
+    session: ReturnType<typeof getCurrentSession>,
+    goals: {
+      activeGoals: LearningGoal[];
+      completedToday: number;
+      streakDays: number;
+      totalCompleted: number;
+    },
+  ): string {
+    // Health indicator
+    const isHealthy = health.status === HealthStatus.Healthy;
+    const healthIcon = isHealthy
+      ? "🟢"
+      : health.brokenSynapses > 5
+        ? "🔴"
+        : "🟡";
+    const healthText = isHealthy
+      ? "Healthy"
+      : `${health.brokenSynapses} issues`;
+
+    // Knowledge stats
+    const patterns = knowledge?.totalPatterns ?? 0;
+    const insights = knowledge?.totalInsights ?? 0;
+
+    // Sync status
+    const syncIcon =
+      syncStatus.status === "up-to-date"
+        ? "✅"
+        : syncStatus.status === "error"
+          ? "❌"
+          : "🔄";
+    const lastSyncText = syncStatus.message;
+
+    // Session status
+    const sessionHtml = session
+      ? `
             <div class="session-card">
                 <div class="session-header">
-                    <span class="session-icon">${session.isBreak ? '☕' : '🎯'}</span>
+                    <span class="session-icon">${session.isBreak ? "☕" : "🎯"}</span>
                     <span class="session-title">${this._escapeHtml(session.topic)}</span>
                 </div>
                 <div class="session-timer">${this._formatTime(session.remaining)}</div>
-                <div class="session-status">${session.isPaused ? '⏸️ Paused' : '▶️ Active'}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ''}</div>
+                <div class="session-status">${session.isPaused ? "⏸️ Paused" : "▶️ Active"}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ""}</div>
             </div>
-        ` : '';
-        
-        return `<!DOCTYPE html>
+        `
+      : "";
+
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -404,7 +458,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <span class="header-icon">🦖</span>
+            <span class="header-icon">🧠</span>
             <span class="header-title">Alex Cognitive</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
@@ -436,33 +490,49 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
-                <button class="action-btn primary" onclick="cmd('startSession')">
-                    <span class="action-icon">🎯</span>
-                    <span class="action-text">Start Learning Session</span>
-                    <span class="action-shortcut">⌃⌥P</span>
-                </button>
-                <button class="action-btn" onclick="cmd('dream')">
+                <button class="action-btn primary" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream (Neural Maintenance)</span>
                     <span class="action-shortcut">⌃⌥D</span>
                 </button>
+                <button class="action-btn" onclick="cmd('selfActualize')">
+                    <span class="action-icon">✨</span>
+                    <span class="action-text">Self-Actualize</span>
+                    <span class="action-shortcut">⌃⌥S</span>
+                </button>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
                     <span class="action-icon">☁️</span>
-                    <span class="action-text">Sync to Cloud</span>
+                    <span class="action-text">Sync Knowledge</span>
                     <span class="action-shortcut">⌃⌥K</span>
                 </button>
-                <button class="action-btn" onclick="cmd('showStatus')">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">All Actions</span>
-                </button>
-                <button class="action-btn" onclick="cmd('showGoals')">
-                    <span class="action-icon">🎯</span>
-                    <span class="action-text">Manage Goals</span>
+                <button class="action-btn" onclick="cmd('exportM365')">
+                    <span class="action-icon">📦</span>
+                    <span class="action-text">Export for M365</span>
                 </button>
                 <button class="action-btn" onclick="cmd('openDocs')">
                     <span class="action-icon">📚</span>
                     <span class="action-text">Documentation</span>
                     <span class="action-shortcut">⌃⌥H</span>
+                </button>
+                <button class="action-btn" onclick="cmd('upgrade')">
+                    <span class="action-icon">⬆️</span>
+                    <span class="action-text">Upgrade Architecture</span>
+                </button>
+                <button class="action-btn" onclick="cmd('setupEnvironment')">
+                    <span class="action-icon">⚙️</span>
+                    <span class="action-text">Setup Environment</span>
+                </button>
+                <button class="action-btn" onclick="cmd('reportIssue')">
+                    <span class="action-icon">🐛</span>
+                    <span class="action-text">Report Issue / Diagnostics</span>
+                </button>
+                <button class="action-btn" onclick="cmd('openChat')">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Chat with @alex</span>
+                </button>
+                <button class="action-btn" onclick="cmd('showGoals')">
+                    <span class="action-icon">🎯</span>
+                    <span class="action-text">Manage Goals</span>
                 </button>
             </div>
         </div>
@@ -486,38 +556,49 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     </script>
 </body>
 </html>`;
+  }
+
+  private _escapeHtml(text: string): string {
+    // Delegate to centralized sanitization
+    return escapeHtml(text);
+  }
+
+  private _formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  }
+
+  private _formatRelativeTime(date: Date): string {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+
+    if (diffMins < 1) {
+      return "Just now";
     }
-    
-    private _escapeHtml(text: string): string {
-        // Delegate to centralized sanitization
-        return escapeHtml(text);
+    if (diffMins < 60) {
+      return `${diffMins}m ago`;
     }
-    
-    private _formatTime(seconds: number): string {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
+
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) {
+      return `${diffHours}h ago`;
     }
-    
-    private _formatRelativeTime(date: Date): string {
-        const now = new Date();
-        const diffMs = now.getTime() - date.getTime();
-        const diffMins = Math.floor(diffMs / 60000);
-        
-        if (diffMins < 1) { return 'Just now'; }
-        if (diffMins < 60) { return `${diffMins}m ago`; }
-        
-        const diffHours = Math.floor(diffMins / 60);
-        if (diffHours < 24) { return `${diffHours}h ago`; }
-        
-        const diffDays = Math.floor(diffHours / 24);
-        return `${diffDays}d ago`;
-    }
-    
-    private _getGoalsHtml(goals: { activeGoals: LearningGoal[]; completedToday: number; streakDays: number; totalCompleted: number }): string {
-        if (goals.activeGoals.length === 0 && goals.streakDays === 0) {
-            // No goals yet - show prompt to create one
-            return `
+
+    const diffDays = Math.floor(diffHours / 24);
+    return `${diffDays}d ago`;
+  }
+
+  private _getGoalsHtml(goals: {
+    activeGoals: LearningGoal[];
+    completedToday: number;
+    streakDays: number;
+    totalCompleted: number;
+  }): string {
+    if (goals.activeGoals.length === 0 && goals.streakDays === 0) {
+      // No goals yet - show prompt to create one
+      return `
         <div class="section">
             <div class="section-title">Learning Goals</div>
             <div style="text-align: center; padding: 12px; opacity: 0.7;">
@@ -528,13 +609,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
             </div>
         </div>`;
-        }
-        
-        // Build goals list
-        const goalsListHtml = goals.activeGoals.slice(0, 3).map(goal => {
-            const progress = Math.round((goal.currentCount / goal.targetCount) * 100);
-            const progressWidth = Math.min(progress, 100);
-            return `
+    }
+
+    // Build goals list
+    const goalsListHtml = goals.activeGoals
+      .slice(0, 3)
+      .map((goal) => {
+        const progress = Math.round(
+          (goal.currentCount / goal.targetCount) * 100,
+        );
+        const progressWidth = Math.min(progress, 100);
+        return `
             <div class="goal-item">
                 <div class="goal-header">
                     <span class="goal-title">${this._escapeHtml(goal.title)}</span>
@@ -544,44 +629,47 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <div class="goal-bar-fill" style="width: ${progressWidth}%;"></div>
                 </div>
             </div>`;
-        }).join('');
-        
-        return `
+      })
+      .join("");
+
+    return `
         <div class="section">
-            <div class="section-title">Learning Goals ${goals.streakDays > 0 ? `<span style="float: right;">🔥 ${goals.streakDays} day streak</span>` : ''}</div>
+            <div class="section-title">Learning Goals ${goals.streakDays > 0 ? `<span style="float: right;">🔥 ${goals.streakDays} day streak</span>` : ""}</div>
             <div class="goals-stats">
                 <span>✅ ${goals.completedToday} today</span>
                 <span>🏆 ${goals.totalCompleted} total</span>
             </div>
             ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;">No active goals</div>'}
         </div>`;
-    }
+  }
 }
 
 /**
  * Register the welcome view provider
  */
-export function registerWelcomeView(context: vscode.ExtensionContext): WelcomeViewProvider {
-    const provider = new WelcomeViewProvider(context.extensionUri);
-    
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(
-            WelcomeViewProvider.viewType,
-            provider,
-            {
-                webviewOptions: {
-                    retainContextWhenHidden: true
-                }
-            }
-        )
-    );
-    
-    // Register refresh command
-    context.subscriptions.push(
-        vscode.commands.registerCommand('alex.refreshWelcomeView', () => {
-            provider.refresh();
-        })
-    );
-    
-    return provider;
+export function registerWelcomeView(
+  context: vscode.ExtensionContext,
+): WelcomeViewProvider {
+  const provider = new WelcomeViewProvider(context.extensionUri);
+
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      WelcomeViewProvider.viewType,
+      provider,
+      {
+        webviewOptions: {
+          retainContextWhenHidden: true,
+        },
+      },
+    ),
+  );
+
+  // Register refresh command
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.refreshWelcomeView", () => {
+      provider.refresh();
+    }),
+  );
+
+  return provider;
 }

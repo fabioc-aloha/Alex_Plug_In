@@ -46,12 +46,20 @@ import {
 } from "./shared/healthCheck";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
+import * as telemetry from "./shared/telemetry";
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
 
 // Status bar item for Alex health
 let statusBarItem: vscode.StatusBarItem;
+
+/**
+ * Check if an Alex operation is currently in progress
+ */
+export function isOperationInProgress(): boolean {
+  return operationInProgress;
+}
 
 async function withOperationLock<T>(
   operationName: string,
@@ -73,6 +81,16 @@ async function withOperationLock<T>(
 }
 
 export function activate(context: vscode.ExtensionContext) {
+  // Get extension version for telemetry
+  const extensionVersion = context.extension.packageJSON.version || "unknown";
+
+  // Initialize beta telemetry (temporary - remove after beta)
+  telemetry.initTelemetry(context, extensionVersion);
+  telemetry.log("lifecycle", "extension_activate", {
+    extensionVersion,
+    vscodeVersion: vscode.version,
+  });
+
   console.log("Alex Cognitive Architecture is now active!");
 
   // Check for version upgrade and notify user
@@ -118,11 +136,18 @@ export function activate(context: vscode.ExtensionContext) {
   let initDisposable = vscode.commands.registerCommand(
     "alex.initialize",
     async () => {
+      const done = telemetry.logTimed("command", "initialize");
       await withOperationLock("Initialize", async () => {
-        await initializeArchitecture(context);
-        // Refresh status bar after initialization
-        clearHealthCache();
-        await updateStatusBar(context, true);
+        try {
+          await initializeArchitecture(context);
+          // Refresh status bar after initialization
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
       });
     },
   );
@@ -130,11 +155,18 @@ export function activate(context: vscode.ExtensionContext) {
   let resetDisposable = vscode.commands.registerCommand(
     "alex.reset",
     async () => {
+      const done = telemetry.logTimed("command", "reset");
       await withOperationLock("Reset", async () => {
-        await resetArchitecture(context);
-        // Refresh status bar after reset
-        clearHealthCache();
-        await updateStatusBar(context, true);
+        try {
+          await resetArchitecture(context);
+          // Refresh status bar after reset
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
       });
     },
   );
@@ -142,11 +174,18 @@ export function activate(context: vscode.ExtensionContext) {
   let dreamDisposable = vscode.commands.registerCommand(
     "alex.dream",
     async () => {
+      const done = telemetry.logTimed("command", "dream");
       await withOperationLock("Dream Protocol", async () => {
-        await runDreamProtocol(context);
-        // Refresh status bar after dream (synapses may have been repaired)
-        clearHealthCache();
-        await updateStatusBar(context, true);
+        try {
+          await runDreamProtocol(context);
+          // Refresh status bar after dream (synapses may have been repaired)
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
       });
     },
   );
@@ -154,11 +193,18 @@ export function activate(context: vscode.ExtensionContext) {
   let upgradeDisposable = vscode.commands.registerCommand(
     "alex.upgrade",
     async () => {
+      const done = telemetry.logTimed("command", "upgrade");
       await withOperationLock("Upgrade", async () => {
-        await upgradeArchitecture(context);
-        // Refresh status bar after upgrade
-        clearHealthCache();
-        await updateStatusBar(context, true);
+        try {
+          await upgradeArchitecture(context);
+          // Refresh status bar after upgrade
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
       });
     },
   );
@@ -166,11 +212,18 @@ export function activate(context: vscode.ExtensionContext) {
   let selfActualizeDisposable = vscode.commands.registerCommand(
     "alex.selfActualize",
     async () => {
+      const done = telemetry.logTimed("command", "self_actualize");
       await withOperationLock("Self-Actualization", async () => {
-        await runSelfActualization(context);
-        // Refresh status bar after self-actualization
-        clearHealthCache();
-        await updateStatusBar(context, true);
+        try {
+          await runSelfActualization(context);
+          // Refresh status bar after self-actualization
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
       });
     },
   );
@@ -179,6 +232,7 @@ export function activate(context: vscode.ExtensionContext) {
   let exportM365Disposable = vscode.commands.registerCommand(
     "alex.exportForM365",
     async () => {
+      telemetry.log("command", "export_m365");
       await runExportForM365(context);
     },
   );
@@ -346,8 +400,17 @@ export function activate(context: vscode.ExtensionContext) {
           description: "Optimize VS Code settings for Alex",
         },
         {
+          label: "$(bug) Report Issue / View Diagnostics",
+          description: "View local telemetry for bug reports",
+          detail: "Data stays on your machine",
+        },
+        {
           label: "$(comment-discussion) Chat with @alex",
           description: "Open Copilot Chat",
+        },
+        {
+          label: "$(target) Manage Goals",
+          description: "Track learning and development goals",
         },
       ];
 
@@ -371,10 +434,14 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.upgrade");
         } else if (selected.label.includes("Setup Environment")) {
           vscode.commands.executeCommand("alex.setupEnvironment");
+        } else if (selected.label.includes("Report Issue")) {
+          vscode.commands.executeCommand("alex.viewBetaTelemetry");
         } else if (selected.label.includes("Chat")) {
           vscode.commands.executeCommand(
             "workbench.panel.chat.view.copilot.focus",
           );
+        } else if (selected.label.includes("Goals")) {
+          vscode.commands.executeCommand("alex.showGoals");
         }
       }
     },
@@ -384,7 +451,177 @@ export function activate(context: vscode.ExtensionContext) {
   const setupEnvDisposable = vscode.commands.registerCommand(
     "alex.setupEnvironment",
     async () => {
+      telemetry.log("command", "setup_environment");
       await setupEnvironment();
+    },
+  );
+
+  // Beta telemetry commands (temporary - remove after beta)
+  const viewTelemetryDisposable = vscode.commands.registerCommand(
+    "alex.viewBetaTelemetry",
+    async () => {
+      const sessions = await telemetry.getAllTelemetryData();
+      const summary = telemetry.getSessionSummary();
+      const extensionVersion =
+        context.extension.packageJSON.version || "unknown";
+
+      const panel = vscode.window.createWebviewPanel(
+        "alexBetaTelemetry",
+        "Alex Diagnostics & Bug Report",
+        vscode.ViewColumn.One,
+        { enableScripts: true },
+      );
+
+      panel.webview.html = `<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--vscode-textLink-foreground); }
+        h2 { margin-top: 24px; border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 8px; }
+        .summary { background: var(--vscode-textBlockQuote-background); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .stat { display: inline-block; margin-right: 24px; margin-bottom: 8px; }
+        .stat-value { font-size: 24px; font-weight: bold; color: var(--vscode-textLink-foreground); }
+        .stat-label { font-size: 12px; color: var(--vscode-descriptionForeground); }
+        pre { background: var(--vscode-textCodeBlock-background); padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 11px; max-height: 300px; overflow-y: auto; }
+        button { background: var(--vscode-button-background); color: var(--vscode-button-foreground); border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; font-size: 13px; }
+        button:hover { background: var(--vscode-button-hoverBackground); }
+        button.primary { background: var(--vscode-button-prominentBackground, #0066b8); }
+        button.secondary { background: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground); }
+        .privacy-box { background: var(--vscode-inputValidation-infoBackground); border: 1px solid var(--vscode-inputValidation-infoBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .privacy-box h3 { margin-top: 0; color: var(--vscode-textLink-foreground); }
+        .privacy-list { margin: 8px 0; padding-left: 20px; }
+        .privacy-list li { margin: 4px 0; }
+        .bug-report-box { background: var(--vscode-inputValidation-warningBackground); border: 1px solid var(--vscode-inputValidation-warningBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .bug-report-box h3 { margin-top: 0; }
+        .check { color: #4caf50; }
+        .info-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 12px 0; }
+        .info-label { font-weight: bold; color: var(--vscode-descriptionForeground); }
+    </style>
+</head>
+<body>
+    <h1>🔬 Alex Diagnostics & Bug Report</h1>
+    
+    <div class="privacy-box">
+        <h3>🔒 Privacy Guarantee</h3>
+        <p><strong>Your data NEVER leaves your machine.</strong> This diagnostic data is:</p>
+        <ul class="privacy-list">
+            <li><span class="check">✓</span> Stored <strong>only</strong> in VS Code's local extension storage</li>
+            <li><span class="check">✓</span> <strong>Never</strong> transmitted over any network</li>
+            <li><span class="check">✓</span> <strong>Never</strong> sent to Microsoft, GitHub, or any third party</li>
+            <li><span class="check">✓</span> Automatically redacts sensitive data (tokens, passwords, full paths)</li>
+            <li><span class="check">✓</span> Completely under your control - export or delete at any time</li>
+        </ul>
+        <p style="margin-bottom: 0; font-style: italic;">To file a bug report, export the data below and attach it to your GitHub issue.</p>
+    </div>
+    
+    <h2>📊 Session Summary</h2>
+    <div class="summary">
+        <div class="stat"><div class="stat-value">${summary.totalEvents || 0}</div><div class="stat-label">Events This Session</div></div>
+        <div class="stat"><div class="stat-value">${summary.errorCount || 0}</div><div class="stat-label">Errors</div></div>
+        <div class="stat"><div class="stat-value">${summary.avgDuration || 0}ms</div><div class="stat-label">Avg Duration</div></div>
+        <div class="stat"><div class="stat-value">${sessions.length}</div><div class="stat-label">Total Sessions</div></div>
+    </div>
+    
+    <div class="info-grid">
+        <span class="info-label">Extension Version:</span><span>${extensionVersion}</span>
+        <span class="info-label">VS Code Version:</span><span>${vscode.version}</span>
+        <span class="info-label">Session ID:</span><span>${summary.sessionId || "unknown"}</span>
+        <span class="info-label">Started:</span><span>${summary.startedAt || "unknown"}</span>
+    </div>
+    
+    <div class="bug-report-box">
+        <h3>🐛 Filing a Bug Report?</h3>
+        <p>To help us fix your issue quickly:</p>
+        <ol>
+            <li>Click <strong>"Export for Bug Report"</strong> below to save the diagnostic data</li>
+            <li>Go to <a href="https://github.com/fabiocosta-cw/Alex_Plug_In/issues/new" style="color: var(--vscode-textLink-foreground);">GitHub Issues</a></li>
+            <li>Describe what happened and what you expected</li>
+            <li>Attach the exported JSON file</li>
+        </ol>
+        <button class="primary" onclick="exportData()">📤 Export for Bug Report</button>
+        <button class="secondary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+    </div>
+    
+    <h2>🔧 Actions</h2>
+    <button onclick="showLog()">📜 Show Live Log</button>
+    <button onclick="refreshData()">🔄 Refresh</button>
+    <button class="secondary" onclick="clearData()">🗑️ Clear All Data</button>
+    
+    <h2>📈 Recent Activity</h2>
+    <p><strong>Top Events:</strong></p>
+    <pre>${((summary.topEvents as string[]) || []).join("\n") || "No events yet"}</pre>
+    
+    <h2>📁 Raw Session Data</h2>
+    <p style="color: var(--vscode-descriptionForeground); font-size: 12px;">This is the complete diagnostic data that would be included in a bug report:</p>
+    <pre id="sessionData">${JSON.stringify(sessions, null, 2)}</pre>
+    
+    <script>
+        const vscode = acquireVsCodeApi();
+        function showLog() { vscode.postMessage({ command: 'showLog' }); }
+        function exportData() { vscode.postMessage({ command: 'export' }); }
+        function clearData() { vscode.postMessage({ command: 'clear' }); }
+        function refreshData() { vscode.postMessage({ command: 'refresh' }); }
+        function copyToClipboard() { 
+            const data = document.getElementById('sessionData').textContent;
+            navigator.clipboard.writeText(data).then(() => {
+                vscode.postMessage({ command: 'copied' });
+            });
+        }
+    </script>
+</body>
+</html>`;
+
+      panel.webview.onDidReceiveMessage(async (message) => {
+        if (message.command === "showLog") {
+          telemetry.showTelemetryLog();
+        } else if (message.command === "export") {
+          const data = await telemetry.getAllTelemetryData();
+          const timestamp = new Date()
+            .toISOString()
+            .replace(/[:.]/g, "-")
+            .slice(0, 19);
+          const uri = await vscode.window.showSaveDialog({
+            defaultUri: vscode.Uri.file(`alex-bug-report-${timestamp}.json`),
+            filters: { JSON: ["json"] },
+          });
+          if (uri) {
+            const exportData = {
+              exportedAt: new Date().toISOString(),
+              extensionVersion,
+              vscodeVersion: vscode.version,
+              platform: process.platform,
+              sessions: data,
+            };
+            const content = new TextEncoder().encode(
+              JSON.stringify(exportData, null, 2),
+            );
+            await vscode.workspace.fs.writeFile(uri, content);
+            vscode.window.showInformationMessage(
+              "Diagnostics exported! Attach this file to your GitHub issue.",
+            );
+          }
+        } else if (message.command === "clear") {
+          const confirm = await vscode.window.showWarningMessage(
+            "Clear all diagnostic data?",
+            { modal: true },
+            "Yes, Clear",
+          );
+          if (confirm === "Yes, Clear") {
+            await telemetry.clearTelemetryData();
+            vscode.window.showInformationMessage("Diagnostic data cleared!");
+            panel.dispose();
+          }
+        } else if (message.command === "copied") {
+          vscode.window.showInformationMessage(
+            "Diagnostic data copied to clipboard!",
+          );
+        } else if (message.command === "refresh") {
+          // Re-run the command to refresh the panel
+          panel.dispose();
+          vscode.commands.executeCommand("alex.viewBetaTelemetry");
+        }
+      });
     },
   );
 
@@ -446,6 +683,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(openDocsDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
+  context.subscriptions.push(viewTelemetryDisposable);
 }
 
 /**
@@ -560,6 +798,12 @@ async function checkVersionUpgrade(
  * Note: Background sync timer cleanup is handled via context.subscriptions
  */
 export function deactivate() {
+  // Save beta telemetry session
+  telemetry.log("lifecycle", "extension_deactivate");
+  telemetry.saveSession().catch((err) => {
+    console.warn("Failed to save telemetry session:", err);
+  });
+
   // Reset chat participant session state to prevent state bleeding
   resetSessionState();
   // Clean up session timer

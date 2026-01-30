@@ -238,6 +238,7 @@ export interface SynapseScanResult {
  * Scan memory files for synapse health
  * @param workspaceFolder The workspace folder to scan
  * @param collectIssues If true, collects detailed issue descriptions
+ * Performance optimized: Pre-builds file index to avoid per-synapse findFiles calls
  */
 export async function scanSynapseHealth(
     workspaceFolder: vscode.WorkspaceFolder,
@@ -251,9 +252,18 @@ export async function scanSynapseHealth(
         issues: collectIssues ? [] : undefined
     };
 
+    // Pre-build a set of all known markdown files for fast lookup
+    // This avoids calling findFiles for each synapse (major performance fix)
+    const allMdFiles = await vscode.workspace.findFiles(
+        new vscode.RelativePattern(workspaceFolder, '**/*.md'),
+        '**/node_modules/**',
+        500  // Limit to prevent scanning huge workspaces
+    );
+    const knownFileBasenames = new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
+
     for (const pattern of MEMORY_FILE_PATTERNS) {
         const relativePattern = new vscode.RelativePattern(workspaceFolder, pattern);
-        const files = await vscode.workspace.findFiles(relativePattern);
+        const files = await vscode.workspace.findFiles(relativePattern, null, 100);
 
         for (const file of files) {
             result.totalFiles++;
@@ -276,12 +286,10 @@ export async function scanSynapseHealth(
                     while ((match = regex.exec(line)) !== null) {
                         result.totalSynapses++;
                         const targetName = match[1].trim();
+                        const targetBasename = path.basename(targetName).toLowerCase();
                         
-                        const found = await vscode.workspace.findFiles(
-                            new vscode.RelativePattern(workspaceFolder, `**/${targetName}`)
-                        );
-                        
-                        if (found.length === 0) {
+                        // Fast lookup in pre-built file index instead of findFiles per synapse
+                        if (!knownFileBasenames.has(targetBasename)) {
                             result.brokenConnections++;
                             if (collectIssues && result.issues) {
                                 result.issues.push(

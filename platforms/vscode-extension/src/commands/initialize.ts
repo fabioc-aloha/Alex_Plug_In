@@ -4,6 +4,7 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, isAlexInstalled } from "../shared/utils";
 import { offerEnvironmentSetup } from "./setupEnvironment";
+import * as telemetry from "../shared/telemetry";
 
 interface FileManifestEntry {
   type: "system" | "hybrid" | "user-created";
@@ -35,10 +36,18 @@ function getManifestPath(rootPath: string): string {
 }
 
 export async function initializeArchitecture(context: vscode.ExtensionContext) {
+  telemetry.log("command", "initialize_start_detailed", {
+    workspaceFolderCount: vscode.workspace.workspaceFolders?.length ?? 0,
+  });
+
   // Use smart workspace folder detection - don't require Alex installed yet
   const workspaceResult = await getAlexWorkspaceFolder(false);
 
   if (!workspaceResult.found) {
+    telemetry.log("command", "initialize_no_workspace", {
+      cancelled: workspaceResult.cancelled,
+      error: workspaceResult.error,
+    });
     if (workspaceResult.cancelled) {
       return; // User cancelled folder selection
     }
@@ -51,9 +60,14 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
   }
 
   const rootPath = workspaceResult.rootPath!;
+  telemetry.log("command", "initialize_workspace_found", {
+    rootPath: path.basename(rootPath),
+  });
+
   const markerFile = path.join(rootPath, ".github", "copilot-instructions.md");
 
   if (await fs.pathExists(markerFile)) {
+    telemetry.log("command", "initialize_already_exists");
     const result = await vscode.window.showWarningMessage(
       'Alex is already installed in this workspace.\n\n• To update to a new version, use "Alex: Upgrade"\n• To completely reinstall, choose Reset below',
       "Upgrade Instead",
@@ -61,6 +75,7 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
       "Cancel",
     );
 
+    telemetry.log("command", "initialize_existing_choice", { choice: result });
     if (result === "Upgrade Instead") {
       await vscode.commands.executeCommand("alex.upgrade");
     } else if (result === "Reset Architecture") {
@@ -148,6 +163,9 @@ async function performInitialization(
   rootPath: string,
   overwrite: boolean,
 ) {
+  const done = telemetry.logTimed("command", "perform_initialization", {
+    overwrite,
+  });
   const extensionPath = context.extensionPath;
 
   // Validate extension has required files
@@ -157,13 +175,25 @@ async function performInitialization(
     "copilot-instructions.md",
   );
   if (!(await fs.pathExists(requiredSource))) {
+    telemetry.logError(
+      "initialize_corrupted_extension",
+      new Error("Missing core files"),
+      {
+        requiredSource,
+      },
+    );
     vscode.window.showErrorMessage(
       "Extension installation appears corrupted - missing core files.\n\n" +
         "Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.",
       { modal: true },
     );
+    done(false, new Error("Extension corrupted"));
     return;
   }
+
+  telemetry.log("command", "initialize_extension_valid", {
+    extensionPath: path.basename(extensionPath),
+  });
 
   // Define source and destination paths
   const sources = [
@@ -203,19 +233,25 @@ async function performInitialization(
 
   try {
     // Test write permissions first
+    telemetry.log("command", "initialize_testing_permissions");
     const testDir = path.join(rootPath, ".github");
     await fs.ensureDir(testDir);
     const testFile = path.join(testDir, ".write-test");
     try {
       await fs.writeFile(testFile, "test");
       await fs.remove(testFile);
+      telemetry.log("command", "initialize_permissions_ok");
     } catch (permError: any) {
       const permErrorMessage =
         permError instanceof Error ? permError.message : String(permError);
+      telemetry.logError("initialize_permission_denied", permError);
       throw new Error(
         `Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`,
       );
     }
+
+    let copiedCount = 0;
+    let skippedCount = 0;
 
     await vscode.window.withProgress(
       {
@@ -229,19 +265,46 @@ async function performInitialization(
             message: `Copying ${path.basename(item.dest)}...`,
           });
           if (await fs.pathExists(item.src)) {
-            await fs.copy(item.src, item.dest, { overwrite: overwrite });
+            try {
+              await fs.copy(item.src, item.dest, { overwrite: overwrite });
+              copiedCount++;
+              telemetry.log("command", "initialize_copied", {
+                item: path.basename(item.dest),
+              });
+            } catch (copyErr) {
+              telemetry.logError("initialize_copy_failed", copyErr, {
+                item: path.basename(item.dest),
+              });
+              throw copyErr;
+            }
           } else {
+            skippedCount++;
+            telemetry.log("command", "initialize_source_missing", {
+              item: path.basename(item.src),
+            });
             console.warn(`Source not found: ${item.src}`);
           }
         }
 
         // Create manifest with checksums of all deployed files
         progress.report({ message: "Creating manifest..." });
-        await createInitialManifest(context, rootPath);
+        try {
+          await createInitialManifest(context, rootPath);
+          telemetry.log("command", "initialize_manifest_created");
+        } catch (manifestErr) {
+          telemetry.logError("initialize_manifest_failed", manifestErr);
+          throw manifestErr;
+        }
       },
     );
 
+    telemetry.log("command", "initialize_copy_complete", {
+      copiedCount,
+      skippedCount,
+    });
+
     // Offer environment setup (non-blocking)
+    telemetry.log("command", "initialize_offering_setup");
     await offerEnvironmentSetup();
 
     const result = await vscode.window.showInformationMessage(
@@ -381,9 +444,16 @@ async function performInitialization(
     } else if (result === "Run Dream Protocol") {
       await vscode.commands.executeCommand("alex.dream");
     }
+
+    telemetry.log("command", "initialize_user_choice", {
+      choice: result || "dismissed",
+    });
+    done(true, { copiedCount, skippedCount });
   } catch (error: any) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error("Initialize failed:", error);
+    telemetry.logError("initialize_failed", error);
+    done(false, error instanceof Error ? error : new Error(errorMessage));
     vscode.window.showErrorMessage(
       `Failed to initialize Alex: ${errorMessage || "Unknown error"}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`,
       { modal: true },

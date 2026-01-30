@@ -27,23 +27,23 @@
 | - | GraphicArt capability | ✅ | Image generation (DALL-E) |
 | - | CodeInterpreter capability | ✅ | Python code execution |
 | - | Alex personality | ✅ | Enhanced instructions with anti-generic rules |
-| - | Visual identity | ✅ | Hatching Dino icons (color + outline) |
-| - | 5 conversation starters | ✅ | Meet, Memory, Meditate, Dream, Self-actualize |
+| - | Visual identity | ✅ | Geometric logo icons (color + outline) |
+| - | 10 conversation starters | ✅ | Meet, Memory, Meditate, Dream, Self-actualize, Meeting Prep, Email, Teams, People, Weekly Review |
 
-### 🔄 M365 Schema Upgrade (v1.5/v1.6 - Current Latest: v1.6)
+### ✅ M365 Schema Upgrade (v1.6 - Complete!)
 
 > **Fact-checked 2026-01-29**: Schema v1.5 and v1.6 ARE AVAILABLE NOW. v1.3/v1.4 don't exist.
 > MS recommends v1.6 for new agents. EmbeddedKnowledge marked "not yet available" in v1.6 docs.
 
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
-| 1 | Upgrade to v1.5 schema | ⬜ | Unlock Email, TeamsMessages, People, Meetings, Dataverse |
-| 2 | Email capability | ⬜ | Search Outlook emails for context (v1.5+) |
-| 3 | TeamsMessages capability | ⬜ | Reference Teams conversations (v1.5+) |
-| 4 | People capability | ⬜ | Know about colleagues (v1.5+) |
-| 5 | Meetings capability | ⬜ | Calendar-aware meeting prep (v1.5+, enhanced in v1.6) |
-| 6 | Dataverse capability | ⬜ | Power Platform data access (v1.5+) |
-| 7 | Upgrade to v1.6 schema | ⬜ | For worker_agents, user_overrides, meeting filtering |
+| 1 | Upgrade to v1.5 schema | ✅ | Unlock Email, TeamsMessages, People, Meetings, Dataverse |
+| 2 | Email capability | ✅ | Search Outlook emails for context (v1.5+) |
+| 3 | TeamsMessages capability | ✅ | Reference Teams conversations (v1.5+) |
+| 4 | People capability | ✅ | Know about colleagues (v1.5+) |
+| 5 | Meetings capability | ✅ | Calendar-aware meeting prep (v1.5+, enhanced in v1.6) |
+| 6 | Dataverse capability | ⬜ | Power Platform data access (v1.5+) - not needed for Alex |
+| 7 | Upgrade to v1.6 schema | ✅ | For worker_agents, user_overrides, meeting filtering |
 | 8 | EmbeddedKnowledge | ⬜ | Local files as knowledge (v1.6 - NOT YET AVAILABLE per MS) |
 
 ### M365 Deep Integration (from v4.5 Custom Engine)
@@ -272,36 +272,40 @@ flowchart TB
 
 | Version | Feature | Status |
 |---------|---------|--------|
-| v3.5.1 | M365 Declarative Agent (Schema v1.2) | ✅ Complete |
+| v3.5.1 | M365 Declarative Agent (Schema v1.6) | ✅ Complete |
 | v3.5.1 | OneDrive-based memory storage | ✅ Complete |
 | v3.5.1 | OneDriveAndSharePoint capability | ✅ Complete |
 | v3.5.1 | WebSearch capability | ✅ Complete |
 | v3.5.1 | GraphicArt capability | ✅ Complete |
 | v3.5.1 | CodeInterpreter capability | ✅ Complete |
 | v3.5.1 | Enhanced Alex personality instructions | ✅ Complete |
-| v3.5.1 | Hatching Dino visual identity | ✅ Complete |
-| v3.5.1 | 5 emoji conversation starters | ✅ Complete |
+| v3.5.1 | Geometric logo visual identity | ✅ Complete |
+| v3.5.1 | 10 emoji conversation starters | ✅ Complete |
 | v3.5.1 | Package validation (51/51 checks pass) | ✅ Complete |
+| v3.5.1 | Email capability | ✅ Complete |
+| v3.5.1 | TeamsMessages capability | ✅ Complete |
+| v3.5.1 | People capability | ✅ Complete |
+| v3.5.1 | Meetings capability | ✅ Complete |
 
-### ⏳ Deferred to v5.0 (Require Schema v1.5/v1.6)
+### ✅ Completed in v3.5.x (Schema v1.6 Upgrade)
 
 | Feature | Required Schema | Status |
 |---------|-----------------|--------|
-| Email capability | v1.5 | ⬜ Deferred |
-| TeamsMessages capability | v1.5 | ⬜ Deferred |
-| People capability | v1.5 | ⬜ Deferred |
-| Meetings capability | v1.6 | ⬜ Deferred |
-| Azure Functions API endpoints | Custom Engine | ⬜ Deferred |
-| send_email action | v1.5 | ⬜ Deferred |
-| send_message action | v1.5 | ⬜ Deferred |
+| Email capability | v1.5 | ✅ Complete |
+| TeamsMessages capability | v1.5 | ✅ Complete |
+| People capability | v1.5 | ✅ Complete |
+| Meetings capability | v1.6 | ✅ Complete |
+| Azure Functions API endpoints | Custom Engine | ⏳ Deferred to v5.0 |
+| send_email action | v1.5 | ⏳ Deferred (requires custom engine) |
+| send_message action | v1.5 | ⏳ Deferred (requires custom engine) |
 
 ### Declarative Agent (M365 Copilot)
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
-| `declarativeAgent.json` | `platforms/m365-copilot/appPackage/` | Agent manifest v1.2 |
+| `declarativeAgent.json` | `platforms/m365-copilot/appPackage/` | Agent manifest v1.6 |
 | `manifest.json` | `platforms/m365-copilot/appPackage/` | Teams app manifest v1.19 |
-| `color.png` | `platforms/m365-copilot/appPackage/` | 192x192 Hatching Dino icon |
+| `color.png` | `platforms/m365-copilot/appPackage/` | 192x192 geometric logo |
 | `outline.png` | `platforms/m365-copilot/appPackage/` | 32x32 outline icon |
 
 ### Azure Functions API (Deferred to v5.0)

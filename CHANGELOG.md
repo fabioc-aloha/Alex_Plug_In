@@ -5,17 +5,124 @@ All notable changes to the Alex Cognitive Architecture extension will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.3-beta.3] TRITRSEPTIUM-PENT-TRI 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
+
+### 🔥 Phoenix: User Documentation Rewrite
+
+Complete rewrite of user documentation with human-AI collaboration framing and appropriate reliance principles.
+
+### Changed
+
+- **📚 Documentation Rewrite** - All user docs rewritten for clarity
+  - Architect/lead metaphor: "You're the architect, Alex is your development lead"
+  - Appropriate reliance as core principle and work etiquette
+  - Human cognitive metaphors: Dream=sleep, Meditate=reflection
+  - Natural conversation focus—no @alex or slash commands required
+  - Removed technical implementation details from user docs
+
+- **📄 README.md Overhaul** - Extension README now matches user-friendly tone
+  - "Just Talk to Alex" section with example phrases
+  - Appropriate reliance section explaining calibrated trust
+  - Simplified feature descriptions using human metaphors
+  - Updated documentation links to new user docs
+
+### Removed
+
+- **🗑️ Outdated Files Cleaned Up**
+  - `sync-architecture.ps1` — obsolete sync script
+  - Old `.vsix` build artifacts (3.4.0, 3.4.1, 3.4.3, 3.5.0-beta.2, 3.5.1)
+  - Technical user docs: CONSCIOUS-MIND.md, UNCONSCIOUS-MIND.md, COPILOT-INTEGRATION.md, SKILLS-CAPABILITIES.md, PROJECT-STRUCTURE.md
+
+### User Documentation (alex_docs/)
+
+| Document | New Focus |
+|----------|-----------|
+| README.md | Main user guide with architect/lead framing |
+| COGNITIVE-ARCHITECTURE.md | "How Alex Thinks" - dual-process, memory, consolidation |
+| MEMORY-SYSTEMS.md | "How Alex Remembers" - knowledge types and capture |
+| GLOBAL-KNOWLEDGE.md | "Knowledge That Travels With You" - cross-project learning |
+| CLOUD-SYNC.md | "Your Knowledge, Everywhere" - backup and sync |
+| QUICK-REFERENCE.md | Commands and shortcuts cheat sheet |
+
+---
+
+## [3.5.3] TRITRSEPTIUM-PENT-TRI 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
+
+### 🔥 Phoenix: Performance Fixes & UX Consistency
+
+Critical performance fixes for upgrade/meditate freezes and unified Quick Actions across all UI surfaces.
+
+### Fixed
+
+- **⚡ Critical Performance Fix** - Synapse scanning no longer freezes
+  - Root cause: Per-synapse `findFiles()` calls causing O(n×m) complexity
+  - Solution: Pre-build file index once, use fast Set lookups
+  - Affected: Dream, Self-Actualize, Upgrade, Health Check, Synapse Tool
+  - Impact: **10-50x faster** for workspaces with 50+ synapses
+
+- **🔒 File Lock Deadlock Prevention** - Global knowledge operations no longer hang
+  - Reduced stale lock timeout from 10s to 5s
+  - Reduced retry attempts from 5 to 3 with shorter backoff
+  - Graceful fallback if lock fails instead of hanging indefinitely
+
+- **🔄 Upgrade "Reading Documents" Freeze** - Now completes in seconds
+  - Added `maxResults: 500` limit on workspace scans
+  - Added progress messages during scanning phases
+
+### Added
+
+- **🐛 Diagnostics Button in Health Dashboard** - Quick access to telemetry panel
+- **📊 Unified Quick Actions** - Same 10 options in both Status Bar and Welcome View:
+  - Dream (Neural Maintenance)
+  - Self-Actualize
+  - Sync Knowledge
+  - Export for M365
+  - Documentation
+  - Upgrade Architecture
+  - Setup Environment
+  - Report Issue / Diagnostics
+  - Chat with @alex
+  - Manage Goals
+
+### Changed
+
+- **UX Consistency** - Status bar menu and Welcome View now have identical actions
+- **Button Labels** - Standardized naming across all UI surfaces
+
+---
+
 ## [3.5.1] TRITRSEPTIUM-PENT-UN 🔥 Phoenix Rising - 2026-01-29 (VS Code Extension)
 
-### 🔥 Phoenix: Pre-Release Build
+### 🔥 Phoenix: Pre-Release Build with Beta Diagnostics
 
-Pre-release update with architecture sync verification and version alignment for VS Code Marketplace.
+Pre-release update with architecture sync verification, beta telemetry instrumentation, and version alignment for VS Code Marketplace.
+
+### Added
+
+- **🐛 Beta Diagnostics Panel** - `Alex: Report Issue / View Diagnostics`
+  - Local-only telemetry for debugging beta issues
+  - Privacy-first: data never leaves your machine
+  - One-click export for GitHub bug reports
+  - Copy to clipboard for quick pasting
+  - Clear all data option for user control
+
+- **📊 Telemetry Instrumentation** - Temporary beta tracking
+  - Command timing (initialize, dream, upgrade, self-actualize)
+  - Success/failure logging with error details
+  - Initialize flow instrumentation (workspace detection, permissions, file copying)
+  - Output channel "Alex Beta Telemetry" for real-time logs
+
+- **🔘 Quick Actions Updates**
+  - "Report Issue / View Diagnostics" in status bar quick pick
+  - "Report Issue" button in Welcome View sidebar
+  - "Setup Environment" button in Welcome View sidebar
 
 ### Changed
 
 - **Version Alignment** - All version references synchronized across extension components
 - **Architecture Sync** - Verified 19 instruction files, 19 domain knowledge files, 5 agent definitions, 5 skills
 - **Marketplace Compatible** - Switched to odd minor versioning for pre-release compatibility
+- **Privacy Assurance UI** - Clear messaging that telemetry stays local
 
 ---
 
