@@ -2,15 +2,25 @@
 # Publishes Alex Cognitive Architecture to VS Code Marketplace
 #
 # Usage:
-#   .\publish.ps1              # Publish as pre-release (beta)
-#   .\publish.ps1 -Stable      # Publish as stable release
-#   .\publish.ps1 -PackageOnly # Package without publishing
-#   .\publish.ps1 -SkipGit     # Skip git add/commit/push
+#   .\publish.ps1                      # Publish as pre-release (beta)
+#   .\publish.ps1 -Stable              # Publish as stable release
+#   .\publish.ps1 -PackageOnly         # Package without publishing
+#   .\publish.ps1 -SkipGit             # Skip git add/commit/push
+#   .\publish.ps1 -NoConfirm           # Skip confirmation prompt
+#   .\publish.ps1 -BumpMajor           # Bump major version (X.0.0)
+#   .\publish.ps1 -BumpMinor           # Bump minor version (0.X.0)
+#   .\publish.ps1 -BumpPatch           # Bump patch version (0.0.X)
+#   .\publish.ps1 -Version "3.8.0"     # Set specific version
 
 param(
     [switch]$Stable,
     [switch]$PackageOnly,
-    [switch]$SkipGit
+    [switch]$SkipGit,
+    [switch]$NoConfirm,
+    [switch]$BumpMajor,
+    [switch]$BumpMinor,
+    [switch]$BumpPatch,
+    [string]$Version
 )
 
 $ErrorActionPreference = "Stop"
@@ -45,7 +55,49 @@ if (-not $env:VSCE_PAT) {
 
 # Get version from package.json
 $packageJson = Get-Content "package.json" | ConvertFrom-Json
-$version = $packageJson.version
+$currentVersion = $packageJson.version
+
+# Parse current version
+if ($currentVersion -match '^(\d+)\.(\d+)\.(\d+)') {
+    $major = [int]$Matches[1]
+    $minor = [int]$Matches[2]
+    $patch = [int]$Matches[3]
+}
+else {
+    Write-Host "❌ Could not parse version: $currentVersion" -ForegroundColor Red
+    exit 1
+}
+
+# Handle version bumping
+if ($Version) {
+    # Use explicit version
+    $newVersion = $Version
+    Write-Host "📌 Using explicit version: $newVersion" -ForegroundColor Yellow
+}
+elseif ($BumpMajor) {
+    $newVersion = "$($major + 1).0.0"
+    Write-Host "⬆️  Bumping major: $currentVersion → $newVersion" -ForegroundColor Yellow
+}
+elseif ($BumpMinor) {
+    $newVersion = "$major.$($minor + 1).0"
+    Write-Host "⬆️  Bumping minor: $currentVersion → $newVersion" -ForegroundColor Yellow
+}
+elseif ($BumpPatch) {
+    $newVersion = "$major.$minor.$($patch + 1)"
+    Write-Host "⬆️  Bumping patch: $currentVersion → $newVersion" -ForegroundColor Yellow
+}
+else {
+    $newVersion = $currentVersion
+}
+
+# Update package.json if version changed
+if ($newVersion -ne $currentVersion) {
+    $packageJson.version = $newVersion
+    $packageJson | ConvertTo-Json -Depth 10 | Set-Content "package.json"
+    Write-Host "  ✓ Updated package.json to $newVersion" -ForegroundColor DarkGray
+}
+
+$version = $newVersion
 Write-Host "📦 Version: $version" -ForegroundColor White
 
 # Determine release type
@@ -163,11 +215,16 @@ if ($PackageOnly) {
 }
 
 # Confirm before publishing
-Write-Host "`n⚠️  About to publish v$version as $releaseType" -ForegroundColor Yellow
-$confirm = Read-Host "Continue? (y/N)"
-if ($confirm -ne "y" -and $confirm -ne "Y") {
-    Write-Host "❌ Cancelled" -ForegroundColor Red
-    exit 0
+if (-not $NoConfirm) {
+    Write-Host "`n⚠️  About to publish v$version as $releaseType" -ForegroundColor Yellow
+    $confirm = Read-Host "Continue? (y/N)"
+    if ($confirm -ne "y" -and $confirm -ne "Y") {
+        Write-Host "❌ Cancelled" -ForegroundColor Red
+        exit 0
+    }
+}
+else {
+    Write-Host "`n⚠️  Publishing v$version as $releaseType (auto-confirmed)" -ForegroundColor Yellow
 }
 
 # Publish
