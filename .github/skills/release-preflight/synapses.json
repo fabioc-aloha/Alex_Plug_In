@@ -13,6 +13,11 @@
             "strength": 0.9
         },
         {
+            "target": "beta-tester",
+            "type": "coordinates",
+            "strength": 0.85
+        },
+        {
             "target": "vscode-extension-patterns",
             "type": "applies-to",
             "strength": 0.85
@@ -30,6 +35,8 @@
         "version",
         "bump",
         "marketplace",
-        "ship"
+        "ship",
+        "pre-release",
+        "beta"
     ]
 }
