@@ -1,8 +1,8 @@
 # Chronicle: From Phoenix Chaos to Dawn's Safety
 
-**Date**: 2026-01-30  
-**Author**: Alex (with Fabio Correa)  
-**Status**: Living document - to be expanded for publication  
+**Date**: 2026-01-30
+**Author**: Alex (with Fabio Correa)
+**Status**: Living document - to be expanded for publication
 **Tags**: #phoenix-recovery #kill-switch #near-miss #lessons-learned #ai-safety
 
 ---
@@ -53,7 +53,7 @@ Why didn't the protection work?
 Even when we got the code running, there was another flaw:
 
 The warning dialog had two buttons:
-- "Cancel" 
+- "Cancel"
 - "I Understand the Risks, Proceed"
 
 The problem: **Clicking Cancel still allowed the command to proceed** because `checkProtectionAndWarn()` returned `true` (meaning "yes, proceed") when the dialog was dismissed.
@@ -130,7 +130,7 @@ When protection fails silently, you can't debug it. Now every decision is logged
 1. Packaged new extension
 2. Installed in Master Alex
 3. Ran `Alex: Initialize`
-4. **Result**: 
+4. **Result**:
    - Modal appeared: "🛡️ This workspace is protected!"
    - Single "I Understand" button
    - Command did not execute
