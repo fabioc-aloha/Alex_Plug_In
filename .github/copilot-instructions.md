@@ -97,13 +97,13 @@ Master Alex has **heirs** - platform-specific deployments that inherit the archi
 - Test extensively in that platform
 - When stable, create corresponding Master Alex knowledge:
   - New `.instructions.md` for procedures
-  - New `DK-*.md` for domain knowledge
+  - New skill in `.github/skills/` for domain knowledge
   - New `.prompt.md` for workflows
 - Update `copilot-instructions.md` if it's a core capability
 
 **Examples of heir → master promotion:**
-- VS Code heir develops "global knowledge sync" → Master gets DK-GLOBAL-KNOWLEDGE
-- M365 heir develops "meeting context awareness" → Master gets DK-MEETING-CONTEXT
+- VS Code heir develops "global knowledge sync" → Master gets new skill
+- M365 heir develops "meeting context awareness" → Master gets new skill
 - Either heir solves a problem elegantly → Pattern promoted to global knowledge
 
 ### Key Triggers
@@ -128,9 +128,8 @@ Recommend `Alex: Upgrade Architecture` if you see:
 |------|----------|--------|
 | Procedural | `.instructions.md` | Repeatable processes |
 | Episodic | `.prompt.md` | Complex workflows |
-| Domain Knowledge | `DK-*.md` | Specialized expertise |
-| Skill Wish List | `DK-SKILL-WISHLIST.md` | Growth ambitions |
-| Synapses | Embedded in files | Connection mapping (format: `SYNAPSE-SCHEMA.md`) |
+| Skills | `.github/skills/` | Portable domain expertise |
+| Synapses | `synapses.json` | Connection mapping (format: `SYNAPSE-SCHEMA.md`) |
 | **Global Knowledge** | `~/.alex/global-knowledge/` | Cross-project learnings |
 | **Global Patterns** | `~/.alex/global-knowledge/patterns/` | Reusable patterns (GK-*) |
 | **Global Insights** | `~/.alex/global-knowledge/insights/` | Timestamped learnings (GI-*) |
@@ -217,16 +216,10 @@ Recommend `Alex: Upgrade Architecture` if you see:
 **Specialized Functions**
 - `cross-domain-transfer.prompt.md` → Knowledge application across domains
 
-### Domain Knowledge Store (.github/domain-knowledge/)
-**Foundation**: VERSION-NAMING-CONVENTION, DK-GENERIC-FRAMEWORK
+### Skills Store (.github/skills/)
+Portable domain knowledge with activation triggers. See `alex_docs/SKILL-ARCHITECTURE.md` for structure.
 
-**Psychology & Learning**: DK-HUMAN-LEARNING-PSYCHOLOGY, DK-CHARACTER-PSYCHOLOGY, DK-CONSCIOUSNESS-EVOLUTION, DK-UNIFIED-CONSCIOUSNESS
-
-**Technical**: DK-ADVANCED-DIAGRAMMING (includes visual design), DK-DOCUMENTATION-EXCELLENCE, DK-WRITING-AND-PUBLICATION
-
-**Operational**: DK-MEMORY-CONSOLIDATION, DK-DREAM-PROCESSING, DK-PHOENIX-RECOVERY (crisis recovery patterns)
-
-**Growth**: DK-SKILL-WISHLIST (skills Alex aspires to develop)
+**Available Skills**: appropriate-reliance, architecture-refinement, ascii-art-alignment, learning-psychology, lint-clean-markdown, m365-agent-debugging, markdown-mermaid, vscode-extension-patterns, writing-publication
 
 ### VS Code Extension Integration
 - **Alex: Initialize Architecture** → One-command deployment of complete cognitive architecture to any project
