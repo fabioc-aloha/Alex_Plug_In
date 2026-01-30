@@ -4,14 +4,15 @@
 
 ---
 
-## Skill Count: 37
+## Skill Count: 38
 
 | Inheritance | Count |
-|-------------|-------|
-| Inheritable | 23 |
+| ----------- | ----- |
+| Inheritable | 24 |
 | Master-Only | 8 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
+| Temporary | 1 |
 
 ---
 
@@ -122,6 +123,16 @@ These skills depend on rapidly evolving technology or regulations:
 
 ---
 
+## ⏳ Temporary Skills (Beta)
+
+These skills exist temporarily for specific purposes and will be removed:
+
+| Skill | Purpose | Remove After |
+| ----- | ------- | ------------ |
+| [beta-tester](../.github/skills/beta-tester/) | Installation validation, bug reporting, migration testing | Stable release (v3.6.0+) |
+
+---
+
 ## Inheritance Model
 
 ```text
@@ -176,6 +187,7 @@ flowchart LR
         RCA[root-cause-analysis]
         IR[incident-response]
         RF[release-preflight]
+        BT[beta-tester]
     end
 
     subgraph Sec["🔐 Security"]
@@ -219,6 +231,9 @@ flowchart LR
     MED --> MF --> KS --> GK
     SA --> AH --> ARF
     SCG --> MM & AH & KS & LP & PS
+
+    %% Beta/temporary skill flow
+    BT --> AH & DP & ERP & RCA & IR
     MED --> SA
     BL -.-> KS
 
@@ -263,10 +278,14 @@ flowchart LR
     %% Styling - Staleness (dashed border)
     classDef stale stroke-dasharray:5 5,stroke-width:2px
 
+    %% Styling - Temporary (orange dashed)
+    classDef temp fill:#fff0e6,stroke:#d97706,stroke-dasharray:5 5
+
     class HC,MED,SA,ARF,KS,GK,MF,LLM master
     class VEP,CPP vscode
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LLM,GW,PRA,SFI stale
+    class BT temp
 ```
 
 ### Legend
@@ -276,6 +295,7 @@ flowchart LR
 | 🟡 Yellow | Master-only |
 | 🔵 Blue | VS Code heir |
 | 🟢 Green | M365 heir |
+| 🟠 Orange (dashed) | Temporary |
 | ⬜ White | Inheritable |
 
 | Border | Meaning |

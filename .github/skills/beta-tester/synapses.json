@@ -1,0 +1,43 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "skillId": "beta-tester",
+    "version": "1.0.0",
+    "lastValidated": "2026-01-30",
+    "temporary": true,
+    "removeAfter": "stable-release",
+    "connections": {
+        "architecture-health": {
+            "weight": 0.9,
+            "relationship": "validates",
+            "reason": "Both skills validate Alex installation integrity"
+        },
+        "debugging-patterns": {
+            "weight": 0.8,
+            "relationship": "uses",
+            "reason": "Bug investigation requires systematic debugging"
+        },
+        "error-recovery-patterns": {
+            "weight": 0.7,
+            "relationship": "uses",
+            "reason": "Helps testers recover from and document errors"
+        },
+        "root-cause-analysis": {
+            "weight": 0.7,
+            "relationship": "uses",
+            "reason": "Identify underlying causes of reported issues"
+        },
+        "incident-response": {
+            "weight": 0.6,
+            "relationship": "adapts",
+            "reason": "Structured approach to triaging beta issues"
+        }
+    },
+    "activationContexts": [
+        "beta-testing",
+        "installation-validation",
+        "bug-reporting",
+        "migration-testing",
+        "environment-diagnostics"
+    ],
+    "notes": "TEMPORARY SKILL - Remove after Alex reaches stable release (v3.6.0+)"
+}
