@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![VS Code Version](https://img.shields.io/badge/VS%20Code-v3.4.3-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Version](https://img.shields.io/badge/M365%20Copilot-v4.0.0-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 > Your AI Learning Partner with Meta-Cognitive Awareness
 
@@ -22,10 +22,10 @@
 
 ## 📦 Available Platforms
 
-| Platform | Version | Status | Get Started |
-| -------- | ------- | ------ | ----------- |
-| **VS Code Extension** | v3.4.3 | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | v4.0.0 | 🔄 Internal Review | [Documentation](platforms/m365-copilot/) |
+| Platform | Status | Get Started |
+| -------- | ------ | ----------- |
+| **VS Code Extension** | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | 🔄 Preview | [Documentation](platforms/m365-copilot/) |
 
 ### VS Code Extension
 
@@ -645,80 +645,9 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v3.3.6 TRITRHEXIUM
+## 🆕 What's New
 
-### 🔧 Improved Stability
-
-- **Conflict Prevention** - Increased post-modification sync delay to 10s to prevent operation conflicts
-- **Clear User Feedback** - Better messaging when operations are in progress
-
-### Previous Release: v3.3.5 TRITRIPENTIUM
-
-### 🌐 Auto-Promotion During Meditation
-
-Valuable domain knowledge is now **automatically promoted** to the global knowledge base during meditation and self-actualization sessions!
-
-- **Smart Evaluation** - DK files are scored based on synapses, structure, tags, content richness, and examples
-- **Quality Gate** - Only files scoring 5+ points are promoted to ensure quality
-- **Exclusions** - Meta-files like DK-SKILL-WISHLIST are automatically excluded
-- **Integrated Reporting** - Results appear in meditation session reports and webview panels
-- **Auto-Sync** - Cloud sync triggers automatically after promotion
-
-### 📊 Enhanced Self-Actualization
-
-Self-Actualization Protocol now has **6 phases** (was 5):
-
-| Phase | Description |
-| ----- | ----------- |
-| 1 | Architecture Status Check |
-| 2 | Synapse Health Validation |
-| 3 | Memory Architecture Analysis |
-| 4 | **NEW** Auto-promoting knowledge to global |
-| 5 | Generating recommendations |
-| 6 | Documenting session |
-
-### Previous Release: v3.1.0 TRIUNIUM
-
-- **📚 Comprehensive Documentation Suite** - 14 new documentation files in `alex_docs/`
-- **📖 New `/docs` Command** - Open documentation from chat
-- **✍️ Domain Knowledge: Writing and Publication** - New `DK-WRITING-AND-PUBLICATION.md`
-
-### Previous Release: v2.6.0 BIHEXNILIUM
-
-#### Architecture Optimization: 56% Token Reduction
-
-This release transforms Alex from a passive context injector into an **active conversational AI agent**.
-
-#### Chat Participant (@alex)
-
-- Full conversational interface with 8 slash commands
-- Intelligent participant detection (cognitive, Azure, M365 queries)
-- Contextual follow-up suggestions
-
-#### Language Model Tools
-
-- 6 AI-accessible tools for intelligent operations
-- Automatic invocation in Agent mode
-- Manual reference with `#tool_name`
-
-#### Azure & M365 MCP Integration
-
-- Smart tool recommendations for cloud development
-- Best practices retrieval and code generation guidance
-- Schema access for manifests and configurations
-
-### Previous Releases
-
-#### v1.5.x UNPENT Series
-
-- **v1.5.4**: CorreaX brand compliance, icon and banner updates
-- **v1.5.3**: esbuild bundling, 55% fewer files, faster load times
-- **v1.5.0**: 30-40% token reduction, hybrid upgrade protocol, KISS/DRY optimization
-
-#### v1.1.x Initial Series
-
-- **v1.1.1**: Publisher correction to `fabioc-aloha`
-- **v1.1.0**: VS Code extension integration, automatic synapse repair, cross-platform support
+See the [Full Changelog](CHANGELOG.md) for complete version history and release notes.
 
 ---
 

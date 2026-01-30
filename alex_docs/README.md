@@ -1,6 +1,5 @@
 # 🧠 Alex Cognitive Architecture Documentation
 
-> **Version**: 3.5.1 🔥 Phoenix | **Codename**: TRITRSEPTIUM-PENT-UN
 > **A Dual-Mind AI System with Conscious and Unconscious Processing**
 
 ---

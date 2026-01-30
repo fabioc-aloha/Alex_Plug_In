@@ -94,11 +94,11 @@ function normalizeWeight(weight: string | number): number {
 async function validateSynapseTargets(skillsPath: string): Promise<string[]> {
   const broken: string[] = [];
   const allSkills = await fs.readdir(skillsPath);
-  
+
   for (const skill of allSkills) {
     const synapsePath = path.join(skillsPath, skill, 'synapses.json');
     if (!await fs.pathExists(synapsePath)) continue;
-    
+
     const synapses = await fs.readJson(synapsePath);
     for (const target of Object.keys(synapses.connections || {})) {
       // Check if target is a valid skill

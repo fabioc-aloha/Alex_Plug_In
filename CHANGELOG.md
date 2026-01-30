@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [3.6.0-beta.1] - 2026-01-30 🛡️ Kill Switch Validated
+## [3.7.0] - 2026-01-30 🛡️ TRISEPTNIL - Dawn
 
-> **Codename:** Dawn — A new beginning with lessons learned
-> **Status:** Beta — Kill switch validated, ready for stability testing
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Stability and safety after Phoenix chaos
 
 ### Focus
 
@@ -53,9 +53,9 @@ Stability and safety after the Phoenix chaos. Kill switch protection validated a
 
 ---
 
-## [Unreleased] - v3.6.0 🌅 Dawn
+## [Unreleased]
 
-> Placeholder for changes after beta
+> Changes for next release (3.8.0 for stable, 3.9.0 for pre-release)
 
 ---
 

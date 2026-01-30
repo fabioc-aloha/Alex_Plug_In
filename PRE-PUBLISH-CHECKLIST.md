@@ -20,12 +20,13 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 
 ## 📋 Version & Metadata
 
-**Version maintained in 4 locations** (to reduce overhead):
+**Version maintained in 3 locations only** (minimal overhead):
 
 - [ ] **package.json** - `"version": "X.Y.Z"` (required for VS Code)
 - [ ] **CHANGELOG.md** - `## [X.Y.Z] CODENAME - YYYY-MM-DD` at top
 - [ ] **copilot-instructions.md** - Header line 4: `**Version**: X.Y.Z CODENAME`
-- [ ] **README.md badge** - `version-X.Y.Z` in shield URL (line 5)
+
+**README badges**: No longer include version numbers - just link to marketplace.
 
 **Naming Convention**: 0=nil, 1=un, 2=bi, 3=tri, 4=quad, 5=pent, 6=hex, 7=sept, 8=oct, 9=enn
 
@@ -42,10 +43,7 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 - [ ] copilot-instructions.md "Reference" section - should have NO version (only naming convention)
 - [ ] README.md comparison table - should say "Latest" not specific version
 - [ ] README.md footer - should have NO version number
-
-**Auto-updated (verify after above changes):**
-
-- [ ] README.md badge - `version-X.Y.Z` in shield URL
+- [ ] README.md badges - should NOT contain version numbers
 
 ## 🔧 Code Quality
 
@@ -69,7 +67,7 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 ```powershell
 Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
   $json = Get-Content $_ | ConvertFrom-Json
-  if ($json.temporary -eq $true) { 
+  if ($json.temporary -eq $true) {
     Write-Warning "EXCLUDE: $($_.Directory.Name)"
   }
 }

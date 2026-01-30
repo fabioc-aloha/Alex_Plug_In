@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.7.0-0078d4?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.108+-007ACC?style=flat-square&logo=visual-studio-code)](https://code.visualstudio.com/)
 [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Required-8957e5?style=flat-square&logo=github)](https://github.com/features/copilot)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
@@ -121,23 +121,9 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v3.5.3 Beta 3
+## 🆕 What's New
 
-**Performance Fixes**
-- Synapse scanning no longer freezes (10-50x faster)
-- Global knowledge operations no longer hang
-- Upgrade completes in seconds, not minutes
-
-**Documentation**
-- New user-friendly documentation with human metaphors
-- Architect/lead framing throughout
-- Appropriate reliance principles explained
-
-**UX Improvements**
-- Diagnostics button in Health Dashboard
-- Unified Quick Actions across all UI surfaces
-
-See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history.
+See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
 ---
 
