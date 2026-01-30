@@ -1,4 +1,6 @@
 import * as vscode from "vscode";
+import * as path from "path";
+import * as fs from "fs";
 import {
   checkHealth,
   HealthCheckResult,
@@ -230,6 +232,25 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       vscode.Uri.joinPath(this._extensionUri, "assets", "logo.svg")
     );
 
+    // Count skills in workspace
+    let skillCount = 0;
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (workspaceFolders) {
+      const skillsPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "skills");
+      try {
+        if (fs.existsSync(skillsPath)) {
+          skillCount = fs.readdirSync(skillsPath).filter(f => 
+            fs.statSync(path.join(skillsPath, f)).isDirectory()
+          ).length;
+        }
+      } catch { /* ignore */ }
+    }
+
+    // Goals summary
+    const activeGoalCount = goals.activeGoals.length;
+    const streakDays = goals.streakDays;
+    const completedToday = goals.completedToday;
+
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthIcon = isHealthy
@@ -305,6 +326,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 14px;
             font-weight: 600;
         }
+        .beta-badge {
+            background: var(--vscode-charts-purple, #a855f7);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .beta-badge:hover {
+            opacity: 0.8;
+        }
         .refresh-btn {
             margin-left: auto;
             background: none;
@@ -339,6 +374,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: var(--vscode-editor-background);
             border-radius: 4px;
             padding: 8px;
+            border-left: 2px solid transparent;
+        }
+        .status-item.status-good {
+            border-left-color: var(--vscode-charts-green);
+        }
+        .status-item.status-warn {
+            border-left-color: var(--vscode-charts-yellow);
         }
         .status-label {
             font-size: 10px;
@@ -348,6 +390,36 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .status-value {
             font-size: 13px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-green { background: var(--vscode-charts-green); }
+        .dot-yellow { background: var(--vscode-charts-yellow); }
+        .dot-red { background: var(--vscode-charts-red); }
+        .status-num {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--vscode-foreground);
+        }
+        .status-unit {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+            font-weight: normal;
+        }
+        .status-completed {
+            font-size: 10px;
+            color: var(--vscode-charts-green);
+            font-weight: 500;
+        }
+        .status-item.status-streak {
+            border-left-color: var(--vscode-charts-orange, #f97316);
         }
         
         .session-card {
@@ -388,6 +460,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             display: flex;
             flex-direction: column;
             gap: 4px;
+        }
+        .action-group-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--vscode-descriptionForeground);
+            margin-top: 10px;
+            margin-bottom: 4px;
+            padding-left: 2px;
+        }
+        .action-group-label:first-child {
+            margin-top: 0;
         }
         .action-btn {
             display: flex;
@@ -477,6 +560,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="header">
             <img src="${logoUri}" alt="Alex" class="header-icon" />
             <span class="header-title">Alex Cognitive</span>
+            <span class="beta-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">BETA</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
         
@@ -485,21 +569,39 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Status</div>
             <div class="status-grid">
-                <div class="status-item">
+                <div class="status-item ${isHealthy ? 'status-good' : 'status-warn'}">
                     <div class="status-label">Health</div>
-                    <div class="status-value">${healthIcon} ${healthText}</div>
+                    <div class="status-value"><span class="status-dot ${isHealthy ? 'dot-green' : health.brokenSynapses > 5 ? 'dot-red' : 'dot-yellow'}"></span>${healthText}</div>
+                </div>
+                <div class="status-item ${syncStatus.status === 'up-to-date' ? 'status-good' : ''}">
+                    <div class="status-label">Sync</div>
+                    <div class="status-value"><span class="status-dot ${syncStatus.status === 'up-to-date' ? 'dot-green' : syncStatus.status === 'error' ? 'dot-red' : 'dot-yellow'}"></span>${lastSyncText}</div>
                 </div>
                 <div class="status-item">
-                    <div class="status-label">Sync</div>
-                    <div class="status-value">${syncIcon} ${lastSyncText}</div>
+                    <div class="status-label">Skills</div>
+                    <div class="status-value"><span class="status-num">${skillCount}</span></div>
                 </div>
+                <div class="status-item">
+                    <div class="status-label">Synapses</div>
+                    <div class="status-value"><span class="status-num">${health.totalSynapses}</span></div>
+                </div>
+            </div>
+            <div class="status-grid" style="margin-top: 8px;">
                 <div class="status-item">
                     <div class="status-label">Patterns</div>
-                    <div class="status-value">📁 ${patterns}</div>
+                    <div class="status-value"><span class="status-num">${patterns}</span></div>
                 </div>
                 <div class="status-item">
                     <div class="status-label">Insights</div>
-                    <div class="status-value">💡 ${insights}</div>
+                    <div class="status-value"><span class="status-num">${insights}</span></div>
+                </div>
+                <div class="status-item ${streakDays > 0 ? 'status-streak' : ''}">
+                    <div class="status-label">Streak</div>
+                    <div class="status-value">${streakDays > 0 ? '🔥' : ''}<span class="status-num">${streakDays}</span> <span class="status-unit">days</span></div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">Goals</div>
+                    <div class="status-value"><span class="status-num">${activeGoalCount}</span> <span class="status-unit">active</span>${completedToday > 0 ? ` <span class="status-completed">+${completedToday} today</span>` : ''}</div>
                 </div>
             </div>
         </div>
@@ -507,6 +609,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
+                <div class="action-group-label">🧠 Core</div>
                 <button class="action-btn primary" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream (Neural Maintenance)</span>
@@ -517,55 +620,61 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Self-Actualize</span>
                     <span class="action-shortcut">⌃⌥S</span>
                 </button>
+                <button class="action-btn" onclick="cmd('healthDashboard')">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Health Dashboard</span>
+                </button>
+                
+                <div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
                     <span class="action-icon">☁️</span>
                     <span class="action-text">Sync Knowledge</span>
                     <span class="action-shortcut">⌃⌥K</span>
                 </button>
+                <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-text">Search Knowledge</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
+                    <span class="action-icon">🌐</span>
+                    <span class="action-text">Generate Skill Catalog</span>
+                </button>
+                
+                <div class="action-group-label">🛠️ Tools</div>
+                <button class="action-btn" onclick="cmd('startSession')">
+                    <span class="action-icon">🍅</span>
+                    <span class="action-text">Start Focus Session</span>
+                </button>
+                <button class="action-btn" onclick="cmd('showGoals')">
+                    <span class="action-icon">🎯</span>
+                    <span class="action-text">Manage Goals</span>
+                </button>
+                <button class="action-btn" onclick="cmd('openChat')">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Chat with @alex</span>
+                </button>
+                
+                <div class="action-group-label">⚙️ System</div>
+                <button class="action-btn" onclick="cmd('upgrade')">
+                    <span class="action-icon">⬆️</span>
+                    <span class="action-text">Upgrade Architecture</span>
+                </button>
                 <button class="action-btn" onclick="cmd('exportM365')">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
+                </button>
+                <button class="action-btn" onclick="cmd('setupEnvironment')">
+                    <span class="action-icon">⚙️</span>
+                    <span class="action-text">Setup Environment</span>
                 </button>
                 <button class="action-btn" onclick="cmd('openDocs')">
                     <span class="action-icon">📚</span>
                     <span class="action-text">Documentation</span>
                     <span class="action-shortcut">⌃⌥H</span>
                 </button>
-                <button class="action-btn" onclick="cmd('upgrade')">
-                    <span class="action-icon">⬆️</span>
-                    <span class="action-text">Upgrade Architecture</span>
-                </button>
-                <button class="action-btn" onclick="cmd('setupEnvironment')">
-                    <span class="action-icon">⚙️</span>
-                    <span class="action-text">Setup Environment</span>
-                </button>
                 <button class="action-btn" onclick="cmd('reportIssue')">
                     <span class="action-icon">🐛</span>
                     <span class="action-text">Report Issue / Diagnostics</span>
-                </button>
-                <button class="action-btn" onclick="cmd('openChat')">
-                    <span class="action-icon">💬</span>
-                    <span class="action-text">Chat with @alex</span>
-                </button>
-                <button class="action-btn" onclick="cmd('showGoals')">
-                    <span class="action-icon">🎯</span>
-                    <span class="action-text">Manage Goals</span>
-                </button>
-                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
-                    <span class="action-icon">🌐</span>
-                    <span class="action-text">Generate Skill Catalog</span>
-                </button>
-                <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
-                    <span class="action-icon">🔍</span>
-                    <span class="action-text">Search Knowledge</span>
-                </button>
-                <button class="action-btn" onclick="cmd('startSession')">
-                    <span class="action-icon">🍅</span>
-                    <span class="action-text">Start Focus Session</span>
-                </button>
-                <button class="action-btn" onclick="cmd('healthDashboard')">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Health Dashboard</span>
                 </button>
             </div>
         </div>
