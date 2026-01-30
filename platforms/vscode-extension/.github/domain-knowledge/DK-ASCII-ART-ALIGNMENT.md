@@ -1,8 +1,8 @@
 # Domain Knowledge: ASCII Art Alignment
 
 **Category**: Visual Design / Documentation
-**Confidence**: High (empirically validated 2026-01-28)
-**Source**: Collaborative learning with Fabio - iterative refinement
+**Confidence**: High (empirically validated)
+**Source**: Collaborative learning through iterative refinement
 
 ---
 
@@ -426,5 +426,4 @@ Final result after fixes:
 
 ---
 
-*Learned: 2026-01-28 through collaborative iteration with Fabio*
-*"Alex figured out my monospace font quirks"*
+*Learned through collaborative iteration*

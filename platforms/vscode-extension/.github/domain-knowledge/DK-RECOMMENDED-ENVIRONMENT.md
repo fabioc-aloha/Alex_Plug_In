@@ -132,8 +132,6 @@ Your existing settings will NOT be modified or removed.
 
 - **[alex-initialization.prompt.md]** (High, Triggers, Forward) → Offer environment setup during init
 - **[bootstrap-learning.instructions.md]** (Medium, Enhances, Forward) → Environment setup is part of onboarding
-- **[DK-VSCODE-EXTENSION-PATTERNS.md]** (High, Implements, Bidirectional) → Safe configuration pattern documented
-- **[upgrade.ts]** (High, Triggers, Forward) → Offer environment setup during upgrade
 
 ---
 

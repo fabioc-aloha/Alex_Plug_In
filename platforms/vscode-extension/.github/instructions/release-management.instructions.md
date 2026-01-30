@@ -161,7 +161,7 @@ vsce publish       # Publish to marketplace
 
 1. Create git tag: `git tag v<version>`
 2. Push tag: `git push origin v<version>`
-3. Verify on marketplace: `vsce show fabioc-aloha.alex-cognitive-architecture`
+3. Verify on marketplace: `vsce show <publisher>.<extension-name>`
 
 ---
 
@@ -362,7 +362,7 @@ Write-Host ""
 Write-Host "✅ Production deployment complete!" -ForegroundColor Green
 Write-Host "   Version: $newVersion" -ForegroundColor Gray
 Write-Host "   Tag: v$newVersion" -ForegroundColor Gray
-Write-Host "   Verify: vsce show fabioc-aloha.alex-cognitive-architecture" -ForegroundColor Gray
+Write-Host "   Verify: vsce show <publisher>.<extension-name>" -ForegroundColor Gray
 ```
 
 ### Script: `rollback.ps1`

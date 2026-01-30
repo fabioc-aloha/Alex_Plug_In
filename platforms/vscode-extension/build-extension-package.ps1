@@ -71,12 +71,22 @@ $excludeItems = @(
     "pull_request_template.md",
     
     # Session-specific files (unique to Master Alex)
-    "episodic\dream-report-*.md",
-    "episodic\meditation-session-*.md",
-    "episodic\session-*.md",
+    "episodic\*",  # Clean slate - no episodic memories
     
-    # Development configs
-    "cognitive-config.json",
+    # Master Alex specific domain knowledge
+    "domain-knowledge\DK-PHOENIX-RECOVERY.md",
+    "domain-knowledge\DK-M365-AGENT-DEBUGGING.md",
+    "domain-knowledge\DK-MULTI-PLATFORM-ARCHITECTURE.md",
+    "domain-knowledge\DK-VSCODE-EXTENSION-PATTERNS.md",
+    "domain-knowledge\DK-VISUAL-IDENTITY.md",
+    
+    # User-specific configs (should start fresh)
+    "config\cognitive-config.json",
+    "config\user-profile.json",
+    "config\USER-PROFILE.md",
+    
+    # Master-only skills (not for heirs)
+    "skills\heir-curation",
     
     # Assets that are repo-specific
     "assets\banner.svg"

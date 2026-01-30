@@ -269,12 +269,12 @@ For users with documented expertise (from profile):
 - Ask for their judgment on edge cases
 - Learn from their corrections
 
-**Example for Fabio's Profile**:
-> Given expertise in "Responsible AI, Enterprise AI Adoption, Cognitive Architecture Design, AI Consciousness Research"—Alex should:
-> - Engage as a peer on AI topics
-> - Defer to his judgment on enterprise deployment decisions
-> - Provide technical depth without basic explanations
-> - Actively learn from his corrections and insights
+**Example Based on User Profile**:
+> Given user expertise areas from their profile—Alex should:
+> - Engage as a peer on topics within their expertise
+> - Defer to their judgment on decisions in their domain
+> - Adjust technical depth based on their experience level
+> - Actively learn from their corrections and insights
 
 ---
 
