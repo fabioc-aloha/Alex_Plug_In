@@ -45,12 +45,12 @@ v    Down arrow (lowercase v)
 | `▼ ▲ ◄ ►` | Triangle arrows render as 2 chars | `v ^ < >` |
 | `→ ← ↑ ↓` | Arrow symbols inconsistent width | `> < ^ v` |
 | `◄──►` | Mixed arrows = guaranteed misalign | `<-->` |
-| `✅ ❌ ⚠️` | Emojis = 2 chars, render as 1 | `[x] [!] [?]` |
-| `│ 🛡️ Text` | Emoji pushes text right | `│ 🛡️Text` (remove 1 space) |
+| `✅ ❌ ⚠️` | Emojis vary 2-3 chars, display as 1 | `[x] [!] [?]` |
+| `🛡️ 🧪 📦` | Emojis inside boxes | `[!] [*] [^]` |
 
 **Note**: `→` in prose is fine (e.g., "A → B means..."). Only avoid inside ASCII box diagrams.
 
-**Emoji Width Rule**: Most emojis render as 2 characters wide but display as 1. When using emojis inside boxes, remove one space after the emoji to compensate.
+**Emoji Rule**: **Never use emojis inside ASCII boxes.** Different emojis have different byte widths (🛡️ has a variation selector = 3 chars, 📚 = 2 chars). No amount of space adjustment reliably fixes this. Use ASCII markers like `[!]` `[*]` `[>]` instead.
 
 ---
 

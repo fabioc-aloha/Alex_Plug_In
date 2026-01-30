@@ -9,16 +9,16 @@
 
 Alex exists as a **family**: one protected Master and multiple platform-specific heirs. This architecture ensures stability while enabling controlled evolution.
 
-```
+```text
                     ┌─────────────────────────┐
                     │      MASTER ALEX        │
                     │   (Source of Truth)     │
                     │                         │
-                    │ 🛡️ Protected by         │
-                    │    5-layer kill switch  │
+                    │  [!] Protected by       │
+                    │      5-layer kill switch│
                     │                         │
-                    │ 📚 Root .github/        │
-                    │    is canonical         │
+                    │  [>] Root .github/      │
+                    │      is canonical       │
                     └───────────┬─────────────┘
                                 │
                     ┌───────────┴───────────┐
@@ -27,9 +27,9 @@ Alex exists as a **family**: one protected Master and multiple platform-specific
         ┌───────────────────┐   ┌───────────────────┐
         │   VS CODE HEIR    │   │    M365 HEIR      │
         │                   │   │                   │
-        │ 🧪 R&D Lab        │   │ 🧪 R&D Lab        │
-        │ 📦 Marketplace    │   │ 📦 Microsoft 365  │
-        │ 👥 User-facing    │   │ 👥 User-facing    │
+        │  [*] R&D Lab      │   │  [*] R&D Lab      │
+        │  [^] Marketplace  │   │  [^] Microsoft 365│
+        │  [@] User-facing  │   │  [@] User-facing  │
         └───────────────────┘   └───────────────────┘
 ```
 
