@@ -75,8 +75,8 @@ const user = { role: 'viewer', permissions: ['read:own'] };
 createServer({ https: false, cors: '*' });
 
 // Good: Secure by default
-createServer({ 
-    https: true, 
+createServer({
+    https: true,
     cors: ['https://trusted.com'],
     helmet: true
 });

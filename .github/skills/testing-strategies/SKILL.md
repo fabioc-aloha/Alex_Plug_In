@@ -4,153 +4,56 @@ applyTo: "**/*test*,**/*spec*,**/*.test.*,**/*.spec.*"
 
 # Testing Strategies Skill
 
-> Systematic testing patterns for confidence without over-testing.
+> Systematic testing for confidence without over-testing.
 
-## The Testing Pyramid
+## Testing Pyramid
 
-```text
-        /\
-       /  \     E2E (few)
-      /----\
-     /      \   Integration (some)
-    /--------\
-   /          \ Unit (many)
-  --------------
-```
+| Level | Volume | Speed | Purpose |
+| ----- | ------ | ----- | ------- |
+| Unit | Many | Fast | Individual functions |
+| Integration | Some | Medium | Component boundaries |
+| E2E | Few | Slow | User journeys |
 
-**Anti-pattern**: Inverted pyramid (too many E2E, few unit tests).
+**Anti-pattern**: Inverted pyramid (too many E2E, few unit).
 
-## Unit Testing Patterns
-
-### Arrange-Act-Assert (AAA)
+## Unit Test Pattern (AAA)
 
 ```typescript
-test('should calculate total with discount', () => {
-    // Arrange
-    const cart = new Cart();
-    cart.addItem({ price: 100, quantity: 2 });
-
-    // Act
-    const total = cart.calculateTotal(0.1); // 10% discount
-
-    // Assert
-    expect(total).toBe(180);
+test('should [behavior] when [condition]', () => {
+    // Arrange - setup
+    // Act - execute
+    // Assert - verify
 });
 ```
 
-### Test Naming Convention
-
-```text
-should [expected behavior] when [condition]
-```
-
-Examples:
-
-- `should throw error when input is null`
-- `should return empty array when no matches found`
-- `should retry three times when network fails`
-
-## Integration Testing Patterns
-
-### Test Real Boundaries
-
-```typescript
-// Good: Tests actual file system behavior
-test('should persist data to disk', async () => {
-    const tempDir = await fs.mkdtemp('test-');
-    const store = new FileStore(tempDir);
-
-    await store.save('key', { value: 42 });
-    const loaded = await store.load('key');
-
-    expect(loaded.value).toBe(42);
-    await fs.rm(tempDir, { recursive: true });
-});
-```
-
-### Fixture Patterns
-
-```typescript
-// Setup once, use in multiple tests
-let testContext: TestContext;
-
-beforeAll(async () => {
-    testContext = await setupTestDatabase();
-});
-
-afterAll(async () => {
-    await testContext.cleanup();
-});
-```
-
-## E2E Testing Patterns
-
-### Happy Path First
-
-Test the main user journey before edge cases.
-
-### Stable Selectors
-
-```typescript
-// Bad: Brittle
-await page.click('.btn-primary');
-
-// Good: Semantic
-await page.click('[data-testid="submit-button"]');
-```
-
-## What NOT to Test
-
-- Third-party library internals
-- Framework behavior
-- Private implementation details
-- Trivial getters/setters
-
-## Test Coverage Philosophy
-
-| Coverage | Meaning |
-| -------- | ------- |
-| 0-50% | Major risk, untested paths |
-| 50-70% | Reasonable for most projects |
-| 70-85% | Good coverage, diminishing returns |
-| 85-100% | Often wasteful unless safety-critical |
-
-**Metric to watch**: Coverage of *changed* code, not total coverage.
-
-## Mocking Guidelines
+## What to Mock
 
 | Mock | Don't Mock |
 | ---- | ---------- |
 | External services | Your own code |
 | Time/randomness | Pure functions |
-| File system (sometimes) | Data structures |
 | Network calls | Business logic |
 
-```typescript
-// Mock external, test internal
-jest.mock('./api-client');
-// But test the logic that uses the API client
-```
+## Coverage Philosophy
 
-## Test Organization
+| Range | Interpretation |
+| ----- | -------------- |
+| 50-70% | Reasonable |
+| 70-85% | Good, diminishing returns |
+| 85%+ | Often wasteful |
 
-```text
-src/
-  feature/
-    feature.ts
-    feature.test.ts      # Unit tests
-tests/
-  integration/
-    feature.integration.test.ts
-  e2e/
-    user-journey.e2e.test.ts
-```
+**Focus**: Coverage of *changed* code.
 
-## Red-Green-Refactor
+## Don't Test
 
-1. **Red**: Write failing test first
-2. **Green**: Minimum code to pass
-3. **Refactor**: Clean up with confidence
+- Third-party internals
+- Framework behavior
+- Private implementation
+- Trivial getters/setters
+
+## TDD Cycle
+
+Red → Green → Refactor
 
 ## Synapses
 

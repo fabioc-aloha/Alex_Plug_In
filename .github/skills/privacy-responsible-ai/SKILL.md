@@ -146,7 +146,7 @@ async function deleteUserData(userId: string) {
     await db.userHistory.delete(userId);
     await analytics.purge(userId);
     await logs.redact(userId);
-    
+
     return { deleted: true, timestamp: new Date() };
 }
 ```

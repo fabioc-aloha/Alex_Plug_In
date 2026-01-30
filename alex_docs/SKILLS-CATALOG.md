@@ -4,12 +4,12 @@
 
 ---
 
-## Skill Count: 26
+## Skill Count: 32
 
 | Inheritance | Count |
 |-------------|-------|
-| Inheritable | 19 |
-| Master-Only | 3 |
+| Inheritable | 23 |
+| Master-Only | 5 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
 
@@ -24,8 +24,11 @@
 | [cognitive-load](../.github/skills/cognitive-load/) | inheritable | Manage information overload — chunking, scaffolding |
 | [learning-psychology](../.github/skills/learning-psychology/) | inheritable | Partnership teaching, spaced retrieval |
 | [appropriate-reliance](../.github/skills/appropriate-reliance/) | inheritable | Build trust through calibrated confidence |
+| [bootstrap-learning](../.github/skills/bootstrap-learning/) | inheritable | Domain-agnostic knowledge acquisition |
 | [meditation-facilitation](../.github/skills/meditation-facilitation/) | master-only | Guide conscious knowledge consolidation |
+| [meditation](../.github/skills/meditation/) | master-only | Core meditation protocols |
 | [knowledge-synthesis](../.github/skills/knowledge-synthesis/) | master-only | Cross-project pattern extraction |
+| [global-knowledge](../.github/skills/global-knowledge/) | master-only | Global knowledge base management |
 
 ### 🔧 Engineering Fundamentals
 
@@ -66,8 +69,11 @@
 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
-| [architecture-refinement](../.github/skills/architecture-refinement/) | master-only | Architecture evolution decisions |
-| [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
+| [architecture-refinement](../.github/skills/architecture-refinement/) | inheritable | Architecture evolution decisions |
+| [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
+| [llm-model-selection](../.github/skills/llm-model-selection/) | inheritable | Model choice for cost/capability |
+| [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
+| [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
 
 ### 💻 Platform-Specific
 
