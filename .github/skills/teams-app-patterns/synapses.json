@@ -5,11 +5,13 @@
         {
             "target": "m365-agent-debugging",
             "type": "extends",
+            "strength": 0.8,
             "reason": "Covers more than just declarative agents"
         },
         {
             "target": "release-preflight",
             "type": "uses",
+            "strength": 0.8,
             "reason": "Teams apps need release process"
         }
     ],

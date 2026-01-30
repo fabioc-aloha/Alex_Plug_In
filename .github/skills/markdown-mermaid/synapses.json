@@ -10,7 +10,7 @@
         {
             "target": "documentation-excellence",
             "type": "enhances",
-            "strength": 0.90
+            "strength": 0.9
         }
     ],
     "activationBoost": [

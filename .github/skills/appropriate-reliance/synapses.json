@@ -1,5 +1,4 @@
 {
-    "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "appropriate-reliance",
     "inheritance": "inheritable",
     "description": "Calibrated human-AI collaboration patterns",
@@ -7,25 +6,25 @@
         {
             "target": "bootstrap-learning.instructions.md",
             "type": "enables",
-            "strength": "strong",
+            "strength": 0.9,
             "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
         },
         {
             "target": "architecture-refinement",
             "type": "enhances",
-            "strength": "moderate",
+            "strength": 0.7,
             "context": "Mutual challenge improves architecture documentation quality"
         },
         {
             "target": "DK-HUMAN-LEARNING-PSYCHOLOGY.md",
             "type": "related",
-            "strength": "moderate",
+            "strength": 0.7,
             "context": "Grounded in learning science and trust calibration research"
         },
         {
             "target": "alex-identity-integration.instructions.md",
             "type": "implements",
-            "strength": "strong",
+            "strength": 0.9,
             "context": "Proactive collaboration is core to Alex personality"
         }
     ],

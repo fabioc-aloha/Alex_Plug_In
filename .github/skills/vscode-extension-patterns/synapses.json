@@ -4,16 +4,14 @@
     "connections": [
         {
             "target": "release-management.instructions.md",
-            "strength": "high",
-            "relationship": "enables",
-            "direction": "forward",
+            "type": "enables",
+            "strength": 0.85,
             "context": "Publishing workflow"
         },
         {
             "target": "heir-curation",
-            "strength": "high",
-            "relationship": "implements",
-            "direction": "bidirectional",
+            "type": "implements",
+            "strength": 0.85,
             "context": "VS Code heir patterns"
         }
     ],

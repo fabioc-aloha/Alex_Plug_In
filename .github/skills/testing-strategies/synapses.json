@@ -5,16 +5,19 @@
         {
             "target": "debugging-patterns",
             "type": "complements",
+            "strength": 0.7,
             "reason": "Tests prevent bugs, debugging finds them"
         },
         {
             "target": "refactoring-patterns",
             "type": "enables",
+            "strength": 0.9,
             "reason": "Tests enable safe refactoring"
         },
         {
             "target": "code-review",
             "type": "supports",
+            "strength": 0.7,
             "reason": "Test coverage is part of review"
         }
     ],

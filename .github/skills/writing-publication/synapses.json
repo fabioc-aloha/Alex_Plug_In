@@ -4,23 +4,20 @@
     "connections": [
         {
             "target": "markdown-mermaid",
-            "strength": "high",
-            "relationship": "enables",
-            "direction": "forward",
+            "type": "enables",
+            "strength": 0.85,
             "context": "Diagrams for papers and articles"
         },
         {
             "target": "lint-clean-markdown",
-            "strength": "medium",
-            "relationship": "enables",
-            "direction": "forward",
+            "type": "enables",
+            "strength": 0.6,
             "context": "Clean markdown for documentation"
         },
         {
             "target": "appropriate-reliance",
-            "strength": "medium",
-            "relationship": "validates",
-            "direction": "bidirectional",
+            "type": "validates",
+            "strength": 0.6,
             "context": "Evidence-based claims"
         }
     ],

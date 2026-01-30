@@ -5,16 +5,19 @@
         {
             "target": "microsoft-sfi",
             "type": "complements",
+            "strength": 0.7,
             "reason": "Privacy is part of security"
         },
         {
             "target": "code-review",
             "type": "informs",
+            "strength": 0.65,
             "reason": "Privacy checks in review"
         },
         {
             "target": "incident-response",
             "type": "extends",
+            "strength": 0.8,
             "reason": "Privacy incidents need response"
         }
     ],

@@ -4,11 +4,11 @@
 
 ---
 
-## Skill Count: 32
+## Skill Count: 36
 
 | Inheritance | Count |
 |-------------|-------|
-| Inheritable | 23 |
+| Inheritable | 27 |
 | Master-Only | 5 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
@@ -39,6 +39,8 @@
 | [debugging-patterns](../.github/skills/debugging-patterns/) | inheritable | Systematic bug hunting |
 | [code-review](../.github/skills/code-review/) | inheritable | 3-pass review, feedback patterns |
 | [git-workflow](../.github/skills/git-workflow/) | inheritable | Commits, recovery, branching |
+| [project-scaffolding](../.github/skills/project-scaffolding/) | inheritable | Complete project setup templates |
+| [vscode-environment](../.github/skills/vscode-environment/) | inheritable | Workspace settings, extensions, launch configs |
 
 ### 🚨 Operations & Reliability
 
@@ -64,6 +66,13 @@
 | [markdown-mermaid](../.github/skills/markdown-mermaid/) | inheritable | Diagrams and visualization |
 | [lint-clean-markdown](../.github/skills/lint-clean-markdown/) | inheritable | Clean, consistent markdown |
 | [ascii-art-alignment](../.github/skills/ascii-art-alignment/) | inheritable | Text-based diagrams |
+
+### 🎨 Visual Design
+
+| Skill | Inheritance | Purpose |
+|-------|-------------|---------|
+| [svg-graphics](../.github/skills/svg-graphics/) | inheritable | SVG banners, logos, icons, visual identity |
+| [image-handling](../.github/skills/image-handling/) | inheritable | Format conversion, optimization, sizing |
 
 ### 🏗️ Architecture & Design
 
@@ -123,6 +132,150 @@ Master Alex
     │
     └── heir:m365 ──► M365 Agent Only
 ```
+
+---
+
+## Skill Network Diagram
+
+```mermaid
+graph TB
+    subgraph Cognitive["🧠 Cognitive Core"]
+        BL[bootstrap-learning]
+        LP[learning-psychology]
+        CL[cognitive-load]
+        AR[appropriate-reliance]
+    end
+
+    subgraph Meta["🔮 Meta-Cognitive"]
+        MED[meditation]
+        MF[meditation-facilitation]
+        KS[knowledge-synthesis]
+        GK[global-knowledge]
+        SA[self-actualization]
+        AH[architecture-health]
+        ARF[architecture-refinement]
+    end
+
+    subgraph Engineering["🔧 Engineering"]
+        TS[testing-strategies]
+        RP[refactoring-patterns]
+        DP[debugging-patterns]
+        CR[code-review]
+        GW[git-workflow]
+        PS[project-scaffolding]
+    end
+
+    subgraph Ops["🚨 Operations"]
+        ERP[error-recovery-patterns]
+        RCA[root-cause-analysis]
+        IR[incident-response]
+        RF[release-preflight]
+    end
+
+    subgraph Security["🔐 Security"]
+        PRA[privacy-responsible-ai]
+        SFI[microsoft-sfi]
+    end
+
+    subgraph Docs["📝 Documentation"]
+        WP[writing-publication]
+        MM[markdown-mermaid]
+        LM[lint-clean-markdown]
+        AA[ascii-art-alignment]
+        LLM[llm-model-selection]
+    end
+
+    subgraph Visual["🎨 Visual Design"]
+        SVG[svg-graphics]
+        IH[image-handling]
+    end
+
+    subgraph VSCode["💻 VS Code Heir"]
+        VEP[vscode-extension-patterns]
+        CPP[chat-participant-patterns]
+    end
+
+    subgraph M365["☁️ M365 Heir"]
+        MAD[m365-agent-debugging]
+        TAP[teams-app-patterns]
+    end
+
+    subgraph Master["👑 Master Only"]
+        HC[heir-curation]
+    end
+
+    %% Cognitive connections
+    BL --> LP
+    BL --> CL
+    BL --> AR
+    LP --> CL
+    CL --> AR
+
+    %% Meta-cognitive flow
+    MED --> MF
+    MED --> KS
+    MED --> SA
+    MF --> KS
+    KS --> GK
+    SA --> AH
+    SA --> ARF
+    AH --> ARF
+    BL --> KS
+
+    %% Engineering connections
+    TS <--> RP
+    TS <--> DP
+    TS --> CR
+    RP --> CR
+    DP --> RCA
+    CR --> GW
+
+    %% Ops connections
+    DP --> ERP
+    ERP --> IR
+    IR --> RCA
+    RCA --> ERP
+    GW --> RF
+
+    %% Security connections
+    PRA <--> SFI
+    SFI --> CR
+    PRA --> CR
+    SFI --> IR
+
+    %% Documentation connections
+    MM <--> AA
+    MM --> LM
+    WP --> MM
+    ARF --> LM
+
+    %% Visual design connections
+    SVG <--> IH
+    SVG --> PS
+    PS --> LM
+    PS --> GW
+    IH --> VEP
+
+    %% Platform heir connections
+    HC --> VEP
+    HC --> MAD
+    VEP --> CPP
+    CPP --> LLM
+    MAD --> TAP
+    RF --> VEP
+    RF --> TAP
+```
+
+### Connection Types
+
+| Type | Meaning | Example |
+| ---- | ------- | ------- |
+| `enables` | A makes B possible | testing-strategies → refactoring-patterns |
+| `applies` | A uses principles from B | bootstrap-learning → learning-psychology |
+| `extends` | A goes deeper than B | root-cause-analysis → debugging-patterns |
+| `complements` | A and B work together | privacy-responsible-ai ↔ microsoft-sfi |
+| `triggers` | A causes B to activate | incident-response → root-cause-analysis |
+| `curates` | A manages B | heir-curation → vscode-extension-patterns |
 
 ---
 

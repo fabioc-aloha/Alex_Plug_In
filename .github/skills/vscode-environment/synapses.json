@@ -1,0 +1,38 @@
+{
+    "skill": "vscode-environment",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "project-scaffolding",
+            "type": "supports",
+            "strength": 0.85,
+            "reason": "Environment is part of scaffolding"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Extension dev needs good environment"
+        },
+        {
+            "target": "git-workflow",
+            "type": "enables",
+            "strength": 0.75,
+            "reason": "Git extensions improve workflow"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "supports",
+            "strength": 0.8,
+            "reason": "launch.json enables debugging"
+        }
+    ],
+    "triggers": [
+        "VS Code setup",
+        "workspace settings",
+        "extensions",
+        "launch.json",
+        "tasks.json",
+        "dev environment"
+    ]
+}

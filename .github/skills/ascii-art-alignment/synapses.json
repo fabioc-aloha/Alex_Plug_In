@@ -1,5 +1,4 @@
 {
-    "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "ascii-art-alignment",
     "inheritance": "inheritable",
     "description": "Create perfectly aligned ASCII diagrams",
@@ -7,19 +6,19 @@
         {
             "target": "markdown-mermaid",
             "type": "complements",
-            "strength": "strong",
+            "strength": 0.9,
             "context": "ASCII for precise control, Mermaid for auto-layout"
         },
         {
             "target": "lint-clean-markdown",
             "type": "related",
-            "strength": "moderate",
+            "strength": 0.7,
             "context": "Both require attention to character-level detail"
         },
         {
             "target": "documentation-excellence",
             "type": "enables",
-            "strength": "moderate",
+            "strength": 0.7,
             "context": "Visual diagrams enhance documentation quality"
         }
     ],

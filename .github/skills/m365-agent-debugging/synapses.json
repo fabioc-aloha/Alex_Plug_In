@@ -4,9 +4,8 @@
     "connections": [
         {
             "target": "heir-curation",
-            "strength": "high",
-            "relationship": "implements",
-            "direction": "forward",
+            "type": "implements",
+            "strength": 0.85,
             "context": "M365 heir debugging"
         }
     ],
