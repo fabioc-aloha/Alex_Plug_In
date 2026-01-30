@@ -4,11 +4,11 @@
 
 ---
 
-## Skill Count: 36
+## Skill Count: 37
 
 | Inheritance | Count |
 |-------------|-------|
-| Inheritable | 22 |
+| Inheritable | 23 |
 | Master-Only | 8 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
@@ -83,6 +83,7 @@
 | [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
+| [skill-catalog-generator](../.github/skills/skill-catalog-generator/) | inheritable | Generate skill catalogs with network diagrams |
 
 ### 💻 Platform-Specific
 
@@ -157,6 +158,7 @@ flowchart LR
         SA[self-actualization]
         AH[architecture-health]
         ARF[architecture-refinement]
+        SCG[skill-catalog-generator]
     end
 
     subgraph Eng["🔧 Engineering"]
@@ -216,6 +218,7 @@ flowchart LR
     %% Meta-cognitive flow
     MED --> MF --> KS --> GK
     SA --> AH --> ARF
+    SCG --> MM & AH & KS & LP & PS
     MED --> SA
     BL -.-> KS
 
