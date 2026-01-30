@@ -98,25 +98,25 @@ Language Model Tools enable extensions to contribute domain-specific capabilitie
 │                                                                      │
 │  1. User sends chat prompt                                          │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  2. Copilot collects available tools                                │
 │     • Built-in tools                                                │
 │     • Extension tools (Language Model Tools)                        │
 │     • MCP server tools                                              │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  3. LLM receives: prompt + context + tool definitions               │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  4. LLM generates response (may include tool invocation requests)   │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  5. Copilot invokes tools with LLM-provided parameters              │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  6. Tool results fed back to LLM (iterate if needed)                │
 │       │                                                              │
-│       ▼                                                              │
+│       v                                                              │
 │  7. Final response returned to user                                 │
 │                                                                      │
 └─────────────────────────────────────────────────────────────────────┘

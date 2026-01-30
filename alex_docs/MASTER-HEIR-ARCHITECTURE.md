@@ -23,7 +23,7 @@ Alex exists as a **family**: one protected Master and multiple platform-specific
                                 │
                     ┌───────────┴───────────┐
                     │                       │
-                    ▼                       ▼
+                    v                       v
         ┌───────────────────┐   ┌───────────────────┐
         │   VS CODE HEIR    │   │    M365 HEIR      │
         │                   │   │                   │
@@ -118,14 +118,14 @@ This is a **feature, not a bug**. It forces:
                                                       │
 ┌──────────────────┐                                  │
 │ 2. STABILITY     │                                  │
-│    PROVEN        │◄─────────────────────────────────┘
+│    PROVEN        │<─────────────────────────────────┘
 │                  │
 │ Feature works    │
 │ reliably in      │
 │ production       │
 └────────┬─────────┘
          │
-         ▼
+         v
 ┌──────────────────┐
 │ 3. MASTER        │
 │    ABSORBS       │
@@ -135,7 +135,7 @@ This is a **feature, not a bug**. It forces:
 │ to Master Alex   │
 └────────┬─────────┘
          │
-         ▼
+         v
 ┌──────────────────┐
 │ 4. ARCHITECTURE  │
 │    GROWS         │
@@ -147,7 +147,7 @@ This is a **feature, not a bug**. It forces:
          │
          │  (New heirs inherit improvements)
          │
-         └────────────────────────────────────────────►
+         └────────────────────────────────────────────>
 ```
 
 ---

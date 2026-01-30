@@ -27,7 +27,7 @@ This is the **safe way** to test extension changes.
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
                               │
-                              ▼
+                              v
 ┌─────────────────────────────────────────────────────────────────────┐
 │  EXTENSION DEVELOPMENT HOST                                         │
 │  (separate VS Code instance)                                        │
