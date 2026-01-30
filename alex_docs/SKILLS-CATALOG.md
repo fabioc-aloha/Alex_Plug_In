@@ -125,11 +125,11 @@ These skills depend on rapidly evolving technology or regulations:
 
 ## ⏳ Temporary Skills (Beta)
 
-These skills exist temporarily for specific purposes and will be removed:
+These skills exist temporarily for specific purposes and will be removed after stable release:
 
-| Skill | Purpose | Remove After |
-| ----- | ------- | ------------ |
-| [beta-tester](../.github/skills/beta-tester/) | Installation validation, bug reporting, migration testing | Stable release (v3.6.0+) |
+| Skill | Inheritance | Purpose | Remove After |
+| ----- | ----------- | ------- | ------------ |
+| [beta-tester](../.github/skills/beta-tester/) | inheritable (all platforms) | Installation validation, bug reporting, migration testing | Stable release (v3.6.0+) |
 
 ---
 

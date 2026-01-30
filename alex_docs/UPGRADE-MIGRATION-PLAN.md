@@ -167,6 +167,19 @@ After migration completes, automatically run:
 
 **Recommendation:** Run `Alex: Dream` automatically after migration to validate architecture health.
 
+### Beta Testing Resource
+
+The **[beta-tester](../.github/skills/beta-tester/SKILL.md)** skill provides comprehensive testing support:
+
+- Installation validation checklists
+- Environment diagnostics commands
+- Migration testing checklists (pre/post)
+- Common issues table with symptoms/checks/fixes
+- Bug report template for consistent reporting
+- Test scenarios for fresh install, upgrade, daily use, edge cases
+
+This skill is inherited by all platforms during beta phase. Ask: "test my installation" or "report a bug".
+
 ---
 
 ## Philosophy: User-Driven Migration
