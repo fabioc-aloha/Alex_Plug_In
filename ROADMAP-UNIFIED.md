@@ -61,8 +61,10 @@
 |---------|----------|--------|--------------|-----------|--------|
 | 3.4.3 | — | ✅ Stable | ✅ Published | — | Last stable |
 | 3.5.x | Phoenix | ⚠️ Chaos | ⚠️ Broken | ✅ v1.6 deployed | Archived |
-| **3.6.0** | **Dawn** | **🔄 Current** | **🔄 Rebuilding** | **✅ Aligned** | **ACTIVE** |
-| 3.7.0 | Foundation | Planned | Planned | Planned | — |
+| 3.6.0 | Dawn | ✅ Done | ✅ Published | ✅ Aligned | Complete |
+| 3.7.0 | Foundation | ✅ Done | ✅ v3.7.0 | — | Complete |
+| 3.7.1 | — | ✅ Done | ✅ Beta 1 | — | Complete |
+| **3.7.2** | **—** | **✅ Done** | **✅ Beta 2** | **—** | **CURRENT** |
 | 3.8.0 | Expression | Planned | Planned | Planned | — |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
 | 4.0.0 | Trust | Planned | Planned | Planned | — |
@@ -88,11 +90,12 @@
 
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
-| 1 | Create build script | ⬜ | `build-extension-package.ps1` generates `.github/` from root |
-| 2 | Test extension builds | ⬜ | `npm install`, `npm run compile`, `npm run package` |
-| 3 | Verify all features | ⬜ | 16 commands, 11 tools, status bar, welcome view |
-| 4 | Update version | ⬜ | 3.6.0 in package.json |
-| 5 | Test fresh install | ⬜ | Install on new workspace |
+| 1 | Create build script | ✅ | `build-extension-package.ps1` generates `.github/` from root |
+| 2 | Test extension builds | ✅ | `npm install`, `npm run compile`, `npm run package` |
+| 3 | Verify all features | ✅ | 17 commands, 11 tools, status bar, welcome view |
+| 4 | Update version | ✅ | 3.7.2 in package.json |
+| 5 | Test fresh install | ✅ | Install on new workspace |
+| 6 | Publish Beta 2 | ✅ | v3.7.2 on Marketplace (pre-release) |
 
 ### M365 Heir Tasks
 

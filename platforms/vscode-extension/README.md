@@ -97,9 +97,15 @@ Knowledge from Project A becomes available in Project B. Your expertise compound
 
 ## 🖥️ Quick Access
 
-**Status Bar** — Click the 🧠 Alex item (bottom-right) for quick actions: Dream, Sync, Diagnostics, Documentation.
+**Status Bar** — Click the 🧠 Alex item (bottom-right) for quick actions. Shows real-time status:
+- Health indicator (🟢/🟡/🔴)
+- Active focus session timer (🍅 25:00)
+- Learning streak (🔥7)
 
-**Welcome Panel** — Find the 🧠 icon in the Activity Bar (left side) for a dashboard view with health status and quick buttons.
+**Welcome Panel** — Find the 🧠 icon in the Activity Bar (left side) for a full dashboard:
+- Health, Sync, Skills, Synapses status
+- Patterns, Insights, Streak, Goals metrics
+- Grouped quick actions (Core, Knowledge, Tools, System)
 
 **Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all available commands.
 
@@ -121,17 +127,26 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New
+## 🆕 What's New in v3.7.2
+
+- **🌐 Generate Skill Catalog** — New command creates network diagrams of all skills
+- **📊 Rich Status Bar** — Shows health, session timer, and streak at a glance
+- **🎨 Welcome View Polish** — Expanded metrics, grouped actions, BETA badge
+- **🔄 Command Parity** — 14 commands accessible from Palette, Status Bar, AND Welcome View
+- **🚀 Activation Preview** — Uninitialized workspaces show feature preview
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
 ---
 
-## 🐛 Beta Testing Features
+## 🐛 Beta Testing
 
-- **Diagnostics Panel** - View local telemetry for bug reports
-- **Privacy-First** - All data stays on your machine, never transmitted
-- **Export for Issues** - One-click export for GitHub bug reports
+We're in beta! Help us improve Alex:
+
+- **Diagnostics Panel** — View local telemetry for bug reports (`Alex: Report Issue`)
+- **Privacy-First** — All data stays on your machine, never transmitted
+- **Export for Issues** — One-click export for GitHub bug reports
+- **BETA Badge** — Click the badge in Welcome View for quick diagnostics
 
 ### Keyboard Shortcuts
 
