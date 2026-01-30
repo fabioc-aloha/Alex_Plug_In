@@ -417,6 +417,18 @@ export function activate(context: vscode.ExtensionContext) {
           label: "$(list-tree) Generate Skill Catalog",
           description: "Create network diagram of all skills",
         },
+        {
+          label: "$(search) Search Knowledge",
+          description: "Quick search across global knowledge",
+        },
+        {
+          label: "$(watch) Start Focus Session",
+          description: "Pomodoro timer for focused learning",
+        },
+        {
+          label: "$(graph) Health Dashboard",
+          description: "Visual architecture health overview",
+        },
       ];
 
       const selected = await vscode.window.showQuickPick(items, {
@@ -449,6 +461,12 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.showGoals");
         } else if (selected.label.includes("Skill Catalog")) {
           vscode.commands.executeCommand("alex.generateSkillCatalog");
+        } else if (selected.label.includes("Search Knowledge")) {
+          vscode.commands.executeCommand("alex.knowledgeQuickPick");
+        } else if (selected.label.includes("Focus Session")) {
+          vscode.commands.executeCommand("alex.startSession");
+        } else if (selected.label.includes("Health Dashboard")) {
+          vscode.commands.executeCommand("alex.openHealthDashboard");
         }
       }
     },

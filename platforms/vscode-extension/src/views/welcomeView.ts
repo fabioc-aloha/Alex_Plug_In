@@ -99,6 +99,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "generateSkillCatalog":
           vscode.commands.executeCommand("alex.generateSkillCatalog");
           break;
+        case "knowledgeQuickPick":
+          vscode.commands.executeCommand("alex.knowledgeQuickPick");
+          break;
+        case "healthDashboard":
+          vscode.commands.executeCommand("alex.openHealthDashboard");
+          break;
         case "refresh":
           this.refresh();
           break;
@@ -540,6 +546,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('generateSkillCatalog')">
                     <span class="action-icon">🌐</span>
                     <span class="action-text">Generate Skill Catalog</span>
+                </button>
+                <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-text">Search Knowledge</span>
+                </button>
+                <button class="action-btn" onclick="cmd('startSession')">
+                    <span class="action-icon">🍅</span>
+                    <span class="action-text">Start Focus Session</span>
+                </button>
+                <button class="action-btn" onclick="cmd('healthDashboard')">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Health Dashboard</span>
                 </button>
             </div>
         </div>
