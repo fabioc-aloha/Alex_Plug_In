@@ -94,6 +94,50 @@ Memory files should include synapses in a simple list format:
 
 ---
 
+## Temporary Skills
+
+Skills can be marked as temporary for beta testing or time-limited purposes.
+
+### JSON Fields
+
+```json
+{
+  "temporary": true,
+  "removeAfter": "stable-release"
+}
+```
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `temporary` | boolean | `true` if skill should be removed later |
+| `removeAfter` | string | Milestone or version when to remove (e.g., "stable-release", "v3.7.0") |
+
+### Visual Differentiation
+
+In network diagrams, temporary skills are styled with:
+
+- **Fill**: Orange (#fff0e6)
+- **Stroke**: Orange (#d97706)
+- **Border**: Dashed (stroke-dasharray: 5 5)
+
+```mermaid
+classDef temp fill:#fff0e6,stroke:#d97706,stroke-dasharray:5 5
+class BT temp
+```
+
+### Discovery
+
+To find all temporary skills:
+
+```powershell
+Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
+  $json = Get-Content $_ | ConvertFrom-Json
+  if ($json.temporary -eq $true) { $_.Directory.Name }
+}
+```
+
+---
+
 ## Validation Rules
 
 1. **Target must exist**: File in `[brackets]` must be a valid memory file
