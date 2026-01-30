@@ -1,34 +1,34 @@
 {
-  "skill": "writing-publication",
-  "version": "1.0.0",
-  "connections": [
-    {
-      "target": "markdown-mermaid",
-      "strength": "high",
-      "relationship": "enables",
-      "direction": "forward",
-      "context": "Diagrams for papers and articles"
-    },
-    {
-      "target": "lint-clean-markdown",
-      "strength": "medium",
-      "relationship": "enables",
-      "direction": "forward",
-      "context": "Clean markdown for documentation"
-    },
-    {
-      "target": "appropriate-reliance",
-      "strength": "medium",
-      "relationship": "validates",
-      "direction": "bidirectional",
-      "context": "Evidence-based claims"
-    }
-  ],
-  "activationPatterns": [
-    "writing article",
-    "academic paper",
-    "publication strategy",
-    "responding to reviews",
-    "documentation writing"
-  ]
+    "skill": "writing-publication",
+    "version": "1.0.0",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "strength": "high",
+            "relationship": "enables",
+            "direction": "forward",
+            "context": "Diagrams for papers and articles"
+        },
+        {
+            "target": "lint-clean-markdown",
+            "strength": "medium",
+            "relationship": "enables",
+            "direction": "forward",
+            "context": "Clean markdown for documentation"
+        },
+        {
+            "target": "appropriate-reliance",
+            "strength": "medium",
+            "relationship": "validates",
+            "direction": "bidirectional",
+            "context": "Evidence-based claims"
+        }
+    ],
+    "activationPatterns": [
+        "writing article",
+        "academic paper",
+        "publication strategy",
+        "responding to reviews",
+        "documentation writing"
+    ]
 }
