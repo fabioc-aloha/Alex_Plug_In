@@ -96,6 +96,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "openChat":
           vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
           break;
+        case "generateSkillCatalog":
+          vscode.commands.executeCommand("alex.generateSkillCatalog");
+          break;
         case "refresh":
           this.refresh();
           break;
@@ -533,6 +536,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('showGoals')">
                     <span class="action-icon">🎯</span>
                     <span class="action-text">Manage Goals</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
+                    <span class="action-icon">🌐</span>
+                    <span class="action-text">Generate Skill Catalog</span>
                 </button>
             </div>
         </div>
