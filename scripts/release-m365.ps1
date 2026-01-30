@@ -49,8 +49,8 @@ try {
     # 3. Find package
     $buildDir = Join-Path $m365Dir "appPackage\build"
     $pkg = Get-ChildItem "$buildDir\*.zip" -ErrorAction SilentlyContinue | 
-           Sort-Object LastWriteTime -Descending | 
-           Select-Object -First 1
+    Sort-Object LastWriteTime -Descending | 
+    Select-Object -First 1
 
     if (-not $pkg) {
         throw "No package found in $buildDir"
@@ -62,7 +62,8 @@ try {
     npx teamsapp validate --package-file $pkg.FullName
     if ($LASTEXITCODE -ne 0) { 
         Write-Host "   ⚠️ Validation warnings (review output above)" -ForegroundColor Yellow
-    } else {
+    }
+    else {
         Write-Host "   ✅ Validation passed" -ForegroundColor Green
     }
 
@@ -92,7 +93,8 @@ try {
     try {
         $pkg.FullName | Set-Clipboard
         Write-Host "   📋 Package path copied to clipboard" -ForegroundColor Green
-    } catch {
+    }
+    catch {
         # Clipboard not available, ignore
     }
 }

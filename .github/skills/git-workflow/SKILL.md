@@ -6,6 +6,23 @@ applyTo: "**/.git/**,**/commit*,**/branch*,**/merge*"
 
 > Consistent git practices, recovery patterns, and safe operations.
 
+## ⚠️ Staleness Warning
+
+Git core is stable, but GitHub features (Actions, CLI, Copilot integration) evolve.
+
+**Refresh triggers:**
+
+- GitHub CLI major updates
+- GitHub Actions runner changes
+- New git features (e.g., `git switch`, `git restore`)
+- GitHub Copilot CLI integration
+
+**Last validated:** January 2026 (Git 2.43+, GitHub CLI 2.x)
+
+**Check current state:** [Git Release Notes](https://git-scm.com/docs/git/RelNotes), [GitHub CLI](https://cli.github.com/)
+
+---
+
 ## Commit Message Convention
 
 ```text

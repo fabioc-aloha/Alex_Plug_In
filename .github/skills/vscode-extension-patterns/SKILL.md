@@ -2,6 +2,23 @@
 
 > Reusable patterns for VS Code extension development.
 
+## ⚠️ Staleness Warning
+
+VS Code APIs evolve with each monthly release. Patterns may become outdated or better alternatives may emerge.
+
+**Refresh triggers:**
+
+- VS Code major/minor releases
+- New proposed APIs becoming stable
+- Extension API deprecations
+- Webview security policy changes
+
+**Last validated:** January 2026 (VS Code 1.96+)
+
+**Check current state:** [VS Code API](https://code.visualstudio.com/api), [Release Notes](https://code.visualstudio.com/updates)
+
+---
+
 ## Webview Dashboard
 
 ```typescript

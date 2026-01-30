@@ -2,6 +2,23 @@
 
 > Debug non-functional M365 Copilot declarative agents.
 
+## ⚠️ Staleness Warning
+
+M365 Copilot and Teams platform APIs are in rapid evolution. Schema versions, capabilities, and tooling change frequently.
+
+**Refresh triggers:**
+
+- New declarativeAgent schema versions
+- Teams Toolkit updates
+- New M365 Copilot capabilities
+- Developer Portal changes
+
+**Last validated:** January 2026 (Schema v1.6)
+
+**Check current state:** [Declarative Agent Schema](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest), [Teams Toolkit](https://github.com/OfficeDev/TeamsFx)
+
+---
+
 ## Schema Version Validation
 
 **Critical**: Only these schema versions exist:
