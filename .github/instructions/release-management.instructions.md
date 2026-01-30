@@ -113,6 +113,26 @@ These MUST be verified before releasing:
 | TypeScript compiles | - | `npm run compile` |
 | Changelog updated | CHANGELOG.md | Visual review |
 | No lint errors | *.md | `get_errors` tool |
+| Temporary skills handled | .github/skills/*/synapses.json | See below |
+
+### Temporary Skills Check
+
+**⚠️ Before stable releases**, verify temporary skills are excluded:
+
+```powershell
+# Find temporary skills
+Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
+  $json = Get-Content $_ | ConvertFrom-Json
+  if ($json.temporary -eq $true) { 
+    Write-Warning "TEMPORARY SKILL: $($_.Directory.Name) - exclude from stable release"
+  }
+}
+```
+
+| Release Type | Action |
+| ------------ | ------ |
+| Beta (`X.Y.Z-beta.N`) | Include temporary skills |
+| Stable (`X.Y.Z`) | **EXCLUDE** temporary skills |
 
 ---
 

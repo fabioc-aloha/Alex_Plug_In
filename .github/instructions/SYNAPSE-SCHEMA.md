@@ -136,6 +136,24 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 }
 ```
 
+### Deployment Policy
+
+**⚠️ IMPORTANT**: Temporary skills are deployed ONLY to beta releases, never to stable/production.
+
+| Release Type | Include Temporary Skills? |
+| ------------ | ------------------------- |
+| `X.Y.Z-beta.N` | ✅ Yes |
+| `X.Y.Z-alpha.N` | ✅ Yes |
+| `X.Y.Z-rc.N` | ⚠️ Review first |
+| `X.Y.Z` (stable) | ❌ No - must be removed |
+
+**Build script responsibility**: Before stable release, the build script should:
+1. Scan for `"temporary": true` in synapses.json files
+2. Exclude those skill folders from the package
+3. Warn if any temporary skills would be included
+
+See [release-management.instructions.md] for release checklist.
+
 ---
 
 ## Validation Rules

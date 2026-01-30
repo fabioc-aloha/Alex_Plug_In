@@ -54,6 +54,36 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 - [ ] No console.log statements in production code (except intentional logging)
 - [ ] All new features have corresponding package.json contributions
 
+## ⏳ Temporary Skills (Beta Only)
+
+**⚠️ IMPORTANT**: Temporary skills must be excluded from stable releases.
+
+### For Beta Releases (`X.Y.Z-beta.N` or odd minor like 3.7.x)
+
+- [ ] Temporary skills are **included** (they help beta testers)
+
+### For Stable Releases (`X.Y.Z` or even minor like 3.6.x)
+
+- [ ] Run check for temporary skills:
+
+```powershell
+Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
+  $json = Get-Content $_ | ConvertFrom-Json
+  if ($json.temporary -eq $true) { 
+    Write-Warning "EXCLUDE: $($_.Directory.Name)"
+  }
+}
+```
+
+- [ ] Verify temporary skills are **excluded** from package
+- [ ] Or confirm all temporary skills have been removed/graduated
+
+**Current Temporary Skills:**
+
+| Skill | Remove After |
+| ----- | ------------ |
+| beta-tester | Stable release (v3.6.0+) |
+
 ## 🧠 Architecture Sync
 
 **IMPORTANT**: The cognitive architecture files live in the root `.github/` folder but must be synced to `platforms/vscode-extension/.github/` before packaging.
