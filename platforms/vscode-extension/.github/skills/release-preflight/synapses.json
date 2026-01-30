@@ -1,0 +1,43 @@
+{
+    "skill": "release-preflight",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "git-workflow",
+            "type": "requires",
+            "strength": 0.95
+        },
+        {
+            "target": "release-management.instructions.md",
+            "type": "implements",
+            "strength": 0.9
+        },
+        {
+            "target": "beta-tester",
+            "type": "coordinates",
+            "strength": 0.85,
+            "bidirectional": true
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "applies-to",
+            "strength": 0.85
+        },
+        {
+            "target": "m365-agent-debugging",
+            "type": "applies-to",
+            "strength": 0.8
+        }
+    ],
+    "activationBoost": [
+        "release",
+        "publish",
+        "deploy",
+        "version",
+        "bump",
+        "marketplace",
+        "ship",
+        "pre-release",
+        "beta"
+    ]
+}

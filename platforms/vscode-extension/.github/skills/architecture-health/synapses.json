@@ -1,0 +1,31 @@
+{
+    "skill": "architecture-health",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "self-actualization",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Health checks feed self-actualization"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "supports",
+            "strength": 0.7,
+            "reason": "Health data guides refinement"
+        },
+        {
+            "target": "meditation-facilitation",
+            "type": "informs",
+            "strength": 0.65,
+            "reason": "Health status during meditation"
+        }
+    ],
+    "triggers": [
+        "synapse health",
+        "architecture check",
+        "validation",
+        "broken connections",
+        "dream"
+    ]
+}

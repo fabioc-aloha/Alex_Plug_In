@@ -1,0 +1,35 @@
+{
+    "skill": "image-handling",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "svg-graphics",
+            "type": "complements",
+            "strength": 0.85,
+            "bidirectional": true,
+            "reason": "SVG is source format"
+        },
+        {
+            "target": "project-scaffolding",
+            "type": "supports",
+            "strength": 0.75,
+            "reason": "Assets for projects"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "supports",
+            "strength": 0.7,
+            "reason": "Extension icons"
+        }
+    ],
+    "triggers": [
+        "PNG",
+        "JPEG",
+        "WebP",
+        "convert image",
+        "resize",
+        "optimize",
+        "favicon",
+        "icon sizes"
+    ]
+}

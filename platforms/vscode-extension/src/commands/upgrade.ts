@@ -1,489 +1,661 @@
+/**
+ * Alex Upgrade Command - v2 (Plan-Based Implementation)
+ * 
+ * Follows UPGRADE-MIGRATION-PLAN.md:
+ * Phase 1: Backup + Fresh Install
+ * Phase 2: Gap Analysis + Migration Candidates
+ * 
+ * Philosophy: "Backup → Fresh Install → Gap Analysis → User Decides"
+ */
+
 import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils";
-import { runDreamProtocol, DreamResult } from "./dream";
+import { runDreamProtocol } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
 
-interface FileManifestEntry {
-  type: "system" | "hybrid" | "user-created";
-  originalChecksum: string;
-  currentChecksum?: string;
-  modified?: boolean;
-  createdAt?: string;
+// ============================================================================
+// TYPES
+// ============================================================================
+
+type LegacyVersion = 'legacy' | 'transitional' | 'current' | 'unknown';
+
+interface LegacyDetection {
+  version: LegacyVersion;
+  dkLocations: string[];  // All places where DK files were found
+  hasSkills: boolean;
+  manifestLocation: string | null;
+  installedVersion: string | null;
 }
 
-interface Manifest {
-  version: string;
-  installedAt: string;
-  upgradedAt?: string;
-  files: Record<string, FileManifestEntry>;
-}
-
-interface MigrationTask {
-  file: string;
-  type: "schema-migration" | "merge-required" | "review-recommended";
+interface MigrationCandidate {
+  type: 'legacy-dk' | 'user-dk' | 'user-skill' | 'modified-system' | 'profile' | 'episodic';
+  sourcePath: string;       // Path in backup
+  targetPath: string;       // Path in new install
   description: string;
-  details: string[];
+  sizeKB: number;
+  lastModified: Date;
+  recommended: boolean;
+  stale: boolean;           // Not modified in > 90 days
 }
 
-interface UpgradeReport {
-  updated: string[];
-  added: string[];
-  preserved: string[];
-  backed_up: string[];
-  migrationTasks: MigrationTask[];
+interface UpgradeResult {
+  success: boolean;
+  backupPath: string;
+  migrationCandidatesPath: string | null;
+  candidateCount: number;
   errors: string[];
 }
 
-/**
- * Calculate MD5 checksum of file content
- */
-function calculateChecksum(content: string): string {
-  return crypto
-    .createHash("md5")
-    .update(content.replace(/\r\n/g, "\n"))
-    .digest("hex");
-}
+// ============================================================================
+// DETECTION
+// ============================================================================
 
 /**
- * Extracts the version from copilot-instructions.md
+ * Detect what version structure exists in the workspace
  */
-async function getInstalledVersion(rootPath: string): Promise<string | null> {
-  const instructionsPath = path.join(
+async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection> {
+  const result: LegacyDetection = {
+    version: 'unknown',
+    dkLocations: [],
+    hasSkills: false,
+    manifestLocation: null,
+    installedVersion: null,
+  };
+
+  // Check for DK files in root (legacy < 3.0)
+  try {
+    const rootFiles = await fs.readdir(rootPath);
+    const rootDKFiles = rootFiles.filter(f => f.startsWith('DK-') && f.endsWith('.md'));
+    if (rootDKFiles.length > 0) {
+      result.dkLocations.push('root');
+    }
+  } catch {
+    // Ignore errors reading root
+  }
+
+  // Check for DK files in .github/ directly (some old versions)
+  const githubPath = path.join(rootPath, '.github');
+  try {
+    if (await fs.pathExists(githubPath)) {
+      const githubFiles = await fs.readdir(githubPath);
+      const githubDKFiles = githubFiles.filter(f => f.startsWith('DK-') && f.endsWith('.md'));
+      if (githubDKFiles.length > 0) {
+        result.dkLocations.push('.github');
+      }
+    }
+  } catch {
+    // Ignore errors
+  }
+
+  // Check for DK files in .github/domain-knowledge/ (3.0+)
+  const dkFolderPath = path.join(rootPath, '.github', 'domain-knowledge');
+  try {
+    if (await fs.pathExists(dkFolderPath)) {
+      const dkFiles = await fs.readdir(dkFolderPath);
+      if (dkFiles.some(f => f.endsWith('.md'))) {
+        result.dkLocations.push('.github/domain-knowledge');
+      }
+    }
+  } catch {
+    // Ignore errors
+  }
+
+  // Check for skills (3.4+)
+  const skillsPath = path.join(rootPath, '.github', 'skills');
+  result.hasSkills = await fs.pathExists(skillsPath);
+
+  // Check for manifest locations
+  const newManifest = path.join(rootPath, '.github', 'config', 'alex-manifest.json');
+  const oldManifest = path.join(rootPath, '.alex-manifest.json');
+
+  if (await fs.pathExists(newManifest)) {
+    result.manifestLocation = '.github/config/alex-manifest.json';
+  } else if (await fs.pathExists(oldManifest)) {
+    result.manifestLocation = '.alex-manifest.json';
+  }
+
+  // Get installed version from copilot-instructions.md
+  const instructionsPath = path.join(rootPath, '.github', 'copilot-instructions.md');
+  if (await fs.pathExists(instructionsPath)) {
+    try {
+      const content = await fs.readFile(instructionsPath, 'utf8');
+      const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);
+      result.installedVersion = versionMatch ? versionMatch[1] : null;
+    } catch {
+      // Ignore
+    }
+  }
+
+  // Determine version category
+  if (result.dkLocations.includes('root')) {
+    result.version = 'legacy';
+  } else if (result.manifestLocation === '.alex-manifest.json') {
+    result.version = 'transitional';
+  } else if (result.hasSkills) {
+    result.version = 'current';
+  } else if (result.dkLocations.length > 0) {
+    result.version = 'transitional';
+  }
+
+  return result;
+}
+
+// ============================================================================
+// BACKUP
+// ============================================================================
+
+/**
+ * Create a complete backup of everything
+ */
+async function createVersionAwareBackup(
+  rootPath: string,
+  detection: LegacyDetection,
+  timestamp: string
+): Promise<string> {
+  const versionLabel = detection.installedVersion || detection.version;
+  const backupDir = path.join(
     rootPath,
-    ".github",
-    "copilot-instructions.md",
+    'archive',
+    'upgrades',
+    `backup-${versionLabel}-${timestamp}`
   );
 
-  if (!(await fs.pathExists(instructionsPath))) {
-    return null;
+  await fs.ensureDir(backupDir);
+
+  // Backup .github folder
+  const githubSrc = path.join(rootPath, '.github');
+  if (await fs.pathExists(githubSrc)) {
+    await fs.copy(githubSrc, path.join(backupDir, '.github'));
   }
 
-  try {
-    const content = await fs.readFile(instructionsPath, "utf8");
-    const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);
-    return versionMatch ? versionMatch[1] : null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Gets the extension's bundled version
- */
-async function getExtensionVersion(extensionPath: string): Promise<string> {
-  try {
-    const packageJson = await fs.readJson(
-      path.join(extensionPath, "package.json"),
-    );
-    return packageJson.version || "0.0.0";
-  } catch (error) {
-    console.error("Failed to read extension package.json:", error);
-    return "0.0.0"; // Fallback version
-  }
-}
-
-/**
- * Get the manifest path (new location)
- */
-function getManifestPath(rootPath: string): string {
-  return path.join(rootPath, ".github", "config", "alex-manifest.json");
-}
-
-/**
- * Get the legacy manifest path (old location)
- */
-function getLegacyManifestPath(rootPath: string): string {
-  return path.join(rootPath, ".alex-manifest.json");
-}
-
-/**
- * Load manifest, migrating from old location if needed
- */
-async function loadManifest(rootPath: string): Promise<Manifest | null> {
-  const manifestPath = getManifestPath(rootPath);
-  const legacyPath = getLegacyManifestPath(rootPath);
-
-  // Check new location first
-  if (await fs.pathExists(manifestPath)) {
-    try {
-      return await fs.readJson(manifestPath);
-    } catch (error) {
-      console.error("Failed to parse manifest (may be corrupted):", error);
-      return null;
+  // Backup root DK files (legacy)
+  if (detection.dkLocations.includes('root')) {
+    const rootDKDir = path.join(backupDir, 'root-dk-files');
+    await fs.ensureDir(rootDKDir);
+    
+    const rootFiles = await fs.readdir(rootPath);
+    for (const file of rootFiles) {
+      if (file.startsWith('DK-') && file.endsWith('.md')) {
+        await fs.copy(
+          path.join(rootPath, file),
+          path.join(rootDKDir, file)
+        );
+      }
     }
   }
 
-  // Check legacy location and migrate if found
-  if (await fs.pathExists(legacyPath)) {
-    try {
-      const manifest = await fs.readJson(legacyPath);
-      // Migrate to new location
-      await fs.ensureDir(path.join(rootPath, ".github", "config"));
-      await fs.writeJson(manifestPath, manifest, { spaces: 2 });
-      await fs.remove(legacyPath);
-      console.log("Migrated manifest from root to .github/config/");
-      return manifest;
-    } catch (error) {
-      console.error("Failed to parse/migrate legacy manifest:", error);
-      return null;
+  // Backup old manifest location
+  const oldManifest = path.join(rootPath, '.alex-manifest.json');
+  if (await fs.pathExists(oldManifest)) {
+    await fs.copy(oldManifest, path.join(backupDir, '.alex-manifest.json'));
+  }
+
+  // Save detection report
+  await fs.writeJson(
+    path.join(backupDir, 'detection-report.json'),
+    {
+      ...detection,
+      backupCreatedAt: new Date().toISOString(),
+    },
+    { spaces: 2 }
+  );
+
+  return backupDir;
+}
+
+// ============================================================================
+// CLEAN + FRESH INSTALL
+// ============================================================================
+
+/**
+ * Remove old structure completely
+ */
+async function cleanOldStructure(rootPath: string, detection: LegacyDetection): Promise<void> {
+  // Delete .github folder
+  const githubPath = path.join(rootPath, '.github');
+  if (await fs.pathExists(githubPath)) {
+    await fs.remove(githubPath);
+  }
+
+  // Delete root DK files (legacy)
+  if (detection.dkLocations.includes('root')) {
+    const rootFiles = await fs.readdir(rootPath);
+    for (const file of rootFiles) {
+      if (file.startsWith('DK-') && file.endsWith('.md')) {
+        await fs.remove(path.join(rootPath, file));
+      }
     }
   }
 
-  return null;
+  // Delete old manifest
+  const oldManifest = path.join(rootPath, '.alex-manifest.json');
+  if (await fs.pathExists(oldManifest)) {
+    await fs.remove(oldManifest);
+  }
 }
 
 /**
- * Save manifest
+ * Install fresh from extension package
  */
-async function saveManifest(
-  rootPath: string,
-  manifest: Manifest,
-): Promise<void> {
-  const manifestPath = getManifestPath(rootPath);
+async function freshInstall(extensionPath: string, rootPath: string): Promise<void> {
+  const sources = [
+    { src: 'copilot-instructions.md', dest: 'copilot-instructions.md' },
+    { src: 'instructions', dest: 'instructions' },
+    { src: 'prompts', dest: 'prompts' },
+    { src: 'episodic', dest: 'episodic' },
+    { src: 'config', dest: 'config' },
+    { src: 'agents', dest: 'agents' },
+    { src: 'skills', dest: 'skills' },
+  ];
+
+  const extGithub = path.join(extensionPath, '.github');
+  const destGithub = path.join(rootPath, '.github');
+
+  await fs.ensureDir(destGithub);
+
+  for (const item of sources) {
+    const srcPath = path.join(extGithub, item.src);
+    const destPath = path.join(destGithub, item.dest);
+
+    if (await fs.pathExists(srcPath)) {
+      await fs.copy(srcPath, destPath, { overwrite: true });
+    }
+  }
+
+  // Create fresh manifest
+  await createFreshManifest(extensionPath, rootPath);
+}
+
+/**
+ * Create manifest for fresh install
+ */
+async function createFreshManifest(extensionPath: string, rootPath: string): Promise<void> {
+  const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
+  const version = packageJson.version || '0.0.0';
+
+  const manifest = {
+    version,
+    installedAt: new Date().toISOString(),
+    files: {} as Record<string, { type: string; checksum: string }>,
+  };
+
+  // Calculate checksums for system files
+  const githubPath = path.join(rootPath, '.github');
+  const systemFiles = await collectSystemFiles(githubPath);
+
+  for (const file of systemFiles) {
+    const content = await fs.readFile(file, 'utf8');
+    const relativePath = path.relative(rootPath, file).replace(/\\/g, '/');
+    manifest.files[relativePath] = {
+      type: 'system',
+      checksum: crypto.createHash('md5').update(content.replace(/\r\n/g, '\n')).digest('hex'),
+    };
+  }
+
+  const manifestPath = path.join(rootPath, '.github', 'config', 'alex-manifest.json');
   await fs.ensureDir(path.dirname(manifestPath));
   await fs.writeJson(manifestPath, manifest, { spaces: 2 });
 }
 
 /**
- * Auto-merge brain file (copilot-instructions.md)
- * Preserves user customizations while updating system sections
+ * Collect all system files for manifest
  */
-async function autoMergeBrainFile(
+async function collectSystemFiles(dir: string): Promise<string[]> {
+  const files: string[] = [];
+
+  async function walk(currentDir: string) {
+    if (!await fs.pathExists(currentDir)) return;
+    
+    const entries = await fs.readdir(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+      } else if (entry.name.endsWith('.md') || entry.name.endsWith('.json')) {
+        files.push(fullPath);
+      }
+    }
+  }
+
+  await walk(dir);
+  return files;
+}
+
+// ============================================================================
+// GAP ANALYSIS
+// ============================================================================
+
+/**
+ * Compare backup to new install and find migration candidates
+ */
+async function runGapAnalysis(
+  backupPath: string,
   rootPath: string,
-  extensionPath: string,
-  newVersion: string,
-): Promise<{ success: boolean; reason?: string }> {
-  const userFile = path.join(rootPath, ".github", "copilot-instructions.md");
-  const newFile = path.join(
-    extensionPath,
-    ".github",
-    "copilot-instructions.md",
-  );
+  detection: LegacyDetection
+): Promise<MigrationCandidate[]> {
+  const candidates: MigrationCandidate[] = [];
+  const now = new Date();
+  const staleThreshold = 90 * 24 * 60 * 60 * 1000; // 90 days
 
-  if (!(await fs.pathExists(userFile)) || !(await fs.pathExists(newFile))) {
-    return { success: false, reason: "File not found" };
-  }
-
-  try {
-    const userContent = await fs.readFile(userFile, "utf8");
-    const newContent = await fs.readFile(newFile, "utf8");
-
-    // Extract user's domain slots (P5-P7 assignments)
-    const domainSlotsMatch = userContent.match(
-      /\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/,
-    );
-    const userDomainSlots = domainSlotsMatch ? domainSlotsMatch[0] : null;
-
-    // Extract user's custom synapses (any added by user beyond defaults)
-    const userSynapsesSection = userContent.match(
-      /## Synapses[\s\S]*?(?=##|$)/,
-    );
-
-    // Check for heavy user customization that requires manual merge
-    const userLines = userContent.split("\n").length;
-    const newLines = newContent.split("\n").length;
-
-    // If user file is significantly different (>20% longer), require manual merge
-    if (userLines > newLines * 1.2) {
-      return {
-        success: false,
-        reason: "User file has significant customizations",
-      };
-    }
-
-    // Check for custom sections (user added their own ## headers)
-    const userHeaders = (userContent.match(/^## [^\n]+/gm) || []) as string[];
-    const newHeaders = (newContent.match(/^## [^\n]+/gm) || []) as string[];
-    const customHeaders = userHeaders.filter((h) => !newHeaders.includes(h));
-
-    if (customHeaders.length > 2) {
-      return {
-        success: false,
-        reason: `User has ${customHeaders.length} custom sections`,
-      };
-    }
-
-    // Safe to auto-merge: Start with new content
-    let mergedContent = newContent;
-
-    // Preserve user's domain slots if they have customized them
-    if (
-      userDomainSlots &&
-      userDomainSlots.includes("P5") &&
-      !userDomainSlots.includes("Available for")
-    ) {
-      const defaultDomainSlots = mergedContent.match(
-        /\*\*Domain Slots \(P5-P7\)\*\*:([^\n]*(?:\n(?!\*\*)[^\n]*)*)/,
-      );
-      if (defaultDomainSlots) {
-        mergedContent = mergedContent.replace(
-          defaultDomainSlots[0],
-          userDomainSlots,
-        );
-      }
-    }
-
-    // Update version number
-    mergedContent = mergedContent.replace(
-      /\*\*Version\*\*:\s*[\d.]+\s*[A-Z]*/,
-      `**Version**: ${newVersion}`,
-    );
-
-    // Write merged content
-    await fs.writeFile(userFile, mergedContent, "utf8");
-
-    return { success: true };
-  } catch (error: any) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Auto-merge brain file failed:", error);
-    return {
-      success: false,
-      reason: errorMessage || "Unknown error during merge",
-    };
-  }
-}
-
-/**
- * Scan file for old synapse patterns that need migration
- */
-async function scanForMigrationNeeds(filePath: string): Promise<string[]> {
-  const issues: string[] = [];
-
-  if (!(await fs.pathExists(filePath))) {
-    return issues;
-  }
-
-  try {
-    const content = await fs.readFile(filePath, "utf8");
-
-    // Check for old headers
-    if (/## Embedded Synapse Network/i.test(content)) {
-      issues.push(
-        'Old header: "## Embedded Synapse Network" → should be "## Synapses"',
-      );
-    }
-    if (/### \*\*Connection Mapping\*\*/i.test(content)) {
-      issues.push(
-        'Old subheader: "### **Connection Mapping**" → should be "### Connection Mapping"',
-      );
-    }
-    if (/### \*\*Activation Patterns/i.test(content)) {
-      issues.push(
-        'Old subheader: "### **Activation Patterns" → should be "### Activation Patterns"',
-      );
-    }
-
-    // Check for old relationship types
-    const oldTypes = [
-      "Expression",
-      "Embodiment",
-      "Living",
-      "Reflexive",
-      "Ethical",
-      "Unconscious",
-      "Application",
-      "Validation",
-    ];
-    for (const type of oldTypes) {
-      const regex = new RegExp(
-        `\\(\\s*(Critical|High|Medium|Low)\\s*,\\s*${type}\\s*,`,
-        "i",
-      );
-      if (regex.test(content)) {
-        issues.push(
-          `Old relationship type: "${type}" → needs migration to standard type`,
-        );
-      }
-    }
-
-    // Check for verbose activation patterns with dates
-    if (/✅\s*(NEW|CRITICAL|ENHANCED).*20[0-9]{2}/.test(content)) {
-      issues.push(
-        "Verbose activation patterns with date stamps → should be simplified",
-      );
-    }
-
-    // Check for bold activation triggers
-    if (/\*\*[A-Z][^*]+\*\*\s*→/.test(content)) {
-      issues.push("Bold activation triggers → should be plain text");
-    }
-  } catch (error: any) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Error scanning file for migration:", error);
-    issues.push(`Error scanning file: ${errorMessage || "Unknown error"}`);
-  }
-
-  return issues;
-}
-
-/**
- * Relationship type migration mapping
- */
-const RELATIONSHIP_TYPE_MIGRATIONS: Record<string, string> = {
-  Expression: "Enables",
-  Embodiment: "Enables",
-  Living: "Validates",
-  Reflexive: "Documents",
-  Ethical: "Validates",
-  Unconscious: "Enables",
-  Application: "Enables",
-  Validation: "Validates",
-};
-
-/**
- * Perform automatic schema migration on a file
- * Returns true if changes were made, false otherwise
- */
-async function performSchemaMigration(
-  filePath: string,
-): Promise<{ migrated: boolean; changes: string[] }> {
-  const changes: string[] = [];
-
-  if (!(await fs.pathExists(filePath))) {
-    return { migrated: false, changes };
-  }
-
-  try {
-    let content = await fs.readFile(filePath, "utf8");
-    const originalContent = content;
-
-    // 1. Migrate old header: "## Embedded Synapse Network" → "## Synapses"
-    if (/## Embedded Synapse Network/i.test(content)) {
-      content = content.replace(/## Embedded Synapse Network/gi, "## Synapses");
-      changes.push('Header: "## Embedded Synapse Network" → "## Synapses"');
-    }
-
-    // 2. Migrate bold subheaders: "### **Connection Mapping**" → "### Connection Mapping"
-    if (/### \*\*Connection Mapping\*\*/i.test(content)) {
-      content = content.replace(
-        /### \*\*Connection Mapping\*\*/gi,
-        "### Connection Mapping",
-      );
-      changes.push(
-        'Subheader: "### **Connection Mapping**" → "### Connection Mapping"',
-      );
-    }
-    if (/### \*\*Activation Patterns\*\*/i.test(content)) {
-      content = content.replace(
-        /### \*\*Activation Patterns\*\*/gi,
-        "### Activation Patterns",
-      );
-      changes.push(
-        'Subheader: "### **Activation Patterns**" → "### Activation Patterns"',
-      );
-    }
-
-    // 3. Migrate old relationship types
-    for (const [oldType, newType] of Object.entries(
-      RELATIONSHIP_TYPE_MIGRATIONS,
-    )) {
-      // Match patterns like (Critical, Expression, or (High, Embodiment,
-      const regex = new RegExp(
-        `(\\(\\s*(?:Critical|High|Medium|Low)\\s*,\\s*)${oldType}(\\s*,)`,
-        "gi",
-      );
-      if (regex.test(content)) {
-        content = content.replace(regex, `$1${newType}$2`);
-        changes.push(`Relationship type: "${oldType}" → "${newType}"`);
-      }
-    }
-
-    // 4. Simplify verbose activation patterns with date stamps
-    // Old: **Bold Trigger** → Long description ✅ NEW Aug 8, 2025
-    // New: Trigger → Action
-    const dateStampPattern =
-      /\*\*([^*]+)\*\*\s*→\s*([^✅\n]+)\s*✅\s*(?:NEW|CRITICAL|ENHANCED)[^\n]*/g;
-    let match;
-    while ((match = dateStampPattern.exec(originalContent)) !== null) {
-      const trigger = match[1].trim();
-      const action = match[2].trim();
-      const oldLine = match[0];
-      const newLine = `${trigger} → ${action}`;
-      content = content.replace(oldLine, newLine);
-      changes.push(
-        `Simplified activation: "${trigger}" (removed date stamp and bold)`,
-      );
-    }
-
-    // 5. Remove bold from remaining activation triggers without date stamps
-    // Match: **Trigger** → Action (but not already matched above)
-    const boldTriggerPattern = /^\s*-\s*\*\*([^*]+)\*\*\s*→\s*(.+)$/gm;
-    content = content.replace(boldTriggerPattern, (match, trigger, action) => {
-      // Only change if we haven't already (check if it still has **)
-      if (match.includes("**")) {
-        changes.push(`Removed bold: "${trigger.trim()}"`);
-        return `- ${trigger.trim()} → ${action.trim()}`;
-      }
-      return match;
-    });
-
-    // 6. Clean up any remaining date stamp patterns that might have been missed
-    content = content.replace(
-      /\s*✅\s*(?:NEW|CRITICAL|ENHANCED)\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s*\d{4}/gi,
-      "",
-    );
-
-    // Write back if changes were made
-    if (content !== originalContent) {
-      await fs.writeFile(filePath, content, "utf8");
-      return { migrated: true, changes };
-    }
-
-    return { migrated: false, changes };
-  } catch (error: any) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Error during schema migration:", error);
-    changes.push(`Error during migration: ${errorMessage || "Unknown error"}`);
-    return { migrated: false, changes };
-  }
-}
-
-/**
- * Scan for user-created files not in manifest
- */
-async function findUserCreatedFiles(
-  rootPath: string,
-  manifest: Manifest | null,
-): Promise<string[]> {
-  const userFiles: string[] = [];
-  const dkPath = path.join(rootPath, ".github", "domain-knowledge");
-
-  if (await fs.pathExists(dkPath)) {
-    const files = await fs.readdir(dkPath);
+  // 1. Legacy DK files (from root)
+  const rootDKPath = path.join(backupPath, 'root-dk-files');
+  if (await fs.pathExists(rootDKPath)) {
+    const files = await fs.readdir(rootDKPath);
     for (const file of files) {
-      if (file.endsWith(".md")) {
-        const relativePath = `.github/domain-knowledge/${file}`;
-        if (!manifest?.files[relativePath]) {
-          userFiles.push(relativePath);
+      const filePath = path.join(rootDKPath, file);
+      const stats = await fs.stat(filePath);
+      const content = await fs.readFile(filePath, 'utf8');
+      const firstLine = content.split('\n').find(l => l.startsWith('#'))?.replace(/^#+\s*/, '') || file;
+
+      candidates.push({
+        type: 'legacy-dk',
+        sourcePath: `root-dk-files/${file}`,
+        targetPath: `.github/skills/${file.replace('DK-', '').replace('.md', '').toLowerCase()}/SKILL.md`,
+        description: firstLine,
+        sizeKB: Math.round(stats.size / 1024),
+        lastModified: stats.mtime,
+        recommended: true,
+        stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+      });
+    }
+  }
+
+  // 2. DK files from .github/domain-knowledge
+  const dkBackupPath = path.join(backupPath, '.github', 'domain-knowledge');
+  if (await fs.pathExists(dkBackupPath)) {
+    const files = await fs.readdir(dkBackupPath);
+    for (const file of files) {
+      if (!file.endsWith('.md')) continue;
+      
+      const filePath = path.join(dkBackupPath, file);
+      const stats = await fs.stat(filePath);
+      const content = await fs.readFile(filePath, 'utf8');
+      const firstLine = content.split('\n').find(l => l.startsWith('#'))?.replace(/^#+\s*/, '') || file;
+
+      candidates.push({
+        type: 'user-dk',
+        sourcePath: `.github/domain-knowledge/${file}`,
+        targetPath: `.github/skills/${file.replace('DK-', '').replace('.md', '').toLowerCase()}/SKILL.md`,
+        description: firstLine,
+        sizeKB: Math.round(stats.size / 1024),
+        lastModified: stats.mtime,
+        recommended: true,
+        stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+      });
+    }
+  }
+
+  // 3. User-created skills
+  const skillsBackupPath = path.join(backupPath, '.github', 'skills');
+  const skillsNewPath = path.join(rootPath, '.github', 'skills');
+  
+  if (await fs.pathExists(skillsBackupPath)) {
+    const backupSkills = await fs.readdir(skillsBackupPath);
+    const newSkills = await fs.pathExists(skillsNewPath) 
+      ? await fs.readdir(skillsNewPath) 
+      : [];
+
+    for (const skill of backupSkills) {
+      if (!newSkills.includes(skill)) {
+        const skillPath = path.join(skillsBackupPath, skill);
+        const stats = await fs.stat(skillPath);
+        
+        // Read SKILL.md for description
+        const skillMdPath = path.join(skillPath, 'SKILL.md');
+        let description = skill;
+        if (await fs.pathExists(skillMdPath)) {
+          const content = await fs.readFile(skillMdPath, 'utf8');
+          description = content.split('\n').find(l => l.startsWith('#'))?.replace(/^#+\s*/, '') || skill;
         }
+
+        candidates.push({
+          type: 'user-skill',
+          sourcePath: `.github/skills/${skill}`,
+          targetPath: `.github/skills/${skill}`,
+          description,
+          sizeKB: await getFolderSize(skillPath),
+          lastModified: stats.mtime,
+          recommended: true,
+          stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+        });
       }
     }
   }
 
-  return userFiles;
+  // 4. User profile (always recommend)
+  const profilePath = path.join(backupPath, '.github', 'config', 'user-profile.json');
+  if (await fs.pathExists(profilePath)) {
+    const stats = await fs.stat(profilePath);
+    candidates.push({
+      type: 'profile',
+      sourcePath: '.github/config/user-profile.json',
+      targetPath: '.github/config/user-profile.json',
+      description: 'Your preferences and settings',
+      sizeKB: Math.round(stats.size / 1024),
+      lastModified: stats.mtime,
+      recommended: true,
+      stale: false,
+    });
+  }
+
+  const profileMdPath = path.join(backupPath, '.github', 'config', 'USER-PROFILE.md');
+  if (await fs.pathExists(profileMdPath)) {
+    const stats = await fs.stat(profileMdPath);
+    candidates.push({
+      type: 'profile',
+      sourcePath: '.github/config/USER-PROFILE.md',
+      targetPath: '.github/config/USER-PROFILE.md',
+      description: 'Your profile document',
+      sizeKB: Math.round(stats.size / 1024),
+      lastModified: stats.mtime,
+      recommended: true,
+      stale: false,
+    });
+  }
+
+  // 5. Episodic records (always recommend)
+  const episodicBackupPath = path.join(backupPath, '.github', 'episodic');
+  if (await fs.pathExists(episodicBackupPath)) {
+    const files = await fs.readdir(episodicBackupPath);
+    const mdFiles = files.filter(f => f.endsWith('.md'));
+    
+    if (mdFiles.length > 0) {
+      const stats = await fs.stat(episodicBackupPath);
+      candidates.push({
+        type: 'episodic',
+        sourcePath: '.github/episodic',
+        targetPath: '.github/episodic',
+        description: `${mdFiles.length} session records (meditation, dreams)`,
+        sizeKB: await getFolderSize(episodicBackupPath),
+        lastModified: stats.mtime,
+        recommended: true,
+        stale: false,
+      });
+    }
+  }
+
+  return candidates;
 }
 
 /**
- * Main upgrade function
+ * Calculate folder size in KB
  */
-export async function upgradeArchitecture(context: vscode.ExtensionContext) {
-  // Use smart workspace folder detection for multi-folder workspaces
-  // Use requireInstalled=true since upgrade only works on existing installations
+async function getFolderSize(folderPath: string): Promise<number> {
+  let totalSize = 0;
+
+  async function walk(dir: string) {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+      } else {
+        const stats = await fs.stat(fullPath);
+        totalSize += stats.size;
+      }
+    }
+  }
+
+  await walk(folderPath);
+  return Math.round(totalSize / 1024);
+}
+
+// ============================================================================
+// MIGRATION CANDIDATES DOCUMENT
+// ============================================================================
+
+/**
+ * Generate the MIGRATION-CANDIDATES.md document
+ */
+async function generateMigrationCandidates(
+  rootPath: string,
+  backupPath: string,
+  candidates: MigrationCandidate[],
+  detection: LegacyDetection,
+  newVersion: string
+): Promise<string> {
+  const timestamp = new Date().toISOString().split('T')[0];
+  const relativeBackupPath = path.relative(rootPath, backupPath).replace(/\\/g, '/');
+
+  let content = `# Migration Candidates
+
+> Generated by Alex Upgrade on ${timestamp}
+> Review and check items you want to migrate from your previous installation.
+>
+> **Previous version:** ${detection.installedVersion || 'unknown'} (${detection.version} structure)
+> **New version:** ${newVersion}
+
+## Instructions
+
+1. Review each section below
+2. Check the boxes \`[x]\` for items you want to keep
+3. Run **"Alex: Complete Migration"** when ready
+4. Or manually copy files from \`${relativeBackupPath}/\`
+
+---
+
+`;
+
+  // Group candidates by type
+  const legacyDK = candidates.filter(c => c.type === 'legacy-dk');
+  const userDK = candidates.filter(c => c.type === 'user-dk');
+  const userSkills = candidates.filter(c => c.type === 'user-skill');
+  const profiles = candidates.filter(c => c.type === 'profile');
+  const episodic = candidates.filter(c => c.type === 'episodic');
+
+  // Legacy DK section
+  if (legacyDK.length > 0) {
+    content += `## 🏛️ Legacy Domain Knowledge (from project root)
+
+These DK files were in your project root. They can be converted to skills:
+
+`;
+    for (const c of legacyDK) {
+      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
+      const checked = c.recommended && !c.stale ? 'x' : ' ';
+      content += `- [${checked}] \`${c.sourcePath}\` → \`${c.targetPath}\`${staleWarning}\n`;
+      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
+    }
+  }
+
+  // User DK section
+  if (userDK.length > 0) {
+    content += `## 📚 Domain Knowledge Files
+
+These DK files can be converted to skills:
+
+`;
+    for (const c of userDK) {
+      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
+      const checked = c.recommended && !c.stale ? 'x' : ' ';
+      content += `- [${checked}] \`${c.sourcePath}\` → \`${c.targetPath}\`${staleWarning}\n`;
+      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
+    }
+  }
+
+  // User Skills section
+  if (userSkills.length > 0) {
+    content += `## 🎓 User-Created Skills
+
+These skills were created by you and don't exist in the new version:
+
+`;
+    for (const c of userSkills) {
+      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
+      const checked = c.recommended && !c.stale ? 'x' : ' ';
+      content += `- [${checked}] \`${c.sourcePath}/\`${staleWarning}\n`;
+      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
+    }
+  }
+
+  // Profile section
+  if (profiles.length > 0) {
+    content += `## 👤 User Profile
+
+Your personal settings and preferences:
+
+`;
+    for (const c of profiles) {
+      content += `- [x] \`${c.sourcePath}\` — ${c.description}\n`;
+    }
+    content += '\n';
+  }
+
+  // Episodic section
+  if (episodic.length > 0) {
+    content += `## 📜 Session History
+
+Your meditation sessions, dream reports, and other episodic records:
+
+`;
+    for (const c of episodic) {
+      content += `- [x] \`${c.sourcePath}/\` — ${c.description} (${c.sizeKB} KB)\n`;
+    }
+    content += '\n';
+  }
+
+  // Backup location
+  content += `---
+
+## Backup Location
+
+All original files available at:
+\`${relativeBackupPath}/\`
+
+You can manually copy any files from this location.
+
+## Need Help?
+
+Ask Alex: "Help me migrate my previous settings"
+`;
+
+  const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
+  await fs.writeFile(candidatesPath, content, 'utf8');
+
+  return candidatesPath;
+}
+
+// ============================================================================
+// MAIN UPGRADE COMMAND
+// ============================================================================
+
+/**
+ * Main upgrade function - follows the plan
+ */
+export async function upgradeArchitecture(context: vscode.ExtensionContext): Promise<void> {
+  // Get workspace
   const workspaceResult = await getAlexWorkspaceFolder(true);
 
   if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {
-      return; // User cancelled folder selection
-    }
+    if (workspaceResult.cancelled) return;
 
-    // Alex not installed - offer to initialize instead
     const result = await vscode.window.showWarningMessage(
       workspaceResult.error || "Alex is not installed in this workspace.",
       "Initialize Alex Now",
-      "Cancel",
+      "Cancel"
     );
 
     if (result === "Initialize Alex Now") {
@@ -495,52 +667,37 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext) {
   const rootPath = workspaceResult.rootPath!;
   const extensionPath = context.extensionPath;
 
-  // 🛡️ KILL SWITCH: Check if workspace is protected (Master Alex)
-  const canProceed = await checkProtectionAndWarn(
-    rootPath,
-    "Alex: Upgrade Architecture",
-    true  // Allow override with double confirmation
-  );
-  if (!canProceed) {
-    return;
-  }
+  // Kill switch check
+  const canProceed = await checkProtectionAndWarn(rootPath, "Alex: Upgrade", true);
+  if (!canProceed) return;
 
-  // Get versions (Alex installation already verified by getAlexWorkspaceFolder)
-  const installedVersion = await getInstalledVersion(rootPath);
-  const extensionVersion = await getExtensionVersion(extensionPath);
+  // Get versions
+  const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
+  const extensionVersion = packageJson.version || '0.0.0';
 
-  if (installedVersion === extensionVersion) {
-    const result = await vscode.window.showInformationMessage(
-      `✅ Alex is already at the latest version (${extensionVersion}).\n\n` +
-        "No upgrade needed. Your cognitive architecture is up to date!",
-      "Run Dream Protocol",
-      "Close",
-    );
-    if (result === "Run Dream Protocol") {
-      await vscode.commands.executeCommand("alex.dream");
-    }
-    return;
-  }
+  // Detect legacy structure
+  const detection = await detectLegacyStructure(rootPath);
 
   // Confirm upgrade
+  const versionInfo = detection.installedVersion 
+    ? `v${detection.installedVersion} → v${extensionVersion}`
+    : `${detection.version} structure → v${extensionVersion}`;
+
   const confirm = await vscode.window.showInformationMessage(
-    `🔄 Upgrade Available: v${installedVersion || "unknown"} → v${extensionVersion}\n\n` +
-      "This is a fully automated upgrade process:\n\n" +
-      "📦 What will happen:\n" +
-      "• Full backup of all cognitive memory\n" +
-      "• Update system files (instructions, prompts)\n" +
-      "• Auto-migrate schema changes\n" +
-      "• Preserve your learned knowledge\n" +
-      "• Run Dream validation\n\n" +
-      "⏱️ Total time: ~30 seconds",
+    `🔄 Upgrade: ${versionInfo}\n\n` +
+    "This upgrade will:\n\n" +
+    "1️⃣ Backup everything (nothing is lost)\n" +
+    "2️⃣ Fresh install of new version\n" +
+    "3️⃣ Show you what can be migrated\n" +
+    "4️⃣ You decide what to keep\n\n" +
+    "Your data is safe - review and migrate at your pace.",
     { modal: true },
     "Start Upgrade",
     "What's New?",
-    "Cancel",
+    "Cancel"
   );
 
   if (confirm === "What's New?") {
-    // Open changelog or show version notes
     const changelogPath = path.join(extensionPath, "CHANGELOG.md");
     if (await fs.pathExists(changelogPath)) {
       const doc = await vscode.workspace.openTextDocument(changelogPath);
@@ -549,775 +706,308 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext) {
     return;
   }
 
-  if (confirm !== "Start Upgrade") {
-    return;
-  }
+  if (confirm !== "Start Upgrade") return;
 
-  await performUpgrade(
-    context,
-    rootPath,
-    extensionPath,
-    installedVersion,
-    extensionVersion,
-  );
-}
+  // Execute upgrade
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
 
-async function performUpgrade(
-  context: vscode.ExtensionContext,
-  rootPath: string,
-  extensionPath: string,
-  oldVersion: string | null,
-  newVersion: string,
-) {
-  // Validate extension has required files before starting
-  const requiredSource = path.join(
-    extensionPath,
-    ".github",
-    "copilot-instructions.md",
-  );
-  if (!(await fs.pathExists(requiredSource))) {
-    vscode.window.showErrorMessage(
-      "Extension installation appears corrupted - missing core files.\n\n" +
-        "Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.",
-      { modal: true },
-    );
-    return;
-  }
-
-  const report: UpgradeReport = {
-    updated: [],
-    added: [],
-    preserved: [],
-    backed_up: [],
-    migrationTasks: [],
-    errors: [],
-  };
-
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-  const backupDir = path.join(
-    rootPath,
-    "archive",
-    "upgrades",
-    `backup-${oldVersion || "unknown"}-${timestamp}`,
-  );
+  // Variables to capture from progress callback
+  let upgradeBackupPath = '';
+  let upgradeCandidates: MigrationCandidate[] = [];
 
   try {
     await vscode.window.withProgress(
       {
         location: vscode.ProgressLocation.Notification,
-        title: "Phase 1: Preparing Upgrade...",
+        title: "Upgrading Alex...",
         cancellable: false,
       },
       async (progress) => {
-        // Step 1: Create full backup
-        progress.report({
-          message: "Creating complete backup...",
-          increment: 15,
-        });
+        // Step 1: Backup
+        progress.report({ message: "Creating backup...", increment: 20 });
+        const backupPath = await createVersionAwareBackup(rootPath, detection, timestamp);
+        upgradeBackupPath = backupPath; // Capture for use after callback
 
-        // Validate we can write to archive directory
-        try {
-          await fs.ensureDir(backupDir);
-          // Test write permissions
-          const testFile = path.join(backupDir, ".write-test");
-          await fs.writeFile(testFile, "test");
-          await fs.remove(testFile);
-        } catch (writeError: any) {
-          const writeErrorMessage =
-            writeError instanceof Error
-              ? writeError.message
-              : String(writeError);
-          throw new Error(
-            `Cannot create backup directory - check disk space and permissions: ${writeErrorMessage || "Write failed"}`,
+        // Step 2: Clean old structure
+        progress.report({ message: "Cleaning old installation...", increment: 20 });
+        await cleanOldStructure(rootPath, detection);
+
+        // Step 3: Fresh install
+        progress.report({ message: "Installing new version...", increment: 20 });
+        await freshInstall(extensionPath, rootPath);
+
+        // Step 4: Gap analysis
+        progress.report({ message: "Analyzing migration candidates...", increment: 20 });
+        const candidates = await runGapAnalysis(backupPath, rootPath, detection);
+        upgradeCandidates = candidates; // Capture for use after callback
+
+        // Step 5: Generate migration candidates document
+        progress.report({ message: "Generating migration guide...", increment: 20 });
+        
+        if (candidates.length > 0) {
+          const candidatesPath = await generateMigrationCandidates(
+            rootPath,
+            backupPath,
+            candidates,
+            detection,
+            extensionVersion
           );
-        }
 
-        // Backup .github folder (includes domain-knowledge, config, episodic)
-        const githubSrc = path.join(rootPath, ".github");
-        if (await fs.pathExists(githubSrc)) {
-          await fs.copy(githubSrc, path.join(backupDir, ".github"));
-          report.backed_up.push(".github/ (all cognitive memory)");
-        }
-
-        // Step 2: Load or create manifest
-        progress.report({
-          message: "Analyzing installed files...",
-          increment: 10,
-        });
-        let manifest = await loadManifest(rootPath);
-
-        if (!manifest) {
-          manifest = {
-            version: oldVersion || "unknown",
-            installedAt: new Date().toISOString(),
-            files: {},
-          };
-        }
-
-        // Step 3: Scan for migration needs in ALL markdown files
-        progress.report({
-          message: "Scanning for schema migration needs...",
-          increment: 15,
-        });
-
-        const filesToScan: string[] = [];
-
-        // Add copilot-instructions.md
-        const mainInstructions = path.join(
-          rootPath,
-          ".github",
-          "copilot-instructions.md",
-        );
-        if (await fs.pathExists(mainInstructions)) {
-          filesToScan.push(mainInstructions);
-        }
-
-        // Add domain-knowledge files
-        const dkPath = path.join(rootPath, ".github", "domain-knowledge");
-        if (await fs.pathExists(dkPath)) {
-          const dkFiles = await fs.readdir(dkPath);
-          for (const file of dkFiles) {
-            if (file.endsWith(".md")) {
-              filesToScan.push(path.join(dkPath, file));
-            }
-          }
-        }
-
-        // Add episodic files
-        const episodicPath = path.join(rootPath, ".github", "episodic");
-        if (await fs.pathExists(episodicPath)) {
-          const episodicFiles = await fs.readdir(episodicPath);
-          for (const file of episodicFiles) {
-            if (file.endsWith(".md")) {
-              filesToScan.push(path.join(episodicPath, file));
-            }
-          }
-        }
-
-        for (const filePath of filesToScan) {
-          const issues = await scanForMigrationNeeds(filePath);
-          if (issues.length > 0) {
-            const relativePath = path.relative(rootPath, filePath);
-            report.migrationTasks.push({
-              file: relativePath,
-              type: "schema-migration",
-              description: `Synapse schema migration needed`,
-              details: issues,
-            });
-          }
-        }
-
-        // Step 4: Find user-created files
-        progress.report({
-          message: "Identifying user-created files...",
-          increment: 10,
-        });
-        const userFiles = await findUserCreatedFiles(rootPath, manifest);
-        for (const file of userFiles) {
-          report.preserved.push(`${file} (user-created)`);
-
-          // Scan user files for migration too
-          const fullPath = path.join(rootPath, file);
-          const issues = await scanForMigrationNeeds(fullPath);
-          if (issues.length > 0) {
-            report.migrationTasks.push({
-              file: file,
-              type: "schema-migration",
-              description: "User-created file needs schema migration",
-              details: issues,
-            });
-          }
-        }
-
-        // Step 5: Auto-merge copilot-instructions.md if possible
-        progress.report({
-          message: "Merging core brain file...",
-          increment: 10,
-        });
-        const brainMergeResult = await autoMergeBrainFile(
-          rootPath,
-          extensionPath,
-          newVersion,
-        );
-        if (brainMergeResult.success) {
-          report.updated.push(".github/copilot-instructions.md (auto-merged)");
-        } else {
-          // Only add merge task if auto-merge failed
-          report.migrationTasks.push({
-            file: ".github/copilot-instructions.md",
-            type: "merge-required",
-            description: "Core brain file requires manual merge",
-            details: [
-              `Auto-merge failed: ${brainMergeResult.reason}`,
-              "UPDATE: Version number, Core Meta-Cognitive Rules, Essential Principles, VS Code commands",
-              "PRESERVE: Domain slot assignments (P5-P7), user-added memory file references",
-              "REVIEW: Any custom sections added by user",
-            ],
-          });
-        }
-
-        // Step 6: Update system files (instructions and prompts)
-        progress.report({ message: "Updating system files...", increment: 20 });
-
-        // Update instructions
-        const instructionsSrc = path.join(
-          extensionPath,
-          ".github",
-          "instructions",
-        );
-        const instructionsDest = path.join(rootPath, ".github", "instructions");
-        if (await fs.pathExists(instructionsSrc)) {
-          const files = await fs.readdir(instructionsSrc);
-          for (const file of files) {
-            const srcFile = path.join(instructionsSrc, file);
-            const destFile = path.join(instructionsDest, file);
-            if ((await fs.stat(srcFile)).isFile()) {
-              const existed = await fs.pathExists(destFile);
-              await fs.copy(srcFile, destFile, { overwrite: true });
-
-              const content = await fs.readFile(srcFile, "utf8");
-              manifest.files[`.github/instructions/${file}`] = {
-                type: "system",
-                originalChecksum: calculateChecksum(content),
-              };
-
-              if (existed) {
-                report.updated.push(`.github/instructions/${file}`);
-              } else {
-                report.added.push(`.github/instructions/${file}`);
-              }
-            }
-          }
-        }
-
-        // Update prompts
-        const promptsSrc = path.join(extensionPath, ".github", "prompts");
-        const promptsDest = path.join(rootPath, ".github", "prompts");
-        if (await fs.pathExists(promptsSrc)) {
-          const files = await fs.readdir(promptsSrc);
-          for (const file of files) {
-            const srcFile = path.join(promptsSrc, file);
-            const destFile = path.join(promptsDest, file);
-            if ((await fs.stat(srcFile)).isFile()) {
-              const existed = await fs.pathExists(destFile);
-              await fs.copy(srcFile, destFile, { overwrite: true });
-
-              const content = await fs.readFile(srcFile, "utf8");
-              manifest.files[`.github/prompts/${file}`] = {
-                type: "system",
-                originalChecksum: calculateChecksum(content),
-              };
-
-              if (existed) {
-                report.updated.push(`.github/prompts/${file}`);
-              } else {
-                report.added.push(`.github/prompts/${file}`);
-              }
-            }
-          }
-        }
-
-        // Step 6b: Add agents folder (new in v2.0.0)
-        const agentsSrc = path.join(extensionPath, ".github", "agents");
-        const agentsDest = path.join(rootPath, ".github", "agents");
-        if (await fs.pathExists(agentsSrc)) {
-          await fs.ensureDir(agentsDest);
-          const files = await fs.readdir(agentsSrc);
-          for (const file of files) {
-            const srcFile = path.join(agentsSrc, file);
-            const destFile = path.join(agentsDest, file);
-            if ((await fs.stat(srcFile)).isFile()) {
-              const existed = await fs.pathExists(destFile);
-              await fs.copy(srcFile, destFile, { overwrite: true });
-
-              const content = await fs.readFile(srcFile, "utf8");
-              manifest.files[`.github/agents/${file}`] = {
-                type: "system",
-                originalChecksum: calculateChecksum(content),
-              };
-
-              if (existed) {
-                report.updated.push(`.github/agents/${file}`);
-              } else {
-                report.added.push(`.github/agents/${file}`);
-              }
-            }
-          }
-        }
-
-        // Step 6c: Add config folder templates (new in v2.0.0)
-        const configSrc = path.join(extensionPath, ".github", "config");
-        const configDest = path.join(rootPath, ".github", "config");
-        if (await fs.pathExists(configSrc)) {
-          await fs.ensureDir(configDest);
-          const files = await fs.readdir(configSrc);
-          for (const file of files) {
-            // Only copy templates and non-user files
-            if (
-              file.includes("template") ||
-              file === "USER-PROFILE-TEMPLATE.md"
-            ) {
-              const srcFile = path.join(configSrc, file);
-              const destFile = path.join(configDest, file);
-              if ((await fs.stat(srcFile)).isFile()) {
-                const existed = await fs.pathExists(destFile);
-                await fs.copy(srcFile, destFile, { overwrite: true });
-
-                if (existed) {
-                  report.updated.push(`.github/config/${file}`);
-                } else {
-                  report.added.push(`.github/config/${file}`);
-                }
-              }
-            }
-          }
-        }
-
-        // Step 7: Handle domain-knowledge files carefully
-        progress.report({
-          message: "Processing domain knowledge...",
-          increment: 10,
-        });
-        const extDkSrc = path.join(
-          extensionPath,
-          ".github",
-          "domain-knowledge",
-        );
-        const extDkDest = path.join(rootPath, ".github", "domain-knowledge");
-
-        if (await fs.pathExists(extDkSrc)) {
-          await fs.ensureDir(extDkDest);
-          const files = await fs.readdir(extDkSrc);
-
-          for (const file of files) {
-            const srcFile = path.join(extDkSrc, file);
-            const destFile = path.join(extDkDest, file);
-
-            if ((await fs.stat(srcFile)).isFile()) {
-              const srcContent = await fs.readFile(srcFile, "utf8");
-              const srcChecksum = calculateChecksum(srcContent);
-
-              if (!(await fs.pathExists(destFile))) {
-                // New file - add it
-                await fs.copy(srcFile, destFile);
-                manifest.files[`.github/domain-knowledge/${file}`] = {
-                  type: "system",
-                  originalChecksum: srcChecksum,
-                };
-                report.added.push(`.github/domain-knowledge/${file}`);
-              } else {
-                // Existing file - check if modified
-                const destContent = await fs.readFile(destFile, "utf8");
-                const destChecksum = calculateChecksum(destContent);
-                const originalChecksum =
-                  manifest.files[`.github/domain-knowledge/${file}`]
-                    ?.originalChecksum;
-
-                if (originalChecksum && destChecksum !== originalChecksum) {
-                  // User modified - preserve and provide new version
-                  const newVersionPath = destFile.replace(
-                    /\.md$/,
-                    `.v${newVersion}.md`,
-                  );
-                  await fs.copy(srcFile, newVersionPath);
-                  report.preserved.push(
-                    `.github/domain-knowledge/${file} (modified by user, new version: ${path.basename(newVersionPath)})`,
-                  );
-
-                  // Add review task
-                  report.migrationTasks.push({
-                    file: `.github/domain-knowledge/${file}`,
-                    type: "review-recommended",
-                    description:
-                      "User-modified system file - review new version",
-                    details: [
-                      `Your version preserved: ${file}`,
-                      `New version available: ${path.basename(newVersionPath)}`,
-                      "Review and merge changes as needed",
-                    ],
-                  });
-                } else {
-                  // Not modified - safe to update
-                  await fs.copy(srcFile, destFile, { overwrite: true });
-                  manifest.files[`.github/domain-knowledge/${file}`] = {
-                    type: "system",
-                    originalChecksum: srcChecksum,
-                  };
-                  report.updated.push(`.github/domain-knowledge/${file}`);
-                }
-              }
-            }
-          }
-        }
-
-        // Step 8: Update manifest (with atomic write)
-        progress.report({ message: "Saving manifest...", increment: 5 });
-        manifest.version = newVersion;
-        manifest.upgradedAt = new Date().toISOString();
-
-        // Atomic write: write to temp file first, then rename
-        const manifestPath = getManifestPath(rootPath);
-        await fs.ensureDir(path.dirname(manifestPath));
-        const tempManifestPath = manifestPath + ".tmp";
-        await fs.writeJson(tempManifestPath, manifest, { spaces: 2 });
-        await fs.move(tempManifestPath, manifestPath, { overwrite: true });
-
-        // Step 9: Perform automatic schema migrations on all flagged files
-        progress.report({
-          message: "Performing schema migrations...",
-          increment: 10,
-        });
-        const migrationResults: { file: string; changes: string[] }[] = [];
-
-        // Collect all files that need migration
-        const filesToMigrate = report.migrationTasks
-          .filter((task) => task.type === "schema-migration")
-          .map((task) => task.file);
-
-        // Also include copilot-instructions.md for migration even if auto-merge succeeded
-        const brainFile = ".github/copilot-instructions.md";
-        if (!filesToMigrate.includes(brainFile)) {
-          filesToMigrate.push(brainFile);
-        }
-
-        for (const relativeFile of filesToMigrate) {
-          const fullPath = path.join(rootPath, relativeFile);
-          const result = await performSchemaMigration(fullPath);
-          if (result.migrated) {
-            migrationResults.push({
-              file: relativeFile,
-              changes: result.changes,
-            });
-          }
-        }
-
-        // Update report with migration results
-        report.migrationTasks = report.migrationTasks.filter(
-          (task) => task.type !== "schema-migration",
-        );
-        if (migrationResults.length > 0) {
-          report.updated.push(
-            ...migrationResults.map(
-              (r) => `${r.file} (schema migrated: ${r.changes.length} changes)`,
-            ),
+          // Auto-restore profile and episodic (recommended)
+          const autoRestore = candidates.filter(c => 
+            (c.type === 'profile' || c.type === 'episodic') && c.recommended
           );
-        }
 
-        // Step 10: Generate upgrade report (but not UPGRADE-INSTRUCTIONS.md if fully automated)
-        progress.report({
-          message: "Generating upgrade report...",
-          increment: 5,
-        });
-        await generateUpgradeReport(
-          rootPath,
-          oldVersion,
-          newVersion,
-          report,
-          backupDir,
-          timestamp,
-          migrationResults,
-        );
-      },
+          for (const item of autoRestore) {
+            const src = path.join(backupPath, item.sourcePath);
+            const dest = path.join(rootPath, item.targetPath);
+            if (await fs.pathExists(src)) {
+              await fs.copy(src, dest, { overwrite: true });
+            }
+          }
+        }
+      }
     );
 
-    // Step 11: Run Dream validation automatically (in silent mode to avoid notification collision)
-    let dreamResult: DreamResult | undefined;
+    // Run Dream to validate
+    let dreamSuccess = false;
     try {
-      dreamResult = await runDreamProtocol(context, { silent: true });
-    } catch (dreamError) {
-      console.error("Dream validation failed:", dreamError);
-      // Don't fail the upgrade if Dream fails - just note it
-    }
-    const dreamSuccess = dreamResult?.success ?? false;
-
-    // Brief delay to ensure any lingering notifications are cleared
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // Step 12: Clean up UPGRADE-INSTRUCTIONS.md if it exists (from previous incomplete upgrades)
-    const instructionsPath = path.join(rootPath, "UPGRADE-INSTRUCTIONS.md");
-    if (await fs.pathExists(instructionsPath)) {
-      await fs.remove(instructionsPath);
+      const dreamResult = await runDreamProtocol(context, { silent: true });
+      dreamSuccess = dreamResult?.success ?? false;
+    } catch {
+      // Dream failure is not fatal
     }
 
-    // Offer environment setup for new/upgraded users
+    // Offer environment setup
     await offerEnvironmentSetup();
 
+    // Use candidates captured from progress callback (no redundant re-computation)
+    const userCandidates = upgradeCandidates.filter(c => c.type !== 'profile' && c.type !== 'episodic');
+
     // Show completion message
-    const result = await vscode.window.showInformationMessage(
-      `✅ Upgrade Complete! v${oldVersion || "unknown"} → v${newVersion}\n\n` +
-        `📊 Summary:\n` +
-        `• Backup created: ${report.backed_up.length} folders\n` +
-        `• Files updated: ${report.updated.length}\n` +
-        `• Files added: ${report.added.length}\n` +
-        `• Files preserved: ${report.preserved.length}\n` +
-        `• Schema migrations: ${report.migrationTasks.length === 0 ? "All completed" : report.migrationTasks.length + " remaining"}\n` +
-        `• Dream validation: ${dreamSuccess ? "✅ Passed" : "⚠️ Check manually"}\n\n` +
-        `🎉 Your cognitive architecture has been fully upgraded!`,
-      "View Upgrade Report",
-      "What's Next?",
-      "Close",
-    );
-
-    if (result === "View Upgrade Report") {
-      const reportPath = path.join(
-        rootPath,
-        "archive",
-        "upgrades",
-        `upgrade-report-${timestamp}.md`,
+    if (userCandidates.length > 0) {
+      const result = await vscode.window.showInformationMessage(
+        `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
+        `📋 ${userCandidates.length} item(s) found for migration\n` +
+        `👤 Profile and history auto-restored\n` +
+        `${dreamSuccess ? '💚' : '⚠️'} Health: ${dreamSuccess ? 'Good' : 'Check recommended'}\n\n` +
+        `Review MIGRATION-CANDIDATES.md to migrate your content.`,
+        "Open Migration Guide",
+        "Run Dream Check",
+        "Close"
       );
-      if (await fs.pathExists(reportPath)) {
-        const doc = await vscode.workspace.openTextDocument(reportPath);
+
+      if (result === "Open Migration Guide") {
+        const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
+        const doc = await vscode.workspace.openTextDocument(candidatesPath);
         await vscode.window.showTextDocument(doc);
+      } else if (result === "Run Dream Check") {
+        await vscode.commands.executeCommand("alex.dream");
       }
-    } else if (result === "What's Next?") {
-      // Show detailed next steps panel
-      const panel = vscode.window.createWebviewPanel(
-        "alexUpgradeNextSteps",
-        "Alex Upgrade - Next Steps",
-        vscode.ViewColumn.One,
-        { enableScripts: false },
+    } else {
+      await vscode.window.showInformationMessage(
+        `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
+        `👤 Profile and history restored\n` +
+        `${dreamSuccess ? '💚' : '⚠️'} Health: ${dreamSuccess ? 'Good' : 'Check recommended'}\n\n` +
+        `No additional migration needed - you're all set!`,
+        "OK"
       );
-
-      panel.webview.html = `<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); line-height: 1.6; }
-        h1 { color: var(--vscode-textLink-foreground); border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 10px; }
-        h2 { color: var(--vscode-textLink-activeForeground); margin-top: 24px; }
-        .step { background: var(--vscode-textBlockQuote-background); border-left: 3px solid var(--vscode-textLink-foreground); padding: 12px 16px; margin: 12px 0; border-radius: 4px; }
-        .step-number { display: inline-block; background: var(--vscode-textLink-foreground); color: var(--vscode-editor-background); width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; margin-right: 10px; font-weight: bold; }
-        code { background: var(--vscode-textCodeBlock-background); padding: 2px 6px; border-radius: 3px; font-family: var(--vscode-editor-font-family); }
-        .tip { background: var(--vscode-inputValidation-infoBackground); border: 1px solid var(--vscode-inputValidation-infoBorder); padding: 12px; border-radius: 4px; margin: 16px 0; }
-        .new-features { background: var(--vscode-inputValidation-warningBackground); border: 1px solid var(--vscode-inputValidation-warningBorder); padding: 12px; border-radius: 4px; }
-        ul { padding-left: 20px; }
-        li { margin: 8px 0; }
-    </style>
-</head>
-<body>
-    <h1>🎉 Upgrade Complete!</h1>
-    <p>Your Alex cognitive architecture has been upgraded from <strong>v${oldVersion || "unknown"}</strong> to <strong>v${newVersion}</strong>.</p>
-    
-    <h2>📋 Recommended Next Steps</h2>
-    
-    <div class="step">
-        <span class="step-number">1</span>
-        <strong>Reload VS Code Window</strong>
-        <p>Press <code>Ctrl+Shift+P</code> → <code>Developer: Reload Window</code> to ensure all changes take effect.</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">2</span>
-        <strong>Start a New Chat Session</strong>
-        <p>Open GitHub Copilot Chat and start a fresh conversation with <code>@alex</code>. The upgraded architecture is now active!</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">3</span>
-        <strong>Review the Changelog</strong>
-        <p>Check the <a href="command:markdown.showPreview?%5B%22.github%2FCHANGELOG.md%22%5D">CHANGELOG</a> to see what's new in this version and any new features you can try.</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">4</span>
-        <strong>Update Your Profile (Optional)</strong>
-        <p>If you haven't already, tell Alex about yourself! Just say <em>"My name is [your name]"</em> or ask Alex to help set up your profile.</p>
-    </div>
-    
-    <div class="tip">
-        <strong>💡 Pro Tip:</strong> Ask <code>@alex</code> to <em>"meditate"</em> after major work sessions to consolidate learnings into the memory architecture.
-    </div>
-    
-    <h2>🎮 Two Ways to Use Alex</h2>
-    
-    <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
-        <tr>
-            <th style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px; background: var(--vscode-textBlockQuote-background);">Feature</th>
-            <th style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px; background: var(--vscode-textBlockQuote-background);">Agent (default)</th>
-            <th style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px; background: var(--vscode-textBlockQuote-background);">@alex</th>
-        </tr>
-        <tr>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">Alex personality & memory</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅ Automatic</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅ Automatic</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">Alex tools</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅ Available</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅ Available</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">Slash commands</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">❌</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅ /meditate, /dream, etc.</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">Sticky mode</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">❌</td>
-            <td style="border: 1px solid var(--vscode-textSeparator-foreground); padding: 8px;">✅</td>
-        </tr>
-    </table>
-    
-    <p><strong>Bottom line:</strong> Use <em>Agent (default)</em> for everyday coding. Use <code>@alex</code> when you need slash commands or guided workflows.</p>
-    
-    <h2>🔧 Useful Commands</h2>
-    <ul>
-        <li><code>Alex: Dream (Neural Maintenance)</code> - Run health checks and synapse validation</li>
-        <li><code>Alex: Self-Actualize</code> - Deep architecture assessment and optimization</li>
-        <li><code>@alex /knowledge [query]</code> - Search your cross-project knowledge base</li>
-        <li><code>@alex /saveinsight</code> - Save valuable learnings for future use</li>
-    </ul>
-    
-    <h2>📁 Where to Find Things</h2>
-    <ul>
-        <li><strong>Upgrade Report:</strong> <code>archive/upgrades/upgrade-report-${timestamp}.md</code></li>
-        <li><strong>Backup Location:</strong> <code>archive/upgrades/${timestamp}/</code></li>
-        <li><strong>Your Config:</strong> <code>.github/config/</code> (preserved during upgrade)</li>
-        <li><strong>Your Domain Knowledge:</strong> <code>.github/domain-knowledge/</code> (preserved during upgrade)</li>
-    </ul>
-    
-    <div class="new-features">
-        <strong>✨ New in this version:</strong> Check the upgrade report or changelog for details on new features, improved protocols, and any new domain knowledge files that were added.
-    </div>
-    
-    <p style="margin-top: 24px; color: var(--vscode-descriptionForeground);">
-        <em>Questions? Just ask @alex in chat - I'm here to help!</em>
-    </p>
-</body>
-</html>`;
     }
+
   } catch (error: any) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Upgrade failed:", error);
     vscode.window.showErrorMessage(
-      `❌ Upgrade failed: ${errorMessage || "Unknown error"}\n\n` +
-        "Your original files should be intact. If you see issues:\n" +
-        "1. Check the archive/upgrades folder for backups\n" +
-        '2. Try running "Alex: Dream" to assess damage\n' +
-        "3. You can restore from backup if needed",
-      { modal: true },
+      `Upgrade failed: ${errorMessage}\n\n` +
+      "Your backup is safe in archive/upgrades/",
+      { modal: true }
     );
-    report.errors.push(errorMessage || "Unknown error");
   }
 }
 
-async function generateUpgradeReport(
-  rootPath: string,
-  oldVersion: string | null,
-  newVersion: string,
-  report: UpgradeReport,
-  backupDir: string,
-  timestamp: string,
-  migrationResults: { file: string; changes: string[] }[],
-) {
-  // Generate detailed report (no longer generating UPGRADE-INSTRUCTIONS.md since upgrade is fully automated)
-  const migrationSection =
-    migrationResults.length > 0
-      ? migrationResults
-          .map(
-            (r, i) => `
-### ${i + 1}. ${r.file}
+// ============================================================================
+// COMPLETE MIGRATION COMMAND
+// ============================================================================
 
-**Status**: ✅ Automatically migrated  
-**Changes applied**:
-${r.changes.map((c) => `- ${c}`).join("\n")}
-`,
-          )
-          .join("\n---\n")
-      : "No schema migrations were needed.";
+/**
+ * Process checked items from MIGRATION-CANDIDATES.md
+ */
+export async function completeMigration(context: vscode.ExtensionContext): Promise<void> {
+  const workspaceResult = await getAlexWorkspaceFolder(true);
+  if (!workspaceResult.found) {
+    vscode.window.showErrorMessage("No workspace with Alex found.");
+    return;
+  }
 
-  const remainingTasksSection =
-    report.migrationTasks.length > 0
-      ? report.migrationTasks
-          .map(
-            (task, i) => `
-### ${i + 1}. ${task.file}
+  const rootPath = workspaceResult.rootPath!;
+  const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
 
-**Type**: \`${task.type}\`  
-**Description**: ${task.description}
+  if (!await fs.pathExists(candidatesPath)) {
+    vscode.window.showInformationMessage(
+      "No migration candidates found. Run 'Alex: Upgrade' first if you need to migrate.",
+      "OK"
+    );
+    return;
+  }
 
-**Details**:
-${task.details.map((d) => `- ${d}`).join("\n")}
-`,
-          )
-          .join("\n---\n")
-      : "All tasks completed automatically.";
+  const content = await fs.readFile(candidatesPath, 'utf8');
+  
+  // Parse checked items: - [x] `path`
+  const checkedPattern = /- \[x\] `([^`]+)`/gi;
+  const checkedItems: string[] = [];
+  let match;
+  
+  while ((match = checkedPattern.exec(content)) !== null) {
+    checkedItems.push(match[1]);
+  }
 
-  const reportContent = `# Alex Cognitive Architecture Upgrade Report
+  if (checkedItems.length === 0) {
+    const result = await vscode.window.showInformationMessage(
+      "No items are checked for migration.\n\n" +
+      "Edit MIGRATION-CANDIDATES.md and check [x] the items you want to keep, then run this command again.",
+      "Open Migration Guide",
+      "Delete Migration Guide",
+      "Cancel"
+    );
 
-**Date**: ${new Date().toISOString()}  
-**From Version**: ${oldVersion || "unknown"}  
-**To Version**: ${newVersion}  
-**Status**: ✅ Fully Automated Upgrade Complete  
-**Backup Location**: \`${backupDir}\`
+    if (result === "Open Migration Guide") {
+      const doc = await vscode.workspace.openTextDocument(candidatesPath);
+      await vscode.window.showTextDocument(doc);
+    } else if (result === "Delete Migration Guide") {
+      await fs.remove(candidatesPath);
+      vscode.window.showInformationMessage("Migration guide deleted.");
+    }
+    return;
+  }
 
----
+  // Find backup path from the document
+  const backupMatch = content.match(/`(archive\/upgrades\/backup-[^`]+)`/);
+  if (!backupMatch) {
+    vscode.window.showErrorMessage("Could not find backup path in migration document.");
+    return;
+  }
 
-## Summary
+  const backupPath = path.join(rootPath, backupMatch[1]);
+  if (!await fs.pathExists(backupPath)) {
+    vscode.window.showErrorMessage(`Backup not found: ${backupMatch[1]}`);
+    return;
+  }
 
-| Category | Count |
-|----------|-------|
-| Updated | ${report.updated.length} |
-| Added | ${report.added.length} |
-| Preserved | ${report.preserved.length} |
-| Backed Up | ${report.backed_up.length} |
-| Schema Migrations | ${migrationResults.length} |
-| Remaining Tasks | ${report.migrationTasks.length} |
-| Errors | ${report.errors.length} |
-
----
-
-## Updated Files
-
-${report.updated.length > 0 ? report.updated.map((f) => `- ✅ ${f}`).join("\n") : "- None"}
-
-## Added Files (New in this version)
-
-${report.added.length > 0 ? report.added.map((f) => `- ➕ ${f}`).join("\n") : "- None"}
-
-## Preserved Files (User content protected)
-
-${report.preserved.length > 0 ? report.preserved.map((f) => `- 🔒 ${f}`).join("\n") : "- None"}
-
-## Backed Up
-
-${report.backed_up.length > 0 ? report.backed_up.map((f) => `- 📦 ${f}`).join("\n") : "- None"}
-
----
-
-## Schema Migrations Performed
-
-${migrationSection}
-
----
-
-## Remaining Tasks (Manual Review Recommended)
-
-${remainingTasksSection}
-
----
-
-${report.errors.length > 0 ? `## Errors\n\n${report.errors.map((e) => `- ❌ ${e}`).join("\n")}\n\n---\n\n` : ""}
-## Rollback Instructions
-
-If you need to revert:
-
-1. Delete current \`.github/\` folder
-2. Copy contents from: \`${path.relative(rootPath, backupDir)}\`
-3. Run \`Alex: Dream (Neural Maintenance)\` to verify
-
----
-
-*Report generated by Alex Cognitive Architecture v${newVersion}*
-*Upgrade completed automatically - no manual intervention required*
-`;
-
-  const reportPath = path.join(
-    rootPath,
-    "archive",
-    "upgrades",
-    `upgrade-report-${timestamp}.md`,
+  // Confirm migration
+  const confirm = await vscode.window.showInformationMessage(
+    `Migrate ${checkedItems.length} item(s)?`,
+    { modal: true },
+    "Yes, Migrate",
+    "Cancel"
   );
-  await fs.ensureDir(path.dirname(reportPath));
-  await fs.writeFile(reportPath, reportContent, "utf8");
+
+  if (confirm !== "Yes, Migrate") return;
+
+  // Execute migration
+  const migrated: string[] = [];
+  const errors: string[] = [];
+
+  await vscode.window.withProgress(
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Migrating...",
+      cancellable: false,
+    },
+    async (progress) => {
+      for (const item of checkedItems) {
+        progress.report({ message: path.basename(item) });
+
+        try {
+          // Handle the → syntax for DK to skill conversion
+          const arrowMatch = item.match(/^(.+?)\s*→\s*(.+)$/);
+          let src: string;
+          let dest: string;
+
+          if (arrowMatch) {
+            src = path.join(backupPath, arrowMatch[1].trim());
+            dest = path.join(rootPath, arrowMatch[2].trim());
+          } else {
+            src = path.join(backupPath, item);
+            dest = path.join(rootPath, item);
+          }
+
+          if (await fs.pathExists(src)) {
+            await fs.ensureDir(path.dirname(dest));
+            await fs.copy(src, dest, { overwrite: true });
+            
+            // For DK → skill migration, create a minimal synapses.json if it doesn't exist
+            if (arrowMatch && dest.endsWith('SKILL.md') && dest.includes('.github/skills/')) {
+              const skillDir = path.dirname(dest);
+              const synapsesPath = path.join(skillDir, 'synapses.json');
+              if (!await fs.pathExists(synapsesPath)) {
+                // Extract skill name from directory path
+                const skillName = path.basename(skillDir);
+                const minimalSynapses = {
+                  schemaVersion: "1.0.0",
+                  skillName: skillName,
+                  description: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`,
+                  connections: [],
+                  activationPatterns: [],
+                  metadata: {
+                    migratedFrom: arrowMatch[1].trim(),
+                    migratedAt: new Date().toISOString()
+                  }
+                };
+                await fs.writeJson(synapsesPath, minimalSynapses, { spaces: 2 });
+              }
+            }
+            
+            migrated.push(item);
+          } else {
+            errors.push(`Not found: ${item}`);
+          }
+        } catch (err: any) {
+          errors.push(`${item}: ${err.message}`);
+        }
+      }
+    }
+  );
+
+  // Delete migration candidates file
+  await fs.remove(candidatesPath);
+
+  // Show results
+  let message = `✅ Migration complete!\n\n` +
+    `Migrated: ${migrated.length} item(s)`;
+
+  if (errors.length > 0) {
+    message += `\n⚠️ Errors: ${errors.length}`;
+  }
+
+  const result = await vscode.window.showInformationMessage(
+    message,
+    "Run Dream Check",
+    "OK"
+  );
+
+  if (result === "Run Dream Check") {
+    await vscode.commands.executeCommand("alex.dream");
+  }
+}
+
+/**
+ * Show migration candidates document
+ */
+export async function showMigrationCandidates(): Promise<void> {
+  const workspaceResult = await getAlexWorkspaceFolder(true);
+  if (!workspaceResult.found) {
+    vscode.window.showErrorMessage("No workspace with Alex found.");
+    return;
+  }
+
+  const candidatesPath = path.join(workspaceResult.rootPath!, '.github', 'MIGRATION-CANDIDATES.md');
+
+  if (!await fs.pathExists(candidatesPath)) {
+    vscode.window.showInformationMessage(
+      "No migration candidates found. Run 'Alex: Upgrade' first if you need to migrate."
+    );
+    return;
+  }
+
+  const doc = await vscode.workspace.openTextDocument(candidatesPath);
+  await vscode.window.showTextDocument(doc);
 }

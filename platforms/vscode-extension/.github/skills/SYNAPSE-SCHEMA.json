@@ -1,0 +1,159 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "alex-synapse-schema",
+    "title": "Alex Skill Synapse Schema",
+    "description": "Schema for synapses.json files in Alex skills",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "Reference to this schema file"
+        },
+        "skill": {
+            "type": "string",
+            "description": "Skill identifier (legacy format)"
+        },
+        "skillId": {
+            "type": "string",
+            "description": "Skill identifier (current format)"
+        },
+        "version": {
+            "type": "string",
+            "description": "Skill version in semver format",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "lastValidated": {
+            "type": "string",
+            "description": "Date of last validation (YYYY-MM-DD)",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "inheritance": {
+            "type": "string",
+            "description": "Who inherits this skill",
+            "enum": [
+                "inheritable",
+                "master-only",
+                "heir:vscode",
+                "heir:m365"
+            ]
+        },
+        "temporary": {
+            "type": "boolean",
+            "description": "True if skill should be removed after a milestone",
+            "default": false
+        },
+        "removeAfter": {
+            "type": "string",
+            "description": "Milestone or version when to remove (e.g., 'stable-release', 'v3.7.0')"
+        },
+        "connections": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "description": "Legacy format: array of connection objects",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "target": {
+                                "type": "string",
+                                "description": "Target skill or DK file name"
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "Relationship type"
+                            },
+                            "strength": {
+                                "type": "number",
+                                "description": "Connection weight (0.0-1.0)",
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "bidirectional": {
+                                "type": "boolean",
+                                "description": "If true, connection goes both ways (<-->)",
+                                "default": false
+                            },
+                            "weak": {
+                                "type": "boolean",
+                                "description": "If true, renders as dashed line (-.->)",
+                                "default": false
+                            }
+                        },
+                        "required": [
+                            "target",
+                            "type",
+                            "strength"
+                        ]
+                    }
+                },
+                {
+                    "type": "object",
+                    "description": "Current format: object with skill names as keys",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "weight": {
+                                "type": "number",
+                                "description": "Connection weight (0.0-1.0)",
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "relationship": {
+                                "type": "string",
+                                "description": "Type of relationship"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "Why this connection exists"
+                            },
+                            "bidirectional": {
+                                "type": "boolean",
+                                "description": "If true, connection goes both ways (<-->)",
+                                "default": false
+                            },
+                            "weak": {
+                                "type": "boolean",
+                                "description": "If true, renders as dashed line (-.->)",
+                                "default": false
+                            }
+                        },
+                        "required": [
+                            "weight",
+                            "relationship"
+                        ]
+                    }
+                }
+            ]
+        },
+        "activationBoost": {
+            "type": "array",
+            "description": "Legacy format: keywords that boost activation",
+            "items": {
+                "type": "string"
+            }
+        },
+        "activationContexts": {
+            "type": "array",
+            "description": "Current format: contexts that activate this skill",
+            "items": {
+                "type": "string"
+            }
+        },
+        "notes": {
+            "type": "string",
+            "description": "Additional notes about the skill"
+        }
+    },
+    "anyOf": [
+        {
+            "required": [
+                "skill"
+            ]
+        },
+        {
+            "required": [
+                "skillId"
+            ]
+        }
+    ]
+}

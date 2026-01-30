@@ -1,0 +1,42 @@
+{
+    "skill": "microsoft-sfi",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "privacy-responsible-ai",
+            "type": "complements",
+            "strength": 0.7,
+            "bidirectional": true,
+            "reason": "Security enables privacy"
+        },
+        {
+            "target": "code-review",
+            "type": "informs",
+            "strength": 0.65,
+            "reason": "Security review checklist"
+        },
+        {
+            "target": "incident-response",
+            "type": "extends",
+            "strength": 0.8,
+            "reason": "Security incidents are incidents"
+        },
+        {
+            "target": "dependency-management.instructions",
+            "type": "implements",
+            "strength": 0.9,
+            "reason": "Dependency security practices"
+        }
+    ],
+    "triggers": [
+        "security",
+        "vulnerability",
+        "CVE",
+        "OWASP",
+        "credential",
+        "secret",
+        "auth",
+        "encryption",
+        "SFI"
+    ]
+}

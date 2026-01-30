@@ -1,0 +1,27 @@
+{
+    "skill": "llm-model-selection",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "appropriate-reliance",
+            "type": "informs",
+            "strength": 0.85
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "supports",
+            "strength": 0.8
+        }
+    ],
+    "activationBoost": [
+        "model",
+        "llm",
+        "opus",
+        "sonnet",
+        "haiku",
+        "gpt",
+        "claude",
+        "cost",
+        "token"
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "skill": "skill-catalog-generator",
+    "version": "1.0.0",
+    "connections": {
+        "markdown-mermaid": {
+            "weight": 0.9,
+            "relationship": "Enables",
+            "reason": "Generates Mermaid network diagrams"
+        },
+        "architecture-health": {
+            "weight": 0.8,
+            "relationship": "Validates",
+            "reason": "Validates skill structure during catalog generation"
+        },
+        "knowledge-synthesis": {
+            "weight": 0.7,
+            "relationship": "Documents",
+            "reason": "Documents synthesized knowledge patterns"
+        },
+        "learning-psychology": {
+            "weight": 0.6,
+            "relationship": "Enables",
+            "reason": "Tracks learning progress for users"
+        },
+        "project-scaffolding": {
+            "weight": 0.5,
+            "relationship": "Documents",
+            "reason": "Documents project structure and capabilities"
+        }
+    },
+    "activationTriggers": [
+        "show skills",
+        "skill catalog",
+        "skill network",
+        "learning progress",
+        "what skills",
+        "generate catalog",
+        "/skills"
+    ],
+    "inheritance": "inheritable"
+}

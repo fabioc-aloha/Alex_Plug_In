@@ -1,0 +1,32 @@
+{
+    "skill": "knowledge-synthesis",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "meditation-facilitation",
+            "type": "follows",
+            "strength": 0.7,
+            "reason": "Synthesis often happens during meditation"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "applies",
+            "strength": 0.8,
+            "reason": "Synthesis is elaborative encoding"
+        },
+        {
+            "target": "bootstrap-learning.instructions",
+            "type": "extends",
+            "strength": 0.8,
+            "reason": "Goes beyond learning to integration"
+        }
+    ],
+    "triggers": [
+        "promote knowledge",
+        "save insight",
+        "cross-project",
+        "pattern",
+        "we learned",
+        "reusable"
+    ]
+}

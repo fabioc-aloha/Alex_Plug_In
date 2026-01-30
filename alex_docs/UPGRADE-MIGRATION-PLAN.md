@@ -16,45 +16,45 @@
 
 | Task | Status | Notes |
 | ---- | ------ | ----- |
-| Detect legacy structure (root DK files) | ⬜ | `detectLegacyStructure()` |
-| Detect transitional structure (.alex-manifest.json) | ⬜ | |
-| Detect current structure (.github/skills/) | ⬜ | |
-| Create version-aware backup | ⬜ | Include all DK locations |
-| Delete old structure after backup | ⬜ | Root DK files, old manifest |
-| Fresh install from extension package | ⬜ | Reuse existing initialize logic |
-| Generate detection-report.json | ⬜ | What we found, where |
+| Detect legacy structure (root DK files) | ✅ | `detectLegacyStructure()` |
+| Detect transitional structure (.alex-manifest.json) | ✅ | |
+| Detect current structure (.github/skills/) | ✅ | |
+| Create version-aware backup | ✅ | Include all DK locations |
+| Delete old structure after backup | ✅ | Root DK files, old manifest |
+| Fresh install from extension package | ✅ | `freshInstall()` |
+| Generate detection-report.json | ✅ | What we found, where |
 
 ### Phase 2: Gap Analysis + Migration Candidates (3.7.0)
 
 | Task | Status | Notes |
 | ---- | ------ | ----- |
-| Compare backup vs new install | ⬜ | Find user-created files |
-| Identify modified system files | ⬜ | Checksum comparison |
-| Generate MIGRATION-CANDIDATES.md | ⬜ | With checkboxes |
-| Show legacy files section | ⬜ | Root DK → new location |
-| Show user-created DK section | ⬜ | |
-| Show user-created skills section | ⬜ | |
-| Show modified system files section | ⬜ | With diffs |
-| Auto-check profile and episodic | ⬜ | Always recommended |
+| Compare backup vs new install | ✅ | `runGapAnalysis()` |
+| Identify modified system files | ⬜ | Checksum comparison - deferred |
+| Generate MIGRATION-CANDIDATES.md | ✅ | With checkboxes |
+| Show legacy files section | ✅ | Root DK → skill conversion |
+| Show user-created DK section | ✅ | |
+| Show user-created skills section | ✅ | |
+| Show modified system files section | ⬜ | Deferred - complex |
+| Auto-check profile and episodic | ✅ | Auto-restore on upgrade |
 
 ### Phase 3: Complete Migration Command (3.8.0)
 
 | Task | Status | Notes |
 | ---- | ------ | ----- |
-| Parse checked items from markdown | ⬜ | Read [x] items |
-| Copy selected files to .github/ | ⬜ | |
-| Move legacy files to new location | ⬜ | Root → .github/domain-knowledge/ |
-| Restore user profile | ⬜ | |
-| Restore episodic records | ⬜ | |
-| Delete MIGRATION-CANDIDATES.md | ⬜ | After completion |
-| Show migration report | ⬜ | What was migrated |
-| **Post-migration validation** | ⬜ | Run Dream to verify health |
+| Parse checked items from markdown | ✅ | `completeMigration()` |
+| Copy selected files to .github/ | ✅ | |
+| Move legacy files to new location | ✅ | DK → skills |
+| Restore user profile | ✅ | Auto-restored in upgrade |
+| Restore episodic records | ✅ | Auto-restored in upgrade |
+| Delete MIGRATION-CANDIDATES.md | ✅ | After completion |
+| Show migration report | ✅ | What was migrated |
+| **Post-migration validation** | ✅ | Run Dream to verify health |
 
 ### Phase 4: Polish (3.9.0)
 
 | Task | Status | Notes |
 | ---- | ------ | ----- |
-| Stale file warnings | ⬜ | > 3 months old |
+| Stale file warnings | ✅ | > 90 days flagged |
 | Cleanup suggestions | ⬜ | Delete old backup? |
 | Backup retention policy | ⬜ | Keep last N? |
 

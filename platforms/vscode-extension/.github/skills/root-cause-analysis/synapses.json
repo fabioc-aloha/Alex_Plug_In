@@ -1,0 +1,31 @@
+{
+    "skill": "root-cause-analysis",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "debugging-patterns",
+            "type": "extends",
+            "strength": 0.8,
+            "reason": "RCA goes deeper than debugging"
+        },
+        {
+            "target": "incident-response",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "RCA follows incident resolution"
+        },
+        {
+            "target": "error-recovery-patterns",
+            "type": "informs",
+            "strength": 0.65,
+            "reason": "RCA reveals what recovery is needed"
+        }
+    ],
+    "triggers": [
+        "root cause",
+        "5 whys",
+        "post-mortem",
+        "why did this happen",
+        "how do we prevent"
+    ]
+}

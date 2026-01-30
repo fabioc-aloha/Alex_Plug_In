@@ -1,0 +1,29 @@
+{
+    "skill": "learning-psychology",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "bootstrap-learning.instructions.md",
+            "type": "enhances",
+            "strength": 0.95
+        },
+        {
+            "target": "appropriate-reliance",
+            "type": "informs",
+            "strength": 0.85
+        },
+        {
+            "target": "alex-identity-integration.instructions.md",
+            "type": "embodies",
+            "strength": 0.80
+        }
+    ],
+    "activationBoost": [
+        "teach",
+        "learn",
+        "explain",
+        "tutor",
+        "help understand",
+        "walk me through"
+    ]
+}

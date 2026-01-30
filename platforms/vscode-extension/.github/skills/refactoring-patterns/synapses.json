@@ -1,0 +1,33 @@
+{
+    "skill": "refactoring-patterns",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "testing-strategies",
+            "type": "requires",
+            "strength": 0.9,
+            "reason": "Safe refactoring needs test coverage"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Refactoring often follows debugging"
+        },
+        {
+            "target": "code-review",
+            "type": "supports",
+            "strength": 0.7,
+            "reason": "Refactoring suggestions common in reviews"
+        }
+    ],
+    "triggers": [
+        "refactor",
+        "extract",
+        "rename",
+        "inline",
+        "move",
+        "code smell",
+        "clean up"
+    ]
+}

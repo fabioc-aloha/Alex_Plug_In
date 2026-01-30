@@ -73,13 +73,6 @@ $excludeItems = @(
     # Session-specific files (unique to Master Alex)
     "episodic\*",  # Clean slate - no episodic memories
     
-    # Master Alex specific domain knowledge
-    "domain-knowledge\DK-PHOENIX-RECOVERY.md",
-    "domain-knowledge\DK-M365-AGENT-DEBUGGING.md",
-    "domain-knowledge\DK-MULTI-PLATFORM-ARCHITECTURE.md",
-    "domain-knowledge\DK-VSCODE-EXTENSION-PATTERNS.md",
-    "domain-knowledge\DK-VISUAL-IDENTITY.md",
-    
     # User-specific configs (should start fresh)
     "config\cognitive-config.json",
     "config\user-profile.json",
@@ -122,7 +115,6 @@ $requiredFiles = @(
     "copilot-instructions.md",
     "instructions",
     "prompts",
-    "domain-knowledge",
     "skills"
 )
 

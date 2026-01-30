@@ -1,0 +1,31 @@
+{
+    "skill": "chat-participant-patterns",
+    "inheritance": "heir:vscode",
+    "connections": [
+        {
+            "target": "vscode-extension-patterns",
+            "type": "specializes",
+            "strength": 0.75,
+            "reason": "Chat is a subset of extension APIs"
+        },
+        {
+            "target": "llm-model-selection",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Chat uses language models"
+        },
+        {
+            "target": "cognitive-load",
+            "type": "applies",
+            "strength": 0.8,
+            "reason": "Chat responses should manage load"
+        }
+    ],
+    "triggers": [
+        "chat participant",
+        "copilot extension",
+        "language model",
+        "chat API",
+        "streaming response"
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "skill": "markdown-mermaid",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "writing-publication",
+            "type": "supports",
+            "strength": 0.85,
+            "reason": "Diagrams enhance publications"
+        },
+        {
+            "target": "lint-clean-markdown",
+            "type": "requires",
+            "strength": 0.8,
+            "reason": "Mermaid must be in valid markdown"
+        }
+    ],
+    "activationBoost": [
+        "broken emoji",
+        "unicode escape",
+        "mermaid dark background",
+        "blockquote styling"
+    ]
+}

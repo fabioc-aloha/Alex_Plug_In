@@ -1,0 +1,21 @@
+{
+    "skill": "m365-agent-debugging",
+    "inheritance": "heir:m365",
+    "connections": [
+        {
+            "target": "heir-curation",
+            "type": "implements",
+            "strength": 0.85,
+            "context": "M365 heir debugging"
+        }
+    ],
+    "activationPatterns": [
+        "agent not working",
+        "agent not responding",
+        "schema version",
+        "icon not transparent",
+        "validation failed",
+        "conversation starters missing",
+        "M365 declarative agent"
+    ]
+}

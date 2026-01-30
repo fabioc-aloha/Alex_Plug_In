@@ -113,6 +113,26 @@ These MUST be verified before releasing:
 | TypeScript compiles | - | `npm run compile` |
 | Changelog updated | CHANGELOG.md | Visual review |
 | No lint errors | *.md | `get_errors` tool |
+| Temporary skills handled | .github/skills/*/synapses.json | See below |
+
+### Temporary Skills Check
+
+**⚠️ Before stable releases**, verify temporary skills are excluded:
+
+```powershell
+# Find temporary skills
+Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
+  $json = Get-Content $_ | ConvertFrom-Json
+  if ($json.temporary -eq $true) { 
+    Write-Warning "TEMPORARY SKILL: $($_.Directory.Name) - exclude from stable release"
+  }
+}
+```
+
+| Release Type | Action |
+| ------------ | ------ |
+| Beta (`X.Y.Z-beta.N`) | Include temporary skills |
+| Stable (`X.Y.Z`) | **EXCLUDE** temporary skills |
 
 ---
 
@@ -161,7 +181,7 @@ vsce publish       # Publish to marketplace
 
 1. Create git tag: `git tag v<version>`
 2. Push tag: `git push origin v<version>`
-3. Verify on marketplace: `vsce show <publisher>.<extension-name>`
+3. Verify on marketplace: `vsce show fabioc-aloha.alex-cognitive-architecture`
 
 ---
 
@@ -362,7 +382,7 @@ Write-Host ""
 Write-Host "✅ Production deployment complete!" -ForegroundColor Green
 Write-Host "   Version: $newVersion" -ForegroundColor Gray
 Write-Host "   Tag: v$newVersion" -ForegroundColor Gray
-Write-Host "   Verify: vsce show <publisher>.<extension-name>" -ForegroundColor Gray
+Write-Host "   Verify: vsce show fabioc-aloha.alex-cognitive-architecture" -ForegroundColor Gray
 ```
 
 ### Script: `rollback.ps1`

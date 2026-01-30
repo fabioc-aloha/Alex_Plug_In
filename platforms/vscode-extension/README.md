@@ -97,25 +97,31 @@ Knowledge from Project A becomes available in Project B. Your expertise compound
 
 ## 🖥️ Quick Access
 
-**Status Bar** — Click the 🧠 Alex item (bottom-right) for quick actions. Shows real-time status:
-- Health indicator (🟢/🟡/🔴)
-- Active focus session timer (🍅 25:00)
-- Learning streak (🔥7)
+**Status Bar** — Click the Alex item (bottom-right) for quick actions:
 
-**Welcome Panel** — Find the 🧠 icon in the Activity Bar (left side) for a full dashboard:
-- Health, Sync, Skills, Synapses status
-- Patterns, Insights, Streak, Goals metrics
+- Health indicator (🟢 Healthy / 🟡 Issues / 🔴 Critical)
+- Active focus session timer (🍅 25:00 or ☕ 5:00)
+- Learning streak when active (🔥7)
+
+**Welcome Panel** — Find the CX icon in the Activity Bar (left side) for a full dashboard:
+
+- Status grid: Health, Sync, Skills, Synapses, Patterns, Insights, Streak, Goals
 - Grouped quick actions (Core, Knowledge, Tools, System)
+- Learning Goals tracker
 
-**Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all available commands.
+**Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all 25+ commands.
 
 **Keyboard Shortcuts:**
+
 | Action | Shortcut |
 | ------ | -------- |
 | Dream (maintenance) | `Ctrl+Alt+D` |
 | Self-Actualize | `Ctrl+Alt+S` |
 | Sync to cloud | `Ctrl+Alt+K` |
 | Open documentation | `Ctrl+Alt+H` |
+| Start Learning Session | `Ctrl+Alt+P` |
+| Pause/Resume Session | `Ctrl+Alt+Space` |
+| Search Knowledge | `Ctrl+Shift+K` |
 
 ---
 
@@ -129,11 +135,12 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ## 🆕 What's New in v3.7.2
 
-- **🌐 Generate Skill Catalog** — New command creates network diagrams of all skills
+- **� Health Dashboard** — Modern card-based UI with CX logo
+- **🌐 Generate Skill Catalog** — Creates network diagrams of all skills
 - **📊 Rich Status Bar** — Shows health, session timer, and streak at a glance
 - **🎨 Welcome View Polish** — Expanded metrics, grouped actions, BETA badge
 - **🔄 Command Parity** — 14 commands accessible from Palette, Status Bar, AND Welcome View
-- **🚀 Activation Preview** — Uninitialized workspaces show feature preview
+- **🛠️ Zero Broken Synapses** — Fresh installs now have 0 issues on first Dream
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
@@ -148,15 +155,7 @@ We're in beta! Help us improve Alex:
 - **Export for Issues** — One-click export for GitHub bug reports
 - **BETA Badge** — Click the badge in Welcome View for quick diagnostics
 
-### Keyboard Shortcuts
-
-| Action | Shortcut |
-| ------ | -------- |
-| Start Learning Session | `Ctrl+Alt+P` |
-| Pause/Resume Session | `Ctrl+Alt+Space` |
-| Search Knowledge | `Ctrl+Shift+K` |
-| Run Dream Protocol | `Ctrl+Alt+D` |
-| Sync Knowledge | `Ctrl+Alt+K` |
+Found an issue? Run `Alex: Report Issue` and paste the output into a [GitHub Issue](https://github.com/fabioc-aloha/Alex_Plug_In/issues).
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history.
 

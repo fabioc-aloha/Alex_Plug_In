@@ -1,0 +1,38 @@
+{
+    "skill": "project-scaffolding",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "README diagrams"
+        },
+        {
+            "target": "svg-graphics",
+            "type": "uses",
+            "strength": 0.9,
+            "reason": "Hero banners"
+        },
+        {
+            "target": "lint-clean-markdown",
+            "type": "requires",
+            "strength": 0.9,
+            "reason": "All docs lint-clean"
+        },
+        {
+            "target": "git-workflow",
+            "type": "enables",
+            "strength": 0.85,
+            "reason": "Proper gitignore and structure"
+        }
+    ],
+    "triggers": [
+        "new project",
+        "scaffold",
+        "initialize",
+        "create repo",
+        "project template",
+        "README"
+    ]
+}

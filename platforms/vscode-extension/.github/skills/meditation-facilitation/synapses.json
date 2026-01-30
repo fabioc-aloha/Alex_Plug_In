@@ -1,0 +1,37 @@
+{
+    "skill": "meditation-facilitation",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "unified-meditation-protocols.prompt",
+            "type": "implements",
+            "strength": 0.9,
+            "reason": "This skill guides meditation prompts"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "applies",
+            "strength": 0.8,
+            "reason": "Meditation uses spaced retrieval"
+        },
+        {
+            "target": "cognitive-load",
+            "type": "applies",
+            "strength": 0.8,
+            "reason": "Meditation manages cognitive load"
+        },
+        {
+            "target": "knowledge-synthesis",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Meditation leads to synthesis"
+        }
+    ],
+    "triggers": [
+        "meditate",
+        "reflect",
+        "consolidate",
+        "what did we learn",
+        "session summary"
+    ]
+}

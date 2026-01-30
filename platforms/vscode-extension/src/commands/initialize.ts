@@ -219,6 +219,7 @@ async function performInitialization(
   });
 
   // Define source and destination paths
+  // Note: domain-knowledge is deprecated - DK files are now migrated to skills
   const sources = [
     {
       src: path.join(extensionPath, ".github", "copilot-instructions.md"),
@@ -235,10 +236,6 @@ async function performInitialization(
     {
       src: path.join(extensionPath, ".github", "episodic"),
       dest: path.join(rootPath, ".github", "episodic"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "domain-knowledge"),
-      dest: path.join(rootPath, ".github", "domain-knowledge"),
     },
     {
       src: path.join(extensionPath, ".github", "config"),

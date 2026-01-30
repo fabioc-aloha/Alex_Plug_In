@@ -42,10 +42,13 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
         return;
     }
     
+    // Store extension URI for content generation
+    extensionUri = context.extensionUri;
+    
     // Create a new panel
     currentPanel = vscode.window.createWebviewPanel(
         'alexHealthDashboard',
-        '🧠 Alex Health Dashboard',
+        'Alex Health Dashboard',
         column || vscode.ViewColumn.One,
         {
             enableScripts: true,
@@ -98,11 +101,14 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
     await refreshDashboard();
 }
 
+// Store extension URI for webview content generation
+let extensionUri: vscode.Uri | undefined;
+
 /**
  * Refresh dashboard content
  */
 async function refreshDashboard(): Promise<void> {
-    if (!currentPanel) {
+    if (!currentPanel || !extensionUri) {
         return;
     }
     
@@ -122,6 +128,8 @@ async function refreshDashboard(): Promise<void> {
         const session = getCurrentSession();
         
         currentPanel.webview.html = await getWebviewContent(
+            currentPanel.webview,
+            extensionUri,
             health,
             knowledgeSummary,
             syncStatus,
@@ -138,6 +146,8 @@ async function refreshDashboard(): Promise<void> {
  * Generate the webview HTML content
  */
 async function getWebviewContent(
+    webview: vscode.Webview,
+    extUri: vscode.Uri,
     health: HealthCheckResult,
     knowledge: { totalPatterns: number; totalInsights: number } | null,
     syncStatus: { status: string; message: string },
@@ -147,6 +157,9 @@ async function getWebviewContent(
 ): Promise<string> {
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthColor = isHealthy ? '#4CAF50' : (health.brokenSynapses > 5 ? '#F44336' : '#FF9800');
+    
+    // Logo URI
+    const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
     
     // Build synapse network visualization
     const synapseViz = buildSynapseVisualization(health);
@@ -210,7 +223,8 @@ async function getWebviewContent(
         }
         
         .logo {
-            font-size: 48px;
+            width: 48px;
+            height: 48px;
         }
         
         .title-block h1 {
@@ -363,15 +377,123 @@ async function getWebviewContent(
             letter-spacing: 0.5px;
         }
         
-        .synapse-viz {
-            font-family: 'Cascadia Code', 'Consolas', monospace;
-            font-size: 11px;
-            line-height: 1.3;
+        /* Synapse Network Visualization */
+        .synapse-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .synapse-metric {
+            text-align: center;
+            padding: 16px 12px;
             background: var(--bg-primary);
-            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .synapse-metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .synapse-metric-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+        
+        .synapse-progress-container {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border);
+        }
+        
+        .synapse-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        
+        .synapse-progress-bar {
+            height: 12px;
+            background: rgba(128, 128, 128, 0.2);
             border-radius: 6px;
-            overflow-x: auto;
-            white-space: pre;
+            overflow: hidden;
+        }
+        
+        .synapse-progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .synapse-issues {
+            margin-top: 16px;
+            background: rgba(244, 67, 54, 0.08);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+        
+        .synapse-issues-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--error);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .synapse-issue-item {
+            font-size: 12px;
+            padding: 4px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(244, 67, 54, 0.15);
+        }
+        
+        .synapse-issue-item:last-child {
+            border-bottom: none;
+        }
+        
+        .synapse-issue-more {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        .synapse-empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .synapse-empty-icon {
+            font-size: 48px;
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+        
+        .synapse-empty-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .synapse-empty-hint {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .synapse-content {
+            padding: 4px;
         }
         
         .memory-list {
@@ -473,7 +595,7 @@ async function getWebviewContent(
     <div class="dashboard">
         <div class="header">
             <div class="header-left">
-                <span class="logo">🧠</span>
+                <img src="${logoUri}" alt="Alex" class="logo" />
                 <div class="title-block">
                     <h1>Alex Health Dashboard</h1>
                     <span class="version">Version ${version || 'Unknown'}</span>
@@ -606,9 +728,9 @@ async function getWebviewContent(
         <!-- Synapse Network -->
         <div class="card" style="margin-top: 20px;">
             <div class="card-header">
-                <span class="card-title">🧠 Synaptic Network</span>
+                <span class="card-title">🔗 Synaptic Network</span>
             </div>
-            <div class="synapse-viz">${synapseViz}</div>
+            <div class="synapse-content">${synapseViz}</div>
         </div>
         
         <!-- Memory Files -->
@@ -644,55 +766,67 @@ async function getWebviewContent(
 }
 
 /**
- * Build ASCII visualization of synapse network
+ * Build modern visualization of synapse network
  */
 function buildSynapseVisualization(health: HealthCheckResult): string {
     if (!health.initialized || health.totalSynapses === 0) {
         return `
-┌─────────────────────────────────────────────────────┐
-│                  No synapses found                   │
-│         Run 'Alex: Initialize' to deploy            │
-└─────────────────────────────────────────────────────┘`;
+        <div class="synapse-empty">
+            <div class="synapse-empty-icon">🔗</div>
+            <div class="synapse-empty-text">No synapses found</div>
+            <div class="synapse-empty-hint">Run 'Alex: Initialize' to deploy architecture</div>
+        </div>`;
     }
     
     const healthyCount = health.totalSynapses - health.brokenSynapses;
     const healthPercent = Math.round((healthyCount / health.totalSynapses) * 100);
+    const healthColor = healthPercent >= 95 ? 'var(--success)' : (healthPercent >= 80 ? 'var(--warning)' : 'var(--error)');
     
-    let viz = `┌${'─'.repeat(60)}┐\n`;
-    viz += `│ SYNAPSE NETWORK SUMMARY                                    │\n`;
-    viz += `├${'─'.repeat(60)}┤\n`;
-    viz += `│                                                            │\n`;
-    viz += `│   Total Connections: ${String(health.totalSynapses).padStart(4)}                                 │\n`;
-    viz += `│   Healthy:          ${String(healthyCount).padStart(4)} (${String(healthPercent).padStart(3)}%)                           │\n`;
-    viz += `│   Broken:           ${String(health.brokenSynapses).padStart(4)}                                  │\n`;
-    viz += `│   Memory Files:     ${String(health.totalFiles).padStart(4)}                                  │\n`;
-    viz += `│                                                            │\n`;
-    viz += `│   Health Bar:                                              │\n`;
-    
-    // Build ASCII health bar
-    const barWidth = 40;
-    const filledWidth = Math.round((healthPercent / 100) * barWidth);
-    const healthBar = '█'.repeat(filledWidth) + '░'.repeat(barWidth - filledWidth);
-    viz += `│   [${healthBar}]   │\n`;
-    viz += `│                                                            │\n`;
-    
-    // Show issues if any
+    // Build issues HTML if any
+    let issuesHtml = '';
     if (health.issues.length > 0) {
-        viz += `├${'─'.repeat(60)}┤\n`;
-        viz += `│ ISSUES DETECTED:                                           │\n`;
-        for (const issue of health.issues.slice(0, 5)) {
-            // Sanitize issue text to prevent XSS
+        const issueItems = health.issues.slice(0, 6).map(issue => {
             const sanitizedIssue = escapeHtml(issue);
-            const shortIssue = sanitizedIssue.length > 54 ? sanitizedIssue.substring(0, 51) + '...' : sanitizedIssue;
-            viz += `│   ⚠ ${shortIssue.padEnd(54)} │\n`;
-        }
-        if (health.issues.length > 5) {
-            viz += `│   ... and ${health.issues.length - 5} more issues                                  │\n`;
-        }
+            return `<div class="synapse-issue-item">⚠️ ${sanitizedIssue}</div>`;
+        }).join('');
+        const moreCount = health.issues.length > 6 ? `<div class="synapse-issue-more">... and ${health.issues.length - 6} more issues</div>` : '';
+        issuesHtml = `
+        <div class="synapse-issues">
+            <div class="synapse-issues-header">Issues Detected</div>
+            ${issueItems}
+            ${moreCount}
+        </div>`;
     }
     
-    viz += `└${'─'.repeat(60)}┘`;
-    return viz;
+    return `
+    <div class="synapse-grid">
+        <div class="synapse-metric">
+            <div class="synapse-metric-value">${health.totalSynapses}</div>
+            <div class="synapse-metric-label">Total Connections</div>
+        </div>
+        <div class="synapse-metric">
+            <div class="synapse-metric-value" style="color: var(--success)">${healthyCount}</div>
+            <div class="synapse-metric-label">Healthy</div>
+        </div>
+        <div class="synapse-metric">
+            <div class="synapse-metric-value" style="color: ${health.brokenSynapses > 0 ? 'var(--error)' : 'var(--success)'}">${health.brokenSynapses}</div>
+            <div class="synapse-metric-label">Broken</div>
+        </div>
+        <div class="synapse-metric">
+            <div class="synapse-metric-value">${health.totalFiles}</div>
+            <div class="synapse-metric-label">Memory Files</div>
+        </div>
+    </div>
+    <div class="synapse-progress-container">
+        <div class="synapse-progress-header">
+            <span>Network Health</span>
+            <span style="color: ${healthColor}; font-weight: 600">${healthPercent}%</span>
+        </div>
+        <div class="synapse-progress-bar">
+            <div class="synapse-progress-fill" style="width: ${healthPercent}%; background: ${healthColor}"></div>
+        </div>
+    </div>
+    ${issuesHtml}`;
 }
 
 /**

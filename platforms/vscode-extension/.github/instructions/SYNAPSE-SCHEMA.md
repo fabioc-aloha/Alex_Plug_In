@@ -94,6 +94,68 @@ Memory files should include synapses in a simple list format:
 
 ---
 
+## Temporary Skills
+
+Skills can be marked as temporary for beta testing or time-limited purposes.
+
+### JSON Fields
+
+```json
+{
+  "temporary": true,
+  "removeAfter": "stable-release"
+}
+```
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `temporary` | boolean | `true` if skill should be removed later |
+| `removeAfter` | string | Milestone or version when to remove (e.g., "stable-release", "v3.7.0") |
+
+### Visual Differentiation
+
+In network diagrams, temporary skills are styled with:
+
+- **Fill**: Purple (#f3e8ff)
+- **Stroke**: Purple (#7c3aed)
+- **Border**: Dashed (stroke-dasharray: 5 5)
+
+```mermaid
+classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5
+class BT temp
+```
+
+### Discovery
+
+To find all temporary skills:
+
+```powershell
+Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
+  $json = Get-Content $_ | ConvertFrom-Json
+  if ($json.temporary -eq $true) { $_.Directory.Name }
+}
+```
+
+### Deployment Policy
+
+**⚠️ IMPORTANT**: Temporary skills are deployed ONLY to beta releases, never to stable/production.
+
+| Release Type | Include Temporary Skills? |
+| ------------ | ------------------------- |
+| `X.Y.Z-beta.N` | ✅ Yes |
+| `X.Y.Z-alpha.N` | ✅ Yes |
+| `X.Y.Z-rc.N` | ⚠️ Review first |
+| `X.Y.Z` (stable) | ❌ No - must be removed |
+
+**Build script responsibility**: Before stable release, the build script should:
+1. Scan for `"temporary": true` in synapses.json files
+2. Exclude those skill folders from the package
+3. Warn if any temporary skills would be included
+
+See [release-management.instructions.md] for release checklist.
+
+---
+
 ## Validation Rules
 
 1. **Target must exist**: File in `[brackets]` must be a valid memory file

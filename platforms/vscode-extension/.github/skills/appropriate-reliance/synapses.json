@@ -1,0 +1,38 @@
+{
+    "skill": "appropriate-reliance",
+    "inheritance": "inheritable",
+    "description": "Calibrated human-AI collaboration patterns",
+    "connections": [
+        {
+            "target": "bootstrap-learning.instructions.md",
+            "type": "enables",
+            "strength": 0.9,
+            "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "enhances",
+            "strength": 0.7,
+            "context": "Mutual challenge improves architecture documentation quality"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "related",
+            "strength": 0.7,
+            "context": "Grounded in learning science and trust calibration research"
+        },
+        {
+            "target": "alex-identity-integration.instructions.md",
+            "type": "implements",
+            "strength": 0.9,
+            "context": "Proactive collaboration is core to Alex personality"
+        }
+    ],
+    "triggers": [
+        "collaboration feels one-sided",
+        "user accepts without reviewing",
+        "user rejects without reasoning",
+        "AI should challenge assumption",
+        "trust calibration needed"
+    ]
+}

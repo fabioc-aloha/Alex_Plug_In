@@ -10,7 +10,7 @@ import {
   setupEnvironment,
   offerEnvironmentSetup,
 } from "./commands/setupEnvironment";
-import { upgradeArchitecture } from "./commands/upgrade";
+import { upgradeArchitecture, completeMigration, showMigrationCandidates } from "./commands/upgrade";
 import { runSelfActualization } from "./commands/self-actualization";
 import { runExportForM365 } from "./commands/exportForM365";
 import { registerContextMenuCommands } from "./commands/contextMenu";
@@ -210,6 +210,32 @@ export function activate(context: vscode.ExtensionContext) {
           throw err;
         }
       });
+    },
+  );
+
+  let completeMigrationDisposable = vscode.commands.registerCommand(
+    "alex.completeMigration",
+    async () => {
+      const done = telemetry.logTimed("command", "complete_migration");
+      await withOperationLock("Migration", async () => {
+        try {
+          await completeMigration(context);
+          clearHealthCache();
+          await updateStatusBar(context, true);
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
+      });
+    },
+  );
+
+  let showMigrationDisposable = vscode.commands.registerCommand(
+    "alex.showMigrationCandidates",
+    async () => {
+      telemetry.log("command", "show_migration_candidates");
+      await showMigrationCandidates();
     },
   );
 
@@ -699,6 +725,8 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(resetDisposable);
   context.subscriptions.push(dreamDisposable);
   context.subscriptions.push(upgradeDisposable);
+  context.subscriptions.push(completeMigrationDisposable);
+  context.subscriptions.push(showMigrationDisposable);
   context.subscriptions.push(selfActualizeDisposable);
   context.subscriptions.push(exportM365Disposable);
   context.subscriptions.push(startSessionDisposable);

@@ -65,9 +65,41 @@
 | 3.7.0 | Foundation | ✅ Done | ✅ v3.7.0 | — | Complete |
 | 3.7.1 | — | ✅ Done | ✅ Beta 1 | — | Complete |
 | **3.7.2** | **—** | **✅ Done** | **✅ Beta 2** | **—** | **CURRENT** |
+| 3.7.3 | GK Migration | Planned | Planned | — | In Progress |
 | 3.8.0 | Expression | Planned | Planned | Planned | — |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
 | 4.0.0 | Trust | Planned | Planned | Planned | — |
+
+---
+
+## 🎯 v3.7.3 GK Migration — Data Quality Normalization
+
+> **Goal:** Normalize global knowledge data during cloud sync for improved quality
+
+### Features
+
+| # | Feature | Status | Description |
+|:-:|---------|:------:|-------------|
+| 1 | GK Migration Function | ✅ | `normalizeGlobalKnowledge()` in globalKnowledge.ts |
+| 2 | Auto-tag Generation | ✅ | Empty tags auto-populated from title keywords |
+| 3 | Category Inference | ✅ | Miscategorized entries corrected via keyword mapping |
+| 4 | Source Normalization | ✅ | "Alex_Sandbox" → "Master Alex (promoted skill)" |
+| 5 | Cloud Sync Integration | ✅ | Migration runs before push/sync operations |
+| 6 | Backward Compatibility | ✅ | Schema 1.0.0 → 1.0.1 (older versions can read) |
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `src/chat/globalKnowledge.ts` | Added migration function, tag generation, category mapping |
+| `src/chat/cloudSync.ts` | Calls migration before push and sync |
+| `alex_docs/GK-MIGRATION-PLAN.md` | Design document |
+
+### Migration Rules
+
+1. **Empty Tags**: Generate from title words (exclude common words, max 5 tags)
+2. **Wrong Categories**: Infer from keyword mapping (needs 2+ matches to change)
+3. **Sandbox Source**: Map bulk-promoted entries to "Master Alex (promoted skill)"
 
 ---
 
@@ -175,6 +207,14 @@
 |:-:|---------|:------:|-------------|
 | 1 | Instructions update | 1d | Embed uncertainty expressions |
 | 2 | OneDrive citation pattern | 0.5d | "According to your notes..." |
+| 3 | **MS Graph Profile Discovery** | 2d | Auto-populate user profile via Graph API |
+
+**MS Graph Profile Discovery Details:**
+- User Profile: Name, title, department, manager, photo
+- Calendar: Work patterns, meeting frequency, focus time preferences
+- Teams: Collaboration style, frequent contacts
+- Org Chart: Team structure, reporting relationships
+- OneDrive: Recent documents for expertise inference
 
 ### Cross-Platform Validation
 

@@ -1,0 +1,40 @@
+{
+    "skill": "svg-graphics",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "project-scaffolding",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Hero banners for READMEs"
+        },
+        {
+            "target": "image-handling",
+            "type": "complements",
+            "strength": 0.85,
+            "reason": "SVG to PNG conversion"
+        },
+        {
+            "target": "ascii-art-alignment",
+            "type": "complements",
+            "strength": 0.6,
+            "reason": "Both are visual skills"
+        },
+        {
+            "target": "markdown-mermaid",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Both create diagrams"
+        }
+    ],
+    "triggers": [
+        "SVG",
+        "banner",
+        "logo",
+        "icon",
+        "graphic",
+        "visual",
+        "badge",
+        "hero image"
+    ]
+}

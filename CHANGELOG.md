@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.3] - 2026-01-30 🔧 Beta 3
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Data quality, upgrade system, architecture sync
+
+### Focus
+
+Under-the-hood improvements: Global Knowledge normalization, upgrade system rewrite, and full skills architecture sync.
+
+### Added
+
+- **🔄 Global Knowledge Migration** — Automatic data quality normalization
+  - Auto-generates missing tags from title keywords
+  - Infers categories from content keywords (e.g., "test" → testing)
+  - Normalizes malformed source fields ("Alex_Sandbox" → "Master Alex")
+  - Runs transparently during cloud sync (push/sync operations)
+  - Preserves all existing valid data
+
+- **📚 Full Skills Catalog** — 46+ skills packaged with extension
+  - Every skill includes `SKILL.md` and `synapses.json`
+  - Enables skill catalog diagram generation
+  - Complete skill network for new installations
+
+### Changed
+
+- **⚡ Upgrade System Rewrite** — Safer, more reliable upgrades
+  - Proper backup creation before any modifications
+  - Preserves user content (domain-knowledge, custom skills)
+  - Cleaner file-by-file update logic
+  - Better error handling and rollback support
+  - Integrated with workspace protection (kill switch)
+
+- **🧹 Architecture Cleanup** — Removed legacy domain-knowledge files
+  - DK files migrated to skills architecture
+  - Cleaner `.github/` folder structure
+  - Reduced extension package size
+
+### Fixed
+
+- Global knowledge entries with empty tags now auto-populated
+- Entries with "uncategorized" category now properly inferred
+- Source field inconsistencies normalized across all entries
+
+---
+
 ## [3.7.2] - 2026-01-30 🎨 Beta 2
 
 > **Status:** Pre-release (use `--pre-release` flag)
@@ -75,6 +120,22 @@ User experience improvements, flexible UX across all entry points, and the new S
   - image-handling ↔ svg-graphics
   - lint-clean-markdown ↔ markdown-mermaid
   - release-preflight ↔ beta-tester
+
+- **Health Dashboard UI** — Modernized visualization
+  - Replaced 🧠 emoji with CX logo
+  - Replaced ASCII art Synaptic Network with modern card-based UI
+  - Grid of 4 metrics (Total, Healthy, Broken, Memory Files)
+  - Progress bar with percentage
+  - Styled issues list
+
+- **Broken Synapses on Fresh Install** — Cleaned up orphaned references
+  - Removed `VERSION-NAMING-CONVENTION.md` (file doesn't exist)
+  - Removed `DK-HYBRID-DREAM-AI.md` and `DK-POST-DREAM-ENHANCEMENT.md` references
+  - Removed `README.md` and `USER-PROFILE.md` synapses (optional files)
+  - Removed `CONTRIBUTING.md` synapse (project-specific)
+  - Fixed `ALEX-INTEGRATION.md` duplicate and non-existent file references
+
+- **Upgrade Preserves User Content Better** — New versions of user-modified DK files now go to `archive/upgrades/.../new-versions/` instead of cluttering `.github/domain-knowledge/` with `.vX.X.X.md` files
 
 ---
 

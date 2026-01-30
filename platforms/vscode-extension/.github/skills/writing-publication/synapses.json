@@ -1,0 +1,31 @@
+{
+    "skill": "writing-publication",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "type": "enables",
+            "strength": 0.85,
+            "context": "Diagrams for papers and articles"
+        },
+        {
+            "target": "lint-clean-markdown",
+            "type": "enables",
+            "strength": 0.6,
+            "context": "Clean markdown for documentation"
+        },
+        {
+            "target": "appropriate-reliance",
+            "type": "validates",
+            "strength": 0.6,
+            "context": "Evidence-based claims"
+        }
+    ],
+    "activationPatterns": [
+        "writing article",
+        "academic paper",
+        "publication strategy",
+        "responding to reviews",
+        "documentation writing"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "skill": "lint-clean-markdown",
+    "inheritance": "inheritable",
+    "description": "Write markdown that passes linting on first attempt",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "type": "complements",
+            "strength": 0.9,
+            "bidirectional": true,
+            "context": "Mermaid diagrams must also follow lint rules"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "enables",
+            "strength": 0.9,
+            "context": "All architecture documentation must be lint-clean"
+        },
+        {
+            "target": "writing-publication",
+            "type": "supports",
+            "strength": 0.7,
+            "context": "Lint-clean is baseline for documentation excellence"
+        }
+    ],
+    "triggers": [
+        "creating markdown file",
+        "editing documentation",
+        "writing lists or tables",
+        "adding code blocks"
+    ],
+    "rules": {
+        "MD032": "Blank lines around lists",
+        "MD031": "Blank lines around code blocks",
+        "MD022": "Blank lines around headings",
+        "MD004": "Use dash for unordered lists",
+        "MD009": "No trailing whitespace",
+        "MD047": "Single newline at file end"
+    }
+}

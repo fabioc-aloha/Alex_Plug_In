@@ -1,0 +1,33 @@
+{
+    "skill": "ascii-art-alignment",
+    "inheritance": "inheritable",
+    "description": "Create perfectly aligned ASCII diagrams",
+    "connections": [
+        {
+            "target": "markdown-mermaid",
+            "type": "complements",
+            "strength": 0.9,
+            "bidirectional": true,
+            "context": "ASCII for precise control, Mermaid for auto-layout"
+        },
+        {
+            "target": "lint-clean-markdown",
+            "type": "related",
+            "strength": 0.7,
+            "context": "Both require attention to character-level detail"
+        },
+        {
+            "target": "writing-publication",
+            "type": "supports",
+            "strength": 0.7,
+            "context": "Visual diagrams enhance documentation quality"
+        }
+    ],
+    "triggers": [
+        "ASCII diagram misaligned",
+        "box drawing characters",
+        "text-based UI mockup",
+        "lines don't match up",
+        "right border jagged"
+    ]
+}

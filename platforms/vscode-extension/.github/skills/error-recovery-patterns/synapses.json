@@ -1,0 +1,32 @@
+{
+    "skill": "error-recovery-patterns",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "debugging-patterns",
+            "type": "follows",
+            "strength": 0.7,
+            "reason": "Recovery happens after finding the error"
+        },
+        {
+            "target": "incident-response",
+            "type": "supports",
+            "strength": 0.7,
+            "reason": "Recovery is part of incident handling"
+        },
+        {
+            "target": "testing-strategies",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Recovery paths need testing"
+        }
+    ],
+    "triggers": [
+        "retry",
+        "fallback",
+        "rollback",
+        "circuit breaker",
+        "graceful degradation",
+        "error handling"
+    ]
+}

@@ -5,7 +5,8 @@ import * as https from 'https';
 import {
     getGlobalKnowledgePath,
     ensureGlobalKnowledgeDirectories,
-    updateGlobalKnowledgeIndex
+    updateGlobalKnowledgeIndex,
+    normalizeGlobalKnowledge
 } from './globalKnowledge';
 import {
     IGlobalKnowledgeIndex,
@@ -15,6 +16,26 @@ import {
 // ============================================================================
 // CLOUD SYNC CONFIGURATION
 // ============================================================================
+
+/**
+ * Output channel for unconscious operations (silent by default)
+ */
+let unconsciousChannel: vscode.OutputChannel | undefined;
+
+function getUnconsciousChannel(): vscode.OutputChannel {
+    if (!unconsciousChannel) {
+        unconsciousChannel = vscode.window.createOutputChannel('Alex Unconscious Mind');
+    }
+    return unconsciousChannel;
+}
+
+/**
+ * Log unconscious activity (for debugging, not shown to user)
+ */
+function logUnconscious(message: string): void {
+    const timestamp = new Date().toISOString();
+    getUnconsciousChannel().appendLine(`[${timestamp}] ${message}`);
+}
 
 /**
  * Gist filename for the knowledge index
@@ -350,6 +371,12 @@ export async function pushToCloud(): Promise<ISyncResult> {
     try {
         await ensureGlobalKnowledgeDirectories();
         
+        // Run migration/normalization before push
+        const migrationResult = await normalizeGlobalKnowledge();
+        if (migrationResult.entriesNormalized > 0) {
+            logUnconscious(`Pre-push migration: ${migrationResult.entriesNormalized} entries normalized`);
+        }
+        
         // Load local index
         const indexPath = getGlobalKnowledgePath('index');
         if (!await fs.pathExists(indexPath)) {
@@ -504,6 +531,12 @@ export async function pullFromCloud(): Promise<ISyncResult> {
 export async function syncWithCloud(): Promise<ISyncResult> {
     try {
         await ensureGlobalKnowledgeDirectories();
+        
+        // Run migration/normalization before sync
+        const migrationResult = await normalizeGlobalKnowledge();
+        if (migrationResult.entriesNormalized > 0) {
+            logUnconscious(`Pre-sync migration: ${migrationResult.entriesNormalized} entries normalized`);
+        }
         
         // Load local index
         const indexPath = getGlobalKnowledgePath('index');
@@ -722,26 +755,6 @@ let lastSyncAttempt: Date | undefined;
 let syncInProgress = false;
 const BACKGROUND_SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 const MIN_SYNC_INTERVAL_MS = 60 * 1000; // Minimum 1 minute between syncs
-
-/**
- * Output channel for unconscious operations (silent by default)
- */
-let unconsciousChannel: vscode.OutputChannel | undefined;
-
-function getUnconsciousChannel(): vscode.OutputChannel {
-    if (!unconsciousChannel) {
-        unconsciousChannel = vscode.window.createOutputChannel('Alex Unconscious Mind');
-    }
-    return unconsciousChannel;
-}
-
-/**
- * Log unconscious activity (for debugging, not shown to user)
- */
-function logUnconscious(message: string): void {
-    const timestamp = new Date().toISOString();
-    getUnconsciousChannel().appendLine(`[${timestamp}] ${message}`);
-}
 
 /**
  * Perform a transparent background sync
