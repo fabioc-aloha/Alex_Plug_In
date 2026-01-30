@@ -33,6 +33,7 @@ This paper reports lessons from 18 months of production deployment.
 Alex implements biologically-inspired memory tiers:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 flowchart TB
     subgraph T1["\u23f1\ufe0f Tier 1: Working Memory"]
         WM["7\u00b12 concepts | Session only"]

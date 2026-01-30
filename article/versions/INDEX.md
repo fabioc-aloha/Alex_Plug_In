@@ -3,6 +3,7 @@
 > 12 publication-ready versions of the Alex Cognitive Architecture paper, each optimized for a specific venue and audience.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff'}}}%%
 mindmap
   root(("\ud83d\udcda Alex Papers"))
     Academic

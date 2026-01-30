@@ -365,6 +365,7 @@
   - **PlantUML Activity Diagrams** - For complex business processes with parallel flows
 - **Example Use Cases**: Onboarding workflows, approval processes, troubleshooting guides
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 flowchart TD
     A[Start Process] --> B{Decision Point}
     B -->|Yes| C[Action 1]
@@ -381,6 +382,7 @@ flowchart TD
   - **D2** - For clean, executive-level architecture overviews
 - **Example Use Cases**: Microservices architecture, API design, system integration
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
 C4Component
     title Component Diagram for Internet Banking System
     Person(customer, "Customer", "Banking customer")
@@ -441,6 +443,7 @@ C4Component
 
 #### **🎯 Complexity Assessment Framework**
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
 quadrantChart
     title Diagram Complexity vs Tool Selection
     x-axis "Simple" --> "Complex"
@@ -465,6 +468,7 @@ quadrantChart
 
 #### **🚀 Decision Tree for Tool Selection**
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 flowchart TD
     A[Need to Create Diagram] --> B{What are you showing?}
 
@@ -540,6 +544,7 @@ flowchart TD
 
 #### Mermaid (Universal Standard)
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 graph TD
     A[Start] --> B{Decision}
     B -->|Yes| C[Action 1]
@@ -646,6 +651,7 @@ database.style.fill: "#e8f5e8"
 
 #### **1. Mermaid** (Primary Focus - GitHub Native)
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 graph TD
     A[Start] --> B{Decision}
     B -->|Yes| C[Action 1]

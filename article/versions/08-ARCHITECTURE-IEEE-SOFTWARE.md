@@ -50,6 +50,7 @@ Automatic operations are visible and overridable. Users can disable any automati
 ### High-Level Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 flowchart TB
     subgraph VSCODE["\ud83d\udcbb VS Code Extension"]
         direction TB
