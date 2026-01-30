@@ -287,6 +287,7 @@ flowchart LR
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LLM,GW,PRA,SFI stale
     class BT temp
+    class BL,LP,CL,AR,AH,SCG,TS,RP,DP,CR,PS,VSE,ERP,RCA,IR,RF,WP,MM,LM,AA,SVG,IH inheritable
 ```
 
 ### Legend
