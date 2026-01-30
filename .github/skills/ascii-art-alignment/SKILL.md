@@ -60,6 +60,20 @@ v    Down arrow (lowercase v)
 5. ☐ Never put emojis inside ASCII boxes
 6. ☐ Test in VS Code preview AND GitHub rendering
 7. ☐ After fixing inner content, re-count total width
+8. ☐ Center text within inner boxes (visual balance)
+
+---
+
+## Real-Time Validation Tip
+
+When editing ASCII art in VS Code:
+
+1. **Select** the entire code block
+2. **Status bar** shows character count per line (bottom right)
+3. **Each line** inside box should match outer border width
+4. **Monospace font** is mandatory - non-monospace breaks everything
+
+**Quick mental math**: If outer box is 43 chars, inner content line = `│` + 41 spaces/content + `│` = 43
 
 ---
 
@@ -134,7 +148,7 @@ $content | Where-Object { $_ -match '^\│' } | ForEach-Object {
 Scan multiple files for Unicode arrows that should be ASCII:
 
 ```powershell
-Select-String -Path "*.md" -Pattern '[▼▲◄►]' | 
+Select-String -Path "*.md" -Pattern '[▼▲◄►]' |
     Select-Object Filename, LineNumber, Line
 ```
 
@@ -146,7 +160,7 @@ Select-String -Path "*.md" -Pattern '[▼▲◄►]' |
 
 ```text
 ┌─────────────────────────────────────────┐
-│            ARCHITECTURE                 │
+│             ARCHITECTURE                │
 ├─────────────────────────────────────────┤
 │                                         │
 │  ┌───────────┐       ┌───────────┐      │
@@ -156,7 +170,7 @@ Select-String -Path "*.md" -Pattern '[▼▲◄►]' |
 │        │                   │            │
 │        v                   v            │
 │  ┌─────────────────────────────────┐    │
-│  │         Shared Layer            │    │
+│  │          Shared Layer           │    │
 │  └─────────────────────────────────┘    │
 │                                         │
 └─────────────────────────────────────────┘

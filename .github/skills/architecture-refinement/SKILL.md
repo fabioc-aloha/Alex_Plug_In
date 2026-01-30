@@ -31,7 +31,8 @@ Before session ends, ask:
 | Did we solve a problem that could recur? | Document in relevant skill or DK file |
 | Did we learn something about Alex's architecture? | Update alex_docs/ |
 | Did a file get created/deleted/consolidated? | Update migration trackers |
-| Did human feedback correct AI judgment? | Capture the principle explicitly |
+| Did user correct AI behavior? | Add to skill's Anti-Patterns + document principle |
+| Did the skill itself get improved during use? | Commit the refinement immediately |
 
 ### Documentation Location Guide
 
@@ -93,14 +94,63 @@ Before committing documentation updates:
 | Over-document obvious things | Focus on non-obvious learnings |
 | Skip human feedback | Capture corrective principles explicitly |
 
+## User Coaching Learning Loop
+
+The most valuable learning often comes from user corrections:
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│              USER COACHING LEARNING LOOP                │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│   ┌─────────┐    ┌─────────┐    ┌─────────┐             │
+│   │   AI    │--->│  User   │--->│   AI    │             │
+│   │ Attempt │    │ Corrects│    │ Refines │             │
+│   └────┬────┘    └────┬────┘    └────┬────┘             │
+│        │              │              │                  │
+│        v              v              v                  │
+│   "Dumped all    "Don't dump    Added to               │
+│    patterns in    in one file"   appropriate           │
+│    one doc"                      skills                │
+│                                                         │
+│   ┌─────────────────────────────────────────────┐       │
+│   │  CAPTURE THE CORRECTION AS A PRINCIPLE      │       │
+│   │  in the relevant skill's Anti-Patterns      │       │
+│   └─────────────────────────────────────────────┘       │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Why User Coaching Matters
+
+| AI Tendency | User Correction | Extracted Principle |
+| ----------- | --------------- | ------------------- |
+| Over-centralize | "Don't dump in one file" | Distribute to appropriate locations |
+| Over-simplify | "You lost context" | Preserve nuance when consolidating |
+| Skip validation | "Did you check it?" | Always verify (lint, count chars) |
+| Assume completion | "What about X?" | Follow through on all aspects |
+
+### Capturing User Feedback
+
+When user corrects AI behavior:
+
+1. **Acknowledge** the correction immediately
+2. **Fix** the specific instance
+3. **Extract** the underlying principle
+4. **Document** in the relevant skill's Anti-Patterns section
+5. **Commit** with message referencing the learning
+
+---
+
 ## Connection to Bootstrap Learning
 
 This skill operationalizes the bootstrap learning principle:
 
 1. **Learn** → Acquire knowledge through conversation
-2. **Extract** → Identify reusable patterns (this skill)
-3. **Document** → Persist in appropriate location (this skill)
-4. **Consolidate** → Integrate during meditation
+2. **Coach** → User corrections refine understanding (NEW)
+3. **Extract** → Identify reusable patterns (this skill)
+4. **Document** → Persist in appropriate location (this skill)
+5. **Consolidate** → Integrate during meditation
 
 ## Synapses
 
