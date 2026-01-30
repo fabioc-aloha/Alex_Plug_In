@@ -24,6 +24,80 @@ Instead: **Backup → Fresh Install → Gap Analysis → User Decides**
 
 ---
 
+## Legacy Structure Detection
+
+Alex has evolved through several folder structures. The migration must detect and handle all of them:
+
+| Version | Structure | DK Location | Skills | Manifest |
+| ------- | --------- | ----------- | ------ | -------- |
+| < 3.0 | Legacy | `DK-*.md` in project root | None | None |
+| 3.0-3.3 | Transitional | `.github/domain-knowledge/` | None | Root `.alex-manifest.json` |
+| 3.4+ | Current | `.github/domain-knowledge/` | `.github/skills/` | `.github/config/alex-manifest.json` |
+
+### Detection Logic
+
+```typescript
+interface LegacyDetection {
+  version: 'legacy' | 'transitional' | 'current' | 'unknown';
+  dkLocations: string[];  // All places where DK files were found
+  hasSkills: boolean;
+  manifestLocation: string | null;
+}
+
+async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection> {
+  const result: LegacyDetection = {
+    version: 'unknown',
+    dkLocations: [],
+    hasSkills: false,
+    manifestLocation: null,
+  };
+
+  // Check for DK files in root (legacy < 3.0)
+  const rootDKFiles = await glob('DK-*.md', { cwd: rootPath });
+  if (rootDKFiles.length > 0) {
+    result.dkLocations.push('root');
+  }
+
+  // Check for DK files in .github/domain-knowledge/ (3.0+)
+  const githubDK = path.join(rootPath, '.github', 'domain-knowledge');
+  if (await fs.pathExists(githubDK)) {
+    const dkFiles = await fs.readdir(githubDK);
+    if (dkFiles.some(f => f.startsWith('DK-'))) {
+      result.dkLocations.push('.github/domain-knowledge');
+    }
+  }
+
+  // Check for skills (3.4+)
+  const skillsPath = path.join(rootPath, '.github', 'skills');
+  result.hasSkills = await fs.pathExists(skillsPath);
+
+  // Check for manifest locations
+  const newManifest = path.join(rootPath, '.github', 'config', 'alex-manifest.json');
+  const oldManifest = path.join(rootPath, '.alex-manifest.json');
+
+  if (await fs.pathExists(newManifest)) {
+    result.manifestLocation = '.github/config/alex-manifest.json';
+  } else if (await fs.pathExists(oldManifest)) {
+    result.manifestLocation = '.alex-manifest.json';
+  }
+
+  // Determine version
+  if (result.dkLocations.includes('root') && !result.dkLocations.includes('.github/domain-knowledge')) {
+    result.version = 'legacy';
+  } else if (result.manifestLocation === '.alex-manifest.json') {
+    result.version = 'transitional';
+  } else if (result.hasSkills) {
+    result.version = 'current';
+  } else if (result.dkLocations.length > 0) {
+    result.version = 'transitional';
+  }
+
+  return result;
+}
+```
+
+---
+
 ## Migration Flow
 
 ```text
@@ -33,19 +107,33 @@ Instead: **Backup → Fresh Install → Gap Analysis → User Decides**
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  STEP 1: BACKUP                                                 │
+│  STEP 0: DETECT LEGACY STRUCTURE                                │
+│                                                                 │
+│  • Scan for DK-*.md in root (legacy)                           │
+│  • Scan for .github/domain-knowledge/ (transitional/current)   │
+│  • Check for .alex-manifest.json (old) vs .github/config/ (new)│
+│  • Check for .github/skills/ (current only)                    │
+│  • Determine version: legacy | transitional | current          │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 1: BACKUP (version-aware)                                 │
 │                                                                 │
 │  archive/upgrades/backup-{version}-{timestamp}/                 │
-│  ├── .github/                  (entire folder)                  │
-│  ├── domain-knowledge/         (explicit copy)                  │
-│  └── manifest-snapshot.json    (state at backup time)           │
+│  ├── .github/                  (if exists)                      │
+│  ├── root-dk-files/            (DK-*.md from root, if legacy)  │
+│  ├── .alex-manifest.json       (if transitional)               │
+│  └── detection-report.json     (what we found)                 │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  STEP 2: FRESH INSTALL                                          │
 │                                                                 │
-│  • Delete .github/ entirely                                     │
+│  • Delete .github/ entirely (if exists)                        │
+│  • Delete root DK-*.md files (moved to backup)                 │
+│  • Delete .alex-manifest.json (moved to backup)                │
 │  • Install new heir from extension package                      │
 │  • Clean slate with latest architecture                         │
 └─────────────────────────────────────────────────────────────────┘
@@ -93,6 +181,7 @@ Instead: **Backup → Fresh Install → Gap Analysis → User Decides**
 │  "Alex: Complete Migration" command:                           │
 │  • Read checked items from MIGRATION-CANDIDATES.md             │
 │  • Copy selected files from backup to new .github/             │
+│  • Legacy files → new location (.github/domain-knowledge/)     │
 │  • Restore user profile                                        │
 │  • Restore episodic records                                    │
 │  • Delete MIGRATION-CANDIDATES.md                              │
@@ -119,22 +208,32 @@ Generated at `.github/MIGRATION-CANDIDATES.md`:
 
 > Generated by Alex Upgrade on 2026-01-30
 > Review and check items you want to migrate from your previous installation.
+>
+> **Detected structure:** Legacy (v2.x) — DK files found in project root
 
 ## Instructions
 
 1. Review each section below
 2. Check the boxes [x] for items you want to keep
 3. Run "Alex: Complete Migration" when ready
-4. Or manually copy files from `archive/upgrades/backup-3.5.3-2026-01-30/`
+4. Or manually copy files from `archive/upgrades/backup-2.5.0-2026-01-30/`
 
 ---
+
+## 🏛️ Legacy Domain Knowledge (from project root)
+
+These DK files were in your project root and will be moved to `.github/domain-knowledge/`:
+
+- [x] `DK-MY-PROJECT-API.md` — API patterns for MyProject (12 KB)
+- [x] `DK-TEAM-CONVENTIONS.md` — Team coding standards (4 KB)
+- [ ] `DK-OLD-NOTES.md` — Misc notes (1 KB) ⚠️ Last modified 2 years ago
 
 ## 📚 User-Created Domain Knowledge
 
 These files were created by you and don't exist in the new version:
 
 - [x] `DK-MY-PROJECT-API.md` — API patterns for MyProject (12 KB)
-- [x] `DK-TEAM-CONVENTIONS.md` — Team coding standards (4 KB)  
+- [x] `DK-TEAM-CONVENTIONS.md` — Team coding standards (4 KB)
 - [ ] `DK-OLD-EXPERIMENT.md` — Experimental notes (2 KB) ⚠️ Last modified 6 months ago
 
 ## 🎓 User-Created Skills
@@ -210,11 +309,11 @@ async function runGapAnalysis(
   newInstallPath: string
 ): Promise<MigrationCandidate[]> {
   const candidates: MigrationCandidate[] = [];
-  
+
   // 1. Find user-created DK files
   const backupDK = await listFiles(path.join(backupPath, '.github/domain-knowledge'));
   const newDK = await listFiles(path.join(newInstallPath, '.github/domain-knowledge'));
-  
+
   for (const file of backupDK) {
     if (!newDK.includes(file)) {
       candidates.push({
@@ -228,12 +327,12 @@ async function runGapAnalysis(
       });
     }
   }
-  
+
   // 2. Find user-created skills
   // 3. Find modified system files (checksum compare)
   // 4. Add profile (always recommended)
   // 5. Add episodic (always recommended)
-  
+
   return candidates;
 }
 ```
@@ -248,28 +347,28 @@ async function completeMigration(
 ): Promise<MigrationReport> {
   const content = await fs.readFile(candidatesFile, 'utf8');
   const checkedItems = parseCheckedItems(content);
-  
+
   const report: MigrationReport = {
     migrated: [],
     skipped: [],
     errors: [],
   };
-  
+
   for (const item of checkedItems) {
     try {
       const src = path.join(backupPath, item.path);
       const dest = path.join(targetPath, item.path);
-      
+
       await fs.copy(src, dest);
       report.migrated.push(item.path);
     } catch (error) {
       report.errors.push({ path: item.path, error: error.message });
     }
   }
-  
+
   // Cleanup
   await fs.remove(candidatesFile);
-  
+
   return report;
 }
 ```
