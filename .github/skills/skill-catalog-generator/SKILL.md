@@ -180,7 +180,7 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   lines.push('    classDef master fill:#fff3cd,stroke:#856404');
   lines.push('    classDef vscode fill:#e1f0ff,stroke:#0969da');
   lines.push('    classDef m365 fill:#e6f4ea,stroke:#1a7f37');
-  lines.push('    classDef inheritable fill:#f0f0f0,stroke:#888');
+  lines.push('    classDef inheritable fill:#e0f7fa,stroke:#00838f');
   lines.push('    classDef user fill:#e6ffe6,stroke:#2da02d');
   lines.push('');
   lines.push('    %% Styling - Staleness (dashed border)');
@@ -228,7 +228,7 @@ Include this legend in generated catalogs:
 | 🟦 Blue | VS Code heir |
 | 🟩 Green | M365 heir |
 | 🟪 Purple (dashed) | Temporary |
-| ⬜ Gray | Inheritable |
+| 🧊 Cyan | Inheritable |
 
 | Border | Meaning |
 | ------ | ------- |
