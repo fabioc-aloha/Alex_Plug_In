@@ -209,14 +209,14 @@ When you search local memory and find nothing, automatically searches the global
 flowchart TD
     START[Memory Search Request]
 
-    START --> LOCAL[Search Local Memory<br/>.github/ files]
+    START --> LOCAL["Search Local Memory<br/>.github/ files"]
     LOCAL --> CHECK{Results found?}
 
     CHECK -->|Yes| RETURN[Return Local Results]
-    CHECK -->|No| GLOBAL[Search Global Knowledge<br/>~/.alex/ files]
+    CHECK -->|No| GLOBAL["Search Global Knowledge<br/>~/.alex/ files"]
 
     GLOBAL --> GCHECK{Global results?}
-    GCHECK -->|Yes| AUGMENT["🌐 Return Global Results<br/>(Unconscious Retrieval)"]
+    GCHECK -->|Yes| AUGMENT["🌐 Return Global Results<br/>Unconscious Retrieval"]
     GCHECK -->|No| EMPTY[Return empty message]
 ```
 

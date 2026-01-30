@@ -10,35 +10,23 @@ The **Global Knowledge Base** is Alex's long-term memory for insights and patter
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
-flowchart TB
-    subgraph PROJECTS["📁 Projects"]
-        direction LR
-        P1["📦 Project A<br/>.github/"]
-        P2["📦 Project B<br/>.github/"]
-        P3["📦 Project C<br/>.github/"]
+flowchart LR
+    subgraph PROJECTS["📁 Your Projects"]
+        P1["Project A"]
+        P2["Project B"]
+        P3["Project C"]
     end
 
-    subgraph GLOBAL["🌐 Global Knowledge"]
-        GK[("🧠 ~/.alex/<br/>Cross-Project Memory")]
-    end
+    GK[("🧠 Global Knowledge<br/>~/.alex/")]
 
-    subgraph CLOUD["☁️ Cloud"]
-        GIST[("📝 GitHub Gist<br/>Backup & Sync")]
-    end
+    GIST[("☁️ GitHub Gist")]
 
-    P1 -.->|"⬆️ Promote"| GK
-    P2 -.->|"⬆️ Promote"| GK
-    P3 -.->|"⬆️ Promote"| GK
-
-    GK -->|"🔍 Search"| P1
-    GK -->|"🔍 Search"| P2
-    GK -->|"🔍 Search"| P3
-
-    GK <-->|"🔄 Sync"| GIST
+    PROJECTS <-->|"Promote & Search"| GK
+    GK <-->|"Sync"| GIST
 
     style PROJECTS fill:#e8f5e9,stroke:#2e7d32
-    style GLOBAL fill:#e3f2fd,stroke:#1565c0
-    style CLOUD fill:#f3e5f5,stroke:#7b1fa2
+    style GK fill:#e3f2fd,stroke:#1565c0
+    style GIST fill:#f3e5f5,stroke:#7b1fa2
 ```
 
 **Figure 1:** *Global Knowledge Architecture - Cross-project memory with cloud synchronization*

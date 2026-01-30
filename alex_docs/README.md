@@ -46,14 +46,14 @@ flowchart TB
     subgraph ALEX["🧠 Alex Cognitive Architecture"]
         direction TB
 
-        subgraph CONSCIOUS["🌟 Conscious Mind (System 2)"]
+        subgraph CONSCIOUS["🌟 Conscious Mind"]
             direction LR
             CM["💬 @alex Chat"]
             CMD["⚡ Commands"]
             TOOLS["🔧 LM Tools"]
         end
 
-        subgraph UNCONSCIOUS["🌙 Unconscious Mind (System 1)"]
+        subgraph UNCONSCIOUS["🌙 Unconscious Mind"]
             direction LR
             BGS["☁️ Sync"]
             AID["💡 Insights"]
@@ -62,11 +62,11 @@ flowchart TB
 
         subgraph MEMORY["💾 Memory Systems"]
             direction TB
-            WM["⏱️ Working<br/>Session"]
-            PM["📋 Procedural<br/>.instructions.md"]
-            EM["📝 Episodic<br/>.prompt.md"]
-            DK["🎓 Domain<br/>DK-*.md"]
-            GK["🌐 Global<br/>~/.alex/"]
+            WM["⏱️ Working Memory"]
+            PM["📋 Procedural"]
+            EM["📝 Episodic"]
+            DK["🎓 Domain"]
+            GK["🌐 Global"]
         end
     end
 
