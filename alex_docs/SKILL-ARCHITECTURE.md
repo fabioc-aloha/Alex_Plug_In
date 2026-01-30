@@ -268,6 +268,8 @@ Keep these as-is (don't migrate to skills):
 | `DK-MARKDOWN-MERMAID-MASTERY.md` | `markdown-mermaid` | ✅ Complete | Initial skill |
 | `DK-ADVANCED-DIAGRAMMING.md` | `markdown-mermaid` | ✅ Consolidated | Merged into existing skill (KISS) |
 | `DK-APPROPRIATE-RELIANCE.md` | `appropriate-reliance` | ✅ Consolidated | Research + session learnings merged |
+| `DK-ASCII-ART-ALIGNMENT.md` | `ascii-art-alignment` | ✅ Migrated | 431→210 lines |
+| `DK-DOCUMENTATION-EXCELLENCE.md` | `alex_docs/` | ✅ Moved | Achievement log → milestone doc |
 | *(new)* | `architecture-refinement` | ✅ Created | Meta-skill for maintaining alex_docs |
 | *(new)* | `lint-clean-markdown` | ✅ Created | Write markdown without lint errors |
 

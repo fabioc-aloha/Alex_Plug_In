@@ -24,6 +24,7 @@ Eliminate the edit-lint-fix cycle by writing markdown correctly the first time. 
 | Single final newline | MD047 | One `\n` at EOF | "One newline" |
 | Language on fences | MD040 | ` ```js ` not ` ``` ` | "Name your code" |
 | Consistent fence style | MD046 | Use ` ``` ` not indent | "Fences only" |
+| No bold as heading | MD036 | Use `##` not `**text**` | "Headers are headers" |
 
 ## Rule Details
 
