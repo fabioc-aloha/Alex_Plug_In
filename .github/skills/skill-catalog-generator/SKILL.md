@@ -190,6 +190,7 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   lines.push('    classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5');
 
   // Apply classes based on inheritance
+  // IMPORTANT: Must apply class to nodes, not just define classDef
   const masterSkills = skills.filter(s => s.inheritance === 'master-only').map(s => toAbbreviation(s.name));
   const vscodeSkills = skills.filter(s => s.inheritance === 'heir:vscode').map(s => toAbbreviation(s.name));
   const m365Skills = skills.filter(s => s.inheritance === 'heir:m365').map(s => toAbbreviation(s.name));
@@ -197,6 +198,7 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   const userSkills = skills.filter(s => s.isUserCreated).map(s => toAbbreviation(s.name));
   const tempSkills = skills.filter(s => s.isTemporary).map(s => toAbbreviation(s.name));
 
+  // Apply classes to nodes (classDef alone does nothing without this!)
   if (masterSkills.length > 0) lines.push(`    class ${masterSkills.join(',')} master`);
   if (vscodeSkills.length > 0) lines.push(`    class ${vscodeSkills.join(',')} vscode`);
   if (m365Skills.length > 0) lines.push(`    class ${m365Skills.join(',')} m365`);
