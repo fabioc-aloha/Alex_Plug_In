@@ -13,6 +13,7 @@
 |----------|-------------|
 | **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
 | [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md) | Complete system architecture with diagrams |
+| [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md) | 🧬 Evolution model and protection system |
 | [Skills & Capabilities](./SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
 | [Copilot Integration](./COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
 | [Conscious Mind](./CONSCIOUS-MIND.md) | User-facing tools and interactions |
