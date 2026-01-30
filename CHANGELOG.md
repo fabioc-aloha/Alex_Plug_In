@@ -7,42 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] - v3.6.0 🌅 Dawn
+## [3.6.0-beta.1] - 2026-01-30 🛡️ Kill Switch Validated
 
 > **Codename:** Dawn — A new beginning with lessons learned
+> **Status:** Beta — Kill switch validated, ready for stability testing
 
 ### Focus
 
-Stability and safety after the Phoenix chaos. No new features, just solid foundations.
+Stability and safety after the Phoenix chaos. Kill switch protection validated and bulletproof.
 
 ### Added
 
-- **🛡️ Kill Switch Protection** — 4-layer protection for Master Alex workspace
-  - `alex.workspace.protectedMode` setting
-  - `alex.workspace.autoProtectMasterAlex` auto-detection
-  - `checkProtectionAndWarn()` utility for dangerous commands
-  - Double-confirmation gates for override attempts
+- **🛡️ 5-Layer Kill Switch Protection** — Bulletproof protection for Master Alex workspace
+  - Layer 0: Hardcoded path check (`alex_plug_in`) — Cannot be bypassed
+  - Layer 0.5: `MASTER-ALEX-PROTECTED.json` marker file — Unique to Master Alex
+  - Layer 1: `alex.workspace.protectedMode` setting
+  - Layer 2: Auto-detect `platforms/vscode-extension` folder
+  - Layer 3: `.vscode/settings.json` configuration
+  - Single "I Understand" button dialog — No dangerous bypass option
+  - Output Channel logging for debugging protection decisions
 
 - **📁 Sandbox Environment** — Safe testing at `C:\Development\Alex_Sandbox`
 
 - **📚 Documentation**
+  - [WORKSPACE-PROTECTION.md](alex_docs/WORKSPACE-PROTECTION.md) — Complete kill switch documentation
   - [COMEBACK-PLAN.md](COMEBACK-PLAN.md) — Recovery roadmap
   - [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) — Single roadmap for all platforms
-  - [RISKS.md](RISKS.md) — Risk register with contingency plans
-  - [alex_docs/EXTENSION-DEVELOPMENT-HOST.md](alex_docs/EXTENSION-DEVELOPMENT-HOST.md) — F5 testing guide
+  - [RISKS.md](RISKS.md) — Risk register with contingency plans (updated with validation)
+  - [EXTENSION-DEVELOPMENT-HOST.md](alex_docs/EXTENSION-DEVELOPMENT-HOST.md) — F5 testing guide
 
 ### Changed
 
 - **🗂️ Unified Roadmap** — Single roadmap replaces separate VS Code and M365 plans
 - **🏗️ Alex Family Model** — Master Alex + two heirs (VS Code, M365)
+- **🔒 Protection Dialog** — Changed from Cancel/Proceed to single "I Understand" button
 
 ### Fixed
 
-- Protected `Alex: Initialize`, `Alex: Reset`, `Alex: Upgrade` from running in Master Alex workspace
+- **CRITICAL**: Kill switch now actually blocks commands (validated 2026-01-30)
+- Protected `Alex: Initialize`, `Alex: Reset`, `Alex: Upgrade` from running in Master Alex
 
 ### Removed
 
 - Archived platform-specific roadmaps to `archive/roadmaps/`
+
+---
+
+## [Unreleased] - v3.6.0 🌅 Dawn
+
+> Placeholder for changes after beta
 
 ---
 
