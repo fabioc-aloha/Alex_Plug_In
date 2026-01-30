@@ -59,6 +59,8 @@ These rules protect Master Alex. Violating them risks cognitive architecture cor
 | **I6** | **One platform, one roadmap** | Separate roadmaps caused Phoenix chaos |
 | **I7** | **Root `.github/` is source of truth** | Extension `.github/` is generated, not canonical |
 
+**Protection Mechanism:** `.github/config/MASTER-ALEX-PROTECTED.json` marker file + 5-layer kill switch. See [RISKS.md](../RISKS.md) for full documentation.
+
 **If kill switch fails:** See [RISKS.md](../RISKS.md) contingency plans CP1-CP8.
 
 ### Key Triggers

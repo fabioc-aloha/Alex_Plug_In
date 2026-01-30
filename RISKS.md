@@ -30,6 +30,51 @@ These rules protect Master Alex. Both human and AI must follow them.
 
 ---
 
+## 🔒 Master Alex Marker File
+
+The **marker file** is a critical component of the kill switch architecture. It provides a unique identifier that distinguishes Master Alex from all other workspaces where the extension might be installed.
+
+### Location
+```
+.github/config/MASTER-ALEX-PROTECTED.json
+```
+
+### Purpose
+- **Unique Identification**: Only Master Alex has this file. Regular user installations don't have it.
+- **Layer 0.5 Protection**: Part of the 5-layer defense system (between hardcoded path check and settings)
+- **Cannot Be Spoofed by Extension**: The file is explicitly excluded from the extension package via `.vscodeignore`
+
+### How It Works
+1. When a dangerous command runs, `isWorkspaceProtected()` checks for this file
+2. If the file exists AND contains `"protected": true`, the workspace is marked protected
+3. The check happens BEFORE any destructive operations
+
+### Contents
+```json
+{
+  "protected": true,
+  "workspace": "master-alex",
+  "description": "This marker file identifies Master Alex source workspace",
+  "warning": "NEVER copy this file to other workspaces",
+  "safetyImperatives": ["I1", "I2", "I3", "I4", "I5"]
+}
+```
+
+### Why This Matters
+- **Settings can fail**: If old extension code runs, it ignores settings
+- **Paths can be ambiguous**: User might have `alex_plug_in` in other paths
+- **Marker is definitive**: File physically exists only in Master Alex
+- **Cannot be packaged**: `.vscodeignore` excludes it from distribution
+
+### Related Files
+| File | Purpose |
+|------|---------|
+| `.github/config/MASTER-ALEX-PROTECTED.json` | The marker itself |
+| `platforms/vscode-extension/.vscodeignore` | Excludes marker from package |
+| `platforms/vscode-extension/src/shared/utils.ts` | Reads and validates marker |
+
+---
+
 ## Confidence Summary
 
 | Category | Confidence | Status |
