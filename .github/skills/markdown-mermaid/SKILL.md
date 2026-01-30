@@ -89,6 +89,126 @@ flowchart LR
 - **Numbering**: Sequential within document, reset per document
 - **Placement**: Label immediately follows the diagram/table block
 
+---
+
+## 🏷️ Shields.io Badges
+
+### Badge Anatomy
+
+Badges use [Shields.io](https://shields.io) - a free service for generating status badges.
+
+**URL Structure:**
+```
+https://img.shields.io/badge/{LABEL}-{MESSAGE}-{COLOR}?{OPTIONS}
+```
+
+**Markdown Syntax:**
+```markdown
+[![Alt Text](https://img.shields.io/badge/Label-Message-color?options)](#)
+```
+
+### Style Options
+
+| Style | Appearance | Parameter |
+| ----- | ---------- | --------- |
+| Flat | Minimal | `style=flat` |
+| Flat-Square | Squared corners | `style=flat-square` |
+| Plastic | Gradient | `style=plastic` |
+| **For-the-Badge** | Large, bold | `style=for-the-badge` |
+| Social | GitHub-like | `style=social` |
+
+### Common Color Names
+
+| Color | Name | Hex |
+| ----- | ---- | --- |
+| 🔵 | `blue` | `#007ec6` |
+| 🟢 | `green` | `#97ca00` |
+| 🟡 | `gold` / `yellow` | `#dfb317` |
+| 🟠 | `orange` | `#fe7d37` |
+| 🔴 | `red` | `#e05d44` |
+| 🟣 | `purple` | `#9f4bc9` |
+| 🔷 | `cyan` | `#25c2a0` |
+| ⚫ | `gray` / `grey` | `#555555` |
+
+**Custom Hex**: Use any hex without `#` → `?color=1f2328`
+
+### Adding Icons (Simple Icons)
+
+Shields.io integrates with [Simple Icons](https://simpleicons.org/) for brand logos:
+
+```markdown
+[![VS Code](https://img.shields.io/badge/VS_Code-Extension-blue?logo=visualstudiocode&logoColor=white)](#)
+```
+
+**Parameters:**
+- `logo=iconname` - Icon from Simple Icons (lowercase, no spaces)
+- `logoColor=white` - Icon color (usually white for dark backgrounds)
+
+### Badge Templates
+
+**Version Badge:**
+```markdown
+[![Version](https://img.shields.io/badge/Version-1.0.0-gold?style=for-the-badge&logo=trophy&logoColor=white)](#)
+```
+
+**Domain/Category Badge:**
+```markdown
+[![Domain](https://img.shields.io/badge/Domain-DIAGRAMMING-blue?style=for-the-badge&logo=graduation-cap&logoColor=white)](#)
+```
+
+**Quality Badge:**
+```markdown
+[![Quality](https://img.shields.io/badge/Quality-Enterprise_Grade-green?style=for-the-badge&logo=shield-alt&logoColor=white)](#)
+```
+
+**Source Count Badge:**
+```markdown
+[![Sources](https://img.shields.io/badge/Sources-50+_Academic-purple?style=for-the-badge&logo=book&logoColor=white)](#)
+```
+
+**Status Badge:**
+```markdown
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)](#)
+[![Status](https://img.shields.io/badge/Status-Beta-orange?style=for-the-badge)](#)
+[![Status](https://img.shields.io/badge/Status-Deprecated-red?style=for-the-badge)](#)
+```
+
+### Document Header Pattern
+
+Professional documents use a badge row at the top:
+
+```markdown
+# Document Title
+
+[![Version](https://img.shields.io/badge/Version-1.0.0-gold?style=for-the-badge&logo=trophy&logoColor=white)](#) [![Domain](https://img.shields.io/badge/Domain-TOPIC-blue?style=for-the-badge)](#) [![Quality](https://img.shields.io/badge/Quality-Production-green?style=for-the-badge)](#)
+
+> Description tagline
+
+---
+```
+
+### Special Characters in Badges
+
+| Character | Encode As |
+| --------- | --------- |
+| Space | `_` (underscore) or `%20` |
+| Dash | `--` (double dash) |
+| Underscore | `__` (double underscore) |
+
+**Example:** "Enterprise Grade" → `Enterprise_Grade` or `Enterprise%20Grade`
+
+### Dynamic Badges (Advanced)
+
+For live data from repos:
+
+```markdown
+[![GitHub Stars](https://img.shields.io/github/stars/owner/repo?style=for-the-badge)](#)
+[![NPM Version](https://img.shields.io/npm/v/package-name?style=for-the-badge)](#)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/owner/repo/ci.yml?style=for-the-badge)](#)
+```
+
+---
+
 ### Emoji Usage
 
 **Best Practice**: Use actual emoji characters, not HTML entities or unicode escapes.
