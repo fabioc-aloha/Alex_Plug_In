@@ -5,7 +5,7 @@
         {
             "target": "testing-strategies",
             "type": "validates",
-            "strength": 0.6,
+            "strength": 0.75,
             "reason": "Review checks test coverage"
         },
         {

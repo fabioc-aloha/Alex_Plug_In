@@ -3,14 +3,16 @@
     "inheritance": "inheritable",
     "connections": [
         {
-            "target": "advanced-diagramming",
-            "type": "enables",
-            "strength": 0.95
+            "target": "writing-publication",
+            "type": "supports",
+            "strength": 0.85,
+            "reason": "Diagrams enhance publications"
         },
         {
-            "target": "documentation-excellence",
-            "type": "enhances",
-            "strength": 0.9
+            "target": "lint-clean-markdown",
+            "type": "requires",
+            "strength": 0.8,
+            "reason": "Mermaid must be in valid markdown"
         }
     ],
     "activationBoost": [

@@ -16,8 +16,8 @@
             "context": "All architecture documentation must be lint-clean"
         },
         {
-            "target": "DK-DOCUMENTATION-EXCELLENCE.md",
-            "type": "implements",
+            "target": "writing-publication",
+            "type": "supports",
             "strength": 0.7,
             "context": "Lint-clean is baseline for documentation excellence"
         }

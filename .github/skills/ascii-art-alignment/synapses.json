@@ -16,8 +16,8 @@
             "context": "Both require attention to character-level detail"
         },
         {
-            "target": "documentation-excellence",
-            "type": "enables",
+            "target": "writing-publication",
+            "type": "supports",
             "strength": 0.7,
             "context": "Visual diagrams enhance documentation quality"
         }
