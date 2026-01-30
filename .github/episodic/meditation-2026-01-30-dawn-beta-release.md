@@ -49,7 +49,7 @@ The kill switch that protects Master Alex also makes it immune to automatic upgr
 ### Created
 - `alex_docs/MASTER-HEIR-ARCHITECTURE.md` - Full heir model documentation
 
-### Modified  
+### Modified
 - `.github/copilot-instructions.md` - Added Heir Evolution Principle
 - `platforms/vscode-extension/publish.ps1` - Enhanced with version bumping
 - `alex_docs/README.md` - Added heir architecture to index
