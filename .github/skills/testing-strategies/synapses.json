@@ -1,0 +1,31 @@
+{
+    "skill": "testing-strategies",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "debugging-patterns",
+            "type": "complements",
+            "reason": "Tests prevent bugs, debugging finds them"
+        },
+        {
+            "target": "refactoring-patterns",
+            "type": "enables",
+            "reason": "Tests enable safe refactoring"
+        },
+        {
+            "target": "code-review",
+            "type": "supports",
+            "reason": "Test coverage is part of review"
+        }
+    ],
+    "triggers": [
+        "test",
+        "spec",
+        "coverage",
+        "mock",
+        "TDD",
+        "unit test",
+        "integration test",
+        "E2E"
+    ]
+}

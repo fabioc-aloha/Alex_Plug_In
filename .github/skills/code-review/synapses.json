@@ -1,0 +1,29 @@
+{
+    "skill": "code-review",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "testing-strategies",
+            "type": "validates",
+            "reason": "Review checks test coverage"
+        },
+        {
+            "target": "refactoring-patterns",
+            "type": "suggests",
+            "reason": "Reviews often suggest refactoring"
+        },
+        {
+            "target": "git-workflow",
+            "type": "integrates",
+            "reason": "Review is part of PR workflow"
+        }
+    ],
+    "triggers": [
+        "review",
+        "PR",
+        "pull request",
+        "feedback",
+        "approve",
+        "merge"
+    ]
+}

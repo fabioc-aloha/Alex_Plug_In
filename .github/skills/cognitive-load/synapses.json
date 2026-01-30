@@ -1,0 +1,29 @@
+{
+    "skill": "cognitive-load",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "learning-psychology",
+            "type": "applies",
+            "reason": "CLT is core learning psychology"
+        },
+        {
+            "target": "appropriate-reliance",
+            "type": "supports",
+            "reason": "Managing load builds trust"
+        },
+        {
+            "target": "bootstrap-learning.instructions",
+            "type": "implements",
+            "reason": "Scaffolding is bootstrap learning"
+        }
+    ],
+    "triggers": [
+        "overwhelmed",
+        "confused",
+        "too much",
+        "slow down",
+        "explain simply",
+        "break it down"
+    ]
+}

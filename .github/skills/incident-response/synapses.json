@@ -1,0 +1,30 @@
+{
+    "skill": "incident-response",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "root-cause-analysis",
+            "type": "triggers",
+            "reason": "Post-mortem requires RCA"
+        },
+        {
+            "target": "error-recovery-patterns",
+            "type": "uses",
+            "reason": "Recovery patterns during resolution"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "applies",
+            "reason": "Debug during investigation phase"
+        }
+    ],
+    "triggers": [
+        "incident",
+        "outage",
+        "production issue",
+        "P1",
+        "P2",
+        "on-call",
+        "post-mortem"
+    ]
+}
