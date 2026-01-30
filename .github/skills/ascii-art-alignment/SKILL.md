@@ -48,24 +48,25 @@ v    Down arrow (lowercase v)
 
 **Note**: `→` in prose is fine (e.g., "A → B means..."). Only avoid inside ASCII box diagrams.
 
-### Emojis in ASCII Boxes (Advanced)
+### Emojis in ASCII Boxes
 
-Emojis CAN work inside boxes but require careful calibration:
+**Principle**: Emojis add personality and visual scanning. Don't sacrifice them for perfect alignment.
 
-| Emoji Type | Byte Width | Visual Width | Adjustment |
-| ---------- | ---------- | ------------ | ---------- |
-| 🛡️ (with variation selector) | 7 bytes | 2 chars | Remove 2 spaces after |
-| 📚 🧪 📦 👥 (standard) | 4 bytes | 2 chars | Remove 1 space after |
-| ✅ ❌ (check/cross) | 3 bytes | 2 chars | Remove 1 space after |
+| Approach | When to Use |
+| -------- | ----------- |
+| Emojis with calibration | Default — emojis are worth the effort |
+| ASCII markers `[!] [*]` | Only if emoji causes severe rendering issues |
 
-**Process**:
+**Calibration Guide**:
 
-1. Add emoji with normal spacing
-2. Run PowerShell line-length check
-3. If line is N chars too long, remove N spaces after emoji
-4. Verify ALL emoji lines match target width
+| Emoji Type | Visual Width | Adjustment |
+| ---------- | ------------ | ---------- |
+| 🛡️ (with variation selector) | ~2 chars | Remove 2 spaces after |
+| 📚 🧪 📦 👥 (standard) | ~2 chars | Remove 1 space after |
 
-**Fallback**: If calibration is tedious or unreliable, use ASCII markers: `[!]` `[*]` `[>]` `[^]` `[@]`
+**Process**: Add emoji → check line length → adjust spaces → verify visually.
+
+**Accept**: Minor alignment imperfections are OK. Emojis > perfect alignment.
 
 ---
 
