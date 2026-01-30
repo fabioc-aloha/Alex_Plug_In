@@ -11,6 +11,7 @@
 A **skill** is a portable, self-contained unit of domain knowledge that works with or without the full Alex cognitive architecture. Skills replace the older `DK-*.md` format.
 
 **Design Principles:**
+
 - **KISS**: Minimum files, maximum clarity
 - **DRY**: Git history = evolution log, no duplication
 - **Portable**: Works with vanilla GitHub Copilot
@@ -20,7 +21,7 @@ A **skill** is a portable, self-contained unit of domain knowledge that works wi
 
 ## Canonical Structure
 
-```
+```text
 .github/skills/{skill-name}/
 ├── SKILL.md          # Required: Knowledge + applyTo frontmatter
 ├── synapses.json     # Optional: Brain connections
@@ -148,7 +149,7 @@ Any supporting files the skill needs:
 
 ### Before (DK-* Format)
 
-```
+```text
 .github/domain-knowledge/
 └── DK-EXAMPLE-TOPIC.md       # Knowledge + embedded JSON synapses
 ```
@@ -183,7 +184,7 @@ Any supporting files the skill needs:
 
 ## Example: markdown-mermaid
 
-```
+```text
 .github/skills/markdown-mermaid/
 ├── SKILL.md              # Knowledge + applyTo frontmatter
 ├── synapses.json         # Brain connections
@@ -191,6 +192,7 @@ Any supporting files the skill needs:
 ```
 
 **SKILL.md (top):**
+
 ```markdown
 ---
 applyTo: "**/*.md,**/mermaid*,**/diagram*,**/*readme*,**/*emoji*"
@@ -204,6 +206,7 @@ applyTo: "**/*.md,**/mermaid*,**/diagram*,**/*readme*,**/*emoji*"
 ```
 
 **synapses.json:**
+
 ```json
 {
   "skill": "markdown-mermaid",
@@ -277,13 +280,10 @@ Keep these as-is (don't migrate to skills):
 
 | DK-* File | Proposed Skill | Priority | Notes |
 | --------- | -------------- | -------- | ----- |
-| `DK-DOCUMENTATION-EXCELLENCE.md` | `documentation-excellence` | High | Connected to markdown-mermaid |
 | `DK-VSCODE-EXTENSION-PATTERNS.md` | `vscode-extension-patterns` | High | Useful to extension heirs |
 | `DK-RECOMMENDED-ENVIRONMENT.md` | `recommended-environment` | Medium | Setup guidance |
 | `DK-WRITING-AND-PUBLICATION.md` | `writing-publication` | Medium | Article/docs authoring |
 | `DK-VISUAL-IDENTITY.md` | `visual-identity` | Medium | Branding/design |
-| `DK-ASCII-ART-ALIGNMENT.md` | `ascii-art` | Low | Niche skill |
-| `DK-APPROPRIATE-RELIANCE.md` | `appropriate-reliance` | Low | Research topic |
 | `DK-M365-AGENT-DEBUGGING.md` | `m365-debugging` | Medium | M365 heir-specific |
 | `DK-MULTI-PLATFORM-ARCHITECTURE.md` | `multi-platform` | Medium | Platform strategy |
 | `DK-HUMAN-LEARNING-PSYCHOLOGY.md` | `learning-psychology` | Low | Could help heirs teach |
@@ -366,6 +366,46 @@ Keep these as-is (don't migrate to skills):
 - Helps future sessions avoid same dead ends
 - Captures human judgment that AI alone missed
 - Demonstrates bootstrap learning in action
+
+### Achievement Logs vs Skills
+
+**Pattern**: Not all DK files become skills. Achievement logs document milestones, not reusable patterns.
+
+**Example**: `DK-DOCUMENTATION-EXCELLENCE.md` → `alex_docs/DOCUMENTATION-EXCELLENCE-MILESTONE.md`
+
+**Decision Rule**:
+
+- Contains dated achievement with specific corrections? → Move to `alex_docs/` as milestone
+- Contains reusable patterns/templates? → Migrate to skill
+
+### Lint-First Writing
+
+**Pattern**: Write markdown that passes linting on first attempt.
+
+**Key Rules** (captured in `lint-clean-markdown` skill):
+
+- MD032: Blank lines around lists ("lists breathe")
+- MD031: Blank lines around code blocks ("code breathes")
+- MD036: No bold text as pseudo-headings (use `##` or `>`)
+- MD040: Always specify language on fenced code blocks
+
+**Anti-pattern**: Nested code blocks — you cannot show "wrong" examples inside fenced blocks. Use inline code or descriptions instead.
+
+### ASCII Art Character Strategy
+
+**Pattern**: Unicode boxes + ASCII arrows + obsessive line counting.
+
+**Use**:
+
+- Box drawing: `┌ ─ ┐ │ └ ┘ ├ ┤ ┬ ┴ ┼`
+- Arrows: `v ^ < > ---> <-->`
+
+**Avoid**:
+
+- Unicode arrows: `▼ ▲ ◄ ►` (inconsistent width)
+- Emojis in boxes: `✅ ❌` (render as 2 chars)
+
+**Validation**: PowerShell line-width checking, not visual inspection.
 
 ---
 
