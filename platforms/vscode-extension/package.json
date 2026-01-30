@@ -173,6 +173,11 @@
         "command": "alex.viewBetaTelemetry",
         "title": "Alex: Report Issue / View Diagnostics",
         "icon": "$(bug)"
+      },
+      {
+        "command": "alex.generateSkillCatalog",
+        "title": "Alex: Generate Skill Catalog",
+        "icon": "$(list-tree)"
       }
     ],
     "viewsContainers": {

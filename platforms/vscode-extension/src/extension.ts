@@ -23,6 +23,7 @@ import {
   disposeSession,
 } from "./commands/session";
 import { registerGoalsCommands } from "./commands/goals";
+import { generateSkillCatalog } from "./commands/skillCatalog";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
 import { registerLanguageModelTools } from "./chat/tools";
 import {
@@ -684,6 +685,16 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
   context.subscriptions.push(viewTelemetryDisposable);
+
+  // Skill Catalog command
+  const skillCatalogDisposable = vscode.commands.registerCommand(
+    "alex.generateSkillCatalog",
+    async () => {
+      telemetry.log("command", "generate_skill_catalog");
+      await generateSkillCatalog();
+    },
+  );
+  context.subscriptions.push(skillCatalogDisposable);
 }
 
 /**

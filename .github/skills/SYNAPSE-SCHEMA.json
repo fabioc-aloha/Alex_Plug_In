@@ -67,6 +67,16 @@
                                 "description": "Connection weight (0.0-1.0)",
                                 "minimum": 0,
                                 "maximum": 1
+                            },
+                            "bidirectional": {
+                                "type": "boolean",
+                                "description": "If true, connection goes both ways (<-->)",
+                                "default": false
+                            },
+                            "weak": {
+                                "type": "boolean",
+                                "description": "If true, renders as dashed line (-.->)",
+                                "default": false
                             }
                         },
                         "required": [
@@ -95,6 +105,16 @@
                             "reason": {
                                 "type": "string",
                                 "description": "Why this connection exists"
+                            },
+                            "bidirectional": {
+                                "type": "boolean",
+                                "description": "If true, connection goes both ways (<-->)",
+                                "default": false
+                            },
+                            "weak": {
+                                "type": "boolean",
+                                "description": "If true, renders as dashed line (-.->)",
+                                "default": false
                             }
                         },
                         "required": [

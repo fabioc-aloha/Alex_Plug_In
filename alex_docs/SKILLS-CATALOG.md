@@ -1,6 +1,9 @@
-# Alex Skills Catalog
+# Alex Skills Catalog (Baseline)
 
-> Complete inventory of Alex's superpowers — what each skill does, who inherits it, and when to use it.
+> **Canonical reference** for Alex's skill inventory. Manually curated for accuracy.
+> Generated catalogs should match this baseline's fidelity.
+
+Complete inventory of Alex's superpowers — what each skill does, who inherits it, and when to use it.
 
 ---
 

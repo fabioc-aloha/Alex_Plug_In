@@ -84,6 +84,7 @@ interface SkillInfo {
   isUserCreated: boolean;
   isTemporary: boolean;      // From synapses.json "temporary": true
   removeAfter?: string;      // From synapses.json "removeAfter"
+  staleProne: boolean;       // True if skill depends on rapidly changing tech
 }
 
 async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
@@ -137,7 +138,39 @@ const CATEGORIES = {
 };
 ```
 
-### Step 3: Generate Mermaid Diagram
+### Step 3: Generate Mermaid Diagram (High Fidelity)
+
+The diagram generator must produce output matching the baseline catalog's richness.
+
+#### Connection Schema in synapses.json
+
+```typescript
+interface Connection {
+  target: string;           // Target skill name
+  type: string;             // enables, applies, extends, complements, triggers, curates
+  strength: number;         // 0.0-1.0
+  bidirectional?: boolean;  // true = <--> arrow
+  weak?: boolean;           // true = -.-> dashed arrow
+}
+```
+
+#### Arrow Types
+
+| Condition | Arrow | Meaning |
+| --------- | ----- | ------- |
+| `bidirectional: true` | `<-->` | Mutual reinforcement |
+| `weak: true` OR `strength < 0.5` | `-.->` | Optional/weak link |
+| Default | `-->` | Direct dependency |
+
+#### Multi-Target Syntax
+
+When a skill connects to multiple targets, use Mermaid's multi-target syntax:
+
+```text
+SCG --> MM & AH & KS
+```
+
+Not individual lines (reduces diagram clutter).
 
 ```typescript
 function generateNetworkDiagram(skills: SkillInfo[]): string {
@@ -160,17 +193,43 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
     lines.push('    end');
   }
 
-  // Add connections from synapses
+  // Add connections from synapses - GROUP by source for multi-target syntax
+  const connectionGroups = new Map<string, { targets: string[], arrow: string }>();
+
   for (const skill of skills) {
     if (!skill.hasSynapses) continue;
     const synapses = loadSynapses(skill.name);
-    for (const [target, data] of Object.entries(synapses.connections)) {
+    const connections = normalizeConnections(synapses.connections);
+
+    for (const conn of connections) {
       const sourceAbbrev = toAbbreviation(skill.name);
-      const targetAbbrev = toAbbreviation(target);
-      const weight = data.weight || 0.5;
-      // Solid arrow for strong connections, dashed for weak
-      const arrow = weight > 0.7 ? '-->' : '-.->';
-      lines.push(`    ${sourceAbbrev} ${arrow} ${targetAbbrev}`);
+      const targetAbbrev = toAbbreviation(conn.target);
+
+      // Determine arrow type
+      let arrow = '-->';
+      if (conn.bidirectional) {
+        arrow = '<-->';
+      } else if (conn.weak || (conn.strength && conn.strength < 0.5)) {
+        arrow = '-.->';
+      }
+
+      // Group connections by source+arrow for multi-target syntax
+      const key = `${sourceAbbrev}|${arrow}`;
+      if (!connectionGroups.has(key)) {
+        connectionGroups.set(key, { targets: [], arrow });
+      }
+      connectionGroups.get(key)!.targets.push(targetAbbrev);
+    }
+  }
+
+  // Output grouped connections using multi-target syntax
+  for (const [key, group] of connectionGroups) {
+    const source = key.split('|')[0];
+    if (group.targets.length === 1) {
+      lines.push(`    ${source} ${group.arrow} ${group.targets[0]}`);
+    } else {
+      // Multi-target: A --> B & C & D
+      lines.push(`    ${source} ${group.arrow} ${group.targets.join(' & ')}`);
     }
   }
 
@@ -190,13 +249,13 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   lines.push('    classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5');
 
   // Apply classes based on inheritance
-  // IMPORTANT: Must apply class to nodes, not just define classDef
   const masterSkills = skills.filter(s => s.inheritance === 'master-only').map(s => toAbbreviation(s.name));
   const vscodeSkills = skills.filter(s => s.inheritance === 'heir:vscode').map(s => toAbbreviation(s.name));
   const m365Skills = skills.filter(s => s.inheritance === 'heir:m365').map(s => toAbbreviation(s.name));
   const inheritableSkills = skills.filter(s => s.inheritance === 'inheritable' && !s.isTemporary).map(s => toAbbreviation(s.name));
   const userSkills = skills.filter(s => s.isUserCreated).map(s => toAbbreviation(s.name));
   const tempSkills = skills.filter(s => s.isTemporary).map(s => toAbbreviation(s.name));
+  const staleSkills = skills.filter(s => s.staleProne).map(s => toAbbreviation(s.name));
 
   // Apply classes to nodes (classDef alone does nothing without this!)
   if (masterSkills.length > 0) lines.push(`    class ${masterSkills.join(',')} master`);
@@ -205,15 +264,26 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   if (inheritableSkills.length > 0) lines.push(`    class ${inheritableSkills.join(',')} inheritable`);
   if (userSkills.length > 0) lines.push(`    class ${userSkills.join(',')} user`);
   if (tempSkills.length > 0) lines.push(`    class ${tempSkills.join(',')} temp`);
+  if (staleSkills.length > 0) lines.push(`    class ${staleSkills.join(',')} stale`);
 
   lines.push('```');
 
   return lines.join('\n');
 }
 
-// Check if skill is temporary
-function isTemporarySkill(synapses: any): boolean {
-  return synapses?.temporary === true;
+// Normalize connections to array format (supports both object and array)
+function normalizeConnections(connections: any): Connection[] {
+  if (Array.isArray(connections)) {
+    return connections;
+  }
+  // Object format: { "target-name": { weight, relationship } }
+  return Object.entries(connections).map(([target, data]: [string, any]) => ({
+    target,
+    type: data.relationship || data.type || 'enables',
+    strength: data.weight || data.strength || 0.5,
+    bidirectional: data.bidirectional || false,
+    weak: data.weak || false,
+  }));
 }
 ```
 
