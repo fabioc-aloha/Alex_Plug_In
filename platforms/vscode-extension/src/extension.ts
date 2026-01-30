@@ -413,6 +413,10 @@ export function activate(context: vscode.ExtensionContext) {
           label: "$(target) Manage Goals",
           description: "Track learning and development goals",
         },
+        {
+          label: "$(list-tree) Generate Skill Catalog",
+          description: "Create network diagram of all skills",
+        },
       ];
 
       const selected = await vscode.window.showQuickPick(items, {
@@ -443,6 +447,8 @@ export function activate(context: vscode.ExtensionContext) {
           );
         } else if (selected.label.includes("Goals")) {
           vscode.commands.executeCommand("alex.showGoals");
+        } else if (selected.label.includes("Skill Catalog")) {
+          vscode.commands.executeCommand("alex.generateSkillCatalog");
         }
       }
     },
