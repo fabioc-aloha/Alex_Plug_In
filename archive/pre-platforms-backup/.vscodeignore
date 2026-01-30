@@ -1,0 +1,49 @@
+# Development files
+.vscode/**
+.vscode-test/**
+src/**
+.git/**
+.gitignore
+.env
+
+# Build artifacts - exclude source maps and old out folder
+**/*.map
+out/**
+
+# Exclude TypeScript source files EXCEPT .github instructions
+**/*.ts
+!.github/instructions/**
+!.github/prompts/**
+
+# Documentation for development (exclude from package)
+vsc-extension-quickstart.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+PUBLISHING.md
+PRE-PUBLISH-CHECKLIST.md
+UPGRADE-INSTRUCTIONS.md
+
+# NOTE: alex_docs/ folder IS included in package for user education
+
+# Private article drafts (exclude from package)
+article/**
+
+# Config files
+tsconfig.json
+.eslintrc.json
+esbuild.js
+
+# GitHub templates (not needed for extension - these are for the repo)
+.github/assets/**
+.github/ISSUE_TEMPLATE/**
+.github/pull_request_template.md
+.github/workflows/**
+
+# Extension documentation (exclude from package)
+alex/
+
+# Package files
+*.vsix
+
+# Node modules - excluded because we bundle with esbuild
+node_modules/**

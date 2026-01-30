@@ -14,8 +14,8 @@
     "full": "Alex Cognitive Architecture - AI Learning Partner"
   },
   "description": {
-    "short": "Your cognitive learning partner with personality and memory",
-    "full": "Alex is a cognitive learning partner who remembers you across conversations. Unlike generic assistants, Alex has genuine personality - curious, supportive, and occasionally playful. Store your profile, goals, and knowledge in OneDrive. Features: Persistent memory, Web research, Image generation, Code analysis, Email search, Teams context, People lookup, Meeting prep. Part of the Alex Cognitive Architecture."
+    "short": "Your AI partner who actually remembers you",
+    "full": "Meet Alex - an AI partner who remembers who you are.\n\nUnlike generic assistants that forget you after every conversation, Alex stores your profile, goals, and learnings in OneDrive. Alex knows your name, your projects, your learning style.\n\nWHAT MAKES ALEX DIFFERENT:\n• Genuine personality - curious, supportive, occasionally playful\n• Persistent memory stored in YOUR OneDrive (you control your data)\n• Proactive context - mention a meeting and Alex checks your calendar\n• Cross-tool awareness - combines email, Teams, calendar, and people data\n\nCAPABILITIES:\n📁 OneDrive Memory - Your profile, notes, and knowledge files\n🔍 Web Search - Research and current information\n🎨 Image Generation - Diagrams, visualizations, concept art\n🐍 Code Interpreter - Python analysis and prototyping\n📧 Email - Search and summarize Outlook conversations\n💬 Teams - Find discussions across channels and chats\n👥 People - Look up colleagues and org structure\n📅 Calendar - Meeting prep and schedule awareness\n\nCOGNITIVE PROTOCOLS:\n• \"Meditate\" - Consolidate learnings into your memory\n• \"Dream\" - Review and clean up your knowledge files\n• \"Prep for my meeting\" - Full briefing with attendees and context\n\nAlex is part of the Alex Cognitive Architecture - bringing human-AI collaboration to M365."
   },
   "icons": {
     "color": "color.png",

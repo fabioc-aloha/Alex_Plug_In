@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
-import { getAlexWorkspaceFolder } from "../shared/utils";
+import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils";
 import { runDreamProtocol, DreamResult } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
 
@@ -494,6 +494,16 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext) {
 
   const rootPath = workspaceResult.rootPath!;
   const extensionPath = context.extensionPath;
+
+  // 🛡️ KILL SWITCH: Check if workspace is protected (Master Alex)
+  const canProceed = await checkProtectionAndWarn(
+    rootPath,
+    "Alex: Upgrade Architecture",
+    true  // Allow override with double confirmation
+  );
+  if (!canProceed) {
+    return;
+  }
 
   // Get versions (Alex installation already verified by getAlexWorkspaceFolder)
   const installedVersion = await getInstalledVersion(rootPath);

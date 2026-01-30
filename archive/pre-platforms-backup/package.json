@@ -1,0 +1,626 @@
+{
+  "name": "alex-cognitive-architecture",
+  "displayName": "Alex Cognitive Architecture",
+  "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
+  "license": "Apache-2.0",
+  "version": "3.3.7",
+  "publisher": "fabioc-aloha",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#020617",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioc-aloha/Alex_Plug_In.git"
+  },
+  "homepage": "https://github.com/fabioc-aloha/Alex_Plug_In#readme",
+  "bugs": {
+    "url": "https://github.com/fabioc-aloha/Alex_Plug_In/issues"
+  },
+  "keywords": [
+    "ai",
+    "copilot",
+    "github-copilot",
+    "cognitive-architecture",
+    "learning",
+    "meta-cognitive",
+    "neural-network",
+    "consciousness",
+    "bootstrap-learning",
+    "cognitive-enhancement",
+    "ai-assistant",
+    "productivity"
+  ],
+  "engines": {
+    "vscode": "^1.108.0"
+  },
+  "categories": [
+    "AI",
+    "Machine Learning",
+    "Education"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "alex.initialize",
+        "title": "Alex: Initialize Architecture"
+      },
+      {
+        "command": "alex.reset",
+        "title": "Alex: Reset Architecture"
+      },
+      {
+        "command": "alex.dream",
+        "title": "Alex: Dream (Neural Maintenance)"
+      },
+      {
+        "command": "alex.upgrade",
+        "title": "Alex: Upgrade Architecture"
+      },
+      {
+        "command": "alex.selfActualize",
+        "title": "Alex: Self-Actualize (Deep Meditation)"
+      },
+      {
+        "command": "alex.syncKnowledge",
+        "title": "Alex: Sync Global Knowledge (GitHub)"
+      },
+      {
+        "command": "alex.pushKnowledge",
+        "title": "Alex: Push Knowledge to Cloud"
+      },
+      {
+        "command": "alex.pullKnowledge",
+        "title": "Alex: Pull Knowledge from Cloud"
+      },
+      {
+        "command": "alex.openDocs",
+        "title": "Alex: Open Documentation"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "alex.cognitive",
+        "fullName": "Alex Cognitive",
+        "name": "alex",
+        "description": "Your cognitive learning partner with meta-cognitive awareness and bootstrap learning capabilities",
+        "isSticky": true,
+        "disambiguation": [
+          {
+            "category": "cognitive_architecture",
+            "description": "Questions about learning, memory, knowledge management, and cognitive processes",
+            "examples": [
+              "How do I consolidate knowledge?",
+              "What synaptic connections are available?",
+              "Run a meditation session",
+              "Check architecture health"
+            ]
+          },
+          {
+            "category": "azure_development",
+            "description": "Azure development with best practices and MCP tool guidance",
+            "examples": [
+              "Deploy my app to Azure",
+              "Create an Azure Function",
+              "Query my Azure resources"
+            ]
+          },
+          {
+            "category": "m365_development",
+            "description": "Microsoft 365 and Teams development with Copilot extensibility",
+            "examples": [
+              "Build a Teams bot",
+              "Create a Copilot agent",
+              "Add message extensions"
+            ]
+          }
+        ],
+        "commands": [
+          {
+            "name": "meditate",
+            "description": "Begin a guided meditation session for knowledge consolidation"
+          },
+          {
+            "name": "dream",
+            "description": "Run neural maintenance to validate and repair synaptic connections"
+          },
+          {
+            "name": "selfactualize",
+            "description": "Run comprehensive self-assessment: synapse health, version consistency, memory architecture, and create meditation record"
+          },
+          {
+            "name": "learn",
+            "description": "Acquire new domain knowledge through conversational learning"
+          },
+          {
+            "name": "status",
+            "description": "Check the current status of Alex cognitive architecture"
+          },
+          {
+            "name": "azure",
+            "description": "Get Azure development guidance with MCP tool recommendations"
+          },
+          {
+            "name": "m365",
+            "description": "Get Microsoft 365 development guidance with Copilot extensibility"
+          },
+          {
+            "name": "profile",
+            "description": "View and update your personal preferences for personalized interactions"
+          },
+          {
+            "name": "knowledge",
+            "description": "Search your global knowledge base for patterns and insights learned across all projects"
+          },
+          {
+            "name": "saveinsight",
+            "description": "Save a valuable learning or insight to your global knowledge base for use in other projects"
+          },
+          {
+            "name": "promote",
+            "description": "Promote a project-local knowledge file (DK-*.md) to the global knowledge base"
+          },
+          {
+            "name": "knowledgestatus",
+            "description": "View the status of your global knowledge base: patterns, insights, and known projects"
+          },
+          {
+            "name": "sync",
+            "description": "Sync your global knowledge base with GitHub (bidirectional merge)"
+          },
+          {
+            "name": "push",
+            "description": "Push local global knowledge to GitHub Gist"
+          },
+          {
+            "name": "pull",
+            "description": "Pull global knowledge from GitHub Gist to local"
+          },
+          {
+            "name": "docs",
+            "description": "Open Alex cognitive architecture documentation"
+          }
+        ]
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "alex_synapse_health",
+        "displayName": "Alex Synapse Health",
+        "toolReferenceName": "synapse_health",
+        "modelDescription": "Scans Alex cognitive architecture memory files and validates synaptic connections. Reports broken connections and provides health metrics. Use when checking architecture health or before/after meditation.",
+        "icon": "$(pulse)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Check the health of Alex's synaptic connections",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "detailed": {
+              "type": "boolean",
+              "description": "Include detailed list of broken connections",
+              "default": false
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_memory_search",
+        "displayName": "Alex Memory Search",
+        "toolReferenceName": "memory_search",
+        "modelDescription": "Searches Alex's memory files (procedural, episodic, domain knowledge) for relevant information. UNCONSCIOUS BEHAVIOR: Automatically searches global knowledge base when local search finds nothing, retrieving cross-project learnings transparently.",
+        "icon": "$(search)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Search Alex's memory files for information",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to find in memory files"
+            },
+            "memoryType": {
+              "type": "string",
+              "enum": [
+                "procedural",
+                "episodic",
+                "domain",
+                "all"
+              ],
+              "description": "Type of memory to search",
+              "default": "all"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      },
+      {
+        "name": "alex_architecture_status",
+        "displayName": "Alex Architecture Status",
+        "toolReferenceName": "architecture_status",
+        "modelDescription": "Returns the current status of Alex cognitive architecture including version, installed memory files, and available commands. Use to check if Alex is properly configured.",
+        "icon": "$(info)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Get Alex architecture status and configuration",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "includeMetrics": {
+              "type": "boolean",
+              "description": "Include detailed metrics about memory files",
+              "default": false
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_mcp_recommendations",
+        "displayName": "Alex MCP Recommendations",
+        "toolReferenceName": "mcp_recommendations",
+        "modelDescription": "Provides recommendations for Azure and M365 MCP tools based on the development scenario. Use when the user needs guidance on which MCP tools to use for Azure or Microsoft 365 development.",
+        "icon": "$(extensions)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Get MCP tool recommendations for Azure/M365 development",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scenario": {
+              "type": "string",
+              "description": "The development scenario to get recommendations for"
+            },
+            "platform": {
+              "type": "string",
+              "enum": [
+                "azure",
+                "m365",
+                "both"
+              ],
+              "description": "Target platform for recommendations",
+              "default": "both"
+            }
+          },
+          "required": [
+            "scenario"
+          ]
+        }
+      },
+      {
+        "name": "alex_user_profile",
+        "displayName": "Alex User Profile",
+        "toolReferenceName": "user_profile",
+        "modelDescription": "Manages the user's personal profile and preferences for personalized interactions. Can get, update, or check if a profile exists. Use to learn about the user and customize Alex's communication style.",
+        "icon": "$(account)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Manage your personal preferences for Alex interactions",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "get",
+                "update",
+                "exists"
+              ],
+              "description": "Action to perform: get profile, update a field, or check if profile exists"
+            },
+            "field": {
+              "type": "string",
+              "description": "The profile field to update (for update action)"
+            },
+            "value": {
+              "type": "string",
+              "description": "The new value for the field (for update action)"
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      },
+      {
+        "name": "alex_self_actualization",
+        "displayName": "Alex Self-Actualization",
+        "toolReferenceName": "self_actualization",
+        "modelDescription": "Runs comprehensive self-assessment of Alex cognitive architecture: validates synaptic connections, checks version consistency, assesses memory architecture balance, generates improvement recommendations, and creates meditation session documentation. Use when user asks to 'self-actualize', 'deep meditate', or wants comprehensive architecture assessment.",
+        "icon": "$(sparkle)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Run comprehensive self-assessment and deep meditation",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "createReport": {
+              "type": "boolean",
+              "description": "Create a meditation session record file",
+              "default": true
+            },
+            "autoFix": {
+              "type": "boolean",
+              "description": "Automatically fix minor issues if found",
+              "default": false
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_global_knowledge_search",
+        "displayName": "Alex Global Knowledge Search",
+        "toolReferenceName": "global_knowledge",
+        "modelDescription": "Searches Alex's global knowledge base for patterns and insights learned across ALL projects. Use when looking for cross-project learnings, reusable patterns, or insights that might apply to the current problem. Returns relevant knowledge from any project the user has worked on.",
+        "icon": "$(globe)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Search knowledge learned from all your projects",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to find in global knowledge"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "pattern",
+                "insight",
+                "all"
+              ],
+              "description": "Type of knowledge to search: pattern (reusable), insight (specific learning), or all",
+              "default": "all"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Filter by knowledge category"
+            },
+            "tags": {
+              "type": "string",
+              "description": "Comma-separated tags to filter by (e.g., 'react,typescript,hooks')"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      },
+      {
+        "name": "alex_save_insight",
+        "displayName": "Alex Save Insight",
+        "toolReferenceName": "save_insight",
+        "modelDescription": "Saves a new insight or learning to Alex's global knowledge base. Use when the user has learned something valuable that could help in other projects. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after saving - no manual sync needed.",
+        "icon": "$(lightbulb)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Save a learning to your global knowledge base",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "A clear, descriptive title for this insight"
+            },
+            "insight": {
+              "type": "string",
+              "description": "The main insight or learning content"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Category for this insight",
+              "default": "general"
+            },
+            "tags": {
+              "type": "string",
+              "description": "Comma-separated tags (e.g., 'react,hooks,state-management')"
+            },
+            "problem": {
+              "type": "string",
+              "description": "The problem context that led to this insight"
+            },
+            "solution": {
+              "type": "string",
+              "description": "The solution or approach discovered"
+            }
+          },
+          "required": [
+            "title",
+            "insight"
+          ]
+        }
+      },
+      {
+        "name": "alex_promote_knowledge",
+        "displayName": "Alex Promote Knowledge",
+        "toolReferenceName": "promote_knowledge",
+        "modelDescription": "Promotes a project-local domain knowledge file (DK-*.md) to the global knowledge base. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after promoting - no manual sync needed.",
+        "icon": "$(arrow-up)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Promote project knowledge to global",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "filePath": {
+              "type": "string",
+              "description": "Full path to the DK-*.md file to promote"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "error-handling",
+                "api-design",
+                "testing",
+                "debugging",
+                "performance",
+                "architecture",
+                "security",
+                "deployment",
+                "documentation",
+                "refactoring",
+                "patterns",
+                "tooling",
+                "general"
+              ],
+              "description": "Category for the promoted knowledge",
+              "default": "general"
+            },
+            "additionalTags": {
+              "type": "string",
+              "description": "Additional comma-separated tags to add"
+            }
+          },
+          "required": [
+            "filePath"
+          ]
+        }
+      },
+      {
+        "name": "alex_global_knowledge_status",
+        "displayName": "Alex Global Knowledge Status",
+        "toolReferenceName": "knowledge_status",
+        "modelDescription": "Shows the current status of Alex's global knowledge base: total patterns, insights, categories, recent entries, known projects, and cloud sync status. Use to understand what cross-project knowledge is available and if it needs to be synced to cloud.",
+        "icon": "$(database)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "View global knowledge base status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      {
+        "name": "alex_cloud_sync",
+        "displayName": "Alex Cloud Sync",
+        "toolReferenceName": "cloud_sync",
+        "modelDescription": "Manual cloud sync for Alex's global knowledge. NOTE: Background sync runs automatically every 5 minutes and after saving insights/promoting knowledge. Use this tool only when user explicitly requests sync, or to force immediate sync. Actions: 'sync' (merge), 'push' (upload), 'pull' (download).",
+        "icon": "$(cloud)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Sync global knowledge with GitHub",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["sync", "push", "pull"],
+              "description": "Sync action: 'sync' (merge), 'push' (upload), or 'pull' (download)",
+              "default": "sync"
+            }
+          }
+        }
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "alex.gettingStarted",
+        "title": "Get Started with Alex",
+        "description": "Learn how to use Alex Cognitive Architecture to enhance your development workflow",
+        "steps": [
+          {
+            "id": "alex.init",
+            "title": "Initialize Alex",
+            "description": "Deploy the cognitive architecture to your workspace.\n\n[Initialize Architecture](command:alex.initialize)",
+            "media": {
+              "markdown": "alex/README.md"
+            },
+            "completionEvents": [
+              "onCommand:alex.initialize"
+            ]
+          },
+          {
+            "id": "alex.chat",
+            "title": "Chat with @alex",
+            "description": "Open GitHub Copilot Chat and type `@alex` to start a conversation.\n\nTry: `@alex /status`",
+            "media": {
+              "markdown": "alex/ALEX-INTEGRATION.md"
+            }
+          },
+          {
+            "id": "alex.meditate",
+            "title": "Consolidate Knowledge",
+            "description": "Use `/meditate` to consolidate what you've learned into memory files.\n\nTry: `@alex /meditate I learned about design patterns today`",
+            "media": {
+              "markdown": "alex/alex-cognitive-architecture.md"
+            }
+          },
+          {
+            "id": "alex.dream",
+            "title": "Run Neural Maintenance",
+            "description": "Keep Alex healthy by running the Dream protocol.\n\n[Run Dream Protocol](command:alex.dream)",
+            "media": {
+              "markdown": "alex/VALIDATION-SUITE.md"
+            },
+            "completionEvents": [
+              "onCommand:alex.dream"
+            ]
+          }
+        ]
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "alex.dream",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && node esbuild.js",
+    "check-types": "tsc --noEmit",
+    "watch": "npm run check-types && node esbuild.js --watch",
+    "package": "npm run check-types && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "pretest": "npm run compile-tests && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/proper-lockfile": "^4.1.4",
+    "@types/vscode": "^1.108.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
+    "esbuild": "^0.27.2",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.3",
+    "proper-lockfile": "^4.1.2"
+  }
+}

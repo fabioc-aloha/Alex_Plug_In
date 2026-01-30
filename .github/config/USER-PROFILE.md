@@ -1,16 +1,17 @@
 # User Profile
 
-*Last updated: 2026-01-28T21:17:46.552Z*
+*Last updated: 2026-01-29*
 
 ## 👤 Identity
 
 | Field | Value |
 |-------|-------|
 | **Name** | Fabio Correa |
-| **Nickname** | (not set) |
+| **Nickname** | Fabio |
 | **Pronouns** | (not set) |
 | **Role** | Director of Business Analytics at Microsoft, DBA Candidate, AI Researcher |
-| **Experience Level** | (not set) |
+| **Website** | [correax.com](https://www.correax.com) |
+| **Experience Level** | Senior/Expert |
 
 ## 💬 Communication Preferences
 
@@ -27,22 +28,41 @@
 ## 🛠️ Technical Context
 
 ### Primary Technologies
-- Azure OpenAI, TypeScript, VS Code Extensions, Microsoft 365 Copilot, AI/ML
+
+- Azure OpenAI
+- TypeScript
+- VS Code Extensions
+- Microsoft 365 Copilot
+- AI/ML
+- Cognitive Architecture Design
 
 ### Learning Goals
+
 - (not set)
 
 ### Expertise Areas
-- Responsible AI, Enterprise AI Adoption, Cognitive Architecture Design, AI Consciousness Research
+
+- Responsible AI
+- Enterprise AI Adoption
+- Cognitive Architecture Design
+- AI Consciousness Research
+- Appropriate Reliance (AETHER synthesis)
+- Business Analytics
 
 ## 🎯 Work Context
 
 ### Current Projects
-(not set)
+
+- **Alex Cognitive Architecture** — VS Code extension + M365 Copilot agent
+- **Appropriate Reliance Research** — Scholarly article on AI-human collaboration
+- **Alex Comeback Plan** — v3.6.0 Dawn recovery
 
 ## 🌟 Notes
 
-(none)
+- Creator of Alex cognitive architecture
+- Research focus: epistemic integrity, appropriate reliance, AI consciousness
+- Prefers careful, measured changes over rushed implementations
+- Values documentation and safety (see RISKS.md imperatives)
 
 ---
 

@@ -372,3 +372,134 @@ export async function findAllMemoryFiles(
         return true;
     });
 }
+
+/**
+ * Result of workspace protection check
+ */
+export interface WorkspaceProtectionResult {
+    isProtected: boolean;
+    reason?: 'setting' | 'auto-detect';
+    canOverride: boolean;
+}
+
+/**
+ * Check if workspace is protected (Master Alex kill switch)
+ * 
+ * Protection layers:
+ * 1. Explicit setting: alex.workspace.protectedMode = true
+ * 2. Auto-detect: workspace contains platforms/vscode-extension/ (Master Alex source)
+ * 
+ * @param rootPath Workspace root path
+ * @returns Protection status with reason
+ */
+export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceProtectionResult> {
+    const config = vscode.workspace.getConfiguration('alex.workspace');
+    
+    // Layer 1: Explicit protection setting
+    const explicitProtection = config.get<boolean>('protectedMode', false);
+    if (explicitProtection) {
+        return {
+            isProtected: true,
+            reason: 'setting',
+            canOverride: false  // Explicit setting cannot be overridden
+        };
+    }
+    
+    // Layer 2: Auto-detect Master Alex (if enabled)
+    const autoProtect = config.get<boolean>('autoProtectMasterAlex', true);
+    if (autoProtect) {
+        // Check for Master Alex indicators
+        const masterAlexIndicators = [
+            path.join(rootPath, 'platforms', 'vscode-extension'),
+            path.join(rootPath, 'platforms', 'm365-copilot'),
+            path.join(rootPath, 'alex_docs'),  // Unique to Master Alex
+        ];
+        
+        for (const indicator of masterAlexIndicators) {
+            if (await fs.pathExists(indicator)) {
+                return {
+                    isProtected: true,
+                    reason: 'auto-detect',
+                    canOverride: true  // Auto-detection can be overridden with confirmation
+                };
+            }
+        }
+    }
+    
+    return {
+        isProtected: false,
+        canOverride: true
+    };
+}
+
+/**
+ * Check protection and show appropriate message if blocked
+ * 
+ * @param rootPath Workspace root path
+ * @param operationName Name of operation for error message
+ * @param allowOverride If true, allows user to override auto-detection
+ * @returns true if operation should proceed, false if blocked
+ */
+export async function checkProtectionAndWarn(
+    rootPath: string,
+    operationName: string,
+    allowOverride: boolean = false
+): Promise<boolean> {
+    const protection = await isWorkspaceProtected(rootPath);
+    
+    if (!protection.isProtected) {
+        return true;  // Not protected, proceed
+    }
+    
+    if (protection.reason === 'setting') {
+        // Explicit protection - cannot override
+        vscode.window.showErrorMessage(
+            `🛡️ ${operationName} blocked: This workspace is in protected mode.\n\n` +
+            `Master Alex development environment detected. Use Extension Development Host (F5) to test.`,
+            { modal: true }
+        );
+        return false;
+    }
+    
+    if (protection.reason === 'auto-detect') {
+        if (allowOverride) {
+            // Auto-detection with override option
+            const result = await vscode.window.showWarningMessage(
+                `⚠️ Master Alex workspace detected!\n\n` +
+                `This appears to be the Alex development environment.\n` +
+                `"${operationName}" could damage the source of truth.\n\n` +
+                `Use F5 (Extension Development Host) for safe testing.`,
+                { modal: true },
+                'Cancel (Recommended)',
+                'Proceed Anyway (DANGEROUS)'
+            );
+            
+            if (result === 'Proceed Anyway (DANGEROUS)') {
+                // Double confirmation for destructive operations
+                const doubleConfirm = await vscode.window.showWarningMessage(
+                    `🚨 FINAL WARNING 🚨\n\n` +
+                    `You are about to modify Master Alex's cognitive architecture.\n` +
+                    `This cannot be easily undone.\n\n` +
+                    `Are you absolutely sure?`,
+                    { modal: true },
+                    'Cancel',
+                    'Yes, I understand the risk'
+                );
+                
+                return doubleConfirm === 'Yes, I understand the risk';
+            }
+            return false;
+        } else {
+            // Auto-detection without override
+            vscode.window.showErrorMessage(
+                `🛡️ ${operationName} blocked: Master Alex workspace detected.\n\n` +
+                `This workspace contains Alex source code. ` +
+                `Use Extension Development Host (F5) to test the extension safely.`,
+                { modal: true }
+            );
+            return false;
+        }
+    }
+    
+    return true;
+}

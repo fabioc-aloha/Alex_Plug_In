@@ -226,6 +226,17 @@
     "configuration": {
       "title": "Alex Cognitive Architecture",
       "properties": {
+        "alex.workspace.protectedMode": {
+          "type": "boolean",
+          "default": false,
+          "scope": "resource",
+          "description": "Enable protected mode to prevent Alex from modifying .github/ in this workspace. Enable this for Master Alex development environment."
+        },
+        "alex.workspace.autoProtectMasterAlex": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically enable protected mode when Alex extension source code (platforms/vscode-extension/) is detected in workspace."
+        },
         "alex.m365.enabled": {
           "type": "boolean",
           "default": true,

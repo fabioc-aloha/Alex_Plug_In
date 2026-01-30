@@ -2,7 +2,8 @@
 param([switch]$Rebuild)
 
 $projectDir = $PSScriptRoot
-$packagePath = "$projectDir\appPackage\build\alex-m365-agent-v4.4.0.zip"
+$packagePath = "$projectDir\appPackage\build\alex-m365-agent.zip"
+$envFile = "$projectDir\env\.env.dev"
 
 Write-Host "`n🧠 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
@@ -12,7 +13,34 @@ if ($Rebuild -or -not (Test-Path $packagePath)) {
     Write-Host "`n📦 Building app package..." -ForegroundColor Yellow
     Push-Location "$projectDir\appPackage"
     New-Item -ItemType Directory -Path "build" -Force | Out-Null
-    Compress-Archive -Path manifest.json, declarativeAgent.json, color.png, outline.png -DestinationPath "build\alex-m365-agent-v4.4.0.zip" -Force
+    
+    # Get or generate App ID from .env.dev
+    $envContent = Get-Content $envFile -Raw
+    if ($envContent -match 'TEAMS_APP_ID=([0-9a-fA-F-]{36})') {
+        $appId = $matches[1]
+        Write-Host "   Using existing App ID: $appId" -ForegroundColor Gray
+    }
+    else {
+        $appId = [guid]::NewGuid().ToString()
+        Write-Host "   Generated new App ID: $appId" -ForegroundColor Yellow
+        # Update .env.dev with new ID
+        $envContent = $envContent -replace 'TEAMS_APP_ID=.*', "TEAMS_APP_ID=$appId"
+        $envContent | Set-Content $envFile -NoNewline
+        Write-Host "   Saved to .env.dev" -ForegroundColor Gray
+    }
+    
+    # Substitute in manifest
+    $manifest = Get-Content manifest.json -Raw
+    $manifest = $manifest -replace '\$\{\{TEAMS_APP_ID\}\}', $appId
+    $manifest | Set-Content build/manifest.json
+    
+    # Copy other files
+    Copy-Item declarativeAgent.json build/
+    Copy-Item color.png build/
+    Copy-Item outline.png build/
+    
+    # Create zip from build folder contents
+    Compress-Archive -Path build/manifest.json, build/declarativeAgent.json, build/color.png, build/outline.png -DestinationPath "build\alex-m365-agent.zip" -Force
     Pop-Location
     Write-Host "✅ Package built" -ForegroundColor Green
 }
@@ -21,42 +49,19 @@ if ($Rebuild -or -not (Test-Path $packagePath)) {
 Write-Host "`n🔍 Validating package..." -ForegroundColor Yellow
 $validateOutput = teamsapp validate --package-file $packagePath 2>&1
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ Validation passed (51 checks)" -ForegroundColor Green
-} else {
+    Write-Host "✅ Validation passed" -ForegroundColor Green
+}
+else {
     Write-Host "❌ Validation failed:" -ForegroundColor Red
     Write-Host $validateOutput
     exit 1
 }
 
-# Show package location prominently
-Write-Host "`n📁 Package ready for upload:" -ForegroundColor Cyan
-Write-Host "   $packagePath" -ForegroundColor White -BackgroundColor DarkBlue
-Write-Host ""
+# Copy path to clipboard and prompt for manual upload
+$packagePath | Set-Clipboard
 
-# Step 3: Try to update (if app exists via CLI)
-Write-Host "📤 Attempting automated update..." -ForegroundColor Yellow
-$updateOutput = teamsapp update --package-file $packagePath 2>&1
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ App updated via CLI!" -ForegroundColor Green
-} else {
-    # Fallback to manual instructions
-    Write-Host "⚠️  CLI update not available (app created via portal)" -ForegroundColor Yellow
-    Write-Host ""
-    Write-Host "📋 Manual upload steps:" -ForegroundColor Cyan
-    Write-Host "   1. Open Developer Portal (link below)" -ForegroundColor White
-    Write-Host "   2. Click: Alex Cognitive" -ForegroundColor White
-    Write-Host "   3. Go to: App package (left menu)" -ForegroundColor White
-    Write-Host "   4. Click: Import app package" -ForegroundColor White
-    Write-Host "   5. Browse to:" -ForegroundColor White
-    Write-Host "      $packagePath" -ForegroundColor Green
-    Write-Host ""
-    
-    # Open browser automatically
-    Start-Process "https://dev.teams.microsoft.com/apps"
-    
-    # Copy path to clipboard
-    $packagePath | Set-Clipboard
-    Write-Host "`n📋 Package path copied to clipboard!" -ForegroundColor Green
-}
-
+Write-Host "`n📋 Package path copied to clipboard!" -ForegroundColor Green
+Write-Host "`n📁 $packagePath" -ForegroundColor White
+Write-Host "`n👉 Upload manually to Teams Developer Portal" -ForegroundColor Yellow
+Write-Host "   https://dev.teams.microsoft.com/apps" -ForegroundColor Cyan
 Write-Host "`n✨ Done!" -ForegroundColor Cyan

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#44a8f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Neural network pattern -->
+    <pattern id="neuralPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1.5" fill="#4ecdc4" opacity="0.3"/>
+      <circle cx="50" cy="30" r="1.5" fill="#44a8f0" opacity="0.3"/>
+      <circle cx="80" cy="60" r="1.5" fill="#a78bfa" opacity="0.3"/>
+      <circle cx="30" cy="80" r="1.5" fill="#4ecdc4" opacity="0.3"/>
+      <line x1="10" y1="10" x2="50" y2="30" stroke="#4ecdc4" stroke-width="0.5" opacity="0.2"/>
+      <line x1="50" y1="30" x2="80" y2="60" stroke="#44a8f0" stroke-width="0.5" opacity="0.2"/>
+      <line x1="80" y1="60" x2="30" y2="80" stroke="#a78bfa" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bgGradient)"/>
+  <rect width="1200" height="300" fill="url(#neuralPattern)" opacity="0.4"/>
+  
+  <!-- Brain icon -->
+  <g transform="translate(120, 140) scale(1.5)">
+    <!-- Brain outline - left hemisphere -->
+    <path d="M 0,40 
+             Q -25,35 -35,20 
+             Q -40,5 -38,-10
+             Q -35,-25 -28,-35
+             Q -20,-45 -8,-48
+             Q 0,-50 5,-48" 
+          fill="none" stroke="url(#textGradient)" stroke-width="4" filter="url(#glow)"/>
+    
+    <!-- Brain outline - right hemisphere -->
+    <path d="M 0,40 
+             Q 25,35 35,20 
+             Q 40,5 38,-10
+             Q 35,-25 28,-35
+             Q 20,-45 8,-48
+             Q 0,-50 -5,-48" 
+          fill="none" stroke="url(#textGradient)" stroke-width="4" filter="url(#glow)"/>
+    
+    <!-- Central fissure -->
+    <path d="M -5,-48 Q 0,-46 5,-48 M 0,-46 L 0,40" 
+          fill="none" stroke="url(#textGradient)" stroke-width="2.5" opacity="0.7"/>
+    
+    <!-- Left hemisphere folds -->
+    <path d="M -30,-25 Q -22,-20 -18,-15" 
+          fill="none" stroke="#4ecdc4" stroke-width="2.5" opacity="0.8"/>
+    <path d="M -32,-10 Q -25,-5 -20,0" 
+          fill="none" stroke="#4ecdc4" stroke-width="2.5" opacity="0.8"/>
+    <path d="M -30,10 Q -22,15 -15,18" 
+          fill="none" stroke="#4ecdc4" stroke-width="2.5" opacity="0.8"/>
+    <path d="M -25,25 Q -18,28 -12,30" 
+          fill="none" stroke="#4ecdc4" stroke-width="2.5" opacity="0.8"/>
+    
+    <!-- Right hemisphere folds -->
+    <path d="M 30,-25 Q 22,-20 18,-15" 
+          fill="none" stroke="#a78bfa" stroke-width="2.5" opacity="0.8"/>
+    <path d="M 32,-10 Q 25,-5 20,0" 
+          fill="none" stroke="#a78bfa" stroke-width="2.5" opacity="0.8"/>
+    <path d="M 30,10 Q 22,15 15,18" 
+          fill="none" stroke="#a78bfa" stroke-width="2.5" opacity="0.8"/>
+    <path d="M 25,25 Q 18,28 12,30" 
+          fill="none" stroke="#a78bfa" stroke-width="2.5" opacity="0.8"/>
+    
+    <!-- Neural nodes -->
+    <circle cx="-25" cy="-30" r="4" fill="#4ecdc4" filter="url(#glow)"/>
+    <circle cx="25" cy="-30" r="4" fill="#a78bfa" filter="url(#glow)"/>
+    <circle cx="0" cy="-40" r="4" fill="#44a8f0" filter="url(#glow)"/>
+    <circle cx="-20" cy="0" r="4" fill="#4ecdc4" filter="url(#glow)"/>
+    <circle cx="20" cy="0" r="4" fill="#a78bfa" filter="url(#glow)"/>
+    <circle cx="-15" cy="20" r="4" fill="#4ecdc4" filter="url(#glow)"/>
+    <circle cx="15" cy="20" r="4" fill="#a78bfa" filter="url(#glow)"/>
+    <circle cx="0" cy="10" r="4" fill="#44a8f0" filter="url(#glow)"/>
+    
+    <!-- Synaptic connections between hemispheres -->
+    <line x1="-25" y1="-30" x2="0" y2="-40" stroke="#4ecdc4" stroke-width="1.5" opacity="0.5"/>
+    <line x1="25" y1="-30" x2="0" y2="-40" stroke="#a78bfa" stroke-width="1.5" opacity="0.5"/>
+    <line x1="-20" y1="0" x2="0" y2="10" stroke="#4ecdc4" stroke-width="1.5" opacity="0.5"/>
+    <line x1="20" y1="0" x2="0" y2="10" stroke="#a78bfa" stroke-width="1.5" opacity="0.5"/>
+    <line x1="-15" y1="20" x2="0" y2="10" stroke="#4ecdc4" stroke-width="1.5" opacity="0.5"/>
+    <line x1="15" y1="20" x2="0" y2="10" stroke="#a78bfa" stroke-width="1.5" opacity="0.5"/>
+    <line x1="-25" y1="-30" x2="-20" y2="0" stroke="#44a8f0" stroke-width="1.5" opacity="0.5"/>
+    <line x1="25" y1="-30" x2="20" y2="0" stroke="#44a8f0" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="250" y="155" font-family="'Segoe UI', Arial, sans-serif" font-size="128" font-weight="bold" fill="url(#textGradient)" filter="url(#glow)">
+    ALEX
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="250" y="210" font-family="'Segoe UI', Arial, sans-serif" font-size="52" fill="#e0e0e0" opacity="0.9">
+    Cognitive Architecture
+  </text>
+  
+  <!-- Tagline -->
+  <text x="250" y="245" font-family="'Segoe UI', Arial, sans-serif" font-size="28" fill="#b0b0b0" opacity="0.8">
+    Enhanced Meta-Cognitive Framework with Unified Consciousness
+  </text>
+  
+
+  
+  <!-- VS Code Extension Badge -->
+  <g transform="translate(920, 135)">
+    <rect width="240" height="46" rx="23" fill="#1e1e1e" stroke="#007ACC" stroke-width="2.5" filter="url(#glow)"/>
+    <text x="120" y="30" font-family="'Segoe UI', Arial, sans-serif" font-size="22" font-weight="bold" fill="#007ACC" text-anchor="middle">
+      VS Code Extension
+    </text>
+  </g>
+
+  <!-- Decorative neural connections -->
+  <g opacity="0.3">
+    <circle cx="850" cy="80" r="2" fill="#4ecdc4"/>
+    <circle cx="900" cy="100" r="2" fill="#44a8f0"/>
+    <circle cx="880" cy="130" r="2" fill="#a78bfa"/>
+    <line x1="850" y1="80" x2="900" y2="100" stroke="#4ecdc4" stroke-width="1"/>
+    <line x1="900" y1="100" x2="880" y2="130" stroke="#44a8f0" stroke-width="1"/>
+  </g>
+</svg>

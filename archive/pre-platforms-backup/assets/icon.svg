@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <radialGradient id="iconGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" rx="24" fill="url(#iconBg)"/>
+  
+  <!-- Glow -->
+  <circle cx="64" cy="64" r="50" fill="url(#iconGlow)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="64" cy="64" r="40" fill="none" stroke="#007ACC" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Brain shape -->
+  <g transform="translate(64, 64)" fill="none" stroke="#007ACC" stroke-width="3" opacity="0.9">
+    <!-- Left hemisphere -->
+    <path d="M-18,-22 Q-32,-18 -28,-3 Q-32,12 -18,22 Q-9,28 0,25"/>
+    <!-- Right hemisphere -->
+    <path d="M18,-22 Q32,-18 28,-3 Q32,12 18,22 Q9,28 0,25"/>
+    <!-- Center -->
+    <path d="M0,-25 Q0,-12 0,0 Q0,12 0,25"/>
+    <!-- Connections -->
+    <path d="M-15,0 Q0,-6 15,0"/>
+    <path d="M-12,-12 Q0,-8 12,-12"/>
+    <path d="M-12,12 Q0,16 12,12"/>
+  </g>
+  
+  <!-- Memory nodes -->
+  <circle cx="42" cy="52" r="5" fill="#4CAF50"/>
+  <circle cx="86" cy="52" r="5" fill="#4CAF50"/>
+  <circle cx="42" cy="76" r="5" fill="#007ACC"/>
+  <circle cx="86" cy="76" r="5" fill="#007ACC"/>
+  <circle cx="64" cy="42" r="5" fill="#4CAF50"/>
+  <circle cx="64" cy="86" r="5" fill="#007ACC"/>
+  
+  <!-- Corner accent -->
+  <path d="M108,20 L108,32 M108,20 L96,20" stroke="#4CAF50" stroke-width="2" opacity="0.6" fill="none"/>
+</svg>

@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
-import { getAlexWorkspaceFolder, isAlexInstalled } from "../shared/utils";
+import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from "../shared/utils";
 import { offerEnvironmentSetup } from "./setupEnvironment";
 import * as telemetry from "../shared/telemetry";
 
@@ -64,6 +64,17 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
     rootPath: path.basename(rootPath),
   });
 
+  // 🛡️ KILL SWITCH: Check if workspace is protected (Master Alex)
+  const canProceed = await checkProtectionAndWarn(
+    rootPath,
+    "Alex: Initialize",
+    true  // Allow override with double confirmation
+  );
+  if (!canProceed) {
+    telemetry.log("command", "initialize_blocked_protected_workspace");
+    return;
+  }
+
   const markerFile = path.join(rootPath, ".github", "copilot-instructions.md");
 
   if (await fs.pathExists(markerFile)) {
@@ -104,6 +115,18 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
   }
 
   const rootPath = workspaceResult.rootPath!;
+
+  // 🛡️ KILL SWITCH: Check if workspace is protected (Master Alex)
+  // Reset is VERY dangerous - only allow with double confirmation
+  const canProceed = await checkProtectionAndWarn(
+    rootPath,
+    "Alex: Reset Architecture",
+    true  // Allow override with double confirmation
+  );
+  if (!canProceed) {
+    telemetry.log("command", "reset_blocked_protected_workspace");
+    return;
+  }
 
   const confirm = await vscode.window.showWarningMessage(
     '⚠️ RESET will permanently delete all Alex memory files!\n\nThis includes:\n• All learned domain knowledge\n• Custom instructions and prompts\n• Synaptic network connections\n\nConsider using "Alex: Upgrade" instead to preserve your knowledge.',
