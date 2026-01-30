@@ -8,8 +8,8 @@
 
 | Inheritance | Count |
 |-------------|-------|
-| Inheritable | 27 |
-| Master-Only | 5 |
+| Inheritable | 22 |
+| Master-Only | 8 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
 
@@ -78,9 +78,9 @@
 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
-| [architecture-refinement](../.github/skills/architecture-refinement/) | inheritable | Architecture evolution decisions |
+| [architecture-refinement](../.github/skills/architecture-refinement/) | master-only | Architecture evolution decisions |
 | [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
-| [llm-model-selection](../.github/skills/llm-model-selection/) | inheritable | Model choice for cost/capability |
+| [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
 
@@ -138,8 +138,9 @@ Master Alex
 ## Skill Network Diagram
 
 ```mermaid
-graph TB
-    subgraph Cognitive["🧠 Cognitive Core"]
+%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da'}}}%%
+flowchart LR
+    subgraph Cognitive["🧠 Cognitive"]
         BL[bootstrap-learning]
         LP[learning-psychology]
         CL[cognitive-load]
@@ -156,13 +157,14 @@ graph TB
         ARF[architecture-refinement]
     end
 
-    subgraph Engineering["🔧 Engineering"]
+    subgraph Eng["🔧 Engineering"]
         TS[testing-strategies]
         RP[refactoring-patterns]
         DP[debugging-patterns]
         CR[code-review]
         GW[git-workflow]
         PS[project-scaffolding]
+        VSE[vscode-environment]
     end
 
     subgraph Ops["🚨 Operations"]
@@ -172,12 +174,12 @@ graph TB
         RF[release-preflight]
     end
 
-    subgraph Security["🔐 Security"]
+    subgraph Sec["🔐 Security"]
         PRA[privacy-responsible-ai]
         SFI[microsoft-sfi]
     end
 
-    subgraph Docs["📝 Documentation"]
+    subgraph Docs["📝 Docs"]
         WP[writing-publication]
         MM[markdown-mermaid]
         LM[lint-clean-markdown]
@@ -185,97 +187,105 @@ graph TB
         LLM[llm-model-selection]
     end
 
-    subgraph Visual["🎨 Visual Design"]
+    subgraph Vis["🎨 Visual"]
         SVG[svg-graphics]
         IH[image-handling]
     end
 
-    subgraph VSCode["💻 VS Code Heir"]
+    subgraph VSC["💻 VS Code"]
         VEP[vscode-extension-patterns]
         CPP[chat-participant-patterns]
     end
 
-    subgraph M365["☁️ M365 Heir"]
+    subgraph M365["☁️ M365"]
         MAD[m365-agent-debugging]
         TAP[teams-app-patterns]
     end
 
-    subgraph Master["👑 Master Only"]
+    subgraph Mstr["👑 Master"]
         HC[heir-curation]
     end
 
-    %% Cognitive connections
-    BL --> LP
-    BL --> CL
-    BL --> AR
-    LP --> CL
+    %% Cognitive flow
+    BL --> LP & CL
+    LP --> AR
     CL --> AR
 
     %% Meta-cognitive flow
-    MED --> MF
-    MED --> KS
+    MED --> MF --> KS --> GK
+    SA --> AH --> ARF
     MED --> SA
-    MF --> KS
-    KS --> GK
-    SA --> AH
-    SA --> ARF
-    AH --> ARF
-    BL --> KS
+    BL -.-> KS
 
-    %% Engineering connections
+    %% Engineering flow
     TS <--> RP
     TS <--> DP
-    TS --> CR
-    RP --> CR
-    DP --> RCA
-    CR --> GW
+    TS & RP --> CR --> GW
+    PS --> VSE
+    VSE --> DP
 
-    %% Ops connections
-    DP --> ERP
-    ERP --> IR
-    IR --> RCA
-    RCA --> ERP
+    %% Ops flow
+    DP --> ERP --> IR --> RCA
+    RCA -.-> ERP
     GW --> RF
 
-    %% Security connections
+    %% Security flow
     PRA <--> SFI
-    SFI --> CR
-    PRA --> CR
-    SFI --> IR
+    SFI --> CR & IR
 
-    %% Documentation connections
+    %% Docs flow
+    WP --> MM --> LM
     MM <--> AA
-    MM --> LM
-    WP --> MM
     ARF --> LM
 
-    %% Visual design connections
+    %% Visual flow
     SVG <--> IH
     SVG --> PS
-    PS --> LM
-    PS --> GW
+    PS --> LM & GW
     IH --> VEP
 
-    %% Platform heir connections
-    HC --> VEP
-    HC --> MAD
-    VEP --> CPP
-    CPP --> LLM
+    %% Platform flow
+    HC --> VEP & MAD
+    VEP --> CPP --> LLM
     MAD --> TAP
-    RF --> VEP
-    RF --> TAP
+    RF --> VEP & TAP
+
+    %% Styling
+    classDef master fill:#fff3cd,stroke:#856404
+    classDef vscode fill:#e1f0ff,stroke:#0969da
+    classDef m365 fill:#e6f4ea,stroke:#1a7f37
+    class HC,MED,SA,ARF,KS,GK,MF,LLM master
+    class VEP,CPP vscode
+    class MAD,TAP m365
 ```
+
+### Legend
+
+| Color | Inheritance |
+| ----- | ----------- |
+| 🟡 Yellow | Master-only |
+| 🔵 Blue | VS Code heir |
+| 🟢 Green | M365 heir |
+| ⬜ White | Inheritable (all platforms) |
+
+| Arrow | Meaning |
+| ----- | ------- |
+| `→` Solid | Direct dependency |
+| `↔` Bidirectional | Mutual reinforcement |
+| `⇢` Dashed | Weak/optional link |
+
+**Weights:** Exact strengths (0.0-1.0) in each skill's `synapses.json`
 
 ### Connection Types
 
 | Type | Meaning | Example |
 | ---- | ------- | ------- |
-| `enables` | A makes B possible | testing-strategies → refactoring-patterns |
-| `applies` | A uses principles from B | bootstrap-learning → learning-psychology |
-| `extends` | A goes deeper than B | root-cause-analysis → debugging-patterns |
-| `complements` | A and B work together | privacy-responsible-ai ↔ microsoft-sfi |
-| `triggers` | A causes B to activate | incident-response → root-cause-analysis |
-| `curates` | A manages B | heir-curation → vscode-extension-patterns |
+| `enables` | A makes B possible | testing → refactoring |
+| `applies` | A uses B's principles | bootstrap → learning-psychology |
+| `extends` | A goes deeper than B | RCA → debugging |
+| `complements` | A and B work together | privacy ↔ microsoft-sfi |
+| `triggers` | A causes B to activate | incident → RCA |
+| `curates` | A manages B | heir-curation → vscode-extension |
 
 ---
 
