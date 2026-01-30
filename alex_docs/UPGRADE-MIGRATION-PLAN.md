@@ -48,6 +48,7 @@
 | Restore episodic records | ⬜ | |
 | Delete MIGRATION-CANDIDATES.md | ⬜ | After completion |
 | Show migration report | ⬜ | What was migrated |
+| **Post-migration validation** | ⬜ | Run Dream to verify health |
 
 ### Phase 4: Polish (3.9.0)
 
@@ -56,6 +57,115 @@
 | Stale file warnings | ⬜ | > 3 months old |
 | Cleanup suggestions | ⬜ | Delete old backup? |
 | Backup retention policy | ⬜ | Keep last N? |
+
+---
+
+## Lessons from Master Alex Skills Migration (2026-01-30)
+
+During the skills network consolidation, we discovered issues that inform this migration plan:
+
+### Issue 1: Synapse Weight Format Inconsistency
+
+**Problem:** Old synapses used string weights ("high", "medium", "low"), new format uses numeric (0.0-1.0).
+
+**Solution:** During migration, normalize weights:
+
+```typescript
+function normalizeWeight(weight: string | number): number {
+  if (typeof weight === 'number') return weight;
+  const map: Record<string, number> = {
+    'critical': 0.95, 'high': 0.8, 'medium': 0.6, 'low': 0.4
+  };
+  return map[weight.toLowerCase()] ?? 0.5;
+}
+```
+
+### Issue 2: Broken Synapse Targets
+
+**Problem:** Synapses pointed to non-existent skills or DK files:
+
+- `advanced-diagramming` → should be `writing-publication`
+- `documentation-excellence` → should be `lint-clean-markdown`
+- `DK-DOCUMENTATION-EXCELLENCE.md` → removed, use skill instead
+
+**Solution:** After migration, validate all synapse targets:
+
+```typescript
+async function validateSynapseTargets(skillsPath: string): Promise<string[]> {
+  const broken: string[] = [];
+  const allSkills = await fs.readdir(skillsPath);
+  
+  for (const skill of allSkills) {
+    const synapsePath = path.join(skillsPath, skill, 'synapses.json');
+    if (!await fs.pathExists(synapsePath)) continue;
+    
+    const synapses = await fs.readJson(synapsePath);
+    for (const target of Object.keys(synapses.connections || {})) {
+      // Check if target is a valid skill
+      if (!allSkills.includes(target) && !target.startsWith('DK-')) {
+        broken.push(`${skill} → ${target}`);
+      }
+      // Check if DK file exists
+      if (target.startsWith('DK-')) {
+        const dkPath = path.join(skillsPath, '..', 'domain-knowledge', target);
+        if (!await fs.pathExists(dkPath)) {
+          broken.push(`${skill} → ${target} (DK file missing)`);
+        }
+      }
+    }
+  }
+  return broken;
+}
+```
+
+### Issue 3: Missing synapses.json Files
+
+**Problem:** Some skills had SKILL.md but no synapses.json (6 skills affected).
+
+**Solution:** Generate default synapses.json for skills missing them:
+
+```typescript
+function createDefaultSynapses(skillName: string): object {
+  return {
+    skill: skillName,
+    version: "1.0.0",
+    connections: {},  // Empty - user can populate
+    activationTriggers: []
+  };
+}
+```
+
+### Issue 4: Skill Structure Validation
+
+**Problem:** User-created skills might not follow expected structure.
+
+**Expected structure per skill:**
+
+```text
+skills/
+└── skill-name/
+    ├── SKILL.md        (required - knowledge content)
+    └── synapses.json   (optional - connections)
+```
+
+**Solution:** Validate during gap analysis, warn about incomplete skills.
+
+---
+
+## Post-Migration Validation Checklist
+
+After migration completes, automatically run:
+
+| Check | Action if Failed |
+| ----- | ---------------- |
+| All skill folders have SKILL.md | Warn user, list incomplete |
+| All synapses.json have numeric weights | Auto-fix with normalization |
+| All synapse targets exist | Warn user, list broken |
+| User profile restored | Warn if missing |
+| Episodic folder restored | Warn if missing |
+| Dream protocol passes | Show health report |
+
+**Recommendation:** Run `Alex: Dream` automatically after migration to validate architecture health.
 
 ---
 
