@@ -42,7 +42,8 @@ Subgraph titles were being **truncated** in VS Code's Mermaid preview - text was
 **Result**: ✅ Backgrounds now consistently light
 
 **Pattern Captured**:
-```mermaid
+
+```text
 %%{init: {'theme': 'base', 'themeVariables': {
   'primaryColor': '#f6f8fa',      /* GitHub's gray-100 */
   'primaryTextColor': '#1f2328',   /* GitHub's gray-900 */

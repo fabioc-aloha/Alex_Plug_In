@@ -389,9 +389,9 @@ flowchart TB
         SIGN["📝 Sign In Controller<br/>MVC Controller"]
         ACCOUNTS["📊 Accounts Summary<br/>MVC Controller"]
     end
-    
+
     CUSTOMER(("👤 Customer"))
-    
+
     CUSTOMER -->|"Sign in"| SIGN
     CUSTOMER -->|"View accounts"| ACCOUNTS
 ```
