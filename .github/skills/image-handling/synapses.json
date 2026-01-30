@@ -6,6 +6,7 @@
             "target": "svg-graphics",
             "type": "complements",
             "strength": 0.85,
+            "bidirectional": true,
             "reason": "SVG is source format"
         },
         {

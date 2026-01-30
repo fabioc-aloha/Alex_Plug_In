@@ -15,7 +15,8 @@
         {
             "target": "beta-tester",
             "type": "coordinates",
-            "strength": 0.85
+            "strength": 0.85,
+            "bidirectional": true
         },
         {
             "target": "vscode-extension-patterns",

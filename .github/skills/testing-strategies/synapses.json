@@ -6,6 +6,7 @@
             "target": "debugging-patterns",
             "type": "complements",
             "strength": 0.7,
+            "bidirectional": true,
             "reason": "Tests prevent bugs, debugging finds them"
         },
         {

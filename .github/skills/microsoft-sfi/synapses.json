@@ -6,6 +6,7 @@
             "target": "privacy-responsible-ai",
             "type": "complements",
             "strength": 0.7,
+            "bidirectional": true,
             "reason": "Security enables privacy"
         },
         {
