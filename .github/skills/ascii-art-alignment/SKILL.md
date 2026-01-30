@@ -46,8 +46,11 @@ v    Down arrow (lowercase v)
 | `→ ← ↑ ↓` | Arrow symbols inconsistent width | `> < ^ v` |
 | `◄──►` | Mixed arrows = guaranteed misalign | `<-->` |
 | `✅ ❌ ⚠️` | Emojis = 2 chars, render as 1 | `[x] [!] [?]` |
+| `│ 🛡️ Text` | Emoji pushes text right | `│ 🛡️Text` (remove 1 space) |
 
 **Note**: `→` in prose is fine (e.g., "A → B means..."). Only avoid inside ASCII box diagrams.
+
+**Emoji Width Rule**: Most emojis render as 2 characters wide but display as 1. When using emojis inside boxes, remove one space after the emoji to compensate.
 
 ---
 

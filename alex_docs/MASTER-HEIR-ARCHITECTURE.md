@@ -14,11 +14,11 @@ Alex exists as a **family**: one protected Master and multiple platform-specific
                     │      MASTER ALEX        │
                     │   (Source of Truth)     │
                     │                         │
-                    │  🛡️ Protected by        │
-                    │     5-layer kill switch │
+                    │ 🛡️ Protected by         │
+                    │    5-layer kill switch  │
                     │                         │
-                    │  📚 Root .github/       │
-                    │     is canonical        │
+                    │ 📚 Root .github/        │
+                    │    is canonical         │
                     └───────────┬─────────────┘
                                 │
                     ┌───────────┴───────────┐
