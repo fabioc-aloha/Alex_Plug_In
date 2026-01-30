@@ -109,4 +109,3 @@
 
 - [ALEX-IDENTITY.md](ALEX-IDENTITY.md) — Who Alex is (personality)
 - [alex-identity-integration.instructions.md](../.github/instructions/alex-identity-integration.instructions.md) — Operational identity
-

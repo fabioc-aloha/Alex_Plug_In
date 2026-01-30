@@ -140,4 +140,3 @@ Your existing settings will NOT be modified or removed.
 ## Related
 
 - [vscode-extension-patterns skill](../.github/skills/vscode-extension-patterns/SKILL.md) — Safe configuration pattern (for Alex)
-
