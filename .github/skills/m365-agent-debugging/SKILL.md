@@ -78,7 +78,25 @@ $bmp.Dispose()
 | Agent not responding | Invalid schema version |
 | Only 1 conversation starter | Schema validation failed |
 | Validation errors on icon | Wrong transparency/size |
-| Capability not working | Schema version too old |
+
+## Memory via OneDrive
+
+Agent reads from OneDrive using `OneDriveAndSharePoint` capability:
+
+1. User creates `Alex-Memory/` folder in OneDrive
+2. User shares folder link in chat
+3. Agent reads cognitive files from shared folder
+4. For writes: Alex generates content → user pastes
+
+**Benefits**: No Azure Functions, no API costs, user controls data.
+
+## Deployment Flow
+
+```powershell
+npx teamsapp package --env local
+npx teamsapp validate --package-file appPackage/build/*.zip
+# Upload to Developer Portal → Preview in Teams
+```
 
 ## Synapses
 

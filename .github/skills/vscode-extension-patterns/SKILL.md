@@ -75,6 +75,25 @@ function isDuplicate(newText: string, existing: string[]): boolean {
 }
 ```
 
+## Portability Rules
+
+Extensions must work on any machine:
+
+```typescript
+// ✅ CORRECT: Dynamic paths
+const rootPath = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
+const globalPath = path.join(os.homedir(), '.alex');
+
+// ❌ WRONG: Hardcoded paths
+const rootPath = 'c:\\Development\\MyProject';  // Never!
+```
+
+**Key utilities**:
+
+- `vscode.workspace.workspaceFolders` — Current workspace
+- `os.homedir()` — Platform-independent home
+- `path.join()` — Cross-platform path building
+
 ## Publishing Workflow
 
 ```powershell

@@ -69,7 +69,7 @@ When packaging heirs, the build script should:
 # Pseudocode for heir packaging
 foreach ($skill in $skills) {
     $inheritance = (Get-Content "$skill/synapses.json" | ConvertFrom-Json).inheritance
-    
+
     switch ($inheritance) {
         "inheritable"   { Include-InAllHeirs $skill }
         "master-only"   { Skip $skill }

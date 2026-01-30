@@ -300,6 +300,7 @@ Keep these as-is (don't migrate to skills):
 | `DK-RECOMMENDED-ENVIRONMENT.md` | `alex_docs/ENVIRONMENT-SETUP.md` | ✅ Moved | Setup guide for human reference |
 | `DK-WRITING-AND-PUBLICATION.md` | `writing-publication` | ✅ Migrated | 258→115 lines |
 | `DK-M365-AGENT-DEBUGGING.md` | `m365-agent-debugging` | ✅ Migrated | 125→75 lines |
+| `DK-MULTI-PLATFORM-ARCHITECTURE.md` | (consolidated) | ✅ Deleted | Merged into skills + MASTER-HEIR-ARCHITECTURE |
 | *(new)* | `architecture-refinement` | ✅ Created | Meta-skill for maintaining alex_docs |
 | *(new)* | `lint-clean-markdown` | ✅ Created | Write markdown without lint errors |
 
@@ -307,7 +308,6 @@ Keep these as-is (don't migrate to skills):
 
 | DK-* File | Proposed Skill | Priority | Notes |
 | --------- | -------------- | -------- | ----- |
-| `DK-MULTI-PLATFORM-ARCHITECTURE.md` | `multi-platform` | Low | May merge with MASTER-HEIR-ARCHITECTURE |
 | `DK-HUMAN-LEARNING-PSYCHOLOGY.md` | `learning-psychology` | Low | Could help heirs teach |
 
 ### 🔒 Keep as DK-* (Alex-Internal)
