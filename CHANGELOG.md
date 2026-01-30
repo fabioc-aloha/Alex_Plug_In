@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.2] - 2026-01-30 🎨 Beta 2
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** UX polish, command parity, skill catalog generation
+
+### Focus
+
+User experience improvements, flexible UX across all entry points, and the new Skill Catalog Generator.
+
+### Added
+
+- **🌐 Generate Skill Catalog Command** — New VS Code command to create network diagrams of all skills
+  - Scans all `.github/skills/` directories for `synapses.json` files
+  - Generates Mermaid diagram with skill relationships
+  - Supports bidirectional (`<-->`) and weak (`-.->`) connections
+  - Multi-target syntax for cleaner diagrams
+  - Available via Command Palette, Status Bar menu, and Welcome View
+
+- **📊 Enhanced Status Bar** — Rich status display at a glance
+  - Shows health status (🟢/🟡/🔴/⚫)
+  - Session timer when focus session active (🍅 25:00 or ☕ 5:00)
+  - Streak indicator when > 0 days (🔥7)
+  - Format: `$(brain) Alex 🟢 | 🍅 25:00 | 🔥7`
+
+- **🚀 Enticing Uninitialized State** — Drive user activation
+  - Status bar preview: `Alex ⚫ | 🍅 Focus | 🔥 Streaks | 💡 Knowledge`
+  - Tooltip lists all features user would unlock by initializing
+  - Clear call-to-action to encourage initialization
+
+- **🎨 Welcome View Polish**
+  - CX logo in header instead of 🧠 emoji
+  - Expanded status grid (2 rows × 4 columns)
+    - Health, Sync, Skills, Synapses
+    - Patterns, Insights, Streak 🔥, Goals
+  - Clickable BETA badge that opens diagnostics
+  - Grouped Quick Actions (🧠 Core, 📚 Knowledge, 🛠️ Tools, ⚙️ System)
+  - Colored left borders for status states
+  - Streak highlight with 🔥 when active
+  - Goals show "+X today" in green
+
+- **🔄 Command Parity** — Flexible UX across all entry points
+  - 14 commands now accessible from Command Palette, Status Bar menu, AND Welcome View
+  - New commands added to menus:
+    - Generate Skill Catalog
+    - Search Knowledge (Knowledge QuickPick)
+    - Start Focus Session
+    - Health Dashboard
+
+- **📋 UI/UX Roadmap** — Added backlog to ROADMAP-UNIFIED.md
+  - Proactive insights and learning reminders (planned)
+  - Quick tips carousel (planned)
+  - Context-aware actions (planned)
+  - Notification system (planned)
+
+### Changed
+
+- **Synapse Schema** — Added `bidirectional` and `weak` boolean fields
+- **Skill Catalog Generator** — Updated algorithm for high-fidelity diagrams
+
+### Fixed
+
+- **Bidirectional Connections** — Added `bidirectional: true` to 6 mutual reinforcement synapses:
+  - testing-strategies ↔ debugging-patterns
+  - microsoft-sfi ↔ privacy-responsible-ai
+  - ascii-art-alignment ↔ markdown-mermaid
+  - image-handling ↔ svg-graphics
+  - lint-clean-markdown ↔ markdown-mermaid
+  - release-preflight ↔ beta-tester
+
+---
+
+## [3.7.1] - 2026-01-30 🔧 Beta 1
+
+> **Status:** Pre-release
+> **Focus:** Initial beta after Dawn stabilization
+
+Minor version bump for initial beta testing after v3.7.0 Dawn release.
+
+---
+
 ## [3.7.0] - 2026-01-30 🛡️ Dawn
 
 > **Status:** Pre-release (use `--pre-release` flag)
