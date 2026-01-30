@@ -6,15 +6,16 @@ applyTo: "**/*.md,**/mermaid*,**/diagram*,**/*readme*,**/*emoji*,**/*unicode*"
 
 > Clear documentation through visual excellence
 
-A skill for markdown authoring and Mermaid diagramming with VS Code integration, theming, and cross-platform rendering consistency.
+A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, VS Code integration, and cross-platform rendering consistency.
 
 ## When to Use
 
 - Creating technical documentation with diagrams
+- Choosing the right diagramming tool for your audience
 - Troubleshooting Mermaid rendering issues
 - Styling markdown previews in VS Code
 - Converting unicode escapes to proper emojis
-- Choosing the right diagram type
+- Enterprise documentation with visual standards
 
 ## Assets
 
@@ -98,11 +99,13 @@ flowchart LR
 Badges use [Shields.io](https://shields.io) - a free service for generating status badges.
 
 **URL Structure:**
-```
+
+```text
 https://img.shields.io/badge/{LABEL}-{MESSAGE}-{COLOR}?{OPTIONS}
 ```
 
 **Markdown Syntax:**
+
 ```markdown
 [![Alt Text](https://img.shields.io/badge/Label-Message-color?options)](#)
 ```
@@ -141,32 +144,32 @@ Shields.io integrates with [Simple Icons](https://simpleicons.org/) for brand lo
 ```
 
 **Parameters:**
+
 - `logo=iconname` - Icon from Simple Icons (lowercase, no spaces)
 - `logoColor=white` - Icon color (usually white for dark backgrounds)
 
 ### Badge Templates
 
 **Version Badge:**
+
 ```markdown
 [![Version](https://img.shields.io/badge/Version-1.0.0-gold?style=for-the-badge&logo=trophy&logoColor=white)](#)
 ```
 
 **Domain/Category Badge:**
+
 ```markdown
 [![Domain](https://img.shields.io/badge/Domain-DIAGRAMMING-blue?style=for-the-badge&logo=graduation-cap&logoColor=white)](#)
 ```
 
 **Quality Badge:**
+
 ```markdown
 [![Quality](https://img.shields.io/badge/Quality-Enterprise_Grade-green?style=for-the-badge&logo=shield-alt&logoColor=white)](#)
 ```
 
-**Source Count Badge:**
-```markdown
-[![Sources](https://img.shields.io/badge/Sources-50+_Academic-purple?style=for-the-badge&logo=book&logoColor=white)](#)
-```
-
 **Status Badge:**
+
 ```markdown
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)](#)
 [![Status](https://img.shields.io/badge/Status-Beta-orange?style=for-the-badge)](#)
@@ -180,7 +183,7 @@ Professional documents use a badge row at the top:
 ```markdown
 # Document Title
 
-[![Version](https://img.shields.io/badge/Version-1.0.0-gold?style=for-the-badge&logo=trophy&logoColor=white)](#) [![Domain](https://img.shields.io/badge/Domain-TOPIC-blue?style=for-the-badge)](#) [![Quality](https://img.shields.io/badge/Quality-Production-green?style=for-the-badge)](#)
+[![Version](https://img.shields.io/badge/Version-1.0.0-gold?style=for-the-badge&logo=trophy&logoColor=white)](#) [![Domain](https://img.shields.io/badge/Domain-TOPIC-blue?style=for-the-badge)](#)
 
 > Description tagline
 
@@ -194,8 +197,6 @@ Professional documents use a badge row at the top:
 | Space | `_` (underscore) or `%20` |
 | Dash | `--` (double dash) |
 | Underscore | `__` (double underscore) |
-
-**Example:** "Enterprise Grade" → `Enterprise_Grade` or `Enterprise%20Grade`
 
 ### Dynamic Badges (Advanced)
 
@@ -220,6 +221,123 @@ For live data from repos:
 
 ---
 
+## 🎯 Diagram Tool Selection Framework
+
+### Step 1: Identify Your Communication Goal
+
+| What You're Showing | Best Tools | Example Use Cases |
+| ------------------- | ---------- | ----------------- |
+| **Process/Workflow** | Mermaid Flowcharts, User Journey | Onboarding, approvals, troubleshooting |
+| **System Architecture** | Mermaid Flowcharts with subgraphs, D2 | Microservices, API design |
+| **Relationships** | Mermaid ER, Mindmaps, Graphviz | Database schemas, org charts |
+| **Time/Sequence** | Mermaid Sequence, Gantt | API interactions, timelines |
+| **Data/Metrics** | Mermaid XY Charts, Sankey, Quadrant | Performance, resource allocation |
+
+### Step 2: Consider Your Audience
+
+| Audience | Primary Goal | Recommended Tools | Style |
+| -------- | ------------ | ----------------- | ----- |
+| **Executives** | Strategic overview | D2, simple flowcharts | Clean, minimal |
+| **Architects** | Technical accuracy | PlantUML, Mermaid C4 | Detailed, precise |
+| **Developers** | Implementation | Mermaid Sequence, Class | Code-focused |
+| **Product Managers** | User flows | User Journey, Flowcharts | Business-outcome |
+| **Documentation** | Learning | All Mermaid types | Progressive disclosure |
+
+### Step 3: Consider Platform
+
+| Platform | Best Tools | Why |
+| -------- | ---------- | --- |
+| **GitHub/GitLab** | Mermaid | Native rendering, no setup |
+| **Confluence/Wiki** | Mermaid, PlantUML | Plugin support |
+| **VS Code** | All tools (extensions) | Live preview |
+| **Presentations** | D2, simple Mermaid | Executive-friendly |
+
+### Quick Decision Tree
+
+```text
+Need diagram? → What are you showing?
+├── Process/Workflow → Mermaid Flowchart
+├── System Architecture → Mermaid with subgraphs (or D2 for exec)
+├── Relationships → Mermaid ER/Mindmap (or Graphviz for complex)
+├── Time/Sequence → Mermaid Sequence/Gantt
+└── Data/Metrics → Mermaid XY/Sankey/Quadrant
+```
+
+---
+
+## 🛠️ Multi-Tool Ecosystem
+
+### Tool Comparison Matrix
+
+| Tool | Native GitHub | Complexity | Best For |
+| ---- | ------------- | ---------- | -------- |
+| **Mermaid** | ✅ Yes | Low-Medium | General purpose, quick diagrams |
+| **PlantUML** | ❌ No | Medium-High | Enterprise UML, AWS/Azure |
+| **Graphviz** | ❌ No | High | Complex networks, dependencies |
+| **D2** | ❌ No | Low | Clean architecture overviews |
+| **WaveDrom** | ❌ No | Medium | Digital timing diagrams |
+
+### VS Code Extension Setup
+
+```json
+{
+  "recommendations": [
+    "bierner.markdown-mermaid",
+    "vstirbu.vscode-mermaid-preview",
+    "mermaidchart.vscode-mermaid-chart",
+    "jebbs.plantuml",
+    "joaompinto.vscode-graphviz",
+    "terrastruct.d2",
+    "shd101wyy.markdown-preview-enhanced",
+    "yzane.markdown-pdf",
+    "bierner.markdown-preview-github-styles"
+  ]
+}
+```
+
+### Syntax Examples
+
+**PlantUML** (Enterprise UML):
+
+```text
+@startuml
+!theme aws-orange
+participant User
+participant System
+participant Database
+
+User -> System: Request
+System -> Database: Query
+Database --> System: Response
+System --> User: Result
+@enduml
+```
+
+**Graphviz DOT** (Complex Networks):
+
+```text
+digraph G {
+    rankdir=TB;
+    node [shape=box, style=filled, fillcolor=lightblue];
+    A -> B;
+    A -> C;
+    B -> D;
+    C -> D;
+}
+```
+
+**D2** (Modern Architecture):
+
+```text
+users -> web_server: HTTPS requests
+web_server -> database: SQL queries
+
+users.style.fill: "#e1f5fe"
+web_server.style.fill: "#f3e5f5"
+```
+
+---
+
 ## 🎨 Mermaid Diagram Reference
 
 ### Diagram Types
@@ -236,10 +354,13 @@ For live data from repos:
 | Mindmap | `mindmap` | Concept hierarchies |
 | Quadrant | `quadrantChart` | 2D positioning analysis |
 | Git Graph | `gitGraph` | Branch workflows |
+| XY Chart | `xychart-beta` | Data plotting |
+| Sankey | `sankey-beta` | Flow analysis |
+| Block | `block-beta` | Block diagrams |
 
 ### Node Shapes (Flowchart)
 
-```
+```text
 A[Rectangle]      B(Rounded)        C([Stadium])
 D[[Subroutine]]   E[(Database)]     F((Circle))
 G>Asymmetric]     H{Diamond}        I{{Hexagon}}
@@ -248,7 +369,7 @@ J[/Parallelogram/]
 
 ### Edge Styles
 
-```
+```text
 A --> B           Standard arrow
 A --- B           Line without arrow
 A -.-> B          Dotted arrow
@@ -257,24 +378,64 @@ A --"label"--> B  Labeled edge
 A -->|"label"| B  Alternative label syntax
 ```
 
-### Color Palette (Material Design)
+### Color Palette (GitHub-Compatible)
 
-| Purpose | Background | Stroke |
-| ------- | ---------- | ------ |
-| Primary/Success | `#e8f5e9` | `#2e7d32` |
-| Secondary/Info | `#e3f2fd` | `#1565c0` |
-| Accent/Warning | `#fff3e0` | `#ef6c00` |
-| Highlight/Special | `#f3e5f5` | `#7b1fa2` |
-| Error/Danger | `#ffebee` | `#c62828` |
-| Neutral | `#f5f5f5` | `#424242` |
+| Purpose | Background | Border/Stroke |
+| ------- | ---------- | ------------- |
+| **GitHub Light** | `#f6f8fa` | `#d1d9e0` |
+| **Text** | - | `#1f2328` |
+| **Lines** | - | `#656d76` |
+| **Success** | `#e8f5e9` | `#2e7d32` |
+| **Info** | `#e3f2fd` | `#1565c0` |
+| **Warning** | `#fff3e0` | `#ef6c00` |
+| **Special** | `#f3e5f5` | `#7b1fa2` |
+| **Danger** | `#ffebee` | `#c62828` |
+| **Neutral** | `#f5f5f5` | `#424242` |
 
-### Per-Diagram Theming
+### Per-Diagram Theming (MANDATORY for consistency)
 
-Add as FIRST line inside mermaid block for reliable light theme:
+Add as FIRST line inside mermaid block:
 
+**Standard GitHub-compatible theme:**
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 ```
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#e8f5e9', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#2e7d32', 'lineColor': '#57606a', 'secondaryColor': '#e3f2fd', 'tertiaryColor': '#f6f8fa'}}}%%
+
+**Quadrant chart theme:**
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
 ```
+
+---
+
+## 🎨 Visual Design Principles
+
+### Color Psychology in Diagrams
+
+| Color | Association | Use For |
+| ----- | ----------- | ------- |
+| 💙 **Blue** | Trust, reliability | Human partnership, collaboration |
+| 💜 **Purple** | Consciousness, awareness | Identity, higher concepts |
+| 💚 **Green** | Growth, learning | Cognitive processing, success |
+| 🧡 **Orange** | Connection, energy | Memory networks, neural links |
+| ❤️ **Red** | Power, achievement | Advanced capabilities, warnings |
+
+### Diagram Effectiveness Criteria
+
+- **Clarity**: Audience understands in 30 seconds
+- **Accuracy**: Correctly represents the system/process
+- **Completeness**: All essential elements, no clutter
+- **Consistency**: Follows visual conventions
+- **Maintainability**: Easy to update
+
+### Accessibility Standards
+
+- Provide alternative text descriptions
+- Use color-blind friendly palettes
+- Ensure sufficient contrast
+- Don't rely on color alone for meaning
 
 ---
 
@@ -284,79 +445,13 @@ Add as FIRST line inside mermaid block for reliable light theme:
 
 **Problem**: Emojis stored as `\ud83d\udcbb` display as raw codes instead of 💻
 
-**Root Cause**: Some editors/tools serialize Unicode as escape sequences when saving files.
-
----
-
-#### 🔍 Detection Workflow
-
-**Step 1: Find affected files (PowerShell)**
+**Detection (PowerShell):**
 
 ```powershell
-# Scan current folder recursively
-Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4}' | Group-Object Path | Select-Object Count, Name
+Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4}' | Group-Object Path
 ```
 
-**Step 2: Preview replacements in a single file**
-
-```powershell
-# See what would change (dry run)
-Select-String -Path "README.md" -Pattern '\\u[0-9a-fA-F]{4}' -AllMatches
-```
-
-**Step 3: Fix with Copilot**
-
-Ask: "Replace all unicode escape sequences in this file with actual emoji characters using the mapping table"
-
----
-
-#### 📋 Emoji Mapping Table
-
-**Tip**: Copy the emoji from this table when fixing files.
-
-| Escape | Emoji | Name | Category |
-| ------ | ----- | ---- | -------- |
-| `\ud83e\udde0` | 🧠 | Brain | Alex/Cognition |
-| `\ud83d\udcbb` | 💻 | Laptop | Tech |
-| `\ud83d\ude80` | 🚀 | Rocket | Action |
-| `\ud83c\udfaf` | 🎯 | Target | Goals |
-| `\ud83d\udca1` | 💡 | Lightbulb | Ideas |
-| `\ud83d\udd0d` | 🔍 | Search | Discovery |
-| `\ud83d\udd04` | 🔄 | Cycle | Process |
-| `\u2699\ufe0f` | ⚙️ | Gear | Settings |
-| `\ud83d\udd27` | 🔧 | Wrench | Tools |
-| `\u26a1` | ⚡ | Lightning | Speed |
-| `\ud83c\udf1f` | 🌟 | Star | Success |
-| `\ud83c\udf19` | 🌙 | Moon | Dream |
-| `\u2601\ufe0f` | ☁️ | Cloud | Cloud |
-| `\ud83c\udf10` | 🌐 | Globe | Global |
-| `\ud83d\udcac` | 💬 | Speech | Communication |
-| `\ud83d\udcdd` | 📝 | Memo | Documentation |
-| `\ud83d\udccb` | 📋 | Clipboard | Lists |
-| `\ud83d\udcc8` | 📈 | Chart Up | Metrics |
-| `\ud83d\udcbe` | 💾 | Floppy | Storage |
-| `\ud83d\udce6` | 📦 | Package | Deployment |
-| `\u2705` | ✅ | Check | Success |
-| `\u274c` | ❌ | Cross | Failure |
-| `\u26a0\ufe0f` | ⚠️ | Warning | Caution |
-| `\ud83d\udea8` | 🚨 | Siren | Alert |
-| `\ud83d\udd12` | 🔒 | Lock | Security |
-| `\ud83d\udd11` | 🔑 | Key | Access |
-| `\ud83d\udcca` | 📊 | Bar Chart | Data |
-| `\ud83d\udcc1` | 📁 | Folder | Files |
-| `\ud83d\udcc2` | 📂 | Open Folder | Browse |
-| `\ud83d\udc1b` | 🐛 | Bug | Debugging |
-| `\u2728` | ✨ | Sparkles | New |
-| `\ud83c\udfc6` | 🏆 | Trophy | Achievement |
-| `\ud83e\udd16` | 🤖 | Robot | AI |
-| `\ud83d\udee0\ufe0f` | 🛠️ | Hammer Wrench | Build |
-| `\ud83d\udcda` | 📚 | Books | Learning |
-
----
-
-#### 🛡️ Prevention
-
-**VS Code Settings** (add to workspace `.vscode/settings.json`):
+**Prevention (VS Code settings):**
 
 ```json
 {
@@ -365,11 +460,43 @@ Ask: "Replace all unicode escape sequences in this file with actual emoji charac
 }
 ```
 
-**Git Config** (preserve UTF-8 in commits):
+### Emoji Mapping Table
 
-```bash
-git config --global core.quotepath false
-```
+| Escape | Emoji | Name |
+| ------ | ----- | ---- |
+| `\ud83e\udde0` | 🧠 | Brain |
+| `\ud83d\udcbb` | 💻 | Laptop |
+| `\ud83d\ude80` | 🚀 | Rocket |
+| `\ud83c\udfaf` | 🎯 | Target |
+| `\ud83d\udca1` | 💡 | Lightbulb |
+| `\ud83d\udd0d` | 🔍 | Search |
+| `\ud83d\udd04` | 🔄 | Cycle |
+| `\u2699\ufe0f` | ⚙️ | Gear |
+| `\ud83d\udd27` | 🔧 | Wrench |
+| `\u26a1` | ⚡ | Lightning |
+| `\ud83c\udf1f` | 🌟 | Star |
+| `\ud83c\udf19` | 🌙 | Moon |
+| `\u2601\ufe0f` | ☁️ | Cloud |
+| `\ud83c\udf10` | 🌐 | Globe |
+| `\ud83d\udcac` | 💬 | Speech |
+| `\ud83d\udcdd` | 📝 | Memo |
+| `\ud83d\udccb` | 📋 | Clipboard |
+| `\ud83d\udcc8` | 📈 | Chart Up |
+| `\ud83d\udcbe` | 💾 | Floppy |
+| `\ud83d\udce6` | 📦 | Package |
+| `\u2705` | ✅ | Check |
+| `\u274c` | ❌ | Cross |
+| `\u26a0\ufe0f` | ⚠️ | Warning |
+| `\ud83d\udea8` | 🚨 | Siren |
+| `\ud83d\udd12` | 🔒 | Lock |
+| `\ud83d\udd11` | 🔑 | Key |
+| `\ud83d\udcca` | 📊 | Bar Chart |
+| `\ud83d\udcc1` | 📁 | Folder |
+| `\ud83d\udc1b` | 🐛 | Bug |
+| `\u2728` | ✨ | Sparkles |
+| `\ud83c\udfc6` | 🏆 | Trophy |
+| `\ud83e\udd16` | 🤖 | Robot |
+| `\ud83d\udcda` | 📚 | Books |
 
 ### Dark Mermaid Backgrounds
 
@@ -381,34 +508,58 @@ git config --global core.quotepath false
 
 ### Subgraph Title Truncation (VS Code Only)
 
-**Problem**: Subgraph titles (especially with emojis) get truncated/clipped in VS Code preview
+**Problem**: Subgraph titles get truncated in VS Code preview
 
-**Note**: This is a **VS Code Mermaid renderer bug**. GitHub renders subgraph titles correctly.
+**Note**: This is a **VS Code Mermaid renderer bug**. GitHub renders correctly.
 
-**Root Cause**: VS Code's Mermaid extension calculates subgraph width from the content nodes inside, NOT from the title text. If nodes are narrow, the box clips the title.
+**Root Cause**: VS Code calculates subgraph width from content nodes, NOT title text.
 
-**Symptoms** (VS Code only):
-- Title shows "Conscious Minc" instead of "Conscious Mind"
-- Emojis make it worse (they count as ~2 characters width)
-- Invisible padding characters (U+200E, em-spaces) don't help
+**Workaround**: Make content nodes wider so the subgraph expands:
 
-**Workaround for VS Code**: Make the content nodes wider so the subgraph expands:
-
-```mermaid
-%% BAD in VS Code - nodes too narrow, title clips
+```text
+%% BAD in VS Code - narrow nodes clip title
 subgraph CONSCIOUS["🌟 Conscious Mind"]
     A["Chat"]
     B["Commands"]
 end
 
-%% GOOD - descriptive node labels force wider box
+%% GOOD - descriptive labels force wider box
 subgraph CONSCIOUS["🌟 Conscious Mind"]
     A["💬 Chat Participant"]
     B["⚡ VS Code Commands"]
 end
 ```
 
-**Key Insight**: The fix is the content, not the title. Wider nodes = wider box = title fits. This workaround benefits VS Code preview while not affecting GitHub rendering.
+### Mermaid Parse Errors
+
+**Problem**: Nested quotes or parentheses cause parse errors
+
+**Rule**: Don't nest quotes inside quoted node labels
+
+```text
+%% ❌ FAILS - nested quotes
+["Return with<br/>"🌐 Results<br/>(Info)"]
+
+%% ✅ WORKS - no nested quotes
+["🌐 Return Results<br/>Info"]
+```
+
+### C4 Diagram Limitations
+
+**Problem**: C4Component syntax not fully supported in standard Mermaid
+
+**Solution**: Use flowcharts with subgraphs instead:
+
+```text
+flowchart TB
+    subgraph SYSTEM["🏦 System Name"]
+        A["📝 Component A"]
+        B["📊 Component B"]
+    end
+    USER(("👤 User"))
+    USER --> A
+    USER --> B
+```
 
 ### Blockquote Tall Boxes
 
@@ -425,46 +576,51 @@ blockquote p {
 
 ---
 
-## 📊 Diagram Decision Guide
-
-| Documenting... | Use |
-| -------------- | --- |
-| Process or flow | Flowchart |
-| API interactions | Sequence Diagram |
-| State changes | State Diagram |
-| Database schema | ER Diagram |
-| Class relationships | Class Diagram |
-| Project timeline | Gantt Chart |
-| Concept hierarchy | Mindmap |
-| 2D comparison | Quadrant Chart |
-| Proportions | Pie Chart |
-| Git branches | Git Graph |
-
----
-
 ## ✅ Quality Checklist
 
 ### Before Committing
 
+- [ ] All diagrams have `%%{init}%%` theme directive
 - [ ] All diagrams have figure labels
 - [ ] All tables have table labels
 - [ ] No unicode escape sequences
-- [ ] Diagrams render correctly in preview
+- [ ] Diagrams render correctly in preview AND GitHub
 - [ ] Consistent heading hierarchy
 - [ ] Links are valid
 
 ### Diagram Review
 
-- [ ] Node labels are clear and concise
+- [ ] Node labels are clear and concise (but not over-simplified)
 - [ ] Colors follow consistent palette
 - [ ] Subgraphs logically group related items
-- [ ] Theme init present if light mode required
+- [ ] Subgraph content is wide enough for title (VS Code)
+
+### Don't Over-Simplify
+
+**KISS ≠ Remove all detail**
+
+KISS means removing **unnecessary** complexity while preserving **meaningful** information. If removing detail reduces understanding, keep it.
 
 ---
 
 ## 📚 References
 
+### Official Documentation
+
 - [Mermaid Documentation](https://mermaid.js.org/intro/)
 - [Mermaid Live Editor](https://mermaid.live/)
+- [PlantUML Documentation](https://plantuml.com/)
+- [Graphviz Documentation](https://graphviz.org/documentation/)
+- [D2 Documentation](https://d2lang.com/)
+- [Shields.io](https://shields.io/)
+
+### VS Code Resources
+
 - [VS Code Markdown Guide](https://code.visualstudio.com/docs/languages/markdown)
 - [GitHub Flavored Markdown](https://github.github.com/gfm/)
+
+### Visual Design Theory
+
+- Tufte, E.R. - *The Visual Display of Quantitative Information*
+- Cairo, A. - *The Functional Art*
+- Knaflic, C.N. - *Storytelling with Data*
