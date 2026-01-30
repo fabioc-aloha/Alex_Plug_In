@@ -42,6 +42,10 @@ esbuild.js
 .github/pull_request_template.md
 .github/workflows/**
 
+# MASTER ALEX PROTECTION - Never include this marker in packages
+# This file only exists in Master Alex and protects it from commands
+.github/config/MASTER-ALEX-PROTECTED.json
+
 # Extension documentation (exclude from package)
 alex/
 

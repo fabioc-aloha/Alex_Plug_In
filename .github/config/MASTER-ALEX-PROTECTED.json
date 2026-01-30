@@ -1,0 +1,19 @@
+{
+    "protected": true,
+    "workspace": "master-alex",
+    "description": "This is the Master Alex development workspace - the source of truth for all Alex cognitive architecture.",
+    "created": "2026-01-30",
+    "safetyImperatives": [
+        "I1: NEVER test extension in this workspace",
+        "I2: ALWAYS use F5 + Sandbox for testing",
+        "I3: NEVER run Alex: Initialize here",
+        "I4: NEVER run Alex: Reset here",
+        "I5: COMMIT before risky operations"
+    ],
+    "testingInstructions": {
+        "step1": "Press F5 to launch Extension Development Host",
+        "step2": "Open C:\\Development\\Alex_Sandbox in the new window",
+        "step3": "Run commands there safely"
+    },
+    "warning": "⚠️ DO NOT DELETE THIS FILE - It protects Master Alex from accidental corruption"
+}

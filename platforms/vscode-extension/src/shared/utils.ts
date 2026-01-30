@@ -386,6 +386,7 @@ export interface WorkspaceProtectionResult {
  * Check if workspace is protected (Master Alex kill switch)
  * 
  * Protection layers:
+ * 0. HARDCODED FAILSAFE: Block Alex_Plug_In path (cannot be bypassed)
  * 1. Explicit setting: alex.workspace.protectedMode = true
  * 2. Auto-detect: workspace contains platforms/vscode-extension/ (Master Alex source)
  * 
@@ -393,11 +394,64 @@ export interface WorkspaceProtectionResult {
  * @returns Protection status with reason
  */
 export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceProtectionResult> {
+    // Get output channel for debugging
+    const outputChannel = vscode.window.createOutputChannel('Alex Kill Switch', { log: true });
+    outputChannel.info(`🛡️ Protection check for: ${rootPath}`);
+    
+    // Layer 0: HARDCODED FAILSAFE - Check for Alex_Plug_In in path
+    // This cannot be overridden by any setting and protects against all bypass attempts
+    const normalizedPath = rootPath.replace(/\\/g, '/').toLowerCase();
+    const masterAlexPatterns = [
+        'alex_plug_in',
+        'alex-plug-in', 
+        'alexplug'
+    ];
+    
+    for (const pattern of masterAlexPatterns) {
+        if (normalizedPath.includes(pattern)) {
+            outputChannel.warn(`🚨 HARDCODED FAILSAFE TRIGGERED: Path contains '${pattern}'`);
+            outputChannel.info(`Full path: ${rootPath}`);
+            return {
+                isProtected: true,
+                reason: 'setting',  // Treat as explicit setting (no override)
+                canOverride: false
+            };
+        }
+    }
+    
+    // Layer 0.5: MASTER ALEX MARKER FILE - Check for protection marker
+    // This file only exists in Master Alex and cannot be created by Alex: Initialize
+    const masterAlexMarker = path.join(rootPath, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
+    if (await fs.pathExists(masterAlexMarker)) {
+        try {
+            const markerContent = await fs.readJson(masterAlexMarker);
+            if (markerContent.protected === true && markerContent.workspace === 'master-alex') {
+                outputChannel.warn(`🚨 MASTER ALEX MARKER DETECTED: ${masterAlexMarker}`);
+                return {
+                    isProtected: true,
+                    reason: 'setting',  // No override allowed
+                    canOverride: false
+                };
+            }
+        } catch {
+            // If file exists but can't be read, assume protected
+            outputChannel.warn(`🚨 MASTER ALEX MARKER EXISTS (unreadable): ${masterAlexMarker}`);
+            return {
+                isProtected: true,
+                reason: 'setting',
+                canOverride: false
+            };
+        }
+    }
+    
     const config = vscode.workspace.getConfiguration('alex.workspace');
     
     // Layer 1: Explicit protection setting
     const explicitProtection = config.get<boolean>('protectedMode', false);
+    outputChannel.info(`protectedMode setting: ${explicitProtection}`);
+    
     if (explicitProtection) {
+        outputChannel.info(`✅ Protected by explicit setting`);
         return {
             isProtected: true,
             reason: 'setting',
@@ -407,6 +461,8 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
     
     // Layer 2: Auto-detect Master Alex (if enabled)
     const autoProtect = config.get<boolean>('autoProtectMasterAlex', true);
+    outputChannel.info(`autoProtectMasterAlex setting: ${autoProtect}`);
+    
     if (autoProtect) {
         // Check for Master Alex indicators
         const masterAlexIndicators = [
@@ -416,7 +472,10 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
         ];
         
         for (const indicator of masterAlexIndicators) {
-            if (await fs.pathExists(indicator)) {
+            const exists = await fs.pathExists(indicator);
+            outputChannel.info(`Checking indicator ${indicator}: ${exists}`);
+            if (exists) {
+                outputChannel.info(`✅ Protected by auto-detect: ${indicator}`);
                 return {
                     isProtected: true,
                     reason: 'auto-detect',
@@ -426,6 +485,7 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
         }
     }
     
+    outputChannel.info(`⚠️ Workspace NOT protected`);
     return {
         isProtected: false,
         canOverride: true
@@ -447,17 +507,34 @@ export async function checkProtectionAndWarn(
 ): Promise<boolean> {
     const protection = await isWorkspaceProtected(rootPath);
     
+    // Get output channel for user visibility
+    const outputChannel = vscode.window.createOutputChannel('Alex Kill Switch', { log: true });
+    outputChannel.info(`🛡️ ${operationName} - Protection result: isProtected=${protection.isProtected}, reason=${protection.reason}, canOverride=${protection.canOverride}`);
+    
     if (!protection.isProtected) {
+        outputChannel.info(`✅ ${operationName} proceeding - workspace not protected`);
         return true;  // Not protected, proceed
     }
     
+    outputChannel.warn(`🛑 ${operationName} BLOCKED - workspace is protected`);
+    outputChannel.show(true);  // Show output channel so user can see logs
+    
     if (protection.reason === 'setting') {
-        // Explicit protection - cannot override
-        vscode.window.showErrorMessage(
-            `🛡️ ${operationName} blocked: This workspace is in protected mode.\n\n` +
-            `Master Alex development environment detected. Use Extension Development Host (F5) to test.`,
-            { modal: true }
+        // Explicit protection (or hardcoded failsafe) - cannot override
+        // Using await to ensure the dialog is shown before returning
+        // The 'OK' button is the only option - clicking X or Escape still blocks
+        await vscode.window.showErrorMessage(
+            `🛡️ ${operationName} BLOCKED!\n\n` +
+            `This is the Master Alex development environment.\n\n` +
+            `⚠️ Running this command here would corrupt the source of truth.\n\n` +
+            `✅ To test safely:\n` +
+            `1. Press F5 to launch Extension Development Host\n` +
+            `2. Open Alex_Sandbox folder in the new window\n` +
+            `3. Run the command there`,
+            { modal: true },
+            'I Understand'  // Single button - no dangerous option
         );
+        // ALWAYS return false regardless of how dialog was dismissed
         return false;
     }
     

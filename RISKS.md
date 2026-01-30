@@ -207,6 +207,33 @@ Before declaring v3.6.0 ready:
 
 ## 🚨 Contingency Plans (If Things Go Wrong)
 
+### ⚡ QUICK DOOM RECOVERY (Copy-Paste Ready)
+
+If Master Alex `.github/` gets corrupted during testing, use these commands:
+
+```powershell
+# === OPTION 1: Git Restore (fastest) ===
+cd "C:\Development\Alex_Plug_In"
+git checkout HEAD -- .github/
+
+# === OPTION 2: From Physical Backup ===
+# List available backups
+Get-ChildItem "C:\Development\Alex_Plug_In\archive\upgrades" -Directory | Sort-Object Name -Descending | Select-Object -First 5
+
+# Restore from most recent backup (replace timestamp)
+Copy-Item -Path "C:\Development\Alex_Plug_In\archive\upgrades\backup-protection-test-2026-01-29-235259\*" -Destination "C:\Development\Alex_Plug_In\.github\" -Recurse -Force
+
+# === OPTION 3: Hard Reset to Last Commit ===
+cd "C:\Development\Alex_Plug_In"
+git reset --hard HEAD
+
+# === VERIFY RECOVERY ===
+Test-Path "C:\Development\Alex_Plug_In\.github\copilot-instructions.md"
+# Should return: True
+```
+
+---
+
 ### Risk ↔ Contingency Cross-Reference
 
 | Risk | Description | Contingency Plan |
