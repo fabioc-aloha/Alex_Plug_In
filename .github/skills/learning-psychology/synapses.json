@@ -1,6 +1,5 @@
 {
     "skill": "learning-psychology",
-    "version": "1.0.0",
     "inheritance": "inheritable",
     "connections": [
         {

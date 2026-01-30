@@ -1,7 +1,6 @@
 {
     "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "appropriate-reliance",
-    "version": "1.0.0",
     "inheritance": "inheritable",
     "description": "Calibrated human-AI collaboration patterns",
     "connections": [

@@ -1,6 +1,5 @@
 {
     "skill": "writing-publication",
-    "version": "1.0.0",
     "inheritance": "inheritable",
     "connections": [
         {

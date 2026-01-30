@@ -111,7 +111,6 @@ Rich metadata for Alex's neural network. Ignored by vanilla Copilot.
 ```json
 {
   "skill": "{skill-name}",
-  "version": "{semver}",
   "inheritance": "inheritable | master-only | heir:vscode | heir:m365",
   "connections": [
     {

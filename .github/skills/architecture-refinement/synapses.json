@@ -1,7 +1,6 @@
 {
     "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "architecture-refinement",
-    "version": "1.0.0",
     "inheritance": "master-only",
     "description": "Meta-skill for maintaining and evolving Alex's cognitive architecture",
     "connections": [

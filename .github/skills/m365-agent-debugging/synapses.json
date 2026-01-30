@@ -1,6 +1,5 @@
 {
     "skill": "m365-agent-debugging",
-    "version": "1.0.0",
     "inheritance": "heir:m365",
     "connections": [
         {

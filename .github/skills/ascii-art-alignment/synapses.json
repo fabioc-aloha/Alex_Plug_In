@@ -1,7 +1,6 @@
 {
     "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "ascii-art-alignment",
-    "version": "1.0.0",
     "inheritance": "inheritable",
     "description": "Create perfectly aligned ASCII diagrams",
     "connections": [
