@@ -180,6 +180,7 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   lines.push('    classDef master fill:#fff3cd,stroke:#856404');
   lines.push('    classDef vscode fill:#e1f0ff,stroke:#0969da');
   lines.push('    classDef m365 fill:#e6f4ea,stroke:#1a7f37');
+  lines.push('    classDef inheritable fill:#f0f0f0,stroke:#888');
   lines.push('    classDef user fill:#e6ffe6,stroke:#2da02d');
   lines.push('');
   lines.push('    %% Styling - Staleness (dashed border)');
@@ -192,12 +193,14 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
   const masterSkills = skills.filter(s => s.inheritance === 'master-only').map(s => toAbbreviation(s.name));
   const vscodeSkills = skills.filter(s => s.inheritance === 'heir:vscode').map(s => toAbbreviation(s.name));
   const m365Skills = skills.filter(s => s.inheritance === 'heir:m365').map(s => toAbbreviation(s.name));
+  const inheritableSkills = skills.filter(s => s.inheritance === 'inheritable' && !s.isTemporary).map(s => toAbbreviation(s.name));
   const userSkills = skills.filter(s => s.isUserCreated).map(s => toAbbreviation(s.name));
   const tempSkills = skills.filter(s => s.isTemporary).map(s => toAbbreviation(s.name));
 
   if (masterSkills.length > 0) lines.push(`    class ${masterSkills.join(',')} master`);
   if (vscodeSkills.length > 0) lines.push(`    class ${vscodeSkills.join(',')} vscode`);
   if (m365Skills.length > 0) lines.push(`    class ${m365Skills.join(',')} m365`);
+  if (inheritableSkills.length > 0) lines.push(`    class ${inheritableSkills.join(',')} inheritable`);
   if (userSkills.length > 0) lines.push(`    class ${userSkills.join(',')} user`);
   if (tempSkills.length > 0) lines.push(`    class ${tempSkills.join(',')} temp`);
 
@@ -225,7 +228,7 @@ Include this legend in generated catalogs:
 | 🟦 Blue | VS Code heir |
 | 🟩 Green | M365 heir |
 | 🟪 Purple (dashed) | Temporary |
-| ⬜ White | Inheritable |
+| ⬜ Gray | Inheritable |
 
 | Border | Meaning |
 | ------ | ------- |

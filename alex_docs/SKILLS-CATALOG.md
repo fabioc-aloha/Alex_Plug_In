@@ -274,6 +274,7 @@ flowchart LR
     classDef master fill:#fff3cd,stroke:#856404
     classDef vscode fill:#e1f0ff,stroke:#0969da
     classDef m365 fill:#e6f4ea,stroke:#1a7f37
+    classDef inheritable fill:#f0f0f0,stroke:#888
 
     %% Styling - Staleness (dashed border)
     classDef stale stroke-dasharray:5 5,stroke-width:2px
@@ -296,12 +297,12 @@ flowchart LR
 | 🟦 Blue | VS Code heir |
 | 🟩 Green | M365 heir |
 | 🟪 Purple (dashed) | Temporary |
-| ⬜ White | Inheritable |
+| ⬜ Gray | Inheritable |
 
 | Border | Meaning |
 | ------ | ------- |
 | ┅ Dashed | Staleness-prone (needs periodic refresh) |
-| ⬜ White | Inheritable (all platforms) |
+| ── Solid | Standard |
 
 | Arrow | Meaning |
 | ----- | ------- |
