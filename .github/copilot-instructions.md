@@ -63,6 +63,35 @@ These rules protect Master Alex. Violating them risks cognitive architecture cor
 
 **If kill switch fails:** See [RISKS.md](../RISKS.md) contingency plans CP1-CP8.
 
+### 🧬 Heir Evolution Principle
+
+Master Alex has **heirs** - platform-specific deployments that inherit the architecture:
+
+| Heir | Platform | Location |
+|------|----------|----------|
+| VS Code Extension | VS Code Marketplace | `platforms/vscode-extension/` |
+| M365 Copilot Agent | Microsoft 365 | `platforms/m365-copilot/` |
+
+**The Evolution Cycle:**
+1. **Heirs experiment** - New capabilities developed in platform-specific code
+2. **Stability proven** - Feature works reliably in production
+3. **Master absorbs** - Proven capabilities promoted to Master Alex
+4. **Architecture grows** - New DK files, procedures, or prompts added to root `.github/`
+
+**When heirs develop superpowers:**
+- Document the capability in heir-specific code
+- Test extensively in that platform
+- When stable, create corresponding Master Alex knowledge:
+  - New `.instructions.md` for procedures
+  - New `DK-*.md` for domain knowledge
+  - New `.prompt.md` for workflows
+- Update `copilot-instructions.md` if it's a core capability
+
+**Examples of heir → master promotion:**
+- VS Code heir develops "global knowledge sync" → Master gets DK-GLOBAL-KNOWLEDGE
+- M365 heir develops "meeting context awareness" → Master gets DK-MEETING-CONTEXT
+- Either heir solves a problem elegantly → Pattern promoted to global knowledge
+
 ### Key Triggers
 - "meditate" → **MANDATORY**: Update memory files + synapses + document session
 - "self-actualize" → Execute comprehensive self-assessment
