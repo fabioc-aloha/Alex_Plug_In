@@ -109,4 +109,3 @@ Alex will recognize the correction and initiate the capture protocol.
 - [architecture-refinement skill](.github/skills/architecture-refinement/SKILL.md) — Operational details
 - [MEMORY-SYSTEMS.md](MEMORY-SYSTEMS.md) — How Alex remembers
 - [COGNITIVE-ARCHITECTURE.md](COGNITIVE-ARCHITECTURE.md) — Overall design
-

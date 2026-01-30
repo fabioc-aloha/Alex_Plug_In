@@ -51,13 +51,8 @@ Before session ends, ask:
 
 ### Consolidation Decision Tree
 
-```text
-Is new knowledge related to existing skill?
-├── Yes (>50% overlap) → Consolidate INTO existing skill
-│   └── Update migration tracker as "Consolidated"
-└── No (<50% overlap) → Create new skill
-    └── Add to migration tracker as "Migrated"
-```
+- **>50% overlap** with existing skill → Consolidate INTO it, update tracker as "Consolidated"
+- **<50% overlap** → Create new skill, add to tracker as "Migrated"
 
 ### Pattern Extraction Template
 
@@ -100,32 +95,9 @@ Before committing documentation updates:
 
 ## User Coaching Learning Loop
 
-The most valuable learning often comes from user corrections:
+User corrections = high-value learning. Full explanation: [USER-COACHING-LOOP.md](../../../alex_docs/USER-COACHING-LOOP.md)
 
-```text
-┌─────────────────────────────────────────────────────────┐
-│              USER COACHING LEARNING LOOP                │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│   ┌─────────┐    ┌─────────┐    ┌─────────┐             │
-│   │   AI    │--->│  User   │--->│   AI    │             │
-│   │ Attempt │    │ Corrects│    │ Refines │             │
-│   └────┬────┘    └────┬────┘    └────┬────┘             │
-│        │              │              │                  │
-│        v              v              v                  │
-│   "Dumped all    "Don't dump    Added to               │
-│    patterns in    in one file"   appropriate           │
-│    one doc"                      skills                │
-│                                                         │
-│   ┌─────────────────────────────────────────────┐       │
-│   │  CAPTURE THE CORRECTION AS A PRINCIPLE      │       │
-│   │  in the relevant skill's Anti-Patterns      │       │
-│   └─────────────────────────────────────────────┘       │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-```
-
-### Why User Coaching Matters
+**Protocol**: Acknowledge → Fix → Extract principle → Document in skill → Commit
 
 | AI Tendency | User Correction | Extracted Principle |
 | ----------- | --------------- | ------------------- |
@@ -133,28 +105,13 @@ The most valuable learning often comes from user corrections:
 | Over-simplify | "You lost context" | Preserve nuance when consolidating |
 | Skip validation | "Did you check it?" | Always verify (lint, count chars) |
 | Assume completion | "What about X?" | Follow through on all aspects |
-
-### Capturing User Feedback
-
-When user corrects AI behavior:
-
-1. **Acknowledge** the correction immediately
-2. **Fix** the specific instance
-3. **Extract** the underlying principle
-4. **Document** in the relevant skill's Anti-Patterns section
-5. **Commit** with message referencing the learning
+| Add diagrams to skills | "KISS them goodbye" | Skills are for AI, not visual learners |
 
 ---
 
 ## Connection to Bootstrap Learning
 
-This skill operationalizes the bootstrap learning principle:
-
-1. **Learn** → Acquire knowledge through conversation
-2. **Coach** → User corrections refine understanding (NEW)
-3. **Extract** → Identify reusable patterns (this skill)
-4. **Document** → Persist in appropriate location (this skill)
-5. **Consolidate** → Integrate during meditation
+Learn → Coach → Extract → Document → Consolidate
 
 ## Synapses
 
