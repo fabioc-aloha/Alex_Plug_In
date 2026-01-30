@@ -1,0 +1,27 @@
+{
+  "skill": "vscode-extension-patterns",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": "release-management.instructions.md",
+      "strength": "high",
+      "relationship": "enables",
+      "direction": "forward",
+      "context": "Publishing workflow"
+    },
+    {
+      "target": "heir-curation",
+      "strength": "high",
+      "relationship": "implements",
+      "direction": "bidirectional",
+      "context": "VS Code heir patterns"
+    }
+  ],
+  "activationPatterns": [
+    "VS Code extension development",
+    "webview implementation",
+    "publishing extension",
+    "settings configuration",
+    "auto-detection features"
+  ]
+}

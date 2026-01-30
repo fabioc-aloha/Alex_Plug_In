@@ -119,4 +119,3 @@ For deeper personality changes, edit `.github/instructions/alex-identity-integra
 > Identity tells Alex who to BE.
 
 Personality isn't applied — it's expressed.
-
