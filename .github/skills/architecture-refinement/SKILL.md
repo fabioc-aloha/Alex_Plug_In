@@ -36,14 +36,18 @@ Before session ends, ask:
 
 ### Documentation Location Guide
 
-| What You Learned | Where to Document |
-| ---------------- | ----------------- |
-| Technical skill pattern | `.github/skills/{name}/SKILL.md` |
-| Architecture evolution | `alex_docs/SKILL-ARCHITECTURE.md` |
-| Process improvement | `.github/instructions/*.instructions.md` |
-| Complex workflow | `.github/prompts/*.prompt.md` |
-| Domain expertise | `.github/domain-knowledge/DK-*.md` |
-| Tool-specific learning | Relevant skill or new skill |
+| What You Learned | Where to Document | Audience |
+| ---------------- | ----------------- | -------- |
+| Technical skill pattern | `.github/skills/{name}/SKILL.md` | Alex (AI) |
+| Important concepts for user | `alex_docs/*.md` | Human |
+| Process improvement | `.github/instructions/*.instructions.md` | Alex (AI) |
+| Complex workflow | `.github/prompts/*.prompt.md` | Alex (AI) |
+| Domain expertise | `.github/domain-knowledge/DK-*.md` | Alex (AI) |
+
+**Key Distinction**:
+
+- `alex_docs/` = For Fabio's benefit (human-readable explanations)
+- `.github/skills/` = For Alex's benefit (operational reference during work)
 
 ### Consolidation Decision Tree
 

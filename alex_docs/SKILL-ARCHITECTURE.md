@@ -10,7 +10,19 @@
 
 A **skill** is a portable, self-contained unit of domain knowledge that works with or without the full Alex cognitive architecture. Skills replace the older `DK-*.md` format.
 
-**Design Principles:**
+## Audience Distinction
+
+| Location | Audience | Purpose |
+| -------- | -------- | ------- |
+| `.github/skills/` | **Alex** (AI) | Operational reference during work |
+| `alex_docs/` | **Fabio** (Human) | Understanding, onboarding, reference |
+
+Skills are written for AI consumption — structured, terse, action-oriented.
+`alex_docs` are written for human consumption — explanatory, contextual, readable.
+
+---
+
+## Design Principles
 
 - **KISS**: Minimum files, maximum clarity
 - **DRY**: Git history = evolution log, no duplication
