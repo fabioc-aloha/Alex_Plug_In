@@ -116,12 +116,12 @@ Skills can be marked as temporary for beta testing or time-limited purposes.
 
 In network diagrams, temporary skills are styled with:
 
-- **Fill**: Orange (#fff0e6)
-- **Stroke**: Orange (#d97706)
+- **Fill**: Purple (#f3e8ff)
+- **Stroke**: Purple (#7c3aed)
 - **Border**: Dashed (stroke-dasharray: 5 5)
 
 ```mermaid
-classDef temp fill:#fff0e6,stroke:#d97706,stroke-dasharray:5 5
+classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5
 class BT temp
 ```
 

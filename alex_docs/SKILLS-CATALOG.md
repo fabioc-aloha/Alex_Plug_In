@@ -278,8 +278,8 @@ flowchart LR
     %% Styling - Staleness (dashed border)
     classDef stale stroke-dasharray:5 5,stroke-width:2px
 
-    %% Styling - Temporary (orange dashed)
-    classDef temp fill:#fff0e6,stroke:#d97706,stroke-dasharray:5 5
+    %% Styling - Temporary (purple dashed)
+    classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5
 
     class HC,MED,SA,ARF,KS,GK,MF,LLM master
     class VEP,CPP vscode
@@ -295,7 +295,7 @@ flowchart LR
 | 🟡 Yellow | Master-only |
 | 🔵 Blue | VS Code heir |
 | 🟢 Green | M365 heir |
-| 🟠 Orange (dashed) | Temporary |
+| � Purple (dashed) | Temporary |
 | ⬜ White | Inheritable |
 
 | Border | Meaning |
