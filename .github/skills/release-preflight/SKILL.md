@@ -104,20 +104,52 @@ vsce publish
 | Published broken build | `npm run compile` in preflight |
 | Version mismatch between files | Single source of truth (package.json), derive others |
 
-## Pre-Release vs Release
+## Platform-Specific Versioning
 
-| Type | Tag Format | Marketplace |
-| ---- | ---------- | ----------- |
-| Pre-release | `3.7.0-beta.1` | Shows as pre-release |
-| Release | `3.7.0` | Shows as stable |
+### VS Code Marketplace Requirements
+
+| Requirement | Rule |
+| ----------- | ---- |
+| Format | SemVer (`major.minor.patch`) |
+| Pre-release | Add `--pre-release` flag, NOT version suffix |
+| Version collision | MUST increment; can't overwrite |
+| Engine compatibility | `engines.vscode` must match target |
 
 ```powershell
-# Pre-release
+# Pre-release (same version number, flag-based)
 vsce publish --pre-release
 
 # Stable release
 vsce publish
 ```
+
+### M365 Developer Portal Requirements
+
+| Requirement | Rule |
+| ----------- | ---- |
+| Format | SemVer in manifest.json |
+| App ID | GUID, immutable after creation |
+| Validation | Must pass `teamsapp validate` |
+| Submission | Manual upload to Developer Portal |
+| Updates | New package upload, same App ID |
+
+```json
+// appPackage/manifest.json
+{
+  "version": "4.0.0",
+  "id": "{{APP_ID}}"
+}
+```
+
+### Version Independence
+
+Heirs can version independently from Master Alex:
+
+| Component | Current | Notes |
+| --------- | ------- | ----- |
+| Master Alex | 3.x.x | Architecture version |
+| VS Code Extension | 3.x.x | Aligned with Master |
+| M365 Agent | 4.x.x | Can diverge (different maturity) |
 
 ## M365 Agent Deployment
 

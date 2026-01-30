@@ -6,6 +6,23 @@ applyTo: "**/*model*,**/*llm*,**/*copilot*,**/*claude*,**/*gpt*"
 
 > Choosing the right model for the task — power vs. cost vs. speed.
 
+## ⚠️ Staleness Warning
+
+This skill depends on rapidly evolving technology. Model capabilities, pricing, and availability change frequently.
+
+**Refresh triggers:**
+
+- New model announcements (Claude, GPT, Gemini, etc.)
+- Significant pricing changes
+- Context window expansions
+- New capability tiers
+
+**Last validated:** January 2026
+
+**Check current state:** [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models), [OpenAI Models](https://platform.openai.com/docs/models)
+
+---
+
 ## The Core Question
 
 > Is Claude Opus 4.5 overkill?
