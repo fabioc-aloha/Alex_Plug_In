@@ -1,0 +1,26 @@
+{
+    "skill": "debugging-patterns",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "git-workflow",
+            "type": "uses",
+            "strength": 0.8
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "applies-to",
+            "strength": 0.75
+        }
+    ],
+    "activationBoost": [
+        "debug",
+        "error",
+        "bug",
+        "fix",
+        "broken",
+        "not working",
+        "fails",
+        "crash"
+    ]
+}
