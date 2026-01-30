@@ -72,10 +72,12 @@ Master Alex has **heirs** - platform-specific deployments that inherit the archi
 | VS Code Extension | VS Code Marketplace | `platforms/vscode-extension/` |
 | M365 Copilot Agent | Microsoft 365 | `platforms/m365-copilot/` |
 
+**⚠️ CRITICAL**: Master Alex is **immune to automatic upgrades** (blocked by kill switch). The heirs are the **only path for Master to evolve**. This is a feature, not a bug - it forces careful, deliberate growth.
+
 **The Evolution Cycle:**
 1. **Heirs experiment** - New capabilities developed in platform-specific code
 2. **Stability proven** - Feature works reliably in production
-3. **Master absorbs** - Proven capabilities promoted to Master Alex
+3. **Master absorbs** - Proven capabilities **manually** promoted to Master Alex
 4. **Architecture grows** - New DK files, procedures, or prompts added to root `.github/`
 
 **When heirs develop superpowers:**
