@@ -292,11 +292,11 @@ flowchart LR
 
 | Color | Inheritance |
 | ----- | ----------- |
-| � Yellow | Master-only |
-| 🟦 Blue | VS Code heir |
-| 🟩 Green | M365 heir |
-| 🟪 Purple (dashed) | Temporary |
-| ⬜ White | Inheritable |
+| Yellow | Master-only |
+| Blue | VS Code heir |
+| Green | M365 heir |
+| Purple (dashed) | Temporary |
+| White | Inheritable |
 
 | Border | Meaning |
 | ------ | ------- |
