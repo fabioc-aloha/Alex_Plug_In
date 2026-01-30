@@ -1,7 +1,7 @@
 # Mermaid Skill Development: A Learning Journey
 
-> **Session Date**: January 30, 2026  
-> **Participants**: Alex (AI) + Fabio (Human)  
+> **Session Date**: January 30, 2026
+> **Participants**: Alex (AI) + Fabio (Human)
 > **Outcome**: New skill created, 40+ diagrams improved, VS Code bug documented
 
 ---
@@ -36,14 +36,14 @@ Subgraph titles were being **truncated** in VS Code's Mermaid preview - text was
 
 ### Iteration 1: Theme Directive Discovery
 
-**Problem**: Dark backgrounds on diagrams  
-**Hypothesis**: Mermaid uses viewer's theme; need explicit light theme  
-**Experiment**: Added `%%{init: {'theme': 'base', 'themeVariables': {...}}}%%`  
+**Problem**: Dark backgrounds on diagrams
+**Hypothesis**: Mermaid uses viewer's theme; need explicit light theme
+**Experiment**: Added `%%{init: {'theme': 'base', 'themeVariables': {...}}}%%`
 **Result**: ✅ Backgrounds now consistently light
 
 **Pattern Captured**:
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 
+%%{init: {'theme': 'base', 'themeVariables': {
   'primaryColor': '#f6f8fa',      /* GitHub's gray-100 */
   'primaryTextColor': '#1f2328',   /* GitHub's gray-900 */
   'primaryBorderColor': '#d1d9e0', /* GitHub's gray-300 */
@@ -55,13 +55,13 @@ Subgraph titles were being **truncated** in VS Code's Mermaid preview - text was
 
 ### Iteration 2: Subgraph Truncation - Failed Attempts
 
-**Problem**: Subgraph title "🧠 Conscious Mind (System 2)" displayed as "🧠 Consci..."  
-**Hypothesis 1**: Invisible characters could pad the title  
-**Experiment**: Added `U+200E` (left-to-right mark) characters  
+**Problem**: Subgraph title "🧠 Conscious Mind (System 2)" displayed as "🧠 Consci..."
+**Hypothesis 1**: Invisible characters could pad the title
+**Experiment**: Added `U+200E` (left-to-right mark) characters
 **Result**: ❌ No effect - characters ignored
 
-**Hypothesis 2**: Em-spaces could force width  
-**Experiment**: Added multiple em-space characters (`\u2003`)  
+**Hypothesis 2**: Em-spaces could force width
+**Experiment**: Added multiple em-space characters (`\u2003`)
 **Result**: ❌ No effect - Mermaid trimmed whitespace
 
 **Learning**: The truncation wasn't a text-length problem.
@@ -86,9 +86,9 @@ Subgraph titles were being **truncated** in VS Code's Mermaid preview - text was
 
 ### Iteration 4: Over-Simplification Lesson
 
-**Context**: Asked to simplify `README.md` diagram  
-**Action**: Aggressively removed labels like "(System 2)" and details  
-**Feedback from Fabio**: 
+**Context**: Asked to simplify `README.md` diagram
+**Action**: Aggressively removed labels like "(System 2)" and details
+**Feedback from Fabio**:
 
 > *"sometimes diagrams need to convey the details, don't over simplify them"*
 
@@ -104,7 +104,7 @@ KISS = Remove unnecessary complexity while preserving meaning
 
 ### Iteration 5: Parse Error Patterns
 
-**Problem**: Some diagrams threw parse errors after theming  
+**Problem**: Some diagrams threw parse errors after theming
 **Root Cause**: Nested quotes and parentheses inside node labels
 
 **Examples Found**:
@@ -164,7 +164,7 @@ Files updated:
 ### Phase 2: Project-Wide Scan (13 diagrams)
 ```powershell
 # Found remaining unthemed diagrams outside alex_docs
-Get-ChildItem -Recurse -Filter "*.md" | 
+Get-ChildItem -Recurse -Filter "*.md" |
   Where-Object { $_.FullName -notmatch "\\archive\\" } |
   Select-String -Pattern '```mermaid' -Context 0,1
 ```

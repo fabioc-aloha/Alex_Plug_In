@@ -382,16 +382,18 @@ flowchart TD
   - **D2** - For clean, executive-level architecture overviews
 - **Example Use Cases**: Microservices architecture, API design, system integration
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
-C4Component
-    title Component Diagram for Internet Banking System
-    Person(customer, "Customer", "Banking customer")
-    Container_Boundary(c1, "Internet Banking") {
-        Component(sign, "Sign In Controller", "MVC Controller", "Allows users to sign in")
-        Component(accounts, "Accounts Summary Controller", "MVC Controller", "Provides customers with an account summary")
-    }
-    customer --> sign
-    customer --> accounts
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
+flowchart TB
+    subgraph BANKING["🏦 Internet Banking System"]
+        direction TB
+        SIGN["📝 Sign In Controller<br/>MVC Controller"]
+        ACCOUNTS["📊 Accounts Summary<br/>MVC Controller"]
+    end
+    
+    CUSTOMER(("👤 Customer"))
+    
+    CUSTOMER -->|"Sign in"| SIGN
+    CUSTOMER -->|"View accounts"| ACCOUNTS
 ```
 
 #### **🔗 Relationships & Dependencies**
