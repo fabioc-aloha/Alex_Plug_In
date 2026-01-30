@@ -253,6 +253,59 @@
 
 ---
 
+## 🎨 UI/UX Enhancements Backlog
+
+> **Goal:** Proactive, delightful user experience across all touchpoints
+
+### Welcome View Enhancements
+
+| # | Feature | Priority | Description |
+|:-:|---------|:--------:|-------------|
+| 1 | Proactive insights | High | Surface relevant knowledge snippets on workspace open |
+| 2 | Learning reminders | High | "You haven't run Dream in 3 days" / "Goal streak at risk!" |
+| 3 | Quick tips carousel | Medium | Rotating tips about Alex capabilities |
+| 4 | Recent activity feed | Medium | Last meditation, last insight saved, etc. |
+| 5 | Skill recommendations | Low | "Based on your work, consider learning X skill" |
+
+### Status Bar Enhancements
+
+| # | Feature | Priority | Description |
+|:-:|---------|:--------:|-------------|
+| 1 | ✅ Session timer display | Done | Shows 🍅 25:00 when focus session active |
+| 2 | ✅ Streak indicator | Done | Shows 🔥7 for active learning streaks |
+| 3 | Sync status indicator | Medium | ☁️ when synced, ⬆️ when pending |
+| 4 | Notification badge | Low | Count of actionable items |
+
+### Proactive Notifications
+
+| # | Feature | Priority | Description |
+|:-:|---------|:--------:|-------------|
+| 1 | Dream reminder | High | Auto-suggest after major file changes |
+| 2 | Streak protection | High | Warn when daily goal at risk |
+| 3 | Knowledge decay | Medium | Suggest review of stale DK files |
+| 4 | Insight opportunities | Medium | "You solved X - want to save as insight?" |
+| 5 | Meditation prompt | Low | After extended coding session |
+
+### Quick Actions Improvements
+
+| # | Feature | Priority | Description |
+|:-:|---------|:--------:|-------------|
+| 1 | ✅ Grouped actions | Done | Core, Knowledge, Tools, System categories |
+| 2 | Context-aware actions | Medium | Show relevant actions based on current file |
+| 3 | Keyboard shortcuts display | Low | Show all shortcuts in tooltip |
+| 4 | Favorites/pinned actions | Low | User can pin most-used actions |
+
+### Beta Tester Experience
+
+| # | Feature | Priority | Description |
+|:-:|---------|:--------:|-------------|
+| 1 | ✅ Beta badge | Done | Clickable badge opens diagnostics |
+| 2 | Feedback button | Medium | Quick link to submit feedback |
+| 3 | Feature flags UI | Low | Toggle experimental features |
+| 4 | Beta changelog popup | Low | Show what's new in beta releases |
+
+---
+
 ## 📊 Timeline Summary
 
 | Version | Focus | Master | VS Code | M365 | Duration |

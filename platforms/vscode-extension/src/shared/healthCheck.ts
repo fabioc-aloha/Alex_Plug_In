@@ -2,6 +2,24 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
+// Import session info (lazy to avoid circular deps)
+let getSessionInfo: (() => { active: boolean; remaining: number; isBreak: boolean } | null) | null = null;
+let getStreakInfo: (() => Promise<number>) | null = null;
+
+/**
+ * Register session provider for status bar (called from extension.ts)
+ */
+export function registerSessionProvider(provider: () => { active: boolean; remaining: number; isBreak: boolean } | null): void {
+    getSessionInfo = provider;
+}
+
+/**
+ * Register streak provider for status bar (called from extension.ts)
+ */
+export function registerStreakProvider(provider: () => Promise<number>): void {
+    getStreakInfo = provider;
+}
+
 /**
  * Health status levels
  */
@@ -194,34 +212,73 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
 /**
  * Get status bar text and icon based on health
  */
-export function getStatusBarDisplay(health: HealthCheckResult): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
+export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { active: boolean; remaining: number; isBreak: boolean } | null, streakDays?: number): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
+    // Build status parts
+    let statusEmoji = '🟢';
+    let bgColor: vscode.ThemeColor | undefined = undefined;
+    
+    switch (health.status) {
+        case HealthStatus.Warning:
+            statusEmoji = '🟡';
+            bgColor = new vscode.ThemeColor('statusBarItem.warningBackground');
+            break;
+        case HealthStatus.Error:
+            statusEmoji = '🔴';
+            bgColor = new vscode.ThemeColor('statusBarItem.errorBackground');
+            break;
+        case HealthStatus.NotInitialized:
+            statusEmoji = '⚫';
+            break;
+    }
+
+    // Build text parts
+    const parts: string[] = [`$(brain) Alex ${statusEmoji}`];
+    
+    // Add session if active
+    if (sessionInfo?.active) {
+        const mins = Math.floor(sessionInfo.remaining / 60);
+        const secs = sessionInfo.remaining % 60;
+        const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
+        const icon = sessionInfo.isBreak ? '☕' : '🍅';
+        parts.push(`${icon} ${timeStr}`);
+    }
+    
+    // Add streak if > 0
+    if (streakDays && streakDays > 0) {
+        parts.push(`🔥${streakDays}`);
+    }
+
+    const text = parts.join(' | ');
+    
+    // Build tooltip
+    let tooltip = '';
     switch (health.status) {
         case HealthStatus.Healthy:
-            return {
-                text: '$(brain) Alex 🟢',
-                tooltip: `✅ Alex Healthy\n${health.summary}\n\nClick for quick actions`,
-                backgroundColor: undefined
-            };
+            tooltip = `✅ Alex Healthy\n${health.summary}`;
+            break;
         case HealthStatus.Warning:
-            return {
-                text: '$(brain) Alex 🟡',
-                tooltip: `⚠️ Alex Warning\n${health.summary}\n${health.issues.join('\n')}\n\nClick to run diagnostics`,
-                backgroundColor: new vscode.ThemeColor('statusBarItem.warningBackground')
-            };
+            tooltip = `⚠️ Alex Warning\n${health.summary}\n${health.issues.join('\n')}`;
+            break;
         case HealthStatus.Error:
-            return {
-                text: '$(brain) Alex 🔴',
-                tooltip: `❌ Alex Error\n${health.summary}\n${health.issues.join('\n')}\n\nClick to repair`,
-                backgroundColor: new vscode.ThemeColor('statusBarItem.errorBackground')
-            };
+            tooltip = `❌ Alex Error\n${health.summary}\n${health.issues.join('\n')}`;
+            break;
         case HealthStatus.NotInitialized:
         default:
-            return {
-                text: '$(brain) Alex ⚫',
-                tooltip: `Alex not initialized in this workspace\n\nClick to initialize`,
-                backgroundColor: undefined
-            };
+            tooltip = `Alex not initialized in this workspace`;
+            break;
     }
+    
+    if (sessionInfo?.active) {
+        tooltip += `\n\n${sessionInfo.isBreak ? '☕ Break' : '🍅 Focus'} session active`;
+    }
+    
+    if (streakDays && streakDays > 0) {
+        tooltip += `\n🔥 ${streakDays} day streak!`;
+    }
+    
+    tooltip += '\n\nClick for quick actions';
+
+    return { text, tooltip, backgroundColor: bgColor };
 }
 
 /**

@@ -21,8 +21,9 @@ import {
   togglePauseSession,
   showSessionActions,
   disposeSession,
+  getCurrentSession,
 } from "./commands/session";
-import { registerGoalsCommands } from "./commands/goals";
+import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
 import { registerLanguageModelTools } from "./chat/tools";
@@ -44,6 +45,8 @@ import {
   getStatusBarDisplay,
   clearHealthCache,
   HealthStatus,
+  registerSessionProvider,
+  registerStreakProvider,
 } from "./shared/healthCheck";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
@@ -730,7 +733,23 @@ async function updateStatusBar(
 ): Promise<void> {
   try {
     const health = await checkHealth(forceRefresh);
-    const display = getStatusBarDisplay(health);
+    
+    // Get session info
+    const session = getCurrentSession();
+    const sessionInfo = session ? {
+      active: true,
+      remaining: session.remaining,
+      isBreak: session.isBreak
+    } : null;
+    
+    // Get streak info
+    let streakDays = 0;
+    try {
+      const goalsSummary = await getGoalsSummary();
+      streakDays = goalsSummary.streakDays;
+    } catch { /* ignore */ }
+    
+    const display = getStatusBarDisplay(health, sessionInfo, streakDays);
 
     statusBarItem.text = display.text;
     statusBarItem.tooltip = display.tooltip;
