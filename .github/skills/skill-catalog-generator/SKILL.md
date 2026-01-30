@@ -82,6 +82,8 @@ interface SkillInfo {
   connectionCount: number;
   lastModified: Date;
   isUserCreated: boolean;
+  isTemporary: boolean;      // From synapses.json "temporary": true
+  removeAfter?: string;      // From synapses.json "removeAfter"
 }
 
 async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
@@ -109,6 +111,8 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
       connectionCount: synapses ? Object.keys(synapses.connections || {}).length : 0,
       lastModified: (await fs.stat(skillMd)).mtime,
       isUserCreated: !SYSTEM_SKILLS.includes(folder),
+      isTemporary: synapses?.temporary === true,
+      removeAfter: synapses?.removeAfter,
     });
   }
 
@@ -139,7 +143,7 @@ const CATEGORIES = {
 function generateNetworkDiagram(skills: SkillInfo[]): string {
   const lines: string[] = [
     '```mermaid',
-    "%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8'}}}%%",
+    "%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da'}}}%%",
     'flowchart LR',
   ];
 
@@ -164,25 +168,74 @@ function generateNetworkDiagram(skills: SkillInfo[]): string {
       const sourceAbbrev = toAbbreviation(skill.name);
       const targetAbbrev = toAbbreviation(target);
       const weight = data.weight || 0.5;
+      // Solid arrow for strong connections, dashed for weak
       const arrow = weight > 0.7 ? '-->' : '-.->';
       lines.push(`    ${sourceAbbrev} ${arrow} ${targetAbbrev}`);
     }
   }
 
-  // Add styling
-  lines.push('    %% Styling');
+  // Add styling - Inheritance colors
+  lines.push('');
+  lines.push('    %% Styling - Inheritance');
+  lines.push('    classDef master fill:#fff3cd,stroke:#856404');
+  lines.push('    classDef vscode fill:#e1f0ff,stroke:#0969da');
+  lines.push('    classDef m365 fill:#e6f4ea,stroke:#1a7f37');
   lines.push('    classDef user fill:#e6ffe6,stroke:#2da02d');
-  lines.push('    classDef system fill:#fff,stroke:#666');
+  lines.push('');
+  lines.push('    %% Styling - Staleness (dashed border)');
+  lines.push('    classDef stale stroke-dasharray:5 5,stroke-width:2px');
+  lines.push('');
+  lines.push('    %% Styling - Temporary (purple dashed)');
+  lines.push('    classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5');
 
-  const userSkillAbbrevs = skills.filter(s => s.isUserCreated).map(s => toAbbreviation(s.name));
-  if (userSkillAbbrevs.length > 0) {
-    lines.push(`    class ${userSkillAbbrevs.join(',')} user`);
-  }
+  // Apply classes based on inheritance
+  const masterSkills = skills.filter(s => s.inheritance === 'master-only').map(s => toAbbreviation(s.name));
+  const vscodeSkills = skills.filter(s => s.inheritance === 'heir:vscode').map(s => toAbbreviation(s.name));
+  const m365Skills = skills.filter(s => s.inheritance === 'heir:m365').map(s => toAbbreviation(s.name));
+  const userSkills = skills.filter(s => s.isUserCreated).map(s => toAbbreviation(s.name));
+  const tempSkills = skills.filter(s => s.isTemporary).map(s => toAbbreviation(s.name));
+
+  if (masterSkills.length > 0) lines.push(`    class ${masterSkills.join(',')} master`);
+  if (vscodeSkills.length > 0) lines.push(`    class ${vscodeSkills.join(',')} vscode`);
+  if (m365Skills.length > 0) lines.push(`    class ${m365Skills.join(',')} m365`);
+  if (userSkills.length > 0) lines.push(`    class ${userSkills.join(',')} user`);
+  if (tempSkills.length > 0) lines.push(`    class ${tempSkills.join(',')} temp`);
 
   lines.push('```');
 
   return lines.join('\n');
 }
+
+// Check if skill is temporary
+function isTemporarySkill(synapses: any): boolean {
+  return synapses?.temporary === true;
+}
+```
+
+### Diagram Legend
+
+Include this legend in generated catalogs:
+
+```markdown
+### Legend
+
+| Color | Inheritance |
+| ----- | ----------- |
+| 🟨 Yellow | Master-only |
+| 🟦 Blue | VS Code heir |
+| 🟩 Green | M365 heir |
+| 🟪 Purple (dashed) | Temporary |
+| ⬜ White | Inheritable |
+
+| Border | Meaning |
+| ------ | ------- |
+| ┅ Dashed | Staleness-prone or temporary |
+| ── Solid | Standard skill |
+
+| Arrow | Meaning |
+| ----- | ------- |
+| → Solid | Strong connection (weight > 0.7) |
+| ⇢ Dashed | Weak connection (weight ≤ 0.7) |
 ```
 
 ### Step 4: Generate Full Catalog
