@@ -47,6 +47,8 @@ v    Down arrow (lowercase v)
 | `◄──►` | Mixed arrows = guaranteed misalign | `<-->` |
 | `✅ ❌ ⚠️` | Emojis = 2 chars, render as 1 | `[x] [!] [?]` |
 
+**Note**: `→` in prose is fine (e.g., "A → B means..."). Only avoid inside ASCII box diagrams.
+
 ---
 
 ## Validation Checklist
@@ -125,6 +127,15 @@ $valid = @(67, 75, 91)  # Multiple valid widths
 $content | Where-Object { $_ -match '^\│' } | ForEach-Object {
     if ($_.Length -notin $valid) { "[$($_.Length)] $_" }
 }
+```
+
+### Find Problematic Unicode Characters
+
+Scan multiple files for Unicode arrows that should be ASCII:
+
+```powershell
+Select-String -Path "*.md" -Pattern '[▼▲◄►]' | 
+    Select-Object Filename, LineNumber, Line
 ```
 
 ---
