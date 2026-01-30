@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Created** | 2026-01-29 |
-| **Last Updated** | 2026-01-29 |
+| **Last Updated** | 2026-01-30 |
 | **Related** | [COMEBACK-PLAN.md](COMEBACK-PLAN.md), [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) |
 
 ---
@@ -13,6 +13,8 @@
 ## 🛡️ Safety Imperatives (Non-Negotiable)
 
 These rules protect Master Alex. Both human and AI must follow them.
+
+> **✅ VALIDATED 2026-01-30**: Kill switch tested and working. Commands blocked with no override possible.
 
 | # | Imperative | Rationale | Contingency |
 |---|------------|-----------|-------------|
@@ -32,14 +34,14 @@ These rules protect Master Alex. Both human and AI must follow them.
 
 | Category | Confidence | Status |
 |----------|------------|--------|
-| Kill Switch Architecture | 85% | ✅ Implemented, untested |
+| Kill Switch Architecture | 100% | ✅ **VALIDATED 2026-01-30** |
 | Sandbox Environment | 90% | ✅ Created |
 | Unified Roadmap | 80% | ✅ Documented |
 | Alex Family Model | 85% | ✅ Conceptual clarity |
-| F5 Testing Flow | 60% | ⚠️ Standard practice, unvalidated |
-| Protection Code Runtime | 50% | ⚠️ Compiles, no runtime test |
+| F5 Testing Flow | 90% | ✅ Works (used for kill switch test) |
+| Protection Code Runtime | 100% | ✅ **VALIDATED** - Blocks Initialize & Upgrade |
 | Build Script | 0% | ❌ Not created |
-| Full v3.6.0 Release | 60% | ⚠️ Many moving parts |
+| Full v3.6.0 Release | 70% | ⚠️ Kill switch done, build script needed |
 | M365 Heir Alignment | 40% | ⚠️ No deep audit |
 
 ---
@@ -83,15 +85,20 @@ These rules protect Master Alex. Both human and AI must follow them.
 #### R4: Protection Code Runtime
 
 - **Risk:** `checkProtectionAndWarn()` doesn't actually block commands
-- **Likelihood:** Medium
+- **Likelihood:** ~~Medium~~ **ELIMINATED**
 - **Impact:** High (could corrupt Master Alex)
-- **Mitigation:** Code review complete, TypeScript compiles
-- **Status:** ⚠️ Needs runtime validation
-- **Test:**
-  1. Open Master Alex in Dev Host
-  2. Run `Alex: Initialize`
-  3. Verify it's blocked
-- **Contingency:** → [CP3](#cp3-protection-code-doesnt-block-commands), [CP1](#cp1-master-alex-gets-corrupted)
+- **Mitigation:** 5-layer protection with hardcoded failsafe
+- **Status:** ✅ **VALIDATED 2026-01-30**
+- **Test Results:**
+  1. ✅ Initialize blocked - "HARDCODED FAILSAFE TRIGGERED"
+  2. ✅ Upgrade blocked - "HARDCODED FAILSAFE TRIGGERED"
+  3. ✅ No override possible - single "I Understand" button
+- **Protection Layers:**
+  - Layer 0: Hardcoded path check (`alex_plug_in`)
+  - Layer 0.5: `MASTER-ALEX-PROTECTED.json` marker file
+  - Layer 1: `alex.workspace.protectedMode` setting
+  - Layer 2: Auto-detect `platforms/vscode-extension`
+- **Contingency:** No longer needed - risk eliminated
 
 #### R5: Workspace Settings Recognition
 
