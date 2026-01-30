@@ -21,6 +21,7 @@
 | [Project Structure](./PROJECT-STRUCTURE.md) | .github folder files and functions |
 | [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md) | Cross-project learning system |
 | [Cloud Sync](./CLOUD-SYNC.md) | GitHub Gist backup and sharing |
+| [Workspace Protection](./WORKSPACE-PROTECTION.md) | 🛡️ Kill switch and safety system |
 | [Quick Reference](./QUICK-REFERENCE.md) | Commands, tools, and shortcuts |
 
 ---
