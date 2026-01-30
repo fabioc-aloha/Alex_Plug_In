@@ -106,16 +106,18 @@
 
 These skills depend on rapidly evolving technology or regulations:
 
-| Skill | Why Stale | Refresh Triggers |
-|-------|-----------|------------------|
-| llm-model-selection | New models frequently | Model announcements, pricing |
-| vscode-extension-patterns | Monthly VS Code releases | API changes, deprecations |
-| chat-participant-patterns | Proposed APIs evolving | API graduation, new features |
-| m365-agent-debugging | Schema versions change | New schema, capabilities |
-| teams-app-patterns | Platform evolution | Toolkit updates, manifest versions |
-| git-workflow | GitHub features evolve | CLI updates, Actions changes |
-| privacy-responsible-ai | Regulations change | New laws, AI regulations |
-| microsoft-sfi | Security landscape shifts | New vulnerabilities, practices |
+| Skill | Why Stale | Refresh Triggers | Updated By |
+|-------|-----------|------------------|------------|
+| vscode-extension-patterns | Monthly VS Code releases | API changes, deprecations | VS Code heir |
+| chat-participant-patterns | Proposed APIs evolving | API graduation, new features | VS Code heir |
+| m365-agent-debugging | Schema versions change | New schema, capabilities | M365 heir |
+| teams-app-patterns | Platform evolution | Toolkit updates, manifest versions | M365 heir |
+| llm-model-selection | New models frequently | Model announcements, pricing | Master |
+| git-workflow | GitHub features evolve | CLI updates, Actions changes | Master |
+| privacy-responsible-ai | Regulations change | New laws, AI regulations | Master |
+| microsoft-sfi | Security landscape shifts | New vulnerabilities, practices | Master |
+
+**Update Flow:** Platform heirs update their skills first (they encounter changes in practice), then promote stable updates to Master. Master updates inheritable skills directly.
 
 ---
 
@@ -250,13 +252,18 @@ flowchart LR
     MAD --> TAP
     RF --> VEP & TAP
 
-    %% Styling
+    %% Styling - Inheritance
     classDef master fill:#fff3cd,stroke:#856404
     classDef vscode fill:#e1f0ff,stroke:#0969da
     classDef m365 fill:#e6f4ea,stroke:#1a7f37
+
+    %% Styling - Staleness (dashed border)
+    classDef stale stroke-dasharray:5 5,stroke-width:2px
+
     class HC,MED,SA,ARF,KS,GK,MF,LLM master
     class VEP,CPP vscode
     class MAD,TAP m365
+    class VEP,CPP,MAD,TAP,LLM,GW,PRA,SFI stale
 ```
 
 ### Legend
@@ -266,6 +273,11 @@ flowchart LR
 | 🟡 Yellow | Master-only |
 | 🔵 Blue | VS Code heir |
 | 🟢 Green | M365 heir |
+| ⬜ White | Inheritable |
+
+| Border | Meaning |
+| ------ | ------- |
+| ┅ Dashed | Staleness-prone (needs periodic refresh) |
 | ⬜ White | Inheritable (all platforms) |
 
 | Arrow | Meaning |
