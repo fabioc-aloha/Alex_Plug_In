@@ -136,6 +136,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const session = getCurrentSession();
 
       this._view.webview.html = this._getHtmlContent(
+        this._view.webview,
         health,
         knowledgeSummary,
         syncStatus,
@@ -212,6 +213,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlContent(
+    webview: vscode.Webview,
     health: HealthCheckResult,
     knowledge: { totalPatterns: number; totalInsights: number } | null,
     syncStatus: { status: string; message: string },
@@ -223,6 +225,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       totalCompleted: number;
     },
   ): string {
+    // Logo URI for webview
+    const logoUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "assets", "logo.svg")
+    );
+
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthIcon = isHealthy
@@ -291,7 +298,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            font-size: 24px;
+            width: 24px;
+            height: 24px;
         }
         .header-title {
             font-size: 14px;
@@ -467,7 +475,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <span class="header-icon">🧠</span>
+            <img src="${logoUri}" alt="Alex" class="header-icon" />
             <span class="header-title">Alex Cognitive</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
