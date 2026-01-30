@@ -165,4 +165,4 @@ When facing similar challenges:
 
 ---
 
-*Domain knowledge captured from Phoenix crisis recovery — v3.6.0 Dawn*
+*Domain knowledge captured from Phoenix crisis recovery*

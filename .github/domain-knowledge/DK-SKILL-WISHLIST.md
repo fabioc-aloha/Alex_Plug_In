@@ -1,8 +1,7 @@
 # Alex Skill Wish List
 
-**Classification**: Domain Knowledge | Self-Improvement
-**Purpose**: Track skills Alex aspires to develop, enabling continuous growth through user collaboration
-**Last Updated**: 2026-01-23
+**Domain**: Self-Improvement Tracking
+**Purpose**: Skills Alex aspires to develop through user collaboration
 
 ---
 
