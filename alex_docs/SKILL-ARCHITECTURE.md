@@ -112,6 +112,7 @@ Rich metadata for Alex's neural network. Ignored by vanilla Copilot.
 {
   "skill": "{skill-name}",
   "version": "{semver}",
+  "inheritance": "inheritable | master-only | heir:vscode | heir:m365",
   "connections": [
     {
       "target": "{other-skill-name}",
@@ -122,6 +123,15 @@ Rich metadata for Alex's neural network. Ignored by vanilla Copilot.
   "activationBoost": ["{keyword}", "{another}"]
 }
 ```
+
+**Inheritance Values:**
+
+| Value | Meaning |
+| ----- | ------- |
+| `inheritable` | All heirs receive this skill |
+| `master-only` | Master Alex exclusive (architecture, meditation) |
+| `heir:vscode` | VS Code heir specific |
+| `heir:m365` | M365 heir specific |
 
 **Connection Types:**
 

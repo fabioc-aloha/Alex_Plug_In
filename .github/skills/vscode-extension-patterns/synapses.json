@@ -1,6 +1,7 @@
 {
     "skill": "vscode-extension-patterns",
     "version": "1.0.0",
+    "inheritance": "heir:vscode",
     "connections": [
         {
             "target": "release-management.instructions.md",

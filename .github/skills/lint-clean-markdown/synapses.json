@@ -2,6 +2,7 @@
     "$schema": "../../instructions/SYNAPSE-SCHEMA.md",
     "skill": "lint-clean-markdown",
     "version": "1.0.0",
+    "inheritance": "inheritable",
     "description": "Write markdown that passes linting on first attempt",
     "connections": [
         {

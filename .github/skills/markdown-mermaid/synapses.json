@@ -1,6 +1,7 @@
 {
     "skill": "markdown-mermaid",
     "version": "1.0.0",
+    "inheritance": "inheritable",
     "connections": [
         {
             "target": "advanced-diagramming",
