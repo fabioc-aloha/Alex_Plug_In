@@ -263,15 +263,15 @@ Keep these as-is (don't migrate to skills):
 
 ### ✅ Migrated to Skills
 
-| Old DK-* File | New Skill | Status |
-| ------------- | --------- | ------ |
-| `DK-MARKDOWN-MERMAID-MASTERY.md` | `markdown-mermaid` | ✅ Complete |
+| Old DK-* File | New Skill | Status | Notes |
+| ------------- | --------- | ------ | ----- |
+| `DK-MARKDOWN-MERMAID-MASTERY.md` | `markdown-mermaid` | ✅ Complete | Initial skill |
+| `DK-ADVANCED-DIAGRAMMING.md` | `markdown-mermaid` | ✅ Consolidated | Merged into existing skill (KISS) |
 
 ### 📋 Candidates for Migration (Heir-Portable)
 
 | DK-* File | Proposed Skill | Priority | Notes |
 | --------- | -------------- | -------- | ----- |
-| `DK-ADVANCED-DIAGRAMMING.md` | `advanced-diagramming` | High | Connected to markdown-mermaid |
 | `DK-DOCUMENTATION-EXCELLENCE.md` | `documentation-excellence` | High | Connected to markdown-mermaid |
 | `DK-VSCODE-EXTENSION-PATTERNS.md` | `vscode-extension-patterns` | High | Useful to extension heirs |
 | `DK-RECOMMENDED-ENVIRONMENT.md` | `recommended-environment` | Medium | Setup guidance |
@@ -308,6 +308,62 @@ Keep these as-is (don't migrate to skills):
 
 ---
 
+## Patterns Learned
+
+### Consolidation Over Proliferation
+
+**Pattern**: When migrating DK files, consider consolidating related topics into existing skills rather than creating new ones.
+
+**Example**: `DK-ADVANCED-DIAGRAMMING.md` (973 lines) was consolidated INTO `markdown-mermaid` rather than creating a separate `advanced-diagramming` skill.
+
+**Why**:
+
+- One source of truth (DRY)
+- Fewer files to maintain (KISS)
+- Stronger, more comprehensive skill
+- Avoids synapse complexity between related skills
+
+**Decision Rule**: If two DK files share >50% audience/context, consolidate. If <50%, keep separate.
+
+### Skill Content Guidelines
+
+**Include**:
+
+- Practical patterns and templates
+- Quick reference tables
+- Troubleshooting guides
+- Tool recommendations
+- "Don't over-simplify" warnings where appropriate
+
+**Exclude** (moved from DK bloat):
+
+- Academic citation lists (just include 3-5 key references)
+- Embedded JSON synapse blocks (use synapses.json)
+- Risk assessment frameworks (too generic)
+- Performance metrics tables (not actionable)
+- Verbose capability descriptions
+
+**Result**: 973-line DK → 558-line skill (42% reduction, same value)
+
+### Collaborative Skill Development
+
+**Pattern**: Document the learning journey, not just the outcome.
+
+**Example**: `alex_docs/MERMAID-SKILL-DEVELOPMENT.md` captures:
+
+- Failed hypotheses (invisible chars, em-spaces)
+- Root cause discovery (VS Code bug, GitHub works)
+- Human-AI complementarity (who caught what)
+- The "don't over-simplify" lesson
+
+**Why**:
+
+- Helps future sessions avoid same dead ends
+- Captures human judgment that AI alone missed
+- Demonstrates bootstrap learning in action
+
+---
+
 ## Maintenance Model
 
 | When | What | Effort |
@@ -318,6 +374,7 @@ Keep these as-is (don't migrate to skills):
 | Never | Metrics, counters, logs | Zero |
 
 **Why it scales:**
+
 - 2 files max per skill (KISS)
 - Git = history (DRY)
 - Event-driven updates, not continuous
