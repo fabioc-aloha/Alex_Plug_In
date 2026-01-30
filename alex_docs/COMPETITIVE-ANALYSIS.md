@@ -22,6 +22,7 @@ The AI coding assistant market has exploded since 2023, with major players compe
 ## 🏆 Competitive Landscape Overview
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'lineColor': '#656d76', 'fontSize': '14px'}}}%%
 mindmap
   root((AI Assistant Landscape 2026))
     Code Completion
@@ -472,6 +473,7 @@ Amazon has announced **Alexa+** with LLM capabilities and "Remarkable Alexa" for
 ### Where Alex Fits
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
 quadrantChart
     title AI Assistants: Task Completion vs Learning/Growth
     x-axis Generic --> Personalized
