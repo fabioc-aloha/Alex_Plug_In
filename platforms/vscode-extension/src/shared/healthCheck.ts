@@ -213,6 +213,22 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
  * Get status bar text and icon based on health
  */
 export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { active: boolean; remaining: number; isBreak: boolean } | null, streakDays?: number): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
+    // Special case: Not initialized - show enticing preview
+    if (health.status === HealthStatus.NotInitialized) {
+        return {
+            text: '$(brain) Alex ⚫ | 🍅 Focus | 🔥 Streaks | 💡 Knowledge',
+            tooltip: `🚀 Initialize Alex to unlock:\n\n` +
+                `🍅 Focus Sessions - Pomodoro timer for deep work\n` +
+                `🔥 Learning Streaks - Build daily learning habits\n` +
+                `💡 Knowledge Base - Save insights across projects\n` +
+                `☁️ Cloud Sync - Access your knowledge anywhere\n` +
+                `🧠 Dream Protocol - Cognitive maintenance\n` +
+                `✨ Self-Actualization - Deep reflection\n\n` +
+                `Click to initialize and start your journey!`,
+            backgroundColor: undefined
+        };
+    }
+
     // Build status parts
     let statusEmoji = '🟢';
     let bgColor: vscode.ThemeColor | undefined = undefined;
@@ -225,9 +241,6 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
         case HealthStatus.Error:
             statusEmoji = '🔴';
             bgColor = new vscode.ThemeColor('statusBarItem.errorBackground');
-            break;
-        case HealthStatus.NotInitialized:
-            statusEmoji = '⚫';
             break;
     }
 
@@ -261,10 +274,6 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
             break;
         case HealthStatus.Error:
             tooltip = `❌ Alex Error\n${health.summary}\n${health.issues.join('\n')}`;
-            break;
-        case HealthStatus.NotInitialized:
-        default:
-            tooltip = `Alex not initialized in this workspace`;
             break;
     }
     
