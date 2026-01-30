@@ -110,7 +110,7 @@ KISS = Remove unnecessary complexity while preserving meaning
 
 **Examples Found**:
 
-```mermaid
+```text
 %% ❌ FAILS - Nested quotes
 ["Return with<br/>"🌐 Global Knowledge Results<br/>(Unconscious Retrieval)"]
 
