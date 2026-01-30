@@ -112,12 +112,64 @@ else {
 Write-Host "🏷️  Release type: $releaseType" -ForegroundColor White
 
 # ============================================
+# STEP 0: Check for version mismatches
+# ============================================
+Write-Host "`n🔍 Checking version consistency..." -ForegroundColor Yellow
+
+$repoRoot = Resolve-Path (Join-Path $scriptDir "..\..")
+$mismatches = @()
+
+# Check README.md badge
+$readmePath = Join-Path $scriptDir "README.md"
+if (Test-Path $readmePath) {
+    $readmeContent = Get-Content $readmePath -Raw
+    if ($readmeContent -match 'version-(\d+\.\d+\.\d+)') {
+        $readmeVersion = $Matches[1]
+        if ($readmeVersion -ne $version) {
+            $mismatches += "README.md badge: $readmeVersion"
+        }
+    }
+}
+
+# Check root copilot-instructions.md
+$rootCopilotInstructions = Join-Path $repoRoot ".github\copilot-instructions.md"
+if (Test-Path $rootCopilotInstructions) {
+    $content = Get-Content $rootCopilotInstructions -Raw
+    if ($content -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
+        $copilotVersion = $Matches[1]
+        if ($copilotVersion -ne $version) {
+            $mismatches += "copilot-instructions.md: $copilotVersion"
+        }
+    }
+}
+
+# Check CHANGELOG.md for latest version
+$changelogPath = Join-Path $repoRoot "CHANGELOG.md"
+if (Test-Path $changelogPath) {
+    $changelogContent = Get-Content $changelogPath -Raw
+    if ($changelogContent -match '## \[(\d+\.\d+\.\d+)\]') {
+        $changelogVersion = $Matches[1]
+        # Only warn if changelog is ahead (we might be about to release)
+        if ([version]$changelogVersion -gt [version]$version) {
+            $mismatches += "CHANGELOG.md: $changelogVersion (ahead of package.json)"
+        }
+    }
+}
+
+if ($mismatches.Count -gt 0) {
+    Write-Host "⚠️  Version mismatches detected (will be fixed by sync):" -ForegroundColor Yellow
+    foreach ($m in $mismatches) {
+        Write-Host "   - $m" -ForegroundColor DarkYellow
+    }
+}
+else {
+    Write-Host "  ✓ All versions consistent" -ForegroundColor DarkGray
+}
+
+# ============================================
 # STEP 1: Sync version numbers across all files
 # ============================================
 Write-Host "`n📝 Syncing version numbers..." -ForegroundColor Yellow
-
-# Files to update with version
-$repoRoot = Resolve-Path (Join-Path $scriptDir "..\..")
 
 # Update copilot-instructions.md
 $copilotInstructions = Join-Path $scriptDir ".github\copilot-instructions.md"
@@ -142,8 +194,8 @@ if (Test-Path $rootCopilotInstructions) {
 $readmePath = Join-Path $scriptDir "README.md"
 if (Test-Path $readmePath) {
     $content = Get-Content $readmePath -Raw
-    # Update version badge: version-X.X.X or version-X.X.X--beta.N
-    $content = $content -replace '(?<=version-)\d+\.\d+\.\d+(--beta\.\d+)?', "$version--beta.3"
+    # Update version badge: version-X.X.X (just the version, no suffix)
+    $content = $content -replace '(?<=version-)\d+\.\d+\.\d+(--[a-zA-Z0-9.]+)?', $version
     Set-Content $readmePath $content -NoNewline
     Write-Host "  ✓ README.md badge" -ForegroundColor DarkGray
 }
