@@ -48,9 +48,9 @@ async function handleRequest(
 ) {
     // Stream markdown incrementally
     response.markdown('Processing...\n\n');
-    
+
     const result = await longRunningOperation();
-    
+
     response.markdown(`Result: ${result}`);
 }
 ```
@@ -116,7 +116,7 @@ tool.inputSchema = {
 async function handleRequest(request, context, response, token) {
     // Access conversation history
     const history = context.history;
-    
+
     for (const turn of history) {
         if (turn instanceof vscode.ChatRequestTurn) {
             console.log('User said:', turn.prompt);
@@ -124,7 +124,7 @@ async function handleRequest(request, context, response, token) {
             console.log('Alex said:', turn.response);
         }
     }
-    
+
     // Access referenced files
     const references = request.references;
     for (const ref of references) {
@@ -169,7 +169,7 @@ try {
 } catch (error) {
     // Don't crash - show friendly error
     response.markdown(`⚠️ Something went wrong: ${error.message}`);
-    
+
     // Log for debugging
     console.error('Chat error:', error);
 }

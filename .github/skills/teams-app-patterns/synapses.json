@@ -1,17 +1,24 @@
 {
-  "skill": "teams-app-patterns",
-  "inheritance": "heir:m365",
-  "connections": [
-    {
-      "target": "m365-agent-debugging",
-      "type": "extends",
-      "reason": "Covers more than just declarative agents"
-    },
-    {
-      "target": "release-preflight",
-      "type": "uses",
-      "reason": "Teams apps need release process"
-    }
-  ],
-  "triggers": ["Teams app", "Teams bot", "adaptive card", "message extension", "Teams tab", "Teams toolkit"]
+    "skill": "teams-app-patterns",
+    "inheritance": "heir:m365",
+    "connections": [
+        {
+            "target": "m365-agent-debugging",
+            "type": "extends",
+            "reason": "Covers more than just declarative agents"
+        },
+        {
+            "target": "release-preflight",
+            "type": "uses",
+            "reason": "Teams apps need release process"
+        }
+    ],
+    "triggers": [
+        "Teams app",
+        "Teams bot",
+        "adaptive card",
+        "message extension",
+        "Teams tab",
+        "Teams toolkit"
+    ]
 }

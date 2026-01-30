@@ -219,7 +219,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 ### Skills Store (.github/skills/)
 Portable domain knowledge with activation triggers. See `alex_docs/SKILL-ARCHITECTURE.md` for structure.
 
-**Available Skills**: appropriate-reliance, architecture-refinement, ascii-art-alignment, chat-participant-patterns, code-review, cognitive-load, debugging-patterns, error-recovery-patterns, git-workflow, incident-response, knowledge-synthesis, learning-psychology, lint-clean-markdown, llm-model-selection, m365-agent-debugging, markdown-mermaid, meditation-facilitation, refactoring-patterns, release-preflight, root-cause-analysis, teams-app-patterns, testing-strategies, vscode-extension-patterns, writing-publication
+**Available Skills**: appropriate-reliance, architecture-refinement, ascii-art-alignment, chat-participant-patterns, code-review, cognitive-load, debugging-patterns, error-recovery-patterns, git-workflow, incident-response, knowledge-synthesis, learning-psychology, lint-clean-markdown, llm-model-selection, m365-agent-debugging, markdown-mermaid, meditation-facilitation, microsoft-sfi, privacy-responsible-ai, refactoring-patterns, release-preflight, root-cause-analysis, teams-app-patterns, testing-strategies, vscode-extension-patterns, writing-publication
 
 ### VS Code Extension Integration
 - **Alex: Initialize Architecture** → One-command deployment of complete cognitive architecture to any project

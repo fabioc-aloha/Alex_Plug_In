@@ -72,13 +72,13 @@ appPackage/
 export class MyBot extends TeamsActivityHandler {
     constructor() {
         super();
-        
+
         this.onMessage(async (context, next) => {
             const text = context.activity.text;
             await context.sendActivity(`You said: ${text}`);
             await next();
         });
-        
+
         this.onMembersAdded(async (context, next) => {
             for (const member of context.activity.membersAdded) {
                 if (member.id !== context.activity.recipient.id) {
@@ -127,7 +127,7 @@ export class MyBot extends TeamsActivityHandler {
 this.handleTeamsMessagingExtensionQuery = async (context, query) => {
     const searchQuery = query.parameters?.[0]?.value;
     const results = await searchDatabase(searchQuery);
-    
+
     return {
         composeExtension: {
             type: 'result',

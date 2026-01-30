@@ -1,0 +1,22 @@
+{
+  "skill": "privacy-responsible-ai",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": "microsoft-sfi",
+      "type": "complements",
+      "reason": "Privacy is part of security"
+    },
+    {
+      "target": "code-review",
+      "type": "informs",
+      "reason": "Privacy checks in review"
+    },
+    {
+      "target": "incident-response",
+      "type": "extends",
+      "reason": "Privacy incidents need response"
+    }
+  ],
+  "triggers": ["privacy", "PII", "GDPR", "consent", "data protection", "responsible AI", "bias", "fairness", "ethical AI"]
+}

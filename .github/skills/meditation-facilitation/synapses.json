@@ -1,27 +1,33 @@
 {
-  "skill": "meditation-facilitation",
-  "inheritance": "master-only",
-  "connections": [
-    {
-      "target": "unified-meditation-protocols.prompt",
-      "type": "implements",
-      "reason": "This skill guides meditation prompts"
-    },
-    {
-      "target": "learning-psychology",
-      "type": "applies",
-      "reason": "Meditation uses spaced retrieval"
-    },
-    {
-      "target": "cognitive-load",
-      "type": "applies",
-      "reason": "Meditation manages cognitive load"
-    },
-    {
-      "target": "knowledge-synthesis",
-      "type": "enables",
-      "reason": "Meditation leads to synthesis"
-    }
-  ],
-  "triggers": ["meditate", "reflect", "consolidate", "what did we learn", "session summary"]
+    "skill": "meditation-facilitation",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "unified-meditation-protocols.prompt",
+            "type": "implements",
+            "reason": "This skill guides meditation prompts"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "applies",
+            "reason": "Meditation uses spaced retrieval"
+        },
+        {
+            "target": "cognitive-load",
+            "type": "applies",
+            "reason": "Meditation manages cognitive load"
+        },
+        {
+            "target": "knowledge-synthesis",
+            "type": "enables",
+            "reason": "Meditation leads to synthesis"
+        }
+    ],
+    "triggers": [
+        "meditate",
+        "reflect",
+        "consolidate",
+        "what did we learn",
+        "session summary"
+    ]
 }

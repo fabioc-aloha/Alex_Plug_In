@@ -38,21 +38,21 @@ Project Learning → Abstract → Generalize → Connect → Store
 ### Level 1: Project-Specific
 
 ```text
-"In the Alex VS Code extension, we fixed the memory leak 
+"In the Alex VS Code extension, we fixed the memory leak
 by closing file handles in the finally block"
 ```
 
 ### Level 2: Technology-Specific
 
 ```text
-"In Node.js, always close file handles in finally blocks 
+"In Node.js, always close file handles in finally blocks
 to prevent memory leaks"
 ```
 
 ### Level 3: Universal
 
 ```text
-"Always clean up resources in finally/defer blocks, 
+"Always clean up resources in finally/defer blocks,
 regardless of success or failure"
 ```
 
