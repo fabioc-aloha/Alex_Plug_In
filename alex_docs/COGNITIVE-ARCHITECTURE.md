@@ -15,49 +15,40 @@ Alex Cognitive Architecture is a **bio-inspired AI system** that implements conc
 Alex implements a dual-process cognitive model inspired by human cognition:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
-    subgraph USER["👤 User"]
-        U((User))
+    U((User))
+
+    subgraph CONSCIOUS["🌟 Conscious Mind"]
+        CP["💬 Chat Participant"]
+        SC["⚡ VS Code Commands"]
+        LMT["🔧 Language Model Tools"]
     end
 
-    subgraph ALEX["🧠 Alex Cognitive Architecture"]
-        direction TB
-
-        subgraph CONSCIOUS["🌟 Conscious Mind (System 2)"]
-            direction LR
-            CP["💬 Chat\nParticipant"]
-            SC["⚡ Slash\nCommands"]
-            LMT["🔧 Language\nModel Tools"]
-        end
-
-        subgraph UNCONSCIOUS["🌙 Unconscious Mind (System 1)"]
-            direction LR
-            BGS["☁️ Background\nSync"]
-            AID["💡 Auto-Insight\nDetection"]
-            AFS["🔍 Auto-Fallback\nSearch"]
-        end
-
-        subgraph MEMORY["💾 Memory Systems"]
-            MEM[("📚 Hierarchical\nMemory")]
-        end
+    subgraph UNCONSCIOUS["🌙 Unconscious Mind"]
+        BGS["☁️ Background Sync"]
+        AID["💡 Auto-Insights"]
+        AFS["🔍 Auto-Fallback Search"]
     end
 
-    U -->|"Explicit\nrequests"| CP
-    U -->|"Commands"| SC
+    MEM[("📚 Memory")]
+
+    U -->|Requests| CP
+    U -->|Commands| SC
 
     CP --> MEM
     SC --> MEM
     LMT --> MEM
 
-    BGS -.->|"Auto"| MEM
-    AID -.->|"Auto"| MEM
-    AFS -.->|"Auto"| MEM
+    BGS -.->|Auto| MEM
+    AID -.->|Auto| MEM
+    AFS -.->|Auto| MEM
 
-    MEM -.->|"Informs"| CP
+    MEM -.->|Informs| CP
 
-    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
-    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
-    style MEMORY fill:#fff3e0,stroke:#ef6c00
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32,color:#1f2328
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0,color:#1f2328
+    style MEM fill:#fff3e0,stroke:#ef6c00,color:#1f2328
 ```
 
 **Figure 1:** *The Dual-Mind Model — Alex's cognitive architecture separates conscious (user-initiated) from unconscious (automatic) processing, both interacting with hierarchical memory systems.*
@@ -83,6 +74,7 @@ flowchart TB
 Alex's architecture maps to biological brain systems:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
     subgraph "Alex Implementation"
         WM[Working Memory<br/>Chat Session]
@@ -134,6 +126,7 @@ graph TB
 Alex uses a hierarchical memory system with increasing persistence:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
     subgraph "Memory Hierarchy"
         direction TB
@@ -185,6 +178,7 @@ graph TB
 ## Information Flow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'actorBkg': '#f6f8fa', 'actorBorder': '#d1d9e0', 'actorTextColor': '#1f2328', 'actorLineColor': '#656d76', 'signalColor': '#656d76', 'signalTextColor': '#1f2328', 'labelBoxBkgColor': '#f6f8fa', 'labelBoxBorderColor': '#d1d9e0', 'labelTextColor': '#1f2328', 'loopTextColor': '#1f2328', 'noteBkgColor': '#fff8c5', 'noteBorderColor': '#d29922', 'noteTextColor': '#1f2328', 'sequenceNumberColor': '#ffffff'}}}%%
 sequenceDiagram
     participant User
     participant Conscious as Conscious Mind
@@ -260,6 +254,7 @@ Consistent moral reasoning:
 ## Architecture Layers
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
     subgraph "Interface Layer"
         CHAT["@alex Chat Participant"]

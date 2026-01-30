@@ -13,19 +13,20 @@
 - **Portability**: Take your learnings wherever you go
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e8f5e9', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#2e7d32', 'lineColor': '#5c6bc0', 'secondaryColor': '#e3f2fd', 'tertiaryColor': '#fff', 'edgeLabelBackground': '#ffffff' }}}%%
 flowchart LR
-    subgraph LOCAL["\ud83d\udcbb Your Machine"]
-        GK[("\ud83c\udf10 Global Knowledge<br/>~/.alex/")]
+    subgraph LOCAL["💻 Your Machine"]
+        GK[("🌐 Global Knowledge<br/>~/.alex/")]
     end
 
-    subgraph CLOUD["\u2601\ufe0f GitHub Cloud"]
-        GIST[("\ud83d\udcdd Private Gist<br/>alex-global-knowledge")]
+    subgraph CLOUD["☁️ GitHub Cloud"]
+        GIST[("📝 Private Gist<br/>alex-global-knowledge")]
     end
 
-    GK <-->|"\ud83d\udd12 Secure Sync"| GIST
+    GK <-->|"🔒 Secure Sync"| GIST
 
-    style LOCAL fill:#e8f5e9,stroke:#2e7d32
-    style CLOUD fill:#e3f2fd,stroke:#1565c0
+    style LOCAL fill:#e8f5e9,stroke:#2e7d32,color:#1f2328
+    style CLOUD fill:#e3f2fd,stroke:#1565c0,color:#1f2328
 ```
 
 **Figure 1:** *Cloud Sync Architecture - Secure bidirectional sync between local and GitHub Gist*
@@ -56,28 +57,29 @@ Cloud sync uses **VS Code's GitHub Authentication**:
 4. Automatic token refresh
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f5f5f5', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#424242', 'lineColor': '#5c6bc0', 'secondaryColor': '#e3f2fd', 'tertiaryColor': '#fff', 'edgeLabelBackground': '#ffffff' }}}%%
 flowchart TD
-    subgraph VSCODE["\ud83d\udcbb VS Code"]
-        EXT["\ud83e\udde9 Alex Extension"]
+    subgraph VSCODE["💻 VS Code"]
+        EXT["🧩 Alex Extension"]
     end
 
-    subgraph AUTH["\ud83d\udd10 Authentication"]
-        GH_AUTH["\ud83d\udc19 GitHub OAuth"]
+    subgraph AUTH["🔐 Authentication"]
+        GH_AUTH["🐙 GitHub OAuth"]
     end
 
-    subgraph GITHUB["\u2601\ufe0f GitHub"]
-        API["\ud83d\udd27 REST API"]
-        GIST["\ud83d\udcdd Private Gist"]
+    subgraph GITHUB["☁️ GitHub"]
+        API["🔧 REST API"]
+        GIST["📝 Private Gist"]
     end
 
-    EXT -->|"1\ufe0f\u20e3 Request Token"| GH_AUTH
-    GH_AUTH -->|"2\ufe0f\u20e3 OAuth Token"| EXT
-    EXT -->|"3\ufe0f\u20e3 Authenticated Requests"| API
-    API <-->|"4\ufe0f\u20e3 CRUD"| GIST
+    EXT -->|"1️⃣ Request Token"| GH_AUTH
+    GH_AUTH -->|"2️⃣ OAuth Token"| EXT
+    EXT -->|"3️⃣ Authenticated Requests"| API
+    API <-->|"4️⃣ CRUD"| GIST
 
-    style VSCODE fill:#f5f5f5,stroke:#424242
-    style AUTH fill:#fff3e0,stroke:#ef6c00
-    style GITHUB fill:#e3f2fd,stroke:#1565c0
+    style VSCODE fill:#f5f5f5,stroke:#424242,color:#1f2328
+    style AUTH fill:#fff3e0,stroke:#ef6c00,color:#1f2328
+    style GITHUB fill:#e3f2fd,stroke:#1565c0,color:#1f2328
 ```
 
 **Figure 2:** *Authentication Flow - VS Code OAuth integration with GitHub*
@@ -113,6 +115,7 @@ Automatic sync running in the background:
 | **Post-Modification** | 2 seconds after save/promote | Push |
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#1565c0', 'lineColor': '#1f2328', 'sectionBkgColor': '#f5f5f5', 'taskTextColor': '#1f2328', 'taskTextOutsideColor': '#1f2328', 'taskTextLightColor': '#1f2328', 'todayLineColor': '#d32f2f', 'gridColor': '#d1d9e0' }}}%%
 gantt
     title Background Sync Timeline
     dateFormat ss
@@ -281,6 +284,7 @@ The Gist is created as **private** by default:
 ## Offline Behavior
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#1565c0', 'lineColor': '#1f2328', 'stateBkg': '#f5f5f5', 'stateLabelColor': '#1f2328', 'compositeBackground': '#ffffff', 'compositeTitleBackground': '#e3f2fd', 'compositeBorder': '#1565c0' }}}%%
 stateDiagram-v2
     [*] --> Online
     Online --> Offline : Network Lost

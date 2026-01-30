@@ -42,35 +42,35 @@ Alex is a **cognitive architecture** that transforms GitHub Copilot into a sophi
 
 ```mermaid
 flowchart TB
-    subgraph ALEX["\ud83e\udde0 Alex Cognitive Architecture"]
+    subgraph ALEX["🧠 Alex Cognitive Architecture"]
         direction TB
 
-        subgraph CONSCIOUS["\ud83c\udf1f Conscious Mind (System 2)"]
+        subgraph CONSCIOUS["🌟 Conscious Mind (System 2)"]
             direction LR
-            CM["\ud83d\udcac @alex Chat"]
-            CMD["\u26a1 Commands"]
-            TOOLS["\ud83d\udd27 LM Tools"]
+            CM["💬 @alex Chat"]
+            CMD["⚡ Commands"]
+            TOOLS["🔧 LM Tools"]
         end
 
-        subgraph UNCONSCIOUS["\ud83c\udf19 Unconscious Mind (System 1)"]
+        subgraph UNCONSCIOUS["🌙 Unconscious Mind (System 1)"]
             direction LR
-            BGS["\u2601\ufe0f Sync"]
-            AID["\ud83d\udca1 Insights"]
-            AFB["\ud83d\udd0d Fallback"]
+            BGS["☁️ Sync"]
+            AID["💡 Insights"]
+            AFB["🔍 Fallback"]
         end
 
-        subgraph MEMORY["\ud83d\udcbe Memory Systems"]
+        subgraph MEMORY["💾 Memory Systems"]
             direction TB
-            WM["\u23f1\ufe0f Working<br/>Session"]
-            PM["\ud83d\udccb Procedural<br/>.instructions.md"]
-            EM["\ud83d\udcdd Episodic<br/>.prompt.md"]
-            DK["\ud83c\udf93 Domain<br/>DK-*.md"]
-            GK["\ud83c\udf10 Global<br/>~/.alex/"]
+            WM["⏱️ Working<br/>Session"]
+            PM["📋 Procedural<br/>.instructions.md"]
+            EM["📝 Episodic<br/>.prompt.md"]
+            DK["🎓 Domain<br/>DK-*.md"]
+            GK["🌐 Global<br/>~/.alex/"]
         end
     end
 
-    subgraph CLOUD["\u2601\ufe0f Cloud"]
-        GIST["\ud83d\udce4 GitHub Gist"]
+    subgraph CLOUD["☁️ Cloud"]
+        GIST["📤 GitHub Gist"]
     end
 
     CM --> WM

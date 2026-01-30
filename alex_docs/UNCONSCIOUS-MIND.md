@@ -10,29 +10,29 @@ The **Unconscious Mind** represents Alex's automatic, always-running processes. 
 
 ```mermaid
 flowchart TB
-    subgraph UNCONSCIOUS["\ud83c\udf19 Unconscious Mind (System 1)"]
+    subgraph UNCONSCIOUS["🌙 Unconscious Mind (System 1)"]
         direction TB
 
-        subgraph PROCESSES["\u2699\ufe0f Background Processes"]
+        subgraph PROCESSES["⚙️ Background Processes"]
             direction LR
-            BGS["\u2601\ufe0f Background Sync<br/>Every 5 minutes"]
-            AID["\ud83d\udca1 Auto-Insight<br/>Pattern matching"]
-            AFS["\ud83d\udd0d Auto-Fallback<br/>Global when local empty"]
+            BGS["☁️ Background Sync<br/>Every 5 minutes"]
+            AID["💡 Auto-Insight<br/>Pattern matching"]
+            AFS["🔍 Auto-Fallback<br/>Global when local empty"]
         end
 
-        subgraph TRIGGERS["\u26a1 Triggers"]
+        subgraph TRIGGERS["⚡ Triggers"]
             direction LR
-            TIME["\u23f0 Timer"]
-            MOD["\ud83d\udcdd Modifications"]
-            SEARCH["\u2753 Empty Results"]
+            TIME["⏰ Timer"]
+            MOD["📝 Modifications"]
+            SEARCH["❓ Empty Results"]
         end
     end
 
-    subgraph ACTIONS["\ud83c\udfaf Automatic Actions"]
+    subgraph ACTIONS["🎯 Automatic Actions"]
         direction LR
-        SYNC["\ud83d\udd04 Sync to Cloud"]
-        SAVE["\ud83d\udcbe Save Insight"]
-        AUGMENT["\ud83d\udcc8 Augment Results"]
+        SYNC["🔄 Sync to Cloud"]
+        SAVE["💾 Save Insight"]
+        AUGMENT["📈 Augment Results"]
     end
 
     TIME -.->|"Auto"| BGS

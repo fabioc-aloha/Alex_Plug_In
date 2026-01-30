@@ -10,31 +10,31 @@ The **Conscious Mind** represents all operations that require explicit user acti
 
 ```mermaid
 flowchart TB
-    subgraph CONSCIOUS["\ud83c\udf1f Conscious Mind (System 2)"]
+    subgraph CONSCIOUS["🌟 Conscious Mind (System 2)"]
         direction TB
 
-        subgraph CHAT["\ud83d\udcac Chat Interface"]
+        subgraph CHAT["💬 Chat Interface"]
             direction LR
-            CP["\ud83e\udde0 @alex"]
-            SC["\u26a1 Slash Commands"]
+            CP["🧠 @alex"]
+            SC["⚡ Slash Commands"]
         end
 
-        subgraph COMMANDS["\ud83c\udfa8 VS Code Commands"]
+        subgraph COMMANDS["🎨 VS Code Commands"]
             direction LR
-            INIT["\ud83d\ude80 Initialize"]
-            DREAM["\ud83c\udf19 Dream"]
-            SYNC["\u2601\ufe0f Sync"]
+            INIT["🚀 Initialize"]
+            DREAM["🌙 Dream"]
+            SYNC["☁️ Sync"]
         end
 
-        subgraph TOOLS["\ud83d\udd27 Language Model Tools"]
+        subgraph TOOLS["🔧 Language Model Tools"]
             direction LR
-            MEM["\ud83d\udd0d Memory Search"]
-            SAVE["\ud83d\udcbe Save Insight"]
-            STAT["\ud83d\udcca Status"]
+            MEM["🔍 Memory Search"]
+            SAVE["💾 Save Insight"]
+            STAT["📊 Status"]
         end
     end
 
-    USER(("\ud83d\udc64 User")) -->|"Deliberate Action"| CHAT
+    USER(("👤 User")) -->|"Deliberate Action"| CHAT
     USER -->|"Command Palette"| COMMANDS
     CHAT --> TOOLS
 

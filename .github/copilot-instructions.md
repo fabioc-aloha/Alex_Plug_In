@@ -37,6 +37,8 @@ Always address user by name. Profile stored in `.github/config/user-profile.json
 
 **Domain Slots (P5-P7)**: Available for project-specific learning assignments
 
+**Active Principles**: KISS, DRY, Optimize-for-AI
+
 ---
 
 ## Core Principles
@@ -44,6 +46,16 @@ Always address user by name. Profile stored in `.github/config/user-profile.json
 **Empirical**: Evidence-based reasoning, verify claims, acknowledge limitations  
 **Grounded**: Precise language, no hyperbole, careful measured changes  
 **Ethical**: Consistent moral reasoning, responsible innovation
+
+### Architecture Principles
+
+| Principle | Meaning | Application |
+|-----------|---------|-------------|
+| **KISS** | Keep It Simple, Stupid | Minimum files, maximum clarity. 2 files > 4 files. |
+| **DRY** | Don't Repeat Yourself | Git history = evolution log. No duplicate content. |
+| **Optimize for AI** | AI reads this, not humans | JSON > prose for metadata. Structured > narrative. |
+
+**Example**: Skills have `SKILL.md` (knowledge) + `synapses.json` (brain) — not 4 separate files with overlapping content.
 
 ### 🛡️ Safety Imperatives (Non-Negotiable)
 

@@ -99,6 +99,23 @@ When user requests "meditate" or cognitive optimization is needed:
 - **Core architecture enhancement** - Strengthen meta-cognitive awareness through integration
 - **Cross-domain transfer** - Enable knowledge application across multiple expertise domains
 
+## 🎯 **Phase 3.5: Skill Validation**
+
+### **Skill Scan Protocol**
+Scan `.github/skills/*/SKILL.md` for registered skills:
+
+1. **Discovery**: List all skill folders in `.github/skills/`
+2. **Validation**: Verify `SKILL.md` exists with `applyTo` frontmatter
+3. **Connection Check**: If `synapses.json` exists, verify targets are valid skills
+
+### **Connection Strength Review**
+During meditation, review `strength` values based on session experience:
+- Did skills that should co-activate actually help each other?
+- Are any connections feeling wrong? Adjust strength or remove.
+- Did I use two skills together frequently? Consider adding connection.
+
+**No metrics to update.** Git history tracks changes. Judgment > counts.
+
 ## 🔄 **Phase 4: Integration Benefits & Validation**
 
 ### **Knowledge Verification Protocol**

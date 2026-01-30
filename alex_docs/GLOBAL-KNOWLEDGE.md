@@ -10,30 +10,30 @@ The **Global Knowledge Base** is Alex's long-term memory for insights and patter
 
 ```mermaid
 flowchart TB
-    subgraph PROJECTS["\ud83d\udcc1 Projects"]
+    subgraph PROJECTS["📁 Projects"]
         direction LR
-        P1["\ud83d\udce6 Project A<br/>.github/"]
-        P2["\ud83d\udce6 Project B<br/>.github/"]
-        P3["\ud83d\udce6 Project C<br/>.github/"]
+        P1["📦 Project A<br/>.github/"]
+        P2["📦 Project B<br/>.github/"]
+        P3["📦 Project C<br/>.github/"]
     end
 
-    subgraph GLOBAL["\ud83c\udf10 Global Knowledge"]
-        GK[("\ud83e\udde0 ~/.alex/<br/>Cross-Project Memory")]
+    subgraph GLOBAL["🌐 Global Knowledge"]
+        GK[("🧠 ~/.alex/<br/>Cross-Project Memory")]
     end
 
-    subgraph CLOUD["\u2601\ufe0f Cloud"]
-        GIST[("\ud83d\udcdd GitHub Gist<br/>Backup & Sync")]
+    subgraph CLOUD["☁️ Cloud"]
+        GIST[("📝 GitHub Gist<br/>Backup & Sync")]
     end
 
-    P1 -.->|"\u2b06\ufe0f Promote"| GK
-    P2 -.->|"\u2b06\ufe0f Promote"| GK
-    P3 -.->|"\u2b06\ufe0f Promote"| GK
+    P1 -.->|"⬆️ Promote"| GK
+    P2 -.->|"⬆️ Promote"| GK
+    P3 -.->|"⬆️ Promote"| GK
 
-    GK -->|"\ud83d\udd0d Search"| P1
-    GK -->|"\ud83d\udd0d Search"| P2
-    GK -->|"\ud83d\udd0d Search"| P3
+    GK -->|"🔍 Search"| P1
+    GK -->|"🔍 Search"| P2
+    GK -->|"🔍 Search"| P3
 
-    GK <-->|"\ud83d\udd04 Sync"| GIST
+    GK <-->|"🔄 Sync"| GIST
 
     style PROJECTS fill:#e8f5e9,stroke:#2e7d32
     style GLOBAL fill:#e3f2fd,stroke:#1565c0

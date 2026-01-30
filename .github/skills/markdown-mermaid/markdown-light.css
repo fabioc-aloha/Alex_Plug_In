@@ -1,0 +1,270 @@
+/* GitHub Markdown Theme - Alex Skill Asset */
+/* Copy to .vscode/markdown-light.css and reference in settings.json */
+
+/* Override VS Code CSS variables */
+:root,
+body,
+.vscode-body {
+    --vscode-textBlockQuote-background: #f6f8fa !important;
+    --vscode-textBlockQuote-border: #d1d9e0 !important;
+    --vscode-editor-background: #ffffff !important;
+    --vscode-editor-foreground: #1f2328 !important;
+}
+
+body {
+    background-color: #ffffff !important;
+    color: #1f2328 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #1f2328 !important;
+    font-weight: 600 !important;
+    margin-top: 24px !important;
+    margin-bottom: 16px !important;
+}
+
+h1,
+h2 {
+    border-bottom: 1px solid #d1d9e0 !important;
+    padding-bottom: 0.3em !important;
+}
+
+a {
+    color: #0969da !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+/* Inline code */
+code {
+    background-color: #eff1f3 !important;
+    color: #1f2328 !important;
+    padding: 0.2em 0.4em !important;
+    border-radius: 6px !important;
+    font-size: 85% !important;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+}
+
+/* Code blocks */
+pre {
+    background-color: #f6f8fa !important;
+    border: 1px solid #d1d9e0 !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    overflow: auto !important;
+    font-size: 85% !important;
+    line-height: 1.45 !important;
+}
+
+pre code {
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    color: #1f2328 !important;
+}
+
+/* Blockquotes - compact with centered text */
+blockquote {
+    border-left: 4px solid #d1d9e0 !important;
+    color: #1f2328 !important;
+    margin: 0 0 16px 0 !important;
+    padding: 8px 16px !important;
+    background-color: #f6f8fa !important;
+    background: #f6f8fa !important;
+}
+
+.vscode-body blockquote,
+.vscode-dark blockquote,
+.vscode-light blockquote,
+body blockquote,
+html blockquote {
+    background-color: #f6f8fa !important;
+    background: #f6f8fa !important;
+    border-left: 4px solid #d1d9e0 !important;
+    color: #1f2328 !important;
+    padding: 8px 16px !important;
+}
+
+blockquote p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.5 !important;
+    color: #1f2328 !important;
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+blockquote strong,
+blockquote em,
+blockquote span {
+    color: #1f2328 !important;
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+blockquote strong {
+    color: #1f2328 !important;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+th,
+td {
+    border: 1px solid #d1d9e0 !important;
+    padding: 6px 13px !important;
+}
+
+th {
+    background-color: #f6f8fa !important;
+    font-weight: 600 !important;
+}
+
+tr:nth-child(even) {
+    background-color: #f6f8fa !important;
+}
+
+hr {
+    background-color: #d1d9e0 !important;
+    border: 0 !important;
+    height: 0.25em !important;
+    margin: 24px 0 !important;
+}
+
+img {
+    max-width: 100% !important;
+}
+
+ul,
+ol {
+    padding-left: 2em !important;
+}
+
+li+li {
+    margin-top: 0.25em !important;
+}
+
+/* Mermaid diagrams - GitHub style */
+.mermaid,
+.mermaid svg {
+    background-color: #ffffff !important;
+    padding: 16px !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+}
+
+/* Force ALL shapes to light fill */
+.mermaid rect,
+.mermaid circle,
+.mermaid ellipse,
+.mermaid polygon,
+.mermaid path.node,
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .basic.label-container,
+.mermaid .label-container,
+.mermaid foreignObject,
+.mermaid .nodeLabel,
+.mermaid [class*="node"] rect,
+.mermaid [class*="node"] polygon,
+.mermaid g.node rect,
+.mermaid g.node polygon,
+.mermaid g rect,
+.mermaid g polygon {
+    fill: #f6f8fa !important;
+    stroke: #d1d9e0 !important;
+    stroke-width: 1px !important;
+}
+
+/* Override any inline styles on shapes */
+.mermaid *[style*="fill"] {
+    fill: #f6f8fa !important;
+}
+
+/* Node text - force dark */
+.mermaid text,
+.mermaid tspan,
+.mermaid .nodeLabel,
+.mermaid .node .label,
+.mermaid .label,
+.mermaid span,
+.mermaid p {
+    fill: #1f2328 !important;
+    color: #1f2328 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+}
+
+/* Edge lines */
+.mermaid .edgePath path,
+.mermaid path.path,
+.mermaid .flowchart-link {
+    stroke: #656d76 !important;
+    stroke-width: 1.5px !important;
+}
+
+/* Edge labels */
+.mermaid .edgeLabel {
+    background-color: #ffffff !important;
+    color: #1f2328 !important;
+}
+
+.mermaid .edgeLabel rect {
+    fill: #ffffff !important;
+}
+
+/* Cluster/subgraph */
+.mermaid .cluster rect {
+    fill: #f6f8fa !important;
+    stroke: #d1d9e0 !important;
+}
+
+.mermaid .cluster text {
+    fill: #1f2328 !important;
+}
+
+/* Sequence diagram */
+.mermaid .actor {
+    fill: #f6f8fa !important;
+    stroke: #d1d9e0 !important;
+}
+
+.mermaid .actor-line {
+    stroke: #d1d9e0 !important;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+    stroke: #656d76 !important;
+}
+
+.mermaid .messageText {
+    fill: #1f2328 !important;
+}
+
+.mermaid .labelText,
+.mermaid .loopText,
+.mermaid .loopLine {
+    fill: #1f2328 !important;
+    stroke: #d1d9e0 !important;
+}
+
+.mermaid .titleText {
+    fill: #1f2328 !important;
+    font-weight: 600 !important;
+}

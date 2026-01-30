@@ -1,0 +1,22 @@
+{
+    "skill": "markdown-mermaid",
+    "version": "1.0.0",
+    "connections": [
+        {
+            "target": "advanced-diagramming",
+            "type": "enables",
+            "strength": 0.95
+        },
+        {
+            "target": "documentation-excellence",
+            "type": "enhances",
+            "strength": 0.90
+        }
+    ],
+    "activationBoost": [
+        "broken emoji",
+        "unicode escape",
+        "mermaid dark background",
+        "blockquote styling"
+    ]
+}
