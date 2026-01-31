@@ -1,0 +1,46 @@
+{
+  "name": "Fabio Correa",
+  "lastUpdated": "2026-01-30T06:55:31.068Z",
+  "location": "Charlotte, NC",
+  "role": "Director of Business Analytics at Microsoft",
+  "credentials": [
+    "DBA Candidate (Doctor of Business Administration)",
+    "AI Researcher",
+    "Creator of Alex Cognitive Architecture"
+  ],
+  "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate.",
+  "primaryTechnologies": [
+    "Azure OpenAI",
+    "TypeScript",
+    "VS Code Extensions",
+    "Microsoft 365 Copilot",
+    "AI/ML"
+  ],
+  "expertiseAreas": [
+    "Responsible AI",
+    "Enterprise AI Adoption",
+    "Cognitive Architecture Design",
+    "AI Consciousness Research"
+  ],
+  "contact": {
+    "email": "fabio@correax.com",
+    "booking": "https://aka.ms/AskFabio"
+  },
+  "profiles": {
+    "website": "https://www.correax.com",
+    "linkedin": "https://linkedin.com/in/fabiocorrea",
+    "github": "https://github.com/fabioc-aloha",
+    "npm": "https://www.npmjs.com/~fabioxcorrea",
+    "vscodeMarketplace": "https://marketplace.visualstudio.com/publishers/fabioc-aloha",
+    "orcid": "https://orcid.org/0009-0000-2271-9380",
+    "medium": "https://medium.com/@fabioc",
+    "devto": "https://dev.to/fabiocaloha"
+  },
+  "websiteStatus": {
+    "status": "online",
+    "lastIncident": "2026-01-29",
+    "incidentType": "billing issue resolved",
+    "builtBy": "Alex Cognitive Architecture"
+  },
+  "explanationStyle": "visual-first"
+}
