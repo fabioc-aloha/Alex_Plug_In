@@ -236,7 +236,7 @@ th {
 `;
       await vscode.workspace.fs.writeFile(
         targetCssPath,
-        Buffer.from(basicCss, "utf8")
+        new Uint8Array(Buffer.from(basicCss, "utf8"))
       );
       return true;
     }
