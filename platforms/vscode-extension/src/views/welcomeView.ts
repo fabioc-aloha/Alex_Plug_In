@@ -705,7 +705,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
                 <div class="action-group-label">🧠 Core</div>
-                <button class="action-btn primary" onclick="cmd('dream')">
+                <button class="action-btn" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream (Neural Maintenance)</span>
                     <span class="action-shortcut">⌃⌥D</span>
