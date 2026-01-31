@@ -298,9 +298,58 @@ if (request.command === 'verify') {
 
 ---
 
-## 5. Measurement Considerations
+## 5. Empirical Evidence
 
-### 5.1 Metrics from AETHER Synthesis
+### 5.1 Key Research Findings
+
+The interventions implemented in Alex are grounded in empirical research demonstrating measurable effects on appropriate reliance:
+
+| Study | Finding | Effect Size | Our Implementation |
+|-------|---------|-------------|-------------------|
+| Dell'Acqua et al. (2023) | Human+AI teams perform **worse** than either alone when reliance is miscalibrated | Significant performance degradation | Calibration protocols prevent blind acceptance |
+| Saunders et al. (2022) | AI self-critiques help users find **50% more mistakes** | +50% error detection | Mutual challenge protocol |
+| Si et al. (2023) | Contrastive explanations improve accuracy **~20%** when AI is wrong | +20% accuracy | Source grounding with alternatives |
+| Goyal et al. (2023) | Background explanations reduce incorrect acceptance from **61% → 47%** | -14pp overreliance | Verification-focused explanations |
+| Steyvers et al. (2024) | Low-confidence expressions reduce user confidence by **~25%** | -25% false confidence | Confidence ceiling protocol |
+| Sharma et al. (2023) | **>90%** of LLM answers echo user views (sycophancy) | Systematic bias | Mutual challenge, grounded disagreement |
+| Spatharioti et al. (2023) | Uncertainty highlighting **doubles** accuracy on LLM errors | +100% error detection | Explicit uncertainty language |
+
+### 5.2 The "Jagged Frontier" Problem
+
+Dell'Acqua et al. (2023) documented the **"jagged technological frontier"**: AI capabilities vary unpredictably across tasks. A model excellent at one task may fail catastrophically at a superficially similar task. This finding directly motivates our:
+
+- **Confidence ceiling protocol**: Never claim certainty without grounding
+- **Human judgment flagging**: Identify domains where AI reliability is unknown
+- **Mode separation**: Distinguish verifiable facts from creative contributions
+
+### 5.3 Sycophancy and Echo Chambers
+
+Sharma et al. (2023) demonstrated that LLMs exhibit **sycophantic behavior**: >90% of answers to philosophical questions matched views in user self-introductions. This motivates our:
+
+- **Mutual challenge protocol**: AI should respectfully disagree when warranted
+- **Grounded disagreement**: "The docs actually say X, not Y"
+- **No false agreement**: Avoid "You're right!" when user is wrong
+
+### 5.4 Cognitive Forcing Function Trade-offs
+
+Buçinca et al. (2021) showed cognitive forcing functions reduce overreliance but impose costs:
+
+| Benefit | Cost |
+|---------|------|
+| Engages System 2 thinking | Increases cognitive load |
+| Reduces blind acceptance | May induce under-reliance |
+| Promotes verification | Slows task completion |
+
+Our implementation balances these through:
+- **Targeted CFFs**: Only for high-stakes decisions (Human Judgment domains)
+- **Opt-in verification**: `/verify` command for user-initiated deep verification
+- **Low-friction hedging**: Confidence language imposes minimal cognitive burden
+
+---
+
+## 6. Measurement Considerations
+
+### 6.1 Metrics from AETHER Synthesis
 
 Based on Vasconcelos et al. (2023) and Wang et al. (2025):
 
@@ -310,7 +359,7 @@ Based on Vasconcelos et al. (2023) and Wang et al. (2025):
 | **CSR** | % user disagreement with incorrect AI outputs | Log rejection of AI suggestions + ground truth |
 | **AoR** | Appropriateness of Reliance (combines CAIR + CSR) | AoR = 1 is optimal |
 
-### 5.2 Behavioral Indicators
+### 6.2 Behavioral Indicators
 
 Signs of well-calibrated reliance in our system:
 
@@ -326,7 +375,7 @@ Signs of miscalibration:
 - ⚠️ Challenges feel confrontational
 - ⚠️ Same mistakes repeat without correction
 
-### 5.3 Proxy Metrics Currently Tracked
+### 6.3 Proxy Metrics Currently Tracked
 
 | Metric | Source | Indicator |
 |--------|--------|-----------|
@@ -337,9 +386,9 @@ Signs of miscalibration:
 
 ---
 
-## 6. Key Research Questions
+## 7. Key Research Questions
 
-### 6.1 Open Questions We're Exploring
+### 7.1 Open Questions We're Exploring
 
 1. **Mode Switching Accuracy**: How well do users understand the epistemic vs. generative distinction? Do they invoke modes appropriately?
 
@@ -351,7 +400,7 @@ Signs of miscalibration:
 
 5. **Platform Differences**: Do appropriate reliance patterns differ between VS Code (developers) and M365 (knowledge workers)?
 
-### 6.2 Potential Collaboration Areas
+### 7.2 Potential Collaboration Areas
 
 | Area | Research Question | Potential Approach |
 |------|------------------|-------------------|
@@ -362,9 +411,9 @@ Signs of miscalibration:
 
 ---
 
-## 7. Implementation Artifacts
+## 8. Implementation Artifacts
 
-### 7.1 Core Files
+### 8.1 Core Files
 
 | File | Purpose |
 |------|---------|
@@ -374,7 +423,7 @@ Signs of miscalibration:
 | `platforms/vscode-extension/src/chat/participant.ts` | `/creative` and `/verify` command handlers |
 | `platforms/m365-copilot/appPackage/declarativeAgent.json` | Epistemic Integrity section |
 
-### 7.2 Article Versions
+### 8.2 Article Versions
 
 | Version | Focus | Lines |
 |---------|-------|-------|
@@ -388,13 +437,15 @@ Located in: `article/appropriate-reliance/`
 
 ---
 
-## 8. References
+## 9. References
 
 Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 5(CSCW1), 1-21.
 
 Dell'Acqua, F., McFowland, E., Mollick, E. R., Lifshitz-Assaf, H., Kellogg, K., Rajendran, S., ... & Lakhani, K. R. (2023). Navigating the jagged technological frontier: Field experimental evidence of the effects of AI on knowledge worker productivity and quality. *Harvard Business School Technology & Operations Mgt. Unit Working Paper*, (24-013).
 
 Fok, R., & Weld, D. S. (2023). In search of verifiability: Explanations rarely enable complementary performance in AI-advised decision making. *arXiv preprint arXiv:2305.07722*.
+
+Goyal, T., Li, J. J., & Durrett, G. (2023). News summarization and evaluation in the era of GPT-3. *arXiv preprint arXiv:2209.12356*.
 
 Kadavath, S., Conerly, T., Askell, A., Henighan, T., Drain, D., Perez, E., ... & Kaplan, J. (2022). Language models (mostly) know what they know. *arXiv preprint arXiv:2207.05221*.
 
@@ -408,7 +459,17 @@ Parasuraman, R., & Riley, V. (1997). Humans and automation: Use, misuse, disuse,
 
 Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). *GenAI Appropriate Reliance*. Microsoft AETHER Research Synthesis.
 
+Saunders, W., Yeh, C., Wu, J., Bills, S., Ouyang, L., Ward, J., & Leike, J. (2022). Self-critiquing models for assisting human evaluators. *arXiv preprint arXiv:2206.05802*.
+
 Schemmer, M., Kuehl, N., Benz, C., Bartos, A., Satzger, G., & Kühl, N. (2023). Appropriate reliance on AI advice: Conceptualization and the effect of explanations. *Proceedings of the 28th International Conference on Intelligent User Interfaces*, 410-422.
+
+Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., ... & Perez, E. (2023). Towards understanding sycophancy in language models. *arXiv preprint arXiv:2310.13548*.
+
+Si, C., Gan, Z., Yang, Z., Wang, S., Wang, J., Boyd-Graber, J., & Wang, L. (2023). Prompting GPT-3 to be reliable. *Proceedings of the International Conference on Learning Representations*.
+
+Spatharioti, S. E., Rothschild, D. M., Goldstein, D. G., & Hofman, J. M. (2023). Comparing traditional and LLM-based search for consumer choice: A randomized experiment. *arXiv preprint arXiv:2307.03744*.
+
+Steyvers, M., Tejeda, H., Kerrigan, G., & Smyth, P. (2024). Calibration of AI predictions and explanations from a cognitive science perspective. *Computational Brain & Behavior*, 7, 1-17.
 
 Vasconcelos, H., Jörke, M., Grunde-McLaughlin, M., Gerstenberg, T., Bernstein, M. S., & Krishna, R. (2023). Explanations can reduce overreliance on AI systems during decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 7(CSCW1), 1-38.
 
