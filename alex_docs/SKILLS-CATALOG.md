@@ -7,12 +7,12 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 47
+## Skill Count: 48
 
 | Inheritance | Count |
 | ----------- | ----- |
 | Inheritable | 36 |
-| Master-Only | 9 |
+| Master-Only | 10 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
 | Temporary | 1 |
@@ -98,6 +98,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
 | [architecture-audit](../.github/skills/architecture-audit/) | inheritable | Comprehensive consistency review |
 | [master-alex-audit](../.github/skills/master-alex-audit/) | master-only | Master-specific audit with heir sync, protection checks |
+| [release-process](../.github/skills/release-process/) | master-only | VS Code marketplace publishing workflow |
 | [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
@@ -249,6 +250,7 @@ flowchart LR
     subgraph Mstr["👑 Master"]
         HC[heir-curation]
         MAA[master-alex-audit]
+        REL[release-process]
     end
 
     %% Cognitive flow
@@ -262,6 +264,7 @@ flowchart LR
     SCG --> MM & AH & KS & LP & PS
     AAU --> AH & RF & CR & LM
     MAA --> AAU & HC & RF & AH
+    REL --> RF & HC & VEP
 
     %% Beta/temporary skill flow
     BT --> AH & DP & ERP & RCA & IR

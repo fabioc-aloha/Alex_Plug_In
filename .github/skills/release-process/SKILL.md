@@ -1,7 +1,7 @@
 # Release Process Skill
 
-**Classification**: Master-Only Skill | Process Automation  
-**Activation**: release, publish, marketplace, vsix, version bump, pre-release  
+**Classification**: Master-Only Skill | Process Automation
+**Activation**: release, publish, marketplace, vsix, version bump, pre-release
 **Inheritance**: master-only (contains PAT handling, marketplace credentials)
 
 ---
@@ -204,7 +204,7 @@ Alex_Plug_In/
 
 **Cause**: PAT expired, invalid, or wrong scope
 
-**Solution**: 
+**Solution**:
 1. Create new PAT at marketplace.visualstudio.com/manage/publishers
 2. Ensure "Marketplace (Manage)" scope
 3. Update .env or environment variable
@@ -219,7 +219,7 @@ Alex_Plug_In/
 
 **Cause**: Often network or auth issues
 
-**Solution**: 
+**Solution**:
 1. Check internet connection
 2. Verify PAT is valid
 3. Try `npx vsce login fabioc-aloha` first
