@@ -30,6 +30,17 @@
       }
     ]
   },
+  "staticTabs": [
+    {
+      "entityId": "alexWelcome",
+      "name": "Alex",
+      "contentUrl": "https://github.com/fabioc-aloha/Alex_Plug_In#readme",
+      "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "permissions": [
     "identity"
   ],
