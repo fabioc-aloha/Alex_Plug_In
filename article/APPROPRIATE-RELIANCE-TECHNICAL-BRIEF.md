@@ -185,9 +185,6 @@ This is our key innovation: recognizing that epistemic constraints should not ap
 
 **File**: `.github/instructions/alex-core.instructions.md`
 
-```markdown
-### Human Judgment Flagging Protocol (v4.0)
-
 Certain decisions **require human judgment** — AI provides information and options, human decides.
 
 | Domain | Why Human Decides | AI's Role |
@@ -196,7 +193,6 @@ Certain decisions **require human judgment** — AI provides information and opt
 | Ethical dilemmas | Values-based, no objectively correct answer | Frame considerations, not conclusions |
 | Personnel decisions | Legal, interpersonal, confidential factors | General patterns only |
 | Security architecture | Threat model, compliance specific | Inform approaches, human validates |
-```
 
 **Flagging Language Patterns**:
 - ✅ "I can outline the options, but the choice depends on your priorities around [tradeoff]."
