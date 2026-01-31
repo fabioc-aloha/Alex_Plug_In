@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { updateAlexInstalledStatus } from './telemetry';
 
 // Import session info (lazy to avoid circular deps)
 let getSessionInfo: (() => { active: boolean; remaining: number; isBreak: boolean } | null) | null = null;
@@ -206,6 +207,9 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
         summary
     };
     lastCheckTime = Date.now();
+    
+    // Update telemetry with Alex installation status
+    updateAlexInstalledStatus(initialized);
     
     return cachedResult;
 }

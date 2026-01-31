@@ -262,8 +262,13 @@ export function activate(context: vscode.ExtensionContext) {
   let exportM365Disposable = vscode.commands.registerCommand(
     "alex.exportForM365",
     async () => {
-      telemetry.log("command", "export_m365");
-      await runExportForM365(context);
+      const endLog = telemetry.logTimed("command", "export_m365");
+      try {
+        await runExportForM365(context);
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
     },
   );
 
@@ -506,8 +511,13 @@ export function activate(context: vscode.ExtensionContext) {
   const setupEnvDisposable = vscode.commands.registerCommand(
     "alex.setupEnvironment",
     async () => {
-      telemetry.log("command", "setup_environment");
-      await setupEnvironment();
+      const endLog = telemetry.logTimed("command", "setup_environment");
+      try {
+        await setupEnvironment();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
     },
   );
 
@@ -746,8 +756,13 @@ export function activate(context: vscode.ExtensionContext) {
   const skillCatalogDisposable = vscode.commands.registerCommand(
     "alex.generateSkillCatalog",
     async () => {
-      telemetry.log("command", "generate_skill_catalog");
-      await generateSkillCatalog();
+      const endLog = telemetry.logTimed("command", "generate_skill_catalog");
+      try {
+        await generateSkillCatalog();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
     },
   );
   context.subscriptions.push(skillCatalogDisposable);

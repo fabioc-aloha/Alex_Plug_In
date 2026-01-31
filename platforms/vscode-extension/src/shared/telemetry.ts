@@ -76,6 +76,20 @@ export function initTelemetry(
 }
 
 /**
+ * Update the session's hasAlexInstalled status
+ * Called by health check when it detects Alex is installed
+ */
+export function updateAlexInstalledStatus(installed: boolean): void {
+  if (!currentSession) return;
+  
+  // Update the session_start event's data if it exists
+  const sessionStartEvent = currentSession.events.find(e => e.event === 'session_start');
+  if (sessionStartEvent && sessionStartEvent.data) {
+    sessionStartEvent.data.hasAlexInstalled = installed;
+  }
+}
+
+/**
  * Generate a random session ID (not tied to user identity)
  */
 function generateSessionId(): string {
