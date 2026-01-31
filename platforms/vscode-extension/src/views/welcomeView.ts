@@ -96,7 +96,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           vscode.commands.executeCommand("alex.viewBetaTelemetry");
           break;
         case "openChat":
-          vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+          // Open Agent mode directly (no clipboard clutter)
+          vscode.commands.executeCommand("workbench.action.chat.openAgent");
           break;
         case "generateSkillCatalog":
           vscode.commands.executeCommand("alex.generateSkillCatalog");
@@ -705,6 +706,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
                 <div class="action-group-label">🧠 Core</div>
+                <button class="action-btn" onclick="cmd('openChat')">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Chat with Copilot</span>
+                </button>
+                <button class="action-btn" onclick="cmd('upgrade')">
+                    <span class="action-icon">⬆️</span>
+                    <span class="action-text">Initialize / Update</span>
+                </button>
                 <button class="action-btn" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream (Neural Maintenance)</span>
@@ -719,10 +728,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">📊</span>
                     <span class="action-text">Health Dashboard</span>
                 </button>
-                <button class="action-btn" onclick="cmd('runAudit')">
-                    <span class="action-icon">🔍</span>
-                    <span class="action-text">Run Project Audit</span>
-                </button>
                 
                 <div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
@@ -731,15 +736,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-shortcut">⌃⌥K</span>
                 </button>
                 <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
-                    <span class="action-icon">🔍</span>
+                    <span class="action-icon">�</span>
                     <span class="action-text">Search Knowledge</span>
-                </button>
-                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
-                    <span class="action-icon">🌐</span>
-                    <span class="action-text">Generate Skill Catalog</span>
                 </button>
                 
                 <div class="action-group-label">🛠️ Developer Tools</div>
+                <button class="action-btn" onclick="cmd('runAudit')">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-text">Run Project Audit</span>
+                </button>
                 <button class="action-btn" onclick="cmd('releasePreflight')">
                     <span class="action-icon">🚀</span>
                     <span class="action-text">Release Preflight</span>
@@ -749,8 +754,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Debug This</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateDiagram')">
-                    <span class="action-icon">📊</span>
+                    <span class="action-icon">�</span>
                     <span class="action-text">Generate Diagram</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
+                    <span class="action-icon">🌐</span>
+                    <span class="action-text">Generate Skill Catalog</span>
                 </button>
                 
                 <div class="action-group-label">⚖️ Work-Life Balance</div>
@@ -762,16 +771,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🎯</span>
                     <span class="action-text">Manage Goals</span>
                 </button>
-                <button class="action-btn" onclick="cmd('openChat')">
-                    <span class="action-icon">💬</span>
-                    <span class="action-text">Chat with @alex</span>
-                </button>
                 
                 <div class="action-group-label">⚙️ System</div>
-                <button class="action-btn" onclick="cmd('upgrade')">
-                    <span class="action-icon">⬆️</span>
-                    <span class="action-text">Upgrade Architecture</span>
-                </button>
                 <button class="action-btn" onclick="cmd('exportM365')" title="Package your global knowledge, profile, and insights for M365 Copilot. Upload the exported folder to OneDrive/Alex-Memory/ to use with the M365 Alex agent.">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
@@ -785,9 +786,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Documentation</span>
                     <span class="action-shortcut">⌃⌥H</span>
                 </button>
-                <button class="action-btn" onclick="cmd('reportIssue')">
-                    <span class="action-icon">🐛</span>
-                    <span class="action-text">Report Issue / Diagnostics</span>
+                <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics, telemetry data, and report bugs">
+                    <span class="action-icon">🩺</span>
+                    <span class="action-text">Diagnostics</span>
                 </button>
             </div>
         </div>

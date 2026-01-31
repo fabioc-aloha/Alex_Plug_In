@@ -35,14 +35,14 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
             }
 
             // Open Copilot Chat with @alex and the selected code
-            const chatInput = `@alex Can you explain this code and suggest improvements?\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+            const chatInput = `Explain this code and suggest improvements:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
             
-            // Copy to clipboard and open chat
+            // Copy to clipboard and open Agent mode
             await vscode.env.clipboard.writeText(chatInput);
-            await vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
+            await vscode.commands.executeCommand('workbench.action.chat.openAgent');
             
             vscode.window.showInformationMessage(
-                '📋 Prompt copied! Paste it in the chat (Ctrl+V)',
+                '📋 Prompt copied! Paste in Agent chat (Ctrl+V)',
                 'OK'
             );
         }

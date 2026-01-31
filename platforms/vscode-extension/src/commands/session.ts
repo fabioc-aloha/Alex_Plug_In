@@ -429,9 +429,8 @@ function updateSessionStatusBar(): void {
 
     sessionStatusBarItem.text = `${typeIcon} ${timeStr} ${pauseIcon}`.trim();
     sessionStatusBarItem.tooltip = `${currentSession.isBreak ? 'Break' : 'Learning'}: "${currentSession.topic}"\n${pomodoroIcon}\nClick for actions`;
-    sessionStatusBarItem.backgroundColor = currentSession.isPaused 
-        ? new vscode.ThemeColor('statusBarItem.warningBackground')
-        : undefined;
+    // Don't use background colors - the ⏸️ emoji is enough to indicate paused state
+    sessionStatusBarItem.backgroundColor = undefined;
     sessionStatusBarItem.show();
 }
 

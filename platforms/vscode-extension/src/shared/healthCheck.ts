@@ -234,18 +234,17 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
         };
     }
 
-    // Build status parts
+    // Build status parts - use emoji for status, no background color
+    // (yellow/red backgrounds look jarring in VS Code status bar)
     let statusEmoji = '🟢';
-    let bgColor: vscode.ThemeColor | undefined = undefined;
+    const bgColor: vscode.ThemeColor | undefined = undefined;
     
     switch (health.status) {
         case HealthStatus.Warning:
             statusEmoji = '🟡';
-            bgColor = new vscode.ThemeColor('statusBarItem.warningBackground');
             break;
         case HealthStatus.Error:
             statusEmoji = '🔴';
-            bgColor = new vscode.ThemeColor('statusBarItem.errorBackground');
             break;
     }
 

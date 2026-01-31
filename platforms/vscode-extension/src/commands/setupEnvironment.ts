@@ -316,9 +316,10 @@ async function applyMarkdownStyles(): Promise<boolean> {
   const config = vscode.workspace.getConfiguration();
   const currentValue = config.inspect("markdown.styles");
   
-  // Skip if already set globally
-  if (currentValue?.globalValue !== undefined) {
-    return true;
+  // Check if already set to the correct absolute path
+  const globalArray = currentValue?.globalValue as string[] | undefined;
+  if (globalArray?.includes(cssPath)) {
+    return true; // Already correctly configured
   }
 
   try {

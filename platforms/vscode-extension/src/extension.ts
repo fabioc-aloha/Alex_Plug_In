@@ -598,20 +598,13 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Open chat with audit prompt
         const auditType = selected.label.replace(/\$\([^)]+\)\s*/, '');
-        vscode.commands.executeCommand(
-          "workbench.panel.chat.view.copilot.focus"
-        );
         
-        // Show info about what to type
+        // Copy prompt to clipboard and open Agent mode
+        await vscode.env.clipboard.writeText(`Run ${auditType.toLowerCase()} on this project`);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
-          `🔍 ${auditType}: Ask @alex to run this audit. Try: "@alex run ${auditType.toLowerCase()}"`,
-          "Copy Prompt"
-        ).then(action => {
-          if (action === "Copy Prompt") {
-            vscode.env.clipboard.writeText(`@alex run ${auditType.toLowerCase()} on this project`);
-            vscode.window.showInformationMessage("Prompt copied! Paste it in Copilot Chat.");
-          }
-        });
+          `🔍 ${auditType} prompt copied. Paste in Agent chat (Ctrl+V).`
+        );
         
         endLog(true);
       } catch (error) {
@@ -647,17 +640,14 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
-        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
         const checkType = selected.label.replace(/\$\([^)]+\)\s*/, '');
+        
+        // Copy prompt to clipboard and open Agent mode
+        await vscode.env.clipboard.writeText(`Run ${checkType.toLowerCase()} check for release`);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
-          `🚀 ${checkType}: Ask @alex to run preflight. Try: "@alex run release preflight"`,
-          "Copy Prompt"
-        ).then(action => {
-          if (action === "Copy Prompt") {
-            vscode.env.clipboard.writeText(`@alex run ${checkType.toLowerCase()} check for release`);
-            vscode.window.showInformationMessage("Prompt copied! Paste it in Copilot Chat.");
-          }
-        });
+          `🚀 ${checkType} prompt copied. Paste in Agent chat (Ctrl+V).`
+        );
 
         endLog(true);
       } catch (error) {
@@ -682,13 +672,13 @@ export function activate(context: vscode.ExtensionContext) {
         const selectedText = editor.document.getText(editor.selection);
         const fileName = editor.document.fileName.split(/[/\\]/).pop();
         
-        // Copy context to clipboard
-        const prompt = `@alex review this code for issues, improvements, and best practices:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        // Copy prompt to clipboard and open Agent mode
+        const prompt = `Review this code for issues, improvements, and best practices:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
-          `📋 Code from ${fileName} copied. Paste in Copilot Chat for review.`
+          `📋 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
         
         endLog(true);
@@ -714,12 +704,12 @@ export function activate(context: vscode.ExtensionContext) {
         const selectedText = editor.document.getText(editor.selection);
         const fileName = editor.document.fileName.split(/[/\\]/).pop();
         
-        const prompt = `@alex help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
-          `🐛 Code from ${fileName} copied. Paste in Copilot Chat to debug.`
+          `🐛 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
         
         endLog(true);
@@ -736,12 +726,12 @@ export function activate(context: vscode.ExtensionContext) {
       const endLog = telemetry.logTimed("command", "generate_diagram");
       try {
         const diagramTypes = [
-          { label: "$(type-hierarchy) Class Diagram", description: "UML class relationships", detail: "Classes, interfaces, inheritance" },
-          { label: "$(git-merge) Sequence Diagram", description: "Interaction flow", detail: "Method calls, messages" },
-          { label: "$(workflow) Flowchart", description: "Process flow", detail: "Decision trees, algorithms" },
-          { label: "$(database) ER Diagram", description: "Entity relationships", detail: "Database schema" },
-          { label: "$(server) Architecture Diagram", description: "System components", detail: "Services, connections" },
-          { label: "$(symbol-state-machine) State Diagram", description: "State transitions", detail: "FSM, lifecycle" },
+          { label: "$(type-hierarchy) Class Diagram", description: "UML class relationships", value: "classDiagram" },
+          { label: "$(git-merge) Sequence Diagram", description: "Interaction flow", value: "sequenceDiagram" },
+          { label: "$(workflow) Flowchart", description: "Process flow", value: "flowchart" },
+          { label: "$(database) ER Diagram", description: "Entity relationships", value: "erDiagram" },
+          { label: "$(server) Architecture Diagram", description: "System components", value: "architecture" },
+          { label: "$(symbol-state-machine) State Diagram", description: "State transitions", value: "stateDiagram" },
         ];
 
         const selected = await vscode.window.showQuickPick(diagramTypes, {
@@ -755,18 +745,42 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         const editor = vscode.window.activeTextEditor;
-        let context = "";
+        let contextCode = "";
+        let contextDescription = "";
         if (editor && !editor.selection.isEmpty) {
-          context = `\n\nContext code:\n\`\`\`${editor.document.languageId}\n${editor.document.getText(editor.selection)}\n\`\`\``;
+          contextCode = editor.document.getText(editor.selection);
+          contextDescription = `Based on this ${editor.document.languageId} code:\n`;
         }
 
         const diagramType = selected.label.replace(/\$\([^)]+\)\s*/, '');
-        const prompt = `@alex generate a Mermaid ${diagramType} for this project/code. Output valid Mermaid syntax I can paste into a markdown file.${context}`;
-        await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        // Create a new untitled markdown file with a template
+        const content = `# ${diagramType}
+
+${contextDescription}${contextCode ? `\`\`\`${editor?.document.languageId || ''}\n${contextCode}\n\`\`\`\n\n` : ''}## Diagram
+
+\`\`\`mermaid
+${selected.value}
+    %% Use Copilot (Ctrl+I) here to generate the diagram
+    %% Or delete this and describe what you want
+\`\`\`
+`;
+        
+        const doc = await vscode.workspace.openTextDocument({
+          content,
+          language: "markdown"
+        });
+        const newEditor = await vscode.window.showTextDocument(doc);
+        
+        // Position cursor inside the mermaid block for easy Copilot invocation
+        const mermaidLine = content.split('\n').findIndex(line => line.includes(selected.value));
+        if (mermaidLine >= 0) {
+          const position = new vscode.Position(mermaidLine + 1, 4);
+          newEditor.selection = new vscode.Selection(position, position);
+        }
+        
         vscode.window.showInformationMessage(
-          `📊 ${diagramType} prompt copied. Paste in Copilot Chat.`
+          `📊 Press Ctrl+I to generate ${diagramType} with Copilot`
         );
         
         endLog(true);
@@ -812,12 +826,12 @@ export function activate(context: vscode.ExtensionContext) {
         const fileName = editor.document.fileName.split(/[/\\]/).pop();
         const frameworkName = framework.label.replace(/\$\([^)]+\)\s*/, '');
         
-        const prompt = `@alex generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
-          `🧪 Test prompt for ${fileName} copied. Paste in Copilot Chat.`
+          `🧪 Test prompt for ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
         
         endLog(true);

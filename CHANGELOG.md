@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.15] - 2026-01-31 🎨 UX Polish
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** UI/UX improvements across Welcome View and commands
+
+### Changed
+
+- **🧠 Welcome View Reorganization**
+  - "Chat with Copilot" now first in Core section (opens Agent mode directly)
+  - "Initialize / Update" moved to Core section (was System)
+  - "Generate Skill Catalog" moved to Developer Tools (was Knowledge)
+  - Unique icons: Search Knowledge (🔎), Generate Diagram (📐), Diagnostics (🩺)
+
+- **🚀 Agent Mode Integration** — All commands now open Agent mode
+  - Run Project Audit, Release Preflight, Debug This, Code Review, Generate Tests
+  - Prompts no longer include `@alex` prefix (Agent doesn't need it)
+  - Cleaner UX: prompt copied to clipboard, Agent opens automatically
+
+- **📊 Generate Diagram** — Creates file instead of chat
+  - Opens new markdown file with Mermaid template
+  - Cursor positioned for Ctrl+I Copilot generation
+  - Includes selected code as context if any
+
+- **🎨 Status Bar** — Removed jarring background colors
+  - Warning/error states now use emoji only (🟡/🔴)
+  - Session paused state uses ⏸️ emoji instead of yellow background
+
+### Fixed
+
+- **🎨 Markdown Styles** — Now properly overwrites old relative paths
+  - Previously skipped update if any value was set globally
+  - Now checks if correct absolute path is configured
+
+---
+
 ## [3.7.12] - 2026-01-31 🎨 Global Markdown Styles
 
 > **Status:** Pre-release (use `--pre-release` flag)
