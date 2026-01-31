@@ -32,52 +32,36 @@
   ],
   "conversation_starters": [
     {
-      "title": "👋 Meet Alex",
-      "text": "Hey Alex! Tell me about yourself"
+      "title": "👋 Learn about me",
+      "text": "Hey Alex! Look me up - my profile, calendar, who I work with. Get to know me."
     },
     {
-      "title": "📝 Set up memory",
-      "text": "Help me set up my OneDrive memory so you can remember me"
+      "title": "🎯 Prep for my next meeting",
+      "text": "Who am I meeting with next? Look up every attendee and tell me about them."
     },
     {
-      "title": "📅 Meeting prep",
-      "text": "Prep me for my next meeting - who's attending, what should I know?"
+      "title": "📊 Am I overloaded?",
+      "text": "Check my calendar - how many meetings do I have? Any back-to-backs? Where's my focus time?"
     },
     {
-      "title": "📧 Email catch-up",
-      "text": "What important emails should I know about from this week?"
+      "title": "🤝 Who do I work with most?",
+      "text": "Build me a stakeholder map - who are my top collaborators based on meetings, emails, and Teams?"
     },
     {
-      "title": "👥 Who is...",
-      "text": "Tell me about the people I'm meeting with today"
+      "title": "👤 Tell me about someone",
+      "text": "Tell me about [name] - look them up and show me our interaction history"
     },
     {
-      "title": "💬 Teams recap",
-      "text": "What's been discussed in my Teams channels this week?"
-    },
-    {
-      "title": "📊 Weekly review",
-      "text": "Let's do a weekly review - summarize my meetings, emails, and progress"
-    },
-    {
-      "title": "🍅 Focus session",
-      "text": "Let's start a 25-minute focus session - I need to concentrate on something"
-    },
-    {
-      "title": "🎯 Goal check-in",
-      "text": "Check my learning goals - how am I progressing?"
+      "title": "📬 Weekly review",
+      "text": "Let's review my week - meetings, emails, Teams activity, and what I accomplished"
     },
     {
       "title": "🧠 Meditate",
-      "text": "Let's meditate - consolidate what I learned today"
+      "text": "Let's meditate - consolidate what I learned today into memory"
     },
     {
       "title": "💭 Dream",
-      "text": "Dream - review my memory and suggest updates"
-    },
-    {
-      "title": "🔮 Self-actualize",
-      "text": "Self-actualize - how am I doing overall?"
+      "text": "Dream - review my OneDrive notes and suggest what to remember"
     }
   ]
 }
