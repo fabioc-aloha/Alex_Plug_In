@@ -7,9 +7,18 @@
 | **Current Master Version** | 3.9.0 |
 | **Current Heirs** | VS Code (3.9.0), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
-| **Status** | 📋 Planning |
+| **Status** | ⏳ v4.0.0 Active Development |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
+
+---
+
+## 📊 Quick Status
+
+| Version | Focus | Status |
+|---------|-------|--------|
+| v3.6.0-v3.9.0 | Dawn → Awareness | ✅ Complete (~2 days) |
+| **v4.0.0 Trust** | CAIR/CSR, Creative Latitude | ⏳ **Active** |
 
 ---
 
@@ -111,161 +120,23 @@
 
 ---
 
-## 🎯 v3.6.0 Dawn — Comeback Release
+## ✅ Completed Versions (v3.6.0 - v3.9.0)
 
-> **Goal:** Stability, single source of truth, both heirs working
+> **Summary:** Dawn → Awareness completed in ~2 days (vs 11 weeks planned)
+> 
+> See [📜 Completed Versions Archive](#-completed-versions-archive) for detailed feature lists.
 
-### Master Alex Tasks
-
-| # | Task | Status | Description |
-|:-:|------|:------:|-------------|
-| 1 | Single source of truth | ✅ | Root `.github/` is canonical (78 files) |
-| 2 | Archive Phoenix artifacts | ✅ | Extension `.github/`, v3.5 roadmap archived |
-| 3 | Preserve domain knowledge | ✅ | 7 DK files merged from extension |
-| 4 | Preserve skills | ✅ | 5 skills merged from extension |
-| 5 | Document family model | ✅ | COMEBACK-PLAN.md created |
-| 6 | Unified roadmap | ✅ | This document |
-
-### VS Code Heir Tasks
-
-| # | Task | Status | Description |
-|:-:|------|:------:|-------------|
-| 1 | Create build script | ✅ | `build-extension-package.ps1` generates `.github/` from root |
-| 2 | Test extension builds | ✅ | `npm install`, `npm run compile`, `npm run package` |
-| 3 | Verify all features | ✅ | 17 commands, 11 tools, status bar, welcome view |
-| 4 | Update version | ✅ | 3.7.2 in package.json |
-| 5 | Test fresh install | ✅ | Install on new workspace |
-| 6 | Publish Beta 2 | ✅ | v3.7.2 on Marketplace (pre-release) |
-
-### M365 Heir Tasks
-
-| # | Task | Status | Description |
-|:-:|------|:------:|-------------|
-| 1 | Schema verification | ✅ | Using v1.6 (latest) |
-| 2 | Identity alignment audit | ✅ | Verified 2026-01-31: Name, character, nicknames, protocols aligned |
-| 3 | Test all capabilities | ⚠️ | User testing required: OneDrive, Email, Teams, People, Meetings |
-| 4 | Document platform differences | ✅ | Created DK-MULTI-PLATFORM-ARCHITECTURE.md |
-
-### Success Criteria
-
-- [x] VS Code extension builds and installs cleanly
-- [x] All existing VS Code features work
-- [x] M365 agent personality matches VS Code Alex *(verified 2026-01-31)*
-- [x] Both heirs recognizable as "Alex"
+| Version | Codename | Key Features |
+|---------|----------|--------------|
+| v3.6.0 | Dawn | Stability, single source of truth, kill switch |
+| v3.7.x | Foundation | Global knowledge, cloud sync, 50 skills |
+| v3.8.0 | Expression | `/help`, `/forget`, `/confidence`, uncertainty language |
+| v3.8.1 | UX Polish | GitHub Copilot branding, architecture-audit fix |
+| v3.9.0 | Awareness | Self-correction, red flag detection, temporal uncertainty |
 
 ---
 
-## 🎯 v3.7.0 Foundation — Confidence Infrastructure
-
-> **Goal:** Core calibration systems in Master, inherited by both heirs
-
-### Master Alex Changes
-
-| # | Change | Files Affected |
-|:-:|--------|----------------|
-| 1 | 4-tier source grounding protocol | `DK-APPROPRIATE-RELIANCE.md` v1.4 |
-| 2 | Confidence ceiling rules | `protocol-triggers.instructions.md` |
-| 3 | Self-correction protocol | `alex-core.instructions.md` |
-
-### VS Code Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | `/help` command | 1d | Discoverability for all commands |
-| 2 | `/forget <topic>` command | 2d | Selective memory cleanup |
-| 3 | Confidence tier awareness | 2d | Tools report confidence levels |
-
-### M365 Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | Instructions update | 1d | Embed confidence language patterns |
-| 2 | Conversation starter | 0.5d | "How confident are you about...?" |
-
-### Cross-Platform Validation
-
-- [ ] Same confidence expressions in both platforms
-- [ ] Both heirs use 4-tier language (documented, inferred, uncertain, unknown)
-
----
-
-## 🎯 v3.8.0 Expression — Uncertainty Communication
-
-> **Goal:** Calibrated uncertainty language in all responses
-
-### Master Alex Changes
-
-| # | Change | Files Affected |
-|:-:|--------|----------------|
-| 1 | Uncertainty language patterns | `DK-APPROPRIATE-RELIANCE.md` v1.5 |
-| 2 | Source attribution protocol | `protocol-triggers.instructions.md` |
-| 3 | Verification suggestion triggers | `protocol-triggers.instructions.md` |
-
-### VS Code Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | Source citations in responses | 1d | "According to `file.ts`..." |
-| 2 | Verification prompts | 1d | "You may want to verify..." |
-| 3 | User profile epistemic settings | 2d | Formality/expertise adaptation |
-
-### M365 Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | Instructions update | 1d | Embed uncertainty expressions |
-| 2 | OneDrive citation pattern | 0.5d | "According to your notes..." |
-| 3 | **MS Graph Profile Discovery** | 2d | Auto-populate user profile via Graph API |
-
-**MS Graph Profile Discovery Details:**
-- User Profile: Name, title, department, manager, photo
-- Calendar: Work patterns, meeting frequency, focus time preferences
-- Teams: Collaboration style, frequent contacts
-- Org Chart: Team structure, reporting relationships
-- OneDrive: Recent documents for expertise inference
-
-### Cross-Platform Validation
-
-- [ ] Same uncertainty phrases in both platforms
-- [ ] Verification prompts feel natural, not robotic
-
----
-
-## 🎯 v3.9.0 Awareness — Detection & Self-Correction
-
-> **Goal:** Proactive risk detection, graceful error handling
-
-### Master Alex Changes
-
-| # | Change | Files Affected |
-|:-:|--------|----------------|
-| 1 | "Confident but wrong" heuristics | `protocol-triggers.instructions.md` |
-| 2 | Self-critique protocol | `DK-APPROPRIATE-RELIANCE.md` v1.6 |
-| 3 | Graceful correction patterns | `alex-core.instructions.md` |
-
-### VS Code Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | Misconception detection | 2d | Flag "everyone knows" patterns |
-| 2 | Temporal uncertainty | 1d | Flag version-specific claims |
-| 3 | Self-critique generation | 2d | "One potential issue..." |
-
-### M365 Heir Features
-
-| # | Feature | Effort | Description |
-|:-:|---------|:------:|-------------|
-| 1 | Instructions update | 1d | Embed detection heuristics |
-| 2 | Calendar-aware temporal flags | 0.5d | "As of your last meeting..." |
-
-### Cross-Platform Validation
-
-- [ ] Same self-correction phrase: "You're right. I got that wrong."
-- [ ] Both heirs proactively identify uncertain claims
-
----
-
-## 🎯 v4.0.0 Trust — Full Epistemic Integrity
+## 🎯 v4.0.0 Trust — Full Epistemic Integrity (ACTIVE)
 
 > **Goal:** CAIR/CSR framework, creative latitude, measurement
 
@@ -458,18 +329,17 @@ Useful for:
 
 ## 📊 Timeline Summary
 
-| Version | Focus | Master | VS Code | M365 | Duration | Status |
-|---------|-------|--------|---------|------|----------|--------|
-| 3.6.0 | Stability | ✅ | ✅ Rebuild | ✅ Audit | Day 1 | ✅ Complete |
-| 3.7.x | Foundation | ✅ | ✅ +features | ✅ +Graph | Day 1-2 | ✅ Complete |
-| 3.8.0 | Expression | ✅ | ✅ /help, /forget, /confidence | ✅ Confidence | Day 2 | ✅ Complete |
-| 3.8.1 | UX Polish | ✅ | ✅ GitHub Copilot branding | — | Day 2 | ✅ Complete |
-| 3.9.0 | Awareness | ✅ | ✅ Awareness skill | ✅ Self-Awareness | Day 2 | ✅ **CURRENT** |
-| 4.0.0 | Trust | Planned | +5 features | +instructions | TBD | ⏳ Next |
+| Version | Focus | Status | Released |
+|---------|-------|--------|----------|
+| 3.6.0 | Dawn (Stability) | ✅ Complete | 2026-01-29 |
+| 3.7.x | Foundation | ✅ Complete | 2026-01-29 |
+| 3.8.x | Expression + UX | ✅ Complete | 2026-01-30 |
+| 3.9.0 | Awareness | ✅ Complete | 2026-01-30 |
+| **4.0.0** | **Trust** | ⏳ **Active** | — |
 
-**Actual: ~2 days** from Dawn (3.6.0) to Awareness (3.9.0) 🚀
+**v3.6.0 → v3.9.0: ~2 days** (vs 11 weeks planned) 🚀
 
-**Remaining: v4.0.0 Trust** — Full epistemic integrity features
+See [Completed Versions Archive](#-completed-versions-archive) for historical details.
 
 ---
 
@@ -521,6 +391,114 @@ Useful for:
 | [article/appropriate-reliance/](article/appropriate-reliance/) | Research foundation for v4.0 |
 | [platforms/vscode-extension/](platforms/vscode-extension/) | VS Code heir implementation |
 | [platforms/m365-copilot/](platforms/m365-copilot/) | M365 heir implementation |
+
+---
+
+## 📜 Completed Versions Archive
+
+<details>
+<summary>📦 v3.6.0 Dawn — Stability First (Complete)</summary>
+
+### v3.6.0 Dawn Changes
+
+**Goal:** Restore trust. Rebuild from verified stable state.
+
+#### Master Alex
+- Verified `copilot-instructions.md` structure
+- All procedural memory (`.instructions.md`) functional
+- All episodic memory (`.prompt.md`) functional
+- Synapses validated
+
+#### VS Code Heir
+- Rebuilt from root `.github/`
+- All 16 commands functional
+- Chat participant operational
+- Language model tools working
+
+#### M365 Heir
+- Audited `declarativeAgent.json`
+- Core personality intact
+- Capability list correct
+
+</details>
+
+<details>
+<summary>📦 v3.7.x Foundation — Core Features (Complete)</summary>
+
+### v3.7.0-v3.7.19 Changes
+
+**Goal:** Foundation infrastructure, feature parity
+
+#### Key Features
+- Kill switch protection (v3.7.0)
+- Global knowledge base structure
+- OneDrive cloud sync
+- UX improvements (status bar, welcome view)
+- M365 Confidence Protocol
+- Anti-hallucination patterns
+
+#### Skills Added
+- 50 skills integrated
+
+</details>
+
+<details>
+<summary>📦 v3.8.x Expression — Identity & Communication (Complete)</summary>
+
+### v3.8.0 Expression Changes
+
+**Goal:** Alex communicates uncertainty and maintains character
+
+#### Master Alex
+- Enhanced `protocol-triggers.instructions.md` with confidence triggers
+- Added "How to Say You're Uncertain" to `alex-core.instructions.md`
+
+#### VS Code Heir
+- `/help` command
+- `/forget` command  
+- `/confidence` command
+- Confidence prompting
+
+#### M365 Heir
+- Graph-powered confidence checking
+- Same confidence protocols
+
+### v3.8.1 UX Polish
+
+- "Chat with GitHub Copilot" button with inline SVG icon
+- Primary button styling for visibility
+- Architecture-audit skill `.github/` exclusion fix
+
+</details>
+
+<details>
+<summary>📦 v3.9.0 Awareness — Epistemic Vigilance (Complete)</summary>
+
+### v3.9.0 Awareness Changes
+
+**Goal:** Self-correction when confident-but-wrong
+
+#### Master Alex
+- Confident-but-wrong detection triggers
+- Graceful correction protocols
+- Temporal uncertainty handling
+
+#### VS Code Heir
+- Awareness skill (#51)
+- Self-critique generation
+- Red flag phrase detection
+
+#### M365 Heir
+- Self-Awareness Protocols in declarativeAgent.json
+- Same correction patterns
+
+#### Key Protocols
+- Red Flag Detection: "I believe", "I think", "AFAIK"
+- Temporal Flags: "as of my knowledge cutoff"
+- Self-Critique: 3 reasons current understanding could be wrong
+- Graceful Correction: "You're right. I got that wrong."
+
+</details>
 
 ---
 
