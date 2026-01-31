@@ -14,12 +14,6 @@
       "target": "architecture-health"
     },
     {
-      "reason": "Documents synthesized knowledge patterns",
-      "type": "documents",
-      "strength": 0.7,
-      "target": "knowledge-synthesis"
-    },
-    {
       "reason": "Tracks learning progress for users",
       "type": "enables",
       "strength": 0.6,

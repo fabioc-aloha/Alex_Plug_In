@@ -9,16 +9,10 @@
             "reason": "Health checks feed self-actualization"
         },
         {
-            "target": "architecture-refinement",
-            "type": "supports",
-            "strength": 0.7,
-            "reason": "Health data guides refinement"
-        },
-        {
-            "target": "meditation-facilitation",
+            "target": "meditation",
             "type": "informs",
             "strength": 0.65,
-            "reason": "Health status during meditation"
+            "reason": "Health status during meditation sessions"
         }
     ],
     "triggers": [

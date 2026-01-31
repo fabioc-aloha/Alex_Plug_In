@@ -37,12 +37,6 @@
       "type": "escalates",
       "strength": 0.4,
       "target": "incident-response"
-    },
-    {
-      "reason": "Retrospective reflection and lessons learned",
-      "type": "supports",
-      "strength": 0.4,
-      "target": "meditation-facilitation"
     }
   ],
   "inheritance": "inheritable",

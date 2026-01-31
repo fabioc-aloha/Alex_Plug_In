@@ -39,12 +39,6 @@
       "type": "supports",
       "strength": 0.4,
       "target": "writing-publication"
-    },
-    {
-      "reason": "Reflective design iteration",
-      "type": "uses",
-      "strength": 0.4,
-      "target": "meditation-facilitation"
     }
   ],
   "inheritance": "inheritable",

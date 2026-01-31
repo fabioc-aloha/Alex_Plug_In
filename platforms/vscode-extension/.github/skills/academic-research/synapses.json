@@ -15,12 +15,6 @@
       "target": "bootstrap-learning"
     },
     {
-      "reason": "Literature synthesis and research integration patterns",
-      "type": "uses",
-      "strength": 0.65,
-      "target": "knowledge-synthesis"
-    },
-    {
       "reason": "Research problem analysis and gap identification",
       "type": "applies",
       "strength": 0.65,
@@ -31,12 +25,6 @@
       "type": "considers",
       "strength": 0.4,
       "target": "cognitive-load"
-    },
-    {
-      "reason": "Knowledge consolidation after research sessions",
-      "type": "supports",
-      "strength": 0.4,
-      "target": "meditation-facilitation"
     }
   ],
   "inheritance": "inheritable",
