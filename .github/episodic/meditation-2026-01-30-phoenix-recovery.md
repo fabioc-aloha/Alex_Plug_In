@@ -119,12 +119,12 @@ This meditation consolidates learnings from the **Phoenix crisis recovery** — 
 
 ### Connection Mapping
 
-- [DK-PHOENIX-RECOVERY.md] (Critical, Documents, Forward) - "Session created this knowledge file"
+- [PHOENIX-RECOVERY.md] (Critical, Documents, Forward) - "Alex_docs has recovery documentation"
 - [unified-meditation-protocols.prompt.md] (High, Follows, Forward) - "Protocol compliance"
 - [RISKS.md] (Medium, Integrates, Bidirectional) - "Session addresses documented risks"
 
 ### Activation Patterns
-- Phoenix-like symptoms → Reference DK-PHOENIX-RECOVERY.md
+- Phoenix-like symptoms → Reference alex_docs/PHOENIX-RECOVERY.md
 - Post-crisis meditation → Follow this session as template
 
 ---
