@@ -281,8 +281,8 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 | Component | Version |
 | --- | --- |
-| Alex Extension | 3.7.3 |
-| Cognitive Architecture | 3.7.3 |
+| Alex Extension | See `@alex /status` |
+| Cognitive Architecture | See `.github/copilot-instructions.md` |
 | Global Knowledge Schema | 1.0.0 |
 
 ---

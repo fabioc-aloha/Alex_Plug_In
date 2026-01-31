@@ -317,4 +317,4 @@ graph TB
 
 ---
 
-*Alex Cognitive Architecture v3.7.3*
+*Alex Cognitive Architecture*

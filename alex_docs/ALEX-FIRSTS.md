@@ -5,7 +5,6 @@
 | | |
 |---|---|
 | **Created** | 2026-01-31 |
-| **Version** | 3.7.3 |
 | **Status** | Living Document |
 
 ---
@@ -307,4 +306,4 @@ As VS Code's AI extensibility matures, we expect:
 
 ---
 
-*Alex Cognitive Architecture v3.7.3 - Pioneering the future of AI-assisted development*
+*Alex Cognitive Architecture - Pioneering the future of AI-assisted development*

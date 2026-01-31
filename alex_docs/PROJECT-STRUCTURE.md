@@ -157,9 +157,9 @@ graph TB
 
 **Specialized expertise** - deep knowledge in specific areas. Each skill is a folder with `SKILL.md` and optional `synapses.json`.
 
-### Core Skills (48 folders)
+### Core Skills (49 folders)
 
-Master Alex includes 48 skills covering areas like:
+Master Alex includes 49 skills covering areas like:
 
 **Table 8:** *Example Skill Categories*
 
@@ -182,7 +182,7 @@ skills/
 ├── debugging-patterns/
 │   ├── SKILL.md
 │   └── synapses.json
-└── ... (46 total)
+└── ... (49 total)
 ```
 
 **When to edit**: Add project-specific skills by creating new folders with `SKILL.md`.
