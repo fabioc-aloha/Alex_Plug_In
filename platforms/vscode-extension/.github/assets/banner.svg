@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Gradient for background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    
+    <!-- Gradient for neural glow -->
+    <radialGradient id="neuralGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0"/>
+    </radialGradient>
+    
+    <!-- Gradient for accent glow -->
+    <radialGradient id="accentGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:0"/>
+    </radialGradient>
+    
+    <!-- Text gradient -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#007ACC"/>
+      <stop offset="100%" style="stop-color:#00a8e8"/>
+    </linearGradient>
+    
+    <!-- Synapse line gradient -->
+    <linearGradient id="synapseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.1"/>
+      <stop offset="50%" style="stop-color:#007ACC;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bgGradient)"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#007ACC" stroke-width="0.5"/>
+    </pattern>
+    <rect width="1280" height="640" fill="url(#grid)"/>
+  </g>
+  
+  <!-- Neural network background visualization -->
+  <!-- Large glow circles -->
+  <circle cx="200" cy="320" r="300" fill="url(#neuralGlow)"/>
+  <circle cx="1080" cy="320" r="250" fill="url(#accentGlow)"/>
+  
+  <!-- Neural nodes - left side -->
+  <g opacity="0.6">
+    <!-- Layer 1 -->
+    <circle cx="100" cy="180" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="280" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="380" r="8" fill="#007ACC"/>
+    <circle cx="100" cy="480" r="8" fill="#007ACC"/>
+    
+    <!-- Layer 2 -->
+    <circle cx="220" cy="220" r="10" fill="#007ACC"/>
+    <circle cx="220" cy="320" r="10" fill="#007ACC"/>
+    <circle cx="220" cy="420" r="10" fill="#007ACC"/>
+    
+    <!-- Layer 3 -->
+    <circle cx="340" cy="270" r="12" fill="#4CAF50"/>
+    <circle cx="340" cy="370" r="12" fill="#4CAF50"/>
+    
+    <!-- Connections -->
+    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
+      <!-- Layer 1 to 2 -->
+      <line x1="108" y1="180" x2="210" y2="220"/>
+      <line x1="108" y1="180" x2="210" y2="320"/>
+      <line x1="108" y1="280" x2="210" y2="220"/>
+      <line x1="108" y1="280" x2="210" y2="320"/>
+      <line x1="108" y1="280" x2="210" y2="420"/>
+      <line x1="108" y1="380" x2="210" y2="320"/>
+      <line x1="108" y1="380" x2="210" y2="420"/>
+      <line x1="108" y1="480" x2="210" y2="420"/>
+      
+      <!-- Layer 2 to 3 -->
+      <line x1="230" y1="220" x2="328" y2="270"/>
+      <line x1="230" y1="320" x2="328" y2="270"/>
+      <line x1="230" y1="320" x2="328" y2="370"/>
+      <line x1="230" y1="420" x2="328" y2="370"/>
+    </g>
+  </g>
+  
+  <!-- Neural nodes - right side -->
+  <g opacity="0.6">
+    <!-- Layer 1 -->
+    <circle cx="1180" cy="200" r="8" fill="#4CAF50"/>
+    <circle cx="1180" cy="320" r="8" fill="#4CAF50"/>
+    <circle cx="1180" cy="440" r="8" fill="#4CAF50"/>
+    
+    <!-- Layer 2 -->
+    <circle cx="1060" cy="260" r="10" fill="#4CAF50"/>
+    <circle cx="1060" cy="380" r="10" fill="#4CAF50"/>
+    
+    <!-- Layer 3 -->
+    <circle cx="940" cy="320" r="12" fill="#007ACC"/>
+    
+    <!-- Connections -->
+    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
+      <line x1="1172" y1="200" x2="1070" y2="260"/>
+      <line x1="1172" y1="320" x2="1070" y2="260"/>
+      <line x1="1172" y1="320" x2="1070" y2="380"/>
+      <line x1="1172" y1="440" x2="1070" y2="380"/>
+      <line x1="1050" y1="260" x2="952" y2="320"/>
+      <line x1="1050" y1="380" x2="952" y2="320"/>
+    </g>
+  </g>
+  
+  <!-- Floating particles -->
+  <g fill="#007ACC" opacity="0.4">
+    <circle cx="450" cy="150" r="3"/>
+    <circle cx="520" cy="500" r="2"/>
+    <circle cx="780" cy="120" r="4"/>
+    <circle cx="850" cy="520" r="3"/>
+    <circle cx="600" cy="80" r="2"/>
+    <circle cx="680" cy="560" r="3"/>
+    <circle cx="400" cy="450" r="2"/>
+    <circle cx="880" cy="180" r="2"/>
+  </g>
+  <g fill="#4CAF50" opacity="0.3">
+    <circle cx="500" cy="100" r="2"/>
+    <circle cx="750" cy="540" r="3"/>
+    <circle cx="420" cy="520" r="2"/>
+    <circle cx="860" cy="100" r="2"/>
+  </g>
+  
+  <!-- Central brain/memory icon -->
+  <g transform="translate(640, 170)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#007ACC" stroke-width="2" opacity="0.3"/>
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.2"/>
+    
+    <!-- Brain-like shape with memory nodes -->
+    <g fill="none" stroke="#007ACC" stroke-width="2.5" opacity="0.8">
+      <!-- Left hemisphere -->
+      <path d="M-30,-35 Q-50,-30 -45,-5 Q-50,20 -30,35 Q-15,45 0,40"/>
+      <!-- Right hemisphere -->
+      <path d="M30,-35 Q50,-30 45,-5 Q50,20 30,35 Q15,45 0,40"/>
+      <!-- Center connection -->
+      <path d="M0,-40 Q0,-20 0,0 Q0,20 0,40"/>
+      <!-- Cross connections -->
+      <path d="M-25,0 Q0,-10 25,0"/>
+      <path d="M-20,-20 Q0,-15 20,-20"/>
+      <path d="M-20,20 Q0,25 20,20"/>
+    </g>
+    
+    <!-- Memory nodes -->
+    <circle cx="-35" cy="-20" r="6" fill="#4CAF50"/>
+    <circle cx="35" cy="-20" r="6" fill="#4CAF50"/>
+    <circle cx="-35" cy="15" r="6" fill="#007ACC"/>
+    <circle cx="35" cy="15" r="6" fill="#007ACC"/>
+    <circle cx="0" cy="-35" r="6" fill="#4CAF50"/>
+    <circle cx="0" cy="35" r="6" fill="#007ACC"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="640" y="310" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
+    Alex
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="640" y="370" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
+    Cognitive Architecture
+  </text>
+  
+  <!-- Tagline -->
+  <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94a3b8" letter-spacing="6">
+    CODE. WRITE. RESEARCH.
+  </text>
+  
+  <!-- VS Code badge -->
+  <g transform="translate(640, 470)">
+    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="#007ACC" opacity="0.2"/>
+    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="none" stroke="#007ACC" stroke-width="1.5" opacity="0.6"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#007ACC">
+      VS Code Extension
+    </text>
+  </g>
+  
+  <!-- Use Case Badges -->
+  <g transform="translate(640, 580)">
+    <!-- Code icon + label -->
+    <g transform="translate(-480, 0)">
+      <rect x="-45" y="-16" width="90" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-20" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">💻</text>
+      <text x="15" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Code</text>
+    </g>
+    
+    <!-- Research icon + label -->
+    <g transform="translate(-320, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🔬</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Research</text>
+    </g>
+    
+    <!-- Writing icon + label -->
+    <g transform="translate(-160, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">✍️</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Writing</text>
+    </g>
+    
+    <!-- Academic icon + label -->
+    <g transform="translate(0, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🎓</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Academic</text>
+    </g>
+    
+    <!-- Projects icon + label -->
+    <g transform="translate(160, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">📊</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Projects</text>
+    </g>
+    
+    <!-- Business icon + label -->
+    <g transform="translate(320, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">📋</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Business</text>
+    </g>
+    
+    <!-- Creative icon + label -->
+    <g transform="translate(480, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🎭</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Creative</text>
+    </g>
+  </g>
+  
+  <!-- Decorative lines -->
+  <line x1="440" y1="395" x2="540" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  <line x1="740" y1="395" x2="840" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Corner accents -->
+  <g stroke="#007ACC" stroke-width="2" opacity="0.4" fill="none">
+    <path d="M30,30 L30,60 M30,30 L60,30"/>
+    <path d="M1250,30 L1250,60 M1250,30 L1220,30"/>
+    <path d="M30,610 L30,580 M30,610 L60,610"/>
+    <path d="M1250,610 L1250,580 M1250,610 L1220,610"/>
+  </g>
+</svg>

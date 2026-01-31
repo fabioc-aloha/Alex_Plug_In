@@ -1,0 +1,27 @@
+{
+  "sourceVersion": "3.7.3",
+  "sourceCommit": "30aa035",
+  "exclusionPatterns": [
+    "ISSUE_TEMPLATE",
+    "PULL_REQUEST_TEMPLATE.md",
+    "FUNDING.yml",
+    "dependabot.yml",
+    "workflows",
+    "episodic/dream-report-*.md",
+    "episodic/meditation-session-*.md",
+    "config/cognitive-config.json",
+    "config/MASTER-ALEX-PROTECTED.json",
+    "skills/meditation",
+    "skills/meditation-facilitation",
+    "skills/knowledge-synthesis",
+    "skills/global-knowledge",
+    "skills/architecture-refinement",
+    "skills/llm-model-selection",
+    "skills/self-actualization",
+    "skills/heir-curation",
+    "skills/master-alex-audit"
+  ],
+  "filesCopied": 131,
+  "generatedAt": "2026-01-31 09:29:09",
+  "filesExcluded": 29
+}
