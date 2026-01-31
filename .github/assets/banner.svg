@@ -228,7 +228,7 @@
   </g>
   
   <!-- Use Case Badges Row 2 -->
-  <g transform="translate(640, 590)">
+  <g transform="translate(680, 590)">
     <!-- Design -->
     <g transform="translate(-360, 0)">
       <rect x="-42" y="-14" width="84" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
