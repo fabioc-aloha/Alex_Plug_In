@@ -19,10 +19,15 @@ applyTo: "**/*.png,**/*.jpg,**/*.webp,**/*image*,**/*convert*"
 ## Conversion Commands
 
 ```powershell
-# SVG to PNG (sharp/node)
-npx sharp-cli -i input.svg -o output.png -w 512 -h 512
+# SVG to PNG using sharp-cli (recommended)
+# --density sets DPI for vector rendering (150 = crisp text)
+npx sharp-cli -i input.svg -o output-folder/ --density 150 -f png
 
-# ImageMagick
+# Note: output must be a directory, filename preserved from input
+npx sharp-cli -i banner.svg -o assets/ --density 150 -f png
+# Creates: assets/banner.png
+
+# ImageMagick (if installed)
 magick input.svg -resize 512x512 output.png
 magick input.png -quality 85 output.jpg
 
@@ -31,6 +36,12 @@ foreach ($size in 16,32,64,128,256,512) {
   magick input.svg -resize ${size}x${size} "icon-$size.png"
 }
 ```
+
+## SVG to PNG Tips
+
+- **Emojis don't convert well** - Use text-only or SVG icons
+- **Use `--density 150+`** for crisp text rendering
+- **Check file size** - README banners should be < 500KB
 
 ## GitHub README Images
 
