@@ -1,0 +1,66 @@
+{
+    "skill": "architecture-audit",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "description": "Comprehensive project consistency review across code, documentation, diagrams, and configuration",
+    "triggers": [
+        "audit",
+        "comprehensive review",
+        "fact-check",
+        "consistency check",
+        "project health",
+        "pre-release audit",
+        "documentation review"
+    ],
+    "connections": [
+        {
+            "target": "release-preflight/SKILL.md",
+            "strength": 0.85,
+            "type": "enables",
+            "direction": "forward",
+            "description": "Pre-release audit trigger"
+        },
+        {
+            "target": "architecture-health/SKILL.md",
+            "strength": 0.8,
+            "type": "complements",
+            "direction": "bidirectional",
+            "description": "Health + consistency validation"
+        },
+        {
+            "target": "code-review/SKILL.md",
+            "strength": 0.6,
+            "type": "extends",
+            "direction": "forward",
+            "description": "Broader scope than code review"
+        },
+        {
+            "target": "refactoring-patterns/SKILL.md",
+            "strength": 0.65,
+            "type": "triggers",
+            "direction": "backward",
+            "description": "Post-refactor audit needed"
+        },
+        {
+            "target": "../instructions/self-actualization.instructions.md",
+            "strength": 0.5,
+            "type": "complements",
+            "direction": "bidirectional",
+            "description": "Architecture introspection"
+        },
+        {
+            "target": "lint-clean-markdown/SKILL.md",
+            "strength": 0.55,
+            "type": "applies",
+            "direction": "forward",
+            "description": "Documentation quality checks"
+        },
+        {
+            "target": "testing-strategies/SKILL.md",
+            "strength": 0.5,
+            "type": "complements",
+            "direction": "bidirectional",
+            "description": "Verification mindset"
+        }
+    ]
+}

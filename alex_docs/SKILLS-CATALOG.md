@@ -7,11 +7,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 45
+## Skill Count: 46
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 35 |
+| Inheritable | 36 |
 | Master-Only | 8 |
 | Heir: VS Code | 2 |
 | Heir: M365 | 2 |
@@ -96,6 +96,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 |-------|-------------|---------|
 | [architecture-refinement](../.github/skills/architecture-refinement/) | master-only | Architecture evolution decisions |
 | [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
+| [architecture-audit](../.github/skills/architecture-audit/) | inheritable | Comprehensive consistency review |
 | [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
@@ -185,6 +186,7 @@ flowchart LR
         AH[architecture-health]
         ARF[architecture-refinement]
         SCG[skill-catalog-generator]
+        AAU[architecture-audit]
     end
 
     subgraph Eng["🔧 Engineering"]
@@ -256,6 +258,7 @@ flowchart LR
     MED --> MF --> KS --> GK
     SA --> AH --> ARF
     SCG --> MM & AH & KS & LP & PS
+    AAU --> AH & RF & CR & LM
 
     %% Beta/temporary skill flow
     BT --> AH & DP & ERP & RCA & IR
@@ -322,7 +325,7 @@ flowchart LR
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LLM,GW,PRA,SFI stale
     class BT temp
-    class BL,LP,CL,AR,AH,SCG,TS,RP,DP,CR,PS,VSE,ERP,RCA,IR,RF,WP,MM,LM,AA,SVG,IH,ACR,CW,LOC,GD,BA,CM,PM inheritable
+    class BL,LP,CL,AR,AH,SCG,TS,RP,DP,CR,PS,VSE,ERP,RCA,IR,RF,WP,MM,LM,AA,SVG,IH,ACR,CW,LOC,GD,BA,CM,PM,AAU inheritable
 ```
 
 ### Legend
