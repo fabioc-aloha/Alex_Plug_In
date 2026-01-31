@@ -73,8 +73,8 @@ try {
     $pkg = Get-Item "$buildDir\appPackage.final.zip" -ErrorAction SilentlyContinue
     if (-not $pkg) {
         $pkg = Get-ChildItem "$buildDir\*.zip" -ErrorAction SilentlyContinue | 
-            Sort-Object LastWriteTime -Descending | 
-            Select-Object -First 1
+        Sort-Object LastWriteTime -Descending | 
+        Select-Object -First 1
     }
 
     if (-not $pkg) {
