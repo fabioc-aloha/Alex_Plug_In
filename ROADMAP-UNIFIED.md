@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.8.1 |
-| **Current Heirs** | VS Code (3.8.1), M365 (v1.6) |
+| **Current Master Version** | 3.9.0 |
+| **Current Heirs** | VS Code (3.9.0), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |
@@ -74,8 +74,8 @@
 | 3.7.18 | Embedded Knowledge | ✅ Done | ✅ Published | ✅ Ready | Complete |
 | 3.7.19 | Anti-Hallucination | ✅ Done | ✅ Published | ✅ Graph-Powered | Complete |
 | 3.8.0 | Expression | ✅ Done | ✅ Published | ✅ Confidence Starter | Complete |
-| **3.8.1** | **UX Polish** | **✅ Done** | **✅ Published** | — | **CURRENT** |
-| 3.9.0 | Awareness | Planned | Planned | Planned | — |
+| 3.8.1 | UX Polish | ✅ Done | ✅ Published | — | Complete |
+| **3.9.0** | **Awareness** | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **CURRENT** |
 | 4.0.0 | Trust | Planned | Planned | Planned | — |
 
 ---

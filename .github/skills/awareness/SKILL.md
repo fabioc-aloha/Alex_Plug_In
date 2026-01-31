@@ -119,7 +119,7 @@ When potential misconception detected:
 
 Example:
 ```
-"I believe this was introduced in React 17, but you'll want to verify 
+"I believe this was introduced in React 17, but you'll want to verify
 in the React docs as version details can blur in my memory."
 ```
 
