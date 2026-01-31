@@ -527,6 +527,9 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const sessions = await telemetry.getAllTelemetryData();
       const summary = telemetry.getSessionSummary();
+      const aggregate = await telemetry.getAllSessionsAggregate();
+      const alexSettings = telemetry.getAlexSettings();
+      const health = await checkHealth();
       const extensionVersion =
         context.extension.packageJSON.version || "unknown";
 
@@ -543,6 +546,31 @@ export function activate(context: vscode.ExtensionContext) {
     <style>
         body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); max-width: 900px; margin: 0 auto; }
         h1 { color: var(--vscode-textLink-foreground); }
+        h2 { margin-top: 24px; border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 8px; }
+        h3 { margin-top: 16px; margin-bottom: 8px; font-size: 14px; }
+        .summary { background: var(--vscode-textBlockQuote-background); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .stat { display: inline-block; margin-right: 24px; margin-bottom: 8px; }
+        .stat-value { font-size: 24px; font-weight: bold; color: var(--vscode-textLink-foreground); }
+        .stat-label { font-size: 12px; color: var(--vscode-descriptionForeground); }
+        pre { background: var(--vscode-textCodeBlock-background); padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 11px; max-height: 300px; overflow-y: auto; }
+        button { background: var(--vscode-button-background); color: var(--vscode-button-foreground); border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; font-size: 13px; }
+        button:hover { background: var(--vscode-button-hoverBackground); }
+        button.primary { background: var(--vscode-button-prominentBackground, #0066b8); }
+        button.secondary { background: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground); }
+        .privacy-box { background: var(--vscode-inputValidation-infoBackground); border: 1px solid var(--vscode-inputValidation-infoBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .privacy-box h3 { margin-top: 0; color: var(--vscode-textLink-foreground); }
+        .privacy-list { margin: 8px 0; padding-left: 20px; }
+        .privacy-list li { margin: 4px 0; }
+        .bug-report-box { background: var(--vscode-inputValidation-warningBackground); border: 1px solid var(--vscode-inputValidation-warningBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .bug-report-box h3 { margin-top: 0; }
+        .check { color: #4caf50; }
+        .info-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 12px 0; }
+        .info-label { font-weight: bold; color: var(--vscode-descriptionForeground); }
+        .health-box { background: var(--vscode-textBlockQuote-background); padding: 12px 16px; border-radius: 8px; margin: 12px 0; border-left: 4px solid ${health.status === 'healthy' ? '#4caf50' : health.status === 'warning' ? '#ff9800' : health.status === 'error' ? '#f44336' : '#9e9e9e'}; }
+        .settings-box { background: var(--vscode-textBlockQuote-background); padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
+        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 12px; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 600px) { .two-column { grid-template-columns: 1fr; } }
         h2 { margin-top: 24px; border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 8px; }
         .summary { background: var(--vscode-textBlockQuote-background); padding: 16px; border-radius: 8px; margin: 16px 0; }
         .stat { display: inline-block; margin-right: 24px; margin-bottom: 8px; }
@@ -613,9 +641,39 @@ export function activate(context: vscode.ExtensionContext) {
     <button onclick="refreshData()">🔄 Refresh</button>
     <button class="secondary" onclick="clearData()">🗑️ Clear All Data</button>
     
-    <h2>📈 Recent Activity</h2>
-    <p><strong>Top Events:</strong></p>
-    <pre>${((summary.topEvents as string[]) || []).join("\n") || "No events yet"}</pre>
+    <h2>🏥 Architecture Health</h2>
+    <div class="health-box">
+        <div class="info-grid">
+            <span class="info-label">Status:</span><span>${health.status === 'healthy' ? '✅ Healthy' : health.status === 'warning' ? '⚠️ Warning' : health.status === 'error' ? '❌ Error' : '⚫ Not Initialized'}</span>
+            <span class="info-label">Initialized:</span><span>${health.initialized ? 'Yes' : 'No'}</span>
+            <span class="info-label">Total Files:</span><span>${health.totalFiles}</span>
+            <span class="info-label">Total Synapses:</span><span>${health.totalSynapses}</span>
+            <span class="info-label">Broken Synapses:</span><span>${health.brokenSynapses}</span>
+            <span class="info-label">Summary:</span><span>${health.summary}</span>
+        </div>
+        ${health.issues.length > 0 ? `<p style="margin-top: 8px; margin-bottom: 0; font-size: 12px;"><strong>Issues:</strong> ${health.issues.slice(0, 5).join(', ')}${health.issues.length > 5 ? ` (+${health.issues.length - 5} more)` : ''}</p>` : ''}
+    </div>
+    
+    <div class="two-column">
+        <div>
+            <h2>📈 This Session</h2>
+            <pre>${((summary.topEvents as string[]) || []).join("\\n") || "No events yet"}</pre>
+        </div>
+        <div>
+            <h2>📊 All Sessions (${aggregate.totalSessions})</h2>
+            <pre>${((aggregate.topEventsAllTime as string[]) || []).join("\\n") || "No events yet"}</pre>
+        </div>
+    </div>
+    
+    <h2>⚙️ Settings</h2>
+    <div class="settings-box">
+        <div class="settings-grid">
+            <span><strong>workspace.protectedMode:</strong> ${alexSettings['workspace.protectedMode'] ?? 'undefined'}</span>
+            <span><strong>m365.enabled:</strong> ${alexSettings['m365.enabled'] ?? 'undefined'}</span>
+            <span><strong>cloudSync.enabled:</strong> ${alexSettings['cloudSync.enabled'] ?? 'undefined'}</span>
+            <span><strong>cloudSync.autoSync:</strong> ${alexSettings['cloudSync.autoSync'] ?? 'undefined'}</span>
+        </div>
+    </div>
     
     <h2>📁 Raw Session Data</h2>
     <p style="color: var(--vscode-descriptionForeground); font-size: 12px;">This is the complete diagnostic data that would be included in a bug report:</p>
@@ -642,6 +700,8 @@ export function activate(context: vscode.ExtensionContext) {
           telemetry.showTelemetryLog();
         } else if (message.command === "export") {
           const data = await telemetry.getAllTelemetryData();
+          const currentHealth = await checkHealth();
+          const currentSettings = telemetry.getAlexSettings();
           const timestamp = new Date()
             .toISOString()
             .replace(/[:.]/g, "-")
@@ -656,6 +716,17 @@ export function activate(context: vscode.ExtensionContext) {
               extensionVersion,
               vscodeVersion: vscode.version,
               platform: process.platform,
+              arch: process.arch,
+              health: {
+                status: currentHealth.status,
+                initialized: currentHealth.initialized,
+                totalFiles: currentHealth.totalFiles,
+                totalSynapses: currentHealth.totalSynapses,
+                brokenSynapses: currentHealth.brokenSynapses,
+                summary: currentHealth.summary,
+                issues: currentHealth.issues.slice(0, 10), // Limit issues
+              },
+              settings: currentSettings,
               sessions: data,
             };
             const content = new TextEncoder().encode(

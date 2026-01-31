@@ -332,7 +332,7 @@ export async function clearTelemetryData(): Promise<void> {
 }
 
 /**
- * Get summary statistics
+ * Get summary statistics for current session
  */
 export function getSessionSummary(): Record<string, unknown> {
   if (!currentSession) return {};
@@ -362,6 +362,58 @@ export function getSessionSummary(): Record<string, unknown> {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10)
       .map(([event, count]) => `${event}: ${count}`),
+  };
+}
+
+/**
+ * Get aggregated statistics across all sessions
+ */
+export async function getAllSessionsAggregate(): Promise<Record<string, unknown>> {
+  const allSessions = await getAllTelemetryData();
+  
+  const eventCounts: Record<string, number> = {};
+  let totalErrors = 0;
+  let totalDuration = 0;
+  let timedEventCount = 0;
+  let totalEvents = 0;
+  
+  for (const session of allSessions) {
+    for (const event of session.events) {
+      totalEvents++;
+      eventCounts[event.event] = (eventCounts[event.event] || 0) + 1;
+      if (event.category === "error") totalErrors++;
+      if (event.duration) {
+        totalDuration += event.duration;
+        timedEventCount++;
+      }
+    }
+  }
+  
+  return {
+    totalSessions: allSessions.length,
+    totalEvents,
+    totalErrors,
+    avgDuration: timedEventCount > 0 ? Math.round(totalDuration / timedEventCount) : 0,
+    topEventsAllTime: Object.entries(eventCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 15)
+      .map(([event, count]) => `${event}: ${count}`),
+  };
+}
+
+/**
+ * Get relevant alex.* settings for debugging (redacted)
+ */
+export function getAlexSettings(): Record<string, unknown> {
+  const config = vscode.workspace.getConfiguration('alex');
+  
+  // Only include non-sensitive settings
+  return {
+    'workspace.protectedMode': config.get('workspace.protectedMode'),
+    'm365.enabled': config.get('m365.enabled'),
+    'cloudSync.enabled': config.get('cloudSync.enabled'),
+    'cloudSync.autoSync': config.get('cloudSync.autoSync'),
+    'telemetry.enabled': config.get('telemetry.enabled'),
   };
 }
 
