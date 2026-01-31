@@ -13,7 +13,7 @@
 
 This document describes the implementation of appropriate reliance principles within Alex, a cognitive architecture for AI programming assistants. Drawing on the AETHER research synthesis (Passi et al., 2024) and foundational work on trust calibration in human-automation interaction, we have implemented a multi-layered system comprising:
 
-1. **CAIR/CSR Framework** — Calibrated AI Reliance + Collaborative Shared Responsibility
+1. **CAIR/CSR Framework** — Correct AI-Reliance + Correct Self-Reliance (Schemmer et al., 2023)
 2. **Epistemic vs. Generative Mode Separation** — Distinct protocols for factual claims vs. creative contributions
 3. **Human Judgment Flagging Protocol** — Explicit signaling when decisions require human expertise
 4. **Confidence Ceiling Mechanisms** — Capped certainty for non-grounded claims
