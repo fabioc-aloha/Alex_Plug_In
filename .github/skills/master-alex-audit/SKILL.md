@@ -271,7 +271,7 @@ git status --short
 # 2. Version check
 Write-Host "`n=== VERSION CHECK ===" -ForegroundColor Cyan
 $pkgVersion = (Get-Content "platforms/vscode-extension/package.json" | ConvertFrom-Json).version
-$copilotVersion = [regex]::Match((Get-Content ".github/copilot-instructions.md" -Raw), 'Version[:\s]+(\d+\.\d+\.\d+)').Groups[1].Value
+$copilotVersion = [regex]::Match((Get-Content ".github/copilot-instructions.md" -Raw), '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)').Groups[1].Value
 Write-Host "Package: v$pkgVersion"
 Write-Host "Copilot: v$copilotVersion"
 if ($pkgVersion -eq $copilotVersion) { Write-Host "✅ Versions match" -ForegroundColor Green }
