@@ -7,12 +7,6 @@
       "type": "enables",
       "strength": 0.85,
       "context": "Publishing workflow"
-    },
-    {
-      "target": "heir-curation",
-      "type": "implements",
-      "strength": 0.85,
-      "context": "VS Code heir patterns"
     }
   ],
   "activationPatterns": [

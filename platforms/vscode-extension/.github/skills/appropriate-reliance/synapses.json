@@ -10,12 +10,6 @@
             "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
         },
         {
-            "target": "architecture-refinement",
-            "type": "enhances",
-            "strength": 0.7,
-            "context": "Mutual challenge improves architecture documentation quality"
-        },
-        {
             "target": "learning-psychology",
             "type": "related",
             "strength": 0.7,

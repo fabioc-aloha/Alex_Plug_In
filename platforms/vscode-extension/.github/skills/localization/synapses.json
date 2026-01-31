@@ -10,13 +10,6 @@
             "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation"
         },
         {
-            "target": "architecture-refinement",
-            "type": "impacts",
-            "strength": 0.85,
-            "bidirectional": true,
-            "reason": "i18n architecture impacts entire application structure: middleware, routing, data models"
-        },
-        {
             "target": "vscode-extension-patterns",
             "type": "applies",
             "strength": 0.7,

@@ -11,12 +11,6 @@
             "context": "Mermaid diagrams must also follow lint rules"
         },
         {
-            "target": "architecture-refinement",
-            "type": "enables",
-            "strength": 0.9,
-            "context": "All architecture documentation must be lint-clean"
-        },
-        {
             "target": "writing-publication",
             "type": "supports",
             "strength": 0.7,

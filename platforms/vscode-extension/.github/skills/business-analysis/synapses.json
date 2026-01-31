@@ -26,12 +26,6 @@
       "target": "testing-strategies"
     },
     {
-      "reason": "Requirements shape solution architecture",
-      "type": "informs",
-      "strength": 0.4,
-      "target": "architecture-refinement"
-    },
-    {
       "reason": "Clear documentation and requirements writing",
       "type": "uses",
       "strength": 0.4,
