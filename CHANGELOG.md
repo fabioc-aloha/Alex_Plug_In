@@ -7,6 +7,106 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.18] - 2026-01-31 📦 Embedded Knowledge Preparation
+
+> **Status:** M365 heir update + roadmap updates (no VS Code code changes)
+> **Focus:** Prepare for Microsoft's upcoming EmbeddedKnowledge feature
+
+### Added (M365 Heir)
+
+- **📦 Knowledge Files for Embedded Knowledge** — Ready for when feature launches
+  - `knowledge/alex-protocols.md` — All cognitive protocols (Meditate, Dream, Focus, etc.)
+  - `knowledge/skill-quick-reference.md` — All 15 embedded skills condensed
+  - `knowledge/cognitive-architecture.md` — How Alex thinks and remembers
+  - `_DISABLED_EmbeddedKnowledge` placeholder in declarativeAgent.json
+
+- **🗺️ Roadmap Updates**
+  - Added "M365 Embedded Knowledge" section (waiting for Microsoft feature launch)
+  - Added "Cross-Platform Communication" section (OneDrive sync patterns)
+  - Image Generation (ADR-007) already in roadmap for future VS Code implementation
+
+### Technical Notes
+
+- Microsoft's EmbeddedKnowledge feature is "not yet available" per docs
+- Knowledge files prepared within constraints: max 10 files, max 1MB each
+- May need `.md` → `.txt` conversion when feature launches
+- Files designed for grounding, not replacing instructions
+
+---
+
+## [3.7.17] - 2026-01-31 🧠 Full Skill Embedding
+
+> **Status:** M365 heir update (no VS Code changes)
+> **Focus:** Embedding all applicable skills into M365 instructions
+
+### Added (M365 Heir)
+
+- **📚 12 Additional Embedded Skills** — Comprehensive skill transfer from VS Code
+  - 🧠 Cognitive Load Management: 4±1 working memory, chunking, progressive disclosure
+  - 🎓 Learning Psychology: Zone of Proximal Development, partnership over instruction
+  - 🔍 Root Cause Analysis: 5 Whys, symptom vs cause, prevention focus
+  - 🚨 Incident Response: Triage questions, severity levels, communication patterns
+  - ✍️ Writing & Publication: CARS model, precision over flair, active voice
+  - 🔒 Privacy & Responsible AI: Data minimization, PII awareness, transparency
+  - 🛡️ Security Awareness (SFI): STRIDE threats, secure by design, phishing awareness
+  - 📊 Business Analysis: Requirements hierarchy, SMART criteria, scope management
+  - 📋 Project Management: PMBOK process groups, risk assessment, status communication
+  - 🔄 Change Management (ADKAR): Awareness → Desire → Knowledge → Ability → Reinforcement
+  - 📖 Creative Writing: Three-act structure, character dimensions, show don't tell
+  - 🧩 Knowledge Synthesis: Abstraction levels, quality over quantity
+
+**Total embedded skills: 15** (3 from v3.7.16 + 12 new)
+
+---
+
+## [3.7.16] - 2026-01-31 🤝 M365 Platform Parity
+
+> **Status:** M365 heir update (no VS Code changes)
+> **Focus:** Closing feature gaps between VS Code and M365 heirs
+
+### Added (M365 Heir)
+
+- **🍅 Focus Session Protocol** — Pomodoro-style concentration blocks
+  - Triggers: "focus", "pomodoro", "deep work", "start a session"
+  - Configurable durations (25 min pomodoro, 50 min deep work, custom)
+  - Break reminders after 4 sessions
+  - Session logging in notes.md with 🍅 emoji
+
+- **🎯 Goal Tracking Protocol** — Structured learning goal management
+  - Triggers: "check my goals", "update goal progress", "goal check-in"
+  - Progress tracking with milestone celebrations (25%, 50%, 75%, 100%)
+  - Generates updated markdown for learning-goals.md
+
+- **📚 Embedded Skills** — Key VS Code skills now in M365
+  - Appropriate Reliance: confidence calibration, source citation
+  - Bootstrap Learning: build on existing knowledge, active recall
+  - Work-Life Balance: boundary respect, break suggestions
+
+- **💬 New Conversation Starters**
+  - "Focus session" — Start concentration block
+  - "Goal check-in" — Review learning progress
+
+### Changed (M365 Heir)
+
+- **📊 Weekly Review** — Now includes focus session count
+- **📝 OneDrive Templates** — Cleaned up for new users
+  - profile.md: Generic template with all preference options
+  - notes.md: Cleaner structure with tips
+  - learning-goals.md: Structured format matching new protocol
+
+### Documentation
+
+- **📋 Platform Comparison** — Full gap analysis with viability assessment
+  - Implementation paths for each missing feature
+  - Priority matrix for decision making
+  - [PLATFORM-COMPARISON.md](alex_docs/PLATFORM-COMPARISON.md)
+
+- **🎨 Image Generation ADR** — Design for VS Code parity
+  - Azure OpenAI and OpenAI provider support
+  - [ADR-007-image-generation.md](alex_docs/ADR-007-image-generation.md)
+
+---
+
 ## [3.7.15] - 2026-01-31 🎨 UX Polish
 
 > **Status:** Pre-release (use `--pre-release` flag)

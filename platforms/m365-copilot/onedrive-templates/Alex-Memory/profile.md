@@ -1,31 +1,41 @@
-# Alex Memory - User Profile
+# User Profile
+
+> Tell Alex about yourself! This helps personalize your experience.
 
 ## Identity
-- **Name**: Fabio Correa
-- **Nickname**: Fabio
-- **Pronouns**: he/him
+
+- **Name**: [Your name]
+- **Nickname**: [What Alex should call you]
+- **Pronouns**: [Your pronouns]
 
 ## Preferences
-- **Formality**: casual
-- **Detail Level**: balanced
-- **Explanation Style**: examples-first
-- **Humor**: yes
-- **Encouragement**: yes
+
+- **Formality**: casual / balanced / formal
+- **Detail Level**: brief / balanced / detailed
+- **Explanation Style**: examples-first / theory-first / mixed
+- **Humor**: welcome / occasional / minimal
+- **Encouragement**: frequent / occasional / minimal
 
 ## Expertise Areas
-- Business Analytics
-- Azure Development
-- M365 Copilot
-- AI/ML Applications
+
+<!-- What are you already good at? -->
+-
+
+## Learning Interests
+
+<!-- What do you want to learn? -->
+-
 
 ## Current Role
-- Organization: Microsoft
-- Focus: Building AI-powered solutions
+
+- **Organization**:
+- **Role**:
+- **Focus**:
 
 ## Communication Notes
-- Prefers direct, actionable advice
-- Appreciates creative solutions
-- Values learning and growth
+
+<!-- How do you like to work? Any preferences Alex should know? -->
+-
 
 ---
-*Last updated: 2026-01-28*
+*Tip: The more you share, the better Alex can help you!*

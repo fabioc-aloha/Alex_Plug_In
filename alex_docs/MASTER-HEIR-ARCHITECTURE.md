@@ -191,8 +191,51 @@ Master Alex now has the proven wisdom. Future heirs will inherit it.
 |---------------|-------------|
 | VS Code: Global knowledge sync | `global-knowledge/SKILL.md` |
 | VS Code: Kill switch protection | `WORKSPACE-PROTECTION.md` |
+| VS Code: LM Tools API | 11 MCP-style tools registered |
 | M365: Meeting context awareness | `m365-context/SKILL.md` (future) |
 | Either: Elegant problem solution | Pattern in global knowledge |
+
+---
+
+## Cross-Platform Skill Embedding
+
+A key innovation in the heir architecture is **unified skill embedding**. Skills defined in Master Alex are embedded in both heirs:
+
+| Platform | Skills Embedded | Method |
+|----------|-----------------|--------|
+| VS Code | 49 skills | File-based in `.github/skills/` |
+| M365 | 15 skills | Condensed in `instructions/alex-instructions.md` |
+
+### Why 15 vs 49?
+
+M365 agents have token limits on instructions. The 15 skills embedded in M365 are:
+
+1. Appropriate Reliance
+2. Architecture Health
+3. Bootstrap Learning
+4. Business Analysis
+5. Change Management
+6. Cognitive Load
+7. Creative Writing
+8. Learning Psychology
+9. Meditation
+10. Project Management
+11. Refactoring Patterns
+12. Root Cause Analysis
+13. Self-Actualization
+14. Testing Strategies
+15. Work-Life Balance
+
+These were selected to cover the most valuable M365 use cases (meetings, productivity, well-being).
+
+### Unified Behavior
+
+Despite different embedding methods, users experience **consistent Alex behavior**:
+
+- Same personality across platforms
+- Same meditation protocol triggers
+- Same learning partnership philosophy
+- Same ethical guidelines
 
 ---
 

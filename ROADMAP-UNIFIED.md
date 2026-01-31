@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.7.12 |
-| **Current Heirs** | VS Code (3.7.12), M365 (v1.6) |
+| **Current Master Version** | 3.7.18 |
+| **Current Heirs** | VS Code (3.7.18), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |
@@ -65,7 +65,13 @@
 | 3.7.0 | Foundation | ✅ Done | ✅ v3.7.0 | — | Complete |
 | 3.7.10 | — | ✅ Done | ✅ Hotfix | — | Complete |
 | 3.7.11 | — | ✅ Done | ✅ Hotfix | — | Complete |
-| **3.7.12** | **—** | **✅ Done** | **✅ Published** | **—** | **CURRENT** |
+| 3.7.12 | — | ✅ Done | ✅ Published | — | — |
+| 3.7.13 | — | ✅ Done | ✅ Published | — | — |
+| 3.7.14 | — | ✅ Done | ✅ Published | — | — |
+| 3.7.15 | UX Polish | ✅ Done | ✅ Published | — | — |
+| 3.7.16 | M365 Parity | ✅ Done | — | ✅ Aligned | — |
+| 3.7.17 | Full Skills | ✅ Done | — | ✅ 15 skills | — |
+| **3.7.18** | **Embedded Knowledge** | **✅ Done** | **🔄 Publishing** | **✅ Ready** | **CURRENT** |
 | 3.7.x | GK Migration | Planned | Planned | — | Next |
 | 3.8.0 | Expression | Planned | Planned | Planned | — |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
@@ -135,16 +141,16 @@
 | # | Task | Status | Description |
 |:-:|------|:------:|-------------|
 | 1 | Schema verification | ✅ | Using v1.6 (latest) |
-| 2 | Identity alignment audit | ⬜ | Compare instructions with Master Alex identity |
-| 3 | Test all capabilities | ⬜ | OneDrive, Email, Teams, People, Meetings |
-| 4 | Document platform differences | ⬜ | Update DK-MULTI-PLATFORM-ARCHITECTURE.md |
+| 2 | Identity alignment audit | ✅ | Verified 2026-01-31: Name, character, nicknames, protocols aligned |
+| 3 | Test all capabilities | ⚠️ | User testing required: OneDrive, Email, Teams, People, Meetings |
+| 4 | Document platform differences | ✅ | Created DK-MULTI-PLATFORM-ARCHITECTURE.md |
 
 ### Success Criteria
 
-- [ ] VS Code extension builds and installs cleanly
-- [ ] All existing VS Code features work
-- [ ] M365 agent personality matches VS Code Alex
-- [ ] Both heirs recognizable as "Alex"
+- [x] VS Code extension builds and installs cleanly
+- [x] All existing VS Code features work
+- [x] M365 agent personality matches VS Code Alex *(verified 2026-01-31)*
+- [x] Both heirs recognizable as "Alex"
 
 ---
 
@@ -294,6 +300,105 @@
 - [ ] Same creative latitude: both distinguish facts from ideas
 - [ ] Same human judgment flagging for ethics, strategy, personnel
 - [ ] Users recognize trustworthy Alex on both platforms
+
+---
+
+## 📦 M365 Embedded Knowledge (Waiting for Feature)
+
+> **Goal:** Package knowledge files with M365 agent for richer context
+
+**Status:** ⏳ Microsoft feature "not yet available" - files prepared, capability commented
+
+### Prepared Knowledge Files
+
+| File | Size | Purpose |
+|------|------|---------|
+| `knowledge/alex-protocols.md` | ~4KB | Meditation, Dream, Focus Session protocols |
+| `knowledge/skill-quick-reference.md` | ~5KB | All 15 embedded skills condensed |
+| `knowledge/cognitive-architecture.md` | ~5KB | How Alex thinks and remembers |
+
+### When Feature Launches
+
+1. Uncomment `EmbeddedKnowledge` capability in `declarativeAgent.json`
+2. Test knowledge grounding in responses
+3. Adjust file content based on retrieval quality
+
+### Constraints (per Microsoft docs)
+
+- Max **10 files**
+- Max **1 MB per file**
+- Formats: `.doc`, `.docx`, `.ppt`, `.pptx`, `.xls`, `.xlsx`, `.txt`, `.pdf`
+
+**Note:** Our `.md` files may need conversion to `.txt` when feature launches.
+
+---
+
+## 🔄 Cross-Platform Communication (Future)
+
+> **Goal:** Enable VS Code ↔ M365 Alex communication
+
+### Current State
+
+Both heirs can already share context via **OneDrive**:
+- Profile data in `Alex-Memory/profile.md`
+- Notes in `Alex-Memory/notes.md`
+- Knowledge files in `Alex-Memory/knowledge/`
+
+### Future Possibilities (Monitoring)
+
+| Approach | Status | Notes |
+|----------|--------|-------|
+| **OneDrive "Mailbox"** | ✅ Possible now | Manual - user triggers M365 to check |
+| **Worker Agents** (v1.6) | 🔜 Preview | Agent-to-agent within M365 |
+| **Copilot Agent API** | ❌ Doesn't exist | Would enable VS Code → M365 calls |
+| **Power Automate** | ⚠️ Limited | Needs Premium, limited Copilot actions |
+
+### OneDrive Sync Pattern (Ready Now)
+
+```
+VS Code Alex writes → OneDrive/Alex-Memory/sync/
+M365 Alex reads  ← OneDrive/Alex-Memory/sync/
+```
+
+Useful for:
+- Sharing learnings between platforms
+- "Leave a message for my other self" workflow
+- Profile sync (same user on both platforms)
+
+---
+
+## 🎨 Image Generation (Platform Parity)
+
+> **Goal:** Bring M365's GraphicArt capability to VS Code
+
+**ADR**: [ADR-007-image-generation.md](alex_docs/ADR-007-image-generation.md)
+
+### Implementation Tasks
+
+| # | Task | Effort | Priority | Description |
+|:-:|------|:------:|:--------:|-------------|
+| 1 | Core service | 3h | High | `imageGeneration.ts` with Azure/OpenAI support |
+| 2 | Settings | 1h | High | Provider, model, size, quality, output folder |
+| 3 | Command | 2h | High | `alex.generateImage` with prompt input |
+| 4 | Setup wizard | 1h | High | `alex.setupImageGeneration` for API keys |
+| 5 | LM Tool | 1h | Medium | `alex_image_generation` for chat |
+| 6 | Context menu | 30m | Low | "Generate Image from Selection" |
+| 7 | Cost awareness | 1h | Medium | Show estimate before generation |
+
+### Provider Support
+
+| Provider | Auth Method | Use Case |
+|----------|-------------|----------|
+| Azure OpenAI | VS Code Azure auth | Enterprise |
+| OpenAI Direct | SecretStorage API key | Personal |
+
+### Success Criteria
+
+- [ ] Generate images from chat naturally
+- [ ] Save to workspace with sensible names
+- [ ] Clear cost indication before generation
+- [ ] Works with both Azure and OpenAI
+- [ ] Graceful error handling
 
 ---
 

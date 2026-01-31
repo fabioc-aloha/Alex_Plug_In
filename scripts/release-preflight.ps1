@@ -80,19 +80,60 @@ else {
     Write-Host "   ⚠️ CHANGELOG.md not found at root" -ForegroundColor Yellow
 }
 
-# Check heir copilot-instructions.md version
+# Check MASTER copilot-instructions.md version (SOURCE OF TRUTH)
+$masterInstructions = Join-Path $rootPath ".github\copilot-instructions.md"
+if (Test-Path $masterInstructions) {
+    $masterContent = Get-Content $masterInstructions -Raw
+    if ($masterContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+        $masterVersion = $matches[1]
+        Write-Host "   Master copilot-instructions.md: $masterVersion" -ForegroundColor Gray
+        if ($pkgVersion -ne $masterVersion) {
+            $errors += "Version mismatch: package.json ($pkgVersion) != Master copilot-instructions ($masterVersion)"
+            Write-Host "   ❌ MISMATCH! Update .github/copilot-instructions.md version" -ForegroundColor Red
+        }
+        else {
+            Write-Host "   ✅ Master version matches" -ForegroundColor Green
+        }
+    }
+    else {
+        $errors += "Could not parse version from Master .github/copilot-instructions.md"
+        Write-Host "   ⚠️ Could not parse Master version" -ForegroundColor Yellow
+    }
+}
+else {
+    $errors += "Master .github/copilot-instructions.md not found"
+    Write-Host "   ❌ Master copilot-instructions.md not found" -ForegroundColor Red
+}
+
+# Check heir copilot-instructions.md version (should match after build)
 $heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
 if (Test-Path $heirInstructions) {
     $heirContent = Get-Content $heirInstructions -Raw
     if ($heirContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $heirVersion = $matches[1]
-        Write-Host "   heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
+        Write-Host "   Heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $heirVersion) {
-            $errors += "Version mismatch: package.json ($pkgVersion) != heir copilot-instructions ($heirVersion)"
-            Write-Host "   ❌ MISMATCH!" -ForegroundColor Red
+            $errors += "Version mismatch: package.json ($pkgVersion) != heir copilot-instructions ($heirVersion). Run build-extension-package.ps1 to sync."
+            Write-Host "   ❌ MISMATCH! Run build-extension-package.ps1" -ForegroundColor Red
         }
         else {
             Write-Host "   ✅ Heir version matches" -ForegroundColor Green
+        }
+    }
+}
+
+# Check ROADMAP-UNIFIED.md version
+$roadmapPath = Join-Path $rootPath "ROADMAP-UNIFIED.md"
+if (Test-Path $roadmapPath) {
+    $roadmapContent = Get-Content $roadmapPath -Raw
+    if ($roadmapContent -match 'Current Master Version\*\*\s*\|\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+        $roadmapVersion = $matches[1]
+        Write-Host "   ROADMAP-UNIFIED.md: $roadmapVersion" -ForegroundColor Gray
+        if ($pkgVersion -ne $roadmapVersion) {
+            Write-Host "   ⚠️ ROADMAP version differs (update recommended)" -ForegroundColor Yellow
+        }
+        else {
+            Write-Host "   ✅ ROADMAP version matches" -ForegroundColor Green
         }
     }
 }

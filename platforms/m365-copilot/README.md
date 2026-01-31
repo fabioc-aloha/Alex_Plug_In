@@ -2,7 +2,7 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.7.12-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.7.18-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
@@ -46,6 +46,11 @@ m365-copilot/
 ├── appPackage/
 │   ├── manifest.json              # M365 App manifest (v1.19)
 │   ├── declarativeAgent.json      # Alex agent config (v1.6 schema) ✨
+│   ├── instructions/              # Alex persona and embedded skills
+│   ├── knowledge/                 # 📚 EmbeddedKnowledge files (ready for future feature)
+│   │   ├── alex-protocols.md      # Meditation, dream, self-actualization guides
+│   │   ├── cognitive-architecture.md  # How Alex thinks and learns
+│   │   └── skill-quick-reference.md   # All 15 embedded skills condensed
 │   ├── color.png                  # 192x192 color icon (geometric logo)
 │   └── outline.png                # 32x32 outline icon (white on transparent)
 ├── env/
@@ -54,6 +59,8 @@ m365-copilot/
 ├── teamsapp.yml                   # M365 Agents Toolkit config
 └── package.json
 ```
+
+> **📚 EmbeddedKnowledge Ready**: The `knowledge/` folder contains pre-prepared files for Microsoft's upcoming EmbeddedKnowledge capability. When the feature launches, Alex will have zero-delay adoption!
 
 ## Prerequisites
 
@@ -145,6 +152,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v3.7.12 🌅 Dawn - Full M365 Integration
+**Alex M365** - v3.7.18 🌅 Dawn - Full M365 Integration + EmbeddedKnowledge Ready
 
 © 2026 CorreaX • AI That Learns How to Learn

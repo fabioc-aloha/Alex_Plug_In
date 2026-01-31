@@ -1,33 +1,36 @@
-# Alex Memory - Learning Goals
+# Learning Goals
+
+> Your personal learning tracker. Alex will check this file to celebrate progress and suggest next actions.
 
 ## Active Goals
 
-### 1. M365 Copilot Agent Development
-- **Status**: In Progress
-- **Started**: 2026-01-27
-- **Target**: Build Alex as a declarative agent
-- **Progress**:
-  - [x] Basic agent deployed
-  - [x] Cognitive protocols defined
-  - [ ] OneDrive memory integration
-  - [ ] API plugin deployment
+### Example Goal: [Your Goal Here]
+- **Target**: [Specific, measurable outcome]
+- **Progress**: 25%
+- **Started**: [date]
+- **Target Date**: [date]
+- **Next Action**: [Your very next step]
+- **Notes**: [Context, blockers, resources]
 
-### 2. Azure Functions Mastery
-- **Status**: In Progress
-- **Focus**: Node.js v4 programming model
-- **Key Topics**: HTTP triggers, Flex Consumption, TypeScript
+<!-- Copy the template above for each new goal -->
 
-### 3. AI Agent Architecture
-- **Status**: Ongoing
-- **Focus**: Cognitive architecture patterns
-- **Resources**: Alex Cognitive Architecture project
+## Completed Goals 🎉
 
-## Completed Goals
-- ✅ VS Code Extension Development (Alex Plugin)
+<!-- Move completed goals here with completion date -->
+<!-- Example:
+### Completed: VS Code Extension Basics
+- **Completed**: 2026-01-15
+- **Outcome**: Published first extension to marketplace
+-->
 
-## Future Goals
-- [ ] Kubernetes/AKS
-- [ ] Advanced RAG patterns
+## Paused Goals ⏸️
+
+<!-- Goals on hold with reason -->
+
+## Focus Sessions Log 🍅
+
+<!-- Alex will add entries here when you complete focus sessions -->
+<!-- Format: 🍅 [date] [duration] - [task] - [outcome] -->
 
 ---
-*Last updated: 2026-01-28*
+*Tip: Say "goal check-in" to Alex for a progress review!*

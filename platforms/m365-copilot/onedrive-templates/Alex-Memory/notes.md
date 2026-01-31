@@ -1,20 +1,23 @@
-# Alex Memory - Session Notes
+# Session Notes
+
+> Quick capture space for thoughts, reminders, and observations. Alex checks this file for context.
 
 ## Quick Notes
-- 
+
+<!-- Jot down anything on your mind -->
 
 ## Reminders
-- 
+
+<!-- Things Alex should remind you about -->
+- [ ]
 
 ## Observations
-- Fabio prefers iterative development with quick feedback loops
-- Values documentation and clear roadmaps
+
+<!-- Things Alex has learned about you from conversations -->
 
 ## Recent Sessions
-### 2026-01-28 - M365 Copilot Integration
-- Deployed Alex as declarative agent (v4.0.0 QUADRUNIUM )
-- Fixed meditation protocol bug
-- Enabled OneDrive memory system
+
+<!-- Alex may add session summaries here after "meditate" -->
 
 ---
-*Last updated: 2026-01-28*
+*Tip: Say "meditate" to Alex to consolidate learnings from your conversation!*

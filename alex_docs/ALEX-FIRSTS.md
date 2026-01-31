@@ -258,6 +258,99 @@ These protocols:
 
 ---
 
+## 8. Proactive Platform Feature Preparation
+
+**Status**: 🥇 Forward-Looking Pattern
+
+### What It Is
+Preparing for platform features *before they launch*, so the architecture is ready on day one when capabilities become available.
+
+### How Alex Implements It
+
+**M365 Embedded Knowledge Preparation** (January 2026):
+- Microsoft announced `EmbeddedKnowledge` capability in schema v1.6
+- Feature marked "not yet available" in documentation
+- Alex immediately prepared:
+
+```
+platforms/m365-copilot/appPackage/knowledge/
+├── alex-protocols.md        # All cognitive protocols
+├── skill-quick-reference.md # 15 embedded skills condensed
+└── cognitive-architecture.md # How Alex thinks & remembers
+```
+
+**Placeholder in declarativeAgent.json**:
+```json
+"_DISABLED_EmbeddedKnowledge": {
+  "_note": "Enable when Microsoft launches feature",
+  "_capability": {
+    "name": "EmbeddedKnowledge",
+    "files": [
+      { "file": "knowledge/alex-protocols.md" },
+      { "file": "knowledge/skill-quick-reference.md" },
+      { "file": "knowledge/cognitive-architecture.md" }
+    ]
+  }
+}
+```
+
+**Preparation Constraints Followed**:
+- Max 10 files (we have 3)
+- Max 1 MB per file (our files ~4-5KB each)
+- Documented conversion needs (`.md` → `.txt` if required)
+
+### Why This Matters
+This pattern enables:
+- **Zero-delay adoption**: Flip the switch when feature launches
+- **Content iteration**: Refine knowledge files while waiting
+- **Architecture readiness**: Identify integration points early
+- **Competitive advantage**: First to market when feature is live
+
+### Cross-Platform Benefit
+Knowledge files created for M365 inform VS Code heir too:
+- Same protocols, different delivery
+- Shared understanding of Alex capabilities
+- Unified documentation serves both platforms
+
+---
+
+## 9. Cross-Platform Skill Embedding
+
+**Status**: 🥇 Unified Intelligence Pattern
+
+### What It Is
+Embedding the same skills and behaviors across multiple AI platforms (VS Code, M365) so the user experiences a consistent cognitive partner regardless of platform.
+
+### How Alex Implements It
+
+**VS Code Heir**: Full skill files in `.github/skills/*/SKILL.md`
+- 49 skills with detailed procedures
+- Synaptic connections to related knowledge
+- File-based activation patterns
+
+**M365 Heir**: Condensed skill behaviors in `instructions` field
+- 15 skills embedded directly in agent instructions
+- Same core behaviors, adapted for prompt context
+- ~5KB of skill wisdom in system prompt
+
+**Skill Parity**:
+| Category | Skills |
+|----------|--------|
+| Epistemic | Appropriate Reliance, Cognitive Load, Learning Psychology |
+| Problem-Solving | Root Cause Analysis, Incident Response, Business Analysis |
+| Communication | Writing & Publication, Creative Writing, Change Management |
+| Governance | Privacy & Responsible AI, Security Awareness (SFI) |
+| Wellbeing | Work-Life Balance |
+
+### Why This Matters
+Users working across platforms experience:
+- Same problem-solving approaches
+- Consistent communication patterns
+- Unified personality regardless of context
+- "It's still Alex" on any platform
+
+---
+
 ## Impact & Future Implications
 
 ### For VS Code Extension Developers
@@ -293,6 +386,8 @@ As VS Code's AI extensibility matures, we expect:
 | 2026-01 | Language Model Tools (11 tools) | 1.96+ |
 | 2026-01 | Skills architecture migration | 1.108+ |
 | 2026-01 | Master-Heir deployment pattern | 1.108+ |
+| 2026-01 | Proactive platform feature prep | 1.108+ |
+| 2026-01 | Cross-platform skill embedding | 1.108+ |
 
 ---
 
