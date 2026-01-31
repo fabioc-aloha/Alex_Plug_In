@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.11] - 2026-01-31 🔧 Hotfix
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Generic project audit for heirs
+
+### Fixed
+
+- **🔍 Audit Menu** — Now targets user's project, not extension internals
+  - Removed VS Code extension-specific options (UI Audit, Bundle Size, CSP)
+  - Added generic options (Documentation, Project Structure)
+  - Renamed for clarity (Full Project Audit, Code Quality, Security Review)
+
+---
+
 ## [3.7.10] - 2026-01-31 🔧 Hotfix
 
 > **Status:** Pre-release (use `--pre-release` flag)

@@ -573,26 +573,22 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const endLog = telemetry.logTimed("command", "run_audit");
       try {
-        // Show audit options
+        // Show audit options - generic for any project type
         const auditOptions = [
-          { label: "$(checklist) Full Audit", description: "Run all 22 audit checks", detail: "Comprehensive project health assessment" },
-          { label: "$(shield) Security Audit", description: "Secrets, CSP, input sanitization", detail: "High priority" },
-          { label: "$(package) Dependency Audit", description: "npm audit, outdated packages", detail: "High priority" },
-          { label: "$(code) Code Quality", description: "TypeScript errors, ESLint, dead code", detail: "High priority" },
-          { label: "$(browser) UI Audit", description: "Dead buttons, WebView issues", detail: "Medium priority" },
-          { label: "$(file-binary) Bundle Size", description: "Extension size, package estimate", detail: "Medium priority" },
-          { label: "$(git-branch) Git Hygiene", description: "Uncommitted changes, large files", detail: "Medium priority" },
-          { label: "$(note) Changelog Audit", description: "Format, version alignment", detail: "Medium priority" },
-          { label: "$(beaker) Test Coverage", description: "Test files, framework, gaps", detail: "Medium priority" },
-          { label: "$(eye) Accessibility", description: "ARIA, keyboard, colors", detail: "Low priority" },
-          { label: "$(globe) Localization", description: "i18n setup, hardcoded strings", detail: "Low priority" },
-          { label: "$(file-media) Asset Integrity", description: "Icons, missing/unused assets", detail: "Low priority" },
-          { label: "$(settings-gear) Configuration", description: "launch.json, tsconfig, vscodeignore", detail: "Low priority" },
+          { label: "$(checklist) Full Project Audit", description: "Comprehensive project health check", detail: "All categories below" },
+          { label: "$(file-code) Code Quality", description: "Errors, warnings, code smells, patterns", detail: "High priority" },
+          { label: "$(shield) Security Review", description: "Secrets, vulnerabilities, input validation", detail: "High priority" },
+          { label: "$(package) Dependencies", description: "Outdated packages, vulnerabilities, unused", detail: "High priority" },
+          { label: "$(book) Documentation", description: "README, comments, API docs completeness", detail: "Medium priority" },
+          { label: "$(git-branch) Git Health", description: "Uncommitted changes, branch hygiene", detail: "Medium priority" },
+          { label: "$(beaker) Test Coverage", description: "Test files, coverage gaps, test quality", detail: "Medium priority" },
+          { label: "$(settings-gear) Configuration", description: "Config files, environment setup", detail: "Low priority" },
+          { label: "$(folder) Project Structure", description: "File organization, naming conventions", detail: "Low priority" },
         ];
 
         const selected = await vscode.window.showQuickPick(auditOptions, {
           placeHolder: "Select audit type to run",
-          title: "🔍 Alex Project Audit",
+          title: "🔍 Project Audit",
         });
 
         if (!selected) {
