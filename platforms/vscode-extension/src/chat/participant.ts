@@ -300,6 +300,8 @@ interface IAlexChatResult extends vscode.ChatResult {
     metadata: {
         command?: string;
         action?: string;
+        mode?: string;
+        topic?: string;
     };
 }
 
@@ -405,6 +407,16 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
     // Confidence command - epistemic integrity
     if (request.command === 'confidence') {
         return await handleConfidenceCommand(request, context, stream, token);
+    }
+
+    // Creative mode command - brainstorming/ideation
+    if (request.command === 'creative') {
+        return await handleCreativeCommand(request, context, stream, token);
+    }
+
+    // Verify command - multi-turn verification for high-stakes decisions
+    if (request.command === 'verify') {
+        return await handleVerifyCommand(request, context, stream, token);
     }
 
     // Check if this is a greeting at the start of a session
@@ -1793,6 +1805,156 @@ Watch out for these red flags in AI responses:
 `);
 
     return { metadata: { command: 'confidence' } };
+}
+
+/**
+ * Handle /creative command - Switch to brainstorming/ideation mode
+ */
+async function handleCreativeCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    const topic = request.prompt.trim() || 'general brainstorming';
+    
+    stream.markdown(`## 💡 Creative Mode Activated
+
+I'm switching to **brainstorming mode** for: **${topic}**
+
+### How This Works
+
+In creative mode, I'll offer ideas and approaches for us to evaluate together. These are **proposals, not facts**:
+
+| What I'll Do | What This Means |
+|--------------|-----------------|
+| "Here's an idea worth considering..." | This is a creative contribution, not an established fact |
+| "One approach we could explore..." | Multiple valid approaches exist |
+| "What do you think?" | Your input is essential to validate ideas |
+| "Does this resonate?" | Checking if the idea fits your context |
+
+---
+
+### 🎯 Your Role
+
+- Challenge ideas that don't fit your context
+- Build on promising directions
+- Tell me when to switch back to factual mode
+- Say "verify this" if you need me to fact-check something
+
+---
+
+### 🔄 Mode Switching
+
+**Back to factual mode:** Just say "switch to factual mode" or ask a direct question like "what does this code do?"
+
+**More creative:** Ask for "more ideas", "alternatives", or "what else?"
+
+---
+
+Ready to brainstorm! What's your first question or challenge?
+`);
+
+    return { metadata: { command: 'creative', mode: 'generative', topic } };
+}
+
+/**
+ * Handle /verify command - Multi-turn verification for high-stakes decisions
+ */
+async function handleVerifyCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    const topic = request.prompt.trim();
+    
+    if (!topic) {
+        stream.markdown(`## 🔍 Verification Walkthrough
+
+The \`/verify\` command helps you validate high-stakes decisions through structured review.
+
+### Usage
+
+\`\`\`
+/verify <topic or decision to verify>
+\`\`\`
+
+### Examples
+
+- \`/verify our new authentication approach\`
+- \`/verify this database migration plan\`
+- \`/verify the API contract changes\`
+- \`/verify security implications of this change\`
+
+### What I'll Do
+
+1. **Identify assumptions** — What are we taking for granted?
+2. **Check edge cases** — What could go wrong?
+3. **Review alternatives** — Did we consider other options?
+4. **Flag concerns** — What needs human judgment?
+5. **Suggest validation** — How can we test our approach?
+
+`);
+        return { metadata: { command: 'verify', action: 'help' } };
+    }
+    
+    stream.markdown(`## 🔍 Verification Walkthrough: ${topic}
+
+Let me help you think through this carefully.
+
+### 1️⃣ Assumptions Check
+
+Before we proceed, let's identify what we're assuming:
+
+- What context am I missing about your situation?
+- What constraints or requirements should I know about?
+- Has this approach been tried before? What happened?
+
+### 2️⃣ Edge Cases to Consider
+
+Let me walk through potential edge cases:
+
+- **Error scenarios**: What happens when things fail?
+- **Scale concerns**: What if the volume is 10x expected?
+- **Security implications**: What's the threat model?
+- **Dependencies**: What could break this?
+
+### 3️⃣ Alternatives Review
+
+Have we considered:
+
+- A simpler approach that's "good enough"?
+- An industry-standard solution?
+- What similar systems have done?
+
+### 4️⃣ Human Judgment Required
+
+Some aspects require your judgment:
+
+- **Business priority**: Does this align with current goals?
+- **Risk tolerance**: Is the risk level acceptable?
+- **Team capacity**: Can the team support this?
+
+### 5️⃣ Validation Suggestions
+
+Consider testing:
+
+- [ ] Unit tests for core logic
+- [ ] Integration test for key paths
+- [ ] Manual testing of edge cases
+- [ ] Review with a teammate
+
+---
+
+**Tell me more about ${topic}** and I'll provide specific verification guidance.
+
+> 💡 *This is structured thinking, not definitive answers. You know your context better than I do.*
+`);
+
+    return { metadata: { command: 'verify', topic, action: 'walkthrough' } };
 }
 
 /**

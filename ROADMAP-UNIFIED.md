@@ -4,10 +4,10 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.9.0 |
-| **Current Heirs** | VS Code (3.9.0), M365 (v1.6) |
-| **Target** | 4.0.0 (Trust/Epistemic Integrity) |
-| **Status** | ⏳ v4.0.0 Active Development |
+| **Current Master Version** | 4.0.0 |
+| **Current Heirs** | VS Code (4.0.0), M365 (v1.6) |
+| **Target** | 4.1.0 (Measurement & Dashboard) |
+| **Status** | ✅ v4.0.0 Complete |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -18,7 +18,7 @@
 | Version | Focus | Status |
 |---------|-------|--------|
 | v3.6.0-v3.9.0 | Dawn → Awareness | ✅ Complete (~2 days) |
-| **v4.0.0 Trust** | CAIR/CSR, Creative Latitude | ⏳ **Active** |
+| **v4.0.0 Trust** | CAIR/CSR, Creative Latitude | ✅ **Complete** |
 
 ---
 
@@ -84,8 +84,9 @@
 | 3.7.19 | Anti-Hallucination | ✅ Done | ✅ Published | ✅ Graph-Powered | Complete |
 | 3.8.0 | Expression | ✅ Done | ✅ Published | ✅ Confidence Starter | Complete |
 | 3.8.1 | UX Polish | ✅ Done | ✅ Published | — | Complete |
-| **3.9.0** | **Awareness** | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **CURRENT** |
-| 4.0.0 | Trust | Planned | Planned | Planned | — |
+| **3.9.0** | **Awareness** | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **Complete** |
+| **4.0.0** | **Trust** | **✅ Done** | **✅ Published** | **✅ v4.0** | **CURRENT** |
+| 4.1.0 | Measurement | Planned | Planned | Planned | — |
 
 ---
 
@@ -123,7 +124,7 @@
 ## ✅ Completed Versions (v3.6.0 - v3.9.0)
 
 > **Summary:** Dawn → Awareness completed in ~2 days (vs 11 weeks planned)
-> 
+>
 > See [📜 Completed Versions Archive](#-completed-versions-archive) for detailed feature lists.
 
 | Version | Codename | Key Features |
@@ -455,7 +456,7 @@ See [Completed Versions Archive](#-completed-versions-archive) for historical de
 
 #### VS Code Heir
 - `/help` command
-- `/forget` command  
+- `/forget` command
 - `/confidence` command
 - Confidence prompting
 

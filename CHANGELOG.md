@@ -7,6 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.0] - 2026-01-31 🛡️ Trust — Full Epistemic Integrity
+
+> **Status:** VS Code + M365 release
+> **Focus:** CAIR/CSR framework, creative latitude, human judgment flagging
+
+### Added (Master Alex)
+
+- **📚 CAIR/CSR Framework** — Calibrated AI Reliance + Collaborative Shared Responsibility
+  - Comprehensive trust calibration framework
+  - Mutual challenge and validation protocols
+  - User and AI share responsibility for output quality
+
+- **🎨 Creative Latitude Framework** — Epistemic vs. Generative modes
+  - **Epistemic Mode**: Factual claims with confidence ceilings and source grounding
+  - **Generative Mode**: Creative ideas with collaborative validation
+  - Clear mode switching signals
+  - Agreement-seeking for novel ideas
+
+- **👤 Human Judgment Flagging** — Domains requiring human decision
+  - Business strategy, ethical dilemmas, personnel decisions
+  - Security architecture, legal/compliance
+  - Language patterns: "I can outline options, but the choice depends on..."
+
+- **appropriate-reliance/SKILL.md v2.0** — Major update
+  - CAIR/CSR framework integration
+  - Creative latitude protocols
+  - Mode detection and switching patterns
+
+### Added (VS Code)
+
+- **💡 `/creative` Command** — Switch to brainstorming mode
+  - Explicit mode signaling for creative contributions
+  - Collaborative validation prompts
+  - Easy switch back to factual mode
+
+- **🔍 `/verify` Command** — Multi-turn verification walkthrough
+  - Structured review for high-stakes decisions
+  - Assumptions check, edge cases, alternatives
+  - Human judgment flagging
+
+### Added (M365 Heir)
+
+- **🛡️ Epistemic Integrity Section (v4.0)** — Full protocol embed
+  - Two-mode distinction (epistemic vs. generative)
+  - Human judgment flagging for M365 context
+  - Integrated with existing Graph-powered protocols
+
+### Changed (Master Alex)
+
+- **alex-core.instructions.md** — Added Human Judgment Flagging Protocol
+- **protocol-triggers.instructions.md** — Added Epistemic vs. Generative Mode Triggers
+
+### Technical Notes
+
+- Major version bump (3.9.0 → 4.0.0) — significant feature addition
+- Research-backed implementation from [appropriate-reliance article](article/appropriate-reliance/)
+- Cross-platform validation: same creative latitude on VS Code and M365
+
+---
+
 ## [3.9.0] - 2026-01-31 🧠 Awareness — Detection & Self-Correction
 
 > **Status:** VS Code + M365 release
