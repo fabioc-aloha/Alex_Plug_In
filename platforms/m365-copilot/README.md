@@ -2,10 +2,10 @@
 
 ![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
 
-[![Version](https://img.shields.io/badge/version-3.5.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-3.7.12-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
-[![Schema](https://img.shields.io/badge/schema-v1.2-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
+[![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
 > Alex Cognitive Architecture extended to Microsoft 365 Copilot 🧠
 
@@ -17,7 +17,7 @@ This project brings Alex's cognitive capabilities to Microsoft 365 Copilot using
 
 Alex M365 is a **declarative agent** that uses M365 Copilot foundation models with custom instructions and OneDrive-based memory.
 
-### What Alex Can Do (v1.2 Schema)
+### What Alex Can Do (v1.6 Schema)
 
 | Capability | Description |
 |------------|-------------|
@@ -25,8 +25,10 @@ Alex M365 is a **declarative agent** that uses M365 Copilot foundation models wi
 | 🔍 **WebSearch** | Research topics online |
 | 🎨 **GraphicArt** | Generate images and diagrams |
 | 🐍 **CodeInterpreter** | Run Python code for calculations |
-
-> **Note**: Email, Teams, and People capabilities require schema v1.5+ (not yet stable)
+| 📧 **Email** | Search and summarize Outlook conversations |
+| 💬 **Teams** | Find discussions across channels and chats |
+| 👥 **People** | Look up colleagues and org structure |
+| 📅 **Meetings** | Meeting prep and calendar awareness |
 
 ### Memory Workflow
 
@@ -43,7 +45,7 @@ Your data stays under your control!
 m365-copilot/
 ├── appPackage/
 │   ├── manifest.json              # M365 App manifest (v1.19)
-│   ├── declarativeAgent.json      # Alex agent config (v1.6 schema)
+│   ├── declarativeAgent.json      # Alex agent config (v1.6 schema) ✨
 │   ├── color.png                  # 192x192 color icon (geometric logo)
 │   └── outline.png                # 32x32 outline icon (white on transparent)
 ├── env/
@@ -92,7 +94,7 @@ Or sideload manually:
 3. **Share folder WITH Copilot**: Right-click → Share → Copy link → Paste in chat
 4. Click "Allow" when prompted
 
-## M365 Capabilities (v1.2 Schema)
+## M365 Capabilities (v1.6 Schema)
 
 | Capability | What Alex Does With It |
 |------------|------------------------|
@@ -100,11 +102,20 @@ Or sideload manually:
 | `WebSearch` | Research topics online |
 | `GraphicArt` | Generate images |
 | `CodeInterpreter` | Run Python code |
+| `Email` | Search Outlook conversations |
+| `TeamsMessages` | Find channel/chat discussions |
+| `People` | Look up colleagues |
+| `Meetings` | Calendar and meeting prep |
 
 ## Conversation Starters
 
-- 🧠 **Meet Alex** - "Hey Alex! Tell me about yourself"
+- 👋 **Meet Alex** - "Hey Alex! Tell me about yourself"
 - 📝 **Set up memory** - "Help me set up my OneDrive memory"
+- 📅 **Meeting prep** - "Prep me for my next meeting"
+- 📧 **Email catch-up** - "What important emails should I know about?"
+- 👥 **Who is...** - "Tell me about the people I'm meeting with today"
+- 💬 **Teams recap** - "What's been discussed in my Teams channels?"
+- 📊 **Weekly review** - "Let's do a weekly review"
 - 🧠 **Meditate** - "Let's meditate - consolidate what I learned"
 - 💭 **Dream** - "Dream - review my memory and suggest updates"
 - 🎯 **Self-actualize** - "Self-actualize - how am I doing on my goals?"
@@ -134,6 +145,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v3.5.1 🔥 Phoenix - Pure M365 Edition
+**Alex M365** - v3.7.12 🌅 Dawn - Full M365 Integration
 
 © 2026 CorreaX • AI That Learns How to Learn
