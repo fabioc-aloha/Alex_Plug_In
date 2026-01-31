@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.6] - 2026-01-31 🌍 Dawn Beta 3
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Localization skill enhancement with dialect inheritance pattern
+
+### Added
+
+- **🗣️ Dialect Inheritance Architecture** — New section in localization skill
+  - Cross-domain insight: dialects mirror OOP inheritance patterns
+  - Portuguese dialect genealogy (pt → Açoriano → Manezinho)
+  - Dialect-aware fallback chains with historical lineage
+  - Feature override system for pronouns, conjugation, vocabulary
+
+### Changed
+
+- **📚 Localization Skill** — Updated to v1.1.0
+  - +11 new triggers (Açoriano, Manezinho, Florianópolis, dialect inheritance, etc.)
+  - +2 new synaptic connections (refactoring-patterns, academic-research)
+  - Added "When to Use Dialect-Level Localization" decision guide
+
+### Insight
+
+- **Cross-Domain Pattern Discovered**: Manezinho (Florianópolis dialect) inherits from Açoriano (Azores Portuguese) via 1748-1756 migration — demonstrating multiple inheritance in linguistics, just like derived classes in OOP.
+
+---
+
 ## [3.7.5] - 2026-01-31 🌅 Dawn Beta 2
 
 > **Status:** Pre-release (use `--pre-release` flag)

@@ -1,7 +1,20 @@
 {
     "skill": "architecture-health",
     "inheritance": "inheritable",
-    "connections": [],
+    "connections": [
+        {
+            "target": "self-actualization",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Health checks feed self-actualization"
+        },
+        {
+            "target": "meditation",
+            "type": "informs",
+            "strength": 0.65,
+            "reason": "Health status during meditation sessions"
+        }
+    ],
     "triggers": [
         "synapse health",
         "architecture check",

@@ -42,6 +42,13 @@
             "description": "Post-refactor audit needed"
         },
         {
+            "target": "../instructions/self-actualization.instructions.md",
+            "strength": 0.5,
+            "type": "complements",
+            "direction": "bidirectional",
+            "description": "Architecture introspection"
+        },
+        {
             "target": "lint-clean-markdown/SKILL.md",
             "strength": 0.55,
             "type": "applies",

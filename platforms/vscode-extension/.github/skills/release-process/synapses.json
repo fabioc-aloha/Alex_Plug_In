@@ -1,0 +1,50 @@
+{
+    "skillId": "release-process",
+    "version": "1.0.0",
+    "classification": "master-only",
+    "connections": [
+        {
+            "target": "release-management.instructions.md",
+            "type": "Implements",
+            "strength": "Critical",
+            "context": "Procedural foundation for release workflows"
+        },
+        {
+            "target": "release-preflight/SKILL.md",
+            "type": "Coordinates",
+            "strength": "High",
+            "context": "Pre-release validation checklist"
+        },
+        {
+            "target": "vscode-extension-patterns/SKILL.md",
+            "type": "Supports",
+            "strength": "Medium",
+            "context": "Extension-specific release considerations"
+        },
+        {
+            "target": "heir-curation/SKILL.md",
+            "type": "Coordinates",
+            "strength": "High",
+            "context": "Heir sync before release"
+        }
+    ],
+    "activationTriggers": [
+        "release",
+        "publish",
+        "marketplace",
+        "vsix",
+        "vsce",
+        "PAT",
+        "personal access token",
+        "version bump",
+        "pre-release",
+        "401 unauthorized"
+    ],
+    "knowledgeDomains": [
+        "VS Code Marketplace",
+        "Azure DevOps",
+        "Semantic Versioning",
+        "CI/CD",
+        "Authentication"
+    ]
+}

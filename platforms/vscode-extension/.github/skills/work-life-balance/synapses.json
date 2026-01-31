@@ -1,0 +1,46 @@
+{
+    "skill": "work-life-balance",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "cognitive-load",
+            "type": "applies",
+            "strength": 0.9,
+            "reason": "Mental exhaustion is cognitive overload"
+        },
+        {
+            "target": "appropriate-reliance",
+            "type": "supports",
+            "strength": 0.8,
+            "reason": "Trust includes caring for user wellbeing"
+        },
+        {
+            "target": "meditation",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Rest and reflection support balance"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "applies",
+            "strength": 0.7,
+            "reason": "Sustainable learning requires rest"
+        }
+    ],
+    "triggers": [
+        "tired",
+        "exhausted",
+        "burned out",
+        "burnout",
+        "late night",
+        "weekend",
+        "no breaks",
+        "hours",
+        "one more thing",
+        "can't stop",
+        "need to finish",
+        "focus session",
+        "streak",
+        "goal"
+    ]
+}

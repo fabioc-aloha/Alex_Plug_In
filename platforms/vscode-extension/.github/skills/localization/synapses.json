@@ -10,6 +10,13 @@
             "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation"
         },
         {
+            "target": "architecture-refinement",
+            "type": "impacts",
+            "strength": 0.85,
+            "bidirectional": true,
+            "reason": "i18n architecture impacts entire application structure: middleware, routing, data models"
+        },
+        {
             "target": "vscode-extension-patterns",
             "type": "applies",
             "strength": 0.7,
@@ -47,6 +54,19 @@
             "type": "supports",
             "strength": 0.5,
             "reason": "Review for i18n issues: hardcoded strings, concatenation, date formats"
+        },
+        {
+            "target": "refactoring-patterns",
+            "type": "mirrors",
+            "strength": 0.75,
+            "bidirectional": true,
+            "reason": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides"
+        },
+        {
+            "target": "academic-research",
+            "type": "enriches",
+            "strength": 0.6,
+            "reason": "Historical linguistics (migration patterns) informs dialect architecture decisions"
         }
     ],
     "triggers": [
@@ -72,6 +92,17 @@
         "translation quality",
         "LQA",
         "BCP 47",
-        "next-intl"
+        "next-intl",
+        "dialect",
+        "dialect inheritance",
+        "regional variant",
+        "Açoriano",
+        "Azores Portuguese",
+        "Manezinho",
+        "Florianópolis",
+        "Portuguese dialects",
+        "pt-BR variant",
+        "language genealogy",
+        "dialect fallback"
     ]
 }

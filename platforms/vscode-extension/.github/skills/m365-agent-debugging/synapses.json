@@ -1,7 +1,14 @@
 {
   "skill": "m365-agent-debugging",
   "inheritance": "heir:m365",
-  "connections": [],
+  "connections": [
+    {
+      "target": "heir-curation",
+      "type": "implements",
+      "strength": 0.85,
+      "context": "M365 heir debugging"
+    }
+  ],
   "activationPatterns": [
     "agent not working",
     "agent not responding",
