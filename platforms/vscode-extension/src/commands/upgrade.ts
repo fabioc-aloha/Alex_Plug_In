@@ -678,6 +678,17 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
   // Detect legacy structure
   const detection = await detectLegacyStructure(rootPath);
 
+  // Check if already at latest version
+  if (detection.installedVersion === extensionVersion) {
+    await vscode.window.showInformationMessage(
+      `✅ Alex is already at the latest version (v${extensionVersion}).\n\n` +
+      'No upgrade needed. Your cognitive architecture is up to date!',
+      { modal: true },
+      'OK'
+    );
+    return;
+  }
+
   // Confirm upgrade
   const versionInfo = detection.installedVersion 
     ? `v${detection.installedVersion} → v${extensionVersion}`
