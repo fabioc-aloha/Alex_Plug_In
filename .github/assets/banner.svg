@@ -182,8 +182,8 @@
     </text>
   </g>
   
-  <!-- Use Case Badges - Text only for PNG compatibility -->
-  <g transform="translate(640, 580)">
+  <!-- Use Case Badges Row 1 - Text only for PNG compatibility -->
+  <g transform="translate(640, 545)">
     <!-- Code -->
     <g transform="translate(-400, 0)">
       <rect x="-40" y="-14" width="80" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
@@ -224,6 +224,44 @@
       <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
       <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
       <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Creative</text>
+    </g>
+  </g>
+  
+  <!-- Use Case Badges Row 2 -->
+  <g transform="translate(640, 590)">
+    <!-- Design -->
+    <g transform="translate(-360, 0)">
+      <rect x="-42" y="-14" width="84" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
+      <rect x="-42" y="-14" width="84" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Design</text>
+    </g>
+    
+    <!-- DevOps -->
+    <g transform="translate(-200, 0)">
+      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
+      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">DevOps</text>
+    </g>
+    
+    <!-- Learning -->
+    <g transform="translate(-40, 0)">
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Learning</text>
+    </g>
+    
+    <!-- Business -->
+    <g transform="translate(120, 0)">
+      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
+      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Business</text>
+    </g>
+    
+    <!-- Security -->
+    <g transform="translate(280, 0)">
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Security</text>
     </g>
   </g>
   
