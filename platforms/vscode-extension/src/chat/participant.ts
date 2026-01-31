@@ -392,6 +392,21 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         return await handleGoalsCommand(request, context, stream, token);
     }
 
+    // Help command - discoverability
+    if (request.command === 'help') {
+        return await handleHelpCommand(request, context, stream, token);
+    }
+
+    // Forget command - selective memory cleanup
+    if (request.command === 'forget') {
+        return await handleForgetCommand(request, context, stream, token);
+    }
+
+    // Confidence command - epistemic integrity
+    if (request.command === 'confidence') {
+        return await handleConfidenceCommand(request, context, stream, token);
+    }
+
     // Check if this is a greeting at the start of a session
     if (isGreeting(request.prompt) && isStartOfSession(context)) {
         return await handleGreetingWithSelfActualization(request, context, stream, token);
@@ -1524,6 +1539,260 @@ async function handleGoalsCommand(
     stream.markdown(`\n\n---\n\n*Goals auto-track when you complete sessions (\`/session\`) or save insights (\`/saveinsight\`).*`);
     
     return { metadata: { command: 'goals' } };
+}
+
+/**
+ * Handle /help command - Discoverability for all Alex capabilities
+ */
+async function handleHelpCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.markdown(`## 🧠 Alex Cognitive Architecture - Commands & Capabilities
+
+### 📝 Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| \`/help\` | This help guide |
+| \`/status\` | Check architecture health and version |
+| \`/profile\` | View/edit your preferences |
+| \`/confidence\` | Understand confidence levels |
+
+### 🧘 Cognitive Protocols
+
+| Command | Description |
+|---------|-------------|
+| \`/meditate\` | Consolidate knowledge from our session |
+| \`/dream\` | Neural maintenance - validate synaptic connections |
+| \`/selfactualize\` | Deep self-assessment with full report |
+| \`/learn\` | Start a guided domain learning session |
+
+### 🎯 Productivity
+
+| Command | Description |
+|---------|-------------|
+| \`/session\` | Start a focused learning session (Pomodoro) |
+| \`/goals\` | View and manage learning goals |
+
+### 🌐 Global Knowledge
+
+| Command | Description |
+|---------|-------------|
+| \`/knowledge <query>\` | Search patterns & insights from all projects |
+| \`/saveinsight\` | Save a valuable learning |
+| \`/promote\` | Promote local knowledge to global |
+| \`/knowledgestatus\` | View global knowledge stats |
+| \`/sync\` | Sync knowledge with cloud |
+| \`/push\` | Push to cloud |
+| \`/pull\` | Pull from cloud |
+
+### ☁️ Platform Development
+
+| Command | Description |
+|---------|-------------|
+| \`/azure\` | Azure development with MCP tool guidance |
+| \`/m365\` | Microsoft 365 & Teams development |
+| \`/docs\` | Open Alex documentation |
+
+### 🛠️ Memory Management
+
+| Command | Description |
+|---------|-------------|
+| \`/forget <topic>\` | Selectively remove information from memory |
+| \`/exportm365\` | Export memory for M365 Copilot |
+
+---
+
+### 🔧 Language Model Tools
+
+Alex provides tools that the AI can use automatically:
+- **\`alex_synapse_health\`** - Check connection health
+- **\`alex_memory_search\`** - Search memory files
+- **\`alex_architecture_status\`** - Get version and status
+- **\`alex_user_profile\`** - Manage your profile
+- **\`alex_global_knowledge_search\`** - Search cross-project knowledge
+- **\`alex_save_insight\`** - Save insights automatically
+- **\`alex_mcp_recommendations\`** - Get MCP tool guidance
+
+---
+
+*Type any command to get started, or just ask me anything!*
+`);
+
+    return { metadata: { command: 'help' } };
+}
+
+/**
+ * Handle /forget command - Selective memory cleanup
+ */
+async function handleForgetCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    const topic = request.prompt?.trim();
+    
+    if (!topic) {
+        stream.markdown(`## 🗑️ Selective Memory Cleanup
+
+The \`/forget\` command helps you remove outdated or unwanted information from Alex's memory.
+
+### Usage
+\`\`\`
+/forget <topic or pattern>
+\`\`\`
+
+### Examples
+- \`/forget old-project-name\` — Remove references to a completed project
+- \`/forget deprecated-api\` — Clear knowledge about outdated APIs
+- \`/forget my-mistake\` — Remove an incorrect insight you saved
+
+### What Can Be Forgotten
+- **Global Knowledge** — Insights and patterns in \`~/.alex/global-knowledge/\`
+- **Project Knowledge** — DK-*.md files in \`.github/knowledge/\`
+- **Memory Notes** — Content in memory files
+
+### What Cannot Be Forgotten
+- **Core Architecture** — Alex's instructions and skills
+- **Your Profile** — Use \`/profile\` to edit preferences
+
+---
+
+*Provide a topic to search for and I'll show you what can be removed.*
+`);
+        return { metadata: { command: 'forget', action: 'help' } };
+    }
+    
+    // Search for matches in global knowledge
+    stream.progress(`🔍 Searching for "${topic}" in memory...`);
+    
+    const globalPath = getAlexGlobalPath();
+    const searchResults = await searchGlobalKnowledge(topic);
+    
+    if (searchResults.length === 0) {
+        stream.markdown(`## 🔍 No Matches Found
+
+I couldn't find any memory entries matching "**${topic}**".
+
+### Suggestions
+- Try a broader search term
+- Check spelling
+- Use \`/knowledgestatus\` to see what's in memory
+
+`);
+        return { metadata: { command: 'forget', action: 'no-matches' } };
+    }
+    
+    stream.markdown(`## 🗑️ Found ${searchResults.length} Matches for "${topic}"
+
+**⚠️ Review carefully before deleting!**
+
+| # | Type | Title | Source |
+|:-:|------|-------|--------|
+`);
+    
+    for (let i = 0; i < searchResults.length; i++) {
+        const result = searchResults[i];
+        const type = result.entry.type === 'pattern' ? '📐' : '💡';
+        const source = result.entry.sourceProject || 'Unknown';
+        stream.markdown(`| ${i + 1} | ${type} | ${result.entry.title} | ${source} |\n`);
+    }
+    
+    stream.markdown(`
+---
+
+### To Delete
+
+I cannot automatically delete files yet. To remove an entry:
+
+1. **Global Knowledge**: Navigate to \`~/.alex/global-knowledge/\`
+2. **Find the file**: Look in \`patterns/\` or \`insights/\` folder
+3. **Delete manually**: Remove the matching GK-*.md or GI-*.md file
+4. **Sync changes**: Run \`/sync\` to update cloud
+
+### Future Enhancement
+Automatic deletion with confirmation is planned for a future version.
+
+`);
+    
+    return { metadata: { command: 'forget', action: 'search-results' } };
+}
+
+/**
+ * Handle /confidence command - Epistemic integrity education
+ */
+async function handleConfidenceCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.markdown(`## 🎯 Understanding AI Confidence Levels
+
+### The 4-Tier Confidence System
+
+| Tier | Language | When Used |
+|------|----------|-----------|
+| **Documented** | "The file shows...", "According to..." | Direct file reads, verified sources |
+| **Inferred** | "Based on patterns...", "Typically..." | Common patterns, general knowledge |
+| **Uncertain** | "I believe...", "If I recall..." | Edge cases, version-specific |
+| **Unknown** | "I don't know" | No reliable basis |
+
+---
+
+### 🔴 When to Verify
+
+**Always verify** AI responses when:
+- Making **architectural decisions**
+- Dealing with **security-sensitive** code
+- Using **version-specific** APIs
+- Following **compliance** requirements
+- Making **financial** or **personnel** decisions
+
+### 🟢 When to Trust More
+
+You can rely more on AI responses when:
+- Reading **file contents** directly
+- Explaining **well-documented** patterns
+- Generating **boilerplate** code
+- Suggesting **common** solutions
+
+---
+
+### ⚠️ Confidence Ceilings
+
+| Source | Max Confidence |
+|--------|----------------|
+| Direct file reading | 100% |
+| Documented patterns | 90% |
+| General claims | 70% |
+| Inference/edge cases | 50% |
+
+---
+
+### 🛡️ Anti-Hallucination Signals
+
+Watch out for these red flags in AI responses:
+- Inventing features that don't exist
+- Specific citations without sources
+- Confident claims about recent events
+- Workarounds for platform limitations
+
+**If something seems too convenient, verify it!**
+
+---
+
+*Use \`/status\` to check Alex's current architecture health.*
+`);
+
+    return { metadata: { command: 'confidence' } };
 }
 
 /**

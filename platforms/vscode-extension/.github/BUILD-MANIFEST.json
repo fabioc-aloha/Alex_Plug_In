@@ -1,9 +1,9 @@
 {
-  "sourceVersion": "3.7.19",
+  "sourceVersion": "3.8.0",
   "filesExcluded": 29,
   "filesCopied": 140,
-  "sourceCommit": "06a92a3",
-  "generatedAt": "2026-01-31 16:05:26",
+  "sourceCommit": "73d7329",
+  "generatedAt": "2026-01-31 16:25:13",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",

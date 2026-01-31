@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "3.7.19",
+  "version": "3.8.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -453,6 +453,18 @@
           {
             "name": "exportm365",
             "description": "Export your Alex memory for M365 Copilot integration"
+          },
+          {
+            "name": "help",
+            "description": "Show all available Alex commands and capabilities"
+          },
+          {
+            "name": "forget",
+            "description": "Selectively remove information from Alex's memory (e.g., /forget old-project-name)"
+          },
+          {
+            "name": "confidence",
+            "description": "Explain confidence levels and when to verify AI responses"
           }
         ]
       }

@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.8.0] - 2026-01-31 🎯 Expression — Discoverability & Confidence
+
+> **Status:** VS Code + M365 release
+> **Focus:** Command discoverability, confidence communication, epistemic integrity
+
+### Added (VS Code)
+
+- **📋 `/help` Command** — Full discoverability for all Alex capabilities
+  - Lists all 20+ slash commands with descriptions
+  - Organized by category: Cognitive, Productivity, Knowledge, Platform
+  - Shows language model tools available
+  - Quick start guidance
+
+- **🗑️ `/forget` Command** — Selective memory cleanup
+  - Search for topics across global knowledge
+  - Shows matching patterns and insights
+  - Manual deletion guidance (auto-delete planned for future)
+
+- **🎯 `/confidence` Command** — Epistemic integrity education
+  - 4-tier confidence system explained
+  - When to verify AI responses
+  - Confidence ceiling rules
+  - Anti-hallucination signals
+
+### Added (M365 Heir)
+
+- **🎯 Confidence Conversation Starter** — "How confident are you?"
+  - Triggers epistemic discussion
+  - Same 4-tier system as VS Code
+
+### Technical Notes
+
+- 3 new chat commands: `/help`, `/forget`, `/confidence`
+- M365 conversation starters: now 9 total
+- Builds foundation for v3.9.0 (Awareness) and v4.0.0 (Trust)
+
+---
+
 ## [3.7.19] - 2026-01-31 🛡️ Anti-Hallucination & M365 Graph Power
 
 > **Status:** VS Code + M365 release

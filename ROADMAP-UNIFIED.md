@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.7.19 |
-| **Current Heirs** | VS Code (3.7.19), M365 (v1.6) |
+| **Current Master Version** | 3.8.0 |
+| **Current Heirs** | VS Code (3.8.0), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |
@@ -72,9 +72,8 @@
 | 3.7.16 | M365 Parity | ✅ Done | — | ✅ Aligned | — |
 | 3.7.17 | Full Skills | ✅ Done | — | ✅ 15 skills | — |
 | 3.7.18 | Embedded Knowledge | ✅ Done | ✅ Published | ✅ Ready | Complete |
-| **3.7.19** | **Anti-Hallucination** | **✅ Done** | **✅ Published** | **✅ Graph-Powered** | **CURRENT** |
-| 3.7.x | GK Migration | Planned | Planned | — | Next |
-| 3.8.0 | Expression | Planned | Planned | Planned | — |
+| 3.7.19 | Anti-Hallucination | ✅ Done | ✅ Published | ✅ Graph-Powered | Complete |
+| **3.8.0** | **Expression** | **✅ Done** | **✅ Publishing** | **✅ Confidence Starter** | **CURRENT** |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
 | 4.0.0 | Trust | Planned | Planned | Planned | — |
 
