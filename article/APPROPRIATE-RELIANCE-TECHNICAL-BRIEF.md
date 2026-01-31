@@ -298,9 +298,9 @@ if (request.command === 'verify') {
 
 ---
 
-## 5. Empirical Evidence
+## 5. Research Foundation
 
-### 5.1 Key Research Findings
+### 5.1 Published Findings Informing Our Design
 
 The interventions implemented in Alex are grounded in empirical research demonstrating measurable effects on appropriate reliance:
 
@@ -341,15 +341,87 @@ Buçinca et al. (2021) showed cognitive forcing functions reduce overreliance bu
 | Promotes verification | Slows task completion |
 
 Our implementation balances these through:
+
 - **Targeted CFFs**: Only for high-stakes decisions (Human Judgment domains)
 - **Opt-in verification**: `/verify` command for user-initiated deep verification
 - **Low-friction hedging**: Confidence language imposes minimal cognitive burden
 
 ---
 
-## 6. Measurement Considerations
+## 6. Hypothesis & Instrumentation Plan
 
-### 6.1 Metrics from AETHER Synthesis
+### 6.1 Primary Hypothesis
+
+**H1: VS Code Alex outperforms M365 Alex on appropriate reliance metrics.**
+
+We hypothesize that the VS Code implementation will demonstrate better appropriate reliance outcomes than the M365 Copilot implementation due to:
+
+| Factor | VS Code Advantage | M365 Constraint |
+|--------|-------------------|-----------------|
+| **Interaction richness** | Explicit `/creative` and `/verify` commands | No explicit mode commands |
+| **User population** | Developers (higher technical literacy) | Knowledge workers (varied technical literacy) |
+| **Verification affordances** | Direct file access, inline code validation | Limited to search results and file references |
+| **Cognitive forcing** | Multi-turn verification scaffolds | Single-turn responses |
+| **Mode awareness** | User explicitly invokes modes | Mode inferred from context |
+
+### 6.2 Secondary Hypotheses
+
+**H2: Explicit mode commands improve CAIR/CSR ratios.**
+- Users who invoke `/verify` before accepting suggestions show higher CSR
+- Users who invoke `/creative` show appropriate epistemic relaxation
+
+**H3: Developer populations show faster trust calibration.**
+- Developers have more experience evaluating AI-generated code
+- Built-in verification habits (testing, code review) transfer to AI interaction
+
+**H4: Human Judgment flagging reduces overreliance in flagged domains.**
+- When Alex flags a decision as "requires human judgment," users spend more time deliberating
+- Flagged decisions show lower acceptance rates (appropriate if AI is uncertain)
+
+### 6.3 Proposed Instrumentation
+
+To test these hypotheses, we need to instrument both platforms:
+
+| Metric | VS Code Collection | M365 Collection | Purpose |
+|--------|-------------------|-----------------|---------|
+| **Command usage** | `/creative`, `/verify` invocations | N/A (no commands) | Mode engagement |
+| **Challenge events** | User corrections, "actually..." patterns | User disagreements | CSR proxy |
+| **Acceptance rate** | Suggestion acceptance/rejection | Response satisfaction | CAIR proxy |
+| **Session duration** | Time in chat sessions | Conversation length | Engagement depth |
+| **Human Judgment compliance** | Behavior after HJ flags | Behavior after HJ flags | Flag effectiveness |
+| **Confidence language** | Alex hedging frequency | Alex hedging frequency | Protocol compliance |
+
+### 6.4 Measurement Challenges
+
+| Challenge | Description | Potential Approach |
+|-----------|-------------|-------------------|
+| **No ground truth** | Can't always determine if AI was correct | Strategy-graded approach (Fok & Weld, 2023) |
+| **Selection bias** | VS Code users self-select (developers) | Control for user expertise |
+| **Hawthorne effect** | Users behave differently when observed | Aggregated anonymized telemetry |
+| **Platform confounds** | Differences beyond appropriate reliance mechanisms | Matched task comparison |
+
+### 6.5 Instrumentation Roadmap
+
+**Phase 1: Baseline Telemetry** (Current)
+- [ ] Session counts by platform
+- [ ] Command usage frequency
+- [ ] Basic engagement metrics
+
+**Phase 2: Appropriate Reliance Proxies**
+- [ ] Challenge event detection (user corrections)
+- [ ] Acceptance/rejection patterns
+- [ ] Human Judgment flag compliance tracking
+
+**Phase 3: Comparative Analysis**
+- [ ] Cross-platform metric comparison
+- [ ] User expertise segmentation
+- [ ] Longitudinal trust calibration tracking
+
+---
+
+## 7. Measurement Considerations
+
+### 7.1 Metrics from AETHER Synthesis
 
 Based on Vasconcelos et al. (2023) and Wang et al. (2025):
 
@@ -359,7 +431,7 @@ Based on Vasconcelos et al. (2023) and Wang et al. (2025):
 | **CSR** | % user disagreement with incorrect AI outputs | Log rejection of AI suggestions + ground truth |
 | **AoR** | Appropriateness of Reliance (combines CAIR + CSR) | AoR = 1 is optimal |
 
-### 6.2 Behavioral Indicators
+### 7.2 Behavioral Indicators
 
 Signs of well-calibrated reliance in our system:
 
@@ -375,7 +447,7 @@ Signs of miscalibration:
 - ⚠️ Challenges feel confrontational
 - ⚠️ Same mistakes repeat without correction
 
-### 6.3 Proxy Metrics Currently Tracked
+### 7.3 Proxy Metrics Currently Tracked
 
 | Metric | Source | Indicator |
 |--------|--------|-----------|
