@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.9.0] - 2026-01-31 🧠 Awareness — Detection & Self-Correction
+
+> **Status:** VS Code + M365 release
+> **Focus:** Proactive error detection, graceful correction, temporal awareness
+
+### Added (Master Alex)
+
+- **🚨 Confident-but-Wrong Detection** — Red flag phrase monitoring
+  - Catches: "Everyone knows...", "Obviously...", "Always use..."
+  - Auto-rephrases to calibrated language
+  - Version/temporal qualifiers for time-sensitive claims
+
+- **🔄 Self-Critique Protocol** — Proactive risk flagging
+  - "One potential issue with this approach..."
+  - "Consider also: [alternative]"
+  - "If that doesn't work, try..."
+
+- **✅ Graceful Correction Patterns** — Clean error recovery
+  - Standard: "You're right — I got that wrong."
+  - No over-apologizing, no blame, move forward
+
+### Added (VS Code)
+
+- **🧠 Awareness Skill (#51)** — New skill for epistemic vigilance
+  - Misconception detection patterns
+  - Temporal uncertainty protocol
+  - Self-critique generation
+  - Graceful correction checklist
+
+### Added (M365 Heir)
+
+- **Self-Awareness Protocols** — Embedded in declarativeAgent.json
+  - Red flag detection
+  - Temporal awareness for calendar data
+  - Same graceful correction patterns as VS Code
+
+### Technical Notes
+
+- Updated `protocol-triggers.instructions.md` with detection heuristics
+- Updated `appropriate-reliance/SKILL.md` to v1.6 with self-critique
+- Updated `alex-core.instructions.md` with correction protocols
+
+---
+
 ## [3.8.1] - 2026-01-31 🎨 UX Polish
 
 ### Changed
