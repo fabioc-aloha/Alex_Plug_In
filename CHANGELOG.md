@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.8] - 2026-01-31 🔧 Dawn Beta 4 (Hotfix)
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Release script fix, version corruption hotfix
+
+### Fixed
+
+- **🐛 Release Script Version Corruption** — Critical fix
+  - PowerShell regex `'$1' + '3.7.8'` was producing `$13.7.8` (backreference ambiguity)
+  - Now uses `'${1}'` + version for unambiguous backreference
+  - Fixed corrupted heir copilot-instructions.md
+
+### Changed
+
+- **🤖 Automated Releases** — Removed interactive confirmation prompt
+
+---
+
 ## [3.7.7] - 2026-01-31 🔧 Dawn Beta 4
 
 > **Status:** Pre-release (use `--pre-release` flag)
