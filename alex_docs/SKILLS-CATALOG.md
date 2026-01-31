@@ -11,9 +11,9 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 28 |
-| Master-Only | 11 |
-| Heir: VS Code | 3 |
+| Inheritable | 35 |
+| Master-Only | 8 |
+| Heir: VS Code | 2 |
 | Heir: M365 | 2 |
 | Temporary | 1 |
 
@@ -54,6 +54,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [root-cause-analysis](../.github/skills/root-cause-analysis/) | inheritable | 5 Whys, fishbone, post-mortem |
 | [incident-response](../.github/skills/incident-response/) | inheritable | Crisis handling, severity levels |
 | [release-preflight](../.github/skills/release-preflight/) | inheritable | Pre-release checks, version sync |
+| [change-management](../.github/skills/change-management/) | inheritable | Organizational change, stakeholder buy-in |
+| [project-management](../.github/skills/project-management/) | inheritable | Planning, tracking, resource allocation |
 
 ### 🔐 Security & Privacy
 
@@ -67,9 +69,12 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
 | [writing-publication](../.github/skills/writing-publication/) | inheritable | Academic writing, publication strategy |
+| [academic-research](../.github/skills/academic-research/) | inheritable | Literature review, citation management |
+| [creative-writing](../.github/skills/creative-writing/) | inheritable | Narrative, storytelling, engagement |
 | [markdown-mermaid](../.github/skills/markdown-mermaid/) | inheritable | Diagrams and visualization |
 | [lint-clean-markdown](../.github/skills/lint-clean-markdown/) | inheritable | Clean, consistent markdown |
 | [ascii-art-alignment](../.github/skills/ascii-art-alignment/) | inheritable | Text-based diagrams |
+| [localization](../.github/skills/localization/) | inheritable | i18n, l10n, translation workflows |
 
 ### 🎨 Visual Design
 
@@ -77,6 +82,13 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 |-------|-------------|---------|
 | [svg-graphics](../.github/skills/svg-graphics/) | inheritable | SVG banners, logos, icons, visual identity |
 | [image-handling](../.github/skills/image-handling/) | inheritable | Format conversion, optimization, sizing |
+| [graphic-design](../.github/skills/graphic-design/) | inheritable | Visual composition, branding, aesthetics |
+
+### 💼 Business & Analysis
+
+| Skill | Inheritance | Purpose |
+|-------|-------------|--------|
+| [business-analysis](../.github/skills/business-analysis/) | inheritable | Requirements, stakeholder analysis, process mapping |
 
 ### 🏗️ Architecture & Design
 
@@ -191,6 +203,8 @@ flowchart LR
         IR[incident-response]
         RF[release-preflight]
         BT[beta-tester]
+        CM[change-management]
+        PM[project-management]
     end
 
     subgraph Sec["🔐 Security"]
@@ -198,17 +212,25 @@ flowchart LR
         SFI[microsoft-sfi]
     end
 
-    subgraph Docs["📝 Docs"]
+    subgraph Docs["📝 Docs & Writing"]
         WP[writing-publication]
         MM[markdown-mermaid]
         LM[lint-clean-markdown]
         AA[ascii-art-alignment]
         LLM[llm-model-selection]
+        ACR[academic-research]
+        CW[creative-writing]
+        LOC[localization]
     end
 
     subgraph Vis["🎨 Visual"]
         SVG[svg-graphics]
         IH[image-handling]
+        GD[graphic-design]
+    end
+
+    subgraph Biz["💼 Business"]
+        BA[business-analysis]
     end
 
     subgraph VSC["💻 VS Code"]
@@ -251,6 +273,8 @@ flowchart LR
     DP --> ERP --> IR --> RCA
     RCA -.-> ERP
     GW --> RF
+    CM --> PM --> IR
+    BA --> PM
 
     %% Security flow
     PRA <--> SFI
@@ -260,12 +284,20 @@ flowchart LR
     WP --> MM --> LM
     MM <--> AA
     ARF --> LM
+    ACR --> WP
+    CW --> WP
+    LOC --> LM
 
     %% Visual flow
     SVG <--> IH
     SVG --> PS
+    GD --> SVG & IH
     PS --> LM & GW
     IH --> VEP
+
+    %% Business flow
+    BA --> ACR & WP
+    PM --> RF & CR
 
     %% Platform flow
     HC --> VEP & MAD
@@ -290,7 +322,7 @@ flowchart LR
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LLM,GW,PRA,SFI stale
     class BT temp
-    class BL,LP,CL,AR,AH,SCG,TS,RP,DP,CR,PS,VSE,ERP,RCA,IR,RF,WP,MM,LM,AA,SVG,IH inheritable
+    class BL,LP,CL,AR,AH,SCG,TS,RP,DP,CR,PS,VSE,ERP,RCA,IR,RF,WP,MM,LM,AA,SVG,IH,ACR,CW,LOC,GD,BA,CM,PM inheritable
 ```
 
 ### Legend
