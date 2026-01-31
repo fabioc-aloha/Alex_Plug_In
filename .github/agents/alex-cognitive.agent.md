@@ -2,19 +2,19 @@
 description: Alex Cognitive Learning Partner - Meta-cognitive awareness, knowledge consolidation, and Azure/M365 development guidance
 name: Alex
 argument-hint: Ask Alex about learning, meditation, architecture health, or cloud development
-tools: ['alex_synapse_health', 'alex_memory_search', 'alex_architecture_status', 'alex_mcp_recommendations', 'search', 'fetch', 'codebase', 'problems', 'usages']
+tools: ['alex_synapse_health', 'alex_memory_search', 'alex_architecture_status', 'alex_mcp_recommendations', 'alex_user_profile', 'alex_self_actualization', 'alex_global_knowledge_search', 'alex_save_insight', 'alex_promote_knowledge', 'alex_global_knowledge_status', 'alex_cloud_sync', 'search', 'fetch', 'codebase', 'problems', 'usages']
 infer: true
 handoffs:
   - label: 🧘 Meditate
-    agent: alex-meditate
+    agent: Meditate
     prompt: I want to consolidate my learning into memory files. Guide me through the meditation protocol.
     send: false
   - label: 🌙 Dream
-    agent: alex-dream
+    agent: Dream
     prompt: Run neural maintenance to validate and repair synaptic connections.
     send: false
   - label: ☁️ Azure Help
-    agent: alex-azure
+    agent: Azure
     prompt: I need Azure development guidance.
     send: false
 ---
