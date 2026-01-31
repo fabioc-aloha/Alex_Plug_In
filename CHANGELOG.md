@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.1] - 2026-01-31 🔧 Hotfix
+
+### Fixed
+
+- **Markdown Preview CSS** — Recreated corrupted `.vscode/markdown-light.css` file that was causing VS Code startup errors
+
+---
+
 ## [4.0.0] - 2026-01-31 🛡️ Trust — Full Epistemic Integrity
 
 > **Status:** VS Code + M365 release
