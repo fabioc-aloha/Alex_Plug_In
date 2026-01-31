@@ -4,6 +4,7 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from "../shared/utils";
 import { offerEnvironmentSetup } from "./setupEnvironment";
+import { runDreamProtocol } from "./dream";
 import * as telemetry from "../shared/telemetry";
 
 interface FileManifestEntry {
@@ -462,7 +463,8 @@ async function performInitialization(
       const doc = await vscode.workspace.openTextDocument(brainFile);
       await vscode.window.showTextDocument(doc);
     } else if (result === "Run Dream Protocol") {
-      await vscode.commands.executeCommand("alex.dream");
+      // Call directly to avoid operation lock conflict (we're still inside initialize's lock)
+      await runDreamProtocol(context);
     }
 
     telemetry.log("command", "initialize_user_choice", {
