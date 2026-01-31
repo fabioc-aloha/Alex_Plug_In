@@ -1,0 +1,112 @@
+{
+    "skill": "master-alex-audit",
+    "version": "1.0.0",
+    "description": "Master-specific audit extensions for comprehensive project health",
+    "inheritable": false,
+    "extends": "architecture-audit",
+    "connections": [
+        {
+            "target": "architecture-audit",
+            "type": "extends",
+            "strength": 1.0,
+            "description": "Builds upon generic audit checklist with Master-specific knowledge"
+        },
+        {
+            "target": "release-preflight",
+            "type": "prerequisite",
+            "strength": 0.9,
+            "description": "Master audit should precede any release preflight"
+        },
+        {
+            "target": "heir-curation",
+            "type": "bidirectional",
+            "strength": 0.85,
+            "description": "Audit verifies heir sync status, curation implements fixes"
+        },
+        {
+            "target": "architecture-health",
+            "type": "informs",
+            "strength": 0.8,
+            "description": "Audit results feed into architecture health monitoring"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "references",
+            "strength": 0.7,
+            "description": "Uses extension patterns for build verification"
+        },
+        {
+            "target": "global-knowledge",
+            "type": "references",
+            "strength": 0.6,
+            "description": "Audit insights can be promoted to global knowledge"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "references",
+            "strength": 0.65,
+            "description": "Audit may uncover bugs requiring debugging skill patterns"
+        },
+        {
+            "target": "release-process",
+            "type": "prerequisite",
+            "strength": 0.85,
+            "description": "Full audit recommended before major releases"
+        }
+    ],
+    "activationPatterns": [
+        "master audit",
+        "full audit",
+        "heir sync check",
+        "platform alignment",
+        "pre-release master",
+        "dependency audit",
+        "security audit",
+        "ui audit",
+        "test coverage",
+        "accessibility audit",
+        "bundle size",
+        "changelog audit"
+    ],
+    "auditSections": {
+        "masterOnly": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+        ],
+        "inheritable": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+        ]
+    },
+    "metadata": {
+        "created": "2026-01-31",
+        "lastUpdated": "2026-01-31",
+        "author": "Alex + Fabio",
+        "masterOnly": true,
+        "totalAuditSections": 22,
+        "paths": {
+            "vscodeExtension": "platforms/vscode-extension/",
+            "m365Agent": "platforms/m365-copilot/",
+            "skills": ".github/skills/",
+            "protection": ".github/config/MASTER-ALEX-PROTECTED.json"
+        }
+    }
+}
