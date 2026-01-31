@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.7.0 |
-| **Current Heirs** | VS Code (3.7.0), M365 (v1.6) |
+| **Current Master Version** | 3.7.12 |
+| **Current Heirs** | VS Code (3.7.12), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |
@@ -63,9 +63,10 @@
 | 3.5.x | Phoenix | ⚠️ Chaos | ⚠️ Broken | ✅ v1.6 deployed | Archived |
 | 3.6.0 | Dawn | ✅ Done | ✅ Published | ✅ Aligned | Complete |
 | 3.7.0 | Foundation | ✅ Done | ✅ v3.7.0 | — | Complete |
-| 3.7.1 | — | ✅ Done | ✅ Beta 1 | — | Complete |
-| **3.7.2** | **—** | **✅ Done** | **✅ Beta 2** | **—** | **CURRENT** |
-| 3.7.3 | GK Migration | Planned | Planned | — | In Progress |
+| 3.7.10 | — | ✅ Done | ✅ Hotfix | — | Complete |
+| 3.7.11 | — | ✅ Done | ✅ Hotfix | — | Complete |
+| **3.7.12** | **—** | **✅ Done** | **✅ Published** | **—** | **CURRENT** |
+| 3.7.x | GK Migration | Planned | Planned | — | Next |
 | 3.8.0 | Expression | Planned | Planned | Planned | — |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
 | 4.0.0 | Trust | Planned | Planned | Planned | — |

@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.12] - 2026-01-31 🎨 Global Markdown Styles
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Persistent markdown preview styling across all workspaces
+
+### Added
+
+- **🎨 Global Markdown Styles** — CSS now persists globally
+  - CSS copied to `~/.alex/markdown-light.css` (user's home directory)
+  - `markdown.styles` setting uses absolute path, works in all workspaces
+  - No more per-workspace CSS setup needed
+  - GitHub-flavored styling for markdown previews
+
+### Changed
+
+- **📜 Publish Script** — Now loads PAT from `.env` file automatically
+  - Safer credential handling (not in command line)
+  - Added `--pat` flag to vsce publish command
+
+---
+
 ## [3.7.11] - 2026-01-31 🔧 Hotfix
 
 > **Status:** Pre-release (use `--pre-release` flag)

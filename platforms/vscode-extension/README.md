@@ -175,15 +175,13 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v3.7.3
+## 🆕 What's New in v3.7.12
 
-- **🛡️ Architecture Integrity** — Fixed all legacy DK-*.md references to skills architecture
-- **📋 Version Alignment** — All memory files now consistent with current version
-- **🔗 Synapse Health** — Fixed broken connections in meditation session records
-- **🫀 Health Dashboard** — Modern card-based UI with CX logo
-- **🌐 Generate Skill Catalog** — Creates network diagrams of all skills
-- **📊 Rich Status Bar** — Shows health, session timer, and streak at a glance
-- **🎨 Welcome View Polish** — Expanded metrics, grouped actions, BETA badge
+- **🎨 Global Markdown Styles** — GitHub-flavored CSS now persists globally across all workspaces
+- **🔧 Operation Lock Fix** — Upgrade offering Initialize no longer blocks itself
+- **🛠️ Developer Tools** — New Welcome View section with Release Preflight, Debug This, Generate Diagram
+- **🔍 Generic Audit** — Audit menu now targets your project, not extension internals
+- **📦 Clean Heir Payload** — Fresh installs get empty episodic folder (build your own history)
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
