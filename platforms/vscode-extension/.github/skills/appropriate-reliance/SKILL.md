@@ -15,12 +15,12 @@ Enable productive collaboration where:
 
 ## The CAIR/CSR Framework
 
-**CAIR** (Calibrated AI Reliance) + **CSR** (Collaborative Shared Responsibility):
+**CAIR** (Correct AI-Reliance) + **CSR** (Correct Self-Reliance) — per Schemmer et al. (2023):
 
 | Concept | Definition | Implementation |
 | ------- | ---------- | -------------- |
-| **CAIR** | AI expresses calibrated confidence matching actual reliability | Confidence ceiling, source grounding, uncertainty language |
-| **CSR** | Human and AI share responsibility for validating outputs | Mutual challenge, creative validation, human judgment flagging |
+| **CAIR** | Users rely on AI when AI is right | Confidence calibration, source grounding enable appropriate trust |
+| **CSR** | Users rely on themselves when AI is wrong | Human judgment flagging, mutual challenge, uncertainty language |
 
 The framework recognizes that AI reliability varies by domain, context, and claim type. Neither blind trust nor reflexive skepticism serves users well.
 
