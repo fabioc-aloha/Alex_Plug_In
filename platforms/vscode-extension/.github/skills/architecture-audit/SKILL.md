@@ -1,10 +1,12 @@
 # Architecture Audit
 
-> Comprehensive project consistency review across code, documentation, diagrams, and configuration
+> Comprehensive **project** consistency review across code, documentation, diagrams, and configuration
 
 ## Overview
 
-Systematic audit process to ensure all project artifacts stay synchronized. Catches version drift, terminology inconsistencies, outdated diagrams, broken references, and code-to-docs mismatches.
+Systematic audit process to ensure all **project** artifacts stay synchronized. Catches version drift, terminology inconsistencies, outdated diagrams, broken references, and code-to-docs mismatches.
+
+⚠️ **IMPORTANT**: This skill audits the **user's project code**, NOT the Alex cognitive architecture in `.github/`. Ignore `.github/` folder contents when performing audits - focus on the actual source code, documentation, and configuration in the project root and subdirectories.
 
 ## Triggers
 
@@ -19,11 +21,13 @@ Systematic audit process to ensure all project artifacts stay synchronized. Catc
 
 ```powershell
 # Find version references in common locations
+# EXCLUDE: .github/** (Alex cognitive architecture - not project code)
 $patterns = @(
     'package.json',           # "version": "x.y.z"
-    '**/config*.json',        # Version in config files
-    '**/*.md',                # Documentation references
-    '**/constants.ts',        # Hardcoded versions
+    'src/**/config*.json',    # Version in config files (not .github)
+    '*.md',                   # Root documentation only
+    'docs/**/*.md',           # Project docs (not .github)
+    'src/**/constants.ts',    # Hardcoded versions
     'CHANGELOG.md'            # Version headers
 )
 
@@ -46,10 +50,11 @@ Build a deprecated terms list for your project:
 | (project-specific) | (project-specific) | (document here) |
 
 ```powershell
-# Search for deprecated terms
+# Search for deprecated terms (exclude .github/)
 $deprecated = @('OLD_TERM_1', 'OLD_TERM_2')
 foreach ($term in $deprecated) {
-    Get-ChildItem -Recurse -Include "*.md","*.ts","*.json" |
+    Get-ChildItem -Recurse -Include "*.md","*.ts","*.json" -Exclude ".github" |
+        Where-Object { $_.FullName -notmatch '\\.github\\' } |
         Select-String -Pattern $term
 }
 ```
@@ -81,8 +86,9 @@ For each diagram (Mermaid/ASCII):
 - [ ] No references to deprecated concepts
 
 ```powershell
-# Find all diagrams
+# Find all diagrams in project (exclude .github/)
 Get-ChildItem -Recurse -Include "*.md" |
+    Where-Object { $_.FullName -notmatch '\\.github\\' } |
     Select-String -Pattern '```mermaid|```ascii|┌|╔' |
     Group-Object -Property Path
 ```
@@ -95,8 +101,9 @@ Get-ChildItem -Recurse -Include "*.md" |
 - [ ] Import/require statements resolve
 
 ```powershell
-# Find markdown links
+# Find markdown links in project (exclude .github/)
 Get-ChildItem -Recurse -Include "*.md" |
+    Where-Object { $_.FullName -notmatch '\\.github\\' } |
     Select-String -Pattern '\[.*?\]\((?!http)[^)]+\)' |
     ForEach-Object {
         # Extract path and verify existence

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.8.1] - 2026-01-31 🎨 UX Polish
+
+### Changed
+
+- **🤖 Chat with GitHub Copilot** — Renamed from "Chat with Copilot" with GitHub Copilot icon
+  - Uses inline SVG for reliable rendering
+  - Clearer branding association
+
+- **🔍 Project Audit Skill** — Now audits actual project code, not Alex architecture
+  - Added `.github/` exclusion to all search patterns
+  - Focus on user's source code, docs, and config
+  - Prevents confusion between project and architecture auditing
+
+---
+
 ## [3.8.0] - 2026-01-31 🎯 Expression — Discoverability & Confidence
 
 > **Status:** VS Code + M365 release

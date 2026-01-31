@@ -519,6 +519,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 14px;
             width: 18px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .action-icon svg {
+            width: 16px;
+            height: 16px;
         }
         .action-text {
             flex: 1;
@@ -707,8 +714,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="action-list">
                 <div class="action-group-label">🧠 Core</div>
                 <button class="action-btn" onclick="cmd('openChat')">
-                    <span class="action-icon">💬</span>
-                    <span class="action-text">Chat with Copilot</span>
+                    <span class="action-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
+                    <span class="action-text">Chat with GitHub Copilot</span>
                 </button>
                 <button class="action-btn" onclick="cmd('upgrade')">
                     <span class="action-icon">⬆️</span>
