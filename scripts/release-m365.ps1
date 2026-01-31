@@ -40,24 +40,49 @@ try {
     }
     Write-Host "   ✅ teamsapp CLI available" -ForegroundColor Green
 
-    # 2. Package
+    # 2. Package with teamsapp (resolves variables)
     Write-Host "`n📦 Packaging agent..." -ForegroundColor Yellow
     npx teamsapp package --env $Environment
     if ($LASTEXITCODE -ne 0) { throw "Packaging failed!" }
-    Write-Host "   ✅ Package created" -ForegroundColor Green
+    Write-Host "   ✅ Base package created" -ForegroundColor Green
 
-    # 3. Find package
+    # 3. Fix: teamsapp doesn't include declarativeAgent.json - rebuild with all files
     $buildDir = Join-Path $m365Dir "appPackage\build"
-    $pkg = Get-ChildItem "$buildDir\*.zip" -ErrorAction SilentlyContinue | 
-    Sort-Object LastWriteTime -Descending | 
-    Select-Object -First 1
+    $appPackageDir = Join-Path $m365Dir "appPackage"
+    
+    # Extract the resolved manifest (has real GUID)
+    $basePkg = Get-ChildItem "$buildDir\appPackage.$Environment.zip" -ErrorAction SilentlyContinue
+    if ($basePkg) {
+        $inspectDir = Join-Path $buildDir "inspect"
+        Expand-Archive -Path $basePkg.FullName -DestinationPath $inspectDir -Force
+        
+        # Create final package with resolved manifest + declarativeAgent
+        $finalDir = Join-Path $buildDir "final"
+        New-Item -ItemType Directory -Path $finalDir -Force | Out-Null
+        Copy-Item (Join-Path $inspectDir "manifest.json") $finalDir
+        Copy-Item (Join-Path $appPackageDir "declarativeAgent.json") $finalDir
+        Copy-Item (Join-Path $appPackageDir "color.png") $finalDir
+        Copy-Item (Join-Path $appPackageDir "outline.png") $finalDir
+        
+        $finalPkg = Join-Path $buildDir "appPackage.final.zip"
+        Compress-Archive -Path "$finalDir\*" -DestinationPath $finalPkg -Force
+        Write-Host "   ✅ Final package with declarativeAgent.json" -ForegroundColor Green
+    }
+
+    # 4. Find package (prefer final, fallback to base)
+    $pkg = Get-Item "$buildDir\appPackage.final.zip" -ErrorAction SilentlyContinue
+    if (-not $pkg) {
+        $pkg = Get-ChildItem "$buildDir\*.zip" -ErrorAction SilentlyContinue | 
+            Sort-Object LastWriteTime -Descending | 
+            Select-Object -First 1
+    }
 
     if (-not $pkg) {
         throw "No package found in $buildDir"
     }
-    Write-Host "   Package: $($pkg.Name)" -ForegroundColor Gray
+    Write-Host "   Package: $($pkg.Name) ($([math]::Round($pkg.Length/1KB, 1)) KB)" -ForegroundColor Gray
 
-    # 4. Validate
+    # 5. Validate
     Write-Host "`n✅ Validating package..." -ForegroundColor Yellow
     npx teamsapp validate --package-file $pkg.FullName
     if ($LASTEXITCODE -ne 0) { 
@@ -65,6 +90,17 @@ try {
     }
     else {
         Write-Host "   ✅ Validation passed" -ForegroundColor Green
+    }
+    
+    # Verify package contents
+    $verifyDir = Join-Path $buildDir "verify"
+    Expand-Archive -Path $pkg.FullName -DestinationPath $verifyDir -Force
+    $verifyFiles = Get-ChildItem $verifyDir
+    Write-Host "`n📋 Package contents:" -ForegroundColor Yellow
+    $verifyFiles | ForEach-Object { Write-Host "   - $($_.Name) ($([math]::Round($_.Length/1KB, 1)) KB)" -ForegroundColor Gray }
+    
+    if (-not (Test-Path (Join-Path $verifyDir "declarativeAgent.json"))) {
+        throw "❌ CRITICAL: declarativeAgent.json missing from package!"
     }
 
     if ($Validate) {
