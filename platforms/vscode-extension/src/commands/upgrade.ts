@@ -15,6 +15,7 @@ import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils";
 import { runDreamProtocol } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
+import { initializeArchitecture } from "./initialize";
 
 // ============================================================================
 // TYPES
@@ -685,7 +686,9 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     );
 
     if (result === "Initialize Alex Now") {
-      await vscode.commands.executeCommand("alex.initialize");
+      // Call function directly instead of command to avoid lock conflict
+      // (upgradeArchitecture already holds the operation lock)
+      await initializeArchitecture(context);
     }
     return;
   }

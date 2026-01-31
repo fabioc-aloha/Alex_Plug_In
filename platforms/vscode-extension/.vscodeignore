@@ -46,6 +46,12 @@ esbuild.js
 # This file only exists in Master Alex and protects it from commands
 .github/config/MASTER-ALEX-PROTECTED.json
 
+# Project-specific meditation sessions (only .prompt.md templates should be packaged)
+.github/episodic/meditation-*.md
+.github/episodic/chronicle-*.md
+.github/episodic/dream-report-*.md
+.github/episodic/.gitkeep
+
 # Extension documentation (exclude from package)
 alex/
 

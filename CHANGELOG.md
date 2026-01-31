@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.10] - 2026-01-31 🔧 Hotfix
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Operation lock fix, heir cleanup, Developer Tools UI
+
+### Fixed
+
+- **🔄 Operation Lock Conflict** — Upgrade command offering Initialize no longer blocks itself
+- **🔗 Fresh Install Broken Synapses** — Heirs now ship with empty episodic folder instead of Master's meditation history
+- **🛠️ Developer Tools Menu** — Added missing Welcome View section with Release Preflight, Debug This, Generate Diagram
+
+### Changed
+
+- Heir episodic folder is now empty (users build their own meditation history)
+- Added `.vscodeignore` rules to prevent future episodic memory leakage
+
+---
+
 ## [3.7.8] - 2026-01-31 🔧 Dawn Beta 4 (Hotfix)
 
 > **Status:** Pre-release (use `--pre-release` flag)

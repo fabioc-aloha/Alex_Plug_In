@@ -110,6 +110,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "runAudit":
           vscode.commands.executeCommand("alex.runAudit");
           break;
+        case "releasePreflight":
+          vscode.commands.executeCommand("alex.releasePreflight");
+          break;
+        case "debugThis":
+          vscode.commands.executeCommand("alex.debugThis");
+          break;
+        case "generateDiagram":
+          vscode.commands.executeCommand("alex.generateDiagram");
+          break;
         case "openMarketplace":
           vscode.env.openExternal(vscode.Uri.parse("https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"));
           break;
@@ -728,6 +737,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('generateSkillCatalog')">
                     <span class="action-icon">🌐</span>
                     <span class="action-text">Generate Skill Catalog</span>
+                </button>
+                
+                <div class="action-group-label">🛠️ Developer Tools</div>
+                <button class="action-btn" onclick="cmd('releasePreflight')">
+                    <span class="action-icon">🚀</span>
+                    <span class="action-text">Release Preflight</span>
+                </button>
+                <button class="action-btn" onclick="cmd('debugThis')">
+                    <span class="action-icon">🐛</span>
+                    <span class="action-text">Debug This</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateDiagram')">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Generate Diagram</span>
                 </button>
                 
                 <div class="action-group-label">⚖️ Work-Life Balance</div>

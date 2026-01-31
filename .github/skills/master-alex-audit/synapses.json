@@ -40,6 +40,18 @@
             "type": "references",
             "strength": 0.6,
             "description": "Audit insights can be promoted to global knowledge"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "references",
+            "strength": 0.65,
+            "description": "Audit may uncover bugs requiring debugging skill patterns"
+        },
+        {
+            "target": "release-process",
+            "type": "prerequisite",
+            "strength": 0.85,
+            "description": "Full audit recommended before major releases"
         }
     ],
     "activationPatterns": [
