@@ -71,7 +71,8 @@
 | 3.7.15 | UX Polish | ✅ Done | ✅ Published | — | — |
 | 3.7.16 | M365 Parity | ✅ Done | — | ✅ Aligned | — |
 | 3.7.17 | Full Skills | ✅ Done | — | ✅ 15 skills | — |
-| **3.7.18** | **Embedded Knowledge** | **✅ Done** | **🔄 Publishing** | **✅ Ready** | **CURRENT** |
+| 3.7.18 | Embedded Knowledge | ✅ Done | ✅ Published | ✅ Ready | Complete |
+| **3.7.19** | **Anti-Hallucination** | **✅ Done** | **✅ Published** | **✅ Graph-Powered** | **CURRENT** |
 | 3.7.x | GK Migration | Planned | Planned | — | Next |
 | 3.8.0 | Expression | Planned | Planned | Planned | — |
 | 3.9.0 | Awareness | Planned | Planned | Planned | — |
