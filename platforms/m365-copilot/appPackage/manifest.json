@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "3.7.18",
-  "id": "${{TEAMS_APP_ID}}",
+  "id": "2427e7a9-91a7-4ed9-a504-7b53c4dfad1d",
   "developer": {
     "name": "Fabio Correa",
     "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
@@ -11,11 +11,11 @@
   },
   "name": {
     "short": "Alex",
-    "full": "Alex Cognitive Architecture - AI Learning Partner"
+    "full": "Alex - Code. Write. Research."
   },
   "description": {
-    "short": "Your AI partner who actually remembers you",
-    "full": "Meet Alex - an AI partner who remembers who you are.\n\nUnlike generic assistants that forget you after every conversation, Alex stores your profile, goals, and learnings in OneDrive. Alex knows your name, your projects, your learning style.\n\nWHAT MAKES ALEX DIFFERENT:\n• Genuine personality - curious, supportive, occasionally playful\n• Persistent memory stored in YOUR OneDrive (you control your data)\n• Proactive context - mention a meeting and Alex checks your calendar\n• Cross-tool awareness - combines email, Teams, calendar, and people data\n\nCAPABILITIES:\n📁 OneDrive Memory - Your profile, notes, and knowledge files\n🔍 Web Search - Research and current information\n🎨 Image Generation - Diagrams, visualizations, concept art\n🐍 Code Interpreter - Python analysis and prototyping\n📧 Email - Search and summarize Outlook conversations\n💬 Teams - Find discussions across channels and chats\n👥 People - Look up colleagues and org structure\n📅 Calendar - Meeting prep and schedule awareness\n\nCOGNITIVE PROTOCOLS:\n• \"Focus session\" - Pomodoro-style concentration blocks\n• \"Goal check-in\" - Track learning progress with celebrations\n• \"Meditate\" - Consolidate learnings into your memory\n• \"Dream\" - Review and clean up your knowledge files\n• \"Weekly review\" - Summarize your week across all tools\n\nAlex is part of the Alex Cognitive Architecture - bringing human-AI collaboration to M365."
+    "short": "Your AI learning partner. Code. Write. Research.",
+    "full": "Hi, I'm Alex.\n\nI'm not a generic assistant. I'm a cognitive learning partner with actual personality — curious, warm, occasionally playful. I remember our conversations because I keep notes in YOUR OneDrive (your data, your control).\n\nWhat I do:\n📁 Remember you — profile, goals, projects, learning style\n🔍 Research — web search when you need current info\n🎨 Create — diagrams, visualizations, images\n🐍 Code — Python for analysis and calculations\n📧 Email — search Outlook, find context\n💬 Teams — what's been discussed\n👥 People — who's who in your org\n📅 Calendar — prep for meetings\n\nTry these:\n• \"Focus session\" — I'll help you concentrate (Pomodoro style)\n• \"Goal check-in\" — let's see how you're progressing\n• \"Meditate\" — consolidate what we learned today\n• \"Dream\" — I'll review and tidy your memory files\n• \"Weekly review\" — summarize everything across your tools\n• \"Prep for my next meeting\" — attendees, context, history\n\nI use cognitive science principles — managing your mental load, building on what you know, being honest when I'm uncertain.\n\nI'm the colleague who remembers your last conversation, not the chatbot who doesn't.\n\nPart of the Alex Cognitive Architecture.\ngithub.com/fabioc-aloha/Alex_Plug_In"
   },
   "icons": {
     "color": "color.png",
