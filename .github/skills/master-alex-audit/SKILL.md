@@ -316,6 +316,114 @@ if ($issues.Count -eq 0) {
 }
 ```
 
+### 9. Skill Network Diagram Audit
+
+Deep validation of the Mermaid skill network diagram in SKILLS-CATALOG.md:
+
+```powershell
+# === SKILL NETWORK DIAGRAM AUDIT ===
+$catalogFile = "alex_docs/SKILLS-CATALOG.md"
+$catalogContent = Get-Content $catalogFile -Raw
+$issues = @()
+
+# 9a. Extract all actual skills
+$actualSkills = Get-ChildItem ".github/skills" -Directory | Select-Object -ExpandProperty Name
+Write-Host "Actual skills: $($actualSkills.Count)"
+
+# 9b. Extract diagram nodes (format: ABBREV[skill-name])
+$nodePattern = '(\w+)\[([\w-]+)\]'
+$diagramNodes = [regex]::Matches($catalogContent, $nodePattern)
+$nodeMap = @{}
+foreach ($match in $diagramNodes) {
+    $abbrev = $match.Groups[1].Value
+    $skillName = $match.Groups[2].Value
+    $nodeMap[$skillName] = $abbrev
+}
+Write-Host "Diagram nodes: $($nodeMap.Count)"
+
+# 9c. Skills missing from diagram
+$missingFromDiagram = $actualSkills | Where-Object { $_ -notin $nodeMap.Keys }
+if ($missingFromDiagram) {
+    Write-Host "`n⚠️ Skills MISSING from diagram:"
+    $missingFromDiagram | ForEach-Object { Write-Host "  - $_" }
+    $issues += "Missing from diagram: $($missingFromDiagram -join ', ')"
+} else {
+    Write-Host "✅ All skills have diagram nodes"
+}
+
+# 9d. Phantom nodes (in diagram but not actual skills)
+$phantomNodes = $nodeMap.Keys | Where-Object { $_ -notin $actualSkills }
+if ($phantomNodes) {
+    Write-Host "`n⚠️ PHANTOM nodes (skill doesn't exist):"
+    $phantomNodes | ForEach-Object { Write-Host "  - $_ ($($nodeMap[$_]))" }
+    $issues += "Phantom nodes: $($phantomNodes -join ', ')"
+} else {
+    Write-Host "✅ No phantom nodes"
+}
+
+# 9e. Check class assignments match inheritance
+# Extract class definitions
+$masterClass = [regex]::Match($catalogContent, 'class\s+([\w,]+)\s+master').Groups[1].Value -split ','
+$inheritableClass = [regex]::Match($catalogContent, 'class\s+([\w,]+)\s+inheritable').Groups[1].Value -split ','
+$vscodeClass = [regex]::Match($catalogContent, 'class\s+([\w,]+)\s+vscode').Groups[1].Value -split ','
+$m365Class = [regex]::Match($catalogContent, 'class\s+([\w,]+)\s+m365').Groups[1].Value -split ','
+
+Write-Host "`nClass assignments:"
+Write-Host "  Master: $($masterClass.Count) nodes"
+Write-Host "  Inheritable: $($inheritableClass.Count) nodes"
+Write-Host "  VS Code: $($vscodeClass.Count) nodes"
+Write-Host "  M365: $($m365Class.Count) nodes"
+
+# 9f. Verify master-only skills are in master class
+$masterOnlySkills = @(
+    'meditation', 'meditation-facilitation', 'knowledge-synthesis', 'global-knowledge',
+    'architecture-refinement', 'llm-model-selection', 'self-actualization', 'heir-curation',
+    'master-alex-audit'
+)
+$masterAbbrevs = $masterOnlySkills | ForEach-Object { $nodeMap[$_] } | Where-Object { $_ }
+$missingMasterClass = $masterAbbrevs | Where-Object { $_ -notin $masterClass }
+if ($missingMasterClass) {
+    Write-Host "`n⚠️ Master-only skills not in master class:"
+    $missingMasterClass | ForEach-Object { Write-Host "  - $_" }
+    $issues += "Master class mismatch"
+}
+
+# 9g. Check for orphan nodes (no connections)
+$connectionPattern = '(\w+)\s*(?:-->|<-->|-.->)\s*'
+$connectedNodes = [regex]::Matches($catalogContent, $connectionPattern) |
+    ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
+$allAbbrevs = $nodeMap.Values | Sort-Object -Unique
+$orphans = $allAbbrevs | Where-Object { $_ -notin $connectedNodes -and $_ -ne 'BT' }  # BT is temp, may be orphan
+if ($orphans) {
+    Write-Host "`n⚠️ Orphan nodes (no connections):"
+    $orphans | ForEach-Object {
+        $skill = ($nodeMap.GetEnumerator() | Where-Object { $_.Value -eq $_ }).Key
+        Write-Host "  - $_ ($skill)"
+    }
+    $issues += "Orphan nodes: $($orphans -join ', ')"
+} else {
+    Write-Host "✅ All nodes connected"
+}
+
+# Summary
+Write-Host "`n--- DIAGRAM AUDIT SUMMARY ---"
+if ($issues.Count -eq 0) {
+    Write-Host "✅ Diagram is accurate" -ForegroundColor Green
+} else {
+    Write-Host "⚠️ Diagram issues: $($issues.Count)" -ForegroundColor Yellow
+    $issues | ForEach-Object { Write-Host "  - $_" }
+}
+```
+
+**Quick diagram check command:**
+
+```powershell
+# One-liner to compare skill count vs diagram nodes
+$skills = (Get-ChildItem ".github/skills" -Directory).Count
+$nodes = ([regex]::Matches((Get-Content "alex_docs/SKILLS-CATALOG.md" -Raw), '\w+\[[\w-]+\]') | Select-Object -ExpandProperty Value | Sort-Object -Unique).Count
+Write-Host "Skills: $skills | Diagram nodes: $nodes | $(if($skills -eq $nodes){'✅ MATCH'}else{'⚠️ MISMATCH'})"
+```
+
 **Key files to audit:**
 
 | File | Key Checks |
