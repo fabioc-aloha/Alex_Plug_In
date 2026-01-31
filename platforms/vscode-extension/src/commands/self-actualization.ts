@@ -240,7 +240,8 @@ async function checkVersionConsistency(
     try {
         if (await fs.pathExists(mainInstructionsPath)) {
             const content = await fs.readFile(mainInstructionsPath, 'utf-8');
-            const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
+            // Match version with optional codename: "3.7.5" or "3.7.5 Beta"
+            const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:\s+\w+)?)/);
             if (versionMatch) {
                 report.versionConsistency.currentVersion = versionMatch[1];
             }
