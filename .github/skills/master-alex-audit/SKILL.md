@@ -218,6 +218,205 @@ foreach ($file in $synapseFiles) {
 }
 ```
 
+### 8. alex_docs Documentation Audit
+
+Comprehensive check of the documentation folder:
+
+```powershell
+# === alex_docs AUDIT ===
+$alexDocs = "alex_docs"
+$issues = @()
+
+# 8a. Version references - should all match current version
+Write-Host "`n--- Version References ---"
+$currentVersion = "3.7.3"
+$versionRefs = Select-String -Path "$alexDocs/*.md" -Pattern '\d+\.\d+\.\d+' -AllMatches
+$wrongVersions = $versionRefs | Where-Object { $_.Matches.Value -ne $currentVersion -and $_.Matches.Value -match '^\d+\.\d+\.\d+$' }
+if ($wrongVersions) {
+    Write-Host "⚠️ Non-current versions found:"
+    $wrongVersions | ForEach-Object { Write-Host "  $($_.Filename):$($_.LineNumber) - $($_.Matches.Value)" }
+    $issues += "Version drift in alex_docs"
+} else {
+    Write-Host "✅ All version references current"
+}
+
+# 8b. Deprecated terminology
+Write-Host "`n--- Deprecated Terms ---"
+$deprecated = @(
+    @{ Term = 'DK-\*.md'; Replacement = 'skills/*/SKILL.md' },
+    @{ Term = 'domain-knowledge/'; Replacement = 'skills/' },
+    @{ Term = 'domain knowledge'; Replacement = 'skills' }
+)
+foreach ($dep in $deprecated) {
+    $found = Select-String -Path "$alexDocs/*.md" -Pattern $dep.Term -SimpleMatch
+    if ($found) {
+        Write-Host "⚠️ '$($dep.Term)' found (use '$($dep.Replacement)'):"
+        $found | ForEach-Object { Write-Host "  $($_.Filename):$($_.LineNumber)" }
+        $issues += "Deprecated term: $($dep.Term)"
+    }
+}
+if ($issues.Count -eq 0) { Write-Host "✅ No deprecated terms" }
+
+# 8c. Skill count accuracy in docs
+Write-Host "`n--- Skill Count Accuracy ---"
+$actualSkillCount = (Get-ChildItem ".github/skills" -Directory).Count
+$docSkillCounts = Select-String -Path "$alexDocs/*.md" -Pattern '(\d+)\s*skills?' -AllMatches
+$wrongCounts = $docSkillCounts | Where-Object {
+    $_.Matches | Where-Object { [int]$_.Groups[1].Value -ne $actualSkillCount -and [int]$_.Groups[1].Value -gt 30 }
+}
+if ($wrongCounts) {
+    Write-Host "⚠️ Incorrect skill counts (actual: $actualSkillCount):"
+    $wrongCounts | ForEach-Object { Write-Host "  $($_.Filename):$($_.LineNumber) - $($_.Line.Trim())" }
+    $issues += "Skill count mismatch"
+} else {
+    Write-Host "✅ Skill counts accurate"
+}
+
+# 8d. Broken internal links
+Write-Host "`n--- Internal Links ---"
+$mdFiles = Get-ChildItem "$alexDocs/*.md"
+$brokenLinks = @()
+foreach ($file in $mdFiles) {
+    $content = Get-Content $file -Raw
+    $links = [regex]::Matches($content, '\[([^\]]+)\]\(([^)]+)\)') | Where-Object { $_.Groups[2].Value -notmatch '^https?://' }
+    foreach ($link in $links) {
+        $target = $link.Groups[2].Value -replace '#.*$', ''  # Remove anchors
+        if ($target -and -not (Test-Path (Join-Path $alexDocs $target)) -and -not (Test-Path $target)) {
+            $brokenLinks += "$($file.Name): $($link.Groups[2].Value)"
+        }
+    }
+}
+if ($brokenLinks) {
+    Write-Host "⚠️ Broken links:"
+    $brokenLinks | ForEach-Object { Write-Host "  $_" }
+    $issues += "Broken internal links"
+} else {
+    Write-Host "✅ All internal links valid"
+}
+
+# 8e. Diagram accuracy (Mermaid node counts)
+Write-Host "`n--- Diagram Checks ---"
+$catalogDiagram = Select-String -Path "$alexDocs/SKILLS-CATALOG.md" -Pattern '\[[\w-]+\]' -AllMatches
+$diagramNodes = ($catalogDiagram.Matches | Select-Object -ExpandProperty Value | Sort-Object -Unique).Count
+Write-Host "Skill network diagram nodes: $diagramNodes (actual skills: $actualSkillCount)"
+if ([Math]::Abs($diagramNodes - $actualSkillCount) -gt 2) {
+    Write-Host "⚠️ Diagram may be out of sync"
+    $issues += "Diagram node count mismatch"
+} else {
+    Write-Host "✅ Diagram appears current"
+}
+
+# Summary
+Write-Host "`n--- alex_docs SUMMARY ---"
+if ($issues.Count -eq 0) {
+    Write-Host "✅ All checks passed" -ForegroundColor Green
+} else {
+    Write-Host "⚠️ Issues found: $($issues.Count)" -ForegroundColor Yellow
+    $issues | ForEach-Object { Write-Host "  - $_" }
+}
+```
+
+**Key files to audit:**
+
+| File | Key Checks |
+|------|------------|
+| `SKILLS-CATALOG.md` | Skill count, network diagram, inheritance table |
+| `COGNITIVE-ARCHITECTURE.md` | Version, component counts |
+| `USER-MANUAL.md` | Command list, feature descriptions |
+| `PROJECT-STRUCTURE.md` | Folder structure accuracy |
+| `MEMORY-SYSTEMS.md` | Memory type descriptions |
+
+## Consistency Reference (What Must Match)
+
+### Version Numbers
+These locations must all show the same version:
+
+| Location | File | Pattern |
+|----------|------|---------|
+| Package.json | `platforms/vscode-extension/package.json` | `"version": "X.Y.Z"` |
+| Copilot Instructions | `.github/copilot-instructions.md` | `**Version**: X.Y.Z` |
+| M365 Agent | `platforms/m365-copilot/appPackage/declarativeAgent.json` | `"version": "X.Y.Z"` |
+| Changelog | `CHANGELOG.md` | `## [X.Y.Z]` (latest) |
+| Quick Reference | `alex_docs/QUICK-REFERENCE.md` | Version table |
+
+**Note:** Historical files (`UPGRADE-MIGRATION-PLAN.md`, `VSCODE-EXTENSIONS-ANALYSIS.md`) may have old versions - that's OK if they're documenting history.
+
+### Skill Count
+These locations must show the actual skill count:
+
+| Location | File | Pattern |
+|----------|------|---------|
+| Copilot Instructions | `.github/copilot-instructions.md` | In stats section |
+| Skills Catalog | `alex_docs/SKILLS-CATALOG.md` | `## Skill Count: N` |
+| Cognitive Architecture | `alex_docs/COGNITIVE-ARCHITECTURE.md` | Skills mention |
+| Quick Reference | `alex_docs/QUICK-REFERENCE.md` | Skills summary |
+| Network Diagram | `alex_docs/SKILLS-CATALOG.md` | Mermaid nodes |
+
+**Current:** 47 skills (check with `(Get-ChildItem ".github/skills" -Directory).Count`)
+
+### MCP Tool Count
+| Location | File | Pattern |
+|----------|------|---------|
+| Package.json | `platforms/vscode-extension/package.json` | `contributes.languageModelTools` |
+| User Manual | `alex_docs/USER-MANUAL.md` | Tools section |
+| Copilot Instructions | `.github/copilot-instructions.md` | Stats |
+
+**Current:** 11 tools
+
+### Command Count
+| Location | File | Pattern |
+|----------|------|---------|
+| Package.json | `platforms/vscode-extension/package.json` | `contributes.commands` |
+| User Manual | `alex_docs/USER-MANUAL.md` | Commands section |
+
+**Current:** Check with `(Get-Content "platforms/vscode-extension/package.json" | ConvertFrom-Json).contributes.commands.Count`
+
+### Identity/Name Consistency
+| Term | Correct Form | Incorrect Forms |
+|------|--------------|-----------------|
+| Product name | Alex Cognitive Architecture | Alex Extension, Alex Plugin |
+| Short name | Alex | ALEX, alex (in headings) |
+| Extension ID | `fabioc-aloha.alex-cognitive-architecture` | Any variation |
+| Publisher | fabioc-aloha | fabioc, aloha |
+
+### Deprecated Terms (Never Use)
+| Deprecated | Replacement | Reason |
+|------------|-------------|--------|
+| `DK-*.md` | `skills/*/SKILL.md` | Format migration 2026-01 |
+| `domain-knowledge/` | `skills/` | Folder rename |
+| `domain knowledge files` | `skills` | Terminology update |
+
+**Exception:** Historical documentation (migration guides, upgrade plans) may reference deprecated terms when explaining the migration.
+
+### File Path Consistency
+| Logical Location | Actual Path |
+|------------------|-------------|
+| Master copilot instructions | `.github/copilot-instructions.md` |
+| Skills folder | `.github/skills/` |
+| Instructions folder | `.github/instructions/` |
+| Prompts folder | `.github/prompts/` |
+| VS Code extension | `platforms/vscode-extension/` |
+| M365 agent | `platforms/m365-copilot/` |
+| Documentation | `alex_docs/` |
+| Protection marker | `.github/config/MASTER-ALEX-PROTECTED.json` |
+
+### Diagram Node Abbreviations
+The skill network diagram uses these abbreviations:
+
+| Abbrev | Skill |
+|--------|-------|
+| BL | bootstrap-learning |
+| LP | learning-psychology |
+| CL | cognitive-load |
+| AR | appropriate-reliance |
+| AH | architecture-health |
+| AAU | architecture-audit |
+| MAA | master-alex-audit |
+| HC | heir-curation |
+| MED | meditation |
+| SA | self-actualization |
+| ... | (see SKILLS-CATALOG.md for full list) |
+
 ## Master Audit Report Template
 
 ```markdown
@@ -236,6 +435,7 @@ foreach ($file in $synapseFiles) {
 | Build Artifacts | ✅/⚠️/❌ | |
 | Documentation Refs | ✅/⚠️/❌ | |
 | Synapse Health | ✅/⚠️/❌ | |
+| alex_docs Audit | ✅/⚠️/❌ | |
 
 ## Detailed Findings
 

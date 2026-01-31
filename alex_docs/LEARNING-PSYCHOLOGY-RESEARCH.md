@@ -2,7 +2,7 @@
 
 > Academic sources supporting Alex's conversational learning approach
 
-**Source**: Extracted from DK-HUMAN-LEARNING-PSYCHOLOGY.md
+**Source**: Originally from DK-HUMAN-LEARNING-PSYCHOLOGY.md (migrated Jan 2026)
 **For**: Human reference (deep understanding of theoretical foundations)
 **Operational skill**: `.github/skills/learning-psychology/SKILL.md`
 
