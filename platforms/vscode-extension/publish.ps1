@@ -281,7 +281,7 @@ else {
 
 # Publish
 Write-Host "`n🚀 Publishing to VS Code Marketplace..." -ForegroundColor Yellow
-npx vsce publish @vsceArgs
+npx vsce publish --pat $env:VSCE_PAT @vsceArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Publishing failed" -ForegroundColor Red
     exit 1
