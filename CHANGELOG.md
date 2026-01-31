@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.4] - 2026-01-31 🌅 Dawn Beta
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Comeback Plan Phase 4 - Build & Distribution Testing
+
+### Focus
+
+First beta after completing Comeback Plan Phases 1-3. New build workflow, proper skill inheritance, and heir architecture sync.
+
+### Added
+
+- **🔧 Build Script** — `build-extension-package.ps1` for heir synchronization
+  - Copies root `.github/` to extension with proper exclusions
+  - Excludes 9 master-only skills (global-knowledge, meditation, self-actualization, etc.)
+  - Excludes dev files (MASTER-ALEX-PROTECTED.json, episodic sessions)
+  - Generates BUILD-MANIFEST.json with sync metadata
+
+- **🔍 Architecture Audit Skills** — New skills for codebase validation
+  - `architecture-audit` (inheritable) — General audit procedures
+  - `master-alex-audit` (master-only) — Master Alex-specific validation
+
+### Changed
+
+- **📦 Heir Architecture** — Proper skill inheritance model
+  - Heir receives 38 inheritable skills (not 47)
+  - Master-only skills excluded from distribution
+  - `copilot-instructions.md` correctly lists heir skills
+
+- **📋 Documentation** — Updated Comeback Plan to v3.8.0 target
+  - Phase 1-3 marked complete
+  - 29 commands documented (was 16)
+  - 11 MCP tools documented
+
+### Fixed
+
+- Heir `copilot-instructions.md` now lists 38 skills (was incorrectly listing 47)
+- Build script path separator normalization for Windows
+- Skill network diagram includes all 47 Master skills
+
+---
+
 ## [3.7.3] - 2026-01-30 🔧 Beta 3
 
 > **Status:** Pre-release (use `--pre-release` flag)

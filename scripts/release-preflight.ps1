@@ -1,5 +1,6 @@
 # Release Preflight Checklist Script
 # Run this BEFORE every release
+# Updated for platforms/vscode-extension structure
 
 param(
     [switch]$SkipTests,
@@ -9,8 +10,15 @@ param(
 $ErrorActionPreference = "Stop"
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Split-Path -Parent $scriptPath
+$extensionPath = Join-Path $rootPath "platforms\vscode-extension"
 
-Push-Location $rootPath
+# Validate extension path exists
+if (-not (Test-Path $extensionPath)) {
+    Write-Host "❌ Extension path not found: $extensionPath" -ForegroundColor Red
+    exit 1
+}
+
+Push-Location $extensionPath
 
 Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host "  RELEASE PREFLIGHT CHECKLIST" -ForegroundColor Cyan
@@ -18,35 +26,82 @@ Write-Host "========================================`n" -ForegroundColor Cyan
 
 $errors = @()
 
+# 0. PAT Check
+Write-Host "0. Checking PAT configuration..." -ForegroundColor Yellow
+$envFile = Join-Path $extensionPath ".env"
+$patFound = $false
+
+if ($env:VSCE_PAT) {
+    Write-Host "   ✅ VSCE_PAT set in environment" -ForegroundColor Green
+    $patFound = $true
+}
+elseif (Test-Path $envFile) {
+    $patLine = Get-Content $envFile | Where-Object { $_ -match '^VSCE_PAT=' }
+    if ($patLine) {
+        Write-Host "   ✅ VSCE_PAT found in .env" -ForegroundColor Green
+        $patFound = $true
+    }
+}
+
+if (-not $patFound) {
+    $errors += "VSCE_PAT not configured (set env var or add to platforms/vscode-extension/.env)"
+    Write-Host "   ❌ VSCE_PAT not found" -ForegroundColor Red
+}
+
 # 1. Version Synchronization Check
-Write-Host "1. Checking version synchronization..." -ForegroundColor Yellow
+Write-Host "`n1. Checking version synchronization..." -ForegroundColor Yellow
 
 $pkg = Get-Content "package.json" | ConvertFrom-Json
 $pkgVersion = $pkg.version
 Write-Host "   package.json: $pkgVersion" -ForegroundColor Gray
 
-$changelogContent = Get-Content "CHANGELOG.md" -Raw
-if ($changelogContent -match '\[(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)\]') {
-    $changelogVersion = $matches[1]
-    Write-Host "   CHANGELOG.md: $changelogVersion" -ForegroundColor Gray
-    
-    if ($pkgVersion -ne $changelogVersion) {
-        $errors += "Version mismatch: package.json ($pkgVersion) != CHANGELOG ($changelogVersion)"
-        Write-Host "   ❌ MISMATCH!" -ForegroundColor Red
+# Check CHANGELOG in root
+$changelogPath = Join-Path $rootPath "CHANGELOG.md"
+if (Test-Path $changelogPath) {
+    $changelogContent = Get-Content $changelogPath -Raw
+    if ($changelogContent -match '\[(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)\]') {
+        $changelogVersion = $matches[1]
+        Write-Host "   CHANGELOG.md: $changelogVersion" -ForegroundColor Gray
+        
+        if ($pkgVersion -ne $changelogVersion) {
+            $errors += "Version mismatch: package.json ($pkgVersion) != CHANGELOG ($changelogVersion)"
+            Write-Host "   ❌ MISMATCH!" -ForegroundColor Red
+        }
+        else {
+            Write-Host "   ✅ Versions match" -ForegroundColor Green
+        }
     }
     else {
-        Write-Host "   ✅ Versions match" -ForegroundColor Green
+        $errors += "Could not parse version from CHANGELOG.md"
+        Write-Host "   ⚠️ Could not parse CHANGELOG version" -ForegroundColor Yellow
     }
 }
 else {
-    $errors += "Could not parse version from CHANGELOG.md"
-    Write-Host "   ⚠️ Could not parse CHANGELOG version" -ForegroundColor Yellow
+    Write-Host "   ⚠️ CHANGELOG.md not found at root" -ForegroundColor Yellow
+}
+
+# Check heir copilot-instructions.md version
+$heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
+if (Test-Path $heirInstructions) {
+    $heirContent = Get-Content $heirInstructions -Raw
+    if ($heirContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+        $heirVersion = $matches[1]
+        Write-Host "   heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
+        if ($pkgVersion -ne $heirVersion) {
+            $errors += "Version mismatch: package.json ($pkgVersion) != heir copilot-instructions ($heirVersion)"
+            Write-Host "   ❌ MISMATCH!" -ForegroundColor Red
+        }
+        else {
+            Write-Host "   ✅ Heir version matches" -ForegroundColor Green
+        }
+    }
 }
 
 # 2. Build Check
 Write-Host "`n2. Checking build..." -ForegroundColor Yellow
-npm run compile 2>&1 | Out-Null
-if ($LASTEXITCODE -ne 0) {
+$buildOutput = npm run compile 2>&1
+$buildExitCode = $LASTEXITCODE
+if ($buildExitCode -ne 0) {
     $errors += "Build failed"
     Write-Host "   ❌ Build failed" -ForegroundColor Red
 }
@@ -57,7 +112,8 @@ else {
 # 3. Lint Check
 Write-Host "`n3. Checking lint..." -ForegroundColor Yellow
 $lintOutput = npm run lint 2>&1
-if ($LASTEXITCODE -ne 0) {
+$lintExitCode = $LASTEXITCODE
+if ($lintExitCode -ne 0) {
     $errors += "Lint errors found"
     Write-Host "   ❌ Lint errors" -ForegroundColor Red
 }
@@ -68,8 +124,9 @@ else {
 # 4. Test Check
 if (-not $SkipTests) {
     Write-Host "`n4. Running tests..." -ForegroundColor Yellow
-    npm test 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) {
+    $testOutput = npm test 2>&1
+    $testExitCode = $LASTEXITCODE
+    if ($testExitCode -ne 0) {
         $errors += "Tests failed"
         Write-Host "   ❌ Tests failed" -ForegroundColor Red
     }
@@ -78,10 +135,11 @@ if (-not $SkipTests) {
     }
 }
 else {
-    Write-Host "`n4. Skipping tests (use -SkipTests:$false to run)" -ForegroundColor Gray
+    Write-Host "`n4. Skipping tests (use -SkipTests:`$false to run)" -ForegroundColor Gray
 }
 
-# 5. Git Status
+# 5. Git Status (from root)
+Push-Location $rootPath
 Write-Host "`n5. Checking git status..." -ForegroundColor Yellow
 $gitStatus = git status --porcelain
 if ($gitStatus) {
@@ -101,6 +159,7 @@ if ($existingTag) {
 else {
     Write-Host "   ✅ Tag v$pkgVersion available" -ForegroundColor Green
 }
+Pop-Location
 
 # 7. Package Check (optional)
 if ($Package) {
@@ -122,16 +181,14 @@ if ($errors.Count -eq 0) {
     Write-Host "  ✅ PREFLIGHT PASSED - Ready to publish!" -ForegroundColor Green
     Write-Host "========================================`n" -ForegroundColor Cyan
     Write-Host "Next steps:" -ForegroundColor White
-    Write-Host "  1. git add -A && git commit -m 'chore: release v$pkgVersion'" -ForegroundColor Gray
-    Write-Host "  2. git tag v$pkgVersion" -ForegroundColor Gray
-    Write-Host "  3. git push && git push --tags" -ForegroundColor Gray
-    Write-Host "  4. vsce publish" -ForegroundColor Gray
+    Write-Host "  Run: .\scripts\release-vscode.ps1 -BumpType patch [-PreRelease]" -ForegroundColor Gray
 }
 else {
     Write-Host "  ❌ PREFLIGHT FAILED - Fix issues before publishing" -ForegroundColor Red
     Write-Host "========================================`n" -ForegroundColor Cyan
     Write-Host "Issues found:" -ForegroundColor White
     $errors | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
+    exit 1
 }
 
 Pop-Location
