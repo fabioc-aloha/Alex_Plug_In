@@ -187,7 +187,6 @@ Or natural language:
 ### Input Connections
 
 - [performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
-- [VERSION-NAMING-CONVENTION.md] (Medium, References, Backward) - "Version consistency validation"
 
 **Primary Function**: Execute comprehensive self-assessment with synapse validation, version checking, memory architecture analysis, and session documentation.
 
