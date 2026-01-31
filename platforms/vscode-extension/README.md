@@ -97,13 +97,25 @@ Tackle thesis work, research papers, literature reviews, and grant proposals wit
 
 Navigate ADKAR change initiatives, PMI project management, BRDs, business cases, and strategic planning.
 
-### 🎭 Creative Arts
+### 🎭 Creative Arts & Design
 
-Screenwriting, poetry, journalism—Alex supports dramatic structure, imagery, and storytelling craft.
+Screenwriting, poetry, journalism, UI/UX design—Alex supports dramatic structure, imagery, visual thinking, and storytelling craft.
 
 ### 📝 Professional Writing
 
 Business proposals, legal documents, technical documentation, and executive communications.
+
+### 🔧 DevOps & Infrastructure
+
+CI/CD pipelines, infrastructure as code, monitoring, deployment strategies, and operational excellence.
+
+### 📖 Learning & Education
+
+Course materials, study guides, curriculum development, and knowledge transfer for teams or students.
+
+### 🔒 Security & Compliance
+
+Threat modeling, security reviews, compliance documentation, and secure development practices.
 
 **[See All Project Templates →](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/PROJECT-TYPE-TEMPLATES.md)**
 
