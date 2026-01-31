@@ -73,6 +73,9 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
                 case 'syncKnowledge':
                     vscode.commands.executeCommand('alex.syncKnowledge');
                     break;
+                case 'runAudit':
+                    vscode.commands.executeCommand('alex.runAudit');
+                    break;
                 case 'viewDiagnostics':
                     vscode.commands.executeCommand('alex.viewBetaTelemetry');
                     break;
@@ -608,7 +611,10 @@ async function getWebviewContent(
                 <button class="btn btn-secondary" onclick="cmd('runDream')">
                     💭 Dream
                 </button>
-                <button class="btn btn-primary" onclick="cmd('selfActualize')">
+                <button class="btn btn-primary" onclick="cmd('runAudit')">
+                    🔍 Audit
+                </button>
+                <button class="btn btn-secondary" onclick="cmd('selfActualize')">
                     🧠 Self-Actualize
                 </button>
                 <button class="btn btn-secondary" onclick="cmd('viewDiagnostics')">
@@ -922,13 +928,23 @@ function getErrorContent(err: unknown): string {
             margin-top: 20px;
             padding: 10px 20px;
             cursor: pointer;
+            background: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: var(--vscode-button-hoverBackground);
         }
     </style>
 </head>
 <body>
     <h2>⚠️ Failed to load dashboard</h2>
     <p class="error">${err}</p>
-    <button onclick="location.reload()">Retry</button>
+    <button onclick="vscode.postMessage({command: 'refresh'})">Retry</button>
+    <script>
+        const vscode = acquireVsCodeApi();
+    </script>
 </body>
 </html>`;
 }

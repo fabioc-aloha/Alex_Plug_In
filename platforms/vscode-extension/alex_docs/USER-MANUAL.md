@@ -316,7 +316,7 @@ First sync creates a private Gist automatically.
 For a comprehensive view of Alex's cognitive architecture, open the Health Dashboard:
 
 ```text
-Ctrl+Shift+P → "Alex: Open Health Dashboard"
+Ctrl+Shift+P → "Alex: Health Dashboard"
 ```
 
 The dashboard displays:
@@ -328,6 +328,40 @@ The dashboard displays:
 - **Active Goals** - Current learning goals with progress
 - **Session Status** - Current session timer (if active)
 - **Cloud Sync** - Sync status and last sync time
+
+### Project Audit
+
+Run a comprehensive 22-point audit to check project health:
+
+```text
+Ctrl+Shift+P → "Alex: Run Project Audit"
+```
+
+Or ask Alex directly:
+
+```text
+@alex run full audit
+@alex run security audit
+@alex run dependency audit
+```
+
+**Audit Categories:**
+
+| Priority | Audits |
+|----------|--------|
+| 🔴 High | Security, Dependencies, Code Quality |
+| 🟡 Medium | UI, Bundle Size, Git, Changelog, Tests, API Compatibility |
+| 🟢 Low | Accessibility, Localization, Assets, Configuration |
+
+**Audit Triggers:**
+
+- "full audit" / "master audit" - All 22 checks
+- "security audit" - Secrets, CSP, input sanitization
+- "dependency audit" - npm vulnerabilities, outdated packages
+- "ui audit" - Dead buttons, WebView issues
+- "test coverage" - Missing tests, coverage gaps
+- "accessibility audit" - ARIA, keyboard navigation
+- "bundle size" - Extension size analysis
 
 ### Daily Maintenance
 

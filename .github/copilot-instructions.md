@@ -167,6 +167,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - [release-management.instructions.md] → "release", "publish", "deploy", "ship", "version bump"
 - [meditation/SKILL.md] → Post-dream enhancement, hybrid processing
 - [markdown-mermaid/SKILL.md] → Diagram creation, visualization requests
+- [master-alex-audit/SKILL.md] → "audit", "full audit", "pre-release check", "heir sync", dependency/security/UI audit
 
 *Detailed triggers: see [protocol-triggers.instructions.md]*
 

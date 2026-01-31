@@ -528,7 +528,7 @@ export async function checkProtectionAndWarn(
     if (protection.reason === 'setting') {
         // Explicit protection (or hardcoded failsafe) - cannot override
         // Using await to ensure the dialog is shown before returning
-        // The 'OK' button is the only option - clicking X or Escape still blocks
+        // Only Cancel button - command is always blocked
         await vscode.window.showErrorMessage(
             `🛡️ ${operationName} BLOCKED!\n\n` +
             `This is the Master Alex development environment.\n\n` +
@@ -538,7 +538,7 @@ export async function checkProtectionAndWarn(
             `2. Open Alex_Sandbox folder in the new window\n` +
             `3. Run the command there`,
             { modal: true },
-            'I Understand'  // Single button - no dangerous option
+            'Cancel'
         );
         // ALWAYS return false regardless of how dialog was dismissed
         return false;

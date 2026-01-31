@@ -175,6 +175,36 @@
         "icon": "$(pulse)"
       },
       {
+        "command": "alex.runAudit",
+        "title": "Alex: Run Project Audit",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "alex.releasePreflight",
+        "title": "Alex: Release Preflight",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "alex.codeReview",
+        "title": "Alex: Review Selected Code",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "alex.debugThis",
+        "title": "Alex: Debug This",
+        "icon": "$(bug)"
+      },
+      {
+        "command": "alex.generateDiagram",
+        "title": "Alex: Generate Diagram",
+        "icon": "$(type-hierarchy)"
+      },
+      {
+        "command": "alex.generateTests",
+        "title": "Alex: Generate Tests",
+        "icon": "$(beaker)"
+      },
+      {
         "command": "alex.setupEnvironment",
         "title": "Alex: Setup Environment",
         "icon": "$(gear)"
@@ -220,6 +250,18 @@
         {
           "command": "alex.askAboutSelection",
           "group": "1_ask@1"
+        },
+        {
+          "command": "alex.codeReview",
+          "group": "1_ask@2"
+        },
+        {
+          "command": "alex.debugThis",
+          "group": "1_ask@3"
+        },
+        {
+          "command": "alex.generateTests",
+          "group": "1_ask@4"
         },
         {
           "command": "alex.saveSelectionAsInsight",

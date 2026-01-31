@@ -445,10 +445,6 @@ export function activate(context: vscode.ExtensionContext) {
           description: "Open Copilot Chat",
         },
         {
-          label: "$(target) Manage Goals",
-          description: "Track learning and development goals",
-        },
-        {
           label: "$(list-tree) Generate Skill Catalog",
           description: "Create network diagram of all skills",
         },
@@ -469,6 +465,38 @@ export function activate(context: vscode.ExtensionContext) {
         {
           label: "$(graph) Health Dashboard",
           description: "Visual architecture health overview",
+        },
+        {
+          label: "$(checklist) Run Project Audit",
+          description: "22-point audit: security, dependencies, UI, tests",
+          detail: "🔍 Comprehensive project health check",
+        },
+        // --- Developer Tools ---
+        { label: "", kind: vscode.QuickPickItemKind.Separator },
+        {
+          label: "$(rocket) Release Preflight",
+          description: "Pre-release checklist and verification",
+          detail: "🚀 Ready to ship?",
+        },
+        {
+          label: "$(code) Code Review Selection",
+          description: "Review selected code for issues",
+          detail: "📋 Requires text selection",
+        },
+        {
+          label: "$(bug) Debug This",
+          description: "Analyze selection for bugs/issues",
+          detail: "🐛 Requires text selection",
+        },
+        {
+          label: "$(symbol-structure) Generate Diagram",
+          description: "Create Mermaid diagrams",
+          detail: "📊 Class, sequence, flowchart, ER, etc.",
+        },
+        {
+          label: "$(beaker) Generate Tests",
+          description: "Generate tests for selected code",
+          detail: "🧪 Jest, Mocha, pytest, etc.",
         },
       ];
 
@@ -508,6 +536,18 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.startSession");
         } else if (selected.label.includes("Health Dashboard")) {
           vscode.commands.executeCommand("alex.openHealthDashboard");
+        } else if (selected.label.includes("Project Audit")) {
+          vscode.commands.executeCommand("alex.runAudit");
+        } else if (selected.label.includes("Release Preflight")) {
+          vscode.commands.executeCommand("alex.releasePreflight");
+        } else if (selected.label.includes("Code Review")) {
+          vscode.commands.executeCommand("alex.codeReview");
+        } else if (selected.label.includes("Debug This")) {
+          vscode.commands.executeCommand("alex.debugThis");
+        } else if (selected.label.includes("Generate Diagram")) {
+          vscode.commands.executeCommand("alex.generateDiagram");
+        } else if (selected.label.includes("Generate Tests")) {
+          vscode.commands.executeCommand("alex.generateTests");
         }
       }
     },
@@ -520,6 +560,270 @@ export function activate(context: vscode.ExtensionContext) {
       const endLog = telemetry.logTimed("command", "setup_environment");
       try {
         await setupEnvironment();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Run Project Audit command
+  const runAuditDisposable = vscode.commands.registerCommand(
+    "alex.runAudit",
+    async () => {
+      const endLog = telemetry.logTimed("command", "run_audit");
+      try {
+        // Show audit options
+        const auditOptions = [
+          { label: "$(checklist) Full Audit", description: "Run all 22 audit checks", detail: "Comprehensive project health assessment" },
+          { label: "$(shield) Security Audit", description: "Secrets, CSP, input sanitization", detail: "High priority" },
+          { label: "$(package) Dependency Audit", description: "npm audit, outdated packages", detail: "High priority" },
+          { label: "$(code) Code Quality", description: "TypeScript errors, ESLint, dead code", detail: "High priority" },
+          { label: "$(browser) UI Audit", description: "Dead buttons, WebView issues", detail: "Medium priority" },
+          { label: "$(file-binary) Bundle Size", description: "Extension size, package estimate", detail: "Medium priority" },
+          { label: "$(git-branch) Git Hygiene", description: "Uncommitted changes, large files", detail: "Medium priority" },
+          { label: "$(note) Changelog Audit", description: "Format, version alignment", detail: "Medium priority" },
+          { label: "$(beaker) Test Coverage", description: "Test files, framework, gaps", detail: "Medium priority" },
+          { label: "$(eye) Accessibility", description: "ARIA, keyboard, colors", detail: "Low priority" },
+          { label: "$(globe) Localization", description: "i18n setup, hardcoded strings", detail: "Low priority" },
+          { label: "$(file-media) Asset Integrity", description: "Icons, missing/unused assets", detail: "Low priority" },
+          { label: "$(settings-gear) Configuration", description: "launch.json, tsconfig, vscodeignore", detail: "Low priority" },
+        ];
+
+        const selected = await vscode.window.showQuickPick(auditOptions, {
+          placeHolder: "Select audit type to run",
+          title: "🔍 Alex Project Audit",
+        });
+
+        if (!selected) {
+          endLog(true);
+          return;
+        }
+
+        // Open chat with audit prompt
+        const auditType = selected.label.replace(/\$\([^)]+\)\s*/, '');
+        vscode.commands.executeCommand(
+          "workbench.panel.chat.view.copilot.focus"
+        );
+        
+        // Show info about what to type
+        vscode.window.showInformationMessage(
+          `🔍 ${auditType}: Ask @alex to run this audit. Try: "@alex run ${auditType.toLowerCase()}"`,
+          "Copy Prompt"
+        ).then(action => {
+          if (action === "Copy Prompt") {
+            vscode.env.clipboard.writeText(`@alex run ${auditType.toLowerCase()} on this project`);
+            vscode.window.showInformationMessage("Prompt copied! Paste it in Copilot Chat.");
+          }
+        });
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(`Audit failed: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    },
+  );
+
+  // Release Preflight command
+  const releasePreflightDisposable = vscode.commands.registerCommand(
+    "alex.releasePreflight",
+    async () => {
+      const endLog = telemetry.logTimed("command", "release_preflight");
+      try {
+        const preflightChecks = [
+          { label: "$(rocket) Full Preflight", description: "Complete release readiness check", detail: "All checks before publishing" },
+          { label: "$(versions) Version Alignment", description: "Check version consistency across files", detail: "package.json, changelog, docs" },
+          { label: "$(git-commit) Git Status", description: "Uncommitted changes, branch status", detail: "Clean working directory" },
+          { label: "$(package) Build Verification", description: "Compile, bundle, package check", detail: "Extension builds successfully" },
+          { label: "$(checklist) Changelog Entry", description: "Verify changelog has entry for this version", detail: "Keep a Changelog format" },
+          { label: "$(shield) Security Scan", description: "npm audit, secrets check", detail: "No vulnerabilities" },
+          { label: "$(beaker) Test Suite", description: "Run tests, check coverage", detail: "All tests passing" },
+        ];
+
+        const selected = await vscode.window.showQuickPick(preflightChecks, {
+          placeHolder: "Select preflight check to run",
+          title: "🚀 Release Preflight",
+        });
+
+        if (!selected) {
+          endLog(true);
+          return;
+        }
+
+        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        const checkType = selected.label.replace(/\$\([^)]+\)\s*/, '');
+        vscode.window.showInformationMessage(
+          `🚀 ${checkType}: Ask @alex to run preflight. Try: "@alex run release preflight"`,
+          "Copy Prompt"
+        ).then(action => {
+          if (action === "Copy Prompt") {
+            vscode.env.clipboard.writeText(`@alex run ${checkType.toLowerCase()} check for release`);
+            vscode.window.showInformationMessage("Prompt copied! Paste it in Copilot Chat.");
+          }
+        });
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Code Review command
+  const codeReviewDisposable = vscode.commands.registerCommand(
+    "alex.codeReview",
+    async () => {
+      const endLog = telemetry.logTimed("command", "code_review");
+      try {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor || editor.selection.isEmpty) {
+          vscode.window.showWarningMessage("Select code to review first.");
+          endLog(true);
+          return;
+        }
+
+        const selectedText = editor.document.getText(editor.selection);
+        const fileName = editor.document.fileName.split(/[/\\]/).pop();
+        
+        // Copy context to clipboard
+        const prompt = `@alex review this code for issues, improvements, and best practices:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        await vscode.env.clipboard.writeText(prompt);
+        
+        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.window.showInformationMessage(
+          `📋 Code from ${fileName} copied. Paste in Copilot Chat for review.`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Debug This command
+  const debugThisDisposable = vscode.commands.registerCommand(
+    "alex.debugThis",
+    async () => {
+      const endLog = telemetry.logTimed("command", "debug_this");
+      try {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor || editor.selection.isEmpty) {
+          vscode.window.showWarningMessage("Select code or error message to debug.");
+          endLog(true);
+          return;
+        }
+
+        const selectedText = editor.document.getText(editor.selection);
+        const fileName = editor.document.fileName.split(/[/\\]/).pop();
+        
+        const prompt = `@alex help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        await vscode.env.clipboard.writeText(prompt);
+        
+        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.window.showInformationMessage(
+          `🐛 Code from ${fileName} copied. Paste in Copilot Chat to debug.`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Generate Diagram command
+  const generateDiagramDisposable = vscode.commands.registerCommand(
+    "alex.generateDiagram",
+    async () => {
+      const endLog = telemetry.logTimed("command", "generate_diagram");
+      try {
+        const diagramTypes = [
+          { label: "$(type-hierarchy) Class Diagram", description: "UML class relationships", detail: "Classes, interfaces, inheritance" },
+          { label: "$(git-merge) Sequence Diagram", description: "Interaction flow", detail: "Method calls, messages" },
+          { label: "$(workflow) Flowchart", description: "Process flow", detail: "Decision trees, algorithms" },
+          { label: "$(database) ER Diagram", description: "Entity relationships", detail: "Database schema" },
+          { label: "$(server) Architecture Diagram", description: "System components", detail: "Services, connections" },
+          { label: "$(symbol-state-machine) State Diagram", description: "State transitions", detail: "FSM, lifecycle" },
+        ];
+
+        const selected = await vscode.window.showQuickPick(diagramTypes, {
+          placeHolder: "Select diagram type to generate",
+          title: "📊 Generate Mermaid Diagram",
+        });
+
+        if (!selected) {
+          endLog(true);
+          return;
+        }
+
+        const editor = vscode.window.activeTextEditor;
+        let context = "";
+        if (editor && !editor.selection.isEmpty) {
+          context = `\n\nContext code:\n\`\`\`${editor.document.languageId}\n${editor.document.getText(editor.selection)}\n\`\`\``;
+        }
+
+        const diagramType = selected.label.replace(/\$\([^)]+\)\s*/, '');
+        const prompt = `@alex generate a Mermaid ${diagramType} for this project/code. Output valid Mermaid syntax I can paste into a markdown file.${context}`;
+        await vscode.env.clipboard.writeText(prompt);
+        
+        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.window.showInformationMessage(
+          `📊 ${diagramType} prompt copied. Paste in Copilot Chat.`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Generate Tests command
+  const generateTestsDisposable = vscode.commands.registerCommand(
+    "alex.generateTests",
+    async () => {
+      const endLog = telemetry.logTimed("command", "generate_tests");
+      try {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor || editor.selection.isEmpty) {
+          vscode.window.showWarningMessage("Select code to generate tests for.");
+          endLog(true);
+          return;
+        }
+
+        const testFrameworks = [
+          { label: "$(beaker) Auto-detect", description: "Let Alex choose based on project", detail: "Recommended" },
+          { label: "$(beaker) Jest", description: "JavaScript/TypeScript testing", detail: "Popular for React, Node.js" },
+          { label: "$(beaker) Mocha", description: "Flexible test framework", detail: "Often with Chai assertions" },
+          { label: "$(beaker) Vitest", description: "Vite-native testing", detail: "Fast, ESM-first" },
+          { label: "$(beaker) pytest", description: "Python testing", detail: "Fixtures, parametrize" },
+          { label: "$(beaker) xUnit/NUnit", description: ".NET testing", detail: "C#, F#" },
+        ];
+
+        const framework = await vscode.window.showQuickPick(testFrameworks, {
+          placeHolder: "Select test framework",
+          title: "🧪 Generate Tests",
+        });
+
+        if (!framework) {
+          endLog(true);
+          return;
+        }
+
+        const selectedText = editor.document.getText(editor.selection);
+        const fileName = editor.document.fileName.split(/[/\\]/).pop();
+        const frameworkName = framework.label.replace(/\$\([^)]+\)\s*/, '');
+        
+        const prompt = `@alex generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        await vscode.env.clipboard.writeText(prompt);
+        
+        vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        vscode.window.showInformationMessage(
+          `🧪 Test prompt for ${fileName} copied. Paste in Copilot Chat.`
+        );
+        
         endLog(true);
       } catch (error) {
         endLog(false, error instanceof Error ? error : new Error(String(error)));
@@ -827,7 +1131,13 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(openDocsDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
+  context.subscriptions.push(runAuditDisposable);
   context.subscriptions.push(viewTelemetryDisposable);
+  context.subscriptions.push(releasePreflightDisposable);
+  context.subscriptions.push(codeReviewDisposable);
+  context.subscriptions.push(debugThisDisposable);
+  context.subscriptions.push(generateDiagramDisposable);
+  context.subscriptions.push(generateTestsDisposable);
 
   // Skill Catalog command
   const skillCatalogDisposable = vscode.commands.registerCommand(

@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.7] - 2026-01-31 🔧 Dawn Beta 4
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** UI polish, skill commands, comprehensive project audit
+
+### Added
+
+- **🔍 22-Point Project Audit** — Comprehensive audit skill with UI integration
+  - Master-only checks (1-9): Version alignment, heir sync, safety imperatives
+  - Inheritable checks (10-22): UI, dependencies, TypeScript/lint, security, tests, etc.
+  - Accessible via Health Dashboard, Welcome View, and Status Quick Pick
+  
+- **🛠️ Developer Tool Commands** — New skill-based commands in UI
+  - `Release Preflight` — Pre-release checklist via quick pick
+  - `Code Review` — Context menu for selected code review
+  - `Debug This` — Context menu for debugging assistance
+  - `Generate Diagram` — Mermaid diagram type picker
+  - `Generate Tests` — Test framework picker with code context
+
+### Fixed
+
+- **🔘 Dead UI Buttons** — WebView compatibility fixes
+  - Fixed "What's New?" button in upgrade dialog (now loops back)
+  - Fixed external links in Welcome View (use postMessage pattern)
+  - Fixed retry button in Health Dashboard error state
+  - Removed "I Understand" from blocked dialogs (Cancel only)
+
+- **📋 Version Detection** — Upgrade command now detects installed version
+  - Multiple regex patterns for different version formats
+  - Fallback to manifest file
+  - Fixed `$13.7.7` corruption in heir copilot-instructions.md
+
+### Changed
+
+- **📖 USER-MANUAL.md** — Added Project Audit documentation section
+
+---
+
 ## [3.7.6] - 2026-01-31 🌍 Dawn Beta 3
 
 > **Status:** Pre-release (use `--pre-release` flag)

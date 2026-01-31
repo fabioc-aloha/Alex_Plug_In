@@ -122,8 +122,34 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
   if (await fs.pathExists(instructionsPath)) {
     try {
       const content = await fs.readFile(instructionsPath, 'utf8');
-      const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/);
-      result.installedVersion = versionMatch ? versionMatch[1] : null;
+      // Try multiple patterns for version detection
+      const patterns = [
+        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/,           // Standard: **Version**: 3.7.6
+        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)-[\w-]+/,    // With suffix: **Version**: 3.5.3-PENT-TRI
+        /Version:\s*(\d+\.\d+\.\d+)/i,                  // Plain: Version: 3.7.6
+      ];
+      for (const pattern of patterns) {
+        const match = content.match(pattern);
+        if (match) {
+          result.installedVersion = match[1];
+          break;
+        }
+      }
+    } catch {
+      // Ignore
+    }
+  }
+
+  // Also try manifest file as fallback
+  if (!result.installedVersion && result.manifestLocation) {
+    try {
+      const manifestPath = path.join(rootPath, result.manifestLocation);
+      if (await fs.pathExists(manifestPath)) {
+        const manifest = await fs.readJson(manifestPath);
+        if (manifest.version) {
+          result.installedVersion = manifest.version;
+        }
+      }
     } catch {
       // Ignore
     }
@@ -689,32 +715,39 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     return;
   }
 
-  // Confirm upgrade
+  // Confirm upgrade (loop to allow viewing What's New and returning to dialog)
   const versionInfo = detection.installedVersion 
     ? `v${detection.installedVersion} → v${extensionVersion}`
     : `${detection.version} structure → v${extensionVersion}`;
 
-  const confirm = await vscode.window.showInformationMessage(
-    `🔄 Upgrade: ${versionInfo}\n\n` +
-    "This upgrade will:\n\n" +
-    "1️⃣ Backup everything (nothing is lost)\n" +
-    "2️⃣ Fresh install of new version\n" +
-    "3️⃣ Show you what can be migrated\n" +
-    "4️⃣ You decide what to keep\n\n" +
-    "Your data is safe - review and migrate at your pace.",
-    { modal: true },
-    "Start Upgrade",
-    "What's New?",
-    "Cancel"
-  );
+  let confirm: string | undefined;
+  while (true) {
+    confirm = await vscode.window.showInformationMessage(
+      `🔄 Upgrade: ${versionInfo}\n\n` +
+      "This upgrade will:\n\n" +
+      "1️⃣ Backup everything (nothing is lost)\n" +
+      "2️⃣ Fresh install of new version\n" +
+      "3️⃣ Show you what can be migrated\n" +
+      "4️⃣ You decide what to keep\n\n" +
+      "Your data is safe - review and migrate at your pace.",
+      { modal: true },
+      "Start Upgrade",
+      "What's New?",
+      "Cancel"
+    );
 
-  if (confirm === "What's New?") {
-    const changelogPath = path.join(extensionPath, "CHANGELOG.md");
-    if (await fs.pathExists(changelogPath)) {
-      const doc = await vscode.workspace.openTextDocument(changelogPath);
-      await vscode.window.showTextDocument(doc);
+    if (confirm === "What's New?") {
+      const changelogPath = path.join(extensionPath, "CHANGELOG.md");
+      if (await fs.pathExists(changelogPath)) {
+        const doc = await vscode.workspace.openTextDocument(changelogPath);
+        await vscode.window.showTextDocument(doc);
+      }
+      // Continue loop to show dialog again
+      continue;
     }
-    return;
+    
+    // Exit loop for Start Upgrade or Cancel
+    break;
   }
 
   if (confirm !== "Start Upgrade") return;

@@ -107,6 +107,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "healthDashboard":
           vscode.commands.executeCommand("alex.openHealthDashboard");
           break;
+        case "runAudit":
+          vscode.commands.executeCommand("alex.runAudit");
+          break;
+        case "openMarketplace":
+          vscode.env.openExternal(vscode.Uri.parse("https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"));
+          break;
+        case "openGitHub":
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"));
+          break;
         case "refresh":
           this.refresh();
           break;
@@ -701,6 +710,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">📊</span>
                     <span class="action-text">Health Dashboard</span>
                 </button>
+                <button class="action-btn" onclick="cmd('runAudit')">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-text">Run Project Audit</span>
+                </button>
                 
                 <div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
@@ -933,8 +946,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     
                     <div class="feature-links">
                         <button class="feature-link-btn" onclick="cmd('openDocs')">📚 Full Documentation</button>
-                        <button class="feature-link-btn" onclick="window.open('https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture')">🏪 Marketplace</button>
-                        <button class="feature-link-btn" onclick="window.open('https://github.com/fabioc-aloha/Alex_Plug_In')">🐙 GitHub</button>
+                        <button class="feature-link-btn" onclick="cmd('openMarketplace')">🏪 Marketplace</button>
+                        <button class="feature-link-btn" onclick="cmd('openGitHub')">🐙 GitHub</button>
                     </div>
                 </div>
             </details>
