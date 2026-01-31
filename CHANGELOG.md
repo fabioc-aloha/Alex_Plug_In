@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Master-only checks (1-9): Version alignment, heir sync, safety imperatives
   - Inheritable checks (10-22): UI, dependencies, TypeScript/lint, security, tests, etc.
   - Accessible via Health Dashboard, Welcome View, and Status Quick Pick
-  
+
 - **🛠️ Developer Tool Commands** — New skill-based commands in UI
   - `Release Preflight` — Pre-release checklist via quick pick
   - `Code Review` — Context menu for selected code review
