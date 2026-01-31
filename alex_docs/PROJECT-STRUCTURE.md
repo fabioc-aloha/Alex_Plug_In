@@ -23,7 +23,7 @@ graph TB
         end
 
         subgraph "skills/"
-            SK[Skills<br/>46 folders]
+            SK[Skills<br/>52 folders]
         end
 
         subgraph "config/"
@@ -157,9 +157,9 @@ graph TB
 
 **Specialized expertise** - deep knowledge in specific areas. Each skill is a folder with `SKILL.md` and optional `synapses.json`.
 
-### Core Skills (49 folders)
+### Core Skills (52 folders)
 
-Master Alex includes 49 skills covering areas like:
+Master Alex includes 52 skills covering areas like:
 
 **Table 8:** *Example Skill Categories*
 

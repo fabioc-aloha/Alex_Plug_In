@@ -1,0 +1,56 @@
+{
+    "skill": "airs-appropriate-reliance",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "appropriate-reliance",
+            "type": "extends",
+            "strength": 0.95
+        },
+        {
+            "target": "bootstrap-learning",
+            "type": "enhances",
+            "strength": 0.7
+        },
+        {
+            "target": "learning-psychology",
+            "type": "requires",
+            "strength": 0.8
+        },
+        {
+            "target": "academic-research",
+            "type": "enables",
+            "strength": 0.85
+        },
+        {
+            "target": "beta-tester",
+            "type": "enhances",
+            "strength": 0.6,
+            "note": "AR telemetry design for behavioral validation"
+        },
+        {
+            "target": "testing-strategies",
+            "type": "enhances",
+            "strength": 0.5,
+            "note": "Hypothesis testing via behavioral measurement"
+        }
+    ],
+    "activationBoost": [
+        "AIRS",
+        "AIRS-16",
+        "AIRS-18",
+        "appropriate reliance",
+        "trust calibration",
+        "AI adoption",
+        "UTAUT",
+        "UTAUT2",
+        "psychometric",
+        "instrument",
+        "scale validation",
+        "CAIR",
+        "CSR",
+        "over-reliance",
+        "under-reliance",
+        "behavioral intention"
+    ]
+}

@@ -31,26 +31,31 @@ Every skill's `synapses.json` includes an `inheritance` field:
 
 ```text
 Master Alex (source of truth)
-├── ALL skills (8 total)
+├── ALL skills (52 total)
+│   ├── 36 inheritable (all heirs)
+│   ├── 8 master-only (never packaged)
+│   ├── 2 heir:vscode (VS Code only)
+│   └── 2 heir:m365 (M365 only)
 │
 ├─► VS Code Extension Heir
-│   ├── appropriate-reliance     (inheritable)
-│   ├── ascii-art-alignment      (inheritable)
-│   ├── lint-clean-markdown      (inheritable)
-│   ├── markdown-mermaid         (inheritable)
-│   ├── writing-publication      (inheritable)
-│   └── vscode-extension-patterns (heir:vscode)
+│   ├── All 36 inheritable skills
+│   ├── vscode-extension-patterns (heir:vscode)
+│   └── chat-participant-patterns (heir:vscode)
 │
 └─► M365 Copilot Agent Heir
-    ├── appropriate-reliance     (inheritable)
-    ├── ascii-art-alignment      (inheritable)
-    ├── lint-clean-markdown      (inheritable)
-    ├── markdown-mermaid         (inheritable)
-    ├── writing-publication      (inheritable)
-    └── m365-agent-debugging     (heir:m365)
+    ├── All 36 inheritable skills
+    ├── m365-agent-debugging      (heir:m365)
+    └── teams-app-patterns        (heir:m365)
 
-Never Distributed:
-└── architecture-refinement      (master-only)
+Never Distributed (master-only):
+├── architecture-refinement
+├── llm-model-selection
+├── meditation
+├── meditation-facilitation
+├── knowledge-synthesis
+├── release-process
+├── heir-curation
+└── self-actualization
 ```
 
 ## Why Master-Only?

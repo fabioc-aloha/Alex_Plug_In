@@ -2,10 +2,12 @@
 
 **Technical Brief for Principal Researcher Discussion**
 
-**Author**: Fabio Correa
-**Organization**: Microsoft Corporation
-**Date**: January 31, 2026
-**Version**: 1.0
+| | |
+|---|---|
+| **Author** | Fabio Correa |
+| **Organization** | Microsoft Corporation |
+| **Date** | January 31, 2026 |
+| **Version** | 1.0 |
 
 ---
 
@@ -20,6 +22,40 @@ This document describes the implementation of appropriate reliance principles wi
 5. **Creative Latitude Framework** — Preserving AI generativity while maintaining epistemic integrity
 
 The implementation spans two deployment platforms: a VS Code extension (for developers) and an M365 Copilot declarative agent (for knowledge workers), enabling comparison of appropriate reliance mechanisms across different user populations and task types.
+
+### Research Motivation: Extending AIRS-16
+
+This technical brief also serves a research purpose: exploring whether **Appropriate Reliance (AR)** could become a new construct in the AIRS-16 instrument (Correa, 2025), a validated 16-item scale measuring AI adoption readiness.
+
+**AIRS-16 in Production**: The instrument is deployed at [airs.correax.com](https://airs.correax.com) — a 5-minute assessment that classifies users into three typologies (Skeptic, Moderate, Enthusiast) with 94.5% accuracy. The platform was built using Alex Cognitive Architecture.
+
+A key finding from AIRS-16 validation (N=523) was that **Trust in AI (TR)** was only marginally significant (β=.106, p=.064) in predicting Behavioral Intention. This raises an important question:
+
+> **Is it not *how much* you trust AI that predicts adoption, but *how well* your trust is calibrated to actual AI capability?**
+
+### Why Appropriate Reliance (AR) ≠ Trust (TR)
+
+| Dimension | Trust (TR) | Appropriate Reliance (AR) |
+|-----------|------------|---------------------------|
+| **What it measures** | Trust *level* — how much do you trust AI? | Trust *calibration* — how accurately does your trust match AI's actual reliability? |
+| **Construct type** | Attitude (affective/cognitive state) | Metacognitive skill (self-regulation ability) |
+| **Item examples** | "I trust AI tools to provide reliable information." | "I can tell when AI-generated information is reliable and when it needs verification." |
+| **Failure mode** | Low trust → under-utilization | Low AR → over-reliance OR under-reliance |
+
+The key insight: **TR asks "Do you trust AI?" while AR asks "Can you discern when trust is warranted?"**
+
+A person could score high on TR ("I totally trust AI") but low on AR ("I can't tell when it's wrong") — the dangerous over-reliance profile. Conversely, someone could score moderate on TR but high on AR — the calibrated user who knows exactly when to leverage AI.
+
+### The 2×2 Trust-Calibration Matrix
+
+| | Low AR (Miscalibrated) | High AR (Calibrated) |
+|--|------------------------|----------------------|
+| **High TR** | ⚠️ Over-reliance → bad outcomes → abandonment | ✅ Optimal: trusts appropriately, verifies when needed |
+| **Low TR** | ❌ Under-reliance → missed value → rejection | ✅ Calibrated skeptic: selective, appropriate use |
+
+This reframes the AI adoption challenge from **"build trust"** to **"build calibration."**
+
+The Alex implementation documented here provides a testbed for studying AR mechanisms in practice, with potential to inform future AIRS instrument extensions (AIRS-18+).
 
 ---
 
@@ -110,7 +146,7 @@ Alex is implemented as a cognitive architecture with:
 
 The appropriate reliance mechanisms are encoded at multiple levels:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    User Interface                       │
 │         /creative command    /verify command            │
@@ -583,7 +619,7 @@ Wang, X., Yin, M., & Vaughan, J. W. (2025). Effects of training on appropriate r
 
 ## Appendix B: Quick Reference Card
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │           APPROPRIATE RELIANCE QUICK REFERENCE                  │
 ├─────────────────────────────────────────────────────────────────┤
@@ -615,6 +651,234 @@ Wang, X., Yin, M., & Vaughan, J. W. (2025). Effects of training on appropriate r
 │  Documented patterns: 90%  Inference/edge: 50%                  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Appendix C: Proposed AIRS-18 Instrument (Amplified with Appropriate Reliance)
+
+This appendix presents a proposed extension of the validated AIRS-16 instrument (Correa, 2025) with a new **Appropriate Reliance (AR)** construct. The original 16 items and 8 constructs are preserved; 2 new items are added to measure reliance calibration.
+
+### C.1 Theoretical Justification for AR Construct
+
+| Aspect | Analysis |
+|--------|----------|
+| **Definition** | AR = ability to correctly rely on AI when AI is right (CAIR) AND correctly rely on self when AI is wrong (CSR) |
+| **Distinct from Trust (TR)?** | Yes — TR measures trust *level*; AR measures trust *calibration accuracy* |
+| **Theoretical Grounding** | AETHER synthesis (Passi et al., 2024); Schemmer et al. (2023) CAIR/CSR framework |
+| **Expected Relationship** | AR may moderate TR→BI or provide incremental validity beyond TR |
+
+### C.1.1 Why Appropriate Reliance (AR) is Distinct from Trust (TR)
+
+A critical question for any instrument extension is discriminant validity: **Is AR measuring something different from TR, or is it redundant?**
+
+**Conceptual Distinction**
+
+| Dimension | Trust (TR) | Appropriate Reliance (AR) |
+|-----------|------------|---------------------------|
+| **What it measures** | Trust *level* — how much do you trust AI? | Trust *calibration* — how accurately does your trust match AI's actual reliability? |
+| **Construct type** | Attitude (affective/cognitive state) | Metacognitive skill (self-regulation ability) |
+| **Can be high or low** | High trust = "I trust AI a lot" | High AR = "My trust matches reality" |
+| **Failure mode** | Low trust → under-utilization | Low AR → over-reliance OR under-reliance |
+| **Theoretical roots** | Technology Acceptance Model (Davis, 1989) | Human-Automation Interaction (Lee & See, 2004) |
+
+**The 2×2 Independence Matrix**
+
+TR and AR are orthogonal dimensions — you can have any combination:
+
+| | Low AR (Miscalibrated) | High AR (Calibrated) |
+|--|------------------------|----------------------|
+| **High TR** | Dangerous: Over-relies on AI, doesn't catch errors | Optimal: Trusts AI appropriately, verifies when needed |
+| **Low TR** | Problematic: Distrusts even when AI is correct | Cautious but accurate: Selective, appropriate skepticism |
+
+**Empirical Prediction**: If AR and TR were the same construct, we would expect:
+- High correlation (r > .85)
+- Similar predictive patterns on BI
+- No incremental validity
+
+**If AR is distinct**, we would expect:
+- Moderate correlation (r = .40-.60) — related but not redundant
+- AR predicts BI beyond TR (ΔR² > .02)
+- AR × TR interaction effects (calibration moderates trust's impact)
+
+**Analogies from Other Domains**
+
+| Domain | "Level" Construct | "Calibration" Construct |
+|--------|-------------------|-------------------------|
+| **Confidence** | Self-efficacy (how confident are you?) | Metacognitive accuracy (is your confidence warranted?) |
+| **Knowledge** | Perceived knowledge (do you think you know?) | Actual knowledge (do you really know?) |
+| **Risk** | Risk tolerance (how much risk do you accept?) | Risk calibration (does your tolerance match actual risk?) |
+| **AI Trust** | Trust level (TR) | Appropriate Reliance (AR) |
+
+In each case, the calibration construct captures something the level construct misses: **the accuracy of self-assessment**.
+
+**Why This Matters for AI Adoption**
+
+The AIRS-16 finding that TR was only marginally significant (β=.106, p=.064) suggests that raw trust level may not be what drives sustained AI adoption. Instead:
+
+> Users who adopt AI successfully may not be those who trust it most, but those who trust it *accurately* — knowing when to rely on AI and when to rely on themselves.
+
+This reframes the adoption challenge from "build trust" to "build calibration."
+
+**Item-Level Distinction**
+
+| TR Items (Trust Level) | AR Items (Trust Calibration) |
+|------------------------|------------------------------|
+| TR1: "I trust AI tools to provide reliable information." | AR1: "I can tell when AI-generated information is reliable and when it needs verification." |
+| TR2: "I trust the AI tools that are available to me." | AR2: "I know when to trust AI tools and when to rely on my own judgment instead." |
+
+- **TR items** ask: Do you trust AI? (yes/no/how much)
+- **AR items** ask: Can you discern when trust is warranted? (metacognitive discrimination)
+
+A person could score 5 on TR ("I totally trust AI") and 2 on AR ("But I can't tell when it's wrong") — this is the over-reliance profile.
+
+Conversely, a person could score 3 on TR ("I'm neutral on trusting AI") and 5 on AR ("But I know exactly when to use it") — this is the calibrated skeptic profile.
+
+### C.2 The AIRS-18 Instrument
+
+**Original 8 Constructs (16 items) — Unchanged**
+
+| Construct | Items | Cronbach's α |
+|-----------|-------|--------------|
+| Performance Expectancy (PE) | PE1, PE2 | .803 |
+| Effort Expectancy (EE) | EE1, EE2 | .859 |
+| Social Influence (SI) | SI1, SI2 | .752 |
+| Facilitating Conditions (FC) | FC1, FC2 | .743 |
+| Hedonic Motivation (HM) | HM1, HM2 | .864 |
+| Price Value (PV) | PV1, PV2 | .883 |
+| Habit (HB) | HB1, HB2 | .909 |
+| Trust in AI (TR) | TR1, TR2 | .891 |
+
+**New Construct: Appropriate Reliance (AR) — 2 items**
+
+| Item | Question Text |
+|------|---------------|
+| **AR1** | I can tell when AI-generated information is reliable and when it needs verification. |
+| **AR2** | I know when to trust AI tools and when to rely on my own judgment instead. |
+
+*Response Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree*
+
+### C.3 Scoring Algorithm Update
+
+```python
+# Original 8 construct means (unchanged)
+PE = mean(PE1, PE2)
+EE = mean(EE1, EE2)
+SI = mean(SI1, SI2)
+FC = mean(FC1, FC2)
+HM = mean(HM1, HM2)
+PV = mean(PV1, PV2)
+HB = mean(HB1, HB2)
+TR = mean(TR1, TR2)
+
+# NEW: Appropriate Reliance construct
+AR = mean(AR1, AR2)
+
+# Updated AIRS-18 Score (range: 9-45)
+AIRS_Score = PE + EE + SI + FC + HM + PV + HB + TR + AR
+
+# Updated typology thresholds (requires validation)
+if AIRS_Score <= 22.5:   # Adjusted from 20
+    typology = "AI Skeptic"
+elif AIRS_Score <= 33.75:  # Adjusted from 30
+    typology = "Moderate User"
+else:
+    typology = "AI Enthusiast"
+```
+
+### C.4 Research Hypotheses for Validation
+
+| # | Hypothesis | Rationale |
+|---|------------|-----------|
+| H1 | AR demonstrates acceptable reliability (α ≥ .70, CR ≥ .70, AVE ≥ .50) | Basic psychometric requirement |
+| H2 | AR shows discriminant validity from TR (HTMT < .85) | AR ≠ Trust level |
+| H3 | AR positively predicts BI (β > 0, p < .05) | Main effect hypothesis |
+| H4 | AR provides incremental validity beyond AIRS-16 (ΔR² > .02) | Unique explanatory power |
+| H5 | AR moderates TR→BI such that high AR strengthens the relationship | Calibration amplifies trust |
+| H6 | AR mediates Experience→BI (more experience → better calibration → adoption) | Learning mechanism |
+
+### C.5 Alternative Item Pool (for Expert Review)
+
+Additional candidate items if 2-item construct proves insufficient:
+
+| Item | Question Text |
+|------|---------------|
+| **AR3** | I check AI suggestions before using them for important decisions. |
+| **AR4** | I have learned to recognize when AI tools are likely to give incorrect answers. |
+| **AR5** | I feel confident in my ability to evaluate AI recommendations critically. |
+| **AR6** | I accept AI suggestions more readily when they match what I already know. |
+
+*Note: Items AR1-AR2 are recommended as the primary 2-item scale. Items AR3-AR6 are candidates for a potential 4-item or 6-item extended scale if psychometric analysis indicates need for additional items.*
+
+### C.6 Full AIRS-18 Item List (Administration Order)
+
+For ease of administration, here is the complete 18-item instrument plus 4 Behavioral Intention outcome items:
+
+**AI Readiness Items (1-18)**
+
+| # | Item | Construct |
+|---|------|-----------|
+| 1 | AI tools help me accomplish tasks more quickly. | PE |
+| 2 | Using AI improves the quality of my work or studies. | PE |
+| 3 | Learning to use AI tools is easy for me. | EE |
+| 4 | Interacting with AI tools is clear and understandable. | EE |
+| 5 | People whose opinions I value encourage me to use AI tools. | SI |
+| 6 | Leaders in my organization or school support the use of AI tools. | SI |
+| 7 | I have access to training or tutorials for the AI tools I use. | FC |
+| 8 | The AI tools I use are compatible with other tools or systems I use. | FC |
+| 9 | Using AI tools is stimulating and engaging. | HM |
+| 10 | AI tools make my work or studies more interesting. | HM |
+| 11 | I get more value from AI tools than the effort they require. | PV |
+| 12 | Using AI tools is worth the learning curve. | PV |
+| 13 | Using AI tools has become a habit for me. | HB |
+| 14 | I tend to rely on AI tools by default when I need help with tasks. | HB |
+| 15 | I trust AI tools to provide reliable information. | TR |
+| 16 | I trust the AI tools that are available to me. | TR |
+| 17 | I can tell when AI-generated information is reliable and when it needs verification. | **AR (new)** |
+| 18 | I know when to trust AI tools and when to rely on my own judgment instead. | **AR (new)** |
+
+**Outcome Variable: Behavioral Intention (BI1-BI4)**
+
+| # | Item |
+|---|------|
+| BI1 | I am ready to use more AI tools in my work or studies. |
+| BI2 | I would recommend AI tools to others. |
+| BI3 | I see AI as an important part of my future. |
+| BI4 | I plan to increase my use of AI tools in the next six months. |
+
+*Response Scale for all items: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree*
+
+*Administration Note: Randomize items within each construct to reduce order effects. Present constructs in the order listed (PE → EE → SI → FC → HM → PV → HB → TR → AR → BI).*
+
+### C.7 Intervention Implications by Typology
+
+If AR proves significant, intervention strategies would expand:
+
+| Typology | Current AIRS-16 Focus | + AR-Informed Focus |
+|----------|----------------------|---------------------|
+| **AI Skeptics** | Trust-building, low-effort demos | Calibration training: "Here's when AI excels vs. struggles" |
+| **Moderate Users** | Clear use cases, ROI evidence | Verification skill-building: "How to spot AI errors" |
+| **AI Enthusiasts** | Advanced features, leadership | Reliance audits: "Are you over-relying in high-stakes areas?" |
+
+### C.7 Measurement Considerations
+
+| Consideration | Approach |
+|---------------|----------|
+| **Self-report limitation** | AR items measure *perceived* calibration, not actual calibration accuracy |
+| **Behavioral validation** | Future research could correlate AR scores with actual CAIR/CSR in task-based studies |
+| **Domain specificity** | AR may vary by AI application type (coding, writing, analysis) — consider modular measurement |
+| **Temporal stability** | AR likely increases with experience — consider longitudinal validation |
+
+### C.8 Citation for Extended Instrument
+
+```bibtex
+@unpublished{correa2026airs18,
+  author = {Correa, Fabio},
+  title = {AIRS-18: Extending the AI Readiness Scale with Appropriate Reliance},
+  year = {2026},
+  note = {Proposed instrument extension, pending validation},
+  howpublished = {Technical Brief: Implementing Appropriate Reliance in a Cognitive AI Architecture}
+}
 ```
 
 ---

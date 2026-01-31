@@ -35,7 +35,7 @@
 | ------- | ------- | ---- | ----- |
 | User profile | ✅ `user-profile.json` | ✅ `profile.md` | Different format |
 | Session notes | ✅ Episodic folder | ✅ `notes.md` | |
-| Domain knowledge | ✅ 49 skills + DK files | ✅ `knowledge/*.md` | VS Code richer |
+| Domain knowledge | ✅ 52 skills + DK files | ✅ `knowledge/*.md` | VS Code richer |
 | Learning goals | ✅ Goals system | ✅ `learning-goals.md` | |
 | Cross-project sync | ✅ Global knowledge + cloud | ❌ N/A | **VS Code only** |
 | Cross-device sync | ✅ GitHub Gist | ✅ OneDrive | Different backends |
@@ -171,7 +171,7 @@ These features exist only in the M365 heir due to platform capabilities:
 | **Calendar awareness** | ❌ None | ✅ Meetings | VS Code | MS Graph API + Azure auth | Medium | ⚠️ Possible |
 | **Org knowledge** | ❌ None | ✅ People | VS Code | MS Graph API + Azure auth | Medium | ⚠️ Possible |
 | **Cross-project learning** | ✅ Global knowledge | ❌ None | M365 | SharePoint list or OneDrive JSON | Medium | ✅ Viable |
-| **Skill system** | ✅ 49 skills | ❌ None | M365 | Embed key skills in instructions | Low | ✅ Viable |
+| **Skill system** | ✅ 52 skills | ❌ None | M365 | Embed key skills in instructions | Low | ✅ Viable |
 | **Architecture health** | ✅ Dream + synapses | ⚠️ Basic | M365 | Cannot validate files - protocol only | N/A | ❌ Not viable |
 | **Automation** | ✅ Commands + tools | ⚠️ Protocols only | — | Platform difference by design | N/A | — |
 

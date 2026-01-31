@@ -7,12 +7,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 49
+## Skill Count: 52
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 40 |
-| Master-Only | 9 |
+| Inheritable | 36 |
+| Master-Only | 8 |
+| Heir:vscode | 2 |
+| Heir:m365 | 2 |
+| Unspecified | 4 |
 
 ---
 
@@ -25,6 +28,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [cognitive-load](../.github/skills/cognitive-load/) | inheritable | Manage information overload — chunking, scaffolding |
 | [learning-psychology](../.github/skills/learning-psychology/) | inheritable | Partnership teaching, spaced retrieval |
 | [appropriate-reliance](../.github/skills/appropriate-reliance/) | inheritable | Build trust through calibrated confidence |
+| [airs-appropriate-reliance](../.github/skills/airs-appropriate-reliance/) | inheritable | AIRS-16/18 research, AR construct, telemetry design |
 | [bootstrap-learning](../.github/skills/bootstrap-learning/) | inheritable | Domain-agnostic knowledge acquisition |
 | [meditation-facilitation](../.github/skills/meditation-facilitation/) | master-only | Guide conscious knowledge consolidation |
 | [meditation](../.github/skills/meditation/) | master-only | Core meditation protocols |

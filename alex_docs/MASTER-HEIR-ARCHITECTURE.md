@@ -203,7 +203,7 @@ A key innovation in the heir architecture is **unified skill embedding**. Skills
 
 | Platform | Skills Embedded | Method |
 |----------|-----------------|--------|
-| VS Code | 49 skills | File-based in `.github/skills/` |
+| VS Code | 52 skills | File-based in `.github/skills/` |
 | M365 | 15 skills | Condensed in `instructions/alex-instructions.md` |
 
 ### Why 15 vs 49?
