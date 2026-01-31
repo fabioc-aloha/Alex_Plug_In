@@ -34,7 +34,7 @@
     {
       "entityId": "alexWelcome",
       "name": "Alex",
-      "contentUrl": "https://github.com/fabioc-aloha/Alex_Plug_In#readme",
+      "contentUrl": "https://fabioc-aloha.github.io/Alex_Plug_In/",
       "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
       "scopes": [
         "personal"
@@ -44,7 +44,9 @@
   "permissions": [
     "identity"
   ],
-  "validDomains": [],
+  "validDomains": [
+    "fabioc-aloha.github.io"
+  ],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"
   }

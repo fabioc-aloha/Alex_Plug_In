@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex - Cognitive Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #1a1a2e;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 24px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 24px 0;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin: 16px 0;
+        }
+
+        .feature-icon {
+            font-size: 1.5em;
+            margin-right: 12px;
+            min-width: 32px;
+        }
+
+        .feature-text h3 {
+            color: #1a1a2e;
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+
+        .feature-text p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .cta {
+            margin-top: 24px;
+        }
+
+        .cta p {
+            color: #888;
+            font-size: 0.95em;
+            margin-bottom: 16px;
+        }
+
+        .cta code {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .links {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .version {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/m365-copilot/appPackage/color.png"
+            alt="Alex" class="logo">
+        <h1>Hi, I'm Alex 👋</h1>
+        <p class="tagline">Your AI learning partner. Code. Write. Research.</p>
+
+        <div class="divider"></div>
+
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">🧠</span>
+                <div class="feature-text">
+                    <h3>Cognitive Architecture</h3>
+                    <p>Not a generic chatbot — a thinking partner with memory and personality</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📁</span>
+                <div class="feature-text">
+                    <h3>Remembers You</h3>
+                    <p>I keep notes in your OneDrive. Your data, your control.</p>
+                </div>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🛡️</span>
+                <div class="feature-text">
+                    <h3>Epistemic Integrity</h3>
+                    <p>I tell you what I know, what I don't, and when to verify</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <p>To chat with me, open M365 Copilot and type:</p>
+            <code>@Alex</code>
+        </div>
+
+        <div class="links">
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank" rel="noopener">📂 GitHub</a>
+            <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"
+                target="_blank" rel="noopener">💻 VS Code Extension</a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/USER-MANUAL.md" target="_blank"
+                rel="noopener">📖 User Manual</a>
+        </div>
+
+        <p class="version">v4.0.0 Trust — Epistemic Integrity</p>
+    </div>
+</body>
+
+</html>
