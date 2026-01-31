@@ -553,6 +553,83 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-radius: 2px;
             transition: width 0.3s ease;
         }
+        
+        /* Features Section Styles */
+        .features-section details {
+            margin: 0;
+        }
+        .features-section summary {
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+        .features-section summary::-webkit-details-marker {
+            display: none;
+        }
+        .features-section summary::before {
+            content: '▶ ';
+            font-size: 10px;
+            margin-right: 4px;
+        }
+        .features-section details[open] summary::before {
+            content: '▼ ';
+        }
+        .section-title.clickable {
+            cursor: pointer;
+        }
+        .section-title.clickable:hover {
+            color: var(--vscode-textLink-foreground);
+        }
+        .features-content {
+            margin-top: 12px;
+            padding: 0 4px;
+        }
+        .feature-category {
+            margin-bottom: 12px;
+        }
+        .feature-category-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--vscode-foreground);
+            margin-bottom: 6px;
+        }
+        .feature-list {
+            margin: 0;
+            padding-left: 16px;
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--vscode-descriptionForeground);
+        }
+        .feature-list li {
+            margin-bottom: 4px;
+        }
+        .feature-list strong {
+            color: var(--vscode-foreground);
+            font-weight: 500;
+        }
+        .feature-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--vscode-widget-border);
+        }
+        .feature-link-btn {
+            background: var(--vscode-button-secondaryBackground);
+            color: var(--vscode-button-secondaryForeground);
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .feature-link-btn:hover {
+            background: var(--vscode-button-secondaryHoverBackground);
+        }
     </style>
 </head>
 <body>
@@ -680,6 +757,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         </div>
         
         ${this._getGoalsHtml(goals)}
+        
+        ${this._getFeaturesHtml()}
     </div>
     
     <script>
@@ -782,6 +861,73 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <span>🏆 ${goals.totalCompleted} total</span>
             </div>
             ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;">No active goals</div>'}
+        </div>`;
+  }
+
+  /**
+   * Generate the Features/Documentation section HTML
+   */
+  private _getFeaturesHtml(): string {
+    return `
+        <div class="section features-section">
+            <details>
+                <summary class="section-title clickable">📖 Features & Documentation</summary>
+                <div class="features-content">
+                    <div class="feature-category">
+                        <div class="feature-category-title">🧠 Cognitive Core</div>
+                        <ul class="feature-list">
+                            <li><strong>Dream Protocol</strong> - Automated neural maintenance, synapse validation, and architecture health checks</li>
+                            <li><strong>Self-Actualization</strong> - Deep meditation with comprehensive architecture assessment and knowledge promotion</li>
+                            <li><strong>Meditation</strong> - Conscious knowledge consolidation via chat (@alex /meditate)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">📚 Knowledge Management</div>
+                        <ul class="feature-list">
+                            <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
+                            <li><strong>Cloud Sync</strong> - Automatic backup to GitHub Gists with conflict resolution</li>
+                            <li><strong>Skill Library</strong> - 38 portable skills with triggers and synaptic connections</li>
+                            <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">🛠️ Productivity Tools</div>
+                        <ul class="feature-list">
+                            <li><strong>Focus Sessions</strong> - Pomodoro-style work sessions with automatic tracking</li>
+                            <li><strong>Learning Goals</strong> - Track progress with targets and streaks</li>
+                            <li><strong>Health Dashboard</strong> - Visual architecture status and metrics</li>
+                            <li><strong>Environment Setup</strong> - Optimize VS Code settings for AI-assisted development</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">💬 Chat Integration</div>
+                        <ul class="feature-list">
+                            <li><strong>@alex Chat Participant</strong> - Personality-driven conversations with memory</li>
+                            <li><strong>11 Language Model Tools</strong> - Status, memory search, knowledge management</li>
+                            <li><strong>Custom Agents</strong> - Specialized handoffs for meditation, dreams, Azure</li>
+                            <li><strong>Slash Commands</strong> - /meditate, /status, /knowledge, /saveinsight, and more</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">🌐 Cross-Platform</div>
+                        <ul class="feature-list">
+                            <li><strong>M365 Export</strong> - Package knowledge for Microsoft 365 Copilot integration</li>
+                            <li><strong>Architecture Upgrade</strong> - Seamless migration between versions with backup</li>
+                            <li><strong>User Profile</strong> - Personalized communication style and preferences</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-links">
+                        <button class="feature-link-btn" onclick="cmd('openDocs')">📚 Full Documentation</button>
+                        <button class="feature-link-btn" onclick="window.open('https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture')">🏪 Marketplace</button>
+                        <button class="feature-link-btn" onclick="window.open('https://github.com/fabioc-aloha/Alex_Plug_In')">🐙 GitHub</button>
+                    </div>
+                </div>
+            </details>
         </div>`;
   }
 }
