@@ -110,10 +110,13 @@ async function githubRequest<T>(
     return new Promise<T | null>((resolve, reject) => {
         const url = new URL(`https://api.github.com${endpoint}`);
         
+        logUnconscious(`GitHub API: ${options.method || 'GET'} ${endpoint}`);
+        
         const reqOptions: https.RequestOptions = {
             hostname: url.hostname,
             path: url.pathname + url.search,
             method: options.method || 'GET',
+            timeout: 30000, // 30 second timeout
             headers: {
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 'Authorization': `Bearer ${session.accessToken}`,
@@ -130,6 +133,7 @@ async function githubRequest<T>(
             let data = '';
             res.on('data', (chunk) => { data += chunk; });
             res.on('end', () => {
+                logUnconscious(`GitHub API response: ${res.statusCode} (${data.length} bytes)`);
                 if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
                     if (res.statusCode === 204 || !data) {
                         resolve(null);
@@ -144,6 +148,11 @@ async function githubRequest<T>(
                     reject(new Error(`GitHub API error (${res.statusCode}): ${data}`));
                 }
             });
+        });
+
+        req.on('timeout', () => {
+            req.destroy();
+            reject(new Error('GitHub API request timed out after 30 seconds'));
         });
 
         req.on('error', (err) => reject(err));
@@ -696,6 +705,13 @@ export class CloudSyncTool implements vscode.LanguageModelTool<{ action: string 
         options: vscode.LanguageModelToolInvocationOptions<{ action: string }>,
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
+        
+        // Prevent concurrent syncs
+        if (syncInProgress) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart('⏳ **Sync already in progress**\n\nPlease wait for the current sync to complete.')
+            ]);
+        }
         
         const action = options.input.action || 'sync';
         let result: ISyncResult;
