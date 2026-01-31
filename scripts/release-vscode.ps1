@@ -120,7 +120,8 @@ try {
     
     if ($PreRelease) {
         npx vsce publish --pre-release
-    } else {
+    }
+    else {
         npx vsce publish
     }
     

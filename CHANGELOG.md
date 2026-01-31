@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.5] - 2026-01-31 🌅 Dawn Beta 2
+
+> **Status:** Pre-release (use `--pre-release` flag)
+> **Focus:** Release automation and skill creation
+
+### Added
+
+- **📦 Release Process Skill** — Master-only skill for marketplace publishing
+  - PAT setup and troubleshooting guide
+  - Version strategy documentation
+  - Complete release workflow reference
+
+### Changed
+
+- **🔧 Release Scripts** — Updated for platforms/vscode-extension structure
+  - Preflight checks PAT, version sync, heir version
+  - Fixed exit code handling in preflight script
+  - Scripts now work from repo root
+
+---
+
 ## [3.7.4] - 2026-01-31 🌅 Dawn Beta
 
 > **Status:** Pre-release (use `--pre-release` flag)
