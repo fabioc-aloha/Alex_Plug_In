@@ -4,8 +4,8 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 3.7.18 |
-| **Current Heirs** | VS Code (3.7.18), M365 (v1.6) |
+| **Current Master Version** | 3.7.19 |
+| **Current Heirs** | VS Code (3.7.19), M365 (v1.6) |
 | **Target** | 4.0.0 (Trust/Epistemic Integrity) |
 | **Status** | 📋 Planning |
 | **Created** | 2026-01-29 |

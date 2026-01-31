@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.19] - 2026-01-31 🛡️ Anti-Hallucination & M365 Graph Power
+
+> **Status:** VS Code + M365 release
+> **Focus:** Prevent AI confabulation + maximize M365 Graph capabilities
+
+### Added
+
+- **🛡️ Anti-Hallucination Skill** — New skill #50!
+  - Hallucination category detection (capability confabulation, process invention, citation fabrication, API hallucination, workaround theater)
+  - Red flag phrase detection ("Upload any file to activate...")
+  - Honest uncertainty protocol
+  - Platform limitation honesty tables (M365 + VS Code)
+  - Recovery protocol when caught hallucinating
+  - Synapses to appropriate-reliance, alex-core, error-recovery
+
+### Changed (M365 Heir)
+
+- **📊 Graph-Powered Protocols** — Maximize Microsoft Graph access
+  - Meeting Prep: Look up every attendee with relationship history
+  - Person Deep Dive: Full profile + email/Teams/meeting history
+  - Weekly Review: Categorized meetings, email volume, Teams activity
+  - Workload Check: Meeting count, focus blocks, back-to-back detection
+  - Stakeholder Map: Ranked collaborators from all channels
+  - Focus Session: Calendar-aware Pomodoro tracking
+
+- **💬 Conversation Starters** — 8 Graph-powered prompts
+  - "Learn about me" → Full profile lookup
+  - "Prep for my next meeting" → Attendee deep dive
+  - "Am I overloaded?" → Calendar analysis
+  - "Who do I work with most?" → Stakeholder map
+  - "Tell me about someone" → Person lookup
+  - "Weekly review" → Full activity summary
+  - "Meditate" / "Dream" → Memory protocols
+
+- **🚫 File Limitation Rules** — Prevent hallucination loops
+  - Cannot send emails (only search/read)
+  - Honest about CodeInterpreter file delivery limitations
+  - No "upload to activate transfer channel" nonsense
+
+### Technical Notes
+
+- Instructions: 4,679/8,000 chars (42% headroom)
+- Description: 2,294/4,000 chars
+- Package ID: `2427e7a9-91a7-4ed9-a504-7b53c4dfad1d`
+- **Total skills: 50** 🎉
+
+---
+
 ## [3.7.18] - 2026-01-31 📦 Embedded Knowledge Preparation
 
 > **Status:** M365 heir update + roadmap updates (no VS Code code changes)
