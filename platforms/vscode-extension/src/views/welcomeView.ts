@@ -659,7 +659,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">⬆️</span>
                     <span class="action-text">Upgrade Architecture</span>
                 </button>
-                <button class="action-btn" onclick="cmd('exportM365')">
+                <button class="action-btn" onclick="cmd('exportM365')" title="Package your global knowledge, profile, and insights for M365 Copilot. Upload the exported folder to OneDrive/Alex-Memory/ to use with the M365 Alex agent.">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>

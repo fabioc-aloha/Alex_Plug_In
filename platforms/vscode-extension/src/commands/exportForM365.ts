@@ -339,11 +339,13 @@ export async function runExportForM365(context: vscode.ExtensionContext): Promis
     if (result.success && result.outputPath) {
         const openFolder = 'Open Folder';
         const copyPath = 'Copy Path';
+        const howToUse = 'How to Use';
         
         const selection = await vscode.window.showInformationMessage(
-            `✅ ${result.message}`,
+            `✅ ${result.message}\n\nNext: Upload to OneDrive/Alex-Memory/ to use with M365 Copilot.`,
             openFolder,
-            copyPath
+            copyPath,
+            howToUse
         );
         
         if (selection === openFolder) {
@@ -353,6 +355,28 @@ export async function runExportForM365(context: vscode.ExtensionContext): Promis
         } else if (selection === copyPath) {
             await vscode.env.clipboard.writeText(result.outputPath);
             vscode.window.showInformationMessage('Path copied to clipboard!');
+        } else if (selection === howToUse) {
+            // Show detailed instructions
+            const instructions = `## M365 Export Setup
+
+**Step 1:** Open OneDrive (onedrive.live.com)
+
+**Step 2:** Create folder: \`Alex-Memory\` in root
+
+**Step 3:** Upload all files from:
+\`${result.outputPath}\`
+
+**Step 4:** In M365 Copilot, try:
+- "@Alex what do you know about me?"
+- "@Alex search my knowledge for [topic]"
+
+**Exported files:** ${result.files.join(', ')}`;
+            
+            const doc = await vscode.workspace.openTextDocument({
+                content: instructions,
+                language: 'markdown'
+            });
+            await vscode.window.showTextDocument(doc, { preview: true });
         }
     } else {
         vscode.window.showWarningMessage(`⚠️ ${result.message}`);

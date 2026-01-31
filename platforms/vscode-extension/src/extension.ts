@@ -415,6 +415,7 @@ export function activate(context: vscode.ExtensionContext) {
         {
           label: "$(package) Export for M365",
           description: "Package memory for M365 Copilot",
+          detail: "Export to ~/Alex-Memory-Export/ → upload to OneDrive",
         },
         {
           label: "$(book) Open Documentation",
