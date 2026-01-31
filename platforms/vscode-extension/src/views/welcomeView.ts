@@ -717,7 +717,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Generate Skill Catalog</span>
                 </button>
                 
-                <div class="action-group-label">🛠️ Tools</div>
+                <div class="action-group-label">⚖️ Work-Life Balance</div>
                 <button class="action-btn" onclick="cmd('startSession')">
                     <span class="action-icon">🍅</span>
                     <span class="action-text">Start Focus Session</span>
@@ -893,12 +893,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     </div>
                     
                     <div class="feature-category">
-                        <div class="feature-category-title">🛠️ Productivity Tools</div>
+                        <div class="feature-category-title">⚖️ Work-Life Balance</div>
                         <ul class="feature-list">
-                            <li><strong>Focus Sessions</strong> - Pomodoro-style work sessions with automatic tracking</li>
-                            <li><strong>Learning Goals</strong> - Track progress with targets and streaks</li>
-                            <li><strong>Health Dashboard</strong> - Visual architecture status and metrics</li>
-                            <li><strong>Environment Setup</strong> - Optimize VS Code settings for AI-assisted development</li>
+                            <li><strong>Focus Sessions</strong> - Pomodoro-style work sessions with breaks and automatic tracking</li>
+                            <li><strong>Learning Goals</strong> - Track progress with targets, streaks, and achievements</li>
+                            <li><strong>Health Dashboard</strong> - Visual architecture status and cognitive metrics</li>
+                            <li><strong>Streak Protection</strong> - Stay motivated with daily progress indicators</li>
                         </ul>
                     </div>
                     

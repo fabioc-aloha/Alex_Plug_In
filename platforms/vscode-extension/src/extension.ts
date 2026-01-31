@@ -458,7 +458,13 @@ export function activate(context: vscode.ExtensionContext) {
         },
         {
           label: "$(watch) Start Focus Session",
-          description: "Pomodoro timer for focused learning",
+          description: "Pomodoro timer for focused work with breaks",
+          detail: "⚖️ Work-Life Balance",
+        },
+        {
+          label: "$(target) Manage Learning Goals",
+          description: "Track progress with targets and streaks",
+          detail: "⚖️ Work-Life Balance",
         },
         {
           label: "$(graph) Health Dashboard",

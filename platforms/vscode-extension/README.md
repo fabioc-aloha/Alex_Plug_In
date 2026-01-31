@@ -148,8 +148,8 @@ Knowledge from Project A becomes available in Project B. Your expertise compound
 **Welcome Panel** — Find the CX icon in the Activity Bar (left side) for a full dashboard:
 
 - Status grid: Health, Sync, Skills, Synapses, Patterns, Insights, Streak, Goals
-- Grouped quick actions (Core, Knowledge, Tools, System)
-- Learning Goals tracker
+- Grouped quick actions (Core, Knowledge, Work-Life Balance, System)
+- Learning Goals tracker with streaks and achievements
 
 **Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all 25+ commands.
 

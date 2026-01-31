@@ -149,7 +149,7 @@ User experience improvements, flexible UX across all entry points, and the new S
     - Health, Sync, Skills, Synapses
     - Patterns, Insights, Streak 🔥, Goals
   - Clickable BETA badge that opens diagnostics
-  - Grouped Quick Actions (🧠 Core, 📚 Knowledge, 🛠️ Tools, ⚙️ System)
+  - Grouped Quick Actions (🧠 Core, 📚 Knowledge, ⚖️ Work-Life Balance, ⚙️ System)
   - Colored left borders for status states
   - Streak highlight with 🔥 when active
   - Goals show "+X today" in green
