@@ -75,8 +75,8 @@ graph TB
 
 | Skill | Status | Location |
 |-------|--------|----------|
-| **Advanced Diagramming** | ✅ Acquired | `DK-ADVANCED-DIAGRAMMING.md` |
-| **Documentation Excellence** | ✅ Acquired | `DK-DOCUMENTATION-EXCELLENCE.md` |
+| **Advanced Diagramming** | ✅ Acquired | `skills/markdown-mermaid/SKILL.md` |
+| **Documentation Excellence** | ✅ Acquired | `skills/writing-publication/SKILL.md` |
 | **Mermaid Diagrams** | ✅ Core | Flowcharts, sequence, class, ER diagrams |
 
 ### Platform Integration
@@ -100,6 +100,31 @@ graph TB
 | **Insight Detection** | ✅ Core | Auto-detect valuable learnings |
 | **Knowledge Promotion** | ✅ Core | Elevate local to global knowledge |
 | **Memory Search** | ✅ Core | Semantic search across memory files |
+
+### Non-Development Domains (Universal Learning Partner)
+
+**Table 5a:** *Academic & Research Skills*
+
+| Skill | Status | Location |
+|-------|--------|----------|
+| **Academic Research** | ✅ Acquired | `skills/academic-research/SKILL.md` |
+| **Creative Writing** | ✅ Acquired | `skills/creative-writing/SKILL.md` |
+| **Writing & Publication** | ✅ Acquired | `skills/writing-publication/SKILL.md` |
+
+**Table 5b:** *Management & Business Analysis Skills*
+
+| Skill | Status | Location |
+|-------|--------|----------|
+| **Project Management** | ✅ Acquired | `skills/project-management/SKILL.md` |
+| **Change Management** | ✅ Acquired | `skills/change-management/SKILL.md` |
+| **Business Analysis** | ✅ Acquired | `skills/business-analysis/SKILL.md` |
+| **Localization (i18n/l10n)** | ✅ Acquired | `skills/localization/SKILL.md` |
+
+**Table 5c:** *Creative & Visual Skills*
+
+| Skill | Status | Location |
+|-------|--------|----------|
+| **Graphic Design** | ✅ Acquired | `skills/graphic-design/SKILL.md` |
 
 ---
 

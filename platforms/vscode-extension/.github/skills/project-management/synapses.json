@@ -1,0 +1,60 @@
+{
+  "skill": "project-management",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Projects drive organizational change",
+      "type": "complements",
+      "strength": 0.85,
+      "target": "change-management"
+    },
+    {
+      "reason": "Requirements drive project scope",
+      "type": "receives",
+      "strength": 0.85,
+      "target": "business-analysis"
+    },
+    {
+      "reason": "Risk management is core to project management",
+      "type": "contains",
+      "strength": 0.85,
+      "target": "root-cause-analysis"
+    },
+    {
+      "reason": "Testing activities in project schedule",
+      "type": "plans",
+      "strength": 0.65,
+      "target": "testing-strategies"
+    },
+    {
+      "reason": "Release planning within project delivery",
+      "type": "uses",
+      "strength": 0.65,
+      "target": "release-preflight"
+    },
+    {
+      "reason": "Project issues may become incidents",
+      "type": "escalates",
+      "strength": 0.4,
+      "target": "incident-response"
+    },
+    {
+      "reason": "Retrospective reflection and lessons learned",
+      "type": "supports",
+      "strength": 0.4,
+      "target": "meditation-facilitation"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "project",
+    "timeline",
+    "milestone",
+    "deliverable",
+    "risk",
+    "RACI",
+    "sprint",
+    "backlog",
+    "estimation"
+  ]
+}

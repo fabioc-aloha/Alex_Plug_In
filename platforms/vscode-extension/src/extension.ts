@@ -705,7 +705,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Watch for changes in Alex memory files and refresh status
   const memoryWatcher = vscode.workspace.createFileSystemWatcher(
-    "**/.github/{copilot-instructions.md,instructions/*.md,prompts/*.md,domain-knowledge/*.md}",
+    "**/.github/{copilot-instructions.md,instructions/*.md,prompts/*.md,skills/*/SKILL.md,domain-knowledge/*.md}",
   );
   memoryWatcher.onDidChange(() => {
     clearHealthCache();

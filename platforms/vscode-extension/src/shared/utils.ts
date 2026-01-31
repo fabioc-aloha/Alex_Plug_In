@@ -315,6 +315,7 @@ export async function scanSynapseHealth(
 export interface MemoryFileCounts {
     procedural: number;
     episodic: number;
+    skills: number;
     domain: number;
     total: number;
 }
@@ -334,19 +335,24 @@ export async function countMemoryFiles(
     const episodicFiles = await vscode.workspace.findFiles(
         new vscode.RelativePattern(workspaceFolder, '.github/episodic/*.md')
     );
+    const skillFiles = await vscode.workspace.findFiles(
+        new vscode.RelativePattern(workspaceFolder, '.github/skills/*/SKILL.md')
+    );
     const domainFiles = await vscode.workspace.findFiles(
-        new vscode.RelativePattern(workspaceFolder, '.github/domain-knowledge/*.md')
+        new vscode.RelativePattern(workspaceFolder, '.github/domain-knowledge/*.md')  // Legacy
     );
 
     const procedural = instructionFiles.length;
     const episodic = promptFiles.length + episodicFiles.length;
+    const skills = skillFiles.length;
     const domain = domainFiles.length;
 
     return {
         procedural,
         episodic,
+        skills,
         domain,
-        total: procedural + episodic + domain
+        total: procedural + episodic + skills + domain
     };
 }
 

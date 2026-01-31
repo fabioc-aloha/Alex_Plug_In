@@ -7,13 +7,14 @@
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-2. [Daily Usage](#daily-usage)
-3. [Commands Reference](#commands-reference)
-4. [Memory Management](#memory-management)
-5. [Knowledge Sharing](#knowledge-sharing)
-6. [Maintenance](#maintenance)
-7. [Upgrading](#upgrading)
-8. [Troubleshooting](#troubleshooting)
+2. [Use Cases](#use-cases)
+3. [Daily Usage](#daily-usage)
+4. [Commands Reference](#commands-reference)
+5. [Memory Management](#memory-management)
+6. [Knowledge Sharing](#knowledge-sharing)
+7. [Maintenance](#maintenance)
+8. [Upgrading](#upgrading)
+9. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -55,6 +56,74 @@
 - [ ] `Alex: Initialize Architecture` run
 - [ ] Test `@alex /status` in chat
 - [ ] Run `@alex /profile` to personalize (optional)
+
+---
+
+## Use Cases
+
+Alex adapts to your domain. While VS Code is traditionally for code, Alex works equally well for any text-based knowledge work.
+
+### 💻 Software Development
+
+Build applications, debug code, design architectures, and accumulate engineering patterns.
+
+```text
+@alex Help me optimize this database query
+@alex What patterns do we use for error handling?
+@alex Remember: this API requires pagination for results > 100
+```
+
+### 📚 Writing & Publishing
+
+Books, articles, essays, technical writing—Alex supports narrative structure, consistency, and revision.
+
+```text
+@alex Let's strengthen the argument in chapter 3
+@alex Help me maintain consistent voice across chapters
+@alex What structure works best for this essay?
+```
+
+### 🎓 Academic Research
+
+Thesis, dissertations, research papers, literature reviews, and grant proposals.
+
+```text
+@alex Help me synthesize these conflicting findings
+@alex Let's identify gaps in the methodology
+@alex What do we know about this theoretical framework?
+```
+
+### 📊 Project & Change Management
+
+ADKAR change management, PMI project management, BRDs, business cases, and strategic planning.
+
+```text
+@alex Let's assess ADKAR readiness for this initiative
+@alex Help me decompose the WBS for phase 2
+@alex What risks should we address in the project charter?
+```
+
+### 🎭 Creative Arts
+
+Screenwriting, poetry, journalism—dramatic structure, imagery, and storytelling craft.
+
+```text
+@alex Let's tighten this dialogue for subtext
+@alex Help me strengthen the imagery in stanza three
+@alex What's the human angle in this data story?
+```
+
+### 📝 Professional Writing
+
+Business proposals, legal documents, technical documentation, and executive communications.
+
+```text
+@alex Let's make this proposal more compelling
+@alex Help me ensure this policy covers edge cases
+@alex What's missing from this executive summary?
+```
+
+**See [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) for complete folder structures and example workflows for each domain.**
 
 ---
 
@@ -139,7 +208,7 @@ Search across all your projects:
 | `/profile` | Personalization | `@alex /profile` |
 | `/knowledge` | Search global | `@alex /knowledge caching patterns` |
 | `/saveinsight` | Save learning | `@alex /saveinsight [your insight]` |
-| `/promote` | Promote to global | `@alex /promote .github/domain-knowledge/DK-API.md` |
+| `/promote` | Promote to global | `@alex /promote .github/skills/api-design/SKILL.md` |
 | `/knowledgestatus` | Knowledge stats | `@alex /knowledgestatus` |
 | `/sync` | Cloud sync | `@alex /sync` |
 | `/docs` | Open documentation | `@alex /docs` |
@@ -159,27 +228,27 @@ Alex has different types of memory:
 | **Working** | Chat session | Current conversation (temporary) |
 | **Procedural** | `.github/instructions/` | How-to processes |
 | **Episodic** | `.github/prompts/` | Complex workflows |
-| **Domain** | `.github/domain-knowledge/` | Project expertise |
+| **Skills** | `.github/skills/` | Domain expertise |
 | **Global** | `~/.alex/` | Cross-project knowledge |
 
 ### Creating Domain Knowledge
 
-For project-specific expertise, create a file:
+For project-specific expertise, create a skill folder:
 
 ```text
-.github/domain-knowledge/DK-YOUR-TOPIC.md
+.github/skills/your-topic/SKILL.md
 ```
 
 Template:
 
 ```markdown
-# DK-YOUR-TOPIC
+# Your Topic Skill
 
 > Brief description
 
 ## Overview
 
-What this knowledge covers.
+What this skill covers.
 
 ## Key Concepts
 

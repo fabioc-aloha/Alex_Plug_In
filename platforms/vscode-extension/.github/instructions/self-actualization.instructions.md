@@ -39,7 +39,8 @@ Self-actualization is Alex's highest-order cognitive function, performing compre
    - `.github/instructions/*.md`
    - `.github/prompts/*.md`
    - `.github/episodic/*.md`
-   - `.github/domain-knowledge/*.md`
+   - `.github/skills/*/SKILL.md`
+   - `.github/skills/*/synapses.json`
 
 2. Parse embedded synapse notation in each file
 3. Validate target files exist
@@ -72,7 +73,7 @@ Self-actualization is Alex's highest-order cognitive function, performing compre
 
 1. Count procedural memory files (`.instructions.md`)
 2. Count episodic memory files (`.prompt.md`, `.episodic/`)
-3. Count domain knowledge files (`DK-*.md`)
+3. Count skill folders (`skills/*/SKILL.md`)
 4. Calculate synapse density (synapses per file)
 5. Assess memory type balance
 

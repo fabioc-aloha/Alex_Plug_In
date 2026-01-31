@@ -109,7 +109,8 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
         '.github/copilot-instructions.md',
         '.github/instructions/*.md',
         '.github/prompts/*.md',
-        '.github/domain-knowledge/*.md'
+        '.github/skills/*/SKILL.md',
+        '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
     ];
 
     let totalFiles = 0;

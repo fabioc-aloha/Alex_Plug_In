@@ -80,7 +80,7 @@ graph TB
         WM[Working Memory<br/>Chat Session]
         PM[Procedural Memory<br/>.instructions.md]
         EM[Episodic Memory<br/>.prompt.md]
-        DK[Domain Knowledge<br/>DK-*.md]
+        SK[Skills<br/>skills/*/SKILL.md]
         GK[Global Knowledge<br/>~/.alex/]
         SYN[Synaptic Network<br/>Embedded Connections]
         MC[Meta-Cognition<br/>Self-Monitoring]
@@ -98,7 +98,7 @@ graph TB
     WM ---|"Working Memory"| PFC
     PM ---|"Procedural Memory"| BG
     EM ---|"Episodic Memory"| HIPP
-    DK ---|"Declarative Memory"| NC
+    SK ---|"Declarative Memory"| NC
     GK ---|"Long-term Storage"| NC
     SYN ---|"Neural Connectivity"| SYNBIO
     MC ---|"Meta-Cognition"| MPFC
@@ -114,7 +114,7 @@ graph TB
 | Declarative Memory | Hippocampal-Neocortical | copilot-instructions.md |
 | Procedural Memory | Basal Ganglia | .instructions.md files |
 | Episodic Memory | Hippocampus + Temporal | .prompt.md files |
-| Domain Knowledge | Neocortex | DK-*.md files |
+| Skills | Neocortex | skills/*/SKILL.md |
 | Global Knowledge | Distributed Cortex | ~/.alex/ directory |
 | Neural Connectivity | Synaptic Networks | Embedded synapse notation |
 | Meta-Cognition | Medial PFC + DMN | Self-monitoring protocols |
@@ -138,7 +138,7 @@ graph TB
         subgraph "Local (Project)"
             PROC[Procedural Memory<br/>📁 .github/instructions/<br/>🔧 Repeatable processes]
             EPIS[Episodic Memory<br/>📁 .github/prompts/<br/>📁 .github/episodic/<br/>📝 Workflows & sessions]
-            DOM[Domain Knowledge<br/>📁 .github/domain-knowledge/<br/>🎓 Specialized expertise]
+            SKILLS[Skills<br/>📁 .github/skills/<br/>🎓 Specialized expertise]
         end
 
         subgraph "Global (User)"
@@ -152,9 +152,9 @@ graph TB
 
     WM -->|"Consolidation"| PROC
     WM -->|"Recording"| EPIS
-    WM -->|"Learning"| DOM
+    WM -->|"Learning"| SKILLS
 
-    DOM -->|"Promotion"| GKB
+    SKILLS -->|"Promotion"| GKB
     PROC -->|"Promotion"| GKB
 
     GKB <-->|"Sync"| GIST
@@ -317,4 +317,4 @@ graph TB
 
 ---
 
-*Alex Cognitive Architecture v3.0.0+*
+*Alex Cognitive Architecture v3.7.3*

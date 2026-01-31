@@ -1,0 +1,52 @@
+{
+  "skill": "business-analysis",
+  "connections": [
+    {
+      "reason": "Requirements feed project scope and planning",
+      "type": "informs",
+      "strength": 0.85,
+      "target": "project-management"
+    },
+    {
+      "reason": "Change impact on requirements and processes",
+      "type": "receives",
+      "strength": 0.85,
+      "target": "change-management"
+    },
+    {
+      "reason": "Problem analysis for requirements elicitation",
+      "type": "uses",
+      "strength": 0.65,
+      "target": "root-cause-analysis"
+    },
+    {
+      "reason": "Requirements enable test case design",
+      "type": "enables",
+      "strength": 0.65,
+      "target": "testing-strategies"
+    },
+    {
+      "reason": "Requirements shape solution architecture",
+      "type": "informs",
+      "strength": 0.4,
+      "target": "architecture-refinement"
+    },
+    {
+      "reason": "Clear documentation and requirements writing",
+      "type": "uses",
+      "strength": 0.4,
+      "target": "writing-publication"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "requirements",
+    "stakeholder",
+    "user story",
+    "use case",
+    "acceptance criteria",
+    "process mapping",
+    "gap analysis",
+    "scope"
+  ]
+}

@@ -4,6 +4,22 @@
 
 ---
 
+## Use Cases at a Glance
+
+| Domain | Example Prompts |
+| --- | --- |
+| **Development** | *"Help me debug this"*, *"What patterns for error handling?"* |
+| **Writing** | *"Strengthen chapter 3"*, *"Maintain consistent voice"* |
+| **Research** | *"Synthesize these findings"*, *"Identify literature gaps"* |
+| **Management** | *"Assess ADKAR readiness"*, *"Decompose the WBS"* |
+| **Creative** | *"Tighten this dialogue"*, *"Strengthen the imagery"* |
+| **Design** | *"Design a banner"*, *"What's the best icon grid?"* |
+| **Localization** | *"Set up i18n"*, *"Handle RTL languages"*, *"ICU pluralization"* |
+
+**See [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) for full templates.**
+
+---
+
 ## Chat Commands
 
 **Table 1:** *Chat Commands Quick Reference*
@@ -12,7 +28,7 @@
 | --- | --- | --- |
 | `/knowledge` | Search global knowledge | `@alex /knowledge error handling` |
 | `/saveinsight` | Save a new insight | `@alex /saveinsight React useEffect cleanup...` |
-| `/promote` | Promote local DK to global | `@alex /promote .github/domain-knowledge/DK-API.md` |
+| `/promote` | Promote local skill to global | `@alex /promote .github/skills/api-design/SKILL.md` |
 | `/knowledgestatus` | View knowledge base stats | `@alex /knowledgestatus` |
 | `/session` | Start/manage learning session | `@alex /session React hooks` |
 | `/goals` | View learning goals & streak | `@alex /goals` |
@@ -85,7 +101,7 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | --- | --- | --- | --- |
 | Procedural | `.github/instructions/` | `*.instructions.md` | How-to processes |
 | Episodic | `.github/prompts/` | `*.prompt.md` | Complex workflows |
-| Domain | `.github/domain-knowledge/` | `DK-*.md` | Project expertise |
+| Skills | `.github/skills/` | `*/SKILL.md` | Domain expertise |
 | Global Pattern | `~/.alex/global-knowledge/patterns/` | `GK-*.md` | Cross-project patterns |
 | Global Insight | `~/.alex/global-knowledge/insights/` | `GI-*.md` | Timestamped learnings |
 
@@ -134,9 +150,9 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 ├── copilot-instructions.md    # Main Alex config
 ├── instructions/              # Procedural memory
 ├── prompts/                   # Episodic memory
-├── domain-knowledge/          # Domain knowledge
+├── skills/                    # Domain expertise (skills/*/SKILL.md)
 ├── episodic/                  # Session records
-└── docs/                      # Architecture docs
+└── config/                    # Configuration files
 
 ~/.alex/
 ├── global-knowledge/

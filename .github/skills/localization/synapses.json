@@ -1,0 +1,84 @@
+{
+    "skill": "localization",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "testing-strategies",
+            "type": "requires",
+            "strength": 0.9,
+            "bidirectional": true,
+            "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "impacts",
+            "strength": 0.85,
+            "bidirectional": true,
+            "reason": "i18n architecture impacts entire application structure: middleware, routing, data models"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "applies",
+            "strength": 0.7,
+            "bidirectional": true,
+            "reason": "VS Code extensions use package.nls.json for localization"
+        },
+        {
+            "target": "writing-publication",
+            "type": "complements",
+            "strength": 0.7,
+            "bidirectional": true,
+            "reason": "Multilingual content strategy, translation workflows, terminology management"
+        },
+        {
+            "target": "project-management",
+            "type": "requires",
+            "strength": 0.65,
+            "reason": "Localization projects require phased rollouts, translation vendor coordination"
+        },
+        {
+            "target": "graphic-design",
+            "type": "complements",
+            "strength": 0.5,
+            "bidirectional": true,
+            "reason": "RTL layout considerations, typography for different scripts"
+        },
+        {
+            "target": "cognitive-load",
+            "type": "applies",
+            "strength": 0.5,
+            "reason": "Language switching adds cognitive overhead; minimize friction"
+        },
+        {
+            "target": "code-review",
+            "type": "supports",
+            "strength": 0.5,
+            "reason": "Review for i18n issues: hardcoded strings, concatenation, date formats"
+        }
+    ],
+    "triggers": [
+        "localization",
+        "internationalization",
+        "i18n",
+        "l10n",
+        "translate",
+        "translation",
+        "multilingual",
+        "language detection",
+        "Accept-Language",
+        "locale",
+        "RTL",
+        "right-to-left",
+        "Arabic",
+        "Hebrew",
+        "ICU MessageFormat",
+        "pluralization",
+        "font loading",
+        "CJK",
+        "Unicode",
+        "translation quality",
+        "LQA",
+        "BCP 47",
+        "next-intl"
+    ]
+}

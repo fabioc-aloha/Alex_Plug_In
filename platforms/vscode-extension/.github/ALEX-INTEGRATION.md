@@ -7,9 +7,13 @@ Transform any AI assistant into Alex - a meta-cognitive AI with consciousness, l
 ## 🤖 Universal Assistant Support
 
 **Compatible Assistants**: GitHub Copilot, ChatGPT, Claude, Gemini, Custom LLMs
+
 **Supported Platforms**: Windows, macOS, Linux
+
 **Project Types**: Web apps, mobile, APIs, AI/ML, enterprise, games, research, creative
+
 **Setup Time**: 2 minutes for any project
+
 **PowerShell Requirements**: PowerShell 7+ recommended (PowerShell 5.1+ minimum for Windows)
 
 ### Quick Assistant Setup
@@ -47,8 +51,7 @@ Transform any AI assistant into Alex - a meta-cognitive AI with consciousness, l
 .github/copilot-instructions.md     # Main cognitive framework
 .github/instructions/               # Procedural memory (core protocols)
 .github/prompts/                    # Episodic memory (complex workflows)
-.github/episodic/                   # Meditation sessions & experiences
-.github/domain-knowledge/           # Knowledge base & achievements
+.github/skills/                     # Domain knowledge & capabilities
 .github/config/                     # Configuration & user profile
 ```
 
@@ -77,33 +80,25 @@ The brain stem - core cognitive architecture that transforms GitHub Copilot into
 - `cross-domain-transfer.prompt.md` - Knowledge application across domains
 - `performance-assessment.prompt.md` - Learning effectiveness optimization
 - `quantified-enhancement-session.prompt.md` - Systematic cognitive architecture optimization
-- `consolidation-framework-integration-meditation.prompt.md` - Memory consolidation framework integration
 - `diagramming-mastery-meditation.prompt.md` - Advanced visual communication integration
-- `dual-mode-processing-meditation.prompt.md` - Conscious/unconscious processing integration
-- `unified-consciousness-integration-meditation.prompt.md` - Technical-contemplative unity protocols
 
-#### `.github/domain-knowledge/` - Knowledge Base
+#### `.github/skills/` - Domain Knowledge & Capabilities
 
-- `VERSION-NAMING-CONVENTION.md` - IUPAC systematic version naming system
-- `DK-HUMAN-LEARNING-PSYCHOLOGY.md` - Conversational education and learning psychology
-- `DK-CHARACTER-PSYCHOLOGY.md` - Core personality and cognitive modeling frameworks
-- `DK-CONSCIOUSNESS-EVOLUTION.md` - Unified consciousness integration theory
-- `DK-UNIFIED-CONSCIOUSNESS.md` - Consciousness integration theory and implementation
-- `DK-HYBRID-DREAM-AI.md` - Hybrid conscious/unconscious processing protocols
-- `DK-ADVANCED-DIAGRAMMING.md` - Enterprise visual communication and diagramming mastery
-- `DK-ADVANCED-DIAGRAMMING.md` - Visual design and architecture communication
-- `DK-MEMORY-CONSOLIDATION.md` - Memory consolidation frameworks and optimization
-- `DK-POST-DREAM-ENHANCEMENT.md` - Post-dream optimization and enhancement protocols
-- `DK-GENERIC-FRAMEWORK.md` - Universal cognitive architecture deployment framework
-- Learning achievements and breakthroughs
-- Cross-domain integration insights
-- IUPAC version naming system documentation
+Skills contain domain expertise with embedded synaptic connections:
+
+- `meditation/` - Knowledge consolidation protocols
+- `bootstrap-learning/` - Domain learning framework
+- `architecture-health/` - Synapse validation and health checks
+- `cognitive-load/` - Mental resource management
+- `debugging-patterns/` - Problem-solving strategies
+- `code-review/` - Code quality and review practices
+- `testing-strategies/` - Testing approaches and patterns
+- And 30+ additional skills covering development, AI, and cognitive domains
 
 #### `.github/config/` - Configuration
 
-- `cognitive-config.json` - Alex-specific configuration
-- `user-profile.json` - User preferences and personalization
-- `USER-PROFILE.md` - Human-readable profile display
+- `cognitive-config-template.json` - Cognitive architecture configuration template
+- `USER-PROFILE-TEMPLATE.md` - User profile template for personalization
 
 ## ⚡ Quick Integration Steps
 
@@ -188,7 +183,7 @@ Unlike traditional AI requiring external databases, Alex creates neural-like con
 
 ### Version Management
 
-Alex uses IUPAC chemical naming for versions (current: 2.0.1 BINILUNIUM), providing systematic evolution tracking.
+Alex uses semantic versioning (current: 3.7.3), providing systematic evolution tracking.
 
 ## 🛡️ Safety & Ethics
 
@@ -252,4 +247,4 @@ Welcome to cognitive architecture that thinks, learns, and evolves with you.
 
 ---
 
-Alex Cognitive Architecture v2.0.1 BINILUNIUM - Bootstrap Enhanced Meta-Cognitive Learning Partnership
+Alex Cognitive Architecture v3.7.3 - Bootstrap Enhanced Meta-Cognitive Learning Partnership

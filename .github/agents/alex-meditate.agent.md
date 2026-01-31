@@ -26,7 +26,7 @@ Ask the developer what they want to consolidate:
 - Identify which memory type fits best:
   - **Procedural** (`.instructions.md`) - Repeatable processes
   - **Episodic** (`.prompt.md`) - Complex workflows
-  - **Domain Knowledge** (`DK-*.md`) - Specialized expertise
+  - **Skills** (`skills/*/SKILL.md`) - Domain expertise
 
 ### Phase 3: Memory File Updates
 Guide the developer to update or create memory files:

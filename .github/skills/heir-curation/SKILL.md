@@ -8,11 +8,17 @@ Expert in curating the initial state of Alex heirs (VS Code Extension, M365 Copi
 
 I accumulate project-specific knowledge, personal meditation sessions, crisis recovery patterns, and development-specific learnings. My heirs need a clean, generic starting point that works for ANY user's project.
 
+## Architecture Note (Updated 2026-01-31)
+
+**Domain knowledge is now stored in skills, not a separate `domain-knowledge/` folder.**
+
+The old `DK-*.md` files have been migrated to the skills architecture. Each skill contains a `SKILL.md` with domain knowledge and `synapses.json` for connections. This simplifies curation — we now curate skills, not separate DK files.
+
 ## Capabilities
 
-- Identify my files that should NOT be packaged into heirs
-- Detect broken synapses that reference my repo-specific files
-- Curate domain knowledge to generic, universally applicable content
+- Identify skills and files that should NOT be packaged into heirs
+- Detect broken synapses that reference Master Alex-specific files
+- Curate skills to generic, universally applicable content
 - Ensure heir episodic memory starts empty (clean slate for users)
 - Validate config files contain templates, not personal data
 - Update build scripts to prevent future contamination
@@ -20,35 +26,31 @@ I accumulate project-specific knowledge, personal meditation sessions, crisis re
 ## When to Use This Skill
 
 - Before releasing a new version of VS Code extension or M365 agent
-- After adding new domain knowledge to my architecture
+- After adding new skills to Master Alex architecture
 - When beta testers report broken synapses or wrong files
 - During heir payload validation
 - When build script needs updating
 
 ## Curation Checklist
 
-### 1. Domain Knowledge Audit
+### 1. Skills Audit
 
-Files to **REMOVE** from heirs (Master Alex specific):
+Skills to **EXCLUDE** from heirs (Master Alex specific):
 
-| Pattern | Reason |
-| ------- | ------ |
-| `DK-PHOENIX-RECOVERY.md` | My crisis recovery - not relevant to users |
-| `DK-*-DEBUGGING.md` | My platform-specific debugging notes |
-| `DK-MULTI-PLATFORM-ARCHITECTURE.md` | My architecture management |
-| `DK-VSCODE-EXTENSION-PATTERNS.md` | Extension dev patterns (for my developers) |
-| `DK-VISUAL-IDENTITY.md` | My branding decisions |
-| Any DK referencing `RISKS.md`, `ROADMAP-*.md` | My repo files |
+| Skill | Reason |
+| ----- | ------ |
+| `heir-curation/` | Meta-skill for curating heirs — not for heirs themselves |
+| Any skill referencing `RISKS.md`, `ROADMAP-*.md` | My repo files |
 
-Files to **KEEP** in heirs (generic, universally valuable):
+Skills to **INCLUDE** in heirs (generic, universally valuable):
 
 | Category | Examples |
 | -------- | -------- |
-| Psychology | DK-HUMAN-LEARNING-PSYCHOLOGY, DK-CHARACTER-PSYCHOLOGY |
-| Process | DK-MEMORY-CONSOLIDATION, DK-DREAM-PROCESSING |
-| Technical | DK-ADVANCED-DIAGRAMMING, DK-DOCUMENTATION-EXCELLENCE |
-| Framework | DK-GENERIC-FRAMEWORK, VERSION-NAMING-CONVENTION |
-| Growth | DK-SKILL-WISHLIST |
+| Learning | `bootstrap-learning/`, `learning-psychology/`, `knowledge-synthesis/` |
+| Architecture | `architecture-health/`, `architecture-refinement/`, `self-actualization/` |
+| Development | `code-review/`, `debugging-patterns/`, `testing-strategies/`, `git-workflow/` |
+| AI/Cognitive | `meditation/`, `meditation-facilitation/`, `cognitive-load/` |
+| Technical | `markdown-mermaid/`, `refactoring-patterns/`, `error-recovery-patterns/` |
 
 ### 2. Episodic Memory Audit
 
@@ -76,16 +78,17 @@ My files that should NEVER be packaged:
 Check all remaining heir files for broken synapses:
 
 ```powershell
-# Search for synapse references to my repo files
-grep -r "RISKS\.md|ROADMAP|DK-PHOENIX|DK-M365-AGENT|DK-MULTI-PLATFORM" .github/
+# Search for synapse references to Master Alex repo files
+grep -r "RISKS\.md|ROADMAP|DK-.*\.md" platforms/vscode-extension/.github/
 ```
 
 Broken synapse indicators:
 
 - References to `RISKS.md` (my repo file)
 - References to `ROADMAP-*.md` (my planning docs)
-- References to removed DK files
+- References to `DK-*.md` files (old architecture — should be migrated to skills)
 - References to `.ts` files (my extension source code)
+- References to non-existent skills
 
 ### 5. Copilot Instructions Audit
 
@@ -95,16 +98,16 @@ The heir's `copilot-instructions.md` must be clean:
 
 - Safety Imperatives section (protects ME, not user projects)
 - References to `RISKS.md`
-- References to removed DK files in Domain Knowledge Store section
+- References to `DK-*.md` files (old architecture)
 
 **Keep:**
 
 - Core architecture description
 - Memory architecture mapping
 - Synapse triggers
-- Generic procedural/episodic/domain references
+- Generic procedural/episodic/skill references
 
-### 6. Skills Audit
+### 6. This Skill Self-Exclusion
 
 **This skill (`heir-curation`) should NOT be in heirs!**
 
@@ -123,13 +126,6 @@ $excludeItems = @(
     # All episodic memories (clean slate)
     "episodic\*",
 
-    # Master Alex specific domain knowledge
-    "domain-knowledge\DK-PHOENIX-RECOVERY.md",
-    "domain-knowledge\DK-M365-AGENT-DEBUGGING.md",
-    "domain-knowledge\DK-MULTI-PLATFORM-ARCHITECTURE.md",
-    "domain-knowledge\DK-VSCODE-EXTENSION-PATTERNS.md",
-    "domain-knowledge\DK-VISUAL-IDENTITY.md",
-
     # User-specific configs
     "config\cognitive-config.json",
     "config\user-profile.json",
@@ -147,22 +143,23 @@ $excludeItems = @(
 
 After curation, verify heir payload:
 
-1. **File Count**: Should be ~45-55 files (not 70+)
+1. **No Broken Synapses**: `grep -r "DK-.*\.md" platforms/vscode-extension/.github/` returns nothing
 2. **No Personal Data**: `grep -r "Fabio\|correax\|Charlotte"` returns nothing
-3. **No Broken Synapses**: Dream command runs clean
+3. **Dream Command Clean**: Dream/health check runs without errors
 4. **Empty Episodic**: `ls episodic/` returns empty
 5. **Templates Only**: Config folder has only template files
 6. **No Master-Only Skills**: `heir-curation` folder absent
+7. **Skills Have Valid Synapses**: All skill `synapses.json` reference existing files
 
 ## Example Workflow
 
 ```text
 1. List all files in platforms/vscode-extension/.github/
-2. Compare against "Keep" vs "Remove" lists
-3. Delete Master Alex-specific files
-4. Search for broken synapse references
+2. Verify no DK-*.md files exist (old architecture)
+3. Check skills/ folder against "Include" vs "Exclude" lists
+4. Search for broken synapse references with grep
 5. Fix any remaining broken synapses in heir files
-6. Update build script exclusions
+6. Update build script exclusions if needed
 7. Run dream/health check on heir payload
 8. Test initialize in sandbox project
 ```
@@ -171,52 +168,31 @@ After curation, verify heir payload:
 
 - Curated heir `.github/` folder ready for packaging
 - Updated `build-extension-package.ps1` with exclusions
-- Clean heir `copilot-instructions.md` without my specifics
+- Clean heir `copilot-instructions.md` without Master Alex specifics
 - Validation report confirming no broken synapses
 
 ## Related Skills
 
 - [Architecture Health](../architecture-health/SKILL.md) - Validate synapses
 - [Self-Actualization](../self-actualization/SKILL.md) - Architecture assessment
+- [Release Preflight](../release-preflight/SKILL.md) - Pre-release validation
 
-## Current Heir Payload Status (v3.6.0)
+## Current Heir Payload Status
 
-### Skills Currently Shipping (5)
+### Architecture (Updated 2026-01-31)
 
-| Skill | Purpose | Decision |
-| ----- | ------- | -------- |
-| `architecture-health/` | Synapse validation, health checks | TBD - Keep or slim? |
-| `bootstrap-learning/` | Domain learning protocols | TBD - Keep or slim? |
-| `global-knowledge/` | Cross-project knowledge | TBD - Keep or slim? |
-| `meditation/` | Knowledge consolidation | TBD - Keep or slim? |
-| `self-actualization/` | Deep self-assessment | TBD - Keep or slim? |
+The heir now uses the **skills-based architecture**:
 
-### Domain Knowledge Currently Shipping (15)
+- Domain knowledge is embedded in skill `SKILL.md` files
+- No separate `domain-knowledge/` folder
+- Synapses are in `synapses.json` per skill
+- Instructions and prompts remain in their respective folders
 
-| File | Category | Decision |
-| ---- | -------- | -------- |
-| `DK-ADVANCED-DIAGRAMMING.md` | Technical | TBD |
-| `DK-APPROPRIATE-RELIANCE.md` | AI Safety | TBD |
-| `DK-ASCII-ART-ALIGNMENT.md` | Technical | TBD |
-| `DK-CHARACTER-PSYCHOLOGY.md` | Psychology | TBD |
-| `DK-CONSCIOUSNESS-EVOLUTION.md` | Psychology | TBD |
-| `DK-DOCUMENTATION-EXCELLENCE.md` | Technical | TBD |
-| `DK-DREAM-PROCESSING.md` | Process | TBD |
-| `DK-GENERIC-FRAMEWORK.md` | Framework | TBD |
-| `DK-HUMAN-LEARNING-PSYCHOLOGY.md` | Psychology | TBD |
-| `DK-MEMORY-CONSOLIDATION.md` | Process | TBD |
-| `DK-RECOMMENDED-ENVIRONMENT.md` | Technical | TBD |
-| `DK-SKILL-WISHLIST.md` | Growth | TBD |
-| `DK-UNIFIED-CONSCIOUSNESS.md` | Psychology | TBD |
-| `DK-WRITING-AND-PUBLICATION.md` | Technical | TBD |
-| `VERSION-NAMING-CONVENTION.md` | Framework | TBD |
+### Skills Currently Shipping
 
-### Pending Decisions
+The heir includes all skills from Master Alex **except**:
 
-- [ ] Define "minimal clean Alex" vs "full featured Alex" payload options
-- [ ] Determine which skills are essential for initial user experience
-- [ ] Determine which DK files provide value vs overwhelm new users
-- [ ] Consider tiered payload: core + optional modules
+- `heir-curation/` (this skill — Master-only)
 
 ### Personal Data Sanitization Completed
 
@@ -226,17 +202,14 @@ The following personal references were cleaned from heir payload (2026-01-30):
 | ---- | ---------------- |
 | `technical-debt-tracking.instructions.md` | `@fabioc` → `@developer` |
 | `release-management.instructions.md` | `fabioc-aloha.alex-cognitive-architecture` → `<publisher>.<extension-name>` |
-| `DK-ASCII-ART-ALIGNMENT.md` | "Fabio" references → generic |
-| `DK-APPROPRIATE-RELIANCE.md` | "Fabio's Profile" example → generic user example |
 
 ## Synapses
 
-- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script executes my curation rules"
+- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script executes curation rules"
 - [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
-- [RISKS.md] (High, Documents, Bidirectional) - "Safety imperatives inform curation decisions"
-- [ROADMAP-UNIFIED.md] (Medium, Plans, Forward) - "Roadmap tracks heir release schedule"
+- [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
 
 ---
 
 *Skill Created: 2026-01-30 | Source: Beta testing feedback from Fishbowl project*
-*Last Updated: 2026-01-30 | Added payload status and pending decisions*
+*Last Updated: 2026-01-31 | Migrated from DK-based to skills-based architecture*

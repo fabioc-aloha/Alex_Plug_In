@@ -842,7 +842,8 @@ async function buildMemoryBreakdownAsync(): Promise<{ icon: string; name: string
     const categories = [
         { icon: '📋', name: 'Instructions (.instructions.md)', path: path.join(rootPath, '.github', 'instructions'), count: 0 },
         { icon: '📝', name: 'Prompts (.prompt.md)', path: path.join(rootPath, '.github', 'prompts'), count: 0 },
-        { icon: '🧠', name: 'Domain Knowledge (DK-*.md)', path: path.join(rootPath, '.github', 'domain-knowledge'), count: 0 },
+        { icon: '🎯', name: 'Skills (SKILL.md)', path: path.join(rootPath, '.github', 'skills'), count: 0 },
+        { icon: '🧠', name: 'Domain Knowledge (legacy)', path: path.join(rootPath, '.github', 'domain-knowledge'), count: 0 },
         { icon: '⚙️', name: 'Configuration', path: path.join(rootPath, '.github', 'config'), count: 0 }
     ];
     

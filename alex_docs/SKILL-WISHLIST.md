@@ -42,7 +42,7 @@ When starting a new session or project, Alex can:
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
-| Incident Response | High | Calm, systematic crisis handling | Severity levels, communication, post-mortem |
+| Incident Response | ✅ **ACQUIRED** | Calm, systematic crisis handling | `skills/incident-response/SKILL.md` |
 | Performance Profiling | Medium | Identify bottlenecks systematically | CPU, memory, network analysis patterns |
 | Security Review | High | Security-focused code analysis | OWASP, common vulnerabilities, threat modeling |
 | Database Design | Medium | Schema design, query optimization | Normalization, indexing strategies |
@@ -84,11 +84,60 @@ When starting a new session or project, Alex can:
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
-| Root Cause Analysis | High | Systematic debugging | 5 Whys, fishbone, fault trees |
+| Root Cause Analysis | ✅ **ACQUIRED** | Systematic debugging | `skills/root-cause-analysis/SKILL.md` |
 | Technology Evaluation | Medium | Structured comparison | Weighted criteria, proof of concept |
 | Competitive Analysis | Low | What do alternatives offer? | Feature comparison, positioning |
 | Data Interpretation | Medium | Making sense of metrics | Trends, anomalies, actionable insights |
 | User Feedback Synthesis | Medium | Patterns from feedback | Theme extraction, prioritization |
+
+---
+
+## Writing, Academic & Research Skills
+
+### Recently Acquired ✅
+
+| Skill | Status | File | Acquired |
+|-------|--------|------|----------|
+| Academic Research | ✅ Acquired | `skills/academic-research/SKILL.md` | 2026-01-31 |
+| Creative Writing | ✅ Acquired | `skills/creative-writing/SKILL.md` | 2026-01-31 |
+| Graphic Design | ✅ Acquired | `skills/graphic-design/SKILL.md` | 2026-01-31 |
+
+### Already Available ✅
+
+| Skill | Status | File | Notes |
+|-------|--------|------|-------|
+| Writing & Publication | ✅ Acquired | `skills/writing-publication/SKILL.md` | Manuscript preparation, publishing |
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Journalism & Reporting | Low | News writing, fact-checking | Inverted pyramid, source verification |
+| Poetry & Verse | Low | Forms, meter, literary devices | Specialized creative writing |
+| Screenwriting Advanced | Low | Industry format, screenplay craft | Beyond basic screenplay format |
+| Grant Writing | Medium | Research funding applications | NSF, NIH, foundation proposals |
+
+---
+
+## Management & Business Analysis Skills
+
+### Recently Acquired ✅
+
+| Skill | Status | File | Acquired |
+|-------|--------|------|----------|
+| Project Management | ✅ Acquired | `skills/project-management/SKILL.md` | 2026-01-31 |
+| Change Management | ✅ Acquired | `skills/change-management/SKILL.md` | 2026-01-31 |
+| Business Analysis | ✅ Acquired | `skills/business-analysis/SKILL.md` | 2026-01-31 |
+| Localization (i18n/l10n) | ✅ Acquired | `skills/localization/SKILL.md` | 2026-01-31 |
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Strategic Planning | Medium | Long-term organizational planning | SWOT, vision/mission, OKRs |
+| Financial Analysis | Low | Business case financials | ROI, NPV, cost-benefit |
+| Governance Frameworks | Low | Decision-making structures | RACI, approval processes |
+| Vendor Management | Low | RFP, contract management | Evaluation criteria, negotiation |
 
 ---
 
@@ -351,12 +400,12 @@ Track skill development progress:
 
 | Metric | Current | Target |
 |--------|---------|--------|
-| Total Skills Acquired | 5 | - |
-| Wishlist Items | ~60 | Reduce over time |
+| Total Skills Acquired | 46 | - |
+| Wishlist Items | ~55 | Reduce over time |
 | Skills in Development | 0 | 1-2 at a time |
 | User Feedback Sessions | 0 | Track |
 
-### Skill Distribution
+### Skill Distribution (Updated 2026-01-31)
 
 | Category | Count | High Priority |
 |----------|-------|---------------|

@@ -99,7 +99,8 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
             '.github/instructions/*.md',
             '.github/prompts/*.md',
             '.github/episodic/*.md',
-            '.github/domain-knowledge/*.md'
+            '.github/skills/*/SKILL.md',
+            '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
         ];
 
         let totalFiles = 0;
@@ -245,7 +246,8 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
             patterns.push('.github/episodic/*.md');
         }
         if (memoryType === 'all' || memoryType === 'domain') {
-            patterns.push('.github/domain-knowledge/*.md');
+            patterns.push('.github/skills/*/SKILL.md');
+            patterns.push('.github/domain-knowledge/*.md');  // Legacy
         }
 
         const results: { file: string; matches: string[] }[] = [];
@@ -402,8 +404,11 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
         const episodicFiles = await vscode.workspace.findFiles(
             new vscode.RelativePattern(workspaceFolders[0], '.github/episodic/*.md')
         );
+        const skillFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/SKILL.md')
+        );
         const domainFiles = await vscode.workspace.findFiles(
-            new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md')
+            new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md')  // Legacy
         );
 
         // Get version from main file
@@ -426,13 +431,15 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
 | Version | ${version} |
 | Procedural Memory | ${instructionFiles.length} files |
 | Episodic Memory | ${promptFiles.length + episodicFiles.length} files |
+| Skills | ${skillFiles.length} skills |
 | Domain Knowledge | ${domainFiles.length} files |
 
 ### Memory Systems
 - **Working Memory**: Chat session (7-rule capacity)
 - **Procedural Memory**: .github/instructions/*.md files (repeatable processes)
 - **Episodic Memory**: .github/prompts/*.md + .github/episodic/*.md files (workflows & sessions)
-- **Domain Knowledge**: .github/domain-knowledge/DK-*.md files (specialized expertise)
+- **Skills**: .github/skills/*/SKILL.md files (portable domain expertise)
+- **Domain Knowledge**: .github/domain-knowledge/DK-*.md files (legacy - migrated to skills)
 
 ### Available Commands
 - \`Alex: Initialize Architecture\` - Deploy to new project

@@ -13,7 +13,8 @@ export const MEMORY_FILE_PATTERNS = [
     '.github/instructions/*.md',
     '.github/prompts/*.md',
     '.github/episodic/*.md',
-    '.github/domain-knowledge/*.md'
+    '.github/skills/*/SKILL.md',
+    '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
 ] as const;
 
 /**

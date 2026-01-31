@@ -7,13 +7,13 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 38
+## Skill Count: 45
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 24 |
-| Master-Only | 8 |
-| Heir: VS Code | 2 |
+| Inheritable | 28 |
+| Master-Only | 11 |
+| Heir: VS Code | 3 |
 | Heir: M365 | 2 |
 | Temporary | 1 |
 

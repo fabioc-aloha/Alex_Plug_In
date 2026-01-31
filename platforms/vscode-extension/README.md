@@ -8,15 +8,15 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![Pre-Release](https://img.shields.io/badge/Status-Pre--Release-orange?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
-> **Your AI Development Lead**
+> **Your AI Learning Partner**
 
 ---
 
 ## 🎯 Who is Alex?
 
-You're the architect. Alex is your development lead.
+You're the expert. Alex is your learning partner.
 
-**Alex Cognitive Architecture** transforms GitHub Copilot into a development lead that learns, remembers, and gets better over time. You set the vision; Alex coordinates the work—managing Copilot as your development team.
+**Alex Cognitive Architecture** transforms GitHub Copilot into a cognitive partner that learns, remembers, and gets better over time. Whether you're coding, writing, researching, or managing projects—Alex adapts to your domain.
 
 - 🧠 **Remembers What You Learn** — Insights persist across sessions, projects, and machines
 - 🤝 **Practices Appropriate Reliance** — Confident when grounded, transparent when uncertain
@@ -31,7 +31,7 @@ You're the architect. Alex is your development lead.
 2. **Initialize** — Run `Alex: Initialize Architecture` from Command Palette (`Ctrl+Shift+P`)
 3. **Talk** — Open Copilot Chat and just talk. No special syntax needed.
 
-That's it. Alex is ready to be your development lead.
+That's it. Alex is ready to be your learning partner.
 
 ---
 
@@ -41,12 +41,22 @@ The best way to use Alex is natural conversation. You don't need `@alex` or slas
 
 | What you might say | What happens |
 | ------------------ | ------------ |
-| *"Help me understand this code"* | Alex analyzes and explains |
-| *"Remember that React hooks need cleanup"* | Saves to your knowledge base |
-| *"What do we know about error handling?"* | Searches your accumulated expertise |
+| *"Help me understand this"* | Alex analyzes and explains |
+| *"Remember this pattern for next time"* | Saves to your knowledge base |
+| *"What do we know about this topic?"* | Searches your accumulated expertise |
 | *"Time to dream"* | Runs maintenance on Alex's memory |
 | *"Let's meditate"* | Consolidates learnings from your session |
 | *"How are you doing?"* | Status check on Alex's health |
+
+### Works Across Domains
+
+**Development**: *"Help me optimize this React component..."*
+
+**Writing**: *"Let's strengthen the argument in chapter 3..."*
+
+**Research**: *"Help me synthesize these conflicting findings..."*
+
+**Management**: *"Let's identify risks in this project plan..."*
 
 Alex understands intent. Speak naturally—like you would to a trusted colleague.
 
@@ -63,6 +73,38 @@ Research shows human-AI teams can perform worse than either alone when reliance 
 - **Your judgment matters** — On critical decisions, stay engaged. That's appropriate self-reliance.
 
 Not blind trust. Not constant skepticism. A genuine partnership where each side brings irreplaceable value.
+
+---
+
+## 🎨 Use Cases
+
+Alex adapts to your domain. Here are just a few ways people use Alex:
+
+### 💻 Software Development
+
+Build applications, debug code, design architectures, write tests, and accumulate engineering patterns.
+
+### 📚 Writing & Publishing
+
+Write books, articles, essays. Get help with narrative structure, character development, consistency, and revision.
+
+### 🎓 Academic Research
+
+Tackle thesis work, research papers, literature reviews, and grant proposals with academic rigor and synthesis support.
+
+### 📊 Project & Change Management
+
+Navigate ADKAR change initiatives, PMI project management, BRDs, business cases, and strategic planning.
+
+### 🎭 Creative Arts
+
+Screenwriting, poetry, journalism—Alex supports dramatic structure, imagery, and storytelling craft.
+
+### 📝 Professional Writing
+
+Business proposals, legal documents, technical documentation, and executive communications.
+
+**[See All Project Templates →](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/PROJECT-TYPE-TEMPLATES.md)**
 
 ---
 
@@ -133,14 +175,15 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v3.7.2
+## 🆕 What's New in v3.7.3
 
-- **� Health Dashboard** — Modern card-based UI with CX logo
+- **🛡️ Architecture Integrity** — Fixed all legacy DK-*.md references to skills architecture
+- **📋 Version Alignment** — All memory files now consistent with current version
+- **🔗 Synapse Health** — Fixed broken connections in meditation session records
+- **🫀 Health Dashboard** — Modern card-based UI with CX logo
 - **🌐 Generate Skill Catalog** — Creates network diagrams of all skills
 - **📊 Rich Status Bar** — Shows health, session timer, and streak at a glance
 - **🎨 Welcome View Polish** — Expanded metrics, grouped actions, BETA badge
-- **🔄 Command Parity** — 14 commands accessible from Palette, Status Bar, AND Welcome View
-- **🛠️ Zero Broken Synapses** — Fresh installs now have 0 issues on first Dream
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
@@ -166,6 +209,7 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 | Document | Description |
 | -------- | ----------- |
 | [User Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/README.md) | Complete guide to using Alex |
+| [Project Templates](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/PROJECT-TYPE-TEMPLATES.md) | Use cases for development, writing, research, management |
 | [How Alex Thinks](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/COGNITIVE-ARCHITECTURE.md) | The cognitive model explained |
 | [How Alex Remembers](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/MEMORY-SYSTEMS.md) | Memory systems and knowledge capture |
 | [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project learning |
@@ -183,7 +227,7 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** — Your AI Development Lead
+**Alex Cognitive Architecture** — Your AI Learning Partner
 
 Built on appropriate reliance research for human-AI collaboration
 

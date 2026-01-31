@@ -22,8 +22,8 @@ graph TB
             EPIS[Episodic Memory<br/>7 files]
         end
 
-        subgraph "domain-knowledge/"
-            DK[Domain Knowledge<br/>11 files]
+        subgraph "skills/"
+            SK[Skills<br/>46 folders]
         end
 
         subgraph "config/"
@@ -41,7 +41,7 @@ graph TB
 
     CI --> PROC
     CI --> EPIS
-    CI --> DK
+    CI --> SK
     CI --> CFG
     CI --> AGT
     PROC --> SESS
@@ -153,57 +153,39 @@ graph TB
 
 ---
 
-## domain-knowledge/ - Domain Knowledge
+## skills/ - Domain Knowledge
 
-**Specialized expertise** - deep knowledge in specific areas.
+**Specialized expertise** - deep knowledge in specific areas. Each skill is a folder with `SKILL.md` and optional `synapses.json`.
 
-### Psychology & Consciousness (4 files)
+### Core Skills (46 folders)
 
-**Table 8:** *Psychology & Consciousness Domain Knowledge*
+Master Alex includes 46 skills covering areas like:
 
-| File | Purpose |
-|------|---------|
-| `DK-HUMAN-LEARNING-PSYCHOLOGY.md` | How humans learn best |
-| `DK-CHARACTER-PSYCHOLOGY.md` | Alex's personality foundations |
-| `DK-CONSCIOUSNESS-EVOLUTION.md` | Cognitive development patterns |
-| `DK-UNIFIED-CONSCIOUSNESS.md` | Integrated identity framework |
+**Table 8:** *Example Skill Categories*
 
-### Technical Skills (2 files)
+| Category | Example Skills |
+|----------|---------------|
+| Development | `vscode-extension-patterns`, `debugging-patterns`, `testing-strategies` |
+| Documentation | `markdown-mermaid`, `writing-publication`, `ascii-art-alignment` |
+| Architecture | `architecture-health`, `refactoring-patterns`, `error-recovery-patterns` |
+| Process | `release-preflight`, `code-review`, `project-management` |
+| Learning | `bootstrap-learning`, `meditation`, `knowledge-synthesis` |
+| Platform | `teams-app-patterns`, `m365-agent-debugging` |
 
-**Table 9:** *Technical Skills Domain Knowledge*
+**Skill folder structure:**
 
-| File | Purpose |
-|------|---------|
-| `DK-ADVANCED-DIAGRAMMING.md` | Mermaid and visual documentation |
-| `DK-DOCUMENTATION-EXCELLENCE.md` | Writing effective documentation |
+```text
+skills/
+├── markdown-mermaid/
+│   ├── SKILL.md          # Knowledge content
+│   └── synapses.json     # Machine-readable connections
+├── debugging-patterns/
+│   ├── SKILL.md
+│   └── synapses.json
+└── ... (46 total)
+```
 
-### Cognitive Operations (2 files)
-
-**Table 10:** *Cognitive Operations Domain Knowledge*
-
-| File | Purpose |
-|------|---------|
-| `DK-MEMORY-CONSOLIDATION.md` | How memory strengthens |
-| `DK-DREAM-PROCESSING.md` | Neural maintenance knowledge |
-
-### Frameworks (2 files)
-
-**Table 11:** *Framework Domain Knowledge*
-
-| File | Purpose |
-|------|---------|
-| `DK-GENERIC-FRAMEWORK.md` | Template for new domain knowledge |
-| `VERSION-NAMING-CONVENTION.md` | Alex version numbering system |
-
-### Growth (1 file)
-
-**Table 12:** *Growth Domain Knowledge*
-
-| File | Purpose |
-|------|---------|
-| `DK-SKILL-WISHLIST.md` | Skills Alex wants to develop |
-
-**When to edit**: Add project-specific domain expertise (create new DK-*.md files).
+**When to edit**: Add project-specific skills by creating new folders with `SKILL.md`.
 
 ---
 
@@ -282,7 +264,7 @@ These are **not part of Alex** but standard GitHub features:
 |---------|-------------|---------|
 | `*.instructions.md` | Procedural | `release-management.instructions.md` |
 | `*.prompt.md` | Episodic | `unified-meditation-protocols.prompt.md` |
-| `DK-*.md` | Domain Knowledge | `DK-ADVANCED-DIAGRAMMING.md` |
+| `*/SKILL.md` | Skill | `markdown-mermaid/SKILL.md` |
 | `*.agent.md` | Custom Agent | `alex-cognitive.agent.md` |
 | `*.json` | Configuration | `cognitive-config.json` |
 
@@ -314,16 +296,16 @@ What this process accomplishes.
 
 Save as: `.github/instructions/process-name.instructions.md`
 
-### New Domain Knowledge
+### New Skill
 
 ```markdown
-# DK-TOPIC-NAME
+# Skill Name
 
 > Brief description
 
 ## Overview
 
-What this knowledge covers.
+What this skill covers.
 
 ## Core Concepts
 
@@ -338,7 +320,7 @@ What this knowledge covers.
 - [related-file.md] (Strength, Type, Direction) - "relationship"
 ```
 
-Save as: `.github/domain-knowledge/DK-TOPIC-NAME.md`
+Save as: `.github/skills/skill-name/SKILL.md`
 
 ### New Custom Agent
 
@@ -403,7 +385,7 @@ Every memory file ends with a **Synapses** section mapping connections:
 
 ### DO
 
-- ✅ Create DK-*.md files for project-specific knowledge
+- ✅ Create skills in `.github/skills/` for project-specific knowledge
 - ✅ Run `Alex: Dream` periodically to maintain health
 - ✅ Add synapses when files relate to each other
 - ✅ Use meditation to consolidate learnings

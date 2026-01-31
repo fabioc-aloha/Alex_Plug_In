@@ -1,0 +1,62 @@
+{
+  "skill": "graphic-design",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Visual storytelling and narrative design",
+      "type": "complements",
+      "strength": 0.85,
+      "target": "creative-writing"
+    },
+    {
+      "reason": "Extension branding, icons, and UI design",
+      "type": "applies",
+      "strength": 0.85,
+      "target": "vscode-extension-patterns"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Diagram visualization and styling",
+      "type": "extends",
+      "strength": 0.65,
+      "target": "markdown-mermaid"
+    },
+    {
+      "reason": "Visual information processing and hierarchy",
+      "type": "applies",
+      "strength": 0.65,
+      "target": "cognitive-load"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Text-based visual design and alignment",
+      "type": "complements",
+      "strength": 0.65,
+      "target": "ascii-art-alignment"
+    },
+    {
+      "reason": "Document visual design and layout",
+      "type": "supports",
+      "strength": 0.4,
+      "target": "writing-publication"
+    },
+    {
+      "reason": "Reflective design iteration",
+      "type": "uses",
+      "strength": 0.4,
+      "target": "meditation-facilitation"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "design",
+    "visual",
+    "layout",
+    "typography",
+    "color",
+    "logo",
+    "branding",
+    "UI design",
+    "mockup"
+  ]
+}

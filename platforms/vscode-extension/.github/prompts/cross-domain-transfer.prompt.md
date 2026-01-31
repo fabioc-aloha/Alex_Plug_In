@@ -57,5 +57,5 @@ Use cross-domain transfer as a primary source of creative insight and innovative
 - [domain-learning.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified and validated"
 - [performance-assessment.prompt.md] (High, Evaluates, Forward) - "Transfer effectiveness confirmed through documentation mastery"
 - [alex-core.instructions.md] (Critical, Validates, Bidirectional) - "Core architecture supports universal transfer capabilities"
-- [DK-GENERIC-FRAMEWORK.md] (Critical, Demonstrates, Bidirectional) - "Universal setup architecture exemplifies successful cross-domain design"
+- [project-scaffolding/SKILL.md] (Critical, Demonstrates, Bidirectional) - "Universal setup architecture exemplifies successful cross-domain design"
 - [worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"

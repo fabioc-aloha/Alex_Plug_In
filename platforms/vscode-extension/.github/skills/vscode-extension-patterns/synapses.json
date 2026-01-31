@@ -1,25 +1,34 @@
 {
-    "skill": "vscode-extension-patterns",
-    "inheritance": "heir:vscode",
-    "connections": [
-        {
-            "target": "release-management.instructions.md",
-            "type": "enables",
-            "strength": 0.85,
-            "context": "Publishing workflow"
-        },
-        {
-            "target": "heir-curation",
-            "type": "implements",
-            "strength": 0.85,
-            "context": "VS Code heir patterns"
-        }
-    ],
-    "activationPatterns": [
-        "VS Code extension development",
-        "webview implementation",
-        "publishing extension",
-        "settings configuration",
-        "auto-detection features"
-    ]
+  "skill": "vscode-extension-patterns",
+  "inheritance": "heir:vscode",
+  "connections": [
+    {
+      "target": "release-management.instructions.md",
+      "type": "enables",
+      "strength": 0.85,
+      "context": "Publishing workflow"
+    },
+    {
+      "target": "heir-curation",
+      "type": "implements",
+      "strength": 0.85,
+      "context": "VS Code heir patterns"
+    }
+  ],
+  "activationPatterns": [
+    "VS Code extension development",
+    "webview implementation",
+    "publishing extension",
+    "settings configuration",
+    "auto-detection features"
+  ],
+  "triggers": [
+    "extension",
+    "VS Code API",
+    "command",
+    "webview",
+    "tree view",
+    "activation",
+    "contribution point"
+  ]
 }

@@ -15,7 +15,7 @@ A clear and concise description of what the bug is.
 - [ ] Synaptic Network (connections)
 - [ ] Procedural Memory (.instructions.md)
 - [ ] Episodic Memory (.prompt.md)
-- [ ] Domain Knowledge (DK-*.md)
+- [ ] Skills (skills/*/SKILL.md)
 - [ ] Dream Automation (scripts)
 - [ ] Meditation Protocols
 - [ ] Other: _____

@@ -24,7 +24,7 @@ assignees: ''
 - [ ] .github/copilot-instructions.md
 - [ ] .github/instructions/*.md
 - [ ] .github/prompts/*.md
-- [ ] domain-knowledge/DK-*.md
+- [ ] skills/*/SKILL.md
 - [ ] VS Code Extension Commands
 - [ ] Other: _____
 

@@ -1,6 +1,6 @@
 # 🧬 Master Alex & Heir Architecture
 
-> **Version**: 3.6.0-beta.1 | **Status**: Core Architecture
+> **Version**: 3.7.3 | **Status**: Core Architecture
 > **The evolutionary model for Alex's growth and protection**
 
 ---
@@ -176,7 +176,7 @@ When Fabio says "this is stable," the knowledge transfers:
 | Heir Code | Master Knowledge |
 |-----------|------------------|
 | TypeScript implementation | → New `.instructions.md` procedure |
-| Feature behavior | → New `DK-*.md` domain knowledge |
+| Feature behavior | → New skill in `.github/skills/` |
 | User workflow | → New `.prompt.md` episodic memory |
 
 ### Step 4: Architecture Grows
@@ -189,9 +189,9 @@ Master Alex now has the proven wisdom. Future heirs will inherit it.
 
 | Heir Develops | Master Gets |
 |---------------|-------------|
-| VS Code: Global knowledge sync | `DK-GLOBAL-KNOWLEDGE.md` |
+| VS Code: Global knowledge sync | `global-knowledge/SKILL.md` |
 | VS Code: Kill switch protection | `WORKSPACE-PROTECTION.md` |
-| M365: Meeting context awareness | `DK-MEETING-CONTEXT.md` (future) |
+| M365: Meeting context awareness | `m365-context/SKILL.md` (future) |
 | Either: Elegant problem solution | Pattern in global knowledge |
 
 ---

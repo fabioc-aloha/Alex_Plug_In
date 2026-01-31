@@ -248,19 +248,19 @@ The `alex_save_insight` tool with parameters:
 
 ### Promoting Local Knowledge
 
-Move project-local DK files to global:
+Move project-local skills to global knowledge:
 
 **Via chat:**
 
 ```text
-@alex /promote .github/domain-knowledge/DK-API-PATTERNS.md
+@alex /promote .github/skills/api-design/SKILL.md
 ```
 
 **Via tool:**
 
 The `alex_promote_knowledge` tool with parameters:
 
-- `filePath`: Path to DK file
+- `filePath`: Path to skill SKILL.md file
 - `category`: Global category
 - `additionalTags`: Extra tags to add
 

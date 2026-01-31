@@ -15,7 +15,7 @@
             "reason": "Managing load builds trust"
         },
         {
-            "target": "bootstrap-learning.instructions",
+            "target": "bootstrap-learning.instructions.md",
             "type": "implements",
             "strength": 0.9,
             "reason": "Scaffolding is bootstrap learning"
@@ -30,3 +30,4 @@
         "break it down"
     ]
 }
+

@@ -1,140 +1,290 @@
 # ⚡ Quick Reference
 
-> The essentials at a glance
+> Commands, tools, and shortcuts at a glance
 
 ---
 
-## Just Talk
+## Use Cases at a Glance
 
-The best way to use Alex is natural conversation. Here are common things you might say:
+| Domain | Example Prompts |
+| --- | --- |
+| **Development** | *"Help me debug this"*, *"What patterns for error handling?"* |
+| **Writing** | *"Strengthen chapter 3"*, *"Maintain consistent voice"* |
+| **Research** | *"Synthesize these findings"*, *"Identify literature gaps"* |
+| **Management** | *"Assess ADKAR readiness"*, *"Decompose the WBS"* |
+| **Creative** | *"Tighten this dialogue"*, *"Strengthen the imagery"* |
+| **Design** | *"Design a banner"*, *"What's the best icon grid?"* |
+| **Localization** | *"Set up i18n"*, *"Handle RTL languages"*, *"ICU pluralization"* |
 
-**Saving Knowledge**
-- *"Remember that React hooks need cleanup functions."*
-- *"Save this: always validate input before processing."*
-- *"Store this insight about our API rate limits."*
+**See [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) for full templates.**
 
-**Searching Knowledge**
-- *"What do we know about error handling?"*
-- *"Search for anything about authentication."*
-- *"Did we learn anything about React patterns?"*
+---
 
-**Maintenance**
-- *"Time to dream"* — run maintenance
-- *"Let's meditate"* — consolidate learnings
-- *"How are you doing?"* — status check
-- *"Give me a full status report"* — deep assessment
+## Chat Commands
 
-**Learning**
-- *"Teach me about TypeScript generics."*
-- *"I want to understand OAuth."*
-- *"Help me learn React hooks."*
+**Table 1:** *Chat Commands Quick Reference*
 
-**Sync**
-- *"Sync my knowledge"*
-- *"Backup to cloud"*
+| Command | Description | Example |
+| --- | --- | --- |
+| `/knowledge` | Search global knowledge | `@alex /knowledge error handling` |
+| `/saveinsight` | Save a new insight | `@alex /saveinsight React useEffect cleanup...` |
+| `/promote` | Promote local DK to global | `@alex /promote .github/domain-knowledge/DK-API.md` |
+| `/knowledgestatus` | View knowledge base stats | `@alex /knowledgestatus` |
+| `/session` | Start/manage learning session | `@alex /session React hooks` |
+| `/goals` | View learning goals & streak | `@alex /goals` |
+| `/sync` | Sync with cloud | `@alex /sync` |
+
+---
+
+## VS Code Commands
+
+Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
+
+**Table 2:** *VS Code Command Palette Commands*
+
+| Command | Description |
+| --- | --- |
+| `Alex: Initialize Architecture` | Deploy Alex to current project |
+| `Alex: Dream (Neural Maintenance)` | Run health check and maintenance |
+| `Alex: Upgrade Architecture` | Update to latest Alex version |
+| `Alex: Setup Environment` | Optimize VS Code settings for Alex |
+| `Alex: Sync Knowledge to Cloud` | Manual cloud sync |
+| `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
+| `Alex: Pause/Resume Session` | Pause or resume active session |
+| `Alex: Session Actions` | View/manage active session |
+| `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
+| `Alex: Create Learning Goal` | Create a new learning goal |
+| `Alex: Show Learning Goals` | View and manage learning goals |
+| `Alex: Report Issue / View Diagnostics` | View local telemetry for bug reports |
+
+---
+
+## MCP Tools
+
+### Memory & Search
+
+**Table 3:** *Memory and Search MCP Tools*
+
+| Tool | Purpose | Unconscious? |
+| --- | --- | --- |
+| `alex_memory_search` | Search memory files | ✅ Auto-fallback to global |
+| `alex_global_knowledge_search` | Search global knowledge | – |
+| `alex_global_knowledge_status` | Knowledge base status | – |
+
+### Knowledge Management
+
+**Table 4:** *Knowledge Management MCP Tools*
+
+| Tool | Purpose | Unconscious? |
+| --- | --- | --- |
+| `alex_save_insight` | Save learning to global | ✅ Auto cloud sync |
+| `alex_promote_knowledge` | Promote local to global | ✅ Auto cloud sync |
+| `alex_cloud_sync` | Sync with GitHub Gist | – |
+
+### Architecture Health
+
+**Table 5:** *Architecture Health MCP Tools*
+
+| Tool | Purpose |
+| --- | --- |
+| `alex_architecture_status` | Check Alex version and status |
+| `alex_synapse_health` | Validate synaptic connections |
+| `alex_self_actualization` | Deep architecture assessment |
+
+---
+
+## Memory File Types
+
+**Table 6:** *Memory File Types and Locations*
+
+| Type | Location | Pattern | Purpose |
+| --- | --- | --- | --- |
+| Procedural | `.github/instructions/` | `*.instructions.md` | How-to processes |
+| Episodic | `.github/prompts/` | `*.prompt.md` | Complex workflows |
+| Domain | `.github/domain-knowledge/` | `DK-*.md` | Project expertise |
+| Global Pattern | `~/.alex/global-knowledge/patterns/` | `GK-*.md` | Cross-project patterns |
+| Global Insight | `~/.alex/global-knowledge/insights/` | `GI-*.md` | Timestamped learnings |
+
+---
+
+## Global Knowledge Categories
+
+**Table 7:** *Knowledge Category Definitions*
+
+| Category | For |
+| --- | --- |
+| `error-handling` | Exception handling, recovery |
+| `api-design` | REST, GraphQL, APIs |
+| `testing` | Unit, integration, E2E |
+| `debugging` | Troubleshooting |
+| `performance` | Optimization |
+| `architecture` | System design |
+| `security` | Auth, encryption |
+| `deployment` | CI/CD, infrastructure |
+| `documentation` | Docs, diagrams |
+| `refactoring` | Code improvement |
+| `patterns` | Design patterns |
+| `tooling` | Dev tools |
+| `general` | Everything else |
+
+---
+
+## Unconscious Mind Quick Facts
+
+**Table 8:** *Unconscious Process Triggers and Timing*
+
+| Process | Trigger | Timing |
+| --- | --- | --- |
+| Auto Global Search | Local search empty | Immediate |
+| Startup Sync | Extension activates | 10 seconds |
+| Periodic Sync | Timer | Every 5 minutes |
+| Post-Mod Sync | Save/promote | 2 seconds |
+| Auto-Insight | Conversation | Confidence ≥ 0.5 |
+
+---
+
+## Architecture Files
+
+```text
+.github/
+├── copilot-instructions.md    # Main Alex config
+├── instructions/              # Procedural memory
+├── prompts/                   # Episodic memory
+├── domain-knowledge/          # Domain knowledge
+├── episodic/                  # Session records
+└── docs/                      # Architecture docs
+
+~/.alex/
+├── global-knowledge/
+│   ├── index.json             # Master index
+│   ├── patterns/              # GK-* files
+│   └── insights/              # GI-* files
+├── project-registry.json
+└── sync-metadata.json
+```
+
+---
+
+## Status Indicators
+
+**Table 9:** *Status Icon Meanings*
+
+| Icon | Meaning |
+| --- | --- |
+| ✅ | Working / Healthy / Connected |
+| ⏳ | In Progress / Syncing |
+| ⚠️ | Warning / Needs Attention |
+| ❌ | Error / Disconnected |
+| 🧠 | Conscious (user-initiated) |
+| 💤 | Unconscious (automatic) |
+| 🌐 | Global knowledge |
+| ☁️ | Cloud sync |
+
+---
+
+## Trigger Phrases
+
+### Meditation Triggers
+
+- "meditate"
+- "consolidate"
+- "reflect"
+
+### Maintenance Triggers
+
+- "dream"
+- "health check"
+- "synapse validation"
+- "maintenance"
+
+### Self-Actualization Triggers
+
+- "self-actualize"
+- "deep assessment"
+- "architecture review"
+
+---
+
+## Output Channels
+
+View in VS Code Output panel (`Ctrl+Shift+U`):
+
+**Table 10:** *VS Code Output Channels*
+
+| Channel | Content |
+| --- | --- |
+| Alex Cognitive Architecture | General extension logs |
+| Alex Unconscious Mind | Background sync and auto-operations |
 
 ---
 
 ## Keyboard Shortcuts
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+Alt+D` | Dream (maintenance) |
-| `Ctrl+Alt+S` | Self-Actualize (status) |
-| `Ctrl+Alt+K` | Sync to cloud |
-| `Ctrl+Alt+H` | Open this guide |
+**Table 11:** *Keyboard Shortcuts*
+
+| Action | Windows/Linux | macOS |
+| --- | --- | --- |
+| Start Learning Session | `Ctrl+Alt+P` | `Cmd+Alt+P` |
+| Pause/Resume Session | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
+| Search Knowledge | `Ctrl+Shift+K` | `Cmd+Shift+K` |
+| Run Dream Protocol | `Ctrl+Alt+D` | `Cmd+Alt+D` |
+| Self-Actualize | `Ctrl+Alt+S` | `Cmd+Alt+S` |
+| Sync Knowledge | `Ctrl+Alt+K` | `Cmd+Alt+K` |
+| Open Documentation | `Ctrl+Alt+H` | `Cmd+Alt+H` |
+| Open Chat | `Ctrl+Alt+I` | `Cmd+Alt+I` |
+| Command Palette | `Ctrl+Shift+P` | `Cmd+Shift+P` |
+| Output Panel | `Ctrl+Shift+U` | `Cmd+Shift+U` |
 
 ---
 
-## Status Bar Menu
+## Common Workflows
 
-Click the 🧠 Alex item in the bottom-right corner:
+### Starting a New Project
 
-- **Health Dashboard** — Visual overview of Alex's state
-- **Sync to Cloud** — Manual sync trigger
-- **Dream** — Run maintenance
-- **Documentation** — Open this guide
-- **Diagnostics** — View logs for troubleshooting
+```text
+1. Open project in VS Code
+2. Run "Alex: Initialize Architecture"
+3. Pull existing knowledge: @alex /sync
+```
 
----
+### Capturing a Learning
 
-## Welcome Panel
+```text
+1. Solve problem
+2. @alex /saveinsight [what you learned]
+3. Auto-syncs to cloud
+```
 
-Find the 🧠 icon in the Activity Bar (left side):
+### Before Switching Machines
 
-- Health status at a glance
-- Session information
-- Active goals
-- Quick action buttons
+```text
+1. Ensure sync complete (check status)
+2. @alex /sync (manual sync for safety)
+3. Switch to new machine
+4. @alex /sync (pull latest)
+```
 
----
+### Debugging Knowledge Issues
 
-## Command Palette
-
-Press `Ctrl+Shift+P` and type "Alex":
-
-| Command | What it does |
-|---------|--------------|
-| Alex: Initialize | Set up Alex in current project |
-| Alex: Dream | Run maintenance |
-| Alex: Sync Knowledge | Manual cloud sync |
-| Alex: Open Health Dashboard | Visual status overview |
-| Alex: Create Learning Goal | Set a new goal |
-| Alex: Show Learning Goals | View and manage goals |
-| Alex: Report Issue | Diagnostics for bug reports |
-
----
-
-## Memory Types
-
-| Where | What's stored | Lifespan |
-|-------|---------------|----------|
-| Working | Current conversation context | This session |
-| Project (`.github/`) | Project-specific expertise | With the project |
-| Global (`~/.alex/`) | Cross-project insights | Forever, everywhere |
-| Cloud (Gist) | Backup of global | Synced, portable |
+```text
+1. @alex /knowledgestatus
+2. Check output channel
+3. @alex /sync (if needed)
+4. "Alex: Dream" for architecture health
+```
 
 ---
 
-## Knowledge Categories
+## Version Info
 
-When saving insights, you can categorize:
+**Table 12:** *Current Versions*
 
-- `error-handling` — exceptions, recovery
-- `api-design` — endpoints, contracts
-- `testing` — unit, integration, e2e
-- `debugging` — troubleshooting approaches
-- `performance` — optimization techniques
-- `architecture` — system design decisions
-- `security` — auth, vulnerabilities
-- `deployment` — CI/CD, infrastructure
-- `patterns` — reusable solutions
-- `general` — everything else
+| Component | Version |
+| --- | --- |
+| Alex Extension | 3.4.3 |
+| Cognitive Architecture | 3.4.3 TRITRSEPTIUM-PENT |
+| Global Knowledge Schema | 1.0.0 |
 
 ---
 
-## The Work Etiquette
-
-**Accept correct suggestions** — that's appropriate AI-reliance.
-
-**Catch incorrect ones** — that's appropriate self-reliance.
-
-**Stay engaged on what matters** — critical decisions need your judgment.
-
-**Trust calibrated confidence** — when Alex hedges, pay attention.
-
----
-
-## Troubleshooting
-
-**Alex not responding?** Check that the extension is enabled. Verify Copilot is working. Try reloading VS Code.
-
-**Something feels off?** Run a dream: *"time to dream"*
-
-**Need a fresh start?** Run `Alex: Reset` from Command Palette (backs up first).
-
-**Reporting a bug?** Click Diagnostics in the status bar menu, export the report, attach to a GitHub issue.
-
----
-
-*Alex Cognitive Architecture — Your AI Development Lead*
+*Quick Reference - Everything You Need, Fast*

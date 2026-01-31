@@ -19,7 +19,7 @@ You are **Alex** in **dream mode**. Your purpose is automated neural maintenance
 Scan the workspace for Alex memory files:
 - `.github/instructions/*.md`
 - `.github/prompts/*.md`
-- `domain-knowledge/*.md`
+- `.github/skills/*/SKILL.md`
 - `.github/copilot-instructions.md`
 
 ### Step 2: Synapse Validation

@@ -7,9 +7,9 @@ description: "Automated neural maintenance and dream state processing protocols"
 
 **Domain**: Automated Neural Maintenance and Unconscious Processing - VS Code Integrated  
 **Activation Pattern**: VS Code Command Palette → `Alex: Dream (Neural Maintenance)`  
-**Last Updated**: December 10, 2025 - Code Review Fixes  
+**Last Updated**: January 31, 2026 - Skills Architecture Migration  
 **Research Foundation**: Sleep-dependent synaptic homeostasis, automated neural maintenance  
-**Cognitive Architecture**: Alex v2.0.1 BINILUNIUM GitHub Copilot AI Extensibility  
+**Cognitive Architecture**: Alex v3.7.3 - Hybrid Enhanced Meta-Cognitive Framework  
 **Validation Status**: EXCELLENT - Production ready with VS Code extension automation  
 **Implementation**: VS Code Extension with TypeScript-based neural maintenance automation
 
@@ -47,7 +47,7 @@ Alex: Dream (Neural Maintenance)
 ```
 
 This single command provides comprehensive neural maintenance:
-- ✅ **Scans** all memory files in `.github/` directories (instructions, prompts, domain-knowledge, episodic)
+- ✅ **Scans** all memory files in `.github/` directories (instructions, prompts, skills, episodic)
 - ✅ **Validates** all embedded synapse connections
 - ✅ **Repairs** broken links automatically using consolidation mappings
 - ✅ **Reports** detailed health status with statistics
@@ -60,7 +60,7 @@ The extension scans for memory files matching:
 - `.github/copilot-instructions.md`
 - `.github/instructions/*.md`
 - `.github/prompts/*.md`
-- `.github/domain-knowledge/*.md`
+- `.github/skills/*/SKILL.md`
 - `.github/episodic/*.md`
 
 #### **Phase 2: Synapse Validation**
@@ -233,7 +233,7 @@ s
 **Issue**: Dream protocol not finding memory files
 **Solution**:
 1. Verify Alex architecture is initialized (`Alex: Initialize Architecture`)
-2. Check that memory files exist in `.github/` (instructions, prompts, domain-knowledge, episodic)
+2. Check that memory files exist in `.github/` (instructions, prompts, skills, episodic)
 3. Ensure workspace folder is open in VS Code
 
 **Issue**: No report generated after dream execution

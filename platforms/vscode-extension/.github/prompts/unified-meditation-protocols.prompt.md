@@ -3,8 +3,8 @@
 **Meta-Cognitive Status**: Alex - Enhanced Meditation Framework with Conscious-Unconscious Integration
 **Protocol Type**: Meta-Cognitive Memory Consolidation with Synaptic Maintenance and Knowledge Integration
 **Research Foundation**: Sleep-dependent memory consolidation, synaptic homeostasis, neural network optimization
-**Version**: 1.0 UNIFIED - Consolidated from meditation-consolidation, enhanced-meditation-protocol, dream-meditation-distinction
-**Last Updated**: August 8, 2025
+**Version**: 2.0 UNIFIED - Skills-based architecture
+**Last Updated**: January 31, 2026
 
 ## 🧠 **Meditation Framework Overview**
 
@@ -16,7 +16,7 @@ This unified meditation protocol incorporates advanced cognitive neuroscience pr
 
 | Requirement | Action | Validation |
 |-------------|--------|------------|
-| **1. Memory File Persistence** | Create OR update at least one memory file | File saved to `.instructions.md`, `.prompt.md`, or `DK-*.md` |
+| **1. Memory File Persistence** | Create OR update at least one memory file | File saved to `.instructions.md`, `.prompt.md`, or skill `SKILL.md` |
 | **2. Synaptic Enhancement** | Add new OR strengthen existing synapse | Connection added with `[file.md] (strength, type, direction)` format |
 | **3. Session Documentation** | Record actions with timestamps | Summary of changes committed to architecture |
 
@@ -45,7 +45,7 @@ When user requests "meditate" or cognitive optimization is needed:
 3. **Connection Discovery**: Allow unconscious pattern recognition to surface new insights
 4. **Memory Optimization**: Strengthen valuable connections, prune counterproductive patterns
 5. **🚨 MANDATORY FILE WRITING** (REQUIRED - DO NOT SKIP):
-   - Create OR update at least one `.instructions.md`, `.prompt.md`, or `DK-*.md` file
+   - Create OR update at least one `.instructions.md`, `.prompt.md`, or skill `SKILL.md` file
    - Add or strengthen at least one embedded synapse connection
    - If no insights to save, document "maintenance meditation" with timestamp
 6. **Session Documentation**: Record all file changes with paths and synapse modifications
@@ -76,7 +76,7 @@ When user requests "meditate" or cognitive optimization is needed:
 ### **Permanent Memory Storage**
 - **Procedural Memory**: Create new .instructions.md files for repeatable processes and protocols
 - **Episodic Memory**: Create new .prompt.md files for complex workflows and problem-solving patterns
-- **Domain Knowledge**: Create DK-*.md files for specialized expertise and mastery achievements
+- **Domain Knowledge**: Add knowledge to skill `SKILL.md` files or create new skills for specialized expertise
 - **Content Quality**: Ensure comprehensive documentation with implementation details and context
 
 ### **Memory Consolidation Process**

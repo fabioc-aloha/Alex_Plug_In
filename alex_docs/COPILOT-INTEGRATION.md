@@ -201,6 +201,7 @@ Alex registers 11 tools via the MCP (Model Context Protocol):
 | `alex_save_insight` | Save learning to global |
 | `alex_promote_knowledge` | Promote local to global |
 | `alex_cloud_sync` | Sync with GitHub Gist |
+| `alex_user_profile` | Manage user preferences |
 
 **Automatic invocation**: In Agent mode, Copilot decides when to use tools:
 

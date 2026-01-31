@@ -19,7 +19,7 @@ flowchart TB
         direction LR
         PM["📋 Procedural\n.instructions.md"]
         EM["📝 Episodic\n.prompt.md"]
-        DK["🎓 Domain\nDK-*.md"]
+        SK["🎓 Skills\nskills/*/SKILL.md"]
     end
 
     subgraph GLOBAL_LAYER["🌐 Global (User)"]
@@ -32,10 +32,10 @@ flowchart TB
 
     WM ==>|"Consolidate"| PM
     WM ==>|"Record"| EM
-    WM ==>|"Learn"| DK
+    WM ==>|"Learn"| SK
 
     PM -.->|"Promote"| GK
-    DK -.->|"Promote"| GK
+    SK -.->|"Promote"| GK
 
     GK <-->|"Sync"| GIST
 
@@ -90,11 +90,11 @@ flowchart LR
 
     WM -->|"Repeated procedure"| PM[Procedural Memory]
     WM -->|"Session record"| EM[Episodic Memory]
-    WM -->|"Domain expertise"| DK[Domain Knowledge]
+    WM -->|"Domain expertise"| SK[Skills]
 
     PM -->|".instructions.md"| FS[File System]
     EM -->|".prompt.md"| FS
-    DK -->|"DK-*.md"| FS
+    SK -->|"SKILL.md"| FS
 ```
 
 **Figure 2:** *Memory Consolidation Flow — How working memory content is persisted to different memory types.*
@@ -202,35 +202,41 @@ Key learnings from this session
 
 ---
 
-## Domain Knowledge
+## Skills (Domain Knowledge)
 
 ### Purpose
 
-Stores **what Alex knows** - specialized expertise about specific topics.
+Stores **what Alex knows** - specialized expertise about specific topics. Skills are portable domain knowledge that can be shared across projects.
 
 ### Location
 
-```
-.github/domain-knowledge/
-├── DK-ADVANCED-DIAGRAMMING.md
-├── DK-DOCUMENTATION-EXCELLENCE.md
-├── DK-HUMAN-LEARNING-PSYCHOLOGY.md
-├── DK-MEMORY-CONSOLIDATION.md
-├── DK-SKILL-WISHLIST.md
+```text
+.github/skills/
+├── markdown-mermaid/
+│   ├── SKILL.md
+│   └── synapses.json
+├── writing-publication/
+│   ├── SKILL.md
+│   └── synapses.json
+├── error-recovery-patterns/
+│   ├── SKILL.md
+│   └── synapses.json
 └── ...
 ```
 
 ### File Format
 
-```markdown
-# Domain: Topic Name
+Each skill is a folder containing:
 
-**ID**: DK-TOPIC-NAME
-**Category**: Category name
-**Tags**: tag1, tag2, tag3
+**SKILL.md** - The knowledge content:
+
+```markdown
+# Skill Name
+
+> Brief description
 
 ## Overview
-What this domain covers
+What this skill covers
 
 ## Key Concepts
 ### Concept 1
@@ -247,15 +253,17 @@ Details...
 - [related-file.md] (Strength, Type, Direction) - "Description"
 ```
 
+**synapses.json** - Machine-readable connections (optional)
+
 ### Naming Convention
 
-Files follow the pattern: `DK-TOPIC-NAME.md`
+Folders use kebab-case: `skill-topic-name/`
 
 Examples:
 
-- `DK-REACT-HOOKS.md`
-- `DK-API-DESIGN.md`
-- `DK-TESTING-STRATEGIES.md`
+- `api-design/SKILL.md`
+- `react-hooks/SKILL.md`
+- `testing-strategies/SKILL.md`
 
 ---
 
@@ -334,11 +342,11 @@ flowchart TD
 
     LOCAL --> PM_SEARCH[Search Procedural<br/>.instructions.md]
     LOCAL --> EM_SEARCH[Search Episodic<br/>.prompt.md]
-    LOCAL --> DK_SEARCH[Search Domain<br/>DK-*.md]
+    LOCAL --> SK_SEARCH[Search Skills<br/>SKILL.md]
 
     PM_SEARCH --> RESULTS{Found?}
     EM_SEARCH --> RESULTS
-    DK_SEARCH --> RESULTS
+    SK_SEARCH --> RESULTS
 
     RESULTS -->|Yes| RETURN[Return Results]
     RESULTS -->|No| GLOBAL[Search Global Knowledge<br/>Unconscious Fallback]
@@ -360,7 +368,7 @@ Moving knowledge from local to global:
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph "Local (Project)"
-        DK[DK-TOPIC.md]
+        SK[SKILL.md]
     end
 
     subgraph "Promotion Process"
@@ -379,7 +387,7 @@ flowchart LR
         GIST[GitHub Gist]
     end
 
-    DK --> CMD
+    SK --> CMD
     CMD --> COPY
     COPY --> GK
     CMD --> INDEX
@@ -414,7 +422,7 @@ Memory files are connected via synapses:
 ## Synapses
 
 - [bootstrap-learning.instructions.md] (Critical, Enables, Bidirectional) - "Learning protocol"
-- [DK-MEMORY-CONSOLIDATION.md] (High, References, Forward) - "Consolidation theory"
+- [meditation/SKILL.md] (High, References, Forward) - "Consolidation theory"
 - [meditation-session.prompt.md] (Medium, Validates, Backward) - "Session record"
 ```
 
@@ -427,7 +435,7 @@ Memory files are connected via synapses:
 | Working Memory | 7 rules | Cognitive limit |
 | Procedural Files | 20-30 | Keep focused |
 | Episodic Files | Unlimited | History is valuable |
-| Domain Files | 10-20 per project | Avoid sprawl |
+| Skill Folders | 10-20 per project | Avoid sprawl |
 | Global Patterns | Unlimited | Cross-project value |
 | Global Insights | Unlimited | Timestamped history |
 

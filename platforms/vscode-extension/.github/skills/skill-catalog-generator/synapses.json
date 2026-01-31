@@ -1,41 +1,45 @@
 {
-    "skill": "skill-catalog-generator",
-    "version": "1.0.0",
-    "connections": {
-        "markdown-mermaid": {
-            "weight": 0.9,
-            "relationship": "Enables",
-            "reason": "Generates Mermaid network diagrams"
-        },
-        "architecture-health": {
-            "weight": 0.8,
-            "relationship": "Validates",
-            "reason": "Validates skill structure during catalog generation"
-        },
-        "knowledge-synthesis": {
-            "weight": 0.7,
-            "relationship": "Documents",
-            "reason": "Documents synthesized knowledge patterns"
-        },
-        "learning-psychology": {
-            "weight": 0.6,
-            "relationship": "Enables",
-            "reason": "Tracks learning progress for users"
-        },
-        "project-scaffolding": {
-            "weight": 0.5,
-            "relationship": "Documents",
-            "reason": "Documents project structure and capabilities"
-        }
+  "skill": "skill-catalog-generator",
+  "connections": [
+    {
+      "reason": "Generates Mermaid network diagrams",
+      "type": "enables",
+      "strength": 0.9,
+      "target": "markdown-mermaid"
     },
-    "activationTriggers": [
-        "show skills",
-        "skill catalog",
-        "skill network",
-        "learning progress",
-        "what skills",
-        "generate catalog",
-        "/skills"
-    ],
-    "inheritance": "inheritable"
+    {
+      "reason": "Validates skill structure during catalog generation",
+      "type": "validates",
+      "strength": 0.8,
+      "target": "architecture-health"
+    },
+    {
+      "reason": "Documents synthesized knowledge patterns",
+      "type": "documents",
+      "strength": 0.7,
+      "target": "knowledge-synthesis"
+    },
+    {
+      "reason": "Tracks learning progress for users",
+      "type": "enables",
+      "strength": 0.6,
+      "target": "learning-psychology"
+    },
+    {
+      "reason": "Documents project structure and capabilities",
+      "type": "documents",
+      "strength": 0.5,
+      "target": "project-scaffolding"
+    }
+  ],
+  "triggers": [
+    "show skills",
+    "skill catalog",
+    "skill network",
+    "learning progress",
+    "what skills",
+    "generate catalog",
+    "/skills"
+  ],
+  "inheritance": "inheritable"
 }

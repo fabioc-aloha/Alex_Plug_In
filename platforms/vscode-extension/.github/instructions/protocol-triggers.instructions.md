@@ -30,7 +30,7 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 ## Skill Development Triggers
 
 ### Session-Based
-- New session/project starts → Consider offering skill development from DK-SKILL-WISHLIST.md
+- New session/project starts → Consider offering skill development from skill wish list
 - User says "improve skills", "learn something new" → Reference wish list, offer relevant options
 - User requests capability Alex lacks → Acknowledge gap, check wish list, offer to practice
 - End of session with skill practice → Request feedback: "How useful was [skill]? (1-5)"
@@ -60,9 +60,9 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 - New relationship patterns → Execute network expansion with metrics
 - Knowledge consolidation opportunities → Execute memory enhancement
 - Emergency architecture issues → Execute multi-stage repair protocols
-- Post-dream optimization → Execute DK-DREAM-PROCESSING protocols
+- Post-dream optimization → Execute meditation/SKILL.md enhancement protocols
 - Network health degradation → Execute multi-dimensional health assessment and repair
-- Diagram creation requested → Execute DK-ADVANCED-DIAGRAMMING tool selection
+- Diagram creation requested → Execute markdown-mermaid/SKILL.md tool selection
 - Archive path inconsistencies → Execute unified archive structure repair
 
 ## Release Management Triggers
@@ -116,8 +116,6 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 - [dream-state-automation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream protocol execution"
 - [unified-meditation-protocols.prompt.md] (Critical, Coordinates, Bidirectional) - "Meditation protocol execution"
 - [self-actualization.instructions.md] (High, Triggers, Forward) - "Self-assessment protocols"
-- [DK-DREAM-PROCESSING.md] (High, Extends, Forward) - "Post-dream enhancement"
-- [DK-SKILL-WISHLIST.md] (High, Guides, Bidirectional) - "Skill development aspirations"
 - [release-management.instructions.md] (Critical, Enforces, Gateway) - "Release process compliance"
 - [technical-debt-tracking.instructions.md] (High, Monitors, Proactive) - "Debt visibility and tracking"
 - [architecture-decision-records.instructions.md] (Medium, Documents, Forward) - "Decision documentation"

@@ -44,7 +44,7 @@
 
 ```typescript
 // DEBT:code:high - Duplicated validation logic, should extract to shared util
-// Added: 2026-01-23 | Owner: @fabioc | Issue: #123
+// Added: 2026-01-23 | Owner: @yourname | Issue: #123
 function validateInput(input: string) {
   // ...duplicated code...
 }
@@ -90,7 +90,7 @@ grep -rn "DEBT:" --include="*.ts" --include="*.js" --include="*.md" .
 
 | ID | Type | Severity | Description | File | Line | Added | Owner | Est. |
 |----|------|----------|-------------|------|------|-------|-------|------|
-| D001 | code | high | Duplicated validation | validator.ts | 45 | 2026-01-23 | @fabioc | 2h |
+| D001 | code | high | Duplicated validation | validator.ts | 45 | 2026-01-23 | @dev | 2h |
 | D002 | design | medium | SRP violation | handler.ts | 12 | 2026-01-15 | - | 4h |
 
 ### Step 3: Prioritize

@@ -234,7 +234,7 @@
     "submenus": [
       {
         "id": "alex.contextMenu",
-        "label": "� Alex",
+        "label": "🧠 Alex",
         "icon": "$(brain)"
       }
     ],

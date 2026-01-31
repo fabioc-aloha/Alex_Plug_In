@@ -37,7 +37,7 @@ description: "Deep thinking cognitive skill for systematic problem analysis with
 
 **Actions**:
 1. **Scan episodic memory** (`.prompt.md` files) for similar situations
-2. **Search domain knowledge** (`DK-*.md` files) for applicable frameworks
+2. **Search skills** (`skills/*/SKILL.md` files) for applicable frameworks
 3. **Review meditation sessions** (`.github/episodic/`) for consolidated insights
 4. **Check procedural memory** (`.instructions.md` files) for established protocols
 
@@ -91,7 +91,7 @@ Current Problem + Extracted Patterns + Contextual Adaptation = Solution Approach
 ```markdown
 **Source Episodes**:
 - [episode-name.prompt.md](path) - "Key insight extracted"
-- [DK-domain-v1.0.0.md](path) - "Applicable framework"
+- [relevant-skill/SKILL.md](path) - "Applicable framework"
 - [meditation-session-date.prompt.md](path) - "Consolidated learning"
 ```
 

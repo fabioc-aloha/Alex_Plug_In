@@ -11,6 +11,8 @@
 | Document | Description |
 |----------|-------------|
 | **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
+| [Use Cases Guide](./USE-CASES.md) | 🎨 **NEW** - Deep dive into every domain Alex supports |
+| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md) | Folder structures for development, writing, research, management |
 | [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md) | Complete system architecture with diagrams |
 | [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md) | 🧬 Evolution model and protection system |
 | [Skills & Capabilities](./SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
@@ -34,6 +36,7 @@ Alex is a **cognitive architecture** that transforms GitHub Copilot into a sophi
 - **Persistent Memory** - Knowledge that survives across sessions and projects
 - **Self-Maintenance** - Automatic health checks and neural maintenance
 - **Cross-Project Learning** - Global knowledge base shared across all your work
+- **Domain Flexibility** - Works for development, writing, research, management, and more
 
 ---
 
@@ -64,7 +67,7 @@ flowchart TB
             WM["⏱️ Working Memory"]
             PM["📋 Procedural"]
             EM["📝 Episodic"]
-            DK["🎓 Domain"]
+            SK["🎓 Skills"]
             GK["🌐 Global"]
         end
     end
@@ -75,7 +78,7 @@ flowchart TB
 
     CM --> WM
     CMD --> PM & EM
-    TOOLS --> DK & GK
+    TOOLS --> SK & GK
 
     BGS -.->|"Auto"| GIST
     AID -.->|"Auto"| GK

@@ -1,25 +1,36 @@
 {
-    "skill": "git-workflow",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "release-preflight",
-            "type": "enables",
-            "strength": 0.9
-        },
-        {
-            "target": "release-management.instructions.md",
-            "type": "supports",
-            "strength": 0.85
-        }
-    ],
-    "activationBoost": [
-        "commit",
-        "git",
-        "branch",
-        "merge",
-        "recovery",
-        "undo",
-        "reset"
-    ]
+  "skill": "git-workflow",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": "release-preflight",
+      "type": "enables",
+      "strength": 0.9
+    },
+    {
+      "target": "release-management.instructions.md",
+      "type": "supports",
+      "strength": 0.85
+    }
+  ],
+  "activationBoost": [
+    "commit",
+    "git",
+    "branch",
+    "merge",
+    "recovery",
+    "undo",
+    "reset"
+  ],
+  "triggers": [
+    "git",
+    "branch",
+    "merge",
+    "rebase",
+    "commit",
+    "pull request",
+    "PR",
+    "cherry-pick",
+    "conflict"
+  ]
 }

@@ -73,7 +73,7 @@ Alex responds with personality, context awareness, and access to all cognitive t
 | `/status` | Check architecture health | `@alex /status` |
 | `/knowledge [query]` | Search global knowledge | `@alex /knowledge error handling` |
 | `/saveinsight` | Save a learning | `@alex /saveinsight React useEffect cleanup` |
-| `/promote` | Promote local knowledge to global | `@alex /promote DK-REACT-PATTERNS.md` |
+| `/promote` | Promote local knowledge to global | `@alex /promote .github/skills/react/SKILL.md` |
 | `/knowledgestatus` | View global knowledge stats | `@alex /knowledgestatus` |
 | `/sync` | Sync with cloud (manual) | `@alex /sync` |
 | `/push` | Push to cloud | `@alex /push` |
@@ -186,7 +186,7 @@ graph LR
 | `alex_memory_search` | Search local memory with auto-fallback to global |
 | `alex_global_knowledge_search` | Search cross-project knowledge base |
 | `alex_save_insight` | Save valuable learning (auto-syncs) |
-| `alex_promote_knowledge` | Promote local DK to global (auto-syncs) |
+| `alex_promote_knowledge` | Promote local skill to global (auto-syncs) |
 | `alex_architecture_status` | Check if Alex is installed and healthy |
 | `alex_global_knowledge_status` | View global knowledge statistics |
 | `alex_synapse_health` | Validate synaptic connections |
@@ -256,10 +256,10 @@ Run dream protocol weekly:
 
 ### 4. Promote Reusable Knowledge
 
-When domain knowledge applies to other projects:
+When skill knowledge applies to other projects:
 
-```
-@alex /promote .github/domain-knowledge/DK-API-PATTERNS.md
+```text
+@alex /promote .github/skills/api-patterns/SKILL.md
 ```
 
 ---

@@ -73,7 +73,7 @@ Proposed version: X.Y.Z
 **Changelog Classification Rules:**
 - New `.instructions.md` file → "Added" + "New procedural memory for X"
 - New `.prompt.md` file → "Added" + "New episodic workflow for X"
-- New `DK-*.md` file → "Added" + "New domain knowledge for X"
+- New skill folder → "Added" + "New skill for X"
 - Modified existing file → "Changed" + describe the modification
 - Deleted file → "Removed" + note what was removed
 - Fix in code → "Fixed" + describe what was corrected

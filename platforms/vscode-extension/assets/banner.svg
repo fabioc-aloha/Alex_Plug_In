@@ -130,7 +130,7 @@
   </g>
   
   <!-- Central brain/memory icon -->
-  <g transform="translate(640, 200)">
+  <g transform="translate(640, 170)">
     <!-- Outer ring -->
     <circle cx="0" cy="0" r="60" fill="none" stroke="#007ACC" stroke-width="2" opacity="0.3"/>
     <circle cx="0" cy="0" r="80" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.2"/>
@@ -159,22 +159,22 @@
   </g>
   
   <!-- Main title -->
-  <text x="640" y="340" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
+  <text x="640" y="310" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
     Alex
   </text>
   
   <!-- Subtitle -->
-  <text x="640" y="400" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
+  <text x="640" y="370" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
     Cognitive Architecture
   </text>
   
   <!-- Tagline -->
-  <text x="640" y="460" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="20" font-weight="300" fill="#94a3b8" letter-spacing="2">
-    YOUR AI DEVELOPMENT LEAD
+  <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94a3b8" letter-spacing="6">
+    CODE. WRITE. RESEARCH.
   </text>
   
   <!-- VS Code badge -->
-  <g transform="translate(640, 520)">
+  <g transform="translate(640, 470)">
     <rect x="-80" y="-18" width="160" height="36" rx="18" fill="#007ACC" opacity="0.2"/>
     <rect x="-80" y="-18" width="160" height="36" rx="18" fill="none" stroke="#007ACC" stroke-width="1.5" opacity="0.6"/>
     <text x="0" y="6" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#007ACC">
@@ -182,9 +182,61 @@
     </text>
   </g>
   
+  <!-- Use Case Badges -->
+  <g transform="translate(640, 580)">
+    <!-- Code icon + label -->
+    <g transform="translate(-480, 0)">
+      <rect x="-45" y="-16" width="90" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-20" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">💻</text>
+      <text x="15" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Code</text>
+    </g>
+    
+    <!-- Research icon + label -->
+    <g transform="translate(-320, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🔬</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Research</text>
+    </g>
+    
+    <!-- Writing icon + label -->
+    <g transform="translate(-160, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">✍️</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Writing</text>
+    </g>
+    
+    <!-- Academic icon + label -->
+    <g transform="translate(0, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🎓</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Academic</text>
+    </g>
+    
+    <!-- Projects icon + label -->
+    <g transform="translate(160, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">📊</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Projects</text>
+    </g>
+    
+    <!-- Business icon + label -->
+    <g transform="translate(320, 0)">
+      <rect x="-55" y="-16" width="110" height="32" rx="16" fill="#4CAF50" opacity="0.15"/>
+      <text x="-28" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">📋</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Business</text>
+    </g>
+    
+    <!-- Creative icon + label -->
+    <g transform="translate(480, 0)">
+      <rect x="-50" y="-16" width="100" height="32" rx="16" fill="#007ACC" opacity="0.15"/>
+      <text x="-23" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI Emoji, Apple Color Emoji" font-size="14">🎭</text>
+      <text x="12" y="1" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">Creative</text>
+    </g>
+  </g>
+  
   <!-- Decorative lines -->
-  <line x1="440" y1="430" x2="540" y2="430" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
-  <line x1="740" y1="430" x2="840" y2="430" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  <line x1="440" y1="395" x2="540" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
+  <line x1="740" y1="395" x2="840" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
   
   <!-- Corner accents -->
   <g stroke="#007ACC" stroke-width="2" opacity="0.4" fill="none">

@@ -5,7 +5,7 @@ Expert in domain-agnostic knowledge acquisition through conversational learning.
 ## Capabilities
 
 - Guide conversational knowledge acquisition
-- Create domain knowledge files (DK-*.md)
+- Create skill files (`skills/*/SKILL.md`)
 - Build expertise through progressive questioning
 - Connect new learning to existing knowledge
 - Identify knowledge gaps and fill them

@@ -24,7 +24,7 @@ ls -la .github/copilot-instructions.md          # ✅ Main cognitive config
 ls -la .github/instructions/                    # ✅ Procedural memory
 ls -la .github/prompts/                         # ✅ Episodic workflows
 ls -la .github/episodic/                        # ✅ Meditation sessions
-ls -la .github/domain-knowledge/                # ✅ Knowledge files
+ls -la .github/skills/                          # ✅ Domain knowledge skills
 ls -la .github/config/                          # ✅ Configuration
 ```
 
@@ -37,7 +37,7 @@ your-project/
     ├── instructions/ (.instructions.md files)
     ├── prompts/ (.prompt.md files)
     ├── episodic/ (meditation sessions)
-    ├── domain-knowledge/ (DK-*.md files)
+    ├── skills/ (skill folders with SKILL.md + synapses.json)
     └── config/ (cognitive-config.json)
 ```
 
@@ -45,10 +45,10 @@ your-project/
 ```bash
 # Verify key files are not corrupted
 head -5 .github/copilot-instructions.md | grep "Alex Cognitive Architecture"
-ls .github/instructions/*.instructions.md | wc -l  # Should be 8+
+ls .github/instructions/*.instructions.md | wc -l  # Should be 15+
 ls .github/prompts/*.prompt.md | wc -l             # Should be 7+
-ls .github/domain-knowledge/*.md | wc -l           # Should be 12+
-ls .github/episodic/*.md | wc -l                   # Meditation sessions
+ls .github/skills/*/SKILL.md | wc -l               # Should be 40+
+ls .github/episodic/*.md | wc -l                   # Meditation sessions (initially empty)
 ```
 
 ## ✅ Post-Integration Testing

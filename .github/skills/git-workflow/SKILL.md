@@ -39,7 +39,7 @@ type(scope): brief description
 ```text
 feat(skills): add git-workflow skill
 fix(sync): resolve race condition in background sync
-refactor(dk): consolidate domain-knowledge files
+refactor(skills): migrate domain-knowledge to skills architecture
 docs(readme): update installation instructions
 chore(deps): bump typescript to 5.3
 ```

@@ -1,0 +1,55 @@
+{
+  "skill": "creative-writing",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Publishing creative work and manuscript preparation",
+      "type": "extends",
+      "strength": 0.85,
+      "target": "writing-publication"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Research for historical fiction and non-fiction elements",
+      "type": "complements",
+      "strength": 0.65,
+      "target": "academic-research"
+    },
+    {
+      "reason": "Synthesizing story elements and world-building",
+      "type": "uses",
+      "strength": 0.65,
+      "target": "knowledge-synthesis"
+    },
+    {
+      "reason": "Reader experience and information pacing",
+      "type": "applies",
+      "strength": 0.65,
+      "target": "cognitive-load"
+    },
+    {
+      "reason": "Creative reflection and inspiration cultivation",
+      "type": "supports",
+      "strength": 0.4,
+      "target": "meditation-facilitation"
+    },
+    {
+      "reason": "Balancing AI assistance with authentic creative voice",
+      "type": "applies",
+      "strength": 0.4,
+      "target": "appropriate-reliance"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "story",
+    "narrative",
+    "character",
+    "plot",
+    "fiction",
+    "creative",
+    "prose",
+    "dialogue",
+    "worldbuilding"
+  ]
+}

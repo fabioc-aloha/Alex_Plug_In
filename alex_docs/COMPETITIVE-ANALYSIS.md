@@ -409,7 +409,7 @@ Amazon has announced **Alexa+** with LLM capabilities and "Remarkable Alexa" for
 │     ─────────────────────                                                               │
 │     • Procedural memory (.instructions.md) - repeatable processes                       │
 │     • Episodic memory (.prompt.md) - complex workflows                                  │
-│     • Domain knowledge (DK-*.md) - specialized expertise                                │
+│     • Skills (skills/*/SKILL.md) - specialized expertise                                │
 │     • Synapses - connection mapping between concepts                                    │
 │     • Global knowledge - cross-project learnings                                        │
 │                                                                                         │

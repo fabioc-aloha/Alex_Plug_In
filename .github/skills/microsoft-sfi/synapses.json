@@ -22,7 +22,7 @@
             "reason": "Security incidents are incidents"
         },
         {
-            "target": "dependency-management.instructions",
+            "target": "dependency-management.instructions.md",
             "type": "implements",
             "strength": 0.9,
             "reason": "Dependency security practices"
@@ -40,3 +40,4 @@
         "SFI"
     ]
 }
+

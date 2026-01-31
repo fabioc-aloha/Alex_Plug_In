@@ -542,7 +542,7 @@ Use #tool:githubRepo to search the repository for relevant code.
 | Workflow definitions | Handoffs | `.prompt.md` |
 | Tool configuration | `tools` frontmatter | MCP + extension tools |
 | Model selection | `model` frontmatter | User dropdown |
-| Domain knowledge | N/A | `DK-*.md` files |
+| Domain knowledge | N/A | `skills/*/SKILL.md` |
 | Cross-session memory | N/A | Global knowledge base |
 | Synapse connections | N/A | Embedded synapses |
 

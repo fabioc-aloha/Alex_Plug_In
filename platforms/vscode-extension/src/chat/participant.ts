@@ -569,7 +569,8 @@ async function handleStatusCommand(
 | Working Memory | ✅ 7-rule capacity (4 core + 3 domain) |
 | Procedural Memory | ✅ .github/instructions/*.md files active |
 | Episodic Memory | ✅ .github/prompts/*.md + .github/episodic/*.md files active |
-| Domain Knowledge | ✅ .github/domain-knowledge/DK-*.md files available |
+| Skills | ✅ .github/skills/*/SKILL.md - Portable domain expertise |
+| Domain Knowledge | ✅ .github/domain-knowledge/DK-*.md (legacy - migrated to skills) |
 | Synaptic Network | ✅ Embedded connections operational |
 
 ### Meta-Cognitive Rules (Always Active)
@@ -1203,13 +1204,14 @@ async function handlePromoteCommand(
     
     stream.markdown(`## ⬆️ Promote Knowledge to Global
 
-Promote a project-local knowledge file (DK-*.md) to make it available across all your projects.
+Promote a project-local knowledge file (DK-*.md or skill) to make it available across all your projects.
 
 ### Usage
-\`@alex /promote <path to DK file>\`
+\`@alex /promote <path to knowledge file>\`
 
-### Example
-\`@alex /promote .github/domain-knowledge/DK-ERROR-HANDLING.md\`
+### Examples
+\`@alex /promote .github/skills/my-framework/SKILL.md\`
+\`@alex /promote .github/domain-knowledge/DK-ERROR-HANDLING.md\` (legacy)
 
 ### What Happens
 1. The file is copied to your global knowledge base
@@ -1220,20 +1222,35 @@ Promote a project-local knowledge file (DK-*.md) to make it available across all
 ### Current Project's Knowledge Files
 `);
 
-    // List available DK files
+    // List available knowledge files (skills and legacy DK)
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (workspaceFolders) {
+        // Check for skills first
+        const skillPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/SKILL.md');
+        const skillFiles = await vscode.workspace.findFiles(skillPattern);
+        
+        // Also check for legacy DK files
         const dkPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/DK-*.md');
         const dkFiles = await vscode.workspace.findFiles(dkPattern);
         
+        if (skillFiles.length > 0) {
+            stream.markdown(`**Skills** (${skillFiles.length}):\n`);
+            for (const file of skillFiles) {
+                const relativePath = vscode.workspace.asRelativePath(file);
+                stream.markdown(`- \`${relativePath}\`\n`);
+            }
+        }
+        
         if (dkFiles.length > 0) {
-            stream.markdown(`Found ${dkFiles.length} knowledge files:\n`);
+            stream.markdown(`\n**Legacy DK files** (${dkFiles.length}):\n`);
             for (const file of dkFiles) {
                 const relativePath = vscode.workspace.asRelativePath(file);
                 stream.markdown(`- \`${relativePath}\`\n`);
             }
-        } else {
-            stream.markdown(`*No DK-*.md files found in this project.*\n`);
+        }
+        
+        if (skillFiles.length === 0 && dkFiles.length === 0) {
+            stream.markdown(`*No knowledge files found in this project.*\n`);
         }
     }
 

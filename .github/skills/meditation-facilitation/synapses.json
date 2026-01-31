@@ -3,7 +3,7 @@
     "inheritance": "master-only",
     "connections": [
         {
-            "target": "unified-meditation-protocols.prompt",
+            "target": "unified-meditation-protocols.prompt.md",
             "type": "implements",
             "strength": 0.9,
             "reason": "This skill guides meditation prompts"
@@ -35,3 +35,4 @@
         "session summary"
     ]
 }
+

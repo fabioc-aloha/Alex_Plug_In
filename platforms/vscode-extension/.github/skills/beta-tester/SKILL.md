@@ -36,7 +36,7 @@ Run comprehensive checks on Alex installation:
 - [ ] `.github/instructions/` folder with .instructions.md files
 - [ ] `.github/prompts/` folder with .prompt.md files
 - [ ] `.github/skills/` folder with skill directories
-- [ ] `.github/domain-knowledge/` folder (may be empty initially)
+- [ ] Each skill has `SKILL.md` and `synapses.json`
 - [ ] `.github/config/` folder with settings files
 
 ### Skill Validation
@@ -184,7 +184,7 @@ Systematic testing for beta evaluation:
 
 - **GitHub Issues**: [Alex_Plug_In Issues](https://github.com/fabioc-aloha/Alex_Plug_In/issues)
 - **Discussions**: For questions and suggestions
-- **Direct to Fabio**: Tag in issue for urgent matters
+- **Direct Contact**: Tag maintainer in issue for urgent matters
 
 ## Known Limitations (Beta)
 
@@ -192,7 +192,7 @@ Document known issues so testers don't re-report:
 
 1. **Skills not synced to extension** - Extension package may have fewer skills than Master Alex
 2. **Global knowledge sync** - Cloud sync requires manual setup
-3. **M365 heir** - Not yet aligned with v3.6 architecture
+3. **M365 heir** - Aligned with v3.7.3 architecture (system prompt updated)
 4. **Network diagram** - May not render in all markdown viewers
 
 ## Synapses

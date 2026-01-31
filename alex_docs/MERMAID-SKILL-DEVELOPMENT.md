@@ -171,7 +171,7 @@ Get-ChildItem -Recurse -Filter "*.md" |
 ```
 
 Files updated:
-- `.github/domain-knowledge/DK-ADVANCED-DIAGRAMMING.md` (6 diagrams)
+- `.github/skills/markdown-mermaid/SKILL.md` (6 diagrams)
 - `article/versions/01-HCI-CHI.md`
 - `article/versions/08-ARCHITECTURE-IEEE-SOFTWARE.md`
 - `article/versions/10-AGENTS-NEURIPS-WORKSHOP.md`

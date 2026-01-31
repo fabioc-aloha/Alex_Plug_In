@@ -332,7 +332,7 @@ Auto-insight detection captures knowledge you might forget to save:
 
 ### What It Does
 
-Automatically evaluates and promotes valuable domain knowledge (DK-*.md files) to the global knowledge base during meditation and self-actualization sessions.
+Automatically evaluates and promotes valuable skill knowledge (SKILL.md files) to the global knowledge base during meditation and self-actualization sessions.
 
 ### When It Runs
 
@@ -350,7 +350,7 @@ Automatically evaluates and promotes valuable domain knowledge (DK-*.md files) t
 flowchart TD
     START[Meditation/Self-Actualization]
 
-    SCAN[Scan .github/domain-knowledge/<br/>for DK-*.md files]
+    SCAN[Scan .github/skills/<br/>for SKILL.md files]
     EVAL[Evaluate each file]
 
     subgraph SCORING["📊 Scoring Criteria (min 5 points)"]
@@ -414,9 +414,9 @@ Files need a minimum score of **5 points** to be promoted:
 
 Some files are intentionally excluded from auto-promotion:
 
-- `DK-SKILL-WISHLIST` - Personal growth tracking
-- `DK-GENERIC-FRAMEWORK` - Template file
-- `VERSION-NAMING-CONVENTION` - Project-specific naming
+- Personal growth tracking skills
+- Template files
+- Project-specific naming conventions
 
 ### Session Report
 
@@ -427,7 +427,7 @@ After each meditation, the report shows:
 
 | Metric | Value |
 |--------|-------|
-| DK Files Evaluated | 11 |
+| Skills Evaluated | 46 |
 | Auto-Promoted | 3 |
 | Updated | 2 |
 | Skipped (needs improvement) | 4 |

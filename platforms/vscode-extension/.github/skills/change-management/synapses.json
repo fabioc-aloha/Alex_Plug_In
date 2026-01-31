@@ -1,0 +1,59 @@
+{
+  "skill": "change-management",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Change management within project delivery",
+      "type": "complements",
+      "strength": 0.85,
+      "target": "project-management"
+    },
+    {
+      "reason": "Requirements include change impact assessment",
+      "type": "informs",
+      "strength": 0.85,
+      "target": "business-analysis"
+    },
+    {
+      "reason": "Analyzing resistance causes and stakeholder concerns",
+      "type": "uses",
+      "strength": 0.65,
+      "target": "root-cause-analysis"
+    },
+    {
+      "reason": "Stakeholder feedback synthesis and communication",
+      "type": "uses",
+      "strength": 0.65,
+      "target": "knowledge-synthesis"
+    },
+    {
+      "reason": "Trust building in change leadership",
+      "type": "applies",
+      "strength": 0.65,
+      "target": "appropriate-reliance"
+    },
+    {
+      "reason": "Change capacity limits and saturation",
+      "type": "considers",
+      "strength": 0.4,
+      "target": "cognitive-load"
+    },
+    {
+      "reason": "Reflection on change progress and lessons",
+      "type": "supports",
+      "strength": 0.4,
+      "target": "meditation-facilitation"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "change",
+    "adoption",
+    "resistance",
+    "stakeholder buy-in",
+    "communication plan",
+    "training",
+    "transition",
+    "rollout"
+  ]
+}

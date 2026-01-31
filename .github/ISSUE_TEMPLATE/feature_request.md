@@ -22,7 +22,7 @@ A detailed description of how you envision this feature working.
 - [ ] Synaptic Network
 - [ ] Procedural Memory (.instructions.md)
 - [ ] Episodic Memory (.prompt.md)
-- [ ] Domain Knowledge (DK-*.md)
+- [ ] Skills (skills/*/SKILL.md)
 - [ ] Dream Automation (scripts)
 - [ ] Meditation Protocols
 - [ ] Bootstrap Learning

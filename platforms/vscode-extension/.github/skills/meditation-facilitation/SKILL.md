@@ -33,7 +33,6 @@ Interactive knowledge consolidation (vs automated "dream" processing).
 | Repeatable process | `.instructions.md` |
 | Workflow/template | `.prompt.md` |
 | Domain knowledge | `skills/*/SKILL.md` |
-| Project-specific | `DK-*.md` |
 | Cross-project | Global knowledge |
 
 ## Self-Actualization Protocol

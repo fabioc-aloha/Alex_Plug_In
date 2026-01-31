@@ -98,7 +98,8 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
             '.github/instructions/*.md',
             '.github/prompts/*.md',
             '.github/episodic/*.md',
-            '.github/domain-knowledge/*.md'
+            '.github/skills/*/SKILL.md',
+            '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
         ];
 
         let allFiles: string[] = [];

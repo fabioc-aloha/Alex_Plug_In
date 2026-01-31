@@ -16,7 +16,7 @@
 - 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
 - 🌙 **Self-Maintains** - Validates and repairs its neural network through dream protocols
 - 🧘 **Self-Actualizes** - Automatically assesses health on greetings and meditation
-- ☁️ **Guides Development** - Provides Azure & M365 best practices via MCP tools
+- 🌐 **Works Across Domains** - Development, writing, research, management, and more
 
 ---
 

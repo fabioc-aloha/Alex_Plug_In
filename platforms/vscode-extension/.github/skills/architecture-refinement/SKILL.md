@@ -42,11 +42,11 @@ Before session ends, ask:
 | Important concepts for user | `alex_docs/*.md` | Human |
 | Process improvement | `.github/instructions/*.instructions.md` | Alex (AI) |
 | Complex workflow | `.github/prompts/*.prompt.md` | Alex (AI) |
-| Domain expertise | `.github/domain-knowledge/DK-*.md` | Alex (AI) |
+| Domain expertise | `.github/skills/{name}/SKILL.md` | Alex (AI) |
 
 **Key Distinction**:
 
-- `alex_docs/` = For Fabio's benefit (human-readable explanations)
+- `alex_docs/` = For the user's benefit (human-readable explanations)
 - `.github/skills/` = For Alex's benefit (operational reference during work)
 
 ### Consolidation Decision Tree
