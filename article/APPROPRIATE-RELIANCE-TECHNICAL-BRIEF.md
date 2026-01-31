@@ -138,14 +138,10 @@ The appropriate reliance mechanisms are encoded at multiple levels:
 
 **File**: `.github/skills/appropriate-reliance/SKILL.md`
 
-```markdown
-## The CAIR/CSR Framework
-
 | Concept | Definition | Implementation |
 |---------|------------|----------------|
 | **CAIR** (Correct AI-Reliance) | Users rely on AI when AI is right | Confidence calibration enables trust; source grounding signals reliability |
 | **CSR** (Correct Self-Reliance) | Users rely on themselves when AI is wrong | Human judgment flagging, mutual challenge, uncertainty language |
-```
 
 **Behavioral Manifestations**:
 
