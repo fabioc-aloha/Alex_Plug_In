@@ -511,6 +511,8 @@ Located in: `article/appropriate-reliance/`
 
 ## 9. References
 
+(*) = Paper includes Microsoft employee(s) as author(s)
+
 Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 5(CSCW1), 1-21.
 
 Dell'Acqua, F., McFowland, E., Mollick, E. R., Lifshitz-Assaf, H., Kellogg, K., Rajendran, S., ... & Lakhani, K. R. (2023). Navigating the jagged technological frontier: Field experimental evidence of the effects of AI on knowledge worker productivity and quality. *Harvard Business School Technology & Operations Mgt. Unit Working Paper*, (24-013).
@@ -529,7 +531,7 @@ Lin, S., Hilton, J., & Evans, O. (2022). Teaching models to express their uncert
 
 Parasuraman, R., & Riley, V. (1997). Humans and automation: Use, misuse, disuse, abuse. *Human Factors*, 39(2), 230-253.
 
-Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). *GenAI Appropriate Reliance*. Microsoft AETHER Research Synthesis.
+Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). *GenAI Appropriate Reliance*. Microsoft AETHER Research Synthesis. (*)
 
 Saunders, W., Yeh, C., Wu, J., Bills, S., Ouyang, L., Ward, J., & Leike, J. (2022). Self-critiquing models for assisting human evaluators. *arXiv preprint arXiv:2206.05802*.
 
@@ -537,15 +539,15 @@ Schemmer, M., Kuehl, N., Benz, C., Bartos, A., Satzger, G., & Kühl, N. (2023). 
 
 Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., ... & Perez, E. (2023). Towards understanding sycophancy in language models. *arXiv preprint arXiv:2310.13548*.
 
-Si, C., Gan, Z., Yang, Z., Wang, S., Wang, J., Boyd-Graber, J., & Wang, L. (2023). Prompting GPT-3 to be reliable. *Proceedings of the International Conference on Learning Representations*.
+Si, C., Gan, Z., Yang, Z., Wang, S., Wang, J., Boyd-Graber, J., & Wang, L. (2023). Prompting GPT-3 to be reliable. *Proceedings of the International Conference on Learning Representations*. (*)
 
-Spatharioti, S. E., Rothschild, D. M., Goldstein, D. G., & Hofman, J. M. (2023). Comparing traditional and LLM-based search for consumer choice: A randomized experiment. *arXiv preprint arXiv:2307.03744*.
+Spatharioti, S. E., Rothschild, D. M., Goldstein, D. G., & Hofman, J. M. (2023). Comparing traditional and LLM-based search for consumer choice: A randomized experiment. *arXiv preprint arXiv:2307.03744*. (*)
 
 Steyvers, M., Tejeda, H., Kerrigan, G., & Smyth, P. (2024). Calibration of AI predictions and explanations from a cognitive science perspective. *Computational Brain & Behavior*, 7, 1-17.
 
 Vasconcelos, H., Jörke, M., Grunde-McLaughlin, M., Gerstenberg, T., Bernstein, M. S., & Krishna, R. (2023). Explanations can reduce overreliance on AI systems during decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 7(CSCW1), 1-38.
 
-Wang, X., Yin, M., & Vaughan, J. W. (2025). Effects of training on appropriate reliance on AI decision aids. *Proceedings of the CHI Conference on Human Factors in Computing Systems*.
+Wang, X., Yin, M., & Vaughan, J. W. (2025). Effects of training on appropriate reliance on AI decision aids. *Proceedings of the CHI Conference on Human Factors in Computing Systems*. (*)
 
 ---
 
