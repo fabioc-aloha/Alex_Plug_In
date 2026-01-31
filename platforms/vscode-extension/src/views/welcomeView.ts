@@ -921,6 +921,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
+                    <div class="feature-category">
+                        <div class="feature-category-title">📖 Documentation Guides</div>
+                        <ul class="feature-list">
+                            <li><strong>Work-Life Balance</strong> - Focus sessions, goals, streaks, and sustainable productivity</li>
+                            <li><strong>M365 Export</strong> - Bridge your knowledge to Microsoft 365 Copilot</li>
+                            <li><strong>Global Knowledge</strong> - Cross-project patterns and insights</li>
+                            <li><strong>User Manual</strong> - Complete feature reference and tutorials</li>
+                        </ul>
+                    </div>
+                    
                     <div class="feature-links">
                         <button class="feature-link-btn" onclick="cmd('openDocs')">📚 Full Documentation</button>
                         <button class="feature-link-btn" onclick="window.open('https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture')">🏪 Marketplace</button>
