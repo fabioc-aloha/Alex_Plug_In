@@ -228,6 +228,21 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 
 ---
 
+## 🌐 Also Available
+
+**Alex for Microsoft 365 Copilot** — The same cognitive learning partner, now in M365.
+
+- 📁 Persistent memory in YOUR OneDrive
+- 📧 Email, Teams, Calendar, People integration
+- 🍅 Focus sessions and goal tracking
+- 🔍 Web search and image generation
+
+Available in the Teams Developer Portal for sideloading.
+
+[Learn more →](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
