@@ -50,18 +50,25 @@
 - [ ] Verify personality consistency between platforms
 - [ ] Create skill for M365 identity alignment (instead of DK file)
 
-### Phase 4: Rebuild Trust (Days 8-10)
-- [ ] Run all existing tests
-- [ ] Manual test of all 16 commands
-- [ ] Test `Alex: Initialize` on fresh workspace
+### Phase 4: Rebuild Trust (In Progress)
+
+- [x] Run all existing tests (TypeScript compiles cleanly)
+- [ ] Manual test of all 29 commands (updated from 16)
+- [ ] Test `Alex: Initialize` on fresh workspace (sandbox)
 - [ ] Test `Alex: Upgrade` from v3.4.x
 - [ ] Test `Alex: Dream` performance
 - [ ] Verify status bar and welcome view work
 - [ ] Update README and documentation
 
-### Phase 5: Release v3.6.0 Dawn
-- [ ] Single source of truth established
-- [ ] Extension builds cleanly from root
+**Discovered during audit:**
+- Commands: 29 (not 16 as originally documented)
+- MCP Tools: 11
+- Inheritable skills: 38 (synced to heir via build script)
+
+### Phase 5: Release v3.8.0 Dawn
+
+- [x] Single source of truth established (root .github/)
+- [x] Extension builds cleanly from root (build-extension-package.ps1)
 - [ ] All existing features work
 - [ ] No regression in functionality
 - [ ] At least 3 successful test installs
