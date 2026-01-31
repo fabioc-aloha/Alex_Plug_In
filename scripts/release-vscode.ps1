@@ -54,7 +54,13 @@ try {
         throw "VSCE_PAT not set. Set environment variable or add to platforms/vscode-extension/.env"
     }
 
-    # 1. Run preflight (from extension folder)
+    # 1a. Sync Master Alex to extension (ensures .github/ is fresh)
+    Write-Host "`n🔄 Syncing Master Alex to extension package..." -ForegroundColor Yellow
+    & "$scriptDir\build-extension-package.ps1"
+    if ($LASTEXITCODE -ne 0) { throw "Build/sync failed!" }
+    Write-Host "   ✅ Extension .github/ synced from Master Alex" -ForegroundColor Green
+
+    # 1b. Run preflight (from extension folder)
     Write-Host "`n📋 Gate 1-4: Running preflight checks..." -ForegroundColor Yellow
     & "$scriptDir\release-preflight.ps1" -Package -SkipTests
     if ($LASTEXITCODE -ne 0) { throw "Preflight failed!" }

@@ -122,6 +122,25 @@ if (Test-Path $heirInstructions) {
     }
 }
 
+# Check BUILD-MANIFEST.json exists and is recent (indicates build script was run)
+$manifestPath = Join-Path $extensionPath ".github\BUILD-MANIFEST.json"
+if (Test-Path $manifestPath) {
+    $manifest = Get-Content $manifestPath | ConvertFrom-Json
+    $buildTime = [DateTime]::Parse($manifest.buildTimestamp)
+    $hoursSinceBuild = ((Get-Date) - $buildTime).TotalHours
+    Write-Host "   BUILD-MANIFEST.json: $($manifest.buildTimestamp)" -ForegroundColor Gray
+    if ($hoursSinceBuild -gt 24) {
+        Write-Host "   ⚠️ Build manifest is $([math]::Round($hoursSinceBuild)) hours old - consider re-running build-extension-package.ps1" -ForegroundColor Yellow
+    }
+    else {
+        Write-Host "   ✅ Build manifest is recent ($([math]::Round($hoursSinceBuild, 1)) hours ago)" -ForegroundColor Green
+    }
+}
+else {
+    $errors += "BUILD-MANIFEST.json not found. Run build-extension-package.ps1 to generate."
+    Write-Host "   ❌ BUILD-MANIFEST.json missing! Run build-extension-package.ps1" -ForegroundColor Red
+}
+
 # Check ROADMAP-UNIFIED.md version
 $roadmapPath = Join-Path $rootPath "ROADMAP-UNIFIED.md"
 if (Test-Path $roadmapPath) {
