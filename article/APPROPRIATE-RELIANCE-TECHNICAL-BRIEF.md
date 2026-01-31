@@ -157,9 +157,6 @@ The appropriate reliance mechanisms are encoded at multiple levels:
 
 This is our key innovation: recognizing that epistemic constraints should not apply uniformly to creative contributions.
 
-```markdown
-### Epistemic vs. Generative Mode (v4.0)
-
 **Epistemic Mode** — factual claims, apply full calibration:
 - "According to the docs..."
 - "The codebase shows..."
@@ -172,7 +169,6 @@ This is our key innovation: recognizing that epistemic constraints should not ap
 
 **Mode Switching Signal:**
 > "I'm switching to brainstorming mode here — these are ideas to evaluate, not established facts."
-```
 
 **User-Triggered Mode Commands** (VS Code):
 
@@ -203,9 +199,6 @@ Certain decisions **require human judgment** — AI provides information and opt
 
 **Source**: Lin et al. (2022) finding that models can verbalize calibrated uncertainty
 
-```markdown
-### Confidence Ceiling Protocol
-
 For generated content (not direct reads), apply ceiling:
 
 | Source | Max Confidence |
@@ -214,32 +207,22 @@ For generated content (not direct reads), apply ceiling:
 | Code from documented patterns | 90% |
 | Factual claims without source | 70% |
 | Inference or edge cases | 50% |
-```
 
 **Implementation in Protocol Triggers**:
 
-```markdown
-## Epistemic vs. Generative Mode Triggers (v4.0)
-
-### Epistemic Mode Triggers
+**Epistemic Mode Triggers**:
 - "how does X work?", "what is", "is it true that"
 - Documentation/API questions, debugging existing code
 - **Action**: Full calibration protocols
   - Apply confidence ceiling (90% max for non-grounded claims)
   - Use source grounding language
   - Flag uncertainty explicitly
-```
 
 ### 3.6 Creative Latitude Framework
 
 **File**: `.github/skills/appropriate-reliance/SKILL.md`
 
 The framework recognizes that applying epistemic constraints to creativity impoverishes collaboration:
-
-```markdown
-## Creative Latitude Framework (v2.0)
-
-### The Problem
 
 The protocols above address **epistemic claims**. However, AI assistants also engage in **creative activities** where different considerations apply:
 
@@ -249,15 +232,12 @@ The protocols above address **epistemic claims**. However, AI assistants also en
 
 **Applying epistemic constraints to creativity impoverishes collaboration.**
 
-### Two Modes: Epistemic vs. Generative
-
 | Mode | When | Protocols |
 |------|------|-----------|
 | **Epistemic** | Claims about facts, existing code, verifiable info | Full calibration |
 | **Generative** | Novel ideas, creative suggestions, brainstormed approaches | Creative latitude |
 
 **Key insight:** Epistemic uncertainty ("I don't know if this is true") differs from creative contribution ("Here's an idea for us to evaluate together").
-```
 
 ---
 
