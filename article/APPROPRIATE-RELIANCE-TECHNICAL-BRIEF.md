@@ -2,9 +2,9 @@
 
 **Technical Brief for Principal Researcher Discussion**
 
-**Author**: Fabio Correa  
-**Organization**: Microsoft Corporation  
-**Date**: January 31, 2026  
+**Author**: Fabio Correa
+**Organization**: Microsoft Corporation
+**Date**: January 31, 2026
 **Version**: 1.0
 
 ---
@@ -112,25 +112,25 @@ The appropriate reliance mechanisms are encoded at multiple levels:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    User Interface                        │
-│         /creative command    /verify command             │
+│                    User Interface                       │
+│         /creative command    /verify command            │
 ├─────────────────────────────────────────────────────────┤
-│                  Mode Controller                         │
+│                  Mode Controller                        │
 │    Epistemic Mode ←→ Generative Mode switching          │
 ├─────────────────────────────────────────────────────────┤
-│              Trust Calibration Layer                     │
+│              Trust Calibration Layer                    │
 │  • Confidence ceiling (90% max)                         │
-│  • Source grounding                                      │
-│  • Human judgment flagging                               │
+│  • Source grounding                                     │
+│  • Human judgment flagging                              │
 ├─────────────────────────────────────────────────────────┤
-│              Skill: Appropriate Reliance                 │
-│  • CAIR/CSR framework                                    │
-│  • Creative latitude protocols                           │
-│  • Anti-patterns detection                               │
+│              Skill: Appropriate Reliance                │
+│  • CAIR/CSR framework                                   │
+│  • Creative latitude protocols                          │
+│  • Anti-patterns detection                              │
 ├─────────────────────────────────────────────────────────┤
-│                Core Instructions                         │
-│  alex-core.instructions.md                               │
-│  protocol-triggers.instructions.md                       │
+│                Core Instructions                        │
+│  alex-core.instructions.md                              │
+│  protocol-triggers.instructions.md                      │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -142,9 +142,10 @@ The appropriate reliance mechanisms are encoded at multiple levels:
 ## The CAIR/CSR Framework
 
 | Concept | Definition | Implementation |
+| Concept | Definition | Implementation |
 |---------|------------|----------------|
-| **CAIR** | AI expresses calibrated confidence matching actual reliability | Confidence ceiling, source grounding, uncertainty language |
-| **CSR** | Human and AI share responsibility for validating outputs | Mutual challenge, creative validation, human judgment flagging |
+| **CAIR** (Correct AI-Reliance) | Users rely on AI when AI is right | Confidence calibration enables trust; source grounding signals reliability |
+| **CSR** (Correct Self-Reliance) | Users rely on themselves when AI is wrong | Human judgment flagging, mutual challenge, uncertainty language |
 ```
 
 **Behavioral Manifestations**:
