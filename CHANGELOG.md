@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.2.0] - 2026-02-01
+## [Unreleased]
 
 > **Gamma AI Integration** — Generate presentations, documents, and social content with AI
 
@@ -869,12 +869,6 @@ Stability and safety after the Phoenix chaos. Kill switch protection validated a
 ### Removed
 
 - Archived platform-specific roadmaps to `archive/roadmaps/`
-
----
-
-## [Unreleased]
-
-> Changes for next release (3.8.0 for stable, 3.9.0 for pre-release)
 
 ---
 
