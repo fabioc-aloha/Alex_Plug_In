@@ -529,11 +529,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.7.0
-      
+
       - name: Terraform Init
         run: terraform init
         working-directory: infrastructure/environments/prod
@@ -542,11 +542,11 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_USE_OIDC: true
-      
+
       - name: Terraform Plan
         run: terraform plan -out=tfplan
         working-directory: infrastructure/environments/prod
-      
+
       - name: Upload Plan
         uses: actions/upload-artifact@v4
         with:
@@ -560,15 +560,15 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: hashicorp/setup-terraform@v3
-      
+
       - name: Download Plan
         uses: actions/download-artifact@v4
         with:
           name: tfplan
           path: infrastructure/environments/prod
-      
+
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
         working-directory: infrastructure/environments/prod
@@ -597,7 +597,7 @@ jobs:
 # Terraform
 resource "azurerm_application_insights" "main" {
   count = var.enable_monitoring ? 1 : 0
-  
+
   name                = "appi-${var.project}-${var.environment}"
   resource_group_name = azurerm_resource_group.main.name
   location            = var.location

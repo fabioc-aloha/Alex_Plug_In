@@ -259,7 +259,7 @@ const cacheKey = `${resource}:${id}:${version}`;
 async function getUser(id: string) {
   const cached = await cache.get(`user:${id}`);
   if (cached) return cached;
-  
+
   const user = await db.users.findById(id);
   await cache.set(`user:${id}`, user, { ttl: 300 });
   return user;
@@ -310,7 +310,7 @@ async function updateUser(id: string, data: UserUpdate) {
 class TokenBucket {
   private tokens: number;
   private lastRefill: number;
-  
+
   constructor(
     private capacity: number,      // Max burst size
     private refillRate: number,    // Tokens per second
@@ -318,7 +318,7 @@ class TokenBucket {
     this.tokens = capacity;
     this.lastRefill = Date.now();
   }
-  
+
   consume(tokens: number = 1): boolean {
     this.refill();
     if (this.tokens >= tokens) {
@@ -327,7 +327,7 @@ class TokenBucket {
     }
     return false;
   }
-  
+
   private refill() {
     const now = Date.now();
     const elapsed = (now - this.lastRefill) / 1000;
@@ -386,17 +386,17 @@ const combinedKey = `ratelimit:${userId}:${method}:${path}`;
 ```typescript
 async function apiCallWithRetry(request: Request): Promise<Response> {
   const response = await fetch(request);
-  
+
   if (response.status === 429) {
     const retryAfter = parseInt(
       response.headers.get('Retry-After') || '60'
     );
-    
+
     console.log(`Rate limited. Retrying in ${retryAfter}s`);
     await sleep(retryAfter * 1000);
     return apiCallWithRetry(request);
   }
-  
+
   return response;
 }
 
@@ -404,15 +404,15 @@ async function apiCallWithRetry(request: Request): Promise<Response> {
 class RateLimitedClient {
   private remaining: number = Infinity;
   private resetTime: number = 0;
-  
+
   async request(url: string): Promise<Response> {
     // Wait if we know we're out of quota
     if (this.remaining <= 0 && Date.now() < this.resetTime) {
       await sleep(this.resetTime - Date.now());
     }
-    
+
     const response = await fetch(url);
-    
+
     // Update tracking from headers
     this.remaining = parseInt(
       response.headers.get('X-RateLimit-Remaining') || '100'
@@ -420,7 +420,7 @@ class RateLimitedClient {
     this.resetTime = parseInt(
       response.headers.get('X-RateLimit-Reset') || '0'
     ) * 1000;
-    
+
     return response;
   }
 }

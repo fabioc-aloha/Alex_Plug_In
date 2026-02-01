@@ -148,14 +148,14 @@ Combine semantic (vector) with keyword (BM25) search:
 def hybrid_search(query, k=5, alpha=0.5):
     semantic_results = vector_search(query, k=k*2)
     keyword_results = bm25_search(query, k=k*2)
-    
+
     # Fuse rankings
     scores = {}
     for rank, doc in enumerate(semantic_results):
         scores[doc.id] = scores.get(doc.id, 0) + alpha * (1 / (rank + 60))
     for rank, doc in enumerate(keyword_results):
         scores[doc.id] = scores.get(doc.id, 0) + (1-alpha) * (1 / (rank + 60))
-    
+
     return sorted(scores.items(), key=lambda x: -x[1])[:k]
 ```
 
@@ -199,7 +199,7 @@ def multi_query_search(query):
 ### Basic RAG Prompt
 
 ```
-Use the following context to answer the question. If the context doesn't 
+Use the following context to answer the question. If the context doesn't
 contain the answer, say "I don't have information about that."
 
 Context:

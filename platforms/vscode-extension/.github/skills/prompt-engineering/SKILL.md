@@ -70,7 +70,7 @@ Ask the model to think step-by-step:
 ```
 Solve this problem. Think through it step by step before giving your answer.
 
-A store has 45 apples. They sell 12 in the morning and receive a shipment of 30. 
+A store has 45 apples. They sell 12 in the morning and receive a shipment of 30.
 How many apples do they have?
 
 Let's think step by step:
@@ -88,7 +88,7 @@ Answer: 63 apples
 Generate multiple reasoning paths, take majority vote:
 
 ```
-Solve this problem 3 different ways, then give your final answer based on 
+Solve this problem 3 different ways, then give your final answer based on
 which approach gives the most consistent result.
 ```
 
@@ -117,7 +117,7 @@ Answer: The population of Paris, the capital of France, is about 2.1 million.
 ### Role Definition
 
 ```
-You are a senior software architect with 15 years of experience in distributed 
+You are a senior software architect with 15 years of experience in distributed
 systems. You prioritize scalability, maintainability, and cost-effectiveness.
 ```
 
@@ -146,7 +146,7 @@ Respond in this exact JSON format:
 ### Persona + Audience
 
 ```
-You are explaining to a junior developer who knows Python but is new to 
+You are explaining to a junior developer who knows Python but is new to
 async programming. Use analogies and avoid jargon.
 ```
 
@@ -274,15 +274,15 @@ Metrics:
 def manage_context(messages, max_tokens=4000):
     # Always keep system prompt
     system = messages[0]
-    
+
     # Keep recent messages, summarize old ones
     recent = messages[-5:]
-    
+
     if token_count(messages) > max_tokens:
         # Summarize older context
         summary = summarize(messages[1:-5])
         return [system, {"role": "system", "content": f"Previous context: {summary}"}] + recent
-    
+
     return messages
 ```
 
@@ -291,7 +291,7 @@ def manage_context(messages, max_tokens=4000):
 ```
 [System] You are a helpful coding assistant.
 
-[Previous context summary] User is building a REST API in Python using FastAPI. 
+[Previous context summary] User is building a REST API in Python using FastAPI.
 They've set up the project structure and are now working on authentication.
 
 [User] How do I add JWT tokens?
