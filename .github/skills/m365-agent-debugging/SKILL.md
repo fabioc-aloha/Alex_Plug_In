@@ -21,31 +21,48 @@ M365 Copilot and Teams platform APIs are in rapid evolution. Schema versions, ca
 
 ## Schema Version Validation
 
-**Critical**: Only these schema versions exist:
+**Critical**: Schema versions and their capabilities:
 
-| Version | Status |
-| ------- | ------ |
-| v1.0 | Original baseline |
-| v1.2 | Stable, RECOMMENDED |
-| v1.5 | Preview features |
-| v1.6 | Latest with Dataverse |
+| Version | Status | Key Additions |
+| ------- | ------ | ------------- |
+| v1.0 | Original baseline | Core capabilities |
+| v1.2 | Stable | WebSearch sites, GraphicArt, CodeInterpreter |
+| v1.5 | Extended | TeamsMessages, Email, People |
+| v1.6 | **LATEST** | Dataverse, Meetings, EmbeddedKnowledge, worker_agents |
 
-**v1.3 DOES NOT EXIST** — unrecognized schema makes entire document invalid.
+**v1.3 and v1.4 DO NOT EXIST** — unrecognized schema makes entire document invalid.
 
 ## Capability Compatibility
 
-| Capability | v1.2 | v1.5+ |
-| ---------- | ---- | ----- |
-| OneDriveAndSharePoint | ✅ | ✅ |
-| WebSearch | ✅ | ✅ |
-| GraphicArt | ✅ | ✅ |
-| CodeInterpreter | ✅ | ✅ |
-| TeamsMessages | ❌ | ✅ |
-| Email | ❌ | ✅ |
-| People | ❌ | ✅ |
-| Dataverse | ❌ | v1.6 only |
+| Capability | v1.2 | v1.5 | v1.6 |
+| ---------- | ---- | ---- | ---- |
+| OneDriveAndSharePoint | ✅ | ✅ | ✅ |
+| WebSearch | ✅ | ✅ | ✅ |
+| GraphicArt | ✅ | ✅ | ✅ |
+| CodeInterpreter | ✅ | ✅ | ✅ |
+| GraphConnectors | ✅ | ✅ | ✅ |
+| TeamsMessages | ❌ | ✅ | ✅ |
+| Email | ❌ | ✅ | ✅ |
+| People | ❌ | ✅ | ✅ |
+| Meetings | ❌ | ❌ | ✅ |
+| Dataverse | ❌ | ❌ | ✅ |
+| EmbeddedKnowledge | ❌ | ❌ | ✅ (not yet available) |
+| ScenarioModels | ❌ | ❌ | ✅ |
 
 **Lesson**: v1.5/v1.6 capabilities with v1.2 schema = silent failure.
+
+## Manifest Limits (v1.6)
+
+| Property | Limit |
+| -------- | ----- |
+| `name` | 100 characters |
+| `description` | 1,000 characters |
+| `instructions` | 8,000 characters |
+| `conversation_starters` | **6 items max** (was 12 in v1.2) |
+| `actions` | 1-10 items |
+| `WebSearch.sites` | 4 items |
+| `TeamsMessages.urls` | 5 items |
+| `Meetings.items_by_id` | 5 items |
 
 ## Icon Requirements
 

@@ -1,0 +1,67 @@
+{
+    "skill": "mcp-development",
+    "version": "1.0.0",
+    "connections": [
+        {
+            "target": "ai-agent-design",
+            "relationship": "enables",
+            "strength": "strong",
+            "context": "MCP provides standardized tool interface for AI agents"
+        },
+        {
+            "target": "api-design",
+            "relationship": "requires",
+            "strength": "strong",
+            "context": "MCP tools are essentially APIs for AI consumption"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "relationship": "complements",
+            "strength": "strong",
+            "context": "VS Code integrates MCP servers for Copilot"
+        },
+        {
+            "target": "security-review",
+            "relationship": "requires",
+            "strength": "moderate",
+            "context": "MCP servers need security hardening"
+        },
+        {
+            "target": "testing-strategies",
+            "relationship": "complements",
+            "strength": "moderate",
+            "context": "MCP servers need unit and integration testing"
+        },
+        {
+            "target": "error-recovery-patterns",
+            "relationship": "complements",
+            "strength": "moderate",
+            "context": "MCP tools need graceful error handling"
+        },
+        {
+            "target": "prompt-engineering",
+            "relationship": "informs",
+            "strength": "weak",
+            "context": "Tool descriptions are prompts for AI understanding"
+        }
+    ],
+    "activationTriggers": [
+        "MCP",
+        "Model Context Protocol",
+        "MCP server",
+        "MCP client",
+        "tool server",
+        "resource server",
+        "Claude Desktop",
+        "mcp.json",
+        "@modelcontextprotocol",
+        "stdio transport"
+    ],
+    "metadata": {
+        "category": "ai-infrastructure",
+        "complexity": "intermediate",
+        "prerequisites": [
+            "api-design"
+        ]
+    }
+}

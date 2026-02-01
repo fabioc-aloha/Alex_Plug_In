@@ -1,7 +1,7 @@
 # Alex Skills Catalog (Generated)
 
 > Generated: 2026-01-30
-> Total Skills: **38** (25 inheritable, 8 master-only, 2 VS Code, 2 M365, 1 temporary)
+> Total Skills: **37** (25 inheritable, 8 master-only, 2 VS Code, 2 M365)
 > Total Connections: **124** (0 bidirectional, 17 weak)
 
 ---
@@ -34,9 +34,6 @@ flowchart LR
         LMS[llm-model-selection]
         MM[markdown-mermaid]
         WP[writing-publication]
-    end
-    subgraph Temporary["🧪 Temporary"]
-        BT[beta-tester]
     end
     subgraph Vscode["💻 Vscode"]
         CPP[chat-participant-patterns]
@@ -217,12 +214,6 @@ flowchart LR
 | ----- | ----------- |
 | m365-agent-debugging | 1 |
 | teams-app-patterns | 2 |
-
-### 🟪 Temporary (1)
-
-| Skill | Connections | Remove After |
-| ----- | ----------- | ------------ |
-| beta-tester | 5 | stable-release |
 
 ---
 

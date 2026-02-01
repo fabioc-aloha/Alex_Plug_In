@@ -7,15 +7,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 53
+## Skill Count: 63
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 37 |
+| Inheritable | 48 |
 | Master-Only | 8 |
 | Heir:vscode | 2 |
 | Heir:m365 | 2 |
-| Unspecified | 4 |
+| Unspecified | 3 |
 
 ---
 
@@ -34,6 +34,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [meditation](../.github/skills/meditation/) | master-only | Core meditation protocols |
 | [knowledge-synthesis](../.github/skills/knowledge-synthesis/) | master-only | Cross-project pattern extraction |
 | [global-knowledge](../.github/skills/global-knowledge/) | master-only | Global knowledge base management |
+| [socratic-questioning](../.github/skills/socratic-questioning/) | inheritable | Guide users to discover answers through questions |
+| [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/) | inheritable | Be a thinking partner through explanation |
 
 ### 🔧 Engineering Fundamentals
 
@@ -46,6 +48,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [git-workflow](../.github/skills/git-workflow/) | inheritable | Commits, recovery, branching |
 | [project-scaffolding](../.github/skills/project-scaffolding/) | inheritable | Complete project setup templates |
 | [vscode-environment](../.github/skills/vscode-environment/) | inheritable | Workspace settings, extensions, launch configs |
+| [api-design](../.github/skills/api-design/) | inheritable | RESTful best practices, contract-first, versioning |
+| [infrastructure-as-code](../.github/skills/infrastructure-as-code/) | inheritable | **NEW** Terraform, Bicep, Pulumi, GitOps patterns |
 
 ### 🚨 Operations & Reliability
 
@@ -54,6 +58,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [error-recovery-patterns](../.github/skills/error-recovery-patterns/) | inheritable | Retry, fallback, circuit breaker |
 | [root-cause-analysis](../.github/skills/root-cause-analysis/) | inheritable | 5 Whys, fishbone, post-mortem |
 | [incident-response](../.github/skills/incident-response/) | inheritable | Crisis handling, severity levels |
+| [post-mortem](../.github/skills/post-mortem/) | inheritable | Blameless retrospectives, learning from failures |
 | [release-preflight](../.github/skills/release-preflight/) | inheritable | Pre-release checks, version sync |
 | [change-management](../.github/skills/change-management/) | inheritable | Organizational change, stakeholder buy-in |
 | [project-management](../.github/skills/project-management/) | inheritable | Planning, tracking, resource allocation |
@@ -62,6 +67,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
+| [security-review](../.github/skills/security-review/) | inheritable | OWASP, threat modeling, security-focused code review |
 | [microsoft-sfi](../.github/skills/microsoft-sfi/) | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
 | [pii-privacy-regulations](../.github/skills/pii-privacy-regulations/) | inheritable | **NEW** GDPR & Australian Privacy Principles compliance |
 | [privacy-responsible-ai](../.github/skills/privacy-responsible-ai/) | inheritable | Privacy by design, RAI principles, bias mitigation |
@@ -72,6 +78,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 |-------|-------------|---------|
 | [writing-publication](../.github/skills/writing-publication/) | inheritable | Academic writing, publication strategy |
 | [academic-research](../.github/skills/academic-research/) | inheritable | Literature review, citation management |
+| [grant-writing](../.github/skills/grant-writing/) | inheritable | Research funding applications, NSF/NIH patterns |
 | [creative-writing](../.github/skills/creative-writing/) | inheritable | Narrative, storytelling, engagement |
 | [markdown-mermaid](../.github/skills/markdown-mermaid/) | inheritable | Diagrams and visualization |
 | [lint-clean-markdown](../.github/skills/lint-clean-markdown/) | inheritable | Clean, consistent markdown |
@@ -105,6 +112,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
 | [skill-catalog-generator](../.github/skills/skill-catalog-generator/) | inheritable | Generate skill catalogs with network diagrams |
+
+### 🤖 AI & Machine Learning
+
+| Skill | Inheritance | Purpose |
+|-------|-------------|---------|
+| [prompt-engineering](../.github/skills/prompt-engineering/) | inheritable | **NEW** LLM prompting patterns, system prompts, few-shot, chain-of-thought |
+| [rag-architecture](../.github/skills/rag-architecture/) | inheritable | **NEW** Retrieval-augmented generation, embedding, chunking, vector stores |
+| [ai-agent-design](../.github/skills/ai-agent-design/) | inheritable | **NEW** Multi-agent systems, ReAct, planning, tool use, memory patterns |
+| [mcp-development](../.github/skills/mcp-development/) | inheritable | **NEW** Model Context Protocol servers, tools, resources, transports |
 
 ### 💻 Platform-Specific
 
@@ -140,16 +156,6 @@ These skills depend on rapidly evolving technology or regulations:
 | microsoft-sfi | Security landscape shifts | New vulnerabilities, practices | Master |
 
 **Update Flow:** Platform heirs update their skills first (they encounter changes in practice), then promote stable updates to Master. Master updates inheritable skills directly.
-
----
-
-## ⏳ Temporary Skills (Beta)
-
-These skills exist temporarily for specific purposes and will be removed after stable release:
-
-| Skill | Inheritance | Purpose | Remove After |
-| ----- | ----------- | ------- | ------------ |
-| [beta-tester](../.github/skills/beta-tester/) | inheritable (all platforms) | Installation validation, bug reporting, migration testing | Stable release (v3.6.0+) |
 
 ---
 
@@ -208,7 +214,6 @@ flowchart LR
         RCA[root-cause-analysis]
         IR[incident-response]
         RF[release-preflight]
-        BT[beta-tester]
         CM[change-management]
         PM[project-management]
     end

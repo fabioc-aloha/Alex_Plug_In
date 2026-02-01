@@ -496,16 +496,6 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 2. Search knowledge: `@alex /knowledge [your issue]`
 3. Run diagnostics: `@alex /status`
 
-### Beta Testing (Temporary)
-
-During beta, the **beta-tester** skill provides extra support:
-
-- "test my installation" - Run validation checklists
-- "report a bug" - Get bug report template
-- "check my environment" - Gather diagnostic info
-
-This skill will be removed after stable release.
-
 ---
 
 ## Quick Tips

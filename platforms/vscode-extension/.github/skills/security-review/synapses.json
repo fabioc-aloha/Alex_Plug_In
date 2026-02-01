@@ -1,0 +1,59 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "skillId": "security-review",
+    "version": "1.0.0",
+    "created": "2026-02-01",
+    "description": "Security-focused code analysis, OWASP patterns, threat modeling",
+    "synapses": [
+        {
+            "target": "incident-response",
+            "type": "Triggers",
+            "strength": "strong",
+            "description": "Vulnerability found triggers incident response"
+        },
+        {
+            "target": "code-review",
+            "type": "Enhances",
+            "strength": "strong",
+            "description": "Security lens enhances standard code review"
+        },
+        {
+            "target": "root-cause-analysis",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "Security incidents need root cause analysis"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "Security bugs need systematic debugging"
+        },
+        {
+            "target": "testing-strategies",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "Security testing is specialized testing"
+        },
+        {
+            "target": "microsoft-sfi",
+            "type": "Implements",
+            "strength": "strong",
+            "description": "Implements Microsoft Secure Future Initiative patterns"
+        }
+    ],
+    "activationTriggers": [
+        "security review",
+        "vulnerability",
+        "OWASP",
+        "threat model",
+        "penetration test",
+        "security audit",
+        "credential",
+        "authentication",
+        "authorization",
+        "injection",
+        "XSS",
+        "CSRF"
+    ]
+}

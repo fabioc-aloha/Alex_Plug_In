@@ -48,24 +48,12 @@
             "text": "Build me a stakeholder map - who are my top collaborators based on meetings, emails, and Teams?"
         },
         {
-            "title": "👤 Tell me about someone",
-            "text": "Tell me about [name] - look them up and show me our interaction history"
-        },
-        {
-            "title": "📬 Weekly review",
+            "title": "� Weekly review",
             "text": "Let's review my week - meetings, emails, Teams activity, and what I accomplished"
-        },
-        {
-            "title": "🎯 How confident are you?",
-            "text": "How confident should I be in your answers? When should I verify what you tell me?"
         },
         {
             "title": "🧠 Meditate",
             "text": "Let's meditate - consolidate what I learned today into memory"
-        },
-        {
-            "title": "💭 Dream",
-            "text": "Dream - review my OneDrive notes and suggest what to remember"
         }
     ]
 }

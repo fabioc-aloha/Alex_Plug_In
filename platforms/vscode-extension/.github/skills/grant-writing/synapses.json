@@ -1,0 +1,50 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "skillId": "grant-writing",
+    "version": "1.0.0",
+    "created": "2026-02-01",
+    "description": "Research funding applications, NSF/NIH patterns, proposal writing",
+    "synapses": [
+        {
+            "target": "academic-research",
+            "type": "Requires",
+            "strength": "strong",
+            "description": "Grant writing requires research expertise"
+        },
+        {
+            "target": "writing-publication",
+            "type": "Relates",
+            "strength": "strong",
+            "description": "Both require clear academic writing"
+        },
+        {
+            "target": "project-management",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "Grants require project planning"
+        },
+        {
+            "target": "business-analysis",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "Budget justification is business analysis"
+        },
+        {
+            "target": "creative-writing",
+            "type": "Enhances",
+            "strength": "weak",
+            "description": "Narrative skills help with proposal writing"
+        }
+    ],
+    "activationTriggers": [
+        "grant proposal",
+        "NSF",
+        "NIH",
+        "funding",
+        "research grant",
+        "specific aims",
+        "R01",
+        "proposal writing",
+        "broader impacts"
+    ]
+}

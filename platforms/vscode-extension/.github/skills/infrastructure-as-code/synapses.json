@@ -1,0 +1,55 @@
+{
+  "skill": "infrastructure-as-code",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": "security-review",
+      "relationship": "requires",
+      "strength": "strong",
+      "context": "IaC needs security scanning (tfsec, checkov)"
+    },
+    {
+      "target": "git-workflow",
+      "relationship": "requires",
+      "strength": "strong",
+      "context": "IaC follows GitOps patterns with PRs and reviews"
+    },
+    {
+      "target": "testing-strategies",
+      "relationship": "complements",
+      "strength": "moderate",
+      "context": "IaC needs unit and integration testing"
+    },
+    {
+      "target": "api-design",
+      "relationship": "complements",
+      "strength": "weak",
+      "context": "IaC provisions infrastructure for APIs"
+    },
+    {
+      "target": "mcp-development",
+      "relationship": "complements",
+      "strength": "weak",
+      "context": "MCP servers may need cloud infrastructure"
+    }
+  ],
+  "activationTriggers": [
+    "infrastructure as code",
+    "IaC",
+    "Terraform",
+    "Bicep",
+    "Pulumi",
+    "CloudFormation",
+    "ARM template",
+    "CDK",
+    "tfvars",
+    "terraform.tfstate",
+    "GitOps",
+    "provision infrastructure"
+  ],
+  "metadata": {
+    "category": "devops",
+    "complexity": "intermediate",
+    "prerequisites": ["git-workflow"]
+  }
+}

@@ -121,7 +121,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
 | Model Awareness | ❌ None | ✅ **NEW** Warns when task needs Opus |
 | Skill Review | ❌ None | ✅ **NEW** Review staleness-prone skills |
-| Skills Library | ❌ None | ✅ 53 portable skills (security, privacy, RAI, etc.) |
+| Skills Library | ❌ None | ✅ 63 portable skills (security, privacy, RAI, etc.) |
 | Fully Automated Upgrades | ❌ None | ✅ One-click upgrade with schema migration |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 

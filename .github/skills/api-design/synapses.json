@@ -1,0 +1,50 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "skillId": "api-design",
+    "version": "1.0.0",
+    "created": "2026-02-01",
+    "description": "RESTful best practices, contract-first design, versioning",
+    "synapses": [
+        {
+            "target": "security-review",
+            "type": "Requires",
+            "strength": "strong",
+            "description": "APIs need security review"
+        },
+        {
+            "target": "testing-strategies",
+            "type": "Relates",
+            "strength": "strong",
+            "description": "APIs need contract testing"
+        },
+        {
+            "target": "code-review",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "API changes need careful review"
+        },
+        {
+            "target": "architecture-audit",
+            "type": "Relates",
+            "strength": "moderate",
+            "description": "API design is architectural decision"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "Relates",
+            "strength": "weak",
+            "description": "Extension APIs follow similar patterns"
+        }
+    ],
+    "activationTriggers": [
+        "API design",
+        "REST API",
+        "endpoint",
+        "OpenAPI",
+        "Swagger",
+        "API versioning",
+        "HTTP methods",
+        "status codes",
+        "request response"
+    ]
+}

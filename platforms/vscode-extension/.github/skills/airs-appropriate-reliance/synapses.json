@@ -23,12 +23,6 @@
             "strength": 0.85
         },
         {
-            "target": "beta-tester",
-            "type": "enhances",
-            "strength": 0.6,
-            "note": "AR telemetry design for behavioral validation"
-        },
-        {
             "target": "testing-strategies",
             "type": "enhances",
             "strength": 0.5,

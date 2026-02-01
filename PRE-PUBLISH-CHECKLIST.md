@@ -72,11 +72,7 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 - [ ] Verify temporary skills are **excluded** from package
 - [ ] Or confirm all temporary skills have been removed/graduated
 
-**Current Temporary Skills:**
-
-| Skill | Remove After |
-| ----- | ------------ |
-| beta-tester | Stable release (v3.6.0+) |
+**Current Temporary Skills:** None (beta-tester removed for v4.0.7+ stable release)
 
 ## 🧠 Architecture Sync
 

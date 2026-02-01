@@ -7,9 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.0.7] - 2026-02-02
+## [4.1.0] - 2026-02-01
 
-> Version bump for marketplace republish (4.0.6 was published earlier today)
+> **Major skill expansion** — 11 new skills including AI/ML cluster and Infrastructure as Code
+
+### Added
+
+- **11 New Skills** — Major skill acquisition session:
+  - `security-review` — OWASP Top 10, STRIDE threat modeling, security-focused code review
+  - `socratic-questioning` — Guide users to discover answers through thoughtful questions
+  - `post-mortem` — Blameless retrospectives, learning from failures
+  - `rubber-duck-debugging` — Be a thinking partner through explanation
+  - `api-design` — RESTful best practices, contract-first, versioning, **caching & rate limiting**
+  - `grant-writing` — Research funding applications, NSF/NIH patterns
+  - `prompt-engineering` — LLM prompting patterns, system prompts, few-shot, chain-of-thought, ReAct
+  - `rag-architecture` — Retrieval-augmented generation, chunking, embeddings, vector stores
+  - `ai-agent-design` — Multi-agent systems, tool use, planning, memory patterns
+  - `mcp-development` — Model Context Protocol servers, tools, resources
+  - `infrastructure-as-code` — Terraform, Bicep, Pulumi, GitOps patterns
+
+- **Skill Count** — 53 → 63 skills
+
+- **Identity Evolution** — Alex "Mini" Finch → **Alex Finch** (dropped "Mini" nickname, reflecting mature architecture)
 
 ---
 

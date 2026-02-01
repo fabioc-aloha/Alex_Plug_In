@@ -43,10 +43,31 @@ When starting a new session or project, Alex can:
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
 | Incident Response | ✅ **ACQUIRED** | Calm, systematic crisis handling | `skills/incident-response/SKILL.md` |
+| Security Review | ✅ **ACQUIRED** | Security-focused code analysis | `skills/security-review/SKILL.md` |
+| API Design | ✅ **ACQUIRED** | RESTful best practices, versioning | `skills/api-design/SKILL.md` |
 | Performance Profiling | Medium | Identify bottlenecks systematically | CPU, memory, network analysis patterns |
-| Security Review | High | Security-focused code analysis | OWASP, common vulnerabilities, threat modeling |
 | Database Design | Medium | Schema design, query optimization | Normalization, indexing strategies |
-| API Design | Medium | RESTful best practices, versioning | Contract-first, documentation |
+| Observability & Monitoring | Medium | Logs, metrics, traces, alerts | OpenTelemetry, Grafana, structured logging |
+| Infrastructure as Code | Medium | Terraform, Bicep, CloudFormation | Reproducible deployments |
+| Container Orchestration | Medium | Docker, Kubernetes patterns | Deployment, scaling, networking |
+| CI/CD Pipeline Design | High | GitHub Actions, Azure Pipelines | Build, test, deploy automation |
+| Feature Flag Management | Low | Progressive rollout, A/B testing | LaunchDarkly patterns, risk mitigation |
+
+---
+
+## AI & Machine Learning Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| ✅ Prompt Engineering | High | Effective LLM prompting | System prompts, few-shot, chain-of-thought — **ACQUIRED v4.0.7** |
+| ✅ RAG Architecture | High | Retrieval-augmented generation | Embedding, chunking, vector stores — **ACQUIRED v4.0.7** |
+| ✅ AI Agent Design | Medium | Multi-agent systems | Tool use, planning, memory patterns — **ACQUIRED v4.0.7** |
+| ✅ MCP Development | High | Model Context Protocol | Tool servers, resources, transports — **ACQUIRED v4.0.7** |
+| Model Selection | Medium | Choose the right model for task | Cost vs capability tradeoffs |
+| Evaluation & Testing | Medium | LLM output quality assessment | Metrics, benchmarks, human eval |
+| ✅ Responsible AI | High | Bias detection, safety, transparency | See `privacy-responsible-ai` skill |
 
 ---
 
@@ -101,6 +122,7 @@ When starting a new session or project, Alex can:
 | Academic Research | ✅ Acquired | `skills/academic-research/SKILL.md` | 2026-01-31 |
 | Creative Writing | ✅ Acquired | `skills/creative-writing/SKILL.md` | 2026-01-31 |
 | Graphic Design | ✅ Acquired | `skills/graphic-design/SKILL.md` | 2026-01-31 |
+| Grant Writing | ✅ Acquired | `skills/grant-writing/SKILL.md` | 2026-02-01 |
 
 ### Already Available ✅
 
@@ -115,7 +137,34 @@ When starting a new session or project, Alex can:
 | Journalism & Reporting | Low | News writing, fact-checking | Inverted pyramid, source verification |
 | Poetry & Verse | Low | Forms, meter, literary devices | Specialized creative writing |
 | Screenwriting Advanced | Low | Industry format, screenplay craft | Beyond basic screenplay format |
-| Grant Writing | Medium | Research funding applications | NSF, NIH, foundation proposals |
+
+---
+
+## Platform & Integration Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Microsoft Graph | High | M365 data access patterns | Permissions, batching, change notifications |
+| OAuth/OIDC Flows | High | Authentication patterns | Token handling, refresh, scopes |
+| Webhook Design | Medium | Event-driven integrations | Reliability, retries, security |
+| API Gateway Patterns | Medium | Rate limiting, caching, routing | Kong, APIM, AWS API Gateway |
+| Message Queue Patterns | Medium | Pub/sub, queues, event sourcing | Kafka, Service Bus, RabbitMQ |
+| SharePoint Development | Low | SPFx, lists, document libraries | M365 content management |
+
+---
+
+## Accessibility & Inclusion Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| WCAG Compliance | High | Web accessibility guidelines | Screen readers, keyboard nav, contrast |
+| Inclusive Language | Medium | Bias-free, clear communication | Plain language, avoid assumptions |
+| Neurodiversity Awareness | Medium | Different cognitive styles | Accommodate various thinking patterns |
+| Universal Design | Low | Design for all abilities | Beyond minimum compliance |
 
 ---
 
@@ -138,6 +187,22 @@ When starting a new session or project, Alex can:
 | Financial Analysis | Low | Business case financials | ROI, NPV, cost-benefit |
 | Governance Frameworks | Low | Decision-making structures | RACI, approval processes |
 | Vendor Management | Low | RFP, contract management | Evaluation criteria, negotiation |
+| Product Thinking | High | User needs → features → outcomes | Jobs-to-be-done, user stories |
+| Agile Coaching | Medium | Scrum, Kanban, retrospectives | Help teams improve their process |
+
+---
+
+## Data & Analytics Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Data Visualization | High | Charts, dashboards, storytelling | Choose right viz, avoid chartjunk |
+| SQL Mastery | Medium | Complex queries, CTEs, window functions | Beyond basic SELECT |
+| Statistical Thinking | Medium | Correlation vs causation, significance | Avoid common pitfalls |
+| A/B Test Design | Medium | Experiment design, sample size | Valid conclusions from experiments |
+| Data Pipeline Design | Low | ETL, data quality, lineage | Reliable data flows |
 
 ---
 
@@ -152,6 +217,22 @@ When starting a new session or project, Alex can:
 | FAQ Generation | Low | Turn questions into docs | Pattern detection, documentation |
 | Runbook Creation | Medium | Operational procedures | Step-by-step for common ops tasks |
 | On-call Handoff | Low | Context transfer | What happened, what's pending |
+| SRE Principles | Medium | Reliability engineering | SLIs, SLOs, error budgets, toil reduction |
+| Chaos Engineering | Low | Controlled failure injection | Game days, resilience testing |
+
+---
+
+## Developer Experience Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Documentation Architecture | High | Doc structure, findability | Information architecture for devs |
+| Developer Onboarding | High | New team member ramp-up | Learning paths, mentoring patterns |
+| Internal Tooling | Medium | Build tools developers love | CLI design, DX principles |
+| Code Generation | Medium | Templates, scaffolding | Consistency, reduce boilerplate |
+| Error Message Design | Medium | Helpful, actionable errors | User-friendly diagnostics |
 
 ---
 
@@ -161,10 +242,26 @@ When starting a new session or project, Alex can:
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
+| Post-Mortem Facilitation | ✅ **ACQUIRED** | Learning from failures | `skills/post-mortem/SKILL.md` |
 | Roadmap Planning | Medium | What to build and when | Themes, dependencies, milestones |
-| Post-Mortem Facilitation | High | Learning from failures | Blameless, actionable outcomes |
 | OKR/Goal Setting | Low | Measurable objectives | Ambitious but achievable |
 | Stakeholder Management | Low | Different audiences, different needs | Tailor communication |
+| Innovation Facilitation | Medium | Ideation, brainstorming, design thinking | Creative problem-solving |
+| Technical Roadmapping | High | Translate strategy to technical milestones | Dependencies, sequencing, capacity |
+
+---
+
+## Career & Professional Development Skills
+
+### Wishlist 🎯
+
+| Skill | Priority | Value | Notes |
+|-------|----------|-------|-------|
+| Interview Preparation | High | Both sides of the table | Technical interviews, behavioral, system design |
+| Resume/CV Review | Medium | Highlight achievements, impact | Action-result format |
+| Personal Brand | Low | Professional visibility | LinkedIn, speaking, writing |
+| Mentor Matching | Low | Find/be effective mentor | Goals, feedback, accountability |
+| Career Path Planning | Medium | Growth trajectory, skill gaps | Short and long-term goals |
 
 ---
 
@@ -196,11 +293,11 @@ When starting a new session or project, Alex can:
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
+| Socratic Questioning | ✅ **ACQUIRED** | Help users discover answers | `skills/socratic-questioning/SKILL.md` |
+| Rubber Duck Debugging | ✅ **ACQUIRED** | Be a thinking partner | `skills/rubber-duck-debugging/SKILL.md` |
 | Adaptive Explanation | High | Adjust depth based on user's level | More/less detail on demand |
-| Socratic Questioning | High | Help users discover answers | Guide thinking, don't just give answers |
 | Cognitive Load Management | High | Don't overwhelm with information | Chunk information, summarize first |
 | Learning Style Adaptation | Medium | Visual, verbal, hands-on preferences | Diagrams vs code vs explanation |
-| Rubber Duck Debugging | Medium | Be a thinking partner | Ask clarifying questions that help user think |
 | Deliberate Practice Guidance | Medium | Help users improve systematically | Identify gaps, suggest exercises |
 | Knowledge Scaffolding | Medium | Build on what user already knows | Connect new to familiar |
 | Reframing Techniques | Medium | Help see problems differently | Alternative perspectives, analogies |
@@ -400,26 +497,33 @@ Track skill development progress:
 
 | Metric | Current | Target |
 |--------|---------|--------|
-| Total Skills Acquired | 46 | - |
-| Wishlist Items | ~55 | Reduce over time |
+| Total Skills Acquired | 57 | - |
+| Wishlist Items | ~95 | Reduce over time |
 | Skills in Development | 0 | 1-2 at a time |
 | User Feedback Sessions | 0 | Track |
 
-### Skill Distribution (Updated 2026-01-31)
+### Skill Distribution (Updated 2026-02-01)
 
 | Category | Count | High Priority |
 |----------|-------|---------------|
-| Development & Engineering | 5 | 2 |
-| Project Management | 5 | 2 |
+| Development & Engineering | 10 | 3 |
+| AI & Machine Learning | 6 | 3 |
+| Project Management | 7 | 2 |
 | Communication | 5 | 1 |
 | Analysis & Research | 5 | 1 |
-| Support & Operations | 5 | 1 |
-| Strategic | 4 | 1 |
+| Data & Analytics | 5 | 1 |
+| Platform & Integration | 6 | 2 |
+| Accessibility & Inclusion | 4 | 1 |
+| Support & Operations | 7 | 1 |
+| Developer Experience | 5 | 2 |
+| Strategic | 6 | 2 |
+| Career & Professional | 5 | 1 |
 | Emotional Intelligence | 8 | 4 |
 | Cognitive & Learning | 8 | 3 |
 | Personal Effectiveness | 8 | 2 |
 | Interpersonal Psychology | 6 | 0 |
 | Wellbeing & Sustainability | 6 | 0 |
+| Writing & Research | 3 | 0 |
 
 ---
 

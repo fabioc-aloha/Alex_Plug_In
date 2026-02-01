@@ -965,7 +965,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
                             <li><strong>Cloud Sync</strong> - Automatic backup to GitHub Gists with conflict resolution</li>
-                            <li><strong>Skill Library</strong> - 38 portable skills with triggers and synaptic connections</li>
+                            <li><strong>Skill Library</strong> - 63 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>
                     </div>
