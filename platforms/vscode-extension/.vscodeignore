@@ -1,5 +1,8 @@
 # Development files
-.vscode/**
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/mcp.json
+# Keep .vscode/settings.json and .vscode/markdown-light.css for markdown preview styling
 .vscode-test/**
 src/**
 .git/**

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.3] - 2026-02-01 🔧 Hotfix
+
+### Fixed
+
+- **Markdown Preview Styling in Package** — `.vscode/settings.json` and `.vscode/markdown-light.css` were being excluded from the extension package by `.vscodeignore`, preventing users from getting the GitHub-style markdown preview. Now included.
+
+---
+
 ## [4.0.2] - 2026-02-01 🔧 Hotfix
 
 ### Fixed
