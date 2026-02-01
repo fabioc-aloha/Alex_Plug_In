@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.0] - 2026-02-01
+
+> **Gamma AI Integration** — Generate presentations, documents, and social content with AI
+
+### Added
+
+- **🎨 New Skill: gamma-presentations** (64th skill)
+  - Full Gamma API integration for AI-powered content generation
+  - Supports: presentations, documents, social content, webpages
+  - 20+ AI image models (Flux, Imagen, DALL-E, Ideogram, GPT Image, etc.)
+  - User manual with example prompts and cost guide
+  - MCP server integration documentation
+
+- **🛠️ CLI Script: gamma-generator.js**
+  - Standalone Node.js script for command-line generation
+  - Generate from topic or file content
+  - Export to PPTX/PDF with automatic download
+  - Full customization: tone, audience, language, dimensions, image models
+
+- **📚 Research Document**
+  - `AI-MULTIMEDIA-GENERATION-RESEARCH-2026.md` — Analysis of 25+ AI multimedia tools
+  - Video, audio, image, presentation, avatar, and voice AI services
+  - API comparison matrix and technical viability assessment
+
+### Documentation
+
+- README: Added "Gamma AI Integration" section with quick start guide
+- SKILLS-CATALOG: Updated to 64 skills, added Visual Design category entry
+- copilot-instructions: Updated skill list
+
+---
+
 ## [4.1.0] - 2026-02-01
 
 > **Major skill expansion** — 11 new skills including AI/ML cluster and Infrastructure as Code

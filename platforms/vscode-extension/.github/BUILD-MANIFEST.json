@@ -1,5 +1,6 @@
 {
-  "filesExcluded": 30,
+  "filesCopied": 171,
+  "sourceVersion": "4.1.1",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -20,8 +21,7 @@
     "skills/heir-curation",
     "skills/master-alex-audit"
   ],
-  "sourceCommit": "ace7341",
-  "generatedAt": "2026-02-01 15:04:18",
-  "sourceVersion": "4.1.0",
-  "filesCopied": 169
+  "filesExcluded": 30,
+  "sourceCommit": "a2b7495",
+  "generatedAt": "2026-02-01 17:46:59"
 }
