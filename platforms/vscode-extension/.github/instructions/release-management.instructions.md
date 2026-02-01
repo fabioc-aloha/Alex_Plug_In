@@ -146,6 +146,30 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 3. Work through EACH section systematically
 4. All checkboxes must be verified (not assumed)
 5. Run build/compile commands for project type
+6. Verify .vscodeignore includes user-facing assets (see Packaging Pitfalls)
+```
+
+### Packaging Pitfalls (Learned 2026-02-01)
+
+**The `.vscode/` Dual-Purpose Problem:**
+
+The `.vscode/` folder contains both:
+- **Development assets** (launch.json, tasks.json, mcp.json) — should NOT ship
+- **User experience assets** (settings.json, CSS files) — SHOULD ship
+
+**Bad:** `.vscode/**` — Excludes everything, including user assets
+
+**Good:** Explicitly list dev files to exclude:
+```ignore
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/mcp.json
+# Keep .vscode/settings.json and .vscode/markdown-light.css
+```
+
+**Verification:** After packaging changes, always run:
+```powershell
+npx vsce ls | Select-String "\.vscode"
 ```
 
 ### Phase 2: Version Bump
@@ -173,9 +197,28 @@ code --install-extension alex-cognitive-architecture-<version>.vsix
 
 ### Phase 5: Publish
 
+**⚠️ VSCE requires an Azure DevOps PAT, NOT a GitHub PAT!**
+
 ```powershell
-vsce publish       # Publish to marketplace
+# Option 1: With saved credentials
+vsce publish
+
+# Option 2: With PAT directly
+vsce publish -p <AZURE_DEVOPS_PAT>
+
+# Option 3: Login first (saves credentials)
+vsce login fabioc-aloha
+# Then: vsce publish
 ```
+
+**Creating Azure DevOps PAT:**
+1. Go to [dev.azure.com](https://dev.azure.com)
+2. Click profile → Personal access tokens
+3. Create token with:
+   - Organization: `All accessible organizations`
+   - Scopes: **Marketplace** → **Manage**
+
+**Common Error:** `401 Unauthorized` = Wrong PAT type (GitHub vs Azure DevOps)
 
 ### Phase 6: Post-Release
 

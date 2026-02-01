@@ -257,9 +257,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       vscode.Uri.joinPath(this._extensionUri, "assets", "logo.svg")
     );
 
+    // Get workspace/folder name (vscode.workspace.name works for both workspaces and folders)
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const workspaceName = vscode.workspace.name || workspaceFolders?.[0]?.name || "No folder open";
+
     // Count skills in workspace
     let skillCount = 0;
-    const workspaceFolders = vscode.workspace.workspaceFolders;
     if (workspaceFolders) {
       const skillsPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "skills");
       try {
@@ -350,6 +353,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header-title {
             font-size: 14px;
             font-weight: 600;
+        }
+        .header-workspace {
+            font-size: 11px;
+            color: var(--vscode-descriptionForeground);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 120px;
+        }
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+            flex: 1;
         }
         .version-badge {
             background: var(--vscode-badge-background, #4d4d4d);
@@ -668,7 +686,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     <div class="container">
         <div class="header">
             <img src="${logoUri}" alt="Alex" class="header-icon" />
-            <span class="header-title">Alex Cognitive</span>
+            <div class="header-text">
+                <span class="header-title">Alex Cognitive</span>
+                <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
+            </div>
             <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>

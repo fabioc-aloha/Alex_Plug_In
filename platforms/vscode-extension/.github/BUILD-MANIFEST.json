@@ -1,9 +1,8 @@
 {
-  "sourceVersion": "4.0.0",
-  "filesExcluded": 29,
-  "filesCopied": 142,
-  "sourceCommit": "c5679e8",
-  "generatedAt": "2026-01-31 17:00:34",
+  "filesCopied": 147,
+  "filesExcluded": 30,
+  "generatedAt": "2026-02-01 05:44:31",
+  "sourceVersion": "4.0.5",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -23,5 +22,6 @@
     "skills/self-actualization",
     "skills/heir-curation",
     "skills/master-alex-audit"
-  ]
+  ],
+  "sourceCommit": "d042652"
 }

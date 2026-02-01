@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.5] - 2026-02-01
+
+### Changed
+
+- **Welcome View Header** — Added workspace/folder name display below "Alex Cognitive" title for better context awareness
+
+---
+
 ## [4.0.4] - 2026-02-01 🔧 Hotfix
 
 ### Fixed
