@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.4] - 2026-02-01 🔧 Hotfix
+
+### Fixed
+
+- **Markdown Preview CSS Loading** — VS Code security restrictions prevented loading CSS from `~/.alex/` (absolute path). Changed to workspace-local approach:
+  - CSS now copied to `.vscode/markdown-light.css` in each workspace
+  - Uses workspace-relative path instead of global absolute path
+  - Properly applies as workspace setting, not global setting
+  - Fixes "could not load CSS" error and dark markdown preview
+
+---
+
 ## [4.0.3] - 2026-02-01 🔧 Hotfix
 
 ### Fixed
