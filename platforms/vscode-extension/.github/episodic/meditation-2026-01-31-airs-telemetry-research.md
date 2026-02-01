@@ -61,8 +61,7 @@ Analyzed existing telemetry infrastructure in `telemetry.ts`:
 1. **airs-appropriate-reliance → appropriate-reliance** (0.95, extends)
 2. **airs-appropriate-reliance → learning-psychology** (0.80, requires)
 3. **airs-appropriate-reliance → academic-research** (0.85, enables)
-4. **airs-appropriate-reliance → beta-tester** (0.60, enhances) — NEW
-5. **airs-appropriate-reliance → testing-strategies** (0.50, enhances) — NEW
+4. **airs-appropriate-reliance → testing-strategies** (0.50, enhances) — NEW
 
 ## Global Knowledge Saved
 
@@ -109,7 +108,6 @@ AR2: "I adjust my level of scrutiny based on the complexity of the AI request"
 - [x] Memory File: Created `meditation-2026-01-31-airs-telemetry-research.md`
 - [x] Memory File: Created `alex_docs/AR-TELEMETRY-DESIGN.md`
 - [x] Memory File: Created `.github/skills/airs-appropriate-reliance/SKILL.md`
-- [x] Synapse Added: `airs-appropriate-reliance → beta-tester` (0.60, enhances)
 - [x] Synapse Added: `airs-appropriate-reliance → testing-strategies` (0.50, enhances)
 - [x] Global Knowledge: 2 new insights saved
 - [x] Session Log: This document
