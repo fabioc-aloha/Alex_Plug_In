@@ -74,6 +74,184 @@ pre code {
     color: #1f2328 !important;
 }
 
+/* NUCLEAR OPTION: Force ALL spans in code blocks to be dark readable */
+pre code span {
+    color: #1f2328 !important;
+}
+
+/* VS Code markdown preview uses these specific classes */
+.vscode-body pre code span,
+.markdown-body pre code span,
+pre.hljs code span,
+code span {
+    color: #1f2328 !important;
+}
+
+/* Override VS Code's built-in light theme syntax colors that are too light */
+.mtk1 { color: #1f2328 !important; }   /* default text */
+.mtk3 { color: #57606a !important; }   /* comments - darker gray */
+.mtk4 { color: #0550ae !important; }   /* numbers */
+.mtk5 { color: #cf222e !important; }   /* keywords */
+.mtk6 { color: #0a3069 !important; }   /* strings */
+.mtk7 { color: #8250df !important; }   /* functions */
+.mtk8 { color: #953800 !important; }   /* types */
+.mtk9 { color: #0550ae !important; }   /* variables */
+.mtk10 { color: #1f2328 !important; }  /* operators */
+.mtk11 { color: #0550ae !important; }  /* properties */
+.mtk12 { color: #8250df !important; }  /* methods */
+
+/* Syntax highlighting - GitHub style */
+pre code .hljs-keyword,
+pre code .token.keyword,
+.hljs-keyword,
+.token.keyword {
+    color: #cf222e !important;
+    /* Red for keywords */
+}
+
+pre code .hljs-string,
+pre code .token.string,
+.hljs-string,
+.token.string {
+    color: #0a3069 !important;
+    /* Dark blue for strings */
+}
+
+pre code .hljs-comment,
+pre code .token.comment,
+.hljs-comment,
+.token.comment {
+    color: #6e7781 !important;
+    /* Gray for comments - NOT too light */
+}
+
+pre code .hljs-function,
+pre code .token.function,
+.hljs-function,
+.token.function {
+    color: #8250df !important;
+    /* Purple for functions */
+}
+
+pre code .hljs-number,
+pre code .token.number,
+.hljs-number,
+.token.number {
+    color: #0550ae !important;
+    /* Blue for numbers */
+}
+
+pre code .hljs-class,
+pre code .token.class-name,
+pre code .hljs-type,
+pre code .token.type,
+.hljs-class,
+.token.class-name,
+.hljs-type,
+.token.type {
+    color: #953800 !important;
+    /* Orange for types/classes */
+}
+
+pre code .hljs-variable,
+pre code .token.variable,
+.hljs-variable,
+.token.variable {
+    color: #24292f !important;
+    /* Dark for variables */
+}
+
+pre code .hljs-attr,
+pre code .token.attr-name,
+pre code .hljs-property,
+pre code .token.property,
+.hljs-attr,
+.token.attr-name,
+.hljs-property,
+.token.property {
+    color: #0550ae !important;
+    /* Blue for attributes */
+}
+
+pre code .hljs-operator,
+pre code .token.operator,
+.hljs-operator,
+.token.operator {
+    color: #cf222e !important;
+    /* Red for operators */
+}
+
+pre code .hljs-punctuation,
+pre code .token.punctuation,
+.hljs-punctuation,
+.token.punctuation {
+    color: #24292f !important;
+    /* Dark for punctuation */
+}
+
+/* CRITICAL: Force all code text to dark color as fallback */
+pre code,
+pre code span,
+pre code * {
+    color: #24292f !important;
+}
+
+/* Then re-apply specific syntax colors */
+pre code .hljs-keyword,
+pre code .token.keyword {
+    color: #cf222e !important;
+}
+
+pre code .hljs-string,
+pre code .token.string {
+    color: #0a3069 !important;
+}
+
+pre code .hljs-comment,
+pre code .token.comment {
+    color: #57606a !important;
+    font-style: italic !important;
+}
+
+pre code .hljs-function,
+pre code .token.function,
+pre code .hljs-title,
+pre code .token.method {
+    color: #8250df !important;
+}
+
+pre code .hljs-number,
+pre code .token.number {
+    color: #0550ae !important;
+}
+
+pre code .hljs-class-name,
+pre code .token.class-name,
+pre code .hljs-type,
+pre code .token.type {
+    color: #953800 !important;
+}
+
+pre code .hljs-built_in,
+pre code .token.builtin {
+    color: #0550ae !important;
+}
+
+pre code .hljs-literal,
+pre code .token.boolean {
+    color: #0550ae !important;
+}
+
+pre code .hljs-attr,
+pre code .token.attr-name {
+    color: #0550ae !important;
+}
+
+pre code .hljs-property,
+pre code .token.property {
+    color: #0550ae !important;
+}
+
 /* Blockquotes - compact with centered text */
 blockquote {
     border-left: 4px solid #d1d9e0 !important;

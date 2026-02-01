@@ -841,6 +841,145 @@ ${selected.value}
     },
   );
 
+  // Skill Review command - Check staleness of skills and knowledge
+  const skillReviewDisposable = vscode.commands.registerCommand(
+    "alex.skillReview",
+    async () => {
+      const endLog = telemetry.logTimed("command", "skill_review");
+      try {
+        const reviewTypes = [
+          { label: "$(warning) Check Stale Skills", description: "Review skills that may need updating", detail: "Security, privacy, models, APIs" },
+          { label: "$(shield) Security Review", description: "Review Microsoft SFI and security practices", detail: "Secure Future Initiative compliance" },
+          { label: "$(lock) Privacy & PII Review", description: "Review GDPR, Australian Privacy compliance", detail: "Data protection regulations" },
+          { label: "$(hubot) Responsible AI Review", description: "Review AI ethics and governance practices", detail: "Microsoft & Google RAI principles" },
+          { label: "$(rocket) LLM Model Review", description: "Check model recommendations are current", detail: "Claude, GPT, Gemini updates" },
+          { label: "$(extensions) VS Code API Review", description: "Check extension patterns are current", detail: "VS Code release compatibility" },
+          { label: "$(comment-discussion) Chat Patterns Review", description: "Review chat participant patterns", detail: "Proposed APIs, deprecations" },
+          { label: "$(git-branch) Git Workflow Review", description: "Review git best practices", detail: "Branching, commits, PR patterns" },
+        ];
+
+        const selected = await vscode.window.showQuickPick(reviewTypes, {
+          placeHolder: "Select review type",
+          title: "🔍 Skill & Knowledge Review",
+        });
+
+        if (!selected) {
+          endLog(true);
+          return;
+        }
+
+        let prompt = "";
+        const reviewName = selected.label.replace(/\$\([^)]+\)\s*/, '');
+        
+        switch (reviewName) {
+          case "Check Stale Skills":
+            prompt = `Review Alex's staleness-prone skills and check if they need updates. Skills to check:
+1. microsoft-sfi - Secure Future Initiative (last validated: Feb 2026)
+2. pii-privacy-regulations - GDPR & Australian Privacy (last validated: Feb 2026)
+3. privacy-responsible-ai - RAI principles (last validated: Feb 2026)
+4. llm-model-selection - Model recommendations (last validated: Jan 2026)
+5. vscode-extension-patterns - VS Code APIs (last validated: Jan 2026)
+6. chat-participant-patterns - Chat APIs (last validated: Jan 2026)
+7. git-workflow - Git practices (last validated: Jan 2026)
+8. teams-app-patterns - Teams development (last validated: Jan 2026)
+9. m365-agent-debugging - M365 agents (last validated: Jan 2026)
+
+For each skill, check if there are newer versions, deprecations, or significant changes to the underlying technology.`;
+            break;
+          case "Security Review":
+            prompt = `Review Microsoft Secure Future Initiative (SFI) compliance in the current project:
+1. Check the 3 Core Principles: Secure by Design, Secure by Default, Secure Operations
+2. Verify the 6 Pillars: Identity/Secrets, Tenants/Isolation, Networks, Engineering Systems, Threat Detection, Response/Remediation
+3. Review OWASP Top 10 mitigations
+4. Check credential management and secret handling
+5. Verify dependency security (npm audit or equivalent)
+6. Review security code patterns
+
+Reference: .github/skills/microsoft-sfi/SKILL.md`;
+            break;
+          case "Privacy & PII Review":
+            prompt = `Review privacy and PII handling compliance in the current project:
+1. GDPR Compliance: Lawful basis, data minimization, consent, data subject rights
+2. Australian Privacy Principles (APPs): All 13 APPs checklist
+3. PII identification: Check for direct and indirect identifiers
+4. Data encryption: At rest and in transit
+5. Logging practices: Ensure PII is not logged
+6. Retention policies: Data lifecycle management
+7. Cross-border transfers: Adequacy and safeguards
+
+Reference: .github/skills/pii-privacy-regulations/SKILL.md`;
+            break;
+          case "Responsible AI Review":
+            prompt = `Review Responsible AI practices in the current project:
+1. Microsoft's 6 RAI Principles: Fairness, Reliability/Safety, Privacy/Security, Inclusiveness, Transparency, Accountability
+2. Google's 3 Pillars: Bold Innovation, Responsible Development, Collaborative Progress
+3. Bias detection and mitigation
+4. Model documentation (Model Cards)
+5. Human-AI collaboration patterns
+6. Appropriate reliance: CAIR/CSR framework
+7. AI transparency and explainability
+
+Reference: .github/skills/privacy-responsible-ai/SKILL.md and .github/skills/appropriate-reliance/SKILL.md`;
+            break;
+          case "LLM Model Review":
+            prompt = `Review and update LLM model recommendations:
+1. Check current model capabilities and pricing
+2. Verify context window sizes are accurate
+3. Review tier recommendations (Frontier/Capable/Fast)
+4. Check for new model announcements (Claude, GPT, Gemini)
+5. Update cost optimization strategies
+6. Review model-specific limitations
+
+Reference: .github/skills/llm-model-selection/SKILL.md
+Check: Anthropic docs, OpenAI docs, Google AI docs`;
+            break;
+          case "VS Code API Review":
+            prompt = `Review VS Code extension patterns for current API compatibility:
+1. Check against latest VS Code release notes
+2. Verify no deprecated APIs are used
+3. Review proposed APIs that may have become stable
+4. Check webview security policies
+5. Review activation events and contributes patterns
+6. Verify compatibility with current VS Code version
+
+Reference: .github/skills/vscode-extension-patterns/SKILL.md
+Check: VS Code API docs, latest release notes`;
+            break;
+          case "Chat Patterns Review":
+            prompt = `Review chat participant patterns for current API status:
+1. Check which proposed APIs have become stable
+2. Review deprecated patterns
+3. Verify chat participant registration patterns
+4. Check language model tool patterns
+5. Review follow-up question patterns
+
+Reference: .github/skills/chat-participant-patterns/SKILL.md`;
+            break;
+          case "Git Workflow Review":
+            prompt = `Review git workflow patterns and best practices:
+1. Check branch naming conventions
+2. Review commit message format (Conventional Commits)
+3. Verify PR and code review patterns
+4. Check GitHub CLI usage patterns
+5. Review git hooks and automation
+
+Reference: .github/skills/git-workflow/SKILL.md`;
+            break;
+        }
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `🔍 ${reviewName} prompt copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
   // Beta telemetry commands (temporary - remove after beta)
   const viewTelemetryDisposable = vscode.commands.registerCommand(
     "alex.viewBetaTelemetry",
@@ -1148,6 +1287,7 @@ ${selected.value}
   context.subscriptions.push(debugThisDisposable);
   context.subscriptions.push(generateDiagramDisposable);
   context.subscriptions.push(generateTestsDisposable);
+  context.subscriptions.push(skillReviewDisposable);
 
   // Skill Catalog command
   const skillCatalogDisposable = vscode.commands.registerCommand(

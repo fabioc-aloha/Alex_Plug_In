@@ -8,7 +8,7 @@ applyTo: "**/*teams*,**/*manifest*,**/*m365*"
 
 ## ⚠️ Staleness Warning
 
-Teams platform evolves rapidly. **Last validated:** January 2026 (TTK 5.x, Manifest v1.17)
+Teams platform evolves rapidly. **Last validated:** February 2026 (TTK 5.x, Manifest v1.18+)
 
 **Check:** [Teams Docs](https://learn.microsoft.com/en-us/microsoftteams/platform/), [Teams Toolkit](https://github.com/OfficeDev/TeamsFx)
 

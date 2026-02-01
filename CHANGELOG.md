@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.6] - 2026-02-02
+
+### Added
+
+- **🧠 Model Awareness** — Self-monitoring capability for model-task matching
+  - Warns users when complex tasks (meditation, self-actualization, architecture refactoring) may require Opus-level cognition
+  - Added to `copilot-instructions.md` with task-to-model mapping table
+  - Documented in `COGNITIVE-ARCHITECTURE.md` as fifth core principle
+
+- **🎨 Markdown Preview CSS Fix** — Fixed code block readability
+  - Added Monaco editor `mtk1-mtk12` token classes to `.vscode/markdown-light.css`
+  - Code syntax highlighting now visible on gray backgrounds
+  - Colors: `#1f2328` (default), `#cf222e` (keywords), `#0550ae` (types), etc.
+
+### Changed
+
+- **Skills Updated to Feb 2026** — Five skills validated and refreshed:
+  - `llm-model-selection` — Claude 4.5 family pricing ($1-$25/MTok), context windows (200K-1M), extended thinking
+  - `chat-participant-patterns` — VS Code 1.108+ APIs, tool calling with `@vscode/chat-extension-utils`
+  - `teams-app-patterns` — Validation date Feb 2026
+  - `m365-agent-debugging` — Validation date Feb 2026
+  - `git-workflow` — Validation date Feb 2026
+
+- **Skill Count** — 52 → 53 skills (added `pii-privacy-regulations`)
+
+### Documentation
+
+- Updated `SKILLS-CATALOG.md` with pii-privacy-regulations skill
+- Updated `SKILLS-CAPABILITIES.md` with Model Awareness section (Table 8)
+- Updated `COGNITIVE-ARCHITECTURE.md` with Model Awareness principle
+- Updated `README.md` feature comparison table
+- Updated `QUICK-REFERENCE.md` and `USER-MANUAL.md` with Skill Review command
+
+---
+
 ## [4.0.5] - 2026-02-01
 
 ### Changed

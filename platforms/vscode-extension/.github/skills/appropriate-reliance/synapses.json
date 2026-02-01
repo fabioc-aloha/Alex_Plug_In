@@ -26,6 +26,13 @@
             "type": "implements",
             "strength": 0.9,
             "context": "Proactive collaboration is core to Alex personality"
+        },
+        {
+            "target": "privacy-responsible-ai",
+            "type": "complements",
+            "strength": 0.75,
+            "bidirectional": true,
+            "context": "Trust calibration is core to responsible AI deployment"
         }
     ],
     "triggers": [
@@ -33,6 +40,11 @@
         "user accepts without reviewing",
         "user rejects without reasoning",
         "AI should challenge assumption",
-        "trust calibration needed"
+        "trust calibration needed",
+        "CAIR",
+        "CSR",
+        "over-reliance",
+        "under-reliance",
+        "appropriate reliance"
     ]
 }

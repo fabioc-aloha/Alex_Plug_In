@@ -187,6 +187,7 @@ Search across all your projects:
 | `Alex: Upgrade Architecture` | Update to latest version |
 | `Alex: Dream (Neural Maintenance)` | Validate and repair synapses |
 | `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check |
+| `Alex: Skill & Knowledge Review` | **NEW** Review staleness-prone skills |
 | `Alex: Open Documentation` | View the docs |
 | `Alex: Sync Global Knowledge` | Sync with GitHub Gist |
 | `Alex: Push Knowledge to Cloud` | Upload to GitHub |
@@ -208,7 +209,7 @@ Search across all your projects:
 | `/profile` | Personalization | `@alex /profile` |
 | `/knowledge` | Search global | `@alex /knowledge caching patterns` |
 | `/saveinsight` | Save learning | `@alex /saveinsight [your insight]` |
-| `/promote` | Promote to global | `@alex /promote .github/domain-knowledge/DK-API.md` |
+| `/promote` | Promote to global | `@alex /promote .github/skills/api-design/SKILL.md` |
 | `/knowledgestatus` | Knowledge stats | `@alex /knowledgestatus` |
 | `/sync` | Cloud sync | `@alex /sync` |
 | `/docs` | Open documentation | `@alex /docs` |
@@ -228,27 +229,27 @@ Alex has different types of memory:
 | **Working** | Chat session | Current conversation (temporary) |
 | **Procedural** | `.github/instructions/` | How-to processes |
 | **Episodic** | `.github/prompts/` | Complex workflows |
-| **Domain** | `.github/domain-knowledge/` | Project expertise |
+| **Skills** | `.github/skills/` | Domain expertise |
 | **Global** | `~/.alex/` | Cross-project knowledge |
 
 ### Creating Domain Knowledge
 
-For project-specific expertise, create a file:
+For project-specific expertise, create a skill folder:
 
 ```text
-.github/domain-knowledge/DK-YOUR-TOPIC.md
+.github/skills/your-topic/SKILL.md
 ```
 
 Template:
 
 ```markdown
-# DK-YOUR-TOPIC
+# Your Topic Skill
 
 > Brief description
 
 ## Overview
 
-What this knowledge covers.
+What this skill covers.
 
 ## Key Concepts
 
@@ -354,7 +355,6 @@ Or ask Alex directly:
 | 🟢 Low | Accessibility, Localization, Assets, Configuration |
 
 **Audit Triggers:**
-
 - "full audit" / "master audit" - All 22 checks
 - "security audit" - Secrets, CSP, input sanitization
 - "dependency audit" - npm vulnerabilities, outdated packages

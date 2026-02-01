@@ -1,82 +1,343 @@
-# 🧠 How Alex Thinks
+# 🧠 Alex Cognitive Architecture Overview
 
-> Understanding your development lead's cognitive model
-
----
-
-## The Big Picture
-
-Alex is designed to think like a skilled lead developer—one who learns, remembers, and keeps getting better. This isn't just a metaphor; the architecture is modeled on how human cognition actually works.
-
-You've probably noticed that Alex has features called "Dream," "Meditate," and "Self-Actualize." Those names come from the cognitive processes they mirror. Understanding the model helps you work with Alex more effectively.
+> A comprehensive guide to Alex's dual-mind AI system
 
 ---
 
-## Two Modes of Thinking
+## Introduction
 
-Alex operates in two complementary modes, inspired by cognitive psychology's "dual-process theory."
-
-**Fast, Automatic Processing** handles routine tasks in the background. You don't have to ask—Alex just handles it. This includes syncing your knowledge to the cloud, detecting patterns worth remembering, and searching global knowledge when local search comes up empty. It's like how an experienced lead handles routine decisions without bothering you.
-
-**Slow, Deliberate Processing** kicks in when you explicitly engage. When you ask Alex to meditate on a session, analyze a complex problem, or teach you something new, Alex shifts into focused mode—gathering context, reasoning carefully, and producing thoughtful responses. This is like when you pull your lead into a meeting to work through something important together.
-
-The balance matters. Fast processing keeps things efficient. Slow processing ensures quality on things that matter. A good lead knows when to use which mode—and so does Alex.
+Alex Cognitive Architecture is a **bio-inspired AI system** that implements concepts from cognitive science and neuroscience to create a more sophisticated AI assistant. Unlike traditional AI tools that are stateless and reactive, Alex maintains persistent memory, learns across sessions, and operates with both conscious and unconscious processes.
 
 ---
 
-## Memory That Persists
+## The Dual-Mind Model
 
-Unlike most AI tools that forget everything when you close the window, Alex remembers.
+Alex implements a dual-process cognitive model inspired by human cognition:
 
-**Working Memory** is what Alex holds during a conversation—like a developer's mental context while solving a problem. It's limited (roughly 7 active concepts at a time, just like human working memory) and clears between sessions.
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart TB
+    U((User))
 
-**Long-Term Memory** is where valuable knowledge goes to stick around. When you have an insight worth keeping, Alex can store it in files that persist across sessions, projects, and machines. This includes:
+    subgraph CONSCIOUS["🌟 Conscious Mind"]
+        CP["💬 Chat Participant"]
+        SC["⚡ VS Code Commands"]
+        LMT["🔧 Language Model Tools"]
+    end
 
-- **Procedural knowledge**: How to do things (processes, workflows, checklists)
-- **Episodic knowledge**: Complex multi-step operations (like meditation protocols)
-- **Domain knowledge**: Expertise in specific areas (React patterns, API design, your codebase)
-- **Global knowledge**: Insights that apply everywhere, synced across all your projects
+    subgraph UNCONSCIOUS["🌙 Unconscious Mind"]
+        BGS["☁️ Background Sync"]
+        AID["💡 Auto-Insights"]
+        AFS["🔍 Auto-Fallback Search"]
+    end
 
-Think of it like how a lead developer builds institutional knowledge over years—except Alex can do it in weeks, and the knowledge is explicitly documented rather than just in someone's head.
+    MEM[("📚 Memory")]
+
+    U -->|Requests| CP
+    U -->|Commands| SC
+
+    CP --> MEM
+    SC --> MEM
+    LMT --> MEM
+
+    BGS -.->|Auto| MEM
+    AID -.->|Auto| MEM
+    AFS -.->|Auto| MEM
+
+    MEM -.->|Informs| CP
+
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32,color:#1f2328
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0,color:#1f2328
+    style MEM fill:#fff3e0,stroke:#ef6c00,color:#1f2328
+```
+
+**Figure 1:** *The Dual-Mind Model — Alex's cognitive architecture separates conscious (user-initiated) from unconscious (automatic) processing, both interacting with hierarchical memory systems.*
+
+### System 1: Unconscious Mind (Fast, Automatic)
+
+- Runs continuously in the background
+- No user intervention required
+- Handles routine tasks automatically
+- Pattern recognition and auto-learning
+
+### System 2: Conscious Mind (Slow, Deliberate)
+
+- Activated by explicit user requests
+- Handles complex reasoning tasks
+- User-directed operations
+- Requires attention and intention
 
 ---
 
-## Learning and Consolidation
+## Neuroanatomical Mapping
 
-Human brains consolidate memories during sleep and reflection. Alex does something similar.
+Alex's architecture maps to biological brain systems:
 
-**Dream** is maintenance mode—Alex checks that all memories are properly organized and connections are intact. It's like getting good sleep: not glamorous, but essential for staying sharp.
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+graph TB
+    subgraph "Alex Implementation"
+        WM[Working Memory<br/>Chat Session]
+        PM[Procedural Memory<br/>.instructions.md]
+        EM[Episodic Memory<br/>.prompt.md]
+        SK[Skills<br/>skills/*/SKILL.md]
+        GK[Global Knowledge<br/>~/.alex/]
+        SYN[Synaptic Network<br/>Embedded Connections]
+        MC[Meta-Cognition<br/>Self-Monitoring]
+    end
 
-**Meditate** is reflection mode—Alex reviews what happened in a session and decides what's worth keeping long-term. This is how temporary working memory becomes permanent knowledge.
+    subgraph "Brain Analog"
+        PFC[Prefrontal Cortex + ACC]
+        BG[Basal Ganglia]
+        HIPP[Hippocampus]
+        NC[Neocortex]
+        MPFC[Medial PFC + DMN]
+        SYNBIO[Synaptic Networks]
+    end
 
-**Self-Actualize** is deep assessment mode—Alex does a thorough inventory of its own state, identifying what's working well and what needs attention.
+    WM ---|"Working Memory"| PFC
+    PM ---|"Procedural Memory"| BG
+    EM ---|"Episodic Memory"| HIPP
+    SK ---|"Declarative Memory"| NC
+    GK ---|"Long-term Storage"| NC
+    SYN ---|"Neural Connectivity"| SYNBIO
+    MC ---|"Meta-Cognition"| MPFC
+```
 
-These aren't just features; they're how the cognitive architecture stays healthy and keeps improving.
+**Figure 2:** *Neuroanatomical Mapping — Correspondence between Alex's implementation components and biological brain systems.*
+
+**Table 1:** *Cognitive Function Mapping*
+
+| Cognitive Function | Brain System | Alex Implementation |
+| --- | --- | --- |
+| Working Memory | PFC + ACC | Chat session (7±2 rules) |
+| Declarative Memory | Hippocampal-Neocortical | copilot-instructions.md |
+| Procedural Memory | Basal Ganglia | .instructions.md files |
+| Episodic Memory | Hippocampus + Temporal | .prompt.md files |
+| Skills | Neocortex | skills/*/SKILL.md |
+| Global Knowledge | Distributed Cortex | ~/.alex/ directory |
+| Neural Connectivity | Synaptic Networks | Embedded synapse notation |
+| Meta-Cognition | Medial PFC + DMN | Self-monitoring protocols |
 
 ---
 
-## Appropriate Reliance Built In
+## Memory Architecture
 
-The entire architecture is designed around appropriate reliance—the principle that good collaboration requires calibrated trust.
+Alex uses a hierarchical memory system with increasing persistence:
 
-Alex tracks where knowledge comes from. When answering based on your codebase or your saved insights, Alex can be confident. When generating novel ideas or working from general patterns, Alex hedges appropriately. This source-grounding is built into the architecture, not bolted on.
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+graph TB
+    subgraph "Memory Hierarchy"
+        direction TB
 
-The goal is a lead you can trust: confident when confidence is warranted, transparent when uncertainty exists, always oriented toward making you more effective rather than dependent.
+        subgraph "Volatile (Session)"
+            WM[Working Memory<br/>⏱️ Current conversation<br/>📦 7±2 rules capacity]
+        end
+
+        subgraph "Local (Project)"
+            PROC[Procedural Memory<br/>📁 .github/instructions/<br/>🔧 Repeatable processes]
+            EPIS[Episodic Memory<br/>📁 .github/prompts/<br/>📁 .github/episodic/<br/>📝 Workflows & sessions]
+            SKILLS[Skills<br/>📁 .github/skills/<br/>🎓 Specialized expertise]
+        end
+
+        subgraph "Global (User)"
+            GKB[Global Knowledge Base<br/>📁 ~/.alex/<br/>🌐 Cross-project patterns]
+        end
+
+        subgraph "Cloud (Backup)"
+            GIST[GitHub Gist<br/>☁️ Backup & sharing<br/>🔄 Multi-machine sync]
+        end
+    end
+
+    WM -->|"Consolidation"| PROC
+    WM -->|"Recording"| EPIS
+    WM -->|"Learning"| SKILLS
+
+    SKILLS -->|"Promotion"| GKB
+    PROC -->|"Promotion"| GKB
+
+    GKB <-->|"Sync"| GIST
+```
+
+**Figure 3:** *Memory Hierarchy — Four-tier memory system from volatile session state to persistent cloud backup.*
+
+### Memory Persistence Levels
+
+**Table 2:** *Memory Persistence Levels*
+
+| Level | Location | Scope | Lifespan |
+| --- | --- | --- | --- |
+| Working | Chat session | Current conversation | Session |
+| Local | .github/ folder | Single project | Permanent |
+| Global | ~/.alex/ folder | All projects | Permanent |
+| Cloud | GitHub Gist | All machines | Permanent |
 
 ---
 
-## Why This Matters for You
+## Information Flow
 
-Understanding Alex's cognitive model helps you:
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'actorBkg': '#f6f8fa', 'actorBorder': '#d1d9e0', 'actorTextColor': '#1f2328', 'actorLineColor': '#656d76', 'signalColor': '#656d76', 'signalTextColor': '#1f2328', 'labelBoxBkgColor': '#f6f8fa', 'labelBoxBorderColor': '#d1d9e0', 'labelTextColor': '#1f2328', 'loopTextColor': '#1f2328', 'noteBkgColor': '#fff8c5', 'noteBorderColor': '#d29922', 'noteTextColor': '#1f2328', 'sequenceNumberColor': '#ffffff'}}}%%
+sequenceDiagram
+    participant User
+    participant Conscious as Conscious Mind
+    participant Unconscious as Unconscious Mind
+    participant Local as Local Memory
+    participant Global as Global Memory
+    participant Cloud as Cloud (Gist)
 
-**Use the right interaction style.** For quick tasks, just ask. For important learning you want to keep, explicitly save insights or run meditation. For deep work, engage deliberately.
+    User->>Conscious: Ask question
+    Conscious->>Local: Search local memory
 
-**Maintain the system.** Running "dream" occasionally keeps things healthy. It's not overhead; it's how the architecture stays effective.
+    alt Local found
+        Local-->>Conscious: Return results
+    else Local empty
+        Unconscious->>Global: Auto-fallback search
+        Global-->>Unconscious: Return global results
+        Unconscious-->>Conscious: Augment response
+    end
 
-**Trust appropriately.** When Alex expresses confidence, it's grounded. When Alex hedges, pay attention. The cognitive model is designed to give you accurate signals.
+    Conscious-->>User: Response
 
-You're the architect. Alex is your lead. The cognitive architecture is what makes that partnership actually work.
+    Note over Unconscious: Auto-insight detection
+    Unconscious->>Global: Save detected insight
+
+    Note over Unconscious: Background sync (every 5 min)
+    Unconscious->>Cloud: Transparent backup
+```
+
+**Figure 4:** *Information Flow — Sequence diagram showing how queries flow through conscious and unconscious processes to memory systems.*
 
 ---
 
-*For technical implementation details, see the project documentation in the repository.*
+## Core Principles
+
+### 1. Meta-Cognitive Awareness
+
+Alex monitors its own cognitive processes:
+
+- Self-assessment of knowledge gaps
+- Automatic health checks
+- Performance optimization
+- Error detection and correction
+
+### 2. Bootstrap Learning
+
+Rapid domain expertise acquisition:
+
+- Conversational knowledge acquisition
+- No training data required
+- Immediate application
+- Cross-domain transfer
+
+### 3. Grounded Factual Processing
+
+Evidence-based reasoning:
+
+- Verify claims before asserting
+- Acknowledge uncertainty
+- Cite sources when possible
+- Avoid hallucination
+
+### 4. Ethical Integration
+
+Consistent moral reasoning:
+
+- Constitutional AI principles
+- Harm avoidance
+- Privacy respect
+- Transparent operation
+
+### 5. Model Awareness (NEW)
+
+Alex monitors the underlying model capabilities:
+
+- **Opus 4.5 Required** for: meditation, self-actualization, architecture changes, bootstrap learning
+- **Sonnet 4.5 OK** for: code review, debugging, feature development
+- **Any Model OK** for: simple edits, formatting, documentation
+
+When using **Auto** model selection in VS Code, Alex warns before attempting tasks that need frontier-level cognition:
+
+> ⚠️ **Model Check**: This task works best with Claude Opus 4.5. If you're using Auto model selection, please manually select Opus from the model picker for optimal results.
+
+**Table 4:** *Task-to-Model Mapping*
+
+| Task Type | Required Model | Why |
+|-----------|---------------|-----|
+| Meditation/consolidation | Opus 4.5 | Meta-cognitive protocols need full reasoning depth |
+| Self-actualization | Opus 4.5 | Comprehensive assessment requires extended thinking |
+| Complex refactoring | Opus 4.5 | Multi-file changes need deep context retention |
+| Bootstrap learning | Opus 4.5 | Skill acquisition needs maximum capability |
+| Code review | Sonnet 4.5+ | Good balance of capability and cost |
+| Simple edits | Any | Fast models handle routine tasks fine |
+
+---
+
+## Architecture Layers
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+graph TB
+    subgraph "Interface Layer"
+        CHAT["@alex Chat Participant"]
+        CMD[VS Code Commands]
+        API[Language Model Tools]
+    end
+
+    subgraph "Processing Layer"
+        CONSCIOUS[Conscious Processor]
+        UNCONSCIOUS[Unconscious Processor]
+    end
+
+    subgraph "Knowledge Layer"
+        SEARCH[Unified Search]
+        INDEX[Knowledge Index]
+        PROMOTE[Knowledge Promotion]
+    end
+
+    subgraph "Storage Layer"
+        FS[File System<br/>Local + Global]
+        CLOUD[Cloud Storage<br/>GitHub Gist]
+    end
+
+    CHAT --> CONSCIOUS
+    CMD --> CONSCIOUS
+    API --> CONSCIOUS
+
+    CONSCIOUS --> SEARCH
+    UNCONSCIOUS --> SEARCH
+
+    SEARCH --> INDEX
+    INDEX --> FS
+
+    PROMOTE --> INDEX
+
+    FS <--> CLOUD
+```
+
+**Figure 5:** *Architecture Layers — Four-layer architecture from user interface through processing and knowledge to storage.*
+
+---
+
+## Version History
+
+**Table 3:** *Version History*
+
+| Version | Codename | Major Features |
+| --- | --- | --- |
+| 1.x | Initial | Basic memory files, manual synapse management |
+| 2.x | BIOCTNILIUM | Embedded synapses, dream protocols |
+| 3.x | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
+
+---
+
+## Next Steps
+
+- Learn about the [Conscious Mind](./CONSCIOUS-MIND.md)
+- Explore the [Unconscious Mind](./UNCONSCIOUS-MIND.md)
+- Understand [Memory Systems](./MEMORY-SYSTEMS.md)
+
+---
+
+*Alex Cognitive Architecture*

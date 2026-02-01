@@ -18,19 +18,51 @@ Security practices evolve with new threats, vulnerabilities, and industry standa
 - Dependency security advisories
 - Compliance requirement changes
 
-**Last validated:** January 2026
+**Last validated:** February 2026
 
-**Check current state:** [Microsoft SFI](https://www.microsoft.com/en-us/security/blog/secure-future-initiative/), [OWASP](https://owasp.org/), [CVE Database](https://cve.mitre.org/)
+**Check current state:** [Microsoft SFI](https://www.microsoft.com/en-us/trust-center/security/secure-future-initiative), [OWASP](https://owasp.org/), [CVE Database](https://cve.mitre.org/)
 
 ---
 
-## SFI Core Pillars
+## SFI Core Principles
+
+Three principles anchor Microsoft's approach to SFI:
+
+| Principle | Focus |
+| --------- | ----- |
+| **Secure by Design** | Security comes first when designing any product or service |
+| **Secure by Default** | Protections enabled/enforced by default, require no extra effort, not optional |
+| **Secure Operations** | Security controls and monitoring continuously improved for current/future threats |
+
+> **Satya's Mandate (May 2024):** "If you're faced with the tradeoff between security and another priority, your answer is clear: Do security."
+
+---
+
+## SFI Foundations
+
+Four foundations that underpin successful security operations:
+
+| Foundation | Description |
+| ---------- | ----------- |
+| **Security-first Culture** | Daily behaviors reinforced through regular meetings between engineering and SFI leaders |
+| **Security Governance** | Framework led by CISO, partnering with engineering teams to oversee SFI and manage risks |
+| **Continuous Improvement** | Growth mindset integrating feedback and learnings from incidents into standards |
+| **Paved Paths & Standards** | Best practices that optimize productivity, compliance, and security at scale |
+
+---
+
+## SFI Six Pillars
 
 | Pillar | Focus |
 | ------ | ----- |
-| **Secure by Design** | Build security in from the start |
-| **Secure by Default** | Safest settings out of the box |
-| **Secure Operations** | Continuous monitoring and response |
+| **Protect Identities & Secrets** | Best-in-class standards for identity/secrets infrastructure, phishing-resistant MFA |
+| **Protect Tenants & Isolate Systems** | Tenant isolation and production system protection |
+| **Protect Networks** | Network security and segmentation |
+| **Protect Engineering Systems** | Secure development infrastructure and CI/CD |
+| **Monitor & Detect Cyberthreats** | Continuous threat monitoring and detection |
+| **Accelerate Response & Remediation** | Fast incident response and recovery |
+
+---
 
 ## Secure by Design
 

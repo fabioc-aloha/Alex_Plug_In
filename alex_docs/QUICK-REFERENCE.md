@@ -55,6 +55,7 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
 | `Alex: Create Learning Goal` | Create a new learning goal |
 | `Alex: Show Learning Goals` | View and manage learning goals |
+| `Alex: Skill & Knowledge Review` | **NEW** Review staleness-prone skills (security, privacy, AI, APIs) |
 | `Alex: Report Issue / View Diagnostics` | View local telemetry for bug reports |
 
 ---

@@ -19,6 +19,20 @@
             "type": "extends",
             "strength": 0.8,
             "reason": "Privacy incidents need response"
+        },
+        {
+            "target": "pii-privacy-regulations",
+            "type": "extends",
+            "strength": 0.9,
+            "bidirectional": true,
+            "reason": "Detailed regulatory compliance for PII"
+        },
+        {
+            "target": "appropriate-reliance",
+            "type": "complements",
+            "strength": 0.75,
+            "bidirectional": true,
+            "reason": "Human-AI trust calibration is core to responsible AI"
         }
     ],
     "triggers": [
@@ -30,6 +44,14 @@
         "responsible AI",
         "bias",
         "fairness",
-        "ethical AI"
+        "ethical AI",
+        "RAI",
+        "transparency",
+        "accountability",
+        "model card",
+        "HAX",
+        "human oversight"
+    ]
+}
     ]
 }

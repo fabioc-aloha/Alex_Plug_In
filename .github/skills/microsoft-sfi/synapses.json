@@ -26,6 +26,18 @@
             "type": "implements",
             "strength": 0.9,
             "reason": "Dependency security practices"
+        },
+        {
+            "target": "architecture",
+            "type": "informs",
+            "strength": 0.75,
+            "reason": "SFI six pillars guide architecture decisions"
+        },
+        {
+            "target": "testing-strategies",
+            "type": "informs",
+            "strength": 0.6,
+            "reason": "Security testing requirements"
         }
     ],
     "triggers": [
@@ -37,7 +49,13 @@
         "secret",
         "auth",
         "encryption",
-        "SFI"
+        "SFI",
+        "Secure Future Initiative",
+        "threat model",
+        "STRIDE",
+        "phishing",
+        "MFA",
+        "identity protection",
+        "tenant isolation"
     ]
 }
-

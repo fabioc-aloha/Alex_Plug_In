@@ -120,6 +120,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "generateDiagram":
           vscode.commands.executeCommand("alex.generateDiagram");
           break;
+        case "skillReview":
+          vscode.commands.executeCommand("alex.skillReview");
+          break;
         case "openMarketplace":
           vscode.env.openExternal(vscode.Uri.parse("https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"));
           break;
@@ -770,7 +773,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-shortcut">⌃⌥K</span>
                 </button>
                 <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
-                    <span class="action-icon">�</span>
+                    <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
                 </button>
                 
@@ -788,12 +791,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Debug This</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateDiagram')">
-                    <span class="action-icon">�</span>
+                    <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateSkillCatalog')">
                     <span class="action-icon">🌐</span>
                     <span class="action-text">Generate Skill Catalog</span>
+                </button>
+                <button class="action-btn" onclick="cmd('skillReview')" title="Review staleness-prone skills: Security, Privacy, AI, Models, APIs">
+                    <span class="action-icon">🔄</span>
+                    <span class="action-text">Skill Review</span>
                 </button>
                 
                 <div class="action-group-label">⚖️ Work-Life Balance</div>

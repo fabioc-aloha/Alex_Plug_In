@@ -119,6 +119,9 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
 | Auto-Promotion | ❌ None | ✅ Auto-promote DK files during meditation |
 | Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
+| Model Awareness | ❌ None | ✅ **NEW** Warns when task needs Opus |
+| Skill Review | ❌ None | ✅ **NEW** Review staleness-prone skills |
+| Skills Library | ❌ None | ✅ 53 portable skills (security, privacy, RAI, etc.) |
 | Fully Automated Upgrades | ❌ None | ✅ One-click upgrade with schema migration |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
@@ -396,7 +399,8 @@ Access via `Ctrl+Shift+P`:
 | **Alex: Upgrade Architecture** | Update to latest version, preserving customizations |
 | **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
 | **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
-| **Alex: Self-Actualize (Deep Meditation)** | **NEW** Comprehensive self-assessment with session documentation |
+| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation |
+| **Alex: Skill & Knowledge Review** | **NEW** Review staleness-prone skills (security, privacy, RAI, APIs) |
 
 ### 🤖 Language Model Tools
 

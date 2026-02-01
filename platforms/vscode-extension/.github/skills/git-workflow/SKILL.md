@@ -17,7 +17,7 @@ Git core is stable, but GitHub features (Actions, CLI, Copilot integration) evol
 - New git features (e.g., `git switch`, `git restore`)
 - GitHub Copilot CLI integration
 
-**Last validated:** January 2026 (Git 2.43+, GitHub CLI 2.x)
+**Last validated:** February 2026 (Git 2.45+, GitHub CLI 2.x)
 
 **Check current state:** [Git Release Notes](https://git-scm.com/docs/git/RelNotes), [GitHub CLI](https://cli.github.com/)
 

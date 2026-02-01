@@ -205,6 +205,11 @@
         "icon": "$(beaker)"
       },
       {
+        "command": "alex.skillReview",
+        "title": "Alex: Skill & Knowledge Review",
+        "icon": "$(checklist)"
+      },
+      {
         "command": "alex.setupEnvironment",
         "title": "Alex: Setup Environment",
         "icon": "$(gear)"

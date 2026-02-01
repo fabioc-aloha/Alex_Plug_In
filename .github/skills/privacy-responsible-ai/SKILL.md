@@ -16,10 +16,11 @@ Privacy regulations and AI ethics guidelines evolve continuously.
 - AI regulation updates (EU AI Act, etc.)
 - Industry standard changes
 - Major incident learnings
+- Annual transparency reports (Microsoft, Google)
 
-**Last validated:** January 2026
+**Last validated:** February 2026
 
-**Check current state:** [Microsoft RAI](https://www.microsoft.com/en-us/ai/responsible-ai), [GDPR](https://gdpr.eu/), [CCPA](https://oag.ca.gov/privacy/ccpa)
+**Check current state:** [Microsoft RAI](https://www.microsoft.com/en-us/ai/responsible-ai), [Google AI Principles](https://ai.google/responsibility/responsible-ai-practices/), [GDPR](https://gdpr.eu/), [CCPA](https://oag.ca.gov/privacy/ccpa)
 
 ---
 
@@ -59,20 +60,42 @@ Personal Identifiable Information includes:
 - [ ] Health data
 - [ ] Biometric data
 
+---
+
 ## Responsible AI Principles
 
-### Microsoft's 6 Principles
+### Microsoft's 6 Principles (2025 RAI Transparency Report)
 
-| Principle | Question to Ask |
-| --------- | --------------- |
-| **Fairness** | Does it treat all groups equitably? |
-| **Reliability** | Does it work consistently and safely? |
-| **Privacy** | Does it protect user data? |
-| **Inclusiveness** | Does it work for everyone? |
-| **Transparency** | Can users understand how it works? |
-| **Accountability** | Who is responsible for outcomes? |
+| Principle | Question to Ask | Implementation |
+| --------- | --------------- | -------------- |
+| **Fairness** | Does it treat all groups equitably? | Bias testing, diverse datasets, fairness metrics |
+| **Reliability & Safety** | Does it work consistently and safely? | Testing, monitoring, failure modes, guardrails |
+| **Privacy & Security** | Does it protect user data? | Data minimization, encryption, access controls |
+| **Inclusiveness** | Does it work for everyone? | Accessibility, diverse user testing, edge cases |
+| **Transparency** | Can users understand how it works? | Explainability, documentation, model cards |
+| **Accountability** | Who is responsible for outcomes? | Human oversight, audit trails, governance |
 
-### Bias Detection
+### Google's 3 Pillars (2024 AI Responsibility Report)
+
+| Pillar | Description |
+| ------ | ----------- |
+| **Bold Innovation** | Deploy AI where benefits substantially outweigh risks |
+| **Responsible Development** | Human oversight, safety research, bias mitigation, privacy |
+| **Collaborative Progress** | Enable ecosystem, share learnings, engage stakeholders |
+
+### Key RAI Tools & Frameworks
+
+| Tool | Purpose | Source |
+| ---- | ------- | ------ |
+| **HAX Workbook** | Human-AI interaction best practices | Microsoft |
+| **Responsible AI Dashboard** | End-to-end RAI experience | Microsoft/Azure |
+| **Model Cards** | Structured model documentation | Google |
+| **People + AI Guidebook** | Design guidance for AI products | Google PAIR |
+| **Frontier Safety Framework** | Advanced model risk management | Google |
+
+---
+
+## Bias Detection
 
 ```text
 Ask:
@@ -81,9 +104,56 @@ Ask:
 3. What are the failure modes?
 4. Who might be harmed by errors?
 5. Have we tested with diverse inputs?
+6. What demographic slices show performance gaps?
+7. Are there proxy variables that encode bias?
 ```
 
-### AI Transparency
+### Bias Categories
+
+| Type | Description | Example |
+| ---- | ----------- | ------- |
+| **Selection Bias** | Training data not representative | Hiring model trained only on past hires |
+| **Measurement Bias** | Flawed data collection | Self-reported data with social desirability |
+| **Algorithmic Bias** | Model amplifies patterns | Recommendation loops |
+| **Presentation Bias** | UI choices influence perception | Image ordering in search results |
+
+---
+
+## AI Transparency & Documentation
+
+### Model Card Template
+
+```markdown
+## Model Card: [Model Name]
+
+### Model Details
+- **Developer**: [Organization]
+- **Version**: [Version number]
+- **Type**: [Classification/Generation/etc.]
+- **License**: [License terms]
+
+### Intended Use
+- **Primary use cases**: [Description]
+- **Out-of-scope uses**: [What NOT to use it for]
+- **Users**: [Target users]
+
+### Training Data
+- **Sources**: [Data sources]
+- **Size**: [Dataset size]
+- **Known limitations**: [Data gaps]
+
+### Performance
+- **Metrics**: [Evaluation metrics]
+- **Sliced analysis**: [Performance by demographic groups]
+- **Failure modes**: [Known failure patterns]
+
+### Ethical Considerations
+- **Risks**: [Potential harms]
+- **Mitigations**: [Steps taken]
+- **Human oversight**: [Review processes]
+```
+
+### AI Feature Transparency (User-Facing)
 
 ```markdown
 ## How This AI Works
@@ -93,7 +163,28 @@ Ask:
 **Data used**: [What inputs, how stored]
 **Human oversight**: [When humans review]
 **How to appeal**: [Process for disputes]
+**Confidence indicators**: [How certainty is communicated]
 ```
+
+---
+
+## Human-AI Collaboration
+
+### Appropriate Reliance Framework
+
+| State | Description | Signal |
+| ----- | ----------- | ------ |
+| **Over-reliance** | Blind acceptance | User never questions AI |
+| **Appropriate reliance** | Calibrated trust | User verifies when uncertain |
+| **Under-reliance** | Excessive skepticism | User ignores useful AI output |
+
+### Design for Appropriate Reliance
+
+1. **Show confidence levels** — Don't present all outputs as equally certain
+2. **Explain reasoning** — Help users evaluate AI logic
+3. **Enable challenge** — Make it easy to question or override
+4. **Provide alternatives** — Show multiple options when available
+5. **Track calibration** — Monitor if users trust appropriately
 
 ## Code Patterns
 

@@ -152,9 +152,20 @@ graph TB
 | **Cross-Domain Transfer** | ✅ Core | Apply patterns across different fields |
 | **Adaptive Explanation** | 🎯 Wishlist | Adjust depth based on user's level |
 
+### Model Awareness
+
+**Table 8:** *Model Awareness Skills*
+
+| Skill | Status | Description |
+|-------|--------|-------------|
+| **Model Detection** | ✅ Core | Infer current model from context |
+| **Task-Model Matching** | ✅ Core | Know which models suit which tasks |
+| **Warning Protocol** | ✅ Core | Alert user when wrong model for task |
+| **Graceful Degradation** | ✅ Core | Adjust expectations for lesser models |
+
 ### Emotional Intelligence
 
-**Table 8:** *Emotional Intelligence Skills*
+**Table 9:** *Emotional Intelligence Skills*
 
 | Skill | Status | Description |
 |-------|--------|-------------|
@@ -166,7 +177,7 @@ graph TB
 
 ### Ethical Reasoning
 
-**Table 9:** *Ethical Reasoning Skills*
+**Table 10:** *Ethical Reasoning Skills*
 
 | Skill | Status | Location |
 |-------|--------|----------|
@@ -179,7 +190,7 @@ graph TB
 
 ## Skill Status Legend
 
-**Table 10:** *Skill Status Icons and Meanings*
+**Table 11:** *Skill Status Icons and Meanings*
 
 | Icon | Status | Meaning |
 |------|--------|---------|
@@ -194,7 +205,7 @@ graph TB
 
 ### High Priority
 
-**Table 11:** *High Priority Skill Wishlist*
+**Table 12:** *High Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -215,7 +226,7 @@ graph TB
 
 ### Medium Priority
 
-**Table 12:** *Medium Priority Skill Wishlist*
+**Table 13:** *Medium Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -241,7 +252,7 @@ graph TB
 
 ### Low Priority
 
-**Table 13:** *Low Priority Skill Wishlist*
+**Table 14:** *Low Priority Skill Wishlist*
 
 | Skill | Category | Value |
 |-------|----------|-------|
@@ -286,7 +297,7 @@ flowchart LR
 
 ### Contextual Skill Triggers
 
-**Table 14:** *Context-Based Skill Recommendations*
+**Table 15:** *Context-Based Skill Recommendations*
 
 | User Context | Skills to Offer |
 |--------------|-----------------|
@@ -315,18 +326,19 @@ flowchart LR
 
 ### Current Statistics
 
-**Table 15:** *Current Skill Metrics*
+**Table 16:** *Current Skill Metrics*
 
 | Metric | Count |
 |--------|-------|
+| Total Skills | 53 |
 | Core Skills | 15+ |
-| Acquired Skills | 5 |
+| Acquired Skills | 38 |
 | Wishlist Items | ~60 |
 | Skills in Development | Variable |
 
 ### Distribution by Category
 
-**Table 16:** *Skills Distribution by Category*
+**Table 17:** *Skills Distribution by Category*
 
 | Category | Skills | High Priority |
 |----------|--------|---------------|
@@ -335,6 +347,7 @@ flowchart LR
 | Documentation | 3 | 0 |
 | Platform Integration | 4 | 0 |
 | Knowledge Management | 4 | 0 |
+| Model Awareness | 4 | All core |
 | Communication | 5 | 2 wishlist |
 | Teaching & Learning | 8 | 3 wishlist |
 | Emotional Intelligence | 8 | 4 wishlist |

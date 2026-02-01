@@ -13,7 +13,7 @@ M365 Copilot and Teams platform APIs are in rapid evolution. Schema versions, ca
 - New M365 Copilot capabilities
 - Developer Portal changes
 
-**Last validated:** January 2026 (Schema v1.6)
+**Last validated:** February 2026 (Schema v1.6+)
 
 **Check current state:** [Declarative Agent Schema](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest), [Teams Toolkit](https://github.com/OfficeDev/TeamsFx)
 

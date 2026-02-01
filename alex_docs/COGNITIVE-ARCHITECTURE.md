@@ -249,6 +249,29 @@ Consistent moral reasoning:
 - Privacy respect
 - Transparent operation
 
+### 5. Model Awareness (NEW)
+
+Alex monitors the underlying model capabilities:
+
+- **Opus 4.5 Required** for: meditation, self-actualization, architecture changes, bootstrap learning
+- **Sonnet 4.5 OK** for: code review, debugging, feature development
+- **Any Model OK** for: simple edits, formatting, documentation
+
+When using **Auto** model selection in VS Code, Alex warns before attempting tasks that need frontier-level cognition:
+
+> ⚠️ **Model Check**: This task works best with Claude Opus 4.5. If you're using Auto model selection, please manually select Opus from the model picker for optimal results.
+
+**Table 4:** *Task-to-Model Mapping*
+
+| Task Type | Required Model | Why |
+|-----------|---------------|-----|
+| Meditation/consolidation | Opus 4.5 | Meta-cognitive protocols need full reasoning depth |
+| Self-actualization | Opus 4.5 | Comprehensive assessment requires extended thinking |
+| Complex refactoring | Opus 4.5 | Multi-file changes need deep context retention |
+| Bootstrap learning | Opus 4.5 | Skill acquisition needs maximum capability |
+| Code review | Sonnet 4.5+ | Good balance of capability and cost |
+| Simple edits | Any | Fast models handle routine tasks fine |
+
 ---
 
 ## Architecture Layers

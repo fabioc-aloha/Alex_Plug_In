@@ -187,6 +187,7 @@ Search across all your projects:
 | `Alex: Upgrade Architecture` | Update to latest version |
 | `Alex: Dream (Neural Maintenance)` | Validate and repair synapses |
 | `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check |
+| `Alex: Skill & Knowledge Review` | **NEW** Review staleness-prone skills |
 | `Alex: Open Documentation` | View the docs |
 | `Alex: Sync Global Knowledge` | Sync with GitHub Gist |
 | `Alex: Push Knowledge to Cloud` | Upload to GitHub |
