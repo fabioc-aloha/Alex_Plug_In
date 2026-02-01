@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.7] - 2026-02-02
+
+> Version bump for marketplace republish (4.0.6 was published earlier today)
+
+---
+
 ## [4.0.6] - 2026-02-02
 
 ### Added
