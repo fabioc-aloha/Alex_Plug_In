@@ -277,11 +277,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       } catch { /* ignore */ }
     }
 
-    // Goals summary
-    const activeGoalCount = goals.activeGoals.length;
-    const streakDays = goals.streakDays;
-    const completedToday = goals.completedToday;
-
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthIcon = isHealthy
@@ -463,9 +458,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 10px;
             color: var(--vscode-charts-green);
             font-weight: 500;
-        }
-        .status-item.status-streak {
-            border-left-color: var(--vscode-charts-orange, #f97316);
         }
         
         .session-card {
@@ -727,14 +719,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <div class="status-item">
                     <div class="status-label">Insights</div>
                     <div class="status-value"><span class="status-num">${insights}</span></div>
-                </div>
-                <div class="status-item ${streakDays > 0 ? 'status-streak' : ''}">
-                    <div class="status-label">Streak</div>
-                    <div class="status-value">${streakDays > 0 ? '🔥' : ''}<span class="status-num">${streakDays}</span> <span class="status-unit">days</span></div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Goals</div>
-                    <div class="status-value"><span class="status-num">${activeGoalCount}</span> <span class="status-unit">active</span>${completedToday > 0 ? ` <span class="status-completed">+${completedToday} today</span>` : ''}</div>
                 </div>
             </div>
         </div>

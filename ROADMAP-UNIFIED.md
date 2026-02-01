@@ -4,10 +4,10 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 4.0.1 |
-| **Current Heirs** | VS Code (4.0.1), M365 (v4.0) |
-| **Target** | 4.1.0 (Measurement & Dashboard) |
-| **Status** | ✅ v4.0.1 Released |
+| **Current Master Version** | 4.1.0 |
+| **Current Heirs** | VS Code (4.1.0), M365 (v4.0) |
+| **Target** | 4.2.0 (Measurement & Dashboard) |
+| **Status** | ✅ v4.1.0 Released |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
 

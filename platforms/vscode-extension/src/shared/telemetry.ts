@@ -4,13 +4,13 @@ import * as path from "path";
 import * as os from "os";
 
 /**
- * Beta Telemetry - Temporary instrumentation for v3.5.x beta testing
+ * Beta Telemetry - Usage instrumentation for ongoing feedback
  *
- * This module collects anonymous usage data to identify issues during beta.
+ * This module collects anonymous usage data to identify issues and usage patterns.
  * All data is stored locally in the extension's global storage.
  * Users can view/export/clear their data via "Alex: View Beta Telemetry"
  *
- * TODO: Remove or formalize after beta period (target: v3.6.0 or v4.0.0)
+ * NOTE: Retained post-v4.0.0 for ongoing user feedback and feature prioritization.
  */
 
 interface TelemetryEvent {
