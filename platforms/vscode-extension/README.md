@@ -187,13 +187,12 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v3.7.12
+## 🆕 What's New in v4.0.4
 
-- **🎨 Global Markdown Styles** — GitHub-flavored CSS now persists globally across all workspaces
-- **🔧 Operation Lock Fix** — Upgrade offering Initialize no longer blocks itself
-- **🛠️ Developer Tools** — New Welcome View section with Release Preflight, Debug This, Generate Diagram
-- **🔍 Generic Audit** — Audit menu now targets your project, not extension internals
-- **📦 Clean Heir Payload** — Fresh installs get empty episodic folder (build your own history)
+- **🔧 Markdown Preview Fix** — CSS now properly loads using workspace-local path (security compliance)
+- **🛡️ CAIR/CSR Framework** — Calibrated AI Reliance + Collaborative Shared Responsibility
+- **🎨 Creative Latitude** — Encourages creative exploration when appropriate
+- **⚖️ Human Judgment Flags** — Explicit markers for decisions requiring human review
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
