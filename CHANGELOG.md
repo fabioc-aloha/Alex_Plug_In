@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.2] - 2026-02-01 🔧 Hotfix
+
+### Fixed
+
+- **Markdown Preview Path Parsing** — Fixed Windows path escaping issue where `markdown.styles` setting lost backslash before `.alex` folder (e.g., `C:\Users\fabioc.alex` instead of `C:\Users\fabioc\.alex`). Now uses forward slashes for cross-platform compatibility.
+
+---
+
 ## [4.0.1] - 2026-01-31 🔧 Hotfix
 
 ### Fixed

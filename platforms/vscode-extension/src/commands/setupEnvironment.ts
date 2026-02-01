@@ -312,20 +312,24 @@ async function applyMarkdownStyles(): Promise<boolean> {
     return false;
   }
 
+  // Use forward slashes for cross-platform compatibility and to avoid
+  // VS Code settings parsing issues with backslashes on Windows
+  const normalizedPath = cssPath.replace(/\\/g, '/');
+
   // Set markdown.styles as a GLOBAL setting with absolute path
   const config = vscode.workspace.getConfiguration();
   const currentValue = config.inspect("markdown.styles");
   
   // Check if already set to the correct absolute path
   const globalArray = currentValue?.globalValue as string[] | undefined;
-  if (globalArray?.includes(cssPath)) {
+  if (globalArray?.includes(normalizedPath)) {
     return true; // Already correctly configured
   }
 
   try {
     await config.update(
       "markdown.styles",
-      [cssPath],
+      [normalizedPath],
       vscode.ConfigurationTarget.Global
     );
     return true;
