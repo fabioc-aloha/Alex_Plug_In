@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- NO background - transparent -->
+  
+  <!-- Connection lines - monochrome white outline -->
+  <line x1="16" y1="6" x2="6" y2="24" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="16" y1="6" x2="26" y2="24" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="6" y1="24" x2="26" y2="24" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="16" y1="6" x2="16" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="6" y1="24" x2="16" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="26" y1="24" x2="16" y2="16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Outer nodes -->
+  <circle cx="16" cy="6" r="2.5" fill="white"/>
+  <circle cx="6" cy="24" r="2.5" fill="white"/>
+  <circle cx="26" cy="24" r="2.5" fill="white"/>
+  
+  <!-- Central spark -->
+  <polygon points="16,12 17,15 20,15 17.5,17 18.5,20 16,18 13.5,20 14.5,17 12,15 15,15" fill="white"/>
+</svg>

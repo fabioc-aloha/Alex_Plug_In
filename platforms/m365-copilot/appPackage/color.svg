@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <radialGradient id="sparkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A574;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14B8A6" />
+      <stop offset="100%" style="stop-color:#0D7377" />
+    </linearGradient>
+  </defs>
+  
+  <!-- NO background - transparent -->
+  
+  <!-- Connection lines -->
+  <line x1="96" y1="48" x2="48" y2="131" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  <line x1="96" y1="48" x2="144" y2="131" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  <line x1="48" y1="131" x2="144" y2="131" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  <line x1="96" y1="48" x2="96" y2="96" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  <line x1="48" y1="131" x2="96" y2="96" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  <line x1="144" y1="131" x2="96" y2="96" stroke="#0D7377" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Outer nodes -->
+  <circle cx="96" cy="48" r="12" fill="url(#nodeGradient)"/>
+  <circle cx="48" cy="131" r="12" fill="url(#nodeGradient)"/>
+  <circle cx="144" cy="131" r="12" fill="url(#nodeGradient)"/>
+  
+  <!-- Central spark glow -->
+  <circle cx="96" cy="96" r="28" fill="url(#sparkGlow)"/>
+  
+  <!-- Central spark - the "A" shape stylized -->
+  <polygon points="96,73 100,90 118,90 104,102 110,120 96,108 82,120 88,102 74,90 92,90" fill="#D4A574"/>
+</svg>
