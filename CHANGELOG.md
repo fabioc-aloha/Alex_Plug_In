@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Markdown Preview Styling in Package** — `.vscode/settings.json` and `.vscode/markdown-light.css` were being excluded from the extension package by `.vscodeignore`, preventing users from getting the GitHub-style markdown preview. Now included.
 
+### Changed
+
+- **Welcome View Badge** — Replaced "BETA" badge with dynamic version badge (e.g., "v4.0.3") in the activity bar welcome panel
+- **README Badges** — Removed "Pre-Release" status badge since v4.0 is production release
+
 ---
 
 ## [4.0.2] - 2026-02-01 🔧 Hotfix

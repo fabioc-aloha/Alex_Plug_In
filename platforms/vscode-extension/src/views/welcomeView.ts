@@ -155,6 +155,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         ]);
 
       const session = getCurrentSession();
+      
+      // Get extension version
+      const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
+      const version = extension?.packageJSON?.version || '0.0.0';
 
       this._view.webview.html = this._getHtmlContent(
         this._view.webview,
@@ -163,6 +167,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         syncStatus,
         session,
         goalsSummary,
+        version,
       );
     } catch (err) {
       this._view.webview.html = this._getErrorHtml(err);
@@ -245,6 +250,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       streakDays: number;
       totalCompleted: number;
     },
+    version: string,
   ): string {
     // Logo URI for webview
     const logoUri = webview.asWebviewUri(
@@ -345,18 +351,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 14px;
             font-weight: 600;
         }
-        .beta-badge {
-            background: var(--vscode-charts-purple, #a855f7);
-            color: white;
+        .version-badge {
+            background: var(--vscode-badge-background, #4d4d4d);
+            color: var(--vscode-badge-foreground, white);
             font-size: 9px;
-            font-weight: 700;
+            font-weight: 600;
             padding: 2px 6px;
             border-radius: 3px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
-        .beta-badge:hover {
+        .version-badge:hover {
             opacity: 0.8;
         }
         .refresh-btn {
@@ -663,7 +669,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="header">
             <img src="${logoUri}" alt="Alex" class="header-icon" />
             <span class="header-title">Alex Cognitive</span>
-            <span class="beta-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">BETA</span>
+            <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
         
