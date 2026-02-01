@@ -7,11 +7,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 63
+## Skill Count: 64
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 48 |
+| Inheritable | 49 |
 | Master-Only | 8 |
 | Heir:vscode | 2 |
 | Heir:m365 | 2 |
@@ -85,13 +85,14 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [ascii-art-alignment](../.github/skills/ascii-art-alignment/) | inheritable | Text-based diagrams |
 | [localization](../.github/skills/localization/) | inheritable | i18n, l10n, translation workflows |
 
-### 🎨 Visual Design
+### 🎨 Visual Design & Content Creation
 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
 | [svg-graphics](../.github/skills/svg-graphics/) | inheritable | SVG banners, logos, icons, visual identity |
 | [image-handling](../.github/skills/image-handling/) | inheritable | Format conversion, optimization, sizing |
 | [graphic-design](../.github/skills/graphic-design/) | inheritable | Visual composition, branding, aesthetics |
+| [gamma-presentations](../.github/skills/gamma-presentations/) | inheritable | **NEW** AI presentations, documents, social content via Gamma API |
 
 ### 💼 Business & Analysis
 

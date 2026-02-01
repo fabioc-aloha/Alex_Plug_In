@@ -451,6 +451,68 @@ Use in any Copilot chat to activate specific modes:
 
 ---
 
+## 🎨 Gamma AI Integration (NEW)
+
+Alex can generate professional **presentations**, **documents**, **social content**, and **webpages** using the **Gamma API**.
+
+### Quick Start
+
+1. **Get API Key:** [gamma.app/settings](https://gamma.app/settings) (requires Pro+ plan)
+
+2. **Set Environment Variable:**
+
+   ```powershell
+   $env:GAMMA_API_KEY = "sk-gamma-xxx"
+   ```
+
+3. **Ask Alex:**
+
+   ```text
+   @alex Create a 10-slide presentation about machine learning for executives
+   @alex Create a presentation from README.md and export as PowerPoint
+   ```
+
+### CLI Script
+
+A standalone generator is also available:
+
+```bash
+# Simple topic
+node scripts/gamma-generator.js --topic "Introduction to AI"
+
+# From file with export
+node scripts/gamma-generator.js --file README.md --export pptx
+
+# Full options
+node scripts/gamma-generator.js \
+  --topic "Climate Change" \
+  --slides 12 \
+  --tone "inspiring" \
+  --audience "executives" \
+  --image-model flux-pro \
+  --export pptx
+```
+
+### Supported Formats
+
+| Format | Use Case |
+| ------ | -------- |
+| `presentation` | Slide decks (default) |
+| `document` | Reports, pages |
+| `social` | Instagram carousels, LinkedIn posts |
+| `webpage` | Simple websites |
+
+### AI Image Models
+
+- **Cost-effective (2 credits):** flux-quick, imagen-flash, luma-flash
+- **Standard (8-15 credits):** flux-pro, imagen-pro, leonardo
+- **Premium (20-33 credits):** ideogram, dalle3, gpt-image
+- **Ultra (30-120 credits):** flux-ultra, imagen4-ultra
+
+📘 **[Full Gamma Skill Documentation](.github/skills/gamma-presentations/SKILL.md)**
+
+---
+
 ## ☁️ MCP Integrations
 
 Alex provides intelligent guidance for **Azure** and **Microsoft 365** development through MCP (Model Context Protocol) tools.
