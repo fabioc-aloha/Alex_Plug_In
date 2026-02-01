@@ -18,7 +18,8 @@
 | Version | Focus | Status |
 |---------|-------|--------|
 | v3.6.0-v3.9.0 | Dawn → Awareness | ✅ Complete (~2 days) |
-| **v4.0.0 Trust** | CAIR/CSR, Creative Latitude | ✅ **Complete** |
+| v4.0.x | Trust (CAIR/CSR, Creative Latitude) | ✅ **Complete** |
+| **v4.1.0** | **Skill Expansion (63 skills)** | ✅ **Complete** |
 
 ---
 
@@ -86,8 +87,9 @@
 | 3.8.1 | UX Polish | ✅ Done | ✅ Published | — | Complete |
 | **3.9.0** | **Awareness** | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **Complete** |
 | **4.0.0** | **Trust** | **✅ Done** | **✅ Published** | **✅ v4.0** | **Complete** |
-| **4.0.1** | **Hotfix** | **✅ Done** | **✅ Published** | **✅ v4.0** | **CURRENT** |
-| 4.1.0 | Measurement | Planned | Planned | Planned | — |
+| **4.0.1-4.0.6** | **Hotfixes** | **✅ Done** | **✅ Published** | **✅ v4.0** | **Complete** |
+| **4.1.0** | **Skill Expansion** | **✅ Done** | **✅ Published** | **✅ v4.0** | **CURRENT** |
+| 4.2.0 | Measurement | Planned | Planned | Planned | — |
 
 ---
 
@@ -138,9 +140,10 @@
 
 ---
 
-## 🎯 v4.0.0 Trust — Full Epistemic Integrity (ACTIVE)
+## ✅ v4.0.0 Trust — Full Epistemic Integrity (COMPLETE)
 
 > **Goal:** CAIR/CSR framework, creative latitude, measurement
+> **Status:** ✅ Complete (v4.0.0-v4.0.6 released)
 
 ### Master Alex Changes
 
@@ -339,9 +342,10 @@ Useful for:
 | 3.7.x | Foundation | ✅ Complete | 2026-01-29 |
 | 3.8.x | Expression + UX | ✅ Complete | 2026-01-30 |
 | 3.9.0 | Awareness | ✅ Complete | 2026-01-30 |
-| **4.0.0** | **Trust** | ⏳ **Active** | — |
+| 4.0.x | Trust | ✅ Complete | 2026-01-31 |
+| **4.1.0** | **Skill Expansion** | ✅ **Complete** | **2026-02-01** |
 
-**v3.6.0 → v3.9.0: ~2 days** (vs 11 weeks planned) 🚀
+**v3.6.0 → v4.1.0: ~4 days** (vs months planned) 🚀
 
 See [Completed Versions Archive](#-completed-versions-archive) for historical details.
 
