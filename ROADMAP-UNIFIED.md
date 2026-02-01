@@ -4,10 +4,10 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 4.0.0 |
-| **Current Heirs** | VS Code (4.0.0), M365 (v1.6) |
+| **Current Master Version** | 4.0.1 |
+| **Current Heirs** | VS Code (4.0.1), M365 (v4.0) |
 | **Target** | 4.1.0 (Measurement & Dashboard) |
-| **Status** | ✅ v4.0.0 Complete |
+| **Status** | ✅ v4.0.1 Released |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -85,7 +85,8 @@
 | 3.8.0 | Expression | ✅ Done | ✅ Published | ✅ Confidence Starter | Complete |
 | 3.8.1 | UX Polish | ✅ Done | ✅ Published | — | Complete |
 | **3.9.0** | **Awareness** | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **Complete** |
-| **4.0.0** | **Trust** | **✅ Done** | **✅ Published** | **✅ v4.0** | **CURRENT** |
+| **4.0.0** | **Trust** | **✅ Done** | **✅ Published** | **✅ v4.0** | **Complete** |
+| **4.0.1** | **Hotfix** | **✅ Done** | **✅ Published** | **✅ v4.0** | **CURRENT** |
 | 4.1.0 | Measurement | Planned | Planned | Planned | — |
 
 ---
@@ -170,9 +171,11 @@
 
 ### Cross-Platform Validation
 
-- [ ] Same creative latitude: both distinguish facts from ideas
-- [ ] Same human judgment flagging for ethics, strategy, personnel
-- [ ] Users recognize trustworthy Alex on both platforms
+- [x] Same creative latitude: both distinguish facts from ideas
+- [x] Same human judgment flagging for ethics, strategy, personnel
+- [x] Users recognize trustworthy Alex on both platforms
+
+**Status:** ✅ v4.0.0 Complete + v4.0.1 Hotfix (CSS fix)
 
 ---
 
