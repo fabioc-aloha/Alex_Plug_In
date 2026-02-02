@@ -6,15 +6,26 @@ Use this checklist before each release to ensure quality and consistency.
 
 ## 🔐 Authentication
 
-- [ ] **VSCE_PAT** in `.env` file is valid (not expired)
-  - Create PAT at: [Azure DevOps Tokens](https://dev.azure.com/fabioc-aloha/_usersSettings/tokens)
-  - Scopes: Marketplace (Manage)
+⚠️ **PATs expire frequently** — Create a new one before EACH publish session.
+
+- [ ] **Create fresh PAT** at [Azure DevOps Tokens](https://dev.azure.com/fabioc-aloha/_usersSettings/tokens)
+  - Name: `VS Code Marketplace` (or any)
+  - Organization: **All accessible organizations**
+  - Expiration: **30 days** (or custom)
+  - Scopes: **Custom defined** → **Marketplace** → ✅ **Manage**
+- [ ] Update `.env` file in `platforms/vscode-extension/`:
+
+  ```text
+  VSCE_PAT=<paste-new-token-here>
+  ```
 
 **Publish command** (loads PAT from .env):
 
 ```powershell
-$env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { $_.Line.Split("=",2)[1] }) ; vsce publish
+$env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { $_.Line.Split("=",2)[1] }) ; npx vsce publish
 ```
+
+**If you get 401 error**: Your PAT expired. Create a new one and update `.env`.
 
 ---
 
