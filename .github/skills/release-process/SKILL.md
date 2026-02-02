@@ -35,6 +35,9 @@ npx vsce publish                # Stable release
 
 ## PAT (Personal Access Token) Setup
 
+> ⚠️ **IMPORTANT**: PATs expire frequently and may only work for a single publish session.
+> Always create a fresh PAT before each release to avoid 401 errors.
+
 ### Creating a New PAT
 
 1. **Via Marketplace** (Recommended):
