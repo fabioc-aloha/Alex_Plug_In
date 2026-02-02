@@ -7,12 +7,12 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 63
+## Skill Count: 54
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 48 |
-| Master-Only | 8 |
+| Inheritable | 54 |
+| Master-Only | 0 |
 | Heir:vscode | 2 |
 | Heir:m365 | 2 |
 | Unspecified | 3 |
@@ -30,10 +30,6 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [appropriate-reliance](../.github/skills/appropriate-reliance/) | inheritable | Build trust through calibrated confidence |
 | [airs-appropriate-reliance](../.github/skills/airs-appropriate-reliance/) | inheritable | AIRS-16/18 research, AR construct, telemetry design |
 | [bootstrap-learning](../.github/skills/bootstrap-learning/) | inheritable | Domain-agnostic knowledge acquisition |
-| [meditation-facilitation](../.github/skills/meditation-facilitation/) | master-only | Guide conscious knowledge consolidation |
-| [meditation](../.github/skills/meditation/) | master-only | Core meditation protocols |
-| [knowledge-synthesis](../.github/skills/knowledge-synthesis/) | master-only | Cross-project pattern extraction |
-| [global-knowledge](../.github/skills/global-knowledge/) | master-only | Global knowledge base management |
 | [socratic-questioning](../.github/skills/socratic-questioning/) | inheritable | Guide users to discover answers through questions |
 | [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/) | inheritable | Be a thinking partner through explanation |
 
@@ -59,7 +55,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [root-cause-analysis](../.github/skills/root-cause-analysis/) | inheritable | 5 Whys, fishbone, post-mortem |
 | [incident-response](../.github/skills/incident-response/) | inheritable | Crisis handling, severity levels |
 | [post-mortem](../.github/skills/post-mortem/) | inheritable | Blameless retrospectives, learning from failures |
-| [release-preflight](../.github/skills/release-preflight/) | inheritable | Pre-release checks, version sync |
+| [project-deployment](../.github/skills/project-deployment/) | inheritable | **NEW** Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
 | [change-management](../.github/skills/change-management/) | inheritable | Organizational change, stakeholder buy-in |
 | [project-management](../.github/skills/project-management/) | inheritable | Planning, tracking, resource allocation |
 
@@ -103,14 +99,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill | Inheritance | Purpose |
 |-------|-------------|---------|
-| [architecture-refinement](../.github/skills/architecture-refinement/) | master-only | Architecture evolution decisions |
 | [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
 | [architecture-audit](../.github/skills/architecture-audit/) | inheritable | Comprehensive consistency review |
-| [master-alex-audit](../.github/skills/master-alex-audit/) | master-only | Master-specific audit with heir sync, protection checks |
-| [release-process](../.github/skills/release-process/) | master-only | VS Code marketplace publishing workflow |
-| [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
-| [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
-| [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |
 | [skill-catalog-generator](../.github/skills/skill-catalog-generator/) | inheritable | Generate skill catalogs with network diagrams |
 
 ### 🤖 AI & Machine Learning

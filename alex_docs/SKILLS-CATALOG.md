@@ -7,12 +7,12 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 64
+## Skill Count: 65
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 49 |
-| Master-Only | 8 |
+| Inheritable | 54 |
+| Master-Only | 11 |
 | Heir:vscode | 2 |
 | Heir:m365 | 2 |
 | Unspecified | 3 |
@@ -59,7 +59,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [root-cause-analysis](../.github/skills/root-cause-analysis/) | inheritable | 5 Whys, fishbone, post-mortem |
 | [incident-response](../.github/skills/incident-response/) | inheritable | Crisis handling, severity levels |
 | [post-mortem](../.github/skills/post-mortem/) | inheritable | Blameless retrospectives, learning from failures |
-| [release-preflight](../.github/skills/release-preflight/) | inheritable | Pre-release checks, version sync |
+| [project-deployment](../.github/skills/project-deployment/) | inheritable | **NEW** Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
 | [change-management](../.github/skills/change-management/) | inheritable | Organizational change, stakeholder buy-in |
 | [project-management](../.github/skills/project-management/) | inheritable | Planning, tracking, resource allocation |
 
@@ -109,6 +109,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [architecture-audit](../.github/skills/architecture-audit/) | inheritable | Comprehensive consistency review |
 | [master-alex-audit](../.github/skills/master-alex-audit/) | master-only | Master-specific audit with heir sync, protection checks |
 | [release-process](../.github/skills/release-process/) | master-only | VS Code marketplace publishing workflow |
+| [release-preflight](../.github/skills/release-preflight/) | master-only | Pre-release checks, version sync |
 | [llm-model-selection](../.github/skills/llm-model-selection/) | master-only | Model choice for cost/capability |
 | [self-actualization](../.github/skills/self-actualization/) | master-only | Deep self-assessment protocols |
 | [heir-curation](../.github/skills/heir-curation/) | master-only | Curate heir deployments |

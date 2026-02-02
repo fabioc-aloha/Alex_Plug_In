@@ -330,9 +330,9 @@ flowchart LR
 
 | Metric | Count |
 |--------|-------|
-| Total Skills | 63 |
+| Total Skills | 54 |
 | Core Skills | 15+ |
-| Acquired Skills | 48 |
+| Acquired Skills | 39 |
 | Wishlist Items | ~54 |
 | Skills in Development | Variable |
 
