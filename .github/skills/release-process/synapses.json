@@ -1,7 +1,7 @@
 {
     "skillId": "release-process",
     "version": "1.0.0",
-    "classification": "master-only",
+    "inheritance": "master-only",
     "connections": [
         {
             "target": "release-management.instructions.md",

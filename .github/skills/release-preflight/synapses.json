@@ -1,6 +1,6 @@
 {
   "skill": "release-preflight",
-  "inheritance": "inheritable",
+  "inheritance": "master-only",
   "connections": [
     {
       "target": "git-workflow",

@@ -339,18 +339,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 16px;
-            padding-bottom: 8px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
         }
         .header-title {
             font-size: 14px;
             font-weight: 600;
+            letter-spacing: -0.2px;
         }
         .header-workspace {
             font-size: 11px;
@@ -358,7 +360,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 120px;
+            max-width: 140px;
         }
         .header-text {
             display: flex;
@@ -370,16 +372,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .version-badge {
             background: var(--vscode-badge-background, #4d4d4d);
             color: var(--vscode-badge-foreground, white);
-            font-size: 9px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 3px;
-            letter-spacing: 0.3px;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 3px 7px;
+            border-radius: 10px;
+            letter-spacing: 0.2px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.15s ease;
         }
         .version-badge:hover {
-            opacity: 0.8;
+            opacity: 0.85;
+            transform: scale(1.02);
         }
         .refresh-btn {
             margin-left: auto;
@@ -387,23 +390,27 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border: none;
             color: var(--vscode-foreground);
             cursor: pointer;
-            opacity: 0.7;
+            opacity: 0.5;
             font-size: 14px;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.15s ease;
         }
         .refresh-btn:hover {
             opacity: 1;
+            background: var(--vscode-toolbar-hoverBackground);
         }
         
         .section {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         .section-title {
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .status-grid {
@@ -413,9 +420,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .status-item {
             background: var(--vscode-editor-background);
-            border-radius: 4px;
-            padding: 8px;
-            border-left: 2px solid transparent;
+            border-radius: 6px;
+            padding: 10px;
+            border-left: 3px solid transparent;
+            transition: border-color 0.15s ease;
+        }
+        .status-item:hover {
+            border-left-color: var(--vscode-focusBorder);
         }
         .status-item.status-good {
             border-left-color: var(--vscode-charts-green);
@@ -440,14 +451,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             height: 8px;
             border-radius: 50%;
             flex-shrink: 0;
+            box-shadow: 0 0 4px currentColor;
         }
-        .dot-green { background: var(--vscode-charts-green); }
-        .dot-yellow { background: var(--vscode-charts-yellow); }
-        .dot-red { background: var(--vscode-charts-red); }
+        .dot-green { background: var(--vscode-charts-green); color: var(--vscode-charts-green); }
+        .dot-yellow { background: var(--vscode-charts-yellow); color: var(--vscode-charts-yellow); }
+        .dot-red { background: var(--vscode-charts-red); color: var(--vscode-charts-red); }
         .status-num {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--vscode-foreground);
+            line-height: 1;
         }
         .status-unit {
             font-size: 11px;
@@ -503,9 +516,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 10px;
             font-weight: 600;
             color: var(--vscode-descriptionForeground);
-            margin-top: 10px;
-            margin-bottom: 4px;
-            padding-left: 2px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            padding-left: 4px;
+            opacity: 0.8;
         }
         .action-group-label:first-child {
             margin-top: 0;
@@ -513,19 +527,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
+            gap: 10px;
+            padding: 8px 12px;
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
             text-align: left;
-            transition: background 0.1s;
+            transition: all 0.12s ease;
         }
         .action-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
+            transform: translateX(2px);
         }
         .action-btn.primary {
             background: var(--vscode-button-background);
@@ -533,14 +548,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-btn.primary:hover {
             background: var(--vscode-button-hoverBackground);
+            transform: translateX(2px);
         }
         .action-icon {
             font-size: 14px;
-            width: 18px;
+            width: 20px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
         .action-icon svg {
             width: 16px;
@@ -551,8 +568,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-shortcut {
             font-size: 10px;
-            opacity: 0.6;
-            font-family: monospace;
+            opacity: 0.5;
+            font-family: var(--vscode-editor-font-family), monospace;
+            background: var(--vscode-badge-background);
+            padding: 2px 5px;
+            border-radius: 3px;
         }
         
         .goals-stats {
@@ -560,13 +580,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 16px;
             font-size: 11px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .goal-item {
             background: var(--vscode-editor-background);
-            border-radius: 4px;
-            padding: 8px;
+            border-radius: 6px;
+            padding: 10px;
             margin-bottom: 6px;
+            transition: transform 0.12s ease;
+        }
+        .goal-item:hover {
+            transform: translateX(2px);
         }
         .goal-header {
             display: flex;
@@ -607,17 +631,25 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             cursor: pointer;
             list-style: none;
             user-select: none;
+            padding: 4px 0;
+            border-radius: 4px;
+            transition: color 0.12s ease;
+        }
+        .features-section summary:hover {
+            color: var(--vscode-textLink-foreground);
         }
         .features-section summary::-webkit-details-marker {
             display: none;
         }
         .features-section summary::before {
-            content: '▶ ';
-            font-size: 10px;
-            margin-right: 4px;
+            content: '▸ ';
+            font-size: 11px;
+            margin-right: 6px;
+            transition: transform 0.15s ease;
+            display: inline-block;
         }
         .features-section details[open] summary::before {
-            content: '▼ ';
+            content: '▾ ';
         }
         .section-title.clickable {
             cursor: pointer;
@@ -655,9 +687,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .feature-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-            padding-top: 12px;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 14px;
             border-top: 1px solid var(--vscode-widget-border);
         }
         .feature-link-btn {
@@ -665,15 +697,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-button-secondaryForeground);
             border: none;
             border-radius: 4px;
-            padding: 4px 8px;
+            padding: 5px 10px;
             font-size: 11px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
+            transition: all 0.12s ease;
         }
         .feature-link-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -949,7 +983,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
                             <li><strong>Cloud Sync</strong> - Automatic backup to GitHub Gists with conflict resolution</li>
-                            <li><strong>Skill Library</strong> - 63 portable skills with triggers and synaptic connections</li>
+                            <li><strong>Skill Library</strong> - 54 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>
                     </div>

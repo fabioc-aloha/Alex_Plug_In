@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.0] - 2026-02-01
+
+> **Welcome UI Polish & Master-Only Skills** — Better UX and proper skill inheritance
+
+### Added
+
+- **🆕 New Skill: project-deployment** (65th skill)
+  - Universal deployment patterns for any project type
+  - Covers npm, PyPI, NuGet, Cargo package managers
+  - CI/CD patterns, versioning, changelog best practices
+  - Inheritable skill available to all heirs
+
+### Changed
+
+- **✨ Welcome View UI Polish**
+  - Larger logo (28px) with better header spacing
+  - Pill-shaped version badge with subtle scale effect on hover
+  - Status grid items with thicker left border and hover feedback
+  - Status dots now have subtle glow effect
+  - Action buttons with 6px border-radius and slide-right hover effect
+  - Keyboard shortcuts displayed with badge-style background
+  - Goals section with hover slide effect
+  - Features disclosure with better arrow characters and hover colors
+  - Consistent 0.12s transitions throughout
+
+### Fixed
+
+- **🔧 Skill Inheritance**
+  - `release-process` and `release-preflight` now properly marked as `master-only`
+  - Removed master-only skills from heir package (was incorrectly distributing 10+ master skills)
+  - Heir package now has 54 skills (down from 64) - master-only skills excluded
+  - Fixed `release-process/synapses.json` using `classification` instead of standard `inheritance` field
+
+### Documentation
+
+- Updated SKILL-ARCHITECTURE.md with inheritance examples table
+- Updated skill counts: Master (65), Heir (54)
+
+---
+
 ## [4.1.1] - 2026-02-01
 
 > **Gamma AI Integration** — Generate presentations, documents, and social content with AI

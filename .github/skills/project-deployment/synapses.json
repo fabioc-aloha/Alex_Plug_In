@@ -1,0 +1,38 @@
+{
+    "skill": "project-deployment",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": "git-workflow",
+            "type": "requires",
+            "strength": 0.9
+        },
+        {
+            "target": "infrastructure-as-code",
+            "type": "enhances",
+            "strength": 0.7
+        },
+        {
+            "target": "security-review",
+            "type": "requires",
+            "strength": 0.8
+        },
+        {
+            "target": "testing-strategies",
+            "type": "requires",
+            "strength": 0.85
+        }
+    ],
+    "activationBoost": [
+        "deploy",
+        "release",
+        "publish",
+        "version",
+        "ship",
+        "package",
+        "npm publish",
+        "pip install",
+        "cargo publish",
+        "dotnet publish"
+    ]
+}

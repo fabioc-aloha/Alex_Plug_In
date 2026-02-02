@@ -132,6 +132,15 @@ Rich metadata for Alex's neural network. Ignored by vanilla Copilot.
 | `heir:vscode` | VS Code heir specific |
 | `heir:m365` | M365 heir specific |
 
+**Inheritance Examples:**
+
+| Master Skill | Heir Equivalent | Why |
+| ------------ | --------------- | --- |
+| `release-process` | `project-deployment` | Master releases Alex; heirs help users deploy their projects |
+| `release-preflight` | `project-deployment` | Master has PAT/marketplace; heirs have generic pre-deploy checks |
+| `meditation` | (none) | Only Master Alex meditates |
+| `heir-curation` | (none) | Only Master curates heirs |
+
 **Connection Types:**
 
 | Type | Meaning |
