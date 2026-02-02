@@ -163,6 +163,25 @@ if (Test-Path $roadmapPath) {
     }
 }
 
+# Check README.md skill count matches actual
+$readmePath = Join-Path $rootPath "README.md"
+$masterSkillsPath = Join-Path $rootPath ".github\skills"
+if ((Test-Path $readmePath) -and (Test-Path $masterSkillsPath)) {
+    $actualSkillCount = (Get-ChildItem $masterSkillsPath -Directory).Count
+    $readmeContent = Get-Content $readmePath -Raw
+    if ($readmeContent -match '(\d+) portable skills') {
+        $readmeSkillCount = [int]$matches[1]
+        Write-Host "   README.md skills: $readmeSkillCount (actual: $actualSkillCount)" -ForegroundColor Gray
+        if ($readmeSkillCount -ne $actualSkillCount) {
+            $errors += "Skill count mismatch: README ($readmeSkillCount) != actual ($actualSkillCount)"
+            Write-Host "   ❌ MISMATCH! Update README.md skill count" -ForegroundColor Red
+        }
+        else {
+            Write-Host "   ✅ README skill count matches" -ForegroundColor Green
+        }
+    }
+}
+
 # 2. Build Check
 Write-Host "`n2. Checking build..." -ForegroundColor Yellow
 $buildOutput = npm run compile 2>&1
