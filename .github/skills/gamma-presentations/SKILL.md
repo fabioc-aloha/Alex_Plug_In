@@ -28,9 +28,9 @@ Gamma is an AI-powered platform with 50M+ users for creating presentations, docu
 
 ### How to Ask Alex to Create Gamma Content
 
-Simply tell Alex what you want to create. Here are example prompts:
+Simply tell Alex what you want to create. **Alex will write the actual content for you**, then generate the presentation.
 
-#### From a Topic (AI generates all content)
+#### From a Topic (Alex writes all content)
 
 ```text
 "Create a 10-slide presentation about machine learning for executives"
@@ -38,13 +38,31 @@ Simply tell Alex what you want to create. Here are example prompts:
 "Generate a social media carousel about productivity tips"
 ```
 
-#### From a File in Your Workspace
+**What Alex does:**
+1. Creates a detailed markdown file with real slide content
+2. Sends it to Gamma API for professional formatting
+3. Returns the link and/or downloads the file
+4. Opens it automatically if requested
+
+#### From Your Own Content File
 
 ```text
 "Create a presentation from README.md"
 "Turn ROADMAP-UNIFIED.md into a 15-slide deck"
 "Make a document from alex_docs/COGNITIVE-ARCHITECTURE.md"
 ```
+
+#### From Reference Documents
+
+```text
+"Create a presentation about appropriate reliance using all the documents in the article folder"
+"Make a pitch deck from my business plan - use investor-deck.md and financials.md"
+```
+
+**Alex will:**
+1. Read and synthesize the referenced files
+2. Write presentation content based on that material
+3. Generate the formatted presentation
 
 #### With Specific Options
 
@@ -58,8 +76,9 @@ Simply tell Alex what you want to create. Here are example prompts:
 
 | What You Say | What Happens |
 |--------------|--------------|
-| "Create a presentation about X" | Generates slides from topic |
+| "Create a presentation about X" | Alex writes content, then generates slides |
 | "Create a presentation from FILE" | Reads file, converts to slides |
+| "Create presentation using [files]" | Alex synthesizes files into slides |
 | "Make a document from FILE" | Creates paginated document |
 | "Generate a social post from X" | Creates carousel/story format |
 | "Create a webpage from FILE" | Generates simple website |
@@ -78,6 +97,7 @@ When asking Alex to create Gamma content, you can specify:
 | **Dimensions** | 16x9, 4x3, 1x1, 4x5, 9x16, letter, a4 | "in 16x9 format" |
 | **Images** | AI, Unsplash, no images | "with AI-generated images" |
 | **Export** | pptx, pdf | "export as PowerPoint" |
+| **Illustrations only** | | "use only illustrations" (no photos) |
 
 ### Step-by-Step: Create from a Workspace File
 
@@ -117,7 +137,65 @@ When asking Alex to create Gamma content, you can specify:
    - `format`, `numCards`, `textOptions`, `imageOptions` based on your request
 3. Polls generation status every 2-3 seconds
 4. Returns the Gamma URL when complete
-5. Reports credits used and remaining balance
+5. Downloads export (PPTX/PDF) if requested
+6. **Auto-opens** the file if `--open` flag is used
+7. Reports credits used and remaining balance
+
+### Pro Tips for Great Results
+
+#### 1. Structure Your Content with Slide Markers
+
+Use clear headers in your markdown — they become natural slide breaks:
+
+```markdown
+## Slide 1: Title
+Main message here
+
+## Slide 2: The Problem
+- Pain point 1
+- Pain point 2
+
+## Slide 3: Our Solution
+Description of solution
+```
+
+#### 2. Use Illustrations for Professional Decks
+
+Specify `--image-style` with "illustrations" for consistent, modern look:
+
+```bash
+--image-model ideogram --image-style "modern clean illustrations, abstract concepts"
+```
+
+#### 3. Match Tone to Audience
+
+| Audience | Suggested Tone |
+|----------|----------------|
+| Executives | "professional and concise" |
+| Researchers | "intellectual and evidence-based" |
+| Developers | "technical and practical" |
+| Investors | "confident and visionary" |
+| General | "friendly and accessible" |
+
+#### 4. One Command, Open Result
+
+Always use `--open` to immediately review your deck:
+
+```bash
+node scripts/gamma-generator.js -f content.md -e pptx --open
+```
+
+#### 5. Iterate with Cost-Effective Models
+
+Use cheaper models while iterating, premium for final:
+
+```bash
+# Drafts (2 credits/image)
+--image-model flux-quick
+
+# Final version (20 credits/image)
+--image-model ideogram
+```
 
 ### Cost Awareness
 
@@ -522,15 +600,21 @@ node scripts/gamma-generator.js --topic "Introduction to AI"
 # From file with PowerPoint export
 node scripts/gamma-generator.js --file README.md --export pptx
 
-# Full customization
+# Generate and immediately open in PowerPoint 🚀
+node scripts/gamma-generator.js --file README.md --export pptx --open
+
+# Full customization with auto-open
 node scripts/gamma-generator.js \
-  --topic "Climate Change Solutions" \
-  --slides 12 \
-  --tone "inspiring" \
-  --audience "business leaders" \
-  --image-model flux-pro \
+  --file my-content.md \
+  --slides 15 \
+  --tone "professional and inspiring" \
+  --audience "executives" \
+  --image-model ideogram \
+  --image-style "modern illustrations, clean" \
   --dimensions 16x9 \
-  --export pptx
+  --export pptx \
+  --output ./exports \
+  --open
 ```
 
 ### CLI Options
@@ -548,8 +632,124 @@ node scripts/gamma-generator.js \
 | `--image-style` | | Image style description |
 | `--dimensions` | `-d` | Card dimensions |
 | `--export` | `-e` | Export format (pptx, pdf) |
-| `--output` | `-o` | Output directory |
+| `--output` | `-o` | Output directory (default: ./exports) |
+| `--open` | | **Auto-open** exported file after generation |
+| `--quiet` | `-q` | Suppress progress messages |
+| `--timeout` | | Generation timeout in seconds (default: 180) |
 | `--help` | `-h` | Show help |
+
+### Best UX: The `--open` Flag
+
+The `--open` flag provides seamless workflow — generate and review in one command:
+
+```bash
+# Create presentation and open immediately
+node scripts/gamma-generator.js \
+  --file content.md \
+  --export pptx \
+  --open
+
+# Works on all platforms:
+# - Windows: Opens in PowerPoint
+# - macOS: Opens in Keynote/PowerPoint
+# - Linux: Opens with default application
+```
+
+### Two-Step Workflow: Draft → Edit → Generate
+
+For full control over content, use the **draft workflow**:
+
+#### Step 1: Generate a Draft Template
+
+```bash
+# Create editable markdown template (no API call, no credits)
+node scripts/gamma-generator.js \
+  --topic "AI Ethics for Developers" \
+  --slides 10 \
+  --tone "thoughtful and practical" \
+  --audience "software engineers" \
+  --image-style "modern illustrations" \
+  --draft \
+  --open
+```
+
+This creates a markdown file with:
+- Slide structure placeholders
+- Your tone/audience settings preserved
+- Image style guidance
+- Opens immediately for editing
+
+#### Step 2: Edit the Markdown
+
+Fill in your actual content:
+
+```markdown
+## Slide 1: Title
+**AI Ethics: A Developer's Responsibility**
+
+Building AI that serves humanity
+
+*Illustration: Developer at computer with ethical symbols*
+
+---
+
+## Slide 2: Why This Matters
+**The Code We Write Has Consequences**
+
+- AI systems affect millions of lives
+- Bias in training data becomes bias in decisions
+- We are the last line of defense
+
+*Illustration: Ripple effect from code to society*
+```
+
+#### Step 3: Generate from Your Edited File
+
+```bash
+# Now generate the real presentation
+node scripts/gamma-generator.js \
+  --file ./exports/ai-ethics-for-developers-draft.md \
+  --image-model ideogram \
+  --export pptx \
+  --open
+```
+
+**Why use the draft workflow?**
+- ✅ Full control over every slide's content
+- ✅ No wasted credits on iterations
+- ✅ Review structure before committing to generation
+- ✅ Reuse templates for similar presentations
+
+### CLI Options Summary
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--topic` | `-t` | Topic or content to generate |
+| `--file` | `-f` | Path to content file |
+| `--format` | | presentation, document, social, webpage |
+| `--slides` | `-n` | Number of slides (1-75) |
+| `--tone` | | Tone description |
+| `--audience` | | Target audience |
+| `--language` | `-l` | Language code (en, es, pt...) |
+| `--image-model` | | AI model (flux-quick, dalle3...) |
+| `--image-style` | | Image style description |
+| `--dimensions` | `-d` | Card dimensions |
+| `--export` | `-e` | Export format (pptx, pdf) |
+| `--output` | `-o` | Output directory (default: ./exports) |
+| `--open` | | **Auto-open** exported file after generation |
+| `--draft` | | **Generate markdown template only** (no API call) |
+| `--draft-output` | | Custom path for draft markdown file |
+| `--quiet` | `-q` | Suppress progress messages |
+| `--timeout` | | Generation timeout in seconds (default: 180) |
+| `--help` | `-h` | Show help |
+
+**Workflow tip:** Create a markdown file with your content structure, then generate and review:
+
+```bash
+# Quick workflow
+node scripts/gamma-generator.js -t "My Topic" --draft --open  # Edit the draft
+node scripts/gamma-generator.js -f exports/my-topic-draft.md -e pptx --open  # Generate
+```
 
 Run `node scripts/gamma-generator.js --help` for full documentation.
 

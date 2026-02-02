@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { exec } = require('child_process');
 
 // ============================================================================
 // Constants
@@ -464,6 +465,16 @@ function parseArgs() {
       case '-q':
         options.verbose = false;
         break;
+      case '--open':
+        options.open = true;
+        break;
+      case '--draft':
+        options.draft = true;
+        break;
+      case '--draft-output':
+        options.draftOutput = value;
+        i++;
+        break;
       case '--help':
       case '-h':
         printHelp();
@@ -497,6 +508,9 @@ Options:
   --output, -o <dir>       Output directory for exports (default: ./exports)
   --timeout <seconds>      Generation timeout in seconds (default: 180)
   --quiet, -q              Suppress progress messages
+  --open                   Open the exported file after generation
+  --draft                  Generate markdown content file only (no API call)
+  --draft-output <path>    Output path for draft markdown file
   --help, -h               Show this help
 
 Examples:
@@ -506,6 +520,11 @@ Examples:
   # Presentation from file with export
   node scripts/gamma-generator.js --file README.md --export pptx
 
+  # Two-step workflow: Draft → Edit → Generate
+  node scripts/gamma-generator.js --topic "AI Ethics" --slides 10 --draft --draft-output ./my-deck.md
+  # ... edit my-deck.md ...
+  node scripts/gamma-generator.js --file ./my-deck.md --export pptx --open
+
   # Full customization
   node scripts/gamma-generator.js \\
     --topic "Climate Change Solutions" \\
@@ -514,7 +533,8 @@ Examples:
     --audience "business leaders" \\
     --image-model flux-pro \\
     --dimensions 16x9 \\
-    --export pptx
+    --export pptx \\
+    --open
 
 Image Models:
   Cost-effective (2 credits): flux-quick, flux-kontext, imagen-flash, luma-flash
@@ -531,6 +551,141 @@ Environment:
 // Main Entry Point
 // ============================================================================
 
+function openFile(filePath) {
+  const platform = process.platform;
+  // Normalize path separators for Windows
+  const normalizedPath = filePath.replace(/\\/g, '/');
+
+  if (platform === 'win32') {
+    // On Windows, spawn with shell: true handles paths better
+    const { spawn } = require('child_process');
+    spawn('cmd', ['/c', 'start', '', normalizedPath], { shell: true, detached: true, stdio: 'ignore' }).unref();
+  } else if (platform === 'darwin') {
+    exec(`open "${filePath}"`, (err) => {
+      if (err) {
+        error(`Failed to open file: ${err.message}`);
+      }
+    });
+  } else {
+    exec(`xdg-open "${filePath}"`, (err) => {
+      if (err) {
+        error(`Failed to open file: ${err.message}`);
+      }
+    });
+  }
+}
+
+function generateDraftMarkdown(topic, options) {
+  const slides = options.slides || 10;
+  const tone = options.tone || 'professional';
+  const audience = options.audience || 'general audience';
+  const format = options.format || 'presentation';
+  const imageStyle = options.imageStyle || 'modern, professional illustrations';
+  
+  let content = `# ${topic}\n\n`;
+  content += `## Target Audience\n${audience}\n\n`;
+  content += `## Presentation Overview\nA ${tone} ${format} about "${topic}" for ${audience}.\n\n`;
+  content += `---\n\n`;
+  
+  // Generate topic-aware slide structure
+  const slideStructure = getSlideStructure(slides, topic);
+  
+  for (let i = 0; i < slideStructure.length; i++) {
+    const slide = slideStructure[i];
+    content += `## Slide ${i + 1}: ${slide.title}\n\n`;
+    content += `**${slide.keyPoint}**\n\n`;
+    for (const bullet of slide.bullets) {
+      content += `- ${bullet}\n`;
+    }
+    content += `\n*Illustration: ${slide.visual}*\n\n`;
+    content += `---\n\n`;
+  }
+  
+  content += `## Visual Style Guidance\n\n`;
+  content += `- **Illustration style**: ${imageStyle}\n`;
+  content += `- **Tone**: ${tone}\n`;
+  content += `- **Audience**: ${audience}\n`;
+  content += `- **Tip**: Replace placeholder text with your actual content, keep the structure\n`;
+  
+  return content;
+}
+
+function getSlideStructure(numSlides, topic) {
+  // Create a topic-aware presentation structure
+  const structures = {
+    // Standard presentation arc for various slide counts
+    short: [ // 5-7 slides
+      { title: `Title`, keyPoint: topic, bullets: ['Subtitle or tagline', 'Your name / organization', 'Date'], visual: 'Bold, attention-grabbing image representing the core theme' },
+      { title: 'The Challenge', keyPoint: 'Why this matters now', bullets: ['Current state or problem', 'Impact on the audience', 'Urgency or opportunity'], visual: 'Visual metaphor showing the challenge or tension' },
+      { title: 'The Approach', keyPoint: 'How we address this', bullets: ['Key insight or method', 'What makes this different', 'Core principle'], visual: 'Diagram or illustration of the approach' },
+      { title: 'Key Benefits', keyPoint: 'What you gain', bullets: ['Benefit 1 with evidence', 'Benefit 2 with evidence', 'Benefit 3 with evidence'], visual: 'Icons or illustrations representing each benefit' },
+      { title: 'How It Works', keyPoint: 'The mechanism or process', bullets: ['Step or component 1', 'Step or component 2', 'Step or component 3'], visual: 'Process flow or system diagram' },
+      { title: 'Real Results', keyPoint: 'Evidence this works', bullets: ['Example, case study, or data point', 'Quote or testimonial', 'Measurable outcome'], visual: 'Chart, graph, or success story imagery' },
+      { title: 'Next Steps', keyPoint: 'Your call to action', bullets: ['Immediate action they can take', 'Resources or support available', 'How to get started'], visual: 'Forward-looking, inspiring image' },
+    ],
+    medium: [ // 8-12 slides
+      { title: `Title`, keyPoint: topic, bullets: ['Subtitle or tagline', 'Your name / organization', 'Date'], visual: 'Bold, attention-grabbing image representing the core theme' },
+      { title: 'Why This Matters', keyPoint: 'The context and urgency', bullets: ['Current landscape or trend', 'The problem or opportunity', 'Stakes for the audience'], visual: 'Visual showing the landscape or challenge' },
+      { title: 'The Core Problem', keyPoint: 'What needs to change', bullets: ['Specific pain point 1', 'Specific pain point 2', 'Root cause or insight'], visual: 'Illustration of the problem state' },
+      { title: 'Our Perspective', keyPoint: 'A new way of thinking', bullets: ['Key insight or reframe', 'What others miss', 'The principle behind our approach'], visual: 'Conceptual illustration of the insight' },
+      { title: 'The Solution', keyPoint: 'How we address this', bullets: ['Overview of the approach', 'Key differentiator', 'Why it works'], visual: 'Solution overview diagram' },
+      { title: 'Component 1', keyPoint: 'First key element', bullets: ['What it is', 'How it works', 'Why it matters'], visual: 'Detailed illustration of component 1' },
+      { title: 'Component 2', keyPoint: 'Second key element', bullets: ['What it is', 'How it works', 'Why it matters'], visual: 'Detailed illustration of component 2' },
+      { title: 'Component 3', keyPoint: 'Third key element', bullets: ['What it is', 'How it works', 'Why it matters'], visual: 'Detailed illustration of component 3' },
+      { title: 'Evidence & Results', keyPoint: 'Proof this works', bullets: ['Data point or metric', 'Case study or example', 'Testimonial or quote'], visual: 'Charts, graphs, or success imagery' },
+      { title: 'Implementation', keyPoint: 'How to make it happen', bullets: ['Getting started steps', 'Resources needed', 'Timeline or milestones'], visual: 'Roadmap or implementation visual' },
+      { title: 'Summary', keyPoint: 'Key takeaways', bullets: ['Main point 1', 'Main point 2', 'Main point 3'], visual: 'Synthesis visual bringing themes together' },
+      { title: 'Call to Action', keyPoint: 'What to do next', bullets: ['Primary action', 'Secondary action', 'Contact or resources'], visual: 'Inspiring, forward-looking image' },
+    ],
+    long: [ // 13+ slides
+      { title: `Title`, keyPoint: topic, bullets: ['Subtitle or tagline', 'Your name / organization', 'Date'], visual: 'Bold, attention-grabbing image representing the core theme' },
+      { title: 'Agenda', keyPoint: 'What we will cover', bullets: ['Section 1 overview', 'Section 2 overview', 'Section 3 overview'], visual: 'Clean agenda or journey visual' },
+      { title: 'Context & Background', keyPoint: 'Setting the stage', bullets: ['Historical context', 'Current state', 'Why now'], visual: 'Timeline or landscape illustration' },
+      { title: 'The Challenge', keyPoint: 'What we face', bullets: ['Challenge dimension 1', 'Challenge dimension 2', 'Challenge dimension 3'], visual: 'Problem visualization' },
+      { title: 'Research & Insights', keyPoint: 'What we learned', bullets: ['Key finding 1', 'Key finding 2', 'Key finding 3'], visual: 'Research or data visualization' },
+      { title: 'Framework Overview', keyPoint: 'Our approach', bullets: ['Framework principle 1', 'Framework principle 2', 'Framework principle 3'], visual: 'Framework diagram' },
+      { title: 'Deep Dive: Area 1', keyPoint: 'First focus area', bullets: ['Detail 1', 'Detail 2', 'Detail 3'], visual: 'Detailed illustration for area 1' },
+      { title: 'Deep Dive: Area 2', keyPoint: 'Second focus area', bullets: ['Detail 1', 'Detail 2', 'Detail 3'], visual: 'Detailed illustration for area 2' },
+      { title: 'Deep Dive: Area 3', keyPoint: 'Third focus area', bullets: ['Detail 1', 'Detail 2', 'Detail 3'], visual: 'Detailed illustration for area 3' },
+      { title: 'Integration', keyPoint: 'How it all connects', bullets: ['Connection point 1', 'Connection point 2', 'Synergies'], visual: 'Integration or synthesis diagram' },
+      { title: 'Case Study', keyPoint: 'Real-world application', bullets: ['Context', 'Approach', 'Results'], visual: 'Case study imagery' },
+      { title: 'Lessons Learned', keyPoint: 'What we discovered', bullets: ['Lesson 1', 'Lesson 2', 'Lesson 3'], visual: 'Insights visualization' },
+      { title: 'Recommendations', keyPoint: 'What we suggest', bullets: ['Recommendation 1', 'Recommendation 2', 'Recommendation 3'], visual: 'Recommendation icons or pathway' },
+      { title: 'Implementation Roadmap', keyPoint: 'How to proceed', bullets: ['Phase 1', 'Phase 2', 'Phase 3'], visual: 'Roadmap or timeline visual' },
+      { title: 'Summary & Key Takeaways', keyPoint: 'Remember these', bullets: ['Takeaway 1', 'Takeaway 2', 'Takeaway 3'], visual: 'Summary visual' },
+      { title: 'Questions & Discussion', keyPoint: 'Let\'s explore together', bullets: ['Contact information', 'Resources', 'Next meeting'], visual: 'Collaborative or discussion imagery' },
+    ]
+  };
+  
+  let template;
+  if (numSlides <= 7) {
+    template = structures.short;
+  } else if (numSlides <= 12) {
+    template = structures.medium;
+  } else {
+    template = structures.long;
+  }
+  
+  // Adjust to exact slide count
+  if (numSlides < template.length) {
+    return template.slice(0, numSlides);
+  } else if (numSlides > template.length) {
+    // Add extra content slides
+    const extra = numSlides - template.length;
+    const result = [...template];
+    for (let i = 0; i < extra; i++) {
+      result.splice(-1, 0, {
+        title: `Additional Point ${i + 1}`,
+        keyPoint: 'Supporting content',
+        bullets: ['Detail or example', 'Evidence or data', 'Implication or insight'],
+        visual: 'Relevant illustration for this point'
+      });
+    }
+    return result;
+  }
+  return template;
+}
+
 async function main() {
   const options = parseArgs();
 
@@ -538,6 +693,36 @@ async function main() {
     error('Either --topic or --file is required');
     printHelp();
     process.exit(1);
+  }
+
+  // Draft mode: Generate markdown template without calling Gamma API
+  if (options.draft && options.topic) {
+    const draftContent = generateDraftMarkdown(options.topic, options);
+    const outputPath = options.draftOutput || path.join(options.outputDir || './exports', `${options.topic.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-draft.md`);
+    
+    // Ensure output directory exists
+    const outputDir = path.dirname(outputPath);
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+    
+    fs.writeFileSync(outputPath, draftContent, 'utf-8');
+    
+    console.log('\n' + '='.repeat(60));
+    console.log('📝 DRAFT CREATED');
+    console.log('='.repeat(60));
+    console.log(`File: ${outputPath}`);
+    console.log('');
+    console.log('Next steps:');
+    console.log('  1. Edit the markdown file with your content');
+    console.log('  2. Run: node scripts/gamma-generator.js --file "' + outputPath + '" --export pptx --open');
+    console.log('='.repeat(60) + '\n');
+    
+    if (options.open) {
+      openFile(outputPath);
+    }
+    
+    process.exit(0);
   }
 
   const generator = new GammaGenerator(options);
@@ -551,6 +736,12 @@ async function main() {
   } else {
     error('No input provided');
     process.exit(1);
+  }
+
+  // Open the exported file if --open flag is set
+  if (result.success && options.open && result.localFile) {
+    log('Opening file...', options.verbose !== false);
+    openFile(result.localFile);
   }
 
   process.exit(result.success ? 0 : 1);
