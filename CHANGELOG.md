@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.4] - 2026-02-03
+
+> **Setup Environment Polish & Mermaid Skill** — Cleaner settings workflow, interactive mermaid configuration
+
+### Added
+
+- **📊 Polish Mermaid Setup Skill Prompt**
+  - New `polish-mermaid-setup.prompt.md` in markdown-mermaid skill
+  - Interactive configuration helper for Mermaid diagram rendering
+  - Audits installed extensions, resolves conflicts
+  - Guides through theme selection and troubleshooting
+  - Better than one-size-fits-all settings
+
+### Changed
+
+- **⚙️ Setup Environment Simplified**
+  - Removed Nice-to-Have category (was just 1 setting)
+  - Moved Command Center toggle to Recommended
+  - Both Essential (5) and Recommended (5) now pre-checked by default
+  - Removed mermaid settings (now handled by skill prompt)
+  - Fixed dialog message to accurately state "OVERWRITE" not "ADD"
+
+- **🎯 Settings Now Only Verified MS Docs Settings**
+  - Essential: instruction files, prompts, agents.md (5 settings)
+  - Recommended: thinking tool, max requests, locale, command center (5 settings)
+  - All settings verified against official VS Code/Copilot documentation
+
+### Fixed
+
+- **📝 Accurate Dialog Messaging**
+  - Changed "ADD new settings" to "OVERWRITE existing values"
+  - Added category explanations in confirmation dialog
+  - Button text changed from "Add Settings" to "Apply Settings"
+
+---
+
 ## [4.2.3] - 2026-02-02
 
 > **Welcome View Streamlining & Smart Nudges** — Cleaner sidebar, proactive reminders, cross-platform sync

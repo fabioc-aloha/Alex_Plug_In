@@ -19,7 +19,10 @@
     "broken emoji",
     "unicode escape",
     "mermaid dark background",
-    "blockquote styling"
+    "blockquote styling",
+    "polish mermaid",
+    "mermaid setup",
+    "mermaid not rendering"
   ],
   "triggers": [
     "mermaid",
@@ -29,6 +32,8 @@
     "gantt",
     "class diagram",
     "graph",
-    "visualization"
+    "visualization",
+    "polish mermaid setup",
+    "configure mermaid"
   ]
 }
