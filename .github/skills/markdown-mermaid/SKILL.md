@@ -22,8 +22,11 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 | File | Purpose |
 | ---- | ------- |
 | `markdown-light.css` | VS Code preview styling |
+| `polish-mermaid-setup.prompt.md` | Interactive Mermaid configuration helper |
 
 **Setup:** Copy CSS to `.vscode/`, add `"markdown.styles": [".vscode/markdown-light.css"]` to settings.
+
+**Mermaid Config:** Run the "Polish Mermaid Setup" prompt to configure Mermaid rendering for your VS Code environment.
 
 ---
 

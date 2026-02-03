@@ -43,18 +43,13 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "chat.detectParticipant.enabled": true,
   // Locale override - verified in docs
   "github.copilot.chat.localeOverride": "en",
+  // Command center in title bar - quick access to Copilot features
+  "chat.commandCenter.enabled": true,
 };
 
-/**
- * Nice-to-have settings that reduce friction
- */
-const NICE_TO_HAVE_SETTINGS: Record<string, unknown> = {
-  // Command center - verified in docs
-  "chat.commandCenter.enabled": true,
-  // Mermaid diagram theme settings - neutral is closest to GitHub style
-  "markdown-mermaid.lightModeTheme": "neutral",
-  "markdown-mermaid.darkModeTheme": "dark",
-};
+// Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
+// skill's "Polish Mermaid Setup" prompt, not here, because they vary by VS Code
+// version and installed extensions.
 
 interface SettingCategory {
   name: string;
@@ -75,12 +70,6 @@ const SETTING_CATEGORIES: SettingCategory[] = [
     description: "Improves the Alex experience",
     settings: RECOMMENDED_SETTINGS,
     icon: "🟡",
-  },
-  {
-    name: "Nice-to-Have",
-    description: "Quality of life improvements",
-    settings: NICE_TO_HAVE_SETTINGS,
-    icon: "🟢",
   },
 ];
 
@@ -485,15 +474,12 @@ export async function setupEnvironment(): Promise<void> {
   // Check what's already configured
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
-  const niceToHaveExisting = getExistingSettings(NICE_TO_HAVE_SETTINGS);
 
   const essentialTotal = Object.keys(ESSENTIAL_SETTINGS).length;
   const recommendedTotal = Object.keys(RECOMMENDED_SETTINGS).length;
-  const niceToHaveTotal = Object.keys(NICE_TO_HAVE_SETTINGS).length;
 
   const essentialNeeded = essentialTotal - essentialExisting.length;
   const recommendedNeeded = recommendedTotal - recommendedExisting.length;
-  const niceToHaveNeeded = niceToHaveTotal - niceToHaveExisting.length;
 
   // Build quick pick items - always show all categories
   interface CategoryQuickPickItem extends vscode.QuickPickItem {
@@ -504,7 +490,7 @@ export async function setupEnvironment(): Promise<void> {
 
   const items: CategoryQuickPickItem[] = [];
 
-  // Essential Settings - always show
+  // Essential Settings - always show, pre-checked
   const essentialStatus = essentialNeeded === 0 ? "✓ all configured" : `${essentialNeeded} to add`;
   items.push({
     label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
@@ -513,10 +499,10 @@ export async function setupEnvironment(): Promise<void> {
     category: SETTING_CATEGORIES[0],
     needed: essentialNeeded,
     existing: essentialExisting.length,
-    picked: essentialNeeded > 0,
+    picked: true,
   });
 
-  // Recommended Settings - always show
+  // Recommended Settings - always show, pre-checked
   const recommendedStatus = recommendedNeeded === 0 ? "✓ all configured" : `${recommendedNeeded} to add`;
   items.push({
     label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
@@ -525,19 +511,7 @@ export async function setupEnvironment(): Promise<void> {
     category: SETTING_CATEGORIES[1],
     needed: recommendedNeeded,
     existing: recommendedExisting.length,
-    picked: false,
-  });
-
-  // Nice-to-Have Settings - always show
-  const niceToHaveStatus = niceToHaveNeeded === 0 ? "✓ all configured" : `${niceToHaveNeeded} to add`;
-  items.push({
-    label: `${SETTING_CATEGORIES[2].icon} Nice-to-Have Settings`,
-    description: niceToHaveStatus,
-    detail: SETTING_CATEGORIES[2].description,
-    category: SETTING_CATEGORIES[2],
-    needed: niceToHaveNeeded,
-    existing: niceToHaveExisting.length,
-    picked: false,
+    picked: true,
   });
 
   // Show multi-select quick pick
@@ -568,9 +542,9 @@ export async function setupEnvironment(): Promise<void> {
   const categoryNames = selected.map((s) => s.category.name).join(", ");
 
   const confirm = await vscode.window.showInformationMessage(
-    `Add ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\nThis will only ADD new settings - your existing settings will NOT be changed.`,
-    { modal: true, detail: `Settings to add:\n${preview}` },
-    "Add Settings",
+    `Apply ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\n⚠️ This will OVERWRITE existing values for these settings.\n\n• Essential: Required for Alex to read instruction files\n• Recommended: Improves agent capabilities\n• Nice-to-Have: Quality of life`,
+    { modal: true, detail: `Settings to apply:\n${preview}` },
+    "Apply Settings",
     "Show Preview",
     "Cancel",
   );
@@ -578,22 +552,22 @@ export async function setupEnvironment(): Promise<void> {
   if (confirm === "Show Preview") {
     // Open a preview document
     const doc = await vscode.workspace.openTextDocument({
-      content: `// Settings that will be ADDED to your VS Code configuration\n// Your existing settings will NOT be modified\n\n${preview}`,
+      content: `// Settings that will be APPLIED to your VS Code configuration\n// ⚠️ Existing values for these settings will be OVERWRITTEN\n\n${preview}`,
       language: "jsonc",
     });
     await vscode.window.showTextDocument(doc, { preview: true });
 
     // Ask again after preview
     const confirmAfterPreview = await vscode.window.showInformationMessage(
-      "Add these settings to your VS Code configuration?",
-      "Add Settings",
+      "Apply these settings to your VS Code configuration?",
+      "Apply Settings",
       "Cancel",
     );
 
-    if (confirmAfterPreview !== "Add Settings") {
+    if (confirmAfterPreview !== "Apply Settings") {
       return;
     }
-  } else if (confirm !== "Add Settings") {
+  } else if (confirm !== "Apply Settings") {
     return;
   }
 
