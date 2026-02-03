@@ -11,77 +11,49 @@ function getGlobalAlexDir(): string {
 
 /**
  * Essential settings required for Alex to function properly
+ * These are verified to exist in VS Code Copilot settings
  */
 const ESSENTIAL_SETTINGS: Record<string, unknown> = {
+  // Custom instructions location - verified in docs
   "chat.instructionsFilesLocations": {
     ".github/instructions": true,
   },
-  "chat.useAgentSkills": true,
+  // Prompt files location - verified in docs (for .github/prompts)
+  "chat.promptFilesLocations": {
+    ".github/prompts": true,
+  },
+  // Enable AGENTS.md files - verified in docs  
+  "chat.useAgentsMdFile": true,
+  // Enable nested AGENTS.md in subfolders - experimental but documented
   "chat.useNestedAgentsMdFiles": true,
-  "github.copilot.chat.tools.memory.enabled": true,
+  // Auto-include copilot-instructions.md - verified in docs
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
 };
 
 /**
  * Recommended settings that improve the Alex experience
+ * These are verified to exist in VS Code Copilot settings
  */
 const RECOMMENDED_SETTINGS: Record<string, unknown> = {
+  // Thinking tool for agents - experimental but documented
   "github.copilot.chat.agent.thinkingTool": true,
+  // Max agent requests - verified in docs (default 25)
   "chat.agent.maxRequests": 50,
-  "chat.experimental.detectParticipant.enabled": true,
-  "github.copilot.chat.followUps": "always",
-  "chat.agent.todoList": {
-    position: "panel",
-  },
-  // Recommended tools for Alex - these enhance the agent experience
-  "chat.tools.enabled": {
-    // File and code tools
-    "vscode.file_search": true,
-    "vscode.grep_search": true,
-    "vscode.semantic_search": true,
-    "vscode.read_file": true,
-    "vscode.replace_string_in_file": true,
-    "vscode.multi_replace_string_in_file": true,
-    "vscode.create_file": true,
-    "vscode.list_dir": true,
-    "vscode.list_code_usages": true,
-    // Terminal and tasks
-    "vscode.run_in_terminal": true,
-    "vscode.get_terminal_output": true,
-    "vscode.terminal_selection": true,
-    "vscode.terminal_last_command": true,
-    "vscode.create_and_run_task": true,
-    // Development tools
-    "vscode.get_errors": true,
-    "vscode.get_changed_files": true,
-    "vscode.test_failure": true,
-    // Web and external
-    "vscode.fetch_webpage": true,
-    "vscode.open_simple_browser": true,
-    // Notebook support
-    "vscode.edit_notebook_file": true,
-    "vscode.run_notebook_cell": true,
-    "vscode.copilot_getNotebookSummary": true,
-    // Project management
-    "vscode.create_new_workspace": true,
-    "vscode.manage_todo_list": true,
-    "vscode.memory": true,
-    // Subagent support
-    "vscode.runSubagent": true,
-  },
+  // Participant detection - verified in docs
+  "chat.detectParticipant.enabled": true,
+  // Locale override - verified in docs
+  "github.copilot.chat.localeOverride": "en",
 };
 
 /**
  * Nice-to-have settings that reduce friction
  */
 const NICE_TO_HAVE_SETTINGS: Record<string, unknown> = {
-  "chat.tools.autoRun": true,
-  "chat.tools.fileSystem.autoApprove": true,
-  "github.copilot.chat.localeOverride": "en",
+  // Command center - verified in docs
   "chat.commandCenter.enabled": true,
-  // Mermaid diagram theme settings for consistent light mode rendering
-  "markdown-mermaid.lightModeTheme": "default",
+  // Mermaid diagram theme settings - neutral is closest to GitHub style
+  "markdown-mermaid.lightModeTheme": "neutral",
   "markdown-mermaid.darkModeTheme": "dark",
-  // Note: markdown.styles handled separately as workspace setting
 };
 
 interface SettingCategory {
@@ -420,32 +392,39 @@ img {
 
 /**
  * Apply settings to VS Code user configuration
+ * @param settings - The settings to apply
+ * @param force - If true, apply all settings even if already configured
  */
 async function applySettings(
   settings: Record<string, unknown>,
-): Promise<{ applied: string[]; skipped: string[] }> {
+  force: boolean = false,
+): Promise<{ applied: string[]; skipped: string[]; failed: string[] }> {
   const config = vscode.workspace.getConfiguration();
   const applied: string[] = [];
   const skipped: string[] = [];
+  const failed: string[] = [];
 
   for (const [key, value] of Object.entries(settings)) {
     try {
-      // Check if already set
-      const currentValue = config.inspect(key);
-      if (currentValue?.globalValue !== undefined) {
-        skipped.push(key);
-        continue;
+      // Check if already set (skip only if not forcing)
+      if (!force) {
+        const currentValue = config.inspect(key);
+        if (currentValue?.globalValue !== undefined) {
+          skipped.push(key);
+          continue;
+        }
       }
 
       await config.update(key, value, vscode.ConfigurationTarget.Global);
       applied.push(key);
+      console.log(`[Alex Setup] ✅ Applied: ${key}`);
     } catch (error) {
-      console.error(`Failed to apply setting ${key}:`, error);
-      skipped.push(key);
+      console.error(`[Alex Setup] ❌ Failed to apply ${key}:`, error);
+      failed.push(key);
     }
   }
 
-  return { applied, skipped };
+  return { applied, skipped, failed };
 }
 
 /**
@@ -508,33 +487,15 @@ export async function setupEnvironment(): Promise<void> {
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
   const niceToHaveExisting = getExistingSettings(NICE_TO_HAVE_SETTINGS);
 
-  const essentialNeeded =
-    Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
-  const recommendedNeeded =
-    Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
-  const niceToHaveNeeded =
-    Object.keys(NICE_TO_HAVE_SETTINGS).length - niceToHaveExisting.length;
+  const essentialTotal = Object.keys(ESSENTIAL_SETTINGS).length;
+  const recommendedTotal = Object.keys(RECOMMENDED_SETTINGS).length;
+  const niceToHaveTotal = Object.keys(NICE_TO_HAVE_SETTINGS).length;
 
-  // If everything is configured, let user know
-  if (
-    essentialNeeded === 0 &&
-    recommendedNeeded === 0 &&
-    niceToHaveNeeded === 0
-  ) {
-    vscode.window
-      .showInformationMessage(
-        "✅ Your VS Code environment is already optimized for Alex!",
-        "View Current Settings",
-      )
-      .then((choice) => {
-        if (choice === "View Current Settings") {
-          vscode.commands.executeCommand("workbench.action.openSettingsJson");
-        }
-      });
-    return;
-  }
+  const essentialNeeded = essentialTotal - essentialExisting.length;
+  const recommendedNeeded = recommendedTotal - recommendedExisting.length;
+  const niceToHaveNeeded = niceToHaveTotal - niceToHaveExisting.length;
 
-  // Build quick pick items
+  // Build quick pick items - always show all categories
   interface CategoryQuickPickItem extends vscode.QuickPickItem {
     category: SettingCategory;
     needed: number;
@@ -543,47 +504,47 @@ export async function setupEnvironment(): Promise<void> {
 
   const items: CategoryQuickPickItem[] = [];
 
-  if (essentialNeeded > 0) {
-    items.push({
-      label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
-      description: `${essentialNeeded} settings to add`,
-      detail: SETTING_CATEGORIES[0].description,
-      category: SETTING_CATEGORIES[0],
-      needed: essentialNeeded,
-      existing: essentialExisting.length,
-      picked: true,
-    });
-  }
+  // Essential Settings - always show
+  const essentialStatus = essentialNeeded === 0 ? "✓ all configured" : `${essentialNeeded} to add`;
+  items.push({
+    label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
+    description: essentialStatus,
+    detail: SETTING_CATEGORIES[0].description,
+    category: SETTING_CATEGORIES[0],
+    needed: essentialNeeded,
+    existing: essentialExisting.length,
+    picked: essentialNeeded > 0,
+  });
 
-  if (recommendedNeeded > 0) {
-    items.push({
-      label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
-      description: `${recommendedNeeded} settings to add`,
-      detail: SETTING_CATEGORIES[1].description,
-      category: SETTING_CATEGORIES[1],
-      needed: recommendedNeeded,
-      existing: recommendedExisting.length,
-      picked: false,
-    });
-  }
+  // Recommended Settings - always show
+  const recommendedStatus = recommendedNeeded === 0 ? "✓ all configured" : `${recommendedNeeded} to add`;
+  items.push({
+    label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
+    description: recommendedStatus,
+    detail: SETTING_CATEGORIES[1].description,
+    category: SETTING_CATEGORIES[1],
+    needed: recommendedNeeded,
+    existing: recommendedExisting.length,
+    picked: false,
+  });
 
-  if (niceToHaveNeeded > 0) {
-    items.push({
-      label: `${SETTING_CATEGORIES[2].icon} Nice-to-Have Settings`,
-      description: `${niceToHaveNeeded} settings to add`,
-      detail: SETTING_CATEGORIES[2].description,
-      category: SETTING_CATEGORIES[2],
-      needed: niceToHaveNeeded,
-      existing: niceToHaveExisting.length,
-      picked: false,
-    });
-  }
+  // Nice-to-Have Settings - always show
+  const niceToHaveStatus = niceToHaveNeeded === 0 ? "✓ all configured" : `${niceToHaveNeeded} to add`;
+  items.push({
+    label: `${SETTING_CATEGORIES[2].icon} Nice-to-Have Settings`,
+    description: niceToHaveStatus,
+    detail: SETTING_CATEGORIES[2].description,
+    category: SETTING_CATEGORIES[2],
+    needed: niceToHaveNeeded,
+    existing: niceToHaveExisting.length,
+    picked: false,
+  });
 
   // Show multi-select quick pick
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
     placeHolder:
-      "Select which settings to add (your existing settings will NOT be modified)",
+      "Select categories to apply (will re-apply even if already configured)",
     title: "Alex Environment Setup",
   });
 
@@ -594,8 +555,13 @@ export async function setupEnvironment(): Promise<void> {
   // Collect all settings to apply
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
+    console.log(`[Alex Setup] Adding ${item.category.name} with ${Object.keys(item.category.settings).length} settings`);
     Object.assign(settingsToApply, item.category.settings);
   }
+  
+  const totalKeys = Object.keys(settingsToApply).length;
+  console.log(`[Alex Setup] Total settings to apply: ${totalKeys}`);
+  console.log(`[Alex Setup] Settings keys:`, Object.keys(settingsToApply));
 
   // Show preview and ask for confirmation
   const preview = formatSettingsPreview(settingsToApply);
@@ -631,7 +597,7 @@ export async function setupEnvironment(): Promise<void> {
     return;
   }
 
-  // Apply settings
+  // Apply settings (force = true to ensure all selected settings are applied)
   const result = await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
@@ -639,7 +605,7 @@ export async function setupEnvironment(): Promise<void> {
       cancellable: false,
     },
     async () => {
-      const settingsResult = await applySettings(settingsToApply);
+      const settingsResult = await applySettings(settingsToApply, true);
       // Also apply markdown styles as workspace setting
       await applyMarkdownStyles();
       return settingsResult;
@@ -648,10 +614,10 @@ export async function setupEnvironment(): Promise<void> {
 
   // Show result
   if (result.applied.length > 0) {
-    const message =
-      result.skipped.length > 0
-        ? `✅ Added ${result.applied.length} settings (${result.skipped.length} already configured)`
-        : `✅ Added ${result.applied.length} settings`;
+    let message = `✅ Applied ${result.applied.length} settings`;
+    if (result.failed.length > 0) {
+      message += ` (${result.failed.length} failed)`;
+    }
 
     vscode.window
       .showInformationMessage(message, "View Settings")
@@ -660,9 +626,14 @@ export async function setupEnvironment(): Promise<void> {
           vscode.commands.executeCommand("workbench.action.openSettingsJson");
         }
       });
-  } else {
-    vscode.window.showInformationMessage(
-      "All selected settings were already configured.",
+    
+    // Log failed settings if any
+    if (result.failed.length > 0) {
+      console.error("[Alex] Failed to apply settings:", result.failed);
+    }
+  } else if (result.failed.length > 0) {
+    vscode.window.showErrorMessage(
+      `Failed to apply ${result.failed.length} settings. Check Output > Extension Host for details.`,
     );
   }
 }
