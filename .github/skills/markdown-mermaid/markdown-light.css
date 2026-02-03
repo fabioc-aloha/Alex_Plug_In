@@ -1,7 +1,14 @@
-/* GitHub Markdown Theme - Alex Skill Asset */
-/* Copy to .vscode/markdown-light.css and reference in settings.json */
+/* ============================================================================
+   GitHub-flavored Markdown Preview Theme
+   Alex Cognitive Architecture - Polished Edition
+   
+   Copy to .vscode/markdown-light.css and reference in settings.json:
+   "markdown.styles": [".vscode/markdown-light.css"]
+   ============================================================================ */
 
-/* Override VS Code CSS variables */
+/* ============================================
+   CSS Variables Override
+   ============================================ */
 :root,
 body,
 .vscode-body {
@@ -11,14 +18,24 @@ body,
     --vscode-editor-foreground: #1f2328 !important;
 }
 
+/* ============================================
+   Base Typography
+   ============================================ */
 body {
     background-color: #ffffff !important;
     color: #1f2328 !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
     font-size: 16px !important;
-    line-height: 1.5 !important;
+    line-height: 1.6 !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    padding: 32px 45px !important;
+    word-wrap: break-word !important;
 }
 
+/* ============================================
+   Headings
+   ============================================ */
 h1,
 h2,
 h3,
@@ -29,6 +46,32 @@ h6 {
     font-weight: 600 !important;
     margin-top: 24px !important;
     margin-bottom: 16px !important;
+    line-height: 1.25 !important;
+}
+
+h1 {
+    font-size: 2em !important;
+}
+
+h2 {
+    font-size: 1.5em !important;
+}
+
+h3 {
+    font-size: 1.25em !important;
+}
+
+h4 {
+    font-size: 1em !important;
+}
+
+h5 {
+    font-size: 0.875em !important;
+}
+
+h6 {
+    font-size: 0.85em !important;
+    color: #656d76 !important;
 }
 
 h1,
@@ -37,6 +80,9 @@ h2 {
     padding-bottom: 0.3em !important;
 }
 
+/* ============================================
+   Links
+   ============================================ */
 a {
     color: #0969da !important;
     text-decoration: none !important;
@@ -46,7 +92,9 @@ a:hover {
     text-decoration: underline !important;
 }
 
-/* Inline code */
+/* ============================================
+   Code - Inline
+   ============================================ */
 code {
     background-color: #eff1f3 !important;
     color: #1f2328 !important;
@@ -56,7 +104,9 @@ code {
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
 }
 
-/* Code blocks */
+/* ============================================
+   Code - Blocks
+   ============================================ */
 pre {
     background-color: #f6f8fa !important;
     border: 1px solid #d1d9e0 !important;
@@ -74,129 +124,61 @@ pre code {
     color: #1f2328 !important;
 }
 
-/* NUCLEAR OPTION: Force ALL spans in code blocks to be dark readable */
-pre code span {
-    color: #1f2328 !important;
-}
-
-/* VS Code markdown preview uses these specific classes */
-.vscode-body pre code span,
-.markdown-body pre code span,
-pre.hljs code span,
-code span {
-    color: #1f2328 !important;
-}
-
-/* Override VS Code's built-in light theme syntax colors that are too light */
-.mtk1 { color: #1f2328 !important; }   /* default text */
-.mtk3 { color: #57606a !important; }   /* comments - darker gray */
-.mtk4 { color: #0550ae !important; }   /* numbers */
-.mtk5 { color: #cf222e !important; }   /* keywords */
-.mtk6 { color: #0a3069 !important; }   /* strings */
-.mtk7 { color: #8250df !important; }   /* functions */
-.mtk8 { color: #953800 !important; }   /* types */
-.mtk9 { color: #0550ae !important; }   /* variables */
-.mtk10 { color: #1f2328 !important; }  /* operators */
-.mtk11 { color: #0550ae !important; }  /* properties */
-.mtk12 { color: #8250df !important; }  /* methods */
-
-/* Syntax highlighting - GitHub style */
-pre code .hljs-keyword,
-pre code .token.keyword,
-.hljs-keyword,
-.token.keyword {
-    color: #cf222e !important;
-    /* Red for keywords */
-}
-
-pre code .hljs-string,
-pre code .token.string,
-.hljs-string,
-.token.string {
-    color: #0a3069 !important;
-    /* Dark blue for strings */
-}
-
-pre code .hljs-comment,
-pre code .token.comment,
-.hljs-comment,
-.token.comment {
-    color: #6e7781 !important;
-    /* Gray for comments - NOT too light */
-}
-
-pre code .hljs-function,
-pre code .token.function,
-.hljs-function,
-.token.function {
-    color: #8250df !important;
-    /* Purple for functions */
-}
-
-pre code .hljs-number,
-pre code .token.number,
-.hljs-number,
-.token.number {
-    color: #0550ae !important;
-    /* Blue for numbers */
-}
-
-pre code .hljs-class,
-pre code .token.class-name,
-pre code .hljs-type,
-pre code .token.type,
-.hljs-class,
-.token.class-name,
-.hljs-type,
-.token.type {
-    color: #953800 !important;
-    /* Orange for types/classes */
-}
-
-pre code .hljs-variable,
-pre code .token.variable,
-.hljs-variable,
-.token.variable {
-    color: #24292f !important;
-    /* Dark for variables */
-}
-
-pre code .hljs-attr,
-pre code .token.attr-name,
-pre code .hljs-property,
-pre code .token.property,
-.hljs-attr,
-.token.attr-name,
-.hljs-property,
-.token.property {
-    color: #0550ae !important;
-    /* Blue for attributes */
-}
-
-pre code .hljs-operator,
-pre code .token.operator,
-.hljs-operator,
-.token.operator {
-    color: #cf222e !important;
-    /* Red for operators */
-}
-
-pre code .hljs-punctuation,
-pre code .token.punctuation,
-.hljs-punctuation,
-.token.punctuation {
-    color: #24292f !important;
-    /* Dark for punctuation */
-}
-
-/* CRITICAL: Force all code text to dark color as fallback */
+/* Force all code text readable (nuclear option for VS Code dark themes) */
 pre code,
 pre code span,
 pre code * {
-    color: #24292f !important;
+    color: #1f2328 !important;
 }
 
-/* Then re-apply specific syntax colors */
+/* VS Code Monaco editor classes override */
+.mtk1 {
+    color: #1f2328 !important;
+}
+
+.mtk3 {
+    color: #57606a !important;
+}
+
+.mtk4 {
+    color: #0550ae !important;
+}
+
+.mtk5 {
+    color: #cf222e !important;
+}
+
+.mtk6 {
+    color: #0a3069 !important;
+}
+
+.mtk7 {
+    color: #8250df !important;
+}
+
+.mtk8 {
+    color: #953800 !important;
+}
+
+.mtk9 {
+    color: #0550ae !important;
+}
+
+.mtk10 {
+    color: #1f2328 !important;
+}
+
+.mtk11 {
+    color: #0550ae !important;
+}
+
+.mtk12 {
+    color: #8250df !important;
+}
+
+/* ============================================
+   Syntax Highlighting - GitHub Colors
+   ============================================ */
 pre code .hljs-keyword,
 pre code .token.keyword {
     color: #cf222e !important;
@@ -232,6 +214,28 @@ pre code .token.type {
     color: #953800 !important;
 }
 
+pre code .hljs-variable,
+pre code .token.variable {
+    color: #24292f !important;
+}
+
+pre code .hljs-attr,
+pre code .token.attr-name,
+pre code .hljs-property,
+pre code .token.property {
+    color: #0550ae !important;
+}
+
+pre code .hljs-operator,
+pre code .token.operator {
+    color: #cf222e !important;
+}
+
+pre code .hljs-punctuation,
+pre code .token.punctuation {
+    color: #24292f !important;
+}
+
 pre code .hljs-built_in,
 pre code .token.builtin {
     color: #0550ae !important;
@@ -242,69 +246,45 @@ pre code .token.boolean {
     color: #0550ae !important;
 }
 
-pre code .hljs-attr,
-pre code .token.attr-name {
-    color: #0550ae !important;
-}
-
-pre code .hljs-property,
-pre code .token.property {
-    color: #0550ae !important;
-}
-
-/* Blockquotes - compact with centered text */
-blockquote {
+/* ============================================
+   Blockquotes
+   ============================================ */
+blockquote,
+.vscode-body blockquote,
+body blockquote {
     border-left: 4px solid #d1d9e0 !important;
     color: #1f2328 !important;
     margin: 0 0 16px 0 !important;
     padding: 8px 16px !important;
     background-color: #f6f8fa !important;
-    background: #f6f8fa !important;
-}
-
-.vscode-body blockquote,
-.vscode-dark blockquote,
-.vscode-light blockquote,
-body blockquote,
-html blockquote {
-    background-color: #f6f8fa !important;
-    background: #f6f8fa !important;
-    border-left: 4px solid #d1d9e0 !important;
-    color: #1f2328 !important;
-    padding: 8px 16px !important;
 }
 
 blockquote p {
     margin: 0 !important;
-    padding: 0 !important;
     line-height: 1.5 !important;
     color: #1f2328 !important;
-    background-color: transparent !important;
-    background: transparent !important;
 }
 
 blockquote strong,
-blockquote em,
-blockquote span {
-    color: #1f2328 !important;
-    background-color: transparent !important;
-    background: transparent !important;
-}
-
-blockquote strong {
+blockquote em {
     color: #1f2328 !important;
 }
 
-/* Tables */
+/* ============================================
+   Tables
+   ============================================ */
 table {
     border-collapse: collapse !important;
     width: 100% !important;
+    margin-bottom: 16px !important;
+    display: block !important;
+    overflow-x: auto !important;
 }
 
 th,
 td {
     border: 1px solid #d1d9e0 !important;
-    padding: 6px 13px !important;
+    padding: 8px 13px !important;
 }
 
 th {
@@ -316,27 +296,56 @@ tr:nth-child(even) {
     background-color: #f6f8fa !important;
 }
 
-hr {
-    background-color: #d1d9e0 !important;
-    border: 0 !important;
-    height: 0.25em !important;
-    margin: 24px 0 !important;
-}
-
-img {
-    max-width: 100% !important;
-}
-
+/* ============================================
+   Lists
+   ============================================ */
 ul,
 ol {
     padding-left: 2em !important;
+    margin-bottom: 16px !important;
 }
 
 li+li {
     margin-top: 0.25em !important;
 }
 
-/* Mermaid diagrams - GitHub style */
+/* Task lists */
+li input[type="checkbox"] {
+    margin-right: 0.5em !important;
+}
+
+/* Nested lists */
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ============================================
+   Horizontal Rule
+   ============================================ */
+hr {
+    background-color: #d1d9e0 !important;
+    border: 0 !important;
+    height: 0.25em !important;
+    margin: 24px 0 !important;
+    padding: 0 !important;
+}
+
+/* ============================================
+   Images
+   ============================================ */
+img {
+    max-width: 100% !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+}
+
+/* ============================================
+   Mermaid Diagrams - Light Theme
+   ============================================ */
 .mermaid,
 .mermaid svg {
     background-color: #ffffff !important;
@@ -345,41 +354,26 @@ li+li {
     text-align: center !important;
 }
 
-/* Force ALL shapes to light fill */
+/* Shape fills */
 .mermaid rect,
 .mermaid circle,
 .mermaid ellipse,
 .mermaid polygon,
-.mermaid path.node,
 .mermaid .node rect,
 .mermaid .node circle,
-.mermaid .node ellipse,
 .mermaid .node polygon,
-.mermaid .basic.label-container,
 .mermaid .label-container,
-.mermaid foreignObject,
-.mermaid .nodeLabel,
-.mermaid [class*="node"] rect,
-.mermaid [class*="node"] polygon,
 .mermaid g.node rect,
-.mermaid g.node polygon,
-.mermaid g rect,
-.mermaid g polygon {
+.mermaid g.node polygon {
     fill: #f6f8fa !important;
     stroke: #d1d9e0 !important;
     stroke-width: 1px !important;
 }
 
-/* Override any inline styles on shapes */
-.mermaid *[style*="fill"] {
-    fill: #f6f8fa !important;
-}
-
-/* Node text - force dark */
+/* Text in diagrams */
 .mermaid text,
 .mermaid tspan,
 .mermaid .nodeLabel,
-.mermaid .node .label,
 .mermaid .label,
 .mermaid span,
 .mermaid p {
@@ -406,7 +400,7 @@ li+li {
     fill: #ffffff !important;
 }
 
-/* Cluster/subgraph */
+/* Clusters/Subgraphs */
 .mermaid .cluster rect {
     fill: #f6f8fa !important;
     stroke: #d1d9e0 !important;
@@ -416,7 +410,7 @@ li+li {
     fill: #1f2328 !important;
 }
 
-/* Sequence diagram */
+/* Sequence diagrams */
 .mermaid .actor {
     fill: #f6f8fa !important;
     stroke: #d1d9e0 !important;
@@ -436,13 +430,31 @@ li+li {
 }
 
 .mermaid .labelText,
-.mermaid .loopText,
-.mermaid .loopLine {
+.mermaid .loopText {
     fill: #1f2328 !important;
+}
+
+.mermaid .loopLine {
     stroke: #d1d9e0 !important;
 }
 
 .mermaid .titleText {
     fill: #1f2328 !important;
     font-weight: 600 !important;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    body {
+        background-color: white !important;
+        max-width: none !important;
+        padding: 20px !important;
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+    }
 }

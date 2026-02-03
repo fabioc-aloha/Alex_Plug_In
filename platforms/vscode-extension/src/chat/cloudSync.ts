@@ -374,6 +374,21 @@ export async function getSyncStatus(): Promise<{ status: SyncStatus; message: st
 }
 
 /**
+ * Get the timestamp of the last successful sync (for nudges/reminders)
+ */
+export async function getLastSyncTimestamp(): Promise<Date | null> {
+    try {
+        const metadata = await loadSyncMetadata();
+        if (metadata.lastSyncedAt) {
+            return new Date(metadata.lastSyncedAt);
+        }
+    } catch {
+        // Ignore errors
+    }
+    return null;
+}
+
+/**
  * Push local knowledge to GitHub Gist
  */
 export async function pushToCloud(): Promise<ISyncResult> {

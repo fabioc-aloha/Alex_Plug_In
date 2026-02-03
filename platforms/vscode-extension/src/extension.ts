@@ -9,10 +9,12 @@ import { runDreamProtocol } from "./commands/dream";
 import {
   setupEnvironment,
   offerEnvironmentSetup,
+  setExtensionPathForCss,
+  applyMarkdownStyles,
 } from "./commands/setupEnvironment";
 import { upgradeArchitecture, completeMigration, showMigrationCandidates } from "./commands/upgrade";
 import { runSelfActualization } from "./commands/self-actualization";
-import { runExportForM365 } from "./commands/exportForM365";
+import { runExportForM365, silentSyncToOneDrive, exportForM365 } from "./commands/exportForM365";
 import { registerContextMenuCommands } from "./commands/contextMenu";
 import {
   initializeSessionStatusBar,
@@ -97,6 +99,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   console.log("Alex Cognitive Architecture is now active!");
 
+  // Set extension path for markdown CSS lookup
+  // This allows setupEnvironment to find the bundled CSS file
+  setExtensionPathForCss(context.extensionPath);
+
   // Check for version upgrade and notify user
   checkVersionUpgrade(context);
 
@@ -136,6 +142,12 @@ export function activate(context: vscode.ExtensionContext) {
     .catch((err) => {
       console.warn("Failed to initialize global knowledge directories:", err);
     });
+
+  // Apply markdown preview CSS for workspaces that have Alex installed
+  // This ensures proper styling even if user opens an existing Alex workspace
+  applyMarkdownStyles().catch((err) => {
+    console.warn("Failed to apply markdown styles on activation:", err);
+  });
 
   let initDisposable = vscode.commands.registerCommand(
     "alex.initialize",
@@ -185,6 +197,17 @@ export function activate(context: vscode.ExtensionContext) {
           // Refresh status bar after dream (synapses may have been repaired)
           clearHealthCache();
           await updateStatusBar(context, true);
+          
+          // Auto-sync to OneDrive if enabled
+          const config = vscode.workspace.getConfiguration('alex');
+          if (config.get<boolean>('m365.autoSync', false)) {
+            // First export, then sync
+            const result = await exportForM365(context);
+            if (result.oneDrivePath) {
+              vscode.window.showInformationMessage(`☁️ Synced to OneDrive: ${result.oneDrivePath}`);
+            }
+          }
+          
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -249,6 +272,16 @@ export function activate(context: vscode.ExtensionContext) {
           // Refresh status bar after self-actualization
           clearHealthCache();
           await updateStatusBar(context, true);
+          
+          // Auto-sync to OneDrive if enabled
+          const config = vscode.workspace.getConfiguration('alex');
+          if (config.get<boolean>('m365.autoSync', false)) {
+            const result = await exportForM365(context);
+            if (result.oneDrivePath) {
+              vscode.window.showInformationMessage(`☁️ Synced to OneDrive: ${result.oneDrivePath}`);
+            }
+          }
+          
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));

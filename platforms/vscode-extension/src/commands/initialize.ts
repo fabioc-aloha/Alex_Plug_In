@@ -3,7 +3,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from "../shared/utils";
-import { offerEnvironmentSetup } from "./setupEnvironment";
+import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
 import { runDreamProtocol } from "./dream";
 import * as telemetry from "../shared/telemetry";
 
@@ -323,6 +323,10 @@ async function performInitialization(
       copiedCount,
       skippedCount,
     });
+
+    // Apply markdown preview CSS (always, regardless of settings choice)
+    // This ensures proper markdown rendering even if user skips settings wizard
+    await applyMarkdownStyles();
 
     // Offer environment setup (non-blocking)
     telemetry.log("command", "initialize_offering_setup");

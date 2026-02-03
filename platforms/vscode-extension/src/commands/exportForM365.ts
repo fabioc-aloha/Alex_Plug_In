@@ -13,11 +13,13 @@ import * as os from 'os';
  * 1. Uploaded to OneDrive as Alex-Memory folder
  * 2. Used with the M365 Copilot declarative agent
  * 3. Synced via the Azure Functions API
+ * 4. Automatically synced to local OneDrive folder (if detected)
  */
 
 interface ExportResult {
     success: boolean;
     outputPath?: string;
+    oneDrivePath?: string;
     files: string[];
     message: string;
 }
@@ -28,6 +30,74 @@ interface GlobalKnowledgeEntry {
     content: string;
     category?: string;
     tags?: string[];
+}
+
+/**
+ * Detect the user's OneDrive folder path
+ * Supports personal OneDrive, OneDrive for Business, and custom paths
+ */
+async function detectOneDrivePath(): Promise<string | null> {
+    const homeDir = os.homedir();
+    
+    // Common OneDrive folder names (check in order of likelihood)
+    const possiblePaths = [
+        path.join(homeDir, 'OneDrive'),                           // Personal
+        path.join(homeDir, 'OneDrive - Personal'),                // Personal (alt)
+    ];
+    
+    // Check for OneDrive for Business folders (company names vary)
+    try {
+        const homeDirContents = await fs.readdir(homeDir);
+        for (const folder of homeDirContents) {
+            if (folder.startsWith('OneDrive -') && folder !== 'OneDrive - Personal') {
+                possiblePaths.unshift(path.join(homeDir, folder)); // Prioritize business
+            }
+        }
+    } catch { /* ignore */ }
+    
+    // Return first existing path
+    for (const oneDrivePath of possiblePaths) {
+        if (await fs.pathExists(oneDrivePath)) {
+            return oneDrivePath;
+        }
+    }
+    
+    return null;
+}
+
+/**
+ * Sync exported files to OneDrive Alex-Memory folder
+ */
+async function syncToOneDrive(exportDir: string): Promise<{ success: boolean; path?: string; message: string }> {
+    const oneDriveRoot = await detectOneDrivePath();
+    
+    if (!oneDriveRoot) {
+        return {
+            success: false,
+            message: 'OneDrive folder not detected. Upload manually or configure OneDrive sync.'
+        };
+    }
+    
+    const alexMemoryPath = path.join(oneDriveRoot, 'Alex-Memory');
+    
+    try {
+        // Create Alex-Memory folder if it doesn't exist
+        await fs.ensureDir(alexMemoryPath);
+        
+        // Copy all exported files to OneDrive
+        await fs.copy(exportDir, alexMemoryPath, { overwrite: true });
+        
+        return {
+            success: true,
+            path: alexMemoryPath,
+            message: `Synced to ${alexMemoryPath}`
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: `Failed to sync to OneDrive: ${error instanceof Error ? error.message : String(error)}`
+        };
+    }
 }
 
 /**
@@ -152,14 +222,29 @@ export async function exportForM365(context: vscode.ExtensionContext): Promise<E
         await fs.writeFile(path.join(exportDir, 'README.md'), readmeMd);
         exportFiles.push('README.md');
 
-        progress.report({ increment: 10, message: 'Complete!' });
+        progress.report({ increment: 5, message: 'Syncing to OneDrive...' });
 
-        return {
-            success: true,
-            outputPath: exportDir,
-            files: exportFiles,
-            message: `Exported ${exportFiles.length} files to ${exportDir}`
-        };
+        // Try to sync to OneDrive automatically
+        const oneDriveResult = await syncToOneDrive(exportDir);
+        
+        progress.report({ increment: 5, message: 'Complete!' });
+
+        if (oneDriveResult.success) {
+            return {
+                success: true,
+                outputPath: exportDir,
+                oneDrivePath: oneDriveResult.path,
+                files: exportFiles,
+                message: `Exported ${exportFiles.length} files and synced to OneDrive!`
+            };
+        } else {
+            return {
+                success: true,
+                outputPath: exportDir,
+                files: exportFiles,
+                message: `Exported ${exportFiles.length} files to ${exportDir}. ${oneDriveResult.message}`
+            };
+        }
     });
 }
 
@@ -326,7 +411,7 @@ from OneDrive. For bi-directional sync:
 - Docs: https://github.com/fabioc-aloha/Alex_Plug_In
 
 ---
-*Exported by Alex Cognitive Architecture v4.0.0 🧠*
+*Exported by Alex Cognitive Architecture v4.2.3 🧠*
 `;
 }
 
@@ -337,31 +422,52 @@ export async function runExportForM365(context: vscode.ExtensionContext): Promis
     const result = await exportForM365(context);
     
     if (result.success && result.outputPath) {
-        const openFolder = 'Open Folder';
-        const copyPath = 'Copy Path';
-        const howToUse = 'How to Use';
-        
-        const selection = await vscode.window.showInformationMessage(
-            `✅ ${result.message}\n\nNext: Upload to OneDrive/Alex-Memory/ to use with M365 Copilot.`,
-            openFolder,
-            copyPath,
-            howToUse
-        );
-        
-        if (selection === openFolder) {
-            // Open the export folder in the file explorer
-            const uri = vscode.Uri.file(result.outputPath);
-            await vscode.env.openExternal(uri);
-        } else if (selection === copyPath) {
-            await vscode.env.clipboard.writeText(result.outputPath);
-            vscode.window.showInformationMessage('Path copied to clipboard!');
-        } else if (selection === howToUse) {
-            // Show detailed instructions
-            const instructions = `## M365 Export Setup
+        // Different message based on whether OneDrive sync succeeded
+        if (result.oneDrivePath) {
+            // OneDrive sync worked - simpler success message
+            const openOneDrive = 'Open OneDrive Folder';
+            const tryM365 = 'Try in M365';
+            
+            const selection = await vscode.window.showInformationMessage(
+                `✅ ${result.message}\n\n📁 ${result.oneDrivePath}\n\nYour M365 Alex agent can now access this knowledge!`,
+                openOneDrive,
+                tryM365
+            );
+            
+            if (selection === openOneDrive) {
+                const uri = vscode.Uri.file(result.oneDrivePath);
+                await vscode.env.openExternal(uri);
+            } else if (selection === tryM365) {
+                // Open M365 Copilot in browser
+                await vscode.env.openExternal(vscode.Uri.parse('https://m365.cloud.microsoft/chat'));
+            }
+        } else {
+            // OneDrive not found - show manual upload instructions
+            const openFolder = 'Open Export Folder';
+            const copyPath = 'Copy Path';
+            const howToUse = 'How to Use';
+            
+            const selection = await vscode.window.showInformationMessage(
+                `✅ Exported ${result.files.length} files.\n\nOneDrive not detected - upload manually to OneDrive/Alex-Memory/`,
+                openFolder,
+                copyPath,
+                howToUse
+            );
+            
+            if (selection === openFolder) {
+                const uri = vscode.Uri.file(result.outputPath);
+                await vscode.env.openExternal(uri);
+            } else if (selection === copyPath) {
+                await vscode.env.clipboard.writeText(result.outputPath);
+                vscode.window.showInformationMessage('Path copied to clipboard!');
+            } else if (selection === howToUse) {
+                const instructions = `## M365 Export Setup
 
-**Step 1:** Open OneDrive (onedrive.live.com)
+**OneDrive was not detected on this machine.**
 
-**Step 2:** Create folder: \`Alex-Memory\` in root
+**Step 1:** Install OneDrive desktop app, or manually upload to onedrive.live.com
+
+**Step 2:** Create folder: \`Alex-Memory\` in your OneDrive root
 
 **Step 3:** Upload all files from:
 \`${result.outputPath}\`
@@ -371,14 +477,32 @@ export async function runExportForM365(context: vscode.ExtensionContext): Promis
 - "@Alex search my knowledge for [topic]"
 
 **Exported files:** ${result.files.join(', ')}`;
-            
-            const doc = await vscode.workspace.openTextDocument({
-                content: instructions,
-                language: 'markdown'
-            });
-            await vscode.window.showTextDocument(doc, { preview: true });
+                
+                const doc = await vscode.workspace.openTextDocument({
+                    content: instructions,
+                    language: 'markdown'
+                });
+                await vscode.window.showTextDocument(doc, { preview: true });
+            }
         }
     } else {
         vscode.window.showWarningMessage(`⚠️ ${result.message}`);
     }
+}
+
+/**
+ * Silently sync to OneDrive (for auto-sync on dream/meditate)
+ * Returns true if sync succeeded
+ */
+export async function silentSyncToOneDrive(): Promise<boolean> {
+    const homeDir = os.homedir();
+    const exportDir = path.join(homeDir, 'Alex-Memory-Export');
+    
+    // Check if export folder exists
+    if (!await fs.pathExists(exportDir)) {
+        return false;
+    }
+    
+    const result = await syncToOneDrive(exportDir);
+    return result.success;
 }

@@ -119,10 +119,11 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
 | Auto-Promotion | ❌ None | ✅ Auto-promote DK files during meditation |
 | Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
-| Model Awareness | ❌ None | ✅ **NEW** Warns when task needs Opus |
-| Skill Review | ❌ None | ✅ **NEW** Review staleness-prone skills |
+| Model Awareness | ❌ None | ✅ Warns when task needs Opus |
 | Skills Library | ❌ None | ✅ 65 portable skills (security, privacy, RAI, etc.) |
 | Fully Automated Upgrades | ❌ None | ✅ One-click upgrade with schema migration |
+| Smart Nudges | ❌ None | ✅ **NEW** Proactive reminders (dream, streak, sync) |
+| OneDrive Auto-Sync | ❌ None | ✅ **NEW** Cross-platform sync to M365 |
 | Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
 
 ### Migration Notes
@@ -711,7 +712,32 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New
+## 🆕 What's New in v4.2.3
+
+### 💡 Smart Nudges
+
+Contextual reminders appear at the top of the Welcome View (max 2 at a time):
+
+- "Haven't dreamed in X days" - neural maintenance reminder
+- "X-day streak at risk!" - goal streak protection
+- "X broken synapses need repair" - health warnings
+- "Local changes not synced" - sync status nudges
+
+Each nudge has a one-click action button to resolve.
+
+### ☁️ OneDrive Auto-Sync
+
+Export for M365 now auto-detects OneDrive and syncs directly:
+
+- Supports personal OneDrive and OneDrive for Business
+- Enable `alex.m365.autoSync` for automatic sync after Dream operations
+- Share knowledge seamlessly between VS Code and M365 Copilot
+
+### 🎯 Streamlined Welcome View
+
+- Reduced metrics from 6 to 4 (Health, Sync, Skills, Synapses)
+- Click metrics to open Health Dashboard
+- Removed niche actions (still in Command Palette)
 
 See the [Full Changelog](CHANGELOG.md) for complete version history and release notes.
 

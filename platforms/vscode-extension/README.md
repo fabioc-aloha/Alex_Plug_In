@@ -159,8 +159,9 @@ Knowledge from Project A becomes available in Project B. Your expertise compound
 
 **Welcome Panel** — Find the CX icon in the Activity Bar (left side) for a full dashboard:
 
-- Status grid: Health, Sync, Skills, Synapses, Patterns, Insights, Streak, Goals
-- Grouped quick actions (Core, Knowledge, Work-Life Balance, System)
+- Smart nudges: proactive reminders for dream, streak, sync
+- Status grid: Health, Sync, Skills, Synapses (click to open Health Dashboard)
+- Grouped quick actions (Core, Knowledge, Developer Tools, Work-Life Balance, System)
 - Learning Goals tracker with streaks and achievements
 
 **Command Palette** — Press `Ctrl+Shift+P` and type "Alex" for all 25+ commands.
@@ -187,12 +188,31 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v4.0.4
+## 🆕 What's New in v4.2.3
 
-- **🔧 Markdown Preview Fix** — CSS now properly loads using workspace-local path (security compliance)
-- **🛡️ CAIR/CSR Framework** — Calibrated AI Reliance + Collaborative Shared Responsibility
-- **🎨 Creative Latitude** — Encourages creative exploration when appropriate
-- **⚖️ Human Judgment Flags** — Explicit markers for decisions requiring human review
+### 💡 Smart Nudges
+
+Contextual reminders appear at the top of the Welcome View:
+
+- "Haven't dreamed in X days" - neural maintenance reminder
+- "X-day streak at risk!" - goal streak protection
+- "X broken synapses need repair" - health warnings
+
+Each nudge has a one-click action button to resolve.
+
+### ☁️ OneDrive Auto-Sync
+
+Export for M365 now auto-detects OneDrive and syncs directly:
+
+- Supports personal OneDrive and OneDrive for Business
+- Enable `alex.m365.autoSync` for automatic sync after Dream
+- Share knowledge seamlessly between VS Code and M365 Copilot
+
+### 🎯 Streamlined Welcome View
+
+- Reduced metrics from 6 to 4 (Health, Sync, Skills, Synapses)
+- Click metrics to open Health Dashboard
+- Cleaner, faster experience
 
 See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 

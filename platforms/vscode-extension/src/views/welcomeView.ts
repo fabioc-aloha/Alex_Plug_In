@@ -6,12 +6,24 @@ import {
   HealthCheckResult,
   HealthStatus,
 } from "../shared/healthCheck";
-import { getGlobalKnowledgeSummary } from "../chat/globalKnowledge";
-import { getSyncStatus } from "../chat/cloudSync";
+// Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
+import { getSyncStatus, getLastSyncTimestamp } from "../chat/cloudSync";
 import { getCurrentSession, isSessionActive } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
+
+/**
+ * Nudge types for contextual reminders
+ */
+interface Nudge {
+  type: 'dream' | 'sync' | 'streak' | 'health' | 'tip';
+  icon: string;
+  message: string;
+  action?: string;
+  actionLabel?: string;
+  priority: number; // Lower = higher priority
+}
 
 /**
  * Welcome View Provider - Activity Bar panel with health, quick actions, and recent activity
@@ -149,12 +161,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     try {
       // Gather all status data in parallel
-      const [health, knowledgeSummary, syncStatus, goalsSummary] =
+      const [health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate] =
         await Promise.all([
           checkHealth(false),
-          getGlobalKnowledgeSummary(),
           getSyncStatus(),
           getGoalsSummary(),
+          getLastSyncTimestamp(),
+          this._getLastDreamDate(),
         ]);
 
       const session = getCurrentSession();
@@ -163,18 +176,142 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
       const version = extension?.packageJSON?.version || '0.0.0';
 
+      // Generate nudges based on current state
+      const nudges = this._generateNudges(health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate);
+
       this._view.webview.html = this._getHtmlContent(
         this._view.webview,
         health,
-        knowledgeSummary,
         syncStatus,
         session,
         goalsSummary,
         version,
+        nudges,
       );
     } catch (err) {
       this._view.webview.html = this._getErrorHtml(err);
     }
+  }
+
+  /**
+   * Get the last dream report date from episodic folder
+   */
+  private async _getLastDreamDate(): Promise<Date | null> {
+    try {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders) return null;
+      
+      const episodicPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "episodic");
+      if (!fs.existsSync(episodicPath)) return null;
+
+      const files = fs.readdirSync(episodicPath)
+        .filter(f => f.startsWith('dream-report-') && f.endsWith('.md'))
+        .sort()
+        .reverse();
+
+      if (files.length === 0) return null;
+
+      // Parse timestamp from filename: dream-report-1738456789123.md
+      const match = files[0].match(/dream-report-(\d+)\.md/);
+      if (match) {
+        return new Date(parseInt(match[1], 10));
+      }
+    } catch {
+      // Ignore errors
+    }
+    return null;
+  }
+
+  /**
+   * Generate contextual nudges based on current state
+   * Returns max 2 nudges to avoid overwhelming the user
+   */
+  private _generateNudges(
+    health: HealthCheckResult,
+    syncStatus: { status: string; message: string },
+    goals: { activeGoals: LearningGoal[]; streakDays: number; completedToday: number },
+    lastSyncDate: Date | null,
+    lastDreamDate: Date | null
+  ): Nudge[] {
+    const nudges: Nudge[] = [];
+    const now = new Date();
+    const dayMs = 24 * 60 * 60 * 1000;
+
+    // Check health issues (highest priority)
+    if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
+      nudges.push({
+        type: 'health',
+        icon: '⚠️',
+        message: `${health.brokenSynapses} broken synapses need repair`,
+        action: 'dream',
+        actionLabel: 'Run Dream',
+        priority: 1
+      });
+    }
+
+    // Check streak at risk (high priority)
+    if (goals.streakDays > 0 && goals.completedToday === 0) {
+      nudges.push({
+        type: 'streak',
+        icon: '🔥',
+        message: `${goals.streakDays}-day streak at risk! Complete a goal today.`,
+        action: 'showGoals',
+        actionLabel: 'View Goals',
+        priority: 2
+      });
+    }
+
+    // Check last dream date (medium priority)
+    if (lastDreamDate) {
+      const daysSinceDream = Math.floor((now.getTime() - lastDreamDate.getTime()) / dayMs);
+      if (daysSinceDream >= 7) {
+        nudges.push({
+          type: 'dream',
+          icon: '💭',
+          message: `Haven't dreamed in ${daysSinceDream} days. Neural maintenance recommended.`,
+          action: 'dream',
+          actionLabel: 'Dream',
+          priority: 3
+        });
+      }
+    } else {
+      // Never dreamed in this workspace
+      nudges.push({
+        type: 'dream',
+        icon: '💭',
+        message: 'Run Dream to validate your cognitive architecture.',
+        action: 'dream',
+        actionLabel: 'Dream',
+        priority: 5
+      });
+    }
+
+    // Check sync status (medium priority)
+    if (syncStatus.status === 'needs-push' || syncStatus.status === 'needs-pull') {
+      nudges.push({
+        type: 'sync',
+        icon: '☁️',
+        message: syncStatus.status === 'needs-push' ? 'Local changes not synced to cloud.' : 'Cloud has updates to pull.',
+        action: 'syncKnowledge',
+        actionLabel: 'Sync',
+        priority: 4
+      });
+    } else if (lastSyncDate) {
+      const daysSinceSync = Math.floor((now.getTime() - lastSyncDate.getTime()) / dayMs);
+      if (daysSinceSync >= 14) {
+        nudges.push({
+          type: 'sync',
+          icon: '☁️',
+          message: `Last synced ${daysSinceSync} days ago.`,
+          action: 'syncKnowledge',
+          actionLabel: 'Sync',
+          priority: 6
+        });
+      }
+    }
+
+    // Sort by priority and return top 2
+    return nudges.sort((a, b) => a.priority - b.priority).slice(0, 2);
   }
 
   private _getLoadingHtml(): string {
@@ -244,7 +381,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private _getHtmlContent(
     webview: vscode.Webview,
     health: HealthCheckResult,
-    knowledge: { totalPatterns: number; totalInsights: number } | null,
     syncStatus: { status: string; message: string },
     session: ReturnType<typeof getCurrentSession>,
     goals: {
@@ -254,6 +390,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       totalCompleted: number;
     },
     version: string,
+    nudges: Nudge[],
   ): string {
     // Logo URI for webview
     const logoUri = webview.asWebviewUri(
@@ -279,26 +416,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
-    const healthIcon = isHealthy
-      ? "🟢"
-      : health.brokenSynapses > 5
-        ? "🔴"
-        : "🟡";
     const healthText = isHealthy
       ? "Healthy"
       : `${health.brokenSynapses} issues`;
 
-    // Knowledge stats
-    const patterns = knowledge?.totalPatterns ?? 0;
-    const insights = knowledge?.totalInsights ?? 0;
-
     // Sync status
-    const syncIcon =
-      syncStatus.status === "up-to-date"
-        ? "✅"
-        : syncStatus.status === "error"
-          ? "❌"
-          : "🔄";
     const lastSyncText = syncStatus.message;
 
     // Session status
@@ -623,6 +745,58 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transition: width 0.3s ease;
         }
         
+        /* Nudges Section Styles */
+        .nudges-section {
+            margin-bottom: 16px;
+        }
+        .nudge-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--vscode-editor-background);
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border-left: 3px solid var(--vscode-charts-yellow);
+            transition: all 0.12s ease;
+        }
+        .nudge-card:hover {
+            transform: translateX(2px);
+            border-left-color: var(--vscode-charts-blue);
+        }
+        .nudge-card.nudge-health {
+            border-left-color: var(--vscode-charts-red);
+        }
+        .nudge-card.nudge-streak {
+            border-left-color: var(--vscode-charts-orange, #f0883e);
+        }
+        .nudge-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .nudge-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .nudge-message {
+            font-size: 12px;
+            line-height: 1.3;
+        }
+        .nudge-action {
+            font-size: 11px;
+            color: var(--vscode-textLink-foreground);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.12s ease;
+            white-space: nowrap;
+        }
+        .nudge-action:hover {
+            background: var(--vscode-toolbar-hoverBackground);
+        }
+        
         /* Features Section Styles */
         .features-section details {
             margin: 0;
@@ -725,9 +899,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         
         ${sessionHtml}
         
+        ${this._getNudgesHtml(nudges)}
+        
         <div class="section">
-            <div class="section-title">Status</div>
-            <div class="status-grid">
+            <div class="section-title clickable" onclick="cmd('healthDashboard')" title="Click to open Health Dashboard">Status</div>
+            <div class="status-grid" onclick="cmd('healthDashboard')" style="cursor: pointer;" title="Click to open Health Dashboard">
                 <div class="status-item ${isHealthy ? 'status-good' : 'status-warn'}">
                     <div class="status-label">Health</div>
                     <div class="status-value"><span class="status-dot ${isHealthy ? 'dot-green' : health.brokenSynapses > 5 ? 'dot-red' : 'dot-yellow'}"></span>${healthText}</div>
@@ -743,16 +919,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <div class="status-item">
                     <div class="status-label">Synapses</div>
                     <div class="status-value"><span class="status-num">${health.totalSynapses}</span></div>
-                </div>
-            </div>
-            <div class="status-grid" style="margin-top: 8px;">
-                <div class="status-item">
-                    <div class="status-label">Patterns</div>
-                    <div class="status-value"><span class="status-num">${patterns}</span></div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Insights</div>
-                    <div class="status-value"><span class="status-num">${insights}</span></div>
                 </div>
             </div>
         </div>
@@ -779,10 +945,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Self-Actualize</span>
                     <span class="action-shortcut">⌃⌥S</span>
                 </button>
-                <button class="action-btn" onclick="cmd('healthDashboard')">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Health Dashboard</span>
-                </button>
                 
                 <div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
@@ -804,21 +966,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🚀</span>
                     <span class="action-text">Release Preflight</span>
                 </button>
-                <button class="action-btn" onclick="cmd('debugThis')">
+                <button class="action-btn" onclick="cmd('debugThis')" title="Select code or error message, then click to generate a debug prompt. Opens Copilot chat - paste to get AI debugging assistance.">
                     <span class="action-icon">🐛</span>
-                    <span class="action-text">Debug This</span>
+                    <span class="action-text">Debug This (selected code)</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateDiagram')">
                     <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
-                </button>
-                <button class="action-btn" onclick="cmd('generateSkillCatalog')">
-                    <span class="action-icon">🌐</span>
-                    <span class="action-text">Generate Skill Catalog</span>
-                </button>
-                <button class="action-btn" onclick="cmd('skillReview')" title="Review staleness-prone skills: Security, Privacy, AI, Models, APIs">
-                    <span class="action-icon">🔄</span>
-                    <span class="action-text">Skill Review</span>
                 </button>
                 
                 <div class="action-group-label">⚖️ Work-Life Balance</div>
@@ -832,7 +986,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 <div class="action-group-label">⚙️ System</div>
-                <button class="action-btn" onclick="cmd('exportM365')" title="Package your global knowledge, profile, and insights for M365 Copilot. Upload the exported folder to OneDrive/Alex-Memory/ to use with the M365 Alex agent.">
+                <button class="action-btn" onclick="cmd('exportM365')" title="Package your global knowledge, profile, and insights for M365 Copilot. Auto-syncs to OneDrive/Alex-Memory/ if detected. Enable 'alex.m365.autoSync' for automatic sync after Dream operations.">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>
@@ -957,6 +1111,37 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <span>🏆 ${goals.totalCompleted} total</span>
             </div>
             ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;">No active goals</div>'}
+        </div>`;
+  }
+
+  /**
+   * Generate the Nudges section HTML (contextual reminders)
+   * Only shows when there are actionable nudges
+   */
+  private _getNudgesHtml(nudges: Nudge[]): string {
+    if (nudges.length === 0) {
+      return '';
+    }
+
+    const nudgesHtml = nudges.map(nudge => {
+      const typeClass = `nudge-${nudge.type}`;
+      const actionHtml = nudge.action 
+        ? `<button class="nudge-action" onclick="cmd('${nudge.action}')">${nudge.actionLabel}</button>`
+        : '';
+      
+      return `
+        <div class="nudge-card ${typeClass}">
+            <span class="nudge-icon">${nudge.icon}</span>
+            <div class="nudge-content">
+                <span class="nudge-message">${this._escapeHtml(nudge.message)}</span>
+            </div>
+            ${actionHtml}
+        </div>`;
+    }).join('');
+
+    return `
+        <div class="nudges-section">
+            ${nudgesHtml}
         </div>`;
   }
 

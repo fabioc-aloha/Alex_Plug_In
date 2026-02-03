@@ -4,10 +4,10 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 4.1.0 |
-| **Current Heirs** | VS Code (4.1.0), M365 (v4.0) |
-| **Target** | 4.2.0 (Measurement & Dashboard) |
-| **Status** | ✅ v4.1.0 Released |
+| **Current Master Version** | 4.2.3 |
+| **Current Heirs** | VS Code (4.2.3), M365 (v4.0) |
+| **Target** | 4.3.0 (Measurement & Dashboard) |
+| **Status** | ✅ v4.2.3 Released |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -19,7 +19,8 @@
 |---------|-------|--------|
 | v3.6.0-v3.9.0 | Dawn → Awareness | ✅ Complete (~2 days) |
 | v4.0.x | Trust (CAIR/CSR, Creative Latitude) | ✅ **Complete** |
-| **v4.1.0** | **Skill Expansion (63 skills)** | ✅ **Complete** |
+| v4.1.0 | Skill Expansion (63 skills) | ✅ **Complete** |
+| **v4.2.x** | **UX Polish & Cross-Platform Sync** | ✅ **Complete** |
 
 ---
 
@@ -223,6 +224,11 @@ Both heirs can already share context via **OneDrive**:
 - Notes in `Alex-Memory/notes.md`
 - Knowledge files in `Alex-Memory/knowledge/`
 
+**✅ Implemented in v4.2.3:**
+- Auto-detect OneDrive folder (personal and business)
+- Direct sync to `OneDrive/Alex-Memory/` on export
+- Auto-sync on Dream/Self-Actualize (via `alex.m365.autoSync` setting)
+
 ### Future Possibilities (Monitoring)
 
 | Approach | Status | Notes |
@@ -289,11 +295,14 @@ Useful for:
 
 | # | Feature | Priority | Description |
 |:-:|---------|:--------:|-------------|
-| 1 | Proactive insights | High | Surface relevant knowledge snippets on workspace open |
-| 2 | Learning reminders | High | "You haven't run Dream in 3 days" / "Goal streak at risk!" |
-| 3 | Quick tips carousel | Medium | Rotating tips about Alex capabilities |
-| 4 | Recent activity feed | Medium | Last meditation, last insight saved, etc. |
-| 5 | Skill recommendations | Low | "Based on your work, consider learning X skill" |
+| 1 | ✅ Streamlined metrics | Done | Reduced to 4 key metrics (Health, Sync, Skills, Synapses) |
+| 2 | ✅ Clickable metrics | Done | Metrics open Health Dashboard on click |
+| 3 | ✅ Debug This tooltip | Done | Clear usage instructions in tooltip |
+| 4 | ✅ Smart Nudges | Done | Proactive reminders: dream, streak risk, sync, health (max 2) |
+| 5 | ✅ Learning reminders | Done | "You haven't run Dream in X days" / "X-day streak at risk!" |
+| 6 | Quick tips carousel | Medium | Rotating tips about Alex capabilities |
+| 7 | Recent activity feed | Medium | Last meditation, last insight saved, etc. |
+| 8 | Skill recommendations | Low | "Based on your work, consider learning X skill" |
 
 ### Status Bar Enhancements
 
@@ -308,11 +317,12 @@ Useful for:
 
 | # | Feature | Priority | Description |
 |:-:|---------|:--------:|-------------|
-| 1 | Dream reminder | High | Auto-suggest after major file changes |
-| 2 | Streak protection | High | Warn when daily goal at risk |
-| 3 | Knowledge decay | Medium | Suggest review of stale DK files |
-| 4 | Insight opportunities | Medium | "You solved X - want to save as insight?" |
-| 5 | Meditation prompt | Low | After extended coding session |
+| 1 | ✅ Dream reminder | Done | Smart nudge: "Haven't dreamed in X days" |
+| 2 | ✅ Streak protection | Done | Smart nudge: "X-day streak at risk!" |
+| 3 | ✅ Health warnings | Done | Smart nudge: "X broken synapses need repair" |
+| 4 | ✅ Sync reminders | Done | Smart nudge: "Local changes not synced" |
+| 5 | Insight opportunities | Medium | "You solved X - want to save as insight?" |
+| 6 | Meditation prompt | Low | After extended coding session |
 
 ### Quick Actions Improvements
 
@@ -343,9 +353,10 @@ Useful for:
 | 3.8.x | Expression + UX | ✅ Complete | 2026-01-30 |
 | 3.9.0 | Awareness | ✅ Complete | 2026-01-30 |
 | 4.0.x | Trust | ✅ Complete | 2026-01-31 |
-| **4.1.0** | **Skill Expansion** | ✅ **Complete** | **2026-02-01** |
+| 4.1.0 | Skill Expansion | ✅ Complete | 2026-02-01 |
+| **4.2.x** | **UX Polish & Cross-Platform** | ✅ **Complete** | **2026-02-02** |
 
-**v3.6.0 → v4.1.0: ~4 days** (vs months planned) 🚀
+**v3.6.0 → v4.2.3: ~5 days** (vs months planned) 🚀
 
 See [Completed Versions Archive](#-completed-versions-archive) for historical details.
 

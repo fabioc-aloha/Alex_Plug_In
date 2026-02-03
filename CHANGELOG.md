@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.3] - 2026-02-02
+
+> **Welcome View Streamlining & Smart Nudges** — Cleaner sidebar, proactive reminders, cross-platform sync
+
+### Added
+
+- **💡 Smart Nudges (Proactive Reminders)**
+  - Contextual reminders appear at top of welcome view (max 2 at a time)
+  - "Haven't dreamed in X days" - neural maintenance reminder
+  - "X-day streak at risk!" - goal streak protection
+  - "X broken synapses need repair" - health warnings
+  - "Local changes not synced" - sync status nudges
+  - Each nudge has one-click action button to resolve
+
+- **☁️ OneDrive Auto-Sync**
+  - Export for M365 now auto-detects OneDrive folder and syncs directly
+  - Supports personal OneDrive, OneDrive for Business (company folders)
+  - New setting `alex.m365.autoSync` - auto-sync on Dream/Self-Actualize
+  - Silent sync function for background operations
+
+### Changed
+
+- **🎯 Welcome View Metrics Simplified**
+  - Reduced from 6 to 4 metrics (Health, Sync, Skills, Synapses)
+  - Patterns/Insights moved to Health Dashboard for detailed view
+  - Clicking metrics or "Status" title now opens Health Dashboard
+
+- **🛠️ Developer Tools Streamlined**
+  - Renamed "Debug This" → "Debug This (selected code)" with usage tooltip
+  - Removed niche actions from sidebar (Generate Skill Catalog, Skill Review)
+  - All removed actions still available via Command Palette
+
+- **🎨 Markdown Preview CSS Polished**
+  - Reorganized with clear section headers
+  - Removed redundant selectors (~140 lines reduced)
+  - Added print styles, task list checkbox styling
+  - Improved table scrolling with `overflow-x: auto`
+  - Added image border-radius for polish
+
+### Fixed
+
+- **♿ Accessibility: Comments Contrast**
+  - Fixed comments color failing WCAG AA on code block background
+  - Changed `#6e7781` → `#57606a` (4.1:1 → 5.0:1 contrast ratio)
+
+- **🧹 Dead Code Cleanup**
+  - Removed unused `healthIcon`, `syncIcon` variables
+  - Removed unused `patterns`/`insights` variables
+  - Removed unused `knowledge` parameter and `getGlobalKnowledgeSummary()` call
+
+### Technical
+
+- Added `getLastSyncTimestamp()` export to cloudSync.ts for nudge system
+- Added `_getLastDreamDate()` helper to parse dream report timestamps
+- Updated Export M365 tooltip to mention auto-sync capability
+
+---
+
 
 ## [4.2.2] - 2026-02-01
 
