@@ -78,6 +78,9 @@ const NICE_TO_HAVE_SETTINGS: Record<string, unknown> = {
   "chat.tools.fileSystem.autoApprove": true,
   "github.copilot.chat.localeOverride": "en",
   "chat.commandCenter.enabled": true,
+  // Mermaid diagram theme settings for consistent light mode rendering
+  "markdown-mermaid.lightModeTheme": "default",
+  "markdown-mermaid.darkModeTheme": "dark",
   // Note: markdown.styles handled separately as workspace setting
 };
 

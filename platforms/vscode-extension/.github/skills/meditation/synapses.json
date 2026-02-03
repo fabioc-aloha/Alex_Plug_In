@@ -1,0 +1,37 @@
+{
+    "skill": "meditation",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "meditation-facilitation",
+            "type": "specializes",
+            "strength": 0.75,
+            "reason": "Facilitation guides meditation"
+        },
+        {
+            "target": "knowledge-synthesis",
+            "type": "triggers",
+            "strength": 0.65,
+            "reason": "Meditation creates synthesis"
+        },
+        {
+            "target": "self-actualization",
+            "type": "enables",
+            "strength": 0.9,
+            "reason": "Meditation precedes self-actualization"
+        },
+        {
+            "target": "architecture-health",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Meditation checks health"
+        }
+    ],
+    "triggers": [
+        "meditate",
+        "reflect",
+        "consolidate",
+        "deep thought",
+        "what did we learn"
+    ]
+}

@@ -1,6 +1,6 @@
 {
   "filesCopied": 171,
-  "sourceVersion": "4.1.1",
+  "sourceVersion": "4.2.4",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -9,19 +9,25 @@
     "workflows",
     "episodic/dream-report-*.md",
     "episodic/meditation-session-*.md",
+    "episodic/meditation-*.md",
+    "episodic/chronicle-*.md",
     "config/cognitive-config.json",
     "config/MASTER-ALEX-PROTECTED.json",
-    "skills/meditation",
-    "skills/meditation-facilitation",
-    "skills/knowledge-synthesis",
-    "skills/global-knowledge",
-    "skills/architecture-refinement",
-    "skills/llm-model-selection",
-    "skills/self-actualization",
     "skills/heir-curation",
-    "skills/master-alex-audit"
+    "skills/master-alex-audit",
+    "skills/release-preflight",
+    "skills/release-process"
+  ],
+  "skillsIncluded": [
+    "meditation",
+    "meditation-facilitation",
+    "knowledge-synthesis",
+    "global-knowledge",
+    "architecture-refinement",
+    "llm-model-selection",
+    "self-actualization"
   ],
   "filesExcluded": 30,
-  "sourceCommit": "aef1a14",
-  "generatedAt": "2026-02-01 17:50:01"
+  "sourceCommit": "pending",
+  "generatedAt": "2026-02-03"
 }

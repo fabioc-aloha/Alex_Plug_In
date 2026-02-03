@@ -40,17 +40,20 @@ Skills to **EXCLUDE** from heirs (Master Alex specific):
 | Skill | Reason |
 | ----- | ------ |
 | `heir-curation/` | Meta-skill for curating heirs — not for heirs themselves |
-| Any skill referencing `RISKS.md`, `ROADMAP-*.md` | My repo files |
+| `master-alex-audit/` | Master-specific audit procedures |
+| `release-preflight/` | Master release process |
+| `release-process/` | Master release process with PAT handling |
 
-Skills to **INCLUDE** in heirs (generic, universally valuable):
+Skills to **INCLUDE** in heirs (user-valuable):
 
-| Category | Examples |
-| -------- | -------- |
-| Learning | `bootstrap-learning/`, `learning-psychology/`, `knowledge-synthesis/` |
-| Architecture | `architecture-health/`, `architecture-refinement/`, `self-actualization/` |
-| Development | `code-review/`, `debugging-patterns/`, `testing-strategies/`, `git-workflow/` |
-| AI/Cognitive | `meditation/`, `meditation-facilitation/`, `cognitive-load/` |
-| Technical | `markdown-mermaid/`, `refactoring-patterns/`, `error-recovery-patterns/` |
+| Category | Skills |
+| -------- | ------ |
+| **Learning** | `bootstrap-learning/`, `learning-psychology/`, `knowledge-synthesis/` |
+| **Architecture** | `architecture-health/`, `architecture-refinement/`, `self-actualization/` |
+| **Cognitive** | `meditation/`, `meditation-facilitation/`, `cognitive-load/`, `global-knowledge/` |
+| **Model Selection** | `llm-model-selection/` |
+| **Development** | `code-review/`, `debugging-patterns/`, `testing-strategies/`, `git-workflow/` |
+| **Technical** | `markdown-mermaid/`, `refactoring-patterns/`, `error-recovery-patterns/` |
 
 ### 2. Episodic Memory Audit
 

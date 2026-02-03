@@ -1,0 +1,54 @@
+{
+  "skill": "llm-model-selection",
+  "inheritance": "master-only",
+  "connections": [
+    {
+      "target": "appropriate-reliance",
+      "type": "informs",
+      "strength": 0.9,
+      "note": "Model awareness enables appropriate reliance through task-model matching"
+    },
+    {
+      "target": "architecture-refinement",
+      "type": "supports",
+      "strength": 0.8
+    },
+    {
+      "target": "self-actualization",
+      "type": "supports",
+      "strength": 0.85,
+      "note": "Model awareness required for accurate self-assessment"
+    },
+    {
+      "target": "meditation",
+      "type": "supports",
+      "strength": 0.85,
+      "note": "Deep meditation requires frontier model cognition"
+    }
+  ],
+  "activationBoost": [
+    "model",
+    "llm",
+    "opus",
+    "sonnet",
+    "haiku",
+    "gpt",
+    "claude",
+    "cost",
+    "token",
+    "auto mode",
+    "model awareness"
+  ],
+  "triggers": [
+    "model selection",
+    "GPT",
+    "Claude",
+    "Gemini",
+    "token",
+    "context window",
+    "temperature",
+    "prompt engineering",
+    "wrong model",
+    "model warning"
+  ]
+}

@@ -225,6 +225,9 @@
         "icon": "$(list-tree)"
       }
     ],
+    "markdown.previewStyles": [
+      "./.github/skills/markdown-mermaid/markdown-light.css"
+    ],
     "viewsContainers": {
       "activitybar": [
         {
