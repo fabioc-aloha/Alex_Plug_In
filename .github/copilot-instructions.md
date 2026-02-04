@@ -191,6 +191,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - [meditation/SKILL.md] → Post-dream enhancement, hybrid processing
 - [markdown-mermaid/SKILL.md] → Diagram creation, visualization requests
 - [master-alex-audit/SKILL.md] → "audit", "full audit", "pre-release check", "heir sync", dependency/security/UI audit
+- [heir-skill-promotion.instructions.md] → "promote skill", "heir expertise", "skill from heir"
 
 *Detailed triggers: see [protocol-triggers.instructions.md]*
 
@@ -214,6 +215,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - `architecture-decision-records.instructions.md` → ADR templates and decision documentation
 - `dependency-management.instructions.md` → Security audits, updates, and package health
 - `code-review-guidelines.instructions.md` → Review checklists, feedback standards, PR quality
+- `heir-skill-promotion.instructions.md` → Workflow for promoting heir-developed skills to Master Alex
 
 **Automation & Processing**
 - `dream-state-automation.instructions.md` → Automated neural maintenance and unconscious processing
