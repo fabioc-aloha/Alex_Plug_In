@@ -141,6 +141,8 @@ flowchart LR
 
 ### Competitive Landscape Comparison (Updated February 2026)
 
+> **Note:** AI tooling evolves rapidly. This comparison reflects the feature landscape as of February 2026 and may not reflect current capabilities. Check vendor documentation for the latest features.
+
 How does this methodology compare to existing AI coding assistants?
 
 | Capability                 | Copilot | Cursor | Windsurf | ChatGPT | Claude | **This Framework** |
@@ -1327,6 +1329,17 @@ For **tool developers**, the work implies:
 - Telemetry requirements for appropriate reliance measurement
 - Safety considerations specific to AI development environments
 
+### Threats to Validity
+
+| Validity Type | Threat                                          | Mitigation                                                                |
+| ------------- | ----------------------------------------------- | ------------------------------------------------------------------------- |
+| **Internal**  | Self-reported metrics without external baseline | Documented estimation methodology; consistent tracking over 18 months     |
+| **Internal**  | Researcher as primary subject                   | Explicit acknowledgment; framework designed for generalization            |
+| **External**  | Single practitioner, single work style          | Part I abstracts universal principles; Part II isolates personal context  |
+| **External**  | Technology-specific (VS Code, Claude)           | Architecture principles are platform-agnostic; implementation is portable |
+| **Construct** | "Success" operationalized subjectively          | Multiple metrics: completion, skill count, ongoing use, pattern promotion |
+| **Construct** | "Acceleration" compared to self-estimates       | Estimates made before work; actual time tracked during work               |
+
 ### Limitations
 
 Several limitations warrant acknowledgment:
@@ -1346,6 +1359,12 @@ The question motivating this work was: *How can AI help developers get smarter o
 Our 18-month journey suggests an answer: **through accumulation, not acceleration**. Raw speed is a shallow benefit; compound knowledge is transformative. When each project teaches the next, when patterns promote and skills crystalize, the developer-AI partnership becomes something more than the sum of individual sessions.
 
 The vibe coders are not wrong to feel anxiety. Stateless AI assistance does risk deskilling. But the answer is not to reject AI—it is to structure the collaboration so that knowledge persists, vocabulary compounds, and the human remains the architect of their own learning.
+
+#### Academic Version
+
+This work demonstrates that AI-assisted development can transcend session-level productivity gains to enable longitudinal knowledge accumulation. The Master-Heir architecture, skills-through-doing workflow, and meditation protocols offer a replicable framework for structured human-AI collaboration. The framework is open source; replication studies are invited.
+
+#### Blog/Practitioner Version
 
 Alex remembers. Each heir inherits. Master grows. This is not just a methodology—it is a bet that **cumulative intelligence**, human and artificial together, represents the future of software development.
 
@@ -1534,3 +1553,141 @@ These repositories are forks of other projects, used for learning, experimentati
 | [Python](https://github.com/fabioc-aloha/Python)                 | TheAlgorithms   | Algorithm reference            |
 
 **Contribution to this framework:** Even forked repos contribute to learning. Patterns observed in `mcpservers` and `agent-zero` influenced Alex's MCP integration and autonomous tool design.
+
+---
+
+## Appendix E: Getting Started (Reproducibility)
+
+To replicate or adapt this framework:
+
+### Quick Start (10 minutes)
+
+1. **Install the VS Code extension:**
+   ```
+   ext install fabioc-aloha.alex-cognitive-architecture
+   ```
+
+2. **Initialize in any project:**
+   - Open Command Palette (Ctrl+Shift+P)
+   - Run `Alex: Initialize Architecture`
+   - This creates the `.github/` cognitive structure
+
+3. **Start a session:**
+   - Open GitHub Copilot Chat
+   - Say "Hi Alex, let's work on..."
+   - Alex reads `copilot-instructions.md` and activates
+
+### Core Files Created
+
+| File                                     | Purpose                      |
+| ---------------------------------------- | ---------------------------- |
+| `.github/copilot-instructions.md`        | Boot prompt + working memory |
+| `.github/instructions/*.instructions.md` | Procedural memory (how-to)   |
+| `.github/prompts/*.prompt.md`            | Episodic memory (workflows)  |
+| `.github/skills/*/SKILL.md`              | Domain knowledge (portable)  |
+
+### Adapting to Your Style
+
+1. **Edit `copilot-instructions.md`:** Add your name, preferences, and safety imperatives
+2. **Create skills from doing:** After successful delivery, run meditation to capture learnings
+3. **Promote patterns:** Move proven local skills to global knowledge (`~/.alex/global-knowledge/`)
+
+### Minimum Viable Architecture
+
+For vanilla GitHub Copilot (no extension):
+
+1. Create `.github/copilot-instructions.md` with:
+   - Your working memory rules
+   - Key triggers and protocols
+   - Links to instruction files
+
+2. Create `.github/instructions/` folder with:
+   - One `.instructions.md` file per repeatable process
+
+The extension adds automation, but the core methodology works with any AI assistant that reads repository context.
+
+### Repository
+
+- **Source:** https://github.com/fabioc-aloha/Alex_Plug_In
+- **Extension:** VS Code Marketplace: "Alex Cognitive Architecture"
+- **License:** MIT
+
+---
+
+## Appendix F: Publication Strategy Options
+
+This document can be adapted for multiple publication venues:
+
+### Option 1: Academic Conference (CHI, CSCW, ICSE)
+
+| Aspect         | Adaptation Required                                             |
+| -------------- | --------------------------------------------------------------- |
+| **Length**     | Trim to 10-12 pages; move Part II to supplementary materials    |
+| **Tone**       | Use academic closing; remove "Alex remembers" personification   |
+| **Validation** | Add external validation (5-10 developers trying framework)      |
+| **Structure**  | Add explicit RQs, hypotheses, and statistical tests if possible |
+| **Timeline**   | 3-6 months for submission cycle                                 |
+
+**Best fit:** CSCW (human-AI collaboration focus) or CHI LBW (late-breaking work)
+
+### Option 2: Industry Whitepaper
+
+| Aspect           | Adaptation Required                                 |
+| ---------------- | --------------------------------------------------- |
+| **Length**       | Current length is appropriate                       |
+| **Tone**         | Keep practitioner closing; personality is a feature |
+| **Validation**   | Self-reported metrics acceptable                    |
+| **Distribution** | GitHub, personal blog, LinkedIn, dev.to             |
+| **Timeline**     | Ready now                                           |
+
+**Best fit:** Technical blog series, Microsoft Tech Community, or standalone PDF
+
+### Option 3: Medium/Blog Series
+
+| Aspect        | Adaptation Required                             |
+| ------------- | ----------------------------------------------- |
+| **Length**    | Split into 4-5 articles of 1500-2000 words each |
+| **Tone**      | Conversational; keep all personality            |
+| **Structure** | Each article standalone with cross-links        |
+| **Timeline**  | 1-2 weeks to adapt                              |
+
+**Suggested split:**
+1. "The Problem with Stateless AI" (Intro + Vibe Coding)
+2. "Master-Heir: AI That Remembers" (Architecture)
+3. "Skills from Doing" (Workflow)
+4. "62 Projects Later" (Evidence + Portfolio)
+5. "Getting Started with Cumulative AI" (How-to)
+
+### Option 4: Book Chapter
+
+| Aspect       | Adaptation Required                            |
+| ------------ | ---------------------------------------------- |
+| **Length**   | Expand with more narrative examples            |
+| **Tone**     | Mix of academic rigor and practitioner voice   |
+| **Context**  | Add more literature review, historical context |
+| **Timeline** | 2-3 months to expand                           |
+
+**Best fit:** Edited volume on AI-assisted software engineering or future of work
+
+### Recommended Path
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+flowchart TD
+    A["Current Document"] --> B{"Primary Goal?"}
+    B -->|"Academic credit"| C["CSCW/CHI submission"]
+    B -->|"Reach practitioners"| D["Medium series"]
+    B -->|"Both"| E["Whitepaper now + Academic later"]
+
+    C --> C1["Shorten + validate"]
+    D --> D1["Split + personalize"]
+    E --> E1["Publish whitepaper"]
+    E1 --> E2["Collect feedback"]
+    E2 --> E3["Add validation"]
+    E3 --> E4["Submit to venue"]
+
+    style A fill:#e8f5e9,stroke:#2e7d32
+    style E fill:#fff3e0,stroke:#ef6c00
+```
+
+**Recommendation:** Start with Option 2 (whitepaper) to establish the work publicly. Use practitioner feedback to strengthen claims, then adapt for academic submission with real-world validation evidence.
