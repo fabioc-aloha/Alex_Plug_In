@@ -70,6 +70,32 @@ Distilled from extensive practice:
 4. **Pivot scope when blocked by externals**
 5. **Continuous small > sporadic large**
 
+### Competitive Landscape Comparison
+
+How does this methodology compare to existing AI coding assistants?
+
+| Capability | Copilot | Cursor | Windsurf | ChatGPT | Claude | **This Framework** |
+|------------|:-------:|:------:|:--------:|:-------:|:------:|:------------------:|
+| Code completion | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Chat assistance | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| **Persistent memory** | ❌ | ❌ | ❌ | ⭐ | ⭐ | ⭐⭐⭐ |
+| **Structured knowledge** | ❌ | ❌ | ❌ | ❌ | ⭐ | ⭐⭐⭐ |
+| **Learning/consolidation** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
+| **Cross-project transfer** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
+| Multi-platform | ⭐⭐ | ❌ | ❌ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| User data ownership | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
+
+**The fundamental difference:**
+
+| Other AI Assistants | This Framework |
+|---------------------|----------------|
+| "Let me do that for you" | "Let me help you learn that" |
+| Session-based amnesia | Persistent growth |
+| You get outputs | You get capabilities |
+| Replaces your skills | Augments your skills |
+
+Current AI coding tools excel at making developers faster *today*. This framework addresses a different goal: making developers **smarter over time** through accumulative learning. The Master-Heir architecture, skills-through-doing workflow, and meditation protocols are novel contributions not found in competing approaches (see Appendix C for detailed literature context).
+
 ---
 
 ## 1. Fundamental Paradigm Shifts
