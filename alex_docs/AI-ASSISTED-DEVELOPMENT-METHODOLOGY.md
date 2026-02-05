@@ -895,3 +895,116 @@ Storey, M.-A., Zimmermann, T., Bird, C., Czerwonka, J., Murphy, B., & Kalliamvak
 Sumers, T. R., Yao, S., Narasimhan, K., & Griffiths, T. L. (2023). Cognitive architectures for language agents. *Transactions on Machine Learning Research*. https://arxiv.org/abs/2309.02427
 
 Vaithilingam, P., Zhang, T., & Glassman, E. L. (2022). Expectation vs. experience: Evaluating the usability of code generation tools powered by large language models. *CHI Conference on Human Factors in Computing Systems Extended Abstracts*, 1-7. https://doi.org/10.1145/3491101.3519665
+
+---
+
+## Appendix D: Portfolio Evidence — Projects Built With This Framework
+
+This methodology emerged from building 48+ projects across diverse domains over 18 months. The portfolio demonstrates:
+- **Breadth**: Research platforms, enterprise tools, creative projects, infrastructure automation
+- **Depth**: Some projects (Alex, AIRS, Fishbowl) sustained over 12+ months
+- **Cross-domain transfer**: Patterns from one domain inform others
+
+### Topic Distribution
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
+mindmap
+  root((48 Projects<br/>Built with Alex))
+    AI & Cognitive Architecture
+      Alex_Plug_In
+      Catalyst-BABY
+      alex-articles
+      executive-coach
+      Catalyst-NEWBORN
+    Research & Psychometrics
+      AIRS_Data_Analysis
+      airs-enterprise
+      VT_AIPOWERBI
+    Azure & Cloud Infrastructure
+      Lab-Subscription
+      FabricManager
+      FishbowlGovernance
+      AlexSFI
+      cpesynapse
+    Data Analytics & BI
+      Project-Fishbowl
+      Disposition_Dashboard
+      eureka
+      KalabashDashboard
+    MCP & AI Integrations
+      youtube-mcp-server
+      spotify-mcpb
+      mcpservers
+      omi
+    Productivity Tools
+      ChessCoach
+      ProjectPlans
+      gastown
+      Qualtrics
+    Creative & Personal
+      AlexCook
+      Alex_Sandbox
+      maya
+      amazfit-watchfaces
+```
+
+### Key Projects
+
+| Project | Domain | Description | Link |
+|---------|--------|-------------|------|
+| **Alex_Plug_In** | AI/Cognitive | Transform GitHub Copilot into a sophisticated AI learning partner with meta-cognitive awareness, persistent memory, dual-mind processing, and cross-project knowledge sharing | [GitHub](https://github.com/fabioc-aloha/Alex_Plug_In) |
+| **airs-enterprise** | Research | Research-validated AI Readiness assessment platform (N=523, CFI=.975). 5-minute assessment with personalized AI guides in 29 languages. Live at airs.correax.com | [GitHub](https://github.com/fabioc-aloha/airs-enterprise) |
+| **AIRS_Data_Analysis** | Psychometrics | AI Readiness Scale: 7-phase psychometric validation with EFA→CFA→SEM pipeline. Autonomy-centered UTAUT2 extension (R²=.819) | [GitHub](https://github.com/fabioc-aloha/AIRS_Data_Analysis) |
+| **Project-Fishbowl** | Analytics | Real-time Qualtrics analytics dashboard with distribution monitoring, respondent experience insights, and Microsoft Fabric integration | [GitHub](https://github.com/fabioc-aloha/Project-Fishbowl) |
+| **Lab-Subscription** | Infrastructure | SFI-compliant Azure IaC for subscription management. Bicep modules, CI/CD pipelines, compliance audits | [GitHub](https://github.com/fabioc-aloha/Lab-Subscription) |
+| **youtube-mcp-server** | MCP Integration | Comprehensive YouTube MCP Server with 31 tools, AI intelligence layer, learning path generator | [GitHub](https://github.com/fabioc-aloha/youtube-mcp-server) |
+| **ChessCoach** | AI Application | AI-powered chess coaching with dual-engine analysis (Stockfish + Maia-2), Azure OpenAI coaching, real-time game analysis | [GitHub](https://github.com/fabioc-aloha/ChessCoach) |
+| **FabricManager** | Data Platform | Python toolkit for Azure Synapse to Microsoft Fabric migration - authentication, workspace management, OneLake shortcuts | [GitHub](https://github.com/fabioc-aloha/FabricManager) |
+| **KalabashDashboard** | Finance | Desktop financial market tracking with 8-Factor Investment Rating, 60+ financial ratios, advanced technical indicators | [GitHub](https://github.com/fabioc-aloha/KalabashDashboard) |
+| **AlexCook** | Creative | AI-generated family cookbook with 100+ recipes. IBS-friendly options, picky-eater approved | [GitHub](https://github.com/fabioc-aloha/AlexCook) |
+
+### Technology Distribution
+
+```mermaid
+pie title Languages Across Portfolio
+    "TypeScript" : 12
+    "Python" : 10
+    "PowerShell" : 8
+    "Jupyter" : 4
+    "JavaScript" : 4
+    "Bicep/IaC" : 3
+    "Go" : 1
+    "C#" : 1
+    "Other" : 5
+```
+
+### Insights for the Methodology
+
+| Pattern Observed | Evidence from Portfolio | Contribution to Framework |
+|-----------------|------------------------|---------------------------|
+| **Cross-domain fertilization** | Security patterns from Lab-Subscription inform FishbowlGovernance | Global knowledge promotion mechanism |
+| **Research-to-practice pipeline** | AIRS_Data_Analysis (academic) → airs-enterprise (production) | Skill evolution through deployment |
+| **Creative projects accelerate learning** | AlexCook, maya, amazfit-watchfaces lower stakes for experimentation | Sandboxes for pattern discovery |
+| **MCP as integration pattern** | 4 MCP projects share authentication, tool discovery patterns | Skills transfer across integrations |
+| **Psychometric rigor transfers** | AIRS validation approach used in appropriate reliance telemetry design | Research methods as skills |
+
+### Project Lifecycle Evidence
+
+The portfolio shows three project lifecycle patterns:
+
+1. **Sustained evolution** (12+ months): Alex_Plug_In, AIRS, Project-Fishbowl
+   - Continuous refinement, deep knowledge accumulation
+   - Most valuable for skill development
+
+2. **Rapid delivery** (days to weeks): AlexCook, amazfit-watchfaces, maya
+   - Fun/creative projects completed quickly
+   - Test new patterns in low-stakes environment
+
+3. **Research vehicles** (months, publication-oriented): alex-articles, AIRS_Data_Analysis
+   - Academic rigor, reproducible methods
+   - Inform theoretical foundations of the framework
+
+---
+
+*This portfolio represents work completed using the Alex cognitive architecture between August 2024 and February 2026.*
