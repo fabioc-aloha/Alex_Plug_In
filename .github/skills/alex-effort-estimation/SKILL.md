@@ -93,6 +93,41 @@ When estimating tasks, use this format:
 
 **Acceleration factor: 6.6×**
 
+## Calibrated from 62-Project Analysis
+
+### What Accelerates Well (4-10×)
+
+| Task Type | Human | Alex | Factor | Evidence |
+|-----------|-------|------|--------|----------|
+| Documentation | 4h | 25m | 10× | METHODOLOGY doc: 400 lines in ~30 min |
+| Skill creation | 2h | 15m | 8× | 65 skills created, many in single sessions |
+| Code generation | 4h | 30m | 8× | Slash commands, refactors |
+| Research + synthesis | 8h | 45m | 10× | 62 project analysis in ~20 min |
+| Architecture decisions | 8h | 2h | 4× | Root cause analysis + recommendations |
+
+### What Doesn't Accelerate (<2×)
+
+| Bottleneck | Why | Evidence |
+|------------|-----|----------|
+| External dependencies | Can't control | AlexCook blocked by book formatting |
+| Unrealistic scope | Must be discovered | Altman-Z-Score, KalabashDashboard |
+| Human learning curve | Needs real time | Writing skills developing (Paper) |
+| Third-party tools | Must wait | markdown-to-pdf "not working" |
+| Approval cycles | Calendar-bound | Release publishing waits for human |
+
+### Project Success Predictors
+
+From 62-project analysis:
+
+| Indicator | Success Correlation | Action |
+|-----------|--------------------|---------|
+| Clear "done" definition | Strong positive | Define in one sentence upfront |
+| Quick win potential | Strong positive | Favor 🚀 over 🗓️ |
+| External dependencies | Strong negative | Identify blockers early, pivot |
+| Scope ambition | Moderate negative | Conservative > ambitious |
+| Continuous small work | Strong positive | Daily touch > weekly sprint |
+| Skill count | Weak positive | Skills = investment, not outcome |
+
 ## Usage in Planning
 
 When reviewing task lists:

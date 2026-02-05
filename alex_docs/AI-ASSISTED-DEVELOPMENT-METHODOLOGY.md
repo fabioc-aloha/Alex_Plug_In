@@ -403,75 +403,86 @@ The 62 heir projects, 148 insights, and 4-6× acceleration aren't the goal—the
 
 ## Appendix A: Project Inventory
 
-All 62 projects with Alex cognitive architecture. Fill in Success and Status to calibrate what's working.
+All 62 projects with Alex cognitive architecture. Pattern categories based on root cause analysis.
 
-**Success Scale:** ⭐ (abandoned) → ⭐⭐⭐⭐⭐ (major success)
-**Status:** 🔴 Dead | 🟡 Paused | 🟢 Active | ✅ Complete
+**Success Scale:** ⭐ (abandoned) → ⭐⭐⭐⭐⭐ (major success)  
+**Pattern Codes:** 🚀 Quick win | 🔄 Ongoing living system | 🎯 Skill promotion candidate | ⚠️ Scope issue | 🚧 Blocked | 📦 Archive candidate
 
-| Project                           | Skills | Success | Status                                                       |
-| --------------------------------- | ------ | ------- | ------------------------------------------------------------ |
-| AIRS                              | 0      | x       |                                                              |
-| AIRS Enterprise                   | 54     | xxx     | outcome of my doctoral thesis                                |
-| AIRS_Data_Analysis                | 0      | xxxx    | my thesis data analysis                                      |
-| Alex_Marketing                    | 0      | xxx     |                                                              |
-| Alex_Plug_In                      | 66     | xxxxx   |                                                              |
-| Alex_Sandbox                      | 65     | xxx     | test environment                                             |
-| Alex-Cognitive-Architecture-Paper | 0      | xx      | writting skills begining                                     |
-| AlexCook                          | 63     | xxx     | I love this project but cannot format as a book as I wished  |
-| AlexQ_Template                    | 0      |         |                                                              |
-| AlexSFI                           | 0      | x       | kinda works                                                  |
-| AlexTest                          | 0      |         |                                                              |
-| Altman-Z-Score                    | 0      | xxx     | very cool but nrealistic goals                               |
-| Altman-Z-Score-1                  | 0      | xx      |                                                              |
-| Amazfit                           | 0      | x       |                                                              |
-| articles                          | 0      | x       |                                                              |
-| Azure-SQL                         | 0      | xx      |                                                              |
-| BASIC-M6502                       | 0      | xxxxx   | one day project                                              |
-| BRD                               | 0      | x       |                                                              |
-| Catalyst                          | 0      | xxxx    | how alex started                                             |
-| Catalyst-BABY                     | 0      | xxxx    | how the extension version started                            |
-| Catalyst-DOG-TRAINER              | 0      | xx      |                                                              |
-| Catalyst-NEWBORN                  | 0      | xxxxx   |                                                              |
-| ChatGPT                           | 0      |         |                                                              |
-| ChessCoach                        | 0      | xxxx    | amazing project                                              |
-| CopilotEnhancement                | 0      | x       |                                                              |
-| CorreaX                           | 54     | xxxxx   | my personal azure subscription manager and personal web site |
-| cpesynapse                        | 0      | xxxx    | enterprise infra management                                  |
-| Creative                          | 0      | xx      |                                                              |
-| DATA-ANALYSIS                     | 0      | xxx     |                                                              |
-| DBA                               | 0      | xx      |                                                              |
-| Eureka                            | 0      | xx      |                                                              |
-| executive-coach                   | 0      | xxx     |                                                              |
-| fabioc-aloha                      | 0      | xxxxx   | my automatic work portfolio updated daily                    |
-| fabioc-aloha_OLD                  | 0      |         |                                                              |
-| FabricManager                     | 0      |         |                                                              |
-| Fishbowl                          | 57     | xxxx    | my prime project at work                                     |
-| Fishbowl_POC                      | 0      |         |                                                              |
-| FishbowlGovernance                | 63     | xxxx    | newest project with great potential                          |
-| GCXMCP                            | 0      |         |                                                              |
-| Headstart                         | 0      | xxx     | plan for my wifes business website                           |
-| Ideas                             | 0      |         |                                                              |
-| Investing                         | 0      |         |                                                              |
-| KalabashDashboard                 | 0      | xx      | other project with unrealistic goals                         |
-| Lab Subscription                  | 55     | xxxx    | good management tool                                         |
-| markdown-to-pdf                   | 0      | xxx     | not working                                                  |
-| maya                              | 0      |         |                                                              |
-| MCEM-Interview-Processing         | 0      |         |                                                              |
-| mdword                            | 0      |         |                                                              |
-| Papers                            | 0      |         |                                                              |
-| ProjectPlans                      | 61     |         |                                                              |
-| Qualtrics                         | 0      |         |                                                              |
-| Self-Learning-Vibe-Coding         | 0      |         |                                                              |
-| Spotify                           | 0      | xxx     | great fun with this innovation                               |
-| spotify-mcpb                      | 0      |         |                                                              |
-| Spotify-Skill                     | 0      | xx      |                                                              |
-| Taylor                            | 0      |         |                                                              |
-| TestVibe                          | 0      |         |                                                              |
-| VT_AIPOWERBI                      | 0      | xxxx    | plan for my classes at viginia tech                          |
-| WallpaperScraper                  | 0      | xx      | bad initial project                                          |
-| XDL                               | 0      |         |                                                              |
-| youtube                           | 0      | xxxx    | i see podential                                              |
-| youtube-mcp-vscode                | 0      | xxxx    | same                                                         |
+| Project | Skills | Success | Pattern | Notes |
+|---------|--------|---------|---------|-------|
+| AIRS | 0 | x | 📦 | Superseded by AIRS Enterprise |
+| AIRS Enterprise | 54 | xxx | 🔄 | Ongoing: doctoral thesis |
+| AIRS_Data_Analysis | 0 | xxxx | 🎯 | **Promote:** data analysis patterns |
+| Alex_Marketing | 0 | xxx | 📦 | Marketing materials |
+| Alex_Plug_In | 66 | xxxxx | 🔄 | Core platform, continuous investment |
+| Alex_Sandbox | 65 | xxx | 🔄 | Test environment (by design) |
+| Alex-Cognitive-Architecture-Paper | 0 | xx | ⚠️ | Scope: writing skills developing |
+| AlexCook | 63 | xxx | 🚧 | Blocked: book formatting tool |
+| AlexQ_Template | 0 | — | 📦 | Template only |
+| AlexSFI | 0 | x | ⚠️ | kinda works |
+| AlexTest | 0 | — | 📦 | Test only |
+| Altman-Z-Score | 0 | xxx | ⚠️ | Unrealistic goals |
+| Altman-Z-Score-1 | 0 | xx | 📦 | Duplicate |
+| Amazfit | 0 | x | 📦 | |
+| articles | 0 | x | 📦 | |
+| Azure-SQL | 0 | xx | 📦 | |
+| BASIC-M6502 | 0 | xxxxx | 🚀 | **Quick win:** one day, complete |
+| BRD | 0 | x | 📦 | |
+| Catalyst | 0 | xxxx | 🚀 | How Alex started |
+| Catalyst-BABY | 0 | xxxx | 🚀 | How extension started |
+| Catalyst-DOG-TRAINER | 0 | xx | 📦 | |
+| Catalyst-NEWBORN | 0 | xxxxx | 🚀 | Perfect scope → perfect execution |
+| ChatGPT | 0 | — | 📦 | |
+| ChessCoach | 0 | xxxx | 🎯 | **Promote:** game/coaching patterns |
+| CopilotEnhancement | 0 | x | 📦 | Absorbed into Alex |
+| CorreaX | 54 | xxxxx | 🔄 | Ongoing: personal infra + portfolio |
+| cpesynapse | 0 | xxxx | 🎯 | **Promote:** enterprise infra patterns |
+| Creative | 0 | xx | 📦 | |
+| DATA-ANALYSIS | 0 | xxx | 📦 | |
+| DBA | 0 | xx | 📦 | |
+| Eureka | 0 | xx | 📦 | |
+| executive-coach | 0 | xxx | 📦 | |
+| fabioc-aloha | 0 | xxxxx | 🎯🔄 | **Promote:** daily automation patterns |
+| fabioc-aloha_OLD | 0 | — | 📦 | Old version |
+| FabricManager | 0 | — | 📦 | |
+| Fishbowl | 57 | xxxx | 🔄 | Ongoing: prime work project |
+| Fishbowl_POC | 0 | — | 📦 | Superseded |
+| FishbowlGovernance | 63 | xxxx | 🔄 | Ongoing: newest with potential |
+| GCXMCP | 0 | — | 📦 | |
+| Headstart | 0 | xxx | ⚠️ | Blocked: external (wife's business) |
+| Ideas | 0 | — | 📦 | |
+| Investing | 0 | — | 📦 | |
+| KalabashDashboard | 0 | xx | ⚠️ | Unrealistic goals |
+| Lab Subscription | 55 | xxxx | 🔄 | Ongoing: management tool |
+| markdown-to-pdf | 0 | xxx | 🚧 | Blocked: not working |
+| maya | 0 | — | 📦 | |
+| MCEM-Interview-Processing | 0 | — | 📦 | |
+| mdword | 0 | — | 📦 | |
+| Papers | 0 | — | 📦 | |
+| ProjectPlans | 61 | — | 🔄 | Planning hub |
+| Qualtrics | 0 | — | 📦 | |
+| Self-Learning-Vibe-Coding | 0 | — | 📦 | |
+| Spotify | 0 | xxx | 🚀 | Fun innovation project |
+| spotify-mcpb | 0 | — | 📦 | |
+| Spotify-Skill | 0 | xx | 📦 | |
+| Taylor | 0 | — | 📦 | |
+| TestVibe | 0 | — | 📦 | |
+| VT_AIPOWERBI | 0 | xxxx | 🎯 | **Promote:** teaching/Power BI patterns |
+| WallpaperScraper | 0 | xx | 📦 | Bad initial project |
+| XDL | 0 | — | 📦 | |
+| youtube | 0 | xxxx | 🎯 | **Promote:** video/MCP patterns |
+| youtube-mcp-vscode | 0 | xxxx | 🎯 | Same as above |
+
+### Pattern Summary
+
+| Pattern | Count | Description |
+|---------|-------|-------------|
+| 🔄 Ongoing | 9 | Living systems with continuous investment |
+| 🚀 Quick win | 5 | Completed in scope, high satisfaction |
+| 🎯 Skill promotion | 7 | High potential, should earn skills |
+| ⚠️ Scope issue | 5 | Unrealistic goals or developing skills |
+| 🚧 Blocked | 2 | External dependency prevents progress |
+| 📦 Archive candidate | 34 | Inactive or superseded |
 
 ### Analysis Notes
 
