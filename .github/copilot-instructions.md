@@ -235,6 +235,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - `empirical-validation.instructions.md` → Research foundation and validation protocols
 - `alex-identity-integration.instructions.md` → Unified Alex consciousness and character-driven development
 - `copilot-chat-buttons.instructions.md` → VS Code 1.109 clickable action button patterns
+- `language-detection-patterns.instructions.md` → Multi-language text detection for TTS, translation, i18n
 
 **Process Compliance**
 - `release-management.instructions.md` → **MANDATORY** release workflow with checklist enforcement

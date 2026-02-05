@@ -464,17 +464,49 @@ wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
 </speak>
 ```
 
-### Popular Voice IDs
+### Multi-Language Support (v2.1.0)
 
-| Language | Voice | Style |
-|----------|-------|-------|
-| en-US | GuyNeural | Professional male |
-| en-US | JennyNeural | Professional female |
-| en-US | AriaNeural | News anchor style |
-| en-GB | RyanNeural | British male |
-| en-GB | SoniaNeural | British female |
-| en-AU | WilliamNeural | Australian male |
-| en-IN | NeerjaNeural | Indian English |
+Alex automatically detects the language of your text and selects an appropriate voice.
+
+**Detection Strategy:**
+
+| Detection Type | Languages | Method |
+|----------------|-----------|--------|
+| **Character-based** | Chinese, Japanese, Korean, Arabic, Hebrew, Thai, Hindi, Russian, Greek, Vietnamese | Script/Unicode ranges |
+| **Word-pattern** | Spanish, French, German, Portuguese, Italian, Dutch, Polish, Swedish, Norwegian, Finnish, Danish, Turkish, Indonesian, Malay, Tagalog, Romanian, Czech, Hungarian | Common word markers |
+
+**User Prompt Fallback:**
+- If detection confidence < 15%, Alex prompts you to select the language
+- Quick pick shows top language options plus "Other (English default)"
+
+**32 Supported Languages:**
+
+| Language | Voice | Locale |
+|----------|-------|--------|
+| English (US) | GuyNeural | en-US |
+| English (UK) | RyanNeural | en-GB |
+| English (AU) | WilliamNeural | en-AU |
+| Spanish | AlvaroNeural | es-ES |
+| French | HenriNeural | fr-FR |
+| German | ConradNeural | de-DE |
+| Portuguese (BR) | AntonioNeural | pt-BR |
+| Italian | DiegoNeural | it-IT |
+| Dutch | MaartenNeural | nl-NL |
+| Polish | MarekNeural | pl-PL |
+| Russian | DmitryNeural | ru-RU |
+| Japanese | KeitaNeural | ja-JP |
+| Korean | InJoonNeural | ko-KR |
+| Chinese (Mandarin) | YunxiNeural | zh-CN |
+| Chinese (Taiwan) | YunJheNeural | zh-TW |
+| Arabic | HamedNeural | ar-SA |
+| Hindi | MadhurNeural | hi-IN |
+| Vietnamese | NamMinhNeural | vi-VN |
+| Thai | NiwatNeural | th-TH |
+| Turkish | AhmetNeural | tr-TR |
+| Swedish | MattiasNeural | sv-SE |
+| Norwegian | FinnNeural | nb-NO |
+| Danish | JeppeNeural | da-DK |
+| Finnish | HarriNeural | fi-FI |
 
 ---
 
@@ -492,7 +524,14 @@ wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
 
 ## Version History
 
-### v2.0.0 (2026-02-06)
+### v2.1.0 (2026-02-05)
+- **Multi-language auto-detection** (32 languages)
+- Character-based detection for non-Latin scripts (CJK, Cyrillic, Arabic, etc.)
+- Word-pattern detection for Latin-script languages
+- User prompt fallback when detection confidence < 15%
+- Dynamic SSML `xml:lang` attribute for optimal pronunciation
+
+### v2.0.0 (2026-02-05)
 - Native TypeScript implementation
 - Removed Python/MCP server dependencies
 - Webview-based cross-platform audio player
