@@ -1306,7 +1306,7 @@ This methodology emerged from building 48+ projects across diverse domains over 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
 mindmap
-  root((42 Original<br/>Projects)))
+  root((42 Original Projects))
     AI & Cognitive Architecture
       Alex_Plug_In
       Catalyst-BABY
