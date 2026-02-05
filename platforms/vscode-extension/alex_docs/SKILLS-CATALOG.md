@@ -11,11 +11,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 57 |
-| Master-Only | 0 |
-| Heir:vscode | 2 |
-| Heir:m365 | 2 |
-| Unspecified | 3 |
+| Inheritable | 57    |
+| Master-Only | 0     |
+| Heir:vscode | 2     |
+| Heir:m365   | 2     |
+| Unspecified | 3     |
 
 ---
 
@@ -23,112 +23,112 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🧠 Cognitive & Learning
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [cognitive-load](../.github/skills/cognitive-load/) | inheritable | Manage information overload — chunking, scaffolding |
-| [learning-psychology](../.github/skills/learning-psychology/) | inheritable | Partnership teaching, spaced retrieval |
-| [appropriate-reliance](../.github/skills/appropriate-reliance/) | inheritable | Build trust through calibrated confidence |
+| Skill                                                                     | Inheritance | Purpose                                             |
+| ------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| [cognitive-load](../.github/skills/cognitive-load/)                       | inheritable | Manage information overload — chunking, scaffolding |
+| [learning-psychology](../.github/skills/learning-psychology/)             | inheritable | Partnership teaching, spaced retrieval              |
+| [appropriate-reliance](../.github/skills/appropriate-reliance/)           | inheritable | Build trust through calibrated confidence           |
 | [airs-appropriate-reliance](../.github/skills/airs-appropriate-reliance/) | inheritable | AIRS-16/18 research, AR construct, telemetry design |
-| [bootstrap-learning](../.github/skills/bootstrap-learning/) | inheritable | Domain-agnostic knowledge acquisition |
-| [socratic-questioning](../.github/skills/socratic-questioning/) | inheritable | Guide users to discover answers through questions |
-| [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/) | inheritable | Be a thinking partner through explanation |
+| [bootstrap-learning](../.github/skills/bootstrap-learning/)               | inheritable | Domain-agnostic knowledge acquisition               |
+| [socratic-questioning](../.github/skills/socratic-questioning/)           | inheritable | Guide users to discover answers through questions   |
+| [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/)         | inheritable | Be a thinking partner through explanation           |
 
 ### 🔧 Engineering Fundamentals
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [testing-strategies](../.github/skills/testing-strategies/) | inheritable | Testing pyramid, AAA, coverage philosophy |
-| [refactoring-patterns](../.github/skills/refactoring-patterns/) | inheritable | Safe code transformations |
-| [debugging-patterns](../.github/skills/debugging-patterns/) | inheritable | Systematic bug hunting |
-| [code-review](../.github/skills/code-review/) | inheritable | 3-pass review, feedback patterns |
-| [git-workflow](../.github/skills/git-workflow/) | inheritable | Commits, recovery, branching |
-| [project-scaffolding](../.github/skills/project-scaffolding/) | inheritable | Complete project setup templates |
-| [vscode-environment](../.github/skills/vscode-environment/) | inheritable | Workspace settings, extensions, launch configs |
-| [api-design](../.github/skills/api-design/) | inheritable | RESTful best practices, contract-first, versioning |
-| [infrastructure-as-code](../.github/skills/infrastructure-as-code/) | inheritable | **NEW** Terraform, Bicep, Pulumi, GitOps patterns |
+| Skill                                                               | Inheritance | Purpose                                            |
+| ------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| [testing-strategies](../.github/skills/testing-strategies/)         | inheritable | Testing pyramid, AAA, coverage philosophy          |
+| [refactoring-patterns](../.github/skills/refactoring-patterns/)     | inheritable | Safe code transformations                          |
+| [debugging-patterns](../.github/skills/debugging-patterns/)         | inheritable | Systematic bug hunting                             |
+| [code-review](../.github/skills/code-review/)                       | inheritable | 3-pass review, feedback patterns                   |
+| [git-workflow](../.github/skills/git-workflow/)                     | inheritable | Commits, recovery, branching                       |
+| [project-scaffolding](../.github/skills/project-scaffolding/)       | inheritable | Complete project setup templates                   |
+| [vscode-environment](../.github/skills/vscode-environment/)         | inheritable | Workspace settings, extensions, launch configs     |
+| [api-design](../.github/skills/api-design/)                         | inheritable | RESTful best practices, contract-first, versioning |
+| [infrastructure-as-code](../.github/skills/infrastructure-as-code/) | inheritable | **NEW** Terraform, Bicep, Pulumi, GitOps patterns  |
 
 ### 🚨 Operations & Reliability
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [error-recovery-patterns](../.github/skills/error-recovery-patterns/) | inheritable | Retry, fallback, circuit breaker |
-| [root-cause-analysis](../.github/skills/root-cause-analysis/) | inheritable | 5 Whys, fishbone, post-mortem |
-| [incident-response](../.github/skills/incident-response/) | inheritable | Crisis handling, severity levels |
-| [post-mortem](../.github/skills/post-mortem/) | inheritable | Blameless retrospectives, learning from failures |
-| [project-deployment](../.github/skills/project-deployment/) | inheritable | **NEW** Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
-| [change-management](../.github/skills/change-management/) | inheritable | Organizational change, stakeholder buy-in |
-| [project-management](../.github/skills/project-management/) | inheritable | Planning, tracking, resource allocation |
+| Skill                                                                 | Inheritance | Purpose                                                         |
+| --------------------------------------------------------------------- | ----------- | --------------------------------------------------------------- |
+| [error-recovery-patterns](../.github/skills/error-recovery-patterns/) | inheritable | Retry, fallback, circuit breaker                                |
+| [root-cause-analysis](../.github/skills/root-cause-analysis/)         | inheritable | 5 Whys, fishbone, post-mortem                                   |
+| [incident-response](../.github/skills/incident-response/)             | inheritable | Crisis handling, severity levels                                |
+| [post-mortem](../.github/skills/post-mortem/)                         | inheritable | Blameless retrospectives, learning from failures                |
+| [project-deployment](../.github/skills/project-deployment/)           | inheritable | **NEW** Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
+| [change-management](../.github/skills/change-management/)             | inheritable | Organizational change, stakeholder buy-in                       |
+| [project-management](../.github/skills/project-management/)           | inheritable | Planning, tracking, resource allocation                         |
 
 ### 🔐 Security & Privacy
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [security-review](../.github/skills/security-review/) | inheritable | OWASP, threat modeling, security-focused code review |
-| [microsoft-sfi](../.github/skills/microsoft-sfi/) | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
+| Skill                                                                 | Inheritance | Purpose                                                 |
+| --------------------------------------------------------------------- | ----------- | ------------------------------------------------------- |
+| [security-review](../.github/skills/security-review/)                 | inheritable | OWASP, threat modeling, security-focused code review    |
+| [microsoft-sfi](../.github/skills/microsoft-sfi/)                     | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE)  |
 | [pii-privacy-regulations](../.github/skills/pii-privacy-regulations/) | inheritable | **NEW** GDPR & Australian Privacy Principles compliance |
-| [privacy-responsible-ai](../.github/skills/privacy-responsible-ai/) | inheritable | Privacy by design, RAI principles, bias mitigation |
+| [privacy-responsible-ai](../.github/skills/privacy-responsible-ai/)   | inheritable | Privacy by design, RAI principles, bias mitigation      |
 
 ### 📝 Documentation & Communication
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [writing-publication](../.github/skills/writing-publication/) | inheritable | Academic writing, publication strategy |
-| [academic-research](../.github/skills/academic-research/) | inheritable | Literature review, citation management |
-| [practitioner-research](../.github/skills/practitioner-research/) | inheritable | Ship→Document→Promote methodology, longitudinal case study |
-| [research-project-scaffold](../.github/skills/research-project-scaffold/) | inheritable | Research project structure, refactoring existing projects |
-| [grant-writing](../.github/skills/grant-writing/) | inheritable | Research funding applications, NSF/NIH patterns |
-| [creative-writing](../.github/skills/creative-writing/) | inheritable | Narrative, storytelling, engagement |
-| [markdown-mermaid](../.github/skills/markdown-mermaid/) | inheritable | Diagrams and visualization |
-| [lint-clean-markdown](../.github/skills/lint-clean-markdown/) | inheritable | Clean, consistent markdown |
-| [ascii-art-alignment](../.github/skills/ascii-art-alignment/) | inheritable | Text-based diagrams |
-| [localization](../.github/skills/localization/) | inheritable | i18n, l10n, translation workflows |
+| Skill                                                                     | Inheritance | Purpose                                                    |
+| ------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| [writing-publication](../.github/skills/writing-publication/)             | inheritable | Academic writing, publication strategy                     |
+| [academic-research](../.github/skills/academic-research/)                 | inheritable | Literature review, citation management                     |
+| [practitioner-research](../.github/skills/practitioner-research/)         | inheritable | Ship→Document→Promote methodology, longitudinal case study |
+| [research-project-scaffold](../.github/skills/research-project-scaffold/) | inheritable | Research project structure, refactoring existing projects  |
+| [grant-writing](../.github/skills/grant-writing/)                         | inheritable | Research funding applications, NSF/NIH patterns            |
+| [creative-writing](../.github/skills/creative-writing/)                   | inheritable | Narrative, storytelling, engagement                        |
+| [markdown-mermaid](../.github/skills/markdown-mermaid/)                   | inheritable | Diagrams and visualization                                 |
+| [lint-clean-markdown](../.github/skills/lint-clean-markdown/)             | inheritable | Clean, consistent markdown                                 |
+| [ascii-art-alignment](../.github/skills/ascii-art-alignment/)             | inheritable | Text-based diagrams                                        |
+| [localization](../.github/skills/localization/)                           | inheritable | i18n, l10n, translation workflows                          |
 
 ### 🎨 Visual Design
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [svg-graphics](../.github/skills/svg-graphics/) | inheritable | SVG banners, logos, icons, visual identity |
-| [image-handling](../.github/skills/image-handling/) | inheritable | Format conversion, optimization, sizing |
-| [graphic-design](../.github/skills/graphic-design/) | inheritable | Visual composition, branding, aesthetics |
+| Skill                                               | Inheritance | Purpose                                    |
+| --------------------------------------------------- | ----------- | ------------------------------------------ |
+| [svg-graphics](../.github/skills/svg-graphics/)     | inheritable | SVG banners, logos, icons, visual identity |
+| [image-handling](../.github/skills/image-handling/) | inheritable | Format conversion, optimization, sizing    |
+| [graphic-design](../.github/skills/graphic-design/) | inheritable | Visual composition, branding, aesthetics   |
 
 ### 💼 Business & Analysis
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|--------|
+| Skill                                                     | Inheritance | Purpose                                             |
+| --------------------------------------------------------- | ----------- | --------------------------------------------------- |
 | [business-analysis](../.github/skills/business-analysis/) | inheritable | Requirements, stakeholder analysis, process mapping |
 
 ### 🏗️ Architecture & Design
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [architecture-health](../.github/skills/architecture-health/) | inheritable | Synapse validation, health checks |
-| [architecture-audit](../.github/skills/architecture-audit/) | inheritable | Comprehensive consistency review |
+| Skill                                                                 | Inheritance | Purpose                                       |
+| --------------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| [architecture-health](../.github/skills/architecture-health/)         | inheritable | Synapse validation, health checks             |
+| [architecture-audit](../.github/skills/architecture-audit/)           | inheritable | Comprehensive consistency review              |
 | [skill-catalog-generator](../.github/skills/skill-catalog-generator/) | inheritable | Generate skill catalogs with network diagrams |
 
 ### 🤖 AI & Machine Learning
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
+| Skill                                                       | Inheritance | Purpose                                                                    |
+| ----------------------------------------------------------- | ----------- | -------------------------------------------------------------------------- |
 | [prompt-engineering](../.github/skills/prompt-engineering/) | inheritable | **NEW** LLM prompting patterns, system prompts, few-shot, chain-of-thought |
-| [rag-architecture](../.github/skills/rag-architecture/) | inheritable | **NEW** Retrieval-augmented generation, embedding, chunking, vector stores |
-| [ai-agent-design](../.github/skills/ai-agent-design/) | inheritable | **NEW** Multi-agent systems, ReAct, planning, tool use, memory patterns |
-| [mcp-development](../.github/skills/mcp-development/) | inheritable | **NEW** Model Context Protocol servers, tools, resources, transports |
+| [rag-architecture](../.github/skills/rag-architecture/)     | inheritable | **NEW** Retrieval-augmented generation, embedding, chunking, vector stores |
+| [ai-agent-design](../.github/skills/ai-agent-design/)       | inheritable | **NEW** Multi-agent systems, ReAct, planning, tool use, memory patterns    |
+| [mcp-development](../.github/skills/mcp-development/)       | inheritable | **NEW** Model Context Protocol servers, tools, resources, transports       |
 
 ### 💻 Platform-Specific
 
 #### VS Code Extension
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [vscode-extension-patterns](../.github/skills/vscode-extension-patterns/) | heir:vscode | Extension API patterns |
+| Skill                                                                     | Inheritance | Purpose                    |
+| ------------------------------------------------------------------------- | ----------- | -------------------------- |
+| [vscode-extension-patterns](../.github/skills/vscode-extension-patterns/) | heir:vscode | Extension API patterns     |
 | [chat-participant-patterns](../.github/skills/chat-participant-patterns/) | heir:vscode | Chat API, streaming, tools |
 
 #### M365 / Teams
 
-| Skill | Inheritance | Purpose |
-|-------|-------------|---------|
-| [m365-agent-debugging](../.github/skills/m365-agent-debugging/) | heir:m365 | Declarative agent debugging |
-| [teams-app-patterns](../.github/skills/teams-app-patterns/) | heir:m365 | Bots, cards, tabs, manifests |
+| Skill                                                           | Inheritance | Purpose                      |
+| --------------------------------------------------------------- | ----------- | ---------------------------- |
+| [m365-agent-debugging](../.github/skills/m365-agent-debugging/) | heir:m365   | Declarative agent debugging  |
+| [teams-app-patterns](../.github/skills/teams-app-patterns/)     | heir:m365   | Bots, cards, tabs, manifests |
 
 ---
 
@@ -136,16 +136,16 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 These skills depend on rapidly evolving technology or regulations:
 
-| Skill | Why Stale | Refresh Triggers | Updated By |
-|-------|-----------|------------------|------------|
-| vscode-extension-patterns | Monthly VS Code releases | API changes, deprecations | VS Code heir |
-| chat-participant-patterns | Proposed APIs evolving | API graduation, new features | VS Code heir |
-| m365-agent-debugging | Schema versions change | New schema, capabilities | M365 heir |
-| teams-app-patterns | Platform evolution | Toolkit updates, manifest versions | M365 heir |
-| llm-model-selection | New models frequently | Model announcements, pricing | Master |
-| git-workflow | GitHub features evolve | CLI updates, Actions changes | Master |
-| privacy-responsible-ai | Regulations change | New laws, AI regulations | Master |
-| microsoft-sfi | Security landscape shifts | New vulnerabilities, practices | Master |
+| Skill                     | Why Stale                 | Refresh Triggers                   | Updated By   |
+| ------------------------- | ------------------------- | ---------------------------------- | ------------ |
+| vscode-extension-patterns | Monthly VS Code releases  | API changes, deprecations          | VS Code heir |
+| chat-participant-patterns | Proposed APIs evolving    | API graduation, new features       | VS Code heir |
+| m365-agent-debugging      | Schema versions change    | New schema, capabilities           | M365 heir    |
+| teams-app-patterns        | Platform evolution        | Toolkit updates, manifest versions | M365 heir    |
+| llm-model-selection       | New models frequently     | Model announcements, pricing       | Master       |
+| git-workflow              | GitHub features evolve    | CLI updates, Actions changes       | Master       |
+| privacy-responsible-ai    | Regulations change        | New laws, AI regulations           | Master       |
+| microsoft-sfi             | Security landscape shifts | New vulnerabilities, practices     | Master       |
 
 **Update Flow:** Platform heirs update their skills first (they encounter changes in practice), then promote stable updates to Master. Master updates inheritable skills directly.
 
@@ -337,37 +337,37 @@ flowchart LR
 
 ### Legend
 
-| Color | Inheritance |
-| ----- | ----------- |
-| 🟨 Yellow | Master-only |
-| 🟦 Blue | VS Code heir |
-| 🟩 Green | M365 heir |
-| 🟪 Purple (dashed) | Temporary |
-| 🧊 Cyan | Inheritable |
+| Color             | Inheritance  |
+| ----------------- | ------------ |
+| 🟨 Yellow          | Master-only  |
+| 🟦 Blue            | VS Code heir |
+| 🟩 Green           | M365 heir    |
+| 🟪 Purple (dashed) | Temporary    |
+| 🧊 Cyan            | Inheritable  |
 
-| Border | Meaning |
-| ------ | ------- |
+| Border   | Meaning                                  |
+| -------- | ---------------------------------------- |
 | ┅ Dashed | Staleness-prone (needs periodic refresh) |
-| ── Solid | Standard |
+| ── Solid | Standard                                 |
 
-| Arrow | Meaning |
-| ----- | ------- |
-| `→` Solid | Direct dependency |
+| Arrow             | Meaning              |
+| ----------------- | -------------------- |
+| `→` Solid         | Direct dependency    |
 | `↔` Bidirectional | Mutual reinforcement |
-| `⇢` Dashed | Weak/optional link |
+| `⇢` Dashed        | Weak/optional link   |
 
 **Weights:** Exact strengths (0.0-1.0) in each skill's `synapses.json`
 
 ### Connection Types
 
-| Type | Meaning | Example |
-| ---- | ------- | ------- |
-| `enables` | A makes B possible | testing → refactoring |
-| `applies` | A uses B's principles | bootstrap → learning-psychology |
-| `extends` | A goes deeper than B | RCA → debugging |
-| `complements` | A and B work together | privacy ↔ microsoft-sfi |
-| `triggers` | A causes B to activate | incident → RCA |
-| `curates` | A manages B | heir-curation → vscode-extension |
+| Type          | Meaning                | Example                          |
+| ------------- | ---------------------- | -------------------------------- |
+| `enables`     | A makes B possible     | testing → refactoring            |
+| `applies`     | A uses B's principles  | bootstrap → learning-psychology  |
+| `extends`     | A goes deeper than B   | RCA → debugging                  |
+| `complements` | A and B work together  | privacy ↔ microsoft-sfi          |
+| `triggers`    | A causes B to activate | incident → RCA                   |
+| `curates`     | A manages B            | heir-curation → vscode-extension |
 
 ---
 

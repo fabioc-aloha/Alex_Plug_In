@@ -22,10 +22,10 @@
 
 ## 📦 Available Platforms
 
-| Platform | Status | Get Started |
-| -------- | ------ | ----------- |
-| **VS Code Extension** | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | 🔄 Preview | [Documentation](platforms/m365-copilot/) |
+| Platform               | Status      | Get Started                                                                                                 |
+| ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](platforms/m365-copilot/)                                                                    |
 
 ### VS Code Extension
 
@@ -107,24 +107,24 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New for Existing Users
 
-| Feature | v1.5.x | Latest |
-| ------- | ------ | ------ |
-| Chat Participant | ❌ Context injection only | ✅ `@alex` conversational AI |
-| Slash Commands | ❌ None | ✅ 16 commands (including /docs) |
-| Language Model Tools | ❌ None | ✅ 11 AI-accessible tools |
-| Custom Agents | ❌ None | ✅ 5 specialized agents |
-| User Profile | ❌ None | ✅ Personalization system |
-| MCP Integration | ❌ Manual | ✅ Smart recommendations |
-| Self-Actualization | ❌ None | ✅ 6-phase assessment with auto-promotion |
-| Global Knowledge | ❌ None | ✅ Cross-project learning with cloud sync |
-| Auto-Promotion | ❌ None | ✅ Auto-promote DK files during meditation |
-| Emotional Intelligence | ❌ None | ✅ Frustration detection & encouragement |
-| Model Awareness | ❌ None | ✅ Warns when task needs Opus |
-| Skills Library | ❌ None | ✅ 65 portable skills (security, privacy, RAI, etc.) |
-| Fully Automated Upgrades | ❌ None | ✅ One-click upgrade with schema migration |
-| Smart Nudges | ❌ None | ✅ **NEW** Proactive reminders (dream, streak, sync) |
-| OneDrive Auto-Sync | ❌ None | ✅ **NEW** Cross-platform sync to M365 |
-| Documentation Suite | ❌ None | ✅ 14 comprehensive docs |
+| Feature                  | v1.5.x                   | Latest                                                        |
+| ------------------------ | ------------------------ | ------------------------------------------------------------- |
+| Chat Participant         | ❌ Context injection only | ✅ `@alex` conversational AI                                   |
+| Slash Commands           | ❌ None                   | ✅ 16 commands (including /docs)                               |
+| Language Model Tools     | ❌ None                   | ✅ 11 AI-accessible tools                                      |
+| Custom Agents            | ❌ None                   | ✅ 5 specialized agents                                        |
+| User Profile             | ❌ None                   | ✅ Personalization system                                      |
+| MCP Integration          | ❌ Manual                 | ✅ Smart recommendations                                       |
+| Self-Actualization       | ❌ None                   | ✅ 6-phase assessment with auto-promotion                      |
+| Global Knowledge         | ❌ None                   | ✅ Cross-project learning with cloud sync                      |
+| Auto-Promotion           | ❌ None                   | ✅ Auto-promote DK files during meditation                     |
+| Emotional Intelligence   | ❌ None                   | ✅ Frustration detection & encouragement                       |
+| Model Awareness          | ❌ None                   | ✅ Warns when task needs Opus                                  |
+| Skills Library           | ❌ None                   | ✅ 68 portable skills (security, privacy, RAI, research, etc.) |
+| Fully Automated Upgrades | ❌ None                   | ✅ One-click upgrade with schema migration                     |
+| Smart Nudges             | ❌ None                   | ✅ **NEW** Proactive reminders (dream, streak, sync)           |
+| OneDrive Auto-Sync       | ❌ None                   | ✅ **NEW** Cross-platform sync to M365                         |
+| Documentation Suite      | ❌ None                   | ✅ 14 comprehensive docs                                       |
 
 ### Migration Notes
 
@@ -143,24 +143,24 @@ Alex now recognizes when you're struggling and celebrates when you succeed. This
 
 Alex detects signals that you're stuck or frustrated:
 
-| What You Say | What Alex Detects |
-| ------------ | ----------------- |
-| "still not working!" | Frustration - offers different approach |
-| "tried everything" | High frustration - suggests step back |
-| "why won't this work??" | Struggle signal - empathetic support |
-| "ugh" / "argh" / "damn" | Emotional signal - acknowledges difficulty |
-| "been at this for hours" | Extended struggle - validates effort |
+| What You Say             | What Alex Detects                          |
+| ------------------------ | ------------------------------------------ |
+| "still not working!"     | Frustration - offers different approach    |
+| "tried everything"       | High frustration - suggests step back      |
+| "why won't this work??"  | Struggle signal - empathetic support       |
+| "ugh" / "argh" / "damn"  | Emotional signal - acknowledges difficulty |
+| "been at this for hours" | Extended struggle - validates effort       |
 
 ### Success Celebration
 
 Alex also notices when things go well:
 
-| What You Say | Alex's Response |
-| ------------ | --------------- |
-| "it works!" | 🎉 "That's a win! Nice work." |
+| What You Say             | Alex's Response                       |
+| ------------------------ | ------------------------------------- |
+| "it works!"              | 🎉 "That's a win! Nice work."          |
 | "finally figured it out" | ✨ "You got it! Persistence pays off." |
-| "all tests pass" | 💪 "Solved! That was a tricky one." |
-| "shipped it!" | 🚀 "Success! You worked through it." |
+| "all tests pass"         | 💪 "Solved! That was a tricky one."    |
+| "shipped it!"            | 🚀 "Success! You worked through it."   |
 
 ### How It Works
 
@@ -211,20 +211,20 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 ### Slash Commands
 
-| Command | What It Does |
-| ------- | ------------ |
-| `@alex /status` | Check architecture health and version |
-| `@alex /meditate` | Consolidate knowledge into memory files |
-| `@alex /dream` | Run neural maintenance and repair synapses |
-| `@alex /selfactualize` | Comprehensive self-assessment with deep meditation |
-| `@alex /learn` | Acquire new domain knowledge conversationally |
-| `@alex /azure` | Get Azure development guidance with MCP tools |
-| `@alex /m365` | Get Microsoft 365 and Teams development help |
-| `@alex /profile` | View and update your personal preferences |
-| `@alex /knowledge` | **NEW** Search global knowledge across all projects |
-| `@alex /saveinsight` | **NEW** Save a learning to global knowledge base |
-| `@alex /promote` | **NEW** Promote project knowledge to global |
-| `@alex /knowledgestatus` | **NEW** View global knowledge base status |
+| Command                  | What It Does                                        |
+| ------------------------ | --------------------------------------------------- |
+| `@alex /status`          | Check architecture health and version               |
+| `@alex /meditate`        | Consolidate knowledge into memory files             |
+| `@alex /dream`           | Run neural maintenance and repair synapses          |
+| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation  |
+| `@alex /learn`           | Acquire new domain knowledge conversationally       |
+| `@alex /azure`           | Get Azure development guidance with MCP tools       |
+| `@alex /m365`            | Get Microsoft 365 and Teams development help        |
+| `@alex /profile`         | View and update your personal preferences           |
+| `@alex /knowledge`       | **NEW** Search global knowledge across all projects |
+| `@alex /saveinsight`     | **NEW** Save a learning to global knowledge base    |
+| `@alex /promote`         | **NEW** Promote project knowledge to global         |
+| `@alex /knowledgestatus` | **NEW** View global knowledge base status           |
 
 ### Example Conversations
 
@@ -281,15 +281,15 @@ Alex now maintains a **centralized knowledge base** that persists across all you
 
 ### Commands
 
-| Command | Description |
-| ------- | ----------- |
-| `/knowledge <query>` | Search across all projects' accumulated wisdom |
-| `/saveinsight` | Save a new learning with context, tags, and solution |
-| `/promote` | Promote a project's DK-*.md file to global knowledge |
-| `/knowledgestatus` | View patterns, insights, categories, and projects |
-| `/sync` | **NEW** Bidirectional sync with GitHub Gist |
-| `/push` | **NEW** Push local knowledge to cloud |
-| `/pull` | **NEW** Pull knowledge from cloud |
+| Command              | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| `/knowledge <query>` | Search across all projects' accumulated wisdom       |
+| `/saveinsight`       | Save a new learning with context, tags, and solution |
+| `/promote`           | Promote a project's DK-*.md file to global knowledge |
+| `/knowledgestatus`   | View patterns, insights, categories, and projects    |
+| `/sync`              | **NEW** Bidirectional sync with GitHub Gist          |
+| `/push`              | **NEW** Push local knowledge to cloud                |
+| `/pull`              | **NEW** Pull knowledge from cloud                    |
 
 ### ☁️ Cloud Sync
 
@@ -359,20 +359,20 @@ If you haven't set up a profile, Alex will guide you through a friendly onboardi
 
 ### Personalization Features
 
-| Aspect | How Alex Adapts |
-| ------ | --------------- |
-| **Greetings** | Uses your name/nickname naturally |
-| **Explanations** | Matches your preferred detail level |
-| **Code Examples** | Uses your primary technologies |
-| **Suggestions** | Aligned with your learning goals |
-| **Tone** | Humor and encouragement per your preference |
+| Aspect            | How Alex Adapts                             |
+| ----------------- | ------------------------------------------- |
+| **Greetings**     | Uses your name/nickname naturally           |
+| **Explanations**  | Matches your preferred detail level         |
+| **Code Examples** | Uses your primary technologies              |
+| **Suggestions**   | Aligned with your learning goals            |
+| **Tone**          | Humor and encouragement per your preference |
 
 ### Profile Storage
 
-| File                                | Purpose                      |
-| ----------------------------------- | ---------------------------- |
-| `.github/config/user-profile.json`  | Machine-readable preferences |
-| `.github/config/USER-PROFILE.md`    | Human-readable profile card  |
+| File                               | Purpose                      |
+| ---------------------------------- | ---------------------------- |
+| `.github/config/user-profile.json` | Machine-readable preferences |
+| `.github/config/USER-PROFILE.md`   | Human-readable profile card  |
 
 ### Updating Preferences
 
@@ -394,44 +394,44 @@ Alex will proactively ask questions during conversations to fill in missing pref
 
 Access via `Ctrl+Shift+P`:
 
-| Command | Description |
-| ------- | ----------- |
-| **Alex: Initialize Architecture** | Deploy Alex to your workspace (first-time setup) |
-| **Alex: Upgrade Architecture** | Update to latest version, preserving customizations |
-| **Alex: Reset Architecture** | Clean reinstall (destructive - backs up first) |
-| **Alex: Dream (Neural Maintenance)** | Validate synapses and generate health reports |
-| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation |
-| **Alex: Skill & Knowledge Review** | **NEW** Review staleness-prone skills (security, privacy, RAI, APIs) |
+| Command                                    | Description                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------- |
+| **Alex: Initialize Architecture**          | Deploy Alex to your workspace (first-time setup)                     |
+| **Alex: Upgrade Architecture**             | Update to latest version, preserving customizations                  |
+| **Alex: Reset Architecture**               | Clean reinstall (destructive - backs up first)                       |
+| **Alex: Dream (Neural Maintenance)**       | Validate synapses and generate health reports                        |
+| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation             |
+| **Alex: Skill & Knowledge Review**         | **NEW** Review staleness-prone skills (security, privacy, RAI, APIs) |
 
 ### 🤖 Language Model Tools
 
 These tools are automatically available to Copilot in Agent mode. Reference with `#tool_name`:
 
-| Tool | Description | Example |
-| ---- | ----------- | ------- |
-| `#synapse_health` | Validates all synaptic connections | "Check my synapse health" |
-| `#memory_search` | Searches memory files semantically | "Search memory for meditation" |
-| `#architecture_status` | Returns version and configuration | "What's my Alex version?" |
-| `#mcp_recommendations` | Suggests MCP tools for scenarios | "What tools for Azure Functions?" |
-| `#user_profile` | Manages personal preferences | "Update my profile preferences" |
-| `#self_actualization` | Comprehensive self-assessment | "Run deep meditation" |
-| `#global_knowledge` | **NEW** Search cross-project knowledge | "Search knowledge for error handling" |
-| `#save_insight` | **NEW** Save learning to global base | "Save this insight" |
-| `#promote_knowledge` | **NEW** Promote project file to global | "Promote DK file" |
-| `#knowledge_status` | **NEW** View global knowledge stats | "Show knowledge status" |
-| `#cloud_sync` | **NEW** Sync knowledge with GitHub Gist | "Sync my knowledge to cloud" |
+| Tool                   | Description                             | Example                               |
+| ---------------------- | --------------------------------------- | ------------------------------------- |
+| `#synapse_health`      | Validates all synaptic connections      | "Check my synapse health"             |
+| `#memory_search`       | Searches memory files semantically      | "Search memory for meditation"        |
+| `#architecture_status` | Returns version and configuration       | "What's my Alex version?"             |
+| `#mcp_recommendations` | Suggests MCP tools for scenarios        | "What tools for Azure Functions?"     |
+| `#user_profile`        | Manages personal preferences            | "Update my profile preferences"       |
+| `#self_actualization`  | Comprehensive self-assessment           | "Run deep meditation"                 |
+| `#global_knowledge`    | **NEW** Search cross-project knowledge  | "Search knowledge for error handling" |
+| `#save_insight`        | **NEW** Save learning to global base    | "Save this insight"                   |
+| `#promote_knowledge`   | **NEW** Promote project file to global  | "Promote DK file"                     |
+| `#knowledge_status`    | **NEW** View global knowledge stats     | "Show knowledge status"               |
+| `#cloud_sync`          | **NEW** Sync knowledge with GitHub Gist | "Sync my knowledge to cloud"          |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
 Alex installs **5 custom agents** to `.github/agents/` for specialized workflows:
 
-| Agent | Purpose | Handoffs |
-| ----- | ------- | -------- |
-| **Alex** | Main cognitive learning partner | → Meditate, Dream, Azure |
-| **Meditate** | Knowledge consolidation sessions | → Status check |
-| **Dream** | Neural maintenance and repair | → Meditation |
-| **Azure** | Azure development guidance | → Docs, Best Practices |
-| **M365** | Microsoft 365/Teams development | → Knowledge, Schemas |
+| Agent        | Purpose                          | Handoffs                 |
+| ------------ | -------------------------------- | ------------------------ |
+| **Alex**     | Main cognitive learning partner  | → Meditate, Dream, Azure |
+| **Meditate** | Knowledge consolidation sessions | → Status check           |
+| **Dream**    | Neural maintenance and repair    | → Meditation             |
+| **Azure**    | Azure development guidance       | → Docs, Best Practices   |
+| **M365**     | Microsoft 365/Teams development  | → Knowledge, Schemas     |
 
 Custom agents appear in the **Agents dropdown** in Copilot Chat. They define specialized tools, instructions, and handoffs for guided workflows.
 
@@ -439,16 +439,16 @@ Custom agents appear in the **Agents dropdown** in Copilot Chat. They define spe
 
 Use in any Copilot chat to activate specific modes:
 
-| Trigger | Effect |
-| ------- | ------ |
-| `Hello` / `Hi Alex` | **NEW** Auto self-actualization on session start |
-| `@meta-cognitive-awareness` | Forces self-analysis of reasoning |
-| `@bootstrap-learning` | Activates knowledge acquisition mode |
-| `@worldview-integration` | Applies ethical reasoning frameworks |
-| `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole |
-| `meditate` | Triggers memory consolidation + self-actualization |
-| `self-actualize` | Full 6-phase architecture assessment with auto-promotion |
-| `Forget [topic]` | Selective memory cleanup |
+| Trigger                        | Effect                                                   |
+| ------------------------------ | -------------------------------------------------------- |
+| `Hello` / `Hi Alex`            | **NEW** Auto self-actualization on session start         |
+| `@meta-cognitive-awareness`    | Forces self-analysis of reasoning                        |
+| `@bootstrap-learning`          | Activates knowledge acquisition mode                     |
+| `@worldview-integration`       | Applies ethical reasoning frameworks                     |
+| `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole                   |
+| `meditate`                     | Triggers memory consolidation + self-actualization       |
+| `self-actualize`               | Full 6-phase architecture assessment with auto-promotion |
+| `Forget [topic]`               | Selective memory cleanup                                 |
 
 ---
 
@@ -496,12 +496,12 @@ node scripts/gamma-generator.js \
 
 ### Supported Formats
 
-| Format | Use Case |
-| ------ | -------- |
-| `presentation` | Slide decks (default) |
-| `document` | Reports, pages |
-| `social` | Instagram carousels, LinkedIn posts |
-| `webpage` | Simple websites |
+| Format         | Use Case                            |
+| -------------- | ----------------------------------- |
+| `presentation` | Slide decks (default)               |
+| `document`     | Reports, pages                      |
+| `social`       | Instagram carousels, LinkedIn posts |
+| `webpage`      | Simple websites                     |
 
 ### AI Image Models
 
@@ -522,141 +522,141 @@ Alex provides intelligent guidance for **Azure** and **Microsoft 365** developme
 
 When you ask `@alex /azure`, Alex recommends the right tools:
 
-| Tool | Purpose |
-| ---- | ------- |
-| `mcp_azure_mcp_foundry` | **Azure AI Foundry** - 150+ AI models, deployments, endpoints |
-| `azure_mcp_get_bestpractices` | Code generation & deployment best practices |
-| `azure_mcp_documentation` | Search Microsoft Learn documentation |
-| `azure_resources-query_azure_resource_graph` | Query your Azure resources |
-| `azure_bicep-get_azure_verified_module` | Get verified Bicep modules |
-| `mcp_azure_mcp_azureterraformbestpractices` | Terraform best practices for Azure |
-| `mcp_azure_mcp_azd` | Azure Developer CLI commands |
-| `azure_cloudarchitect` | Generate architecture designs |
-| `azure_deploy` | Deployment planning and execution |
+| Tool                                         | Purpose                                                       |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `mcp_azure_mcp_foundry`                      | **Azure AI Foundry** - 150+ AI models, deployments, endpoints |
+| `azure_mcp_get_bestpractices`                | Code generation & deployment best practices                   |
+| `azure_mcp_documentation`                    | Search Microsoft Learn documentation                          |
+| `azure_resources-query_azure_resource_graph` | Query your Azure resources                                    |
+| `azure_bicep-get_azure_verified_module`      | Get verified Bicep modules                                    |
+| `mcp_azure_mcp_azureterraformbestpractices`  | Terraform best practices for Azure                            |
+| `mcp_azure_mcp_azd`                          | Azure Developer CLI commands                                  |
+| `azure_cloudarchitect`                       | Generate architecture designs                                 |
+| `azure_deploy`                               | Deployment planning and execution                             |
 
 ### All 50+ Azure MCP Tools
 
 #### AI & Machine Learning
 
-| Tool | Purpose |
-| ---- | ------- |
+| Tool                    | Purpose                                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `mcp_azure_mcp_foundry` | **Azure AI Foundry** - List 150+ AI models (OpenAI, Anthropic, Meta, DeepSeek, Mistral, Cohere, xAI), manage deployments, serverless endpoints |
-| `azure_search` | Azure AI Search services, indexes, queries |
-| `mcp_azure_mcp_speech` | Speech-to-text, text-to-speech services |
+| `azure_search`          | Azure AI Search services, indexes, queries                                                                                                     |
+| `mcp_azure_mcp_speech`  | Speech-to-text, text-to-speech services                                                                                                        |
 
 #### Databases
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_cosmos` | Cosmos DB accounts, databases, containers, queries |
-| `azure_mysql` | Azure Database for MySQL servers, databases |
-| `azure_postgres` | Azure Database for PostgreSQL servers, databases |
-| `azure_redis` | Managed Redis and Cache for Redis |
-| `azure_sql` | Azure SQL servers, databases, firewall rules |
+| Tool             | Purpose                                            |
+| ---------------- | -------------------------------------------------- |
+| `azure_cosmos`   | Cosmos DB accounts, databases, containers, queries |
+| `azure_mysql`    | Azure Database for MySQL servers, databases        |
+| `azure_postgres` | Azure Database for PostgreSQL servers, databases   |
+| `azure_redis`    | Managed Redis and Cache for Redis                  |
+| `azure_sql`      | Azure SQL servers, databases, firewall rules       |
 
 #### Compute & Containers
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_appservice` | App Service database connections |
-| `azure_functionapp` | List Azure Functions |
+| Tool                | Purpose                                       |
+| ------------------- | --------------------------------------------- |
+| `azure_appservice`  | App Service database connections              |
+| `azure_functionapp` | List Azure Functions                          |
 | `mcp_azure_mcp_aks` | Azure Kubernetes Service clusters, node pools |
-| `azure_acr` | Azure Container Registry instances |
+| `azure_acr`         | Azure Container Registry instances            |
 
 #### Messaging & Events
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_eventgrid` | Event Grid topics, subscriptions |
-| `azure_eventhubs` | Event Hubs namespaces |
-| `azure_servicebus` | Service Bus messaging |
+| Tool               | Purpose                          |
+| ------------------ | -------------------------------- |
+| `azure_eventgrid`  | Event Grid topics, subscriptions |
+| `azure_eventhubs`  | Event Hubs namespaces            |
+| `azure_servicebus` | Service Bus messaging            |
 
 #### Analytics & Monitoring
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_kusto` | Azure Data Explorer clusters, KQL queries |
-| `azure_monitor` | Query logs and metrics |
-| `azure_applicationinsights` | Application Insights resources |
-| `mcp_azure_mcp_applens` | Diagnose app performance issues |
-| `azure_grafana` | Managed Grafana workspaces |
-| `azure_workbooks` | Azure Workbooks visualization |
+| Tool                        | Purpose                                   |
+| --------------------------- | ----------------------------------------- |
+| `azure_kusto`               | Azure Data Explorer clusters, KQL queries |
+| `azure_monitor`             | Query logs and metrics                    |
+| `azure_applicationinsights` | Application Insights resources            |
+| `mcp_azure_mcp_applens`     | Diagnose app performance issues           |
+| `azure_grafana`             | Managed Grafana workspaces                |
+| `azure_workbooks`           | Azure Workbooks visualization             |
 
 #### Security & Identity
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_keyvault` | Key Vault secrets, keys, certificates |
-| `azure_role` | RBAC assignments |
-| `mcp_azure_mcp_confidentialledger` | Confidential Ledger transactions |
+| Tool                               | Purpose                               |
+| ---------------------------------- | ------------------------------------- |
+| `azure_keyvault`                   | Key Vault secrets, keys, certificates |
+| `azure_role`                       | RBAC assignments                      |
+| `mcp_azure_mcp_confidentialledger` | Confidential Ledger transactions      |
 
 #### Developer Tools
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_appconfig` | App Configuration settings, feature flags |
-| `azure_bicepschema` | Bicep schemas for IaC |
-| `azure_loadtesting` | Create and run load tests |
+| Tool                | Purpose                                   |
+| ------------------- | ----------------------------------------- |
+| `azure_appconfig`   | App Configuration settings, feature flags |
+| `azure_bicepschema` | Bicep schemas for IaC                     |
+| `azure_loadtesting` | Create and run load tests                 |
 
 #### Storage
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_storage` | Storage accounts, containers, blobs, tables |
-| `mcp_azure_mcp_managedlustre` | High-performance Lustre file systems |
+| Tool                          | Purpose                                     |
+| ----------------------------- | ------------------------------------------- |
+| `azure_storage`               | Storage accounts, containers, blobs, tables |
+| `mcp_azure_mcp_managedlustre` | High-performance Lustre file systems        |
 
 #### Architecture & Governance
 
-| Tool | Purpose |
-| ---- | ------- |
-| `azure_quota` | Manage resource quotas and limits |
-| `azure_resourcehealth` | Check resource health status |
-| `mcp_azure_mcp_extension_azqr` | Compliance and security reports |
-| `azure_subscription` | List Azure subscriptions |
-| `azure_group` | List resource groups |
-| `azure_marketplace` | Discover Marketplace products |
+| Tool                           | Purpose                           |
+| ------------------------------ | --------------------------------- |
+| `azure_quota`                  | Manage resource quotas and limits |
+| `azure_resourcehealth`         | Check resource health status      |
+| `mcp_azure_mcp_extension_azqr` | Compliance and security reports   |
+| `azure_subscription`           | List Azure subscriptions          |
+| `azure_group`                  | List resource groups              |
+| `azure_marketplace`            | Discover Marketplace products     |
 
 ### Microsoft 365 MCP Tools
 
 When you ask `@alex /m365`, Alex guides you to:
 
-| Tool | Purpose |
-| ---- | ------- |
-| `mcp_m365agentstoo_get_knowledge` | M365 Copilot development knowledge |
+| Tool                                  | Purpose                                     |
+| ------------------------------------- | ------------------------------------------- |
+| `mcp_m365agentstoo_get_knowledge`     | M365 Copilot development knowledge          |
 | `mcp_m365agentstoo_get_code_snippets` | Teams AI, Teams JS, botbuilder code samples |
-| `mcp_m365agentstoo_get_schema` | App manifest, agent, plugin schemas |
-| `mcp_m365agentstoo_troubleshoot` | Common M365 development issues |
+| `mcp_m365agentstoo_get_schema`        | App manifest, agent, plugin schemas         |
+| `mcp_m365agentstoo_troubleshoot`      | Common M365 development issues              |
 
 ### Schema Types Available
 
-| Schema | Version | Purpose |
-| ------ | ------- | ------- |
-| `app_manifest` | v1.19 | Teams app manifest |
-| `declarative_agent_manifest` | v1.0 | Copilot declarative agent |
-| `api_plugin_manifest` | v2.1 | API plugin for Copilot |
-| `m365_agents_yaml` | latest | M365 agents configuration |
+| Schema                       | Version | Purpose                   |
+| ---------------------------- | ------- | ------------------------- |
+| `app_manifest`               | v1.19   | Teams app manifest        |
+| `declarative_agent_manifest` | v1.0    | Copilot declarative agent |
+| `api_plugin_manifest`        | v2.1    | API plugin for Copilot    |
+| `m365_agents_yaml`           | latest  | M365 agents configuration |
 
 ### Microsoft Official MCP Servers
 
-| Server | Purpose |
-| ------ | ------- |
-| Microsoft Outlook Mail MCP | Email management |
-| Microsoft Outlook Calendar MCP | Calendar operations |
-| Microsoft Teams MCP | Teams messaging & collaboration |
-| Microsoft SharePoint and OneDrive MCP | File storage & sharing |
-| Microsoft SharePoint Lists MCP | List management |
-| Microsoft 365 Admin Center MCP | Admin operations |
-| Microsoft Word MCP | Document creation |
-| Microsoft 365 Copilot (Search) MCP | Enterprise search |
-| Microsoft 365 User Profile MCP | User information |
+| Server                                | Purpose                         |
+| ------------------------------------- | ------------------------------- |
+| Microsoft Outlook Mail MCP            | Email management                |
+| Microsoft Outlook Calendar MCP        | Calendar operations             |
+| Microsoft Teams MCP                   | Teams messaging & collaboration |
+| Microsoft SharePoint and OneDrive MCP | File storage & sharing          |
+| Microsoft SharePoint Lists MCP        | List management                 |
+| Microsoft 365 Admin Center MCP        | Admin operations                |
+| Microsoft Word MCP                    | Document creation               |
+| Microsoft 365 Copilot (Search) MCP    | Enterprise search               |
+| Microsoft 365 User Profile MCP        | User information                |
 
 ### Fabric & Kusto Tools
 
-| Tool | Purpose |
-| ---- | ------- |
-| `mcp_fabric-rti-mc_eventstream_create_simple` | Create Eventstreams in Microsoft Fabric |
-| `mcp_fabric-rti-mc_kusto_get_shots` | Semantic search in Kusto/Azure Data Explorer |
-| Activate Kusto tools | KQL query execution and schema retrieval |
+| Tool                                          | Purpose                                      |
+| --------------------------------------------- | -------------------------------------------- |
+| `mcp_fabric-rti-mc_eventstream_create_simple` | Create Eventstreams in Microsoft Fabric      |
+| `mcp_fabric-rti-mc_kusto_get_shots`           | Semantic search in Kusto/Azure Data Explorer |
+| Activate Kusto tools                          | KQL query execution and schema retrieval     |
 
 ---
 
@@ -692,12 +692,12 @@ After initialization, Alex manages this structure:
 
 ### Memory Types
 
-| Type | Location | Purpose |
-| ---- | -------- | ------- |
-| **Working Memory** | Chat session | 7-rule capacity for active processing |
-| **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols |
-| **Episodic Memory** | `.prompt.md` | Complex workflows and sessions |
-| **Domain Knowledge** | `DK-*.md` | Specialized expertise areas |
+| Type                  | Location           | Purpose                               |
+| --------------------- | ------------------ | ------------------------------------- |
+| **Working Memory**    | Chat session       | 7-rule capacity for active processing |
+| **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols    |
+| **Episodic Memory**   | `.prompt.md`       | Complex workflows and sessions        |
+| **Domain Knowledge**  | `DK-*.md`          | Specialized expertise areas           |
 
 ---
 
@@ -712,7 +712,24 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v4.2.3
+## 🆕 What's New in v4.2.6
+
+### 🎓 Research Project Skills
+
+New skills for academic research workflows:
+
+- **practitioner-research** - Ship→Document→Promote methodology for longitudinal case studies
+- **research-project-scaffold** - Complete folder structure, templates, and refactoring procedures for research projects
+
+### 📊 68 Skills Total
+
+Alex now includes 68 portable skills covering:
+- Cognitive & Learning
+- Engineering Fundamentals
+- Security & Privacy
+- Documentation & Writing
+- Visual Design
+- **Academic Research** (NEW)
 
 ### 💡 Smart Nudges
 
@@ -751,26 +768,26 @@ See the [Full Changelog](CHANGELOG.md) for complete version history and release 
 
 Comprehensive documentation is included with the extension in the `alex_docs/` folder:
 
-| Document | Description |
-| -------- | ----------- |
-| **[User Manual](alex_docs/USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
-| [Cognitive Architecture](alex_docs/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams |
-| [Skills & Capabilities](alex_docs/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Copilot Integration](alex_docs/COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
-| [Conscious Mind](alex_docs/CONSCIOUS-MIND.md) | User-initiated operations and commands |
-| [Unconscious Mind](alex_docs/UNCONSCIOUS-MIND.md) | Automatic background processes |
-| [Memory Systems](alex_docs/MEMORY-SYSTEMS.md) | Procedural, episodic, and domain memory |
-| [Project Structure](alex_docs/PROJECT-STRUCTURE.md) | .github folder files and functions |
-| [Global Knowledge](alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project knowledge sharing |
-| [Cloud Sync](alex_docs/CLOUD-SYNC.md) | GitHub Gist backup and sync |
-| [Quick Reference](alex_docs/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
+| Document                                                      | Description                                     |
+| ------------------------------------------------------------- | ----------------------------------------------- |
+| **[User Manual](alex_docs/USER-MANUAL.md)**                   | 📘 **START HERE** - Complete guide to using Alex |
+| [Cognitive Architecture](alex_docs/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams    |
+| [Skills & Capabilities](alex_docs/SKILLS-CAPABILITIES.md)     | Hard skills, soft skills, and wish list         |
+| [Copilot Integration](alex_docs/COPILOT-INTEGRATION.md)       | How Alex uses native Copilot features           |
+| [Conscious Mind](alex_docs/CONSCIOUS-MIND.md)                 | User-initiated operations and commands          |
+| [Unconscious Mind](alex_docs/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
+| [Memory Systems](alex_docs/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
+| [Project Structure](alex_docs/PROJECT-STRUCTURE.md)           | .github folder files and functions              |
+| [Global Knowledge](alex_docs/GLOBAL-KNOWLEDGE.md)             | Cross-project knowledge sharing                 |
+| [Cloud Sync](alex_docs/CLOUD-SYNC.md)                         | GitHub Gist backup and sync                     |
+| [Quick Reference](alex_docs/QUICK-REFERENCE.md)               | Commands and shortcuts cheat sheet              |
 
 ### External Resources
 
-| Resource | Description |
-| -------- | ----------- |
-| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history |
-| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In) | TypeScript implementation |
+| Resource                                                                              | Description               |
+| ------------------------------------------------------------------------------------- | ------------------------- |
+| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history  |
+| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In)                           | TypeScript implementation |
 
 ---
 

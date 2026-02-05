@@ -140,19 +140,19 @@ flowchart LR
 
 ## Legend
 
-| Color | Inheritance |
-| ----- | ----------- |
-| 🟨 Yellow | Master-only |
-| 🟦 Blue | VS Code heir |
-| 🟩 Green | M365 heir |
-| 🟪 Purple (dashed) | Temporary |
-| 🧊 Cyan | Inheritable |
+| Color             | Inheritance  |
+| ----------------- | ------------ |
+| 🟨 Yellow          | Master-only  |
+| 🟦 Blue            | VS Code heir |
+| 🟩 Green           | M365 heir    |
+| 🟪 Purple (dashed) | Temporary    |
+| 🧊 Cyan            | Inheritable  |
 
-| Arrow | Meaning |
-| ----- | ------- |
-| `<-->` | Bidirectional (mutual) |
-| `-->` | Strong connection (≥0.7) |
-| `-.->` | Weak connection (<0.7) |
+| Arrow  | Meaning                  |
+| ------ | ------------------------ |
+| `<-->` | Bidirectional (mutual)   |
+| `-->`  | Strong connection (≥0.7) |
+| `-.->` | Weak connection (<0.7)   |
 
 ---
 
@@ -160,75 +160,75 @@ flowchart LR
 
 ### 🧊 Inheritable (25)
 
-| Skill | Connections |
-| ----- | ----------- |
-| appropriate-reliance | 4 |
-| architecture-health | 3 |
-| ascii-art-alignment | 3 |
-| bootstrap-learning | 4 |
-| code-review | 3 |
-| cognitive-load | 3 |
-| debugging-patterns | 2 |
-| error-recovery-patterns | 3 |
-| git-workflow | 2 |
-| image-handling | 3 |
-| incident-response | 3 |
-| learning-psychology | 3 |
-| lint-clean-markdown | 3 |
-| markdown-mermaid | 2 |
-| microsoft-sfi | 4 |
-| privacy-responsible-ai | 3 |
-| project-scaffolding | 4 |
-| refactoring-patterns | 3 |
-| release-preflight | 5 |
-| root-cause-analysis | 3 |
-| skill-catalog-generator | 5 |
-| svg-graphics | 4 |
-| testing-strategies | 3 |
-| vscode-environment | 4 |
-| writing-publication | 3 |
+| Skill                   | Connections |
+| ----------------------- | ----------- |
+| appropriate-reliance    | 4           |
+| architecture-health     | 3           |
+| ascii-art-alignment     | 3           |
+| bootstrap-learning      | 4           |
+| code-review             | 3           |
+| cognitive-load          | 3           |
+| debugging-patterns      | 2           |
+| error-recovery-patterns | 3           |
+| git-workflow            | 2           |
+| image-handling          | 3           |
+| incident-response       | 3           |
+| learning-psychology     | 3           |
+| lint-clean-markdown     | 3           |
+| markdown-mermaid        | 2           |
+| microsoft-sfi           | 4           |
+| privacy-responsible-ai  | 3           |
+| project-scaffolding     | 4           |
+| refactoring-patterns    | 3           |
+| release-preflight       | 5           |
+| root-cause-analysis     | 3           |
+| skill-catalog-generator | 5           |
+| svg-graphics            | 4           |
+| testing-strategies      | 3           |
+| vscode-environment      | 4           |
+| writing-publication     | 3           |
 
 ### 🟨 Master-Only (8)
 
-| Skill | Connections |
-| ----- | ----------- |
-| architecture-refinement | 5 |
-| global-knowledge | 3 |
-| heir-curation | 4 |
-| knowledge-synthesis | 3 |
-| llm-model-selection | 2 |
-| meditation | 4 |
-| meditation-facilitation | 4 |
-| self-actualization | 4 |
+| Skill                   | Connections |
+| ----------------------- | ----------- |
+| architecture-refinement | 5           |
+| global-knowledge        | 3           |
+| heir-curation           | 4           |
+| knowledge-synthesis     | 3           |
+| llm-model-selection     | 2           |
+| meditation              | 4           |
+| meditation-facilitation | 4           |
+| self-actualization      | 4           |
 
 ### 🟦 VS Code Heir (2)
 
-| Skill | Connections |
-| ----- | ----------- |
-| chat-participant-patterns | 3 |
-| vscode-extension-patterns | 2 |
+| Skill                     | Connections |
+| ------------------------- | ----------- |
+| chat-participant-patterns | 3           |
+| vscode-extension-patterns | 2           |
 
 ### 🟩 M365 Heir (2)
 
-| Skill | Connections |
-| ----- | ----------- |
-| m365-agent-debugging | 1 |
-| teams-app-patterns | 2 |
+| Skill                | Connections |
+| -------------------- | ----------- |
+| m365-agent-debugging | 1           |
+| teams-app-patterns   | 2           |
 
 ---
 
 ## Staleness-Prone Skills
 
-| Skill | Reason |
-| ----- | ------ |
+| Skill                     | Reason                          |
+| ------------------------- | ------------------------------- |
 | vscode-extension-patterns | Platform/API changes frequently |
 | chat-participant-patterns | Platform/API changes frequently |
-| m365-agent-debugging | Platform/API changes frequently |
-| teams-app-patterns | Platform/API changes frequently |
-| llm-model-selection | Platform/API changes frequently |
-| git-workflow | Platform/API changes frequently |
-| privacy-responsible-ai | Platform/API changes frequently |
-| microsoft-sfi | Platform/API changes frequently |
+| m365-agent-debugging      | Platform/API changes frequently |
+| teams-app-patterns        | Platform/API changes frequently |
+| llm-model-selection       | Platform/API changes frequently |
+| git-workflow              | Platform/API changes frequently |
+| privacy-responsible-ai    | Platform/API changes frequently |
+| microsoft-sfi             | Platform/API changes frequently |
 
 ---
 

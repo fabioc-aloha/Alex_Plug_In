@@ -188,7 +188,14 @@ The cognitive architecture draws on dual-process theory, memory consolidation re
 
 ---
 
-## 🆕 What's New in v4.2.3
+## 🆕 What's New in v4.2.6
+
+### 🎓 Research Project Skills
+
+New skills for academic research workflows:
+
+- **practitioner-research** - Ship→Document→Promote methodology for longitudinal case studies
+- **research-project-scaffold** - Research project structure and refactoring procedures
 
 ### 💡 Smart Nudges
 
