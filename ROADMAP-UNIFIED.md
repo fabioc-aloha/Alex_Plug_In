@@ -381,7 +381,7 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 
 ### Implementation Tasks
 
-> **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate  
+> **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate
 > See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology
 
 | Version | Task | Owner | Human | Alex | Status |

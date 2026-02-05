@@ -16,6 +16,55 @@ description: "Patterns for PMI/PMBOK methodology, Agile practices, risk manageme
 | **Hybrid** | Complex, mixed needs | Predictive planning + Agile execution |
 | **Lean** | Continuous flow | Eliminate waste, optimize flow |
 
+## 📋 Planning Document Standards
+
+### Task Lists First
+
+**All planning documents MUST have task lists at the top** (after title/metadata).
+
+Why:
+- Immediate visibility into what needs doing
+- Quick status check without scrolling
+- Aligns with how Alex and humans scan documents
+
+### Required Structure
+
+```markdown
+# [Document Title]
+
+> Metadata (created, owner, status)
+
+---
+
+## 📋 Task List (Quick Reference)
+
+[Remaining tasks with status]
+
+[Progress summary table]
+
+---
+
+## [Rest of document...]
+```
+
+### Alex Effort Estimation
+
+Use dual-column effort estimates:
+
+| Task | Human Est. | Alex Est. | Status |
+|------|:----------:|:---------:|:------:|
+| Research X | 4h | 🔄 25m | ⬜ |
+| Implement Y | 8h | ⏱️ 1h | ⬜ |
+
+**Effort units:**
+- ⚡ Instant (<5m)
+- 🔄 Short (5-30m)
+- ⏱️ Medium (30-60m)
+- 📦 Session (1-2h)
+- 🗓️ Multi-session (2h+)
+
+See [alex-effort-estimation skill](../alex-effort-estimation/SKILL.md) for methodology.
+
 ## PMBOK Process Groups
 
 | Group | Purpose | Key Activities |

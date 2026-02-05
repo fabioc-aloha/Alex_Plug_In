@@ -5,9 +5,45 @@
 > **Status:** Phase 1 Complete (v4.2.5 published)
 > **Owner:** Master Alex + VS Code Heir
 
+---
+
+## 📋 Task List (Quick Reference)
+
+> **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate
+> See [alex-effort-estimation skill](../.github/skills/alex-effort-estimation/SKILL.md) for methodology
+
+### Remaining Tasks
+
+| # | Task | Phase | Owner | Human | Alex | Status |
+|:-:|------|:-----:|-------|:-----:|:----:|:------:|
+| 10 | Research community orchestration patterns | 4 | Master | 4h | 🔄 25m | ⬜ |
+| 11 | Design Alex orchestrator architecture | 4 | Master | 4h | ⏱️ 45m | ⬜ |
+| 12 | Implement alex-orchestrator.agent.md | 4 | Master | 4h | 🔄 30m | ⬜ |
+| 17 | Test skills with `chat.agentSkillsLocations` | 2 | Heir | 2h | 🔄 20m | ⬜ |
+| 22 | Create TDD workflow (Red/Green/Refactor) | 4 | Master | 4h | ⏱️ 40m | ⬜ |
+| 23 | Test parallel subagent execution | 4 | Heir | 4h | ⏱️ 1h | ⬜ |
+| 24 | Implement background agent handoff | 4 | Heir | 4h | ⏱️ 45m | ⬜ |
+| 25 | Document skill format in SKILL-ARCHITECTURE.md | 2 | Master | 1h | 🔄 15m | ⬜ |
+| 26 | Document agents in USER-MANUAL | 3 | Master | 2h | 🔄 20m | ⬜ |
+| 27 | Document orchestration patterns | 4 | Master | 2h | 🔄 20m | ⬜ |
+
+**Remaining:** Human 31h → Alex ~5.5h
+
+### Progress Summary
+
+| Phase | Version | Status | Human Est. | Alex Est. |
+|-------|---------|:------:|:----------:|:---------:|
+| 1. Foundation + Agents | v4.2.5 | ✅ Complete | 18h | ~2h actual |
+| 2. Skills Audit | v4.3.0-prep | ⬜ Pending | 5h | ~1h |
+| ~~3. Custom Agents~~ | ~~v4.3.0~~ | ✅ Merged | — | — |
+| 4. Orchestration | v4.3.0+ | ⬜ Pending | 26h | ~4h |
+| **Total Remaining** | | | **31h** | **~5h** |
+
+---
+
 ## ⚠️ Architecture Decision: Consolidated Agents
 
-**Original Plan:** 4 separate agents (meditate, learn, dream, review)  
+**Original Plan:** 4 separate agents (meditate, learn, dream, review)
 **Actual Implementation:** 1 consolidated Alex agent with 6 slash commands + 2 handoff agents
 
 **Why:** VS Code 1.109 registers `.prompt.md` files as slash commands automatically. This gives better UX than switching agents — users stay in one Alex context with `/meditate`, `/dream`, `/learn`, `/review`, `/tdd`, `/selfactualize` commands available.
@@ -16,68 +52,36 @@
 
 ---
 
-## Task Overview
+## Completed Tasks (Phase 1)
 
-### P0 — Critical Path (Must Complete)
+### P0 — Critical Path
 
-| # | Task | Phase | Owner | Effort | Status |
-|:-:|------|:-----:|-------|:------:|:------:|
-| 1 | Update engine to `^1.109.0` | 1 | Heir | 30m | ✅ |
-| 2 | Document recommended settings in USER-MANUAL | 1 | Master | 2h | ✅ |
-| 3 | Update copilot-instructions.md settings section | 1 | Master | 1h | ✅ |
-| 4 | Audit all SKILL.md files for required frontmatter | 2 | Master | 4h | ✅ |
-| 5 | Create skill validation script | 2 | Heir | 2h | ✅ |
-| 6 | ~~Design 4 core agents~~ → Consolidated agent approach | 1 | Master | 2h | ✅ |
-| 7 | Create `.github/agents/` with 3 agents (Alex, Azure, M365) | 1 | Master | 1h | ✅ |
-| 8 | ~~alex-meditate.agent.md~~ → 6 slash command .prompt.md files | 1 | Master | 1h | ✅ |
-| 9 | ~~alex-learn.agent.md~~ → Agent handoffs to Azure/M365 | 1 | Master | 1h | ✅ |
-| 10 | Research community orchestration patterns | 4 | Master | 4h | ⬜ |
-| 11 | Design Alex orchestrator architecture | 4 | Master | 4h | ⬜ |
-| 12 | Implement alex-orchestrator.agent.md | 4 | Master | 4h | ⬜ |
+| # | Task | Phase | Owner | Human | Alex | Status |
+|:-:|------|:-----:|-------|:-----:|:----:|:------:|
+| 1 | Update engine to `^1.109.0` | 1 | Heir | 30m | ⚡ 5m | ✅ |
+| 2 | Document recommended settings in USER-MANUAL | 1 | Master | 2h | 🔄 20m | ✅ |
+| 3 | Update copilot-instructions.md settings section | 1 | Master | 1h | ⚡ 10m | ✅ |
+| 4 | Audit all SKILL.md files for required frontmatter | 2 | Master | 4h | ⏱️ 45m | ✅ |
+| 5 | Create skill validation script | 2 | Heir | 2h | 🔄 25m | ✅ |
+| 6 | ~~Design 4 core agents~~ → Consolidated agent approach | 1 | Master | 2h | 🔄 20m | ✅ |
+| 7 | Create `.github/agents/` with 3 agents (Alex, Azure, M365) | 1 | Master | 1h | ⚡ 10m | ✅ |
+| 8 | ~~alex-meditate.agent.md~~ → 6 slash command .prompt.md files | 1 | Master | 1h | ⚡ 10m | ✅ |
+| 9 | ~~alex-learn.agent.md~~ → Agent handoffs to Azure/M365 | 1 | Master | 1h | ⚡ 10m | ✅ |
 
-### P1 — High Priority (Complete in Phase)
+### P1 — High Priority
 
-| # | Task | Phase | Owner | Effort | Status |
-|:-:|------|:-----:|-------|:------:|:------:|
-| 13 | Update markdown-mermaid skill for native rendering | 1 | Master | 1h | ✅ |
-| 14 | Add Anthropic settings to setup wizard | 1 | Heir | 2h | ✅ |
-| 15 | Test extended thinking with meditation workflows | 1 | Master | 2h | ✅ |
-| 16 | Fix any non-compliant skills | 2 | Master | 2h | ✅ |
-| 17 | Test skills with `chat.agentSkillsLocations` | 2 | Heir | 2h | ⬜ |
-| 18 | ~~alex-dream.agent.md~~ → Refactor dream to synapse-core.ts | 1 | Heir | 2h | ✅ |
-| 19 | ~~alex-review.agent.md~~ → dream-cli.ts for terminal usage | 1 | Heir | 30m | ✅ |
-| 20 | ~~Handoff workflows~~ → Built into alex.agent.md | 1 | Master | 1h | ✅ |
-| 21 | Test agent switching and Azure/M365 handoffs | 1 | Heir | 1h | ✅ |
-| 22 | Create TDD workflow (Red/Green/Refactor) | 4 | Master | 4h | ⬜ |
-| 23 | Test parallel subagent execution | 4 | Heir | 4h | ⬜ |
-| 24 | Implement background agent handoff | 4 | Heir | 4h | ⬜ |
+| # | Task | Phase | Owner | Human | Alex | Status |
+|:-:|------|:-----:|-------|:-----:|:----:|:------:|
+| 13 | Update markdown-mermaid skill for native rendering | 1 | Master | 1h | 🔄 15m | ✅ |
+| 14 | Add Anthropic settings to setup wizard | 1 | Heir | 2h | 🔄 25m | ✅ |
+| 15 | Test extended thinking with meditation workflows | 1 | Master | 2h | ⏱️ 45m | ✅ |
+| 16 | Fix any non-compliant skills | 2 | Master | 2h | 🔄 20m | ✅ |
+| 18 | ~~alex-dream.agent.md~~ → Refactor dream to synapse-core.ts | 1 | Heir | 2h | ⏱️ 45m | ✅ |
+| 19 | ~~alex-review.agent.md~~ → dream-cli.ts for terminal usage | 1 | Heir | 30m | ⚡ 10m | ✅ |
+| 20 | ~~Handoff workflows~~ → Built into alex.agent.md | 1 | Master | 1h | ⚡ 10m | ✅ |
+| 21 | Test agent switching and Azure/M365 handoffs | 1 | Heir | 1h | 🔄 15m | ✅ |
 
-### P2 — Low Priority (Time Permitting)
-
-| # | Task | Phase | Owner | Effort | Status |
-|:-:|------|:-----:|-------|:------:|:------:|
-| 25 | Document skill format in SKILL-ARCHITECTURE.md | 2 | Master | 1h | ⬜ |
-| 26 | Document agents in USER-MANUAL | 3 | Master | 2h | ⬜ |
-| 27 | Document orchestration patterns | 4 | Master | 2h | ⬜ |
-
-### Progress Summary
-
-| Phase | Version | P0 | P1 | P2 | Timeline |
-|-------|---------|:--:|:--:|:--:|----------|
-| 1. Foundation + Agents | v4.2.5 | 9/9 | 7/7 | — | ✅ Feb 4 |
-| 2. Skills Audit | v4.3.0-prep | 0/2 | 0/2 | 0/1 | Week 2 (Feb 10-16) |
-| ~~3. Custom Agents~~ | ~~v4.3.0~~ | — | — | — | Merged into Phase 1 |
-| 4. Orchestration | v4.3.0+ | 0/3 | 0/3 | 0/1 | Weeks 5-6 (Mar 3-14) |
-| 5. Extension | v4.4.0 | — | — | — | Weeks 7-8 (Mar 17-28) |
-| 6. Memory | v4.4.0+ | — | — | — | Week 9 (Mar 31-Apr 4) |
-
-**Total Effort:** ~62 hours across 6 phases
-
----
-
-## Executive Summary
-
-This plan leverages VS Code 1.109's multi-agent development capabilities to transform Alex from an extension with skills into a **native-integrated cognitive architecture**. The key insight: VS Code has standardized exactly what we've already built, so we're positioned to lead rather than follow.
+**Phase 1 Actual:** Human estimate 26h → Alex actual ~4h (6.5× acceleration)
 
 ### Architecture Overview
 
