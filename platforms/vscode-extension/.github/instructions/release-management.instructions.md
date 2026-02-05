@@ -17,6 +17,15 @@
 
 **⚠️ CRITICAL**: Before ANY release action, Alex MUST automatically perform these assessments:
 
+### Step 0: Brain QA (Cognitive Architecture Health)
+
+```text
+Action: Run `brain-qa` skill or synapse validation
+Purpose: Ensure no broken synapses, all skills indexed, Master-Heir sync
+Output: 6-phase validation report
+Blocker: Do NOT proceed if synapses are broken
+```
+
 ### Step 1: Detect Uncommitted Changes
 
 ```text

@@ -3,6 +3,12 @@
   "inheritance": "master-only",
   "connections": [
     {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "requires",
+      "strength": 0.95,
+      "note": "Run brain QA before any release"
+    },
+    {
       "target": ".github/skills/git-workflow/SKILL.md",
       "type": "requires",
       "strength": 0.95

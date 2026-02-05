@@ -26,6 +26,11 @@ applyTo: "**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/
 Run BEFORE every release:
 
 ```powershell
+# 0. Brain QA - validate cognitive architecture health
+# Run the brain-qa skill or execute these checks:
+$uniqueBroken = @{}; Get-ChildItem ".github" -Recurse -Filter "synapses.json" | ForEach-Object { $json = Get-Content $_.FullName -Raw | ConvertFrom-Json; foreach ($conn in $json.connections) { $target = $conn.target; if ($target -match "^\.github/|^alex_docs/") { $fullPath = Join-Path $PWD $target } else { $fullPath = Join-Path $_.DirectoryName $target }; if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true } } }; if ($uniqueBroken.Count -gt 0) { throw "Broken synapses: $($uniqueBroken.Keys -join ', ')" }
+Write-Host "✅ Brain QA: All synapses valid"
+
 # 1. Version check - are all locations synchronized?
 $pkg = Get-Content package.json | ConvertFrom-Json
 Write-Host "package.json version: $($pkg.version)"

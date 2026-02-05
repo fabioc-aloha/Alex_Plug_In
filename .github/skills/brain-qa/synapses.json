@@ -39,6 +39,12 @@
             "type": "related",
             "strength": 0.65,
             "note": "Meditative practice for brain maintenance"
+        },
+        {
+            "target": ".github/skills/release-preflight/SKILL.md",
+            "type": "informs",
+            "strength": 0.9,
+            "note": "Brain QA is step 0 of release preflight checklist"
         }
     ],
     "activationBoost": [
