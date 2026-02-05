@@ -192,6 +192,20 @@ Based on empirical observation of the Alex Cognitive Architecture over eight mon
 
 **Detection**: Comparing skill inventory against activation indices and discovery mechanisms.
 
+### 4.7 Identity Hallucination Debt
+
+**Definition**: Failure to consult explicit knowledge (such as user profiles) during content generation, resulting in confabulated information that contradicts stored facts.
+
+**Example**: While drafting this very article, Alex listed the co-author as "Fabio Calefato" despite having the correct name "Fabio Correa" stored in the user profile (`user-profile.json`). The AI system pattern-matched the first name "Fabio" to similar names encountered in training data rather than consulting its explicit knowledge store.
+
+**The Irony**: This error occurred *during a meditation session about cognitive debt*, demonstrating that even systems actively reflecting on their own architectural integrity can exhibit cognitive debt in real-time.
+
+**Accumulation Pattern**: Reliance on parametric memory (neural network weights) over explicit memory (structured knowledge files); generation without verification; assuming familiarity without confirmation.
+
+**Detection**: Human review; cross-referencing generated content against authoritative knowledge stores.
+
+**Prevention**: Mandatory profile lookup instructions added to core architecture: *"When writing content that includes the user's name, ALWAYS read the profile first. Do NOT guess or pattern-match from training data."*
+
 ---
 
 ## 5. Case Study: The Alex Cognitive Architecture
@@ -433,16 +447,17 @@ if ($uniqueBroken.Count -eq 0) {
 
 ## Appendix B: Cognitive Debt Taxonomy Summary
 
-| Type                   | Definition                             | Detection                 | Payoff                            |
-| ---------------------- | -------------------------------------- | ------------------------- | --------------------------------- |
-| Broken Synapse         | Invalid connection targets             | Graph traversal           | Update or remove reference        |
-| Aspirational Reference | Connections to unimplemented knowledge | Inventory cross-reference | Create target or remove reference |
-| Path Format Drift      | Inconsistent resource paths            | Pattern matching          | Normalize to standard format      |
-| Heir Divergence        | Instance synchronization gaps          | Hash comparison           | Propagate changes                 |
-| Trigger Overlap        | Duplicate activation keywords          | Index analysis            | Differentiate or accept           |
-| Orphan Skill           | Unintegrated knowledge                 | Coverage analysis         | Add to discovery mechanisms       |
+| Type                    | Definition                             | Detection                 | Payoff                            |
+| ----------------------- | -------------------------------------- | ------------------------- | --------------------------------- |
+| Broken Synapse          | Invalid connection targets             | Graph traversal           | Update or remove reference        |
+| Aspirational Reference  | Connections to unimplemented knowledge | Inventory cross-reference | Create target or remove reference |
+| Path Format Drift       | Inconsistent resource paths            | Pattern matching          | Normalize to standard format      |
+| Heir Divergence         | Instance synchronization gaps          | Hash comparison           | Propagate changes                 |
+| Trigger Overlap         | Duplicate activation keywords          | Index analysis            | Differentiate or accept           |
+| Orphan Skill            | Unintegrated knowledge                 | Coverage analysis         | Add to discovery mechanisms       |
+| Identity Hallucination  | Confabulation over explicit knowledge  | Human review              | Mandatory knowledge lookup        |
 
 ---
 
 *Manuscript prepared: February 5, 2026*
-*Word count: ~4,200 (excluding references and appendices)*
+*Word count: ~4,500 (excluding references and appendices)*
