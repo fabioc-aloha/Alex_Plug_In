@@ -31,20 +31,20 @@
 
 ## Memory Files Created/Updated
 
-| File | Action | Purpose |
-|------|--------|---------|
-| `.github/skills/text-to-speech/SKILL.md` | Updated | Added v2.1.0 multi-language documentation, 32 language voice table |
-| `.github/instructions/language-detection-patterns.instructions.md` | Created | Reusable language detection patterns for TTS, translation, i18n |
-| `.github/copilot-instructions.md` | Updated | Added synapse to language-detection-patterns |
+| File                                                               | Action  | Purpose                                                            |
+| ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------ |
+| `.github/skills/text-to-speech/SKILL.md`                           | Updated | Added v2.1.0 multi-language documentation, 32 language voice table |
+| `.github/instructions/language-detection-patterns.instructions.md` | Created | Reusable language detection patterns for TTS, translation, i18n    |
+| `.github/copilot-instructions.md`                                  | Updated | Added synapse to language-detection-patterns                       |
 
 ---
 
 ## Synapses Established
 
-| Target | Strength | Type | Direction | Activation |
-|--------|----------|------|-----------|------------|
-| `language-detection-patterns.instructions.md` | strong | implements | bidirectional | "language detection", "multilingual", "i18n" |
-| `text-to-speech/SKILL.md` | reinforced | documents | bidirectional | "TTS", "read aloud", "voice" |
+| Target                                        | Strength   | Type       | Direction     | Activation                                   |
+| --------------------------------------------- | ---------- | ---------- | ------------- | -------------------------------------------- |
+| `language-detection-patterns.instructions.md` | strong     | implements | bidirectional | "language detection", "multilingual", "i18n" |
+| `text-to-speech/SKILL.md`                     | reinforced | documents  | bidirectional | "TTS", "read aloud", "voice"                 |
 
 ---
 
