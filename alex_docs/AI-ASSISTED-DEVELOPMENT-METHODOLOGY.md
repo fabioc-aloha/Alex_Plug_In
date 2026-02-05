@@ -74,18 +74,18 @@ Distilled from extensive practice:
 
 How does this methodology compare to existing AI coding assistants?
 
-| Capability | Copilot | Cursor | Windsurf | ChatGPT | Claude | **This Framework** |
-|------------|:-------:|:------:|:--------:|:-------:|:------:|:------------------:|
-| Code completion | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
-| Chat assistance | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| Agentic coding | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐ |
-| **Persistent memory** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ |
-| **Structured knowledge** | ⭐ | ⭐ | ⭐ | ❌ | ⭐⭐ | ⭐⭐⭐ |
-| **Learning/consolidation** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
-| **Cross-project transfer** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
-| Multi-platform | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| MCP/tool integration | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ |
-| User data ownership | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
+| Capability                 | Copilot | Cursor | Windsurf | ChatGPT | Claude | **This Framework** |
+| -------------------------- | :-----: | :----: | :------: | :-----: | :----: | :----------------: |
+| Code completion            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐    |   ⭐⭐   |         ⭐          |
+| Chat assistance            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |        ⭐⭐⭐         |
+| Agentic coding             |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ⭐    |   ⭐⭐   |         ⭐⭐         |
+| **Persistent memory**      |    ⭐    |   ⭐    |    ⭐     |    ⭐    |   ⭐⭐   |        ⭐⭐⭐         |
+| **Structured knowledge**   |    ⭐    |   ⭐    |    ⭐     |    ❌    |   ⭐⭐   |        ⭐⭐⭐         |
+| **Learning/consolidation** |    ❌    |   ❌    |    ❌     |    ❌    |   ❌    |        ⭐⭐⭐         |
+| **Cross-project transfer** |    ❌    |   ❌    |    ❌     |    ❌    |   ❌    |        ⭐⭐⭐         |
+| Multi-platform             |   ⭐⭐⭐   |   ⭐⭐   |    ⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |        ⭐⭐⭐         |
+| MCP/tool integration       |   ⭐⭐⭐   |   ⭐⭐   |   ⭐⭐⭐    |    ⭐    |   ⭐⭐   |        ⭐⭐⭐         |
+| User data ownership        |    ❌    |   ❌    |    ❌     |    ❌    |   ❌    |        ⭐⭐⭐         |
 
 **2026 Feature Notes:**
 - **Copilot**: Copilot Spaces (shared context), coding agents (Claude/Codex), MCP server access, 10+ IDE platforms
@@ -95,23 +95,57 @@ How does this methodology compare to existing AI coding assistants?
 
 **What competitors now have vs. what remains unique:**
 
-| Feature | Competitors Added (2025-2026) | Still Unique to This Framework |
-|---------|------------------------------|-------------------------------|
-| Memory | Windsurf "Memories", Cursor "Skills", Claude Projects | Structured hierarchical architecture (local→global) |
-| Context | Copilot Spaces, Cursor codebase indexing | Cross-project pattern promotion |
-| Agents | Copilot coding agent, Cursor subagents, Windsurf Cascade | Heirs that learn and contribute back |
-| Skills | Cursor "Skills" (v2.4), Claude "Skills" | Skills earned through doing, not declared |
+| Feature | Competitors Added (2025-2026)                            | Still Unique to This Framework                      |
+| ------- | -------------------------------------------------------- | --------------------------------------------------- |
+| Memory  | Windsurf "Memories", Cursor "Skills", Claude Projects    | Structured hierarchical architecture (local→global) |
+| Context | Copilot Spaces, Cursor codebase indexing                 | Cross-project pattern promotion                     |
+| Agents  | Copilot coding agent, Cursor subagents, Windsurf Cascade | Heirs that learn and contribute back                |
+| Skills  | Cursor "Skills" (v2.4), Claude "Skills"                  | Skills earned through doing, not declared           |
 
 **The fundamental difference:**
 
-| Other AI Assistants | This Framework |
-|---------------------|----------------|
+| Other AI Assistants                  | This Framework                                      |
+| ------------------------------------ | --------------------------------------------------- |
 | Memory = facts about current project | Knowledge = structured, hierarchical, cross-project |
-| Skills = pre-built capabilities | Skills = earned through successful delivery |
-| Agents = do tasks autonomously | Partner = teaches while doing, you grow |
-| Session resets or basic recall | Heirs improve master, master improves future heirs |
+| Skills = pre-built capabilities      | Skills = earned through successful delivery         |
+| Agents = do tasks autonomously       | Partner = teaches while doing, you grow             |
+| Session resets or basic recall       | Heirs improve master, master improves future heirs  |
 
 Current AI coding tools have added memory and agent features since 2025. However, none implement **accumulative cross-project learning** where knowledge compounds. The Master-Heir architecture, skills-through-doing workflow, and meditation protocols remain novel contributions (see Appendix C for literature context).
+
+### Gaps and Research Opportunities
+
+Capabilities competitors have that this framework currently lacks:
+
+| Capability | Competitor Strength | Current Gap | Research Opportunity |
+|------------|---------------------|-------------|----------------------|
+| **Code completion** | Copilot/Cursor/Windsurf ⭐⭐⭐ | Relies on native Copilot (⭐) | Integrate completion with knowledge context |
+| **Autonomous agents** | Copilot/Cursor/Windsurf all have background agents | Chat-first, in-session only | "Teach mode" vs "Do mode" slider |
+| **Inline editing** | Cursor Cmd+K, Windsurf Tab actions | No inline code manipulation | Inline suggestions with learning capture |
+| **Terminal agents** | Cursor CLI, Copilot CLI, Windsurf Turbo | No autonomous terminal workflows | Terminal coaching with explanation |
+| **PR code review** | Copilot code review, Cursor BugBot | No GitHub PR integration | Review-as-teaching: explain *why* changes matter |
+| **Cloud/background** | Cursor Cloud Agents, Copilot coding agent | Runs in-session only | Async learning: agent works, captures insights for later |
+| **Image → code** | Cursor/Windsurf: drag-drop design | No visual input | Design-to-code with architectural explanation |
+| **IDE-native** | Cursor/Windsurf are purpose-built editors | Extension on VS Code | Deeper IDE integration via Language Model API |
+
+**The teaching trade-off:**
+
+These gaps are partly *intentional*. Competitors optimize for "do it for me" (max speed, min learning). This framework optimizes for "help me learn" (max growth, reasonable speed). However, some gaps could be filled while preserving the teaching mission:
+
+| Priority | Opportunity | Alignment with Teaching Mission |
+|----------|-------------|--------------------------------|
+| 🎯 High | **PR code review integration** | Review is teaching: explain why changes matter, not just what |
+| 🎯 High | **Terminal workflow coaching** | Explain commands while executing, capture patterns |
+| 🔄 Medium | **Autonomy slider** | "Teach me" (default) vs "Just do it" (when appropriate) |
+| 🔄 Medium | **Inline suggestions** | Quick edits with optional explanation expansion |
+| 📋 Lower | **Background agents** | Less aligned—doing work while user is away reduces learning |
+| 📋 Lower | **Image → code** | Nice-to-have but doesn't leverage core differentiator |
+
+**Research questions:**
+1. Can autonomous agents *also* teach? (Capture insights during background work for later review)
+2. What's the optimal autonomy level for different task types?
+3. How can PR review be structured as a learning moment, not just quality gate?
+4. Can inline editing preserve the "skills from doing" workflow?
 
 ---
 
