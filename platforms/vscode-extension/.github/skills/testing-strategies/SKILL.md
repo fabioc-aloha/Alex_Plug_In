@@ -1,4 +1,6 @@
 ---
+name: "Testing Strategies Skill"
+description: "Systematic testing for confidence without over-testing."
 applyTo: "**/*test*,**/*spec*,**/*.test.*,**/*.spec.*"
 ---
 

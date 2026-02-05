@@ -1,3 +1,8 @@
+---
+name: "Writing & Publication Skill"
+description: "Patterns for technical writing, academic publication, and content strategy."
+---
+
 # Writing & Publication Skill
 
 > Patterns for technical writing, academic publication, and content strategy.

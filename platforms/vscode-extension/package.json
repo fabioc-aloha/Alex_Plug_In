@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "4.2.4",
+  "version": "4.2.5",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -33,14 +33,16 @@
     "productivity"
   ],
   "engines": {
-    "vscode": "^1.108.0"
+    "vscode": "^1.109.0"
   },
   "categories": [
     "AI",
     "Machine Learning",
     "Education"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
@@ -288,6 +290,38 @@
         "icon": "$(brain)"
       }
     ],
+    "chatSkills": [
+      {
+        "path": "./.github/skills/anti-hallucination"
+      },
+      {
+        "path": "./.github/skills/appropriate-reliance"
+      },
+      {
+        "path": "./.github/skills/debugging-patterns"
+      },
+      {
+        "path": "./.github/skills/testing-strategies"
+      },
+      {
+        "path": "./.github/skills/code-review"
+      },
+      {
+        "path": "./.github/skills/bootstrap-learning"
+      },
+      {
+        "path": "./.github/skills/meditation"
+      },
+      {
+        "path": "./.github/skills/prompt-engineering"
+      },
+      {
+        "path": "./.github/skills/security-review"
+      },
+      {
+        "path": "./.github/skills/architecture-audit"
+      }
+    ],
     "configuration": {
       "title": "Alex Cognitive Architecture",
       "properties": {
@@ -345,6 +379,7 @@
         "name": "alex",
         "description": "Your cognitive learning partner with meta-cognitive awareness and bootstrap learning capabilities",
         "isSticky": true,
+        "sampleRequest": "What would you like to learn today?",
         "disambiguation": [
           {
             "category": "cognitive_architecture",
@@ -951,7 +986,8 @@
     "compile-tests": "tsc -p . --outDir out",
     "pretest": "npm run compile-tests && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "dream": "tsx ../../scripts/dream-cli.ts"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
@@ -967,6 +1003,8 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "sharp": "^0.34.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.1.3"
   },
   "dependencies": {

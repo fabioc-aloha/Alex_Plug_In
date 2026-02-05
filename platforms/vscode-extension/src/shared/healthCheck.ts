@@ -217,7 +217,7 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
 /**
  * Get status bar text and icon based on health
  */
-export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { active: boolean; remaining: number; isBreak: boolean } | null, streakDays?: number): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
+export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { active: boolean; remaining: number; isBreak: boolean } | null, streakDays?: number, isProtected?: boolean): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
     // Special case: Not initialized - show enticing preview
     if (health.status === HealthStatus.NotInitialized) {
         return {
@@ -250,6 +250,11 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
 
     // Build text parts
     const parts: string[] = [`$(brain) Alex ${statusEmoji}`];
+    
+    // Add protection indicator
+    if (isProtected) {
+        parts.push('🔒');
+    }
     
     // Add session if active
     if (sessionInfo?.active) {
@@ -287,6 +292,10 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
     
     if (streakDays && streakDays > 0) {
         tooltip += `\n🔥 ${streakDays} day streak!`;
+    }
+    
+    if (isProtected) {
+        tooltip += '\n\n🔒 PROTECTED: Master Alex workspace - commands blocked';
     }
     
     tooltip += '\n\nClick for quick actions';

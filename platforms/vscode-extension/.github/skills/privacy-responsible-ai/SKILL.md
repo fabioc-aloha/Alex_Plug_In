@@ -1,4 +1,6 @@
 ---
+name: "Privacy & Responsible AI Skill"
+description: "Privacy by design, data protection, and responsible AI principles."
 applyTo: "**/*privacy*,**/*consent*,**/*data*,**/*PII*,**/*GDPR*,**/*responsible*,**/*ethical*,**/*bias*,**/*fairness*"
 ---
 

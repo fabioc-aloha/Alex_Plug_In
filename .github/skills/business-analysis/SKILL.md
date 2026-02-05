@@ -1,3 +1,8 @@
+---
+name: "Business Analysis Skill"
+description: "Patterns for requirements elicitation, BRDs, process analysis, and stakeholder alignment."
+---
+
 # Business Analysis Skill
 
 > Patterns for requirements elicitation, BRDs, process analysis, and stakeholder alignment.

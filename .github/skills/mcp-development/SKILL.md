@@ -1,3 +1,8 @@
+---
+name: "MCP Development Skill"
+description: "**Domain**: AI Infrastructure"
+---
+
 # MCP Development Skill
 
 > **Domain**: AI Infrastructure

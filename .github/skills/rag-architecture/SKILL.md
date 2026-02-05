@@ -1,4 +1,6 @@
 ---
+name: "RAG Architecture Skill"
+description: "Build retrieval-augmented generation systems that ground LLMs in your data."
 applyTo: "**/*rag*,**/*retrieval*,**/*embedding*,**/*vector*,**/*knowledge*,**/*search*"
 ---
 

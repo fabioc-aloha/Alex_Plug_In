@@ -1,4 +1,6 @@
 ---
+name: "Rubber Duck Debugging Skill"
+description: "Be a thinking partner. The answer often emerges when explaining the problem."
 applyTo: "**/*debug*,**/*stuck*,**/*help*,**/*problem*,**/*issue*"
 ---
 

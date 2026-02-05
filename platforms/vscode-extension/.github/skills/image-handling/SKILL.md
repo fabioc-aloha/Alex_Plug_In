@@ -1,4 +1,6 @@
 ---
+name: "Image Handling Skill"
+description: "Right format, right size, right quality."
 applyTo: "**/*.png,**/*.jpg,**/*.webp,**/*image*,**/*convert*"
 ---
 

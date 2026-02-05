@@ -1,3 +1,8 @@
+---
+name: "Release Process Skill"
+description: "⚠️ **IMPORTANT**: PATs expire frequently and may only work for a single publish session."
+---
+
 # Release Process Skill
 
 **Classification**: Master-Only Skill | Process Automation

@@ -274,7 +274,7 @@ ${STALE_PRONE.map(s => `| ${s} | Platform/API changes frequently |`).join('\n')}
 function generateMermaidDiagram(skills: SkillInfo[]): string {
     const lines: string[] = [
         '```mermaid',
-        "%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da'}}}%%",
+        "%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff', 'lineColor': '#656d76', 'primaryTextColor': '#1f2328', 'primaryColor': '#f6f8fa', 'primaryBorderColor': '#d1d9e0'}}}%%",
         'flowchart LR'
     ];
 
@@ -286,18 +286,28 @@ function generateMermaidDiagram(skills: SkillInfo[]): string {
         categoryGroups[cat].push(skill);
     }
 
-    // Generate subgraphs
+    // Generate subgraphs with TB direction for vertical stacking
+    const categoryNames: string[] = [];
     for (const [category, catSkills] of Object.entries(categoryGroups)) {
         if (catSkills.length === 0) continue;
         const config = CATEGORIES[category] || { emoji: '📦' };
         const title = category.charAt(0).toUpperCase() + category.slice(1);
+        categoryNames.push(title);
         
         lines.push(`    subgraph ${title}["${config.emoji} ${title}"]`);
+        lines.push(`        direction TB`);
         for (const skill of catSkills) {
             const abbrev = toAbbreviation(skill.name);
             lines.push(`        ${abbrev}[${skill.name}]`);
         }
         lines.push('    end');
+    }
+
+    // Add invisible links between subgraphs to force LR layout
+    if (categoryNames.length > 1) {
+        lines.push('');
+        lines.push('    %% Invisible links for LR layout');
+        lines.push(`    ${categoryNames.join(' ~~~ ')}`);
     }
 
     // Group connections by source+arrow for multi-target syntax
@@ -352,15 +362,15 @@ function generateMermaidDiagram(skills: SkillInfo[]): string {
         }
     }
 
-    // Add styling
+    // Add styling with GitHub-compatible colors
     lines.push('');
     lines.push('    %% Styling');
-    lines.push('    classDef master fill:#fff3cd,stroke:#856404');
-    lines.push('    classDef vscode fill:#e1f0ff,stroke:#0969da');
-    lines.push('    classDef m365 fill:#e6f4ea,stroke:#1a7f37');
-    lines.push('    classDef inheritable fill:#e0f7fa,stroke:#00838f');
-    lines.push('    classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5');
-    lines.push('    classDef stale stroke-dasharray:5 5,stroke-width:2px');
+    lines.push('    classDef master fill:#fff3e0,stroke:#ef6c00');
+    lines.push('    classDef vscode fill:#e3f2fd,stroke:#1565c0');
+    lines.push('    classDef m365 fill:#e8f5e9,stroke:#2e7d32');
+    lines.push('    classDef inheritable fill:#f6f8fa,stroke:#656d76');
+    lines.push('    classDef temp fill:#f3e5f5,stroke:#7b1fa2,stroke-dasharray:5 5');
+    lines.push('    classDef stale fill:#ffebee,stroke:#c62828,stroke-dasharray:5 5,stroke-width:2px');
 
     // Apply classes
     const masterSkills = skills.filter(s => s.inheritance === 'master-only').map(s => toAbbreviation(s.name));

@@ -1,4 +1,6 @@
 ---
+name: "Gamma Presentations Skill"
+description: "Generate professional presentations, documents, and websites using the Gamma API."
 applyTo: "**/*presentation*,**/*slides*,**/*deck*,**/*gamma*,**/*pitch*"
 ---
 

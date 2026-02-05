@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.5] - 2026-02-04
+
+> **VS Code 1.109 Upgrade & Agent Consolidation** — Native multi-agent architecture, clickable action buttons, dream CLI
+
+### Added
+
+- **🤖 VS Code 1.109 Multi-Agent Architecture**
+  - Upgraded engine to ^1.109.0 for custom agents support
+  - Consolidated from 9 agents to 3 (Alex, Azure, M365)
+  - Slash commands: /meditate, /dream, /learn, /review, /tdd, /selfactualize
+  - chatSkills contribution with 10 flagship skills bundled
+  - sampleRequest for better onboarding UX
+
+- **🖱️ Clickable Action Buttons Discovery**
+  - VS Code 1.109 auto-renders emoji-prefixed suggestions as clickable buttons
+  - New `copilot-chat-buttons.instructions.md` documenting the pattern
+  - Saved as global insight for cross-project use
+
+- **🌙 Dream Protocol CLI**
+  - New `scripts/dream-cli.ts` for command-line neural maintenance
+  - Shared `synapse-core.ts` module (platform-agnostic logic)
+  - Run via `npm run dream` from extension folder
+  - Colorized terminal output with progress indicators
+
+- **🔒 Master Alex Protection**
+  - Status bar shows 🔒 indicator in protected workspaces
+  - `onStartupFinished` activation for immediate status bar
+
+### Changed
+
+- **🧹 Agent Consolidation**
+  - Removed: alex-cognitive, alex-dream, alex-learn, alex-meditate, alex-review, alex-tdd, alex-orchestrator
+  - Kept: alex.agent.md (main with commands), alex-azure.agent.md, alex-m365.agent.md
+  - Cleaner agent dropdown, same functionality via slash commands
+
+- **♻️ Dream Protocol Refactoring**
+  - Extracted core logic to `synapse-core.ts` (shared module)
+  - dream.ts now 118 lines (was 350)
+  - Same functionality, better maintainability
+
+### Fixed
+
+- **⏰ Status Bar Activation**
+  - Added `onStartupFinished` to activationEvents
+  - Status bar now shows immediately on VS Code launch
+
+---
+
 ## [4.2.4] - 2026-02-03
 
 > **Setup Environment Polish & Mermaid Skill** — Cleaner settings workflow, interactive mermaid configuration

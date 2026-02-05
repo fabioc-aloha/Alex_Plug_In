@@ -1,3 +1,8 @@
+---
+name: "Appropriate Reliance Skill (v2.0)"
+description: "Calibrated human-AI collaboration with creative latitude — trust calibrated to reliability, creativity preserved with validation."
+---
+
 # Appropriate Reliance Skill (v2.0)
 
 > Calibrated human-AI collaboration with creative latitude — trust calibrated to reliability, creativity preserved with validation.

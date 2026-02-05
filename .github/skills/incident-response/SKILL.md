@@ -1,4 +1,6 @@
 ---
+name: "Incident Response Skill"
+description: "Calm, systematic crisis handling."
 applyTo: "**/*incident*,**/*outage*,**/*alert*,**/*emergency*"
 ---
 

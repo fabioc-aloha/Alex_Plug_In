@@ -57,6 +57,47 @@
 - [ ] Test `@alex /status` in chat
 - [ ] Run `@alex /profile` to personalize (optional)
 
+### Recommended Settings (VS Code 1.109+)
+
+Alex works best with these VS Code settings enabled. Add to your `settings.json`:
+
+```jsonc
+{
+  // === Core Agent Features ===
+  "chat.agent.enabled": true,                    // Enable agent mode
+  "chat.viewSessions.enabled": true,             // Agent session history
+  "chat.useAgentsMdFile": true,                  // Use .github/AGENTS.md
+  "chat.agentSkillsLocations": [".github/skills"],  // Auto-load Alex skills
+
+  // === Extended Thinking (Opus 4.5) ===
+  "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled": true,
+  "github.copilot.chat.models.anthropic.claude-opus-4-5.thinkingBudget": 16384,
+
+  // === MCP Integration ===
+  "chat.mcp.gallery.enabled": true,              // MCP tool gallery
+  "chat.mcp.autostart": true,                    // Auto-start MCP servers
+
+  // === Background Agents (Experimental) ===
+  "chat.agentsControl.enabled": true,            // Status indicator in command center
+  "github.copilot.chat.cli.customAgents.enabled": true,  // Custom agents in CLI
+
+  // === Terminal Safety (macOS/Linux only) ===
+  // "chat.tools.terminal.sandbox.enabled": true,
+
+  // === Organization Features ===
+  "github.copilot.chat.organizationInstructions.enabled": true
+}
+```
+
+**Quick Setup:** Run `Alex: Apply Recommended Settings` from the Command Palette.
+
+**What These Enable:**
+- **Agent Mode**: Custom Alex agents (Meditate, Learn, Dream, Review) in chat dropdown
+- **Extended Thinking**: 16K token budget for deep reasoning during meditation/learning
+- **Skills Auto-Loading**: All 65 Alex skills available without manual configuration
+- **MCP Tools**: Enhanced tool access including Azure, GitHub, and custom integrations
+- **Background Agents**: Run long tasks (like Dream) without blocking your work
+
 ---
 
 ## Use Cases

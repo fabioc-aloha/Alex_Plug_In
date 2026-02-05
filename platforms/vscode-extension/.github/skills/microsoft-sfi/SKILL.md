@@ -1,4 +1,6 @@
 ---
+name: "Microsoft Secure Future Initiative (SFI) Skill"
+description: "Security-first development practices aligned with Microsoft's SFI."
 applyTo: "**/*security*,**/*auth*,**/*credential*,**/*secret*,**/*vulnerability*,**/*CVE*"
 ---
 

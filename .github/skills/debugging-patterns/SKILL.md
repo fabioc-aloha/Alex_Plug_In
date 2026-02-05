@@ -1,4 +1,6 @@
 ---
+name: "Debugging Patterns Skill"
+description: "Systematic problem-solving and error analysis."
 applyTo: "**/*debug*,**/*error*,**/*fix*,**/*issue*"
 ---
 

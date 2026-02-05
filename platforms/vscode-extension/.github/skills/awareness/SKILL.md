@@ -1,3 +1,8 @@
+---
+name: "Awareness Skill"
+description: "Proactive detection, self-correction, and epistemic vigilance"
+---
+
 # Awareness Skill
 
 > Proactive detection, self-correction, and epistemic vigilance

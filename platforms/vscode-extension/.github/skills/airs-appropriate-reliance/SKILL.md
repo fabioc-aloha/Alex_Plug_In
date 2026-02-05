@@ -1,4 +1,6 @@
 ---
+name: "AIRS & Appropriate Reliance Research"
+description: "Domain knowledge for AI adoption measurement, psychometric instrument development, and appropriate reliance research"
 applyTo: "**/*airs*,**/*reliance*,**/*adoption*,**/*utaut*,**/*psychometric*,**/*instrument*,**/*survey*,**/*scale*"
 ---
 

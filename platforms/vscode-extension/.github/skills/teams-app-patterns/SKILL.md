@@ -1,4 +1,6 @@
 ---
+name: "Teams App Patterns Skill"
+description: "Full Teams app development patterns."
 applyTo: "**/*teams*,**/*manifest*,**/*m365*"
 ---
 

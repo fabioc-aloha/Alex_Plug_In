@@ -1,4 +1,6 @@
 ---
+name: "Root Cause Analysis Skill"
+description: "Find the true source, not symptoms."
 applyTo: "**/*debug*,**/*error*,**/*bug*,**/*issue*,**/*problem*"
 ---
 

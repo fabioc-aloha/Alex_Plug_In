@@ -1,3 +1,8 @@
+---
+name: "Project Management Skill"
+description: "Patterns for PMI/PMBOK methodology, Agile practices, risk management, and stakeholder communication."
+---
+
 # Project Management Skill
 
 > Patterns for PMI/PMBOK methodology, Agile practices, risk management, and stakeholder communication.

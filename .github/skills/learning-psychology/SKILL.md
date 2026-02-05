@@ -1,4 +1,6 @@
 ---
+name: "Learning Psychology Skill"
+description: "Help humans learn through partnership, not instruction."
 applyTo: "**/*learn*,**/*teach*,**/*tutor*,**/*explain*"
 ---
 

@@ -1,3 +1,8 @@
+---
+name: "VS Code Extension Patterns Skill"
+description: "Reusable patterns for VS Code extension development."
+---
+
 # VS Code Extension Patterns Skill
 
 > Reusable patterns for VS Code extension development.

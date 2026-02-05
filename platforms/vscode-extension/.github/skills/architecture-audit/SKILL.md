@@ -1,3 +1,8 @@
+---
+name: "Architecture Audit"
+description: "Comprehensive **project** consistency review across code, documentation, diagrams, and configuration"
+---
+
 # Architecture Audit
 
 > Comprehensive **project** consistency review across code, documentation, diagrams, and configuration

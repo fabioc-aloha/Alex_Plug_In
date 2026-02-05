@@ -1,4 +1,6 @@
 ---
+name: "Post-Mortem Facilitation Skill"
+description: "Learn from failures without blame. Improve systems, not shame people."
 applyTo: "**/*incident*,**/*postmortem*,**/*retro*,**/*failure*,**/*outage*"
 ---
 

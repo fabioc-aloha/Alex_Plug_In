@@ -1,3 +1,8 @@
+---
+name: "Graphic Design Skill"
+description: "Patterns for visual design, SVG creation, layout composition, typography, and brand identity."
+---
+
 # Graphic Design Skill
 
 > Patterns for visual design, SVG creation, layout composition, typography, and brand identity.

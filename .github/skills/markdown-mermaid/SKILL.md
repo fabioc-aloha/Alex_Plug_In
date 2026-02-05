@@ -1,4 +1,6 @@
 ---
+name: "Markdown & Mermaid"
+description: "Clear documentation through visual excellence"
 applyTo: "**/*.md,**/mermaid*,**/diagram*,**/*readme*,**/*emoji*,**/*unicode*"
 ---
 
@@ -16,6 +18,46 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 - Styling markdown previews in VS Code
 - Converting unicode escapes to proper emojis
 - Enterprise documentation with visual standards
+- **Interactive diagrams in VS Code chat** (1.109+)
+
+---
+
+## VS Code 1.109+ Native Chat Rendering
+
+VS Code 1.109 introduces **native Mermaid rendering in chat** via the `renderMermaidDiagram` tool.
+
+### When to Use Native Rendering
+
+When creating diagrams **in Copilot Chat** (not markdown files), use the native tool for:
+- **Interactive exploration**: Pan, zoom, and full-screen viewing
+- **Immediate feedback**: See diagrams without switching to markdown preview
+- **Iterative refinement**: Quick edits with instant re-render
+- **Copy source**: Extract the Mermaid code for documentation
+
+### Usage Pattern
+
+```text
+User: Create a sequence diagram showing OAuth flow
+
+Alex: [uses renderMermaidDiagram tool]
+       → Interactive diagram appears in chat
+       → User can pan/zoom/fullscreen
+       → "Copy source" extracts code for docs
+```
+
+### When NOT to Use
+
+- **Documentation authoring**: Use markdown code blocks for `.md` files
+- **GitHub rendering**: Embed Mermaid in markdown for native GitHub support
+- **Presentations**: Export to image formats or use D2
+
+### Combined Workflow
+
+1. **Design in chat**: Use `renderMermaidDiagram` for rapid iteration
+2. **Finalize**: Copy the Mermaid source code
+3. **Document**: Paste into markdown file with ` ```mermaid ` code fence
+
+---
 
 ## Assets
 
@@ -508,6 +550,127 @@ Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4
 **Solution 1**: Use per-diagram `%%{init}%%` theming (see above)
 
 **Solution 2**: Apply included `markdown-light.css` via settings
+
+### Disproportionate Diagram Layouts (Too Wide/Too Tall)
+
+**Problem**: Diagrams become too wide (horizontal) or too tall (vertical), causing poor readability
+
+**Detection**: Look for diagrams where one dimension is 3x+ the other
+
+**Pattern**: Use opposing directions for outer flowchart vs. inner subgraphs:
+
+```text
+%% Pattern 1: TD outer with LR inner (vertical stack of horizontal lanes)
+flowchart TD
+    subgraph Phase1["Phase 1"]
+        direction LR
+        A --> B --> C
+    end
+    subgraph Phase2["Phase 2"]
+        direction LR
+        D --> E --> F
+    end
+
+%% Pattern 2: LR outer with TB inner (horizontal flow of vertical stacks)
+flowchart LR
+    subgraph Group1["Group 1"]
+        direction TB
+        A --> B --> C
+    end
+    subgraph Group2["Group 2"]
+        direction TB
+        D --> E --> F
+    end
+```
+
+**Key Rules**:
+
+| Outer Direction | Inner Direction | Result |
+| --------------- | --------------- | ------ |
+| TD/TB | LR | Subgraphs stack vertically, content flows horizontally |
+| LR | TB | Subgraphs flow horizontally, content stacks vertically |
+
+**Anti-Pattern 1**: Single subgraph with opposing direction has no effect (nothing to stack)
+
+```text
+%% WRONG - single subgraph, direction LR does nothing useful
+flowchart TD
+    subgraph Only["Only Subgraph"]
+        direction LR
+        A --> B --> C --> D --> E  %% Still very wide!
+    end
+
+%% RIGHT - break into multiple subgraphs
+flowchart TD
+    subgraph Phase1["Setup"]
+        direction LR
+        A --> B
+    end
+    subgraph Phase2["Execute"]
+        direction LR
+        C --> D
+    end
+```
+
+**Anti-Pattern 2**: Cross-subgraph edges defined inside subgraphs (causes layout confusion)
+
+```text
+%% WRONG - edge to next subgraph defined inside source subgraph
+flowchart TD
+    subgraph Phase1["Setup"]
+        direction LR
+        A --> B
+        B --> C  %% C is in Phase2!
+    end
+    subgraph Phase2["Execute"]
+        direction LR
+        C --> D
+    end
+
+%% RIGHT - cross-subgraph edges defined outside all subgraphs
+flowchart TD
+    subgraph Phase1["Setup"]
+        direction LR
+        A --> B
+    end
+    subgraph Phase2["Execute"]
+        direction LR
+        C --> D
+    end
+    B --> C  %% Cross-subgraph edge outside
+    subgraph Phase3["Complete"]
+        direction LR
+        E
+    end
+```
+
+**Anti-Pattern 3**: Independent subgraphs without connections default to vertical stacking
+
+```text
+%% WRONG - no connections between subgraphs, ignores LR direction
+flowchart LR
+    subgraph A["Group A"]
+        direction TB
+        A1 --> A2
+    end
+    subgraph B["Group B"]
+        direction TB
+        B1 --> B2
+    end
+    %% Result: Groups stack vertically despite LR!
+
+%% RIGHT - invisible links force horizontal layout
+flowchart LR
+    subgraph A["Group A"]
+        direction TB
+        A1 --> A2
+    end
+    subgraph B["Group B"]
+        direction TB
+        B1 --> B2
+    end
+    A ~~~ B  %% Invisible link forces LR arrangement
+```
 
 ### Subgraph Title Truncation (VS Code Only)
 

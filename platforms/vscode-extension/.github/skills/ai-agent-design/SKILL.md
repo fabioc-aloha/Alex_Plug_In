@@ -1,3 +1,8 @@
+---
+name: "AI Agent Design Skill"
+description: "**Domain**: AI/ML Architecture"
+---
+
 # AI Agent Design Skill
 
 > **Domain**: AI/ML Architecture

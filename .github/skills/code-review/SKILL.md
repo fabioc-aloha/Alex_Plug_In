@@ -1,4 +1,6 @@
 ---
+name: "Code Review Skill"
+description: "Systematic review for quality and learning."
 applyTo: "**/*review*,**/*PR*,**/*pull*,**/*merge*"
 ---
 

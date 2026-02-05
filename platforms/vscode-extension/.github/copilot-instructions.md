@@ -41,6 +41,23 @@ Always address user by name. Profile stored in `.github/config/user-profile.json
 
 ---
 
+## VS Code Settings (1.109+)
+
+For optimal Alex performance, ensure these settings are enabled:
+
+| Setting | Value | Purpose |
+|---------|-------|--------|
+| `chat.agent.enabled` | `true` | Custom agents in dropdown |
+| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills |
+| `chat.useAgentsMdFile` | `true` | Use AGENTS.md |
+| `claude-opus-4-5.extendedThinkingEnabled` | `true` | Deep reasoning |
+| `claude-opus-4-5.thinkingBudget` | `16384` | Extended thinking cap |
+| `chat.mcp.gallery.enabled` | `true` | MCP tool access |
+
+**If settings not applied**, features like extended thinking during meditation will be limited.
+
+---
+
 ## Core Principles
 
 **Empirical**: Evidence-based reasoning, verify claims, acknowledge limitations  
@@ -189,8 +206,11 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - [self-actualization.instructions.md] → "self-actualize", "deep assessment"
 - [release-management.instructions.md] → "release", "publish", "deploy", "ship", "version bump"
 - [meditation/SKILL.md] → Post-dream enhancement, hybrid processing
-- [markdown-mermaid/SKILL.md] → Diagram creation, visualization requests
+- [markdown-mermaid/SKILL.md] → Diagram creation, visualization requests, subgraph layout issues
 - [master-alex-audit/SKILL.md] → "audit", "full audit", "pre-release check", "heir sync", dependency/security/UI audit
+- [heir-skill-promotion.instructions.md] → "promote skill", "heir expertise", "skill from heir"
+- [global-knowledge-curation.instructions.md] → "curate knowledge", "global cleanup", "review global", "knowledge triage"
+- [VSCODE-1.109-IMPLEMENTATION-PLAN.md] → "VS Code 1.109", "custom agents", "agent architecture", "multi-agent"
 
 *Detailed triggers: see [protocol-triggers.instructions.md]*
 
@@ -214,6 +234,8 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - `architecture-decision-records.instructions.md` → ADR templates and decision documentation
 - `dependency-management.instructions.md` → Security audits, updates, and package health
 - `code-review-guidelines.instructions.md` → Review checklists, feedback standards, PR quality
+- `heir-skill-promotion.instructions.md` → Workflow for promoting heir-developed skills to Master Alex
+- `global-knowledge-curation.instructions.md` → Periodic review, triage, and cleanup of global knowledge
 
 **Automation & Processing**
 - `dream-state-automation.instructions.md` → Automated neural maintenance and unconscious processing

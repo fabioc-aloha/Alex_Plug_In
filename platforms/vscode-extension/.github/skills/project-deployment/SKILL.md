@@ -1,4 +1,6 @@
 ---
+name: "Project Deployment Skill"
+description: "Universal deployment patterns for any project type."
 applyTo: "**/*release*,**/*deploy*,**/*publish*,**/package.json,**/pyproject.toml,**/*.csproj,**/Cargo.toml"
 ---
 

@@ -1,3 +1,8 @@
+---
+name: "Alex Bootstrap Learning Skill"
+description: "Skill for alex bootstrap learning skill"
+---
+
 # Alex Bootstrap Learning Skill
 
 Expert in domain-agnostic knowledge acquisition through conversational learning.

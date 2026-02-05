@@ -50,6 +50,7 @@ import {
   registerSessionProvider,
   registerStreakProvider,
 } from "./shared/healthCheck";
+import { isWorkspaceProtected } from "./shared/utils";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import * as telemetry from "./shared/telemetry";
@@ -1261,6 +1262,8 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   statusBarItem.command = "alex.showStatus";
   statusBarItem.tooltip =
     "Alex Cognitive Architecture - Click for quick actions";
+  statusBarItem.text = "$(brain) Alex";  // Show immediately while async check runs
+  statusBarItem.show();
   context.subscriptions.push(statusBarItem);
 
   // Update status bar based on workspace health
@@ -1363,7 +1366,17 @@ async function updateStatusBar(
       streakDays = goalsSummary.streakDays;
     } catch { /* ignore */ }
     
-    const display = getStatusBarDisplay(health, sessionInfo, streakDays);
+    // Check protection status
+    let isProtected = false;
+    try {
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+      if (workspaceFolder) {
+        const protectionResult = await isWorkspaceProtected(workspaceFolder.uri.fsPath);
+        isProtected = protectionResult.isProtected;
+      }
+    } catch { /* ignore */ }
+    
+    const display = getStatusBarDisplay(health, sessionInfo, streakDays, isProtected);
 
     statusBarItem.text = display.text;
     statusBarItem.tooltip = display.tooltip;

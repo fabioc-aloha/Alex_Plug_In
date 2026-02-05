@@ -1,4 +1,6 @@
 ---
+name: "Prompt Engineering Skill"
+description: "Craft effective prompts that get the best results from language models."
 applyTo: "**/*prompt*,**/*llm*,**/*ai*,**/*copilot*,**/*agent*"
 ---
 

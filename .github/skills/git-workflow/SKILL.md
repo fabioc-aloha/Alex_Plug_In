@@ -1,4 +1,6 @@
 ---
+name: "Git Workflow Skill"
+description: "Consistent git practices, recovery patterns, and safe operations."
 applyTo: "**/.git/**,**/commit*,**/branch*,**/merge*"
 ---
 

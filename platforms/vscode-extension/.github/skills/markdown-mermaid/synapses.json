@@ -13,6 +13,12 @@
       "type": "requires",
       "strength": 0.8,
       "reason": "Mermaid must be in valid markdown"
+    },
+    {
+      "target": "vscode-extension-patterns",
+      "type": "integrates",
+      "strength": 0.75,
+      "reason": "Native VS Code rendering since 1.109"
     }
   ],
   "activationBoost": [
@@ -22,7 +28,12 @@
     "blockquote styling",
     "polish mermaid",
     "mermaid setup",
-    "mermaid not rendering"
+    "mermaid not rendering",
+    "subgraph stacking vertically",
+    "ignoring direction",
+    "diagram too tall",
+    "diagram too wide",
+    "invisible link"
   ],
   "triggers": [
     "mermaid",
@@ -34,6 +45,10 @@
     "graph",
     "visualization",
     "polish mermaid setup",
-    "configure mermaid"
+    "configure mermaid",
+    "subgraph layout",
+    "direction LR",
+    "direction TB",
+    "anti-pattern"
   ]
 }

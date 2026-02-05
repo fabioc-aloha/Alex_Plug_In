@@ -237,6 +237,7 @@ Both heirs can already share context via **OneDrive**:
 | **Worker Agents** (v1.6) | 🔜 Preview | Agent-to-agent within M365 |
 | **Copilot Agent API** | ❌ Doesn't exist | Would enable VS Code → M365 calls |
 | **Power Automate** | ⚠️ Limited | Needs Premium, limited Copilot actions |
+| **Copilot Memory** | 🔓 **UNLOCKED** | VS Code 1.109 - GitHub cloud sync |
 
 ### OneDrive Sync Pattern (Ready Now)
 
@@ -247,8 +248,10 @@ M365 Alex reads  ← OneDrive/Alex-Memory/sync/
 
 Useful for:
 - Sharing learnings between platforms
-- "Leave a message for my other self" workflow
-- Profile sync (same user on both platforms)
+- 🔓 "Leave a message for my other self" workflow **(UNLOCKED via Copilot Memory)**
+- 🔓 Profile sync (same user on both platforms) **(UNLOCKED via Copilot Memory)**
+
+> **See:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md §Execution Modes](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md) for full breakdown of Local/Background/Cloud modes.
 
 ---
 
@@ -321,8 +324,8 @@ Useful for:
 | 2 | ✅ Streak protection | Done | Smart nudge: "X-day streak at risk!" |
 | 3 | ✅ Health warnings | Done | Smart nudge: "X broken synapses need repair" |
 | 4 | ✅ Sync reminders | Done | Smart nudge: "Local changes not synced" |
-| 5 | Insight opportunities | Medium | "You solved X - want to save as insight?" |
-| 6 | Meditation prompt | Low | After extended coding session |
+| 5 | 🔓 Insight opportunities | **UNLOCKED** | "You solved X - want to save as insight?" *(Background+Cloud modes)* |
+| 6 | 🔓 Meditation prompt | **UNLOCKED** | After extended coding session *(Background mode)* |
 
 ### Quick Actions Improvements
 
@@ -344,6 +347,56 @@ Useful for:
 
 ---
 
+## � VS Code 1.109 Opportunities (2026-02-04)
+
+> **References:**
+> - [VSCODE-1.109-OPPORTUNITIES.md](alex_docs/VSCODE-1.109-OPPORTUNITIES.md) — Initial analysis
+> - [VSCODE-1.109-HEIR-INSIGHTS.md](alex_docs/VSCODE-1.109-HEIR-INSIGHTS.md) — Consolidated heir insights
+
+VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 65 skills already use the compatible format!
+
+### High-Priority Features
+
+| # | Feature | Impact | Status | Description |
+|:-:|---------|:------:|:------:|-------------|
+| 1 | Agent Skills (GA) | HIGH | 🔬 Investigate | `chatSkills` contribution point for native skill registration |
+| 2 | Custom Agents (`.agent.md`) | HIGH | 🆕 Plan | Create Alex personas: Meditate, Learn, Dream, Review |
+| 3 | Anthropic Improvements | HIGH | ⏳ Document | Extended thinking, interleaved reasoning, tool search |
+| 4 | Subagent Orchestration | HIGH | 🔬 Research | Multi-agent workflows with isolated context windows |
+| 5 | Chat Prompt Files API | MEDIUM | 🔜 Monitor | Proposed API for dynamic skills/prompts |
+| 6 | Mermaid Native Rendering | MEDIUM | ⏳ Update | `renderMermaidDiagram` tool complements our skill |
+
+### New Recommended Settings
+
+```json
+{
+  "github.copilot.chat.anthropic.thinking.budgetTokens": 16000,
+  "github.copilot.chat.anthropic.toolSearchTool.enabled": true,
+  "github.copilot.chat.anthropic.contextEditing.enabled": true,
+  "chat.askQuestions.enabled": true,
+  "github.copilot.chat.copilotMemory.enabled": true,
+  "chat.useAgentSkills": true
+}
+```
+
+### Implementation Tasks
+
+| Version | Task | Owner | Effort |
+|---------|------|:-----:|:------:|
+| v4.2.5 | Update engine to ^1.109.0 | Heir | 30m |
+| v4.2.5 | Document recommended settings | Master | 1h |
+| v4.2.5 | Update markdown-mermaid skill | Master | 1h |
+| v4.3.0 | Audit 65 skills for Agent Skills compatibility | Master | 4h |
+| v4.3.0 | Create 4 Alex custom agents | Master + Heir | 4h |
+| v4.3.0 | Investigate `chatSkills` contribution | Heir | 4h |
+| v4.3.0+ | Agent orchestration prototype | Master | 8h |
+| Future | Adopt Chat Prompt Files API | Heir | TBD |
+
+> **Full Implementation Plan:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md)
+> Includes 8 detailed use cases: Alex Meditation Agent, Bootstrap Learning with Subagents, TDD Workflow, Code Review with Epistemic Humility, Background Dream Processing, and more.
+
+---
+
 ## 📊 Timeline Summary
 
 | Version | Focus | Status | Released |
@@ -355,8 +408,11 @@ Useful for:
 | 4.0.x | Trust | ✅ Complete | 2026-01-31 |
 | 4.1.0 | Skill Expansion | ✅ Complete | 2026-02-01 |
 | **4.2.x** | **UX Polish & Cross-Platform** | ✅ **Complete** | **2026-02-02** |
+| 4.2.5 | VS Code 1.109 Foundation | 📋 Planned | Feb W1 |
+| 4.3.0 | Custom Agents & Skills Audit | 📋 Planned | Feb W2-3 |
+| 4.4.0 | Orchestration & Extension Integration | 📋 Planned | Mar |
 
-**v3.6.0 → v4.2.3: ~5 days** (vs months planned) 🚀
+**v3.6.0 → v4.2.4: ~6 days** (vs months planned) 🚀
 
 See [Completed Versions Archive](#-completed-versions-archive) for historical details.
 

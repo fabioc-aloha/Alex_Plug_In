@@ -1,3 +1,8 @@
+---
+name: "Academic Research Skill"
+description: "Patterns for thesis writing, dissertations, research papers, literature reviews, and scholarly work."
+---
+
 # Academic Research Skill
 
 > Patterns for thesis writing, dissertations, research papers, literature reviews, and scholarly work.

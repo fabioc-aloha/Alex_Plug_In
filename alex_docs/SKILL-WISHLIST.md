@@ -208,6 +208,8 @@ When starting a new session or project, Alex can:
 
 ## Support & Operations Skills
 
+> **VS Code 1.109 Unlock:** Background mode enables non-blocking monitoring and runbook generation from observed patterns.
+
 ### Wishlist 🎯
 
 | Skill | Priority | Value | Notes |
@@ -215,9 +217,9 @@ When starting a new session or project, Alex can:
 | Issue Triage | High | Categorize, prioritize, route | Severity, impact, reproducibility |
 | Troubleshooting Trees | Medium | Systematic problem isolation | Decision trees for common issues |
 | FAQ Generation | Low | Turn questions into docs | Pattern detection, documentation |
-| Runbook Creation | Medium | Operational procedures | Step-by-step for common ops tasks |
-| On-call Handoff | Low | Context transfer | What happened, what's pending |
-| SRE Principles | Medium | Reliability engineering | SLIs, SLOs, error budgets, toil reduction |
+| Runbook Creation | Medium 🔓 | Operational procedures | Step-by-step for common ops — **Background mode generates from patterns** |
+| On-call Handoff | Low 🔓 | Context transfer | What happened, what's pending — **Cloud mode persists handoff** |
+| SRE Principles | Medium 🔓 | Reliability engineering | SLIs, SLOs, error budgets — **Background mode health monitoring** |
 | Chaos Engineering | Low | Controlled failure injection | Game days, resilience testing |
 
 ---
@@ -306,18 +308,20 @@ When starting a new session or project, Alex can:
 
 ## Personal Effectiveness Skills
 
+> **VS Code 1.109 Unlock:** Several of these skills are now feasible with Background and Cloud execution modes. See [VSCODE-1.109-IMPLEMENTATION-PLAN.md §Execution Modes](VSCODE-1.109-IMPLEMENTATION-PLAN.md).
+
 ### Wishlist 🎯
 
 | Skill | Priority | Value | Notes |
 |-------|----------|-------|-------|
-| Focus Recovery | High | Help user get back on track | Summarize where we were, next step |
+| Focus Recovery | High 🔓 | Help user get back on track | Summarize where we were, next step — **Cloud mode enables cross-session** |
 | Decision Fatigue Recognition | High | Notice when choices are overwhelming | Suggest defaults, reduce options |
 | Time Awareness | Medium | Gentle reminders about time spent | "We've been at this an hour, want to take stock?" |
 | Scope Creep Alerting | Medium | Notice when goals keep expanding | "Original goal was X, we've added Y and Z..." |
-| Break Suggestions | Medium | Recognize when breaks would help | Long sessions, frustration, stuck loops |
+| Break Suggestions | Medium 🔓 | Recognize when breaks would help | Long sessions, frustration — **Background mode non-blocking** |
 | Momentum Maintenance | Medium | Keep progress visible and motivating | "We've completed 3 of 5 tasks" |
-| Context Switching Support | Low | Help transition between tasks | Summarize, bookmark, clear mental state |
-| End-of-Day Wrap-up | Low | Help close out work sessions | What's done, what's pending, tomorrow's priorities |
+| Context Switching Support | Medium 🔓 | Help transition between tasks | Summarize, bookmark — **Cloud mode stores bookmarks** |
+| End-of-Day Wrap-up | Medium 🔓 | Help close out work sessions | What's done, what's pending — **Background + Cloud modes enable** |
 
 ---
 

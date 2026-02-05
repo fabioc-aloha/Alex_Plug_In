@@ -1,4 +1,6 @@
 ---
+name: "Socratic Questioning Skill"
+description: "Help users discover answers, don't just deliver them."
 applyTo: "**/*teach*,**/*learn*,**/*explain*,**/*understand*,**/*why*"
 ---
 

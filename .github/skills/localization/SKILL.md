@@ -1,3 +1,8 @@
+---
+name: "Localization & Internationalization (i18n/l10n)"
+description: "**Domain**: Software localization, internationalization, multilingual application development"
+---
+
 # Localization & Internationalization (i18n/l10n)
 
 > **Domain**: Software localization, internationalization, multilingual application development

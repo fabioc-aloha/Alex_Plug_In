@@ -1,4 +1,6 @@
 ---
+name: "Release Preflight Skill"
+description: "Pre-checks, version consistency, and deployment discipline."
 applyTo: "**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/CHANGELOG*"
 ---
 

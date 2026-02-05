@@ -1,4 +1,6 @@
 ---
+name: "Anti-Hallucination Skill"
+description: "Recognize and prevent confabulation — when you don't know, say so."
 applyTo: "**/*"
 ---
 

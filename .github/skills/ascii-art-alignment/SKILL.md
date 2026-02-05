@@ -1,3 +1,8 @@
+---
+name: "ASCII Art Alignment Skill"
+description: "Create perfectly aligned ASCII diagrams using the hybrid character strategy."
+---
+
 # ASCII Art Alignment Skill
 
 > Create perfectly aligned ASCII diagrams using the hybrid character strategy.

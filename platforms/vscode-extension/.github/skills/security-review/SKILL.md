@@ -1,4 +1,6 @@
 ---
+name: "Security Review Skill"
+description: "Defend before attackers find the gaps."
 applyTo: "**/*security*,**/*auth*,**/*password*,**/*token*,**/*credential*,**/*vulnerability*"
 ---
 

@@ -1,4 +1,6 @@
 ---
+name: "API Design Skill"
+description: "Design APIs that developers love to use."
 applyTo: "**/*api*,**/*rest*,**/*endpoint*,**/*route*,**/*schema*"
 ---
 

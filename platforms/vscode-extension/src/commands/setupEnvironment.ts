@@ -28,6 +28,8 @@ const ESSENTIAL_SETTINGS: Record<string, unknown> = {
   "chat.useNestedAgentsMdFiles": true,
   // Auto-include copilot-instructions.md - verified in docs
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  // Skills auto-loading location - enables 65 Alex skills in chat
+  "chat.agentSkillsLocations": [".github/skills"],
 };
 
 /**
@@ -45,6 +47,23 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.localeOverride": "en",
   // Command center in title bar - quick access to Copilot features
   "chat.commandCenter.enabled": true,
+  // Agent mode - enables custom agents in chat dropdown
+  "chat.agent.enabled": true,
+  // Agent session history - view and manage agent sessions
+  "chat.viewSessions.enabled": true,
+  // MCP gallery - enables Model Context Protocol tools
+  "chat.mcp.gallery.enabled": true,
+};
+
+/**
+ * Extended thinking settings for Anthropic models (Opus 4.5)
+ * These enable deeper reasoning for complex tasks like meditation/learning
+ */
+const EXTENDED_THINKING_SETTINGS: Record<string, unknown> = {
+  // Enable extended thinking for Opus 4.5 - deep reasoning mode
+  "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled": true,
+  // Thinking budget in tokens (max 16384) - higher = deeper reasoning
+  "github.copilot.chat.models.anthropic.claude-opus-4-5.thinkingBudget": 16384,
 };
 
 // Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
@@ -70,6 +89,12 @@ const SETTING_CATEGORIES: SettingCategory[] = [
     description: "Improves the Alex experience",
     settings: RECOMMENDED_SETTINGS,
     icon: "🟡",
+  },
+  {
+    name: "Extended Thinking",
+    description: "Deep reasoning for Opus 4.5 (meditation, learning)",
+    settings: EXTENDED_THINKING_SETTINGS,
+    icon: "🧠",
   },
 ];
 
