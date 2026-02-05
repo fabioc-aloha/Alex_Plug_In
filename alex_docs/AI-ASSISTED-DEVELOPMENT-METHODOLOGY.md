@@ -29,6 +29,45 @@ This work addresses a gap in the literature: while AI coding productivity is wel
 
 ---
 
+## Foundational Insight: From Dialog Engineering to Cognitive Architecture
+
+This framework evolved from a single insight articulated in ["Dialog Engineering: AI as Your Research Assistant"](https://medium.com/@fabioc/dialog-engineering-ai-as-your-research-assistant-616a625e9853) (Correa, October 2024):
+
+> **Dialog Engineering transforms AI from a static tool into a dynamic conversational partner through iterative, conversational interactions rather than one-shot prompts.** Much like an editor refining a manuscript with a writer, or a researcher guiding an assistant through stages of investigation, this iterative process allows the user to shape the AI's output over time.
+
+The original article proposed:
+- **Iterative refinement** over single-shot prompts
+- **AI as research assistant**, not replacement
+- **Feedback loops** where each interaction builds on the previous
+- **Human oversight** as essential, not optional
+- **Structured workflow**: Set scenario → Gather info → Structure outline → Generate iteratively → Refine
+
+**What evolved:** The Alex cognitive architecture extended these principles from *within-session* iteration to *cross-session* and *cross-project* knowledge accumulation. The Dialog Engineering article described how to work effectively with AI in one conversation; this methodology describes how to make those conversations *compound* over months and years.
+
+```mermaid
+flowchart LR
+    subgraph DE["Dialog Engineering (Oct 2024)"]
+        D1["💬 Iterative prompts"] --> D2["🔄 Feedback loops"] --> D3["🎯 Refined output"]
+    end
+
+    subgraph Alex["Alex Cognitive Architecture (2025-2026)"]
+        A1["🧠 Persistent memory"] --> A2["📈 Cross-project learning"] --> A3["👥 Master-Heir inheritance"] --> A4["⭐ Skills from doing"]
+    end
+
+    DE -->|"💡 Evolution"| Alex
+
+    style DE fill:#e3f2fd,stroke:#1565c0
+    style Alex fill:#e8f5e9,stroke:#2e7d32
+```
+
+**Key insight from Dialog Engineering that shaped everything:**
+
+> “By engaging in Dialog Engineering, users can break down tasks into smaller, more manageable pieces, refining each section until the final result is coherent and comprehensive.”
+
+This principle—breaking complex work into iterative chunks with continuous refinement—became the foundation for the meditation protocols, skill development workflow, and synapse connections that define the Alex architecture.
+
+---
+
 ## Document Structure
 
 This methodology is organized in two parts:
@@ -1114,6 +1153,8 @@ Buçinca, Z., Malte, B., & Gajos, K. Z. (2021). To trust or to think: Cognitive 
 
 Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., Ray, A., Puri, R., Krueger, G., Petrov, M., Khlaaf, H., Sastry, G., Mishkin, P., Chan, B., Gray, S., … Zaremba, W. (2021). Evaluating large language models trained on code. *arXiv preprint arXiv:2107.03374*. https://arxiv.org/abs/2107.03374
 
+Correa, F. (2024, October 12). Dialog engineering: AI as your research assistant. *Medium*. https://medium.com/@fabioc/dialog-engineering-ai-as-your-research-assistant-616a625e9853
+
 Dell'Acqua, F., McFowland, E., Mollick, E., Lifshitz-Assaf, H., Kellogg, K., Rajendran, S., Krayer, L., Candelon, F., & Lakhani, K. R. (2023). Navigating the jagged technological frontier: Field experimental evidence of the effects of AI on knowledge worker productivity and quality. *Harvard Business School Working Paper 24-013*. https://www.hbs.edu/faculty/Pages/item.aspx?num=64700
 
 Forsgren, N., Humble, J., & Kim, G. (2018). *Accelerate: The science of Lean software and DevOps: Building and scaling high performing technology organizations*. IT Revolution Press.
@@ -1155,12 +1196,14 @@ This methodology emerged from building 48+ projects across diverse domains over 
 - **Depth**: Some projects (Alex, AIRS, Fishbowl) sustained over 12+ months
 - **Cross-domain transfer**: Patterns from one domain inform others
 
+> **Note on forked repositories:** Some repos in my GitHub are forks used for learning and inspiration, not original work. These include: `gastown`, `BASIC-M6502-TS`, `omi`, `mcpservers`, `agent-zero`, `Python`. The statistics below reflect **42 original projects**.
+
 ### Topic Distribution
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
 mindmap
-  root((48 Projects<br/>Built with Alex))
+  root((42 Original<br/>Projects)))
     AI & Cognitive Architecture
       Alex_Plug_In
       Catalyst-BABY
@@ -1185,18 +1228,21 @@ mindmap
     MCP & AI Integrations
       youtube-mcp-server
       spotify-mcpb
-      mcpservers
-      omi
+      youtube-mcp-vscode
     Productivity Tools
       ChessCoach
       ProjectPlans
-      gastown
       Qualtrics
     Creative & Personal
       AlexCook
       Alex_Sandbox
-      maya
       amazfit-watchfaces
+
+    Inspiration/Forks
+      gastown
+      omi
+      mcpservers
+      agent-zero
 ```
 
 ### Key Projects
@@ -1258,3 +1304,18 @@ The portfolio shows three project lifecycle patterns:
 ---
 
 *This portfolio represents work completed using the Alex cognitive architecture between August 2024 and February 2026.*
+
+### Inspirations and Forks
+
+These repositories are forks of other projects, used for learning, experimentation, or contribution:
+
+| Repo | Original Author | Why Forked |
+|------|----------------|------------|
+| [gastown](https://github.com/fabioc-aloha/gastown) | — | Multi-agent workspace patterns |
+| [BASIC-M6502-TS](https://github.com/fabioc-aloha/BASIC-M6502-TS) | — | Retro computing interest |
+| [omi](https://github.com/fabioc-aloha/omi) | — | AI wearables research |
+| [mcpservers](https://github.com/fabioc-aloha/mcpservers) | — | MCP protocol patterns |
+| [agent-zero](https://github.com/fabioc-aloha/agent-zero) | — | Autonomous agent patterns |
+| [Python](https://github.com/fabioc-aloha/Python) | TheAlgorithms | Algorithm reference |
+
+**Contribution to this framework:** Even forked repos contribute to learning. Patterns observed in `mcpservers` and `agent-zero` influenced Alex's MCP integration and autonomous tool design.
