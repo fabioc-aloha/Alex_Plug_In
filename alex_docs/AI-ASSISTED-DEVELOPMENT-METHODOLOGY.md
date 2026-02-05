@@ -401,4 +401,87 @@ The 62 heir projects, 148 insights, and 4-6× acceleration aren't the goal—the
 
 ---
 
+## Appendix A: Project Inventory
+
+All 62 projects with Alex cognitive architecture. Fill in Success and Status to calibrate what's working.
+
+**Success Scale:** ⭐ (abandoned) → ⭐⭐⭐⭐⭐ (major success)  
+**Status:** 🔴 Dead | 🟡 Paused | 🟢 Active | ✅ Complete
+
+| Project | Skills | Success | Status |
+|---------|--------|---------|--------|
+| AIRS | 0 | | |
+| AIRS Enterprise | 54 | | |
+| AIRS_Data_Analysis | 0 | | |
+| Alex_Marketing | 0 | | |
+| Alex_Plug_In | 66 | | |
+| Alex_Sandbox | 65 | | |
+| Alex-Cognitive-Architecture-Paper | 0 | | |
+| AlexCook | 63 | | |
+| AlexQ_Template | 0 | | |
+| AlexSFI | 0 | | |
+| AlexTest | 0 | | |
+| Altman-Z-Score | 0 | | |
+| Altman-Z-Score-1 | 0 | | |
+| Amazfit | 0 | | |
+| articles | 0 | | |
+| Azure-SQL | 0 | | |
+| BASIC-M6502 | 0 | | |
+| BRD | 0 | | |
+| Catalyst | 0 | | |
+| Catalyst-BABY | 0 | | |
+| Catalyst-DOG-TRAINER | 0 | | |
+| Catalyst-NEWBORN | 0 | | |
+| ChatGPT | 0 | | |
+| ChessCoach | 0 | | |
+| CopilotEnhancement | 0 | | |
+| CorreaX | 54 | | |
+| cpesynapse | 0 | | |
+| Creative | 0 | | |
+| DATA-ANALYSIS | 0 | | |
+| DBA | 0 | | |
+| Eureka | 0 | | |
+| executive-coach | 0 | | |
+| fabioc-aloha | 0 | | |
+| fabioc-aloha_OLD | 0 | | |
+| FabricManager | 0 | | |
+| Fishbowl | 57 | | |
+| Fishbowl_POC | 0 | | |
+| FishbowlGovernance | 63 | | |
+| GCXMCP | 0 | | |
+| Headstart | 0 | | |
+| Ideas | 0 | | |
+| Investing | 0 | | |
+| KalabashDashboard | 0 | | |
+| Lab Subscription | 55 | | |
+| markdown-to-pdf | 0 | | |
+| maya | 0 | | |
+| MCEM-Interview-Processing | 0 | | |
+| mdword | 0 | | |
+| Papers | 0 | | |
+| ProjectPlans | 61 | | |
+| Qualtrics | 0 | | |
+| Self-Learning-Vibe-Coding | 0 | | |
+| Spotify | 0 | | |
+| spotify-mcpb | 0 | | |
+| Spotify-Skill | 0 | | |
+| Taylor | 0 | | |
+| TestVibe | 0 | | |
+| VT_AIPOWERBI | 0 | | |
+| WallpaperScraper | 0 | | |
+| XDL | 0 | | |
+| youtube | 0 | | |
+| youtube-mcp-vscode | 0 | | |
+
+### Analysis Notes
+
+*After completing the table, patterns to analyze:*
+
+- Do projects with more skills (>50) correlate with higher success?
+- Which 0-skill projects should have earned skills but didn't?
+- Which "successful" projects contributed patterns back to Master?
+- What differentiates 🟢 Active from 🔴 Dead projects?
+
+---
+
 *This document is itself a product of the methodology it describes: written after 18 months of practice, capturing patterns that emerged through doing, structured for AI consumption while remaining human-readable.*
