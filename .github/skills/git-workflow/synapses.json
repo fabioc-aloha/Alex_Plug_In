@@ -8,7 +8,7 @@
       "strength": 0.9
     },
     {
-      "target": "release-management.instructions.md",
+      "target": ".github/instructions/release-management.instructions.md",
       "type": "supports",
       "strength": 0.85
     }

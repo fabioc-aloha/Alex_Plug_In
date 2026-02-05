@@ -4,7 +4,7 @@
   "inheritance": "master-only",
   "connections": [
     {
-      "target": "release-management.instructions.md",
+      "target": ".github/instructions/release-management.instructions.md",
       "type": "Implements",
       "strength": "Critical",
       "context": "Procedural foundation for release workflows"

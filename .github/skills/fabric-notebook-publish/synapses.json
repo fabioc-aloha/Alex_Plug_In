@@ -5,13 +5,6 @@
   "lastUpdated": "2026-02-05",
   "connections": [
     {
-      "target": "fabric-notebook-push.instructions.md",
-      "strength": "high",
-      "relationship": "procedural-memory",
-      "direction": "bidirectional",
-      "context": "Core procedures for notebook publishing"
-    },
-    {
       "target": ".github/skills/git-workflow/SKILL.md",
       "strength": "high",
       "relationship": "enables",
@@ -33,18 +26,11 @@
       "context": "REST API token handling and verification"
     },
     {
-      "target": ".github/skills/fishbowl-governance/SKILL.md",
-      "strength": "high",
-      "relationship": "implements",
-      "direction": "forward",
-      "context": "Implements notebook deployment for Fishbowl project"
-    },
-    {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "strength": "medium",
       "relationship": "uses",
       "direction": "forward",
-      "context": "Fishbowl pastel color palette for architecture diagrams"
+      "context": "Diagrams in notebook documentation"
     }
   ],
   "activationPatterns": [

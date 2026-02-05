@@ -15,7 +15,7 @@
       "reason": "Synthesis is elaborative encoding"
     },
     {
-      "target": "bootstrap-learning.instructions.md",
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "extends",
       "strength": 0.8,
       "reason": "Goes beyond learning to integration"

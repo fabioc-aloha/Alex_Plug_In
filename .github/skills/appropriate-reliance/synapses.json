@@ -4,7 +4,7 @@
   "description": "Calibrated human-AI collaboration patterns",
   "connections": [
     {
-      "target": "bootstrap-learning.instructions.md",
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "enables",
       "strength": 0.9,
       "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
@@ -22,7 +22,7 @@
       "context": "Grounded in learning science and trust calibration research"
     },
     {
-      "target": "alex-identity-integration.instructions.md",
+      "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "implements",
       "strength": 0.9,
       "context": "Proactive collaboration is core to Alex personality"
