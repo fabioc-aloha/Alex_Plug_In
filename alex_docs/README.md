@@ -11,7 +11,8 @@
 | Document | Description |
 |----------|-------------|
 | **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
-| [Use Cases Guide](./USE-CASES.md) | 🎨 **NEW** - Deep dive into every domain Alex supports |
+| **[AI-Assisted Development Methodology](./AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md)** | 📊 **NEW** - The Fabio+Alex model: fundamentals that differentiate AI-assisted work |
+| [Use Cases Guide](./USE-CASES.md) | 🎨 Deep dive into every domain Alex supports |
 | [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md) | Folder structures for development, writing, research, management |
 | [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md) | Complete system architecture with diagrams |
 | [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md) | 🧬 Evolution model and protection system |
