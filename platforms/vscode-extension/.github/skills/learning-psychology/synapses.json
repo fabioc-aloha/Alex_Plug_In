@@ -3,7 +3,7 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": "bootstrap-learning.instructions.md",
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "enhances",
       "strength": 0.95
     },
@@ -13,7 +13,7 @@
       "strength": 0.85
     },
     {
-      "target": "alex-identity-integration.instructions.md",
+      "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "embodies",
       "strength": 0.8
     }

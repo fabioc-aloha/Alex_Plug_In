@@ -15,7 +15,7 @@
       "reason": "Managing load builds trust"
     },
     {
-      "target": "bootstrap-learning.instructions.md",
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "implements",
       "strength": 0.9,
       "reason": "Scaffolding is bootstrap learning"

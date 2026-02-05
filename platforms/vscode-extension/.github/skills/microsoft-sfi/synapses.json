@@ -22,13 +22,13 @@
       "reason": "Security incidents are incidents"
     },
     {
-      "target": "dependency-management.instructions.md",
+      "target": ".github/instructions/dependency-management.instructions.md",
       "type": "implements",
       "strength": 0.9,
       "reason": "Dependency security practices"
     },
     {
-      "target": ".github/skills/architecture/SKILL.md",
+      "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "informs",
       "strength": 0.75,
       "reason": "SFI six pillars guide architecture decisions"

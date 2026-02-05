@@ -4,7 +4,7 @@
   "description": "Meta-skill for maintaining and evolving Alex's cognitive architecture",
   "connections": [
     {
-      "target": "bootstrap-learning.instructions.md",
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "implements",
       "strength": 0.9,
       "context": "Operationalizes the extract-and-document phase of bootstrap learning"
@@ -16,7 +16,7 @@
       "context": "Primary documentation target for skill-related learnings"
     },
     {
-      "target": "unified-meditation-protocols.prompt.md",
+      "target": ".github/prompts/unified-meditation-protocols.prompt.md",
       "type": "feeds",
       "strength": 0.7,
       "context": "Documented patterns become consolidation fodder during meditation"

@@ -3,7 +3,7 @@
   "inheritance": "heir:vscode",
   "connections": [
     {
-      "target": "release-management.instructions.md",
+      "target": ".github/instructions/release-management.instructions.md",
       "type": "enables",
       "strength": 0.85,
       "context": "Publishing workflow"

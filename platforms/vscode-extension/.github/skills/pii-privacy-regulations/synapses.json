@@ -35,7 +35,7 @@
       "reason": "Privacy testing and PII detection in test data"
     },
     {
-      "target": ".github/skills/architecture/SKILL.md",
+      "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "informs",
       "strength": 0.75,
       "reason": "Privacy by design architectural patterns"
