@@ -70,31 +70,48 @@ Distilled from extensive practice:
 4. **Pivot scope when blocked by externals**
 5. **Continuous small > sporadic large**
 
-### Competitive Landscape Comparison
+### Competitive Landscape Comparison (Updated February 2026)
 
 How does this methodology compare to existing AI coding assistants?
 
 | Capability | Copilot | Cursor | Windsurf | ChatGPT | Claude | **This Framework** |
 |------------|:-------:|:------:|:--------:|:-------:|:------:|:------------------:|
-| Code completion | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
-| Chat assistance | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| **Persistent memory** | ❌ | ❌ | ❌ | ⭐ | ⭐ | ⭐⭐⭐ |
-| **Structured knowledge** | ❌ | ❌ | ❌ | ❌ | ⭐ | ⭐⭐⭐ |
+| Code completion | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐ |
+| Chat assistance | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| Agentic coding | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐ |
+| **Persistent memory** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ |
+| **Structured knowledge** | ⭐ | ⭐ | ⭐ | ❌ | ⭐⭐ | ⭐⭐⭐ |
 | **Learning/consolidation** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
 | **Cross-project transfer** | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
-| Multi-platform | ⭐⭐ | ❌ | ❌ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| Multi-platform | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| MCP/tool integration | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐ |
 | User data ownership | ❌ | ❌ | ❌ | ❌ | ❌ | ⭐⭐⭐ |
+
+**2026 Feature Notes:**
+- **Copilot**: Copilot Spaces (shared context), coding agents (Claude/Codex), MCP server access, 10+ IDE platforms
+- **Cursor**: Subagents, Skills, multi-surface (Slack, GitHub PR, terminal), GPT-5.2/Opus 4.5/Gemini 3 Pro
+- **Windsurf**: "Memories" feature, MCP support, JetBrains plugin, "Continue My Work" action tracking
+- **Claude**: Projects, Skills, Google Workspace integration, Claude Code, Excel/Slack integrations
+
+**What competitors now have vs. what remains unique:**
+
+| Feature | Competitors Added (2025-2026) | Still Unique to This Framework |
+|---------|------------------------------|-------------------------------|
+| Memory | Windsurf "Memories", Cursor "Skills", Claude Projects | Structured hierarchical architecture (local→global) |
+| Context | Copilot Spaces, Cursor codebase indexing | Cross-project pattern promotion |
+| Agents | Copilot coding agent, Cursor subagents, Windsurf Cascade | Heirs that learn and contribute back |
+| Skills | Cursor "Skills" (v2.4), Claude "Skills" | Skills earned through doing, not declared |
 
 **The fundamental difference:**
 
 | Other AI Assistants | This Framework |
 |---------------------|----------------|
-| "Let me do that for you" | "Let me help you learn that" |
-| Session-based amnesia | Persistent growth |
-| You get outputs | You get capabilities |
-| Replaces your skills | Augments your skills |
+| Memory = facts about current project | Knowledge = structured, hierarchical, cross-project |
+| Skills = pre-built capabilities | Skills = earned through successful delivery |
+| Agents = do tasks autonomously | Partner = teaches while doing, you grow |
+| Session resets or basic recall | Heirs improve master, master improves future heirs |
 
-Current AI coding tools excel at making developers faster *today*. This framework addresses a different goal: making developers **smarter over time** through accumulative learning. The Master-Heir architecture, skills-through-doing workflow, and meditation protocols are novel contributions not found in competing approaches (see Appendix C for detailed literature context).
+Current AI coding tools have added memory and agent features since 2025. However, none implement **accumulative cross-project learning** where knowledge compounds. The Master-Heir architecture, skills-through-doing workflow, and meditation protocols remain novel contributions (see Appendix C for literature context).
 
 ---
 
