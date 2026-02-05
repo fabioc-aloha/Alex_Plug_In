@@ -2,8 +2,17 @@
 
 > **Created:** 2026-02-04
 > **Target Versions:** v4.2.5 to v4.4.0
-> **Status:** Draft
+> **Status:** Phase 1 Complete (v4.2.5 published)
 > **Owner:** Master Alex + VS Code Heir
+
+## ⚠️ Architecture Decision: Consolidated Agents
+
+**Original Plan:** 4 separate agents (meditate, learn, dream, review)  
+**Actual Implementation:** 1 consolidated Alex agent with 6 slash commands + 2 handoff agents
+
+**Why:** VS Code 1.109 registers `.prompt.md` files as slash commands automatically. This gives better UX than switching agents — users stay in one Alex context with `/meditate`, `/dream`, `/learn`, `/review`, `/tdd`, `/selfactualize` commands available.
+
+**Result:** Tasks 6-9, 18-21 replaced by consolidated approach. Simpler, better UX.
 
 ---
 
@@ -18,10 +27,10 @@
 | 3 | Update copilot-instructions.md settings section | 1 | Master | 1h | ✅ |
 | 4 | Audit all SKILL.md files for required frontmatter | 2 | Master | 4h | ✅ |
 | 5 | Create skill validation script | 2 | Heir | 2h | ✅ |
-| 6 | Design 4 core agents (meditate, learn, dream, review) | 3 | Master | 4h | ⬜ |
-| 7 | Create `.github/agents/` folder structure | 3 | Master | 1h | ⬜ |
-| 8 | Implement alex-meditate.agent.md | 3 | Master | 2h | ⬜ |
-| 9 | Implement alex-learn.agent.md | 3 | Master | 2h | ⬜ |
+| 6 | ~~Design 4 core agents~~ → Consolidated agent approach | 1 | Master | 2h | ✅ |
+| 7 | Create `.github/agents/` with 3 agents (Alex, Azure, M365) | 1 | Master | 1h | ✅ |
+| 8 | ~~alex-meditate.agent.md~~ → 6 slash command .prompt.md files | 1 | Master | 1h | ✅ |
+| 9 | ~~alex-learn.agent.md~~ → Agent handoffs to Azure/M365 | 1 | Master | 1h | ✅ |
 | 10 | Research community orchestration patterns | 4 | Master | 4h | ⬜ |
 | 11 | Design Alex orchestrator architecture | 4 | Master | 4h | ⬜ |
 | 12 | Implement alex-orchestrator.agent.md | 4 | Master | 4h | ⬜ |
@@ -35,10 +44,10 @@
 | 15 | Test extended thinking with meditation workflows | 1 | Master | 2h | ✅ |
 | 16 | Fix any non-compliant skills | 2 | Master | 2h | ✅ |
 | 17 | Test skills with `chat.agentSkillsLocations` | 2 | Heir | 2h | ⬜ |
-| 18 | Implement alex-dream.agent.md | 3 | Master | 2h | ⬜ |
-| 19 | Implement alex-review.agent.md | 3 | Master | 2h | ⬜ |
-| 20 | Add handoff workflows between agents | 3 | Master | 3h | ⬜ |
-| 21 | Test agent switching and context isolation | 3 | Heir | 4h | ⬜ |
+| 18 | ~~alex-dream.agent.md~~ → Refactor dream to synapse-core.ts | 1 | Heir | 2h | ✅ |
+| 19 | ~~alex-review.agent.md~~ → dream-cli.ts for terminal usage | 1 | Heir | 30m | ✅ |
+| 20 | ~~Handoff workflows~~ → Built into alex.agent.md | 1 | Master | 1h | ✅ |
+| 21 | Test agent switching and Azure/M365 handoffs | 1 | Heir | 1h | ✅ |
 | 22 | Create TDD workflow (Red/Green/Refactor) | 4 | Master | 4h | ⬜ |
 | 23 | Test parallel subagent execution | 4 | Heir | 4h | ⬜ |
 | 24 | Implement background agent handoff | 4 | Heir | 4h | ⬜ |
@@ -55,9 +64,9 @@
 
 | Phase | Version | P0 | P1 | P2 | Timeline |
 |-------|---------|:--:|:--:|:--:|----------|
-| 1. Foundation | v4.2.5 | 3/3 | 3/3 | — | Week 1 (Feb 3-9) |
-| 2. Skills Audit | v4.3.0-prep | 2/2 | 1/2 | 0/1 | Week 2 (Feb 10-16) |
-| 3. Custom Agents | v4.3.0 | 0/4 | 0/4 | 0/1 | Weeks 3-4 (Feb 17-28) |
+| 1. Foundation + Agents | v4.2.5 | 9/9 | 7/7 | — | ✅ Feb 4 |
+| 2. Skills Audit | v4.3.0-prep | 0/2 | 0/2 | 0/1 | Week 2 (Feb 10-16) |
+| ~~3. Custom Agents~~ | ~~v4.3.0~~ | — | — | — | Merged into Phase 1 |
 | 4. Orchestration | v4.3.0+ | 0/3 | 0/3 | 0/1 | Weeks 5-6 (Mar 3-14) |
 | 5. Extension | v4.4.0 | — | — | — | Weeks 7-8 (Mar 17-28) |
 | 6. Memory | v4.4.0+ | — | — | — | Week 9 (Mar 31-Apr 4) |

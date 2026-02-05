@@ -4,10 +4,10 @@
 
 | | |
 |---|---|
-| **Current Master Version** | 4.2.3 |
-| **Current Heirs** | VS Code (4.2.3), M365 (v4.0) |
-| **Target** | 4.3.0 (Measurement & Dashboard) |
-| **Status** | ✅ v4.2.3 Released |
+| **Current Master Version** | 4.2.5 |
+| **Current Heirs** | VS Code (4.2.5), M365 (v4.0) |
+| **Target** | 4.3.0 (Custom Agents & Skills) |
+| **Status** | ✅ v4.2.5 Released |
 | **Created** | 2026-01-29 |
 | **Philosophy** | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -381,16 +381,19 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 
 ### Implementation Tasks
 
-| Version | Task | Owner | Effort |
-|---------|------|:-----:|:------:|
-| v4.2.5 | Update engine to ^1.109.0 | Heir | 30m |
-| v4.2.5 | Document recommended settings | Master | 1h |
-| v4.2.5 | Update markdown-mermaid skill | Master | 1h |
-| v4.3.0 | Audit 65 skills for Agent Skills compatibility | Master | 4h |
-| v4.3.0 | Create 4 Alex custom agents | Master + Heir | 4h |
-| v4.3.0 | Investigate `chatSkills` contribution | Heir | 4h |
-| v4.3.0+ | Agent orchestration prototype | Master | 8h |
-| Future | Adopt Chat Prompt Files API | Heir | TBD |
+| Version | Task | Owner | Effort | Status |
+|---------|------|:-----:|:------:|:------:|
+| v4.2.5 | Update engine to ^1.109.0 | Heir | 30m | ✅ |
+| v4.2.5 | Consolidate 9 agents → 3 (Alex, Azure, M365) | Master | 2h | ✅ |
+| v4.2.5 | Create 6 slash command prompt files | Master | 1h | ✅ |
+| v4.2.5 | Implement agent handoffs (Azure, M365) | Master | 1h | ✅ |
+| v4.2.5 | Refactor dream to shared synapse-core.ts | Heir | 2h | ✅ |
+| v4.2.5 | Create dream CLI for terminal usage | Heir | 30m | ✅ |
+| v4.2.5 | Document recommended settings | Master | 1h | ✅ |
+| v4.3.0 | Audit 65 skills for Agent Skills compatibility | Master | 4h | ⬜ |
+| v4.3.0 | Investigate `chatSkills` contribution | Heir | 4h | ⬜ |
+| v4.3.0+ | Agent orchestration prototype | Master | 8h | ⬜ |
+| Future | Adopt Chat Prompt Files API | Heir | TBD | ⬜ |
 
 > **Full Implementation Plan:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md)
 > Includes 8 detailed use cases: Alex Meditation Agent, Bootstrap Learning with Subagents, TDD Workflow, Code Review with Epistemic Humility, Background Dream Processing, and more.
@@ -408,7 +411,7 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | 4.0.x | Trust | ✅ Complete | 2026-01-31 |
 | 4.1.0 | Skill Expansion | ✅ Complete | 2026-02-01 |
 | **4.2.x** | **UX Polish & Cross-Platform** | ✅ **Complete** | **2026-02-02** |
-| 4.2.5 | VS Code 1.109 Foundation | 📋 Planned | Feb W1 |
+| **4.2.5** | **VS Code 1.109 Multi-Agent** | ✅ **Complete** | **2026-02-04** |
 | 4.3.0 | Custom Agents & Skills Audit | 📋 Planned | Feb W2-3 |
 | 4.4.0 | Orchestration & Extension Integration | 📋 Planned | Mar |
 
