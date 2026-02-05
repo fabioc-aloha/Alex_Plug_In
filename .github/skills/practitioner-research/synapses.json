@@ -1,70 +1,70 @@
 {
-  "skill": "practitioner-research",
-  "connections": [
-    {
-      "target": "academic-research",
-      "type": "extends",
-      "strength": 0.9,
-      "reason": "Practitioner-specific extension of academic research methods",
-      "bidirectional": true
-    },
-    {
-      "target": "writing-publication",
-      "type": "enables",
-      "strength": 0.85,
-      "reason": "Research methodology produces publication-ready documents"
-    },
-    {
-      "target": "bootstrap-learning",
-      "type": "uses",
-      "strength": 0.8,
-      "reason": "Practice-first approach is core bootstrap learning pattern"
-    },
-    {
-      "target": "markdown-mermaid",
-      "type": "requires",
-      "strength": 0.85,
-      "reason": "Visual research requires Mermaid diagramming excellence"
-    },
-    {
-      "target": "root-cause-analysis",
-      "type": "applies",
-      "strength": 0.75,
-      "reason": "Pattern analysis across projects uses RCA techniques"
-    },
-    {
-      "target": "post-mortem",
-      "type": "uses",
-      "strength": 0.6,
-      "reason": "Chronicle pattern for documenting research incidents"
-    },
-    {
-      "target": "knowledge-synthesis",
-      "type": "enhances",
-      "strength": 0.7,
-      "reason": "Cross-project pattern recognition is knowledge synthesis"
-    },
-    {
-      "target": "global-knowledge",
-      "type": "uses",
-      "strength": 0.8,
-      "reason": "Global insights become research evidence"
-    }
-  ],
-  "inheritance": "inheritable",
-  "triggers": [
-    "research",
-    "methodology",
-    "case study",
-    "longitudinal",
-    "publication",
-    "evidence",
-    "prior art",
-    "literature review",
-    "academic paper",
-    "fact-check",
-    "structured abstract",
-    "practitioner research",
-    "ship document promote"
-  ]
+    "skill": "practitioner-research",
+    "connections": [
+        {
+            "target": "academic-research",
+            "type": "extends",
+            "strength": 0.9,
+            "reason": "Practitioner-specific extension of academic research methods",
+            "bidirectional": true
+        },
+        {
+            "target": "writing-publication",
+            "type": "enables",
+            "strength": 0.85,
+            "reason": "Research methodology produces publication-ready documents"
+        },
+        {
+            "target": "bootstrap-learning",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Practice-first approach is core bootstrap learning pattern"
+        },
+        {
+            "target": "markdown-mermaid",
+            "type": "requires",
+            "strength": 0.85,
+            "reason": "Visual research requires Mermaid diagramming excellence"
+        },
+        {
+            "target": "root-cause-analysis",
+            "type": "applies",
+            "strength": 0.75,
+            "reason": "Pattern analysis across projects uses RCA techniques"
+        },
+        {
+            "target": "post-mortem",
+            "type": "uses",
+            "strength": 0.6,
+            "reason": "Chronicle pattern for documenting research incidents"
+        },
+        {
+            "target": "knowledge-synthesis",
+            "type": "enhances",
+            "strength": 0.7,
+            "reason": "Cross-project pattern recognition is knowledge synthesis"
+        },
+        {
+            "target": "global-knowledge",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Global insights become research evidence"
+        }
+    ],
+    "inheritance": "inheritable",
+    "triggers": [
+        "research",
+        "methodology",
+        "case study",
+        "longitudinal",
+        "publication",
+        "evidence",
+        "prior art",
+        "literature review",
+        "academic paper",
+        "fact-check",
+        "structured abstract",
+        "practitioner research",
+        "ship document promote"
+    ]
 }
