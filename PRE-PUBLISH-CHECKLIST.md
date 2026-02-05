@@ -122,6 +122,13 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 - [ ] Schema version history table current
 - [ ] Manifest example shows current version
 
+### Landing Page (docs/index.html)
+
+- [ ] **Version number** matches release version
+- [ ] **Feature stats** are current (skills count, TTS languages, research sources)
+- [ ] **Feature descriptions** reflect latest capabilities
+- [ ] Push changes — site auto-deploys via GitHub Pages
+
 ## 🎨 Lint Compliance
 
 Run `get_errors` in VS Code or check Problems panel:
@@ -132,13 +139,13 @@ Run `get_errors` in VS Code or check Problems panel:
 
 ### Common Lint Rules
 
-| Rule | Description | Fix |
-| ---- | ----------- | --- |
-| MD033 | Inline HTML | Use Markdown syntax instead |
-| MD036 | Emphasis as heading | Use proper `###` headings |
-| MD040 | Fenced code language | Add language identifier (e.g., `bash`, `text`) |
-| MD051 | Invalid link fragment | Check anchor matches heading ID |
-| MD058 | Blanks around tables | Add blank lines before/after tables |
+| Rule  | Description           | Fix                                            |
+| ----- | --------------------- | ---------------------------------------------- |
+| MD033 | Inline HTML           | Use Markdown syntax instead                    |
+| MD036 | Emphasis as heading   | Use proper `###` headings                      |
+| MD040 | Fenced code language  | Add language identifier (e.g., `bash`, `text`) |
+| MD051 | Invalid link fragment | Check anchor matches heading ID                |
+| MD058 | Blanks around tables  | Add blank lines before/after tables            |
 
 ## 🔗 API Compliance (Microsoft Docs)
 

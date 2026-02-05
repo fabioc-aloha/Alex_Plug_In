@@ -38,6 +38,7 @@
 | Insight saving to episodic memory               | v4.2.9  | 2026-02-05 |
 | TTS v2 - Native TypeScript implementation       | v4.2.6+ | 2026-02-05 |
 | TTS Flagship Skill documentation                | v4.2.6+ | 2026-02-05 |
+| TTS v2.1 - Multi-language support (32 langs)    | v4.2.9  | 2026-02-05 |
 | OneDrive Agents insight captured                | —       | 2026-02-05 |
 | Teams Community Agents insight captured         | —       | 2026-02-05 |
 | Embedded Knowledge status check (still waiting) | —       | 2026-02-05 |
@@ -47,7 +48,6 @@
 
 | Task                            | Owner | Priority | Notes                                |
 | ------------------------------- | :---: | :------: | ------------------------------------ |
-| TTS v2 testing & refinement     | Heir  |   High   | Compile clean, needs runtime test    |
 | Schema 1.6 preparation for M365 | M365  |  Medium  | Ready when EmbeddedKnowledge enables |
 
 ### 📋 Planned (v4.3.0)
