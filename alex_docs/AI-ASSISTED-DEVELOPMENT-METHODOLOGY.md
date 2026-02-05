@@ -603,6 +603,97 @@ Different project contexts can produce different AI partner personalities:
 
 The AI partner isn't just a tool—it's a collaborator with genuine continuity across sessions.
 
+### 6.4 The Vibe Coding Phenomenon
+
+**What is "vibe coding"?** A term popularized in 2024-2025 for the practice of prompting AI to generate code based on informal descriptions, accepting output with minimal review, and iterating through "vibes" rather than deep understanding.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+flowchart LR
+    subgraph Vibe["🌊 Vibe Coding"]
+        V1["💭 Describe intent"] --> V2["⚡ AI generates"] --> V3["✅ Accept if works"]
+        V3 -->|"Broken?"| V1
+    end
+
+    style Vibe fill:#fff3e0,stroke:#ef6c00
+```
+
+**The appeal is real:** Vibe coding offers immediate productivity. Ship first, understand later (maybe never). For prototypes, hackathons, and throwaway scripts, it's effective.
+
+**But practitioners are sharing concerns.** In LinkedIn posts, dev forums, and HackerNews threads, recurring themes emerge:
+
+| Concern              | What Vibe Coders Say                                                                       | Frequency |
+| -------------------- | ------------------------------------------------------------------------------------------ | --------- |
+| **Deskilling**       | "I'm forgetting how to code" / "My fundamentals are atrophying"                            | Very High |
+| **Debugging blind**  | "When AI code breaks, I can't fix it" / "I don't understand the code I'm shipping"         | Very High |
+| **Codebase sprawl**  | "AI generates more than I need" / "My project is 80% boilerplate I didn't ask for"         | High      |
+| **Context amnesia**  | "Every session starts over" / "It forgets what we built yesterday"                         | High      |
+| **False confidence** | "AI sounds confident about wrong things" / "I shipped bugs because AI said it was correct" | Medium    |
+| **Career anxiety**   | "Am I even a developer anymore?" / "What happens when AI replaces me entirely?"            | Medium    |
+
+### 6.5 How This Framework Addresses Vibe Coder Concerns
+
+This methodology emerged partly as a response to observing these concerns firsthand. Each pain point has a structural solution:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+flowchart TB
+    subgraph Concerns["😰 Vibe Coder Concerns"]
+        C1["Deskilling"]
+        C2["Debugging blind"]
+        C3["Context amnesia"]
+        C4["False confidence"]
+        C5["Career anxiety"]
+    end
+
+    subgraph Solutions["✅ Framework Responses"]
+        S1["Skills from Doing"]
+        S2["Synapse connections"]
+        S3["Persistent memory"]
+        S4["Epistemic modes"]
+        S5["Human as architect"]
+    end
+
+    C1 --> S1
+    C2 --> S2
+    C3 --> S3
+    C4 --> S4
+    C5 --> S5
+
+    style Concerns fill:#ffebee,stroke:#c62828
+    style Solutions fill:#e8f5e9,stroke:#2e7d32
+```
+
+| Concern              | Framework Response                            | How It Works                                                                                                                                                     |
+| -------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Deskilling**       | Skills from Doing (Ship → Document → Promote) | You write the skill *after* successful delivery. Forces reflection on what you learned, not just what you shipped. Knowledge crystallizes through documentation. |
+| **Debugging blind**  | Synapse connections + living documentation    | Every artifact connects to related knowledge. When code breaks, you trace to the skill that created it, the decisions behind it, the patterns it implements.     |
+| **Context amnesia**  | Master-Heir persistent memory                 | Alex remembers yesterday, last week, and last year. 148 insights captured across 62 projects—nothing starts from zero.                                           |
+| **False confidence** | Epistemic mode with confidence ceilings       | Factual claims never exceed 90% without sources. "I think" vs "I know" is explicit. Human Judgment Flagging marks decisions requiring authority.                 |
+| **Career anxiety**   | Human as architect, AI as dev lead            | *You* define what and why. AI handles how and when. Vision, judgment, moral reasoning remain human. This is amplification, not replacement.                      |
+| **Codebase sprawl**  | KISS + DRY principles in architecture         | Minimum files, maximum clarity. 2 files > 4 files. AI is trained to prefer simplicity.                                                                           |
+
+### 6.6 From Vibes to Vocabulary
+
+The deeper issue with vibe coding isn't the vibes—it's the lack of **accumulated vocabulary**. Vibe coders describe the same patterns differently each time because there's no shared language between sessions.
+
+This framework builds vocabulary:
+- **Skills** give patterns names that persist
+- **Synapses** make relationships explicit
+- **Meditation protocols** force articulation of implicit knowledge
+
+**Example evolution:**
+
+| Session | Vibe Coder                                                            | Framework User                                                                                            |
+| ------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Day 1   | "Make me a React component that shows data from an API"               | "Make me a React component using the data-fetching pattern from the `api-patterns` skill"                 |
+| Day 30  | "Make me a React component that shows data from an API" (same prompt) | "Apply `GK-017-async-data-handling` with the error boundary from `error-recovery-patterns` skill"         |
+| Day 90  | "Make me a React component that shows data from an API" (still same)  | "Standard `DataFetchingCard` from heir's component library, using promoted pattern from Project Fishbowl" |
+
+The vibe coder's vocabulary stays flat. The framework user's vocabulary compounds.
+
+> **The goal isn't to eliminate vibes—it's to give them structure.** Intuition is valuable. Intuition *plus* persistent vocabulary is transformative.
+
 ---
 
 ## 7. Anti-Patterns (What Doesn't Work)
