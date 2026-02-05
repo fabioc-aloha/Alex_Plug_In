@@ -2,7 +2,9 @@
 
 A Framework for Human-AI Collaborative Software Development
 
-*Version 1.1.0 | February 2026*
+*Version 1.2.0 | February 2026*
+
+> **Status**: Draft for peer review. Literature context and APA 7 references added.
 
 ---
 
@@ -28,7 +30,7 @@ Principles that apply to any developer working with AI assistance.
 This framework captures a development methodology for intensive human-AI collaboration. It represents a fundamentally different approach from traditional software development—not an incremental improvement, but a paradigm shift.
 
 **Expected Outcomes:**
-- 4-6× acceleration vs human-only estimates
+- 4-6× acceleration vs human-only estimates (cf. Peng et al., 2023, reporting 55% faster task completion)
 - Cross-project knowledge accumulation
 - Living documentation that evolves with code
 - Safety through architecture, not discipline
@@ -126,7 +128,7 @@ Typical acceleration observed across projects:
 | Bug investigation      | 3 hours        | 30 min        | 6×         |
 | Architecture decision  | 4 hours        | 1 hour        | 4×         |
 
-**Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details.
+**Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details. This aligns with findings that 87% of developers preserve mental effort on repetitive tasks when using AI assistance (Kalliamvakou, 2022).
 
 ### 3.2 Momentum Compounds
 
@@ -134,7 +136,7 @@ Acceleration is not linear—it compounds:
 
 1. **Quick wins build confidence** — Each release proves the next is possible
 2. **Automated pipeline removes friction** — One command to package, publish, sync
-3. **No context switching** — Same AI partner remembers yesterday's work
+3. **No context switching** — Same AI partner remembers yesterday's work (cf. Meyer et al., 2017, on context-switching costs)
 4. **Immediate capture** — Insights documented while fresh, not rediscovered
 
 ### 3.3 The Effort Units System
@@ -190,6 +192,8 @@ For significant events (crises, major releases, lessons learned), create a **Chr
 
 ## 5. Knowledge Architecture
 
+Our approach to persistent knowledge draws on research in memory-augmented language models (Packer et al., 2023; Park et al., 2023) and cognitive architectures for AI agents (Sumers et al., 2023). The key insight: **memory persistence is essential** for AI assistants to accumulate domain expertise.
+
 ### 5.1 Two-Tier Knowledge
 
 ```
@@ -233,6 +237,8 @@ Skills and documents have explicit connections:
 
 ## 6. Human-AI Collaboration Model
 
+Research on human-AI teams reveals a "jagged technological frontier" where AI capability is uneven across task types (Dell'Acqua et al., 2023). Some tasks accelerate dramatically; similar-seeming tasks fail. Effective collaboration requires learning this frontier.
+
 ### 6.1 The Role Metaphor
 
 **You:** The architect who defines what and why
@@ -250,11 +256,11 @@ This isn't "AI as tool"—it's collaborative partnership where each party has di
 
 ### 6.2 Trust as Architecture
 
-The appropriate reliance framework:
+The appropriate reliance framework builds on established trust calibration research (Lee & See, 2004) and emerging work on AI-specific reliance (Passi et al., 2024):
 
-1. **Epistemic mode:** Factual claims with confidence ceilings (never >90% without sources)
+1. **Epistemic mode:** Factual claims with confidence ceilings (never >90% without sources; cf. Lin et al., 2022)
 2. **Generative mode:** Creative ideas with collaborative validation
-3. **Human Judgment Flagging:** Decisions that require human authority are explicitly marked
+3. **Human Judgment Flagging:** Decisions that require human authority are explicitly marked (cognitive forcing; Buçinca et al., 2021)
 4. **Trust builds through consistency:** Same partner across sessions builds mutual calibration
 
 ### 6.3 Identity Through Relationship
@@ -374,6 +380,8 @@ The AI reads these files more than any human. Design for the primary consumer.
 
 ## 10. Metrics That Matter
 
+Productivity measurement draws on the SPACE framework (Forsgren et al., 2021), which established that no single metric captures developer productivity. Our approach tracks Satisfaction, Performance, Activity, Communication, and Efficiency holistically.
+
 ### 10.1 Actual vs Estimated
 
 Track ratio of actual time to estimates. If consistently:
@@ -431,7 +439,7 @@ Fabio Correa's specific implementation of the framework, with real project data 
 ### Key Metrics
 
 - 62 projects using shared cognitive architecture
-- 148 cross-project insights captured automatically  
+- 148 cross-project insights captured automatically
 - v3.6.0 → v4.2.5 in ~6 days (originally planned: 11 weeks)
 - 18 months of intensive human-AI collaboration
 
@@ -448,12 +456,12 @@ Fabio Correa's specific implementation of the framework, with real project data 
 
 ### Projects → Publications Pipeline
 
-| Project | Publication Target |
-|---------|-------------------|
-| AIRS Enterprise | Doctoral thesis (AI readiness) |
-| Appropriate Reliance research | Academic paper + Microsoft article |
-| Alex Cognitive Architecture | Technical brief + potential paper |
-| This methodology | Potential publication on AI-assisted development |
+| Project                       | Publication Target                               |
+| ----------------------------- | ------------------------------------------------ |
+| AIRS Enterprise               | Doctoral thesis (AI readiness)                   |
+| Appropriate Reliance research | Academic paper + Microsoft article               |
+| Alex Cognitive Architecture   | Technical brief + potential paper                |
+| This methodology              | Potential publication on AI-assisted development |
 
 ### Safety Imperatives (Fabio's I1-I7)
 
@@ -686,3 +694,89 @@ From `PHOENIX-RECOVERY.md`:
 ---
 
 *This document is itself a product of the methodology it describes: written after 18 months of practice, capturing patterns that emerged through doing, structured for AI consumption while remaining human-readable.*
+
+---
+
+## Appendix C: Literature Context
+
+### Concepts with Strong Prior Art
+
+These concepts build on established research:
+
+| Concept | Prior Art | Our Extension |
+|---------|-----------|---------------|
+| **AI accelerates productivity** | Peng et al. (2023): 55% faster; Kalliamvakou (2022): 87% mental effort preserved | We report 4-6× on specific task types; task-type granularity is novel |
+| **Trust calibration** | Lee & See (2004): performance/process/purpose dimensions | Applied to AI coding partners with persistent memory |
+| **Cognitive forcing** | Buçinca et al. (2021): friction reduces over-reliance | Implemented as "Human Judgment Flagging" in chat interface |
+| **SPACE framework** | Forsgren et al. (2021): multidimensional productivity | Adopted for session tracking; added "Insights per Session" |
+| **Memory persistence** | Packer et al. (2023): MemGPT; Park et al. (2023): Generative Agents | Production implementation with two-tier local/global architecture |
+| **Context-switching costs** | Meyer et al. (2017): developers lose flow on switches | Same-partner continuity as architectural mitigation |
+
+### Novel Contributions
+
+These concepts appear under-researched or novel in our implementation:
+
+| Contribution | Description | Why Novel |
+|--------------|-------------|-----------|
+| **Master-Heir architecture** | Source-of-truth + 62 specializing heirs | Cross-project inheritance with skill promotion; not in literature |
+| **Skills from doing** | Ship → Document → Promote workflow | Inversion of typical "document first" practice; experiential learning for AI |
+| **Living documentation** | Git-tracked docs that evolve with code | Practice exists; little academic study of effectiveness |
+| **Synaptic connections** | Explicit cross-file relationship mapping | Graph-based knowledge representation for development; novel application |
+| **Meditation protocols** | Structured reflection for human-AI teams | Draws on meta-cognition research; novel AI-team application |
+| **Defense in depth for AI** | Multi-layer protection (marker files, hardcoded checks) | Security pattern applied to AI workspace safety; not in AI literature |
+| **Dual-column estimation** | Human-only vs AI-assisted estimates side-by-side | Calibration mechanism for demonstrating AI value; not documented |
+| **Chronicle pattern** | Narrative accounts of crises for future self | Combines retrospective + publication potential; novel framing |
+
+### Research Gaps This Work Addresses
+
+1. **Cross-project knowledge transfer** in AI-assisted development
+2. **Behavioral telemetry for appropriate reliance** (edit distance, verification patterns)
+3. **Safety patterns specific to AI coding assistants** (vs. generic AI safety)
+4. **Long-term productivity effects** (18 months vs. typical short-term studies)
+5. **Named AI identity** and its effect on collaboration quality
+
+---
+
+## References
+
+Amershi, S., Weld, D., Vorvoreanu, M., Fourney, A., Nushi, B., Collisson, P., Suh, J., Iqbal, S., Bennett, P. N., Inkpen, K., Teevan, J., Kiber, R., & Horvitz, E. (2019). Guidelines for human-AI interaction. *Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems*, 1-13. https://doi.org/10.1145/3290605.3300233
+
+Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., Chen, A., Goldie, A., Mirhoseini, A., McKinnon, C., Chen, C., Olsson, C., Olah, C., Hernandez, D., Drain, D., Ganguli, D., Li, D., Tran-Johnson, E., Perez, E., … Kaplan, J. (2022). Constitutional AI: Harmlessness from AI feedback. *arXiv preprint arXiv:2212.08073*. https://arxiv.org/abs/2212.08073
+
+Barke, S., James, M. B., & Polikarpova, N. (2023). Grounded Copilot: How programmers interact with code-generating models. *Proceedings of the ACM on Programming Languages, 7*(OOPSLA1), 85-111. https://doi.org/10.1145/3586030
+
+Buçinca, Z., Malte, B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction, 5*(CSCW1), 1-21. https://doi.org/10.1145/3449287
+
+Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., Ray, A., Puri, R., Krueger, G., Petrov, M., Khlaaf, H., Sastry, G., Mishkin, P., Chan, B., Gray, S., … Zaremba, W. (2021). Evaluating large language models trained on code. *arXiv preprint arXiv:2107.03374*. https://arxiv.org/abs/2107.03374
+
+Dell'Acqua, F., McFowland, E., Mollick, E., Lifshitz-Assaf, H., Kellogg, K., Rajendran, S., Krayer, L., Candelon, F., & Lakhani, K. R. (2023). Navigating the jagged technological frontier: Field experimental evidence of the effects of AI on knowledge worker productivity and quality. *Harvard Business School Working Paper 24-013*. https://www.hbs.edu/faculty/Pages/item.aspx?num=64700
+
+Forsgren, N., Humble, J., & Kim, G. (2018). *Accelerate: The science of Lean software and DevOps: Building and scaling high performing technology organizations*. IT Revolution Press.
+
+Forsgren, N., Storey, M.-A., Maddila, C., Zimmermann, T., Houck, B., & Butler, J. (2021). The SPACE of developer productivity. *ACM Queue, 19*(1), 24-48. https://doi.org/10.1145/3454122.3454124
+
+Kalliamvakou, E. (2022, September 7). Research: Quantifying GitHub Copilot's impact on developer productivity and happiness. *GitHub Blog*. https://github.blog/2022-09-07-research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/
+
+Lee, J. D., & See, K. A. (2004). Trust in automation: Designing for appropriate reliance. *Human Factors, 46*(1), 50-80. https://doi.org/10.1518/hfes.46.1.50_30392
+
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. *Advances in Neural Information Processing Systems, 33*, 9459-9474. https://arxiv.org/abs/2005.11401
+
+Lin, S., Hilton, J., & Evans, O. (2022). Teaching models to express their uncertainty in words. *Transactions on Machine Learning Research*. https://arxiv.org/abs/2205.14334
+
+Meyer, A. N., Fritz, T., Murphy, G. C., & Zimmermann, T. (2017). The work life of developers: Activities, switches, and perceived productivity. *IEEE Transactions on Software Engineering, 43*(12), 1178-1193. https://doi.org/10.1109/TSE.2017.2656886
+
+Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., & Gonzalez, J. E. (2023). MemGPT: Towards LLMs as operating systems. *arXiv preprint arXiv:2310.08560*. https://arxiv.org/abs/2310.08560
+
+Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. *Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology*, 1-22. https://doi.org/10.1145/3586183.3606763
+
+Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). GenAI appropriate reliance: AETHER synthesis. *Microsoft Research Internal Report*.
+
+Peng, S., Kalliamvakou, E., Cihon, P., & Demirer, M. (2023). The impact of AI on developer productivity: Evidence from GitHub Copilot. *arXiv preprint arXiv:2302.06590*. https://arxiv.org/abs/2302.06590
+
+Schemmer, M., Kühl, N., Benz, C., & Gerber, A. (2023). Appropriate reliance on AI advice: Conceptualization and the effect of explanations. *International Conference on Information Systems (ICIS) 2022 Proceedings*. https://aisel.aisnet.org/icis2022/hci/hci/3/
+
+Storey, M.-A., Zimmermann, T., Bird, C., Czerwonka, J., Murphy, B., & Kalliamvakou, E. (2019). Towards a theory of software developer job satisfaction and perceived productivity. *IEEE Transactions on Software Engineering, 47*(10), 2125-2142. https://doi.org/10.1109/TSE.2019.2944354
+
+Sumers, T. R., Yao, S., Narasimhan, K., & Griffiths, T. L. (2023). Cognitive architectures for language agents. *Transactions on Machine Learning Research*. https://arxiv.org/abs/2309.02427
+
+Vaithilingam, P., Zhang, T., & Glassman, E. L. (2022). Expectation vs. experience: Evaluating the usability of code generation tools powered by large language models. *CHI Conference on Human Factors in Computing Systems Extended Abstracts*, 1-7. https://doi.org/10.1145/3491101.3519665
