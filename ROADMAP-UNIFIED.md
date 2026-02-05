@@ -381,19 +381,24 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 
 ### Implementation Tasks
 
-| Version | Task | Owner | Effort | Status |
-|---------|------|:-----:|:------:|:------:|
-| v4.2.5 | Update engine to ^1.109.0 | Heir | 30m | ✅ |
-| v4.2.5 | Consolidate 9 agents → 3 (Alex, Azure, M365) | Master | 2h | ✅ |
-| v4.2.5 | Create 6 slash command prompt files | Master | 1h | ✅ |
-| v4.2.5 | Implement agent handoffs (Azure, M365) | Master | 1h | ✅ |
-| v4.2.5 | Refactor dream to shared synapse-core.ts | Heir | 2h | ✅ |
-| v4.2.5 | Create dream CLI for terminal usage | Heir | 30m | ✅ |
-| v4.2.5 | Document recommended settings | Master | 1h | ✅ |
-| v4.3.0 | Audit 65 skills for Agent Skills compatibility | Master | 4h | ⬜ |
-| v4.3.0 | Investigate `chatSkills` contribution | Heir | 4h | ⬜ |
-| v4.3.0+ | Agent orchestration prototype | Master | 8h | ⬜ |
-| Future | Adopt Chat Prompt Files API | Heir | TBD | ⬜ |
+> **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate  
+> See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology
+
+| Version | Task | Owner | Human | Alex | Status |
+|---------|------|:-----:|:-----:|:----:|:------:|
+| v4.2.5 | Update engine to ^1.109.0 | Heir | 30m | ⚡ 5m | ✅ |
+| v4.2.5 | Consolidate 9 agents → 3 (Alex, Azure, M365) | Master | 2h | 🔄 20m | ✅ |
+| v4.2.5 | Create 6 slash command prompt files | Master | 1h | ⚡ 10m | ✅ |
+| v4.2.5 | Implement agent handoffs (Azure, M365) | Master | 1h | ⚡ 10m | ✅ |
+| v4.2.5 | Refactor dream to shared synapse-core.ts | Heir | 2h | ⏱️ 45m | ✅ |
+| v4.2.5 | Create dream CLI for terminal usage | Heir | 30m | ⚡ 10m | ✅ |
+| v4.2.5 | Document recommended settings | Master | 1h | 🔄 15m | ✅ |
+| v4.3.0 | Audit 65 skills for Agent Skills compatibility | Master | 4h | ⏱️ 45m | ⬜ |
+| v4.3.0 | Investigate `chatSkills` contribution | Heir | 4h | 🔄 30m | ⬜ |
+| v4.3.0+ | Agent orchestration prototype | Master | 8h | 📦 1.5h | ⬜ |
+| Future | Adopt Chat Prompt Files API | Heir | TBD | TBD | ⬜ |
+
+**v4.2.5 Actual:** Human estimate 8.5h → Alex actual ~2h (4× acceleration)
 
 > **Full Implementation Plan:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md)
 > Includes 8 detailed use cases: Alex Meditation Agent, Bootstrap Learning with Subagents, TDD Workflow, Code Review with Epistemic Humility, Background Dream Processing, and more.

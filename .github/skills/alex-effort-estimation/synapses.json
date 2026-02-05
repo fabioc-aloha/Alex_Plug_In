@@ -1,0 +1,37 @@
+{
+  "skillId": "alex-effort-estimation",
+  "version": "1.0.0",
+  "lastValidated": "2026-02-04",
+  "synapses": [
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "type": "Enhances",
+      "strength": "Strong",
+      "context": "Learning acceleration estimates"
+    },
+    {
+      "target": ".github/skills/project-management/SKILL.md",
+      "type": "Enhances",
+      "strength": "Strong",
+      "context": "Task planning integration"
+    },
+    {
+      "target": ".github/skills/release-process/SKILL.md",
+      "type": "Enhances",
+      "strength": "Medium",
+      "context": "Release effort estimation"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "References",
+      "strength": "Medium",
+      "context": "Test effort as real-time bottleneck"
+    },
+    {
+      "target": "ROADMAP-UNIFIED.md",
+      "type": "Applies",
+      "strength": "Strong",
+      "context": "Convert roadmap estimates to Alex effort"
+    }
+  ]
+}
