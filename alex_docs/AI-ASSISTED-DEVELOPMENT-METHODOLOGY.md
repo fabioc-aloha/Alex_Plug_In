@@ -352,13 +352,25 @@ Typical acceleration observed across projects:
 **Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details. This aligns with findings that 87% of developers preserve mental effort on repetitive tasks when using AI assistance (Kalliamvakou, 2022).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': {'plotColorPalette': '#1565c0, #2e7d32, #7b1fa2, #ef6c00, #c62828'}, 'primaryTextColor': '#1f2328'}}}%%
-xychart-beta
-    title "Acceleration by Task Type"
-    x-axis [Refactor, Feature, Docs, Debug, Arch]
-    y-axis "Multiplier" 0 --> 14
-    bar [8, 4, 12, 6, 4]
+%%{init: {'theme': 'base', 'themeVariables': { 'pie1': '#1565c0', 'pie2': '#2e7d32', 'pie3': '#7b1fa2', 'pie4': '#ef6c00', 'pie5': '#c62828', 'pieStrokeColor': '#ffffff', 'pieStrokeWidth': '2px'}}}%%
+pie showData
+    title Acceleration by Task Type (×)
+    "Refactor 8×" : 8
+    "Feature 4×" : 4
+    "Docs 12×" : 12
+    "Debug 6×" : 6
+    "Arch 4×" : 4
 ```
+
+**Visual Summary:**
+
+| Task       | Multiplier | Visual       |
+| ---------- | ---------- | ------------ |
+| 🔄 Refactor | **8×**     | ████████░░░░ |
+| ✨ Feature  | **4×**     | ████░░░░░░░░ |
+| 📝 Docs     | **12×**    | ████████████ |
+| 🐛 Debug    | **6×**     | ██████░░░░░░ |
+| 🏛️ Arch     | **4×**     | ████░░░░░░░░ |
 
 ### 3.2 Momentum Compounds
 
