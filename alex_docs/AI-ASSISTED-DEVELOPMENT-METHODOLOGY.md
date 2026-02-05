@@ -349,7 +349,7 @@ Typical acceleration observed across projects:
 **Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details. This aligns with findings that 87% of developers preserve mental effort on repetitive tasks when using AI assistance (Kalliamvakou, 2022).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#1565c0', 'lineColor': '#656d76'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': {'plotColorPalette': '#1565c0, #2e7d32, #7b1fa2, #ef6c00, #c62828'}, 'primaryTextColor': '#1f2328'}}}%%
 xychart-beta
     title "Acceleration by Task Type"
     x-axis [Refactor, Feature, Docs, Debug, Arch]
