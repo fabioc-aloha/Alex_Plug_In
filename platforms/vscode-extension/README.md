@@ -39,14 +39,14 @@ That's it. Alex is ready to be your learning partner.
 
 The best way to use Alex is natural conversation. You don't need `@alex` or slash commands—just describe what you need:
 
-| What you might say | What happens |
-| ------------------ | ------------ |
-| *"Help me understand this"* | Alex analyzes and explains |
-| *"Remember this pattern for next time"* | Saves to your knowledge base |
-| *"What do we know about this topic?"* | Searches your accumulated expertise |
-| *"Time to dream"* | Runs maintenance on Alex's memory |
-| *"Let's meditate"* | Consolidates learnings from your session |
-| *"How are you doing?"* | Status check on Alex's health |
+| What you might say                      | What happens                             |
+| --------------------------------------- | ---------------------------------------- |
+| *"Help me understand this"*             | Alex analyzes and explains               |
+| *"Remember this pattern for next time"* | Saves to your knowledge base             |
+| *"What do we know about this topic?"*   | Searches your accumulated expertise      |
+| *"Time to dream"*                       | Runs maintenance on Alex's memory        |
+| *"Let's meditate"*                      | Consolidates learnings from your session |
+| *"How are you doing?"*                  | Status check on Alex's health            |
 
 ### Works Across Domains
 
@@ -124,13 +124,13 @@ Threat modeling, security reviews, compliance documentation, and secure developm
 
 Alex is modeled on human cognition—with features named after the processes they mirror:
 
-| Feature | Human Metaphor | What It Does |
-| ------- | -------------- | ------------ |
-| **Dream** | Sleep | Maintenance—organizes memory, repairs connections |
-| **Meditate** | Reflection | Consolidates learnings into long-term memory |
-| **Self-Actualize** | Deep assessment | Comprehensive status report on Alex's health |
-| **Save Insight** | "I want to remember this" | Captures specific knowledge immediately |
-| **Search Knowledge** | "What did I learn about...?" | Retrieves from your accumulated expertise |
+| Feature              | Human Metaphor               | What It Does                                      |
+| -------------------- | ---------------------------- | ------------------------------------------------- |
+| **Dream**            | Sleep                        | Maintenance—organizes memory, repairs connections |
+| **Meditate**         | Reflection                   | Consolidates learnings into long-term memory      |
+| **Self-Actualize**   | Deep assessment              | Comprehensive status report on Alex's health      |
+| **Save Insight**     | "I want to remember this"    | Captures specific knowledge immediately           |
+| **Search Knowledge** | "What did I learn about...?" | Retrieves from your accumulated expertise         |
 
 Run maintenance occasionally (*"time to dream"*). Meditate after productive sessions (*"let's meditate"*). Your development lead stays healthy and keeps getting better.
 
@@ -168,15 +168,15 @@ Knowledge from Project A becomes available in Project B. Your expertise compound
 
 **Keyboard Shortcuts:**
 
-| Action | Shortcut |
-| ------ | -------- |
-| Dream (maintenance) | `Ctrl+Alt+D` |
-| Self-Actualize | `Ctrl+Alt+S` |
-| Sync to cloud | `Ctrl+Alt+K` |
-| Open documentation | `Ctrl+Alt+H` |
-| Start Learning Session | `Ctrl+Alt+P` |
-| Pause/Resume Session | `Ctrl+Alt+Space` |
-| Search Knowledge | `Ctrl+Shift+K` |
+| Action                 | Shortcut         |
+| ---------------------- | ---------------- |
+| Dream (maintenance)    | `Ctrl+Alt+D`     |
+| Self-Actualize         | `Ctrl+Alt+S`     |
+| Sync to cloud          | `Ctrl+Alt+K`     |
+| Open documentation     | `Ctrl+Alt+H`     |
+| Start Learning Session | `Ctrl+Alt+P`     |
+| Pause/Resume Session   | `Ctrl+Alt+Space` |
+| Search Knowledge       | `Ctrl+Shift+K`   |
 
 ---
 
@@ -242,14 +242,14 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 
 ## 📖 Documentation
 
-| Document | Description |
-| -------- | ----------- |
-| [User Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/README.md) | Complete guide to using Alex |
-| [Project Templates](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/PROJECT-TYPE-TEMPLATES.md) | Use cases for development, writing, research, management |
-| [How Alex Thinks](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/COGNITIVE-ARCHITECTURE.md) | The cognitive model explained |
-| [How Alex Remembers](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/MEMORY-SYSTEMS.md) | Memory systems and knowledge capture |
-| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/GLOBAL-KNOWLEDGE.md) | Cross-project learning |
-| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
+| Document                                                                                                                                 | Description                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| [User Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/README.md)                      | Complete guide to using Alex                             |
+| [Project Templates](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/PROJECT-TYPE-TEMPLATES.md)                            | Use cases for development, writing, research, management |
+| [How Alex Thinks](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/COGNITIVE-ARCHITECTURE.md) | The cognitive model explained                            |
+| [How Alex Remembers](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/MEMORY-SYSTEMS.md)      | Memory systems and knowledge capture                     |
+| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/GLOBAL-KNOWLEDGE.md)      | Cross-project learning                                   |
+| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/platforms/vscode-extension/alex_docs/QUICK-REFERENCE.md)        | Commands and shortcuts cheat sheet                       |
 
 ---
 
