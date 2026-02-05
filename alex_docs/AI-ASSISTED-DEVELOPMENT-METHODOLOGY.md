@@ -64,6 +64,33 @@ This framework captures a methodology for intensive human-AI collaboration that 
 
 Distilled from extensive practice:
 
+```mermaid
+flowchart LR
+    subgraph P1["1. Define Done"]
+        A["One sentence\nbefore starting"]
+    end
+    subgraph P2["2. Momentum"]
+        B["Quick wins\nbuild confidence"]
+    end
+    subgraph P3["3. Skills from Doing"]
+        C["Capture what\nworked"]
+    end
+    subgraph P4["4. Pivot"]
+        D["Unblock by\nrescoping"]
+    end
+    subgraph P5["5. Continuous"]
+        E["Small > sporadic\nlarge"]
+    end
+    P1 --> P2 --> P3 --> P4 --> P5
+    P5 -.->|"Cycle"| P1
+
+    style P1 fill:#e3f2fd,stroke:#1565c0
+    style P2 fill:#e8f5e9,stroke:#2e7d32
+    style P3 fill:#fff3e0,stroke:#ef6c00
+    style P4 fill:#fce4ec,stroke:#c2185b
+    style P5 fill:#f3e5f5,stroke:#7b1fa2
+```
+
 1. **Define "done" in one sentence before starting**
 2. **Build momentum with quick wins**
 3. **Capture skills from what worked, not what you planned**
@@ -196,18 +223,32 @@ This is the **key differentiator** from other AI-assisted development approaches
 
 ### 2.1 Inheritance, Not Copies
 
-```
-Master (source of truth)
-│
-├── Core Architecture
-│   ├── copilot-instructions.md    # Cognitive architecture
-│   ├── Portable skills            # Domain expertise
-│   └── Safety imperatives         # Protection mechanisms
-│
-└── Heir Projects (N projects inherit and specialize)
-    ├── Project A → + domain-specific skills ──┐
-    ├── Project B → + specialized patterns  ───┼─→ Promote to Master
-    └── Project C → + unique integrations ─────┘
+```mermaid
+flowchart TB
+    subgraph Master["🧠 Master Alex (Source of Truth)"]
+        direction TB
+        CI[copilot-instructions.md]
+        SK[Portable Skills]
+        SI[Safety Imperatives]
+    end
+
+    subgraph Heirs["👥 Heir Projects"]
+        direction TB
+        A["Project A\n+ domain skills"]
+        B["Project B\n+ specialized patterns"]
+        C["Project C\n+ unique integrations"]
+    end
+
+    Master -->|"Initialize"| Heirs
+    A -->|"Promote patterns"| Master
+    B -->|"Promote patterns"| Master
+    C -->|"Promote patterns"| Master
+
+    style Master fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style Heirs fill:#e3f2fd,stroke:#1565c0
+    style A fill:#fff3e0,stroke:#ef6c00
+    style B fill:#fff3e0,stroke:#ef6c00
+    style C fill:#fff3e0,stroke:#ef6c00
 ```
 
 **The virtuous cycle:**
@@ -227,6 +268,25 @@ This is NOT static template copying. It's **evolutionary knowledge accumulation*
 
 **The pattern:** Ship → Document → Promote. Ship a project, discover the gotchas, then document the skill. That skill now helps all heirs.
 
+```mermaid
+flowchart LR
+    subgraph Anti["❌ Anti-Pattern"]
+        direction LR
+        T1["Theory"] --> W1["Write Skill"] --> D1["Deploy"]
+        D1 -.->|"Missing edge cases"| X1["Gaps & Failures"]
+    end
+
+    subgraph Pattern["✅ The Pattern"]
+        direction LR
+        S2["🚀 Ship"] --> L2["🔍 Learn Gotchas"] --> D2["📝 Document"] --> P2["⬆️ Promote"]
+        P2 -->|"10× more valuable"| SK2["Battle-tested Skill"]
+    end
+
+    style Anti fill:#ffebee,stroke:#c62828
+    style Pattern fill:#e8f5e9,stroke:#2e7d32
+    style SK2 fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
+```
+
 ---
 
 ## 3. Velocity Mechanics
@@ -245,9 +305,32 @@ Typical acceleration observed across projects:
 
 **Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details. This aligns with findings that 87% of developers preserve mental effort on repetitive tasks when using AI assistance (Kalliamvakou, 2022).
 
+```mermaid
+xychart-beta
+    title "Acceleration by Task Type"
+    x-axis [Refactor, Feature, Docs, Debug, Arch]
+    y-axis "Multiplier" 0 --> 14
+    bar [8, 4, 12, 6, 4]
+```
+
 ### 3.2 Momentum Compounds
 
 Acceleration is not linear—it compounds:
+
+```mermaid
+flowchart LR
+    subgraph Cycle["Compounding Momentum"]
+        direction LR
+        W["🏆 Quick Win"] --> C["💪 Confidence"] --> A["⚡ Automation"] --> N["🧠 No Context Switch"] --> I["📝 Immediate Capture"]
+        I -->|"Next cycle starts stronger"| W
+    end
+
+    style W fill:#c8e6c9,stroke:#2e7d32
+    style C fill:#bbdefb,stroke:#1565c0
+    style A fill:#fff3e0,stroke:#ef6c00
+    style N fill:#f3e5f5,stroke:#7b1fa2
+    style I fill:#e1f5fe,stroke:#0277bd
+```
 
 1. **Quick wins build confidence** — Each release proves the next is possible
 2. **Automated pipeline removes friction** — One command to package, publish, sync
@@ -285,11 +368,26 @@ Safety rules learned through real incidents (near-disasters, corruptions, data l
 
 Effective protection has multiple layers:
 
-```
-Layer 0:   Hardcoded checks (cannot be bypassed by configuration)
-Layer 1:   Physical markers (files that exist only in protected locations)
-Layer 2:   Environment detection (auto-detect contexts)
-Layer 3:   User configuration (settings, preferences)
+```mermaid
+block-beta
+    columns 1
+    block:L0["Layer 0: Hardcoded Checks"]:1
+        H0["Cannot be bypassed by configuration"]
+    end
+    block:L1["Layer 1: Physical Markers"]:1
+        H1["Files that exist only in protected locations"]
+    end
+    block:L2["Layer 2: Environment Detection"]:1
+        H2["Auto-detect contexts"]
+    end
+    block:L3["Layer 3: User Configuration"]:1
+        H3["Settings and preferences"]
+    end
+
+    style L0 fill:#c62828,color:#ffffff
+    style L1 fill:#d32f2f,color:#ffffff
+    style L2 fill:#e57373,color:#000000
+    style L3 fill:#ffcdd2,color:#000000
 ```
 
 **Key lesson:** One protection layer isn't enough. Settings can be outdated. Paths can be ambiguous. Physical markers and hardcoded checks provide ground truth.
@@ -297,6 +395,19 @@ Layer 3:   User configuration (settings, preferences)
 ### 4.3 The Chronicle Pattern
 
 For significant events (crises, major releases, lessons learned), create a **Chronicle**:
+
+```mermaid
+flowchart LR
+    subgraph Chronicle["Chronicle Structure"]
+        direction LR
+        S["🎬 Setup\nContext & stakes"] --> C["💥 Crisis\nWhat went wrong"] --> R["✅ Resolution\nHow it was fixed"] --> L["💡 Lessons\nWhat to remember"]
+    end
+
+    style S fill:#e3f2fd,stroke:#1565c0
+    style C fill:#ffebee,stroke:#c62828
+    style R fill:#e8f5e9,stroke:#2e7d32
+    style L fill:#fff3e0,stroke:#ef6c00
+```
 
 - NOT a retrospective (too formal)
 - NOT a postmortem (implies blame)
@@ -311,13 +422,29 @@ Our approach to persistent knowledge draws on research in memory-augmented langu
 
 ### 5.1 Two-Tier Knowledge
 
-```
-Local Knowledge              Global Knowledge
-(per-project)                (cross-project)
-────────────────            ────────────────
-.github/skills/             ~/.alex/global-knowledge/
-.github/episodic/           ├── patterns/ (GK-*)
-.github/instructions/       └── insights/ (GI-*)
+```mermaid
+flowchart TB
+    subgraph Local["📁 Local Knowledge (per-project)"]
+        direction TB
+        LS[".github/skills/"]
+        LE[".github/episodic/"]
+        LI[".github/instructions/"]
+    end
+
+    subgraph Global["🌐 Global Knowledge (cross-project)"]
+        direction TB
+        GK["~/.alex/global-knowledge/"]
+        GP["patterns/ (GK-*)"]
+        GI["insights/ (GI-*)"]
+        GK --> GP
+        GK --> GI
+    end
+
+    Local -->|"Promote proven patterns"| Global
+    Global -->|"Seed new projects"| Local
+
+    style Local fill:#e3f2fd,stroke:#1565c0
+    style Global fill:#e8f5e9,stroke:#2e7d32
 ```
 
 - **Local:** Project-specific decisions, domain knowledge
@@ -336,8 +463,30 @@ Every captured insight is one less thing to rediscover later.
 
 ### 5.3 Synapse Connections
 
-Skills and documents have explicit connections:
+Skills and documents have explicit connections—like neurons in a brain:
 
+```mermaid
+flowchart TB
+    subgraph Synapses["🧠 Synapse Network Example"]
+        direction TB
+        RM["release-management.instructions.md"]
+        MED["meditation/SKILL.md"]
+        ROAD["ROADMAP-UNIFIED.md"]
+        SKILL["new-skill/SKILL.md"]
+
+        RM -->|"Critical, Gates"| ROAD
+        MED <-->|"High, Complements"| SKILL
+        ROAD <-->|"High, References"| MED
+        SKILL -->|"Medium, Informs"| RM
+    end
+
+    style RM fill:#ffebee,stroke:#c62828
+    style MED fill:#e8f5e9,stroke:#2e7d32
+    style ROAD fill:#e3f2fd,stroke:#1565c0
+    style SKILL fill:#fff3e0,stroke:#ef6c00
+```
+
+**Synapse notation:**
 ```markdown
 ## Synapses
 
@@ -360,6 +509,25 @@ Research on human-AI teams reveals a "jagged technological frontier" where AI ca
 **Alex:** The development lead who handles how and when
 
 This isn't "AI as tool"—it's collaborative partnership where each party has distinct strengths:
+
+```mermaid
+quadrantChart
+    title Human-AI Collaboration Strengths
+    x-axis "Speed / Consistency" --> "Vision / Judgment"
+    y-axis "Pattern / Memory" --> "Creative / Moral"
+    quadrant-1 "Human Excellence"
+    quadrant-2 "Shared Zone"
+    quadrant-3 "AI Excellence"
+    quadrant-4 "Collaborative Sweet Spot"
+    "Vision": [0.85, 0.75]
+    "Moral reasoning": [0.80, 0.90]
+    "Creative leaps": [0.70, 0.85]
+    "Speed": [0.15, 0.20]
+    "Consistency": [0.20, 0.30]
+    "Pattern recognition": [0.25, 0.60]
+    "Memory": [0.10, 0.50]
+    "Codebase context": [0.30, 0.40]
+```
 
 | Human Strengths      | AI Strengths              |
 | -------------------- | ------------------------- |
@@ -390,6 +558,33 @@ The AI partner isn't just a tool—it's a collaborator with genuine continuity a
 ---
 
 ## 7. Anti-Patterns (What Doesn't Work)
+
+```mermaid
+flowchart TB
+    subgraph Avoid["❌ Anti-Patterns"]
+        direction TB
+        AP1["📝 Planning Without Doing\n3hr planning, then handoff"]
+        AP2["📂 Staged Copy Syndrome\nEdit → Stage → Prod → Commit"]
+        AP3["📖 Skills from Theory\n500 lines before doing"]
+        AP4["🔇 Silent Failures\nNo logging on skip"]
+    end
+
+    subgraph Do["✅ Patterns"]
+        direction TB
+        P1["⚡ 10min intent, iterate"]
+        P2["🔀 Edit in place, Git branches"]
+        P3["🏆 Ship → Document → Promote"]
+        P4["📝 Every decision logged"]
+    end
+
+    AP1 -.->|"Replace with"| P1
+    AP2 -.->|"Replace with"| P2
+    AP3 -.->|"Replace with"| P3
+    AP4 -.->|"Replace with"| P4
+
+    style Avoid fill:#ffebee,stroke:#c62828
+    style Do fill:#e8f5e9,stroke:#2e7d32
+```
 
 ### 7.1 Planning Without Doing
 
@@ -449,36 +644,44 @@ The AI reads these files more than any human. Design for the primary consumer.
 
 ### 9.1 The Work Cycle
 
-```
-┌─────────────────────────────────────────────────┐
-│                  SESSION START                  │
-│   "Hi Alex, let's work on [feature/issue]..."   │
-└────────────────────────┬────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────┐
-│                  ACTIVE WORK                    │
-│   Todo list updated → Code → Commit → Repeat    │
-└────────────────────────┬────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────┐
-│              NATURAL PAUSE POINT                │
-│   Feature complete / End of day / Stuck         │
-└────────────────────────┬────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────┐
-│                  MEDITATION                     │
-│   Consolidate learnings → Update synapses →     │
-│   Capture insights → Sync documentation         │
-└────────────────────────┬────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────┐
-│                  SESSION END                    │
-│   Todo list persists → Context preserved        │
-└─────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Start["🌅 Session Start"]
+        S1["Hi Alex, let's work on..."]
+    end
+
+    subgraph Work["⚡ Active Work"]
+        W1["Update Todo"] --> W2["Code"] --> W3["Commit"] --> W4["Repeat"]
+        W4 --> W1
+    end
+
+    subgraph Pause["⏸️ Natural Pause"]
+        P1["Feature complete / End of day / Stuck"]
+    end
+
+    subgraph Med["🧘 Meditation"]
+        M1["Consolidate learnings"]
+        M2["Update synapses"]
+        M3["Capture insights"]
+        M4["Sync documentation"]
+        M1 --> M2 --> M3 --> M4
+    end
+
+    subgraph End["🌙 Session End"]
+        E1["Context preserved for next session"]
+    end
+
+    Start --> Work
+    Work --> Pause
+    Pause --> Med
+    Med --> End
+    End -.->|"Next session"| Start
+
+    style Start fill:#e1f5fe,stroke:#0277bd
+    style Work fill:#fff3e0,stroke:#ef6c00
+    style Pause fill:#f3e5f5,stroke:#7b1fa2
+    style Med fill:#e8f5e9,stroke:#2e7d32
+    style End fill:#e3f2fd,stroke:#1565c0
 ```
 
 ### 9.2 Session Types
@@ -496,6 +699,26 @@ The AI reads these files more than any human. Design for the primary consumer.
 ## 10. Metrics That Matter
 
 Productivity measurement draws on the SPACE framework (Forsgren et al., 2021), which established that no single metric captures developer productivity. Our approach tracks Satisfaction, Performance, Activity, Communication, and Efficiency holistically.
+
+```mermaid
+flowchart TB
+    subgraph Metrics["What We Track"]
+        direction TB
+        M1["⏱️ Actual vs Estimated\nCalibration ratio"]
+        M2["💡 Insights per Session\n1-3 healthy range"]
+        M3["🏅 Skills Acquisition\nEarned, not declared"]
+        M4["🌱 Heir Evolution\nPromotion rate"]
+    end
+
+    M1 --> |"<0.5×"| Over["Overestimating\n(common with AI)"]
+    M1 --> |"0.5-1.0×"| Good["✅ Good calibration"]
+    M1 --> |">1.0×"| Under["Underestimating\n(unknown complexity)"]
+
+    style Metrics fill:#e8f5e9,stroke:#2e7d32
+    style Good fill:#c8e6c9,stroke:#1b5e20
+    style Over fill:#fff3e0,stroke:#ef6c00
+    style Under fill:#ffebee,stroke:#c62828
+```
 
 ### 10.1 Actual vs Estimated
 
@@ -532,6 +755,33 @@ This shows where genuine learning is happening.
 ## Conclusion (Part I)
 
 This methodology isn't about "using AI to code faster." It's about fundamentally reconceiving how development work happens:
+
+```mermaid
+flowchart TB
+    subgraph Framework["The Five Pillars"]
+        direction LR
+        P1["🧠 Knowledge\nPersists"]
+        P2["📈 Learning\nCompounds"]
+        P3["🛡️ Safety\nArchitectural"]
+        P4["🤝 Trust\nCalibrated"]
+        P5["⚡ Speed\nEnables"]
+    end
+
+    subgraph Evidence["Evidence"]
+        E1["4-6× acceleration"]
+        E2["148 insights"]
+        E3["62 projects"]
+    end
+
+    Framework --> Evidence
+
+    style P1 fill:#e3f2fd,stroke:#1565c0
+    style P2 fill:#e8f5e9,stroke:#2e7d32
+    style P3 fill:#ffebee,stroke:#c62828
+    style P4 fill:#fff3e0,stroke:#ef6c00
+    style P5 fill:#f3e5f5,stroke:#7b1fa2
+    style Evidence fill:#e0f2f1,stroke:#00695c
+```
 
 1. **Knowledge persists** across sessions, projects, and years
 2. **Learning compounds** through structured capture and cross-project sharing
@@ -951,18 +1201,18 @@ mindmap
 
 ### Key Projects
 
-| Project | Domain | Description | Link |
-|---------|--------|-------------|------|
-| **Alex_Plug_In** | AI/Cognitive | Transform GitHub Copilot into a sophisticated AI learning partner with meta-cognitive awareness, persistent memory, dual-mind processing, and cross-project knowledge sharing | [GitHub](https://github.com/fabioc-aloha/Alex_Plug_In) |
-| **airs-enterprise** | Research | Research-validated AI Readiness assessment platform (N=523, CFI=.975). 5-minute assessment with personalized AI guides in 29 languages. Live at airs.correax.com | [GitHub](https://github.com/fabioc-aloha/airs-enterprise) |
-| **AIRS_Data_Analysis** | Psychometrics | AI Readiness Scale: 7-phase psychometric validation with EFA→CFA→SEM pipeline. Autonomy-centered UTAUT2 extension (R²=.819) | [GitHub](https://github.com/fabioc-aloha/AIRS_Data_Analysis) |
-| **Project-Fishbowl** | Analytics | Real-time Qualtrics analytics dashboard with distribution monitoring, respondent experience insights, and Microsoft Fabric integration | [GitHub](https://github.com/fabioc-aloha/Project-Fishbowl) |
-| **Lab-Subscription** | Infrastructure | SFI-compliant Azure IaC for subscription management. Bicep modules, CI/CD pipelines, compliance audits | [GitHub](https://github.com/fabioc-aloha/Lab-Subscription) |
-| **youtube-mcp-server** | MCP Integration | Comprehensive YouTube MCP Server with 31 tools, AI intelligence layer, learning path generator | [GitHub](https://github.com/fabioc-aloha/youtube-mcp-server) |
-| **ChessCoach** | AI Application | AI-powered chess coaching with dual-engine analysis (Stockfish + Maia-2), Azure OpenAI coaching, real-time game analysis | [GitHub](https://github.com/fabioc-aloha/ChessCoach) |
-| **FabricManager** | Data Platform | Python toolkit for Azure Synapse to Microsoft Fabric migration - authentication, workspace management, OneLake shortcuts | [GitHub](https://github.com/fabioc-aloha/FabricManager) |
-| **KalabashDashboard** | Finance | Desktop financial market tracking with 8-Factor Investment Rating, 60+ financial ratios, advanced technical indicators | [GitHub](https://github.com/fabioc-aloha/KalabashDashboard) |
-| **AlexCook** | Creative | AI-generated family cookbook with 100+ recipes. IBS-friendly options, picky-eater approved | [GitHub](https://github.com/fabioc-aloha/AlexCook) |
+| Project                | Domain          | Description                                                                                                                                                                   | Link                                                         |
+| ---------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Alex_Plug_In**       | AI/Cognitive    | Transform GitHub Copilot into a sophisticated AI learning partner with meta-cognitive awareness, persistent memory, dual-mind processing, and cross-project knowledge sharing | [GitHub](https://github.com/fabioc-aloha/Alex_Plug_In)       |
+| **airs-enterprise**    | Research        | Research-validated AI Readiness assessment platform (N=523, CFI=.975). 5-minute assessment with personalized AI guides in 29 languages. Live at airs.correax.com              | [GitHub](https://github.com/fabioc-aloha/airs-enterprise)    |
+| **AIRS_Data_Analysis** | Psychometrics   | AI Readiness Scale: 7-phase psychometric validation with EFA→CFA→SEM pipeline. Autonomy-centered UTAUT2 extension (R²=.819)                                                   | [GitHub](https://github.com/fabioc-aloha/AIRS_Data_Analysis) |
+| **Project-Fishbowl**   | Analytics       | Real-time Qualtrics analytics dashboard with distribution monitoring, respondent experience insights, and Microsoft Fabric integration                                        | [GitHub](https://github.com/fabioc-aloha/Project-Fishbowl)   |
+| **Lab-Subscription**   | Infrastructure  | SFI-compliant Azure IaC for subscription management. Bicep modules, CI/CD pipelines, compliance audits                                                                        | [GitHub](https://github.com/fabioc-aloha/Lab-Subscription)   |
+| **youtube-mcp-server** | MCP Integration | Comprehensive YouTube MCP Server with 31 tools, AI intelligence layer, learning path generator                                                                                | [GitHub](https://github.com/fabioc-aloha/youtube-mcp-server) |
+| **ChessCoach**         | AI Application  | AI-powered chess coaching with dual-engine analysis (Stockfish + Maia-2), Azure OpenAI coaching, real-time game analysis                                                      | [GitHub](https://github.com/fabioc-aloha/ChessCoach)         |
+| **FabricManager**      | Data Platform   | Python toolkit for Azure Synapse to Microsoft Fabric migration - authentication, workspace management, OneLake shortcuts                                                      | [GitHub](https://github.com/fabioc-aloha/FabricManager)      |
+| **KalabashDashboard**  | Finance         | Desktop financial market tracking with 8-Factor Investment Rating, 60+ financial ratios, advanced technical indicators                                                        | [GitHub](https://github.com/fabioc-aloha/KalabashDashboard)  |
+| **AlexCook**           | Creative        | AI-generated family cookbook with 100+ recipes. IBS-friendly options, picky-eater approved                                                                                    | [GitHub](https://github.com/fabioc-aloha/AlexCook)           |
 
 ### Technology Distribution
 
@@ -981,13 +1231,13 @@ pie title Languages Across Portfolio
 
 ### Insights for the Methodology
 
-| Pattern Observed | Evidence from Portfolio | Contribution to Framework |
-|-----------------|------------------------|---------------------------|
-| **Cross-domain fertilization** | Security patterns from Lab-Subscription inform FishbowlGovernance | Global knowledge promotion mechanism |
-| **Research-to-practice pipeline** | AIRS_Data_Analysis (academic) → airs-enterprise (production) | Skill evolution through deployment |
-| **Creative projects accelerate learning** | AlexCook, maya, amazfit-watchfaces lower stakes for experimentation | Sandboxes for pattern discovery |
-| **MCP as integration pattern** | 4 MCP projects share authentication, tool discovery patterns | Skills transfer across integrations |
-| **Psychometric rigor transfers** | AIRS validation approach used in appropriate reliance telemetry design | Research methods as skills |
+| Pattern Observed                          | Evidence from Portfolio                                                | Contribution to Framework            |
+| ----------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------ |
+| **Cross-domain fertilization**            | Security patterns from Lab-Subscription inform FishbowlGovernance      | Global knowledge promotion mechanism |
+| **Research-to-practice pipeline**         | AIRS_Data_Analysis (academic) → airs-enterprise (production)           | Skill evolution through deployment   |
+| **Creative projects accelerate learning** | AlexCook, maya, amazfit-watchfaces lower stakes for experimentation    | Sandboxes for pattern discovery      |
+| **MCP as integration pattern**            | 4 MCP projects share authentication, tool discovery patterns           | Skills transfer across integrations  |
+| **Psychometric rigor transfers**          | AIRS validation approach used in appropriate reliance telemetry design | Research methods as skills           |
 
 ### Project Lifecycle Evidence
 
