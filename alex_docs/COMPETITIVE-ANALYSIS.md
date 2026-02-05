@@ -389,6 +389,10 @@ Amazon has announced **Alexa+** with LLM capabilities and "Remarkable Alexa" for
 | Code completion            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐    |   ⭐⭐   |   ⭐⭐   |   ❌   |   ⭐   |
 | Chat assistance            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐   |  ⭐⭐   |  ⭐⭐⭐  |
 | Agentic coding             |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ⭐    |   ⭐⭐   |   ⭐⭐   |   ❌   |  ⭐⭐   |
+| Inline editing             |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ❌    |   ⭐    |   ⭐    |   ❌   |   ❌   |
+| PR code review             |   ⭐⭐⭐   |  ⭐⭐⭐   |    ⭐⭐    |    ❌    |   ❌    |   ❌    |   ❌   |   ❌   |
+| Background agents          |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ❌    |   ⭐    |   ⭐    |   ❌   |   ❌   |
+| Image → code               |    ⭐    |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |  ⭐⭐⭐   |   ❌   |   ❌   |
 | Persistent memory          |    ⭐    |   ⭐    |    ⭐     |    ⭐    |   ⭐⭐   |   ⭐    |   ⭐   |  ⭐⭐⭐  |
 | Structured knowledge       |    ⭐    |   ⭐    |    ⭐     |    ❌    |   ⭐⭐   |   ⭐    |   ❌   |  ⭐⭐⭐  |
 | Learning model             |    ❌    |   ❌    |    ❌     |    ❌    |   ❌    |   ❌    |   ❌   |  ⭐⭐⭐  |
@@ -406,6 +410,30 @@ Amazon has announced **Alexa+** with LLM capabilities and "Remarkable Alexa" for
 - **Cursor**: Subagents, Skills (v2.4), CLI agents, multi-surface (Slack, GitHub), GPT-5.2/Opus 4.5
 - **Windsurf**: "Memories" feature, MCP support, JetBrains plugin, Tab v2 with variable aggression
 - **Claude**: Projects, Skills, Google Workspace integration, Claude Code with Opus 4.5, Excel integration
+
+### 🔍 Gaps: Where Alex Trails (Honest Assessment)
+
+Alex intentionally optimizes for teaching over doing, but some competitor capabilities could enhance the teaching mission:
+
+| Gap                   | Competitor Strength                                | Alex Status               | Priority | Opportunity                                          |
+| --------------------- | -------------------------------------------------- | ------------------------- | :------: | ---------------------------------------------------- |
+| **Code completion**   | Copilot/Cursor/Windsurf have ⭐⭐⭐ native completion | Relies on Copilot (⭐)     |    🔄    | Integrate completion with knowledge context          |
+| **Inline editing**    | Cursor Cmd+K, Windsurf Tab actions                 | No inline manipulation    |    🔄    | Inline suggestions with learning capture             |
+| **PR code review**    | Copilot code review, Cursor BugBot                 | No GitHub PR integration  |    🎯    | Review-as-teaching: explain *why* changes matter     |
+| **Background agents** | Cursor Cloud Agents, Copilot coding agent          | In-session only           |    📋    | Async learning: capture insights during background   |
+| **Terminal agents**   | Cursor CLI, Copilot CLI, Windsurf Turbo            | No autonomous terminal    |    🎯    | Terminal coaching with explanation                   |
+| **Image → code**      | Cursor/Windsurf: drag-drop design                  | No visual input           |    📋    | Design-to-code with architectural explanation        |
+| **IDE-native**        | Cursor/Windsurf are purpose-built editors          | VS Code extension         |    📋    | Deeper integration via Language Model API            |
+
+**Legend:** 🎯 High priority (aligns with teaching mission) | 🔄 Medium priority | 📋 Lower priority
+
+**The teaching trade-off:** These gaps are partly intentional. Competitors optimize for "do it for me" (max speed, min learning). Alex optimizes for "help me learn" (max growth, reasonable speed).
+
+**Research questions:**
+1. Can autonomous agents *also* teach? (Capture insights during background work for later review)
+2. What's the optimal autonomy level for different task types?
+3. How can PR review be structured as a learning moment, not just quality gate?
+4. Can inline editing preserve the "skills from doing" workflow?
 
 ---
 

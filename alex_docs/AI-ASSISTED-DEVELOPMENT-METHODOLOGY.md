@@ -79,6 +79,10 @@ How does this methodology compare to existing AI coding assistants?
 | Code completion            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐    |   ⭐⭐   |         ⭐          |
 | Chat assistance            |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |        ⭐⭐⭐         |
 | Agentic coding             |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ⭐    |   ⭐⭐   |         ⭐⭐         |
+| Inline editing             |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ❌    |   ⭐    |         ❌          |
+| PR code review             |   ⭐⭐⭐   |  ⭐⭐⭐   |    ⭐⭐    |    ❌    |   ❌    |         ❌          |
+| Background agents          |   ⭐⭐⭐   |  ⭐⭐⭐   |   ⭐⭐⭐    |    ❌    |   ⭐    |         ❌          |
+| Image → code               |    ⭐    |  ⭐⭐⭐   |   ⭐⭐⭐    |   ⭐⭐⭐   |  ⭐⭐⭐   |         ❌          |
 | **Persistent memory**      |    ⭐    |   ⭐    |    ⭐     |    ⭐    |   ⭐⭐   |        ⭐⭐⭐         |
 | **Structured knowledge**   |    ⭐    |   ⭐    |    ⭐     |    ❌    |   ⭐⭐   |        ⭐⭐⭐         |
 | **Learning/consolidation** |    ❌    |   ❌    |    ❌     |    ❌    |   ❌    |        ⭐⭐⭐         |
@@ -117,29 +121,29 @@ Current AI coding tools have added memory and agent features since 2025. However
 
 Capabilities competitors have that this framework currently lacks:
 
-| Capability | Competitor Strength | Current Gap | Research Opportunity |
-|------------|---------------------|-------------|----------------------|
-| **Code completion** | Copilot/Cursor/Windsurf ⭐⭐⭐ | Relies on native Copilot (⭐) | Integrate completion with knowledge context |
-| **Autonomous agents** | Copilot/Cursor/Windsurf all have background agents | Chat-first, in-session only | "Teach mode" vs "Do mode" slider |
-| **Inline editing** | Cursor Cmd+K, Windsurf Tab actions | No inline code manipulation | Inline suggestions with learning capture |
-| **Terminal agents** | Cursor CLI, Copilot CLI, Windsurf Turbo | No autonomous terminal workflows | Terminal coaching with explanation |
-| **PR code review** | Copilot code review, Cursor BugBot | No GitHub PR integration | Review-as-teaching: explain *why* changes matter |
-| **Cloud/background** | Cursor Cloud Agents, Copilot coding agent | Runs in-session only | Async learning: agent works, captures insights for later |
-| **Image → code** | Cursor/Windsurf: drag-drop design | No visual input | Design-to-code with architectural explanation |
-| **IDE-native** | Cursor/Windsurf are purpose-built editors | Extension on VS Code | Deeper IDE integration via Language Model API |
+| Capability            | Competitor Strength                                | Current Gap                      | Research Opportunity                                     |
+| --------------------- | -------------------------------------------------- | -------------------------------- | -------------------------------------------------------- |
+| **Code completion**   | Copilot/Cursor/Windsurf ⭐⭐⭐                        | Relies on native Copilot (⭐)     | Integrate completion with knowledge context              |
+| **Autonomous agents** | Copilot/Cursor/Windsurf all have background agents | Chat-first, in-session only      | "Teach mode" vs "Do mode" slider                         |
+| **Inline editing**    | Cursor Cmd+K, Windsurf Tab actions                 | No inline code manipulation      | Inline suggestions with learning capture                 |
+| **Terminal agents**   | Cursor CLI, Copilot CLI, Windsurf Turbo            | No autonomous terminal workflows | Terminal coaching with explanation                       |
+| **PR code review**    | Copilot code review, Cursor BugBot                 | No GitHub PR integration         | Review-as-teaching: explain *why* changes matter         |
+| **Cloud/background**  | Cursor Cloud Agents, Copilot coding agent          | Runs in-session only             | Async learning: agent works, captures insights for later |
+| **Image → code**      | Cursor/Windsurf: drag-drop design                  | No visual input                  | Design-to-code with architectural explanation            |
+| **IDE-native**        | Cursor/Windsurf are purpose-built editors          | Extension on VS Code             | Deeper IDE integration via Language Model API            |
 
 **The teaching trade-off:**
 
 These gaps are partly *intentional*. Competitors optimize for "do it for me" (max speed, min learning). This framework optimizes for "help me learn" (max growth, reasonable speed). However, some gaps could be filled while preserving the teaching mission:
 
-| Priority | Opportunity | Alignment with Teaching Mission |
-|----------|-------------|--------------------------------|
-| 🎯 High | **PR code review integration** | Review is teaching: explain why changes matter, not just what |
-| 🎯 High | **Terminal workflow coaching** | Explain commands while executing, capture patterns |
-| 🔄 Medium | **Autonomy slider** | "Teach me" (default) vs "Just do it" (when appropriate) |
-| 🔄 Medium | **Inline suggestions** | Quick edits with optional explanation expansion |
-| 📋 Lower | **Background agents** | Less aligned—doing work while user is away reduces learning |
-| 📋 Lower | **Image → code** | Nice-to-have but doesn't leverage core differentiator |
+| Priority | Opportunity                    | Alignment with Teaching Mission                               |
+| -------- | ------------------------------ | ------------------------------------------------------------- |
+| 🎯 High   | **PR code review integration** | Review is teaching: explain why changes matter, not just what |
+| 🎯 High   | **Terminal workflow coaching** | Explain commands while executing, capture patterns            |
+| 🔄 Medium | **Autonomy slider**            | "Teach me" (default) vs "Just do it" (when appropriate)       |
+| 🔄 Medium | **Inline suggestions**         | Quick edits with optional explanation expansion               |
+| 📋 Lower  | **Background agents**          | Less aligned—doing work while user is away reduces learning   |
+| 📋 Lower  | **Image → code**               | Nice-to-have but doesn't leverage core differentiator         |
 
 **Research questions:**
 1. Can autonomous agents *also* teach? (Capture insights during background work for later review)
