@@ -26,11 +26,82 @@ import {
     VOICE_PRESETS,
     LANGUAGE_VOICES,
     type VoicePreset,
-    type TTSProgress
+    type TTSProgress,
+    type TTSChunkedProgress
 } from '../tts';
 
 // Confidence threshold below which we ask user to confirm language
 const LANGUAGE_CONFIDENCE_THRESHOLD = 0.15;
+
+// Duration estimation constants
+const WORDS_PER_MINUTE = 150;          // Average TTS speaking rate
+const LONG_CONTENT_THRESHOLD_MINUTES = 5; // Offer summarization above this
+const LONG_CONTENT_WORD_THRESHOLD = WORDS_PER_MINUTE * LONG_CONTENT_THRESHOLD_MINUTES; // 750 words
+
+/**
+ * Estimate audio duration from word count
+ */
+function estimateDuration(wordCount: number): { minutes: number; formatted: string } {
+    const minutes = Math.ceil(wordCount / WORDS_PER_MINUTE);
+    if (minutes < 1) {
+        return { minutes: 0, formatted: 'less than 1 minute' };
+    } else if (minutes === 1) {
+        return { minutes: 1, formatted: '~1 minute' };
+    } else {
+        return { minutes, formatted: `~${minutes} minutes` };
+    }
+}
+
+/**
+ * Summarize content using VS Code's Language Model API
+ * Returns a concise summary suitable for reading aloud
+ */
+async function summarizeForSpeech(text: string, targetMinutes: number = 3): Promise<string | undefined> {
+    try {
+        // Get available chat models
+        const models = await vscode.lm.selectChatModels({ family: 'gpt-4o' });
+        if (models.length === 0) {
+            // Fall back to any available model
+            const allModels = await vscode.lm.selectChatModels();
+            if (allModels.length === 0) {
+                vscode.window.showWarningMessage('No language model available for summarization. Reading full content.');
+                return undefined;
+            }
+            models.push(allModels[0]);
+        }
+        
+        const model = models[0];
+        const targetWords = targetMinutes * WORDS_PER_MINUTE;
+        
+        const messages = [
+            vscode.LanguageModelChatMessage.User(`You are summarizing a document for text-to-speech. Create a clear, spoken-word summary that captures the key points.
+
+Requirements:
+- Target length: approximately ${targetWords} words (${targetMinutes} minutes when read aloud)
+- Write in complete sentences suitable for listening
+- Preserve the document's main arguments, findings, and conclusions
+- Maintain the original tone and voice
+- Do NOT use markdown formatting - plain text only
+- Do NOT say "This document..." or "The author..." - speak as if presenting the content directly
+
+Document to summarize:
+${text}`)
+        ];
+        
+        const response = await model.sendRequest(messages, {}, new vscode.CancellationTokenSource().token);
+        
+        let summary = '';
+        for await (const chunk of response.text) {
+            summary += chunk;
+        }
+        
+        return summary.trim();
+    } catch (error) {
+        console.error('Summarization failed:', error);
+        vscode.window.showWarningMessage('Failed to summarize. Reading full content.');
+        return undefined;
+    }
+}
 
 // Status bar item for TTS progress
 let ttsStatusBar: vscode.StatusBarItem | undefined;
@@ -137,20 +208,38 @@ export async function readAloud(
     }
     
     // Prepare text for speech (strip markdown, etc.)
-    const textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
+    let textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
     
-    // Check length and warn for very long documents
+    // Check length and offer summarization for long documents
     const wordCount = textToSpeak.split(/\s+/).length;
+    const duration = estimateDuration(wordCount);
     
-    if (wordCount > 5000) {
-        const proceed = await vscode.window.showWarningMessage(
-            `This document has ~${wordCount} words and may take a while to synthesize. Continue?`,
-            'Yes, read it',
+    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
+        const summaryDuration = estimateDuration(WORDS_PER_MINUTE * 3); // ~3 minute summary
+        
+        const choice = await vscode.window.showWarningMessage(
+            `This content is ${duration.formatted} long (~${wordCount} words). Would you like a summary instead?`,
+            { modal: false },
+            'Read Summary (~3 min)',
+            'Read Full Content',
             'Cancel'
         );
         
-        if (proceed !== 'Yes, read it') {
+        if (choice === 'Cancel' || !choice) {
             return;
+        }
+        
+        if (choice === 'Read Summary (~3 min)') {
+            showTTSStatus('Summarizing...', true);
+            
+            const summary = await summarizeForSpeech(rawText, 3);
+            if (summary) {
+                textToSpeak = summary;
+                vscode.window.showInformationMessage(
+                    `Reading summarized version (${estimateDuration(summary.split(/\s+/).length).formatted})`
+                );
+            }
+            // If summarization fails, we continue with full text
         }
     }
     
@@ -213,17 +302,22 @@ export async function readAloud(
         const audioBuffer = await synthesize(
             textToSpeak,
             { voice, lang: selectedLang },
-            (progress: TTSProgress) => {
+            (progress: TTSChunkedProgress) => {
+                // Build chunk indicator for long documents
+                const chunkInfo = progress.totalChunks && progress.totalChunks > 1
+                    ? ` [${progress.currentChunk}/${progress.totalChunks}]`
+                    : '';
+                
                 switch (progress.state) {
                     case 'connecting':
-                        showTTSStatus('Connecting...', true);
+                        showTTSStatus(`Connecting...${chunkInfo}`, true);
                         break;
                     case 'synthesizing':
-                        showTTSStatus('Synthesizing...', true);
+                        showTTSStatus(`Synthesizing...${chunkInfo}`, true);
                         break;
                     case 'streaming':
-                        const kb = Math.round((progress.bytesReceived || 0) / 1024);
-                        showTTSStatus(`Receiving... ${kb}KB`, true);
+                        const kb = Math.round((progress.totalBytesReceived || progress.bytesReceived || 0) / 1024);
+                        showTTSStatus(`Receiving... ${kb}KB${chunkInfo}`, true);
                         break;
                     case 'complete':
                         showTTSStatus('Preparing playback...', true);
@@ -371,10 +465,13 @@ export async function saveAsAudio(
                 const audioBuffer = await synthesize(
                     textToSpeak,
                     { voice: selectedVoice, lang: selectedLang },
-                    (ttsProgress) => {
+                    (ttsProgress: TTSChunkedProgress) => {
                         if (ttsProgress.state === 'streaming') {
-                            const kb = Math.round((ttsProgress.bytesReceived || 0) / 1024);
-                            progress.report({ message: `Receiving audio... ${kb}KB` });
+                            const kb = Math.round((ttsProgress.totalBytesReceived || ttsProgress.bytesReceived || 0) / 1024);
+                            const chunkInfo = ttsProgress.totalChunks && ttsProgress.totalChunks > 1
+                                ? ` [${ttsProgress.currentChunk}/${ttsProgress.totalChunks}]`
+                                : '';
+                            progress.report({ message: `Receiving audio... ${kb}KB${chunkInfo}` });
                         }
                     }
                 );

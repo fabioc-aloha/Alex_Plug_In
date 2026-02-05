@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.12] - 2026-02-05
+
+> **TTS Hotfix** — Fixed stalling on long documents with chunking, timeout, retry, and speaker warmup
+
+### Fixed
+
+- **🎙️ TTS Stalling on Long Content**
+  - Added chunking (max 3000 chars per request) — splits at paragraph/sentence boundaries
+  - Added 60-second timeout per chunk — prevents infinite hangs
+  - Added retry with exponential backoff (3 attempts, 1s→2s→4s + jitter)
+  - Added 2-second speaker warmup delay — allows Bluetooth/USB speakers to wake
+
+- **📊 Status Bar Progress**
+  - Shows chunk progress during synthesis: "Synthesizing speech [n/N]..."
+  - Displays "Preparing speakers..." before playback starts
+
+### Added
+
+- **📝 Summarization for Long Content**
+  - Offers to summarize documents over 5 minutes (~750 words)
+  - Uses VS Code Language Model API (GPT-4o preferred)
+  - Target summary: ~3 minutes (~450 words)
+
+### Changed
+
+- **🐦 Identity Documentation**
+  - Updated easter egg with Atticus Finch origin story (moral clarity, empathy, integrity)
+  - README now references "Alex Finch — named after Atticus Finch"
+
+---
+
 ## [4.2.10] - 2026-02-05
 
 > **Neural Bug Fix** — Repaired 15 broken synapses, added brain-qa skill for cognitive architecture validation

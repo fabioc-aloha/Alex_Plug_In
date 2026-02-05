@@ -207,7 +207,7 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         <p class="voice-info">Voice: Alex (en-US-GuyNeural)</p>
     </div>
 
-    <audio id="audio" autoplay>
+    <audio id="audio">
         <source src="data:audio/mp3;base64,${audioBase64}" type="audio/mp3">
     </audio>
 
@@ -221,6 +221,9 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         const playPauseBtn = document.getElementById('playPauseBtn');
         const playPauseIcon = document.getElementById('playPauseIcon');
         const playPauseText = document.getElementById('playPauseText');
+        
+        // Speaker activation delay (helps wake up Bluetooth/USB speakers)
+        const SPEAKER_WARMUP_MS = 2000;
         
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
@@ -242,15 +245,21 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         });
         
         audio.addEventListener('canplaythrough', () => {
-            // Explicitly start playback (autoplay may be blocked)
-            audio.play().then(() => {
-                sendState('playing', { duration: audio.duration });
-            }).catch(err => {
-                statusEl.textContent = 'Click Play to start';
-                playPauseIcon.textContent = '▶';
-                playPauseText.textContent = 'Play';
-                sendState('paused');
-            });
+            // Add a brief delay to wake up speakers (Bluetooth/USB often need time)
+            statusEl.textContent = 'Preparing speakers...';
+            sendState('preparing');
+            
+            setTimeout(() => {
+                audio.play().then(() => {
+                    statusEl.textContent = 'Playing...';
+                    sendState('playing', { duration: audio.duration });
+                }).catch(err => {
+                    statusEl.textContent = 'Click Play to start';
+                    playPauseIcon.textContent = '▶';
+                    playPauseText.textContent = 'Play';
+                    sendState('paused');
+                });
+            }, SPEAKER_WARMUP_MS);
         });
         
         audio.addEventListener('timeupdate', () => {

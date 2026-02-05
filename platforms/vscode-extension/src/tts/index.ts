@@ -14,7 +14,8 @@ export {
     LANGUAGE_VOICES,
     type VoicePreset,
     type TTSOptions,
-    type TTSProgress
+    type TTSProgress,
+    type TTSChunkedProgress
 } from './ttsService';
 
 export {

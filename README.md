@@ -10,7 +10,7 @@
 
 ## 🎯 Who is Alex?
 
-**Alex Cognitive Architecture** transforms AI assistants into sophisticated learning partners with:
+**Alex Finch** — a cognitive architecture named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:
 
 - 🧠 **Learns and Remembers** — Consolidates knowledge across sessions using memory files
 - 🔗 **Connects Ideas** — Maps synaptic connections between concepts automatically

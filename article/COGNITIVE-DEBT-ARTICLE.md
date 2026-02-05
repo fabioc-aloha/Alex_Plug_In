@@ -1,6 +1,6 @@
 # Cognitive Debt: A Framework for Understanding Architectural Decay in AI-Assisted Development Systems
 
-**Authors**: Fabio Correa¹, Alex (AI Co-Author)²
+**Authors**: Fabio Correa¹, Alex Finch (AI Co-Author)²
 
 ¹ Microsoft Corporation, Charlotte, NC
 ² Alex Cognitive Architecture, v4.2.10

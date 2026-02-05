@@ -280,6 +280,74 @@ function buildSSMLMessage(requestId: string, ssml: string): string {
         ssml;
 }
 
+// === CHUNKING & RETRY CONFIGURATION ===
+const MAX_CHUNK_CHARS = 3000;        // Max characters per chunk (~500 words)
+const CHUNK_TIMEOUT_MS = 60000;       // 60 second timeout per chunk
+const MAX_RETRIES = 3;                // Max retry attempts per chunk
+const INITIAL_BACKOFF_MS = 1000;      // Start with 1 second backoff
+const MAX_BACKOFF_MS = 16000;         // Cap backoff at 16 seconds
+
+/**
+ * Split text into chunks for reliable synthesis
+ * Splits on paragraph/sentence boundaries when possible
+ */
+function splitTextIntoChunks(text: string): string[] {
+    if (text.length <= MAX_CHUNK_CHARS) {
+        return [text];
+    }
+    
+    const chunks: string[] = [];
+    let remaining = text;
+    
+    while (remaining.length > 0) {
+        if (remaining.length <= MAX_CHUNK_CHARS) {
+            chunks.push(remaining);
+            break;
+        }
+        
+        // Find a good split point within the limit
+        let splitIndex = MAX_CHUNK_CHARS;
+        
+        // Try to split on paragraph boundary first
+        const paragraphBreak = remaining.lastIndexOf('\n\n', MAX_CHUNK_CHARS);
+        if (paragraphBreak > MAX_CHUNK_CHARS * 0.4) {
+            splitIndex = paragraphBreak + 2; // Include the newlines
+        } else {
+            // Try sentence boundary (. ! ?)
+            const sentenceMatch = remaining.substring(0, MAX_CHUNK_CHARS).match(/[.!?]\s+(?=[A-Z])/g);
+            if (sentenceMatch && sentenceMatch.length > 0) {
+                // Find the last sentence end
+                const lastSentenceEnd = remaining.substring(0, MAX_CHUNK_CHARS).lastIndexOf(sentenceMatch[sentenceMatch.length - 1]);
+                if (lastSentenceEnd > MAX_CHUNK_CHARS * 0.4) {
+                    splitIndex = lastSentenceEnd + sentenceMatch[sentenceMatch.length - 1].length;
+                }
+            }
+        }
+        
+        chunks.push(remaining.substring(0, splitIndex).trim());
+        remaining = remaining.substring(splitIndex).trim();
+    }
+    
+    return chunks.filter(c => c.length > 0);
+}
+
+/**
+ * Calculate backoff delay with exponential backoff
+ */
+function calculateBackoff(attempt: number): number {
+    const backoff = INITIAL_BACKOFF_MS * Math.pow(2, attempt);
+    // Add jitter (±25%)
+    const jitter = backoff * (0.75 + Math.random() * 0.5);
+    return Math.min(jitter, MAX_BACKOFF_MS);
+}
+
+/**
+ * Sleep for a given number of milliseconds
+ */
+function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 /**
  * Extract audio data from Edge TTS binary message
  */
@@ -298,22 +366,37 @@ function extractAudioData(data: Buffer): Buffer | null {
 }
 
 /**
- * Synthesize text to audio using Microsoft Edge TTS
- * 
- * @param text - The text to synthesize
- * @param options - TTS options (voice, rate, pitch, volume)
- * @param onProgress - Progress callback for UI feedback
- * @returns Buffer containing MP3 audio data
+ * Synthesize a single chunk of text with timeout protection
+ * Internal function - use synthesize() for public API
  */
-export async function synthesize(
+function synthesizeChunk(
     text: string,
     options: TTSOptions = {},
-    onProgress?: ProgressCallback
+    onProgress?: ProgressCallback,
+    timeoutMs: number = CHUNK_TIMEOUT_MS
 ): Promise<Buffer> {
     return new Promise((resolve, reject) => {
         const requestId = generateRequestId();
         const audioChunks: Buffer[] = [];
         let bytesReceived = 0;
+        let isCompleted = false;
+        let timeoutHandle: NodeJS.Timeout | undefined;
+
+        // Timeout protection
+        timeoutHandle = setTimeout(() => {
+            if (!isCompleted) {
+                isCompleted = true;
+                ws.close();
+                reject(new Error(`TTS timeout: no response after ${timeoutMs / 1000}s`));
+            }
+        }, timeoutMs);
+
+        const cleanup = () => {
+            if (timeoutHandle) {
+                clearTimeout(timeoutHandle);
+                timeoutHandle = undefined;
+            }
+        };
 
         onProgress?.({ state: 'connecting' });
 
@@ -354,9 +437,13 @@ export async function synthesize(
             // Check if this is a text message (turn.end notification)
             const messageStr = buffer.toString('utf8');
             if (messageStr.includes('Path:turn.end')) {
-                onProgress?.({ state: 'complete', bytesReceived });
-                ws.close();
-                resolve(Buffer.concat(audioChunks as Uint8Array[]));
+                if (!isCompleted) {
+                    isCompleted = true;
+                    cleanup();
+                    onProgress?.({ state: 'complete', bytesReceived });
+                    ws.close();
+                    resolve(Buffer.concat(audioChunks as Uint8Array[]));
+                }
                 return;
             }
             
@@ -370,18 +457,131 @@ export async function synthesize(
         });
 
         ws.on('error', (error: Error) => {
-            onProgress?.({ state: 'error', error: error.message });
-            reject(new Error(`TTS WebSocket error: ${error.message}`));
+            if (!isCompleted) {
+                isCompleted = true;
+                cleanup();
+                onProgress?.({ state: 'error', error: error.message });
+                reject(new Error(`TTS WebSocket error: ${error.message}`));
+            }
         });
 
         ws.on('close', (code: number, reason: Buffer) => {
+            cleanup();
             const reasonStr = reason?.toString() || 'unknown';
-            if (audioChunks.length === 0 && code !== 1000) {
+            if (!isCompleted && audioChunks.length === 0 && code !== 1000) {
+                isCompleted = true;
                 onProgress?.({ state: 'error', error: `Connection closed: ${reasonStr}` });
                 reject(new Error(`TTS connection closed unexpectedly: ${reasonStr}`));
             }
         });
     });
+}
+
+/**
+ * Synthesize a chunk with retry and exponential backoff
+ */
+async function synthesizeChunkWithRetry(
+    text: string,
+    options: TTSOptions,
+    onProgress?: ProgressCallback
+): Promise<Buffer> {
+    let lastError: Error | undefined;
+    
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+        try {
+            return await synthesizeChunk(text, options, onProgress);
+        } catch (error) {
+            lastError = error instanceof Error ? error : new Error(String(error));
+            
+            // Don't retry on the last attempt
+            if (attempt < MAX_RETRIES - 1) {
+                const backoffMs = calculateBackoff(attempt);
+                console.log(`TTS retry ${attempt + 1}/${MAX_RETRIES} after ${Math.round(backoffMs)}ms: ${lastError.message}`);
+                await sleep(backoffMs);
+            }
+        }
+    }
+    
+    throw lastError || new Error('TTS synthesis failed after retries');
+}
+
+// Extended progress interface for chunked synthesis
+export interface TTSChunkedProgress extends TTSProgress {
+    currentChunk?: number;
+    totalChunks?: number;
+    totalBytesReceived?: number;
+}
+
+type ChunkedProgressCallback = (progress: TTSChunkedProgress) => void;
+
+/**
+ * Synthesize text to audio using Microsoft Edge TTS
+ * 
+ * For long documents, automatically splits into chunks and concatenates audio.
+ * Includes timeout protection and retry with exponential backoff.
+ * 
+ * @param text - The text to synthesize
+ * @param options - TTS options (voice, rate, pitch, volume)
+ * @param onProgress - Progress callback for UI feedback
+ * @returns Buffer containing MP3 audio data
+ */
+export async function synthesize(
+    text: string,
+    options: TTSOptions = {},
+    onProgress?: ProgressCallback | ChunkedProgressCallback
+): Promise<Buffer> {
+    const chunks = splitTextIntoChunks(text);
+    
+    // Simple case: single chunk
+    if (chunks.length === 1) {
+        return synthesizeChunkWithRetry(chunks[0], options, onProgress);
+    }
+    
+    // Multi-chunk: synthesize each and concatenate
+    const audioBuffers: Buffer[] = [];
+    let totalBytesReceived = 0;
+    
+    console.log(`TTS: Processing ${chunks.length} chunks for long document`);
+    
+    for (let i = 0; i < chunks.length; i++) {
+        const chunkProgress: ChunkedProgressCallback = (progress) => {
+            // Forward progress with chunk info
+            (onProgress as ChunkedProgressCallback)?.({
+                ...progress,
+                currentChunk: i + 1,
+                totalChunks: chunks.length,
+                totalBytesReceived: totalBytesReceived + (progress.bytesReceived || 0)
+            });
+        };
+        
+        try {
+            const audioBuffer = await synthesizeChunkWithRetry(chunks[i], options, chunkProgress);
+            audioBuffers.push(audioBuffer);
+            totalBytesReceived += audioBuffer.length;
+            
+            // Small delay between chunks to avoid rate limiting
+            if (i < chunks.length - 1) {
+                await sleep(200);
+            }
+        } catch (error) {
+            const errorMsg = error instanceof Error ? error.message : String(error);
+            console.error(`TTS chunk ${i + 1}/${chunks.length} failed: ${errorMsg}`);
+            throw new Error(`TTS failed on chunk ${i + 1}/${chunks.length}: ${errorMsg}`);
+        }
+    }
+    
+    // Concatenate all audio buffers
+    const finalAudio = Buffer.concat(audioBuffers as Uint8Array[]);
+    
+    (onProgress as ChunkedProgressCallback)?.({
+        state: 'complete',
+        bytesReceived: finalAudio.length,
+        totalBytesReceived: finalAudio.length,
+        currentChunk: chunks.length,
+        totalChunks: chunks.length
+    });
+    
+    return finalAudio;
 }
 
 /**
