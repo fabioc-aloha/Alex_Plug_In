@@ -96,7 +96,7 @@ Principles that apply to any developer working with AI assistance.
 This framework captures a methodology for intensive human-AI collaboration that goes beyond "AI makes coding faster" to address a deeper question: **How can AI help developers get smarter over time, not just faster today?**
 
 **Expected Outcomes:**
-- 4-6× acceleration vs human-only estimates (cf. Peng et al., 2023, reporting 55% faster task completion)
+- 4-6× acceleration vs human-only estimates (cf. Peng et al., 2023, reporting 55.8% faster task completion)
 - Cross-project knowledge accumulation (148 insights captured across 62 projects)
 - Living documentation that evolves with code
 - Safety through architecture, not discipline
@@ -1251,35 +1251,35 @@ This work opens several avenues for future investigation:
 
 ### 8.1 Quantitative Validation Studies
 
-| Direction | Research Question | Proposed Method |
-| --------- | ----------------- | --------------- |
+| Direction                              | Research Question                                                                            | Proposed Method                                                                                                          |
+| -------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | **Controlled productivity comparison** | Does Master-Heir architecture outperform stateless AI assistance on multi-project workflows? | Between-subjects experiment with professional developers; measure completion time, code quality, and knowledge retention |
-| **Skill retention measurement** | Does the framework mitigate deskilling concerns compared to unstructured AI use? | Longitudinal study comparing fundamentals assessments over 6-12 months |
-| **Cross-project transfer validation** | How effectively do promoted patterns transfer to new domains? | Track pattern reuse rates and adaptation effort across heir projects |
+| **Skill retention measurement**        | Does the framework mitigate deskilling concerns compared to unstructured AI use?             | Longitudinal study comparing fundamentals assessments over 6-12 months                                                   |
+| **Cross-project transfer validation**  | How effectively do promoted patterns transfer to new domains?                                | Track pattern reuse rates and adaptation effort across heir projects                                                     |
 
 ### 8.2 Trust and Reliance Calibration
 
-| Direction | Research Question | Proposed Method |
-| --------- | ----------------- | --------------- |
+| Direction                           | Research Question                                                                                         | Proposed Method                                                       |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | **Edit distance as reliance proxy** | Does low edit distance correlate with poor outcomes (over-reliance) or efficiency (appropriate reliance)? | Analyze edit patterns against defect rates and developer satisfaction |
-| **Epistemic mode effectiveness** | Do explicit confidence ceilings reduce hallucination acceptance? | A/B test confidence displays in AI coding interfaces |
-| **Named identity effects** | Does consistent AI partner naming affect trust calibration? | Compare developer perceptions of named vs. unnamed AI assistants |
+| **Epistemic mode effectiveness**    | Do explicit confidence ceilings reduce hallucination acceptance?                                          | A/B test confidence displays in AI coding interfaces                  |
+| **Named identity effects**          | Does consistent AI partner naming affect trust calibration?                                               | Compare developer perceptions of named vs. unnamed AI assistants      |
 
 ### 8.3 Organizational Adoption
 
-| Direction | Research Question | Proposed Method |
-| --------- | ----------------- | --------------- |
-| **Team-level Master-Heir** | Can the architecture scale from individual to team knowledge management? | Case study with development teams sharing Master repositories |
+| Direction                   | Research Question                                                              | Proposed Method                                                                |
+| --------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| **Team-level Master-Heir**  | Can the architecture scale from individual to team knowledge management?       | Case study with development teams sharing Master repositories                  |
 | **Onboarding acceleration** | Do heir projects help new developers onboard faster through inherited context? | Measure time-to-productivity for developers joining heir vs. non-heir projects |
-| **Knowledge governance** | What policies govern pattern promotion in organizational contexts? | Interview-based study of team decision-making around shared AI knowledge |
+| **Knowledge governance**    | What policies govern pattern promotion in organizational contexts?             | Interview-based study of team decision-making around shared AI knowledge       |
 
 ### 8.4 Safety and Ethics
 
-| Direction | Research Question | Proposed Method |
-| --------- | ----------------- | --------------- |
-| **Defense in depth validation** | Do multi-layer protections actually prevent AI workspace incidents? | Simulate attack vectors and measure protection layer effectiveness |
-| **Skill floor maintenance** | What minimum human verification ensures AI doesn't mask capability gaps? | Establish competency thresholds through staged AI removal experiments |
-| **Bias propagation** | Do promoted patterns carry biases across projects? | Audit promoted patterns for consistent anti-patterns or exclusionary defaults |
+| Direction                       | Research Question                                                        | Proposed Method                                                               |
+| ------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| **Defense in depth validation** | Do multi-layer protections actually prevent AI workspace incidents?      | Simulate attack vectors and measure protection layer effectiveness            |
+| **Skill floor maintenance**     | What minimum human verification ensures AI doesn't mask capability gaps? | Establish competency thresholds through staged AI removal experiments         |
+| **Bias propagation**            | Do promoted patterns carry biases across projects?                       | Audit promoted patterns for consistent anti-patterns or exclusionary defaults |
 
 ### 8.5 Extension to Other Domains
 
@@ -1357,11 +1357,13 @@ The framework is open source. The invitation is open.
 
 Amershi, S., Weld, D., Vorvoreanu, M., Fourney, A., Nushi, B., Collisson, P., Suh, J., Iqbal, S., Bennett, P. N., Inkpen, K., Teevan, J., Kiber, R., & Horvitz, E. (2019). Guidelines for human-AI interaction. *Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems*, 1-13. https://doi.org/10.1145/3290605.3300233
 
+Argote, L., & Fahrenkopf, E. (2016). Knowledge transfer in organizations: The roles of members, tasks, tools, and networks. *Organizational Behavior and Human Decision Processes, 136*, 87-100. https://doi.org/10.1016/j.obhdp.2016.10.003
+
 Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., Chen, A., Goldie, A., Mirhoseini, A., McKinnon, C., Chen, C., Olsson, C., Olah, C., Hernandez, D., Drain, D., Ganguli, D., Li, D., Tran-Johnson, E., Perez, E., … Kaplan, J. (2022). Constitutional AI: Harmlessness from AI feedback. *arXiv preprint arXiv:2212.08073*. https://arxiv.org/abs/2212.08073
 
 Barke, S., James, M. B., & Polikarpova, N. (2023). Grounded Copilot: How programmers interact with code-generating models. *Proceedings of the ACM on Programming Languages, 7*(OOPSLA1), 85-111. https://doi.org/10.1145/3586030
 
-Buçinca, Z., Malte, B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction, 5*(CSCW1), 1-21. https://doi.org/10.1145/3449287
+Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction, 5*(CSCW1), 1-21. https://doi.org/10.1145/3449287
 
 Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., Ray, A., Puri, R., Krueger, G., Petrov, M., Khlaaf, H., Sastry, G., Mishkin, P., Chan, B., Gray, S., … Zaremba, W. (2021). Evaluating large language models trained on code. *arXiv preprint arXiv:2107.03374*. https://arxiv.org/abs/2107.03374
 
@@ -1387,13 +1389,13 @@ Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., & Gonzalez
 
 Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. *Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology*, 1-22. https://doi.org/10.1145/3586183.3606763
 
-Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). GenAI appropriate reliance: AETHER synthesis. *Microsoft Research Internal Report*.
+Passi, S., Dhanorkar, S., & Vorvoreanu, M. (2024). GenAI appropriate reliance: AETHER synthesis. *Microsoft Research Technical Report* (pre-publication). [Note: Internal Microsoft framework; cited for conceptual alignment with appropriate reliance literature.]
 
 Peng, S., Kalliamvakou, E., Cihon, P., & Demirer, M. (2023). The impact of AI on developer productivity: Evidence from GitHub Copilot. *arXiv preprint arXiv:2302.06590*. https://arxiv.org/abs/2302.06590
 
 Schemmer, M., Kühl, N., Benz, C., & Gerber, A. (2023). Appropriate reliance on AI advice: Conceptualization and the effect of explanations. *International Conference on Information Systems (ICIS) 2022 Proceedings*. https://aisel.aisnet.org/icis2022/hci/hci/3/
 
-Storey, M.-A., Zimmermann, T., Bird, C., Czerwonka, J., Murphy, B., & Kalliamvakou, E. (2019). Towards a theory of software developer job satisfaction and perceived productivity. *IEEE Transactions on Software Engineering, 47*(10), 2125-2142. https://doi.org/10.1109/TSE.2019.2944354
+Storey, M.-A., Zimmermann, T., Bird, C., Czerwonka, J., Murphy, B., & Kalliamvakou, E. (2021). Towards a theory of software developer job satisfaction and perceived productivity. *IEEE Transactions on Software Engineering, 47*(10), 2125-2142. https://doi.org/10.1109/TSE.2019.2944354
 
 Sumers, T. R., Yao, S., Narasimhan, K., & Griffiths, T. L. (2023). Cognitive architectures for language agents. *Transactions on Machine Learning Research*. https://arxiv.org/abs/2309.02427
 
