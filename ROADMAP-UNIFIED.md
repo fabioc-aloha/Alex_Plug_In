@@ -666,18 +666,18 @@ Useful for:
 > - [VSCODE-1.109-OPPORTUNITIES.md](alex_docs/VSCODE-1.109-OPPORTUNITIES.md) — Initial analysis
 > - [VSCODE-1.109-HEIR-INSIGHTS.md](alex_docs/VSCODE-1.109-HEIR-INSIGHTS.md) — Consolidated heir insights
 
-VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 68 skills already use the compatible format!
+VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 72 skills already use the compatible format!
 
 ### High-Priority Features
 
-|   #   | Feature                     | Impact |    Status     | Description                                                   |
-| :---: | --------------------------- | :----: | :-----------: | ------------------------------------------------------------- |
-|   1   | Agent Skills (GA)           |  HIGH  | 🔬 Investigate | `chatSkills` contribution point for native skill registration |
-|   2   | Custom Agents (`.agent.md`) |  HIGH  |    🆕 Plan     | Create Alex personas: Meditate, Learn, Dream, Review          |
-|   3   | Anthropic Improvements      |  HIGH  |  ⏳ Document   | Extended thinking, interleaved reasoning, tool search         |
-|   4   | Subagent Orchestration      |  HIGH  |  🔬 Research   | Multi-agent workflows with isolated context windows           |
-|   5   | Chat Prompt Files API       | MEDIUM |   🔜 Monitor   | Proposed API for dynamic skills/prompts                       |
-|   6   | Mermaid Native Rendering    | MEDIUM |   ⏳ Update    | `renderMermaidDiagram` tool complements our skill             |
+|   #   | Feature                     | Impact |    Status     | Description                                            |
+| :---: | --------------------------- | :----: | :-----------: | ------------------------------------------------------ |
+|   1   | Agent Skills (GA)           |  HIGH  | ✅ Implemented | `chatSkills` contribution point — 54 skills registered |
+|   2   | Custom Agents (`.agent.md`) |  HIGH  |    🆕 Plan     | Create Alex personas: Meditate, Learn, Dream, Review   |
+|   3   | Anthropic Improvements      |  HIGH  |  ⏳ Document   | Extended thinking, interleaved reasoning, tool search  |
+|   4   | Subagent Orchestration      |  HIGH  |  🔬 Research   | Multi-agent workflows with isolated context windows    |
+|   5   | Chat Prompt Files API       | MEDIUM |   🔜 Monitor   | Proposed API for dynamic skills/prompts                |
+|   6   | Mermaid Native Rendering    | MEDIUM |   ⏳ Update    | `renderMermaidDiagram` tool complements our skill      |
 
 ### New Recommended Settings
 
@@ -697,21 +697,21 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 > **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate
 > See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology
 
-| Version | Task                                           | Owner  | Human |  Alex  | Status |
-| ------- | ---------------------------------------------- | :----: | :---: | :----: | :----: |
-| v4.2.5  | Update engine to ^1.109.0                      |  Heir  |  30m  |  ⚡ 5m  |   ✅    |
-| v4.2.5  | Consolidate 9 agents → 3 (Alex, Azure, M365)   | Master |  2h   | 🔄 20m  |   ✅    |
-| v4.2.5  | Create 6 slash command prompt files            | Master |  1h   | ⚡ 10m  |   ✅    |
-| v4.2.5  | Implement agent handoffs (Azure, M365)         | Master |  1h   | ⚡ 10m  |   ✅    |
-| v4.2.5  | Refactor dream to shared synapse-core.ts       |  Heir  |  2h   | ⏱️ 45m  |   ✅    |
-| v4.2.5  | Create dream CLI for terminal usage            |  Heir  |  30m  | ⚡ 10m  |   ✅    |
-| v4.2.5  | Document recommended settings                  | Master |  1h   | 🔄 15m  |   ✅    |
-| v4.3.0  | Audit 68 skills for Agent Skills compatibility | Master |  4h   | ⏱️ 45m  |   ⬜    |
-| v4.3.0  | Investigate `chatSkills` contribution          |  Heir  |  4h   | 🔄 30m  |   ⬜    |
-| v4.3.0  | **OneDrive Agent Export command**              |  Heir  |  4h   | 🔄 45m  |   ⬜    |
-| v4.3.0  | **Community Agent pilot (Teams)**              |  M365  |  2h   | 🔄 30m  |   ⬜    |
-| v4.3.0+ | Agent orchestration prototype                  | Master |  8h   | 📦 1.5h |   ⬜    |
-| Future  | Adopt Chat Prompt Files API                    |  Heir  |  TBD  |  TBD   |   ⬜    |
+| Version | Task                                            | Owner  | Human |  Alex  | Status |
+| ------- | ----------------------------------------------- | :----: | :---: | :----: | :----: |
+| v4.2.5  | Update engine to ^1.109.0                       |  Heir  |  30m  |  ⚡ 5m  |   ✅    |
+| v4.2.5  | Consolidate 9 agents → 3 (Alex, Azure, M365)    | Master |  2h   | 🔄 20m  |   ✅    |
+| v4.2.5  | Create 6 slash command prompt files             | Master |  1h   | ⚡ 10m  |   ✅    |
+| v4.2.5  | Implement agent handoffs (Azure, M365)          | Master |  1h   | ⚡ 10m  |   ✅    |
+| v4.2.5  | Refactor dream to shared synapse-core.ts        |  Heir  |  2h   | ⏱️ 45m  |   ✅    |
+| v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m  |   ✅    |
+| v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m  |   ✅    |
+| v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m  |   ✅    |
+| v4.3.0  | Audit 72 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
+| v4.3.0  | **OneDrive Agent Export command**               |  Heir  |  4h   | 🔄 45m  |   ⬜    |
+| v4.3.0  | **Community Agent pilot (Teams)**               |  M365  |  2h   | 🔄 30m  |   ⬜    |
+| v4.3.0+ | Agent orchestration prototype                   | Master |  8h   | 📦 1.5h |   ⬜    |
+| Future  | Adopt Chat Prompt Files API                     |  Heir  |  TBD  |  TBD   |   ⬜    |
 
 **v4.2.5 Actual:** Human estimate 8.5h → Alex actual ~2h (4× acceleration)
 
