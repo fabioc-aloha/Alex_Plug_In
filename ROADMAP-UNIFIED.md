@@ -115,7 +115,7 @@ flowchart TB
     subgraph Master["🧠 MASTER ALEX"]
         direction TB
         M1["Root .github/"]
-        M2["71 Skills"]
+        M2["73 Skills"]
         M3["Cognitive Protocols"]
         M4["Identity & Personality"]
     end

@@ -121,7 +121,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Auto-Promotion           | ❌ None                   | ✅ Auto-promote DK files during meditation                     |
 | Emotional Intelligence   | ❌ None                   | ✅ Frustration detection & encouragement                       |
 | Model Awareness          | ❌ None                   | ✅ Warns when task needs Opus                                  |
-| Skills Library           | ❌ None                   | ✅ 68 portable skills (security, privacy, RAI, research, etc.) |
+| Skills Library           | ❌ None                   | ✅ 73 portable skills (security, privacy, RAI, research, etc.) |
 | Fully Automated Upgrades | ❌ None                   | ✅ One-click upgrade with schema migration                     |
 | Smart Nudges             | ❌ None                   | ✅ **NEW** Proactive reminders (dream, streak, sync)           |
 | OneDrive Auto-Sync       | ❌ None                   | ✅ **NEW** Cross-platform sync to M365                         |
