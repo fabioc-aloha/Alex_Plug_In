@@ -1,38 +1,38 @@
 {
-    "skill": "project-deployment",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "git-workflow",
-            "type": "requires",
-            "strength": 0.9
-        },
-        {
-            "target": "infrastructure-as-code",
-            "type": "enhances",
-            "strength": 0.7
-        },
-        {
-            "target": "security-review",
-            "type": "requires",
-            "strength": 0.8
-        },
-        {
-            "target": "testing-strategies",
-            "type": "requires",
-            "strength": 0.85
-        }
-    ],
-    "activationBoost": [
-        "deploy",
-        "release",
-        "publish",
-        "version",
-        "ship",
-        "package",
-        "npm publish",
-        "pip install",
-        "cargo publish",
-        "dotnet publish"
-    ]
+  "skill": "project-deployment",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/git-workflow/SKILL.md",
+      "type": "requires",
+      "strength": 0.9
+    },
+    {
+      "target": ".github/skills/infrastructure-as-code/SKILL.md",
+      "type": "enhances",
+      "strength": 0.7
+    },
+    {
+      "target": ".github/skills/security-review/SKILL.md",
+      "type": "requires",
+      "strength": 0.8
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "requires",
+      "strength": 0.85
+    }
+  ],
+  "activationBoost": [
+    "deploy",
+    "release",
+    "publish",
+    "version",
+    "ship",
+    "package",
+    "npm publish",
+    "pip install",
+    "cargo publish",
+    "dotnet publish"
+  ]
 }

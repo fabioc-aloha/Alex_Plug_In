@@ -6,25 +6,25 @@
       "reason": "Academic writing standards and publication workflows",
       "type": "complements",
       "strength": 0.85,
-      "target": "writing-publication"
+      "target": ".github/skills/writing-publication/SKILL.md"
     },
     {
       "reason": "Knowledge acquisition methodology for literature reviews",
       "type": "uses",
       "strength": 0.85,
-      "target": "bootstrap-learning"
+      "target": ".github/skills/bootstrap-learning/SKILL.md"
     },
     {
       "reason": "Research problem analysis and gap identification",
       "type": "applies",
       "strength": 0.65,
-      "target": "root-cause-analysis"
+      "target": ".github/skills/root-cause-analysis/SKILL.md"
     },
     {
       "reason": "Information chunking in academic writing",
       "type": "considers",
       "strength": 0.4,
-      "target": "cognitive-load"
+      "target": ".github/skills/cognitive-load/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

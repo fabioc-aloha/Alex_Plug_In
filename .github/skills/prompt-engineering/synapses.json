@@ -1,59 +1,59 @@
 {
-    "skill": "prompt-engineering",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "rag-architecture",
-            "type": "complements",
-            "strength": 0.9,
-            "bidirectional": true
-        },
-        {
-            "target": "llm-model-selection",
-            "type": "requires",
-            "strength": 0.85
-        },
-        {
-            "target": "anti-hallucination",
-            "type": "enhances",
-            "strength": 0.8
-        },
-        {
-            "target": "appropriate-reliance",
-            "type": "implements",
-            "strength": 0.75
-        },
-        {
-            "target": "api-design",
-            "type": "informs",
-            "strength": 0.6,
-            "note": "API design principles apply to prompt interfaces"
-        },
-        {
-            "target": "testing-strategies",
-            "type": "requires",
-            "strength": 0.7,
-            "note": "Prompt testing and evaluation"
-        }
-    ],
-    "activationBoost": [
-        "prompt",
-        "prompting",
-        "LLM",
-        "language model",
-        "GPT",
-        "Claude",
-        "system prompt",
-        "few-shot",
-        "zero-shot",
-        "chain of thought",
-        "CoT",
-        "instruction",
-        "temperature",
-        "token",
-        "completion",
-        "chat completion",
-        "AI agent",
-        "copilot"
-    ]
+  "skill": "prompt-engineering",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/rag-architecture/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/llm-model-selection/SKILL.md",
+      "type": "requires",
+      "strength": 0.85
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "type": "enhances",
+      "strength": 0.8
+    },
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "type": "implements",
+      "strength": 0.75
+    },
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "type": "informs",
+      "strength": 0.6,
+      "note": "API design principles apply to prompt interfaces"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "requires",
+      "strength": 0.7,
+      "note": "Prompt testing and evaluation"
+    }
+  ],
+  "activationBoost": [
+    "prompt",
+    "prompting",
+    "LLM",
+    "language model",
+    "GPT",
+    "Claude",
+    "system prompt",
+    "few-shot",
+    "zero-shot",
+    "chain of thought",
+    "CoT",
+    "instruction",
+    "temperature",
+    "token",
+    "completion",
+    "chat completion",
+    "AI agent",
+    "copilot"
+  ]
 }

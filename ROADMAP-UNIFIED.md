@@ -4,10 +4,10 @@
 
 |                            |                                                                      |
 | -------------------------- | -------------------------------------------------------------------- |
-| **Current Master Version** | 4.2.6                                                                |
-| **Current Heirs**          | VS Code (4.2.6), M365 (v4.0)                                         |
+| **Current Master Version** | 4.2.9                                                                |
+| **Current Heirs**          | VS Code (4.2.9), M365 (v4.0)                                         |
 | **Target**                 | 4.3.0 (Custom Agents & Skills)                                       |
-| **Status**                 | ✅ v4.2.6 Released                                                    |
+| **Status**                 | ✅ v4.2.9 Released                                                    |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -19,12 +19,194 @@
 | ------------- | ----------------------------------- | -------------------- |
 | v3.6.0-v3.9.0 | Dawn → Awareness                    | ✅ Complete (~2 days) |
 | v4.0.x        | Trust (CAIR/CSR, Creative Latitude) | ✅ **Complete**       |
-| v4.1.0        | Skill Expansion (68 skills)         | ✅ **Complete**       |
+| v4.1.0        | Skill Expansion (68 skills → 71)    | ✅ **Complete**       |
 | **v4.2.x**    | **UX Polish & Cross-Platform Sync** | ✅ **Complete**       |
+| **v4.3.0**    | **Custom Agents & M365 Expansion**  | 📋 **Planned**        |
+
+---
+
+## 📋 Current Task List (Updated 2026-02-05)
+
+### ✅ Recently Completed
+
+| Task                                            | Version | Date       |
+| ----------------------------------------------- | ------- | ---------- |
+| UX simplification: All command dialogs          | v4.2.9  | 2026-02-05 |
+| chatSkills expanded to 54 inheritable skills    | v4.2.9  | 2026-02-05 |
+| Community Agent setup docs added                | v4.2.9  | 2026-02-05 |
+| Context menu: Generate Image from Selection     | v4.2.9  | 2026-02-05 |
+| Insight saving to episodic memory               | v4.2.9  | 2026-02-05 |
+| TTS v2 - Native TypeScript implementation       | v4.2.6+ | 2026-02-05 |
+| TTS Flagship Skill documentation                | v4.2.6+ | 2026-02-05 |
+| OneDrive Agents insight captured                | —       | 2026-02-05 |
+| Teams Community Agents insight captured         | —       | 2026-02-05 |
+| Embedded Knowledge status check (still waiting) | —       | 2026-02-05 |
+| Meditation skill promoted from heir             | v4.2.6  | 2026-02-05 |
+
+### 🔄 In Progress
+
+| Task                            | Owner | Priority | Notes                                |
+| ------------------------------- | :---: | :------: | ------------------------------------ |
+| TTS v2 testing & refinement     | Heir  |   High   | Compile clean, needs runtime test    |
+| Schema 1.6 preparation for M365 | M365  |  Medium  | Ready when EmbeddedKnowledge enables |
+
+### 📋 Planned (v4.3.0)
+
+| Task                          | Owner  | Effort | Priority | Description                      |
+| ----------------------------- | :----: | :----: | :------: | -------------------------------- |
+| OneDrive Agent Export command |  Heir  |   4h   |  🔥 High  | `Alex: Export to OneDrive Agent` |
+| Agent orchestration prototype | Master |  1.5h  |  Medium  | Multi-agent workflows            |
+
+### 💡 Future Opportunities (v4.3.0+)
+
+#### 🔥 High-Impact Differentiation
+
+| Task                    | Owner | Effort | Priority | Description                                                                |
+| ----------------------- | :---: | :----: | :------: | -------------------------------------------------------------------------- |
+| Skill Mastery Dashboard | Heir  |   4h   |   High   | WebView panel showing skill usage stats, mastery levels (0-5), suggestions |
+| Learning Journeys       | Heir  |   3h   |   High   | Curated skill progressions (e.g., "Azure Fundamentals → Advanced → Arch")  |
+| Session Replay          | Heir  |   2h   |  Medium  | Save session transcripts + code changes to episodic memory                 |
+| Alex Daily Briefing     | Heir  |   2h   |   High   | On workspace open: goals, streak, suggested skills based on yesterday      |
+
+#### 🧠 Cognitive Architecture Enhancements
+
+| Task                        | Owner  | Effort | Priority | Description                                                       |
+| --------------------------- | :----: | :----: | :------: | ----------------------------------------------------------------- |
+| Skill Recommendations       |  Heir  |   3h   |   High   | Suggest skills based on file types opened (.bicep → Azure IaC)    |
+| Context-Aware Skill Loading |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace detection (package.json, etc) |
+| Synapse Strength Scoring    | Master |   2h   |  Medium  | Track frequently-used synapses, strengthen/prune pathways         |
+| Meditation Webview Panel    |  Heir  |   4h   |   High   | Rich UI for meditation/self-actualization with charts             |
+
+#### 🎨 UX Breakthroughs
+
+| Task                  | Owner | Effort | Priority | Description                                                  |
+| --------------------- | :---: | :----: | :------: | ------------------------------------------------------------ |
+| Voice Mode Toggle     | Heir  |   1h   |   High   | Status bar button to enable TTS for all Alex responses       |
+| Quick Command Palette | Heir  |   2h   |  Medium  | `Ctrl+Shift+A` opens Alex-specific palette with fuzzy search |
+| Inline Skill Hints    | Heir  |   3h   |  Medium  | Hover on code shows "💡 Alex can help: skill-name"            |
+| Progress Widget       | Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress   |
+
+#### 🔗 Platform Integration
+
+| Task                     | Owner | Effort | Priority | Description                                               |
+| ------------------------ | :---: | :----: | :------: | --------------------------------------------------------- |
+| GitHub Issue → Alex Task | Heir  |   3h   |   High   | MCP tool to fetch issues, create focus sessions from #123 |
+| PR Review Assistant      | Heir  |   4h   |   High   | Load PR diff, apply code-review skill, generate feedback  |
+| Calendar-Aware Focus     | Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min       |
+| Team Knowledge Sharing   | Heir  |   4h   |   High   | Export skills/insights as shareable JSON for team import  |
+
+### ⏳ Waiting for External
+
+| Task                    | Blocker                               | Last Checked |
+| ----------------------- | ------------------------------------- | :----------: |
+| M365 Embedded Knowledge | Microsoft feature "not yet available" |  2026-02-05  |
+| Chat Prompt Files API   | Proposed API, not stable              |  2026-02-04  |
+| Worker Agents (v1.6)    | Preview, not GA                       |  2026-02-05  |
 
 ---
 
 ## 🧠 The Alex Family
+
+### Master-Heir Architecture
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
+flowchart TB
+    subgraph Master["🧠 MASTER ALEX"]
+        direction TB
+        M1["Root .github/"]
+        M2["71 Skills"]
+        M3["Cognitive Protocols"]
+        M4["Identity & Personality"]
+    end
+
+    subgraph VSCode["👶 VS Code Heir"]
+        direction TB
+        V1["Chat Participant"]
+        V2["28 Commands"]
+        V3["11 LM Tools"]
+        V4["Local + Cloud Modes"]
+    end
+
+    subgraph M365["👶 M365 Heir"]
+        direction TB
+        M365_1["Declarative Agent"]
+        M365_2["8 Capabilities"]
+        M365_3["OneDrive Memory"]
+        M365_4["Graph Integration"]
+    end
+
+    Master -->|"DNA Inheritance"| VSCode
+    Master -->|"DNA Inheritance"| M365
+
+    style Master fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    style VSCode fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    style M365 fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+### Deployment Channels (Not Separate Heirs!)
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
+flowchart LR
+    subgraph VSCodeHeir["👶 VS Code Heir"]
+        CMD1["alex.exportToOneDrive"]
+        CMD2["alex.cloudSync"]
+    end
+
+    subgraph M365Heir["👶 M365 Heir"]
+        DA["Declarative Agent<br/>(IT-managed)"]
+    end
+
+    subgraph Channels["📤 M365 Deployment Channels"]
+        ODA[".agent File<br/>(OneDrive Agent)"]
+        CA["Community Agent<br/>(Teams)"]
+        WA["Worker Agent<br/>(Agent-to-Agent)"]
+    end
+
+    subgraph Target["🎯 Same Runtime"]
+        COP["M365 Copilot"]
+    end
+
+    VSCodeHeir -->|"Export"| ODA
+    M365Heir --> DA
+    DA --> COP
+    ODA --> COP
+    CA --> COP
+    WA -.->|"Preview"| COP
+
+    style VSCodeHeir fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    style M365Heir fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    style Channels fill:#eaeef2,color:#24292f,stroke:#d0d7de
+    style Target fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Key Insight:** OneDrive Agents, Community Agents, and Worker Agents are **deployment channels** for M365 Copilot, not separate heirs. They all run on the same M365 Copilot runtime with the same Alex DNA.
+
+### Platform Opportunity Analysis
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
+quadrantChart
+    title Platform Opportunities for Alex Heirs
+    x-axis Low Effort --> High Effort
+    y-axis Low Impact --> High Impact
+    quadrant-1 "Do Now"
+    quadrant-2 "Plan Carefully"
+    quadrant-3 "Fill Gaps"
+    quadrant-4 "Deprioritize"
+    "OneDrive Agent Export": [0.25, 0.85]
+    "Community Agent": [0.35, 0.75]
+    "GitHub Copilot Workspace": [0.65, 0.90]
+    "Worker Agents": [0.45, 0.55]
+    "Power Automate": [0.70, 0.30]
+    "Copilot Studio": [0.55, 0.40]
+    "Claude/ChatGPT": [0.80, 0.50]
+```
+
+### ASCII Architecture (For Non-Mermaid Renderers)
 
 ```
                          ┌─────────────────────────────────────┐
@@ -59,10 +241,54 @@
      │   • Full .github/ copy    │               │   • Instructions embed    │
      │   • Technical depth       │               │     core protocols        │
      │                           │               │   • M365-native features  │
-     └───────────────────────────┘               └───────────────────────────┘
+     └─────────────┬─────────────┘               └─────────────┬─────────────┘
+                   │                                           │
+          ┌────────┴────────┐                      ┌───────────┴───────────┐
+          ▼                 ▼                      ▼           ▼           ▼
+      Local Mode      Cloud Sync           Declarative   OneDrive    Community
+      (workspace)     (GitHub)             Agent (IT)    Agent       Agent
+                                                         (Zero IT)   (Teams)
 ```
 
 **Principle:** Both heirs carry the same Alex identity. Users should recognize Alex on any platform.
+
+---
+
+## 🚀 Future Platform Opportunities
+
+### Heirs vs Integration vs Channels
+
+| Category                | Examples                        | Relationship to Master                             |
+| ----------------------- | ------------------------------- | -------------------------------------------------- |
+| **Heirs**               | VS Code, M365                   | Full DNA inheritance, platform-specific expression |
+| **Deployment Channels** | OneDrive Agent, Community Agent | Delivery mechanism for existing heir               |
+| **Integrations**        | OneDrive Sync, GitHub Cloud     | Cross-heir communication layer                     |
+
+### Potential Future Heirs
+
+| Platform                       | Heir Status | Rationale                               |
+| ------------------------------ | :---------: | --------------------------------------- |
+| **GitHub Copilot Workspace**   | ⭐⭐⭐ Strong  | Cloud IDE, natural VS Code extension    |
+| **Standalone Web/Mobile**      |  ⭐⭐ Medium  | No platform exists yet; would be custom |
+| **Claude/Anthropic Artifacts** |    ⭐ Low    | Different ecosystem, limited API        |
+| **Browser Extension**          |  ⭐⭐ Medium  | Could run VS Code heir's cognitive core |
+
+### Current Focus (v4.3.0)
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ddf4ff', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#80ccff', 'secondaryColor': '#fff8c5', 'tertiaryColor': '#d3f5db', 'lineColor': '#57606a', 'taskTextColor': '#1f2328', 'sectionBkgColor': '#eaeef2', 'altSectionBkgColor': '#f6f8fa', 'gridColor': '#d0d7de', 'doneColor': '#d3f5db', 'activeColor': '#fff8c5', 'critColor': '#ffebe9'}}}%%
+gantt
+    title v4.3.0 Platform Expansion
+    dateFormat YYYY-MM-DD
+    section VS Code Heir
+        OneDrive Agent Export     :active, oda, 2026-02-06, 4d
+        Agent Skills Audit        :skills, after oda, 2d
+    section M365 Heir
+        Community Agent Pilot     :ca, 2026-02-06, 3d
+        Schema 1.6 Prep           :schema, after ca, 2d
+    section Waiting
+        Embedded Knowledge        :crit, ek, 2026-02-15, 1d
+```
 
 ---
 
@@ -191,6 +417,12 @@
 
 **Status:** ⏳ Microsoft feature "not yet available" - files prepared, capability commented
 
+| Property           | Value                       |
+| ------------------ | --------------------------- |
+| **Schema Version** | 1.6 (latest as of Feb 2026) |
+| **Feature Status** | Documented but NOT enabled  |
+| **Last Checked**   | 2026-02-05                  |
+
 ### Prepared Knowledge Files
 
 | File                                  | Size | Purpose                                    |
@@ -199,19 +431,36 @@
 | `knowledge/skill-quick-reference.md`  | ~5KB | All 15 embedded skills condensed           |
 | `knowledge/cognitive-architecture.md` | ~5KB | How Alex thinks and remembers              |
 
+### Embedded Knowledge Capability (Schema 1.6)
+
+```json
+{
+  "name": "EmbeddedKnowledge",
+  "files": [
+    { "file": "knowledge/alex-protocols.txt" },
+    { "file": "knowledge/skill-quick-reference.txt" },
+    { "file": "knowledge/cognitive-architecture.txt" }
+  ]
+}
+```
+
 ### When Feature Launches
 
-1. Uncomment `EmbeddedKnowledge` capability in `declarativeAgent.json`
-2. Test knowledge grounding in responses
-3. Adjust file content based on retrieval quality
+1. Convert `.md` files to `.txt` (Markdown not supported)
+2. Uncomment `EmbeddedKnowledge` capability in `declarativeAgent.json`
+3. Add `sensitivity_label` if files contain sensitive content
+4. Update schema version to `v1.6`
+5. Test knowledge grounding in responses
+6. Adjust file content based on retrieval quality
 
-### Constraints (per Microsoft docs)
+### Constraints (per Microsoft docs - Schema 1.6)
 
 - Max **10 files**
 - Max **1 MB per file**
-- Formats: `.doc`, `.docx`, `.ppt`, `.pptx`, `.xls`, `.xlsx`, `.txt`, `.pdf`
+- Formats: `.docx`, `.pptx`, `.xlsx`, `.txt`, `.pdf` (NO `.md`!)
+- Relative paths from manifest location
 
-**Note:** Our `.md` files may need conversion to `.txt` when feature launches.
+**Note:** Our `.md` files MUST be converted to `.txt` when feature launches.
 
 ---
 
@@ -231,15 +480,77 @@ Both heirs can already share context via **OneDrive**:
 - Direct sync to `OneDrive/Alex-Memory/` on export
 - Auto-sync on Dream/Self-Actualize (via `alex.m365.autoSync` setting)
 
+### 🆕 OneDrive Agents (February 2026 - NEW!)
+
+> **Breaking News!** Microsoft launched OneDrive Agents on Feb 5, 2026. This is a game-changer for M365 Alex.
+
+**What are OneDrive Agents?**
+- `.agent` files stored in OneDrive
+- Provide specialized Copilot experience grounded in your documents
+- Select up to 20 files/folders as agent context
+- Shareable like any file!
+
+**Alex Integration Opportunity:**
+
+| Deployment Path             | Effort  | IT Required | Best For                     |
+| --------------------------- | ------- | ----------- | ---------------------------- |
+| Declarative Agent (current) | Medium  | Yes         | Org-wide deployment          |
+| **OneDrive Agent** (new)    | **Low** | **No**      | Personal/team, zero friction |
+| **Community Agent** (new)   | **Low** | **No**      | Team Q&A, shared knowledge   |
+| Teams App                   | High    | Yes         | Deep enterprise integration  |
+
+**Proposed Command:** `Alex: Export to OneDrive Agent`
+
+This command would:
+1. Generate optimized instruction file from skills/profile
+2. Export relevant knowledge to OneDrive
+3. Create `.agent` file with Alex persona
+4. User opens in OneDrive → Alex in M365 Copilot!
+
+**Benefits:**
+- Zero IT involvement required
+- Shareable across organization
+- Synergy with VS Code heir (develop → deploy)
+- Always up-to-date (source files update agent)
+
+### 🆕 Teams Community Agents (January 2026 - NEW!)
+
+> **Also New!** Microsoft launched Agents in Communities (public preview) in Teams January 2026.
+
+**What are Community Agents?**
+- AI agents embedded in Teams Communities (alongside chats and channels)
+- Draft responses to unanswered questions in the community
+- Grounded in SharePoint sites + past community discussions
+- Community admins review and publish suggested responses
+
+**Alex Integration Opportunity:**
+
+Deploy Alex as a Community Agent that:
+1. Answers team questions about patterns, best practices, architecture
+2. Grounds responses in Alex knowledge files (stored in SharePoint)
+3. Builds organizational knowledge over time from Q&A
+4. Admin-reviewed responses ensure quality
+
+**Benefits:**
+- Team-wide Alex without individual setup
+- Organic knowledge building from real questions
+- SharePoint grounding aligns with existing M365 integration
+- Community admins can curate Alex's responses
+
+**See also:** Frontline Agent (persona-tuned assistants) validates Alex's approach to specialized AI personas.
+
 ### Future Possibilities (Monitoring)
 
-| Approach                 | Status          | Notes                                  |
-| ------------------------ | --------------- | -------------------------------------- |
-| **OneDrive "Mailbox"**   | ✅ Possible now  | Manual - user triggers M365 to check   |
-| **Worker Agents** (v1.6) | 🔜 Preview       | Agent-to-agent within M365             |
-| **Copilot Agent API**    | ❌ Doesn't exist | Would enable VS Code → M365 calls      |
-| **Power Automate**       | ⚠️ Limited       | Needs Premium, limited Copilot actions |
-| **Copilot Memory**       | 🔓 **UNLOCKED**  | VS Code 1.109 - GitHub cloud sync      |
+| Approach                 | Status          | Notes                                      |
+| ------------------------ | --------------- | ------------------------------------------ |
+| **OneDrive Agents**      | ✅ **AVAILABLE** | Feb 2026 - .agent files, grounded AI!      |
+| **Community Agents**     | ✅ **PREVIEW**   | Jan 2026 - Q&A bot grounded in SharePoint! |
+| **OneDrive "Mailbox"**   | ✅ Possible now  | Manual - user triggers M365 to check       |
+| **Worker Agents** (v1.6) | 🔜 Preview       | Agent-to-agent within M365                 |
+| **Interpreter Agent**    | ✅ GA            | Real-time translation, 9 languages         |
+| **Copilot Agent API**    | ❌ Doesn't exist | Would enable VS Code → M365 calls          |
+| **Power Automate**       | ⚠️ Limited       | Needs Premium, limited Copilot actions     |
+| **Copilot Memory**       | 🔓 **UNLOCKED**  | VS Code 1.109 - GitHub cloud sync          |
 
 ### OneDrive Sync Pattern (Ready Now)
 
@@ -349,7 +660,7 @@ Useful for:
 
 ---
 
-## � VS Code 1.109 Opportunities (2026-02-04)
+## 💡 VS Code 1.109 Opportunities (2026-02-04)
 
 > **References:**
 > - [VSCODE-1.109-OPPORTUNITIES.md](alex_docs/VSCODE-1.109-OPPORTUNITIES.md) — Initial analysis
@@ -397,6 +708,8 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | v4.2.5  | Document recommended settings                  | Master |  1h   | 🔄 15m  |   ✅    |
 | v4.3.0  | Audit 68 skills for Agent Skills compatibility | Master |  4h   | ⏱️ 45m  |   ⬜    |
 | v4.3.0  | Investigate `chatSkills` contribution          |  Heir  |  4h   | 🔄 30m  |   ⬜    |
+| v4.3.0  | **OneDrive Agent Export command**              |  Heir  |  4h   | 🔄 45m  |   ⬜    |
+| v4.3.0  | **Community Agent pilot (Teams)**              |  M365  |  2h   | 🔄 30m  |   ⬜    |
 | v4.3.0+ | Agent orchestration prototype                  | Master |  8h   | 📦 1.5h |   ⬜    |
 | Future  | Adopt Chat Prompt Files API                    |  Heir  |  TBD  |  TBD   |   ⬜    |
 
@@ -421,6 +734,8 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | **4.2.5** | **VS Code 1.109 Multi-Agent**         | ✅ **Complete** | **2026-02-04** |
 | **4.2.6** | **Research Skills (68 total)**        | ✅ **Complete** | **2026-02-05** |
 | 4.3.0     | Custom Agents & Skills Audit          | 📋 Planned      | Feb W2-3       |
+| 4.3.0     | **OneDrive Agent Export (M365)**      | 📋 Planned      | Feb W2-3       |
+| 4.3.0     | **Community Agent Pilot (Teams)**     | 📋 Planned      | Feb W2-3       |
 | 4.4.0     | Orchestration & Extension Integration | 📋 Planned      | Mar            |
 
 **v3.6.0 → v4.2.6: ~7 days** (vs months planned) 🚀

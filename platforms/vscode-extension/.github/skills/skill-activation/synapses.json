@@ -1,0 +1,43 @@
+{
+    "skill": "skill-activation",
+    "version": "1.0.0",
+    "description": "Auto-triggering metacognitive skill for capability discovery before response formation",
+    "category": "cognitive",
+    "autoTrigger": true,
+    "triggerConditions": [
+        "Before suggesting manual steps",
+        "When uncertain about capabilities",
+        "On action verb detection (convert, create, generate, build, debug)",
+        "Before responding with 'you can...', 'try...', 'manually...'"
+    ],
+    "synapses": [
+        {
+            "target": ".github/copilot-instructions.md",
+            "type": "referenced-by",
+            "strength": 1.0,
+            "when": "self-correction protocol triggers",
+            "yields": "Pointer to this file for action-keyword index lookup"
+        },
+        {
+            "target": ".github/skills/awareness/SKILL.md",
+            "type": "relates-to",
+            "strength": 0.8,
+            "when": "detecting own uncertainty or errors",
+            "yields": "Self-monitoring patterns, red flag phrases"
+        },
+        {
+            "target": ".github/skills/anti-hallucination/SKILL.md",
+            "type": "uses",
+            "strength": 0.6,
+            "when": "uncertain if skill exists",
+            "yields": "Verification patterns, admit-uncertainty protocol"
+        },
+        {
+            "target": ".github/skills/cognitive-load/SKILL.md",
+            "type": "uses",
+            "strength": 0.5,
+            "when": "routing between multiple skill matches",
+            "yields": "Chunking strategies, decision simplification"
+        }
+    ]
+}

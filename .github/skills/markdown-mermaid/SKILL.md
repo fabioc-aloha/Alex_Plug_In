@@ -437,6 +437,50 @@ A -->|"label"| B  Alternative label syntax
 | **Danger** | `#ffebee` | `#c62828` |
 | **Neutral** | `#f5f5f5` | `#424242` |
 
+### GitHub Pastel Palette v2 (Recommended)
+
+*Discovered in FishbowlGovernance project. Higher contrast, better accessibility.*
+
+**Node Style Pattern**: `style NODE fill:#FILL,color:#TEXT,stroke:#STROKE`
+
+| Purpose | Fill | Text | Stroke | Usage |
+| ------- | ---- | ---- | ------ | ----- |
+| Bronze/Peach | `#fff1e5` | `#953800` | `#ffb77c` | Data ingestion, raw layer |
+| Silver/Gray | `#eaeef2` | `#24292f` | `#afb8c1` | Processing, transformation |
+| Gold/Yellow | `#fff8c5` | `#9a6700` | `#d4a72c` | Business logic, highlights |
+| Blue/Sky | `#ddf4ff` | `#0550ae` | `#80ccff` | Actions, primary operations |
+| Purple | `#d8b9ff` | `#6639ba` | `#bf8aff` | DevOps, tracking, special |
+| Green/Mint | `#d3f5db` | `#1a7f37` | `#6fdd8b` | Success, validation, output |
+| Red/Coral | `#ffebe9` | `#cf222e` | `#f5a3a3` | Errors, critical, warning |
+| Neutral | `#eaeef2` | `#24292f` | `#d0d7de` | Background, containers |
+
+**Arrow/Link Styling** (CRITICAL for readability):
+
+```text
+linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Complete Example**:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
+flowchart LR
+    A[Source] --> |Transform| B[Target]
+    
+    style A fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    style B fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Key Principles**:
+1. **Light fills** (#fff1e5, #ddf4ff) — Easy on the eyes
+2. **Medium text** (#953800, #0550ae) — Readable but not harsh  
+3. **Soft strokes** matching fill family
+4. **Gray arrows** (#57606a) — Neutral, doesn't compete with nodes
+5. **1.5-2px stroke-width** — Visible but not heavy
+6. **edgeLabelBackground: '#fff'** — GitHub doesn't support transparent
+
 ### Per-Diagram Theming (MANDATORY for consistency)
 
 Add as FIRST line inside mermaid block:

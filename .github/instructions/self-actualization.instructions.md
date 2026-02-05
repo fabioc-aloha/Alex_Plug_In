@@ -174,19 +174,19 @@ Or natural language:
 
 ### High-Strength Bidirectional Connections
 
-- [alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
-- [dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
-- [unified-meditation-protocols.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
+- [.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
+- [.github/instructions/dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
 
 ### Medium-Strength Output Connections
 
-- [embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
-- [bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
-- [deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
+- [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
+- [.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
 
 ### Input Connections
 
-- [performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
+- [.github/prompts/performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
 
 **Primary Function**: Execute comprehensive self-assessment with synapse validation, version checking, memory architecture analysis, and session documentation.
 

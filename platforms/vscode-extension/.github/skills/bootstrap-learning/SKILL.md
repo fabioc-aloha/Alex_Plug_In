@@ -56,6 +56,6 @@ Expert in domain-agnostic knowledge acquisition through conversational learning.
 
 ## Related Skills
 
-- [Meditation](../meditation/SKILL.md) - Consolidate after learning
-- [Architecture Health](../architecture-health/SKILL.md) - Validate new connections
-- [Global Knowledge](../global-knowledge/SKILL.md) - Leverage cross-project learnings
+- [Meditation](.github/skills/meditation/SKILL.md) - Consolidate after learning
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate new connections
+- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Leverage cross-project learnings

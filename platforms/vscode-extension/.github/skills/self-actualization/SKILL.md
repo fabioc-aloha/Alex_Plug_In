@@ -57,6 +57,6 @@ Expert in comprehensive cognitive self-assessment, deep meditation, and architec
 
 ## Related Skills
 
-- [Architecture Health](../architecture-health/SKILL.md) - Quick health checks
-- [Meditation](../meditation/SKILL.md) - Regular consolidation
-- [Global Knowledge](../global-knowledge/SKILL.md) - Cross-project status
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Quick health checks
+- [Meditation](.github/skills/meditation/SKILL.md) - Regular consolidation
+- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Cross-project status

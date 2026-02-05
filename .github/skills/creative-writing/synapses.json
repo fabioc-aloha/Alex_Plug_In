@@ -6,26 +6,26 @@
       "reason": "Publishing creative work and manuscript preparation",
       "type": "extends",
       "strength": 0.85,
-      "target": "writing-publication"
+      "target": ".github/skills/writing-publication/SKILL.md"
     },
     {
       "bidirectional": true,
       "reason": "Research for historical fiction and non-fiction elements",
       "type": "complements",
       "strength": 0.65,
-      "target": "academic-research"
+      "target": ".github/skills/academic-research/SKILL.md"
     },
     {
       "reason": "Reader experience and information pacing",
       "type": "applies",
       "strength": 0.65,
-      "target": "cognitive-load"
+      "target": ".github/skills/cognitive-load/SKILL.md"
     },
     {
       "reason": "Balancing AI assistance with authentic creative voice",
       "type": "applies",
       "strength": 0.4,
-      "target": "appropriate-reliance"
+      "target": ".github/skills/appropriate-reliance/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

@@ -3,12 +3,12 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": "git-workflow",
+      "target": ".github/skills/git-workflow/SKILL.md",
       "type": "uses",
       "strength": 0.8
     },
     {
-      "target": "vscode-extension-patterns",
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies-to",
       "strength": 0.75
     }

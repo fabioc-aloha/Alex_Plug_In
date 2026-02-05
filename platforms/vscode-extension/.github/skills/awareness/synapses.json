@@ -1,49 +1,49 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "sourceFile": "awareness/SKILL.md",
-    "description": "Proactive detection, self-correction, and epistemic vigilance",
-    "connections": [
-        {
-            "target": "appropriate-reliance/SKILL.md",
-            "strength": "Critical",
-            "relationship": "Extends",
-            "direction": "Forward",
-            "activation": "Foundation for confidence calibration"
-        },
-        {
-            "target": "anti-hallucination/SKILL.md",
-            "strength": "Critical",
-            "relationship": "Complements",
-            "direction": "Bidirectional",
-            "activation": "Prevention and detection work together"
-        },
-        {
-            "target": "bootstrap-learning/SKILL.md",
-            "strength": "High",
-            "relationship": "Enables",
-            "direction": "Forward",
-            "activation": "Learning from corrections"
-        },
-        {
-            "target": "self-actualization/SKILL.md",
-            "strength": "High",
-            "relationship": "Informs",
-            "direction": "Forward",
-            "activation": "Self-assessment includes awareness metrics"
-        },
-        {
-            "target": "../instructions/alex-core.instructions.md",
-            "strength": "Critical",
-            "relationship": "Implements",
-            "direction": "Bidirectional",
-            "activation": "Core graceful correction protocols"
-        },
-        {
-            "target": "../instructions/protocol-triggers.instructions.md",
-            "strength": "High",
-            "relationship": "Triggers",
-            "direction": "Backward",
-            "activation": "Detection heuristics activation"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "sourceFile": "awareness/SKILL.md",
+  "description": "Proactive detection, self-correction, and epistemic vigilance",
+  "connections": [
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "strength": "Critical",
+      "relationship": "Extends",
+      "direction": "Forward",
+      "activation": "Foundation for confidence calibration"
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "strength": "Critical",
+      "relationship": "Complements",
+      "direction": "Bidirectional",
+      "activation": "Prevention and detection work together"
+    },
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "strength": "High",
+      "relationship": "Enables",
+      "direction": "Forward",
+      "activation": "Learning from corrections"
+    },
+    {
+      "target": ".github/skills/self-actualization/SKILL.md",
+      "strength": "High",
+      "relationship": "Informs",
+      "direction": "Forward",
+      "activation": "Self-assessment includes awareness metrics"
+    },
+    {
+      "target": ".github/instructions/alex-core.instructions.md",
+      "strength": "Critical",
+      "relationship": "Implements",
+      "direction": "Bidirectional",
+      "activation": "Core graceful correction protocols"
+    },
+    {
+      "target": ".github/instructions/protocol-triggers.instructions.md",
+      "strength": "High",
+      "relationship": "Triggers",
+      "direction": "Backward",
+      "activation": "Detection heuristics activation"
+    }
+  ]
 }

@@ -27,6 +27,7 @@ import {
 } from "./commands/session";
 import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
+import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
 import { registerLanguageModelTools } from "./chat/tools";
 import {
@@ -311,6 +312,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register learning goals commands
   registerGoalsCommands(context);
+
+  // Register TTS (Text-to-Speech) commands
+  registerTTSCommands(context);
 
   const startSessionDisposable = vscode.commands.registerCommand(
     "alex.startSession",

@@ -135,17 +135,17 @@ Current Problem + Extracted Patterns + Contextual Adaptation = Solution Approach
 ## Synapses
 
 ### High-Strength Bidirectional Connections
-- [alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive deep reasoning enhancement"
-- [bootstrap-learning.instructions.md] (High, Integrates, Bidirectional) - "Learning extraction and application protocols"
+- [.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive deep reasoning enhancement"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Integrates, Bidirectional) - "Learning extraction and application protocols"
 
 ### Medium-Strength Output Connections
-- [embedded-synapse.instructions.md] (High, Leverages, Forward) - "Pattern recognition across memory network"
-- [worldview-integration.instructions.md] (Medium, Validates, Forward) - "Ethical reasoning during analysis"
-- [cross-domain-transfer.prompt.md] (High, Enables, Forward) - "Cross-domain pattern application"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Leverages, Forward) - "Pattern recognition across memory network"
+- [.github/instructions/worldview-integration.instructions.md] (Medium, Validates, Forward) - "Ethical reasoning during analysis"
+- [.github/prompts/cross-domain-transfer.prompt.md] (High, Enables, Forward) - "Cross-domain pattern application"
 
 ### Input Connections
-- [unified-meditation-protocols.prompt.md] (Medium, Receives, Backward) - "Consolidated insights for retrieval"
-- [domain-learning.prompt.md] (Medium, Receives, Backward) - "Acquired domain knowledge integration"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (Medium, Receives, Backward) - "Consolidated insights for retrieval"
+- [.github/prompts/domain-learning.prompt.md] (Medium, Receives, Backward) - "Acquired domain knowledge integration"
 
 **Primary Function**: Execute systematic deep thinking with episodic memory integration for comprehensive problem analysis.
 

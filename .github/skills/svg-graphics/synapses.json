@@ -3,28 +3,32 @@
     "inheritance": "inheritable",
     "connections": [
         {
-            "target": "project-scaffolding",
+            "target": ".github/skills/project-scaffolding/SKILL.md",
             "type": "enables",
             "strength": 0.9,
-            "reason": "Hero banners for READMEs"
+            "when": "creating hero banner for README",
+            "yields": "README structure, banner placement, sizing guidelines"
         },
         {
-            "target": "image-handling",
-            "type": "complements",
+            "target": ".github/skills/image-handling/SKILL.md",
+            "type": "output-to",
             "strength": 0.85,
-            "reason": "SVG to PNG conversion"
+            "when": "SVG needs conversion to PNG/JPEG",
+            "yields": "sharp-cli commands, optimization flags"
         },
         {
-            "target": "ascii-art-alignment",
+            "target": ".github/skills/ascii-art-alignment/SKILL.md",
             "type": "complements",
             "strength": 0.6,
-            "reason": "Both are visual skills"
+            "when": "text alignment in visual elements",
+            "yields": "Box drawing, unicode alignment"
         },
         {
-            "target": "markdown-mermaid",
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
             "type": "complements",
             "strength": 0.7,
-            "reason": "Both create diagrams"
+            "when": "choosing between SVG and Mermaid",
+            "yields": "Mermaid syntax, when to use each"
         }
     ],
     "triggers": [
@@ -35,6 +39,8 @@
         "graphic",
         "visual",
         "badge",
-        "hero image"
+        "hero image",
+        "viewBox",
+        "dark mode CSS"
     ]
 }

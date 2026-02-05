@@ -3,22 +3,28 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": "writing-publication",
+      "target": ".github/skills/writing-publication/SKILL.md",
       "type": "supports",
       "strength": 0.85,
       "reason": "Diagrams enhance publications"
     },
     {
-      "target": "lint-clean-markdown",
+      "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "type": "requires",
       "strength": 0.8,
       "reason": "Mermaid must be in valid markdown"
     },
     {
-      "target": "vscode-extension-patterns",
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "integrates",
       "strength": 0.75,
       "reason": "Native VS Code rendering since 1.109"
+    },
+    {
+      "target": ".github/skills/graphic-design/SKILL.md",
+      "type": "requires",
+      "strength": 0.9,
+      "reason": "Color theory, accessibility, contrast principles for diagram styling"
     }
   ],
   "activationBoost": [
@@ -33,7 +39,14 @@
     "ignoring direction",
     "diagram too tall",
     "diagram too wide",
-    "invisible link"
+    "invisible link",
+    "color palette",
+    "pastel colors",
+    "GitHub colors",
+    "node styling",
+    "linkStyle",
+    "arrow color",
+    "accessibility colors"
   ],
   "triggers": [
     "mermaid",

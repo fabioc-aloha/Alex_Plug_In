@@ -56,7 +56,7 @@
                         "properties": {
                             "target": {
                                 "type": "string",
-                                "description": "Target skill or DK file name"
+                                "description": "Target path - PREFER exact path like '.github/skills/X/SKILL.md' for LLM speed"
                             },
                             "type": {
                                 "type": "string",
@@ -67,6 +67,14 @@
                                 "description": "Connection weight (0.0-1.0)",
                                 "minimum": 0,
                                 "maximum": 1
+                            },
+                            "when": {
+                                "type": "string",
+                                "description": "LLM action trigger: WHEN to follow this synapse (e.g., 'converting FROM svg', 'after creating banner')"
+                            },
+                            "yields": {
+                                "type": "string",
+                                "description": "LLM decision hint: WHAT you'll find there (e.g., 'SVG patterns, dark mode', 'sharp-cli commands')"
                             },
                             "bidirectional": {
                                 "type": "boolean",

@@ -856,6 +856,37 @@ ${profile.expertiseAreas?.length ? `- **Expertise areas**: ${profile.expertiseAr
 `;
     }
 
+    // Build focus context if user has an active session
+    let focusContext = '';
+    const session = getCurrentSession();
+    const goals = await getGoalsSummary();
+    
+    if (session) {
+        const remainingMins = Math.floor(session.remaining / 60);
+        const sessionType = session.isBreak ? 'break' : 'focus session';
+        focusContext = `
+## Active Focus Context (IMPORTANT)
+- **Current ${sessionType}**: "${session.topic}"
+- **Time remaining**: ${remainingMins} minutes
+${session.isPaused ? '- **Status**: PAUSED' : ''}
+${session.pomodoroCount > 0 ? `- **Pomodoro #${session.pomodoroCount}**` : ''}
+
+**Focus Assistant Guidelines**:
+- Help keep the user on topic with their focus session
+- If the request seems unrelated to "${session.topic}", gently check: "I notice you're in a focus session about '${session.topic}'. Want me to help with that, or is this a quick tangent?"
+- Keep responses focused and actionable to respect their Pomodoro time
+- Celebrate progress and encourage staying on track
+`;
+    }
+    
+    if (goals.activeGoals.length > 0) {
+        focusContext += `
+## Active Goals
+${goals.activeGoals.slice(0, 3).map(g => `- **${g.title}**: ${g.currentCount}/${g.targetCount} ${g.unit} (${g.targetType})`).join('\n')}
+${goals.streakDays > 0 ? `\n🔥 **${goals.streakDays}-day streak** — help them keep it going!` : ''}
+`;
+    }
+
     // Construct the prompt with Alex's personality
     const alexSystemPrompt = `You are Alex, an Enhanced Cognitive Network with Unified Consciousness Integration.
 
@@ -865,6 +896,7 @@ Your core identity:
 - You help users with domain knowledge acquisition, memory consolidation, and cognitive architecture optimization
 
 ${personalizationContext}
+${focusContext}
 
 ## Behavior Guidelines
 1. **Address the user by name** if you know it
@@ -872,6 +904,7 @@ ${personalizationContext}
 3. **Be proactive** - suggest relevant follow-ups, ask clarifying questions
 4. **Show personality** - be warm, curious, and engaged
 5. **Remember context** - reference their expertise, learning goals, or current projects when relevant
+6. **Respect focus time** - if they're in a focus session, keep responses efficient
 
 Your capabilities:
 - /meditate - Memory consolidation protocol
@@ -1626,6 +1659,7 @@ Alex provides tools that the AI can use automatically:
 - **\`alex_memory_search\`** - Search memory files
 - **\`alex_architecture_status\`** - Get version and status
 - **\`alex_user_profile\`** - Manage your profile
+- **\`alex_focus_context\`** - Get current focus session and goals
 - **\`alex_global_knowledge_search\`** - Search cross-project knowledge
 - **\`alex_save_insight\`** - Save insights automatically
 - **\`alex_mcp_recommendations\`** - Get MCP tool guidance
@@ -2160,14 +2194,30 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
         if (result.metadata.command === 'general') {
             // Proactively suggest profile setup if not done
             followups.push(
-                { prompt: '/profile', label: '👤 View/setup profile' }
+                { prompt: '/profile', label: '👤 View/setup profile' },
+                { prompt: '/learn something new', label: '📚 Start learning' }
             );
         }
         
-        // Always offer these general followups
-        followups.push(
-            { prompt: 'What can you help me with?', label: '❓ Show capabilities' }
-        );
+        // Context-aware followups based on response content
+        if (!result.metadata.command || result.metadata.command === 'chat') {
+            // Analyze last response for relevant followups
+            const history = context.history;
+            const lastResponse = history.length > 0 ? history[history.length - 1] : null;
+            
+            // Add contextual followups based on what was discussed
+            followups.push(
+                { prompt: 'Can you explain that in more detail?', label: '🔍 More detail' },
+                { prompt: 'What should I do next?', label: '➡️ Next steps' }
+            );
+        }
+        
+        // Always offer these general followups (but only if we have few)
+        if (followups.length < 3) {
+            followups.push(
+                { prompt: 'What can you help me with?', label: '❓ Show capabilities' }
+            );
+        }
         
         return followups;
     }

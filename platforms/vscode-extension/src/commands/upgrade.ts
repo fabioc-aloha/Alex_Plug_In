@@ -832,31 +832,28 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     const userCandidates = upgradeCandidates.filter(c => c.type !== 'profile' && c.type !== 'episodic');
 
     // Show completion message
+    const healthIcon = dreamSuccess ? '💚' : '⚠️';
+    const healthText = dreamSuccess ? 'healthy' : 'needs attention';
+    
     if (userCandidates.length > 0) {
       const result = await vscode.window.showInformationMessage(
         `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
-        `📋 ${userCandidates.length} item(s) found for migration\n` +
-        `👤 Profile and history auto-restored\n` +
-        `${dreamSuccess ? '💚' : '⚠️'} Health: ${dreamSuccess ? 'Good' : 'Check recommended'}\n\n` +
-        `Review MIGRATION-CANDIDATES.md to migrate your content.`,
-        "Open Migration Guide",
-        "Run Dream Check",
-        "Close"
+        `${healthIcon} Health: ${healthText} • 👤 Profile restored\n` +
+        `📋 ${userCandidates.length} custom item(s) need your review`,
+        "Review Items",
+        "OK"
       );
 
-      if (result === "Open Migration Guide") {
+      if (result === "Review Items") {
         const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
         const doc = await vscode.workspace.openTextDocument(candidatesPath);
         await vscode.window.showTextDocument(doc);
-      } else if (result === "Run Dream Check") {
-        await vscode.commands.executeCommand("alex.dream");
       }
     } else {
       await vscode.window.showInformationMessage(
         `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
-        `👤 Profile and history restored\n` +
-        `${dreamSuccess ? '💚' : '⚠️'} Health: ${dreamSuccess ? 'Good' : 'Check recommended'}\n\n` +
-        `No additional migration needed - you're all set!`,
+        `${healthIcon} Health: ${healthText} • 👤 Profile restored\n` +
+        `No migration needed - you're all set!`,
         "OK"
       );
     }

@@ -1,72 +1,72 @@
 {
-    "skill": "rag-architecture",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "prompt-engineering",
-            "type": "complements",
-            "strength": 0.9,
-            "bidirectional": true
-        },
-        {
-            "target": "api-design",
-            "type": "applies",
-            "strength": 0.7,
-            "note": "RAG systems expose APIs"
-        },
-        {
-            "target": "anti-hallucination",
-            "type": "implements",
-            "strength": 0.85,
-            "note": "RAG is a key anti-hallucination technique"
-        },
-        {
-            "target": "global-knowledge",
-            "type": "related",
-            "strength": 0.75,
-            "note": "Global knowledge is a form of RAG for Alex"
-        },
-        {
-            "target": "testing-strategies",
-            "type": "requires",
-            "strength": 0.7,
-            "note": "RAG evaluation and testing"
-        },
-        {
-            "target": "llm-model-selection",
-            "type": "informs",
-            "strength": 0.65,
-            "note": "Embedding and generation model choices"
-        },
-        {
-            "target": "performance",
-            "type": "considers",
-            "strength": 0.6,
-            "note": "Latency, caching, cost optimization"
-        }
-    ],
-    "activationBoost": [
-        "RAG",
-        "retrieval",
-        "retrieval-augmented",
-        "embedding",
-        "embeddings",
-        "vector",
-        "vector database",
-        "vector store",
-        "semantic search",
-        "similarity search",
-        "chunking",
-        "chunk",
-        "knowledge base",
-        "document retrieval",
-        "Pinecone",
-        "Weaviate",
-        "Chroma",
-        "FAISS",
-        "pgvector",
-        "Azure AI Search",
-        "reranking",
-        "hybrid search"
-    ]
+  "skill": "rag-architecture",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "type": "applies",
+      "strength": 0.7,
+      "note": "RAG systems expose APIs"
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "type": "implements",
+      "strength": 0.85,
+      "note": "RAG is a key anti-hallucination technique"
+    },
+    {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "related",
+      "strength": 0.75,
+      "note": "Global knowledge is a form of RAG for Alex"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "requires",
+      "strength": 0.7,
+      "note": "RAG evaluation and testing"
+    },
+    {
+      "target": ".github/skills/llm-model-selection/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "note": "Embedding and generation model choices"
+    },
+    {
+      "target": ".github/skills/performance/SKILL.md",
+      "type": "considers",
+      "strength": 0.6,
+      "note": "Latency, caching, cost optimization"
+    }
+  ],
+  "activationBoost": [
+    "RAG",
+    "retrieval",
+    "retrieval-augmented",
+    "embedding",
+    "embeddings",
+    "vector",
+    "vector database",
+    "vector store",
+    "semantic search",
+    "similarity search",
+    "chunking",
+    "chunk",
+    "knowledge base",
+    "document retrieval",
+    "Pinecone",
+    "Weaviate",
+    "Chroma",
+    "FAISS",
+    "pgvector",
+    "Azure AI Search",
+    "reranking",
+    "hybrid search"
+  ]
 }

@@ -99,20 +99,12 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
             }
         } else {
             const healthStatus = dreamResult.totalSynapses > 50 ? 'excellent' : dreamResult.totalSynapses > 20 ? 'good' : 'developing';
-            const result = await vscode.window.showInformationMessage(
+            await vscode.window.showInformationMessage(
                 `✅ Neural network is healthy!\n\n` +
-                `📊 Statistics:\n` +
-                `• ${dreamResult.totalFiles} memory files\n` +
-                `• ${dreamResult.totalSynapses} active synapses\n` +
-                `${dreamResult.repairedCount > 0 ? `• ${dreamResult.repairedCount} auto-repaired\n` : ''}` +
-                `• Network health: ${healthStatus}`,
-                'View Full Report',
-                'Close'
+                `📊 ${dreamResult.totalFiles} memory files • ${dreamResult.totalSynapses} synapses • ${healthStatus}` +
+                `${dreamResult.repairedCount > 0 ? ` • ${dreamResult.repairedCount} auto-repaired` : ''}`,
+                'OK'
             );
-            if (result === 'View Full Report') {
-                const doc = await vscode.workspace.openTextDocument(reportPath);
-                await vscode.window.showTextDocument(doc);
-            }
         }
     }
 

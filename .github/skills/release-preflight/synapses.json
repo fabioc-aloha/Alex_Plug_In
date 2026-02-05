@@ -3,7 +3,7 @@
   "inheritance": "master-only",
   "connections": [
     {
-      "target": "git-workflow",
+      "target": ".github/skills/git-workflow/SKILL.md",
       "type": "requires",
       "strength": 0.95
     },
@@ -13,12 +13,12 @@
       "strength": 0.9
     },
     {
-      "target": "vscode-extension-patterns",
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies-to",
       "strength": 0.85
     },
     {
-      "target": "m365-agent-debugging",
+      "target": ".github/skills/m365-agent-debugging/SKILL.md",
       "type": "applies-to",
       "strength": 0.8
     }

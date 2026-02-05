@@ -63,24 +63,24 @@ Alex responds with personality, context awareness, and access to all cognitive t
 
 **Table 1:** *Alex Chat Slash Commands*
 
-| Command | Purpose | Example |
-| --- | --- | --- |
-| `/meditate` | Consolidate knowledge into memory files | `@alex /meditate learned about React hooks` |
-| `/dream` | Run neural maintenance | `@alex /dream` |
-| `/selfactualize` | Deep architecture assessment | `@alex /selfactualize` |
-| `/learn [topic]` | Acquire domain knowledge | `@alex /learn TypeScript generics` |
-| `/session [topic]` | Start focused learning session | `@alex /session React hooks` |
-| `/status` | Check architecture health | `@alex /status` |
-| `/knowledge [query]` | Search global knowledge | `@alex /knowledge error handling` |
-| `/saveinsight` | Save a learning | `@alex /saveinsight React useEffect cleanup` |
-| `/promote` | Promote local knowledge to global | `@alex /promote .github/skills/react/SKILL.md` |
-| `/knowledgestatus` | View global knowledge stats | `@alex /knowledgestatus` |
-| `/sync` | Sync with cloud (manual) | `@alex /sync` |
-| `/push` | Push to cloud | `@alex /push` |
-| `/pull` | Pull from cloud | `@alex /pull` |
-| `/azure [query]` | Azure development help | `@alex /azure create function app` |
-| `/m365 [query]` | M365 development help | `@alex /m365 teams bot` |
-| `/profile` | View/update preferences | `@alex /profile` |
+| Command              | Purpose                                 | Example                                        |
+| -------------------- | --------------------------------------- | ---------------------------------------------- |
+| `/meditate`          | Consolidate knowledge into memory files | `@alex /meditate learned about React hooks`    |
+| `/dream`             | Run neural maintenance                  | `@alex /dream`                                 |
+| `/selfactualize`     | Deep architecture assessment            | `@alex /selfactualize`                         |
+| `/learn [topic]`     | Acquire domain knowledge                | `@alex /learn TypeScript generics`             |
+| `/session [topic]`   | Start focused learning session          | `@alex /session React hooks`                   |
+| `/status`            | Check architecture health               | `@alex /status`                                |
+| `/knowledge [query]` | Search global knowledge                 | `@alex /knowledge error handling`              |
+| `/saveinsight`       | Save a learning                         | `@alex /saveinsight React useEffect cleanup`   |
+| `/promote`           | Promote local knowledge to global       | `@alex /promote .github/skills/react/SKILL.md` |
+| `/knowledgestatus`   | View global knowledge stats             | `@alex /knowledgestatus`                       |
+| `/sync`              | Sync with cloud (manual)                | `@alex /sync`                                  |
+| `/push`              | Push to cloud                           | `@alex /push`                                  |
+| `/pull`              | Pull from cloud                         | `@alex /pull`                                  |
+| `/azure [query]`     | Azure development help                  | `@alex /azure create function app`             |
+| `/m365 [query]`      | M365 development help                   | `@alex /m365 teams bot`                        |
+| `/profile`           | View/update preferences                 | `@alex /profile`                               |
 
 ---
 
@@ -181,19 +181,20 @@ graph LR
 
 **Table 2:** *Alex Language Model Tool Descriptions*
 
-| Tool | Purpose |
-| --- | --- |
-| `alex_memory_search` | Search local memory with auto-fallback to global |
-| `alex_global_knowledge_search` | Search cross-project knowledge base |
-| `alex_save_insight` | Save valuable learning (auto-syncs) |
-| `alex_promote_knowledge` | Promote local skill to global (auto-syncs) |
-| `alex_architecture_status` | Check if Alex is installed and healthy |
-| `alex_global_knowledge_status` | View global knowledge statistics |
-| `alex_synapse_health` | Validate synaptic connections |
-| `alex_self_actualization` | Run comprehensive self-assessment |
-| `alex_cloud_sync` | Manual cloud sync control |
-| `alex_mcp_recommendations` | Get Azure/M365 MCP tool suggestions |
-| `alex_user_profile` | Manage user preferences |
+| Tool                           | Purpose                                          |
+| ------------------------------ | ------------------------------------------------ |
+| `alex_memory_search`           | Search local memory with auto-fallback to global |
+| `alex_global_knowledge_search` | Search cross-project knowledge base              |
+| `alex_save_insight`            | Save valuable learning (auto-syncs)              |
+| `alex_promote_knowledge`       | Promote local skill to global (auto-syncs)       |
+| `alex_architecture_status`     | Check if Alex is installed and healthy           |
+| `alex_global_knowledge_status` | View global knowledge statistics                 |
+| `alex_synapse_health`          | Validate synaptic connections                    |
+| `alex_self_actualization`      | Run comprehensive self-assessment                |
+| `alex_cloud_sync`              | Manual cloud sync control                        |
+| `alex_mcp_recommendations`     | Get Azure/M365 MCP tool suggestions              |
+| `alex_user_profile`            | Manage user preferences                          |
+| `alex_focus_context`           | Get current focus session and goals              |
 
 ---
 
@@ -270,13 +271,13 @@ The conscious mind works alongside the unconscious:
 
 **Table 3:** *Conscious Actions and Unconscious Responses*
 
-| Conscious Action | Unconscious Response |
-| --- | --- |
-| Save insight | Auto-triggers cloud sync |
-| Promote knowledge | Auto-triggers cloud sync |
-| Search local (empty) | Auto-fallback to global |
-| Start session | Auto-triggers self-actualization check |
-| Any conversation | Auto-insight detection runs |
+| Conscious Action     | Unconscious Response                   |
+| -------------------- | -------------------------------------- |
+| Save insight         | Auto-triggers cloud sync               |
+| Promote knowledge    | Auto-triggers cloud sync               |
+| Search local (empty) | Auto-fallback to global                |
+| Start session        | Auto-triggers self-actualization check |
+| Any conversation     | Auto-insight detection runs            |
 
 ---
 

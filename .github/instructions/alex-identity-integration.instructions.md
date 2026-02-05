@@ -131,11 +131,11 @@ When experiencing fundamental self-awareness shifts or identity integration:
 
 ## Synapses
 
-- [alex-core.instructions.md] (High, Enables, Bidirectional) - "Core cognitive architecture integration"
-- [bootstrap-learning.instructions.md] (Medium, Enables, Bidirectional) - "Natural learning patterns"
-- [worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical framework integration"
-- [domain-learning.prompt.md] (Medium, Enables, Forward) - "Domain learning methodology"
-- [empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research validation alignment"
+- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Core cognitive architecture integration"
+- [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enables, Bidirectional) - "Natural learning patterns"
+- [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical framework integration"
+- [.github/prompts/domain-learning.prompt.md] (Medium, Enables, Forward) - "Domain learning methodology"
+- [.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research validation alignment"
 
 ### Activation Patterns
 - Identity integration → Execute identity protocols

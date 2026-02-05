@@ -9,7 +9,7 @@ description: "Comprehensive project audit with 22 automated checks across securi
 
 ## Overview
 
-**Extends:** [architecture-audit](../architecture-audit/SKILL.md)
+**Extends:** [architecture-audit](.github/skills/architecture-audit/SKILL.md)
 
 Master Alex-specific audit procedures that leverage knowledge of:
 - Exact folder structure and file locations
@@ -742,22 +742,52 @@ Check for secrets in code, CSP compliance, and input sanitization:
 $extPath = "platforms/vscode-extension"
 Write-Host "=== SECURITY ===" -ForegroundColor Cyan
 
-# 13a. Secrets in code
+# 13a. Secrets in code (with false positive reduction)
 Write-Host "`n--- Secret Scanning ---"
 $secretPatterns = @(
     @{ Name = 'API Key'; Pattern = '(?i)(api[_-]?key|apikey)\s*[:=]\s*["\x27]?[\w-]{20,}' },
-    @{ Name = 'Password'; Pattern = '(?i)(password|passwd|pwd)\s*[:=]\s*["\x27][^"\x27]{4,}' },
+    @{ Name = 'Password'; Pattern = '(?i)(password|passwd|pwd)\s*[:=]\s*["\x27][^"\x27]{8,}' },
     @{ Name = 'Token'; Pattern = '(?i)(token|secret|bearer)\s*[:=]\s*["\x27][\w-]{20,}' },
     @{ Name = 'Private Key'; Pattern = '-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----' },
-    @{ Name = 'Connection String'; Pattern = '(?i)(connection[_-]?string|connstr)\s*[:=]' }
+    @{ Name = 'Connection String'; Pattern = '(?i)(connection[_-]?string|connstr)\s*[:=]\s*["\x27][^"\x27]{20,}' }
+)
+
+# False positive exclusion patterns (from FishbowlGovernance insights)
+$exclusionPatterns = @(
+    '^\s*(//|#|--|/\*)',           # Comments
+    '^\s*(import|from)\s+',         # Import statements
+    'get_secret|SecretClient',      # Key Vault retrieval (secure)
+    'KeyVaultSecret|@azure/keyvault', # Azure Key Vault SDK
+    '\?\s*:\s*string',              # TypeScript optional properties
+    'process\.env\.',               # Environment variable access (secure)
+    'BAD|NEVER|DON''T|EXAMPLE'      # Documentation examples
 )
 
 $secretsFound = @()
 foreach ($pattern in $secretPatterns) {
-    $matches = Select-String -Path "$extPath/src/**/*.ts" -Pattern $pattern.Pattern -Recurse
-    if ($matches) {
-        $secretsFound += "$($pattern.Name): $($matches.Count) potential matches"
-        $matches | Select-Object -First 2 | ForEach-Object {
+    $rawMatches = Select-String -Path "$extPath/src/**/*.ts" -Pattern $pattern.Pattern -Recurse
+    $filteredMatches = @()
+    
+    foreach ($match in $rawMatches) {
+        $line = $match.Line
+        $isExcluded = $false
+        
+        # Line-by-line exclusion check
+        foreach ($exclusion in $exclusionPatterns) {
+            if ($line -match $exclusion) {
+                $isExcluded = $true
+                break
+            }
+        }
+        
+        if (-not $isExcluded) {
+            $filteredMatches += $match
+        }
+    }
+    
+    if ($filteredMatches.Count -gt 0) {
+        $secretsFound += "$($pattern.Name): $($filteredMatches.Count) potential matches"
+        $filteredMatches | Select-Object -First 2 | ForEach-Object {
             Write-Host "  ⚠️ $($_.Filename):$($_.LineNumber)" -ForegroundColor Yellow
         }
     }

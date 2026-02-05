@@ -3,32 +3,32 @@
     "inheritance": "inheritable",
     "connections": [
         {
-            "target": "microsoft-sfi",
+            "target": ".github/skills/microsoft-sfi/SKILL.md",
             "type": "complements",
             "strength": 0.7,
             "reason": "Privacy is part of security"
         },
         {
-            "target": "code-review",
+            "target": ".github/skills/code-review/SKILL.md",
             "type": "informs",
             "strength": 0.65,
             "reason": "Privacy checks in review"
         },
         {
-            "target": "incident-response",
+            "target": ".github/skills/incident-response/SKILL.md",
             "type": "extends",
             "strength": 0.8,
             "reason": "Privacy incidents need response"
         },
         {
-            "target": "pii-privacy-regulations",
+            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
             "type": "extends",
             "strength": 0.9,
             "bidirectional": true,
             "reason": "Detailed regulatory compliance for PII"
         },
         {
-            "target": "appropriate-reliance",
+            "target": ".github/skills/appropriate-reliance/SKILL.md",
             "type": "complements",
             "strength": 0.75,
             "bidirectional": true,
@@ -52,6 +52,4 @@
         "HAX",
         "human oversight"
     ]
-}
-]
 }

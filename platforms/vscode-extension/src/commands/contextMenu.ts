@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import { 
     searchGlobalKnowledge, 
     createGlobalInsight, 
@@ -53,19 +54,83 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
         'alex.saveSelectionAsInsight',
         async () => {
             const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                vscode.window.showWarningMessage('No active editor');
+            const selection = editor?.selection;
+            const selectedText = editor && selection ? editor.document.getText(selection) : '';
+
+            // If no editor or no selection, fall back to input prompt and save to episodic
+            if (!editor || !selectedText) {
+                const insight = await vscode.window.showInputBox({
+                    prompt: 'What insight would you like to save?',
+                    placeHolder: 'e.g., useEffect cleanup runs before next effect - helped fix my memory leak',
+                    ignoreFocusOut: true
+                });
+                
+                if (insight) {
+                    // Save directly to episodic memory
+                    const workspaceFolders = vscode.workspace.workspaceFolders;
+                    if (!workspaceFolders) {
+                        vscode.window.showWarningMessage('No workspace folder found');
+                        return;
+                    }
+
+                    const now = new Date();
+                    const dateStr = now.toISOString().split('T')[0];
+                    const timeStr = now.toTimeString().slice(0, 5).replace(':', '');
+                    const fileName = `quick-insight-${dateStr}-${timeStr}.md`;
+                    
+                    const episodicPath = path.join(workspaceFolders[0].uri.fsPath, '.github', 'episodic');
+                    const filePath = path.join(episodicPath, fileName);
+
+                    const content = `# Quick Insight
+
+**Date**: ${now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+**Time**: ${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+**Type**: Quick Capture
+
+---
+
+## Insight
+
+${insight}
+
+---
+
+## Context
+
+Captured via Alex quick save (no active editor/selection).
+Project: ${workspaceFolders[0].name}
+`;
+
+                    try {
+                        await fs.ensureDir(episodicPath);
+                        await fs.writeFile(filePath, content, 'utf8');
+                        
+                        const relativePath = vscode.workspace.asRelativePath(filePath);
+                        vscode.window.showInformationMessage(
+                            `✅ Insight saved: ${relativePath}`,
+                            'Open File'
+                        ).then(action => {
+                            if (action === 'Open File') {
+                                vscode.workspace.openTextDocument(filePath).then(doc => {
+                                    vscode.window.showTextDocument(doc);
+                                });
+                            }
+                        });
+                        
+                        // Auto-increment insight goals
+                        try {
+                            await autoIncrementGoals('insight');
+                        } catch (err) {
+                            console.warn('Failed to auto-increment goals:', err);
+                        }
+                    } catch (err) {
+                        vscode.window.showErrorMessage(`Failed to save insight: ${err}`);
+                    }
+                }
                 return;
             }
 
-            const selection = editor.selection;
-            const selectedText = editor.document.getText(selection);
-
-            if (!selectedText) {
-                vscode.window.showWarningMessage('No text selected');
-                return;
-            }
-
+            // Original flow with editor selection
             // Get insight details from user
             const title = await vscode.window.showInputBox({
                 prompt: 'Title for this insight',
@@ -284,8 +349,43 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
         }
     );
 
+    // Generate image from selection
+    const generateImageFromSelectionDisposable = vscode.commands.registerCommand(
+        'alex.generateImageFromSelection',
+        async () => {
+            const editor = vscode.window.activeTextEditor;
+            const selection = editor?.selection;
+            const selectedText = editor && selection ? editor.document.getText(selection) : '';
+
+            let prompt: string;
+            
+            if (!selectedText) {
+                // No selection - prompt for description
+                const userInput = await vscode.window.showInputBox({
+                    prompt: 'Describe the image you want to generate',
+                    placeHolder: 'e.g., A flowchart showing user authentication process',
+                    ignoreFocusOut: true
+                });
+                
+                if (!userInput) {
+                    return;
+                }
+                prompt = userInput;
+            } else {
+                prompt = selectedText;
+            }
+
+            // Open chat with image generation request
+            vscode.commands.executeCommand('workbench.action.chat.open', {
+                query: `@alex Generate an image based on this description:\n\n${prompt}`,
+                isPartialQuery: false
+            });
+        }
+    );
+
     context.subscriptions.push(askAboutSelectionDisposable);
     context.subscriptions.push(saveSelectionAsInsightDisposable);
     context.subscriptions.push(searchRelatedKnowledgeDisposable);
     context.subscriptions.push(knowledgeQuickPickDisposable);
+    context.subscriptions.push(generateImageFromSelectionDisposable);
 }

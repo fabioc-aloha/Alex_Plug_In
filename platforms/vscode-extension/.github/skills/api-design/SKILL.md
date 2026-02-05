@@ -451,6 +451,147 @@ plugins:
 
 ---
 
+## Enterprise API Integration Patterns
+
+*Patterns from FishbowlGovernance multi-platform integrations (Feb 2026)*
+
+### Microsoft Graph API (Planner)
+
+**Key Limitations**:
+| Constraint | Impact | Workaround |
+|------------|--------|------------|
+| Subscriptions expire after 3 days | Need timer-based renewal | Azure Function timer trigger |
+| No native comments API | Cannot sync comments TO Planner | Use checklist items instead |
+| 2400 tasks per plan limit | Monitor at threshold | Alert and archive old tasks |
+| Task details require separate API call | Each has its own ETag | Batch carefully |
+| Webhook requires public URL | Local dev challenge | Use ngrok or dev tunnels |
+| User assignment needs Graph User ID | Must resolve from email/UPN | Cache user mappings |
+| Tasks are flat (no hierarchy) | Can't mirror ADO parent/child | Map Features → Buckets |
+
+**ETag Pattern for Updates**:
+```http
+PATCH /planner/tasks/{task-id}/details
+If-Match: {etag}
+Content-Type: application/json
+
+{"description": "Updated description"}
+```
+
+### Azure DevOps REST API
+
+**JSON Patch Pattern**:
+```http
+PATCH /_apis/wit/workitems/{id}?api-version=7.0
+Content-Type: application/json-patch+json
+
+[
+  {"op": "add", "path": "/fields/System.Title", "value": "New Title"},
+  {"op": "replace", "path": "/fields/System.State", "value": "Active"}
+]
+```
+
+**Key Patterns**:
+- Use `application/json-patch+json` content type
+- Implement idempotency with WIQL queries before insert
+- Link work items with relation URLs, not IDs
+- Batch updates sequentially (parallel causes conflicts)
+
+**WIQL Query for Duplicate Check**:
+```http
+POST /_apis/wit/wiql?api-version=7.0
+Content-Type: application/json
+
+{
+  "query": "SELECT [System.Id] FROM WorkItems WHERE [System.Title] = 'Exact Title'"
+}
+```
+
+### Qualtrics API v3
+
+**Rate Limits by Endpoint**:
+| Endpoint | Calls/Minute |
+|----------|--------------|
+| Survey definitions | 100 |
+| Distributions | 3000 |
+| Responses | 2000 |
+
+**Integration Patterns**:
+- Use webhook subscriptions for real-time events
+- Poll distributions every 5-15 minutes
+- Cache survey definitions (TTL: 1-4 hours)
+- Flat JSON response structure (no nested objects)
+
+### Microsoft Fabric REST API
+
+**Async Operation Pattern** (202 Accepted):
+```powershell
+# 1. POST triggers async operation
+$response = Invoke-WebRequest -Uri $uri -Headers $headers -Method Post
+
+# 2. Get Location header for polling
+if ($response.StatusCode -eq 202) {
+    $operationUrl = $response.Headers["Location"][0]
+    
+    # 3. Poll until complete
+    do {
+        Start-Sleep -Seconds 2
+        $status = Invoke-RestMethod -Uri $operationUrl -Headers $headers
+    } while ($status.status -ne "Succeeded")
+    
+    # 4. Fetch result
+    $result = Invoke-RestMethod -Uri "$operationUrl/result" -Headers $headers
+}
+```
+
+**Token Acquisition**:
+```powershell
+# Fabric API token
+$fabricToken = az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken -o tsv
+
+# Storage token (for Unity Catalog/schema-enabled lakehouses)
+$storageToken = az account get-access-token --resource https://storage.azure.com --query accessToken -o tsv
+```
+
+### Multi-Platform Sync Architecture
+
+```mermaid
+flowchart LR
+    subgraph Sources["Source Systems"]
+        ADO[Azure DevOps]
+        QX[Qualtrics]
+    end
+    
+    subgraph Integration["Integration Layer"]
+        SB[Service Bus Queue]
+        FN[Azure Functions]
+        DB[(Cosmos DB<br/>Mappings)]
+    end
+    
+    subgraph Targets["Target Systems"]
+        PL[Microsoft Planner]
+        FB[Microsoft Fabric]
+    end
+    
+    ADO --> SB
+    QX --> SB
+    SB --> FN
+    FN --> DB
+    FN --> PL
+    FN --> FB
+    
+    style Sources fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    style Integration fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    style Targets fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+```
+
+**Key Design Principles**:
+1. **Decouple with queues** — Service Bus between source and target
+2. **Persist mappings** — Cosmos DB for ID correlation
+3. **Timer renewals** — Subscription expiry handled automatically
+4. **Accept limitations** — Some features (Planner comments) simply not feasible
+
+---
+
 ## Security Checklist
 
 ```text

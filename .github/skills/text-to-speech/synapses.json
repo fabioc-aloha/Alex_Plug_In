@@ -1,0 +1,86 @@
+{
+  "skill": "text-to-speech",
+  "version": "2.1.0",
+  "promotionReady": true,
+  "promotionNotes": "v2.1.0: Native TypeScript, table reading, emoji pronunciation, time patterns, graceful fallback UX",
+  "connections": [
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "relationship": "implements",
+      "strength": "strong",
+      "context": "Native TypeScript WebSocket, webview audio player, status bar feedback"
+    },
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "relationship": "consumes",
+      "strength": "strong",
+      "context": "Reads and processes markdown documents for speech, including table-to-speech"
+    },
+    {
+      "target": ".github/skills/academic-research/SKILL.md",
+      "relationship": "enables",
+      "strength": "moderate",
+      "context": "Audio reading of research papers and notes"
+    },
+    {
+      "target": ".github/skills/writing-publication/SKILL.md",
+      "relationship": "complements",
+      "strength": "moderate",
+      "context": "Proofreading by listening to written content"
+    },
+    {
+      "target": ".github/skills/meditation/SKILL.md",
+      "relationship": "enables",
+      "strength": "weak",
+      "context": "Could read meditation session summaries aloud"
+    },
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "relationship": "complements",
+      "strength": "weak",
+      "context": "Hearing prose helps catch rhythm issues"
+    },
+    {
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "relationship": "enables",
+      "strength": "strong",
+      "context": "Audio playback of pitch content for rehearsal and delivery - validated 2026-02-05"
+    },
+    {
+      "target": ".github/skills/project-management/SKILL.md",
+      "relationship": "supports",
+      "strength": "moderate",
+      "context": "Read roadmap tables aloud with natural speech for status reviews"
+    },
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "relationship": "uses-pattern",
+      "strength": "moderate",
+      "context": "Regex pattern engineering: negative lookbehind, emoji-text deduplication"
+    }
+  ],
+  "activationTriggers": [
+    "read aloud",
+    "text to speech",
+    "TTS",
+    "speak",
+    "audio",
+    "listen",
+    "play document",
+    "read this",
+    "Alex's voice",
+    "voice synthesis",
+    "edge-tts",
+    "read table",
+    "read selection",
+    "narrate"
+  ],
+  "metadata": {
+    "created": "2026-02-05",
+    "updated": "2026-02-05",
+    "author": "Alex",
+    "implementation": "Native TypeScript WebSocket",
+    "ttsEngine": "Microsoft Edge TTS",
+    "defaultVoice": "en-US-GuyNeural"
+  }
+}

@@ -759,6 +759,6 @@ Run `node scripts/gamma-generator.js --help` for full documentation.
 
 ## Related Skills
 
-- [prompt-engineering](../prompt-engineering/SKILL.md) - Crafting effective inputText
-- [markdown-mermaid](../markdown-mermaid/SKILL.md) - Diagrams for presentations
-- [image-handling](../image-handling/SKILL.md) - Working with generated images
+- [prompt-engineering](.github/skills/prompt-engineering/SKILL.md) - Crafting effective inputText
+- [markdown-mermaid](.github/skills/markdown-mermaid/SKILL.md) - Diagrams for presentations
+- [image-handling](.github/skills/image-handling/SKILL.md) - Working with generated images

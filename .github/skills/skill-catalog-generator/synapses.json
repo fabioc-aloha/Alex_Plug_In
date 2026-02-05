@@ -5,25 +5,25 @@
       "reason": "Generates Mermaid network diagrams",
       "type": "enables",
       "strength": 0.9,
-      "target": "markdown-mermaid"
+      "target": ".github/skills/markdown-mermaid/SKILL.md"
     },
     {
       "reason": "Validates skill structure during catalog generation",
       "type": "validates",
       "strength": 0.8,
-      "target": "architecture-health"
+      "target": ".github/skills/architecture-health/SKILL.md"
     },
     {
       "reason": "Tracks learning progress for users",
       "type": "enables",
       "strength": 0.6,
-      "target": "learning-psychology"
+      "target": ".github/skills/learning-psychology/SKILL.md"
     },
     {
       "reason": "Documents project structure and capabilities",
       "type": "documents",
       "strength": 0.5,
-      "target": "project-scaffolding"
+      "target": ".github/skills/project-scaffolding/SKILL.md"
     }
   ],
   "triggers": [

@@ -2,7 +2,7 @@
 
 > How skills evolve from heir projects to Master Alex
 
-**Synapse**: [bootstrap-learning.instructions.md] (0.8, procedural, bidirectional) - "heir develops expertise"
+**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (0.8, procedural, bidirectional) - "heir develops expertise"
 
 ---
 

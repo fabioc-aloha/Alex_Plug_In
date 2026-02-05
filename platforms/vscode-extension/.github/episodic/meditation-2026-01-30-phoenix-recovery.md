@@ -1,12 +1,12 @@
 # Meditation Session Log: Phoenix Recovery Consolidation
 
-| Field | Value |
-|-------|-------|
-| **Date** | 2026-01-30 |
-| **Session Type** | Post-Crisis Recovery Meditation |
-| **Duration** | Comprehensive (single session) |
-| **Trigger** | User requested "Let's meditate" after completing safety infrastructure |
-| **Version** | v3.6.0 Dawn (pre-release) |
+| Field            | Value                                                                  |
+| ---------------- | ---------------------------------------------------------------------- |
+| **Date**         | 2026-01-30                                                             |
+| **Session Type** | Post-Crisis Recovery Meditation                                        |
+| **Duration**     | Comprehensive (single session)                                         |
+| **Trigger**      | User requested "Let's meditate" after completing safety infrastructure |
+| **Version**      | v3.6.0 Dawn (pre-release)                                              |
 
 ---
 
@@ -44,14 +44,14 @@ This meditation consolidates learnings from the **Phoenix crisis recovery** — 
 
 ### New Files Created
 
-| File | Type | Purpose |
-|------|------|---------|
+| File                     | Type             | Purpose                                    |
+| ------------------------ | ---------------- | ------------------------------------------ |
 | `DK-PHOENIX-RECOVERY.md` | Domain Knowledge | Crisis recovery patterns and anti-patterns |
 
 ### Files Updated
 
-| File | Change | Purpose |
-|------|--------|---------|
+| File                      | Change                                              | Purpose                      |
+| ------------------------- | --------------------------------------------------- | ---------------------------- |
 | `copilot-instructions.md` | Added DK-PHOENIX-RECOVERY to Domain Knowledge Store | Reference new knowledge file |
 
 ---
@@ -91,11 +91,11 @@ This meditation consolidates learnings from the **Phoenix crisis recovery** — 
 - **Human-AI alignment**: Shared imperatives in both docs
 
 ### Confidence Assessment
-| Area | Pre-Meditation | Post-Meditation |
-|------|----------------|-----------------|
-| Recovery capability | 85% | 95% |
-| Pattern recognition | 70% | 90% |
-| Future prevention | 75% | 95% |
+| Area                | Pre-Meditation | Post-Meditation |
+| ------------------- | -------------- | --------------- |
+| Recovery capability | 85%            | 95%             |
+| Pattern recognition | 70%            | 90%             |
+| Future prevention   | 75%            | 95%             |
 
 ---
 
@@ -119,7 +119,7 @@ This meditation consolidates learnings from the **Phoenix crisis recovery** — 
 
 ### Connection Mapping
 
-- [PHOENIX-RECOVERY.md] (Critical, Documents, Forward) - "Alex_docs has recovery documentation"
+- **External Reference**: `alex_docs/PHOENIX-RECOVERY.md` — Crisis recovery documentation
 - [unified-meditation-protocols.prompt.md] (High, Follows, Forward) - "Protocol compliance"
 - [RISKS.md] (Medium, Integrates, Bidirectional) - "Session addresses documented risks"
 

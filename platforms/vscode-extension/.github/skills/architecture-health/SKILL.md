@@ -47,6 +47,6 @@ Expert in cognitive architecture health assessment, synapse validation, and neur
 
 ## Related Skills
 
-- [Meditation](../meditation/SKILL.md) - Consolidate knowledge
-- [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Learn new domains
-- [Global Knowledge](../global-knowledge/SKILL.md) - Cross-project patterns
+- [Meditation](.github/skills/meditation/SKILL.md) - Consolidate knowledge
+- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Learn new domains
+- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Cross-project patterns

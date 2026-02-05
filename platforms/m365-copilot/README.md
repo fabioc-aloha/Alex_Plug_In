@@ -19,16 +19,16 @@ Alex M365 is a **declarative agent** that uses M365 Copilot foundation models wi
 
 ### What Alex Can Do (v1.6 Schema)
 
-| Capability | Description |
-|------------|-------------|
-| 📖 **OneDrive** | READ your Alex-Memory files (profile, notes, knowledge) |
-| 🔍 **WebSearch** | Research topics online |
-| 🎨 **GraphicArt** | Generate images and diagrams |
-| 🐍 **CodeInterpreter** | Run Python code for calculations |
-| 📧 **Email** | Search and summarize Outlook conversations |
-| 💬 **Teams** | Find discussions across channels and chats |
-| 👥 **People** | Look up colleagues and org structure |
-| 📅 **Meetings** | Meeting prep and calendar awareness |
+| Capability            | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| 📖 **OneDrive**        | READ your Alex-Memory files (profile, notes, knowledge) |
+| 🔍 **WebSearch**       | Research topics online                                  |
+| 🎨 **GraphicArt**      | Generate images and diagrams                            |
+| 🐍 **CodeInterpreter** | Run Python code for calculations                        |
+| 📧 **Email**           | Search and summarize Outlook conversations              |
+| 💬 **Teams**           | Find discussions across channels and chats              |
+| 👥 **People**          | Look up colleagues and org structure                    |
+| 📅 **Meetings**        | Meeting prep and calendar awareness                     |
 
 ### Memory Workflow
 
@@ -103,16 +103,16 @@ Or sideload manually:
 
 ## M365 Capabilities (v1.6 Schema)
 
-| Capability | What Alex Does With It |
-|------------|------------------------|
-| `OneDriveAndSharePoint` | Read your memory files |
-| `WebSearch` | Research topics online |
-| `GraphicArt` | Generate images |
-| `CodeInterpreter` | Run Python code |
-| `Email` | Search Outlook conversations |
-| `TeamsMessages` | Find channel/chat discussions |
-| `People` | Look up colleagues |
-| `Meetings` | Calendar and meeting prep |
+| Capability              | What Alex Does With It        |
+| ----------------------- | ----------------------------- |
+| `OneDriveAndSharePoint` | Read your memory files        |
+| `WebSearch`             | Research topics online        |
+| `GraphicArt`            | Generate images               |
+| `CodeInterpreter`       | Run Python code               |
+| `Email`                 | Search Outlook conversations  |
+| `TeamsMessages`         | Find channel/chat discussions |
+| `People`                | Look up colleagues            |
+| `Meetings`              | Calendar and meeting prep     |
 
 ## Conversation Starters
 
@@ -129,20 +129,202 @@ Or sideload manually:
 
 ---
 
-## 📚 Documentation
+## � Future: OneDrive Native Agents (February 2026)
 
-| Document | Description |
-|----------|-------------|
-| [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md) | Step-by-step deployment guide |
+Microsoft has launched **OneDrive Agents** - a game-changing feature that creates a new integration path for Alex.
+
+### What Are OneDrive Agents?
+
+OneDrive agents are `.agent` files stored directly in OneDrive that provide a specialized Copilot experience grounded in your documents:
+
+| Feature          | Description                                          |
+| ---------------- | ---------------------------------------------------- |
+| **Creation**     | OneDrive web → + Create/Upload → Agent               |
+| **Grounding**    | Select up to 20 files/folders as context             |
+| **Instructions** | Custom instructions for the agent                    |
+| **Sharing**      | Share like any file - recipients get same experience |
+| **Requirements** | Microsoft 365 Copilot license                        |
+
+### Alex Integration Opportunity
+
+This creates **additional deployment options** for Alex M365:
+
+| Approach                        | Complexity | Reach         | Best For                      |
+| ------------------------------- | ---------- | ------------- | ----------------------------- |
+| **Declarative Agent** (current) | Medium     | Org-wide      | IT-managed deployment         |
+| **OneDrive Agent** (new)        | Low        | Personal/team | Individual users, quick setup |
+| **Community Agent** (new)       | Low        | Team          | Q&A bot for Teams communities |
+| **Worker Agent** (v1.6)         | Medium     | Agent-Agent   | Multi-agent orchestration     |
+| **Teams App**                   | High       | Enterprise    | Deep Teams integration        |
+
+### Deployment Channel Architecture
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
+flowchart TB
+    subgraph Master["🧠 MASTER ALEX"]
+        DNA["Cognitive DNA<br/>71 Skills, Protocols, Identity"]
+    end
+
+    subgraph VSCode["👶 VS Code Heir"]
+        Export["alex.exportToOneDrive"]
+        Cloud["alex.cloudSync"]
+    end
+
+    subgraph M365["👶 M365 Heir"]
+        DA["Declarative Agent"]
+    end
+
+    subgraph Channels["📤 Deployment Channels"]
+        direction TB
+        ODA[".agent File<br/>(OneDrive)"]
+        CA["Community Agent<br/>(Teams)"]
+        WA["Worker Agent<br/>(Schema 1.6)"]
+    end
+
+    subgraph Runtime["🎯 M365 Copilot Runtime"]
+        COP["Same Alex DNA<br/>Different Delivery"]
+    end
+
+    Master --> VSCode
+    Master --> M365
+    VSCode --> Export --> ODA
+    M365 --> DA
+    DA --> COP
+    ODA --> COP
+    CA --> COP
+    WA -.->|"Preview"| COP
+
+    style Master fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    style VSCode fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    style M365 fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    style Channels fill:#eaeef2,color:#24292f,stroke:#d0d7de
+    style Runtime fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Key Insight:** All deployment channels run on the **same M365 Copilot runtime**. They're not separate heirs — they're different ways to deliver the M365 heir's capabilities.
+
+### Proposed OneDrive Agent Architecture
+
+```text
+OneDrive/
+└── Alex-Memory/
+    ├── profile.md                    # User profile
+    ├── notes.md                      # Active memory
+    ├── knowledge/                    # Domain knowledge
+    │   ├── DK-project-patterns.md
+    │   └── DK-team-expertise.md
+    ├── skills/                       # Alex skill guides
+    │   ├── meditation-guide.md
+    │   ├── dream-protocol.md
+    │   └── meeting-prep.md
+    └── Alex.agent                    # ⭐ The Alex agent file
+```
+
+### Benefits of OneDrive Agent Approach
+
+1. **Zero IT involvement** - Users create their own agent
+2. **Portable** - Copy to any OneDrive, instant Alex
+3. **Shareable** - Send Alex to colleagues
+4. **VS Code synergy** - Export from VS Code Alex → OneDrive Agent
+5. **Always up-to-date** - Update source files, agent reflects changes
+
+### Export Command (Proposed)
+
+The VS Code Alex extension could add:
+```
+Alex: Export to OneDrive Agent
+```
+
+This would:
+1. Generate optimized instruction file from your skills
+2. Export relevant knowledge to OneDrive
+3. Create `.agent` file with Alex persona
+4. User opens agent in OneDrive → Alex available in M365 Copilot
+
+---
+
+## 🏢 Community Agent Setup (Teams)
+
+Deploy Alex as a Q&A agent in your Teams Community. Community Agents are grounded in SharePoint and learn from community discussions.
+
+### Prerequisites
+
+- Teams with Communities feature enabled (preview)
+- Access to create/manage a Teams Community
+- SharePoint site for community content
+- M365 Copilot license
+
+### Setup Steps
+
+1. **Create or access a Teams Community**
+   - Teams → Communities → Create community (or join existing)
+   - Ensure you have admin access
+
+2. **Upload Alex knowledge to SharePoint**
+   - Navigate to the community's SharePoint site
+   - Create folder: `Alex-Knowledge/`
+   - Upload key knowledge files:
+     ```text
+     Alex-Knowledge/
+     ├── alex-protocols.md           # From appPackage/knowledge/
+     ├── cognitive-architecture.md   # How Alex thinks
+     ├── skill-quick-reference.md    # Skill summaries
+     └── team-specific/              # Your team's knowledge
+         ├── patterns.md
+         ├── architecture.md
+         └── best-practices.md
+     ```
+
+3. **Enable Community Agent**
+   - Community Settings → Agent configuration
+   - Enable "Agents in Communities" (preview feature)
+   - Configure SharePoint grounding to include `Alex-Knowledge/`
+
+4. **Customize Alex persona**
+   - Set agent name: "Alex"
+   - Add system message from `appPackage/instructions/`
+   - Configure response style: empathetic, technically accurate
+
+5. **Test and iterate**
+   - Ask questions in the community
+   - Alex drafts responses based on knowledge files
+   - Admins review and publish suggestions
+   - Community builds knowledge organically
+
+### Benefits
+
+| Benefit                  | Description                                 |
+| ------------------------ | ------------------------------------------- |
+| **Team-wide Alex**       | Everyone gets Alex without individual setup |
+| **Organic knowledge**    | Q&A grows the knowledge base over time      |
+| **Admin oversight**      | Quality control through review workflow     |
+| **SharePoint grounding** | Leverages existing document structure       |
+
+### Limitations (Preview)
+
+- Community Agents are still in preview
+- Response suggestions require admin approval
+- Limited customization of agent behavior
+- No direct integration with VS Code Alex (yet)
+
+---
+
+## �📚 Documentation
+
+| Document                                               | Description                       |
+| ------------------------------------------------------ | --------------------------------- |
+| [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md)      | Step-by-step deployment guide     |
 | [Schema Compatibility](./docs/SCHEMA-COMPATIBILITY.md) | v1.2 vs v1.5 vs v1.6 capabilities |
-| [Manifest Reference](./docs/MANIFEST-REFERENCE.md) | M365 app manifest documentation |
+| [Manifest Reference](./docs/MANIFEST-REFERENCE.md)     | M365 app manifest documentation   |
 
 ## 🔗 Related
 
-| Platform | Description |
-|----------|-------------|
-| [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) | Alex for VS Code + GitHub Copilot |
-| [Project Repository](https://github.com/fabioc-aloha/Alex_Plug_In) | Full source code and documentation |
+| Platform                                                                                                          | Description                        |
+| ----------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) | Alex for VS Code + GitHub Copilot  |
+| [Project Repository](https://github.com/fabioc-aloha/Alex_Plug_In)                                                | Full source code and documentation |
 
 ---
 
@@ -152,6 +334,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v3.7.18 🌅 Dawn - Full M365 Integration + EmbeddedKnowledge Ready
+**Alex M365** - v4.2.6 🌅 Full M365 Integration + Deployment Channels Ready
 
 © 2026 CorreaX • AI That Learns How to Learn

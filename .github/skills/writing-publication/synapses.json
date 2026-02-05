@@ -3,19 +3,19 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": "markdown-mermaid",
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "enables",
       "strength": 0.85,
       "context": "Diagrams for papers and articles"
     },
     {
-      "target": "lint-clean-markdown",
+      "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "type": "enables",
       "strength": 0.6,
       "context": "Clean markdown for documentation"
     },
     {
-      "target": "appropriate-reliance",
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "validates",
       "strength": 0.6,
       "context": "Evidence-based claims"

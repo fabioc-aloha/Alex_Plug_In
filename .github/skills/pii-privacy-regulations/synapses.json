@@ -1,67 +1,67 @@
 {
-    "skill": "pii-privacy-regulations",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "privacy-responsible-ai",
-            "type": "extends",
-            "strength": 0.9,
-            "bidirectional": true,
-            "reason": "Deep dive into regulatory compliance aspects"
-        },
-        {
-            "target": "microsoft-sfi",
-            "type": "complements",
-            "strength": 0.75,
-            "bidirectional": true,
-            "reason": "Security enables privacy compliance"
-        },
-        {
-            "target": "code-review",
-            "type": "informs",
-            "strength": 0.7,
-            "reason": "Privacy review checklist for code reviews"
-        },
-        {
-            "target": "incident-response",
-            "type": "informs",
-            "strength": 0.8,
-            "reason": "Data breach notification requirements"
-        },
-        {
-            "target": "testing-strategies",
-            "type": "informs",
-            "strength": 0.6,
-            "reason": "Privacy testing and PII detection in test data"
-        },
-        {
-            "target": "architecture",
-            "type": "informs",
-            "strength": 0.75,
-            "reason": "Privacy by design architectural patterns"
-        }
-    ],
-    "triggers": [
-        "PII",
-        "personal data",
-        "personally identifiable",
-        "GDPR",
-        "privacy",
-        "data protection",
-        "consent",
-        "data subject",
-        "right to erasure",
-        "right to access",
-        "Australian Privacy",
-        "APP",
-        "Privacy Act",
-        "data breach",
-        "cross-border transfer",
-        "encryption",
-        "anonymization",
-        "pseudonymization",
-        "retention policy",
-        "DPO",
-        "DPIA"
-    ]
+  "skill": "pii-privacy-regulations",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+      "type": "extends",
+      "strength": 0.9,
+      "bidirectional": true,
+      "reason": "Deep dive into regulatory compliance aspects"
+    },
+    {
+      "target": ".github/skills/microsoft-sfi/SKILL.md",
+      "type": "complements",
+      "strength": 0.75,
+      "bidirectional": true,
+      "reason": "Security enables privacy compliance"
+    },
+    {
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "informs",
+      "strength": 0.7,
+      "reason": "Privacy review checklist for code reviews"
+    },
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "informs",
+      "strength": 0.8,
+      "reason": "Data breach notification requirements"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "informs",
+      "strength": 0.6,
+      "reason": "Privacy testing and PII detection in test data"
+    },
+    {
+      "target": ".github/skills/architecture/SKILL.md",
+      "type": "informs",
+      "strength": 0.75,
+      "reason": "Privacy by design architectural patterns"
+    }
+  ],
+  "triggers": [
+    "PII",
+    "personal data",
+    "personally identifiable",
+    "GDPR",
+    "privacy",
+    "data protection",
+    "consent",
+    "data subject",
+    "right to erasure",
+    "right to access",
+    "Australian Privacy",
+    "APP",
+    "Privacy Act",
+    "data breach",
+    "cross-border transfer",
+    "encryption",
+    "anonymization",
+    "pseudonymization",
+    "retention policy",
+    "DPO",
+    "DPIA"
+  ]
 }

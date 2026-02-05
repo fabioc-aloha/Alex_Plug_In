@@ -3,7 +3,7 @@
   "inheritance": "heir:m365",
   "connections": [
     {
-      "target": "heir-curation",
+      "target": ".github/skills/heir-curation/SKILL.md",
       "type": "implements",
       "strength": 0.85,
       "context": "M365 heir debugging"

@@ -6,39 +6,39 @@
       "reason": "Visual storytelling and narrative design",
       "type": "complements",
       "strength": 0.85,
-      "target": "creative-writing"
+      "target": ".github/skills/creative-writing/SKILL.md"
     },
     {
       "reason": "Extension branding, icons, and UI design",
       "type": "applies",
       "strength": 0.85,
-      "target": "vscode-extension-patterns"
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md"
     },
     {
       "bidirectional": true,
-      "reason": "Diagram visualization and styling",
+      "reason": "Color theory, pastel palettes, accessibility for diagram styling",
       "type": "extends",
-      "strength": 0.65,
-      "target": "markdown-mermaid"
+      "strength": 0.9,
+      "target": ".github/skills/markdown-mermaid/SKILL.md"
     },
     {
       "reason": "Visual information processing and hierarchy",
       "type": "applies",
       "strength": 0.65,
-      "target": "cognitive-load"
+      "target": ".github/skills/cognitive-load/SKILL.md"
     },
     {
       "bidirectional": true,
       "reason": "Text-based visual design and alignment",
       "type": "complements",
       "strength": 0.65,
-      "target": "ascii-art-alignment"
+      "target": ".github/skills/ascii-art-alignment/SKILL.md"
     },
     {
       "reason": "Document visual design and layout",
       "type": "supports",
       "strength": 0.4,
-      "target": "writing-publication"
+      "target": ".github/skills/writing-publication/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

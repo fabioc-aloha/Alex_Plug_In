@@ -1,68 +1,68 @@
 {
-    "skill": "gamma-presentations",
-    "version": "1.0.0",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "prompt-engineering",
-            "type": "requires",
-            "strength": 0.85,
-            "note": "Effective inputText crafting"
-        },
-        {
-            "target": "markdown-mermaid",
-            "type": "complements",
-            "strength": 0.7,
-            "bidirectional": true,
-            "note": "Diagrams can enhance presentations"
-        },
-        {
-            "target": "image-handling",
-            "type": "complements",
-            "strength": 0.75,
-            "note": "Working with AI-generated images"
-        },
-        {
-            "target": "api-design",
-            "type": "implements",
-            "strength": 0.6,
-            "note": "REST API integration patterns"
-        },
-        {
-            "target": "documentation",
-            "type": "enhances",
-            "strength": 0.7,
-            "note": "Creating documentation presentations"
-        }
-    ],
-    "activationBoost": [
-        "presentation",
-        "slide",
-        "slides",
-        "deck",
-        "pitch deck",
-        "gamma",
-        "powerpoint",
-        "pptx",
-        "keynote",
-        "document",
-        "social media",
-        "carousel",
-        "instagram",
-        "linkedin",
-        "create slides",
-        "make presentation",
-        "generate presentation",
-        "pitch",
-        "investor deck"
-    ],
-    "apiIntegration": {
-        "type": "REST",
-        "baseUrl": "https://public-api.gamma.app/v1.0",
-        "authentication": "API_KEY",
-        "headerName": "X-API-KEY",
-        "envVariable": "GAMMA_API_KEY",
-        "mcpAvailable": true,
-        "mcpConnector": "Gamma"
+  "skill": "gamma-presentations",
+  "version": "1.0.0",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "type": "requires",
+      "strength": 0.85,
+      "note": "Effective inputText crafting"
+    },
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "bidirectional": true,
+      "note": "Diagrams can enhance presentations"
+    },
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "complements",
+      "strength": 0.75,
+      "note": "Working with AI-generated images"
+    },
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "type": "implements",
+      "strength": 0.6,
+      "note": "REST API integration patterns"
+    },
+    {
+      "target": ".github/skills/documentation/SKILL.md",
+      "type": "enhances",
+      "strength": 0.7,
+      "note": "Creating documentation presentations"
     }
+  ],
+  "activationBoost": [
+    "presentation",
+    "slide",
+    "slides",
+    "deck",
+    "pitch deck",
+    "gamma",
+    "powerpoint",
+    "pptx",
+    "keynote",
+    "document",
+    "social media",
+    "carousel",
+    "instagram",
+    "linkedin",
+    "create slides",
+    "make presentation",
+    "generate presentation",
+    "pitch",
+    "investor deck"
+  ],
+  "apiIntegration": {
+    "type": "REST",
+    "baseUrl": "https://public-api.gamma.app/v1.0",
+    "authentication": "API_KEY",
+    "headerName": "X-API-KEY",
+    "envVariable": "GAMMA_API_KEY",
+    "mcpAvailable": true,
+    "mcpConnector": "Gamma"
+  }
 }

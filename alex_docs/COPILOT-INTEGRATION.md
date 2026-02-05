@@ -143,23 +143,23 @@ Alex registers as `@alex` with 15 slash commands:
 
 **Table 2:** *Alex Slash Commands*
 
-| Command | Function |
-|---------|----------|
-| `/status` | Architecture health check |
-| `/meditate` | Knowledge consolidation |
-| `/dream` | Neural maintenance |
-| `/selfactualize` | Deep self-assessment |
-| `/learn` | Domain learning session |
-| `/azure` | Azure development guidance |
-| `/m365` | Microsoft 365 guidance |
-| `/profile` | User preferences |
-| `/knowledge` | Search global knowledge |
-| `/saveinsight` | Save learning to global |
-| `/promote` | Promote local to global |
-| `/knowledgestatus` | Global knowledge stats |
-| `/sync` | Cloud sync |
-| `/push` | Push to cloud |
-| `/pull` | Pull from cloud |
+| Command            | Function                   |
+| ------------------ | -------------------------- |
+| `/status`          | Architecture health check  |
+| `/meditate`        | Knowledge consolidation    |
+| `/dream`           | Neural maintenance         |
+| `/selfactualize`   | Deep self-assessment       |
+| `/learn`           | Domain learning session    |
+| `/azure`           | Azure development guidance |
+| `/m365`            | Microsoft 365 guidance     |
+| `/profile`         | User preferences           |
+| `/knowledge`       | Search global knowledge    |
+| `/saveinsight`     | Save learning to global    |
+| `/promote`         | Promote local to global    |
+| `/knowledgestatus` | Global knowledge stats     |
+| `/sync`            | Cloud sync                 |
+| `/push`            | Push to cloud              |
+| `/pull`            | Pull from cloud            |
 
 **Usage**:
 
@@ -189,19 +189,20 @@ Alex registers 11 tools via the MCP (Model Context Protocol):
 
 **Table 3:** *Alex MCP Tools*
 
-| Tool | Purpose |
-|------|---------|
-| `alex_architecture_status` | Check Alex version and config |
-| `alex_synapse_health` | Validate synaptic connections |
-| `alex_self_actualization` | Run comprehensive assessment |
-| `alex_memory_search` | Search local memory files |
-| `alex_mcp_recommendations` | Suggest Azure/M365 tools |
-| `alex_global_knowledge_search` | Search cross-project knowledge |
-| `alex_global_knowledge_status` | View knowledge base stats |
-| `alex_save_insight` | Save learning to global |
-| `alex_promote_knowledge` | Promote local to global |
-| `alex_cloud_sync` | Sync with GitHub Gist |
-| `alex_user_profile` | Manage user preferences |
+| Tool                           | Purpose                             |
+| ------------------------------ | ----------------------------------- |
+| `alex_architecture_status`     | Check Alex version and config       |
+| `alex_synapse_health`          | Validate synaptic connections       |
+| `alex_self_actualization`      | Run comprehensive assessment        |
+| `alex_memory_search`           | Search local memory files           |
+| `alex_mcp_recommendations`     | Suggest Azure/M365 tools            |
+| `alex_global_knowledge_search` | Search cross-project knowledge      |
+| `alex_global_knowledge_status` | View knowledge base stats           |
+| `alex_save_insight`            | Save learning to global             |
+| `alex_promote_knowledge`       | Promote local to global             |
+| `alex_cloud_sync`              | Sync with GitHub Gist               |
+| `alex_user_profile`            | Manage user preferences             |
+| `alex_focus_context`           | Get current focus session and goals |
 
 **Automatic invocation**: In Agent mode, Copilot decides when to use tools:
 
@@ -267,14 +268,14 @@ Specialized instructions for guiding meditation sessions...
 
 **Table 4:** *Native Copilot Features vs Alex Enhancement*
 
-| Feature | Native Copilot | Alex Enhancement |
-|---------|---------------|------------------|
-| Context injection | `copilot-instructions.md` | Full cognitive framework |
-| Procedural guidance | `.instructions.md` | 19 procedural memory files |
-| Reusable workflows | `.prompt.md` | 7 episodic memory files |
-| Chat interaction | Chat Participant API | @alex with 15 commands |
-| Tool integration | Language Model Tools | 11 MCP tools |
-| Specialized modes | Custom Agents | 5 specialized agents |
+| Feature             | Native Copilot            | Alex Enhancement           |
+| ------------------- | ------------------------- | -------------------------- |
+| Context injection   | `copilot-instructions.md` | Full cognitive framework   |
+| Procedural guidance | `.instructions.md`        | 19 procedural memory files |
+| Reusable workflows  | `.prompt.md`              | 7 episodic memory files    |
+| Chat interaction    | Chat Participant API      | @alex with 15 commands     |
+| Tool integration    | Language Model Tools      | 11 MCP tools               |
+| Specialized modes   | Custom Agents             | 5 specialized agents       |
 
 ---
 

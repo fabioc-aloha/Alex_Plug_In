@@ -3,6 +3,8 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { searchGlobalKnowledge } from './globalKnowledge';
 import { validateUserProfile, safeJsonParse, createConfigBackup } from '../shared/sanitize';
+import { getSessionState, PersistedSessionState } from '../commands/session';
+import { getGoalsSummary, LearningGoal } from '../commands/goals';
 
 /**
  * Tool input parameters interfaces
@@ -29,6 +31,10 @@ export interface IUserProfileParams {
     action: 'get' | 'update' | 'exists';
     field?: string;
     value?: string;
+}
+
+export interface IFocusContextParams {
+    includeGoals?: boolean;
 }
 
 /**
@@ -852,6 +858,101 @@ ${profile.notes || '(none)'}
 }
 
 /**
+ * Focus Context Response Interface
+ */
+export interface IFocusContextResponse {
+    session: PersistedSessionState;
+    goals?: {
+        activeGoals: LearningGoal[];
+        completedToday: number;
+        streakDays: number;
+        totalCompleted: number;
+    };
+    summary: string;
+}
+
+/**
+ * Focus Context Tool - Returns user's current focus session and goals
+ * 
+ * This provides Alex with awareness of what the user is currently working on,
+ * enabling context-aware assistance and productivity support.
+ */
+export class FocusContextTool implements vscode.LanguageModelTool<IFocusContextParams> {
+    
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<IFocusContextParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        return {
+            invocationMessage: 'Checking your focus context...',
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<IFocusContextParams>,
+        token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+        
+        try {
+            // Get current session state
+            const session = getSessionState();
+            
+            // Get goals if requested
+            let goals = undefined;
+            if (options.input.includeGoals !== false) {
+                goals = await getGoalsSummary();
+            }
+            
+            // Generate human-readable summary
+            let summary = '';
+            
+            if (session.active) {
+                const timeRemaining = session.remaining ? Math.floor(session.remaining / 60) : 0;
+                const sessionType = session.isBreak ? 'break' : 'focus session';
+                const pauseStatus = session.isPaused ? ' (PAUSED)' : '';
+                const pomodoroInfo = session.pomodoroCount ? ` - Pomodoro #${session.pomodoroCount}` : '';
+                
+                summary = `Active ${sessionType}: "${session.topic}"${pomodoroInfo}${pauseStatus}\n`;
+                summary += `Time remaining: ${timeRemaining} minutes\n`;
+            } else {
+                summary = 'No active focus session.\n';
+            }
+            
+            if (goals) {
+                summary += `\nGoals: ${goals.activeGoals.length} active, ${goals.completedToday} completed today`;
+                if (goals.streakDays > 0) {
+                    summary += `, ${goals.streakDays}-day streak`;
+                }
+                summary += '\n';
+                
+                if (goals.activeGoals.length > 0) {
+                    summary += '\nActive goals:\n';
+                    for (const goal of goals.activeGoals.slice(0, 5)) {
+                        const progress = Math.round((goal.currentCount / goal.targetCount) * 100);
+                        summary += `- ${goal.title}: ${goal.currentCount}/${goal.targetCount} ${goal.unit} (${progress}%)\n`;
+                    }
+                }
+            }
+            
+            const response: IFocusContextResponse = {
+                session,
+                goals,
+                summary
+            };
+            
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(JSON.stringify(response, null, 2))
+            ]);
+            
+        } catch (error: any) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(`Error getting focus context: ${error.message}`)
+            ]);
+        }
+    }
+}
+
+/**
  * Self-Actualization Tool Input Parameters
  */
 export interface ISelfActualizationParams {
@@ -1209,6 +1310,11 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
     // Register User Profile Tool
     context.subscriptions.push(
         vscode.lm.registerTool('alex_user_profile', new UserProfileTool())
+    );
+    
+    // Register Focus Context Tool
+    context.subscriptions.push(
+        vscode.lm.registerTool('alex_focus_context', new FocusContextTool())
     );
     
     // Register Self-Actualization Tool

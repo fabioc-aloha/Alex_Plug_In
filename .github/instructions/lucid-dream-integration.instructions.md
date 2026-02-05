@@ -66,7 +66,7 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 ## Synapses
 
 ### Connection Mapping
-- [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "VS Code extension foundation for lucid processing"
+- [.github/instructions/dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "VS Code extension foundation for lucid processing"
 
 ### Activation Patterns
 - Enhancement opportunity → Execute lucid-dream mode

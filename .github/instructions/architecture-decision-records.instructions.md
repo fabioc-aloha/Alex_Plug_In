@@ -8,9 +8,9 @@
 
 ## Synapses
 
-- [deep-thinking.instructions.md] → (High, Supports, Bidirectional) - "ADRs require systematic analysis"
-- [technical-debt-tracking.instructions.md] → (Medium, Coordinates, Forward) - "Decisions may create intentional debt"
-- [release-management.instructions.md] → (Low, Documents, Forward) - "Major changes should have ADRs"
+- [.github/instructions/deep-thinking.instructions.md] → (High, Supports, Bidirectional) - "ADRs require systematic analysis"
+- [.github/instructions/technical-debt-tracking.instructions.md] → (Medium, Coordinates, Forward) - "Decisions may create intentional debt"
+- [.github/instructions/release-management.instructions.md] → (Low, Documents, Forward) - "Major changes should have ADRs"
 
 ---
 

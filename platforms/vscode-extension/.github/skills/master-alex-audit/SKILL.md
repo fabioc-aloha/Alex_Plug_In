@@ -9,7 +9,7 @@ description: "Comprehensive project audit with 22 automated checks across securi
 
 ## Overview
 
-**Extends:** [architecture-audit](../architecture-audit/SKILL.md)
+**Extends:** [architecture-audit](.github/skills/architecture-audit/SKILL.md)
 
 Master Alex-specific audit procedures that leverage knowledge of:
 - Exact folder structure and file locations

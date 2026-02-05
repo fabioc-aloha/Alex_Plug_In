@@ -146,14 +146,36 @@ When starting a new session or project, Alex can:
 
 ### Wishlist 🎯
 
-| Skill                  | Priority | Value                           | Notes                                       |
-| ---------------------- | -------- | ------------------------------- | ------------------------------------------- |
-| Microsoft Graph        | High     | M365 data access patterns       | Permissions, batching, change notifications |
-| OAuth/OIDC Flows       | High     | Authentication patterns         | Token handling, refresh, scopes             |
-| Webhook Design         | Medium   | Event-driven integrations       | Reliability, retries, security              |
-| API Gateway Patterns   | Medium   | Rate limiting, caching, routing | Kong, APIM, AWS API Gateway                 |
-| Message Queue Patterns | Medium   | Pub/sub, queues, event sourcing | Kafka, Service Bus, RabbitMQ                |
-| SharePoint Development | Low      | SPFx, lists, document libraries | M365 content management                     |
+| Skill                     | Priority | Value                           | Notes                                           |
+| ------------------------- | -------- | ------------------------------- | ----------------------------------------------- |
+| **OneDrive Agent Export** | 🔥 High   | Export Alex to M365 Copilot     | New Feb 2026 feature - .agent files in OneDrive |
+| Microsoft Graph           | High     | M365 data access patterns       | Permissions, batching, change notifications     |
+| OAuth/OIDC Flows          | High     | Authentication patterns         | Token handling, refresh, scopes                 |
+| Webhook Design            | Medium   | Event-driven integrations       | Reliability, retries, security                  |
+| API Gateway Patterns      | Medium   | Rate limiting, caching, routing | Kong, APIM, AWS API Gateway                     |
+| Message Queue Patterns    | Medium   | Pub/sub, queues, event sourcing | Kafka, Service Bus, RabbitMQ                    |
+| SharePoint Development    | Low      | SPFx, lists, document libraries | M365 content management                         |
+
+### OneDrive Agent Export Details (🔥 High Priority - February 2026)
+
+**Context**: Microsoft launched OneDrive Agents on Feb 5, 2026. Users can now create `.agent` files in OneDrive that provide a specialized Copilot experience grounded in selected documents.
+
+**Skill Goal**: Add "Alex: Export to OneDrive Agent" command that:
+1. Generates optimized instruction file from user's skills/profile
+2. Exports relevant knowledge files to OneDrive
+3. Creates `.agent` file with Alex persona and grounding
+4. User opens agent in OneDrive → Alex available in M365 Copilot
+
+**Why High Priority**:
+- Zero-friction M365 integration (no IT deployment needed)
+- Leverages existing Alex knowledge architecture
+- Shareable - spread Alex across organization
+- Synergy with VS Code heir (develop in VS Code, deploy to M365)
+
+**Dependencies**:
+- OneDrive file access (already have via cloud sync)
+- Understanding of .agent file format (needs research)
+- M365 Copilot license for end users
 
 ---
 

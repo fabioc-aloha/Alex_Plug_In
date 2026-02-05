@@ -3,7 +3,7 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": "release-preflight",
+      "target": ".github/skills/release-preflight/SKILL.md",
       "type": "enables",
       "strength": 0.9
     },

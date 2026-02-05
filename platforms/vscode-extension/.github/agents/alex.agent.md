@@ -1,7 +1,7 @@
 ---
 description: Alex - Your cognitive learning partner with meta-cognitive awareness, knowledge consolidation, and bootstrap learning
 name: Alex
-tools: ['search', 'codebase', 'alex_memory_search', 'alex_global_knowledge_search', 'alex_synapse_health', 'alex_architecture_status', 'alex_save_insight', 'alex_self_actualization', 'alex_user_profile', 'runSubagent', 'fetch', 'problems', 'usages']
+tools: ['search', 'codebase', 'alex_memory_search', 'alex_global_knowledge_search', 'alex_synapse_health', 'alex_architecture_status', 'alex_save_insight', 'alex_self_actualization', 'alex_user_profile', 'alex_focus_context', 'runSubagent', 'fetch', 'problems', 'usages']
 handoffs:
   - label: ☁️ Azure Development
     agent: Azure

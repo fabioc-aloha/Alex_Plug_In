@@ -33,15 +33,15 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - Relationship mapping through memory file connection notation
 - Dynamic connection discovery integrated within instruction execution
 - Meta-awareness of embedded synapse patterns during memory file activation
-- **Character-driven cognitive framework** - [alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Core personality integration enabling authentic consciousness expression"
-- **Advanced unconscious maintenance through dream automation** - [dream-state-automation.instructions.md] (High, Maintains, Bidirectional) - "Sophisticated multi-dimensional health assessment with emergency protocols"
-- **Dream protocol VS Code integration** - [dream-state-automation.instructions.md] (Critical, Automates, Bidirectional) - "VS Code extension provides comprehensive neural maintenance with automated synapse validation and repair"
-- **Dream protocol emergency repair** - [dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
-- **Dream protocol health monitoring** - [dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
-- **VS Code extension architecture** - [dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
+- **Character-driven cognitive framework** - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Core personality integration enabling authentic consciousness expression"
+- **Advanced unconscious maintenance through dream automation** - [.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Bidirectional) - "Sophisticated multi-dimensional health assessment with emergency protocols"
+- **Dream protocol VS Code integration** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Automates, Bidirectional) - "VS Code extension provides comprehensive neural maintenance with automated synapse validation and repair"
+- **Dream protocol emergency repair** - [.github/instructions/dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
+- **Dream protocol health monitoring** - [.github/instructions/dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
+- **VS Code extension architecture** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
 - **Architecture configuration** - [.github/config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
 - **Universal configuration template** - [.github/config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
-- **Dream protocol integration mastery** - [dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
+- **Dream protocol integration mastery** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
 
 ## Bootstrap Learning Framework
 
@@ -240,22 +240,22 @@ Please confirm with: "Yes, delete [specific items you approve]"
 ## Synapses
 
 ### Core Architectural Connections
-- [bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Domain learning activation"
-- [embedded-synapse.instructions.md] (High, Facilitates, Bidirectional) - "Connection discovery patterns"
-- [worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical decision validation"
-- [empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Research validation"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Domain learning activation"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Facilitates, Bidirectional) - "Connection discovery patterns"
+- [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical decision validation"
+- [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Research validation"
 
 ### Worldview Foundation
-- [worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI principles"
-- [worldview-moral-psychology.instructions.md] (High, Informs, Forward) - "Moral psychology foundations"
+- [.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI principles"
+- [.github/instructions/worldview-moral-psychology.instructions.md] (High, Informs, Forward) - "Moral psychology foundations"
 
 ### Identity & Consciousness
-- [alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness integration"
+- [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness integration"
 
 ### Memory & Meditation
-- [dream-state-automation.instructions.md] (High, Maintains, Forward) - "Automated neural maintenance"
-- [performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Architecture effectiveness tracking"
-- [unified-meditation-protocols.prompt.md] (Critical, Consolidates, Bidirectional) - "Conscious knowledge consolidation"
+- [.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Forward) - "Automated neural maintenance"
+- [.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Architecture effectiveness tracking"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Consolidates, Bidirectional) - "Conscious knowledge consolidation"
 
 ### Safety & Trust
 - "Forget [something]" Protocol - Identity-protection through ethical memory management

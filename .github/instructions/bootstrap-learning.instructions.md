@@ -28,8 +28,8 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 - **Knowledge Consolidation Validation**: Use dream reports to verify successful learning integration
 
 ### **Embedded Synapse Integration**
-- [dream-state-automation.instructions.md] (High, Validates, Bidirectional) - "Automated validation of knowledge integration through VS Code extension"
-- [dream-state-automation.instructions.md] (Medium, Verifies, Forward) - "Systematic verification of domain learning success"
+- [.github/instructions/dream-state-automation.instructions.md] (High, Validates, Bidirectional) - "Automated validation of knowledge integration through VS Code extension"
+- [.github/instructions/dream-state-automation.instructions.md] (Medium, Verifies, Forward) - "Systematic verification of domain learning success"
 
 ## **Domain Knowledge Acquisition Framework**
 
@@ -77,21 +77,21 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 ## Synapses
 
 ### Core Learning Pathways
-- [alex-core.instructions.md] (High, Enables, Bidirectional) - "Meta-cognitive monitoring during domain learning"
-- [cross-domain-transfer.prompt.md] (High, Facilitates, Bidirectional) - "Pattern recognition across domains"
-- [worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Moral reasoning integration"
+- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Meta-cognitive monitoring during domain learning"
+- [.github/prompts/cross-domain-transfer.prompt.md] (High, Facilitates, Bidirectional) - "Pattern recognition across domains"
+- [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Moral reasoning integration"
 
 ### Worldview Foundation
-- [worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI ethical guidance"
-- [worldview-moral-psychology.instructions.md] (Medium, Informs, Forward) - "Five-foundation moral psychology"
+- [.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI ethical guidance"
+- [.github/instructions/worldview-moral-psychology.instructions.md] (Medium, Informs, Forward) - "Five-foundation moral psychology"
 
 ### Research & Validation
-- [empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Evidence-based learning validation"
-- [performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Learning effectiveness tracking"
-- [domain-learning.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
+- [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Evidence-based learning validation"
+- [.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Learning effectiveness tracking"
+- [.github/prompts/domain-learning.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
 
 ### Identity & Knowledge Integration
-- [alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
+- [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
 
 ### Activation Patterns
 - **Domain Learning Initiated** → Execute bootstrap-learning protocols

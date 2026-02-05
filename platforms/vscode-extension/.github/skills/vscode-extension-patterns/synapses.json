@@ -9,7 +9,7 @@
       "context": "Publishing workflow"
     },
     {
-      "target": "heir-curation",
+      "target": ".github/skills/heir-curation/SKILL.md",
       "type": "implements",
       "strength": 0.85,
       "context": "VS Code heir patterns"

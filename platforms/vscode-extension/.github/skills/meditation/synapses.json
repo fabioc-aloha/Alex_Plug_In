@@ -3,28 +3,32 @@
     "inheritance": "master-only",
     "connections": [
         {
-            "target": "meditation-facilitation",
-            "type": "specializes",
+            "target": ".github/skills/meditation-facilitation/SKILL.md",
+            "type": "guided-by",
             "strength": 0.75,
-            "reason": "Facilitation guides meditation"
+            "when": "user explicitly requests guided meditation",
+            "yields": "Four R's protocol, structured reflection prompts"
         },
         {
-            "target": "knowledge-synthesis",
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
             "type": "triggers",
             "strength": 0.65,
-            "reason": "Meditation creates synthesis"
+            "when": "session learnings need abstraction",
+            "yields": "Pattern extraction, cross-project promotion"
         },
         {
-            "target": "self-actualization",
+            "target": ".github/skills/self-actualization/SKILL.md",
             "type": "enables",
             "strength": 0.9,
-            "reason": "Meditation precedes self-actualization"
+            "when": "deep assessment requested",
+            "yields": "Comprehensive architecture review protocol"
         },
         {
-            "target": "architecture-health",
+            "target": ".github/skills/architecture-health/SKILL.md",
             "type": "uses",
             "strength": 0.8,
-            "reason": "Meditation checks health"
+            "when": "validating synapses during meditation",
+            "yields": "Health check commands, validation patterns"
         }
     ],
     "triggers": [

@@ -1,77 +1,77 @@
 {
-    "skill": "ai-agent-design",
-    "version": "1.0.0",
-    "connections": [
-        {
-            "target": "prompt-engineering",
-            "relationship": "requires",
-            "strength": "strong",
-            "context": "Agent prompts require sophisticated prompt engineering"
-        },
-        {
-            "target": "rag-architecture",
-            "relationship": "complements",
-            "strength": "strong",
-            "context": "Agents often use RAG for knowledge retrieval"
-        },
-        {
-            "target": "mcp-development",
-            "relationship": "complements",
-            "strength": "strong",
-            "context": "MCP provides standardized tool interface for agents"
-        },
-        {
-            "target": "llm-model-selection",
-            "relationship": "informs",
-            "strength": "moderate",
-            "context": "Agent design requires model selection for different components"
-        },
-        {
-            "target": "api-design",
-            "relationship": "complements",
-            "strength": "moderate",
-            "context": "Tool APIs must be well-designed for agent consumption"
-        },
-        {
-            "target": "anti-hallucination",
-            "relationship": "requires",
-            "strength": "strong",
-            "context": "Agents must detect and handle hallucinated tool calls"
-        },
-        {
-            "target": "error-recovery-patterns",
-            "relationship": "requires",
-            "strength": "strong",
-            "context": "Agents need robust error handling and recovery"
-        },
-        {
-            "target": "testing-strategies",
-            "relationship": "complements",
-            "strength": "moderate",
-            "context": "Agent testing requires specialized evaluation approaches"
-        }
-    ],
-    "activationTriggers": [
-        "agent",
-        "autonomous",
-        "multi-agent",
-        "tool use",
-        "function calling",
-        "ReAct",
-        "plan and execute",
-        "LangChain",
-        "LangGraph",
-        "AutoGen",
-        "CrewAI",
-        "orchestration",
-        "supervisor"
-    ],
-    "metadata": {
-        "category": "ai-ml",
-        "complexity": "advanced",
-        "prerequisites": [
-            "prompt-engineering",
-            "api-design"
-        ]
+  "skill": "ai-agent-design",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "relationship": "requires",
+      "strength": "strong",
+      "context": "Agent prompts require sophisticated prompt engineering"
+    },
+    {
+      "target": ".github/skills/rag-architecture/SKILL.md",
+      "relationship": "complements",
+      "strength": "strong",
+      "context": "Agents often use RAG for knowledge retrieval"
+    },
+    {
+      "target": ".github/skills/mcp-development/SKILL.md",
+      "relationship": "complements",
+      "strength": "strong",
+      "context": "MCP provides standardized tool interface for agents"
+    },
+    {
+      "target": ".github/skills/llm-model-selection/SKILL.md",
+      "relationship": "informs",
+      "strength": "moderate",
+      "context": "Agent design requires model selection for different components"
+    },
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "relationship": "complements",
+      "strength": "moderate",
+      "context": "Tool APIs must be well-designed for agent consumption"
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "relationship": "requires",
+      "strength": "strong",
+      "context": "Agents must detect and handle hallucinated tool calls"
+    },
+    {
+      "target": ".github/skills/error-recovery-patterns/SKILL.md",
+      "relationship": "requires",
+      "strength": "strong",
+      "context": "Agents need robust error handling and recovery"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "relationship": "complements",
+      "strength": "moderate",
+      "context": "Agent testing requires specialized evaluation approaches"
     }
+  ],
+  "activationTriggers": [
+    "agent",
+    "autonomous",
+    "multi-agent",
+    "tool use",
+    "function calling",
+    "ReAct",
+    "plan and execute",
+    "LangChain",
+    "LangGraph",
+    "AutoGen",
+    "CrewAI",
+    "orchestration",
+    "supervisor"
+  ],
+  "metadata": {
+    "category": "ai-ml",
+    "complexity": "advanced",
+    "prerequisites": [
+      "prompt-engineering",
+      "api-design"
+    ]
+  }
 }

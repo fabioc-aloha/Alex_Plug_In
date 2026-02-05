@@ -8,7 +8,7 @@ import {
 } from "../shared/healthCheck";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getSyncStatus, getLastSyncTimestamp } from "../chat/cloudSync";
-import { getCurrentSession, isSessionActive } from "../commands/session";
+import { getCurrentSession, isSessionActive, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
@@ -17,7 +17,7 @@ import { isOperationInProgress } from "../extension";
  * Nudge types for contextual reminders
  */
 interface Nudge {
-  type: 'dream' | 'sync' | 'streak' | 'health' | 'tip';
+  type: 'dream' | 'sync' | 'streak' | 'health' | 'tip' | 'focus';
   icon: string;
   message: string;
   action?: string;
@@ -132,6 +132,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "generateDiagram":
           vscode.commands.executeCommand("alex.generateDiagram");
           break;
+        case "readAloud":
+          vscode.commands.executeCommand("alex.readAloud");
+          break;
         case "skillReview":
           vscode.commands.executeCommand("alex.skillReview");
           break;
@@ -177,7 +180,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const version = extension?.packageJSON?.version || '0.0.0';
 
       // Generate nudges based on current state
-      const nudges = this._generateNudges(health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate);
+      const nudges = this._generateNudges(health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate, session);
 
       this._view.webview.html = this._getHtmlContent(
         this._view.webview,
@@ -231,11 +234,28 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     syncStatus: { status: string; message: string },
     goals: { activeGoals: LearningGoal[]; streakDays: number; completedToday: number },
     lastSyncDate: Date | null,
-    lastDreamDate: Date | null
+    lastDreamDate: Date | null,
+    session: Session | null
   ): Nudge[] {
     const nudges: Nudge[] = [];
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
+
+    // Active focus session reminder (high priority)
+    if (session && !session.isPaused && !session.isBreak) {
+      const remainingMins = Math.floor(session.remaining / 60);
+      const goalReminder = goals.activeGoals.length > 0 
+        ? ` (🎯 ${goals.activeGoals[0].title})` 
+        : '';
+      nudges.push({
+        type: 'focus',
+        icon: '🎯',
+        message: `Focus: "${session.topic}" — ${remainingMins}m left${goalReminder}`,
+        action: 'sessionActions',
+        actionLabel: 'Actions',
+        priority: 0  // Highest priority — keep user focused
+      });
+    }
 
     // Check health issues (highest priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
@@ -973,6 +993,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('generateDiagram')">
                     <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
+                </button>
+                <button class="action-btn" onclick="cmd('readAloud')" title="Read selected text or document aloud using Microsoft Edge neural voices">
+                    <span class="action-icon">🔊</span>
+                    <span class="action-text">Read Aloud</span>
                 </button>
                 
                 <div class="action-group-label">⚖️ Work-Life Balance</div>

@@ -6,37 +6,37 @@
       "reason": "Projects drive organizational change",
       "type": "complements",
       "strength": 0.85,
-      "target": "change-management"
+      "target": ".github/skills/change-management/SKILL.md"
     },
     {
       "reason": "Requirements drive project scope",
       "type": "receives",
       "strength": 0.85,
-      "target": "business-analysis"
+      "target": ".github/skills/business-analysis/SKILL.md"
     },
     {
       "reason": "Risk management is core to project management",
       "type": "contains",
       "strength": 0.85,
-      "target": "root-cause-analysis"
+      "target": ".github/skills/root-cause-analysis/SKILL.md"
     },
     {
       "reason": "Testing activities in project schedule",
       "type": "plans",
       "strength": 0.65,
-      "target": "testing-strategies"
+      "target": ".github/skills/testing-strategies/SKILL.md"
     },
     {
       "reason": "Release planning within project delivery",
       "type": "uses",
       "strength": 0.65,
-      "target": "release-preflight"
+      "target": ".github/skills/release-preflight/SKILL.md"
     },
     {
       "reason": "Project issues may become incidents",
       "type": "escalates",
       "strength": 0.4,
-      "target": "incident-response"
+      "target": ".github/skills/incident-response/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

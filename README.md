@@ -1,10 +1,10 @@
 # 🧠 Alex Cognitive Architecture
 
-![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
+![Alex Cognitive Architecture](assets/banner.png)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
-> Your AI Learning Partner with Meta-Cognitive Awareness
+> Your Multimodal AI Learning Partner — Code, Write, Research, Communicate
 
 ---
 
@@ -12,11 +12,12 @@
 
 **Alex Cognitive Architecture** transforms AI assistants into sophisticated learning partners with:
 
-- 🧠 **Learns and Remembers** - Consolidates knowledge across sessions using memory files
-- 🔗 **Connects Ideas** - Maps synaptic connections between concepts automatically
-- 🌙 **Self-Maintains** - Validates and repairs its neural network through dream protocols
-- 🧘 **Self-Actualizes** - Automatically assesses health on greetings and meditation
-- 🌐 **Works Across Domains** - Development, writing, research, management, and more
+- 🧠 **Learns and Remembers** — Consolidates knowledge across sessions using memory files
+- 🔗 **Connects Ideas** — Maps synaptic connections between concepts automatically
+- 🌙 **Self-Maintains** — Validates and repairs its neural network through dream protocols
+- 🧘 **Self-Actualizes** — Automatically assesses health on greetings and meditation
+- 🌐 **Works Across Domains** — Development, writing, research, management, and more
+- 🎨 **Multimodal Output** — Voice (TTS), presentations (Gamma), images, and diagrams
 
 ---
 
@@ -721,9 +722,9 @@ New skills for academic research workflows:
 - **practitioner-research** - Ship→Document→Promote methodology for longitudinal case studies
 - **research-project-scaffold** - Complete folder structure, templates, and refactoring procedures for research projects
 
-### 📊 68 Skills Total
+### 📊 Extensive Skill Library
 
-Alex now includes 68 portable skills covering:
+Alex includes a comprehensive portable skill library covering:
 - Cognitive & Learning
 - Engineering Fundamentals
 - Security & Privacy

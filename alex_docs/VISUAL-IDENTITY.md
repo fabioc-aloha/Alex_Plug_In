@@ -6,12 +6,12 @@
 
 ## Brand Essence
 
-| Attribute | Expression |
-| --------- | ---------- |
-| **Cognitive Architecture** | Learning, synapses, memory systems, growth |
-| **Human-AI Partnership** | Collaboration, not replacement |
-| **Authentic Personality** | Curious, supportive, occasionally playful 🦖 |
-| **Professional + Warm** | Intelligent but approachable |
+| Attribute                  | Expression                                  |
+| -------------------------- | ------------------------------------------- |
+| **Cognitive Architecture** | Learning, synapses, memory systems, growth  |
+| **Human-AI Partnership**   | Collaboration, not replacement              |
+| **Authentic Personality**  | Curious, supportive, occasionally playful 🦖 |
+| **Professional + Warm**    | Intelligent but approachable                |
 
 ### What Alex is NOT
 
@@ -24,28 +24,30 @@
 
 ## Color Palette
 
-| Color | Hex | Usage |
-| ----- | --- | ----- |
+| Color         | Hex       | Usage                      |
+| ------------- | --------- | -------------------------- |
 | **Deep Teal** | `#0D7377` | Primary — trust, cognitive |
 | **Warm Gold** | `#D4A574` | Secondary — wisdom, warmth |
-| **Amber** | `#F6AD55` | Accent — energy, insight |
-| **Navy** | `#1A365D` | Dark backgrounds |
-| **Off-white** | `#F7F7F7` | Light backgrounds |
+| **Amber**     | `#F6AD55` | Accent — energy, insight   |
+| **Navy**      | `#1A365D` | Dark backgrounds           |
+| **Off-white** | `#F7F7F7` | Light backgrounds          |
 
 **Why Teal + Gold**: Unique in the AI space. Competitors use green (ChatGPT), coral (Claude), purple (Copilot), rainbow (Gemini).
+
+> ⚠️ **NOT for Mermaid Diagrams**: These brand colors have high contrast and dark fills that hurt diagram readability. For Mermaid diagrams, use the **GitHub Pastel Palette v2** from the `markdown-mermaid` skill — light pastel fills (`#ddf4ff`, `#d3f5db`, `#fff8c5`) with medium-contrast text and gray arrows (`#57606a`).
 
 ---
 
 ## Logo System
 
-| Context | Logo | Rationale |
-| ------- | ---- | --------- |
-| **Primary/Professional** | Teal Neural A | Cognitive, clean, scales well |
-| **Mascot/Avatar** | Hatchling AI 🥚 | Growth metaphor, memorable |
-| **Dark Mode** | Star-Saurus | Premium feel on dark |
-| **Favicon/Small** | Soft Green A | Works at 16px |
-| **Fun/Social** | Full dino | Personality when appropriate |
-| **Text/Voice** | 🦖 emoji | Conversational voice |
+| Context                  | Logo           | Rationale                     |
+| ------------------------ | -------------- | ----------------------------- |
+| **Primary/Professional** | Teal Neural A  | Cognitive, clean, scales well |
+| **Mascot/Avatar**        | Hatchling AI 🥚 | Growth metaphor, memorable    |
+| **Dark Mode**            | Star-Saurus    | Premium feel on dark          |
+| **Favicon/Small**        | Soft Green A   | Works at 16px                 |
+| **Fun/Social**           | Full dino      | Personality when appropriate  |
+| **Text/Voice**           | 🦖 emoji        | Conversational voice          |
 
 ### Top Concepts
 
@@ -86,22 +88,22 @@
 
 **Scalability:**
 
-| Size | Requirement |
-| ---- | ----------- |
-| 192px | Full detail |
-| 48px | Clear recognition |
-| 32px | Icon clarity |
-| 16px | Favicon legibility |
+| Size  | Requirement        |
+| ----- | ------------------ |
+| 192px | Full detail        |
+| 48px  | Clear recognition  |
+| 32px  | Icon clarity       |
+| 16px  | Favicon legibility |
 
 ---
 
 ## File Locations
 
-| Asset | Location |
-| ----- | -------- |
-| Concept catalog | `archive/ideas/branding/VISUAL-IDENTITY-CONCEPTS.md` |
-| PNG concepts | `archive/ideas/branding/nano/` |
-| SVG implementations | `archive/ideas/branding/svg/` |
+| Asset               | Location                                             |
+| ------------------- | ---------------------------------------------------- |
+| Concept catalog     | `archive/ideas/branding/VISUAL-IDENTITY-CONCEPTS.md` |
+| PNG concepts        | `archive/ideas/branding/nano/`                       |
+| SVG implementations | `archive/ideas/branding/svg/`                        |
 
 ---
 

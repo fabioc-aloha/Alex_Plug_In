@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "skill": "microsoft-fabric",
+  "lastUpdated": "2026-02-04",
+  "synapses": [
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "type": "Follows",
+      "strength": "High",
+      "context": "Fabric API follows long-running operation patterns"
+    },
+    {
+      "target": ".github/skills/data-governance/SKILL.md",
+      "type": "Enables",
+      "strength": "Critical",
+      "context": "Fabric governance enables enterprise data management"
+    },
+    {
+      "target": ".github/skills/infrastructure-as-code/SKILL.md",
+      "type": "Integrates",
+      "strength": "Medium",
+      "context": "Fabric deployment can be automated via APIs"
+    },
+    {
+      "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+      "type": "Implements",
+      "strength": "High",
+      "context": "Permission pipelines enforce privacy compliance"
+    },
+    {
+      "target": ".github/skills/project-deployment/SKILL.md",
+      "type": "Supports",
+      "strength": "Medium",
+      "context": "Fabric workspaces support CI/CD patterns"
+    },
+    {
+      "target": ".github/skills/architecture-audit/SKILL.md",
+      "type": "Enables",
+      "strength": "High",
+      "context": "Scanner APIs enable workspace auditing"
+    }
+  ],
+  "activationTriggers": [
+    "Fabric workspace",
+    "Fabric API",
+    "Fabric governance",
+    "medallion architecture",
+    "bronze silver gold",
+    "lakehouse",
+    "Unity Catalog",
+    "schema-enabled lakehouse",
+    "permission pipeline",
+    "contact compliance",
+    "workspace inventory",
+    "Fabric scanner",
+    "onelake"
+  ],
+  "relatedSkills": [
+    "api-design",
+    "data-governance",
+    "privacy-responsible-ai",
+    "architecture-audit"
+  ]
+}

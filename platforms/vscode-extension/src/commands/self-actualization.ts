@@ -132,22 +132,25 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
                        report.synapseHealth.healthStatus === 'GOOD' ? '🟢' :
                        report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? '🟡' : '🔴';
 
+    const totalFiles = report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles;
     const message = `Self-Actualization Complete ${healthEmoji}\n\n` +
-        `Synapses: ${report.synapseHealth.totalSynapses} (${report.synapseHealth.brokenConnections} broken)\n` +
-        `Memory Files: ${report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles}\n` +
-        `Recommendations: ${report.recommendations.length}`;
+        `📊 ${report.synapseHealth.totalSynapses} synapses • ${totalFiles} memory files` +
+        `${report.synapseHealth.brokenConnections > 0 ? ` • ${report.synapseHealth.brokenConnections} need attention` : ''}` +
+        `${report.recommendations.length > 0 ? `\n💡 ${report.recommendations.length} recommendations` : ''}`;
 
-    const action = await vscode.window.showInformationMessage(
-        message,
-        'View Report',
-        'Open Session File'
-    );
-
-    if (action === 'View Report') {
-        showReportInPanel(report);
-    } else if (action === 'Open Session File' && report.sessionFile) {
-        const doc = await vscode.workspace.openTextDocument(report.sessionFile);
-        await vscode.window.showTextDocument(doc);
+    if (report.recommendations.length > 0 || report.synapseHealth.brokenConnections > 0) {
+        // Has actionable items - offer to discuss
+        const action = await vscode.window.showInformationMessage(
+            message,
+            'Chat with Alex',
+            'OK'
+        );
+        if (action === 'Chat with Alex') {
+            await vscode.commands.executeCommand('workbench.action.chat.open', { query: 'Review my self-actualization results and help me address the recommendations.' });
+        }
+    } else {
+        // All good - simple confirmation
+        await vscode.window.showInformationMessage(message, 'OK');
     }
 
     return report;

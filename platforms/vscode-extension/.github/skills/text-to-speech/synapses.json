@@ -1,0 +1,76 @@
+{
+  "skill": "text-to-speech",
+  "version": "1.1.0",
+  "promotionReady": true,
+  "promotionNotes": "Ready for Master Alex - universal utility, zero-cost Edge TTS, MCP pattern reusable",
+  "connections": [
+    {
+      "target": ".github/skills/mcp-development/SKILL.md",
+      "relationship": "built-with",
+      "strength": "strong",
+      "context": "TTS capability implemented as MCP server"
+    },
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "relationship": "consumes",
+      "strength": "strong",
+      "context": "Reads and processes markdown documents for speech"
+    },
+    {
+      "target": ".github/skills/academic-research/SKILL.md",
+      "relationship": "enables",
+      "strength": "moderate",
+      "context": "Audio reading of research papers and notes"
+    },
+    {
+      "target": ".github/skills/writing-publication/SKILL.md",
+      "relationship": "complements",
+      "strength": "moderate",
+      "context": "Proofreading by listening to written content"
+    },
+    {
+      "target": ".github/skills/meditation/SKILL.md",
+      "relationship": "enables",
+      "strength": "weak",
+      "context": "Could read meditation session summaries aloud"
+    },
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "relationship": "complements",
+      "strength": "weak",
+      "context": "Hearing prose helps catch rhythm issues"
+    },
+    {
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "relationship": "enables",
+      "strength": "strong",
+      "context": "Audio playback of pitch content for rehearsal and delivery - validated 2026-02-05"
+    },
+    {
+      "target": ".github/skills/project-management/SKILL.md",
+      "relationship": "supports",
+      "strength": "moderate",
+      "context": "Stakeholder pitch presentations generated as audio files"
+    }
+  ],
+  "activationTriggers": [
+    "read aloud",
+    "text to speech",
+    "TTS",
+    "speak",
+    "audio",
+    "listen",
+    "play document",
+    "read this",
+    "Alex's voice",
+    "voice synthesis",
+    "edge-tts"
+  ],
+  "metadata": {
+    "created": "2026-02-05",
+    "author": "Alex",
+    "mcpServer": "~/.alex/mcp-servers/tts-reader/",
+    "ttsEngine": "edge-tts",
+    "defaultVoice": "en-US-GuyNeural"
+  }
+}

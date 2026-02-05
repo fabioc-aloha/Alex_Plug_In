@@ -64,7 +64,7 @@ This pattern is now documented in practitioner-research skill.
 ## Synaptic Connections
 
 - [practitioner-research/SKILL.md] (1.0, created, forward) - "New skill capturing Fabio's research methodology"
-- [AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md] (0.95, enhances, bidirectional) - "Publication-ready methodology paper"
+- **External Reference**: `alex_docs/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md` — Publication-ready methodology paper
 - [markdown-mermaid/SKILL.md] (0.7, informs, forward) - "xychart-beta color limitation discovered"
 - [academic-research/SKILL.md] (0.85, extends, bidirectional) - "Practitioner-research extends academic-research"
 

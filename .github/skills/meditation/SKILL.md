@@ -45,6 +45,6 @@ Expert in knowledge consolidation, memory integration, and guided meditation ses
 
 ## Related Skills
 
-- [Architecture Health](../architecture-health/SKILL.md) - Check neural network health
-- [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Acquire new domain knowledge
-- [Global Knowledge](../global-knowledge/SKILL.md) - Search cross-project patterns
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Check neural network health
+- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Acquire new domain knowledge
+- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Search cross-project patterns

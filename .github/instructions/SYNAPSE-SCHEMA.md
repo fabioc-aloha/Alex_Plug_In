@@ -19,7 +19,7 @@ description: "Single source of truth for synapse notation format"
 
 ### Example
 ```
-- [alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
+- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
 ```
 
 ---
@@ -68,8 +68,8 @@ Memory files should include synapses in a simple list format:
 ```markdown
 ## Synapses
 
-- [file-a.instructions.md] (High, Enables, Bidirectional) - "When X happens"
-- [file-b.prompt.md] (Medium, Triggers, Forward) - "On Y condition"
+- [.github/instructions/file-a.instructions.md] (High, Enables, Bidirectional) - "When X happens"
+- [.github/prompts/file-b.prompt.md] (Medium, Triggers, Forward) - "On Y condition"
 ```
 
 **Note**: No need to repeat schema documentation in each file. Reference this document for format details.
@@ -152,7 +152,7 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 2. Exclude those skill folders from the package
 3. Warn if any temporary skills would be included
 
-See [release-management.instructions.md] for release checklist.
+See [.github/instructions/release-management.instructions.md] for release checklist.
 
 ---
 

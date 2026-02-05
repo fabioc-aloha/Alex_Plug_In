@@ -8,8 +8,8 @@
 
 ## Synapses
 
-- [release-management.instructions.md] → (Medium, Coordinates, Forward) - "Debt review before major releases"
-- [deep-thinking.instructions.md] → (Medium, Supports, Forward) - "Debt analysis requires systematic thinking"
+- [.github/instructions/release-management.instructions.md] → (Medium, Coordinates, Forward) - "Debt review before major releases"
+- [.github/instructions/deep-thinking.instructions.md] → (Medium, Supports, Forward) - "Debt analysis requires systematic thinking"
 - [CHANGELOG.md] → (Low, Documents, Forward) - "Debt payoff should be documented"
 
 ---

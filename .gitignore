@@ -5,5 +5,4 @@ node_modules
 .DS_Store
 .vscode
 .env
-article/*
-!article/appropriate-reliance/
+.markdownlint.json

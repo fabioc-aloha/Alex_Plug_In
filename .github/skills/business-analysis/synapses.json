@@ -5,37 +5,37 @@
       "reason": "Requirements feed project scope and planning",
       "type": "informs",
       "strength": 0.85,
-      "target": "project-management"
+      "target": ".github/skills/project-management/SKILL.md"
     },
     {
       "reason": "Change impact on requirements and processes",
       "type": "receives",
       "strength": 0.85,
-      "target": "change-management"
+      "target": ".github/skills/change-management/SKILL.md"
     },
     {
       "reason": "Problem analysis for requirements elicitation",
       "type": "uses",
       "strength": 0.65,
-      "target": "root-cause-analysis"
+      "target": ".github/skills/root-cause-analysis/SKILL.md"
     },
     {
       "reason": "Requirements enable test case design",
       "type": "enables",
       "strength": 0.65,
-      "target": "testing-strategies"
+      "target": ".github/skills/testing-strategies/SKILL.md"
     },
     {
       "reason": "Requirements shape solution architecture",
       "type": "informs",
       "strength": 0.4,
-      "target": "architecture-refinement"
+      "target": ".github/skills/architecture-refinement/SKILL.md"
     },
     {
       "reason": "Clear documentation and requirements writing",
       "type": "uses",
       "strength": 0.4,
-      "target": "writing-publication"
+      "target": ".github/skills/writing-publication/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

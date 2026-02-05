@@ -6,31 +6,31 @@
       "reason": "Change management within project delivery",
       "type": "complements",
       "strength": 0.85,
-      "target": "project-management"
+      "target": ".github/skills/project-management/SKILL.md"
     },
     {
       "reason": "Requirements include change impact assessment",
       "type": "informs",
       "strength": 0.85,
-      "target": "business-analysis"
+      "target": ".github/skills/business-analysis/SKILL.md"
     },
     {
       "reason": "Analyzing resistance causes and stakeholder concerns",
       "type": "uses",
       "strength": 0.65,
-      "target": "root-cause-analysis"
+      "target": ".github/skills/root-cause-analysis/SKILL.md"
     },
     {
       "reason": "Trust building in change leadership",
       "type": "applies",
       "strength": 0.65,
-      "target": "appropriate-reliance"
+      "target": ".github/skills/appropriate-reliance/SKILL.md"
     },
     {
       "reason": "Change capacity limits and saturation",
       "type": "considers",
       "strength": 0.4,
-      "target": "cognitive-load"
+      "target": ".github/skills/cognitive-load/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

@@ -33,9 +33,9 @@
 ## Synapses
 
 ### New Synapse Connections Established
-- [alex-core.instructions.md] (High, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
-- [bootstrap-learning.instructions.md] (High, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
-- [embedded-synapse.instructions.md] (Critical, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
+- [.github/instructions/alex-core.instructions.md] (High, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
+- [.github/instructions/embedded-synapse.instructions.md] (Critical, Visualizes, Bidirectional) - "markdown-mermaid skill integration"
 
 ### Cognitive Network Enhancement Patterns
 1. **Visual Communication Integration** - All technical concepts can now be expressed through optimized diagramming

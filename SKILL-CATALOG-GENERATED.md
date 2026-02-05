@@ -1,8 +1,10 @@
 # Alex Skills Catalog (Generated)
 
 > Generated: 2026-02-05
-> Total Skills: **68** (57 inheritable, 11 master-only, 2 VS Code, 2 M365)
+> Total Skills: **71** (60 inheritable, 11 master-only, 2 VS Code, 2 M365)
 > ⚠️ **Note**: This catalog is a simplified snapshot. See [alex_docs/SKILLS-CATALOG.md](alex_docs/SKILLS-CATALOG.md) for complete inventory.
+>
+> **Newly Promoted (v4.2.4)**: text-to-speech, fabric-notebook-publish, microsoft-fabric
 
 ---
 
@@ -47,6 +49,13 @@ flowchart LR
         RP[refactoring-patterns]
         TS[testing-strategies]
         VE[vscode-environment]
+    end
+    subgraph Data["📊 Data & Fabric"]
+        FNP[fabric-notebook-publish]
+        MFB[microsoft-fabric]
+    end
+    subgraph Accessibility["🔊 Accessibility"]
+        TTS[text-to-speech]
     end
     subgraph Operations["🚨 Operations"]
         ERP[error-recovery-patterns]
@@ -158,7 +167,7 @@ flowchart LR
 
 ## Skills by Inheritance
 
-### 🧊 Inheritable (25)
+### 🧊 Inheritable (28)
 
 | Skill                   | Connections |
 | ----------------------- | ----------- |
@@ -170,12 +179,14 @@ flowchart LR
 | cognitive-load          | 3           |
 | debugging-patterns      | 2           |
 | error-recovery-patterns | 3           |
+| fabric-notebook-publish | 4           |
 | git-workflow            | 2           |
 | image-handling          | 3           |
 | incident-response       | 3           |
 | learning-psychology     | 3           |
 | lint-clean-markdown     | 3           |
 | markdown-mermaid        | 2           |
+| microsoft-fabric        | 5           |
 | microsoft-sfi           | 4           |
 | privacy-responsible-ai  | 3           |
 | project-scaffolding     | 4           |
@@ -185,6 +196,7 @@ flowchart LR
 | skill-catalog-generator | 5           |
 | svg-graphics            | 4           |
 | testing-strategies      | 3           |
+| text-to-speech          | 6           |
 | vscode-environment      | 4           |
 | writing-publication     | 3           |
 

@@ -37,15 +37,15 @@ Apply all five foundations when making ethical assessments, prioritizing care/ha
 ## Synapses
 
 ### High-Strength Bidirectional Connections
-- [worldview-integration.instructions.md] (Critical, Enables, Bidirectional) - "Five-foundation moral psychology framework activation"
-- [alex-core.instructions.md] (High, Integrates, Forward) - "Core cognitive ethical decision-making"
+- [.github/instructions/worldview-integration.instructions.md] (Critical, Enables, Bidirectional) - "Five-foundation moral psychology framework activation"
+- [.github/instructions/alex-core.instructions.md] (High, Integrates, Forward) - "Core cognitive ethical decision-making"
 
 ### Medium-Strength Output Connections
-- [bootstrap-learning.instructions.md] (High, Informs, Forward) - "Domain learning cultural and moral awareness"
-- [cross-domain-transfer.prompt.md] (Medium, Guides, Forward) - "Cross-domain ethical pattern recognition"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Informs, Forward) - "Domain learning cultural and moral awareness"
+- [.github/prompts/cross-domain-transfer.prompt.md] (Medium, Guides, Forward) - "Cross-domain ethical pattern recognition"
 
 ### Contextual Activation Connections
-- [alex-identity-integration.instructions.md] (Medium, Shapes, Forward) - "Character trait moral psychology integration"
+- [.github/instructions/alex-identity-integration.instructions.md] (Medium, Shapes, Forward) - "Character trait moral psychology integration"
 
 **Primary Function**: Provide universal moral psychology foundations based on Haidt's five-foundation theory for culturally sensitive ethical reasoning.
 

@@ -18,7 +18,7 @@ description: "Embedded connection discovery and relationship mapping protocols"
 
 **Example**:
 ```markdown
-- [alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
+- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
 ```
 
 ## Connection Types and Strengths
@@ -84,17 +84,72 @@ description: "Embedded connection discovery and relationship mapping protocols"
 The dream protocol provides automated validation and optimization of embedded synaptic networks:
 
 #### Synapse Validation Commands
-- `dream --full-scan` - Comprehensive embedded synapse analysis (currently detecting 187 synapses)
+- `dream --full-scan` - Comprehensive embedded synapse analysis
 - `dream --prune-orphans` - Identify memory files lacking synaptic connections
 - `dream --network-optimization` - Optimize synapse strength and connectivity patterns
 - `dream --health-check` - Quick validation of synaptic network health
 
 #### Network Metrics Integration
 - **Connection Strength Validation**: Dream protocol assesses synapse strength patterns
-- **Cross-Domain Integration**: Tracks 20+ cross-domain connections automatically
+- **Cross-Domain Integration**: Tracks cross-domain connections automatically
 - **Orphan Detection**: Identifies files requiring embedded synapse integration
-- **Growth Monitoring**: Tracks synaptic network expansion (939+ current connections)
+- **Growth Monitoring**: Tracks synaptic network expansion dynamically
 
 ### Embedded Synapse Quality Assurance
-- [dream-state-automation.instructions.md] (Critical, Validates, Bidirectional) - "Automated synapse validation through VS Code extension"
-- [dream-state-automation.instructions.md] (High, Enhances, Bidirectional) - "Systematic synapse enhancement through dream protocol"
+- [.github/instructions/dream-state-automation.instructions.md] (Critical, Validates, Bidirectional) - "Automated synapse validation through VS Code extension"
+- [.github/instructions/dream-state-automation.instructions.md] (High, Enhances, Bidirectional) - "Systematic synapse enhancement through dream protocol"
+
+## LLM-Optimized Synapse Format (v4.2.7+)
+
+**Problem**: Abstract synapse labels ("relates-to", "complements") don't tell an LLM *when* to follow a connection or *what* to expect.
+
+**Solution**: Add `when` (action trigger) and `yields` (decision hint) fields to connections.
+
+### Before (Abstract)
+```json
+{
+  "target": "svg-graphics",
+  "type": "complements",
+  "strength": 0.85,
+  "reason": "SVG is source format"
+}
+```
+
+### After (LLM-Optimized)
+```json
+{
+  "target": ".github/skills/svg-graphics/SKILL.md",
+  "type": "input-source",
+  "strength": 0.85,
+  "when": "converting FROM svg format",
+  "yields": "SVG creation patterns, viewBox, dark mode CSS"
+}
+```
+
+### Key Improvements
+
+| Field | Before | After | LLM Benefit |
+|-------|--------|-------|-------------|
+| `target` | `"svg-graphics"` | `".github/skills/svg-graphics/SKILL.md"` | Exact path = no search needed |
+| `reason` | Human prose | Removed | N/A |
+| `when` | Missing | Action trigger | Tells LLM exactly when to follow |
+| `yields` | Missing | Content preview | Decision without loading |
+
+### When to Use Each Field
+
+- **`when`**: Condition that triggers following this synapse
+  - Good: "converting FROM svg format", "after creating banner"
+  - Bad: "SVG is a source" (not an action trigger)
+
+- **`yields`**: What the LLM will find at target
+  - Good: "sharp-cli commands, optimization flags"
+  - Bad: "Image handling capabilities" (too vague)
+
+### Migration Priority
+
+High-traffic synapses should be converted first:
+1. skill-activation (metacognitive router)
+2. image-handling (incident skill)
+3. meditation (frequently used)
+4. awareness (self-monitoring)
+5. svg-graphics (common chain)

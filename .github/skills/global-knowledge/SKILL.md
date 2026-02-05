@@ -63,9 +63,9 @@ Specific learnings from particular situations:
 
 ## Related Skills
 
-- [Meditation](../meditation/SKILL.md) - Save insights after sessions
-- [Architecture Health](../architecture-health/SKILL.md) - Check knowledge health
-- [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Build new knowledge
+- [Meditation](.github/skills/meditation/SKILL.md) - Save insights after sessions
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Check knowledge health
+- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Build new knowledge
 
 ## Memory System Differentiation (VS Code 1.109+)
 

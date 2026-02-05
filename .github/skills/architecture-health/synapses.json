@@ -1,25 +1,25 @@
 {
-    "skill": "architecture-health",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "self-actualization",
-            "type": "enables",
-            "strength": 0.9,
-            "reason": "Health checks feed self-actualization"
-        },
-        {
-            "target": "meditation",
-            "type": "informs",
-            "strength": 0.65,
-            "reason": "Health status during meditation sessions"
-        }
-    ],
-    "triggers": [
-        "synapse health",
-        "architecture check",
-        "validation",
-        "broken connections",
-        "dream"
-    ]
+  "skill": "architecture-health",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/self-actualization/SKILL.md",
+      "type": "enables",
+      "strength": 0.9,
+      "reason": "Health checks feed self-actualization"
+    },
+    {
+      "target": ".github/skills/meditation/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "reason": "Health status during meditation sessions"
+    }
+  ],
+  "triggers": [
+    "synapse health",
+    "architecture check",
+    "validation",
+    "broken connections",
+    "dream"
+  ]
 }

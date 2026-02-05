@@ -1,60 +1,93 @@
+````instructions
 # Copilot Chat Action Buttons Pattern
 
 **Discovery Date**: February 4, 2026  
 **VS Code Version**: 1.109+  
 **Category**: UX Enhancement
 
-## Discovery
+## Official VS Code APIs
 
-VS Code 1.109 Copilot Chat automatically renders certain markdown patterns as **clickable action buttons** that execute when clicked.
+There are **two official ways** to create clickable buttons in chat:
 
-## Working Pattern
+### 1. Command Buttons (Inline)
 
-When a response includes emoji-prefixed action suggestions, VS Code renders them as buttons:
+Use `stream.button()` to add clickable buttons inline with the response:
+
+```typescript
+stream.button({
+    command: 'alex.startSession',
+    title: '🎯 Start a Session',
+    arguments: []
+});
+```
+
+**When to use**: After completing a task, to offer the next logical action.
+
+### 2. Follow-up Provider (After Response)
+
+Register a `ChatFollowupProvider` that returns suggested prompts:
+
+```typescript
+alex.followupProvider = {
+    provideFollowups(result, context, token) {
+        return [
+            { prompt: '/meditate', label: '🧘 Meditate on insights' },
+            { prompt: 'What should I focus on next?', label: '🎯 Next steps' }
+        ];
+    }
+};
+```
+
+**When to use**: Suggest follow-up questions or commands after ANY response.
+
+## ⚠️ Markdown Emoji Pattern (Unreliable)
+
+The emoji-prefixed markdown pattern:
 
 ```markdown
 🧠 Run Self-Actualization First
 🌍 Global Knowledge Contribution
-🌙 Run Dream Protocol After
-☁️ Sync Global Knowledge
 ```
 
-**Result**: Each line becomes a clickable button that sends the text as a new prompt.
+This is **NOT an official API** and may render inconsistently. Use `stream.button()` or `ChatFollowupProvider` for guaranteed clickable actions.
 
-## Recommended Format
+## Best Practices for Consistent Buttons
 
-For action suggestions in skills and prompts:
+### In TypeScript Code
+
+1. **End responses with stream.button()** for primary actions:
+```typescript
+stream.markdown('Task completed successfully!\n\n');
+stream.button({ command: 'alex.nextStep', title: '➡️ Next Step' });
+```
+
+2. **Return metadata** so followupProvider knows context:
+```typescript
+return { metadata: { command: 'learn', topic: 'typescript' } };
+```
+
+3. **Context-aware followups** based on result metadata:
+```typescript
+if (result.metadata.command === 'learn') {
+    return [{ prompt: 'Quiz me on this topic', label: '📝 Quiz' }];
+}
+```
+
+### In Skills/Prompts (Markdown)
+
+When writing skills or prompts, **instruct Alex to use stream.button()**:
 
 ```markdown
-## Next Steps
-🎯 Start Learning Session
-🧘 Meditate on Insights  
-🔧 Run Dream Maintenance
-📊 Check Architecture Health
+## Response Format
+
+After completing this task, call:
+- `stream.button({ command: 'alex.meditate', title: '🧘 Meditate' })`
+- `stream.button({ command: 'alex.dream', title: '🌙 Dream' })`
 ```
-
-## Design Guidelines
-
-| Element | Recommendation |
-|---------|---------------|
-| Emoji | Use meaningful emoji prefix |
-| Text | Action-oriented, 3-5 words |
-| Grouping | Related actions together |
-| Context | Place after completing a task |
-
-## Anti-Patterns
-
-- ❌ Long sentences (button text truncates)
-- ❌ Questions (buttons should be actions)
-- ❌ Generic text without emoji (may not render as button)
-
-## Skills Using This Pattern
-
-- `meditation/SKILL.md` - Post-meditation actions
-- `self-actualization/SKILL.md` - Assessment follow-ups
-- `global-knowledge/SKILL.md` - Sync and save actions
 
 ## Synapses
 
-- [unified-meditation-protocols.prompt.md] (0.9, enhancement, bidirectional) - "action suggestions in meditation"
-- [alex.agent.md] (0.8, integration, outgoing) - "agent command suggestions"
+- [platforms/vscode-extension/src/chat/participant.ts] (1.0, implementation, bidirectional) - "stream.button() and followupProvider implementation"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (0.9, enhancement, outgoing) - "action suggestions in meditation"
+
+````

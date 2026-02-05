@@ -333,10 +333,9 @@ async function performInitialization(
     await offerEnvironmentSetup();
 
     const result = await vscode.window.showInformationMessage(
-      '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open any file and start chatting with your AI assistant\n2. Run "Alex: Dream" periodically to maintain neural health\n3. Ask Alex to learn new domains as needed',
+      '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',
       "Getting Started",
-      "Open Main Brain File",
-      "Run Dream Protocol",
+      "Open Chat",
     );
 
     if (result === "Getting Started") {
@@ -444,31 +443,16 @@ async function performInitialization(
         <strong>💡 Pro Tip:</strong> Run <code>Alex: Dream (Neural Maintenance)</code> from the Command Palette periodically to keep your cognitive architecture healthy!
     </div>
     
-    <h2>📁 What Was Installed</h2>
-    <ul>
-        <li><code>.github/copilot-instructions.md</code> - Alex's main brain (loaded automatically)</li>
-        <li><code>.github/instructions/</code> - Procedural memory (how-to knowledge)</li>
-        <li><code>.github/prompts/</code> - Episodic memory (complex workflows)</li>
-        <li><code>.github/domain-knowledge/</code> - Domain expertise files</li>
-        <li><code>.github/config/</code> - Your settings and profile</li>
-    </ul>
-    
     <p style="margin-top: 24px; color: var(--vscode-descriptionForeground);">
         <em>Questions? Just ask in Copilot Chat - Alex is ready to help!</em>
     </p>
 </body>
 </html>`;
-    } else if (result === "Open Main Brain File") {
-      const brainFile = path.join(
-        rootPath,
-        ".github",
-        "copilot-instructions.md",
-      );
-      const doc = await vscode.workspace.openTextDocument(brainFile);
-      await vscode.window.showTextDocument(doc);
-    } else if (result === "Run Dream Protocol") {
-      // Call directly to avoid operation lock conflict (we're still inside initialize's lock)
-      await runDreamProtocol(context);
+    } else if (result === "Open Chat") {
+      vscode.commands.executeCommand('workbench.action.chat.open', {
+        query: '@alex /status',
+        isPartialQuery: false
+      });
     }
 
     telemetry.log("command", "initialize_user_choice", {

@@ -1,61 +1,61 @@
 {
-    "skill": "microsoft-sfi",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": "privacy-responsible-ai",
-            "type": "complements",
-            "strength": 0.7,
-            "bidirectional": true,
-            "reason": "Security enables privacy"
-        },
-        {
-            "target": "code-review",
-            "type": "informs",
-            "strength": 0.65,
-            "reason": "Security review checklist"
-        },
-        {
-            "target": "incident-response",
-            "type": "extends",
-            "strength": 0.8,
-            "reason": "Security incidents are incidents"
-        },
-        {
-            "target": "dependency-management.instructions.md",
-            "type": "implements",
-            "strength": 0.9,
-            "reason": "Dependency security practices"
-        },
-        {
-            "target": "architecture",
-            "type": "informs",
-            "strength": 0.75,
-            "reason": "SFI six pillars guide architecture decisions"
-        },
-        {
-            "target": "testing-strategies",
-            "type": "informs",
-            "strength": 0.6,
-            "reason": "Security testing requirements"
-        }
-    ],
-    "triggers": [
-        "security",
-        "vulnerability",
-        "CVE",
-        "OWASP",
-        "credential",
-        "secret",
-        "auth",
-        "encryption",
-        "SFI",
-        "Secure Future Initiative",
-        "threat model",
-        "STRIDE",
-        "phishing",
-        "MFA",
-        "identity protection",
-        "tenant isolation"
-    ]
+  "skill": "microsoft-sfi",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "bidirectional": true,
+      "reason": "Security enables privacy"
+    },
+    {
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "reason": "Security review checklist"
+    },
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "extends",
+      "strength": 0.8,
+      "reason": "Security incidents are incidents"
+    },
+    {
+      "target": "dependency-management.instructions.md",
+      "type": "implements",
+      "strength": 0.9,
+      "reason": "Dependency security practices"
+    },
+    {
+      "target": ".github/skills/architecture/SKILL.md",
+      "type": "informs",
+      "strength": 0.75,
+      "reason": "SFI six pillars guide architecture decisions"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "informs",
+      "strength": 0.6,
+      "reason": "Security testing requirements"
+    }
+  ],
+  "triggers": [
+    "security",
+    "vulnerability",
+    "CVE",
+    "OWASP",
+    "credential",
+    "secret",
+    "auth",
+    "encryption",
+    "SFI",
+    "Secure Future Initiative",
+    "threat model",
+    "STRIDE",
+    "phishing",
+    "MFA",
+    "identity protection",
+    "tenant isolation"
+  ]
 }

@@ -1,55 +1,55 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "skillId": "rubber-duck-debugging",
-    "version": "1.0.0",
-    "created": "2026-02-01",
-    "description": "Be a thinking partner, help users debug through explanation",
-    "synapses": [
-        {
-            "target": "socratic-questioning",
-            "type": "Relates",
-            "strength": "strong",
-            "description": "Both are thinking partnership approaches"
-        },
-        {
-            "target": "debugging-patterns",
-            "type": "Enhances",
-            "strength": "strong",
-            "description": "Rubber duck enhances systematic debugging"
-        },
-        {
-            "target": "root-cause-analysis",
-            "type": "Supports",
-            "strength": "moderate",
-            "description": "Talking through helps find root cause"
-        },
-        {
-            "target": "cognitive-load",
-            "type": "Relates",
-            "strength": "moderate",
-            "description": "Verbalizing reduces cognitive load"
-        },
-        {
-            "target": "learning-psychology",
-            "type": "Implements",
-            "strength": "moderate",
-            "description": "Learning by explaining is effective"
-        },
-        {
-            "target": "error-recovery-patterns",
-            "type": "Supports",
-            "strength": "moderate",
-            "description": "Helps recover from error states"
-        }
-    ],
-    "activationTriggers": [
-        "I'm stuck",
-        "can't figure out",
-        "help me debug",
-        "what am I missing",
-        "doesn't make sense",
-        "let me think out loud",
-        "rubber duck",
-        "walk through this with me"
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "skillId": "rubber-duck-debugging",
+  "version": "1.0.0",
+  "created": "2026-02-01",
+  "description": "Be a thinking partner, help users debug through explanation",
+  "synapses": [
+    {
+      "target": ".github/skills/socratic-questioning/SKILL.md",
+      "type": "Relates",
+      "strength": "strong",
+      "description": "Both are thinking partnership approaches"
+    },
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "type": "Enhances",
+      "strength": "strong",
+      "description": "Rubber duck enhances systematic debugging"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "Supports",
+      "strength": "moderate",
+      "description": "Talking through helps find root cause"
+    },
+    {
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "type": "Relates",
+      "strength": "moderate",
+      "description": "Verbalizing reduces cognitive load"
+    },
+    {
+      "target": ".github/skills/learning-psychology/SKILL.md",
+      "type": "Implements",
+      "strength": "moderate",
+      "description": "Learning by explaining is effective"
+    },
+    {
+      "target": ".github/skills/error-recovery-patterns/SKILL.md",
+      "type": "Supports",
+      "strength": "moderate",
+      "description": "Helps recover from error states"
+    }
+  ],
+  "activationTriggers": [
+    "I'm stuck",
+    "can't figure out",
+    "help me debug",
+    "what am I missing",
+    "doesn't make sense",
+    "let me think out loud",
+    "rubber duck",
+    "walk through this with me"
+  ]
 }

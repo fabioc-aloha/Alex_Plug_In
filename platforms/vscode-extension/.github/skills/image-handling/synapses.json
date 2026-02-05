@@ -3,23 +3,26 @@
     "inheritance": "inheritable",
     "connections": [
         {
-            "target": "svg-graphics",
-            "type": "complements",
+            "target": ".github/skills/svg-graphics/SKILL.md",
+            "type": "input-source",
             "strength": 0.85,
-            "bidirectional": true,
-            "reason": "SVG is source format"
+            "when": "converting FROM svg format",
+            "yields": "SVG creation patterns, viewBox, dark mode CSS",
+            "bidirectional": true
         },
         {
-            "target": "project-scaffolding",
+            "target": ".github/skills/project-scaffolding/SKILL.md",
             "type": "supports",
             "strength": 0.75,
-            "reason": "Assets for projects"
+            "when": "creating project assets (icons, banners)",
+            "yields": "README structure, hero banner placement"
         },
         {
-            "target": "vscode-extension-patterns",
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
             "type": "supports",
             "strength": 0.7,
-            "reason": "Extension icons"
+            "when": "creating extension icons",
+            "yields": "Icon size requirements, package.json icon field"
         }
     ],
     "triggers": [
@@ -30,6 +33,7 @@
         "resize",
         "optimize",
         "favicon",
-        "icon sizes"
+        "icon sizes",
+        "sharp-cli"
     ]
 }

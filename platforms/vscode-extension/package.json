@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
   "license": "Apache-2.0",
-  "version": "4.2.5",
+  "version": "4.2.9",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -127,6 +127,11 @@
         "icon": "$(search)"
       },
       {
+        "command": "alex.generateImageFromSelection",
+        "title": "Generate Image from Selection",
+        "icon": "$(file-media)"
+      },
+      {
         "command": "alex.knowledgeQuickPick",
         "title": "Alex: Search Knowledge",
         "icon": "$(search)"
@@ -165,6 +170,26 @@
         "command": "alex.showGoals",
         "title": "Alex: Show Learning Goals",
         "icon": "$(checklist)"
+      },
+      {
+        "command": "alex.readAloud",
+        "title": "Alex: Read Aloud",
+        "icon": "$(unmute)"
+      },
+      {
+        "command": "alex.readWithVoice",
+        "title": "Alex: Read with Voice Selection",
+        "icon": "$(mic)"
+      },
+      {
+        "command": "alex.saveAsAudio",
+        "title": "Alex: Save as Audio",
+        "icon": "$(file-media)"
+      },
+      {
+        "command": "alex.stopReading",
+        "title": "Alex: Stop Reading",
+        "icon": "$(mute)"
       },
       {
         "command": "alex.incrementGoal",
@@ -280,6 +305,10 @@
         {
           "command": "alex.searchRelatedKnowledge",
           "group": "3_search@1"
+        },
+        {
+          "command": "alex.generateImageFromSelection",
+          "group": "4_create@1"
         }
       ]
     },
@@ -292,34 +321,166 @@
     ],
     "chatSkills": [
       {
+        "path": "./.github/skills/academic-research"
+      },
+      {
+        "path": "./.github/skills/ai-agent-design"
+      },
+      {
+        "path": "./.github/skills/airs-appropriate-reliance"
+      },
+      {
         "path": "./.github/skills/anti-hallucination"
+      },
+      {
+        "path": "./.github/skills/api-design"
       },
       {
         "path": "./.github/skills/appropriate-reliance"
       },
       {
-        "path": "./.github/skills/debugging-patterns"
+        "path": "./.github/skills/architecture-audit"
       },
       {
-        "path": "./.github/skills/testing-strategies"
+        "path": "./.github/skills/architecture-health"
       },
       {
-        "path": "./.github/skills/code-review"
+        "path": "./.github/skills/ascii-art-alignment"
+      },
+      {
+        "path": "./.github/skills/awareness"
       },
       {
         "path": "./.github/skills/bootstrap-learning"
       },
       {
-        "path": "./.github/skills/meditation"
+        "path": "./.github/skills/business-analysis"
+      },
+      {
+        "path": "./.github/skills/change-management"
+      },
+      {
+        "path": "./.github/skills/chat-participant-patterns"
+      },
+      {
+        "path": "./.github/skills/code-review"
+      },
+      {
+        "path": "./.github/skills/cognitive-load"
+      },
+      {
+        "path": "./.github/skills/creative-writing"
+      },
+      {
+        "path": "./.github/skills/debugging-patterns"
+      },
+      {
+        "path": "./.github/skills/error-recovery-patterns"
+      },
+      {
+        "path": "./.github/skills/gamma-presentations"
+      },
+      {
+        "path": "./.github/skills/git-workflow"
+      },
+      {
+        "path": "./.github/skills/grant-writing"
+      },
+      {
+        "path": "./.github/skills/graphic-design"
+      },
+      {
+        "path": "./.github/skills/image-handling"
+      },
+      {
+        "path": "./.github/skills/incident-response"
+      },
+      {
+        "path": "./.github/skills/infrastructure-as-code"
+      },
+      {
+        "path": "./.github/skills/learning-psychology"
+      },
+      {
+        "path": "./.github/skills/lint-clean-markdown"
+      },
+      {
+        "path": "./.github/skills/localization"
+      },
+      {
+        "path": "./.github/skills/markdown-mermaid"
+      },
+      {
+        "path": "./.github/skills/mcp-development"
+      },
+      {
+        "path": "./.github/skills/microsoft-sfi"
+      },
+      {
+        "path": "./.github/skills/pii-privacy-regulations"
+      },
+      {
+        "path": "./.github/skills/post-mortem"
+      },
+      {
+        "path": "./.github/skills/practitioner-research"
+      },
+      {
+        "path": "./.github/skills/privacy-responsible-ai"
+      },
+      {
+        "path": "./.github/skills/project-deployment"
+      },
+      {
+        "path": "./.github/skills/project-management"
+      },
+      {
+        "path": "./.github/skills/project-scaffolding"
       },
       {
         "path": "./.github/skills/prompt-engineering"
       },
       {
+        "path": "./.github/skills/rag-architecture"
+      },
+      {
+        "path": "./.github/skills/refactoring-patterns"
+      },
+      {
+        "path": "./.github/skills/root-cause-analysis"
+      },
+      {
+        "path": "./.github/skills/rubber-duck-debugging"
+      },
+      {
         "path": "./.github/skills/security-review"
       },
       {
-        "path": "./.github/skills/architecture-audit"
+        "path": "./.github/skills/skill-catalog-generator"
+      },
+      {
+        "path": "./.github/skills/socratic-questioning"
+      },
+      {
+        "path": "./.github/skills/svg-graphics"
+      },
+      {
+        "path": "./.github/skills/testing-strategies"
+      },
+      {
+        "path": "./.github/skills/text-to-speech"
+      },
+      {
+        "path": "./.github/skills/vscode-environment"
+      },
+      {
+        "path": "./.github/skills/vscode-extension-patterns"
+      },
+      {
+        "path": "./.github/skills/work-life-balance"
+      },
+      {
+        "path": "./.github/skills/writing-publication"
       }
     ],
     "configuration": {
@@ -974,6 +1135,17 @@
         "command": "alex.togglePauseSession",
         "key": "ctrl+alt+space",
         "mac": "cmd+alt+space"
+      },
+      {
+        "command": "alex.readAloud",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "alex.stopReading",
+        "key": "escape",
+        "when": "alex.isReading"
       }
     ]
   },
@@ -1005,10 +1177,12 @@
     "sharp": "^0.34.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "@types/ws": "^8.5.12"
   },
   "dependencies": {
     "fs-extra": "^11.3.3",
-    "proper-lockfile": "^4.1.2"
+    "proper-lockfile": "^4.1.2",
+    "ws": "^8.18.0"
   }
 }

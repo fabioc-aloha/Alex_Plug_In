@@ -8,7 +8,7 @@
 [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Required-8957e5?style=flat-square&logo=github)](https://github.com/features/copilot)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 
-> **Your AI Learning Partner**
+> **Your Multimodal AI Learning Partner — Code, Write, Research, Communicate**
 
 ---
 
@@ -22,6 +22,7 @@ You're the expert. Alex is your learning partner.
 - 🤝 **Practices Appropriate Reliance** — Confident when grounded, transparent when uncertain
 - 🌙 **Maintains Itself** — Like sleep for your brain, keeps the system healthy
 - ☁️ **Knowledge Travels With You** — Global knowledge synced across all your projects
+- 🎨 **Multimodal Output** — Voice (TTS), presentations (Gamma), images, and diagrams
 
 ---
 

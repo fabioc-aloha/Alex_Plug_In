@@ -8,7 +8,7 @@
       "strength": 0.95
     },
     {
-      "target": "appropriate-reliance",
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "informs",
       "strength": 0.85
     },

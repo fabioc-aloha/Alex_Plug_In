@@ -528,7 +528,7 @@ export async function checkProtectionAndWarn(
     if (protection.reason === 'setting') {
         // Explicit protection (or hardcoded failsafe) - cannot override
         // Using await to ensure the dialog is shown before returning
-        // Only Cancel button - command is always blocked
+        // No action buttons - user can only close/escape to dismiss
         await vscode.window.showErrorMessage(
             `🛡️ ${operationName} BLOCKED!\n\n` +
             `This is the Master Alex development environment.\n\n` +
@@ -538,7 +538,7 @@ export async function checkProtectionAndWarn(
             `2. Open Alex_Sandbox folder in the new window\n` +
             `3. Run the command there`,
             { modal: true },
-            'Cancel'
+            'I Understand'
         );
         // ALWAYS return false regardless of how dialog was dismissed
         return false;
@@ -547,13 +547,13 @@ export async function checkProtectionAndWarn(
     if (protection.reason === 'auto-detect') {
         if (allowOverride) {
             // Auto-detection with override option
+            // Only show the dangerous action button - closing/escape = cancel
             const result = await vscode.window.showWarningMessage(
                 `⚠️ Master Alex workspace detected!\n\n` +
                 `This appears to be the Alex development environment.\n` +
                 `"${operationName}" could damage the source of truth.\n\n` +
                 `Use F5 (Extension Development Host) for safe testing.`,
                 { modal: true },
-                'Cancel (Recommended)',
                 'Proceed Anyway (DANGEROUS)'
             );
             
@@ -565,7 +565,6 @@ export async function checkProtectionAndWarn(
                     `This cannot be easily undone.\n\n` +
                     `Are you absolutely sure?`,
                     { modal: true },
-                    'Cancel',
                     'Yes, I understand the risk'
                 );
                 

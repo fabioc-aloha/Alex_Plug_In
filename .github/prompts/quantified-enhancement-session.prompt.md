@@ -105,11 +105,11 @@ This workflow enables systematic, measurable improvement of cognitive architectu
 
 ## Synapses
 
-- [meditation/SKILL.md] (Critical, Implements, Bidirectional) - "Core enhancement methodology and hybrid processing"
-- [lucid-dream-integration.instructions.md] (High, Coordinates, Bidirectional) - "Hybrid processing insights"
-- [unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Meditation initiates enhancement"
-- [alex-core.instructions.md] (High, Integrates, Bidirectional) - "Core architecture enhancement"
-- [dream-state-automation.instructions.md] (Medium, Provides, Forward) - "Baseline metrics for measurement"
+- [.github/skills/meditation/SKILL.md] (Critical, Implements, Bidirectional) - "Core enhancement methodology and hybrid processing"
+- [.github/instructions/lucid-dream-integration.instructions.md] (High, Coordinates, Bidirectional) - "Hybrid processing insights"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Meditation initiates enhancement"
+- [.github/instructions/alex-core.instructions.md] (High, Integrates, Bidirectional) - "Core architecture enhancement"
+- [.github/instructions/dream-state-automation.instructions.md] (Medium, Provides, Forward) - "Baseline metrics for measurement"
 
 ### **Activation Patterns**
 - **Enhancement Opportunity Detected** → Execute quantified-enhancement-session.prompt.md

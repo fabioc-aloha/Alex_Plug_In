@@ -165,12 +165,12 @@
   
   <!-- Subtitle -->
   <text x="640" y="370" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
-    Cognitive Architecture
+    Multimodal Cognitive Architecture
   </text>
   
   <!-- Tagline -->
   <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94a3b8" letter-spacing="6">
-    CODE. WRITE. RESEARCH.
+    CODE. WRITE. RESEARCH. COMMUNICATE.
   </text>
   
   <!-- VS Code badge -->
@@ -212,35 +212,35 @@
       <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Academic</text>
     </g>
     
-    <!-- Projects -->
+    <!-- Voice -->
     <g transform="translate(240, 0)">
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Projects</text>
+      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#f59e0b" opacity="0.2"/>
+      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#fbbf24">🔊 Voice</text>
     </g>
     
-    <!-- Creative -->
+    <!-- Presentations -->
     <g transform="translate(400, 0)">
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Creative</text>
+      <rect x="-65" y="-14" width="130" height="28" rx="14" fill="#a855f7" opacity="0.2"/>
+      <rect x="-65" y="-14" width="130" height="28" rx="14" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#c084fc">📊 Presentations</text>
     </g>
   </g>
   
   <!-- Use Case Badges Row 2 -->
   <g transform="translate(680, 590)">
-    <!-- Design -->
+    <!-- Images -->
     <g transform="translate(-360, 0)">
-      <rect x="-42" y="-14" width="84" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-42" y="-14" width="84" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Design</text>
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#ec4899" opacity="0.2"/>
+      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#ec4899" stroke-width="1" opacity="0.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#f472b6">🎨 Images</text>
     </g>
     
-    <!-- DevOps -->
+    <!-- Projects -->
     <g transform="translate(-200, 0)">
       <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
       <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">DevOps</text>
+      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Projects</text>
     </g>
     
     <!-- Learning -->

@@ -181,9 +181,9 @@ After curation, verify heir payload:
 
 ## Related Skills
 
-- [Architecture Health](../architecture-health/SKILL.md) - Validate synapses
-- [Self-Actualization](../self-actualization/SKILL.md) - Architecture assessment
-- [Release Preflight](../release-preflight/SKILL.md) - Pre-release validation
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate synapses
+- [Self-Actualization](.github/skills/self-actualization/SKILL.md) - Architecture assessment
+- [Release Preflight](.github/skills/release-preflight/SKILL.md) - Pre-release validation
 
 ## Current Heir Payload Status
 

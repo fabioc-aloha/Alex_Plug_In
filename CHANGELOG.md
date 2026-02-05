@@ -7,6 +7,167 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.9] - 2026-02-05
+
+> **UX Simplification** — Streamlined dialogs, expanded chatSkills, episodic memory integration
+
+### Added
+
+- **📚 Expanded chatSkills** (10 → 54 skills)
+  - All eligible skills now registered with VS Code's native chatSkills contribution point
+  - Skills automatically inherit into Copilot conversations
+  - Excluded: master-only skills, m365-only skills, skills with invalid frontmatter
+
+- **📝 Episodic Memory for Insights**
+  - Session insights now saved to `.github/episodic/` folder
+  - Format: `session-insight-YYYY-MM-DD-HHMM-topic.md`
+  - Quick insights from context menu also save to episodic memory
+  - Persistent record of learnings across sessions
+
+- **🖼️ Image Generation Context Menu**
+  - New "Generate Image from Selection" command in editor context menu
+  - Opens chat with selected text as image generation prompt
+  - Available when text is selected in any editor
+
+- **👥 Community Agent Documentation**
+  - Added Teams Community Agent setup guide to M365 heir
+  - Prerequisites, setup steps, benefits, and limitations documented
+
+### Changed
+
+- **🎨 Simplified Command Dialogs** (UX improvement)
+  - **Initialize**: Removed "Open Main Brain File" and "Run Dream Protocol" - now offers "Getting Started" or "Open Chat"
+  - **Dream**: Healthy network shows compact stats with "OK" only - "View Report" only for broken synapses
+  - **Self-Actualization**: Shows "OK" or "Chat with Alex" (if recommendations exist) - removed file-opening options
+  - **Upgrade**: Smart dialog - "OK" if no migration needed, "Review Items" only if custom content needs attention
+
+- **🐛 Fixed Insight Saving Bug**
+  - "No active editor" error when saving insights with no file open
+  - Now falls back to input prompt for topic, saves directly to episodic memory
+
+---
+
+## [4.2.8] - 2026-02-05
+
+> **LLM-Optimized Synapses** — `when`/`yields` fields for faster cognitive routing
+
+### Added
+
+- **🎯 Focus Context Tool** (`alex_focus_context`)
+  - Returns current focus session: topic, time remaining, paused status, Pomodoro count
+  - Includes active learning goals, completion stats, and streak information
+  - Session state persisted to `~/.alex/session-state.json` for cross-session awareness
+  - **Session survives VS Code restart** — time calculated from startTime + duration
+  - Restore notification shows both session status and active goals count
+  - Enables context-aware assistance during Pomodoro focus sessions
+
+- **🎯 Focus-Aware Nudging**
+  - Chat responses now include focus context in system prompt
+  - Alex gently reminds users if requests seem off-topic from their focus session
+  - Welcome view shows focus session nudge with remaining time and first goal
+  - Nudge includes quick action to manage session
+
+- **⚠️ Off-Topic Status Indicator**
+  - New status bar item appears when you drift from your focus topic
+  - Tracks file activity and detects when you open unrelated files
+  - Click to: acknowledge tangent, confirm it's related, change topic, or end session
+  - Auto-hides when you're on-track or session is paused/on break
+
+- **🧠 Prefrontal Cortex Metaphor**
+  - `skill-activation` now mapped as Dorsolateral PFC in Neuroanatomical table
+  - Executive function center — intercepts all task requests before response
+  - Inhibits impulsive "manual suggestion" responses in favor of capability lookup
+  - Full explanation added below Neuroanatomical Mapping table
+
+- **⚡ LLM-Optimized Synapse Format**
+  - New `when` field: Action trigger telling LLM WHEN to follow synapse
+  - New `yields` field: Decision hint showing WHAT to expect at target
+  - Exact file paths instead of abstract names (no search needed)
+  - Documented in `embedded-synapse.instructions.md`
+
+- **📁 DRY Path Pattern**
+  - Action-keyword index now defines path pattern once: `.github/skills/{skill-name}/SKILL.md`
+  - Synapses in SKILL.md use full paths with WHEN/YIELDS format
+  - Reduces cognitive load while maintaining precision
+
+- **🧠 Schema Enhancement**
+  - Updated `SYNAPSE-SCHEMA.json` with `when` and `yields` properties
+  - Target description now recommends exact paths for LLM speed
+  - Backward compatible with existing synapses
+
+### Changed
+
+- **🔗 Comprehensive Path Normalization (ALL files)**
+  - **72 synapses.json files**: All targets now use exact paths `.github/skills/{name}/SKILL.md`
+  - **10 SKILL.md files**: Embedded synapses converted from relative `../` paths
+  - **19 instruction files**: Synapse references now use `.github/instructions/{name}`
+  - **7 prompt files**: Synapse references now use `.github/prompts/{name}`
+  - **copilot-instructions.md**: All protocol trigger paths now explicit
+  - Pattern: `"target": "skill-name"` → `"target": ".github/skills/skill-name/SKILL.md"`
+  - Pattern: `[../skill/SKILL.md]` → `[.github/skills/skill/SKILL.md]`
+  - Pattern: `[file.instructions.md]` → `[.github/instructions/file.instructions.md]`
+
+- **🔗 High-Traffic Synapses Converted**
+  - skill-activation: 4 connections with when/yields
+  - image-handling: 3 connections with when/yields
+  - meditation: 4 connections with when/yields
+  - svg-graphics: 4 connections with when/yields
+
+- **📂 Heir Sync**
+  - Synced 6 missing skills to heir (72 total now)
+  - LLM-optimized synapses deployed to heir
+  - All path normalizations synced
+
+### Technical
+
+- **Path Resolution Eliminated**: LLM no longer needs to resolve relative paths or search for files
+- Synapse decision-making now ~2x faster (no path resolution)
+- `when` triggers action-oriented routing
+- `yields` enables decision without file load
+- **Normalization Scripts Created**: `scripts/normalize-*.ps1` for future maintenance
+
+---
+
+## [4.2.7] - 2026-02-05
+
+> **Skill Discovery Optimization** — Action-keyword index for all 72 skills + meta-cognitive skill activation
+
+### Added
+
+- **🧠 New Skill: skill-activation** (72nd skill)
+  - Auto-triggering metacognitive skill (not user-invoked)
+  - Activates before ANY task response to check action-keyword index
+  - Triggers on action verbs: convert, create, generate, build, debug, etc.
+  - Self-correction: stops mid-response if skill exists for manual suggestion
+  - Prevents "SVG→PNG incident" class of capability blindness
+
+- **🔍 Action-Keyword Index for All Skills**
+  - Every skill now has 3-7 action-verb triggers
+  - Full index moved to skill-activation/SKILL.md (cognitive load optimization)
+  - copilot-instructions.md now has compact reference + skill list only
+  - 72 skills indexed with capability-focused keywords
+
+- **🎨 Multimodal Branding Update**
+  - Banner updated: "Multimodal Cognitive Architecture"
+  - Tagline: "CODE. WRITE. RESEARCH. COMMUNICATE."
+  - New badges: Voice (TTS), Presentations (Gamma), Images
+  - Identity updated across all copilot-instructions.md files
+
+### Changed
+
+- **📊 Skills Count Update**
+  - Master Alex: 71 → 72 skills
+  - Synapses section restructured for LLM optimization
+  - Core procedures separated from skill action-keywords
+
+### Fixed
+
+- **🖼️ Banner PNG Regeneration**
+  - SVG→PNG conversion using image-handling skill (sharp-cli)
+  - Marketplace now shows updated multimodal branding
+
+---
+
 ## [4.2.6] - 2026-02-05
 
 > **Research Project Skills** — New skills for academic research scaffolding and practitioner methodology
