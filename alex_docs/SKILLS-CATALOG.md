@@ -7,11 +7,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 65
+## Skill Count: 68
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 54 |
+| Inheritable | 57 |
 | Master-Only | 11 |
 | Heir:vscode | 2 |
 | Heir:m365 | 2 |
@@ -78,6 +78,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 |-------|-------------|---------|
 | [writing-publication](../.github/skills/writing-publication/) | inheritable | Academic writing, publication strategy |
 | [academic-research](../.github/skills/academic-research/) | inheritable | Literature review, citation management |
+| [practitioner-research](../.github/skills/practitioner-research/) | inheritable | **NEW** Ship→Document→Promote methodology, longitudinal case study |
+| [research-project-scaffold](../.github/skills/research-project-scaffold/) | inheritable | **NEW** Research project structure, refactoring existing projects |
 | [grant-writing](../.github/skills/grant-writing/) | inheritable | Research funding applications, NSF/NIH patterns |
 | [creative-writing](../.github/skills/creative-writing/) | inheritable | Narrative, storytelling, engagement |
 | [markdown-mermaid](../.github/skills/markdown-mermaid/) | inheritable | Diagrams and visualization |
@@ -232,6 +234,8 @@ flowchart LR
         AA[ascii-art-alignment]
         LLM[llm-model-selection]
         ACR[academic-research]
+        PR[practitioner-research]
+        RPS[research-project-scaffold]
         CW[creative-writing]
         LOC[localization]
     end

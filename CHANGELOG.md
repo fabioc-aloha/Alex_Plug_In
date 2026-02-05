@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.6] - 2026-02-05
+
+> **Research Project Skills** — New skills for academic research scaffolding and practitioner methodology
+
+### Added
+
+- **🎓 New Skill: practitioner-research** (66th skill)
+  - Ship→Document→Promote methodology
+  - Longitudinal case study structure
+  - Structured abstracts (Background/Objective/Method/Results)
+  - Part I (Universal) / Part II (Practitioner) document architecture
+  - APA 7 citation and fact-checking protocols
+
+- **📁 New Skill: research-project-scaffold** (68th skill)
+  - Complete folder structure for academic research projects
+  - Essential file templates (RESEARCH-PLAN.md, LITERATURE-MATRIX.md, METHODOLOGY.md)
+  - 6-phase refactoring procedure for existing projects
+  - Research-specific copilot-instructions.md template
+  - Git-preserving migration patterns
+
+- **📄 AI-Assisted Development Methodology Paper**
+  - Threats to Validity section (internal, external, construct)
+  - Appendix E: Getting Started (10-minute reproducibility guide)
+  - Appendix F: Publication Strategy (4 venue options)
+  - Dual closing paragraphs (academic + practitioner versions)
+  - APA 7 compliance with DOIs for arXiv references
+
+### Changed
+
+- **📊 Skills Count Update**
+  - Master Alex: 65 → 68 skills
+  - Updated copilot-instructions.md skill list
+  - Updated SKILLS-CATALOG.md with new skills
+
+### Fixed
+
+- **🔗 Heir Synapse Health**
+  - Removed broken CHANGELOG.md synapse from heir episodic memory
+  - Heirs now 136/136 (100%) healthy synapses
+
+---
+
 ## [4.2.5] - 2026-02-04
 
 > **VS Code 1.109 Upgrade & Agent Consolidation** — Native multi-agent architecture, clickable action buttons, dream CLI

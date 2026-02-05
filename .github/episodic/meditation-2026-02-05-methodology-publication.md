@@ -135,10 +135,10 @@ User requested best practices for scaffolding academic research projects. Create
 
 ### Cognitive Architecture Updates
 
-| Component | Change |
-|-----------|--------|
-| Skills | +1 (research-project-scaffold) → 68 total |
-| Skill list | Updated in copilot-instructions.md |
+| Component  | Change                                    |
+| ---------- | ----------------------------------------- |
+| Skills     | +1 (research-project-scaffold) → 68 total |
+| Skill list | Updated in copilot-instructions.md        |
 
 ---
 

@@ -1,8 +1,8 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-01-30
-> Total Skills: **37** (25 inheritable, 8 master-only, 2 VS Code, 2 M365)
-> Total Connections: **124** (0 bidirectional, 17 weak)
+> Generated: 2026-02-05
+> Total Skills: **68** (57 inheritable, 11 master-only, 2 VS Code, 2 M365)
+> ⚠️ **Note**: This catalog is a simplified snapshot. See [alex_docs/SKILLS-CATALOG.md](alex_docs/SKILLS-CATALOG.md) for complete inventory.
 
 ---
 
