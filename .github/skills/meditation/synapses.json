@@ -29,6 +29,13 @@
             "strength": 0.8,
             "when": "validating synapses during meditation",
             "yields": "Health check commands, validation patterns"
+        },
+        {
+            "target": ".github/skills/brain-qa/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "when": "deep architecture validation needed",
+            "yields": "6-phase cognitive QA, Master-Heir sync validation"
         }
     ],
     "triggers": [
