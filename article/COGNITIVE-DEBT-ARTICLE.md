@@ -470,8 +470,9 @@ if ($uniqueBroken.Count -eq 0) {
 | Trigger Overlap        | Duplicate activation keywords          | Index analysis            | Differentiate or accept           |
 | Orphan Skill           | Unintegrated knowledge                 | Coverage analysis         | Add to discovery mechanisms       |
 | Identity Hallucination | Confabulation over explicit knowledge  | Human review              | Mandatory knowledge lookup        |
+| Stylistic Homogeneity  | LLM-characteristic linguistic patterns | Pattern analysis          | Style guidelines, human editing   |
 
 ---
 
 *Manuscript prepared: February 5, 2026*
-*Word count: ~4,500 (excluding references and appendices)*
+*Word count: ~4,800 (excluding references and appendices)*
