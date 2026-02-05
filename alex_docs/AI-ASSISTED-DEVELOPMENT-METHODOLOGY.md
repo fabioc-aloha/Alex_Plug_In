@@ -45,6 +45,7 @@ The original article proposed:
 **What evolved:** The Alex cognitive architecture extended these principles from *within-session* iteration to *cross-session* and *cross-project* knowledge accumulation. The Dialog Engineering article described how to work effectively with AI in one conversation; this methodology describes how to make those conversations *compound* over months and years.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph DE["Dialog Engineering (Oct 2024)"]
         D1["💬 Iterative prompts"] --> D2["🔄 Feedback loops"] --> D3["🎯 Refined output"]
@@ -104,6 +105,7 @@ This framework captures a methodology for intensive human-AI collaboration that 
 Distilled from extensive practice:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph P1["1. Define Done"]
         A["One sentence\nbefore starting"]
@@ -263,6 +265,7 @@ This is the **key differentiator** from other AI-assisted development approaches
 ### 2.1 Inheritance, Not Copies
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Master["🧠 Master Alex (Source of Truth)"]
         direction TB
@@ -308,6 +311,7 @@ This is NOT static template copying. It's **evolutionary knowledge accumulation*
 **The pattern:** Ship → Document → Promote. Ship a project, discover the gotchas, then document the skill. That skill now helps all heirs.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph Anti["❌ Anti-Pattern"]
         direction LR
@@ -358,6 +362,7 @@ xychart-beta
 Acceleration is not linear—it compounds:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph Cycle["Compounding Momentum"]
         direction LR
@@ -463,6 +468,7 @@ Our approach to persistent knowledge draws on research in memory-augmented langu
 ### 5.1 Two-Tier Knowledge
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Local["📁 Local Knowledge (per-project)"]
         direction TB
@@ -506,6 +512,7 @@ Every captured insight is one less thing to rediscover later.
 Skills and documents have explicit connections—like neurons in a brain:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Synapses["🧠 Synapse Network Example"]
         direction TB
@@ -601,6 +608,7 @@ The AI partner isn't just a tool—it's a collaborator with genuine continuity a
 ## 7. Anti-Patterns (What Doesn't Work)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Avoid["❌ Anti-Patterns"]
         direction TB
@@ -686,6 +694,7 @@ The AI reads these files more than any human. Design for the primary consumer.
 ### 9.1 The Work Cycle
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Start["🌅 Session Start"]
         S1["Hi Alex, let's work on..."]
@@ -742,6 +751,7 @@ flowchart TB
 Productivity measurement draws on the SPACE framework (Forsgren et al., 2021), which established that no single metric captures developer productivity. Our approach tracks Satisfaction, Performance, Activity, Communication, and Efficiency holistically.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Metrics["What We Track"]
         direction TB
