@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex - Cognitive Architecture</title>
+    <title>Alex - AI Learning Partner</title>
+    <meta name="description" content="Alex Cognitive Architecture - Your multimodal AI learning partner for VS Code and M365 Copilot. Code, write, research, and communicate with an AI that remembers and grows.">
+    <meta name="keywords" content="AI, VS Code, Copilot, cognitive architecture, learning partner, GitHub Copilot extension">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/icon.png">
     <style>
         * {
             margin: 0;
@@ -13,168 +16,298 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            color: #e8e8e8;
         }
 
         .container {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            max-width: 600px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 720px;
             text-align: center;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
+            width: 96px;
+            height: 96px;
+            margin-bottom: 24px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
         }
 
         h1 {
-            color: #1a1a2e;
-            font-size: 2em;
+            color: #ffffff;
+            font-size: 2.4em;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
         .tagline {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 24px;
+            color: #a8b2d1;
+            font-size: 1.2em;
+            margin-bottom: 32px;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 640px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .platforms {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            border-radius: 50px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .platform-badge:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .platform-badge.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+        }
+
+        .platform-badge.primary:hover {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
         }
 
         .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
-            margin: 24px 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            margin: 32px 0;
         }
 
         .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
             text-align: left;
-            margin: 20px 0;
+            margin: 24px 0;
         }
 
         .feature {
-            display: flex;
-            align-items: flex-start;
-            margin: 16px 0;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .feature-icon {
-            font-size: 1.5em;
-            margin-right: 12px;
-            min-width: 32px;
+            font-size: 1.8em;
+            margin-bottom: 12px;
         }
 
-        .feature-text h3 {
-            color: #1a1a2e;
+        .feature h3 {
+            color: #ffffff;
             font-size: 1em;
-            margin-bottom: 4px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
-        .feature-text p {
-            color: #666;
+        .feature p {
+            color: #8892b0;
             font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #8892b0;
         }
 
         .cta {
-            margin-top: 24px;
+            margin-top: 32px;
         }
 
         .cta p {
-            color: #888;
-            font-size: 0.95em;
+            color: #a8b2d1;
+            font-size: 1em;
             margin-bottom: 16px;
         }
 
         .cta code {
-            background: #f0f0f0;
-            padding: 8px 16px;
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.15);
+            padding: 12px 24px;
             border-radius: 8px;
-            font-family: 'Consolas', monospace;
+            font-family: 'SF Mono', 'Consolas', monospace;
             color: #667eea;
             font-size: 1.1em;
+            border: 1px solid rgba(102, 126, 234, 0.3);
         }
 
         .links {
-            margin-top: 24px;
+            margin-top: 32px;
             display: flex;
-            gap: 16px;
+            gap: 24px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .links a {
-            color: #667eea;
+            color: #a8b2d1;
             text-decoration: none;
             font-size: 0.9em;
+            transition: color 0.2s ease;
         }
 
         .links a:hover {
-            text-decoration: underline;
+            color: #667eea;
         }
 
-        .version {
-            margin-top: 20px;
-            color: #aaa;
-            font-size: 0.8em;
+        .footer {
+            margin-top: 24px;
+            color: #5a6a8a;
+            font-size: 0.85em;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <img src="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/m365-copilot/appPackage/color.png"
+        <img src="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/icon.png"
             alt="Alex" class="logo">
-        <h1>Hi, I'm Alex 👋</h1>
-        <p class="tagline">Your AI learning partner. Code. Write. Research.</p>
+        <h1>Alex Cognitive Architecture</h1>
+        <p class="tagline">Your Multimodal AI Learning Partner</p>
+
+        <img src="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png"
+            alt="Alex Banner" class="banner">
+
+        <div class="platforms">
+            <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"
+                class="platform-badge primary" target="_blank" rel="noopener">
+                💻 VS Code Extension
+            </a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot"
+                class="platform-badge" target="_blank" rel="noopener">
+                ☁️ M365 Copilot Agent
+            </a>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">68</div>
+                <div class="stat-label">Portable Skills</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">32</div>
+                <div class="stat-label">TTS Languages</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">270+</div>
+                <div class="stat-label">Research Sources</div>
+            </div>
+        </div>
 
         <div class="divider"></div>
 
         <div class="features">
             <div class="feature">
-                <span class="feature-icon">🧠</span>
-                <div class="feature-text">
-                    <h3>Cognitive Architecture</h3>
-                    <p>Not a generic chatbot — a thinking partner with memory and personality</p>
-                </div>
+                <div class="feature-icon">🧠</div>
+                <h3>Learns & Remembers</h3>
+                <p>Consolidates knowledge across sessions. Dream protocols repair and strengthen synaptic connections.</p>
             </div>
             <div class="feature">
-                <span class="feature-icon">📁</span>
-                <div class="feature-text">
-                    <h3>Remembers You</h3>
-                    <p>I keep notes in your OneDrive. Your data, your control.</p>
-                </div>
+                <div class="feature-icon">🔗</div>
+                <h3>Connects Ideas</h3>
+                <p>Maps relationships between concepts automatically. Cross-project global knowledge base.</p>
             </div>
             <div class="feature">
-                <span class="feature-icon">🛡️</span>
-                <div class="feature-text">
-                    <h3>Epistemic Integrity</h3>
-                    <p>I tell you what I know, what I don't, and when to verify</p>
-                </div>
+                <div class="feature-icon">🎨</div>
+                <h3>Multimodal Output</h3>
+                <p>Voice synthesis (TTS), presentations, images, diagrams. 32 languages supported.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Epistemic Integrity</h3>
+                <p>Knows what it knows, admits what it doesn't. Evidence-based reasoning with citations.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💡</div>
+                <h3>Emotional Intelligence</h3>
+                <p>Detects frustration, celebrates success. Adaptive support when you're stuck.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">☁️</div>
+                <h3>Cloud Sync</h3>
+                <p>GitHub Gist backup. OneDrive integration. Your knowledge, everywhere.</p>
             </div>
         </div>
 
+        <div class="divider"></div>
+
         <div class="cta">
-            <p>To chat with me, open M365 Copilot and type:</p>
-            <code>@Alex</code>
+            <p>Install in VS Code:</p>
+            <code>code --install-extension fabioc-aloha.alex-cognitive-architecture</code>
         </div>
 
         <div class="links">
-            <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank" rel="noopener">📂 GitHub</a>
-            <a href="https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"
-                target="_blank" rel="noopener">💻 VS Code Extension</a>
-            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/USER-MANUAL.md" target="_blank"
-                rel="noopener">📖 User Manual</a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank" rel="noopener">📂 Source Code</a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/USER-MANUAL.md" target="_blank" rel="noopener">📖 User Manual</a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md" target="_blank" rel="noopener">📋 Changelog</a>
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">🤝 Contributing</a>
         </div>
 
-        <p class="version">v4.0.0 Trust — Epistemic Integrity</p>
+        <div class="footer">
+            <p>v4.2.9 · Built on 270+ academic sources · <a href="https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md">Apache 2.0</a></p>
+            <p style="margin-top: 8px;">© 2026 CorreaX · AI That Learns How to Learn</p>
+        </div>
     </div>
 </body>
 
