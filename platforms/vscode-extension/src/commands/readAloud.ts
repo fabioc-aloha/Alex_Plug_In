@@ -21,10 +21,16 @@ import {
     saveAudioToFile,
     stopPlayback,
     isPlaying,
+    detectLanguage,
+    getVoiceForLanguage,
     VOICE_PRESETS,
+    LANGUAGE_VOICES,
     type VoicePreset,
     type TTSProgress
 } from '../tts';
+
+// Confidence threshold below which we ask user to confirm language
+const LANGUAGE_CONFIDENCE_THRESHOLD = 0.15;
 
 // Status bar item for TTS progress
 let ttsStatusBar: vscode.StatusBarItem | undefined;
@@ -148,14 +154,65 @@ export async function readAloud(
         }
     }
     
+    // Detect language
+    const detected = detectLanguage(textToSpeak);
+    let selectedVoice: string;
+    let selectedLang: string;
+    
+    if (detected.confidence >= LANGUAGE_CONFIDENCE_THRESHOLD) {
+        // High confidence - use detected language
+        selectedVoice = getVoiceForLanguage(detected.lang);
+        selectedLang = detected.lang;
+        
+        // For non-English, show brief notification
+        if (!detected.lang.startsWith('en-')) {
+            vscode.window.showInformationMessage(`Detected ${detected.name} - using ${selectedVoice.split('-')[2]}`);
+        }
+    } else {
+        // Low confidence - ask user
+        const languageItems = Object.entries(LANGUAGE_VOICES).map(([code, info]) => ({
+            label: info.name,
+            description: code,
+            detail: info.voice,
+            code
+        }));
+        
+        // Put detected language first, then English
+        languageItems.sort((a, b) => {
+            if (a.code === detected.lang) return -1;
+            if (b.code === detected.lang) return 1;
+            if (a.code === 'en-US') return -1;
+            if (b.code === 'en-US') return 1;
+            return a.label.localeCompare(b.label);
+        });
+        
+        const selected = await vscode.window.showQuickPick(languageItems, {
+            title: 'Select Language',
+            placeHolder: `Could not auto-detect language (best guess: ${detected.name}). Please select:`,
+            matchOnDescription: true
+        });
+        
+        if (!selected) {
+            return; // User cancelled
+        }
+        
+        selectedVoice = LANGUAGE_VOICES[selected.code].voice;
+        selectedLang = selected.code;
+    }
+    
+    // Override with English preset if user explicitly selected one and text is English
+    if (voicePreset !== 'default' && selectedLang.startsWith('en-')) {
+        selectedVoice = VOICE_PRESETS[voicePreset];
+    }
+    
     try {
         showTTSStatus('Synthesizing...', true);
         
         // Synthesize audio
-        const voice = VOICE_PRESETS[voicePreset];
+        const voice = selectedVoice;
         const audioBuffer = await synthesize(
             textToSpeak,
-            { voice },
+            { voice, lang: selectedLang },
             (progress: TTSProgress) => {
                 switch (progress.state) {
                     case 'connecting':
@@ -258,6 +315,49 @@ export async function saveAsAudio(
     const isMarkdown = editor.document.languageId === 'markdown';
     const textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
     
+    // Detect language
+    const detected = detectLanguage(textToSpeak);
+    let selectedVoice: string;
+    let selectedLang: string;
+    
+    if (detected.confidence >= LANGUAGE_CONFIDENCE_THRESHOLD) {
+        selectedVoice = getVoiceForLanguage(detected.lang);
+        selectedLang = detected.lang;
+    } else {
+        // Ask user for language for save operation
+        const languageItems = Object.entries(LANGUAGE_VOICES).map(([code, info]) => ({
+            label: info.name,
+            description: code,
+            code
+        }));
+        
+        languageItems.sort((a, b) => {
+            if (a.code === detected.lang) return -1;
+            if (b.code === detected.lang) return 1;
+            if (a.code === 'en-US') return -1;
+            if (b.code === 'en-US') return 1;
+            return a.label.localeCompare(b.label);
+        });
+        
+        const selected = await vscode.window.showQuickPick(languageItems, {
+            title: 'Select Language for Audio',
+            placeHolder: `Best guess: ${detected.name}. Please confirm:`,
+            matchOnDescription: true
+        });
+        
+        if (!selected) {
+            return; // User cancelled
+        }
+        
+        selectedVoice = LANGUAGE_VOICES[selected.code].voice;
+        selectedLang = selected.code;
+    }
+    
+    // Override with English preset if user explicitly selected one
+    if (voicePreset !== 'default' && selectedLang.startsWith('en-')) {
+        selectedVoice = VOICE_PRESETS[voicePreset];
+    }
+    
     try {
         await vscode.window.withProgress(
             {
@@ -268,10 +368,9 @@ export async function saveAsAudio(
             async (progress) => {
                 progress.report({ message: 'Connecting to TTS service...' });
                 
-                const voice = VOICE_PRESETS[voicePreset];
                 const audioBuffer = await synthesize(
                     textToSpeak,
-                    { voice },
+                    { voice: selectedVoice, lang: selectedLang },
                     (ttsProgress) => {
                         if (ttsProgress.state === 'streaming') {
                             const kb = Math.round((ttsProgress.bytesReceived || 0) / 1024);

@@ -8,7 +8,10 @@ export {
     synthesize,
     listVoices,
     prepareTextForSpeech,
+    detectLanguage,
+    getVoiceForLanguage,
     VOICE_PRESETS,
+    LANGUAGE_VOICES,
     type VoicePreset,
     type TTSOptions,
     type TTSProgress

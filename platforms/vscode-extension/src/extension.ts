@@ -92,6 +92,16 @@ export function activate(context: vscode.ExtensionContext) {
   // Get extension version for telemetry
   const extensionVersion = context.extension.packageJSON.version || "unknown";
 
+  // Create status bar immediately with loading indicator
+  statusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Right,
+    100,
+  );
+  statusBarItem.text = "$(sync~spin) Alex loading...";
+  statusBarItem.tooltip = "Alex Cognitive Architecture is initializing...";
+  statusBarItem.show();
+  context.subscriptions.push(statusBarItem);
+
   // Initialize beta telemetry (temporary - remove after beta)
   telemetry.initTelemetry(context, extensionVersion);
   telemetry.log("lifecycle", "extension_activate", {
@@ -1258,19 +1268,12 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
 
-  // Create status bar item
-  statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Right,
-    100,
-  );
+  // Configure status bar item (already created at activation start with loading state)
   statusBarItem.command = "alex.showStatus";
   statusBarItem.tooltip =
     "Alex Cognitive Architecture - Click for quick actions";
-  statusBarItem.text = "$(brain) Alex";  // Show immediately while async check runs
-  statusBarItem.show();
-  context.subscriptions.push(statusBarItem);
 
-  // Update status bar based on workspace health
+  // Update status bar based on workspace health (replaces loading state)
   updateStatusBar(context);
 
   // Start periodic health checks (every 5 minutes)

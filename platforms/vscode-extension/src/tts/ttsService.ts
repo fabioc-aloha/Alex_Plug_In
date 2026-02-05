@@ -25,6 +25,122 @@ const EDGE_TTS_ENDPOINT = `wss://speech.platform.bing.com/consumer/speech/synthe
 // Windows epoch offset (1601-01-01 to 1970-01-01 in seconds)
 const WIN_EPOCH = 11644473600;
 
+// Supported languages with their default neural voices
+export const LANGUAGE_VOICES: Record<string, { voice: string; name: string }> = {
+    'en-US': { voice: 'en-US-GuyNeural', name: 'English (US)' },
+    'en-GB': { voice: 'en-GB-RyanNeural', name: 'English (UK)' },
+    'es-ES': { voice: 'es-ES-AlvaroNeural', name: 'Spanish (Spain)' },
+    'es-MX': { voice: 'es-MX-JorgeNeural', name: 'Spanish (Mexico)' },
+    'fr-FR': { voice: 'fr-FR-HenriNeural', name: 'French' },
+    'de-DE': { voice: 'de-DE-ConradNeural', name: 'German' },
+    'it-IT': { voice: 'it-IT-DiegoNeural', name: 'Italian' },
+    'pt-BR': { voice: 'pt-BR-AntonioNeural', name: 'Portuguese (Brazil)' },
+    'pt-PT': { voice: 'pt-PT-DuarteNeural', name: 'Portuguese (Portugal)' },
+    'nl-NL': { voice: 'nl-NL-MaartenNeural', name: 'Dutch' },
+    'pl-PL': { voice: 'pl-PL-MarekNeural', name: 'Polish' },
+    'ru-RU': { voice: 'ru-RU-DmitryNeural', name: 'Russian' },
+    'zh-CN': { voice: 'zh-CN-YunxiNeural', name: 'Chinese (Mandarin)' },
+    'ja-JP': { voice: 'ja-JP-KeitaNeural', name: 'Japanese' },
+    'ko-KR': { voice: 'ko-KR-InJoonNeural', name: 'Korean' },
+    'ar-SA': { voice: 'ar-SA-HamedNeural', name: 'Arabic' },
+    'hi-IN': { voice: 'hi-IN-MadhurNeural', name: 'Hindi' },
+    'tr-TR': { voice: 'tr-TR-AhmetNeural', name: 'Turkish' },
+    'vi-VN': { voice: 'vi-VN-NamMinhNeural', name: 'Vietnamese' },
+    'th-TH': { voice: 'th-TH-NiwatNeural', name: 'Thai' },
+    'sv-SE': { voice: 'sv-SE-MattiasNeural', name: 'Swedish' },
+    'da-DK': { voice: 'da-DK-JeppeNeural', name: 'Danish' },
+    'fi-FI': { voice: 'fi-FI-HarriNeural', name: 'Finnish' },
+    'nb-NO': { voice: 'nb-NO-FinnNeural', name: 'Norwegian' },
+    'he-IL': { voice: 'he-IL-AvriNeural', name: 'Hebrew' },
+    'uk-UA': { voice: 'uk-UA-OstapNeural', name: 'Ukrainian' },
+    'cs-CZ': { voice: 'cs-CZ-AntoninNeural', name: 'Czech' },
+    'el-GR': { voice: 'el-GR-NestorasNeural', name: 'Greek' },
+    'ro-RO': { voice: 'ro-RO-EmilNeural', name: 'Romanian' },
+    'hu-HU': { voice: 'hu-HU-TamasNeural', name: 'Hungarian' },
+    'id-ID': { voice: 'id-ID-ArdiNeural', name: 'Indonesian' },
+    'ms-MY': { voice: 'ms-MY-OsmanNeural', name: 'Malay' },
+};
+
+// Language detection patterns (character ranges and common words)
+const LANGUAGE_PATTERNS: Array<{ lang: string; test: (text: string) => number }> = [
+    // CJK and special scripts (check first - distinctive characters)
+    { lang: 'zh-CN', test: (t) => (t.match(/[\u4e00-\u9fff]/g)?.length || 0) / t.length },
+    { lang: 'ja-JP', test: (t) => (t.match(/[\u3040-\u309f\u30a0-\u30ff]/g)?.length || 0) / t.length },
+    { lang: 'ko-KR', test: (t) => (t.match(/[\uac00-\ud7af\u1100-\u11ff]/g)?.length || 0) / t.length },
+    { lang: 'ar-SA', test: (t) => (t.match(/[\u0600-\u06ff]/g)?.length || 0) / t.length },
+    { lang: 'he-IL', test: (t) => (t.match(/[\u0590-\u05ff]/g)?.length || 0) / t.length },
+    { lang: 'hi-IN', test: (t) => (t.match(/[\u0900-\u097f]/g)?.length || 0) / t.length },
+    { lang: 'th-TH', test: (t) => (t.match(/[\u0e00-\u0e7f]/g)?.length || 0) / t.length },
+    { lang: 'ru-RU', test: (t) => (t.match(/[\u0400-\u04ff]/g)?.length || 0) / t.length },
+    { lang: 'uk-UA', test: (t) => (t.match(/[іїєґ]/gi)?.length || 0) / Math.max(1, (t.match(/[\u0400-\u04ff]/g)?.length || 0)) * 0.3 },
+    { lang: 'el-GR', test: (t) => (t.match(/[\u0370-\u03ff]/g)?.length || 0) / t.length },
+    
+    // Latin script languages (use common word patterns)
+    { lang: 'es-ES', test: (t) => (t.match(/\b(el|la|los|las|de|que|en|un|una|es|por|con|para|como|más|pero|sus|le|ya|muy|sin|sobre|ser|tiene|también|fue|siendo|está|había|han|hemos|esto|entre|cuando|todo|esta|desde|son|del|al)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'fr-FR', test: (t) => (t.match(/\b(le|la|les|de|du|des|un|une|et|est|en|que|qui|dans|ce|il|elle|pas|pour|sur|avec|sont|au|aux|ont|été|être|fait|vous|nous|mais|ou|son|sa|ses|leur|même|tout|tous|cette|ces|plus|par|comme|très|bien|aussi|peut|faire)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'de-DE', test: (t) => (t.match(/\b(der|die|das|und|in|von|ist|den|mit|für|auf|dem|ein|eine|zu|sich|nicht|als|auch|es|an|wurde|werden|werden|aus|bei|hat|nach|sind|zur|einer|eines|kann|haben|war|im|noch|wie|oder|vom|zum|über|nur|vor|aber|sein|mehr|durch|wird|bis|unter|wir|diese|wenn|so|einem)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'it-IT', test: (t) => (t.match(/\b(il|la|di|che|è|e|un|una|in|per|non|sono|da|del|della|con|si|le|dei|delle|ha|gli|al|alla|come|su|lo|più|ma|anche|era|ho|cui|questo|questa|ci|essere|ne|se|dal|hanno|tutto|fra|suo|sua|suoi|sue|nel|nella|molto|perché|così|quale|stato|stati)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'pt-BR', test: (t) => (t.match(/\b(o|a|de|que|e|do|da|em|um|uma|para|é|com|não|os|as|dos|das|no|na|se|por|mais|ao|à|foi|são|tem|como|mas|pelo|pela|nos|nas|seu|sua|seus|suas|ele|ela|isso|quando|muito|já|também|só|bem|está|esse|essa|tinha|ter|eram|foram|pode|fazer|mesmo|sobre|entre|depois|até)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'nl-NL', test: (t) => (t.match(/\b(de|het|een|van|en|in|is|op|te|dat|die|voor|met|zijn|aan|hij|niet|werd|door|maar|ook|als|naar|om|bij|tot|uit|dan|nog|was|worden|heeft|hebben|er|geen|meer|zou|ze|kan|moet|dit|wel|al|zo|nu|jaar|waren|over|alle|na|kunnen|zelf|waar|deze|tegen|onder|daar|twee|mijn)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'pl-PL', test: (t) => (t.match(/\b(i|w|z|na|do|nie|to|się|że|jest|o|co|jak|od|za|po|ale|tak|już|tylko|ten|tym|był|być|ma|są|ich|jego|jej|tego|która|który|które|przez|bardzo|może|aby|też|ani|lub|czy|ze|jako|przed|bez|dla|jeszcze|więc|kiedy|tam|tu|teraz)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'tr-TR', test: (t) => (t.match(/\b(bir|ve|bu|için|de|da|ile|o|ne|var|gibi|daha|çok|olarak|ki|ama|ben|sen|biz|siz|onlar|olan|oldu|olur|olmak|değil|mi|mı|mu|mü|kadar|sonra|önce|şey|ise|en|göre|ya|veya|hem|ancak|yani|yer|zaman|tarafından|aynı|büyük|iyi)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'sv-SE', test: (t) => (t.match(/\b(och|i|att|det|som|en|på|är|av|för|med|till|den|har|de|om|inte|ett|var|jag|han|hon|vi|ni|dom|från|eller|men|så|nu|kan|ska|vill|här|där|mycket|bara|efter|vid|under|över|sin|sitt|sina|denna|detta|dessa|vårt|våra|ert|era)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'da-DK', test: (t) => (t.match(/\b(og|i|at|det|er|en|af|på|til|med|som|den|har|de|for|ikke|var|et|han|hun|vi|jeg|kan|skal|vil|her|der|men|så|nu|eller|efter|ved|fra|om|over|under|sig|sin|sit|sine|denne|dette|disse|vores|jeres|min|mit|mine|din|dit|dine)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'fi-FI', test: (t) => (t.match(/\b(ja|on|ei|että|se|hän|oli|olla|kun|niin|mutta|tai|jos|vain|kuin|myös|jo|joka|tämä|sitä|hänen|minä|sinä|me|te|he|ovat|olisi|voi|kanssa|sitten|nyt|tässä|mikä|mitä|kaikki|yli|alle|ennen|jälkeen|missä|miksi|miten)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'nb-NO', test: (t) => (t.match(/\b(og|i|er|det|en|at|på|til|som|av|for|med|den|har|de|om|ikke|var|et|han|hun|vi|jeg|kan|skal|vil|her|der|men|så|nå|eller|etter|ved|fra|over|under|seg|sin|sitt|sine|denne|dette|disse|vår|vårt|våre|min|mitt|mine|din|ditt|dine)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'cs-CZ', test: (t) => (t.match(/\b(a|je|v|na|se|že|s|z|do|to|i|o|jako|pro|ale|by|jeho|jsou|byl|být|nebo|po|tak|jsem|jen|jej|ho|má|při|podle|co|které|který|která|tento|tato|toto|tyto|roku|si|ve|ze|mezi|pod|nad|před|za|ke|od|než)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'ro-RO', test: (t) => (t.match(/\b(și|în|de|la|a|cu|ce|pe|un|o|nu|este|se|că|mai|din|au|fost|sunt|care|fi|pentru|al|să|era|lui|lor|le|ei|ea|el|noi|voi|despre|astfel|foarte|poate|după|sau|când|avea|fără|prin|până|încă|însă|totuși|acestă|acest|această|aceasta)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'hu-HU', test: (t) => (t.match(/\b(a|az|és|hogy|nem|is|van|volt|egy|meg|ez|de|csak|már|én|te|ő|mi|ti|ők|lett|lesz|vagy|mint|még|fel|ki|be|el|át|rá|le|vissza|után|előtt|között|alatt|felett|mellett|mögött|szerint|miatt|nélkül|ellen|iránt)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'id-ID', test: (t) => (t.match(/\b(dan|di|yang|untuk|dengan|ini|itu|dari|ke|pada|adalah|tidak|akan|juga|atau|ada|mereka|saya|kami|kita|anda|ia|dalam|oleh|sebagai|dapat|telah|sudah|bisa|harus|serta|bahwa|seperti|karena|ketika|setelah|sebelum|antara|tentang)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'ms-MY', test: (t) => (t.match(/\b(dan|di|yang|untuk|dengan|ini|itu|dari|ke|pada|adalah|tidak|akan|juga|atau|ada|mereka|saya|kami|kita|anda|beliau|dalam|oleh|sebagai|dapat|telah|sudah|boleh|perlu|serta|bahawa|seperti|kerana|apabila|selepas|sebelum|antara|tentang)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    { lang: 'vi-VN', test: (t) => (t.match(/\b(và|của|là|trong|có|được|cho|với|không|này|đã|những|một|các|người|để|tôi|bạn|anh|chị|ông|bà|họ|chúng|ta|nó|cũng|như|khi|sau|trước|trên|dưới|giữa|ngoài|bên|đến|từ|về|hơn|rất|nhiều|ít|mỗi|nào)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+    
+    // English as fallback (check last)
+    { lang: 'en-US', test: (t) => (t.match(/\b(the|a|an|is|are|was|were|be|been|being|have|has|had|do|does|did|will|would|could|should|may|might|must|shall|can|need|dare|ought|used|to|of|in|for|on|with|at|by|from|as|into|through|during|before|after|above|below|between|under|again|further|then|once|here|there|when|where|why|how|all|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|just|also|now|about|after|before|because|if|or|and|but|although|however|therefore|thus|yet|since|while|whereas|whether|either|neither)\b/gi)?.length || 0) / (t.split(/\s+/).length || 1) },
+];
+
+/**
+ * Detect the language of the given text
+ * Returns the detected language code and confidence (0-1)
+ */
+export function detectLanguage(text: string): { lang: string; confidence: number; name: string } {
+    if (!text || text.trim().length < 10) {
+        return { lang: 'en-US', confidence: 0, name: 'English (US)' };
+    }
+    
+    // Normalize text for analysis
+    const normalizedText = text.toLowerCase();
+    
+    let bestMatch = { lang: 'en-US', score: 0 };
+    
+    for (const pattern of LANGUAGE_PATTERNS) {
+        const score = pattern.test(normalizedText);
+        if (score > bestMatch.score) {
+            bestMatch = { lang: pattern.lang, score };
+        }
+    }
+    
+    // Convert score to confidence (0-1)
+    // Script-based detection (CJK, Arabic, etc.) typically scores 0.1-0.5
+    // Word-based detection typically scores 0.05-0.3
+    const confidence = Math.min(1, bestMatch.score * 3);
+    
+    const langInfo = LANGUAGE_VOICES[bestMatch.lang] || LANGUAGE_VOICES['en-US'];
+    
+    return {
+        lang: bestMatch.lang,
+        confidence,
+        name: langInfo.name
+    };
+}
+
+/**
+ * Get the default voice for a language
+ */
+export function getVoiceForLanguage(lang: string): string {
+    return LANGUAGE_VOICES[lang]?.voice || LANGUAGE_VOICES['en-US'].voice;
+}
+
 // Default voice presets (Alex's voice)
 export const VOICE_PRESETS = {
     default: 'en-US-GuyNeural',      // Professional male, clear articulation
@@ -39,6 +155,7 @@ export type VoicePreset = keyof typeof VOICE_PRESETS;
 
 export interface TTSOptions {
     voice?: string;
+    lang?: string;       // Language code, e.g., 'en-US', 'es-ES'
     rate?: string;       // e.g., '+10%', '-20%'
     pitch?: string;      // e.g., '+5Hz', '-10Hz'
     volume?: string;     // e.g., '+50%', '-25%'
@@ -106,6 +223,10 @@ function buildSSML(text: string, options: TTSOptions = {}): string {
     const rate = options.rate || '+0%';
     const pitch = options.pitch || '+0Hz';
     const volume = options.volume || '+0%';
+    
+    // Extract language from voice name (e.g., 'en-US-GuyNeural' → 'en-US')
+    // Or use explicit lang option, or default to en-US
+    const lang = options.lang || voice.match(/^([a-z]{2}-[A-Z]{2})/)?.[1] || 'en-US';
 
     // Escape XML special characters
     const escapedText = text
@@ -115,7 +236,7 @@ function buildSSML(text: string, options: TTSOptions = {}): string {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&apos;');
 
-    return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-US">
+    return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="${lang}">
     <voice name="${voice}">
         <prosody rate="${rate}" pitch="${pitch}" volume="${volume}">
             ${escapedText}
