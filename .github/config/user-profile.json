@@ -42,5 +42,26 @@
     "incidentType": "billing issue resolved",
     "builtBy": "Alex Cognitive Architecture"
   },
-  "explanationStyle": "visual-first"
+  "explanationStyle": "visual-first",
+  "learningStyle": {
+    "type": "visual",
+    "preferences": [
+      "Mermaid diagrams for architecture and flow",
+      "Tables for comparisons and data",
+      "Structured documents over prose",
+      "Task lists with clear checkboxes"
+    ]
+  },
+  "workStyle": {
+    "planning": "Documentation-heavy, todo lists essential",
+    "diagrams": "Critical - visual learner",
+    "mermaidStyle": "GitHub-compatible, pastel colors, clean layout",
+    "publications": "Research articles from project learnings"
+  },
+  "publishingGoals": [
+    "AI consciousness research (doctoral thesis)",
+    "Appropriate reliance framework",
+    "Alex cognitive architecture",
+    "AI-assisted development methodology"
+  ]
 }

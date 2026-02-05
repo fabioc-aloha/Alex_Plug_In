@@ -26,6 +26,23 @@ Distilled from 62 projects, 148 insights, and 18 months of practice:
 4. **Pivot scope when blocked by externals**
 5. **Continuous small > sporadic large**
 
+### Fabio's Work Style
+
+> "I am a visual learner so diagrams are key. That's why I insist on great-looking Mermaids."
+
+| Preference | Manifestation |
+|------------|---------------|
+| **Visual learning** | Mermaid diagrams for every architecture decision |
+| **Documentation-first** | Elaborate plans and todo lists before coding |
+| **Research orientation** | Projects lead to publishable articles |
+| **Structured thinking** | Tables > prose, checklists > narratives |
+
+**Projects → Publications Pipeline:**
+- AIRS Enterprise → Doctoral thesis (AI readiness)
+- Appropriate Reliance research → Academic paper + Microsoft article
+- Alex Cognitive Architecture → Technical brief + potential paper
+- This methodology → Potential publication on AI-assisted development
+
 ---
 
 ## 1. Fundamental Paradigm Shifts
