@@ -104,7 +104,7 @@
   },
   "metadata": {
     "created": "2026-01-31",
-    "lastUpdated": "2026-01-31",
+    "lastUpdated": "2026-02-04",
     "author": "Alex + Fabio",
     "masterOnly": true,
     "totalAuditSections": 22,
@@ -113,6 +113,12 @@
       "m365Agent": "platforms/m365-copilot/",
       "skills": ".github/skills/",
       "protection": ".github/config/MASTER-ALEX-PROTECTED.json"
-    }
+    },
+    "changelog": [
+      {
+        "date": "2026-02-04",
+        "change": "Section 13a: Added line-by-line scanning with false positive exclusions (comments, imports, Key Vault patterns, type definitions). Heir insight from FishbowlGovernance applied."
+      }
+    ]
   }
 }

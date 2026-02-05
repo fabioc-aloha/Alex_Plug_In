@@ -1,20 +1,20 @@
 {
   "skill": "text-to-speech",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "promotionReady": true,
-  "promotionNotes": "Ready for Master Alex - universal utility, zero-cost Edge TTS, MCP pattern reusable",
+  "promotionNotes": "v2.1.0: Native TypeScript, table reading, emoji pronunciation, time patterns, graceful fallback UX",
   "connections": [
     {
-      "target": ".github/skills/mcp-development/SKILL.md",
-      "relationship": "built-with",
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "relationship": "implements",
       "strength": "strong",
-      "context": "TTS capability implemented as MCP server"
+      "context": "Native TypeScript WebSocket, webview audio player, status bar feedback"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "relationship": "consumes",
       "strength": "strong",
-      "context": "Reads and processes markdown documents for speech"
+      "context": "Reads and processes markdown documents for speech, including table-to-speech"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
@@ -50,7 +50,13 @@
       "target": ".github/skills/project-management/SKILL.md",
       "relationship": "supports",
       "strength": "moderate",
-      "context": "Stakeholder pitch presentations generated as audio files"
+      "context": "Read roadmap tables aloud with natural speech for status reviews"
+    },
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "relationship": "uses-pattern",
+      "strength": "moderate",
+      "context": "Regex pattern engineering: negative lookbehind, emoji-text deduplication"
     }
   ],
   "activationTriggers": [
@@ -64,13 +70,17 @@
     "read this",
     "Alex's voice",
     "voice synthesis",
-    "edge-tts"
+    "edge-tts",
+    "read table",
+    "read selection",
+    "narrate"
   ],
   "metadata": {
     "created": "2026-02-05",
+    "updated": "2026-02-05",
     "author": "Alex",
-    "mcpServer": "~/.alex/mcp-servers/tts-reader/",
-    "ttsEngine": "edge-tts",
+    "implementation": "Native TypeScript WebSocket",
+    "ttsEngine": "Microsoft Edge TTS",
     "defaultVoice": "en-US-GuyNeural"
   }
 }

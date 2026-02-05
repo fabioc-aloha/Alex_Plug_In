@@ -1,0 +1,57 @@
+{
+    "skill": "brain-qa",
+    "version": "1.0.0",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": ".github/skills/architecture-health/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "note": "Deeper analysis beyond basic synapse validation"
+        },
+        {
+            "target": ".github/skills/skill-activation/SKILL.md",
+            "type": "validates",
+            "strength": 0.85,
+            "note": "Checks trigger index coverage and semantic coherence"
+        },
+        {
+            "target": ".github/skills/master-alex-audit/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "bidirectional": true,
+            "note": "Brain QA for cognitive architecture, master-alex-audit for code/project"
+        },
+        {
+            "target": ".github/skills/heir-curation/SKILL.md",
+            "type": "informs",
+            "strength": 0.75,
+            "note": "Validates Master-Heir sync"
+        },
+        {
+            "target": ".github/instructions/dream-state-automation.instructions.md",
+            "type": "extends",
+            "strength": 0.7,
+            "note": "Can be triggered as deep dream phase"
+        },
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "related",
+            "strength": 0.65,
+            "note": "Meditative practice for brain maintenance"
+        }
+    ],
+    "activationBoost": [
+        "brain qa",
+        "brain audit",
+        "validate brain",
+        "synapse audit",
+        "deep synapse",
+        "trigger audit",
+        "skill index",
+        "master heir sync",
+        "heir sync",
+        "cognitive qa",
+        "architecture validation"
+    ]
+}

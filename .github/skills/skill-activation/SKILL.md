@@ -37,6 +37,7 @@ Search this index when processing any task request:
 | ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
 | awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge, skill creation |
+| brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension |
