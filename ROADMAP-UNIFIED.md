@@ -666,7 +666,7 @@ Useful for:
 > - [VSCODE-1.109-OPPORTUNITIES.md](alex_docs/VSCODE-1.109-OPPORTUNITIES.md) — Initial analysis
 > - [VSCODE-1.109-HEIR-INSIGHTS.md](alex_docs/VSCODE-1.109-HEIR-INSIGHTS.md) — Consolidated heir insights
 
-VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 72 skills already use the compatible format!
+VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 73 skills already use the compatible format!
 
 ### High-Priority Features
 
@@ -707,7 +707,7 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m  |   ✅    |
 | v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m  |   ✅    |
 | v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m  |   ✅    |
-| v4.3.0  | Audit 72 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
+| v4.3.0  | Audit 73 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
 | v4.3.0  | **OneDrive Agent Export command**               |  Heir  |  4h   | 🔄 45m  |   ⬜    |
 | v4.3.0  | **Community Agent pilot (Teams)**               |  M365  |  2h   | 🔄 30m  |   ⬜    |
 | v4.3.0+ | Agent orchestration prototype                   | Master |  8h   | 📦 1.5h |   ⬜    |
