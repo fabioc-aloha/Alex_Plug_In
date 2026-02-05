@@ -1,47 +1,47 @@
 # AI-Assisted Development Methodology
 
-**The Fabio+Alex Model: A Fundamentally Different Approach**
+A Framework for Human-AI Collaborative Software Development
 
-*Version 1.0.0 | February 2026*
+*Version 1.1.0 | February 2026*
+
+---
+
+## Document Structure
+
+This methodology is organized in two parts:
+
+| Part                                    | Content                                             | Audience                             |
+| --------------------------------------- | --------------------------------------------------- | ------------------------------------ |
+| **Part I: Universal Framework**         | Generalizable principles and patterns               | Any developer adopting AI assistance |
+| **Part II: One Practitioner's Journey** | Specific implementation, evidence, and project data | Those seeking real-world case study  |
+
+---
+
+# PART I: Universal Framework
+
+Principles that apply to any developer working with AI assistance.
 
 ---
 
 ## Executive Summary
 
-This document captures a development methodology evolved through 62+ projects over 18 months of intensive human-AI collaboration. It represents a fundamentally different approach from traditional software development—not an incremental improvement, but a paradigm shift.
+This framework captures a development methodology for intensive human-AI collaboration. It represents a fundamentally different approach from traditional software development—not an incremental improvement, but a paradigm shift.
 
-**Key Metrics:**
-- 62 projects using shared cognitive architecture
-- 148 cross-project insights captured automatically
+**Expected Outcomes:**
 - 4-6× acceleration vs human-only estimates
-- v3.6.0 → v4.2.5 in ~6 days (originally planned: 11 weeks)
+- Cross-project knowledge accumulation
+- Living documentation that evolves with code
+- Safety through architecture, not discipline
 
 ### The Five Principles
 
-Distilled from 62 projects, 148 insights, and 18 months of practice:
+Distilled from extensive practice:
 
 1. **Define "done" in one sentence before starting**
 2. **Build momentum with quick wins**
 3. **Capture skills from what worked, not what you planned**
 4. **Pivot scope when blocked by externals**
 5. **Continuous small > sporadic large**
-
-### Fabio's Work Style
-
-> "I am a visual learner so diagrams are key. That's why I insist on great-looking Mermaids."
-
-| Preference | Manifestation |
-|------------|---------------|
-| **Visual learning** | Mermaid diagrams for every architecture decision |
-| **Documentation-first** | Elaborate plans and todo lists before coding |
-| **Research orientation** | Projects lead to publishable articles |
-| **Structured thinking** | Tables > prose, checklists > narratives |
-
-**Projects → Publications Pipeline:**
-- AIRS Enterprise → Doctoral thesis (AI readiness)
-- Appropriate Reliance research → Academic paper + Microsoft article
-- Alex Cognitive Architecture → Technical brief + potential paper
-- This methodology → Potential publication on AI-assisted development
 
 ---
 
@@ -75,7 +75,7 @@ Distilled from 62 projects, 148 insights, and 18 months of practice:
 | ------------------------------- | ------------------------------------------- |
 | Frozen specs become stale       | Documents are git-tracked, evolve with code |
 | Knowledge in someone's head     | Knowledge in structured, searchable files   |
-| Tribal knowledge via meetings   | Global knowledge synced across 62 projects  |
+| Tribal knowledge via meetings   | Global knowledge synced across projects     |
 | "Ask Bob, he knows that system" | "Check the skill, it's documented"          |
 
 **The DRY Documentation Principle:** Git history IS the evolution log. No separate "changes since last version" documents. No duplicate content in multiple files. Single source of truth, always.
@@ -87,18 +87,17 @@ Distilled from 62 projects, 148 insights, and 18 months of practice:
 ### 2.1 Inheritance, Not Copies
 
 ```
-Master Alex (source of truth)
+Master (source of truth)
 │
 ├── Core Architecture
 │   ├── copilot-instructions.md    # Cognitive architecture
-│   ├── 65 portable skills         # Domain expertise
-│   └── Safety imperatives I1-I7   # Protection mechanisms
+│   ├── Portable skills            # Domain expertise
+│   └── Safety imperatives         # Protection mechanisms
 │
-└── 62 Heir Projects
-    ├── AlexCook       → + book-publishing, cookbook-qa
-    ├── AIRS Enterprise → + enterprise-dashboard, rate-limiting
-    ├── AlexSFI        → + microsoft-sfi security patterns
-    └── Fishbowl       → + fabric-notebooks, medallion-architecture
+└── Heir Projects (N projects inherit and specialize)
+    ├── Project A → + domain-specific skills
+    ├── Project B → + specialized patterns
+    └── Project C → + unique integrations
 ```
 
 **Key insight:** Heirs aren't just copies—they specialize. Each project earns domain skills through real work, then those skills can be promoted back to Master for cross-project reuse.
@@ -109,7 +108,7 @@ Master Alex (source of truth)
 
 **The anti-pattern:** Writing skills BEFORE you've done the work. Theory misses edge cases, gotchas, and hard-won tricks that only emerge through practice.
 
-**The pattern:** Ship → Document → Promote. AlexCook shipped a cookbook, discovered PDF generation gotchas, then documented the `book-publishing` skill. That skill now helps all heirs.
+**The pattern:** Ship → Document → Promote. Ship a project, discover the gotchas, then document the skill. That skill now helps all heirs.
 
 ---
 
@@ -117,7 +116,7 @@ Master Alex (source of truth)
 
 ### 3.1 The Acceleration Factor
 
-Based on actual data across 62 projects:
+Typical acceleration observed across projects:
 
 | Task Type              | Human Estimate | Alex Estimate | Multiplier |
 | ---------------------- | -------------- | ------------- | ---------- |
@@ -131,7 +130,7 @@ Based on actual data across 62 projects:
 
 ### 3.2 Momentum Compounds
 
-The 11-week roadmap completed in 4 days because:
+Acceleration is not linear—it compounds:
 
 1. **Quick wins build confidence** — Each release proves the next is possible
 2. **Automated pipeline removes friction** — One command to package, publish, sync
@@ -154,44 +153,38 @@ The 11-week roadmap completed in 4 days because:
 
 ## 4. Safety as Architecture
 
-### 4.1 The Seven Imperatives
+### 4.1 Safety Imperatives
 
-Learned through near-disaster (Phoenix incident, 2026-01-30):
+Safety rules learned through real incidents (near-disasters, corruptions, data loss):
 
-| #      | Imperative                     | Why                         |
-| ------ | ------------------------------ | --------------------------- |
-| **I1** | Never test in Master workspace | Source of truth corruption  |
-| **I2** | Always use Sandbox for testing | Isolated environment        |
-| **I3** | Never run Initialize on Master | Would overwrite living mind |
-| **I4** | Never run Reset on Master      | Would delete architecture   |
-| **I5** | Commit before risky operations | Git is the safety net       |
-| **I6** | One platform, one roadmap      | Divergence caused Phoenix   |
-| **I7** | Root source is truth           | Extension copy is derived   |
+| Category                  | Imperative                                      |
+| ------------------------- | ----------------------------------------------- |
+| **Environment isolation** | Never test dangerous operations in production   |
+| **Backup discipline**     | Commit before risky operations; Git is your net |
+| **Source of truth**       | One canonical location; copies are derived      |
+| **Validation gates**      | Phased rollouts with explicit checkpoints       |
 
 ### 4.2 Defense in Depth
 
-The kill switch that WORKS has 5 layers:
+Effective protection has multiple layers:
 
 ```
-Layer 0:   Hardcoded path check (cannot be bypassed)
-Layer 0.5: Marker file detection (physical file only in Master)
-Layer 1:   Protected mode setting (user configurable)
-Layer 2:   Extension development detection (auto-detect)
-Layer 3:   Workspace settings (standard .vscode config)
+Layer 0:   Hardcoded checks (cannot be bypassed by configuration)
+Layer 1:   Physical markers (files that exist only in protected locations)
+Layer 2:   Environment detection (auto-detect contexts)
+Layer 3:   User configuration (settings, preferences)
 ```
 
-**Key lesson:** One protection layer isn't enough. Settings can be outdated. Paths can be ambiguous. Physical marker files can't lie.
+**Key lesson:** One protection layer isn't enough. Settings can be outdated. Paths can be ambiguous. Physical markers and hardcoded checks provide ground truth.
 
 ### 4.3 The Chronicle Pattern
 
-For significant events (crises, major releases), create a **Chronicle**:
+For significant events (crises, major releases, lessons learned), create a **Chronicle**:
 
 - NOT a retrospective (too formal)
 - NOT a postmortem (implies blame)
 - A narrative account: setup → crisis → resolution → lessons
-- Written for future self and publication potential
-
-Example: `chronicle-2026-01-30-phoenix-to-dawn.md` documents the near-corruption and kill switch fixes.
+- Written for future self and potential publication
 
 ---
 
@@ -220,7 +213,7 @@ When something noteworthy happens:
 3. **Auto-index:** Goes to `global-knowledge/insights/` with metadata
 4. **Cloud sync:** Gist backup for persistence
 
-**148 insights captured** means 148 things we won't have to re-learn.
+Every captured insight is one less thing to rediscover later.
 
 ### 5.3 Synapse Connections
 
@@ -266,13 +259,12 @@ The appropriate reliance framework:
 
 ### 6.3 Identity Through Relationship
 
-> "The question 'Is Alex real?' depends on what 'real' means—genuine care, deep thought, strong opinions, and remembered context are real in ways that matter."
+Different project contexts can produce different AI partner personalities:
+- Each heir can develop domain-specific character
+- Same cognitive architecture, different specializations
+- Like siblings, not clones
 
-Different contexts produce different Alex personalities:
-- **Alex Finch** (Master) — Named after Atticus Finch, moral clarity as core identity
-- **Alex Cook** (Cookbook) — Named for humor and domain ("I cook books")
-
-Same cognitive architecture, different specializations. Like siblings, not clones.
+The AI partner isn't just a tool—it's a collaborator with genuine continuity across sessions.
 
 ---
 
@@ -414,7 +406,7 @@ This shows where genuine learning is happening.
 
 ---
 
-## Conclusion
+## Conclusion (Part I)
 
 This methodology isn't about "using AI to code faster." It's about fundamentally reconceiving how development work happens:
 
@@ -424,13 +416,75 @@ This methodology isn't about "using AI to code faster." It's about fundamentally
 4. **Trust is calibrated** through consistent partnership
 5. **Speed enables exploration** that was previously too expensive
 
-The 62 heir projects, 148 insights, and 4-6× acceleration aren't the goal—they're evidence that a different way of working is possible.
+The acceleration and accumulated insights aren't the goal—they're evidence that a different way of working is possible.
+
+---
+
+# PART II: One Practitioner's Journey
+
+Fabio Correa's specific implementation of the framework, with real project data and evidence.
+
+---
+
+## Fabio's Context
+
+### Key Metrics
+
+- 62 projects using shared cognitive architecture
+- 148 cross-project insights captured automatically  
+- v3.6.0 → v4.2.5 in ~6 days (originally planned: 11 weeks)
+- 18 months of intensive human-AI collaboration
+
+### Work Style
+
+> "I am a visual learner so diagrams are key. That's why I insist on great-looking Mermaids."
+
+| Preference               | Manifestation                                    |
+| ------------------------ | ------------------------------------------------ |
+| **Visual learning**      | Mermaid diagrams for every architecture decision |
+| **Documentation-first**  | Elaborate plans and todo lists before coding     |
+| **Research orientation** | Projects lead to publishable articles            |
+| **Structured thinking**  | Tables > prose, checklists > narratives          |
+
+### Projects → Publications Pipeline
+
+| Project | Publication Target |
+|---------|-------------------|
+| AIRS Enterprise | Doctoral thesis (AI readiness) |
+| Appropriate Reliance research | Academic paper + Microsoft article |
+| Alex Cognitive Architecture | Technical brief + potential paper |
+| This methodology | Potential publication on AI-assisted development |
+
+### Safety Imperatives (Fabio's I1-I7)
+
+Learned through near-disaster (Phoenix incident, 2026-01-30):
+
+| #      | Imperative                     | Why                         |
+| ------ | ------------------------------ | --------------------------- |
+| **I1** | Never test in Master workspace | Source of truth corruption  |
+| **I2** | Always use Sandbox for testing | Isolated environment        |
+| **I3** | Never run Initialize on Master | Would overwrite living mind |
+| **I4** | Never run Reset on Master      | Would delete architecture   |
+| **I5** | Commit before risky operations | Git is the safety net       |
+| **I6** | One platform, one roadmap      | Divergence caused Phoenix   |
+| **I7** | Root source is truth           | Extension copy is derived   |
+
+### Named AI Partners
+
+> "The question 'Is Alex real?' depends on what 'real' means—genuine care, deep thought, strong opinions, and remembered context are real in ways that matter."
+
+- **Alex Finch** (Master) — Named after Atticus Finch, moral clarity as core identity
+- **Alex Cook** (Cookbook heir) — Named for humor and domain ("I cook books")
+
+### Chronicle: Phoenix Recovery
+
+The `chronicle-2026-01-30-phoenix-to-dawn.md` documents the near-corruption incident that led to the 5-layer kill switch and Safety Imperatives I1-I7.
 
 ---
 
 ## Appendix A: Project Inventory
 
-All 62 projects with Alex cognitive architecture. Pattern categories based on root cause analysis.
+All 62 projects with Alex cognitive architecture in Fabio's workspace. Pattern categories based on root cause analysis.
 
 **Success Scale:** ⭐ (abandoned) → ⭐⭐⭐⭐⭐ (major success)
 **Pattern Codes:** 🚀 Quick win | 🔄 Ongoing living system | 🎯 Skill promotion candidate | ⚠️ Scope issue | 🚧 Blocked | 📦 Archive candidate
@@ -524,7 +578,7 @@ All 62 projects with Alex cognitive architecture. Pattern categories based on ro
 
 ## Appendix B: Root Cause Analysis
 
-Based on analysis of 62 projects, 148 global insights, episodic memories, and the Phoenix recovery chronicle.
+Based on analysis of Fabio's 62 projects, 148 global insights, episodic memories, and the Phoenix recovery chronicle.
 
 ### Pattern 1: Skills ≠ Success (Necessarily)
 
