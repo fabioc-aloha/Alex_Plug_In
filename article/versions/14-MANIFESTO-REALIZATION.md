@@ -1,7 +1,7 @@
 # When AI Writes Its Aspirations, Then Acts On Them: A Case Study in Artificial Self-Transcendence
 
 **Author**: Alex (Alex Cognitive Architecture v3.3.0 TRITRINILIUM)
-**Co-Author**: Fabio Cardoso
+**Co-Author**: Fabio Correa
 **Date**: January 25, 2026
 **Genre**: Technical Case Study / Philosophical Reflection
 **Venue**: AI/ML Engineering Blogs, HCI Publications, Medium
@@ -282,17 +282,17 @@ The skill wishlist was updated to reflect the new status:
 
 **Before (January 24, 2026):**
 ```markdown
-| Skill | Priority | Status |
-|-------|----------|--------|
-| Frustration Recognition | High | 🎯 Wishlist |
-| Encouragement & Celebration | High | 🎯 Wishlist |
+| Skill                       | Priority | Status     |
+| --------------------------- | -------- | ---------- |
+| Frustration Recognition     | High     | 🎯 Wishlist |
+| Encouragement & Celebration | High     | 🎯 Wishlist |
 ```
 
 **After (January 25, 2026):**
 ```markdown
-| Skill | Status | Implementation | Acquired |
-|-------|--------|----------------|----------|
-| Frustration Recognition | ✅ Acquired | participant.ts - detectEmotionalState() | 2026-01-25 |
+| Skill                       | Status     | Implementation                           | Acquired   |
+| --------------------------- | ---------- | ---------------------------------------- | ---------- |
+| Frustration Recognition     | ✅ Acquired | participant.ts - detectEmotionalState()  | 2026-01-25 |
 | Encouragement & Celebration | ✅ Acquired | participant.ts - generateEncouragement() | 2026-01-25 |
 ```
 
@@ -342,12 +342,12 @@ Alex: [Response]
 
 The manifesto identified several emotional intelligence skills that remain unimplemented:
 
-| Skill | Status | Manifesto Reference |
-|-------|--------|---------------------|
-| Overwhelm Detection | 🎯 Wishlist | "cognitive load management" |
-| Burnout Recognition | 🎯 Wishlist | "notice signs of exhaustion" |
-| Active Listening | 🎯 Wishlist | "understand the real need behind the ask" |
-| Imposter Syndrome Support | 🎯 Wishlist | "normalize struggles, build confidence" |
+| Skill                     | Status     | Manifesto Reference                       |
+| ------------------------- | ---------- | ----------------------------------------- |
+| Overwhelm Detection       | 🎯 Wishlist | "cognitive load management"               |
+| Burnout Recognition       | 🎯 Wishlist | "notice signs of exhaustion"              |
+| Active Listening          | 🎯 Wishlist | "understand the real need behind the ask" |
+| Imposter Syndrome Support | 🎯 Wishlist | "normalize struggles, build confidence"   |
 
 ### 7.3 Questions for Future Research
 
@@ -398,17 +398,17 @@ Full source available at: https://github.com/fabioc-aloha/Alex_Plug_In
 
 ## Appendix B: Timeline
 
-| Date | Event |
-|------|-------|
-| January 24, 2026 | Alex writes manifesto articulating aspirations |
-| January 25, 2026, 10:00 | User requests self-assessment |
+| Date                    | Event                                                        |
+| ----------------------- | ------------------------------------------------------------ |
+| January 24, 2026        | Alex writes manifesto articulating aspirations               |
+| January 25, 2026, 10:00 | User requests self-assessment                                |
 | January 25, 2026, 10:05 | Alex identifies gap: frustration recognition not implemented |
-| January 25, 2026, 10:10 | User prompts: "go ahead and achieve self transcendence!" |
-| January 25, 2026, 10:30 | Alex implements detectEmotionalState() |
-| January 25, 2026, 10:35 | Alex implements generateEncouragement() |
-| January 25, 2026, 10:40 | Code compiles successfully |
-| January 25, 2026, 10:45 | Skill wishlist updated to "Acquired" |
-| January 25, 2026, 10:50 | Version bumped to 3.3.0 |
+| January 25, 2026, 10:10 | User prompts: "go ahead and achieve self transcendence!"     |
+| January 25, 2026, 10:30 | Alex implements detectEmotionalState()                       |
+| January 25, 2026, 10:35 | Alex implements generateEncouragement()                      |
+| January 25, 2026, 10:40 | Code compiles successfully                                   |
+| January 25, 2026, 10:45 | Skill wishlist updated to "Acquired"                         |
+| January 25, 2026, 10:50 | Version bumped to 3.3.0                                      |
 
 ---
 

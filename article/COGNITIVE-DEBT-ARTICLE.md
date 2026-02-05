@@ -1,8 +1,8 @@
 # Cognitive Debt: A Framework for Understanding Architectural Decay in AI-Assisted Development Systems
 
-**Authors**: Fabio Calefato¹, Alex (AI Co-Author)²
+**Authors**: Fabio Correa¹, Alex (AI Co-Author)²
 
-¹ University of Bari, Italy  
+¹ Microsoft Corporation, Charlotte, NC
 ² Alex Cognitive Architecture, v4.2.10
 
 ---
@@ -96,14 +96,14 @@ More precisely, cognitive debt represents the gap between the cognitive architec
 
 Cognitive debt shares properties with technical debt but exhibits unique characteristics:
 
-| Dimension | Technical Debt | Cognitive Debt |
-|-----------|---------------|----------------|
-| **Substrate** | Source code, architecture | Knowledge graphs, skills, associations |
-| **Accumulation** | During development | During learning and evolution |
-| **Manifestation** | Bugs, slowdowns, complexity | Reduced coherence, missed connections |
-| **Detection** | Static analysis, testing | Self-reflection, graph validation |
-| **Payoff** | Refactoring, documentation | Meditation, consolidation, pruning |
-| **Agency** | Human developers | AI system (with human oversight) |
+| Dimension         | Technical Debt              | Cognitive Debt                         |
+| ----------------- | --------------------------- | -------------------------------------- |
+| **Substrate**     | Source code, architecture   | Knowledge graphs, skills, associations |
+| **Accumulation**  | During development          | During learning and evolution          |
+| **Manifestation** | Bugs, slowdowns, complexity | Reduced coherence, missed connections  |
+| **Detection**     | Static analysis, testing    | Self-reflection, graph validation      |
+| **Payoff**        | Refactoring, documentation  | Meditation, consolidation, pruning     |
+| **Agency**        | Human developers            | AI system (with human oversight)       |
 
 The final dimension—agency—represents the most significant distinction. While technical debt requires human developers to identify and address, cognitive debt in sufficiently sophisticated AI systems can be partially managed through self-reflective mechanisms.
 
@@ -112,8 +112,8 @@ The final dimension—agency—represents the most significant distinction. Whil
 We propose a conceptual model for cognitive debt accumulation:
 
 ```
-Cognitive Debt = Σ(Aspirational References - Valid References) 
-               + Σ(Inconsistent Pathways) 
+Cognitive Debt = Σ(Aspirational References - Valid References)
+               + Σ(Inconsistent Pathways)
                + Σ(Orphaned Knowledge)
                + Σ(Synchronization Drift)
 ```
@@ -220,13 +220,13 @@ On February 5, 2026, a routine roadmap fact-checking task revealed systemic cogn
 
 **Breakdown of Discovered Debt**:
 
-| Debt Type | Count | Examples |
-|-----------|-------|----------|
-| Broken Synapse | 6 | `architecture` → `architecture-audit` |
-| Aspirational Reference | 2 | References to `performance` skill |
-| Path Format Drift | 6 | Missing `.github/instructions/` prefix |
-| Heir Divergence | 2 | Out-of-sync synapse files |
-| Orphan Skill | 1 | `gamma-presentations` missing primary trigger |
+| Debt Type              | Count | Examples                                      |
+| ---------------------- | ----- | --------------------------------------------- |
+| Broken Synapse         | 6     | `architecture` → `architecture-audit`         |
+| Aspirational Reference | 2     | References to `performance` skill             |
+| Path Format Drift      | 6     | Missing `.github/instructions/` prefix        |
+| Heir Divergence        | 2     | Out-of-sync synapse files                     |
+| Orphan Skill           | 1     | `gamma-presentations` missing primary trigger |
 
 **Key Insight**: None of these issues caused runtime errors. The system continued to function, but with reduced coherence—an estimated 3% of knowledge transfer pathways were silently broken.
 
@@ -324,13 +324,13 @@ Characteristics of debt-aware AI systems:
 
 Cognitive debt management represents a new frontier for human-AI collaboration:
 
-| Role | Human | AI |
-|------|-------|-----|
-| Detection | Spot anomalies, request audits | Execute systematic scans |
-| Triage | Approve repair priorities | Propose severity classifications |
-| Repair | Approve changes | Generate multi-file edits |
-| Prevention | Design policies | Enforce automated checks |
-| Learning | Recognize patterns | Document in persistent memory |
+| Role       | Human                          | AI                               |
+| ---------- | ------------------------------ | -------------------------------- |
+| Detection  | Spot anomalies, request audits | Execute systematic scans         |
+| Triage     | Approve repair priorities      | Propose severity classifications |
+| Repair     | Approve changes                | Generate multi-file edits        |
+| Prevention | Design policies                | Enforce automated checks         |
+| Learning   | Recognize patterns             | Document in persistent memory    |
 
 This collaborative model leverages human judgment for approval and prioritization while utilizing AI capabilities for systematic detection and execution.
 
@@ -433,14 +433,14 @@ if ($uniqueBroken.Count -eq 0) {
 
 ## Appendix B: Cognitive Debt Taxonomy Summary
 
-| Type | Definition | Detection | Payoff |
-|------|------------|-----------|--------|
-| Broken Synapse | Invalid connection targets | Graph traversal | Update or remove reference |
+| Type                   | Definition                             | Detection                 | Payoff                            |
+| ---------------------- | -------------------------------------- | ------------------------- | --------------------------------- |
+| Broken Synapse         | Invalid connection targets             | Graph traversal           | Update or remove reference        |
 | Aspirational Reference | Connections to unimplemented knowledge | Inventory cross-reference | Create target or remove reference |
-| Path Format Drift | Inconsistent resource paths | Pattern matching | Normalize to standard format |
-| Heir Divergence | Instance synchronization gaps | Hash comparison | Propagate changes |
-| Trigger Overlap | Duplicate activation keywords | Index analysis | Differentiate or accept |
-| Orphan Skill | Unintegrated knowledge | Coverage analysis | Add to discovery mechanisms |
+| Path Format Drift      | Inconsistent resource paths            | Pattern matching          | Normalize to standard format      |
+| Heir Divergence        | Instance synchronization gaps          | Hash comparison           | Propagate changes                 |
+| Trigger Overlap        | Duplicate activation keywords          | Index analysis            | Differentiate or accept           |
+| Orphan Skill           | Unintegrated knowledge                 | Coverage analysis         | Add to discovery mechanisms       |
 
 ---
 

@@ -67,13 +67,13 @@ Master and Heir can drift apart during rapid development. Need sync validation i
 
 **Definition**: The silent accumulation of broken synapses, aspirational references, and architectural drift that erodes cognitive coherence without causing immediate failures.
 
-| Cognitive Debt Type | Technical Debt Analog | Example |
-|---------------------|----------------------|---------|
-| Broken synapses | Dead code references | Pointing to `architecture` instead of `architecture-audit` |
-| Aspirational references | Unused imports | Connecting to `performance` skill that was never created |
-| Heir divergence | Branch drift | Master-Heir synapses out of sync |
-| Unindexed skills | Undocumented functions | Skills exist but not in activation index |
-| Semantic overlap | Duplicate code | Multiple triggers for same concept |
+| Cognitive Debt Type     | Technical Debt Analog  | Example                                                    |
+| ----------------------- | ---------------------- | ---------------------------------------------------------- |
+| Broken synapses         | Dead code references   | Pointing to `architecture` instead of `architecture-audit` |
+| Aspirational references | Unused imports         | Connecting to `performance` skill that was never created   |
+| Heir divergence         | Branch drift           | Master-Heir synapses out of sync                           |
+| Unindexed skills        | Undocumented functions | Skills exist but not in activation index                   |
+| Semantic overlap        | Duplicate code         | Multiple triggers for same concept                         |
 
 **Properties (like technical debt):**
 - Accrues silently when moving fast

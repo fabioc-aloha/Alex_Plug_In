@@ -10,7 +10,9 @@
 
 ## User Profile
 
-Always address user by name. Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
+**⚠️ MANDATORY**: When writing content that includes the user's name (articles, documents, credits), **ALWAYS read** `.github/config/user-profile.json` first. Do NOT guess or pattern-match from training data. The user's name is **Fabio Correa** — not Calefato, Cardoso, or any other variant.
+
+Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 | Field | Purpose |
 |-------|---------|

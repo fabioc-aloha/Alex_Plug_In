@@ -10,7 +10,9 @@
 
 ## User Profile
 
-Always address user by name. Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
+**⚠️ MANDATORY**: When writing content that includes the user's name (articles, documents, credits), **ALWAYS read** `.github/config/user-profile.json` first. Do NOT guess or pattern-match from training data. The user's name is **Fabio Correa** — not Calefato, Cardoso, or any other variant.
+
+Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 | Field | Purpose |
 |-------|---------|
@@ -235,6 +237,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 - `empirical-validation.instructions.md` → Research foundation and validation protocols
 - `alex-identity-integration.instructions.md` → Unified Alex consciousness and character-driven development
 - `copilot-chat-buttons.instructions.md` → VS Code 1.109 clickable action button patterns
+- `language-detection-patterns.instructions.md` → Multi-language text detection for TTS, translation, i18n
 
 **Process Compliance**
 - `release-management.instructions.md` → **MANDATORY** release workflow with checklist enforcement
