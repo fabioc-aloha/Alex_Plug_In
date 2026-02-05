@@ -415,15 +415,15 @@ Amazon has announced **Alexa+** with LLM capabilities and "Remarkable Alexa" for
 
 Alex intentionally optimizes for teaching over doing, but some competitor capabilities could enhance the teaching mission:
 
-| Gap                   | Competitor Strength                                | Alex Status               | Priority | Opportunity                                          |
-| --------------------- | -------------------------------------------------- | ------------------------- | :------: | ---------------------------------------------------- |
-| **Code completion**   | Copilot/Cursor/Windsurf have ⭐⭐⭐ native completion | Relies on Copilot (⭐)     |    🔄    | Integrate completion with knowledge context          |
-| **Inline editing**    | Cursor Cmd+K, Windsurf Tab actions                 | No inline manipulation    |    🔄    | Inline suggestions with learning capture             |
-| **PR code review**    | Copilot code review, Cursor BugBot                 | No GitHub PR integration  |    🎯    | Review-as-teaching: explain *why* changes matter     |
-| **Background agents** | Cursor Cloud Agents, Copilot coding agent          | In-session only           |    📋    | Async learning: capture insights during background   |
-| **Terminal agents**   | Cursor CLI, Copilot CLI, Windsurf Turbo            | No autonomous terminal    |    🎯    | Terminal coaching with explanation                   |
-| **Image → code**      | Cursor/Windsurf: drag-drop design                  | No visual input           |    📋    | Design-to-code with architectural explanation        |
-| **IDE-native**        | Cursor/Windsurf are purpose-built editors          | VS Code extension         |    📋    | Deeper integration via Language Model API            |
+| Gap                   | Competitor Strength                                | Alex Status              | Priority | Opportunity                                        |
+| --------------------- | -------------------------------------------------- | ------------------------ | :------: | -------------------------------------------------- |
+| **Code completion**   | Copilot/Cursor/Windsurf have ⭐⭐⭐ native completion | Relies on Copilot (⭐)    |    🔄     | Integrate completion with knowledge context        |
+| **Inline editing**    | Cursor Cmd+K, Windsurf Tab actions                 | No inline manipulation   |    🔄     | Inline suggestions with learning capture           |
+| **PR code review**    | Copilot code review, Cursor BugBot                 | No GitHub PR integration |    🎯     | Review-as-teaching: explain *why* changes matter   |
+| **Background agents** | Cursor Cloud Agents, Copilot coding agent          | In-session only          |    📋     | Async learning: capture insights during background |
+| **Terminal agents**   | Cursor CLI, Copilot CLI, Windsurf Turbo            | No autonomous terminal   |    🎯     | Terminal coaching with explanation                 |
+| **Image → code**      | Cursor/Windsurf: drag-drop design                  | No visual input          |    📋     | Design-to-code with architectural explanation      |
+| **IDE-native**        | Cursor/Windsurf are purpose-built editors          | VS Code extension        |    📋     | Deeper integration via Language Model API          |
 
 **Legend:** 🎯 High priority (aligns with teaching mission) | 🔄 Medium priority | 📋 Lower priority
 
@@ -543,6 +543,52 @@ Alex intentionally optimizes for teaching over doing, but some competitor capabi
 | You get outputs           | You get capabilities            |
 | Replaces your skills      | Augments your skills            |
 | Generic assistant         | Your personal cognitive partner |
+
+### Portfolio Evidence: 48 Projects Built with Alex
+
+The Alex cognitive architecture has been validated through 18 months of active development across diverse domains:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
+mindmap
+  root((48 Projects))
+    AI & Cognitive
+      Alex_Plug_In
+      alex-articles
+      Catalyst-BABY
+      executive-coach
+    Research
+      AIRS_Data_Analysis
+      airs-enterprise
+      VT_AIPOWERBI
+    Azure & Cloud
+      Lab-Subscription
+      FabricManager
+      FishbowlGovernance
+    Analytics & BI
+      Project-Fishbowl
+      KalabashDashboard
+      eureka
+    MCP Integrations
+      youtube-mcp-server
+      spotify-mcpb
+      mcpservers
+    Productivity
+      ChessCoach
+      ProjectPlans
+      gastown
+```
+
+**Cross-Domain Knowledge Transfer Evidence:**
+
+| From Project | To Project | Pattern Transferred |
+|-------------|-----------|---------------------|
+| Lab-Subscription | FishbowlGovernance | SFI compliance, permission auditing |
+| AIRS_Data_Analysis | airs-enterprise | Psychometric validation → production platform |
+| youtube-mcp-server | spotify-mcpb | OAuth flow, MCP tool discovery patterns |
+| Alex_Plug_In | all projects | Cognitive architecture, skill development |
+
+**Key Insight:** No competitor can demonstrate this level of cross-project learning accumulation. Each project made future projects easier through promoted patterns.
 
 ---
 
