@@ -35,6 +35,24 @@
 | **Doc Debt** | `// DEBT:doc` | Outdated docs, missing comments |
 | **Dependency Debt** | `// DEBT:dep` | Outdated packages, deprecated APIs |
 | **Infrastructure Debt** | `// DEBT:infra` | Build issues, deployment friction |
+| **Cognitive Debt** | `// DEBT:cognitive` | Broken synapses, orphan skills, drift |
+
+### Cognitive Debt (Alex-Specific)
+
+> *"Cognitive debt is the gap between the architecture I aspire to and the architecture I actually have."*
+
+Cognitive debt applies to Alex's cognitive architecture — the accumulated decay in synapses, skills, and cross-platform sync.
+
+| Cognitive Debt Type | Example | Payoff Mechanism |
+|---------------------|---------|------------------|
+| Broken synapses | Pointing to `architecture` instead of `architecture-audit` | `brain-qa` Phase 1 |
+| Aspirational references | Connecting to skills never created | Remove or create the skill |
+| Heir divergence | Master-Heir synapses out of sync | `brain-qa` Phase 4-6 |
+| Unindexed skills | Skills exist but not in skill-activation | `brain-qa` Phase 2 |
+| Semantic overlap | Multiple triggers for same concept | `brain-qa` Phase 3 |
+
+**Detection**: Run `brain-qa` skill or `Alex: Dream` command
+**Prevention**: Brain QA is now Step 0 in release-preflight checklist
 
 ---
 
