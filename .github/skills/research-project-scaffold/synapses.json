@@ -1,54 +1,54 @@
 {
-  "skill": "research-project-scaffold",
-  "version": "1.0.0",
-  "description": "Scaffolding new and refactoring existing academic research projects for Alex-assisted workflows",
-  "synapses": [
-    {
-      "target": "academic-research",
-      "type": "extends",
-      "strength": 0.9,
-      "context": "Uses academic research methodology knowledge for proper research structure"
-    },
-    {
-      "target": "practitioner-research",
-      "type": "uses",
-      "strength": 0.85,
-      "context": "Applies Ship→Document→Promote workflow for research projects"
-    },
-    {
-      "target": "project-scaffolding",
-      "type": "extends",
-      "strength": 0.85,
-      "context": "Builds on general scaffolding patterns for research-specific needs"
-    },
-    {
-      "target": "bootstrap-learning",
-      "type": "applies",
-      "strength": 0.7,
-      "context": "Learning new research methods during project setup"
-    },
-    {
-      "target": "writing-publication",
-      "type": "triggers",
-      "strength": 0.75,
-      "context": "Writing phase activates publication preparation workflows"
-    },
-    {
-      "target": "git-workflow",
-      "type": "uses",
-      "strength": 0.7,
-      "context": "Version control essential for research project refactoring"
-    }
-  ],
-  "activationTriggers": [
-    "new research project",
-    "scaffold research",
-    "refactor research",
-    "research structure",
-    "literature matrix",
-    "research plan",
-    "academic project setup",
-    "organize research",
-    "research folder structure"
-  ]
+    "skill": "research-project-scaffold",
+    "version": "1.0.0",
+    "description": "Scaffolding new and refactoring existing academic research projects for Alex-assisted workflows",
+    "synapses": [
+        {
+            "target": "academic-research",
+            "type": "extends",
+            "strength": 0.9,
+            "context": "Uses academic research methodology knowledge for proper research structure"
+        },
+        {
+            "target": "practitioner-research",
+            "type": "uses",
+            "strength": 0.85,
+            "context": "Applies Ship→Document→Promote workflow for research projects"
+        },
+        {
+            "target": "project-scaffolding",
+            "type": "extends",
+            "strength": 0.85,
+            "context": "Builds on general scaffolding patterns for research-specific needs"
+        },
+        {
+            "target": "bootstrap-learning",
+            "type": "applies",
+            "strength": 0.7,
+            "context": "Learning new research methods during project setup"
+        },
+        {
+            "target": "writing-publication",
+            "type": "triggers",
+            "strength": 0.75,
+            "context": "Writing phase activates publication preparation workflows"
+        },
+        {
+            "target": "git-workflow",
+            "type": "uses",
+            "strength": 0.7,
+            "context": "Version control essential for research project refactoring"
+        }
+    ],
+    "activationTriggers": [
+        "new research project",
+        "scaffold research",
+        "refactor research",
+        "research structure",
+        "literature matrix",
+        "research plan",
+        "academic project setup",
+        "organize research",
+        "research folder structure"
+    ]
 }

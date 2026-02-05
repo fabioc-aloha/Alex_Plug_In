@@ -104,4 +104,42 @@ This pattern is now documented in practitioner-research skill.
 
 ---
 
-*Knowledge consolidated. Practitioner research methodology now available as reusable skill. Methodology paper ready for venue selection.*
+## Session Continuation: Research Project Scaffold
+
+**Time**: Later same day
+
+### Additional Skill Creation: research-project-scaffold
+
+User requested best practices for scaffolding academic research projects. Created comprehensive skill combining:
+
+**New Project Scaffolding**:
+- Folder structure: `.github/`, `docs/`, `data/`, `analysis/`, `writing/`, `references/`
+- Essential files: RESEARCH-PLAN.md, LITERATURE-MATRIX.md, METHODOLOGY.md, DECISION-LOG.md
+- Research-specific copilot-instructions.md template
+- Phase-based Alex integration points
+
+**Existing Project Refactoring** (user-requested addition):
+- 4-part assessment checklist (structure, documentation, Alex-readiness, data management)
+- 6-phase refactoring procedure: Inventory → Scaffold → Migrate → Document → Link Updates → Validate
+- Common refactoring patterns table
+- Git-preserving migration (`git mv` not delete+create)
+- Retroactive documentation prompts
+
+### Synaptic Connections (research-project-scaffold)
+- [academic-research] (0.9, extends) - Methodology knowledge for structure
+- [practitioner-research] (0.85, uses) - Ship→Document→Promote for research
+- [project-scaffolding] (0.85, extends) - Base scaffolding patterns
+- [bootstrap-learning] (0.7, applies) - Learning new research methods
+- [writing-publication] (0.75, triggers) - Writing phase → publication prep
+- [git-workflow] (0.7, uses) - Version control for refactoring
+
+### Cognitive Architecture Updates
+
+| Component | Change |
+|-----------|--------|
+| Skills | +1 (research-project-scaffold) → 68 total |
+| Skill list | Updated in copilot-instructions.md |
+
+---
+
+*Academic research scaffolding complete. Both new project initialization and existing project refactoring now supported.*
