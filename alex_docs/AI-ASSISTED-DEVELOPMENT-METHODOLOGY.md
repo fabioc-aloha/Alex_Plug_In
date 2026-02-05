@@ -323,7 +323,7 @@ flowchart LR
 
     style Anti fill:#ffebee,stroke:#c62828
     style Pattern fill:#e8f5e9,stroke:#2e7d32
-    style SK2 fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
+    style SK2 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
 ```
 
 ---
@@ -345,6 +345,7 @@ Typical acceleration observed across projects:
 **Why:** AI eliminates "boilerplate think time"—the mental overhead of remembering syntax, finding examples, checking documentation. Humans think at concept level, AI fills in details. This aligns with findings that 87% of developers preserve mental effort on repetitive tasks when using AI assistance (Kalliamvakou, 2022).
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#1565c0', 'lineColor': '#656d76'}}}%%
 xychart-beta
     title "Acceleration by Task Type"
     x-axis [Refactor, Feature, Docs, Debug, Arch]
@@ -364,11 +365,11 @@ flowchart LR
         I -->|"Next cycle starts stronger"| W
     end
 
-    style W fill:#c8e6c9,stroke:#2e7d32
-    style C fill:#bbdefb,stroke:#1565c0
+    style W fill:#e8f5e9,stroke:#2e7d32
+    style C fill:#e3f2fd,stroke:#1565c0
     style A fill:#fff3e0,stroke:#ef6c00
     style N fill:#f3e5f5,stroke:#7b1fa2
-    style I fill:#e1f5fe,stroke:#0277bd
+    style I fill:#e3f2fd,stroke:#1565c0
 ```
 
 1. **Quick wins build confidence** — Each release proves the next is possible
@@ -550,6 +551,7 @@ Research on human-AI teams reveals a "jagged technological frontier" where AI ca
 This isn't "AI as tool"—it's collaborative partnership where each party has distinct strengths:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
 quadrantChart
     title Human-AI Collaboration Strengths
     x-axis "Speed / Consistency" --> "Vision / Judgment"
@@ -716,7 +718,7 @@ flowchart TB
     Med --> End
     End -.->|"Next session"| Start
 
-    style Start fill:#e1f5fe,stroke:#0277bd
+    style Start fill:#e3f2fd,stroke:#1565c0
     style Work fill:#fff3e0,stroke:#ef6c00
     style Pause fill:#f3e5f5,stroke:#7b1fa2
     style Med fill:#e8f5e9,stroke:#2e7d32
@@ -754,7 +756,7 @@ flowchart TB
     M1 --> |">1.0×"| Under["Underestimating\n(unknown complexity)"]
 
     style Metrics fill:#e8f5e9,stroke:#2e7d32
-    style Good fill:#c8e6c9,stroke:#1b5e20
+    style Good fill:#e8f5e9,stroke:#2e7d32
     style Over fill:#fff3e0,stroke:#ef6c00
     style Under fill:#ffebee,stroke:#c62828
 ```
@@ -819,7 +821,7 @@ flowchart TB
     style P3 fill:#ffebee,stroke:#c62828
     style P4 fill:#fff3e0,stroke:#ef6c00
     style P5 fill:#f3e5f5,stroke:#7b1fa2
-    style Evidence fill:#e0f2f1,stroke:#00695c
+    style Evidence fill:#e8f5e9,stroke:#2e7d32
 ```
 
 1. **Knowledge persists** across sessions, projects, and years
@@ -1263,6 +1265,7 @@ mindmap
 ### Technology Distribution
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#1f2328', 'pie1': '#1565c0', 'pie2': '#2e7d32', 'pie3': '#7b1fa2', 'pie4': '#ef6c00', 'pie5': '#0277bd', 'pie6': '#00695c', 'pie7': '#c62828', 'pie8': '#424242', 'pie9': '#d1d9e0', 'pieStrokeColor': '#ffffff', 'pieStrokeWidth': '2px'}}}%%
 pie title Languages Across Portfolio
     "TypeScript" : 12
     "Python" : 10
@@ -1309,13 +1312,13 @@ The portfolio shows three project lifecycle patterns:
 
 These repositories are forks of other projects, used for learning, experimentation, or contribution:
 
-| Repo | Original Author | Why Forked |
-|------|----------------|------------|
-| [gastown](https://github.com/fabioc-aloha/gastown) | — | Multi-agent workspace patterns |
-| [BASIC-M6502-TS](https://github.com/fabioc-aloha/BASIC-M6502-TS) | — | Retro computing interest |
-| [omi](https://github.com/fabioc-aloha/omi) | — | AI wearables research |
-| [mcpservers](https://github.com/fabioc-aloha/mcpservers) | — | MCP protocol patterns |
-| [agent-zero](https://github.com/fabioc-aloha/agent-zero) | — | Autonomous agent patterns |
-| [Python](https://github.com/fabioc-aloha/Python) | TheAlgorithms | Algorithm reference |
+| Repo                                                             | Original Author | Why Forked                     |
+| ---------------------------------------------------------------- | --------------- | ------------------------------ |
+| [gastown](https://github.com/fabioc-aloha/gastown)               | —               | Multi-agent workspace patterns |
+| [BASIC-M6502-TS](https://github.com/fabioc-aloha/BASIC-M6502-TS) | —               | Retro computing interest       |
+| [omi](https://github.com/fabioc-aloha/omi)                       | —               | AI wearables research          |
+| [mcpservers](https://github.com/fabioc-aloha/mcpservers)         | —               | MCP protocol patterns          |
+| [agent-zero](https://github.com/fabioc-aloha/agent-zero)         | —               | Autonomous agent patterns      |
+| [Python](https://github.com/fabioc-aloha/Python)                 | TheAlgorithms   | Algorithm reference            |
 
 **Contribution to this framework:** Even forked repos contribute to learning. Patterns observed in `mcpservers` and `agent-zero` influenced Alex's MCP integration and autonomous tool design.
