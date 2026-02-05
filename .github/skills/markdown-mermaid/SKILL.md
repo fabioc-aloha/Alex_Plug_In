@@ -710,6 +710,49 @@ end
 ["🌐 Return Results<br/>Info"]
 ```
 
+### XY Chart Bar Coloring (xychart-beta)
+
+**Problem**: Individual bars all render the same color despite `plotColorPalette`
+
+**Root Cause**: `xychart-beta` only applies different colors to **different data series** (multiple `bar` or `line` commands), not individual bars in a single series.
+
+```text
+%% ❌ FAILS - single series, all bars same color
+%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': {'plotColorPalette': '#1565c0, #2e7d32, #7b1fa2'}}}}%%
+xychart-beta
+    x-axis [A, B, C]
+    bar [1, 2, 3]  %% All same color!
+
+%% ✅ WORKS - multiple series, each gets color from palette
+xychart-beta
+    x-axis [A, B, C]
+    bar [1, 2, 3]    %% Color 1
+    bar [4, 5, 6]    %% Color 2
+```
+
+**Alternative Solutions:**
+
+1. **Pie chart** — Use `pie` with theming when showing proportions:
+   ```text
+   %%{init: {'theme': 'base', 'themeVariables': { 'pie1': '#1565c0', 'pie2': '#2e7d32'}}}%%
+   pie showData
+       title "Task Distribution"
+       "Task A" : 8
+       "Task B" : 4
+   ```
+
+2. **Visual ASCII table** — Use markdown table with visual bars:
+   ```markdown
+   | Task | Value | Visual |
+   | ---- | ----- | ------ |
+   | A | **8** | ████████░░░░ |
+   | B | **4** | ████░░░░░░░░ |
+   ```
+
+3. **Stacked bar (grouped)** — Split data into multiple series
+
+---
+
 ### C4 Diagram Limitations
 
 **Problem**: C4Component syntax not fully supported in standard Mermaid
