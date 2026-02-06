@@ -1,5 +1,7 @@
 # Alex Marketing Plan
 
+<img src="banner-concepts/banner-rotating-nouns.svg" alt="Alex Animated Banner" width="1200">
+
 > Brand identity, personas, terminology, logo concepts, and outreach copy.
 
 ## Target Personas
@@ -352,25 +354,25 @@ The Global Knowledge feature extends the rocket metaphor: individual projects (r
 
 | #      | Concept          | Preview                                                                                  | Tagline                                         | Alex Pick |
 | ------ | ---------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------- | --------- |
-| **V1** | Orbital          | <img src="banner-concepts/gk-v1-orbital.svg" alt="GK Orbital" width="300">               | "Your KNOWLEDGE in Orbit"                       | ⭐⭐⭐       |
-| **V2** | Constellation    | <img src="banner-concepts/gk-v2-constellation.svg" alt="GK Constellation" width="300">   | "Connect Your PROJECTS Like Stars"              | ⭐⭐        |
-| **V3** | Mothership       | <img src="banner-concepts/gk-v3-mothership.svg" alt="GK Mothership" width="300">         | "Your MOTHERSHIP for All Projects"              | ⭐⭐⭐       |
-| **V4** | Station Docked   | <img src="banner-concepts/gk-v4-station-docked.svg" alt="GK Station Docked" width="300"> | "Your MISSION CONTROL for Cross-Project Wisdom" | ⭐⭐⭐⭐⭐     |
-| **V5** | Launchpad Return | <img src="banner-concepts/gk-v5-launchpad-return.svg" alt="GK Launchpad" width="300">    | "Your HOME BASE for Every Mission"              | ⭐⭐⭐       |
-| **V6** | Library          | <img src="banner-concepts/gk-v6-library.svg" alt="GK Library" width="300">               | "Your STAR CHART LIBRARY Across Projects"       | ⭐⭐        |
+| **V1** | Orbital          | <img src="banner-concepts/gk-v1-orbital.svg" alt="GK Orbital" width="800">               | "Your KNOWLEDGE in Orbit"                       | ⭐⭐⭐       |
+| **V2** | Constellation    | <img src="banner-concepts/gk-v2-constellation.svg" alt="GK Constellation" width="800">   | "Connect Your PROJECTS Like Stars"              | ⭐⭐        |
+| **V3** | Mothership       | <img src="banner-concepts/gk-v3-mothership.svg" alt="GK Mothership" width="800">         | "Your MOTHERSHIP for All Projects"              | ⭐⭐⭐       |
+| **V4** | Station Docked   | <img src="banner-concepts/gk-v4-station-docked.svg" alt="GK Station Docked" width="800"> | "Your MISSION CONTROL for Cross-Project Wisdom" | ⭐⭐⭐⭐⭐     |
+| **V5** | Launchpad Return | <img src="banner-concepts/gk-v5-launchpad-return.svg" alt="GK Launchpad" width="800">    | "Your HOME BASE for Every Mission"              | ⭐⭐⭐       |
+| **V6** | Library          | <img src="banner-concepts/gk-v6-library.svg" alt="GK Library" width="800">               | "Your STAR CHART LIBRARY Across Projects"       | ⭐⭐        |
 
 **Selected GK Banner**: V4 Station Docked — [gk-space-station.svg](banner-concepts/gk-space-station.svg)
 
 #### GK Logo Candidates
 
-| #      | Concept        | Preview                                                                                         | Metaphor                           | Alex Pick |
-| ------ | -------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------- | --------- |
-| **V1** | Orbital        | <img src="logo-concepts/gk-v1-orbital-logo.svg" alt="GK Orbital Logo" width="80">               | GK sphere with rocket in orbit     | ⭐⭐⭐       |
-| **V2** | Constellation  | <img src="logo-concepts/gk-v2-constellation-logo.svg" alt="GK Constellation Logo" width="80">   | Network of connected project nodes | ⭐⭐        |
-| **V3** | Mothership     | <img src="logo-concepts/gk-v3-mothership-logo.svg" alt="GK Mothership Logo" width="80">         | Carrier with docking bays          | ⭐⭐⭐       |
-| **V4** | Station Docked | <img src="logo-concepts/gk-v4-station-docked-logo.svg" alt="GK Station Docked Logo" width="80"> | ISS-style station + docked rocket  | ⭐⭐⭐⭐⭐     |
-| **V5** | Launchpad      | <img src="logo-concepts/gk-v5-launchpad-logo.svg" alt="GK Launchpad Logo" width="80">           | Landing pad "GK HOME"              | ⭐⭐⭐       |
-| **V6** | Library        | <img src="logo-concepts/gk-v6-library-logo.svg" alt="GK Library Logo" width="80">               | Star chart bookshelf               | ⭐⭐        |
+| #      | Concept        | Preview                                                                                          | Metaphor                           | Alex Pick |
+| ------ | -------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- | --------- |
+| **V1** | Orbital        | <img src="logo-concepts/gk-v1-orbital-logo.svg" alt="GK Orbital Logo" width="128">               | GK sphere with rocket in orbit     | ⭐⭐⭐       |
+| **V2** | Constellation  | <img src="logo-concepts/gk-v2-constellation-logo.svg" alt="GK Constellation Logo" width="128">   | Network of connected project nodes | ⭐⭐        |
+| **V3** | Mothership     | <img src="logo-concepts/gk-v3-mothership-logo.svg" alt="GK Mothership Logo" width="128">         | Carrier with docking bays          | ⭐⭐⭐       |
+| **V4** | Station Docked | <img src="logo-concepts/gk-v4-station-docked-logo.svg" alt="GK Station Docked Logo" width="128"> | ISS-style station + docked rocket  | ⭐⭐⭐⭐⭐     |
+| **V5** | Launchpad      | <img src="logo-concepts/gk-v5-launchpad-logo.svg" alt="GK Launchpad Logo" width="128">           | Landing pad "GK HOME"              | ⭐⭐⭐       |
+| **V6** | Library        | <img src="logo-concepts/gk-v6-library-logo.svg" alt="GK Library Logo" width="128">               | Star chart bookshelf               | ⭐⭐        |
 
 **Selected GK Logo**: V4 Station Docked — [gk-space-station-logo.svg](logo-concepts/gk-space-station-logo.svg)
 

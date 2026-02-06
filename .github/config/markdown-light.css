@@ -12,6 +12,12 @@
 :root,
 body,
 .vscode-body {
+    /* ================================================
+       PREVIEW WIDTH - Adjust this value to change
+       the maximum width of the markdown preview
+       ================================================ */
+    --preview-max-width: 1400px;
+
     --vscode-textBlockQuote-background: #f6f8fa !important;
     --vscode-textBlockQuote-border: #d1d9e0 !important;
     --vscode-editor-background: #ffffff !important;
@@ -27,10 +33,16 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif !important;
     font-size: 16px !important;
     line-height: 1.6 !important;
-    max-width: 980px !important;
+    max-width: var(--preview-max-width) !important;
     margin: 0 auto !important;
     padding: 32px 45px !important;
     word-wrap: break-word !important;
+}
+
+/* Allow images to display at full width */
+img {
+    max-width: 100% !important;
+    height: auto !important;
 }
 
 /* ============================================
