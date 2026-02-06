@@ -39,5 +39,7 @@
     "file migration or consolidation completed",
     "human feedback corrected AI judgment",
     "new workflow pattern emerged"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

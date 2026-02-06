@@ -64,5 +64,7 @@
     "envVariable": "GAMMA_API_KEY",
     "mcpAvailable": true,
     "mcpConnector": "Gamma"
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

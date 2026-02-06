@@ -4,6 +4,65 @@
 
 ---
 
+## 🧠 The LLM as Executive Function
+
+**Core Architectural Insight**: In Alex's cognitive architecture, the Large Language Model (Claude Opus) serves as the **executive function**—the prefrontal cortex that orchestrates all cognitive processes.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+graph TB
+    subgraph "Executive Function (LLM)"
+        LLM["Claude Opus 4.5/4.6<br/>Reasoning • Planning • Decision-Making"]
+    end
+
+    subgraph "Memory Systems (Alex Architecture)"
+        DM["Declarative Memory<br/>copilot-instructions.md"]
+        PM["Procedural Memory<br/>.instructions.md files"]
+        EM["Episodic Memory<br/>.prompt.md files"]
+        SK["Skill Knowledge<br/>.github/skills/"]
+    end
+
+    LLM --> DM
+    LLM --> PM
+    LLM --> EM
+    LLM --> SK
+
+    DM -.-> LLM
+    PM -.-> LLM
+    EM -.-> LLM
+    SK -.-> LLM
+```
+
+**Figure 0:** *The LLM (Claude Opus) as Executive Function orchestrating Alex's memory systems*
+
+| Cognitive Component    | Brain Analog            | Alex Implementation                                          |
+| ---------------------- | ----------------------- | ------------------------------------------------------------ |
+| **Executive Function** | Prefrontal Cortex       | **Claude Opus (LLM)** — reasoning, planning, decision-making |
+| Declarative Memory     | Hippocampal-Neocortical | `.github/copilot-instructions.md`                            |
+| Procedural Memory      | Basal Ganglia           | `.instructions.md` files                                     |
+| Episodic Memory        | Hippocampus + Temporal  | `.prompt.md` files                                           |
+| Skill Knowledge        | Cortical Specialization | `.github/skills/` folder                                     |
+| Neural Connectivity    | Synaptic Networks       | `synapses.json` mappings                                     |
+
+**Key Insight**: Alex's architecture files are "memory"—inert without the LLM to activate them. The LLM provides the reasoning engine that interprets, connects, and acts on stored knowledge. This is why model quality directly impacts Alex's cognitive capability.
+
+### The Orchestration Paradigm
+
+This architecture embodies the shift from **coding** to **orchestration** (Sam Altman, January 2026):
+
+| Traditional Development | Alex-Enabled Development |
+| ----------------------- | ------------------------ |
+| Write syntax            | Express intent           |
+| Debug line-by-line      | Validate outcomes        |
+| Learn APIs              | Learn to communicate     |
+| Tool proficiency        | Partnership fluency      |
+
+The human doesn't operate Alex—they **orchestrate through** Alex. The LLM (executive function) interprets human intent, consults memory systems, and coordinates execution. The human focuses on *what* and *why*; Alex handles *how*.
+
+> *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."*
+
+---
+
 ## Overview
 
 Alex isn't a replacement for GitHub Copilot—it **extends** Copilot using its native extension points. This document explains which Copilot features Alex uses and how.

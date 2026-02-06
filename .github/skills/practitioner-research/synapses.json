@@ -66,5 +66,7 @@
     "structured abstract",
     "practitioner research",
     "ship document promote"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

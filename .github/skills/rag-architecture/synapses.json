@@ -62,5 +62,7 @@
     "Azure AI Search",
     "reranking",
     "hybrid search"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -73,4 +73,38 @@ Include the gotchas you discovered.
 
 ---
 
+## Upgrade Preservation (Automatic)
+
+When heirs upgrade to a new Alex version, their skills are **automatically preserved**:
+
+### What Happens During Upgrade
+1. **Backup**: All existing `.github/` content backed up with timestamp
+2. **Fresh Install**: New Alex architecture deployed
+3. **Auto-Restore**: Profile, episodic memories, AND user-created skills restored
+4. **Synapse Normalization**: Legacy synapse formats upgraded to current schema
+
+### Synapse Schema Migrations (Automatic)
+| Legacy Format | Current Format |
+|---------------|----------------|
+| `strength: "strong"` | `strength: 0.9` |
+| `synapses: [...]` | `connections: [...]` |
+| `context: "..."` | `when: "..." + yields: "..."` |
+| `activationKeywords` | `activationContexts` |
+
+### Strength Mapping
+```
+critical → 1.0
+strong/high → 0.9
+moderate/medium → 0.7
+low → 0.5
+weak/minimal → 0.3
+```
+
+### Philosophy
+> **Never lose heir-created work.** Skills represent hard-won expertise from real projects. The upgrade process auto-restores everything recommended; only stale items (>90 days) require manual review.
+
+**Synapse**: [upgrade.ts] (0.9, implements, forward) - "normalizeAllSynapses() executes this"
+
+---
+
 *Skills are earned through doing, not declared by planning.*

@@ -49,5 +49,7 @@
     "preflight",
     "checklist",
     "go-live"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

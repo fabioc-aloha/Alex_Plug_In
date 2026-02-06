@@ -1,8 +1,9 @@
 {
   "skill": "research-project-scaffold",
   "version": "1.0.0",
+  "inheritance": "inheritable",
   "description": "Scaffolding new and refactoring existing academic research projects for Alex-assisted workflows",
-  "synapses": [
+  "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "extends",
@@ -50,5 +51,7 @@
     "academic project setup",
     "organize research",
     "research folder structure"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

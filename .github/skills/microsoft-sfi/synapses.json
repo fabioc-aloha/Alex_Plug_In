@@ -57,5 +57,7 @@
     "MFA",
     "identity protection",
     "tenant isolation"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

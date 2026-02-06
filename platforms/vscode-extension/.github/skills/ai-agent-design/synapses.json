@@ -1,53 +1,54 @@
 {
   "skill": "ai-agent-design",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "Agent prompts require sophisticated prompt engineering"
     },
     {
       "target": ".github/skills/rag-architecture/SKILL.md",
       "relationship": "complements",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "Agents often use RAG for knowledge retrieval"
     },
     {
       "target": ".github/skills/mcp-development/SKILL.md",
       "relationship": "complements",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "MCP provides standardized tool interface for agents"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "relationship": "informs",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "Agent design requires model selection for different components"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "relationship": "complements",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "Tool APIs must be well-designed for agent consumption"
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "Agents must detect and handle hallucinated tool calls"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "Agents need robust error handling and recovery"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "relationship": "complements",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "Agent testing requires specialized evaluation approaches"
     }
   ],
@@ -73,5 +74,7 @@
       "prompt-engineering",
       "api-design"
     ]
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

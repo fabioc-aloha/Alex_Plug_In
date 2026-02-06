@@ -43,5 +43,7 @@
     "training",
     "transition",
     "rollout"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

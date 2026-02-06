@@ -34,5 +34,7 @@
     "create repo",
     "project template",
     "README"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

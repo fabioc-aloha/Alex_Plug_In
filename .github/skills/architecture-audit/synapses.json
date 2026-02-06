@@ -62,5 +62,7 @@
       "direction": "bidirectional",
       "description": "Verification mindset"
     }
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

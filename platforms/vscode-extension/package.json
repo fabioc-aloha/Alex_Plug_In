@@ -1,7 +1,7 @@
 {
   "name": "alex-cognitive-architecture",
   "displayName": "Alex Cognitive Architecture",
-  "description": "Transform your development environment into a sophisticated AI learning partner with meta-cognitive awareness, bootstrap learning, and autonomous neural maintenance for GitHub Copilot.",
+  "description": "The AI that grows with you. Transform GitHub Copilot into a sophisticated learning partner with meta-cognitive awareness and cross-project knowledge transfer.",
   "license": "Apache-2.0",
   "version": "4.2.12",
   "publisher": "fabioc-aloha",
@@ -538,7 +538,7 @@
         "id": "alex.cognitive",
         "fullName": "Alex Cognitive",
         "name": "alex",
-        "description": "Your cognitive learning partner with meta-cognitive awareness and bootstrap learning capabilities",
+        "description": "The AI that grows with you - your cognitive learning partner with meta-cognitive awareness",
         "isSticky": true,
         "sampleRequest": "What would you like to learn today?",
         "disambiguation": [

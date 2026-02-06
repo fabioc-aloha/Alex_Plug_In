@@ -1,46 +1,48 @@
 {
-    "skill": "svg-graphics",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/project-scaffolding/SKILL.md",
-            "type": "enables",
-            "strength": 0.9,
-            "when": "creating hero banner for README",
-            "yields": "README structure, banner placement, sizing guidelines"
-        },
-        {
-            "target": ".github/skills/image-handling/SKILL.md",
-            "type": "output-to",
-            "strength": 0.85,
-            "when": "SVG needs conversion to PNG/JPEG",
-            "yields": "sharp-cli commands, optimization flags"
-        },
-        {
-            "target": ".github/skills/ascii-art-alignment/SKILL.md",
-            "type": "complements",
-            "strength": 0.6,
-            "when": "text alignment in visual elements",
-            "yields": "Box drawing, unicode alignment"
-        },
-        {
-            "target": ".github/skills/markdown-mermaid/SKILL.md",
-            "type": "complements",
-            "strength": 0.7,
-            "when": "choosing between SVG and Mermaid",
-            "yields": "Mermaid syntax, when to use each"
-        }
-    ],
-    "triggers": [
-        "SVG",
-        "banner",
-        "logo",
-        "icon",
-        "graphic",
-        "visual",
-        "badge",
-        "hero image",
-        "viewBox",
-        "dark mode CSS"
-    ]
+  "skill": "svg-graphics",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/project-scaffolding/SKILL.md",
+      "type": "enables",
+      "strength": 0.9,
+      "when": "creating hero banner for README",
+      "yields": "README structure, banner placement, sizing guidelines"
+    },
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "output-to",
+      "strength": 0.85,
+      "when": "SVG needs conversion to PNG/JPEG",
+      "yields": "sharp-cli commands, optimization flags"
+    },
+    {
+      "target": ".github/skills/ascii-art-alignment/SKILL.md",
+      "type": "complements",
+      "strength": 0.6,
+      "when": "text alignment in visual elements",
+      "yields": "Box drawing, unicode alignment"
+    },
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "when": "choosing between SVG and Mermaid",
+      "yields": "Mermaid syntax, when to use each"
+    }
+  ],
+  "triggers": [
+    "SVG",
+    "banner",
+    "logo",
+    "icon",
+    "graphic",
+    "visual",
+    "badge",
+    "hero image",
+    "viewBox",
+    "dark mode CSS"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -1,6 +1,6 @@
 {
   "filesExcluded": 30,
-  "sourceVersion": "4.2.4",
+  "sourceVersion": "4.2.12",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",

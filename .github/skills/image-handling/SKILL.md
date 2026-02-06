@@ -1,7 +1,17 @@
 ---
 name: "Image Handling Skill"
 description: "Right format, right size, right quality."
-applyTo: "**/*.png,**/*.jpg,**/*.webp,**/*image*,**/*convert*"
+applyTo: "**/*.png,**/*.jpg,**/*.jpeg,**/*.webp,**/*.svg,**/*.ico,**/*image*,**/*banner*,**/*icon*"
+triggers:
+  - "convert svg"
+  - "convert png"
+  - "svg to png"
+  - "png to jpg"
+  - "image conversion"
+  - "resize image"
+  - "optimize image"
+  - "banner"
+  - "screenshot"
 ---
 
 # Image Handling Skill

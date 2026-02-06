@@ -102,7 +102,7 @@ All changes undergo review for:
 - [ ] `npm audit` passes
 - [ ] Dependencies updated
 - [ ] Security-focused code review completed
-- [ ] COMPLIANCE-AUDIT.md updated
+- [ ] alex_docs/audits/COMPLIANCE-AUDIT.md updated
 
 ## Incident Response
 

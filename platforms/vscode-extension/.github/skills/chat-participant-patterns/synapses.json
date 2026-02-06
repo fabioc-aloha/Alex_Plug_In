@@ -27,5 +27,7 @@
     "language model",
     "chat API",
     "streaming response"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

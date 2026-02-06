@@ -29,5 +29,7 @@
     "text-based UI mockup",
     "lines don't match up",
     "right border jagged"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

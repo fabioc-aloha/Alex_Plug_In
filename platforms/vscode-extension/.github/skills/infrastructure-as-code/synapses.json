@@ -1,35 +1,36 @@
 {
   "skill": "infrastructure-as-code",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/security-review/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "IaC needs security scanning (tfsec, checkov)"
     },
     {
       "target": ".github/skills/git-workflow/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "IaC follows GitOps patterns with PRs and reviews"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "relationship": "complements",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "IaC needs unit and integration testing"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "relationship": "complements",
-      "strength": "weak",
+      "strength": 0.3,
       "context": "IaC provisions infrastructure for APIs"
     },
     {
       "target": ".github/skills/mcp-development/SKILL.md",
       "relationship": "complements",
-      "strength": "weak",
+      "strength": 0.3,
       "context": "MCP servers may need cloud infrastructure"
     }
   ],
@@ -53,5 +54,7 @@
     "prerequisites": [
       "git-workflow"
     ]
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -27,5 +27,7 @@
     "post-mortem",
     "why did this happen",
     "how do we prevent"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

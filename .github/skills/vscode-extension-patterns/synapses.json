@@ -30,5 +30,7 @@
     "tree view",
     "activation",
     "contribution point"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -55,5 +55,7 @@
     "chat completion",
     "AI agent",
     "copilot"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

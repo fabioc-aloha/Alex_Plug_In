@@ -29,5 +29,7 @@
     "P2",
     "on-call",
     "post-mortem"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

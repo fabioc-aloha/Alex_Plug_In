@@ -27,5 +27,7 @@
     "new domain",
     "unfamiliar with",
     "explain"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

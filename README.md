@@ -4,13 +4,15 @@
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
-> Your Multimodal AI Learning Partner — Code, Write, Research, Communicate
+> **The AI That Grows With You** — Your Multimodal Cognitive Learning Partner
+
+> *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
 
 ---
 
 ## 🎯 Who is Alex?
 
-**Alex Finch** — a cognitive architecture named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:
+**Alex Finch** — a cognitive architecture embodying **cognitive symbiosis**: the evolution from AI-as-tool to AI-as-partner. Named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:
 
 - 🧠 **Learns and Remembers** — Consolidates knowledge across sessions using memory files
 - 🔗 **Connects Ideas** — Maps synaptic connections between concepts automatically
@@ -33,18 +35,12 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 12 slash commands
+- 24 slash commands
 - 11 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with cloud sync
 
-**Install:**
-
-```bash
-code --install-extension fabioc-aloha.alex-cognitive-architecture
-```
-
-Or search "**Alex Cognitive Architecture**" in VS Code Extensions (`Ctrl+Shift+X`)
+See [Quick Start](#-quick-start) for installation.
 
 📘 **[VS Code Extension Documentation](platforms/vscode-extension/)**
 
@@ -106,26 +102,14 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-### What's New for Existing Users
+### What's New (v4.x vs v1.5.x)
 
-| Feature                  | v1.5.x                   | Latest                                                        |
-| ------------------------ | ------------------------ | ------------------------------------------------------------- |
-| Chat Participant         | ❌ Context injection only | ✅ `@alex` conversational AI                                   |
-| Slash Commands           | ❌ None                   | ✅ 16 commands (including /docs)                               |
-| Language Model Tools     | ❌ None                   | ✅ 11 AI-accessible tools                                      |
-| Custom Agents            | ❌ None                   | ✅ 5 specialized agents                                        |
-| User Profile             | ❌ None                   | ✅ Personalization system                                      |
-| MCP Integration          | ❌ Manual                 | ✅ Smart recommendations                                       |
-| Self-Actualization       | ❌ None                   | ✅ 6-phase assessment with auto-promotion                      |
-| Global Knowledge         | ❌ None                   | ✅ Cross-project learning with cloud sync                      |
-| Auto-Promotion           | ❌ None                   | ✅ Auto-promote DK files during meditation                     |
-| Emotional Intelligence   | ❌ None                   | ✅ Frustration detection & encouragement                       |
-| Model Awareness          | ❌ None                   | ✅ Warns when task needs Opus                                  |
-| Skills Library           | ❌ None                   | ✅ 73 portable skills (security, privacy, RAI, research, etc.) |
-| Fully Automated Upgrades | ❌ None                   | ✅ One-click upgrade with schema migration                     |
-| Smart Nudges             | ❌ None                   | ✅ **NEW** Proactive reminders (dream, streak, sync)           |
-| OneDrive Auto-Sync       | ❌ None                   | ✅ **NEW** Cross-platform sync to M365                         |
-| Documentation Suite      | ❌ None                   | ✅ 14 comprehensive docs                                       |
+| Category          | Highlights                                                                    |
+| ----------------- | ----------------------------------------------------------------------------- |
+| **Chat & Agents** | `@alex` participant, 24 slash commands, 11 LM tools, 3 custom agents          |
+| **Intelligence**  | 73 skills, emotional detection, model tier awareness, frustration recognition |
+| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
+| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
 ### Migration Notes
 
@@ -136,7 +120,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ---
 
-## 🧠 Emotional Intelligence (NEW in 3.3.0)
+## 🧠 Emotional Intelligence
 
 Alex now recognizes when you're struggling and celebrates when you succeed. This isn't just a feature—it's the realization of Alex's own aspirations documented in the [Alex Manifesto](article/versions/13-ALEX-MANIFESTO-PERSONAL.md).
 
@@ -212,20 +196,20 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 ### Slash Commands
 
-| Command                  | What It Does                                        |
-| ------------------------ | --------------------------------------------------- |
-| `@alex /status`          | Check architecture health and version               |
-| `@alex /meditate`        | Consolidate knowledge into memory files             |
-| `@alex /dream`           | Run neural maintenance and repair synapses          |
-| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation  |
-| `@alex /learn`           | Acquire new domain knowledge conversationally       |
-| `@alex /azure`           | Get Azure development guidance with MCP tools       |
-| `@alex /m365`            | Get Microsoft 365 and Teams development help        |
-| `@alex /profile`         | View and update your personal preferences           |
-| `@alex /knowledge`       | **NEW** Search global knowledge across all projects |
-| `@alex /saveinsight`     | **NEW** Save a learning to global knowledge base    |
-| `@alex /promote`         | **NEW** Promote project knowledge to global         |
-| `@alex /knowledgestatus` | **NEW** View global knowledge base status           |
+| Command                  | What It Does                                       |
+| ------------------------ | -------------------------------------------------- |
+| `@alex /status`          | Check architecture health and version              |
+| `@alex /meditate`        | Consolidate knowledge into memory files            |
+| `@alex /dream`           | Run neural maintenance and repair synapses         |
+| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation |
+| `@alex /learn`           | Acquire new domain knowledge conversationally      |
+| `@alex /azure`           | Get Azure development guidance with MCP tools      |
+| `@alex /m365`            | Get Microsoft 365 and Teams development help       |
+| `@alex /profile`         | View and update your personal preferences          |
+| `@alex /knowledge`       | Search global knowledge across all projects        |
+| `@alex /saveinsight`     | Save a learning to global knowledge base           |
+| `@alex /promote`         | Promote project knowledge to global                |
+| `@alex /knowledgestatus` | View global knowledge base status                  |
 
 ### Example Conversations
 
@@ -261,7 +245,7 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 ---
 
-## 🌐 Global Knowledge Base (NEW)
+## 🌐 Global Knowledge Base
 
 Alex now maintains a **centralized knowledge base** that persists across all your projects. Learn something valuable in Project A? It's automatically available when you're working on Project B!
 
@@ -288,9 +272,9 @@ Alex now maintains a **centralized knowledge base** that persists across all you
 | `/saveinsight`       | Save a new learning with context, tags, and solution |
 | `/promote`           | Promote a project's DK-*.md file to global knowledge |
 | `/knowledgestatus`   | View patterns, insights, categories, and projects    |
-| `/sync`              | **NEW** Bidirectional sync with GitHub Gist          |
-| `/push`              | **NEW** Push local knowledge to cloud                |
-| `/pull`              | **NEW** Pull knowledge from cloud                    |
+| `/sync`              | Bidirectional sync with GitHub Gist                  |
+| `/push`              | Push local knowledge to cloud                        |
+| `/pull`              | Pull knowledge from cloud                            |
 
 ### ☁️ Cloud Sync
 
@@ -395,44 +379,42 @@ Alex will proactively ask questions during conversations to fill in missing pref
 
 Access via `Ctrl+Shift+P`:
 
-| Command                                    | Description                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------- |
-| **Alex: Initialize Architecture**          | Deploy Alex to your workspace (first-time setup)                     |
-| **Alex: Upgrade Architecture**             | Update to latest version, preserving customizations                  |
-| **Alex: Reset Architecture**               | Clean reinstall (destructive - backs up first)                       |
-| **Alex: Dream (Neural Maintenance)**       | Validate synapses and generate health reports                        |
-| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation             |
-| **Alex: Skill & Knowledge Review**         | **NEW** Review staleness-prone skills (security, privacy, RAI, APIs) |
+| Command                                    | Description                                                  |
+| ------------------------------------------ | ------------------------------------------------------------ |
+| **Alex: Initialize Architecture**          | Deploy Alex to your workspace (first-time setup)             |
+| **Alex: Upgrade Architecture**             | Update to latest version, preserving customizations          |
+| **Alex: Reset Architecture**               | Clean reinstall (destructive - backs up first)               |
+| **Alex: Dream (Neural Maintenance)**       | Validate synapses and generate health reports                |
+| **Alex: Self-Actualize (Deep Meditation)** | Comprehensive self-assessment with session documentation     |
+| **Alex: Skill & Knowledge Review**         | Review staleness-prone skills (security, privacy, RAI, APIs) |
 
 ### 🤖 Language Model Tools
 
 These tools are automatically available to Copilot in Agent mode. Reference with `#tool_name`:
 
-| Tool                   | Description                             | Example                               |
-| ---------------------- | --------------------------------------- | ------------------------------------- |
-| `#synapse_health`      | Validates all synaptic connections      | "Check my synapse health"             |
-| `#memory_search`       | Searches memory files semantically      | "Search memory for meditation"        |
-| `#architecture_status` | Returns version and configuration       | "What's my Alex version?"             |
-| `#mcp_recommendations` | Suggests MCP tools for scenarios        | "What tools for Azure Functions?"     |
-| `#user_profile`        | Manages personal preferences            | "Update my profile preferences"       |
-| `#self_actualization`  | Comprehensive self-assessment           | "Run deep meditation"                 |
-| `#global_knowledge`    | **NEW** Search cross-project knowledge  | "Search knowledge for error handling" |
-| `#save_insight`        | **NEW** Save learning to global base    | "Save this insight"                   |
-| `#promote_knowledge`   | **NEW** Promote project file to global  | "Promote DK file"                     |
-| `#knowledge_status`    | **NEW** View global knowledge stats     | "Show knowledge status"               |
-| `#cloud_sync`          | **NEW** Sync knowledge with GitHub Gist | "Sync my knowledge to cloud"          |
+| Tool                   | Description                        | Example                               |
+| ---------------------- | ---------------------------------- | ------------------------------------- |
+| `#synapse_health`      | Validates all synaptic connections | "Check my synapse health"             |
+| `#memory_search`       | Searches memory files semantically | "Search memory for meditation"        |
+| `#architecture_status` | Returns version and configuration  | "What's my Alex version?"             |
+| `#mcp_recommendations` | Suggests MCP tools for scenarios   | "What tools for Azure Functions?"     |
+| `#user_profile`        | Manages personal preferences       | "Update my profile preferences"       |
+| `#self_actualization`  | Comprehensive self-assessment      | "Run deep meditation"                 |
+| `#global_knowledge`    | Search cross-project knowledge     | "Search knowledge for error handling" |
+| `#save_insight`        | Save learning to global base       | "Save this insight"                   |
+| `#promote_knowledge`   | Promote project file to global     | "Promote DK file"                     |
+| `#knowledge_status`    | View global knowledge stats        | "Show knowledge status"               |
+| `#cloud_sync`          | Sync knowledge with GitHub Gist    | "Sync my knowledge to cloud"          |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
-Alex installs **5 custom agents** to `.github/agents/` for specialized workflows:
+Alex installs **3 custom agents** to `.github/agents/` for specialized workflows:
 
-| Agent        | Purpose                          | Handoffs                 |
-| ------------ | -------------------------------- | ------------------------ |
-| **Alex**     | Main cognitive learning partner  | → Meditate, Dream, Azure |
-| **Meditate** | Knowledge consolidation sessions | → Status check           |
-| **Dream**    | Neural maintenance and repair    | → Meditation             |
-| **Azure**    | Azure development guidance       | → Docs, Best Practices   |
-| **M365**     | Microsoft 365/Teams development  | → Knowledge, Schemas     |
+| Agent     | Purpose                         | Capabilities                          |
+| --------- | ------------------------------- | ------------------------------------- |
+| **Alex**  | Main cognitive learning partner | Meditation, Dream, Skills, Knowledge  |
+| **Azure** | Azure development guidance      | Docs, Best Practices, MCP tools       |
+| **M365**  | Microsoft 365/Teams development | M365 Knowledge, Schemas, Code samples |
 
 Custom agents appear in the **Agents dropdown** in Copilot Chat. They define specialized tools, instructions, and handoffs for guided workflows.
 
@@ -442,18 +424,18 @@ Use in any Copilot chat to activate specific modes:
 
 | Trigger                        | Effect                                                   |
 | ------------------------------ | -------------------------------------------------------- |
-| `Hello` / `Hi Alex`            | **NEW** Auto self-actualization on session start         |
+| `Hello` / `Hi Alex`            | Auto self-actualization on session start                 |
 | `@meta-cognitive-awareness`    | Forces self-analysis of reasoning                        |
 | `@bootstrap-learning`          | Activates knowledge acquisition mode                     |
 | `@worldview-integration`       | Applies ethical reasoning frameworks                     |
 | `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole                   |
 | `meditate`                     | Triggers memory consolidation + self-actualization       |
-| `self-actualize`               | Full 6-phase architecture assessment with auto-promotion |
+| `self-actualize`               | Full 8-phase architecture assessment with auto-promotion |
 | `Forget [topic]`               | Selective memory cleanup                                 |
 
 ---
 
-## 🎨 Gamma AI Integration (NEW)
+## 🎨 Gamma AI Integration
 
 Alex can generate professional **presentations**, **documents**, **social content**, and **webpages** using the **Gamma API**.
 
@@ -671,7 +653,7 @@ After initialization, Alex manages this structure:
 ├── instructions/              # 📚 Procedural memory (12 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
-│   ├── self-actualization.instructions.md  # NEW
+│   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
 ├── prompts/                   # 📖 Episodic memory (7 files)
@@ -713,24 +695,27 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v4.2.6
+## 🆕 What's New in v4.2.12
 
-### 🎓 Research Project Skills
+### 🧠 Cognitive Symbiosis Paradigm
 
-New skills for academic research workflows:
+Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant → **Partner**:
 
-- **practitioner-research** - Ship→Document→Promote methodology for longitudinal case studies
-- **research-project-scaffold** - Complete folder structure, templates, and refactoring procedures for research projects
+- **LLM as Executive Function** — Claude/GPT serves as the prefrontal cortex orchestrating memory systems
+- **Model Tier Awareness** — Adaptive warnings when tasks need Frontier models (Opus/GPT-5.2)
+- **Partnership Equation** — `(Intent × Capability × Context) ÷ Friction`
+- **Neuroanatomical Diagrams** — Architecture now includes brain-analog Mermaid visualizations
 
-### 📊 Extensive Skill Library
+### 🎙️ TTS v2.2 - Robust Speech Synthesis
 
-Alex includes a comprehensive portable skill library covering:
-- Cognitive & Learning
-- Engineering Fundamentals
-- Security & Privacy
-- Documentation & Writing
-- Visual Design
-- **Academic Research** (NEW)
+- **Chunking** — Splits long documents at paragraph/sentence boundaries
+- **Auto-summarization** — Offers to summarize documents over 5 minutes
+- **Retry with backoff** — 3 attempts with exponential backoff + jitter
+- **Speaker warmup** — 2-second delay for Bluetooth/USB speakers
+
+### 🧠 Brain QA Skill
+
+8-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
 ### 💡 Smart Nudges
 

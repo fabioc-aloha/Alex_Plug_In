@@ -129,7 +129,7 @@ Or sideload manually:
 
 ---
 
-## � Future: OneDrive Native Agents (February 2026)
+## 🔮 Future: OneDrive Native Agents (February 2026)
 
 Microsoft has launched **OneDrive Agents** - a game-changing feature that creates a new integration path for Alex.
 
@@ -311,7 +311,7 @@ Deploy Alex as a Q&A agent in your Teams Community. Community Agents are grounde
 
 ---
 
-## �📚 Documentation
+## 📚 Documentation
 
 | Document                                               | Description                       |
 | ------------------------------------------------------ | --------------------------------- |
@@ -334,6 +334,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v4.2.6 🌅 Full M365 Integration + Deployment Channels Ready
+**Alex M365** - v4.2.12 🧠 Cognitive Symbiosis + Full M365 Integration
 
 © 2026 CorreaX • AI That Learns How to Learn

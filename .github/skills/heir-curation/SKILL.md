@@ -211,6 +211,127 @@ The following personal references were cleaned from heir payload (2026-01-30):
 | `technical-debt-tracking.instructions.md` | `@fabioc` → `@developer` |
 | `release-management.instructions.md` | `fabioc-aloha.alex-cognitive-architecture` → `<publisher>.<extension-name>` |
 
+## Master → Heir Sync Process
+
+> **Critical**: This process must be run before every release to prevent drift.
+
+### Why Sync is Needed
+
+Master Alex and Heir exist in two locations:
+- **Master**: `.github/` (root)
+- **Heir**: `platforms/vscode-extension/.github/`
+
+When skills are updated in Master, they must be synced to Heir. Without sync:
+- Schema updates don't propagate
+- Synapse fixes don't propagate
+- Heirs ship with stale knowledge
+
+### Sync Script
+
+Run this **before every release**:
+
+```powershell
+# Master → Heir Skill Sync Script
+# Location: Run from Alex_Plug_In root
+
+$masterRoot = ".github"
+$heirRoot = "platforms/vscode-extension/.github"
+
+# 1. SYNC SKILLS (excluding Master-only)
+$masterOnlySkills = @("heir-curation", "master-alex-audit")
+
+Get-ChildItem "$masterRoot\skills" -Directory | ForEach-Object {
+    $skill = $_.Name
+    if ($skill -notin $masterOnlySkills) {
+        $src = $_.FullName
+        $dst = "$heirRoot\skills\$skill"
+        Copy-Item $src $dst -Recurse -Force
+        Write-Host "Synced skill: $skill"
+    } else {
+        Write-Host "Skipped Master-only: $skill"
+    }
+}
+
+# 2. SYNC INSTRUCTIONS
+Copy-Item "$masterRoot\instructions\*" "$heirRoot\instructions\" -Force
+Write-Host "Synced instructions"
+
+# 3. SYNC PROMPTS
+Copy-Item "$masterRoot\prompts\*" "$heirRoot\prompts\" -Force
+Write-Host "Synced prompts"
+
+# 4. SYNC SCHEMA
+Copy-Item "$masterRoot\skills\SYNAPSE-SCHEMA.json" "$heirRoot\skills\" -Force
+Write-Host "Synced schema"
+
+# 5. VALIDATE (Brain QA on heir)
+Write-Host "`n--- Running Brain QA on Heir ---"
+$uniqueBroken = @{}
+Get-ChildItem "$heirRoot" -Recurse -Filter "synapses.json" | ForEach-Object {
+    $json = Get-Content $_.FullName -Raw | ConvertFrom-Json
+    foreach ($conn in $json.connections) {
+        $target = $conn.target
+        if ($target -match "^\.github/|^alex_docs/") {
+            $fullPath = Join-Path "." $target
+        } else {
+            $fullPath = Join-Path $_.DirectoryName $target
+        }
+        if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true }
+    }
+}
+
+if ($uniqueBroken.Count -eq 0) {
+    Write-Host "✅ Brain QA: All heir synapses valid"
+} else {
+    Write-Host "❌ Broken synapses in heir:"
+    $uniqueBroken.Keys | Sort-Object
+    throw "Fix broken synapses before release"
+}
+
+Write-Host "`n✅ Master → Heir sync complete"
+```
+
+### Quick Sync Commands
+
+For **single skill** sync:
+```powershell
+$skill = "text-to-speech"
+Copy-Item ".github\skills\$skill" "platforms\vscode-extension\.github\skills\" -Recurse -Force
+```
+
+For **all synapses.json** sync:
+```powershell
+Get-ChildItem ".github\skills" -Directory | ForEach-Object {
+    $skill = $_.Name
+    $src = Join-Path $_.FullName "synapses.json"
+    $dst = "platforms\vscode-extension\.github\skills\$skill\synapses.json"
+    if ((Test-Path $src) -and (Test-Path $dst)) {
+        Copy-Item $src $dst -Force
+        Write-Host "Synced: $skill"
+    }
+}
+```
+
+### Sync Checklist
+
+Run BEFORE every release:
+
+- [ ] Run full sync script
+- [ ] Verify no Master-only skills leaked to heir
+- [ ] Run Brain QA on heir
+- [ ] Test `Alex: Initialize` in sandbox
+- [ ] Test `Alex: Dream` in sandbox
+
+### Future: Role Adaptation (Roadmap)
+
+In future versions, sync will:
+1. Adapt skills to heir-specific roles
+2. Remove Master-specific synapses
+3. Auto-run Brain QA after sync
+4. Block release if validation fails
+
+**Status**: Roadmap item 2c (per Architecture Assessment 2026-02-06)
+
 ## Synapses
 
 - [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script executes curation rules"

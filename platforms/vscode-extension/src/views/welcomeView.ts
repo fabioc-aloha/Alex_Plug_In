@@ -496,6 +496,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-weight: 600;
             letter-spacing: -0.2px;
         }
+        .header-tagline {
+            font-size: 10px;
+            color: var(--vscode-textLink-foreground);
+            font-style: italic;
+            letter-spacing: 0.3px;
+            opacity: 0.9;
+        }
         .header-workspace {
             font-size: 11px;
             color: var(--vscode-descriptionForeground);
@@ -911,6 +918,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <img src="${logoUri}" alt="Alex" class="header-icon" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
+                <span class="header-tagline">The AI that grows with you</span>
                 <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
             </div>
             <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>

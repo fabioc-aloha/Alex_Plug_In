@@ -1,55 +1,57 @@
 {
-    "skill": "privacy-responsible-ai",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/microsoft-sfi/SKILL.md",
-            "type": "complements",
-            "strength": 0.7,
-            "reason": "Privacy is part of security"
-        },
-        {
-            "target": ".github/skills/code-review/SKILL.md",
-            "type": "informs",
-            "strength": 0.65,
-            "reason": "Privacy checks in review"
-        },
-        {
-            "target": ".github/skills/incident-response/SKILL.md",
-            "type": "extends",
-            "strength": 0.8,
-            "reason": "Privacy incidents need response"
-        },
-        {
-            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
-            "type": "extends",
-            "strength": 0.9,
-            "bidirectional": true,
-            "reason": "Detailed regulatory compliance for PII"
-        },
-        {
-            "target": ".github/skills/appropriate-reliance/SKILL.md",
-            "type": "complements",
-            "strength": 0.75,
-            "bidirectional": true,
-            "reason": "Human-AI trust calibration is core to responsible AI"
-        }
-    ],
-    "triggers": [
-        "privacy",
-        "PII",
-        "GDPR",
-        "consent",
-        "data protection",
-        "responsible AI",
-        "bias",
-        "fairness",
-        "ethical AI",
-        "RAI",
-        "transparency",
-        "accountability",
-        "model card",
-        "HAX",
-        "human oversight"
-    ]
+  "skill": "privacy-responsible-ai",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/microsoft-sfi/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "reason": "Privacy is part of security"
+    },
+    {
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "reason": "Privacy checks in review"
+    },
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "extends",
+      "strength": 0.8,
+      "reason": "Privacy incidents need response"
+    },
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "extends",
+      "strength": 0.9,
+      "bidirectional": true,
+      "reason": "Detailed regulatory compliance for PII"
+    },
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "type": "complements",
+      "strength": 0.75,
+      "bidirectional": true,
+      "reason": "Human-AI trust calibration is core to responsible AI"
+    }
+  ],
+  "triggers": [
+    "privacy",
+    "PII",
+    "GDPR",
+    "consent",
+    "data protection",
+    "responsible AI",
+    "bias",
+    "fairness",
+    "ethical AI",
+    "RAI",
+    "transparency",
+    "accountability",
+    "model card",
+    "HAX",
+    "human oversight"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

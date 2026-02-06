@@ -31,5 +31,7 @@
     "unit test",
     "integration test",
     "E2E"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -1,44 +1,45 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "skillId": "socratic-questioning",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "Guide thinking, help users discover answers themselves",
-  "synapses": [
+  "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "Implements",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Applies learning psychology principles"
     },
     {
       "target": ".github/skills/rubber-duck-debugging/SKILL.md",
       "type": "Relates",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Both are thinking partnership approaches"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "Enhances",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Socratic method enhances learning acquisition"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Must balance questioning with cognitive load"
     },
     {
       "target": ".github/skills/meditation-facilitation/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Both guide self-discovery"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "Enhances",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Socratic questioning helps find root causes"
     }
   ],

@@ -1,49 +1,64 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "sourceFile": "awareness/SKILL.md",
-  "description": "Proactive detection, self-correction, and epistemic vigilance",
+  "skillId": "awareness",
+  "version": "1.1.0",
+  "lastUpdated": "2026-02-06",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "strength": "Critical",
-      "relationship": "Extends",
-      "direction": "Forward",
-      "activation": "Foundation for confidence calibration"
+      "strength": 1.0,
+      "type": "extends",
+      "when": "Calibrating confidence levels",
+      "yields": "Confidence frameworks, user trust patterns",
+      "bidirectional": false
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "strength": "Critical",
-      "relationship": "Complements",
-      "direction": "Bidirectional",
-      "activation": "Prevention and detection work together"
+      "strength": 1.0,
+      "type": "complements",
+      "when": "Detecting or preventing hallucinations",
+      "yields": "Detection heuristics, prevention strategies",
+      "bidirectional": true
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "strength": "High",
-      "relationship": "Enables",
-      "direction": "Forward",
-      "activation": "Learning from corrections"
+      "strength": 0.9,
+      "type": "enables",
+      "when": "Learning from corrections",
+      "yields": "Error integration patterns, learning protocols",
+      "bidirectional": false
     },
     {
       "target": ".github/skills/self-actualization/SKILL.md",
-      "strength": "High",
-      "relationship": "Informs",
-      "direction": "Forward",
-      "activation": "Self-assessment includes awareness metrics"
+      "strength": 0.9,
+      "type": "informs",
+      "when": "Running self-assessment",
+      "yields": "Awareness metrics, calibration data",
+      "bidirectional": false
     },
     {
       "target": ".github/instructions/alex-core.instructions.md",
-      "strength": "Critical",
-      "relationship": "Implements",
-      "direction": "Bidirectional",
-      "activation": "Core graceful correction protocols"
+      "strength": 1.0,
+      "type": "implements",
+      "when": "Executing graceful correction",
+      "yields": "Correction protocols, epistemic humility patterns",
+      "bidirectional": true
     },
     {
       "target": ".github/instructions/protocol-triggers.instructions.md",
-      "strength": "High",
-      "relationship": "Triggers",
-      "direction": "Backward",
-      "activation": "Detection heuristics activation"
+      "strength": 0.9,
+      "type": "triggers",
+      "when": "Detection heuristics fire",
+      "yields": "Protocol activation rules",
+      "bidirectional": false
     }
+  ],
+  "activationContexts": [
+    "confidence calibration",
+    "uncertainty",
+    "self-correction",
+    "epistemic vigilance",
+    "awareness check"
   ]
 }

@@ -28,5 +28,7 @@
     "slow down",
     "explain simply",
     "break it down"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

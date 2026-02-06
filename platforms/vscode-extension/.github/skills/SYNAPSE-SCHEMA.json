@@ -1,13 +1,20 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "alex-synapse-schema",
-    "title": "Alex Skill Synapse Schema",
-    "description": "Schema for synapses.json files in Alex skills",
+    "title": "Alex Skill Synapse Schema v2.1",
+    "description": "Schema for synapses.json files in Alex skills. Schema version enables migration tooling.",
+    "$comment": "Schema version 2.1.0 - February 2026. Added: inheritance field required. Breaking changes from 2.0: numeric strengths, connections array, when/yields context.",
     "type": "object",
     "properties": {
         "$schema": {
             "type": "string",
             "description": "Reference to this schema file"
+        },
+        "schemaVersion": {
+            "type": "string",
+            "description": "Schema version this file was written against (enables migration)",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "default": "2.0.0"
         },
         "skill": {
             "type": "string",
@@ -155,12 +162,14 @@
     "anyOf": [
         {
             "required": [
-                "skill"
+                "skill",
+                "inheritance"
             ]
         },
         {
             "required": [
-                "skillId"
+                "skillId",
+                "inheritance"
             ]
         }
     ]

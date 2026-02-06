@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture — Compliance Audit
 
-> **Version**: 4.2.9
+> **Version**: 4.2.12
 > **Last Audit**: 2026-02-05
 > **Auditor**: Alex (Self-Assessment) + Manual Review
 > **Status**: ✅ Compliant (with recommendations)
@@ -358,7 +358,7 @@ Alex self-monitors for phrases indicating overconfidence:
 
 ## ✅ Certification
 
-This document certifies that Alex Cognitive Architecture v4.2.9 has been reviewed for compliance with Security, SFI, Privacy, Accessibility, and RAI requirements.
+This document certifies that Alex Cognitive Architecture v4.2.12 has been reviewed for compliance with Security, SFI, Privacy, Accessibility, and RAI requirements.
 
 **Reviewed By**: Alex (Self-Assessment)
 **Date**: 2026-02-05

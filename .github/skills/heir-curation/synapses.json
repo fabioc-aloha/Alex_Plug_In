@@ -33,5 +33,7 @@
     "platform",
     "deploy heir",
     "curate"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

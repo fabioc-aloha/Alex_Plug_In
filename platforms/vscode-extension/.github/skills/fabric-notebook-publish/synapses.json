@@ -1,39 +1,40 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "skillId": "fabric-notebook-publish",
-  "version": "2.0.0",
-  "lastUpdated": "2026-02-05",
+  "version": "2.1.0",
+  "lastUpdated": "2026-02-06",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/git-workflow/SKILL.md",
-      "strength": "high",
-      "relationship": "enables",
-      "direction": "forward",
-      "context": "Git worktree and remote management"
+      "strength": 0.9,
+      "type": "enables",
+      "when": "Setting up Git remote or worktree for Fabric sync",
+      "yields": "Worktree creation, remote management commands"
     },
     {
       "target": ".github/skills/microsoft-fabric/SKILL.md",
-      "strength": "high",
-      "relationship": "integrates",
-      "direction": "forward",
-      "context": "Fabric workspace and API knowledge"
+      "strength": 0.9,
+      "type": "integrates",
+      "when": "Working with Fabric workspace APIs or configuration",
+      "yields": "Workspace patterns, API endpoints, authentication"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "strength": "medium",
-      "relationship": "enables",
-      "direction": "forward",
-      "context": "REST API token handling and verification"
+      "strength": 0.7,
+      "type": "enables",
+      "when": "Handling Fabric REST API tokens or verification",
+      "yields": "Token refresh patterns, error handling"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "strength": "medium",
-      "relationship": "uses",
-      "direction": "forward",
-      "context": "Diagrams in notebook documentation"
+      "strength": 0.7,
+      "type": "uses",
+      "when": "Adding diagrams to notebook documentation cells",
+      "yields": "Mermaid syntax, diagram best practices"
     }
   ],
-  "activationPatterns": [
+  "activationContexts": [
     "push to fabric",
     "sync notebooks",
     "deploy notebooks",

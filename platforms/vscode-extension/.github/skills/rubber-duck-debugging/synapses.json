@@ -1,44 +1,45 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "skillId": "rubber-duck-debugging",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "Be a thinking partner, help users debug through explanation",
-  "synapses": [
+  "connections": [
     {
       "target": ".github/skills/socratic-questioning/SKILL.md",
       "type": "Relates",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Both are thinking partnership approaches"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "Enhances",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Rubber duck enhances systematic debugging"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "Supports",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Talking through helps find root cause"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Verbalizing reduces cognitive load"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "Implements",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Learning by explaining is effective"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "type": "Supports",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Helps recover from error states"
     }
   ],

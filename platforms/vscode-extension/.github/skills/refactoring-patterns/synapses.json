@@ -29,5 +29,7 @@
     "move",
     "code smell",
     "clean up"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

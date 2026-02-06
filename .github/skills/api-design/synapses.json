@@ -1,38 +1,39 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "skillId": "api-design",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "RESTful best practices, contract-first design, versioning",
-  "synapses": [
+  "connections": [
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "Requires",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "APIs need security review"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "Relates",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "APIs need contract testing"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "API changes need careful review"
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "API design is architectural decision"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "Relates",
-      "strength": "weak",
+      "strength": 0.3,
       "description": "Extension APIs follow similar patterns"
     }
   ],

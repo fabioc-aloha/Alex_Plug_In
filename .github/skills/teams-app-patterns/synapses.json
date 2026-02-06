@@ -22,5 +22,7 @@
     "message extension",
     "Teams tab",
     "Teams toolkit"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

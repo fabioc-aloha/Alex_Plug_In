@@ -169,8 +169,8 @@
   </text>
   
   <!-- Tagline -->
-  <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#94a3b8" letter-spacing="6">
-    CODE. WRITE. RESEARCH. COMMUNICATE.
+  <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="500" fill="#94a3b8" letter-spacing="4">
+    THE AI THAT GROWS WITH YOU
   </text>
   
   <!-- VS Code badge -->

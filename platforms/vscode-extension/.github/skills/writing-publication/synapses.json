@@ -37,5 +37,7 @@
     "editing",
     "proofread",
     "manuscript"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

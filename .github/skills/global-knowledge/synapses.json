@@ -28,5 +28,7 @@
     "cross-project",
     "global",
     "reusable"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

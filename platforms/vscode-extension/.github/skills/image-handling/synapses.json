@@ -1,39 +1,41 @@
 {
-    "skill": "image-handling",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/svg-graphics/SKILL.md",
-            "type": "input-source",
-            "strength": 0.85,
-            "when": "converting FROM svg format",
-            "yields": "SVG creation patterns, viewBox, dark mode CSS",
-            "bidirectional": true
-        },
-        {
-            "target": ".github/skills/project-scaffolding/SKILL.md",
-            "type": "supports",
-            "strength": 0.75,
-            "when": "creating project assets (icons, banners)",
-            "yields": "README structure, hero banner placement"
-        },
-        {
-            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-            "type": "supports",
-            "strength": 0.7,
-            "when": "creating extension icons",
-            "yields": "Icon size requirements, package.json icon field"
-        }
-    ],
-    "triggers": [
-        "PNG",
-        "JPEG",
-        "WebP",
-        "convert image",
-        "resize",
-        "optimize",
-        "favicon",
-        "icon sizes",
-        "sharp-cli"
-    ]
+  "skill": "image-handling",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/svg-graphics/SKILL.md",
+      "type": "input-source",
+      "strength": 0.85,
+      "when": "converting FROM svg format",
+      "yields": "SVG creation patterns, viewBox, dark mode CSS",
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/project-scaffolding/SKILL.md",
+      "type": "supports",
+      "strength": 0.75,
+      "when": "creating project assets (icons, banners)",
+      "yields": "README structure, hero banner placement"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "when": "creating extension icons",
+      "yields": "Icon size requirements, package.json icon field"
+    }
+  ],
+  "triggers": [
+    "PNG",
+    "JPEG",
+    "WebP",
+    "convert image",
+    "resize",
+    "optimize",
+    "favicon",
+    "icon sizes",
+    "sharp-cli"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

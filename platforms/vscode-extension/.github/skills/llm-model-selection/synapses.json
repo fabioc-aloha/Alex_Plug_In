@@ -50,5 +50,7 @@
     "prompt engineering",
     "wrong model",
     "model warning"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

@@ -28,5 +28,7 @@
     "circuit breaker",
     "graceful degradation",
     "error handling"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

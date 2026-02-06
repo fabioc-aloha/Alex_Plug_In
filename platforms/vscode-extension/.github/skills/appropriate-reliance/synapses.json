@@ -46,5 +46,7 @@
     "over-reliance",
     "under-reliance",
     "appropriate reliance"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

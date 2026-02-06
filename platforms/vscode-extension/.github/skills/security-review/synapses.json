@@ -1,44 +1,45 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "skillId": "security-review",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "Security-focused code analysis, OWASP patterns, threat modeling",
-  "synapses": [
+  "connections": [
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "Triggers",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Vulnerability found triggers incident response"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "Enhances",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Security lens enhances standard code review"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Security incidents need root cause analysis"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Security bugs need systematic debugging"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "Relates",
-      "strength": "moderate",
+      "strength": 0.7,
       "description": "Security testing is specialized testing"
     },
     {
       "target": ".github/skills/microsoft-sfi/SKILL.md",
       "type": "Implements",
-      "strength": "strong",
+      "strength": 0.9,
       "description": "Implements Microsoft Secure Future Initiative patterns"
     }
   ],

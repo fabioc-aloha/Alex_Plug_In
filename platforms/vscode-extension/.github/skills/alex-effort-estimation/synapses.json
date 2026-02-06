@@ -1,37 +1,51 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
     "skillId": "alex-effort-estimation",
-    "version": "1.0.0",
-    "lastValidated": "2026-02-04",
-    "synapses": [
+    "version": "1.1.0",
+    "lastUpdated": "2026-02-06",
+    "inheritance": "inheritable",
+    "connections": [
         {
             "target": ".github/skills/bootstrap-learning/SKILL.md",
-            "type": "Enhances",
-            "strength": "Strong",
-            "context": "Learning acceleration estimates"
+            "type": "enhances",
+            "strength": 0.85,
+            "when": "Estimating learning timelines",
+            "yields": "Learning acceleration patterns"
         },
         {
             "target": ".github/skills/project-management/SKILL.md",
-            "type": "Enhances",
-            "strength": "Strong",
-            "context": "Task planning integration"
+            "type": "enhances",
+            "strength": 0.85,
+            "when": "Planning task timelines",
+            "yields": "Project breakdown patterns"
         },
         {
             "target": ".github/skills/release-process/SKILL.md",
-            "type": "Enhances",
-            "strength": "Medium",
-            "context": "Release effort estimation"
+            "type": "enhances",
+            "strength": 0.7,
+            "when": "Estimating release effort",
+            "yields": "Release workflow complexity factors"
         },
         {
             "target": ".github/skills/testing-strategies/SKILL.md",
-            "type": "References",
-            "strength": "Medium",
-            "context": "Test effort as real-time bottleneck"
+            "type": "references",
+            "strength": 0.7,
+            "when": "Factoring test effort into estimates",
+            "yields": "Test coverage effort patterns"
         },
         {
             "target": "ROADMAP-UNIFIED.md",
-            "type": "Applies",
-            "strength": "Strong",
-            "context": "Convert roadmap estimates to Alex effort"
+            "type": "applies",
+            "strength": 0.85,
+            "when": "Converting roadmap items to effort estimates",
+            "yields": "Roadmap task complexity patterns"
         }
+    ],
+    "activationContexts": [
+        "effort estimation",
+        "how long will",
+        "time estimate",
+        "complexity assessment",
+        "roadmap planning"
     ]
 }

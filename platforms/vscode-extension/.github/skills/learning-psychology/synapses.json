@@ -34,5 +34,7 @@
     "retrieval practice",
     "scaffolding",
     "zone of proximal"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

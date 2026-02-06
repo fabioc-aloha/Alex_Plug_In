@@ -59,15 +59,51 @@ When starting a new session or project, Alex can:
 
 ### Wishlist 🎯
 
-| Skill                | Priority | Value                                | Notes                                                            |
-| -------------------- | -------- | ------------------------------------ | ---------------------------------------------------------------- |
-| ✅ Prompt Engineering | High     | Effective LLM prompting              | System prompts, few-shot, chain-of-thought — **ACQUIRED v4.0.7** |
-| ✅ RAG Architecture   | High     | Retrieval-augmented generation       | Embedding, chunking, vector stores — **ACQUIRED v4.0.7**         |
-| ✅ AI Agent Design    | Medium   | Multi-agent systems                  | Tool use, planning, memory patterns — **ACQUIRED v4.0.7**        |
-| ✅ MCP Development    | High     | Model Context Protocol               | Tool servers, resources, transports — **ACQUIRED v4.0.7**        |
-| Model Selection      | Medium   | Choose the right model for task      | Cost vs capability tradeoffs                                     |
-| Evaluation & Testing | Medium   | LLM output quality assessment        | Metrics, benchmarks, human eval                                  |
-| ✅ Responsible AI     | High     | Bias detection, safety, transparency | See `privacy-responsible-ai` skill                               |
+| Skill                       | Priority | Value                                | Notes                                                            |
+| --------------------------- | -------- | ------------------------------------ | ---------------------------------------------------------------- |
+| ✅ Prompt Engineering        | High     | Effective LLM prompting              | System prompts, few-shot, chain-of-thought — **ACQUIRED v4.0.7** |
+| ✅ RAG Architecture          | High     | Retrieval-augmented generation       | Embedding, chunking, vector stores — **ACQUIRED v4.0.7**         |
+| ✅ AI Agent Design           | Medium   | Multi-agent systems                  | Tool use, planning, memory patterns — **ACQUIRED v4.0.7**        |
+| ✅ MCP Development           | High     | Model Context Protocol               | Tool servers, resources, transports — **ACQUIRED v4.0.7**        |
+| **Model Selection Advisor** | 🔥 High   | Advise model upgrade/downgrade       | Tier matching, quota optimization — See details below            |
+| Evaluation & Testing        | Medium   | LLM output quality assessment        | Metrics, benchmarks, human eval                                  |
+| ✅ Responsible AI            | High     | Bias detection, safety, transparency | See `privacy-responsible-ai` skill                               |
+
+### Model Selection Advisor Details (🔥 High Priority - February 2026)
+
+**Context**: Opus 4.6 has limited quota and aggressive rate limits. Users need guidance on when to switch models for optimal cost/capability balance.
+
+**Skill Goal**: Proactively advise on model selection:
+1. **Upgrade alerts**: Flag when a task would benefit from Opus 4.6 (heavy lifting)
+2. **Downgrade suggestions**: Suggest Opus 4.5/Sonnet for routine tasks to conserve quota
+3. **Task classification**: Classify requests into tier-appropriate categories
+4. **User preference integration**: Read `modelPreferences` from user profile
+
+**Heavy Lifting Tasks** (suggest Opus 4.6):
+- Meditation/consolidation sessions
+- Self-actualization assessments
+- Complex multi-file architecture refactoring
+- Bootstrap learning (new skill acquisition)
+- Large document restructuring
+- Deep analysis with synthesis
+
+**Routine Tasks** (stay on Opus 4.5 or suggest Sonnet):
+- Code edits, debugging, simple refactors
+- Documentation updates
+- File searches and context gathering
+- Synapse validation/dream maintenance
+- Review tasks
+
+**Implementation Options**:
+- A. Procedural memory (`.instructions.md`) — Pattern for detection and advice
+- B. LM Tool — `alex_model_advisor` tool that analyzes task and returns recommendation
+- C. Chat Participant behavior — Integrated into @alex processing pipeline
+
+**Why High Priority**:
+- Immediate user need (quota exhaustion is frustrating)
+- Improves cost efficiency for users
+- Demonstrates Alex's meta-awareness of its own capabilities
+- Aligns with cognitive architecture theme (knowing your own limits)
 
 ---
 

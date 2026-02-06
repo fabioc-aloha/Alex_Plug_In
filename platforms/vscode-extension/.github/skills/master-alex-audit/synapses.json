@@ -2,7 +2,7 @@
   "skill": "master-alex-audit",
   "version": "1.0.0",
   "description": "Master-specific audit extensions for comprehensive project health",
-  "inheritable": false,
+  "inheritance": "master-only",
   "extends": "architecture-audit",
   "connections": [
     {
@@ -120,5 +120,7 @@
         "change": "Section 13a: Added line-by-line scanning with false positive exclusions (comments, imports, Key Vault patterns, type definitions). Heir insight from FishbowlGovernance applied."
       }
     ]
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

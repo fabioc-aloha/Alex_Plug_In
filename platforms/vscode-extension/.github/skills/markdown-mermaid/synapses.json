@@ -63,5 +63,7 @@
     "direction LR",
     "direction TB",
     "anti-pattern"
-  ]
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

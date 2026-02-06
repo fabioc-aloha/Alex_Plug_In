@@ -33,11 +33,15 @@ Get-ChildItem "c:\Development\Alex_Plug_In\.github" -Recurse -Filter "synapses.j
   $sourceDir = $_.DirectoryName
   foreach ($conn in $json.connections) {
     $target = $conn.target
-    if ($target -match "^\.github/|^alex_docs/") {
+    # All paths resolved from workspace root
+    if ($target -match "^\.github/|^alex_docs/|^platforms/|^[A-Z].*\.md$") {
       $fullPath = Join-Path "c:\Development\Alex_Plug_In" $target
-    } elseif ($target -match "^[a-zA-Z]") {
-      $fullPath = Join-Path $sourceDir $target
-    } else { $fullPath = $target }
+    } elseif ($target -match "^\.\./") {
+      # Relative paths from skill folder
+      $fullPath = [System.IO.Path]::GetFullPath((Join-Path $sourceDir $target))
+    } else { 
+      $fullPath = Join-Path $sourceDir $target 
+    }
     if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true }
   }
 }
@@ -45,6 +49,28 @@ if ($uniqueBroken.Count -eq 0) { "All synapses valid!" } else { $uniqueBroken.Ke
 ```
 
 **Expected:** All synapses valid!
+
+### Phase 1.5: Inheritance Field Validation
+
+Verify all skills have `inheritance` field in synapses.json:
+
+```powershell
+$missing = @()
+Get-ChildItem ".github\skills" -Directory | ForEach-Object {
+  $synapse = Join-Path $_.FullName "synapses.json"
+  if (Test-Path $synapse) {
+    $json = Get-Content $synapse -Raw | ConvertFrom-Json
+    if (-not $json.inheritance) {
+      $missing += $_.Name
+    }
+  }
+}
+if ($missing.Count -eq 0) { "All skills have inheritance!" } else { "MISSING INHERITANCE: $($missing -join ', ')" }
+```
+
+**Expected:** All skills have inheritance!
+**Valid values:** `inheritable`, `master-only`, `heir:vscode`, `heir:m365`
+**Required by:** SYNAPSE-SCHEMA.json (enforced since v4.2.12)
 
 ### Phase 2: Skill Index Coverage
 
@@ -103,7 +129,37 @@ Compare-Object $masterSkills $heirSkills
 
 **Expected:** Same count, no differences
 
-### Phase 5: Synapse File Sync
+### Phase 5: Synapse Schema Format Validation
+
+Verify all synapses use current schema format:
+
+```powershell
+$critical = @(); $info = @()
+Get-ChildItem ".github\skills" -Recurse -Filter "synapses.json" | ForEach-Object {
+  $content = Get-Content $_.FullName -Raw
+  $skill = $_.DirectoryName | Split-Path -Leaf
+  # CRITICAL: String strengths (must fix)
+  if ($content -match '"strength":\s*"(strong|moderate|High|Medium|Critical|Low)"') {
+    $critical += $skill
+  }
+  # CRITICAL: Missing $schema (must fix)
+  if ($content -notmatch '"\$schema"') {
+    $critical += $skill
+  }
+  # INFO: Legacy array name (both supported, `connections` preferred)
+  if ($content -match '"synapses":\s*\[' -and $content -notmatch '"connections":\s*\[') {
+    $info += $skill
+  }
+}
+$critical = $critical | Select-Object -Unique
+$info = $info | Select-Object -Unique
+if ($critical.Count -eq 0) { "Phase 5: Schema validation passed!" } else { "CRITICAL: $($critical -join ', ')" }
+if ($info.Count -gt 0) { "INFO (legacy array, works but prefer 'connections'): $($info -join ', ')" }
+```
+
+**Expected:** Phase 5: Schema validation passed!
+
+### Phase 6: Synapse File Sync
 
 Verify synapses.json files are synchronized:
 
@@ -124,7 +180,7 @@ if ($diffs.Count -eq 0) { "All synapses in sync!" } else { "OUT OF SYNC: $($diff
 
 **Expected:** All synapses in sync!
 
-### Phase 6: Skill-Activation Index Sync
+### Phase 7: Skill-Activation Index Sync
 
 ```powershell
 $masterHash = (Get-FileHash ".github\skills\skill-activation\SKILL.md").Hash
@@ -134,6 +190,51 @@ if ($masterHash -eq $heirHash) { "Index in sync!" } else { "INDEX OUT OF SYNC" }
 
 **Expected:** Index in sync!
 
+### Phase 8: Catalog Accuracy Validation
+
+Verify SKILLS-CATALOG.md reflects actual skill inventory:
+
+```powershell
+# Check skill count matches
+$actualSkills = (Get-ChildItem ".github\skills" -Directory).Count
+$catalogContent = Get-Content "alex_docs\SKILLS-CATALOG.md" -Raw
+
+# Extract count from catalog (matches "## Skill Count: 73" format)
+if ($catalogContent -match '## Skill Count:\s*(\d+)') {
+  $catalogCount = [int]$matches[1]
+  if ($actualSkills -eq $catalogCount) { 
+    "Catalog count accurate: $actualSkills skills" 
+  } else { 
+    "COUNT MISMATCH: Catalog says $catalogCount, actual is $actualSkills" 
+  }
+} else {
+  "WARNING: Could not parse skill count from catalog"
+}
+
+# Check each skill appears in Subgraph Index
+$skillDirs = (Get-ChildItem ".github\skills" -Directory).Name
+$missing = @()
+foreach ($skill in $skillDirs) {
+  if ($catalogContent -notmatch $skill) {
+    $missing += $skill
+  }
+}
+if ($missing.Count -eq 0) { 
+  "All skills in catalog!" 
+} else { 
+  "MISSING FROM CATALOG: $($missing -join ', ')" 
+}
+```
+
+**Expected:** 
+- Catalog count accurate: 73 skills
+- All skills in catalog!
+
+**This phase validates:**
+- Skill count matches actual folder count
+- All skills appear in Subgraph Index table
+- No orphaned skills missing from documentation
+
 ## Repair Actions
 
 ### Fix Broken Synapses
@@ -142,6 +243,34 @@ if ($masterHash -eq $heirHash) { "Index in sync!" } else { "INDEX OUT OF SYNC" }
 2. **Missing prefixes:** Add `.github/instructions/` or `.github/prompts/` prefixes
 3. **Aspirational references:** Remove connections to planned-but-not-created skills
 4. **Heir-specific content:** Remove project-specific references from Master
+
+### Normalize Legacy Synapse Format
+
+For heir-created skills with legacy format (string strengths, old field names):
+
+```powershell
+# Run upgrade command in VS Code - it normalizes all synapses automatically
+# Or manually normalize a single synapse file:
+
+$strengthMap = @{ "critical" = 1.0; "strong" = 0.9; "high" = 0.9; "moderate" = 0.7; "medium" = 0.7; "low" = 0.5 }
+$file = ".github/skills/my-skill/synapses.json"
+$json = Get-Content $file -Raw | ConvertFrom-Json
+
+# Rename arrays
+if ($json.synapses) { $json | Add-Member -NotePropertyName connections -NotePropertyValue $json.synapses; $json.PSObject.Properties.Remove('synapses') }
+if ($json.activationKeywords) { $json | Add-Member -NotePropertyName activationContexts -NotePropertyValue $json.activationKeywords; $json.PSObject.Properties.Remove('activationKeywords') }
+
+# Convert string strengths to numeric
+foreach ($conn in $json.connections) { 
+  if ($conn.strength -is [string]) { 
+    $conn.strength = $strengthMap[$conn.strength.ToLower()] 
+  } 
+}
+
+$json | ConvertTo-Json -Depth 10 | Set-Content $file
+```
+
+**Preferred:** Use 'Alex: Upgrade' command which normalizes all heir-created skill synapses automatically.
 
 ### Sync Master → Heir
 
@@ -167,6 +296,10 @@ Get-ChildItem ".github\skills" -Directory | ForEach-Object {
 | Heir leak | Project-specific skill in Master | Remove or generalize |
 | Stale sync | Hash mismatch between Master and Heir | Copy Master → Heir |
 | Unindexed skill | Skill exists but not in skill-activation | Add to index table |
+| Legacy format | String strengths like `"strong"` instead of `0.9` | Run 'Alex: Upgrade' or normalize manually |
+| Missing $schema | Synapse file has no schema reference | Add `"$schema": "../SYNAPSE-SCHEMA.json"` |
+| Catalog count mismatch | SKILLS-CATALOG.md count differs from actual | Update catalog count |
+| Missing from catalog | Skill not in Subgraph Index table | Add skill to appropriate category |
 
 ## Integration with Dream Protocol
 
@@ -183,6 +316,7 @@ Brain QA can be triggered as part of `dream` maintenance:
 - "synapse audit", "deep synapse check"
 - "trigger audit", "skill index check"
 - "master heir sync", "heir sync validation"
+- "catalog validation", "verify catalog", "catalog accuracy"
 
 ---
 

@@ -1,77 +1,91 @@
 {
-  "skill": "text-to-speech",
-  "version": "2.2.0",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "skillId": "text-to-speech",
+  "version": "2.4.0",
+  "lastUpdated": "2026-02-06",
+  "inheritance": "inheritable",
   "promotionReady": true,
   "promotionNotes": "v2.2.0: Chunking for long content, retry with backoff, speaker warmup, LM-based summarization",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "relationship": "implements",
-      "strength": "strong",
-      "context": "Native TypeScript WebSocket, webview audio player, status bar feedback, chunked synthesis"
+      "type": "implements",
+      "strength": 0.9,
+      "when": "Using native TypeScript WebSocket",
+      "yields": "Webview audio player, status bar feedback, chunked synthesis"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "relationship": "consumes",
-      "strength": "strong",
-      "context": "Reads and processes markdown documents for speech, including table-to-speech"
+      "type": "consumes",
+      "strength": 0.9,
+      "when": "Reading markdown documents for speech",
+      "yields": "Table-to-speech conversion"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "relationship": "enables",
-      "strength": "strong",
-      "context": "Audio reading of research papers with summarization option for long documents"
+      "type": "enables",
+      "strength": 0.9,
+      "when": "Audio reading research papers",
+      "yields": "Summarization option for long documents"
     },
     {
       "target": ".github/skills/writing-publication/SKILL.md",
-      "relationship": "complements",
-      "strength": "moderate",
-      "context": "Proofreading by listening to written content"
+      "type": "complements",
+      "strength": 0.7,
+      "when": "Proofreading written content",
+      "yields": "Listening catches errors eyes miss"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "relationship": "enables",
-      "strength": "weak",
-      "context": "Could read meditation session summaries aloud"
+      "type": "enables",
+      "strength": 0.3,
+      "when": "Reading meditation summaries aloud",
+      "yields": "Audio reflection support"
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "relationship": "complements",
-      "strength": "weak",
-      "context": "Hearing prose helps catch rhythm issues"
+      "type": "complements",
+      "strength": 0.3,
+      "when": "Reading prose for rhythm checks",
+      "yields": "Audio catches pacing issues"
     },
     {
       "target": ".github/skills/gamma-presentations/SKILL.md",
-      "relationship": "enables",
-      "strength": "strong",
-      "context": "Audio playback of pitch content for rehearsal and delivery - validated 2026-02-05"
+      "type": "enables",
+      "strength": 0.9,
+      "when": "Rehearsing pitch content",
+      "yields": "Audio playback for delivery practice"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
-      "relationship": "supports",
-      "strength": "moderate",
-      "context": "Read roadmap tables aloud with natural speech for status reviews"
+      "type": "supports",
+      "strength": 0.7,
+      "when": "Reading roadmap tables aloud",
+      "yields": "Natural speech for status reviews"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "relationship": "uses-pattern",
-      "strength": "moderate",
-      "context": "Regex pattern engineering: negative lookbehind, emoji-text deduplication"
+      "type": "uses",
+      "strength": 0.7,
+      "when": "Pattern engineering for text processing",
+      "yields": "Regex patterns: negative lookbehind, emoji-text deduplication"
     },
     {
       "target": "platforms/vscode-extension/src/tts/ttsService.ts",
-      "relationship": "implementation",
-      "strength": "critical",
-      "context": "Core TTS engine with chunking (3000 chars), timeout (60s), retry with exponential backoff"
+      "type": "implementation",
+      "strength": 1.0,
+      "when": "Core TTS engine",
+      "yields": "Chunking (3000 chars), timeout (60s), retry with exponential backoff"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
-      "relationship": "informed-by",
-      "strength": "weak",
-      "context": "PAT-based publishing protocol learned during TTS hotfix release"
+      "type": "informed-by",
+      "strength": 0.3,
+      "when": "TTS hotfix release",
+      "yields": "PAT-based publishing protocol"
     }
   ],
-  "activationTriggers": [
+  "activationContexts": [
     "read aloud",
     "text to speech",
     "TTS",
@@ -80,7 +94,6 @@
     "listen",
     "play document",
     "read this",
-    "Alex's voice",
     "voice synthesis",
     "edge-tts",
     "read table",
@@ -92,7 +105,7 @@
   ],
   "metadata": {
     "created": "2026-02-05",
-    "updated": "2026-02-05",
+    "updated": "2026-02-06",
     "author": "Alex",
     "implementation": "Native TypeScript WebSocket with chunking",
     "ttsEngine": "Microsoft Edge TTS",

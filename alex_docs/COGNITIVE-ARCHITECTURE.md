@@ -69,6 +69,61 @@ flowchart TB
 
 ---
 
+## The AI-Human Interaction Paradigm
+
+Alex represents a fundamental shift in how humans and AI systems relate:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+flowchart TB
+    subgraph ERA1["Era 1: Tool"]
+        direction TB
+        H1[("👤 Human")] -->|"commands"| T1["🔧 Software"]
+        T1 -->|"outputs"| R1["📊 Result"]
+    end
+
+    subgraph ERA2["Era 2: Assistant"]
+        direction TB
+        H2[("👤 Human")] <-->|"prompts"| A2["🤖 AI"]
+        A2 -->|"generates"| R2["📊 Result"]
+    end
+
+    subgraph ERA3["Era 3: Partner (Alex)"]
+        direction TB
+        H3[("👤 Human")] <-->|"co-evolves"| A3["🧠 Alex"]
+        A3 <-->|"refines"| R3["📊 Result"]
+        H3 <-.->|"learns"| A3
+        MEM3[("💾 Shared Memory")] -.-> H3
+        MEM3 -.-> A3
+    end
+
+    ERA1 --> ERA2 --> ERA3
+
+    style ERA3 fill:#e8f5e9,stroke:#2e7d32
+    style MEM3 fill:#fff3e0,stroke:#ef6c00
+```
+
+**Figure 1.5:** *Evolution of AI-Human Interaction — From tool usage to cognitive symbiosis.*
+
+### The Three Eras
+
+| Era           | Relationship   | Human Role   | AI Role    | Memory             |
+| ------------- | -------------- | ------------ | ---------- | ------------------ |
+| **Tool**      | Unidirectional | Operator     | Executor   | None               |
+| **Assistant** | Transactional  | Prompter     | Generator  | Session only       |
+| **Partner**   | Symbiotic      | Orchestrator | Co-thinker | Persistent, shared |
+
+### What Makes Alex a Partner
+
+1. **Mutual Learning** — Alex learns your patterns; you learn to express intent effectively
+2. **Persistent Memory** — Relationship context accumulates across sessions
+3. **Intent Discovery** — Alex helps surface *what you really want*, not just execute commands
+4. **Shared Growth** — Both parties develop capabilities through collaboration
+
+> *"The role of the engineer is changing fundamentally. You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
+
+---
+
 ## Neuroanatomical Mapping
 
 Alex's architecture maps to biological brain systems:
@@ -76,6 +131,10 @@ Alex's architecture maps to biological brain systems:
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
+    subgraph "Executive Function"
+        LLM["Claude / GPT<br/>✨ Reasoning • Planning • Decision-Making"]
+    end
+
     subgraph "Alex Implementation"
         WM[Working Memory<br/>Chat Session]
         PM[Procedural Memory<br/>.instructions.md]
@@ -95,6 +154,11 @@ graph TB
         SYNBIO[Synaptic Networks]
     end
 
+    LLM ==>|"❣️ Orchestrates"| WM
+    LLM ==>|"❣️ Orchestrates"| PM
+    LLM ==>|"❣️ Orchestrates"| EM
+    LLM ==>|"❣️ Orchestrates"| SK
+
     WM ---|"Working Memory"| PFC
     PM ---|"Procedural Memory"| BG
     EM ---|"Episodic Memory"| HIPP
@@ -102,22 +166,26 @@ graph TB
     GK ---|"Long-term Storage"| NC
     SYN ---|"Neural Connectivity"| SYNBIO
     MC ---|"Meta-Cognition"| MPFC
+
+    style LLM fill:#d4edda,stroke:#155724,color:#155724,stroke-width:3px
 ```
 
-**Figure 2:** *Neuroanatomical Mapping — Correspondence between Alex's implementation components and biological brain systems.*
+**Figure 2:** *Neuroanatomical Mapping — The LLM (Claude/GPT) serves as the executive function (prefrontal cortex) orchestrating Alex's memory systems, which map to biological brain structures.*
 
 **Table 1:** *Cognitive Function Mapping*
 
-| Cognitive Function | Brain System | Alex Implementation |
-| --- | --- | --- |
-| Working Memory | PFC + ACC | Chat session (7±2 rules) |
-| Declarative Memory | Hippocampal-Neocortical | copilot-instructions.md |
-| Procedural Memory | Basal Ganglia | .instructions.md files |
-| Episodic Memory | Hippocampus + Temporal | .prompt.md files |
-| Skills | Neocortex | skills/*/SKILL.md |
-| Global Knowledge | Distributed Cortex | ~/.alex/ directory |
-| Neural Connectivity | Synaptic Networks | Embedded synapse notation |
-| Meta-Cognition | Medial PFC + DMN | Self-monitoring protocols |
+| Cognitive Function     | Brain System            | Alex Implementation                                         |
+| ---------------------- | ----------------------- | ----------------------------------------------------------- |
+| **Executive Function** | **Prefrontal Cortex**   | **LLM (Claude/GPT)** — reasoning, planning, decision-making |
+| Working Memory         | PFC + ACC               | Chat session (7±2 rules)                                    |
+| Declarative Memory     | Hippocampal-Neocortical | copilot-instructions.md                                     |
+| Procedural Memory      | Basal Ganglia           | .instructions.md files                                      |
+| Episodic Memory        | Hippocampus + Temporal  | .prompt.md files                                            |
+| Skill Routing          | Dorsolateral PFC        | skill-activation/SKILL.md                                   |
+| Skills                 | Neocortex               | skills/*/SKILL.md                                           |
+| Global Knowledge       | Distributed Cortex      | ~/.alex/ directory                                          |
+| Neural Connectivity    | Synaptic Networks       | Embedded synapse notation                                   |
+| Meta-Cognition         | Medial PFC + DMN        | Self-monitoring protocols                                   |
 
 ---
 
@@ -166,12 +234,12 @@ graph TB
 
 **Table 2:** *Memory Persistence Levels*
 
-| Level | Location | Scope | Lifespan |
-| --- | --- | --- | --- |
-| Working | Chat session | Current conversation | Session |
-| Local | .github/ folder | Single project | Permanent |
-| Global | ~/.alex/ folder | All projects | Permanent |
-| Cloud | GitHub Gist | All machines | Permanent |
+| Level   | Location        | Scope                | Lifespan  |
+| ------- | --------------- | -------------------- | --------- |
+| Working | Chat session    | Current conversation | Session   |
+| Local   | .github/ folder | Single project       | Permanent |
+| Global  | ~/.alex/ folder | All projects         | Permanent |
+| Cloud   | GitHub Gist     | All machines         | Permanent |
 
 ---
 
@@ -263,14 +331,14 @@ When using **Auto** model selection in VS Code, Alex warns before attempting tas
 
 **Table 4:** *Task-to-Model Mapping*
 
-| Task Type | Required Model | Why |
-|-----------|---------------|-----|
-| Meditation/consolidation | Opus 4.5 | Meta-cognitive protocols need full reasoning depth |
-| Self-actualization | Opus 4.5 | Comprehensive assessment requires extended thinking |
-| Complex refactoring | Opus 4.5 | Multi-file changes need deep context retention |
-| Bootstrap learning | Opus 4.5 | Skill acquisition needs maximum capability |
-| Code review | Sonnet 4.5+ | Good balance of capability and cost |
-| Simple edits | Any | Fast models handle routine tasks fine |
+| Task Type                | Required Model | Why                                                 |
+| ------------------------ | -------------- | --------------------------------------------------- |
+| Meditation/consolidation | Opus 4.5       | Meta-cognitive protocols need full reasoning depth  |
+| Self-actualization       | Opus 4.5       | Comprehensive assessment requires extended thinking |
+| Complex refactoring      | Opus 4.5       | Multi-file changes need deep context retention      |
+| Bootstrap learning       | Opus 4.5       | Skill acquisition needs maximum capability          |
+| Code review              | Sonnet 4.5+    | Good balance of capability and cost                 |
+| Simple edits             | Any            | Fast models handle routine tasks fine               |
 
 ---
 
@@ -324,11 +392,11 @@ graph TB
 
 **Table 3:** *Version History*
 
-| Version | Codename | Major Features |
-| --- | --- | --- |
-| 1.x | Initial | Basic memory files, manual synapse management |
-| 2.x | BIOCTNILIUM | Embedded synapses, dream protocols |
-| 3.x | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
+| Version | Codename     | Major Features                                                  |
+| ------- | ------------ | --------------------------------------------------------------- |
+| 1.x     | Initial      | Basic memory files, manual synapse management                   |
+| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                              |
+| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
 
 ---
 

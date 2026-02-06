@@ -1,47 +1,48 @@
 {
   "skill": "mcp-development",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/ai-agent-design/SKILL.md",
       "relationship": "enables",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "MCP provides standardized tool interface for AI agents"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "relationship": "requires",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "MCP tools are essentially APIs for AI consumption"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "relationship": "complements",
-      "strength": "strong",
+      "strength": 0.9,
       "context": "VS Code integrates MCP servers for Copilot"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "relationship": "requires",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "MCP servers need security hardening"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "relationship": "complements",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "MCP servers need unit and integration testing"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "relationship": "complements",
-      "strength": "moderate",
+      "strength": 0.7,
       "context": "MCP tools need graceful error handling"
     },
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "relationship": "informs",
-      "strength": "weak",
+      "strength": 0.3,
       "context": "Tool descriptions are prompts for AI understanding"
     }
   ],
@@ -63,5 +64,7 @@
     "prerequisites": [
       "api-design"
     ]
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

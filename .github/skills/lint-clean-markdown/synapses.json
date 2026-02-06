@@ -36,5 +36,7 @@
     "MD004": "Use dash for unordered lists",
     "MD009": "No trailing whitespace",
     "MD047": "Single newline at file end"
-  }
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
 }

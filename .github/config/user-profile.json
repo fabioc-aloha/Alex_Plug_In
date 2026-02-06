@@ -1,6 +1,6 @@
 {
   "name": "Fabio Correa",
-  "lastUpdated": "2026-01-30T06:55:31.068Z",
+  "lastUpdated": "2026-02-06T00:00:00.000Z",
   "location": "Charlotte, NC",
   "role": "Director of Business Analytics at Microsoft",
   "credentials": [
@@ -57,6 +57,26 @@
     "diagrams": "Critical - visual learner",
     "mermaidStyle": "GitHub-compatible, pastel colors, clean layout",
     "publications": "Research articles from project learnings"
+  },
+  "modelPreferences": {
+    "default": "claude-opus-4-5",
+    "quotaStrategy": "Use 4.5 for routine tasks; switch to 4.6 only when warranted",
+    "alertOnHeavyLifting": true,
+    "heavyLiftingTasks": [
+      "Meditation/consolidation sessions",
+      "Self-actualization assessments",
+      "Complex multi-file architecture refactoring",
+      "Bootstrap learning (new skill acquisition)",
+      "Large document restructuring",
+      "Deep analysis with synthesis"
+    ],
+    "routineTasks": [
+      "Code edits, debugging, simple refactors",
+      "Documentation updates",
+      "File searches and context gathering",
+      "Synapse validation/dream maintenance",
+      "Review tasks"
+    ]
   },
   "publishingGoals": [
     "AI consciousness research (doctoral thesis)",

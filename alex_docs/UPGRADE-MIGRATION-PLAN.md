@@ -4,7 +4,7 @@
 
 |             |                                                                                |
 | ----------- | ------------------------------------------------------------------------------ |
-| **Status**  | 📋 Planning                                                                    |
+| **Status**  | ✅ Implemented                                                                  |
 | **Created** | 2026-01-30                                                                     |
 | **Related** | [SKILLS-CATALOG.md](SKILLS-CATALOG.md), [MEMORY-SYSTEMS.md](MEMORY-SYSTEMS.md) |
 
@@ -14,49 +14,49 @@
 
 ### Phase 1: Backup + Fresh Install (3.7.0-beta)
 
-| Task | Status | Notes |
-| ---- | ------ | ----- |
-| Detect legacy structure (root DK files) | ✅ | `detectLegacyStructure()` |
-| Detect transitional structure (.alex-manifest.json) | ✅ | |
-| Detect current structure (.github/skills/) | ✅ | |
-| Create version-aware backup | ✅ | Include all DK locations |
-| Delete old structure after backup | ✅ | Root DK files, old manifest |
-| Fresh install from extension package | ✅ | `freshInstall()` |
-| Generate detection-report.json | ✅ | What we found, where |
+| Task                                                | Status | Notes                       |
+| --------------------------------------------------- | ------ | --------------------------- |
+| Detect legacy structure (root DK files)             | ✅      | `detectLegacyStructure()`   |
+| Detect transitional structure (.alex-manifest.json) | ✅      |                             |
+| Detect current structure (.github/skills/)          | ✅      |                             |
+| Create version-aware backup                         | ✅      | Include all DK locations    |
+| Delete old structure after backup                   | ✅      | Root DK files, old manifest |
+| Fresh install from extension package                | ✅      | `freshInstall()`            |
+| Generate detection-report.json                      | ✅      | What we found, where        |
 
 ### Phase 2: Gap Analysis + Migration Candidates (3.7.0)
 
-| Task | Status | Notes |
-| ---- | ------ | ----- |
-| Compare backup vs new install | ✅ | `runGapAnalysis()` |
-| Identify modified system files | ⬜ | Checksum comparison - deferred |
-| Generate MIGRATION-CANDIDATES.md | ✅ | With checkboxes |
-| Show legacy files section | ✅ | Root DK → skill conversion |
-| Show user-created DK section | ✅ | |
-| Show user-created skills section | ✅ | |
-| Show modified system files section | ⬜ | Deferred - complex |
-| Auto-check profile and episodic | ✅ | Auto-restore on upgrade |
+| Task                               | Status | Notes                          |
+| ---------------------------------- | ------ | ------------------------------ |
+| Compare backup vs new install      | ✅      | `runGapAnalysis()`             |
+| Identify modified system files     | ⬜      | Checksum comparison - deferred |
+| Generate MIGRATION-CANDIDATES.md   | ✅      | With checkboxes                |
+| Show legacy files section          | ✅      | Root DK → skill conversion     |
+| Show user-created DK section       | ✅      |                                |
+| Show user-created skills section   | ✅      |                                |
+| Show modified system files section | ⬜      | Deferred - complex             |
+| Auto-check profile and episodic    | ✅      | Auto-restore on upgrade        |
 
 ### Phase 3: Complete Migration Command (3.8.0)
 
-| Task | Status | Notes |
-| ---- | ------ | ----- |
-| Parse checked items from markdown | ✅ | `completeMigration()` |
-| Copy selected files to .github/ | ✅ | |
-| Move legacy files to new location | ✅ | DK → skills |
-| Restore user profile | ✅ | Auto-restored in upgrade |
-| Restore episodic records | ✅ | Auto-restored in upgrade |
-| Delete MIGRATION-CANDIDATES.md | ✅ | After completion |
-| Show migration report | ✅ | What was migrated |
-| **Post-migration validation** | ✅ | Run Dream to verify health |
+| Task                              | Status | Notes                      |
+| --------------------------------- | ------ | -------------------------- |
+| Parse checked items from markdown | ✅      | `completeMigration()`      |
+| Copy selected files to .github/   | ✅      |                            |
+| Move legacy files to new location | ✅      | DK → skills                |
+| Restore user profile              | ✅      | Auto-restored in upgrade   |
+| Restore episodic records          | ✅      | Auto-restored in upgrade   |
+| Delete MIGRATION-CANDIDATES.md    | ✅      | After completion           |
+| Show migration report             | ✅      | What was migrated          |
+| **Post-migration validation**     | ✅      | Run Dream to verify health |
 
 ### Phase 4: Polish (3.9.0)
 
-| Task | Status | Notes |
-| ---- | ------ | ----- |
-| Stale file warnings | ✅ | > 90 days flagged |
-| Cleanup suggestions | ⬜ | Delete old backup? |
-| Backup retention policy | ⬜ | Keep last N? |
+| Task                    | Status | Notes              |
+| ----------------------- | ------ | ------------------ |
+| Stale file warnings     | ✅      | > 90 days flagged  |
+| Cleanup suggestions     | ⬜      | Delete old backup? |
+| Backup retention policy | ⬜      | Keep last N?       |
 
 ---
 
@@ -156,14 +156,14 @@ skills/
 
 After migration completes, automatically run:
 
-| Check | Action if Failed |
-| ----- | ---------------- |
-| All skill folders have SKILL.md | Warn user, list incomplete |
+| Check                                  | Action if Failed            |
+| -------------------------------------- | --------------------------- |
+| All skill folders have SKILL.md        | Warn user, list incomplete  |
 | All synapses.json have numeric weights | Auto-fix with normalization |
-| All synapse targets exist | Warn user, list broken |
-| User profile restored | Warn if missing |
-| Episodic folder restored | Warn if missing |
-| Dream protocol passes | Show health report |
+| All synapse targets exist              | Warn user, list broken      |
+| User profile restored                  | Warn if missing             |
+| Episodic folder restored               | Warn if missing             |
+| Dream protocol passes                  | Show health report          |
 
 **Recommendation:** Run `Alex: Dream` automatically after migration to validate architecture health.
 
@@ -187,11 +187,11 @@ Instead: **Backup → Fresh Install → Gap Analysis → User Decides**
 
 Alex has evolved through several folder structures. The migration must detect and handle all of them:
 
-| Version | Structure | DK Location | Skills | Manifest |
-| ------- | --------- | ----------- | ------ | -------- |
-| < 3.0 | Legacy | `DK-*.md` in project root | None | None |
-| 3.0-3.3 | Transitional | `.github/domain-knowledge/` | None | Root `.alex-manifest.json` |
-| 3.4+ | Current | `.github/domain-knowledge/` | `.github/skills/` | `.github/config/alex-manifest.json` |
+| Version | Structure    | DK Location                 | Skills            | Manifest                            |
+| ------- | ------------ | --------------------------- | ----------------- | ----------------------------------- |
+| < 3.0   | Legacy       | `DK-*.md` in project root   | None              | None                                |
+| 3.0-3.3 | Transitional | `.github/domain-knowledge/` | None              | Root `.alex-manifest.json`          |
+| 3.4+    | Current      | `.github/domain-knowledge/` | `.github/skills/` | `.github/config/alex-manifest.json` |
 
 ### Detection Logic
 
@@ -443,11 +443,11 @@ You can manually copy any files from this location.
 
 ### New Commands
 
-| Command | Purpose |
-| ------- | ------- |
-| `Alex: Upgrade` | Existing — now uses new migration flow |
-| `Alex: Complete Migration` | New — processes checked items |
-| `Alex: Show Migration Candidates` | New — reopens the document |
+| Command                           | Purpose                                |
+| --------------------------------- | -------------------------------------- |
+| `Alex: Upgrade`                   | Existing — now uses new migration flow |
+| `Alex: Complete Migration`        | New — processes checked items          |
+| `Alex: Show Migration Candidates` | New — reopens the document             |
 
 ### Gap Analysis Logic
 
@@ -536,14 +536,14 @@ async function completeMigration(
 
 ## Advantages of This Approach
 
-| Aspect | Auto-Merge (Old) | User-Driven (New) |
-| ------ | ---------------- | ----------------- |
-| **Complexity** | High — merge algorithms | Low — copy files |
-| **Risk** | Silent data loss possible | User sees everything |
-| **Debuggability** | Hard — merge failures opaque | Easy — just files |
-| **User Control** | Limited | Full |
-| **Code to Maintain** | Complex | Simple |
-| **Edge Cases** | Many | Few |
+| Aspect               | Auto-Merge (Old)             | User-Driven (New)    |
+| -------------------- | ---------------------------- | -------------------- |
+| **Complexity**       | High — merge algorithms      | Low — copy files     |
+| **Risk**             | Silent data loss possible    | User sees everything |
+| **Debuggability**    | Hard — merge failures opaque | Easy — just files    |
+| **User Control**     | Limited                      | Full                 |
+| **Code to Maintain** | Complex                      | Simple               |
+| **Edge Cases**       | Many                         | Few                  |
 
 ---
 
@@ -551,11 +551,11 @@ async function completeMigration(
 
 Some things should always be restored without asking:
 
-| Item | Reason |
-| ---- | ------ |
-| `config/user-profile.json` | Personal preferences |
-| `config/USER-PROFILE.md` | User identity |
-| `episodic/` folder | Session history (meditation, dreams) |
+| Item                       | Reason                               |
+| -------------------------- | ------------------------------------ |
+| `config/user-profile.json` | Personal preferences                 |
+| `config/USER-PROFILE.md`   | User identity                        |
+| `episodic/` folder         | Session history (meditation, dreams) |
 
 These are pre-checked in the migration candidates document.
 
@@ -563,12 +563,12 @@ These are pre-checked in the migration candidates document.
 
 ## Rollout Plan
 
-| Phase | Version | Scope |
-| ----- | ------- | ----- |
-| **Phase 1** | 3.7.0-beta | Backup + Fresh Install + Manual Migration |
-| **Phase 2** | 3.7.0 | Gap Analysis + Migration Candidates Document |
-| **Phase 3** | 3.8.0 | "Complete Migration" command |
-| **Phase 4** | 3.9.0 | Stale file warnings, cleanup suggestions |
+| Phase       | Version    | Scope                                        |
+| ----------- | ---------- | -------------------------------------------- |
+| **Phase 1** | 3.7.0-beta | Backup + Fresh Install + Manual Migration    |
+| **Phase 2** | 3.7.0      | Gap Analysis + Migration Candidates Document |
+| **Phase 3** | 3.8.0      | "Complete Migration" command                 |
+| **Phase 4** | 3.9.0      | Stale file warnings, cleanup suggestions     |
 
 ---
 

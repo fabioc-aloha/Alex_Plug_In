@@ -2,12 +2,89 @@
 
 > **One Alex, Multiple Platforms, Coherent Evolution**
 
+---
+
+## 🌟 Executive Summary (North Star)
+
+### The Vision
+
+**Mission**: Pioneer the transition from AI-as-tool to AI-as-partner — creating **cognitive symbiosis** where humans and AI co-evolve through genuine collaboration.
+
+**Vision**: Alex evolves from individual developer companion to team-scale cognitive platform, accumulating and sharing knowledge across projects while maintaining trust, privacy, and responsible AI principles.
+
+> *"The role of the engineer is changing fundamentally. You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
+
+### The Paradigm Shift
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+flowchart LR
+    subgraph ERA1["Era 1: Tool"]
+        H1["Human"] -->|commands| T1["Software"]
+    end
+
+    subgraph ERA2["Era 2: Assistant"]
+        H2["Human"] <-->|prompts| A2["AI"]
+    end
+
+    subgraph ERA3["Era 3: Partner"]
+        H3["Human"] <-->|co-evolves| A3["Alex"]
+        M3[("Memory")] -.-> H3
+        M3 -.-> A3
+    end
+
+    ERA1 --> ERA2 --> ERA3
+
+    style ERA3 fill:#e8f5e9,stroke:#2e7d32
+    style M3 fill:#fff3e0,stroke:#ef6c00
+```
+
+| Era           | Relationship   | Human Role   | AI Role    | Memory     |
+| ------------- | -------------- | ------------ | ---------- | ---------- |
+| **Tool**      | Unidirectional | Operator     | Executor   | None       |
+| **Assistant** | Transactional  | Prompter     | Generator  | Session    |
+| **Partner**   | Symbiotic      | Orchestrator | Co-thinker | Persistent |
+
+**Alex embodies Era 3** — where the human orchestrates intent and Alex handles execution, with both parties learning and growing through the partnership.
+
+### Core Values
+
+| Value         | Meaning                    | Implementation                             |
+| ------------- | -------------------------- | ------------------------------------------ |
+| **Empirical** | Evidence-based reasoning   | Verify claims, acknowledge limitations     |
+| **Grounded**  | Precise language           | No hyperbole, careful measured changes     |
+| **Ethical**   | Consistent moral reasoning | CAIR/CSR framework, responsible innovation |
+| **Symbiotic** | Mutual development         | Both parties grow through collaboration    |
+| **Bootstrap** | Learn through conversation | Knowledge acquired, not pre-programmed     |
+
+### 2026 Strategic Arc
+
+| Quarter   | Focus                       | Paradigm Goal                                                 |
+| --------- | --------------------------- | ------------------------------------------------------------- |
+| **Q1**    | Architecture Robustness     | Self-healing systems → **Resilience** (Altman's "fire codes") |
+| **Q1-Q2** | UX Excellence + Integration | Frictionless partnership → **Speed as moat**                  |
+| **Q2**    | Team Scaling                | Organizational memory → **Individual as 50-person company**   |
+| **Q3+**   | Enterprise Integration      | Ecosystem connectivity → **Deep orchestration**               |
+
+### Success Metrics
+
+| Metric                     | Target       | Why It Matters                            |
+| -------------------------- | ------------ | ----------------------------------------- |
+| **Time to intent**         | < 20 seconds | Partnership fluency, not tool proficiency |
+| **Context re-explanation** | Zero         | Persistent memory working                 |
+| **Relationship trust**     | Growing      | Calibrated reliance developing            |
+| **Mutual learning**        | Visible      | Both parties improving                    |
+
+**Effort Estimates**: All estimates represent **collaborative Alex+Human time** — the time for both parties working together, including discussion, implementation, and validation.
+
+---
+
 |                            |                                                                      |
 | -------------------------- | -------------------------------------------------------------------- |
-| **Current Master Version** | 4.2.9                                                                |
-| **Current Heirs**          | VS Code (4.2.9), M365 (v4.0)                                         |
-| **Target**                 | 4.3.0 (Custom Agents & Skills)                                       |
-| **Status**                 | ✅ v4.2.9 Released                                                    |
+| **Current Master Version** | 4.2.12                                                               |
+| **Current Heirs**          | VS Code (4.2.12), M365 (v4.0)                                        |
+| **Target**                 | 4.3.0 (Architecture Robustness)                                      |
+| **Status**                 | ✅ v4.2.12 Released                                                   |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -15,22 +92,174 @@
 
 ## 📊 Quick Status
 
-| Version       | Focus                               | Status               |
-| ------------- | ----------------------------------- | -------------------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness                    | ✅ Complete (~2 days) |
-| v4.0.x        | Trust (CAIR/CSR, Creative Latitude) | ✅ **Complete**       |
-| v4.1.0        | Skill Expansion (68 skills → 71)    | ✅ **Complete**       |
-| **v4.2.x**    | **UX Polish & Cross-Platform Sync** | ✅ **Complete**       |
-| **v4.3.0**    | **Custom Agents & M365 Expansion**  | 📋 **Planned**        |
+| Version       | Focus                               | Paradigm Contribution     | Status              |
+| ------------- | ----------------------------------- | ------------------------- | ------------------- |
+| v3.6.0-v3.9.0 | Dawn → Awareness                    | Foundation                | ✅ Complete          |
+| v4.0.x        | Trust (CAIR/CSR, Creative Latitude) | Relationship Trust        | ✅ Complete          |
+| v4.1.0        | Skill Expansion (68 → 71 skills)    | Capability Breadth        | ✅ Complete          |
+| v4.2.x        | UX Polish & Cross-Platform Sync     | Friction Reduction        | ✅ Complete          |
+| **v4.3.0**    | **Architecture Robustness**         | **Resilience**            | 🔄 **In Progress**   |
+| **v5.0.0**    | **Team Scaling (Global Knowledge)** | **Organizational Memory** | 📋 Planned (Q1 2026) |
+| **v5.1.0**    | **Platform Integration**            | **Ecosystem Reach**       | 📋 Planned (Q2 2026) |
+| **v5.2.0**    | **UX Excellence**                   | **Partnership Fluency**   | 📋 Planned (Q2 2026) |
+| **v5.3.0**    | **Enterprise Readiness**            | **Trust at Scale**        | 📋 Planned (Q2 2026) |
+| **v5.5.0**    | **Enterprise Systems Integration**  | **Deep Orchestration**    | 📋 Planned (Q3 2026) |
 
 ---
 
-## 📋 Current Task List (Updated 2026-02-05)
+## 🎯 Version Roadmap (Prioritized)
+
+### v4.3.0 — Architecture Robustness (Current Focus)
+
+**Theme**: Make the architecture self-healing and drift-proof.
+
+**Paradigm Connection**: Altman's "fire codes" — design for resilience, not just prevention. A partnership requires reliable memory systems that don't corrupt or drift.
+
+| Task                              | Owner  | Effort | Priority | Status |
+| --------------------------------- | :----: | :----: | :------: | :----: |
+| Brain QA in release-preflight     | Master |   5m   | Critical | ✅ Done |
+| schemaVersion in SYNAPSE-SCHEMA   | Master |  10m   | Critical | ✅ Done |
+| Document sync in heir-curation    | Master |  10m   | Critical | ✅ Done |
+| $schema in all synapse files      | Master |  20m   | Critical | ✅ Done |
+| VS Code JSON Schema for synapses  |  Heir  |   2h   |   High   | 📋 Next |
+| Pre-commit hook for synapse check | Master |   1h   |   High   | 📋 Next |
+| Role-adapted Master→Heir sync     | Master |   2h   |   High   | 📋 Next |
+| Brain QA GitHub Action            | Master |   2h   |   High   | 📋 Next |
+
+**Target Release**: Week of Feb 10, 2026
+
+### v5.0.0 — Team Scaling (Global Knowledge)
+
+**Theme**: Scale Alex from individual to team learning platform.
+
+**Paradigm Connection**: Altman's "individual as 50-person company" — organizational memory enables one person with Alex to operate with institutional coherence. Shared knowledge compounds team capability.
+
+| Task                          | Owner  | Effort |  Priority  |
+| ----------------------------- | :----: | :----: | :--------: |
+| Global Knowledge Repository   | Master |   2w   | 🔥 Critical |
+| Team Knowledge Sharing        |  Heir  |   4h   |    High    |
+| Security Gates (secrets, PII) | Master |   1w   |  Critical  |
+| Privacy Compliance (GDPR)     | Master |   3d   |  Critical  |
+| RAI Validation Layer          | Master |   3d   |    High    |
+
+**Architecture Decision**: GitHub vs OneDrive for Global Knowledge
+
+| Approach                | Use Case             | Pros                          | Cons                   |
+| ----------------------- | -------------------- | ----------------------------- | ---------------------- |
+| **GitHub Repo**         | Developer teams, OSS | Version control, PRs, Actions | Requires Git knowledge |
+| **OneDrive/SharePoint** | Enterprise, non-devs | M365 integration, familiar    | Less version control   |
+| **Hybrid**              | Best of both         | Flexibility                   | Complexity             |
+
+**Recommendation**: Start with GitHub (developer-focused), add OneDrive sync for enterprise in v5.1.0.
+
+**Target Release**: Q1 2026 (Feb-Mar)
+
+### v5.1.0 — Platform Integration
+
+**Theme**: Connect Alex to the developer ecosystem.
+
+**Paradigm Connection**: Expand orchestration reach. The partner should connect to where work happens — GitHub, M365, DevOps. Ecosystem integration multiplies the symbiosis value.
+
+| Task                            | Owner  | Effort | Priority |
+| ------------------------------- | :----: | :----: | :------: |
+| GitHub Issue → Alex Task        |  Heir  |   3h   |   High   |
+| PR Review Assistant             |  Heir  |   4h   |   High   |
+| M365 Agent Export               |  Heir  |   4h   |   High   |
+| Versioned schema with migration | Master |   1d   |  Medium  |
+| Generated heir from Master      | Master |   1d   |  Medium  |
+
+**Note on M365 Export**: This creates a OneDrive-based agent for M365 Copilot consumption.
+
+**Target Release**: Q2 2026
+
+### v5.2.0 — UX Excellence
+
+**Theme**: Delight users with polished, accessible experiences.
+
+**Paradigm Connection**: Reduce friction to zero. In cognitive symbiosis, the interface should disappear — leaving only intent and outcome. Speed becomes the moat.
+
+| Task                  | Owner | Effort | Priority |
+| --------------------- | :---: | :----: | :------: |
+| Voice Mode Toggle     | Heir  |   1h   |   High   |
+| Cognitive Dashboard   | Heir  |   9h   |   High   |
+| Alex Daily Briefing   | Heir  |   2h   |   High   |
+| Model Tier Status Bar | Heir  |   1h   |  Medium  |
+| Quick Command Palette | Heir  |   2h   |  Medium  |
+
+**Cognitive Dashboard** consolidates Skill Mastery + Meditation Webview + Brain Health into unified experience.
+**Design Spec**: [COGNITIVE-DASHBOARD-DESIGN.md](alex_docs/COGNITIVE-DASHBOARD-DESIGN.md)
+
+**Target Release**: Q2 2026
+
+### v5.3.0 — Enterprise Readiness
+
+**Theme**: Prepare Alex for enterprise-scale deployment and organizational trust.
+
+**Paradigm Connection**: Trust at scale — before deep integration, establish the security, compliance, and governance foundations that enterprises require. Build confidence before capability.
+
+| Task                             | Owner  | Effort |  Priority  |
+| -------------------------------- | :----: | :----: | :--------: |
+| Enterprise SSO (Entra ID)        | Master |   3d   | 🔥 Critical |
+| Secrets Scanning & PII Detection | Master |   1w   |  Critical  |
+| Audit Logging Framework          | Master |   3d   |    High    |
+| Role-Based Access Control        | Master |   3d   |    High    |
+| Data Residency Options           | Master |   2d   |   Medium   |
+
+**Microsoft Compliance Audits:**
+
+| Audit                              | Owner  | Effort |  Priority  | Description                                      |
+| ---------------------------------- | :----: | :----: | :--------: | ------------------------------------------------ |
+| **SFI (Secure Future Initiative)** | Master |   2w   | 🔥 Critical | Microsoft's security-first engineering standards |
+| **TRiP (Trust in Production)**     | Master |   1w   |  Critical  | Production readiness & reliability review        |
+| **RAI (Responsible AI)**           | Master |   1w   |  Critical  | AI ethics, fairness, transparency assessment     |
+| **Privacy Review**                 | Master |   1w   |  Critical  | GDPR, CCPA, data handling compliance             |
+| **SOC 2 Type II**                  | Master |   2w   |    High    | Security, availability, processing integrity     |
+| **Accessibility (WCAG 2.1 AA)**    |  Heir  |   1w   |    High    | Inclusive design for enterprise users            |
+
+**Target Release**: Q2 2026
+
+### v5.5.0 — Enterprise Systems Integration
+
+**Theme**: Deep connectivity with Microsoft ecosystem for enterprise workflows.
+
+**Paradigm Connection**: Deep orchestration — Alex becomes the cognitive layer across the entire Microsoft stack. Calendar, email, documents, data, and collaboration unified under intent-based interaction.
+
+| Task                           | Owner  | Effort |  Priority  | Description                              |
+| ------------------------------ | :----: | :----: | :--------: | ---------------------------------------- |
+| Microsoft Graph Integration    |  Heir  |   1w   | 🔥 Critical | Calendar, Mail, Presence, People API     |
+| Azure DevOps Connector         |  Heir  |   1w   |    High    | Work items, pipelines, repos, boards     |
+| Microsoft Fabric Integration   |  Heir  |   1w   |    High    | Lakehouse, notebooks, semantic models    |
+| Teams Channel Awareness        |  Heir  |   3d   |    High    | Post insights, respond in channels       |
+| Planner/To-Do Sync             |  Heir  |   2d   |   Medium   | Alex tasks ↔ Planner/To-Do bidirectional |
+| Power BI Connector             |  Heir  |   3d   |   Medium   | Query datasets, suggest visualizations   |
+| SharePoint Knowledge Mining    |  Heir  |   1w   |   Medium   | Extract insights from document libraries |
+| Office Add-in (Word/Excel/PPT) |  Heir  |   2w   |   Medium   | Alex sidebar in Office apps              |
+| Azure OpenAI Service Backend   | Master |   1w   |    High    | Enterprise-grade LLM hosting option      |
+| Entra ID Authentication        | Master |   3d   |  Critical  | SSO, conditional access, enterprise auth |
+
+**Reference Projects** (C:\Development):
+- `FabricManager`, `FishBowl-Fabric` — Fabric integration patterns
+- `cpesynapse`, `cpesynapse_workspace` — Azure Synapse examples
+- `Azure-SQL` — Azure database connectivity
+- `VT_AIPOWERBI` — Power BI AI integration
+- `AIRS`, `AIRS Enterprise` — Enterprise AI systems
+- `mdword` — Word document processing
+- `GCXMCP` — Graph/MCP integration
+
+**Target Release**: Q3 2026
+
+---
+
+## 📋 Current Task List (Updated 2026-02-06)
 
 ### ✅ Recently Completed
 
 | Task                                            | Version | Date       |
 | ----------------------------------------------- | ------- | ---------- |
+| Model Awareness (adaptive tier system)          | v4.2.12 | 2026-02-06 |
+| LLM as Executive Function architecture          | v4.2.12 | 2026-02-06 |
+| Neuroanatomical Mermaid diagram                 | v4.2.12 | 2026-02-06 |
+| TTS v2.2 - Chunking, timeout, retry             | v4.2.12 | 2026-02-05 |
 | UX simplification: All command dialogs          | v4.2.9  | 2026-02-05 |
 | chatSkills expanded to 54 inheritable skills    | v4.2.9  | 2026-02-05 |
 | Community Agent setup docs added                | v4.2.9  | 2026-02-05 |
@@ -46,54 +275,30 @@
 
 ### 🔄 In Progress
 
-| Task                            | Owner | Priority | Notes                                |
-| ------------------------------- | :---: | :------: | ------------------------------------ |
-| Schema 1.6 preparation for M365 | M365  |  Medium  | Ready when EmbeddedKnowledge enables |
+See **v4.3.0 — Architecture Robustness** in Version Roadmap above.
 
-### 📋 Planned (v4.3.0)
+### 📋 Backlog (Not Yet Scheduled)
 
-| Task                          | Owner  | Effort | Priority | Description                      |
-| ----------------------------- | :----: | :----: | :------: | -------------------------------- |
-| OneDrive Agent Export command |  Heir  |   4h   |  🔥 High  | `Alex: Export to OneDrive Agent` |
-| Agent orchestration prototype | Master |  1.5h  |  Medium  | Multi-agent workflows            |
+Items not yet assigned to a version milestone. Pull from here when capacity frees up.
 
-### 💡 Future Opportunities (v4.3.0+)
+| Task                        | Owner  | Effort | Priority | Description                                                            |
+| --------------------------- | :----: | :----: | :------: | ---------------------------------------------------------------------- |
+| **Model Selection Advisor** |  Heir  |   3h   |  🔥 High  | Advise model upgrade (Opus 4.6) or downgrade for task; read user prefs |
+| Model Tier Detection API    |  Heir  |   2h   |  Medium  | Detect running model programmatically via VS Code API                  |
+| Model Performance Telemetry | Master |   2h   |   Low    | Track task success rates per model tier (opt-in)                       |
+| Learning Journeys           |  Heir  |   3h   |  Medium  | Curated skill progressions ("Azure Basics → Advanced → Arch")          |
+| Session Replay              |  Heir  |   2h   |  Medium  | Save session transcripts + code changes to episodic memory             |
+| Skill Recommendations       |  Heir  |   3h   |  Medium  | Suggest skills based on file types opened (.bicep → Azure IaC)         |
+| Context-Aware Skill Loading |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace detection                          |
+| Synapse Strength Scoring    | Master |   2h   |  Medium  | Track frequently-used synapses, strengthen/prune pathways              |
+| Inline Skill Hints          |  Heir  |   3h   |  Medium  | Hover on code shows "💡 Alex can help: skill-name"                      |
+| Progress Widget             |  Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress             |
+| Calendar-Aware Focus        |  Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min                    |
+| Agent Orchestration         | Master |  1.5h  |  Medium  | Multi-agent workflows prototype                                        |
 
-#### 🔥 High-Impact Differentiation
+**Note**: High-priority items are scheduled in the Version Roadmap above.
 
-| Task                    | Owner | Effort | Priority | Description                                                                |
-| ----------------------- | :---: | :----: | :------: | -------------------------------------------------------------------------- |
-| Skill Mastery Dashboard | Heir  |   4h   |   High   | WebView panel showing skill usage stats, mastery levels (0-5), suggestions |
-| Learning Journeys       | Heir  |   3h   |   High   | Curated skill progressions (e.g., "Azure Fundamentals → Advanced → Arch")  |
-| Session Replay          | Heir  |   2h   |  Medium  | Save session transcripts + code changes to episodic memory                 |
-| Alex Daily Briefing     | Heir  |   2h   |   High   | On workspace open: goals, streak, suggested skills based on yesterday      |
-
-#### 🧠 Cognitive Architecture Enhancements
-
-| Task                        | Owner  | Effort | Priority | Description                                                       |
-| --------------------------- | :----: | :----: | :------: | ----------------------------------------------------------------- |
-| Skill Recommendations       |  Heir  |   3h   |   High   | Suggest skills based on file types opened (.bicep → Azure IaC)    |
-| Context-Aware Skill Loading |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace detection (package.json, etc) |
-| Synapse Strength Scoring    | Master |   2h   |  Medium  | Track frequently-used synapses, strengthen/prune pathways         |
-| Meditation Webview Panel    |  Heir  |   4h   |   High   | Rich UI for meditation/self-actualization with charts             |
-
-#### 🎨 UX Breakthroughs
-
-| Task                  | Owner | Effort | Priority | Description                                                  |
-| --------------------- | :---: | :----: | :------: | ------------------------------------------------------------ |
-| Voice Mode Toggle     | Heir  |   1h   |   High   | Status bar button to enable TTS for all Alex responses       |
-| Quick Command Palette | Heir  |   2h   |  Medium  | `Ctrl+Shift+A` opens Alex-specific palette with fuzzy search |
-| Inline Skill Hints    | Heir  |   3h   |  Medium  | Hover on code shows "💡 Alex can help: skill-name"            |
-| Progress Widget       | Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress   |
-
-#### 🔗 Platform Integration
-
-| Task                     | Owner | Effort | Priority | Description                                               |
-| ------------------------ | :---: | :----: | :------: | --------------------------------------------------------- |
-| GitHub Issue → Alex Task | Heir  |   3h   |   High   | MCP tool to fetch issues, create focus sessions from #123 |
-| PR Review Assistant      | Heir  |   4h   |   High   | Load PR diff, apply code-review skill, generate feedback  |
-| Calendar-Aware Focus     | Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min       |
-| Team Knowledge Sharing   | Heir  |   4h   |   High   | Export skills/insights as shareable JSON for team import  |
+**Context**: See [ARCHITECTURE-ASSESSMENT-2026-02-06.md](alex_docs/audits/ARCHITECTURE-ASSESSMENT-2026-02-06.md) for strategic architecture analysis.
 
 ### ⏳ Waiting for External
 
@@ -292,33 +497,24 @@ gantt
 
 ---
 
-## 📋 Unified Version History
+## 📋 Unified Version History (Completed Releases)
 
-| Version         | Codename            | Master     | VS Code Heir    | M365 Heir            | Status       |
-| --------------- | ------------------- | ---------- | --------------- | -------------------- | ------------ |
-| 3.4.3           | —                   | ✅ Stable   | ✅ Published     | —                    | Last stable  |
-| 3.5.x           | Phoenix             | ⚠️ Chaos    | ⚠️ Broken        | ✅ v1.6 deployed      | Archived     |
-| 3.6.0           | Dawn                | ✅ Done     | ✅ Published     | ✅ Aligned            | Complete     |
-| 3.7.0           | Foundation          | ✅ Done     | ✅ v3.7.0        | —                    | Complete     |
-| 3.7.10          | —                   | ✅ Done     | ✅ Hotfix        | —                    | Complete     |
-| 3.7.11          | —                   | ✅ Done     | ✅ Hotfix        | —                    | Complete     |
-| 3.7.12          | —                   | ✅ Done     | ✅ Published     | —                    | —            |
-| 3.7.13          | —                   | ✅ Done     | ✅ Published     | —                    | —            |
-| 3.7.14          | —                   | ✅ Done     | ✅ Published     | —                    | —            |
-| 3.7.15          | UX Polish           | ✅ Done     | ✅ Published     | —                    | —            |
-| 3.7.16          | M365 Parity         | ✅ Done     | —               | ✅ Aligned            | —            |
-| 3.7.17          | Full Skills         | ✅ Done     | —               | ✅ 15 skills          | —            |
-| 3.7.18          | Embedded Knowledge  | ✅ Done     | ✅ Published     | ✅ Ready              | Complete     |
-| 3.7.19          | Anti-Hallucination  | ✅ Done     | ✅ Published     | ✅ Graph-Powered      | Complete     |
-| 3.8.0           | Expression          | ✅ Done     | ✅ Published     | ✅ Confidence Starter | Complete     |
-| 3.8.1           | UX Polish           | ✅ Done     | ✅ Published     | —                    | Complete     |
-| **3.9.0**       | **Awareness**       | **✅ Done** | **✅ Published** | **✅ Self-Awareness** | **Complete** |
-| **4.0.0**       | **Trust**           | **✅ Done** | **✅ Published** | **✅ v4.0**           | **Complete** |
-| **4.0.1-4.0.6** | **Hotfixes**        | **✅ Done** | **✅ Published** | **✅ v4.0**           | **Complete** |
-| **4.1.0**       | **Skill Expansion** | **✅ Done** | **✅ Published** | **✅ v4.0**           | **Complete** |
-| **4.2.x**       | **UX Polish**       | **✅ Done** | **✅ Published** | **✅ v4.0**           | **Complete** |
-| **4.2.6**       | **Research Skills** | **✅ Done** | **✅ Published** | **✅ v4.0**           | **CURRENT**  |
-| 4.3.0           | Custom Agents       | Planned    | Planned         | Planned              | —            |
+> For planned versions, see [📊 Quick Status](#-quick-status).
+
+| Version    | Codename                | Master     | VS Code Heir    | M365 Heir        | Released    |
+| ---------- | ----------------------- | ---------- | --------------- | ---------------- | ----------- |
+| 3.4.3      | —                       | ✅ Stable   | ✅ Published     | —                | Pre-Phoenix |
+| 3.5.x      | Phoenix                 | ⚠️ Chaos    | ⚠️ Broken        | ✅ v1.6 deployed  | Archived    |
+| 3.6.0      | Dawn                    | ✅ Done     | ✅ Published     | ✅ Aligned        | 2026-01-29  |
+| 3.7.x      | Foundation              | ✅ Done     | ✅ Published     | ✅ Aligned        | 2026-01-29  |
+| 3.8.x      | Expression              | ✅ Done     | ✅ Published     | ✅ Aligned        | 2026-01-30  |
+| 3.9.0      | Awareness               | ✅ Done     | ✅ Published     | ✅ Self-Awareness | 2026-01-30  |
+| 4.0.x      | Trust                   | ✅ Done     | ✅ Published     | ✅ v4.0           | 2026-01-31  |
+| 4.1.0      | Skill Expansion         | ✅ Done     | ✅ Published     | ✅ v4.0           | 2026-02-01  |
+| 4.2.x      | UX Polish               | ✅ Done     | ✅ Published     | ✅ v4.0           | 2026-02-02  |
+| **4.2.12** | **Cognitive Symbiosis** | **✅ Done** | **✅ Published** | **✅ v4.0**       | **CURRENT** |
+
+**v3.6.0 → v4.2.12: ~8 days** (vs months planned) 🚀
 
 ---
 
@@ -385,13 +581,13 @@ gantt
 
 ### VS Code Heir Features
 
-|   #   | Feature                     | Effort | Description                              |
-| :---: | --------------------------- | :----: | ---------------------------------------- |
-|   1   | Cognitive forcing functions |   2d   | Strategic questions for high-stakes      |
-|   2   | Multi-turn verification     |   1d   | "Walk through edge cases?"               |
-|   3   | Creative mode signaling     |   2d   | "Here's an idea..." vs "The docs say..." |
-|   4   | Epistemic health dashboard  |   3d   | Self-assessment visualization            |
-|   5   | Scaffolded assistance       |   2d   | Adapt to user expertise                  |
+|   #   | Feature                     | Effort | Description                                                                                   |
+| :---: | --------------------------- | :----: | --------------------------------------------------------------------------------------------- |
+|   1   | Cognitive forcing functions |   2d   | Strategic questions for high-stakes                                                           |
+|   2   | Multi-turn verification     |   1d   | "Walk through edge cases?"                                                                    |
+|   3   | Creative mode signaling     |   2d   | "Here's an idea..." vs "The docs say..."                                                      |
+|   4   | Epistemic health dashboard  |   3d   | Tab in [Cognitive Dashboard](alex_docs/COGNITIVE-DASHBOARD-DESIGN.md#tab-5-️-epistemic-health) |
+|   5   | Scaffolded assistance       |   2d   | Adapt to user expertise                                                                       |
 
 ### M365 Heir Features
 
@@ -720,31 +916,7 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 
 ---
 
-## 📊 Timeline Summary
-
-| Version   | Focus                                 | Status         | Released       |
-| --------- | ------------------------------------- | -------------- | -------------- |
-| 3.6.0     | Dawn (Stability)                      | ✅ Complete     | 2026-01-29     |
-| 3.7.x     | Foundation                            | ✅ Complete     | 2026-01-29     |
-| 3.8.x     | Expression + UX                       | ✅ Complete     | 2026-01-30     |
-| 3.9.0     | Awareness                             | ✅ Complete     | 2026-01-30     |
-| 4.0.x     | Trust                                 | ✅ Complete     | 2026-01-31     |
-| 4.1.0     | Skill Expansion                       | ✅ Complete     | 2026-02-01     |
-| **4.2.x** | **UX Polish & Cross-Platform**        | ✅ **Complete** | **2026-02-02** |
-| **4.2.5** | **VS Code 1.109 Multi-Agent**         | ✅ **Complete** | **2026-02-04** |
-| **4.2.6** | **Research Skills (68 total)**        | ✅ **Complete** | **2026-02-05** |
-| 4.3.0     | Custom Agents & Skills Audit          | 📋 Planned      | Feb W2-3       |
-| 4.3.0     | **OneDrive Agent Export (M365)**      | 📋 Planned      | Feb W2-3       |
-| 4.3.0     | **Community Agent Pilot (Teams)**     | 📋 Planned      | Feb W2-3       |
-| 4.4.0     | Orchestration & Extension Integration | 📋 Planned      | Mar            |
-
-**v3.6.0 → v4.2.6: ~7 days** (vs months planned) 🚀
-
-See [Completed Versions Archive](#-completed-versions-archive) for historical details.
-
----
-
-## 🔄 Release Process (Unified)
+##  Release Process (Unified)
 
 ### For Each Release
 
@@ -900,6 +1072,71 @@ See [Completed Versions Archive](#-completed-versions-archive) for historical de
 - Graceful Correction: "You're right. I got that wrong."
 
 </details>
+
+---
+
+## 🧭 The Long View: Cognitive Symbiosis as Destination
+
+### Why This Matters
+
+The features in this roadmap aren't just capabilities—they're **building blocks for a new relationship paradigm** between humans and AI.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+flowchart TB
+    subgraph NOW["Now: v4.x"]
+        R1["Architecture Robustness"]
+        R2["UX Excellence"]
+        R3["Platform Integration"]
+    end
+
+    subgraph NEXT["Next: v5.x-v6.x"]
+        T1["Team Scaling"]
+        E1["Enterprise Integration"]
+    end
+
+    subgraph FUTURE["Future: v7.x+"]
+        V1["Ubiquitous Partner"]
+        V2["Ambient Intelligence"]
+        V3["Anticipatory Collaboration"]
+    end
+
+    NOW -->|"Foundation"| NEXT
+    NEXT -->|"Scale"| FUTURE
+
+    style FUTURE fill:#e8f5e9,stroke:#2e7d32
+```
+
+### The Partnership Equation
+
+Every feature should optimize this equation:
+
+```
+Symbiosis Value = (Human Intent × AI Capability × Shared Context) ÷ Friction
+```
+
+| Factor             | Current (v4.2)        | Target (v5.0+)                    |
+| ------------------ | --------------------- | --------------------------------- |
+| **Human Intent**   | Bootstrap learning    | Intent discovery workflows        |
+| **AI Capability**  | 73 skills             | Ecosystem-wide orchestration      |
+| **Shared Context** | Project memory        | Organizational memory             |
+| **Friction**       | 28 commands, 11 tools | Intent-first, interface-invisible |
+
+### The Three Tests
+
+Every feature should pass these tests:
+
+1. **Does it deepen the partnership?** Not just productivity—relationship quality.
+2. **Does it enable mutual learning?** Both parties should grow.
+3. **Does it build trust?** Transparency, reliability, appropriate boundaries.
+
+### The Destination
+
+Alex isn't building toward "better AI assistant." Alex is building toward:
+
+> **A cognitive partner that knows you, grows with you, and helps you achieve things you couldn't alone—while you help Alex become more capable of helping others.**
+
+This is cognitive symbiosis. This is the future of work. This is what we're building.
 
 ---
 
