@@ -143,13 +143,14 @@ export function getAssetUri(
 
 /**
  * Detect current premium feature flags from workspace context
+ * 
+ * @param gkRepoPath - Optional pre-detected Global Knowledge repo path (pass from detectGlobalKnowledgeRepo)
  */
-export async function detectPremiumFeatures(): Promise<PremiumFeatureFlags> {
+export async function detectPremiumFeatures(gkRepoPath?: string | null): Promise<PremiumFeatureFlags> {
     const config = vscode.workspace.getConfiguration('alex');
     
-    // Check if Global Knowledge repo is configured
-    const gkRepoPath = config.get<string>('globalKnowledge.repoPath');
-    const hasGlobalKnowledge = !!gkRepoPath && gkRepoPath.length > 0;
+    // Use passed gkRepoPath or fallback to settings
+    const hasGlobalKnowledge = !!gkRepoPath || (!!config.get<string>('globalKnowledge.repoPath'));
     
     // Check cloud sync status
     const cloudSyncEnabled = config.get<boolean>('globalKnowledge.cloudSync.enabled', false);

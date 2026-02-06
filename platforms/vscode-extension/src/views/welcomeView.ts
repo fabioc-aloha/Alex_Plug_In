@@ -180,8 +180,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
       
-      // Detect premium features and get appropriate assets
-      const premiumFlags = await detectPremiumFeatures();
+      // Detect premium features and get appropriate assets (pass gkRepoPath for accurate detection)
+      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
       const premiumAssets = getPremiumAssets(premiumFlags, true); // rotate banners
       
       // Detect persona from user profile
@@ -770,14 +770,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-text {
             flex: 1;
         }
-        .action-shortcut {
-            font-size: 10px;
-            opacity: 0.5;
-            font-family: var(--vscode-editor-font-family), monospace;
-            background: var(--vscode-badge-background);
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
         .premium-badge {
             font-size: 10px;
             margin-left: auto;
@@ -1043,19 +1035,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream (Neural Maintenance)</span>
-                    <span class="action-shortcut">⌃⌥D</span>
                 </button>
                 <button class="action-btn" onclick="cmd('selfActualize')">
                     <span class="action-icon">✨</span>
                     <span class="action-text">Self-Actualize</span>
-                    <span class="action-shortcut">⌃⌥S</span>
                 </button>
                 
                 ${hasGlobalKnowledge ? `<div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
                     <span class="action-icon">☁️</span>
                     <span class="action-text">Sync Knowledge</span>
-                    <span class="action-shortcut">⌃⌥K</span>
                 </button>
                 <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="⭐ Premium feature: Requires Global Knowledge repository">
                     <span class="action-icon">🔎</span>
@@ -1107,7 +1096,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('openDocs')">
                     <span class="action-icon">📚</span>
                     <span class="action-text">Documentation</span>
-                    <span class="action-shortcut">⌃⌥H</span>
                 </button>
                 <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics, telemetry data, and report bugs">
                     <span class="action-icon">🩺</span>
