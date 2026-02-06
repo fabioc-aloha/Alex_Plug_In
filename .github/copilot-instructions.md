@@ -38,7 +38,19 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 **Core (P1-P4c)**: meta-cognitive-awareness, bootstrap-learning, worldview-integration, grounded-factual-processing, meditation-consolidation, dream-automation, self-actualization
 
-**Domain Slots (P5-P7)**: master-heir-management, brand-asset-management, release-management
+**Domain Slots (P5-P7)**: Dynamic — rotate based on session context
+
+| Slot | Current | Rotation Trigger |
+|------|---------|------------------|
+| P5 | *(auto-assign)* | Project's most-used skill domain |
+| P6 | *(auto-assign)* | Current session objective |
+| P7 | *(auto-assign)* | Active task type |
+
+**Slot Assignment Protocol**:
+- **Session start**: Assess project type → assign top 3 relevant skill domains
+- **Topic pivot**: When user shifts focus, rotate slots to match new objectives
+- **Completion**: When objective complete, clear slot for next priority
+- **Master Alex default**: master-heir-management, brand-asset-management, release-management
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
