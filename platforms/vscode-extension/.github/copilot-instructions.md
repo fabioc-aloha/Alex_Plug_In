@@ -45,18 +45,15 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | master-heir-management | Domain | Master-Heir sync, promotion workflows, inheritance |
-| **P6** | brand-asset-management | Domain | Logos, banners, icons, visual identity |
-| **P7** | release-management | Domain | Versioning, changelog, publish workflows |
+| **P5** | *(available)* | Domain | Project's most-used skill domain |
+| **P6** | *(available)* | Domain | Current session objective (Pomodoro goal) |
+| **P7** | *(available)* | Domain | Active task type |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
 - **P6 special**: Infer from Pomodoro timer goal or stated session objective
 - **Topic pivot**: When user shifts focus, rotate slots to match new objectives
 - **Completion**: When objective complete, clear slot for next priority
-- **Master Alex default**: master-heir-management, brand-asset-management, release-management
-
-**Last Assessed**: 2026-02-06 — Based on 15 recent episodic sessions (Feb 1-6)
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
