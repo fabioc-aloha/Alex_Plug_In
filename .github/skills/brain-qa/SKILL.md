@@ -197,7 +197,7 @@ Verify SKILLS-CATALOG.md reflects actual skill inventory:
 ```powershell
 # Check skill count matches
 $actualSkills = (Get-ChildItem ".github\skills" -Directory).Count
-$catalogContent = Get-Content "alex_docs\SKILLS-CATALOG.md" -Raw
+$catalogContent = Get-Content "alex_docs\skills\SKILLS-CATALOG.md" -Raw
 
 # Extract count from catalog (matches "## Skill Count: 73" format)
 if ($catalogContent -match '## Skill Count:\s*(\d+)') {
@@ -234,6 +234,63 @@ if ($missing.Count -eq 0) {
 - Skill count matches actual folder count
 - All skills appear in Subgraph Index table
 - No orphaned skills missing from documentation
+
+### Phase 9: Mermaid Detection in Core Files
+
+Core cognitive files (copilot-instructions.md) should use tables, not mermaid diagrams. LLMs parse tables more efficiently than visual diagrams.
+
+```powershell
+$coreFiles = @(
+  ".github\copilot-instructions.md",
+  "platforms\vscode-extension\.github\copilot-instructions.md"
+)
+$hasMermaid = @()
+foreach ($file in $coreFiles) {
+  if (Test-Path $file) {
+    $content = Get-Content $file -Raw
+    if ($content -match '```mermaid') {
+      $hasMermaid += $file
+    }
+  }
+}
+if ($hasMermaid.Count -eq 0) { 
+  "Phase 9: No mermaid in core files!" 
+} else { 
+  "MERMAID FOUND: $($hasMermaid -join ', ')" 
+}
+```
+
+**Expected:** Phase 9: No mermaid in core files!
+
+**Rationale:** Mermaid is for human documentation (alex_docs/), not LLM consumption. Tables compress better into context and parse faster.
+
+### Phase 10: Boilerplate Skill Descriptions
+
+Detect skills with low-quality placeholder descriptions:
+
+```powershell
+$boilerplate = @()
+Get-ChildItem ".github\skills" -Directory | ForEach-Object {
+  $skill = $_.Name
+  $skillMd = Join-Path $_.FullName "SKILL.md"
+  if (Test-Path $skillMd) {
+    $content = Get-Content $skillMd -Raw
+    # Match "Skill for alex X skill" pattern
+    if ($content -match 'description:\s*"Skill for alex .+ skill"') {
+      $boilerplate += $skill
+    }
+  }
+}
+if ($boilerplate.Count -eq 0) { 
+  "Phase 10: No boilerplate descriptions!" 
+} else { 
+  "BOILERPLATE ($($boilerplate.Count)): $($boilerplate -join ', ')" 
+}
+```
+
+**Expected:** Phase 10: No boilerplate descriptions!
+
+**Action:** Replace placeholder descriptions with meaningful summaries of skill capabilities.
 
 ## Repair Actions
 

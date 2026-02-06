@@ -617,7 +617,7 @@ export async function listVoices(language: string = 'en'): Promise<string[]> {
  */
 function tableToSpeech(tableMatch: string): string {
     const lines = tableMatch.trim().split('\n').filter(line => line.trim());
-    if (lines.length < 2) return '';
+    if (lines.length < 2) {return '';}
     
     // Parse header row
     const headers = lines[0]
@@ -625,7 +625,7 @@ function tableToSpeech(tableMatch: string): string {
         .map(cell => cell.trim())
         .filter(cell => cell && !cell.match(/^[-:]+$/));
     
-    if (headers.length === 0) return '';
+    if (headers.length === 0) {return '';}
     
     // Skip separator row (line with dashes)
     const dataRows = lines.slice(2);
@@ -640,7 +640,7 @@ function tableToSpeech(tableMatch: string): string {
             .map(cell => cell.trim())
             .filter(cell => cell);
         
-        if (cells.length === 0) continue;
+        if (cells.length === 0) {continue;}
         
         // Read each cell with its column header
         const rowParts: string[] = [];

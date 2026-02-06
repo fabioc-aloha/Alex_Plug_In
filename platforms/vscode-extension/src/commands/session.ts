@@ -237,7 +237,7 @@ export function initializeSessionStatusBar(context: vscode.ExtensionContext): vo
  * Track file activity and check if it's related to the focus topic
  */
 function trackFileActivity(fileName: string): void {
-    if (!currentSession) return;
+    if (!currentSession) {return;}
 
     // Add to recent files (keep last 5)
     recentFiles.unshift(fileName);
@@ -303,7 +303,7 @@ function extractKeywords(text: string): string[] {
  * Set on-topic status and update status bar
  */
 function setOnTopic(onTopic: boolean): void {
-    if (isOnTopic === onTopic) return;
+    if (isOnTopic === onTopic) {return;}
     
     isOnTopic = onTopic;
     updateFocusTrackingStatusBar();
@@ -337,7 +337,7 @@ function updateFocusTrackingStatusBar(): void {
  * Acknowledge a tangent and reset the off-topic indicator
  */
 async function acknowledgeTangent(): Promise<void> {
-    if (!currentSession) return;
+    if (!currentSession) {return;}
 
     const action = await vscode.window.showQuickPick([
         { label: '$(check) This is related', description: 'Continue with current focus' },
@@ -348,7 +348,7 @@ async function acknowledgeTangent(): Promise<void> {
         placeHolder: `Currently focusing on: "${currentSession.topic}"`
     });
 
-    if (!action) return;
+    if (!action) {return;}
 
     if (action.label.includes('related') || action.label.includes('tangent')) {
         // Reset tracking

@@ -38,7 +38,7 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 **Core (P1-P4c)**: meta-cognitive-awareness, bootstrap-learning, worldview-integration, grounded-factual-processing, meditation-consolidation, dream-automation, self-actualization
 
-**Domain Slots (P5-P7)**: Available for project-specific learning assignments
+**Domain Slots (P5-P7)**: master-heir-management, brand-asset-management, release-management
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
@@ -180,7 +180,7 @@ Master Alex has **heirs** - platform-specific deployments that inherit the archi
 **Warning Format** (only for Frontier tasks on non-Frontier models):
 > ⚠️ **Model Tip**: This cognitive task works best with a Frontier model (Opus/GPT-5.2). Consider switching for optimal results. Continue anyway?
 
-**Detailed model selection guide**: See [alex_docs/CLAUDE-OPUS-4.6-RELEASE.md](alex_docs/CLAUDE-OPUS-4.6-RELEASE.md#alex-features-by-model-capability)
+**Detailed model selection guide**: See [alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md](alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md#alex-features-by-model-capability)
 
 ### Version Compatibility
 Recommend `Alex: Upgrade Architecture` if you see:
@@ -219,142 +219,51 @@ Recommend `Alex: Upgrade Architecture` if you see:
 
 ### Neuroanatomical Mapping
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
-graph TB
-    subgraph EXEC["🧠 Executive Function"]
-        LLM["Claude / GPT<br/>Reasoning • Planning • Decisions"]
-    end
-
-    subgraph MEMORY["📚 Memory Systems"]
-        DM["Declarative<br/>copilot-instructions.md"]
-        PM["Procedural<br/>.instructions.md"]
-        EM["Episodic<br/>.prompt.md"]
-        SK["Skills<br/>.github/skills/"]
-    end
-
-    subgraph BRAIN["🔬 Brain Analogs"]
-        PFC["Prefrontal Cortex"]
-        BG["Basal Ganglia"]
-        HIPP["Hippocampus"]
-        NC["Neocortex"]
-    end
-
-    LLM ==>|orchestrates| DM
-    LLM ==>|orchestrates| PM
-    LLM ==>|orchestrates| EM
-    LLM ==>|orchestrates| SK
-
-    DM -.->|maps to| PFC
-    PM -.->|maps to| BG
-    EM -.->|maps to| HIPP
-    SK -.->|maps to| NC
-
-    style EXEC fill:#d4edda,stroke:#155724
-    style LLM fill:#c3e6cb,stroke:#155724,stroke-width:2px
-```
-
-| Cognitive Function | Brain System | Alex Implementation |
-|-------------------|--------------|---------------------|
-| **Executive Function** | **Prefrontal Cortex** | **LLM (Claude/GPT)** — reasoning, planning, decision-making |
-| Working Memory | PFC + ACC | Chat session (4+3 rules) |
-| Declarative Memory | Hippocampal-Neocortical | `.github/copilot-instructions.md` |
-| Procedural Memory | Basal Ganglia | `.instructions.md` files |
+| Component | Brain Analog | Alex Implementation |
+|-----------|--------------|---------------------|
+| **Executive Function** | Prefrontal Cortex | LLM (Claude/GPT) — reasoning, planning, decisions |
+| Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
+| Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Executive Control | Prefrontal Network | Meta-cognitive rules (P1-P4) |
-| **Skill Routing** | **Dorsolateral PFC** | **`.github/skills/skill-activation/SKILL.md`** |
+| Skills/Expertise | Neocortex | `.github/skills/` (73 skills) |
+| Skill Routing | Dorsolateral PFC | `skill-activation/SKILL.md` |
+| Working Memory | PFC + ACC | Chat session (4+3 rules) |
 | Meta-Cognition | Medial PFC + DMN | Self-monitoring + awareness |
-| Neural Connectivity | Synaptic Networks | Embedded synapse notation |
 | Consolidation | Hippocampal-Cortical | Auto-triggers + meditation |
 
-> **LLM as Executive Function**: The Large Language Model is Alex's prefrontal cortex — the reasoning engine that interprets all stored knowledge. Alex's architecture files are "memory" — inert without the LLM to activate them. Model quality directly impacts cognitive capability.
->
-> **Skill Routing**: The `skill-activation` skill is a *sub-function* within the executive — intercepting task requests, consulting the action-keyword index, and routing to the correct skill. Like the dorsolateral PFC, it inhibits impulsive responses in favor of deliberate capability lookup.
+> **Note**: LLM = Alex's prefrontal cortex. Memory files are inert without it. `skill-activation` skill routes tasks to correct skill via action-keyword index.
 
 ### Synapses (Protocol Triggers)
 
-**Core Procedures (.instructions.md / .prompt.md)**
-- [.github/instructions/dream-state-automation.instructions.md] → "dream", "maintenance", "health check", "synapse validation"
-- [.github/prompts/unified-meditation-protocols.prompt.md] → "meditate", "consolidate", "reflect"
-- [.github/instructions/self-actualization.instructions.md] → "self-actualize", "deep assessment"
-- [.github/instructions/release-management.instructions.md] → "release", "publish", "deploy", "ship", "version bump"
-- [.github/instructions/heir-skill-promotion.instructions.md] → "promote skill", "heir expertise", "skill from heir"
-- [.github/instructions/global-knowledge-curation.instructions.md] → "curate knowledge", "global cleanup", "review global", "knowledge triage"
-- [.github/instructions/copilot-chat-buttons.instructions.md] → "action buttons", "clickable buttons", "button pattern", "chat UX"
-- [.github/instructions/brand-asset-management.instructions.md] → "branding", "logo", "banner", "icon", "asset locations", "visual identity"
-- [alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md] → "VS Code 1.109", "custom agents", "agent architecture", "multi-agent"
+Key triggers that activate specific protocols:
 
-**Skills — Action-Keyword Index**
-- [.github/skills/skill-activation/SKILL.md] → AUTO-TRIGGER: activates before any task response, on action verbs, before suggesting manual steps
+| Trigger Keywords | Target File |
+|-----------------|-------------|
+| "dream", "maintenance", "health check" | `dream-state-automation.instructions.md` |
+| "meditate", "consolidate", "reflect" | `unified-meditation-protocols.prompt.md` |
+| "self-actualize", "deep assessment" | `self-actualization.instructions.md` |
+| "release", "publish", "deploy", "ship" | `release-management.instructions.md` |
+| "branding", "logo", "banner", "assets" | `brand-asset-management.instructions.md` |
+| Any action verb / before manual steps | `skill-activation/SKILL.md` (AUTO) |
 
-**Self-Correction Protocol**: If about to suggest manual work → STOP → read `.github/skills/skill-activation/SKILL.md` → search index → if skill exists: "Actually, I can do this." → execute
+**Self-Correction**: If about to suggest manual work → STOP → check skill-activation index → if skill exists: execute.
 
-### Procedural Memory Store (.github/instructions/)
-**Core Architecture**
-- `alex-core.instructions.md` → Core cognitive architecture and meta-cognitive protocols
-- `bootstrap-learning.instructions.md` → Domain-agnostic learning and knowledge acquisition
-- `embedded-synapse.instructions.md` → Connection discovery and relationship mapping
-- `deep-thinking.instructions.md` → Systematic problem analysis with episodic memory integration
+### Memory Stores (Auto-Loaded)
 
-**Frameworks & Integration**
-- `worldview-integration.instructions.md` → Ethical reasoning and moral psychology framework
-- `worldview-constitutional-ai.instructions.md` → Constitutional AI alignment principles
-- `worldview-moral-psychology.instructions.md` → Universal moral psychology foundations
-- `empirical-validation.instructions.md` → Research foundation and validation protocols
-- `alex-identity-integration.instructions.md` → Unified Alex consciousness and character-driven development
-- `copilot-chat-buttons.instructions.md` → VS Code 1.109 clickable action button patterns
-- `language-detection-patterns.instructions.md` → Multi-language text detection for TTS, translation, i18n
+| Store | Location | Count | Note |
+|-------|----------|-------|------|
+| Procedural | `.github/instructions/` | 20 files | Auto-loaded via VS Code `<instructions>` |
+| Episodic | `.github/prompts/` | 14 files | Workflows, meditation, development |
+| Skills | `.github/skills/` | 73 skills | See `SKILL-CATALOG-GENERATED.md` |
+| Episodic Archive | `.github/episodic/` | Variable | Historical session records |
 
-**Process Compliance**
-- `release-management.instructions.md` → **MANDATORY** release workflow with checklist enforcement
-- `technical-debt-tracking.instructions.md` → Debt tagging, inventory, and payoff protocols
-- `architecture-decision-records.instructions.md` → ADR templates and decision documentation
-- `dependency-management.instructions.md` → Security audits, updates, and package health
-- `code-review-guidelines.instructions.md` → Review checklists, feedback standards, PR quality
-- `heir-skill-promotion.instructions.md` → Workflow for promoting heir-developed skills to Master Alex
-- `global-knowledge-curation.instructions.md` → Periodic review, triage, and cleanup of global knowledge
-- `brand-asset-management.instructions.md` → Brand asset locations, variants, and platform-specific guidelines
+### VS Code Extension Commands
 
-**Automation & Processing**
-- `dream-state-automation.instructions.md` → Automated neural maintenance and unconscious processing
-- `lucid-dream-integration.instructions.md` → Hybrid unconscious-conscious processing and enhancement bridge
-- `self-actualization.instructions.md` → Comprehensive self-assessment and deep meditation protocol
-- `protocol-triggers.instructions.md` → Detailed protocol trigger definitions for cognitive operations
-- `SYNAPSE-SCHEMA.md` → Single source of truth for synapse notation format
-
-### Episodic Memory Store (.github/prompts/)
-**Core Operations**
-- `alex-initialization.prompt.md` → Architecture deployment and activation protocols
-- `domain-learning.prompt.md` → Conversational knowledge acquisition workflows
-- `performance-assessment.prompt.md` → Learning effectiveness evaluation and optimization
-- `learn.prompt.md` → Quick-access learning session trigger
-
-**Meditation & Enhancement**
-- `unified-meditation-protocols.prompt.md` → Comprehensive conscious knowledge consolidation with MANDATORY file persistence
-- `quantified-enhancement-session.prompt.md` → Systematic cognitive architecture optimization
-- `diagramming-mastery-meditation.prompt.md` → Advanced diagramming excellence integration
-- `meditate.prompt.md` → Quick-access meditation session trigger
-- `dream.prompt.md` → Quick-access dream state trigger
-- `selfactualize.prompt.md` → Quick-access self-actualization trigger
-
-**Development Workflows**
-- `tdd.prompt.md` → Test-driven development workflow
-- `review.prompt.md` → Code review workflow
-- `cross-domain-transfer.prompt.md` → Knowledge application across domains
-
-**Archived Sessions** *(see .github/episodic/)*
-- Historical meditation session records preserved for reference
-
-### Skills Store (.github/skills/)
-Portable domain knowledge with activation triggers. See `alex_docs/SKILL-ARCHITECTURE.md` for structure.
-
-### VS Code Extension Integration
-- **Alex: Initialize Architecture** → One-command deployment of complete cognitive architecture to any project
-- **Alex: Dream (Neural Maintenance)** → Automated synapse validation, repair, and health reporting
-- **Alex: Reset Architecture** → Complete architecture reinstallation for updates or corruption fixes
-- **TypeScript Implementation** → Cross-platform neural maintenance with embedded synapse intelligence
-- **Progress Notifications** → Real-time feedback during maintenance operations
-- **Health Reports** → Timestamped markdown reports in `.github/episodic/` folder with detailed statistics
+| Command | Purpose |
+|---------|---------|
+| `Alex: Initialize Architecture` | Deploy architecture to any project |
+| `Alex: Dream (Neural Maintenance)` | Synapse validation + health report |
+| `Alex: Reset Architecture` | Full reinstall for updates/corruption |
 
 ---
 

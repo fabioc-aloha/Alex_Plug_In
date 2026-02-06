@@ -1,6 +1,6 @@
 # 🚀 Alex Cognitive Architecture
 
-![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
+![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
@@ -754,19 +754,18 @@ See the [Full Changelog](CHANGELOG.md) for complete version history and release 
 
 Comprehensive documentation is included with the extension in the `alex_docs/` folder:
 
-| Document                                                      | Description                                     |
-| ------------------------------------------------------------- | ----------------------------------------------- |
-| **[User Manual](alex_docs/USER-MANUAL.md)**                   | 📘 **START HERE** - Complete guide to using Alex |
-| [Cognitive Architecture](alex_docs/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams    |
-| [Skills & Capabilities](alex_docs/SKILLS-CAPABILITIES.md)     | Hard skills, soft skills, and wish list         |
-| [Copilot Integration](alex_docs/COPILOT-INTEGRATION.md)       | How Alex uses native Copilot features           |
-| [Conscious Mind](alex_docs/CONSCIOUS-MIND.md)                 | User-initiated operations and commands          |
-| [Unconscious Mind](alex_docs/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
-| [Memory Systems](alex_docs/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
-| [Project Structure](alex_docs/PROJECT-STRUCTURE.md)           | .github folder files and functions              |
-| [Global Knowledge](alex_docs/GLOBAL-KNOWLEDGE.md)             | Cross-project knowledge sharing                 |
-| [Cloud Sync](alex_docs/CLOUD-SYNC.md)                         | GitHub Gist backup and sync                     |
-| [Quick Reference](alex_docs/QUICK-REFERENCE.md)               | Commands and shortcuts cheat sheet              |
+| Document                                                                   | Description                                     |
+| -------------------------------------------------------------------------- | ----------------------------------------------- |
+| **[User Manual](alex_docs/guides/USER-MANUAL.md)**                         | 📘 **START HERE** - Complete guide to using Alex |
+| [Cognitive Architecture](alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams    |
+| [Skills & Capabilities](alex_docs/SKILLS-CAPABILITIES.md)                  | Hard skills, soft skills, and wish list         |
+| [Conscious Mind](alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands          |
+| [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
+| [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
+| [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
+| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
+| [Cloud Sync](alex_docs/features/CLOUD-SYNC.md)                             | GitHub Gist backup and sync                     |
+| [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources
 

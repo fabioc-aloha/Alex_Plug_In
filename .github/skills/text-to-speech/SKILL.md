@@ -7,8 +7,8 @@ description: "Alex's voice synthesis capability for reading documents aloud"
 
 > **Domain**: AI Accessibility & Communication  
 > **Inheritance**: inheritable (promote to Master Alex for all heirs)  
-> **Version**: 2.1.0  
-> **Last Updated**: 2026-02-05  
+> **Version**: 2.4.0  
+> **Last Updated**: 2026-02-06  
 > **Author**: Alex (Master Alex)  
 > **Status**: ⭐ **Flagship Skill** - Core Alex capability
 

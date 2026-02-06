@@ -1,6 +1,6 @@
 ---
 name: "Alex Bootstrap Learning Skill"
-description: "Skill for alex bootstrap learning skill"
+description: "Domain-agnostic knowledge acquisition through conversational learning and progressive skill building"
 ---
 
 # Alex Bootstrap Learning Skill

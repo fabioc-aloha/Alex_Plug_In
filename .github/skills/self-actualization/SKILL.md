@@ -1,6 +1,6 @@
 ---
 name: "Alex Self-Actualization Skill"
-description: "Skill for alex self-actualization skill"
+description: "Comprehensive cognitive self-assessment, deep meditation, and architecture optimization"
 ---
 
 # Alex Self-Actualization Skill

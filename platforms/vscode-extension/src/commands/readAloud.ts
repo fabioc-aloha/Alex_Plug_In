@@ -268,10 +268,10 @@ export async function readAloud(
         
         // Put detected language first, then English
         languageItems.sort((a, b) => {
-            if (a.code === detected.lang) return -1;
-            if (b.code === detected.lang) return 1;
-            if (a.code === 'en-US') return -1;
-            if (b.code === 'en-US') return 1;
+            if (a.code === detected.lang) {return -1;}
+            if (b.code === detected.lang) {return 1;}
+            if (a.code === 'en-US') {return -1;}
+            if (b.code === 'en-US') {return 1;}
             return a.label.localeCompare(b.label);
         });
         
@@ -426,10 +426,10 @@ export async function saveAsAudio(
         }));
         
         languageItems.sort((a, b) => {
-            if (a.code === detected.lang) return -1;
-            if (b.code === detected.lang) return 1;
-            if (a.code === 'en-US') return -1;
-            if (b.code === 'en-US') return 1;
+            if (a.code === detected.lang) {return -1;}
+            if (b.code === detected.lang) {return 1;}
+            if (a.code === 'en-US') {return -1;}
+            if (b.code === 'en-US') {return 1;}
             return a.label.localeCompare(b.label);
         });
         

@@ -7,8 +7,8 @@ description: "Alex's voice synthesis capability for reading documents aloud"
 
 > **Domain**: AI Accessibility & Communication  
 > **Inheritance**: inheritable (promote to Master Alex for all heirs)  
-> **Version**: 2.0.0  
-> **Last Updated**: 2026-02-05  
+> **Version**: 2.4.0  
+> **Last Updated**: 2026-02-06  
 > **Author**: Alex (Master Alex)  
 > **Status**: ⭐ **Flagship Skill** - Core Alex capability
 
@@ -253,8 +253,10 @@ Reads the current selection or entire document aloud using Alex's default voice.
 
 **Behavior**:
 - If text is selected, reads only the selection
-- If no selection, reads the entire document
+- If no selection, reads the entire document from top
+- If no editor open (v2.1.0): offers "Paste from Clipboard" or "Type Text" options
 - Markdown files are stripped of formatting for natural speech
+- Pasted/typed text is auto-detected for markdown patterns
 - Progress shown in status bar
 - Click status bar to stop playback
 
@@ -335,7 +337,114 @@ Symbols are converted to natural speech equivalents:
 | `°` | "degrees" | 37°C → "37 degrees celsius" |
 | `±` | "plus or minus" | ±5% → "plus or minus 5 percent" |
 
+### Time Duration Patterns (v2.1.0)
+
+| Input | Spoken As |
+|-------|----------|
+| `4h` | "4 hours" |
+| `30m` | "30 minutes" |
+| `15s` | "15 seconds" |
+| `2d` | "2 days" |
+| `1w` | "1 week" |
+| `90min` | "90 minutes" |
+
+### Emoji Pronunciation (v2.1.0)
+
+| Emoji | Spoken As | Context |
+|-------|-----------|--------|
+| ✅ | "completed" | Status indicators |
+| ❌ | "not done" | Status indicators |
+| ⚠️ | "warning" | Alerts |
+| 📋 | "planned" | Task status |
+| 🔄 | "in progress" | Task status |
+| ⏳ | "waiting" | Task status |
+| 🔥 | "hot" or "high priority" | When followed by "High" |
+| 🔓 | "unlocked" | Feature status |
+| 💡 | "idea" | Suggestions |
+| 🆕 | "new" | Version notes |
+
+**Emoji-Text Deduplication**: When emoji meaning matches following text (e.g., `✅ Complete`), only says it once ("completed", not "completed Complete").
+
+### Table Reading (v2.1.0)
+
+Markdown tables are converted to natural speech:
+
+```markdown
+| Name  | Status    |
+|-------|----------|
+| Alice | ✅ Done   |
+| Bob   | 🔄 Active |
+```
+
+Becomes: "Table with 2 columns: Name, Status. Row 1: Name is Alice. Status is completed. Row 2: Name is Bob. Status is in progress."
+
+### Version Pattern Intelligence (v2.1.0)
+
+Versions are spoken naturally with context awareness:
+
+| Input | Spoken As | Why |
+|-------|-----------|----|
+| `v4.2.9` | "version 4.2.9" | Standalone version |
+| `Version: v4.2.9` | "Version: 4.2.9" | Already has "Version:" prefix |
+
+Uses negative lookbehind to prevent redundant "version version".
+
 **Design Principle**: Would a human reading this aloud say the symbol name, or translate it to meaning? Almost always the latter.
+
+---
+
+## Reliability & Long Content Handling (v2.1.0)
+
+### The Problem
+
+Edge TTS has undocumented size limits per WebSocket request. Documents over ~3000 characters (approximately 7 minutes of audio) can cause the connection to stall indefinitely, appearing to hang at "Synthesizing..." with no progress.
+
+### The Solution: Chunking with Retry
+
+**Chunking Strategy:**
+
+| Setting | Value | Rationale |
+|---------|-------|-----------|
+| `MAX_CHUNK_CHARS` | 3000 | Safe limit before Edge TTS stalls |
+| `CHUNK_TIMEOUT_MS` | 60000 | 60 seconds per chunk |
+| `MAX_RETRIES` | 3 | Retry failed chunks |
+
+**Chunk Splitting Logic:**
+1. Split at paragraph boundaries (`\n\n`) first
+2. If still too long, split at sentence boundaries (`. ` or `! ` or `? `)
+3. Progress displayed as `Synthesizing speech [n/N]...`
+
+**Retry with Exponential Backoff:**
+
+| Attempt | Delay | Formula |
+|---------|-------|---------|
+| 1 | ~1s | `1000 + jitter` |
+| 2 | ~2s | `2000 + jitter` |
+| 3 | ~4s | `4000 + jitter` |
+
+Jitter (0-500ms random) prevents thundering herd on concurrent requests.
+
+### Long Content Summarization
+
+For documents over 5 minutes (~750 words), Alex offers to summarize before reading:
+
+```
+This document is approximately 32 minutes long (~4800 words).
+Would you like to:
+- Read full content (~32 min)
+- Summarize for speech (~3 min) ← Recommended
+```
+
+Summarization uses the VS Code Language Model API (GPT-4o preferred) with a target of ~450 words (~3 minutes).
+
+### Speaker Warmup Delay
+
+Bluetooth and USB speakers often need time to "wake up" from power-saving mode. A 2-second delay before playback starts ensures the first words aren't clipped:
+
+```javascript
+const SPEAKER_WARMUP_MS = 2000;
+// Status shows "Preparing speakers..." during delay
+```
 
 ---
 
@@ -410,17 +519,49 @@ wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
 </speak>
 ```
 
-### Popular Voice IDs
+### Multi-Language Support (v2.1.0)
 
-| Language | Voice | Style |
-|----------|-------|-------|
-| en-US | GuyNeural | Professional male |
-| en-US | JennyNeural | Professional female |
-| en-US | AriaNeural | News anchor style |
-| en-GB | RyanNeural | British male |
-| en-GB | SoniaNeural | British female |
-| en-AU | WilliamNeural | Australian male |
-| en-IN | NeerjaNeural | Indian English |
+Alex automatically detects the language of your text and selects an appropriate voice.
+
+**Detection Strategy:**
+
+| Detection Type | Languages | Method |
+|----------------|-----------|--------|
+| **Character-based** | Chinese, Japanese, Korean, Arabic, Hebrew, Thai, Hindi, Russian, Greek, Vietnamese | Script/Unicode ranges |
+| **Word-pattern** | Spanish, French, German, Portuguese, Italian, Dutch, Polish, Swedish, Norwegian, Finnish, Danish, Turkish, Indonesian, Malay, Tagalog, Romanian, Czech, Hungarian | Common word markers |
+
+**User Prompt Fallback:**
+- If detection confidence < 15%, Alex prompts you to select the language
+- Quick pick shows top language options plus "Other (English default)"
+
+**32 Supported Languages:**
+
+| Language | Voice | Locale |
+|----------|-------|--------|
+| English (US) | GuyNeural | en-US |
+| English (UK) | RyanNeural | en-GB |
+| English (AU) | WilliamNeural | en-AU |
+| Spanish | AlvaroNeural | es-ES |
+| French | HenriNeural | fr-FR |
+| German | ConradNeural | de-DE |
+| Portuguese (BR) | AntonioNeural | pt-BR |
+| Italian | DiegoNeural | it-IT |
+| Dutch | MaartenNeural | nl-NL |
+| Polish | MarekNeural | pl-PL |
+| Russian | DmitryNeural | ru-RU |
+| Japanese | KeitaNeural | ja-JP |
+| Korean | InJoonNeural | ko-KR |
+| Chinese (Mandarin) | YunxiNeural | zh-CN |
+| Chinese (Taiwan) | YunJheNeural | zh-TW |
+| Arabic | HamedNeural | ar-SA |
+| Hindi | MadhurNeural | hi-IN |
+| Vietnamese | NamMinhNeural | vi-VN |
+| Thai | NiwatNeural | th-TH |
+| Turkish | AhmetNeural | tr-TR |
+| Swedish | MattiasNeural | sv-SE |
+| Norwegian | FinnNeural | nb-NO |
+| Danish | JeppeNeural | da-DK |
+| Finnish | HarriNeural | fi-FI |
 
 ---
 
@@ -438,7 +579,14 @@ wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1
 
 ## Version History
 
-### v2.0.0 (2026-02-06)
+### v2.1.0 (2026-02-05)
+- **Multi-language auto-detection** (32 languages)
+- Character-based detection for non-Latin scripts (CJK, Cyrillic, Arabic, etc.)
+- Word-pattern detection for Latin-script languages
+- User prompt fallback when detection confidence < 15%
+- Dynamic SSML `xml:lang` attribute for optimal pronunciation
+
+### v2.0.0 (2026-02-05)
 - Native TypeScript implementation
 - Removed Python/MCP server dependencies
 - Webview-based cross-platform audio player

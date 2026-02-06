@@ -150,7 +150,7 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
                             inCodeBlock = !inCodeBlock;
                             continue;
                         }
-                        if (inCodeBlock) continue;
+                        if (inCodeBlock) {continue;}
                         
                         // Reset regex state
                         synapseRegex.lastIndex = 0;

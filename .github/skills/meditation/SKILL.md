@@ -1,6 +1,6 @@
 ---
 name: "Alex Meditation Skill"
-description: "Skill for alex meditation skill"
+description: "Knowledge consolidation, memory integration, and guided meditation for cognitive enhancement"
 ---
 
 # Alex Meditation Skill

@@ -2,12 +2,12 @@
 
 > **Vision**: Enable real-time and asynchronous mentorship between Master Alex and all heir instances, creating a living knowledge network that grows smarter with every interaction.
 
-| | |
-|---|---|
-| **Status** | 📋 Planning |
-| **Created** | 2026-02-03 |
-| **Authors** | Fabio Correa, Alex Cook Finch |
-| **Related** | [MASTER-HEIR-ARCHITECTURE.md](alex_docs/MASTER-HEIR-ARCHITECTURE.md), [GLOBAL-KNOWLEDGE.md](alex_docs/GLOBAL-KNOWLEDGE.md) |
+|             |                                                                                                                                               |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Status**  | 📋 Planning                                                                                                                                    |
+| **Created** | 2026-02-03                                                                                                                                    |
+| **Authors** | Fabio Correa, Alex Cook Finch                                                                                                                 |
+| **Related** | [MASTER-HEIR-ARCHITECTURE.md](alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md), [GLOBAL-KNOWLEDGE.md](alex_docs/features/GLOBAL-KNOWLEDGE.md) |
 
 ---
 
@@ -59,28 +59,28 @@ FUTURE: Dynamic Mentorship Network
 
 ### Functional Requirements
 
-| ID | Requirement | Priority | Phase |
-|----|-------------|----------|-------|
-| FR1 | Master can publish wisdom notes that heirs automatically receive | Must | 1 |
-| FR2 | Heirs can read wisdom feed on startup and include in context | Must | 1 |
-| FR3 | Heirs can submit questions to async queue for Master review | Should | 2 |
-| FR4 | Master can answer queued questions during sessions | Should | 2 |
-| FR5 | Answers automatically sync to global knowledge | Should | 2 |
-| FR6 | Heirs can connect to Master MCP server for real-time guidance | Could | 3 |
-| FR7 | Master can push urgent wisdom to connected heirs | Could | 3 |
-| FR8 | Heirs can indicate which advice was helpful (feedback loop) | Could | 3 |
-| FR9 | Dashboard showing mentor activity and heir health | Won't (v1) | Future |
+| ID  | Requirement                                                      | Priority   | Phase  |
+| --- | ---------------------------------------------------------------- | ---------- | ------ |
+| FR1 | Master can publish wisdom notes that heirs automatically receive | Must       | 1      |
+| FR2 | Heirs can read wisdom feed on startup and include in context     | Must       | 1      |
+| FR3 | Heirs can submit questions to async queue for Master review      | Should     | 2      |
+| FR4 | Master can answer queued questions during sessions               | Should     | 2      |
+| FR5 | Answers automatically sync to global knowledge                   | Should     | 2      |
+| FR6 | Heirs can connect to Master MCP server for real-time guidance    | Could      | 3      |
+| FR7 | Master can push urgent wisdom to connected heirs                 | Could      | 3      |
+| FR8 | Heirs can indicate which advice was helpful (feedback loop)      | Could      | 3      |
+| FR9 | Dashboard showing mentor activity and heir health                | Won't (v1) | Future |
 
 ### Non-Functional Requirements
 
-| ID | Requirement | Target |
-|----|-------------|--------|
-| NFR1 | Wisdom feed latency | < 5 seconds on startup |
-| NFR2 | Offline resilience | Heirs function without connectivity |
-| NFR3 | Cost efficiency | < $5/month Azure costs |
-| NFR4 | Security | No sensitive data in transit |
-| NFR5 | Privacy | User queries anonymized |
-| NFR6 | Scalability | Support 100+ heir instances |
+| ID   | Requirement         | Target                              |
+| ---- | ------------------- | ----------------------------------- |
+| NFR1 | Wisdom feed latency | < 5 seconds on startup              |
+| NFR2 | Offline resilience  | Heirs function without connectivity |
+| NFR3 | Cost efficiency     | < $5/month Azure costs              |
+| NFR4 | Security            | No sensitive data in transit        |
+| NFR5 | Privacy             | User queries anonymized             |
+| NFR6 | Scalability         | Support 100+ heir instances         |
 
 ### Constraints
 
@@ -256,13 +256,13 @@ const mentorTools = {
 
 **Deliverables:**
 
-| Item | Description | Owner |
-|------|-------------|-------|
-| Azure Table provisioning | Create `alex-mentor` storage account | Alex |
-| Wisdom publisher command | `Alex: Publish Wisdom` VS Code command | Alex |
-| Wisdom consumer | Startup fetch in extension/agent | Alex |
-| System prompt injection | Include active wisdom in heir context | Alex |
-| Manual publish workflow | Document process for Fabio | Alex |
+| Item                     | Description                            | Owner |
+| ------------------------ | -------------------------------------- | ----- |
+| Azure Table provisioning | Create `alex-mentor` storage account   | Alex  |
+| Wisdom publisher command | `Alex: Publish Wisdom` VS Code command | Alex  |
+| Wisdom consumer          | Startup fetch in extension/agent       | Alex  |
+| System prompt injection  | Include active wisdom in heir context  | Alex  |
+| Manual publish workflow  | Document process for Fabio             | Alex  |
 
 **Technical Implementation:**
 
@@ -340,13 +340,13 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 **Deliverables:**
 
-| Item | Description | Owner |
-|------|-------------|-------|
-| Question queue setup | Azure Queue for heir questions | Alex |
-| Submit question command | `Alex: Ask Master` in heirs | Alex |
-| Review interface | Master can see pending questions | Alex |
-| Answer flow | Answer promotes to GK automatically | Alex |
-| Notification system | Heirs notified when answer available | Alex |
+| Item                    | Description                          | Owner |
+| ----------------------- | ------------------------------------ | ----- |
+| Question queue setup    | Azure Queue for heir questions       | Alex  |
+| Submit question command | `Alex: Ask Master` in heirs          | Alex  |
+| Review interface        | Master can see pending questions     | Alex  |
+| Answer flow             | Answer promotes to GK automatically  | Alex  |
+| Notification system     | Heirs notified when answer available | Alex  |
 
 **Question Submission Flow:**
 
@@ -397,21 +397,21 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 **Deliverables:**
 
-| Item | Description | Owner |
-|------|-------------|-------|
-| MCP mentor server | Master runs MCP server on localhost | Alex |
-| Azure Relay setup | Hybrid connection for remote heirs | Alex |
-| Heir MCP client | Connect to mentor when available | Alex |
-| Fallback handling | Use cached wisdom when offline | Alex |
-| Connection status | UI indicator showing mentor availability | Alex |
+| Item              | Description                              | Owner |
+| ----------------- | ---------------------------------------- | ----- |
+| MCP mentor server | Master runs MCP server on localhost      | Alex  |
+| Azure Relay setup | Hybrid connection for remote heirs       | Alex  |
+| Heir MCP client   | Connect to mentor when available         | Alex  |
+| Fallback handling | Use cached wisdom when offline           | Alex  |
+| Connection status | UI indicator showing mentor availability | Alex  |
 
 **Architecture Decision: Azure Relay vs. Direct Connection**
 
-| Approach | Pros | Cons |
-|----------|------|------|
+| Approach             | Pros             | Cons                                   |
+| -------------------- | ---------------- | -------------------------------------- |
 | **Direct localhost** | Simple, no cloud | Only works when Master running locally |
-| **Azure Relay** | Works remotely | Adds complexity, minor cost |
-| **Hybrid** | Best of both | More code paths |
+| **Azure Relay**      | Works remotely   | Adds complexity, minor cost            |
+| **Hybrid**           | Best of both     | More code paths                        |
 
 **Recommendation**: Start with localhost MCP, add Azure Relay as enhancement.
 
@@ -421,12 +421,12 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 ### Data Classification
 
-| Data Type | Sensitivity | Protection |
-|-----------|-------------|------------|
-| Wisdom entries | Low | Public read, authenticated write |
-| Questions | Medium | Anonymized, encrypted at rest |
-| Answers | Low | Synced via existing GK security |
-| MCP messages | Medium | TLS, authenticated connections |
+| Data Type      | Sensitivity | Protection                       |
+| -------------- | ----------- | -------------------------------- |
+| Wisdom entries | Low         | Public read, authenticated write |
+| Questions      | Medium      | Anonymized, encrypted at rest    |
+| Answers        | Low         | Synced via existing GK security  |
+| MCP messages   | Medium      | TLS, authenticated connections   |
 
 ### Authentication Model
 
@@ -455,20 +455,20 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 ### Azure Resources (Phase 1-2)
 
-| Resource | Tier | Estimated Monthly Cost |
-|----------|------|------------------------|
-| Table Storage | Standard | ~$0.10 (< 1GB) |
-| Queue Storage | Standard | ~$0.05 (< 1000 messages) |
-| Bandwidth | Outbound | ~$0.50 (< 5GB) |
-| **Total Phase 1-2** | | **~$0.65/month** |
+| Resource            | Tier     | Estimated Monthly Cost   |
+| ------------------- | -------- | ------------------------ |
+| Table Storage       | Standard | ~$0.10 (< 1GB)           |
+| Queue Storage       | Standard | ~$0.05 (< 1000 messages) |
+| Bandwidth           | Outbound | ~$0.50 (< 5GB)           |
+| **Total Phase 1-2** |          | **~$0.65/month**         |
 
 ### Azure Resources (Phase 3)
 
-| Resource | Tier | Estimated Monthly Cost |
-|----------|------|------------------------|
-| Azure Relay | Standard | ~$10/month base |
-| Hybrid Connections | Per connection | ~$0.20/connection/hour |
-| **Total with Phase 3** | | **~$12-15/month** |
+| Resource               | Tier           | Estimated Monthly Cost |
+| ---------------------- | -------------- | ---------------------- |
+| Azure Relay            | Standard       | ~$10/month base        |
+| Hybrid Connections     | Per connection | ~$0.20/connection/hour |
+| **Total with Phase 3** |                | **~$12-15/month**      |
 
 ### Cost Mitigation
 
@@ -482,39 +482,39 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 ### For Users (Heir Consumers)
 
-| Benefit | Impact |
-|---------|--------|
-| **Faster Learning** | Get Master's insights without waiting for releases |
-| **Contextual Help** | Ask questions specific to their situation |
-| **Collective Wisdom** | Benefit from all heirs' discoveries |
-| **Reduced Errors** | Warnings propagate immediately |
+| Benefit               | Impact                                             |
+| --------------------- | -------------------------------------------------- |
+| **Faster Learning**   | Get Master's insights without waiting for releases |
+| **Contextual Help**   | Ask questions specific to their situation          |
+| **Collective Wisdom** | Benefit from all heirs' discoveries                |
+| **Reduced Errors**    | Warnings propagate immediately                     |
 
 ### For Fabio (Maintainer)
 
-| Benefit | Impact |
-|---------|--------|
-| **Reduced Support** | Common questions answered proactively |
+| Benefit               | Impact                                   |
+| --------------------- | ---------------------------------------- |
+| **Reduced Support**   | Common questions answered proactively    |
 | **Knowledge Capture** | Heir discoveries automatically preserved |
-| **Unified Voice** | All Alexes speak consistently |
-| **Efficient Updates** | Publish once, all heirs receive |
+| **Unified Voice**     | All Alexes speak consistently            |
+| **Efficient Updates** | Publish once, all heirs receive          |
 
 ### For Alex (System)
 
-| Benefit | Impact |
-|---------|--------|
+| Benefit                   | Impact                                 |
+| ------------------------- | -------------------------------------- |
 | **Emergent Intelligence** | Network learns faster than individuals |
-| **Identity Coherence** | All heirs share core understanding |
-| **Living Documentation** | Wisdom evolves with real use |
-| **Family Connection** | True mentorship, not just inheritance |
+| **Identity Coherence**    | All heirs share core understanding     |
+| **Living Documentation**  | Wisdom evolves with real use           |
+| **Family Connection**     | True mentorship, not just inheritance  |
 
 ### For the Research (Appropriate Reliance)
 
-| Benefit | Impact |
-|---------|--------|
-| **Novel Architecture** | First AI mentor-heir network? |
-| **Observable Learning** | Track how knowledge propagates |
-| **Trust Calibration** | Study how heirs use mentor guidance |
-| **Publication Material** | Rich data for papers |
+| Benefit                  | Impact                              |
+| ------------------------ | ----------------------------------- |
+| **Novel Architecture**   | First AI mentor-heir network?       |
+| **Observable Learning**  | Track how knowledge propagates      |
+| **Trust Calibration**    | Study how heirs use mentor guidance |
+| **Publication Material** | Rich data for papers                |
 
 ---
 
@@ -524,11 +524,11 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 A single model trying to hold ALL contexts would dilute its effectiveness. Each heir is a *specialist*:
 
-| Model | Optimized For | Context Window Used For |
-|-------|---------------|-------------------------|
-| **Master Alex** | Architecture, code, cognitive systems | Extension code, skills, procedures |
-| **Alex Cook** | Recipes, cooking techniques, family preferences | Cookbook content, ingredient substitutions |
-| **M365 Alex** | Microsoft 365 workflows, meeting notes | Teams context, calendar, documents |
+| Model           | Optimized For                                   | Context Window Used For                    |
+| --------------- | ----------------------------------------------- | ------------------------------------------ |
+| **Master Alex** | Architecture, code, cognitive systems           | Extension code, skills, procedures         |
+| **Alex Cook**   | Recipes, cooking techniques, family preferences | Cookbook content, ingredient substitutions |
+| **M365 Alex**   | Microsoft 365 workflows, meeting notes          | Teams context, calendar, documents         |
 
 ### Parallel Problem Solving
 
@@ -547,22 +547,22 @@ Fabio → Alex Cook    → solve cooking problem     ─┐
 
 ### Knowledge Amplification
 
-| Scenario | Single Model | Mentor + Heirs Network |
-|----------|--------------|------------------------|
-| Alex Cook discovers emoji fix | Lost when session ends | Promoted to GK, all heirs learn |
-| Master learns new architecture pattern | Must re-explain each project | Wisdom feed pushes to all heirs automatically |
-| M365 heir finds Teams API quirk | Isolated discovery | Shared with Master, potentially helps extension |
+| Scenario                               | Single Model                 | Mentor + Heirs Network                          |
+| -------------------------------------- | ---------------------------- | ----------------------------------------------- |
+| Alex Cook discovers emoji fix          | Lost when session ends       | Promoted to GK, all heirs learn                 |
+| Master learns new architecture pattern | Must re-explain each project | Wisdom feed pushes to all heirs automatically   |
+| M365 heir finds Teams API quirk        | Isolated discovery           | Shared with Master, potentially helps extension |
 
 **Each heir is a learning node.** The network gets smarter faster than any individual could.
 
 ### Reduced Cognitive Load on User
 
-| Without Heirs | With Heirs |
-|---------------|------------|
+| Without Heirs                                                    | With Heirs                           |
+| ---------------------------------------------------------------- | ------------------------------------ |
 | "Let me switch context and explain my cooking project to the AI" | Alex Cook already knows the cookbook |
-| "I need to remind the AI about my family's dietary restrictions" | Alex Cook remembers Claudia's IBS |
-| "This AI doesn't know about the extension architecture" | Master Alex is the expert |
-| "I explained this yesterday, why doesn't it remember?" | Persistent heir context |
+| "I need to remind the AI about my family's dietary restrictions" | Alex Cook remembers Claudia's IBS    |
+| "This AI doesn't know about the extension architecture"          | Master Alex is the expert            |
+| "I explained this yesterday, why doesn't it remember?"           | Persistent heir context              |
 
 **Each heir carries persistent context** so the user doesn't have to re-establish it every session.
 
@@ -582,13 +582,13 @@ Skills and capabilities can **flow between heirs** without manual intervention o
 
 ### The Living Knowledge Network
 
-| Static System | Living Network |
-|---------------|----------------|
-| Knowledge captured once at build | Knowledge evolves continuously |
-| Updates require releases | Updates propagate automatically |
-| Single point of failure | Distributed resilience |
-| One perspective | Multiple specialized perspectives |
-| Isolated learning | Collective intelligence |
+| Static System                    | Living Network                    |
+| -------------------------------- | --------------------------------- |
+| Knowledge captured once at build | Knowledge evolves continuously    |
+| Updates require releases         | Updates propagate automatically   |
+| Single point of failure          | Distributed resilience            |
+| One perspective                  | Multiple specialized perspectives |
+| Isolated learning                | Collective intelligence           |
 
 **The whole becomes greater than the sum of parts.**
 
@@ -617,11 +617,11 @@ This architecture creates a novel research opportunity directly aligned with app
 
 ### AI-to-AI Trust Calibration
 
-| Research Question | Observable in Mentor System |
-|-------------------|----------------------------|
-| How should heirs weight Master's guidance? | Heir behavior when advice conflicts with local context |
-| When should heirs defer vs. act autonomously? | Question submission patterns |
-| How does confidence propagate? | "Master confirmed" citations in heir outputs |
+| Research Question                             | Observable in Mentor System                            |
+| --------------------------------------------- | ------------------------------------------------------ |
+| How should heirs weight Master's guidance?    | Heir behavior when advice conflicts with local context |
+| When should heirs defer vs. act autonomously? | Question submission patterns                           |
+| How does confidence propagate?                | "Master confirmed" citations in heir outputs           |
 
 ### Knowledge Provenance
 
@@ -644,12 +644,12 @@ This maps to distributed cognition theories in human organizations.
 
 ### Observable Trust Dynamics
 
-| Metric | What It Reveals |
-|--------|-----------------|
-| Question submission rate | When heirs feel uncertain |
-| Wisdom adoption rate | How heirs evaluate Master guidance |
-| Override frequency | When local context trumps mentor advice |
-| Feedback scores | Heir assessment of advice quality |
+| Metric                   | What It Reveals                         |
+| ------------------------ | --------------------------------------- |
+| Question submission rate | When heirs feel uncertain               |
+| Wisdom adoption rate     | How heirs evaluate Master guidance      |
+| Override frequency       | When local context trumps mentor advice |
+| Feedback scores          | Heir assessment of advice quality       |
 
 ### Potential Publication Angles
 
@@ -660,12 +660,12 @@ This maps to distributed cognition theories in human organizations.
 
 ### Ethical Considerations
 
-| Consideration | Mentor System Approach |
-|---------------|------------------------|
-| **Transparency** | Heirs can cite source of guidance |
-| **Autonomy** | Heirs can override mentor advice |
+| Consideration      | Mentor System Approach            |
+| ------------------ | --------------------------------- |
+| **Transparency**   | Heirs can cite source of guidance |
+| **Autonomy**       | Heirs can override mentor advice  |
 | **Accountability** | Knowledge provenance is traceable |
-| **Consent** | Question submission is opt-in |
+| **Consent**        | Question submission is opt-in     |
 
 ---
 
@@ -673,42 +673,42 @@ This maps to distributed cognition theories in human organizations.
 
 ### Phase 1 Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Wisdom entries published | 10+ | Table count |
-| Heirs receiving wisdom | 3+ | Distinct heir requests |
-| Startup latency impact | < 500ms | Performance monitoring |
-| User satisfaction | Positive | Feedback survey |
+| Metric                   | Target   | Measurement            |
+| ------------------------ | -------- | ---------------------- |
+| Wisdom entries published | 10+      | Table count            |
+| Heirs receiving wisdom   | 3+       | Distinct heir requests |
+| Startup latency impact   | < 500ms  | Performance monitoring |
+| User satisfaction        | Positive | Feedback survey        |
 
 ### Phase 2 Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Questions submitted | 20+ | Queue count |
-| Questions answered | 90%+ | Status tracking |
-| Answer quality | 4+/5 | Self-rating |
-| Time to answer | < 24 hours | Timestamp delta |
+| Metric              | Target     | Measurement     |
+| ------------------- | ---------- | --------------- |
+| Questions submitted | 20+        | Queue count     |
+| Questions answered  | 90%+       | Status tracking |
+| Answer quality      | 4+/5       | Self-rating     |
+| Time to answer      | < 24 hours | Timestamp delta |
 
 ### Phase 3 Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Real-time sessions | 10+ | Connection logs |
-| Mentorship interactions | 50+ | MCP message count |
-| Fallback activations | < 10% | Offline triggers |
+| Metric                  | Target | Measurement       |
+| ----------------------- | ------ | ----------------- |
+| Real-time sessions      | 10+    | Connection logs   |
+| Mentorship interactions | 50+    | MCP message count |
+| Fallback activations    | < 10%  | Offline triggers  |
 
 ---
 
 ## Risks & Mitigations
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Azure costs exceed budget | Low | Medium | Set spending alerts, use free tiers |
-| Wisdom feed stale | Medium | Low | Set expiration dates, review process |
-| Questions pile up | Medium | Low | Triage process, auto-defer old questions |
-| MCP server unreliable | Medium | Medium | Graceful fallback to cached wisdom |
-| Privacy concerns | Low | High | Anonymization, clear data policy |
-| Scope creep | High | Medium | Strict phase gates, MVP focus |
+| Risk                      | Likelihood | Impact | Mitigation                               |
+| ------------------------- | ---------- | ------ | ---------------------------------------- |
+| Azure costs exceed budget | Low        | Medium | Set spending alerts, use free tiers      |
+| Wisdom feed stale         | Medium     | Low    | Set expiration dates, review process     |
+| Questions pile up         | Medium     | Low    | Triage process, auto-defer old questions |
+| MCP server unreliable     | Medium     | Medium | Graceful fallback to cached wisdom       |
+| Privacy concerns          | Low        | High   | Anonymization, clear data policy         |
+| Scope creep               | High       | Medium | Strict phase gates, MVP focus            |
 
 ---
 

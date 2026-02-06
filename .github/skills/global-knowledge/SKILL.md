@@ -1,6 +1,6 @@
 ---
 name: "Alex Global Knowledge Skill"
-description: "Skill for alex global knowledge skill"
+description: "Cross-project knowledge search, pattern recognition, and insight retrieval from Alex's global memory"
 ---
 
 # Alex Global Knowledge Skill

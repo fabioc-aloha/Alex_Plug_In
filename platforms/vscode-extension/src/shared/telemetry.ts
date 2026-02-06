@@ -80,7 +80,7 @@ export function initTelemetry(
  * Called by health check when it detects Alex is installed
  */
 export function updateAlexInstalledStatus(installed: boolean): void {
-  if (!currentSession) return;
+  if (!currentSession) {return;}
   
   // Update the session_start event's data if it exists
   const sessionStartEvent = currentSession.events.find(e => e.event === 'session_start');
@@ -104,7 +104,7 @@ export function log(
   event: string,
   data?: Record<string, unknown>,
 ): void {
-  if (!currentSession) return;
+  if (!currentSession) {return;}
 
   if (currentSession.events.length >= MAX_EVENTS_PER_SESSION) {
     // Prevent runaway logging
@@ -209,7 +209,7 @@ export function logError(
 function sanitizeData(
   data?: Record<string, unknown>,
 ): Record<string, unknown> | undefined {
-  if (!data) return undefined;
+  if (!data) {return undefined;}
 
   const sanitized: Record<string, unknown> = {};
 
@@ -247,7 +247,7 @@ function sanitizeData(
  * Save session data to disk
  */
 export async function saveSession(): Promise<void> {
-  if (!currentSession || !globalStoragePath) return;
+  if (!currentSession || !globalStoragePath) {return;}
 
   try {
     const telemetryDir = path.join(globalStoragePath, "beta-telemetry");
@@ -289,10 +289,10 @@ async function cleanupOldSessions(telemetryDir: string): Promise<void> {
  * Get all stored telemetry data (for user review/export)
  */
 export async function getAllTelemetryData(): Promise<TelemetrySession[]> {
-  if (!globalStoragePath) return [];
+  if (!globalStoragePath) {return [];}
 
   const telemetryDir = path.join(globalStoragePath, "beta-telemetry");
-  if (!(await fs.pathExists(telemetryDir))) return [];
+  if (!(await fs.pathExists(telemetryDir))) {return [];}
 
   const files = await fs.readdir(telemetryDir);
   const sessions: TelemetrySession[] = [];
@@ -318,7 +318,7 @@ export async function getAllTelemetryData(): Promise<TelemetrySession[]> {
  * Clear all telemetry data
  */
 export async function clearTelemetryData(): Promise<void> {
-  if (!globalStoragePath) return;
+  if (!globalStoragePath) {return;}
 
   const telemetryDir = path.join(globalStoragePath, "beta-telemetry");
   if (await fs.pathExists(telemetryDir)) {
@@ -335,7 +335,7 @@ export async function clearTelemetryData(): Promise<void> {
  * Get summary statistics for current session
  */
 export function getSessionSummary(): Record<string, unknown> {
-  if (!currentSession) return {};
+  if (!currentSession) {return {};}
 
   const eventCounts: Record<string, number> = {};
   let errorCount = 0;
@@ -344,7 +344,7 @@ export function getSessionSummary(): Record<string, unknown> {
 
   for (const event of currentSession.events) {
     eventCounts[event.event] = (eventCounts[event.event] || 0) + 1;
-    if (event.category === "error") errorCount++;
+    if (event.category === "error") {errorCount++;}
     if (event.duration) {
       totalDuration += event.duration;
       timedEventCount++;
@@ -381,7 +381,7 @@ export async function getAllSessionsAggregate(): Promise<Record<string, unknown>
     for (const event of session.events) {
       totalEvents++;
       eventCounts[event.event] = (eventCounts[event.event] || 0) + 1;
-      if (event.category === "error") totalErrors++;
+      if (event.category === "error") {totalErrors++;}
       if (event.duration) {
         totalDuration += event.duration;
         timedEventCount++;

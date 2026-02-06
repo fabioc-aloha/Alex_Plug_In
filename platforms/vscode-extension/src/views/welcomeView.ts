@@ -202,17 +202,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private async _getLastDreamDate(): Promise<Date | null> {
     try {
       const workspaceFolders = vscode.workspace.workspaceFolders;
-      if (!workspaceFolders) return null;
+      if (!workspaceFolders) {return null;}
       
       const episodicPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "episodic");
-      if (!fs.existsSync(episodicPath)) return null;
+      if (!fs.existsSync(episodicPath)) {return null;}
 
       const files = fs.readdirSync(episodicPath)
         .filter(f => f.startsWith('dream-report-') && f.endsWith('.md'))
         .sort()
         .reverse();
 
-      if (files.length === 0) return null;
+      if (files.length === 0) {return null;}
 
       // Parse timestamp from filename: dream-report-1738456789123.md
       const match = files[0].match(/dream-report-(\d+)\.md/);

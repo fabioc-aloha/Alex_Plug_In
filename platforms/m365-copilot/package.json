@@ -19,7 +19,7 @@
     "declarative-agent"
   ],
   "author": "Alex Cognitive Architecture Team",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@microsoft/teamsfx-cli": "^2.1.2",
     "sharp": "^0.34.5"

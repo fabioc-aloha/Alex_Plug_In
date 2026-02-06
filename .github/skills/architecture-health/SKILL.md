@@ -1,6 +1,6 @@
 ---
 name: "Alex Architecture Health Skill"
-description: "Skill for alex architecture health skill"
+description: "Cognitive architecture health assessment, synapse validation, and neural maintenance for Alex's memory systems"
 ---
 
 # Alex Architecture Health Skill

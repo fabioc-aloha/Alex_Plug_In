@@ -110,11 +110,11 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
     for (const folder of folders) {
         const skillPath = path.join(skillsPath, folder);
         const stat = await fs.stat(skillPath);
-        if (!stat.isDirectory()) continue;
+        if (!stat.isDirectory()) {continue;}
         
         const synapsesPath = path.join(skillPath, 'synapses.json');
         
-        if (!await fs.pathExists(synapsesPath)) continue;
+        if (!await fs.pathExists(synapsesPath)) {continue;}
 
         try {
             const synapses: SynapsesJson = await fs.readJson(synapsesPath);
@@ -137,7 +137,7 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
 }
 
 function normalizeConnections(connections: SynapsesJson['connections']): Connection[] {
-    if (!connections) return [];
+    if (!connections) {return [];}
     
     if (Array.isArray(connections)) {
         return connections.map(c => ({
@@ -169,9 +169,9 @@ function toAbbreviation(name: string): string {
 }
 
 function getCategory(skillName: string, isTemp: boolean): string {
-    if (isTemp) return 'temporary';
+    if (isTemp) {return 'temporary';}
     for (const [cat, config] of Object.entries(CATEGORIES)) {
-        if (config.skills.includes(skillName)) return cat;
+        if (config.skills.includes(skillName)) {return cat;}
     }
     return 'other';
 }
@@ -282,14 +282,14 @@ function generateMermaidDiagram(skills: SkillInfo[]): string {
     const categoryGroups: Record<string, SkillInfo[]> = {};
     for (const skill of skills) {
         const cat = getCategory(skill.name, skill.temporary);
-        if (!categoryGroups[cat]) categoryGroups[cat] = [];
+        if (!categoryGroups[cat]) {categoryGroups[cat] = [];}
         categoryGroups[cat].push(skill);
     }
 
     // Generate subgraphs with TB direction for vertical stacking
     const categoryNames: string[] = [];
     for (const [category, catSkills] of Object.entries(categoryGroups)) {
-        if (catSkills.length === 0) continue;
+        if (catSkills.length === 0) {continue;}
         const config = CATEGORIES[category] || { emoji: '📦' };
         const title = category.charAt(0).toUpperCase() + category.slice(1);
         categoryNames.push(title);
@@ -320,14 +320,14 @@ function generateMermaidDiagram(skills: SkillInfo[]): string {
         for (const conn of skill.connections) {
             // Skip non-skill targets (instructions, prompts, etc.)
             const targetSkill = skills.find(s => s.name === conn.target);
-            if (!targetSkill) continue;
+            if (!targetSkill) {continue;}
             
             const targetAbbrev = toAbbreviation(conn.target);
             
             // Handle bidirectional - only output once
             if (conn.bidirectional) {
                 const pairKey = [skill.name, conn.target].sort().join('|');
-                if (processedBidirectional.has(pairKey)) continue;
+                if (processedBidirectional.has(pairKey)) {continue;}
                 processedBidirectional.add(pairKey);
                 
                 const key = `${sourceAbbrev}|<-->`;
@@ -381,12 +381,12 @@ function generateMermaidDiagram(skills: SkillInfo[]): string {
     const staleSkills = skills.filter(s => STALE_PRONE.includes(s.name)).map(s => toAbbreviation(s.name));
 
     lines.push('');
-    if (masterSkills.length > 0) lines.push(`    class ${masterSkills.join(',')} master`);
-    if (vscodeSkills.length > 0) lines.push(`    class ${vscodeSkills.join(',')} vscode`);
-    if (m365Skills.length > 0) lines.push(`    class ${m365Skills.join(',')} m365`);
-    if (inheritableSkills.length > 0) lines.push(`    class ${inheritableSkills.join(',')} inheritable`);
-    if (tempSkills.length > 0) lines.push(`    class ${tempSkills.join(',')} temp`);
-    if (staleSkills.length > 0) lines.push(`    class ${staleSkills.join(',')} stale`);
+    if (masterSkills.length > 0) {lines.push(`    class ${masterSkills.join(',')} master`);}
+    if (vscodeSkills.length > 0) {lines.push(`    class ${vscodeSkills.join(',')} vscode`);}
+    if (m365Skills.length > 0) {lines.push(`    class ${m365Skills.join(',')} m365`);}
+    if (inheritableSkills.length > 0) {lines.push(`    class ${inheritableSkills.join(',')} inheritable`);}
+    if (tempSkills.length > 0) {lines.push(`    class ${tempSkills.join(',')} temp`);}
+    if (staleSkills.length > 0) {lines.push(`    class ${staleSkills.join(',')} stale`);}
 
     lines.push('```');
 

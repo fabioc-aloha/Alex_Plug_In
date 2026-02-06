@@ -1135,7 +1135,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         <p>To help us fix your issue quickly:</p>
         <ol>
             <li>Click <strong>"Export for Bug Report"</strong> below to save the diagnostic data</li>
-            <li>Go to <a href="https://github.com/fabiocosta-cw/Alex_Plug_In/issues/new" style="color: var(--vscode-textLink-foreground);">GitHub Issues</a></li>
+            <li>Go to <a href="https://github.com/fabioc-aloha/Alex_Plug_In/issues/new" style="color: var(--vscode-textLink-foreground);">GitHub Issues</a></li>
             <li>Describe what happened and what you expected</li>
             <li>Attach the exported JSON file</li>
         </ol>

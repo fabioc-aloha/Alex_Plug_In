@@ -344,7 +344,7 @@ async function collectSystemFiles(dir: string): Promise<string[]> {
   const files: string[] = [];
 
   async function walk(currentDir: string) {
-    if (!await fs.pathExists(currentDir)) return;
+    if (!await fs.pathExists(currentDir)) {return;}
     
     const entries = await fs.readdir(currentDir, { withFileTypes: true });
     for (const entry of entries) {
@@ -405,7 +405,7 @@ async function runGapAnalysis(
   if (await fs.pathExists(dkBackupPath)) {
     const files = await fs.readdir(dkBackupPath);
     for (const file of files) {
-      if (!file.endsWith('.md')) continue;
+      if (!file.endsWith('.md')) {continue;}
       
       const filePath = path.join(dkBackupPath, file);
       const stats = await fs.stat(filePath);
@@ -746,7 +746,7 @@ async function normalizeAllSynapses(skillsDir: string): Promise<{ normalized: nu
     const skillDirs = await fs.readdir(skillsDir, { withFileTypes: true });
     
     for (const entry of skillDirs) {
-      if (!entry.isDirectory()) continue;
+      if (!entry.isDirectory()) {continue;}
       
       const synapsePath = path.join(skillsDir, entry.name, 'synapses.json');
       if (await fs.pathExists(synapsePath)) {
@@ -911,7 +911,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
   const workspaceResult = await getAlexWorkspaceFolder(true);
 
   if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) return;
+    if (workspaceResult.cancelled) {return;}
 
     const result = await vscode.window.showWarningMessage(
       workspaceResult.error || "Alex is not installed in this workspace.",
@@ -932,7 +932,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
 
   // Kill switch check
   const canProceed = await checkProtectionAndWarn(rootPath, "Alex: Upgrade", true);
-  if (!canProceed) return;
+  if (!canProceed) {return;}
 
   // Get versions
   const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
@@ -987,7 +987,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     break;
   }
 
-  if (confirm !== "Start Upgrade") return;
+  if (confirm !== "Start Upgrade") {return;}
 
   // Execute upgrade
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
@@ -1222,7 +1222,7 @@ export async function completeMigration(context: vscode.ExtensionContext): Promi
     "Cancel"
   );
 
-  if (confirm !== "Yes, Migrate") return;
+  if (confirm !== "Yes, Migrate") {return;}
 
   // Execute migration
   const migrated: string[] = [];
