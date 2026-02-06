@@ -92,11 +92,11 @@ This makes brain-qa a comprehensive pre-release validation.
 - **Completion**: Clear for next priority
 
 ### Master vs Heir Slots
-| Slot | Master Alex | Heir |
-|------|-------------|------|
-| P5 | master-heir-management | *(available)* |
-| P6 | brand-asset-management | *(available)* |
-| P7 | release-management | *(available)* |
+| Slot | Master Alex            | Heir          |
+| ---- | ---------------------- | ------------- |
+| P5   | master-heir-management | *(available)* |
+| P6   | brand-asset-management | *(available)* |
+| P7   | release-management     | *(available)* |
 
 **Last Assessed**: 2026-02-06 — Based on 15 episodic sessions (Feb 1-6)
 
