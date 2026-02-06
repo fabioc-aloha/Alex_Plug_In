@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Clean dark background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c0c14"/>
+      <stop offset="100%" stop-color="#0c0c14"/>
+    </linearGradient>
+    
+    <!-- Azure -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  
+  <!-- Single accent line -->
+  <line x1="640" y1="580" x2="640" y2="620" stroke="#0078d4" stroke-width="2" opacity="0.3"/>
+  
+  <!-- A Negative Space Logo - small, centered top -->
+  <g transform="translate(590, 160) scale(1.5)">
+    <!-- Rocket body -->
+    <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+    <!-- Fins -->
+    <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
+    <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
+    <!-- A cutout -->
+    <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#0c0c14"/>
+    <!-- Flame -->
+    <polygon points="22,68 30,90 38,68" fill="url(#flame)"/>
+  </g>
+  
+  <!-- Alex -->
+  <text x="640" y="380" font-family="Segoe UI, Arial, sans-serif" font-size="80" font-weight="300" fill="white" text-anchor="middle" letter-spacing="20">ALEX</text>
+  
+  <!-- Tagline -->
+  <text x="640" y="440" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#666666" text-anchor="middle" letter-spacing="4">STRAP A ROCKET TO YOUR BACK</text>
+  
+  <!-- CorreaX subtle -->
+  <text x="640" y="600" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#333333" text-anchor="middle">CorreaX</text>
+</svg>

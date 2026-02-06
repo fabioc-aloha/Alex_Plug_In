@@ -11,13 +11,13 @@ Comprehensive brand architecture development for Alex VS Code extension. Establi
 
 ## Key Decisions Made
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| **Logo** | A Negative Space | Iconic, scales to 16x16, one concept |
-| **Tagline** | "Strap a rocket to your back" | Original CorreaX marketing, verified clear of trademark |
-| **Primary Persona** | Power User / Builder | Core audience, not beginners |
-| **Secondary Personas** | 12 niches | Expand market with skill-specific hooks |
-| **Terminology** | 5 language systems | Same features, localized resonance |
+| Decision               | Choice                        | Rationale                                               |
+| ---------------------- | ----------------------------- | ------------------------------------------------------- |
+| **Logo**               | A Negative Space              | Iconic, scales to 16x16, one concept                    |
+| **Tagline**            | "Strap a rocket to your back" | Original CorreaX marketing, verified clear of trademark |
+| **Primary Persona**    | Power User / Builder          | Core audience, not beginners                            |
+| **Secondary Personas** | 12 niches                     | Expand market with skill-specific hooks                 |
+| **Terminology**        | 5 language systems            | Same features, localized resonance                      |
 
 ## Insights Consolidated
 
@@ -49,11 +49,11 @@ Reuse, not rewrite.
 
 ## Files Modified
 
-| File | Change |
-|------|--------|
-| `alex_docs/marketing/MARKETING-PLAN.md` | Renamed, expanded with personas, terminology tables, logo concepts |
-| `alex_docs/marketing/logo-concepts/*.svg` | 21 logo concept SVGs created |
-| `alex_docs/` | Reorganized into 11 category folders |
+| File                                      | Change                                                             |
+| ----------------------------------------- | ------------------------------------------------------------------ |
+| `alex_docs/marketing/MARKETING-PLAN.md`   | Renamed, expanded with personas, terminology tables, logo concepts |
+| `alex_docs/marketing/logo-concepts/*.svg` | 21 logo concept SVGs created                                       |
+| `alex_docs/`                              | Reorganized into 11 category folders                               |
 
 ## Synaptic Connections Established
 
@@ -64,12 +64,12 @@ Reuse, not rewrite.
 
 ## Working Memory State
 
-| Slot | Status | Content |
-|------|--------|---------|
-| P1-P4c | Active | Core cognitive protocols |
-| P5 | Empty | Available for next domain |
-| P6 | Empty | Available for next domain |
-| P7 | Empty | Available for next domain |
+| Slot   | Status | Content                   |
+| ------ | ------ | ------------------------- |
+| P1-P4c | Active | Core cognitive protocols  |
+| P5     | Empty  | Available for next domain |
+| P6     | Empty  | Available for next domain |
+| P7     | Empty  | Available for next domain |
 
 ## Next Actions
 

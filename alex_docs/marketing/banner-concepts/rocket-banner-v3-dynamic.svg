@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Deep space gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a14"/>
+      <stop offset="100%" stop-color="#0f1826"/>
+    </linearGradient>
+    
+    <!-- Azure -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Horizontal thrust gradient -->
+    <linearGradient id="thrust" x1="100%" y1="50%" x2="0%" y2="50%">
+      <stop offset="0%" stop-color="#ff6b35" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/>
+    </linearGradient>
+    
+    <!-- Glow -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  
+  <!-- Stars -->
+  <g fill="white">
+    <circle cx="80" cy="120" r="1" opacity="0.5"/>
+    <circle cx="180" cy="80" r="1.5" opacity="0.6"/>
+    <circle cx="300" cy="180" r="1" opacity="0.4"/>
+    <circle cx="150" cy="450" r="1" opacity="0.3"/>
+    <circle cx="250" cy="550" r="1.5" opacity="0.5"/>
+    <circle cx="1050" cy="100" r="1" opacity="0.4"/>
+    <circle cx="1150" cy="180" r="1.5" opacity="0.6"/>
+    <circle cx="1200" cy="80" r="1" opacity="0.3"/>
+    <circle cx="1100" cy="500" r="1" opacity="0.4"/>
+    <circle cx="1180" cy="560" r="1" opacity="0.5"/>
+  </g>
+  
+  <!-- Thrust trail behind rocket -->
+  <ellipse cx="500" cy="320" rx="450" ry="120" fill="url(#thrust)"/>
+  
+  <!-- Glow -->
+  <ellipse cx="950" cy="320" rx="200" ry="200" fill="url(#glow)"/>
+  
+  <!-- A Negative Space Logo - flying right -->
+  <g transform="translate(850, 200) rotate(45, 60, 60) scale(2.5)">
+    <!-- Rocket body -->
+    <path d="M60,10 C60,10 40,30 40,60 L40,90 L50,95 L50,85 L70,85 L70,95 L80,90 L80,60 C80,30 60,10 60,10 Z" fill="url(#azure)"/>
+    <!-- Fins -->
+    <polygon points="40,75 25,95 40,90" fill="url(#azure)"/>
+    <polygon points="80,75 95,95 80,90" fill="url(#azure)"/>
+    <!-- A cutout -->
+    <path d="M60,25 L48,70 L52,70 L55,58 L65,58 L68,70 L72,70 Z M57,52 L60,35 L63,52 Z" fill="#0a0a14"/>
+    <!-- Flame -->
+    <polygon points="50,95 60,130 70,95" fill="url(#flame)"/>
+    <polygon points="53,95 60,120 67,95" fill="#ffc857"/>
+  </g>
+  
+  <!-- Large ALEX text -->
+  <text x="100" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="180" font-weight="bold" fill="white" opacity="0.95">Alex</text>
+  
+  <!-- Tagline below -->
+  <text x="110" y="400" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="600" fill="#0078d4" letter-spacing="2">STRAP A ROCKET TO YOUR BACK</text>
+  
+  <!-- Stats bar -->
+  <g transform="translate(110, 450)">
+    <text font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#555555">
+      <tspan fill="#0078d4" font-weight="600">73</tspan> skills
+      <tspan dx="30" fill="#0078d4" font-weight="600">•</tspan>
+      <tspan dx="10">Cross-project memory</tspan>
+      <tspan dx="30" fill="#0078d4" font-weight="600">•</tspan>
+      <tspan dx="10">Open source</tspan>
+    </text>
+  </g>
+  
+  <!-- VS Code badge -->
+  <g transform="translate(110, 500)">
+    <rect width="160" height="30" rx="4" fill="#0078d4" opacity="0.15"/>
+    <rect width="160" height="30" rx="4" fill="none" stroke="#0078d4" stroke-width="1" opacity="0.3"/>
+    <text x="20" y="20" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#0078d4">VS Code Extension</text>
+  </g>
+  
+  <!-- CorreaX in corner -->
+  <g transform="translate(1200, 600)" opacity="0.5">
+    <text x="0" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#555555" text-anchor="end">CorreaX</text>
+  </g>
+</svg>

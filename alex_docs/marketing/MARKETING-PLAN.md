@@ -35,6 +35,21 @@
 
 ## Quick Reference — Brand Decisions
 
+> *"An icon must be iconic."*
+> If it doesn't work at 16×16 pixels, it fails as a logo.
+
+### Selected Logo
+
+<img src="logo-concepts/a-negative-space.svg" alt="A Negative Space Logo" width="128">
+
+**A Negative Space** — The letter A cut out of a rocket silhouette. Clean, scales perfectly, one concept.
+
+### Parent Brand
+
+<img src="../../platforms/vscode-extension/assets/logo.svg" alt="CorreaX Logo" width="64">
+
+**CorreaX** — C split X mark. The unchanging parent brand.
+
 | Asset                  | Decision                                                                           | Status       |
 | ---------------------- | ---------------------------------------------------------------------------------- | ------------ |
 | **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                            | ✅ LOCKED     |
@@ -42,16 +57,23 @@
 | **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ SELECTED   |
 | **Tagline**            | Strap a rocket to your back                                                        | ✅ LOCKED     |
 | **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
-| **Banner**             | Alex — STRAP A ROCKET TO YOUR BACK                                                 | ✅ LOCKED     |
-| **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | ✅ LOCKED     |
-| **Primary Persona**    | Power User / Builder                                                               | ✅ LOCKED     |
-| **Secondary Personas** | 12 niches (Academic, DevOps, Fiction Writer, etc.) — see table above               | ✅ DEFINED    |
-| **Primary Language**   | Rocket Terminology                                                                 | ✅ LOCKED     |
-| **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                      | ✅ DEFINED    |
-| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | ✅ DEFINED    |
-| **Marketplace**        | [See Marketplace Description below]                                                | 📝 READY      |
-| **README**             | [See README Description below]                                                     | 📝 READY      |
-| **Outreach**           | [See Outreach section]                                                             | 📝 READY      |
+| **Banner**             | Alex — STRAP A ROCKET TO YOUR BACK                                                 | 📝 DRAFT      |
+| **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | 📝 DRAFT      |
+| **Primary Persona**    | Power User / Builder                                                               | 📝 DEFINED    |
+| **Secondary Personas** | 12 niches (Academic, DevOps, Fiction Writer, etc.) — see table above               | 📝 DEFINED    |
+| **Primary Language**   | Rocket Terminology                                                                 | 📝 DEFINED    |
+| **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                      | 📝 DEFINED    |
+| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | 📝 DEFINED    |
+| **Marketplace**        | [See Marketplace Description below]                                                | 📝 DRAFT      |
+| **README**             | [See README Description below]                                                     | 📝 DRAFT      |
+| **Outreach**           | [See Outreach section]                                                             | 📝 DRAFT      |
+
+**Status Legend:**
+- ✅ LOCKED — Explicitly confirmed, not changing
+- ✅ SELECTED — Chosen, pending final approval
+- ✅ DOCUMENTED — Recorded for reference
+- 📝 DEFINED — Created, open to refinement
+- 📝 DRAFT — Ready to use, needs review before publish
 
 ---
 
@@ -261,6 +283,17 @@ That's Alex.
 | **Badge**          | VS Code Extension                                                                                       |
 | **Use Cases**      | Code, Research, Writing, Academic, Voice, Presentations, Images, Projects, Learning, Business, Security |
 | **Colors**         | #007ACC (VS Code blue), #4CAF50 (green accent)                                                          |
+
+### Banner Concepts (NEW)
+
+| Concept           | Preview                                                                                 | Description                                                          |
+| ----------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **v1**            | <img src="banner-concepts/rocket-banner-v1.svg" alt="Banner v1" width="400">            | Logo left, text right, exhaust particles. CX in bottom-right corner. |
+| **v2-centered**   | <img src="banner-concepts/rocket-banner-v2-centered.svg" alt="Banner v2" width="400">   | Large centered logo, tagline below. CX in bottom-left corner.        |
+| **v3-dynamic**    | <img src="banner-concepts/rocket-banner-v3-dynamic.svg" alt="Banner v3" width="400">    | Rocket flying 45°, large "Alex" text, thrust trail. CX text only.    |
+| **v4-minimalist** | <img src="banner-concepts/rocket-banner-v4-minimalist.svg" alt="Banner v4" width="400"> | Clean, logo + tagline, lots of space. Subtle centered CX.            |
+| **v5-split**      | <img src="banner-concepts/rocket-banner-v5-split.svg" alt="Banner v5" width="400">      | Diagonal split: dark side with logo, blue side with text.            |
+| **v6-launchpad**  | <img src="banner-concepts/rocket-banner-v6-launchpad.svg" alt="Banner v6" width="400">  | Rocket on launch pad, towers, smoke, countdown badge. Epic scene.    |
 
 ### Current Logo Analysis
 

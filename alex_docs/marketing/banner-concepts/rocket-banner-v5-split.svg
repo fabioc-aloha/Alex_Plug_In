@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Dark side -->
+    <linearGradient id="darkSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a12"/>
+      <stop offset="100%" stop-color="#0f1420"/>
+    </linearGradient>
+    
+    <!-- Blue side -->
+    <linearGradient id="blueSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Azure for logo -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Clip for diagonal -->
+    <clipPath id="leftClip">
+      <polygon points="0,0 700,0 580,640 0,640"/>
+    </clipPath>
+    <clipPath id="rightClip">
+      <polygon points="700,0 1280,0 1280,640 580,640"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Left side - dark with logo -->
+  <g clip-path="url(#leftClip)">
+    <rect width="1280" height="640" fill="url(#darkSide)"/>
+    
+    <!-- Large A Negative Space Logo -->
+    <g transform="translate(180, 160) scale(3)">
+      <path d="M60,10 C60,10 40,30 40,60 L40,90 L50,95 L50,85 L70,85 L70,95 L80,90 L80,60 C80,30 60,10 60,10 Z" fill="url(#azure)"/>
+      <polygon points="40,75 25,95 40,90" fill="url(#azure)"/>
+      <polygon points="80,75 95,95 80,90" fill="url(#azure)"/>
+      <path d="M60,25 L48,70 L52,70 L55,58 L65,58 L68,70 L72,70 Z M57,52 L60,35 L63,52 Z" fill="#0a0a12"/>
+      <polygon points="50,95 60,130 70,95" fill="url(#flame)"/>
+    </g>
+  </g>
+  
+  <!-- Right side - blue with text -->
+  <g clip-path="url(#rightClip)">
+    <rect width="1280" height="640" fill="url(#blueSide)"/>
+    
+    <!-- Alex text -->
+    <text x="920" y="280" font-family="Segoe UI, Arial, sans-serif" font-size="100" font-weight="bold" fill="white" text-anchor="middle">Alex</text>
+    
+    <!-- Tagline -->
+    <text x="920" y="350" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.9)" text-anchor="middle" letter-spacing="2">STRAP A ROCKET</text>
+    <text x="920" y="385" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.9)" text-anchor="middle" letter-spacing="2">TO YOUR BACK</text>
+    
+    <!-- Stats -->
+    <text x="920" y="460" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.7)" text-anchor="middle">73 skills • Cross-project memory • Open source</text>
+    
+    <!-- CorreaX -->
+    <text x="1200" y="600" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.4)" text-anchor="end">CorreaX</text>
+  </g>
+  
+  <!-- Diagonal separator highlight -->
+  <line x1="700" y1="0" x2="580" y2="640" stroke="white" stroke-width="1" opacity="0.1"/>
+</svg>
