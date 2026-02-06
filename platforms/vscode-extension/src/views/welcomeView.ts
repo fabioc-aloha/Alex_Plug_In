@@ -445,8 +445,47 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Persona display
     const persona = personaResult?.persona;
-    const personaBannerNoun = persona?.bannerNoun || 'CODE';
-    const personaDisplay = persona ? `<span class="header-persona" title="Detected persona: ${persona.name}">${persona.icon} ${persona.name}</span>` : '';
+    const personaHook = persona?.hook || 'Take Your Code to New Heights';
+    const personaIcon = persona?.icon || '💻';
+    const personaName = persona?.name || 'Developer';
+    const personaSkill = persona?.skill || 'code-quality';
+    
+    // Persona accent color mapping
+    const personaAccentMap: Record<string, string> = {
+      'developer': 'var(--vscode-charts-blue)',
+      'academic': 'var(--vscode-charts-purple)',
+      'researcher': 'var(--vscode-charts-purple)',
+      'technical-writer': 'var(--vscode-charts-green)',
+      'architect': 'var(--vscode-charts-orange, #f0883e)',
+      'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
+      'devops': 'var(--vscode-charts-green)',
+      'content-creator': 'var(--vscode-charts-yellow)',
+      'fiction-writer': 'var(--vscode-charts-purple)',
+      'project-manager': 'var(--vscode-charts-blue)',
+      'security': 'var(--vscode-charts-red)',
+      'student': 'var(--vscode-charts-purple)',
+      'job-seeker': 'var(--vscode-charts-green)',
+      'presenter': 'var(--vscode-charts-yellow)',
+      'power-user': 'var(--vscode-charts-blue)'
+    };
+    const personaAccent = persona ? personaAccentMap[persona.id] || 'var(--vscode-charts-blue)' : 'var(--vscode-charts-blue)';
+    
+    // Skill name mapping for display
+    const skillNameMap: Record<string, string> = {
+      'code-quality': 'Code Quality',
+      'research-project-scaffold': 'Research Setup',
+      'api-documentation': 'API Docs',
+      'architecture-health': 'Architecture',
+      'microsoft-fabric': 'Data Fabric',
+      'infrastructure-as-code': 'IaC',
+      'creative-writing': 'Creative Writing',
+      'project-management': 'PM Dashboard',
+      'incident-response': 'Security',
+      'learning-psychology': 'Learning',
+      'gamma-presentations': 'Presentations',
+      'git-workflow': 'Git Workflows'
+    };
+    const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
     // Get workspace/folder name (vscode.workspace.name works for both workspaces and folders)
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -497,6 +536,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     <style>
         * {
             box-sizing: border-box;
+            --persona-accent: ${personaAccent};
         }
         body {
             font-family: var(--vscode-font-family);
@@ -522,6 +562,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             height: 32px;
             flex-shrink: 0;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+            border-radius: 4px;
+            border: 2px solid var(--persona-accent);
+            padding: 2px;
         }
         .header-title-row {
             display: flex;
@@ -536,10 +579,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .header-tagline {
             font-size: 9px;
-            color: var(--vscode-descriptionForeground);
-            font-style: italic;
+            color: var(--persona-accent);
+            font-weight: 500;
             letter-spacing: 0.2px;
-            opacity: 0.75;
+            opacity: 0.9;
         }
         .header-workspace {
             font-size: 10px;
@@ -552,11 +595,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .header-persona {
             font-size: 9px;
-            color: var(--vscode-textPreformat-foreground);
-            background: var(--vscode-badge-background);
-            padding: 1px 5px;
-            border-radius: 6px;
-            opacity: 0.85;
+            color: var(--vscode-foreground);
+            background: color-mix(in srgb, var(--persona-accent) 20%, transparent);
+            border: 1px solid color-mix(in srgb, var(--persona-accent) 40%, transparent);
+            padding: 2px 6px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
         }
         .header-text {
             display: flex;
@@ -793,6 +839,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn.premium:hover .premium-badge {
             opacity: 0.8;
         }
+        .action-btn.recommended {
+            border-left: 2px solid var(--persona-accent);
+            background: color-mix(in srgb, var(--persona-accent) 8%, var(--vscode-button-secondaryBackground));
+        }
+        .action-btn.recommended:hover {
+            background: color-mix(in srgb, var(--persona-accent) 15%, var(--vscode-button-secondaryHoverBackground));
+        }
+        .recommended-badge {
+            font-size: 11px;
+            margin-left: auto;
+            opacity: 0.6;
+            color: var(--persona-accent);
+        }
         
         .goals-stats {
             display: flex;
@@ -995,8 +1054,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
                     ${featureHighlight}
                 </div>
-                <span class="header-tagline">Take Your ${personaBannerNoun} to New Heights</span>
-                ${personaDisplay}
+                <span class="header-tagline">${this._escapeHtml(personaHook)}</span>
+                <span class="header-persona" title="Detected as ${personaName}">${personaIcon} ${personaName}</span>
                 <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
             </div>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
@@ -1031,6 +1090,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
+                <div class="action-group-label">FOR YOU</div>
+                <button class="action-btn recommended" onclick="cmd('skillReview')" title="Recommended for ${personaName}: ${recommendedSkillName}">
+                    <span class="action-icon">${personaIcon}</span>
+                    <span class="action-text">${recommendedSkillName}</span>
+                    <span class="recommended-badge">\u2192</span>
+                </button>
+                
                 <div class="action-group-label">CORE</div>
                 <button class="action-btn primary" onclick="cmd('openChat')">
                     <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
