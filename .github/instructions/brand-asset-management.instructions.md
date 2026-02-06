@@ -50,6 +50,36 @@ All logos use 30° rotation for dynamic launch angle.
 | `platforms/m365-copilot/appPackage/outline.png` | 32x32 | 1.20 KB | Teams outline icon |
 | `alex_docs/marketing/logo-concepts/correa-x.svg` | 32x32 | - | Parent brand asset |
 
+## GK Premium Branding (v5.0)
+
+**Metaphor Evolution**: Rocket strapped to back → Docked at space station
+
+| Tier | Symbol | Meaning |
+|------|--------|---------|
+| **Standard** | A Negative Space Rocket | Individual project acceleration |
+| **Premium (GK)** | Space Station + Docked Rocket | Cross-project knowledge hub |
+
+### GK Assets
+
+| Asset | Location | Status |
+|-------|----------|--------|
+| **Banner** | `alex_docs/marketing/banner-concepts/gk-space-station.svg` | ✅ SELECTED |
+| **Logo** | `alex_docs/marketing/logo-concepts/gk-space-station-logo.svg` | ✅ SELECTED |
+| **GK Repo** | `Alex-Global-Knowledge/assets/banner.svg` | ✅ DEPLOYED |
+
+### GK Brand Elements
+
+| Element | Value |
+|---------|-------|
+| **Tagline** | "Your MISSION CONTROL for Cross-Project Wisdom" |
+| **Colors** | Azure + orange + **sync green (#00ff88)** |
+| **Status Badge** | "DOCKED & SYNCED" |
+| **Feature Pills** | Patterns, Insights, Synced, Shareable |
+
+### Concept Candidates (6 variations)
+
+See `alex_docs/marketing/MARKETING-PLAN.md` → GK Banner Candidates table.
+
 ## Platform-Specific Guidelines
 
 ### GitHub (Animated SVG Supported)
@@ -81,3 +111,4 @@ The `--density 150` flag ensures crisp text rendering.
 - [MARKETING-PLAN.md] (strong, reference, bidirectional) — Brand decisions source of truth
 - [release-management.instructions.md] (moderate, workflow, incoming) — Asset verification during release
 - [heir-skill-promotion.instructions.md] (weak, reference, outgoing) — Heir branding alignment
+- [GI-premium-tier-visual-metaphor-pattern-2026-02-06.md] (strong, pattern, outgoing) — Tiered branding pattern (Global Knowledge)
