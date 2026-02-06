@@ -7,11 +7,65 @@ description: "Synchronize insights between local projects and the Alex Global Kn
 
 Manages bidirectional synchronization between local project knowledge and the centralized Alex Global Knowledge repository.
 
+## First-Time Setup (New Users)
+
+If you don't have a Global Knowledge repository yet, create one:
+
+### Option 1: GitHub CLI (Recommended)
+```powershell
+cd C:\Development  # or your projects folder
+gh repo create My-Global-Knowledge --private --description "Alex Global Knowledge Base" --clone
+cd My-Global-Knowledge
+```
+
+### Option 2: Manual
+1. Create a new private GitHub repo named `My-Global-Knowledge`
+2. Clone it as a sibling to your projects
+
+### Scaffold the Repository
+After creating the repo, initialize the structure:
+
+```powershell
+# Create folders
+mkdir patterns, insights
+
+# Create index.json
+@'
+{
+  "version": "1.0.0",
+  "lastUpdated": "$(Get-Date -Format 'yyyy-MM-ddTHH:mm:ssZ')",
+  "entries": []
+}
+'@ | Out-File -FilePath index.json -Encoding utf8
+
+# Create README
+@'
+# My Global Knowledge Base
+
+Cross-project learnings for Alex Cognitive Architecture.
+
+## Structure
+- `patterns/` - Reusable solutions (GK-*.md)
+- `insights/` - Timestamped learnings (GI-*.md)
+- `index.json` - Master search index
+
+## Usage
+- `/knowledge <query>` - Search knowledge
+- `/saveinsight` - Save a learning
+- `/promote` - Make local knowledge global
+'@ | Out-File -FilePath README.md -Encoding utf8
+
+# Commit
+git add -A
+git commit -m "feat: initialize global knowledge structure"
+git push
+```
+
 ## Repository Location
 
 **Default**: The GK repo should be a sibling folder to your project workspace:
 - Your Project: `C:\Development\YourProject\`
-- Global Knowledge: `C:\Development\Alex-Global-Knowledge\`
+- Global Knowledge: `C:\Development\My-Global-Knowledge\`
 
 **Configuration**: Set via `globalKnowledgeRepo` in `.github/config/alex-settings.json`
 

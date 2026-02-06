@@ -138,6 +138,8 @@ flowchart LR
 | ----------------------------- | :----: | :----: | :--------: | :----: |
 | Global Knowledge Repository   | Master |   2w   | 🔥 Critical | ✅ Done |
 | GK Sync Skill                 | Master |   2h   |    High    | ✅ Done |
+| GK Setup Instructions         | Master |   1h   |    High    | ✅ Done |
+| `Alex: Init Global Knowledge` |  Heir  |   4h   |   Medium   | 📋 Next |
 | Configurable GK Repo Location | Master |   4h   |    High    | 📋 Next |
 | Team Knowledge Sharing        |  Heir  |   4h   |    High    | 📋 Next |
 | Security Gates (secrets, PII) | Master |   1w   |  Critical  | 📋 Next |
