@@ -1,8 +1,14 @@
 {
   "skill": "brain-qa",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "inheritance": "master-only",
   "connections": [
+    {
+      "target": ".github/copilot-instructions.md",
+      "type": "validates",
+      "strength": 0.95,
+      "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate"
+    },
     {
       "target": ".github/skills/architecture-health/SKILL.md",
       "type": "extends",
