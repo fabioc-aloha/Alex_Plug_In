@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Rocket body as brain-like shape -->
+  <ellipse cx="64" cy="50" rx="30" ry="35" fill="url(#azureGrad)"/>
+  <!-- Neural connection lines -->
+  <line x1="40" y1="35" x2="25" y2="25" stroke="#0078d4" stroke-width="2"/>
+  <line x1="88" y1="35" x2="103" y2="25" stroke="#0078d4" stroke-width="2"/>
+  <line x1="34" y1="55" x2="18" y2="55" stroke="#0078d4" stroke-width="2"/>
+  <line x1="94" y1="55" x2="110" y2="55" stroke="#0078d4" stroke-width="2"/>
+  <!-- Neural nodes -->
+  <circle cx="25" cy="25" r="5" fill="#0078d4"/>
+  <circle cx="103" cy="25" r="5" fill="#0078d4"/>
+  <circle cx="18" cy="55" r="5" fill="#0078d4"/>
+  <circle cx="110" cy="55" r="5" fill="#0078d4"/>
+  <!-- Rocket exhaust/thrust -->
+  <polygon points="50,85 64,115 78,85" fill="#ff6b35"/>
+  <polygon points="55,85 64,105 73,85" fill="#ffc857"/>
+  <!-- A letterform inside -->
+  <path d="M64,25 L50,70 L55,70 L58,60 L70,60 L73,70 L78,70 Z M60,55 L64,35 L68,55 Z" fill="white"/>
+</svg>

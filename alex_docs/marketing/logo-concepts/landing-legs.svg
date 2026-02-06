@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Landing pad -->
+  <ellipse cx="64" cy="115" rx="45" ry="8" fill="#e0e0e0"/>
+  <!-- Landing legs (deployed) -->
+  <line x1="45" y1="85" x2="25" y2="110" stroke="url(#azureGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="83" y1="85" x2="103" y2="110" stroke="url(#azureGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Leg feet -->
+  <ellipse cx="25" cy="112" rx="8" ry="3" fill="url(#azureGrad)"/>
+  <ellipse cx="103" cy="112" rx="8" ry="3" fill="url(#azureGrad)"/>
+  <!-- Rocket body with A -->
+  <polygon points="64,12 45,85 55,85 58,70 70,70 73,85 83,85" fill="url(#azureGrad)"/>
+  <polygon points="60,65 64,35 68,65" fill="white"/>
+  <!-- Grid fins -->
+  <rect x="42" y="25" width="4" height="15" fill="url(#azureGrad)" opacity="0.7"/>
+  <rect x="82" y="25" width="4" height="15" fill="url(#azureGrad)" opacity="0.7"/>
+  <!-- Soft landing effect -->
+  <ellipse cx="64" cy="108" rx="20" ry="4" fill="#ffc857" opacity="0.3"/>
+</svg>

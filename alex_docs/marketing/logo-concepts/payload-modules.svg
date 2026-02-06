@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Nose cone -->
+  <polygon points="64,10 50,35 78,35" fill="url(#azureGrad)"/>
+  <!-- Module 1 (skills) -->
+  <rect x="50" y="38" width="28" height="18" rx="2" fill="url(#azureGrad)"/>
+  <text x="64" y="51" font-family="Arial" font-size="8" fill="white" text-anchor="middle">SKILLS</text>
+  <!-- Module 2 (memory) -->
+  <rect x="48" y="59" width="32" height="18" rx="2" fill="url(#azureGrad)"/>
+  <text x="64" y="72" font-family="Arial" font-size="8" fill="white" text-anchor="middle">MEMORY</text>
+  <!-- Module 3 (tools) -->
+  <rect x="46" y="80" width="36" height="18" rx="2" fill="url(#azureGrad)"/>
+  <text x="64" y="93" font-family="Arial" font-size="8" fill="white" text-anchor="middle">TOOLS</text>
+  <!-- Engine section -->
+  <polygon points="46,101 64,101 82,101 85,115 43,115" fill="url(#azureGrad)"/>
+  <!-- Exhaust flames -->
+  <polygon points="50,115 55,125 60,115" fill="#ff6b35"/>
+  <polygon points="60,115 64,128 68,115" fill="#ffc857"/>
+  <polygon points="68,115 73,125 78,115" fill="#ff6b35"/>
+  <!-- Connection lines between modules -->
+  <line x1="50" y1="56" x2="78" y2="56" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="48" y1="77" x2="80" y2="77" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+  <line x1="46" y1="98" x2="82" y2="98" stroke="white" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>

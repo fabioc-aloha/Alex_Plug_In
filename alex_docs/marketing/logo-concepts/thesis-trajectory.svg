@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Trajectory arc -->
+  <path d="M20,100 Q64,10 108,100" fill="none" stroke="#0078d4" stroke-width="3" stroke-dasharray="5,3"/>
+  <!-- Graduation cap at apex -->
+  <rect x="48" y="28" width="32" height="6" fill="url(#azureGrad)"/>
+  <polygon points="64,20 44,32 84,32" fill="url(#azureGrad)"/>
+  <line x1="64" y1="20" x2="64" y2="12" stroke="#0078d4" stroke-width="2"/>
+  <circle cx="64" cy="10" r="3" fill="#ffc857"/>
+  <!-- Tassel -->
+  <path d="M64,20 Q75,25 78,35" fill="none" stroke="#ffc857" stroke-width="2"/>
+  <!-- Rocket at end of trajectory -->
+  <polygon points="100,85 108,100 92,100" fill="url(#azureGrad)"/>
+  <polygon points="100,100 104,108 100,106 96,108" fill="#ff6b35"/>
+  <!-- A letterform small -->
+  <text x="64" y="75" font-family="Arial Black" font-size="28" fill="url(#azureGrad)" text-anchor="middle">A</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="50%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#fff4e0"/>
+    </linearGradient>
+  </defs>
+  <!-- Quill feather shape made of flame -->
+  <path d="M30,100 Q40,60 64,20 Q70,35 68,50 Q85,40 95,25 Q88,55 75,70 Q90,65 105,55 Q85,80 65,90 Q70,95 80,100 L30,100 Z" fill="url(#flameGrad)"/>
+  <!-- Quill stem -->
+  <line x1="30" y1="100" x2="64" y2="20" stroke="url(#azureGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- A formed by flame tip -->
+  <path d="M64,20 L58,45 L60,45 L62,38 L66,38 L68,45 L70,45 Z M63,36 L64,28 L65,36 Z" fill="url(#azureGrad)"/>
+  <!-- Ink/exhaust trail -->
+  <path d="M25,105 Q35,108 50,105 Q60,102 75,108" fill="none" stroke="url(#azureGrad)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Writing sparkles -->
+  <circle cx="78" cy="100" r="2" fill="#ffc857"/>
+  <circle cx="85" cy="95" r="1.5" fill="#ffc857"/>
+</svg>

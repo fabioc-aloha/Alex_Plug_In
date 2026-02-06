@@ -36,7 +36,9 @@
 | Asset            | Copy                                                                             |
 | ---------------- | -------------------------------------------------------------------------------- |
 | **Brand**        | Alex                                                                             |
+| **Logo**         | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette         |
 | **Banner**       | Alex — STRAP A ROCKET TO YOUR BACK                                               |
+| **Tagline**      | Strap a rocket to your back                                                      |
 | **package.json** | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source. |
 | **Marketplace**  | [See Marketplace Description below]                                              |
 | **README**       | [See README Description below]                                                   |
@@ -289,13 +291,37 @@ That's Alex.
 **Status**: Open to new designs that embrace the rocket theme
 **Files**: `alex_docs/logo-concepts/`
 
-| Concept           | Preview                                                                    | Pros                          | Cons                 |
-| ----------------- | -------------------------------------------------------------------------- | ----------------------------- | -------------------- |
-| **Rocket "A"**    | <img src="logo-concepts/rocket-a.svg" alt="Rocket A" width="48">           | Direct, memorable, on-brand   | May look generic     |
-| **Launch Pad A**  | <img src="logo-concepts/launch-pad-a.svg" alt="Launch Pad A" width="48">   | Subtle, professional          | Less literal         |
-| **Arc + Flame**   | <img src="logo-concepts/arc-flame.svg" alt="Arc Flame" width="48">         | Brand continuity              | Hybrid complexity    |
-| **Orbital A**     | <img src="logo-concepts/orbital-a.svg" alt="Orbital A" width="48">         | Suggests journey, destination | Less "thrust" energy |
-| **Chevron Stack** | <img src="logo-concepts/chevron-stack.svg" alt="Chevron Stack" width="48"> | Multi-stage = skill layers    | Abstract             |
+| Concept                | Preview                                                                              | Pros                          | Cons                  | Target Persona          | Alex Pick |
+| ---------------------- | ------------------------------------------------------------------------------------ | ----------------------------- | --------------------- | ----------------------- | --------- |
+| **Rocket "A"**         | <img src="logo-concepts/rocket-a.svg" alt="Rocket A" width="80">                     | Direct, memorable, on-brand   | May look generic      | Primary (Power User)    | ⭐⭐⭐       |
+| **Launch Pad A**       | <img src="logo-concepts/launch-pad-a.svg" alt="Launch Pad A" width="80">             | Subtle, professional          | Less literal          | Enterprise Architect    | ⭐⭐        |
+| **Arc + Flame**        | <img src="logo-concepts/arc-flame.svg" alt="Arc Flame" width="80">                   | Brand continuity              | Hybrid complexity     | Primary (Power User)    | ⭐⭐        |
+| **Orbital A**          | <img src="logo-concepts/orbital-a.svg" alt="Orbital A" width="80">                   | Suggests journey, destination | Less "thrust" energy  | Open Source Contributor | ⭐⭐        |
+| **Chevron Stack**      | <img src="logo-concepts/chevron-stack.svg" alt="Chevron Stack" width="80">           | Multi-stage = skill layers    | Abstract              | DevOps Engineer         | ⭐⭐        |
+| **Neural Rocket**      | <img src="logo-concepts/neural-rocket.svg" alt="Neural Rocket" width="80">           | Brain + rocket fusion         | Complex at small size | Cognitive Scientist     | ⭐         |
+| **Thesis Trajectory**  | <img src="logo-concepts/thesis-trajectory.svg" alt="Thesis Trajectory" width="80">   | Grad cap + flight arc         | Niche                 | Academic / Grad Student | ⭐         |
+| **Mission Control**    | <img src="logo-concepts/mission-control.svg" alt="Mission Control" width="80">       | Dashboard feel, status lights | Less dynamic          | Enterprise Architect    | ⭐         |
+| **Booster Separation** | <img src="logo-concepts/booster-separation.svg" alt="Booster Separation" width="80"> | Modular, dramatic moment      | Complex               | DevOps Engineer         | ⭐         |
+| **Landing Legs**       | <img src="logo-concepts/landing-legs.svg" alt="Landing Legs" width="80">             | Safe landing = reliability    | Less "launch" energy  | SRE / On-Call           | ⭐⭐        |
+| **Flame Quill**        | <img src="logo-concepts/flame-quill.svg" alt="Flame Quill" width="80">               | Writing + fire creativity     | Niche                 | Fiction Writer          | ⭐         |
+| **Payload Modules**    | <img src="logo-concepts/payload-modules.svg" alt="Payload Modules" width="80">       | Shows feature stack           | Text may not scale    | All (feature showcase)  | ⭐         |
+| **Countdown Launch**   | <img src="logo-concepts/countdown-launch.svg" alt="Countdown Launch" width="80">     | T-minus drama, GO status      | Complex at small size | Project Manager         | ⭐         |
+| **A Rocket Body**      | <img src="logo-concepts/a-rocket-body.svg" alt="A Rocket Body" width="80">           | A IS the rocket, fins extend  | Bold interpretation   | Primary (Power User)    | ⭐⭐⭐⭐      |
+| **A Negative Space**   | <img src="logo-concepts/a-negative-space.svg" alt="A Negative Space" width="80">     | A cut out of rocket shape     | Clean, iconic         | Primary (Power User)    | ⭐⭐⭐⭐⭐     |
+| **A Rocket Through**   | <img src="logo-concepts/a-rocket-through.svg" alt="A Rocket Through" width="80">     | Rocket piercing through A     | Dynamic action        | Primary (Power User)    | ⭐⭐⭐       |
+| **A Exhaust Trail**    | <img src="logo-concepts/a-exhaust-trail.svg" alt="A Exhaust Trail" width="80">       | A formed by exhaust plume     | Creative, unusual     | Creative personas       | ⭐⭐        |
+| **A Nosecone**         | <img src="logo-concepts/a-nosecone.svg" alt="A Nosecone" width="80">                 | A with nosecone apex          | Cohesive design       | Primary (Power User)    | ⭐⭐⭐⭐      |
+| **A Capsule**          | <img src="logo-concepts/a-capsule.svg" alt="A Capsule" width="80">                   | Capsule shape with A inside   | Spacecraft feel       | Enterprise Architect    | ⭐⭐⭐       |
+| **A Orbit**            | <img src="logo-concepts/a-orbit.svg" alt="A Orbit" width="80">                       | Rocket orbits central A       | Journey + destination | Open Source Contributor | ⭐⭐        |
+| **A Ascending**        | <img src="logo-concepts/a-ascending.svg" alt="A Ascending" width="80">               | Rocket climbing the A outline | Motion, progress      | Academic / Grad Student | ⭐⭐        |
+
+### Alex's Top 3 Recommendations
+
+1. **⭐⭐⭐⭐⭐ A Negative Space** — Clean, iconic, scales perfectly. The A emerges from the rocket silhouette. Works at 16x16 and 128x128. Professional and memorable.
+
+2. **⭐⭐⭐⭐ A Rocket Body** — The A literally IS the rocket. Bold statement. Crossbar becomes fins. Clear brand + metaphor fusion.
+
+3. **⭐⭐⭐⭐ A Nosecone** — Cohesive spacecraft feel. The nosecone apex makes the A feel aerodynamic. Window detail adds personality.
 
 **Design Constraints:**
 - Must work at 16x16, 32x32, 128x128

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Stylized A with integrated nose cone -->
+  <!-- Nose cone at apex -->
+  <ellipse cx="64" cy="18" rx="12" ry="18" fill="url(#azureGrad)"/>
+  <!-- A legs extending down -->
+  <polygon points="52,30 35,105 48,105 55,70 73,70 80,105 93,105 76,30" fill="url(#azureGrad)"/>
+  <!-- Window on nose cone -->
+  <circle cx="64" cy="20" r="5" fill="white"/>
+  <circle cx="64" cy="20" r="3" fill="#001a33"/>
+  <!-- Crossbar as stabilizer fin -->
+  <rect x="50" y="58" width="28" height="8" rx="2" fill="white"/>
+  <!-- Side fins -->
+  <polygon points="35,105 20,115 35,95" fill="url(#azureGrad)"/>
+  <polygon points="93,105 108,115 93,95" fill="url(#azureGrad)"/>
+  <!-- Center exhaust -->
+  <polygon points="55,105 64,125 73,105" fill="#ff6b35"/>
+  <polygon points="58,105 64,118 70,105" fill="#ffc857"/>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  <!-- Bold A letterform -->
+  <path d="M64,15 L35,105 L50,105 L55,85 L73,85 L78,105 L93,105 Z M58,70 L64,40 L70,70 Z" fill="url(#azureGrad)"/>
+  <!-- Rocket ascending through the A hole -->
+  <polygon points="64,30 58,55 60,55 61,50 67,50 68,55 70,55" fill="white"/>
+  <polygon points="62,48 64,38 66,48" fill="url(#azureGrad)"/>
+  <!-- Rocket trail going down and out -->
+  <path d="M64,55 Q64,62 64,72 Q60,80 52,90 Q48,95 40,100" fill="none" stroke="url(#flameGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M64,55 Q64,62 64,72 Q68,80 76,90 Q80,95 88,100" fill="none" stroke="url(#flameGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Trail sparks -->
+  <circle cx="38" cy="102" r="3" fill="#ff6b35"/>
+  <circle cx="90" cy="102" r="3" fill="#ff6b35"/>
+</svg>

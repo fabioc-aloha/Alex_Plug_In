@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Rocket silhouette -->
+  <path d="M64,10 C64,10 45,30 45,60 L45,90 L55,95 L55,85 L73,85 L73,95 L83,90 L83,60 C83,30 64,10 64,10 Z" fill="url(#azureGrad)"/>
+  <!-- Fins -->
+  <polygon points="45,75 30,95 45,90" fill="url(#azureGrad)"/>
+  <polygon points="83,75 98,95 83,90" fill="url(#azureGrad)"/>
+  <!-- Large A cut out of rocket body (negative space) -->
+  <path d="M64,25 L52,70 L56,70 L59,58 L69,58 L72,70 L76,70 Z M61,52 L64,35 L67,52 Z" fill="white"/>
+  <!-- Flames -->
+  <polygon points="55,95 64,120 73,95" fill="#ff6b35"/>
+  <polygon points="58,95 64,112 70,95" fill="#ffc857"/>
+</svg>

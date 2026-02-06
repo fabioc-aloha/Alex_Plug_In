@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  <!-- A outline only -->
+  <path d="M64,20 L40,100 L48,100 L55,72 L73,72 L80,100 L88,100 Z M58,64 L64,38 L70,64 Z" 
+        fill="none" stroke="url(#azureGrad)" stroke-width="5"/>
+  <!-- Rocket ascending along left leg of A -->
+  <g transform="translate(48, 55) rotate(-25)">
+    <polygon points="0,-8 -4,4 4,4" fill="url(#azureGrad)"/>
+    <rect x="-3" y="4" width="6" height="10" rx="1" fill="url(#azureGrad)"/>
+    <polygon points="-3,14 0,22 3,14" fill="url(#flameGrad)"/>
+  </g>
+  <!-- Motion lines behind rocket -->
+  <line x1="55" y1="70" x2="62" y2="85" stroke="#0078d4" stroke-width="1.5" opacity="0.4"/>
+  <line x1="52" y1="75" x2="58" y2="88" stroke="#0078d4" stroke-width="1.5" opacity="0.3"/>
+  <line x1="49" y1="80" x2="54" y2="92" stroke="#0078d4" stroke-width="1.5" opacity="0.2"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Circular orbit ring -->
+  <circle cx="64" cy="64" r="50" fill="none" stroke="#e0e0e0" stroke-width="3"/>
+  <!-- A in center -->
+  <path d="M64,25 L45,95 L55,95 L60,75 L68,75 L73,95 L83,95 Z M62,65 L64,45 L66,65 Z" fill="url(#azureGrad)"/>
+  <!-- Rocket orbiting the A -->
+  <g transform="rotate(-30, 64, 64)">
+    <polygon points="114,64 106,58 106,70" fill="url(#azureGrad)"/>
+    <!-- Rocket body -->
+    <rect x="94" y="60" width="12" height="8" rx="2" fill="url(#azureGrad)"/>
+    <!-- Exhaust -->
+    <polygon points="94,62 88,64 94,66" fill="#ff6b35"/>
+  </g>
+  <!-- Orbit trail -->
+  <path d="M114,64 A50,50 0 0,1 64,114" fill="none" stroke="#ffc857" stroke-width="2" stroke-dasharray="4,4"/>
+</svg>

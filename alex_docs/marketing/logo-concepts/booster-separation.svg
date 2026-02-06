@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  <!-- Center core (A-shaped rocket) -->
+  <polygon points="64,10 50,75 55,75 58,60 70,60 73,75 78,75" fill="url(#azureGrad)"/>
+  <polygon points="60,55 64,30 68,55" fill="white"/>
+  <!-- Center flame -->
+  <polygon points="55,75 64,100 73,75" fill="url(#flameGrad)"/>
+  <!-- Left booster separating -->
+  <g transform="translate(-5,5) rotate(-15,35,50)">
+    <rect x="25" y="25" width="12" height="50" rx="3" fill="url(#azureGrad)"/>
+    <polygon points="25,75 31,90 37,75" fill="#ff6b35" opacity="0.7"/>
+  </g>
+  <!-- Right booster separating -->
+  <g transform="translate(5,5) rotate(15,93,50)">
+    <rect x="91" y="25" width="12" height="50" rx="3" fill="url(#azureGrad)"/>
+    <polygon points="91,75 97,90 103,75" fill="#ff6b35" opacity="0.7"/>
+  </g>
+  <!-- Separation sparks -->
+  <circle cx="42" cy="45" r="2" fill="#ffc857"/>
+  <circle cx="86" cy="45" r="2" fill="#ffc857"/>
+  <circle cx="45" cy="55" r="1.5" fill="#ffc857"/>
+  <circle cx="83" cy="55" r="1.5" fill="#ffc857"/>
+</svg>

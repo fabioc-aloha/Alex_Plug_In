@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- A formed by rocket exhaust plume -->
+  <!-- Left exhaust stream -->
+  <path d="M64,10 Q55,30 45,60 Q40,80 35,105" fill="none" stroke="url(#azureGrad)" stroke-width="8" stroke-linecap="round"/>
+  <!-- Right exhaust stream -->
+  <path d="M64,10 Q73,30 83,60 Q88,80 93,105" fill="none" stroke="url(#azureGrad)" stroke-width="8" stroke-linecap="round"/>
+  <!-- Crossbar exhaust -->
+  <path d="M50,65 L78,65" stroke="url(#azureGrad)" stroke-width="8" stroke-linecap="round"/>
+  <!-- Rocket at top (source of exhaust) -->
+  <polygon points="64,5 58,18 60,18 61,15 67,15 68,18 70,18" fill="url(#azureGrad)"/>
+  <polygon points="61,13 64,8 67,13" fill="white"/>
+  <!-- Glow at rocket -->
+  <circle cx="64" cy="12" r="8" fill="#ffc857" opacity="0.3"/>
+  <!-- Exhaust particles -->
+  <circle cx="40" cy="95" r="2" fill="#0078d4" opacity="0.5"/>
+  <circle cx="88" cy="95" r="2" fill="#0078d4" opacity="0.5"/>
+  <circle cx="55" cy="85" r="1.5" fill="#0078d4" opacity="0.4"/>
+  <circle cx="73" cy="85" r="1.5" fill="#0078d4" opacity="0.4"/>
+</svg>
