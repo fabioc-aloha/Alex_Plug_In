@@ -66,6 +66,20 @@
 
 **A Negative Space** — The letter A cut out of a rocket silhouette. Rotated 30° for dynamic launch angle. Clean, scales perfectly, one concept.
 
+### GK Premium Logo Concepts
+
+Logo variants aligned with the premium Global Knowledge banner design language. All use deep space gradient, Azure blue rocket, connection lines, and project nodes.
+
+| Variant     | Preview                                                                                        | Concept                                        |
+| ----------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| **Hub**     | <img src="logo-concepts/gk-premium-hub-logo.svg" alt="GK Premium Hub Logo" width="64">         | 4 nodes with lines feeding into central rocket |
+| **Network** | <img src="logo-concepts/gk-premium-network-logo.svg" alt="GK Premium Network Logo" width="64"> | Constellation patterns with triangular links   |
+| **Orbital** | <img src="logo-concepts/gk-premium-orbital-logo.svg" alt="GK Premium Orbital Logo" width="64"> | Tilted orbit ring with 2 project nodes         |
+| **Radial**  | <img src="logo-concepts/gk-premium-radial-logo.svg" alt="GK Premium Radial Logo" width="64">   | 5 radial lines converging on center + stars    |
+| **Minimal** | <img src="logo-concepts/gk-premium-minimal-logo.svg" alt="GK Premium Minimal Logo" width="64"> | 2 nodes, subtle curves, larger rocket, stars   |
+
+**Design Language**: Deep space (#080810 → #0d1520), Azure gradient (#0078d4 → #005a9e), thrust orange flame (#ff6b35), glowing nodes, connection lines representing cross-project knowledge flow.
+
 ### Parent Brand
 
 <img src="logo-concepts/correa-x.svg" alt="CorreaX Logo" width="64">
@@ -74,40 +88,44 @@
 
 ### Selected Banner
 
-| Variant               | Preview                                                                                          | Use Case                           |
-| --------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- |
-| **Static CODE (SVG)** | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">          | VS Code Marketplace, GitHub README |
-| **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | Social media, blog posts           |
-| **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Website hero, landing pages        |
-| **GK Space Station**  | <img src="banner-concepts/gk-space-station.svg" alt="GK Space Station Banner" width="400">       | Global Knowledge repo README       |
+| Variant                  | Preview                                                                                             | Use Case                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **Static CODE (SVG)**    | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">             | VS Code Marketplace, GitHub README |
+| **Static CODE (PNG)**    | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">         | Social media, blog posts           |
+| **Animated Rotating**    | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400">    | Website hero, landing pages        |
+| **GK Premium (Primary)** | <img src="banner-concepts/banner-premium-global-knowledge.svg" alt="Premium GK Banner" width="400"> | Global Knowledge repo README       |
 
 **banner-code-static** — Large centered logo, "Take Your CODE to New Heights" subtitle, CorreaX in corner.
 
 **gk-space-station** — ISS-inspired station with docked A Negative Space rocket. "Your MISSION CONTROL for Cross-Project Wisdom". Premium v5.0 feature.
 
-| Asset                  | Decision                                                                           | Status       |
-| ---------------------- | ---------------------------------------------------------------------------------- | ------------ |
-| **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                            | ✅ LOCKED     |
-| **Product Brand**      | Alex                                                                               | ✅ LOCKED     |
-| **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ LOCKED     |
-| **Logo Mono**          | A Negative Space rocket for VS Code activity bar (logo-mono.svg) — masked cutout   | ✅ LOCKED     |
-| **Tagline**            | Strap a rocket to your back                                                        | ✅ LOCKED     |
-| **Subtitle**           | "Take Your [NOUN] to New Heights" — rotates per persona (CODE, THESIS, etc.)       | ✅ LOCKED     |
-| **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
-| **Banner**             | banner-code-static.svg — Centered logo with "Take Your CODE to New Heights"        | ✅ LOCKED     |
-| **Animated Banner**    | banner-rotating-nouns.svg — 10 personas cycling                                    | ✅ LOCKED     |
-| **GK Banner**          | gk-space-station.svg — Docked rocket at ISS-inspired station, "MISSION CONTROL"    | ✅ LOCKED     |
-| **GK Logo**            | gk-space-station-logo.svg — 128x128 space station with docked rocket               | ✅ LOCKED     |
-| **Status Bar Icon**    | $(rocket) — Rocket codicon                                                         | ✅ LOCKED     |
-| **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | 📝 DRAFT      |
-| **Primary Persona**    | Power User / Builder                                                               | ✅ LOCKED     |
-| **Secondary Personas** | 10 niches with Banner Nouns — see animated banner                                  | ✅ LOCKED     |
-| **Primary Language**   | Rocket Terminology                                                                 | ✅ LOCKED     |
-| **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                      | 📝 DEFINED    |
-| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | ✅ LOCKED     |
-| **Marketplace**        | [See Marketplace Description below]                                                | 📝 DRAFT      |
-| **README**             | [See README Description below]                                                     | 📝 DRAFT      |
-| **Outreach**           | [See Outreach section]                                                             | 📝 DRAFT      |
+**banner-premium-global-knowledge** — Large centered A logo with connection lines representing cross-project knowledge links. "Your KNOWLEDGE Across All Projects" subtitle with premium badge. Unified brand language.
+
+| Asset                  | Decision                                                                                                 | Status       |
+| ---------------------- | -------------------------------------------------------------------------------------------------------- | ------------ |
+| **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                                                  | ✅ LOCKED     |
+| **Product Brand**      | Alex                                                                                                     | ✅ LOCKED     |
+| **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette                                 | ✅ LOCKED     |
+| **Logo Mono**          | A Negative Space rocket for VS Code activity bar (logo-mono.svg) — masked cutout                         | ✅ LOCKED     |
+| **Tagline**            | Strap a rocket to your back                                                                              | ✅ LOCKED     |
+| **Subtitle**           | "Take Your [NOUN] to New Heights" — rotates per persona (CODE, THESIS, etc.)                             | ✅ LOCKED     |
+| **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration                       | ✅ DOCUMENTED |
+| **Banner**             | banner-code-static.svg — Centered logo with "Take Your CODE to New Heights"                              | ✅ LOCKED     |
+| **Animated Banner**    | banner-rotating-nouns.svg — 10 personas cycling                                                          | ✅ LOCKED     |
+| **GK Banner**          | banner-premium-global-knowledge.svg — Centered A logo, connection lines, "KNOWLEDGE Across All Projects" | ✅ LOCKED     |
+| **GK Banner (Alt)**    | gk-space-station.svg — Docked rocket at ISS-inspired station, "MISSION CONTROL"                          | ✅ LOCKED     |
+| **GK Logo**            | gk-premium-minimal-logo.svg — 128x128 centered A rocket with 2 nodes + subtle curves (V11)               | ✅ LOCKED     |
+| **GK Logo (Alt)**      | gk-space-station-logo.svg — 128x128 space station with docked rocket (V4)                                | ✅ LOCKED     |
+| **Status Bar Icon**    | $(rocket) — Rocket codicon                                                                               | ✅ LOCKED     |
+| **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.                         | 📝 DRAFT      |
+| **Primary Persona**    | Power User / Builder                                                                                     | ✅ LOCKED     |
+| **Secondary Personas** | 10 niches with Banner Nouns — see animated banner                                                        | ✅ LOCKED     |
+| **Primary Language**   | Rocket Terminology                                                                                       | ✅ LOCKED     |
+| **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                                            | 📝 DEFINED    |
+| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent                                 | ✅ LOCKED     |
+| **Marketplace**        | [See Marketplace Description below]                                                                      | 📝 DRAFT      |
+| **README**             | [See README Description below]                                                                           | 📝 DRAFT      |
+| **Outreach**           | [See Outreach section]                                                                                   | 📝 DRAFT      |
 
 **Status Legend:**
 - ✅ LOCKED — Explicitly confirmed, not changing
@@ -344,6 +362,17 @@ That's Alex.
 | **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | PNG version (204KB) for platforms that don't support SVG                                                                                  | Social media, blog posts           |
 | **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Crossfade animation cycling 10 nouns: CODE → LEARNING → CAREER → CONTENT → THESIS → RESEARCH → WRITING → PROJECTS → DATA → INFRASTRUCTURE | Website hero, landing pages        |
 
+### Premium Feature Banners
+
+Variations of the standard banner highlighting v5.0 premium features. Each maintains brand consistency with subtle visual elements representing the feature.
+
+| Variant                  | Preview                                                                                                           | Tagline                                 | Premium Feature                 | Use Case                       |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------- | ------------------------------ |
+| **Global Knowledge**     | <img src="banner-concepts/banner-premium-global-knowledge.svg" alt="Global Knowledge Banner" width="400">         | "Your KNOWLEDGE Across All Projects"    | Cross-project patterns/insights | Feature announcement, docs     |
+| **Cloud Sync**           | <img src="banner-concepts/banner-premium-cloud-sync.svg" alt="Cloud Sync Banner" width="400">                     | "Sync Your WISDOM Everywhere"           | GitHub Gist backup              | Multi-device users, enterprise |
+| **Cross-Project Memory** | <img src="banner-concepts/banner-premium-cross-project-memory.svg" alt="Cross-Project Memory Banner" width="400"> | "NO REFUELING BETWEEN LAUNCHES"         | Persistent memory across repos  | Power users, consultants       |
+| **Mission Control**      | <img src="banner-concepts/banner-premium-mission-control.svg" alt="Mission Control Banner" width="400">           | "Your MISSION CONTROL for All Projects" | Central dashboard/status        | Enterprise, portfolio managers |
+
 ### Global Knowledge Banners (v5.0 Premium)
 
 > **Metaphor Evolution**: User straps rocket to their back → With GK, they dock at a space station
@@ -365,16 +394,23 @@ The Global Knowledge feature extends the rocket metaphor: individual projects (r
 
 #### GK Logo Candidates
 
-| #      | Concept        | Preview                                                                                          | Metaphor                           | Alex Pick |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- | --------- |
-| **V1** | Orbital        | <img src="logo-concepts/gk-v1-orbital-logo.svg" alt="GK Orbital Logo" width="128">               | GK sphere with rocket in orbit     | ⭐⭐⭐       |
-| **V2** | Constellation  | <img src="logo-concepts/gk-v2-constellation-logo.svg" alt="GK Constellation Logo" width="128">   | Network of connected project nodes | ⭐⭐        |
-| **V3** | Mothership     | <img src="logo-concepts/gk-v3-mothership-logo.svg" alt="GK Mothership Logo" width="128">         | Carrier with docking bays          | ⭐⭐⭐       |
-| **V4** | Station Docked | <img src="logo-concepts/gk-v4-station-docked-logo.svg" alt="GK Station Docked Logo" width="128"> | ISS-style station + docked rocket  | ⭐⭐⭐⭐⭐     |
-| **V5** | Launchpad      | <img src="logo-concepts/gk-v5-launchpad-logo.svg" alt="GK Launchpad Logo" width="128">           | Landing pad "GK HOME"              | ⭐⭐⭐       |
-| **V6** | Library        | <img src="logo-concepts/gk-v6-library-logo.svg" alt="GK Library Logo" width="128">               | Star chart bookshelf               | ⭐⭐        |
+| #       | Concept         | Preview                                                                                          | Metaphor                            | Alex Pick |
+| ------- | --------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------- | --------- |
+| **V1**  | Orbital         | <img src="logo-concepts/gk-v1-orbital-logo.svg" alt="GK Orbital Logo" width="128">               | GK sphere with rocket in orbit      | ⭐⭐⭐       |
+| **V2**  | Constellation   | <img src="logo-concepts/gk-v2-constellation-logo.svg" alt="GK Constellation Logo" width="128">   | Network of connected project nodes  | ⭐⭐        |
+| **V3**  | Mothership      | <img src="logo-concepts/gk-v3-mothership-logo.svg" alt="GK Mothership Logo" width="128">         | Carrier with docking bays           | ⭐⭐⭐       |
+| **V4**  | Station Docked  | <img src="logo-concepts/gk-v4-station-docked-logo.svg" alt="GK Station Docked Logo" width="128"> | ISS-style station + docked rocket   | ⭐⭐⭐⭐⭐     |
+| **V5**  | Launchpad       | <img src="logo-concepts/gk-v5-launchpad-logo.svg" alt="GK Launchpad Logo" width="128">           | Landing pad "GK HOME"               | ⭐⭐⭐       |
+| **V6**  | Library         | <img src="logo-concepts/gk-v6-library-logo.svg" alt="GK Library Logo" width="128">               | Star chart bookshelf                | ⭐⭐        |
+| **V7**  | Premium Hub     | <img src="logo-concepts/gk-premium-hub-logo.svg" alt="GK Premium Hub Logo" width="128">          | 4 nodes feeding into central rocket | ⭐⭐⭐⭐      |
+| **V8**  | Premium Network | <img src="logo-concepts/gk-premium-network-logo.svg" alt="GK Premium Network Logo" width="128">  | Constellation triangles + rocket    | ⭐⭐⭐       |
+| **V9**  | Premium Orbital | <img src="logo-concepts/gk-premium-orbital-logo.svg" alt="GK Premium Orbital Logo" width="128">  | Tilted orbit ring + 2 project nodes | ⭐⭐⭐⭐      |
+| **V10** | Premium Radial  | <img src="logo-concepts/gk-premium-radial-logo.svg" alt="GK Premium Radial Logo" width="128">    | 5 radial lines converging on center | ⭐⭐⭐       |
+| **V11** | Premium Minimal | <img src="logo-concepts/gk-premium-minimal-logo.svg" alt="GK Premium Minimal Logo" width="128">  | 2 nodes, subtle curves, clean       | ⭐⭐⭐⭐⭐ ✅   |
 
-**Selected GK Logo**: V4 Station Docked — [gk-space-station-logo.svg](logo-concepts/gk-space-station-logo.svg)
+**Note**: V7-V11 (Premium series) align with `banner-premium-global-knowledge.svg` design language: deep space gradient, Azure rocket, connection lines, glowing nodes.
+
+**Selected GK Logo**: V11 Premium Minimal — [gk-premium-minimal-logo.svg](logo-concepts/gk-premium-minimal-logo.svg)
 
 #### Visual Elements (V4 Selected Design)
 
