@@ -9,11 +9,13 @@ Manages bidirectional synchronization between local project knowledge and the ce
 
 ## Repository Location
 
-**Default**: Sibling to Master Alex workspace
-- Master Alex: `C:\Development\Alex_Plug_In\`
+**Default**: The GK repo should be a sibling folder to your project workspace:
+- Your Project: `C:\Development\YourProject\`
 - Global Knowledge: `C:\Development\Alex-Global-Knowledge\`
 
 **Configuration**: Set via `globalKnowledgeRepo` in `.github/config/alex-settings.json`
+
+**Note**: All heirs inherit this skill — GK sync works in any Alex-enabled project.
 
 ## Capabilities
 

@@ -2,7 +2,7 @@
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.0.0",
     "skill": "global-knowledge-sync",
-    "inheritance": "master-only",
+    "inheritance": "universal",
     "externalRepository": "fabioc-aloha/Alex-Global-Knowledge",
     "connections": [
         {
