@@ -578,15 +578,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transform: scale(1.02);
         }
         .premium-badge {
-            background: linear-gradient(135deg, #ff6b35, #ffc857);
-            color: #080810;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 10px;
-            letter-spacing: 0.2px;
+            background: var(--vscode-badge-background, #4d4d4d);
+            color: var(--vscode-badge-foreground, #ccc);
+            font-size: 9px;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
             margin-left: 6px;
-            box-shadow: 0 1px 3px rgba(255, 107, 53, 0.3);
+            opacity: 0.7;
         }
         .refresh-btn {
             margin-left: auto;
