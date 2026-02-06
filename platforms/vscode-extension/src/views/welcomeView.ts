@@ -512,81 +512,84 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
         }
         .header-title-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: wrap;
         }
         .header-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
         .header-tagline {
-            font-size: 10px;
-            color: var(--vscode-textLink-foreground);
+            font-size: 9px;
+            color: var(--vscode-descriptionForeground);
             font-style: italic;
-            letter-spacing: 0.3px;
-            opacity: 0.9;
+            letter-spacing: 0.2px;
+            opacity: 0.75;
         }
         .header-workspace {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--vscode-descriptionForeground);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 140px;
+            max-width: 160px;
+            opacity: 0.8;
         }
         .header-persona {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--vscode-textPreformat-foreground);
             background: var(--vscode-badge-background);
-            padding: 2px 6px;
-            border-radius: 8px;
-            opacity: 0.9;
+            padding: 1px 5px;
+            border-radius: 6px;
+            opacity: 0.85;
         }
         .header-text {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
             min-width: 0;
             flex: 1;
         }
         .version-badge {
             background: var(--vscode-badge-background, #4d4d4d);
             color: var(--vscode-badge-foreground, white);
-            font-size: 10px;
-            font-weight: 500;
-            padding: 3px 7px;
-            border-radius: 10px;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        .version-badge:hover {
-            opacity: 0.85;
-            transform: scale(1.02);
-        }
-        .premium-badge {
-            background: var(--vscode-badge-background, #4d4d4d);
-            color: var(--vscode-badge-foreground, #ccc);
             font-size: 9px;
             font-weight: 500;
             padding: 2px 6px;
             border-radius: 8px;
-            letter-spacing: 0.3px;
-            margin-left: 6px;
+            letter-spacing: 0.1px;
+            cursor: pointer;
             opacity: 0.7;
+            transition: all 0.15s ease;
+        }
+        .version-badge:hover {
+            opacity: 1;
+        }
+        .premium-badge {
+            background: var(--vscode-badge-background, #4d4d4d);
+            color: var(--vscode-badge-foreground, #ccc);
+            font-size: 8px;
+            font-weight: 500;
+            padding: 1px 5px;
+            border-radius: 6px;
+            letter-spacing: 0.2px;
+            margin-left: 4px;
+            opacity: 0.6;
         }
         .refresh-btn {
             margin-left: auto;
@@ -606,31 +609,33 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .section-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            opacity: 0.85;
         }
         
         .status-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 6px;
         }
         .status-item {
             background: var(--vscode-editor-background);
-            border-radius: 6px;
-            padding: 10px;
-            border-left: 3px solid transparent;
-            transition: border-color 0.15s ease;
+            border-radius: 5px;
+            padding: 8px 10px;
+            border-left: 2px solid transparent;
+            transition: all 0.12s ease;
         }
         .status-item:hover {
             border-left-color: var(--vscode-focusBorder);
+            background: var(--vscode-list-hoverBackground);
         }
         .status-item.status-good {
             border-left-color: var(--vscode-charts-green);
@@ -639,23 +644,25 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-left-color: var(--vscode-charts-yellow);
         }
         .status-label {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--vscode-descriptionForeground);
             margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
         .status-value {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             flex-shrink: 0;
-            box-shadow: 0 0 4px currentColor;
+            box-shadow: 0 0 3px currentColor;
         }
         .dot-green { background: var(--vscode-charts-green); color: var(--vscode-charts-green); }
         .dot-yellow { background: var(--vscode-charts-yellow); color: var(--vscode-charts-yellow); }
@@ -679,51 +686,54 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         
         .session-card {
             background: var(--vscode-editor-background);
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 12px;
-            border-left: 3px solid var(--vscode-charts-blue);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 2px solid var(--vscode-charts-blue);
         }
         .session-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
+            gap: 6px;
+            margin-bottom: 3px;
         }
         .session-icon {
-            font-size: 16px;
+            font-size: 14px;
         }
         .session-title {
+            font-size: 11px;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .session-timer {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             font-family: monospace;
             color: var(--vscode-charts-blue);
         }
         .session-status {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--vscode-descriptionForeground);
-            margin-top: 4px;
+            margin-top: 3px;
         }
         
         .action-list {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
         .action-group-label {
-            font-size: 10px;
-            font-weight: 600;
+            font-size: 9px;
+            font-weight: 500;
             color: var(--vscode-descriptionForeground);
-            margin-top: 12px;
-            margin-bottom: 6px;
-            padding-left: 4px;
-            opacity: 0.8;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            padding-left: 2px;
+            opacity: 0.7;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
         }
         .action-group-label:first-child {
             margin-top: 0;
@@ -731,20 +741,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
+            gap: 8px;
+            padding: 6px 10px;
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             text-align: left;
-            transition: all 0.12s ease;
+            transition: all 0.1s ease;
         }
         .action-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
-            transform: translateX(2px);
+            transform: translateX(1px);
         }
         .action-btn.primary {
             background: var(--vscode-button-background);
@@ -752,58 +762,55 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-btn.primary:hover {
             background: var(--vscode-button-hoverBackground);
-            transform: translateX(2px);
+            transform: translateX(1px);
         }
         .action-icon {
-            font-size: 14px;
-            width: 20px;
+            font-size: 12px;
+            width: 18px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            opacity: 0.9;
         }
         .action-icon svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
         .action-text {
             flex: 1;
         }
-        .premium-badge {
-            font-size: 10px;
+        .action-btn .premium-badge {
+            font-size: 9px;
             margin-left: auto;
-            opacity: 0.8;
-            animation: pulse-star 2s ease-in-out infinite;
-        }
-        @keyframes pulse-star {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
+            opacity: 0.5;
         }
         .action-btn.premium {
             border-left: 2px solid var(--vscode-charts-yellow);
+            opacity: 0.95;
         }
         .action-btn.premium:hover .premium-badge {
-            animation: none;
-            opacity: 1;
+            opacity: 0.8;
         }
         
         .goals-stats {
             display: flex;
-            gap: 16px;
-            font-size: 11px;
+            gap: 12px;
+            font-size: 10px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            opacity: 0.85;
         }
         .goal-item {
             background: var(--vscode-editor-background);
-            border-radius: 6px;
-            padding: 10px;
-            margin-bottom: 6px;
-            transition: transform 0.12s ease;
+            border-radius: 5px;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            transition: transform 0.1s ease;
         }
         .goal-item:hover {
-            transform: translateX(2px);
+            transform: translateX(1px);
         }
         .goal-header {
             display: flex;
@@ -812,19 +819,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-bottom: 4px;
         }
         .goal-title {
-            font-size: 12px;
+            font-size: 11px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             flex: 1;
         }
         .goal-progress-text {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--vscode-descriptionForeground);
             margin-left: 8px;
+            opacity: 0.8;
         }
         .goal-bar {
-            height: 4px;
+            height: 3px;
             background: var(--vscode-progressBar-background);
             border-radius: 2px;
             overflow: hidden;
@@ -843,17 +851,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .nudge-card {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
+            gap: 8px;
+            padding: 8px 10px;
             background: var(--vscode-editor-background);
-            border-radius: 6px;
-            margin-bottom: 6px;
-            border-left: 3px solid var(--vscode-charts-yellow);
-            transition: all 0.12s ease;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            border-left: 2px solid var(--vscode-charts-yellow);
+            transition: all 0.1s ease;
         }
         .nudge-card:hover {
-            transform: translateX(2px);
-            border-left-color: var(--vscode-charts-blue);
+            transform: translateX(1px);
+            background: var(--vscode-list-hoverBackground);
         }
         .nudge-card.nudge-health {
             border-left-color: var(--vscode-charts-red);
@@ -862,26 +870,27 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-left-color: var(--vscode-charts-orange, #f0883e);
         }
         .nudge-icon {
-            font-size: 16px;
+            font-size: 14px;
             flex-shrink: 0;
+            opacity: 0.9;
         }
         .nudge-content {
             flex: 1;
             min-width: 0;
         }
         .nudge-message {
-            font-size: 12px;
+            font-size: 11px;
             line-height: 1.3;
         }
         .nudge-action {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--vscode-textLink-foreground);
             background: none;
             border: none;
             cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: background 0.12s ease;
+            padding: 3px 6px;
+            border-radius: 3px;
+            transition: background 0.1s ease;
             white-space: nowrap;
         }
         .nudge-action:hover {
@@ -896,9 +905,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             cursor: pointer;
             list-style: none;
             user-select: none;
-            padding: 4px 0;
-            border-radius: 4px;
-            transition: color 0.12s ease;
+            padding: 3px 0;
+            border-radius: 3px;
+            transition: color 0.1s ease;
         }
         .features-section summary:hover {
             color: var(--vscode-textLink-foreground);
@@ -908,10 +917,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .features-section summary::before {
             content: '▸ ';
-            font-size: 11px;
-            margin-right: 6px;
-            transition: transform 0.15s ease;
+            font-size: 10px;
+            margin-right: 4px;
+            transition: transform 0.12s ease;
             display: inline-block;
+            opacity: 0.7;
         }
         .features-section details[open] summary::before {
             content: '▾ ';
@@ -923,27 +933,27 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-textLink-foreground);
         }
         .features-content {
-            margin-top: 12px;
-            padding: 0 4px;
+            margin-top: 10px;
+            padding: 0 2px;
         }
         .feature-category {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .feature-category-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             color: var(--vscode-foreground);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .feature-list {
             margin: 0;
-            padding-left: 16px;
-            font-size: 11px;
-            line-height: 1.6;
+            padding-left: 14px;
+            font-size: 10px;
+            line-height: 1.5;
             color: var(--vscode-descriptionForeground);
         }
         .feature-list li {
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .feature-list strong {
             color: var(--vscode-foreground);
@@ -952,9 +962,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .feature-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 14px;
-            padding-top: 14px;
+            gap: 6px;
+            margin-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid var(--vscode-widget-border);
         }
         .feature-link-btn {
@@ -962,17 +972,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-button-secondaryForeground);
             border: none;
             border-radius: 4px;
-            padding: 5px 10px;
-            font-size: 11px;
+            padding: 4px 8px;
+            font-size: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
-            transition: all 0.12s ease;
+            gap: 4px;
+            transition: all 0.1s ease;
         }
         .feature-link-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
-            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -1022,82 +1031,82 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
-                <div class="action-group-label">🧠 Core</div>
+                <div class="action-group-label">CORE</div>
                 <button class="action-btn primary" onclick="cmd('openChat')">
-                    <span class="action-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
-                    <span class="action-text">Chat with GitHub Copilot</span>
+                    <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
+                    <span class="action-text">Chat with Copilot</span>
                 </button>
                 <button class="action-btn" onclick="cmd('upgrade')">
                     <span class="action-icon">${hasGlobalKnowledge ? '🌐' : '⬆️'}</span>
                     <span class="action-text">Initialize / Update</span>
-                    ${hasGlobalKnowledge ? '<span class="premium-badge" title="Global Knowledge enabled">🌐</span>' : ''}
+                    ${hasGlobalKnowledge ? '<span class="premium-badge" title="Global Knowledge enabled">GK</span>' : ''}
                 </button>
                 <button class="action-btn" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
-                    <span class="action-text">Dream (Neural Maintenance)</span>
+                    <span class="action-text">Dream</span>
                 </button>
                 <button class="action-btn" onclick="cmd('selfActualize')">
                     <span class="action-icon">✨</span>
                     <span class="action-text">Self-Actualize</span>
                 </button>
                 
-                ${hasGlobalKnowledge ? `<div class="action-group-label">📚 Knowledge</div>
+                ${hasGlobalKnowledge ? `<div class="action-group-label">KNOWLEDGE</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
                     <span class="action-icon">☁️</span>
                     <span class="action-text">Sync Knowledge</span>
                 </button>
-                <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="⭐ Premium feature: Requires Global Knowledge repository">
+                <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="Premium: Requires Global Knowledge">
                     <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
                     <span class="premium-badge">⭐</span>
                 </button>` : ''}
                 
-                <div class="action-group-label">🛠️ Developer Tools</div>
+                <div class="action-group-label">DEV TOOLS</div>
                 <button class="action-btn" onclick="cmd('runAudit')">
                     <span class="action-icon">🔍</span>
-                    <span class="action-text">Run Project Audit</span>
+                    <span class="action-text">Project Audit</span>
                 </button>
                 <button class="action-btn" onclick="cmd('releasePreflight')">
                     <span class="action-icon">🚀</span>
                     <span class="action-text">Release Preflight</span>
                 </button>
-                <button class="action-btn" onclick="cmd('debugThis')" title="Select code or error message, then click to generate a debug prompt. Opens Copilot chat - paste to get AI debugging assistance.">
+                <button class="action-btn" onclick="cmd('debugThis')" title="Select code or error message, then click to generate a debug prompt">
                     <span class="action-icon">🐛</span>
-                    <span class="action-text">Debug This (selected code)</span>
+                    <span class="action-text">Debug This</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateDiagram')">
                     <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
                 </button>
-                <button class="action-btn" onclick="cmd('readAloud')" title="Read selected text or document aloud using Microsoft Edge neural voices">
+                <button class="action-btn" onclick="cmd('readAloud')" title="Read selected text aloud using neural voices">
                     <span class="action-icon">🔊</span>
                     <span class="action-text">Read Aloud</span>
                 </button>
                 
-                <div class="action-group-label">⚖️ Work-Life Balance</div>
+                <div class="action-group-label">BALANCE</div>
                 <button class="action-btn" onclick="cmd('startSession')">
                     <span class="action-icon">🍅</span>
-                    <span class="action-text">Start Focus Session</span>
+                    <span class="action-text">Focus Session</span>
                 </button>
                 <button class="action-btn" onclick="cmd('showGoals')">
                     <span class="action-icon">🎯</span>
-                    <span class="action-text">Manage Goals</span>
+                    <span class="action-text">Goals</span>
                 </button>
                 
-                <div class="action-group-label">⚙️ System</div>
-                <button class="action-btn" onclick="cmd('exportM365')" title="Package your global knowledge, profile, and insights for M365 Copilot. Auto-syncs to OneDrive/Alex-Memory/ if detected. Enable 'alex.m365.autoSync' for automatic sync after Dream operations.">
+                <div class="action-group-label">SYSTEM</div>
+                <button class="action-btn" onclick="cmd('exportM365')" title="Package knowledge for M365 Copilot">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>
                 <button class="action-btn" onclick="cmd('setupEnvironment')">
                     <span class="action-icon">⚙️</span>
-                    <span class="action-text">Setup Environment</span>
+                    <span class="action-text">Environment Setup</span>
                 </button>
                 <button class="action-btn" onclick="cmd('openDocs')">
                     <span class="action-icon">📚</span>
-                    <span class="action-text">Documentation</span>
+                    <span class="action-text">Docs</span>
                 </button>
-                <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics, telemetry data, and report bugs">
+                <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics and report issues">
                     <span class="action-icon">🩺</span>
                     <span class="action-text">Diagnostics</span>
                 </button>
