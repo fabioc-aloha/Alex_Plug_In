@@ -1,4 +1,6 @@
-# Alex Viral Description Options
+# Alex Marketing Plan
+
+> Brand identity, personas, terminology, logo concepts, and outreach copy.
 
 ## Target Personas
 
@@ -31,18 +33,25 @@
 
 ---
 
-## Quick Reference
+## Quick Reference — Brand Decisions
 
-| Asset            | Copy                                                                             |
-| ---------------- | -------------------------------------------------------------------------------- |
-| **Brand**        | Alex                                                                             |
-| **Logo**         | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette         |
-| **Banner**       | Alex — STRAP A ROCKET TO YOUR BACK                                               |
-| **Tagline**      | Strap a rocket to your back                                                      |
-| **package.json** | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source. |
-| **Marketplace**  | [See Marketplace Description below]                                              |
-| **README**       | [See README Description below]                                                   |
-| **Outreach**     | [See Outreach section]                                                           |
+| Asset                  | Decision                                                                           | Status       |
+| ---------------------- | ---------------------------------------------------------------------------------- | ------------ |
+| **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                            | ✅ LOCKED     |
+| **Product Brand**      | Alex                                                                               | ✅ LOCKED     |
+| **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ SELECTED   |
+| **Tagline**            | Strap a rocket to your back                                                        | ✅ LOCKED     |
+| **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
+| **Banner**             | Alex — STRAP A ROCKET TO YOUR BACK                                                 | ✅ LOCKED     |
+| **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | ✅ LOCKED     |
+| **Primary Persona**    | Power User / Builder                                                               | ✅ LOCKED     |
+| **Secondary Personas** | 12 niches (Academic, DevOps, Fiction Writer, etc.) — see table above               | ✅ DEFINED    |
+| **Primary Language**   | Rocket Terminology                                                                 | ✅ LOCKED     |
+| **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                      | ✅ DEFINED    |
+| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | ✅ DEFINED    |
+| **Marketplace**        | [See Marketplace Description below]                                                | 📝 READY      |
+| **README**             | [See README Description below]                                                     | 📝 READY      |
+| **Outreach**           | [See Outreach section]                                                             | 📝 READY      |
 
 ---
 
