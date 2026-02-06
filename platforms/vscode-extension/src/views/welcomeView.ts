@@ -918,7 +918,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <img src="${logoUri}" alt="Alex" class="header-icon" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
-                <span class="header-tagline">The AI that grows with you</span>
+                <span class="header-tagline">Take Your CODE to New Heights</span>
                 <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
             </div>
             <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>

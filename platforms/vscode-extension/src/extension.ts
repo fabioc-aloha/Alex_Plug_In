@@ -550,7 +550,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       const selected = await vscode.window.showQuickPick(items, {
         placeHolder: "Alex Cognitive Architecture - Quick Actions",
-        title: "🧠 Alex Status",
+        title: "🚀 Alex Status",
       });
 
       if (selected) {
@@ -1391,7 +1391,7 @@ async function updateStatusBar(
     statusBarItem.show();
   } catch (err) {
     // Fallback if health check fails
-    statusBarItem.text = "$(brain) Alex";
+    statusBarItem.text = "$(rocket) Alex";
     statusBarItem.tooltip =
       "Alex Cognitive Architecture - Click for quick actions";
     statusBarItem.backgroundColor = undefined;

@@ -261,7 +261,7 @@ Project: ${workspaceFolders[0].name}
             // Create a quick pick with search
             const quickPick = vscode.window.createQuickPick<KnowledgeQuickPickItem>();
             quickPick.placeholder = 'Search Alex Knowledge (type to filter)...';
-            quickPick.title = '🧠 Alex Knowledge Search';
+            quickPick.title = '🚀 Alex Knowledge Search';
             
             // Initial items (recent/popular)
             const updateItems = async (query: string) => {

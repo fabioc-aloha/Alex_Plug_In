@@ -73,9 +73,9 @@ Say *"How are you really doing?"* or *"Give me a full status report"* and Alex d
 
 Conversation is primary, but there are shortcuts for quick access.
 
-The **Status Bar** shows a 🧠 Alex item in the bottom-right corner. Click it for a quick menu of common actions—useful when you want one-click access to Dream, Sync, Documentation, and more.
+The **Status Bar** shows a 🚀 Alex item in the bottom-right corner. Click it for a quick menu of common actions—useful when you want one-click access to Dream, Sync, Documentation, and more.
 
-The **Welcome Panel** lives in the Activity Bar on the left side (look for the 🧠 icon). It's your dashboard: health status, active goals, session information, and quick action buttons—all visible at a glance.
+The **Welcome Panel** lives in the Activity Bar on the left side (look for the 🚀 icon). It's your dashboard: health status, active goals, session information, and quick action buttons—all visible at a glance.
 
 For keyboard lovers: `Ctrl+Alt+D` for Dream, `Ctrl+Alt+S` for Self-Actualize, `Ctrl+Alt+K` to Sync to cloud, and `Ctrl+Alt+H` to open this guide.
 

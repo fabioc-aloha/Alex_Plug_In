@@ -29,12 +29,6 @@
   <!-- Background -->
   <rect width="1280" height="640" fill="url(#bg)"/>
   
-  <!-- Subtle grid lines -->
-  <g stroke="#0078d4" stroke-width="0.5" opacity="0.1">
-    <line x1="0" y1="320" x2="1280" y2="320"/>
-    <line x1="640" y1="0" x2="640" y2="640"/>
-  </g>
-  
   <!-- Stars (minimal) -->
   <g fill="white">
     <circle cx="100" cy="100" r="1" opacity="0.4"/>
@@ -50,7 +44,7 @@
   <ellipse cx="640" cy="260" rx="400" ry="300" fill="url(#glow)"/>
   
   <!-- Large centered A Negative Space Logo -->
-  <g transform="translate(540, 100) scale(3.5)">
+  <g transform="translate(540, 130) scale(3.5)">
     <!-- Rocket body -->
     <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
     <!-- Fins -->
@@ -63,17 +57,19 @@
     <polygon points="24,68 30,85 36,68" fill="#ffc857"/>
   </g>
   
-  <!-- Tagline - centered below logo -->
-  <text x="640" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
+  <!-- Tagline - shifted right to clear rocket glow -->
+  <text x="680" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
   
-  <!-- Subtitle -->
-  <text x="640" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#666666" text-anchor="middle">The AI Copilot Extension That Grows With You</text>
+  <!-- Subtitle: Take Your CODE to New Heights -->
+  <text x="680" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#888888" text-anchor="middle">
+    <tspan fill="#888888">Take Your </tspan><tspan fill="#0078d4" font-weight="bold">CODE</tspan><tspan fill="#888888"> to New Heights</tspan>
+  </text>
   
-  <!-- CorreaX subtle mark bottom left -->
-  <g transform="translate(30, 590) scale(0.6)" opacity="0.4">
+  <!-- CorreaX mark bottom left -->
+  <g transform="translate(30, 580) scale(1.0)" opacity="0.7">
     <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14c3.866 0 7.389-1.568 9.928-4.1l-3.535-3.536A9.002 9.002 0 0116 25c-4.97 0-9-4.03-9-9s4.03-9 9-9c2.29 0 4.38.857 5.971 2.268l3.464-3.639C22.993 3.352 19.66 2 16 2z" fill="#0078d4"/>
     <path d="M20 10l-4 6 4 6h4l-4-6 4-6h-4z" fill="#0078d4"/>
     <path d="M24 10l4 6-4 6h4l4-6-4-6h-4z" fill="#0078d4" opacity="0.5"/>
   </g>
-  <text x="52" y="610" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#444444">CorreaX</text>
+  <text x="68" y="608" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#888888">CorreaX</text>
 </svg>

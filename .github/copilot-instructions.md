@@ -281,6 +281,7 @@ graph TB
 - [.github/instructions/heir-skill-promotion.instructions.md] → "promote skill", "heir expertise", "skill from heir"
 - [.github/instructions/global-knowledge-curation.instructions.md] → "curate knowledge", "global cleanup", "review global", "knowledge triage"
 - [.github/instructions/copilot-chat-buttons.instructions.md] → "action buttons", "clickable buttons", "button pattern", "chat UX"
+- [.github/instructions/brand-asset-management.instructions.md] → "branding", "logo", "banner", "icon", "asset locations", "visual identity"
 - [alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md] → "VS Code 1.109", "custom agents", "agent architecture", "multi-agent"
 
 **Skills — Action-Keyword Index**
@@ -312,6 +313,7 @@ graph TB
 - `code-review-guidelines.instructions.md` → Review checklists, feedback standards, PR quality
 - `heir-skill-promotion.instructions.md` → Workflow for promoting heir-developed skills to Master Alex
 - `global-knowledge-curation.instructions.md` → Periodic review, triage, and cleanup of global knowledge
+- `brand-asset-management.instructions.md` → Brand asset locations, variants, and platform-specific guidelines
 
 **Automation & Processing**
 - `dream-state-automation.instructions.md` → Automated neural maintenance and unconscious processing

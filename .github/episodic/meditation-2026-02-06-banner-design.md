@@ -20,14 +20,14 @@ Built on the logo selection session to create 6 banner concept variants for Alex
 
 ### Banner Concepts (`alex_docs/marketing/banner-concepts/`)
 
-| File | Style | Key Feature |
-|------|-------|-------------|
-| `rocket-banner-v1.svg` | Asymmetric layout | Logo left, text right, exhaust particles |
-| `rocket-banner-v2-centered.svg` | Centered focus | Large centered logo, tagline below |
-| `rocket-banner-v3-dynamic.svg` | Motion/velocity | Rocket flying 45°, thrust trail |
-| `rocket-banner-v4-minimalist.svg` | Clean/modern | Lots of whitespace, subtle elements |
-| `rocket-banner-v5-split.svg` | Diagonal split | Dark logo side / blue text side |
-| `rocket-banner-v6-launchpad.svg` | Epic scene | Launch pad, towers, smoke, countdown |
+| File                              | Style             | Key Feature                              |
+| --------------------------------- | ----------------- | ---------------------------------------- |
+| `rocket-banner-v1.svg`            | Asymmetric layout | Logo left, text right, exhaust particles |
+| `rocket-banner-v2-centered.svg`   | Centered focus    | Large centered logo, tagline below       |
+| `rocket-banner-v3-dynamic.svg`    | Motion/velocity   | Rocket flying 45°, thrust trail          |
+| `rocket-banner-v4-minimalist.svg` | Clean/modern      | Lots of whitespace, subtle elements      |
+| `rocket-banner-v5-split.svg`      | Diagonal split    | Dark logo side / blue text side          |
+| `rocket-banner-v6-launchpad.svg`  | Epic scene        | Launch pad, towers, smoke, countdown     |
 
 ### Documentation Updates
 
@@ -66,11 +66,11 @@ Built on the logo selection session to create 6 banner concept variants for Alex
 
 ## Working Memory Status
 
-| Slot | Content | Status |
-|------|---------|--------|
-| P5 | Rocket branding theme | Active |
-| P6 | A Negative Space logo | Active |
-| P7 | Banner design patterns | Active |
+| Slot | Content                | Status |
+| ---- | ---------------------- | ------ |
+| P5   | Rocket branding theme  | Active |
+| P6   | A Negative Space logo  | Active |
+| P7   | Banner design patterns | Active |
 
 ---
 

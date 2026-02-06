@@ -53,7 +53,7 @@ Search this index when processing any task request:
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
-| image-handling | convert svg, svg to png, resize image, sharp-cli, image optimization |
+| image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png |
 | incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
 | infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
 | knowledge-synthesis | synthesize knowledge, abstract pattern, promote insight, cross-project learning |

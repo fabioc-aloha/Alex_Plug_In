@@ -1,7 +1,7 @@
 {
   "name": "alex-cognitive-architecture",
   "displayName": "Alex Cognitive Architecture",
-  "description": "The AI that grows with you. Transform GitHub Copilot into a sophisticated learning partner with meta-cognitive awareness and cross-project knowledge transfer.",
+  "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
   "version": "4.2.12",
   "publisher": "fabioc-aloha",
@@ -315,8 +315,8 @@
     "submenus": [
       {
         "id": "alex.contextMenu",
-        "label": "🧠 Alex",
-        "icon": "$(brain)"
+        "label": "🚀 Alex",
+        "icon": "$(rocket)"
       }
     ],
     "chatSkills": [
@@ -538,7 +538,7 @@
         "id": "alex.cognitive",
         "fullName": "Alex Cognitive",
         "name": "alex",
-        "description": "The AI that grows with you - your cognitive learning partner with meta-cognitive awareness",
+        "description": "Strap a rocket to your back. Take Your CODE to New Heights.",
         "isSticky": true,
         "sampleRequest": "What would you like to learn today?",
         "disambiguation": [

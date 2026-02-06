@@ -1596,7 +1596,7 @@ async function handleHelpCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    stream.markdown(`## 🧠 Alex Cognitive Architecture - Commands & Capabilities
+    stream.markdown(`## 🚀 Alex Cognitive Architecture - Commands & Capabilities
 
 ### 📝 Slash Commands
 

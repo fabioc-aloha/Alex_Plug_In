@@ -16,20 +16,35 @@
 
 ### Secondary Personas
 
-| Persona                     | Profile                                         | Language          | Hook                                      | Rocket Angle                              | Skill                     |
-| --------------------------- | ----------------------------------------------- | ----------------- | ----------------------------------------- | ----------------------------------------- | ------------------------- |
-| **Cognitive Scientist**     | AI/ML researchers, cognitive architecture nerds | Neuroanatomic     | "Prefrontal cortex for your IDE"          | Launch your research to new frontiers     | ai-agent-design           |
-| **Academic / Grad Student** | Thesis writers, researchers, dissertation grind | Academic          | "Literature review on autopilot"          | Rocket your thesis to completion          | research-project-scaffold |
-| **Enterprise Architect**    | System designers, documentation maintainers     | Neuroanatomic     | "Self-documenting cognitive architecture" | Elevate your architecture documentation   | architecture-health       |
-| **Open Source Contributor** | OSS maintainers, community builders             | Rocket + Academic | "Your rocket. Your trajectory."           | Launch your project, your way             | git-workflow              |
-| **Grant Writer**            | PIs, postdocs, funding hunters                  | Academic          | "Research vision → funded reality"        | Propel your proposal past the competition | grant-writing             |
-| **Fiction Writer**          | Novelists, screenwriters, storytellers          | Creative          | "Your story structure co-author"          | Take your manuscript to new heights       | creative-writing          |
-| **Business Analyst**        | Requirements, BRDs, process mapping             | Enterprise        | "Stakeholder alignment accelerator"       | Accelerate stakeholder buy-in             | business-analysis         |
-| **DevOps Engineer**         | Infrastructure as code, cloud provisioning      | Rocket            | "Same infra, every time. Automated."      | Launch infrastructure at cloud speed      | infrastructure-as-code    |
-| **SRE / On-Call**           | Incident response, production operations        | Rocket            | "Calm. Systematic. Crisis handled."       | Recover faster, land smoother             | incident-response         |
-| **Project Manager**         | Agile, iteration, release cycles                | Rocket            | "4-6× faster than human estimates"        | Ship releases at rocket velocity          | project-management        |
-| **Data Engineer**           | Fabric, lakehouse, medallion architecture       | Enterprise        | "Governance on autopilot"                 | Elevate your data architecture            | microsoft-fabric          |
-| **Speaker / Presenter**     | Pitch decks, conference talks, workshops        | Creative          | "Notes → polished slides in minutes"      | Launch presentations that land            | gamma-presentations       |
+| Persona                     | Profile                                         | Banner Noun    | Hook                                      | Skill                     |
+| --------------------------- | ----------------------------------------------- | -------------- | ----------------------------------------- | ------------------------- |
+| **Developer**               | Coders, engineers, script writers               | CODE           | "Ship faster, debug less"                 | code-quality              |
+| **Cognitive Scientist**     | AI/ML researchers, cognitive architecture nerds | RESEARCH       | "Prefrontal cortex for your IDE"          | ai-agent-design           |
+| **Academic / Grad Student** | Thesis writers, researchers, dissertation grind | THESIS         | "Literature review on autopilot"          | research-project-scaffold |
+| **Researcher**              | Lab scientists, data researchers                | RESEARCH       | "Hypothesis to publication, accelerated"  | research-project-scaffold |
+| **Technical Writer**        | Documentation, API docs, manuals                | DOCUMENTATION  | "Docs that write themselves"              | api-documentation         |
+| **Enterprise Architect**    | System designers, documentation maintainers     | ARCHITECTURE   | "Self-documenting cognitive architecture" | architecture-health       |
+| **Open Source Contributor** | OSS maintainers, community builders             | PROJECTS       | "Your rocket. Your trajectory."           | git-workflow              |
+| **Grant Writer**            | PIs, postdocs, funding hunters                  | GRANTS         | "Research vision → funded reality"        | grant-writing             |
+| **Fiction Writer**          | Novelists, screenwriters, storytellers          | WRITING        | "Your story structure co-author"          | creative-writing          |
+| **Copywriter**              | Marketing copy, ads, landing pages              | COPY           | "Headlines that convert"                  | creative-writing          |
+| **Content Creator**         | Bloggers, social media, newsletters             | CONTENT        | "Ideas to posts in minutes"               | creative-writing          |
+| **Business Analyst**        | Requirements, BRDs, process mapping             | ANALYSIS       | "Stakeholder alignment accelerator"       | business-analysis         |
+| **DevOps Engineer**         | Infrastructure as code, cloud provisioning      | INFRASTRUCTURE | "Same infra, every time. Automated."      | infrastructure-as-code    |
+| **SRE / On-Call**           | Incident response, production operations        | INCIDENTS      | "Calm. Systematic. Crisis handled."       | incident-response         |
+| **Security Engineer**       | Threat modeling, compliance, audits             | SECURITY       | "Threat-aware by default"                 | incident-response         |
+| **Project Manager**         | Agile, iteration, release cycles                | PROJECTS       | "4-6× faster than human estimates"        | project-management        |
+| **Product Manager**         | Roadmaps, user stories, prioritization          | ROADMAPS       | "User needs → shipped features"           | project-management        |
+| **Data Engineer**           | Fabric, lakehouse, medallion architecture       | DATA           | "Governance on autopilot"                 | microsoft-fabric          |
+| **BI Analyst**              | Dashboards, reports, metrics                    | INSIGHTS       | "Raw data → executive insights"           | microsoft-fabric          |
+| **Speaker / Presenter**     | Pitch decks, conference talks, workshops        | PRESENTATIONS  | "Notes → polished slides in minutes"      | gamma-presentations       |
+| **Consultant**              | Proposals, client deliverables                  | PROPOSALS      | "Win more deals, faster"                  | business-analysis         |
+| **QA Engineer**             | Test cases, automation, coverage                | TESTS          | "Coverage without the tedium"             | code-quality              |
+| **Marketer**                | Campaigns, strategy, analytics                  | MARKETING      | "Data-driven campaigns, faster"           | business-analysis         |
+| **Job Seeker**              | Resumes, cover letters, interview prep          | CAREER         | "Stand out, get hired"                    | creative-writing          |
+| **Student**                 | Homework, study notes, learning                 | LEARNING       | "Master concepts, not just memorize"      | learning-psychology       |
+
+**Banner Template**: "Take Your [NOUN] to New Heights"
 
 ---
 
@@ -40,30 +55,49 @@
 
 ### Selected Logo
 
-<img src="logo-concepts/a-negative-space.svg" alt="A Negative Space Logo" width="128">
+| Variant              | Preview                                                                                            | Use Case                           |
+| -------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **Full Color (SVG)** | <img src="logo-concepts/a-negative-space.svg" alt="A Negative Space Logo" width="64">              | Documentation, marketing           |
+| **Full Color (PNG)** | <img src="logo-concepts/a-negative-space.png" alt="A Negative Space Logo PNG" width="64">          | Marketplace, social                |
+| **Extension Logo**   | <img src="../../platforms/vscode-extension/assets/logo.svg" alt="Extension Logo" width="64">       | Marketplace icon (32x32 optimized) |
+| **Monochrome**       | <img src="../../platforms/vscode-extension/assets/logo-mono.svg" alt="Monochrome Logo" width="64"> | VS Code activity bar sidebar       |
 
 **A Negative Space** — The letter A cut out of a rocket silhouette. Clean, scales perfectly, one concept.
 
 ### Parent Brand
 
-<img src="../../platforms/vscode-extension/assets/logo.svg" alt="CorreaX Logo" width="64">
+<img src="logo-concepts/correa-x.svg" alt="CorreaX Logo" width="64">
 
 **CorreaX** — C split X mark. The unchanging parent brand.
+
+### Selected Banner
+
+| Variant               | Preview                                                                                          | Use Case                           |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| **Static CODE (SVG)** | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">          | VS Code Marketplace, GitHub README |
+| **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | Social media, blog posts           |
+| **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Website hero, landing pages        |
+
+**banner-code-static** — Large centered logo, "Take Your CODE to New Heights" subtitle, CorreaX in corner.
 
 | Asset                  | Decision                                                                           | Status       |
 | ---------------------- | ---------------------------------------------------------------------------------- | ------------ |
 | **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                            | ✅ LOCKED     |
 | **Product Brand**      | Alex                                                                               | ✅ LOCKED     |
-| **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ SELECTED   |
+| **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ LOCKED     |
+| **Logo Mono**          | Rocket silhouette for VS Code activity bar (logo-mono.svg)                         | ✅ LOCKED     |
 | **Tagline**            | Strap a rocket to your back                                                        | ✅ LOCKED     |
+| **Subtitle**           | "Take Your [NOUN] to New Heights" — rotates per persona (CODE, THESIS, etc.)       | ✅ LOCKED     |
 | **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
-| **Banner**             | Alex — STRAP A ROCKET TO YOUR BACK                                                 | 📝 DRAFT      |
+| **Banner**             | banner-code-static.svg — Centered logo with "Take Your CODE to New Heights"        | ✅ LOCKED     |
+| **Animated Banner**    | banner-rotating-nouns.svg — 10 personas cycling                                    | ✅ LOCKED     |
+| **Status Bar Icon**    | $(rocket) — Rocket codicon                                                         | ✅ LOCKED     |
 | **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | 📝 DRAFT      |
-| **Primary Persona**    | Power User / Builder                                                               | 📝 DEFINED    |
-| **Secondary Personas** | 12 niches (Academic, DevOps, Fiction Writer, etc.) — see table above               | 📝 DEFINED    |
-| **Primary Language**   | Rocket Terminology                                                                 | 📝 DEFINED    |
+| **Primary Persona**    | Power User / Builder                                                               | ✅ LOCKED     |
+| **Secondary Personas** | 10 niches with Banner Nouns — see animated banner                                  | ✅ LOCKED     |
+| **Primary Language**   | Rocket Terminology                                                                 | ✅ LOCKED     |
 | **Alt Languages**      | Neuroanatomic, Academic, Enterprise, Creative                                      | 📝 DEFINED    |
-| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | 📝 DEFINED    |
+| **Colors**             | Azure blue gradient (#0078d4 → #005a9e) + thrust orange (#ff6b35) accent           | ✅ LOCKED     |
 | **Marketplace**        | [See Marketplace Description below]                                                | 📝 DRAFT      |
 | **README**             | [See README Description below]                                                     | 📝 DRAFT      |
 | **Outreach**           | [See Outreach section]                                                             | 📝 DRAFT      |
@@ -295,6 +329,14 @@ That's Alex.
 | **v5-split**      | <img src="banner-concepts/rocket-banner-v5-split.svg" alt="Banner v5" width="400">      | Diagonal split: dark side with logo, blue side with text.            |
 | **v6-launchpad**  | <img src="banner-concepts/rocket-banner-v6-launchpad.svg" alt="Banner v6" width="400">  | Rocket on launch pad, towers, smoke, countdown badge. Epic scene.    |
 
+### Persona-Targeted Banners (NEW)
+
+| Variant               | Preview                                                                                          | Description                                                                                                                               | Use Case                           |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **Static CODE (SVG)** | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">          | "Take Your CODE to New Heights" — highlighted CODE noun                                                                                   | VS Code Marketplace, GitHub README |
+| **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | PNG version (204KB) for platforms that don't support SVG                                                                                  | Social media, blog posts           |
+| **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Crossfade animation cycling 10 nouns: CODE → LEARNING → CAREER → CONTENT → THESIS → RESEARCH → WRITING → PROJECTS → DATA → INFRASTRUCTURE | Website hero, landing pages        |
+
 ### Current Logo Analysis
 
 **File**: `platforms/vscode-extension/assets/logo.svg`
@@ -494,6 +536,38 @@ New:      "STRAP A ROCKET TO YOUR BACK"
 | Windsurf     | "Type less. Code more."      | We don't type less — we fly           |
 
 **Our position**: Alex — the only skill engine with propulsion, not just storage.
+
+---
+
+## Banner Impression Tracking (TO DECIDE)
+
+Since the banner is fetched from GitHub raw URL, we can instrument it to measure impressions.
+
+| Method                                      | Pros                                       | Cons                                 | Cost      |
+| ------------------------------------------- | ------------------------------------------ | ------------------------------------ | --------- |
+| **Hit counter badge** (hits.seeyoufarm.com) | Free, easy, shows count                    | Visible badge, basic stats only      | Free      |
+| **Invisible pixel**                         | No UI change, still free                   | No referrer data                     | Free      |
+| **Image proxy service**                     | Full analytics, referrer tracking          | Adds latency, third-party dependency | Varies    |
+| **Azure Function + redirect**               | Full control, custom metrics, geo/referrer | Requires hosting, maintenance        | ~$1/mo    |
+| **Cloudflare Workers**                      | Fast, 100K free/day, edge caching          | Requires Cloudflare account          | Free tier |
+
+### Option 1: Visible Hit Counter Badge
+```markdown
+![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ffabioc-aloha%2FAlex_Plug_In)
+```
+
+### Option 2: Invisible Tracking Pixel
+```markdown
+![](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ffabioc-aloha%2FAlex_Plug_In&count_bg=%2300000000&title_bg=%2300000000&icon=&icon_color=%23E7E7E7&title=&edge_flat=true)
+```
+
+### Option 3: Azure Function (Full Analytics)
+- Logs: timestamp, referrer (marketplace vs GitHub vs other), user-agent, geo
+- Returns banner PNG with proper cache headers
+- Store in Azure Table Storage or App Insights
+- Endpoint: `https://alex-analytics.azurewebsites.net/banner.png`
+
+**Status**: 📝 TO DECIDE
 
 ---
 

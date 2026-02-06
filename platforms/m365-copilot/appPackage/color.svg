@@ -1,13 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
   <defs>
-    <linearGradient id="g1h" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#0078d4"/>
       <stop offset="100%" stop-color="#005a9e"/>
     </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
   </defs>
-  <!-- CX Logo - Azure blue, scaled to 192x192 -->
-  <!-- Original viewBox 0 0 32 32, scale factor = 6 -->
-  <path d="M96 12C49.608 12 12 49.608 12 96s37.608 84 84 84c23.196 0 44.334-9.408 59.568-24.6l-21.21-21.216A54.012 54.012 0 0196 150c-29.82 0-54-24.18-54-54s24.18-54 54-54c13.74 0 26.28 5.142 35.826 13.608l20.784-21.834C137.958 20.112 117.96 12 96 12z" fill="url(#g1h)"/>
-  <path d="M120 60l-24 36 24 36h24l-24-36 24-36h-24z" fill="url(#g1h)"/>
-  <path d="M144 60l24 36-24 36h24l24-36-24-36h-24z" fill="url(#g1h)" opacity="0.5"/>
+  <!-- A Negative Space Rocket Logo - 192x192 for Teams -->
+  <!-- Rocket body (scaled 6x from 32x32 base) -->
+  <path d="M96,15 C96,15 60,45 60,90 L60,138 L78,147 L78,126 L114,126 L114,147 L132,138 L132,90 C132,45 96,15 96,15 Z" fill="url(#azureGrad)"/>
+  <!-- Fins -->
+  <polygon points="60,114 30,156 60,138" fill="url(#azureGrad)"/>
+  <polygon points="132,114 162,156 132,138" fill="url(#azureGrad)"/>
+  <!-- A cutout (negative space) -->
+  <path d="M96,39 L75,108 L84,108 L90,84 L102,84 L108,108 L117,108 Z M93,75 L96,54 L99,75 Z" fill="white"/>
+  <!-- Flames -->
+  <polygon points="78,147 96,180 114,147" fill="url(#flameGrad)"/>
 </svg>

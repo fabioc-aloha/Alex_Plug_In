@@ -5,6 +5,10 @@ applyTo: "**/*.png,**/*.jpg,**/*.jpeg,**/*.webp,**/*.svg,**/*.ico,**/*image*,**/
 triggers:
   - "convert svg"
   - "convert png"
+  - "convert to png"
+  - "convert to jpg"
+  - "convert logo"
+  - "logo to png"
   - "svg to png"
   - "png to jpg"
   - "image conversion"
@@ -12,6 +16,14 @@ triggers:
   - "optimize image"
   - "banner"
   - "screenshot"
+  - "rasterize"
+  - "make png"
+  - "export as png"
+  - "export png"
+  - "marketplace logo"
+  - "marketplace icon"
+  - "favicon"
+  - "sharp-cli"
 ---
 
 # Image Handling Skill

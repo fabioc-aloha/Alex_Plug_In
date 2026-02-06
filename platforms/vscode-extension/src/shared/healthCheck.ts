@@ -221,7 +221,7 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
     // Special case: Not initialized - show enticing preview
     if (health.status === HealthStatus.NotInitialized) {
         return {
-            text: '$(brain) Alex ⚫ | 🍅 Focus | 🔥 Streaks | 💡 Knowledge',
+            text: '$(rocket) Alex ⚫ | 🍅 Focus | 🔥 Streaks | 💡 Knowledge',
             tooltip: `🚀 Initialize Alex to unlock:\n\n` +
                 `🍅 Focus Sessions - Pomodoro timer for deep work\n` +
                 `🔥 Learning Streaks - Build daily learning habits\n` +
@@ -249,7 +249,7 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
     }
 
     // Build text parts
-    const parts: string[] = [`$(brain) Alex ${statusEmoji}`];
+    const parts: string[] = [`$(rocket) Alex ${statusEmoji}`];
     
     // Add protection indicator
     if (isProtected) {

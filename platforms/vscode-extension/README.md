@@ -1,10 +1,10 @@
-# 🧠 Alex Cognitive Architecture
+# 🚀 Alex Cognitive Architecture
 
-![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png)
+![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
-> **The AI That Grows With You** — Your Multimodal Cognitive Learning Partner
+> **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
 
 > *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
 

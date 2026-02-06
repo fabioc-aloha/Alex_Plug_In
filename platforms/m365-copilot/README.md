@@ -1,13 +1,13 @@
-# 🧠 Alex M365 Copilot Agent
+# 🚀 Alex M365 Copilot Agent
 
-![Alex Cognitive Architecture](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/banner.png)
+![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-4.0.4-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-4.2.12-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
-> Alex Cognitive Architecture extended to Microsoft 365 Copilot 🧠
+> **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
 ---
 
@@ -51,8 +51,8 @@ m365-copilot/
 │   │   ├── alex-protocols.md      # Meditation, dream, self-actualization guides
 │   │   ├── cognitive-architecture.md  # How Alex thinks and learns
 │   │   └── skill-quick-reference.md   # All 15 embedded skills condensed
-│   ├── color.png                  # 192x192 color icon (geometric logo)
-│   └── outline.png                # 32x32 outline icon (white on transparent)
+│   ├── color.png                  # 192x192 color icon (A Negative Space Rocket)
+│   └── outline.png                # 32x32 outline icon (rocket silhouette)
 ├── env/
 │   ├── .env.dev
 │   └── .env.local

@@ -1,279 +1,156 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
   <defs>
-    <!-- Gradient for background -->
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a2e"/>
-      <stop offset="50%" style="stop-color:#16213e"/>
-      <stop offset="100%" style="stop-color:#0f3460"/>
+    <!-- Deep space gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
     </linearGradient>
     
-    <!-- Gradient for neural glow -->
-    <radialGradient id="neuralGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.4"/>
-      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0"/>
+    <!-- Azure blue -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Large glow behind rocket -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.2"/>
+      <stop offset="70%" stop-color="#0078d4" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
     </radialGradient>
-    
-    <!-- Gradient for accent glow -->
-    <radialGradient id="accentGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.3"/>
-      <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:0"/>
-    </radialGradient>
-    
-    <!-- Text gradient -->
-    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#007ACC"/>
-      <stop offset="100%" style="stop-color:#00a8e8"/>
-    </linearGradient>
-    
-    <!-- Synapse line gradient -->
-    <linearGradient id="synapseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#007ACC;stop-opacity:0.1"/>
-      <stop offset="50%" style="stop-color:#007ACC;stop-opacity:0.6"/>
-      <stop offset="100%" style="stop-color:#007ACC;stop-opacity:0.1"/>
-    </linearGradient>
   </defs>
   
   <!-- Background -->
-  <rect width="1280" height="640" fill="url(#bgGradient)"/>
+  <rect width="1280" height="640" fill="url(#bg)"/>
   
-  <!-- Grid pattern -->
-  <g opacity="0.1">
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#007ACC" stroke-width="0.5"/>
-    </pattern>
-    <rect width="1280" height="640" fill="url(#grid)"/>
+  <!-- Stars (minimal) -->
+  <g fill="white">
+    <circle cx="100" cy="100" r="1" opacity="0.4"/>
+    <circle cx="200" cy="500" r="1" opacity="0.3"/>
+    <circle cx="400" cy="150" r="1.5" opacity="0.5"/>
+    <circle cx="850" cy="80" r="1" opacity="0.4"/>
+    <circle cx="1000" cy="200" r="1" opacity="0.3"/>
+    <circle cx="1150" cy="120" r="1.5" opacity="0.5"/>
+    <circle cx="1200" cy="500" r="1" opacity="0.4"/>
   </g>
   
-  <!-- Neural network background visualization -->
-  <!-- Large glow circles -->
-  <circle cx="200" cy="320" r="300" fill="url(#neuralGlow)"/>
-  <circle cx="1080" cy="320" r="250" fill="url(#accentGlow)"/>
+  <!-- Glow behind logo -->
+  <ellipse cx="640" cy="260" rx="400" ry="300" fill="url(#glow)"/>
   
-  <!-- Neural nodes - left side -->
-  <g opacity="0.6">
-    <!-- Layer 1 -->
-    <circle cx="100" cy="180" r="8" fill="#007ACC"/>
-    <circle cx="100" cy="280" r="8" fill="#007ACC"/>
-    <circle cx="100" cy="380" r="8" fill="#007ACC"/>
-    <circle cx="100" cy="480" r="8" fill="#007ACC"/>
-    
-    <!-- Layer 2 -->
-    <circle cx="220" cy="220" r="10" fill="#007ACC"/>
-    <circle cx="220" cy="320" r="10" fill="#007ACC"/>
-    <circle cx="220" cy="420" r="10" fill="#007ACC"/>
-    
-    <!-- Layer 3 -->
-    <circle cx="340" cy="270" r="12" fill="#4CAF50"/>
-    <circle cx="340" cy="370" r="12" fill="#4CAF50"/>
-    
-    <!-- Connections -->
-    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
-      <!-- Layer 1 to 2 -->
-      <line x1="108" y1="180" x2="210" y2="220"/>
-      <line x1="108" y1="180" x2="210" y2="320"/>
-      <line x1="108" y1="280" x2="210" y2="220"/>
-      <line x1="108" y1="280" x2="210" y2="320"/>
-      <line x1="108" y1="280" x2="210" y2="420"/>
-      <line x1="108" y1="380" x2="210" y2="320"/>
-      <line x1="108" y1="380" x2="210" y2="420"/>
-      <line x1="108" y1="480" x2="210" y2="420"/>
-      
-      <!-- Layer 2 to 3 -->
-      <line x1="230" y1="220" x2="328" y2="270"/>
-      <line x1="230" y1="320" x2="328" y2="270"/>
-      <line x1="230" y1="320" x2="328" y2="370"/>
-      <line x1="230" y1="420" x2="328" y2="370"/>
-    </g>
+  <!-- Large centered A Negative Space Logo -->
+  <g transform="translate(540, 130) scale(3.5)">
+    <!-- Rocket body -->
+    <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+    <!-- Fins -->
+    <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
+    <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
+    <!-- A cutout -->
+    <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
+    <!-- Flame -->
+    <polygon points="22,68 30,90 38,68" fill="url(#flame)"/>
+    <polygon points="24,68 30,85 36,68" fill="#ffc857"/>
   </g>
   
-  <!-- Neural nodes - right side -->
-  <g opacity="0.6">
-    <!-- Layer 1 -->
-    <circle cx="1180" cy="200" r="8" fill="#4CAF50"/>
-    <circle cx="1180" cy="320" r="8" fill="#4CAF50"/>
-    <circle cx="1180" cy="440" r="8" fill="#4CAF50"/>
+  <!-- Tagline - shifted right to clear rocket glow -->
+  <text x="680" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
+  
+  <!-- Animated Subtitle: Crossfade with roll-up -->
+  <!-- Static parts: gap=220px centered at 640 for max noun width ~200px -->
+  <text x="530" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#888888" text-anchor="end">Take Your</text>
+  <text x="750" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#888888" text-anchor="start">to New Heights</text>
+  
+  <!-- Clip path to contain vertical scroll -->
+  <defs>
+    <clipPath id="nounClip">
+      <rect x="460" y="515" width="360" height="80"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Crossfade with roll-up: 10 nouns prioritized by audience size, 20s total -->
+  <!-- Order: CODE, LEARNING, CAREER, CONTENT, THESIS, RESEARCH, WRITING, PROJECTS, DATA, INFRASTRUCTURE -->
+  <g clip-path="url(#nounClip)">
+    <!-- CODE (0-10%): Developers - largest audience -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;520;520;555" keyTimes="0;0.02;0.08;0.1;0.9;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0;0" keyTimes="0;0.02;0.08;0.1;0.9;1" dur="20s" repeatCount="indefinite"/>
+      CODE
+    </text>
     
-    <!-- Layer 2 -->
-    <circle cx="1060" cy="260" r="10" fill="#4CAF50"/>
-    <circle cx="1060" cy="380" r="10" fill="#4CAF50"/>
+    <!-- LEARNING (10-20%): Students - massive global population -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.1;0.12;0.18;0.2;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.1;0.12;0.18;0.2;1" dur="20s" repeatCount="indefinite"/>
+      LEARNING
+    </text>
     
-    <!-- Layer 3 -->
-    <circle cx="940" cy="320" r="12" fill="#007ACC"/>
+    <!-- CAREER (20-30%): Job Seekers - large active market -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.2;0.22;0.28;0.3;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.2;0.22;0.28;0.3;1" dur="20s" repeatCount="indefinite"/>
+      CAREER
+    </text>
     
-    <!-- Connections -->
-    <g stroke="url(#synapseGradient)" stroke-width="1.5" fill="none">
-      <line x1="1172" y1="200" x2="1070" y2="260"/>
-      <line x1="1172" y1="320" x2="1070" y2="260"/>
-      <line x1="1172" y1="320" x2="1070" y2="380"/>
-      <line x1="1172" y1="440" x2="1070" y2="380"/>
-      <line x1="1050" y1="260" x2="952" y2="320"/>
-      <line x1="1050" y1="380" x2="952" y2="320"/>
-    </g>
-  </g>
-  
-  <!-- Floating particles -->
-  <g fill="#007ACC" opacity="0.4">
-    <circle cx="450" cy="150" r="3"/>
-    <circle cx="520" cy="500" r="2"/>
-    <circle cx="780" cy="120" r="4"/>
-    <circle cx="850" cy="520" r="3"/>
-    <circle cx="600" cy="80" r="2"/>
-    <circle cx="680" cy="560" r="3"/>
-    <circle cx="400" cy="450" r="2"/>
-    <circle cx="880" cy="180" r="2"/>
-  </g>
-  <g fill="#4CAF50" opacity="0.3">
-    <circle cx="500" cy="100" r="2"/>
-    <circle cx="750" cy="540" r="3"/>
-    <circle cx="420" cy="520" r="2"/>
-    <circle cx="860" cy="100" r="2"/>
-  </g>
-  
-  <!-- Central brain/memory icon -->
-  <g transform="translate(640, 170)">
-    <!-- Outer ring -->
-    <circle cx="0" cy="0" r="60" fill="none" stroke="#007ACC" stroke-width="2" opacity="0.3"/>
-    <circle cx="0" cy="0" r="80" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.2"/>
+    <!-- CONTENT (30-40%): Content Creators - huge creator economy -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.3;0.32;0.38;0.4;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.3;0.32;0.38;0.4;1" dur="20s" repeatCount="indefinite"/>
+      CONTENT
+    </text>
     
-    <!-- Brain-like shape with memory nodes -->
-    <g fill="none" stroke="#007ACC" stroke-width="2.5" opacity="0.8">
-      <!-- Left hemisphere -->
-      <path d="M-30,-35 Q-50,-30 -45,-5 Q-50,20 -30,35 Q-15,45 0,40"/>
-      <!-- Right hemisphere -->
-      <path d="M30,-35 Q50,-30 45,-5 Q50,20 30,35 Q15,45 0,40"/>
-      <!-- Center connection -->
-      <path d="M0,-40 Q0,-20 0,0 Q0,20 0,40"/>
-      <!-- Cross connections -->
-      <path d="M-25,0 Q0,-10 25,0"/>
-      <path d="M-20,-20 Q0,-15 20,-20"/>
-      <path d="M-20,20 Q0,25 20,20"/>
-    </g>
+    <!-- THESIS (40-50%): Academics/Grad Students -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.4;0.42;0.48;0.5;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.4;0.42;0.48;0.5;1" dur="20s" repeatCount="indefinite"/>
+      THESIS
+    </text>
     
-    <!-- Memory nodes -->
-    <circle cx="-35" cy="-20" r="6" fill="#4CAF50"/>
-    <circle cx="35" cy="-20" r="6" fill="#4CAF50"/>
-    <circle cx="-35" cy="15" r="6" fill="#007ACC"/>
-    <circle cx="35" cy="15" r="6" fill="#007ACC"/>
-    <circle cx="0" cy="-35" r="6" fill="#4CAF50"/>
-    <circle cx="0" cy="35" r="6" fill="#007ACC"/>
-  </g>
-  
-  <!-- Main title -->
-  <text x="640" y="310" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#ffffff">
-    Alex
-  </text>
-  
-  <!-- Subtitle -->
-  <text x="640" y="370" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="400" fill="url(#textGradient)">
-    Multimodal Cognitive Architecture
-  </text>
-  
-  <!-- Tagline -->
-  <text x="640" y="425" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="22" font-weight="500" fill="#94a3b8" letter-spacing="4">
-    THE AI THAT GROWS WITH YOU
-  </text>
-  
-  <!-- VS Code badge -->
-  <g transform="translate(640, 470)">
-    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="#007ACC" opacity="0.2"/>
-    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="none" stroke="#007ACC" stroke-width="1.5" opacity="0.6"/>
-    <text x="0" y="6" text-anchor="middle" font-family="Segoe UI, SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#007ACC">
-      VS Code Extension
+    <!-- RESEARCH (50-60%): Researchers -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.5;0.52;0.58;0.6;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.52;0.58;0.6;1" dur="20s" repeatCount="indefinite"/>
+      RESEARCH
+    </text>
+    
+    <!-- WRITING (60-70%): Writers -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.6;0.62;0.68;0.7;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.6;0.62;0.68;0.7;1" dur="20s" repeatCount="indefinite"/>
+      WRITING
+    </text>
+    
+    <!-- PROJECTS (70-80%): Project Managers + OSS Contributors -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.7;0.72;0.78;0.8;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7;0.72;0.78;0.8;1" dur="20s" repeatCount="indefinite"/>
+      PROJECTS
+    </text>
+    
+    <!-- DATA (80-90%): Data Engineers - rapidly growing -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520;520" keyTimes="0;0.8;0.82;0.88;0.9;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.8;0.82;0.88;0.9;1" dur="20s" repeatCount="indefinite"/>
+      DATA
+    </text>
+    
+    <!-- INFRASTRUCTURE (90-100%): DevOps Engineers -->
+    <text x="640" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="bold" fill="#0078d4" text-anchor="middle">
+      <animate attributeName="y" values="555;555;555;555;520" keyTimes="0;0.9;0.92;0.98;1" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.9;0.92;0.98;1" dur="20s" repeatCount="indefinite"/>
+      INFRASTRUCTURE
     </text>
   </g>
   
-  <!-- Use Case Badges Row 1 - Text only for PNG compatibility -->
-  <g transform="translate(640, 545)">
-    <!-- Code -->
-    <g transform="translate(-400, 0)">
-      <rect x="-40" y="-14" width="80" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-40" y="-14" width="80" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Code</text>
-    </g>
-    
-    <!-- Research -->
-    <g transform="translate(-240, 0)">
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Research</text>
-    </g>
-    
-    <!-- Writing -->
-    <g transform="translate(-80, 0)">
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Writing</text>
-    </g>
-    
-    <!-- Academic -->
-    <g transform="translate(80, 0)">
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Academic</text>
-    </g>
-    
-    <!-- Voice -->
-    <g transform="translate(240, 0)">
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#f59e0b" opacity="0.2"/>
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#fbbf24">🔊 Voice</text>
-    </g>
-    
-    <!-- Presentations -->
-    <g transform="translate(400, 0)">
-      <rect x="-65" y="-14" width="130" height="28" rx="14" fill="#a855f7" opacity="0.2"/>
-      <rect x="-65" y="-14" width="130" height="28" rx="14" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#c084fc">📊 Presentations</text>
-    </g>
+  <!-- CorreaX mark bottom left -->
+  <g transform="translate(30, 580) scale(1.0)" opacity="0.7">
+    <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14c3.866 0 7.389-1.568 9.928-4.1l-3.535-3.536A9.002 9.002 0 0116 25c-4.97 0-9-4.03-9-9s4.03-9 9-9c2.29 0 4.38.857 5.971 2.268l3.464-3.639C22.993 3.352 19.66 2 16 2z" fill="#0078d4"/>
+    <path d="M20 10l-4 6 4 6h4l-4-6 4-6h-4z" fill="#0078d4"/>
+    <path d="M24 10l4 6-4 6h4l4-6-4-6h-4z" fill="#0078d4" opacity="0.5"/>
   </g>
-  
-  <!-- Use Case Badges Row 2 -->
-  <g transform="translate(680, 590)">
-    <!-- Images -->
-    <g transform="translate(-360, 0)">
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#ec4899" opacity="0.2"/>
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#ec4899" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#f472b6">🎨 Images</text>
-    </g>
-    
-    <!-- Projects -->
-    <g transform="translate(-200, 0)">
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
-      <rect x="-45" y="-14" width="90" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Projects</text>
-    </g>
-    
-    <!-- Learning -->
-    <g transform="translate(-40, 0)">
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Learning</text>
-    </g>
-    
-    <!-- Business -->
-    <g transform="translate(120, 0)">
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="#4CAF50" opacity="0.2"/>
-      <rect x="-50" y="-14" width="100" height="28" rx="14" fill="none" stroke="#4CAF50" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#4ade80">Business</text>
-    </g>
-    
-    <!-- Security -->
-    <g transform="translate(280, 0)">
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="#007ACC" opacity="0.2"/>
-      <rect x="-48" y="-14" width="96" height="28" rx="14" fill="none" stroke="#007ACC" stroke-width="1" opacity="0.4"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="500" fill="#60a5fa">Security</text>
-    </g>
-  </g>
-  
-  <!-- Decorative lines -->
-  <line x1="440" y1="395" x2="540" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
-  <line x1="740" y1="395" x2="840" y2="395" stroke="#007ACC" stroke-width="1" opacity="0.3"/>
-  
-  <!-- Corner accents -->
-  <g stroke="#007ACC" stroke-width="2" opacity="0.4" fill="none">
-    <path d="M30,30 L30,60 M30,30 L60,30"/>
-    <path d="M1250,30 L1250,60 M1250,30 L1220,30"/>
-    <path d="M30,610 L30,580 M30,610 L60,610"/>
-    <path d="M1250,610 L1250,580 M1250,610 L1220,610"/>
-  </g>
+  <text x="68" y="608" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#888888">CorreaX</text>
 </svg>
