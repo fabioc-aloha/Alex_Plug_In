@@ -1098,56 +1098,7 @@
         ]
       }
     ],
-    "keybindings": [
-      {
-        "command": "alex.dream",
-        "key": "ctrl+alt+d",
-        "mac": "cmd+alt+d",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "alex.selfActualize",
-        "key": "ctrl+alt+s",
-        "mac": "cmd+alt+s",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "alex.syncKnowledge",
-        "key": "ctrl+alt+k",
-        "mac": "cmd+alt+k"
-      },
-      {
-        "command": "alex.openDocs",
-        "key": "ctrl+alt+h",
-        "mac": "cmd+alt+h"
-      },
-      {
-        "command": "alex.knowledgeQuickPick",
-        "key": "ctrl+shift+k",
-        "mac": "cmd+shift+k"
-      },
-      {
-        "command": "alex.startSession",
-        "key": "ctrl+alt+p",
-        "mac": "cmd+alt+p"
-      },
-      {
-        "command": "alex.togglePauseSession",
-        "key": "ctrl+alt+space",
-        "mac": "cmd+alt+space"
-      },
-      {
-        "command": "alex.readAloud",
-        "key": "ctrl+alt+r",
-        "mac": "cmd+alt+r",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "alex.stopReading",
-        "key": "escape",
-        "when": "alex.isReading"
-      }
-    ]
+    "keybindings": []
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
