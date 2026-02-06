@@ -1,43 +1,33 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "skillId": "anti-hallucination",
-  "version": "1.1.0",
+  "skill": "anti-hallucination",
+  "version": "1.2.0",
   "inheritance": "inheritable",
   "connections": [
     {
-      "id": "confidence-calibration",
-      "target": "../appropriate-reliance/SKILL.md",
-      "relationship": "Complement",
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "type": "complements",
       "strength": 0.9,
-      "description": "Appropriate reliance provides confidence calibration framework"
+      "note": "Appropriate reliance provides confidence calibration framework"
     },
     {
-      "id": "honest-uncertainty",
-      "target": "../../instructions/alex-core.instructions.md",
-      "relationship": "Implements",
+      "target": ".github/instructions/alex-core.instructions.md",
+      "type": "implements",
       "strength": 0.9,
-      "description": "Core identity principle: empirical honesty"
+      "note": "Core identity principle: empirical honesty"
     },
     {
-      "id": "capability-boundaries",
-      "target": "../m365-agent-debugging/SKILL.md",
-      "relationship": "Extends",
-      "strength": 0.7,
-      "description": "M365 debugging includes platform limitation awareness"
+      "target": ".github/skills/awareness/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "bidirectional": true,
+      "note": "Self-awareness of limitations prevents hallucination"
     },
     {
-      "id": "error-recovery",
-      "target": "../error-recovery-patterns/SKILL.md",
-      "relationship": "Collaborates",
-      "strength": 0.7,
-      "description": "Error recovery when hallucination is caught"
-    },
-    {
-      "id": "grounded-factual",
-      "target": "../../instructions/empirical-validation.instructions.md",
-      "relationship": "Implements",
+      "target": ".github/instructions/empirical-validation.instructions.md",
+      "type": "implements",
       "strength": 0.9,
-      "description": "Empirical validation prevents fabricated claims"
+      "note": "Empirical validation prevents fabricated claims"
     }
   ],
   "activationTriggers": [
