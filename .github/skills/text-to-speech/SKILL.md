@@ -393,6 +393,61 @@ Uses negative lookbehind to prevent redundant "version version".
 
 ---
 
+## Reliability & Long Content Handling (v2.1.0)
+
+### The Problem
+
+Edge TTS has undocumented size limits per WebSocket request. Documents over ~3000 characters (approximately 7 minutes of audio) can cause the connection to stall indefinitely, appearing to hang at "Synthesizing..." with no progress.
+
+### The Solution: Chunking with Retry
+
+**Chunking Strategy:**
+
+| Setting | Value | Rationale |
+|---------|-------|-----------|
+| `MAX_CHUNK_CHARS` | 3000 | Safe limit before Edge TTS stalls |
+| `CHUNK_TIMEOUT_MS` | 60000 | 60 seconds per chunk |
+| `MAX_RETRIES` | 3 | Retry failed chunks |
+
+**Chunk Splitting Logic:**
+1. Split at paragraph boundaries (`\n\n`) first
+2. If still too long, split at sentence boundaries (`. ` or `! ` or `? `)
+3. Progress displayed as `Synthesizing speech [n/N]...`
+
+**Retry with Exponential Backoff:**
+
+| Attempt | Delay | Formula |
+|---------|-------|---------|
+| 1 | ~1s | `1000 + jitter` |
+| 2 | ~2s | `2000 + jitter` |
+| 3 | ~4s | `4000 + jitter` |
+
+Jitter (0-500ms random) prevents thundering herd on concurrent requests.
+
+### Long Content Summarization
+
+For documents over 5 minutes (~750 words), Alex offers to summarize before reading:
+
+```
+This document is approximately 32 minutes long (~4800 words).
+Would you like to:
+- Read full content (~32 min)
+- Summarize for speech (~3 min) ← Recommended
+```
+
+Summarization uses the VS Code Language Model API (GPT-4o preferred) with a target of ~450 words (~3 minutes).
+
+### Speaker Warmup Delay
+
+Bluetooth and USB speakers often need time to "wake up" from power-saving mode. A 2-second delay before playback starts ensures the first words aren't clipped:
+
+```javascript
+const SPEAKER_WARMUP_MS = 2000;
+// Status shows "Preparing speakers..." during delay
+```
+
+---
+
 ## Installation (v2.0)
 
 TTS v2 is built into the Alex VS Code extension. No separate installation required.

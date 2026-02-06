@@ -1,14 +1,14 @@
 {
   "skill": "text-to-speech",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "promotionReady": true,
-  "promotionNotes": "v2.1.0: Native TypeScript, table reading, emoji pronunciation, time patterns, graceful fallback UX",
+  "promotionNotes": "v2.2.0: Chunking for long content, retry with backoff, speaker warmup, LM-based summarization",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "relationship": "implements",
       "strength": "strong",
-      "context": "Native TypeScript WebSocket, webview audio player, status bar feedback"
+      "context": "Native TypeScript WebSocket, webview audio player, status bar feedback, chunked synthesis"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
@@ -19,8 +19,8 @@
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "relationship": "enables",
-      "strength": "moderate",
-      "context": "Audio reading of research papers and notes"
+      "strength": "strong",
+      "context": "Audio reading of research papers with summarization option for long documents"
     },
     {
       "target": ".github/skills/writing-publication/SKILL.md",
@@ -57,6 +57,18 @@
       "relationship": "uses-pattern",
       "strength": "moderate",
       "context": "Regex pattern engineering: negative lookbehind, emoji-text deduplication"
+    },
+    {
+      "target": "platforms/vscode-extension/src/tts/ttsService.ts",
+      "relationship": "implementation",
+      "strength": "critical",
+      "context": "Core TTS engine with chunking (3000 chars), timeout (60s), retry with exponential backoff"
+    },
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "relationship": "informed-by",
+      "strength": "weak",
+      "context": "PAT-based publishing protocol learned during TTS hotfix release"
     }
   ],
   "activationTriggers": [
@@ -73,14 +85,20 @@
     "edge-tts",
     "read table",
     "read selection",
-    "narrate"
+    "narrate",
+    "long content",
+    "summarize for speech",
+    "speaker warmup"
   ],
   "metadata": {
     "created": "2026-02-05",
     "updated": "2026-02-05",
     "author": "Alex",
-    "implementation": "Native TypeScript WebSocket",
+    "implementation": "Native TypeScript WebSocket with chunking",
     "ttsEngine": "Microsoft Edge TTS",
-    "defaultVoice": "en-US-GuyNeural"
+    "defaultVoice": "en-US-GuyNeural",
+    "maxChunkChars": 3000,
+    "chunkTimeoutMs": 60000,
+    "speakerWarmupMs": 2000
   }
 }
