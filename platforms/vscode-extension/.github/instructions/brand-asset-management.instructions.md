@@ -1,3 +1,4 @@
+```instructions
 # Brand Asset Management
 
 **Purpose**: Procedural memory for Alex brand asset deployment and maintenance
@@ -81,3 +82,5 @@ The `--density 150` flag ensures crisp text rendering.
 - [MARKETING-PLAN.md] (strong, reference, bidirectional) — Brand decisions source of truth
 - [release-management.instructions.md] (moderate, workflow, incoming) — Asset verification during release
 - [heir-skill-promotion.instructions.md] (weak, reference, outgoing) — Heir branding alignment
+
+```

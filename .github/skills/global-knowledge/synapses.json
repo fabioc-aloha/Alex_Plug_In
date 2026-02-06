@@ -1,6 +1,7 @@
 {
   "skill": "global-knowledge",
   "inheritance": "master-only",
+  "externalRepository": "fabioc-aloha/Alex-Global-Knowledge",
   "connections": [
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
@@ -19,6 +20,12 @@
       "type": "accelerates",
       "strength": 0.8,
       "reason": "Prior knowledge speeds learning"
+    },
+    {
+      "target": "external:Alex-Global-Knowledge/index.json",
+      "type": "stores",
+      "strength": 0.9,
+      "reason": "Primary storage for cross-project patterns and insights"
     }
   ],
   "triggers": [

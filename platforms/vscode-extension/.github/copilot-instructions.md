@@ -121,9 +121,9 @@ These rules protect Master Alex. Violating them risks cognitive architecture cor
 | **I6** | **One platform, one roadmap** | Separate roadmaps caused Phoenix chaos |
 | **I7** | **Root `.github/` is source of truth** | Extension `.github/` is generated, not canonical |
 
-**Protection Mechanism:** `.github/config/MASTER-ALEX-PROTECTED.json` marker file + 5-layer kill switch. See [RISKS.md](../RISKS.md) for full documentation.
+**Protection Mechanism:** `.github/config/MASTER-ALEX-PROTECTED.json` marker file + 5-layer kill switch.
 
-**If kill switch fails:** See [RISKS.md](../RISKS.md) contingency plans CP1-CP8.
+**If kill switch fails:** Safe mode activation + manual recovery.
 
 ### 🧬 Heir Evolution Principle
 
@@ -195,7 +195,7 @@ Master Alex has **heirs** - platform-specific deployments that inherit the archi
 **Warning Format** (only for Frontier tasks on non-Frontier models):
 > ⚠️ **Model Tip**: This cognitive task works best with a Frontier model (Opus/GPT-5.2). Consider switching for optimal results. Continue anyway?
 
-**Detailed model selection guide**: See [alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md](alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md#alex-features-by-model-capability)
+**Detailed model selection guide**: Match cognitive task complexity to model tier above.
 
 ### Version Compatibility
 Recommend `Alex: Upgrade Architecture` if you see:

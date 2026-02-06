@@ -1,0 +1,154 @@
+# Alex Brain QA GitHub Action
+# Validates synapse files and skill structure on every push/PR
+#
+# Runs automatically on:
+# - Push to main/master branch
+# - Pull requests targeting main/master
+
+name: Brain QA
+
+on:
+    push:
+        branches: [main, master]
+        paths:
+            - ".github/skills/**"
+            - ".github/instructions/**"
+            - ".github/prompts/**"
+    pull_request:
+        branches: [main, master]
+        paths:
+            - ".github/skills/**"
+            - ".github/instructions/**"
+            - ".github/prompts/**"
+    workflow_dispatch: # Allow manual trigger
+
+jobs:
+    validate-synapses:
+        name: Validate Synapses
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Validate JSON syntax
+              run: |
+                  echo "🧠 Validating synapse JSON files..."
+                  ERRORS=0
+
+                  for file in $(find .github/skills -name "synapses.json"); do
+                    if ! jq empty "$file" 2>/dev/null; then
+                      echo "❌ Invalid JSON: $file"
+                      ERRORS=$((ERRORS + 1))
+                    fi
+                  done
+
+                  if [ $ERRORS -gt 0 ]; then
+                    echo "::error::Found $ERRORS invalid JSON file(s)"
+                    exit 1
+                  fi
+
+                  echo "✅ All JSON files valid"
+
+            - name: Validate required fields
+              run: |
+                  echo "🧠 Checking required fields in synapses..."
+                  ERRORS=0
+                  WARNINGS=0
+
+                  for file in $(find .github/skills -name "synapses.json"); do
+                    SKILL_DIR=$(dirname "$file")
+                    SKILL_NAME=$(basename "$SKILL_DIR")
+                    
+                    # Check for skill/skillId
+                    HAS_SKILL=$(jq -r 'if .skill or .skillId then "yes" else "no" end' "$file")
+                    if [ "$HAS_SKILL" = "no" ]; then
+                      echo "❌ Missing skill/skillId: $SKILL_NAME"
+                      ERRORS=$((ERRORS + 1))
+                    fi
+                    
+                    # Check for inheritance
+                    HAS_INHERITANCE=$(jq -r 'if .inheritance then "yes" else "no" end' "$file")
+                    if [ "$HAS_INHERITANCE" = "no" ]; then
+                      echo "❌ Missing inheritance: $SKILL_NAME"
+                      ERRORS=$((ERRORS + 1))
+                    fi
+                    
+                    # Check for schemaVersion (warning only)
+                    HAS_SCHEMA=$(jq -r 'if .schemaVersion then "yes" else "no" end' "$file")
+                    if [ "$HAS_SCHEMA" = "no" ]; then
+                      echo "⚠️ Missing schemaVersion: $SKILL_NAME"
+                      WARNINGS=$((WARNINGS + 1))
+                    fi
+                    
+                    # Check for connections
+                    HAS_CONNECTIONS=$(jq -r 'if .connections and (.connections | length) > 0 then "yes" else "no" end' "$file")
+                    if [ "$HAS_CONNECTIONS" = "no" ]; then
+                      echo "⚠️ Empty connections: $SKILL_NAME"
+                      WARNINGS=$((WARNINGS + 1))
+                    fi
+                  done
+
+                  echo ""
+                  echo "Summary: $ERRORS error(s), $WARNINGS warning(s)"
+
+                  if [ $ERRORS -gt 0 ]; then
+                    echo "::error::Found $ERRORS error(s) in synapse files"
+                    exit 1
+                  fi
+
+                  echo "✅ All required fields present"
+
+            - name: Validate skill structure
+              run: |
+                  echo "🧠 Checking skill structure..."
+                  ERRORS=0
+
+                  for skill_dir in .github/skills/*/; do
+                    SKILL_NAME=$(basename "$skill_dir")
+                    
+                    # Skip special files
+                    if [[ "$SKILL_NAME" == *.* ]]; then
+                      continue
+                    fi
+                    
+                    # Check for SKILL.md
+                    if [ ! -f "$skill_dir/SKILL.md" ]; then
+                      echo "❌ Missing SKILL.md: $SKILL_NAME"
+                      ERRORS=$((ERRORS + 1))
+                    fi
+                    
+                    # Check for synapses.json
+                    if [ ! -f "$skill_dir/synapses.json" ]; then
+                      echo "⚠️ Missing synapses.json: $SKILL_NAME"
+                    fi
+                  done
+
+                  if [ $ERRORS -gt 0 ]; then
+                    echo "::error::Found $ERRORS skill structure error(s)"
+                    exit 1
+                  fi
+
+                  echo "✅ All skills have required structure"
+
+            - name: Generate summary
+              if: always()
+              run: |
+                  SKILL_COUNT=$(find .github/skills -maxdepth 1 -type d | wc -l)
+                  SYNAPSE_COUNT=$(find .github/skills -name "synapses.json" | wc -l)
+                  INSTRUCTION_COUNT=$(find .github/instructions -name "*.instructions.md" 2>/dev/null | wc -l)
+                  PROMPT_COUNT=$(find .github/prompts -name "*.prompt.md" 2>/dev/null | wc -l)
+
+                  echo "## 🧠 Alex Brain QA Report" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+                  echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+                  echo "| Skills | $((SKILL_COUNT - 1)) |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Synapses | $SYNAPSE_COUNT |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Instructions | $INSTRUCTION_COUNT |" >> $GITHUB_STEP_SUMMARY
+                  echo "| Prompts | $PROMPT_COUNT |" >> $GITHUB_STEP_SUMMARY

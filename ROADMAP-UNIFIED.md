@@ -121,10 +121,10 @@ flowchart LR
 | schemaVersion in SYNAPSE-SCHEMA   | Master |  10m   | Critical | ✅ Done |
 | Document sync in heir-curation    | Master |  10m   | Critical | ✅ Done |
 | $schema in all synapse files      | Master |  20m   | Critical | ✅ Done |
-| VS Code JSON Schema for synapses  |  Heir  |   2h   |   High   | 📋 Next |
-| Pre-commit hook for synapse check | Master |   1h   |   High   | 📋 Next |
-| Role-adapted Master→Heir sync     | Master |   2h   |   High   | 📋 Next |
-| Brain QA GitHub Action            | Master |   2h   |   High   | 📋 Next |
+| VS Code JSON Schema for synapses  |  Heir  |   2h   |   High   | ✅ Done |
+| Pre-commit hook for synapse check | Master |   1h   |   High   | ✅ Done |
+| Role-adapted Master→Heir sync     | Master |   2h   |   High   | ✅ Done |
+| Brain QA GitHub Action            | Master |   2h   |   High   | ✅ Done |
 
 **Target Release**: Week of Feb 10, 2026
 

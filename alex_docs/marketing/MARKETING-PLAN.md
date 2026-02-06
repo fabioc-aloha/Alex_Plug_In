@@ -60,9 +60,9 @@
 | **Full Color (SVG)** | <img src="logo-concepts/a-negative-space.svg" alt="A Negative Space Logo" width="64">              | Documentation, marketing           |
 | **Full Color (PNG)** | <img src="logo-concepts/a-negative-space.png" alt="A Negative Space Logo PNG" width="64">          | Marketplace, social                |
 | **Extension Logo**   | <img src="../../platforms/vscode-extension/assets/logo.svg" alt="Extension Logo" width="64">       | Marketplace icon (32x32 optimized) |
-| **Monochrome**       | <img src="../../platforms/vscode-extension/assets/logo-mono.svg" alt="Monochrome Logo" width="64"> | VS Code activity bar sidebar       |
+| **Monochrome**       | <img src="../../platforms/vscode-extension/assets/logo-mono.svg" alt="Monochrome Logo" width="64"> | VS Code activity bar (A cutout)    |
 
-**A Negative Space** — The letter A cut out of a rocket silhouette. Clean, scales perfectly, one concept.
+**A Negative Space** — The letter A cut out of a rocket silhouette. Rotated 30° for dynamic launch angle. Clean, scales perfectly, one concept.
 
 ### Parent Brand
 
@@ -85,7 +85,7 @@
 | **Parent Brand**       | CorreaX (C split X logo) — NOT changing                                            | ✅ LOCKED     |
 | **Product Brand**      | Alex                                                                               | ✅ LOCKED     |
 | **Logo**               | A Negative Space (a-negative-space.svg) — A cut out of rocket silhouette           | ✅ LOCKED     |
-| **Logo Mono**          | Rocket silhouette for VS Code activity bar (logo-mono.svg)                         | ✅ LOCKED     |
+| **Logo Mono**          | A Negative Space rocket for VS Code activity bar (logo-mono.svg) — masked cutout   | ✅ LOCKED     |
 | **Tagline**            | Strap a rocket to your back                                                        | ✅ LOCKED     |
 | **Subtitle**           | "Take Your [NOUN] to New Heights" — rotates per persona (CODE, THESIS, etc.)       | ✅ LOCKED     |
 | **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
