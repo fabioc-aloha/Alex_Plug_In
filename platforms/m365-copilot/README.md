@@ -233,11 +233,13 @@ OneDrive/
 ### Export Command (Proposed)
 
 The VS Code Alex extension could add:
-```
+
+```text
 Alex: Export to OneDrive Agent
 ```
 
 This would:
+
 1. Generate optimized instruction file from your skills
 2. Export relevant knowledge to OneDrive
 3. Create `.agent` file with Alex persona
@@ -266,6 +268,7 @@ Deploy Alex as a Q&A agent in your Teams Community. Community Agents are grounde
    - Navigate to the community's SharePoint site
    - Create folder: `Alex-Knowledge/`
    - Upload key knowledge files:
+
      ```text
      Alex-Knowledge/
      ├── alex-protocols.md           # From appPackage/knowledge/

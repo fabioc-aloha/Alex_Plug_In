@@ -40,7 +40,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 - Dream/meditation protocols
 - Global knowledge base with cloud sync
 
-See [Quick Start](#-quick-start) for installation.
+See [Quick Start](#-quick-start-vs-code) for installation.
 
 📘 **[VS Code Extension Documentation](platforms/vscode-extension/)**
 
