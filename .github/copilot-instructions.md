@@ -36,15 +36,18 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 ## Working Memory (7 Rules)
 
-**Core (P1-P4c)**: meta-cognitive-awareness, bootstrap-learning, worldview-integration, grounded-factual-processing, meditation-consolidation, dream-automation, self-actualization
-
-**Domain Slots (P5-P7)**: Dynamic — rotate based on session context
-
-| Slot | Current | Rotation Trigger |
-|------|---------|------------------|
-| P5 | *(auto-assign)* | Project's most-used skill domain |
-| P6 | *(auto-assign)* | Current session objective |
-| P7 | *(auto-assign)* | Active task type |
+| Slot | Name | Type | Description |
+|------|------|------|-------------|
+| **P1** | meta-cognitive-awareness | Core | Self-monitoring, model awareness, adaptive behavior |
+| **P2** | bootstrap-learning | Core | Domain-agnostic knowledge acquisition |
+| **P3** | worldview-integration | Core | Ethical reasoning, moral psychology, constitutional AI |
+| **P4a** | grounded-factual-processing | Core | Evidence-based, precise language, verify claims |
+| **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
+| **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
+| **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
+| **P5** | *(dynamic)* | Domain | Project's most-used skill domain |
+| **P6** | *(dynamic)* | Domain | Current session objective |
+| **P7** | *(dynamic)* | Domain | Active task type |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
