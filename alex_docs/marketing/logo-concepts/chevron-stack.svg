@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="azureGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Stage 3 (top) - smallest chevron -->
+  <path d="M64 12 L80 36 L72 36 L64 24 L56 36 L48 36 Z" 
+        fill="url(#azureGradient)" opacity="1"/>
+  
+  <!-- Stage 2 (middle) - medium chevron -->
+  <path d="M64 36 L88 68 L76 68 L64 50 L52 68 L40 68 Z" 
+        fill="url(#azureGradient)" opacity="0.85"/>
+  
+  <!-- Stage 1 (bottom) - largest chevron -->
+  <path d="M64 68 L96 108 L80 108 L64 84 L48 108 L32 108 Z" 
+        fill="url(#azureGradient)" opacity="0.7"/>
+  
+  <!-- Subtle connecting lines between stages -->
+  <line x1="64" y1="36" x2="64" y2="40" stroke="#fff" stroke-width="2" opacity="0.5"/>
+  <line x1="64" y1="68" x2="64" y2="72" stroke="#fff" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Thrust indicators at base -->
+  <circle cx="48" cy="114" r="3" fill="#0078d4" opacity="0.5"/>
+  <circle cx="64" cy="116" r="4" fill="#0078d4" opacity="0.6"/>
+  <circle cx="80" cy="114" r="3" fill="#0078d4" opacity="0.5"/>
+</svg>

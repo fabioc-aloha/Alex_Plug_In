@@ -1,13 +1,33 @@
 # Alex Viral Description Options
 
-## Target Persona
+## Target Personas
+
+### Primary Persona
 
 | Field               | Value                                                                              |
 | ------------------- | ---------------------------------------------------------------------------------- |
 | **Brand**           | **Alex** (non-negotiable)                                                          |
-| **Persona**         | [Power User / Builder](marketing/PERSONA-POWER-USER-VETERAN.md)                    |
+| **Persona**         | [Power User / Builder](PERSONA-POWER-USER-VETERAN.md)                              |
 | **Primary Tagline** | STRAP A ROCKET TO YOUR BACK                                                        |
 | **Origin**          | Original CorreaX marketing — inspired by developer sentiment about AI acceleration |
+| **Language**        | Rocket Terminology                                                                 |
+
+### Secondary Personas
+
+| Persona                     | Profile                                         | Language          | Hook                                      | Rocket Angle                              | Skill                     |
+| --------------------------- | ----------------------------------------------- | ----------------- | ----------------------------------------- | ----------------------------------------- | ------------------------- |
+| **Cognitive Scientist**     | AI/ML researchers, cognitive architecture nerds | Neuroanatomic     | "Prefrontal cortex for your IDE"          | Launch your research to new frontiers     | ai-agent-design           |
+| **Academic / Grad Student** | Thesis writers, researchers, dissertation grind | Academic          | "Literature review on autopilot"          | Rocket your thesis to completion          | research-project-scaffold |
+| **Enterprise Architect**    | System designers, documentation maintainers     | Neuroanatomic     | "Self-documenting cognitive architecture" | Elevate your architecture documentation   | architecture-health       |
+| **Open Source Contributor** | OSS maintainers, community builders             | Rocket + Academic | "Your rocket. Your trajectory."           | Launch your project, your way             | git-workflow              |
+| **Grant Writer**            | PIs, postdocs, funding hunters                  | Academic          | "Research vision → funded reality"        | Propel your proposal past the competition | grant-writing             |
+| **Fiction Writer**          | Novelists, screenwriters, storytellers          | Creative          | "Your story structure co-author"          | Take your manuscript to new heights       | creative-writing          |
+| **Business Analyst**        | Requirements, BRDs, process mapping             | Enterprise        | "Stakeholder alignment accelerator"       | Accelerate stakeholder buy-in             | business-analysis         |
+| **DevOps Engineer**         | Infrastructure as code, cloud provisioning      | Rocket            | "Same infra, every time. Automated."      | Launch infrastructure at cloud speed      | infrastructure-as-code    |
+| **SRE / On-Call**           | Incident response, production operations        | Rocket            | "Calm. Systematic. Crisis handled."       | Recover faster, land smoother             | incident-response         |
+| **Project Manager**         | Agile, iteration, release cycles                | Rocket            | "4-6× faster than human estimates"        | Ship releases at rocket velocity          | project-management        |
+| **Data Engineer**           | Fabric, lakehouse, medallion architecture       | Enterprise        | "Governance on autopilot"                 | Elevate your data architecture            | microsoft-fabric          |
+| **Speaker / Presenter**     | Pitch decks, conference talks, workshops        | Creative          | "Notes → polished slides in minutes"      | Launch presentations that land            | gamma-presentations       |
 
 ---
 
@@ -144,14 +164,71 @@ That's Alex.
 
 ## Rocket Terminology
 
-| Concept       | Rocket Language          | Alex Feature               |
-| ------------- | ------------------------ | -------------------------- |
-| Memory        | Fuel that never runs out | Cross-project context      |
-| Skills        | Pre-built boosters       | 73 skills with inheritance |
-| Custom skills | Build your own thrusters | Skill creation + sharing   |
-| Inheritance   | Multi-stage propulsion   | Skills build on skills     |
-| Open source   | Inspect every component  | Apache 2.0                 |
-| Meditation    | Refueling station        | Knowledge consolidation    |
+| Concept              | Rocket Language               | Alex Feature                             |
+| -------------------- | ----------------------------- | ---------------------------------------- |
+| **Memory**           | Fuel that never runs out      | Cross-project context                    |
+| **Skills**           | Pre-built boosters            | 73 skills with inheritance               |
+| **Custom skills**    | Build your own thrusters      | Skill creation + sharing                 |
+| **Inheritance**      | Multi-stage propulsion        | Skills build on skills                   |
+| **Open source**      | Inspect every component       | Apache 2.0                               |
+| **Meditation**       | Refueling station             | Knowledge consolidation                  |
+| **Dream Protocol**   | Autopilot maintenance         | Background neural health check           |
+| **Synapses**         | Pre-wired navigation circuits | 150+ connections between knowledge files |
+| **MCP Tools**        | Mission control systems       | 11 programmatic AI tools                 |
+| **Welcome Panel**    | Launch control dashboard      | Activity bar with quick actions          |
+| **Status Bar**       | Flight status indicator       | Real-time cognitive health display       |
+| **TTS Voice**        | Mission announcer             | Edge TTS with multi-language support     |
+| **Chat Participant** | Pilot interface               | @alex with slash commands                |
+| **Global Knowledge** | Star chart library            | Cross-project learnings (~/.alex/)       |
+| **Self-Modifying**   | Flight recorder + learning    | AI writes its own memory files           |
+| **Master-Heir**      | Same rocket, any launchpad    | Consistent across VS Code, M365          |
+
+---
+
+## Neuroanatomic Terminology
+
+| Concept                  | Brain Metaphor             | Alex Feature                         |
+| ------------------------ | -------------------------- | ------------------------------------ |
+| **LLM Engine**           | Prefrontal Cortex          | Executive function (Claude/GPT)      |
+| **Chat Session**         | Working Memory (PFC + ACC) | 4+3 working memory rules             |
+| **copilot-instructions** | Hippocampal-Neocortical    | Declarative memory store             |
+| **Instructions**         | Basal Ganglia              | Procedural memory (.instructions.md) |
+| **Prompts**              | Hippocampus + Temporal     | Episodic memory (.prompt.md)         |
+| **Meta-Rules P1-P4**     | Prefrontal Network         | Executive control layer              |
+| **Skill Routing**        | Dorsolateral PFC           | skill-activation SKILL.md            |
+| **Self-Monitoring**      | Medial PFC + DMN           | Meta-cognitive awareness             |
+| **Synapses**             | Synaptic Networks          | Embedded connection notation         |
+| **Meditation**           | Hippocampal-Cortical       | Memory consolidation protocol        |
+| **Dream Protocol**       | REM Sleep Processing       | Unconscious neural maintenance       |
+| **Skills Store**         | Neocortex                  | Specialized domain knowledge         |
+| **Bootstrap Learning**   | Neuroplasticity            | Conversational knowledge acquisition |
+| **Working Memory**       | 7±2 Chunks                 | Miller's Law capacity limit          |
+| **Self-Actualization**   | Introspection Network      | Deep cognitive self-assessment       |
+| **Global Knowledge**     | Long-Term Memory           | Cross-project persistent learnings   |
+
+---
+
+## Academic Terminology
+
+| Concept                | Academic Language              | Alex Feature                          |
+| ---------------------- | ------------------------------ | ------------------------------------- |
+| **Memory**             | Literature review on autopilot | Cross-project context retention       |
+| **Skills**             | Methodology library            | 73 pre-built research templates       |
+| **Custom Skills**      | Your own methodologies         | Skill creation + department sharing   |
+| **Inheritance**        | Building on prior work         | Skills extend parent skills           |
+| **Open Source**        | Peer-reviewable code           | Apache 2.0 license                    |
+| **Meditation**         | Research synthesis session     | Knowledge consolidation               |
+| **Dream Protocol**     | Background citation check      | Automated integrity maintenance       |
+| **Synapses**           | Cross-reference network        | 150+ inter-document connections       |
+| **MCP Tools**          | Research assistant toolkit     | 11 programmatic AI tools              |
+| **Welcome Panel**      | Research dashboard             | Quick access to all capabilities      |
+| **Status Bar**         | Project health indicator       | Real-time cognitive status            |
+| **TTS Voice**          | Thesis proofreader             | Listen to your writing with TTS       |
+| **Chat Participant**   | AI research partner            | @alex with slash commands             |
+| **Global Knowledge**   | Cross-project bibliography     | Learnings persist across all projects |
+| **Self-Modifying**     | Self-documenting research      | AI maintains its own knowledge base   |
+| **Bootstrap Learning** | Socratic method                | Conversational knowledge acquisition  |
+| **Scaffolding**        | Framework generation           | Project structure from templates      |
 
 ---
 
@@ -163,6 +240,7 @@ That's Alex.
 
 | Element            | Current Implementation                                                                                  |
 | ------------------ | ------------------------------------------------------------------------------------------------------- |
+| **Preview**        | <img src="../../.github/assets/banner.svg" alt="Current Banner" width="400">                            |
 | **Background**     | Dark gradient (#1a1a2e → #16213e → #0f3460)                                                             |
 | **Primary Visual** | Neural network diagram (brain/nodes/synapses)                                                           |
 | **Central Icon**   | Brain with memory nodes                                                                                 |
@@ -178,32 +256,52 @@ That's Alex.
 **File**: `platforms/vscode-extension/assets/logo.svg`
 **Brand**: CorreaX (C split X mark)
 
-| Element       | Current Implementation                           |
-| ------------- | ------------------------------------------------ |
-| **Brand**     | **CorreaX** — the parent brand                   |
-| **Symbol**    | C split X (partial circle + crossing chevrons)   |
-| **Style**     | Geometric, minimalist, Microsoft design language |
-| **Color**     | Azure blue gradient (#0078d4 → #005a9e)          |
-| **Direction** | Right-pointing arrows (forward motion)           |
-| **Size**      | 32x32 viewBox (icon-sized)                       |
+| Element       | Current Implementation                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| **Preview**   | <img src="../../platforms/vscode-extension/assets/logo.svg" alt="CorreaX Logo" width="64"> |
+| **Brand**     | **CorreaX** — the parent brand                                                             |
+| **Symbol**    | C split X (partial circle + crossing chevrons)                                             |
+| **Style**     | Geometric, minimalist, Microsoft design language                                           |
+| **Color**     | Azure blue gradient (#0078d4 → #005a9e)                                                    |
+| **Direction** | Right-pointing arrows (forward motion)                                                     |
+| **Size**      | 32x32 viewBox (icon-sized)                                                                 |
 
 **Brand Hierarchy:**
 ```
 ┌─────────────────────────────────────┐
-│           CorreaX                   │  ← Parent brand (logo)
+│           CorreaX                   │  ← Parent brand (FIXED - not changing)
 │              ↓                      │
-│            Alex                     │  ← Product name
+│            Alex                     │  ← Product name (logo: open to new designs)
 │              ↓                      │
 │   STRAP A ROCKET TO YOUR BACK       │  ← Positioning tagline
 └─────────────────────────────────────┘
 ```
 
 **Logo Interpretation:**
-- C split X = CorreaX brand mark
+- C split X = CorreaX brand mark (permanent)
 - Arc (C) suggests growth/progress (partial → complete)
 - Chevrons (X) suggest forward motion, speed
 - Azure blue = Microsoft brand alignment
 - Already has "forward momentum" built in
+
+### Alex Extension Logo Concepts
+
+**Status**: Open to new designs that embrace the rocket theme
+**Files**: `alex_docs/logo-concepts/`
+
+| Concept           | Preview                                                                    | Pros                          | Cons                 |
+| ----------------- | -------------------------------------------------------------------------- | ----------------------------- | -------------------- |
+| **Rocket "A"**    | <img src="logo-concepts/rocket-a.svg" alt="Rocket A" width="48">           | Direct, memorable, on-brand   | May look generic     |
+| **Launch Pad A**  | <img src="logo-concepts/launch-pad-a.svg" alt="Launch Pad A" width="48">   | Subtle, professional          | Less literal         |
+| **Arc + Flame**   | <img src="logo-concepts/arc-flame.svg" alt="Arc Flame" width="48">         | Brand continuity              | Hybrid complexity    |
+| **Orbital A**     | <img src="logo-concepts/orbital-a.svg" alt="Orbital A" width="48">         | Suggests journey, destination | Less "thrust" energy |
+| **Chevron Stack** | <img src="logo-concepts/chevron-stack.svg" alt="Chevron Stack" width="48"> | Multi-stage = skill layers    | Abstract             |
+
+**Design Constraints:**
+- Must work at 16x16, 32x32, 128x128
+- Single color must remain recognizable
+- Azure blue gradient preferred (#0078d4 → #005a9e)
+- Should feel like it belongs in VS Code ecosystem
 
 **Rocket Compatibility:**
 | Aspect          | Logo Fit   | Notes                                  |
