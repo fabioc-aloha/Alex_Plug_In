@@ -51,6 +51,7 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
+- **P6 special**: Infer from Pomodoro timer goal or stated session objective
 - **Topic pivot**: When user shifts focus, rotate slots to match new objectives
 - **Completion**: When objective complete, clear slot for next priority
 - **Master Alex default**: master-heir-management, brand-asset-management, release-management
