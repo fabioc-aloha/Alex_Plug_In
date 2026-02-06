@@ -184,7 +184,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const workspaceFolders = vscode.workspace.workspaceFolders;
       if (workspaceFolders) {
         const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
-        personaResult = await detectPersona(userProfile, workspaceFolders);
+        personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
       }
       
       // Get extension version

@@ -164,12 +164,13 @@ export async function scaffoldGlobalKnowledgeRepo(repoPath: string): Promise<voi
                 id: p.id,
                 title: p.title,
                 type: 'pattern' as const,
-                category: p.category,
+                category: p.category as IGlobalKnowledgeEntry['category'],
                 tags: p.tags,
                 filePath: `patterns/${p.filename}`,
-                createdAt: now,
-                updatedAt: now,
-                source: 'Alex Starter Pack'
+                created: now,
+                modified: now,
+                summary: p.title,
+                sourceProject: 'Alex Starter Pack'
             }))
         };
         await fs.writeJson(indexPath, initialIndex, { spaces: 2 });
