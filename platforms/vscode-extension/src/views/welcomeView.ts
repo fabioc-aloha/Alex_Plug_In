@@ -450,20 +450,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const personaName = persona?.name || 'Developer';
     const personaSkill = persona?.skill || 'code-quality';
     
-    // Persona accent color mapping
+    // Persona accent color mapping (no pink/purple - use teal for research personas)
     const personaAccentMap: Record<string, string> = {
       'developer': 'var(--vscode-charts-blue)',
-      'academic': 'var(--vscode-charts-purple)',
-      'researcher': 'var(--vscode-charts-purple)',
+      'academic': '#2aa198',
+      'researcher': '#2aa198',
       'technical-writer': 'var(--vscode-charts-green)',
       'architect': 'var(--vscode-charts-orange, #f0883e)',
       'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
       'devops': 'var(--vscode-charts-green)',
       'content-creator': 'var(--vscode-charts-yellow)',
-      'fiction-writer': 'var(--vscode-charts-purple)',
+      'fiction-writer': '#2aa198',
       'project-manager': 'var(--vscode-charts-blue)',
       'security': 'var(--vscode-charts-red)',
-      'student': 'var(--vscode-charts-purple)',
+      'student': '#2aa198',
       'job-seeker': 'var(--vscode-charts-green)',
       'presenter': 'var(--vscode-charts-yellow)',
       'power-user': 'var(--vscode-charts-blue)'
@@ -555,7 +555,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 12px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--persona-accent);
+            border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
             width: 32px;
@@ -625,7 +625,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .version-badge:hover {
             opacity: 1;
-            background: var(--persona-accent);
         }
         .premium-badge {
             background: var(--vscode-badge-background, #4d4d4d);
@@ -652,8 +651,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .refresh-btn:hover {
             opacity: 1;
-            background: color-mix(in srgb, var(--persona-accent) 15%, var(--vscode-toolbar-hoverBackground));
-            color: var(--persona-accent);
+            background: var(--vscode-toolbar-hoverBackground);
         }
         
         .section {
@@ -664,11 +662,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-            color: var(--persona-accent);
+            color: var(--vscode-descriptionForeground);
             margin-bottom: 8px;
-            opacity: 0.95;
-            border-bottom: 1px solid color-mix(in srgb, var(--persona-accent) 25%, transparent);
-            padding-bottom: 4px;
+            opacity: 0.85;
         }
         
         .status-grid {
@@ -684,8 +680,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transition: all 0.12s ease;
         }
         .status-item:hover {
-            border-left-color: var(--persona-accent);
-            background: color-mix(in srgb, var(--persona-accent) 5%, var(--vscode-list-hoverBackground));
+            border-left-color: var(--vscode-focusBorder);
+            background: var(--vscode-list-hoverBackground);
         }
         .status-item.status-good {
             border-left-color: var(--vscode-charts-green);
@@ -720,7 +716,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .status-num {
             font-weight: 600;
             font-size: 18px;
-            color: var(--persona-accent);
+            color: var(--vscode-foreground);
             line-height: 1;
         }
         .status-unit {
@@ -739,8 +735,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
-            border-left: 3px solid var(--persona-accent);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--persona-accent) 15%, transparent);
+            border-left: 2px solid var(--vscode-charts-blue);
         }
         .session-header {
             display: flex;
@@ -762,7 +757,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 18px;
             font-weight: 600;
             font-family: monospace;
-            color: var(--persona-accent);
+            color: var(--vscode-charts-blue);
         }
         .session-status {
             font-size: 10px;
@@ -797,7 +792,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
-            border-left: 2px solid transparent;
             border-radius: 5px;
             cursor: pointer;
             font-size: 11px;
@@ -806,16 +800,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
-            border-left-color: var(--persona-accent);
             transform: translateX(1px);
         }
         .action-btn.primary {
-            background: var(--persona-accent);
+            background: var(--vscode-button-background);
             color: var(--vscode-button-foreground);
             border: none;
         }
         .action-btn.primary:hover {
-            background: color-mix(in srgb, var(--persona-accent) 85%, black);
+            background: var(--vscode-button-hoverBackground);
             transform: translateX(1px);
         }
         .action-icon {
@@ -906,7 +899,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .goal-bar-fill {
             height: 100%;
-            background: var(--persona-accent);
+            background: var(--vscode-charts-green);
             border-radius: 2px;
             transition: width 0.3s ease;
         }
@@ -920,15 +913,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             align-items: center;
             gap: 8px;
             padding: 8px 10px;
-            background: color-mix(in srgb, var(--persona-accent) 5%, var(--vscode-editor-background));
+            background: var(--vscode-editor-background);
             border-radius: 5px;
             margin-bottom: 5px;
-            border-left: 2px solid var(--persona-accent);
+            border-left: 2px solid var(--vscode-charts-yellow);
             transition: all 0.1s ease;
         }
         .nudge-card:hover {
             transform: translateX(1px);
-            background: color-mix(in srgb, var(--persona-accent) 10%, var(--vscode-editor-background));
+            background: var(--vscode-list-hoverBackground);
         }
         .nudge-card.nudge-health {
             border-left-color: var(--vscode-charts-red);
