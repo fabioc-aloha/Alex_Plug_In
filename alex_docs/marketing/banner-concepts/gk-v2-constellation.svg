@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <!-- Deep space -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    
+    <!-- Azure blue -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Node glow -->
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  
+  <!-- Stars -->
+  <g fill="white" opacity="0.3">
+    <circle cx="80" cy="50" r="1"/>
+    <circle cx="200" cy="260" r="1"/>
+    <circle cx="400" cy="40" r="1"/>
+    <circle cx="850" cy="30" r="1"/>
+    <circle cx="1000" cy="250" r="1"/>
+    <circle cx="1150" cy="100" r="1"/>
+  </g>
+  
+  <!-- CONSTELLATION: Network of connected knowledge nodes -->
+  <g transform="translate(50, 50)">
+    
+    <!-- Connection lines (constellation wires) -->
+    <g stroke="#0078d4" stroke-width="1" opacity="0.4">
+      <line x1="150" y1="100" x2="80" y2="50"/>
+      <line x1="150" y1="100" x2="220" y2="40"/>
+      <line x1="150" y1="100" x2="250" y2="130"/>
+      <line x1="150" y1="100" x2="100" y2="160"/>
+      <line x1="150" y1="100" x2="200" y2="180"/>
+      <line x1="80" y1="50" x2="220" y2="40"/>
+      <line x1="250" y1="130" x2="200" y2="180"/>
+      <line x1="100" y1="160" x2="200" y2="180"/>
+    </g>
+    
+    <!-- Central node (GK Hub) with rocket docked -->
+    <ellipse cx="150" cy="100" rx="50" ry="50" fill="url(#nodeGlow)"/>
+    <circle cx="150" cy="100" r="35" fill="url(#azure)"/>
+    <circle cx="150" cy="100" r="35" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+    <text x="150" y="107" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" font-weight="bold" fill="white">GK</text>
+    
+    <!-- Docked rocket (small, attached to hub) -->
+    <g transform="translate(185, 100) rotate(-90) scale(0.35)">
+      <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+      <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
+      <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
+      <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
+    </g>
+    
+    <!-- Outer nodes (projects/knowledge points) -->
+    <!-- Node 1: Patterns -->
+    <circle cx="80" cy="50" r="18" fill="#0078d4" opacity="0.8"/>
+    <text x="80" y="55" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="white">📁</text>
+    
+    <!-- Node 2: Insights -->
+    <circle cx="220" cy="40" r="18" fill="#ff6b35" opacity="0.8"/>
+    <text x="220" y="45" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="white">💡</text>
+    
+    <!-- Node 3: Project A -->
+    <circle cx="250" cy="130" r="15" fill="#0078d4" opacity="0.6"/>
+    <text x="250" y="135" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" fill="white">P1</text>
+    
+    <!-- Node 4: Project B -->
+    <circle cx="100" cy="160" r="15" fill="#0078d4" opacity="0.6"/>
+    <text x="100" y="165" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" fill="white">P2</text>
+    
+    <!-- Node 5: Project C -->
+    <circle cx="200" cy="180" r="15" fill="#0078d4" opacity="0.6"/>
+    <text x="200" y="185" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" fill="white">P3</text>
+    
+    <!-- Pulse animation on connections -->
+    <circle cx="115" cy="75" r="3" fill="#00d4ff">
+      <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="185" cy="70" r="3" fill="#00d4ff">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Title -->
+  <text x="420" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700" fill="white">
+    Global Knowledge
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="420" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#888888">
+    <tspan>Connect Your </tspan><tspan fill="#0078d4" font-weight="bold">PROJECTS</tspan><tspan> Like Stars</tspan>
+  </text>
+  
+  <!-- Feature pills -->
+  <g transform="translate(420, 170)">
+    <g>
+      <rect x="0" y="0" width="120" height="28" rx="14" fill="#0078d4" fill-opacity="0.15" stroke="#0078d4" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="60" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#0078d4">⭐ Constellation</text>
+    </g>
+    <g transform="translate(130, 0)">
+      <rect x="0" y="0" width="100" height="28" rx="14" fill="#ff6b35" fill-opacity="0.15" stroke="#ff6b35" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="50" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#ff6b35">🔗 Connected</text>
+    </g>
+    <g transform="translate(240, 0)">
+      <rect x="0" y="0" width="100" height="28" rx="14" fill="#0078d4" fill-opacity="0.15" stroke="#0078d4" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="50" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#0078d4">🌐 Global</text>
+    </g>
+  </g>
+  
+  <!-- v5.0 badge -->
+  <g transform="translate(420, 220)">
+    <rect width="100" height="22" rx="11" fill="url(#flame)" fill-opacity="0.2"/>
+    <text x="50" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#ffc857">🚀 Premium v5.0</text>
+  </g>
+  
+  <!-- CorreaX -->
+  <g transform="translate(1080, 250)" opacity="0.6">
+    <path d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12s4.701 10.5 10.5 10.5c2.9 0 5.542-1.176 7.446-3.075l-2.651-2.652A6.75 6.75 0 0112 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75c1.718 0 3.285.643 4.478 1.701l2.598-2.729A10.46 10.46 0 0012 1.5z" fill="#0078d4"/>
+    <path d="M15 7.5l-3 4.5 3 4.5h3l-3-4.5 3-4.5h-3z" fill="#0078d4"/>
+    <path d="M18 7.5l3 4.5-3 4.5h3l3-4.5-3-4.5h-3z" fill="#0078d4" opacity="0.5"/>
+  </g>
+  <text x="1116" y="278" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">CorreaX</text>
+</svg>

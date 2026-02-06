@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <!-- Deep space -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    
+    <!-- Azure blue -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Hull metallic -->
+    <linearGradient id="hull" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a5568"/>
+      <stop offset="50%" stop-color="#718096"/>
+      <stop offset="100%" stop-color="#4a5568"/>
+    </linearGradient>
+    
+    <!-- Mothership glow -->
+    <radialGradient id="motherGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Hangar glow -->
+    <linearGradient id="hangarGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  
+  <!-- Stars -->
+  <g fill="white">
+    <circle cx="50" cy="40" r="1" opacity="0.4"/>
+    <circle cx="150" cy="250" r="1" opacity="0.3"/>
+    <circle cx="350" cy="50" r="1.5" opacity="0.5"/>
+    <circle cx="800" cy="30" r="1" opacity="0.4"/>
+    <circle cx="1100" cy="200" r="1" opacity="0.3"/>
+  </g>
+  
+  <!-- Glow behind mothership -->
+  <ellipse cx="240" cy="150" rx="200" ry="130" fill="url(#motherGlow)"/>
+  
+  <!-- MOTHERSHIP (Carrier-style, multiple docking bays) -->
+  <g transform="translate(80, 60)">
+    
+    <!-- Main hull (elongated hexagon) -->
+    <polygon points="50,90 30,50 100,20 220,20 290,50 270,90 220,120 100,120" fill="url(#hull)"/>
+    <polygon points="50,90 30,50 100,20 220,20 290,50 270,90 220,120 100,120" fill="none" stroke="#0078d4" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Command bridge (top) -->
+    <rect x="130" y="30" width="60" height="25" rx="5" fill="url(#azure)"/>
+    <rect x="140" y="35" width="40" height="12" rx="3" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
+    <text x="160" y="65" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#0078d4">GK</text>
+    
+    <!-- Engine glow (rear) -->
+    <ellipse cx="50" cy="70" rx="8" ry="15" fill="url(#flame)" opacity="0.6"/>
+    <ellipse cx="50" cy="70" rx="4" ry="10" fill="#ffc857"/>
+    
+    <!-- Docking bays (3 slots for rockets) -->
+    <!-- Bay 1: Occupied -->
+    <g transform="translate(100, 75)">
+      <rect x="0" y="0" width="35" height="35" rx="4" fill="#0a1628" stroke="url(#hangarGlow)" stroke-width="2"/>
+      <!-- Docked rocket (tiny) -->
+      <g transform="translate(17, 28) rotate(180) scale(0.25)">
+        <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+        <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#0a1628"/>
+      </g>
+      <circle cx="30" cy="5" r="3" fill="#00ff88">
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Bay 2: Occupied -->
+    <g transform="translate(145, 75)">
+      <rect x="0" y="0" width="35" height="35" rx="4" fill="#0a1628" stroke="url(#hangarGlow)" stroke-width="2"/>
+      <g transform="translate(17, 28) rotate(180) scale(0.25)">
+        <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+        <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#0a1628"/>
+      </g>
+      <circle cx="30" cy="5" r="3" fill="#00ff88">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Bay 3: Empty (available) -->
+    <g transform="translate(190, 75)">
+      <rect x="0" y="0" width="35" height="35" rx="4" fill="#0a1628" stroke="#0078d4" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="17" y="22" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" fill="#0078d4" opacity="0.5">+</text>
+    </g>
+    
+    <!-- Side engines -->
+    <rect x="255" y="50" width="20" height="15" rx="3" fill="url(#hull)"/>
+    <rect x="255" y="75" width="20" height="15" rx="3" fill="url(#hull)"/>
+    
+  </g>
+  
+  <!-- Incoming rocket (approaching mothership) -->
+  <g transform="translate(360, 180) rotate(-30) scale(0.5)">
+    <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+    <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
+    <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
+    <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
+    <polygon points="22,68 30,90 38,68" fill="url(#flame)"/>
+    <polygon points="24,68 30,82 36,68" fill="#ffc857"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="480" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700" fill="white">
+    Global Knowledge
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="480" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#888888">
+    <tspan>Your </tspan><tspan fill="#0078d4" font-weight="bold">MOTHERSHIP</tspan><tspan> for All Projects</tspan>
+  </text>
+  
+  <!-- Feature pills -->
+  <g transform="translate(480, 170)">
+    <g>
+      <rect x="0" y="0" width="110" height="28" rx="14" fill="#00ff88" fill-opacity="0.15" stroke="#00ff88" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="55" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#00ff88">🛬 Dock &amp; Sync</text>
+    </g>
+    <g transform="translate(120, 0)">
+      <rect x="0" y="0" width="100" height="28" rx="14" fill="#0078d4" fill-opacity="0.15" stroke="#0078d4" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="50" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#0078d4">📁 Patterns</text>
+    </g>
+    <g transform="translate(230, 0)">
+      <rect x="0" y="0" width="90" height="28" rx="14" fill="#ff6b35" fill-opacity="0.15" stroke="#ff6b35" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#ff6b35">💡 Insights</text>
+    </g>
+  </g>
+  
+  <!-- v5.0 badge -->
+  <g transform="translate(480, 220)">
+    <rect width="100" height="22" rx="11" fill="url(#flame)" fill-opacity="0.2"/>
+    <text x="50" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#ffc857">🚀 Premium v5.0</text>
+  </g>
+  
+  <!-- CorreaX -->
+  <g transform="translate(1080, 250)" opacity="0.6">
+    <path d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12s4.701 10.5 10.5 10.5c2.9 0 5.542-1.176 7.446-3.075l-2.651-2.652A6.75 6.75 0 0112 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75c1.718 0 3.285.643 4.478 1.701l2.598-2.729A10.46 10.46 0 0012 1.5z" fill="#0078d4"/>
+    <path d="M15 7.5l-3 4.5 3 4.5h3l-3-4.5 3-4.5h-3z" fill="#0078d4"/>
+    <path d="M18 7.5l3 4.5-3 4.5h3l3-4.5-3-4.5h-3z" fill="#0078d4" opacity="0.5"/>
+  </g>
+  <text x="1116" y="278" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">CorreaX</text>
+</svg>

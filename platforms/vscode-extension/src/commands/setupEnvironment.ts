@@ -133,9 +133,10 @@ export function setExtensionPathForCss(extensionPath: string): void {
  * We must copy the CSS to each workspace's .vscode/ folder and use a relative path.
  * 
  * Priority order for CSS source:
- * 1. Workspace's .github/skills/markdown-mermaid/markdown-light.css (if Alex already deployed)
- * 2. Extension's bundled .github/skills/markdown-mermaid/markdown-light.css (master version)
- * 3. Embedded fallback CSS (last resort)
+ * 1. Workspace's .github/config/markdown-light.css (primary - after Alex initialize)
+ * 2. Extension's bundled .github/config/markdown-light.css (bundled location)
+ * 3. Legacy locations as fallback
+ * 4. Embedded fallback CSS (last resort)
  */
 async function copyMarkdownCssToWorkspace(): Promise<boolean> {
   const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -150,34 +151,52 @@ async function copyMarkdownCssToWorkspace(): Promise<boolean> {
 
   let cssContent: Uint8Array | null = null;
 
-  // Priority 1: Try to find CSS in workspace's Alex .github/skills folder
-  const githubSkillCss = vscode.Uri.joinPath(
+  // Priority 1: Try workspace's .github/config/ (primary location after initialization)
+  const githubConfigCss = vscode.Uri.joinPath(
     workspaceRoot,
     ".github",
-    "skills",
-    "markdown-mermaid",
+    "config",
     "markdown-light.css"
   );
 
   try {
-    cssContent = await vscode.workspace.fs.readFile(githubSkillCss);
-    console.log("Using markdown CSS from workspace skills folder");
+    cssContent = await vscode.workspace.fs.readFile(githubConfigCss);
+    console.log("Using markdown CSS from workspace .github/config folder");
   } catch {
-    // CSS not found in workspace skills folder
+    // CSS not found in workspace config folder
   }
 
-  // Priority 2: Try extension's bundled .github/skills folder
+  // Priority 2: Try extension's bundled .github/config folder (primary location)
   if (!cssContent && cachedExtensionPath) {
-    const extensionSkillCss = vscode.Uri.file(
-      path.join(cachedExtensionPath, ".github", "skills", "markdown-mermaid", "markdown-light.css")
+    const extensionConfigCss = vscode.Uri.file(
+      path.join(cachedExtensionPath, ".github", "config", "markdown-light.css")
     );
     try {
-      cssContent = await vscode.workspace.fs.readFile(extensionSkillCss);
-      console.log("Using markdown CSS from extension bundle:", extensionSkillCss.fsPath);
-    } catch (err) {
-      console.error("Failed to read CSS from extension bundle:", extensionSkillCss.fsPath, err);
+      cssContent = await vscode.workspace.fs.readFile(extensionConfigCss);
+      console.log("Using markdown CSS from extension .github/config folder:", extensionConfigCss.fsPath);
+    } catch {
+      // CSS not found in extension config folder
     }
-  } else if (!cssContent) {
+  }
+
+  // Priority 3: Try legacy locations (skills folder, .vscode folder)
+  if (!cssContent && cachedExtensionPath) {
+    const legacyLocations = [
+      path.join(cachedExtensionPath, ".vscode", "markdown-light.css"),
+      path.join(cachedExtensionPath, ".github", "skills", "markdown-mermaid", "markdown-light.css")
+    ];
+    for (const location of legacyLocations) {
+      try {
+        cssContent = await vscode.workspace.fs.readFile(vscode.Uri.file(location));
+        console.log("Using markdown CSS from legacy location:", location);
+        break;
+      } catch {
+        // Try next location
+      }
+    }
+  }
+  
+  if (!cssContent && !cachedExtensionPath) {
     console.error("No cachedExtensionPath set, cannot read CSS from extension bundle");
   }
 

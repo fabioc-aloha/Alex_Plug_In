@@ -134,17 +134,25 @@ flowchart LR
 
 **Paradigm Connection**: Altman's "individual as 50-person company" — organizational memory enables one person with Alex to operate with institutional coherence. Shared knowledge compounds team capability.
 
-| Task                          | Owner  | Effort |  Priority  | Status |
-| ----------------------------- | :----: | :----: | :--------: | :----: |
-| Global Knowledge Repository   | Master |   2w   | 🔥 Critical | ✅ Done |
-| GK Sync Skill                 | Master |   2h   |    High    | ✅ Done |
-| GK Setup Instructions         | Master |   1h   |    High    | ✅ Done |
-| `Alex: Init Global Knowledge` |  Heir  |   4h   |   Medium   | 📋 Next |
-| Configurable GK Repo Location | Master |   4h   |    High    | 📋 Next |
-| Team Knowledge Sharing        |  Heir  |   4h   |    High    | 📋 Next |
-| Security Gates (secrets, PII) | Master |   1w   |  Critical  | 📋 Next |
-| Privacy Compliance (GDPR)     | Master |   3d   |  Critical  | 📋 Next |
-| RAI Validation Layer          | Master |   3d   |    High    | 📋 Next |
+| Task                           | Owner  | Effort |  Priority  | Status |
+| ------------------------------ | :----: | :----: | :--------: | :----: |
+| Global Knowledge Repository    | Master |   2w   | 🔥 Critical | ✅ Done |
+| GK Sync Skill                  | Master |   2h   |    High    | ✅ Done |
+| GK Setup Instructions          | Master |   1h   |    High    | ✅ Done |
+| **Know Your Customer**         |  Heir  |   3h   |    High    | ✅ Done |
+| **Premium Feature Indicators** |  Heir  |   1h   |   Medium   | ✅ Done |
+| **Enhanced GK Scaffolding**    |  Heir  |   2h   |   Medium   | ✅ Done |
+| `Alex: Init Global Knowledge`  |  Heir  |   4h   |   Medium   | 📋 Next |
+| Configurable GK Repo Location  | Master |   4h   |    High    | 📋 Next |
+| Team Knowledge Sharing         |  Heir  |   4h   |    High    | 📋 Next |
+| Security Gates (secrets, PII)  | Master |   1w   |  Critical  | 📋 Next |
+| Privacy Compliance (GDPR)      | Master |   3d   |  Critical  | 📋 Next |
+| RAI Validation Layer           | Master |   3d   |    High    | 📋 Next |
+
+**New in v5.0.0**:
+- **Know Your Customer** — Persona detection from user profile and workspace analysis. Matches users to 15 marketing personas (Developer, Academic, Researcher, etc.) with confidence scoring.
+- **Premium Feature Indicators** — GK-dependent features marked with ⭐ badge. Pulsing animation draws attention to premium capabilities.
+- **Enhanced GK Scaffolding** — New repos include animated SVG banner, 3 starter patterns, comprehensive USER-GUIDE.md, and personalized creation teaser based on detected persona.
 
 **Architecture Decision**: GitHub vs OneDrive for Global Knowledge
 

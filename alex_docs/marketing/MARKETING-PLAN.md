@@ -77,8 +77,11 @@
 | **Static CODE (SVG)** | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">          | VS Code Marketplace, GitHub README |
 | **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | Social media, blog posts           |
 | **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Website hero, landing pages        |
+| **GK Space Station**  | <img src="banner-concepts/gk-space-station.svg" alt="GK Space Station Banner" width="400">       | Global Knowledge repo README       |
 
 **banner-code-static** — Large centered logo, "Take Your CODE to New Heights" subtitle, CorreaX in corner.
+
+**gk-space-station** — ISS-inspired station with docked A Negative Space rocket. "Your MISSION CONTROL for Cross-Project Wisdom". Premium v5.0 feature.
 
 | Asset                  | Decision                                                                           | Status       |
 | ---------------------- | ---------------------------------------------------------------------------------- | ------------ |
@@ -91,6 +94,8 @@
 | **Origin**             | Original CorreaX marketing — inspired by developer sentiment about AI acceleration | ✅ DOCUMENTED |
 | **Banner**             | banner-code-static.svg — Centered logo with "Take Your CODE to New Heights"        | ✅ LOCKED     |
 | **Animated Banner**    | banner-rotating-nouns.svg — 10 personas cycling                                    | ✅ LOCKED     |
+| **GK Banner**          | gk-space-station.svg — Docked rocket at ISS-inspired station, "MISSION CONTROL"    | ✅ LOCKED     |
+| **GK Logo**            | gk-space-station-logo.svg — 128x128 space station with docked rocket               | ✅ LOCKED     |
 | **Status Bar Icon**    | $(rocket) — Rocket codicon                                                         | ✅ LOCKED     |
 | **package.json**       | Alex: Strap a rocket to your back. 73 skills. Cross-project memory. Open source.   | 📝 DRAFT      |
 | **Primary Persona**    | Power User / Builder                                                               | ✅ LOCKED     |
@@ -336,6 +341,60 @@ That's Alex.
 | **Static CODE (SVG)** | <img src="banner-concepts/banner-code-static.svg" alt="Static CODE Banner" width="400">          | "Take Your CODE to New Heights" — highlighted CODE noun                                                                                   | VS Code Marketplace, GitHub README |
 | **Static CODE (PNG)** | <img src="banner-concepts/banner-code-static.png" alt="Static CODE Banner PNG" width="400">      | PNG version (204KB) for platforms that don't support SVG                                                                                  | Social media, blog posts           |
 | **Animated Rotating** | <img src="banner-concepts/banner-rotating-nouns.svg" alt="Animated Rotating Banner" width="400"> | Crossfade animation cycling 10 nouns: CODE → LEARNING → CAREER → CONTENT → THESIS → RESEARCH → WRITING → PROJECTS → DATA → INFRASTRUCTURE | Website hero, landing pages        |
+
+### Global Knowledge Banners (v5.0 Premium)
+
+> **Metaphor Evolution**: User straps rocket to their back → With GK, they dock at a space station
+
+The Global Knowledge feature extends the rocket metaphor: individual projects (rockets) sync to a central knowledge hub (space station). The docked rocket represents a project connected to cross-project wisdom.
+
+#### GK Banner Candidates
+
+| #      | Concept          | Preview                                                                                  | Tagline                                         | Alex Pick |
+| ------ | ---------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------- | --------- |
+| **V1** | Orbital          | <img src="banner-concepts/gk-v1-orbital.svg" alt="GK Orbital" width="300">               | "Your KNOWLEDGE in Orbit"                       | ⭐⭐⭐       |
+| **V2** | Constellation    | <img src="banner-concepts/gk-v2-constellation.svg" alt="GK Constellation" width="300">   | "Connect Your PROJECTS Like Stars"              | ⭐⭐        |
+| **V3** | Mothership       | <img src="banner-concepts/gk-v3-mothership.svg" alt="GK Mothership" width="300">         | "Your MOTHERSHIP for All Projects"              | ⭐⭐⭐       |
+| **V4** | Station Docked   | <img src="banner-concepts/gk-v4-station-docked.svg" alt="GK Station Docked" width="300"> | "Your MISSION CONTROL for Cross-Project Wisdom" | ⭐⭐⭐⭐⭐     |
+| **V5** | Launchpad Return | <img src="banner-concepts/gk-v5-launchpad-return.svg" alt="GK Launchpad" width="300">    | "Your HOME BASE for Every Mission"              | ⭐⭐⭐       |
+| **V6** | Library          | <img src="banner-concepts/gk-v6-library.svg" alt="GK Library" width="300">               | "Your STAR CHART LIBRARY Across Projects"       | ⭐⭐        |
+
+**Selected GK Banner**: V4 Station Docked — [gk-space-station.svg](banner-concepts/gk-space-station.svg)
+
+#### GK Logo Candidates
+
+| #      | Concept        | Preview                                                                                         | Metaphor                           | Alex Pick |
+| ------ | -------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------- | --------- |
+| **V1** | Orbital        | <img src="logo-concepts/gk-v1-orbital-logo.svg" alt="GK Orbital Logo" width="80">               | GK sphere with rocket in orbit     | ⭐⭐⭐       |
+| **V2** | Constellation  | <img src="logo-concepts/gk-v2-constellation-logo.svg" alt="GK Constellation Logo" width="80">   | Network of connected project nodes | ⭐⭐        |
+| **V3** | Mothership     | <img src="logo-concepts/gk-v3-mothership-logo.svg" alt="GK Mothership Logo" width="80">         | Carrier with docking bays          | ⭐⭐⭐       |
+| **V4** | Station Docked | <img src="logo-concepts/gk-v4-station-docked-logo.svg" alt="GK Station Docked Logo" width="80"> | ISS-style station + docked rocket  | ⭐⭐⭐⭐⭐     |
+| **V5** | Launchpad      | <img src="logo-concepts/gk-v5-launchpad-logo.svg" alt="GK Launchpad Logo" width="80">           | Landing pad "GK HOME"              | ⭐⭐⭐       |
+| **V6** | Library        | <img src="logo-concepts/gk-v6-library-logo.svg" alt="GK Library Logo" width="80">               | Star chart bookshelf               | ⭐⭐        |
+
+**Selected GK Logo**: V4 Station Docked — [gk-space-station-logo.svg](logo-concepts/gk-space-station-logo.svg)
+
+#### Visual Elements (V4 Selected Design)
+
+| Element              | Design                                           | Meaning                                     |
+| -------------------- | ------------------------------------------------ | ------------------------------------------- |
+| **Space Station**    | ISS-inspired modular design with central command | Global Knowledge hub (cross-project memory) |
+| **Solar Panels**     | Orange gradient arrays (brand accent)            | Power source / active knowledge harvesting  |
+| **Central Module**   | Azure blue with "GK" label, observation window   | Command center / knowledge viewport         |
+| **Docked Rocket**    | A Negative Space logo, rotated -90° (horizontal) | User's project connected to the hub         |
+| **Docking Ring**     | Green #00ff88 with pulsing animation             | Sync status (connected = green, syncing)    |
+| **RCS Thrusters**    | Soft orange glow (no main flame while docked)    | Station-keeping, gentle maneuvering         |
+| **Earth Background** | Subtle blue curve in bottom right                | Grounding, global perspective               |
+
+**New Tagline**: "Your MISSION CONTROL for Cross-Project Wisdom"
+
+**Feature Pills** (branded colors):
+- 📁 Patterns (azure)
+- 💡 Insights (orange)
+- 🔗 Synced (green — new!)
+- 👥 Shareable (orange)
+
+**Status Badge**: "DOCKED & SYNCED" with animated green indicator
 
 ### Current Logo Analysis
 

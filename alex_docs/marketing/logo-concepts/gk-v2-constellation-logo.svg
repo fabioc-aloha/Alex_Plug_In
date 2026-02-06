@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bg)" stroke="url(#azure)" stroke-width="2"/>
+  
+  <!-- Connection lines -->
+  <g stroke="#0078d4" stroke-width="1" opacity="0.5">
+    <line x1="64" y1="64" x2="35" y2="35"/>
+    <line x1="64" y1="64" x2="95" y2="40"/>
+    <line x1="64" y1="64" x2="100" y2="80"/>
+    <line x1="64" y1="64" x2="45" y2="100"/>
+    <line x1="35" y1="35" x2="95" y2="40"/>
+    <line x1="100" y1="80" x2="45" y2="100"/>
+  </g>
+  
+  <!-- Central node (GK) -->
+  <circle cx="64" cy="64" r="50" fill="url(#nodeGlow)"/>
+  <circle cx="64" cy="64" r="22" fill="url(#azure)"/>
+  <circle cx="64" cy="64" r="22" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+  <text x="64" y="70" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold" fill="white">GK</text>
+  
+  <!-- Outer nodes -->
+  <circle cx="35" cy="35" r="10" fill="#0078d4" opacity="0.8"/>
+  <circle cx="95" cy="40" r="10" fill="#ff6b35" opacity="0.8"/>
+  <circle cx="100" cy="80" r="8" fill="#0078d4" opacity="0.6"/>
+  <circle cx="45" cy="100" r="8" fill="#0078d4" opacity="0.6"/>
+  
+  <!-- Pulse -->
+  <circle cx="64" cy="64" r="28" fill="none" stroke="#00d4ff" stroke-width="1">
+    <animate attributeName="r" values="22;35;22" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

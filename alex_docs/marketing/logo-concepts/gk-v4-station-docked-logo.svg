@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Deep space -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    
+    <!-- Azure blue -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Solar panel orange -->
+    <linearGradient id="solar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="50%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Station hull -->
+    <linearGradient id="hull" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a5568"/>
+      <stop offset="50%" stop-color="#718096"/>
+      <stop offset="100%" stop-color="#4a5568"/>
+    </linearGradient>
+    
+    <!-- Docking glow -->
+    <radialGradient id="dockGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bg)" stroke="url(#azure)" stroke-width="2"/>
+  
+  <!-- Stars -->
+  <g fill="white" opacity="0.4">
+    <circle cx="20" cy="25" r="1"/>
+    <circle cx="105" cy="30" r="1"/>
+    <circle cx="15" cy="95" r="1"/>
+    <circle cx="110" cy="90" r="1"/>
+  </g>
+  
+  <!-- SPACE STATION (simplified) -->
+  <g transform="translate(30, 45)">
+    
+    <!-- Solar panels LEFT -->
+    <rect x="-5" y="12" width="25" height="3" fill="url(#hull)"/>
+    <rect x="-15" y="3" width="20" height="10" fill="url(#solar)" rx="1"/>
+    <rect x="-15" y="17" width="20" height="10" fill="url(#solar)" rx="1"/>
+    
+    <!-- Solar panels RIGHT -->
+    <rect x="48" y="12" width="20" height="3" fill="url(#hull)"/>
+    <rect x="60" y="3" width="20" height="10" fill="url(#solar)" rx="1"/>
+    <rect x="60" y="17" width="20" height="10" fill="url(#solar)" rx="1"/>
+    
+    <!-- Main truss -->
+    <rect x="10" y="12" width="50" height="6" fill="url(#hull)"/>
+    
+    <!-- Central module (GK) -->
+    <rect x="25" y="0" width="20" height="30" rx="4" fill="url(#azure)"/>
+    <rect x="29" y="5" width="12" height="8" rx="2" fill="#0a1628" stroke="#00d4ff" stroke-width="0.5"/>
+    
+    <!-- Left module -->
+    <rect x="10" y="5" width="18" height="15" rx="3" fill="url(#azure)"/>
+    <circle cx="15" cy="12" r="3" fill="#0a1628"/>
+    <circle cx="23" cy="12" r="3" fill="#0a1628"/>
+    
+  </g>
+  
+  <!-- DOCKED ROCKET (A Negative Space) -->
+  <g transform="translate(64, 75)">
+    <!-- Docking glow -->
+    <ellipse cx="0" cy="0" rx="15" ry="15" fill="url(#dockGlow)"/>
+    
+    <!-- Docking connector -->
+    <rect x="-5" y="-20" width="10" height="8" fill="url(#hull)"/>
+    <circle cx="0" cy="-12" r="4" fill="#2d3748" stroke="#00ff88" stroke-width="1.5"/>
+    
+    <!-- Rocket (approaching from below) -->
+    <g transform="translate(0, 15) scale(0.4)">
+      <!-- Rocket body -->
+      <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)" transform="translate(-30, -5)"/>
+      <!-- Fins -->
+      <polygon points="15,55 5,70 15,67" fill="url(#azure)" transform="translate(-30, -5)"/>
+      <polygon points="45,55 55,70 45,67" fill="url(#azure)" transform="translate(-30, -5)"/>
+      <!-- A cutout -->
+      <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810" transform="translate(-30, -5)"/>
+    </g>
+  </g>
+  
+  <!-- Docking ring (animated) -->
+  <circle cx="64" cy="63" r="6" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.8">
+    <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1a2a3a"/>
+      <stop offset="50%" stop-color="#0d1520"/>
+      <stop offset="100%" stop-color="#080810"/>
+    </linearGradient>
+    
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <linearGradient id="pad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d3748"/>
+      <stop offset="100%" stop-color="#1a202c"/>
+    </linearGradient>
+    
+    <radialGradient id="spotlight" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bg)" stroke="url(#azure)" stroke-width="2"/>
+  
+  <!-- Stars -->
+  <g fill="white" opacity="0.4">
+    <circle cx="25" cy="20" r="1"/>
+    <circle cx="100" cy="25" r="1"/>
+    <circle cx="45" cy="30" r="0.8"/>
+  </g>
+  
+  <!-- Ground -->
+  <rect x="4" y="100" width="120" height="24" fill="#1a202c"/>
+  <line x1="4" y1="100" x2="124" y2="100" stroke="#2d3748" stroke-width="1"/>
+  
+  <!-- Landing pad -->
+  <ellipse cx="64" cy="105" rx="40" ry="12" fill="url(#pad)"/>
+  <ellipse cx="64" cy="105" rx="40" ry="12" fill="none" stroke="#0078d4" stroke-width="1.5"/>
+  <ellipse cx="64" cy="105" rx="25" ry="8" fill="none" stroke="#0078d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="64" y="108" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="7" font-weight="bold" fill="#0078d4">GK</text>
+  
+  <!-- Spotlight -->
+  <polygon points="64,105 35,30 93,30" fill="url(#spotlight)"/>
+  
+  <!-- Landed rocket (large) -->
+  <g transform="translate(64, 55) scale(0.8)">
+    <!-- Landing legs -->
+    <line x1="-15" y1="45" x2="-25" y2="60" stroke="#4a5568" stroke-width="2"/>
+    <line x1="15" y1="45" x2="25" y2="60" stroke="#4a5568" stroke-width="2"/>
+    <circle cx="-25" cy="60" r="3" fill="#2d3748"/>
+    <circle cx="25" cy="60" r="3" fill="#2d3748"/>
+    
+    <!-- Rocket body -->
+    <path d="M0,-45 C0,-45 -12,-32 -12,-10 L-12,45 L-6,48 L-6,44 L6,44 L6,48 L12,45 L12,-10 C12,-32 0,-45 0,-45 Z" fill="url(#azure)"/>
+    <!-- Fins -->
+    <polygon points="-12,35 -20,50 -12,47" fill="url(#azure)"/>
+    <polygon points="12,35 20,50 12,47" fill="url(#azure)"/>
+    <!-- A cutout -->
+    <path d="M0,-38 L-7,35 L-4,35 L-3,25 L3,25 L4,35 L7,35 Z M-1.5,20 L0,-30 L1.5,20 Z" fill="#080810"/>
+  </g>
+  
+  <!-- Landing lights -->
+  <circle cx="30" cy="105" r="2" fill="#00ff88">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="98" cy="105" r="2" fill="#00ff88">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+  </circle>
+</svg>

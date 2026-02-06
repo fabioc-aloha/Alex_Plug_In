@@ -5,6 +5,8 @@ import * as crypto from "crypto";
 import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from "../shared/utils";
 import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
 import { runDreamProtocol } from "./dream";
+import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/globalKnowledge";
+import { detectPersona, loadUserProfile, PERSONAS } from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
 
 interface FileManifestEntry {
@@ -250,6 +252,8 @@ async function performInitialization(
       src: path.join(extensionPath, ".github", "skills"),
       dest: path.join(rootPath, ".github", "skills"),
     },
+    // Note: markdown-light.css is now in .github/config/ and gets copied with config folder
+    // applyMarkdownStyles() will copy it to .vscode/ for markdown.styles to work
   ];
 
   try {
@@ -327,6 +331,71 @@ async function performInitialization(
     // Apply markdown preview CSS (always, regardless of settings choice)
     // This ensures proper markdown rendering even if user skips settings wizard
     await applyMarkdownStyles();
+
+    // Check for Global Knowledge repository (GitHub repo as sibling folder)
+    try {
+      const existingGkRepo = await detectGlobalKnowledgeRepo();
+      if (existingGkRepo) {
+        telemetry.log("command", "initialize_global_knowledge_found", {
+          repoPath: path.basename(existingGkRepo),
+        });
+        console.log(`[Alex] Found Global Knowledge repo at ${existingGkRepo}`);
+      } else {
+        // Detect user persona for personalized messaging
+        const userProfile = await loadUserProfile(rootPath);
+        const personaResult = await detectPersona(userProfile ?? undefined, vscode.workspace.workspaceFolders);
+        const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
+        
+        // Offer to create a new GK repository with premium features teaser
+        const parentDir = path.dirname(rootPath);
+        const gkRepoName = "Alex-Global-Knowledge";
+        const gkRepoPath = path.join(parentDir, gkRepoName);
+        
+        // Build personalized message
+        const personalizedHook = `${persona.icon} ${persona.hook}`;
+        const premiumFeatures = [
+          "⭐ Search Knowledge — Find patterns instantly",
+          "💡 Save Insights — Capture debugging discoveries",
+          "📈 Promote Patterns — Share solutions globally",
+          "👥 Team Sharing — GitHub collaboration built-in"
+        ].join("\n");
+        
+        const createGk = await vscode.window.showInformationMessage(
+          `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nCreate a GitHub repository to store cross-project learnings?`,
+          { modal: true },
+          "Create Repository",
+          "Skip for Now"
+        );
+        
+        if (createGk === "Create Repository") {
+          telemetry.log("command", "initialize_global_knowledge_create", {
+            persona: persona.id,
+            confidence: personaResult?.confidence ?? 0
+          });
+          
+          // Scaffold the repository structure
+          await scaffoldGlobalKnowledgeRepo(gkRepoPath);
+          
+          vscode.window.showInformationMessage(
+            `✅ Global Knowledge repository created at ${gkRepoPath}\n\n🚀 Next steps:\n1. cd "${gkRepoPath}"\n2. git init && git add -A && git commit -m "feat: initialize global knowledge"\n3. gh repo create ${gkRepoName} --private --source=. --push\n\nYour ⭐ premium features are now unlocked!`,
+            { modal: false }
+          );
+          
+          telemetry.log("command", "initialize_global_knowledge_created", {
+            repoPath: gkRepoPath,
+            persona: persona.id
+          });
+        } else {
+          telemetry.log("command", "initialize_global_knowledge_skipped", {
+            persona: persona.id
+          });
+        }
+      }
+    } catch (globalErr) {
+      // Non-fatal - log but continue
+      telemetry.logError("initialize_global_knowledge_failed", globalErr);
+      console.warn("[Alex] Failed to setup global knowledge:", globalErr);
+    }
 
     // Offer environment setup (non-blocking)
     telemetry.log("command", "initialize_offering_setup");

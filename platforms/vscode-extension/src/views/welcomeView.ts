@@ -6,6 +6,8 @@ import {
   HealthCheckResult,
   HealthStatus,
 } from "../shared/healthCheck";
+import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
+import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from "../chat/personaDetection";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getSyncStatus, getLastSyncTimestamp } from "../chat/cloudSync";
 import { getCurrentSession, isSessionActive, Session } from "../commands/session";
@@ -164,16 +166,26 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     try {
       // Gather all status data in parallel
-      const [health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate] =
+      const [health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate, gkRepoPath] =
         await Promise.all([
           checkHealth(false),
           getSyncStatus(),
           getGoalsSummary(),
           getLastSyncTimestamp(),
           this._getLastDreamDate(),
+          detectGlobalKnowledgeRepo(),
         ]);
 
       const session = getCurrentSession();
+      const hasGlobalKnowledge = gkRepoPath !== null;
+      
+      // Detect persona from user profile
+      let personaResult: PersonaDetectionResult | null = null;
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (workspaceFolders) {
+        const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
+        personaResult = await detectPersona(userProfile, workspaceFolders);
+      }
       
       // Get extension version
       const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
@@ -190,6 +202,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         goalsSummary,
         version,
         nudges,
+        hasGlobalKnowledge,
+        personaResult,
       );
     } catch (err) {
       this._view.webview.html = this._getErrorHtml(err);
@@ -411,11 +425,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     },
     version: string,
     nudges: Nudge[],
+    hasGlobalKnowledge: boolean,
+    personaResult: PersonaDetectionResult | null,
   ): string {
     // Logo URI for webview
     const logoUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "assets", "logo.svg")
     );
+
+    // Persona display
+    const persona = personaResult?.persona;
+    const personaBannerNoun = persona?.bannerNoun || 'CODE';
+    const personaDisplay = persona ? `<span class="header-persona" title="Detected persona: ${persona.name}">${persona.icon} ${persona.name}</span>` : '';
 
     // Get workspace/folder name (vscode.workspace.name works for both workspaces and folders)
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -491,6 +512,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             height: 28px;
             flex-shrink: 0;
         }
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .header-title {
             font-size: 14px;
             font-weight: 600;
@@ -510,6 +536,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             text-overflow: ellipsis;
             white-space: nowrap;
             max-width: 140px;
+        }
+        .header-persona {
+            font-size: 10px;
+            color: var(--vscode-textPreformat-foreground);
+            background: var(--vscode-badge-background);
+            padding: 2px 6px;
+            border-radius: 8px;
+            opacity: 0.9;
         }
         .header-text {
             display: flex;
@@ -723,6 +757,23 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             padding: 2px 5px;
             border-radius: 3px;
         }
+        .premium-badge {
+            font-size: 10px;
+            margin-left: auto;
+            opacity: 0.8;
+            animation: pulse-star 2s ease-in-out infinite;
+        }
+        @keyframes pulse-star {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .action-btn.premium {
+            border-left: 2px solid var(--vscode-charts-yellow);
+        }
+        .action-btn.premium:hover .premium-badge {
+            animation: none;
+            opacity: 1;
+        }
         
         .goals-stats {
             display: flex;
@@ -917,11 +968,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="header">
             <img src="${logoUri}" alt="Alex" class="header-icon" />
             <div class="header-text">
-                <span class="header-title">Alex Cognitive</span>
-                <span class="header-tagline">Take Your CODE to New Heights</span>
+                <div class="header-title-row">
+                    <span class="header-title">Alex Cognitive</span>
+                    <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
+                </div>
+                <span class="header-tagline">Take Your ${personaBannerNoun} to New Heights</span>
+                ${personaDisplay}
                 <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
             </div>
-            <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
         
@@ -960,8 +1014,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Chat with GitHub Copilot</span>
                 </button>
                 <button class="action-btn" onclick="cmd('upgrade')">
-                    <span class="action-icon">⬆️</span>
+                    <span class="action-icon">${hasGlobalKnowledge ? '🌐' : '⬆️'}</span>
                     <span class="action-text">Initialize / Update</span>
+                    ${hasGlobalKnowledge ? '<span class="premium-badge" title="Global Knowledge enabled">🌐</span>' : ''}
                 </button>
                 <button class="action-btn" onclick="cmd('dream')">
                     <span class="action-icon">💭</span>
@@ -974,16 +1029,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-shortcut">⌃⌥S</span>
                 </button>
                 
-                <div class="action-group-label">📚 Knowledge</div>
+                ${hasGlobalKnowledge ? `<div class="action-group-label">📚 Knowledge</div>
                 <button class="action-btn" onclick="cmd('syncKnowledge')">
                     <span class="action-icon">☁️</span>
                     <span class="action-text">Sync Knowledge</span>
                     <span class="action-shortcut">⌃⌥K</span>
                 </button>
-                <button class="action-btn" onclick="cmd('knowledgeQuickPick')">
+                <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="⭐ Premium feature: Requires Global Knowledge repository">
                     <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
-                </button>
+                    <span class="premium-badge">⭐</span>
+                </button>` : ''}
                 
                 <div class="action-group-label">🛠️ Developer Tools</div>
                 <button class="action-btn" onclick="cmd('runAudit')">
