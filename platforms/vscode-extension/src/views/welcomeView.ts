@@ -555,7 +555,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 12px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid var(--vscode-widget-border);
+            border-bottom: 2px solid var(--persona-accent);
         }
         .header-icon {
             width: 32px;
@@ -625,6 +625,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .version-badge:hover {
             opacity: 1;
+            background: var(--persona-accent);
         }
         .premium-badge {
             background: var(--vscode-badge-background, #4d4d4d);
@@ -651,7 +652,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .refresh-btn:hover {
             opacity: 1;
-            background: var(--vscode-toolbar-hoverBackground);
+            background: color-mix(in srgb, var(--persona-accent) 15%, var(--vscode-toolbar-hoverBackground));
+            color: var(--persona-accent);
         }
         
         .section {
@@ -662,9 +664,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-            color: var(--vscode-descriptionForeground);
+            color: var(--persona-accent);
             margin-bottom: 8px;
-            opacity: 0.85;
+            opacity: 0.95;
+            border-bottom: 1px solid color-mix(in srgb, var(--persona-accent) 25%, transparent);
+            padding-bottom: 4px;
         }
         
         .status-grid {
@@ -680,8 +684,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transition: all 0.12s ease;
         }
         .status-item:hover {
-            border-left-color: var(--vscode-focusBorder);
-            background: var(--vscode-list-hoverBackground);
+            border-left-color: var(--persona-accent);
+            background: color-mix(in srgb, var(--persona-accent) 5%, var(--vscode-list-hoverBackground));
         }
         .status-item.status-good {
             border-left-color: var(--vscode-charts-green);
@@ -716,7 +720,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .status-num {
             font-weight: 600;
             font-size: 18px;
-            color: var(--vscode-foreground);
+            color: var(--persona-accent);
             line-height: 1;
         }
         .status-unit {
@@ -735,7 +739,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
-            border-left: 2px solid var(--vscode-charts-blue);
+            border-left: 3px solid var(--persona-accent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--persona-accent) 15%, transparent);
         }
         .session-header {
             display: flex;
@@ -757,7 +762,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: 18px;
             font-weight: 600;
             font-family: monospace;
-            color: var(--vscode-charts-blue);
+            color: var(--persona-accent);
         }
         .session-status {
             font-size: 10px;
@@ -792,6 +797,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
+            border-left: 2px solid transparent;
             border-radius: 5px;
             cursor: pointer;
             font-size: 11px;
@@ -800,14 +806,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
+            border-left-color: var(--persona-accent);
             transform: translateX(1px);
         }
         .action-btn.primary {
-            background: var(--vscode-button-background);
+            background: var(--persona-accent);
             color: var(--vscode-button-foreground);
+            border: none;
         }
         .action-btn.primary:hover {
-            background: var(--vscode-button-hoverBackground);
+            background: color-mix(in srgb, var(--persona-accent) 85%, black);
             transform: translateX(1px);
         }
         .action-icon {
@@ -898,7 +906,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .goal-bar-fill {
             height: 100%;
-            background: var(--vscode-charts-green);
+            background: var(--persona-accent);
             border-radius: 2px;
             transition: width 0.3s ease;
         }
@@ -912,15 +920,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             align-items: center;
             gap: 8px;
             padding: 8px 10px;
-            background: var(--vscode-editor-background);
+            background: color-mix(in srgb, var(--persona-accent) 5%, var(--vscode-editor-background));
             border-radius: 5px;
             margin-bottom: 5px;
-            border-left: 2px solid var(--vscode-charts-yellow);
+            border-left: 2px solid var(--persona-accent);
             transition: all 0.1s ease;
         }
         .nudge-card:hover {
             transform: translateX(1px);
-            background: var(--vscode-list-hoverBackground);
+            background: color-mix(in srgb, var(--persona-accent) 10%, var(--vscode-editor-background));
         }
         .nudge-card.nudge-health {
             border-left-color: var(--vscode-charts-red);
