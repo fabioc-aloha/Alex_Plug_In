@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Deep space gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080810"/>
+      <stop offset="100%" stop-color="#0d1520"/>
+    </linearGradient>
+    
+    <!-- Azure blue -->
+    <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    
+    <!-- Flame -->
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+    
+    <!-- Glow -->
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="128" height="128" fill="url(#bg)"/>
+  
+  <!-- Glow -->
+  <ellipse cx="64" cy="55" rx="55" ry="50" fill="url(#glow)"/>
+  
+  <!-- Constellation network lines -->
+  <g stroke="#0078d4" stroke-width="0.75" fill="none" opacity="0.4">
+    <!-- Triangular constellation patterns -->
+    <path d="M18,18 L35,40 L10,50 Z"/>
+    <path d="M110,18 L93,40 L118,50 Z"/>
+    <path d="M12,95 L30,75 L5,70"/>
+    <path d="M116,95 L98,75 L123,70"/>
+    <!-- Cross connections -->
+    <line x1="35" y1="40" x2="50" y2="50"/>
+    <line x1="93" y1="40" x2="78" y2="50"/>
+  </g>
+  
+  <!-- Constellation nodes -->
+  <g fill="#0078d4">
+    <circle cx="18" cy="18" r="2.5" opacity="0.7"/>
+    <circle cx="35" cy="40" r="2" opacity="0.5"/>
+    <circle cx="10" cy="50" r="2" opacity="0.5"/>
+    <circle cx="110" cy="18" r="2.5" opacity="0.7"/>
+    <circle cx="93" cy="40" r="2" opacity="0.5"/>
+    <circle cx="118" cy="50" r="2" opacity="0.5"/>
+    <circle cx="12" cy="95" r="2" opacity="0.5"/>
+    <circle cx="30" cy="75" r="2" opacity="0.5"/>
+    <circle cx="116" cy="95" r="2" opacity="0.5"/>
+    <circle cx="98" cy="75" r="2" opacity="0.5"/>
+  </g>
+  
+  <!-- A Negative Space Rocket (centered) -->
+  <g transform="translate(34, 22) scale(1)">
+    <!-- Rocket body -->
+    <path d="M30,5 C30,5 15,20 15,45 L15,65 L22,68 L22,62 L38,62 L38,68 L45,65 L45,45 C45,20 30,5 30,5 Z" fill="url(#azure)"/>
+    <!-- Fins -->
+    <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
+    <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
+    <!-- A cutout -->
+    <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
+    <!-- Flame -->
+    <polygon points="22,68 30,82 38,68" fill="url(#flame)"/>
+    <polygon points="24,68 30,79 36,68" fill="#ffc857"/>
+  </g>
+</svg>

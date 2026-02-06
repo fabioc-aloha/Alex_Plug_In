@@ -14,6 +14,7 @@ import { getCurrentSession, isSessionActive, Session } from "../commands/session
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
+import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
 
 /**
  * Nudge types for contextual reminders
@@ -179,6 +180,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
       
+      // Detect premium features and get appropriate assets
+      const premiumFlags = await detectPremiumFeatures();
+      const premiumAssets = getPremiumAssets(premiumFlags, true); // rotate banners
+      
       // Detect persona from user profile
       let personaResult: PersonaDetectionResult | null = null;
       const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -204,6 +209,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         nudges,
         hasGlobalKnowledge,
         personaResult,
+        premiumAssets,
       );
     } catch (err) {
       this._view.webview.html = this._getErrorHtml(err);
@@ -427,11 +433,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     nudges: Nudge[],
     hasGlobalKnowledge: boolean,
     personaResult: PersonaDetectionResult | null,
+    premiumAssets: PremiumAssetSelection,
   ): string {
-    // Logo URI for webview
-    const logoUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "assets", "logo.svg")
-    );
+    // Logo URI for webview - use premium asset if available
+    const logoUri = getAssetUri(webview, this._extensionUri, premiumAssets.logoPath);
+    
+    // Banner feature highlight (shown if premium feature is active)
+    const featureHighlight = premiumAssets.featureHighlight !== 'none' 
+      ? `<span class="premium-badge" title="${premiumAssets.bannerAlt}">✨ ${premiumAssets.featureHighlight}</span>` 
+      : '';
 
     // Persona display
     const persona = personaResult?.persona;
@@ -566,6 +576,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .version-badge:hover {
             opacity: 0.85;
             transform: scale(1.02);
+        }
+        .premium-badge {
+            background: linear-gradient(135deg, #ff6b35, #ffc857);
+            color: #080810;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            letter-spacing: 0.2px;
+            margin-left: 6px;
+            box-shadow: 0 1px 3px rgba(255, 107, 53, 0.3);
         }
         .refresh-btn {
             margin-left: auto;
@@ -971,6 +992,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <div class="header-title-row">
                     <span class="header-title">Alex Cognitive</span>
                     <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
+                    ${featureHighlight}
                 </div>
                 <span class="header-tagline">Take Your ${personaBannerNoun} to New Heights</span>
                 ${personaDisplay}
