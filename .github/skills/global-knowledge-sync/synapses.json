@@ -1,0 +1,47 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "global-knowledge-sync",
+    "inheritance": "master-only",
+    "externalRepository": "fabioc-aloha/Alex-Global-Knowledge",
+    "connections": [
+        {
+            "target": ".github/skills/global-knowledge/SKILL.md",
+            "type": "extends",
+            "strength": 0.95,
+            "reason": "Sync operations extend core GK search capability"
+        },
+        {
+            "target": ".github/skills/meditation-facilitation/SKILL.md",
+            "type": "triggers",
+            "strength": 0.8,
+            "reason": "Meditation creates insights that sync promotes"
+        },
+        {
+            "target": ".github/skills/dream-automation/SKILL.md",
+            "type": "integrates",
+            "strength": 0.85,
+            "reason": "Dream protocol includes GK sync step"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "accelerates",
+            "strength": 0.7,
+            "reason": "GK provides prior knowledge for new learning"
+        },
+        {
+            "target": ".github/instructions/dream-state-automation.instructions.md",
+            "type": "modifies",
+            "strength": 0.75,
+            "reason": "Adds GK sync to dream checklist"
+        }
+    ],
+    "triggers": [
+        "saveinsight",
+        "save insight",
+        "promote to global",
+        "sync knowledge",
+        "global knowledge sync",
+        "gk sync"
+    ]
+}

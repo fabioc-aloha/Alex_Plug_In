@@ -134,13 +134,15 @@ flowchart LR
 
 **Paradigm Connection**: Altman's "individual as 50-person company" — organizational memory enables one person with Alex to operate with institutional coherence. Shared knowledge compounds team capability.
 
-| Task                          | Owner  | Effort |  Priority  |
-| ----------------------------- | :----: | :----: | :--------: |
-| Global Knowledge Repository   | Master |   2w   | 🔥 Critical |
-| Team Knowledge Sharing        |  Heir  |   4h   |    High    |
-| Security Gates (secrets, PII) | Master |   1w   |  Critical  |
-| Privacy Compliance (GDPR)     | Master |   3d   |  Critical  |
-| RAI Validation Layer          | Master |   3d   |    High    |
+| Task                          | Owner  | Effort |  Priority  | Status |
+| ----------------------------- | :----: | :----: | :--------: | :----: |
+| Global Knowledge Repository   | Master |   2w   | 🔥 Critical | ✅ Done |
+| GK Sync Skill                 | Master |   2h   |    High    | ✅ Done |
+| Configurable GK Repo Location | Master |   4h   |    High    | 📋 Next |
+| Team Knowledge Sharing        |  Heir  |   4h   |    High    | 📋 Next |
+| Security Gates (secrets, PII) | Master |   1w   |  Critical  | 📋 Next |
+| Privacy Compliance (GDPR)     | Master |   3d   |  Critical  | 📋 Next |
+| RAI Validation Layer          | Master |   3d   |    High    | 📋 Next |
 
 **Architecture Decision**: GitHub vs OneDrive for Global Knowledge
 

@@ -82,14 +82,24 @@ Example consolidation mappings:
 - `self-identity-integration.prompt.md` → `alex-identity-integration.instructions.md`
 - `dream-protocol-integration.prompt.md` → `dream-state-automation.instructions.md`
 
-#### **Phase 4: Health Reporting**
+#### **Phase 4: Global Knowledge Sync** (Master Alex Only)
+For Master Alex workspace, synchronizes with the Global Knowledge repository:
+- Checks for uncommitted changes in `Alex-Global-Knowledge/`
+- Pulls latest from remote if workspace is clean
+- Regenerates `KNOWLEDGE-INDEX.md` if `index.json` changed
+- Reports sync status in dream output
+
+**Note**: Heirs skip this phase — they only use local knowledge.
+
+#### **Phase 5: Health Reporting**
 Generates comprehensive report including:
 - Total memory files and synapses
 - Broken connections (if any)
 - Successfully repaired connections
+- Global Knowledge sync status (Master only)
 - Recommendations for manual fixes
 
-#### **Phase 5: Results Display**
+#### **Phase 6: Results Display**
 - Shows notification with summary
 - Opens generated report automatically
 - Archives report with timestamp
