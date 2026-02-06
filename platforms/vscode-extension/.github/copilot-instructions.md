@@ -45,9 +45,9 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | *(dynamic)* | Domain | Project's most-used skill domain |
-| **P6** | *(dynamic)* | Domain | Current session objective |
-| **P7** | *(dynamic)* | Domain | Active task type |
+| **P5** | master-heir-management | Domain | Master-Heir sync, promotion workflows, inheritance |
+| **P6** | brand-asset-management | Domain | Logos, banners, icons, visual identity |
+| **P7** | release-management | Domain | Versioning, changelog, publish workflows |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
