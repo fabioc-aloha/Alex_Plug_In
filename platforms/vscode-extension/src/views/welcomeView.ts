@@ -71,6 +71,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "startSession":
           vscode.commands.executeCommand("alex.startSession");
           break;
+        case "sessionActions":
+          vscode.commands.executeCommand("alex.sessionActions");
+          break;
         case "meditate":
           vscode.commands.executeCommand(
             "workbench.panel.chat.view.copilot.focus",
@@ -157,7 +160,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"));
           break;
         case "provideFeedback":
-          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/discussions"));
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues"));
           break;
         case "refresh":
           this.refresh();
@@ -285,21 +288,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       });
     }
 
-    // Active focus session reminder (high priority)
-    if (session && !session.isPaused && !session.isBreak) {
-      const remainingMins = Math.floor(session.remaining / 60);
-      const goalReminder = goals.activeGoals.length > 0 
-        ? ` (🎯 ${goals.activeGoals[0].title})` 
-        : '';
-      nudges.push({
-        type: 'focus',
-        icon: '🎯',
-        message: `Focus: "${session.topic}" — ${remainingMins}m left${goalReminder}`,
-        action: 'sessionActions',
-        actionLabel: 'Actions',
-        priority: 1  // High priority — keep user focused
-      });
-    }
+    // Note: Focus session is already shown in the timer card, so no nudge needed here
 
     // Check health issues (high priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
@@ -499,7 +488,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="session-title">${this._escapeHtml(session.topic)}</span>
                 </div>
                 <div class="session-timer">${this._formatTime(session.remaining)}</div>
-                <div class="session-status">${session.isPaused ? "⏸️ Paused" : "▶️ Active"}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ""}</div>
+                <div class="session-footer">
+                    <span class="session-status">${session.isPaused ? "⏸️ Paused" : "▶️ Active"}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ""}</span>
+                    <a href="#" class="session-actions-link" onclick="cmd('sessionActions'); return false;">Actions</a>
+                </div>
             </div>
         `
       : "";
@@ -706,10 +698,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-family: monospace;
             color: var(--vscode-charts-blue);
         }
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3px;
+        }
         .session-status {
             font-size: 10px;
             color: var(--vscode-descriptionForeground);
-            margin-top: 3px;
+        }
+        .session-actions-link {
+            font-size: 10px;
+            color: var(--vscode-textLink-foreground);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .session-actions-link:hover {
+            text-decoration: underline;
         }
         
         .action-list {

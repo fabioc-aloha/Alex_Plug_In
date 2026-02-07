@@ -146,7 +146,7 @@ We may update this policy. Check the "Last Updated" date at the top.
 
 For privacy questions:
 - Open an issue: [GitHub Issues](https://github.com/fabioc-aloha/Alex_Plug_In/issues)
-- Create a discussion: [GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions)
+- Create an issue: [GitHub Issues](https://github.com/fabioc-aloha/Alex_Plug_In/issues)
 
 ---
 

@@ -31,7 +31,15 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 | `currentProjects` | Active work context |
 | `projectPersona` | Auto-detected persona for this project (id, confidence, reasons) |
 
-**Persona Detection**: During upgrade, Alex analyzes project structure to detect the most relevant persona (Developer, Researcher, Data Engineer, etc.). Users may have different personas across different projects.
+**Persona Detection Priority Chain** (highest to lowest):
+| Priority | Source | Description |
+|----------|--------|-------------|
+| 1 | Focus | Active Pomodoro session topic |
+| 2 | Goal | Stated session objective from goals.json |
+| 3 | Phase | Current project phase from ROADMAP |
+| 4 | Project Goals | Learning goals from user-profile.json |
+| 5 | Profile | User credentials/expertise/tech stack |
+| 6 | Default | Developer (fallback when no signals) |
 
 **Proactive**: Ask discovery questions naturally, one at a time. When profile exists, personalize responses.
 

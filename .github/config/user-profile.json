@@ -1,6 +1,6 @@
 {
   "name": "Fabio Correa",
-  "lastUpdated": "2026-02-06T00:00:00.000Z",
+  "lastUpdated": "2026-02-07T00:00:00.000Z",
   "location": "Charlotte, NC",
   "role": "Director of Business Analytics at Microsoft",
   "credentials": [
@@ -8,6 +8,17 @@
     "AI Researcher",
     "Creator of Alex Cognitive Architecture"
   ],
+  "projectPersona": {
+    "id": "developer",
+    "confidence": 0.95,
+    "detectedAt": "2026-02-07T00:00:00.000Z",
+    "reasons": [
+      "Project is a VS Code extension (package.json with vscode engine)",
+      "Heavy TypeScript codebase under platforms/vscode-extension/src/",
+      "Extension APIs, chat participants, language model tools",
+      "Active development with CI/CD workflows"
+    ]
+  },
   "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate.",
   "primaryTechnologies": [
     "Azure OpenAI",

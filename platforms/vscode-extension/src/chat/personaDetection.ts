@@ -6,11 +6,21 @@
  * 
  * v5.0.0 Feature: Know Your Customer
  * v5.1.0 Feature: LLM-based persona detection + P6 update
+ * v5.1.1 Feature: Priority-based detection chain
+ * 
+ * PRIORITY CHAIN (highest to lowest):
+ * 1. Focus - Current session topic from Pomodoro timer
+ * 2. Goal - Stated session objective
+ * 3. Project Phase - Current phase from project config
+ * 4. Project Goals - From learning goals
+ * 5. Profile - User profile credentials/expertise
+ * 6. Developer - Default fallback
  */
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import * as os from 'os';
 
 /**
  * Marketing persona definition
@@ -22,6 +32,7 @@ export interface Persona {
     hook: string;
     skill: string;
     icon: string;
+    accentColor: string;  // Hex color for badges/pills
     keywords: string[];
     techStack: string[];
     projectPatterns: string[];
@@ -49,6 +60,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Ship faster, debug less',
         skill: 'code-quality',
         icon: '💻',
+        accentColor: '#0078D4',  // Azure Blue
         keywords: ['developer', 'engineer', 'programmer', 'coder', 'software'],
         techStack: ['typescript', 'javascript', 'python', 'java', 'c#', 'go', 'rust', 'react', 'angular', 'vue', 'node'],
         projectPatterns: ['src/', 'package.json', 'tsconfig.json', 'pom.xml', 'Cargo.toml', 'go.mod']
@@ -60,6 +72,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Literature review on autopilot',
         skill: 'research-project-scaffold',
         icon: '🎓',
+        accentColor: '#8B5CF6',  // Purple
         keywords: ['student', 'phd', 'thesis', 'dissertation', 'academic', 'university', 'graduate', 'research'],
         techStack: ['latex', 'bibtex', 'markdown', 'r', 'python', 'jupyter'],
         projectPatterns: ['.tex', '.bib', 'thesis/', 'dissertation/', 'chapters/', 'references/']
@@ -71,6 +84,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Hypothesis to publication, accelerated',
         skill: 'research-project-scaffold',
         icon: '🔬',
+        accentColor: '#10B981',  // Emerald Green
         keywords: ['researcher', 'scientist', 'lab', 'data', 'analysis', 'experiment', 'hypothesis'],
         techStack: ['python', 'r', 'julia', 'matlab', 'jupyter', 'pandas', 'numpy'],
         projectPatterns: ['data/', 'analysis/', 'experiments/', 'notebooks/', '.ipynb']
@@ -82,6 +96,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Docs that write themselves',
         skill: 'api-documentation',
         icon: '📝',
+        accentColor: '#F59E0B',  // Amber
         keywords: ['writer', 'documentation', 'docs', 'technical', 'api', 'manual'],
         techStack: ['markdown', 'rst', 'asciidoc', 'docusaurus', 'sphinx', 'mkdocs'],
         projectPatterns: ['docs/', 'documentation/', 'README.md', 'CONTRIBUTING.md', '.mdx']
@@ -93,6 +108,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Self-documenting cognitive architecture',
         skill: 'architecture-health',
         icon: '🏗️',
+        accentColor: '#6366F1',  // Indigo
         keywords: ['architect', 'system', 'enterprise', 'design', 'infrastructure'],
         techStack: ['terraform', 'bicep', 'kubernetes', 'docker', 'azure', 'aws'],
         projectPatterns: ['infra/', 'terraform/', 'bicep/', 'kubernetes/', 'helm/', 'ADR/']
@@ -104,6 +120,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Governance on autopilot',
         skill: 'microsoft-fabric',
         icon: '📊',
+        accentColor: '#06B6D4',  // Cyan
         keywords: ['data', 'engineer', 'etl', 'pipeline', 'warehouse', 'analytics', 'fabric', 'lakehouse'],
         techStack: ['sql', 'python', 'spark', 'dbt', 'fabric', 'synapse', 'databricks'],
         projectPatterns: ['pipelines/', 'etl/', 'dbt/', 'notebooks/', 'lakehouse/']
@@ -115,6 +132,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Same infra, every time. Automated.',
         skill: 'infrastructure-as-code',
         icon: '⚙️',
+        accentColor: '#EF4444',  // Red
         keywords: ['devops', 'sre', 'infrastructure', 'ci', 'cd', 'deployment', 'automation'],
         techStack: ['terraform', 'ansible', 'docker', 'kubernetes', 'github-actions', 'azure-devops'],
         projectPatterns: ['.github/workflows/', 'azure-pipelines.yml', 'Dockerfile', '.gitlab-ci.yml']
@@ -126,6 +144,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Ideas to posts in minutes',
         skill: 'creative-writing',
         icon: '✍️',
+        accentColor: '#EC4899',  // Pink
         keywords: ['content', 'creator', 'blogger', 'writer', 'newsletter', 'social'],
         techStack: ['markdown', 'ghost', 'wordpress', 'substack', 'notion'],
         projectPatterns: ['posts/', 'articles/', 'blog/', 'content/', 'drafts/']
@@ -137,6 +156,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Your story structure co-author',
         skill: 'creative-writing',
         icon: '📚',
+        accentColor: '#A855F7',  // Violet
         keywords: ['fiction', 'novel', 'screenplay', 'story', 'author', 'creative', 'book', 'writing'],
         techStack: ['markdown', 'scrivener', 'fountain', 'writing'],
         projectPatterns: ['chapters/', 'manuscript/', 'outline/', 'characters/', '.fountain', 'book/', 'drafts/', 'scenes/', 'OUTLINE.md', 'outline.md', 'plot/', 'worldbuilding/']
@@ -148,6 +168,7 @@ export const PERSONAS: Persona[] = [
         hook: '4-6× faster than human estimates',
         skill: 'project-management',
         icon: '📋',
+        accentColor: '#14B8A6',  // Teal
         keywords: ['project', 'manager', 'agile', 'scrum', 'sprint', 'roadmap'],
         techStack: ['markdown', 'jira', 'azure-boards', 'notion', 'linear'],
         projectPatterns: ['sprints/', 'roadmap/', 'epics/', 'backlog/']
@@ -159,6 +180,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Threat-aware by default',
         skill: 'incident-response',
         icon: '🔐',
+        accentColor: '#DC2626',  // Crimson
         keywords: ['security', 'threat', 'audit', 'compliance', 'penetration', 'vulnerability'],
         techStack: ['python', 'bash', 'powershell', 'terraform'],
         projectPatterns: ['security/', 'audits/', 'compliance/', 'threat-models/']
@@ -170,6 +192,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Master concepts, not just memorize',
         skill: 'learning-psychology',
         icon: '📖',
+        accentColor: '#3B82F6',  // Blue
         keywords: ['student', 'learning', 'study', 'course', 'class', 'homework'],
         techStack: ['markdown', 'notion', 'obsidian'],
         projectPatterns: ['notes/', 'study/', 'courses/', 'assignments/']
@@ -181,6 +204,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Stand out, get hired',
         skill: 'creative-writing',
         icon: '💼',
+        accentColor: '#84CC16',  // Lime
         keywords: ['job', 'career', 'resume', 'interview', 'portfolio', 'linkedin'],
         techStack: ['markdown', 'latex'],
         projectPatterns: ['resume/', 'portfolio/', 'cover-letters/', 'cv/']
@@ -192,6 +216,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Notes → polished slides in minutes',
         skill: 'gamma-presentations',
         icon: '🎤',
+        accentColor: '#F97316',  // Orange
         keywords: ['speaker', 'presenter', 'slides', 'deck', 'talk', 'conference', 'workshop'],
         techStack: ['markdown', 'marp', 'reveal.js', 'gamma'],
         projectPatterns: ['slides/', 'decks/', 'presentations/', 'talks/']
@@ -203,11 +228,188 @@ export const PERSONAS: Persona[] = [
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🚀',
+        accentColor: '#FBBF24',  // Gold
         keywords: ['power user', 'builder', 'maker', 'hacker', 'tinkerer', 'contributor'],
         techStack: ['typescript', 'python', 'bash', 'powershell', 'git'],
         projectPatterns: ['skills/', '.github/', 'extensions/', 'plugins/']
     }
 ];
+
+// ============================================================================
+// PRIORITY CHAIN DETECTION HELPERS
+// ============================================================================
+
+/**
+ * PRIORITY 1: Detect persona from active Focus session (Pomodoro timer)
+ * Highest priority - if user explicitly started a focus session with a topic,
+ * that topic should drive persona detection.
+ */
+async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
+    try {
+        const sessionStatePath = path.join(os.homedir(), '.alex', 'session-state.json');
+        if (!await fs.pathExists(sessionStatePath)) {
+            return null;
+        }
+        
+        const sessionState = await fs.readJson(sessionStatePath);
+        if (!sessionState.active || !sessionState.topic) {
+            return null;
+        }
+        
+        const topic = sessionState.topic.toLowerCase();
+        
+        // Match topic against persona keywords
+        for (const persona of PERSONAS) {
+            for (const keyword of persona.keywords) {
+                if (topic.includes(keyword)) {
+                    return {
+                        persona,
+                        confidence: 0.95,
+                        reasons: [`Active focus session: "${sessionState.topic}"`]
+                    };
+                }
+            }
+            // Also check tech stack
+            for (const tech of persona.techStack) {
+                if (topic.includes(tech)) {
+                    return {
+                        persona,
+                        confidence: 0.9,
+                        reasons: [`Focus session on ${tech}: "${sessionState.topic}"`]
+                    };
+                }
+            }
+        }
+    } catch {
+        // Session state not available
+    }
+    return null;
+}
+
+/**
+ * PRIORITY 2: Detect persona from current session goal
+ * Second priority - explicit goals set for this session.
+ */
+async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
+    if (!rootPath) { return null; }
+    
+    try {
+        const goalsPath = path.join(rootPath, '.github', 'config', 'goals.json');
+        if (!await fs.pathExists(goalsPath)) {
+            return null;
+        }
+        
+        const goalsData = await fs.readJson(goalsPath);
+        const activeGoals = goalsData.goals?.filter((g: { completedAt?: string }) => !g.completedAt) || [];
+        
+        // Check goal titles and tags for persona matches
+        for (const goal of activeGoals) {
+            const goalText = `${goal.title} ${goal.description || ''} ${(goal.tags || []).join(' ')}`.toLowerCase();
+            
+            for (const persona of PERSONAS) {
+                for (const keyword of persona.keywords) {
+                    if (goalText.includes(keyword)) {
+                        return {
+                            persona,
+                            confidence: 0.85,
+                            reasons: [`Active goal: "${goal.title}"`]
+                        };
+                    }
+                }
+            }
+        }
+    } catch {
+        // Goals not available
+    }
+    return null;
+}
+
+/**
+ * PRIORITY 3: Detect persona from project phase
+ * Third priority - current phase of the project lifecycle.
+ */
+async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
+    if (!rootPath) { return null; }
+    
+    try {
+        // Check for ROADMAP files that indicate current phase
+        const roadmapPaths = [
+            path.join(rootPath, 'ROADMAP.md'),
+            path.join(rootPath, 'ROADMAP-UNIFIED.md'),
+            path.join(rootPath, '.github', 'ROADMAP.md')
+        ];
+        
+        for (const roadmapPath of roadmapPaths) {
+            if (await fs.pathExists(roadmapPath)) {
+                const content = await fs.readFile(roadmapPath, 'utf8');
+                const contentLower = content.toLowerCase();
+                
+                // Look for current phase indicators
+                const phaseKeywords: Array<{ keywords: string[]; persona: string }> = [
+                    { keywords: ['🔄 in progress', '## current', 'active track'], persona: 'developer' },
+                    { keywords: ['documentation phase', 'docs sprint'], persona: 'technical-writer' },
+                    { keywords: ['release phase', 'publishing', 'deployment'], persona: 'devops' },
+                    { keywords: ['architecture review', 'design phase'], persona: 'architect' },
+                    { keywords: ['research phase', 'literature review'], persona: 'researcher' },
+                    { keywords: ['presentation', 'demo prep'], persona: 'presenter' }
+                ];
+                
+                for (const { keywords, persona: personaId } of phaseKeywords) {
+                    if (keywords.some(k => contentLower.includes(k))) {
+                        const persona = PERSONAS.find(p => p.id === personaId);
+                        if (persona) {
+                            return {
+                                persona,
+                                confidence: 0.75,
+                                reasons: [`Project phase from roadmap`]
+                            };
+                        }
+                    }
+                }
+            }
+        }
+    } catch {
+        // Roadmap not available
+    }
+    return null;
+}
+
+/**
+ * PRIORITY 4: Detect persona from project learning goals
+ * Fourth priority - what the user is trying to learn in this project.
+ */
+async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
+    if (!rootPath) { return null; }
+    
+    try {
+        const profilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
+        if (!await fs.pathExists(profilePath)) {
+            return null;
+        }
+        
+        const profile = await fs.readJson(profilePath);
+        const goals = profile.learningGoals || [];
+        
+        for (const goal of goals) {
+            const goalLower = (goal as string).toLowerCase();
+            
+            for (const persona of PERSONAS) {
+                for (const keyword of persona.keywords) {
+                    if (goalLower.includes(keyword)) {
+                        return {
+                            persona,
+                            confidence: 0.7,
+                            reasons: [`Learning goal: "${goal}"`]
+                        };
+                    }
+                }
+            }
+        }
+    } catch {
+        // Profile not available
+    }
+    return null;
+}
 
 /**
  * User profile structure (subset relevant for persona detection)
@@ -232,7 +434,15 @@ export interface PersonaDetectionResult {
 }
 
 /**
- * Detect the most likely persona based on user profile and project context.
+ * Detect the most likely persona based on priority chain.
+ * 
+ * PRIORITY CHAIN (each level overrides lower levels if confident):
+ * 1. Focus - Current session topic from Pomodoro timer (highest priority)
+ * 2. Goal - Stated session objective
+ * 3. Project Phase - Current phase from project config
+ * 4. Project Goals - From learning goals
+ * 5. Profile - User profile credentials/expertise
+ * 6. Developer - Default fallback (lowest priority)
  * 
  * @param userProfile - User profile from user-profile.json
  * @param workspaceFolders - Current workspace folders
@@ -242,14 +452,47 @@ export async function detectPersona(
     userProfile?: UserProfile,
     workspaceFolders?: readonly vscode.WorkspaceFolder[]
 ): Promise<PersonaDetectionResult | null> {
-    // Use saved projectPersona if available and recent (within 7 days)
+    const rootPath = workspaceFolders?.[0]?.uri.fsPath;
+    
+    // PRIORITY 1: Check active focus session (Pomodoro timer topic)
+    const focusResult = await detectFromFocusSession();
+    if (focusResult && focusResult.confidence >= 0.8) {
+        return { ...focusResult, source: 'detected' };
+    }
+    
+    // PRIORITY 2: Check session goal from goals.json
+    const goalResult = await detectFromSessionGoals(rootPath);
+    if (goalResult && goalResult.confidence >= 0.7) {
+        return { ...goalResult, source: 'detected' };
+    }
+    
+    // PRIORITY 3: Check project phase from config
+    const phaseResult = await detectFromProjectPhase(rootPath);
+    if (phaseResult && phaseResult.confidence >= 0.7) {
+        return { ...phaseResult, source: 'detected' };
+    }
+    
+    // PRIORITY 4: Check project learning goals
+    const projectGoalsResult = await detectFromProjectGoals(rootPath);
+    if (projectGoalsResult && projectGoalsResult.confidence >= 0.6) {
+        return { ...projectGoalsResult, source: 'detected' };
+    }
+    
+    // PRIORITY 5: Use saved projectPersona if available and recent (within 7 days)
     const extendedProfile = userProfile as ExtendedUserProfile | undefined;
     if (extendedProfile?.projectPersona) {
         const savedPersona = extendedProfile.projectPersona;
-        const detectedAt = new Date(savedPersona.detectedAt);
-        const ageInDays = (Date.now() - detectedAt.getTime()) / (1000 * 60 * 60 * 24);
         
-        // Use cached persona if less than 7 days old
+        // Defensive: if detectedAt is missing, treat as recently detected
+        let ageInDays = 0;
+        if (savedPersona.detectedAt) {
+            const detectedAt = new Date(savedPersona.detectedAt);
+            if (!isNaN(detectedAt.getTime())) {
+                ageInDays = (Date.now() - detectedAt.getTime()) / (1000 * 60 * 60 * 24);
+            }
+        }
+        
+        // Use cached persona if less than 7 days old (or if no date, assume valid)
         if (ageInDays < 7) {
             const matchedPersona = PERSONAS.find(p => p.id === savedPersona.id);
             if (matchedPersona) {
@@ -263,6 +506,7 @@ export async function detectPersona(
         }
     }
     
+    // PRIORITY 6: Profile-based detection (existing logic)
     const scores: Map<string, { score: number; reasons: string[] }> = new Map();
     
     // Initialize all personas with 0 score
@@ -382,18 +626,24 @@ export async function detectPersona(
         }
     }
     
-    // Require minimum confidence
-    if (!bestPersona || bestScore < 1) {
-        return null;
+    // If profile-based detection found something, return it
+    if (bestPersona && bestScore >= 1) {
+        const confidence = Math.min(bestScore / 10, 1);
+        return {
+            persona: bestPersona,
+            confidence,
+            reasons: bestReasons.slice(0, 5), // Top 5 reasons
+            source: 'detected'
+        };
     }
     
-    // Normalize confidence to 0-1 range (max reasonable score ~10)
-    const confidence = Math.min(bestScore / 10, 1);
-    
+    // PRIORITY 6: Default fallback to Developer
+    const developerPersona = PERSONAS.find(p => p.id === 'developer')!;
     return {
-        persona: bestPersona,
-        confidence,
-        reasons: bestReasons.slice(0, 5) // Top 5 reasons
+        persona: developerPersona,
+        confidence: 0.5,
+        reasons: ['Default persona (no specific signals detected)'],
+        source: 'detected'
     };
 }
 
@@ -820,6 +1070,7 @@ Respond with ONLY the JSON block, no other text.`;
             hook: `Alex-assisted ${parsed.personaName || 'development'}`,
             skill: parsed.skill || 'code-quality',
             icon: '🎯',
+            accentColor: '#0078D4',  // Default to Azure Blue
             keywords: [],
             techStack: detectedTech,
             projectPatterns: []

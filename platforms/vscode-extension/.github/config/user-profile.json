@@ -4,9 +4,9 @@
   "learningGoals": [],
   "formality": "balanced",
   "projectPersona": {
-    "reasons": [],
+    "id": "",
     "confidence": 0,
-    "id": ""
+    "reasons": []
   },
   "proactiveSuggestions": true,
   "name": "",
