@@ -385,35 +385,77 @@ export async function runDreamCore(
 }
 
 /**
- * Generate markdown report content
+ * Generate markdown report content with Alex branding
  */
 export function generateReportMarkdown(report: DreamReport): string {
-    return `# Dream Protocol Report
-**Timestamp**: ${report.timestamp}
-**Status**: ${report.brokenSynapses.length === 0 ? 'HEALTHY' : 'ATTENTION REQUIRED'}
+    const isHealthy = report.brokenSynapses.length === 0;
+    const healthPercent = report.totalSynapses > 0 
+        ? Math.round(((report.totalSynapses - report.brokenSynapses.length) / report.totalSynapses) * 100)
+        : 100;
+    
+    const statusEmoji = isHealthy ? '✅' : '⚠️';
+    const statusText = isHealthy ? 'HEALTHY' : 'ATTENTION REQUIRED';
+    
+    return `# 🧠 Alex Dream Protocol Report
 
-## Statistics
-- **Total Memory Files**: ${report.totalFiles}
-- **Total Synapses**: ${report.totalSynapses}
-- **Broken Connections**: ${report.brokenSynapses.length}
-- **Repaired Connections**: ${report.repairedSynapses.length}
+> **Timestamp**: ${report.timestamp}  
+> **Status**: ${statusEmoji} ${statusText}  
+> **Health Score**: ${healthPercent}%
 
-## Repaired Synapses
-${report.repairedSynapses.length === 0 ? '_None._' : report.repairedSynapses.map(s => 
-`- **Source**: ${path.basename(s.sourceFile)}:${s.line}
-  - **Old Target**: ${s.targetFile}
-  - **New Target**: ${s.newTarget} (Auto-repaired)`
-).join('\n')}
+---
 
-## Broken Synapses
-${report.brokenSynapses.length === 0 ? '_None detected._' : report.brokenSynapses.map(s => 
-`- **Source**: ${path.basename(s.sourceFile)}:${s.line}
-  - **Target**: ${s.targetFile} (Not found)
-  - **Condition**: "${s.condition}"`
-).join('\n')}
+## 📊 Architecture Statistics
 
-## Recommendations
-${report.brokenSynapses.length > 0 ? '- [ ] Repair remaining broken links manually.' : '- [x] System is optimized.'}
+| Metric | Value |
+|--------|-------|
+| 📁 Memory Files | ${report.totalFiles} |
+| 🔗 Total Synapses | ${report.totalSynapses} |
+| ✅ Healthy Connections | ${report.totalSynapses - report.brokenSynapses.length} |
+| ❌ Broken Connections | ${report.brokenSynapses.length} |
+| 🔧 Auto-Repaired | ${report.repairedSynapses.length} |
+
+---
+
+## 🔧 Repaired Synapses
+
+${report.repairedSynapses.length === 0 ? '> _No repairs needed. All synapses were healthy._' : 
+`| Source | Old Target | New Target |
+|--------|------------|------------|
+${report.repairedSynapses.map(s => 
+`| \`${path.basename(s.sourceFile)}:${s.line}\` | ~~${s.targetFile}~~ | ✅ ${s.newTarget} |`
+).join('\n')}`}
+
+---
+
+## ❌ Broken Synapses
+
+${report.brokenSynapses.length === 0 ? '> _None detected. Architecture is healthy!_' : 
+`> **Action Required**: These connections need manual repair.
+
+| Source | Target | Condition |
+|--------|--------|-----------|
+${report.brokenSynapses.map(s => 
+`| \`${path.basename(s.sourceFile)}:${s.line}\` | ❌ ${s.targetFile} | "${s.condition}" |`
+).join('\n')}`}
+
+---
+
+## 📋 Recommendations
+
+${report.brokenSynapses.length > 0 ? `- [ ] Review and repair ${report.brokenSynapses.length} broken synapse${report.brokenSynapses.length > 1 ? 's' : ''}
+- [ ] Check if target files were renamed or moved
+- [ ] Consider running \`Alex: Self-Actualize\` for deeper analysis` : `- [x] Architecture is optimized
+- [x] All synapses are connected
+- Consider meditation to consolidate learnings`}
+
+---
+
+<div align="center">
+
+**🚀 Alex Cognitive Architecture**  
+*Take Your Code to New Heights*
+
+</div>
 `;
 }
 

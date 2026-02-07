@@ -12,6 +12,7 @@ import { getGoalsSummary } from '../commands/goals';
 import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 import { escapeHtml } from '../shared/sanitize';
+import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
 
 /**
  * Health Dashboard - Rich webview visualization of Alex cognitive architecture
@@ -85,6 +86,9 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
                         await vscode.window.showTextDocument(doc);
                     }
                     break;
+                case 'deepBrainQA':
+                    vscode.commands.executeCommand('alex.deepBrainQA');
+                    break;
             }
         },
         undefined,
@@ -128,6 +132,13 @@ async function refreshDashboard(): Promise<void> {
             rootPath ? getInstalledAlexVersion(rootPath) : Promise.resolve(null)
         ]);
         
+        // Detect persona for UI accent
+        let personaResult: PersonaDetectionResult | null = null;
+        if (workspaceFolders) {
+            const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
+            personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
+        }
+        
         const session = getCurrentSession();
         
         currentPanel.webview.html = await getWebviewContent(
@@ -138,12 +149,34 @@ async function refreshDashboard(): Promise<void> {
             syncStatus,
             goalsSummary,
             session,
-            version
+            version,
+            personaResult
         );
     } catch (err) {
         currentPanel.webview.html = getErrorContent(err);
     }
 }
+
+/**
+ * Persona accent color mapping
+ */
+const personaAccentMap: Record<string, string> = {
+    'developer': 'var(--vscode-charts-blue)',
+    'academic': '#2aa198',
+    'researcher': '#2aa198',
+    'technical-writer': 'var(--vscode-charts-green)',
+    'architect': 'var(--vscode-charts-orange, #f0883e)',
+    'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
+    'devops': 'var(--vscode-charts-green)',
+    'content-creator': 'var(--vscode-charts-yellow)',
+    'fiction-writer': '#2aa198',
+    'project-manager': 'var(--vscode-charts-blue)',
+    'security': 'var(--vscode-charts-red)',
+    'student': '#2aa198',
+    'job-seeker': 'var(--vscode-charts-green)',
+    'presenter': 'var(--vscode-charts-yellow)',
+    'power-user': 'var(--vscode-charts-blue)'
+};
 
 /**
  * Generate the webview HTML content
@@ -156,10 +189,15 @@ async function getWebviewContent(
     syncStatus: { status: string; message: string },
     goals: { activeGoals: any[]; completedToday: number; streakDays: number; totalCompleted: number },
     session: ReturnType<typeof getCurrentSession>,
-    version: string | null
+    version: string | null,
+    personaResult: PersonaDetectionResult | null
 ): Promise<string> {
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthColor = isHealthy ? '#4CAF50' : (health.brokenSynapses > 5 ? '#F44336' : '#FF9800');
+    
+    // Get persona accent color
+    const persona = personaResult?.persona;
+    const personaAccent = persona ? personaAccentMap[persona.id] || '#2aa198' : '#2aa198';
     
     // Logo URI
     const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
@@ -170,6 +208,8 @@ async function getWebviewContent(
     // Build memory file breakdown
     const memoryCategories = await buildMemoryBreakdownAsync();
     const memoryBreakdown = buildMemoryBreakdown(memoryCategories);
+    
+    const hasIssues = !isHealthy || health.brokenSynapses > 0;
     
     return `<!DOCTYPE html>
 <html lang="en">
@@ -188,6 +228,8 @@ async function getWebviewContent(
             --success: #4CAF50;
             --warning: #FF9800;
             --error: #F44336;
+            --premium: ${personaAccent};
+            --persona-accent: ${personaAccent};
         }
         
         * {
@@ -273,6 +315,27 @@ async function getWebviewContent(
         
         .btn-secondary:hover {
             background: var(--vscode-button-secondaryHoverBackground);
+        }
+        
+        .btn-accent {
+            background: var(--persona-accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            filter: brightness(1.1);
+            background: var(--persona-accent);
+        }
+        
+        .btn-fix {
+            background: linear-gradient(135deg, var(--persona-accent), color-mix(in srgb, var(--persona-accent) 80%, var(--success)));
+            color: white;
+            font-weight: 500;
+        }
+        
+        .btn-fix:hover {
+            filter: brightness(1.1);
+            background: linear-gradient(135deg, var(--persona-accent), color-mix(in srgb, var(--persona-accent) 80%, var(--success)));
         }
         
         .grid {
@@ -605,13 +668,14 @@ async function getWebviewContent(
                 </div>
             </div>
             <div class="header-actions">
-                <button class="btn btn-secondary" onclick="refresh()">
+                ${hasIssues ? `<button class="btn btn-fix" onclick="cmd('deepBrainQA')">🔧 Fix Issues</button>` : ''}
+                <button class="btn btn-accent" onclick="refresh()">
                     🔄 Refresh
                 </button>
                 <button class="btn btn-secondary" onclick="cmd('runDream')">
                     💭 Dream
                 </button>
-                <button class="btn btn-primary" onclick="cmd('runAudit')">
+                <button class="btn btn-secondary" onclick="cmd('runAudit')">
                     🔍 Audit
                 </button>
                 <button class="btn btn-secondary" onclick="cmd('selfActualize')">

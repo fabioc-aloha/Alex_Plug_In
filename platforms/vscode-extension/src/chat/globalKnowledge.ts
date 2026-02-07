@@ -659,6 +659,159 @@ return res.status(404).json({
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
+        },
+        {
+            id: 'GK-starter-problem-solving',
+            filename: 'GK-starter-problem-solving.md',
+            title: 'Problem Solving Framework',
+            category: 'debugging',
+            tags: ['debugging', 'problem-solving', '5-whys', 'rubber-duck', 'root-cause', 'starter'],
+            content: `# Problem Solving Framework
+
+**ID**: GK-starter-problem-solving
+**Category**: debugging
+**Tags**: debugging, problem-solving, 5-whys, rubber-duck, root-cause, starter
+**Source**: Alex Starter Pack
+**Created**: ${createdAt}
+
+---
+
+## The Rubber Duck Method
+
+When stuck, explain the problem out loud (or in writing):
+
+1. **Describe what should happen**
+2. **Describe what actually happens**
+3. **Walk through the code step by step**
+4. **The answer often emerges mid-explanation**
+
+> The duck doesn't need to answer. The act of explaining reveals what you missed.
+
+## 5 Whys Root Cause Analysis
+
+Keep asking "Why?" until you reach the systemic issue:
+
+| Level | Question | Example |
+|-------|----------|---------|
+| 1 | Why did the API fail? | Database timeout |
+| 2 | Why did the database timeout? | Query took 30 seconds |
+| 3 | Why did the query take 30 seconds? | No index on user_id |
+| 4 | Why is there no index? | Not added during migration |
+| 5 | Why wasn't it caught? | No query performance tests |
+
+**Root cause**: Missing performance testing → Add query performance checks to CI.
+
+## Problem-Solving Questions
+
+### About the Symptom
+- What exactly is happening vs. what should happen?
+- When did this last work correctly?
+- What changed since then?
+
+### About the Context
+- Can you reproduce it reliably?
+- Does it happen in all environments?
+- Does it affect all users or just some?
+
+### About Assumptions
+- Have you verified that value is what you expect?
+- Are you sure that code path is being executed?
+- What are you assuming that might not be true?
+
+## Fix + Prevent Pattern
+
+1. **Immediate**: Stop the bleeding (hotfix)
+2. **Permanent**: Fix the root cause
+3. **Prevention**: Add tests/alerts to prevent recurrence
+
+---
+
+> 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
+`
+        },
+        {
+            id: 'GK-starter-cognitive-communication',
+            filename: 'GK-starter-cognitive-communication.md',
+            title: 'Cognitive Communication',
+            category: 'communication',
+            tags: ['cognitive-load', 'communication', 'summarize', 'chunking', 'teaching', 'starter'],
+            content: `# Cognitive Communication
+
+**ID**: GK-starter-cognitive-communication
+**Category**: communication
+**Tags**: cognitive-load, communication, summarize, chunking, teaching, starter
+**Source**: Alex Starter Pack
+**Created**: ${createdAt}
+
+---
+
+## The Cognitive Load Rule
+
+**Working memory: 4±1 items.** Exceed this and comprehension drops.
+
+| High Cognitive Load | Low Cognitive Load |
+|---------------------|-------------------|
+| Wall of text | Headers + bullets |
+| Multiple concepts at once | One at a time |
+| Technical jargon | Plain language first |
+| Deep nesting | Flat structure |
+| No context | Summary first |
+
+## Summarize First Pattern
+
+Always lead with the conclusion:
+
+\`\`\`markdown
+## Summary
+[2-3 sentences answering the core question]
+
+## Details
+[Only if they ask for more]
+
+## Implementation
+[Only if they need specifics]
+\`\`\`
+
+**Anti-pattern**: Building up to the answer. Say the answer first, then explain.
+
+## Chunking for Comprehension
+
+Break large responses into digestible pieces:
+
+1. **Group related items** (categories, themes)
+2. **Limit to 3-5 chunks** per level
+3. **Use visual hierarchy** (headers, bullets, tables)
+4. **Pause between chunks** — check understanding
+
+## The 3-3-3 Rule
+
+- **3 sentences** for the summary
+- **3 examples** to illustrate
+- **3 minutes** before checking: "Does this make sense so far?"
+
+## Progressive Disclosure
+
+| Level | Contains | When to Use |
+|-------|----------|-------------|
+| 1. Summary | Core answer | Always first |
+| 2. Details | How it works | If they ask "how?" |
+| 3. Implementation | Code/steps | If they need to do it |
+
+**Ask before going deeper**: "Want me to show you how this works?"
+
+## Overload Signals & Responses
+
+| Signal | What to Do |
+|--------|------------|
+| "I'm confused" | Stop, simplify, restart |
+| Repeated questions | You skipped something |
+| Frustration | Acknowledge, slow down |
+| Silence | Check in: "Still with me?" |
+
+---
+
+> 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
+`
         }
     ];
 }

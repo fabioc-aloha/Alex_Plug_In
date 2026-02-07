@@ -62,6 +62,11 @@
         "icon": "$(pulse)"
       },
       {
+        "command": "alex.deepBrainQA",
+        "title": "Alex: Deep Brain QA (Fix Issues)",
+        "icon": "$(tools)"
+      },
+      {
         "command": "alex.upgrade",
         "title": "Alex: Upgrade",
         "icon": "$(arrow-up)"
@@ -200,6 +205,11 @@
         "command": "alex.openHealthDashboard",
         "title": "Alex: Health Dashboard",
         "icon": "$(pulse)"
+      },
+      {
+        "command": "alex.openMemoryDashboard",
+        "title": "Alex: Memory Architecture (Premium)",
+        "icon": "$(symbol-structure)"
       },
       {
         "command": "alex.runAudit",

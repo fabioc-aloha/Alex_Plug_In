@@ -123,6 +123,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "healthDashboard":
           vscode.commands.executeCommand("alex.openHealthDashboard");
           break;
+        case "memoryDashboard":
+          vscode.commands.executeCommand("alex.openMemoryDashboard");
+          break;
         case "runAudit":
           vscode.commands.executeCommand("alex.runAudit");
           break;
@@ -1157,6 +1160,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 <div class="action-group-label">SYSTEM</div>
+                <button class="action-btn premium" onclick="cmd('memoryDashboard')" title="Premium: View cognitive memory architecture">
+                    <span class="action-icon">🧠</span>
+                    <span class="action-text">Memory Architecture</span>
+                    <span class="premium-badge">⭐</span>
+                </button>
                 <button class="action-btn" onclick="cmd('exportM365')" title="Package knowledge for M365 Copilot">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>

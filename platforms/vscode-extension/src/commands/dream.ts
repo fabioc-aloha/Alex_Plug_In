@@ -86,10 +86,9 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
     if (!silent && dreamResult && reportPath) {
         if (dreamResult.brokenCount > 0) {
             const result = await vscode.window.showWarningMessage(
-                `⚠️ Dream Protocol found ${dreamResult.brokenCount} broken synapse${dreamResult.brokenCount > 1 ? 's' : ''}!\n\n` +
+                `🧠 Dream Protocol: ${dreamResult.brokenCount} broken synapse${dreamResult.brokenCount > 1 ? 's' : ''} found\n\n` +
                 `${dreamResult.repairedCount > 0 ? `✅ Auto-repaired: ${dreamResult.repairedCount}\n` : ''}` +
-                `❌ Need manual repair: ${dreamResult.brokenCount}\n\n` +
-                'Review the report for details on broken connections.',
+                `❌ Need manual repair: ${dreamResult.brokenCount}`,
                 'View Report',
                 'Close'
             );
@@ -100,9 +99,9 @@ export async function runDreamProtocol(context: vscode.ExtensionContext, options
         } else {
             const healthStatus = dreamResult.totalSynapses > 50 ? 'excellent' : dreamResult.totalSynapses > 20 ? 'good' : 'developing';
             await vscode.window.showInformationMessage(
-                `✅ Neural network is healthy!\n\n` +
-                `📊 ${dreamResult.totalFiles} memory files • ${dreamResult.totalSynapses} synapses • ${healthStatus}` +
-                `${dreamResult.repairedCount > 0 ? ` • ${dreamResult.repairedCount} auto-repaired` : ''}`,
+                `🧠 Dream Protocol: Architecture healthy!\n\n` +
+                `📊 ${dreamResult.totalFiles} files · ${dreamResult.totalSynapses} synapses · ${healthStatus}` +
+                `${dreamResult.repairedCount > 0 ? ` · ${dreamResult.repairedCount} auto-repaired` : ''}`,
                 'OK'
             );
         }

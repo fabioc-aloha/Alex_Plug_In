@@ -1,6 +1,6 @@
 # 🚀 Alex Cognitive Architecture
 
-![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
+![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 

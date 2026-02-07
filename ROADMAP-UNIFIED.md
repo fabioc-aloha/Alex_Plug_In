@@ -174,11 +174,17 @@ flowchart LR
 | GitHub Issue → Alex Task        |  Heir  |   3h   |   High   |
 | PR Review Assistant             |  Heir  |   4h   |   High   |
 | M365 Agent Export               |  Heir  |   4h   |   High   |
+| M365 → GK Bridge                |  Heir  |   3h   |  Medium  |
 | Configurable GK Repo Location   |  Heir  |   2h   |  Medium  |
 | Versioned schema with migration | Master |   1d   |  Medium  |
 | Generated heir from Master      | Master |   1d   |  Medium  |
 
 **Note on M365 Export**: This creates a OneDrive-based agent for M365 Copilot consumption.
+
+**Note on M365 → GK Bridge**: The M365 heir (declarative agent) cannot directly write to Global Knowledge. This bridge enables learnings from M365 to flow into GK via:
+1. **User-mediated**: M365 generates insights → user saves to OneDrive `Alex-Memory/` → VS Code heir detects & promotes to GK
+2. **OneDrive sync script**: Scheduled scan of OneDrive `Alex-Memory/insights/` → auto-commit to GK repo
+3. **Future**: Microsoft's EmbeddedKnowledge capability may enable two-way sync
 
 **Target Release**: Q2 2026
 
@@ -758,21 +764,35 @@ Deploy Alex as a Community Agent that:
 | **OneDrive "Mailbox"**   | ✅ Possible now  | Manual - user triggers M365 to check       |
 | **Worker Agents** (v1.6) | 🔜 Preview       | Agent-to-agent within M365                 |
 | **Interpreter Agent**    | ✅ GA            | Real-time translation, 9 languages         |
+| **EmbeddedKnowledge**    | 🔜 Coming        | May enable bidirectional M365 ↔ GK sync    |
 | **Copilot Agent API**    | ❌ Doesn't exist | Would enable VS Code → M365 calls          |
 | **Power Automate**       | ⚠️ Limited       | Needs Premium, limited Copilot actions     |
 | **Copilot Memory**       | 🔓 **UNLOCKED**  | VS Code 1.109 - GitHub cloud sync          |
+
+### M365 Heir → Global Knowledge (Current Limitation)
+
+The M365 heir is a **declarative agent** that can READ from OneDrive but cannot WRITE to arbitrary locations. Learnings from M365 Copilot cannot directly flow to Global Knowledge.
+
+**Workarounds**:
+1. **User-mediated**: M365 Alex generates insight → user pastes to OneDrive `Alex-Memory/insights/` → VS Code detects & promotes to GK
+2. **OneDrive sync script**: VS Code scheduled scan of OneDrive folder → auto-commit new insights to GK repo
+3. **Future EmbeddedKnowledge**: Microsoft feature may enable two-way grounding files
 
 ### OneDrive Sync Pattern (Ready Now)
 
 ```
 VS Code Alex writes → OneDrive/Alex-Memory/sync/
 M365 Alex reads  ← OneDrive/Alex-Memory/sync/
+
+M365 Alex generates → user pastes to OneDrive/Alex-Memory/insights/
+VS Code Alex scans ← OneDrive/Alex-Memory/insights/ → promotes to GK
 ```
 
 Useful for:
 - Sharing learnings between platforms
 - 🔓 "Leave a message for my other self" workflow **(UNLOCKED via Copilot Memory)**
 - 🔓 Profile sync (same user on both platforms) **(UNLOCKED via Copilot Memory)**
+- 🆕 M365 → GK insight promotion (via OneDrive bridge script)
 
 > **See:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md §Execution Modes](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md) for full breakdown of Local/Background/Cloud modes.
 

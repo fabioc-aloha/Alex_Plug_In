@@ -34,6 +34,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Setup instructions for new users
   - Cross-project knowledge sharing foundation
 
+- **📦 5 Universal Starter Patterns**
+  - Code Quality Principles — SOLID, naming, complexity
+  - Documentation Structure — README templates, API docs
+  - Error Handling — try/catch, logging, graceful degradation
+  - Problem Solving Framework — Rubber Duck + 5 Whys methods ✨
+  - Cognitive Communication — Summarize-first, cognitive load management ✨
+
 - **🧠 Working Memory Architecture Refinement**
   - Explicit 7-slot working memory table (P1-P7)
   - P6 special rule: Infer from Pomodoro timer goal or session objective

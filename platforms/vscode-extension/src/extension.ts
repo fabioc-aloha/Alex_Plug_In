@@ -54,6 +54,7 @@ import {
 import { isWorkspaceProtected } from "./shared/utils";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
+import { registerMemoryDashboard } from "./views/memoryDashboard";
 import * as telemetry from "./shared/telemetry";
 
 // Operation lock to prevent concurrent modifications
@@ -139,6 +140,9 @@ export function activate(context: vscode.ExtensionContext) {
   // Register health dashboard webview
   registerHealthDashboard(context);
 
+  // Register memory architecture dashboard (premium)
+  registerMemoryDashboard(context);
+
   // === UNCONSCIOUS MIND: Start background sync ===
   // This creates Alex's transparent knowledge backup system
   startBackgroundSync(context);
@@ -223,6 +227,71 @@ export function activate(context: vscode.ExtensionContext) {
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
+          throw err;
+        }
+      });
+    },
+  );
+
+  // Deep Brain QA - comprehensive health check, GK sync, and synapse healing
+  let deepBrainQADisposable = vscode.commands.registerCommand(
+    "alex.deepBrainQA",
+    async () => {
+      const done = telemetry.logTimed("command", "deepBrainQA");
+      await withOperationLock("Deep Brain QA", async () => {
+        try {
+          await vscode.window.withProgress(
+            {
+              location: vscode.ProgressLocation.Notification,
+              title: "🧠 Deep Brain QA - Comprehensive Architecture Health Check",
+              cancellable: false,
+            },
+            async (progress) => {
+              // Phase 1: Run Dream Protocol (synapse validation + repair)
+              progress.report({ message: "Phase 1/3: Running Dream Protocol..." });
+              const dreamResult = await runDreamProtocol(context, { silent: true });
+              
+              // Phase 2: Sync Global Knowledge
+              progress.report({ message: "Phase 2/3: Syncing Global Knowledge..." });
+              const syncResult = await syncWithCloud();
+              
+              // Phase 3: Final health check
+              progress.report({ message: "Phase 3/3: Final health validation..." });
+              clearHealthCache();
+              await updateStatusBar(context, true);
+              
+              // Build result message
+              const results: string[] = [];
+              if (dreamResult) {
+                if (dreamResult.brokenCount === 0) {
+                  results.push(`✅ Synapses: ${dreamResult.totalSynapses} healthy`);
+                } else {
+                  results.push(`⚠️ Synapses: ${dreamResult.brokenCount} broken, ${dreamResult.repairedCount} repaired`);
+                }
+              }
+              results.push(syncResult.success ? `✅ GK Sync: ${syncResult.message}` : `⚠️ GK Sync: ${syncResult.message}`);
+              
+              const overallSuccess = dreamResult?.brokenCount === 0 && syncResult.success;
+              const title = overallSuccess 
+                ? "🧠 Deep Brain QA Complete - Architecture Healthy!" 
+                : "🧠 Deep Brain QA Complete - Some Issues Remain";
+              
+              const viewReport = dreamResult?.reportPath ? "View Report" : undefined;
+              const selection = await vscode.window.showInformationMessage(
+                `${title}\n\n${results.join('\n')}`,
+                ...(viewReport ? [viewReport] : []),
+              );
+              
+              if (selection === "View Report" && dreamResult?.reportPath) {
+                const doc = await vscode.workspace.openTextDocument(dreamResult.reportPath);
+                await vscode.window.showTextDocument(doc);
+              }
+            },
+          );
+          done(true);
+        } catch (err) {
+          done(false, err instanceof Error ? err : new Error(String(err)));
+          vscode.window.showErrorMessage(`Deep Brain QA failed: ${err}`);
           throw err;
         }
       });
@@ -1308,6 +1377,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(initDisposable);
   context.subscriptions.push(resetDisposable);
   context.subscriptions.push(dreamDisposable);
+  context.subscriptions.push(deepBrainQADisposable);
   context.subscriptions.push(upgradeDisposable);
   context.subscriptions.push(completeMigrationDisposable);
   context.subscriptions.push(showMigrationDisposable);
