@@ -34,6 +34,12 @@
             "type": "modifies",
             "strength": 0.75,
             "reason": "Adds GK sync to dream checklist"
+        },
+        {
+            "target": ".github/skills/rubber-duck-debugging/SKILL.md",
+            "type": "accelerates",
+            "strength": 0.7,
+            "reason": "Problem Solving starter pattern includes rubber duck method"
         }
     ],
     "triggers": [
