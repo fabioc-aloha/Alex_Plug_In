@@ -31,6 +31,10 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
     readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
     private rootPath: string | undefined;
+    
+    // Cache for file listings (avoid repeated disk reads)
+    private cache = new Map<string, { data: MemoryTreeItemData[]; timestamp: number }>();
+    private readonly CACHE_TTL = 30000; // 30 seconds
 
     constructor() {
         this.rootPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -38,7 +42,20 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
 
     refresh(): void {
         this.rootPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        this.cache.clear(); // Clear cache on explicit refresh
         this._onDidChangeTreeData.fire();
+    }
+
+    private getCached(key: string): MemoryTreeItemData[] | null {
+        const entry = this.cache.get(key);
+        if (entry && Date.now() - entry.timestamp < this.CACHE_TTL) {
+            return entry.data;
+        }
+        return null;
+    }
+
+    private setCache(key: string, data: MemoryTreeItemData[]): void {
+        this.cache.set(key, { data, timestamp: Date.now() });
     }
 
     getTreeItem(element: MemoryTreeItemData): vscode.TreeItem {
@@ -161,6 +178,10 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
     }
 
     private async getSkillFiles(): Promise<MemoryTreeItemData[]> {
+        const cacheKey = 'skills';
+        const cached = this.getCached(cacheKey);
+        if (cached) { return cached; }
+        
         if (!this.rootPath) { return []; }
         const skillsDir = path.join(this.rootPath, '.github', 'skills');
         if (!await fs.pathExists(skillsDir)) { return []; }
@@ -180,6 +201,7 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
                 });
             }
         }
+        this.setCache(cacheKey, items);
         return items;
     }
 
@@ -220,6 +242,10 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
     }
 
     private async getGlobalFiles(subfolder: 'patterns' | 'insights'): Promise<MemoryTreeItemData[]> {
+        const cacheKey = `global-${subfolder}`;
+        const cached = this.getCached(cacheKey);
+        if (cached) { return cached; }
+        
         const gkPath = getGlobalKnowledgePath(subfolder);
         if (!await fs.pathExists(gkPath)) { return []; }
 
@@ -227,15 +253,21 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
             .filter(f => f.endsWith('.md'))
             .sort();
 
-        return files.map(f => ({
+        const items = files.map(f => ({
             type: 'file' as TreeItemType,
             label: f.replace(/\.md$/, ''),
             filePath: path.join(gkPath, f),
             icon: subfolder === 'patterns' ? 'symbol-structure' : 'lightbulb',
         }));
+        this.setCache(cacheKey, items);
+        return items;
     }
 
     private async listFiles(relDir: string, glob: string): Promise<MemoryTreeItemData[]> {
+        const cacheKey = `list-${relDir}`;
+        const cached = this.getCached(cacheKey);
+        if (cached) { return cached; }
+        
         if (!this.rootPath) { return []; }
         const dirPath = path.join(this.rootPath, relDir);
         if (!await fs.pathExists(dirPath)) { return []; }
@@ -248,12 +280,14 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
             })
             .sort();
 
-        return files.map(f => ({
+        const items = files.map(f => ({
             type: 'file' as TreeItemType,
             label: f,
             filePath: path.join(dirPath, f),
             icon: 'file-text',
         }));
+        this.setCache(cacheKey, items);
+        return items;
     }
 }
 

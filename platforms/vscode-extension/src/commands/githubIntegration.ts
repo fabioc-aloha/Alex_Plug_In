@@ -8,6 +8,10 @@
 import * as vscode from 'vscode';
 import { createGoal, LearningGoal } from './goals';
 
+// Rate limit tracking
+let rateLimitRemaining = 5000;
+let rateLimitReset = 0;
+
 export interface GitHubIssue {
     number: number;
     title: string;
@@ -23,6 +27,31 @@ export interface GitHubIssue {
 export interface GitHubRepo {
     owner: string;
     repo: string;
+}
+
+/**
+ * Check if rate limited and show user-friendly message
+ */
+function checkRateLimit(): boolean {
+    if (rateLimitRemaining <= 0 && Date.now() < rateLimitReset) {
+        const resetDate = new Date(rateLimitReset);
+        const minutes = Math.ceil((rateLimitReset - Date.now()) / 60000);
+        vscode.window.showWarningMessage(
+            `GitHub API rate limited. Resets in ${minutes} minute(s) at ${resetDate.toLocaleTimeString()}.`
+        );
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Update rate limit info from response headers
+ */
+function updateRateLimitFromResponse(response: Response): void {
+    const remaining = response.headers.get('x-ratelimit-remaining');
+    const reset = response.headers.get('x-ratelimit-reset');
+    if (remaining) { rateLimitRemaining = parseInt(remaining, 10); }
+    if (reset) { rateLimitReset = parseInt(reset, 10) * 1000; } // Convert to ms
 }
 
 /**
@@ -85,6 +114,8 @@ export async function fetchGitHubIssues(
         limit?: number;
     } = {}
 ): Promise<GitHubIssue[]> {
+    if (checkRateLimit()) { return []; }
+    
     const session = await getGitHubSession();
     if (!session) {
         return [];
@@ -105,6 +136,13 @@ export async function fetchGitHubIssues(
                 'User-Agent': 'Alex-Cognitive-Architecture'
             }
         });
+
+        updateRateLimitFromResponse(response);
+        
+        if (response.status === 403 && rateLimitRemaining === 0) {
+            checkRateLimit();
+            return [];
+        }
 
         if (!response.ok) {
             throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
@@ -217,9 +255,9 @@ async function importFromRepo(repo: GitHubRepo): Promise<LearningGoal[]> {
             goalData.targetType!,
             goalData.targetCount!,
             goalData.unit!,
-            goalData.description
+            goalData.description,
+            goalData.tags
         );
-        // Add tags manually since createGoal doesn't support them
         createdGoals.push(goal);
     }
 
@@ -268,6 +306,8 @@ export async function fetchGitHubPRs(
     repo: GitHubRepo,
     options: { state?: 'open' | 'closed' | 'all'; limit?: number } = {}
 ): Promise<GitHubPullRequest[]> {
+    if (checkRateLimit()) { return []; }
+    
     const session = await getGitHubSession();
     if (!session) {
         return [];
@@ -286,6 +326,13 @@ export async function fetchGitHubPRs(
             }
         });
 
+        updateRateLimitFromResponse(response);
+        
+        if (response.status === 403 && rateLimitRemaining === 0) {
+            checkRateLimit();
+            return [];
+        }
+
         if (!response.ok) {
             throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
         }
@@ -301,6 +348,8 @@ export async function fetchGitHubPRs(
  * Fetch PR diff
  */
 export async function fetchPRDiff(repo: GitHubRepo, prNumber: number): Promise<string> {
+    if (checkRateLimit()) { return ''; }
+    
     const session = await getGitHubSession();
     if (!session) {
         return '';
@@ -316,6 +365,13 @@ export async function fetchPRDiff(repo: GitHubRepo, prNumber: number): Promise<s
                 'User-Agent': 'Alex-Cognitive-Architecture'
             }
         });
+
+        updateRateLimitFromResponse(response);
+        
+        if (response.status === 403 && rateLimitRemaining === 0) {
+            checkRateLimit();
+            return '';
+        }
 
         if (!response.ok) {
             throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);

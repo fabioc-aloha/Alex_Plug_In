@@ -118,7 +118,8 @@ export async function createGoal(
     targetType: 'daily' | 'weekly' | 'custom' = 'daily',
     targetCount: number = 1,
     unit: string = 'sessions',
-    description?: string
+    description?: string,
+    tags?: string[]
 ): Promise<LearningGoal> {
     const data = await loadGoals();
     
@@ -131,7 +132,8 @@ export async function createGoal(
         currentCount: 0,
         unit,
         createdAt: new Date().toISOString(),
-        dueAt: calculateDueDate(targetType)
+        dueAt: calculateDueDate(targetType),
+        tags
     };
     
     data.goals.push(goal);

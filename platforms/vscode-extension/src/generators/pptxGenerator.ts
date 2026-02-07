@@ -476,17 +476,26 @@ function addTwoColumnSlide(pres: pptxgen, content: SlideContent): void {
 
 /**
  * Parse markdown content into slide structure
+ * Handles: # → title, ## → subtitle/section, - → bullets, > → notes
+ * Skips: fenced code blocks (```), inline code
  */
 export function parseMarkdownToSlides(markdown: string): SlideContent[] {
     const slides: SlideContent[] = [];
     const sections = markdown.split(/^---$/m).filter(s => s.trim());
 
     for (const section of sections) {
-        const lines = section.trim().split('\n');
+        // Remove fenced code blocks before parsing
+        const cleanedSection = section.replace(/```[\s\S]*?```/g, '');
+        const lines = cleanedSection.trim().split('\n');
         let currentSlide: SlideContent = { type: 'content', bullets: [] };
 
         for (const line of lines) {
             const trimmed = line.trim();
+
+            // Skip empty lines and inline code remnants
+            if (!trimmed || trimmed.startsWith('`')) {
+                continue;
+            }
 
             if (trimmed.startsWith('# ')) {
                 // If this is the first slide and only a title, make it title slide
@@ -504,7 +513,8 @@ export function parseMarkdownToSlides(markdown: string): SlideContent[] {
                 }
             } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
                 currentSlide.bullets = currentSlide.bullets || [];
-                currentSlide.bullets.push(trimmed.replace(/^[-*]\s+/, ''));
+                // Remove inline code backticks from bullets
+                currentSlide.bullets.push(trimmed.replace(/^[-*]\s+/, '').replace(/`/g, ''));
             } else if (trimmed.startsWith('> ')) {
                 // Speaker notes
                 currentSlide.notes = (currentSlide.notes || '') + trimmed.replace(/^>\s+/, '') + '\n';
