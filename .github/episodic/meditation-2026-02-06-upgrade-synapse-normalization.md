@@ -90,7 +90,7 @@ const STRENGTH_MAP: Record<string, number> = {
 
 ## Synapses Strengthened
 
-- [heir-skill-promotion.instructions.md] (0.9, Enhanced, Forward) - "Added upgrade preservation documentation"
+- [.github/instructions/heir-skill-promotion.instructions.md] (0.9, Enhanced, Forward) - "Added upgrade preservation documentation"
 - [brain-qa/synapses.json] (0.8, Validates, Forward) - "Phase 5 validates synapse normalization"
 - [upgrade.ts] (0.95, Implements, Forward) - "normalizeSynapseFile() and normalizeAllSynapses()"
 - [SYNAPSE-SCHEMA.md] (0.85, References, Forward) - "Schema defines normalization target"

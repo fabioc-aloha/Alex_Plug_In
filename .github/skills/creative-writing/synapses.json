@@ -16,6 +16,13 @@
       "target": ".github/skills/academic-research/SKILL.md"
     },
     {
+      "bidirectional": true,
+      "reason": "Book project scaffolding and folder structure",
+      "type": "extends",
+      "strength": 0.75,
+      "target": ".github/skills/project-scaffolding/SKILL.md"
+    },
+    {
       "reason": "Reader experience and information pacing",
       "type": "applies",
       "strength": 0.65,
@@ -38,7 +45,11 @@
     "creative",
     "prose",
     "dialogue",
-    "worldbuilding"
+    "worldbuilding",
+    "book",
+    "novel",
+    "manuscript",
+    "chapter"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

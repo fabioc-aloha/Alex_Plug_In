@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.1] - 2026-02-07
+
+> **API Polish** — Tool discoverability, command UX, and Mermaid diagram quality
+
+### Added
+
+- **Tool Declarations**: `alex_focus_context` and `alex_heir_validation` now declared in `package.json` with full input schemas — visible in `#` tool picker
+- **Tool Tags**: All 13 tools tagged (`cognitive`, `knowledge`, `cloud`, `quality`, `productivity`) for better LLM tool selection
+- **Sample Requests**: All 24 slash commands now show example usage text in command palette autocomplete
+- **Disambiguation Examples**: Each routing category expanded to 6-7 examples for more accurate query routing to `@alex`
+
+### Changed
+
+- **Mermaid Skills**: Enhanced `markdown-mermaid`, `graphic-design`, and `ascii-art-alignment` skills with parse error prevention rules, reserved word documentation, and GitHub Pastel Palette v2
+- **Mermaid Diagrams**: Audited and fixed 15 of 32 diagram blocks across 4 architecture documents (em-dashes, reserved words, HTML tags, `style` placement)
+
+### Fixed
+
+- Broken synapse reference in meditation episodic record (incorrect `.instructions.md` path)
+
+---
+
 ## [5.0.0] - 2026-02-06
 
 > **Global Knowledge** — Cross-project knowledge sharing, persona-aware UX, premium branding

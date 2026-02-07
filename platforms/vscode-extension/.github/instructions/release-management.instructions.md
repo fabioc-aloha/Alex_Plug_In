@@ -10,6 +10,7 @@
 
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
+- [scripts/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 
 ---
 
@@ -209,16 +210,14 @@ code --install-extension alex-cognitive-architecture-<version>.vsix
 **⚠️ VSCE requires an Azure DevOps PAT, NOT a GitHub PAT!**
 
 ```powershell
-# Option 1: With saved credentials
-vsce publish
-
-# Option 2: With PAT directly
-vsce publish -p <AZURE_DEVOPS_PAT>
-
-# Option 3: Login first (saves credentials)
-vsce login fabioc-aloha
-# Then: vsce publish
+# RECOMMENDED: Use PAT directly (single command, no login needed)
+npx vsce publish --no-dependencies --pat <AZURE_DEVOPS_PAT>
 ```
+
+**Important:**
+- Do NOT use `vsce login` — PATs are single-use and login prompts interactively
+- Always use `--pat` flag directly with the publish command
+- Use `--no-dependencies` to skip npm dependency installation (faster)
 
 **Creating Azure DevOps PAT:**
 1. Go to [dev.azure.com](https://dev.azure.com)
@@ -227,7 +226,7 @@ vsce login fabioc-aloha
    - Organization: `All accessible organizations`
    - Scopes: **Marketplace** → **Manage**
 
-**Common Error:** `401 Unauthorized` = Wrong PAT type (GitHub vs Azure DevOps)
+**Common Error:** `401 Unauthorized` = Wrong PAT type (GitHub vs Azure DevOps) or expired PAT
 
 ### Phase 6: Post-Release
 

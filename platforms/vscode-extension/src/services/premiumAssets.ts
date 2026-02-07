@@ -26,6 +26,7 @@ export interface PremiumAssetSelection {
     bannerPath: string;         // Relative path from assets/
     bannerAlt: string;          // Alt text for banner
     featureHighlight: string;   // Current feature being highlighted
+    missionStatement?: string;  // Always shows "Mission: Elevate {{NOUN}}" when missionControl enabled
 }
 
 /**
@@ -62,8 +63,8 @@ const PREMIUM_BANNERS: BannerConfig[] = [
     },
     {
         path: 'premium/banner-premium-mission-control.svg',
-        alt: 'Your mission control for cross-project wisdom',
-        feature: 'Mission Control',
+        alt: 'Mission: Elevate your {{NOUN}} to new heights',
+        feature: 'Mission: Elevate {{NOUN}}',
         requiredFlag: 'missionControl'
     }
 ];
@@ -75,7 +76,8 @@ const DEFAULT_ASSETS: PremiumAssetSelection = {
     logoPath: 'logo.svg',
     bannerPath: 'banner.svg',
     bannerAlt: 'Strap a rocket to your back',
-    featureHighlight: 'none'
+    featureHighlight: 'none',
+    missionStatement: undefined
 };
 
 /**
@@ -93,11 +95,13 @@ let rotationIndex = 0;
  * 
  * @param flags - Current premium feature flags
  * @param rotate - If true, rotates through available premium banners
+ * @param bannerNoun - Optional persona-specific noun to replace {{NOUN}} placeholder (default: CODE)
  * @returns Asset selection for current context
  */
 export function getPremiumAssets(
     flags: PremiumFeatureFlags,
-    rotate: boolean = false
+    rotate: boolean = false,
+    bannerNoun: string = 'CODE'
 ): PremiumAssetSelection {
     // Get all enabled banners
     const enabledBanners = PREMIUM_BANNERS.filter(b => flags[b.requiredFlag]);
@@ -113,18 +117,28 @@ export function getPremiumAssets(
         selectedBanner = enabledBanners[rotationIndex % enabledBanners.length];
         rotationIndex++;
     } else {
-        // Priority: Global Knowledge > Cloud Sync > Cross-Project > Mission Control
+        // Priority: Global Knowledge > Cloud Sync > Cross-Project > Mission: Elevate
         selectedBanner = enabledBanners[0];
     }
     
     // Use premium logo if Global Knowledge is enabled
     const logoPath = flags.globalKnowledge ? GK_LOGO_PATH : DEFAULT_ASSETS.logoPath;
     
+    // Replace {{NOUN}} placeholder with persona-specific noun
+    const featureHighlight = selectedBanner.feature.replace('{{NOUN}}', bannerNoun);
+    const bannerAlt = selectedBanner.alt.replace('{{NOUN}}', bannerNoun);
+    
+    // Mission statement always appears when missionControl is enabled (not rotated)
+    const missionStatement = flags.missionControl 
+        ? `Mission: Elevate your ${bannerNoun} to new heights`
+        : undefined;
+    
     return {
         logoPath,
         bannerPath: selectedBanner.path,
-        bannerAlt: selectedBanner.alt,
-        featureHighlight: selectedBanner.feature
+        bannerAlt,
+        featureHighlight,
+        missionStatement
     };
 }
 

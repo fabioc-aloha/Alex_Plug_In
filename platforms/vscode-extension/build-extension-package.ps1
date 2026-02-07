@@ -80,6 +80,7 @@ $excludeItems = @(
     
     # Master-only skills (not for heirs)
     "skills\heir-curation",
+    "skills\master-alex-audit",
     
     # Assets that are repo-specific
     "assets\banner.svg"
@@ -139,6 +140,61 @@ if (-not $allPresent) {
 $fileCount = (Get-ChildItem -Path $ExtGitHub -Recurse -File).Count
 Write-Host "   Total files in extension .github/: $fileCount" -ForegroundColor Cyan
 
+# Step 4b: Personal data validation
+Write-Host "🔍 Step 4b: Scanning for personal data leakage..." -ForegroundColor Yellow
+
+$ForbiddenPatterns = @(
+    @{ Pattern = "Fabio\s+Correa|Fabio's"; Description = "Developer's full name" },
+    @{ Pattern = "correax@|fabiocorrea@"; Description = "Personal email pattern" },
+    @{ Pattern = "Charlotte"; Description = "Personal location reference" },
+    @{ Pattern = "Alex\s*\+\s*Fabio"; Description = "Personal collaboration credit" },
+    @{ Pattern = "The user's name is \*\*[^*]+\*\*"; Description = "Hardcoded user name" }
+)
+
+$violations = @()
+$heirFiles = Get-ChildItem $ExtGitHub -Recurse -File -Include "*.md", "*.json" | 
+Where-Object { $_.Name -ne "BUILD-MANIFEST.json" }
+
+foreach ($file in $heirFiles) {
+    $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
+    if (-not $content) { continue }
+    
+    $relativePath = $file.FullName.Substring($ExtGitHub.Length + 1) -replace '\\', '/'
+    
+    foreach ($forbidden in $ForbiddenPatterns) {
+        if ($content -match $forbidden.Pattern) {
+            $matchedText = $matches[0]
+            $violations += @{
+                File    = $relativePath
+                Pattern = $forbidden.Description
+                Match   = if ($matchedText.Length -gt 50) { $matchedText.Substring(0, 50) + "..." } else { $matchedText }
+            }
+        }
+    }
+}
+
+if ($violations.Count -gt 0) {
+    Write-Host ""
+    Write-Host "   ❌ PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
+    Write-Host ""
+    
+    foreach ($v in $violations) {
+        Write-Host "   📁 $($v.File)" -ForegroundColor Yellow
+        Write-Host "      Pattern: $($v.Pattern)" -ForegroundColor Gray
+        Write-Host "      Found:   '$($v.Match)'" -ForegroundColor Red
+        Write-Host ""
+    }
+    
+    Write-Host "   Fix: Edit the source files to remove personal data," -ForegroundColor Yellow
+    Write-Host "        or add files to exclusion list if they shouldn't be in heir." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Error "Build aborted: $($violations.Count) personal data violation(s) found"
+    exit 1
+}
+else {
+    Write-Host "   ✓ No personal data found - heir is clean" -ForegroundColor Green
+}
+
 # Step 5: Run npm compile
 Write-Host "🔨 Step 5: Compiling TypeScript..." -ForegroundColor Yellow
 Push-Location $ExtensionDir
@@ -190,4 +246,5 @@ Write-Host "Next steps:" -ForegroundColor White
 Write-Host "  1. Test with F5 (Extension Development Host)" -ForegroundColor Gray
 Write-Host "  2. Install .vsix in sandbox: code --install-extension <file>.vsix" -ForegroundColor Gray
 Write-Host "  3. Test Alex: Initialize in a fresh workspace" -ForegroundColor Gray
+Write-Host "  4. Run 'Alex: Validate Heir (LLM Curation Check)' for semantic validation" -ForegroundColor Gray
 Write-Host ""

@@ -28,7 +28,7 @@ const ESSENTIAL_SETTINGS: Record<string, unknown> = {
   "chat.useNestedAgentsMdFiles": true,
   // Auto-include copilot-instructions.md - verified in docs
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  // Skills auto-loading location - enables 65 Alex skills in chat
+  // Skills auto-loading location - enables 75 Alex skills in chat
   "chat.agentSkillsLocations": [".github/skills"],
 };
 

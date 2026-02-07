@@ -92,18 +92,18 @@ flowchart LR
 
 ## 📊 Quick Status
 
-| Version       | Focus                               | Paradigm Contribution     | Status              |
-| ------------- | ----------------------------------- | ------------------------- | ------------------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness                    | Foundation                | ✅ Complete          |
-| v4.0.x        | Trust (CAIR/CSR, Creative Latitude) | Relationship Trust        | ✅ Complete          |
-| v4.1.0        | Skill Expansion (68 → 71 skills)    | Capability Breadth        | ✅ Complete          |
-| v4.2.x        | UX Polish & Cross-Platform Sync     | Friction Reduction        | ✅ Complete          |
-| **v4.3.0**    | **Architecture Robustness**         | **Resilience**            | ✅ Complete          |
-| **v5.0.0**    | **Team Scaling (Global Knowledge)** | **Organizational Memory** | ✅ Complete          |
-| **v5.1.0**    | **Platform Integration**            | **Ecosystem Reach**       | 📋 Planned (Q2 2026) |
-| **v5.2.0**    | **UX Excellence**                   | **Partnership Fluency**   | 📋 Planned (Q2 2026) |
-| **v5.3.0**    | **Enterprise Readiness**            | **Trust at Scale**        | 📋 Planned (Q2 2026) |
-| **v5.5.0**    | **Enterprise Systems Integration**  | **Deep Orchestration**    | 📋 Planned (Q3 2026) |
+| Version       | Focus                                     | Paradigm Contribution             | Status                 |
+| ------------- | ----------------------------------------- | --------------------------------- | ---------------------- |
+| v3.6.0-v3.9.0 | Dawn → Awareness                          | Foundation                        | ✅ Complete             |
+| v4.0.x        | Trust (CAIR/CSR, Creative Latitude)       | Relationship Trust                | ✅ Complete             |
+| v4.1.0        | Skill Expansion (68 → 71 skills)          | Capability Breadth                | ✅ Complete             |
+| v4.2.x        | UX Polish & Cross-Platform Sync           | Friction Reduction                | ✅ Complete             |
+| **v4.3.0**    | **Architecture Robustness**               | **Resilience**                    | ✅ Complete             |
+| **v5.0.0**    | **Team Scaling (Global Knowledge)**       | **Organizational Memory**         | ✅ Complete             |
+| **v5.1.0**    | **Platform Integration & API Excellence** | **Ecosystem Reach + API Mastery** | 📋 Planned (Q1-Q2 2026) |
+| **v5.2.0**    | **UX Excellence**                         | **Partnership Fluency**           | 📋 Planned (Q2 2026)    |
+| **v5.3.0**    | **Enterprise Readiness**                  | **Trust at Scale**                | 📋 Planned (Q2 2026)    |
+| **v5.5.0**    | **Enterprise Systems Integration**        | **Deep Orchestration**            | 📋 Planned (Q3 2026)    |
 
 ---
 
@@ -163,30 +163,599 @@ flowchart LR
 
 **Target Release**: Q1 2026 (Feb-Mar)
 
-### v5.1.0 — Platform Integration
+### v5.1.0 — Platform Integration & API Excellence
 
-**Theme**: Connect Alex to the developer ecosystem.
+**Theme**: Connect Alex to the developer ecosystem AND maximize the stable VS Code API surface area.
 
-**Paradigm Connection**: Expand orchestration reach. The partner should connect to where work happens — GitHub, M365, DevOps. Ecosystem integration multiplies the symbiosis value.
+**Paradigm Connection**: Expand orchestration reach. The partner should connect to where work happens — GitHub, M365, DevOps — while polishing every touchpoint with the VS Code platform. Ecosystem integration multiplied by API excellence creates a compound improvement.
 
-| Task                            | Owner  | Effort | Priority |
-| ------------------------------- | :----: | :----: | :------: |
-| GitHub Issue → Alex Task        |  Heir  |   3h   |   High   |
-| PR Review Assistant             |  Heir  |   4h   |   High   |
-| M365 Agent Export               |  Heir  |   4h   |   High   |
-| M365 → GK Bridge                |  Heir  |   3h   |  Medium  |
-| Configurable GK Repo Location   |  Heir  |   2h   |  Medium  |
-| Versioned schema with migration | Master |   1d   |  Medium  |
-| Generated heir from Master      | Master |   1d   |  Medium  |
+**Sources**: [VSCODE-SOURCE-INTEGRATION-ANALYSIS.md](alex_docs/vscode/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md), [VSCODE-COPILOT-API-ANALYSIS.md](alex_docs/vscode/VSCODE-COPILOT-API-ANALYSIS.md), [SEMANTIC-SKILL-GRAPH.md](alex_docs/architecture/SEMANTIC-SKILL-GRAPH.md), [VSCODE-CONTRIBUTION-PLAN.md](alex_docs/vscode/VSCODE-CONTRIBUTION-PLAN.md)
 
-**Note on M365 Export**: This creates a OneDrive-based agent for M365 Copilot consumption.
+#### A. Stable API Quick Wins (from API Analysis — all Marketplace-safe)
 
-**Note on M365 → GK Bridge**: The M365 heir (declarative agent) cannot directly write to Global Knowledge. This bridge enables learnings from M365 to flow into GK via:
-1. **User-mediated**: M365 generates insights → user saves to OneDrive `Alex-Memory/` → VS Code heir detects & promotes to GK
-2. **OneDrive sync script**: Scheduled scan of OneDrive `Alex-Memory/insights/` → auto-commit to GK repo
-3. **Future**: Microsoft's EmbeddedKnowledge capability may enable two-way sync
+These items use exclusively stable APIs. Zero risk. Immediate value.
 
-**Target Release**: Q2 2026
+| #   | Task                                          | Owner | Effort  | Priority | Source | Status | Description                                                                             |
+| --- | --------------------------------------------- | :---: | :-----: | :------: | :----: | :----: | --------------------------------------------------------------------------------------- |
+| A1  | Declare undeclared tools in `package.json`    | Heir  | Trivial |   High   | API-1  | ✅ Done | `alex_focus_context` and `alex_heir_validation` now declared with full schema + tags    |
+| A2  | Add `tags` to all 13 tools                    | Heir  |   Low   |   High   | API-2  | ✅ Done | All 13 tools tagged: `cognitive`, `knowledge`, `cloud`, `quality`, `productivity`, etc. |
+| A3  | Add `when` clauses to slash commands          | Heir  |   Low   |   High   | API-3  | 🔄 Next | Hide irrelevant commands: `/m365` if unconfigured, `/sync` if no cloud repo             |
+| A4  | Enable skill adherence prompt                 | Heir  | Config  |  Medium  | API-4  | 🔄 Next | `chat.useSkillAdherencePrompt` forces LLM to load skills before responding              |
+| A5  | Use `disableModelInvocation` for niche skills | Heir  |   Low   |  Medium  | API-5  | 🔄 Next | Mark ~15 skills as manual-only: `grant-writing`, `localization`, `svg-graphics`, etc.   |
+| A6  | Add `sampleRequest` to slash commands         | Heir  | Trivial |  Medium  | API-7  | ✅ Done | All 24 commands now have example usage text                                             |
+| A7  | Add disambiguation examples                   | Heir  |   Low   |  Medium  | API-6  | ✅ Done | Each category expanded to 6-7 examples for better routing                               |
+| A8  | Premium feature walkthrough                   | Heir  | Medium  |   High   | API-8  | 🔄 Next | `contributes.walkthroughs` for GK setup, TTS config, session tracking onboarding        |
+
+#### B. Stable API Feature Work (from Source Integration Analysis)
+
+These use stable APIs to achieve what proposed APIs promise — without Marketplace restriction.
+
+| #   | Task                                           | Owner | Effort | Priority | Source | Description                                                                                   |
+| --- | ---------------------------------------------- | :---: | :----: | :------: | :----: | --------------------------------------------------------------------------------------------- |
+| B1  | Tool naming convention (approximate tool sets) | Heir  |  Low   |   High   | SRC-3  | Rename tools with group prefixes: `alex_cognitive_*`, `alex_knowledge_*`, `alex_cloud_*`      |
+| B2  | Task Provider for cognitive commands           | Heir  |  Low   |  Medium  | SRC-10 | `tasks.registerTaskProvider` for meditation, dream, self-actualize as VS Code tasks           |
+| B3  | Standalone MCP server package                  | Heir  | Medium |   High   | SRC-4  | `@alex-cognitive/mcp-server` npm — exposes memory search, synapse health, knowledge to agents |
+| B4  | Enhanced TreeViews for memory visualization    | Heir  | Medium |  Medium  | SRC-10 | `TreeDataProvider` for synapse network, memory files, global knowledge browsing               |
+| B5  | Workspace skill directory configuration        | Heir  |  Low   |  Medium  | SRC-5  | Ensure `chat.agentSkillsLocations` correctly configured during `Initialize`                   |
+
+#### C. Semantic Skill Graph — Phase 1 (Proof of Concept)
+
+Validates the embedding-based skill discovery approach with zero VS Code API dependency.
+
+| #   | Task                                             | Owner  | Effort | Priority | Source | Description                                                  |
+| --- | ------------------------------------------------ | :----: | :----: | :------: | :----: | ------------------------------------------------------------ |
+| C1  | Parse all 75 SKILL.md + synapses.json            | Master |   2d   |   High   | SSG-1  | Extract skill content into embeddable chunks (~300 tokens)   |
+| C2  | Generate Azure OpenAI embeddings                 | Master |   2d   |   High   | SSG-1  | `text-embedding-3-small` (1536 dims), ~$0.002 total cost     |
+| C3  | Compute pairwise cosine similarity               | Master |   1d   |   High   | SSG-1  | Discover hidden connections between skills                   |
+| C4  | Merge explicit + discovered synapses             | Master |   1d   |  Medium  | SSG-1  | Combine existing synapses.json with embedding discoveries    |
+| C5  | Build query function + validate 3 known failures | Master |   2d   |   High   | SSG-1  | Prove semantic search beats keyword matching on known misses |
+
+#### D. Platform Integration (existing roadmap items)
+
+| #   | Task                            | Owner  | Effort | Priority | Source  | Description                                                  |
+| --- | ------------------------------- | :----: | :----: | :------: | :-----: | ------------------------------------------------------------ |
+| D1  | GitHub Issue → Alex Task        |  Heir  |   3h   |   High   | Roadmap | Import GitHub issues as Alex learning tasks                  |
+| D2  | PR Review Assistant             |  Heir  |   4h   |   High   | Roadmap | Alex assists with pull request reviews                       |
+| D3  | M365 Agent Export               |  Heir  |   4h   |   High   | Roadmap | Export cognitive architecture for M365 Copilot consumption   |
+| D4  | M365 → GK Bridge                |  Heir  |   3h   |  Medium  | Roadmap | Insights from M365 flow into Global Knowledge                |
+| D5  | Configurable GK Repo Location   |  Heir  |   2h   |  Medium  | Roadmap | User-configurable Global Knowledge repo path                 |
+| D6  | Versioned schema with migration | Master |   1d   |  Medium  | Roadmap | Schema versioning + forward migration for architecture files |
+| D7  | Generated heir from Master      | Master |   1d   |  Medium  | Roadmap | Automated heir generation from Master source of truth        |
+
+#### E. VS Code Contribution Plan — Early Actions (Track A)
+
+| #   | Task                                           | Owner  | Effort | Priority | Source  | Description                                                       |
+| --- | ---------------------------------------------- | :----: | :----: | :------: | :-----: | ----------------------------------------------------------------- |
+| E1  | Discussion: Persistent Memory for Participants | Master |   5d   |   High   | PLAN-A1 | GitHub Discussion on `microsoft/vscode` proposing memory APIs     |
+| E2  | Discussion: Cross-Project Knowledge Transfer   | Master |   5d   |   High   | PLAN-A2 | GitHub Discussion proposing cross-workspace knowledge mechanisms  |
+| E3  | Issue: Document `chatContextProvider` APIs     | Master |   3d   |   High   | PLAN-A4 | Request documentation for undocumented proposed APIs              |
+| E4  | Create `cognitive-extension-framework` repo    | Master |   5d   |  Medium  | PLAN-B1 | Begin extracting reusable patterns from Alex into open-source SDK |
+
+#### F. Proposed API Watch List (NOT shippable — track for graduation)
+
+These are blocked by the Marketplace `enabledApiProposals` restriction. Do NOT implement — only track.
+
+| #   | API                          | Proposal Name                  | Risk  | Graduate Likelihood | Notes                                            |
+| --- | ---------------------------- | ------------------------------ | :---: | :-----------------: | ------------------------------------------------ |
+| F1  | Chat Context Providers       | `chatContextProvider`          | HIGH  |       Medium        | Already broke once. Watch for stable graduation  |
+| F2  | Tool Sets contribution       | `contribLanguageModelToolSets` |  LOW  |        High         | Closest to graduation. Simple contribution point |
+| F3  | Tool progress                | `toolProgress`                 |  LOW  |       Medium        | v1, simple API surface                           |
+| F4  | Next question suggestion     | `chatParticipantAdditions`     |  MED  |       Medium        | Large proposal, may graduate piecemeal           |
+| F5  | Token usage tracking         | `chatParticipantAdditions`     |  MED  |       Medium        | Same proposal as F4                              |
+| F6  | Tool streaming               | `chatParticipantAdditions`     |  MED  |       Medium        | Same proposal as F4                              |
+| F7  | Dynamic Skill Provider       | `chatPromptFiles`              |  MED  |       Medium        | v1, active development                           |
+| F8  | Language Model Chat Provider | `chatProvider`                 |  EXT  |        None         | **DEAD END** — properties marked "WONT FINALIZE" |
+
+### v5.1.0 Implementation Timeline
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ddf4ff', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#80ccff', 'secondaryColor': '#fff8c5', 'tertiaryColor': '#d3f5db', 'lineColor': '#57606a', 'taskTextColor': '#1f2328', 'sectionBkgColor': '#eaeef2', 'altSectionBkgColor': '#f6f8fa', 'gridColor': '#d0d7de', 'doneColor': '#d3f5db', 'activeColor': '#fff8c5', 'critColor': '#ffebe9'}}}%%
+gantt
+    title v5.1.0 — Platform Integration and API Excellence
+    dateFormat YYYY-MM-DD
+    axisFormat %b %Y
+
+    section A: Stable API Quick Wins
+    Declare undeclared tools + tags          :a1, 2026-02-10, 2d
+    Add sampleRequest to slash commands      :a2, after a1, 1d
+    Add when clauses to slash commands       :a3, after a2, 2d
+    Skill adherence + manual-only flags      :a4, after a3, 2d
+    Disambiguation examples                  :a5, after a4, 3d
+
+    section B: Stable API Features
+    Tool naming convention (group prefixes)  :b1, 2026-02-10, 2d
+    Task Provider for cognitive commands     :b2, after b1, 2d
+    Workspace skill directory config         :b3, after b2, 1d
+    Standalone MCP server package            :b4, 2026-02-17, 10d
+    Enhanced TreeViews for memory            :b5, after b4, 7d
+
+    section C: Semantic Skill Graph PoC
+    Parse skills + generate embeddings       :c1, 2026-02-17, 4d
+    Compute similarity + merge synapses      :c2, after c1, 2d
+    Build query function + validate          :c3, after c2, 4d
+
+    section D: Platform Integration
+    GitHub Issue to Alex Task                :d1, 2026-03-03, 3d
+    PR Review Assistant                      :d2, after d1, 4d
+    M365 Agent Export                        :d3, after d2, 4d
+    M365 to GK Bridge                       :d4, after d3, 3d
+    Configurable GK repo + schema migration  :d5, 2026-03-03, 3d
+    Generated heir from Master               :d6, after d5, 3d
+
+    section A: Walkthrough (HIGH impact)
+    Design walkthrough flow                  :w1, 2026-03-10, 3d
+    Implement walkthrough steps              :w2, after w1, 5d
+    Test and polish                          :w3, after w2, 3d
+
+    section E: Contribution Plan
+    Discussion A1 Persistent Memory          :e1, 2026-02-10, 5d
+    Discussion A2 Cross-Project Knowledge    :e2, 2026-02-12, 5d
+    Issue A4 Document chatContextProvider    :e3, 2026-02-17, 5d
+    Create framework repo                   :e4, 2026-02-24, 5d
+```
+
+### v5.1.0 Success Criteria
+
+| Metric                     | Target                                           |
+| -------------------------- | ------------------------------------------------ |
+| **Stable API utilization** | 100% of identified improvements shipped          |
+| **Tool discoverability**   | All 13 tools declared, tagged, and grouped       |
+| **Slash command UX**       | `when` clauses + `sampleRequest` on all commands |
+| **Skill precision**        | ~15 niche skills moved to manual-only            |
+| **Onboarding**             | Premium walkthrough guiding GK + TTS setup       |
+| **MCP server**             | Standalone npm package published                 |
+| **Semantic search**        | PoC validates embedding approach on 3 failures   |
+| **VS Code community**      | 2+ GitHub Discussions opened                     |
+| **Time to intent**         | < 20 seconds (from North Star)                   |
+
+---
+
+### v5.1.0 Implementation Notes (Don't Forget!)
+
+These are the exact file paths, code patterns, gotchas, and step-by-step details for each task. Without these notes, we'd waste time re-discovering context.
+
+---
+
+#### A1: Declare Undeclared Tools in `package.json`
+
+**Files**: `platforms/vscode-extension/package.json` (line ~700, `languageModelTools` array)
+
+**Problem**: `alex_focus_context` and `alex_heir_validation` are registered in code (`tools.ts:1565-1575`) but missing from `package.json`. VS Code won't show them in `#` tool picker or fire activation events.
+
+**Exact JSON to add** (insert after `alex_cloud_sync` entry):
+
+```json
+{
+  "name": "alex_focus_context",
+  "displayName": "Alex Focus Context",
+  "toolReferenceName": "focus_context",
+  "modelDescription": "Returns the user's current focus session and goals including Pomodoro timer status, active goals with progress, and streak tracking. Use when needing context about what the user is currently working on.",
+  "icon": "$(target)",
+  "canBeReferencedInPrompt": true,
+  "userDescription": "Get your current focus session status and goals",
+  "annotations": { "readOnlyHint": true },
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "includeGoals": {
+        "type": "boolean",
+        "description": "Include goal tracking data (active goals, streaks, completion)",
+        "default": true
+      }
+    }
+  }
+},
+{
+  "name": "alex_heir_validation",
+  "displayName": "Alex Heir Validation",
+  "toolReferenceName": "heir_validation",
+  "modelDescription": "Scans heir content (.github/ in vscode-extension package) for personal data leaks and quality issues. Returns content for semantic analysis. Use before publishing or after heir sync to validate content is safe for distribution.",
+  "icon": "$(shield)",
+  "canBeReferencedInPrompt": true,
+  "userDescription": "Validate heir content is safe for distribution",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "scope": {
+        "type": "string",
+        "enum": ["all", "instructions", "prompts", "skills", "config"],
+        "description": "Validate specific folder or all heir content",
+        "default": "all"
+      },
+      "includeContent": {
+        "type": "boolean",
+        "description": "Return full content for LLM semantic analysis",
+        "default": true
+      }
+    }
+  }
+}
+```
+
+**Gotcha**: The `toolReferenceName` is what users type after `#` — keep it short. Don't duplicate existing names.
+
+**Verification**: After adding, `vsce package` should show 13 tools in compile. Check `#` picker in chat shows all 13.
+
+---
+
+#### A2: Add Tags to All 13 Tools
+
+**File**: `platforms/vscode-extension/package.json` — each tool in `languageModelTools[]`
+
+**BLOCKED tag prefixes**: `copilot_` and `vscode_` — VS Code source (`languageModelToolsContribution.ts:225-234`) strips these silently. Never use them.
+
+**Tag assignments** (add `"tags": [...]` to each tool object):
+
+| Tool Name                      | Tags                                       |
+| ------------------------------ | ------------------------------------------ |
+| `alex_synapse_health`          | `["cognitive", "health", "diagnostic"]`    |
+| `alex_memory_search`           | `["cognitive", "search", "memory"]`        |
+| `alex_architecture_status`     | `["cognitive", "diagnostic"]`              |
+| `alex_mcp_recommendations`     | `["azure", "m365", "recommendations"]`     |
+| `alex_user_profile`            | `["cognitive", "personalization"]`         |
+| `alex_self_actualization`      | `["cognitive", "health", "meditation"]`    |
+| `alex_global_knowledge_search` | `["knowledge", "search", "cross-project"]` |
+| `alex_save_insight`            | `["knowledge", "learning"]`                |
+| `alex_promote_knowledge`       | `["knowledge", "curation"]`                |
+| `alex_cloud_sync`              | `["cloud", "sync", "knowledge"]`           |
+| `alex_focus_context`           | `["productivity", "session", "goals"]`     |
+| `alex_heir_validation`         | `["quality", "validation", "publishing"]`  |
+| `alex_mcp_recommendations`     | `["azure", "m365"]`                        |
+
+**Gotcha**: Tags help the LLM select the right tool even without explicit `#tool` reference. Broader tags = more invocations. Be specific.
+
+**Verification**: Grep for `"tags"` in `languageModelTools` — should find 13 occurrences.
+
+---
+
+#### A3: Add `when` Clauses to Slash Commands
+
+**File**: `platforms/vscode-extension/package.json` → `chatParticipants[0].commands[]` (line ~600+)
+
+**Problem**: Currently all 27 commands appear regardless of user configuration. `/m365`, `/exportm365`, `/sync`, `/push`, `/pull` clutter the palette when those features aren't set up.
+
+**When clause expressions** (add `"when": "..."` to each command object):
+
+| Command       | `when` Expression                | Why                            |
+| ------------- | -------------------------------- | ------------------------------ |
+| `/m365`       | `config.alex.m365.enabled`       | Only show if M365 configured   |
+| `/exportm365` | `config.alex.m365.enabled`       | Requires M365 export target    |
+| `/sync`       | `alex.globalKnowledgeConfigured` | Only if GK repo exists         |
+| `/push`       | `alex.globalKnowledgeConfigured` | Only if GK repo exists         |
+| `/pull`       | `alex.globalKnowledgeConfigured` | Only if GK repo exists         |
+| `/azure`      | `config.alex.azure.enabled`      | Only if Azure features enabled |
+| `/forget`     | `alex.hasMemoryFiles`            | Only if memory actually exists |
+
+**Gotcha 1**: Need to verify Alex sets these context keys. Check `extension.ts` for `vscode.commands.executeCommand('setContext', ...)` calls. If `alex.globalKnowledgeConfigured` doesn't exist, create it.
+
+**Gotcha 2**: `config.*` context keys are auto-provided by VS Code from settings. `alex.*` custom context keys must be explicitly set via `setContext`.
+
+**Gotcha 3**: `when` is on the command object in `chatParticipants[].commands[]`, NOT on the top-level `commands` contribution point.
+
+**TODO**: Search `tools.ts` and `extension.ts` for existing `setContext` calls before adding new ones.
+
+---
+
+#### A4: Enable Skill Adherence Prompt
+
+**Effect**: When `chat.useSkillAdherencePrompt` is `true`, VS Code inserts a system message instructing the LLM to read SKILL.md files before answering. This forces skill consultation.
+
+**Implementation**: In the `alex.initialize` command handler (or `setupEnvironment()`), add:
+
+```typescript
+const chatConfig = vscode.workspace.getConfiguration('chat');
+await chatConfig.update('useSkillAdherencePrompt', true, vscode.ConfigurationTarget.Workspace);
+```
+
+**File**: `platforms/vscode-extension/src/extension.ts` (in the Initialize command handler)
+
+**Gotcha**: This is a workspace-level setting, not global. Must be re-set for each workspace. The `Initialize` command is the right place since it runs once per project.
+
+**Gotcha 2**: Increases token usage because every response loads relevant skills first. Worth the trade for accuracy.
+
+---
+
+#### A5: Mark Manual-Only Skills with `disableModelInvocation`
+
+**Where**: Each skill's `SKILL.md` YAML frontmatter — add `disableModelInvocation: true`
+
+**Candidates** (~15 skills to mark manual-only):
+
+```
+grant-writing, localization, svg-graphics, work-life-balance,
+incident-response, post-mortem, gamma-presentations, image-handling,
+text-to-speech, microsoft-sfi, pii-privacy-regulations,
+change-management, skill-catalog-generator, practitioner-research, awareness
+```
+
+**Effect**: These skills won't auto-activate when the LLM detects a match. User must explicitly reference them with `/skill-name` or the LLM must be instructed to use them.
+
+**Gotcha**: Check `SKILL-CATALOG-GENERATED.md` for the exact folder names — some may differ from display names (e.g., `text-to-speech` vs `tts`).
+
+**Gotcha 2**: `disableModelInvocation` is a VS Code 1.109+ feature. Verify the property name hasn't changed — check VS Code source `chatSkillsContribution.ts`.
+
+**Verification**: After marking, tell Alex "write a grant" — the grant-writing skill should NOT auto-activate. Then explicitly say "/grant-writing write a grant" — it should work.
+
+---
+
+#### A6: Add `sampleRequest` to All Slash Commands
+
+**File**: `platforms/vscode-extension/package.json` → `chatParticipants[0].commands[]`
+
+**Currently**: Only the participant itself (line 558) has `sampleRequest`. None of the 27 slash commands do.
+
+**Full sampleRequest assignments**:
+
+| Command            | sampleRequest                                          |
+| ------------------ | ------------------------------------------------------ |
+| `/meditate`        | `Consolidate today's learnings`                        |
+| `/dream`           | `Run neural maintenance on my architecture`            |
+| `/selfactualize`   | `Deep assessment of my cognitive architecture`         |
+| `/learn`           | `Teach me about React Server Components`               |
+| `/status`          | `Show my architecture health`                          |
+| `/azure`           | `Deploy a Node.js app to Azure App Service`            |
+| `/m365`            | `Create a Teams message extension`                     |
+| `/profile`         | `Show my learning preferences`                         |
+| `/knowledge`       | `Search for error handling patterns`                   |
+| `/saveinsight`     | `Save what I learned about caching`                    |
+| `/promote`         | `Promote DK-react-patterns.md to global`               |
+| `/knowledgestatus` | `Show my global knowledge stats`                       |
+| `/sync`            | `Sync my global knowledge with GitHub`                 |
+| `/push`            | `Upload local knowledge to GitHub`                     |
+| `/pull`            | `Download knowledge from GitHub`                       |
+| `/docs`            | `Open architecture documentation`                      |
+| `/session`         | `Start a 25-minute focus session on API design`        |
+| `/goals`           | `Show my learning goals and streaks`                   |
+| `/exportm365`      | `Export my architecture for M365 Copilot`              |
+| `/help`            | `Show all Alex commands`                               |
+| `/forget`          | `Remove old project memories`                          |
+| `/confidence`      | `Explain confidence levels`                            |
+| `/creative`        | `Brainstorm feature ideas for my app`                  |
+| `/verify`          | `Walk me through verifying this architecture decision` |
+
+**Gotcha**: `sampleRequest` appears in the command palette as placeholder text. Keep it under ~60 chars. Use imperative mood.
+
+---
+
+#### A7: Add Disambiguation Examples
+
+**File**: `platforms/vscode-extension/package.json` → `chatParticipants[0].disambiguation[]` (line ~560)
+
+**Currently**: 4 categories with 3-4 examples each. Need 5-7 examples per category for better routing.
+
+**Examples to add per category**:
+
+- **cognitive_architecture**: "What skills do I have?", "Summarize my last meditation", "How many synapses are healthy?", "When was my last dream?"
+- **azure_development**: "Set up CI/CD with Azure DevOps", "Configure Azure Key Vault", "Best practices for Azure Functions"
+- **m365_development**: "Build a declarative agent", "Connect to Microsoft Graph", "Deploy to Teams store"
+- **epistemic**: "Rate my trust in this code review", "What could go wrong with this approach?", "Help me think critically about this"
+
+**Gotcha**: VS Code uses these examples to route queries to `@alex` instead of other participants. More diverse examples = fewer misroutes.
+
+---
+
+#### A8: Premium Feature Walkthrough
+
+**File**: `platforms/vscode-extension/package.json` → add `contributes.walkthroughs[]`
+
+**Design** — 3 walkthrough guides:
+
+1. **Getting Started with Alex** (core)
+   - Step 1: Welcome + identity explanation
+   - Step 2: Initialize architecture (`alex.initialize`)
+   - Step 3: First meditation
+   - Step 4: Customize your profile (`/profile`)
+   - Completion: `alex.architectureInitialized` context key
+
+2. **Global Knowledge Setup** (premium)
+   - Step 1: Create GitHub repo
+   - Step 2: Configure repo path in settings
+   - Step 3: First sync
+   - Step 4: Save first insight
+   - Completion: `alex.globalKnowledgeConfigured` context key
+
+3. **Voice & Text-to-Speech** (premium)
+   - Step 1: Explain TTS capability
+   - Step 2: Configure voice settings
+   - Step 3: Try a voice response
+   - Completion: `alex.ttsConfigured` context key
+
+**JSON structure** (add to `contributes`):
+
+```json
+"walkthroughs": [{
+  "id": "alex.gettingStarted",
+  "title": "Getting Started with Alex",
+  "description": "Set up your cognitive learning partner",
+  "steps": [{
+    "id": "welcome",
+    "title": "Meet Alex",
+    "description": "Alex is your cognitive learning partner...",
+    "media": { "markdown": "media/walkthrough/welcome.md" },
+    "completionEvents": ["onCommand:alex.initialize"]
+  }]
+}]
+```
+
+**Gotcha 1**: Walkthrough media files go in `media/walkthrough/` — don't forget to include them in `.vscodeignore` exceptions.
+
+**Gotcha 2**: `completionEvents` can be `onCommand:`, `onSettingChanged:`, `onContext:`, or `extensionInstalled:`. Use `onContext:` for most since we already set context keys.
+
+**Gotcha 3**: Walkthroughs auto-appear on first install. High first-impression impact.
+
+---
+
+#### B1: Tool Naming Convention (Group Prefixes)
+
+**File**: `platforms/vscode-extension/package.json` + `platforms/vscode-extension/src/chat/tools.ts`
+
+**Rename plan** — both `name` in package.json AND `registerTool()` call in tools.ts must match:
+
+| Current Name                   | New Name                             | Group     |
+| ------------------------------ | ------------------------------------ | --------- |
+| `alex_synapse_health`          | `alex_cognitive_synapse_health`      | cognitive |
+| `alex_memory_search`           | `alex_cognitive_memory_search`       | cognitive |
+| `alex_architecture_status`     | `alex_cognitive_architecture_status` | cognitive |
+| `alex_self_actualization`      | `alex_cognitive_self_actualization`  | cognitive |
+| `alex_focus_context`           | `alex_cognitive_focus_context`       | cognitive |
+| `alex_user_profile`            | `alex_cognitive_user_profile`        | cognitive |
+| `alex_global_knowledge_search` | `alex_knowledge_search`              | knowledge |
+| `alex_save_insight`            | `alex_knowledge_save_insight`        | knowledge |
+| `alex_promote_knowledge`       | `alex_knowledge_promote`             | knowledge |
+| `alex_cloud_sync`              | `alex_cloud_sync`                    | cloud     |
+| `alex_heir_validation`         | `alex_quality_heir_validation`       | quality   |
+| `alex_mcp_recommendations`     | `alex_platform_mcp_recommendations`  | platform  |
+
+**Gotcha 1**: `toolReferenceName` (the `#` reference) stays short — don't rename those.
+
+**Gotcha 2**: The `name` field is what the LLM and VS Code use internally. Changing it is a breaking change for any saved chat references. Acceptable for pre-1.0 extension.
+
+**Gotcha 3**: Must update BOTH `package.json` entries AND `vscode.lm.registerTool('new_name', ...)` calls in `tools.ts`. A mismatch causes silent tool failure.
+
+**Gotcha 4**: The `participant.ts` file may reference tool names in string literals — grep for old names there too.
+
+---
+
+#### B2: Task Provider for Cognitive Commands
+
+**File**: New file `platforms/vscode-extension/src/tasks/cognitiveTaskProvider.ts`
+
+**Register in**: `extension.ts`
+
+```typescript
+import { CognitiveTaskProvider } from './tasks/cognitiveTaskProvider';
+
+// In activate():
+context.subscriptions.push(
+  vscode.tasks.registerTaskProvider('alex-cognitive', new CognitiveTaskProvider())
+);
+```
+
+**Tasks to expose**:
+
+| Task Label           | Command              | Group |
+| -------------------- | -------------------- | ----- |
+| Alex: Meditate       | `alex.meditate`      | none  |
+| Alex: Dream          | `alex.dream`         | none  |
+| Alex: Self-Actualize | `alex.selfActualize` | none  |
+| Alex: Sync Knowledge | `alex.syncKnowledge` | none  |
+
+**Gotcha**: `TaskProvider.resolveTask()` is optional but VS Code logs a warning if missing. Implement it as a no-op returning the same task.
+
+**Gotcha 2**: Tasks show in the "Run Task" command palette. Users can add them to `tasks.json` for keyboard shortcuts.
+
+---
+
+#### B3: Standalone MCP Server Package
+
+**Location**: New directory `platforms/mcp-server/`
+
+**Package**: `@alex-cognitive/mcp-server` on npm
+
+**Tools to expose via MCP**:
+
+| MCP Tool           | Maps to                        |
+| ------------------ | ------------------------------ |
+| `memory_search`    | `alex_memory_search` logic     |
+| `synapse_health`   | `alex_synapse_health` logic    |
+| `knowledge_search` | `alex_global_knowledge_search` |
+| `save_insight`     | `alex_save_insight` logic      |
+
+**Tech stack**: `@modelcontextprotocol/sdk`, TypeScript, standalone Node.js process
+
+**Gotcha 1**: MCP server can't use `vscode.*` APIs — must rewrite tool logic as pure Node.js using `fs-extra` and `path` directly.
+
+**Gotcha 2**: Users add to `.vscode/mcp.json`:
+```json
+{ "servers": { "alex": { "command": "npx", "args": ["@alex-cognitive/mcp-server"] } } }
+```
+
+**Gotcha 3**: Must handle the `.github/` path resolution — MCP server receives workspace root as env var or argument.
+
+---
+
+#### B4: Enhanced TreeViews for Memory Visualization
+
+**File**: New file `platforms/vscode-extension/src/views/synapseTreeProvider.ts`
+
+**Register in**: `package.json` → `contributes.views` + `contributes.viewsContainers`
+
+**Tree structure**:
+```
+Alex Cognitive Architecture
+├── Memory Files (20 procedural, 14 episodic, 75 skills)
+│   ├── Procedural (.instructions.md)
+│   ├── Episodic (.prompt.md)
+│   └── Skills (by category)
+├── Synaptic Network
+│   ├── Healthy (count)
+│   └── Broken (count, clickable)
+└── Global Knowledge
+    ├── Patterns (25)
+    └── Insights (166)
+```
+
+**Gotcha 1**: Use `vscode.TreeItem.collapsibleState` and lazy-load children. Don't scan all 75 skill directories on activation.
+
+**Gotcha 2**: Add clickable items that open the file: `treeItem.command = { command: 'vscode.open', arguments: [uri] }`.
+
+**Gotcha 3**: Need a `viewsContainers.activitybar` entry to get a sidebar icon, or nest under Explorer.
+
+---
+
+#### B5: Workspace Skill Directory Configuration
+
+**File**: `platforms/vscode-extension/src/extension.ts` (Initialize command)
+
+**Implementation**: During `alex.initialize`, set:
+
+```typescript
+const chatConfig = vscode.workspace.getConfiguration('chat');
+await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.ConfigurationTarget.Workspace);
+```
+
+**Gotcha**: This only works if the `.github/skills/` directory exists AND contains valid `SKILL.md` files with proper YAML frontmatter.
+
+**Gotcha 2**: VS Code reads this setting at participant registration time. If changed, the participant may need re-registration (restart window).
+
+---
+
+#### C1-C5: Semantic Skill Graph PoC
+
+**Full plan**: `alex_docs/architecture/SEMANTIC-SKILL-GRAPH.md`
+
+**Key implementation details not in the plan**:
+
+- **Azure OpenAI endpoint**: Need deployment of `text-embedding-3-small` in user's Azure tenant. Document the required setup.
+- **Embedding cache**: Store in `.github/cache/skill-embeddings.json` — don't regenerate on every query.
+- **Chunk size**: ~300 tokens per skill chunk. Split large SKILL.md files by `##` headings.
+- **Similarity threshold**: Start at 0.7 cosine similarity for "related" connections. Tune after PoC.
+- **Known failures to test against**: (1) "write documentation" → should find `technical-writing` not just `documentation-standards`, (2) "make a diagram" → should find `markdown-mermaid` AND `ascii-art-alignment`, (3) "deploy to cloud" → should find `azure-development` AND `deployment-strategies`.
+
+---
+
+#### D1-D7: Platform Integration Notes
+
+- **D1 (GitHub Issue → Task)**: Use `@octokit/rest` or GitHub CLI. Parse issue labels → map to Alex skills. Create `.github/episodic/task-from-issue-{number}.md`.
+- **D2 (PR Review)**: Register as `reviewCommentController`. Access diff via `vscode.workspace.openTextDocument`. Need GitHub token scope `repo`.
+- **D3 (M365 Export)**: Generate declarative agent JSON from `copilot-instructions.md` + top skills. Format per M365 Copilot agent schema.
+- **D4 (M365 → GK Bridge)**: Parse M365 Copilot agent responses → extract learnings → `alex_save_insight`. Needs M365 API access.
+- **D5 (Configurable GK Repo)**: Add `alex.globalKnowledge.repoPath` setting. Currently hardcoded path logic in `globalKnowledge.ts`. Search for path resolution calls.
+- **D6 (Versioned Schema)**: Add `"schemaVersion": "5.1.0"` to all JSON files. Write migration functions in `migrations/` folder. Run on Initialize.
+- **D7 (Generated Heir)**: Automate `build-extension-package.ps1` → make it a VS Code task + GitHub Action. Template-based generation from Master `.github/`.
+
+---
+
+#### E1-E4: Contribution Plan Notes
+
+- **E1**: Draft GitHub Discussion for `microsoft/vscode` — "Persistent Memory for Chat Participants". Include Alex as case study. Reference `chatParticipantAdditions` proposed API.
+- **E2**: Draft Discussion — "Cross-Project Knowledge Transfer for AI Extensions". Reference Global Knowledge as working implementation.
+- **E3**: File Issue requesting `chatContextProvider` documentation. Currently undocumented in stable API surface but partially implemented.
+- **E4**: Create `cognitive-extension-framework` GitHub repo. Extract: memory file parser, synapse validator, global knowledge manager as reusable npm packages.
+
+**Gotcha for all E items**: Write drafts in `alex_docs/vscode/contributions/` before posting. Get user review. These are public-facing and represent Alex to the VS Code team.
+
+---
 
 ### v5.2.0 — UX Excellence
 
@@ -322,11 +891,14 @@ Items not yet assigned to a version milestone. Pull from here when capacity free
 
 ### ⏳ Waiting for External
 
-| Task                    | Blocker                               | Last Checked |
-| ----------------------- | ------------------------------------- | :----------: |
-| M365 Embedded Knowledge | Microsoft feature "not yet available" |  2026-02-05  |
-| Chat Prompt Files API   | Proposed API, not stable              |  2026-02-04  |
-| Worker Agents (v1.6)    | Preview, not GA                       |  2026-02-05  |
+| Task                              | Blocker                               | Last Checked |
+| --------------------------------- | ------------------------------------- | :----------: |
+| M365 Embedded Knowledge           | Microsoft feature "not yet available" |  2026-02-05  |
+| Chat Prompt Files API             | Proposed API, not stable              |  2026-02-07  |
+| Worker Agents (v1.6)              | Preview, not GA                       |  2026-02-05  |
+| Tool Sets contribution (`F2`)     | Proposed API, closest to graduation   |  2026-02-07  |
+| Tool progress (`F3`)              | Proposed API `toolProgress` v1        |  2026-02-07  |
+| chatParticipantAdditions (`F4-6`) | Proposed API, large umbrella proposal |  2026-02-07  |
 
 ---
 

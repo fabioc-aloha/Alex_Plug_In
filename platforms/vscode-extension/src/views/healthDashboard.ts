@@ -7,7 +7,6 @@ import {
     HealthStatus
 } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { getSyncStatus } from '../chat/cloudSync';
 import { getGoalsSummary } from '../commands/goals';
 import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
@@ -71,9 +70,6 @@ export async function openHealthDashboard(context: vscode.ExtensionContext): Pro
                 case 'selfActualize':
                     vscode.commands.executeCommand('alex.selfActualize');
                     break;
-                case 'syncKnowledge':
-                    vscode.commands.executeCommand('alex.syncKnowledge');
-                    break;
                 case 'runAudit':
                     vscode.commands.executeCommand('alex.runAudit');
                     break;
@@ -124,10 +120,9 @@ async function refreshDashboard(): Promise<void> {
         const rootPath = workspaceFolders?.[0]?.uri.fsPath || '';
         
         // Gather all data in parallel
-        const [health, knowledgeSummary, syncStatus, goalsSummary, version] = await Promise.all([
+        const [health, knowledgeSummary, goalsSummary, version] = await Promise.all([
             checkHealth(true), // Force fresh health check
             getGlobalKnowledgeSummary(),
-            getSyncStatus(),
             getGoalsSummary(),
             rootPath ? getInstalledAlexVersion(rootPath) : Promise.resolve(null)
         ]);
@@ -146,7 +141,6 @@ async function refreshDashboard(): Promise<void> {
             extensionUri,
             health,
             knowledgeSummary,
-            syncStatus,
             goalsSummary,
             session,
             version,
@@ -186,7 +180,6 @@ async function getWebviewContent(
     extUri: vscode.Uri,
     health: HealthCheckResult,
     knowledge: { totalPatterns: number; totalInsights: number } | null,
-    syncStatus: { status: string; message: string },
     goals: { activeGoals: any[]; completedToday: number; streakDays: number; totalCompleted: number },
     session: ReturnType<typeof getCurrentSession>,
     version: string | null,
@@ -738,15 +731,6 @@ async function getWebviewContent(
                         <div class="stat-label">Insights</div>
                     </div>
                 </div>
-                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
-                    <div class="card-title" style="margin-bottom: 8px;">☁️ Cloud Sync</div>
-                    <p style="font-size: 12px; color: var(--text-secondary);">
-                        ${getSyncStatusIcon(syncStatus.status)} ${syncStatus.message}
-                    </p>
-                    <button class="btn btn-secondary" style="margin-top: 8px; width: 100%;" onclick="cmd('syncKnowledge')">
-                        ☁️ Sync Now
-                    </button>
-                </div>
             </div>
             
             ${session ? `
@@ -945,18 +929,6 @@ function buildMemoryBreakdown(categories: { icon: string; name: string; count: n
         </li>
         `).join('')}
     </ul>`;
-}
-
-/**
- * Get sync status icon
- */
-function getSyncStatusIcon(status: string): string {
-    switch (status) {
-        case 'up-to-date': return '✅';
-        case 'syncing': return '🔄';
-        case 'error': return '❌';
-        default: return '⚪';
-    }
 }
 
 /**

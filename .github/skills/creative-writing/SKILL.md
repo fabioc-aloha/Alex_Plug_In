@@ -7,6 +7,184 @@ description: "Patterns for fiction, narrative structure, character development, 
 
 > Patterns for fiction, narrative structure, character development, dialogue, and storytelling craft.
 
+---
+
+## Book Project Scaffolding
+
+### Recommended Folder Structure
+
+```text
+book-project/
+├── .github/
+│   ├── copilot-instructions.md    # Book-specific Alex context
+│   └── prompts/
+│       └── chapter-review.prompt.md
+├── outline/
+│   ├── BOOK-PLAN.md               # Synopsis, themes, timeline
+│   ├── PLOT-OUTLINE.md            # Beat sheet or chapter summaries
+│   └── TIMELINE.md                # Story timeline (if complex)
+├── characters/
+│   ├── CHARACTER-BIBLE.md         # All characters in one file
+│   └── [character-name].md        # Deep dives for major characters
+├── worldbuilding/                  # For fantasy/sci-fi/historical
+│   ├── WORLD-BIBLE.md             # Rules, history, geography
+│   ├── magic-system.md            # If applicable
+│   └── locations/                 # Location details
+├── research/                       # For historical, technical, etc.
+│   ├── RESEARCH-LOG.md            # What you've researched
+│   └── notes/                     # Source notes
+├── chapters/
+│   ├── act-1/
+│   │   ├── ch01-[slug].md
+│   │   └── ch02-[slug].md
+│   ├── act-2/
+│   └── act-3/
+├── drafts/
+│   ├── draft-1/                   # Complete manuscript versions
+│   └── draft-2/
+├── scenes/                         # Loose scenes not yet placed
+└── README.md                       # Project overview
+```
+
+### BOOK-PLAN.md Template
+
+```markdown
+# Book Plan: [Title]
+
+## Logline
+[One sentence that captures the core conflict]
+
+## Synopsis
+[2-3 paragraph summary]
+
+## Genre & Comparables
+- **Genre**: [Primary genre + subgenre]
+- **Comp Titles**: [Book] meets [Book]
+- **Target Audience**: [Who is this for]
+
+## Themes
+1. [Primary theme — what is this book ABOUT thematically?]
+2. [Secondary theme]
+
+## Structure
+- **Format**: [Novel / Novella / Short Story Collection]
+- **POV**: [First / Third Limited / Multiple]
+- **Tense**: [Past / Present]
+- **Target Word Count**: [XX,000]
+
+## Timeline
+| Phase | Duration | Deliverable |
+|-------|----------|-------------|
+| Outline | Weeks 1-2 | PLOT-OUTLINE.md complete |
+| Draft 1 | Weeks 3-10 | Rough draft in drafts/draft-1/ |
+| Revision | Weeks 11-14 | Draft 2 |
+| Beta | Weeks 15-18 | Beta feedback incorporated |
+| Polish | Weeks 19-20 | Submission-ready |
+
+## Success Criteria
+- [ ] First draft complete
+- [ ] [Other goals]
+```
+
+### CHARACTER-BIBLE.md Template
+
+```markdown
+# Character Bible
+
+## Main Characters
+
+### [Character Name] — [Role: Protagonist/Antagonist/etc.]
+- **Age**: 
+- **Occupation**: 
+- **Want** (external goal): 
+- **Need** (internal growth): 
+- **Lie** (false belief): 
+- **Ghost** (wound from past): 
+- **Arc**: [Positive/Negative/Flat]
+
+**Voice notes**: [How they speak, verbal tics, vocabulary level]
+
+**Appearance**: [Key visual details]
+
+**Relationships**:
+| Character | Relationship | Dynamic |
+|-----------|-------------|---------|
+| [Name] | [Role] | [How they interact] |
+
+---
+
+### [Next Character]
+...
+
+## Supporting Characters
+
+| Name | Role | One-Line Description |
+|------|------|---------------------|
+| [Name] | [Best friend] | [Brief] |
+```
+
+### copilot-instructions.md Template (Fiction Projects)
+
+```markdown
+# [Book Title] — Writing Context
+
+## Project Overview
+[2-3 sentence summary: genre, premise, current status]
+
+## Current Phase
+- [x] Outlining
+- [ ] Drafting (Chapter X of Y)
+- [ ] Revision
+- [ ] Beta/Feedback
+
+## Key Files
+- Book plan: outline/BOOK-PLAN.md
+- Plot: outline/PLOT-OUTLINE.md
+- Characters: characters/CHARACTER-BIBLE.md
+- World: worldbuilding/WORLD-BIBLE.md (if applicable)
+
+## Alex Guidance
+- **Voice**: [Describe the narrative voice — literary, commercial, etc.]
+- **POV Rules**: [Third limited / No head-hopping / etc.]
+- **Tone**: [Dark, humorous, lyrical, etc.]
+- When suggesting dialogue: Match character voice from CHARACTER-BIBLE.md
+- When reviewing scenes: Check against PLOT-OUTLINE.md for consistency
+
+## Don't
+- Don't make the prose purple/overwrought
+- Don't add characters not in CHARACTER-BIBLE.md without discussion
+- Don't resolve tension too easily
+
+## World Rules (if applicable)
+[Key constraints: magic rules, historical accuracy needs, etc.]
+```
+
+### Book Project Audit Checklist
+
+```markdown
+## Book Project Audit
+
+### Structure Assessment
+- [ ] Has outline/ with BOOK-PLAN.md
+- [ ] Character documentation exists
+- [ ] Chapters organized (by act or sequentially)
+- [ ] Drafts versioned separately
+
+### Alex-Readiness Assessment
+- [ ] copilot-instructions.md exists with project context
+- [ ] Current phase clearly marked
+- [ ] Voice/tone guidance provided
+- [ ] Key files linked
+
+### Craft Documentation
+- [ ] Character arcs defined (want/need/lie)
+- [ ] Plot structure documented
+- [ ] World rules captured (if applicable)
+- [ ] Research tracked (if needed)
+```
+
+---
+
 ## Story Structure Models
 
 ### Three-Act Structure

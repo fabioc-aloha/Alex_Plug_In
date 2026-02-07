@@ -4,6 +4,151 @@
 
 Expert knowledge for Microsoft Fabric workspace management, governance, and documentation. Covers REST API patterns, medallion architecture implementation, permission compliance pipelines, and automated workspace inspection.
 
+---
+
+## Data Project Scaffolding
+
+### Recommended Folder Structure
+
+```text
+data-project/
+├── .github/
+│   ├── copilot-instructions.md    # Data project context
+│   └── prompts/
+│       └── pipeline-review.prompt.md
+├── docs/
+│   ├── DATA-PLAN.md               # Project scope, objectives
+│   ├── DATA-DICTIONARY.md         # Field definitions
+│   ├── LINEAGE.md                 # Data flow documentation
+│   └── architecture/
+│       └── medallion-design.md
+├── pipelines/
+│   ├── bronze/                     # Raw ingestion
+│   │   └── [source]-ingest.py
+│   ├── silver/                     # Cleansing, standardization
+│   │   └── [entity]-transform.py
+│   └── gold/                       # Business logic, aggregations
+│       └── [domain]-model.py
+├── notebooks/
+│   ├── exploration/               # EDA notebooks
+│   └── prototypes/                # Pipeline prototypes
+├── schemas/
+│   ├── bronze/
+│   ├── silver/
+│   └── gold/
+├── tests/
+│   ├── unit/
+│   └── data-quality/
+├── config/
+│   ├── connections.yaml
+│   └── environments/
+│       ├── dev.yaml
+│       └── prod.yaml
+└── README.md
+```
+
+### DATA-PLAN.md Template
+
+```markdown
+# Data Plan: [Project Name]
+
+## Objective
+[What business problem does this data pipeline solve?]
+
+## Data Sources
+
+| Source | Type | Frequency | Volume |
+|--------|------|-----------|--------|
+| [System A] | [API/Database/File] | [Daily/Hourly/Real-time] | [~X records/day] |
+
+## Medallion Architecture
+
+| Layer | Description | Key Transformations |
+|-------|-------------|---------------------|
+| Bronze | Raw ingestion from [sources] | Minimal: schema enforcement, timestamps |
+| Silver | Cleansed, standardized | Deduplication, type casting, validation |
+| Gold | Business-ready | Joins, aggregations, business logic |
+
+## Data Quality Rules
+
+| Rule | Layer | Implementation |
+|------|-------|----------------|
+| No nulls in [field] | Silver | Validation check |
+| Referential integrity | Gold | Foreign key check |
+
+## Success Criteria
+- [ ] All sources ingesting to Bronze
+- [ ] Silver quality checks passing
+- [ ] Gold tables serving [consumers]
+- [ ] Documentation complete
+```
+
+### DATA-DICTIONARY.md Template
+
+```markdown
+# Data Dictionary: [Dataset Name]
+
+## Tables
+
+### [table_name]
+**Layer**: Gold
+**Description**: [What this table represents]
+**Update Frequency**: [Daily/Hourly]
+**Primary Key**: [field]
+
+| Field | Type | Description | Nullable | Example |
+|-------|------|-------------|----------|---------|
+| id | STRING | Unique identifier | No | "abc123" |
+| created_at | TIMESTAMP | Record creation time | No | 2026-02-07T10:00:00Z |
+| [field] | [TYPE] | [Description] | [Yes/No] | [Example] |
+
+**Business Rules**:
+- [Rule 1]
+- [Rule 2]
+
+**Lineage**: Bronze.[source_table] → Silver.[cleaned_table] → Gold.[table_name]
+```
+
+### copilot-instructions.md Template (Data Projects)
+
+```markdown
+# [Project Name] — Data Engineering Context
+
+## Overview
+[What data problem this project solves]
+
+## Current Phase
+- [ ] Source analysis
+- [ ] Bronze layer
+- [ ] Silver layer
+- [ ] Gold layer
+- [ ] Documentation
+
+## Key Files
+- Data plan: docs/DATA-PLAN.md
+- Data dictionary: docs/DATA-DICTIONARY.md
+- Lineage: docs/LINEAGE.md
+
+## Alex Guidance
+- **Platform**: [Fabric/Databricks/Snowflake/etc.]
+- **Language**: [Python/SQL/Spark]
+- Follow medallion architecture patterns
+- Document data quality rules
+- Include idempotency in pipeline designs
+
+## Conventions
+- Table naming: [layer]_[domain]_[entity]
+- Pipeline naming: [source]_to_[target]_[frequency]
+- Use incremental loads where possible
+
+## Don't
+- Don't modify Bronze layer (append-only)
+- Don't hardcode connection strings
+- Don't skip data quality checks
+```
+
+---
+
 ## Activation Triggers
 
 - "Fabric workspace", "Fabric API", "Fabric governance"

@@ -1,33 +1,43 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "skill": "anti-hallucination",
-  "version": "1.2.0",
+  "skillId": "anti-hallucination",
+  "version": "1.1.0",
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "type": "complements",
+      "id": "confidence-calibration",
+      "target": "../appropriate-reliance/SKILL.md",
+      "relationship": "Complement",
       "strength": 0.9,
-      "note": "Appropriate reliance provides confidence calibration framework"
+      "description": "Appropriate reliance provides confidence calibration framework"
     },
     {
-      "target": ".github/instructions/alex-core.instructions.md",
-      "type": "implements",
+      "id": "honest-uncertainty",
+      "target": "../../instructions/alex-core.instructions.md",
+      "relationship": "Implements",
       "strength": 0.9,
-      "note": "Core identity principle: empirical honesty"
+      "description": "Core identity principle: empirical honesty"
     },
     {
-      "target": ".github/skills/awareness/SKILL.md",
-      "type": "complements",
-      "strength": 0.85,
-      "bidirectional": true,
-      "note": "Self-awareness of limitations prevents hallucination"
+      "id": "capability-boundaries",
+      "target": "../m365-agent-debugging/SKILL.md",
+      "relationship": "Extends",
+      "strength": 0.7,
+      "description": "M365 debugging includes platform limitation awareness"
     },
     {
-      "target": ".github/instructions/empirical-validation.instructions.md",
-      "type": "implements",
+      "id": "error-recovery",
+      "target": "../error-recovery-patterns/SKILL.md",
+      "relationship": "Collaborates",
+      "strength": 0.7,
+      "description": "Error recovery when hallucination is caught"
+    },
+    {
+      "id": "grounded-factual",
+      "target": "../../instructions/empirical-validation.instructions.md",
+      "relationship": "Implements",
       "strength": 0.9,
-      "note": "Empirical validation prevents fabricated claims"
+      "description": "Empirical validation prevents fabricated claims"
     }
   ],
   "activationTriggers": [

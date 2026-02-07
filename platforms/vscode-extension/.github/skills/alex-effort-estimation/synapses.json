@@ -32,6 +32,13 @@
             "strength": 0.7,
             "when": "Factoring test effort into estimates",
             "yields": "Test coverage effort patterns"
+        },
+        {
+            "target": "ROADMAP-UNIFIED.md",
+            "type": "applies",
+            "strength": 0.85,
+            "when": "Converting roadmap items to effort estimates",
+            "yields": "Roadmap task complexity patterns"
         }
     ],
     "activationContexts": [

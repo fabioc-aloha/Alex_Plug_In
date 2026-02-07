@@ -147,6 +147,35 @@ description: "Patterns for visual design, SVG creation, layout composition, typo
 | AA (large) | 3:1 | 18px+ or 14px bold |
 | AAA | 7:1 | Maximum accessibility |
 
+### Applying Color Theory to Mermaid Diagrams
+
+Color theory principles translate directly to Mermaid diagram styling. The **GitHub Pastel Palette v2** (defined in the **markdown-mermaid** skill) implements these principles:
+
+**Semantic Color Mapping** (from color psychology):
+
+| Semantic Purpose | Palette Color | Fill | Text | Stroke |
+| ---------------- | ------------- | ---- | ---- | ------ |
+| Primary actions | Blue | `#ddf4ff` | `#0550ae` | `#80ccff` |
+| Success/output | Green | `#d3f5db` | `#1a7f37` | `#6fdd8b` |
+| Business logic | Gold | `#fff8c5` | `#9a6700` | `#d4a72c` |
+| Special/DevOps | Purple | `#d8b9ff` | `#6639ba` | `#bf8aff` |
+| Errors/critical | Red | `#ffebe9` | `#cf222e` | `#f5a3a3` |
+| Raw/ingestion | Bronze | `#fff1e5` | `#953800` | `#ffb77c` |
+| Background | Neutral | `#eaeef2` | `#24292f` | `#d0d7de` |
+
+**Design Principles Applied**:
+
+1. **Triadic harmony**: Blue + Gold + Red form a balanced triad
+2. **Analogous groups**: Green + Blue are adjacent, creating calm flow sections
+3. **Light fills + dark text**: Ensures WCAG AA contrast (4.5:1+)
+4. **Neutral arrows** (`#57606a`): Don't compete with colored nodes — visual hierarchy preserved
+5. **Consistent stroke family**: Each color has a matching mid-tone stroke (not jarring black borders)
+
+**When to Override the Palette**:
+- Diagrams comparing two systems → Use just 2 contrasting colors (complementary scheme)
+- Status dashboards → Green/Yellow/Red RAG mapping
+- Sequential processes → Monochromatic gradient (light to dark within one hue)
+
 ## SVG Design
 
 ### SVG Structure

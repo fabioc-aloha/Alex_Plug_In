@@ -1,0 +1,52 @@
+{
+    "skill": "api-documentation",
+    "connections": [
+        {
+            "bidirectional": true,
+            "reason": "Documentation project structure and templates",
+            "type": "extends",
+            "strength": 0.85,
+            "target": ".github/skills/project-scaffolding/SKILL.md"
+        },
+        {
+            "bidirectional": true,
+            "reason": "Documented code is quality code",
+            "type": "complements",
+            "strength": 0.8,
+            "target": ".github/skills/code-quality/SKILL.md"
+        },
+        {
+            "reason": "Clear writing techniques apply to technical docs",
+            "type": "complements",
+            "strength": 0.6,
+            "target": ".github/skills/creative-writing/SKILL.md"
+        },
+        {
+            "reason": "Docs-as-code versioning workflows",
+            "type": "uses",
+            "strength": 0.6,
+            "target": ".github/skills/git-workflow/SKILL.md"
+        },
+        {
+            "reason": "Core markdown formatting for documentation",
+            "type": "uses",
+            "strength": 0.65,
+            "target": ".github/skills/markdown-mastery/SKILL.md"
+        }
+    ],
+    "inheritance": "inheritable",
+    "triggers": [
+        "documentation",
+        "docs",
+        "api",
+        "readme",
+        "guide",
+        "reference",
+        "manual",
+        "technical writing",
+        "openapi",
+        "swagger"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

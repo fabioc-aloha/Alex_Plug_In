@@ -71,7 +71,7 @@
       "yields": "Regex patterns: negative lookbehind, emoji-text deduplication"
     },
     {
-      "target": "src/tts/ttsService.ts",
+      "target": "platforms/vscode-extension/src/tts/ttsService.ts",
       "type": "implementation",
       "strength": 1.0,
       "when": "Core TTS engine",

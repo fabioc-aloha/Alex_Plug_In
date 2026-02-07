@@ -226,7 +226,6 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
                 `🍅 Focus Sessions - Pomodoro timer for deep work\n` +
                 `🔥 Learning Streaks - Build daily learning habits\n` +
                 `💡 Knowledge Base - Save insights across projects\n` +
-                `☁️ Cloud Sync - Access your knowledge anywhere\n` +
                 `🧠 Dream Protocol - Cognitive maintenance\n` +
                 `✨ Self-Actualization - Deep reflection\n\n` +
                 `Click to initialize and start your journey!`,

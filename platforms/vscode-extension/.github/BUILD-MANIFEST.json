@@ -1,6 +1,9 @@
 {
-  "filesExcluded": 30,
-  "sourceVersion": "4.2.12",
+  "sourceCommit": "dd91bfa",
+  "filesCopied": 196,
+  "generatedAt": "2026-02-07 13:11:55",
+  "sourceVersion": "5.0.1",
+  "filesExcluded": 64,
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -9,7 +12,12 @@
     "workflows",
     "episodic/dream-report-*.md",
     "episodic/meditation-session-*.md",
+    "episodic/meditation-*.md",
+    "episodic/chronicle-*.md",
+    "episodic/self-actualization-*.md",
     "config/cognitive-config.json",
+    "config/user-profile.json",
+    "config/USER-PROFILE.md",
     "config/MASTER-ALEX-PROTECTED.json",
     "skills/meditation",
     "skills/meditation-facilitation",
@@ -20,8 +28,5 @@
     "skills/self-actualization",
     "skills/heir-curation",
     "skills/master-alex-audit"
-  ],
-  "sourceCommit": "d7a02ba",
-  "filesCopied": 175,
-  "generatedAt": "2026-02-03 14:43:27"
+  ]
 }

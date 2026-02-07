@@ -839,8 +839,8 @@ function getReadmeContent(repoName: string): string {
 | 🔍 **Search Knowledge** | Find patterns and insights instantly across all projects |
 | 💡 **Save Insights** | Capture debugging discoveries and "aha!" moments |
 | 📈 **Promote Patterns** | Share reusable solutions globally |
-| ☁️ **Cloud Sync** | Knowledge travels via Git |
-| 👥 **Team Sharing** | Standard GitHub collaboration |
+| 📁 **Git Sync** | Knowledge travels via any Git provider |
+| 👥 **Team Sharing** | Standard Git collaboration (GitHub, Azure DevOps, GitLab) |
 
 ---
 
@@ -906,18 +906,18 @@ ${repoName}/
 
 ## Sharing Your Knowledge
 
-Since this is a standard Git repository, sharing is handled through GitHub permissions:
+Since this is a standard Git repository, sharing works with **any Git provider**:
 
-| Access Level | GitHub Setting | Use Case |
-|--------------|----------------|----------|
-| **Private** | Private repo | Personal knowledge vault |
-| **Team** | Private + collaborators | Shared team learnings |
+| Access Level | Platform Examples | Use Case |
+|--------------|-------------------|----------|
+| **Private** | GitHub, Azure DevOps, GitLab | Personal knowledge vault |
+| **Team** | Private repo + collaborators | Shared team learnings |
 | **Organization** | Org-owned repo | Enterprise knowledge base |
 | **Public** | Public repo | Open-source knowledge sharing |
 
 To share, just:
-1. Push this repo to GitHub
-2. Adjust repository visibility (Settings → General)
+1. Push this repo to your Git provider (GitHub, Azure DevOps, GitLab, etc.)
+2. Adjust repository visibility in your provider's settings
 3. Add collaborators if needed
 
 ## Starter Patterns Included
@@ -1149,12 +1149,12 @@ This repository is designed to be **managed by Alex**, not GitHub Actions. When 
 
 This keeps the repository simple and portable — no CI/CD dependencies, works offline, and syncs via standard Git.
 
-### Why No GitHub Actions?
+### Why No CI/CD Workflows?
 
 | Approach | Pros | Cons |
 |----------|------|------|
 | **Alex-Managed** (current) | Simple, portable, offline-friendly, no workflow failures | Requires VS Code |
-| **GitHub Actions** | Automated CI/CD | Dependency on GitHub, workflow complexity |
+| **CI/CD Workflows** | Automated validation | Dependency on specific platform, workflow complexity |
 
 You can add your own workflows if you need CI validation.
 
@@ -1203,7 +1203,7 @@ git commit -m "knowledge: add GK-new-pattern"
 ## Sharing and Collaboration
 
 ### Personal Use
-Keep the repo private on GitHub. Only you access your knowledge.
+Keep the repo private on your Git provider (GitHub, Azure DevOps, GitLab, etc.). Only you access your knowledge.
 
 ### Team Sharing
 1. Create org-owned repo or add collaborators

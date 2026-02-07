@@ -272,8 +272,7 @@ Project: ${workspaceFolders[0].name}
                     quickPick.items = [
                         { label: '$(folder) Patterns', description: `${status.totalPatterns} patterns`, alwaysShow: true },
                         { label: '$(lightbulb) Insights', description: `${status.totalInsights} insights`, alwaysShow: true },
-                        { label: '$(pulse) Run Health Check', description: 'Check architecture status', alwaysShow: true },
-                        { label: '$(sync) Sync Knowledge', description: 'Sync with cloud', alwaysShow: true }
+                        { label: '$(pulse) Run Health Check', description: 'Check architecture status', alwaysShow: true }
                     ];
                 } else {
                     // Search knowledge
@@ -321,8 +320,6 @@ Project: ${workspaceFolders[0].name}
 
                 if (selected.label.includes('Health Check')) {
                     vscode.commands.executeCommand('alex.dream');
-                } else if (selected.label.includes('Sync Knowledge')) {
-                    vscode.commands.executeCommand('alex.syncKnowledge');
                 } else if (selected.label.includes('Patterns')) {
                     // Search for patterns
                     quickPick.value = 'type:pattern ';

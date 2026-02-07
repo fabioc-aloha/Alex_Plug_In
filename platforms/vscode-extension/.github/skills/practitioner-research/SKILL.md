@@ -1,13 +1,13 @@
 ---
 name: "Practitioner Research Skill"
-description: "Fabio's methodology for longitudinal case study research, evidence-based documentation, and publication-ready academic writing in AI-assisted development."
+description: "Practitioner methodology for longitudinal case study research, evidence-based documentation, and publication-ready academic writing in AI-assisted development."
 ---
 
 # Practitioner Research Skill
 
 > Evidence-based research methodology for longitudinal case studies with publication-ready output.
 
-This skill captures Fabio's research approach: **practitioner-first, evidence-grounded, visually rich** methodology papers that bridge academic rigor with real-world applicability.
+This skill captures the practitioner research approach: **practitioner-first, evidence-grounded, visually rich** methodology papers that bridge academic rigor with real-world applicability.
 
 ## Core Philosophy
 

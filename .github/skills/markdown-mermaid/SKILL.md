@@ -385,6 +385,29 @@ web_server.style.fill: "#f3e5f5"
 
 ## 🎨 Mermaid Diagram Reference
 
+### ⚡ Quick Start — Pastel v2 Template
+
+Copy this template for every new diagram. It sets the GitHub Pastel v2 palette defaults:
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+flowchart LR
+    A[Source]:::blue --> B[Process]:::gold --> C[Output]:::green
+
+    classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Three things every diagram needs:**
+1. `%%{init}%%` directive (first line)
+2. `classDef` or `style` for node colors
+3. `linkStyle default` for arrow color
+
+> 💡 For color theory and design principles, see the **graphic-design** skill. The palette values here come from that skill's color system, optimized for GitHub rendering.
+
 ### Diagram Types
 
 | Type | Syntax | Best Use Case |
@@ -423,7 +446,9 @@ A --"label"--> B  Labeled edge
 A -->|"label"| B  Alternative label syntax
 ```
 
-### Color Palette (GitHub-Compatible)
+### Color Palette (Legacy — GitHub-Compatible)
+
+> **Note:** Superseded by GitHub Pastel Palette v2 below. Kept for reference only.
 
 | Purpose | Background | Border/Stroke |
 | ------- | ---------- | ------------- |
@@ -437,9 +462,9 @@ A -->|"label"| B  Alternative label syntax
 | **Danger** | `#ffebee` | `#c62828` |
 | **Neutral** | `#f5f5f5` | `#424242` |
 
-### GitHub Pastel Palette v2 (Recommended)
+### GitHub Pastel Palette v2 (Default)
 
-*Discovered in FishbowlGovernance project. Higher contrast, better accessibility.*
+*Higher contrast, better accessibility. Always use this palette for new diagrams.*
 
 **Node Style Pattern**: `style NODE fill:#FILL,color:#TEXT,stroke:#STROKE`
 
@@ -485,7 +510,13 @@ flowchart LR
 
 Add as FIRST line inside mermaid block:
 
-**Standard GitHub-compatible theme:**
+**Default init directive (GitHub Pastel v2):**
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+```
+
+**Standard GitHub-compatible theme (legacy):**
 
 ```text
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
@@ -495,6 +526,113 @@ Add as FIRST line inside mermaid block:
 
 ```text
 %%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
+```
+
+### classDef Reusable Styles
+
+Define style classes once and apply to multiple nodes. Cleaner than per-node `style` directives.
+
+```text
+flowchart LR
+    A[Source]:::input --> B[Process]:::action --> C[Output]:::success
+
+    classDef input fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    classDef action fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    classDef success fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    classDef error fill:#ffebe9,color:#cf222e,stroke:#f5a3a3
+    classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
+    classDef special fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    classDef bronze fill:#fff1e5,color:#953800,stroke:#ffb77c
+```
+
+**Pastel v2 classDef Quick Reference** (copy-paste ready):
+
+```text
+classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+classDef purple fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+classDef red fill:#ffebe9,color:#cf222e,stroke:#f5a3a3
+classDef bronze fill:#fff1e5,color:#953800,stroke:#ffb77c
+classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
+```
+
+**Apply to multiple nodes**: `class A,B,C blue`
+
+**Apply inline**: `A[Label]:::blue`
+
+### Subgraph Styling
+
+Style subgraph backgrounds with the `style` directive using the subgraph ID:
+
+```text
+flowchart LR
+    subgraph SG1["Phase 1"]
+        direction TB
+        A --> B
+    end
+    subgraph SG2["Phase 2"]
+        direction TB
+        C --> D
+    end
+
+    style SG1 fill:#ddf4ff,stroke:#80ccff,color:#0550ae
+    style SG2 fill:#d3f5db,stroke:#6fdd8b,color:#1a7f37
+```
+
+**Key**: Use `fill` for background, keep it light. The `color` property sets the title text color.
+
+### Gantt Chart Theming
+
+Gantt charts use different theme variables than flowcharts:
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'taskBkgColor': '#ddf4ff',
+  'activeTaskBkgColor': '#d3f5db',
+  'activeTaskBorderColor': '#6fdd8b',
+  'doneTaskBkgColor': '#eaeef2',
+  'doneTaskBorderColor': '#d0d7de',
+  'critBkgColor': '#ffebe9',
+  'critBorderColor': '#f5a3a3',
+  'todayLineColor': '#cf222e',
+  'gridColor': '#d0d7de',
+  'sectionBkgColor': '#f6f8fa',
+  'altSectionBkgColor': '#ffffff',
+  'taskTextColor': '#24292f',
+  'sectionBkgColor2': '#f6f8fa'
+}}}%%
+```
+
+**Section formatting**: Gantt sections inherit alternating background colors. Use `section` keyword to group related tasks:
+
+```text
+gantt
+    title Project Timeline
+    dateFormat YYYY-MM-DD
+    section Phase 1
+    Task A :done, a1, 2026-01-01, 14d
+    Task B :active, a2, after a1, 7d
+    section Phase 2
+    Task C :crit, a3, after a2, 10d
+```
+
+### Sequence Diagram Theming
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'actorBkg': '#ddf4ff',
+  'actorBorder': '#80ccff',
+  'actorTextColor': '#0550ae',
+  'activationBkgColor': '#d3f5db',
+  'activationBorderColor': '#6fdd8b',
+  'signalColor': '#57606a',
+  'labelBoxBkgColor': '#fff8c5',
+  'labelTextColor': '#9a6700',
+  'noteBkgColor': '#fff8c5',
+  'noteTextColor': '#9a6700',
+  'noteBorderColor': '#d4a72c'
+}}}%%
 ```
 
 ---
@@ -716,6 +854,94 @@ flowchart LR
     A ~~~ B  %% Invisible link forces LR arrangement
 ```
 
+### Named Layout Patterns
+
+Use these named patterns for consistent, well-proportioned diagrams. Each combines an outer flowchart direction with inner subgraph directions.
+
+#### Medallion Pattern (TD + LR)
+
+**Use when**: Phases/layers stack vertically, each containing a horizontal flow.
+
+```text
+flowchart TD
+    subgraph Phase1["Phase 1: Ingestion"]
+        direction LR
+        A[Source] --> B[Validate] --> C[Store]
+    end
+    subgraph Phase2["Phase 2: Processing"]
+        direction LR
+        D[Load] --> E[Transform] --> F[Enrich]
+    end
+    Phase1 --> Phase2
+```
+
+**Result**: Compact rectangle. Good for pipelines, ETL stages, layered architectures.
+
+#### Lineage Pattern (LR + TB)
+
+**Use when**: Groups flow left-to-right, each containing a vertical stack.
+
+```text
+flowchart LR
+    subgraph Cluster1["Input"]
+        direction TB
+        A1[Raw] --> A2[Clean]
+    end
+    subgraph Cluster2["Process"]
+        direction TB
+        B1[Compute] --> B2[Validate]
+    end
+    subgraph Cluster3["Output"]
+        direction TB
+        C1[Format] --> C2[Deliver]
+    end
+    Cluster1 --> Cluster2 --> Cluster3
+```
+
+**Result**: Wide timeline-like layout. Good for data lineage, system boundaries, progression.
+
+#### Pipeline Pattern (LR + LR)
+
+**Use when**: Everything flows left-to-right (flat pipeline, no vertical stacking needed).
+
+```text
+flowchart LR
+    A[Input] --> B[Stage 1] --> C[Stage 2] --> D[Output]
+```
+
+**Result**: Simple horizontal chain. Good for CI/CD, request flows, simple sequences.
+
+#### Pattern Decision Matrix
+
+| Your Content | Pattern | Outer | Inner | Typical Shape |
+| ------------ | ------- | ----- | ----- | ------------- |
+| Phases with steps inside | **Medallion** | TD | LR | Tall rectangle |
+| Groups flowing in sequence | **Lineage** | LR | TB | Wide rectangle |
+| Simple linear flow | **Pipeline** | LR | — | Narrow strip |
+| Hierarchy, org chart | **Tree** | TD | — | Triangle |
+| Complex interconnected | **Medallion** | TD | LR | Structured layers |
+
+#### Independent Subgraphs (Invisible Links)
+
+When subgraphs have no logical connections between them, Mermaid ignores the outer direction and stacks them vertically by default. Fix with invisible links (`~~~`):
+
+```text
+flowchart LR
+    subgraph A["Group A"]
+        direction TB
+        A1 --> A2
+    end
+    subgraph B["Group B"]
+        direction TB
+        B1 --> B2
+    end
+    A ~~~ B  %% Forces horizontal arrangement per outer LR
+```
+
+**Rule**: Always add `~~~` between independent subgraphs to enforce the outer direction.
+
+**Multiple independent groups**: Chain invisible links: `A ~~~ B ~~~ C ~~~ D`
+
 ### Subgraph Title Truncation (VS Code Only)
 
 **Problem**: Subgraph titles get truncated in VS Code preview
@@ -742,9 +968,9 @@ end
 
 ### Mermaid Parse Errors
 
-**Problem**: Nested quotes or parentheses cause parse errors
+**Problem**: Nested quotes, parentheses, or reserved words cause cryptic parse errors
 
-**Rule**: Don't nest quotes inside quoted node labels
+**Rule 1**: Don't nest quotes inside quoted node labels
 
 ```text
 %% ❌ FAILS - nested quotes
@@ -753,6 +979,89 @@ end
 %% ✅ WORKS - no nested quotes
 ["🌐 Return Results<br/>Info"]
 ```
+
+**Rule 2**: Avoid HTML tags inside node labels (some renderers choke on them)
+
+```text
+%% ❌ RISKY - <i> tag may break parsing
+SYN["synapses.json<br/><i>inert — rarely traversed</i>"]
+
+%% ✅ SAFE - plain text with em dash
+SYN["synapses.json — inert, rarely traversed"]
+```
+
+**Rule 3**: Avoid em dashes (—) in subgraph titles (some parsers treat them as operators)
+
+```text
+%% ❌ RISKY - em dash in subgraph title
+subgraph P1["Phase 1 — Compiled Graph"]
+
+%% ✅ SAFE - colon or hyphen instead
+subgraph P1["Phase 1: Compiled Graph"]
+subgraph P1["Phase 1 - Compiled Graph"]
+```
+
+**Rule 4**: Place `style` directives for subgraphs **outside** the subgraph block
+
+```text
+%% ❌ FAILS in some renderers - style inside subgraph
+subgraph SG["My Group"]
+    style SG fill:#ddf4ff,stroke:#80ccff
+    direction TB
+    A --> B
+end
+
+%% ✅ WORKS everywhere - style after all subgraphs
+subgraph SG["My Group"]
+    direction TB
+    A --> B
+end
+style SG fill:#ddf4ff,stroke:#80ccff
+```
+
+### Reserved Words in Labels and Titles
+
+**Problem**: Certain words are reserved syntax in specific diagram types. Using them as the **first word** in a task description or node label causes parse errors like `got 'callbackname'`, `got 'keyword'`, etc.
+
+**Gantt Chart Reserved Words** (cause `callbackname` or `keyword` errors):
+
+| Reserved | Why | Safe Alternative |
+| -------- | --- | ---------------- |
+| `call` | Click callback syntax | `Invoke`, `Execute`, `Generate`, `Run` |
+| `click` | Click handler syntax | `Select`, `Choose`, `Trigger` |
+| `after` | Dependency keyword (only at start) | Rephrase to not start with `after` |
+| `done` | Task state modifier | Use as tag `:done,` not in description |
+| `active` | Task state modifier | Use as tag `:active,` not in description |
+| `crit` | Task state modifier | Use as tag `:crit,` not in description |
+
+```text
+%% ❌ FAILS - "Call" is reserved
+Call Azure OpenAI embeddings API    :p1c, after p1b, 2d
+
+%% ✅ WORKS - rephrase to avoid reserved word
+Generate Azure OpenAI embeddings    :p1c, after p1b, 2d
+```
+
+**Flowchart Reserved Words** (cause unexpected parse behavior):
+
+| Reserved | Why | Safe Alternative |
+| -------- | --- | ---------------- |
+| `end` | Subgraph terminator | Wrap in quotes: `["End"]` |
+| `subgraph` | Block keyword | Wrap in quotes: `["Subgraph"]` |
+| `class` | classDef application | Wrap in quotes: `["Class"]` |
+| `style` | Style directive | Wrap in quotes: `["Style"]` |
+| `click` | Click handler | Wrap in quotes: `["Click"]` |
+| `default` | Default linkStyle target | Wrap in quotes: `["Default"]` |
+
+```text
+%% ❌ FAILS - "end" is reserved
+A --> end
+
+%% ✅ WORKS - quoted label
+A --> E["End"]
+```
+
+**General Safety Rule**: If a parse error occurs on a label or title, wrap it in double quotes (`"text"`) or rephrase to avoid the reserved word. When in doubt, quote it.
 
 ### XY Chart Bar Coloring (xychart-beta)
 

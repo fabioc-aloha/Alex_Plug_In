@@ -1,7 +1,7 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-02-06
-> Total Skills: **74** (57 inheritable, 13 master-only, 2 VS Code, 2 M365)
+> Generated: 2026-02-07
+> Total Skills: **75** (58 inheritable, 13 master-only, 2 VS Code, 2 M365)
 > ⚠️ **Note**: This catalog is a simplified snapshot. See [alex_docs/SKILLS-CATALOG.md](alex_docs/SKILLS-CATALOG.md) for complete inventory.
 
 ---

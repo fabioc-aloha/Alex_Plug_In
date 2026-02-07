@@ -6,10 +6,12 @@ import { startSession, getCurrentSession, isSessionActive, endSession } from '..
 import { getGoalsSummary, showGoalsQuickPick, showCreateGoalDialog, autoIncrementGoals } from '../commands/goals';
 import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
-import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
+import { validateWorkspace } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
-import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, getSyncStatus, triggerPostModificationSync } from './cloudSync';
+// Cloud sync deprecated in v5.0.1 - Gist sync removed
+// import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
+import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -111,8 +113,8 @@ async function autoSaveInsight(
             content
         );
         
-        // Trigger background sync
-        triggerPostModificationSync();
+        // Cloud sync deprecated - insights saved locally only
+        // triggerPostModificationSync();
         
         console.log(`[Unconscious] Auto-saved insight: ${title}`);
     } catch (err) {
@@ -440,15 +442,33 @@ async function handleMeditateCommand(
     
     stream.progress('🧘 Initiating meditation protocol with self-actualization...');
     
+    // Detect and update persona during meditation (deep context awareness)
+    const workspace = validateWorkspace();
+    let personaContext = '';
+    if (workspace.isValid && workspace.rootPath) {
+        try {
+            stream.progress('🎯 Analyzing project context...');
+            const personaResult = await detectAndUpdateProjectPersona(workspace.rootPath);
+            if (personaResult) {
+                personaContext = `**Project Context**: ${personaResult.persona.icon} ${personaResult.persona.name}\n`;
+                personaContext += `**P6 Skill**: ${personaResult.persona.skill}\n\n`;
+                console.log(`[Alex] Meditation: Updated P6 to ${personaResult.persona.skill}`);
+            }
+        } catch (err) {
+            console.log('[Alex] Meditation: Persona detection skipped');
+        }
+    }
+    
     stream.markdown(`## 🧘 Meditation Protocol Activated
 
-I'm entering a contemplative state to consolidate knowledge from our session.
+${personaContext}I'm entering a contemplative state to consolidate knowledge from our session.
 
 ### Self-Actualization Integration
 Meditation now includes automatic architecture assessment:
 - Synapse health validation
 - Memory file consistency check
 - Connection integrity verification
+- **P6 working memory auto-tuned** to project context
 
 `);
 
@@ -471,12 +491,6 @@ Consider contributing reusable insights to your global knowledge base:
 - **Best practices** you've discovered
 
 `);
-
-    stream.button({
-        command: 'alex.syncKnowledge',
-        title: '☁️ Sync Global Knowledge',
-        arguments: []
-    });
 
     stream.markdown(`\n### What would you like me to consolidate?
 `);
@@ -579,11 +593,9 @@ async function handleStatusCommand(
     
     stream.progress('📊 Gathering cognitive architecture status...');
     
-    // Get version dynamically
-    const workspace = validateWorkspace();
-    const version = workspace.isValid && workspace.rootPath 
-        ? await getInstalledAlexVersion(workspace.rootPath) ?? 'Unknown'
-        : 'Unknown';
+    // Get extension version (not workspace version)
+    const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
+    const version = extension?.packageJSON?.version || 'Unknown';
     
     stream.markdown(`## 📊 Alex Cognitive Architecture Status
 
@@ -1027,6 +1039,23 @@ async function handleGreetingWithSelfActualization(
     const profile = await getUserProfile();
     const userName = profile?.nickname || profile?.name;
     
+    // Detect and update project persona on greeting
+    stream.progress('🎯 Detecting project context...');
+    const workspace = validateWorkspace();
+    let personaInfo = '';
+    if (workspace.isValid && workspace.rootPath) {
+        try {
+            const personaResult = await detectAndUpdateProjectPersona(workspace.rootPath);
+            if (personaResult) {
+                personaInfo = `\n**Detected Context**: ${personaResult.persona.icon} ${personaResult.persona.name} (${(personaResult.confidence * 100).toFixed(0)}% confidence)\n`;
+                console.log(`[Alex] Greeting: Detected persona ${personaResult.persona.id}`);
+            }
+        } catch (err) {
+            // Persona detection is not critical
+            console.log('[Alex] Greeting: Persona detection skipped');
+        }
+    }
+    
     stream.progress('🧠 Running self-actualization on session start...');
     
     // Personalized greeting
@@ -1036,34 +1065,7 @@ async function handleGreetingWithSelfActualization(
         stream.markdown(`## 👋 Hello!\n\n`);
     }
     
-    stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n\n`);
-    
-    // Check cloud sync status
-    stream.progress('☁️ Checking global knowledge sync status...');
-    try {
-        const syncStatus = await getSyncStatus();
-        if (syncStatus.status === 'needs-pull') {
-            stream.markdown(`### ☁️ Cloud Knowledge Available\n`);
-            stream.markdown(`There may be new knowledge in your cloud. Consider syncing:\n\n`);
-            stream.button({
-                command: 'alex.syncKnowledge',
-                title: '☁️ Sync Global Knowledge',
-                arguments: []
-            });
-            stream.markdown(`\n`);
-        } else if (syncStatus.status === 'needs-push') {
-            stream.markdown(`### ☁️ Local Knowledge Not Synced\n`);
-            stream.markdown(`You have local insights that aren't backed up to cloud yet.\n\n`);
-            stream.button({
-                command: 'alex.syncKnowledge',
-                title: '☁️ Sync to Cloud',
-                arguments: []
-            });
-            stream.markdown(`\n`);
-        }
-    } catch (err) {
-        // Silently continue if sync check fails (not signed in, etc.)
-    }
+    stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n${personaInfo}\n`);
     
     // Run mini self-actualization report
     stream.markdown(`### 🧠 Quick Architecture Check\n\n`);
@@ -1075,11 +1077,9 @@ async function handleGreetingWithSelfActualization(
         arguments: []
     });
     
-    // Get version dynamically
-    const workspace = validateWorkspace();
-    const version = workspace.isValid && workspace.rootPath 
-        ? await getInstalledAlexVersion(workspace.rootPath) ?? 'Unknown'
-        : 'Unknown';
+    // Get extension version (consistent with /status)
+    const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
+    const version = extension?.packageJSON?.version || 'Unknown';
     
     stream.markdown(`\n\n**Alex v${version}** - Ready to assist!\n\n`);
     
@@ -1386,7 +1386,7 @@ async function handleKnowledgeStatusCommand(
 }
 
 /**
- * Handle /sync command - Bidirectional sync with GitHub
+ * Handle /sync command - DEPRECATED (Gist sync removed)
  */
 async function handleSyncCommand(
     request: vscode.ChatRequest,
@@ -1395,38 +1395,32 @@ async function handleSyncCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    stream.progress('☁️ Syncing knowledge with GitHub...');
+    stream.markdown(`## ⚠️ Cloud Sync Deprecated
 
-    try {
-        const result = await syncWithCloud();
-        const cloudUrl = await getCloudUrl();
-        
-        if (result.success) {
-            stream.markdown(`## ☁️ Cloud Sync Complete
+**Gist-based cloud sync has been deprecated.**
 
-✅ ${result.message}
+Your global knowledge is stored locally at:
+- **Windows**: \`%USERPROFILE%\\.alex\\global-knowledge\\\`
+- **macOS/Linux**: \`~/.alex/global-knowledge/\`
 
-| Metric | Count |
-|--------|-------|
-| 📤 Pushed | ${result.entriesPushed ?? 0} entries |
-| 📥 Pulled | ${result.entriesPulled ?? 0} entries |
+### Git-Based Sync (Recommended)
+To sync knowledge across machines, initialize the global knowledge folder as a Git repository:
 
+\`\`\`bash
+cd ~/.alex/global-knowledge
+git init
+git remote add origin <your-repo-url>
+git push -u origin main
+\`\`\`
+
+This gives you full control over versioning and privacy.
 `);
-            if (cloudUrl) {
-                stream.markdown(`**Cloud URL**: [View Gist](${cloudUrl})\n`);
-            }
-        } else {
-            stream.markdown(`## ❌ Sync Failed\n\n${result.message}\n\n*Make sure you're signed into GitHub in VS Code.*`);
-        }
-    } catch (err) {
-        stream.markdown(`❌ Error syncing: ${err}`);
-    }
 
     return { metadata: { command: 'sync' } };
 }
 
 /**
- * Handle /push command - Push local knowledge to GitHub
+ * Handle /push command - DEPRECATED (Gist sync removed)
  */
 async function handlePushCommand(
     request: vscode.ChatRequest,
@@ -1435,32 +1429,22 @@ async function handlePushCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    stream.progress('📤 Pushing knowledge to cloud...');
+    stream.markdown(`## ⚠️ Cloud Push Deprecated
 
-    try {
-        const result = await pushToCloud();
-        const cloudUrl = await getCloudUrl();
-        
-        if (result.success) {
-            stream.markdown(`## 📤 Push Complete
+**Gist-based cloud sync has been deprecated.**
 
-✅ ${result.message}
+Use Git to push your knowledge:
+\`\`\`bash
+cd ~/.alex/global-knowledge
+git add . && git commit -m "Knowledge update" && git push
+\`\`\`
 `);
-            if (cloudUrl) {
-                stream.markdown(`\n**Cloud URL**: [View Gist](${cloudUrl})\n`);
-            }
-        } else {
-            stream.markdown(`## ❌ Push Failed\n\n${result.message}`);
-        }
-    } catch (err) {
-        stream.markdown(`❌ Error pushing: ${err}`);
-    }
 
     return { metadata: { command: 'push' } };
 }
 
 /**
- * Handle /pull command - Pull knowledge from GitHub
+ * Handle /pull command - DEPRECATED (Gist sync removed)
  */
 async function handlePullCommand(
     request: vscode.ChatRequest,
@@ -1469,22 +1453,16 @@ async function handlePullCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    stream.progress('📥 Pulling knowledge from cloud...');
+    stream.markdown(`## ⚠️ Cloud Pull Deprecated
 
-    try {
-        const result = await pullFromCloud();
-        
-        if (result.success) {
-            stream.markdown(`## 📥 Pull Complete
+**Gist-based cloud sync has been deprecated.**
 
-✅ ${result.message}
+Use Git to pull your knowledge:
+\`\`\`bash
+cd ~/.alex/global-knowledge
+git pull
+\`\`\`
 `);
-        } else {
-            stream.markdown(`## ❌ Pull Failed\n\n${result.message}`);
-        }
-    } catch (err) {
-        stream.markdown(`❌ Error pulling: ${err}`);
-    }
 
     return { metadata: { command: 'pull' } };
 }
@@ -1631,9 +1609,9 @@ async function handleHelpCommand(
 | \`/saveinsight\` | Save a valuable learning |
 | \`/promote\` | Promote local knowledge to global |
 | \`/knowledgestatus\` | View global knowledge stats |
-| \`/sync\` | Sync knowledge with cloud |
-| \`/push\` | Push to cloud |
-| \`/pull\` | Pull from cloud |
+| \`/sync\` | ⚠️ Deprecated - use Git instead |
+| \`/push\` | ⚠️ Deprecated - use Git instead |
+| \`/pull\` | ⚠️ Deprecated - use Git instead |
 
 ### ☁️ Platform Development
 

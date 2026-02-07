@@ -254,14 +254,23 @@ Select-String -Path "*.md" -Pattern '[▼▲◄►]' |
 
 ## Mermaid vs ASCII Decision
 
+> **Default**: Use Mermaid unless you have a specific reason for ASCII. Mermaid auto-layouts, renders interactively, and supports theming via the **markdown-mermaid** skill.
+
 | Diagram Type | Use | Reason |
 | ------------ | --- | ------ |
-| Flow charts | Mermaid | Auto-layout, interactive |
-| Gantt/Timeline | Mermaid | Native support |
-| UI Mockups | ASCII | Precise layout control |
-| Conversation mockups | ASCII | Text-heavy, spacing matters |
-| Feature lists in boxes | ASCII | Better for bullet lists |
-| Simple architecture | Either | Mermaid for simple, ASCII for control |
+| Flow charts | **Mermaid** | Auto-layout, interactive, GitHub-native |
+| Gantt/Timeline | **Mermaid** | Native support, date handling |
+| Sequence diagrams | **Mermaid** | Lifelines, activation bars |
+| State machines | **Mermaid** | Standard notation, auto-routing |
+| ER diagrams | **Mermaid** | Relationship cardinality notation |
+| UI Mockups | **ASCII** | Precise pixel-level layout control |
+| Conversation mockups | **ASCII** | Text-heavy, spacing matters per-character |
+| Feature lists in boxes | **ASCII** | Better for bullet lists inside boxes |
+| Simple architecture | **Either** | Mermaid for auto-layout, ASCII for exact control |
+| Inline code comments | **ASCII** | Can't embed Mermaid in source code |
+| Terminal output | **ASCII** | Rendered in monospace, no Mermaid support |
+
+**When ASCII excels**: Content with precise character-level alignment, mixed bullet lists inside boxes, or rendering contexts without Mermaid support (terminals, code comments, plain text files).
 
 ---
 

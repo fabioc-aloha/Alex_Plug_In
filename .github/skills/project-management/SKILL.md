@@ -1,11 +1,11 @@
 ---
 name: "Project Management Skill"
-description: "Alex+Fabio project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work, and safety-first release gates."
+description: "Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work, and safety-first release gates."
 ---
 
 # Project Management Skill
 
-> Alex+Fabio project management: rapid iteration, meditation-based retrospectives, session-based work, and safety-first release gates.
+> Alex project management: rapid iteration, meditation-based retrospectives, session-based work, and safety-first release gates.
 
 ## Our Management Philosophy
 

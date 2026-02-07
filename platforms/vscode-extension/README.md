@@ -28,7 +28,7 @@
 | Platform               | Status      | Get Started                                                                                                 |
 | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
 | **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](platforms/m365-copilot/)                                                                    |
+| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)              |
 
 ### VS Code Extension
 
@@ -53,7 +53,7 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 - Email drafting for reminders
 - Teams and People context
 
-📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
+📘 **[M365 Copilot Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)**
 
 ---
 

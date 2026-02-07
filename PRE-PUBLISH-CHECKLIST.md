@@ -98,8 +98,8 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 ### README.md
 
 - [ ] **Banner image** uses raw GitHub URL (not relative path)
-  - ✅ `https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/assets/banner.png`
-  - ❌ `assets/banner.png`
+  - ✅ `https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg`
+  - ❌ `assets/banner.png` or relative paths
 - [ ] **All external links** use full GitHub URLs
   - LICENSE.md → `https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md`
   - CONTRIBUTING.md → `https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md`
@@ -173,7 +173,7 @@ Run `get_errors` in VS Code or check Problems panel:
 ### Files Included
 
 - [ ] `assets/icon.png` - Extension icon (128x128 or 256x256)
-- [ ] `assets/banner.png` - README banner
+- [ ] `.github/assets/banner.svg` - README banner (animated)
 - [ ] `dist/extension.js` - Bundled extension code
 - [ ] `README.md` - Marketplace description
 - [ ] `CHANGELOG.md` - Version history

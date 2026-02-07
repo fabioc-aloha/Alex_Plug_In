@@ -6,6 +6,7 @@ import {
   resetArchitecture,
 } from "./commands/initialize";
 import { runDreamProtocol } from "./commands/dream";
+import { registerHeirValidationCommand } from "./commands/heirValidation";
 import {
   setupEnvironment,
   offerEnvironmentSetup,
@@ -37,11 +38,7 @@ import {
 } from "./chat/globalKnowledge";
 import {
   registerCloudSyncTools,
-  syncWithCloud,
-  pushToCloud,
-  pullFromCloud,
-  getCloudUrl,
-  startBackgroundSync,
+  // Gist sync deprecated - syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync removed
 } from "./chat/cloudSync";
 import {
   checkHealth,
@@ -128,8 +125,8 @@ export function activate(context: vscode.ExtensionContext) {
   // Register global knowledge tools for cross-project learning
   registerGlobalKnowledgeTools(context);
 
-  // Register cloud sync tools for GitHub Gist backup
-  registerCloudSyncTools(context);
+  // Cloud sync tools deprecated - Gist sync removed in v5.0.1
+  // registerCloudSyncTools(context);
 
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
   registerContextMenuCommands(context);
@@ -143,9 +140,8 @@ export function activate(context: vscode.ExtensionContext) {
   // Register memory architecture dashboard (premium)
   registerMemoryDashboard(context);
 
-  // === UNCONSCIOUS MIND: Start background sync ===
-  // This creates Alex's transparent knowledge backup system
-  startBackgroundSync(context);
+  // Background cloud sync deprecated in v5.0.1 - use Git instead
+  // startBackgroundSync(context);
 
   // Initialize global knowledge base directories
   ensureGlobalKnowledgeDirectories()
@@ -248,15 +244,11 @@ export function activate(context: vscode.ExtensionContext) {
             },
             async (progress) => {
               // Phase 1: Run Dream Protocol (synapse validation + repair)
-              progress.report({ message: "Phase 1/3: Running Dream Protocol..." });
+              progress.report({ message: "Phase 1/2: Running Dream Protocol..." });
               const dreamResult = await runDreamProtocol(context, { silent: true });
               
-              // Phase 2: Sync Global Knowledge
-              progress.report({ message: "Phase 2/3: Syncing Global Knowledge..." });
-              const syncResult = await syncWithCloud();
-              
-              // Phase 3: Final health check
-              progress.report({ message: "Phase 3/3: Final health validation..." });
+              // Phase 2: Final health check
+              progress.report({ message: "Phase 2/2: Final health validation..." });
               clearHealthCache();
               await updateStatusBar(context, true);
               
@@ -269,9 +261,8 @@ export function activate(context: vscode.ExtensionContext) {
                   results.push(`⚠️ Synapses: ${dreamResult.brokenCount} broken, ${dreamResult.repairedCount} repaired`);
                 }
               }
-              results.push(syncResult.success ? `✅ GK Sync: ${syncResult.message}` : `⚠️ GK Sync: ${syncResult.message}`);
               
-              const overallSuccess = dreamResult?.brokenCount === 0 && syncResult.success;
+              const overallSuccess = dreamResult?.brokenCount === 0;
               const title = overallSuccess 
                 ? "🧠 Deep Brain QA Complete - Architecture Healthy!" 
                 : "🧠 Deep Brain QA Complete - Some Issues Remain";
@@ -395,6 +386,9 @@ export function activate(context: vscode.ExtensionContext) {
   // Register TTS (Text-to-Speech) commands
   registerTTSCommands(context);
 
+  // Register heir validation command (developer tool for release validation)
+  registerHeirValidationCommand(context);
+
   const startSessionDisposable = vscode.commands.registerCommand(
     "alex.startSession",
     async () => {
@@ -423,53 +417,26 @@ export function activate(context: vscode.ExtensionContext) {
     },
   );
 
-  // Cloud sync commands
+  // Cloud sync commands (DEPRECATED - Gist sync removed)
   const syncDisposable = vscode.commands.registerCommand(
     "alex.syncKnowledge",
     async () => {
-      await vscode.window.withProgress(
-        {
-          location: vscode.ProgressLocation.Notification,
-          title: "Syncing Global Knowledge...",
-          cancellable: false,
-        },
-        async () => {
-          const result = await syncWithCloud();
-          if (result.success) {
-            const url = await getCloudUrl();
-            const viewButton = url ? "View Gist" : undefined;
-            const selection = await vscode.window.showInformationMessage(
-              `✅ ${result.message}`,
-              ...(viewButton ? [viewButton] : []),
-            );
-            if (selection === "View Gist" && url) {
-              vscode.env.openExternal(vscode.Uri.parse(url));
-            }
-          } else {
-            vscode.window.showErrorMessage(`❌ ${result.message}`);
-          }
-        },
-      );
+      vscode.window.showWarningMessage(
+        "☁️ Gist sync has been deprecated. Use Git to sync ~/.alex/global-knowledge/",
+        "Learn More"
+      ).then(selection => {
+        if (selection === "Learn More") {
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In#global-knowledge"));
+        }
+      });
     },
   );
 
   const pushDisposable = vscode.commands.registerCommand(
     "alex.pushKnowledge",
     async () => {
-      await vscode.window.withProgress(
-        {
-          location: vscode.ProgressLocation.Notification,
-          title: "Pushing to Cloud...",
-          cancellable: false,
-        },
-        async () => {
-          const result = await pushToCloud();
-          if (result.success) {
-            vscode.window.showInformationMessage(`✅ ${result.message}`);
-          } else {
-            vscode.window.showErrorMessage(`❌ ${result.message}`);
-          }
-        },
+      vscode.window.showWarningMessage(
+        "☁️ Gist push has been deprecated. Use Git to push ~/.alex/global-knowledge/"
       );
     },
   );
@@ -477,20 +444,8 @@ export function activate(context: vscode.ExtensionContext) {
   const pullDisposable = vscode.commands.registerCommand(
     "alex.pullKnowledge",
     async () => {
-      await vscode.window.withProgress(
-        {
-          location: vscode.ProgressLocation.Notification,
-          title: "Pulling from Cloud...",
-          cancellable: false,
-        },
-        async () => {
-          const result = await pullFromCloud();
-          if (result.success) {
-            vscode.window.showInformationMessage(`✅ ${result.message}`);
-          } else {
-            vscode.window.showErrorMessage(`❌ ${result.message}`);
-          }
-        },
+      vscode.window.showWarningMessage(
+        "☁️ Gist pull has been deprecated. Use Git to pull ~/.alex/global-knowledge/"
       );
     },
   );
@@ -528,11 +483,6 @@ export function activate(context: vscode.ExtensionContext) {
           label: "$(sparkle) Self-Actualize",
           description: "Deep meditation and assessment",
           detail: "Ctrl+Alt+S",
-        },
-        {
-          label: "$(sync) Sync Knowledge",
-          description: "Sync global knowledge with GitHub",
-          detail: "Ctrl+Alt+K",
         },
         {
           label: "$(package) Export for M365",
@@ -627,8 +577,6 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.dream");
         } else if (selected.label.includes("Self-Actualize")) {
           vscode.commands.executeCommand("alex.selfActualize");
-        } else if (selected.label.includes("Sync")) {
-          vscode.commands.executeCommand("alex.syncKnowledge");
         } else if (selected.label.includes("Export for M365")) {
           vscode.commands.executeCommand("alex.exportForM365");
         } else if (selected.label.includes("Documentation")) {

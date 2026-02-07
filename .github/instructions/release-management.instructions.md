@@ -10,6 +10,7 @@
 
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
+- [scripts/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 
 ---
 

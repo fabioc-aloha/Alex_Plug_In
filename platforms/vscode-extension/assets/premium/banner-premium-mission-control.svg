@@ -112,15 +112,15 @@
   <!-- Tagline -->
   <text x="680" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
   
-  <!-- Subtitle: Mission Control -->
+  <!-- Subtitle: Mission Elevate -->
   <text x="680" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#888888" text-anchor="middle">
-    <tspan fill="#888888">Your </tspan><tspan fill="#0078d4" font-weight="bold">MISSION CONTROL</tspan><tspan fill="#888888"> for All Projects</tspan>
+    <tspan fill="#888888">Mission: </tspan><tspan fill="#0078d4" font-weight="bold">ELEVATE YOUR CODE</tspan><tspan fill="#888888"> to New Heights</tspan>
   </text>
   
   <!-- Premium feature badge -->
   <g transform="translate(1075, 85)">
     <rect x="0" y="0" width="165" height="28" rx="14" fill="#ff6b35" opacity="0.9"/>
-    <text x="82" y="19" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MISSION CONTROL</text>
+    <text x="82" y="19" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MISSION: ELEVATE</text>
   </g>
   
   <!-- CorreaX mark bottom left -->

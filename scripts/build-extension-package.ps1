@@ -40,9 +40,16 @@ $Exclusions = @(
     # Session-specific files (unique to Master Alex)
     "episodic/dream-report-*.md",
     "episodic/meditation-session-*.md",
+    "episodic/meditation-*.md",
+    "episodic/chronicle-*.md",
+    "episodic/self-actualization-*.md",
     
     # Development config
     "config/cognitive-config.json",
+    
+    # Personal user profile (unique to each user - never copy to heirs)
+    "config/user-profile.json",
+    "config/USER-PROFILE.md",
     
     # Master-only protection marker (CRITICAL: never copy to heirs)
     "config/MASTER-ALEX-PROTECTED.json",
@@ -57,6 +64,37 @@ $Exclusions = @(
     "skills/self-actualization",
     "skills/heir-curation",
     "skills/master-alex-audit"
+)
+
+# PERSONAL DATA PATTERNS - Fail build if found in heir
+# These patterns detect content that should not be in a generic distribution
+# Format: @{ Pattern = "regex"; Description = "what it detects"; AllowIn = @("file patterns to ignore") }
+$ForbiddenPatterns = @(
+    @{ 
+        Pattern     = "Fabio\s+Correa|Fabio's"
+        Description = "Developer's full name"
+        AllowIn     = @()  # Never allowed
+    },
+    @{ 
+        Pattern     = "correax@|fabiocorrea@"
+        Description = "Developer's email patterns"
+        AllowIn     = @()
+    },
+    @{
+        Pattern     = "Charlotte"
+        Description = "Personal location reference"
+        AllowIn     = @()
+    },
+    @{
+        Pattern     = "Alex\s*\+\s*Fabio"
+        Description = "Personal collaboration credit"
+        AllowIn     = @()
+    },
+    @{
+        Pattern     = "The user's name is \*\*[^*]+\*\*"
+        Description = "Hardcoded user name reference"
+        AllowIn     = @()
+    }
 )
 
 # Skills explicitly marked as inheritable (copy these)
@@ -85,7 +123,7 @@ function Test-ShouldExclude {
 }
 
 # Step 1: Validate source and VERSION SYNCHRONIZATION
-Write-Host "[1/6] Validating source and versions..." -ForegroundColor Yellow
+Write-Host "[1/7] Validating source and versions..." -ForegroundColor Yellow
 if (-not (Test-Path $SourceGithub)) {
     Write-Error "Source .github/ not found at $SourceGithub"
     exit 1
@@ -137,7 +175,7 @@ $sourceFiles = Get-ChildItem $SourceGithub -Recurse -File
 Write-Host "  Found $($sourceFiles.Count) files in source"
 
 # Step 2: Clean target (if not dry run)
-Write-Host "[2/6] Preparing target..." -ForegroundColor Yellow
+Write-Host "[2/7] Preparing target..." -ForegroundColor Yellow
 if (-not $DryRun) {
     if (Test-Path $TargetGithub) {
         Write-Host "  Removing existing $TargetGithub"
@@ -147,7 +185,7 @@ if (-not $DryRun) {
 }
 
 # Step 3: Copy files with exclusions
-Write-Host "[3/6] Copying files..." -ForegroundColor Yellow
+Write-Host "[3/7] Copying files..." -ForegroundColor Yellow
 $copied = 0
 $excluded = 0
 
@@ -181,8 +219,74 @@ foreach ($file in $sourceFiles) {
 Write-Host "  Copied: $copied files"
 Write-Host "  Excluded: $excluded files"
 
+# Step 3.5: Create fresh template files (not copied from Master)
+Write-Host "[3.5/7] Creating fresh template files..." -ForegroundColor Yellow
+if (-not $DryRun) {
+    # User Profile JSON - blank template
+    $userProfileTemplate = @{
+        name                 = ""
+        nickname             = ""
+        pronouns             = ""
+        formality            = "balanced"
+        detailLevel          = "balanced"
+        explanationStyle     = "mixed"
+        humor                = $true
+        encouragement        = $true
+        questionFrequency    = "moderate"
+        proactiveSuggestions = $true
+        primaryTechnologies  = @()
+        learningGoals        = @()
+        expertiseAreas       = @()
+        currentProjects      = @()
+        projectPersona       = @{
+            id         = ""
+            confidence = 0
+            reasons    = @()
+        }
+    }
+    $userProfilePath = Join-Path $TargetGithub "config/user-profile.json"
+    $userProfileDir = Split-Path $userProfilePath -Parent
+    if (-not (Test-Path $userProfileDir)) {
+        New-Item $userProfileDir -ItemType Directory -Force | Out-Null
+    }
+    $userProfileTemplate | ConvertTo-Json -Depth 3 | Set-Content $userProfilePath
+    Write-Host "  Created: config/user-profile.json (template)"
+
+    # User Profile Markdown - blank template
+    $userProfileMd = @"
+# User Profile
+
+This file stores your personalized Alex experience preferences.
+
+## Quick Setup
+
+Edit ``user-profile.json`` in this folder, or let Alex learn your preferences through conversation.
+
+| Field | Your Value |
+|-------|------------|
+| Name | *(not set)* |
+| Formality | balanced |
+| Detail Level | balanced |
+| Explanation Style | mixed |
+
+## How Alex Uses This
+
+- **Personalized responses**: Matches your communication style
+- **Smart suggestions**: Based on your expertise and goals  
+- **Project context**: Adapts to your current work
+
+Run ``Alex: Initialize`` to start the discovery process, or edit the JSON directly.
+"@
+    $userProfileMdPath = Join-Path $TargetGithub "config/USER-PROFILE.md"
+    Set-Content $userProfileMdPath $userProfileMd
+    Write-Host "  Created: config/USER-PROFILE.md (template)"
+}
+else {
+    Write-Host "  Skipped (--DryRun flag)" -ForegroundColor DarkGray
+}
+
 # Step 4: Generate manifest
-Write-Host "[4/6] Generating manifest..." -ForegroundColor Yellow
+Write-Host "[4/7] Generating manifest..." -ForegroundColor Yellow
 $manifest = @{
     generatedAt       = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
     sourceCommit      = (git -C $RootPath rev-parse --short HEAD 2>$null) ?? "unknown"
@@ -199,7 +303,7 @@ if (-not $DryRun) {
 }
 
 # Step 5: Compile extension (unless skipped)
-Write-Host "[5/6] Building extension..." -ForegroundColor Yellow
+Write-Host "[5/7] Building extension..." -ForegroundColor Yellow
 if ($SkipCompile) {
     Write-Host "  Skipped (--SkipCompile flag)" -ForegroundColor DarkGray
 }
@@ -223,7 +327,7 @@ else {
 }
 
 # Step 6: Final version verification
-Write-Host "[6/6] Verifying final state..." -ForegroundColor Yellow
+Write-Host "[6/7] Verifying heir version..." -ForegroundColor Yellow
 $heirInstructionsPath = Join-Path $TargetGithub "copilot-instructions.md"
 if (Test-Path $heirInstructionsPath) {
     $heirContent = Get-Content $heirInstructionsPath -Raw
@@ -238,6 +342,72 @@ if (Test-Path $heirInstructionsPath) {
             exit 1
         }
     }
+}
+
+# Step 7: Personal data validation (CRITICAL for curation integrity)
+Write-Host "[7/7] Scanning for personal data leakage..." -ForegroundColor Yellow
+$violations = @()
+$scannedFiles = 0
+
+if (-not $DryRun) {
+    $heirFiles = Get-ChildItem $TargetGithub -Recurse -File -Include "*.md", "*.json" | 
+    Where-Object { $_.Name -ne "BUILD-MANIFEST.json" }
+    
+    foreach ($file in $heirFiles) {
+        $scannedFiles++
+        $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
+        if (-not $content) { continue }
+        
+        $relativePath = $file.FullName.Substring($TargetGithub.Length + 1) -replace '\\', '/'
+        
+        foreach ($forbidden in $ForbiddenPatterns) {
+            # Check if this file is in the allow list
+            $isAllowed = $false
+            foreach ($allowPattern in $forbidden.AllowIn) {
+                if ($relativePath -like $allowPattern) {
+                    $isAllowed = $true
+                    break
+                }
+            }
+            
+            if (-not $isAllowed -and $content -match $forbidden.Pattern) {
+                $matchedText = $matches[0]
+                $violations += @{
+                    File    = $relativePath
+                    Pattern = $forbidden.Description
+                    Match   = if ($matchedText.Length -gt 50) { $matchedText.Substring(0, 50) + "..." } else { $matchedText }
+                }
+            }
+        }
+    }
+    
+    Write-Host "  Scanned $scannedFiles files for personal data"
+    
+    if ($violations.Count -gt 0) {
+        Write-Host ""
+        Write-Host "  ❌ PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
+        Write-Host "  =================================" -ForegroundColor Red
+        Write-Host ""
+        
+        foreach ($v in $violations) {
+            Write-Host "  📁 $($v.File)" -ForegroundColor Yellow
+            Write-Host "     Pattern: $($v.Pattern)" -ForegroundColor Gray
+            Write-Host "     Found:   '$($v.Match)'" -ForegroundColor Red
+            Write-Host ""
+        }
+        
+        Write-Host "  Fix: Edit the source files to remove personal data," -ForegroundColor Yellow
+        Write-Host "       or add files to exclusion list if they shouldn't be in heir." -ForegroundColor Yellow
+        Write-Host ""
+        Write-Error "Build aborted: $($violations.Count) personal data violation(s) found"
+        exit 1
+    }
+    else {
+        Write-Host "  ✅ No personal data found - heir is clean" -ForegroundColor Green
+    }
+}
+else {
+    Write-Host "  Skipped (--DryRun flag)" -ForegroundColor DarkGray
 }
 
 # Summary
@@ -256,5 +426,8 @@ if ($DryRun) {
     Write-Host "NOTE: This was a dry run. No files were modified." -ForegroundColor Yellow
 }
 else {
-    Write-Host "Next: Run .\scripts\release-preflight.ps1 to verify release readiness" -ForegroundColor Cyan
+    Write-Host "Next steps:" -ForegroundColor Cyan
+    Write-Host "  1. Run .\scripts\release-preflight.ps1 to verify release readiness" -ForegroundColor Gray
+    Write-Host "  2. Run 'Alex: Validate Heir (LLM Curation Check)' in VS Code for semantic validation" -ForegroundColor Gray
+    Write-Host ""
 }

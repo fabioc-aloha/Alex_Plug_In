@@ -16,7 +16,7 @@
     },
     {
       "bidirectional": true,
-      "reason": "Color theory, pastel palettes, accessibility for diagram styling",
+      "reason": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
       "type": "extends",
       "strength": 0.9,
       "target": ".github/skills/markdown-mermaid/SKILL.md"
@@ -51,7 +51,13 @@
     "logo",
     "branding",
     "UI design",
-    "mockup"
+    "mockup",
+    "color palette",
+    "contrast ratio",
+    "WCAG",
+    "pastel colors",
+    "diagram colors",
+    "mermaid colors"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

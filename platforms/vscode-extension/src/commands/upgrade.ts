@@ -26,6 +26,7 @@ import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils"
 import { runDreamProtocol } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
 import { initializeArchitecture } from "./initialize";
+import { detectAndUpdateProjectPersona } from "../chat/personaDetection";
 
 // ============================================================================
 // TYPES
@@ -1087,6 +1088,19 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
 
     // Offer environment setup
     await offerEnvironmentSetup();
+
+    // Detect and update project persona
+    // This helps identify the right context for users with multiple personas across projects
+    let personaDetected = false;
+    try {
+      const personaResult = await detectAndUpdateProjectPersona(rootPath);
+      if (personaResult) {
+        personaDetected = true;
+        console.log(`[Alex] Detected persona: ${personaResult.persona.name} (confidence: ${(personaResult.confidence * 100).toFixed(0)}%)`);
+      }
+    } catch {
+      // Persona detection failure is not fatal
+    }
 
     // Extract stats from captured candidates
     const restoredCount = (upgradeCandidates as any)._restoredCount || 0;

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -220,6 +220,11 @@
         "command": "alex.releasePreflight",
         "title": "Alex: Release Preflight",
         "icon": "$(rocket)"
+      },
+      {
+        "command": "alex.validateHeir",
+        "title": "Alex: Validate Heir (LLM Curation Check)",
+        "icon": "$(shield)"
       },
       {
         "command": "alex.codeReview",
@@ -559,7 +564,10 @@
               "How do I consolidate knowledge?",
               "What synaptic connections are available?",
               "Run a meditation session",
-              "Check architecture health"
+              "Check architecture health",
+              "What skills do I have?",
+              "Summarize my last meditation",
+              "How many synapses are healthy?"
             ]
           },
           {
@@ -568,7 +576,10 @@
             "examples": [
               "Deploy my app to Azure",
               "Create an Azure Function",
-              "Query my Azure resources"
+              "Query my Azure resources",
+              "Set up CI/CD with Azure DevOps",
+              "Configure Azure Key Vault",
+              "Best practices for Azure Functions"
             ]
           },
           {
@@ -577,7 +588,10 @@
             "examples": [
               "Build a Teams bot",
               "Create a Copilot agent",
-              "Add message extensions"
+              "Add message extensions",
+              "Build a declarative agent",
+              "Connect to Microsoft Graph",
+              "Deploy to Teams store"
             ]
           },
           {
@@ -587,106 +601,132 @@
               "How confident should I be in this?",
               "Should I verify this?",
               "Is this something I should double-check?",
-              "What's your confidence level?"
+              "What's your confidence level?",
+              "Help me think critically about this",
+              "What could go wrong with this approach?"
             ]
           }
         ],
         "commands": [
           {
             "name": "meditate",
-            "description": "Begin a guided meditation session for knowledge consolidation"
+            "description": "Begin a guided meditation session for knowledge consolidation",
+            "sampleRequest": "Consolidate today's learnings"
           },
           {
             "name": "dream",
-            "description": "Run neural maintenance to validate and repair synaptic connections"
+            "description": "Run neural maintenance to validate and repair synaptic connections",
+            "sampleRequest": "Run neural maintenance on my architecture"
           },
           {
             "name": "selfactualize",
-            "description": "Run comprehensive self-assessment: synapse health, version consistency, memory architecture, and create meditation record"
+            "description": "Run comprehensive self-assessment: synapse health, version consistency, memory architecture, and create meditation record",
+            "sampleRequest": "Deep assessment of my cognitive architecture"
           },
           {
             "name": "learn",
-            "description": "Acquire new domain knowledge through conversational learning"
+            "description": "Acquire new domain knowledge through conversational learning",
+            "sampleRequest": "Teach me about React Server Components"
           },
           {
             "name": "status",
-            "description": "Check the current status of Alex cognitive architecture"
+            "description": "Check the current status of Alex cognitive architecture",
+            "sampleRequest": "Show my architecture health"
           },
           {
             "name": "azure",
-            "description": "Get Azure development guidance with MCP tool recommendations"
+            "description": "Get Azure development guidance with MCP tool recommendations",
+            "sampleRequest": "Deploy a Node.js app to Azure App Service"
           },
           {
             "name": "m365",
-            "description": "Get Microsoft 365 development guidance with Copilot extensibility"
+            "description": "Get Microsoft 365 development guidance with Copilot extensibility",
+            "sampleRequest": "Create a Teams message extension"
           },
           {
             "name": "profile",
-            "description": "View and update your personal preferences for personalized interactions"
+            "description": "View and update your personal preferences for personalized interactions",
+            "sampleRequest": "Show my learning preferences"
           },
           {
             "name": "knowledge",
-            "description": "Search your global knowledge base for patterns and insights learned across all projects"
+            "description": "Search your global knowledge base for patterns and insights learned across all projects",
+            "sampleRequest": "Search for error handling patterns"
           },
           {
             "name": "saveinsight",
-            "description": "Save a valuable learning or insight to your global knowledge base for use in other projects"
+            "description": "Save a valuable learning or insight to your global knowledge base for use in other projects",
+            "sampleRequest": "Save what I learned about caching"
           },
           {
             "name": "promote",
-            "description": "Promote a project-local knowledge file (DK-*.md) to the global knowledge base"
+            "description": "Promote a project-local knowledge file (DK-*.md) to the global knowledge base",
+            "sampleRequest": "Promote DK-react-patterns.md to global"
           },
           {
             "name": "knowledgestatus",
-            "description": "View the status of your global knowledge base: patterns, insights, and known projects"
+            "description": "View the status of your global knowledge base: patterns, insights, and known projects",
+            "sampleRequest": "Show my global knowledge stats"
           },
           {
             "name": "sync",
-            "description": "Sync your global knowledge base with GitHub (bidirectional merge)"
+            "description": "Sync your global knowledge base with GitHub (bidirectional merge)",
+            "sampleRequest": "Sync my global knowledge with GitHub"
           },
           {
             "name": "push",
-            "description": "Push local global knowledge to GitHub Gist"
+            "description": "Push local global knowledge to GitHub Gist",
+            "sampleRequest": "Upload local knowledge to GitHub"
           },
           {
             "name": "pull",
-            "description": "Pull global knowledge from GitHub Gist to local"
+            "description": "Pull global knowledge from GitHub Gist to local",
+            "sampleRequest": "Download knowledge from GitHub"
           },
           {
             "name": "docs",
-            "description": "Open Alex cognitive architecture documentation"
+            "description": "Open Alex cognitive architecture documentation",
+            "sampleRequest": "Open architecture documentation"
           },
           {
             "name": "session",
-            "description": "Start or manage a focused learning session with optional Pomodoro timing"
+            "description": "Start or manage a focused learning session with optional Pomodoro timing",
+            "sampleRequest": "Start a 25-minute focus session on API design"
           },
           {
             "name": "goals",
-            "description": "View and manage learning goals with streak tracking and progress visualization"
+            "description": "View and manage learning goals with streak tracking and progress visualization",
+            "sampleRequest": "Show my learning goals and streaks"
           },
           {
             "name": "exportm365",
-            "description": "Export your Alex memory for M365 Copilot integration"
+            "description": "Export your Alex memory for M365 Copilot integration",
+            "sampleRequest": "Export my architecture for M365 Copilot"
           },
           {
             "name": "help",
-            "description": "Show all available Alex commands and capabilities"
+            "description": "Show all available Alex commands and capabilities",
+            "sampleRequest": "Show all Alex commands"
           },
           {
             "name": "forget",
-            "description": "Selectively remove information from Alex's memory (e.g., /forget old-project-name)"
+            "description": "Selectively remove information from Alex's memory (e.g., /forget old-project-name)",
+            "sampleRequest": "Remove old project memories"
           },
           {
             "name": "confidence",
-            "description": "Explain confidence levels and when to verify AI responses"
+            "description": "Explain confidence levels and when to verify AI responses",
+            "sampleRequest": "Explain confidence levels"
           },
           {
             "name": "creative",
-            "description": "Switch to creative/brainstorming mode - ideas offered for collaborative validation"
+            "description": "Switch to creative/brainstorming mode - ideas offered for collaborative validation",
+            "sampleRequest": "Brainstorm feature ideas for my app"
           },
           {
             "name": "verify",
-            "description": "Request verification walkthrough for high-stakes decisions"
+            "description": "Request verification walkthrough for high-stakes decisions",
+            "sampleRequest": "Walk me through verifying this decision"
           }
         ]
       }
@@ -700,6 +740,11 @@
         "icon": "$(pulse)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Check the health of Alex's synaptic connections",
+        "tags": [
+          "cognitive",
+          "health",
+          "diagnostic"
+        ],
         "annotations": {
           "readOnlyHint": true
         },
@@ -722,6 +767,11 @@
         "icon": "$(search)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Search Alex's memory files for information",
+        "tags": [
+          "cognitive",
+          "search",
+          "memory"
+        ],
         "annotations": {
           "readOnlyHint": true
         },
@@ -757,6 +807,10 @@
         "icon": "$(info)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Get Alex architecture status and configuration",
+        "tags": [
+          "cognitive",
+          "diagnostic"
+        ],
         "annotations": {
           "readOnlyHint": true
         },
@@ -779,6 +833,11 @@
         "icon": "$(extensions)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Get MCP tool recommendations for Azure/M365 development",
+        "tags": [
+          "azure",
+          "m365",
+          "recommendations"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -810,6 +869,10 @@
         "icon": "$(account)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Manage your personal preferences for Alex interactions",
+        "tags": [
+          "cognitive",
+          "personalization"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -844,6 +907,11 @@
         "icon": "$(sparkle)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Run comprehensive self-assessment and deep meditation",
+        "tags": [
+          "cognitive",
+          "health",
+          "meditation"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -868,6 +936,11 @@
         "icon": "$(globe)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Search knowledge learned from all your projects",
+        "tags": [
+          "knowledge",
+          "search",
+          "cross-project"
+        ],
         "annotations": {
           "readOnlyHint": true
         },
@@ -925,6 +998,10 @@
         "icon": "$(lightbulb)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Save a learning to your global knowledge base",
+        "tags": [
+          "knowledge",
+          "learning"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -983,6 +1060,10 @@
         "icon": "$(arrow-up)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Promote project knowledge to global",
+        "tags": [
+          "knowledge",
+          "curation"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -1028,6 +1109,10 @@
         "icon": "$(database)",
         "canBeReferencedInPrompt": true,
         "userDescription": "View global knowledge base status",
+        "tags": [
+          "knowledge",
+          "diagnostic"
+        ],
         "annotations": {
           "readOnlyHint": true
         },
@@ -1044,6 +1129,11 @@
         "icon": "$(cloud)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Sync global knowledge with GitHub",
+        "tags": [
+          "cloud",
+          "sync",
+          "knowledge"
+        ],
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -1056,6 +1146,69 @@
               ],
               "description": "Sync action: 'sync' (merge), 'push' (upload), or 'pull' (download)",
               "default": "sync"
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_focus_context",
+        "displayName": "Alex Focus Context",
+        "toolReferenceName": "focus_context",
+        "modelDescription": "Returns the user's current focus session and goals including Pomodoro timer status, active goals with progress, and streak tracking. Use when needing context about what the user is currently working on.",
+        "icon": "$(target)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Get your current focus session status and goals",
+        "tags": [
+          "productivity",
+          "session",
+          "goals"
+        ],
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "includeGoals": {
+              "type": "boolean",
+              "description": "Include goal tracking data (active goals, streaks, completion)",
+              "default": true
+            }
+          }
+        }
+      },
+      {
+        "name": "alex_heir_validation",
+        "displayName": "Alex Heir Validation",
+        "toolReferenceName": "heir_validation",
+        "modelDescription": "Scans heir content (.github/ in vscode-extension package) for personal data leaks and quality issues. Returns content for semantic analysis by the LLM. Use before publishing or after heir sync to validate content is safe for Marketplace distribution.",
+        "icon": "$(shield)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Validate heir content is safe for distribution",
+        "tags": [
+          "quality",
+          "validation",
+          "publishing"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope": {
+              "type": "string",
+              "enum": [
+                "all",
+                "instructions",
+                "prompts",
+                "skills",
+                "config"
+              ],
+              "description": "Validate specific folder or all heir content",
+              "default": "all"
+            },
+            "includeContent": {
+              "type": "boolean",
+              "description": "Return full content for LLM semantic analysis",
+              "default": true
             }
           }
         }

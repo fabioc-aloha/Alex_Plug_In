@@ -6,7 +6,7 @@ import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from 
 import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
 import { runDreamProtocol } from "./dream";
 import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectPersona, loadUserProfile, PERSONAS } from "../chat/personaDetection";
+import { detectPersona, detectAndUpdateProjectPersona, loadUserProfile, PERSONAS } from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
 
 interface FileManifestEntry {
@@ -400,6 +400,23 @@ async function performInitialization(
     // Offer environment setup (non-blocking)
     telemetry.log("command", "initialize_offering_setup");
     await offerEnvironmentSetup();
+
+    // Detect and persist project persona
+    let detectedPersonaName = '';
+    try {
+      const personaResult = await detectAndUpdateProjectPersona(rootPath);
+      if (personaResult) {
+        detectedPersonaName = personaResult.persona.name;
+        console.log(`[Alex] Initialize: Detected persona ${personaResult.persona.id}, updated P6 to ${personaResult.persona.skill}`);
+        telemetry.log("command", "initialize_persona_detected", {
+          persona: personaResult.persona.id,
+          skill: personaResult.persona.skill,
+          confidence: personaResult.confidence
+        });
+      }
+    } catch (err) {
+      console.log('[Alex] Initialize: Persona detection skipped');
+    }
 
     const result = await vscode.window.showInformationMessage(
       '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',

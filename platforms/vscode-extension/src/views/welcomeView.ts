@@ -9,7 +9,7 @@ import {
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from "../chat/personaDetection";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
-import { getSyncStatus, getLastSyncTimestamp } from "../chat/cloudSync";
+// Cloud sync deprecated - Gist sync removed in v5.0.1
 import { getCurrentSession, isSessionActive, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
@@ -20,7 +20,7 @@ import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelec
  * Nudge types for contextual reminders
  */
 interface Nudge {
-  type: 'dream' | 'sync' | 'streak' | 'health' | 'tip' | 'focus';
+  type: 'dream' | 'streak' | 'health' | 'tip' | 'focus' | 'mission';
   icon: string;
   message: string;
   action?: string;
@@ -58,7 +58,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message) => {
       // Commands that use operation lock - check before executing
-      const lockedCommands = ["dream", "syncKnowledge", "setupEnvironment"];
+      const lockedCommands = ["dream", "setupEnvironment"];
 
       if (lockedCommands.includes(message.command) && isOperationInProgress()) {
         vscode.window.showWarningMessage(
@@ -82,9 +82,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         case "selfActualize":
           vscode.commands.executeCommand("alex.selfActualize");
-          break;
-        case "syncKnowledge":
-          vscode.commands.executeCommand("alex.syncKnowledge");
           break;
         case "exportM365":
           vscode.commands.executeCommand("alex.exportForM365");
@@ -170,12 +167,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     try {
       // Gather all status data in parallel
-      const [health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate, gkRepoPath] =
+      const [health, goalsSummary, lastDreamDate, gkRepoPath] =
         await Promise.all([
           checkHealth(false),
-          getSyncStatus(),
           getGoalsSummary(),
-          getLastSyncTimestamp(),
           this._getLastDreamDate(),
           detectGlobalKnowledgeRepo(),
         ]);
@@ -183,11 +178,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
       
-      // Detect premium features and get appropriate assets (pass gkRepoPath for accurate detection)
-      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
-      const premiumAssets = getPremiumAssets(premiumFlags, true); // rotate banners
-      
-      // Detect persona from user profile
+      // Detect persona from user profile (needed for premium asset personalization)
       let personaResult: PersonaDetectionResult | null = null;
       const workspaceFolders = vscode.workspace.workspaceFolders;
       if (workspaceFolders) {
@@ -195,17 +186,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
       }
       
+      // Detect premium features and get appropriate assets (pass persona's bannerNoun)
+      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
+      const bannerNoun = personaResult?.persona?.bannerNoun ?? 'CODE';
+      const premiumAssets = getPremiumAssets(premiumFlags, true, bannerNoun); // rotate banners with persona noun
+      
+      // Get workspace name for mission card context
+      const workspaceName = workspaceFolders?.[0]?.name ?? 'Workspace';
+      
       // Get extension version
       const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
       const version = extension?.packageJSON?.version || '0.0.0';
 
-      // Generate nudges based on current state
-      const nudges = this._generateNudges(health, syncStatus, goalsSummary, lastSyncDate, lastDreamDate, session);
+      // Generate nudges based on current state (includes mission card from premium assets)
+      const nudges = this._generateNudges(health, goalsSummary, lastDreamDate, session, premiumAssets, workspaceName);
 
       this._view.webview.html = this._getHtmlContent(
         this._view.webview,
         health,
-        syncStatus,
         session,
         goalsSummary,
         version,
@@ -250,19 +248,30 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   /**
    * Generate contextual nudges based on current state
-   * Returns max 2 nudges to avoid overwhelming the user
+   * Returns max 3 nudges (mission + up to 2 contextual)
    */
   private _generateNudges(
     health: HealthCheckResult,
-    syncStatus: { status: string; message: string },
     goals: { activeGoals: LearningGoal[]; streakDays: number; completedToday: number },
-    lastSyncDate: Date | null,
     lastDreamDate: Date | null,
-    session: Session | null
+    session: Session | null,
+    premiumAssets?: PremiumAssetSelection,
+    workspaceName?: string
   ): Nudge[] {
     const nudges: Nudge[] = [];
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
+
+    // Mission statement with workspace context (always shown when missionControl is enabled)
+    if (premiumAssets?.missionStatement) {
+      const wsLabel = workspaceName ? `${workspaceName}: ` : '';
+      nudges.push({
+        type: 'mission',
+        icon: '🚀',
+        message: `${wsLabel}${premiumAssets.missionStatement}`,
+        priority: 0  // Highest priority — mission statement always visible
+      });
+    }
 
     // Active focus session reminder (high priority)
     if (session && !session.isPaused && !session.isBreak) {
@@ -276,11 +285,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         message: `Focus: "${session.topic}" — ${remainingMins}m left${goalReminder}`,
         action: 'sessionActions',
         actionLabel: 'Actions',
-        priority: 0  // Highest priority — keep user focused
+        priority: 1  // High priority — keep user focused
       });
     }
 
-    // Check health issues (highest priority)
+    // Check health issues (high priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
       nudges.push({
         type: 'health',
@@ -288,11 +297,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         message: `${health.brokenSynapses} broken synapses need repair`,
         action: 'dream',
         actionLabel: 'Run Dream',
-        priority: 1
+        priority: 2
       });
     }
 
-    // Check streak at risk (high priority)
+    // Check streak at risk (medium-high priority)
     if (goals.streakDays > 0 && goals.completedToday === 0) {
       nudges.push({
         type: 'streak',
@@ -300,7 +309,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         message: `${goals.streakDays}-day streak at risk! Complete a goal today.`,
         action: 'showGoals',
         actionLabel: 'View Goals',
-        priority: 2
+        priority: 3
       });
     }
 
@@ -314,7 +323,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           message: `Haven't dreamed in ${daysSinceDream} days. Neural maintenance recommended.`,
           action: 'dream',
           actionLabel: 'Dream',
-          priority: 3
+          priority: 4
         });
       }
     } else {
@@ -325,36 +334,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         message: 'Run Dream to validate your cognitive architecture.',
         action: 'dream',
         actionLabel: 'Dream',
-        priority: 5
+        priority: 6
       });
     }
 
-    // Check sync status (medium priority)
-    if (syncStatus.status === 'needs-push' || syncStatus.status === 'needs-pull') {
-      nudges.push({
-        type: 'sync',
-        icon: '☁️',
-        message: syncStatus.status === 'needs-push' ? 'Local changes not synced to cloud.' : 'Cloud has updates to pull.',
-        action: 'syncKnowledge',
-        actionLabel: 'Sync',
-        priority: 4
-      });
-    } else if (lastSyncDate) {
-      const daysSinceSync = Math.floor((now.getTime() - lastSyncDate.getTime()) / dayMs);
-      if (daysSinceSync >= 14) {
-        nudges.push({
-          type: 'sync',
-          icon: '☁️',
-          message: `Last synced ${daysSinceSync} days ago.`,
-          action: 'syncKnowledge',
-          actionLabel: 'Sync',
-          priority: 6
-        });
-      }
-    }
-
-    // Sort by priority and return top 2
-    return nudges.sort((a, b) => a.priority - b.priority).slice(0, 2);
+    // Sort by priority and return top 3 (mission + up to 2 contextual)
+    return nudges.sort((a, b) => a.priority - b.priority).slice(0, 3);
   }
 
   private _getLoadingHtml(): string {
@@ -424,7 +409,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private _getHtmlContent(
     webview: vscode.Webview,
     health: HealthCheckResult,
-    syncStatus: { status: string; message: string },
     session: ReturnType<typeof getCurrentSession>,
     goals: {
       activeGoals: LearningGoal[];
@@ -440,11 +424,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   ): string {
     // Logo URI for webview - use premium asset if available
     const logoUri = getAssetUri(webview, this._extensionUri, premiumAssets.logoPath);
-    
-    // Banner feature highlight (shown if premium feature is active)
-    const featureHighlight = premiumAssets.featureHighlight !== 'none' 
-      ? `<span class="premium-badge" title="${premiumAssets.bannerAlt}">✨ ${premiumAssets.featureHighlight}</span>` 
-      : '';
 
     // Persona display
     const persona = personaResult?.persona;
@@ -490,31 +469,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     };
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
-    // Get workspace/folder name (vscode.workspace.name works for both workspaces and folders)
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    const workspaceName = vscode.workspace.name || workspaceFolders?.[0]?.name || "No folder open";
-
-    // Count skills in workspace
-    let skillCount = 0;
-    if (workspaceFolders) {
-      const skillsPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "skills");
-      try {
-        if (fs.existsSync(skillsPath)) {
-          skillCount = fs.readdirSync(skillsPath).filter(f => 
-            fs.statSync(path.join(skillsPath, f)).isDirectory()
-          ).length;
-        }
-      } catch { /* ignore */ }
-    }
-
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthText = isHealthy
       ? "Healthy"
       : `${health.brokenSynapses} issues`;
 
-    // Sync status
-    const lastSyncText = syncStatus.message;
+    // Streak days for status display
+    const streakDays = goals.streakDays;
 
     // Session status
     const sessionHtml = session
@@ -555,76 +517,49 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+            cursor: pointer;
+            transition: transform 0.15s ease;
         }
-        .header-title-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
+        .header-icon:hover {
+            transform: scale(1.08);
         }
         .header-title {
             font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-        .header-tagline {
-            font-size: 9px;
-            color: var(--persona-accent);
-            font-weight: 500;
-            letter-spacing: 0.2px;
-            opacity: 0.9;
-        }
-        .header-workspace {
-            font-size: 10px;
-            color: var(--vscode-descriptionForeground);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 160px;
-            opacity: 0.8;
+            letter-spacing: -0.2px;
         }
         .header-persona {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--vscode-foreground);
-            background: color-mix(in srgb, var(--persona-accent) 20%, transparent);
-            border: 1px solid color-mix(in srgb, var(--persona-accent) 40%, transparent);
-            padding: 2px 6px;
-            border-radius: 10px;
+            background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
+            border: 1px solid color-mix(in srgb, var(--persona-accent) 30%, transparent);
+            padding: 3px 8px;
+            border-radius: 12px;
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .header-persona:hover {
+            background: color-mix(in srgb, var(--persona-accent) 25%, transparent);
         }
         .header-text {
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 4px;
             min-width: 0;
             flex: 1;
-        }
-        .version-badge {
-            background: var(--vscode-badge-background, #4d4d4d);
-            color: var(--vscode-badge-foreground, white);
-            font-size: 9px;
-            font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 8px;
-            letter-spacing: 0.1px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.15s ease;
-        }
-        .version-badge:hover {
-            opacity: 1;
         }
         .premium-badge {
             background: var(--vscode-badge-background, #4d4d4d);
@@ -929,6 +864,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .nudge-card.nudge-streak {
             border-left-color: var(--vscode-charts-orange, #f0883e);
         }
+        .nudge-card.nudge-mission {
+            border-left-color: var(--vscode-charts-purple, #a371f7);
+            background: linear-gradient(90deg, var(--vscode-editor-background), rgba(163, 113, 247, 0.08));
+        }
         .nudge-icon {
             font-size: 14px;
             flex-shrink: 0;
@@ -1048,15 +987,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex" class="header-icon" />
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('reportIssue')" title="Alex Cognitive v${version} — Click for diagnostics" />
             <div class="header-text">
-                <div class="header-title-row">
-                    <span class="header-title">Alex Cognitive</span>
-                    <span class="version-badge" onclick="cmd('reportIssue')" title="Click to view diagnostics">v${version}</span>
-                    ${featureHighlight}
-                </div>
-                <span class="header-persona" title="Detected as ${personaName}">${personaIcon} ${personaName}</span>
-                <span class="header-workspace" title="${this._escapeHtml(workspaceName)}">${this._escapeHtml(workspaceName)}</span>
+                <span class="header-title">Alex Cognitive</span>
+                <span class="header-persona" onclick="cmd('skillReview')" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
             </div>
             <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
         </div>
@@ -1072,17 +1006,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <div class="status-label">Health</div>
                     <div class="status-value"><span class="status-dot ${isHealthy ? 'dot-green' : health.brokenSynapses > 5 ? 'dot-red' : 'dot-yellow'}"></span>${healthText}</div>
                 </div>
-                <div class="status-item ${syncStatus.status === 'up-to-date' ? 'status-good' : ''}">
-                    <div class="status-label">Sync</div>
-                    <div class="status-value"><span class="status-dot ${syncStatus.status === 'up-to-date' ? 'dot-green' : syncStatus.status === 'error' ? 'dot-red' : 'dot-yellow'}"></span>${lastSyncText}</div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Skills</div>
-                    <div class="status-value"><span class="status-num">${skillCount}</span></div>
-                </div>
-                <div class="status-item">
-                    <div class="status-label">Synapses</div>
-                    <div class="status-value"><span class="status-num">${health.totalSynapses}</span></div>
+                <div class="status-item ${streakDays > 0 ? 'status-good' : ''}">
+                    <div class="status-label">Streak</div>
+                    <div class="status-value"><span class="status-dot ${streakDays > 0 ? 'dot-green' : 'dot-yellow'}"></span>${streakDays > 0 ? streakDays + ' days' : 'Start today!'}</div>
                 </div>
             </div>
         </div>
@@ -1117,10 +1043,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 ${hasGlobalKnowledge ? `<div class="action-group-label">KNOWLEDGE</div>
-                <button class="action-btn" onclick="cmd('syncKnowledge')">
-                    <span class="action-icon">☁️</span>
-                    <span class="action-text">Sync Knowledge</span>
-                </button>
                 <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="Premium: Requires Global Knowledge">
                     <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
@@ -1169,7 +1091,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>
-                <button class="action-btn" onclick="cmd('setupEnvironment')">
+                <button class="action-btn" onclick="cmd('setupEnvironment')" title="Configure VS Code settings: Essential, Recommended, Extended Thinking">
                     <span class="action-icon">⚙️</span>
                     <span class="action-text">Environment Setup</span>
                 </button>
@@ -1346,7 +1268,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
                             <li><strong>Cloud Sync</strong> - Automatic backup to GitHub Gists with conflict resolution</li>
-                            <li><strong>Skill Library</strong> - 54 portable skills with triggers and synaptic connections</li>
+                            <li><strong>Skill Library</strong> - 75 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>
                     </div>
@@ -1377,6 +1299,26 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>M365 Export</strong> - Package knowledge for Microsoft 365 Copilot integration</li>
                             <li><strong>Architecture Upgrade</strong> - Seamless migration between versions with backup</li>
                             <li><strong>User Profile</strong> - Personalized communication style and preferences</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">⚙️ Environment Setup</div>
+                        <ul class="feature-list">
+                            <li><strong>Essential Settings</strong> - instruction/prompt file locations, agent mode, skill loading</li>
+                            <li><strong>Recommended Settings</strong> - thinking tool, agent requests, MCP gallery</li>
+                            <li><strong>Extended Thinking</strong> - Opus 4.5 deep reasoning for meditation/learning</li>
+                            <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt P6 skill (GK premium)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category">
+                        <div class="feature-category-title">📁 Configuration Locations</div>
+                        <ul class="feature-list">
+                            <li><strong>.github/config/</strong> - All Alex configuration files</li>
+                            <li><strong>user-profile.json</strong> - Communication preferences and project persona</li>
+                            <li><strong>markdown-light.css</strong> - GitHub-style markdown preview theme</li>
+                            <li><strong>cognitive-config.json</strong> - Dream/meditation state tracking</li>
                         </ul>
                     </div>
                     

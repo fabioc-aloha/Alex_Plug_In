@@ -101,9 +101,6 @@ export async function openMemoryDashboard(context: vscode.ExtensionContext): Pro
                 case 'deepBrainQA':
                     vscode.commands.executeCommand('alex.deepBrainQA');
                     break;
-                case 'gkSync':
-                    vscode.commands.executeCommand('alex.syncKnowledge');
-                    break;
             }
         },
         undefined,
@@ -596,7 +593,6 @@ async function getWebviewContent(
             </div>
             <div class="header-actions">
                 ${hasIssues ? `<button class="btn btn-fix" onclick="cmd('deepBrainQA')">🔧 Fix Issues</button>` : ''}
-                <button class="btn btn-secondary" onclick="cmd('gkSync')">☁️ Sync</button>
                 <button class="btn btn-secondary" onclick="cmd('openHealthDashboard')">📊 Health</button>
                 <button class="btn btn-secondary" onclick="cmd('openSkillCatalog')">📚 Skills</button>
                 <button class="btn btn-accent" onclick="cmd('refresh')">🔄 Refresh</button>

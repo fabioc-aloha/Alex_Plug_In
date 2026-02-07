@@ -16,7 +16,7 @@ body,
        PREVIEW WIDTH - Adjust this value to change
        the maximum width of the markdown preview
        ================================================ */
-    --preview-max-width: 1400px;
+    --preview-max-width: 1600px;
 
     --vscode-textBlockQuote-background: #f6f8fa !important;
     --vscode-textBlockQuote-border: #d1d9e0 !important;
