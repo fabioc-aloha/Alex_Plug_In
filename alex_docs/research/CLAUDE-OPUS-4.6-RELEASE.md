@@ -402,7 +402,7 @@ From official docs:
 ## Action Items for Alex
 
 1. **Update copilot-instructions.md** — Change model reference from Opus 4.5 to Opus 4.6
-2. **Test 1M context** — Can we load all 73 skills + synapses in one session?
+2. **Test 1M context** — Can we load all 74 skills + synapses in one session?
 3. **Explore Agent Teams** — Research multi-agent patterns for Brain QA, Dream, etc.
 4. **Leverage adaptive thinking** — Meditation sessions may benefit from `/effort max`
 5. **Context compaction** — Test long meditation sessions for stability

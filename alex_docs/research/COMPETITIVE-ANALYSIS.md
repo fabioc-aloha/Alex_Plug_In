@@ -86,7 +86,7 @@ mindmap
 mindmap
   root((VS Code Extension\nEcosystem))
     🧠 Alex
-      73 Skills
+      74 Skills
       TTS + Gamma + Images
       Cognitive Architecture
       Global Knowledge Sync
@@ -176,7 +176,7 @@ These VS Code extensions target the same cognitive/memory niche as Alex — pers
 
 | Extension                                                                                                          | Focus                   | Key Features                                            | Installs | Threat   | Marketplace                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------ | ----------------------- | ------------------------------------------------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| **[Alex](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)**           | Cognitive Architecture  | 73 skills, TTS, Gamma, memory, meditation, focus mode   | 23       | —        | [Link](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **[Alex](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)**           | Cognitive Architecture  | 74 skills, TTS, Gamma, memory, meditation, focus mode   | 23       | —        | [Link](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
 | **[Sona](https://marketplace.visualstudio.com/items?itemName=waycoreinc.sona-ai-native-programming)**              | Cognitive Accessibility | Focus Mode, Working Memory, ADHD/Dyslexia support       | 157      | 🟠 Medium | [Link](https://marketplace.visualstudio.com/items?itemName=waycoreinc.sona-ai-native-programming)    |
 | **[Reasoning Layer RL4](https://marketplace.visualstudio.com/items?itemName=valentingaludec.reasoning-layer-rl4)** | Dev Continuity          | Captures dev context, reasoning history across sessions | 13       | 🟡 Low    | [Link](https://marketplace.visualstudio.com/items?itemName=valentingaludec.reasoning-layer-rl4)      |
 | **[Agent Memory](https://marketplace.visualstudio.com/items?itemName=digitarald.agent-memory)**                    | Memory Persistence      | Store/retrieve context across conversations             | 1,590    | 🟠 Medium | [Link](https://marketplace.visualstudio.com/items?itemName=digitarald.agent-memory)                  |
@@ -207,7 +207,7 @@ Major agentic coding extensions that compete on different dimensions:
 #### Key Insights
 
 **Alex's Advantages Over Direct Competitors:**
-- **Mature architecture**: 73 skills vs single-feature extensions
+- **Mature architecture**: 74 skills vs single-feature extensions
 - **Multi-modal**: TTS, Gamma, image generation (none have this)
 - **Symbiotic approach**: Runs on Copilot (inherits LLM power)
 - **Global knowledge**: Cross-project learning (only Obsidian Brain competes)
@@ -330,7 +330,7 @@ Alex needs to either:
 
 **Legend**: ⭐⭐⭐ = Excellent | ⭐⭐ = Good | ⭐ = Basic | ❌ = None
 
-**Key Takeaway**: Alex is the only extension combining cognitive architecture (meditation, dream, reflection) with multi-modal output (TTS, images, presentations) and deep Copilot integration (73 skills, 11 LM Tools). Competitors focus on single aspects — memory (Agent Memory, Cortex), knowledge graphs (Flowbaby), or accessibility (Sona).
+**Key Takeaway**: Alex is the only extension combining cognitive architecture (meditation, dream, reflection) with multi-modal output (TTS, images, presentations) and deep Copilot integration (74 skills, 11 LM Tools). Competitors focus on single aspects — memory (Agent Memory, Cortex), knowledge graphs (Flowbaby), or accessibility (Sona).
 
 
 ---
@@ -367,7 +367,7 @@ Alex needs to either:
 - 10+ IDE platform support
 
 **What Alex Adds to Copilot:**
-- 73 skills with action-keyword routing
+- 74 skills with action-keyword routing
 - Cross-project knowledge transfer (Global Knowledge)
 - Meditation & dream protocols for consolidation
 - Emotional intelligence (frustration/success detection)
@@ -394,7 +394,7 @@ Alex needs to either:
 │  Alex Cognitive Architecture (Learning Layer)                │
 │    • @alex chat participant                                   │
 │    • 11 Language Model Tools                                  │
-│    • 73 skills with synaptic connections                      │
+│    • 74 skills with synaptic connections                      │
 │    • Memory architecture (procedural, episodic, domain)       │
 │    • Global knowledge + cloud sync                            │
 │    • Dream/meditation protocols                               │
@@ -633,7 +633,7 @@ Alex also runs as a **declarative agent on M365 Copilot**, bringing unified pers
 - **Windsurf**: Memories feature, MCP support, JetBrains, 1M+ users, Cognition-acquired
 - **Claude Code**: Terminal-first, Cowork agents, Skills, CLAUDE.md, 99.9% accuracy claims
 - **OpenAI Codex**: Parallel sandbox execution, AGENTS.md spec, GitHub PR integration
-- **Alex v4.2.12**: All LLMs via Copilot, 73 skills, TTS v2.2, Gamma, Focus mode, 50+ Azure MCP tools
+- **Alex v4.2.12**: All LLMs via Copilot, 74 skills, TTS v2.2, Gamma, Focus mode, 50+ Azure MCP tools
 
 ---
 

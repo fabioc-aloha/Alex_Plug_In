@@ -314,7 +314,7 @@ Altman's vision: AI enables individuals to rival small companies.
 | Institutional memory  | Global Knowledge Base                |
 | Standard procedures   | Procedural Memory (.instructions.md) |
 | Case studies          | Episodic Memory (.prompt.md)         |
-| Specialized expertise | Skills library (73 skills)           |
+| Specialized expertise | Skills library (74 skills)           |
 | Quality assurance     | Dream state validation               |
 | Strategic planning    | Self-actualization assessment        |
 

@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.0] - 2026-02-06
+
+> **Global Knowledge** — Cross-project knowledge sharing, persona-aware UX, premium branding
+
+### Added
+
+- **🌐 Global Knowledge Infrastructure**
+  - 7 slash commands: `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`, `/sync`, `/push`, `/pull`
+  - 5 agent-callable tools: `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`, `cloud_sync`
+  - GK init integrated into `Alex: Initialize Architecture` command
+  - Team sharing via Git repository collaboration
+
+- **🎯 Persona-Aware Welcome Sidebar**
+  - Detects user persona from profile and workspace (Developer, Academic, Researcher, etc.)
+  - Adapts UI accent colors and recommendations based on persona
+  - 15 marketing personas with confidence scoring
+
+- **⭐ Premium Asset Switcher**
+  - Dynamic logo/banner selection based on GK repository status
+  - Premium badge styling (discreet grayscale aesthetic)
+  - 5 premium logo concepts for Global Knowledge branding
+
+- **🔗 Global Knowledge Sync Skill**
+  - New inheritable skill for GK repository integration
+  - Setup instructions for new users
+  - Cross-project knowledge sharing foundation
+
+- **🧠 Working Memory Architecture Refinement**
+  - Explicit 7-slot working memory table (P1-P7)
+  - P6 special rule: Infer from Pomodoro timer goal or session objective
+  - "Last Assessed" date tracking for domain slots
+  - Dynamic P5-P7 domain slot rotation based on task focus
+
+### Changed
+
+- **🎨 UX Declutter**
+  - Removed all keyboard shortcut hints from UI buttons
+  - Cleaner, less cluttered interface throughout
+
+- **📊 Premium Badge Styling**
+  - More discreet grayscale styling for premium features
+  - Nuanced persona accent colors (badge, recommended button, progress bars)
+  - Replaced purple with teal across UI
+
+### Fixed
+
+- **🐛 TypeScript Errors**
+  - Fixed errors in globalKnowledge and welcomeView modules
+
+---
+
 ## [4.2.12] - 2026-02-05
 
 > **TTS Hotfix** — Fixed stalling on long documents with chunking, timeout, retry, and speaker warmup

@@ -50,6 +50,7 @@ Search this index when processing any task request:
 | ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution |
+| global-knowledge-sync | sync knowledge, push gk, pull gk, gk sync, cloud sync, promote to global |
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |

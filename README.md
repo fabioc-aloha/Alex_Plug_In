@@ -107,7 +107,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
 | **Chat & Agents** | `@alex` participant, 24 slash commands, 11 LM tools, 3 custom agents          |
-| **Intelligence**  | 73 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 74 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
@@ -695,9 +695,43 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v4.2.12
+## 🆕 What's New in v5.0.0
 
-### 🧠 Cognitive Symbiosis Paradigm
+### 🌐 Global Knowledge Infrastructure
+
+Cross-project knowledge sharing is now built-in:
+
+- **7 slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`, `/sync`, `/push`, `/pull`
+- **5 agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`, `cloud_sync`
+- **Team sharing** — Share your GK repo via Git for instant team knowledge sync
+- **GK init integrated** — `Alex: Initialize Architecture` now scaffolds GK automatically
+
+### 🎯 Persona-Aware UX
+
+- **Auto-detection** — Detects 15 user personas from profile and workspace files
+- **Adaptive theming** — UI accent colors match detected persona
+- **Skill recommendations** — Suggests relevant skills based on persona
+
+### ⭐ Premium Asset System
+
+- **Dynamic branding** — Logo switches based on GK status
+- **GK badge** — Discreet "GK" badge when Global Knowledge is enabled
+- **Grayscale aesthetic** — Professional, non-distracting premium indicators
+
+### 🧠 Architecture Refinements
+
+- **7-slot working memory** — Explicit P1-P7 slots with dynamic rotation
+- **LLM as Executive Function** — Claude/GPT as prefrontal cortex model
+- **Model tier awareness** — Warnings when Frontier models needed
+
+---
+
+### Previous: v4.2.12
+
+<details>
+<summary>v4.2.12 Release Notes</summary>
+
+#### 🧠 Cognitive Symbiosis Paradigm
 
 Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant → **Partner**:
 
@@ -706,18 +740,18 @@ Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant 
 - **Partnership Equation** — `(Intent × Capability × Context) ÷ Friction`
 - **Neuroanatomical Diagrams** — Architecture now includes brain-analog Mermaid visualizations
 
-### 🎙️ TTS v2.2 - Robust Speech Synthesis
+#### 🎙️ TTS v2.2 - Robust Speech Synthesis
 
 - **Chunking** — Splits long documents at paragraph/sentence boundaries
 - **Auto-summarization** — Offers to summarize documents over 5 minutes
 - **Retry with backoff** — 3 attempts with exponential backoff + jitter
 - **Speaker warmup** — 2-second delay for Bluetooth/USB speakers
 
-### 🧠 Brain QA Skill
+#### 🧠 Brain QA Skill
 
 8-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
-### 💡 Smart Nudges
+#### 💡 Smart Nudges
 
 Contextual reminders appear at the top of the Welcome View (max 2 at a time):
 
@@ -727,6 +761,8 @@ Contextual reminders appear at the top of the Welcome View (max 2 at a time):
 - "Local changes not synced" - sync status nudges
 
 Each nudge has a one-click action button to resolve.
+
+</details>
 
 ### ☁️ OneDrive Auto-Sync
 
@@ -748,7 +784,7 @@ See the [Full Changelog](CHANGELOG.md) for complete version history and release 
 
 ## 📖 Documentation
 
-> 📘 **New to Alex?** Start with the **[User Manual](alex_docs/USER-MANUAL.md)** for a complete getting-started guide!
+> 📘 **New to Alex?** Start with the **[User Manual](alex_docs/guides/USER-MANUAL.md)** for a complete getting-started guide!
 
 ### Architecture Deep Dive
 

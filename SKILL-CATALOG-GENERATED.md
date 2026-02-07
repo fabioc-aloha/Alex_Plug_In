@@ -1,7 +1,7 @@
 # Alex Skills Catalog (Generated)
 
 > Generated: 2026-02-06
-> Total Skills: **73** (56 inheritable, 13 master-only, 2 VS Code, 2 M365)
+> Total Skills: **74** (57 inheritable, 13 master-only, 2 VS Code, 2 M365)
 > ⚠️ **Note**: This catalog is a simplified snapshot. See [alex_docs/SKILLS-CATALOG.md](alex_docs/SKILLS-CATALOG.md) for complete inventory.
 
 ---
@@ -16,6 +16,7 @@ flowchart LR
         BL[bootstrap-learning]
         CL[cognitive-load]
         GK[global-knowledge]
+        GKS[global-knowledge-sync]
         KS[knowledge-synthesis]
         LP[learning-psychology]
         M[meditation]
@@ -165,7 +166,7 @@ flowchart LR
 
 ## Skills by Inheritance
 
-### 🧊 Inheritable (28)
+### 🧊 Inheritable (29)
 
 | Skill                   | Connections |
 | ----------------------- | ----------- |
@@ -179,6 +180,7 @@ flowchart LR
 | error-recovery-patterns | 3           |
 | fabric-notebook-publish | 4           |
 | git-workflow            | 2           |
+| global-knowledge-sync   | 3           |
 | image-handling          | 3           |
 | incident-response       | 3           |
 | learning-psychology     | 3           |

@@ -45,7 +45,7 @@ flowchart TD
         direction TB
         A1["All LLM models via API"]
         A2["Code completion + agents"]
-        A3["73 skills + learning"]
+        A3["74 skills + learning"]
     end
     subgraph VS1["vs"]
         direction TB
@@ -87,7 +87,7 @@ In the Y Combinator days, the hard part was building the product. Today, a solo 
 
 We are living in an era of **Permissionless Creation but Gatekept Attention.**
 
-**Alex's Paradox:** 73 skills, TTS, Gamma presentations, meditation protocols — the product is deep. But **23 installs**. The technology is a commodity. The moat is no longer the code; it's the **distribution channel** and **brand narrative**.
+**Alex's Paradox:** 74 skills, TTS, Gamma presentations, meditation protocols — the product is deep. But **23 installs**. The technology is a commodity. The moat is no longer the code; it's the **distribution channel** and **brand narrative**.
 
 > *"If you cannot validate demand before you build, you are wasting your time."*
 
@@ -154,7 +154,7 @@ flowchart TD
 
     subgraph RETAIN["4. RETAIN (Product Depth)"]
         direction TB
-        R1["73 skills discovered over time"]
+        R1["74 skills discovered over time"]
         R2["Meditation protocols"]
         R3["Cross-project learning"]
     end
@@ -315,7 +315,7 @@ mindmap
 mindmap
   root((VS Code Extensions))
     🧠 Alex 23
-      73 Skills
+      74 Skills
       TTS + Gamma + Images
       Cognitive Architecture
     🗄️ Memory Extensions
@@ -369,7 +369,7 @@ quadrantChart
 
 | Extension                                                                                                       | Focus                   | Key Features                                     | Installs | Threat |
 | --------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------ | -------- | ------ |
-| **[Alex](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)**        | Cognitive Architecture  | 73 skills, TTS, Gamma, memory, meditation, focus | 23       | —      |
+| **[Alex](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)**        | Cognitive Architecture  | 74 skills, TTS, Gamma, memory, meditation, focus | 23       | —      |
 | **[Agent Memory](https://marketplace.visualstudio.com/items?itemName=digitarald.agent-memory)**                 | Memory Persistence      | Store/retrieve context, AGENTS.md sync           | 1,590    | 🟠      |
 | **[Flowbaby](https://marketplace.visualstudio.com/items?itemName=flowbaby.flowbaby)**                           | Workspace Memory        | Knowledge graph, "no drift no drama"             | 225      | 🟠      |
 | **[Sona](https://marketplace.visualstudio.com/items?itemName=waycoreinc.sona-ai-native-programming)**           | Cognitive Accessibility | Focus Mode, ADHD/Dyslexia support                | 157      | 🟠      |
@@ -383,7 +383,7 @@ quadrantChart
 3. **Zero friction** — no init command, just works
 
 **Alex's advantages over direct competitors:**
-- 73 skills vs single-feature extensions
+- 74 skills vs single-feature extensions
 - Multi-modal: TTS, Gamma, image generation (none have this)
 - Cross-project learning (only Obsidian Brain competes)
 - User data sovereignty (GitHub Gists)

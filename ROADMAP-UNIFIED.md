@@ -81,10 +81,10 @@ flowchart LR
 
 |                            |                                                                      |
 | -------------------------- | -------------------------------------------------------------------- |
-| **Current Master Version** | 4.2.12                                                               |
-| **Current Heirs**          | VS Code (4.2.12), M365 (v4.0)                                        |
-| **Target**                 | 4.3.0 (Architecture Robustness)                                      |
-| **Status**                 | ✅ v4.2.12 Released                                                   |
+| **Current Master Version** | 5.0.0                                                                |
+| **Current Heirs**          | VS Code (5.0.0), M365 (v4.0)                                         |
+| **Target**                 | 5.0.0 (Global Knowledge)                                             |
+| **Status**                 | ✅ v5.0.0 Released                                                    |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -98,8 +98,8 @@ flowchart LR
 | v4.0.x        | Trust (CAIR/CSR, Creative Latitude) | Relationship Trust        | ✅ Complete          |
 | v4.1.0        | Skill Expansion (68 → 71 skills)    | Capability Breadth        | ✅ Complete          |
 | v4.2.x        | UX Polish & Cross-Platform Sync     | Friction Reduction        | ✅ Complete          |
-| **v4.3.0**    | **Architecture Robustness**         | **Resilience**            | 🔄 **In Progress**   |
-| **v5.0.0**    | **Team Scaling (Global Knowledge)** | **Organizational Memory** | 📋 Planned (Q1 2026) |
+| **v4.3.0**    | **Architecture Robustness**         | **Resilience**            | ✅ Complete          |
+| **v5.0.0**    | **Team Scaling (Global Knowledge)** | **Organizational Memory** | ✅ Complete          |
 | **v5.1.0**    | **Platform Integration**            | **Ecosystem Reach**       | 📋 Planned (Q2 2026) |
 | **v5.2.0**    | **UX Excellence**                   | **Partnership Fluency**   | 📋 Planned (Q2 2026) |
 | **v5.3.0**    | **Enterprise Readiness**            | **Trust at Scale**        | 📋 Planned (Q2 2026) |
@@ -142,12 +142,9 @@ flowchart LR
 | **Know Your Customer**         |  Heir  |   3h   |    High    | ✅ Done |
 | **Premium Feature Indicators** |  Heir  |   1h   |   Medium   | ✅ Done |
 | **Enhanced GK Scaffolding**    |  Heir  |   2h   |   Medium   | ✅ Done |
-| `Alex: Init Global Knowledge`  |  Heir  |   4h   |   Medium   | 📋 Next |
-| Configurable GK Repo Location  | Master |   4h   |    High    | 📋 Next |
-| Team Knowledge Sharing         |  Heir  |   4h   |    High    | 📋 Next |
-| Security Gates (secrets, PII)  | Master |   1w   |  Critical  | 📋 Next |
-| Privacy Compliance (GDPR)      | Master |   3d   |  Critical  | 📋 Next |
-| RAI Validation Layer           | Master |   3d   |    High    | 📋 Next |
+| GK Init in Initialize Command  |  Heir  |   —    |   Medium   | ✅ Done |
+
+**v5.0.0 Complete** — Core Global Knowledge infrastructure shipped. GK initialization integrated into main `Alex: Initialize` flow with persona-based onboarding.
 
 **New in v5.0.0**:
 - **Know Your Customer** — Persona detection from user profile and workspace analysis. Matches users to 15 marketing personas (Developer, Academic, Researcher, etc.) with confidence scoring.
@@ -177,6 +174,7 @@ flowchart LR
 | GitHub Issue → Alex Task        |  Heir  |   3h   |   High   |
 | PR Review Assistant             |  Heir  |   4h   |   High   |
 | M365 Agent Export               |  Heir  |   4h   |   High   |
+| Configurable GK Repo Location   |  Heir  |   2h   |  Medium  |
 | Versioned schema with migration | Master |   1d   |  Medium  |
 | Generated heir from Master      | Master |   1d   |  Medium  |
 
@@ -266,28 +264,32 @@ flowchart LR
 
 ### ✅ Recently Completed
 
-| Task                                            | Version | Date       |
-| ----------------------------------------------- | ------- | ---------- |
-| Model Awareness (adaptive tier system)          | v4.2.12 | 2026-02-06 |
-| LLM as Executive Function architecture          | v4.2.12 | 2026-02-06 |
-| Neuroanatomical Mermaid diagram                 | v4.2.12 | 2026-02-06 |
-| TTS v2.2 - Chunking, timeout, retry             | v4.2.12 | 2026-02-05 |
-| UX simplification: All command dialogs          | v4.2.9  | 2026-02-05 |
-| chatSkills expanded to 54 inheritable skills    | v4.2.9  | 2026-02-05 |
-| Community Agent setup docs added                | v4.2.9  | 2026-02-05 |
-| Context menu: Generate Image from Selection     | v4.2.9  | 2026-02-05 |
-| Insight saving to episodic memory               | v4.2.9  | 2026-02-05 |
-| TTS v2 - Native TypeScript implementation       | v4.2.6+ | 2026-02-05 |
-| TTS Flagship Skill documentation                | v4.2.6+ | 2026-02-05 |
-| TTS v2.1 - Multi-language support (32 langs)    | v4.2.9  | 2026-02-05 |
-| OneDrive Agents insight captured                | —       | 2026-02-05 |
-| Teams Community Agents insight captured         | —       | 2026-02-05 |
-| Embedded Knowledge status check (still waiting) | —       | 2026-02-05 |
-| Meditation skill promoted from heir             | v4.2.6  | 2026-02-05 |
+| Task                                         | Version | Date       |
+| -------------------------------------------- | ------- | ---------- |
+| Persona-aware welcome sidebar                | v4.2.12 | 2026-02-06 |
+| Premium asset switcher (dynamic logo/banner) | v4.2.12 | 2026-02-06 |
+| GK Premium branding + logo concepts          | v4.2.12 | 2026-02-06 |
+| Global Knowledge sync skill (inheritable)    | v4.2.12 | 2026-02-06 |
+| Working memory slot architecture refinement  | v4.2.12 | 2026-02-06 |
+| Dynamic P5-P7 domain slot rotation           | v4.2.12 | 2026-02-06 |
+| UX declutter: remove keyboard shortcuts      | v4.2.12 | 2026-02-06 |
+| Model Awareness (adaptive tier system)       | v4.2.12 | 2026-02-06 |
+| LLM as Executive Function architecture       | v4.2.12 | 2026-02-06 |
+| Neuroanatomical Mermaid diagram              | v4.2.12 | 2026-02-06 |
+| TTS v2.2 - Chunking, timeout, retry          | v4.2.12 | 2026-02-05 |
+| UX simplification: All command dialogs       | v4.2.9  | 2026-02-05 |
+| chatSkills expanded to 54 inheritable skills | v4.2.9  | 2026-02-05 |
+| Community Agent setup docs added             | v4.2.9  | 2026-02-05 |
+| Context menu: Generate Image from Selection  | v4.2.9  | 2026-02-05 |
+| Insight saving to episodic memory            | v4.2.9  | 2026-02-05 |
+| TTS v2 - Native TypeScript implementation    | v4.2.6+ | 2026-02-05 |
+| TTS v2.1 - Multi-language support (32 langs) | v4.2.9  | 2026-02-05 |
 
 ### 🔄 In Progress
 
-See **v4.3.0 — Architecture Robustness** in Version Roadmap above.
+**v5.0.0 Team Scaling (Global Knowledge)**: ✅ Complete — Core GK infrastructure shipped (Feb 2026)
+
+**v4.3.0 Architecture Robustness**: ✅ Complete (all 8 tasks done)
 
 ### 📋 Backlog (Not Yet Scheduled)
 
@@ -332,7 +334,7 @@ flowchart TB
     subgraph Master["🧠 MASTER ALEX"]
         direction TB
         M1["Root .github/"]
-        M2["73 Skills"]
+        M2["74 Skills"]
         M3["Cognitive Protocols"]
         M4["Identity & Personality"]
     end
@@ -874,7 +876,7 @@ Useful for:
 > - [VSCODE-1.109-OPPORTUNITIES.md](alex_docs/VSCODE-1.109-OPPORTUNITIES.md) — Initial analysis
 > - [VSCODE-1.109-HEIR-INSIGHTS.md](alex_docs/VSCODE-1.109-HEIR-INSIGHTS.md) — Consolidated heir insights
 
-VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 73 skills already use the compatible format!
+VS Code January 2026 release introduces multi-agent development capabilities that align with Alex's architecture. **Agent Skills is now an open standard** (agentskills.io) — and our 74 skills already use the compatible format!
 
 ### High-Priority Features
 
@@ -915,7 +917,7 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m  |   ✅    |
 | v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m  |   ✅    |
 | v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m  |   ✅    |
-| v4.3.0  | Audit 73 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
+| v4.3.0  | Audit 74 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
 | v4.3.0  | **OneDrive Agent Export command**               |  Heir  |  4h   | 🔄 45m  |   ⬜    |
 | v4.3.0  | **Community Agent pilot (Teams)**               |  M365  |  2h   | 🔄 30m  |   ⬜    |
 | v4.3.0+ | Agent orchestration prototype                   | Master |  8h   | 📦 1.5h |   ⬜    |
@@ -1130,7 +1132,7 @@ Symbiosis Value = (Human Intent × AI Capability × Shared Context) ÷ Friction
 | Factor             | Current (v4.2)        | Target (v5.0+)                    |
 | ------------------ | --------------------- | --------------------------------- |
 | **Human Intent**   | Bootstrap learning    | Intent discovery workflows        |
-| **AI Capability**  | 73 skills             | Ecosystem-wide orchestration      |
+| **AI Capability**  | 74 skills             | Ecosystem-wide orchestration      |
 | **Shared Context** | Project memory        | Organizational memory             |
 | **Friction**       | 28 commands, 11 tools | Intent-first, interface-invisible |
 
