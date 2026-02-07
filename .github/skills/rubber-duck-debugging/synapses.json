@@ -41,6 +41,12 @@
       "type": "Supports",
       "strength": 0.7,
       "description": "Helps recover from error states"
+    },
+    {
+      "target": ".github/instructions/alex-identity-integration.instructions.md",
+      "type": "Implements",
+      "strength": 0.85,
+      "description": "Rubber duck symbiosis embodies cognitive symbiosis — AI as articulation partner"
     }
   ],
   "activationTriggers": [
