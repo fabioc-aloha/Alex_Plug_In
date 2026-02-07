@@ -100,10 +100,12 @@ flowchart LR
 | v4.2.x        | UX Polish & Cross-Platform Sync           | Friction Reduction                | ✅ Complete             |
 | **v4.3.0**    | **Architecture Robustness**               | **Resilience**                    | ✅ Complete             |
 | **v5.0.0**    | **Team Scaling (Global Knowledge)**       | **Organizational Memory**         | ✅ Complete             |
+| **v5.0.2**    | **M365 Schema Polish (Quick Wins)**       | **Platform Parity**               | ✅ Complete             |
 | **v5.1.0**    | **Platform Integration & API Excellence** | **Ecosystem Reach + API Mastery** | 📋 Planned (Q1-Q2 2026) |
 | **v5.2.0**    | **UX Excellence**                         | **Partnership Fluency**           | 📋 Planned (Q2 2026)    |
 | **v5.3.0**    | **Enterprise Readiness**                  | **Trust at Scale**                | 📋 Planned (Q2 2026)    |
 | **v5.5.0**    | **Enterprise Systems Integration**        | **Deep Orchestration**            | 📋 Planned (Q3 2026)    |
+| **v6.0.0**    | **Semantic Skill Graph**                  | **Emergent Intelligence**         | 📋 Planned (2026+)      |
 
 ---
 
@@ -163,88 +165,115 @@ flowchart LR
 
 **Target Release**: Q1 2026 (Feb-Mar)
 
+### v5.0.2 — M365 Schema Polish (Quick Wins)
+
+**Theme**: Exploit all production-ready v1.6 declarative agent features that require minimal effort.
+
+**Paradigm Connection**: Platform parity — Alex's M365 surface should use every stable capability available. Trivial changes that improve trust, data richness, and user control.
+
+**Sources**: [M365-COPILOT-ECOSYSTEM-ANALYSIS.md](alex_docs/m365/M365-COPILOT-ECOSYSTEM-ANALYSIS.md), [M365-INTEGRATION-OPPORTUNITIES.md](alex_docs/m365/M365-INTEGRATION-OPPORTUNITIES.md), [M365-ENHANCEMENT-PLAN.md](alex_docs/m365/M365-ENHANCEMENT-PLAN.md)
+
+| #   | Task                                        | Owner | Effort  | Priority | Status | M365  | Description                                                                                       |
+| --- | ------------------------------------------- | :---: | :-----: | :------: | :----: | :---: | ------------------------------------------------------------------------------------------------- |
+| D8a | People `include_related_content: true`      | Heir  | Trivial |   High   | ✅ Done |   ✅   | Enriches person lookups with shared docs, emails, Teams — replaces 4-step Person Deep Dive with 1 |
+| D8b | Add `behavior_overrides` + `disclaimer`     | Heir  | Trivial |   High   | ✅ Done |   ✅   | Trust signal for new users + `special_instructions` bonus instruction space beyond 8K limit       |
+| D8c | Add `user_overrides` for capability toggles | Heir  | Trivial |  Medium  | ✅ Done |   ✅   | Let users disable Email/Teams/Meetings — aligns with Alex's ethical framework on user sovereignty |
+| D8d | Instruction: graceful degradation note      | Heir  | Trivial |  Medium  | ✅ Done |   ✅   | ~200 chars — handle disabled capabilities gracefully                                              |
+| D8e | Version bump manifest + declarativeAgent    | Heir  | Trivial |   Low    | ✅ Done |   ✅   | Bump to v5.0.2 across manifest.json and declarativeAgent.json                                     |
+
+**Estimated effort**: 1-2 hours total
+**Risk**: None — all features are GA in schema v1.6
+**Impact**: Capability coverage jumps from 8/17 (47%) → 12/17 (71%)
+
+**Target Release**: Q1 2026 (Feb 2026)
+
 ### v5.1.0 — Platform Integration & API Excellence
 
 **Theme**: Connect Alex to the developer ecosystem AND maximize the stable VS Code API surface area.
 
 **Paradigm Connection**: Expand orchestration reach. The partner should connect to where work happens — GitHub, M365, DevOps — while polishing every touchpoint with the VS Code platform. Ecosystem integration multiplied by API excellence creates a compound improvement.
 
-**Sources**: [VSCODE-SOURCE-INTEGRATION-ANALYSIS.md](alex_docs/vscode/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md), [VSCODE-COPILOT-API-ANALYSIS.md](alex_docs/vscode/VSCODE-COPILOT-API-ANALYSIS.md), [SEMANTIC-SKILL-GRAPH.md](alex_docs/architecture/SEMANTIC-SKILL-GRAPH.md), [VSCODE-CONTRIBUTION-PLAN.md](alex_docs/vscode/VSCODE-CONTRIBUTION-PLAN.md)
+**Sources**: [VSCODE-SOURCE-INTEGRATION-ANALYSIS.md](alex_docs/vscode/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md), [VSCODE-COPILOT-API-ANALYSIS.md](alex_docs/vscode/VSCODE-COPILOT-API-ANALYSIS.md), [VSCODE-CONTRIBUTION-PLAN.md](alex_docs/vscode/VSCODE-CONTRIBUTION-PLAN.md), [PPTXGENJS-IMPLEMENTATION-PLAN.md](alex_docs/gamma/PPTXGENJS-IMPLEMENTATION-PLAN.md)
+
+**M365 Column Legend**: ✅ = directly M365 work | 🔄 = benefits M365 (spillover/shared) | — = VS Code only
 
 #### A. Stable API Quick Wins (from API Analysis — all Marketplace-safe)
 
 These items use exclusively stable APIs. Zero risk. Immediate value.
 
-| #   | Task                                          | Owner | Effort  | Priority | Source | Status | Description                                                                             |
-| --- | --------------------------------------------- | :---: | :-----: | :------: | :----: | :----: | --------------------------------------------------------------------------------------- |
-| A1  | Declare undeclared tools in `package.json`    | Heir  | Trivial |   High   | API-1  | ✅ Done | `alex_focus_context` and `alex_heir_validation` now declared with full schema + tags    |
-| A2  | Add `tags` to all 13 tools                    | Heir  |   Low   |   High   | API-2  | ✅ Done | All 13 tools tagged: `cognitive`, `knowledge`, `cloud`, `quality`, `productivity`, etc. |
-| A3  | Add `when` clauses to slash commands          | Heir  |   Low   |   High   | API-3  | 🔄 Next | Hide irrelevant commands: `/m365` if unconfigured, `/sync` if no cloud repo             |
-| A4  | Enable skill adherence prompt                 | Heir  | Config  |  Medium  | API-4  | 🔄 Next | `chat.useSkillAdherencePrompt` forces LLM to load skills before responding              |
-| A5  | Use `disableModelInvocation` for niche skills | Heir  |   Low   |  Medium  | API-5  | 🔄 Next | Mark ~15 skills as manual-only: `grant-writing`, `localization`, `svg-graphics`, etc.   |
-| A6  | Add `sampleRequest` to slash commands         | Heir  | Trivial |  Medium  | API-7  | ✅ Done | All 24 commands now have example usage text                                             |
-| A7  | Add disambiguation examples                   | Heir  |   Low   |  Medium  | API-6  | ✅ Done | Each category expanded to 6-7 examples for better routing                               |
-| A8  | Premium feature walkthrough                   | Heir  | Medium  |   High   | API-8  | 🔄 Next | `contributes.walkthroughs` for GK setup, TTS config, session tracking onboarding        |
+| #   | Task                                          | Owner | Effort  | Priority | Source | Status | M365  | Description                                                                              |
+| --- | --------------------------------------------- | :---: | :-----: | :------: | :----: | :----: | :---: | ---------------------------------------------------------------------------------------- |
+| A1  | Declare undeclared tools in `package.json`    | Heir  | Trivial |   High   | API-1  | ✅ Done |   —   | `alex_focus_context` and `alex_heir_validation` now declared with full schema + tags     |
+| A2  | Add `tags` to all 13 tools                    | Heir  |   Low   |   High   | API-2  | ✅ Done |   —   | All 13 tools tagged: `cognitive`, `knowledge`, `cloud`, `quality`, `productivity`, etc.  |
+| A3  | Add `when` clauses to slash commands          | Heir  |   Low   |   High   | API-3  | ✅ Done |   —   | 7 commands gated: `/m365`, `/exportm365`, `/sync`, `/push`, `/pull`, `/azure`, `/forget` |
+| A4  | Enable skill adherence prompt                 | Heir  | Config  |  Medium  | API-4  | ✅ Done |   —   | `chat.useSkillAdherencePrompt` added to ESSENTIAL_SETTINGS in setupEnvironment           |
+| A5  | Use `disableModelInvocation` for niche skills | Heir  |   Low   |  Medium  | API-5  | ✅ Done |   —   | 15 skills marked manual-only via SKILL.md frontmatter                                    |
+| A6  | Add `sampleRequest` to slash commands         | Heir  | Trivial |  Medium  | API-7  | ✅ Done |   —   | All 24 commands now have example usage text                                              |
+| A7  | Add disambiguation examples                   | Heir  |   Low   |  Medium  | API-6  | ✅ Done |   —   | Each category expanded to 6-7 examples for better routing                                |
+| A8  | Premium feature walkthrough                   | Heir  | Medium  |   High   | API-8  | ✅ Done |   —   | 3 walkthroughs: Getting Started (enhanced), Global Knowledge, Voice & TTS                |
 
 #### B. Stable API Feature Work (from Source Integration Analysis)
 
 These use stable APIs to achieve what proposed APIs promise — without Marketplace restriction.
 
-| #   | Task                                           | Owner | Effort | Priority | Source | Description                                                                                   |
-| --- | ---------------------------------------------- | :---: | :----: | :------: | :----: | --------------------------------------------------------------------------------------------- |
-| B1  | Tool naming convention (approximate tool sets) | Heir  |  Low   |   High   | SRC-3  | Rename tools with group prefixes: `alex_cognitive_*`, `alex_knowledge_*`, `alex_cloud_*`      |
-| B2  | Task Provider for cognitive commands           | Heir  |  Low   |  Medium  | SRC-10 | `tasks.registerTaskProvider` for meditation, dream, self-actualize as VS Code tasks           |
-| B3  | Standalone MCP server package                  | Heir  | Medium |   High   | SRC-4  | `@alex-cognitive/mcp-server` npm — exposes memory search, synapse health, knowledge to agents |
-| B4  | Enhanced TreeViews for memory visualization    | Heir  | Medium |  Medium  | SRC-10 | `TreeDataProvider` for synapse network, memory files, global knowledge browsing               |
-| B5  | Workspace skill directory configuration        | Heir  |  Low   |  Medium  | SRC-5  | Ensure `chat.agentSkillsLocations` correctly configured during `Initialize`                   |
+| #   | Task                                           | Owner | Effort | Priority | Source | M365  |  Status  | Description                                                                                   |
+| --- | ---------------------------------------------- | :---: | :----: | :------: | :----: | :---: | :------: | --------------------------------------------------------------------------------------------- |
+| B1  | Tool naming convention (approximate tool sets) | Heir  |  Low   |   High   | SRC-3  |   —   |  ✅ Done  | Rename tools with group prefixes: `alex_cognitive_*`, `alex_knowledge_*`, `alex_cloud_*`      |
+| B2  | Task Provider for cognitive commands           | Heir  |  Low   |  Medium  | SRC-10 |   —   |  ✅ Done  | `tasks.registerTaskProvider` for meditation, dream, self-actualize as VS Code tasks           |
+| B3  | Standalone MCP server package                  | Heir  | Medium |   High   | SRC-4  |   🔄   | Deferred | `@alex-cognitive/mcp-server` npm — exposes memory search, synapse health, knowledge to agents |
+| B4  | Enhanced TreeViews for memory visualization    | Heir  | Medium |  Medium  | SRC-10 |   —   |  ✅ Done  | `TreeDataProvider` for synapse network, memory files, global knowledge browsing               |
+| B5  | Workspace skill directory configuration        | Heir  |  Low   |  Medium  | SRC-5  |   —   |  ✅ Done  | Ensure `chat.agentSkillsLocations` correctly configured during `Initialize`                   |
 
-#### C. Semantic Skill Graph — Phase 1 (Proof of Concept)
+#### C. PptxGenJS Implementation — Programmatic PPTX Generation
 
-Validates the embedding-based skill discovery approach with zero VS Code API dependency.
+Native PowerPoint generation via PptxGenJS — zero cloud dependencies, runs in Alex's Node.js runtime.
 
-| #   | Task                                             | Owner  | Effort | Priority | Source | Description                                                  |
-| --- | ------------------------------------------------ | :----: | :----: | :------: | :----: | ------------------------------------------------------------ |
-| C1  | Parse all 75 SKILL.md + synapses.json            | Master |   2d   |   High   | SSG-1  | Extract skill content into embeddable chunks (~300 tokens)   |
-| C2  | Generate Azure OpenAI embeddings                 | Master |   2d   |   High   | SSG-1  | `text-embedding-3-small` (1536 dims), ~$0.002 total cost     |
-| C3  | Compute pairwise cosine similarity               | Master |   1d   |   High   | SSG-1  | Discover hidden connections between skills                   |
-| C4  | Merge explicit + discovered synapses             | Master |   1d   |  Medium  | SSG-1  | Combine existing synapses.json with embedding discoveries    |
-| C5  | Build query function + validate 3 known failures | Master |   2d   |   High   | SSG-1  | Prove semantic search beats keyword matching on known misses |
+| #   | Task                                         | Owner | Effort | Priority | Source | M365  |  Status  | Description                                                                          |
+| --- | -------------------------------------------- | :---: | :----: | :------: | :----: | :---: | :------: | ------------------------------------------------------------------------------------ |
+| C1  | Core generator (`pptxGenerator.ts`)          | Heir  |   4h   |   High   | PPTX-1 |   🔄   |  ✅ Done  | `src/generators/pptxGenerator.ts` — text, title, section, chart, table, image slides |
+| C2  | Rich content support (tables, charts, imgs)  | Heir  |   4h   |   High   | PPTX-2 |   🔄   |  ✅ Done  | `addTable()`, `addChart()`, `addImage()`, speaker notes, two-column layout           |
+| C3  | Intelligence layer (Markdown → slides)       | Heir  |   6h   |   High   | PPTX-3 |   🔄   |  ✅ Done  | `parseMarkdownToSlides()` — `# → title`, `## → subtitle`, `- → bullets`, `> → notes` |
+| C4  | Alex skill integration                       | Heir  |   3h   |  Medium  | PPTX-4 |   🔄   |  ✅ Done  | `.github/skills/pptx-generation/` with SKILL.md + synapses.json                      |
+| C5  | Template library + brand system              | Heir  |   3h   |  Medium  | PPTX-4 |   🔄   |  ✅ Done  | Slide Masters: ALEX_TITLE, ALEX_CONTENT, ALEX_SECTION, ALEX_CHART                    |
+| C6  | Data connectors (Azure SQL + Semantic Model) | Heir  |   4h   |   High   | PPTX-5 |   🔄   | Deferred | `mssql` + Power BI REST API — deferred to v5.2.0                                     |
 
 #### D. Platform Integration (existing roadmap items)
 
-| #   | Task                            | Owner  | Effort | Priority | Source  | Description                                                  |
-| --- | ------------------------------- | :----: | :----: | :------: | :-----: | ------------------------------------------------------------ |
-| D1  | GitHub Issue → Alex Task        |  Heir  |   3h   |   High   | Roadmap | Import GitHub issues as Alex learning tasks                  |
-| D2  | PR Review Assistant             |  Heir  |   4h   |   High   | Roadmap | Alex assists with pull request reviews                       |
-| D3  | M365 Agent Export               |  Heir  |   4h   |   High   | Roadmap | Export cognitive architecture for M365 Copilot consumption   |
-| D4  | M365 → GK Bridge                |  Heir  |   3h   |  Medium  | Roadmap | Insights from M365 flow into Global Knowledge                |
-| D5  | Configurable GK Repo Location   |  Heir  |   2h   |  Medium  | Roadmap | User-configurable Global Knowledge repo path                 |
-| D6  | Versioned schema with migration | Master |   1d   |  Medium  | Roadmap | Schema versioning + forward migration for architecture files |
-| D7  | Generated heir from Master      | Master |   1d   |  Medium  | Roadmap | Automated heir generation from Master source of truth        |
+| #   | Task                            | Owner  | Effort | Priority | Source  | M365  | Status  | Description                                                    |
+| --- | ------------------------------- | :----: | :----: | :------: | :-----: | :---: | :-----: | -------------------------------------------------------------- |
+| D1  | GitHub Issue → Alex Task        |  Heir  |   3h   |   High   | Roadmap |   —   | ✅ Done  | `alex.importGitHubIssues` command + `githubIntegration.ts`     |
+| D2  | PR Review Assistant             |  Heir  |   4h   |   High   | Roadmap |   —   | ✅ Done  | `alex.reviewPR` command — fetches PRs, generates review prompt |
+| D3  | M365 Agent Export               |  Heir  |   4h   |   High   | Roadmap |   ✅   | ✅ Done  | Export cognitive architecture for M365 Copilot consumption     |
+| D4  | M365 → GK Bridge                |  Heir  |   3h   |  Medium  | Roadmap |   ✅   | ✅ Done  | Insights from M365 flow into Global Knowledge                  |
+| D5  | Configurable GK Repo Location   |  Heir  |   2h   |  Medium  | Roadmap |   🔄   | ✅ Done  | `alex.globalKnowledge.repoPath` setting + auto-detection       |
+| D6  | Versioned schema with migration | Master |   1d   |  Medium  | Roadmap |   🔄   | Partial | Synapse schemaVersion exists; full arch versioning → v5.2.0    |
+| D7  | Generated heir from Master      | Master |   1d   |  Medium  | Roadmap |   ✅   | ✅ Done  | Automated heir generation from Master source of truth          |
 
-#### E. VS Code Contribution Plan — Early Actions (Track A)
+#### E. VS Code Contribution Plan — **POSTPONED to v7+**
 
-| #   | Task                                           | Owner  | Effort | Priority | Source  | Description                                                       |
-| --- | ---------------------------------------------- | :----: | :----: | :------: | :-----: | ----------------------------------------------------------------- |
-| E1  | Discussion: Persistent Memory for Participants | Master |   5d   |   High   | PLAN-A1 | GitHub Discussion on `microsoft/vscode` proposing memory APIs     |
-| E2  | Discussion: Cross-Project Knowledge Transfer   | Master |   5d   |   High   | PLAN-A2 | GitHub Discussion proposing cross-workspace knowledge mechanisms  |
-| E3  | Issue: Document `chatContextProvider` APIs     | Master |   3d   |   High   | PLAN-A4 | Request documentation for undocumented proposed APIs              |
-| E4  | Create `cognitive-extension-framework` repo    | Master |   5d   |  Medium  | PLAN-B1 | Begin extracting reusable patterns from Alex into open-source SDK |
+Master-scope strategic planning. Not heir implementation.
 
-#### F. Proposed API Watch List (NOT shippable — track for graduation)
+| #   | Task                                           | Owner  | Effort | Priority | Source  | M365  | Description                                                       |
+| --- | ---------------------------------------------- | :----: | :----: | :------: | :-----: | :---: | ----------------------------------------------------------------- |
+| E1  | Discussion: Persistent Memory for Participants | Master |   5d   |   High   | PLAN-A1 |   —   | GitHub Discussion on `microsoft/vscode` proposing memory APIs     |
+| E2  | Discussion: Cross-Project Knowledge Transfer   | Master |   5d   |   High   | PLAN-A2 |   —   | GitHub Discussion proposing cross-workspace knowledge mechanisms  |
+| E3  | Issue: Document `chatContextProvider` APIs     | Master |   3d   |   High   | PLAN-A4 |   —   | Request documentation for undocumented proposed APIs              |
+| E4  | Create `cognitive-extension-framework` repo    | Master |   5d   |  Medium  | PLAN-B1 |   —   | Begin extracting reusable patterns from Alex into open-source SDK |
 
-These are blocked by the Marketplace `enabledApiProposals` restriction. Do NOT implement — only track.
+#### F. Proposed API Watch List — **POSTPONED to v7+**
 
-| #   | API                          | Proposal Name                  | Risk  | Graduate Likelihood | Notes                                            |
-| --- | ---------------------------- | ------------------------------ | :---: | :-----------------: | ------------------------------------------------ |
-| F1  | Chat Context Providers       | `chatContextProvider`          | HIGH  |       Medium        | Already broke once. Watch for stable graduation  |
-| F2  | Tool Sets contribution       | `contribLanguageModelToolSets` |  LOW  |        High         | Closest to graduation. Simple contribution point |
-| F3  | Tool progress                | `toolProgress`                 |  LOW  |       Medium        | v1, simple API surface                           |
-| F4  | Next question suggestion     | `chatParticipantAdditions`     |  MED  |       Medium        | Large proposal, may graduate piecemeal           |
-| F5  | Token usage tracking         | `chatParticipantAdditions`     |  MED  |       Medium        | Same proposal as F4                              |
-| F6  | Tool streaming               | `chatParticipantAdditions`     |  MED  |       Medium        | Same proposal as F4                              |
-| F7  | Dynamic Skill Provider       | `chatPromptFiles`              |  MED  |       Medium        | v1, active development                           |
-| F8  | Language Model Chat Provider | `chatProvider`                 |  EXT  |        None         | **DEAD END** — properties marked "WONT FINALIZE" |
+Blocked by Marketplace `enabledApiProposals` restriction. Track only — do NOT implement.
+
+| #   | API                          | Proposal Name                  | Risk  | Graduate Likelihood | M365  | Notes                                            |
+| --- | ---------------------------- | ------------------------------ | :---: | :-----------------: | :---: | ------------------------------------------------ |
+| F1  | Chat Context Providers       | `chatContextProvider`          | HIGH  |       Medium        |   —   | Already broke once. Watch for stable graduation  |
+| F2  | Tool Sets contribution       | `contribLanguageModelToolSets` |  LOW  |        High         |   —   | Closest to graduation. Simple contribution point |
+| F3  | Tool progress                | `toolProgress`                 |  LOW  |       Medium        |   —   | v1, simple API surface                           |
+| F4  | Next question suggestion     | `chatParticipantAdditions`     |  MED  |       Medium        |   —   | Large proposal, may graduate piecemeal           |
+| F5  | Token usage tracking         | `chatParticipantAdditions`     |  MED  |       Medium        |   —   | Same proposal as F4                              |
+| F6  | Tool streaming               | `chatParticipantAdditions`     |  MED  |       Medium        |   —   | Same proposal as F4                              |
+| F7  | Dynamic Skill Provider       | `chatPromptFiles`              |  MED  |       Medium        |   —   | v1, active development                           |
+| F8  | Language Model Chat Provider | `chatProvider`                 |  EXT  |        None         |   —   | **DEAD END** — properties marked "WONT FINALIZE" |
 
 ### v5.1.0 Implementation Timeline
 
@@ -269,10 +298,12 @@ gantt
     Standalone MCP server package            :b4, 2026-02-17, 10d
     Enhanced TreeViews for memory            :b5, after b4, 7d
 
-    section C: Semantic Skill Graph PoC
-    Parse skills + generate embeddings       :c1, 2026-02-17, 4d
-    Compute similarity + merge synapses      :c2, after c1, 2d
-    Build query function + validate          :c3, after c2, 4d
+    section C: PptxGenJS Implementation
+    Core generator + CLI                     :c1, 2026-02-17, 2d
+    Rich content (tables, charts, images)    :c2, after c1, 2d
+    Intelligence layer (Markdown to slides)  :c3, after c2, 3d
+    Skill integration + template library     :c4, after c3, 2d
+    Data connectors (SQL + Semantic Model)   :c5, after c4, 2d
 
     section D: Platform Integration
     GitHub Issue to Alex Task                :d1, 2026-03-03, 3d
@@ -287,11 +318,6 @@ gantt
     Implement walkthrough steps              :w2, after w1, 5d
     Test and polish                          :w3, after w2, 3d
 
-    section E: Contribution Plan
-    Discussion A1 Persistent Memory          :e1, 2026-02-10, 5d
-    Discussion A2 Cross-Project Knowledge    :e2, 2026-02-12, 5d
-    Issue A4 Document chatContextProvider    :e3, 2026-02-17, 5d
-    Create framework repo                   :e4, 2026-02-24, 5d
 ```
 
 ### v5.1.0 Success Criteria
@@ -672,6 +698,8 @@ context.subscriptions.push(
 
 **Gotcha 3**: Must handle the `.github/` path resolution — MCP server receives workspace root as env var or argument.
 
+**Why this matters**: See [^b3-benefits] for strategic value.
+
 ---
 
 #### B4: Enhanced TreeViews for Memory Visualization
@@ -720,17 +748,22 @@ await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.Confi
 
 ---
 
-#### C1-C5: Semantic Skill Graph PoC
+#### C1-C5: PptxGenJS Implementation
 
-**Full plan**: `alex_docs/architecture/SEMANTIC-SKILL-GRAPH.md`
+**Full plan**: `alex_docs/gamma/PPTXGENJS-IMPLEMENTATION-PLAN.md`
 
-**Key implementation details not in the plan**:
+**Status**: New in v5.1.0. Replaces postponed Semantic Skill Graph (now v6).
 
-- **Azure OpenAI endpoint**: Need deployment of `text-embedding-3-small` in user's Azure tenant. Document the required setup.
-- **Embedding cache**: Store in `.github/cache/skill-embeddings.json` — don't regenerate on every query.
-- **Chunk size**: ~300 tokens per skill chunk. Split large SKILL.md files by `##` headings.
-- **Similarity threshold**: Start at 0.7 cosine similarity for "related" connections. Tune after PoC.
-- **Known failures to test against**: (1) "write documentation" → should find `technical-writing` not just `documentation-standards`, (2) "make a diagram" → should find `markdown-mermaid` AND `ascii-art-alignment`, (3) "deploy to cloud" → should find `azure-development` AND `deployment-strategies`.
+**Key implementation details**:
+
+- **Dependency**: `pptxgenjs` (MIT, single dep: JSZip). `npm install pptxgenjs` in extension package.
+- **Generator script**: `scripts/pptxgen-generator.js` — CLI flags: `--content`, `--slides`, `--output`.
+- **Markdown parser**: `# Heading → Title Slide`, `## → Section`, `- bullet → content`. Detect data → auto-suggest chart type.
+- **Template system**: Slide Masters for Alex branding (colors, fonts). Pre-built layouts: title, content, two-column, chart, comparison.
+- **Skill integration**: `.github/skills/pptx-generation/` with SKILL.md + synapses.json. Connect to `gamma-presentations`, `markdown-mermaid`, `data-visualization`.
+- **Mermaid diagrams**: Mermaid markup → SVG (via Mermaid CLI) → `addImage()` as base64 data URI. PowerPoint 2019+/365 renders SVG natively — no rasterization needed.
+- **Data connectors**: Azure SQL via `mssql` package (supports Entra ID auth). Power BI semantic models via REST API (`/datasets/{id}/executeQueries` with DAX) or XMLA endpoint (Premium/PPU). Both return JSON → `addChart()` / `addTable()`. Critical for dashboard and metrics slides.
+- **Validated**: Two PPTX files successfully generated via Claude + PptxGenJS (2026-02-07).
 
 ---
 
@@ -1756,6 +1789,17 @@ Previous platform-specific roadmaps are archived:
 | [archive/roadmaps/ROADMAP-VSCODE-V4.0-ORIGINAL.md](archive/roadmaps/ROADMAP-VSCODE-V4.0-ORIGINAL.md)                   | Original pre-revision             |
 | [archive/roadmaps/ROADMAP-M365-COPILOT-v3.5.1-COMPLETED.md](archive/roadmaps/ROADMAP-M365-COPILOT-v3.5.1-COMPLETED.md) | M365 deployment record            |
 | [ROADMAP-V5-PENTUNIUM.md](ROADMAP-V5-PENTUNIUM.md)                                                                     | Future vision (post-v4.0)         |
+
+---
+
+## Footnotes
+
+[^b3-benefits]: **B3 Standalone MCP Server — Strategic Benefits**
+- **Agent-agnostic**: Works with any MCP-compatible agent (Claude Desktop, Cursor, Windsurf, other IDEs)
+- **No extension dependency**: Users can access Alex's cognitive tools without installing the VS Code extension
+- **Cross-IDE consistency**: Same memory search and synapse tools available in all environments
+- **npx distribution**: Zero install friction — `npx @alex-cognitive/mcp-server` just works
+- **Composable**: Other MCP servers can chain with Alex's knowledge base
 
 ---
 

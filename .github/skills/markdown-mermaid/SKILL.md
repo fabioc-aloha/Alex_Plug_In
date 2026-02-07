@@ -22,6 +22,59 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 
 ---
 
+## Mandatory Workflow: ATACCU
+
+**Every Mermaid diagram MUST follow this 6-step protocol.** No exceptions — this prevents forgotten palettes, broken layouts, and inconsistent styling.
+
+| Step | Action | What to Do |
+| ---- | ------ | ---------- |
+| **A** | **Analyze** | What data/process am I visualizing? Who is the audience? What diagram type fits? |
+| **T** | **Think** | Which layout pattern? (Medallion/Lineage/Pipeline) How many nodes? Will it be too wide/tall? |
+| **A** | **Apply Skills** | Load GitHub Pastel v2 palette. Select `classDef` colors by semantic meaning. Add `%%{init}%%` directive. Choose `direction` for subgraphs. |
+| **C** | **Create** | Write the Mermaid code. Every node gets a style. Every flowchart gets `linkStyle default`. |
+| **C** | **Check** | Render the diagram. Verify: pastels (not saturated), layout (not lopsided), labels (readable), arrows (gray #57606a). |
+| **U** | **Update** | Write the final diagram into the target `.md` file. Add `**Figure N:** *description*` label. |
+
+### Pre-Flight Checklist (Steps A-T-A)
+
+Before writing any Mermaid code, answer these:
+
+```text
+□ Diagram type selected (flowchart/sequence/gantt/quadrant/etc.)
+□ Layout direction chosen (LR preferred for flow, TD for hierarchy)
+□ Subgraph strategy decided (Medallion vs Lineage vs Pipeline)
+□ Color assignments mapped (what color = what meaning)
+□ Init directive ready: %%{init: {'theme': 'base', 'themeVariables': ...}}%%
+```
+
+### Quality Gate (Steps C-C-U)
+
+After creating the diagram, verify ALL of these:
+
+```text
+□ Init directive is FIRST line inside mermaid block
+□ ALL nodes have style/classDef (no unstyled nodes)
+□ Colors are GitHub Pastel v2 (NOT saturated: no #51cf66, #339af0, #fab005)
+□ linkStyle default stroke:#57606a,stroke-width:1.5px (flowcharts)
+□ Diagram rendered and visually inspected
+□ No dimension > 3x the other (use subgroups to balance)
+□ Figure label added below diagram block
+□ Written to target file (not just shown in chat)
+```
+
+### Common Violations This Prevents
+
+| Violation | ATACCU Step That Catches It |
+| --------- | -------------------------- |
+| Saturated colors instead of pastels | **Apply Skills** — load palette first |
+| Missing init directive | **Apply Skills** — it's step 3 |
+| Missing linkStyle | **Create** — every flowchart needs it |
+| Lopsided layout (7-way fan-out) | **Think** — choose layout pattern |
+| Diagram only in chat, not in file | **Update** — write to `.md` file |
+| No figure label | **Update** — add label |
+
+---
+
 ## VS Code 1.109+ Native Chat Rendering
 
 VS Code 1.109 introduces **native Mermaid rendering in chat** via the `renderMermaidDiagram` tool.

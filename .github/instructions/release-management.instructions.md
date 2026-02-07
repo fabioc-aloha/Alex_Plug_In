@@ -11,6 +11,9 @@
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
 - [scripts/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
+- [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
+- [ROADMAP-UNIFIED.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
+- [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 
 ---
 
@@ -181,6 +184,29 @@ The `.vscode/` folder contains both:
 ```powershell
 npx vsce ls | Select-String "\.vscode"
 ```
+
+### Forward-Pull Pattern (Learned 2026-02-07)
+
+**When planning a future release, check if any items can ship immediately as a patch.**
+
+**Criteria for forward-pull candidates:**
+- Pure metadata changes (package.json contribution points only)
+- Zero code changes — no TypeScript modifications
+- Additive — doesn't change existing behavior, only enhances
+- Zero risk — worst case is a no-op, never a regression
+
+**v5.0.1 precedent:** Pulled 4 of 31 items from v5.1.0 plan:
+- A1: Declare undeclared tools in `package.json` (already registered in code)
+- A2: Add `tags` to all tools (new property, ignored if unsupported)
+- A6: Add `sampleRequest` to slash commands (placeholder text only)
+- A7: Add disambiguation examples (more routing examples)
+
+**Process:**
+1. Review roadmap for metadata-only items
+2. Implement in current version
+3. Run full preflight + build pipeline
+4. Publish as patch
+5. Mark items completed in both roadmap AND source documents
 
 ### Phase 2: Version Bump
 

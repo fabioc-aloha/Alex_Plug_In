@@ -1,6 +1,7 @@
 ---
 name: "Skill: Skill Catalog Generator"
 description: "Generate dynamic skill catalogs with network diagrams to visualize Alex's capabilities and track learning progress."
+disableModelInvocation: true
 ---
 
 # Skill: Skill Catalog Generator

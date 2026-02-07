@@ -33,6 +33,24 @@
       "type": "enhances",
       "strength": 0.7,
       "note": "Creating documentation presentations"
+    },
+    {
+      "target": "alex_docs/gamma/MARP-AUTOMATION-PLAN.md",
+      "type": "complements",
+      "strength": 0.8,
+      "note": "Marp handles repetitive template decks; Gamma handles AI-designed content"
+    },
+    {
+      "target": "alex_docs/gamma/PPTXGENJS-IMPLEMENTATION-PLAN.md",
+      "type": "complements",
+      "strength": 0.75,
+      "note": "PptxGenJS handles data-driven charts; Gamma handles beautiful design"
+    },
+    {
+      "target": "alex_docs/gamma/PRESENTATION-VISUALIZATION-ECOSYSTEM-2026.md",
+      "type": "references",
+      "strength": 0.6,
+      "note": "Comprehensive ecosystem research covering 16+ tools"
     }
   ],
   "activationBoost": [

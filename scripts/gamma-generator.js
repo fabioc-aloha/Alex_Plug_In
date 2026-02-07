@@ -23,7 +23,7 @@ const { exec } = require('child_process');
 // ============================================================================
 
 const API_BASE_URL = 'https://public-api.gamma.app';
-const API_VERSION = 'v0.2';
+const API_VERSION = 'v1.0';
 const DEFAULT_TIMEOUT_MS = 180000; // 3 minutes
 const POLL_INTERVAL_MS = 3000; // 3 seconds
 const MAX_INPUT_CHARS = 400000;
@@ -311,9 +311,9 @@ class GammaGenerator {
     }
 
     // Add image options
-    if (this.options.imageModel || this.options.imageStyle) {
+    if (this.options.imageModel || this.options.imageStyle || this.options.imageSource) {
       request.imageOptions = {
-        source: 'aiGenerated',
+        source: this.options.imageSource || 'aiGenerated',
         model: IMAGE_MODELS[this.options.imageModel] || this.options.imageModel,
         style: this.options.imageStyle,
       };
@@ -324,6 +324,11 @@ class GammaGenerator {
       request.cardOptions = {
         dimensions: this.options.dimensions,
       };
+    }
+
+    // Add additional instructions
+    if (this.options.instructions) {
+      request.additionalInstructions = this.options.instructions;
     }
 
     // Add export option
@@ -442,6 +447,10 @@ function parseArgs() {
         options.imageStyle = value;
         i++;
         break;
+      case '--image-source':
+        options.imageSource = value;
+        i++;
+        break;
       case '--dimensions':
       case '-d':
         options.dimensions = value;
@@ -467,6 +476,11 @@ function parseArgs() {
         break;
       case '--open':
         options.open = true;
+        break;
+      case '--instructions':
+      case '-i':
+        options.instructions = value;
+        i++;
         break;
       case '--draft':
         options.draft = true;
@@ -503,6 +517,8 @@ Options:
   --language, -l <code>    Language code (e.g., "en", "es", "pt")
   --image-model <name>     AI image model (flux-quick, flux-pro, dalle3, etc.)
   --image-style <text>     Image style description
+  --image-source <type>    Image source: aiGenerated, pexels, pictographic, giphy, etc.
+  --instructions, -i <text> Additional instructions for the AI (max 2000 chars)
   --dimensions, -d <size>  Card dimensions (16x9, 4x3, 1x1, 4x5, 9x16)
   --export, -e <type>      Export format: pptx, pdf
   --output, -o <dir>       Output directory for exports (default: ./exports)
@@ -531,6 +547,7 @@ Examples:
     --slides 12 \\
     --tone "inspiring and actionable" \\
     --audience "business leaders" \\
+    --instructions "Include a call-to-action on the final slide" \\
     --image-model flux-pro \\
     --dimensions 16x9 \\
     --export pptx \\

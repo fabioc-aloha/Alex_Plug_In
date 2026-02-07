@@ -1537,42 +1537,42 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
     
     // Register Synapse Health Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_synapse_health', new SynapseHealthTool())
+        vscode.lm.registerTool('alex_cognitive_synapse_health', new SynapseHealthTool())
     );
     
     // Register Memory Search Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_memory_search', new MemorySearchTool())
+        vscode.lm.registerTool('alex_cognitive_memory_search', new MemorySearchTool())
     );
     
     // Register Architecture Status Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_architecture_status', new ArchitectureStatusTool())
+        vscode.lm.registerTool('alex_cognitive_architecture_status', new ArchitectureStatusTool())
     );
     
     // Register MCP Recommendation Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_mcp_recommendations', new McpRecommendationTool())
+        vscode.lm.registerTool('alex_platform_mcp_recommendations', new McpRecommendationTool())
     );
     
     // Register User Profile Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_user_profile', new UserProfileTool())
+        vscode.lm.registerTool('alex_cognitive_user_profile', new UserProfileTool())
     );
     
     // Register Focus Context Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_focus_context', new FocusContextTool())
+        vscode.lm.registerTool('alex_cognitive_focus_context', new FocusContextTool())
     );
     
     // Register Self-Actualization Tool
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_self_actualization', new SelfActualizationTool())
+        vscode.lm.registerTool('alex_cognitive_self_actualization', new SelfActualizationTool())
     );
     
     // Register Heir Validation Tool (for LLM-based curation quality control)
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_heir_validation', new HeirValidationTool())
+        vscode.lm.registerTool('alex_quality_heir_validation', new HeirValidationTool())
     );
     
     console.log('Alex Language Model Tools registered');

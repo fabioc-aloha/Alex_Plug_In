@@ -2,6 +2,7 @@
 name: "PII & Privacy Regulations Skill"
 description: "Handling personally identifiable information under European and Australian privacy regulations."
 applyTo: "**/*privacy*,**/*PII*,**/*personal*,**/*GDPR*,**/*data-protection*,**/*consent*,**/*user-data*"
+disableModelInvocation: true
 ---
 
 # PII & Privacy Regulations Skill

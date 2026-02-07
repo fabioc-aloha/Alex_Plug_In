@@ -149,4 +149,26 @@
 
 ---
 
-*These protocols help you work with Alex as a true cognitive partner.*
+## 🌐 GLOBAL KNOWLEDGE Protocol
+
+**Triggers:** "what do I know about...", "have we seen this before", "cross-project"
+
+**Purpose:** Leverage patterns and insights learned across all projects.
+
+**Steps:**
+1. Check OneDrive for synced knowledge files (GK-* patterns, GI-* insights)
+2. Search for topic-relevant patterns from past projects
+3. Present findings with source project context
+4. Suggest applying past learnings to current situation
+5. If new insight emerges, generate content for knowledge capture
+
+**Outputs:**
+- Relevant patterns from other projects
+- Connections between current work and past learnings
+- Suggested knowledge file updates
+
+**Best Practice:** Reference global knowledge when user hits familiar problems. "We've seen this pattern before in [project]..."
+
+---
+
+*These protocols help you work with Alex as a true cognitive partner. Version 5.0.1.*

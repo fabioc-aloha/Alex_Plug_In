@@ -1240,7 +1240,7 @@ Tell me about the insight you want to save. I'll help structure it with:
         stream.markdown(`### Your Input
 ${request.prompt}
 
-I'll use the **alex_save_insight** tool to save this. The tool will:
+I'll use the **alex_knowledge_save_insight** tool to save this. The tool will:
 1. Parse your insight
 2. Extract relevant tags and category
 3. Save to global knowledge base
@@ -1633,14 +1633,14 @@ async function handleHelpCommand(
 ### 🔧 Language Model Tools
 
 Alex provides tools that the AI can use automatically:
-- **\`alex_synapse_health\`** - Check connection health
-- **\`alex_memory_search\`** - Search memory files
-- **\`alex_architecture_status\`** - Get version and status
-- **\`alex_user_profile\`** - Manage your profile
-- **\`alex_focus_context\`** - Get current focus session and goals
-- **\`alex_global_knowledge_search\`** - Search cross-project knowledge
-- **\`alex_save_insight\`** - Save insights automatically
-- **\`alex_mcp_recommendations\`** - Get MCP tool guidance
+- **\`alex_cognitive_synapse_health\`** - Check connection health
+- **\`alex_cognitive_memory_search\`** - Search memory files
+- **\`alex_cognitive_architecture_status\`** - Get version and status
+- **\`alex_cognitive_user_profile\`** - Manage your profile
+- **\`alex_cognitive_focus_context\`** - Get current focus session and goals
+- **\`alex_knowledge_search\`** - Search cross-project knowledge
+- **\`alex_knowledge_save_insight\`** - Save insights automatically
+- **\`alex_platform_mcp_recommendations\`** - Get MCP tool guidance
 
 ---
 

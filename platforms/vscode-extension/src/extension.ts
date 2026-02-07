@@ -28,6 +28,7 @@ import {
 } from "./commands/session";
 import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
+import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
 import { registerLanguageModelTools } from "./chat/tools";
@@ -35,6 +36,7 @@ import {
   registerGlobalKnowledgeTools,
   ensureGlobalKnowledgeDirectories,
   registerCurrentProject,
+  detectGlobalKnowledgeRepo,
 } from "./chat/globalKnowledge";
 import {
   registerCloudSyncTools,
@@ -52,6 +54,8 @@ import { isWorkspaceProtected } from "./shared/utils";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import { registerMemoryDashboard } from "./views/memoryDashboard";
+import { registerMemoryTreeView } from "./views/memoryTreeProvider";
+import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
 import * as telemetry from "./shared/telemetry";
 
 // Operation lock to prevent concurrent modifications
@@ -131,6 +135,11 @@ export function activate(context: vscode.ExtensionContext) {
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
   registerContextMenuCommands(context);
 
+  // Register cognitive task provider (Meditate, Dream, Self-Actualize, Sync Knowledge)
+  context.subscriptions.push(
+    vscode.tasks.registerTaskProvider(CognitiveTaskProvider.type, new CognitiveTaskProvider())
+  );
+
   // Register welcome view in Activity Bar
   const welcomeViewProvider = registerWelcomeView(context);
 
@@ -139,6 +148,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register memory architecture dashboard (premium)
   registerMemoryDashboard(context);
+
+  // Register memory tree view in Activity Bar sidebar
+  const memoryTreeProvider = registerMemoryTreeView(context);
 
   // Background cloud sync deprecated in v5.0.1 - use Git instead
   // startBackgroundSync(context);
@@ -154,6 +166,11 @@ export function activate(context: vscode.ExtensionContext) {
     .catch((err) => {
       console.warn("Failed to initialize global knowledge directories:", err);
     });
+
+  // Set context keys for when-clause filtering on slash commands (A3)
+  setCommandContextKeys().catch((err) => {
+    console.warn("Failed to set command context keys:", err);
+  });
 
   // Apply markdown preview CSS for workspaces that have Alex installed
   // This ensures proper styling even if user opens an existing Alex workspace
@@ -171,6 +188,8 @@ export function activate(context: vscode.ExtensionContext) {
           // Refresh status bar after initialization
           clearHealthCache();
           await updateStatusBar(context, true);
+          // Refresh context keys (memory files now exist)
+          await setCommandContextKeys();
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -190,6 +209,8 @@ export function activate(context: vscode.ExtensionContext) {
           // Refresh status bar after reset
           clearHealthCache();
           await updateStatusBar(context, true);
+          // Refresh context keys (memory files may have changed)
+          await setCommandContextKeys();
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -855,6 +876,227 @@ ${selected.value}
     },
   );
 
+  // Generate PPTX command
+  const generatePptxDisposable = vscode.commands.registerCommand(
+    "alex.generatePptx",
+    async () => {
+      const endLog = telemetry.logTimed("command", "generate_pptx");
+      try {
+        const sourceOptions = [
+          { label: "$(markdown) From Markdown File", description: "Convert .md to PPTX", value: "markdown" },
+          { label: "$(selection) From Selection", description: "Generate from selected text", value: "selection" },
+          { label: "$(new-file) New Presentation", description: "Create template to fill in", value: "new" },
+        ];
+
+        const selected = await vscode.window.showQuickPick(sourceOptions, {
+          placeHolder: "Select presentation source",
+          title: "📰 Generate PowerPoint Presentation",
+        });
+
+        if (!selected) {
+          endLog(true);
+          return;
+        }
+
+        // Import the generator dynamically to avoid loading it unnecessarily
+        const { generateAndSavePresentation, parseMarkdownToSlides } = await import("./generators/pptxGenerator");
+        
+        if (selected.value === "markdown") {
+          // Let user pick a markdown file
+          const mdFiles = await vscode.workspace.findFiles("**/*.md", "**/node_modules/**", 50);
+          if (mdFiles.length === 0) {
+            vscode.window.showWarningMessage("No markdown files found in workspace.");
+            endLog(true);
+            return;
+          }
+
+          const fileItems = mdFiles.map(uri => ({
+            label: vscode.workspace.asRelativePath(uri),
+            uri,
+          }));
+
+          const selectedFile = await vscode.window.showQuickPick(fileItems, {
+            placeHolder: "Select markdown file to convert",
+          });
+
+          if (!selectedFile) {
+            endLog(true);
+            return;
+          }
+
+          const mdContent = (await vscode.workspace.fs.readFile(selectedFile.uri)).toString();
+          const slides = parseMarkdownToSlides(mdContent);
+          
+          if (slides.length === 0) {
+            vscode.window.showWarningMessage("No slides parsed from markdown. Use # for titles, - for bullets.");
+            endLog(true);
+            return;
+          }
+
+          const outputPath = selectedFile.uri.fsPath.replace(/\.md$/, ".pptx");
+          const result = await generateAndSavePresentation(
+            slides,
+            { title: selectedFile.label.replace(/\.md$/, "") },
+            outputPath
+          );
+
+          if (result.success) {
+            vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+            // Open containing folder
+            vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
+          } else {
+            vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
+          }
+
+        } else if (selected.value === "selection") {
+          const editor = vscode.window.activeTextEditor;
+          if (!editor || editor.selection.isEmpty) {
+            vscode.window.showWarningMessage("Select markdown-formatted text to convert.");
+            endLog(true);
+            return;
+          }
+
+          const selectedText = editor.document.getText(editor.selection);
+          const slides = parseMarkdownToSlides(selectedText);
+
+          if (slides.length === 0) {
+            vscode.window.showWarningMessage("No slides parsed. Use # for titles, - for bullets, --- for slide breaks.");
+            endLog(true);
+            return;
+          }
+
+          const outputName = await vscode.window.showInputBox({
+            prompt: "Enter presentation filename",
+            value: "presentation.pptx",
+            validateInput: (v) => v && v.endsWith(".pptx") ? null : "Must end with .pptx",
+          });
+
+          if (!outputName) {
+            endLog(true);
+            return;
+          }
+
+          const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+          if (!workspaceFolder) {
+            vscode.window.showWarningMessage("Open a workspace folder first.");
+            endLog(true);
+            return;
+          }
+
+          const outputPath = `${workspaceFolder}/${outputName}`;
+          const result = await generateAndSavePresentation(
+            slides,
+            { title: outputName.replace(/\.pptx$/, "") },
+            outputPath
+          );
+
+          if (result.success) {
+            vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+            vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
+          } else {
+            vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
+          }
+
+        } else if (selected.value === "new") {
+          // Create a markdown template for the user to fill in
+          const template = `# Presentation Title
+
+## Subtitle or Author
+
+---
+
+# Section 1
+
+- First point
+- Second point
+- Third point
+
+> Speaker notes go here
+
+---
+
+## Section Divider [section]
+
+Section description
+
+---
+
+# Conclusion
+
+- Summary point 1
+- Summary point 2
+- Call to action
+
+---
+
+> TIP: Use # for titles, - for bullets, > for notes
+> Use --- to separate slides
+> Add [section] to ## headers for section dividers
+`;
+          
+          const doc = await vscode.workspace.openTextDocument({
+            content: template,
+            language: "markdown",
+          });
+          await vscode.window.showTextDocument(doc);
+          vscode.window.showInformationMessage("📰 Fill in the template, then run 'Generate Presentation' → 'From Selection'");
+        }
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(`PPTX generation failed: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    },
+  );
+
+  // Generate PPTX from file (explorer context menu)
+  const generatePptxFromFileDisposable = vscode.commands.registerCommand(
+    "alex.generatePptxFromFile",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "generate_pptx_from_file");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        const { generateAndSavePresentation, parseMarkdownToSlides } = await import("./generators/pptxGenerator");
+        
+        const mdContent = (await vscode.workspace.fs.readFile(uri)).toString();
+        const slides = parseMarkdownToSlides(mdContent);
+        
+        if (slides.length === 0) {
+          vscode.window.showWarningMessage("No slides parsed from markdown. Use # for titles, - for bullets, --- for slide breaks.");
+          endLog(true);
+          return;
+        }
+
+        const outputPath = uri.fsPath.replace(/\.md$/, ".pptx");
+        const fileName = uri.fsPath.split(/[/\\]/).pop()?.replace(/\.md$/, "") || "presentation";
+        
+        const result = await generateAndSavePresentation(
+          slides,
+          { title: fileName },
+          outputPath
+        );
+
+        if (result.success) {
+          vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+          vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
+        } else {
+          vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
+        }
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(`PPTX generation failed: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    },
+  );
+
   // Generate Tests command
   const generateTestsDisposable = vscode.commands.registerCommand(
     "alex.generateTests",
@@ -1347,6 +1589,8 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(codeReviewDisposable);
   context.subscriptions.push(debugThisDisposable);
   context.subscriptions.push(generateDiagramDisposable);
+  context.subscriptions.push(generatePptxDisposable);
+  context.subscriptions.push(generatePptxFromFileDisposable);
   context.subscriptions.push(generateTestsDisposable);
   context.subscriptions.push(skillReviewDisposable);
 
@@ -1364,6 +1608,68 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
   context.subscriptions.push(skillCatalogDisposable);
+
+  // GitHub Integration commands (D1, D2)
+  const importGitHubIssuesDisposable = vscode.commands.registerCommand(
+    "alex.importGitHubIssues",
+    async () => {
+      const endLog = telemetry.logTimed("command", "import_github_issues");
+      try {
+        await importGitHubIssuesAsGoals();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+  context.subscriptions.push(importGitHubIssuesDisposable);
+
+  const reviewPRDisposable = vscode.commands.registerCommand(
+    "alex.reviewPR",
+    async () => {
+      const endLog = telemetry.logTimed("command", "review_pr");
+      try {
+        await reviewPullRequest();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+  context.subscriptions.push(reviewPRDisposable);
+}
+
+/**
+ * Set VS Code context keys for when-clause filtering on slash commands.
+ * These keys control visibility of commands like /sync, /m365, /forget.
+ * Called at activation and after initialize/reset.
+ */
+async function setCommandContextKeys(): Promise<void> {
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+
+  // alex.globalKnowledgeConfigured — true if GK repo detected
+  const gkRepo = await detectGlobalKnowledgeRepo();
+  await vscode.commands.executeCommand(
+    "setContext",
+    "alex.globalKnowledgeConfigured",
+    gkRepo !== null,
+  );
+
+  // alex.hasMemoryFiles — true if .github/copilot-instructions.md exists
+  let hasMemory = false;
+  if (workspaceFolder) {
+    const markerFile = path.join(
+      workspaceFolder.uri.fsPath,
+      ".github",
+      "copilot-instructions.md",
+    );
+    hasMemory = await fs.pathExists(markerFile);
+  }
+  await vscode.commands.executeCommand(
+    "setContext",
+    "alex.hasMemoryFiles",
+    hasMemory,
+  );
 }
 
 /**

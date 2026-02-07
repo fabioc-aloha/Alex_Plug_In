@@ -1,6 +1,7 @@
 ---
 name: "Practitioner Research Skill"
 description: "Practitioner methodology for longitudinal case study research, evidence-based documentation, and publication-ready academic writing in AI-assisted development."
+disableModelInvocation: true
 ---
 
 # Practitioner Research Skill

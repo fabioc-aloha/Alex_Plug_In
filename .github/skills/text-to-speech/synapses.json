@@ -1,5 +1,6 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
   "skillId": "text-to-speech",
   "version": "2.4.0",
   "lastUpdated": "2026-02-06",

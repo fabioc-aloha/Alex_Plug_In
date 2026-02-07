@@ -81,8 +81,24 @@ const GK_REPO_NAMES = [
 /**
  * Detect an existing Global Knowledge repository as a sibling folder.
  * Returns the path if found, null otherwise.
+ * 
+ * Priority:
+ * 1. User-configured path via `alex.globalKnowledge.repoPath` setting
+ * 2. Sibling folder with known GK repo names
+ * 3. Any sibling folder with index.json + patterns/ + insights/
  */
 export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
+    // First check user-configured path
+    const configuredPath = vscode.workspace.getConfiguration('alex.globalKnowledge').get<string>('repoPath');
+    if (configuredPath && configuredPath.trim() !== '') {
+        const indexPath = path.join(configuredPath, 'index.json');
+        if (await fs.pathExists(indexPath)) {
+            return configuredPath;
+        }
+        // If configured path doesn't exist or isn't a valid GK repo, log warning but continue
+        console.warn(`Configured GK repo path ${configuredPath} is not a valid Global Knowledge repository`);
+    }
+
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (!workspaceFolders || workspaceFolders.length === 0) {
         return null;
@@ -2862,9 +2878,9 @@ ${syncStatusStr}
  */
 export function registerGlobalKnowledgeTools(context: vscode.ExtensionContext): void {
     context.subscriptions.push(
-        vscode.lm.registerTool('alex_global_knowledge_search', new GlobalKnowledgeSearchTool()),
-        vscode.lm.registerTool('alex_save_insight', new SaveInsightTool()),
-        vscode.lm.registerTool('alex_promote_knowledge', new PromoteKnowledgeTool()),
-        vscode.lm.registerTool('alex_global_knowledge_status', new GlobalKnowledgeStatusTool())
+        vscode.lm.registerTool('alex_knowledge_search', new GlobalKnowledgeSearchTool()),
+        vscode.lm.registerTool('alex_knowledge_save_insight', new SaveInsightTool()),
+        vscode.lm.registerTool('alex_knowledge_promote', new PromoteKnowledgeTool()),
+        vscode.lm.registerTool('alex_knowledge_status', new GlobalKnowledgeStatusTool())
     );
 }

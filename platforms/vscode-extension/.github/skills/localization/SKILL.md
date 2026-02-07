@@ -1,6 +1,7 @@
 ---
 name: "Localization & Internationalization (i18n/l10n)"
 description: "**Domain**: Software localization, internationalization, multilingual application development"
+disableModelInvocation: true
 ---
 
 # Localization & Internationalization (i18n/l10n)

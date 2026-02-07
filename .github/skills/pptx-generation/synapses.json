@@ -1,0 +1,66 @@
+{
+    "$schema": "../../../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "version": "1.0.0",
+    "skill": "pptx-generation",
+    "description": "Programmatic PowerPoint generation via PptxGenJS",
+    "inheritance": {
+        "parent": "gamma-presentations",
+        "relationship": "specialization",
+        "note": "Extends Gamma presentations with programmatic PPTX generation capability"
+    },
+    "connections": [
+        {
+            "type": "implements",
+            "target": "multimodal-output",
+            "strength": 1.0,
+            "context": "PPTX is a core multimodal output format alongside text and images"
+        },
+        {
+            "type": "uses",
+            "target": "brand-asset-management",
+            "strength": 0.9,
+            "context": "Uses Alex brand colors and visual identity in Slide Masters"
+        },
+        {
+            "type": "consumes",
+            "target": "markdown-parsing",
+            "strength": 0.85,
+            "context": "Converts markdown documents to structured slides"
+        },
+        {
+            "type": "integrates",
+            "target": "data-visualization",
+            "strength": 0.8,
+            "context": "Charts and tables for data-driven presentations"
+        },
+        {
+            "type": "supports",
+            "target": "memory-export",
+            "strength": 0.7,
+            "context": "Can export episodic memories and session summaries as slides"
+        },
+        {
+            "type": "extends",
+            "target": "gamma-presentations",
+            "strength": 0.6,
+            "context": "Offline alternative to Gamma for PPTX generation"
+        }
+    ],
+    "triggers": [
+        "create presentation",
+        "generate slides",
+        "make pptx",
+        "convert markdown to powerpoint",
+        "md to pptx",
+        "data visualization slides",
+        "chart presentation",
+        "alex branded deck"
+    ],
+    "metadata": {
+        "created": "2025-02-07",
+        "status": "active",
+        "priority": "high",
+        "implementation": "platforms/vscode-extension/src/generators/pptxGenerator.ts"
+    }
+}

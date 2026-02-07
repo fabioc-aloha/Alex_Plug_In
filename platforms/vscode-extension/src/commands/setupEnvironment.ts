@@ -30,6 +30,8 @@ const ESSENTIAL_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   // Skills auto-loading location - enables 75 Alex skills in chat
   "chat.agentSkillsLocations": [".github/skills"],
+  // Skill adherence - forces LLM to read SKILL.md files before responding (A4)
+  "chat.useSkillAdherencePrompt": true,
 };
 
 /**

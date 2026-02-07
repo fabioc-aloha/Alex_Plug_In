@@ -242,6 +242,16 @@
         "icon": "$(type-hierarchy)"
       },
       {
+        "command": "alex.generatePptx",
+        "title": "Alex: Generate Presentation",
+        "icon": "$(file-media)"
+      },
+      {
+        "command": "alex.generatePptxFromFile",
+        "title": "Alex: Convert to PowerPoint",
+        "icon": "$(file-media)"
+      },
+      {
         "command": "alex.generateTests",
         "title": "Alex: Generate Tests",
         "icon": "$(beaker)"
@@ -265,10 +275,34 @@
         "command": "alex.generateSkillCatalog",
         "title": "Alex: Generate Skill Catalog",
         "icon": "$(list-tree)"
+      },
+      {
+        "command": "alex.importGitHubIssues",
+        "title": "Alex: Import GitHub Issues as Goals",
+        "icon": "$(github)"
+      },
+      {
+        "command": "alex.reviewPR",
+        "title": "Alex: Review Pull Request",
+        "icon": "$(git-pull-request)"
       }
     ],
     "markdown.previewStyles": [
       "./.github/skills/markdown-mermaid/markdown-light.css"
+    ],
+    "taskDefinitions": [
+      {
+        "type": "alex-cognitive",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "The Alex cognitive command to execute (e.g. alex.meditate, alex.dream)"
+          }
+        }
+      }
     ],
     "viewsContainers": {
       "activitybar": [
@@ -285,6 +319,10 @@
           "type": "webview",
           "id": "alex.welcomeView",
           "name": "Welcome"
+        },
+        {
+          "id": "alex.memoryTree",
+          "name": "Memory Architecture"
         }
       ]
     },
@@ -294,6 +332,13 @@
           "submenu": "alex.contextMenu",
           "group": "alex@1",
           "when": "editorHasSelection"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "alex.generatePptxFromFile",
+          "group": "alex@1",
+          "when": "resourceExtname == .md"
         }
       ],
       "alex.contextMenu": [
@@ -545,6 +590,12 @@
           "type": "boolean",
           "default": false,
           "description": "Automatically save insights with very high confidence (>0.8) without prompting"
+        },
+        "alex.globalKnowledge.repoPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Custom path to Global Knowledge repository. Leave empty for auto-detection (sibling folder named Alex-Global-Knowledge)."
         }
       }
     },
@@ -636,11 +687,13 @@
           {
             "name": "azure",
             "description": "Get Azure development guidance with MCP tool recommendations",
+            "when": "config.alex.m365.enabled",
             "sampleRequest": "Deploy a Node.js app to Azure App Service"
           },
           {
             "name": "m365",
             "description": "Get Microsoft 365 development guidance with Copilot extensibility",
+            "when": "config.alex.m365.enabled",
             "sampleRequest": "Create a Teams message extension"
           },
           {
@@ -671,16 +724,19 @@
           {
             "name": "sync",
             "description": "Sync your global knowledge base with GitHub (bidirectional merge)",
+            "when": "alex.globalKnowledgeConfigured",
             "sampleRequest": "Sync my global knowledge with GitHub"
           },
           {
             "name": "push",
             "description": "Push local global knowledge to GitHub Gist",
+            "when": "alex.globalKnowledgeConfigured",
             "sampleRequest": "Upload local knowledge to GitHub"
           },
           {
             "name": "pull",
             "description": "Pull global knowledge from GitHub Gist to local",
+            "when": "alex.globalKnowledgeConfigured",
             "sampleRequest": "Download knowledge from GitHub"
           },
           {
@@ -701,6 +757,7 @@
           {
             "name": "exportm365",
             "description": "Export your Alex memory for M365 Copilot integration",
+            "when": "config.alex.m365.enabled",
             "sampleRequest": "Export my architecture for M365 Copilot"
           },
           {
@@ -711,6 +768,7 @@
           {
             "name": "forget",
             "description": "Selectively remove information from Alex's memory (e.g., /forget old-project-name)",
+            "when": "alex.hasMemoryFiles",
             "sampleRequest": "Remove old project memories"
           },
           {
@@ -733,7 +791,7 @@
     ],
     "languageModelTools": [
       {
-        "name": "alex_synapse_health",
+        "name": "alex_cognitive_synapse_health",
         "displayName": "Alex Synapse Health",
         "toolReferenceName": "synapse_health",
         "modelDescription": "Scans Alex cognitive architecture memory files and validates synaptic connections. Reports broken connections and provides health metrics. Use when checking architecture health or before/after meditation.",
@@ -760,7 +818,7 @@
         }
       },
       {
-        "name": "alex_memory_search",
+        "name": "alex_cognitive_memory_search",
         "displayName": "Alex Memory Search",
         "toolReferenceName": "memory_search",
         "modelDescription": "Searches Alex's memory files (procedural, episodic, domain knowledge) for relevant information. UNCONSCIOUS BEHAVIOR: Automatically searches global knowledge base when local search finds nothing, retrieving cross-project learnings transparently.",
@@ -800,7 +858,7 @@
         }
       },
       {
-        "name": "alex_architecture_status",
+        "name": "alex_cognitive_architecture_status",
         "displayName": "Alex Architecture Status",
         "toolReferenceName": "architecture_status",
         "modelDescription": "Returns the current status of Alex cognitive architecture including version, installed memory files, and available commands. Use to check if Alex is properly configured.",
@@ -826,7 +884,7 @@
         }
       },
       {
-        "name": "alex_mcp_recommendations",
+        "name": "alex_platform_mcp_recommendations",
         "displayName": "Alex MCP Recommendations",
         "toolReferenceName": "mcp_recommendations",
         "modelDescription": "Provides recommendations for Azure and M365 MCP tools based on the development scenario. Use when the user needs guidance on which MCP tools to use for Azure or Microsoft 365 development.",
@@ -862,7 +920,7 @@
         }
       },
       {
-        "name": "alex_user_profile",
+        "name": "alex_cognitive_user_profile",
         "displayName": "Alex User Profile",
         "toolReferenceName": "user_profile",
         "modelDescription": "Manages the user's personal profile and preferences for personalized interactions. Can get, update, or check if a profile exists. Use to learn about the user and customize Alex's communication style.",
@@ -900,7 +958,7 @@
         }
       },
       {
-        "name": "alex_self_actualization",
+        "name": "alex_cognitive_self_actualization",
         "displayName": "Alex Self-Actualization",
         "toolReferenceName": "self_actualization",
         "modelDescription": "Runs comprehensive self-assessment of Alex cognitive architecture: validates synaptic connections, checks version consistency, assesses memory architecture balance, generates improvement recommendations, and creates meditation session documentation. Use when user asks to 'self-actualize', 'deep meditate', or wants comprehensive architecture assessment.",
@@ -929,7 +987,7 @@
         }
       },
       {
-        "name": "alex_global_knowledge_search",
+        "name": "alex_knowledge_search",
         "displayName": "Alex Global Knowledge Search",
         "toolReferenceName": "global_knowledge",
         "modelDescription": "Searches Alex's global knowledge base for patterns and insights learned across ALL projects. Use when looking for cross-project learnings, reusable patterns, or insights that might apply to the current problem. Returns relevant knowledge from any project the user has worked on.",
@@ -991,7 +1049,7 @@
         }
       },
       {
-        "name": "alex_save_insight",
+        "name": "alex_knowledge_save_insight",
         "displayName": "Alex Save Insight",
         "toolReferenceName": "save_insight",
         "modelDescription": "Saves a new insight or learning to Alex's global knowledge base. Use when the user has learned something valuable that could help in other projects. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after saving - no manual sync needed.",
@@ -1053,7 +1111,7 @@
         }
       },
       {
-        "name": "alex_promote_knowledge",
+        "name": "alex_knowledge_promote",
         "displayName": "Alex Promote Knowledge",
         "toolReferenceName": "promote_knowledge",
         "modelDescription": "Promotes a project-local domain knowledge file (DK-*.md) to the global knowledge base. UNCONSCIOUS BEHAVIOR: Automatically triggers background cloud sync after promoting - no manual sync needed.",
@@ -1102,7 +1160,7 @@
         }
       },
       {
-        "name": "alex_global_knowledge_status",
+        "name": "alex_knowledge_status",
         "displayName": "Alex Global Knowledge Status",
         "toolReferenceName": "knowledge_status",
         "modelDescription": "Shows the current status of Alex's global knowledge base: total patterns, insights, categories, recent entries, known projects, and cloud sync status. Use to understand what cross-project knowledge is available and if it needs to be synced to cloud.",
@@ -1151,7 +1209,7 @@
         }
       },
       {
-        "name": "alex_focus_context",
+        "name": "alex_cognitive_focus_context",
         "displayName": "Alex Focus Context",
         "toolReferenceName": "focus_context",
         "modelDescription": "Returns the user's current focus session and goals including Pomodoro timer status, active goals with progress, and streak tracking. Use when needing context about what the user is currently working on.",
@@ -1178,7 +1236,7 @@
         }
       },
       {
-        "name": "alex_heir_validation",
+        "name": "alex_quality_heir_validation",
         "displayName": "Alex Heir Validation",
         "toolReferenceName": "heir_validation",
         "modelDescription": "Scans heir content (.github/ in vscode-extension package) for personal data leaks and quality issues. Returns content for semantic analysis by the LLM. Use before publishing or after heir sync to validate content is safe for Marketplace distribution.",
@@ -1217,13 +1275,21 @@
     "walkthroughs": [
       {
         "id": "alex.gettingStarted",
-        "title": "Get Started with Alex",
-        "description": "Learn how to use Alex Cognitive Architecture to enhance your development workflow",
+        "title": "Getting Started with Alex",
+        "description": "Set up your cognitive learning partner and start building knowledge",
         "steps": [
           {
+            "id": "alex.welcome",
+            "title": "Meet Alex",
+            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **75 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
+            "media": {
+              "markdown": "alex_docs/README.md"
+            }
+          },
+          {
             "id": "alex.init",
-            "title": "Initialize Alex",
-            "description": "Deploy the cognitive architecture to your workspace.\n\n[Initialize Architecture](command:alex.initialize)",
+            "title": "Initialize Architecture",
+            "description": "Deploy the cognitive architecture to your workspace. This creates memory files, skills, and synaptic connections.\n\n[Initialize Architecture](command:alex.initialize)",
             "media": {
               "markdown": "alex_docs/README.md"
             },
@@ -1234,28 +1300,93 @@
           {
             "id": "alex.chat",
             "title": "Chat with @alex",
-            "description": "Open GitHub Copilot Chat and type `@alex` to start a conversation.\n\nTry: `@alex /status`",
+            "description": "Open GitHub Copilot Chat and type `@alex` to start a conversation.\n\nTry: `@alex /status` to check your architecture health.",
             "media": {
-              "markdown": "alex_docs/COPILOT-INTEGRATION.md"
+              "markdown": "alex_docs/README.md"
+            }
+          },
+          {
+            "id": "alex.profile",
+            "title": "Set Up Your Profile",
+            "description": "Personalize Alex by setting your learning preferences, expertise areas, and communication style.\n\nTry: `@alex /profile`",
+            "media": {
+              "markdown": "alex_docs/README.md"
             }
           },
           {
             "id": "alex.meditate",
             "title": "Consolidate Knowledge",
-            "description": "Use `/meditate` to consolidate what you've learned into memory files.\n\nTry: `@alex /meditate I learned about design patterns today`",
+            "description": "Use `/meditate` to consolidate what you've learned into persistent memory files.\n\nTry: `@alex /meditate I learned about design patterns today`",
             "media": {
-              "markdown": "alex_docs/COGNITIVE-ARCHITECTURE.md"
+              "markdown": "alex_docs/README.md"
             }
           },
           {
             "id": "alex.dream",
             "title": "Run Neural Maintenance",
-            "description": "Keep Alex healthy by running the Dream protocol.\n\n[Run Dream Protocol](command:alex.dream)",
+            "description": "Keep Alex healthy by running the Dream protocol — it validates synapses and repairs broken connections.\n\n[Run Dream Protocol](command:alex.dream)",
             "media": {
-              "markdown": "alex_docs/CONSCIOUS-MIND.md"
+              "markdown": "alex_docs/README.md"
             },
             "completionEvents": [
               "onCommand:alex.dream"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "alex.globalKnowledge",
+        "title": "Global Knowledge Setup",
+        "description": "Share learnings across all your projects with a Git-based knowledge repository",
+        "when": "alex.hasMemoryFiles",
+        "steps": [
+          {
+            "id": "alex.gk.intro",
+            "title": "What is Global Knowledge?",
+            "description": "Global Knowledge lets Alex share patterns and insights across all your projects. Learnings from one project automatically benefit every other project.\n\nIt's powered by a simple Git repository — no cloud services required."
+          },
+          {
+            "id": "alex.gk.createRepo",
+            "title": "Create a Knowledge Repository",
+            "description": "Create a new GitHub repository named `Alex-Global-Knowledge` (or any name) and clone it next to your workspace.\n\nAlex auto-detects sibling folders with `index.json` + `patterns/` + `insights/`."
+          },
+          {
+            "id": "alex.gk.firstSync",
+            "title": "First Sync",
+            "description": "Once set up, try syncing your knowledge:\n\nTry: `@alex /sync`\n\nThis merges local and remote knowledge bidirectionally.",
+            "completionEvents": [
+              "onContext:alex.globalKnowledgeConfigured"
+            ]
+          },
+          {
+            "id": "alex.gk.saveInsight",
+            "title": "Save Your First Insight",
+            "description": "Capture a valuable learning for use across projects:\n\nTry: `@alex /saveinsight` after discovering something useful."
+          }
+        ]
+      },
+      {
+        "id": "alex.voiceTTS",
+        "title": "Voice & Text-to-Speech",
+        "description": "Let Alex read responses aloud with configurable voice synthesis",
+        "when": "alex.hasMemoryFiles",
+        "steps": [
+          {
+            "id": "alex.tts.intro",
+            "title": "About Voice Mode",
+            "description": "Alex can read responses aloud using text-to-speech synthesis. This is useful for accessibility, hands-free coding, or reviewing long documents."
+          },
+          {
+            "id": "alex.tts.configure",
+            "title": "Configure Voice",
+            "description": "Voice is powered by your system's speech synthesis engine. Try the Read Aloud command:\n\n[Read Aloud](command:alex.readAloud)"
+          },
+          {
+            "id": "alex.tts.try",
+            "title": "Try It Out",
+            "description": "Select some text in your editor, then right-click and choose **Ask Alex** to get a spoken response.\n\nOr use: `@alex read this file aloud`",
+            "completionEvents": [
+              "onCommand:alex.readAloud"
             ]
           }
         ]
@@ -1281,6 +1412,7 @@
     "@types/mocha": "^10.0.10",
     "@types/proper-lockfile": "^4.1.4",
     "@types/vscode": "^1.108.1",
+    "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@vscode/test-electron": "^2.3.2",
@@ -1291,11 +1423,11 @@
     "sharp": "^0.34.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.1.3",
-    "@types/ws": "^8.5.12"
+    "typescript": "^5.1.3"
   },
   "dependencies": {
     "fs-extra": "^11.3.3",
+    "pptxgenjs": "^4.0.1",
     "proper-lockfile": "^4.1.2",
     "ws": "^8.18.0"
   }

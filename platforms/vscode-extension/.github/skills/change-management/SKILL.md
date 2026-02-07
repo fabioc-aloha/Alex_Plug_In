@@ -1,6 +1,7 @@
 ---
 name: "Change Management Skill"
 description: "Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies."
+disableModelInvocation: true
 ---
 
 # Change Management Skill

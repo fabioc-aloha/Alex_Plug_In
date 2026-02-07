@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.2] - 2026-02-07
+
+> **M365 Schema Polish** — Exploit all production-ready v1.6 declarative agent features
+
+### Added (M365 Heir)
+
+- **D8a — People Enrichment**: `include_related_content: true` on People capability — person lookups now return shared docs, emails, and Teams messages in a single call (replaces 4-step Person Deep Dive)
+- **D8b — Behavior Overrides**: `behavior_overrides` block with `suggestions: false` (Alex drives proactive behavior), `discourage_model_knowledge: false` (epistemic + generative modes), and `special_instructions` for knowledge-priority guidance
+- **D8b — Disclaimer**: Responsible AI trust signal displayed on first interaction — describes data access and privacy posture
+- **D8c — User Overrides**: `user_overrides` block letting users toggle Email, Teams, Meetings, People, OneDrive, and WebSearch capabilities — aligns with Alex's ethical framework on user sovereignty
+- **D8d — Graceful Degradation**: Instruction rule for handling disabled capabilities without pressuring users to re-enable
+
+### Changed (M365 Heir)
+
+- **D8e — Version Bump**: M365 manifest, package.json, README, system prompt, and declarativeAgent instructions all bumped to 5.0.2
+- **Capability Coverage**: 8/17 (47%) → 12/17 (71%) of available M365 declarative agent features
+
+---
+
 ## [5.0.1] - 2026-02-07
 
 > **API Polish** — Tool discoverability, command UX, and Mermaid diagram quality
