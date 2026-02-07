@@ -156,6 +156,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "openGitHub":
           vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"));
           break;
+        case "provideFeedback":
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/discussions"));
+          break;
         case "refresh":
           this.refresh();
           break;
@@ -1121,6 +1124,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('openDocs')">
                     <span class="action-icon">📚</span>
                     <span class="action-text">Docs</span>
+                </button>
+                <button class="action-btn" onclick="cmd('provideFeedback')" title="Share feedback, ideas, or feature requests">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Provide Feedback</span>
                 </button>
                 <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics and report issues">
                     <span class="action-icon">🩺</span>
