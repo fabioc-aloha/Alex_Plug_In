@@ -1071,14 +1071,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🐛</span>
                     <span class="action-text">Debug This</span>
                 </button>
-                <button class="action-btn" onclick="cmd('generateDiagram')">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Generate Diagram</span>
-                </button>
-                <button class="action-btn" onclick="cmd('generatePptx')" title="Generate PowerPoint from markdown or selection">
-                    <span class="action-icon">📰</span>
-                    <span class="action-text">Generate Presentation</span>
-                </button>
                 <button class="action-btn" onclick="cmd('importGitHubIssues')" title="Import GitHub issues as learning goals">
                     <span class="action-icon">📋</span>
                     <span class="action-text">Import Issues</span>
@@ -1086,6 +1078,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('reviewPR')" title="Generate AI-powered code review for pull requests">
                     <span class="action-icon">👁️</span>
                     <span class="action-text">Review PR</span>
+                </button>
+                
+                <div class="action-group-label">MULTIMODAL</div>
+                <button class="action-btn" onclick="cmd('generateDiagram')" title="Generate Mermaid diagrams from code or text">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Generate Diagram</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generatePptx')" title="Generate PowerPoint from markdown or selection">
+                    <span class="action-icon">📰</span>
+                    <span class="action-text">Generate Presentation</span>
                 </button>
                 <button class="action-btn" onclick="cmd('readAloud')" title="Read selected text aloud using neural voices">
                     <span class="action-icon">🔊</span>
