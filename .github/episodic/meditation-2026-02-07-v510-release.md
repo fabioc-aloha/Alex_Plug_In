@@ -13,13 +13,13 @@ Released **Alex Cognitive Architecture v5.1.0** to the VS Code Marketplace. This
 
 ## Key Accomplishments
 
-| Phase | Commits | Files | What |
-|-------|---------|-------|------|
-| Second Audit Fix | `b196447` | 2 | Architecture tree, ROADMAP versions |
-| Branding Audit | `cfe9495` | 6 | Skill counts, color palette, homepage URL |
-| Roadmap Cleanup | `d1eeefc` | 1 | 5 stale tasks moved, section renamed |
-| Version Bump | `a9c53e7` → `96ee88c` | 6 | 5.0.1 → 5.0.2 → 5.1.0 |
-| **Published** | — | 238 files | 3.8 MB VSIX to marketplace |
+| Phase            | Commits               | Files     | What                                      |
+| ---------------- | --------------------- | --------- | ----------------------------------------- |
+| Second Audit Fix | `b196447`             | 2         | Architecture tree, ROADMAP versions       |
+| Branding Audit   | `cfe9495`             | 6         | Skill counts, color palette, homepage URL |
+| Roadmap Cleanup  | `d1eeefc`             | 1         | 5 stale tasks moved, section renamed      |
+| Version Bump     | `a9c53e7` → `96ee88c` | 6         | 5.0.1 → 5.0.2 → 5.1.0                     |
+| **Published**    | —                     | 238 files | 3.8 MB VSIX to marketplace                |
 
 ## Insights Consolidated
 
@@ -37,18 +37,18 @@ The workflow pattern that emerged: `audit → fix → re-audit → fix → roadm
 
 ## Memory Files Modified
 
-| File | Action | Change |
-|------|--------|--------|
-| `release-preflight/SKILL.md` | Updated | Version locations table: 4 → 7 entries; added 3 new mistakes |
-| `master-alex-audit/SKILL.md` | Updated | Version reference 3.7.3 → 5.1.0; added M365 version lag note |
-| `release-preflight/synapses.json` | Strengthened | +2 connections (release-process, master-alex-audit) |
+| File                              | Action       | Change                                                       |
+| --------------------------------- | ------------ | ------------------------------------------------------------ |
+| `release-preflight/SKILL.md`      | Updated      | Version locations table: 4 → 7 entries; added 3 new mistakes |
+| `master-alex-audit/SKILL.md`      | Updated      | Version reference 3.7.3 → 5.1.0; added M365 version lag note |
+| `release-preflight/synapses.json` | Strengthened | +2 connections (release-process, master-alex-audit)          |
 
 ## Synapse Changes
 
-| Connection | Strength | Type | Note |
-|------------|----------|------|------|
-| release-preflight → release-process | 0.95 | coordinates | Bidirectional pairing now complete |
-| release-preflight → master-alex-audit | 0.85 | supports | Audit-before-preflight pattern validated |
+| Connection                            | Strength | Type        | Note                                     |
+| ------------------------------------- | -------- | ----------- | ---------------------------------------- |
+| release-preflight → release-process   | 0.95     | coordinates | Bidirectional pairing now complete       |
+| release-preflight → master-alex-audit | 0.85     | supports    | Audit-before-preflight pattern validated |
 
 ## Architecture State
 
@@ -68,4 +68,25 @@ The workflow pattern that emerged: `audit → fix → re-audit → fix → roadm
 
 ---
 
-*Meditation complete. Architecture consolidated after v5.1.0 release.*
+## Addendum: Post-Publish Maintenance Meditation
+
+**Time**: ~30 min after initial meditation
+
+### Activity
+- Checked subdomain health: `alex.correax.com` (HTTP 200, HTTPS failed) and `github.correax.com` (HTTPS 200)
+- Diagnosed SSL issue: GitHub Pages serving `*.github.io` wildcard cert instead of custom domain cert
+- User enabled "Enforce HTTPS" in GitHub Pages settings → Let's Encrypt cert provisioned (CN=alex.correax.com, expires May 8, 2026)
+- Verified marketplace listing: v5.1.0 live, 23 installs
+
+### Insight Saved
+- **GI-github-pages-custom-domain-ssl-enforce-h-2026-02-08**: GitHub Pages custom domain SSL requires "Enforce HTTPS" toggle to trigger Let's Encrypt provisioning
+
+### Final State
+- **alex.correax.com**: HTTPS 200 OK (Let's Encrypt, expires May 2026)
+- **github.correax.com**: HTTPS 200 OK (redirects to github.com/fabioc-aloha)
+- **Marketplace**: v5.1.0 live, 23 installs
+- All surfaces healthy
+
+---
+
+*Maintenance meditation complete. All deployment surfaces verified.*

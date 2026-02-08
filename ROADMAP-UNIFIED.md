@@ -83,7 +83,7 @@ flowchart LR
 | -------------------------- | -------------------------------------------------------------------- |
 | **Current Master Version** | 5.1.0                                                                |
 | **Current Heirs**          | VS Code (5.1.0), M365 (5.0.2)                                        |
-| **Target**                 | 5.1.0 (Platform Polish)                                               |
+| **Target**                 | 5.1.0 (Platform Polish)                                              |
 | **Status**                 | ✅ v5.1.0 Released                                                    |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
@@ -905,24 +905,24 @@ await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.Confi
 
 Items not yet assigned to a version milestone. Pull from here when capacity frees up.
 
-| Task                        | Owner  | Effort | Priority | Description                                                            |
-| --------------------------- | :----: | :----: | :------: | ---------------------------------------------------------------------- |
-| **Model Selection Advisor** |  Heir  |   3h   |  🔥 High  | Advise model upgrade (Opus 4.6) or downgrade for task; read user prefs |
-| Model Tier Detection API    |  Heir  |   2h   |  Medium  | Detect running model programmatically via VS Code API                  |
-| Model Performance Telemetry | Master |   2h   |   Low    | Track task success rates per model tier (opt-in)                       |
-| Learning Journeys           |  Heir  |   3h   |  Medium  | Curated skill progressions ("Azure Basics → Advanced → Arch")          |
-| Session Replay              |  Heir  |   2h   |  Medium  | Save session transcripts + code changes to episodic memory             |
-| Skill Recommendations       |  Heir  |   3h   |  Medium  | Suggest skills based on file types opened (.bicep → Azure IaC)         |
-| Context-Aware Skill Loading |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace detection                          |
-| Synapse Strength Scoring    | Master |   2h   |  Medium  | Track frequently-used synapses, strengthen/prune pathways              |
-| Inline Skill Hints          |  Heir  |   3h   |  Medium  | Hover on code shows "💡 Alex can help: skill-name"                      |
-| Progress Widget             |  Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress             |
-| Calendar-Aware Focus        |  Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min                    |
-| Agent Orchestration         | Master |  1.5h  |  Medium  | Multi-agent workflows prototype                                        |
-| Audit 76 skills for Agent Skills compat |  Master |   4h   |  Medium  | Verify all 76 skills work correctly as VS Code Agent Skills            |
-| OneDrive Agent Export command |  Heir  |   4h   |  Medium  | Export cognitive architecture to OneDrive for M365 consumption         |
-| Community Agent pilot (Teams) |  M365  |   2h   |  Medium  | Pilot Alex as a Teams community agent                                  |
-| Chat Prompt Files API         |  Heir  |  TBD   |   Low    | Adopt when API graduates from proposed to stable                       |
+| Task                                    | Owner  | Effort | Priority | Description                                                            |
+| --------------------------------------- | :----: | :----: | :------: | ---------------------------------------------------------------------- |
+| **Model Selection Advisor**             |  Heir  |   3h   |  🔥 High  | Advise model upgrade (Opus 4.6) or downgrade for task; read user prefs |
+| Model Tier Detection API                |  Heir  |   2h   |  Medium  | Detect running model programmatically via VS Code API                  |
+| Model Performance Telemetry             | Master |   2h   |   Low    | Track task success rates per model tier (opt-in)                       |
+| Learning Journeys                       |  Heir  |   3h   |  Medium  | Curated skill progressions ("Azure Basics → Advanced → Arch")          |
+| Session Replay                          |  Heir  |   2h   |  Medium  | Save session transcripts + code changes to episodic memory             |
+| Skill Recommendations                   |  Heir  |   3h   |  Medium  | Suggest skills based on file types opened (.bicep → Azure IaC)         |
+| Context-Aware Skill Loading             |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace detection                          |
+| Synapse Strength Scoring                | Master |   2h   |  Medium  | Track frequently-used synapses, strengthen/prune pathways              |
+| Inline Skill Hints                      |  Heir  |   3h   |  Medium  | Hover on code shows "💡 Alex can help: skill-name"                      |
+| Progress Widget                         |  Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress             |
+| Calendar-Aware Focus                    |  Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min                    |
+| Agent Orchestration                     | Master |  1.5h  |  Medium  | Multi-agent workflows prototype                                        |
+| Audit 76 skills for Agent Skills compat | Master |   4h   |  Medium  | Verify all 76 skills work correctly as VS Code Agent Skills            |
+| OneDrive Agent Export command           |  Heir  |   4h   |  Medium  | Export cognitive architecture to OneDrive for M365 consumption         |
+| Community Agent pilot (Teams)           |  M365  |   2h   |  Medium  | Pilot Alex as a Teams community agent                                  |
+| Chat Prompt Files API                   |  Heir  |  TBD   |   Low    | Adopt when API graduates from proposed to stable                       |
 
 **Note**: High-priority items are scheduled in the Version Roadmap above.
 
@@ -1538,16 +1538,16 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 > **Effort columns:** Human = traditional estimate, Alex = AI-assisted estimate
 > See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology
 
-| Version | Task                                            | Owner  | Human |  Alex  | Status |
-| ------- | ----------------------------------------------- | :----: | :---: | :----: | :----: |
-| v4.2.5  | Update engine to ^1.109.0                       |  Heir  |  30m  |  ⚡ 5m  |   ✅    |
-| v4.2.5  | Consolidate 9 agents → 3 (Alex, Azure, M365)    | Master |  2h   | 🔄 20m  |   ✅    |
-| v4.2.5  | Create 6 slash command prompt files             | Master |  1h   | ⚡ 10m  |   ✅    |
-| v4.2.5  | Implement agent handoffs (Azure, M365)          | Master |  1h   | ⚡ 10m  |   ✅    |
-| v4.2.5  | Refactor dream to shared synapse-core.ts        |  Heir  |  2h   | ⏱️ 45m  |   ✅    |
-| v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m  |   ✅    |
-| v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m  |   ✅    |
-| v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m  |   ✅    |
+| Version | Task                                            | Owner  | Human | Alex  | Status |
+| ------- | ----------------------------------------------- | :----: | :---: | :---: | :----: |
+| v4.2.5  | Update engine to ^1.109.0                       |  Heir  |  30m  | ⚡ 5m  |   ✅    |
+| v4.2.5  | Consolidate 9 agents → 3 (Alex, Azure, M365)    | Master |  2h   | 🔄 20m |   ✅    |
+| v4.2.5  | Create 6 slash command prompt files             | Master |  1h   | ⚡ 10m |   ✅    |
+| v4.2.5  | Implement agent handoffs (Azure, M365)          | Master |  1h   | ⚡ 10m |   ✅    |
+| v4.2.5  | Refactor dream to shared synapse-core.ts        |  Heir  |  2h   | ⏱️ 45m |   ✅    |
+| v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m |   ✅    |
+| v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m |   ✅    |
+| v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m |   ✅    |
 
 **v4.2.5 Actual:** Human estimate 8.5h → Alex actual ~2h (4× acceleration)
 
