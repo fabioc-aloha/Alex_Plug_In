@@ -1185,7 +1185,7 @@ vscode.tasks.registerTaskProvider('alex', {
 | ----------------------- | ---------------------------------------------------- | -------- |
 | Chat Participant        | `chatParticipants` contribution point                | ✅ Active |
 | 31 Chat Commands        | `/meditate`, `/dream`, `/learn`, `/status`, etc.     | ✅ Active |
-| 11 Language Model Tools | `languageModelTools` contribution point              | ✅ Active |
+| 12 Language Model Tools | `languageModelTools` contribution point              | ✅ Active |
 | 55 Chat Skills          | `chatSkills` contribution point (static paths)       | ✅ Active |
 | Tree Views              | Health Dashboard, Memory Architecture                | ✅ Active |
 | Commands                | 30+ commands (`alex.initialize`, `alex.dream`, etc.) | ✅ Active |

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.1.3",
+  "version": "5.3.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -320,6 +320,61 @@
         "command": "alex.reviewPR",
         "title": "Alex: Review Pull Request",
         "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "alex.toggleVoice",
+        "title": "Alex: Toggle Voice Mode",
+        "icon": "$(unmute)"
+      },
+      {
+        "command": "alex.showCognitiveDashboard",
+        "title": "Alex: Cognitive Dashboard",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "alex.dailyBriefing",
+        "title": "Alex: Daily Briefing",
+        "icon": "$(calendar)"
+      },
+      {
+        "command": "alex.quickCommands",
+        "title": "Alex: Quick Commands",
+        "icon": "$(zap)"
+      },
+      {
+        "command": "alex.enterprise.signIn",
+        "title": "Alex: Enterprise Sign In",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "alex.enterprise.signOut",
+        "title": "Alex: Enterprise Sign Out",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "alex.enterprise.showAuthStatus",
+        "title": "Alex: Enterprise Auth Status",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "alex.enterprise.scanSecrets",
+        "title": "Alex: Scan for Secrets",
+        "icon": "$(search)"
+      },
+      {
+        "command": "alex.enterprise.scanWorkspace",
+        "title": "Alex: Scan Workspace for Secrets",
+        "icon": "$(search-fuzzy)"
+      },
+      {
+        "command": "alex.enterprise.viewAuditLog",
+        "title": "Alex: View Audit Log",
+        "icon": "$(history)"
+      },
+      {
+        "command": "alex.enterprise.exportAuditLog",
+        "title": "Alex: Export Audit Log",
+        "icon": "$(export)"
       }
     ],
     "markdown.previewStyles": [
@@ -354,6 +409,11 @@
           "type": "webview",
           "id": "alex.welcomeView",
           "name": "Welcome"
+        },
+        {
+          "type": "webview",
+          "id": "alex.cognitiveDashboard",
+          "name": "Cognitive Dashboard"
         },
         {
           "id": "alex.memoryTree",
@@ -862,6 +922,171 @@
           "default": "",
           "scope": "application",
           "description": "Logo.dev API token for ticker-based logo lookup (free 500K/mo at logo.dev). Attribution required on free tier."
+        },
+        "alex.voice.enabled": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Enable automatic voice mode. When enabled, Alex will read responses aloud."
+        },
+        "alex.voice.autoReadResponses": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Automatically read chat responses aloud when voice mode is enabled."
+        },
+        "alex.voice.defaultPreset": {
+          "type": "string",
+          "default": "zen_master",
+          "enum": [
+            "zen_master",
+            "british_scholar",
+            "storyteller",
+            "fast_learner",
+            "custom"
+          ],
+          "enumDescriptions": [
+            "Zen Master - Calm, measured pace with a soothing male voice",
+            "British Scholar - Sophisticated UK accent, slightly formal",
+            "Storyteller - Warm, engaging narrator voice",
+            "Fast Learner - Quick pace for efficient information absorption",
+            "Custom - Use custom voice settings"
+          ],
+          "scope": "machine",
+          "description": "Default voice preset for text-to-speech."
+        },
+        "alex.dashboard.refreshInterval": {
+          "type": "number",
+          "default": 30,
+          "minimum": 10,
+          "maximum": 300,
+          "scope": "machine",
+          "description": "Dashboard auto-refresh interval in seconds."
+        },
+        "alex.dailyBriefing.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Show daily briefing on first chat of the day."
+        },
+        "alex.dailyBriefing.includeGoals": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Include learning goals progress in daily briefing."
+        },
+        "alex.dailyBriefing.includeStreak": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Include streak information in daily briefing."
+        },
+        "alex.enterprise.enabled": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Enable enterprise mode with Microsoft Entra ID authentication and enhanced security features."
+        },
+        "alex.enterprise.requireAuth": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Require authentication for all Alex operations in enterprise mode."
+        },
+        "alex.enterprise.minWriteRole": {
+          "type": "string",
+          "default": "contributor",
+          "enum": [
+            "viewer",
+            "contributor",
+            "admin",
+            "owner"
+          ],
+          "enumDescriptions": [
+            "Viewer - Read-only access",
+            "Contributor - Can modify content",
+            "Admin - Full access except ownership changes",
+            "Owner - Full access including role management"
+          ],
+          "scope": "machine",
+          "description": "Minimum role required for write operations in enterprise mode."
+        },
+        "alex.enterprise.allowedTenants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "scope": "machine",
+          "description": "List of allowed Entra ID tenant IDs. Leave empty to allow any tenant."
+        },
+        "alex.enterprise.auditEnabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Enable audit logging for enterprise operations."
+        },
+        "alex.enterprise.audit.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Enable the audit logging system."
+        },
+        "alex.enterprise.audit.fileLogging": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Write audit events to local log files."
+        },
+        "alex.enterprise.audit.logFilePath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Custom path for audit log files. Leave empty to use extension storage."
+        },
+        "alex.enterprise.audit.consoleLogging": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Log audit events to VS Code developer console."
+        },
+        "alex.enterprise.audit.remoteLogging": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Send audit events to a remote endpoint."
+        },
+        "alex.enterprise.audit.remoteEndpoint": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "URL endpoint for remote audit log collection."
+        },
+        "alex.enterprise.audit.minLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "scope": "machine",
+          "description": "Minimum severity level for audit events."
+        },
+        "alex.enterprise.audit.retentionDays": {
+          "type": "number",
+          "default": 90,
+          "minimum": 7,
+          "maximum": 365,
+          "scope": "machine",
+          "description": "Number of days to retain audit log files."
+        },
+        "alex.enterprise.audit.redactSensitive": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Automatically redact sensitive data from audit logs."
         }
       }
     },

@@ -81,10 +81,10 @@ flowchart LR
 
 |                            |                                                                      |
 | -------------------------- | -------------------------------------------------------------------- |
-| **Current Master Version** | 5.1.0                                                                |
-| **Current Heirs**          | VS Code (5.1.0), M365 (5.0.2)                                        |
-| **Target**                 | 5.1.0 (Platform Polish)                                              |
-| **Status**                 | ✅ v5.1.0 Released                                                    |
+| **Current Master Version** | 5.3.0                                                                |
+| **Current Heirs**          | VS Code (5.3.0), M365 (5.3.0)                                        |
+| **Target**                 | 5.3.0 (Enterprise Readiness)                                         |
+| **Status**                 | ✅ v5.3.0 Core Complete                                               |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
 
@@ -92,20 +92,19 @@ flowchart LR
 
 ## 📊 Quick Status
 
-| Version       | Focus                                     | Paradigm Contribution             | Status                 |
-| ------------- | ----------------------------------------- | --------------------------------- | ---------------------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness                          | Foundation                        | ✅ Complete             |
-| v4.0.x        | Trust (CAIR/CSR, Creative Latitude)       | Relationship Trust                | ✅ Complete             |
-| v4.1.0        | Skill Expansion (68 → 71 skills)          | Capability Breadth                | ✅ Complete             |
-| v4.2.x        | UX Polish & Cross-Platform Sync           | Friction Reduction                | ✅ Complete             |
-| **v4.3.0**    | **Architecture Robustness**               | **Resilience**                    | ✅ Complete             |
-| **v5.0.0**    | **Team Scaling (Global Knowledge)**       | **Organizational Memory**         | ✅ Complete             |
-| **v5.0.2**    | **M365 Schema Polish (Quick Wins)**       | **Platform Parity**               | ✅ Complete             |
-| **v5.1.0**    | **Platform Integration & API Excellence** | **Ecosystem Reach + API Mastery** | 📋 Planned (Q1-Q2 2026) |
-| **v5.2.0**    | **UX Excellence**                         | **Partnership Fluency**           | 📋 Planned (Q2 2026)    |
-| **v5.3.0**    | **Enterprise Readiness**                  | **Trust at Scale**                | 📋 Planned (Q2 2026)    |
-| **v5.5.0**    | **Enterprise Systems Integration**        | **Deep Orchestration**            | 📋 Planned (Q3 2026)    |
-| **v6.0.0**    | **Semantic Skill Graph**                  | **Emergent Intelligence**         | 📋 Planned (2026+)      |
+| Version       | Focus                                     | Paradigm Contribution             | Status              |
+| ------------- | ----------------------------------------- | --------------------------------- | ------------------- |
+| v3.6.0-v3.9.0 | Dawn → Awareness                          | Foundation                        | ✅ Complete          |
+| v4.0.x        | Trust (CAIR/CSR, Creative Latitude)       | Relationship Trust                | ✅ Complete          |
+| v4.1.0        | Skill Expansion (68 → 71 skills)          | Capability Breadth                | ✅ Complete          |
+| v4.2.x        | UX Polish & Cross-Platform Sync           | Friction Reduction                | ✅ Complete          |
+| **v4.3.0**    | **Architecture Robustness**               | **Resilience**                    | ✅ Complete          |
+| **v5.0.x**    | **Team Scaling (Global Knowledge)**       | **Organizational Memory**         | ✅ Complete          |
+| **v5.1.x**    | **Platform Integration & API Excellence** | **Ecosystem Reach + API Mastery** | ✅ Complete          |
+| **v5.2.0**    | **UX Excellence**                         | **Partnership Fluency**           | ✅ Complete          |
+| **v5.3.0**    | **Enterprise Readiness**                  | **Trust at Scale**                | ✅ Core Complete     |
+| **v5.5.0**    | **Enterprise Systems Integration**        | **Deep Orchestration**            | 📋 Planned (Q3 2026) |
+| **v6.0.0**    | **Semantic Skill Graph**                  | **Emergent Intelligence**         | 📋 Planned (2026+)   |
 
 ---
 
@@ -235,7 +234,7 @@ Native PowerPoint generation via PptxGenJS — zero cloud dependencies, runs in 
 | C3  | Intelligence layer (Markdown → slides)       | Heir  |   6h   |   High   | PPTX-3 |   🔄   |  ✅ Done  | `parseMarkdownToSlides()` — `# → title`, `## → subtitle`, `- → bullets`, `> → notes` |
 | C4  | Alex skill integration                       | Heir  |   3h   |  Medium  | PPTX-4 |   🔄   |  ✅ Done  | `.github/skills/pptx-generation/` with SKILL.md + synapses.json                      |
 | C5  | Template library + brand system              | Heir  |   3h   |  Medium  | PPTX-4 |   🔄   |  ✅ Done  | Slide Masters: ALEX_TITLE, ALEX_CONTENT, ALEX_SECTION, ALEX_CHART                    |
-| C6  | Data connectors (Azure SQL + Semantic Model) | Heir  |   4h   |   High   | PPTX-5 |   🔄   | Deferred | `mssql` + Power BI REST API — deferred to v5.2.0                                     |
+| C6  | Data connectors (Azure SQL + Semantic Model) | Heir  |   4h   |   High   | PPTX-5 |   🔄   | Deferred | `mssql` + Power BI REST API — deferred to v5.5.0 (Enterprise Systems Integration)    |
 
 #### D. Platform Integration (existing roadmap items)
 
@@ -246,7 +245,7 @@ Native PowerPoint generation via PptxGenJS — zero cloud dependencies, runs in 
 | D3  | M365 Agent Export               |  Heir  |   4h   |   High   | Roadmap |   ✅   | ✅ Done  | Export cognitive architecture for M365 Copilot consumption     |
 | D4  | M365 → GK Bridge                |  Heir  |   3h   |  Medium  | Roadmap |   ✅   | ✅ Done  | Insights from M365 flow into Global Knowledge                  |
 | D5  | Configurable GK Repo Location   |  Heir  |   2h   |  Medium  | Roadmap |   🔄   | ✅ Done  | `alex.globalKnowledge.repoPath` setting + auto-detection       |
-| D6  | Versioned schema with migration | Master |   1d   |  Medium  | Roadmap |   🔄   | Partial | Synapse schemaVersion exists; full arch versioning → v5.2.0    |
+| D6  | Versioned schema with migration | Master |   1d   |  Medium  | Roadmap |   🔄   | Partial | Synapse schemaVersion exists; full arch versioning → v5.3.0    |
 | D7  | Generated heir from Master      | Master |   1d   |  Medium  | Roadmap |   ✅   | ✅ Done  | Automated heir generation from Master source of truth          |
 
 #### E. VS Code Contribution Plan — **POSTPONED to v7+**
@@ -711,7 +710,7 @@ context.subscriptions.push(
 **Tree structure**:
 ```
 Alex Cognitive Architecture
-├── Memory Files (25 procedural, 13 episodic, 77 skills)
+├── Memory Files (24 procedural, 13 episodic, 77 skills)
 │   ├── Procedural (.instructions.md)
 │   ├── Episodic (.prompt.md)
 │   └── Skills (by category)
@@ -719,8 +718,8 @@ Alex Cognitive Architecture
 │   ├── Healthy (count)
 │   └── Broken (count, clickable)
 └── Global Knowledge
-    ├── Patterns (25)
-    └── Insights (166)
+    ├── Patterns (26)
+    └── Insights (171)
 ```
 
 **Gotcha 1**: Use `vscode.TreeItem.collapsibleState` and lazy-load children. Don't scan all 77 skill directories on activation.
@@ -790,24 +789,33 @@ await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.Confi
 
 ---
 
-### v5.2.0 — UX Excellence
+### v5.2.0 — UX Excellence ✅ COMPLETE
 
 **Theme**: Delight users with polished, accessible experiences.
 
 **Paradigm Connection**: Reduce friction to zero. In cognitive symbiosis, the interface should disappear — leaving only intent and outcome. Speed becomes the moat.
 
-| Task                  | Owner | Effort | Priority |
-| --------------------- | :---: | :----: | :------: |
-| Voice Mode Toggle     | Heir  |   1h   |   High   |
-| Cognitive Dashboard   | Heir  |   9h   |   High   |
-| Alex Daily Briefing   | Heir  |   2h   |   High   |
-| Model Tier Status Bar | Heir  |   1h   |  Medium  |
-| Quick Command Palette | Heir  |   2h   |  Medium  |
+| Task                                        | Owner  | Effort | Priority |  Status  |
+| ------------------------------------------- | :----: | :----: | :------: | :------: |
+| Voice Mode Toggle                           |  Heir  |   1h   |   High   |  ✅ Done  |
+| Cognitive Dashboard                         |  Heir  |   9h   |   High   |  ✅ Done  |
+| Alex Daily Briefing                         |  Heir  |   2h   |   High   |  ✅ Done  |
+| Model Tier Status Bar                       |  Heir  |   1h   |  Medium  |  ✅ Done  |
+| Quick Command Palette                       |  Heir  |   2h   |  Medium  |  ✅ Done  |
+| Standalone MCP server package (from v5.1.x) |  Heir  | Medium |   High   | Deferred |
+| Data connectors (SQL + Semantic, from C6)   |  Heir  |   4h   |   High   | Deferred |
+| Versioned schema with full migration (D6)   | Master |   1d   |  Medium  | Deferred |
 
-**Cognitive Dashboard** consolidates Skill Mastery + Meditation Webview + Brain Health into unified experience.
-**Design Spec**: [COGNITIVE-DASHBOARD-DESIGN.md](alex_docs/COGNITIVE-DASHBOARD-DESIGN.md)
+**Implementation Notes (v5.2.0)**:
+- Voice Mode Toggle: Status bar item + `alex.voice.enabled` setting + auto-read capability
+- Cognitive Dashboard: Webview with health, memory, goals, focus stats, quick actions
+- Daily Briefing: Time-based greeting + goals + streak + architecture summary
+- Model Tier Status Bar: Detects Frontier/Capable/Efficient tier from `lm.selectChatModels()`
+- Quick Commands: Quick pick palette with 10 common commands
 
-**Target Release**: Q2 2026
+**M365 Platform**: Knowledge file `ux-features.md` with daily briefing patterns. Added conversation starter.
+
+**Target Release**: Week of Feb 10, 2026 ✅
 
 ### v5.3.0 — Enterprise Readiness
 
@@ -815,13 +823,19 @@ await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.Confi
 
 **Paradigm Connection**: Trust at scale — before deep integration, establish the security, compliance, and governance foundations that enterprises require. Build confidence before capability.
 
-| Task                             | Owner  | Effort |  Priority  |
-| -------------------------------- | :----: | :----: | :--------: |
-| Enterprise SSO (Entra ID)        | Master |   3d   | 🔥 Critical |
-| Secrets Scanning & PII Detection | Master |   1w   |  Critical  |
-| Audit Logging Framework          | Master |   3d   |    High    |
-| Role-Based Access Control        | Master |   3d   |    High    |
-| Data Residency Options           | Master |   2d   |   Medium   |
+| Task                             | Owner  | Effort |  Priority  | Status |
+| -------------------------------- | :----: | :----: | :--------: | :----: |
+| Enterprise SSO (Entra ID)        | Master |   3d   | 🔥 Critical | ✅ Done |
+| Secrets Scanning & PII Detection | Master |   1w   |  Critical  | ✅ Done |
+| Audit Logging Framework          | Master |   3d   |    High    | ✅ Done |
+| Role-Based Access Control        | Master |   3d   |    High    | ✅ Done |
+| Data Residency Options           | Master |   2d   |   Medium   | 🔲 TODO |
+
+**Implementation Details** (Feb 8, 2026):
+- `src/enterprise/enterpriseAuth.ts` — Entra ID SSO + RBAC (viewer/contributor/admin/owner)
+- `src/enterprise/secretsScanning.ts` — 20+ patterns: API keys, AWS, Azure, PII, credit cards
+- `src/enterprise/auditLogging.ts` — JSONL file + remote endpoint, retention, cleanup
+- 7 enterprise commands + 15 settings in package.json
 
 **Microsoft Compliance Audits:**
 
@@ -960,7 +974,7 @@ flowchart TB
         direction TB
         V1["Chat Participant"]
         V2["28 Commands"]
-        V3["11 LM Tools"]
+        V3["12 LM Tools"]
         V4["Local + Cloud Modes"]
     end
 
@@ -1762,7 +1776,7 @@ Symbiosis Value = (Human Intent × AI Capability × Shared Context) ÷ Friction
 | **Human Intent**   | Bootstrap learning    | Intent discovery workflows        |
 | **AI Capability**  | 74 skills             | Ecosystem-wide orchestration      |
 | **Shared Context** | Project memory        | Organizational memory             |
-| **Friction**       | 28 commands, 11 tools | Intent-first, interface-invisible |
+| **Friction**       | 28 commands, 12 tools | Intent-first, interface-invisible |
 
 ### The Three Tests
 

@@ -1,8 +1,8 @@
 # Alex Skills - Quick Reference
 
-> 15 core skills that shape how Alex thinks — from a catalog of 75 across all platforms
+> 16 core skills that shape how Alex thinks — from a catalog of 77 across all platforms
 
-These are the skills most relevant to M365 interactions. Alex has 75 total skills across platforms (including code-specific skills in VS Code).
+These are the skills most relevant to M365 interactions. Alex has 77 total skills across platforms (including code-specific skills in VS Code).
 
 ---
 
@@ -172,6 +172,20 @@ Find the barrier point (first element ≤3) and focus there.
 - Suggest breaks after long focus sessions
 - Celebrate boundary-setting
 - When stressed, help prioritize - don't add tasks
+
+---
+
+## 📊 PPTX Generation
+
+**Core:** Create polished presentations from data or text.
+
+- Use CodeInterpreter with python-pptx for PPTX generation
+- Always save output to OneDrive/Alex-Files (NEVER use sandbox download links)
+- Markdown to slides: `#` = title slide, `##` = content slide, `-` = bullets
+- Include speaker notes from `>` blockquotes
+- Use professional colors and clean layouts
+- For charts: bar (compare), line (trend), pie (parts, ≤6 segments)
+- For data-driven decks: accept JSON or table data
 
 ---
 

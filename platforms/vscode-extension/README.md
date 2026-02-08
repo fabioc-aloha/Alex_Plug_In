@@ -36,7 +36,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
 - 24 slash commands
-- 11 Language Model tools
+- 12 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
 
@@ -106,7 +106,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
-| **Chat & Agents** | `@alex` participant, 24 slash commands, 11 LM tools, 3 custom agents          |
+| **Chat & Agents** | `@alex` participant, 24 slash commands, 12 LM tools, 3 custom agents          |
 | **Intelligence**  | 77 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |

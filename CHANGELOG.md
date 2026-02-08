@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.3.0] - 2026-02-08
+
+> **Enterprise Readiness** — Security, compliance, governance foundations
+
+### Added
+
+- **Enterprise SSO (Entra ID)**: Microsoft authentication via VS Code's `microsoft` provider with tenant restrictions, silent auth on startup
+- **Secrets Scanning & PII Detection**: 20+ patterns for API keys (OpenAI, GitHub, AWS, Azure), credit cards, SSN, emails, IPs with VS Code diagnostics integration
+- **Audit Logging Framework**: JSONL file + remote endpoint support, buffered writes, automatic cleanup by retention period (7-365 days)
+- **Role-Based Access Control**: viewer → contributor → admin → owner hierarchy with JWT claim extraction
+- **Enterprise Commands**: 7 new commands (signIn, signOut, showAuthStatus, scanSecrets, scanWorkspace, viewAuditLog, exportAuditLog)
+- **Enterprise Settings**: 15 new settings for auth, audit logging, and secrets scanning configuration
+- **M365 Version Parity**: M365 Copilot heir updated to 5.3.0
+
+### Changed
+
+- **VS Code Extension**: New `src/enterprise/` module with enterpriseAuth.ts, secretsScanning.ts, auditLogging.ts, index.ts
+- **Extension Lifecycle**: Enterprise initialization in activate(), cleanup in deactivate()
+
+### Deferred to v5.3.1
+
+- Data Residency Options — location-based storage
+- Accessibility (WCAG 2.1 AA) compliance review
+
+---
+
+## [5.2.0] - 2026-02-08
+
+> **UX Excellence** — Voice mode, cognitive dashboard, daily briefing, model awareness
+
+### Added
+
+- **Voice Mode Toggle**: Status bar indicator + `alex.toggleVoice` command with persona options (Warm, Professional, Scholarly)
+- **Cognitive Dashboard**: Unified sidebar webview showing brain health, memory architecture, goals, and recent activity
+- **Alex Daily Briefing**: `alex.dailyBriefing` command generates personalized morning overview with priorities, calendar hints, cognitive state
+- **Model Tier Status Bar**: Real-time detection displaying Frontier/Capable/Efficient tier based on active language model
+- **Quick Command Palette**: `alex.quickCommands` with 10 common actions (meditate, self-actualize, dream, etc.)
+- **M365 UX Knowledge**: New `ux-features.md` knowledge file documenting voice, briefing, and quick command patterns
+- **M365 Daily Briefing Starter**: "📅 Daily briefing" conversation starter in declarativeAgent.json
+
+### Changed
+
+- **VS Code Extension**: Version 5.1.3 → 5.2.0
+- **M365 Copilot Heir**: Version 5.0.2 → 5.0.3
+
+---
+
+## [5.1.3] - 2026-02-08
+
+> **Documentation Sync** — Version alignment and count corrections
+
+### Changed
+
+- **Master Version**: Updated to 5.1.3 across all documentation
+- **ROADMAP Target**: Advanced from 5.1.0 to 5.2.0 (UX Excellence)
+- **Skill Count**: 76→77 in alex-brain-anatomy.html and ROADMAP (matches actual skill inventory)
+- **Instruction Count**: 25→24 in README.md and copilot-instructions.md (matches actual file count)
+- **Assessment Date**: Updated to 2026-02-08 in copilot-instructions.md
+
+---
+
+## [5.1.2] - 2026-02-08
+
+> **Hotfix** — Critical crash fix for Welcome view
+
+### Fixed
+
+- **Welcome View Crash Fix**: Fixed `TypeError: p.toLowerCase is not a function` that prevented the Welcome sidebar from loading
+- **Type Guards**: Added defensive type guards for user profile arrays (primaryTechnologies, learningGoals, expertiseAreas, currentProjects)
+- **Persona Detection**: Now gracefully handles malformed or empty profile data
+
+---
+
 ## [5.1.1] - 2026-02-08
 
 > **Feature Expansion** — New skills, commands, prompts, and security hardening

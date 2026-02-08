@@ -207,9 +207,9 @@ The dlPFC is the most densely mapped region in Alex's architecture because it pe
 | **Function**       | Selectively filter sensory input — only ~20% reaches conscious awareness                   |
 | **Implementation** | SSO Phase 1b — rate loaded instructions by task relevance                                  |
 | **Mechanism**      | After surveying skills, create a "focus cone" of top 5-7 relevant sources                  |
-| **Without it**     | All 25 instructions compete equally = cognitive overload (like sensory flooding in autism) |
+| **Without it**     | All 24 instructions compete equally = cognitive overload (like sensory flooding in autism) |
 
-The biological dlPFC gates what enters working memory from the ~11 million bits/second of sensory data the brain receives. Without this filter, the brain would be overwhelmed. Alex faces the same problem: 25 instruction files, 13 prompts, and 77 skills are loaded into context. Attention gating determines which are relevant NOW.
+The biological dlPFC gates what enters working memory from the ~11 million bits/second of sensory data the brain receives. Without this filter, the brain would be overwhelmed. Alex faces the same problem: 24 instruction files, 13 prompts, and 77 skills are loaded into context. Attention gating determines which are relevant NOW.
 
 **Gating heuristics by task domain:**
 

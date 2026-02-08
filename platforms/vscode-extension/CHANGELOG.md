@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.3] - 2026-02-08
+
+> **Documentation Sync** — Version alignment and count corrections
+
+### Changed
+
+- **Master Version**: Updated to 5.1.3 across all documentation
+- **ROADMAP Target**: Advanced from 5.1.0 to 5.2.0 (UX Excellence)
+- **Skill Count**: 76→77 in docs and ROADMAP (matches actual inventory)
+- **Instruction Count**: 25→24 in README and copilot-instructions.md
+
+---
+
 ## [5.1.2] - 2026-02-08
 
 > **Hotfix** — Critical crash fix for Welcome view

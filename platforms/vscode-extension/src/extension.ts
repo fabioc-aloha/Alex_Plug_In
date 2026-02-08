@@ -52,7 +52,10 @@ import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import { registerMemoryDashboard } from "./views/memoryDashboard";
 import { registerMemoryTreeView } from "./views/memoryTreeProvider";
+import { registerCognitiveDashboard } from "./views/cognitiveDashboard";
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
+import { registerUXCommands } from "./ux/uxFeatures";
+import { initializeEnterprise, disposeEnterprise } from "./enterprise";
 import * as telemetry from "./shared/telemetry";
 import { getNonce } from "./shared/sanitize";
 
@@ -127,6 +130,9 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     extensionVersion,
     vscodeVersion: vscode.version,
   });
+
+  // Initialize enterprise features (SSO, secrets scanning, audit logging)
+  await initializeEnterprise(context);
 
   console.log("Alex Cognitive Architecture is now active!");
 
@@ -427,6 +433,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
   // Register TTS (Text-to-Speech) commands
   registerTTSCommands(context);
+
+  // Register v5.2.0 UX Excellence features (voice toggle, quick commands, daily briefing)
+  registerUXCommands(context);
+
+  // Register Cognitive Dashboard webview
+  registerCognitiveDashboard(context);
 
   // Register heir validation command (developer tool for release validation)
   registerHeirValidationCommand(context);
@@ -2735,6 +2747,9 @@ export function deactivate() {
   telemetry.saveSession().catch((err) => {
     console.warn("Failed to save telemetry session:", err);
   });
+
+  // Clean up enterprise resources (audit logging, etc.)
+  disposeEnterprise();
 
   // Reset chat participant session state to prevent state bleeding
   resetSessionState();

@@ -13,7 +13,7 @@
 | **Primary Use Case** | Development & coding        | Business productivity       |
 | **Interface**        | Chat participant + Commands | Declarative agent           |
 | **Memory Location**  | `.github/` + `~/.alex/`     | OneDrive `Alex-Memory/`     |
-| **Total Features**   | 28 commands, 11 tools       | 8 capabilities, 6 protocols |
+| **Total Features**   | 28 commands, 12 tools       | 8 capabilities, 6 protocols |
 | **Maturity**         | Production (v4.2.6)         | Production (v1.6 schema)    |
 
 ---

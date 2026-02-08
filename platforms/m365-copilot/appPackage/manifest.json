@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
-  "version": "5.0.2",
+  "version": "5.3.0",
   "id": "2427e7a9-91a7-4ed9-a504-7b53c4dfad1d",
   "developer": {
     "name": "Fabio Correa",

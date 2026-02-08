@@ -1384,7 +1384,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <div class="feature-category-title">💬 Chat Integration</div>
                         <ul class="feature-list">
                             <li><strong>@alex Chat Participant</strong> - Personality-driven conversations with memory</li>
-                            <li><strong>11 Language Model Tools</strong> - Status, memory search, knowledge management</li>
+                            <li><strong>12 Language Model Tools</strong> - Status, memory search, knowledge management</li>
                             <li><strong>Custom Agents</strong> - Specialized handoffs for meditation, dreams, Azure</li>
                             <li><strong>Slash Commands</strong> - /meditate, /status, /knowledge, /saveinsight, and more</li>
                         </ul>

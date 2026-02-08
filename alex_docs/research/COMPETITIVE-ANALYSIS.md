@@ -330,7 +330,7 @@ Alex needs to either:
 
 **Legend**: ⭐⭐⭐ = Excellent | ⭐⭐ = Good | ⭐ = Basic | ❌ = None
 
-**Key Takeaway**: Alex is the only extension combining cognitive architecture (meditation, dream, reflection) with multi-modal output (TTS, images, presentations) and deep Copilot integration (74 skills, 11 LM Tools). Competitors focus on single aspects — memory (Agent Memory, Cortex), knowledge graphs (Flowbaby), or accessibility (Sona).
+**Key Takeaway**: Alex is the only extension combining cognitive architecture (meditation, dream, reflection) with multi-modal output (TTS, images, presentations) and deep Copilot integration (77 skills, 12 LM Tools). Competitors focus on single aspects — memory (Agent Memory, Cortex), knowledge graphs (Flowbaby), or accessibility (Sona).
 
 
 ---
@@ -393,8 +393,8 @@ Alex needs to either:
 ├─────────────────────────────────────────────────────────────┤
 │  Alex Cognitive Architecture (Learning Layer)                │
 │    • @alex chat participant                                   │
-│    • 11 Language Model Tools                                  │
-│    • 74 skills with synaptic connections                      │
+│    • 12 Language Model Tools                                  │
+│    • 77 skills with synaptic connections                      │
 │    • Memory architecture (procedural, episodic, domain)       │
 │    • Global knowledge + cloud sync                            │
 │    • Dream/meditation protocols                               │
