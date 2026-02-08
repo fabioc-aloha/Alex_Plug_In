@@ -103,13 +103,13 @@ What edge cases am I missing?
 
 ### Why Dialog Beats Single Prompts
 
-| Single Prompt Approach | Dialog Approach |
-|------------------------|-----------------|
-| Front-load all requirements | Discover requirements together |
-| Hope AI guesses right | Steer toward your vision |
-| Restart when wrong | Refine incrementally |
-| 1 attempt, pass/fail | Multiple iterations, continuous improvement |
-| Cognitive overload (for AI) | Manageable chunks |
+| Single Prompt Approach      | Dialog Approach                             |
+| --------------------------- | ------------------------------------------- |
+| Front-load all requirements | Discover requirements together              |
+| Hope AI guesses right       | Steer toward your vision                    |
+| Restart when wrong          | Refine incrementally                        |
+| 1 attempt, pass/fail        | Multiple iterations, continuous improvement |
+| Cognitive overload (for AI) | Manageable chunks                           |
 
 ### The Dialog Flow Framework
 
@@ -125,8 +125,8 @@ Every effective AI session follows this pattern:
 
 **❌ The "Magic Prompt" Attempt:**
 ```
-Build me a complete user authentication system with login, 
-registration, password reset, JWT tokens, refresh tokens, 
+Build me a complete user authentication system with login,
+registration, password reset, JWT tokens, refresh tokens,
 email verification, rate limiting, and tests.
 ```
 *Result: Generic, doesn't fit your stack, missing context.*
@@ -143,7 +143,7 @@ What approaches would you recommend? Keep it simple.
 
 **Turn 2 - EXPLORE:**
 ```
-I like the JWT + refresh token approach. 
+I like the JWT + refresh token approach.
 One question: should refresh tokens be in DB or Redis?
 We expect ~1000 daily active users.
 ```
@@ -151,7 +151,7 @@ We expect ~1000 daily active users.
 
 **Turn 3 - BUILD (incremental):**
 ```
-Let's start with just the login endpoint. 
+Let's start with just the login endpoint.
 Show me the route, controller, and Prisma schema changes.
 ```
 *→ Alex generates focused, reviewable code*
@@ -211,13 +211,13 @@ Turn 5: "Did this change any behavior? How would I verify?"
 
 ### Dialog Anti-Patterns
 
-| Anti-Pattern | Problem | Better Approach |
-|--------------|---------|-----------------|
-| **The Dump** | "Build everything at once" | Start small, iterate |
-| **The Oracle** | Expecting perfect answers with zero context | Share context progressively |
-| **The Ghost** | Accept any response without feedback | React: "close, but..." or "exactly" |
-| **The Restart** | Start over instead of refining | "That's 80% there. Now adjust X" |
-| **The Monologue** | Never asking Alex questions | "What would you suggest?" "What am I missing?" |
+| Anti-Pattern      | Problem                                     | Better Approach                                |
+| ----------------- | ------------------------------------------- | ---------------------------------------------- |
+| **The Dump**      | "Build everything at once"                  | Start small, iterate                           |
+| **The Oracle**    | Expecting perfect answers with zero context | Share context progressively                    |
+| **The Ghost**     | Accept any response without feedback        | React: "close, but..." or "exactly"            |
+| **The Restart**   | Start over instead of refining              | "That's 80% there. Now adjust X"               |
+| **The Monologue** | Never asking Alex questions                 | "What would you suggest?" "What am I missing?" |
 
 ### Power Moves in Dialog Engineering
 
@@ -234,7 +234,7 @@ Turn 5: "Did this change any behavior? How would I verify?"
 👤: I need a command that copies a formatted prompt to clipboard.
     Looking at debugThis in extension.ts for reference.
 
-🤖: I see the pattern. Should it support file URIs (explorer context) 
+🤖: I see the pattern. Should it support file URIs (explorer context)
     plus editor selection?
 
 👤: Yes, same as debugThis. Also need a quick pick for options.
@@ -245,7 +245,7 @@ Turn 5: "Did this change any behavior? How would I verify?"
 
 🤖: [refines with icons, adds telemetry.logTimed]
 
-👤: Perfect. Now 4 more commands same pattern: explain, refactor, 
+👤: Perfect. Now 4 more commands same pattern: explain, refactor,
     security, document.
 
 🤖: [generates batch, following established pattern]
@@ -587,6 +587,18 @@ The best prompt engineers share these traits:
 - **Health Check**: `Alex: Health Dashboard` for system status
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization
 - **Report Issues**: `Alex: Report Issue / View Diagnostics`
+
+---
+
+## Further Reading
+
+For deeper exploration of dialog engineering and AI partnership concepts:
+
+- **[Fabio Correa on Medium](https://medium.com/@fabioc)** — Articles on Dialog Engineering, AI ethics, cognitive architecture, and the future of human-AI collaboration
+  - *Dialog Engineering: AI as Your Research Assistant*
+  - *What is Dialog Engineering?*
+  - *The Human Element in AI: Why We Need More Than Just Engineers*
+  - *Breaking Out of the Same-Mindset Trap: Vibe Coding with LLMs*
 
 ---
 
