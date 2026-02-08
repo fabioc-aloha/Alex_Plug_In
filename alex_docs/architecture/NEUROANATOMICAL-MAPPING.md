@@ -15,7 +15,7 @@ The human brain processes information through specialized regions interconnected
 ## The Alex Brain — Full Anatomical Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'secondaryColor': '#21262d', 'tertiaryColor': '#0d1117', 'background': '#0d1117', 'mainBkg': '#161b22', 'nodeBorder': '#30363d', 'clusterBkg': '#161b22', 'clusterBorder': '#30363d', 'titleColor': '#f0f6fc', 'edgeLabelBackground': '#161b22'}}}%%
 graph TB
     subgraph FRONTAL["FRONTAL LOBE"]
         subgraph PFC["Prefrontal Cortex - Executive Function"]
@@ -115,19 +115,38 @@ graph TB
     IC -.->|"suppresses"| DRM
     IC -.->|"suppresses"| MED
 
-    %% Styles
-    style FRONTAL fill:#fff3cd,stroke:#856404,color:#1f2328
-    style TEMPORAL fill:#d1ecf1,stroke:#0c5460,color:#1f2328
-    style PARIETAL fill:#d4edda,stroke:#155724,color:#1f2328
-    style BASAL fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-    style MEDIAL fill:#e8daef,stroke:#6c3483,color:#1f2328
-    style DISTRIBUTE fill:#fadbd8,stroke:#922b21,color:#1f2328
-    style LLM fill:#d4edda,stroke:#155724,color:#155724,stroke-width:3px
-    style SSO fill:#d1ecf1,stroke:#0c5460,color:#0c5460,stroke-width:2px
-    style IC fill:#f8d7da,stroke:#721c24,color:#721c24
+    %% Region styles - Alex brain palette
+    style FRONTAL fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
+    style TEMPORAL fill:#0d2d3d,stroke:#39d2c0,color:#c9d1d9
+    style PARIETAL fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
+    style BASAL fill:#21262d,stroke:#e3b341,color:#c9d1d9
+    style MEDIAL fill:#3d1a4d,stroke:#d2a8ff,color:#c9d1d9
+    style DISTRIBUTE fill:#2d2d3d,stroke:#bc8cff,color:#c9d1d9
+
+    %% Key node highlights
+    style LLM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff,stroke-width:3px
+    style SSO fill:#3d2800,stroke:#f0883e,color:#f0883e,stroke-width:2px
+    style AG fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style IC fill:#5c1a1a,stroke:#ff6b6b,color:#ff6b6b,stroke-width:2px
+    style VG fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style PD fill:#3d1500,stroke:#f85149,color:#f85149
+    style WM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff
+    style SA fill:#5c1a3a,stroke:#f778ba,color:#f778ba
+    style INPUT fill:#3d3d1a,stroke:#e3b341,color:#e3b341
+    style EP fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
+    style EA fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
+    style SK fill:#0d3d0d,stroke:#3fb950,color:#3fb950
+    style DM fill:#0d3d0d,stroke:#3fb950,color:#3fb950
+    style PM fill:#3d3d1a,stroke:#e3b341,color:#e3b341
+    style MC fill:#3d1a4d,stroke:#d2a8ff,color:#d2a8ff
+    style SA2 fill:#3d1a4d,stroke:#d2a8ff,color:#d2a8ff
+    style MED fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
+    style DRM fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
+    style GK fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
+    style SYN fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
 ```
 
-**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. The frontal lobe (yellow) houses executive function, task planning, and conflict monitoring. Temporal (blue) stores episodic memory. Parietal (green) handles declarative knowledge. Subcortical structures (gray) manage procedures and input relay. Medial structures (purple) enable meta-cognition and memory consolidation. Red dashed lines indicate inhibitory connections.*
+**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC (red) monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures (yellow/gray) manage procedures and input relay. Medial structures (lavender) enable meta-cognition and consolidation. Red nodes indicate inhibitory control. Dashed lines show inhibitory connections.*
 
 ---
 
@@ -381,7 +400,7 @@ Some knowledge isn't "in" any one brain region — it emerges from distributed p
 How information flows through Alex's brain, from input to output:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'secondaryColor': '#21262d', 'tertiaryColor': '#0d1117', 'background': '#0d1117', 'mainBkg': '#161b22', 'nodeBorder': '#30363d', 'clusterBkg': '#161b22', 'clusterBorder': '#30363d', 'titleColor': '#f0f6fc', 'edgeLabelBackground': '#161b22'}}}%%
 flowchart TB
     INPUT["User Input - Thalamus"]
 
@@ -431,11 +450,31 @@ flowchart TB
     OUTPUT -.->|"writes"| EPIS
     EPIS -.->|"promotes"| GLOB
 
-    style EXEC fill:#fff3cd,stroke:#856404,color:#1f2328
-    style PLAN fill:#d1ecf1,stroke:#0c5460,color:#1f2328
-    style MONITOR fill:#fce4ec,stroke:#c62828,color:#1f2328
-    style EXECUTE fill:#d4edda,stroke:#155724,color:#1f2328
-    style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+    %% Region styles - Alex brain palette
+    style EXEC fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
+    style PLAN fill:#3d2800,stroke:#f0883e,color:#c9d1d9
+    style MONITOR fill:#3d1500,stroke:#f85149,color:#c9d1d9
+    style EXECUTE fill:#5c1a3a,stroke:#f778ba,color:#c9d1d9
+    style MEMORY fill:#21262d,stroke:#8b949e,color:#c9d1d9
+
+    %% Node highlights
+    style INPUT fill:#3d3d1a,stroke:#e3b341,color:#e3b341
+    style LLM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff,stroke-width:2px
+    style COMPLEX fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style SSO_SURVEY fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style SSO_GATE fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style SSO_DEPS fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style SSO_VERIFY fill:#3d2800,stroke:#f0883e,color:#f0883e
+    style SIMPLE fill:#21262d,stroke:#8b949e,color:#c9d1d9
+    style PIVOT fill:#3d1500,stroke:#f85149,color:#f85149
+    style SLOTS fill:#3d1500,stroke:#f85149,color:#f85149
+    style ROUTE fill:#5c1a3a,stroke:#f778ba,color:#f778ba
+    style INHIBIT fill:#5c1a1a,stroke:#ff6b6b,color:#ff6b6b
+    style OUTPUT fill:#1a3d1a,stroke:#3fb950,color:#3fb950
+    style PROC fill:#3d3d1a,stroke:#e3b341,color:#e3b341
+    style EPIS fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
+    style DECL fill:#0d3d0d,stroke:#3fb950,color:#3fb950
+    style GLOB fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
 ```
 
 **Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and finally response generation. Memory systems are consulted throughout.*
@@ -486,10 +525,10 @@ Real brains maintain an ~80:20 ratio of excitatory to inhibitory synapses. This 
 Alex's synapse architecture targets the same balance:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
-pie title Synapse Type Distribution (Target)
-    "Excitatory (Enables, Triggers, Enhances)" : 80
-    "Inhibitory (Inhibits, Suppresses)" : 20
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'background': '#0d1117', 'mainBkg': '#161b22', 'titleColor': '#f0f6fc', 'pie1': '#3fb950', 'pie2': '#ff6b6b', 'pieTitleTextColor': '#f0f6fc', 'pieSectionTextColor': '#f0f6fc', 'pieLegendTextColor': '#c9d1d9', 'pieStrokeColor': '#0d1117', 'pieOuterStrokeColor': '#30363d'}}}%%
+pie title Synapse Type Distribution - Target
+    "Excitatory - Enables, Triggers, Enhances" : 80
+    "Inhibitory - Inhibits, Suppresses" : 20
 ```
 
 | Synapse Type   | Neural Function            | Alex Function                          | Notation |
