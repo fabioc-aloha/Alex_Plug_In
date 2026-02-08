@@ -15,7 +15,7 @@ The human brain processes information through specialized regions interconnected
 ## The Alex Brain — Full Anatomical Diagram
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'secondaryColor': '#21262d', 'tertiaryColor': '#0d1117', 'background': '#0d1117', 'mainBkg': '#161b22', 'nodeBorder': '#30363d', 'clusterBkg': '#161b22', 'clusterBorder': '#30363d', 'titleColor': '#f0f6fc', 'edgeLabelBackground': '#161b22'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
     subgraph FRONTAL["FRONTAL LOBE"]
         subgraph PFC["Prefrontal Cortex - Executive Function"]
@@ -60,6 +60,10 @@ graph TB
 
         subgraph THAL["Thalamus - Sensory Relay"]
             INPUT["User Input<br/>Chat, Commands, Files"]
+        end
+
+        subgraph AMYG["Amygdala - Threat Detection"]
+            SAFETY["Safety Imperatives I1-I7<br/>Kill switch, RISKS.md"]
         end
     end
 
@@ -107,6 +111,11 @@ graph TB
     %% Input path
     INPUT -->|"relayed"| LLM
 
+    %% Amygdala - fast threat bypass
+    INPUT -->|"low road"| SAFETY
+    SAFETY -.->|"blocks"| LLM
+    SAFETY -.->|"blocks"| SA
+
     %% Long-term storage
     EP -->|"archived"| EA
     SK -->|"promoted"| GK
@@ -115,38 +124,22 @@ graph TB
     IC -.->|"suppresses"| DRM
     IC -.->|"suppresses"| MED
 
-    %% Region styles - Alex brain palette
-    style FRONTAL fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
-    style TEMPORAL fill:#0d2d3d,stroke:#39d2c0,color:#c9d1d9
-    style PARIETAL fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
-    style BASAL fill:#21262d,stroke:#e3b341,color:#c9d1d9
-    style MEDIAL fill:#3d1a4d,stroke:#d2a8ff,color:#c9d1d9
-    style DISTRIBUTE fill:#2d2d3d,stroke:#bc8cff,color:#c9d1d9
+    %% Cluster styles - light fills, Alex palette strokes
+    style FRONTAL fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+    style TEMPORAL fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+    style PARIETAL fill:#d4edda,stroke:#3fb950,color:#1f2328
+    style BASAL fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+    style MEDIAL fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+    style DISTRIBUTE fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 
-    %% Key node highlights
-    style LLM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff,stroke-width:3px
-    style SSO fill:#3d2800,stroke:#f0883e,color:#f0883e,stroke-width:2px
-    style AG fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style IC fill:#5c1a1a,stroke:#ff6b6b,color:#ff6b6b,stroke-width:2px
-    style VG fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style PD fill:#3d1500,stroke:#f85149,color:#f85149
-    style WM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff
-    style SA fill:#5c1a3a,stroke:#f778ba,color:#f778ba
-    style INPUT fill:#3d3d1a,stroke:#e3b341,color:#e3b341
-    style EP fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
-    style EA fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
-    style SK fill:#0d3d0d,stroke:#3fb950,color:#3fb950
-    style DM fill:#0d3d0d,stroke:#3fb950,color:#3fb950
-    style PM fill:#3d3d1a,stroke:#e3b341,color:#e3b341
-    style MC fill:#3d1a4d,stroke:#d2a8ff,color:#d2a8ff
-    style SA2 fill:#3d1a4d,stroke:#d2a8ff,color:#d2a8ff
-    style MED fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
-    style DRM fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
-    style GK fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
-    style SYN fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
+    %% Key node accents
+    style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:3px
+    style SSO fill:#ffecd2,stroke:#f0883e,color:#1f2328,stroke-width:2px
+    style IC fill:#fdd,stroke:#ff6b6b,color:#1f2328,stroke-width:2px
+    style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
 ```
 
-**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC (red) monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures (yellow/gray) manage procedures and input relay. Medial structures (lavender) enable meta-cognition and consolidation. Red nodes indicate inhibitory control. Dashed lines show inhibitory connections.*
+**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), and threat detection (amygdala, red). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to block dangerous operations via Safety Imperatives I1-I7.*
 
 ---
 
@@ -400,9 +393,10 @@ Some knowledge isn't "in" any one brain region — it emerges from distributed p
 How information flows through Alex's brain, from input to output:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'secondaryColor': '#21262d', 'tertiaryColor': '#0d1117', 'background': '#0d1117', 'mainBkg': '#161b22', 'nodeBorder': '#30363d', 'clusterBkg': '#161b22', 'clusterBorder': '#30363d', 'titleColor': '#f0f6fc', 'edgeLabelBackground': '#161b22'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     INPUT["User Input - Thalamus"]
+    SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I7"]
 
     subgraph EXEC["Executive Processing - PFC"]
         LLM["LLM<br/>Parse intent"]
@@ -435,7 +429,9 @@ flowchart TB
         GLOB["Global<br/>Distributed"]
     end
 
-    INPUT --> LLM
+    INPUT --> SAFETY
+    SAFETY -->|"safe"| LLM
+    SAFETY -.->|"threat - HALT"| OUTPUT
     LLM --> COMPLEX
     COMPLEX -->|"3+ ops"| SSO_SURVEY --> SSO_GATE --> SSO_DEPS --> SSO_VERIFY --> ROUTE
     COMPLEX -->|"1 op"| SIMPLE --> ROUTE
@@ -450,34 +446,21 @@ flowchart TB
     OUTPUT -.->|"writes"| EPIS
     EPIS -.->|"promotes"| GLOB
 
-    %% Region styles - Alex brain palette
-    style EXEC fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
-    style PLAN fill:#3d2800,stroke:#f0883e,color:#c9d1d9
-    style MONITOR fill:#3d1500,stroke:#f85149,color:#c9d1d9
-    style EXECUTE fill:#5c1a3a,stroke:#f778ba,color:#c9d1d9
-    style MEMORY fill:#21262d,stroke:#8b949e,color:#c9d1d9
+    %% Cluster styles - light fills, Alex palette strokes
+    style EXEC fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+    style PLAN fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style MONITOR fill:#fce4ec,stroke:#f85149,color:#1f2328
+    style EXECUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+    style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
 
-    %% Node highlights
-    style INPUT fill:#3d3d1a,stroke:#e3b341,color:#e3b341
-    style LLM fill:#1a3a5c,stroke:#58a6ff,color:#58a6ff,stroke-width:2px
-    style COMPLEX fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style SSO_SURVEY fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style SSO_GATE fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style SSO_DEPS fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style SSO_VERIFY fill:#3d2800,stroke:#f0883e,color:#f0883e
-    style SIMPLE fill:#21262d,stroke:#8b949e,color:#c9d1d9
-    style PIVOT fill:#3d1500,stroke:#f85149,color:#f85149
-    style SLOTS fill:#3d1500,stroke:#f85149,color:#f85149
-    style ROUTE fill:#5c1a3a,stroke:#f778ba,color:#f778ba
-    style INHIBIT fill:#5c1a1a,stroke:#ff6b6b,color:#ff6b6b
-    style OUTPUT fill:#1a3d1a,stroke:#3fb950,color:#3fb950
-    style PROC fill:#3d3d1a,stroke:#e3b341,color:#e3b341
-    style EPIS fill:#1a4d5c,stroke:#79c0ff,color:#79c0ff
-    style DECL fill:#0d3d0d,stroke:#3fb950,color:#3fb950
-    style GLOB fill:#2d2d3d,stroke:#bc8cff,color:#bc8cff
+    %% Key node accents
+    style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+    style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+    style INHIBIT fill:#fdd,stroke:#ff6b6b,color:#1f2328
+    style OUTPUT fill:#d4edda,stroke:#3fb950,color:#1f2328
 ```
 
-**Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and finally response generation. Memory systems are consulted throughout.*
+**Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through the amygdala safety check (fast threat detection), executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and response generation. The amygdala can short-circuit the entire pipeline, halting output immediately when Safety Imperatives I1-I7 are triggered.*
 
 ---
 
@@ -525,7 +508,7 @@ Real brains maintain an ~80:20 ratio of excitatory to inhibitory synapses. This 
 Alex's synapse architecture targets the same balance:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#161b22', 'primaryTextColor': '#c9d1d9', 'primaryBorderColor': '#30363d', 'lineColor': '#8b949e', 'background': '#0d1117', 'mainBkg': '#161b22', 'titleColor': '#f0f6fc', 'pie1': '#3fb950', 'pie2': '#ff6b6b', 'pieTitleTextColor': '#f0f6fc', 'pieSectionTextColor': '#f0f6fc', 'pieLegendTextColor': '#c9d1d9', 'pieStrokeColor': '#0d1117', 'pieOuterStrokeColor': '#30363d'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'titleColor': '#1f2328', 'pie1': '#3fb950', 'pie2': '#ff6b6b', 'pieTitleTextColor': '#1f2328', 'pieSectionTextColor': '#ffffff', 'pieLegendTextColor': '#1f2328', 'pieStrokeColor': '#ffffff', 'pieOuterStrokeColor': '#d1d9e0'}}}%%
 pie title Synapse Type Distribution - Target
     "Excitatory - Enables, Triggers, Enhances" : 80
     "Inhibitory - Inhibits, Suppresses" : 20
