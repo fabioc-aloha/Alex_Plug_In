@@ -132,11 +132,38 @@ graph TB
     style MEDIAL fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
     style DISTRIBUTE fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 
-    %% Key node accents
+    %% Frontal nodes
     style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:3px
     style SSO fill:#ffecd2,stroke:#f0883e,color:#1f2328,stroke-width:2px
+    style AG fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style VG fill:#ffecd2,stroke:#f0883e,color:#1f2328
     style IC fill:#fdd,stroke:#ff6b6b,color:#1f2328,stroke-width:2px
+    style PD fill:#fce4ec,stroke:#f85149,color:#1f2328
+    style WM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+    style SA fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+
+    %% Temporal nodes
+    style EP fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+    style EA fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+
+    %% Parietal nodes
+    style SK fill:#d4edda,stroke:#3fb950,color:#1f2328
+    style DM fill:#d4edda,stroke:#3fb950,color:#1f2328
+
+    %% Subcortical nodes
+    style PM fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+    style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
     style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+
+    %% Medial nodes
+    style MC fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+    style SA2 fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+    style MED fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+    style DRM fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+
+    %% Distributed nodes
+    style GK fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+    style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 ```
 
 **Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), and threat detection (amygdala, red). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to block dangerous operations via Safety Imperatives I1-I7.*
@@ -453,11 +480,25 @@ flowchart TB
     style EXECUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
     style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
 
-    %% Key node accents
+    %% Node fills matching parent clusters
+    style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
     style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
     style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+    style COMPLEX fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style SSO_SURVEY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style SSO_GATE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style SSO_DEPS fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style SSO_VERIFY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style SIMPLE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+    style PIVOT fill:#fce4ec,stroke:#f85149,color:#1f2328
+    style SLOTS fill:#fce4ec,stroke:#f85149,color:#1f2328
+    style ROUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
     style INHIBIT fill:#fdd,stroke:#ff6b6b,color:#1f2328
     style OUTPUT fill:#d4edda,stroke:#3fb950,color:#1f2328
+    style PROC fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+    style EPIS fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+    style DECL fill:#d4edda,stroke:#3fb950,color:#1f2328
+    style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 ```
 
 **Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through the amygdala safety check (fast threat detection), executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and response generation. The amygdala can short-circuit the entire pipeline, halting output immediately when Safety Imperatives I1-I7 are triggered.*
