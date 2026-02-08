@@ -48,17 +48,19 @@ Alex copies it to your global base, making it available across all future projec
 
 ---
 
-## Cloud Sync
+## Team Sharing
 
-Your global knowledge syncs to a private GitHub Gist, which means:
+Your global knowledge lives in a GitHub repository, which means:
 
 **Backup.** Your insights survive hardware failures and machine changes.
 
 **Multi-machine access.** Knowledge saved on your work laptop is available on your home machine.
 
-**Portability.** Switch jobs, switch computers, your institutional knowledge follows you.
+**Team collaboration.** Share your GitHub username with teammates — they enter it during initialization.
 
-Sync happens automatically in the background. Alex checks every few minutes and syncs any changes. You can also sync manually anytime with *"sync my knowledge"* or through the status bar menu.
+**Full history.** Git versioning tracks all changes over time.
+
+**Private repo support.** Team members sign in with GitHub for authenticated access.
 
 ---
 

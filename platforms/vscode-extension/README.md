@@ -38,7 +38,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 - 24 slash commands
 - 11 Language Model tools
 - Dream/meditation protocols
-- Global knowledge base with cloud sync
+- Global knowledge base with GitHub sharing
 
 See [Quick Start](#-quick-start-vs-code) for installation.
 
@@ -272,35 +272,30 @@ Alex now maintains a **centralized knowledge base** that persists across all you
 | `/saveinsight`       | Save a new learning with context, tags, and solution |
 | `/promote`           | Promote a project's DK-*.md file to global knowledge |
 | `/knowledgestatus`   | View patterns, insights, categories, and projects    |
-| `/sync`              | Bidirectional sync with GitHub Gist                  |
-| `/push`              | Push local knowledge to cloud                        |
-| `/pull`              | Pull knowledge from cloud                            |
 
-### ☁️ Cloud Sync
+### 📚 Team Sharing
 
-Sync your global knowledge across machines using **GitHub Gist**:
+Share your global knowledge with your team via **GitHub**:
 
 ```text
-@alex /sync
-→ Merges local and cloud knowledge (newer wins for conflicts)
+# Creator: Initialize and push to GitHub
+Alex: Initialize → Create New → push to GitHub
 
-@alex /push
-→ Uploads all local knowledge to your private Gist
-
-@alex /pull
-→ Downloads cloud knowledge to a new machine
+# Team: Connect to shared knowledge (just enter owner name)
+Alex: Initialize → Connect GitHub → fabioc-aloha
 ```
 
 **How it works:**
 
-1. First push creates a **private Gist** in your GitHub account
-2. The Gist ID is stored in the index for automatic discovery
-3. On a new machine, just `/pull` - Alex finds your Gist automatically!
-4. `/sync` does bidirectional merge: local + cloud combined
+1. First user creates a local GK repo and pushes to GitHub (private)
+2. Team members enter just the owner name (repo name is standardized)
+3. Alex reads directly from GitHub (no clone needed)
+4. For private repos, sign in with GitHub when prompted
+5. Contributors clone locally when they want to add knowledge
 
 **Automatic prompts:**
 
-- **Session greeting** checks if cloud has new knowledge
+- **Session greeting** welcomes you to your workspace
 - **Meditation** reminds you to contribute reusable insights
 
 ### Example Workflow
@@ -404,7 +399,6 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#save_insight`        | Save learning to global base       | "Save this insight"                   |
 | `#promote_knowledge`   | Promote project file to global     | "Promote DK file"                     |
 | `#knowledge_status`    | View global knowledge stats        | "Show knowledge status"               |
-| `#cloud_sync`          | Sync knowledge with GitHub Gist    | "Sync my knowledge to cloud"          |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
@@ -701,9 +695,9 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 Cross-project knowledge sharing is now built-in:
 
-- **7 slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`, `/sync`, `/push`, `/pull`
-- **5 agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`, `cloud_sync`
-- **Team sharing** — Share your GK repo via Git for instant team knowledge sync
+- **4 slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`
+- **4 agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`
+- **Team sharing** — Share your GK GitHub repo with team members for instant knowledge sync
 - **GK init integrated** — `Alex: Initialize Architecture` now scaffolds GK automatically
 
 ### 🎯 Persona-Aware UX
@@ -800,8 +794,7 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
 | [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
-| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
-| [Cloud Sync](alex_docs/features/CLOUD-SYNC.md)                             | GitHub Gist backup and sync                     |
+| [Global Knowledge Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md) | Cross-project knowledge sharing                 |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources

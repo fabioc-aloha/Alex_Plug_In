@@ -9,7 +9,6 @@ import {
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from "../chat/personaDetection";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
-// Cloud sync deprecated - Gist sync removed in v5.0.1
 import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
@@ -532,8 +531,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 28px;
-            height: 28px;
+            width: 40px;
+            height: 40px;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
             cursor: pointer;
@@ -1311,8 +1310,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <div class="feature-category">
                         <div class="feature-category-title">📚 Knowledge Management</div>
                         <ul class="feature-list">
-                            <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
-                            <li><strong>Knowledge Sync</strong> - Git-based knowledge repository with cross-project sharing</li>
+                            <li><strong>Global Knowledge</strong> - Cross-project patterns and insights with GitHub remote access</li>
+                            <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
                             <li><strong>Skill Library</strong> - 75 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>

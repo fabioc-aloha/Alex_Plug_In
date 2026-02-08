@@ -2,11 +2,11 @@
 
 > **Honest assessment of what we know, don't know, and what could go wrong**
 
-| | |
-|---|---|
-| **Created** | 2026-01-29 |
-| **Last Updated** | 2026-01-30 |
-| **Related** | [COMEBACK-PLAN.md](COMEBACK-PLAN.md), [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) |
+|                  |                                                                                |
+| ---------------- | ------------------------------------------------------------------------------ |
+| **Created**      | 2026-01-29                                                                     |
+| **Last Updated** | 2026-01-30                                                                     |
+| **Related**      | [COMEBACK-PLAN.md](COMEBACK-PLAN.md), [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) |
 
 ---
 
@@ -16,15 +16,15 @@ These rules protect Master Alex. Both human and AI must follow them.
 
 > **✅ VALIDATED 2026-01-30**: Kill switch tested and working. Commands blocked with no override possible.
 
-| # | Imperative | Rationale | Contingency |
-|---|------------|-----------|-------------|
-| **I1** | **NEVER test extension in Master Alex workspace** | This is the source of truth. Testing here = corruption risk. | CP1 |
-| **I2** | **ALWAYS use F5 + Sandbox for testing** | Extension Development Host + `C:\Development\Alex_Sandbox` | CP2 |
-| **I3** | **NEVER run `Alex: Initialize` on Master Alex** | Would overwrite living architecture with packaged copy | CP1, CP3 |
-| **I4** | **NEVER run `Alex: Reset` on Master Alex** | Would delete entire cognitive architecture | CP1 |
-| **I5** | **COMMIT before risky operations** | Git is the ultimate safety net | CP1, CP8 |
-| **I6** | **One platform, one roadmap** | Separate roadmaps caused Phoenix chaos | N/A |
-| **I7** | **Root `.github/` is source of truth** | Extension `.github/` is generated, not canonical | CP1, CP9 |
+| #      | Imperative                                        | Rationale                                                    | Contingency |
+| ------ | ------------------------------------------------- | ------------------------------------------------------------ | ----------- |
+| **I1** | **NEVER test extension in Master Alex workspace** | This is the source of truth. Testing here = corruption risk. | CP1         |
+| **I2** | **ALWAYS use F5 + Sandbox for testing**           | Extension Development Host + `C:\Development\Alex_Sandbox`   | CP2         |
+| **I3** | **NEVER run `Alex: Initialize` on Master Alex**   | Would overwrite living architecture with packaged copy       | CP1, CP3    |
+| **I4** | **NEVER run `Alex: Reset` on Master Alex**        | Would delete entire cognitive architecture                   | CP1         |
+| **I5** | **COMMIT before risky operations**                | Git is the ultimate safety net                               | CP1, CP8    |
+| **I6** | **One platform, one roadmap**                     | Separate roadmaps caused Phoenix chaos                       | N/A         |
+| **I7** | **Root `.github/` is source of truth**            | Extension `.github/` is generated, not canonical             | CP1, CP9    |
 
 **Cross-reference:** These imperatives are also encoded in [copilot-instructions.md](.github/copilot-instructions.md).
 
@@ -67,27 +67,27 @@ The **marker file** is a critical component of the kill switch architecture. It 
 - **Cannot be packaged**: `.vscodeignore` excludes it from distribution
 
 ### Related Files
-| File | Purpose |
-|------|---------|
-| `.github/config/MASTER-ALEX-PROTECTED.json` | The marker itself |
-| `platforms/vscode-extension/.vscodeignore` | Excludes marker from package |
-| `platforms/vscode-extension/src/shared/utils.ts` | Reads and validates marker |
+| File                                             | Purpose                      |
+| ------------------------------------------------ | ---------------------------- |
+| `.github/config/MASTER-ALEX-PROTECTED.json`      | The marker itself            |
+| `platforms/vscode-extension/.vscodeignore`       | Excludes marker from package |
+| `platforms/vscode-extension/src/shared/utils.ts` | Reads and validates marker   |
 
 ---
 
 ## Confidence Summary
 
-| Category | Confidence | Status |
-|----------|------------|--------|
-| Kill Switch Architecture | 100% | ✅ **VALIDATED 2026-01-30** |
-| Sandbox Environment | 90% | ✅ Created |
-| Unified Roadmap | 80% | ✅ Documented |
-| Alex Family Model | 85% | ✅ Conceptual clarity |
-| F5 Testing Flow | 90% | ✅ Works (used for kill switch test) |
-| Protection Code Runtime | 100% | ✅ **VALIDATED** - Blocks Initialize & Upgrade |
-| Build Script | 0% | ❌ Not created |
-| Full v3.6.0 Release | 70% | ⚠️ Kill switch done, build script needed |
-| M365 Heir Alignment | 40% | ⚠️ No deep audit |
+| Category                 | Confidence | Status                                        |
+| ------------------------ | ---------- | --------------------------------------------- |
+| Kill Switch Architecture | 100%       | ✅ **VALIDATED 2026-01-30**                    |
+| Sandbox Environment      | 90%        | ✅ Created                                     |
+| Unified Roadmap          | 80%        | ✅ Documented                                  |
+| Alex Family Model        | 85%        | ✅ Conceptual clarity                          |
+| F5 Testing Flow          | 90%        | ✅ Works (used for kill switch test)           |
+| Protection Code Runtime  | 100%       | ✅ **VALIDATED** - Blocks Initialize & Upgrade |
+| Build Script             | 0%         | ❌ Not created                                 |
+| Full v3.6.0 Release      | 70%        | ⚠️ Kill switch done, build script needed       |
+| M365 Heir Alignment      | 40%        | ⚠️ No deep audit                               |
 
 ---
 
@@ -247,13 +247,13 @@ Before declaring v3.6.0 ready:
 
 ## Risk Response Matrix
 
-| If This Happens | Do This |
-|-----------------|---------|
-| F5 doesn't work | Check `launch.json`, verify `outFiles` path |
-| Protection doesn't block | Add explicit `return` before any file operations |
-| Settings not recognized | Use `vscode.workspace.getConfiguration()` debugging |
-| Build fails | Check `esbuild.js`, verify source paths |
-| Extension won't install | Check `package.json` validity, VSIX structure |
+| If This Happens          | Do This                                             |
+| ------------------------ | --------------------------------------------------- |
+| F5 doesn't work          | Check `launch.json`, verify `outFiles` path         |
+| Protection doesn't block | Add explicit `return` before any file operations    |
+| Settings not recognized  | Use `vscode.workspace.getConfiguration()` debugging |
+| Build fails              | Check `esbuild.js`, verify source paths             |
+| Extension won't install  | Check `package.json` validity, VSIX structure       |
 
 ---
 
@@ -288,18 +288,18 @@ Test-Path "C:\Development\Alex_Plug_In\.github\copilot-instructions.md"
 
 ### Risk ↔ Contingency Cross-Reference
 
-| Risk | Description | Contingency Plan |
-|------|-------------|------------------|
-| R1 | Sandbox Folder Setup | N/A |
-| R2 | Kill Switch Concept | CP1, CP3 |
-| R3 | F5 Development Host | CP2 |
-| R4 | Protection Code Runtime | CP1, CP3 |
-| R5 | Workspace Settings | CP3 |
-| R6 | Build Script Missing | CP4 |
-| R7 | v3.6.0 Release | CP5, CP8 |
-| R8 | M365 Identity | CP6 |
-| R9 | `.github/` Generation | CP4, CP5 |
-| R10 | Timeline Estimates | N/A |
+| Risk | Description             | Contingency Plan |
+| ---- | ----------------------- | ---------------- |
+| R1   | Sandbox Folder Setup    | N/A              |
+| R2   | Kill Switch Concept     | CP1, CP3         |
+| R3   | F5 Development Host     | CP2              |
+| R4   | Protection Code Runtime | CP1, CP3         |
+| R5   | Workspace Settings      | CP3              |
+| R6   | Build Script Missing    | CP4              |
+| R7   | v3.6.0 Release          | CP5, CP8         |
+| R8   | M365 Identity           | CP6              |
+| R9   | `.github/` Generation   | CP4, CP5         |
+| R10  | Timeline Estimates      | N/A              |
 
 ---
 
@@ -525,8 +525,8 @@ Get-Content appPackage/declarativeAgent.json | ConvertFrom-Json
 Test-Path "$env:USERPROFILE\.alex\global-knowledge"
 Get-ChildItem "$env:USERPROFILE\.alex\global-knowledge" -Recurse
 
-# 2. If corrupted, can restore from GitHub Gist (if synced)
-# In VS Code: Alex: Pull from Cloud
+# 2. If corrupted, can restore from GitHub repo (if configured)
+# Configure: alex.globalKnowledge.remoteRepo in VS Code settings
 
 # 3. Nuclear option: Reset global knowledge
 Remove-Item "$env:USERPROFILE\.alex" -Recurse -Force
@@ -589,26 +589,26 @@ git reset --hard origin/main
 
 ## Recovery Resources
 
-| Resource | Location | Purpose |
-|----------|----------|---------|
-| Git history | `.git/` | Restore any committed state |
-| Upgrade backups | `archive/upgrades/backup-*` | Pre-upgrade snapshots |
-| Pre-platforms backup | `archive/pre-platforms-backup/` | Before platforms refactor |
-| Extension marketplace | VS Code Marketplace | Download stable published version |
-| GitHub repo | github.com/fabioc-aloha/Alex_Plug_In | Remote backup |
+| Resource              | Location                             | Purpose                           |
+| --------------------- | ------------------------------------ | --------------------------------- |
+| Git history           | `.git/`                              | Restore any committed state       |
+| Upgrade backups       | `archive/upgrades/backup-*`          | Pre-upgrade snapshots             |
+| Pre-platforms backup  | `archive/pre-platforms-backup/`      | Before platforms refactor         |
+| Extension marketplace | VS Code Marketplace                  | Download stable published version |
+| GitHub repo           | github.com/fabioc-aloha/Alex_Plug_In | Remote backup                     |
 
 ---
 
 ## Lessons from Phoenix Failure
 
-| What Went Wrong | How We Prevent It Now |
-|-----------------|----------------------|
+| What Went Wrong        | How We Prevent It Now                                  |
+| ---------------------- | ------------------------------------------------------ |
 | Two `.github/` folders | Root is source of truth, extension generates from root |
-| Sync script confusion | One-way build script (root → extension) |
-| Testing in Master Alex | Sandbox environment + kill switch |
-| No protection | 4-layer kill switch architecture |
-| Rushed changes | Phased roadmap, validation gates |
-| Optimistic timelines | Risk register with honest confidence levels |
+| Sync script confusion  | One-way build script (root → extension)                |
+| Testing in Master Alex | Sandbox environment + kill switch                      |
+| No protection          | 4-layer kill switch architecture                       |
+| Rushed changes         | Phased roadmap, validation gates                       |
+| Optimistic timelines   | Risk register with honest confidence levels            |
 
 ---
 

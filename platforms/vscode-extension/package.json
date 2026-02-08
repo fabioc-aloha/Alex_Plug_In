@@ -681,6 +681,32 @@
           "scope": "machine",
           "description": "Custom path to Global Knowledge repository. Leave empty for auto-detection (sibling folder named Alex-Global-Knowledge)."
         },
+        "alex.globalKnowledge.remoteRepo": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "markdownDescription": "GitHub owner or repository for remote Global Knowledge access. Enter just the owner (e.g., `fabioc-aloha`) to use the standard repo name `Alex-Global-Knowledge`, or `owner/custom-repo` for a custom name."
+        },
+        "alex.globalKnowledge.remoteCacheTTL": {
+          "type": "number",
+          "default": 300,
+          "minimum": 60,
+          "maximum": 3600,
+          "scope": "machine",
+          "description": "Cache TTL in seconds for remote GitHub knowledge reads. Lower values fetch more frequently. Default: 300 (5 minutes)."
+        },
+        "alex.globalKnowledge.useGitHubAuth": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Use VS Code's built-in GitHub authentication for private repository access. Recommended for private team repos."
+        },
+        "alex.globalKnowledge.githubToken": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "markdownDescription": "GitHub Personal Access Token for private repository access. Only needed if VS Code GitHub auth is disabled. Token needs `repo` scope for private repos. **Stored in VS Code settings - use secrets for production.**"
+        },
         "alex.logos.brandfetchClientId": {
           "type": "string",
           "default": "",
@@ -1273,35 +1299,6 @@
         "inputSchema": {
           "type": "object",
           "properties": {}
-        }
-      },
-      {
-        "name": "alex_cloud_sync",
-        "displayName": "Alex Cloud Sync",
-        "toolReferenceName": "cloud_sync",
-        "modelDescription": "Manual cloud sync for Alex's global knowledge. NOTE: Background sync runs automatically every 5 minutes and after saving insights/promoting knowledge. Use this tool only when user explicitly requests sync, or to force immediate sync. Actions: 'sync' (merge), 'push' (upload), 'pull' (download).",
-        "icon": "$(cloud)",
-        "canBeReferencedInPrompt": true,
-        "userDescription": "Sync global knowledge with GitHub",
-        "tags": [
-          "cloud",
-          "sync",
-          "knowledge"
-        ],
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "action": {
-              "type": "string",
-              "enum": [
-                "sync",
-                "push",
-                "pull"
-              ],
-              "description": "Sync action: 'sync' (merge), 'push' (upload), or 'pull' (download)",
-              "default": "sync"
-            }
-          }
         }
       },
       {

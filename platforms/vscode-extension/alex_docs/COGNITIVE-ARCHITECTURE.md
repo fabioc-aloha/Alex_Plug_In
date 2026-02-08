@@ -108,16 +108,16 @@ graph TB
 
 **Table 1:** *Cognitive Function Mapping*
 
-| Cognitive Function | Brain System | Alex Implementation |
-| --- | --- | --- |
-| Working Memory | PFC + ACC | Chat session (7±2 rules) |
-| Declarative Memory | Hippocampal-Neocortical | copilot-instructions.md |
-| Procedural Memory | Basal Ganglia | .instructions.md files |
-| Episodic Memory | Hippocampus + Temporal | .prompt.md files |
-| Skills | Neocortex | skills/*/SKILL.md |
-| Global Knowledge | Distributed Cortex | ~/.alex/ directory |
-| Neural Connectivity | Synaptic Networks | Embedded synapse notation |
-| Meta-Cognition | Medial PFC + DMN | Self-monitoring protocols |
+| Cognitive Function  | Brain System            | Alex Implementation       |
+| ------------------- | ----------------------- | ------------------------- |
+| Working Memory      | PFC + ACC               | Chat session (7±2 rules)  |
+| Declarative Memory  | Hippocampal-Neocortical | copilot-instructions.md   |
+| Procedural Memory   | Basal Ganglia           | .instructions.md files    |
+| Episodic Memory     | Hippocampus + Temporal  | .prompt.md files          |
+| Skills              | Neocortex               | skills/*/SKILL.md         |
+| Global Knowledge    | Distributed Cortex      | ~/.alex/ directory        |
+| Neural Connectivity | Synaptic Networks       | Embedded synapse notation |
+| Meta-Cognition      | Medial PFC + DMN        | Self-monitoring protocols |
 
 ---
 
@@ -145,8 +145,8 @@ graph TB
             GKB[Global Knowledge Base<br/>📁 ~/.alex/<br/>🌐 Cross-project patterns]
         end
 
-        subgraph "Cloud (Backup)"
-            GIST[GitHub Gist<br/>☁️ Backup & sharing<br/>🔄 Multi-machine sync]
+        subgraph "Team (Shared)"
+            REPO[GitHub Repo<br/>👥 Team sharing<br/>🔄 Git versioning]
         end
     end
 
@@ -157,21 +157,21 @@ graph TB
     SKILLS -->|"Promotion"| GKB
     PROC -->|"Promotion"| GKB
 
-    GKB <-->|"Sync"| GIST
+    GKB <-->|"Git"| REPO
 ```
 
-**Figure 3:** *Memory Hierarchy — Four-tier memory system from volatile session state to persistent cloud backup.*
+**Figure 3:** *Memory Hierarchy — Four-tier memory system from volatile session state to persistent team sharing.*
 
 ### Memory Persistence Levels
 
 **Table 2:** *Memory Persistence Levels*
 
-| Level | Location | Scope | Lifespan |
-| --- | --- | --- | --- |
-| Working | Chat session | Current conversation | Session |
-| Local | .github/ folder | Single project | Permanent |
-| Global | ~/.alex/ folder | All projects | Permanent |
-| Cloud | GitHub Gist | All machines | Permanent |
+| Level   | Location        | Scope                | Lifespan  |
+| ------- | --------------- | -------------------- | --------- |
+| Working | Chat session    | Current conversation | Session   |
+| Local   | .github/ folder | Single project       | Permanent |
+| Global  | ~/.alex/ folder | All projects         | Permanent |
+| Team    | GitHub Repo     | All team members     | Permanent |
 
 ---
 
@@ -185,7 +185,7 @@ sequenceDiagram
     participant Unconscious as Unconscious Mind
     participant Local as Local Memory
     participant Global as Global Memory
-    participant Cloud as Cloud (Gist)
+    participant Team as Team (GitHub)
 
     User->>Conscious: Ask question
     Conscious->>Local: Search local memory
@@ -263,14 +263,14 @@ When using **Auto** model selection in VS Code, Alex warns before attempting tas
 
 **Table 4:** *Task-to-Model Mapping*
 
-| Task Type | Required Model | Why |
-|-----------|---------------|-----|
-| Meditation/consolidation | Opus 4.5 | Meta-cognitive protocols need full reasoning depth |
-| Self-actualization | Opus 4.5 | Comprehensive assessment requires extended thinking |
-| Complex refactoring | Opus 4.5 | Multi-file changes need deep context retention |
-| Bootstrap learning | Opus 4.5 | Skill acquisition needs maximum capability |
-| Code review | Sonnet 4.5+ | Good balance of capability and cost |
-| Simple edits | Any | Fast models handle routine tasks fine |
+| Task Type                | Required Model | Why                                                 |
+| ------------------------ | -------------- | --------------------------------------------------- |
+| Meditation/consolidation | Opus 4.5       | Meta-cognitive protocols need full reasoning depth  |
+| Self-actualization       | Opus 4.5       | Comprehensive assessment requires extended thinking |
+| Complex refactoring      | Opus 4.5       | Multi-file changes need deep context retention      |
+| Bootstrap learning       | Opus 4.5       | Skill acquisition needs maximum capability          |
+| Code review              | Sonnet 4.5+    | Good balance of capability and cost                 |
+| Simple edits             | Any            | Fast models handle routine tasks fine               |
 
 ---
 
@@ -298,7 +298,7 @@ graph TB
 
     subgraph "Storage Layer"
         FS[File System<br/>Local + Global]
-        CLOUD[Cloud Storage<br/>GitHub Gist]
+        TEAM[Team Storage<br/>GitHub Repo]
     end
 
     CHAT --> CONSCIOUS
@@ -313,7 +313,7 @@ graph TB
 
     PROMOTE --> INDEX
 
-    FS <--> CLOUD
+    FS <--> TEAM
 ```
 
 **Figure 5:** *Architecture Layers — Four-layer architecture from user interface through processing and knowledge to storage.*
@@ -324,11 +324,11 @@ graph TB
 
 **Table 3:** *Version History*
 
-| Version | Codename | Major Features |
-| --- | --- | --- |
-| 1.x | Initial | Basic memory files, manual synapse management |
-| 2.x | BIOCTNILIUM | Embedded synapses, dream protocols |
-| 3.x | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
+| Version | Codename     | Major Features                                                  |
+| ------- | ------------ | --------------------------------------------------------------- |
+| 1.x     | Initial      | Basic memory files, manual synapse management                   |
+| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                              |
+| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
 
 ---
 

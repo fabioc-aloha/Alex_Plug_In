@@ -22,7 +22,7 @@ Alex organizes knowledge into layers, from temporary to permanent, from local to
 
 **Global Memory** lives in your home directory (`~/.alex/`). This is knowledge that applies everywhere: general patterns, cross-cutting insights, lessons learned that help on any project. It travels with you.
 
-**Cloud Backup** syncs your global memory to a private GitHub Gist. This means your knowledge survives machine changes, lives across multiple computers, and is backed up against data loss.
+**Team Sharing** shares your global memory via a GitHub repository. This means your knowledge works across teams, lives across multiple computers, and is backed up with full Git history.
 
 ---
 

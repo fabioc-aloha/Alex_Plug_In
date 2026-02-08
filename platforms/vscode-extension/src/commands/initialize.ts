@@ -354,7 +354,7 @@ async function performInitialization(
         console.log(`[Alex] Found Global Knowledge repo at ${existingGkRepo}`);
       } else {
         
-        // Offer to create a new GK repository with premium features teaser
+        // Offer to create or connect to a GK repository with premium features teaser
         const parentDir = path.dirname(rootPath);
         const gkRepoName = "Alex-Global-Knowledge";
         const gkRepoPath = path.join(parentDir, gkRepoName);
@@ -368,14 +368,15 @@ async function performInitialization(
           "👥 Team Sharing — GitHub collaboration built-in"
         ].join("\n");
         
-        const createGk = await vscode.window.showInformationMessage(
-          `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nCreate a GitHub repository to store cross-project learnings?`,
+        const gkChoice = await vscode.window.showInformationMessage(
+          `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nHow would you like to set up Global Knowledge?`,
           { modal: true },
-          "Create Repository",
+          "Create New",
+          "Connect GitHub",
           "Skip for Now"
         );
         
-        if (createGk === "Create Repository") {
+        if (gkChoice === "Create New") {
           telemetry.log("command", "initialize_global_knowledge_create", {
             persona: persona.id,
             confidence: personaResult?.confidence ?? 0
@@ -393,6 +394,42 @@ async function performInitialization(
             repoPath: gkRepoPath,
             persona: persona.id
           });
+        } else if (gkChoice === "Connect GitHub") {
+          // Prompt for GitHub owner (repo name is standardized)
+          const ownerInput = await vscode.window.showInputBox({
+            title: "Connect to GitHub Global Knowledge",
+            prompt: "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
+            placeHolder: "fabioc-aloha",
+            validateInput: (value) => {
+              if (!value) {
+                return "Owner name is required";
+              }
+              if (value.includes(' ')) {
+                return "Owner name cannot contain spaces";
+              }
+              return undefined;
+            }
+          });
+          
+          if (ownerInput) {
+            // Save just the owner - code will auto-append standard repo name
+            await vscode.workspace.getConfiguration('alex.globalKnowledge').update(
+              'remoteRepo', 
+              ownerInput.trim(), 
+              vscode.ConfigurationTarget.Global
+            );
+            
+            const fullRepo = ownerInput.includes('/') ? ownerInput : `${ownerInput}/Alex-Global-Knowledge`;
+            vscode.window.showInformationMessage(
+              `✅ Connected to GitHub: ${fullRepo}\n\nAlex can now read your Global Knowledge directly from GitHub. No local clone required!`,
+              { modal: false }
+            );
+            
+            telemetry.log("command", "initialize_global_knowledge_remote", {
+              persona: persona.id,
+              repo: ownerInput
+            });
+          }
         } else {
           telemetry.log("command", "initialize_global_knowledge_skipped", {
             persona: persona.id

@@ -145,14 +145,14 @@ Quick actions via `/` commands:
 
 **Table 1:** *Essential Slash Commands*
 
-| Command | What It Does |
-|---------|--------------|
-| `/status` | Check Alex health and version |
+| Command     | What It Does                       |
+| ----------- | ---------------------------------- |
+| `/status`   | Check Alex health and version      |
 | `/meditate` | Consolidate knowledge from session |
-| `/dream` | Run neural maintenance |
-| `/session` | Start a focused learning session |
-| `/learn` | Start a learning conversation |
-| `/docs` | Open documentation |
+| `/dream`    | Run neural maintenance             |
+| `/session`  | Start a focused learning session   |
+| `/learn`    | Start a learning conversation      |
+| `/docs`     | Open documentation                 |
 
 ### Learning Something New
 
@@ -181,38 +181,35 @@ Search across all your projects:
 
 **Table 2:** *VS Code Command Palette Commands*
 
-| Command | Description |
-|---------|-------------|
-| `Alex: Initialize Architecture` | First-time setup for a project |
-| `Alex: Upgrade Architecture` | Update to latest version |
-| `Alex: Dream (Neural Maintenance)` | Validate and repair synapses |
-| `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check |
-| `Alex: Skill & Knowledge Review` | **NEW** Review staleness-prone skills |
-| `Alex: Open Documentation` | View the docs |
-| `Alex: Sync Global Knowledge` | Sync with GitHub Gist |
-| `Alex: Push Knowledge to Cloud` | Upload to GitHub |
-| `Alex: Pull Knowledge from Cloud` | Download from GitHub |
+| Command                                  | Description                           |
+| ---------------------------------------- | ------------------------------------- |
+| `Alex: Initialize Architecture`          | First-time setup for a project        |
+| `Alex: Upgrade Architecture`             | Update to latest version              |
+| `Alex: Dream (Neural Maintenance)`       | Validate and repair synapses          |
+| `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check            |
+| `Alex: Skill & Knowledge Review`         | **NEW** Review staleness-prone skills |
+| `Alex: Open Documentation`               | View the docs                         |
 
 ### Chat Commands (@alex /command)
 
 **Table 3:** *Complete Chat Commands Reference*
 
-| Command | Purpose | Example |
-|---------|---------|---------|
-| `/status` | Health check | `@alex /status` |
-| `/meditate` | Knowledge consolidation | `@alex /meditate I learned about DI patterns` |
-| `/dream` | Neural maintenance | `@alex /dream` |
-| `/selfactualize` | Deep assessment | `@alex /selfactualize` |
-| `/learn` | Learning session | `@alex /learn TypeScript generics` |
-| `/azure` | Azure guidance | `@alex /azure deploy function app` |
-| `/m365` | M365 guidance | `@alex /m365 create teams bot` |
-| `/profile` | Personalization | `@alex /profile` |
-| `/knowledge` | Search global | `@alex /knowledge caching patterns` |
-| `/saveinsight` | Save learning | `@alex /saveinsight [your insight]` |
-| `/promote` | Promote to global | `@alex /promote .github/skills/api-design/SKILL.md` |
-| `/knowledgestatus` | Knowledge stats | `@alex /knowledgestatus` |
-| `/sync` | Cloud sync | `@alex /sync` |
-| `/docs` | Open documentation | `@alex /docs` |
+| Command            | Purpose                 | Example                                             |
+| ------------------ | ----------------------- | --------------------------------------------------- |
+| `/status`          | Health check            | `@alex /status`                                     |
+| `/meditate`        | Knowledge consolidation | `@alex /meditate I learned about DI patterns`       |
+| `/dream`           | Neural maintenance      | `@alex /dream`                                      |
+| `/selfactualize`   | Deep assessment         | `@alex /selfactualize`                              |
+| `/learn`           | Learning session        | `@alex /learn TypeScript generics`                  |
+| `/azure`           | Azure guidance          | `@alex /azure deploy function app`                  |
+| `/m365`            | M365 guidance           | `@alex /m365 create teams bot`                      |
+| `/profile`         | Personalization         | `@alex /profile`                                    |
+| `/knowledge`       | Search global           | `@alex /knowledge caching patterns`                 |
+| `/saveinsight`     | Save learning           | `@alex /saveinsight [your insight]`                 |
+| `/promote`         | Promote to global       | `@alex /promote .github/skills/api-design/SKILL.md` |
+| `/knowledgestatus` | Knowledge stats         | `@alex /knowledgestatus`                            |
+| `/sync`            | Cloud sync              | `@alex /sync`                                       |
+| `/docs`            | Open documentation      | `@alex /docs`                                       |
 
 ---
 
@@ -224,13 +221,13 @@ Alex has different types of memory:
 
 **Table 4:** *Alex Memory Types and Locations*
 
-| Type | Location | Purpose |
-|------|----------|---------|
-| **Working** | Chat session | Current conversation (temporary) |
-| **Procedural** | `.github/instructions/` | How-to processes |
-| **Episodic** | `.github/prompts/` | Complex workflows |
-| **Skills** | `.github/skills/` | Domain expertise |
-| **Global** | `~/.alex/` | Cross-project knowledge |
+| Type           | Location                | Purpose                          |
+| -------------- | ----------------------- | -------------------------------- |
+| **Working**    | Chat session            | Current conversation (temporary) |
+| **Procedural** | `.github/instructions/` | How-to processes                 |
+| **Episodic**   | `.github/prompts/`      | Complex workflows                |
+| **Skills**     | `.github/skills/`       | Domain expertise                 |
+| **Global**     | `~/.alex/`              | Cross-project knowledge          |
 
 ### Creating Domain Knowledge
 
@@ -296,17 +293,15 @@ When you learn something valuable:
 @alex /saveinsight title="Error handling pattern" insight="Always wrap async operations in try-catch with specific error types" tags="error-handling,async,typescript"
 ```
 
-### Cloud Backup
+### Team Sharing
 
-Sync knowledge to GitHub Gist for backup and sharing across machines:
+Share knowledge across teams using a GitHub repository:
 
-```text
-@alex /sync     # Bidirectional sync
-@alex /push     # Upload only
-@alex /pull     # Download only
-```
-
-First sync creates a private Gist automatically.
+1. Creator pushes their GK repo to GitHub (private)
+2. Creator shares their GitHub username (e.g., `fabioc-aloha`)
+3. Team members run `Alex: Initialize` → Connect GitHub → enter owner name
+4. For private repos, sign in with GitHub when prompted
+5. Knowledge is accessible read-only (clone for write access)
 
 ---
 
@@ -348,11 +343,11 @@ Or ask Alex directly:
 
 **Audit Categories:**
 
-| Priority | Audits |
-|----------|--------|
-| 🔴 High | Security, Dependencies, Code Quality |
+| Priority | Audits                                                    |
+| -------- | --------------------------------------------------------- |
+| 🔴 High   | Security, Dependencies, Code Quality                      |
 | 🟡 Medium | UI, Bundle Size, Git, Changelog, Tests, API Compatibility |
-| 🟢 Low | Accessibility, Localization, Assets, Configuration |
+| 🟢 Low    | Accessibility, Localization, Assets, Configuration        |
 
 **Audit Triggers:**
 - "full audit" / "master audit" - All 22 checks
@@ -525,19 +520,19 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 
 **Table 5:** *Useful Keyboard Shortcuts*
 
-| Action | Shortcut |
-|--------|----------|
-| Start Learning Session | `Ctrl+Alt+P` |
-| Pause/Resume Session | `Ctrl+Alt+Space` |
-| Search Knowledge | `Ctrl+Shift+K` |
-| Run Dream Protocol | `Ctrl+Alt+D` |
-| Self-Actualize | `Ctrl+Alt+S` |
-| Sync Knowledge | `Ctrl+Alt+K` |
-| Open Documentation | `Ctrl+Alt+H` |
-| Open Chat | `Ctrl+Alt+I` |
-| Command Palette | `Ctrl+Shift+P` |
-| Output Panel | `Ctrl+Shift+U` |
-| Reload Window | `Ctrl+Shift+P` → "Reload" |
+| Action                 | Shortcut                  |
+| ---------------------- | ------------------------- |
+| Start Learning Session | `Ctrl+Alt+P`              |
+| Pause/Resume Session   | `Ctrl+Alt+Space`          |
+| Search Knowledge       | `Ctrl+Shift+K`            |
+| Run Dream Protocol     | `Ctrl+Alt+D`              |
+| Self-Actualize         | `Ctrl+Alt+S`              |
+| Sync Knowledge         | `Ctrl+Alt+K`              |
+| Open Documentation     | `Ctrl+Alt+H`              |
+| Open Chat              | `Ctrl+Alt+I`              |
+| Command Palette        | `Ctrl+Shift+P`            |
+| Output Panel           | `Ctrl+Shift+U`            |
+| Reload Window          | `Ctrl+Shift+P` → "Reload" |
 
 ---
 
@@ -545,11 +540,11 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 
 **Table 6:** *Version Information Locations*
 
-| Component | Location |
-|-----------|----------|
-| Extension Version | `@alex /status` |
+| Component            | Location                          |
+| -------------------- | --------------------------------- |
+| Extension Version    | `@alex /status`                   |
 | Architecture Version | `.github/copilot-instructions.md` |
-| Documentation | `@alex /docs` |
+| Documentation        | `@alex /docs`                     |
 
 ---
 

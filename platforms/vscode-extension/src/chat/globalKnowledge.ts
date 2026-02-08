@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
+import * as https from 'https';
 import * as lockfile from 'proper-lockfile';
 import {
     ALEX_GLOBAL_HOME,
@@ -14,9 +15,6 @@ import {
     IProjectRegistry,
     IProjectRegistryEntry
 } from '../shared/constants';
-
-// Import cloud sync status for auto-sync suggestions
-import { getSyncStatus, triggerPostModificationSync } from './cloudSync';
 
 // ============================================================================
 // GLOBAL KNOWLEDGE BASE UTILITIES
@@ -35,6 +33,390 @@ const LOCK_OPTIONS = {
         maxTimeout: 500  // Reduced from 1000
     }
 };
+
+// ============================================================================
+// REMOTE GITHUB ACCESS (Read-only, no clone required)
+// ============================================================================
+
+/**
+ * In-memory cache for remote GitHub content
+ */
+interface IRemoteCache {
+    content: string;
+    fetchedAt: number;
+    etag?: string;
+}
+
+const remoteCache = new Map<string, IRemoteCache>();
+
+/**
+ * Track remote access status for error feedback
+ */
+interface IRemoteAccessStatus {
+    lastAttempt: number;
+    lastSuccess: boolean;
+    lastError?: string;
+    authMethod?: 'vscode-sso' | 'pat' | 'none';
+}
+
+let remoteAccessStatus: IRemoteAccessStatus | null = null;
+
+/**
+ * Get the current remote access status
+ */
+export function getRemoteAccessStatus(): IRemoteAccessStatus | null {
+    return remoteAccessStatus;
+}
+
+/**
+ * Standard repository name for Global Knowledge
+ */
+const STANDARD_GK_REPO_NAME = 'Alex-Global-Knowledge';
+
+/**
+ * Get remote repo configuration
+ * Accepts: "owner" (appends standard repo name) or "owner/repo" (custom repo name)
+ */
+function getRemoteRepoConfig(): { repo: string; ttl: number; useAuth: boolean; token: string | null } | null {
+    const config = vscode.workspace.getConfiguration('alex.globalKnowledge');
+    const repoInput = config.get<string>('remoteRepo')?.trim();
+    const ttl = config.get<number>('remoteCacheTTL') || 300;
+    const useAuth = config.get<boolean>('useGitHubAuth') ?? true;
+    const token = config.get<string>('githubToken')?.trim() || null;
+    
+    if (!repoInput) {
+        return null;
+    }
+    
+    let repo: string;
+    
+    // Check if it's a full URL first
+    const urlMatch = repoInput.match(/github\.com\/([^\/]+\/[^\/]+?)(?:\.git)?$/);
+    if (urlMatch) {
+        repo = urlMatch[1];
+    }
+    // Check if it's "owner/repo" format
+    else if (repoInput.includes('/')) {
+        repo = repoInput;
+    }
+    // Just owner name - append standard repo name
+    else {
+        repo = `${repoInput}/${STANDARD_GK_REPO_NAME}`;
+    }
+    
+    return { repo, ttl, useAuth, token };
+}
+
+/**
+ * Get GitHub authentication token using VS Code's built-in GitHub auth or PAT fallback
+ */
+async function getGitHubAuthToken(): Promise<{ token: string | null; method: 'vscode-sso' | 'pat' | 'none' }> {
+    const config = getRemoteRepoConfig();
+    if (!config) {
+        return { token: null, method: 'none' };
+    }
+    
+    // Try VS Code GitHub authentication first (if enabled)
+    if (config.useAuth) {
+        try {
+            const session = await vscode.authentication.getSession('github', ['repo'], { createIfNone: false });
+            if (session) {
+                return { token: session.accessToken, method: 'vscode-sso' };
+            }
+        } catch (err) {
+            console.log('[Alex] VS Code GitHub auth not available:', err);
+        }
+    }
+    
+    // Fall back to PAT token
+    if (config.token) {
+        return { token: config.token, method: 'pat' };
+    }
+    
+    return { token: null, method: 'none' };
+}
+
+/**
+ * Request GitHub authentication from VS Code (prompts user to sign in)
+ */
+export async function requestGitHubAuth(): Promise<boolean> {
+    try {
+        const session = await vscode.authentication.getSession('github', ['repo'], { createIfNone: true });
+        return session !== undefined;
+    } catch {
+        return false;
+    }
+}
+
+/**
+ * Fetch a file from GitHub raw content
+ * Authentication priority: VS Code SSO > PAT token > unauthenticated (public repos only)
+ */
+async function fetchFromGitHub(
+    repoPath: string, 
+    filePath: string,
+    branch: string = 'main'
+): Promise<string | null> {
+    const cacheKey = `${repoPath}/${branch}/${filePath}`;
+    const config = getRemoteRepoConfig();
+    const ttl = config?.ttl || 300;
+    
+    // Check cache first
+    const cached = remoteCache.get(cacheKey);
+    if (cached && (Date.now() - cached.fetchedAt) < ttl * 1000) {
+        return cached.content;
+    }
+    
+    // Get authentication token
+    const auth = await getGitHubAuthToken();
+    
+    // Try raw.githubusercontent.com (works for public repos, or private with auth)
+    const rawUrl = `https://raw.githubusercontent.com/${repoPath}/${branch}/${filePath}`;
+    
+    return new Promise<string | null>((resolve) => {
+        const headers: Record<string, string> = {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            'User-Agent': 'Alex-Cognitive-Architecture-VSCode'
+        };
+        
+        // Add authorization header if we have a token
+        if (auth.token) {
+            headers['Authorization'] = `Bearer ${auth.token}`;
+        }
+        
+        const req = https.get(rawUrl, {
+            headers,
+            timeout: 10000
+        }, (res) => {
+            // Handle redirects
+            if (res.statusCode === 301 || res.statusCode === 302) {
+                const redirectUrl = res.headers.location;
+                if (redirectUrl) {
+                    https.get(redirectUrl, { headers, timeout: 10000 }, (redirectRes) => {
+                        handleResponse(redirectRes);
+                    }).on('error', () => {
+                        updateAccessStatus(false, 'Network error during redirect', auth.method);
+                        resolve(null);
+                    });
+                    return;
+                }
+            }
+            handleResponse(res);
+            
+            function handleResponse(response: typeof res) {
+                if (response.statusCode === 401 || response.statusCode === 403) {
+                    // Authentication required or insufficient permissions
+                    const errorMsg = response.statusCode === 401 
+                        ? 'Authentication required - private repository'
+                        : 'Access forbidden - check repository permissions';
+                    updateAccessStatus(false, errorMsg, auth.method);
+                    resolve(null);
+                    return;
+                }
+                
+                if (response.statusCode === 404) {
+                    // Could be wrong branch, try 'master'
+                    if (branch === 'main') {
+                        fetchFromGitHub(repoPath, filePath, 'master')
+                            .then(resolve)
+                            .catch(() => {
+                                updateAccessStatus(false, 'Repository or file not found', auth.method);
+                                resolve(null);
+                            });
+                        return;
+                    }
+                    updateAccessStatus(false, 'Repository or file not found', auth.method);
+                    resolve(null);
+                    return;
+                }
+                
+                if (response.statusCode !== 200) {
+                    updateAccessStatus(false, `HTTP ${response.statusCode}`, auth.method);
+                    resolve(null);
+                    return;
+                }
+                
+                let data = '';
+                response.on('data', (chunk) => { data += chunk; });
+                response.on('end', () => {
+                    // Cache the result
+                    remoteCache.set(cacheKey, {
+                        content: data,
+                        fetchedAt: Date.now(),
+                        etag: response.headers.etag as string | undefined
+                    });
+                    updateAccessStatus(true, undefined, auth.method);
+                    resolve(data);
+                });
+            }
+        });
+        
+        req.on('error', (err) => {
+            updateAccessStatus(false, `Network error: ${err.message}`, auth.method);
+            resolve(null);
+        });
+        req.on('timeout', () => {
+            req.destroy();
+            updateAccessStatus(false, 'Request timeout', auth.method);
+            resolve(null);
+        });
+    });
+}
+
+/**
+ * Update the remote access status for error feedback
+ */
+function updateAccessStatus(success: boolean, error?: string, authMethod?: 'vscode-sso' | 'pat' | 'none'): void {
+    remoteAccessStatus = {
+        lastAttempt: Date.now(),
+        lastSuccess: success,
+        lastError: error,
+        authMethod
+    };
+}
+
+/**
+ * Show remote access error to user with actionable guidance
+ */
+export async function showRemoteAccessError(): Promise<void> {
+    const status = remoteAccessStatus;
+    const config = getRemoteRepoConfig();
+    
+    if (!status || status.lastSuccess || !config) {
+        return;
+    }
+    
+    let message = `Failed to access Global Knowledge from GitHub: ${status.lastError}`;
+    let actions: string[] = [];
+    
+    if (status.lastError?.includes('Authentication required') || status.lastError?.includes('Access forbidden')) {
+        message += '\n\nThis appears to be a private repository.';
+        actions = ['Sign in with GitHub', 'Configure PAT Token', 'Cancel'];
+    } else if (status.lastError?.includes('not found')) {
+        message += '\n\nCheck that the repository exists and the path is correct.';
+        actions = ['Open Settings', 'Cancel'];
+    } else {
+        actions = ['Retry', 'Open Settings', 'Cancel'];
+    }
+    
+    const choice = await vscode.window.showWarningMessage(message, ...actions);
+    
+    if (choice === 'Sign in with GitHub') {
+        const success = await requestGitHubAuth();
+        if (success) {
+            clearRemoteCache();
+            vscode.window.showInformationMessage('GitHub authentication successful. Retrying...');
+        }
+    } else if (choice === 'Configure PAT Token') {
+        await vscode.commands.executeCommand('workbench.action.openSettings', 'alex.globalKnowledge.githubToken');
+    } else if (choice === 'Open Settings') {
+        await vscode.commands.executeCommand('workbench.action.openSettings', 'alex.globalKnowledge.remoteRepo');
+    } else if (choice === 'Retry') {
+        clearRemoteCache();
+    }
+}
+
+/**
+ * Get remote Global Knowledge index
+ */
+async function getRemoteIndex(): Promise<IGlobalKnowledgeIndex | null> {
+    const config = getRemoteRepoConfig();
+    if (!config) {
+        return null;
+    }
+    
+    const content = await fetchFromGitHub(config.repo, 'index.json');
+    if (!content) {
+        return null;
+    }
+    
+    try {
+        return JSON.parse(content) as IGlobalKnowledgeIndex;
+    } catch {
+        console.warn('[Alex] Failed to parse remote index.json');
+        return null;
+    }
+}
+
+/**
+ * Get a specific knowledge file from remote
+ */
+async function getRemoteKnowledgeFile(relativePath: string): Promise<string | null> {
+    const config = getRemoteRepoConfig();
+    if (!config) {
+        return null;
+    }
+    
+    return await fetchFromGitHub(config.repo, relativePath);
+}
+
+/**
+ * Check if remote GK is configured and available
+ */
+export async function isRemoteGlobalKnowledgeAvailable(): Promise<boolean> {
+    const config = getRemoteRepoConfig();
+    if (!config) {
+        return false;
+    }
+    
+    const index = await getRemoteIndex();
+    return index !== null;
+}
+
+/**
+ * Read knowledge file content from local or remote source
+ * Handles both absolute paths (local) and relative paths (remote)
+ */
+export async function readKnowledgeFileContent(
+    filePath: string,
+    entry?: IGlobalKnowledgeEntry
+): Promise<string | null> {
+    // Try local first if path is absolute and exists
+    if (path.isAbsolute(filePath)) {
+        try {
+            if (await fs.pathExists(filePath)) {
+                return await fs.readFile(filePath, 'utf-8');
+            }
+        } catch {
+            // Fall through to remote
+        }
+    }
+    
+    // If in remote-only mode or local read failed, try remote
+    if (isRemoteOnlyMode || !path.isAbsolute(filePath)) {
+        const config = getRemoteRepoConfig();
+        if (config) {
+            // Determine relative path for remote fetch
+            let relativePath = filePath;
+            if (path.isAbsolute(filePath)) {
+                // Extract relative path from entry or guess based on type
+                if (entry) {
+                    relativePath = entry.type === 'pattern' 
+                        ? `patterns/${entry.id}.md`
+                        : `insights/${entry.id}.md`;
+                } else {
+                    // Try to extract from absolute path
+                    const match = filePath.match(/(?:patterns|insights)[\/\\].+\.md$/);
+                    relativePath = match ? match[0].replace(/\\/g, '/') : filePath;
+                }
+            }
+            
+            const content = await getRemoteKnowledgeFile(relativePath);
+            if (content) {
+                return content;
+            }
+        }
+    }
+    
+    return null;
+}
+
+/**
+ * Clear the remote cache (useful for forcing refresh)
+ */
+export function clearRemoteCache(): void {
+    remoteCache.clear();
+}
 
 /**
  * Get the full path to the Alex global home directory
@@ -79,13 +461,14 @@ const GK_REPO_NAMES = [
 ];
 
 /**
- * Detect an existing Global Knowledge repository as a sibling folder.
+ * Detect an existing Global Knowledge repository.
  * Returns the path if found, null otherwise.
  * 
  * Priority:
  * 1. User-configured path via `alex.globalKnowledge.repoPath` setting
- * 2. Sibling folder with known GK repo names
- * 3. Any sibling folder with index.json + patterns/ + insights/
+ * 2. Workspace folder that IS a GK repo (multi-root workspace support)
+ * 3. Walk up directory tree (max 3 levels) looking for GK repo
+ *    - Handles nested projects like C:\Dev\Sandbox\project when GK is at C:\Dev\Alex-Global-Knowledge
  */
 export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
     // First check user-configured path
@@ -104,41 +487,79 @@ export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
         return null;
     }
     
-    // Get parent directory of the workspace
-    const workspaceRoot = workspaceFolders[0].uri.fsPath;
-    const parentDir = path.dirname(workspaceRoot);
-    
-    // Check for common GK repo names
-    for (const repoName of GK_REPO_NAMES) {
-        const gkPath = path.join(parentDir, repoName);
-        const indexPath = path.join(gkPath, 'index.json');
+    // Priority 2: Check if any workspace folder IS a GK repo (multi-root workspace)
+    for (const folder of workspaceFolders) {
+        const folderPath = folder.uri.fsPath;
+        const folderName = path.basename(folderPath);
         
-        if (await fs.pathExists(indexPath)) {
-            return gkPath;
+        // Quick check by name first
+        if (GK_REPO_NAMES.includes(folderName)) {
+            const indexPath = path.join(folderPath, 'index.json');
+            if (await fs.pathExists(indexPath)) {
+                return folderPath;
+            }
+        }
+        
+        // Also check by structure (index.json + patterns + insights)
+        const indexPath = path.join(folderPath, 'index.json');
+        const patternsPath = path.join(folderPath, 'patterns');
+        const insightsPath = path.join(folderPath, 'insights');
+        
+        if (await fs.pathExists(indexPath) && 
+            await fs.pathExists(patternsPath) && 
+            await fs.pathExists(insightsPath)) {
+            return folderPath;
         }
     }
     
-    // Also check for any folder with index.json that looks like a GK repo
-    try {
-        const siblings = await fs.readdir(parentDir);
-        for (const sibling of siblings) {
-            const siblingPath = path.join(parentDir, sibling);
-            const stat = await fs.stat(siblingPath);
-            if (stat.isDirectory()) {
-                const indexPath = path.join(siblingPath, 'index.json');
-                const patternsPath = path.join(siblingPath, 'patterns');
-                const insightsPath = path.join(siblingPath, 'insights');
-                
-                // If it has index.json + patterns/ + insights/, it's likely a GK repo
-                if (await fs.pathExists(indexPath) && 
-                    await fs.pathExists(patternsPath) && 
-                    await fs.pathExists(insightsPath)) {
-                    return siblingPath;
-                }
+    // Priority 3: Walk up directory tree looking for GK repo (max 3 levels)
+    // Handles nested projects like C:\Dev\Sandbox\project when GK is at C:\Dev\Alex-Global-Knowledge
+    const workspaceRoot = workspaceFolders[0].uri.fsPath;
+    let currentDir = workspaceRoot;
+    const MAX_TREE_DEPTH = 3;
+    
+    for (let depth = 0; depth < MAX_TREE_DEPTH; depth++) {
+        const parentDir = path.dirname(currentDir);
+        
+        // Stop if we've reached the root
+        if (parentDir === currentDir) {
+            break;
+        }
+        
+        // Check for common GK repo names at this level
+        for (const repoName of GK_REPO_NAMES) {
+            const gkPath = path.join(parentDir, repoName);
+            const indexPath = path.join(gkPath, 'index.json');
+            
+            if (await fs.pathExists(indexPath)) {
+                return gkPath;
             }
         }
-    } catch {
-        // Parent directory not readable
+        
+        // Also check for any folder with GK structure at this level
+        try {
+            const siblings = await fs.readdir(parentDir);
+            for (const sibling of siblings) {
+                const siblingPath = path.join(parentDir, sibling);
+                const stat = await fs.stat(siblingPath);
+                if (stat.isDirectory()) {
+                    const indexPath = path.join(siblingPath, 'index.json');
+                    const patternsPath = path.join(siblingPath, 'patterns');
+                    const insightsPath = path.join(siblingPath, 'insights');
+                    
+                    // If it has index.json + patterns/ + insights/, it's likely a GK repo
+                    if (await fs.pathExists(indexPath) && 
+                        await fs.pathExists(patternsPath) && 
+                        await fs.pathExists(insightsPath)) {
+                        return siblingPath;
+                    }
+                }
+            }
+        } catch {
+            // Directory not readable, continue walking up
+        }
+        
+        currentDir = parentDir;
     }
     
     return null;
@@ -1470,9 +1891,70 @@ export async function updateProjectRegistry(
 }
 
 /**
- * Initialize the global knowledge index if it doesn't exist
+ * Track whether we're operating in remote-only mode (no local GK repo)
+ */
+let isRemoteOnlyMode = false;
+
+/**
+ * Check if we're in remote-only mode (no local GK, reading from GitHub)
+ */
+export function isRemoteOnly(): boolean {
+    return isRemoteOnlyMode;
+}
+
+/**
+ * Initialize the global knowledge index, with fallback to remote GitHub
+ * 
+ * Priority:
+ * 1. Local GK repo (if exists)
+ * 2. Remote GitHub repo (if configured)
+ * 3. Create empty local index (fallback)
  */
 export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeIndex> {
+    // First, check for local GK repo
+    const gkRepo = await detectGlobalKnowledgeRepo();
+    
+    if (gkRepo) {
+        // Local GK repo exists - use it
+        isRemoteOnlyMode = false;
+        const indexPath = path.join(gkRepo, 'index.json');
+        
+        try {
+            if (await fs.pathExists(indexPath)) {
+                const content = await fs.readFile(indexPath, 'utf-8');
+                if (content.trim()) {
+                    const index = JSON.parse(content) as IGlobalKnowledgeIndex;
+                    // Normalize file paths to use repo path
+                    for (const entry of index.entries) {
+                        if (!path.isAbsolute(entry.filePath)) {
+                            entry.filePath = path.join(gkRepo, entry.filePath);
+                        }
+                    }
+                    return index;
+                }
+            }
+        } catch (err) {
+            console.warn('[Alex] Failed to read local GK index:', err);
+        }
+    }
+    
+    // No local GK repo - try remote GitHub
+    const config = getRemoteRepoConfig();
+    const remoteIndex = await getRemoteIndex();
+    if (remoteIndex) {
+        isRemoteOnlyMode = true;
+        console.log('[Alex] Using remote Global Knowledge from GitHub');
+        return remoteIndex;
+    }
+    
+    // If remote was configured but failed, show error feedback
+    if (config && remoteAccessStatus && !remoteAccessStatus.lastSuccess) {
+        // Show error asynchronously (don't block)
+        showRemoteAccessError().catch(() => {});
+    }
+    
+    // Fallback: create local empty index in ~/.alex
+    isRemoteOnlyMode = false;
     const indexPath = getGlobalKnowledgePath('index');
     await ensureGlobalKnowledgeDirectories();
     
@@ -1711,6 +2193,7 @@ ${newContent}
 
 /**
  * Create a new global insight (timestamped learning) - with concurrent-safe index update
+ * Note: Requires local GK repo - cannot write to remote
  */
 export async function createGlobalInsight(
     title: string,
@@ -1721,6 +2204,16 @@ export async function createGlobalInsight(
     problemContext?: string,
     solution?: string
 ): Promise<IGlobalKnowledgeEntry> {
+    // Check if we're in remote-only mode
+    if (isRemoteOnlyMode) {
+        throw new Error(
+            'Cannot save insights in remote-only mode. ' +
+            'To save insights, either:\n' +
+            '1. Clone your GK repo locally: git clone https://github.com/{owner}/Alex-Global-Knowledge\n' +
+            '2. Create a new local GK: Run "Alex: Initialize"'
+        );
+    }
+    
     await ensureGlobalKnowledgeDirectories();
     
     const id = generateKnowledgeId('insight', title);
@@ -1871,18 +2364,15 @@ export async function searchGlobalKnowledge(
         }
 
         if (relevance > 0) {
-            // Read full content for top results
+            // Read full content for top results (local or remote)
             let content: string | undefined;
-            if (await fs.pathExists(entry.filePath)) {
-                try {
-                    content = await fs.readFile(entry.filePath, 'utf-8');
-                    // Additional relevance from content
-                    for (const word of queryWords) {
-                        const matches = (content.toLowerCase().match(new RegExp(word, 'g')) || []).length;
-                        relevance += Math.min(matches, 5) * 0.5;
-                    }
-                } catch (err) {
-                    // File read error, skip content
+            const fileContent = await readKnowledgeFileContent(entry.filePath, entry);
+            if (fileContent) {
+                content = fileContent;
+                // Additional relevance from content
+                for (const word of queryWords) {
+                    const matches = (content.toLowerCase().match(new RegExp(word, 'g')) || []).length;
+                    relevance += Math.min(matches, 5) * 0.5;
                 }
             }
             
@@ -1897,12 +2387,22 @@ export async function searchGlobalKnowledge(
 
 /**
  * Promote a project-local DK file to global knowledge
+ * Note: Requires local GK repo - cannot write to remote
  */
 export async function promoteToGlobalKnowledge(
     localFilePath: string,
     category: GlobalKnowledgeCategory,
     additionalTags: string[] = []
 ): Promise<IGlobalKnowledgeEntry | null> {
+    // Check if we're in remote-only mode
+    if (isRemoteOnlyMode) {
+        vscode.window.showErrorMessage(
+            'Cannot promote knowledge in remote-only mode. ' +
+            'Clone your GK repo locally or create a new one via "Alex: Initialize".'
+        );
+        return null;
+    }
+    
     try {
         const content = await fs.readFile(localFilePath, 'utf-8');
         const filename = path.basename(localFilePath, '.md');
@@ -2262,11 +2762,6 @@ export async function autoPromoteDuringMeditation(
         } catch (err) {
             result.skipped.push({ filename: file, reason: `Error: ${err}` });
         }
-    }
-    
-    // Trigger cloud sync if we promoted or updated anything
-    if (!dryRun && (result.promoted.length > 0 || result.updated.length > 0)) {
-        triggerPostModificationSync();
     }
     
     return result;
@@ -2690,9 +3185,6 @@ export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightPar
             solution
         );
 
-        // === UNCONSCIOUS MIND: Trigger automatic background sync ===
-        triggerPostModificationSync();
-
         const result = `## ✅ Insight Saved to Global Knowledge
 
 **ID**: ${entry.id}  
@@ -2769,9 +3261,6 @@ export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKn
             ]);
         }
 
-        // === UNCONSCIOUS MIND: Trigger automatic background sync ===
-        triggerPostModificationSync();
-
         const result = `## ✅ Knowledge Promoted to Global
 
 **ID**: ${entry.id}  
@@ -2814,18 +3303,11 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
         const summary = await getGlobalKnowledgeSummary();
         const registry = await ensureProjectRegistry();
 
-        // Get cloud sync status
-        let syncStatusStr = '';
-        try {
-            const syncStatus = await getSyncStatus();
-            const statusEmoji = syncStatus.status === 'up-to-date' ? '✅' :
-                               syncStatus.status === 'needs-push' ? '📤' :
-                               syncStatus.status === 'needs-pull' ? '📥' :
-                               syncStatus.status === 'error' ? '❌' : '⚪';
-            syncStatusStr = `| Cloud Sync | ${statusEmoji} ${syncStatus.status} |\n`;
-        } catch {
-            syncStatusStr = `| Cloud Sync | ⚪ Not configured |\n`;
-        }
+        // Remote GK status indicator
+        const remoteConfigured = getRemoteRepoConfig() !== null;
+        const syncStatusStr = remoteConfigured 
+            ? `| GitHub Access | ✅ Remote configured |\n`
+            : `| GitHub Access | ⚪ Local only |\n`;
 
         let result = `## 🧠 Global Knowledge Base Status
 

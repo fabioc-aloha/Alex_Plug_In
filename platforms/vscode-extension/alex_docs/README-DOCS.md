@@ -8,23 +8,23 @@
 
 **Table 1:** *Alex Documentation Suite Overview*
 
-| Document | Description |
-|----------|-------------|
-| **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
-| [Use Cases Guide](./USE-CASES.md) | 🎨 **NEW** - Deep dive into every domain Alex supports |
-| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md) | Folder structures for development, writing, research, management |
-| [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md) | Complete system architecture with diagrams |
-| [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md) | 🧬 Evolution model and protection system |
-| [Skills & Capabilities](./SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Copilot Integration](./COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
-| [Conscious Mind](./CONSCIOUS-MIND.md) | User-facing tools and interactions |
-| [Unconscious Mind](./UNCONSCIOUS-MIND.md) | Automatic background processes |
-| [Memory Systems](./MEMORY-SYSTEMS.md) | How Alex stores and retrieves knowledge |
-| [Project Structure](./PROJECT-STRUCTURE.md) | .github folder files and functions |
-| [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md) | Cross-project learning system |
-| [Cloud Sync](./CLOUD-SYNC.md) | GitHub Gist backup and sharing |
-| [Workspace Protection](./WORKSPACE-PROTECTION.md) | 🛡️ Kill switch and safety system |
-| [Quick Reference](./QUICK-REFERENCE.md) | Commands, tools, and shortcuts |
+| Document                                                                  | Description                                                      |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **[User Manual](./USER-MANUAL.md)**                                       | 📘 **START HERE** - Complete guide to using Alex                  |
+| [Use Cases Guide](./USE-CASES.md)                                         | 🎨 **NEW** - Deep dive into every domain Alex supports            |
+| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md)                 | Folder structures for development, writing, research, management |
+| [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md)            | Complete system architecture with diagrams                       |
+| [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md)               | 🧬 Evolution model and protection system                          |
+| [Skills & Capabilities](./SKILLS-CAPABILITIES.md)                         | Hard skills, soft skills, and wish list                          |
+| [Copilot Integration](./COPILOT-INTEGRATION.md)                           | How Alex uses native Copilot features                            |
+| [Conscious Mind](./CONSCIOUS-MIND.md)                                     | User-facing tools and interactions                               |
+| [Unconscious Mind](./UNCONSCIOUS-MIND.md)                                 | Automatic background processes                                   |
+| [Memory Systems](./MEMORY-SYSTEMS.md)                                     | How Alex stores and retrieves knowledge                          |
+| [Project Structure](./PROJECT-STRUCTURE.md)                               | .github folder files and functions                               |
+| [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md)                            | Cross-project learning system                                    |
+| [Knowledge Sharing](../../alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md) | GitHub-based team sharing                                        |
+| [Workspace Protection](./WORKSPACE-PROTECTION.md)                         | 🛡️ Kill switch and safety system                                  |
+| [Quick Reference](./QUICK-REFERENCE.md)                                   | Commands, tools, and shortcuts                                   |
 
 ---
 
@@ -72,27 +72,27 @@ flowchart TB
         end
     end
 
-    subgraph CLOUD["☁️ Cloud"]
-        GIST["📤 GitHub Gist"]
+    subgraph TEAM["👥 Team"]
+        REPO["📂 GitHub Repo"]
     end
 
     CM --> WM
     CMD --> PM & EM
     TOOLS --> DK & GK
 
-    BGS -.->|"Auto"| GIST
+    BGS -.->|"Auto"| REPO
     AID -.->|"Auto"| GK
     AFB -.->|"Auto"| GK
 
-    GK <-->|"Sync"| GIST
+    GK <-->|"Git"| REPO
 
     style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
     style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
     style MEMORY fill:#fff3e0,stroke:#ef6c00
-    style CLOUD fill:#f3e5f5,stroke:#7b1fa2
+    style TEAM fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-**Figure 1:** *Alex Cognitive Architecture Overview - Dual-mind processing with memory systems and cloud sync*
+**Figure 1:** *Alex Cognitive Architecture Overview - Dual-mind processing with memory systems and GitHub sharing*
 
 ---
 
@@ -133,7 +133,7 @@ Automatic processes that happen transparently:
 1. **Working Memory** - Current chat session (7±2 rules)
 2. **Local Memory** - Project-specific files in `.github/`
 3. **Global Memory** - Cross-project knowledge in `~/.alex/`
-4. **Cloud Memory** - GitHub Gist backup for sharing/recovery
+4. **Team Sync** - GitHub repo sharing for teams
 
 ---
 

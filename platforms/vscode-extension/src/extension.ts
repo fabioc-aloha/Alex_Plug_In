@@ -39,10 +39,6 @@ import {
   detectGlobalKnowledgeRepo,
 } from "./chat/globalKnowledge";
 import {
-  registerCloudSyncTools,
-  // Gist sync deprecated - syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, startBackgroundSync removed
-} from "./chat/cloudSync";
-import {
   checkHealth,
   getStatusBarDisplay,
   clearHealthCache,
@@ -148,13 +144,10 @@ export function activate(context: vscode.ExtensionContext) {
   // Register global knowledge tools for cross-project learning
   registerGlobalKnowledgeTools(context);
 
-  // Cloud sync tools deprecated - Gist sync removed in v5.0.1
-  // registerCloudSyncTools(context);
-
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
   registerContextMenuCommands(context);
 
-  // Register cognitive task provider (Meditate, Dream, Self-Actualize, Sync Knowledge)
+  // Register cognitive task provider (Meditate, Dream, Self-Actualize)
   context.subscriptions.push(
     vscode.tasks.registerTaskProvider(CognitiveTaskProvider.type, new CognitiveTaskProvider())
   );
