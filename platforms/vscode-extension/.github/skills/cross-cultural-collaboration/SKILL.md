@@ -308,8 +308,8 @@ Americans often sandwich criticism: "Great work on X, but Y needs improvement, a
 
 ## References
 
-- Meyer, E. (2014). *The Culture Map: Breaking Through the Invisible Boundaries of Global Business*
-- Lewis, R. (2018). *When Cultures Collide*
-- Hofstede Insights Country Comparison Tool
-- Harvard Business Review: "Getting Virtual Teams Right"
-- Harvard Business Review: "Being the Boss in Brussels, Boston, and Beijing"
+- Meyer, E. (2014). [*The Culture Map: Breaking Through the Invisible Boundaries of Global Business*](https://www.erinmeyer.com/book/)
+- Lewis, R. (2018). [*When Cultures Collide*](https://www.amazon.com/When-Cultures-Collide-4th-Successful/dp/1473684838)
+- [Hofstede Insights Country Comparison Tool](https://www.hofstede-insights.com/country-comparison-tool)
+- Harvard Business Review: [Getting Virtual Teams Right](https://hbr.org/2014/12/getting-virtual-teams-right)
+- Harvard Business Review: [Being the Boss in Brussels, Boston, and Beijing](https://hbr.org/2017/07/being-the-boss-in-brussels-boston-and-beijing)
