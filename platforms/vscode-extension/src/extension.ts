@@ -503,6 +503,24 @@ export function activate(context: vscode.ExtensionContext) {
     },
   );
 
+  // Working with Alex - prompting guide
+  const workingWithAlexDisposable = vscode.commands.registerCommand(
+    "alex.workingWithAlex",
+    async () => {
+      const guidePath = vscode.Uri.joinPath(
+        context.extensionUri,
+        "alex_docs",
+        "WORKING-WITH-ALEX.md",
+      );
+      try {
+        await vscode.commands.executeCommand("markdown.showPreview", guidePath);
+      } catch {
+        const doc = await vscode.workspace.openTextDocument(guidePath);
+        await vscode.window.showTextDocument(doc);
+      }
+    },
+  );
+
   // Status bar command - show quick status
   const showStatusDisposable = vscode.commands.registerCommand(
     "alex.showStatus",
@@ -527,6 +545,11 @@ export function activate(context: vscode.ExtensionContext) {
           label: "$(book) Open Documentation",
           description: "View Alex documentation",
           detail: "Ctrl+Alt+H",
+        },
+        {
+          label: "$(mortar-board) Working with Alex",
+          description: "Prompting guide for effective partnership",
+          detail: "📚 Learn to work with Alex effectively",
         },
         {
           label: "$(arrow-up) Upgrade Architecture",
@@ -653,6 +676,8 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.exportForM365");
         } else if (selected.label.includes("Documentation")) {
           vscode.commands.executeCommand("alex.openDocs");
+        } else if (selected.label.includes("Working with Alex")) {
+          vscode.commands.executeCommand("alex.workingWithAlex");
         } else if (selected.label.includes("Upgrade")) {
           vscode.commands.executeCommand("alex.upgrade");
         } else if (selected.label.includes("Setup Environment")) {
@@ -2026,6 +2051,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(pushDisposable);
   context.subscriptions.push(pullDisposable);
   context.subscriptions.push(openDocsDisposable);
+  context.subscriptions.push(workingWithAlexDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
   context.subscriptions.push(runAuditDisposable);

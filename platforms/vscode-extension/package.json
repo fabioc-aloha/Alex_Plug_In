@@ -107,6 +107,11 @@
         "icon": "$(book)"
       },
       {
+        "command": "alex.workingWithAlex",
+        "title": "Alex: Working with Alex (Prompting Guide)",
+        "icon": "$(mortar-board)"
+      },
+      {
         "command": "alex.showStatus",
         "title": "Alex: Status",
         "icon": "$(info)"
