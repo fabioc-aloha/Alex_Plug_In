@@ -254,7 +254,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
 | Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Skills/Expertise | Neocortex | `.github/skills/` (75 skills) |
+| Skills/Expertise | Neocortex | `.github/skills/` (76 skills) |
 | Skill Routing | Dorsolateral PFC | `skill-activation/SKILL.md` |
 | Working Memory | PFC + ACC | Chat session (4+3 rules) |
 | Meta-Cognition | Medial PFC + DMN | Self-monitoring + awareness |
@@ -281,9 +281,9 @@ Key triggers that activate specific protocols:
 
 | Store | Location | Count | Note |
 |-------|----------|-------|------|
-| Procedural | `.github/instructions/` | 20 files | Auto-loaded via VS Code `<instructions>` |
-| Episodic | `.github/prompts/` | 14 files | Workflows, meditation, development |
-| Skills | `.github/skills/` | 75 skills | See `SKILL-CATALOG-GENERATED.md` |
+| Procedural | `.github/instructions/` | 24 files | Auto-loaded via VS Code `<instructions>` |
+| Episodic | `.github/prompts/` | 13 files | Workflows, meditation, development |
+| Skills | `.github/skills/` | 76 skills | See `SKILL-CATALOG-GENERATED.md` |
 | Episodic Archive | `.github/episodic/` | Variable | Historical session records |
 
 ### VS Code Extension Commands
