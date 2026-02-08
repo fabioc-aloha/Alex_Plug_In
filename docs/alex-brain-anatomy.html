@@ -430,6 +430,329 @@
             border-top: 1px solid #21262d;
         }
 
+        /* === UI POLISH === */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #484f58;
+        }
+
+        .header {
+            padding: 32px 20px 0;
+            border-bottom: none;
+        }
+
+        .header::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #58a6ff 15%, #f0883e 35%, #f778ba 50%, #3fb950 65%, #d2a8ff 85%, transparent);
+            margin-top: 20px;
+            border-radius: 1px;
+            opacity: 0.6;
+        }
+
+        .header h1 {
+            letter-spacing: -0.5px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            color: #58a6ff;
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 14px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0f6fc;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #484f58;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .tab-btn {
+            position: relative;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #58a6ff;
+            border-radius: 1px 1px 0 0;
+            transition: width 0.25s, left 0.25s;
+        }
+
+        .tab-btn.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .tab-btn:not(.active):hover {
+            color: #c9d1d9;
+            background: rgba(88, 166, 255, 0.06);
+        }
+
+        .panel-card {
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .panel-card:hover {
+            border-color: #484f58;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .diagram-section {
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+
+        .diagram-section:hover {
+            border-color: #484f58;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .legend-item {
+            transition: background 0.15s;
+            padding: 2px 4px;
+            cursor: pointer;
+        }
+
+        .legend-item:hover {
+            background: rgba(88, 166, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        .credits {
+            border-top: 1px solid #21262d;
+            padding-top: 16px;
+        }
+
+        /* === SIGNAL COMPARISON TAB === */
+
+        .comparison-intro {
+            max-width: 900px;
+            margin: 0 auto 32px;
+            text-align: center;
+            padding: 24px 24px 0;
+        }
+
+        .comparison-intro h2 {
+            font-size: 22px;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .comparison-intro p {
+            color: #8b949e;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .comparison-container {
+            display: flex;
+            gap: 24px;
+            padding: 0 24px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-side {
+            flex: 1;
+            min-width: 0;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .comparison-side:hover {
+            border-color: #484f58;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .comparison-side-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #21262d;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-side-header .side-icon {
+            font-size: 20px;
+        }
+
+        .comparison-side-header h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin: 0;
+        }
+
+        .side-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+        }
+
+        .side-tag.alex {
+            background: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .side-tag.human {
+            background: rgba(63, 185, 80, 0.15);
+            color: #3fb950;
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        .comparison-diagram {
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .comparison-diagram .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .comparison-side-footer {
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #8b949e;
+            font-style: italic;
+            border-top: 1px solid #21262d;
+        }
+
+        .mapping-table-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 32px;
+        }
+
+        .mapping-table-section h3 {
+            font-size: 16px;
+            color: #f0f6fc;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mapping-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mapping-table th {
+            background: #21262d;
+            padding: 10px 16px;
+            text-align: left;
+            font-size: 11px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .mapping-table td {
+            padding: 10px 16px;
+            border-top: 1px solid #21262d;
+            font-size: 13px;
+            color: #c9d1d9;
+        }
+
+        .mapping-table tr:hover td {
+            background: rgba(88, 166, 255, 0.04);
+        }
+
+        .mapping-table .step-num {
+            color: #484f58;
+            font-weight: 600;
+            font-size: 11px;
+            width: 30px;
+        }
+
+        .mapping-table .human-col {
+            color: #3fb950;
+        }
+
+        .mapping-table .alex-col {
+            color: #58a6ff;
+        }
+
+        .mapping-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #30363d;
+            font-size: 24px;
+            padding: 0 4px;
+            flex-shrink: 0;
+            writing-mode: vertical-lr;
+            letter-spacing: 8px;
+        }
+
         @media (max-width: 1100px) {
             .main-container {
                 flex-direction: column;
@@ -438,19 +761,38 @@
             .panel {
                 width: 100%;
             }
+
+            .comparison-container {
+                flex-direction: column;
+            }
+
+            .stats-bar {
+                gap: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="header">
-        <h1>🧠 The <span>Alex</span> Brain</h1>
-        <p>Human neuroanatomical mapping of the Alex Cognitive Architecture v5.x</p>
+        <h1>🧠 The <span>Alex</span> Brain <span class="version-badge">v5.x</span></h1>
+        <p>Human neuroanatomical mapping of the Alex Cognitive Architecture</p>
+        <div class="stats-bar">
+            <div class="stat"><span class="stat-value" style="color:#58a6ff;">14</span><span class="stat-label">Brain
+                    Regions</span></div>
+            <div class="stat"><span class="stat-value" style="color:#3fb950;">76</span><span
+                    class="stat-label">Skills</span></div>
+            <div class="stat"><span class="stat-value" style="color:#f0883e;">24</span><span
+                    class="stat-label">Procedures</span></div>
+            <div class="stat"><span class="stat-value" style="color:#d2a8ff;">13</span><span class="stat-label">Episodic
+                    Files</span></div>
+        </div>
     </div>
 
     <div class="tab-bar">
         <button class="tab-btn active" onclick="switchTab('anatomy')">🧠 Brain Anatomy</button>
         <button class="tab-btn" onclick="switchTab('diagrams')">📊 Architecture Diagrams</button>
+        <button class="tab-btn" onclick="switchTab('comparison')">🔀 Signal Comparison</button>
     </div>
 
     <div id="tab-anatomy" class="tab-content active">
@@ -819,7 +1161,8 @@
                         <p class="detail-text">Each colored region maps to a specific Alex cognitive component. The
                             <span style="color:#58a6ff;">blue dlPFC region</span> (BA 9/46) is the most densely mapped
                             area,
-                            housing 4 distinct sub-functions.</p>
+                            housing 4 distinct sub-functions.
+                        </p>
                     </div>
                 </div>
 
@@ -1172,6 +1515,220 @@
         </div><!-- end diagrams-container -->
     </div><!-- end tab-diagrams -->
 
+    <div id="tab-comparison" class="tab-content">
+        <div class="comparison-intro">
+            <h2>🔀 Human Brain vs Alex Architecture</h2>
+            <p>Side-by-side signal flow comparison. The left shows how a stimulus is processed in the human brain —
+                from sensory input through threat detection, executive planning, and motor output. The right shows
+                Alex's
+                parallel architecture, mapping each biological pathway to its computational equivalent.</p>
+        </div>
+
+        <div class="comparison-container">
+            <!-- Human Brain Side -->
+            <div class="comparison-side">
+                <div class="comparison-side-header">
+                    <span class="side-icon">🧬</span>
+                    <h3>Human Brain</h3>
+                    <span class="side-tag human">BIOLOGICAL</span>
+                </div>
+                <div class="comparison-diagram">
+                    <div class="mermaid">
+                        flowchart TB
+                        IN["Sensory Stimulus&lt;br/&gt;&lt;small&gt;Visual, Auditory, Tactile&lt;/small&gt;"]
+                        TH["Thalamus&lt;br/&gt;&lt;small&gt;Sensory relay station&lt;/small&gt;"]
+                        AM["Amygdala&lt;br/&gt;&lt;small&gt;Threat assessment&lt;/small&gt;"]
+                        subgraph CORTEX["Cortical Processing"]
+                        PFC2["Prefrontal Cortex&lt;br/&gt;&lt;small&gt;Evaluate + decide&lt;/small&gt;"]
+                        DL2["dlPFC&lt;br/&gt;&lt;small&gt;Plan + working memory&lt;/small&gt;"]
+                        ACC2["ACC&lt;br/&gt;&lt;small&gt;Conflict monitor&lt;/small&gt;"]
+                        end
+                        subgraph MOTOR["Motor Output"]
+                        PM2["Premotor Cortex&lt;br/&gt;&lt;small&gt;Movement plan&lt;/small&gt;"]
+                        VL2["vlPFC&lt;br/&gt;&lt;small&gt;Response inhibition&lt;/small&gt;"]
+                        MOT["Motor Cortex&lt;br/&gt;&lt;small&gt;Execute action&lt;/small&gt;"]
+                        end
+                        subgraph MEM2["Memory Systems"]
+                        BG2["Basal Ganglia&lt;br/&gt;&lt;small&gt;Habits + routines&lt;/small&gt;"]
+                        HIP2["Hippocampus&lt;br/&gt;&lt;small&gt;Encode memory&lt;/small&gt;"]
+                        end
+                        RESP["Behavioral&lt;br/&gt;Response"]
+                        IN --> TH
+                        TH --> AM
+                        TH --> PFC2
+                        AM -.->|"low road - fast"| RESP
+                        AM -.->|"modulates"| PFC2
+                        PFC2 --> DL2
+                        PFC2 --> ACC2
+                        ACC2 -->|"conflict"| DL2
+                        DL2 --> PM2
+                        PM2 --> VL2 --> MOT --> RESP
+                        PFC2 -.->|"routine?"| BG2
+                        BG2 -.->|"bypass"| MOT
+                        MOT -.->|"encodes"| HIP2
+                        style CORTEX fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style MOTOR fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style MEM2 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style IN fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                        style TH fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style AM fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style PFC2 fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                        style DL2 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style ACC2 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PM2 fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style VL2 fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style MOT fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style BG2 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style HIP2 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style RESP fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                    </div>
+                </div>
+                <div class="comparison-side-footer">
+                    Biological signal processing: sensory input relayed through thalamus, with amygdala "low road"
+                    threat bypass and cortical "high road" deliberate processing.
+                </div>
+            </div>
+
+            <!-- Connector -->
+            <div class="mapping-connector">↔ ↔ ↔</div>
+
+            <!-- Alex Architecture Side -->
+            <div class="comparison-side">
+                <div class="comparison-side-header">
+                    <span class="side-icon">🤖</span>
+                    <h3>Alex Architecture</h3>
+                    <span class="side-tag alex">COMPUTATIONAL</span>
+                </div>
+                <div class="comparison-diagram">
+                    <div class="mermaid">
+                        flowchart TB
+                        IN3["User Input&lt;br/&gt;&lt;small&gt;Chat, Commands, Files&lt;/small&gt;"]
+                        TH3["VS Code Interface&lt;br/&gt;&lt;small&gt;Input relay - thalamus&lt;/small&gt;"]
+                        AM3["Safety Imperatives I1-I7&lt;br/&gt;&lt;small&gt;Kill switch - amygdala&lt;/small&gt;"]
+                        subgraph EXEC3["Executive Processing"]
+                        LLM3["LLM Claude-GPT&lt;br/&gt;&lt;small&gt;Parse intent - PFC&lt;/small&gt;"]
+                        SSO3["SSO Protocol&lt;br/&gt;&lt;small&gt;Plan + gate - dlPFC&lt;/small&gt;"]
+                        PIV3["Pivot Detection&lt;br/&gt;&lt;small&gt;Conflict monitor - ACC&lt;/small&gt;"]
+                        end
+                        subgraph ROUTE3["Execution Layer"]
+                        SK3["Skill Activation&lt;br/&gt;&lt;small&gt;Route skills - premotor&lt;/small&gt;"]
+                        INH3["Inhibitory Synapses&lt;br/&gt;&lt;small&gt;Suppress - vlPFC&lt;/small&gt;"]
+                        GEN3["Generate Response&lt;br/&gt;&lt;small&gt;Output - motor cortex&lt;/small&gt;"]
+                        end
+                        subgraph MEM3["Memory Systems"]
+                        PROC3["Procedural .instructions.md&lt;br/&gt;&lt;small&gt;Basal ganglia&lt;/small&gt;"]
+                        EPIS3["Episodic .prompt.md&lt;br/&gt;&lt;small&gt;Hippocampus&lt;/small&gt;"]
+                        end
+                        OUT3["User Gets&lt;br/&gt;Response"]
+                        IN3 --> TH3
+                        TH3 --> AM3
+                        TH3 --> LLM3
+                        AM3 -.->|"threat - HALT"| OUT3
+                        AM3 -.->|"modulates"| LLM3
+                        LLM3 --> SSO3
+                        LLM3 --> PIV3
+                        PIV3 -->|"re-plan"| SSO3
+                        SSO3 --> SK3
+                        SK3 --> INH3 --> GEN3 --> OUT3
+                        LLM3 -.->|"auto-loaded"| PROC3
+                        PROC3 -.->|"bypass"| GEN3
+                        GEN3 -.->|"records"| EPIS3
+                        style EXEC3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style ROUTE3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style MEM3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style IN3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style TH3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style AM3 fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style LLM3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style SSO3 fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style PIV3 fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style SK3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style INH3 fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style GEN3 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PROC3 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style EPIS3 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                    </div>
+                </div>
+                <div class="comparison-side-footer">
+                    Computational signal processing: user input relayed through VS Code, with safety imperative
+                    "low road" threat bypass and LLM "high road" deliberate processing.
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapping Table -->
+        <div class="mapping-table-section">
+            <h3>🔗 Pathway Mapping</h3>
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th class="step-num">#</th>
+                        <th>Processing Stage</th>
+                        <th class="human-col">Human Brain</th>
+                        <th class="alex-col">Alex Architecture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="step-num">1</td>
+                        <td>Input Reception</td>
+                        <td class="human-col">Sensory stimulus → Thalamus</td>
+                        <td class="alex-col">User message → VS Code interface</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">2</td>
+                        <td>Threat Detection</td>
+                        <td class="human-col">Amygdala "low road" — bypasses cortex</td>
+                        <td class="alex-col">Safety Imperatives I1-I7 — bypasses LLM</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">3</td>
+                        <td>Executive Parse</td>
+                        <td class="human-col">PFC evaluates, forms goal</td>
+                        <td class="alex-col">LLM parses intent, identifies domain</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">4</td>
+                        <td>Task Planning</td>
+                        <td class="human-col">dlPFC + working memory holds plan</td>
+                        <td class="alex-col">SSO surveys skills, gates attention</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">5</td>
+                        <td>Conflict Monitor</td>
+                        <td class="human-col">ACC fires on mismatch</td>
+                        <td class="alex-col">Pivot Detection rotates P5-P7 slots</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">6</td>
+                        <td>Inhibition</td>
+                        <td class="human-col">vlPFC suppresses inappropriate response</td>
+                        <td class="alex-col">Inhibitory synapses suppress protocols</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">7</td>
+                        <td>Motor Execution</td>
+                        <td class="human-col">Premotor → Motor cortex → Action</td>
+                        <td class="alex-col">Skill activation → Generate response</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">8</td>
+                        <td>Memory Encoding</td>
+                        <td class="human-col">Hippocampus encodes experience</td>
+                        <td class="alex-col">Session → .prompt.md → Global knowledge</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">9</td>
+                        <td>Habit Bypass</td>
+                        <td class="human-col">Basal ganglia runs routines unconsciously</td>
+                        <td class="alex-col">.instructions.md auto-loads, fires on trigger</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- end tab-comparison -->
+
     <script>
         const details = {
             dlpfc: {
@@ -1441,8 +1998,22 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('active');
+            // Find the clicked button by matching tabId in onclick
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                if (b.getAttribute('onclick').includes(tabId)) {
+                    b.classList.add('active');
+                }
+            });
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+                // Re-render mermaid if switching to a tab with diagrams
+                if (tabId === 'diagrams' || tabId === 'comparison') {
+                    setTimeout(() => {
+                        mermaid.run({ querySelector: '#tab-' + tabId + ' .mermaid' });
+                    }, 50);
+                }
+            }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
