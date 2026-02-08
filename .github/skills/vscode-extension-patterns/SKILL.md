@@ -18,7 +18,7 @@ VS Code APIs evolve with each monthly release. Patterns may become outdated or b
 - Extension API deprecations
 - Webview security policy changes
 
-**Last validated:** January 2026 (VS Code 1.96+)
+**Last validated:** February 2026 (VS Code 1.109+)
 
 **Check current state:** [VS Code API](https://code.visualstudio.com/api), [Release Notes](https://code.visualstudio.com/updates)
 
@@ -150,6 +150,130 @@ async function autoIncrementGoals(activityType: 'session' | 'insight') {
     await saveGoalsData(data);
 }
 ```
+
+## SecretStorage for Sensitive Tokens
+
+**Never store secrets in settings** — use VS Code's SecretStorage API:
+
+```typescript
+// Module-level cache
+let secretStorage: vscode.SecretStorage | null = null;
+let cachedToken: string | null = null;
+
+// Initialize during activation
+export async function initSecrets(context: vscode.ExtensionContext): Promise<void> {
+    secretStorage = context.secrets;
+    cachedToken = await secretStorage.get('myExtension.apiToken') || null;
+    
+    // Migration: Move token from settings to secrets
+    const config = vscode.workspace.getConfiguration('myExtension');
+    const settingsToken = config.get<string>('apiToken')?.trim();
+    if (settingsToken && !cachedToken) {
+        await secretStorage.store('myExtension.apiToken', settingsToken);
+        cachedToken = settingsToken;
+        await config.update('apiToken', undefined, vscode.ConfigurationTarget.Global);
+        vscode.window.showInformationMessage('Token migrated to secure storage.');
+    }
+}
+
+// Synchronous access to cached value
+function getToken(): string | null {
+    return cachedToken;
+}
+```
+
+**Key points:**
+- `context.secrets.get()` / `store()` / `delete()` are async
+- Cache at module level for sync access
+- Migrate existing settings tokens on first run
+- Mark old setting as deprecated in package.json
+
+## Webview CSP Security
+
+**Always add Content-Security-Policy** when `enableScripts: true`:
+
+```typescript
+import { getNonce } from './sanitize';
+
+function getWebviewHtml(webview: vscode.Webview): string {
+    const nonce = getNonce();
+    return `<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        style-src ${webview.cspSource} 'unsafe-inline';
+        script-src 'nonce-${nonce}';
+        img-src ${webview.cspSource} https: data:;
+        font-src ${webview.cspSource};
+    ">
+</head>
+<body>
+    <script nonce="${nonce}">
+        const vscode = acquireVsCodeApi();
+        // ... your code
+    </script>
+</body>
+</html>`;
+}
+
+// Nonce generator
+function getNonce(): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return Array.from({ length: 32 }, () => 
+        chars.charAt(Math.floor(Math.random() * chars.length))
+    ).join('');
+}
+```
+
+## Telemetry Opt-Out Compliance
+
+**Always respect VS Code's telemetry settings:**
+
+```typescript
+function isTelemetryEnabled(): boolean {
+    // Check VS Code global setting first
+    if (!vscode.env.isTelemetryEnabled) {
+        return false;
+    }
+    // Then check extension-specific setting
+    const config = vscode.workspace.getConfiguration('myExtension');
+    return config.get<boolean>('telemetry.enabled', true);
+}
+
+function log(event: string, data?: Record<string, unknown>): void {
+    if (!isTelemetryEnabled()) {
+        return;
+    }
+    // Send telemetry...
+}
+```
+
+## Configuration Change Listeners
+
+**React to settings changes at runtime:**
+
+```typescript
+export function activate(context: vscode.ExtensionContext) {
+    // Listen for configuration changes
+    context.subscriptions.push(
+        vscode.workspace.onDidChangeConfiguration(e => {
+            if (e.affectsConfiguration('myExtension.featureA')) {
+                // Refresh feature A
+                refreshFeatureA();
+            }
+            if (e.affectsConfiguration('myExtension.telemetry')) {
+                // Update telemetry state
+            }
+        })
+    );
+}
+```
+
+**Key points:**
+- Use `affectsConfiguration()` to filter relevant changes
+- Push listener to `context.subscriptions` for cleanup
+- Re-read config values, don't cache indefinitely
 
 ## Synapses
 
