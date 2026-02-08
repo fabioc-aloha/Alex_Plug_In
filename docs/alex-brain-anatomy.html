@@ -422,6 +422,8 @@
         .diagram-body .mermaid svg {
             max-width: 100%;
             height: auto;
+            background: #f0f0f0 !important;
+            border-radius: 8px;
         }
 
         .diagram-caption {
@@ -671,6 +673,8 @@
         .comparison-diagram .mermaid svg {
             max-width: 100%;
             height: auto;
+            background: #f0f0f0 !important;
+            border-radius: 8px;
         }
 
         .comparison-side-footer {
@@ -2131,17 +2135,21 @@
                 primaryBorderColor: '#d1d9e0',
                 lineColor: '#656d76',
                 secondaryColor: '#f6f8fa',
-                tertiaryColor: '#ffffff',
+                tertiaryColor: '#f0f0f0',
                 background: '#f0f0f0',
                 mainBkg: '#f6f8fa',
                 nodeBorder: '#d1d9e0',
                 titleColor: '#1f2328',
-                pie1: '#3fb950',
-                pie2: '#ff6b6b'
+                fontSize: '14px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
             },
             flowchart: {
                 useMaxWidth: true,
-                htmlLabels: true
+                htmlLabels: true,
+                nodeSpacing: 30,
+                rankSpacing: 40,
+                padding: 15,
+                curve: 'basis'
             }
         });
     </script>
