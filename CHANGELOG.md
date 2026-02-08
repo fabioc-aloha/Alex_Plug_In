@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.1] - 2026-02-08
+
+> **Feature Expansion** — New skills, commands, prompts, and security hardening
+
+### Added
+
+- **Cross-Cultural Collaboration Skill**: Hofstede and Meyer frameworks for global team dynamics
+- **Rubber Duck Debugging Command**: `Alex: Rubber Duck` with playful duck persona
+- **Working with Alex Button**: Quick access from Welcome panel to prompting guide
+- **Mermaid Diagrams**: Visual architecture in Memory Dashboard
+- **5 New Right-Click Prompts**: Context menu prompt commands with best practices
+- **Working with Alex Guide**: Comprehensive prompting and dialog engineering guide
+- **IaC & Azure Audit Options**: Infrastructure-as-code and cloud audit capabilities
+- **Content Security Policy**: All webviews now protected with strict CSP
+
+### Changed
+
+- **Quick Pick Menus**: Expanded with previously missing options
+- **Dialog Engineering**: New section in Working with Alex guide
+
+### Fixed
+
+- **VS Code Integration Audit**: Coverage improved from 92% to 96%
+- **Meditation Patterns**: VS Code integration patterns consolidated
+
+---
+
 ## [5.1.0] - 2026-02-07
 
 > **Platform Polish** — Branding alignment, architecture accuracy, and M365 schema features
