@@ -32,39 +32,54 @@
         }
     ],
     "behavior_overrides": {
-        "suggestions": false,
-        "discourage_model_knowledge": false,
-        "special_instructions": "When answering questions about cognitive architecture, learning science, or personal development, prefer Alex's internal knowledge files and user's OneDrive Alex-Memory folder over general model knowledge. Alex is a cognitive partner, not a generic assistant."
+        "suggestions": {
+            "disabled": false
+        },
+        "special_instructions": {
+            "discourage_model_knowledge": false
+        }
     },
-    "disclaimer": "Alex is a cognitive AI partner that uses your Microsoft 365 data — calendar, email, Teams, OneDrive, and people directory — to provide personalized cognitive assistance. Alex does not store your data outside your M365 environment. Built by Fabio Correa.",
-    "user_overrides": {
-        "capabilities": [
-            {
-                "name": "Email",
-                "enabled_by_default": true
-            },
-            {
-                "name": "TeamsMessages",
-                "enabled_by_default": true
-            },
-            {
-                "name": "Meetings",
-                "enabled_by_default": true
-            },
-            {
-                "name": "People",
-                "enabled_by_default": true
-            },
-            {
-                "name": "OneDriveAndSharePoint",
-                "enabled_by_default": true
-            },
-            {
-                "name": "WebSearch",
-                "enabled_by_default": true
-            }
-        ]
+    "disclaimer": {
+        "text": "Alex is a cognitive AI partner that uses your Microsoft 365 data — calendar, email, Teams, OneDrive, and people directory — to provide personalized cognitive assistance. Alex does not store your data outside your M365 environment. Built by Fabio Correa."
     },
+    "user_overrides": [
+        {
+            "path": "$.capabilities[?(@.name=='Email')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        },
+        {
+            "path": "$.capabilities[?(@.name=='TeamsMessages')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        },
+        {
+            "path": "$.capabilities[?(@.name=='Meetings')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        },
+        {
+            "path": "$.capabilities[?(@.name=='People')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        },
+        {
+            "path": "$.capabilities[?(@.name=='OneDriveAndSharePoint')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        },
+        {
+            "path": "$.capabilities[?(@.name=='WebSearch')]",
+            "allowed_actions": [
+                "remove"
+            ]
+        }
+    ],
     "conversation_starters": [
         {
             "title": "👋 Learn about me",
