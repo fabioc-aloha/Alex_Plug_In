@@ -242,6 +242,11 @@
         "icon": "$(bug)"
       },
       {
+        "command": "alex.rubberDuck",
+        "title": "Alex: Rubber Duck Debug",
+        "icon": "$(comment-discussion)"
+      },
+      {
         "command": "alex.explainThis",
         "title": "Alex: Explain This",
         "icon": "$(question)"
@@ -391,8 +396,13 @@
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
         },
         {
-          "command": "alex.refactorThis",
+          "command": "alex.rubberDuck",
           "group": "1_ask@5",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.refactorThis",
+          "group": "1_ask@6",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
         },
         {
@@ -477,8 +487,12 @@
           "group": "1_ask@4"
         },
         {
-          "command": "alex.refactorThis",
+          "command": "alex.rubberDuck",
           "group": "1_ask@5"
+        },
+        {
+          "command": "alex.refactorThis",
+          "group": "1_ask@6"
         },
         {
           "command": "alex.simplifyThis",

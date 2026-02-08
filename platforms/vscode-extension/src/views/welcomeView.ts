@@ -134,6 +134,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "debugThis":
           vscode.commands.executeCommand("alex.debugThis");
           break;
+        case "rubberDuck":
+          vscode.commands.executeCommand("alex.rubberDuck");
+          break;
         case "codeReview":
           vscode.commands.executeCommand("alex.codeReview");
           break;
@@ -1082,6 +1085,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('debugThis')" title="Debug code or error message">
                     <span class="action-icon">🐛</span>
                     <span class="action-text">Debug This</span>
+                </button>
+                <button class="action-btn" onclick="cmd('rubberDuck')" title="Explain your problem to Alex as rubber duck">
+                    <span class="action-icon">🦆</span>
+                    <span class="action-text">Rubber Duck</span>
                 </button>
                 <button class="action-btn" onclick="cmd('generateTests')" title="Generate tests for selection or pasted code">
                     <span class="action-icon">🧪</span>

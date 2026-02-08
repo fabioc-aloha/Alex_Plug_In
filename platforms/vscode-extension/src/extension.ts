@@ -617,6 +617,11 @@ export function activate(context: vscode.ExtensionContext) {
           detail: "🐛 Requires text selection",
         },
         {
+          label: "$(comment-discussion) Rubber Duck Debug",
+          description: "Explain your problem to Alex as rubber duck",
+          detail: "🦆 Dialog-based debugging",
+        },
+        {
           label: "$(question) Explain This",
           description: "Level-appropriate code explanation",
           detail: "📚 Junior/senior/reviewer/teacher levels",
@@ -733,6 +738,8 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.codeReview");
         } else if (selected.label.includes("Debug This")) {
           vscode.commands.executeCommand("alex.debugThis");
+        } else if (selected.label.includes("Rubber Duck")) {
+          vscode.commands.executeCommand("alex.rubberDuck");
         } else if (selected.label.includes("Explain This")) {
           vscode.commands.executeCommand("alex.explainThis");
         } else if (selected.label.includes("Refactor This")) {
@@ -999,6 +1006,49 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
           `🐛 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Rubber Duck Debugging command
+  const rubberDuckDisposable = vscode.commands.registerCommand(
+    "alex.rubberDuck",
+    async () => {
+      const endLog = telemetry.logTimed("command", "rubber_duck");
+      try {
+        // Get optional context from selection
+        let context = '';
+        const editor = vscode.window.activeTextEditor;
+        if (editor && !editor.selection.isEmpty) {
+          const selectedText = editor.document.getText(editor.selection);
+          const languageId = editor.document.languageId;
+          context = `\n\nHere's the code I'm looking at:\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+        }
+
+        const prompt = `🦆 **Rubber Duck Debug Session**
+
+You are my rubber duck. I need to explain my problem to you.
+
+**Your role:**
+- Listen actively and ask clarifying questions
+- Don't jump to solutions immediately
+- Help me think through the problem step by step
+- Ask "what should happen?" and "what actually happens?"
+- Prompt me to explain my assumptions
+- Only offer suggestions after I've fully explained
+
+**Start by asking:** "What problem are you trying to solve?"${context}`;
+
+        await vscode.env.clipboard.writeText(prompt);
+        
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          "🦆 Rubber duck prompt copied. Paste in Agent chat (Ctrl+V) to start."
         );
         
         endLog(true);
@@ -2431,6 +2481,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(releasePreflightDisposable);
   context.subscriptions.push(codeReviewDisposable);
   context.subscriptions.push(debugThisDisposable);
+  context.subscriptions.push(rubberDuckDisposable);
   context.subscriptions.push(explainThisDisposable);
   context.subscriptions.push(refactorThisDisposable);
   context.subscriptions.push(securityReviewDisposable);
