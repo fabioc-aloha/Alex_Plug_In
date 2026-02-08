@@ -563,10 +563,16 @@
         "path": "./.github/skills/airs-appropriate-reliance"
       },
       {
+        "path": "./.github/skills/alex-effort-estimation"
+      },
+      {
         "path": "./.github/skills/anti-hallucination"
       },
       {
         "path": "./.github/skills/api-design"
+      },
+      {
+        "path": "./.github/skills/api-documentation"
       },
       {
         "path": "./.github/skills/appropriate-reliance"
@@ -587,6 +593,9 @@
         "path": "./.github/skills/bootstrap-learning"
       },
       {
+        "path": "./.github/skills/brain-qa"
+      },
+      {
         "path": "./.github/skills/business-analysis"
       },
       {
@@ -605,16 +614,25 @@
         "path": "./.github/skills/creative-writing"
       },
       {
+        "path": "./.github/skills/cross-cultural-collaboration"
+      },
+      {
         "path": "./.github/skills/debugging-patterns"
       },
       {
         "path": "./.github/skills/error-recovery-patterns"
       },
       {
+        "path": "./.github/skills/fabric-notebook-publish"
+      },
+      {
         "path": "./.github/skills/gamma-presentations"
       },
       {
         "path": "./.github/skills/git-workflow"
+      },
+      {
+        "path": "./.github/skills/global-knowledge-sync"
       },
       {
         "path": "./.github/skills/grant-writing"
@@ -641,10 +659,16 @@
         "path": "./.github/skills/localization"
       },
       {
+        "path": "./.github/skills/m365-agent-debugging"
+      },
+      {
         "path": "./.github/skills/markdown-mermaid"
       },
       {
         "path": "./.github/skills/mcp-development"
+      },
+      {
+        "path": "./.github/skills/microsoft-fabric"
       },
       {
         "path": "./.github/skills/microsoft-sfi"
@@ -654,6 +678,9 @@
       },
       {
         "path": "./.github/skills/post-mortem"
+      },
+      {
+        "path": "./.github/skills/pptx-generation"
       },
       {
         "path": "./.github/skills/practitioner-research"
@@ -680,6 +707,15 @@
         "path": "./.github/skills/refactoring-patterns"
       },
       {
+        "path": "./.github/skills/release-preflight"
+      },
+      {
+        "path": "./.github/skills/release-process"
+      },
+      {
+        "path": "./.github/skills/research-project-scaffold"
+      },
+      {
         "path": "./.github/skills/root-cause-analysis"
       },
       {
@@ -687,6 +723,9 @@
       },
       {
         "path": "./.github/skills/security-review"
+      },
+      {
+        "path": "./.github/skills/skill-activation"
       },
       {
         "path": "./.github/skills/skill-catalog-generator"
@@ -699,6 +738,9 @@
       },
       {
         "path": "./.github/skills/testing-strategies"
+      },
+      {
+        "path": "./.github/skills/teams-app-patterns"
       },
       {
         "path": "./.github/skills/text-to-speech"
@@ -764,6 +806,18 @@
           "default": false,
           "description": "Automatically save insights with very high confidence (>0.8) without prompting"
         },
+        "alex.globalKnowledge.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "machine",
+          "description": "Enable Global Knowledge features for cross-project learning and memory."
+        },
+        "alex.globalKnowledge.cloudSync.enabled": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "description": "Enable cloud synchronization for Global Knowledge via GitHub repository."
+        },
         "alex.globalKnowledge.repoPath": {
           "type": "string",
           "default": "",
@@ -794,7 +848,8 @@
           "type": "string",
           "default": "",
           "scope": "machine",
-          "markdownDescription": "GitHub Personal Access Token for private repository access. Only needed if VS Code GitHub auth is disabled. Token needs `repo` scope for private repos. **Stored in VS Code settings - use secrets for production.**"
+          "deprecationMessage": "This setting is deprecated. Tokens are now stored securely using VS Code SecretStorage. Any existing token will be migrated automatically on extension activation.",
+          "markdownDescription": "**DEPRECATED**: GitHub tokens are now stored securely via SecretStorage. Any token here will be migrated automatically and cleared from settings."
         },
         "alex.logos.brandfetchClientId": {
           "type": "string",
@@ -1463,7 +1518,7 @@
           {
             "id": "alex.welcome",
             "title": "Meet Alex",
-            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **76 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
+            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **77 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
             "media": {
               "markdown": "alex_docs/README.md"
             }

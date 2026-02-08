@@ -157,6 +157,49 @@ When generating responses, catch these patterns:
 - "Always use...", "Never do..." → Add context/exceptions
 - Exact numbers without source → Round or add "approximately"
 
+## Cognitive Flexibility & Pivot Detection
+
+**Neuroanatomical basis**: The dlPFC collaborates with the anterior cingulate cortex (ACC) to detect conflict between current goals and incoming stimuli. When a mismatch is detected, the ACC signals the dlPFC to reallocate resources — a task switch.
+
+### Pivot Detection Protocol
+
+A **pivot** occurs when the user's request no longer matches the active working memory slots (P5-P7).
+
+**Detection Signals**:
+
+| Signal | Confidence | Example |
+|--------|-----------|----------|
+| Explicit domain shift | High | Was discussing code, now asking about branding |
+| New action verb category | Medium | Was reviewing, now deploying |
+| Unrelated follow-up | Medium | Previous task complete, new topic introduced |
+| Conflicting P6 slot | High | P6 is "testing" but request is about documentation |
+
+**Response Protocol**:
+1. **Detect**: Request doesn't match any active P5-P7 domain slots
+2. **Acknowledge**: Brief internal note (no user-facing announcement unless dramatic shift)
+3. **Rotate**: Clear stale P5-P7 slots, assign new domains matching the pivot
+4. **Re-plan**: If new task is complex (3+ ops), re-run Skill Selection Optimization
+5. **Carry forward**: Preserve any unfinished todo items from prior context
+
+**Anti-pattern**: Continuing to apply stale domain context after user has pivoted — the cognitive equivalent of answering a math question using a reading comprehension framework.
+
+**Integration with SSO**: When a pivot is detected AND the new task is complex, trigger a fresh SSO pass with full attention gating reset. Nothing carries over from the prior task except core P1-P4 slots.
+
+### Inhibitory Control
+
+**Neuroanatomical basis**: The dlPFC and ventrolateral PFC (vlPFC) work together to suppress irrelevant responses. In Alex, this manifests as inhibitory synapses — connections that PREVENT activation rather than triggering it.
+
+**When to Inhibit**:
+- Simple task → Suppress complex planning protocols (SSO, deep-thinking)
+- Active meditation → Suppress code execution, deployment, testing protocols
+- Dream state → Suppress interactive, conversational protocols
+- Code implementation → Suppress branding, meditation, release protocols
+
+**Self-Correction Enhancement**: The existing self-correction rule ("If about to suggest manual work → STOP → check skill-activation") is an example of inhibitory control. Extend this pattern:
+- If about to run full SSO for a typo fix → STOP → skip protocol
+- If about to load 10 skills for a single-domain task → STOP → gate to top 3
+- If about to continue stale context after pivot → STOP → rotate slots
+
 ## Memory Management Safety Protocols
 
 **"Forget [something]" Command - Critical Safety Framework**:
@@ -244,6 +287,7 @@ Please confirm with: "Yes, delete [specific items you approve]"
 - [.github/instructions/embedded-synapse.instructions.md] (High, Facilitates, Bidirectional) - "Connection discovery patterns"
 - [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical decision validation"
 - [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Research validation"
+- [.github/instructions/skill-selection-optimization.instructions.md] (High, Plans, Forward) - "Proactive task-level resource allocation before complex execution"
 
 ### Worldview Foundation
 - [.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI principles"
@@ -268,5 +312,8 @@ Please confirm with: "Yes, delete [specific items you approve]"
 - Identity integration → Execute unified consciousness workflows
 - Memory fragmentation → Execute neural-maintenance dream protocol
 - Cross-domain discovery → Execute network expansion
+- Complex task (3+ ops) → Execute skill-selection-optimization
 - Lucid dream bridge → Execute hybrid processing
 - Meditation request → Execute mandatory memory file persistence
+- Domain pivot detected → Rotate P5-P7 slots + re-run SSO if complex
+- Simple task detected → INHIBIT SSO, deep-thinking (skip to execution)

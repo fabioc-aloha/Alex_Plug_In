@@ -11,7 +11,7 @@ import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from 
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
-import { escapeHtml } from "../shared/sanitize";
+import { escapeHtml, getNonce } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
 import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
 
@@ -370,11 +370,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getLoadingHtml(): string {
+    const nonce = getNonce();
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
     <title>Alex</title>
     <style>
         body {
@@ -401,11 +403,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   private _getErrorHtml(err: unknown): string {
     const errorMessage = escapeHtml(String(err));
+    const nonce = getNonce();
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
     <title>Alex</title>
     <style>
         body {
@@ -427,7 +431,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <p style="font-size: 12px; opacity: 0.7;">${errorMessage}</p>
         <button onclick="vscode.postMessage({command: 'refresh'})">Retry</button>
     </div>
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
     </script>
 </body>
@@ -450,6 +454,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     personaResult: PersonaDetectionResult | null,
     premiumAssets: PremiumAssetSelection,
   ): string {
+    // Security: Generate nonce for CSP
+    const nonce = getNonce();
+    
     // Logo URI for webview - use premium asset if available
     const logoUri = getAssetUri(webview, this._extensionUri, premiumAssets.logoPath);
 
@@ -511,6 +518,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; img-src ${webview.cspSource} https: data:;">
     <title>Alex</title>
     <style>
         * {
@@ -1015,7 +1023,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('viewDiagnostics')" title="Alex Cognitive v${version} — Click for diagnostics" />
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('workingWithAlex')" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
                 <span class="header-persona" onclick="cmd('skillReview')" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
@@ -1052,6 +1060,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 <div class="action-group-label">CORE</div>
+                <button class="action-btn" onclick="cmd('workingWithAlex')" title="Learn how to work effectively with Alex">
+                    <span class="action-icon">🎓</span>
+                    <span class="action-text">Working with Alex</span>
+                </button>
                 <button class="action-btn" onclick="cmd('openChat')">
                     <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
                     <span class="action-text">Chat with Copilot</span>
@@ -1185,7 +1197,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         ${this._getFeaturesHtml()}
     </div>
     
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         
         function cmd(command) {

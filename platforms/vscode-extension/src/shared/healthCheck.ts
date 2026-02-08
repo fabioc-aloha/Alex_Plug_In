@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { updateAlexInstalledStatus } from './telemetry';
+import { createSynapseRegex } from './utils';
 
 // Import session info (lazy to avoid circular deps)
 let getSessionInfo: (() => { active: boolean; remaining: number; isBreak: boolean } | null) | null = null;
@@ -120,7 +121,7 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
     const issues: string[] = [];
 
     // Synapse pattern
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+    const synapseRegex = createSynapseRegex();
 
     // Pre-build a set of all known markdown files for fast lookup
     // This avoids calling findFiles for each synapse (major performance fix)

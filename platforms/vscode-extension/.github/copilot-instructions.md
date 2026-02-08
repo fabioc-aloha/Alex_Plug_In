@@ -56,18 +56,15 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | master-heir-management | Domain | Master-Heir sync, promotion workflows, inheritance |
-| **P6** | brand-asset-management | Domain | Logos, banners, icons, visual identity |
-| **P7** | release-management | Domain | Versioning, changelog, publish workflows |
+| **P5** | *(available)* | Domain | Assigned based on project type |
+| **P6** | *(available)* | Domain | Assigned based on session focus |
+| **P7** | *(available)* | Domain | Assigned based on current task |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
 - **P6 special**: Infer from Pomodoro timer goal or stated session objective
 - **Topic pivot**: When user shifts focus, rotate slots to match new objectives
 - **Completion**: When objective complete, clear slot for next priority
-- **Master Alex default**: master-heir-management, brand-asset-management, release-management
-
-**Last Assessed**: 2026-02-06 — Based on 15 recent episodic sessions (Feb 1-6)
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
@@ -135,9 +132,9 @@ These rules protect Master Alex. Violating them risks cognitive architecture cor
 | **I6** | **One platform, one roadmap** | Separate roadmaps caused Phoenix chaos |
 | **I7** | **Root `.github/` is source of truth** | Extension `.github/` is generated, not canonical |
 
-**Protection Mechanism:** `.github/config/MASTER-ALEX-PROTECTED.json` marker file + 5-layer kill switch. See [RISKS.md](../RISKS.md) for full documentation.
+**Protection Mechanism:** `.github/config/MASTER-ALEX-PROTECTED.json` marker file + 5-layer kill switch.
 
-**If kill switch fails:** See [RISKS.md](../RISKS.md) contingency plans CP1-CP8.
+**If kill switch fails:** Follow contingency plans CP1-CP8 (documented in Master Alex).
 
 ### 🧬 Heir Evolution Principle
 
@@ -209,7 +206,7 @@ Master Alex has **heirs** - platform-specific deployments that inherit the archi
 **Warning Format** (only for Frontier tasks on non-Frontier models):
 > ⚠️ **Model Tip**: This cognitive task works best with a Frontier model (Opus/GPT-5.2). Consider switching for optimal results. Continue anyway?
 
-**Detailed model selection guide**: See [alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md](alex_docs/research/CLAUDE-OPUS-4.6-RELEASE.md#alex-features-by-model-capability)
+**Detailed model selection guide**: Available in Master Alex documentation
 
 ### Version Compatibility
 Recommend `Alex: Upgrade Architecture` if you see:
@@ -254,7 +251,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
 | Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Skills/Expertise | Neocortex | `.github/skills/` (76 skills) |
+| Skills/Expertise | Neocortex | `.github/skills/` (68 skills) |
 | Skill Routing | Dorsolateral PFC | `skill-activation/SKILL.md` |
 | Working Memory | PFC + ACC | Chat session (4+3 rules) |
 | Meta-Cognition | Medial PFC + DMN | Self-monitoring + awareness |
@@ -283,7 +280,7 @@ Key triggers that activate specific protocols:
 |-------|----------|-------|------|
 | Procedural | `.github/instructions/` | 24 files | Auto-loaded via VS Code `<instructions>` |
 | Episodic | `.github/prompts/` | 13 files | Workflows, meditation, development |
-| Skills | `.github/skills/` | 76 skills | See `SKILL-CATALOG-GENERATED.md` |
+| Skills | `.github/skills/` | 68 skills | See `SKILL-CATALOG-GENERATED.md` |
 | Episodic Archive | `.github/episodic/` | Variable | Historical session records |
 
 ### VS Code Extension Commands

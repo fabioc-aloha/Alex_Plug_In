@@ -68,6 +68,89 @@ export function getRemoteAccessStatus(): IRemoteAccessStatus | null {
     return remoteAccessStatus;
 }
 
+// ============================================================================
+// SECURE TOKEN STORAGE (SecretStorage API)
+// ============================================================================
+
+/** Secret storage key for GitHub token */
+const GITHUB_TOKEN_SECRET_KEY = 'alex.globalKnowledge.githubToken';
+
+/** Module-level reference to VS Code SecretStorage */
+let secretStorage: vscode.SecretStorage | null = null;
+
+/** Cached token (loaded async at activation, refreshed on config change) */
+let cachedGithubToken: string | null = null;
+
+/**
+ * Initialize secure storage for Global Knowledge.
+ * Migrates token from settings to SecretStorage on first run.
+ * @param context Extension context with secrets API
+ */
+export async function initGlobalKnowledgeSecrets(context: vscode.ExtensionContext): Promise<void> {
+    secretStorage = context.secrets;
+    
+    // Try to load token from SecretStorage
+    try {
+        cachedGithubToken = await secretStorage.get(GITHUB_TOKEN_SECRET_KEY) || null;
+    } catch {
+        cachedGithubToken = null;
+    }
+    
+    // Migration: If token exists in settings but not in secrets, migrate it
+    const config = vscode.workspace.getConfiguration('alex.globalKnowledge');
+    const settingsToken = config.get<string>('githubToken')?.trim();
+    
+    if (settingsToken && !cachedGithubToken) {
+        // Migrate token to SecretStorage
+        try {
+            await secretStorage.store(GITHUB_TOKEN_SECRET_KEY, settingsToken);
+            cachedGithubToken = settingsToken;
+            
+            // Clear token from settings (it's now in secure storage)
+            await config.update('githubToken', undefined, vscode.ConfigurationTarget.Global);
+            
+            vscode.window.showInformationMessage(
+                'Alex: GitHub token migrated to secure storage.'
+            );
+        } catch (error) {
+            // Migration failed, keep using settings token
+            cachedGithubToken = settingsToken;
+        }
+    } else if (settingsToken && cachedGithubToken) {
+        // Token exists in both places - clear settings copy
+        try {
+            await config.update('githubToken', undefined, vscode.ConfigurationTarget.Global);
+        } catch {
+            // Ignore cleanup failure
+        }
+    }
+}
+
+/**
+ * Store a GitHub token securely
+ * @param token The token to store, or empty string to clear
+ */
+export async function setGitHubToken(token: string): Promise<void> {
+    if (!secretStorage) {
+        throw new Error('Secret storage not initialized. Call initGlobalKnowledgeSecrets first.');
+    }
+    
+    if (token) {
+        await secretStorage.store(GITHUB_TOKEN_SECRET_KEY, token);
+        cachedGithubToken = token;
+    } else {
+        await secretStorage.delete(GITHUB_TOKEN_SECRET_KEY);
+        cachedGithubToken = null;
+    }
+}
+
+/**
+ * Get the cached GitHub token (synchronous, uses cached value)
+ */
+function getCachedGithubToken(): string | null {
+    return cachedGithubToken;
+}
+
 /**
  * Standard repository name for Global Knowledge
  */
@@ -82,7 +165,8 @@ function getRemoteRepoConfig(): { repo: string; ttl: number; useAuth: boolean; t
     const repoInput = config.get<string>('remoteRepo')?.trim();
     const ttl = config.get<number>('remoteCacheTTL') || 300;
     const useAuth = config.get<boolean>('useGitHubAuth') ?? true;
-    const token = config.get<string>('githubToken')?.trim() || null;
+    // Use token from SecretStorage (cached), fallback to settings for backwards compatibility
+    const token = getCachedGithubToken() || config.get<string>('githubToken')?.trim() || null;
     
     if (!repoInput) {
         return null;
@@ -2515,7 +2599,8 @@ export async function evaluateDKFile(filePath: string): Promise<DKFileEvaluation
     const title = titleMatch ? titleMatch[1] : filename.replace(/^DK-/, '').replace(/-/g, ' ');
     
     // Check for synapses section with actual connections
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+    const { SYNAPSE_REGEX } = await import('../shared/constants');
+    const synapseRegex = new RegExp(SYNAPSE_REGEX.source, SYNAPSE_REGEX.flags);
     const synapseMatches = content.match(synapseRegex);
     if (synapseMatches && synapseMatches.length > 0) {
         score += 3;

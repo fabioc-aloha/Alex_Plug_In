@@ -30,6 +30,7 @@ Search this index when processing any task request:
 | alex-effort-estimation | estimate effort, how long, task duration, ai time, planning |
 | anti-hallucination | prevent hallucination, verify claim, admit uncertainty, fact check, don't know |
 | api-design | design api, rest endpoints, openapi, http status, api versioning |
+| api-documentation | write docs, api reference, readme, guide, technical writing, swagger docs |
 | appropriate-reliance | calibrate trust, when to challenge, confidence level, human-ai collaboration |
 | architecture-audit | audit project, consistency check, version drift, fact inventory, pre-release audit |
 | architecture-health | check health, validate synapses, neural maintenance, health report, dream |
@@ -43,7 +44,7 @@ Search this index when processing any task request:
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension |
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
-| creative-writing | write story, character arc, plot structure, dialogue, narrative |
+| creative-writing | write story, character arc, plot structure, dialogue, narrative |\n| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
@@ -71,6 +72,7 @@ Search this index when processing any task request:
 | ⭐ microsoft-fabric | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
+| pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides |
 | post-mortem | run post-mortem, blameless review, incident analysis, action items, 5 whys |
 | practitioner-research | research methodology, case study, evidence collection, academic writing |
 | privacy-responsible-ai | responsible ai, ethical ai, bias detection, fairness, data minimization |

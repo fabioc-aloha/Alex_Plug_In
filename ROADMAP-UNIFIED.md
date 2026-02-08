@@ -711,7 +711,7 @@ context.subscriptions.push(
 **Tree structure**:
 ```
 Alex Cognitive Architecture
-├── Memory Files (24 procedural, 13 episodic, 76 skills)
+├── Memory Files (25 procedural, 13 episodic, 77 skills)
 │   ├── Procedural (.instructions.md)
 │   ├── Episodic (.prompt.md)
 │   └── Skills (by category)
@@ -723,7 +723,7 @@ Alex Cognitive Architecture
     └── Insights (166)
 ```
 
-**Gotcha 1**: Use `vscode.TreeItem.collapsibleState` and lazy-load children. Don't scan all 75 skill directories on activation.
+**Gotcha 1**: Use `vscode.TreeItem.collapsibleState` and lazy-load children. Don't scan all 77 skill directories on activation.
 
 **Gotcha 2**: Add clickable items that open the file: `treeItem.command = { command: 'vscode.open', arguments: [uri] }`.
 
@@ -919,7 +919,7 @@ Items not yet assigned to a version milestone. Pull from here when capacity free
 | Progress Widget                         |  Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress             |
 | Calendar-Aware Focus                    |  Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min                    |
 | Agent Orchestration                     | Master |  1.5h  |  Medium  | Multi-agent workflows prototype                                        |
-| Audit 76 skills for Agent Skills compat | Master |   4h   |  Medium  | Verify all 76 skills work correctly as VS Code Agent Skills            |
+| Audit 77 skills for Agent Skills compat | Master |   4h   |  Medium  | Verify all 77 skills work correctly as VS Code Agent Skills            |
 | OneDrive Agent Export command           |  Heir  |   4h   |  Medium  | Export cognitive architecture to OneDrive for M365 consumption         |
 | Community Agent pilot (Teams)           |  M365  |   2h   |  Medium  | Pilot Alex as a Teams community agent                                  |
 | Chat Prompt Files API                   |  Heir  |  TBD   |   Low    | Adopt when API graduates from proposed to stable                       |

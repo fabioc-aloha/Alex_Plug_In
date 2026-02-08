@@ -107,7 +107,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
 | **Chat & Agents** | `@alex` participant, 24 slash commands, 11 LM tools, 3 custom agents          |
-| **Intelligence**  | 76 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 77 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
@@ -657,7 +657,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (76 skills)
+├── skills/                    # 🎓 Portable domain expertise (77 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...

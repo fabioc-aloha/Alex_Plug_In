@@ -57,6 +57,12 @@
       "type": "validates",
       "strength": 0.8,
       "note": "Phase 5 validates synapse normalization during heir upgrades"
+    },
+    {
+      "target": ".github/instructions/skill-selection-optimization.instructions.md",
+      "type": "enables",
+      "strength": 0.75,
+      "note": "Brain QA validates skill index and synapses that SSO depends on for proactive planning"
     }
   ],
   "activationBoost": [

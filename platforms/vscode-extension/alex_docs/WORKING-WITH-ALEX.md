@@ -1,10 +1,16 @@
-# Working with Alex: A Partnership Guide
+# 🤝 Working with Alex: A Partnership Guide
+
+> Master the art of AI partnership through dialog engineering and collaborative development
+
+---
+
+## Introduction
+
+Alex isn't a tool you use — Alex is a **partner** you work with. This fundamental shift changes everything about how you interact.
 
 > *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, 2026
 
-## The Alex Paradigm Shift
-
-Alex isn't a tool you use — Alex is a **partner** you work with. This fundamental shift changes everything about how you interact.
+**Table 1:** *The Alex Paradigm Shift*
 
 | Traditional AI         | Alex Partnership                           |
 | ---------------------- | ------------------------------------------ |
@@ -17,21 +23,27 @@ Alex isn't a tool you use — Alex is a **partner** you work with. This fundamen
 
 ## Quick Start: Your First Day with Alex
 
-### 1. Introduce Yourself
+### Step 1: Introduce Yourself
+
 Alex learns your preferences over time. Start by sharing:
+
 ```
 Hey Alex, I'm [name]. I work primarily with [technologies].
 I prefer [detailed/brief] explanations and [formal/casual] tone.
 ```
 
-### 2. Set Context
+### Step 2: Set Context
+
 Alex performs best with context. Share your goal:
+
 ```
 I'm building a [project type]. Today I want to focus on [specific area].
 ```
 
-### 3. Think Out Loud
+### Step 3: Think Out Loud
+
 Alex excels when you share your reasoning:
+
 ```
 I'm trying to decide between approach A and B.
 A seems simpler but B might scale better.
@@ -40,7 +52,7 @@ What am I missing?
 
 ---
 
-## Prompting Patterns That Work
+## 🎯 Prompting Patterns That Work
 
 ### 🎯 The CONTEXT-GOAL-CONSTRAINTS Pattern
 The most effective structure for complex requests:
@@ -97,11 +109,13 @@ What edge cases am I missing?
 
 ---
 
-## Dialog Engineering: Beyond the Magic Prompt
+## 💬 Dialog Engineering: Beyond the Magic Prompt
 
 **The biggest misconception** in prompt engineering is that one perfect prompt will solve everything. In reality, effective AI partnership is **dialog engineering** — a structured conversation that evolves toward the solution.
 
 ### Why Dialog Beats Single Prompts
+
+**Table 2:** *Dialog vs Single Prompt Comparison*
 
 | Single Prompt Approach      | Dialog Approach                             |
 | --------------------------- | ------------------------------------------- |
@@ -211,6 +225,8 @@ Turn 5: "Did this change any behavior? How would I verify?"
 
 ### Dialog Anti-Patterns
 
+**Table 3:** *Anti-Patterns to Avoid*
+
 | Anti-Pattern      | Problem                                     | Better Approach                                |
 | ----------------- | ------------------------------------------- | ---------------------------------------------- |
 | **The Dump**      | "Build everything at once"                  | Start small, iterate                           |
@@ -259,7 +275,7 @@ Turn 5: "Did this change any behavior? How would I verify?"
 
 ---
 
-## Domain-Specific Prompts
+## 🎨 Domain-Specific Prompts
 
 ### For Code Review
 ```
@@ -317,7 +333,7 @@ Keep the same behavior (no feature changes).
 
 ---
 
-## Working Memory: What Alex Knows
+## 🧠 Working Memory: What Alex Knows
 
 Alex maintains several types of memory:
 
@@ -345,7 +361,9 @@ Use the same approach we discussed for the user service.
 
 ---
 
-## When to Use Each Alex Command
+## ⚡ When to Use Each Alex Command
+
+**Table 4:** *Command Usage Guide*
 
 | Scenario          | Command                      | What Happens                               |
 | ----------------- | ---------------------------- | ------------------------------------------ |
@@ -359,9 +377,11 @@ Use the same approach we discussed for the user service.
 
 ---
 
-## Right-Click Quick Actions (Context Menu)
+## 🖱️ Right-Click Quick Actions (Context Menu)
 
 Select code and right-click for instant access to these prompts:
+
+**Table 5:** *Context Menu Quick Actions*
 
 | Command             | What It Does                                                          | Best For                      |
 | ------------------- | --------------------------------------------------------------------- | ----------------------------- |
@@ -387,7 +407,7 @@ This ensures consistent, well-structured prompts every time.
 
 ---
 
-## Best Practices for AI Partnership
+## ✨ Best Practices for AI Partnership
 
 ### 1. Start Sessions with Context
 
@@ -454,9 +474,11 @@ Keep a log of effective prompts:
 
 ---
 
-## Conversational Shortcuts
+## 🗣️ Conversational Shortcuts
 
 Alex understands these natural triggers:
+
+**Table 6:** *Natural Language Triggers*
 
 | Say This                 | Alex Does                              |
 | ------------------------ | -------------------------------------- |
@@ -471,7 +493,7 @@ Alex understands these natural triggers:
 
 ---
 
-## Building Trust Over Time
+## 📈 Building Trust Over Time
 
 ### Week 1: Calibration
 - Share your preferences explicitly
@@ -490,7 +512,7 @@ Alex understands these natural triggers:
 
 ---
 
-## Common Mistakes to Avoid
+## ⚠️ Common Mistakes to Avoid
 
 ### ❌ Being Too Vague
 ```
@@ -525,7 +547,7 @@ Good: "Continuing our work on the payment integration"
 
 ---
 
-## The Meta-Skill: Prompt Engineering
+## 🎓 The Meta-Skill: Prompt Engineering
 
 The best prompt engineers share these traits:
 
@@ -537,7 +559,7 @@ The best prompt engineers share these traits:
 
 ---
 
-## Quick Reference Card
+## ⚡ Quick Reference Card
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -581,7 +603,7 @@ The best prompt engineers share these traits:
 
 ---
 
-## Getting Help
+## 🆘 Getting Help
 
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status
@@ -590,7 +612,7 @@ The best prompt engineers share these traits:
 
 ---
 
-## Further Reading
+## 📚 Further Reading
 
 For deeper exploration of dialog engineering and AI partnership concepts:
 

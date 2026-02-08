@@ -16,6 +16,8 @@ import WebSocket from 'ws';
 import * as vscode from 'vscode';
 
 // Edge TTS constants (from edge-tts Python library)
+// This is a well-known public token used by all Edge TTS clients (edge-tts, edge-playback, etc.)
+// It is NOT a secret — it's embedded in Edge browser's speech synthesis and required for the public API
 const TRUSTED_CLIENT_TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
 const CHROMIUM_FULL_VERSION = '143.0.3650.75';
 const CHROMIUM_MAJOR_VERSION = CHROMIUM_FULL_VERSION.split('.')[0];

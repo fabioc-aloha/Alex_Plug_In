@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
-import { getAlexWorkspaceFolder } from '../shared/utils';
+import { getAlexWorkspaceFolder, createSynapseRegex } from '../shared/utils';
 
 /**
  * Self-Actualization Protocol Results
@@ -173,7 +173,7 @@ async function scanSynapseHealth(
         '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
     ];
 
-    const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+    const synapseRegex = createSynapseRegex();
 
     // Pre-build a set of all known markdown files for fast lookup
     // This avoids calling findFiles for each synapse (major performance fix)

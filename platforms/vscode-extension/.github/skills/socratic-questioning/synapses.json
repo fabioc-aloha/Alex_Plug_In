@@ -1,5 +1,6 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
   "skillId": "socratic-questioning",
   "version": "1.1.0",
   "inheritance": "inheritable",

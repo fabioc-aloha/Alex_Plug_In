@@ -5,6 +5,7 @@ import { searchGlobalKnowledge } from './globalKnowledge';
 import { validateUserProfile, safeJsonParse, createConfigBackup } from '../shared/sanitize';
 import { getSessionState, PersistedSessionState } from '../commands/session';
 import { getGoalsSummary, LearningGoal } from '../commands/goals';
+import { createSynapseRegex } from '../shared/utils';
 
 /**
  * Tool input parameters interfaces
@@ -122,7 +123,7 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
         const issues: string[] = [];
 
         // Create fresh regex instance to avoid state leakage
-        const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+        const synapseRegex = createSynapseRegex();
 
         // Pre-build a set of all known markdown files for fast lookup
         // This avoids calling findFiles for each synapse (major performance fix)
@@ -802,9 +803,9 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                         new vscode.LanguageModelTextPart(`Unknown action: ${action}`)
                     ]);
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             return new vscode.LanguageModelToolResult([
-                new vscode.LanguageModelTextPart(`Error accessing user profile: ${error.message}`)
+                new vscode.LanguageModelTextPart(`Error accessing user profile: ${error instanceof Error ? error.message : String(error)}`)
             ]);
         }
     }
@@ -951,9 +952,9 @@ export class FocusContextTool implements vscode.LanguageModelTool<IFocusContextP
                 new vscode.LanguageModelTextPart(JSON.stringify(response, null, 2))
             ]);
             
-        } catch (error: any) {
+        } catch (error: unknown) {
             return new vscode.LanguageModelToolResult([
-                new vscode.LanguageModelTextPart(`Error getting focus context: ${error.message}`)
+                new vscode.LanguageModelTextPart(`Error getting focus context: ${error instanceof Error ? error.message : String(error)}`)
             ]);
         }
     }
@@ -1060,7 +1061,7 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         ];
 
         // Create fresh regex instance to avoid state leakage
-        const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+        const synapseRegex = createSynapseRegex();
 
         for (const pattern of synapsePatterns) {
             // Check for cancellation

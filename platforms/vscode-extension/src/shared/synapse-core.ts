@@ -5,6 +5,7 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { SYNAPSE_REGEX } from './constants';
 
 export interface Synapse {
     sourceFile: string;
@@ -76,7 +77,12 @@ export const ignoredTargetFiles = ['target-file.md', 'CHANGELOG.md'];
  * Regex to match synapse notation:
  * [file.md] (strength, type, direction) - "condition"
  */
-export const synapseRegex = /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+/**
+ * Re-export the canonical synapse regex from constants.
+ * Each usage should create a fresh instance via `new RegExp(synapseRegex.source, synapseRegex.flags)`
+ * because the `g` flag makes RegExp stateful.
+ */
+export const synapseRegex = SYNAPSE_REGEX;
 
 /**
  * Match a file against a glob-like pattern

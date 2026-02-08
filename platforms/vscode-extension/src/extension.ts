@@ -37,6 +37,7 @@ import {
   ensureGlobalKnowledgeDirectories,
   registerCurrentProject,
   detectGlobalKnowledgeRepo,
+  initGlobalKnowledgeSecrets,
 } from "./chat/globalKnowledge";
 import {
   checkHealth,
@@ -46,7 +47,7 @@ import {
   registerSessionProvider,
   registerStreakProvider,
 } from "./shared/healthCheck";
-import { isWorkspaceProtected } from "./shared/utils";
+import { isWorkspaceProtected, getLanguageIdFromPath } from "./shared/utils";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import { registerMemoryDashboard } from "./views/memoryDashboard";
@@ -87,26 +88,7 @@ async function withOperationLock<T>(
   }
 }
 
-/**
- * Get language ID from file extension
- */
-function getLanguageIdFromPath(filePath: string): string {
-  const ext = path.extname(filePath).toLowerCase();
-  const extMap: Record<string, string> = {
-    '.ts': 'typescript', '.tsx': 'typescriptreact',
-    '.js': 'javascript', '.jsx': 'javascriptreact',
-    '.py': 'python', '.rb': 'ruby', '.go': 'go',
-    '.rs': 'rust', '.java': 'java', '.cs': 'csharp',
-    '.cpp': 'cpp', '.c': 'c', '.h': 'c',
-    '.md': 'markdown', '.json': 'json', '.yaml': 'yaml',
-    '.yml': 'yaml', '.html': 'html', '.css': 'css',
-    '.scss': 'scss', '.sql': 'sql', '.sh': 'shellscript',
-    '.ps1': 'powershell', '.xml': 'xml'
-  };
-  return extMap[ext] || 'text';
-}
-
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
   // Get extension version for telemetry
   const extensionVersion = context.extension.packageJSON.version || "unknown";
 
@@ -143,6 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
   registerLanguageModelTools(context);
 
   // Register global knowledge tools for cross-project learning
+  await initGlobalKnowledgeSecrets(context);
   registerGlobalKnowledgeTools(context);
 
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
@@ -2455,6 +2438,24 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     updateStatusBar(context, true);
   });
   context.subscriptions.push(memoryWatcher);
+
+  // Listen for configuration changes to update behavior at runtime
+  const configChangeListener = vscode.workspace.onDidChangeConfiguration((e) => {
+    // Refresh status bar if workspace protection settings change
+    if (e.affectsConfiguration('alex.workspace')) {
+      clearHealthCache();
+      updateStatusBar(context, true);
+    }
+    // Log configuration changes if it affects telemetry (for debugging)
+    if (e.affectsConfiguration('alex.telemetry')) {
+      console.log('[Alex] Telemetry configuration changed');
+    }
+    // Re-check M365 sync settings
+    if (e.affectsConfiguration('alex.m365')) {
+      console.log('[Alex] M365 configuration changed - reload may be required for full effect');
+    }
+  });
+  context.subscriptions.push(configChangeListener);
 
   context.subscriptions.push(initDisposable);
   context.subscriptions.push(resetDisposable);

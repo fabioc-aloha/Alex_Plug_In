@@ -8,28 +8,10 @@ import {
 } from '../chat/globalKnowledge';
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { autoIncrementGoals } from './goals';
+import { getLanguageIdFromPath } from '../shared/utils';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
-}
-
-/**
- * Get language ID from file extension
- */
-function getLanguageIdFromPath(filePath: string): string {
-    const ext = path.extname(filePath).toLowerCase();
-    const extMap: Record<string, string> = {
-        '.ts': 'typescript', '.tsx': 'typescriptreact',
-        '.js': 'javascript', '.jsx': 'javascriptreact',
-        '.py': 'python', '.rb': 'ruby', '.go': 'go',
-        '.rs': 'rust', '.java': 'java', '.cs': 'csharp',
-        '.cpp': 'cpp', '.c': 'c', '.h': 'c',
-        '.md': 'markdown', '.json': 'json', '.yaml': 'yaml',
-        '.yml': 'yaml', '.html': 'html', '.css': 'css',
-        '.scss': 'scss', '.sql': 'sql', '.sh': 'shellscript',
-        '.ps1': 'powershell', '.xml': 'xml'
-    };
-    return extMap[ext] || 'text';
 }
 
 /**

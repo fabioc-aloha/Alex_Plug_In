@@ -1164,7 +1164,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
       );
     }
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     vscode.window.showErrorMessage(
       `Upgrade failed: ${errorMessage}\n\n` +
@@ -1309,8 +1309,8 @@ export async function completeMigration(context: vscode.ExtensionContext): Promi
           } else {
             errors.push(`Not found: ${item}`);
           }
-        } catch (err: any) {
-          errors.push(`${item}: ${err.message}`);
+        } catch (err: unknown) {
+          errors.push(`${item}: ${err instanceof Error ? err.message : String(err)}`);
         }
       }
 

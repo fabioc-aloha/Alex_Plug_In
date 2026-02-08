@@ -981,7 +981,7 @@ function getErrorContent(err: unknown): string {
 </head>
 <body>
     <h2>⚠️ Failed to load dashboard</h2>
-    <p class="error">${err}</p>
+    <p class="error">${escapeHtml(String(err))}</p>
     <button id="retryBtn">Retry</button>
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();

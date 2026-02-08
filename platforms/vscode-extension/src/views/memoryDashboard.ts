@@ -264,24 +264,24 @@ function getWorkingMemorySlots(): WorkingMemorySlot[] {
 }
 
 /**
- * Persona accent color mapping
+ * Persona accent color mapping - use hex colors for Mermaid compatibility
  */
 const personaAccentMap: Record<string, string> = {
-    'developer': 'var(--vscode-charts-blue)',
-    'academic': '#2aa198',
-    'researcher': '#2aa198',
-    'technical-writer': 'var(--vscode-charts-green)',
-    'architect': 'var(--vscode-charts-orange, #f0883e)',
-    'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
-    'devops': 'var(--vscode-charts-green)',
-    'content-creator': 'var(--vscode-charts-yellow)',
-    'fiction-writer': '#2aa198',
-    'project-manager': 'var(--vscode-charts-blue)',
-    'security': 'var(--vscode-charts-red)',
-    'student': '#2aa198',
-    'job-seeker': 'var(--vscode-charts-green)',
-    'presenter': 'var(--vscode-charts-yellow)',
-    'power-user': 'var(--vscode-charts-blue)'
+    'developer': '#3794ff',      // VS Code blue
+    'academic': '#2aa198',       // Teal
+    'researcher': '#2aa198',     // Teal
+    'technical-writer': '#89d185', // VS Code green
+    'architect': '#f0883e',      // Orange
+    'data-engineer': '#f0883e',  // Orange
+    'devops': '#89d185',         // VS Code green
+    'content-creator': '#cca700', // VS Code yellow
+    'fiction-writer': '#2aa198', // Teal
+    'project-manager': '#3794ff', // VS Code blue
+    'security': '#f14c4c',       // VS Code red
+    'student': '#2aa198',        // Teal
+    'job-seeker': '#89d185',     // VS Code green
+    'presenter': '#cca700',      // VS Code yellow
+    'power-user': '#3794ff'      // VS Code blue
 };
 
 /**
@@ -316,7 +316,7 @@ async function getWebviewContent(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' https://cdn.jsdelivr.net; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' 'unsafe-eval' https://cdn.jsdelivr.net/npm/mermaid@10/; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
     <title>Alex Memory Architecture</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
@@ -820,31 +820,40 @@ flowchart LR
         const vscode = acquireVsCodeApi();
         
         // Initialize Mermaid with dark theme
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'dark',
-            securityLevel: 'loose',
-            flowchart: {
-                htmlLabels: true,
-                curve: 'basis',
-                padding: 15
-            },
-            themeVariables: {
-                primaryColor: '${personaAccent}',
-                primaryTextColor: '#e0e0e0',
-                primaryBorderColor: '${personaAccent}',
-                lineColor: '#666',
-                secondaryColor: '#1e1e1e',
-                tertiaryColor: '#252526',
-                background: '#1e1e1e',
-                mainBkg: '#252526',
-                nodeBorder: '${personaAccent}',
-                clusterBkg: '#1e1e1e',
-                clusterBorder: '#444',
-                titleColor: '#e0e0e0',
-                edgeLabelBackground: '#1e1e1e'
-            }
-        });
+        try {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'dark',
+                securityLevel: 'loose',
+                flowchart: {
+                    htmlLabels: true,
+                    curve: 'basis',
+                    padding: 15
+                },
+                themeVariables: {
+                    primaryColor: '${personaAccent}',
+                    primaryTextColor: '#e0e0e0',
+                    primaryBorderColor: '${personaAccent}',
+                    lineColor: '#666',
+                    secondaryColor: '#1e1e1e',
+                    tertiaryColor: '#252526',
+                    background: '#1e1e1e',
+                    mainBkg: '#252526',
+                    nodeBorder: '${personaAccent}',
+                    clusterBkg: '#1e1e1e',
+                    clusterBorder: '#444',
+                    titleColor: '#e0e0e0',
+                    edgeLabelBackground: '#1e1e1e'
+                }
+            });
+            
+            // Explicitly run mermaid rendering
+            mermaid.run({
+                querySelector: '.mermaid'
+            });
+        } catch (e) {
+            console.error('Mermaid initialization failed:', e);
+        }
         
         function cmd(command, data) {
             vscode.postMessage({ command, ...data });

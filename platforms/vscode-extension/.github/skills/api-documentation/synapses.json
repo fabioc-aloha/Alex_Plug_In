@@ -13,7 +13,7 @@
             "reason": "Documented code is quality code",
             "type": "complements",
             "strength": 0.8,
-            "target": ".github/skills/code-quality/SKILL.md"
+            "target": ".github/skills/code-review/SKILL.md"
         },
         {
             "reason": "Clear writing techniques apply to technical docs",
@@ -31,7 +31,7 @@
             "reason": "Core markdown formatting for documentation",
             "type": "uses",
             "strength": 0.65,
-            "target": ".github/skills/markdown-mastery/SKILL.md"
+            "target": ".github/skills/lint-clean-markdown/SKILL.md"
         }
     ],
     "inheritance": "inheritable",

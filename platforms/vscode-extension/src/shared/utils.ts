@@ -19,6 +19,19 @@ import {
 } from './constants';
 
 /**
+ * Singleton output channel for kill switch logging
+ * Prevents creating a new channel on every protection check (every 5 min + file changes)
+ */
+let killSwitchOutputChannel: vscode.LogOutputChannel | null = null;
+
+function getKillSwitchOutputChannel(): vscode.LogOutputChannel {
+    if (!killSwitchOutputChannel) {
+        killSwitchOutputChannel = vscode.window.createOutputChannel('Alex Kill Switch', { log: true });
+    }
+    return killSwitchOutputChannel;
+}
+
+/**
  * Result of workspace validation
  */
 export interface WorkspaceValidation {
@@ -401,7 +414,7 @@ export interface WorkspaceProtectionResult {
  */
 export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceProtectionResult> {
     // Get output channel for debugging
-    const outputChannel = vscode.window.createOutputChannel('Alex Kill Switch', { log: true });
+    const outputChannel = getKillSwitchOutputChannel();
     outputChannel.info(`🛡️ Protection check for: ${rootPath}`);
     
     // Layer 0: HARDCODED FAILSAFE - Check for Alex_Plug_In in path
@@ -514,7 +527,7 @@ export async function checkProtectionAndWarn(
     const protection = await isWorkspaceProtected(rootPath);
     
     // Get output channel for user visibility
-    const outputChannel = vscode.window.createOutputChannel('Alex Kill Switch', { log: true });
+    const outputChannel = getKillSwitchOutputChannel();
     outputChannel.info(`🛡️ ${operationName} - Protection result: isProtected=${protection.isProtected}, reason=${protection.reason}, canOverride=${protection.canOverride}`);
     
     if (!protection.isProtected) {
@@ -584,4 +597,36 @@ export async function checkProtectionAndWarn(
     }
     
     return true;
+}
+
+/**
+ * Get language ID from file extension for clipboard/chat commands
+ * 
+ * Centralised utility - used by extension.ts and contextMenu.ts
+ */
+export function getLanguageIdFromPath(filePath: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+    const extMap: Record<string, string> = {
+        '.ts': 'typescript', '.tsx': 'typescriptreact',
+        '.js': 'javascript', '.jsx': 'javascriptreact',
+        '.py': 'python', '.rb': 'ruby', '.go': 'go',
+        '.rs': 'rust', '.java': 'java', '.cs': 'csharp',
+        '.cpp': 'cpp', '.c': 'c', '.h': 'c',
+        '.md': 'markdown', '.json': 'json', '.yaml': 'yaml',
+        '.yml': 'yaml', '.html': 'html', '.css': 'css',
+        '.scss': 'scss', '.sql': 'sql', '.sh': 'shellscript',
+        '.ps1': 'powershell', '.xml': 'xml'
+    };
+    return extMap[ext] || 'text';
+}
+
+/**
+ * Create a fresh RegExp instance from SYNAPSE_REGEX for scanning.
+ * 
+ * Because RegExp with the `g` flag is stateful (tracks lastIndex),
+ * each scan site must use its own instance to avoid cross-contamination.
+ * Import this instead of re-declaring the pattern.
+ */
+export function createSynapseRegex(): RegExp {
+    return new RegExp(SYNAPSE_REGEX.source, SYNAPSE_REGEX.flags);
 }

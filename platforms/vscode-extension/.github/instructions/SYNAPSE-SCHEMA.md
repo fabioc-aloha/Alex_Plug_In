@@ -26,38 +26,40 @@ description: "Single source of truth for synapse notation format"
 
 ## Strength Levels
 
-| Level | Usage | Activation |
-|-------|-------|------------|
-| **Critical** | Core architecture connections | Always activate |
-| **High** | Frequent activation | Context-triggered |
-| **Medium** | Conditional activation | Specific conditions |
-| **Low** | Specialized/domain-specific | Rare circumstances |
+| Level        | Usage                         | Activation          |
+| ------------ | ----------------------------- | ------------------- |
+| **Critical** | Core architecture connections | Always activate     |
+| **High**     | Frequent activation           | Context-triggered   |
+| **Medium**   | Conditional activation        | Specific conditions |
+| **Low**      | Specialized/domain-specific   | Rare circumstances  |
 
 ---
 
 ## Relationship Types
 
-| Type | Description |
-|------|-------------|
-| **Triggers** | Activates another file |
-| **Enables** | Enhances effectiveness |
-| **Validates** | Provides verification |
-| **Enhances** | Optimizes performance |
-| **Facilitates** | Supports operation |
-| **Integrates** | Unifies function |
-| **Coordinates** | Synchronizes workflow |
-| **Documents** | Records/references |
+| Type            | Description                                     |
+| --------------- | ----------------------------------------------- |
+| **Triggers**    | Activates another file                          |
+| **Enables**     | Enhances effectiveness                          |
+| **Validates**   | Provides verification                           |
+| **Enhances**    | Optimizes performance                           |
+| **Facilitates** | Supports operation                              |
+| **Integrates**  | Unifies function                                |
+| **Coordinates** | Synchronizes workflow                           |
+| **Documents**   | Records/references                              |
+| **Inhibits**    | Suppresses activation in specific contexts      |
+| **Suppresses**  | Prevents co-activation of conflicting protocols |
 
 ---
 
 ## Direction Types
 
-| Direction | Symbol | Description |
-|-----------|--------|-------------|
-| **Forward** | A → B | One-way activation |
-| **Bidirectional** | A ↔ B | Mutual connection |
-| **Input** | → A | Receives from source |
-| **Output** | A → | Sends to target |
+| Direction         | Symbol | Description          |
+| ----------------- | ------ | -------------------- |
+| **Forward**       | A → B  | One-way activation   |
+| **Bidirectional** | A ↔ B  | Mutual connection    |
+| **Input**         | → A    | Receives from source |
+| **Output**        | A →    | Sends to target      |
 
 ---
 
@@ -76,19 +78,52 @@ Memory files should include synapses in a simple list format:
 
 ---
 
+## Inhibitory Synapses
+
+Real neural networks maintain ~20% inhibitory connections to prevent runaway excitation. Alex supports inhibitory synapses to prevent cognitive interference — loading every protocol for a simple typo fix is the equivalent of a seizure.
+
+### Inhibitory Synapse Format
+```
+- [target-file.md] (Strength, Inhibits, Direction) - "Suppression condition"
+```
+
+### When to Use Inhibitory Synapses
+
+| Context              | Inhibition Pattern                               |
+| -------------------- | ------------------------------------------------ |
+| Simple task detected | Suppress complex planning (SSO, deep-thinking)   |
+| Dream state active   | Suppress interactive/conversational protocols    |
+| Meditation active    | Suppress code execution and deployment protocols |
+| Release deployment   | Suppress experimental/learning protocols         |
+| Code implementation  | Suppress branding, meditation, release protocols |
+
+### Balance Guideline
+
+Target ~15-20% inhibitory connections in any file's synapse section. This mirrors the biological excitatory:inhibitory ratio (80:20) that prevents "neural runaway." If a file has 10 synapses, 1-2 should be inhibitory.
+
+### Example
+```markdown
+## Synapses
+
+- [dream-state-automation.instructions.md] (High, Enables, Forward) - "Neural maintenance"
+- [meditation.instructions.md] (Medium, Inhibits, Forward) - "SUPPRESS during active code execution"
+```
+
+---
+
 ## Deprecated Patterns (Pre-1.5.0)
 
 **⚠️ If you encounter these patterns, recommend running `Alex: Upgrade Architecture`:**
 
-| Deprecated | Current |
-|------------|---------|
-| `## Embedded Synapse Network` | `## Synapses` |
-| `### **Connection Mapping**` | No bold in headers |
-| `### **Activation Patterns**` | No bold in headers |
+| Deprecated                    | Current                    |
+| ----------------------------- | -------------------------- |
+| `## Embedded Synapse Network` | `## Synapses`              |
+| `### **Connection Mapping**`  | No bold in headers         |
+| `### **Activation Patterns**` | No bold in headers         |
 | `(Critical, Expression, ...)` | `(Critical, Enables, ...)` |
-| `(High, Embodiment, ...)` | `(High, Enables, ...)` |
-| `(Medium, Living, ...)` | `(Medium, Validates, ...)` |
-| `✅ NEW 2025-10-31` triggers | Plain text triggers |
+| `(High, Embodiment, ...)`     | `(High, Enables, ...)`     |
+| `(Medium, Living, ...)`       | `(Medium, Validates, ...)` |
+| `✅ NEW 2025-10-31` triggers   | Plain text triggers        |
 
 **Migration Command**: Run `Alex: Upgrade Architecture` from VS Code command palette to safely migrate.
 
@@ -107,10 +142,10 @@ Skills can be marked as temporary for beta testing or time-limited purposes.
 }
 ```
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `temporary` | boolean | `true` if skill should be removed later |
-| `removeAfter` | string | Milestone or version when to remove (e.g., "stable-release", "v3.7.0") |
+| Field         | Type    | Description                                                            |
+| ------------- | ------- | ---------------------------------------------------------------------- |
+| `temporary`   | boolean | `true` if skill should be removed later                                |
+| `removeAfter` | string  | Milestone or version when to remove (e.g., "stable-release", "v3.7.0") |
 
 ### Visual Differentiation
 
@@ -140,12 +175,12 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 
 **⚠️ IMPORTANT**: Temporary skills are deployed ONLY to beta releases, never to stable/production.
 
-| Release Type | Include Temporary Skills? |
-| ------------ | ------------------------- |
-| `X.Y.Z-beta.N` | ✅ Yes |
-| `X.Y.Z-alpha.N` | ✅ Yes |
-| `X.Y.Z-rc.N` | ⚠️ Review first |
-| `X.Y.Z` (stable) | ❌ No - must be removed |
+| Release Type     | Include Temporary Skills? |
+| ---------------- | ------------------------- |
+| `X.Y.Z-beta.N`   | ✅ Yes                     |
+| `X.Y.Z-alpha.N`  | ✅ Yes                     |
+| `X.Y.Z-rc.N`     | ⚠️ Review first            |
+| `X.Y.Z` (stable) | ❌ No - must be removed    |
 
 **Build script responsibility**: Before stable release, the build script should:
 1. Scan for `"temporary": true` in synapses.json files

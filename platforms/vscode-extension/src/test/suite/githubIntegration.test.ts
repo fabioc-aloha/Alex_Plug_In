@@ -73,7 +73,7 @@ suite('GitHub Integration Test Suite', () => {
             if (reset) { rateLimitReset = parseInt(reset, 10) * 1000; }
         }
 
-        beforeEach(() => {
+        setup(() => {
             // Reset state before each test
             rateLimitRemaining = 5000;
             rateLimitReset = 0;

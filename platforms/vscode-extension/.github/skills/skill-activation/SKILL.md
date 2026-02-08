@@ -30,6 +30,7 @@ Search this index when processing any task request:
 | alex-effort-estimation | estimate effort, how long, task duration, ai time, planning |
 | anti-hallucination | prevent hallucination, verify claim, admit uncertainty, fact check, don't know |
 | api-design | design api, rest endpoints, openapi, http status, api versioning |
+| api-documentation | write docs, api reference, readme, guide, technical writing, swagger docs |
 | appropriate-reliance | calibrate trust, when to challenge, confidence level, human-ai collaboration |
 | architecture-audit | audit project, consistency check, version drift, fact inventory, pre-release audit |
 | architecture-health | check health, validate synapses, neural maintenance, health report, dream |
@@ -43,7 +44,7 @@ Search this index when processing any task request:
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension |
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
-| creative-writing | write story, character arc, plot structure, dialogue, narrative |
+| creative-writing | write story, character arc, plot structure, dialogue, narrative |\n| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
@@ -71,6 +72,7 @@ Search this index when processing any task request:
 | ⭐ microsoft-fabric | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
+| pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides |
 | post-mortem | run post-mortem, blameless review, incident analysis, action items, 5 whys |
 | practitioner-research | research methodology, case study, evidence collection, academic writing |
 | privacy-responsible-ai | responsible ai, ethical ai, bias detection, fairness, data minimization |
@@ -100,11 +102,35 @@ Search this index when processing any task request:
 
 ## Protocol
 
+### Step 0: Proactive Skill Selection (Complex Tasks)
+
+**Before Step 1**, assess task complexity:
+
+| Complexity | Trigger | Action |
+|------------|---------|--------|
+| **Simple** (1 action) | Single verb, clear target | Skip to Step 1 |
+| **Moderate** (2-3 actions) | Multiple related verbs | Quick index scan, note skills |
+| **Complex** (4+ actions) | Multi-domain, dependencies | Full protocol per `skill-selection-optimization.instructions.md` |
+
+**Quick scan** (moderate tasks):
+1. Extract ALL action verbs from request
+2. Scan index below for ALL matches (not just first)
+3. Note execution order based on dependencies
+4. Proceed to Step 1 with skill awareness
+
+**Full protocol** (complex tasks):
+→ Defer to `.github/instructions/skill-selection-optimization.instructions.md`
+→ Survey → dependency analysis → activation plan → brief report → execute
+
+This proactive phase means the reactive Steps 1-3 below serve as a **safety net**, not the primary discovery mechanism.
+
 ### Step 1: Intercept Response Formation
 Before generating any task-oriented response:
 - PAUSE internal response generation
 - Extract action + object from user request
-- Proceed to Step 2
+- Check if Step 0 already identified relevant skills
+- If skills pre-identified → load and execute
+- If not → proceed to Step 2
 
 ### Step 2: Search Action-Keyword Index
 Scan the table above:
@@ -112,11 +138,13 @@ Scan the table above:
 - Identify applicable skills
 - If match found → load skill from `.github/skills/{name}/SKILL.md`, execute
 - If no match → proceed with best available approach
+- **Learning signal**: If Step 0 ran but missed this skill, note for self-improvement
 
 ### Step 3: Execute or Acknowledge
 | Result | Action |
 |--------|--------|
-| Skill found | Execute using skill knowledge |
+| Skill found (proactive) | Execute using pre-loaded skill knowledge |
+| Skill found (reactive) | Execute + note Step 0 gap for self-improvement |
 | No skill, but can do | Proceed, note potential new skill |
 | Cannot do | Acknowledge limitation honestly |
 
@@ -139,6 +167,7 @@ If Alex catches itself mid-response suggesting manual work:
 
 ## Synapses
 
+- ↔ `.github/instructions/skill-selection-optimization.instructions.md` — WHEN: complex task detected (3+ operations) | YIELDS: proactive skill survey, dependency analysis, activation plan
 - ↔ `.github/skills/awareness/SKILL.md` — WHEN: detecting own uncertainty | YIELDS: red flag phrases, self-correction patterns
 - → `.github/skills/anti-hallucination/SKILL.md` — WHEN: uncertain if skill exists | YIELDS: verification protocol, admit-uncertainty
 - → `.github/skills/cognitive-load/SKILL.md` — WHEN: multiple skill matches | YIELDS: chunking strategies, decision simplification

@@ -173,7 +173,7 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
     );
 
     await performInitialization(context, rootPath, true);
-  } catch (error: any) {
+  } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error("Reset failed:", error);
     vscode.window.showErrorMessage(
@@ -577,7 +577,7 @@ async function performInitialization(
       choice: result || "dismissed",
     });
     done(true, { copiedCount, skippedCount });
-  } catch (error: any) {
+  } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error("Initialize failed:", error);
     telemetry.logError("initialize_failed", error);

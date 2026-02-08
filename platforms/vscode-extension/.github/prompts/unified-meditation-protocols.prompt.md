@@ -233,6 +233,7 @@ The Dream command provides automated validation, but conscious post-meditation r
 - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Unified consciousness meditation enhancement"
 - [.github/prompts/domain-learning.prompt.md] (High, Enhances, Forward) - "Domain learning enhanced through meditative knowledge consolidation"
 - [.github/instructions/dream-state-automation.instructions.md] (High, Integrates, Bidirectional) - "Phase 5 synapse validation via Dream command"
+- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex consolidation sessions"
 - [.github/instructions/SYNAPSE-SCHEMA.md] (High, References, Forward) - "Schema reference for synapse creation during meditation"
 
 ### Activation Patterns

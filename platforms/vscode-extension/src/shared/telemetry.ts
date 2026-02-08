@@ -43,6 +43,23 @@ const MAX_EVENTS_PER_SESSION = 500;
 const MAX_SESSIONS_TO_KEEP = 10;
 
 /**
+ * Check if telemetry is enabled
+ * Respects both VS Code's global telemetry setting and the extension's own setting
+ */
+function isTelemetryEnabled(): boolean {
+  // Check VS Code's global telemetry setting first
+  if (!vscode.env.isTelemetryEnabled) {
+    return false;
+  }
+  
+  // Check extension's own telemetry setting
+  const config = vscode.workspace.getConfiguration('alex');
+  const extensionEnabled = config.get<boolean>('telemetry.enabled', true);
+  
+  return extensionEnabled;
+}
+
+/**
  * Initialize telemetry for the current session
  */
 export function initTelemetry(
@@ -104,7 +121,7 @@ export function log(
   event: string,
   data?: Record<string, unknown>,
 ): void {
-  if (!currentSession) {return;}
+  if (!currentSession || !isTelemetryEnabled()) {return;}
 
   if (currentSession.events.length >= MAX_EVENTS_PER_SESSION) {
     // Prevent runaway logging
@@ -140,9 +157,15 @@ export function logTimed(
 ): (success: boolean, errorOrData?: Error | Record<string, unknown>) => void {
   const startTime = Date.now();
 
-  log(category, `${event}_start`, data);
+  // Only log start if telemetry is enabled
+  if (isTelemetryEnabled()) {
+    log(category, `${event}_start`, data);
+  }
 
   return (success: boolean, errorOrData?: Error | Record<string, unknown>) => {
+    // Check again at completion time in case setting changed
+    if (!isTelemetryEnabled()) {return;}
+    
     const duration = Date.now() - startTime;
 
     const endEvent: TelemetryEvent = {

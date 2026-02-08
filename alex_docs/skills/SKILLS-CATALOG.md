@@ -7,12 +7,13 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 73
+## Skill Count: 77
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 56    |
+| Inheritable | 59    |
 | Master-Only | 13    |
+| Universal   | 1     |
 | Heir:vscode | 2     |
 | Heir:m365   | 2     |
 
@@ -33,6 +34,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [meditation](../.github/skills/meditation/)                               | master-only | Core meditation protocols                             |
 | [knowledge-synthesis](../.github/skills/knowledge-synthesis/)             | master-only | Cross-project pattern extraction                      |
 | [global-knowledge](../.github/skills/global-knowledge/)                   | master-only | Global knowledge base management                      |
+| [global-knowledge-sync](../.github/skills/global-knowledge-sync/)         | universal   | Cloud sync for global knowledge base                  |
 | [socratic-questioning](../.github/skills/socratic-questioning/)           | inheritable | Guide users to discover answers through questions     |
 | [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/)         | inheritable | Be a thinking partner through explanation             |
 | [anti-hallucination](../.github/skills/anti-hallucination/)               | inheritable | Prevent confabulation, honest uncertainty             |
@@ -76,18 +78,20 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 📝 Documentation & Communication
 
-| Skill                                                                     | Inheritance | Purpose                                                    |
-| ------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
-| [writing-publication](../.github/skills/writing-publication/)             | inheritable | Academic writing, publication strategy                     |
-| [academic-research](../.github/skills/academic-research/)                 | inheritable | Literature review, citation management                     |
-| [practitioner-research](../.github/skills/practitioner-research/)         | inheritable | Ship→Document→Promote methodology, longitudinal case study |
-| [research-project-scaffold](../.github/skills/research-project-scaffold/) | inheritable | Research project structure, refactoring existing projects  |
-| [grant-writing](../.github/skills/grant-writing/)                         | inheritable | Research funding applications, NSF/NIH patterns            |
-| [creative-writing](../.github/skills/creative-writing/)                   | inheritable | Narrative, storytelling, engagement                        |
-| [markdown-mermaid](../.github/skills/markdown-mermaid/)                   | inheritable | Diagrams and visualization                                 |
-| [lint-clean-markdown](../.github/skills/lint-clean-markdown/)             | inheritable | Clean, consistent markdown                                 |
-| [ascii-art-alignment](../.github/skills/ascii-art-alignment/)             | inheritable | Text-based diagrams                                        |
-| [localization](../.github/skills/localization/)                           | inheritable | i18n, l10n, translation workflows                          |
+| Skill                                                                           | Inheritance | Purpose                                                    |
+| ------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| [writing-publication](../.github/skills/writing-publication/)                   | inheritable | Academic writing, publication strategy                     |
+| [academic-research](../.github/skills/academic-research/)                       | inheritable | Literature review, citation management                     |
+| [practitioner-research](../.github/skills/practitioner-research/)               | inheritable | Ship→Document→Promote methodology, longitudinal case study |
+| [research-project-scaffold](../.github/skills/research-project-scaffold/)       | inheritable | Research project structure, refactoring existing projects  |
+| [grant-writing](../.github/skills/grant-writing/)                               | inheritable | Research funding applications, NSF/NIH patterns            |
+| [creative-writing](../.github/skills/creative-writing/)                         | inheritable | Narrative, storytelling, engagement                        |
+| [markdown-mermaid](../.github/skills/markdown-mermaid/)                         | inheritable | Diagrams and visualization                                 |
+| [lint-clean-markdown](../.github/skills/lint-clean-markdown/)                   | inheritable | Clean, consistent markdown                                 |
+| [ascii-art-alignment](../.github/skills/ascii-art-alignment/)                   | inheritable | Text-based diagrams                                        |
+| [localization](../.github/skills/localization/)                                 | inheritable | i18n, l10n, translation workflows                          |
+| [api-documentation](../.github/skills/api-documentation/)                       | inheritable | API docs, OpenAPI specs, developer portal content          |
+| [cross-cultural-collaboration](../.github/skills/cross-cultural-collaboration/) | inheritable | Cross-cultural team dynamics, communication adaptation     |
 
 ### 🎨 Visual Design & Content Creation
 
@@ -98,6 +102,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [graphic-design](../.github/skills/graphic-design/)           | inheritable | Visual composition, branding, aesthetics                  |
 | [gamma-presentations](../.github/skills/gamma-presentations/) | inheritable | AI presentations, documents, social content via Gamma API |
 | [text-to-speech](../.github/skills/text-to-speech/)           | inheritable | TTS synthesis, chunking, audio content generation         |
+| [pptx-generation](../.github/skills/pptx-generation/)         | inheritable | PowerPoint generation via python-pptx, slide layouts      |
 
 ### 💼 Business & Analysis
 
@@ -472,21 +477,21 @@ flowchart LR
 
 ### Subgraph Index
 
-| Subgraph         | Skills                                                                                                                                                                                                                |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance               |
-| 🔮 Meta-Cognitive | meditation, meditation-facilitation, knowledge-synthesis, global-knowledge, self-actualization, architecture-health, architecture-refinement, skill-catalog-generator, architecture-audit, brain-qa, skill-activation |
-| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code                                                  |
-| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management                                                            |
-| 🔐 Security       | security-review, microsoft-sfi, privacy-responsible-ai, pii-privacy-regulations                                                                                                                                       |
-| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development                                                                                                                                                |
-| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                             |
-| 📝 Docs & Writing | writing-publication, markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization                   |
-| 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech                                                                                                                                     |
-| 💼 Business       | business-analysis, alex-effort-estimation                                                                                                                                                                             |
-| 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns                                                                                                                                                                  |
-| ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                              |
-| 👑 Master         | heir-curation, master-alex-audit, release-process, llm-model-selection                                                                                                                                                |
+| Subgraph         | Skills                                                                                                                                                                                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance                                              |
+| 🔮 Meta-Cognitive | meditation, meditation-facilitation, knowledge-synthesis, global-knowledge, global-knowledge-sync, self-actualization, architecture-health, architecture-refinement, skill-catalog-generator, architecture-audit, brain-qa, skill-activation         |
+| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code                                                                                 |
+| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management                                                                                           |
+| 🔐 Security       | security-review, microsoft-sfi, privacy-responsible-ai, pii-privacy-regulations                                                                                                                                                                      |
+| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development                                                                                                                                                                               |
+| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                            |
+| 📝 Docs & Writing | writing-publication, markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration |
+| 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation                                                                                                                                                   |
+| 💼 Business       | business-analysis, alex-effort-estimation                                                                                                                                                                                                            |
+| 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns                                                                                                                                                                                                 |
+| ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                                                             |
+| 👑 Master         | heir-curation, master-alex-audit, release-process, llm-model-selection                                                                                                                                                                               |
 
 ---
 
