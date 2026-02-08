@@ -650,26 +650,26 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (12 files)
+├── instructions/              # 📚 Procedural memory (24 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (7 files)
+├── prompts/                   # 📖 Episodic memory (13 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── domain-knowledge/          # 🎓 Specialized expertise (12 files)
-│   ├── DK-HUMAN-LEARNING-PSYCHOLOGY.md
-│   ├── DK-ADVANCED-DIAGRAMMING.md
+├── skills/                    # 🎓 Portable domain expertise (76 skills)
+│   ├── academic-research/SKILL.md
+│   ├── ai-agent-design/SKILL.md
 │   └── ...
 └── config/                    # ⚙️ Architecture configuration
-    ├── alex-manifest.json     # File tracking for upgrades
     ├── cognitive-config.json
+    ├── MASTER-ALEX-PROTECTED.json
     └── user-profile.json
 ```
 
