@@ -1,0 +1,65 @@
+{
+    "skill": "cross-cultural-collaboration",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/localization/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "bidirectional": true,
+            "reason": "Cultural awareness directly informs localization strategies and vice versa"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "impacts",
+            "strength": 0.85,
+            "bidirectional": true,
+            "reason": "Cross-cultural dynamics affect standup formats, escalation paths, and deadline management"
+        },
+        {
+            "target": ".github/skills/communication/SKILL.md",
+            "type": "requires",
+            "strength": 0.95,
+            "bidirectional": true,
+            "reason": "Cultural adaptation is fundamentally about communication style adaptation"
+        },
+        {
+            "target": ".github/skills/work-life-balance/SKILL.md",
+            "type": "applies",
+            "strength": 0.8,
+            "bidirectional": true,
+            "reason": "Time zone respect and preventing offshore burnout are cultural wellness issues"
+        },
+        {
+            "target": ".github/skills/socratic-questioning/SKILL.md",
+            "type": "applies",
+            "strength": 0.75,
+            "reason": "Open-ended questioning techniques are essential for high-context cultures"
+        },
+        {
+            "target": ".github/skills/post-mortem/SKILL.md",
+            "type": "impacts",
+            "strength": 0.7,
+            "reason": "Retrospective and blame-free post-mortem formats must adapt for face-saving cultures"
+        },
+        {
+            "target": ".github/skills/appropriate-reliance/SKILL.md",
+            "type": "complements",
+            "strength": 0.65,
+            "reason": "Trust calibration in AI extends to trust calibration across cultures"
+        },
+        {
+            "target": ".github/skills/mentorship/SKILL.md",
+            "type": "requires",
+            "strength": 0.7,
+            "bidirectional": true,
+            "reason": "Mentoring across cultures requires cultural intelligence"
+        }
+    ],
+    "metadata": {
+        "lastUpdated": "2026-02-08",
+        "synapseCount": 8,
+        "avgStrength": 0.79,
+        "inheritanceSource": null
+    }
+}
