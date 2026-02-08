@@ -81,10 +81,10 @@ flowchart LR
 
 |                            |                                                                      |
 | -------------------------- | -------------------------------------------------------------------- |
-| **Current Master Version** | 5.0.1                                                                |
-| **Current Heirs**          | VS Code (5.0.1), M365 (5.0.2)                                        |
-| **Target**                 | 5.0.1 (Global Knowledge)                                             |
-| **Status**                 | ✅ v5.0.1 Released                                                    |
+| **Current Master Version** | 5.0.2                                                                |
+| **Current Heirs**          | VS Code (5.0.2), M365 (5.0.2)                                        |
+| **Target**                 | 5.0.2 (Platform Polish)                                               |
+| **Status**                 | ✅ v5.0.2 Released                                                    |
 | **Created**                | 2026-01-29                                                           |
 | **Philosophy**             | Master + Heirs model — unified identity, platform-adapted expression |
 

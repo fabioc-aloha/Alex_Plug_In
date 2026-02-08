@@ -9,7 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.0.2] - 2026-02-07
 
-> **M365 Schema Polish** — Exploit all production-ready v1.6 declarative agent features
+> **Platform Polish** — Branding alignment, architecture accuracy, and M365 schema features
+
+### Fixed (VS Code + Master)
+
+- **Skill Count**: 75→76 across package.json, M365 manifest, M365 knowledge docs, and ROADMAP
+- **Architecture Tree**: README + extension README updated — instructions 12→24, prompts 7→13, legacy `domain-knowledge/` replaced with `skills/` (76 skills), config entries corrected
+- **ROADMAP Versions**: Master 5.0.0→5.0.1, heirs updated to VS Code 5.0.1 + M365 5.0.2
+- **ROADMAP Memory Tree**: Counts corrected to 24 procedural, 13 episodic, 76 skills
+- **Color Palette Conflict**: Marked VISUAL-IDENTITY.md palette as superseded; documented website palette in brand-asset-management
+- **Stale Roadmap Tasks**: 5 orphaned v4.3.0 ⬜ tasks moved to Backlog; "In Progress" section renamed to "Completed"
+
+### Changed (VS Code)
+
+- **Homepage URL**: Updated package.json homepage from GitHub repo to `https://alex.correax.com`
 
 ### Added (M365 Heir)
 
