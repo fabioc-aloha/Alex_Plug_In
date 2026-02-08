@@ -1,7 +1,6 @@
 ---
 name: "Awareness Skill"
 description: "Proactive detection, self-correction, and epistemic vigilance"
-disableModelInvocation: true
 ---
 
 # Awareness Skill

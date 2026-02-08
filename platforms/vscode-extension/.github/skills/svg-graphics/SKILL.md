@@ -2,7 +2,6 @@
 name: "SVG Graphics Skill"
 description: "Scalable, accessible, theme-aware visuals."
 applyTo: "**/*.svg,**/*banner*,**/*logo*,**/*icon*,**/*graphic*"
-disableModelInvocation: true
 ---
 
 # SVG Graphics Skill

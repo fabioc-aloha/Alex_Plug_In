@@ -21,6 +21,17 @@ A meditative QA process for validating the health and coherence of Alex's brain 
 
 ## Audit Phases
 
+### Phase 0: Pre-Audit Skill Selection Optimization
+
+Brain QA is a complex multi-phase operation. Before starting, apply the Skill Selection Optimization protocol:
+
+1. **Classify complexity**: Full brain QA = Complex (15 phases)
+2. **Pre-load skills**: architecture-health, skill-activation, heir-curation, release-preflight
+3. **Execution order**: Sequential phases 1-15 with parallel sub-checks where possible
+4. **Gap check**: Verify all audit scripts exist, flag missing PowerShell tools
+
+This ensures all validation phases run in optimal order with the right skill context loaded.
+
 ### Phase 1: Synapse Target Validation
 
 Verify all synapse connections point to existing files:
@@ -504,6 +515,16 @@ Brain QA can be triggered as part of `dream` maintenance:
 1. Run standard dream (synapse validation)
 2. If issues found → run Brain QA for deeper analysis
 3. Repair and re-validate
+
+## Integration with Skill Selection Optimization
+
+Brain QA validates that SSO has correct data to work with:
+
+1. **Phase 3** (Skill Index Coverage) → ensures SSO's skill survey can find all skills
+2. **Phase 4** (Trigger Semantic Analysis) → validates action-keyword index SSO depends on
+3. **Phase 6** (Schema Format) → ensures synapses.json that SSO reads for dependency analysis are valid
+
+If Brain QA finds index coverage gaps or trigger conflicts, SSO's proactive skill survey becomes unreliable. Fix these first.
 
 ## Triggers
 

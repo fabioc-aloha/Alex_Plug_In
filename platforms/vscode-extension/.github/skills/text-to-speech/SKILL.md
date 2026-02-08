@@ -1,7 +1,6 @@
 ---
 name: "text-to-speech"
 description: "Alex's voice synthesis capability for reading documents aloud"
-disableModelInvocation: true
 ---
 
 # Text-to-Speech Skill ⭐ Flagship

@@ -1,9 +1,7 @@
 {
-  "sourceCommit": "dd91bfa",
-  "filesCopied": 196,
-  "generatedAt": "2026-02-07 13:11:55",
-  "sourceVersion": "5.0.1",
-  "filesExcluded": 64,
+  "generatedAt": "2026-02-08 13:54:09",
+  "sourceVersion": "5.1.0",
+  "sourceCommit": "5634b22",
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -28,5 +26,7 @@
     "skills/self-actualization",
     "skills/heir-curation",
     "skills/master-alex-audit"
-  ]
+  ],
+  "filesCopied": 201,
+  "filesExcluded": 69
 }

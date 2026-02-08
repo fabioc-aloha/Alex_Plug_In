@@ -2,7 +2,6 @@
 name: "Image Handling Skill"
 description: "Right format, right size, right quality."
 applyTo: "**/*.png,**/*.jpg,**/*.jpeg,**/*.webp,**/*.svg,**/*.ico,**/*image*,**/*banner*,**/*icon*"
-disableModelInvocation: true
 triggers:
   - "convert svg"
   - "convert png"
