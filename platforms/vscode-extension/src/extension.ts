@@ -617,6 +617,31 @@ export function activate(context: vscode.ExtensionContext) {
           detail: "🐛 Requires text selection",
         },
         {
+          label: "$(question) Explain This",
+          description: "Level-appropriate code explanation",
+          detail: "📚 Junior/senior/reviewer/teacher levels",
+        },
+        {
+          label: "$(edit) Refactor This",
+          description: "Goal-oriented refactoring",
+          detail: "🔧 Readability/performance/testability/SOLID",
+        },
+        {
+          label: "$(lightbulb) Simplify This",
+          description: "Clean code transformation",
+          detail: "✨ Reduce nesting, improve naming",
+        },
+        {
+          label: "$(shield) Security Review",
+          description: "OWASP Top 10 security audit",
+          detail: "🛡️ Injection, auth, secrets, etc.",
+        },
+        {
+          label: "$(note) Document This",
+          description: "Generate documentation",
+          detail: "📝 JSDoc/docstrings/XML docs",
+        },
+        {
           label: "$(symbol-structure) Generate Diagram",
           description: "Create Mermaid diagrams",
           detail: "📊 Class, sequence, flowchart, ER, etc.",
@@ -708,6 +733,16 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.codeReview");
         } else if (selected.label.includes("Debug This")) {
           vscode.commands.executeCommand("alex.debugThis");
+        } else if (selected.label.includes("Explain This")) {
+          vscode.commands.executeCommand("alex.explainThis");
+        } else if (selected.label.includes("Refactor This")) {
+          vscode.commands.executeCommand("alex.refactorThis");
+        } else if (selected.label.includes("Simplify This")) {
+          vscode.commands.executeCommand("alex.simplifyThis");
+        } else if (selected.label.includes("Security Review")) {
+          vscode.commands.executeCommand("alex.securityReview");
+        } else if (selected.label.includes("Document This")) {
+          vscode.commands.executeCommand("alex.documentThis");
         } else if (selected.label.includes("Generate Diagram")) {
           vscode.commands.executeCommand("alex.generateDiagram");
         } else if (selected.label.includes("Generate Tests")) {
@@ -964,6 +999,343 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.executeCommand("workbench.action.chat.openAgent");
         vscode.window.showInformationMessage(
           `🐛 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Explain This command
+  const explainThisDisposable = vscode.commands.registerCommand(
+    "alex.explainThis",
+    async (uri?: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "explain_this");
+      try {
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        if (uri) {
+          const content = await vscode.workspace.fs.readFile(uri);
+          selectedText = new TextDecoder().decode(content);
+          fileName = path.basename(uri.fsPath);
+          languageId = getLanguageIdFromPath(uri.fsPath);
+        } else {
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        if (!selectedText) {
+          vscode.window.showWarningMessage("Select code to explain");
+          endLog(true);
+          return;
+        }
+
+        const levels = [
+          { label: "$(mortar-board) Junior Developer", description: "Step by step, define terms", value: "junior" },
+          { label: "$(account) Senior Developer", description: "Key insights only", value: "senior" },
+          { label: "$(shield) Code Reviewer", description: "Focus on risks and edge cases", value: "reviewer" },
+          { label: "$(broadcast) Teaching Workshop", description: "Include exercises", value: "teacher" },
+        ];
+
+        const level = await vscode.window.showQuickPick(levels, {
+          placeHolder: "Explain like I'm a...",
+          title: "📚 Choose explanation level",
+        });
+
+        if (!level) {
+          endLog(true);
+          return;
+        }
+
+        const prompt = `Explain this code like I'm a ${level.value} developer. ${level.description}:
+
+\`\`\`${languageId}
+${selectedText}
+\`\`\`
+
+Focus on: purpose, data flow, key design decisions, and any non-obvious behavior.`;
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `📚 Explanation prompt copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Refactor This command
+  const refactorThisDisposable = vscode.commands.registerCommand(
+    "alex.refactorThis",
+    async (uri?: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "refactor_this");
+      try {
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        if (uri) {
+          const content = await vscode.workspace.fs.readFile(uri);
+          selectedText = new TextDecoder().decode(content);
+          fileName = path.basename(uri.fsPath);
+          languageId = getLanguageIdFromPath(uri.fsPath);
+        } else {
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        if (!selectedText) {
+          vscode.window.showWarningMessage("Select code to refactor");
+          endLog(true);
+          return;
+        }
+
+        const goals = [
+          { label: "$(book) Readability", description: "Cleaner, more understandable code", value: "readability" },
+          { label: "$(dashboard) Performance", description: "Faster execution, less memory", value: "performance" },
+          { label: "$(beaker) Testability", description: "Easier to test, better DI", value: "testability" },
+          { label: "$(extensions) Maintainability", description: "Easier to modify and extend", value: "maintainability" },
+          { label: "$(symbol-interface) SOLID Principles", description: "Apply SOLID design patterns", value: "solid" },
+        ];
+
+        const goal = await vscode.window.showQuickPick(goals, {
+          placeHolder: "Refactor for...",
+          title: "🔧 Choose refactoring goal",
+        });
+
+        if (!goal) {
+          endLog(true);
+          return;
+        }
+
+        const prompt = `Refactor this code for ${goal.value}. ${goal.description}.
+
+\`\`\`${languageId}
+${selectedText}
+\`\`\`
+
+Show:
+1. The refactored code
+2. Before/after comparison for key changes
+3. Explain each transformation and its benefit
+4. Any tradeoffs to consider`;
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `🔧 Refactoring prompt for ${goal.value} copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Security Review command
+  const securityReviewDisposable = vscode.commands.registerCommand(
+    "alex.securityReview",
+    async (uri?: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "security_review");
+      try {
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        if (uri) {
+          const content = await vscode.workspace.fs.readFile(uri);
+          selectedText = new TextDecoder().decode(content);
+          fileName = path.basename(uri.fsPath);
+          languageId = getLanguageIdFromPath(uri.fsPath);
+        } else {
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        if (!selectedText) {
+          vscode.window.showWarningMessage("Select code for security review");
+          endLog(true);
+          return;
+        }
+
+        const prompt = `Security audit this code. Check for OWASP Top 10 vulnerabilities:
+
+\`\`\`${languageId}
+${selectedText}
+\`\`\`
+
+Analyze for:
+1. **Injection** (SQL, XSS, command injection)
+2. **Authentication/Authorization** flaws
+3. **Sensitive data exposure** (secrets, PII)
+4. **Security misconfiguration**
+5. **Insecure deserialization**
+6. **Input validation** gaps
+7. **Cryptographic weaknesses**
+
+For each finding:
+- Severity: Critical/High/Medium/Low
+- Line/location
+- Risk explanation
+- Secure fix with code example`;
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `🛡️ Security review prompt copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Document This command
+  const documentThisDisposable = vscode.commands.registerCommand(
+    "alex.documentThis",
+    async (uri?: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "document_this");
+      try {
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        if (uri) {
+          const content = await vscode.workspace.fs.readFile(uri);
+          selectedText = new TextDecoder().decode(content);
+          fileName = path.basename(uri.fsPath);
+          languageId = getLanguageIdFromPath(uri.fsPath);
+        } else {
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        if (!selectedText) {
+          vscode.window.showWarningMessage("Select code to document");
+          endLog(true);
+          return;
+        }
+
+        // Detect doc format based on language
+        let docFormat = "JSDoc";
+        if (languageId === "python") docFormat = "docstrings (Google style)";
+        else if (languageId === "csharp" || languageId === "fsharp") docFormat = "XML documentation comments";
+        else if (languageId === "rust") docFormat = "rustdoc";
+        else if (languageId === "go") docFormat = "Go doc comments";
+        else if (languageId === "java") docFormat = "Javadoc";
+
+        const prompt = `Generate comprehensive ${docFormat} documentation for this code:
+
+\`\`\`${languageId}
+${selectedText}
+\`\`\`
+
+Include:
+- @param / @returns / @throws (or language equivalent)
+- Description of purpose and behavior
+- Usage examples for complex functions
+- Edge cases and important notes
+- Type information where applicable
+
+Output ONLY the documented code, ready to paste.`;
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `📝 Documentation prompt (${docFormat}) copied. Paste in Agent chat (Ctrl+V).`
+        );
+        
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Simplify This command
+  const simplifyThisDisposable = vscode.commands.registerCommand(
+    "alex.simplifyThis",
+    async (uri?: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "simplify_this");
+      try {
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        if (uri) {
+          const content = await vscode.workspace.fs.readFile(uri);
+          selectedText = new TextDecoder().decode(content);
+          fileName = path.basename(uri.fsPath);
+          languageId = getLanguageIdFromPath(uri.fsPath);
+        } else {
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        if (!selectedText) {
+          vscode.window.showWarningMessage("Select code to simplify");
+          endLog(true);
+          return;
+        }
+
+        const prompt = `Simplify this code while preserving behavior:
+
+\`\`\`${languageId}
+${selectedText}
+\`\`\`
+
+Apply these clean code principles:
+1. **Reduce nesting** - Flatten conditionals, use early returns
+2. **Extract helpers** - Break complex logic into named functions
+3. **Improve naming** - Variables and functions should be self-documenting
+4. **Remove duplication** - DRY principle
+5. **Simplify expressions** - Use language idioms and built-ins
+
+For each change:
+- Show the before/after
+- Explain WHY it's simpler (not just how)
+- Ensure no behavior changes`;
+        
+        await vscode.env.clipboard.writeText(prompt);
+        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        vscode.window.showInformationMessage(
+          `✨ Simplification prompt copied. Paste in Agent chat (Ctrl+V).`
         );
         
         endLog(true);
@@ -2059,6 +2431,11 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(releasePreflightDisposable);
   context.subscriptions.push(codeReviewDisposable);
   context.subscriptions.push(debugThisDisposable);
+  context.subscriptions.push(explainThisDisposable);
+  context.subscriptions.push(refactorThisDisposable);
+  context.subscriptions.push(securityReviewDisposable);
+  context.subscriptions.push(documentThisDisposable);
+  context.subscriptions.push(simplifyThisDisposable);
   context.subscriptions.push(generateDiagramDisposable);
   context.subscriptions.push(generatePptxDisposable);
   context.subscriptions.push(generatePptxFromFileDisposable);

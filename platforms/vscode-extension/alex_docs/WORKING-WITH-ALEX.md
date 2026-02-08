@@ -197,6 +197,101 @@ Use the same approach we discussed for the user service.
 
 ---
 
+## Right-Click Quick Actions (Context Menu)
+
+Select code and right-click for instant access to these prompts:
+
+| Command             | What It Does                                                          | Best For                      |
+| ------------------- | --------------------------------------------------------------------- | ----------------------------- |
+| **Explain This**    | Level-appropriate explanation (junior/senior/reviewer/teacher)        | Understanding unfamiliar code |
+| **Code Review**     | Bugs, performance, security, maintainability analysis                 | Quality gates                 |
+| **Debug This**      | Root cause analysis with fix suggestions                              | Stuck on a bug                |
+| **Refactor This**   | Goal-oriented refactoring (readability/performance/testability/SOLID) | Code improvement              |
+| **Simplify This**   | Reduce nesting, extract helpers, improve naming                       | Code cleanup                  |
+| **Security Review** | OWASP Top 10 audit with severity ratings                              | Before deployment             |
+| **Document This**   | Language-appropriate docs (JSDoc/docstrings/XML docs)                 | Missing documentation         |
+| **Generate Tests**  | Framework-appropriate test generation                                 | Test coverage                 |
+
+### Best Practice: The Right-Click Workflow
+
+Instead of typing complex prompts, use the context menu:
+
+1. **Select the code** you want to analyze
+2. **Right-click** → Alex submenu
+3. **Choose the action** (prompt is copied to clipboard)
+4. **Paste in chat** (Ctrl+V) and send
+
+This ensures consistent, well-structured prompts every time.
+
+---
+
+## Best Practices for AI Partnership
+
+### 1. Start Sessions with Context
+
+```
+Good morning! Today I'm working on:
+- Project: Alex Cognitive Architecture
+- Focus: Adding new clipboard commands
+- Constraints: Must follow existing patterns
+```
+
+### 2. Use Incremental Refinement
+
+Don't try to get everything perfect in one prompt:
+
+```
+First: "Generate a basic implementation"
+Then:  "Add error handling"
+Then:  "Add TypeScript strict types"
+Then:  "Add tests"
+```
+
+### 3. Leverage History
+
+Alex remembers the session. Use references:
+
+```
+"Apply the same pattern we used for the user service"
+"Use the error handling from the auth module"
+"Similar to what we discussed earlier, but for products"
+```
+
+### 4. Give Feedback
+
+Help Alex calibrate:
+
+```
+"That's exactly what I needed"
+"Too verbose — keep it to the essentials"
+"Good approach, but I prefer functional style"
+```
+
+### 5. Know When to Pause
+
+If Alex seems stuck or outputs low quality:
+
+```
+"Let's step back. Here's the bigger picture..."
+"I think we're overcomplicating this. The core need is..."
+"Can we try a completely different approach?"
+```
+
+### 6. Document Your Partnership
+
+Keep a log of effective prompts:
+
+```
+// Alex prompt that works well for API endpoints:
+"Generate a REST endpoint for [resource] with:
+- Input validation using Zod
+- Error handling with proper HTTP codes
+- TypeScript strict mode
+- Unit test in same response"
+```
+
+---
+
 ## Conversational Shortcuts
 
 Alex understands these natural triggers:
@@ -287,6 +382,16 @@ The best prompt engineers share these traits:
 │  WORKING WITH ALEX — QUICK REFERENCE                    │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
+│  RIGHT-CLICK ACTIONS (select code first):               │
+│  • Explain This → Level-appropriate explanation         │
+│  • Code Review → Quality analysis                       │
+│  • Debug This → Root cause analysis                     │
+│  • Refactor This → Goal-oriented improvement            │
+│  • Simplify This → Clean code transformation            │
+│  • Security Review → OWASP audit                        │
+│  • Document This → Generate docs (JSDoc/docstring)      │
+│  • Generate Tests → Framework-appropriate tests         │
+│                                                         │
 │  STRUCTURE YOUR ASK:                                    │
 │  • Context → Goal → Constraints                         │
 │  • Be specific about output format                      │
@@ -306,7 +411,7 @@ The best prompt engineers share these traits:
 │                                                         │
 │  DAILY RHYTHM:                                          │
 │  • Morning: Self-Actualize → set context               │
-│  • Working: Natural conversation                        │
+│  • Working: Right-click actions + conversation         │
 │  • End: Dream → consolidate learnings                  │
 │                                                         │
 └─────────────────────────────────────────────────────────┘

@@ -242,6 +242,31 @@
         "icon": "$(bug)"
       },
       {
+        "command": "alex.explainThis",
+        "title": "Alex: Explain This",
+        "icon": "$(question)"
+      },
+      {
+        "command": "alex.refactorThis",
+        "title": "Alex: Refactor This",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "alex.securityReview",
+        "title": "Alex: Security Review",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "alex.documentThis",
+        "title": "Alex: Document This",
+        "icon": "$(note)"
+      },
+      {
+        "command": "alex.simplifyThis",
+        "title": "Alex: Simplify This",
+        "icon": "$(lightbulb)"
+      },
+      {
         "command": "alex.generateDiagram",
         "title": "Alex: Generate Diagram",
         "icon": "$(type-hierarchy)"
@@ -351,18 +376,43 @@
           "group": "1_ask@1"
         },
         {
-          "command": "alex.codeReview",
+          "command": "alex.explainThis",
           "group": "1_ask@2",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
         },
         {
-          "command": "alex.debugThis",
+          "command": "alex.codeReview",
           "group": "1_ask@3",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
         },
         {
-          "command": "alex.generateTests",
+          "command": "alex.debugThis",
           "group": "1_ask@4",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.refactorThis",
+          "group": "1_ask@5",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.simplifyThis",
+          "group": "1_ask@6",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.securityReview",
+          "group": "1_ask@7",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.documentThis",
+          "group": "1_ask@8",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.generateTests",
+          "group": "1_ask@9",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb)$/"
         },
         {
@@ -415,16 +465,36 @@
           "group": "1_ask@1"
         },
         {
-          "command": "alex.codeReview",
+          "command": "alex.explainThis",
           "group": "1_ask@2"
         },
         {
-          "command": "alex.debugThis",
+          "command": "alex.codeReview",
           "group": "1_ask@3"
         },
         {
-          "command": "alex.generateTests",
+          "command": "alex.debugThis",
           "group": "1_ask@4"
+        },
+        {
+          "command": "alex.refactorThis",
+          "group": "1_ask@5"
+        },
+        {
+          "command": "alex.simplifyThis",
+          "group": "1_ask@6"
+        },
+        {
+          "command": "alex.securityReview",
+          "group": "1_ask@7"
+        },
+        {
+          "command": "alex.documentThis",
+          "group": "1_ask@8"
+        },
+        {
+          "command": "alex.generateTests",
+          "group": "1_ask@9"
         },
         {
           "command": "alex.saveSelectionAsInsight",
