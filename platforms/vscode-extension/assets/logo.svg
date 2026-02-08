@@ -9,7 +9,7 @@
       <stop offset="100%" stop-color="#ff6b35"/>
     </linearGradient>
   </defs>
-  <g transform="rotate(30 16 16)">
+  <g transform="rotate(60 16 16)">
     <!-- A Negative Space Rocket Logo -->
     <!-- Rocket body -->
     <path d="M16,2.5 C16,2.5 10,7.5 10,15 L10,23 L13,24.5 L13,21 L19,21 L19,24.5 L22,23 L22,15 C22,7.5 16,2.5 16,2.5 Z" fill="url(#azureGrad)"/>

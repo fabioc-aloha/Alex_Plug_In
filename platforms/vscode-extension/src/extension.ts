@@ -47,7 +47,7 @@ import {
   registerSessionProvider,
   registerStreakProvider,
 } from "./shared/healthCheck";
-import { isWorkspaceProtected, getLanguageIdFromPath } from "./shared/utils";
+import { isWorkspaceProtected, getLanguageIdFromPath, openChatPanel } from "./shared/utils";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import { registerMemoryDashboard } from "./views/memoryDashboard";
@@ -102,6 +102,25 @@ export async function activate(context: vscode.ExtensionContext) {
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
 
+  try {
+    await activateInternal(context, extensionVersion);
+  } catch (err) {
+    console.error('[Alex] CRITICAL: Extension activation failed:', err);
+    statusBarItem.text = "$(error) Alex";
+    statusBarItem.tooltip = `Alex failed to activate: ${err}`;
+    vscode.window.showErrorMessage(
+      `Alex Cognitive Architecture failed to activate: ${err instanceof Error ? err.message : String(err)}. Try reloading the window.`,
+      "Reload Window"
+    ).then(selection => {
+      if (selection === "Reload Window") {
+        vscode.commands.executeCommand("workbench.action.reloadWindow");
+      }
+    });
+  }
+}
+
+async function activateInternal(context: vscode.ExtensionContext, extensionVersion: string) {
+
   // Initialize beta telemetry (temporary - remove after beta)
   telemetry.initTelemetry(context, extensionVersion);
   telemetry.log("lifecycle", "extension_activate", {
@@ -116,7 +135,9 @@ export async function activate(context: vscode.ExtensionContext) {
   setExtensionPathForCss(context.extensionPath);
 
   // Check for version upgrade and notify user
-  checkVersionUpgrade(context);
+  checkVersionUpgrade(context).catch(err =>
+    console.warn('[Alex] Version upgrade check failed:', err)
+  );
 
   // Register chat participant for @alex conversations
   registerChatParticipant(context);
@@ -125,7 +146,11 @@ export async function activate(context: vscode.ExtensionContext) {
   registerLanguageModelTools(context);
 
   // Register global knowledge tools for cross-project learning
-  await initGlobalKnowledgeSecrets(context);
+  try {
+    await initGlobalKnowledgeSecrets(context);
+  } catch (err) {
+    console.warn('[Alex] Failed to initialize GK secrets:', err);
+  }
   registerGlobalKnowledgeTools(context);
 
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
@@ -808,7 +833,7 @@ export async function activate(context: vscode.ExtensionContext) {
         
         // Copy prompt to clipboard and open Agent mode
         await vscode.env.clipboard.writeText(`Run ${auditType.toLowerCase()} on this project`);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🔍 ${auditType} prompt copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -855,7 +880,7 @@ export async function activate(context: vscode.ExtensionContext) {
         
         // Copy prompt to clipboard and open Agent mode
         await vscode.env.clipboard.writeText(`Run ${checkType.toLowerCase()} check for release`);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🚀 ${checkType} prompt copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -900,28 +925,23 @@ export async function activate(context: vscode.ExtensionContext) {
           }
         }
 
-        // If no text, fall back to input prompt
+        // If no text, open Agent chat with a general code review prompt
         if (!selectedText) {
-          const userInput = await vscode.window.showInputBox({
-            prompt: 'Paste the code you want reviewed',
-            placeHolder: 'function example() { ... }',
-            ignoreFocusOut: true
-          });
-          
-          if (!userInput) {
-            endLog(true);
-            return;
-          }
-          selectedText = userInput;
-          fileName = 'input';
-          languageId = 'text';
+          const prompt = `Review the code in the current workspace for issues, improvements, and best practices. Focus on:\n1. Code quality and readability\n2. Potential bugs or edge cases\n3. Performance considerations\n4. Security concerns\n5. Adherence to project conventions`;
+          await vscode.env.clipboard.writeText(prompt);
+          await openChatPanel();
+          vscode.window.showInformationMessage(
+            `📋 Code review prompt copied. Paste in Agent chat (Ctrl+V).`
+          );
+          endLog(true);
+          return;
         }
         
-        // Copy prompt to clipboard and open Agent mode
+        // Copy prompt with selected code to clipboard and open Agent mode
         const prompt = `Review this code from ${fileName} for issues, improvements, and best practices:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `📋 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -986,7 +1006,7 @@ export async function activate(context: vscode.ExtensionContext) {
         const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🐛 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -1029,7 +1049,7 @@ You are my rubber duck. I need to explain my problem to you.
 
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           "🦆 Rubber duck prompt copied. Paste in Agent chat (Ctrl+V) to start."
         );
@@ -1098,7 +1118,7 @@ ${selectedText}
 Focus on: purpose, data flow, key design decisions, and any non-obvious behavior.`;
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `📚 Explanation prompt copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -1172,7 +1192,7 @@ Show:
 4. Any tradeoffs to consider`;
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🔧 Refactoring prompt for ${goal.value} copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -1237,7 +1257,7 @@ For each finding:
 - Secure fix with code example`;
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🛡️ Security review prompt copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -1304,7 +1324,7 @@ Include:
 Output ONLY the documented code, ready to paste.`;
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `📝 Documentation prompt (${docFormat}) copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -1366,7 +1386,7 @@ For each change:
 - Ensure no behavior changes`;
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `✨ Simplification prompt copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -2010,7 +2030,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🧪 Test prompt for ${fileName} copied. Paste in Agent chat (Ctrl+V).`
         );
@@ -2149,7 +2169,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         }
         
         await vscode.env.clipboard.writeText(prompt);
-        vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await openChatPanel();
         vscode.window.showInformationMessage(
           `🔍 ${reviewName} prompt copied. Paste in Agent chat (Ctrl+V).`
         );

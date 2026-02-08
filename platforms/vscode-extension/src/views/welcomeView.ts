@@ -13,6 +13,7 @@ import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml, getNonce } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
+import { openChatPanel } from "../shared/utils";
 import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
 
 /**
@@ -111,7 +112,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         case "openChat":
           // Open Agent mode directly (no clipboard clutter)
-          vscode.commands.executeCommand("workbench.action.chat.openAgent");
+          openChatPanel();
           break;
         case "generateSkillCatalog":
           vscode.commands.executeCommand("alex.generateSkillCatalog");
@@ -173,6 +174,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "skillReview":
           vscode.commands.executeCommand("alex.skillReview");
           break;
+        case "launchRecommendedSkill": {
+          const skill = message.skill || 'code-quality';
+          const skillName = message.skillName || skill;
+          const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
+          await vscode.env.clipboard.writeText(prompt);
+          await openChatPanel();
+          vscode.window.showInformationMessage(`${skillName} prompt copied. Paste in Agent chat (Ctrl+V).`);
+          break;
+        }
         case "openMarketplace":
           vscode.env.openExternal(vscode.Uri.parse("https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"));
           break;
@@ -429,10 +439,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     <div class="error">
         <p>Failed to load Alex status</p>
         <p style="font-size: 12px; opacity: 0.7;">${errorMessage}</p>
-        <button onclick="vscode.postMessage({command: 'refresh'})">Retry</button>
+        <button data-cmd="refresh">Retry</button>
     </div>
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
+        document.addEventListener('click', function(e) {
+            const el = e.target.closest('[data-cmd]');
+            if (el) {
+                e.preventDefault();
+                vscode.postMessage({ command: el.getAttribute('data-cmd') });
+            }
+        });
     </script>
 </body>
 </html>`;
@@ -472,6 +489,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     
     // Skill name mapping for display
     const skillNameMap: Record<string, string> = {
+      'code-quality': 'Code Quality',
       'code-review': 'Code Review',
       'research-project-scaffold': 'Research Setup',
       'api-documentation': 'API Docs',
@@ -507,7 +525,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <div class="session-timer">${this._formatTime(session.remaining)}</div>
                 <div class="session-footer">
                     <span class="session-status">${session.isPaused ? "⏸️ Paused" : "▶️ Active"}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ""}</span>
-                    <a href="#" class="session-actions-link" onclick="cmd('sessionActions'); return false;">Actions</a>
+                    <a href="#" class="session-actions-link" data-cmd="sessionActions">Actions</a>
                 </div>
             </div>
         `
@@ -534,7 +552,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin: 0;
         }
         .container {
-            padding: 12px;
+            padding: 4px 6px;
         }
         .header {
             display: flex;
@@ -545,8 +563,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
             cursor: pointer;
@@ -1023,12 +1041,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('workingWithAlex')" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
-                <span class="header-persona" onclick="cmd('skillReview')" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
+                <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
             </div>
-            <button class="refresh-btn" onclick="refresh()" title="Refresh">↻</button>
+            <button class="refresh-btn" data-cmd="refresh" title="Refresh">↻</button>
         </div>
         
         ${sessionHtml}
@@ -1036,8 +1054,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         ${this._getNudgesHtml(nudges)}
         
         <div class="section">
-            <div class="section-title clickable" onclick="cmd('healthDashboard')" title="Click to open Health Dashboard">Status</div>
-            <div class="status-grid" onclick="cmd('healthDashboard')" style="cursor: pointer;" title="Click to open Health Dashboard">
+            <div class="section-title clickable" data-cmd="healthDashboard" title="Click to open Health Dashboard">Status</div>
+            <div class="status-grid" data-cmd="healthDashboard" style="cursor: pointer;" title="Click to open Health Dashboard">
                 <div class="status-item ${isHealthy ? 'status-good' : 'status-warn'}">
                     <div class="status-label">Health</div>
                     <div class="status-value"><span class="status-dot ${isHealthy ? 'dot-green' : health.brokenSynapses > 5 ? 'dot-red' : 'dot-yellow'}"></span>${healthText}</div>
@@ -1053,139 +1071,136 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
                 <div class="action-group-label">FOR YOU</div>
-                <button class="action-btn recommended" onclick="cmd('skillReview')" title="Recommended for ${personaName}: ${recommendedSkillName}">
+                <button class="action-btn recommended" data-cmd="launchRecommendedSkill" data-skill="${personaSkill}" data-skill-name="${recommendedSkillName}" title="Recommended for ${personaName}: ${recommendedSkillName}">
                     <span class="action-icon">${personaIcon}</span>
                     <span class="action-text">${recommendedSkillName}</span>
                     <span class="recommended-badge">\u2192</span>
                 </button>
                 
                 <div class="action-group-label">CORE</div>
-                <button class="action-btn" onclick="cmd('workingWithAlex')" title="Learn how to work effectively with Alex">
+                <button class="action-btn" data-cmd="workingWithAlex" title="Learn how to work effectively with Alex">
                     <span class="action-icon">🎓</span>
                     <span class="action-text">Working with Alex</span>
                 </button>
-                <button class="action-btn" onclick="cmd('openChat')">
+                <button class="action-btn" data-cmd="openChat">
                     <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
                     <span class="action-text">Chat with Copilot</span>
                 </button>
-                <button class="action-btn" onclick="cmd('upgrade')">
+                <button class="action-btn" data-cmd="upgrade">
                     <span class="action-icon">${hasGlobalKnowledge ? '🌐' : '⬆️'}</span>
                     <span class="action-text">Initialize / Update</span>
-                    ${hasGlobalKnowledge ? '<span class="premium-badge" title="Global Knowledge enabled">GK</span>' : ''}
                 </button>
-                <button class="action-btn" onclick="cmd('dream')">
+                <button class="action-btn" data-cmd="dream">
                     <span class="action-icon">💭</span>
                     <span class="action-text">Dream</span>
                 </button>
-                <button class="action-btn" onclick="cmd('selfActualize')">
+                <button class="action-btn" data-cmd="selfActualize">
                     <span class="action-icon">✨</span>
                     <span class="action-text">Self-Actualize</span>
                 </button>
                 
                 ${hasGlobalKnowledge ? `<div class="action-group-label">KNOWLEDGE</div>
-                <button class="action-btn premium" onclick="cmd('knowledgeQuickPick')" title="Premium: Requires Global Knowledge">
+                <button class="action-btn" data-cmd="knowledgeQuickPick">
                     <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
-                    <span class="premium-badge">⭐</span>
                 </button>` : ''}
                 
                 <div class="action-group-label">DEV TOOLS</div>
-                <button class="action-btn" onclick="cmd('codeReview')" title="Get AI code review for selection or pasted code">
+                <button class="action-btn" data-cmd="codeReview" title="Get AI code review for selection or pasted code">
                     <span class="action-icon">👀</span>
                     <span class="action-text">Code Review</span>
                 </button>
-                <button class="action-btn" onclick="cmd('debugThis')" title="Debug code or error message">
+                <button class="action-btn" data-cmd="debugThis" title="Debug code or error message">
                     <span class="action-icon">🐛</span>
                     <span class="action-text">Debug This</span>
                 </button>
-                <button class="action-btn" onclick="cmd('rubberDuck')" title="Explain your problem to Alex as rubber duck">
+                <button class="action-btn" data-cmd="rubberDuck" title="Explain your problem to Alex as rubber duck">
                     <span class="action-icon">🦆</span>
                     <span class="action-text">Rubber Duck</span>
                 </button>
-                <button class="action-btn" onclick="cmd('generateTests')" title="Generate tests for selection or pasted code">
+                <button class="action-btn" data-cmd="generateTests" title="Generate tests for selection or pasted code">
                     <span class="action-icon">🧪</span>
                     <span class="action-text">Generate Tests</span>
                 </button>
-                <button class="action-btn" onclick="cmd('runAudit')">
+                <button class="action-btn" data-cmd="runAudit">
                     <span class="action-icon">🔍</span>
                     <span class="action-text">Project Audit</span>
                 </button>
-                <button class="action-btn" onclick="cmd('releasePreflight')">
+                <button class="action-btn" data-cmd="releasePreflight">
                     <span class="action-icon">🚀</span>
                     <span class="action-text">Release Preflight</span>
                 </button>
-                <button class="action-btn" onclick="cmd('importGitHubIssues')" title="Import GitHub issues as learning goals">
+                <button class="action-btn" data-cmd="importGitHubIssues" title="Import GitHub issues as learning goals">
                     <span class="action-icon">📋</span>
                     <span class="action-text">Import Issues</span>
                 </button>
-                <button class="action-btn" onclick="cmd('reviewPR')" title="Generate AI-powered code review for pull requests">
+                <button class="action-btn" data-cmd="reviewPR" title="Generate AI-powered code review for pull requests">
                     <span class="action-icon">👁️</span>
                     <span class="action-text">Review PR</span>
                 </button>
                 
                 <div class="action-group-label">MULTIMODAL</div>
-                <button class="action-btn" onclick="cmd('askAboutSelection')" title="Ask Alex about selected code or enter a question">
+                <button class="action-btn" data-cmd="askAboutSelection" title="Ask Alex about selected code or enter a question">
                     <span class="action-icon">💬</span>
                     <span class="action-text">Ask Alex</span>
                 </button>
-                <button class="action-btn" onclick="cmd('saveSelectionAsInsight')" title="Save selection or type an insight to knowledge">
+                <button class="action-btn" data-cmd="saveSelectionAsInsight" title="Save selection or type an insight to knowledge">
                     <span class="action-icon">💡</span>
                     <span class="action-text">Save Insight</span>
                 </button>
-                <button class="action-btn" onclick="cmd('searchRelatedKnowledge')" title="Search Alex knowledge for related patterns">
+                <button class="action-btn" data-cmd="searchRelatedKnowledge" title="Search Alex knowledge for related patterns">
                     <span class="action-icon">🔍</span>
                     <span class="action-text">Search Knowledge</span>
                 </button>
-                <button class="action-btn" onclick="cmd('generateImageFromSelection')" title="Generate an image from description">
+                <button class="action-btn" data-cmd="generateImageFromSelection" title="Generate an image from description">
                     <span class="action-icon">🖼️</span>
                     <span class="action-text">Generate Image</span>
                 </button>
-                <button class="action-btn" onclick="cmd('generateDiagram')" title="Generate Mermaid diagrams from code or text">
+                <button class="action-btn" data-cmd="generateDiagram" title="Generate Mermaid diagrams from code or text">
                     <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
                 </button>
-                <button class="action-btn" onclick="cmd('generatePptx')" title="Generate PowerPoint from markdown or selection">
+                <button class="action-btn" data-cmd="generatePptx" title="Generate PowerPoint from markdown or selection">
                     <span class="action-icon">📰</span>
                     <span class="action-text">Generate Presentation</span>
                 </button>
-                <button class="action-btn" onclick="cmd('readAloud')" title="Read selected text aloud using neural voices">
+                <button class="action-btn" data-cmd="readAloud" title="Read selected text aloud using neural voices">
                     <span class="action-icon">🔊</span>
                     <span class="action-text">Read Aloud</span>
                 </button>
                 
                 <div class="action-group-label">BALANCE</div>
-                <button class="action-btn" onclick="cmd('startSession')">
+                <button class="action-btn" data-cmd="startSession">
                     <span class="action-icon">🍅</span>
                     <span class="action-text">Focus Session</span>
                 </button>
-                <button class="action-btn" onclick="cmd('showGoals')">
+                <button class="action-btn" data-cmd="showGoals">
                     <span class="action-icon">🎯</span>
                     <span class="action-text">Goals</span>
                 </button>
                 
                 <div class="action-group-label">SYSTEM</div>
-                <button class="action-btn premium" onclick="cmd('memoryDashboard')" title="Premium: View cognitive memory architecture">
+                <button class="action-btn" data-cmd="memoryDashboard" title="View cognitive memory architecture">
                     <span class="action-icon">🧠</span>
                     <span class="action-text">Memory Architecture</span>
-                    <span class="premium-badge">⭐</span>
                 </button>
-                <button class="action-btn" onclick="cmd('exportM365')" title="Package knowledge for M365 Copilot">
+                <button class="action-btn" data-cmd="exportM365" title="Package knowledge for M365 Copilot">
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>
-                <button class="action-btn" onclick="cmd('setupEnvironment')" title="Configure VS Code settings: Essential, Recommended, Extended Thinking">
+                <button class="action-btn" data-cmd="setupEnvironment" title="Configure VS Code settings: Essential, Recommended, Extended Thinking">
                     <span class="action-icon">⚙️</span>
                     <span class="action-text">Environment Setup</span>
                 </button>
-                <button class="action-btn" onclick="cmd('openDocs')">
+                <button class="action-btn" data-cmd="openDocs">
                     <span class="action-icon">📚</span>
                     <span class="action-text">Docs</span>
                 </button>
-                <button class="action-btn" onclick="cmd('provideFeedback')" title="Share feedback, ideas, or feature requests">
+                <button class="action-btn" data-cmd="provideFeedback" title="Share feedback, ideas, or feature requests">
                     <span class="action-icon">💬</span>
                     <span class="action-text">Provide Feedback</span>
                 </button>
-                <button class="action-btn" onclick="cmd('viewDiagnostics')" title="View diagnostics and report issues">
+                <button class="action-btn" data-cmd="viewDiagnostics" title="View diagnostics and report issues">
                     <span class="action-icon">🩺</span>
                     <span class="action-text">Diagnostics</span>
                 </button>
@@ -1200,13 +1215,29 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         
-        function cmd(command) {
-            vscode.postMessage({ command });
+        function cmd(command, data) {
+            vscode.postMessage({ command, ...data });
         }
         
         function refresh() {
             vscode.postMessage({ command: 'refresh' });
         }
+        
+        // Event delegation for all data-cmd clicks (CSP-compliant)
+        document.addEventListener('click', function(e) {
+            const el = e.target.closest('[data-cmd]');
+            if (el) {
+                e.preventDefault();
+                const command = el.getAttribute('data-cmd');
+                const skill = el.getAttribute('data-skill');
+                const skillName = el.getAttribute('data-skill-name');
+                if (skill) {
+                    cmd(command, { skill, skillName });
+                } else {
+                    cmd(command);
+                }
+            }
+        });
         
         // Auto-refresh interval (30 seconds)
         const AUTO_REFRESH_MS = 30000;
@@ -1240,7 +1271,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="section-title">Learning Goals</div>
             <div style="text-align: center; padding: 12px; opacity: 0.7;">
                 <p style="margin: 0 0 8px 0;">Set goals to track your progress</p>
-                <button class="action-btn primary" onclick="cmd('createGoal')" style="display: inline-flex; width: auto;">
+                <button class="action-btn primary" data-cmd="createGoal" style="display: inline-flex; width: auto;">
                     <span class="action-icon">➕</span>
                     <span class="action-text">Create Goal</span>
                 </button>
@@ -1292,7 +1323,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const nudgesHtml = nudges.map(nudge => {
       const typeClass = `nudge-${nudge.type}`;
       const actionHtml = nudge.action 
-        ? `<button class="nudge-action" onclick="cmd('${nudge.action}')">${nudge.actionLabel}</button>`
+        ? `<button class="nudge-action" data-cmd="${nudge.action}">${nudge.actionLabel}</button>`
         : '';
       
       return `
@@ -1399,11 +1430,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     </div>
                     
                     <div class="feature-links">
-                        <button class="feature-link-btn" onclick="cmd('workingWithAlex')">🎓 Working with Alex</button>
-                        <button class="feature-link-btn" onclick="cmd('openDocs')">📚 Full Documentation</button>
-                        <button class="feature-link-btn" onclick="cmd('openBrainAnatomy')">🧠 Brain Anatomy</button>
-                        <button class="feature-link-btn" onclick="cmd('openMarketplace')">🏪 Marketplace</button>
-                        <button class="feature-link-btn" onclick="cmd('openGitHub')">🐙 GitHub</button>
+                        <button class="feature-link-btn" data-cmd="workingWithAlex">🎓 Working with Alex</button>
+                        <button class="feature-link-btn" data-cmd="openDocs">📚 Full Documentation</button>
+                        <button class="feature-link-btn" data-cmd="openBrainAnatomy">🧠 Brain Anatomy</button>
+                        <button class="feature-link-btn" data-cmd="openMarketplace">🏪 Marketplace</button>
+                        <button class="feature-link-btn" data-cmd="openGitHub">🐙 GitHub</button>
                     </div>
                 </div>
             </details>

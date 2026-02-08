@@ -630,3 +630,21 @@ export function getLanguageIdFromPath(filePath: string): string {
 export function createSynapseRegex(): RegExp {
     return new RegExp(SYNAPSE_REGEX.source, SYNAPSE_REGEX.flags);
 }
+
+/**
+ * Open the Copilot Agent/Chat panel with fallback.
+ * Tries Agent mode first, falls back to chat panel if unavailable.
+ */
+export async function openChatPanel(): Promise<void> {
+    try {
+        await vscode.commands.executeCommand("workbench.action.chat.openAgent");
+    } catch {
+        try {
+            await vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        } catch {
+            vscode.window.showWarningMessage(
+                "Could not open Copilot Chat. Make sure GitHub Copilot Chat extension is installed and up to date."
+            );
+        }
+    }
+}

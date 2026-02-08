@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.2] - 2026-02-08
+
+> **Hotfix** — Critical crash fix for Welcome view
+
+### Fixed
+
+- **🔧 Welcome View Crash Fix**
+  - Fixed `TypeError: p.toLowerCase is not a function` that prevented the Welcome sidebar from loading
+  - Added defensive type guards for user profile arrays (primaryTechnologies, learningGoals, expertiseAreas, currentProjects)
+  - Persona detection now gracefully handles malformed or empty profile data
+
+---
+
 ## [5.0.0] - 2026-02-06
 
 > **Global Knowledge** — Cross-project knowledge sharing, persona-aware UX, premium branding

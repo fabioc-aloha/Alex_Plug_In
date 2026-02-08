@@ -8,7 +8,7 @@ import {
 } from '../chat/globalKnowledge';
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { autoIncrementGoals } from './goals';
-import { getLanguageIdFromPath } from '../shared/utils';
+import { getLanguageIdFromPath, openChatPanel } from '../shared/utils';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
@@ -70,7 +70,7 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
             
             // Copy to clipboard and open Agent mode
             await vscode.env.clipboard.writeText(chatInput);
-            await vscode.commands.executeCommand('workbench.action.chat.openAgent');
+            await openChatPanel();
             
             vscode.window.showInformationMessage(
                 '📋 Prompt copied! Paste in Agent chat (Ctrl+V)',

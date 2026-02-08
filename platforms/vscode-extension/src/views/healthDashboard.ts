@@ -664,20 +664,20 @@ async function getWebviewContent(
                 </div>
             </div>
             <div class="header-actions">
-                ${hasIssues ? `<button class="btn btn-fix" onclick="cmd('deepBrainQA')">🔧 Fix Issues</button>` : ''}
-                <button class="btn btn-accent" onclick="refresh()">
+                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ''}
+                <button class="btn btn-accent" data-cmd="refresh">
                     🔄 Refresh
                 </button>
-                <button class="btn btn-secondary" onclick="cmd('runDream')">
+                <button class="btn btn-secondary" data-cmd="runDream">
                     💭 Dream
                 </button>
-                <button class="btn btn-secondary" onclick="cmd('runAudit')">
+                <button class="btn btn-secondary" data-cmd="runAudit">
                     🔍 Audit
                 </button>
-                <button class="btn btn-secondary" onclick="cmd('selfActualize')">
+                <button class="btn btn-secondary" data-cmd="selfActualize">
                     🧠 Self-Actualize
                 </button>
-                <button class="btn btn-secondary" onclick="cmd('viewDiagnostics')">
+                <button class="btn btn-secondary" data-cmd="viewDiagnostics">
                     🐛 Diagnostics
                 </button>
             </div>
@@ -817,6 +817,16 @@ async function getWebviewContent(
         function openFile(filePath) {
             vscode.postMessage({ command: 'openFile', filePath });
         }
+        
+        // Event delegation for all data-cmd clicks (CSP-compliant)
+        document.addEventListener('click', function(e) {
+            const el = e.target.closest('[data-cmd]');
+            if (el) {
+                e.preventDefault();
+                const command = el.getAttribute('data-cmd');
+                cmd(command);
+            }
+        });
     </script>
 </body>
 </html>`;

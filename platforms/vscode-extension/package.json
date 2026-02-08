@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -1632,7 +1632,8 @@
     "keybindings": []
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
+    "vscode:prepublish": "npm run clean && npm run package",
+    "clean": "node -e \"const fs=require('fs');['dist','out'].forEach(d=>{if(fs.existsSync(d)){fs.rmSync(d,{recursive:true});console.log('Cleaned '+d+'/')}})\"",
     "compile": "npm run check-types && node esbuild.js",
     "check-types": "tsc --noEmit",
     "watch": "npm run check-types && node esbuild.js --watch",
@@ -1641,6 +1642,7 @@
     "pretest": "npm run compile-tests && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
+    "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
     "dream": "tsx ../../scripts/dream-cli.ts"
   },
   "devDependencies": {

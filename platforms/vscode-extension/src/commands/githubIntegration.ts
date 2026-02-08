@@ -7,6 +7,7 @@
 
 import * as vscode from 'vscode';
 import { createGoal, LearningGoal } from './goals';
+import { openChatPanel } from '../shared/utils';
 
 // Rate limit tracking
 let rateLimitRemaining = 5000;
@@ -470,6 +471,6 @@ Provide specific, actionable feedback with line references where applicable.`;
 
     // Copy to clipboard and open chat
     await vscode.env.clipboard.writeText(prompt);
-    vscode.commands.executeCommand('workbench.action.chat.openAgent');
+    await openChatPanel();
     vscode.window.showInformationMessage(`📋 PR #${selected.pr.number} review prompt copied. Paste in Agent chat (Ctrl+V).`);
 }

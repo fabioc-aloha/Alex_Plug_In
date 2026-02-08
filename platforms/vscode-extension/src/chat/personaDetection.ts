@@ -418,7 +418,8 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
         const goals = profile.learningGoals || [];
         
         for (const goal of goals) {
-            const goalLower = (goal as string).toLowerCase();
+            if (typeof goal !== 'string') { continue; }
+            const goalLower = goal.toLowerCase();
             
             for (const persona of PERSONAS) {
                 for (const keyword of persona.keywords) {
@@ -447,7 +448,7 @@ interface UserProfile {
     primaryTechnologies?: string[];
     learningGoals?: string[];
     expertiseAreas?: string[];
-    currentProjects?: string[];
+    currentProjects?: (string | { name?: string; [key: string]: unknown })[];
 }
 
 /**
@@ -546,6 +547,7 @@ export async function detectPersona(
         // Check primary technologies
         if (userProfile.primaryTechnologies) {
             for (const tech of userProfile.primaryTechnologies) {
+                if (typeof tech !== 'string') { continue; }
                 const techLower = tech.toLowerCase();
                 for (const persona of PERSONAS) {
                     if (persona.techStack.some(t => techLower.includes(t) || t.includes(techLower))) {
@@ -560,6 +562,7 @@ export async function detectPersona(
         // Check learning goals
         if (userProfile.learningGoals) {
             for (const goal of userProfile.learningGoals) {
+                if (typeof goal !== 'string') { continue; }
                 const goalLower = goal.toLowerCase();
                 for (const persona of PERSONAS) {
                     if (persona.keywords.some(k => goalLower.includes(k))) {
@@ -574,6 +577,7 @@ export async function detectPersona(
         // Check expertise areas
         if (userProfile.expertiseAreas) {
             for (const area of userProfile.expertiseAreas) {
+                if (typeof area !== 'string') { continue; }
                 const areaLower = area.toLowerCase();
                 for (const persona of PERSONAS) {
                     if (persona.keywords.some(k => areaLower.includes(k))) {
@@ -585,15 +589,18 @@ export async function detectPersona(
             }
         }
         
-        // Check current projects
+        // Check current projects (supports both string[] and object[] with name property)
         if (userProfile.currentProjects) {
             for (const project of userProfile.currentProjects) {
-                const projectLower = project.toLowerCase();
+                // Handle both string and object formats
+                const projectName = typeof project === 'string' ? project : (project as { name?: string })?.name;
+                if (!projectName || typeof projectName !== 'string') { continue; }
+                const projectLower = projectName.toLowerCase();
                 for (const persona of PERSONAS) {
                     if (persona.keywords.some(k => projectLower.includes(k))) {
                         const entry = scores.get(persona.id)!;
                         entry.score += 1;
-                        entry.reasons.push(`Working on ${project}`);
+                        entry.reasons.push(`Working on ${projectName}`);
                     }
                 }
             }

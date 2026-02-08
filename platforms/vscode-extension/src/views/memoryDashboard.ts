@@ -5,6 +5,7 @@ import { checkHealth, HealthCheckResult, HealthStatus } from '../shared/healthCh
 import { getGlobalKnowledgeSummary, detectGlobalKnowledgeRepo } from '../chat/globalKnowledge';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
+import { openChatPanel } from '../shared/utils';
 
 /**
  * Memory Architecture Dashboard - Premium visualization of Alex's cognitive memory structure
@@ -84,7 +85,7 @@ export async function openMemoryDashboard(context: vscode.ExtensionContext): Pro
                     vscode.commands.executeCommand('alex.dream');
                     break;
                 case 'meditate':
-                    vscode.commands.executeCommand('workbench.action.chat.openAgent');
+                    openChatPanel();
                     break;
                 case 'openFile':
                     if (message.filePath) {
@@ -622,10 +623,10 @@ async function getWebviewContent(
                 </div>
             </div>
             <div class="header-actions">
-                ${hasIssues ? `<button class="btn btn-fix" onclick="cmd('deepBrainQA')">🔧 Fix Issues</button>` : ''}
-                <button class="btn btn-secondary" onclick="cmd('openHealthDashboard')">📊 Health</button>
-                <button class="btn btn-secondary" onclick="cmd('openSkillCatalog')">📚 Skills</button>
-                <button class="btn btn-accent" onclick="cmd('refresh')">🔄 Refresh</button>
+                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ''}
+                <button class="btn btn-secondary" data-cmd="openHealthDashboard">📊 Health</button>
+                <button class="btn btn-secondary" data-cmd="openSkillCatalog">📚 Skills</button>
+                <button class="btn btn-accent" data-cmd="refresh">🔄 Refresh</button>
             </div>
         </div>
         
@@ -858,6 +859,16 @@ flowchart LR
         function cmd(command, data) {
             vscode.postMessage({ command, ...data });
         }
+        
+        // Event delegation for all data-cmd clicks (CSP-compliant)
+        document.addEventListener('click', function(e) {
+            const el = e.target.closest('[data-cmd]');
+            if (el) {
+                e.preventDefault();
+                const command = el.getAttribute('data-cmd');
+                cmd(command);
+            }
+        });
     </script>
 </body>
 </html>`;
