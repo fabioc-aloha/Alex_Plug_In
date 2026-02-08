@@ -13,7 +13,7 @@
 
 **Discovery**: The `teamsApp/zipAppPackage` action in v2.1.2 has a critical bug where it does NOT follow the `copilotAgents.declarativeAgents[0].file` reference in manifest.json. The resulting zip only contains:
 - manifest.json
-- color.png  
+- color.png
 - outline.png
 
 **Missing**: `declarativeAgent.json` — the entire agent definition!
@@ -28,21 +28,21 @@
 
 The v1.6 schema has stricter type requirements vs earlier versions:
 
-| Field | Old (worked in v1.3) | New (required in v1.6) |
-|-------|---------------------|------------------------|
-| `disclaimer` | `"text"` | `{ "text": "..." }` |
-| `behavior_overrides.suggestions` | `false` | `{ "disabled": false }` |
-| `behavior_overrides.special_instructions` | `"text"` | `{ "discourage_model_knowledge": false }` |
-| `user_overrides` | `{ "capabilities": [...] }` | `[ { "path": "$.capabilities[?(@.name=='X')]", "allowed_actions": ["remove"] } ]` |
+| Field                                     | Old (worked in v1.3)        | New (required in v1.6)                                                            |
+| ----------------------------------------- | --------------------------- | --------------------------------------------------------------------------------- |
+| `disclaimer`                              | `"text"`                    | `{ "text": "..." }`                                                               |
+| `behavior_overrides.suggestions`          | `false`                     | `{ "disabled": false }`                                                           |
+| `behavior_overrides.special_instructions` | `"text"`                    | `{ "discourage_model_knowledge": false }`                                         |
+| `user_overrides`                          | `{ "capabilities": [...] }` | `[ { "path": "$.capabilities[?(@.name=='X')]", "allowed_actions": ["remove"] } ]` |
 
 ### 3. Icon Requirements Enforcement
 
 Teams Toolkit v3.x is stricter about icon validation:
 
-| Icon | Size | Background | Content |
-|------|------|------------|---------|
-| color.png | 192×192 | Any | Full color |
-| outline.png | 32×32 | **Transparent** (Alpha=0) | **White only** |
+| Icon        | Size    | Background                | Content        |
+| ----------- | ------- | ------------------------- | -------------- |
+| color.png   | 192×192 | Any                       | Full color     |
+| outline.png | 32×32   | **Transparent** (Alpha=0) | **White only** |
 
 Our original icons were 400x400 and 67x67 respectively, with non-transparent outline.
 
@@ -50,10 +50,10 @@ Our original icons were 400x400 and 67x67 respectively, with non-transparent out
 
 ## 📝 Memory Files Updated
 
-| File | Change |
-|------|--------|
-| `.github/skills/teams-app-patterns/SKILL.md` | Added v1.6 schema table, CLI upgrade notes, icon requirements |
-| `.github/skills/teams-app-patterns/synapses.json` | Added 2 connections + 4 triggers |
+| File                                              | Change                                                        |
+| ------------------------------------------------- | ------------------------------------------------------------- |
+| `.github/skills/teams-app-patterns/SKILL.md`      | Added v1.6 schema table, CLI upgrade notes, icon requirements |
+| `.github/skills/teams-app-patterns/synapses.json` | Added 2 connections + 4 triggers                              |
 
 ## 🧠 Global Insights Saved
 
@@ -62,10 +62,10 @@ Our original icons were 400x400 and 67x67 respectively, with non-transparent out
 
 ## 🔗 Synaptic Connections Strengthened
 
-| Source | Target | Type | Strength |
-|--------|--------|------|----------|
-| teams-app-patterns | platforms/m365-copilot/appPackage/declarativeAgent.json | implements | 0.9 |
-| teams-app-patterns | platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md | uses | 0.85 |
+| Source             | Target                                                  | Type       | Strength |
+| ------------------ | ------------------------------------------------------- | ---------- | -------- |
+| teams-app-patterns | platforms/m365-copilot/appPackage/declarativeAgent.json | implements | 0.9      |
+| teams-app-patterns | platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md          | uses       | 0.85     |
 
 ---
 
@@ -77,11 +77,11 @@ Our original icons were 400x400 and 67x67 respectively, with non-transparent out
 
 ## 📊 Synapse Health
 
-| Metric | Value |
-|--------|-------|
-| Total Synapses | 172 |
+| Metric             | Value                             |
+| ------------------ | --------------------------------- |
+| Total Synapses     | 172                               |
 | Broken Connections | 4 (false positives - file exists) |
-| Status | **GOOD** |
+| Status             | **GOOD**                          |
 
 ---
 
