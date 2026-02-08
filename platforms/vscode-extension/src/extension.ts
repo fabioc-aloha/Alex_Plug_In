@@ -717,6 +717,8 @@ export function activate(context: vscode.ExtensionContext) {
           { label: "$(file-code) Code Quality", description: "Errors, warnings, code smells, patterns", detail: "High priority" },
           { label: "$(shield) Security Review", description: "Secrets, vulnerabilities, input validation", detail: "High priority" },
           { label: "$(package) Dependencies", description: "Outdated packages, vulnerabilities, unused", detail: "High priority" },
+          { label: "$(cloud) Infrastructure as Code", description: "Terraform, Bicep, CloudFormation validation", detail: "High priority" },
+          { label: "$(azure) Azure/Cloud Resources", description: "Resource configuration, best practices, costs", detail: "High priority" },
           { label: "$(book) Documentation", description: "README, comments, API docs completeness", detail: "Medium priority" },
           { label: "$(git-branch) Git Health", description: "Uncommitted changes, branch hygiene", detail: "Medium priority" },
           { label: "$(beaker) Test Coverage", description: "Test files, coverage gaps, test quality", detail: "Medium priority" },
