@@ -179,6 +179,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "openBrainAnatomy":
           vscode.env.openExternal(vscode.Uri.parse("https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html"));
           break;
+        case "workingWithAlex":
+          vscode.commands.executeCommand("alex.workingWithAlex");
+          break;
         case "provideFeedback":
           vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues"));
           break;
@@ -1377,6 +1380,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     </div>
                     
                     <div class="feature-links">
+                        <button class="feature-link-btn" onclick="cmd('workingWithAlex')">🎓 Working with Alex</button>
                         <button class="feature-link-btn" onclick="cmd('openDocs')">📚 Full Documentation</button>
                         <button class="feature-link-btn" onclick="cmd('openBrainAnatomy')">🧠 Brain Anatomy</button>
                         <button class="feature-link-btn" onclick="cmd('openMarketplace')">🏪 Marketplace</button>
