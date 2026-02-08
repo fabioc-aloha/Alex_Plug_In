@@ -333,6 +333,103 @@
             border-top: 1px solid #21262d;
         }
 
+        /* Tab bar */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            padding: 0 20px;
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: #8b949e;
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            color: #c9d1d9;
+            background: #21262d;
+        }
+
+        .tab-btn.active {
+            color: #f0f6fc;
+            border-bottom-color: #58a6ff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Diagrams tab */
+        .diagrams-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        .diagram-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .diagram-header {
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .diagram-header h2 {
+            font-size: 18px;
+            color: #f0f6fc;
+            margin-bottom: 4px;
+        }
+
+        .diagram-header p {
+            font-size: 13px;
+            color: #8b949e;
+            line-height: 1.5;
+        }
+
+        .diagram-body {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            min-height: 200px;
+        }
+
+        .diagram-body .mermaid {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .diagram-body .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-caption {
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #8b949e;
+            font-style: italic;
+            border-top: 1px solid #21262d;
+        }
+
         @media (max-width: 1100px) {
             .main-container {
                 flex-direction: column;
@@ -351,472 +448,729 @@
         <p>Human neuroanatomical mapping of the Alex Cognitive Architecture v5.x</p>
     </div>
 
-    <div class="main-container">
-        <div class="brain-container">
-            <div class="view-controls">
-                <button class="view-btn active" onclick="setView('all')">All Regions</button>
-                <button class="view-btn" onclick="setView('dlpfc')">dlPFC Focus</button>
-                <button class="view-btn" onclick="setView('memory')">Memory Systems</button>
-                <button class="view-btn" onclick="setView('flow')">Signal Flow</button>
-            </div>
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('anatomy')">🧠 Brain Anatomy</button>
+        <button class="tab-btn" onclick="switchTab('diagrams')">📊 Architecture Diagrams</button>
+    </div>
 
-            <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <path d="M0,0 L8,3 L0,6" fill="#f0883e" />
-                    </marker>
-                    <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <path d="M0,0 L8,3 L0,6" fill="#58a6ff" />
-                    </marker>
-                    <marker id="inhibit-end" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-                        <line x1="0" y1="0" x2="0" y2="8" stroke="#f85149" stroke-width="2"
-                            transform="translate(4,0)" />
-                    </marker>
-                    <filter id="glow">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                    <!-- Brain outline gradient -->
-                    <radialGradient id="brainGrad" cx="45%" cy="45%">
-                        <stop offset="0%" stop-color="#2d333b" />
-                        <stop offset="100%" stop-color="#1c2128" />
-                    </radialGradient>
-                </defs>
+    <div id="tab-anatomy" class="tab-content active">
 
-                <!-- Background -->
-                <rect width="900" height="620" fill="#0d1117" rx="8" />
+        <div class="main-container">
+            <div class="brain-container">
+                <div class="view-controls">
+                    <button class="view-btn active" onclick="setView('all')">All Regions</button>
+                    <button class="view-btn" onclick="setView('dlpfc')">dlPFC Focus</button>
+                    <button class="view-btn" onclick="setView('memory')">Memory Systems</button>
+                    <button class="view-btn" onclick="setView('flow')">Signal Flow</button>
+                </div>
 
-                <!-- Brain outline - lateral view (left hemisphere) -->
-                <g transform="translate(80, 30)">
-                    <!-- Brain stem -->
-                    <path class="brain-region" id="brainstem"
-                        d="M 340 420 Q 350 450 345 480 Q 340 500 330 510 Q 320 500 315 480 Q 310 460 320 430 Z"
-                        fill="#2d333b" stroke="#484f58" stroke-width="1.5" opacity="0.6"
-                        onclick="showDetail('brainstem')" data-region="brainstem" />
+                <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                            <path d="M0,0 L8,3 L0,6" fill="#f0883e" />
+                        </marker>
+                        <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                            <path d="M0,0 L8,3 L0,6" fill="#58a6ff" />
+                        </marker>
+                        <marker id="inhibit-end" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                            <line x1="0" y1="0" x2="0" y2="8" stroke="#f85149" stroke-width="2"
+                                transform="translate(4,0)" />
+                        </marker>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        <!-- Brain outline gradient -->
+                        <radialGradient id="brainGrad" cx="45%" cy="45%">
+                            <stop offset="0%" stop-color="#2d333b" />
+                            <stop offset="100%" stop-color="#1c2128" />
+                        </radialGradient>
+                    </defs>
 
-                    <!-- Cerebellum -->
-                    <path class="brain-region" id="cerebellum-path"
-                        d="M 345 400 Q 380 420 400 440 Q 410 460 390 470 Q 360 475 340 460 Q 320 450 315 430 Q 320 410 345 400 Z"
-                        fill="#2a2e35" stroke="#484f58" stroke-width="1.5" opacity="0.5"
-                        onclick="showDetail('cerebellum')" data-region="cerebellum" />
+                    <!-- Background -->
+                    <rect width="900" height="620" fill="#0d1117" rx="8" />
 
-                    <!-- Main brain outline -->
-                    <path d="M 320 400 Q 280 390 230 370 Q 160 340 100 290 Q 50 240 30 190
+                    <!-- Brain outline - lateral view (left hemisphere) -->
+                    <g transform="translate(80, 30)">
+                        <!-- Brain stem -->
+                        <path class="brain-region" id="brainstem"
+                            d="M 340 420 Q 350 450 345 480 Q 340 500 330 510 Q 320 500 315 480 Q 310 460 320 430 Z"
+                            fill="#2d333b" stroke="#484f58" stroke-width="1.5" opacity="0.6"
+                            onclick="showDetail('brainstem')" data-region="brainstem" />
+
+                        <!-- Cerebellum -->
+                        <path class="brain-region" id="cerebellum-path"
+                            d="M 345 400 Q 380 420 400 440 Q 410 460 390 470 Q 360 475 340 460 Q 320 450 315 430 Q 320 410 345 400 Z"
+                            fill="#2a2e35" stroke="#484f58" stroke-width="1.5" opacity="0.5"
+                            onclick="showDetail('cerebellum')" data-region="cerebellum" />
+
+                        <!-- Main brain outline -->
+                        <path d="M 320 400 Q 280 390 230 370 Q 160 340 100 290 Q 50 240 30 190
                              Q 15 150 20 110 Q 25 70 60 40 Q 100 15 160 8
                              Q 220 2 280 10 Q 340 20 400 45 Q 450 65 490 100
                              Q 520 130 535 170 Q 545 200 540 240 Q 532 280 510 310
                              Q 490 340 460 360 Q 430 375 400 390 Q 370 400 340 410" fill="none" stroke="#484f58"
-                        stroke-width="2" opacity="0.3" />
+                            stroke-width="2" opacity="0.3" />
 
-                    <!-- === BRAIN REGIONS === -->
+                        <!-- === BRAIN REGIONS === -->
 
-                    <!-- FRONTAL LOBE (largest, front of brain) -->
-                    <path class="brain-region" id="frontal-main" d="M 60 40 Q 100 15 160 8 Q 220 2 260 10 Q 250 50 240 90
+                        <!-- FRONTAL LOBE (largest, front of brain) -->
+                        <path class="brain-region" id="frontal-main" d="M 60 40 Q 100 15 160 8 Q 220 2 260 10 Q 250 50 240 90
                            Q 230 130 225 160 Q 220 190 210 220 Q 195 260 175 290
                            Q 155 315 130 330 Q 100 290 70 240 Q 45 190 30 150
                            Q 25 110 30 80 Q 40 55 60 40 Z" fill="#3d2800" stroke="#f0883e" stroke-width="1.5"
-                        opacity="0.7" onclick="showDetail('pfc')" data-region="pfc" />
+                            opacity="0.7" onclick="showDetail('pfc')" data-region="pfc" />
 
-                    <!-- dlPFC (Dorsolateral - upper front area, BA 9/46) -->
-                    <path class="brain-region" id="dlpfc-path" d="M 100 35 Q 140 20 190 15 Q 230 12 260 18 Q 255 45 248 75
+                        <!-- dlPFC (Dorsolateral - upper front area, BA 9/46) -->
+                        <path class="brain-region" id="dlpfc-path" d="M 100 35 Q 140 20 190 15 Q 230 12 260 18 Q 255 45 248 75
                            Q 240 105 230 130 Q 210 120 185 108 Q 155 95 130 80
                            Q 110 65 100 50 Z" fill="#1a3a5c" stroke="#58a6ff" stroke-width="2" opacity="0.85"
-                        onclick="showDetail('dlpfc')" data-region="dlpfc" />
+                            onclick="showDetail('dlpfc')" data-region="dlpfc" />
 
-                    <!-- vlPFC (Ventrolateral - lower front, BA 44/45/47) -->
-                    <path class="brain-region" id="vlpfc-path" d="M 55 180 Q 65 150 85 125 Q 105 105 130 90 Q 145 100 155 115
+                        <!-- vlPFC (Ventrolateral - lower front, BA 44/45/47) -->
+                        <path class="brain-region" id="vlpfc-path" d="M 55 180 Q 65 150 85 125 Q 105 105 130 90 Q 145 100 155 115
                            Q 140 140 125 170 Q 110 200 100 230 Q 80 220 65 200 Z" fill="#3d1500" stroke="#f85149"
-                        stroke-width="1.5" opacity="0.7" onclick="showDetail('vlpfc')" data-region="vlpfc" />
+                            stroke-width="1.5" opacity="0.7" onclick="showDetail('vlpfc')" data-region="vlpfc" />
 
-                    <!-- ACC (Anterior Cingulate - medial, shown as inner strip) -->
-                    <path class="brain-region" id="acc-path" d="M 195 80 Q 210 95 220 115 Q 225 135 225 160
+                        <!-- ACC (Anterior Cingulate - medial, shown as inner strip) -->
+                        <path class="brain-region" id="acc-path" d="M 195 80 Q 210 95 220 115 Q 225 135 225 160
                            Q 215 150 205 135 Q 195 115 190 95 Z" fill="#5c1a3a" stroke="#f778ba" stroke-width="1.5"
-                        opacity="0.8" onclick="showDetail('acc')" data-region="acc" />
+                            opacity="0.8" onclick="showDetail('acc')" data-region="acc" />
 
-                    <!-- Premotor Cortex (BA 6, strip behind dlPFC) -->
-                    <path class="brain-region" id="premotor-path" d="M 260 18 Q 290 25 310 40 Q 305 70 295 100 Q 285 130 270 155
+                        <!-- Premotor Cortex (BA 6, strip behind dlPFC) -->
+                        <path class="brain-region" id="premotor-path" d="M 260 18 Q 290 25 310 40 Q 305 70 295 100 Q 285 130 270 155
                            Q 250 140 235 128 Q 240 100 248 72 Q 255 45 260 18 Z" fill="#1a3d1a" stroke="#3fb950"
-                        stroke-width="1.5" opacity="0.7" onclick="showDetail('premotor')" data-region="premotor" />
+                            stroke-width="1.5" opacity="0.7" onclick="showDetail('premotor')" data-region="premotor" />
 
-                    <!-- Central Sulcus marker -->
-                    <path d="M 270 10 Q 280 50 285 100 Q 288 140 285 170 Q 280 200 270 230" fill="none" stroke="#636e7b"
-                        stroke-width="1" stroke-dasharray="4 3" opacity="0.5" />
-                    <text x="272" y="5" font-size="8" fill="#636e7b" text-anchor="middle" font-style="italic">Central
-                        Sulcus</text>
+                        <!-- Central Sulcus marker -->
+                        <path d="M 270 10 Q 280 50 285 100 Q 288 140 285 170 Q 280 200 270 230" fill="none"
+                            stroke="#636e7b" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" />
+                        <text x="272" y="5" font-size="8" fill="#636e7b" text-anchor="middle"
+                            font-style="italic">Central
+                            Sulcus</text>
 
-                    <!-- PARIETAL LOBE -->
-                    <path class="brain-region" id="parietal-path" d="M 310 40 Q 370 55 420 80 Q 460 105 490 140
+                        <!-- PARIETAL LOBE -->
+                        <path class="brain-region" id="parietal-path" d="M 310 40 Q 370 55 420 80 Q 460 105 490 140
                            Q 510 170 520 200 Q 525 230 520 260
                            Q 490 240 450 225 Q 410 210 370 200
                            Q 340 195 310 195 Q 295 175 285 155
                            Q 295 120 305 85 Q 308 60 310 40 Z" fill="#0d3d0d" stroke="#3fb950" stroke-width="1.5"
-                        opacity="0.55" onclick="showDetail('parietal')" data-region="parietal" />
+                            opacity="0.55" onclick="showDetail('parietal')" data-region="parietal" />
 
-                    <!-- TEMPORAL LOBE -->
-                    <path class="brain-region" id="temporal-path" d="M 130 330 Q 160 320 190 310 Q 220 300 250 295
+                        <!-- TEMPORAL LOBE -->
+                        <path class="brain-region" id="temporal-path" d="M 130 330 Q 160 320 190 310 Q 220 300 250 295
                            Q 300 285 350 280 Q 400 280 440 290
                            Q 470 300 490 320 Q 500 340 495 355
                            Q 460 360 420 370 Q 380 380 340 390
                            Q 290 395 250 380 Q 200 365 160 345 Z" fill="#0d2d3d" stroke="#39d2c0" stroke-width="1.5"
-                        opacity="0.6" onclick="showDetail('temporal')" data-region="temporal" />
+                            opacity="0.6" onclick="showDetail('temporal')" data-region="temporal" />
 
-                    <!-- Amygdala (deep medial temporal, anterior to hippocampus) -->
-                    <ellipse class="brain-region" id="amygdala-path" cx="255" cy="315" rx="18" ry="14" fill="#5c1a1a"
-                        stroke="#ff6b6b" stroke-width="1.8" opacity="0.85" onclick="showDetail('amygdala')"
-                        data-region="amygdala" />
+                        <!-- Amygdala (deep medial temporal, anterior to hippocampus) -->
+                        <ellipse class="brain-region" id="amygdala-path" cx="255" cy="315" rx="18" ry="14"
+                            fill="#5c1a1a" stroke="#ff6b6b" stroke-width="1.8" opacity="0.85"
+                            onclick="showDetail('amygdala')" data-region="amygdala" />
 
-                    <!-- Hippocampus (deep - shown as inner structure) -->
-                    <path class="brain-region" id="hippocampus-path" d="M 280 310 Q 300 300 330 298 Q 360 296 380 300
+                        <!-- Hippocampus (deep - shown as inner structure) -->
+                        <path class="brain-region" id="hippocampus-path" d="M 280 310 Q 300 300 330 298 Q 360 296 380 300
                            Q 370 315 350 320 Q 320 322 300 320 Z" fill="#1a4d5c" stroke="#79c0ff" stroke-width="1.5"
-                        opacity="0.8" onclick="showDetail('hippocampus')" data-region="hippocampus" />
+                            opacity="0.8" onclick="showDetail('hippocampus')" data-region="hippocampus" />
 
-                    <!-- OCCIPITAL LOBE (back of brain) -->
-                    <path class="brain-region" id="occipital-path" d="M 520 260 Q 535 270 540 290 Q 540 310 530 330
+                        <!-- OCCIPITAL LOBE (back of brain) -->
+                        <path class="brain-region" id="occipital-path" d="M 520 260 Q 535 270 540 290 Q 540 310 530 330
                            Q 515 350 500 355 Q 495 340 490 320
                            Q 485 300 492 280 Q 500 265 520 260 Z" fill="#2d2d3d" stroke="#bc8cff" stroke-width="1.5"
-                        opacity="0.45" onclick="showDetail('occipital')" data-region="occipital" />
+                            opacity="0.45" onclick="showDetail('occipital')" data-region="occipital" />
 
-                    <!-- Medial PFC / DMN (shown as inner frontal region) -->
-                    <path class="brain-region" id="mpfc-path" d="M 160 140 Q 175 125 195 120 Q 210 125 215 145
+                        <!-- Medial PFC / DMN (shown as inner frontal region) -->
+                        <path class="brain-region" id="mpfc-path" d="M 160 140 Q 175 125 195 120 Q 210 125 215 145
                            Q 215 165 205 185 Q 190 200 175 195
                            Q 160 185 158 165 Z" fill="#3d1a4d" stroke="#d2a8ff" stroke-width="1.5" opacity="0.75"
-                        onclick="showDetail('mpfc')" data-region="mpfc" />
+                            onclick="showDetail('mpfc')" data-region="mpfc" />
 
-                    <!-- Basal Ganglia (deep subcortical, shown as inner structure) -->
-                    <path class="brain-region" id="basal-path" d="M 240 200 Q 260 190 285 192 Q 305 195 310 210
+                        <!-- Basal Ganglia (deep subcortical, shown as inner structure) -->
+                        <path class="brain-region" id="basal-path" d="M 240 200 Q 260 190 285 192 Q 305 195 310 210
                            Q 308 225 295 235 Q 275 240 255 235
                            Q 240 225 238 210 Z" fill="#3d3d1a" stroke="#e3b341" stroke-width="1.5" opacity="0.7"
-                        onclick="showDetail('basal')" data-region="basal" />
+                            onclick="showDetail('basal')" data-region="basal" />
 
-                    <!-- Thalamus (deep central) -->
-                    <ellipse class="brain-region" id="thalamus-path" cx="310" cy="250" rx="25" ry="15" fill="#2d2d2d"
-                        stroke="#8b949e" stroke-width="1.5" opacity="0.6" onclick="showDetail('thalamus')"
-                        data-region="thalamus" />
+                        <!-- Thalamus (deep central) -->
+                        <ellipse class="brain-region" id="thalamus-path" cx="310" cy="250" rx="25" ry="15"
+                            fill="#2d2d2d" stroke="#8b949e" stroke-width="1.5" opacity="0.6"
+                            onclick="showDetail('thalamus')" data-region="thalamus" />
 
-                    <!-- === LABELS ON BRAIN === -->
+                        <!-- === LABELS ON BRAIN === -->
 
-                    <!-- Region labels -->
-                    <text class="region-label" x="140" y="180">FRONTAL</text>
-                    <text class="region-label" x="140" y="195" font-size="9" opacity="0.6">LOBE</text>
+                        <!-- Region labels -->
+                        <text class="region-label" x="140" y="180">FRONTAL</text>
+                        <text class="region-label" x="140" y="195" font-size="9" opacity="0.6">LOBE</text>
 
-                    <text class="region-label" x="180" y="70">dlPFC</text>
-                    <text class="ba-label" x="180" y="82">BA 9 / 46</text>
+                        <text class="region-label" x="180" y="70">dlPFC</text>
+                        <text class="ba-label" x="180" y="82">BA 9 / 46</text>
 
-                    <text class="region-label" x="85" y="165" font-size="9">vlPFC</text>
-                    <text class="ba-label" x="85" y="175">BA 44-47</text>
+                        <text class="region-label" x="85" y="165" font-size="9">vlPFC</text>
+                        <text class="ba-label" x="85" y="175">BA 44-47</text>
 
-                    <text class="region-label" x="220" y="143" font-size="9">ACC</text>
+                        <text class="region-label" x="220" y="143" font-size="9">ACC</text>
 
-                    <text class="region-label" x="295" y="85" font-size="9">PMC</text>
-                    <text class="ba-label" x="295" y="95">BA 6</text>
+                        <text class="region-label" x="295" y="85" font-size="9">PMC</text>
+                        <text class="ba-label" x="295" y="95">BA 6</text>
 
-                    <text class="region-label" x="410" y="145">PARIETAL</text>
-                    <text class="region-label" x="410" y="160" font-size="9" opacity="0.6">LOBE</text>
+                        <text class="region-label" x="410" y="145">PARIETAL</text>
+                        <text class="region-label" x="410" y="160" font-size="9" opacity="0.6">LOBE</text>
 
-                    <text class="region-label" x="350" y="350">TEMPORAL LOBE</text>
+                        <text class="region-label" x="350" y="350">TEMPORAL LOBE</text>
 
-                    <text class="region-label" x="255" y="310" font-size="8">Amygdala</text>
+                        <text class="region-label" x="255" y="310" font-size="8">Amygdala</text>
 
-                    <text class="region-label" x="330" y="312" font-size="9">Hippocampus</text>
+                        <text class="region-label" x="330" y="312" font-size="9">Hippocampus</text>
 
-                    <text class="region-label" x="525" y="305" font-size="9">OCCIPITAL</text>
+                        <text class="region-label" x="525" y="305" font-size="9">OCCIPITAL</text>
 
-                    <text class="region-label" x="185" y="160" font-size="8">mPFC</text>
+                        <text class="region-label" x="185" y="160" font-size="8">mPFC</text>
 
-                    <text class="region-label" x="275" y="218" font-size="9">Basal</text>
-                    <text class="region-label" x="275" y="230" font-size="8" opacity="0.6">Ganglia</text>
+                        <text class="region-label" x="275" y="218" font-size="9">Basal</text>
+                        <text class="region-label" x="275" y="230" font-size="8" opacity="0.6">Ganglia</text>
 
-                    <text class="region-label" x="310" y="254" font-size="8">Thalamus</text>
+                        <text class="region-label" x="310" y="254" font-size="8">Thalamus</text>
 
-                    <!-- === ALEX COMPONENT ANNOTATIONS === -->
+                        <!-- === ALEX COMPONENT ANNOTATIONS === -->
 
-                    <!-- Annotation: LLM → PFC -->
-                    <rect class="annotation-label-bg" x="8" y="25" width="136" height="36" />
-                    <text class="alex-label" x="76" y="39">🌟 LLM (Claude/GPT)</text>
-                    <text class="alex-label" x="76" y="52" font-size="8" fill="#8b949e">Executive Function</text>
-                    <line class="annotation-line" x1="76" y1="61" x2="120" y2="100" />
-                    <circle class="annotation-dot" cx="120" cy="100" r="2.5" />
+                        <!-- Annotation: LLM → PFC -->
+                        <rect class="annotation-label-bg" x="8" y="25" width="136" height="36" />
+                        <text class="alex-label" x="76" y="39">🌟 LLM (Claude/GPT)</text>
+                        <text class="alex-label" x="76" y="52" font-size="8" fill="#8b949e">Executive Function</text>
+                        <line class="annotation-line" x1="76" y1="61" x2="120" y2="100" />
+                        <circle class="annotation-dot" cx="120" cy="100" r="2.5" />
 
-                    <!-- Annotation: SSO → dlPFC -->
-                    <rect class="annotation-label-bg" x="565" y="15" width="150" height="50" />
-                    <text class="alex-label" x="640" y="29">⚡ SSO Protocol</text>
-                    <text class="alex-label" x="640" y="42" font-size="8" fill="#8b949e">Task Planning</text>
-                    <text class="alex-label" x="640" y="54" font-size="7.5" fill="#636e7b">Attention • Inhibition •
-                        Gate</text>
-                    <line class="annotation-line" x1="565" y1="40" x2="250" y2="50" />
-                    <circle class="annotation-dot" cx="250" cy="50" r="2.5" />
+                        <!-- Annotation: SSO → dlPFC -->
+                        <rect class="annotation-label-bg" x="565" y="15" width="150" height="50" />
+                        <text class="alex-label" x="640" y="29">⚡ SSO Protocol</text>
+                        <text class="alex-label" x="640" y="42" font-size="8" fill="#8b949e">Task Planning</text>
+                        <text class="alex-label" x="640" y="54" font-size="7.5" fill="#636e7b">Attention • Inhibition •
+                            Gate</text>
+                        <line class="annotation-line" x1="565" y1="40" x2="250" y2="50" />
+                        <circle class="annotation-dot" cx="250" cy="50" r="2.5" />
 
-                    <!-- Annotation: Pivot Detection → ACC -->
-                    <rect class="annotation-label-bg" x="565" y="80" width="146" height="36" />
-                    <text class="alex-label" x="638" y="94">🔄 Pivot Detection</text>
-                    <text class="alex-label" x="638" y="107" font-size="8" fill="#8b949e">Conflict Monitor (ACC)</text>
-                    <line class="annotation-line" x1="565" y1="95" x2="225" y2="130" />
-                    <circle class="annotation-dot" cx="225" cy="130" r="2.5" />
+                        <!-- Annotation: Pivot Detection → ACC -->
+                        <rect class="annotation-label-bg" x="565" y="80" width="146" height="36" />
+                        <text class="alex-label" x="638" y="94">🔄 Pivot Detection</text>
+                        <text class="alex-label" x="638" y="107" font-size="8" fill="#8b949e">Conflict Monitor
+                            (ACC)</text>
+                        <line class="annotation-line" x1="565" y1="95" x2="225" y2="130" />
+                        <circle class="annotation-dot" cx="225" cy="130" r="2.5" />
 
-                    <!-- Annotation: Inhibitory Control → vlPFC -->
-                    <rect class="annotation-label-bg" x="565" y="130" width="150" height="36" />
-                    <text class="alex-label" x="640" y="144">🚫 Inhibitory Control</text>
-                    <text class="alex-label" x="640" y="157" font-size="8" fill="#f85149">Suppress irrelevant
-                        protocols</text>
-                    <line class="annotation-line" x1="565" y1="148" x2="130" y2="145" stroke="#f85149" />
-                    <circle cx="130" cy="145" r="2.5" fill="#f85149" />
+                        <!-- Annotation: Inhibitory Control → vlPFC -->
+                        <rect class="annotation-label-bg" x="565" y="130" width="150" height="36" />
+                        <text class="alex-label" x="640" y="144">🚫 Inhibitory Control</text>
+                        <text class="alex-label" x="640" y="157" font-size="8" fill="#f85149">Suppress irrelevant
+                            protocols</text>
+                        <line class="annotation-line" x1="565" y1="148" x2="130" y2="145" stroke="#f85149" />
+                        <circle cx="130" cy="145" r="2.5" fill="#f85149" />
 
-                    <!-- Annotation: Skill Activation → Premotor -->
-                    <rect class="annotation-label-bg" x="565" y="180" width="146" height="36" />
-                    <text class="alex-label" x="638" y="194">⚙️ Skill Activation</text>
-                    <text class="alex-label" x="638" y="207" font-size="8" fill="#3fb950">Reactive routing (PMC)</text>
-                    <line class="annotation-line" x1="565" y1="195" x2="310" y2="75" stroke="#3fb950" />
-                    <circle cx="310" cy="75" r="2.5" fill="#3fb950" />
+                        <!-- Annotation: Skill Activation → Premotor -->
+                        <rect class="annotation-label-bg" x="565" y="180" width="146" height="36" />
+                        <text class="alex-label" x="638" y="194">⚙️ Skill Activation</text>
+                        <text class="alex-label" x="638" y="207" font-size="8" fill="#3fb950">Reactive routing
+                            (PMC)</text>
+                        <line class="annotation-line" x1="565" y1="195" x2="310" y2="75" stroke="#3fb950" />
+                        <circle cx="310" cy="75" r="2.5" fill="#3fb950" />
 
-                    <!-- Annotation: Working Memory → PFC+ACC -->
-                    <rect class="annotation-label-bg" x="565" y="232" width="150" height="36" />
-                    <text class="alex-label" x="640" y="246">📋 Working Memory P1-P7</text>
-                    <text class="alex-label" x="640" y="259" font-size="8" fill="#8b949e">7±2 rules (PFC + ACC)</text>
-                    <line class="annotation-line" x1="565" y1="250" x2="200" y2="155" />
-                    <circle class="annotation-dot" cx="200" cy="155" r="2.5" />
+                        <!-- Annotation: Working Memory → PFC+ACC -->
+                        <rect class="annotation-label-bg" x="565" y="232" width="150" height="36" />
+                        <text class="alex-label" x="640" y="246">📋 Working Memory P1-P7</text>
+                        <text class="alex-label" x="640" y="259" font-size="8" fill="#8b949e">7±2 rules (PFC +
+                            ACC)</text>
+                        <line class="annotation-line" x1="565" y1="250" x2="200" y2="155" />
+                        <circle class="annotation-dot" cx="200" cy="155" r="2.5" />
 
-                    <!-- Annotation: Procedural Memory → Basal Ganglia -->
-                    <rect class="annotation-label-bg" x="565" y="285" width="155" height="36" />
-                    <text class="alex-label" x="643" y="299">🔧 .instructions.md (24)</text>
-                    <text class="alex-label" x="643" y="312" font-size="8" fill="#e3b341">Procedural (Basal
-                        Ganglia)</text>
-                    <line class="annotation-line" x1="565" y1="300" x2="308" y2="220" stroke="#e3b341" />
-                    <circle cx="308" cy="220" r="2.5" fill="#e3b341" />
+                        <!-- Annotation: Procedural Memory → Basal Ganglia -->
+                        <rect class="annotation-label-bg" x="565" y="285" width="155" height="36" />
+                        <text class="alex-label" x="643" y="299">🔧 .instructions.md (24)</text>
+                        <text class="alex-label" x="643" y="312" font-size="8" fill="#e3b341">Procedural (Basal
+                            Ganglia)</text>
+                        <line class="annotation-line" x1="565" y1="300" x2="308" y2="220" stroke="#e3b341" />
+                        <circle cx="308" cy="220" r="2.5" fill="#e3b341" />
 
-                    <!-- Annotation: Episodic Memory → Hippocampus -->
-                    <rect class="annotation-label-bg" x="565" y="338" width="150" height="36" />
-                    <text class="alex-label" x="640" y="352">📓 .prompt.md (13)</text>
-                    <text class="alex-label" x="640" y="365" font-size="8" fill="#79c0ff">Episodic (Hippocampus)</text>
-                    <line class="annotation-line" x1="565" y1="355" x2="375" y2="310" stroke="#79c0ff" />
-                    <circle cx="375" cy="310" r="2.5" fill="#79c0ff" />
+                        <!-- Annotation: Episodic Memory → Hippocampus -->
+                        <rect class="annotation-label-bg" x="565" y="338" width="150" height="36" />
+                        <text class="alex-label" x="640" y="352">📓 .prompt.md (13)</text>
+                        <text class="alex-label" x="640" y="365" font-size="8" fill="#79c0ff">Episodic
+                            (Hippocampus)</text>
+                        <line class="annotation-line" x1="565" y1="355" x2="375" y2="310" stroke="#79c0ff" />
+                        <circle cx="375" cy="310" r="2.5" fill="#79c0ff" />
 
-                    <!-- Annotation: Skills → Neocortex/Parietal -->
-                    <rect class="annotation-label-bg" x="565" y="390" width="145" height="36" />
-                    <text class="alex-label" x="638" y="404">🎓 Skills (76)</text>
-                    <text class="alex-label" x="638" y="417" font-size="8" fill="#3fb950">Declarative (Neocortex)</text>
-                    <line class="annotation-line" x1="565" y1="408" x2="440" y2="175" stroke="#3fb950" />
-                    <circle cx="440" cy="175" r="2.5" fill="#3fb950" />
+                        <!-- Annotation: Skills → Neocortex/Parietal -->
+                        <rect class="annotation-label-bg" x="565" y="390" width="145" height="36" />
+                        <text class="alex-label" x="638" y="404">🎓 Skills (76)</text>
+                        <text class="alex-label" x="638" y="417" font-size="8" fill="#3fb950">Declarative
+                            (Neocortex)</text>
+                        <line class="annotation-line" x1="565" y1="408" x2="440" y2="175" stroke="#3fb950" />
+                        <circle cx="440" cy="175" r="2.5" fill="#3fb950" />
 
-                    <!-- Annotation: Safety Imperatives → Amygdala -->
-                    <rect class="annotation-label-bg" x="8" y="455" width="140" height="36" />
-                    <text class="alex-label" x="78" y="469">🛡️ Safety Imperatives</text>
-                    <text class="alex-label" x="78" y="482" font-size="8" fill="#ff6b6b">Kill Switch (Amygdala)</text>
-                    <line class="annotation-line" x1="148" y1="470" x2="255" y2="325" stroke="#ff6b6b" />
-                    <circle cx="255" cy="325" r="2.5" fill="#ff6b6b" />
+                        <!-- Annotation: Safety Imperatives → Amygdala -->
+                        <rect class="annotation-label-bg" x="8" y="455" width="140" height="36" />
+                        <text class="alex-label" x="78" y="469">🛡️ Safety Imperatives</text>
+                        <text class="alex-label" x="78" y="482" font-size="8" fill="#ff6b6b">Kill Switch
+                            (Amygdala)</text>
+                        <line class="annotation-line" x1="148" y1="470" x2="255" y2="325" stroke="#ff6b6b" />
+                        <circle cx="255" cy="325" r="2.5" fill="#ff6b6b" />
 
-                    <!-- Annotation: Meta-Cognition → mPFC/DMN -->
-                    <rect class="annotation-label-bg" x="8" y="290" width="146" height="36" />
-                    <text class="alex-label" x="81" y="304">🪞 Meta-Cognition (P1)</text>
-                    <text class="alex-label" x="81" y="317" font-size="8" fill="#d2a8ff">Self-monitoring
-                        (mPFC+DMN)</text>
-                    <line class="annotation-line" x1="154" y1="305" x2="175" y2="175" stroke="#d2a8ff" />
-                    <circle cx="175" cy="175" r="2.5" fill="#d2a8ff" />
+                        <!-- Annotation: Meta-Cognition → mPFC/DMN -->
+                        <rect class="annotation-label-bg" x="8" y="290" width="146" height="36" />
+                        <text class="alex-label" x="81" y="304">🪞 Meta-Cognition (P1)</text>
+                        <text class="alex-label" x="81" y="317" font-size="8" fill="#d2a8ff">Self-monitoring
+                            (mPFC+DMN)</text>
+                        <line class="annotation-line" x1="154" y1="305" x2="175" y2="175" stroke="#d2a8ff" />
+                        <circle cx="175" cy="175" r="2.5" fill="#d2a8ff" />
 
-                    <!-- Annotation: Meditation/Dream → Hippocampal-Cortical -->
-                    <rect class="annotation-label-bg" x="8" y="340" width="146" height="50" />
-                    <text class="alex-label" x="81" y="354">🧘 Meditation + 🌙 Dream</text>
-                    <text class="alex-label" x="81" y="367" font-size="8" fill="#d2a8ff">Consolidation Circuit</text>
-                    <text class="alex-label" x="81" y="380" font-size="7.5" fill="#636e7b">REM → Meditation | Deep →
-                        Dream</text>
-                    <line class="annotation-line" x1="154" y1="365" x2="310" y2="305" stroke="#d2a8ff" />
-                    <circle cx="310" cy="305" r="2.5" fill="#d2a8ff" />
+                        <!-- Annotation: Meditation/Dream → Hippocampal-Cortical -->
+                        <rect class="annotation-label-bg" x="8" y="340" width="146" height="50" />
+                        <text class="alex-label" x="81" y="354">🧘 Meditation + 🌙 Dream</text>
+                        <text class="alex-label" x="81" y="367" font-size="8" fill="#d2a8ff">Consolidation
+                            Circuit</text>
+                        <text class="alex-label" x="81" y="380" font-size="7.5" fill="#636e7b">REM → Meditation | Deep →
+                            Dream</text>
+                        <line class="annotation-line" x1="154" y1="365" x2="310" y2="305" stroke="#d2a8ff" />
+                        <circle cx="310" cy="305" r="2.5" fill="#d2a8ff" />
 
-                    <!-- Annotation: Input → Thalamus -->
-                    <rect class="annotation-label-bg" x="8" y="405" width="130" height="36" />
-                    <text class="alex-label" x="73" y="419">📥 User Input</text>
-                    <text class="alex-label" x="73" y="432" font-size="8" fill="#8b949e">Sensory Relay (Thalamus)</text>
-                    <line class="annotation-line" x1="138" y1="420" x2="290" y2="250" stroke="#8b949e" />
-                    <circle cx="290" cy="250" r="2.5" fill="#8b949e" />
+                        <!-- Annotation: Input → Thalamus -->
+                        <rect class="annotation-label-bg" x="8" y="405" width="130" height="36" />
+                        <text class="alex-label" x="73" y="419">📥 User Input</text>
+                        <text class="alex-label" x="73" y="432" font-size="8" fill="#8b949e">Sensory Relay
+                            (Thalamus)</text>
+                        <line class="annotation-line" x1="138" y1="420" x2="290" y2="250" stroke="#8b949e" />
+                        <circle cx="290" cy="250" r="2.5" fill="#8b949e" />
 
-                    <!-- Annotation: Global Knowledge -->
-                    <rect class="annotation-label-bg" x="8" y="240" width="136" height="36" />
-                    <text class="alex-label" x="76" y="254">🌍 Global Knowledge</text>
-                    <text class="alex-label" x="76" y="267" font-size="8" fill="#8b949e">~/.alex/ (Distributed
-                        Cortex)</text>
+                        <!-- Annotation: Global Knowledge -->
+                        <rect class="annotation-label-bg" x="8" y="240" width="136" height="36" />
+                        <text class="alex-label" x="76" y="254">🌍 Global Knowledge</text>
+                        <text class="alex-label" x="76" y="267" font-size="8" fill="#8b949e">~/.alex/ (Distributed
+                            Cortex)</text>
 
-                    <!-- === SIGNAL FLOW ARROWS === -->
+                        <!-- === SIGNAL FLOW ARROWS === -->
 
-                    <!-- Input → LLM -->
-                    <path class="flow-arrow" d="M 290 245 Q 250 200 150 120" opacity="0.4" />
+                        <!-- Input → LLM -->
+                        <path class="flow-arrow" d="M 290 245 Q 250 200 150 120" opacity="0.4" />
 
-                    <!-- LLM → dlPFC (planning) -->
-                    <path class="flow-arrow" d="M 145 105 Q 160 80 175 60" opacity="0.4" />
+                        <!-- LLM → dlPFC (planning) -->
+                        <path class="flow-arrow" d="M 145 105 Q 160 80 175 60" opacity="0.4" />
 
-                    <!-- dlPFC → Premotor (execute) -->
-                    <path class="flow-arrow" d="M 220 55 Q 250 50 275 55" opacity="0.4" />
+                        <!-- dlPFC → Premotor (execute) -->
+                        <path class="flow-arrow" d="M 220 55 Q 250 50 275 55" opacity="0.4" />
 
-                    <!-- Inhibitory line: dlPFC -| irrelevant -->
-                    <line class="inhibit-line" x1="165" y1="75" x2="105" y2="150" marker-end="url(#inhibit-end)"
-                        opacity="0.3" />
+                        <!-- Inhibitory line: dlPFC -| irrelevant -->
+                        <line class="inhibit-line" x1="165" y1="75" x2="105" y2="150" marker-end="url(#inhibit-end)"
+                            opacity="0.3" />
 
-                    <!-- === BRODMANN AREA NUMBERS === -->
-                    <text class="ba-label" x="160" y="40" font-size="10" fill="rgba(88,166,255,0.4)">9</text>
-                    <text class="ba-label" x="210" y="55" font-size="10" fill="rgba(88,166,255,0.4)">46</text>
-                    <text class="ba-label" x="100" y="145" font-size="10" fill="rgba(248,81,73,0.4)">44</text>
-                    <text class="ba-label" x="78" y="195" font-size="10" fill="rgba(248,81,73,0.4)">47</text>
-                    <text class="ba-label" x="285" y="65" font-size="10" fill="rgba(63,185,80,0.4)">6</text>
-                    <text class="ba-label" x="210" y="130" font-size="10" fill="rgba(247,120,186,0.4)">24</text>
+                        <!-- === BRODMANN AREA NUMBERS === -->
+                        <text class="ba-label" x="160" y="40" font-size="10" fill="rgba(88,166,255,0.4)">9</text>
+                        <text class="ba-label" x="210" y="55" font-size="10" fill="rgba(88,166,255,0.4)">46</text>
+                        <text class="ba-label" x="100" y="145" font-size="10" fill="rgba(248,81,73,0.4)">44</text>
+                        <text class="ba-label" x="78" y="195" font-size="10" fill="rgba(248,81,73,0.4)">47</text>
+                        <text class="ba-label" x="285" y="65" font-size="10" fill="rgba(63,185,80,0.4)">6</text>
+                        <text class="ba-label" x="210" y="130" font-size="10" fill="rgba(247,120,186,0.4)">24</text>
 
-                    <!-- Title: "LEFT LATERAL VIEW" -->
-                    <text x="270" y="505" font-size="11" fill="#484f58" text-anchor="middle" font-family="sans-serif">
-                        Left Lateral View — Annotated for Alex Cognitive Architecture
-                    </text>
+                        <!-- Title: "LEFT LATERAL VIEW" -->
+                        <text x="270" y="505" font-size="11" fill="#484f58" text-anchor="middle"
+                            font-family="sans-serif">
+                            Left Lateral View — Annotated for Alex Cognitive Architecture
+                        </text>
 
-                    <!-- Sulcus labels -->
-                    <text x="200" y="295" font-size="7" fill="#484f58" font-style="italic"
-                        transform="rotate(-10, 200, 295)">Lateral Sulcus (Sylvian Fissure)</text>
-                    <path d="M 130 290 Q 200 270 300 280 Q 400 285 470 300" fill="none" stroke="#484f58"
-                        stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4" />
+                        <!-- Sulcus labels -->
+                        <text x="200" y="295" font-size="7" fill="#484f58" font-style="italic"
+                            transform="rotate(-10, 200, 295)">Lateral Sulcus (Sylvian Fissure)</text>
+                        <path d="M 130 290 Q 200 270 300 280 Q 400 285 470 300" fill="none" stroke="#484f58"
+                            stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4" />
 
-                </g>
+                    </g>
 
-                <!-- Legend in bottom-left -->
-                <g transform="translate(20, 535)">
-                    <text font-size="10" fill="#8b949e" font-family="sans-serif" font-weight="600">SYNAPSE TYPES:</text>
-                    <rect x="120" y="-10" width="10" height="10" fill="#3fb950" rx="2" opacity="0.7" />
-                    <text x="134" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Excitatory (~80%)</text>
-                    <rect x="230" y="-10" width="10" height="10" fill="#f85149" rx="2" opacity="0.7" />
-                    <text x="244" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Inhibitory (~20%)</text>
-                    <line x1="340" y1="-5" x2="380" y2="-5" stroke="#f0883e" stroke-width="1.5"
-                        marker-end="url(#arrowhead)" />
-                    <text x="384" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Signal Flow</text>
-                    <line x1="460" y1="-5" x2="500" y2="-5" stroke="#58a6ff" stroke-width="1" stroke-dasharray="4 3" />
-                    <text x="504" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Annotation Link</text>
-                </g>
-            </svg>
+                    <!-- Legend in bottom-left -->
+                    <g transform="translate(20, 535)">
+                        <text font-size="10" fill="#8b949e" font-family="sans-serif" font-weight="600">SYNAPSE
+                            TYPES:</text>
+                        <rect x="120" y="-10" width="10" height="10" fill="#3fb950" rx="2" opacity="0.7" />
+                        <text x="134" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Excitatory
+                            (~80%)</text>
+                        <rect x="230" y="-10" width="10" height="10" fill="#f85149" rx="2" opacity="0.7" />
+                        <text x="244" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Inhibitory
+                            (~20%)</text>
+                        <line x1="340" y1="-5" x2="380" y2="-5" stroke="#f0883e" stroke-width="1.5"
+                            marker-end="url(#arrowhead)" />
+                        <text x="384" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Signal Flow</text>
+                        <line x1="460" y1="-5" x2="500" y2="-5" stroke="#58a6ff" stroke-width="1"
+                            stroke-dasharray="4 3" />
+                        <text x="504" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Annotation Link</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="panel">
+                <div class="panel-card">
+                    <h3><span class="icon">🧠</span> Region Detail</h3>
+                    <div id="detail-content">
+                        <p class="detail-text" style="font-style: italic;">Click on any brain region to see its Alex
+                            mapping.</p>
+                        <p class="detail-text">The brain is shown in <strong style="color:#f0f6fc;">left lateral
+                                view</strong> — the same orientation used in neuroscience textbooks. Major lobes are
+                            color-coded. Key Brodmann area numbers are overlaid.</p>
+                        <p class="detail-text">Each colored region maps to a specific Alex cognitive component. The
+                            <span style="color:#58a6ff;">blue dlPFC region</span> (BA 9/46) is the most densely mapped
+                            area,
+                            housing 4 distinct sub-functions.</p>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <h3><span class="icon">🗺️</span> Region Legend</h3>
+                    <div class="legend">
+                        <div class="legend-item" onclick="showDetail('dlpfc')">
+                            <div class="swatch" style="background:#1a3a5c; border: 1px solid #58a6ff;"></div>
+                            <span>dlPFC — SSO</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('pfc')">
+                            <div class="swatch" style="background:#3d2800; border: 1px solid #f0883e;"></div>
+                            <span>PFC — LLM</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('vlpfc')">
+                            <div class="swatch" style="background:#3d1500; border: 1px solid #f85149;"></div>
+                            <span>vlPFC — Inhibition</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('acc')">
+                            <div class="swatch" style="background:#5c1a3a; border: 1px solid #f778ba;"></div>
+                            <span>ACC — Pivot</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('premotor')">
+                            <div class="swatch" style="background:#1a3d1a; border: 1px solid #3fb950;"></div>
+                            <span>PMC — Skill Route</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('parietal')">
+                            <div class="swatch" style="background:#0d3d0d; border: 1px solid #3fb950;"></div>
+                            <span>Parietal — Skills</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('temporal')">
+                            <div class="swatch" style="background:#0d2d3d; border: 1px solid #39d2c0;"></div>
+                            <span>Temporal — Episodic</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('amygdala')">
+                            <div class="swatch" style="background:#5c1a1a; border: 1px solid #ff6b6b;"></div>
+                            <span>Amygdala — Safety</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('hippocampus')">
+                            <div class="swatch" style="background:#1a4d5c; border: 1px solid #79c0ff;"></div>
+                            <span>Hippocampus</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('basal')">
+                            <div class="swatch" style="background:#3d3d1a; border: 1px solid #e3b341;"></div>
+                            <span>Basal G. — Proc.</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('mpfc')">
+                            <div class="swatch" style="background:#3d1a4d; border: 1px solid #d2a8ff;"></div>
+                            <span>mPFC — Meta</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('thalamus')">
+                            <div class="swatch" style="background:#2d2d2d; border: 1px solid #8b949e;"></div>
+                            <span>Thalamus — Input</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('occipital')">
+                            <div class="swatch" style="background:#2d2d3d; border: 1px solid #bc8cff;"></div>
+                            <span>Occipital</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <h3><span class="icon">⚕️</span> Clinical Parallels</h3>
+                    <table class="clinical-table">
+                        <thead>
+                            <tr>
+                                <th>Condition</th>
+                                <th>Alex Failure Mode</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color:#f0883e;">Executive Dysfunction</td>
+                                <td>Low-tier model on complex tasks</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#58a6ff;">ADHD</td>
+                                <td>No attention gating (all protocols compete)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#f85149;">Impulsivity</td>
+                                <td>No verification gate (code before plan)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#f778ba;">Cognitive Rigidity</td>
+                                <td>No pivot detection (stale context)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#f85149;">Seizure</td>
+                                <td>No inhibitory synapses</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#79c0ff;">Amnesia</td>
+                                <td>No meditation (lost insights)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#d2a8ff;">Dementia</td>
+                                <td>Broken synapses, no dream cycle</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#ff6b6b;">Amygdala Lesion</td>
+                                <td>No kill switch (self-destructive ops)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div class="panel">
-            <div class="panel-card">
-                <h3><span class="icon">🧠</span> Region Detail</h3>
-                <div id="detail-content">
-                    <p class="detail-text" style="font-style: italic;">Click on any brain region to see its Alex
-                        mapping.</p>
-                    <p class="detail-text">The brain is shown in <strong style="color:#f0f6fc;">left lateral
-                            view</strong> — the same orientation used in neuroscience textbooks. Major lobes are
-                        color-coded. Key Brodmann area numbers are overlaid.</p>
-                    <p class="detail-text">Each colored region maps to a specific Alex cognitive component. The <span
-                            style="color:#58a6ff;">blue dlPFC region</span> (BA 9/46) is the most densely mapped area,
-                        housing 4 distinct sub-functions.</p>
+        <div class="credits">
+            Alex Cognitive Architecture v5.x — Neuroanatomical Brain Mapping — Created 2026-02-07<br />
+            Brain regions based on Brodmann area classifications. Diagram is an original illustration for the Alex
+            project.<br />
+            <em>Note: ACC, mPFC, amygdala, hippocampus, basal ganglia, and thalamus are medial/deep structures shown by
+                educational convention.</em>
+        </div>
+    </div><!-- end tab-anatomy -->
+
+    <div id="tab-diagrams" class="tab-content">
+        <div class="diagrams-container">
+
+            <div class="diagram-section">
+                <div class="diagram-header">
+                    <h2>🗺️ Complete Brain Map</h2>
+                    <p>Full neuroanatomical mapping of Alex's cognitive architecture. Six brain regions containing all
+                        major components — from the LLM executive function (PFC) through the amygdala safety system to
+                        distributed global knowledge.</p>
+                </div>
+                <div class="diagram-body">
+                    <div class="mermaid">
+                        graph TB
+                        subgraph FRONTAL["FRONTAL LOBE"]
+                        subgraph PFC["Prefrontal Cortex - Executive Function"]
+                        LLM["LLM Claude-GPT&lt;br/&gt;Reasoning, Planning, Decisions&lt;br/&gt;The thinking engine"]
+                        end
+                        subgraph DLPFC["Dorsolateral PFC BA 9-46 - Task Planning"]
+                        SSO["Skill Selection Optimization&lt;br/&gt;Proactive resource allocation"]
+                        AG["Attention Gating BA 46&lt;br/&gt;SSO Phase 1b - context filtering"]
+                        IC["Inhibitory Control + vlPFC&lt;br/&gt;Suppress irrelevant protocols"]
+                        VG["Verification Gate&lt;br/&gt;Delayed gratification checkpoint"]
+                        end
+                        subgraph ACC["Anterior Cingulate Cortex - Conflict Monitor"]
+                        PD["Pivot Detection Protocol&lt;br/&gt;Task-switch signal detection"]
+                        WM["Working Memory P1-P7&lt;br/&gt;7 plus-minus 2 active rules"]
+                        end
+                        subgraph PMC["Premotor Cortex - Motor Planning"]
+                        SA["Skill Activation&lt;br/&gt;Reactive capability routing"]
+                        end
+                        end
+                        subgraph TEMPORAL["TEMPORAL LOBE"]
+                        subgraph HIPP["Hippocampus - Episodic Memory"]
+                        EP[".prompt.md files&lt;br/&gt;Workflows and session records"]
+                        EA[".github episodic&lt;br/&gt;Historical session archive"]
+                        end
+                        end
+                        subgraph PARIETAL["PARIETAL LOBE"]
+                        subgraph NC["Neocortex - Declarative Knowledge"]
+                        SK["Skills x76&lt;br/&gt;skills SKILL.md"]
+                        DM["Declarative Memory&lt;br/&gt;copilot-instructions.md"]
+                        end
+                        end
+                        subgraph BASAL["SUBCORTICAL STRUCTURES"]
+                        subgraph BG["Basal Ganglia - Procedural Memory"]
+                        PM[".instructions.md x24&lt;br/&gt;Automated procedures"]
+                        end
+                        subgraph THAL["Thalamus - Sensory Relay"]
+                        INPUT["User Input&lt;br/&gt;Chat, Commands, Files"]
+                        end
+                        subgraph AMYG["Amygdala - Threat Detection"]
+                        SAFETY["Safety Imperatives I1-I7&lt;br/&gt;Kill switch, RISKS.md"]
+                        end
+                        end
+                        subgraph MEDIAL["MEDIAL STRUCTURES"]
+                        subgraph MPFC["Medial PFC + DMN - Meta-Cognition"]
+                        MC["Self-Monitoring&lt;br/&gt;Meta-cognitive awareness"]
+                        SA2["Self-Actualization&lt;br/&gt;Deep architecture assessment"]
+                        end
+                        subgraph HPC["Hippocampal-Cortical - Consolidation"]
+                        MED["Meditation&lt;br/&gt;Knowledge consolidation"]
+                        DRM["Dream State&lt;br/&gt;Unconscious maintenance"]
+                        end
+                        end
+                        subgraph DISTRIBUTE["DISTRIBUTED CORTEX"]
+                        GK["Global Knowledge&lt;br/&gt;Cross-project patterns"]
+                        SYN["Synaptic Network&lt;br/&gt;Embedded connections + inhibitory"]
+                        end
+                        LLM ==>|"orchestrates"| SSO
+                        LLM ==>|"orchestrates"| WM
+                        LLM ==>|"orchestrates"| SA
+                        LLM ==>|"orchestrates"| MC
+                        SSO --> AG
+                        AG --> IC
+                        IC --> VG
+                        PD -.->|"pivot signal"| SSO
+                        WM -->|"slot context"| SSO
+                        SA -->|"routes to"| SK
+                        SA -->|"routes to"| PM
+                        SSO -->|"surveys"| SK
+                        MED -.->|"strengthens"| SYN
+                        DRM -.->|"validates"| SYN
+                        INPUT -->|"relayed"| LLM
+                        INPUT -->|"low road"| SAFETY
+                        SAFETY -.->|"blocks"| LLM
+                        SAFETY -.->|"blocks"| SA
+                        EP -->|"archived"| EA
+                        SK -->|"promoted"| GK
+                        IC -.->|"suppresses"| DRM
+                        IC -.->|"suppresses"| MED
+                        style FRONTAL fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style TEMPORAL fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style PARIETAL fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style BASAL fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style MEDIAL fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style DISTRIBUTE fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                        style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:3px
+                        style SSO fill:#ffecd2,stroke:#f0883e,color:#1f2328,stroke-width:2px
+                        style AG fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style VG fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style IC fill:#fdd,stroke:#ff6b6b,color:#1f2328,stroke-width:2px
+                        style PD fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style WM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style SA fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style EP fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style EA fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style SK fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style DM fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PM fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style MC fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style SA2 fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style MED fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style DRM fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style GK fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                        style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                    </div>
+                </div>
+                <div class="diagram-caption">
+                    Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC
+                    monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative
+                    knowledge. Subcortical structures include procedures, input relay, and threat detection (amygdala,
+                    red). Medial structures (lavender) enable meta-cognition and consolidation.
                 </div>
             </div>
 
-            <div class="panel-card">
-                <h3><span class="icon">🗺️</span> Region Legend</h3>
-                <div class="legend">
-                    <div class="legend-item" onclick="showDetail('dlpfc')">
-                        <div class="swatch" style="background:#1a3a5c; border: 1px solid #58a6ff;"></div>
-                        <span>dlPFC — SSO</span>
+            <div class="diagram-section">
+                <div class="diagram-header">
+                    <h2>⚡ Signal Flow</h2>
+                    <p>How information flows through Alex's brain — from user input through the amygdala safety check,
+                        executive parsing, task planning with attention gating, conflict monitoring, and response
+                        generation.</p>
+                </div>
+                <div class="diagram-body">
+                    <div class="mermaid">
+                        flowchart TB
+                        INPUT["User Input - Thalamus"]
+                        SAFETY["Safety Check - Amygdala&lt;br/&gt;Imperatives I1-I7"]
+                        subgraph EXEC["Executive Processing - PFC"]
+                        LLM["LLM&lt;br/&gt;Parse intent"]
+                        end
+                        subgraph PLAN["Task Planning - dlPFC"]
+                        COMPLEX{"Complex?"}
+                        SSO_SURVEY["Survey skills"]
+                        SSO_GATE["Gate attention"]
+                        SSO_DEPS["Analyze deps"]
+                        SSO_VERIFY["Verify plan"]
+                        SIMPLE["Direct execute"]
+                        end
+                        subgraph MONITOR["Conflict Monitor - ACC"]
+                        PIVOT{"Domain&lt;br/&gt;pivot?"}
+                        SLOTS["Rotate P5-P7"]
+                        end
+                        subgraph EXECUTE["Execution - Premotor"]
+                        ROUTE["Route to skills"]
+                        INHIBIT["Check inhibitions"]
+                        OUTPUT["Generate Response"]
+                        end
+                        subgraph MEMORY["Memory Systems"]
+                        PROC["Procedural&lt;br/&gt;Basal Ganglia"]
+                        EPIS["Episodic&lt;br/&gt;Hippocampus"]
+                        DECL["Declarative&lt;br/&gt;Neocortex"]
+                        GLOB["Global&lt;br/&gt;Distributed"]
+                        end
+                        INPUT --> SAFETY
+                        SAFETY -->|"safe"| LLM
+                        SAFETY -.->|"threat - HALT"| OUTPUT
+                        LLM --> COMPLEX
+                        COMPLEX -->|"3+ ops"| SSO_SURVEY --> SSO_GATE --> SSO_DEPS --> SSO_VERIFY --> ROUTE
+                        COMPLEX -->|"1 op"| SIMPLE --> ROUTE
+                        LLM --> PIVOT
+                        PIVOT -->|"yes"| SLOTS --> SSO_SURVEY
+                        PIVOT -->|"no"| ROUTE
+                        ROUTE --> INHIBIT --> OUTPUT
+                        ROUTE -.->|"reads"| PROC
+                        ROUTE -.->|"reads"| DECL
+                        SSO_SURVEY -.->|"scans"| DECL
+                        OUTPUT -.->|"writes"| EPIS
+                        EPIS -.->|"promotes"| GLOB
+                        style EXEC fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style PLAN fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style MONITOR fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style EXECUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style COMPLEX fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_SURVEY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_GATE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_DEPS fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_VERIFY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SIMPLE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style PIVOT fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style SLOTS fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style ROUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style INHIBIT fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style OUTPUT fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PROC fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style EPIS fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style DECL fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
                     </div>
-                    <div class="legend-item" onclick="showDetail('pfc')">
-                        <div class="swatch" style="background:#3d2800; border: 1px solid #f0883e;"></div>
-                        <span>PFC — LLM</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('vlpfc')">
-                        <div class="swatch" style="background:#3d1500; border: 1px solid #f85149;"></div>
-                        <span>vlPFC — Inhibition</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('acc')">
-                        <div class="swatch" style="background:#5c1a3a; border: 1px solid #f778ba;"></div>
-                        <span>ACC — Pivot</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('premotor')">
-                        <div class="swatch" style="background:#1a3d1a; border: 1px solid #3fb950;"></div>
-                        <span>PMC — Skill Route</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('parietal')">
-                        <div class="swatch" style="background:#0d3d0d; border: 1px solid #3fb950;"></div>
-                        <span>Parietal — Skills</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('temporal')">
-                        <div class="swatch" style="background:#0d2d3d; border: 1px solid #39d2c0;"></div>
-                        <span>Temporal — Episodic</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('amygdala')">
-                        <div class="swatch" style="background:#5c1a1a; border: 1px solid #ff6b6b;"></div>
-                        <span>Amygdala — Safety</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('hippocampus')">
-                        <div class="swatch" style="background:#1a4d5c; border: 1px solid #79c0ff;"></div>
-                        <span>Hippocampus</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('basal')">
-                        <div class="swatch" style="background:#3d3d1a; border: 1px solid #e3b341;"></div>
-                        <span>Basal G. — Proc.</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('mpfc')">
-                        <div class="swatch" style="background:#3d1a4d; border: 1px solid #d2a8ff;"></div>
-                        <span>mPFC — Meta</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('thalamus')">
-                        <div class="swatch" style="background:#2d2d2d; border: 1px solid #8b949e;"></div>
-                        <span>Thalamus — Input</span>
-                    </div>
-                    <div class="legend-item" onclick="showDetail('occipital')">
-                        <div class="swatch" style="background:#2d2d3d; border: 1px solid #bc8cff;"></div>
-                        <span>Occipital</span>
-                    </div>
+                </div>
+                <div class="diagram-caption">
+                    The amygdala safety check can short-circuit the entire pipeline, halting output immediately when
+                    Safety Imperatives I1-I7 are triggered — the "low road" threat bypass.
                 </div>
             </div>
 
-            <div class="panel-card">
-                <h3><span class="icon">⚕️</span> Clinical Parallels</h3>
-                <table class="clinical-table">
-                    <thead>
-                        <tr>
-                            <th>Condition</th>
-                            <th>Alex Failure Mode</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="color:#f0883e;">Executive Dysfunction</td>
-                            <td>Low-tier model on complex tasks</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#58a6ff;">ADHD</td>
-                            <td>No attention gating (all protocols compete)</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#f85149;">Impulsivity</td>
-                            <td>No verification gate (code before plan)</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#f778ba;">Cognitive Rigidity</td>
-                            <td>No pivot detection (stale context)</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#f85149;">Seizure</td>
-                            <td>No inhibitory synapses</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#79c0ff;">Amnesia</td>
-                            <td>No meditation (lost insights)</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#d2a8ff;">Dementia</td>
-                            <td>Broken synapses, no dream cycle</td>
-                        </tr>
-                        <tr>
-                            <td style="color:#ff6b6b;">Amygdala Lesion</td>
-                            <td>No kill switch (self-destructive ops)</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="diagram-section">
+                <div class="diagram-header">
+                    <h2>⚖️ Synapse Type Distribution</h2>
+                    <p>Real neural networks maintain approximately 80% excitatory / 20% inhibitory balance. Alex's
+                        synaptic network targets the same ratio — without inhibition, all protocols would fire
+                        simultaneously (cognitive seizure).</p>
+                </div>
+                <div class="diagram-body">
+                    <div class="mermaid">
+                        pie title Synapse Type Distribution - Target
+                        "Excitatory - Enables, Triggers, Enhances" : 80
+                        "Inhibitory - Inhibits, Suppresses" : 20
+                    </div>
+                </div>
+                <div class="diagram-caption">
+                    Excitatory synapses (green) activate downstream protocols. Inhibitory synapses (red) suppress
+                    irrelevant ones. The 80/20 balance prevents both under-activation and over-activation.
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="credits">
-        Alex Cognitive Architecture v5.x — Neuroanatomical Brain Mapping — Created 2026-02-07<br />
-        Brain regions based on Brodmann area classifications. Diagram is an original illustration for the Alex
-        project.<br />
-        <em>Note: ACC, mPFC, amygdala, hippocampus, basal ganglia, and thalamus are medial/deep structures shown by
-            educational convention.</em>
-    </div>
+        </div><!-- end diagrams-container -->
+    </div><!-- end tab-diagrams -->
 
     <script>
         const details = {
@@ -1080,6 +1434,39 @@
                     r.classList.remove('active', 'dimmed');
                 });
                 activeRegion = null;
+            }
+        });
+
+        // Tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f6f8fa',
+                primaryTextColor: '#1f2328',
+                primaryBorderColor: '#d1d9e0',
+                lineColor: '#656d76',
+                secondaryColor: '#f6f8fa',
+                tertiaryColor: '#ffffff',
+                background: '#ffffff',
+                mainBkg: '#f6f8fa',
+                nodeBorder: '#d1d9e0',
+                titleColor: '#1f2328',
+                pie1: '#3fb950',
+                pie2: '#ff6b6b'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
             }
         });
     </script>
