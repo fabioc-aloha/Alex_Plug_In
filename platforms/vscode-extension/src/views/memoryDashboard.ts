@@ -316,8 +316,9 @@ async function getWebviewContent(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' https://cdn.jsdelivr.net; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
     <title>Alex Memory Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         :root {
             --bg-primary: var(--vscode-editor-background);
@@ -454,22 +455,48 @@ async function getWebviewContent(
         
         .card h2 .icon { font-size: 18px; }
         
-        /* Brain Diagram */
+        /* Brain Diagram - Mermaid */
         .brain-diagram {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 11px;
-            line-height: 1.3;
             background: var(--bg-primary);
-            padding: 16px;
-            border-radius: 6px;
+            padding: 20px;
+            border-radius: 8px;
             overflow-x: auto;
-            white-space: pre;
+            display: flex;
+            justify-content: center;
         }
         
-        .brain-diagram .core { color: var(--premium); }
-        .brain-diagram .domain { color: var(--accent); }
-        .brain-diagram .storage { color: var(--success); }
-        .brain-diagram .external { color: var(--warning); }
+        .brain-diagram .mermaid {
+            width: 100%;
+        }
+        
+        .mermaid {
+            font-family: var(--vscode-font-family) !important;
+        }
+        
+        .mermaid .node rect,
+        .mermaid .node polygon {
+            fill: var(--bg-secondary) !important;
+            stroke: var(--persona-accent) !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .edgePath path {
+            stroke: var(--text-secondary) !important;
+            stroke-width: 1.5px !important;
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: var(--bg-primary) !important;
+            padding: 2px 6px !important;
+        }
+        
+        /* Memory Flow Diagram */
+        .flow-diagram {
+            background: var(--bg-primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
         
         /* Memory Stats */
         .memory-stat {
@@ -627,39 +654,77 @@ async function getWebviewContent(
             <div class="card" style="grid-column: span 2;">
                 <h2><span class="icon">🧠</span> Neuroanatomical Mapping</h2>
                 <div class="brain-diagram">
-<span class="core">┌─────────────────────────────────────────────────────────────────────────┐</span>
-<span class="core">│                    ALEX COGNITIVE ARCHITECTURE                           │</span>
-<span class="core">│                 ═══════════════════════════════                          │</span>
-<span class="core">│                                                                          │</span>
-<span class="core">│   ┌─────────────────────────────────────────────────────────────────┐   │</span>
-<span class="core">│   │                    EXECUTIVE FUNCTION (LLM)                      │   │</span>
-<span class="core">│   │              Claude/GPT = Prefrontal Cortex                      │   │</span>
-<span class="core">│   │         Reasoning • Planning • Decisions • Working Memory        │   │</span>
-<span class="core">│   └─────────────────────────────────────────────────────────────────┘   │</span>
-<span class="core">│                              │                                           │</span>
-<span class="core">│              ┌───────────────┼───────────────┐                          │</span>
-<span class="core">│              ▼               ▼               ▼                          │</span>
-<span class="domain">│   ┌───────────────┐  ┌───────────────┐  ┌───────────────┐              │</span>
-<span class="domain">│   │  PROCEDURAL   │  │   EPISODIC    │  │    SKILLS     │              │</span>
-<span class="domain">│   │  Basal Ganglia │  │  Hippocampus  │  │   Neocortex   │              │</span>
-<span class="domain">│   │               │  │               │  │               │              │</span>
-<span class="storage">│   │ ${String(stats.instructions).padStart(2)} .instructions│  │ ${String(stats.prompts).padStart(2)} .prompts   │  │ ${String(stats.skills).padStart(2)} skills    │              │</span>
-<span class="domain">│   └───────────────┘  └───────────────┘  └───────────────┘              │</span>
-<span class="domain">│          │                   │                   │                      │</span>
-<span class="domain">│          └───────────────────┼───────────────────┘                      │</span>
-<span class="domain">│                              ▼                                           │</span>
-<span class="domain">│                   ┌───────────────────┐                                 │</span>
-<span class="domain">│                   │    SYNAPSES       │                                 │</span>
-<span class="domain">│                   │  Neural Pathways  │                                 │</span>
-<span class="storage">│                   │  ${String(stats.synapses).padStart(2)} connections  │                                 │</span>
-<span class="domain">│                   └─────────┬─────────┘                                 │</span>
-<span class="domain">│                             │                                            │</span>
-<span class="external">│   ┌─────────────────────────┼─────────────────────────┐                 │</span>
-<span class="external">│   │              GLOBAL KNOWLEDGE (External)           │                 │</span>
-<span class="external">│   │        Cross-Project • Patterns • Insights         │                 │</span>
-<span class="storage">│   │            ${String(stats.globalPatterns).padStart(2)} patterns + ${String(stats.globalInsights).padStart(3)} insights              │                 │</span>
-<span class="external">│   └─────────────────────────────────────────────────────┘                 │</span>
-<span class="core">└─────────────────────────────────────────────────────────────────────────┘</span>
+                    <pre class="mermaid">
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '${personaAccent}', 'primaryTextColor': '#fff', 'primaryBorderColor': '${personaAccent}', 'lineColor': '#888', 'secondaryColor': '#1e1e1e', 'tertiaryColor': '#252526' }}}%%
+flowchart TB
+    subgraph Executive["🧠 EXECUTIVE FUNCTION"]
+        LLM["<b>LLM<\/b><br/>Claude / GPT<br/><i>Prefrontal Cortex<\/i>"]
+    end
+    
+    subgraph Memory["📚 LONG-TERM MEMORY"]
+        direction LR
+        subgraph Procedural["📜 Procedural"]
+            INS["${stats.instructions} .instructions.md<br/><i>Basal Ganglia<\/i>"]
+        end
+        subgraph Episodic["💬 Episodic"]
+            PRM["${stats.prompts} .prompt.md<br/><i>Hippocampus<\/i>"]
+        end
+        subgraph Skills["🎯 Skills"]
+            SKL["${stats.skills} skill domains<br/><i>Neocortex<\/i>"]
+        end
+    end
+    
+    subgraph Neural["🔗 NEURAL PATHWAYS"]
+        SYN["⚡ ${stats.synapses} Synapses<br/><i>Connection Mapping<\/i>"]
+    end
+    
+    subgraph Global["🌐 GLOBAL KNOWLEDGE"]
+        GK["${stats.globalPatterns} Patterns + ${stats.globalInsights} Insights<br/><i>Cross-Project Memory<\/i>"]
+    end
+    
+    LLM --> |"reasons with"| INS
+    LLM --> |"recalls"| PRM
+    LLM --> |"applies"| SKL
+    INS --> SYN
+    PRM --> SYN
+    SKL --> SYN
+    SYN --> |"syncs"| GK
+                    </pre>
+                </div>
+                
+                <!-- Memory Flow -->
+                <div class="flow-diagram">
+                    <pre class="mermaid">
+%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '${personaAccent}', 'lineColor': '#888' }}}%%
+flowchart LR
+    subgraph Input["📥 Input"]
+        Q["User Query"]
+    end
+    
+    subgraph Process["⚙️ Processing"]
+        SSO["Skill Selection<br/>Optimization"]
+        WM["Working Memory<br/>P1-P7 Slots"]
+    end
+    
+    subgraph Retrieval["📤 Retrieval"]
+        INS2["Instructions"]
+        SKL2["Skills"]
+        GK2["Global Knowledge"]
+    end
+    
+    subgraph Output["💡 Output"]
+        R["Response"]
+    end
+    
+    Q --> SSO
+    SSO --> WM
+    WM --> INS2
+    WM --> SKL2
+    WM --> GK2
+    INS2 --> R
+    SKL2 --> R
+    GK2 --> R
+                    </pre>
                 </div>
             </div>
             
@@ -753,6 +818,33 @@ async function getWebviewContent(
     
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
+        
+        // Initialize Mermaid with dark theme
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 15
+            },
+            themeVariables: {
+                primaryColor: '${personaAccent}',
+                primaryTextColor: '#e0e0e0',
+                primaryBorderColor: '${personaAccent}',
+                lineColor: '#666',
+                secondaryColor: '#1e1e1e',
+                tertiaryColor: '#252526',
+                background: '#1e1e1e',
+                mainBkg: '#252526',
+                nodeBorder: '${personaAccent}',
+                clusterBkg: '#1e1e1e',
+                clusterBorder: '#444',
+                titleColor: '#e0e0e0',
+                edgeLabelBackground: '#1e1e1e'
+            }
+        });
         
         function cmd(command, data) {
             vscode.postMessage({ command, ...data });

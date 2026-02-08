@@ -117,7 +117,7 @@ Every effective AI session follows this pattern:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  1. ORIENT → 2. EXPLORE → 3. BUILD → 4. REFINE → 5. ✓  │
+│  1. ORIENT → 2. EXPLORE → 3. BUILD → 4. REFINE → 5. ✓   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -560,21 +560,21 @@ The best prompt engineers share these traits:
 │  • Include relevant code/files                          │
 │                                                         │
 │  EFFECTIVE PHRASES:                                     │
-│  • "Show me 3 approaches with tradeoffs"               │
-│  • "Explain like I'm [audience level]"                 │
+│  • "Show me 3 approaches with tradeoffs"                │
+│  • "Explain like I'm [audience level]"                  │
 │  • "What am I missing?"                                 │
-│  • "Challenge my assumption that..."                   │
-│  • "Step by step, starting from..."                    │
+│  • "Challenge my assumption that..."                    │
+│  • "Step by step, starting from..."                     │
 │                                                         │
 │  ITERATE:                                               │
-│  • "Close, but also consider..."                       │
-│  • "Make it more [X]"                                  │
-│  • "Same pattern but for [Y]"                          │
+│  • "Close, but also consider..."                        │
+│  • "Make it more [X]"                                   │
+│  • "Same pattern but for [Y]"                           │
 │                                                         │
 │  DAILY RHYTHM:                                          │
-│  • Morning: Self-Actualize → set context               │
-│  • Working: Right-click actions + conversation         │
-│  • End: Dream → consolidate learnings                  │
+│  • Morning: Self-Actualize → set context                │
+│  • Working: Right-click actions + conversation          │
+│  • End: Dream → consolidate learnings                   │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
 ```
