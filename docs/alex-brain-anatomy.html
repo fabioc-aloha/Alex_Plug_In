@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Brain — Neuroanatomical Mapping</title>
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/platforms/vscode-extension/assets/icon.png">
     <style>
         * {
             margin: 0;
@@ -1292,113 +1294,113 @@
                         distributed global knowledge.</p>
                 </div>
                 <div class="diagram-body">
-<div class="mermaid">
-graph TB
-subgraph FRONTAL["FRONTAL LOBE"]
-subgraph PFC["Prefrontal Cortex - Executive Function"]
-LLM["LLM Claude-GPT<br/>Reasoning, Planning, Decisions<br/>The thinking engine"]
-end
-subgraph DLPFC["Dorsolateral PFC BA 9-46 - Task Planning"]
-SSO["Skill Selection Optimization<br/>Proactive resource allocation"]
-AG["Attention Gating BA 46<br/>SSO Phase 1b - context filtering"]
-IC["Inhibitory Control + vlPFC<br/>Suppress irrelevant protocols"]
-VG["Verification Gate<br/>Delayed gratification checkpoint"]
-end
-subgraph ACC["Anterior Cingulate Cortex - Conflict Monitor"]
-PD["Pivot Detection Protocol<br/>Task-switch signal detection"]
-WM["Working Memory P1-P7<br/>7 plus-minus 2 active rules"]
-end
-subgraph PMC["Premotor Cortex - Motor Planning"]
-SA["Skill Activation<br/>Reactive capability routing"]
-end
-end
-subgraph TEMPORAL["TEMPORAL LOBE"]
-subgraph HIPP["Hippocampus - Episodic Memory"]
-EP[".prompt.md files<br/>Workflows and session records"]
-EA[".github episodic<br/>Historical session archive"]
-end
-end
-subgraph PARIETAL["PARIETAL LOBE"]
-subgraph NC["Neocortex - Declarative Knowledge"]
-SK["Skills x76<br/>skills SKILL.md"]
-DM["Declarative Memory<br/>copilot-instructions.md"]
-end
-end
-subgraph BASAL["SUBCORTICAL STRUCTURES"]
-subgraph BG["Basal Ganglia - Procedural Memory"]
-PM[".instructions.md x24<br/>Automated procedures"]
-end
-subgraph THAL["Thalamus - Sensory Relay"]
-INPUT["User Input<br/>Chat, Commands, Files"]
-end
-subgraph AMYG["Amygdala - Threat Detection"]
-SAFETY["Safety Imperatives I1-I7<br/>Kill switch, RISKS.md"]
-end
-end
-subgraph MEDIAL["MEDIAL STRUCTURES"]
-subgraph MPFC["Medial PFC + DMN - Meta-Cognition"]
-MC["Self-Monitoring<br/>Meta-cognitive awareness"]
-SA2["Self-Actualization<br/>Deep architecture assessment"]
-end
-subgraph HPC["Hippocampal-Cortical - Consolidation"]
-MED["Meditation<br/>Knowledge consolidation"]
-DRM["Dream State<br/>Unconscious maintenance"]
-end
-end
-subgraph DISTRIBUTE["DISTRIBUTED CORTEX"]
-GK["Global Knowledge<br/>Cross-project patterns"]
-SYN["Synaptic Network<br/>Embedded connections + inhibitory"]
-end
-LLM ==>|"orchestrates"| SSO
-LLM ==>|"orchestrates"| WM
-LLM ==>|"orchestrates"| SA
-LLM ==>|"orchestrates"| MC
-SSO --> AG
-AG --> IC
-IC --> VG
-PD -.->|"pivot signal"| SSO
-WM -->|"slot context"| SSO
-SA -->|"routes to"| SK
-SA -->|"routes to"| PM
-SSO -->|"surveys"| SK
-MED -.->|"strengthens"| SYN
-DRM -.->|"validates"| SYN
-INPUT -->|"relayed"| LLM
-INPUT -->|"low road"| SAFETY
-SAFETY -.->|"blocks"| LLM
-SAFETY -.->|"blocks"| SA
-EP -->|"archived"| EA
-SK -->|"promoted"| GK
-IC -.->|"suppresses"| DRM
-IC -.->|"suppresses"| MED
-style FRONTAL fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
-style TEMPORAL fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
-style PARIETAL fill:#d4edda,stroke:#3fb950,color:#1f2328
-style BASAL fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style MEDIAL fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
-style DISTRIBUTE fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
-style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:3px
-style SSO fill:#ffecd2,stroke:#f0883e,color:#1f2328,stroke-width:2px
-style AG fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style VG fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style IC fill:#fdd,stroke:#ff6b6b,color:#1f2328,stroke-width:2px
-style PD fill:#fce4ec,stroke:#f85149,color:#1f2328
-style WM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
-style SA fill:#e8f5e9,stroke:#3fb950,color:#1f2328
-style EP fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
-style EA fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
-style SK fill:#d4edda,stroke:#3fb950,color:#1f2328
-style DM fill:#d4edda,stroke:#3fb950,color:#1f2328
-style PM fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
-style MC fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
-style SA2 fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
-style MED fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
-style DRM fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
-style GK fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
-style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
-</div>
+                    <div class="mermaid">
+                        graph TB
+                        subgraph FRONTAL["FRONTAL LOBE"]
+                        subgraph PFC["Prefrontal Cortex - Executive Function"]
+                        LLM["LLM Claude-GPT<br />Reasoning, Planning, Decisions<br />The thinking engine"]
+                        end
+                        subgraph DLPFC["Dorsolateral PFC BA 9-46 - Task Planning"]
+                        SSO["Skill Selection Optimization<br />Proactive resource allocation"]
+                        AG["Attention Gating BA 46<br />SSO Phase 1b - context filtering"]
+                        IC["Inhibitory Control + vlPFC<br />Suppress irrelevant protocols"]
+                        VG["Verification Gate<br />Delayed gratification checkpoint"]
+                        end
+                        subgraph ACC["Anterior Cingulate Cortex - Conflict Monitor"]
+                        PD["Pivot Detection Protocol<br />Task-switch signal detection"]
+                        WM["Working Memory P1-P7<br />7 plus-minus 2 active rules"]
+                        end
+                        subgraph PMC["Premotor Cortex - Motor Planning"]
+                        SA["Skill Activation<br />Reactive capability routing"]
+                        end
+                        end
+                        subgraph TEMPORAL["TEMPORAL LOBE"]
+                        subgraph HIPP["Hippocampus - Episodic Memory"]
+                        EP[".prompt.md files<br />Workflows and session records"]
+                        EA[".github episodic<br />Historical session archive"]
+                        end
+                        end
+                        subgraph PARIETAL["PARIETAL LOBE"]
+                        subgraph NC["Neocortex - Declarative Knowledge"]
+                        SK["Skills x76<br />skills SKILL.md"]
+                        DM["Declarative Memory<br />copilot-instructions.md"]
+                        end
+                        end
+                        subgraph BASAL["SUBCORTICAL STRUCTURES"]
+                        subgraph BG["Basal Ganglia - Procedural Memory"]
+                        PM[".instructions.md x24<br />Automated procedures"]
+                        end
+                        subgraph THAL["Thalamus - Sensory Relay"]
+                        INPUT["User Input<br />Chat, Commands, Files"]
+                        end
+                        subgraph AMYG["Amygdala - Threat Detection"]
+                        SAFETY["Safety Imperatives I1-I7<br />Kill switch, RISKS.md"]
+                        end
+                        end
+                        subgraph MEDIAL["MEDIAL STRUCTURES"]
+                        subgraph MPFC["Medial PFC + DMN - Meta-Cognition"]
+                        MC["Self-Monitoring<br />Meta-cognitive awareness"]
+                        SA2["Self-Actualization<br />Deep architecture assessment"]
+                        end
+                        subgraph HPC["Hippocampal-Cortical - Consolidation"]
+                        MED["Meditation<br />Knowledge consolidation"]
+                        DRM["Dream State<br />Unconscious maintenance"]
+                        end
+                        end
+                        subgraph DISTRIBUTE["DISTRIBUTED CORTEX"]
+                        GK["Global Knowledge<br />Cross-project patterns"]
+                        SYN["Synaptic Network<br />Embedded connections + inhibitory"]
+                        end
+                        LLM ==>|"orchestrates"| SSO
+                        LLM ==>|"orchestrates"| WM
+                        LLM ==>|"orchestrates"| SA
+                        LLM ==>|"orchestrates"| MC
+                        SSO --> AG
+                        AG --> IC
+                        IC --> VG
+                        PD -.->|"pivot signal"| SSO
+                        WM -->|"slot context"| SSO
+                        SA -->|"routes to"| SK
+                        SA -->|"routes to"| PM
+                        SSO -->|"surveys"| SK
+                        MED -.->|"strengthens"| SYN
+                        DRM -.->|"validates"| SYN
+                        INPUT -->|"relayed"| LLM
+                        INPUT -->|"low road"| SAFETY
+                        SAFETY -.->|"blocks"| LLM
+                        SAFETY -.->|"blocks"| SA
+                        EP -->|"archived"| EA
+                        SK -->|"promoted"| GK
+                        IC -.->|"suppresses"| DRM
+                        IC -.->|"suppresses"| MED
+                        style FRONTAL fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style TEMPORAL fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style PARIETAL fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style BASAL fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style MEDIAL fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style DISTRIBUTE fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                        style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:3px
+                        style SSO fill:#ffecd2,stroke:#f0883e,color:#1f2328,stroke-width:2px
+                        style AG fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style VG fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style IC fill:#fdd,stroke:#ff6b6b,color:#1f2328,stroke-width:2px
+                        style PD fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style WM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style SA fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style EP fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style EA fill:#d1f5ef,stroke:#39d2c0,color:#1f2328
+                        style SK fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style DM fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PM fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style MC fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style SA2 fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
+                        style MED fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style DRM fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style GK fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                        style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                    </div>
                 </div>
                 <div class="diagram-caption">
                     Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC
@@ -1416,82 +1418,82 @@ style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
                         generation.</p>
                 </div>
                 <div class="diagram-body">
-<div class="mermaid">
-flowchart TB
-INPUT["User Input - Thalamus"]
-SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I7"]
-subgraph EXEC["Executive Processing - PFC"]
-LLM["LLM<br/>Parse intent"]
-end
-subgraph PLAN["Task Planning - dlPFC"]
-COMPLEX{"Complex?"}
-SSO_SURVEY["Survey skills"]
-SSO_GATE["Gate attention"]
-SSO_DEPS["Analyze deps"]
-SSO_VERIFY["Verify plan"]
-SIMPLE["Direct execute"]
-end
-subgraph MONITOR["Conflict Monitor - ACC"]
-PIVOT{"Domain<br/>pivot?"}
-SLOTS["Rotate P5-P7"]
-end
-subgraph EXECUTE["Execution - Premotor"]
-ROUTE["Route to skills"]
-INHIBIT["Check inhibitions"]
-OUTPUT["Generate Response"]
-end
-subgraph MEMORY["Memory Systems"]
-PROC["Procedural<br/>Basal Ganglia"]
-EPIS["Episodic<br/>Hippocampus"]
-DECL["Declarative<br/>Neocortex"]
-GLOB["Global<br/>Distributed"]
-end
-INPUT --> SAFETY
-SAFETY -->|"safe"| LLM
-SAFETY -.->|"threat - HALT"| OUTPUT
-LLM --> COMPLEX
-COMPLEX -->|"3+ ops"| SSO_SURVEY
-SSO_SURVEY --> SSO_GATE
-SSO_GATE --> SSO_DEPS
-SSO_DEPS --> SSO_VERIFY
-SSO_VERIFY --> ROUTE
-COMPLEX -->|"1 op"| SIMPLE
-SIMPLE --> ROUTE
-LLM --> PIVOT
-PIVOT -->|"yes"| SLOTS
-SLOTS --> SSO_SURVEY
-PIVOT -->|"no"| ROUTE
-ROUTE --> INHIBIT
-INHIBIT --> OUTPUT
-ROUTE -.->|"reads"| PROC
-ROUTE -.->|"reads"| DECL
-SSO_SURVEY -.->|"scans"| DECL
-OUTPUT -.->|"writes"| EPIS
-EPIS -.->|"promotes"| GLOB
-style EXEC fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
-style PLAN fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style MONITOR fill:#fce4ec,stroke:#f85149,color:#1f2328
-style EXECUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
-style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
-style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
-style COMPLEX fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style SSO_SURVEY fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style SSO_GATE fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style SSO_DEPS fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style SSO_VERIFY fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style SIMPLE fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style PIVOT fill:#fce4ec,stroke:#f85149,color:#1f2328
-style SLOTS fill:#fce4ec,stroke:#f85149,color:#1f2328
-style ROUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
-style INHIBIT fill:#fdd,stroke:#ff6b6b,color:#1f2328
-style OUTPUT fill:#d4edda,stroke:#3fb950,color:#1f2328
-style PROC fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style EPIS fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
-style DECL fill:#d4edda,stroke:#3fb950,color:#1f2328
-style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
-</div>
+                    <div class="mermaid">
+                        flowchart TB
+                        INPUT["User Input - Thalamus"]
+                        SAFETY["Safety Check - Amygdala<br />Imperatives I1-I7"]
+                        subgraph EXEC["Executive Processing - PFC"]
+                        LLM["LLM<br />Parse intent"]
+                        end
+                        subgraph PLAN["Task Planning - dlPFC"]
+                        COMPLEX{"Complex?"}
+                        SSO_SURVEY["Survey skills"]
+                        SSO_GATE["Gate attention"]
+                        SSO_DEPS["Analyze deps"]
+                        SSO_VERIFY["Verify plan"]
+                        SIMPLE["Direct execute"]
+                        end
+                        subgraph MONITOR["Conflict Monitor - ACC"]
+                        PIVOT{"Domain<br />pivot?"}
+                        SLOTS["Rotate P5-P7"]
+                        end
+                        subgraph EXECUTE["Execution - Premotor"]
+                        ROUTE["Route to skills"]
+                        INHIBIT["Check inhibitions"]
+                        OUTPUT["Generate Response"]
+                        end
+                        subgraph MEMORY["Memory Systems"]
+                        PROC["Procedural<br />Basal Ganglia"]
+                        EPIS["Episodic<br />Hippocampus"]
+                        DECL["Declarative<br />Neocortex"]
+                        GLOB["Global<br />Distributed"]
+                        end
+                        INPUT --> SAFETY
+                        SAFETY -->|"safe"| LLM
+                        SAFETY -.->|"threat - HALT"| OUTPUT
+                        LLM --> COMPLEX
+                        COMPLEX -->|"3+ ops"| SSO_SURVEY
+                        SSO_SURVEY --> SSO_GATE
+                        SSO_GATE --> SSO_DEPS
+                        SSO_DEPS --> SSO_VERIFY
+                        SSO_VERIFY --> ROUTE
+                        COMPLEX -->|"1 op"| SIMPLE
+                        SIMPLE --> ROUTE
+                        LLM --> PIVOT
+                        PIVOT -->|"yes"| SLOTS
+                        SLOTS --> SSO_SURVEY
+                        PIVOT -->|"no"| ROUTE
+                        ROUTE --> INHIBIT
+                        INHIBIT --> OUTPUT
+                        ROUTE -.->|"reads"| PROC
+                        ROUTE -.->|"reads"| DECL
+                        SSO_SURVEY -.->|"scans"| DECL
+                        OUTPUT -.->|"writes"| EPIS
+                        EPIS -.->|"promotes"| GLOB
+                        style EXEC fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style PLAN fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style MONITOR fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style EXECUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style MEMORY fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style LLM fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style COMPLEX fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_SURVEY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_GATE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_DEPS fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SSO_VERIFY fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style SIMPLE fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style PIVOT fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style SLOTS fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style ROUTE fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style INHIBIT fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style OUTPUT fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PROC fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style EPIS fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style DECL fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
+                    </div>
                 </div>
                 <div class="diagram-caption">
                     The amygdala safety check can short-circuit the entire pipeline, halting output immediately when
@@ -1605,57 +1607,57 @@ style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
                     <span class="side-tag human">BIOLOGICAL</span>
                 </div>
                 <div class="comparison-diagram">
-<div class="mermaid">
-flowchart TB
-IN["Sensory Stimulus<br/>Visual, Auditory, Tactile"]
-TH["Thalamus<br/>Sensory relay station"]
-AM["Amygdala<br/>Threat assessment"]
-subgraph CORTEX["Cortical Processing"]
-PFC2["Prefrontal Cortex<br/>Evaluate + decide"]
-DL2["dlPFC<br/>Plan + working memory"]
-ACC2["ACC<br/>Conflict monitor"]
-end
-subgraph MOTOR["Motor Output"]
-PM2["Premotor Cortex<br/>Movement plan"]
-VL2["vlPFC<br/>Response inhibition"]
-MOT["Motor Cortex<br/>Execute action"]
-end
-subgraph MEM2["Memory Systems"]
-BG2["Basal Ganglia<br/>Habits + routines"]
-HIP2["Hippocampus<br/>Encode memory"]
-end
-RESP["Behavioral<br/>Response"]
-IN --> TH
-TH --> AM
-TH --> PFC2
-AM -.->|"low road - fast"| RESP
-AM -.->|"modulates"| PFC2
-PFC2 --> DL2
-PFC2 --> ACC2
-ACC2 -->|"conflict"| DL2
-DL2 --> PM2
-PM2 --> VL2
-VL2 --> MOT
-MOT --> RESP
-PFC2 -.->|"routine?"| BG2
-BG2 -.->|"bypass"| MOT
-MOT -.->|"encodes"| HIP2
-style CORTEX fill:#d4edda,stroke:#3fb950,color:#1f2328
-style MOTOR fill:#e8f5e9,stroke:#3fb950,color:#1f2328
-style MEM2 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-style IN fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
-style TH fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-style AM fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
-style PFC2 fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
-style DL2 fill:#d4edda,stroke:#3fb950,color:#1f2328
-style ACC2 fill:#d4edda,stroke:#3fb950,color:#1f2328
-style PM2 fill:#e8f5e9,stroke:#3fb950,color:#1f2328
-style VL2 fill:#fdd,stroke:#ff6b6b,color:#1f2328
-style MOT fill:#e8f5e9,stroke:#3fb950,color:#1f2328
-style BG2 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style HIP2 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
-style RESP fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
-</div>
+                    <div class="mermaid">
+                        flowchart TB
+                        IN["Sensory Stimulus<br />Visual, Auditory, Tactile"]
+                        TH["Thalamus<br />Sensory relay station"]
+                        AM["Amygdala<br />Threat assessment"]
+                        subgraph CORTEX["Cortical Processing"]
+                        PFC2["Prefrontal Cortex<br />Evaluate + decide"]
+                        DL2["dlPFC<br />Plan + working memory"]
+                        ACC2["ACC<br />Conflict monitor"]
+                        end
+                        subgraph MOTOR["Motor Output"]
+                        PM2["Premotor Cortex<br />Movement plan"]
+                        VL2["vlPFC<br />Response inhibition"]
+                        MOT["Motor Cortex<br />Execute action"]
+                        end
+                        subgraph MEM2["Memory Systems"]
+                        BG2["Basal Ganglia<br />Habits + routines"]
+                        HIP2["Hippocampus<br />Encode memory"]
+                        end
+                        RESP["Behavioral<br />Response"]
+                        IN --> TH
+                        TH --> AM
+                        TH --> PFC2
+                        AM -.->|"low road - fast"| RESP
+                        AM -.->|"modulates"| PFC2
+                        PFC2 --> DL2
+                        PFC2 --> ACC2
+                        ACC2 -->|"conflict"| DL2
+                        DL2 --> PM2
+                        PM2 --> VL2
+                        VL2 --> MOT
+                        MOT --> RESP
+                        PFC2 -.->|"routine?"| BG2
+                        BG2 -.->|"bypass"| MOT
+                        MOT -.->|"encodes"| HIP2
+                        style CORTEX fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style MOTOR fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style MEM2 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style IN fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                        style TH fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style AM fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style PFC2 fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                        style DL2 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style ACC2 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PM2 fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style VL2 fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style MOT fill:#e8f5e9,stroke:#3fb950,color:#1f2328
+                        style BG2 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style HIP2 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style RESP fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
+                    </div>
                 </div>
                 <div class="comparison-side-footer">
                     Biological signal processing: sensory input relayed through thalamus, with amygdala "low road"
@@ -1674,57 +1676,57 @@ style RESP fill:#d4edda,stroke:#3fb950,color:#1f2328,stroke-width:2px
                     <span class="side-tag alex">COMPUTATIONAL</span>
                 </div>
                 <div class="comparison-diagram">
-<div class="mermaid">
-flowchart TB
-IN3["User Input<br/>Chat, Commands, Files"]
-TH3["VS Code Interface<br/>Input relay - thalamus"]
-AM3["Safety Imperatives I1-I7<br/>Kill switch - amygdala"]
-subgraph EXEC3["Executive Processing"]
-LLM3["LLM Claude-GPT<br/>Parse intent - PFC"]
-SSO3["SSO Protocol<br/>Plan + gate - dlPFC"]
-PIV3["Pivot Detection<br/>Conflict monitor - ACC"]
-end
-subgraph ROUTE3["Execution Layer"]
-SK3["Skill Activation<br/>Route skills - premotor"]
-INH3["Inhibitory Synapses<br/>Suppress - vlPFC"]
-GEN3["Generate Response<br/>Output - motor cortex"]
-end
-subgraph MEM3["Memory Systems"]
-PROC3["Procedural .instructions.md<br/>Basal ganglia"]
-EPIS3["Episodic .prompt.md<br/>Hippocampus"]
-end
-OUT3["User Gets<br/>Response"]
-IN3 --> TH3
-TH3 --> AM3
-TH3 --> LLM3
-AM3 -.->|"threat - HALT"| OUT3
-AM3 -.->|"modulates"| LLM3
-LLM3 --> SSO3
-LLM3 --> PIV3
-PIV3 -->|"re-plan"| SSO3
-SSO3 --> SK3
-SK3 --> INH3
-INH3 --> GEN3
-GEN3 --> OUT3
-LLM3 -.->|"auto-loaded"| PROC3
-PROC3 -.->|"bypass"| GEN3
-GEN3 -.->|"records"| EPIS3
-style EXEC3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
-style ROUTE3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
-style MEM3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-style IN3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
-style TH3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
-style AM3 fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
-style LLM3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
-style SSO3 fill:#ffecd2,stroke:#f0883e,color:#1f2328
-style PIV3 fill:#fce4ec,stroke:#f85149,color:#1f2328
-style SK3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
-style INH3 fill:#fdd,stroke:#ff6b6b,color:#1f2328
-style GEN3 fill:#d4edda,stroke:#3fb950,color:#1f2328
-style PROC3 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
-style EPIS3 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
-style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
-</div>
+                    <div class="mermaid">
+                        flowchart TB
+                        IN3["User Input<br />Chat, Commands, Files"]
+                        TH3["VS Code Interface<br />Input relay - thalamus"]
+                        AM3["Safety Imperatives I1-I7<br />Kill switch - amygdala"]
+                        subgraph EXEC3["Executive Processing"]
+                        LLM3["LLM Claude-GPT<br />Parse intent - PFC"]
+                        SSO3["SSO Protocol<br />Plan + gate - dlPFC"]
+                        PIV3["Pivot Detection<br />Conflict monitor - ACC"]
+                        end
+                        subgraph ROUTE3["Execution Layer"]
+                        SK3["Skill Activation<br />Route skills - premotor"]
+                        INH3["Inhibitory Synapses<br />Suppress - vlPFC"]
+                        GEN3["Generate Response<br />Output - motor cortex"]
+                        end
+                        subgraph MEM3["Memory Systems"]
+                        PROC3["Procedural .instructions.md<br />Basal ganglia"]
+                        EPIS3["Episodic .prompt.md<br />Hippocampus"]
+                        end
+                        OUT3["User Gets<br />Response"]
+                        IN3 --> TH3
+                        TH3 --> AM3
+                        TH3 --> LLM3
+                        AM3 -.->|"threat - HALT"| OUT3
+                        AM3 -.->|"modulates"| LLM3
+                        LLM3 --> SSO3
+                        LLM3 --> PIV3
+                        PIV3 -->|"re-plan"| SSO3
+                        SSO3 --> SK3
+                        SK3 --> INH3
+                        INH3 --> GEN3
+                        GEN3 --> OUT3
+                        LLM3 -.->|"auto-loaded"| PROC3
+                        PROC3 -.->|"bypass"| GEN3
+                        GEN3 -.->|"records"| EPIS3
+                        style EXEC3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328
+                        style ROUTE3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style MEM3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style IN3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style TH3 fill:#f5f5f5,stroke:#6c757d,color:#1f2328
+                        style AM3 fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+                        style LLM3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                        style SSO3 fill:#ffecd2,stroke:#f0883e,color:#1f2328
+                        style PIV3 fill:#fce4ec,stroke:#f85149,color:#1f2328
+                        style SK3 fill:#f3e5f5,stroke:#f778ba,color:#1f2328
+                        style INH3 fill:#fdd,stroke:#ff6b6b,color:#1f2328
+                        style GEN3 fill:#d4edda,stroke:#3fb950,color:#1f2328
+                        style PROC3 fill:#f5f5f5,stroke:#e3b341,color:#1f2328
+                        style EPIS3 fill:#e0f2f1,stroke:#79c0ff,color:#1f2328
+                        style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
+                    </div>
                 </div>
                 <div class="comparison-side-footer">
                     Computational signal processing: user input relayed through VS Code, with safety imperative
@@ -2070,11 +2072,39 @@ style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
             }
         });
 
+        // Mermaid preprocessing — strips formatter-induced leading whitespace
+        // and normalizes <br> tags so diagrams render correctly regardless of
+        // how the HTML formatter indents the content.
+        const renderedTabs = new Set();
+
+        function preprocessMermaid(el) {
+            const lines = el.innerHTML.split('\n');
+            const nonEmpty = lines.filter(l => l.trim().length > 0);
+            if (nonEmpty.length === 0) return;
+            const minIndent = nonEmpty.reduce((min, l) => {
+                return Math.min(min, l.match(/^(\s*)/)[1].length);
+            }, Infinity);
+            el.innerHTML = lines
+                .map(l => l.length >= minIndent ? l.slice(minIndent) : l)
+                .join('\n')
+                .replace(/<br\s*\/?>/gi, '<br/>');
+        }
+
+        function renderMermaidInTab(tabId) {
+            if (renderedTabs.has(tabId)) return;
+            const tab = document.getElementById('tab-' + tabId);
+            if (!tab) return;
+            const elements = tab.querySelectorAll('.mermaid');
+            if (elements.length === 0) return;
+            elements.forEach(preprocessMermaid);
+            mermaid.run({ querySelector: '#tab-' + tabId + ' .mermaid' });
+            renderedTabs.add(tabId);
+        }
+
         // Tab switching
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            // Find the clicked button by matching tabId in onclick
             document.querySelectorAll('.tab-btn').forEach(b => {
                 if (b.getAttribute('onclick').includes(tabId)) {
                     b.classList.add('active');
@@ -2083,11 +2113,9 @@ style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
             const targetTab = document.getElementById('tab-' + tabId);
             if (targetTab) {
                 targetTab.classList.add('active');
-                // Re-render mermaid if switching to a tab with diagrams
+                // Lazy-render mermaid diagrams only when tab becomes visible
                 if (tabId === 'diagrams' || tabId === 'comparison') {
-                    setTimeout(() => {
-                        mermaid.run({ querySelector: '#tab-' + tabId + ' .mermaid' });
-                    }, 50);
+                    setTimeout(() => renderMermaidInTab(tabId), 100);
                 }
             }
         }
@@ -2095,7 +2123,7 @@ style OUT3 fill:#dbe9f6,stroke:#58a6ff,color:#1f2328,stroke-width:2px
     <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({
-            startOnLoad: true,
+            startOnLoad: false,
             theme: 'base',
             themeVariables: {
                 primaryColor: '#f6f8fa',
