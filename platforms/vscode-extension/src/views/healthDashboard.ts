@@ -10,7 +10,7 @@ import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
 import { getGoalsSummary } from '../commands/goals';
 import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
-import { escapeHtml } from '../shared/sanitize';
+import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
 
 /**
@@ -204,11 +204,14 @@ async function getWebviewContent(
     
     const hasIssues = !isHealthy || health.brokenSynapses > 0;
     
+    const nonce = getNonce();
+    
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
     <title>Alex Health Dashboard</title>
     <style>
         :root {
@@ -800,7 +803,7 @@ async function getWebviewContent(
         </div>
     </div>
     
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         
         function cmd(command, args) {
@@ -944,10 +947,12 @@ function formatTime(seconds: number): string {
  * Get error content
  */
 function getErrorContent(err: unknown): string {
+    const nonce = getNonce();
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
     <title>Error</title>
     <style>
         body {
@@ -977,9 +982,12 @@ function getErrorContent(err: unknown): string {
 <body>
     <h2>⚠️ Failed to load dashboard</h2>
     <p class="error">${err}</p>
-    <button onclick="vscode.postMessage({command: 'refresh'})">Retry</button>
-    <script>
+    <button id="retryBtn">Retry</button>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
+        document.getElementById('retryBtn').addEventListener('click', () => {
+            vscode.postMessage({command: 'refresh'});
+        });
     </script>
 </body>
 </html>`;

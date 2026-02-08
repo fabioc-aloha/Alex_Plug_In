@@ -544,6 +544,7 @@ function showReportInPanel(report: SelfActualizationReport): void {
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
     <style>
         body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); }
         h1 { color: var(--vscode-textLink-foreground); }

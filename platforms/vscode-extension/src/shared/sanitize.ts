@@ -6,6 +6,18 @@
  * @module shared/sanitize
  */
 
+import * as crypto from 'crypto';
+
+/**
+ * Generate a cryptographically secure nonce for Content Security Policy
+ * Use this for script-src directives in webviews to allow inline scripts
+ * 
+ * @returns A random 32-character hex string
+ */
+export function getNonce(): string {
+    return crypto.randomBytes(16).toString('hex');
+}
+
 /**
  * Escape HTML special characters to prevent XSS attacks
  * Use this for any user-controlled content rendered in webviews

@@ -17,6 +17,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
 import { exec } from 'child_process';
+import { getNonce } from '../shared/sanitize';
 
 // Singleton webview panel for audio playback
 let audioPanel: vscode.WebviewPanel | undefined;
@@ -78,11 +79,13 @@ async function cleanupTempFiles(): Promise<void> {
  * Get HTML content for the audio player webview
  */
 function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
+    const nonce = getNonce();
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}'; media-src data:;">
     <title>Alex TTS Player</title>
     <style>
         body {
@@ -211,7 +214,7 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         <source src="data:audio/mp3;base64,${audioBase64}" type="audio/mp3">
     </audio>
 
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         const audio = document.getElementById('audio');
         const progress = document.getElementById('progress');

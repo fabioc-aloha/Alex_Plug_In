@@ -53,6 +53,7 @@ import { registerMemoryDashboard } from "./views/memoryDashboard";
 import { registerMemoryTreeView } from "./views/memoryTreeProvider";
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
 import * as telemetry from "./shared/telemetry";
+import { getNonce } from "./shared/sanitize";
 
 // Operation lock to prevent concurrent modifications
 let operationInProgress = false;
@@ -1726,9 +1727,11 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         { enableScripts: true },
       );
 
+      const nonce = getNonce();
       panel.webview.html = `<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
     <style>
         body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); max-width: 900px; margin: 0 auto; }
         h1 { color: var(--vscode-textLink-foreground); }
@@ -1864,7 +1867,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     <p style="color: var(--vscode-descriptionForeground); font-size: 12px;">This is the complete diagnostic data that would be included in a bug report:</p>
     <pre id="sessionData">${JSON.stringify(sessions, null, 2)}</pre>
     
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         function showLog() { vscode.postMessage({ command: 'showLog' }); }
         function exportData() { vscode.postMessage({ command: 'export' }); }

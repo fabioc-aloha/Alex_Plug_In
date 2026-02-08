@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import { checkHealth, HealthCheckResult, HealthStatus } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary, detectGlobalKnowledgeRepo } from '../chat/globalKnowledge';
-import { escapeHtml } from '../shared/sanitize';
+import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
 
 /**
@@ -309,11 +309,14 @@ async function getWebviewContent(
     const totalGK = stats.globalPatterns + stats.globalInsights;
     const hasIssues = !isHealthy || health.brokenSynapses > 0;
     
+    const nonce = getNonce();
+    
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; img-src ${webview.cspSource} https: data:; font-src ${webview.cspSource};">
     <title>Alex Memory Architecture</title>
     <style>
         :root {
@@ -748,7 +751,7 @@ async function getWebviewContent(
         </div>
     </div>
     
-    <script>
+    <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
         
         function cmd(command, data) {
@@ -764,11 +767,19 @@ async function getWebviewContent(
  */
 function getErrorContent(err: unknown): string {
     const message = err instanceof Error ? err.message : String(err);
+    const nonce = getNonce();
     return `<!DOCTYPE html>
-<html><body style="padding: 20px; font-family: var(--vscode-font-family);">
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
+</head>
+<body style="padding: 20px; font-family: var(--vscode-font-family);">
     <h2>⚠️ Error Loading Dashboard</h2>
     <p>${escapeHtml(message)}</p>
-    <button onclick="location.reload()">Retry</button>
+    <button id="retryBtn">Retry</button>
+    <script nonce="${nonce}">
+        document.getElementById('retryBtn').addEventListener('click', () => location.reload());
+    </script>
 </body></html>`;
 }
 

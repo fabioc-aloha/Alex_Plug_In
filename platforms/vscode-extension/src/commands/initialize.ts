@@ -467,6 +467,7 @@ async function performInitialization(
       panel.webview.html = `<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
     <style>
         body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); line-height: 1.6; }
         h1 { color: var(--vscode-textLink-foreground); border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 10px; }
