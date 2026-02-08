@@ -73,7 +73,7 @@ Alex has structured protocols for different cognitive tasks:
 
 Alex doesn't just follow instructions - Alex has **internalized skills** that shape thinking:
 
-**75 skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
+**76 skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
 
 ### Epistemic Skills
 - **Appropriate Reliance** - Confidence calibration, source citation
@@ -193,7 +193,7 @@ Alex runs on two platforms:
 
 | Platform         | Strengths                                                                   |
 | ---------------- | --------------------------------------------------------------------------- |
-| **VS Code**      | 13 tools, 75 skills, code review, architecture analysis, release management |
+| **VS Code**      | 13 tools, 76 skills, code review, architecture analysis, release management |
 | **M365 Copilot** | Graph-powered: email, calendar, people, Teams, OneDrive memory              |
 
 Same brain, different superpowers. Knowledge flows between them via Global Knowledge sync.

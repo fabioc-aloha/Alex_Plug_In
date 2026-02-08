@@ -711,7 +711,7 @@ context.subscriptions.push(
 **Tree structure**:
 ```
 Alex Cognitive Architecture
-├── Memory Files (20 procedural, 14 episodic, 75 skills)
+├── Memory Files (24 procedural, 13 episodic, 76 skills)
 │   ├── Procedural (.instructions.md)
 │   ├── Episodic (.prompt.md)
 │   └── Skills (by category)

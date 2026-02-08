@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/fabioc-aloha/Alex_Plug_In.git"
   },
-  "homepage": "https://github.com/fabioc-aloha/Alex_Plug_In#readme",
+  "homepage": "https://alex.correax.com",
   "bugs": {
     "url": "https://github.com/fabioc-aloha/Alex_Plug_In/issues"
   },
@@ -1377,7 +1377,7 @@
           {
             "id": "alex.welcome",
             "title": "Meet Alex",
-            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **75 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
+            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **76 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
             "media": {
               "markdown": "alex_docs/README.md"
             }

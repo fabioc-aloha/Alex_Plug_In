@@ -20,6 +20,19 @@
 | **Primary Icon** | `$(rocket)` codicon | ✅ LOCKED |
 | **Colors** | Azure blue (#0078d4) + thrust orange (#ff6b35) | ✅ LOCKED |
 
+### Website Palette (alex.correax.com)
+
+The landing page (`docs/index.html`) uses a distinct dark-themed palette optimized for web:
+
+| Element | Hex | Usage |
+|---------|-----|-------|
+| Primary gradient | `#667eea` → `#764ba2` | CTA buttons, accents |
+| Background | `#1a1a2e` → `#0f3460` | Page gradient |
+| Text | `#e8e8e8` / `#a8b2d1` | Primary / secondary |
+| Muted | `#8892b0` / `#5a6a8a` | Feature text / footer |
+
+The brain anatomy page (`docs/alex-brain-anatomy.html`) uses GitHub's dark palette for Mermaid diagram consistency.
+
 ## Persona Priority (by audience size)
 
 1. CODE → 2. LEARNING → 3. CAREER → 4. CONTENT → 5. THESIS

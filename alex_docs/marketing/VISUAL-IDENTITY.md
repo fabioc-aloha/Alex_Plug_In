@@ -24,13 +24,15 @@
 
 ## Color Palette
 
-| Color         | Hex       | Usage                      |
-| ------------- | --------- | -------------------------- |
-| **Deep Teal** | `#0D7377` | Primary — trust, cognitive |
-| **Warm Gold** | `#D4A574` | Secondary — wisdom, warmth |
-| **Amber**     | `#F6AD55` | Accent — energy, insight   |
-| **Navy**      | `#1A365D` | Dark backgrounds           |
-| **Off-white** | `#F7F7F7` | Light backgrounds          |
+> ⚠️ **SUPERSEDED**: The palette below was an early exploration. The **canonical brand palette** is defined in `.github/instructions/brand-asset-management.instructions.md` and is **LOCKED**: Azure blue (`#0078d4`) + thrust orange (`#ff6b35`). The colors below are retained for historical reference only.
+
+| Color         | Hex       | Usage                      | Status |
+| ------------- | --------- | -------------------------- | ------ |
+| **Deep Teal** | `#0D7377` | Primary — trust, cognitive | ❌ Superseded |
+| **Warm Gold** | `#D4A574` | Secondary — wisdom, warmth | ❌ Superseded |
+| **Amber**     | `#F6AD55` | Accent — energy, insight   | ❌ Superseded |
+| **Navy**      | `#1A365D` | Dark backgrounds           | ❌ Superseded |
+| **Off-white** | `#F7F7F7` | Light backgrounds          | ❌ Superseded |
 
 **Why Teal + Gold**: Unique in the AI space. Competitors use green (ChatGPT), coral (Claude), purple (Copilot), rainbow (Gemini).
 
