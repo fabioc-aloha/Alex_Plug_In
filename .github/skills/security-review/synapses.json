@@ -48,6 +48,12 @@
       "type": "Documents",
       "strength": 0.8,
       "description": "CSP event delegation pattern for VS Code webviews"
+    },
+    {
+      "target": "platforms/vscode-extension/src/enterprise/secretsScanning.ts",
+      "type": "Implements",
+      "strength": 0.95,
+      "description": "Enterprise secrets scanning with 20+ detection patterns"
     }
   ],
   "activationTriggers": [
@@ -64,6 +70,12 @@
     "XSS",
     "CSRF",
     "CSP",
-    "Content-Security-Policy"
+    "Content-Security-Policy",
+    "secrets scanning",
+    "PII detection",
+    "audit logging",
+    "enterprise security",
+    "Entra ID",
+    "RBAC"
   ]
 }
