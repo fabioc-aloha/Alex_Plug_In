@@ -83,8 +83,17 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         case 'refresh':
           await this.refresh();
           break;
-        case 'openCommand':
-          await vscode.commands.executeCommand(message.commandId);
+        case 'dream':
+          await vscode.commands.executeCommand('alex.dream');
+          break;
+        case 'selfActualize':
+          await vscode.commands.executeCommand('alex.selfActualize');
+          break;
+        case 'syncKnowledge':
+          await vscode.commands.executeCommand('alex.syncKnowledge');
+          break;
+        case 'startSession':
+          await vscode.commands.executeCommand('alex.startSession');
           break;
       }
     });
@@ -442,7 +451,7 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
     <div class="dashboard-title">
       🧠 Cognitive Dashboard
     </div>
-    <button class="refresh-btn" onclick="refresh()">↻ Refresh</button>
+    <button class="refresh-btn" data-cmd="refresh">↻ Refresh</button>
   </div>
 
   <div class="card" id="health-card">
@@ -504,10 +513,10 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   <div class="card">
     <div class="card-title">⚡ Quick Actions</div>
     <div class="quick-actions">
-      <button class="quick-action" onclick="runCommand('alex.dream')">🌙 Dream</button>
-      <button class="quick-action" onclick="runCommand('alex.selfActualize')">✨ Self-Actualize</button>
-      <button class="quick-action" onclick="runCommand('alex.syncKnowledge')">🔄 Sync</button>
-      <button class="quick-action" onclick="runCommand('alex.startSession')">▶️ Session</button>
+      <button class="quick-action" data-cmd="dream">🌙 Dream</button>
+      <button class="quick-action" data-cmd="selfActualize">✨ Self-Actualize</button>
+      <button class="quick-action" data-cmd="syncKnowledge">🔄 Sync</button>
+      <button class="quick-action" data-cmd="startSession">▶️ Session</button>
     </div>
   </div>
 
@@ -527,13 +536,15 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   <script nonce="${nonce}">
     const vscode = acquireVsCodeApi();
 
-    function refresh() {
-      vscode.postMessage({ command: 'refresh' });
-    }
-
-    function runCommand(commandId) {
-      vscode.postMessage({ command: 'openCommand', commandId });
-    }
+    // Event delegation for all data-cmd clicks (CSP-compliant)
+    document.addEventListener('click', function(e) {
+      const el = e.target.closest('[data-cmd]');
+      if (el) {
+        e.preventDefault();
+        const command = el.getAttribute('data-cmd');
+        vscode.postMessage({ command });
+      }
+    });
 
     window.addEventListener('message', event => {
       const message = event.data;

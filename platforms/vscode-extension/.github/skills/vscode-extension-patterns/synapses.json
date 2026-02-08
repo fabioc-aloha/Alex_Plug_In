@@ -13,6 +13,12 @@
       "type": "implements",
       "strength": 0.85,
       "context": "VS Code heir patterns"
+    },
+    {
+      "target": ".github/skills/security-review/SKILL.md",
+      "type": "implements",
+      "strength": 0.80,
+      "context": "CSP, SecretStorage, telemetry compliance"
     }
   ],
   "activationPatterns": [
@@ -20,7 +26,11 @@
     "webview implementation",
     "publishing extension",
     "settings configuration",
-    "auto-detection features"
+    "auto-detection features",
+    "SecretStorage token migration",
+    "CSP Content-Security-Policy",
+    "telemetry opt-out compliance",
+    "onDidChangeConfiguration listener"
   ],
   "triggers": [
     "extension",
@@ -29,7 +39,10 @@
     "webview",
     "tree view",
     "activation",
-    "contribution point"
+    "contribution point",
+    "SecretStorage",
+    "CSP",
+    "telemetry"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

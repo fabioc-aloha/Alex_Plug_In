@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.3.1] - 2026-02-08
+
+### Fixed
+
+- **Cognitive Dashboard**: CSP-compliant event handling (data-cmd pattern replaces inline onclick)
+- **Memory Dashboard**: Fixed retry button to use proper webview messaging
+
+---
+
 ## [5.3.0] - 2026-02-08
 
 > **Enterprise Readiness** — Security, compliance, governance foundations

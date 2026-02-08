@@ -890,7 +890,10 @@ function getErrorContent(err: unknown): string {
     <p>${escapeHtml(message)}</p>
     <button id="retryBtn">Retry</button>
     <script nonce="${nonce}">
-        document.getElementById('retryBtn').addEventListener('click', () => location.reload());
+        const vscode = acquireVsCodeApi();
+        document.getElementById('retryBtn').addEventListener('click', () => {
+            vscode.postMessage({ command: 'refresh' });
+        });
     </script>
 </body></html>`;
 }

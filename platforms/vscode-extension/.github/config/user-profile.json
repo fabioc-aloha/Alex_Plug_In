@@ -1,21 +1,21 @@
 {
-  "learningGoals": [],
-  "proactiveSuggestions": true,
-  "humor": true,
-  "explanationStyle": "mixed",
-  "currentProjects": [],
-  "encouragement": true,
-  "name": "",
-  "expertiseAreas": [],
-  "primaryTechnologies": [],
   "nickname": "",
-  "projectPersona": {
-    "confidence": 0,
-    "reasons": [],
-    "id": ""
-  },
+  "proactiveSuggestions": true,
   "formality": "balanced",
-  "detailLevel": "balanced",
+  "primaryTechnologies": [],
+  "expertiseAreas": [],
+  "encouragement": true,
   "pronouns": "",
-  "questionFrequency": "moderate"
+  "explanationStyle": "mixed",
+  "detailLevel": "balanced",
+  "name": "",
+  "learningGoals": [],
+  "humor": true,
+  "currentProjects": [],
+  "questionFrequency": "moderate",
+  "projectPersona": {
+    "reasons": [],
+    "id": "",
+    "confidence": 0
+  }
 }
