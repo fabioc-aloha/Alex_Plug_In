@@ -568,6 +568,10 @@ export function activate(context: vscode.ExtensionContext) {
           description: "Visual architecture health overview",
         },
         {
+          label: "$(server) Memory Dashboard",
+          description: "Memory architecture visualization",
+        },
+        {
           label: "$(checklist) Run Project Audit",
           description: "22-point audit: security, dependencies, UI, tests",
           detail: "🔍 Comprehensive project health check",
@@ -598,6 +602,11 @@ export function activate(context: vscode.ExtensionContext) {
           label: "$(beaker) Generate Tests",
           description: "Generate tests for selected code",
           detail: "🧪 Jest, Mocha, pytest, etc.",
+        },
+        {
+          label: "$(verified) Validate Heir",
+          description: "Check heir sync with Master Alex",
+          detail: "🧬 Extension development",
         },
         // --- Multimodal ---
         { label: "", kind: vscode.QuickPickItemKind.Separator },
@@ -662,6 +671,8 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.knowledgeQuickPick");
         } else if (selected.label.includes("Focus Session")) {
           vscode.commands.executeCommand("alex.startSession");
+        } else if (selected.label.includes("Memory Dashboard")) {
+          vscode.commands.executeCommand("alex.openMemoryDashboard");
         } else if (selected.label.includes("Health Dashboard")) {
           vscode.commands.executeCommand("alex.openHealthDashboard");
         } else if (selected.label.includes("Project Audit")) {
@@ -686,6 +697,8 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.reviewPR");
         } else if (selected.label.includes("Import GitHub Issues")) {
           vscode.commands.executeCommand("alex.importGitHubIssues");
+        } else if (selected.label.includes("Validate Heir")) {
+          vscode.commands.executeCommand("alex.validateHeir");
         }
       }
     },
@@ -719,6 +732,10 @@ export function activate(context: vscode.ExtensionContext) {
           { label: "$(package) Dependencies", description: "Outdated packages, vulnerabilities, unused", detail: "High priority" },
           { label: "$(cloud) Infrastructure as Code", description: "Terraform, Bicep, CloudFormation validation", detail: "High priority" },
           { label: "$(azure) Azure/Cloud Resources", description: "Resource configuration, best practices, costs", detail: "High priority" },
+          { label: "$(dashboard) Performance", description: "Bundle size, load times, memory, bottlenecks", detail: "Medium priority" },
+          { label: "$(eye) Accessibility", description: "WCAG compliance, a11y patterns, screen readers", detail: "Medium priority" },
+          { label: "$(plug) API Design", description: "REST/GraphQL conventions, contracts, versioning", detail: "Medium priority" },
+          { label: "$(law) License Compliance", description: "OSS license conflicts, attribution requirements", detail: "Medium priority" },
           { label: "$(book) Documentation", description: "README, comments, API docs completeness", detail: "Medium priority" },
           { label: "$(git-branch) Git Health", description: "Uncommitted changes, branch hygiene", detail: "Medium priority" },
           { label: "$(beaker) Test Coverage", description: "Test files, coverage gaps, test quality", detail: "Medium priority" },
@@ -768,6 +785,10 @@ export function activate(context: vscode.ExtensionContext) {
           { label: "$(checklist) Changelog Entry", description: "Verify changelog has entry for this version", detail: "Keep a Changelog format" },
           { label: "$(shield) Security Scan", description: "npm audit, secrets check", detail: "No vulnerabilities" },
           { label: "$(beaker) Test Suite", description: "Run tests, check coverage", detail: "All tests passing" },
+          { label: "$(law) License Audit", description: "Check dependency licenses for conflicts", detail: "OSS compliance" },
+          { label: "$(warning) Breaking Changes", description: "Detect API/schema breaking changes", detail: "Semantic versioning" },
+          { label: "$(book) Documentation Coverage", description: "All exports documented, examples current", detail: "API docs complete" },
+          { label: "$(globe) Localization", description: "i18n strings complete, no hardcoded text", detail: "For international releases" },
         ];
 
         const selected = await vscode.window.showQuickPick(preflightChecks, {
