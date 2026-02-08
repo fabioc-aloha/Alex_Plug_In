@@ -14,12 +14,17 @@ applyTo: "**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/
 
 ## Version Locations (Must Stay Synchronized)
 
-| Location | Field | Example |
-| -------- | ----- | ------- |
-| `package.json` | `version` | `"3.7.0"` |
-| `CHANGELOG.md` | Latest heading | `## [3.7.0] - 2026-01-30` |
-| README badge (if any) | Version badge | `v3.7.0` |
-| Git tag | Tag name | `v3.7.0` |
+| # | Location | Field | Example |
+| - | -------- | ----- | ------- |
+| 1 | `platforms/vscode-extension/package.json` | `version` | `"5.1.0"` |
+| 2 | `CHANGELOG.md` | Latest heading | `## [5.1.0] - 2026-02-07` |
+| 3 | `.github/copilot-instructions.md` | `**Version**:` line | `**Version**: 5.1.0` |
+| 4 | `platforms/vscode-extension/.github/copilot-instructions.md` | `**Version**:` line | Same as #3 |
+| 5 | `docs/index.html` | Footer version | `v5.1.0` |
+| 6 | `ROADMAP-UNIFIED.md` | Quick Status table | Master 5.1.0, Heirs row |
+| 7 | Git tag | Tag name | `v5.1.0` |
+
+> **Lesson (v5.1.0)**: Locations #3-#6 were missed in earlier releases. Always grep for the old version string across the entire repo before publishing.
 
 ## Preflight Checklist
 
@@ -109,7 +114,10 @@ vsce publish
 | CHANGELOG not updated | Include in version bump workflow |
 | Forgot to push tags | `git push --tags` in workflow |
 | Published broken build | `npm run compile` in preflight |
-| Version mismatch between files | Single source of truth (package.json), derive others |
+| Version mismatch between files | Grep entire repo for old version string |
+| PAT 401 error | Create fresh PAT before each release (see release-process skill) |
+| Patch bump for meaningful changes | Branding + audit + architecture fixes = **minor** bump, not patch |
+| Missing version locations | Use the 7-location table above — don't rely on memory |
 
 ## Platform-Specific Versioning
 

@@ -73,7 +73,9 @@ foreach ($source in $versionFiles.GetEnumerator()) {
 }
 ```
 
-**Expected State:** All show same version (currently v3.7.3)
+**Expected State:** All show same version (currently v5.1.0)
+
+> **Note**: Master and VS Code heir share a version. M365 heir may lag (e.g., M365 5.0.2 while Master 5.1.0). Check `ROADMAP-UNIFIED.md` Quick Status table for authoritative version state.
 
 ### 2. Heir Folder Sync Status
 
