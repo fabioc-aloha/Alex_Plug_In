@@ -26,8 +26,8 @@
 
 > ⚠️ **SUPERSEDED**: The palette below was an early exploration. The **canonical brand palette** is defined in `.github/instructions/brand-asset-management.instructions.md` and is **LOCKED**: Azure blue (`#0078d4`) + thrust orange (`#ff6b35`). The colors below are retained for historical reference only.
 
-| Color         | Hex       | Usage                      | Status |
-| ------------- | --------- | -------------------------- | ------ |
+| Color         | Hex       | Usage                      | Status       |
+| ------------- | --------- | -------------------------- | ------------ |
 | **Deep Teal** | `#0D7377` | Primary — trust, cognitive | ❌ Superseded |
 | **Warm Gold** | `#D4A574` | Secondary — wisdom, warmth | ❌ Superseded |
 | **Amber**     | `#F6AD55` | Accent — energy, insight   | ❌ Superseded |

@@ -893,11 +893,13 @@ await chatConfig.update('agentSkillsLocations', ['.github/skills'], vscode.Confi
 | TTS v2 - Native TypeScript implementation    | v4.2.6+ | 2026-02-05 |
 | TTS v2.1 - Multi-language support (32 langs) | v4.2.9  | 2026-02-05 |
 
-### 🔄 In Progress
+### ✅ Completed
 
-**v5.0.0 Team Scaling (Global Knowledge)**: ✅ Complete — Core GK infrastructure shipped (Feb 2026)
+**v5.0.0 Team Scaling (Global Knowledge)**: Complete — Core GK infrastructure shipped (Feb 2026)
 
-**v4.3.0 Architecture Robustness**: ✅ Complete (all 8 tasks done)
+**v4.3.0 Architecture Robustness**: Complete (all 8 tasks done)
+
+**v5.0.2 M365 Schema Polish**: Complete — Capability coverage 47% → 71% (Feb 2026)
 
 ### 📋 Backlog (Not Yet Scheduled)
 
@@ -917,6 +919,10 @@ Items not yet assigned to a version milestone. Pull from here when capacity free
 | Progress Widget             |  Heir  |   2h   |  Medium  | Persistent status bar showing focus, streak, goal progress             |
 | Calendar-Aware Focus        |  Heir  |   3h   |  Medium  | Warn if starting 45min session but meeting in 30min                    |
 | Agent Orchestration         | Master |  1.5h  |  Medium  | Multi-agent workflows prototype                                        |
+| Audit 76 skills for Agent Skills compat |  Master |   4h   |  Medium  | Verify all 76 skills work correctly as VS Code Agent Skills            |
+| OneDrive Agent Export command |  Heir  |   4h   |  Medium  | Export cognitive architecture to OneDrive for M365 consumption         |
+| Community Agent pilot (Teams) |  M365  |   2h   |  Medium  | Pilot Alex as a Teams community agent                                  |
+| Chat Prompt Files API         |  Heir  |  TBD   |   Low    | Adopt when API graduates from proposed to stable                       |
 
 **Note**: High-priority items are scheduled in the Version Roadmap above.
 
@@ -1542,13 +1548,10 @@ VS Code January 2026 release introduces multi-agent development capabilities tha
 | v4.2.5  | Create dream CLI for terminal usage             |  Heir  |  30m  | ⚡ 10m  |   ✅    |
 | v4.2.5  | Document recommended settings                   | Master |  1h   | 🔄 15m  |   ✅    |
 | v4.2.9  | Implement `chatSkills` contribution (54 skills) |  Heir  |  4h   | 🔄 30m  |   ✅    |
-| v4.3.0  | Audit 74 skills for Agent Skills compatibility  | Master |  4h   | ⏱️ 45m  |   ⬜    |
-| v4.3.0  | **OneDrive Agent Export command**               |  Heir  |  4h   | 🔄 45m  |   ⬜    |
-| v4.3.0  | **Community Agent pilot (Teams)**               |  M365  |  2h   | 🔄 30m  |   ⬜    |
-| v4.3.0+ | Agent orchestration prototype                   | Master |  8h   | 📦 1.5h |   ⬜    |
-| Future  | Adopt Chat Prompt Files API                     |  Heir  |  TBD  |  TBD   |   ⬜    |
 
 **v4.2.5 Actual:** Human estimate 8.5h → Alex actual ~2h (4× acceleration)
+
+> **Note**: Tasks previously listed here under v4.3.0 (skill audit, OneDrive export, Community Agent, agent orchestration, Chat Prompt Files) were moved to the **Backlog** section — v4.3.0 scope was limited to Architecture Robustness (8 tasks, all complete).
 
 > **Full Implementation Plan:** [VSCODE-1.109-IMPLEMENTATION-PLAN.md](alex_docs/VSCODE-1.109-IMPLEMENTATION-PLAN.md)
 > Includes 8 detailed use cases: Alex Meditation Agent, Bootstrap Learning with Subagents, TDD Workflow, Code Review with Epistemic Humility, Background Dream Processing, and more.
