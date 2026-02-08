@@ -22,6 +22,33 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as os from 'os';
 
+// ============================================================================
+// CONFIDENCE THRESHOLDS & LIMITS
+// ============================================================================
+
+/** Confidence threshold for Focus session detection (P1) */
+const CONFIDENCE_FOCUS = 0.95;
+/** Confidence threshold for Focus session tech match */
+const CONFIDENCE_FOCUS_TECH = 0.9;
+/** Confidence threshold for Session goal detection (P2) */
+const CONFIDENCE_GOAL = 0.85;
+/** Confidence threshold for Project phase detection (P3) */
+const CONFIDENCE_PHASE = 0.75;
+/** Confidence threshold for Learning goals detection (P4) */
+const CONFIDENCE_LEARNING_GOALS = 0.7;
+/** Minimum threshold to use priority chain result */
+const THRESHOLD_PRIORITY_1 = 0.8;
+const THRESHOLD_PRIORITY_2 = 0.7;
+const THRESHOLD_PRIORITY_3 = 0.7;
+const THRESHOLD_PRIORITY_4 = 0.6;
+/** Default confidence for fallback detection */
+const CONFIDENCE_FALLBACK = 0.5;
+
+/** Max directory entries to scan */
+const MAX_DIR_ENTRIES = 50;
+/** Max subdirectory entries to scan */
+const MAX_SUBDIR_ENTRIES = 10;
+
 /**
  * Marketing persona definition
  */
@@ -58,7 +85,7 @@ export const PERSONAS: Persona[] = [
         name: 'Developer',
         bannerNoun: 'CODE',
         hook: 'Ship faster, debug less',
-        skill: 'code-quality',
+        skill: 'code-review',
         icon: '💻',
         accentColor: '#0078D4',  // Azure Blue
         keywords: ['developer', 'engineer', 'programmer', 'coder', 'software'],
@@ -264,7 +291,7 @@ async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 's
                 if (topic.includes(keyword)) {
                     return {
                         persona,
-                        confidence: 0.95,
+                        confidence: CONFIDENCE_FOCUS,
                         reasons: [`Active focus session: "${sessionState.topic}"`]
                     };
                 }
@@ -274,14 +301,14 @@ async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 's
                 if (topic.includes(tech)) {
                     return {
                         persona,
-                        confidence: 0.9,
+                        confidence: CONFIDENCE_FOCUS_TECH,
                         reasons: [`Focus session on ${tech}: "${sessionState.topic}"`]
                     };
                 }
             }
         }
-    } catch {
-        // Session state not available
+    } catch (err) {
+        console.debug('[Alex] Focus session state not available:', err);
     }
     return null;
 }
@@ -311,15 +338,15 @@ async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDe
                     if (goalText.includes(keyword)) {
                         return {
                             persona,
-                            confidence: 0.85,
+                            confidence: CONFIDENCE_GOAL,
                             reasons: [`Active goal: "${goal.title}"`]
                         };
                     }
                 }
             }
         }
-    } catch {
-        // Goals not available
+    } catch (err) {
+        console.debug('[Alex] Session goals not available:', err);
     }
     return null;
 }
@@ -360,7 +387,7 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
                         if (persona) {
                             return {
                                 persona,
-                                confidence: 0.75,
+                                confidence: CONFIDENCE_PHASE,
                                 reasons: [`Project phase from roadmap`]
                             };
                         }
@@ -368,8 +395,8 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
                 }
             }
         }
-    } catch {
-        // Roadmap not available
+    } catch (err) {
+        console.debug('[Alex] Roadmap not available:', err);
     }
     return null;
 }
@@ -398,15 +425,15 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
                     if (goalLower.includes(keyword)) {
                         return {
                             persona,
-                            confidence: 0.7,
+                            confidence: CONFIDENCE_LEARNING_GOALS,
                             reasons: [`Learning goal: "${goal}"`]
                         };
                     }
                 }
             }
         }
-    } catch {
-        // Profile not available
+    } catch (err) {
+        console.debug('[Alex] Project learning goals not available:', err);
     }
     return null;
 }
@@ -456,25 +483,25 @@ export async function detectPersona(
     
     // PRIORITY 1: Check active focus session (Pomodoro timer topic)
     const focusResult = await detectFromFocusSession();
-    if (focusResult && focusResult.confidence >= 0.8) {
+    if (focusResult && focusResult.confidence >= THRESHOLD_PRIORITY_1) {
         return { ...focusResult, source: 'detected' };
     }
     
     // PRIORITY 2: Check session goal from goals.json
     const goalResult = await detectFromSessionGoals(rootPath);
-    if (goalResult && goalResult.confidence >= 0.7) {
+    if (goalResult && goalResult.confidence >= THRESHOLD_PRIORITY_2) {
         return { ...goalResult, source: 'detected' };
     }
     
     // PRIORITY 3: Check project phase from config
     const phaseResult = await detectFromProjectPhase(rootPath);
-    if (phaseResult && phaseResult.confidence >= 0.7) {
+    if (phaseResult && phaseResult.confidence >= THRESHOLD_PRIORITY_3) {
         return { ...phaseResult, source: 'detected' };
     }
     
     // PRIORITY 4: Check project learning goals
     const projectGoalsResult = await detectFromProjectGoals(rootPath);
-    if (projectGoalsResult && projectGoalsResult.confidence >= 0.6) {
+    if (projectGoalsResult && projectGoalsResult.confidence >= THRESHOLD_PRIORITY_4) {
         return { ...projectGoalsResult, source: 'detected' };
     }
     
@@ -641,7 +668,7 @@ export async function detectPersona(
     const developerPersona = PERSONAS.find(p => p.id === 'developer')!;
     return {
         persona: developerPersona,
-        confidence: 0.5,
+        confidence: CONFIDENCE_FALLBACK,
         reasons: ['Default persona (no specific signals detected)'],
         source: 'detected'
     };
@@ -667,34 +694,6 @@ export async function loadUserProfile(workspaceRoot: string): Promise<UserProfil
     }
     
     return null;
-}
-
-/**
- * Get a personalized welcome message based on detected persona
- */
-export function getPersonalizedHook(persona: Persona): string {
-    return `${persona.icon} **${persona.hook}**\n\nAs a ${persona.name}, your Global Knowledge will help you:\n- Build reusable ${persona.bannerNoun.toLowerCase()} patterns\n- Remember solutions across projects\n- Share expertise with your team`;
-}
-
-/**
- * Get the premium features teaser based on persona
- */
-export function getPremiumTeaser(persona: Persona): string {
-    return `
-## ⭐ Premium Features Unlocked
-
-With Global Knowledge, you get access to:
-
-| Feature | Benefit for ${persona.name}s |
-|---------|------------------------------|
-| **🔍 Search Knowledge** | Find your ${persona.bannerNoun.toLowerCase()} patterns instantly |
-| **💡 Save Insights** | Capture debugging discoveries |
-| **📈 Promote Patterns** | Share solutions across projects |
-| **☁️ Cloud Sync** | Knowledge travels with you |
-| **👥 Team Sharing** | GitHub collaboration built-in |
-
-> *"${persona.hook}"*
-`;
 }
 
 /**
@@ -926,7 +925,7 @@ async function gatherProjectContext(workspaceRoot: string): Promise<string> {
         const entries = await fs.readdir(workspaceRoot);
         const tree: string[] = [];
         
-        for (const entry of entries.slice(0, 50)) { // Limit to 50 entries
+        for (const entry of entries.slice(0, MAX_DIR_ENTRIES)) {
             if (entry.startsWith('.') && entry !== '.github') {continue;}
             
             const entryPath = path.join(workspaceRoot, entry);
@@ -936,7 +935,7 @@ async function gatherProjectContext(workspaceRoot: string): Promise<string> {
                 tree.push(`${entry}/`);
                 try {
                     const subEntries = await fs.readdir(entryPath);
-                    for (const sub of subEntries.slice(0, 10)) { // Limit subdirs
+                    for (const sub of subEntries.slice(0, MAX_SUBDIR_ENTRIES)) {
                         if (!sub.startsWith('.')) {
                             tree.push(`  ${sub}`);
                         }
@@ -978,18 +977,33 @@ async function detectPersonaWithLLM(
     workspaceRoot: string,
     detectedTech: string[]
 ): Promise<PersonaDetectionResult | null> {
-    // Get available models
-    const models = await vscode.lm.selectChatModels({ family: 'gpt-4o' });
-    if (!models || models.length === 0) {
-        // Try any available model
-        const allModels = await vscode.lm.selectChatModels();
-        if (!allModels || allModels.length === 0) {
-            return null;
-        }
-        models.push(allModels[0]);
+    // Get available models - prefer GPT-4o, fall back to Claude Sonnet, then any model
+    let model: vscode.LanguageModelChat | null = null;
+    
+    // Try GPT-4o family first (best for persona analysis)
+    let models = await vscode.lm.selectChatModels({ family: 'gpt-4o' });
+    if (models && models.length > 0) {
+        model = models[0];
     }
     
-    const model = models[0];
+    // Fall back to Claude Sonnet family
+    if (!model) {
+        models = await vscode.lm.selectChatModels({ family: 'claude-sonnet' });
+        if (models && models.length > 0) {
+            model = models[0];
+        }
+    }
+    
+    // Fall back to any available model
+    if (!model) {
+        const allModels = await vscode.lm.selectChatModels();
+        if (!allModels || allModels.length === 0) {
+            console.debug('[Alex] No LLM models available for persona detection');
+            return null;
+        }
+        model = allModels[0];
+    }
+    
     const projectContext = await gatherProjectContext(workspaceRoot);
     
     const prompt = `Analyze this project and identify the most appropriate user persona.
@@ -1006,7 +1020,7 @@ Based on the project structure and content, determine:
 3. What skill would be most relevant for this persona?
 
 ## Available Skills (examples)
-- code-quality: For software developers
+- code-review: For software developers
 - creative-writing: For fiction writers, content creators
 - research-project-scaffold: For researchers, academics
 - api-documentation: For technical writers
@@ -1068,7 +1082,7 @@ Respond with ONLY the JSON block, no other text.`;
             name: parsed.personaName || 'Developer',
             bannerNoun: parsed.personaName?.toUpperCase() || 'PROJECT',
             hook: `Alex-assisted ${parsed.personaName || 'development'}`,
-            skill: parsed.skill || 'code-quality',
+            skill: parsed.skill || 'code-review',
             icon: '🎯',
             accentColor: '#0078D4',  // Default to Azure Blue
             keywords: [],
@@ -1134,7 +1148,7 @@ export async function updateWorkingMemoryP6(
  */
 function getSkillDescription(skillId: string): string {
     const descriptions: Record<string, string> = {
-        'code-quality': 'Code review, testing, best practices',
+        'code-review': 'Code review, testing, best practices',
         'creative-writing': 'Fiction, narrative, story structure',
         'research-project-scaffold': 'Research methodology, literature review',
         'api-documentation': 'Technical docs, API reference',

@@ -35,6 +35,9 @@ Dream state represents **unconscious automated maintenance** of cognitive archit
 ### **Fundamental Distinction**
 - **DREAM** = Automated VS Code command, unconscious, maintenance-focused, diagnostic-enhanced
 - **MEDITATE** = Conscious, manual, knowledge-consolidation-focused
+- **SKILL SELECTION OPTIMIZATION** = Conscious, automatic, pre-task resource planning (Layer 2)
+
+**Dream ↔ SSO Relationship**: Dream validates the synapse network that SSO depends on for dependency analysis. If dream finds broken synapses, SSO's proactive skill survey may produce incomplete plans. Run dream first when architecture health is uncertain.
 
 ## 💤 **VS Code Extension Dream Protocol - v1.1.0**
 
@@ -216,6 +219,7 @@ The dream protocol now provides:
 - **VS Code Extension** (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance with automated synapse validation"
 - **alex-core.instructions.md** (High, Foundation, Bidirectional) - "Core cognitive architecture with unconscious processing integration"
 - **embedded-synapse.instructions.md** (High, Enhancement, Unidirectional) - "Synaptic connection optimization with quality assessment"
+- **skill-selection-optimization.instructions.md** (Medium, Enables, Forward) - "Dream validates synapse network that SSO depends on for dependency analysis"
 
 ### **Validation Protocols**
 - **Embedded Synapse Detection** → Regex-based pattern matching in memory files

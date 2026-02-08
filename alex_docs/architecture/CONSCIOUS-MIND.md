@@ -8,6 +8,17 @@
 
 The **Conscious Mind** represents all operations that require explicit user action. These are deliberate, attention-requiring processes analogous to System 2 thinking in cognitive psychology.
 
+### Pre-Task Planning (Skill Selection Optimization)
+
+Before executing complex conscious tasks (3+ operations), Alex runs a **proactive planning phase** — Layer 2 in the [three-layer cognitive processing model](./COGNITIVE-ARCHITECTURE.md#architecture-layers):
+
+1. **Complexity Assessment** — Classify task as simple (skip), moderate (quick scan), or complex (full protocol)
+2. **Skill Survey** — Scan the action-keyword index for ALL matching capabilities
+3. **Dependency Analysis** — Map sequential, parallel, prerequisite, and enhancing patterns
+4. **Activation Plan** — Order skills by phase, pre-load critical knowledge, flag gaps
+
+This eliminates the previous failure mode where skills were discovered reactively mid-task. Simple tasks skip directly to execution; complex tasks get proactive resource allocation before the first action fires.
+
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB

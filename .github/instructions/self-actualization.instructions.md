@@ -28,6 +28,14 @@ Self-actualization is Alex's highest-order cognitive function, performing compre
 
 ## Protocol Phases
 
+### Phase 0: Pre-Assessment Resource Planning
+
+Self-actualization is Alex's most complex cognitive operation (5+ phases). Skill Selection Optimization auto-activates:
+
+1. **Skills needed**: architecture-health, brain-qa, knowledge-synthesis, meditation-facilitation
+2. **Dependency chain**: synapse validation (Phase 1) → version check (Phase 2) → memory assessment (Phase 3) → recommendations (Phase 4) → documentation (Phase 5)
+3. **Deep Thinking integration**: Phase 4 recommendations use Deep Thinking's episodic memory scan to reference prior self-actualization sessions
+
 ### Phase 1: Synapse Health Validation
 
 **Objective**: Verify integrity of all synaptic connections across memory files
@@ -183,6 +191,7 @@ Or natural language:
 - [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
 - [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
 - [.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
+- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-assessment resource planning for complex 5-phase protocol"
 
 ### Input Connections
 

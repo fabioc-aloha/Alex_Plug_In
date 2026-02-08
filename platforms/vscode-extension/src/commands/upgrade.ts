@@ -61,6 +61,20 @@ interface UpgradeResult {
   errors: string[];
 }
 
+/** Stats captured during upgrade for completion message */
+interface UpgradeStats {
+  restoredCount: number;
+  normalizedCount: number;
+  staleCount: number;
+}
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+/** Stale threshold: items not modified in >90 days need manual review */
+const STALE_THRESHOLD_MS = 90 * 24 * 60 * 60 * 1000;
+
 // ============================================================================
 // DETECTION
 // ============================================================================
@@ -84,8 +98,8 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
     if (rootDKFiles.length > 0) {
       result.dkLocations.push('root');
     }
-  } catch {
-    // Ignore errors reading root
+  } catch (err) {
+    console.debug('[Alex] Error reading root for DK files:', err);
   }
 
   // Check for DK files in .github/ directly (some old versions)
@@ -98,8 +112,8 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
         result.dkLocations.push('.github');
       }
     }
-  } catch {
-    // Ignore errors
+  } catch (err) {
+    console.debug('[Alex] Error reading .github for DK files:', err);
   }
 
   // Check for DK files in .github/domain-knowledge/ (3.0+)
@@ -111,8 +125,8 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
         result.dkLocations.push('.github/domain-knowledge');
       }
     }
-  } catch {
-    // Ignore errors
+  } catch (err) {
+    console.debug('[Alex] Error reading domain-knowledge:', err);
   }
 
   // Check for skills (3.4+)
@@ -147,8 +161,8 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
           break;
         }
       }
-    } catch {
-      // Ignore
+    } catch (err) {
+      console.debug('[Alex] Error reading version from copilot-instructions:', err);
     }
   }
 
@@ -162,8 +176,8 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
           result.installedVersion = manifest.version;
         }
       }
-    } catch {
-      // Ignore
+    } catch (err) {
+      console.debug('[Alex] Error reading version from manifest:', err);
     }
   }
 
@@ -376,7 +390,6 @@ async function runGapAnalysis(
 ): Promise<MigrationCandidate[]> {
   const candidates: MigrationCandidate[] = [];
   const now = new Date();
-  const staleThreshold = 90 * 24 * 60 * 60 * 1000; // 90 days
 
   // 1. Legacy DK files (from root)
   const rootDKPath = path.join(backupPath, 'root-dk-files');
@@ -396,7 +409,7 @@ async function runGapAnalysis(
         sizeKB: Math.round(stats.size / 1024),
         lastModified: stats.mtime,
         recommended: true,
-        stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+        stale: (now.getTime() - stats.mtime.getTime()) > STALE_THRESHOLD_MS,
       });
     }
   }
@@ -421,7 +434,7 @@ async function runGapAnalysis(
         sizeKB: Math.round(stats.size / 1024),
         lastModified: stats.mtime,
         recommended: true,
-        stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+        stale: (now.getTime() - stats.mtime.getTime()) > STALE_THRESHOLD_MS,
       });
     }
   }
@@ -457,7 +470,7 @@ async function runGapAnalysis(
           sizeKB: await getFolderSize(skillPath),
           lastModified: stats.mtime,
           recommended: true,
-          stale: (now.getTime() - stats.mtime.getTime()) > staleThreshold,
+          stale: (now.getTime() - stats.mtime.getTime()) > STALE_THRESHOLD_MS,
         });
       }
     }
@@ -996,6 +1009,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
   // Variables to capture from progress callback
   let upgradeBackupPath = '';
   let upgradeCandidates: MigrationCandidate[] = [];
+  let upgradeStats: UpgradeStats = { restoredCount: 0, normalizedCount: 0, staleCount: 0 };
 
   try {
     await vscode.window.withProgress(
@@ -1064,9 +1078,11 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
           }
 
           // Capture stats for completion message
-          (upgradeCandidates as any)._restoredCount = restoredItems.length;
-          (upgradeCandidates as any)._normalizedCount = synapseNormalized;
-          (upgradeCandidates as any)._staleCount = staleItems.length;
+          upgradeStats = {
+            restoredCount: restoredItems.length,
+            normalizedCount: synapseNormalized,
+            staleCount: staleItems.length
+          };
         } else {
           // No candidates - still normalize any existing skills
           const skillsDir = path.join(rootPath, '.github', 'skills');
@@ -1082,8 +1098,8 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     try {
       const dreamResult = await runDreamProtocol(context, { silent: true });
       dreamSuccess = dreamResult?.success ?? false;
-    } catch {
-      // Dream failure is not fatal
+    } catch (err) {
+      console.debug('[Alex] Dream validation failed (non-fatal):', err);
     }
 
     // Offer environment setup
@@ -1098,14 +1114,12 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
         personaDetected = true;
         console.log(`[Alex] Detected persona: ${personaResult.persona.name} (confidence: ${(personaResult.confidence * 100).toFixed(0)}%)`);
       }
-    } catch {
-      // Persona detection failure is not fatal
+    } catch (err) {
+      console.debug('[Alex] Persona detection failed (non-fatal):', err);
     }
 
-    // Extract stats from captured candidates
-    const restoredCount = (upgradeCandidates as any)._restoredCount || 0;
-    const normalizedCount = (upgradeCandidates as any)._normalizedCount || 0;
-    const staleCount = (upgradeCandidates as any)._staleCount || 0;
+    // Extract stats from captured stats object
+    const { restoredCount, normalizedCount, staleCount } = upgradeStats;
 
     // Show completion message
     const healthIcon = dreamSuccess ? '💚' : '⚠️';

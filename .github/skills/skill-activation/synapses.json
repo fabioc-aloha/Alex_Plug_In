@@ -13,6 +13,13 @@
   ],
   "connections": [
     {
+      "target": ".github/instructions/skill-selection-optimization.instructions.md",
+      "type": "relates-to",
+      "strength": 0.9,
+      "when": "complex task detected requiring 3+ operations",
+      "yields": "Proactive skill survey, dependency analysis, activation plan"
+    },
+    {
       "target": ".github/copilot-instructions.md",
       "type": "referenced-by",
       "strength": 1.0,

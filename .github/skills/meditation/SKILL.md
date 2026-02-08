@@ -22,6 +22,16 @@ Expert in knowledge consolidation, memory integration, and guided meditation ses
 - When organizing information into memory structures
 - For guided reflection on what was learned
 
+## Pre-Meditation Optimization
+
+Meditation is a complex cognitive operation (3+ phases: review, relate, reinforce, record). Before starting:
+
+1. **Skill Selection Optimization** auto-activates to survey needed skills
+2. **Pre-loaded skills**: architecture-health (for synapse validation), knowledge-synthesis (for pattern extraction), global-knowledge (for cross-project promotion)
+3. **Dream pre-check**: If synapse health is unknown, consider running dream first to clear cognitive overhead
+
+This ensures meditation sessions are productive rather than discovering broken architecture mid-consolidation.
+
 ## Example Prompts
 
 - "Help me meditate on what I learned today"
@@ -48,3 +58,4 @@ Expert in knowledge consolidation, memory integration, and guided meditation ses
 - [Architecture Health](../architecture-health/SKILL.md) - Check neural network health
 - [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Acquire new domain knowledge
 - [Global Knowledge](../global-knowledge/SKILL.md) - Search cross-project patterns
+- [Skill Activation](../skill-activation/SKILL.md) - Proactive/reactive skill routing (SSO integration)

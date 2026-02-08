@@ -36,6 +36,13 @@
       "strength": 0.85,
       "when": "deep architecture validation needed",
       "yields": "6-phase cognitive QA, Master-Heir sync validation"
+    },
+    {
+      "target": ".github/instructions/skill-selection-optimization.instructions.md",
+      "type": "uses",
+      "strength": 0.7,
+      "when": "meditation session involves complex multi-phase consolidation",
+      "yields": "Pre-meditation skill survey, optimal phase ordering"
     }
   ],
   "triggers": [

@@ -14,29 +14,77 @@ interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
 }
 
 /**
+ * Get language ID from file extension
+ */
+function getLanguageIdFromPath(filePath: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+    const extMap: Record<string, string> = {
+        '.ts': 'typescript', '.tsx': 'typescriptreact',
+        '.js': 'javascript', '.jsx': 'javascriptreact',
+        '.py': 'python', '.rb': 'ruby', '.go': 'go',
+        '.rs': 'rust', '.java': 'java', '.cs': 'csharp',
+        '.cpp': 'cpp', '.c': 'c', '.h': 'c',
+        '.md': 'markdown', '.json': 'json', '.yaml': 'yaml',
+        '.yml': 'yaml', '.html': 'html', '.css': 'css',
+        '.scss': 'scss', '.sql': 'sql', '.sh': 'shellscript',
+        '.ps1': 'powershell', '.xml': 'xml'
+    };
+    return extMap[ext] || 'text';
+}
+
+/**
  * Register context menu commands for Alex quick actions
  */
 export function registerContextMenuCommands(context: vscode.ExtensionContext): void {
     // Ask Alex about selection
     const askAboutSelectionDisposable = vscode.commands.registerCommand(
         'alex.askAboutSelection',
-        async () => {
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                vscode.window.showWarningMessage('No active editor');
-                return;
+        async (uri?: vscode.Uri) => {
+            let text: string | undefined;
+            let languageId = 'text';
+            let fileName = '';
+
+            // If URI provided (from explorer context menu), read file content
+            if (uri) {
+                try {
+                    const content = await vscode.workspace.fs.readFile(uri);
+                    text = new TextDecoder().decode(content);
+                    fileName = path.basename(uri.fsPath);
+                    languageId = getLanguageIdFromPath(uri.fsPath);
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+                    return;
+                }
+            } else {
+                // Try active editor
+                const editor = vscode.window.activeTextEditor;
+                if (editor) {
+                    const selection = editor.selection;
+                    text = !selection.isEmpty ? editor.document.getText(selection) : '';
+                    languageId = editor.document.languageId;
+                    fileName = path.basename(editor.document.fileName);
+                }
             }
 
-            const selection = editor.selection;
-            const selectedText = editor.document.getText(selection);
+            let chatInput: string;
 
-            if (!selectedText) {
-                vscode.window.showWarningMessage('No text selected');
-                return;
+            // If no text, fall back to input prompt
+            if (!text) {
+                const question = await vscode.window.showInputBox({
+                    prompt: 'What would you like to ask Alex?',
+                    placeHolder: 'e.g., How do I implement error handling in TypeScript?',
+                    ignoreFocusOut: true
+                });
+                
+                if (!question) {
+                    return; // User cancelled
+                }
+                chatInput = question;
+            } else {
+                // Build prompt with context
+                const context = fileName ? ` from ${fileName}` : '';
+                chatInput = `Explain this code${context} and suggest improvements:\n\n\`\`\`${languageId}\n${text}\n\`\`\``;
             }
-
-            // Open Copilot Chat with @alex and the selected code
-            const chatInput = `Explain this code and suggest improvements:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
             
             // Copy to clipboard and open Agent mode
             await vscode.env.clipboard.writeText(chatInput);
@@ -52,13 +100,35 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
     // Save selection as insight
     const saveSelectionAsInsightDisposable = vscode.commands.registerCommand(
         'alex.saveSelectionAsInsight',
-        async () => {
-            const editor = vscode.window.activeTextEditor;
-            const selection = editor?.selection;
-            const selectedText = editor && selection ? editor.document.getText(selection) : '';
+        async (uri?: vscode.Uri) => {
+            let text: string | undefined;
+            let languageId = 'text';
+            let fileName = '';
 
-            // If no editor or no selection, fall back to input prompt and save to episodic
-            if (!editor || !selectedText) {
+            // If URI provided (from explorer context menu), read file content
+            if (uri) {
+                try {
+                    const content = await vscode.workspace.fs.readFile(uri);
+                    text = new TextDecoder().decode(content);
+                    fileName = path.basename(uri.fsPath);
+                    languageId = getLanguageIdFromPath(uri.fsPath);
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+                    return;
+                }
+            } else {
+                // Try active editor
+                const editor = vscode.window.activeTextEditor;
+                if (editor) {
+                    const selection = editor.selection;
+                    text = !selection.isEmpty ? editor.document.getText(selection) : '';
+                    languageId = editor.document.languageId;
+                    fileName = path.basename(editor.document.fileName);
+                }
+            }
+
+            // If no text, fall back to input prompt and save to episodic
+            if (!text) {
                 const insight = await vscode.window.showInputBox({
                     prompt: 'What insight would you like to save?',
                     placeHolder: 'e.g., useEffect cleanup runs before next effect - helped fix my memory leak',
@@ -76,10 +146,10 @@ export function registerContextMenuCommands(context: vscode.ExtensionContext): v
                     const now = new Date();
                     const dateStr = now.toISOString().split('T')[0];
                     const timeStr = now.toTimeString().slice(0, 5).replace(':', '');
-                    const fileName = `quick-insight-${dateStr}-${timeStr}.md`;
+                    const insightFileName = `quick-insight-${dateStr}-${timeStr}.md`;
                     
                     const episodicPath = path.join(workspaceFolders[0].uri.fsPath, '.github', 'episodic');
-                    const filePath = path.join(episodicPath, fileName);
+                    const filePath = path.join(episodicPath, insightFileName);
 
                     const content = `# Quick Insight
 
@@ -130,7 +200,7 @@ Project: ${workspaceFolders[0].name}
                 return;
             }
 
-            // Original flow with editor selection
+            // Flow with text from editor selection or file
             // Get insight details from user
             const title = await vscode.window.showInputBox({
                 prompt: 'Title for this insight',
@@ -141,8 +211,7 @@ Project: ${workspaceFolders[0].name}
                 return; // User cancelled
             }
 
-            // Detect category from file extension
-            const languageId = editor.document.languageId;
+            // Category selection
             const categories: GlobalKnowledgeCategory[] = [
                 'error-handling', 'api-design', 'testing', 'debugging', 
                 'performance', 'architecture', 'security', 'deployment',
@@ -154,7 +223,7 @@ Project: ${workspaceFolders[0].name}
             }) as GlobalKnowledgeCategory || 'general';
 
             // Build the insight
-            const insight = `**Code Pattern (${languageId}):**\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+            const insight = `**Code Pattern (${languageId}):**\n\`\`\`${languageId}\n${text}\n\`\`\``;
             const tags = [languageId, 'code-snippet'];
             
             // Get current project name
@@ -169,7 +238,7 @@ Project: ${workspaceFolders[0].name}
                     category,
                     tags,
                     sourceProject,
-                    `Captured from ${path.basename(editor.document.fileName)}`,
+                    fileName ? `Captured from ${fileName}` : 'Captured from selection',
                     'Code pattern for reference'
                 );
                 
@@ -190,29 +259,51 @@ Project: ${workspaceFolders[0].name}
     // Search related knowledge
     const searchRelatedKnowledgeDisposable = vscode.commands.registerCommand(
         'alex.searchRelatedKnowledge',
-        async () => {
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                vscode.window.showWarningMessage('No active editor');
-                return;
+        async (uri?: vscode.Uri) => {
+            let text: string | undefined;
+
+            // If URI provided (from explorer context menu), read file content
+            if (uri) {
+                try {
+                    const content = await vscode.workspace.fs.readFile(uri);
+                    text = new TextDecoder().decode(content);
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+                    return;
+                }
+            } else {
+                // Try active editor
+                const editor = vscode.window.activeTextEditor;
+                if (editor) {
+                    const selection = editor.selection;
+                    text = !selection.isEmpty ? editor.document.getText(selection) : '';
+                }
             }
 
-            const selection = editor.selection;
-            const selectedText = editor.document.getText(selection);
+            let keywords: string;
 
-            if (!selectedText) {
-                vscode.window.showWarningMessage('No text selected');
-                return;
+            // If no text, fall back to input prompt
+            if (!text) {
+                const query = await vscode.window.showInputBox({
+                    prompt: 'What would you like to search for?',
+                    placeHolder: 'e.g., error handling patterns, React hooks, TypeScript generics',
+                    ignoreFocusOut: true
+                });
+                
+                if (!query) {
+                    return; // User cancelled
+                }
+                keywords = query;
+            } else {
+                // Extract keywords from text (first 100 chars, remove special chars)
+                keywords = text
+                    .substring(0, 100)
+                    .replace(/[^a-zA-Z0-9\s]/g, ' ')
+                    .split(/\s+/)
+                    .filter(word => word.length > 2)
+                    .slice(0, 5)
+                    .join(' ');
             }
-
-            // Extract keywords from selection (first 100 chars, remove special chars)
-            const keywords = selectedText
-                .substring(0, 100)
-                .replace(/[^a-zA-Z0-9\s]/g, ' ')
-                .split(/\s+/)
-                .filter(word => word.length > 2)
-                .slice(0, 5)
-                .join(' ');
 
             // Search global knowledge
             await vscode.window.withProgress({
@@ -349,15 +440,31 @@ Project: ${workspaceFolders[0].name}
     // Generate image from selection
     const generateImageFromSelectionDisposable = vscode.commands.registerCommand(
         'alex.generateImageFromSelection',
-        async () => {
-            const editor = vscode.window.activeTextEditor;
-            const selection = editor?.selection;
-            const selectedText = editor && selection ? editor.document.getText(selection) : '';
+        async (uri?: vscode.Uri) => {
+            let text: string | undefined;
+
+            // If URI provided (from explorer context menu), read file content
+            if (uri) {
+                try {
+                    const content = await vscode.workspace.fs.readFile(uri);
+                    text = new TextDecoder().decode(content);
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+                    return;
+                }
+            } else {
+                // Try active editor
+                const editor = vscode.window.activeTextEditor;
+                if (editor) {
+                    const selection = editor.selection;
+                    text = !selection.isEmpty ? editor.document.getText(selection) : '';
+                }
+            }
 
             let prompt: string;
             
-            if (!selectedText) {
-                // No selection - prompt for description
+            if (!text) {
+                // No text - prompt for description
                 const userInput = await vscode.window.showInputBox({
                     prompt: 'Describe the image you want to generate',
                     placeHolder: 'e.g., A flowchart showing user authentication process',
@@ -369,7 +476,7 @@ Project: ${workspaceFolders[0].name}
                 }
                 prompt = userInput;
             } else {
-                prompt = selectedText;
+                prompt = text;
             }
 
             // Open chat with image generation request

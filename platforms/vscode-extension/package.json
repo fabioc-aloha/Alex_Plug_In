@@ -243,12 +243,12 @@
       },
       {
         "command": "alex.generatePptx",
-        "title": "Alex: Generate Presentation",
+        "title": "Alex: Presentation Options...",
         "icon": "$(file-media)"
       },
       {
         "command": "alex.generatePptxFromFile",
-        "title": "Alex: Convert to PowerPoint",
+        "title": "Alex: Quick Convert to PPTX",
         "icon": "$(file-media)"
       },
       {
@@ -330,15 +330,78 @@
       "editor/context": [
         {
           "submenu": "alex.contextMenu",
-          "group": "alex@1",
-          "when": "editorHasSelection"
+          "group": "alex@1"
         }
       ],
       "explorer/context": [
         {
-          "command": "alex.generatePptxFromFile",
+          "submenu": "alex.explorerMenu",
           "group": "alex@1",
-          "when": "resourceExtname == .md"
+          "when": "resourceExtname =~ /\\.(md|txt|json|ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|yaml|yml|html|css|scss|sh|ps1|xml)$/"
+        }
+      ],
+      "alex.explorerMenu": [
+        {
+          "command": "alex.askAboutSelection",
+          "group": "1_ask@1"
+        },
+        {
+          "command": "alex.codeReview",
+          "group": "1_ask@2",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.debugThis",
+          "group": "1_ask@3",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|sh|ps1)$/"
+        },
+        {
+          "command": "alex.generateTests",
+          "group": "1_ask@4",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb)$/"
+        },
+        {
+          "command": "alex.saveSelectionAsInsight",
+          "group": "2_save@1"
+        },
+        {
+          "command": "alex.searchRelatedKnowledge",
+          "group": "2_save@2"
+        },
+        {
+          "command": "alex.generatePptxFromFile",
+          "group": "3_generate@1",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.generatePptx",
+          "group": "3_generate@2",
+          "when": "resourceExtname == '.md' || resourceExtname == '.txt'"
+        },
+        {
+          "command": "alex.generateImageFromSelection",
+          "group": "3_generate@3"
+        },
+        {
+          "command": "alex.generateDiagram",
+          "group": "3_generate@4",
+          "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
+        },
+        {
+          "command": "alex.readAloud",
+          "group": "4_voice@1"
+        },
+        {
+          "command": "alex.saveAsAudio",
+          "group": "4_voice@2"
+        },
+        {
+          "command": "alex.importGitHubIssues",
+          "group": "5_github@1"
+        },
+        {
+          "command": "alex.reviewPR",
+          "group": "5_github@2"
         }
       ],
       "alex.contextMenu": [
@@ -369,12 +432,33 @@
         {
           "command": "alex.generateImageFromSelection",
           "group": "4_create@1"
+        },
+        {
+          "command": "alex.generateDiagram",
+          "group": "4_create@2"
+        },
+        {
+          "command": "alex.generatePptx",
+          "group": "4_create@3"
+        },
+        {
+          "command": "alex.readAloud",
+          "group": "5_voice@1"
+        },
+        {
+          "command": "alex.saveAsAudio",
+          "group": "5_voice@2"
         }
       ]
     },
     "submenus": [
       {
         "id": "alex.contextMenu",
+        "label": "🚀 Alex",
+        "icon": "$(rocket)"
+      },
+      {
+        "id": "alex.explorerMenu",
         "label": "🚀 Alex",
         "icon": "$(rocket)"
       }
@@ -596,6 +680,18 @@
           "default": "",
           "scope": "machine",
           "description": "Custom path to Global Knowledge repository. Leave empty for auto-detection (sibling folder named Alex-Global-Knowledge)."
+        },
+        "alex.logos.brandfetchClientId": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "Brandfetch client ID for ticker-based logo lookup (free at brandfetch.com). No attribution required."
+        },
+        "alex.logos.logoDevToken": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "Logo.dev API token for ticker-based logo lookup (free 500K/mo at logo.dev). Attribution required on free tier."
         }
       }
     },

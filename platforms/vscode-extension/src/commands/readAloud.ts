@@ -146,16 +146,30 @@ function hideTTSStatus(): void {
 
 /**
  * Main command: Read current document/selection aloud
+ * @param context Extension context
+ * @param voicePreset Voice preset to use
+ * @param uri Optional file URI (from explorer context menu)
  */
 export async function readAloud(
     context: vscode.ExtensionContext,
-    voicePreset: VoicePreset = 'default'
+    voicePreset: VoicePreset = 'default',
+    uri?: vscode.Uri
 ): Promise<void> {
     const editor = vscode.window.activeTextEditor;
     let rawText: string;
     let isMarkdown = false;
     
-    if (!editor) {
+    // If URI provided (from explorer context menu), read from file
+    if (uri) {
+        try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            rawText = new TextDecoder().decode(content);
+            isMarkdown = uri.fsPath.endsWith('.md');
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
+            return;
+        }
+    } else if (!editor) {
         // No active editor - offer options to get text
         const choice = await vscode.window.showQuickPick([
             { label: '$(clippy) Paste from Clipboard', value: 'clipboard' },
@@ -362,31 +376,79 @@ export async function readAloud(
 
 /**
  * Save current document/selection as MP3
+ * @param context Extension context
+ * @param voicePreset Voice preset to use
+ * @param uri Optional file URI (from explorer context menu)
  */
 export async function saveAsAudio(
     context: vscode.ExtensionContext,
-    voicePreset: VoicePreset = 'default'
+    voicePreset: VoicePreset = 'default',
+    uri?: vscode.Uri
 ): Promise<void> {
     const editor = vscode.window.activeTextEditor;
+    let rawText: string;
+    let defaultName: string;
+    let isMarkdown = false;
     
-    if (!editor) {
-        vscode.window.showWarningMessage('No active editor. Open a document to save as audio.');
-        return;
+    // If URI provided (from explorer context menu), read from file
+    if (uri) {
+        try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            rawText = new TextDecoder().decode(content);
+            defaultName = path.basename(uri.fsPath, path.extname(uri.fsPath)) + '.mp3';
+            isMarkdown = uri.fsPath.endsWith('.md');
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
+            return;
+        }
+    } else if (!editor) {
+        // No active editor - offer options to get text
+        const choice = await vscode.window.showQuickPick([
+            { label: '$(clippy) Paste from Clipboard', value: 'clipboard' },
+            { label: '$(edit) Type Text', value: 'type' }
+        ], {
+            title: 'Alex: Save as Audio',
+            placeHolder: 'No document open. How would you like to provide text?'
+        });
+        
+        if (!choice) {
+            return; // User cancelled
+        }
+        
+        if (choice.value === 'clipboard') {
+            rawText = await vscode.env.clipboard.readText();
+            if (!rawText.trim()) {
+                vscode.window.showWarningMessage('Clipboard is empty. Copy some text first.');
+                return;
+            }
+        } else {
+            const input = await vscode.window.showInputBox({
+                title: 'Alex: Save as Audio',
+                prompt: 'Enter text to save as audio',
+                placeHolder: 'Type text here...',
+                ignoreFocusOut: true
+            });
+            
+            if (!input?.trim()) {
+                return; // User cancelled or empty input
+            }
+            rawText = input;
+        }
+        defaultName = 'audio.mp3';
+    } else {
+        // Get text to save from editor
+        rawText = getTextToRead(editor);
+        defaultName = path.basename(
+            editor.document.fileName,
+            path.extname(editor.document.fileName)
+        ) + '.mp3';
+        isMarkdown = editor.document.languageId === 'markdown';
     }
-    
-    // Get text to save
-    const rawText = getTextToRead(editor);
     
     if (!rawText.trim()) {
         vscode.window.showWarningMessage('No text to convert. Select text or open a document with content.');
         return;
     }
-    
-    // Ask for output file location
-    const defaultName = path.basename(
-        editor.document.fileName,
-        path.extname(editor.document.fileName)
-    ) + '.mp3';
     
     const saveUri = await vscode.window.showSaveDialog({
         defaultUri: vscode.Uri.file(
@@ -406,8 +468,41 @@ export async function saveAsAudio(
     }
     
     // Prepare text for speech
-    const isMarkdown = editor.document.languageId === 'markdown';
-    const textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
+    let textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
+    
+    // Check length and offer summarization for long documents
+    const wordCount = textToSpeak.split(/\s+/).length;
+    const duration = estimateDuration(wordCount);
+    
+    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
+        const choice = await vscode.window.showWarningMessage(
+            `This content is ${duration.formatted} long (~${wordCount} words). Would you like a summary instead?`,
+            { modal: false },
+            'Save Summary (~3 min)',
+            'Save Full Content',
+            'Cancel'
+        );
+        
+        if (choice === 'Cancel' || !choice) {
+            return;
+        }
+        
+        if (choice === 'Save Summary (~3 min)') {
+            await vscode.window.withProgress(
+                {
+                    location: vscode.ProgressLocation.Notification,
+                    title: 'Summarizing content...',
+                    cancellable: false
+                },
+                async () => {
+                    const summary = await summarizeForSpeech(rawText, 3);
+                    if (summary) {
+                        textToSpeak = summary;
+                    }
+                }
+            );
+        }
+    }
     
     // Detect language
     const detected = detectLanguage(textToSpeak);
@@ -531,9 +626,9 @@ export async function readWithVoice(context: vscode.ExtensionContext): Promise<v
  * Register all TTS commands
  */
 export function registerTTSCommands(context: vscode.ExtensionContext): void {
-    // Main read aloud command
+    // Main read aloud command (accepts optional URI from explorer context menu)
     context.subscriptions.push(
-        vscode.commands.registerCommand('alex.readAloud', () => readAloud(context))
+        vscode.commands.registerCommand('alex.readAloud', (uri?: vscode.Uri) => readAloud(context, 'default', uri))
     );
     
     // Read with voice selection
@@ -541,9 +636,9 @@ export function registerTTSCommands(context: vscode.ExtensionContext): void {
         vscode.commands.registerCommand('alex.readWithVoice', () => readWithVoice(context))
     );
     
-    // Save as audio command
+    // Save as audio command (accepts optional URI from explorer context menu)
     context.subscriptions.push(
-        vscode.commands.registerCommand('alex.saveAsAudio', () => saveAsAudio(context))
+        vscode.commands.registerCommand('alex.saveAsAudio', (uri?: vscode.Uri) => saveAsAudio(context, 'default', uri))
     );
     
     // Stop reading command

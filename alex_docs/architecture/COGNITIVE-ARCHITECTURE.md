@@ -174,18 +174,22 @@ graph TB
 
 **Table 1:** *Cognitive Function Mapping*
 
-| Cognitive Function     | Brain System            | Alex Implementation                                         |
-| ---------------------- | ----------------------- | ----------------------------------------------------------- |
-| **Executive Function** | **Prefrontal Cortex**   | **LLM (Claude/GPT)** — reasoning, planning, decision-making |
-| Working Memory         | PFC + ACC               | Chat session (7±2 rules)                                    |
-| Declarative Memory     | Hippocampal-Neocortical | copilot-instructions.md                                     |
-| Procedural Memory      | Basal Ganglia           | .instructions.md files                                      |
-| Episodic Memory        | Hippocampus + Temporal  | .prompt.md files                                            |
-| Skill Routing          | Dorsolateral PFC        | skill-activation/SKILL.md                                   |
-| Skills                 | Neocortex               | skills/*/SKILL.md                                           |
-| Global Knowledge       | Distributed Cortex      | ~/.alex/ directory                                          |
-| Neural Connectivity    | Synaptic Networks       | Embedded synapse notation                                   |
-| Meta-Cognition         | Medial PFC + DMN        | Self-monitoring protocols                                   |
+| Cognitive Function     | Brain System            | Alex Implementation                                                              |
+| ---------------------- | ----------------------- | -------------------------------------------------------------------------------- |
+| **Executive Function** | **Prefrontal Cortex**   | **LLM (Claude/GPT)** — reasoning, planning, decision-making                      |
+| Working Memory         | PFC + ACC               | Chat session (7±2 rules)                                                         |
+| Declarative Memory     | Hippocampal-Neocortical | copilot-instructions.md                                                          |
+| Procedural Memory      | Basal Ganglia           | .instructions.md files                                                           |
+| Episodic Memory        | Hippocampus + Temporal  | .prompt.md files                                                                 |
+| **Task Planning**      | **Dorsolateral PFC**    | **skill-selection-optimization.instructions.md** — proactive resource allocation |
+| Attention Gating       | dlPFC (BA 46)           | SSO Phase 1b — context-relevance filtering                                       |
+| Inhibitory Control     | dlPFC + vlPFC           | Inhibitory synapses — suppress irrelevant protocols                              |
+| Cognitive Flexibility  | dlPFC + ACC             | Pivot Detection Protocol — task-switch re-planning                               |
+| Skill Routing          | Premotor Cortex         | skill-activation/SKILL.md — reactive capability discovery                        |
+| Skills                 | Neocortex               | skills/*/SKILL.md                                                                |
+| Global Knowledge       | Distributed Cortex      | ~/.alex/ directory                                                               |
+| Neural Connectivity    | Synaptic Networks       | Embedded synapse notation                                                        |
+| Meta-Cognition         | Medial PFC + DMN        | Self-monitoring protocols                                                        |
 
 ---
 
@@ -344,6 +348,89 @@ When using **Auto** model selection in VS Code, Alex warns before attempting tas
 
 ## Architecture Layers
 
+Alex processes tasks through three cognitive layers, each operating at a different scope:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart TB
+    subgraph L1["🧠 Layer 1: Session Planning"]
+        direction LR
+        WM["Working Memory\nP1-P7 Slots"]
+        PP["Persona Detection\nPriority Chain"]
+        WM --> PP
+    end
+
+    subgraph L2["⚡ Layer 2: Task Planning (dlPFC)"]
+        direction LR
+        CA["Complexity\nAssessment"]
+        SS["Skill Survey\nAction-Keyword Index"]
+        AG["Attention\nGating 🔍"]
+        DA["Dependency\nAnalysis"]
+        AP["Activation\nPlan"]
+        VG["Verification\nGate 🔒"]
+        CA -->|"moderate/complex"| SS --> AG --> DA --> AP --> VG
+        CA -->|"simple"| SKIP["Skip → Execute\n⊘ INHIBIT SSO"]
+    end
+
+    subgraph L3["🔧 Layer 3: Execution"]
+        direction LR
+        SA["Skill Activation\n⚡ Reactive Safety Net"]
+        DT["Deep Thinking\n📊 Problem Analysis"]
+        TL["Todo List\n📋 Progress Tracking"]
+        PD["Pivot Detection\n🔄 Task Switch"]
+        SA -.->|"gap signal"| SS
+        PD -.->|"pivot signal"| CA
+    end
+
+    subgraph Memory["💾 Memory Stores"]
+        direction LR
+        PROC["📑 Procedural\n24 .instructions.md"]
+        EPIS["📓 Episodic\n13 .prompt.md"]
+        SKILLS["🧊 Skills\n76 skills"]
+        GK["🌐 Global Knowledge\nPatterns + Insights"]
+    end
+
+    L1 -->|"session context"| L2
+    L2 -->|"activation plan"| L3
+    L3 -->|"reads"| Memory
+    L2 -->|"surveys"| SKILLS
+
+    style L1 fill:#fff3cd,stroke:#856404,color:#1f2328
+    style L2 fill:#d1ecf1,stroke:#0c5460,color:#1f2328
+    style L3 fill:#d4edda,stroke:#155724,color:#1f2328
+    style Memory fill:#f6f8fa,stroke:#d1d9e0,color:#1f2328
+```
+
+**Figure 5:** *Three-Layer Cognitive Processing — Session planning sets context, task planning allocates resources with attention gating and a verification gate, execution uses skills with reactive safety net and pivot detection.*
+
+**Table 5:** *Cognitive Processing Layers*
+
+| Layer | Name             | Scope            | Timing           | Implementation                                                |
+| ----- | ---------------- | ---------------- | ---------------- | ------------------------------------------------------------- |
+| 1     | Session Planning | Entire session   | Session start    | Working Memory P1-P7 slot assignment                          |
+| 2     | Task Planning    | Per complex task | Before execution | SSO: survey, attention gating, dependency analysis, gate      |
+| 3     | Execution        | Per action       | During response  | Skill Activation (reactive) + Deep Thinking + Pivot Detection |
+
+### Layer 2 Detail: Skill Selection Optimization
+
+The breakthrough in Layer 2 is **proactive resource allocation**. Before executing a complex task (3+ operations), Alex:
+
+1. **Assesses complexity** — simple (skip), moderate (quick scan), complex (full protocol)
+2. **Surveys skills** — scans the action-keyword index for ALL matching capabilities
+3. **Gates attention** — filters loaded instructions by task relevance, creating a focus cone (top 5-7 sources)
+4. **Analyzes dependencies** — sequential, parallel, prerequisite, and enhancing patterns
+5. **Creates activation plan** — orders skills by phase and dependency chain
+6. **Verifies before executing** — delayed gratification gate prevents premature execution
+
+Three dlPFC sub-functions now have architectural analogs:
+- **Attention Gating** (Phase 1b): Filters ~80% of loaded context to prevent cognitive overload
+- **Inhibitory Control**: Suppressive synapses prevent irrelevant protocols from activating
+- **Cognitive Flexibility**: Pivot Detection Protocol detects task switches and re-plans
+
+This eliminates the previous failure mode where skills were discovered reactively mid-task (or worse, missed entirely — see the SVG→PNG incident). The reactive skill-activation system in Layer 3 now serves as a safety net, and any reactive firing is a **learning signal** that the proactive system missed something.
+
+### Interface Layer
+
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 graph TB
@@ -384,7 +471,7 @@ graph TB
     FS <--> CLOUD
 ```
 
-**Figure 5:** *Architecture Layers — Four-layer architecture from user interface through processing and knowledge to storage.*
+**Figure 6:** *Interface Architecture — Four-layer architecture from user interface through processing and knowledge to storage.*
 
 ---
 
@@ -392,11 +479,12 @@ graph TB
 
 **Table 3:** *Version History*
 
-| Version | Codename     | Major Features                                                  |
-| ------- | ------------ | --------------------------------------------------------------- |
-| 1.x     | Initial      | Basic memory files, manual synapse management                   |
-| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                              |
-| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge |
+| Version | Codename     | Major Features                                                                   |
+| ------- | ------------ | -------------------------------------------------------------------------------- |
+| 1.x     | Initial      | Basic memory files, manual synapse management                                    |
+| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                                               |
+| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge                  |
+| 5.x     | Current      | dlPFC executive functions: attention gating, inhibitory control, pivot detection |
 
 ---
 

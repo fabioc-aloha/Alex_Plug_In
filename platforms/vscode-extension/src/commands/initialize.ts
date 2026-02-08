@@ -2,11 +2,10 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
-import { getAlexWorkspaceFolder, isAlexInstalled, checkProtectionAndWarn } from "../shared/utils";
+import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils";
 import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
-import { runDreamProtocol } from "./dream";
 import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectPersona, detectAndUpdateProjectPersona, loadUserProfile, PERSONAS } from "../chat/personaDetection";
+import { detectAndUpdateProjectPersona, PERSONAS } from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
 
 interface FileManifestEntry {
@@ -332,6 +331,19 @@ async function performInitialization(
     // This ensures proper markdown rendering even if user skips settings wizard
     await applyMarkdownStyles();
 
+    // Detect persona early - reused for GK offer and P6 update
+    let personaResult = await detectAndUpdateProjectPersona(rootPath);
+    const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
+    
+    if (personaResult) {
+      console.log(`[Alex] Initialize: Detected persona ${personaResult.persona.id}, updated P6 to ${personaResult.persona.skill}`);
+      telemetry.log("command", "initialize_persona_detected", {
+        persona: personaResult.persona.id,
+        skill: personaResult.persona.skill,
+        confidence: personaResult.confidence
+      });
+    }
+
     // Check for Global Knowledge repository (GitHub repo as sibling folder)
     try {
       const existingGkRepo = await detectGlobalKnowledgeRepo();
@@ -341,10 +353,6 @@ async function performInitialization(
         });
         console.log(`[Alex] Found Global Knowledge repo at ${existingGkRepo}`);
       } else {
-        // Detect user persona for personalized messaging
-        const userProfile = await loadUserProfile(rootPath);
-        const personaResult = await detectPersona(userProfile ?? undefined, vscode.workspace.workspaceFolders);
-        const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
         
         // Offer to create a new GK repository with premium features teaser
         const parentDir = path.dirname(rootPath);
@@ -401,22 +409,8 @@ async function performInitialization(
     telemetry.log("command", "initialize_offering_setup");
     await offerEnvironmentSetup();
 
-    // Detect and persist project persona
-    let detectedPersonaName = '';
-    try {
-      const personaResult = await detectAndUpdateProjectPersona(rootPath);
-      if (personaResult) {
-        detectedPersonaName = personaResult.persona.name;
-        console.log(`[Alex] Initialize: Detected persona ${personaResult.persona.id}, updated P6 to ${personaResult.persona.skill}`);
-        telemetry.log("command", "initialize_persona_detected", {
-          persona: personaResult.persona.id,
-          skill: personaResult.persona.skill,
-          confidence: personaResult.confidence
-        });
-      }
-    } catch (err) {
-      console.log('[Alex] Initialize: Persona detection skipped');
-    }
+    // Persona already detected and persisted above - just extract name for welcome
+    const detectedPersonaName = personaResult?.persona.name ?? '';
 
     const result = await vscode.window.showInformationMessage(
       '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',
@@ -607,10 +601,7 @@ async function createInitialManifest(
       dir: path.join(rootPath, ".github", "prompts"),
       prefix: ".github/prompts",
     },
-    {
-      dir: path.join(rootPath, ".github", "domain-knowledge"),
-      prefix: ".github/domain-knowledge",
-    },
+    // Note: domain-knowledge deprecated in v5.0 - DK files migrated to skills
     { dir: path.join(rootPath, ".github", "agents"), prefix: ".github/agents" },
   ];
 

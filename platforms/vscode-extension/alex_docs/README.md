@@ -77,17 +77,17 @@ The **Status Bar** shows a 🚀 Alex item in the bottom-right corner. Click it f
 
 The **Welcome Panel** lives in the Activity Bar on the left side (look for the 🚀 icon). It's your dashboard: health status, active goals, session information, and quick action buttons—all visible at a glance.
 
-For keyboard lovers: `Ctrl+Alt+D` for Dream, `Ctrl+Alt+S` for Self-Actualize, `Ctrl+Alt+K` to Sync to cloud, and `Ctrl+Alt+H` to open this guide.
+Use the **Command Palette** (`Ctrl+Shift+P`) and type "Alex:" to see all available commands.
 
 ---
 
-## ☁️ Sync — Portable Institutional Knowledge
+## 🌐 Global Knowledge — Cross-Project Learning
 
-Your team's knowledge shouldn't be trapped in one project or one machine. **Sync** backs everything up to a private GitHub Gist.
+Your expertise shouldn't be trapped in one project. **Global Knowledge** is a Git repository that stores patterns and insights across all your projects.
 
-Say *"sync my knowledge"* or *"backup to the cloud"* and Alex uploads all insights and patterns. When you open a different project or switch machines, sync again and your institutional knowledge is there.
+When you discover something worth remembering, Alex can save it globally. When you start a new project, that accumulated knowledge is available. Knowledge from Project A becomes available in Project B.
 
-Knowledge from Project A becomes available in Project B. Your team's expertise compounds over time and follows you everywhere.
+Set up Global Knowledge by creating a Git repository at `~/.alex/global-knowledge/` or let Alex help you configure it.
 
 ---
 

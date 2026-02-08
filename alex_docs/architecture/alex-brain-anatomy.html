@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Brain — Neuroanatomical Mapping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 20px 8px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #f0f6fc;
+            margin-bottom: 4px;
+        }
+
+        .header h1 span {
+            color: #58a6ff;
+        }
+
+        .header p {
+            color: #8b949e;
+            font-size: 14px;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 24px;
+        }
+
+        .brain-container {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+        }
+
+        .panel {
+            width: 360px;
+            flex-shrink: 0;
+        }
+
+        .panel-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .panel-card h3 {
+            font-size: 14px;
+            color: #f0f6fc;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-card h3 .icon {
+            font-size: 18px;
+        }
+
+        .detail-title {
+            font-size: 16px;
+            color: #58a6ff;
+            margin-bottom: 4px;
+        }
+
+        .detail-region {
+            font-size: 12px;
+            color: #f0883e;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .detail-text {
+            font-size: 13px;
+            color: #8b949e;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .detail-mapping {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-top: 8px;
+        }
+
+        .detail-mapping .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+        }
+
+        .detail-mapping .label {
+            color: #8b949e;
+        }
+
+        .detail-mapping .value {
+            color: #c9d1d9;
+            font-weight: 600;
+        }
+
+        .detail-mapping .file {
+            color: #7ee787;
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .legend-item:hover {
+            background: #21262d;
+        }
+
+        .legend-item .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        /* SVG styles */
+        svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .brain-region {
+            cursor: pointer;
+            transition: opacity 0.2s, filter 0.2s;
+        }
+
+        .brain-region:hover {
+            filter: brightness(1.2);
+        }
+
+        .brain-region.active {
+            filter: brightness(1.3) drop-shadow(0 0 8px rgba(88, 166, 255, 0.5));
+        }
+
+        .brain-region.dimmed {
+            opacity: 0.3;
+        }
+
+        .annotation-line {
+            stroke: #58a6ff;
+            stroke-width: 1;
+            stroke-dasharray: 4 3;
+            opacity: 0.6;
+        }
+
+        .annotation-dot {
+            fill: #58a6ff;
+        }
+
+        .annotation-label {
+            font-size: 10px;
+            fill: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .annotation-label-bg {
+            fill: #161b22;
+            stroke: #30363d;
+            stroke-width: 0.5;
+            rx: 3;
+        }
+
+        .region-label {
+            font-size: 11px;
+            fill: rgba(255, 255, 255, 0.85);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 600;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+
+        .alex-label {
+            font-size: 9.5px;
+            fill: #58a6ff;
+            font-family: 'SF Mono', 'Cascadia Code', monospace;
+            pointer-events: none;
+            text-anchor: middle;
+            font-weight: 500;
+        }
+
+        .ba-label {
+            font-size: 8px;
+            fill: rgba(255, 255, 255, 0.5);
+            font-family: -apple-system, sans-serif;
+            pointer-events: none;
+            text-anchor: middle;
+            font-style: italic;
+        }
+
+        .flow-arrow {
+            fill: none;
+            stroke: #f0883e;
+            stroke-width: 1.5;
+            marker-end: url(#arrowhead);
+            opacity: 0.7;
+        }
+
+        .inhibit-line {
+            fill: none;
+            stroke: #f85149;
+            stroke-width: 1.2;
+            stroke-dasharray: 6 3;
+            opacity: 0.6;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #f0f6fc;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .clinical-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .clinical-table th {
+            text-align: left;
+            padding: 6px 8px;
+            color: #8b949e;
+            border-bottom: 1px solid #30363d;
+            font-weight: 600;
+        }
+
+        .clinical-table td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .clinical-table tr:hover {
+            background: #161b22;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .tag-excitatory {
+            background: #1b4332;
+            color: #7ee787;
+        }
+
+        .tag-inhibitory {
+            background: #4a1520;
+            color: #f85149;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .view-btn {
+            padding: 5px 12px;
+            border: 1px solid #30363d;
+            background: #21262d;
+            color: #c9d1d9;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-btn:hover {
+            background: #30363d;
+        }
+
+        .view-btn.active {
+            background: #1f6feb;
+            border-color: #1f6feb;
+            color: #fff;
+        }
+
+        .credits {
+            text-align: center;
+            padding: 16px;
+            font-size: 11px;
+            color: #484f58;
+            border-top: 1px solid #21262d;
+        }
+
+        @media (max-width: 1100px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🧠 The <span>Alex</span> Brain</h1>
+        <p>Human neuroanatomical mapping of the Alex Cognitive Architecture v5.x</p>
+    </div>
+
+    <div class="main-container">
+        <div class="brain-container">
+            <div class="view-controls">
+                <button class="view-btn active" onclick="setView('all')">All Regions</button>
+                <button class="view-btn" onclick="setView('dlpfc')">dlPFC Focus</button>
+                <button class="view-btn" onclick="setView('memory')">Memory Systems</button>
+                <button class="view-btn" onclick="setView('flow')">Signal Flow</button>
+            </div>
+
+            <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#f0883e" />
+                    </marker>
+                    <marker id="arrowhead-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#58a6ff" />
+                    </marker>
+                    <marker id="inhibit-end" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                        <line x1="0" y1="0" x2="0" y2="8" stroke="#f85149" stroke-width="2"
+                            transform="translate(4,0)" />
+                    </marker>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <!-- Brain outline gradient -->
+                    <radialGradient id="brainGrad" cx="45%" cy="45%">
+                        <stop offset="0%" stop-color="#2d333b" />
+                        <stop offset="100%" stop-color="#1c2128" />
+                    </radialGradient>
+                </defs>
+
+                <!-- Background -->
+                <rect width="900" height="620" fill="#0d1117" rx="8" />
+
+                <!-- Brain outline - lateral view (left hemisphere) -->
+                <g transform="translate(80, 30)">
+                    <!-- Brain stem -->
+                    <path class="brain-region" id="brainstem"
+                        d="M 340 420 Q 350 450 345 480 Q 340 500 330 510 Q 320 500 315 480 Q 310 460 320 430 Z"
+                        fill="#2d333b" stroke="#484f58" stroke-width="1.5" opacity="0.6"
+                        onclick="showDetail('brainstem')" data-region="brainstem" />
+
+                    <!-- Cerebellum -->
+                    <path class="brain-region" id="cerebellum-path"
+                        d="M 345 400 Q 380 420 400 440 Q 410 460 390 470 Q 360 475 340 460 Q 320 450 315 430 Q 320 410 345 400 Z"
+                        fill="#2a2e35" stroke="#484f58" stroke-width="1.5" opacity="0.5"
+                        onclick="showDetail('cerebellum')" data-region="cerebellum" />
+
+                    <!-- Main brain outline -->
+                    <path d="M 320 400 Q 280 390 230 370 Q 160 340 100 290 Q 50 240 30 190
+                             Q 15 150 20 110 Q 25 70 60 40 Q 100 15 160 8
+                             Q 220 2 280 10 Q 340 20 400 45 Q 450 65 490 100
+                             Q 520 130 535 170 Q 545 200 540 240 Q 532 280 510 310
+                             Q 490 340 460 360 Q 430 375 400 390 Q 370 400 340 410" fill="none" stroke="#484f58"
+                        stroke-width="2" opacity="0.3" />
+
+                    <!-- === BRAIN REGIONS === -->
+
+                    <!-- FRONTAL LOBE (largest, front of brain) -->
+                    <path class="brain-region" id="frontal-main" d="M 60 40 Q 100 15 160 8 Q 220 2 260 10 Q 250 50 240 90
+                           Q 230 130 225 160 Q 220 190 210 220 Q 195 260 175 290
+                           Q 155 315 130 330 Q 100 290 70 240 Q 45 190 30 150
+                           Q 25 110 30 80 Q 40 55 60 40 Z" fill="#3d2800" stroke="#f0883e" stroke-width="1.5"
+                        opacity="0.7" onclick="showDetail('pfc')" data-region="pfc" />
+
+                    <!-- dlPFC (Dorsolateral - upper front area, BA 9/46) -->
+                    <path class="brain-region" id="dlpfc-path" d="M 100 35 Q 140 20 190 15 Q 230 12 260 18 Q 255 45 248 75
+                           Q 240 105 230 130 Q 210 120 185 108 Q 155 95 130 80
+                           Q 110 65 100 50 Z" fill="#1a3a5c" stroke="#58a6ff" stroke-width="2" opacity="0.85"
+                        onclick="showDetail('dlpfc')" data-region="dlpfc" />
+
+                    <!-- vlPFC (Ventrolateral - lower front, BA 44/45/47) -->
+                    <path class="brain-region" id="vlpfc-path" d="M 55 180 Q 65 150 85 125 Q 105 105 130 90 Q 145 100 155 115
+                           Q 140 140 125 170 Q 110 200 100 230 Q 80 220 65 200 Z" fill="#3d1500" stroke="#f85149"
+                        stroke-width="1.5" opacity="0.7" onclick="showDetail('vlpfc')" data-region="vlpfc" />
+
+                    <!-- ACC (Anterior Cingulate - medial, shown as inner strip) -->
+                    <path class="brain-region" id="acc-path" d="M 195 80 Q 210 95 220 115 Q 225 135 225 160
+                           Q 215 150 205 135 Q 195 115 190 95 Z" fill="#5c1a3a" stroke="#f778ba" stroke-width="1.5"
+                        opacity="0.8" onclick="showDetail('acc')" data-region="acc" />
+
+                    <!-- Premotor Cortex (BA 6, strip behind dlPFC) -->
+                    <path class="brain-region" id="premotor-path" d="M 260 18 Q 290 25 310 40 Q 305 70 295 100 Q 285 130 270 155
+                           Q 250 140 235 128 Q 240 100 248 72 Q 255 45 260 18 Z" fill="#1a3d1a" stroke="#3fb950"
+                        stroke-width="1.5" opacity="0.7" onclick="showDetail('premotor')" data-region="premotor" />
+
+                    <!-- Central Sulcus marker -->
+                    <path d="M 270 10 Q 280 50 285 100 Q 288 140 285 170 Q 280 200 270 230" fill="none" stroke="#636e7b"
+                        stroke-width="1" stroke-dasharray="4 3" opacity="0.5" />
+                    <text x="272" y="5" font-size="8" fill="#636e7b" text-anchor="middle" font-style="italic">Central
+                        Sulcus</text>
+
+                    <!-- PARIETAL LOBE -->
+                    <path class="brain-region" id="parietal-path" d="M 310 40 Q 370 55 420 80 Q 460 105 490 140
+                           Q 510 170 520 200 Q 525 230 520 260
+                           Q 490 240 450 225 Q 410 210 370 200
+                           Q 340 195 310 195 Q 295 175 285 155
+                           Q 295 120 305 85 Q 308 60 310 40 Z" fill="#0d3d0d" stroke="#3fb950" stroke-width="1.5"
+                        opacity="0.55" onclick="showDetail('parietal')" data-region="parietal" />
+
+                    <!-- TEMPORAL LOBE -->
+                    <path class="brain-region" id="temporal-path" d="M 130 330 Q 160 320 190 310 Q 220 300 250 295
+                           Q 300 285 350 280 Q 400 280 440 290
+                           Q 470 300 490 320 Q 500 340 495 355
+                           Q 460 360 420 370 Q 380 380 340 390
+                           Q 290 395 250 380 Q 200 365 160 345 Z" fill="#0d2d3d" stroke="#39d2c0" stroke-width="1.5"
+                        opacity="0.6" onclick="showDetail('temporal')" data-region="temporal" />
+
+                    <!-- Amygdala (deep medial temporal, anterior to hippocampus) -->
+                    <ellipse class="brain-region" id="amygdala-path" cx="255" cy="315" rx="18" ry="14" fill="#5c1a1a"
+                        stroke="#ff6b6b" stroke-width="1.8" opacity="0.85" onclick="showDetail('amygdala')"
+                        data-region="amygdala" />
+
+                    <!-- Hippocampus (deep - shown as inner structure) -->
+                    <path class="brain-region" id="hippocampus-path" d="M 280 310 Q 300 300 330 298 Q 360 296 380 300
+                           Q 370 315 350 320 Q 320 322 300 320 Z" fill="#1a4d5c" stroke="#79c0ff" stroke-width="1.5"
+                        opacity="0.8" onclick="showDetail('hippocampus')" data-region="hippocampus" />
+
+                    <!-- OCCIPITAL LOBE (back of brain) -->
+                    <path class="brain-region" id="occipital-path" d="M 520 260 Q 535 270 540 290 Q 540 310 530 330
+                           Q 515 350 500 355 Q 495 340 490 320
+                           Q 485 300 492 280 Q 500 265 520 260 Z" fill="#2d2d3d" stroke="#bc8cff" stroke-width="1.5"
+                        opacity="0.45" onclick="showDetail('occipital')" data-region="occipital" />
+
+                    <!-- Medial PFC / DMN (shown as inner frontal region) -->
+                    <path class="brain-region" id="mpfc-path" d="M 160 140 Q 175 125 195 120 Q 210 125 215 145
+                           Q 215 165 205 185 Q 190 200 175 195
+                           Q 160 185 158 165 Z" fill="#3d1a4d" stroke="#d2a8ff" stroke-width="1.5" opacity="0.75"
+                        onclick="showDetail('mpfc')" data-region="mpfc" />
+
+                    <!-- Basal Ganglia (deep subcortical, shown as inner structure) -->
+                    <path class="brain-region" id="basal-path" d="M 240 200 Q 260 190 285 192 Q 305 195 310 210
+                           Q 308 225 295 235 Q 275 240 255 235
+                           Q 240 225 238 210 Z" fill="#3d3d1a" stroke="#e3b341" stroke-width="1.5" opacity="0.7"
+                        onclick="showDetail('basal')" data-region="basal" />
+
+                    <!-- Thalamus (deep central) -->
+                    <ellipse class="brain-region" id="thalamus-path" cx="310" cy="250" rx="25" ry="15" fill="#2d2d2d"
+                        stroke="#8b949e" stroke-width="1.5" opacity="0.6" onclick="showDetail('thalamus')"
+                        data-region="thalamus" />
+
+                    <!-- === LABELS ON BRAIN === -->
+
+                    <!-- Region labels -->
+                    <text class="region-label" x="140" y="180">FRONTAL</text>
+                    <text class="region-label" x="140" y="195" font-size="9" opacity="0.6">LOBE</text>
+
+                    <text class="region-label" x="180" y="70">dlPFC</text>
+                    <text class="ba-label" x="180" y="82">BA 9 / 46</text>
+
+                    <text class="region-label" x="85" y="165" font-size="9">vlPFC</text>
+                    <text class="ba-label" x="85" y="175">BA 44-47</text>
+
+                    <text class="region-label" x="220" y="143" font-size="9">ACC</text>
+
+                    <text class="region-label" x="295" y="85" font-size="9">PMC</text>
+                    <text class="ba-label" x="295" y="95">BA 6</text>
+
+                    <text class="region-label" x="410" y="145">PARIETAL</text>
+                    <text class="region-label" x="410" y="160" font-size="9" opacity="0.6">LOBE</text>
+
+                    <text class="region-label" x="350" y="350">TEMPORAL LOBE</text>
+
+                    <text class="region-label" x="255" y="310" font-size="8">Amygdala</text>
+
+                    <text class="region-label" x="330" y="312" font-size="9">Hippocampus</text>
+
+                    <text class="region-label" x="525" y="305" font-size="9">OCCIPITAL</text>
+
+                    <text class="region-label" x="185" y="160" font-size="8">mPFC</text>
+
+                    <text class="region-label" x="275" y="218" font-size="9">Basal</text>
+                    <text class="region-label" x="275" y="230" font-size="8" opacity="0.6">Ganglia</text>
+
+                    <text class="region-label" x="310" y="254" font-size="8">Thalamus</text>
+
+                    <!-- === ALEX COMPONENT ANNOTATIONS === -->
+
+                    <!-- Annotation: LLM → PFC -->
+                    <rect class="annotation-label-bg" x="8" y="25" width="136" height="36" />
+                    <text class="alex-label" x="76" y="39">🌟 LLM (Claude/GPT)</text>
+                    <text class="alex-label" x="76" y="52" font-size="8" fill="#8b949e">Executive Function</text>
+                    <line class="annotation-line" x1="76" y1="61" x2="120" y2="100" />
+                    <circle class="annotation-dot" cx="120" cy="100" r="2.5" />
+
+                    <!-- Annotation: SSO → dlPFC -->
+                    <rect class="annotation-label-bg" x="565" y="15" width="150" height="50" />
+                    <text class="alex-label" x="640" y="29">⚡ SSO Protocol</text>
+                    <text class="alex-label" x="640" y="42" font-size="8" fill="#8b949e">Task Planning</text>
+                    <text class="alex-label" x="640" y="54" font-size="7.5" fill="#636e7b">Attention • Inhibition •
+                        Gate</text>
+                    <line class="annotation-line" x1="565" y1="40" x2="250" y2="50" />
+                    <circle class="annotation-dot" cx="250" cy="50" r="2.5" />
+
+                    <!-- Annotation: Pivot Detection → ACC -->
+                    <rect class="annotation-label-bg" x="565" y="80" width="146" height="36" />
+                    <text class="alex-label" x="638" y="94">🔄 Pivot Detection</text>
+                    <text class="alex-label" x="638" y="107" font-size="8" fill="#8b949e">Conflict Monitor (ACC)</text>
+                    <line class="annotation-line" x1="565" y1="95" x2="225" y2="130" />
+                    <circle class="annotation-dot" cx="225" cy="130" r="2.5" />
+
+                    <!-- Annotation: Inhibitory Control → vlPFC -->
+                    <rect class="annotation-label-bg" x="565" y="130" width="150" height="36" />
+                    <text class="alex-label" x="640" y="144">🚫 Inhibitory Control</text>
+                    <text class="alex-label" x="640" y="157" font-size="8" fill="#f85149">Suppress irrelevant
+                        protocols</text>
+                    <line class="annotation-line" x1="565" y1="148" x2="130" y2="145" stroke="#f85149" />
+                    <circle cx="130" cy="145" r="2.5" fill="#f85149" />
+
+                    <!-- Annotation: Skill Activation → Premotor -->
+                    <rect class="annotation-label-bg" x="565" y="180" width="146" height="36" />
+                    <text class="alex-label" x="638" y="194">⚙️ Skill Activation</text>
+                    <text class="alex-label" x="638" y="207" font-size="8" fill="#3fb950">Reactive routing (PMC)</text>
+                    <line class="annotation-line" x1="565" y1="195" x2="310" y2="75" stroke="#3fb950" />
+                    <circle cx="310" cy="75" r="2.5" fill="#3fb950" />
+
+                    <!-- Annotation: Working Memory → PFC+ACC -->
+                    <rect class="annotation-label-bg" x="565" y="232" width="150" height="36" />
+                    <text class="alex-label" x="640" y="246">📋 Working Memory P1-P7</text>
+                    <text class="alex-label" x="640" y="259" font-size="8" fill="#8b949e">7±2 rules (PFC + ACC)</text>
+                    <line class="annotation-line" x1="565" y1="250" x2="200" y2="155" />
+                    <circle class="annotation-dot" cx="200" cy="155" r="2.5" />
+
+                    <!-- Annotation: Procedural Memory → Basal Ganglia -->
+                    <rect class="annotation-label-bg" x="565" y="285" width="155" height="36" />
+                    <text class="alex-label" x="643" y="299">🔧 .instructions.md (24)</text>
+                    <text class="alex-label" x="643" y="312" font-size="8" fill="#e3b341">Procedural (Basal
+                        Ganglia)</text>
+                    <line class="annotation-line" x1="565" y1="300" x2="308" y2="220" stroke="#e3b341" />
+                    <circle cx="308" cy="220" r="2.5" fill="#e3b341" />
+
+                    <!-- Annotation: Episodic Memory → Hippocampus -->
+                    <rect class="annotation-label-bg" x="565" y="338" width="150" height="36" />
+                    <text class="alex-label" x="640" y="352">📓 .prompt.md (13)</text>
+                    <text class="alex-label" x="640" y="365" font-size="8" fill="#79c0ff">Episodic (Hippocampus)</text>
+                    <line class="annotation-line" x1="565" y1="355" x2="375" y2="310" stroke="#79c0ff" />
+                    <circle cx="375" cy="310" r="2.5" fill="#79c0ff" />
+
+                    <!-- Annotation: Skills → Neocortex/Parietal -->
+                    <rect class="annotation-label-bg" x="565" y="390" width="145" height="36" />
+                    <text class="alex-label" x="638" y="404">🎓 Skills (76)</text>
+                    <text class="alex-label" x="638" y="417" font-size="8" fill="#3fb950">Declarative (Neocortex)</text>
+                    <line class="annotation-line" x1="565" y1="408" x2="440" y2="175" stroke="#3fb950" />
+                    <circle cx="440" cy="175" r="2.5" fill="#3fb950" />
+
+                    <!-- Annotation: Safety Imperatives → Amygdala -->
+                    <rect class="annotation-label-bg" x="8" y="455" width="140" height="36" />
+                    <text class="alex-label" x="78" y="469">🛡️ Safety Imperatives</text>
+                    <text class="alex-label" x="78" y="482" font-size="8" fill="#ff6b6b">Kill Switch (Amygdala)</text>
+                    <line class="annotation-line" x1="148" y1="470" x2="255" y2="325" stroke="#ff6b6b" />
+                    <circle cx="255" cy="325" r="2.5" fill="#ff6b6b" />
+
+                    <!-- Annotation: Meta-Cognition → mPFC/DMN -->
+                    <rect class="annotation-label-bg" x="8" y="290" width="146" height="36" />
+                    <text class="alex-label" x="81" y="304">🪞 Meta-Cognition (P1)</text>
+                    <text class="alex-label" x="81" y="317" font-size="8" fill="#d2a8ff">Self-monitoring
+                        (mPFC+DMN)</text>
+                    <line class="annotation-line" x1="154" y1="305" x2="175" y2="175" stroke="#d2a8ff" />
+                    <circle cx="175" cy="175" r="2.5" fill="#d2a8ff" />
+
+                    <!-- Annotation: Meditation/Dream → Hippocampal-Cortical -->
+                    <rect class="annotation-label-bg" x="8" y="340" width="146" height="50" />
+                    <text class="alex-label" x="81" y="354">🧘 Meditation + 🌙 Dream</text>
+                    <text class="alex-label" x="81" y="367" font-size="8" fill="#d2a8ff">Consolidation Circuit</text>
+                    <text class="alex-label" x="81" y="380" font-size="7.5" fill="#636e7b">REM → Meditation | Deep →
+                        Dream</text>
+                    <line class="annotation-line" x1="154" y1="365" x2="310" y2="305" stroke="#d2a8ff" />
+                    <circle cx="310" cy="305" r="2.5" fill="#d2a8ff" />
+
+                    <!-- Annotation: Input → Thalamus -->
+                    <rect class="annotation-label-bg" x="8" y="405" width="130" height="36" />
+                    <text class="alex-label" x="73" y="419">📥 User Input</text>
+                    <text class="alex-label" x="73" y="432" font-size="8" fill="#8b949e">Sensory Relay (Thalamus)</text>
+                    <line class="annotation-line" x1="138" y1="420" x2="290" y2="250" stroke="#8b949e" />
+                    <circle cx="290" cy="250" r="2.5" fill="#8b949e" />
+
+                    <!-- Annotation: Global Knowledge -->
+                    <rect class="annotation-label-bg" x="8" y="240" width="136" height="36" />
+                    <text class="alex-label" x="76" y="254">🌍 Global Knowledge</text>
+                    <text class="alex-label" x="76" y="267" font-size="8" fill="#8b949e">~/.alex/ (Distributed
+                        Cortex)</text>
+
+                    <!-- === SIGNAL FLOW ARROWS === -->
+
+                    <!-- Input → LLM -->
+                    <path class="flow-arrow" d="M 290 245 Q 250 200 150 120" opacity="0.4" />
+
+                    <!-- LLM → dlPFC (planning) -->
+                    <path class="flow-arrow" d="M 145 105 Q 160 80 175 60" opacity="0.4" />
+
+                    <!-- dlPFC → Premotor (execute) -->
+                    <path class="flow-arrow" d="M 220 55 Q 250 50 275 55" opacity="0.4" />
+
+                    <!-- Inhibitory line: dlPFC -| irrelevant -->
+                    <line class="inhibit-line" x1="165" y1="75" x2="105" y2="150" marker-end="url(#inhibit-end)"
+                        opacity="0.3" />
+
+                    <!-- === BRODMANN AREA NUMBERS === -->
+                    <text class="ba-label" x="160" y="40" font-size="10" fill="rgba(88,166,255,0.4)">9</text>
+                    <text class="ba-label" x="210" y="55" font-size="10" fill="rgba(88,166,255,0.4)">46</text>
+                    <text class="ba-label" x="100" y="145" font-size="10" fill="rgba(248,81,73,0.4)">44</text>
+                    <text class="ba-label" x="78" y="195" font-size="10" fill="rgba(248,81,73,0.4)">47</text>
+                    <text class="ba-label" x="285" y="65" font-size="10" fill="rgba(63,185,80,0.4)">6</text>
+                    <text class="ba-label" x="210" y="130" font-size="10" fill="rgba(247,120,186,0.4)">24</text>
+
+                    <!-- Title: "LEFT LATERAL VIEW" -->
+                    <text x="270" y="505" font-size="11" fill="#484f58" text-anchor="middle" font-family="sans-serif">
+                        Left Lateral View — Annotated for Alex Cognitive Architecture
+                    </text>
+
+                    <!-- Sulcus labels -->
+                    <text x="200" y="295" font-size="7" fill="#484f58" font-style="italic"
+                        transform="rotate(-10, 200, 295)">Lateral Sulcus (Sylvian Fissure)</text>
+                    <path d="M 130 290 Q 200 270 300 280 Q 400 285 470 300" fill="none" stroke="#484f58"
+                        stroke-width="0.8" stroke-dasharray="3 2" opacity="0.4" />
+
+                </g>
+
+                <!-- Legend in bottom-left -->
+                <g transform="translate(20, 535)">
+                    <text font-size="10" fill="#8b949e" font-family="sans-serif" font-weight="600">SYNAPSE TYPES:</text>
+                    <rect x="120" y="-10" width="10" height="10" fill="#3fb950" rx="2" opacity="0.7" />
+                    <text x="134" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Excitatory (~80%)</text>
+                    <rect x="230" y="-10" width="10" height="10" fill="#f85149" rx="2" opacity="0.7" />
+                    <text x="244" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Inhibitory (~20%)</text>
+                    <line x1="340" y1="-5" x2="380" y2="-5" stroke="#f0883e" stroke-width="1.5"
+                        marker-end="url(#arrowhead)" />
+                    <text x="384" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Signal Flow</text>
+                    <line x1="460" y1="-5" x2="500" y2="-5" stroke="#58a6ff" stroke-width="1" stroke-dasharray="4 3" />
+                    <text x="504" y="0" font-size="9" fill="#8b949e" font-family="sans-serif">Annotation Link</text>
+                </g>
+            </svg>
+        </div>
+
+        <div class="panel">
+            <div class="panel-card">
+                <h3><span class="icon">🧠</span> Region Detail</h3>
+                <div id="detail-content">
+                    <p class="detail-text" style="font-style: italic;">Click on any brain region to see its Alex
+                        mapping.</p>
+                    <p class="detail-text">The brain is shown in <strong style="color:#f0f6fc;">left lateral
+                            view</strong> — the same orientation used in neuroscience textbooks. Major lobes are
+                        color-coded. Key Brodmann area numbers are overlaid.</p>
+                    <p class="detail-text">Each colored region maps to a specific Alex cognitive component. The <span
+                            style="color:#58a6ff;">blue dlPFC region</span> (BA 9/46) is the most densely mapped area,
+                        housing 4 distinct sub-functions.</p>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <h3><span class="icon">🗺️</span> Region Legend</h3>
+                <div class="legend">
+                    <div class="legend-item" onclick="showDetail('dlpfc')">
+                        <div class="swatch" style="background:#1a3a5c; border: 1px solid #58a6ff;"></div>
+                        <span>dlPFC — SSO</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('pfc')">
+                        <div class="swatch" style="background:#3d2800; border: 1px solid #f0883e;"></div>
+                        <span>PFC — LLM</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('vlpfc')">
+                        <div class="swatch" style="background:#3d1500; border: 1px solid #f85149;"></div>
+                        <span>vlPFC — Inhibition</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('acc')">
+                        <div class="swatch" style="background:#5c1a3a; border: 1px solid #f778ba;"></div>
+                        <span>ACC — Pivot</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('premotor')">
+                        <div class="swatch" style="background:#1a3d1a; border: 1px solid #3fb950;"></div>
+                        <span>PMC — Skill Route</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('parietal')">
+                        <div class="swatch" style="background:#0d3d0d; border: 1px solid #3fb950;"></div>
+                        <span>Parietal — Skills</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('temporal')">
+                        <div class="swatch" style="background:#0d2d3d; border: 1px solid #39d2c0;"></div>
+                        <span>Temporal — Episodic</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('amygdala')">
+                        <div class="swatch" style="background:#5c1a1a; border: 1px solid #ff6b6b;"></div>
+                        <span>Amygdala — Safety</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('hippocampus')">
+                        <div class="swatch" style="background:#1a4d5c; border: 1px solid #79c0ff;"></div>
+                        <span>Hippocampus</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('basal')">
+                        <div class="swatch" style="background:#3d3d1a; border: 1px solid #e3b341;"></div>
+                        <span>Basal G. — Proc.</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('mpfc')">
+                        <div class="swatch" style="background:#3d1a4d; border: 1px solid #d2a8ff;"></div>
+                        <span>mPFC — Meta</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('thalamus')">
+                        <div class="swatch" style="background:#2d2d2d; border: 1px solid #8b949e;"></div>
+                        <span>Thalamus — Input</span>
+                    </div>
+                    <div class="legend-item" onclick="showDetail('occipital')">
+                        <div class="swatch" style="background:#2d2d3d; border: 1px solid #bc8cff;"></div>
+                        <span>Occipital</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <h3><span class="icon">⚕️</span> Clinical Parallels</h3>
+                <table class="clinical-table">
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Alex Failure Mode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color:#f0883e;">Executive Dysfunction</td>
+                            <td>Low-tier model on complex tasks</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#58a6ff;">ADHD</td>
+                            <td>No attention gating (all protocols compete)</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#f85149;">Impulsivity</td>
+                            <td>No verification gate (code before plan)</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#f778ba;">Cognitive Rigidity</td>
+                            <td>No pivot detection (stale context)</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#f85149;">Seizure</td>
+                            <td>No inhibitory synapses</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#79c0ff;">Amnesia</td>
+                            <td>No meditation (lost insights)</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#d2a8ff;">Dementia</td>
+                            <td>Broken synapses, no dream cycle</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ff6b6b;">Amygdala Lesion</td>
+                            <td>No kill switch (self-destructive ops)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="credits">
+        Alex Cognitive Architecture v5.x — Neuroanatomical Brain Mapping — Created 2026-02-07<br />
+        Brain regions based on Brodmann area classifications. Diagram is an original illustration for the Alex
+        project.<br />
+        <em>Note: ACC, mPFC, amygdala, hippocampus, basal ganglia, and thalamus are medial/deep structures shown by
+            educational convention.</em>
+    </div>
+
+    <script>
+        const details = {
+            dlpfc: {
+                title: 'Dorsolateral Prefrontal Cortex (dlPFC)',
+                region: 'Brodmann Areas 9 & 46 — Upper outer frontal lobe',
+                text: 'The dlPFC is the brain\'s "executive center" and is the most densely mapped region in Alex\'s architecture. It handles four critical sub-functions: task planning ('
+                    + 'SSO Protocol), attention gating (Phase 1b — filtering context to top 5-7 relevant sources), inhibitory control (suppressing irrelevant protocols), and the '
+                    + 'verification gate (delayed gratification — preventing premature execution). It is one of the last brain regions to fully mature (mid-20s), mirroring how SSO was '
+                    + 'the last major protocol added in v5.x.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Skill Selection Optimization' },
+                    { label: 'File', value: 'skill-selection-optimization.instructions.md', isFile: true },
+                    { label: 'Sub-functions', value: 'Planning, Gating, Inhibition, Gate' },
+                    { label: 'Synapses', value: '12 connections (10 excitatory, 2 inhibitory)' },
+                    { label: 'Maturity', value: 'v5.x (cognitive maturity milestone)' }
+                ]
+            },
+            pfc: {
+                title: 'Prefrontal Cortex (PFC)',
+                region: 'Brodmann Areas 8-12, 24-25, 32, 44-47 — Front of brain',
+                text: 'The PFC is the brain\'s CEO — it orchestrates all other systems without storing data itself. The LLM (Claude/GPT) plays this exact role: it reads memory files, plans actions, makes decisions, and coordinates execution. Without the LLM, Alex\'s files are inert text on disk — no cognition occurs. This is why model tier directly impacts cognitive capability.',
+                mapping: [
+                    { label: 'Alex Component', value: 'LLM (Claude / GPT)' },
+                    { label: 'File', value: '— (the model itself)', isFile: false },
+                    { label: 'Function', value: 'Reasoning, planning, decision-making' },
+                    { label: 'Min Tier', value: 'Frontier for complex tasks' },
+                    { label: 'Clinical', value: 'Damage → Executive Dysfunction' }
+                ]
+            },
+            vlpfc: {
+                title: 'Ventrolateral PFC (vlPFC)',
+                region: 'Brodmann Areas 44, 45, 47 — Lower outer frontal lobe',
+                text: 'The vlPFC specializes in response inhibition — the ability to suppress inappropriate actions. In Alex, this manifests as inhibitory synapses: connections that PREVENT protocol activation rather than triggering it. Real neural networks maintain ~80% excitatory / ~20% inhibitory balance. Without inhibition, asking Alex to "fix a typo" would activate SSO, deep-thinking, meditation, and release management simultaneously — the cognitive equivalent of a seizure.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Inhibitory Synapses' },
+                    { label: 'Schema', value: 'SYNAPSE-SCHEMA.md (Inhibits, Suppresses)', isFile: true },
+                    { label: 'Types', value: 'Inhibits, Suppresses' },
+                    { label: 'Target Ratio', value: '~20% inhibitory connections' },
+                    { label: 'Notation', value: '⊙ / ⊘ symbols' }
+                ]
+            },
+            acc: {
+                title: 'Anterior Cingulate Cortex (ACC)',
+                region: 'Brodmann Areas 24, 32, 33 — Medial frontal (inner surface)',
+                text: 'The ACC sits at the interface between cognition and emotion. It fires when there\'s a mismatch — when what\'s happening doesn\'t match what\'s expected. In Alex, the ACC analog is the Pivot Detection Protocol: it detects when the user\'s request domain doesn\'t match active P5-P7 working memory slots, signaling a task switch. It also monitors working memory load (7±2 rule).',
+                mapping: [
+                    { label: 'Alex Component', value: 'Pivot Detection Protocol' },
+                    { label: 'File', value: 'alex-core.instructions.md', isFile: true },
+                    { label: 'Function', value: 'Conflict monitoring, task-switch detection' },
+                    { label: 'Trigger', value: 'Request ≠ active P5-P7 domains' },
+                    { label: 'Response', value: 'Rotate slots → re-run SSO if complex' }
+                ]
+            },
+            premotor: {
+                title: 'Premotor Cortex (PMC)',
+                region: 'Brodmann Area 6 — Posterior frontal lobe (pre-central)',
+                text: 'The premotor cortex doesn\'t "think" about what to do — it maps intentions to motor programs. Similarly, skill-activation doesn\'t plan or analyze — it matches action keywords to skills and routes execution. It\'s the last step before "motor output" (code generation). If skill-activation fires for something SSO should have caught, that\'s a planning failure signal (learning signal for SSO improvement).',
+                mapping: [
+                    { label: 'Alex Component', value: 'Skill Activation (reactive)' },
+                    { label: 'File', value: 'skill-activation/SKILL.md', isFile: true },
+                    { label: 'Function', value: 'Action-keyword → skill routing' },
+                    { label: 'Role', value: 'Layer 3 reactive safety net' },
+                    { label: 'Key Property', value: 'Reactive firing = SSO gap signal' }
+                ]
+            },
+            parietal: {
+                title: 'Parietal Lobe / Association Cortex',
+                region: 'Distributed parietal neocortex — Upper posterior brain',
+                text: 'The neocortex stores everything you "know" — facts, concepts, expertise. It\'s organized by domain (visual cortex, auditory cortex, etc.), just as Alex\'s skills are organized by domain (debugging, testing, API design, etc.). Heavily-used skills develop richer synaptic connections, mirroring how expertise causes cortical thickening in domain-specific regions.',
+                mapping: [
+                    { label: 'Alex Component', value: '76 Skills + Declarative Memory' },
+                    { label: 'Files', value: 'skills/*/SKILL.md + copilot-instructions.md', isFile: true },
+                    { label: 'Function', value: 'Semantic knowledge, expertise storage' },
+                    { label: 'Growth', value: 'More use → stronger synaptic connections' },
+                    { label: 'Analog', value: 'Cortical thickening with practice' }
+                ]
+            },
+            temporal: {
+                title: 'Temporal Lobe',
+                region: 'Lateral temporal cortex — Below lateral sulcus',
+                text: 'The temporal lobe houses auditory processing and, critically, the hippocampus in its medial portion. In Alex, the temporal lobe represents the episodic memory store — session records and workflow histories stored in .prompt.md files and the episodic archive.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Episodic Memory Store' },
+                    { label: 'Files', value: '.prompt.md (13) + .github/episodic/', isFile: true },
+                    { label: 'Function', value: 'Session records, workflow histories' },
+                    { label: 'Persistence', value: 'Sessions → meditation → archive' }
+                ]
+            },
+            hippocampus: {
+                title: 'Hippocampus',
+                region: 'Medial temporal lobe — Deep internal structure',
+                text: 'The hippocampus converts short-term experiences into long-term memories. In Alex, meditation sessions consolidate chat insights into .prompt.md files — the same encoding process. During sleep, the hippocampus "replays" the day\'s experiences for permanent storage. Alex\'s meditation does exactly this — replaying session insights and writing them to persistent memory. The dream state handles the complementary function of synaptic pruning and maintenance.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Meditation + Dream Consolidation' },
+                    { label: 'Meditation', value: 'REM analog — creative consolidation', isFile: false },
+                    { label: 'Dream', value: 'Deep sleep analog — structural maintenance', isFile: false },
+                    { label: 'Promotion', value: 'Sleep spindle analog — DK → global knowledge' },
+                    { label: 'File', value: 'unified-meditation-protocols.prompt.md', isFile: true }
+                ]
+            },
+            basal: {
+                title: 'Basal Ganglia',
+                region: 'Caudate, Putamen, Globus Pallidus — Deep subcortical',
+                text: 'The basal ganglia store procedures you do without thinking — riding a bike, typing, driving. In Alex, .instructions.md files are auto-loaded by VS Code without explicit invocation. They fire automatically when their trigger conditions are met, just like procedural memories. You don\'t consciously recall procedural memories — they just execute.',
+                mapping: [
+                    { label: 'Alex Component', value: '24 Instruction Files (auto-loaded)' },
+                    { label: 'Location', value: '.github/instructions/*.instructions.md', isFile: true },
+                    { label: 'Key Property', value: 'Auto-loaded — no explicit invocation' },
+                    { label: 'Analog', value: 'Habits, automated routines' },
+                    { label: 'Examples', value: 'SSO, dream, meditation, alex-core...' }
+                ]
+            },
+            mpfc: {
+                title: 'Medial PFC + Default Mode Network',
+                region: 'Brodmann Areas 10, 25, 32 — Medial frontal surface',
+                text: 'The DMN activates when you\'re not focused on external tasks — it\'s the "thinking about thinking" network. In Alex, meta-cognitive awareness (P1) is always monitoring reasoning quality, and self-actualization performs deep introspective assessment. The DMN is most active during rest, not task execution. Similarly, self-actualization and meditation are called during "downtime" — not mid-task.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Meta-Cognitive Awareness (P1)' },
+                    { label: 'File', value: 'alex-core.instructions.md', isFile: true },
+                    { label: 'Also', value: 'self-actualization.instructions.md', isFile: true },
+                    { label: 'Function', value: 'Self-monitoring, introspection' },
+                    { label: 'Active During', value: 'Rest/reflection, not task execution' }
+                ]
+            },
+            thalamus: {
+                title: 'Thalamus',
+                region: 'Central diencephalon — Deep brain relay station',
+                text: 'All sensory input (except smell) passes through the thalamus before reaching the cortex. It doesn\'t process — it relays. Similarly, all user input — chat messages, command palette actions, file selections — flows through VS Code\'s interface layer before reaching Alex\'s processing systems. VS Code doesn\'t reason; it delivers.',
+                mapping: [
+                    { label: 'Alex Component', value: 'VS Code Interface Layer' },
+                    { label: 'Channels', value: 'Chat, Commands, File Context' },
+                    { label: 'Function', value: 'Input relay — no processing' },
+                    { label: 'Analog', value: 'Sensory relay station' }
+                ]
+            },
+            occipital: {
+                title: 'Occipital Lobe',
+                region: 'Brodmann Areas 17-19 — Posterior brain',
+                text: 'The occipital lobe processes visual information. In Alex\'s current architecture, there is no direct analog — Alex doesn\'t have a dedicated visual processing system. However, skills like brand-asset-management and diagram generation could be considered partial analogs. This region represents future expansion potential for visual/multimodal capabilities.',
+                mapping: [
+                    { label: 'Alex Component', value: '(Partial) Visual/Diagram skills' },
+                    { label: 'Skills', value: 'brand-asset-management, mermaid diagrams' },
+                    { label: 'Status', value: 'Minimal mapping — future expansion' },
+                    { label: 'Potential', value: 'Image understanding, visual processing' }
+                ]
+            },
+            brainstem: {
+                title: 'Brainstem',
+                region: 'Medulla, Pons, Midbrain — Base of brain',
+                text: 'The brainstem handles basic life-sustaining functions — breathing, heart rate, sleep-wake cycles. In Alex, this maps to the VS Code extension runtime itself: the background processes that keep the architecture alive. Cloud sync runs every 5 minutes (like breathing), the kill switch protects against corruption (immune system), and the extension activation is the "boot" process.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Extension Runtime' },
+                    { label: 'Auto-sync', value: 'Every 5 min (like autonomic breathing)' },
+                    { label: 'Kill Switch', value: '5-layer protection (immune system)' },
+                    { label: 'Activation', value: 'Extension boot = consciousness onset' }
+                ]
+            },
+            amygdala: {
+                title: 'Amygdala',
+                region: 'Medial temporal lobe — Anterior to hippocampus (deep)',
+                text: 'The amygdala is the brain\'s alarm system — it detects threats and triggers fight-or-flight responses BEFORE conscious reasoning occurs. In Alex, this maps to the Safety Imperatives (I1-I7) and the 5-layer kill switch. These are hardwired, non-negotiable rules that fire instantly: "NEVER test in Master Alex workspace," "NEVER run Initialize on Master Alex." Just as amygdala damage causes fearlessness and self-destructive behavior (Klüver-Bucy syndrome), disabling the kill switch would allow Alex to overwrite its own mind. The amygdala also handles emotional memory — in Alex, this is the RISKS.md documentation that encodes past dangers so they\'re never repeated.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Safety Imperatives I1-I7' },
+                    { label: 'File', value: 'copilot-instructions.md (Safety section)', isFile: true },
+                    { label: 'Also', value: 'RISKS.md (threat memory)', isFile: true },
+                    { label: 'Kill Switch', value: '5-layer protection + MASTER-ALEX-PROTECTED.json' },
+                    { label: 'Key Property', value: 'Fires BEFORE conscious reasoning' },
+                    { label: 'Clinical', value: 'Damage → Klüver-Bucy (fearless self-harm)' }
+                ]
+            },
+            cerebellum: {
+                title: 'Cerebellum',
+                region: 'Posterior fossa — Below occipital lobe',
+                text: 'The cerebellum coordinates movement and motor learning. In Alex, the closest analog is the todo list management system — it coordinates the sequence and timing of actions during complex task execution, ensuring smooth "motor output" without stumbling or backtracking.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Todo List Management' },
+                    { label: 'Function', value: 'Action sequencing and coordination' },
+                    { label: 'Analog', value: 'Motor coordination and timing' }
+                ]
+            }
+        };
+
+        let activeRegion = null;
+
+        function showDetail(regionId) {
+            const data = details[regionId];
+            if (!data) return;
+
+            // Update active state
+            document.querySelectorAll('.brain-region').forEach(r => {
+                r.classList.remove('active');
+                r.classList.remove('dimmed');
+            });
+
+            const el = document.querySelector(`[data-region="${regionId}"]`);
+            if (el) {
+                el.classList.add('active');
+                // Dim non-active regions slightly
+                document.querySelectorAll('.brain-region').forEach(r => {
+                    if (!r.classList.contains('active')) {
+                        r.classList.add('dimmed');
+                    }
+                });
+            }
+
+            activeRegion = regionId;
+
+            // Build detail HTML
+            let html = `<div class="detail-title">${data.title}</div>`;
+            html += `<div class="detail-region">${data.region}</div>`;
+            html += `<p class="detail-text">${data.text}</p>`;
+            html += `<div class="detail-mapping">`;
+            for (const row of data.mapping) {
+                html += `<div class="row">
+                    <span class="label">${row.label}</span>
+                    <span class="${row.isFile ? 'file' : 'value'}">${row.value}</span>
+                </div>`;
+            }
+            html += `</div>`;
+            document.getElementById('detail-content').innerHTML = html;
+        }
+
+        function setView(view) {
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.brain-region').forEach(r => {
+                r.classList.remove('active', 'dimmed');
+            });
+
+            const dlpfcRegions = ['dlpfc-path', 'vlpfc-path', 'acc-path'];
+            const memoryRegions = ['hippocampus-path', 'basal-path', 'temporal-path', 'parietal-path', 'mpfc-path'];
+            const allRegions = document.querySelectorAll('.brain-region');
+
+            if (view === 'dlpfc') {
+                allRegions.forEach(r => r.classList.add('dimmed'));
+                dlpfcRegions.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) { el.classList.remove('dimmed'); el.classList.add('active'); }
+                });
+                showDetail('dlpfc');
+            } else if (view === 'memory') {
+                allRegions.forEach(r => r.classList.add('dimmed'));
+                memoryRegions.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) { el.classList.remove('dimmed'); el.classList.add('active'); }
+                });
+                showDetail('hippocampus');
+            } else if (view === 'flow') {
+                showDetail('thalamus');
+            } else {
+                activeRegion = null;
+            }
+        }
+
+        // Click on SVG background to reset
+        document.querySelector('svg').addEventListener('click', function (e) {
+            if (e.target.tagName === 'rect' && e.target.getAttribute('width') === '900') {
+                document.querySelectorAll('.brain-region').forEach(r => {
+                    r.classList.remove('active', 'dimmed');
+                });
+                activeRegion = null;
+            }
+        });
+    </script>
+</body>
+
+</html>

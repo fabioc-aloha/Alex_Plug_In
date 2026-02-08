@@ -90,6 +90,25 @@ async function withOperationLock<T>(
   }
 }
 
+/**
+ * Get language ID from file extension
+ */
+function getLanguageIdFromPath(filePath: string): string {
+  const ext = path.extname(filePath).toLowerCase();
+  const extMap: Record<string, string> = {
+    '.ts': 'typescript', '.tsx': 'typescriptreact',
+    '.js': 'javascript', '.jsx': 'javascriptreact',
+    '.py': 'python', '.rb': 'ruby', '.go': 'go',
+    '.rs': 'rust', '.java': 'java', '.cs': 'csharp',
+    '.cpp': 'cpp', '.c': 'c', '.h': 'c',
+    '.md': 'markdown', '.json': 'json', '.yaml': 'yaml',
+    '.yml': 'yaml', '.html': 'html', '.css': 'css',
+    '.scss': 'scss', '.sql': 'sql', '.sh': 'shellscript',
+    '.ps1': 'powershell', '.xml': 'xml'
+  };
+  return extMap[ext] || 'text';
+}
+
 export function activate(context: vscode.ExtensionContext) {
   // Get extension version for telemetry
   const extensionVersion = context.extension.packageJSON.version || "unknown";
@@ -586,6 +605,35 @@ export function activate(context: vscode.ExtensionContext) {
           description: "Generate tests for selected code",
           detail: "🧪 Jest, Mocha, pytest, etc.",
         },
+        // --- Multimodal ---
+        { label: "", kind: vscode.QuickPickItemKind.Separator },
+        {
+          label: "$(file-media) Generate Presentation",
+          description: "Create PowerPoint from Markdown or selection",
+          detail: "📊 Native PPTX export",
+        },
+        {
+          label: "$(unmute) Read Aloud",
+          description: "Read selected text with neural voices",
+          detail: "🎙️ Text-to-speech",
+        },
+        {
+          label: "$(file-media) Save as Audio",
+          description: "Export text to MP3 file",
+          detail: "🎵 Creates audio file in workspace",
+        },
+        // --- GitHub Integration ---
+        { label: "", kind: vscode.QuickPickItemKind.Separator },
+        {
+          label: "$(git-pull-request) Review Pull Request",
+          description: "AI-assisted PR review",
+          detail: "🔍 Fetches PRs from GitHub",
+        },
+        {
+          label: "$(github) Import GitHub Issues",
+          description: "Import issues as learning goals",
+          detail: "📋 Sync with GitHub Issues",
+        },
       ];
 
       const selected = await vscode.window.showQuickPick(items, {
@@ -634,6 +682,16 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.commands.executeCommand("alex.generateDiagram");
         } else if (selected.label.includes("Generate Tests")) {
           vscode.commands.executeCommand("alex.generateTests");
+        } else if (selected.label.includes("Generate Presentation")) {
+          vscode.commands.executeCommand("alex.generatePptx");
+        } else if (selected.label.includes("Read Aloud")) {
+          vscode.commands.executeCommand("alex.readAloud");
+        } else if (selected.label.includes("Save as Audio")) {
+          vscode.commands.executeCommand("alex.saveAsAudio");
+        } else if (selected.label.includes("Review Pull Request")) {
+          vscode.commands.executeCommand("alex.reviewPR");
+        } else if (selected.label.includes("Import GitHub Issues")) {
+          vscode.commands.executeCommand("alex.importGitHubIssues");
         }
       }
     },
@@ -745,21 +803,55 @@ export function activate(context: vscode.ExtensionContext) {
   // Code Review command
   const codeReviewDisposable = vscode.commands.registerCommand(
     "alex.codeReview",
-    async () => {
+    async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "code_review");
       try {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor || editor.selection.isEmpty) {
-          vscode.window.showWarningMessage("Select code to review first.");
-          endLog(true);
-          return;
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        // If URI provided (from explorer context menu), read file content
+        if (uri) {
+          try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            selectedText = new TextDecoder().decode(content);
+            fileName = path.basename(uri.fsPath);
+            languageId = getLanguageIdFromPath(uri.fsPath);
+          } catch (err) {
+            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+            endLog(false);
+            return;
+          }
+        } else {
+          // Try active editor
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
         }
 
-        const selectedText = editor.document.getText(editor.selection);
-        const fileName = editor.document.fileName.split(/[/\\]/).pop();
+        // If no text, fall back to input prompt
+        if (!selectedText) {
+          const userInput = await vscode.window.showInputBox({
+            prompt: 'Paste the code you want reviewed',
+            placeHolder: 'function example() { ... }',
+            ignoreFocusOut: true
+          });
+          
+          if (!userInput) {
+            endLog(true);
+            return;
+          }
+          selectedText = userInput;
+          fileName = 'input';
+          languageId = 'text';
+        }
         
         // Copy prompt to clipboard and open Agent mode
-        const prompt = `Review this code for issues, improvements, and best practices:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Review this code from ${fileName} for issues, improvements, and best practices:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
         vscode.commands.executeCommand("workbench.action.chat.openAgent");
@@ -777,20 +869,54 @@ export function activate(context: vscode.ExtensionContext) {
   // Debug This command
   const debugThisDisposable = vscode.commands.registerCommand(
     "alex.debugThis",
-    async () => {
+    async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "debug_this");
       try {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor || editor.selection.isEmpty) {
-          vscode.window.showWarningMessage("Select code or error message to debug.");
-          endLog(true);
-          return;
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        // If URI provided (from explorer context menu), read file content
+        if (uri) {
+          try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            selectedText = new TextDecoder().decode(content);
+            fileName = path.basename(uri.fsPath);
+            languageId = getLanguageIdFromPath(uri.fsPath);
+          } catch (err) {
+            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+            endLog(false);
+            return;
+          }
+        } else {
+          // Try active editor
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
         }
 
-        const selectedText = editor.document.getText(editor.selection);
-        const fileName = editor.document.fileName.split(/[/\\]/).pop();
+        // If no text, fall back to input prompt
+        if (!selectedText) {
+          const userInput = await vscode.window.showInputBox({
+            prompt: 'Paste the code or error message you want to debug',
+            placeHolder: 'Error: Cannot read property x of undefined...',
+            ignoreFocusOut: true
+          });
+          
+          if (!userInput) {
+            endLog(true);
+            return;
+          }
+          selectedText = userInput;
+          fileName = 'input';
+          languageId = 'text';
+        }
         
-        const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
         vscode.commands.executeCommand("workbench.action.chat.openAgent");
@@ -808,7 +934,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Generate Diagram command
   const generateDiagramDisposable = vscode.commands.registerCommand(
     "alex.generateDiagram",
-    async () => {
+    async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "generate_diagram");
       try {
         const diagramTypes = [
@@ -830,12 +956,30 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
-        const editor = vscode.window.activeTextEditor;
         let contextCode = "";
         let contextDescription = "";
-        if (editor && !editor.selection.isEmpty) {
-          contextCode = editor.document.getText(editor.selection);
-          contextDescription = `Based on this ${editor.document.languageId} code:\n`;
+        let languageId = "";
+
+        // If URI provided (from explorer context menu), read file content
+        if (uri) {
+          try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            contextCode = new TextDecoder().decode(content);
+            languageId = getLanguageIdFromPath(uri.fsPath);
+            contextDescription = `Based on ${path.basename(uri.fsPath)} (${languageId}):\n`;
+          } catch (err) {
+            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+            endLog(false);
+            return;
+          }
+        } else {
+          // Try active editor selection
+          const editor = vscode.window.activeTextEditor;
+          if (editor && !editor.selection.isEmpty) {
+            contextCode = editor.document.getText(editor.selection);
+            languageId = editor.document.languageId;
+            contextDescription = `Based on this ${languageId} code:\n`;
+          }
         }
 
         const diagramType = selected.label.replace(/\$\([^)]+\)\s*/, '');
@@ -843,7 +987,7 @@ export function activate(context: vscode.ExtensionContext) {
         // Create a new untitled markdown file with a template
         const content = `# ${diagramType}
 
-${contextDescription}${contextCode ? `\`\`\`${editor?.document.languageId || ''}\n${contextCode}\n\`\`\`\n\n` : ''}## Diagram
+${contextDescription}${contextCode ? `\`\`\`${languageId}\n${contextCode}\n\`\`\`\n\n` : ''}## Diagram
 
 \`\`\`mermaid
 ${selected.value}
@@ -883,9 +1027,11 @@ ${selected.value}
       const endLog = telemetry.logTimed("command", "generate_pptx");
       try {
         const sourceOptions = [
-          { label: "$(markdown) From Markdown File", description: "Convert .md to PPTX", value: "markdown" },
-          { label: "$(selection) From Selection", description: "Generate from selected text", value: "selection" },
-          { label: "$(new-file) New Presentation", description: "Create template to fill in", value: "new" },
+          { label: "$(markdown) From Structured Markdown", description: "Convert .md with layout hints to PPTX", value: "markdown" },
+          { label: "$(sparkle) Consult on Plain Text File", description: "AI-assisted storytelling design (Duarte method)", value: "plaintext" },
+          { label: "$(selection) From Selection (Structured)", description: "Parse selected markdown directly", value: "selection" },
+          { label: "$(sparkle) Consult on Selection", description: "AI transforms selection with consulting", value: "ai-selection" },
+          { label: "$(new-file) New Presentation Template", description: "Create blank template to fill in", value: "new" },
         ];
 
         const selected = await vscode.window.showQuickPick(sourceOptions, {
@@ -899,7 +1045,7 @@ ${selected.value}
         }
 
         // Import the generator dynamically to avoid loading it unnecessarily
-        const { generateAndSavePresentation, parseMarkdownToSlides } = await import("./generators/pptxGenerator");
+        const { generateAndSavePresentation, parseMarkdownToSlides, hasSlideStructure, analyzeSlideContent } = await import("./generators/pptxGenerator");
         
         if (selected.value === "markdown") {
           // Let user pick a markdown file
@@ -925,12 +1071,46 @@ ${selected.value}
           }
 
           const mdContent = (await vscode.workspace.fs.readFile(selectedFile.uri)).toString();
+          
+          // Check if content has structure
+          if (!hasSlideStructure(mdContent)) {
+            const choice = await vscode.window.showWarningMessage(
+              "This file appears to be plain text without slide structure. Use AI to transform it?",
+              "Use AI Transformation",
+              "Try Anyway"
+            );
+            
+            if (choice === "Use AI Transformation") {
+              // Redirect to AI-assisted flow
+              vscode.commands.executeCommand("alex.generatePptx");
+              endLog(true);
+              return;
+            } else if (!choice) {
+              endLog(true);
+              return;
+            }
+          }
+          
           const slides = parseMarkdownToSlides(mdContent);
           
           if (slides.length === 0) {
             vscode.window.showWarningMessage("No slides parsed from markdown. Use # for titles, - for bullets.");
             endLog(true);
             return;
+          }
+          
+          // Analyze and show quality feedback
+          const analysis = analyzeSlideContent(mdContent);
+          if (analysis.suggestions.length > 0 && analysis.score < 60) {
+            const improve = await vscode.window.showInformationMessage(
+              `📊 Quality score: ${analysis.score}/100. ${analysis.suggestions[0]}`,
+              "Continue Anyway",
+              "Cancel"
+            );
+            if (improve === "Cancel") {
+              endLog(true);
+              return;
+            }
           }
 
           const outputPath = selectedFile.uri.fsPath.replace(/\.md$/, ".pptx");
@@ -950,13 +1130,43 @@ ${selected.value}
 
         } else if (selected.value === "selection") {
           const editor = vscode.window.activeTextEditor;
-          if (!editor || editor.selection.isEmpty) {
-            vscode.window.showWarningMessage("Select markdown-formatted text to convert.");
-            endLog(true);
-            return;
-          }
+          const selection = editor?.selection;
+          let selectedText = editor && selection && !selection.isEmpty ? editor.document.getText(selection) : '';
 
-          const selectedText = editor.document.getText(editor.selection);
+          // If no editor or no selection, fall back to input prompt
+          if (!selectedText) {
+            const userInput = await vscode.window.showInputBox({
+              prompt: 'Enter markdown-formatted text for your presentation',
+              placeHolder: '# Title\n- Point 1\n- Point 2\n---\n# Slide 2',
+              ignoreFocusOut: true
+            });
+            
+            if (!userInput) {
+              endLog(true);
+              return;
+            }
+            selectedText = userInput;
+          }
+          
+          // Smart detection - suggest AI if no structure
+          if (!hasSlideStructure(selectedText)) {
+            const choice = await vscode.window.showWarningMessage(
+              "This text doesn't have slide structure. Use AI to transform it?",
+              "Use AI Transformation",
+              "Try Anyway"
+            );
+            
+            if (choice === "Use AI Transformation") {
+              // Redirect to AI-assisted flow - the selection is already there
+              vscode.commands.executeCommand("alex.generatePptx");
+              endLog(true);
+              return;
+            } else if (!choice) {
+              endLog(true);
+              return;
+            }
+          }
+          
           const slides = parseMarkdownToSlides(selectedText);
 
           if (slides.length === 0) {
@@ -983,7 +1193,7 @@ ${selected.value}
             return;
           }
 
-          const outputPath = `${workspaceFolder}/${outputName}`;
+          const outputPath = path.join(workspaceFolder, outputName);
           const result = await generateAndSavePresentation(
             slides,
             { title: outputName.replace(/\.pptx$/, "") },
@@ -1017,8 +1227,6 @@ ${selected.value}
 
 ## Section Divider [section]
 
-Section description
-
 ---
 
 # Conclusion
@@ -1029,9 +1237,15 @@ Section description
 
 ---
 
-> TIP: Use # for titles, - for bullets, > for notes
-> Use --- to separate slides
-> Add [section] to ## headers for section dividers
+<!-- PPTX Layout Reference:
+  # Title              → Title slide or main heading
+  ## Subtitle          → Subtitle on current slide
+  ## Title [section]   → Purple section divider
+  - bullet             → Bullet point
+  > text               → Speaker notes
+  ---                  → Slide separator
+  | col | col |        → Table slide
+-->
 `;
           
           const doc = await vscode.workspace.openTextDocument({
@@ -1040,6 +1254,184 @@ Section description
           });
           await vscode.window.showTextDocument(doc);
           vscode.window.showInformationMessage("📰 Fill in the template, then run 'Generate Presentation' → 'From Selection'");
+        } else if (selected.value === "plaintext") {
+          // AI-assisted plain text transformation
+          const textFiles = await vscode.workspace.findFiles("**/*.{txt,md}", "**/node_modules/**", 50);
+          if (textFiles.length === 0) {
+            vscode.window.showWarningMessage("No text files found in workspace.");
+            endLog(true);
+            return;
+          }
+
+          const fileItems = textFiles.map(uri => ({
+            label: vscode.workspace.asRelativePath(uri),
+            uri,
+          }));
+
+          const selectedFile = await vscode.window.showQuickPick(fileItems, {
+            placeHolder: "Select text file to transform into presentation",
+          });
+
+          if (!selectedFile) {
+            endLog(true);
+            return;
+          }
+
+          const textContent = (await vscode.workspace.fs.readFile(selectedFile.uri)).toString();
+          
+          // Present concept first (Duarte methodology)
+          const consultingPrompt = `You are a presentation design consultant using the Duarte methodology (Nancy Duarte, "Resonate").
+
+## PHASE 1: CONTENT ANALYSIS
+I will analyze this content and present a narrative concept for your approval.
+
+## SOURCE CONTENT:
+\`\`\`
+${textContent.substring(0, 6000)}
+\`\`\`
+
+---
+
+## PHASE 2: PRESENTATION CONCEPT
+
+Based on my analysis, here is the proposed **narrative storyboard**:
+
+### 📊 PRESENTATION CONCEPT
+
+**NARRATIVE ARC (Duarte Sparkline™):**
+The presentation alternates between "what is" (current state) and "what could be" (better future) to maintain engagement.
+
+\`\`\`
+HOOK → PROBLEM (what is) → VISION (what could be) → SOLUTION → PROOF → CALL TO ACTION → NEW BLISS
+\`\`\`
+
+### PROPOSED SLIDE STRUCTURE:
+1. **Title slide** - Hook that speaks to audience's challenge
+2. **The current state** - What is (establish stakes)
+3. **Why this matters** - Urgency/relevance
+4. **[Section]** - The Vision (divider)
+5. **What success looks like** - What could be  
+6. **The path forward** - Solution overview
+7. **Key evidence** - Data/stories that prove the point
+8. **[Section]** - Taking Action (divider)
+9. **Recommendations** - Concrete next steps
+10. **Call to action** - The New Bliss (attainable future)
+
+### SUGGESTED S.T.A.R. MOMENT™:
+(Something They'll Always Remember - a dramatic comparison, story, or visualization)
+
+---
+
+## YOUR FEEDBACK:
+Before I create the structured markdown, please tell me:
+1. Who is the **audience**? (executives, developers, students, investors, etc.)
+2. What should they **do/feel/know** after this presentation?
+3. Any specific **stories, data, or quotes** to emphasize?
+4. Anything to **add, remove, or reorder** in the structure above?
+
+Reply with your feedback, or say "Generate slides" to proceed with this concept.
+
+---
+
+*After approval, I will generate the structured markdown for final review before PPTX creation.*`;
+
+          // Open new document with consulting prompt
+          const doc = await vscode.workspace.openTextDocument({
+            content: consultingPrompt,
+            language: "markdown",
+          });
+          await vscode.window.showTextDocument(doc);
+          
+          vscode.window.showInformationMessage(
+            "📰 Review the concept, then edit or ask Copilot to refine it. Say 'Generate slides' when ready.",
+            "Open Copilot Chat"
+          ).then(selection => {
+            if (selection === "Open Copilot Chat") {
+              vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+            }
+          });
+          
+        } else if (selected.value === "ai-selection") {
+          // AI-assisted selection transformation with consulting
+          const editor = vscode.window.activeTextEditor;
+          const selection = editor?.selection;
+          let selectedText = editor && selection && !selection.isEmpty ? editor.document.getText(selection) : '';
+
+          // If no editor or no selection, fall back to input prompt
+          if (!selectedText) {
+            const userInput = await vscode.window.showInputBox({
+              prompt: 'Enter the text you want to transform into a presentation',
+              placeHolder: 'e.g., Our Q1 results showed 20% growth with key wins in...',
+              ignoreFocusOut: true
+            });
+            
+            if (!userInput) {
+              endLog(true);
+              return;
+            }
+            selectedText = userInput;
+          }
+          
+          // Consulting prompt with Duarte methodology
+          const consultingPrompt = `You are a presentation design consultant using the Duarte methodology (Nancy Duarte, "Resonate").
+
+## PHASE 1: CONTENT ANALYSIS
+Analyzing the selected content to create a compelling presentation...
+
+## SOURCE CONTENT:
+\`\`\`
+${selectedText.substring(0, 6000)}
+\`\`\`
+
+---
+
+## PHASE 2: PRESENTATION CONCEPT
+
+### 📊 NARRATIVE STORYBOARD
+
+**Framework**: Duarte Sparkline™ - alternating "what is" ↔ "what could be"
+
+**Proposed Arc**:
+1. **HOOK** - Opening that establishes stakes and speaks to audience's challenge
+2. **THE PROBLEM** - Current state (what is) that needs to change
+3. **THE VISION** - Better future (what could be) that's possible
+4. **THE PATH** - How to get from here to there  
+5. **THE PROOF** - Evidence, data, stories that validate the approach
+6. **THE ASK** - Clear call to action
+7. **NEW BLISS** - Vision of success achieved (the "happily ever after")
+
+### SUGGESTED S.T.A.R. MOMENT™:
+*(Something They'll Always Remember - propose a memorable element)*
+
+---
+
+## YOUR FEEDBACK NEEDED:
+
+1. **Audience**: Who will see this? (Their role, expertise level, concerns)
+2. **Objective**: What should they think/feel/do after?
+3. **Emphasis**: Any specific points, data, or stories to highlight?
+4. **Constraints**: Time limit? Number of slides?
+
+Reply with your answers, OR type **"Generate slides"** to proceed with this structure.
+
+---
+
+*Once approved, I'll create the structured markdown for your review before generating the PPTX.*`;
+
+          const doc = await vscode.workspace.openTextDocument({
+            content: consultingPrompt,
+            language: "markdown",
+          });
+          await vscode.window.showTextDocument(doc);
+          
+          vscode.window.showInformationMessage(
+            "📰 Select all (Ctrl+A), then press Ctrl+I → 'Execute this prompt'",
+            "Open Copilot Chat"
+          ).then(selection => {
+            if (selection === "Open Copilot Chat") {
+              vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+            }
+          });
         }
 
         endLog(true);
@@ -1074,7 +1466,7 @@ Section description
         }
 
         const outputPath = uri.fsPath.replace(/\.md$/, ".pptx");
-        const fileName = uri.fsPath.split(/[/\\]/).pop()?.replace(/\.md$/, "") || "presentation";
+        const fileName = path.basename(uri.fsPath, ".md") || "presentation";
         
         const result = await generateAndSavePresentation(
           slides,
@@ -1100,14 +1492,51 @@ Section description
   // Generate Tests command
   const generateTestsDisposable = vscode.commands.registerCommand(
     "alex.generateTests",
-    async () => {
+    async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "generate_tests");
       try {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor || editor.selection.isEmpty) {
-          vscode.window.showWarningMessage("Select code to generate tests for.");
-          endLog(true);
-          return;
+        let selectedText = '';
+        let fileName = 'input';
+        let languageId = 'text';
+
+        // If URI provided (from explorer context menu), read file content
+        if (uri) {
+          try {
+            const content = await vscode.workspace.fs.readFile(uri);
+            selectedText = new TextDecoder().decode(content);
+            fileName = path.basename(uri.fsPath);
+            languageId = getLanguageIdFromPath(uri.fsPath);
+          } catch (err) {
+            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+            endLog(false);
+            return;
+          }
+        } else {
+          // Try active editor
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const selection = editor.selection;
+            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
+            fileName = path.basename(editor.document.fileName);
+            languageId = editor.document.languageId;
+          }
+        }
+
+        // If no text, fall back to input prompt
+        if (!selectedText) {
+          const userInput = await vscode.window.showInputBox({
+            prompt: 'Paste the code you want to generate tests for',
+            placeHolder: 'function add(a, b) { return a + b; }',
+            ignoreFocusOut: true
+          });
+          
+          if (!userInput) {
+            endLog(true);
+            return;
+          }
+          selectedText = userInput;
+          fileName = 'input';
+          languageId = 'text';
         }
 
         const testFrameworks = [
@@ -1129,11 +1558,9 @@ Section description
           return;
         }
 
-        const selectedText = editor.document.getText(editor.selection);
-        const fileName = editor.document.fileName.split(/[/\\]/).pop();
         const frameworkName = framework.label.replace(/\$\([^)]+\)\s*/, '');
         
-        const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${editor.document.languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
         await vscode.env.clipboard.writeText(prompt);
         
         vscode.commands.executeCommand("workbench.action.chat.openAgent");
@@ -1436,8 +1863,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         <div class="settings-grid">
             <span><strong>workspace.protectedMode:</strong> ${alexSettings['workspace.protectedMode'] ?? 'undefined'}</span>
             <span><strong>m365.enabled:</strong> ${alexSettings['m365.enabled'] ?? 'undefined'}</span>
-            <span><strong>cloudSync.enabled:</strong> ${alexSettings['cloudSync.enabled'] ?? 'undefined'}</span>
-            <span><strong>cloudSync.autoSync:</strong> ${alexSettings['cloudSync.autoSync'] ?? 'undefined'}</span>
+            <span><strong>globalKnowledge.enabled:</strong> ${alexSettings['globalKnowledge.enabled'] ?? 'undefined'}</span>
         </div>
     </div>
     

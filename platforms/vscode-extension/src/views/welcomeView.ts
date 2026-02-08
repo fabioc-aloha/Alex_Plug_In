@@ -10,7 +10,7 @@ import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from "../chat/personaDetection";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 // Cloud sync deprecated - Gist sync removed in v5.0.1
-import { getCurrentSession, isSessionActive, Session } from "../commands/session";
+import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
@@ -107,7 +107,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "setupEnvironment":
           vscode.commands.executeCommand("alex.setupEnvironment");
           break;
-        case "reportIssue":
+        case "viewDiagnostics":
           vscode.commands.executeCommand("alex.viewBetaTelemetry");
           break;
         case "openChat":
@@ -135,6 +135,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "debugThis":
           vscode.commands.executeCommand("alex.debugThis");
           break;
+        case "codeReview":
+          vscode.commands.executeCommand("alex.codeReview");
+          break;
+        case "generateTests":
+          vscode.commands.executeCommand("alex.generateTests");
+          break;
         case "generateDiagram":
           vscode.commands.executeCommand("alex.generateDiagram");
           break;
@@ -149,6 +155,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         case "readAloud":
           vscode.commands.executeCommand("alex.readAloud");
+          break;
+        case "askAboutSelection":
+          vscode.commands.executeCommand("alex.askAboutSelection");
+          break;
+        case "saveSelectionAsInsight":
+          vscode.commands.executeCommand("alex.saveSelectionAsInsight");
+          break;
+        case "searchRelatedKnowledge":
+          vscode.commands.executeCommand("alex.searchRelatedKnowledge");
+          break;
+        case "generateImageFromSelection":
+          vscode.commands.executeCommand("alex.generateImageFromSelection");
           break;
         case "skillReview":
           vscode.commands.executeCommand("alex.skillReview");
@@ -255,8 +273,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       if (match) {
         return new Date(parseInt(match[1], 10));
       }
-    } catch {
-      // Ignore errors
+    } catch (err) {
+      console.warn('[Alex] Failed to get last dream date:', err);
     }
     return null;
   }
@@ -374,6 +392,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getErrorHtml(err: unknown): string {
+    const errorMessage = escapeHtml(String(err));
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -397,7 +416,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="error">
         <p>Failed to load Alex status</p>
-        <p style="font-size: 12px; opacity: 0.7;">${err}</p>
+        <p style="font-size: 12px; opacity: 0.7;">${errorMessage}</p>
         <button onclick="vscode.postMessage({command: 'refresh'})">Retry</button>
     </div>
     <script>
@@ -433,29 +452,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const personaName = persona?.name || 'Developer';
     const personaSkill = persona?.skill || 'code-quality';
     
-    // Persona accent color mapping (no pink/purple - use teal for research personas)
-    const personaAccentMap: Record<string, string> = {
-      'developer': 'var(--vscode-charts-blue)',
-      'academic': '#2aa198',
-      'researcher': '#2aa198',
-      'technical-writer': 'var(--vscode-charts-green)',
-      'architect': 'var(--vscode-charts-orange, #f0883e)',
-      'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
-      'devops': 'var(--vscode-charts-green)',
-      'content-creator': 'var(--vscode-charts-yellow)',
-      'fiction-writer': '#2aa198',
-      'project-manager': 'var(--vscode-charts-blue)',
-      'security': 'var(--vscode-charts-red)',
-      'student': '#2aa198',
-      'job-seeker': 'var(--vscode-charts-green)',
-      'presenter': 'var(--vscode-charts-yellow)',
-      'power-user': 'var(--vscode-charts-blue)'
-    };
-    const personaAccent = persona ? personaAccentMap[persona.id] || 'var(--vscode-charts-blue)' : 'var(--vscode-charts-blue)';
+    // Use persona's accent color directly, with fallback to blue
+    const personaAccent = persona?.accentColor || 'var(--vscode-charts-blue)';
     
     // Skill name mapping for display
     const skillNameMap: Record<string, string> = {
-      'code-quality': 'Code Quality',
+      'code-review': 'Code Review',
       'research-project-scaffold': 'Research Setup',
       'api-documentation': 'API Docs',
       'architecture-health': 'Architecture',
@@ -1005,7 +1007,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('reportIssue')" title="Alex Cognitive v${version} — Click for diagnostics" />
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" onclick="cmd('viewDiagnostics')" title="Alex Cognitive v${version} — Click for diagnostics" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
                 <span class="header-persona" onclick="cmd('skillReview')" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
@@ -1068,6 +1070,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>` : ''}
                 
                 <div class="action-group-label">DEV TOOLS</div>
+                <button class="action-btn" onclick="cmd('codeReview')" title="Get AI code review for selection or pasted code">
+                    <span class="action-icon">👀</span>
+                    <span class="action-text">Code Review</span>
+                </button>
+                <button class="action-btn" onclick="cmd('debugThis')" title="Debug code or error message">
+                    <span class="action-icon">🐛</span>
+                    <span class="action-text">Debug This</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateTests')" title="Generate tests for selection or pasted code">
+                    <span class="action-icon">🧪</span>
+                    <span class="action-text">Generate Tests</span>
+                </button>
                 <button class="action-btn" onclick="cmd('runAudit')">
                     <span class="action-icon">🔍</span>
                     <span class="action-text">Project Audit</span>
@@ -1075,10 +1089,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" onclick="cmd('releasePreflight')">
                     <span class="action-icon">🚀</span>
                     <span class="action-text">Release Preflight</span>
-                </button>
-                <button class="action-btn" onclick="cmd('debugThis')" title="Select code or error message, then click to generate a debug prompt">
-                    <span class="action-icon">🐛</span>
-                    <span class="action-text">Debug This</span>
                 </button>
                 <button class="action-btn" onclick="cmd('importGitHubIssues')" title="Import GitHub issues as learning goals">
                     <span class="action-icon">📋</span>
@@ -1090,6 +1100,22 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 <div class="action-group-label">MULTIMODAL</div>
+                <button class="action-btn" onclick="cmd('askAboutSelection')" title="Ask Alex about selected code or enter a question">
+                    <span class="action-icon">💬</span>
+                    <span class="action-text">Ask Alex</span>
+                </button>
+                <button class="action-btn" onclick="cmd('saveSelectionAsInsight')" title="Save selection or type an insight to knowledge">
+                    <span class="action-icon">💡</span>
+                    <span class="action-text">Save Insight</span>
+                </button>
+                <button class="action-btn" onclick="cmd('searchRelatedKnowledge')" title="Search Alex knowledge for related patterns">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-text">Search Knowledge</span>
+                </button>
+                <button class="action-btn" onclick="cmd('generateImageFromSelection')" title="Generate an image from description">
+                    <span class="action-icon">🖼️</span>
+                    <span class="action-text">Generate Image</span>
+                </button>
                 <button class="action-btn" onclick="cmd('generateDiagram')" title="Generate Mermaid diagrams from code or text">
                     <span class="action-icon">📊</span>
                     <span class="action-text">Generate Diagram</span>
@@ -1135,7 +1161,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">💬</span>
                     <span class="action-text">Provide Feedback</span>
                 </button>
-                <button class="action-btn" onclick="cmd('reportIssue')" title="View diagnostics and report issues">
+                <button class="action-btn" onclick="cmd('viewDiagnostics')" title="View diagnostics and report issues">
                     <span class="action-icon">🩺</span>
                     <span class="action-text">Diagnostics</span>
                 </button>
@@ -1158,8 +1184,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             vscode.postMessage({ command: 'refresh' });
         }
         
-        // Auto-refresh every 30 seconds
-        setInterval(refresh, 30000);
+        // Auto-refresh interval (30 seconds)
+        const AUTO_REFRESH_MS = 30000;
+        setInterval(refresh, AUTO_REFRESH_MS);
     </script>
 </body>
 </html>`;
@@ -1174,27 +1201,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
-  }
-
-  private _formatRelativeTime(date: Date): string {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-
-    if (diffMins < 1) {
-      return "Just now";
-    }
-    if (diffMins < 60) {
-      return `${diffMins}m ago`;
-    }
-
-    const diffHours = Math.floor(diffMins / 60);
-    if (diffHours < 24) {
-      return `${diffHours}h ago`;
-    }
-
-    const diffDays = Math.floor(diffHours / 24);
-    return `${diffDays}d ago`;
   }
 
   private _getGoalsHtml(goals: {
@@ -1303,7 +1309,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <div class="feature-category-title">📚 Knowledge Management</div>
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights stored in ~/.alex/</li>
-                            <li><strong>Cloud Sync</strong> - Automatic backup to GitHub Gists with conflict resolution</li>
+                            <li><strong>Knowledge Sync</strong> - Git-based knowledge repository with cross-project sharing</li>
                             <li><strong>Skill Library</strong> - 75 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>

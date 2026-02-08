@@ -1,14 +1,306 @@
 ---
 name: "Gamma Presentations Skill"
-description: "Generate professional presentations, documents, and websites using the Gamma API."
+description: "Generate professional presentations using the Gamma API with expert storytelling consulting based on Duarte methodology."
 applyTo: "**/*presentation*,**/*slides*,**/*deck*,**/*gamma*,**/*pitch*"
 ---
 
 # Gamma Presentations Skill
 
-> Generate professional presentations, documents, and websites using the Gamma API.
+> Generate professional presentations with expert storytelling consulting based on Duarte methodology.
 
-Gamma is an AI-powered platform with 50M+ users for creating presentations, documents, social posts, and websites. This skill enables Alex to generate polished content programmatically.
+Gamma is an AI-powered platform with 50M+ users for creating presentations, documents, social posts, and websites. This skill enables Alex to generate polished content programmatically **with professional presentation consulting**.
+
+## Presentation Consulting Methodology
+
+Alex uses the **Duarte methodology** — the industry-leading approach used by Nancy Duarte for Apple, Al Gore, and Fortune 500 companies.
+
+### The 7 Principles of Expert Presentation Design
+
+#### 1. The Hero's Journey Structure
+Every presentation follows story structure:
+- **Beginning**: Establish the current state ("what is")
+- **Middle**: Contrast with the vision ("what could be") 
+- **End**: Call to action and "new bliss" (attainable future)
+
+#### 2. Audience as Hero, Presenter as Mentor
+- The **audience** is the hero facing a challenge
+- The **presenter** (or content) is the mentor providing tools to overcome it
+- Position solutions as enabling the audience's success, not showcasing the presenter
+
+#### 3. The Presentation Sparkline™
+Alternate between "what is" and "what could be" throughout:
+```
+What is → What could be → What is → What could be → NEW BLISS
+```
+This contrast keeps audiences engaged (unlike flat reports or pure pitches).
+
+#### 4. S.T.A.R. Moments™
+Include "Something They'll Always Remember":
+- Dramatic demonstrations
+- Unexpected comparisons (like Steve Jobs sliding MacBook Air into envelope)
+- Emotional stories that crystallize the message
+
+#### 5. Data Storytelling
+Transform data into meaning:
+- **Humanize**: Make numbers relatable to individuals
+- **Compare**: Use unexpected units of measurement
+- **Surprise**: Lead with insight, not just charts
+
+#### 6. Visual Hierarchy
+- One idea per slide (rule of one)
+- Clear title that states the insight (not just topic)
+- 5-7 bullets maximum per slide
+- Use whitespace strategically
+
+#### 7. The New Bliss
+End with a clear vision of the attainable future:
+- What does success look like for the audience?
+- How will their world be better?
+- Concrete, achievable, inspiring
+
+---
+
+## Alex Consulting Workflow
+
+When a user provides plain text or rough content, Alex follows this **consulting process**:
+
+### Phase 1: Discovery
+Alex analyzes the content and asks clarifying questions:
+- Who is the audience? (executives, developers, investors, etc.)
+- What is the goal? (inform, persuade, inspire, teach)
+- What is the single most important takeaway?
+- Are there emotional stories or data points to highlight?
+
+### Phase 2: Concept Presentation
+Alex presents a **narrative storyboard**:
+```
+📊 PRESENTATION CONCEPT
+
+Title: [Compelling title framed as benefit to audience]
+Subtitle: [Supporting context]
+
+NARRATIVE ARC:
+┌─────────────────────────────────────────────────┐
+│ HOOK: [Opening that establishes stakes]        │
+│ PROBLEM: [What is - current pain/challenge]    │
+│ VISION: [What could be - better future]        │
+│ SOLUTION: [How to get there - your offering]   │
+│ PROOF: [Evidence, data, stories]               │
+│ CALL TO ACTION: [Clear next step]              │
+│ NEW BLISS: [Vision of success achieved]        │
+└─────────────────────────────────────────────────┘
+
+PROPOSED SLIDE STRUCTURE (10 slides):
+1. Title slide with hook subtitle
+2. The challenge your audience faces
+3. Why this matters now
+4. Section: The Vision [section divider]
+5. What success looks like
+6. The path forward
+7. Proof point 1: [data/story]
+8. Section: Taking Action [section divider]  
+9. Key recommendations
+10. Call to action + New Bliss
+
+S.T.A.R. MOMENT: [Proposed memorable element]
+```
+
+### Phase 3: User Feedback
+User refines the concept:
+- "Add more data on slide 7"
+- "Make the call to action stronger"
+- "I want to emphasize X instead of Y"
+
+### Phase 4: Structured Markdown Creation
+Alex generates the **full structured markdown** for approval:
+
+```markdown
+# [Title]
+
+## [Subtitle]
+
+> [Speaker notes for opening]
+
+---
+
+# [Slide 2 Title]
+
+- Bullet with **bold** for emphasis
+- Another key point
+- Third supporting point
+
+> [Speaker notes with talking points]
+
+---
+
+## [Section Name] [section]
+
+---
+```
+
+### Phase 5: User Approval
+User reviews the markdown:
+- Make inline edits if needed
+- Request changes to specific slides
+- Approve for generation
+
+### Phase 6: Generation
+Alex converts approved markdown to PPTX with:
+- Alex brand colors and typography
+- Proper slide layouts per the Duarte principles
+- Speaker notes preserved
+- Illustrations as specified
+
+---
+
+## Illustrations and Visual Elements
+
+Alex supports multiple types of illustrations in presentations.
+
+### Illustration Syntax
+
+Use markdown image syntax with type prefixes:
+
+| Syntax | Description | Example |
+|--------|-------------|---------|
+| `![icon:name]` | Lucide vector icon | `![icon:chart-bar]` |
+| `![icon:name#color]` | Icon with hex color | `![icon:lightbulb#0550ae]` |
+| `![stock:name]` | Stock business illustration | `![stock:collaboration]` |
+| `![svg:path]` | Explicit SVG file path | `![svg:./assets/diagram.svg]` |
+| `![logo:name]` | Auto-resolve from logos/ folder (PNG, JPG, SVG) | `![logo:acme]` |
+| `![ticker:SYMBOL]` | Company logo by stock ticker (via API) | `![ticker:AAPL]` |
+| `![image:path]` | Explicit image file path | `![image:./images/photo.png]` |
+
+### Company Logos
+
+#### Local Logo Collection (PNG, JPG, SVG)
+
+Place your company logos in a `logos/` folder (configurable via `alex.logos.folder` setting):
+
+```
+workspace/
+├── logos/
+│   ├── acme.png        # PNG logos supported
+│   ├── partner-a.jpg   # JPG logos supported  
+│   ├── microsoft.svg   # SVG logos supported
+│   └── google.webp     # WebP logos supported
+└── presentation.md
+```
+
+Reference by name (Alex auto-detects format):
+```markdown
+# Our Partners
+
+![logo:acme]
+![logo:partner-a]
+![logo:microsoft]
+
+- Partner A brings expertise in...
+```
+
+#### Ticker-Based Logo API
+
+Fetch company logos by stock ticker symbol (requires API key in settings):
+
+```markdown
+# Tech Giants Comparison
+
+![ticker:AAPL]
+![ticker:MSFT]  
+![ticker:GOOGL]
+
+| Company | Market Cap | Revenue |
+|---------|-----------|---------|
+| Apple | $3.0T | $394B |
+| Microsoft | $2.8T | $211B |
+| Google | $1.9T | $307B |
+```
+
+**Setup:**
+1. Get a free API key from [Brandfetch](https://brandfetch.com) (no attribution required) or [Logo.dev](https://logo.dev) (500K/mo free)
+2. Add to VS Code settings: `alex.logos.brandfetchClientId` or `alex.logos.logoDevToken`
+
+### Available Icons
+
+**Business & Charts**: `chart-bar`, `chart-line`, `chart-pie`, `trending-up`, `trending-down`, `target`, `trophy`, `briefcase`, `building`, `wallet`
+
+**People & Teams**: `users`, `user`, `user-check`, `handshake`
+
+**Technology**: `cpu`, `database`, `server`, `cloud`, `globe`, `code`, `terminal`, `wifi`, `brain`, `sparkles`
+
+**Communication**: `mail`, `message-circle`, `phone`, `share`, `video`, `presentation`
+
+**Actions & Status**: `check`, `check-circle`, `x`, `x-circle`, `plus`, `minus`, `alert-triangle`, `info`, `help-circle`
+
+**Objects & Concepts**: `lightbulb`, `book`, `calendar`, `clock`, `file`, `file-text`, `folder`, `star`, `heart`, `lock`, `unlock`, `shield`, `zap`, `rocket`
+
+**Arrows & Navigation**: `arrow-right`, `arrow-left`, `arrow-up`, `arrow-down`, `chevron-right`, `chevron-left`, `external-link`, `refresh`
+
+### Available Stock Illustrations
+
+| Name | Description |
+|------|-------------|
+| `collaboration` | Three connected circles representing teamwork |
+| `growth` | Bar chart with upward trend line |
+| `innovation` | Lightbulb with connected nodes |
+| `process` | Three-step workflow with arrows |
+| `security` | Shield with checkmark |
+| `network` | Hub-and-spoke network diagram |
+| `analytics` | Line chart with data points |
+| `timeline` | Horizontal timeline with milestones |
+
+### Example: Slide with Illustrations
+
+```markdown
+# Why Choose Us
+
+## Key Differentiators
+
+![icon:trophy#1a7f37]
+
+- Industry-leading performance
+- Enterprise-grade security
+- 24/7 expert support
+
+![stock:security]
+
+> Emphasize the security certification in the demo
+```
+
+---
+
+## Consulting Prompts
+
+Use these prompts to engage Alex as a presentation consultant:
+
+### Full Consulting Workflow
+```
+"Help me create a presentation about [topic]. 
+I want to present to [audience] to [goal].
+Here's my rough content: [paste content or file path]"
+```
+
+### Concept Review
+```
+"Review my presentation concept and suggest improvements:
+[paste existing content]"
+```
+
+### Storyboard Request
+```
+"Create a storyboard for a presentation on [topic].
+Audience: [who]
+Goal: [what you want them to do/feel/know]
+Key message: [single takeaway]"
+```
+
+### S.T.A.R. Moment Ideation
+```
+"What would be a memorable S.T.A.R. moment for a presentation about [topic]?
+I want the audience to remember [key insight]."
+```
+
+---
 
 ## When to Use
 
