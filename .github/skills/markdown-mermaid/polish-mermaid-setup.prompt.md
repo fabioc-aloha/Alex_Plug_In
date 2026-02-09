@@ -60,7 +60,7 @@ For additional styling control, copy the CSS from this skill:
 
 ```powershell
 # Copy markdown-light.css to workspace
-$skillPath = ".github/skills/markdown-mermaid/markdown-light.css"
+$skillPath = ".github/config/markdown-light.css"
 $targetPath = ".vscode/markdown-light.css"
 
 if (Test-Path $skillPath) {

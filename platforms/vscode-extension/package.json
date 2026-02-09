@@ -378,7 +378,7 @@
       }
     ],
     "markdown.previewStyles": [
-      "./.github/skills/markdown-mermaid/markdown-light.css"
+      "./.github/config/markdown-light.css"
     ],
     "taskDefinitions": [
       {
