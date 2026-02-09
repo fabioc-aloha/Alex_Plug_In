@@ -51,6 +51,12 @@
       "type": "references",
       "strength": 0.6,
       "note": "Comprehensive ecosystem research covering 16+ tools"
+    },
+    {
+      "target": ".github/skills/presentation-tool-selection/SKILL.md",
+      "type": "coordinated-by",
+      "strength": 0.9,
+      "note": "Tool selection decision matrix routes AI presentation requests here"
     }
   ],
   "activationBoost": [
