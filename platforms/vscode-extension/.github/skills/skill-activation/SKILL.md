@@ -48,7 +48,7 @@ Search this index when processing any task request:
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
-| ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx |
+| ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution |
 | global-knowledge-sync | sync knowledge, push gk, pull gk, gk sync, cloud sync, promote to global |
@@ -72,7 +72,8 @@ Search this index when processing any task request:
 | ⭐ microsoft-fabric | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
-| pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides |
+| pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides, use auto |
+| ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, use slides, use pitch, use auto, slide deck options |
 | post-mortem | run post-mortem, blameless review, incident analysis, action items, 5 whys |
 | practitioner-research | research methodology, case study, evidence collection, academic writing |
 | privacy-responsible-ai | responsible ai, ethical ai, bias detection, fairness, data minimization |

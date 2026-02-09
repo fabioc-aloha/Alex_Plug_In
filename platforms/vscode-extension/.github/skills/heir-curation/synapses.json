@@ -1,0 +1,39 @@
+{
+  "skill": "heir-curation",
+  "inheritance": "master-only",
+  "connections": [
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "curates",
+      "strength": 0.75,
+      "reason": "VS Code heir management"
+    },
+    {
+      "target": ".github/skills/m365-agent-debugging/SKILL.md",
+      "type": "curates",
+      "strength": 0.75,
+      "reason": "M365 heir management"
+    },
+    {
+      "target": ".github/skills/release-preflight/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "reason": "Heir releases need preflight"
+    },
+    {
+      "target": ".github/skills/architecture-refinement/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "reason": "Heir patterns shape master"
+    }
+  ],
+  "triggers": [
+    "heir",
+    "inherit",
+    "platform",
+    "deploy heir",
+    "curate"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

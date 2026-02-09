@@ -1,0 +1,120 @@
+---
+name: "Master Alex Audit"
+description: "Comprehensive project audit with 22 automated checks across security, quality, and health"
+---
+
+# Master Alex Audit
+
+> Comprehensive project audit with 22 automated checks across security, quality, and health
+
+## Overview
+
+**Extends:** [architecture-audit](.github/skills/architecture-audit/SKILL.md)
+
+Master Alex-specific audit procedures that leverage knowledge of:
+- Exact folder structure and file locations
+- Heir relationships (VS Code extension, M365 agent)
+- Safety imperatives and protection mechanisms
+- Build/release workflows
+- Platform-specific configurations
+
+**Total Audit Sections:** 22
+- **Master-Only (1-9):** Version alignment, heir sync, safety imperatives, build artifacts
+- **Inheritable (10-22):** UI, dependencies, security, tests, accessibility, localization, assets, config
+
+## Triggers
+
+- "master audit", "full audit"
+- "heir sync check", "platform alignment"
+- "pre-release master check"
+- "dependency audit", "security audit", "ui audit"
+- "test coverage", "accessibility audit", "bundle size"
+- Before publishing heirs to marketplace
+
+## Audit Quick Reference
+
+| # | Section | Inheritable | Priority |
+|---|---------|-------------|----------|
+| 1-9 | Master-Specific | ❌ | 🔴 Critical |
+| 10 | UI Audit | ✅ | 🟡 Medium |
+| 11 | Dependency Health | ✅ | 🔴 High |
+| 12 | TypeScript & Lint | ✅ | 🔴 High |
+| 13 | Security | ✅ | 🔴 High |
+| 14 | Bundle Size | ✅ | 🟡 Medium |
+| 15 | Git Hygiene | ✅ | 🟡 Medium |
+| 16 | Changelog | ✅ | 🟡 Medium |
+| 17 | API Compatibility | ✅ | 🟡 Medium |
+| 18 | Test Coverage | ✅ | 🟡 Medium |
+| 19 | Accessibility | ✅ | 🟢 Low |
+| 20 | Localization | ✅ | 🟢 Low |
+| 21 | Asset Integrity | ✅ | 🟢 Low |
+| 22 | Configuration Files | ✅ | 🟢 Low |
+
+## Production Scripts
+
+**Primary Script**: `scripts/audit-master-alex.ps1`
+
+```powershell
+# Full audit (all 22 sections)
+.\scripts\audit-master-alex.ps1
+
+# Quick audit (master-specific only, sections 1-9)
+.\scripts\audit-master-alex.ps1 -Section quick
+
+# Specific sections
+.\scripts\audit-master-alex.ps1 -Section 4,7,13
+```
+
+**Supporting Scripts**:
+
+| Script | Covers | Purpose |
+|--------|--------|---------|
+| `scripts/audit-master-alex.ps1` | 1-22 | Comprehensive audit |
+| `scripts/release-preflight.ps1` | 1, 5, 12, 16 | Version sync, build, lint |
+| `scripts/sync-master-to-heir.ps1` | 2 | Heir folder sync |
+| `scripts/build-extension-package.ps1` | 3 | Skill inheritance |
+| `scripts/validate-synapses.ps1` | 7 | Synapse validation |
+| `scripts/validate-skills.ps1` | N/A | Skill frontmatter |
+
+## Section Reference
+
+### Master-Specific (1-9)
+
+| # | Section | What It Checks |
+|---|---------|----------------|
+| 1 | Version Alignment | package.json ↔ CHANGELOG ↔ copilot-instructions |
+| 2 | Heir Folder Sync | Master → heir file counts |
+| 3 | Skill Inheritance | synapses.json inheritance values |
+| 4 | Safety Imperatives | Kill switch, protection markers |
+| 5 | Build Artifacts | dist/extension.js exists and recent |
+| 6 | Documentation Cross-Refs | Required links between docs |
+| 7 | Synapse Health | Valid connections, no orphans |
+| 8 | alex_docs Audit | Version refs, deprecated terms |
+| 9 | Skill Network Diagram | Node count matches actual skills |
+
+### Inheritable (10-22)
+
+| # | Section | What It Checks |
+|---|---------|----------------|
+| 10 | Extension UI | Dead buttons (window.open, location.reload) |
+| 11 | Dependency Health | npm audit vulnerabilities |
+| 12 | TypeScript & Lint | Compile errors, lint warnings |
+| 13 | Security | Secrets in code, CSP compliance |
+| 14 | Bundle Size | extension.js size |
+| 15 | Git Hygiene | Uncommitted changes, branch status |
+| 16 | Changelog | Format, version alignment |
+| 17 | API Compatibility | Deprecated VS Code APIs |
+| 18 | Test Coverage | Test file count vs source files |
+| 19 | Accessibility | ARIA labels, CSS variables |
+| 20 | Localization | l10n configuration |
+| 21 | Asset Integrity | Icon exists, no missing assets |
+| 22 | Configuration Files | launch.json, tsconfig.json, .vscodeignore |
+
+## Synapses
+
+See [synapses.json](synapses.json) for connections to:
+- `architecture-audit` (extends) - Generic audit foundation
+- `release-preflight` - Pre-release verification
+- `heir-curation` - Heir management
+- `architecture-health` - Structural integrity
+- `vscode-extension-patterns` - Extension-specific knowledge

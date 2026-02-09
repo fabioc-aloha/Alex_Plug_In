@@ -1,0 +1,50 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "release-process",
+  "version": "1.1.0",
+  "lastUpdated": "2026-02-06",
+  "inheritance": "master-only",
+  "connections": [
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "implements",
+      "strength": 1.0,
+      "when": "Starting any release workflow",
+      "yields": "Complete release procedures and checklists"
+    },
+    {
+      "target": ".github/skills/release-preflight/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.9,
+      "when": "Before publishing to marketplace",
+      "yields": "Pre-release validation checklist"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "when": "Packaging extension for release",
+      "yields": "Extension-specific release considerations"
+    },
+    {
+      "target": ".github/skills/heir-curation/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.9,
+      "when": "Preparing release package",
+      "yields": "Heir sync validation steps"
+    }
+  ],
+  "activationContexts": [
+    "release",
+    "publish",
+    "marketplace",
+    "vsix",
+    "vsce",
+    "PAT",
+    "personal access token",
+    "version bump",
+    "pre-release",
+    "401 unauthorized"
+  ]
+}

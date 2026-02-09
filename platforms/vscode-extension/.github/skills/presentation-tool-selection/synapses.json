@@ -1,0 +1,55 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "presentation-tool-selection",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/gamma-presentations/SKILL.md",
+            "type": "coordinates",
+            "strength": 0.95,
+            "reason": "Routes AI-generated presentation requests to Gamma skill"
+        },
+        {
+            "target": ".github/skills/pptx-generation/SKILL.md",
+            "type": "coordinates",
+            "strength": 0.95,
+            "reason": "Routes programmatic/data-driven requests to PptxGenJS skill"
+        },
+        {
+            "target": "alex_docs/gamma/MARP-AUTOMATION-PLAN.md",
+            "type": "references",
+            "strength": 0.85,
+            "reason": "Marp automation patterns and template workflows"
+        },
+        {
+            "target": "alex_docs/gamma/PRESENTATION-VISUALIZATION-ECOSYSTEM-2026.md",
+            "type": "references",
+            "strength": 0.8,
+            "reason": "Comprehensive ecosystem research for tool comparison"
+        },
+        {
+            "target": ".github/skills/text-to-speech/SKILL.md",
+            "type": "enhances",
+            "strength": 0.7,
+            "reason": "TTS can narrate presentation content for rehearsal"
+        }
+    ],
+    "triggers": [
+        "which presentation tool",
+        "what tool for slides",
+        "marp vs gamma",
+        "marp or gamma",
+        "pptx vs gamma",
+        "slides vs pitch",
+        "slides vs auto",
+        "pitch vs auto",
+        "use slides",
+        "use pitch",
+        "use auto",
+        "best presentation tool",
+        "presentation strategy",
+        "how to create slides",
+        "slide deck options"
+    ]
+}

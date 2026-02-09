@@ -23,6 +23,12 @@
             "target": ".github/skills/gamma-presentations/SKILL.md",
             "strength": 0.6,
             "context": "Offline alternative to Gamma for PPTX generation"
+        },
+        {
+            "type": "coordinated-by",
+            "target": ".github/skills/presentation-tool-selection/SKILL.md",
+            "strength": 0.9,
+            "context": "Tool selection decision matrix routes programmatic requests here"
         }
     ],
     "triggers": [
