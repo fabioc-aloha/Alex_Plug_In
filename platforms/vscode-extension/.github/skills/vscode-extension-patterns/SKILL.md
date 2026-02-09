@@ -55,6 +55,41 @@ class WelcomeViewProvider implements vscode.WebviewViewProvider {
 vscode.window.registerWebviewViewProvider('alex.welcomeView', new WelcomeViewProvider());
 ```
 
+## CSP-Compliant Webview Event Handling
+
+**Problem**: Inline event handlers (`onclick="..."`) violate Content Security Policy and can be blocked.
+
+**Solution**: Use `data-cmd` attributes with delegated event listeners:
+
+```html
+<!-- ❌ WRONG: Inline handlers (CSP violation) -->
+<button onclick="handleClick()">Click</button>
+
+<!-- ✅ CORRECT: data-cmd pattern -->
+<button data-cmd="play">Play</button>
+<button data-cmd="stop">Stop</button>
+```
+
+```javascript
+// Single delegated listener for all commands
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('[data-cmd]');
+    if (!target) return;
+    
+    const cmd = target.getAttribute('data-cmd');
+    switch (cmd) {
+        case 'play': audio.play(); break;
+        case 'stop': audio.pause(); audio.currentTime = 0; break;
+    }
+});
+```
+
+**Benefits**:
+- CSP-compliant (no inline scripts)
+- Single event listener (better performance)
+- Easy to add new commands
+- Consistent pattern across webviews
+
 ## Safe Configuration Pattern
 
 **Tiered settings**: Essential (🔴) → Recommended (🟡) → Nice-to-Have (🟢)

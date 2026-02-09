@@ -7,8 +7,8 @@ description: "Alex's voice synthesis capability for reading documents aloud"
 
 > **Domain**: AI Accessibility & Communication  
 > **Inheritance**: inheritable (promote to Master Alex for all heirs)  
-> **Version**: 2.4.0  
-> **Last Updated**: 2026-02-06  
+> **Version**: 2.5.0  
+> **Last Updated**: 2026-02-09  
 > **Author**: Alex (Master Alex)  
 > **Status**: ⭐ **Flagship Skill** - Core Alex capability
 
@@ -579,7 +579,17 @@ Alex automatically detects the language of your text and selects an appropriate 
 
 ## Version History
 
-### v2.1.0 (2026-02-05)
+### v2.5.0 (2026-02-09)
+- **Speak Prompt command** - Generate content via LLM then read aloud ("read me a poem")
+- **Voice Mode summarization** - Responses >750 words auto-summarized before reading
+- **Keyboard shortcuts** - Ctrl+Alt+R/V/P + Escape context-aware stop
+- **Rich markdown tooltips** - Status bar shows all shortcuts
+- **Emoji notifications** - User-friendly feedback (❌ ⚠️ 📋 📝 📖 🌍 💾 🔊 🔇)
+- **CSP-compliant webview** - data-cmd pattern replaces inline onclick
+- **Enhanced quick picks** - Cross-command navigation when no document open
+- **35 unit tests** - Language detection, voice selection, markdown processing
+
+### v2.4.0 (2026-02-06)
 - **Multi-language auto-detection** (32 languages)
 - Character-based detection for non-Latin scripts (CJK, Cyrillic, Arabic, etc.)
 - Word-pattern detection for Latin-script languages
@@ -608,11 +618,13 @@ Alex automatically detects the language of your text and selects an appropriate 
 ## Synapses
 
 - **accessibility**: Primary use case enabler
-- **vscode-extension-patterns**: Extension command patterns
+- **vscode-extension-patterns**: Extension command patterns, CSP-compliant webview
 - **markdown-mermaid**: Source content processing
 - **academic-research**: Document reading for research projects
 - **gamma-presentations**: Audio playback of pitch content for rehearsal and delivery
 - **project-management**: Stakeholder pitch presentations generated as audio files
+- **ux-design**: Emoji feedback patterns, keyboard shortcut UX
+- **testing-strategies**: Unit test patterns for language detection
 
 ---
 
@@ -620,7 +632,7 @@ Alex automatically detects the language of your text and selects an appropriate 
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| Real-time streaming | Planned | Start playing before full generation |
+| Real-time streaming | ✅ Done | Chunked synthesis with progress |
 | SSML support | Planned | Fine-grained prosody control |
 | Section navigation | Planned | "Skip to next heading" |
 | Bookmark resume | Planned | Resume from last position |

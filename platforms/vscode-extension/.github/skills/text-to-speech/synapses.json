@@ -2,11 +2,11 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "skillId": "text-to-speech",
-  "version": "2.4.0",
-  "lastUpdated": "2026-02-06",
+  "version": "2.5.0",
+  "lastUpdated": "2026-02-09",
   "inheritance": "inheritable",
   "promotionReady": true,
-  "promotionNotes": "v2.2.0: Chunking for long content, retry with backoff, speaker warmup, LM-based summarization",
+  "promotionNotes": "v2.5.0: speakPrompt command, voice mode summarization, keyboard shortcuts, CSP-compliant webview, 35 unit tests",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
@@ -102,17 +102,27 @@
     "narrate",
     "long content",
     "summarize for speech",
-    "speaker warmup"
+    "speaker warmup",
+    "speak prompt",
+    "voice mode",
+    "read me a poem",
+    "generate and speak"
   ],
   "metadata": {
     "created": "2026-02-05",
-    "updated": "2026-02-06",
+    "updated": "2026-02-09",
     "author": "Alex",
-    "implementation": "Native TypeScript WebSocket with chunking",
+    "implementation": "Native TypeScript WebSocket with chunking + LLM integration",
     "ttsEngine": "Microsoft Edge TTS",
     "defaultVoice": "en-US-GuyNeural",
     "maxChunkChars": 3000,
     "chunkTimeoutMs": 60000,
-    "speakerWarmupMs": 2000
+    "speakerWarmupMs": 2000,
+    "keyboardShortcuts": {
+      "readAloud": "Ctrl+Alt+R",
+      "toggleVoice": "Ctrl+Alt+V",
+      "speakPrompt": "Ctrl+Alt+P",
+      "stopReading": "Escape (when playing)"
+    }
   }
 }
