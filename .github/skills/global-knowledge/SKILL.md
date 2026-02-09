@@ -123,3 +123,105 @@ User learns something → Is it personal? → Copilot Memory
 ```
 
 **No duplication**: Each piece of information lives in ONE system.
+
+---
+
+## Promotion Candidate Patterns
+
+When scanning project knowledge for promotion candidates, use these patterns to identify high-value content:
+
+### 🎯 Strong Promotion Signals
+
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| **Cross-project applicability** | Would 3+ other projects benefit? | Error handling strategy that works anywhere |
+| **Resolution pattern** | Solved problem with concrete solution | "N+1 query fixed with eager loading" |
+| **Hard-won gotchas** | Prevents repeat mistakes | "Jest timers require runAllTimers() after async" |
+| **Architecture with rationale** | ADR-style decisions with "why" | "Chose event sourcing because..." |
+| **Pipeline/workflow patterns** | Automatable processes | CI/CD template, release flow |
+| **Integration patterns** | How systems connect | OAuth flow, API gateway setup |
+| **Migration patterns** | Version/format transformations | "Upgrading from v3 to v4 schema" |
+| **Schema/format patterns** | Data structures that work | Synapse JSON schema, config templates |
+
+### ❌ Anti-Promotion Signals
+
+| Signal | Why Skip | Example |
+|--------|----------|---------|
+| **Project-specific config** | Only works in one context | "Our AWS account settings" |
+| **Temporary workarounds** | Will be obsolete | "Hack until v2.0 releases" |
+| **Personal preferences** | Not generalizable | "I like 4 spaces" |
+| **Incomplete/draft content** | Needs validation | Work-in-progress notes |
+| **Already in GK** | Avoid duplicates | Check `index.json` first |
+| **Too specific names/IDs** | Not portable | Hardcoded team names, repo URLs |
+
+### Automated Scoring (Score ≥5 = Candidate)
+
+The extension evaluates DK files with this scoring:
+
+| Criteria | Points | Detection |
+|----------|--------|-----------|
+| Has synapses | +3 | Synapse format in content |
+| Well-structured (3+ H2 sections) | +2 | `## Section` headings |
+| Has tags defined | +1 | `**Tags**: tag1, tag2` |
+| Substantial content (>1KB) | +1 | File size |
+| Rich content (>5KB) | +2 | File size |
+| Has code examples | +2 | Code blocks in content |
+| General applicability | +1-3 | Contains: pattern, best practice, guideline, framework, principle, architecture |
+
+**Minimum for auto-promotion**: Score ≥ 5
+
+### Quick Decision Tree
+
+```
+Is this knowledge?
+├── Personal preference → Copilot Memory (not GK)
+├── Project-specific config → Keep in project DK
+├── Would I search for this in another project?
+│   ├── No → Keep in project DK
+│   └── Yes → Continue...
+│       ├── Is it a reusable solution? → Pattern (GK-*)
+│       └── Is it a timestamped learning? → Insight (GI-*)
+```
+
+### Real Examples from Curation
+
+These patterns were identified during cross-project knowledge curation:
+
+**Promoted as Patterns (GK-*):**
+- `GK-kill-switch-pattern-protecting-master-alex.md` — Safety mechanism applicable to any critical system
+- `GK-synapse-schema-2026-standard.md` — Data format standard for the entire architecture
+- `GK-domain-knowledge-azure-synapse-pipeline-.md` — ETL patterns for data engineering
+
+**Promoted as Insights (GI-*):**
+- `GI-agent-consolidation-pattern-kiss-merge-2026-02-09.md` — Lesson from merging duplicate agents
+- `GI-schema-migration-discrimination-flag-vs-change-2026-02-09.md` — Distinguishing migration types
+- `GI-post-upgrade-verification-checklist-2026-02-09.md` — Checklist developed after failed upgrade
+
+### Source Priority for Promotion
+
+When curating from multiple projects:
+
+| Source Type | Priority | Rationale |
+|-------------|----------|-----------|
+| Master Alex episodic memories | Highest | Core cognitive learnings |
+| Production project DK files | High | Battle-tested knowledge |
+| Platform heir DK files | Medium | May have implementation-specific details |
+| Research/experimental projects | Lower | May not be validated |
+| Archive content | Lowest | May be outdated |
+
+### Promotion Workflow Commands
+
+```
+@alex /promote                  # Interactive promotion from project DK
+@alex /saveinsight              # Quick insight capture
+@alex /knowledgestatus          # Check current GK health
+@alex /knowledge <query>        # Search before adding (avoid duplicates)
+```
+
+---
+
+## Synapses
+
+**Synapse**: [heir-skill-promotion.instructions.md](../../instructions/heir-skill-promotion.instructions.md) (0.9, procedural, bidirectional) — "How skills move from heirs to Master"
+**Synapse**: [global-knowledge-curation.instructions.md](../../instructions/global-knowledge-curation.instructions.md) (0.85, procedural, bidirectional) — "Periodic cleanup and implementation"
+**Synapse**: [unified-meditation-protocols.prompt.md](../../prompts/unified-meditation-protocols.prompt.md) (0.8, episodic, forward) — "Auto-promotion during meditation"

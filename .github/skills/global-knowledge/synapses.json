@@ -26,6 +26,24 @@
       "type": "stores",
       "strength": 0.9,
       "reason": "Primary storage for cross-project patterns and insights"
+    },
+    {
+      "target": ".github/instructions/heir-skill-promotion.instructions.md",
+      "type": "informs",
+      "strength": 0.9,
+      "reason": "Promotion candidate patterns guide heir skill evolution"
+    },
+    {
+      "target": ".github/instructions/global-knowledge-curation.instructions.md",
+      "type": "informs",
+      "strength": 0.85,
+      "reason": "Curation protocol uses promotion patterns"
+    },
+    {
+      "target": ".github/prompts/unified-meditation-protocols.prompt.md",
+      "type": "triggers",
+      "strength": 0.8,
+      "reason": "Auto-promotion during meditation sessions"
     }
   ],
   "triggers": [
@@ -34,7 +52,10 @@
     "pattern",
     "cross-project",
     "global",
-    "reusable"
+    "reusable",
+    "promotion",
+    "promote",
+    "candidate"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

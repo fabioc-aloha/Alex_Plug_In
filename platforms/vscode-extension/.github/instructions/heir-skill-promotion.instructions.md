@@ -3,6 +3,24 @@
 > How skills evolve from heir projects to Master Alex
 
 **Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (0.8, procedural, bidirectional) - "heir develops expertise"
+**Synapse**: [.github/skills/global-knowledge/SKILL.md] (0.9, declarative, forward) - "promotion candidate patterns"
+
+---
+
+## Quick Reference: Promotion Patterns
+
+See [global-knowledge skill](../skills/global-knowledge/SKILL.md#promotion-candidate-patterns) for detailed patterns. Quick summary:
+
+| Strong Signals | Anti-Signals |
+|----------------|--------------|
+| Cross-project applicability (3+ projects) | Project-specific config |
+| Resolution pattern with solution | Temporary workarounds |
+| Hard-won gotchas | Personal preferences |
+| Architecture with rationale | Incomplete/draft content |
+| Pipeline/workflow patterns | Already exists in GK |
+| Integration patterns | Too specific names/IDs |
+
+**Auto-promotion score ≥ 5**: synapses (+3), structure (+2), tags (+1), content size (+1-3), code examples (+2), general terms (+1-3)
 
 ---
 
