@@ -1191,6 +1191,56 @@ blockquote p {
 
 ---
 
+## 🔍 Diagram Audit Methodology
+
+When performing comprehensive diagram audits across a project or documentation set, follow this 4-step process:
+
+### Step 1: Enumerate
+
+Identify all Mermaid diagrams in the target scope:
+
+```powershell
+# Find all markdown files with mermaid blocks
+Get-ChildItem -Recurse -Filter "*.md" | 
+  Select-String -Pattern '```mermaid' | 
+  Group-Object Path | 
+  Select-Object Name, Count
+```
+
+### Step 2: Categorize
+
+Create an inventory table to track diagram state:
+
+| # | File | Diagram Type | Status | Issues |
+|---|------|-------------|--------|--------|
+| 1 | README.md | flowchart | ⚠️ | Missing init |
+| 2 | arch.md | sequence | ✅ | None |
+| 3 | flow.md | flowchart | ❌ | Parse error |
+
+**Status codes**: ✅ OK, ⚠️ Needs fix, ❌ Broken
+
+### Step 3: Batch Fix
+
+Apply fixes in batches by issue type:
+
+1. **Missing init directives** — Add `%%{init}%%` theme block
+2. **Reserved word errors** — Rephrase or quote labels
+3. **Parse errors** — Apply 4 safety rules
+4. **Style inconsistencies** — Apply GitHub Pastel v2 palette
+
+### Step 4: Validate
+
+Re-render all diagrams and confirm fixes:
+
+- [ ] All diagrams render in VS Code preview
+- [ ] All diagrams render on GitHub
+- [ ] Color palette is consistent
+- [ ] No parse errors in console
+
+**Typical results**: A 30-40 diagram audit catches 10-15 issues in the first pass.
+
+---
+
 ## ✅ Quality Checklist
 
 ### Before Committing

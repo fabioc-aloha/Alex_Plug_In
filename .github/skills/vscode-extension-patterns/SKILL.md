@@ -226,6 +226,59 @@ function getNonce(): string {
 }
 ```
 
+## CSP Event Delegation (onclick → data-cmd)
+
+**Problem**: After adding CSP with `script-src 'nonce-${nonce}'`, all inline event handlers (`onclick`, `onchange`) stop working because CSP blocks inline JavaScript.
+
+**Solution**: Replace inline handlers with data attributes and event delegation:
+
+```html
+<!-- ❌ BLOCKED BY CSP -->
+<button onclick="cmd('upgrade')">Upgrade</button>
+<button onclick="cmd('launchSkill', {skill: 'code-review'})">Review</button>
+
+<!-- ✅ CSP-COMPLIANT -->
+<button data-cmd="upgrade">Upgrade</button>
+<button data-cmd="launchSkill" data-skill="code-review">Review</button>
+
+<script nonce="${nonce}">
+    document.addEventListener('click', function(e) {
+        const el = e.target.closest('[data-cmd]');
+        if (el) {
+            e.preventDefault();
+            const command = el.getAttribute('data-cmd');
+            const skill = el.getAttribute('data-skill');
+            vscode.postMessage(skill ? { command, skill } : { command });
+        }
+    });
+</script>
+```
+
+**Benefits**:
+- Security — CSP blocks all inline scripts
+- Performance — Single event listener vs many handlers
+- Maintainability — Commands defined as data, not code
+
+## Webview Sandbox: postMessage Required
+
+**Problem**: `window.open()`, `location.reload()`, and direct external links silently fail in sandboxed webviews.
+
+**Solution**: WebView sends message to extension host; extension performs privileged action:
+
+```typescript
+// In webview HTML
+vscode.postMessage({ type: 'openExternal', url: 'https://example.com' });
+
+// In extension host
+panel.webview.onDidReceiveMessage(async (message) => {
+    if (message.type === 'openExternal') {
+        await vscode.env.openExternal(vscode.Uri.parse(message.url));
+    }
+});
+```
+
+**Key insight**: WebView ↔ Extension Host communication mirrors browser Content Script ↔ Background Script patterns.
+
 ## Telemetry Opt-Out Compliance
 
 **Always respect VS Code's telemetry settings:**
@@ -274,6 +327,37 @@ export function activate(context: vscode.ExtensionContext) {
 - Use `affectsConfiguration()` to filter relevant changes
 - Push listener to `context.subscriptions` for cleanup
 - Re-read config values, don't cache indefinitely
+
+## Integration Audit Checklist
+
+**10-category audit scoring system** (5 points each, 50 total):
+
+| # | Category | What to Check |
+|---|----------|---------------|
+| 1 | Activation Events | package.json activationEvents match actual needs |
+| 2 | Extension Context | context.subscriptions, secrets, globalState usage |
+| 3 | Disposable Management | All disposables pushed to subscriptions |
+| 4 | Command Registration | Commands in package.json match registerCommand |
+| 5 | Configuration Access | getConfiguration usage, onDidChangeConfiguration |
+| 6 | Webview Security | CSP policies, nonce usage, enableScripts |
+| 7 | Language Model/Chat | vscode.lm patterns, tool registration |
+| 8 | Telemetry | vscode.env.isTelemetryEnabled respected |
+| 9 | Error Handling | try/catch patterns, error type handling |
+| 10 | File System | vscode.workspace.fs vs Node.js fs |
+
+**Quick wins** (high impact, low effort):
+- Telemetry opt-out: Check `vscode.env.isTelemetryEnabled`
+- CSP on webviews: Add Content-Security-Policy with nonce
+- Config listeners: Add `onDidChangeConfiguration` for runtime updates
+- Secret storage: Use `context.secrets` instead of settings for tokens
+
+**Scoring**:
+- 45-50: Excellent — Ready for publish
+- 40-44: Good — Minor fixes
+- 35-39: Fair — Address before publish
+- <35: Needs Work — Major refactoring
+
+**When to apply**: Before marketplace publishing, after major features, quarterly reviews.
 
 ## Synapses
 

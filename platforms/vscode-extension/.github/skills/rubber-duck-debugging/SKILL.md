@@ -141,6 +141,34 @@ The best rubber duck debugging feels like a conversation, not an interrogation. 
 - User remembers how they found it
 - User gets better at debugging over time
 
+## AI Symbiosis: The Articulation Partner
+
+Traditional rubber duck debugging works because **forcing scattered thoughts into language reveals gaps**. AI partnerships amplify this:
+
+| Traditional Rubber Duck | AI Partner |
+|------------------------|------------|
+| Silent listener | Can respond and probe |
+| No memory | Remembers across sessions |
+| No pattern matching | Spots patterns you miss |
+| One-way articulation | Bidirectional refinement |
+
+**The insight**: When users explain problems to an AI, the act of articulation often leads to self-discovered solutions. The AI doesn't need to solve the problem—it provides a **thinking surface** that forces coherent expression.
+
+**Era 3 reframe**:
+- The human generates insight through articulation
+- The AI provides *structure* for generating insight
+- Neither party "solves" alone—the collaboration surface enables solutions
+
+> "The best debugging sessions are the ones where you say 'wait, I think I just figured it out' mid-explanation."
+
+**When applying this**:
+1. Don't immediately offer solutions
+2. Ask clarifying questions that force articulation
+3. Mirror back what you heard—gaps become visible
+4. Let the human have the "aha" moment
+
+*The insight belongs to them. The structure belongs to us.*
+
 ## Synapses
 
 See [synapses.json](synapses.json) for connections.
