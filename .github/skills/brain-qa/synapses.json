@@ -30,9 +30,9 @@
     },
     {
       "target": ".github/skills/heir-curation/SKILL.md",
-      "type": "informs",
-      "strength": 0.75,
-      "note": "Validates Master-Heir sync"
+      "type": "validates",
+      "strength": 0.90,
+      "note": "Phase 12 catches heir P5-P7 drift; validates Master-Heir sync (v5.4.0 lesson)"
     },
     {
       "target": ".github/instructions/dream-state-automation.instructions.md",
