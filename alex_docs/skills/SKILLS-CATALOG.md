@@ -435,7 +435,7 @@ flowchart LR
     %% Styling - Staleness (dashed border)
     classDef stale stroke-dasharray:5 5,stroke-width:2px
 
-    class HC,MED,SA,ARF,KS,GK,MF,LMS,MAA,BQA,SKA,REL,RF master
+    class HC,MAA,REL,RF master
     class VEP,CPP vscode
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LMS,GW,PRA,SFI stale
@@ -667,4 +667,4 @@ flowchart TB
 
 ---
 
-*Last updated: February 2026*
+*Last updated: 2026-02-09*
