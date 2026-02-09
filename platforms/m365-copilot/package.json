@@ -1,11 +1,11 @@
 {
   "name": "alex-m365-agent",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "description": "Alex Cognitive Architecture - Take Your Work to New Heights with M365 Copilot",
   "scripts": {
     "package": "teamsapp package --env local",
     "package:dev": "teamsapp package --env dev",
-    "validate": "teamsapp validate --package-file appPackage/build/appPackage.local.zip",
+    "validate": "teamsapp validate --package-file ./appPackage/build/appPackage.local.zip",
     "provision": "teamsapp provision",
     "provision:local": "teamsapp provision --env local",
     "deploy": "teamsapp deploy",
@@ -21,6 +21,7 @@
   "author": "Alex Cognitive Architecture Team",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@microsoft/teamsapp-cli": "^3.1.0",
     "@microsoft/teamsfx-cli": "^2.1.2",
     "sharp": "^0.34.5"
   }

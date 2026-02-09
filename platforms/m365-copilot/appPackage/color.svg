@@ -9,6 +9,8 @@
       <stop offset="100%" stop-color="#ff6b35"/>
     </linearGradient>
   </defs>
+  <!-- White background for Teams compatibility -->
+  <rect width="192" height="192" fill="white"/>
   <!-- A Negative Space Rocket Logo - 192x192 for Teams -->
   <!-- Rocket body (scaled 6x from 32x32 base) -->
   <path d="M96,15 C96,15 60,45 60,90 L60,138 L78,147 L78,126 L114,126 L114,147 L132,138 L132,90 C132,45 96,15 96,15 Z" fill="url(#azureGrad)"/>

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -200,6 +200,11 @@
         "command": "alex.stopReading",
         "title": "Alex: Stop Reading",
         "icon": "$(mute)"
+      },
+      {
+        "command": "alex.speakPrompt",
+        "title": "Alex: Speak Prompt",
+        "icon": "$(comment-discussion)"
       },
       {
         "command": "alex.incrementGoal",
@@ -521,6 +526,10 @@
           "group": "4_voice@2"
         },
         {
+          "command": "alex.speakPrompt",
+          "group": "4_voice@3"
+        },
+        {
           "command": "alex.importGitHubIssues",
           "group": "5_github@1"
         },
@@ -597,6 +606,10 @@
         {
           "command": "alex.saveAsAudio",
           "group": "5_voice@2"
+        },
+        {
+          "command": "alex.speakPrompt",
+          "group": "5_voice@3"
         }
       ]
     },
@@ -614,208 +627,208 @@
     ],
     "chatSkills": [
       {
-        "path": "./.github/skills/academic-research"
+        "path": "./.github/skills/academic-research/SKILL.md"
       },
       {
-        "path": "./.github/skills/ai-agent-design"
+        "path": "./.github/skills/ai-agent-design/SKILL.md"
       },
       {
-        "path": "./.github/skills/airs-appropriate-reliance"
+        "path": "./.github/skills/airs-appropriate-reliance/SKILL.md"
       },
       {
-        "path": "./.github/skills/alex-effort-estimation"
+        "path": "./.github/skills/alex-effort-estimation/SKILL.md"
       },
       {
-        "path": "./.github/skills/anti-hallucination"
+        "path": "./.github/skills/anti-hallucination/SKILL.md"
       },
       {
-        "path": "./.github/skills/api-design"
+        "path": "./.github/skills/api-design/SKILL.md"
       },
       {
-        "path": "./.github/skills/api-documentation"
+        "path": "./.github/skills/api-documentation/SKILL.md"
       },
       {
-        "path": "./.github/skills/appropriate-reliance"
+        "path": "./.github/skills/appropriate-reliance/SKILL.md"
       },
       {
-        "path": "./.github/skills/architecture-audit"
+        "path": "./.github/skills/architecture-audit/SKILL.md"
       },
       {
-        "path": "./.github/skills/architecture-health"
+        "path": "./.github/skills/architecture-health/SKILL.md"
       },
       {
-        "path": "./.github/skills/ascii-art-alignment"
+        "path": "./.github/skills/ascii-art-alignment/SKILL.md"
       },
       {
-        "path": "./.github/skills/awareness"
+        "path": "./.github/skills/awareness/SKILL.md"
       },
       {
-        "path": "./.github/skills/bootstrap-learning"
+        "path": "./.github/skills/bootstrap-learning/SKILL.md"
       },
       {
-        "path": "./.github/skills/brain-qa"
+        "path": "./.github/skills/brain-qa/SKILL.md"
       },
       {
-        "path": "./.github/skills/business-analysis"
+        "path": "./.github/skills/business-analysis/SKILL.md"
       },
       {
-        "path": "./.github/skills/change-management"
+        "path": "./.github/skills/change-management/SKILL.md"
       },
       {
-        "path": "./.github/skills/chat-participant-patterns"
+        "path": "./.github/skills/chat-participant-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/code-review"
+        "path": "./.github/skills/code-review/SKILL.md"
       },
       {
-        "path": "./.github/skills/cognitive-load"
+        "path": "./.github/skills/cognitive-load/SKILL.md"
       },
       {
-        "path": "./.github/skills/creative-writing"
+        "path": "./.github/skills/creative-writing/SKILL.md"
       },
       {
-        "path": "./.github/skills/cross-cultural-collaboration"
+        "path": "./.github/skills/cross-cultural-collaboration/SKILL.md"
       },
       {
-        "path": "./.github/skills/debugging-patterns"
+        "path": "./.github/skills/debugging-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/error-recovery-patterns"
+        "path": "./.github/skills/error-recovery-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/fabric-notebook-publish"
+        "path": "./.github/skills/fabric-notebook-publish/SKILL.md"
       },
       {
-        "path": "./.github/skills/gamma-presentations"
+        "path": "./.github/skills/gamma-presentations/SKILL.md"
       },
       {
-        "path": "./.github/skills/git-workflow"
+        "path": "./.github/skills/git-workflow/SKILL.md"
       },
       {
-        "path": "./.github/skills/global-knowledge-sync"
+        "path": "./.github/skills/global-knowledge-sync/SKILL.md"
       },
       {
-        "path": "./.github/skills/grant-writing"
+        "path": "./.github/skills/grant-writing/SKILL.md"
       },
       {
-        "path": "./.github/skills/graphic-design"
+        "path": "./.github/skills/graphic-design/SKILL.md"
       },
       {
-        "path": "./.github/skills/image-handling"
+        "path": "./.github/skills/image-handling/SKILL.md"
       },
       {
-        "path": "./.github/skills/incident-response"
+        "path": "./.github/skills/incident-response/SKILL.md"
       },
       {
-        "path": "./.github/skills/infrastructure-as-code"
+        "path": "./.github/skills/infrastructure-as-code/SKILL.md"
       },
       {
-        "path": "./.github/skills/learning-psychology"
+        "path": "./.github/skills/learning-psychology/SKILL.md"
       },
       {
-        "path": "./.github/skills/lint-clean-markdown"
+        "path": "./.github/skills/lint-clean-markdown/SKILL.md"
       },
       {
-        "path": "./.github/skills/localization"
+        "path": "./.github/skills/localization/SKILL.md"
       },
       {
-        "path": "./.github/skills/m365-agent-debugging"
+        "path": "./.github/skills/m365-agent-debugging/SKILL.md"
       },
       {
-        "path": "./.github/skills/markdown-mermaid"
+        "path": "./.github/skills/markdown-mermaid/SKILL.md"
       },
       {
-        "path": "./.github/skills/mcp-development"
+        "path": "./.github/skills/mcp-development/SKILL.md"
       },
       {
-        "path": "./.github/skills/microsoft-fabric"
+        "path": "./.github/skills/microsoft-fabric/SKILL.md"
       },
       {
-        "path": "./.github/skills/microsoft-sfi"
+        "path": "./.github/skills/microsoft-sfi/SKILL.md"
       },
       {
-        "path": "./.github/skills/pii-privacy-regulations"
+        "path": "./.github/skills/pii-privacy-regulations/SKILL.md"
       },
       {
-        "path": "./.github/skills/post-mortem"
+        "path": "./.github/skills/post-mortem/SKILL.md"
       },
       {
-        "path": "./.github/skills/pptx-generation"
+        "path": "./.github/skills/pptx-generation/SKILL.md"
       },
       {
-        "path": "./.github/skills/practitioner-research"
+        "path": "./.github/skills/practitioner-research/SKILL.md"
       },
       {
-        "path": "./.github/skills/privacy-responsible-ai"
+        "path": "./.github/skills/privacy-responsible-ai/SKILL.md"
       },
       {
-        "path": "./.github/skills/project-deployment"
+        "path": "./.github/skills/project-deployment/SKILL.md"
       },
       {
-        "path": "./.github/skills/project-management"
+        "path": "./.github/skills/project-management/SKILL.md"
       },
       {
-        "path": "./.github/skills/project-scaffolding"
+        "path": "./.github/skills/project-scaffolding/SKILL.md"
       },
       {
-        "path": "./.github/skills/prompt-engineering"
+        "path": "./.github/skills/prompt-engineering/SKILL.md"
       },
       {
-        "path": "./.github/skills/rag-architecture"
+        "path": "./.github/skills/rag-architecture/SKILL.md"
       },
       {
-        "path": "./.github/skills/refactoring-patterns"
+        "path": "./.github/skills/refactoring-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/release-preflight"
+        "path": "./.github/skills/release-preflight/SKILL.md"
       },
       {
-        "path": "./.github/skills/release-process"
+        "path": "./.github/skills/release-process/SKILL.md"
       },
       {
-        "path": "./.github/skills/research-project-scaffold"
+        "path": "./.github/skills/research-project-scaffold/SKILL.md"
       },
       {
-        "path": "./.github/skills/root-cause-analysis"
+        "path": "./.github/skills/root-cause-analysis/SKILL.md"
       },
       {
-        "path": "./.github/skills/rubber-duck-debugging"
+        "path": "./.github/skills/rubber-duck-debugging/SKILL.md"
       },
       {
-        "path": "./.github/skills/security-review"
+        "path": "./.github/skills/security-review/SKILL.md"
       },
       {
-        "path": "./.github/skills/skill-activation"
+        "path": "./.github/skills/skill-activation/SKILL.md"
       },
       {
-        "path": "./.github/skills/skill-catalog-generator"
+        "path": "./.github/skills/skill-catalog-generator/SKILL.md"
       },
       {
-        "path": "./.github/skills/socratic-questioning"
+        "path": "./.github/skills/socratic-questioning/SKILL.md"
       },
       {
-        "path": "./.github/skills/svg-graphics"
+        "path": "./.github/skills/svg-graphics/SKILL.md"
       },
       {
-        "path": "./.github/skills/testing-strategies"
+        "path": "./.github/skills/testing-strategies/SKILL.md"
       },
       {
-        "path": "./.github/skills/teams-app-patterns"
+        "path": "./.github/skills/teams-app-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/text-to-speech"
+        "path": "./.github/skills/text-to-speech/SKILL.md"
       },
       {
-        "path": "./.github/skills/vscode-environment"
+        "path": "./.github/skills/vscode-environment/SKILL.md"
       },
       {
-        "path": "./.github/skills/vscode-extension-patterns"
+        "path": "./.github/skills/vscode-extension-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/work-life-balance"
+        "path": "./.github/skills/work-life-balance/SKILL.md"
       },
       {
-        "path": "./.github/skills/writing-publication"
+        "path": "./.github/skills/writing-publication/SKILL.md"
       }
     ],
     "configuration": {
@@ -954,6 +967,14 @@
           ],
           "scope": "machine",
           "description": "Default voice preset for text-to-speech."
+        },
+        "alex.tts.maxTableRows": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 100,
+          "scope": "machine",
+          "description": "Maximum number of table rows to read aloud. Set higher for accessibility."
         },
         "alex.dashboard.refreshInterval": {
           "type": "number",
@@ -1854,7 +1875,38 @@
         ]
       }
     ],
-    "keybindings": []
+    "keybindings": [
+      {
+        "command": "alex.readAloud",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r"
+      },
+      {
+        "command": "alex.toggleVoice",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v"
+      },
+      {
+        "command": "alex.stopReading",
+        "key": "escape",
+        "when": "alex.ttsPlaying"
+      },
+      {
+        "command": "alex.speakPrompt",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p"
+      },
+      {
+        "command": "alex.dream",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d"
+      },
+      {
+        "command": "alex.quickCommands",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+alt+a"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run clean && npm run package",

@@ -7,6 +7,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.4.1] - 2026-02-09
+
+> **TTS UX Enhancements** — Keyboard shortcuts, emojis, voice mode summarization
+
+### Added
+
+- **Speak Prompt Command**: Generate content via LLM then read aloud ("read me a poem", "explain quantum physics")
+- **Voice Mode Summarization**: Responses over 750 words are automatically summarized before reading
+- **Keyboard Shortcuts**: `Ctrl+Alt+R` (Read Aloud), `Ctrl+Alt+V` (Toggle Voice), `Ctrl+Alt+P` (Speak Prompt), `Ctrl+Alt+D` (Dream), `Ctrl+Alt+A` (Quick Commands), `Escape` (Stop Reading when playing)
+- **Rich Tooltips**: Voice mode status bar shows markdown tooltip with all shortcuts
+- **Enhanced Quick Picks**: When no document is open, Read Aloud and Save as Audio show all voice commands
+
+### Changed
+
+- **Emoji Notifications**: All TTS messages now use emojis (❌ ⚠️ 📋 📝 📖 🌍 💾 🔊 🔇)
+- **CSP Fix**: Audio player uses data-cmd pattern instead of inline onclick handlers
+- **Context Menus**: Added Speak Prompt to explorer and editor context menus
+
+---
+
+## [5.4.0] - 2026-02-09
+
+> **TTS Improvements** — Voice display, accessibility settings, unit tests
+
+### Added
+
+- **TTS Unit Tests**: 35 test cases for language detection, voice selection, and markdown processing
+- **alex.tts.maxTableRows Setting**: Configurable table row limit (1-100, default 10) for accessibility
+- **Voice Name in Audio Player**: Shows actual voice name instead of hardcoded default
+
+### Changed
+
+- **Language Detection Threshold**: Lowered from 10 to 5 characters for better short text handling
+
+---
+
+## [5.3.1] - 2026-02-08
+
+### Fixed
+
+- **Cognitive Dashboard**: CSP-compliant event handling (data-cmd pattern replaces inline onclick)
+- **Memory Dashboard**: Fixed retry button to use proper webview messaging
+
+---
+
+## [5.3.0] - 2026-02-08
+
+> **Enterprise Readiness** — Security, compliance, governance foundations
+
+### Added
+
+- **Enterprise SSO (Entra ID)**: Microsoft authentication via VS Code's `microsoft` provider with tenant restrictions, silent auth on startup
+- **Secrets Scanning & PII Detection**: 20+ patterns for API keys (OpenAI, GitHub, AWS, Azure), credit cards, SSN, emails, IPs with VS Code diagnostics integration
+- **Audit Logging Framework**: JSONL file + remote endpoint support, buffered writes, automatic cleanup by retention period (7-365 days)
+- **Role-Based Access Control**: viewer → contributor → admin → owner hierarchy with JWT claim extraction
+- **Enterprise Commands**: 7 new commands (signIn, signOut, showAuthStatus, scanSecrets, scanWorkspace, viewAuditLog, exportAuditLog)
+- **Enterprise Settings**: 15 new settings for auth, audit logging, and secrets scanning configuration
+
+### Changed
+
+- **VS Code Extension**: New `src/enterprise/` module with enterpriseAuth.ts, secretsScanning.ts, auditLogging.ts, index.ts
+- **Extension Lifecycle**: Enterprise initialization in activate(), cleanup in deactivate()
+
+---
+
+## [5.2.0] - 2026-02-08
+
+> **UX Excellence** — Voice mode, cognitive dashboard, daily briefing, model awareness
+
+### Added
+
+- **Voice Mode Toggle**: Status bar indicator + `alex.toggleVoice` command with persona options (Warm, Professional, Scholarly)
+- **Cognitive Dashboard**: Unified sidebar webview showing brain health, memory architecture, goals, and recent activity
+- **Alex Daily Briefing**: `alex.dailyBriefing` command generates personalized morning overview with priorities, calendar hints, cognitive state
+- **Model Tier Status Bar**: Real-time detection displaying Frontier/Capable/Efficient tier based on active language model
+- **Quick Command Palette**: `alex.quickCommands` with 10 common actions (meditate, self-actualize, dream, etc.)
+
+### Changed
+
+- **VS Code Extension**: Version 5.1.3 → 5.2.0
+
+---
+
 ## [5.1.3] - 2026-02-08
 
 > **Documentation Sync** — Version alignment and count corrections
@@ -30,6 +113,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed `TypeError: p.toLowerCase is not a function` that prevented the Welcome sidebar from loading
   - Added defensive type guards for user profile arrays (primaryTechnologies, learningGoals, expertiseAreas, currentProjects)
   - Persona detection now gracefully handles malformed or empty profile data
+
+---
+
+## [5.1.1] - 2026-02-08
+
+> **Feature Expansion** — New skills, commands, prompts, and security hardening
+
+### Added
+
+- **Cross-Cultural Collaboration Skill**: Hofstede and Meyer frameworks for global team dynamics
+- **Rubber Duck Debugging Command**: `Alex: Rubber Duck` with playful duck persona
+- **Working with Alex Button**: Quick access from Welcome panel to prompting guide
+- **Mermaid Diagrams**: Visual architecture in Memory Dashboard
+- **5 New Right-Click Prompts**: Context menu prompt commands with best practices
+- **Content Security Policy**: All webviews now protected with strict CSP
+
+### Changed
+
+- **Quick Pick Menus**: Expanded with previously missing options
+
+### Fixed
+
+- **VS Code Integration Audit**: Coverage improved from 92% to 96%
+
+---
+
+## [5.1.0] - 2026-02-07
+
+> **Platform Polish** — Branding alignment, architecture accuracy
+
+### Fixed
+
+- **Skill Count**: 75→76 across package.json and documentation
+- **Architecture Tree**: README updated — instructions 12→24, prompts 7→13, skills 76
+- **Color Palette Conflict**: Marked VISUAL-IDENTITY.md palette as superseded
+
+### Changed
+
+- **Homepage URL**: Updated package.json homepage to `https://alex.correax.com`
+
+---
+
+## [5.0.1] - 2026-02-07
+
+> **API Polish** — Tool discoverability, command UX, and Mermaid diagram quality
+
+### Added
+
+- **Tool Declarations**: `alex_focus_context` and `alex_heir_validation` now declared in `package.json` with full input schemas
+- **Tool Tags**: All 13 tools tagged (`cognitive`, `knowledge`, `cloud`, `quality`, `productivity`)
+- **Sample Requests**: All 24 slash commands now show example usage text
+
+### Changed
+
+- **Mermaid Skills**: Enhanced with parse error prevention rules, reserved word documentation
+
+### Fixed
+
+- Broken synapse reference in meditation episodic record
 
 ---
 

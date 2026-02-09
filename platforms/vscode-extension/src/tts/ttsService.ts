@@ -106,7 +106,7 @@ const LANGUAGE_PATTERNS: Array<{ lang: string; test: (text: string) => number }>
  * Returns the detected language code and confidence (0-1)
  */
 export function detectLanguage(text: string): { lang: string; confidence: number; name: string } {
-    if (!text || text.trim().length < 10) {
+    if (!text || text.trim().length < 5) {
         return { lang: 'en-US', confidence: 0, name: 'English (US)' };
     }
     
@@ -634,8 +634,9 @@ function tableToSpeech(tableMatch: string): string {
     
     let speech = `Table with ${headers.length} columns: ${headers.join(', ')}. `;
     
-    // Parse data rows (limit to 10 for speech)
-    const maxRows = Math.min(dataRows.length, 10);
+    // Parse data rows (configurable limit for accessibility)
+    const maxTableRows = vscode.workspace.getConfiguration('alex.tts').get<number>('maxTableRows', 10);
+    const maxRows = Math.min(dataRows.length, maxTableRows);
     for (let i = 0; i < maxRows; i++) {
         const cells = dataRows[i]
             .split('|')

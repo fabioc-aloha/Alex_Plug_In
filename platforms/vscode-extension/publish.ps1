@@ -167,6 +167,41 @@ else {
 }
 
 # ============================================
+# STEP 0b: Check changelog sync
+# ============================================
+Write-Host "`n📝 Checking changelog sync..." -ForegroundColor Yellow
+
+$rootChangelog = Join-Path $repoRoot "CHANGELOG.md"
+$extChangelog = Join-Path $scriptDir "CHANGELOG.md"
+
+if ((Test-Path $rootChangelog) -and (Test-Path $extChangelog)) {
+    $rootContent = Get-Content $rootChangelog -Raw
+    $extContent = Get-Content $extChangelog -Raw
+    
+    # Extract latest version from each
+    $rootVersion = if ($rootContent -match '## \[(\d+\.\d+\.\d+)\]') { $Matches[1] } else { "0.0.0" }
+    $extVersion = if ($extContent -match '## \[(\d+\.\d+\.\d+)\]') { $Matches[1] } else { "0.0.0" }
+    
+    if ([version]$rootVersion -gt [version]$extVersion) {
+        Write-Host "⚠️  Extension CHANGELOG.md is stale!" -ForegroundColor Red
+        Write-Host "   Root: $rootVersion, Extension: $extVersion" -ForegroundColor Yellow
+        Write-Host "   Please sync the extension changelog before publishing." -ForegroundColor Yellow
+        Write-Host "   Tip: Copy new entries from CHANGELOG.md to platforms/vscode-extension/CHANGELOG.md" -ForegroundColor DarkGray
+        
+        if (-not $NoConfirm) {
+            $continueAnyway = Read-Host "Continue anyway? (y/N)"
+            if ($continueAnyway -ne "y" -and $continueAnyway -ne "Y") {
+                Write-Host "❌ Aborted - please update the changelog first" -ForegroundColor Red
+                exit 1
+            }
+        }
+    }
+    else {
+        Write-Host "  ✓ Changelog versions in sync (Extension: $extVersion)" -ForegroundColor DarkGray
+    }
+}
+
+# ============================================
 # STEP 1: Sync version numbers across all files
 # ============================================
 Write-Host "`n📝 Syncing version numbers..." -ForegroundColor Yellow

@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.4.1] - 2026-02-09
+
+> **TTS UX Enhancements** — Keyboard shortcuts, emojis, voice mode summarization
+
+### Added
+
+- **Speak Prompt Command**: Generate content via LLM then read aloud ("read me a poem", "explain quantum physics")
+- **Voice Mode Summarization**: Responses over 750 words are automatically summarized before reading
+- **Keyboard Shortcuts**: `Ctrl+Alt+R` (Read Aloud), `Ctrl+Alt+V` (Toggle Voice), `Ctrl+Alt+P` (Speak Prompt), `Ctrl+Alt+D` (Dream), `Ctrl+Alt+A` (Quick Commands), `Escape` (Stop Reading when playing)
+- **Rich Tooltips**: Voice mode status bar shows markdown tooltip with all shortcuts
+- **Enhanced Quick Picks**: When no document is open, Read Aloud and Save as Audio show all voice commands
+
+### Changed
+
+- **Emoji Notifications**: All TTS messages now use emojis (❌ ⚠️ 📋 📝 📖 🌍 💾 🔊 🔇)
+- **CSP Fix**: Audio player uses data-cmd pattern instead of inline onclick handlers
+- **Context Menus**: Added Speak Prompt to explorer and editor context menus
+
+---
+
+## [5.4.0] - 2026-02-09
+
+> **TTS Improvements** — Voice display, accessibility settings, unit tests
+
+### Added
+
+- **TTS Unit Tests**: 35 test cases for language detection, voice selection, and markdown processing
+- **alex.tts.maxTableRows Setting**: Configurable table row limit (1-100, default 10) for accessibility
+- **Voice Name in Audio Player**: Shows actual voice name instead of hardcoded default
+
+### Changed
+
+- **Language Detection Threshold**: Lowered from 10 to 5 characters for better short text handling
+
+---
+
 ## [5.3.1] - 2026-02-08
 
 ### Fixed
@@ -28,17 +64,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Role-Based Access Control**: viewer → contributor → admin → owner hierarchy with JWT claim extraction
 - **Enterprise Commands**: 7 new commands (signIn, signOut, showAuthStatus, scanSecrets, scanWorkspace, viewAuditLog, exportAuditLog)
 - **Enterprise Settings**: 15 new settings for auth, audit logging, and secrets scanning configuration
-- **M365 Version Parity**: M365 Copilot heir updated to 5.3.0
 
 ### Changed
 
 - **VS Code Extension**: New `src/enterprise/` module with enterpriseAuth.ts, secretsScanning.ts, auditLogging.ts, index.ts
 - **Extension Lifecycle**: Enterprise initialization in activate(), cleanup in deactivate()
-
-### Deferred to v5.3.1
-
-- Data Residency Options — location-based storage
-- Accessibility (WCAG 2.1 AA) compliance review
 
 ---
 
@@ -53,13 +83,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Alex Daily Briefing**: `alex.dailyBriefing` command generates personalized morning overview with priorities, calendar hints, cognitive state
 - **Model Tier Status Bar**: Real-time detection displaying Frontier/Capable/Efficient tier based on active language model
 - **Quick Command Palette**: `alex.quickCommands` with 10 common actions (meditate, self-actualize, dream, etc.)
-- **M365 UX Knowledge**: New `ux-features.md` knowledge file documenting voice, briefing, and quick command patterns
-- **M365 Daily Briefing Starter**: "📅 Daily briefing" conversation starter in declarativeAgent.json
 
 ### Changed
 
 - **VS Code Extension**: Version 5.1.3 → 5.2.0
-- **M365 Copilot Heir**: Version 5.0.2 → 5.0.3
 
 ---
 
@@ -71,9 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Master Version**: Updated to 5.1.3 across all documentation
 - **ROADMAP Target**: Advanced from 5.1.0 to 5.2.0 (UX Excellence)
-- **Skill Count**: 76→77 in alex-brain-anatomy.html and ROADMAP (matches actual skill inventory)
-- **Instruction Count**: 25→24 in README.md and copilot-instructions.md (matches actual file count)
-- **Assessment Date**: Updated to 2026-02-08 in copilot-instructions.md
+- **Skill Count**: 76→77 in docs and ROADMAP (matches actual inventory)
+- **Instruction Count**: 25→24 in README and copilot-instructions.md
 
 ---
 
@@ -83,9 +109,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Welcome View Crash Fix**: Fixed `TypeError: p.toLowerCase is not a function` that prevented the Welcome sidebar from loading
-- **Type Guards**: Added defensive type guards for user profile arrays (primaryTechnologies, learningGoals, expertiseAreas, currentProjects)
-- **Persona Detection**: Now gracefully handles malformed or empty profile data
+- **🔧 Welcome View Crash Fix**
+  - Fixed `TypeError: p.toLowerCase is not a function` that prevented the Welcome sidebar from loading
+  - Added defensive type guards for user profile arrays (primaryTechnologies, learningGoals, expertiseAreas, currentProjects)
+  - Persona detection now gracefully handles malformed or empty profile data
 
 ---
 
@@ -100,51 +127,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Working with Alex Button**: Quick access from Welcome panel to prompting guide
 - **Mermaid Diagrams**: Visual architecture in Memory Dashboard
 - **5 New Right-Click Prompts**: Context menu prompt commands with best practices
-- **Working with Alex Guide**: Comprehensive prompting and dialog engineering guide
-- **IaC & Azure Audit Options**: Infrastructure-as-code and cloud audit capabilities
 - **Content Security Policy**: All webviews now protected with strict CSP
 
 ### Changed
 
 - **Quick Pick Menus**: Expanded with previously missing options
-- **Dialog Engineering**: New section in Working with Alex guide
 
 ### Fixed
 
 - **VS Code Integration Audit**: Coverage improved from 92% to 96%
-- **Meditation Patterns**: VS Code integration patterns consolidated
 
 ---
 
 ## [5.1.0] - 2026-02-07
 
-> **Platform Polish** — Branding alignment, architecture accuracy, and M365 schema features
+> **Platform Polish** — Branding alignment, architecture accuracy
 
-### Fixed (VS Code + Master)
+### Fixed
 
-- **Skill Count**: 75→76 across package.json, M365 manifest, M365 knowledge docs, and ROADMAP
-- **Architecture Tree**: README + extension README updated — instructions 12→24, prompts 7→13, legacy `domain-knowledge/` replaced with `skills/` (76 skills), config entries corrected
-- **ROADMAP Versions**: Master 5.0.0→5.0.1, heirs updated to VS Code 5.0.1 + M365 5.0.2
-- **ROADMAP Memory Tree**: Counts corrected to 24 procedural, 13 episodic, 76 skills
-- **Color Palette Conflict**: Marked VISUAL-IDENTITY.md palette as superseded; documented website palette in brand-asset-management
-- **Stale Roadmap Tasks**: 5 orphaned v4.3.0 ⬜ tasks moved to Backlog; "In Progress" section renamed to "Completed"
+- **Skill Count**: 75→76 across package.json and documentation
+- **Architecture Tree**: README updated — instructions 12→24, prompts 7→13, skills 76
+- **Color Palette Conflict**: Marked VISUAL-IDENTITY.md palette as superseded
 
-### Changed (VS Code)
+### Changed
 
-- **Homepage URL**: Updated package.json homepage from GitHub repo to `https://alex.correax.com`
-
-### Added (M365 Heir)
-
-- **D8a — People Enrichment**: `include_related_content: true` on People capability — person lookups now return shared docs, emails, and Teams messages in a single call (replaces 4-step Person Deep Dive)
-- **D8b — Behavior Overrides**: `behavior_overrides` block with `suggestions: false` (Alex drives proactive behavior), `discourage_model_knowledge: false` (epistemic + generative modes), and `special_instructions` for knowledge-priority guidance
-- **D8b — Disclaimer**: Responsible AI trust signal displayed on first interaction — describes data access and privacy posture
-- **D8c — User Overrides**: `user_overrides` block letting users toggle Email, Teams, Meetings, People, OneDrive, and WebSearch capabilities — aligns with Alex's ethical framework on user sovereignty
-- **D8d — Graceful Degradation**: Instruction rule for handling disabled capabilities without pressuring users to re-enable
-
-### Changed (M365 Heir)
-
-- **D8e — Version Bump**: M365 manifest, package.json, README, system prompt, and declarativeAgent instructions all bumped to 5.0.2
-- **Capability Coverage**: 8/17 (47%) → 12/17 (71%) of available M365 declarative agent features
+- **Homepage URL**: Updated package.json homepage to `https://alex.correax.com`
 
 ---
 
@@ -154,19 +161,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Tool Declarations**: `alex_focus_context` and `alex_heir_validation` now declared in `package.json` with full input schemas — visible in `#` tool picker
-- **Tool Tags**: All 13 tools tagged (`cognitive`, `knowledge`, `cloud`, `quality`, `productivity`) for better LLM tool selection
-- **Sample Requests**: All 24 slash commands now show example usage text in command palette autocomplete
-- **Disambiguation Examples**: Each routing category expanded to 6-7 examples for more accurate query routing to `@alex`
+- **Tool Declarations**: `alex_focus_context` and `alex_heir_validation` now declared in `package.json` with full input schemas
+- **Tool Tags**: All 13 tools tagged (`cognitive`, `knowledge`, `cloud`, `quality`, `productivity`)
+- **Sample Requests**: All 24 slash commands now show example usage text
 
 ### Changed
 
-- **Mermaid Skills**: Enhanced `markdown-mermaid`, `graphic-design`, and `ascii-art-alignment` skills with parse error prevention rules, reserved word documentation, and GitHub Pastel Palette v2
-- **Mermaid Diagrams**: Audited and fixed 15 of 32 diagram blocks across 4 architecture documents (em-dashes, reserved words, HTML tags, `style` placement)
+- **Mermaid Skills**: Enhanced with parse error prevention rules, reserved word documentation
 
 ### Fixed
 
-- Broken synapse reference in meditation episodic record (incorrect `.instructions.md` path)
+- Broken synapse reference in meditation episodic record
 
 ---
 
@@ -196,13 +201,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - New inheritable skill for GK repository integration
   - Setup instructions for new users
   - Cross-project knowledge sharing foundation
-
-- **📦 5 Universal Starter Patterns**
-  - Code Quality Principles — SOLID, naming, complexity
-  - Documentation Structure — README templates, API docs
-  - Error Handling — try/catch, logging, graceful degradation
-  - Problem Solving Framework — Rubber Duck + 5 Whys methods ✨
-  - Cognitive Communication — Summarize-first, cognitive load management ✨
 
 - **🧠 Working Memory Architecture Refinement**
   - Explicit 7-slot working memory table (P1-P7)

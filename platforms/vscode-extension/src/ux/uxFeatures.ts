@@ -9,6 +9,11 @@
  */
 
 import * as vscode from 'vscode';
+import { synthesize, prepareTextForSpeech, playWithWebview, detectLanguage, getVoiceForLanguage } from '../tts';
+import { summarizeForSpeech, LONG_CONTENT_WORD_THRESHOLD } from '../commands/readAloud';
+
+// Extension context for TTS playback
+let extensionContext: vscode.ExtensionContext | undefined;
 
 // Voice Mode Status Bar
 let voiceModeStatusBar: vscode.StatusBarItem | undefined;
@@ -75,9 +80,10 @@ const QUICK_COMMANDS: QuickCommand[] = [
   { label: '$(sync) Sync Knowledge', description: 'Sync with Global Knowledge', command: 'alex.syncKnowledge', icon: '$(sync)' },
   { label: '$(calendar) Daily Briefing', description: 'Get your daily summary', command: 'alex.dailyBriefing', icon: '$(calendar)' },
   { label: '$(dashboard) Cognitive Dashboard', description: 'View architecture health', command: 'alex.showCognitiveDashboard', icon: '$(dashboard)' },
-  { label: '$(unmute) Toggle Voice', description: 'Enable/disable voice mode', command: 'alex.toggleVoice', icon: '$(unmute)' },
+  { label: '$(unmute) Toggle Voice', description: 'Enable/disable voice mode (Ctrl+Alt+V)', command: 'alex.toggleVoice', icon: '$(unmute)' },
   { label: '$(target) Show Goals', description: 'View learning goals', command: 'alex.showGoals', icon: '$(target)' },
-  { label: '$(book) Read Aloud', description: 'Read current selection', command: 'alex.readAloud', icon: '$(book)' },
+  { label: '$(book) Read Aloud', description: 'Read current selection (Ctrl+Alt+R)', command: 'alex.readAloud', icon: '$(book)' },
+  { label: '$(comment-discussion) Speak Prompt', description: 'Generate & speak content (Ctrl+Alt+P)', command: 'alex.speakPrompt', icon: '$(comment-discussion)' },
   { label: '$(gear) Setup Environment', description: 'Configure workspace', command: 'alex.setupEnvironment', icon: '$(gear)' },
 ];
 
@@ -85,6 +91,9 @@ const QUICK_COMMANDS: QuickCommand[] = [
  * Initialize all UX features
  */
 export function initializeUXFeatures(context: vscode.ExtensionContext): void {
+  // Store context for TTS playback
+  extensionContext = context;
+
   // Initialize voice mode from settings
   const config = vscode.workspace.getConfiguration('alex.voice');
   voiceModeEnabled = config.get('enabled', false);
@@ -131,11 +140,27 @@ function updateVoiceModeStatusBar(): void {
 
   if (voiceModeEnabled) {
     voiceModeStatusBar.text = '$(unmute) Voice';
-    voiceModeStatusBar.tooltip = 'Voice Mode: ON - Click to disable';
+    voiceModeStatusBar.tooltip = new vscode.MarkdownString(
+      `### 🔊 Voice Mode: ON\n\n` +
+      `Alex will read responses aloud\n\n` +
+      `**Shortcuts:**\n` +
+      `- Toggle: \`Ctrl+Alt+V\`\n` +
+      `- Read Selection: \`Ctrl+Alt+R\`\n` +
+      `- Speak Prompt: \`Ctrl+Alt+P\`\n` +
+      `- Stop: \`Escape\`\n\n` +
+      `_Click to disable_`
+    );
     voiceModeStatusBar.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
   } else {
     voiceModeStatusBar.text = '$(mute)';
-    voiceModeStatusBar.tooltip = 'Voice Mode: OFF - Click to enable';
+    voiceModeStatusBar.tooltip = new vscode.MarkdownString(
+      `### 🔇 Voice Mode: OFF\n\n` +
+      `**Shortcuts:**\n` +
+      `- Toggle: \`Ctrl+Alt+V\`\n` +
+      `- Read Selection: \`Ctrl+Alt+R\`\n` +
+      `- Speak Prompt: \`Ctrl+Alt+P\`\n\n` +
+      `_Click to enable_`
+    );
     voiceModeStatusBar.backgroundColor = undefined;
   }
 }
@@ -227,8 +252,8 @@ export async function toggleVoiceMode(): Promise<void> {
   
   vscode.window.showInformationMessage(
     voiceModeEnabled 
-      ? '$(unmute) Voice Mode enabled - Alex will read responses aloud' 
-      : '$(mute) Voice Mode disabled'
+      ? '🔊 Voice Mode enabled - Alex will read responses aloud' 
+      : '🔇 Voice Mode disabled'
   );
 }
 
@@ -237,6 +262,60 @@ export async function toggleVoiceMode(): Promise<void> {
  */
 export function isVoiceModeEnabled(): boolean {
   return voiceModeEnabled;
+}
+
+/**
+ * Speak text aloud if voice mode is enabled
+ * Used by chat participant to auto-read responses
+ * @param text - The text to speak (markdown will be stripped)
+ * @param maxLength - Maximum characters to speak (default 5000, long content summarized)
+ */
+export async function speakIfVoiceModeEnabled(text: string, maxLength: number = 5000): Promise<void> {
+  if (!voiceModeEnabled || !extensionContext || !text.trim()) {
+    return;
+  }
+
+  try {
+    // Prepare text for speech (strip markdown, etc.)
+    let textToSpeak = prepareTextForSpeech(text);
+
+    // Skip very short responses
+    if (textToSpeak.length < 10) {
+      return;
+    }
+
+    // Check if content is too long and should be summarized
+    const wordCount = textToSpeak.split(/\s+/).filter(w => w.length > 0).length;
+    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
+      // Attempt to summarize long content
+      try {
+        const summary = await summarizeForSpeech(text);
+        if (summary) {
+          textToSpeak = `Here's a summary: ${summary}`;
+        } else {
+          // Fallback: truncate if summarization fails
+          textToSpeak = textToSpeak.substring(0, maxLength) + '... Content truncated.';
+        }
+      } catch {
+        // Summarization failed, truncate
+        textToSpeak = textToSpeak.substring(0, maxLength) + '... Content truncated.';
+      }
+    } else if (textToSpeak.length > maxLength) {
+      // Normal truncation for moderately long text
+      textToSpeak = textToSpeak.substring(0, maxLength) + '... Message truncated.';
+    }
+
+    // Detect language and get appropriate voice
+    const detected = detectLanguage(textToSpeak);
+    const voice = getVoiceForLanguage(detected.lang);
+
+    // Synthesize and play (in background, don't block)
+    const audioBuffer = await synthesize(textToSpeak, { voice, lang: detected.lang });
+    await playWithWebview(audioBuffer, extensionContext, undefined, voice);
+  } catch (error) {
+    // Don't show errors for voice mode - just log
+    console.warn('[Alex Voice] Auto-read failed:', error instanceof Error ? error.message : String(error));
+  }
 }
 
 /**

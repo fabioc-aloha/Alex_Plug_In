@@ -64,7 +64,7 @@ async function summarizeForSpeech(text: string, targetMinutes: number = 3): Prom
             // Fall back to any available model
             const allModels = await vscode.lm.selectChatModels();
             if (allModels.length === 0) {
-                vscode.window.showWarningMessage('No language model available for summarization. Reading full content.');
+                vscode.window.showWarningMessage('⚠️ No language model available for summarization. Reading full content.');
                 return undefined;
             }
             models.push(allModels[0]);
@@ -98,7 +98,7 @@ ${text}`)
         return summary.trim();
     } catch (error) {
         console.error('Summarization failed:', error);
-        vscode.window.showWarningMessage('Failed to summarize. Reading full content.');
+        vscode.window.showWarningMessage('⚠️ Failed to summarize. Reading full content.');
         return undefined;
     }
 }
@@ -166,27 +166,43 @@ export async function readAloud(
             rawText = new TextDecoder().decode(content);
             isMarkdown = uri.fsPath.endsWith('.md');
         } catch (error) {
-            vscode.window.showErrorMessage(`Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
+            vscode.window.showErrorMessage(`❌ Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
             return;
         }
     } else if (!editor) {
-        // No active editor - offer options to get text
+        // No active editor - offer options to get text or use other voice commands
         const choice = await vscode.window.showQuickPick([
-            { label: '$(clippy) Paste from Clipboard', value: 'clipboard' },
-            { label: '$(edit) Type Text', value: 'type' }
+            { label: '$(clippy) Paste from Clipboard', value: 'clipboard', description: 'Read text from clipboard' },
+            { label: '$(edit) Type Text', value: 'type', description: 'Enter custom text' },
+            { label: '', value: '', kind: vscode.QuickPickItemKind.Separator },
+            { label: '$(comment-discussion) Speak Prompt', value: 'speakPrompt', description: 'Generate & read content (Ctrl+Alt+P)' },
+            { label: '$(file-media) Save as Audio', value: 'saveAsAudio', description: 'Convert text to MP3 file' },
+            { label: '$(unmute) Toggle Voice Mode', value: 'toggleVoice', description: 'Auto-read Alex responses' }
         ], {
             title: 'Alex: Read Aloud',
             placeHolder: 'No document open. How would you like to provide text?'
         });
         
-        if (!choice) {
-            return; // User cancelled
+        if (!choice || !choice.value) {
+            return; // User cancelled or separator
+        }
+        
+        // Handle command shortcuts
+        if (choice.value === 'speakPrompt') {
+            await vscode.commands.executeCommand('alex.speakPrompt');
+            return;
+        } else if (choice.value === 'saveAsAudio') {
+            await vscode.commands.executeCommand('alex.saveAsAudio');
+            return;
+        } else if (choice.value === 'toggleVoice') {
+            await vscode.commands.executeCommand('alex.toggleVoice');
+            return;
         }
         
         if (choice.value === 'clipboard') {
             rawText = await vscode.env.clipboard.readText();
             if (!rawText.trim()) {
-                vscode.window.showWarningMessage('Clipboard is empty. Copy some text first.');
+                vscode.window.showWarningMessage('📋 Clipboard is empty. Copy some text first.');
                 return;
             }
         } else {
@@ -209,7 +225,7 @@ export async function readAloud(
     }
     
     if (!rawText.trim()) {
-        vscode.window.showWarningMessage('No text to read. Select text or open a document with content.');
+        vscode.window.showWarningMessage('📝 No text to read. Select text or open a document with content.');
         return;
     }
     
@@ -250,7 +266,7 @@ export async function readAloud(
             if (summary) {
                 textToSpeak = summary;
                 vscode.window.showInformationMessage(
-                    `Reading summarized version (${estimateDuration(summary.split(/\s+/).length).formatted})`
+                    `📖 Reading summarized version (${estimateDuration(summary.split(/\s+/).length).formatted})`
                 );
             }
             // If summarization fails, we continue with full text
@@ -269,7 +285,7 @@ export async function readAloud(
         
         // For non-English, show brief notification
         if (!detected.lang.startsWith('en-')) {
-            vscode.window.showInformationMessage(`Detected ${detected.name} - using ${selectedVoice.split('-')[2]}`);
+            vscode.window.showInformationMessage(`🌍 Detected ${detected.name} - using ${selectedVoice.split('-')[2]}`);
         }
     } else {
         // Low confidence - ask user
@@ -338,7 +354,7 @@ export async function readAloud(
                         break;
                     case 'error':
                         showTTSStatus('Error', false);
-                        vscode.window.showErrorMessage(`TTS Error: ${progress.error}`);
+                        vscode.window.showErrorMessage(`❌ TTS Error: ${progress.error}`);
                         break;
                 }
             }
@@ -362,15 +378,15 @@ export async function readAloud(
                     break;
                 case 'error':
                     hideTTSStatus();
-                    vscode.window.showErrorMessage(`Playback error: ${state.error}`);
+                    vscode.window.showErrorMessage(`❌ Playback error: ${state.error}`);
                     break;
             }
-        });
+        }, voice);
         
     } catch (error) {
         hideTTSStatus();
         const message = error instanceof Error ? error.message : String(error);
-        vscode.window.showErrorMessage(`Failed to read aloud: ${message}`);
+        vscode.window.showErrorMessage(`❌ Failed to read aloud: ${message}`);
     }
 }
 
@@ -398,27 +414,43 @@ export async function saveAsAudio(
             defaultName = path.basename(uri.fsPath, path.extname(uri.fsPath)) + '.mp3';
             isMarkdown = uri.fsPath.endsWith('.md');
         } catch (error) {
-            vscode.window.showErrorMessage(`Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
+            vscode.window.showErrorMessage(`❌ Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
             return;
         }
     } else if (!editor) {
-        // No active editor - offer options to get text
+        // No active editor - offer options to get text or use other voice commands
         const choice = await vscode.window.showQuickPick([
-            { label: '$(clippy) Paste from Clipboard', value: 'clipboard' },
-            { label: '$(edit) Type Text', value: 'type' }
+            { label: '$(clippy) Paste from Clipboard', value: 'clipboard', description: 'Save clipboard text as audio' },
+            { label: '$(edit) Type Text', value: 'type', description: 'Enter custom text' },
+            { label: '', value: '', kind: vscode.QuickPickItemKind.Separator },
+            { label: '$(book) Read Aloud', value: 'readAloud', description: 'Read text without saving (Ctrl+Alt+R)' },
+            { label: '$(comment-discussion) Speak Prompt', value: 'speakPrompt', description: 'Generate & read content (Ctrl+Alt+P)' },
+            { label: '$(unmute) Toggle Voice Mode', value: 'toggleVoice', description: 'Auto-read Alex responses' }
         ], {
             title: 'Alex: Save as Audio',
             placeHolder: 'No document open. How would you like to provide text?'
         });
         
-        if (!choice) {
-            return; // User cancelled
+        if (!choice || !choice.value) {
+            return; // User cancelled or separator
+        }
+        
+        // Handle command shortcuts
+        if (choice.value === 'readAloud') {
+            await vscode.commands.executeCommand('alex.readAloud');
+            return;
+        } else if (choice.value === 'speakPrompt') {
+            await vscode.commands.executeCommand('alex.speakPrompt');
+            return;
+        } else if (choice.value === 'toggleVoice') {
+            await vscode.commands.executeCommand('alex.toggleVoice');
+            return;
         }
         
         if (choice.value === 'clipboard') {
             rawText = await vscode.env.clipboard.readText();
             if (!rawText.trim()) {
-                vscode.window.showWarningMessage('Clipboard is empty. Copy some text first.');
+                vscode.window.showWarningMessage('📋 Clipboard is empty. Copy some text first.');
                 return;
             }
         } else {
@@ -446,7 +478,7 @@ export async function saveAsAudio(
     }
     
     if (!rawText.trim()) {
-        vscode.window.showWarningMessage('No text to convert. Select text or open a document with content.');
+        vscode.window.showWarningMessage('📝 No text to convert. Select text or open a document with content.');
         return;
     }
     
@@ -577,7 +609,7 @@ export async function saveAsAudio(
         );
         
         const openFile = await vscode.window.showInformationMessage(
-            `Audio saved to ${path.basename(saveUri.fsPath)}`,
+            `💾 Audio saved to ${path.basename(saveUri.fsPath)}`,
             'Open File',
             'Open Folder'
         );
@@ -590,7 +622,7 @@ export async function saveAsAudio(
         
     } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        vscode.window.showErrorMessage(`Failed to save audio: ${message}`);
+        vscode.window.showErrorMessage(`❌ Failed to save audio: ${message}`);
     }
 }
 
@@ -623,6 +655,123 @@ export async function readWithVoice(context: vscode.ExtensionContext): Promise<v
 }
 
 /**
+ * Speak a prompt - generate content with LLM then read aloud
+ * Use cases: "read me a poem", "tell me a story", "explain quantum physics"
+ */
+export async function speakPrompt(context: vscode.ExtensionContext): Promise<void> {
+    // Get the prompt from user
+    const prompt = await vscode.window.showInputBox({
+        title: 'Alex: Speak Prompt',
+        prompt: 'What would you like Alex to say?',
+        placeHolder: 'e.g., "Read me a haiku about coding", "Tell me a short story about a robot"',
+        ignoreFocusOut: true
+    });
+    
+    if (!prompt?.trim()) {
+        return;
+    }
+    
+    try {
+        showTTSStatus('Generating...', true);
+        
+        // Get available chat models
+        const models = await vscode.lm.selectChatModels({ family: 'gpt-4o' });
+        if (models.length === 0) {
+            const allModels = await vscode.lm.selectChatModels();
+            if (allModels.length === 0) {
+                vscode.window.showErrorMessage('❌ No language model available. Please ensure Copilot is active.');
+                hideTTSStatus();
+                return;
+            }
+            models.push(allModels[0]);
+        }
+        
+        const model = models[0];
+        
+        // Generate the spoken content
+        const messages = [
+            vscode.LanguageModelChatMessage.User(`You are Alex, a friendly AI assistant with a warm, engaging voice. The user wants you to speak aloud. Generate content that sounds natural when read by text-to-speech.
+
+User request: "${prompt}"
+
+Requirements:
+- Write in a natural, conversational tone suitable for listening
+- Use complete sentences with good rhythm and pacing
+- Avoid markdown formatting, bullet points, or code blocks
+- Keep it concise but engaging (aim for 1-3 minutes of speech)
+- For creative requests (poems, stories), be expressive and vivid
+- For educational content, be clear and accessible
+- Do NOT say "Here is..." or "I'll read you..." - just deliver the content directly
+
+Generate the spoken content now:`)
+        ];
+        
+        const response = await model.sendRequest(messages, {}, new vscode.CancellationTokenSource().token);
+        
+        let generatedText = '';
+        for await (const chunk of response.text) {
+            generatedText += chunk;
+        }
+        
+        generatedText = generatedText.trim();
+        
+        if (!generatedText) {
+            vscode.window.showWarningMessage('⚠️ No content was generated. Please try again.');
+            hideTTSStatus();
+            return;
+        }
+        
+        showTTSStatus('Synthesizing...', true);
+        
+        // Detect language and synthesize
+        const detected = detectLanguage(generatedText);
+        const voice = getVoiceForLanguage(detected.lang);
+        
+        const audioBuffer = await synthesize(
+            generatedText,
+            { voice, lang: detected.lang },
+            (progress: TTSChunkedProgress) => {
+                if (progress.state === 'streaming') {
+                    const kb = Math.round((progress.totalBytesReceived || progress.bytesReceived || 0) / 1024);
+                    showTTSStatus(`Receiving... ${kb}KB`, true);
+                }
+            }
+        );
+        
+        showTTSStatus('Playing', false);
+        
+        // Play the audio
+        await playWithWebview(audioBuffer, context, (state) => {
+            switch (state.state) {
+                case 'playing':
+                    const percent = state.progress ? Math.round(state.progress) : 0;
+                    showTTSStatus(`Playing ${percent}%`, false);
+                    break;
+                case 'paused':
+                    showTTSStatus('Paused', false);
+                    break;
+                case 'ended':
+                case 'stopped':
+                    hideTTSStatus();
+                    break;
+                case 'error':
+                    hideTTSStatus();
+                    vscode.window.showErrorMessage(`❌ Playback error: ${state.error}`);
+                    break;
+            }
+        }, voice);
+        
+    } catch (error) {
+        hideTTSStatus();
+        const message = error instanceof Error ? error.message : String(error);
+        vscode.window.showErrorMessage(`❌ Failed to generate speech: ${message}`);
+    }
+}
+
+// Export helper functions for use by voice mode
+export { summarizeForSpeech, estimateDuration, LONG_CONTENT_WORD_THRESHOLD };
+
+/**
  * Register all TTS commands
  */
 export function registerTTSCommands(context: vscode.ExtensionContext): void {
@@ -634,6 +783,11 @@ export function registerTTSCommands(context: vscode.ExtensionContext): void {
     // Read with voice selection
     context.subscriptions.push(
         vscode.commands.registerCommand('alex.readWithVoice', () => readWithVoice(context))
+    );
+    
+    // Speak prompt - generate content then read aloud
+    context.subscriptions.push(
+        vscode.commands.registerCommand('alex.speakPrompt', () => speakPrompt(context))
     );
     
     // Save as audio command (accepts optional URI from explorer context menu)

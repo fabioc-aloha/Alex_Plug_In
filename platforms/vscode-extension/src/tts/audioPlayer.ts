@@ -22,6 +22,7 @@ import { getNonce } from '../shared/sanitize';
 // Singleton webview panel for audio playback
 let audioPanel: vscode.WebviewPanel | undefined;
 let currentPlaybackId: string | undefined;
+let currentMediaFile: string | undefined;
 
 export interface PlaybackState {
     state: 'loading' | 'playing' | 'paused' | 'stopped' | 'ended' | 'error';
@@ -33,36 +34,43 @@ export interface PlaybackState {
 
 type PlaybackCallback = (state: PlaybackState) => void;
 
+// Media directory for audio files (set during playWithWebview)
+let mediaDir: string | undefined;
+
 /**
- * Save audio buffer to temp file and return path
+ * Save audio buffer to media file and return path
+ * Uses extension's globalStorageUri/media for reliable webview access
  */
-async function saveToTempFile(audioBuffer: Buffer, extension: string = '.mp3'): Promise<string> {
-    const tempDir = path.join(os.tmpdir(), 'alex-tts');
-    await fs.ensureDir(tempDir);
+async function saveToMediaFile(audioBuffer: Buffer, storageUri: vscode.Uri, extension: string = '.mp3'): Promise<string> {
+    mediaDir = path.join(storageUri.fsPath, 'media');
+    await fs.ensureDir(mediaDir);
     
     const filename = `alex-speech-${Date.now()}${extension}`;
-    const filepath = path.join(tempDir, filename);
+    const filepath = path.join(mediaDir, filename);
     await fs.writeFile(filepath, new Uint8Array(audioBuffer));
     
+    console.log('[AlexTTS] Saved audio to:', filepath);
     return filepath;
 }
 
 /**
- * Clean up old temp files (older than 1 hour)
+ * Clean up old media files (older than 1 hour)
  */
-async function cleanupTempFiles(): Promise<void> {
-    const tempDir = path.join(os.tmpdir(), 'alex-tts');
+async function cleanupMediaFiles(): Promise<void> {
+    if (!mediaDir) {
+        return;
+    }
     
     try {
-        if (!await fs.pathExists(tempDir)) {
+        if (!await fs.pathExists(mediaDir)) {
             return;
         }
         
-        const files = await fs.readdir(tempDir);
+        const files = await fs.readdir(mediaDir);
         const oneHourAgo = Date.now() - (60 * 60 * 1000);
         
         for (const file of files) {
-            const filepath = path.join(tempDir, file);
+            const filepath = path.join(mediaDir, file);
             const stats = await fs.stat(filepath);
             
             if (stats.mtimeMs < oneHourAgo) {
@@ -71,21 +79,24 @@ async function cleanupTempFiles(): Promise<void> {
         }
     } catch (error) {
         // Ignore cleanup errors
-        console.warn('TTS temp cleanup error:', error);
+        console.warn('TTS media cleanup error:', error);
     }
 }
 
 /**
  * Get HTML content for the audio player webview
+ * Uses webview URI for reliable audio playback (not data URIs or blob URLs)
  */
-function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
+function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: string = 'en-US-GuyNeural'): string {
     const nonce = getNonce();
+    // VS Code webview URIs use https://*.vscode-resource.vscode-cdn.net or vscode-webview-resource:
+    // CSP must allow these schemes for audio playback
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}'; media-src data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}'; media-src https: vscode-resource: vscode-webview-resource:;">
     <title>Alex TTS Player</title>
     <style>
         body {
@@ -196,23 +207,21 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         </div>
         
         <div class="controls">
-            <button id="playPauseBtn" onclick="togglePlayPause()">
+            <button id="playPauseBtn" data-cmd="togglePlayPause">
                 <span class="icon" id="playPauseIcon">⏸</span>
                 <span id="playPauseText">Pause</span>
             </button>
-            <button class="secondary" onclick="stopAndClose()">
+            <button class="secondary" data-cmd="stopAndClose">
                 <span class="icon">⏹</span>
                 Stop
             </button>
         </div>
         
         <p class="status" id="status">Playing...</p>
-        <p class="voice-info">Voice: Alex (en-US-GuyNeural)</p>
+        <p class="voice-info">Voice: ${voiceName}</p>
     </div>
 
-    <audio id="audio">
-        <source src="data:audio/mp3;base64,${audioBase64}" type="audio/mp3">
-    </audio>
+    <audio id="audio" preload="auto"></audio>
 
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
@@ -225,10 +234,11 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         const playPauseIcon = document.getElementById('playPauseIcon');
         const playPauseText = document.getElementById('playPauseText');
         
-        // Speaker activation delay (helps wake up Bluetooth/USB speakers)
-        const SPEAKER_WARMUP_MS = 2000;
+        // Audio URI from VS Code webview (uses asWebviewUri for local file access)
+        const audioUri = '${audioUri}';
         
         function formatTime(seconds) {
+            if (!isFinite(seconds)) return '0:00';
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return mins + ':' + secs.toString().padStart(2, '0');
@@ -243,26 +253,57 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
             });
         }
         
+        function log(msg) {
+            console.log('[AlexTTS] ' + msg);
+            // Also send to extension for debugging
+            vscode.postMessage({ type: 'debug', message: msg });
+        }
+        
+        function initAudio() {
+            log('Initializing audio with URI: ' + audioUri.substring(0, 80) + '...');
+            statusEl.textContent = 'Loading audio...';
+            
+            try {
+                audio.src = audioUri;
+                audio.load();
+                log('Audio load() called');
+            } catch (err) {
+                log('Error loading audio: ' + err.message);
+                statusEl.textContent = 'Error: ' + err.message;
+                sendState('error', { error: err.message });
+            }
+        }
+        
         audio.addEventListener('loadedmetadata', () => {
+            log('loadedmetadata: duration=' + audio.duration);
             durationEl.textContent = formatTime(audio.duration);
         });
         
+        audio.addEventListener('loadeddata', () => {
+            log('loadeddata event fired');
+        });
+        
+        audio.addEventListener('canplay', () => {
+            log('canplay event fired');
+        });
+        
         audio.addEventListener('canplaythrough', () => {
-            // Add a brief delay to wake up speakers (Bluetooth/USB often need time)
-            statusEl.textContent = 'Preparing speakers...';
-            sendState('preparing');
+            log('canplaythrough event fired');
+            statusEl.textContent = 'Ready to play...';
+            sendState('ready');
             
-            setTimeout(() => {
-                audio.play().then(() => {
-                    statusEl.textContent = 'Playing...';
-                    sendState('playing', { duration: audio.duration });
-                }).catch(err => {
-                    statusEl.textContent = 'Click Play to start';
-                    playPauseIcon.textContent = '▶';
-                    playPauseText.textContent = 'Play';
-                    sendState('paused');
-                });
-            }, SPEAKER_WARMUP_MS);
+            // Try to play immediately
+            audio.play().then(() => {
+                log('play() succeeded');
+                statusEl.textContent = 'Playing...';
+                sendState('playing', { duration: audio.duration });
+            }).catch(err => {
+                log('play() failed: ' + err.message);
+                statusEl.textContent = 'Click Play to start';
+                playPauseIcon.textContent = '▶';
+                playPauseText.textContent = 'Play';
+                sendState('paused');
+            });
         });
         
         audio.addEventListener('timeupdate', () => {
@@ -277,6 +318,7 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         });
         
         audio.addEventListener('ended', () => {
+            log('Audio ended');
             statusEl.textContent = 'Finished';
             playPauseIcon.textContent = '▶';
             playPauseText.textContent = 'Replay';
@@ -284,16 +326,32 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
         });
         
         audio.addEventListener('error', (e) => {
-            statusEl.textContent = 'Error playing audio';
-            sendState('error', { error: 'Audio playback failed' });
+            const errorCode = audio.error ? audio.error.code : 'unknown';
+            const errorMsg = audio.error ? audio.error.message : 'Unknown error';
+            log('Audio error: code=' + errorCode + ', msg=' + errorMsg);
+            statusEl.textContent = 'Error: ' + errorMsg;
+            sendState('error', { error: 'Audio error code ' + errorCode + ': ' + errorMsg });
+        });
+        
+        audio.addEventListener('stalled', () => {
+            log('Audio stalled');
+        });
+        
+        audio.addEventListener('waiting', () => {
+            log('Audio waiting for data');
         });
         
         function togglePlayPause() {
+            log('togglePlayPause called, paused=' + audio.paused + ', ended=' + audio.ended);
             if (audio.ended) {
                 audio.currentTime = 0;
                 audio.play();
             } else if (audio.paused) {
-                audio.play();
+                audio.play().then(() => {
+                    log('Manual play succeeded');
+                }).catch(err => {
+                    log('Manual play failed: ' + err.message);
+                });
             } else {
                 audio.pause();
             }
@@ -316,14 +374,18 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
             sendState('stopped');
             vscode.postMessage({ type: 'close' });
         }
-        
-        // Start playing notification
-        sendState('loading');
-        
-        // Ensure audio starts (backup for canplaythrough)
-        audio.addEventListener('loadstart', () => {
-            statusEl.textContent = 'Loading audio...';
+                // CSP-compliant event handlers (no inline onclick)
+        document.querySelectorAll('[data-cmd]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const cmd = btn.getAttribute('data-cmd');
+                if (cmd === 'togglePlayPause') togglePlayPause();
+                else if (cmd === 'stopAndClose') stopAndClose();
+            });
         });
+                // Initialize audio on load
+        log('Script loaded, initializing...');
+        sendState('loading');
+        initAudio();
     </script>
 </body>
 </html>`;
@@ -335,7 +397,8 @@ function getAudioPlayerHtml(audioBase64: string, playbackId: string): string {
 export async function playWithWebview(
     audioBuffer: Buffer,
     context: vscode.ExtensionContext,
-    onState?: PlaybackCallback
+    onState?: PlaybackCallback,
+    voiceName?: string
 ): Promise<void> {
     // Clean up previous panel if exists
     if (audioPanel) {
@@ -345,8 +408,13 @@ export async function playWithWebview(
     const playbackId = `playback-${Date.now()}`;
     currentPlaybackId = playbackId;
     
-    // Convert buffer to base64
-    const audioBase64 = audioBuffer.toString('base64');
+    // Save audio to extension's media folder (reliable webview access)
+    const mediaFile = await saveToMediaFile(audioBuffer, context.globalStorageUri, '.mp3');
+    currentMediaFile = mediaFile;
+    const audioFileUri = vscode.Uri.file(mediaFile);
+    const mediaFolderUri = vscode.Uri.file(path.dirname(mediaFile));
+    
+    console.log('[AlexTTS] Media folder:', mediaFolderUri.fsPath);
     
     // Create webview panel
     audioPanel = vscode.window.createWebviewPanel(
@@ -358,22 +426,39 @@ export async function playWithWebview(
         },
         {
             enableScripts: true,
-            retainContextWhenHidden: true
+            retainContextWhenHidden: true,
+            localResourceRoots: [mediaFolderUri]
         }
     );
     
+    // Convert file path to webview URI
+    const audioUri = audioPanel.webview.asWebviewUri(audioFileUri).toString();
+    console.log('[AlexTTS] Audio file URI:', audioUri);
+    
     // Set webview content
-    audioPanel.webview.html = getAudioPlayerHtml(audioBase64, playbackId);
+    audioPanel.webview.html = getAudioPlayerHtml(audioUri, playbackId, voiceName);
     
     // Handle messages from webview
     audioPanel.webview.onDidReceiveMessage(
         message => {
+            // Handle debug messages from any playback
+            if (message.type === 'debug') {
+                console.log('[AlexTTS WebView]', message.message);
+                return;
+            }
+            
             if (message.playbackId !== playbackId) {
                 return; // Ignore messages from old playbacks
             }
             
             switch (message.type) {
                 case 'playbackState':
+                    console.log('[AlexTTS] State:', message.state);
+                    
+                    // Set context for keyboard shortcut (Escape to stop)
+                    const isPlaying = message.state === 'playing' || message.state === 'loading';
+                    vscode.commands.executeCommand('setContext', 'alex.ttsPlaying', isPlaying);
+                    
                     onState?.({
                         state: message.state,
                         progress: message.progress,
@@ -398,12 +483,27 @@ export async function playWithWebview(
         if (currentPlaybackId === playbackId) {
             audioPanel = undefined;
             currentPlaybackId = undefined;
+            vscode.commands.executeCommand('setContext', 'alex.ttsPlaying', false);
             onState?.({ state: 'stopped' });
         }
     });
     
-    // Cleanup old temp files in background
-    cleanupTempFiles().catch(() => {});
+    // Cleanup old media files in background
+    cleanupMediaFiles().catch(() => {});
+}
+
+/**
+ * Save audio buffer to OS temp file (for system player)
+ */
+async function saveToTempFile(audioBuffer: Buffer, extension: string = '.mp3'): Promise<string> {
+    const tempDir = path.join(os.tmpdir(), 'alex-tts');
+    await fs.ensureDir(tempDir);
+    
+    const filename = `alex-speech-${Date.now()}${extension}`;
+    const filepath = path.join(tempDir, filename);
+    await fs.writeFile(filepath, new Uint8Array(audioBuffer));
+    
+    return filepath;
 }
 
 /**

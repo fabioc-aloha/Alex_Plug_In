@@ -12,6 +12,7 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 // import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
+import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -966,15 +967,21 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
         // Send request to language model
         const response = await model.sendRequest(messages, {}, token);
         
-        // Stream the response
+        // Stream the response and collect for voice mode
+        let collectedResponse = '';
         for await (const fragment of response.text) {
             stream.markdown(fragment);
+            collectedResponse += fragment;
         }
         
         // === UNCONSCIOUS MIND: Add encouragement if emotional state warrants it ===
         if (encouragement) {
             stream.markdown(`\n\n---\n*${encouragement}*`);
+            collectedResponse += ` ${encouragement}`;
         }
+
+        // Voice Mode: Read response aloud if enabled (fire and forget)
+        speakIfVoiceModeEnabled(collectedResponse).catch(() => {});
 
     } catch (err) {
         if (err instanceof vscode.LanguageModelError) {
