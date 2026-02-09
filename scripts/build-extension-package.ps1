@@ -29,6 +29,7 @@ Write-Host "Target: $TargetGithub"
 Write-Host ""
 
 # Files/folders to EXCLUDE from heir (development-specific)
+# NOTE: Skill exclusions are handled dynamically via synapses.json inheritance field
 $Exclusions = @(
     # GitHub repo features (not needed in user projects)
     "ISSUE_TEMPLATE",
@@ -52,18 +53,9 @@ $Exclusions = @(
     "config/USER-PROFILE.md",
     
     # Master-only protection marker (CRITICAL: never copy to heirs)
-    "config/MASTER-ALEX-PROTECTED.json",
+    "config/MASTER-ALEX-PROTECTED.json"
     
-    # Master-only skills (not inheritable)
-    "skills/meditation",
-    "skills/meditation-facilitation", 
-    "skills/knowledge-synthesis",
-    "skills/global-knowledge",
-    "skills/architecture-refinement",
-    "skills/llm-model-selection",
-    "skills/self-actualization",
-    "skills/heir-curation",
-    "skills/master-alex-audit"
+    # Skills are NOT hardcoded here - inheritance is read from synapses.json
 )
 
 # PERSONAL DATA PATTERNS - Fail build if found in heir
@@ -98,7 +90,29 @@ $ForbiddenPatterns = @(
 )
 
 # Skills explicitly marked as inheritable (copy these)
-# Note: We copy all skills EXCEPT master-only ones listed above
+# NOTE: Inheritance is read dynamically from synapses.json - not hardcoded
+
+function Get-SkillInheritance {
+    param([string]$SkillPath)
+    
+    $synapsePath = Join-Path $SkillPath "synapses.json"
+    if (-not (Test-Path $synapsePath)) {
+        # Default: inheritable if no synapses.json
+        return "inheritable"
+    }
+    
+    try {
+        $synapse = Get-Content $synapsePath -Raw | ConvertFrom-Json
+        if ($synapse.inheritance) {
+            return $synapse.inheritance
+        }
+        return "inheritable"
+    }
+    catch {
+        Write-Warning "Failed to parse $synapsePath - defaulting to inheritable"
+        return "inheritable"
+    }
+}
 
 function Test-ShouldExclude {
     param([string]$RelativePath)
@@ -106,6 +120,28 @@ function Test-ShouldExclude {
     # Normalize path separators to forward slashes for consistent matching
     $normalizedPath = $RelativePath -replace '\\', '/'
     
+    # Check skill inheritance from synapses.json (source of truth)
+    if ($normalizedPath -match "^skills/([^/]+)") {
+        $skillName = $Matches[1]
+        $skillFolder = Join-Path $SourceGithub "skills/$skillName"
+        
+        if (Test-Path $skillFolder) {
+            $inheritance = Get-SkillInheritance -SkillPath $skillFolder
+            
+            # Exclude master-only skills
+            if ($inheritance -eq "master-only") {
+                return $true
+            }
+            # For heir-specific skills, only include if targeting that heir
+            # Build script targets vscode heir
+            if ($inheritance -eq "heir:m365") {
+                return $true  # Exclude M365-only skills from VS Code heir
+            }
+            # heir:vscode and inheritable/universal pass through
+        }
+    }
+    
+    # Check hardcoded exclusions (non-skill files)
     foreach ($pattern in $Exclusions) {
         # Handle wildcards
         if ($pattern -match '\*') {

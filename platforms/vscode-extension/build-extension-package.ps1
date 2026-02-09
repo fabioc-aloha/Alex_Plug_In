@@ -78,7 +78,7 @@ $excludeItems = @(
     "config\user-profile.json",
     "config\USER-PROFILE.md",
     
-    # Master-only skills (not for heirs)
+    # Master-only skills (not for heirs - these manage Master Alex specifically)
     "skills\heir-curation",
     "skills\master-alex-audit",
     

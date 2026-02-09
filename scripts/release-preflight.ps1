@@ -169,7 +169,8 @@ $masterSkillsPath = Join-Path $rootPath ".github\skills"
 if ((Test-Path $readmePath) -and (Test-Path $masterSkillsPath)) {
     $actualSkillCount = (Get-ChildItem $masterSkillsPath -Directory).Count
     $readmeContent = Get-Content $readmePath -Raw
-    if ($readmeContent -match '(\d+) portable skills') {
+    # Match patterns like "77 skills" in README
+    if ($readmeContent -match '\|\s*\*\*Intelligence\*\*\s*\|\s*(\d+) skills') {
         $readmeSkillCount = [int]$matches[1]
         Write-Host "   README.md skills: $readmeSkillCount (actual: $actualSkillCount)" -ForegroundColor Gray
         if ($readmeSkillCount -ne $actualSkillCount) {

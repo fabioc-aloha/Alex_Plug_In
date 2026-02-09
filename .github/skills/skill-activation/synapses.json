@@ -1,7 +1,7 @@
 {
   "skill": "skill-activation",
   "version": "1.0.0",
-  "inheritance": "master-only",
+  "inheritance": "inheritable",
   "description": "Auto-triggering metacognitive skill for capability discovery before response formation",
   "category": "cognitive",
   "autoTrigger": true,

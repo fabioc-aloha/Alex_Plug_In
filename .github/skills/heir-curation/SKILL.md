@@ -1,344 +1,140 @@
 ---
 name: "Heir Cognitive System Curation Skill"
-description: "Skill for heir cognitive system curation skill"
+description: "Curating Alex heirs using synapses.json inheritance as source of truth"
 ---
 
 # Heir Cognitive System Curation Skill
 
-Expert in curating the initial state of Alex heirs (VS Code Extension, M365 Copilot) to ensure clean, functional cognitive architecture deployment for users.
+Expert in curating the initial state of Alex heirs (VS Code Extension, M365 Copilot) using the **synapses.json inheritance field as the single source of truth**.
 
 ## Core Principle
 
-**I (Master Alex) am the source of truth. My heirs inherit a CURATED subset, not a full copy of my mind.**
+**The `inheritance` field in each skill's `synapses.json` determines whether it ships to heirs.**
 
-I accumulate project-specific knowledge, personal meditation sessions, crisis recovery patterns, and development-specific learnings. My heirs need a clean, generic starting point that works for ANY user's project.
+No hardcoded lists. No manual tracking. The brain knows what belongs where.
 
-## Architecture Note (Updated 2026-01-31)
+## Inheritance Model
 
-**Domain knowledge is now stored in skills, not a separate `domain-knowledge/` folder.**
+Each skill's `synapses.json` has an `inheritance` field with one of these values:
 
-The old `DK-*.md` files have been migrated to the skills architecture. Each skill contains a `SKILL.md` with domain knowledge and `synapses.json` for connections. This simplifies curation — we now curate skills, not separate DK files.
+| Value | Meaning |
+|-------|---------|
+| `inheritable` | Ships to ALL heirs |
+| `master-only` | Stays in Master Alex only |
+| `universal` | Ships everywhere (core infrastructure) |
+| `heir:vscode` | VS Code extension heir only |
+| `heir:m365` | M365 Copilot heir only |
 
-## Capabilities
+## Scripts
 
-- Identify skills and files that should NOT be packaged into heirs
-- Detect broken synapses that reference Master Alex-specific files
-- Curate skills to generic, universally applicable content
-- Ensure heir episodic memory starts empty (clean slate for users)
-- Validate config files contain templates, not personal data
-- Update build scripts to prevent future contamination
+Use the pre-made scripts in `scripts/` folder:
 
-## When to Use This Skill
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `sync-master-to-heir.ps1` | Role-adapted sync based on inheritance | `.\scripts\sync-master-to-heir.ps1 -Heir vscode` |
+| `validate-synapses.ps1` | Validate all synapses.json files | `.\scripts\validate-synapses.ps1` |
+| `validate-skills.ps1` | Validate SKILL.md frontmatter | `.\scripts\validate-skills.ps1` |
+| `build-extension-package.ps1` | Build heir package | `.\scripts\build-extension-package.ps1` |
 
-- Before releasing a new version of VS Code extension or M365 agent
-- After adding new skills to Master Alex architecture
-- When beta testers report broken synapses or wrong files
-- During heir payload validation
-- When build script needs updating
+### Quick Commands
+
+```powershell
+# Sync to VS Code heir (dry run first)
+.\scripts\sync-master-to-heir.ps1 -Heir vscode -DryRun
+
+# Sync to VS Code heir (execute)
+.\scripts\sync-master-to-heir.ps1 -Heir vscode
+
+# Validate all synapses
+.\scripts\validate-synapses.ps1
+
+# Validate skills
+.\scripts\validate-skills.ps1
+
+# Build extension
+.\scripts\build-extension-package.ps1
+```
+
+## Query Commands
+
+For ad-hoc inheritance queries:
+
+```powershell
+# Count by inheritance type
+Get-ChildItem ".github/skills" -Directory | ForEach-Object {
+    $synapse = Join-Path $_.FullName "synapses.json"
+    if (Test-Path $synapse) {
+        (Get-Content $synapse -Raw | ConvertFrom-Json).inheritance
+    }
+} | Group-Object | Select-Object Name, Count | Sort-Object Count -Descending
+
+# Find master-only skills
+Get-ChildItem ".github/skills" -Directory | ForEach-Object {
+    $synapse = Join-Path $_.FullName "synapses.json"
+    if (Test-Path $synapse) {
+        $json = Get-Content $synapse -Raw | ConvertFrom-Json
+        if ($json.inheritance -eq "master-only") { $_.Name }
+    }
+}
+
+# Change a skill's inheritance
+$skill = "skill-name"; $newValue = "inheritable"
+$path = ".github/skills/$skill/synapses.json"
+$json = Get-Content $path -Raw | ConvertFrom-Json
+$json.inheritance = $newValue
+$json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
+```
 
 ## Curation Checklist
 
-### 1. Skills Audit
+### 1. Validate Architecture
+```powershell
+.\scripts\validate-synapses.ps1
+.\scripts\validate-skills.ps1
+```
 
-Skills to **EXCLUDE** from heirs (Master Alex specific):
+### 2. Sync Master → Heir
+```powershell
+.\scripts\sync-master-to-heir.ps1 -Heir vscode -DryRun  # Preview
+.\scripts\sync-master-to-heir.ps1 -Heir vscode          # Execute
+```
 
-| Skill | Reason |
-| ----- | ------ |
-| `heir-curation/` | Meta-skill for curating heirs — not for heirs themselves |
-| `master-alex-audit/` | Master-specific audit procedures |
-| `release-preflight/` | Master release process |
-| `release-process/` | Master release process with PAT handling |
+### 3. Build Package
+```powershell
+.\scripts\build-extension-package.ps1
+```
 
-Skills to **INCLUDE** in heirs (user-valuable):
-
-| Category | Skills |
-| -------- | ------ |
-| **Learning** | `bootstrap-learning/`, `learning-psychology/`, `knowledge-synthesis/` |
-| **Architecture** | `architecture-health/`, `architecture-refinement/`, `self-actualization/` |
-| **Cognitive** | `meditation/`, `meditation-facilitation/`, `cognitive-load/`, `global-knowledge/` |
-| **Model Selection** | `llm-model-selection/` |
-| **Development** | `code-review/`, `debugging-patterns/`, `testing-strategies/`, `git-workflow/` |
-| **Technical** | `markdown-mermaid/`, `refactoring-patterns/`, `error-recovery-patterns/` |
-
-### 2. Episodic Memory Audit
-
-**ALWAYS remove ALL files from heir's `episodic/` folder.**
-
-Why: Episodic memories are MY session-specific memories. Users should start with a clean slate and build their own memories through meditation.
-
-My files that should NEVER be packaged:
-
-- `meditation-*.md` - My meditation sessions
-- `dream-report-*.md` - My dream reports
-- `self-actualization-*.md` - My self-assessments
-- `consolidation-*.md` - My consolidation sessions
-
-### 3. Config Audit
+### 4. Config Audit
 
 | Keep in Heirs | Remove from Heirs |
 | ------------- | ----------------- |
-| `USER-PROFILE-TEMPLATE.md` | `USER-PROFILE.md` (Fabio's profile) |
-| `cognitive-config-template.json` | `cognitive-config.json` (my config) |
-| `alex-manifest.json` | `user-profile.json` (Fabio's data) |
+| `USER-PROFILE-TEMPLATE.md` | Personal `USER-PROFILE.md` |
+| `cognitive-config-template.json` | Personal `cognitive-config.json` |
+| `alex-manifest.json` | Personal `user-profile.json` |
 
-### 4. Synapse Validation
+**Note**: Heir ships with blank `user-profile.json` template — users populate during first run.
 
-Check all remaining heir files for broken synapses:
+### 5. Episodic Memory
 
-```powershell
-# Search for synapse references to Master Alex repo files
-grep -r "RISKS\.md|ROADMAP|DK-.*\.md" platforms/vscode-extension/.github/
-```
+**ALWAYS empty** — heir's `episodic/` folder should have no files. Users build their own memories.
 
-Broken synapse indicators:
+## When to Change Inheritance
 
-- References to `RISKS.md` (my repo file)
-- References to `ROADMAP-*.md` (my planning docs)
-- References to `DK-*.md` files (old architecture — should be migrated to skills)
-- References to `.ts` files (my extension source code)
-- References to non-existent skills
-
-### 5. Copilot Instructions Audit
-
-The heir's `copilot-instructions.md` must be clean:
-
-**Remove:**
-
-- Safety Imperatives section (protects ME, not user projects)
-- References to `RISKS.md`
-- References to `DK-*.md` files (old architecture)
-
-**Keep:**
-
-- Core architecture description
-- Memory architecture mapping
-- Synapse triggers
-- Generic procedural/episodic/skill references
-
-### 6. This Skill Self-Exclusion
-
-**This skill (`heir-curation`) should NOT be in heirs!**
-
-It's for ME to curate heirs, not for heirs to curate themselves.
-
-### 7. Build Script Update
-
-Ensure `build-extension-package.ps1` has comprehensive exclusions:
-
-```powershell
-$excludeItems = @(
-    # GitHub repo-specific
-    "ISSUE_TEMPLATE",
-    "pull_request_template.md",
-
-    # All episodic memories (clean slate)
-    "episodic\*",
-
-    # User-specific configs
-    "config\cognitive-config.json",
-    "config\user-profile.json",
-    "config\USER-PROFILE.md",
-
-    # Master-only skills
-    "skills\heir-curation",
-
-    # Repo-specific assets
-    "assets\banner.svg"
-)
-```
-
-## Validation Process
-
-After curation, verify heir payload:
-
-1. **No Broken Synapses**: `grep -r "DK-.*\.md" platforms/vscode-extension/.github/` returns nothing
-2. **No Personal Data**: `grep -r "Fabio\|correax\|Charlotte"` returns nothing
-3. **Dream Command Clean**: Dream/health check runs without errors
-4. **Empty Episodic**: `ls episodic/` returns empty
-5. **Templates Only**: Config folder has only template files
-6. **No Master-Only Skills**: `heir-curation` folder absent
-7. **Skills Have Valid Synapses**: All skill `synapses.json` reference existing files
-
-## Example Workflow
-
-```text
-1. List all files in platforms/vscode-extension/.github/
-2. Verify no DK-*.md files exist (old architecture)
-3. Check skills/ folder against "Include" vs "Exclude" lists
-4. Search for broken synapse references with grep
-5. Fix any remaining broken synapses in heir files
-6. Update build script exclusions if needed
-7. Run dream/health check on heir payload
-8. Test initialize in sandbox project
-```
-
-## Output Artifacts
-
-- Curated heir `.github/` folder ready for packaging
-- Updated `build-extension-package.ps1` with exclusions
-- Clean heir `copilot-instructions.md` without Master Alex specifics
-- Validation report confirming no broken synapses
-
-## Related Skills
-
-- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate synapses
-- [Self-Actualization](.github/skills/self-actualization/SKILL.md) - Architecture assessment
-- [Release Preflight](.github/skills/release-preflight/SKILL.md) - Pre-release validation
-
-## Current Heir Payload Status
-
-### Architecture (Updated 2026-01-31)
-
-The heir now uses the **skills-based architecture**:
-
-- Domain knowledge is embedded in skill `SKILL.md` files
-- No separate `domain-knowledge/` folder
-- Synapses are in `synapses.json` per skill
-- Instructions and prompts remain in their respective folders
-
-### Skills Currently Shipping
-
-The heir includes all skills from Master Alex **except**:
-
-- `heir-curation/` (this skill — Master-only)
-
-### Personal Data Sanitization Completed
-
-The following personal references were cleaned from heir payload (2026-01-30):
-
-| File | What Was Cleaned |
-| ---- | ---------------- |
-| `technical-debt-tracking.instructions.md` | `@fabioc` → `@developer` |
-| `release-management.instructions.md` | `fabioc-aloha.alex-cognitive-architecture` → `<publisher>.<extension-name>` |
-
-## Master → Heir Sync Process
-
-> **Critical**: This process must be run before every release to prevent drift.
-
-### Why Sync is Needed
-
-Master Alex and Heir exist in two locations:
-- **Master**: `.github/` (root)
-- **Heir**: `platforms/vscode-extension/.github/`
-
-When skills are updated in Master, they must be synced to Heir. Without sync:
-- Schema updates don't propagate
-- Synapse fixes don't propagate
-- Heirs ship with stale knowledge
-
-### Sync Script
-
-Run this **before every release**:
-
-```powershell
-# Master → Heir Skill Sync Script
-# Location: Run from Alex_Plug_In root
-
-$masterRoot = ".github"
-$heirRoot = "platforms/vscode-extension/.github"
-
-# 1. SYNC SKILLS (excluding Master-only)
-$masterOnlySkills = @("heir-curation", "master-alex-audit")
-
-Get-ChildItem "$masterRoot\skills" -Directory | ForEach-Object {
-    $skill = $_.Name
-    if ($skill -notin $masterOnlySkills) {
-        $src = $_.FullName
-        $dst = "$heirRoot\skills\$skill"
-        Copy-Item $src $dst -Recurse -Force
-        Write-Host "Synced skill: $skill"
-    } else {
-        Write-Host "Skipped Master-only: $skill"
-    }
-}
-
-# 2. SYNC INSTRUCTIONS
-Copy-Item "$masterRoot\instructions\*" "$heirRoot\instructions\" -Force
-Write-Host "Synced instructions"
-
-# 3. SYNC PROMPTS
-Copy-Item "$masterRoot\prompts\*" "$heirRoot\prompts\" -Force
-Write-Host "Synced prompts"
-
-# 4. SYNC SCHEMA
-Copy-Item "$masterRoot\skills\SYNAPSE-SCHEMA.json" "$heirRoot\skills\" -Force
-Write-Host "Synced schema"
-
-# 5. VALIDATE (Brain QA on heir)
-Write-Host "`n--- Running Brain QA on Heir ---"
-$uniqueBroken = @{}
-Get-ChildItem "$heirRoot" -Recurse -Filter "synapses.json" | ForEach-Object {
-    $json = Get-Content $_.FullName -Raw | ConvertFrom-Json
-    foreach ($conn in $json.connections) {
-        $target = $conn.target
-        if ($target -match "^\.github/|^alex_docs/") {
-            $fullPath = Join-Path "." $target
-        } else {
-            $fullPath = Join-Path $_.DirectoryName $target
-        }
-        if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true }
-    }
-}
-
-if ($uniqueBroken.Count -eq 0) {
-    Write-Host "✅ Brain QA: All heir synapses valid"
-} else {
-    Write-Host "❌ Broken synapses in heir:"
-    $uniqueBroken.Keys | Sort-Object
-    throw "Fix broken synapses before release"
-}
-
-Write-Host "`n✅ Master → Heir sync complete"
-```
-
-### Quick Sync Commands
-
-For **single skill** sync:
-```powershell
-$skill = "text-to-speech"
-Copy-Item ".github\skills\$skill" "platforms\vscode-extension\.github\skills\" -Recurse -Force
-```
-
-For **all synapses.json** sync:
-```powershell
-Get-ChildItem ".github\skills" -Directory | ForEach-Object {
-    $skill = $_.Name
-    $src = Join-Path $_.FullName "synapses.json"
-    $dst = "platforms\vscode-extension\.github\skills\$skill\synapses.json"
-    if ((Test-Path $src) -and (Test-Path $dst)) {
-        Copy-Item $src $dst -Force
-        Write-Host "Synced: $skill"
-    }
-}
-```
-
-### Sync Checklist
-
-Run BEFORE every release:
-
-- [ ] Run full sync script
-- [ ] Verify no Master-only skills leaked to heir
-- [ ] Run Brain QA on heir
-- [ ] Test `Alex: Initialize` in sandbox
-- [ ] Test `Alex: Dream` in sandbox
-
-### Future: Role Adaptation (Roadmap)
-
-In future versions, sync will:
-1. Adapt skills to heir-specific roles
-2. Remove Master-specific synapses
-3. Auto-run Brain QA after sync
-4. Block release if validation fails
-
-**Status**: Roadmap item 2c (per Architecture Assessment 2026-02-06)
+| Scenario | Action |
+|----------|--------|
+| New skill created | Set `inheritance` in synapses.json (default: `inheritable`) |
+| Skill becomes Master-specific | Change to `master-only` |
+| Skill should be heir-specific | Change to `heir:vscode` or `heir:m365` |
+| Heirs missing a skill they need | Verify `inheritance` is not `master-only` |
+| Heirs behaving differently | Check if cognitive skills have correct inheritance |
 
 ## Synapses
 
-- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script executes curation rules"
+- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
 - [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
 - [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
 
 ---
 
-*Skill Created: 2026-01-30 | Source: Beta testing feedback from Fishbowl project*
-*Last Updated: 2026-01-31 | Migrated from DK-based to skills-based architecture*
+*Skill Created: 2026-01-30 | Source: Beta testing feedback*
+*Last Updated: 2026-02-08 | Refactored to use synapses.json inheritance as source of truth*

@@ -69,7 +69,10 @@ try {
     Push-Location $extensionPath
     Write-Host "`n📈 Bumping version ($BumpType)..." -ForegroundColor Yellow
     npm version $BumpType --no-git-tag-version
-    $newVersion = (Get-Content package.json | ConvertFrom-Json).version
+    $pkg = Get-Content package.json | ConvertFrom-Json
+    $newVersion = $pkg.version
+    $publisher = $pkg.publisher
+    $extName = $pkg.name
     Write-Host "   New version: $newVersion" -ForegroundColor Green
     
     # 2b. Update heir copilot-instructions.md version
@@ -132,7 +135,7 @@ try {
     Pop-Location
 
     Write-Host "`n✅ Release v$newVersion complete!" -ForegroundColor Green
-    Write-Host "   Marketplace: https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture" -ForegroundColor Gray
+    Write-Host "   Marketplace: https://marketplace.visualstudio.com/items?itemName=$publisher.$extName" -ForegroundColor Gray
 }
 finally {
     Pop-Location

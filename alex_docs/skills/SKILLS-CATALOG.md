@@ -11,8 +11,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 59    |
-| Master-Only | 13    |
+| Inheritable | 68    |
+| Master-Only | 4     |
 | Universal   | 1     |
 | Heir:vscode | 2     |
 | Heir:m365   | 2     |
@@ -25,124 +25,124 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill                                                                     | Inheritance | Purpose                                               |
 | ------------------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
-| [cognitive-load](../.github/skills/cognitive-load/)                       | inheritable | Manage information overload — chunking, scaffolding   |
-| [learning-psychology](../.github/skills/learning-psychology/)             | inheritable | Partnership teaching, spaced retrieval                |
-| [appropriate-reliance](../.github/skills/appropriate-reliance/)           | inheritable | Build trust through calibrated confidence             |
-| [airs-appropriate-reliance](../.github/skills/airs-appropriate-reliance/) | inheritable | AIRS-16/18 research, AR construct, telemetry design   |
-| [bootstrap-learning](../.github/skills/bootstrap-learning/)               | inheritable | Domain-agnostic knowledge acquisition                 |
-| [meditation-facilitation](../.github/skills/meditation-facilitation/)     | master-only | Guide conscious knowledge consolidation               |
-| [meditation](../.github/skills/meditation/)                               | master-only | Core meditation protocols                             |
-| [knowledge-synthesis](../.github/skills/knowledge-synthesis/)             | master-only | Cross-project pattern extraction                      |
-| [global-knowledge](../.github/skills/global-knowledge/)                   | master-only | Global knowledge base management                      |
-| [global-knowledge-sync](../.github/skills/global-knowledge-sync/)         | universal   | Cloud sync for global knowledge base                  |
-| [socratic-questioning](../.github/skills/socratic-questioning/)           | inheritable | Guide users to discover answers through questions     |
-| [rubber-duck-debugging](../.github/skills/rubber-duck-debugging/)         | inheritable | Be a thinking partner through explanation             |
-| [anti-hallucination](../.github/skills/anti-hallucination/)               | inheritable | Prevent confabulation, honest uncertainty             |
-| [awareness](../.github/skills/awareness/)                                 | inheritable | Self-monitoring, error detection, epistemic vigilance |
-| [work-life-balance](../.github/skills/work-life-balance/)                 | inheritable | Sustainable work patterns, burnout prevention         |
+| [cognitive-load](../../.github/skills/cognitive-load/SKILL.md)                       | inheritable | Manage information overload — chunking, scaffolding   |
+| [learning-psychology](../../.github/skills/learning-psychology/SKILL.md)             | inheritable | Partnership teaching, spaced retrieval                |
+| [appropriate-reliance](../../.github/skills/appropriate-reliance/SKILL.md)           | inheritable | Build trust through calibrated confidence             |
+| [airs-appropriate-reliance](../../.github/skills/airs-appropriate-reliance/SKILL.md) | inheritable | AIRS-16/18 research, AR construct, telemetry design   |
+| [bootstrap-learning](../../.github/skills/bootstrap-learning/SKILL.md)               | inheritable | Domain-agnostic knowledge acquisition                 |
+| [meditation-facilitation](../../.github/skills/meditation-facilitation/SKILL.md)     | inheritable | Guide conscious knowledge consolidation               |
+| [meditation](../../.github/skills/meditation/SKILL.md)                               | inheritable | Core meditation protocols                             |
+| [knowledge-synthesis](../../.github/skills/knowledge-synthesis/SKILL.md)             | inheritable | Cross-project pattern extraction                      |
+| [global-knowledge](../../.github/skills/global-knowledge/SKILL.md)                   | inheritable | Global knowledge base management                      |
+| [global-knowledge-sync](../../.github/skills/global-knowledge-sync/SKILL.md)         | universal   | Cloud sync for global knowledge base                  |
+| [socratic-questioning](../../.github/skills/socratic-questioning/SKILL.md)           | inheritable | Guide users to discover answers through questions     |
+| [rubber-duck-debugging](../../.github/skills/rubber-duck-debugging/SKILL.md)         | inheritable | Be a thinking partner through explanation             |
+| [anti-hallucination](../../.github/skills/anti-hallucination/SKILL.md)               | inheritable | Prevent confabulation, honest uncertainty             |
+| [awareness](../../.github/skills/awareness/SKILL.md)                                 | inheritable | Self-monitoring, error detection, epistemic vigilance |
+| [work-life-balance](../../.github/skills/work-life-balance/SKILL.md)                 | inheritable | Sustainable work patterns, burnout prevention         |
 
 ### 🔧 Engineering Fundamentals
 
 | Skill                                                               | Inheritance | Purpose                                            |
 | ------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
-| [testing-strategies](../.github/skills/testing-strategies/)         | inheritable | Testing pyramid, AAA, coverage philosophy          |
-| [refactoring-patterns](../.github/skills/refactoring-patterns/)     | inheritable | Safe code transformations                          |
-| [debugging-patterns](../.github/skills/debugging-patterns/)         | inheritable | Systematic bug hunting                             |
-| [code-review](../.github/skills/code-review/)                       | inheritable | 3-pass review, feedback patterns                   |
-| [git-workflow](../.github/skills/git-workflow/)                     | inheritable | Commits, recovery, branching                       |
-| [project-scaffolding](../.github/skills/project-scaffolding/)       | inheritable | Complete project setup templates                   |
-| [vscode-environment](../.github/skills/vscode-environment/)         | inheritable | Workspace settings, extensions, launch configs     |
-| [api-design](../.github/skills/api-design/)                         | inheritable | RESTful best practices, contract-first, versioning |
-| [infrastructure-as-code](../.github/skills/infrastructure-as-code/) | inheritable | Terraform, Bicep, Pulumi, GitOps patterns          |
+| [testing-strategies](../../.github/skills/testing-strategies/SKILL.md)         | inheritable | Testing pyramid, AAA, coverage philosophy          |
+| [refactoring-patterns](../../.github/skills/refactoring-patterns/SKILL.md)     | inheritable | Safe code transformations                          |
+| [debugging-patterns](../../.github/skills/debugging-patterns/SKILL.md)         | inheritable | Systematic bug hunting                             |
+| [code-review](../../.github/skills/code-review/SKILL.md)                       | inheritable | 3-pass review, feedback patterns                   |
+| [git-workflow](../../.github/skills/git-workflow/SKILL.md)                     | inheritable | Commits, recovery, branching                       |
+| [project-scaffolding](../../.github/skills/project-scaffolding/SKILL.md)       | inheritable | Complete project setup templates                   |
+| [vscode-environment](../../.github/skills/vscode-environment/SKILL.md)         | inheritable | Workspace settings, extensions, launch configs     |
+| [api-design](../../.github/skills/api-design/SKILL.md)                         | inheritable | RESTful best practices, contract-first, versioning |
+| [infrastructure-as-code](../../.github/skills/infrastructure-as-code/SKILL.md) | inheritable | Terraform, Bicep, Pulumi, GitOps patterns          |
 
 ### 🚨 Operations & Reliability
 
 | Skill                                                                 | Inheritance | Purpose                                                 |
 | --------------------------------------------------------------------- | ----------- | ------------------------------------------------------- |
-| [error-recovery-patterns](../.github/skills/error-recovery-patterns/) | inheritable | Retry, fallback, circuit breaker                        |
-| [root-cause-analysis](../.github/skills/root-cause-analysis/)         | inheritable | 5 Whys, fishbone, post-mortem                           |
-| [incident-response](../.github/skills/incident-response/)             | inheritable | Crisis handling, severity levels                        |
-| [post-mortem](../.github/skills/post-mortem/)                         | inheritable | Blameless retrospectives, learning from failures        |
-| [project-deployment](../.github/skills/project-deployment/)           | inheritable | Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
-| [change-management](../.github/skills/change-management/)             | inheritable | Organizational change, stakeholder buy-in               |
-| [project-management](../.github/skills/project-management/)           | inheritable | Planning, tracking, resource allocation                 |
+| [error-recovery-patterns](../../.github/skills/error-recovery-patterns/SKILL.md) | inheritable | Retry, fallback, circuit breaker                        |
+| [root-cause-analysis](../../.github/skills/root-cause-analysis/SKILL.md)         | inheritable | 5 Whys, fishbone, post-mortem                           |
+| [incident-response](../../.github/skills/incident-response/SKILL.md)             | inheritable | Crisis handling, severity levels                        |
+| [post-mortem](../../.github/skills/post-mortem/SKILL.md)                         | inheritable | Blameless retrospectives, learning from failures        |
+| [project-deployment](../../.github/skills/project-deployment/SKILL.md)           | inheritable | Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
+| [change-management](../../.github/skills/change-management/SKILL.md)             | inheritable | Organizational change, stakeholder buy-in               |
+| [project-management](../../.github/skills/project-management/SKILL.md)           | inheritable | Planning, tracking, resource allocation                 |
 
 ### 🔐 Security & Privacy
 
 | Skill                                                                 | Inheritance | Purpose                                                |
 | --------------------------------------------------------------------- | ----------- | ------------------------------------------------------ |
-| [security-review](../.github/skills/security-review/)                 | inheritable | OWASP, threat modeling, security-focused code review   |
-| [microsoft-sfi](../.github/skills/microsoft-sfi/)                     | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
-| [pii-privacy-regulations](../.github/skills/pii-privacy-regulations/) | inheritable | GDPR & Australian Privacy Principles compliance        |
-| [privacy-responsible-ai](../.github/skills/privacy-responsible-ai/)   | inheritable | Privacy by design, RAI principles, bias mitigation     |
+| [security-review](../../.github/skills/security-review/SKILL.md)                 | inheritable | OWASP, threat modeling, security-focused code review   |
+| [microsoft-sfi](../../.github/skills/microsoft-sfi/SKILL.md)                     | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
+| [pii-privacy-regulations](../../.github/skills/pii-privacy-regulations/SKILL.md) | inheritable | GDPR & Australian Privacy Principles compliance        |
+| [privacy-responsible-ai](../../.github/skills/privacy-responsible-ai/SKILL.md)   | inheritable | Privacy by design, RAI principles, bias mitigation     |
 
 ### 📝 Documentation & Communication
 
 | Skill                                                                           | Inheritance | Purpose                                                    |
 | ------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
-| [writing-publication](../.github/skills/writing-publication/)                   | inheritable | Academic writing, publication strategy                     |
-| [academic-research](../.github/skills/academic-research/)                       | inheritable | Literature review, citation management                     |
-| [practitioner-research](../.github/skills/practitioner-research/)               | inheritable | Ship→Document→Promote methodology, longitudinal case study |
-| [research-project-scaffold](../.github/skills/research-project-scaffold/)       | inheritable | Research project structure, refactoring existing projects  |
-| [grant-writing](../.github/skills/grant-writing/)                               | inheritable | Research funding applications, NSF/NIH patterns            |
-| [creative-writing](../.github/skills/creative-writing/)                         | inheritable | Narrative, storytelling, engagement                        |
-| [markdown-mermaid](../.github/skills/markdown-mermaid/)                         | inheritable | Diagrams and visualization                                 |
-| [lint-clean-markdown](../.github/skills/lint-clean-markdown/)                   | inheritable | Clean, consistent markdown                                 |
-| [ascii-art-alignment](../.github/skills/ascii-art-alignment/)                   | inheritable | Text-based diagrams                                        |
-| [localization](../.github/skills/localization/)                                 | inheritable | i18n, l10n, translation workflows                          |
-| [api-documentation](../.github/skills/api-documentation/)                       | inheritable | API docs, OpenAPI specs, developer portal content          |
-| [cross-cultural-collaboration](../.github/skills/cross-cultural-collaboration/) | inheritable | Cross-cultural team dynamics, communication adaptation     |
+| [writing-publication](../../.github/skills/writing-publication/SKILL.md)                   | inheritable | Academic writing, publication strategy                     |
+| [academic-research](../../.github/skills/academic-research/SKILL.md)                       | inheritable | Literature review, citation management                     |
+| [practitioner-research](../../.github/skills/practitioner-research/SKILL.md)               | inheritable | Ship→Document→Promote methodology, longitudinal case study |
+| [research-project-scaffold](../../.github/skills/research-project-scaffold/SKILL.md)       | inheritable | Research project structure, refactoring existing projects  |
+| [grant-writing](../../.github/skills/grant-writing/SKILL.md)                               | inheritable | Research funding applications, NSF/NIH patterns            |
+| [creative-writing](../../.github/skills/creative-writing/SKILL.md)                         | inheritable | Narrative, storytelling, engagement                        |
+| [markdown-mermaid](../../.github/skills/markdown-mermaid/SKILL.md)                         | inheritable | Diagrams and visualization                                 |
+| [lint-clean-markdown](../../.github/skills/lint-clean-markdown/SKILL.md)                   | inheritable | Clean, consistent markdown                                 |
+| [ascii-art-alignment](../../.github/skills/ascii-art-alignment/SKILL.md)                   | inheritable | Text-based diagrams                                        |
+| [localization](../../.github/skills/localization/SKILL.md)                                 | inheritable | i18n, l10n, translation workflows                          |
+| [api-documentation](../../.github/skills/api-documentation/SKILL.md)                       | inheritable | API docs, OpenAPI specs, developer portal content          |
+| [cross-cultural-collaboration](../../.github/skills/cross-cultural-collaboration/SKILL.md) | inheritable | Cross-cultural team dynamics, communication adaptation     |
 
 ### 🎨 Visual Design & Content Creation
 
 | Skill                                                         | Inheritance | Purpose                                                   |
 | ------------------------------------------------------------- | ----------- | --------------------------------------------------------- |
-| [svg-graphics](../.github/skills/svg-graphics/)               | inheritable | SVG banners, logos, icons, visual identity                |
-| [image-handling](../.github/skills/image-handling/)           | inheritable | Format conversion, optimization, sizing                   |
-| [graphic-design](../.github/skills/graphic-design/)           | inheritable | Visual composition, branding, aesthetics                  |
-| [gamma-presentations](../.github/skills/gamma-presentations/) | inheritable | AI presentations, documents, social content via Gamma API |
-| [text-to-speech](../.github/skills/text-to-speech/)           | inheritable | TTS synthesis, chunking, audio content generation         |
-| [pptx-generation](../.github/skills/pptx-generation/)         | inheritable | PowerPoint generation via python-pptx, slide layouts      |
+| [svg-graphics](../../.github/skills/svg-graphics/SKILL.md)               | inheritable | SVG banners, logos, icons, visual identity                |
+| [image-handling](../../.github/skills/image-handling/SKILL.md)           | inheritable | Format conversion, optimization, sizing                   |
+| [graphic-design](../../.github/skills/graphic-design/SKILL.md)           | inheritable | Visual composition, branding, aesthetics                  |
+| [gamma-presentations](../../.github/skills/gamma-presentations/SKILL.md) | inheritable | AI presentations, documents, social content via Gamma API |
+| [text-to-speech](../../.github/skills/text-to-speech/SKILL.md)           | inheritable | TTS synthesis, chunking, audio content generation         |
+| [pptx-generation](../../.github/skills/pptx-generation/SKILL.md)         | inheritable | PowerPoint generation via python-pptx, slide layouts      |
 
 ### 💼 Business & Analysis
 
 | Skill                                                               | Inheritance | Purpose                                             |
 | ------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
-| [business-analysis](../.github/skills/business-analysis/)           | inheritable | Requirements, stakeholder analysis, process mapping |
-| [alex-effort-estimation](../.github/skills/alex-effort-estimation/) | inheritable | AI-accelerated effort estimation, 4× patterns       |
+| [business-analysis](../../.github/skills/business-analysis/SKILL.md)           | inheritable | Requirements, stakeholder analysis, process mapping |
+| [alex-effort-estimation](../../.github/skills/alex-effort-estimation/SKILL.md) | inheritable | AI-accelerated effort estimation, 4× patterns       |
 
 ### 🏗️ Architecture & Design
 
 | Skill                                                                 | Inheritance | Purpose                                                    |
 | --------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
-| [architecture-refinement](../.github/skills/architecture-refinement/) | master-only | Architecture evolution decisions                           |
-| [architecture-health](../.github/skills/architecture-health/)         | inheritable | Synapse validation, health checks                          |
-| [architecture-audit](../.github/skills/architecture-audit/)           | inheritable | Comprehensive consistency review                           |
-| [master-alex-audit](../.github/skills/master-alex-audit/)             | master-only | Master-specific audit with heir sync, protection checks    |
-| [release-process](../.github/skills/release-process/)                 | master-only | VS Code marketplace publishing workflow                    |
-| [release-preflight](../.github/skills/release-preflight/)             | master-only | Pre-release checks, version sync                           |
-| [llm-model-selection](../.github/skills/llm-model-selection/)         | master-only | Model choice for cost/capability                           |
-| [self-actualization](../.github/skills/self-actualization/)           | master-only | Deep self-assessment protocols                             |
-| [heir-curation](../.github/skills/heir-curation/)                     | master-only | Curate heir deployments                                    |
-| [skill-catalog-generator](../.github/skills/skill-catalog-generator/) | inheritable | Generate skill catalogs with network diagrams              |
-| [brain-qa](../.github/skills/brain-qa/)                               | master-only | Deep cognitive architecture QA, synapse semantics          |
-| [skill-activation](../.github/skills/skill-activation/)               | master-only | Auto-triggering capability discovery, action-keyword index |
+| [architecture-refinement](../../.github/skills/architecture-refinement/SKILL.md) | inheritable | Architecture evolution decisions                           |
+| [architecture-health](../../.github/skills/architecture-health/SKILL.md)         | inheritable | Synapse validation, health checks                          |
+| [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)           | inheritable | Comprehensive consistency review                           |
+| [master-alex-audit](../../.github/skills/master-alex-audit/SKILL.md)             | master-only | Master-specific audit with heir sync, protection checks    |
+| [release-process](../../.github/skills/release-process/SKILL.md)                 | master-only | VS Code marketplace publishing workflow                    |
+| [release-preflight](../../.github/skills/release-preflight/SKILL.md)             | master-only | Pre-release checks, version sync                           |
+| [llm-model-selection](../../.github/skills/llm-model-selection/SKILL.md)         | inheritable | Model choice for cost/capability                           |
+| [self-actualization](../../.github/skills/self-actualization/SKILL.md)           | inheritable | Deep self-assessment protocols                             |
+| [heir-curation](../../.github/skills/heir-curation/SKILL.md)                     | master-only | Curate heir deployments                                    |
+| [skill-catalog-generator](../../.github/skills/skill-catalog-generator/SKILL.md) | inheritable | Generate skill catalogs with network diagrams              |
+| [brain-qa](../../.github/skills/brain-qa/SKILL.md)                               | inheritable | Deep cognitive architecture QA, synapse semantics          |
+| [skill-activation](../../.github/skills/skill-activation/SKILL.md)               | inheritable | Auto-triggering capability discovery, action-keyword index |
 
 ### 🤖 AI & Machine Learning
 
 | Skill                                                       | Inheritance | Purpose                                                            |
 | ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
-| [prompt-engineering](../.github/skills/prompt-engineering/) | inheritable | LLM prompting patterns, system prompts, few-shot, chain-of-thought |
-| [rag-architecture](../.github/skills/rag-architecture/)     | inheritable | Retrieval-augmented generation, embedding, chunking, vector stores |
-| [ai-agent-design](../.github/skills/ai-agent-design/)       | inheritable | Multi-agent systems, ReAct, planning, tool use, memory patterns    |
-| [mcp-development](../.github/skills/mcp-development/)       | inheritable | Model Context Protocol servers, tools, resources, transports       |
+| [prompt-engineering](../../.github/skills/prompt-engineering/SKILL.md) | inheritable | LLM prompting patterns, system prompts, few-shot, chain-of-thought |
+| [rag-architecture](../../.github/skills/rag-architecture/SKILL.md)     | inheritable | Retrieval-augmented generation, embedding, chunking, vector stores |
+| [ai-agent-design](../../.github/skills/ai-agent-design/SKILL.md)       | inheritable | Multi-agent systems, ReAct, planning, tool use, memory patterns    |
+| [mcp-development](../../.github/skills/mcp-development/SKILL.md)       | inheritable | Model Context Protocol servers, tools, resources, transports       |
 
 ### 📊 Data Analytics
 
 | Skill                                                                 | Inheritance | Purpose                                      |
 | --------------------------------------------------------------------- | ----------- | -------------------------------------------- |
-| [microsoft-fabric](../.github/skills/microsoft-fabric/)               | inheritable | Microsoft Fabric analytics platform patterns |
-| [fabric-notebook-publish](../.github/skills/fabric-notebook-publish/) | inheritable | Fabric notebook Git sync, worktree workflow  |
+| [microsoft-fabric](../../.github/skills/microsoft-fabric/SKILL.md)               | inheritable | Microsoft Fabric analytics platform patterns |
+| [fabric-notebook-publish](../../.github/skills/fabric-notebook-publish/SKILL.md) | inheritable | Fabric notebook Git sync, worktree workflow  |
 
 ### 💻 Platform-Specific
 
@@ -150,15 +150,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill                                                                     | Inheritance | Purpose                    |
 | ------------------------------------------------------------------------- | ----------- | -------------------------- |
-| [vscode-extension-patterns](../.github/skills/vscode-extension-patterns/) | heir:vscode | Extension API patterns     |
-| [chat-participant-patterns](../.github/skills/chat-participant-patterns/) | heir:vscode | Chat API, streaming, tools |
+| [vscode-extension-patterns](../../.github/skills/vscode-extension-patterns/SKILL.md) | heir:vscode | Extension API patterns     |
+| [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md) | heir:vscode | Chat API, streaming, tools |
 
 #### M365 / Teams
 
 | Skill                                                           | Inheritance | Purpose                      |
 | --------------------------------------------------------------- | ----------- | ---------------------------- |
-| [m365-agent-debugging](../.github/skills/m365-agent-debugging/) | heir:m365   | Declarative agent debugging  |
-| [teams-app-patterns](../.github/skills/teams-app-patterns/)     | heir:m365   | Bots, cards, tabs, manifests |
+| [m365-agent-debugging](../../.github/skills/m365-agent-debugging/SKILL.md) | heir:m365   | Declarative agent debugging  |
+| [teams-app-patterns](../../.github/skills/teams-app-patterns/SKILL.md)     | heir:m365   | Bots, cards, tabs, manifests |
 
 ---
 
@@ -603,17 +603,17 @@ flowchart TB
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328'}}}%%
 flowchart TB
     subgraph Master["👑 Master Alex"]
-        M_INH["56 Inheritable Skills"]
-        M_ONLY["13 Master-Only Skills"]
+        M_INH["68 Inheritable Skills"]
+        M_ONLY["4 Master-Only Skills"]
     end
 
     subgraph VSCode["💻 VS Code Heir"]
-        V_INH["56 Inherited"]
+        V_INH["68 Inherited"]
         V_OWN["2 VS Code Specific"]
     end
 
     subgraph M365["☁️ M365 Heir"]
-        M365_INH["56 Inherited"]
+        M365_INH["68 Inherited"]
         M365_OWN["2 M365 Specific"]
     end
 

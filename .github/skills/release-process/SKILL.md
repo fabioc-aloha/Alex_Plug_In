@@ -1,6 +1,6 @@
 ---
 name: "Release Process Skill"
-description: "⚠️ **IMPORTANT**: PATs expire frequently and may only work for a single publish session."
+description: "Complete release automation for VS Code Marketplace publishing"
 ---
 
 # Release Process Skill
@@ -133,20 +133,26 @@ The `release-vscode.ps1` script handles all of these automatically.
          │
          ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ 1. Preflight    │───▶│ 2. Version Bump │───▶│ 3. CHANGELOG    │
-│ - PAT check     │    │ - package.json  │    │ - Add entry     │
-│ - Build check   │    │ - heir version  │    │ - Date stamp    │
-│ - Lint check    │    │                 │    │                 │
-│ - Version sync  │    │                 │    │                 │
+│ 0. PAT Check    │───▶│ 1a. Sync Heir   │───▶│ 1b. Preflight   │
+│ - Load .env     │    │ - build-pkg.ps1 │    │ - Version sync  │
+│ - Validate      │    │ - Master→Heir   │    │ - Build/Lint    │
+│                 │    │                 │    │ - Manifest check│
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │
          ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ 4. Human Review │───▶│ 5. Git Commit   │───▶│ 6. Publish      │
-│ - Confirm (y/N) │    │ - Commit        │    │ - vsce publish  │
-│ - Edit CHANGELOG│    │ - Tag           │    │ - --pre-release │
-│                 │    │ - Push          │    │                 │
+│ 2. Version Bump │───▶│ 3. CHANGELOG    │───▶│ 4. Git Commit   │
+│ - package.json  │    │ - Add entry     │    │ - Commit        │
+│ - heir version  │    │ - Date stamp    │    │ - Tag           │
+│                 │    │                 │    │ - Push          │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
+         │
+         ▼
+┌─────────────────┐
+│ 5. Publish      │
+│ - vsce publish  │
+│ - --pre-release │
+└─────────────────┘
 ```
 
 ### Manual Checklist
@@ -170,8 +176,11 @@ The `release-preflight.ps1` script validates:
 
 | Check | What It Does |
 |-------|--------------|
-| PAT | Verifies VSCE_PAT is available |
-| Version Sync | package.json = CHANGELOG = heir instructions |
+| PAT | Verifies VSCE_PAT is available in env or .env |
+| Version Sync | package.json = CHANGELOG = Master instructions = heir instructions |
+| BUILD-MANIFEST | Checks heir was synced recently (warns if > 24h old) |
+| README Skill Count | Verifies documented skill count matches actual |
+| ROADMAP Version | Warns if ROADMAP-UNIFIED.md version differs |
 | Build | `npm run compile` succeeds |
 | Lint | `npm run lint` passes |
 | Tests | `npm test` passes (can skip with `-SkipTests`) |
@@ -230,7 +239,7 @@ Alex_Plug_In/
 **Solution**:
 1. Check internet connection
 2. Verify PAT is valid
-3. Try `npx vsce login fabioc-aloha` first
+3. Try `npx vsce login <publisher-name>` first
 
 ---
 

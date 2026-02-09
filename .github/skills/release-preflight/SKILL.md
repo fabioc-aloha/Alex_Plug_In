@@ -1,3 +1,4 @@
+````skill
 ---
 name: "Release Preflight Skill"
 description: "Pre-checks, version consistency, and deployment discipline."
@@ -12,6 +13,19 @@ applyTo: "**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/
 
 > **NEVER publish without running the preflight checklist.**
 
+## Quick Start
+
+```powershell
+# Full preflight check
+scripts/release-preflight.ps1
+
+# With packaging test
+scripts/release-preflight.ps1 -Package
+
+# Skip time-consuming tests
+scripts/release-preflight.ps1 -SkipTests
+```
+
 ## Version Locations (Must Stay Synchronized)
 
 | # | Location | Field | Example |
@@ -19,407 +33,73 @@ applyTo: "**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/
 | 1 | `platforms/vscode-extension/package.json` | `version` | `"5.1.0"` |
 | 2 | `CHANGELOG.md` | Latest heading | `## [5.1.0] - 2026-02-07` |
 | 3 | `.github/copilot-instructions.md` | `**Version**:` line | `**Version**: 5.1.0` |
-| 4 | `platforms/vscode-extension/.github/copilot-instructions.md` | `**Version**:` line | Same as #3 |
+| 4 | `platforms/vscode-extension/.github/copilot-instructions.md` | Same as #3 |
 | 5 | `docs/index.html` | Footer version | `v5.1.0` |
-| 6 | `ROADMAP-UNIFIED.md` | Quick Status table | Master 5.1.0, Heirs row |
+| 6 | `ROADMAP-UNIFIED.md` | Quick Status table | Master 5.1.0 row |
 | 7 | Git tag | Tag name | `v5.1.0` |
 
-> **Lesson (v5.1.0)**: Locations #3-#6 were missed in earlier releases. Always grep for the old version string across the entire repo before publishing.
+## Preflight Gates
 
-## Preflight Checklist
+| Gate | Check | Script Flag |
+|------|-------|-------------|
+| 0 | PAT configured | Always |
+| 1 | Version sync (all 7 locations) | Always |
+| 2 | Build passes | Always |
+| 3 | Lint passes | Always |
+| 4 | Tests pass | `-SkipTests` to skip |
+| 5 | Package creates | `-Package` to include |
+| 6 | Human review | Manual |
 
-Run BEFORE every release:
-
-```powershell
-# 0. Brain QA - validate cognitive architecture health
-# Run the brain-qa skill or execute these checks:
-$uniqueBroken = @{}; Get-ChildItem ".github" -Recurse -Filter "synapses.json" | ForEach-Object { $json = Get-Content $_.FullName -Raw | ConvertFrom-Json; foreach ($conn in $json.connections) { $target = $conn.target; if ($target -match "^\.github/|^alex_docs/") { $fullPath = Join-Path $PWD $target } else { $fullPath = Join-Path $_.DirectoryName $target }; if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true } } }; if ($uniqueBroken.Count -gt 0) { throw "Broken synapses: $($uniqueBroken.Keys -join ', ')" }
-Write-Host "✅ Brain QA: All synapses valid"
-
-# 1. Version check - are all locations synchronized?
-$pkg = Get-Content package.json | ConvertFrom-Json
-Write-Host "package.json version: $($pkg.version)"
-
-$changelog = Get-Content CHANGELOG.md | Select-Object -First 20
-Write-Host "CHANGELOG latest:`n$($changelog -join "`n")"
-
-# 2. Build check - does it compile?
-npm run compile
-if ($LASTEXITCODE -ne 0) { throw "Build failed!" }
-
-# 3. Lint check - any errors?
-npm run lint
-if ($LASTEXITCODE -ne 0) { throw "Lint failed!" }
-
-# 4. Test check - do tests pass?
-npm test
-if ($LASTEXITCODE -ne 0) { throw "Tests failed!" }
-
-# 5. Package check - does it package?
-npx vsce package --no-dependencies
-if ($LASTEXITCODE -ne 0) { throw "Package failed!" }
-
-Write-Host "✅ Preflight complete - ready to publish"
-```
-
-## Version Bump Workflow
+## Full Release Workflow
 
 ```powershell
-# 1. Decide version type
-$bumpType = "patch"  # patch | minor | major
+# VS Code Extension release
+scripts/release-vscode.ps1 -BumpType minor
 
-# 2. Bump package.json
-npm version $bumpType --no-git-tag-version
-
-# 3. Get new version
-$newVersion = (Get-Content package.json | ConvertFrom-Json).version
-
-# 4. Update CHANGELOG (add new section at top)
-# ## [$newVersion] - $(Get-Date -Format 'yyyy-MM-dd')
-
-# 5. Commit
-git add -A
-git commit -m "chore: bump version to $newVersion"
-
-# 6. Tag
-git tag "v$newVersion"
-
-# 7. Push
-git push && git push --tags
+# M365 Agent release  
+scripts/release-m365.ps1 -Validate
 ```
 
-## Publishing Workflow (VS Code Extension)
+## Version Bump Only
 
 ```powershell
-# Ensure PAT is set
-if (-not $env:VSCE_PAT) {
-    $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT").Line.Split("=",2)[1]
-}
+# 1. Bump
+npm version patch --no-git-tag-version
 
-# Publish
-vsce publish
+# 2. Get version
+$v = (Get-Content package.json | ConvertFrom-Json).version
 
-# If version collision error:
-# 1. npm version patch --no-git-tag-version
-# 2. Update CHANGELOG
-# 3. git commit + tag + push
-# 4. Retry vsce publish
+# 3. Update CHANGELOG, commit, tag, push
+git add -A; git commit -m "release: v$v"; git tag "v$v"; git push --tags
 ```
 
-## Common Mistakes We've Made
+## Common Mistakes
 
 | Mistake | Prevention |
 | ------- | ---------- |
-| Published without version bump | Run preflight checklist |
-| CHANGELOG not updated | Include in version bump workflow |
-| Forgot to push tags | `git push --tags` in workflow |
-| Published broken build | `npm run compile` in preflight |
-| Version mismatch between files | Grep entire repo for old version string |
-| PAT 401 error | Create fresh PAT before each release (see release-process skill) |
-| Patch bump for meaningful changes | Branding + audit + architecture fixes = **minor** bump, not patch |
-| Missing version locations | Use the 7-location table above — don't rely on memory |
+| Published without version bump | Run preflight first |
+| CHANGELOG not updated | Script checks this |
+| Forgot to push tags | Script does this |
+| Version mismatch | Grep entire repo for old version |
+| PAT 401 error | Refresh PAT before release |
 
-## Platform-Specific Versioning
+## Related Scripts
 
-### VS Code Marketplace Requirements
+| Script | Purpose |
+|--------|---------|
+| `scripts/release-preflight.ps1` | Pre-release validation |
+| `scripts/release-vscode.ps1` | Full VS Code release |
+| `scripts/release-m365.ps1` | M365 agent packaging |
+| `scripts/sync-master-to-heir.ps1` | Sync Master → Heir |
 
-| Requirement | Rule |
-| ----------- | ---- |
-| Format | SemVer (`major.minor.patch`) |
-| Pre-release | Add `--pre-release` flag, NOT version suffix |
-| Version collision | MUST increment; can't overwrite |
-| Engine compatibility | `engines.vscode` must match target |
+## Triggers
 
-```powershell
-# Pre-release (same version number, flag-based)
-vsce publish --pre-release
-
-# Stable release
-vsce publish
-```
-
-### M365 Developer Portal Requirements
-
-| Requirement | Rule |
-| ----------- | ---- |
-| Format | SemVer in manifest.json |
-| App ID | GUID, immutable after creation |
-| Validation | Must pass `teamsapp validate` |
-| Submission | Manual upload to Developer Portal |
-| Updates | New package upload, same App ID |
-
-```json
-// appPackage/manifest.json
-{
-  "version": "4.0.0",
-  "id": "{{APP_ID}}"
-}
-```
-
-### Version Independence
-
-Heirs can version independently from Master Alex:
-
-| Component | Current | Notes |
-| --------- | ------- | ----- |
-| Master Alex | 3.x.x | Architecture version |
-| VS Code Extension | 3.x.x | Aligned with Master |
-| M365 Agent | 4.x.x | Can diverge (different maturity) |
-
-## M365 Agent Deployment
-
-```powershell
-# Package
-npx teamsapp package --env local
-
-# Validate
-npx teamsapp validate --package-file appPackage/build/*.zip
-
-# Upload to Developer Portal manually
-```
-
-## Rollback Plan
-
-If a release is broken:
-
-```powershell
-# 1. Unpublish (VS Code Marketplace)
-vsce unpublish fabioc-aloha.alex-cognitive-architecture
-
-# 2. Or publish previous version quickly
-git checkout v3.6.0
-vsce publish
-
-# 3. Investigate and fix
-git checkout main
-# Fix the issue
-# Go through full release workflow again
-```
-
-## Automation Script Location
-
-Create and maintain: `scripts/release-preflight.ps1`
-
-Run with: `.\scripts\release-preflight.ps1 -Package`
+- "release", "publish", "deploy"
+- "preflight", "pre-release check"
+- "version bump", "version sync"
 
 ---
 
-## Complete Release Scripts
+*Scripts: `scripts/release-preflight.ps1`, `scripts/release-vscode.ps1`*
 
-### Full Release Script (VS Code Extension)
-
-```powershell
-# scripts/release-vscode.ps1
-param(
-    [Parameter(Mandatory)][ValidateSet("patch","minor","major")][string]$BumpType,
-    [switch]$PreRelease,
-    [switch]$DryRun
-)
-
-$ErrorActionPreference = "Stop"
-Push-Location (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
-
-Write-Host "`n🚀 Starting VS Code Extension Release" -ForegroundColor Cyan
-
-# 1. Run preflight
-Write-Host "`n📋 Running preflight checks..." -ForegroundColor Yellow
-.\scripts\release-preflight.ps1 -Package
-if ($LASTEXITCODE -ne 0) { throw "Preflight failed!" }
-
-# 2. Bump version
-Write-Host "`n📈 Bumping version ($BumpType)..." -ForegroundColor Yellow
-npm version $BumpType --no-git-tag-version
-$newVersion = (Get-Content package.json | ConvertFrom-Json).version
-Write-Host "   New version: $newVersion" -ForegroundColor Green
-
-# 3. Update CHANGELOG
-Write-Host "`n📝 Updating CHANGELOG..." -ForegroundColor Yellow
-$date = Get-Date -Format "yyyy-MM-dd"
-$changelog = Get-Content CHANGELOG.md -Raw
-$newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n"
-$changelog = $changelog -replace '(# Changelog\s*\n)', "`$1`n$newEntry"
-Set-Content CHANGELOG.md $changelog
-Write-Host "   Added entry for $newVersion" -ForegroundColor Green
-
-if ($DryRun) {
-    Write-Host "`n⚠️ DRY RUN - Stopping before commit" -ForegroundColor Yellow
-    Pop-Location
-    exit 0
-}
-
-# 4. Commit and tag
-Write-Host "`n📦 Committing and tagging..." -ForegroundColor Yellow
-git add -A
-git commit -m "chore: release v$newVersion"
-git tag "v$newVersion"
-Write-Host "   Tagged: v$newVersion" -ForegroundColor Green
-
-# 5. Push
-Write-Host "`n⬆️ Pushing to remote..." -ForegroundColor Yellow
-git push
-git push --tags
-
-# 6. Publish
-Write-Host "`n🎯 Publishing to marketplace..." -ForegroundColor Yellow
-if (-not $env:VSCE_PAT) {
-    $envFile = ".env"
-    if (Test-Path $envFile) {
-        $env:VSCE_PAT = (Get-Content $envFile | Select-String "VSCE_PAT").Line.Split("=",2)[1]
-    } else {
-        throw "VSCE_PAT not set and .env not found"
-    }
-}
-
-if ($PreRelease) {
-    vsce publish --pre-release
-} else {
-    vsce publish
-}
-
-Write-Host "`n✅ Release v$newVersion complete!" -ForegroundColor Green
-Pop-Location
-```
-
-### M365 Agent Release Script
-
-```powershell
-# scripts/release-m365.ps1
-param([switch]$Validate)
-
-$ErrorActionPreference = "Stop"
-Push-Location "platforms/m365-copilot"
-
-Write-Host "`n🚀 M365 Copilot Agent Release" -ForegroundColor Cyan
-
-# 1. Package
-Write-Host "`n📦 Packaging agent..." -ForegroundColor Yellow
-npx teamsapp package --env local
-
-# 2. Validate
-Write-Host "`n✅ Validating package..." -ForegroundColor Yellow
-$pkg = Get-ChildItem "appPackage/build/*.zip" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-npx teamsapp validate --package-file $pkg.FullName
-
-if ($Validate) {
-    Write-Host "`n⚠️ Validation only - stopping here" -ForegroundColor Yellow
-    Pop-Location
-    exit 0
-}
-
-Write-Host "`n📋 Next steps:" -ForegroundColor Cyan
-Write-Host "   1. Go to https://dev.teams.microsoft.com/apps" -ForegroundColor Gray
-Write-Host "   2. Upload package: $($pkg.Name)" -ForegroundColor Gray
-Write-Host "   3. Test in Teams/M365 Copilot" -ForegroundColor Gray
-Write-Host "   4. Submit for approval if ready" -ForegroundColor Gray
-
-Pop-Location
-```
-
----
-
-## Pre-Check Methodology
-
-### The 5-Gate Model
-
-Every release must pass through 5 gates:
-
-```text
-┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐
-│ GATE 1  │ → │ GATE 2  │ → │ GATE 3  │ → │ GATE 4  │ → │ GATE 5  │
-│ Version │   │  Build  │   │  Test   │   │ Package │   │  Human  │
-│  Sync   │   │  Check  │   │  Check  │   │  Check  │   │ Review  │
-└─────────┘   └─────────┘   └─────────┘   └─────────┘   └─────────┘
-     ↓             ↓             ↓             ↓             ↓
-  Automatic    Automatic    Automatic    Automatic     Manual
-```
-
-### Gate 1: Version Synchronization
-
-```powershell
-function Test-VersionSync {
-    $pkg = (Get-Content package.json | ConvertFrom-Json).version
-    $changelog = (Select-String -Path CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' |
-                  Select-Object -First 1).Matches.Groups[1].Value
-
-    if ($pkg -ne $changelog) {
-        throw "Version mismatch: package.json ($pkg) != CHANGELOG ($changelog)"
-    }
-    Write-Host "✅ Versions synchronized: $pkg"
-}
-```
-
-### Gate 2: Build Verification
-
-```powershell
-function Test-Build {
-    npm run compile 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) { throw "Build failed" }
-    Write-Host "✅ Build successful"
-}
-```
-
-### Gate 3: Test Execution
-
-```powershell
-function Test-Tests {
-    npm test 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) { throw "Tests failed" }
-    Write-Host "✅ Tests passed"
-}
-```
-
-### Gate 4: Package Creation
-
-```powershell
-function Test-Package {
-    npx vsce package --no-dependencies 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) { throw "Package failed" }
-    Write-Host "✅ Package created"
-}
-```
-
-### Gate 5: Human Review
-
-- [ ] CHANGELOG has meaningful entries
-- [ ] README is current
-- [ ] No debug code left in
-- [ ] No secrets in codebase
-- [ ] Breaking changes documented
-
----
-
-## Version Rationalization
-
-### Single Source of Truth
-
-```text
-package.json  ←─── THE SOURCE
-     │
-     ├──→ CHANGELOG.md (derived)
-     ├──→ Git tag (derived)
-     └──→ README badge (derived)
-```
-
-### Automated Sync Script
-
-```powershell
-# scripts/sync-versions.ps1
-$version = (Get-Content package.json | ConvertFrom-Json).version
-
-# Check CHANGELOG has this version
-if (-not (Select-String -Path CHANGELOG.md -Pattern "\[$version\]" -Quiet)) {
-    Write-Host "⚠️ CHANGELOG missing entry for $version" -ForegroundColor Yellow
-}
-
-# Check git tag exists
-$tag = git tag -l "v$version"
-if (-not $tag) {
-    Write-Host "⚠️ Git tag v$version not found" -ForegroundColor Yellow
-}
-
-Write-Host "Version: $version"
-```
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.
+````

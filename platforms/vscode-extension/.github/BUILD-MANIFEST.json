@@ -1,9 +1,7 @@
 {
-  "generatedAt": "2026-02-08 18:50:39",
-  "sourceCommit": "3960c6e",
-  "sourceVersion": "5.3.1",
-  "filesCopied": 201,
-  "filesExcluded": 71,
+  "generatedAt": "2026-02-09 00:48:41",
+  "filesCopied": 207,
+  "filesExcluded": 65,
   "exclusionPatterns": [
     "ISSUE_TEMPLATE",
     "PULL_REQUEST_TEMPLATE.md",
@@ -18,15 +16,8 @@
     "config/cognitive-config.json",
     "config/user-profile.json",
     "config/USER-PROFILE.md",
-    "config/MASTER-ALEX-PROTECTED.json",
-    "skills/meditation",
-    "skills/meditation-facilitation",
-    "skills/knowledge-synthesis",
-    "skills/global-knowledge",
-    "skills/architecture-refinement",
-    "skills/llm-model-selection",
-    "skills/self-actualization",
-    "skills/heir-curation",
-    "skills/master-alex-audit"
-  ]
+    "config/MASTER-ALEX-PROTECTED.json"
+  ],
+  "sourceVersion": "5.3.1",
+  "sourceCommit": "c93a4e3"
 }
