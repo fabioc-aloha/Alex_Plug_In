@@ -25,6 +25,12 @@
       "type": "uses",
       "strength": 0.85,
       "reason": "Deployment checklist applies patterns in practice"
+    },
+    {
+      "target": ".github/instructions/brand-asset-management.instructions.md",
+      "type": "references",
+      "strength": 0.75,
+      "reason": "Icon generation workflow ensures brand consistency across platforms"
     }
   ],
   "triggers": [

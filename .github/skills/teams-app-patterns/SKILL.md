@@ -57,6 +57,25 @@ appPackage/
 
 **❌ Common failures:** Wrong dimensions, outline has gray background, outline uses colors
 
+### Icon Generation from SVG (Brand Consistency)
+
+When syncing icons from VS Code assets to M365:
+
+```powershell
+# Install sharp if needed
+npm install sharp
+
+# Generate color.png (192x192) from logo.svg
+node -e "const sharp = require('sharp'); sharp('vscode-extension/assets/logo.svg').resize(192, 192).png().toFile('appPackage/color.png')"
+
+# Generate outline.png (32x32) from monochrome SVG
+node -e "const sharp = require('sharp'); sharp('vscode-extension/assets/logo-mono.svg').resize(32, 32).png().toFile('appPackage/outline.png')"
+```
+
+**Source of truth**: `platforms/vscode-extension/assets/logo.svg` and `logo-mono.svg`
+
+---
+
 ## Manifest Required Fields
 
 - `$schema`, `manifestVersion`, `version`, `id`
@@ -110,6 +129,33 @@ npx teamsapp preview --env local
 | Manifest fails | Check schema version |
 | Bot not responding | Verify endpoint/tunnel |
 | Sideload fails | Enable custom apps in admin |
+| **Conditional access blocks teamsapp CLI** | Use manual Developer Portal upload |
+
+### Conditional Access Workaround
+
+Microsoft orgs with strict conditional access policies may block `teamsapp auth login m365`. Error: `AADSTS530084`.
+
+**Fallback: Manual Developer Portal Upload**
+1. Build package: `npm run package:dev`
+2. Validate: `npx teamsapp validate --package-file ./appPackage/build/appPackage.dev.zip`
+3. Open: https://dev.teams.microsoft.com/apps
+4. Import app package → Upload zip
+5. Publish to org catalog
+
+---
+
+## Store Description Strategy
+
+**Key insight**: Same product, different audiences require different messaging.
+
+| Platform | Audience | Focus |
+|----------|----------|-------|
+| VS Code Marketplace | Developers | Code acceleration, syntax, debugging |
+| M365/Teams | Knowledge workers | Research, analysis, productivity |
+
+**M365 Positioning Example**:
+- ❌ "Accelerate your Python development"
+- ✅ "Your AI research partner. Remembers context, grows with you."
 
 ## Synapses
 
