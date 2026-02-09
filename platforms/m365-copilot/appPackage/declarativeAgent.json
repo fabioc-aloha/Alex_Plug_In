@@ -94,6 +94,22 @@
             "text": "Who am I meeting with next? Look up every attendee and tell me about them."
         },
         {
+            "title": "Create presentation outline",
+            "text": "Help me structure a presentation. I'll give you the topic and audience, you give me a narrative arc with S.T.A.R. moments."
+        },
+        {
+            "title": "Research a topic",
+            "text": "I need to research [topic]. Search my emails, Teams, and the web for relevant context and summarize what I should know."
+        },
+        {
+            "title": "Summarize this document",
+            "text": "Look at this document in my OneDrive and give me a concise summary with key takeaways and action items."
+        },
+        {
+            "title": "Draft talking points",
+            "text": "Help me prepare talking points for [topic/meeting]. Use my calendar and recent emails for context."
+        },
+        {
             "title": "Am I overloaded?",
             "text": "Check my calendar - how many meetings do I have? Any back-to-backs? Where's my focus time?"
         },
@@ -104,6 +120,10 @@
         {
             "title": "Weekly review",
             "text": "Let's review my week - meetings, emails, Teams activity, and what I accomplished"
+        },
+        {
+            "title": "Help me prioritize",
+            "text": "Look at my calendar, emails, and commitments. What should I focus on today? What can wait?"
         },
         {
             "title": "Meditate",
