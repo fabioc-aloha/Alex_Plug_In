@@ -1,21 +1,21 @@
 {
-  "humor": true,
-  "pronouns": "",
+  "expertiseAreas": [],
+  "primaryTechnologies": [],
   "projectPersona": {
     "reasons": [],
     "id": "",
     "confidence": 0
   },
-  "primaryTechnologies": [],
-  "nickname": "",
-  "formality": "balanced",
-  "questionFrequency": "moderate",
-  "explanationStyle": "mixed",
-  "encouragement": true,
-  "proactiveSuggestions": true,
-  "detailLevel": "balanced",
-  "learningGoals": [],
   "currentProjects": [],
+  "explanationStyle": "mixed",
+  "learningGoals": [],
+  "pronouns": "",
+  "nickname": "",
+  "detailLevel": "balanced",
+  "humor": true,
+  "formality": "balanced",
   "name": "",
-  "expertiseAreas": []
+  "questionFrequency": "moderate",
+  "encouragement": true,
+  "proactiveSuggestions": true
 }
