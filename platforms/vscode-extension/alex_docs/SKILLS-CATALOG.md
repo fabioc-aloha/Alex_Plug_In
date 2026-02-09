@@ -23,8 +23,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🧠 Cognitive & Learning
 
-| Skill                                                                     | Inheritance | Purpose                                               |
-| ------------------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
+| Skill                                                                                | Inheritance | Purpose                                               |
+| ------------------------------------------------------------------------------------ | ----------- | ----------------------------------------------------- |
 | [cognitive-load](../../.github/skills/cognitive-load/SKILL.md)                       | inheritable | Manage information overload — chunking, scaffolding   |
 | [learning-psychology](../../.github/skills/learning-psychology/SKILL.md)             | inheritable | Partnership teaching, spaced retrieval                |
 | [appropriate-reliance](../../.github/skills/appropriate-reliance/SKILL.md)           | inheritable | Build trust through calibrated confidence             |
@@ -43,8 +43,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🔧 Engineering Fundamentals
 
-| Skill                                                               | Inheritance | Purpose                                            |
-| ------------------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| Skill                                                                          | Inheritance | Purpose                                            |
+| ------------------------------------------------------------------------------ | ----------- | -------------------------------------------------- |
 | [testing-strategies](../../.github/skills/testing-strategies/SKILL.md)         | inheritable | Testing pyramid, AAA, coverage philosophy          |
 | [refactoring-patterns](../../.github/skills/refactoring-patterns/SKILL.md)     | inheritable | Safe code transformations                          |
 | [debugging-patterns](../../.github/skills/debugging-patterns/SKILL.md)         | inheritable | Systematic bug hunting                             |
@@ -57,8 +57,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🚨 Operations & Reliability
 
-| Skill                                                                 | Inheritance | Purpose                                                 |
-| --------------------------------------------------------------------- | ----------- | ------------------------------------------------------- |
+| Skill                                                                            | Inheritance | Purpose                                                 |
+| -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------- |
 | [error-recovery-patterns](../../.github/skills/error-recovery-patterns/SKILL.md) | inheritable | Retry, fallback, circuit breaker                        |
 | [root-cause-analysis](../../.github/skills/root-cause-analysis/SKILL.md)         | inheritable | 5 Whys, fishbone, post-mortem                           |
 | [incident-response](../../.github/skills/incident-response/SKILL.md)             | inheritable | Crisis handling, severity levels                        |
@@ -69,8 +69,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🔐 Security & Privacy
 
-| Skill                                                                 | Inheritance | Purpose                                                |
-| --------------------------------------------------------------------- | ----------- | ------------------------------------------------------ |
+| Skill                                                                            | Inheritance | Purpose                                                |
+| -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------ |
 | [security-review](../../.github/skills/security-review/SKILL.md)                 | inheritable | OWASP, threat modeling, security-focused code review   |
 | [microsoft-sfi](../../.github/skills/microsoft-sfi/SKILL.md)                     | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
 | [pii-privacy-regulations](../../.github/skills/pii-privacy-regulations/SKILL.md) | inheritable | GDPR & Australian Privacy Principles compliance        |
@@ -78,8 +78,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 📝 Documentation & Communication
 
-| Skill                                                                           | Inheritance | Purpose                                                    |
-| ------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| Skill                                                                                      | Inheritance | Purpose                                                    |
+| ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------- |
 | [writing-publication](../../.github/skills/writing-publication/SKILL.md)                   | inheritable | Academic writing, publication strategy                     |
 | [academic-research](../../.github/skills/academic-research/SKILL.md)                       | inheritable | Literature review, citation management                     |
 | [practitioner-research](../../.github/skills/practitioner-research/SKILL.md)               | inheritable | Ship→Document→Promote methodology, longitudinal case study |
@@ -95,8 +95,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🎨 Visual Design & Content Creation
 
-| Skill                                                         | Inheritance | Purpose                                                   |
-| ------------------------------------------------------------- | ----------- | --------------------------------------------------------- |
+| Skill                                                                    | Inheritance | Purpose                                                   |
+| ------------------------------------------------------------------------ | ----------- | --------------------------------------------------------- |
 | [svg-graphics](../../.github/skills/svg-graphics/SKILL.md)               | inheritable | SVG banners, logos, icons, visual identity                |
 | [image-handling](../../.github/skills/image-handling/SKILL.md)           | inheritable | Format conversion, optimization, sizing                   |
 | [graphic-design](../../.github/skills/graphic-design/SKILL.md)           | inheritable | Visual composition, branding, aesthetics                  |
@@ -106,15 +106,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 💼 Business & Analysis
 
-| Skill                                                               | Inheritance | Purpose                                             |
-| ------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| Skill                                                                          | Inheritance | Purpose                                             |
+| ------------------------------------------------------------------------------ | ----------- | --------------------------------------------------- |
 | [business-analysis](../../.github/skills/business-analysis/SKILL.md)           | inheritable | Requirements, stakeholder analysis, process mapping |
 | [alex-effort-estimation](../../.github/skills/alex-effort-estimation/SKILL.md) | inheritable | AI-accelerated effort estimation, 4× patterns       |
 
 ### 🏗️ Architecture & Design
 
-| Skill                                                                 | Inheritance | Purpose                                                    |
-| --------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| Skill                                                                            | Inheritance | Purpose                                                    |
+| -------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------- |
 | [architecture-refinement](../../.github/skills/architecture-refinement/SKILL.md) | inheritable | Architecture evolution decisions                           |
 | [architecture-health](../../.github/skills/architecture-health/SKILL.md)         | inheritable | Synapse validation, health checks                          |
 | [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)           | inheritable | Comprehensive consistency review                           |
@@ -130,8 +130,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🤖 AI & Machine Learning
 
-| Skill                                                       | Inheritance | Purpose                                                            |
-| ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
+| Skill                                                                  | Inheritance | Purpose                                                            |
+| ---------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
 | [prompt-engineering](../../.github/skills/prompt-engineering/SKILL.md) | inheritable | LLM prompting patterns, system prompts, few-shot, chain-of-thought |
 | [rag-architecture](../../.github/skills/rag-architecture/SKILL.md)     | inheritable | Retrieval-augmented generation, embedding, chunking, vector stores |
 | [ai-agent-design](../../.github/skills/ai-agent-design/SKILL.md)       | inheritable | Multi-agent systems, ReAct, planning, tool use, memory patterns    |
@@ -139,8 +139,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 📊 Data Analytics
 
-| Skill                                                                 | Inheritance | Purpose                                      |
-| --------------------------------------------------------------------- | ----------- | -------------------------------------------- |
+| Skill                                                                            | Inheritance | Purpose                                      |
+| -------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
 | [microsoft-fabric](../../.github/skills/microsoft-fabric/SKILL.md)               | inheritable | Microsoft Fabric analytics platform patterns |
 | [fabric-notebook-publish](../../.github/skills/fabric-notebook-publish/SKILL.md) | inheritable | Fabric notebook Git sync, worktree workflow  |
 
@@ -148,15 +148,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 #### VS Code Extension
 
-| Skill                                                                     | Inheritance | Purpose                    |
-| ------------------------------------------------------------------------- | ----------- | -------------------------- |
+| Skill                                                                                | Inheritance | Purpose                    |
+| ------------------------------------------------------------------------------------ | ----------- | -------------------------- |
 | [vscode-extension-patterns](../../.github/skills/vscode-extension-patterns/SKILL.md) | heir:vscode | Extension API patterns     |
 | [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md) | heir:vscode | Chat API, streaming, tools |
 
 #### M365 / Teams
 
-| Skill                                                           | Inheritance | Purpose                      |
-| --------------------------------------------------------------- | ----------- | ---------------------------- |
+| Skill                                                                      | Inheritance | Purpose                      |
+| -------------------------------------------------------------------------- | ----------- | ---------------------------- |
 | [m365-agent-debugging](../../.github/skills/m365-agent-debugging/SKILL.md) | heir:m365   | Declarative agent debugging  |
 | [teams-app-patterns](../../.github/skills/teams-app-patterns/SKILL.md)     | heir:m365   | Bots, cards, tabs, manifests |
 
@@ -300,6 +300,7 @@ flowchart LR
         RAG[rag-architecture]
         AAD[ai-agent-design]
         MCP[mcp-development]
+        LMS[llm-model-selection]
     end
 
     subgraph Data["📊 Data Analytics"]
@@ -347,7 +348,6 @@ flowchart LR
         HC[heir-curation]
         MAA[master-alex-audit]
         REL[release-process]
-        LMS[llm-model-selection]
     end
 
     %% Cognitive flow
@@ -439,7 +439,7 @@ flowchart LR
     class VEP,CPP vscode
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LMS,GW,PRA,SFI stale
-    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,AH,SCG,AAU,TS,RP,DP,CR,PS,VSE,API,IAC,ERP,RCA,IR,PM_SKILL,PD,CM,PM,SR,PII,PE,RAG,AAD,MCP,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,SVG,IH,GD,GAM,TTS,BA,AEE inheritable
+    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,AH,SCG,AAU,TS,RP,DP,CR,PS,VSE,API,IAC,ERP,RCA,IR,PM_SKILL,PD,CM,PM,SR,PII,PE,RAG,AAD,MCP,LMS,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,SVG,IH,GD,GAM,TTS,BA,AEE inheritable
 ```
 
 ### Legend
@@ -484,14 +484,14 @@ flowchart LR
 | 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code                                                                                 |
 | 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management                                                                                           |
 | 🔐 Security       | security-review, microsoft-sfi, privacy-responsible-ai, pii-privacy-regulations                                                                                                                                                                      |
-| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development                                                                                                                                                                               |
+| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection                                                                                                                                                          |
 | 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                            |
 | 📝 Docs & Writing | writing-publication, markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration |
 | 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation                                                                                                                                                   |
 | 💼 Business       | business-analysis, alex-effort-estimation                                                                                                                                                                                                            |
 | 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns                                                                                                                                                                                                 |
 | ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                                                             |
-| 👑 Master         | heir-curation, master-alex-audit, release-process, llm-model-selection                                                                                                                                                                               |
+| 👑 Master         | heir-curation, master-alex-audit, release-process, release-preflight                                                                                                                                                                                 |
 
 ---
 
