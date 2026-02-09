@@ -13,19 +13,19 @@ Comprehensive TTS feature enhancement session that began with a code review iden
 
 ## Key Accomplishments
 
-| Phase | Files Changed | What |
-|-------|---------------|------|
-| Code Review | 0 | Identified 7 issues (voice display, maxTableRows, detection threshold, dark mode, CSP, tests, docs) |
-| Bug Fixes | 4 | Fixed voice name display, added maxTableRows config, lowered detection threshold 10→5 |
-| Unit Tests | 1 | Created 35 unit tests for TTS functionality |
-| CSP Fix | 1 | Replaced inline onclick with data-cmd + delegated event listeners |
-| speakPrompt | 4 | New command with LLM content generation via Language Model API |
-| Voice Mode | 1 | Added automatic summarization for content >750 words |
-| Keyboard Shortcuts | 1 | Added 6 keybindings (Ctrl+Alt+R/V/P/D/A, Escape) |
-| Rich Tooltips | 1 | MarkdownString tooltips showing all shortcuts |
-| Quick Picks | 1 | Enhanced with separators and cross-command navigation |
-| Emoji Notifications | 3 | Added emoji prefixes to all TTS messages |
-| **v5.4.1 Release** | 3 | Version bump, changelog, VSIX published + tagged |
+| Phase               | Files Changed | What                                                                                                |
+| ------------------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| Code Review         | 0             | Identified 7 issues (voice display, maxTableRows, detection threshold, dark mode, CSP, tests, docs) |
+| Bug Fixes           | 4             | Fixed voice name display, added maxTableRows config, lowered detection threshold 10→5               |
+| Unit Tests          | 1             | Created 35 unit tests for TTS functionality                                                         |
+| CSP Fix             | 1             | Replaced inline onclick with data-cmd + delegated event listeners                                   |
+| speakPrompt         | 4             | New command with LLM content generation via Language Model API                                      |
+| Voice Mode          | 1             | Added automatic summarization for content >750 words                                                |
+| Keyboard Shortcuts  | 1             | Added 6 keybindings (Ctrl+Alt+R/V/P/D/A, Escape)                                                    |
+| Rich Tooltips       | 1             | MarkdownString tooltips showing all shortcuts                                                       |
+| Quick Picks         | 1             | Enhanced with separators and cross-command navigation                                               |
+| Emoji Notifications | 3             | Added emoji prefixes to all TTS messages                                                            |
+| **v5.4.1 Release**  | 3             | Version bump, changelog, VSIX published + tagged                                                    |
 
 ## Insights Consolidated
 
@@ -73,7 +73,7 @@ User can switch between command families without starting over.
 ### 5. Emoji Notification Consistency
 **Pattern Established**:
 - ❌ Error messages
-- ⚠️ Warning messages  
+- ⚠️ Warning messages
 - 📋 Table processing
 - 📝 Plain text detection
 - 📖 Markdown formatting
@@ -84,27 +84,27 @@ User can switch between command families without starting over.
 
 ## Memory Files Modified
 
-| File | Action | Change |
-|------|--------|--------|
-| platforms/vscode-extension/src/services/tts/ttsService.ts | Modified | Detection threshold 10→5, maxTableRows config |
-| platforms/vscode-extension/src/services/tts/audioPlayer.ts | Modified | Voice name param, CSP handlers, alex.ttsPlaying context |
-| platforms/vscode-extension/src/services/tts/readAloud.ts | Modified | Added speakPrompt (~100 lines), enhanced quick picks |
-| platforms/vscode-extension/src/uxFeatures.ts | Modified | Rich tooltips, speakPrompt in QUICK_COMMANDS, long content summarization |
-| platforms/vscode-extension/package.json | Modified | v5.4.1, 6 keybindings, speakPrompt in menus |
-| platforms/vscode-extension/src/test/ttsService.test.ts | Created | 35 unit tests |
-| .github/skills/text-to-speech/SKILL.md | Modified | Version 2.4.0→2.5.0, changelog, new synapses |
-| .github/skills/text-to-speech/synapses.json | Modified | Updated metadata, new activation contexts |
-| .github/skills/vscode-extension-patterns/SKILL.md | Modified | Added CSP-compliant webview pattern |
+| File                                                       | Action   | Change                                                                   |
+| ---------------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
+| platforms/vscode-extension/src/services/tts/ttsService.ts  | Modified | Detection threshold 10→5, maxTableRows config                            |
+| platforms/vscode-extension/src/services/tts/audioPlayer.ts | Modified | Voice name param, CSP handlers, alex.ttsPlaying context                  |
+| platforms/vscode-extension/src/services/tts/readAloud.ts   | Modified | Added speakPrompt (~100 lines), enhanced quick picks                     |
+| platforms/vscode-extension/src/uxFeatures.ts               | Modified | Rich tooltips, speakPrompt in QUICK_COMMANDS, long content summarization |
+| platforms/vscode-extension/package.json                    | Modified | v5.4.1, 6 keybindings, speakPrompt in menus                              |
+| platforms/vscode-extension/src/test/ttsService.test.ts     | Created  | 35 unit tests                                                            |
+| .github/skills/text-to-speech/SKILL.md                     | Modified | Version 2.4.0→2.5.0, changelog, new synapses                             |
+| .github/skills/text-to-speech/synapses.json                | Modified | Updated metadata, new activation contexts                                |
+| .github/skills/vscode-extension-patterns/SKILL.md          | Modified | Added CSP-compliant webview pattern                                      |
 
 ## Synapse Changes
 
-| Connection | Strength | Type | Note |
-|------------|----------|------|------|
-| text-to-speech → ux-design | 0.80 | enhances | Keyboard shortcuts, tooltips, quick picks |
-| text-to-speech → testing-strategies | 0.75 | validates | 35 unit tests suite |
-| text-to-speech → llm-model-selection | 0.85 | requires | gpt-4o for summarization + speakPrompt |
-| vscode-extension-patterns → text-to-speech | 0.80 | guides | CSP pattern extracted from implementation |
-| readAloud → uxFeatures | 0.90 | integrates | Shared summarization, voice mode coordination |
+| Connection                                 | Strength | Type       | Note                                          |
+| ------------------------------------------ | -------- | ---------- | --------------------------------------------- |
+| text-to-speech → ux-design                 | 0.80     | enhances   | Keyboard shortcuts, tooltips, quick picks     |
+| text-to-speech → testing-strategies        | 0.75     | validates  | 35 unit tests suite                           |
+| text-to-speech → llm-model-selection       | 0.85     | requires   | gpt-4o for summarization + speakPrompt        |
+| vscode-extension-patterns → text-to-speech | 0.80     | guides     | CSP pattern extracted from implementation     |
+| readAloud → uxFeatures                     | 0.90     | integrates | Shared summarization, voice mode coordination |
 
 ## Architecture State
 
@@ -119,9 +119,9 @@ User can switch between command families without starting over.
 
 ### Language Model API Integration
 ```typescript
-const [model] = await vscode.lm.selectChatModels({ 
-  vendor: 'copilot', 
-  family: 'gpt-4o' 
+const [model] = await vscode.lm.selectChatModels({
+  vendor: 'copilot',
+  family: 'gpt-4o'
 });
 const messages = [vscode.LanguageModelChatMessage.User(prompt)];
 const response = await model.sendRequest(messages, {}, token);
