@@ -58,6 +58,12 @@
       "type": "references",
       "strength": 0.6,
       "description": "Documentation audits validate Mermaid diagram consistency and styling"
+    },
+    {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "description": "Brain QA catches semantic issues master-audit misses (e.g., skill index coverage, schema validation). Run both for complete validation."
     }
   ],
   "activationPatterns": [
