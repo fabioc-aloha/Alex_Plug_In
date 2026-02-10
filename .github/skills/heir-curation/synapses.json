@@ -17,14 +17,20 @@
     {
       "target": ".github/skills/release-preflight/SKILL.md",
       "type": "uses",
-      "strength": 0.8,
-      "reason": "Heir releases need preflight"
+      "strength": 0.85,
+      "reason": "Heir releases need preflight validation"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "informs",
       "strength": 0.65,
       "reason": "Heir patterns shape master"
+    },
+    {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "reason": "Phase 12 validates heir reset for publication"
     }
   ],
   "triggers": [
@@ -32,7 +38,9 @@
     "inherit",
     "platform",
     "deploy heir",
-    "curate"
+    "curate",
+    "heir reset",
+    "clean slate"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
