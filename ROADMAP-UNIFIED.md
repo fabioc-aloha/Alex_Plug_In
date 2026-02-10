@@ -59,11 +59,10 @@ v5.5.0 is complete. Alex now has:
 
 **Deferred from v5.3.1**:
 
-| Task                           | Owner  | Effort | Priority | Description                                 |
-| ------------------------------ | :----: | :----: | :------: | ------------------------------------------- |
-| Data Residency Options         | Master |   3h   |  Medium  | Location-based storage preferences (EU, US) |
+| Task                           | Owner  | Effort | Priority | Description                                      |
+| ------------------------------ | :----: | :----: | :------: | ------------------------------------------------ |
 | Automated Doc Count Validation | Master |   2h   |   Low    | Dream protocol verifies instruction/skill counts |
-| Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings    |
+| Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings         |
 
 ---
 
