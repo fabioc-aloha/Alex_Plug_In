@@ -594,7 +594,7 @@ function addIllustrationSlide(pres: pptxgen, content: SlideContent, workspacePat
  * Add inline illustrations to a slide (icons next to bullets, etc.)
  */
 function addInlineIllustrations(slide: pptxgen.Slide, illustrations: IllustrationData[], workspacePath?: string): void {
-    if (!illustrations || illustrations.length === 0) return;
+    if (!illustrations || illustrations.length === 0) {return;}
     
     let xOffset = 0.5;
     const iconSize = 0.5; // Half inch icons
@@ -716,9 +716,9 @@ export function hasSlideStructure(content: string): boolean {
     
     for (const line of lines) {
         const trimmed = line.trim();
-        if (trimmed.startsWith('# ') || trimmed.startsWith('## ')) hasHeadings = true;
-        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) hasBullets = true;
-        if (trimmed === '---') hasSlideBreaks = true;
+        if (trimmed.startsWith('# ') || trimmed.startsWith('## ')) {hasHeadings = true;}
+        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {hasBullets = true;}
+        if (trimmed === '---') {hasSlideBreaks = true;}
     }
     
     // Structured if has headings AND (bullets OR slide breaks)
@@ -748,24 +748,24 @@ export function analyzeSlideContent(markdown: string): {
     const hasTitleSlide = slides.length > 0 && slides[0].type === 'title';
     
     // Scoring
-    if (slideCount >= 3) score += 20;
-    if (slideCount >= 5 && slideCount <= 15) score += 10;
-    if (hasTitleSlide) score += 15;
-    if (hasSections) score += 15;
-    if (hasNotes) score += 15;
-    if (hasTables) score += 10;
+    if (slideCount >= 3) {score += 20;}
+    if (slideCount >= 5 && slideCount <= 15) {score += 10;}
+    if (hasTitleSlide) {score += 15;}
+    if (hasSections) {score += 15;}
+    if (hasNotes) {score += 15;}
+    if (hasTables) {score += 10;}
     
     // Check bullet density
     const avgBullets = slides.reduce((sum, s) => sum + (s.bullets?.length || 0), 0) / Math.max(slideCount, 1);
-    if (avgBullets >= 2 && avgBullets <= 6) score += 15;
+    if (avgBullets >= 2 && avgBullets <= 6) {score += 15;}
     
     // Suggestions
-    if (!hasTitleSlide) suggestions.push("Add a title slide with # Title and ## Subtitle");
-    if (!hasSections && slideCount > 5) suggestions.push("Add section dividers with ## Title [section]");
-    if (!hasNotes) suggestions.push("Add speaker notes with > Note text");
-    if (avgBullets > 7) suggestions.push("Reduce bullets per slide to 5-7 for readability");
-    if (avgBullets < 2) suggestions.push("Add more bullet points for substance");
-    if (slideCount < 3) suggestions.push("Add more content - aim for 5-10 slides");
+    if (!hasTitleSlide) {suggestions.push("Add a title slide with # Title and ## Subtitle");}
+    if (!hasSections && slideCount > 5) {suggestions.push("Add section dividers with ## Title [section]");}
+    if (!hasNotes) {suggestions.push("Add speaker notes with > Note text");}
+    if (avgBullets > 7) {suggestions.push("Reduce bullets per slide to 5-7 for readability");}
+    if (avgBullets < 2) {suggestions.push("Add more bullet points for substance");}
+    if (slideCount < 3) {suggestions.push("Add more content - aim for 5-10 slides");}
     
     return { score, suggestions, slideCount, hasNotes, hasSections, hasTables };
 }
@@ -776,7 +776,7 @@ export function analyzeSlideContent(markdown: string): {
 function parseMarkdownTable(lines: string[]): TableData | null {
     // Find table lines (start with |)
     const tableLines = lines.filter(l => l.trim().startsWith('|') && l.trim().endsWith('|'));
-    if (tableLines.length < 2) return null;
+    if (tableLines.length < 2) {return null;}
 
     // Parse header row
     const headerLine = tableLines[0];
@@ -785,14 +785,14 @@ function parseMarkdownTable(lines: string[]): TableData | null {
         .map(h => h.trim())
         .filter(h => h && !h.match(/^[-:]+$/));
 
-    if (headers.length === 0) return null;
+    if (headers.length === 0) {return null;}
 
     // Skip separator row, parse data rows
     const rows: string[][] = [];
     for (let i = 1; i < tableLines.length; i++) {
         const line = tableLines[i];
         // Skip separator row (contains only dashes and colons)
-        if (line.match(/^\|[\s\-:]+\|$/)) continue;
+        if (line.match(/^\|[\s\-:]+\|$/)) {continue;}
         
         const cells = line
             .split('|')
@@ -825,7 +825,7 @@ function parseMarkdownTable(lines: string[]): TableData | null {
 function parseIllustrationSyntax(text: string): IllustrationData | null {
     // Match: ![type:value] or ![type:value#color/style] with optional caption
     const match = text.match(/!\[(icon|iconify|avatar|stock|svg|ticker|image):([^\]#]+)(?:#([a-zA-Z0-9-]+))?\](?:\(([^)]*)\))?/);
-    if (!match) return null;
+    if (!match) {return null;}
     
     const [, type, value, modifier, caption] = match;
     

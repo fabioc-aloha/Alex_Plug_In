@@ -1,8 +1,12 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "heir:vscode",
     "version": "1.0.0",
     "skill": "azure-architecture-patterns",
     "created": "2026-02-10",
     "connectionCount": 5,
+    "connections": [],
     "synapses": [
         {
             "id": "AZURE-001",

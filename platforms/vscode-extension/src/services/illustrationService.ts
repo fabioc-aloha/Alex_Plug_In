@@ -133,7 +133,7 @@ export async function fetchIconifyIcon(
 export function parseIconifyValue(value: string): [string, string] | null {
     // Support both / and : as separators
     const match = value.match(/^([a-z0-9-]+)[\/:]([a-z0-9-]+)$/i);
-    if (!match) return null;
+    if (!match) {return null;}
     return [match[1].toLowerCase(), match[2].toLowerCase()];
 }
 

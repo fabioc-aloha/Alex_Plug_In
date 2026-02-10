@@ -429,14 +429,14 @@ export function initializeSecretsDiagnostics(context: vscode.ExtensionContext): 
  */
 function shouldScanDocument(doc: vscode.TextDocument): boolean {
   // Skip very large files
-  if (doc.lineCount > 10000) return false;
+  if (doc.lineCount > 10000) {return false;}
 
   // Skip binary files
   const binaryExtensions = ['.png', '.jpg', '.gif', '.pdf', '.zip', '.exe'];
-  if (binaryExtensions.some((ext) => doc.fileName.endsWith(ext))) return false;
+  if (binaryExtensions.some((ext) => doc.fileName.endsWith(ext))) {return false;}
 
   // Skip output/debug panels
-  if (doc.uri.scheme !== 'file') return false;
+  if (doc.uri.scheme !== 'file') {return false;}
 
   return true;
 }
@@ -445,7 +445,7 @@ function shouldScanDocument(doc: vscode.TextDocument): boolean {
  * Scan a document and update diagnostics
  */
 function scanDocument(doc: vscode.TextDocument): void {
-  if (!diagnosticCollection) return;
+  if (!diagnosticCollection) {return;}
 
   const result = scanContent(doc.getText(), { includeLowSeverity: false });
 
@@ -548,7 +548,7 @@ export function registerSecretsCommands(context: vscode.ExtensionContext): void 
           const criticalFiles: string[] = [];
 
           for (const file of files) {
-            if (token.isCancellationRequested) break;
+            if (token.isCancellationRequested) {break;}
 
             progress.report({
               message: `Scanning ${file.fsPath.split(/[\\/]/).pop()}...`,

@@ -1,8 +1,12 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
     "version": "1.0.0",
     "skill": "airs-integration",
     "created": "2026-02-10",
     "connectionCount": 8,
+    "connections": [],
     "synapses": [
         {
             "id": "AIRS-INT-001",

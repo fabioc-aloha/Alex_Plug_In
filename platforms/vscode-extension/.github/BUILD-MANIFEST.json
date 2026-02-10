@@ -1,0 +1,23 @@
+{
+  "sourceVersion": "5.6.1",
+  "filesCopied": 238,
+  "generatedAt": "2026-02-10 15:11:50",
+  "exclusionPatterns": [
+    "ISSUE_TEMPLATE",
+    "PULL_REQUEST_TEMPLATE.md",
+    "FUNDING.yml",
+    "dependabot.yml",
+    "workflows",
+    "episodic/dream-report-*.md",
+    "episodic/meditation-session-*.md",
+    "episodic/meditation-*.md",
+    "episodic/chronicle-*.md",
+    "episodic/self-actualization-*.md",
+    "config/cognitive-config.json",
+    "config/user-profile.json",
+    "config/USER-PROFILE.md",
+    "config/MASTER-ALEX-PROTECTED.json"
+  ],
+  "filesExcluded": 69,
+  "sourceCommit": "b612264"
+}

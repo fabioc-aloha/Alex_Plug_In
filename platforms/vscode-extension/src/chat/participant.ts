@@ -2295,10 +2295,10 @@ Search for people in your organization.
     for (const person of people) {
         const email = person.emailAddresses?.[0]?.address ?? '';
         stream.markdown(`### ${person.displayName}\n`);
-        if (person.jobTitle) stream.markdown(`- **Title**: ${person.jobTitle}\n`);
-        if (person.department) stream.markdown(`- **Department**: ${person.department}\n`);
-        if (email) stream.markdown(`- **Email**: ${email}\n`);
-        if (person.officeLocation) stream.markdown(`- **Office**: ${person.officeLocation}\n`);
+        if (person.jobTitle) {stream.markdown(`- **Title**: ${person.jobTitle}\n`);}
+        if (person.department) {stream.markdown(`- **Department**: ${person.department}\n`);}
+        if (email) {stream.markdown(`- **Email**: ${email}\n`);}
+        if (person.officeLocation) {stream.markdown(`- **Office**: ${person.officeLocation}\n`);}
         stream.markdown('\n');
     }
     

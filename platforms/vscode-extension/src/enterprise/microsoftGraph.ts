@@ -150,7 +150,7 @@ export async function getCalendarEvents(
   daysAhead?: number
 ): Promise<GraphCalendarEvent[]> {
   const config = getGraphConfig();
-  if (!config.calendarEnabled) return [];
+  if (!config.calendarEnabled) {return [];}
 
   const days = daysAhead ?? config.calendarDaysAhead;
   const startDateTime = new Date().toISOString();
@@ -187,7 +187,7 @@ export async function getRecentMail(
   unreadOnly = false
 ): Promise<GraphMailMessage[]> {
   const config = getGraphConfig();
-  if (!config.mailEnabled) return [];
+  if (!config.mailEnabled) {return [];}
 
   const count = maxMessages ?? config.mailMaxMessages;
   const filter = unreadOnly ? '&$filter=isRead eq false' : '';
@@ -204,7 +204,7 @@ export async function getRecentMail(
  */
 export async function getPresence(): Promise<GraphPresence | null> {
   const config = getGraphConfig();
-  if (!config.presenceEnabled) return null;
+  if (!config.presenceEnabled) {return null;}
 
   return graphRequest<GraphPresence>('/me/presence');
 }
@@ -214,7 +214,7 @@ export async function getPresence(): Promise<GraphPresence | null> {
  */
 export async function getBatchPresence(userIds: string[]): Promise<Map<string, GraphPresence>> {
   const config = getGraphConfig();
-  if (!config.presenceEnabled) return new Map();
+  if (!config.presenceEnabled) {return new Map();}
 
   const response = await graphRequest<{ responses: Array<{ id: string; body: GraphPresence }> }>(
     '/communications/getPresencesByUserId',
@@ -239,7 +239,7 @@ export async function getRelevantPeople(
   count = 10
 ): Promise<GraphPerson[]> {
   const config = getGraphConfig();
-  if (!config.peopleEnabled) return [];
+  if (!config.peopleEnabled) {return [];}
 
   const response = await graphRequest<{ value: GraphPerson[] }>(
     `/me/people?$top=${count}&$select=id,displayName,emailAddresses,jobTitle,department,officeLocation`
@@ -256,7 +256,7 @@ export async function searchPeople(
   count = 5
 ): Promise<GraphPerson[]> {
   const config = getGraphConfig();
-  if (!config.peopleEnabled) return [];
+  if (!config.peopleEnabled) {return [];}
 
   const response = await graphRequest<{ value: GraphPerson[] }>(
     `/me/people?$search="${encodeURIComponent(query)}"&$top=${count}&$select=id,displayName,emailAddresses,jobTitle,department,officeLocation`
@@ -335,7 +335,7 @@ export function formatPresence(presence: GraphPresence): string {
  */
 export async function getMeetingContext(): Promise<string | null> {
   const nextMeeting = await getNextMeeting();
-  if (!nextMeeting) return null;
+  if (!nextMeeting) {return null;}
 
   const attendees = nextMeeting.attendees?.map((a) => a.emailAddress.name).join(', ') ?? 'None';
   const start = new Date(nextMeeting.start.dateTime);
@@ -415,10 +415,10 @@ export function getGraphStatus(): { enabled: boolean; connected: boolean; featur
   const connected = isGraphAvailable();
 
   const features: string[] = [];
-  if (config.calendarEnabled) features.push('Calendar');
-  if (config.mailEnabled) features.push('Mail');
-  if (config.presenceEnabled) features.push('Presence');
-  if (config.peopleEnabled) features.push('People');
+  if (config.calendarEnabled) {features.push('Calendar');}
+  if (config.mailEnabled) {features.push('Mail');}
+  if (config.presenceEnabled) {features.push('Presence');}
+  if (config.peopleEnabled) {features.push('People');}
 
   return { enabled: config.enabled, connected, features };
 }

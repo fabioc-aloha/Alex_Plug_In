@@ -1,8 +1,12 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "heir:vscode",
     "version": "1.0.0",
     "skill": "azure-devops-automation",
     "created": "2026-02-10",
     "connectionCount": 4,
+    "connections": [],
     "synapses": [
         {
             "id": "DEVOPS-001",

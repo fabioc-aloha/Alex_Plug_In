@@ -1,8 +1,12 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
     "version": "1.0.0",
     "skill": "deep-work-optimization",
     "created": "2026-02-10",
     "connectionCount": 6,
+    "connections": [],
     "synapses": [
         {
             "id": "DEEP-001",

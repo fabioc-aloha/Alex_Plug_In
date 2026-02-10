@@ -1,8 +1,11 @@
 {
     "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
     "skillId": "academic-paper-drafting",
     "version": "1.0.0",
     "lastUpdated": "2026-02-10",
+    "connections": [],
     "synapses": [
         {
             "target": "writing-publication",

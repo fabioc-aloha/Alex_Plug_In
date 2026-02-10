@@ -24,9 +24,11 @@ Search this index when processing any task request:
 
 | Skill | Action Keywords |
 |-------|-----------------|
+| academic-paper-drafting | draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing |
 | academic-research | write thesis, literature review, cite sources, research paper, dissertation |
 | ai-agent-design | design agent, react pattern, multi-agent, tool use, agent architecture |
 | airs-appropriate-reliance | airs survey, measure adoption, psychometric scale, utaut, ai readiness |
+| airs-integration | airs assessment, readiness assessment, reliance calibration, ai adoption |
 | alex-effort-estimation | estimate effort, how long, task duration, ai time, planning |
 | anti-hallucination | prevent hallucination, verify claim, admit uncertainty, fact check, don't know |
 | api-design | design api, rest endpoints, openapi, http status, api versioning |
@@ -37,17 +39,26 @@ Search this index when processing any task request:
 | architecture-refinement | refine architecture, document pattern, consolidate files, update tracker |
 | ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
 | awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
+| azure-architecture-patterns | azure patterns, cloud architecture, azure best practices, well-architected |
+| azure-devops-automation | azdo, azure devops, pipeline automation, ado automation, yaml pipeline |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
+| citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension |
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
+| coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
 | creative-writing | write story, character arc, plot structure, dialogue, narrative |\n| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
+| deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
+| dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
+| enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
+| executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
+| frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |
 | ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution |
@@ -62,6 +73,7 @@ Search this index when processing any task request:
 | learning-psychology | teach naturally, zone proximal, adaptive learning, learning partnership |
 | lint-clean-markdown | fix markdown lint, blank lines, md032, clean markdown, lint rules |
 | llm-model-selection | choose model, opus vs sonnet, claude model, cost optimization, model tier |
+| literature-review | review literature, systematic review, literature matrix, sources, synthesis |
 | localization | translate, i18n, localize app, language detection, rtl support |
 | m365-agent-debugging | debug m365 agent, declarative agent, manifest validation, copilot agent |
 | markdown-mermaid | create diagram, mermaid syntax, flowchart, sequence diagram, visualize |
@@ -92,6 +104,7 @@ Search this index when processing any task request:
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
 | skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
 | skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
+| slide-design | design slides, slide layout, presentation design, visual slides, deck styling |
 | socratic-questioning | ask questions, discover answer, probe assumption, socratic method |
 | svg-graphics | create svg, svg banner, svg icon, dark mode svg, scalable graphic |
 | teams-app-patterns | teams app, teams manifest, adaptive card, teams bot, teams sso |

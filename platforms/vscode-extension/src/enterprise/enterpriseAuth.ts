@@ -177,7 +177,7 @@ export function getCurrentUser(): EnterpriseUser | null {
  * Check if user has the required role
  */
 export function hasRole(requiredRole: EnterpriseRole): boolean {
-  if (!currentUser) return false;
+  if (!currentUser) {return false;}
 
   const roleHierarchy: EnterpriseRole[] = ['viewer', 'contributor', 'admin', 'owner'];
   const userMaxRole = Math.max(...currentUser.roles.map((r) => roleHierarchy.indexOf(r)));
@@ -191,8 +191,8 @@ export function hasRole(requiredRole: EnterpriseRole): boolean {
  */
 export function canWrite(): boolean {
   const config = getEnterpriseConfig();
-  if (!config.enabled) return true; // No restrictions in non-enterprise mode
-  if (!config.requireAuth) return true; // Auth not required
+  if (!config.enabled) {return true;} // No restrictions in non-enterprise mode
+  if (!config.requireAuth) {return true;} // Auth not required
 
   return hasRole(config.minWriteRole);
 }
@@ -629,9 +629,9 @@ function determineUserRoles(claims: Record<string, unknown>): EnterpriseRole[] {
   // Check for role claims (Azure AD app roles)
   const tokenRoles = claims['roles'] as string[] | undefined;
   if (tokenRoles) {
-    if (tokenRoles.includes('Alex.Owner')) roles.push('owner');
-    if (tokenRoles.includes('Alex.Admin')) roles.push('admin');
-    if (tokenRoles.includes('Alex.Contributor')) roles.push('contributor');
+    if (tokenRoles.includes('Alex.Owner')) {roles.push('owner');}
+    if (tokenRoles.includes('Alex.Admin')) {roles.push('admin');}
+    if (tokenRoles.includes('Alex.Contributor')) {roles.push('contributor');}
   }
 
   // Check for group claims (security groups)

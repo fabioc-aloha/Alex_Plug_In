@@ -219,7 +219,7 @@ function cleanupOldLogs(logDir: string): void {
   try {
     const files = fs.readdirSync(logDir);
     for (const file of files) {
-      if (!file.startsWith('alex-audit-')) continue;
+      if (!file.startsWith('alex-audit-')) {continue;}
 
       const filePath = path.join(logDir, file);
       const stats = fs.statSync(filePath);
@@ -259,8 +259,8 @@ export function logAudit(params: {
   details?: Record<string, unknown>;
   actor?: Partial<AuditActor>;
 }): void {
-  if (!config.enabled) return;
-  if (!config.categories.includes(params.category)) return;
+  if (!config.enabled) {return;}
+  if (!config.categories.includes(params.category)) {return;}
 
   const event: AuditEvent = {
     id: generateEventId(),
@@ -302,7 +302,7 @@ export function logAudit(params: {
  * Flush the event buffer to storage
  */
 async function flushEventBuffer(): Promise<void> {
-  if (eventBuffer.length === 0) return;
+  if (eventBuffer.length === 0) {return;}
 
   const events = [...eventBuffer];
   eventBuffer = [];
@@ -330,7 +330,7 @@ async function flushEventBuffer(): Promise<void> {
  * Send events to remote endpoint
  */
 async function sendToRemote(events: AuditEvent[]): Promise<void> {
-  if (!config.remoteEndpoint) return;
+  if (!config.remoteEndpoint) {return;}
 
   const response = await fetch(config.remoteEndpoint, {
     method: 'POST',
@@ -350,7 +350,7 @@ async function sendToRemote(events: AuditEvent[]): Promise<void> {
  * Redact sensitive information from details
  */
 function redactDetails(details?: Record<string, unknown>): Record<string, unknown> | undefined {
-  if (!details) return undefined;
+  if (!details) {return undefined;}
 
   const sensitiveKeys = ['password', 'token', 'key', 'secret', 'credential', 'auth'];
   const redacted: Record<string, unknown> = {};
@@ -451,7 +451,7 @@ export function registerAuditCommands(context: vscode.ExtensionContext): void {
         filters: { 'JSON': ['json'] },
       });
 
-      if (!saveUri) return;
+      if (!saveUri) {return;}
 
       // Combine all logs
       const files = fs.readdirSync(logDir).filter((f) => f.startsWith('alex-audit-'));

@@ -787,7 +787,7 @@ Alex now adapts behavior based on the running LLM:
 ### 🔍 Automated Doc Count Validation
 
 - Dream protocol now validates documented counts against actual files
-- Reports drift for Procedural (24), Episodic (13), and Skills (78)
+- Reports drift for Procedural (24), Episodic (13), and Skills (92)
 
 ---
 

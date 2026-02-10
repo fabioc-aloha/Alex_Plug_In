@@ -107,7 +107,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
 | **Chat & Agents** | `@alex` participant, 24 slash commands, 12 LM tools, 3 custom agents          |
-| **Intelligence**  | 78 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 92 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
@@ -655,7 +655,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (78 skills)
+├── skills/                    # 🎓 Portable domain expertise (92 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -707,7 +707,7 @@ Alex now adapts behavior based on the running LLM:
 ### 🔍 Automated Doc Count Validation
 
 - Dream protocol now validates documented counts against actual files
-- Reports drift for Procedural (24), Episodic (13), and Skills (78)
+- Reports drift for Procedural (24), Episodic (13), and Skills (92)
 
 ---
 

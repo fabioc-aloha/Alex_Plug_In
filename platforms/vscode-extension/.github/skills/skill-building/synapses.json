@@ -1,0 +1,67 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "skillId": "skill-building",
+    "version": "1.0.0",
+    "lastUpdated": "2026-02-10",
+    "connections": [],
+    "synapses": [
+        {
+            "target": "bootstrap-learning",
+            "type": "conceptual",
+            "strength": "critical",
+            "direction": "incoming",
+            "context": "Learning foundation before skill crystallization"
+        },
+        {
+            "target": "knowledge-synthesis",
+            "type": "procedural",
+            "strength": "critical",
+            "direction": "incoming",
+            "context": "Synthesize learnings into reusable patterns"
+        },
+        {
+            "target": "heir-curation",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "outgoing",
+            "context": "Skills created by heirs need curation for promotion"
+        },
+        {
+            "target": "skill-activation",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "outgoing",
+            "context": "New skills need to be added to activation index"
+        },
+        {
+            "target": "skill-catalog-generator",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "outgoing",
+            "context": "Update catalog after creating new skills"
+        },
+        {
+            "target": "architecture-refinement",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "bidirectional",
+            "context": "Skills are part of cognitive architecture refinement"
+        },
+        {
+            "target": "brain-qa",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "outgoing",
+            "context": "Validate new skill meets quality standards"
+        },
+        {
+            "target": "project-scaffolding",
+            "type": "conceptual",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Skill scaffolding follows project scaffolding patterns"
+        }
+    ]
+}

@@ -208,7 +208,10 @@ if (6 -in $runPhases) {
     Get-ChildItem "$ghPath\skills" -Recurse -Filter "synapses.json" | ForEach-Object {
         $content = Get-Content $_.FullName -Raw
         $skill = $_.DirectoryName | Split-Path -Leaf
-        if ($content -match '"strength":\s*"(strong|moderate|High|Medium|Critical|Low)"') {
+        # Use case-sensitive match (cmatch) for deprecated capitalized strength values only
+        # Valid: critical, strong, moderate, weak (lowercase)
+        # Deprecated: High, Medium, Critical, Low (capitalized)
+        if ($content -cmatch '"strength":\s*"(High|Medium|Critical|Low)"') {
             $critical += $skill
         }
         if ($content -notmatch '"\$schema"') {

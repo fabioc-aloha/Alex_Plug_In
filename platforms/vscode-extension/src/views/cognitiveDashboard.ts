@@ -117,7 +117,7 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
    * Refresh dashboard data
    */
   public async refresh(): Promise<void> {
-    if (!this._view) return;
+    if (!this._view) {return;}
 
     const data = await this.collectDashboardData();
     this._view.webview.postMessage({ command: 'update', data });
@@ -156,7 +156,7 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       recentActivity: [],
     };
 
-    if (!workspaceFolder) return data;
+    if (!workspaceFolder) {return data;}
 
     const rootPath = workspaceFolder.uri.fsPath;
     const githubPath = path.join(rootPath, '.github');

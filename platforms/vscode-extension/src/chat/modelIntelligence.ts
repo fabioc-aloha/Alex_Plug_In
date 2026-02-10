@@ -457,21 +457,21 @@ export function detectTaskFromPrompt(prompt: string): string | undefined {
     const promptLower = prompt.toLowerCase();
     
     // Frontier tasks
-    if (/meditat|consolidat|reflect/.test(promptLower)) return 'meditation';
-    if (/self-actuali|deep assess|architecture review/.test(promptLower)) return 'selfActualization';
-    if (/refactor.*architecture|restructure|major redesign/.test(promptLower)) return 'architectureRefactoring';
-    if (/learn.*new|bootstrap|acquire.*skill|teach me/.test(promptLower)) return 'bootstrapLearning';
+    if (/meditat|consolidat|reflect/.test(promptLower)) {return 'meditation';}
+    if (/self-actuali|deep assess|architecture review/.test(promptLower)) {return 'selfActualization';}
+    if (/refactor.*architecture|restructure|major redesign/.test(promptLower)) {return 'architectureRefactoring';}
+    if (/learn.*new|bootstrap|acquire.*skill|teach me/.test(promptLower)) {return 'bootstrapLearning';}
     
     // Capable tasks
-    if (/dream|maintenance|health check|synapse/.test(promptLower)) return 'dream';
-    if (/review.*code|code review|pr review/.test(promptLower)) return 'codeReview';
-    if (/debug|fix.*bug|troubleshoot|error/.test(promptLower)) return 'debugging';
-    if (/skill select|plan.*task|optimize.*skill/.test(promptLower)) return 'skillSelection';
+    if (/dream|maintenance|health check|synapse/.test(promptLower)) {return 'dream';}
+    if (/review.*code|code review|pr review/.test(promptLower)) {return 'codeReview';}
+    if (/debug|fix.*bug|troubleshoot|error/.test(promptLower)) {return 'debugging';}
+    if (/skill select|plan.*task|optimize.*skill/.test(promptLower)) {return 'skillSelection';}
     
     // Efficient tasks
-    if (/format|rename|simple edit|typo|spelling/.test(promptLower)) return 'simpleEdits';
-    if (/doc|readme|comment|jsdoc/.test(promptLower)) return 'documentation';
-    if (/what is|explain|look up|find|search/.test(promptLower)) return 'lookup';
+    if (/format|rename|simple edit|typo|spelling/.test(promptLower)) {return 'simpleEdits';}
+    if (/doc|readme|comment|jsdoc/.test(promptLower)) {return 'documentation';}
+    if (/what is|explain|look up|find|search/.test(promptLower)) {return 'lookup';}
     
     return undefined;
 }

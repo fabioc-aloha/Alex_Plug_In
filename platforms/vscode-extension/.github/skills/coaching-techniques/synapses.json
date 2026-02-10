@@ -1,6 +1,9 @@
 {
-    "schemaVersion": "1.1.0",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
     "skillId": "coaching-techniques",
+    "connections": [],
     "synapses": [
         {
             "id": "coaching-stakeholder-001",

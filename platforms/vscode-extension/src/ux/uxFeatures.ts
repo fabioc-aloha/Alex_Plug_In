@@ -136,7 +136,7 @@ function createVoiceModeStatusBar(context: vscode.ExtensionContext): void {
  * Update voice mode status bar display
  */
 function updateVoiceModeStatusBar(): void {
-  if (!voiceModeStatusBar) return;
+  if (!voiceModeStatusBar) {return;}
 
   if (voiceModeEnabled) {
     voiceModeStatusBar.text = '$(unmute) Voice';
@@ -228,7 +228,7 @@ async function detectAndUpdateModelTier(): Promise<void> {
  * Update model tier status bar display
  */
 function updateModelTierStatusBar(tier: ModelTier, modelName: string): void {
-  if (!modelTierStatusBar) return;
+  if (!modelTierStatusBar) {return;}
 
   const tierInfo = TIER_INFO[tier];
   const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
@@ -483,9 +483,9 @@ async function collectBriefingData(workspaceUri: vscode.Uri): Promise<DailyBrief
  */
 function getTimeBasedGreeting(): string {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Good morning!';
-  if (hour < 17) return 'Good afternoon!';
-  if (hour < 21) return 'Good evening!';
+  if (hour < 12) {return 'Good morning!';}
+  if (hour < 17) {return 'Good afternoon!';}
+  if (hour < 21) {return 'Good evening!';}
   return 'Working late?';
 }
 

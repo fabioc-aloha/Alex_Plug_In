@@ -1,8 +1,12 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
     "version": "1.0.0",
     "skill": "executive-storytelling",
     "created": "2026-02-10",
     "connectionCount": 5,
+    "connections": [],
     "synapses": [
         {
             "id": "EXEC-001",

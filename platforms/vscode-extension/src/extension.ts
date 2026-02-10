@@ -1314,11 +1314,11 @@ For each finding:
 
         // Detect doc format based on language
         let docFormat = "JSDoc";
-        if (languageId === "python") docFormat = "docstrings (Google style)";
-        else if (languageId === "csharp" || languageId === "fsharp") docFormat = "XML documentation comments";
-        else if (languageId === "rust") docFormat = "rustdoc";
-        else if (languageId === "go") docFormat = "Go doc comments";
-        else if (languageId === "java") docFormat = "Javadoc";
+        if (languageId === "python") {docFormat = "docstrings (Google style)";}
+        else if (languageId === "csharp" || languageId === "fsharp") {docFormat = "XML documentation comments";}
+        else if (languageId === "rust") {docFormat = "rustdoc";}
+        else if (languageId === "go") {docFormat = "Go doc comments";}
+        else if (languageId === "java") {docFormat = "Javadoc";}
 
         const prompt = `Generate comprehensive ${docFormat} documentation for this code:
 

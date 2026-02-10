@@ -223,7 +223,7 @@ This creates **additional deployment options** for Alex M365:
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
 flowchart TB
     subgraph Master["🧠 MASTER ALEX"]
-        DNA["Cognitive DNA<br/>78 Skills, Protocols, Identity"]
+        DNA["Cognitive DNA<br/>92 Skills, Protocols, Identity"]
     end
 
     subgraph VSCode["👶 VS Code Heir"]
