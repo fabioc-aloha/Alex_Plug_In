@@ -44,6 +44,12 @@
       "type": "triggers",
       "strength": 0.8,
       "reason": "Auto-promotion during meditation sessions"
+    },
+    {
+      "target": "external:Alex-Global-Knowledge/insights/GI-gk-index-schema-drift-detection-2026-02-10.md",
+      "type": "validates",
+      "strength": 0.85,
+      "reason": "Schema integrity checks for index entries"
     }
   ],
   "triggers": [

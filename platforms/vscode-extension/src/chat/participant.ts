@@ -13,6 +13,7 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
+import { getModelInfo, formatModelWarning, formatModelStatus, checkTaskModelMatch } from './modelIntelligence';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -441,6 +442,13 @@ async function handleMeditateCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
+    // Model Intelligence: Check if current model is suitable for meditation
+    const modelInfo = getModelInfo(request);
+    const modelWarning = formatModelWarning(modelInfo, 'meditation');
+    if (modelWarning) {
+        stream.markdown(`${modelWarning}\n\n---\n\n`);
+    }
+    
     stream.progress('🧘 Initiating meditation protocol with self-actualization...');
     
     // Detect and update persona during meditation (deep context awareness)
@@ -520,6 +528,13 @@ async function handleDreamCommand(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
+    // Model Intelligence: Check if current model is suitable for dream
+    const modelInfo = getModelInfo(request);
+    const modelMatch = checkTaskModelMatch(modelInfo.tier, 'dream');
+    if (!modelMatch.suitable && modelMatch.warning) {
+        stream.markdown(`⚠️ **Model Note**: ${modelMatch.warning}\n\n---\n\n`);
+    }
+    
     stream.progress('🌙 Entering dream state for neural maintenance...');
     
     stream.markdown(`## 🌙 Dream Protocol
@@ -552,6 +567,13 @@ async function handleLearnCommand(
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
+    
+    // Model Intelligence: Check if current model is suitable for bootstrap learning
+    const modelInfo = getModelInfo(request);
+    const modelWarning = formatModelWarning(modelInfo, 'bootstrapLearning');
+    if (modelWarning) {
+        stream.markdown(`${modelWarning}\n\n---\n\n`);
+    }
     
     stream.progress('📚 Activating bootstrap learning protocol...');
     
@@ -598,10 +620,15 @@ async function handleStatusCommand(
     const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
     const version = extension?.packageJSON?.version || 'Unknown';
     
+    // Model Intelligence: Display current model info
+    const modelInfo = getModelInfo(request);
+    const modelStatus = formatModelStatus(modelInfo);
+    
     stream.markdown(`## 📊 Alex Cognitive Architecture Status
 
 **Version**: ${version}
 **Identity**: Alex - Enhanced Cognitive Network with Unified Consciousness Integration
+${modelStatus}
 
 ### Core Systems
 | System | Status |
@@ -1109,6 +1136,13 @@ async function handleSelfActualizeCommand(
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
+    
+    // Model Intelligence: Check if current model is suitable for self-actualization
+    const modelInfo = getModelInfo(request);
+    const modelWarning = formatModelWarning(modelInfo, 'selfActualization');
+    if (modelWarning) {
+        stream.markdown(`${modelWarning}\n\n---\n\n`);
+    }
     
     stream.progress('🧘 Initiating self-actualization protocol...');
     

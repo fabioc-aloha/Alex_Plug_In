@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased] - v5.5.0
+
+> **Model Intelligence** — Adaptive behavior based on LLM capabilities
+
+### Added
+
+- **Model Tier Detection** (`modelIntelligence.ts`): Classifies models into Frontier/Capable/Efficient tiers
+  - Frontier: Claude Opus 4/4.5/4.6, GPT-5.2 — Deep reasoning, 1M context, extended thinking
+  - Capable: Claude Sonnet 4/4.5, GPT-5.1, GPT-4o — Good reasoning, 200K-400K context
+  - Efficient: Claude Haiku, GPT-4.1 mini — Fast and cost-effective
+
+- **Task-Model Matching**: Cognitive tasks now check if current model meets minimum tier requirements
+  - `/meditate`, `/dream` — Warns if not using Frontier model
+  - `/selfActualize`, `/learn` — Warns if not using Frontier model
+
+- **Model Status in `/status`**: Shows current model tier, context capacity, and capabilities
+
+### Technical
+
+- New `modelIntelligence.ts` module with detection patterns and task definitions
+- Integration with chat participant handler for proactive warnings
+- Context size heuristic fallback when model family cannot be detected
+
+---
+
 ## [5.4.3] - 2026-02-09
 
 > **TTS Language Fix & Heir Reset** — Proper language capitalization in code block summaries

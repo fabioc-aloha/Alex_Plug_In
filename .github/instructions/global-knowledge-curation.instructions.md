@@ -97,6 +97,38 @@ Run this protocol when:
 - **After Major Learning**: When global knowledge grows significantly
 - **Meditation Insight**: When meditation surfaces curation need
 
+## Index Validation (Schema Integrity)
+
+GK index entries can drift from the expected schema. Run this validation during curation:
+
+### Two-Layer Validation Protocol
+
+**Layer 1: File ↔ Index Sync**
+```powershell
+# Check for orphaned files (file exists, no index entry)
+$allFiles = (Get-ChildItem patterns/*.md) + (Get-ChildItem insights/*.md)
+$indexPaths = (Get-Content index.json | ConvertFrom-Json).entries.filePath
+$orphans = $allFiles | Where-Object { $_.Name -notin ($indexPaths | Split-Path -Leaf) }
+
+# Check for missing files (index entry, no file)
+$missing = $indexPaths | Where-Object { -not (Test-Path $_) }
+```
+
+**Layer 2: Schema Field Compliance**
+```powershell
+$requiredFields = @('id', 'title', 'type', 'category', 'created', 'filePath')
+$index = Get-Content index.json | ConvertFrom-Json
+foreach ($entry in $index.entries) {
+    $missingFields = $requiredFields | Where-Object { -not $entry.$_ }
+    if ($missingFields) { "Entry $($entry.id): missing $($missingFields -join ', ')" }
+}
+```
+
+**Common Schema Drift Issues**:
+- `source` instead of `sourceProject`
+- `path` instead of `filePath`
+- Missing `type`, `modified`, or `summary` fields
+
 ## Example Curation Session
 
 ```
@@ -140,6 +172,7 @@ Summary: 2 implemented, 1 retained, 1 archived, 1 deleted
 - Connects to: `global-knowledge/SKILL.md` (for knowledge management)
 - Connects to: `unified-meditation-protocols.prompt.md` (may surface curation needs)
 - Connects to: `dream-state-automation.instructions.md` (could automate checks)
+- Connects to: `GI-gk-index-schema-drift-detection-2026-02-10` (index validation pattern)
 
 ---
 

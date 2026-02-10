@@ -1,6 +1,6 @@
-# Alex Cognitive Architecture — Roadmap v5.4-v6.0
+# Alex Cognitive Architecture — Roadmap v5.5-v6.0
 
-> **Phase: Enterprise Integration & Semantic Intelligence**
+> **Phase: Model Intelligence & Enterprise Integration**
 
 ---
 
@@ -8,76 +8,63 @@
 
 ### Current State
 
-v5.3.0 is complete. Alex now has enterprise-grade security:
-- **Entra ID SSO** — Microsoft identity integration with tenant restrictions
-- **RBAC** — Role-based access control (viewer → contributor → admin → owner)
-- **Secrets Scanning** — 20+ patterns for API keys, PII, credentials
-- **Audit Logging** — JSONL file + remote endpoint with retention
+v5.4.3 is complete. Alex now has:
+- **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
+- **Text-to-Speech** — Multi-language voice synthesis with 35 test cases
+- **Voice Mode** — Continuous reading, speak prompt, auto-summarization
+- **Keyboard Shortcuts** — Full accessibility support (Ctrl+Alt+R/V/P/D/A)
+- **Heir Automation** — Proper P5-P7 reset, user profile consolidation
 
 ### Vision Forward
 
 | Phase  | Focus                          | Timeline   |
 | ------ | ------------------------------ | ---------- |
-| v5.3.1 | Polish & Accessibility         | Feb 2026   |
-| v5.4.0 | Model Intelligence             | Mar 2026   |
-| v5.5.0 | Enterprise Systems Integration | Q2-Q3 2026 |
+| v5.5.0 | Model Intelligence             | Feb 2026   |
+| v5.6.0 | Enterprise Systems Integration | Q2-Q3 2026 |
 | v6.0.0 | Semantic Skill Graph           | Q4 2026+   |
 
 ---
 
 ## Version Status
 
-| Version    | Focus                      | Paradigm              | Status     |
-| ---------- | -------------------------- | --------------------- | ---------- |
-| v5.3.0     | Enterprise Readiness       | Trust at Scale        | ✅ Complete |
-| **v5.3.1** | **Polish & Accessibility** | **Inclusive Trust**   | 📋 Planned  |
-| v5.4.0     | Model Intelligence         | Adaptive Cognition    | 📋 Planned  |
-| v5.5.0     | Enterprise Systems         | Deep Orchestration    | 📋 Planned  |
-| v6.0.0     | Semantic Skill Graph       | Emergent Intelligence | 📋 Planned  |
+| Version    | Focus                  | Paradigm               | Status     |
+| ---------- | ---------------------- | ---------------------- | ---------- |
+| v5.3.0     | Enterprise Readiness   | Trust at Scale         | ✅ Complete |
+| v5.3.1     | CSP Security Fix       | Secure UX              | ✅ Complete |
+| v5.4.0-3   | Text-to-Speech & Voice | Accessible Cognition   | ✅ Complete |
+| **v5.5.0** | **Model Intelligence** | **Adaptive Cognition** | 🚧 Active   |
+| v5.6.0     | Enterprise Systems     | Deep Orchestration     | 📋 Planned  |
+| v6.0.0     | Semantic Skill Graph   | Emergent Intelligence  | 📋 Planned  |
 
 ---
 
 ## 🎯 Version Details
 
-### v5.3.1 — Polish & Accessibility
+### v5.5.0 — Model Intelligence (CURRENT)
 
-**Theme**: Complete enterprise readiness with data residency and accessibility compliance.
+**Theme**: Smarter model utilization — detect, recommend, and optimize for the running LLM.
 
-**Deferred from v5.3.0**:
+| Task                        | Owner  | Effort | Priority | Description                                      |
+| --------------------------- | :----: | :----: | :------: | ------------------------------------------------ |
+| Model Tier Detection        |  Heir  |   2h   |   High   | Detect running model via VS Code/Copilot API     |
+| Task-Model Matching         | Master |   2h   |   High   | Map cognitive tasks to minimum model tier        |
+| Model Selection Advisor     |  Heir  |   3h   |  Medium  | Advise model upgrade/downgrade; read user prefs  |
+| Model Performance Telemetry | Master |   2h   |   Low    | Track task success rates per model tier (opt-in) |
 
-| Task                   | Owner  | Effort | Priority | Description                                          |
-| ---------------------- | :----: | :----: | :------: | ---------------------------------------------------- |
-| Data Residency Options | Master |   3h   |   High   | Location-based storage preferences (EU, US, etc.)    |
-| WCAG 2.1 AA Compliance |  Heir  |   4h   |   High   | Screen reader support, keyboard navigation, contrast |
-
-**Additional Polish**:
+**Deferred from v5.3.1**:
 
 | Task                           | Owner  | Effort | Priority | Description                                      |
 | ------------------------------ | :----: | :----: | :------: | ------------------------------------------------ |
-| Automated Doc Count Validation | Master |   2h   |  Medium  | Dream protocol verifies instruction/skill counts |
-| Enterprise Settings Docs       |  Heir  |   1h   |  Medium  | Document all 15 enterprise settings              |
+| Data Residency Options         | Master |   3h   |  Medium  | Location-based storage preferences (EU, US)      |
+| Automated Doc Count Validation | Master |   2h   |   Low    | Dream protocol verifies instruction/skill counts |
+| Enterprise Settings Docs       |  Heir  |   1h   |   Low    | Document all 15 enterprise settings              |
 | Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings         |
 
 **Target**: Mid-February 2026
 
 ---
 
-### v5.4.0 — Model Intelligence
-
-**Theme**: Smarter model utilization — recommend, detect, and optimize for the running LLM.
-
-| Task                        | Owner  | Effort | Priority | Description                                                   |
-| --------------------------- | :----: | :----: | :------: | ------------------------------------------------------------- |
-| Model Selection Advisor     |  Heir  |   3h   |   High   | Advise model upgrade (Opus 4.6) or downgrade; read user prefs |
-| Model Tier Detection        |  Heir  |   2h   |   High   | Detect running model programmatically via VS Code API         |
-| Task-Model Matching         | Master |   2h   |  Medium  | Map cognitive tasks to minimum model tier                     |
-| Model Performance Telemetry | Master |   2h   |   Low    | Track task success rates per model tier (opt-in)              |
-
-**Target**: March 2026
-
----
-
-### v5.5.0 — Enterprise Systems Integration
+### v5.6.0 — Enterprise Systems Integration
 
 **Theme**: Deep connectivity with Microsoft ecosystem for enterprise workflows.
 
@@ -144,22 +131,24 @@ Items to pull from when capacity frees up:
 - `ROADMAP-UNIFIED-V3.5-V5.3-COMPLETED.md` — Full history v3.5-v5.3.0
 
 **Version History Summary**:
-| Version Range | Theme                 | Completion  |
-| ------------- | --------------------- | ----------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness      | Jan 2026    |
-| v4.0.x        | Trust (CAIR/CSR)      | Jan 2026    |
-| v4.1.0-v4.3.0 | Skills & Architecture | Feb 2026    |
-| v5.0.x-v5.2.0 | Team Scaling & UX     | Feb 2026    |
-| v5.3.0        | Enterprise Readiness  | Feb 8, 2026 |
+| Version Range | Theme                  | Completion  |
+| ------------- | ---------------------- | ----------- |
+| v3.6.0-v3.9.0 | Dawn → Awareness       | Jan 2026    |
+| v4.0.x        | Trust (CAIR/CSR)       | Jan 2026    |
+| v4.1.0-v4.3.0 | Skills & Architecture  | Feb 2026    |
+| v5.0.x-v5.2.0 | Team Scaling & UX      | Feb 2026    |
+| v5.3.0        | Enterprise Readiness   | Feb 8, 2026 |
+| v5.3.1        | CSP Security Fix       | Feb 8, 2026 |
+| v5.4.0-v5.4.3 | Text-to-Speech & Voice | Feb 9, 2026 |
 
 ---
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.3.1                         |
-| **Current Heirs**          | VS Code (5.3.1), M365 (5.3.0) |
-| **Next Target**            | 5.4.0                         |
-| **Created**                | 2026-02-08                    |
+| **Current Master Version** | 5.4.3                         |
+| **Current Heirs**          | VS Code (5.4.3), M365 (5.3.0) |
+| **Next Target**            | 5.5.0                         |
+| **Updated**                | 2026-02-10                    |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3) |
 
 ---
