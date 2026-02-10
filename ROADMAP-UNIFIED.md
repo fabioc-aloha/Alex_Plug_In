@@ -15,6 +15,11 @@ v5.4.3 is complete. Alex now has:
 - **Keyboard Shortcuts** — Full accessibility support (Ctrl+Alt+R/V/P/D/A)
 - **Heir Automation** — Proper P5-P7 reset, user profile consolidation
 
+v5.5.0 in progress:
+- **Model Tier Detection** ✅ — Classify models as Frontier/Capable/Efficient
+- **Task-Model Matching** ✅ — Warn when cognitive tasks need higher-tier models
+- **Model Selection Advisor** 📋 — Recommend optimal model for task
+
 ### Vision Forward
 
 | Phase  | Focus                          | Timeline   |
@@ -44,12 +49,18 @@ v5.4.3 is complete. Alex now has:
 
 **Theme**: Smarter model utilization — detect, recommend, and optimize for the running LLM.
 
-| Task                        | Owner  | Effort | Priority | Description                                      |
-| --------------------------- | :----: | :----: | :------: | ------------------------------------------------ |
-| Model Tier Detection        |  Heir  |   2h   |   High   | Detect running model via VS Code/Copilot API     |
-| Task-Model Matching         | Master |   2h   |   High   | Map cognitive tasks to minimum model tier        |
-| Model Selection Advisor     |  Heir  |   3h   |  Medium  | Advise model upgrade/downgrade; read user prefs  |
-| Model Performance Telemetry | Master |   2h   |   Low    | Track task success rates per model tier (opt-in) |
+| Task                        | Owner  | Effort | Priority | Status | Description                                      |
+| --------------------------- | :----: | :----: | :------: | :----: | ------------------------------------------------ |
+| Model Tier Detection        |  Heir  |   2h   |   High   |   ✅    | Detect running model via VS Code/Copilot API     |
+| Task-Model Matching         | Master |   2h   |   High   |   ✅    | Map cognitive tasks to minimum model tier        |
+| Model Status in /status     |  Heir  |   1h   |   High   |   ✅    | Display current model tier and capabilities      |
+| Model Selection Advisor     |  Heir  |   3h   |  Medium  |   📋    | Advise model upgrade/downgrade; read user prefs  |
+| Model Performance Telemetry | Master |   2h   |   Low    |   📋    | Track task success rates per model tier (opt-in) |
+
+**Completed 2026-02-10**:
+- `modelIntelligence.ts` — Tier detection with patterns for Claude, GPT, Gemini
+- Warnings in `/meditate`, `/dream`, `/selfActualize`, `/learn` handlers
+- Model info display in `/status` command
 
 **Deferred from v5.3.1**:
 
