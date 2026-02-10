@@ -55,17 +55,15 @@ v5.5.0 is complete. Alex now has:
 - Warnings in `/meditate`, `/dream`, `/selfActualize`, `/learn` handlers
 - Model info display in `/status` command
 - `/model` command — Full dashboard + task-specific recommendations
+- Enterprise Settings Docs — All 15 settings documented in `alex_docs/guides/ENTERPRISE-SETTINGS.md`
 
 **Deferred from v5.3.1**:
 
-| Task                           | Owner  | Effort | Priority | Description                                      |
-| ------------------------------ | :----: | :----: | :------: | ------------------------------------------------ |
-| Data Residency Options         | Master |   3h   |  Medium  | Location-based storage preferences (EU, US)      |
+| Task                           | Owner  | Effort | Priority | Description                                 |
+| ------------------------------ | :----: | :----: | :------: | ------------------------------------------- |
+| Data Residency Options         | Master |   3h   |  Medium  | Location-based storage preferences (EU, US) |
 | Automated Doc Count Validation | Master |   2h   |   Low    | Dream protocol verifies instruction/skill counts |
-| Enterprise Settings Docs       |  Heir  |   1h   |   Low    | Document all 15 enterprise settings              |
-| Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings         |
-
-**Target**: Mid-February 2026
+| Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings    |
 
 ---
 
