@@ -291,6 +291,7 @@ flowchart LR
         MF[meditation-facilitation]
         KS[knowledge-synthesis]
         GK[global-knowledge]
+        GKS[global-knowledge-sync]
         SA[self-actualization]
         AH[architecture-health]
         ARF[architecture-refinement]
@@ -362,6 +363,8 @@ flowchart LR
         CM_CITE[citation-management]
         LR[literature-review]
         DD[dissertation-defense]
+        APID[api-documentation]
+        CCC[cross-cultural-collaboration]
     end
 
     subgraph Vis["🎨 Visual & Audio"]
@@ -371,6 +374,8 @@ flowchart LR
         GAM[gamma-presentations]
         TTS[text-to-speech]
         SD[slide-design]
+        PPTX[pptx-generation]
+        PTS[presentation-tool-selection]
     end
 
     subgraph Biz["💼 Business"]
@@ -393,6 +398,11 @@ flowchart LR
         HC[heir-curation]
         MAA[master-alex-audit]
         REL[release-process]
+        RF[release-preflight]
+    end
+
+    subgraph Ent["🏢 Enterprise"]
+        EI[enterprise-integration]
     end
 
     %% Cognitive flow
@@ -408,6 +418,7 @@ flowchart LR
 
     %% Meta-cognitive flow
     MED --> MF --> KS --> GK
+    GK --> GKS
     SA --> AH --> ARF
     SCG --> MM & AH & KS
     AAU --> AH & RF & CR
@@ -463,6 +474,8 @@ flowchart LR
     LR --> APD & KS
     CM_CITE --> LR & APD
     DD --> APD & GAM
+    APID --> API & WP
+    CCC --> LOC & PRAC
 
     %% Visual flow
     SVG <--> IH
@@ -470,6 +483,8 @@ flowchart LR
     GAM --> GD & MM
     TTS --> WP & ACR
     SD --> GAM & GD
+    PPTX --> GAM & SD
+    PTS --> GAM & PPTX
 
     %% Business flow
     BA --> ACR & WP & PM
@@ -482,6 +497,7 @@ flowchart LR
     MAD --> TAP
     RF --> VEP & TAP
     REL --> RF & HC
+    EI --> SR & AAP
 
     %% Styling - Inheritance
     classDef master fill:#fff3cd,stroke:#856404
@@ -493,10 +509,10 @@ flowchart LR
     classDef stale stroke-dasharray:5 5,stroke-width:2px
 
     class HC,MAA,REL,RF master
-    class VEP,CPP,AAP,ADA vscode
+    class VEP,CPP,AAP,ADA,EI vscode
     class MAD,TAP m365
     class VEP,CPP,MAD,TAP,LMS,GW,PRA,SFI stale
-    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,FR,CT,DWO,AH,SCG,SB,AAU,TS,RP,DP,CR,PS,VSE,API,IAC,AIRSI,ERP,RCA,IR,PM_SKILL,PD,CM,PM,SR,PII,PE,RAG,AAD,MCP,LMS,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,APD,CM_CITE,LR,DD,SVG,IH,GD,GAM,TTS,SD,BA,AEE,ES inheritable
+    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,FR,CT,DWO,AH,SCG,SB,AAU,GKS,TS,RP,DP,CR,PS,VSE,API,IAC,AIRSI,ERP,RCA,IR,PM_SKILL,PD,CM,PM,SR,PII,PE,RAG,AAD,MCP,LMS,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,APD,CM_CITE,LR,DD,APID,CCC,SVG,IH,GD,GAM,TTS,SD,PPTX,PTS,BA,AEE,ES inheritable
 ```
 
 ### Legend
