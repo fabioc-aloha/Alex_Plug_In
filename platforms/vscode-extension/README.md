@@ -10,16 +10,95 @@
 
 ---
 
-## 🎯 Who is Alex?
+## 💡 Why Alex? (You Already Have GitHub Copilot)
 
-**Alex Finch** — a cognitive architecture embodying **cognitive symbiosis**: the evolution from AI-as-tool to AI-as-partner. Named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:
+You don't need training wheels. You need thrust.
 
-- 🧠 **Learns and Remembers** — Consolidates knowledge across sessions using memory files
-- 🔗 **Connects Ideas** — Maps synaptic connections between concepts automatically
-- 🌙 **Self-Maintains** — Validates and repairs its neural network through dream protocols
-- 🧘 **Self-Actualizes** — Automatically assesses health on greetings and meditation
-- 🌐 **Works Across Domains** — Development, writing, research, management, and more
-- 🎨 **Multimodal Output** — Voice (TTS), presentations (Gamma), images, and diagrams
+Alex doesn't replace GitHub Copilot — **Alex makes GitHub Copilot remember**.
+
+### The Problem
+
+GitHub Copilot is brilliant but stateless. Every project starts from scratch. It doesn't know:
+- Your coding patterns from last project
+- The architecture decisions you made yesterday
+- What worked (and what failed) across your repos
+- The skills you've been building for months
+
+### The Solution
+
+Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, reusable skills, and cross-project knowledge.
+
+### Comparison: GitHub Copilot vs GitHub Copilot + Alex
+
+| Capability           | GitHub Copilot Alone       | GitHub Copilot + Alex                        |
+| -------------------- | -------------------------- | -------------------------------------------- |
+| **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
+| **Skills**           | You re-prompt from scratch | 92 pre-built skills, inheritable             |
+| **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
+| **Context**          | You re-explain every time  | Synapses map relationships automatically     |
+| **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
+| **Customization**    | Generic responses          | User profile + persona detection             |
+| **Architecture**     | None                       | Full cognitive architecture with inheritance |
+| **MS Graph**         | Not integrated             | Calendar, mail, people context               |
+
+### What Alex Adds in Practice
+
+| Task                      | GitHub Copilot Response | Alex Response                                                           |
+| ------------------------- | ----------------------- | ----------------------------------------------------------------------- |
+| "Help with this codebase" | Reads current file      | Reads synapse connections + global patterns from similar projects       |
+| "Review this PR"          | Generic review          | Uses your code-review-guidelines skill + past patterns                  |
+| "Remember this trick"     | ❌ Cannot persist        | "Saved to Global Knowledge. Available in all your projects."            |
+| "Prep for standup"        | ❌ No calendar           | "You have 3 meetings today. Last week you discussed the API migration." |
+
+### Who Should Install Alex?
+
+| Install If...                       | Skip If...                          |
+| ----------------------------------- | ----------------------------------- |
+| You want GitHub Copilot with memory | You prefer starting fresh each time |
+| You work across multiple projects   | Single-repo transactional work      |
+| You build reusable patterns         | No interest in skill libraries      |
+| You value open-source inspection    | Black-box tools are fine            |
+| You want AI that grows with you     | Generic assistant is sufficient     |
+
+### The Bottom Line
+
+**GitHub Copilot = Powerful autocomplete**
+**GitHub Copilot + Alex = Your rocket strapped to your back**
+
+Alex isn't competing with GitHub Copilot. Alex is the propulsion system that compounds your velocity.
+
+---
+
+## 🎯 Take Your [NOUN] to New Heights
+
+Alex accelerates whatever you're building. Pick your trajectory:
+
+| You Are              | Your Pain                                          | Alex Gives You                                                            |
+| -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 92 skills remember your architecture.            |
+| **Researcher**       | Literature scattered, hypothesis drift             | Hypothesis → publication, accelerated. Cross-project knowledge compounds. |
+| **Grad Student**     | Thesis overwhelm, advisor context gaps             | Literature review on autopilot. Your writing remembers your research.     |
+| **Technical Writer** | Docs fall behind code, style drift                 | Docs that write themselves. Consistent voice across projects.             |
+| **DevOps**           | Manual infra, config drift                         | Same infra, every time. Automated skill templates.                        |
+| **Project Manager**  | Status chasing, context switching                  | 4-6× faster estimates. Meeting prep with calendar + email context.        |
+| **Content Creator**  | Ideas scattered, no momentum                       | Ideas → posts in minutes. Knowledge that compounds.                       |
+
+### What You Get
+
+| Capability                | What It Means                                   |
+| ------------------------- | ----------------------------------------------- |
+| **92 Skills**             | Pre-built propulsion. Don't reinvent prompts.   |
+| **Cross-Project Memory**  | No refueling between launches. Knowledge flows. |
+| **Build Your Own Skills** | Custom boosters for your workflow.              |
+| **Open Source**           | Inspect every component. No black boxes.        |
+
+### The Rocket Ship Effect
+
+> *"You have a thought and you can just do it. That's like having a rocket ship strapped to your back."*
+
+Alex turns friction into flow:
+- **Before**: Explain context → Prompt → Get result → Re-explain next time
+- **After**: Thought → Result → *Knowledge compounds*
 
 ---
 
@@ -35,7 +114,7 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 24 slash commands
+- 29 slash commands
 - 12 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
@@ -106,8 +185,8 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
-| **Chat & Agents** | `@alex` participant, 24 slash commands, 12 LM tools, 3 custom agents          |
-| **Intelligence**  | 78 skills, emotional detection, model tier awareness, frustration recognition |
+| **Chat & Agents** | `@alex` participant, 29 slash commands, 12 LM tools, 3 custom agents          |
+| **Intelligence**  | 92 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
@@ -656,7 +735,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (78 skills)
+├── skills/                    # 🎓 Portable domain expertise (92 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -685,6 +764,30 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 - **Neuroscience**: Squire & Kandel declarative memory systems (2009)
 - **AI Safety**: Constitutional AI principles and alignment research
 - **Learning Psychology**: Bloom's taxonomy, spaced repetition, transfer learning
+
+---
+
+## 🆕 What's New in v5.5.0
+
+### 🧠 Model Intelligence
+
+Alex now adapts behavior based on the running LLM:
+
+- **`/model` command** — Full dashboard showing model tier, context capacity, and capabilities
+- **`/model <task>`** — Analyze any task and get model recommendations
+- **Task-Model Matching** — Cognitive tasks check if current model meets requirements
+- **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
+
+### 🔒 Enterprise Secrets Extensibility
+
+- **Custom patterns** — Define organization-specific regex via `alex.enterprise.secrets.customPatterns`
+- **17 enterprise settings** — Full documentation in [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
+- **Disable built-ins** — Use only your custom patterns for compliance
+
+### 🔍 Automated Doc Count Validation
+
+- Dream protocol now validates documented counts against actual files
+- Reports drift for Procedural (24), Episodic (13), and Skills (78)
 
 ---
 

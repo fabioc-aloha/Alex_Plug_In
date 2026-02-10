@@ -1,7 +1,7 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-02-09
-> Total Skills: **77** (68 inheritable, 4 master-only, 1 universal, 2 VS Code, 2 M365)
+> Generated: 2026-02-10
+> Total Skills: **78** (68 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
 > ⚠️ **Note**: This catalog is a simplified network diagram. See [alex_docs/skills/SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md) for complete inventory.
 
 ---
@@ -38,6 +38,7 @@ flowchart LR
     end
     subgraph Vscode["💻 Vscode"]
         CPP[chat-participant-patterns]
+        EI[enterprise-integration]
         VEP[vscode-extension-patterns]
     end
     subgraph Engineering["🔧 Engineering"]

@@ -9,11 +9,13 @@
 ### Current State
 
 v5.5.0 is complete. Alex now has:
+- **92 Skills** — Comprehensive domain coverage (82 inheritable to heirs)
 - **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
 - **Text-to-Speech** — Multi-language voice synthesis with 35 test cases
 - **Voice Mode** — Continuous reading, speak prompt, auto-summarization
 - **Keyboard Shortcuts** — Full accessibility support (Ctrl+Alt+R/V/P/D/A)
 - **Model Intelligence** — Tier detection, task matching, `/model` advisor
+- **Skill-Building Infrastructure** — Heirs can create and promote quality skills
 
 ### Vision Forward
 
@@ -32,7 +34,7 @@ v5.5.0 is complete. Alex now has:
 | v5.3.1     | CSP Security Fix       | Secure UX              | ✅ Complete |
 | v5.4.0-3   | Text-to-Speech & Voice | Accessible Cognition   | ✅ Complete |
 | v5.5.0     | Model Intelligence     | Adaptive Cognition     | ✅ Complete |
-| **v5.6.0** | **Enterprise Systems** | **Deep Orchestration** | 📋 Planned  |
+| **v5.6.0** | **Enterprise Systems** | **Deep Orchestration** | ✅ Complete |
 | v6.0.0     | Semantic Skill Graph   | Emergent Intelligence  | 📋 Planned  |
 
 ---
@@ -55,14 +57,15 @@ v5.5.0 is complete. Alex now has:
 - Warnings in `/meditate`, `/dream`, `/selfActualize`, `/learn` handlers
 - Model info display in `/status` command
 - `/model` command — Full dashboard + task-specific recommendations
-- Enterprise Settings Docs — All 15 settings documented in `alex_docs/guides/ENTERPRISE-SETTINGS.md`
-
-**Deferred from v5.3.1**:
-
-| Task                           | Owner  | Effort | Priority | Description                                      |
-| ------------------------------ | :----: | :----: | :------: | ------------------------------------------------ |
-| Automated Doc Count Validation | Master |   2h   |   Low    | Dream protocol verifies instruction/skill counts |
-| Secrets Pattern Extensibility  |  Heir  |   2h   |   Low    | User-defined regex patterns via settings         |
+- Enterprise Settings Docs — All 17 settings documented in `alex_docs/guides/ENTERPRISE-SETTINGS.md`
+- Automated Doc Count Validation — Dream protocol verifies instruction/skill counts match actuals
+- Secrets Pattern Extensibility — User-defined regex patterns via `alex.enterprise.secrets.customPatterns`
+- **Heir Evolution Cycle**: 12 skills promoted from sandbox heir (79→92 total skills)
+- **Skill Consolidation**: Merged 4 granular skills into 2 comprehensive ones (KISS principle)
+- **skill-building Skill**: 376-line meta-skill for heir skill creation and promotion
+- **Synapse Health**: 174→206 synapses, normalized formats, added synapses to 9 skills
+- **Quality Gate 4.5**: Promotion Readiness Score (0-16) in heir-skill-promotion.instructions.md
+- **Global Knowledge**: 227 entries (26 patterns + 171 insights)
 
 ---
 
@@ -72,17 +75,30 @@ v5.5.0 is complete. Alex now has:
 
 **Paradigm**: Deep orchestration — Alex becomes the cognitive layer across the entire Microsoft stack.
 
-| Task                         | Owner  | Effort | Priority | Description                              |
-| ---------------------------- | :----: | :----: | :------: | ---------------------------------------- |
-| Microsoft Graph Integration  |  Heir  |   1w   | Critical | Calendar, Mail, Presence, People API     |
-| Azure DevOps Connector       |  Heir  |   1w   |   High   | Work items, pipelines, repos, boards     |
-| Microsoft Fabric Integration |  Heir  |   1w   |   High   | Lakehouse, notebooks, semantic models    |
-| Teams Channel Awareness      |  Heir  |   3d   |   High   | Post insights, respond in channels       |
-| Planner/To-Do Sync           |  Heir  |   2d   |  Medium  | Alex tasks ↔ Planner/To-Do bidirectional |
-| Power BI Connector           |  Heir  |   3d   |  Medium  | Query datasets, suggest visualizations   |
-| SharePoint Knowledge Mining  |  Heir  |   1w   |  Medium  | Extract insights from document libraries |
-| Azure OpenAI Service Backend | Master |   1w   |   High   | Enterprise-grade LLM hosting option      |
-| Data Connectors (Azure SQL)  |  Heir  |   4h   |  Medium  | Deferred from v5.3.0 (PPTX-5)            |
+| Task                         | Owner  | Effort | Priority | Status | Description                              |
+| ---------------------------- | :----: | :----: | :------: | :----: | ---------------------------------------- |
+| Microsoft Graph Integration  |  Heir  |   1w   | Critical |   ✅    | Calendar, Mail, Presence, People API     |
+| Azure DevOps Connector       |  Heir  |   1w   |   High   |   📋    | Work items, pipelines, repos, boards     |
+| Microsoft Fabric Integration |  Heir  |   1w   |   High   |   📋    | Lakehouse, notebooks, semantic models    |
+| Teams Channel Awareness      |  Heir  |   3d   |   High   |   📋    | Post insights, respond in channels       |
+| Planner/To-Do Sync           |  Heir  |   2d   |  Medium  |   📋    | Alex tasks ↔ Planner/To-Do bidirectional |
+| Power BI Connector           |  Heir  |   3d   |  Medium  |   📋    | Query datasets, suggest visualizations   |
+| SharePoint Knowledge Mining  |  Heir  |   1w   |  Medium  |   📋    | Extract insights from document libraries |
+| Azure OpenAI Service Backend | Master |   1w   |   High   |   📋    | Enterprise-grade LLM hosting option      |
+| Data Connectors (Azure SQL)  |  Heir  |   4h   |  Medium  |   📋    | Deferred from v5.3.0 (PPTX-5)            |
+
+**Completed 2026-02-10**:
+- `microsoftGraph.ts` — Full Graph API client (Calendar, Mail, Presence, People)
+- `/calendar`, `/mail`, `/context`, `/people` slash commands
+- 7 new enterprise settings for Graph integration
+- Welcome View integration: Enterprise section with Graph buttons
+- `/status` command shows Graph connection status
+- `/help` command lists Graph commands when enterprise mode enabled
+- Documented in `alex_docs/guides/ENTERPRISE-SETTINGS.md`
+- **Skill-Building Infrastructure**: `skill-building/SKILL.md` (376 lines) + Promotion Readiness Score
+- **Heir Evolution Cycle**: 12 skills promoted from sandbox (79→92 total skills)
+- **Synapse Health Fix**: Fixed file index limit causing false positives (500→targeted patterns)
+- **Global Knowledge**: 227 entries (26 patterns + 171 insights)
 
 **Reference Projects**:
 - `FabricManager`, `FishBowl-Fabric` — Fabric integration patterns
@@ -144,14 +160,15 @@ Items to pull from when capacity frees up:
 | v5.3.1        | CSP Security Fix       | Feb 8, 2026  |
 | v5.4.0-v5.4.3 | Text-to-Speech & Voice | Feb 9, 2026  |
 | v5.5.0        | Model Intelligence     | Feb 10, 2026 |
+| v5.6.0        | Enterprise Systems     | Feb 10, 2026 |
 
 ---
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.5.0                         |
-| **Current Heirs**          | VS Code (5.5.0), M365 (5.3.0) |
-| **Next Target**            | 5.6.0                         |
+| **Current Master Version** | 5.6.0                         |
+| **Current Heirs**          | VS Code (5.6.0), M365 (5.6.0) |
+| **Next Target**            | 5.7.0                         |
 | **Updated**                | 2026-02-10                    |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3) |
 

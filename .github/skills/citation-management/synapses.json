@@ -1,0 +1,62 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "version": "1.0.0",
+    "skill": "citation-management",
+    "created": "2026-02-10",
+    "connectionCount": 4,
+    "connections": [],
+    "synapses": [
+        {
+            "id": "CITE-001",
+            "source": "citation-management",
+            "target": "literature-review",
+            "type": "supports",
+            "strength": 0.95,
+            "description": "Literature review requires proper citation of all sources",
+            "bidirectional": true
+        },
+        {
+            "id": "CITE-002",
+            "source": "citation-management",
+            "target": "academic-paper-drafting",
+            "type": "required-by",
+            "strength": 0.95,
+            "description": "Academic papers require impeccable citation formatting",
+            "bidirectional": false
+        },
+        {
+            "id": "CITE-003",
+            "source": "citation-management",
+            "target": "dissertation-defense",
+            "type": "supports",
+            "strength": 0.7,
+            "description": "Defense may include citation validity questions",
+            "bidirectional": false
+        },
+        {
+            "id": "CITE-004",
+            "source": "citation-management",
+            "target": "airs-appropriate-reliance",
+            "type": "exemplifies",
+            "strength": 0.5,
+            "description": "AIRS research provides example of proper UTAUT2 citation chain",
+            "bidirectional": false
+        }
+    ],
+    "activationPatterns": [
+        {
+            "trigger": "citation|APA|reference|bibliography",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "format.*reference|cite.*source",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "DOI|in-text|reference list",
+            "confidence": 0.85
+        }
+    ]
+}

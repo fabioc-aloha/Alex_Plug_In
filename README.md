@@ -687,6 +687,30 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
+## 🆕 What's New in v5.5.0
+
+### 🧠 Model Intelligence
+
+Alex now adapts behavior based on the running LLM:
+
+- **`/model` command** — Full dashboard showing model tier, context capacity, and capabilities
+- **`/model <task>`** — Analyze any task and get model recommendations
+- **Task-Model Matching** — Cognitive tasks check if current model meets requirements
+- **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
+
+### 🔒 Enterprise Secrets Extensibility
+
+- **Custom patterns** — Define organization-specific regex via `alex.enterprise.secrets.customPatterns`
+- **17 enterprise settings** — Full documentation in [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
+- **Disable built-ins** — Use only your custom patterns for compliance
+
+### 🔍 Automated Doc Count Validation
+
+- Dream protocol now validates documented counts against actual files
+- Reports drift for Procedural (24), Episodic (13), and Skills (78)
+
+---
+
 ## 🆕 What's New in v5.0.0
 
 ### 🌐 Global Knowledge Infrastructure

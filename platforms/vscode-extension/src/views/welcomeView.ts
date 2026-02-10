@@ -15,6 +15,8 @@ import { escapeHtml, getNonce } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
 import { openChatPanel } from "../shared/utils";
 import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
+import { isEnterpriseMode } from "../enterprise/enterpriseAuth";
+import { isGraphAvailable } from "../enterprise/microsoftGraph";
 
 /**
  * Nudge types for contextual reminders
@@ -197,6 +199,29 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         case "provideFeedback":
           vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues"));
+          break;
+        case "enterpriseSignIn":
+          vscode.commands.executeCommand("alex.enterprise.signIn");
+          break;
+        case "viewCalendar":
+          await vscode.env.clipboard.writeText("@alex /calendar");
+          await openChatPanel();
+          vscode.window.showInformationMessage("Calendar command copied. Paste in Agent chat (Ctrl+V).");
+          break;
+        case "viewMail":
+          await vscode.env.clipboard.writeText("@alex /mail unread");
+          await openChatPanel();
+          vscode.window.showInformationMessage("Mail command copied. Paste in Agent chat (Ctrl+V).");
+          break;
+        case "viewContext":
+          await vscode.env.clipboard.writeText("@alex /context");
+          await openChatPanel();
+          vscode.window.showInformationMessage("Context command copied. Paste in Agent chat (Ctrl+V).");
+          break;
+        case "searchPeople":
+          await vscode.env.clipboard.writeText("@alex /people ");
+          await openChatPanel();
+          vscode.window.showInformationMessage("People search copied. Paste in Agent chat (Ctrl+V) and add your search term.");
           break;
         case "refresh":
           this.refresh();
@@ -1204,6 +1229,31 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🩺</span>
                     <span class="action-text">Diagnostics</span>
                 </button>
+                
+                ${isEnterpriseMode() ? `<div class="action-group-label">ENTERPRISE</div>
+                ${isGraphAvailable() ? `
+                <button class="action-btn" data-cmd="viewContext" title="View calendar, mail, and presence">
+                    <span class="action-icon">📊</span>
+                    <span class="action-text">Work Context</span>
+                </button>
+                <button class="action-btn" data-cmd="viewCalendar" title="View upcoming calendar events">
+                    <span class="action-icon">📅</span>
+                    <span class="action-text">Calendar</span>
+                </button>
+                <button class="action-btn" data-cmd="viewMail" title="View recent emails">
+                    <span class="action-icon">📬</span>
+                    <span class="action-text">Mail</span>
+                </button>
+                <button class="action-btn" data-cmd="searchPeople" title="Search for people in your organization">
+                    <span class="action-icon">👥</span>
+                    <span class="action-text">People Search</span>
+                </button>
+                ` : `
+                <button class="action-btn" data-cmd="enterpriseSignIn" title="Sign in with Microsoft Entra ID">
+                    <span class="action-icon">🔐</span>
+                    <span class="action-text">Sign In (Enterprise)</span>
+                </button>
+                `}` : ''}
             </div>
         </div>
         

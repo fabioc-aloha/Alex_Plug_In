@@ -7,6 +7,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.1] - 2026-02-10
+
+### Changed
+
+- Enterprise auth temporarily disabled pending admin consent resolution
+
+---
+
+## [5.6.0] - 2026-02-10
+
+> **Enterprise Systems Integration** — Deep Microsoft 365 connectivity
+
+### Added
+
+- **Microsoft Graph Integration** (`microsoftGraph.ts`): Full Graph API client
+  - Calendar API: View upcoming events, meeting context
+  - Mail API: Recent emails, unread filter
+  - Presence API: Online/offline/busy status
+  - People API: Organization search, frequent contacts
+
+- **Graph Slash Commands**: 4 new enterprise commands
+  - `/calendar` — View upcoming calendar events (supports days ahead filter)
+  - `/mail` — View recent emails (supports unread-only filter)
+  - `/context` — Full work context: calendar + mail + presence
+  - `/people <query>` — Search for people in your organization
+
+- **Graph Settings**: 7 new configuration options
+  - `alex.enterprise.graph.enabled` — Master toggle for Graph
+  - `alex.enterprise.graph.calendarEnabled` — Calendar access
+  - `alex.enterprise.graph.mailEnabled` — Mail access
+  - `alex.enterprise.graph.presenceEnabled` — Presence status
+  - `alex.enterprise.graph.peopleEnabled` — People search
+  - `alex.enterprise.graph.calendarDaysAhead` — Days ahead (1-30)
+  - `alex.enterprise.graph.mailMaxMessages` — Max emails (1-50)
+
+- **Skill-Building Infrastructure**: Meta-skill for heir skill creation
+  - `skill-building/SKILL.md` — 376-line comprehensive guide
+  - Promotion Readiness Score (0-16) in `heir-skill-promotion.instructions.md`
+  - "Skill Creation as Learning Output" section in `bootstrap-learning.instructions.md`
+  - Updated `skill-activation/SKILL.md` with skill-building keywords
+
+- **Heir Evolution Cycle**: 12 skills promoted from sandbox (79→92 total)
+  - Merged 4 granular skills into 2 comprehensive ones (KISS principle)
+  - Added synapses to 9 newly promoted skills
+
+### Fixed
+
+- **Synapse Health False Positives**: Fixed file index limit (500→targeted patterns)
+  - Root cause: `findFiles()` had 500 limit but workspace has 2,867 .md files
+  - Solution: Targeted patterns for `.github/**`, `alex_docs/**`, `platforms/**`
+  - Fixed in: `tools.ts`, `healthCheck.ts`, `utils.ts`, `self-actualization.ts`
+
+### Technical
+
+- New `microsoftGraph.ts` module in `src/enterprise/`
+- Extended `IAlexChatResult` metadata interface for command tracking
+- Updated enterprise scopes: Calendars.Read, Mail.Read, Presence.Read, People.Read
+- Documentation updated in `ENTERPRISE-SETTINGS.md`
+- Global Knowledge: 227 entries (26 patterns + 171 insights)
+- **M365 Heir Sync**: Version aligned to 5.6.0 (package.json, README, declarativeAgent.json, system prompt)
+- New guide: `MICROSOFT-GRAPH-INTEGRATION.md` (271 lines)
+
+---
+
 ## [5.5.0] - 2026-02-10
 
 > **Model Intelligence** — Adaptive behavior based on LLM capabilities
@@ -30,6 +94,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Upgrade suggestions when task needs higher capability
   - Downgrade suggestions for simple tasks (cost savings)
   - Task detection from natural language prompts
+
+- **Enterprise Settings Documentation**: Comprehensive guide for all 17 enterprise settings
+  - Authentication, RBAC, audit logging configuration
+  - Deployment scenarios for personal, team, and enterprise use
+  - Troubleshooting guide with common issues
+
+- **Automated Doc Count Validation**: Dream protocol now verifies memory file counts
+  - Compares documented counts (Procedural=24, Episodic=13, Skills=78) against actual files
+  - Reports drift with actionable guidance in dream reports
+
+- **Secrets Pattern Extensibility**: Custom secret detection patterns via settings
+  - `alex.enterprise.secrets.customPatterns` — Define organization-specific regex patterns
+  - `alex.enterprise.secrets.disableBuiltInPatterns` — Use only custom patterns
+  - Full pattern validation with clear error messages
 
 ### Technical
 

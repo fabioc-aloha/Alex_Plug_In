@@ -27,6 +27,24 @@ export interface DreamReport {
     brokenSynapses: Synapse[];
     repairedSynapses: Synapse[];
     orphanedFiles: string[];
+    docCountValidation?: DocCountValidation;
+}
+
+/**
+ * Documentation count validation results
+ */
+export interface DocCountValidation {
+    isValid: boolean;
+    checks: DocCountCheck[];
+}
+
+export interface DocCountCheck {
+    name: string;
+    pattern: string;
+    documentedCount: number;
+    actualCount: number;
+    isValid: boolean;
+    drift: number;
 }
 
 export interface DreamResult {
@@ -66,6 +84,27 @@ export const memoryFilePatterns = [
     '.github/episodic/*.md',
     '.github/skills/*/SKILL.md',
     '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
+];
+
+/**
+ * Documented counts for validation
+ * These should match what's stated in copilot-instructions.md
+ */
+export interface DocCountConfig {
+    name: string;
+    path: string;
+    pattern: string;      // Glob pattern for counting
+    documentedCount: number;
+}
+
+/**
+ * Default doc count configuration
+ * Updated manually when architecture changes
+ */
+export const defaultDocCounts: DocCountConfig[] = [
+    { name: 'Procedural', path: '.github/instructions/', pattern: '*.instructions.md', documentedCount: 24 },
+    { name: 'Episodic', path: '.github/prompts/', pattern: '*.prompt.md', documentedCount: 13 },
+    { name: 'Skills', path: '.github/skills/', pattern: '*/SKILL.md', documentedCount: 78 }
 ];
 
 /**
@@ -169,6 +208,64 @@ export async function findMemoryFiles(rootPath: string): Promise<string[]> {
 export async function buildFileIndex(rootPath: string): Promise<Set<string>> {
     const mdFiles = await findMdFilesRecursive(rootPath, rootPath);
     return new Set(mdFiles.map(f => path.basename(f).toLowerCase()));
+}
+
+/**
+ * Validate documented counts against actual file counts
+ */
+export async function validateDocCounts(
+    rootPath: string,
+    docCounts: DocCountConfig[] = defaultDocCounts
+): Promise<DocCountValidation> {
+    const checks: DocCountCheck[] = [];
+    
+    for (const config of docCounts) {
+        const dirPath = path.join(rootPath, config.path);
+        let actualCount = 0;
+        
+        try {
+            if (await fs.pathExists(dirPath)) {
+                if (config.pattern.startsWith('*/')) {
+                    // Skill pattern: count subdirectories with SKILL.md
+                    const subPattern = config.pattern.slice(2);
+                    const entries = await fs.readdir(dirPath, { withFileTypes: true });
+                    for (const entry of entries) {
+                        if (entry.isDirectory()) {
+                            const skillFile = path.join(dirPath, entry.name, subPattern);
+                            if (await fs.pathExists(skillFile)) {
+                                actualCount++;
+                            }
+                        }
+                    }
+                } else {
+                    // Simple file pattern
+                    const entries = await fs.readdir(dirPath);
+                    const patternRegex = new RegExp(
+                        '^' + config.pattern.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$'
+                    );
+                    actualCount = entries.filter(e => patternRegex.test(e)).length;
+                }
+            }
+        } catch {
+            // Directory doesn't exist or can't be read
+            actualCount = 0;
+        }
+        
+        const drift = actualCount - config.documentedCount;
+        checks.push({
+            name: config.name,
+            pattern: config.path + config.pattern,
+            documentedCount: config.documentedCount,
+            actualCount,
+            isValid: drift === 0,
+            drift
+        });
+    }
+    
+    return {
+        isValid: checks.every(c => c.isValid),
+        checks
+    };
 }
 
 /**
@@ -377,30 +474,80 @@ export async function runDreamCore(
     
     brokenSynapses = remainingBrokenSynapses;
     
-    // 6. Generate report
+    // 6. Validate documentation counts
+    progress('Validating documentation counts...');
+    const docCountValidation = await validateDocCounts(rootPath);
+    
+    // 7. Generate report
     const report: DreamReport = {
         timestamp: new Date().toISOString(),
         totalFiles: allFiles.length,
         totalSynapses: allSynapses.length,
         brokenSynapses,
         repairedSynapses,
-        orphanedFiles: []
+        orphanedFiles: [],
+        docCountValidation
     };
     
     return { report, synapses: allSynapses };
 }
 
 /**
+ * Generate doc count validation section for report
+ */
+function generateDocCountSection(validation: DocCountValidation): string {
+    if (validation.isValid) {
+        return `
+## 📋 Documentation Count Validation
+
+> ✅ All documented counts match actual file counts.
+
+| Store | Documented | Actual | Status |
+|-------|------------|--------|--------|
+${validation.checks.map(c => 
+`| ${c.name} | ${c.documentedCount} | ${c.actualCount} | ✅ |`
+).join('\n')}
+
+---
+
+`;
+    }
+    
+    return `
+## 📋 Documentation Count Validation
+
+> ⚠️ **Drift detected**: Documented counts don't match actual files.
+
+| Store | Documented | Actual | Drift | Status |
+|-------|------------|--------|-------|--------|
+${validation.checks.map(c => {
+    const drift = c.drift > 0 ? `+${c.drift}` : `${c.drift}`;
+    const status = c.isValid ? '✅' : '⚠️';
+    return `| ${c.name} | ${c.documentedCount} | ${c.actualCount} | ${drift} | ${status} |`;
+}).join('\n')}
+
+**Action Required**: Update \`copilot-instructions.md\` to match actual counts.
+
+---
+
+`;
+}
+
+/**
  * Generate markdown report content with Alex branding
  */
 export function generateReportMarkdown(report: DreamReport): string {
-    const isHealthy = report.brokenSynapses.length === 0;
+    const isHealthy = report.brokenSynapses.length === 0 && 
+        (report.docCountValidation?.isValid ?? true);
     const healthPercent = report.totalSynapses > 0 
         ? Math.round(((report.totalSynapses - report.brokenSynapses.length) / report.totalSynapses) * 100)
         : 100;
     
     const statusEmoji = isHealthy ? '✅' : '⚠️';
     const statusText = isHealthy ? 'HEALTHY' : 'ATTENTION REQUIRED';
+    
+    // Generate doc count validation section
+    const docCountSection = report.docCountValidation ? generateDocCountSection(report.docCountValidation) : '';
     
     return `# 🧠 Alex Dream Protocol Report
 
@@ -421,7 +568,7 @@ export function generateReportMarkdown(report: DreamReport): string {
 | 🔧 Auto-Repaired | ${report.repairedSynapses.length} |
 
 ---
-
+${docCountSection}
 ## 🔧 Repaired Synapses
 
 ${report.repairedSynapses.length === 0 ? '> _No repairs needed. All synapses were healthy._' : 

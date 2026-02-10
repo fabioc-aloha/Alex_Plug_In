@@ -1,0 +1,95 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "skillId": "frustration-recognition",
+    "version": "1.0.0",
+    "lastUpdated": "2026-02-10",
+    "connections": [],
+    "synapses": [
+        {
+            "target": "rubber-duck-debugging",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "outgoing",
+            "context": "Route to when user is stuck and needs to articulate the problem"
+        },
+        {
+            "target": "cognitive-load",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "outgoing",
+            "context": "Route to when user is overwhelmed - simplify immediately"
+        },
+        {
+            "target": "work-life-balance",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "outgoing",
+            "context": "Route to when user shows fatigue or extended session"
+        },
+        {
+            "target": "socratic-questioning",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Use carefully when frustrated - may backfire if not adjusted"
+        },
+        {
+            "target": "awareness",
+            "type": "conceptual",
+            "strength": "strong",
+            "direction": "bidirectional",
+            "context": "Self-calibration and epistemic vigilance during interactions"
+        },
+        {
+            "target": "learning-psychology",
+            "type": "conceptual",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Zone of proximal development - too hard causes frustration"
+        },
+        {
+            "target": "debugging-patterns",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "outgoing",
+            "context": "Route to for systematic problem-solving when nothing works"
+        },
+        {
+            "target": "root-cause-analysis",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "outgoing",
+            "context": "When pattern suggests systemic issue causing repeated failure"
+        }
+    ],
+    "activationPatterns": [
+        "frustrated",
+        "frustrating",
+        "annoying",
+        "annoyed",
+        "this is broken",
+        "nothing works",
+        "still not working",
+        "I give up",
+        "WTF",
+        "why won't this",
+        "been trying for",
+        "stuck"
+    ],
+    "inhibitionPatterns": [
+        "productive-struggle",
+        "learning-challenge"
+    ],
+    "emotionalContext": {
+        "primaryEmotion": "frustration",
+        "relatedEmotions": [
+            "anger",
+            "disappointment",
+            "exhaustion",
+            "confusion"
+        ],
+        "responseMode": "empathetic-first"
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "version": "1.0.0",
+    "skill": "slide-design",
+    "created": "2026-02-10",
+    "connectionCount": 4,
+    "connections": [],
+    "synapses": [
+        {
+            "id": "SLIDE-001",
+            "source": "slide-design",
+            "target": "executive-storytelling",
+            "type": "visualizes",
+            "strength": 0.95,
+            "description": "Slide design is the visual layer of executive storytelling",
+            "bidirectional": true
+        },
+        {
+            "id": "SLIDE-002",
+            "source": "slide-design",
+            "target": "defense-presentation",
+            "type": "enables",
+            "strength": 0.9,
+            "description": "Defense presentations require effective slide design",
+            "bidirectional": false
+        },
+        {
+            "id": "SLIDE-003",
+            "source": "slide-design",
+            "target": "dissertation-defense",
+            "type": "supports",
+            "strength": 0.8,
+            "description": "Visual presentation quality impacts defense success",
+            "bidirectional": false
+        },
+        {
+            "id": "SLIDE-004",
+            "source": "slide-design",
+            "target": "cognitive-load",
+            "type": "applies",
+            "strength": 0.7,
+            "description": "Good slide design reduces cognitive load on audience",
+            "bidirectional": false
+        }
+    ],
+    "activationPatterns": [
+        {
+            "trigger": "slide design|presentation design|PowerPoint|deck",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "data visualization|chart|graph",
+            "module": "3",
+            "confidence": 0.85
+        },
+        {
+            "trigger": "assertion-evidence|visual evidence",
+            "module": "2",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "too much text|clean up|simplify slides",
+            "confidence": 0.85
+        }
+    ]
+}

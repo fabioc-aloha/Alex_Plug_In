@@ -1,0 +1,78 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "version": "1.0.0",
+    "skill": "literature-review",
+    "created": "2026-02-10",
+    "connectionCount": 5,
+    "connections": [],
+    "synapses": [
+        {
+            "id": "LIT-001",
+            "source": "literature-review",
+            "target": "academic-paper-drafting",
+            "type": "feeds",
+            "strength": 0.95,
+            "description": "Literature review is foundational section of academic papers",
+            "bidirectional": true
+        },
+        {
+            "id": "LIT-002",
+            "source": "literature-review",
+            "target": "dissertation-defense",
+            "type": "supports",
+            "strength": 0.85,
+            "description": "Strong lit review demonstrates scholarly rigor in defense",
+            "bidirectional": false
+        },
+        {
+            "id": "LIT-003",
+            "source": "literature-review",
+            "target": "citation-management",
+            "type": "requires",
+            "strength": 0.8,
+            "description": "Lit review requires proper citation handling",
+            "bidirectional": false
+        },
+        {
+            "id": "LIT-004",
+            "source": "literature-review",
+            "target": "airs-appropriate-reliance",
+            "type": "exemplifies",
+            "strength": 0.7,
+            "description": "AIRS research provides example of systematic lit review",
+            "bidirectional": false
+        },
+        {
+            "id": "LIT-005",
+            "source": "literature-review",
+            "target": "bootstrap-learning",
+            "type": "applies",
+            "strength": 0.6,
+            "description": "Lit review is structured knowledge acquisition",
+            "bidirectional": false
+        }
+    ],
+    "activationPatterns": [
+        {
+            "trigger": "literature review|lit review|sources|scholarly sources",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "search strategy|database search|systematic search",
+            "module": "1",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "synthesize|synthesis|themes|patterns across",
+            "module": "4",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "research gap|what's missing|gap identification",
+            "module": "5",
+            "confidence": 0.9
+        }
+    ]
+}

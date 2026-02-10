@@ -1,0 +1,81 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "skillId": "dissertation-defense",
+    "version": "1.0.0",
+    "lastUpdated": "2026-02-10",
+    "connections": [],
+    "synapses": [
+        {
+            "target": "defense-qa-practice",
+            "type": "procedural",
+            "strength": "critical",
+            "direction": "bidirectional",
+            "context": "Q&A practice is core to defense preparation"
+        },
+        {
+            "target": "defense-presentation",
+            "type": "procedural",
+            "strength": "critical",
+            "direction": "bidirectional",
+            "context": "Presentation design and delivery for defense"
+        },
+        {
+            "target": "gamma-presentations",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "outgoing",
+            "context": "AI-powered slide generation with Duarte methodology"
+        },
+        {
+            "target": "academic-research",
+            "type": "conceptual",
+            "strength": "strong",
+            "direction": "incoming",
+            "context": "Research methodology foundations"
+        },
+        {
+            "target": "practitioner-research",
+            "type": "conceptual",
+            "strength": "critical",
+            "direction": "incoming",
+            "context": "DBA/practitioner methodology for applied research"
+        },
+        {
+            "target": "socratic-questioning",
+            "type": "procedural",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Question handling and response techniques"
+        },
+        {
+            "target": "writing-publication",
+            "type": "conceptual",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Academic writing patterns for dissertation"
+        },
+        {
+            "target": "work-life-balance",
+            "type": "supportive",
+            "strength": "moderate",
+            "direction": "incoming",
+            "context": "Stress management during defense preparation"
+        }
+    ],
+    "activationPatterns": [
+        "defense",
+        "dissertation",
+        "thesis",
+        "viva",
+        "doctoral",
+        "committee",
+        "defend",
+        "examination"
+    ],
+    "inhibitionPatterns": [
+        "simple-task",
+        "quick-fix"
+    ]
+}

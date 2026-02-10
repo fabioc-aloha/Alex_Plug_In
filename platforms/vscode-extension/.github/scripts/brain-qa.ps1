@@ -60,10 +60,10 @@ $schemaPhases = 2, 6, 11
 
 # Determine which phases to run
 $runPhases = switch ($Mode) {
-    "quick"  { $quickPhases }
-    "sync"   { $syncPhases }
+    "quick" { $quickPhases }
+    "sync" { $syncPhases }
     "schema" { $schemaPhases }
-    default  { 1..15 }
+    default { 1..15 }
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -83,9 +83,11 @@ if (1 -in $runPhases) {
             if ($target -match '^(external:|global-knowledge://|https?://|mailto:)') { continue }
             if ($target -match "^\.github/|^alex_docs/|^platforms/|^[A-Z].*\.md$") {
                 $fullPath = Join-Path $rootPath $target
-            } elseif ($target -match "^\.\./") {
+            }
+            elseif ($target -match "^\.\./") {
                 $fullPath = [System.IO.Path]::GetFullPath((Join-Path $sourceDir $target))
-            } else { 
+            }
+            else { 
                 $fullPath = Join-Path $sourceDir $target 
             }
             if (-not (Test-Path $fullPath)) { $uniqueBroken[$target] = $true }
@@ -93,7 +95,8 @@ if (1 -in $runPhases) {
     }
     if ($uniqueBroken.Count -eq 0) { 
         Write-Pass "All synapse targets valid" 
-    } else { 
+    }
+    else { 
         foreach ($b in $uniqueBroken.Keys | Sort-Object) { Write-Fail "Broken: $b" }
     }
 }
@@ -113,7 +116,8 @@ if (2 -in $runPhases) {
     }
     if ($missing.Count -eq 0) { 
         Write-Pass "All skills have inheritance field" 
-    } else { 
+    }
+    else { 
         Write-Fail "Missing inheritance: $($missing -join ', ')"
     }
 }
@@ -133,7 +137,8 @@ if (3 -in $runPhases) {
     }
     if ($notIndexed.Count -eq 0) { 
         Write-Pass "All $($skillDirs.Count) skills indexed" 
-    } else { 
+    }
+    else { 
         Write-Fail "Not indexed: $($notIndexed -join ', ')"
     }
 }
@@ -145,22 +150,23 @@ if (4 -in $runPhases) {
     Write-Phase 4 "Trigger Semantic Analysis"
     $triggers = @{}
     Get-Content "$ghPath\skills\skill-activation\SKILL.md" | 
-        Select-String -Pattern "^\| .+ \| .+ \|$" | 
-        ForEach-Object {
-            if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
-                $skill = $matches[1]
-                $keywords = $matches[2] -split ", "
-                foreach ($kw in $keywords) {
-                    $kw = $kw.Trim()
-                    if ($triggers.ContainsKey($kw)) { $triggers[$kw] += ",$skill" }
-                    else { $triggers[$kw] = $skill }
-                }
+    Select-String -Pattern "^\| .+ \| .+ \|$" | 
+    ForEach-Object {
+        if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
+            $skill = $matches[1]
+            $keywords = $matches[2] -split ", "
+            foreach ($kw in $keywords) {
+                $kw = $kw.Trim()
+                if ($triggers.ContainsKey($kw)) { $triggers[$kw] += ",$skill" }
+                else { $triggers[$kw] = $skill }
             }
         }
+    }
     $overlaps = $triggers.GetEnumerator() | Where-Object { $_.Value -match "," }
     if ($overlaps.Count -eq 0) {
         Write-Pass "No trigger overlaps"
-    } else {
+    }
+    else {
         foreach ($o in $overlaps) {
             Write-Warn "Overlap '$($o.Key)': $($o.Value)"
         }
@@ -183,10 +189,12 @@ if (5 -in $runPhases) {
             $extraInHeir = ($diff | Where-Object { $_.SideIndicator -eq "=>" }).InputObject
             if ($missingInHeir) { Write-Warn "Missing in heir: $($missingInHeir -join ', ')" }
             if ($extraInHeir) { Write-Warn "Extra in heir: $($extraInHeir -join ', ')" }
-        } else {
+        }
+        else {
             Write-Pass "Skill directories match"
         }
-    } else {
+    }
+    else {
         Write-Warn "Heir folder not found - skipping sync check"
     }
 }
@@ -214,7 +222,8 @@ if (6 -in $runPhases) {
     $info = $info | Select-Object -Unique
     if ($critical.Count -eq 0) { 
         Write-Pass "Schema validation passed"
-    } else { 
+    }
+    else { 
         Write-Fail "Schema issues: $($critical -join ', ')"
     }
     if ($info.Count -gt 0) { 
@@ -241,7 +250,8 @@ if (7 -in $runPhases) {
         }
         if ($diffs.Count -eq 0) { 
             Write-Pass "All synapses in sync"
-        } else { 
+        }
+        else { 
             Write-Fail "Out of sync: $($diffs -join ', ')"
             if ($Fix) {
                 foreach ($skill in $diffs) {
@@ -250,7 +260,8 @@ if (7 -in $runPhases) {
                 }
             }
         }
-    } else {
+    }
+    else {
         Write-Warn "Heir folder not found - skipping sync check"
     }
 }
@@ -265,14 +276,16 @@ if (8 -in $runPhases) {
         $heirHash = (Get-FileHash "$heirBase\.github\skills\skill-activation\SKILL.md").Hash
         if ($masterHash -eq $heirHash) { 
             Write-Pass "Index in sync"
-        } else { 
+        }
+        else { 
             Write-Fail "Index out of sync"
             if ($Fix) {
                 Copy-Item "$ghPath\skills\skill-activation\SKILL.md" "$heirBase\.github\skills\skill-activation\SKILL.md" -Force
                 $fixed += "Synced skill-activation/SKILL.md"
             }
         }
-    } else {
+    }
+    else {
         Write-Warn "Heir skill-activation not found"
     }
 }
@@ -290,13 +303,16 @@ if (9 -in $runPhases) {
             $catalogCount = [int]$matches[1]
             if ($actualSkills -eq $catalogCount) { 
                 Write-Pass "Catalog count accurate: $actualSkills skills"
-            } else { 
+            }
+            else { 
                 Write-Fail "Count mismatch: Catalog says $catalogCount, actual is $actualSkills"
             }
-        } else {
+        }
+        else {
             Write-Warn "Could not parse skill count from catalog"
         }
-    } else {
+    }
+    else {
         Write-Warn "SKILLS-CATALOG.md not found"
     }
 }
@@ -321,7 +337,8 @@ if (10 -in $runPhases) {
     }
     if ($hasMermaid.Count -eq 0) { 
         Write-Pass "No mermaid in core files"
-    } else { 
+    }
+    else { 
         Write-Warn "Mermaid found in: $($hasMermaid -join ', ')"
     }
 }
@@ -343,7 +360,8 @@ if (11 -in $runPhases) {
     }
     if ($boilerplate.Count -eq 0) { 
         Write-Pass "No boilerplate descriptions"
-    } else { 
+    }
+    else { 
         Write-Warn "Boilerplate ($($boilerplate.Count)): $($boilerplate -join ', ')"
     }
 }
@@ -380,10 +398,12 @@ if (12 -in $runPhases) {
         
         if ($resetIssues.Count -eq 0) { 
             Write-Pass "Heir properly reset for publication"
-        } else {
+        }
+        else {
             foreach ($ri in $resetIssues) { Write-Fail $ri }
         }
-    } else {
+    }
+    else {
         Write-Warn "Heir .github not found"
     }
 }
@@ -409,7 +429,8 @@ if (13 -in $runPhases) {
         
         if ($missing.Count -eq 0) { 
             Write-Pass "Instructions/Prompts in sync"
-        } else {
+        }
+        else {
             Write-Fail "Missing from heir: $($missing -join ', ')"
             
             if ($Fix) {
@@ -421,7 +442,8 @@ if (13 -in $runPhases) {
                 }
             }
         }
-    } else {
+    }
+    else {
         Write-Warn "Heir instructions folder not found"
     }
 }
@@ -435,7 +457,8 @@ if (14 -in $runPhases) {
     $agents = Get-ChildItem "$ghPath\agents\*.md" -ErrorAction SilentlyContinue
     if ($agents.Count -eq 0) { 
         $agentIssues += "No agents found" 
-    } else {
+    }
+    else {
         foreach ($agent in $agents) {
             $content = Get-Content $agent.FullName -Raw
             if ($content -notmatch '^---') { $agentIssues += "$($agent.Name): Missing YAML frontmatter" }
@@ -453,7 +476,8 @@ if (14 -in $runPhases) {
     
     if ($agentIssues.Count -eq 0) { 
         Write-Pass "Agents valid ($($agents.Count) agents)"
-    } else {
+    }
+    else {
         foreach ($ai in $agentIssues) { Write-Fail $ai }
     }
 }
@@ -472,7 +496,8 @@ if (15 -in $runPhases) {
         $path = "$heirBase\.github\config\$cfg"
         if (-not (Test-Path $path)) { 
             $configIssues += "Missing: $cfg" 
-        } elseif ($cfg -match '\.json$') {
+        }
+        elseif ($cfg -match '\.json$') {
             try { Get-Content $path -Raw | ConvertFrom-Json | Out-Null }
             catch { $configIssues += "Invalid JSON: $cfg" }
         }
@@ -486,7 +511,8 @@ if (15 -in $runPhases) {
     
     if ($configIssues.Count -eq 0) { 
         Write-Pass "Config files valid"
-    } else {
+    }
+    else {
         foreach ($ci in $configIssues) { Write-Fail $ci }
     }
 }

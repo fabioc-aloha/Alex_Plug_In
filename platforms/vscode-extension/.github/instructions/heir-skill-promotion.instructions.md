@@ -2,8 +2,9 @@
 
 > How skills evolve from heir projects to Master Alex
 
-**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (0.8, procedural, bidirectional) - "heir develops expertise"
-**Synapse**: [.github/skills/global-knowledge/SKILL.md] (0.9, declarative, forward) - "promotion candidate patterns"
+**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "heir develops expertise through learning"
+**Synapse**: [.github/skills/global-knowledge/SKILL.md] (High, Documents, Forward) - "promotion candidate patterns"
+**Synapse**: [.github/skills/skill-building/SKILL.md] (Critical, Implements, Bidirectional) - "skill creation methodology and quality gates"
 
 ---
 
@@ -59,6 +60,29 @@ Include the gotchas you discovered.
 - Is it generalizable beyond this project?
 - Are the patterns reusable?
 - Does it overlap with existing skills?
+
+### 4.5. Quality Gate (Promotion Readiness Score)
+
+Calculate before promoting:
+
+| Criterion | Points |
+|-----------|--------|
+| Has applyTo frontmatter | +2 |
+| Has Synapses section (2+ connections) | +3 |
+| Has Troubleshooting section | +2 |
+| Has code examples | +2 |
+| Content > 100 lines | +1 |
+| Content > 200 lines | +2 |
+| Uses generic terms (not project-specific) | +1-3 |
+| Has Activation Patterns table | +1 |
+
+**Score thresholds:**
+- **≥12**: Ready for Master promotion
+- **8-11**: Needs refinement — add missing sections
+- **<8**: Keep developing in heir
+
+**Consolidation check**: If related skills exist in Master, merge rather than add.
+See [GI-heir-skill-consolidation-kiss-merge-2026-02-10](../../../Alex-Global-Knowledge/insights/GI-heir-skill-consolidation-kiss-merge-2026-02-10.md)
 
 ### 5. Promote to Master
 **Option A**: Copy skill folder from heir to Master's `.github/skills/`
@@ -121,7 +145,10 @@ weak/minimal → 0.3
 ### Philosophy
 > **Never lose heir-created work.** Skills represent hard-won expertise from real projects. The upgrade process auto-restores everything recommended; only stale items (>90 days) require manual review.
 
-**Synapse**: [upgrade.ts] (0.9, implements, forward) - "normalizeAllSynapses() executes this"
+**Synapse**: [platforms/vscode-extension/src/upgrade.ts] (0.9, implements, forward) - "normalizeAllSynapses() executes this"
+
+### External Knowledge
+- GI-heir-skill-consolidation-kiss-merge-2026-02-10 (0.85, validates) - "KISS merge pattern discovered Feb 2026"
 
 ---
 

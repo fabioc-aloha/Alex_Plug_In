@@ -125,11 +125,23 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
 
     // Pre-build a set of all known markdown files for fast lookup
     // This avoids calling findFiles for each synapse (major performance fix)
-    const allMdFiles = await vscode.workspace.findFiles(
-        new vscode.RelativePattern(workspaceFolders[0], '**/*.md'),
-        '**/node_modules/**',
-        500  // Limit to prevent scanning huge workspaces
-    );
+    // Use targeted patterns to avoid hitting limits on large workspaces (2000+ files)
+    const targetPatterns = [
+        '.github/**/*.md',           // Memory files, config
+        'alex_docs/**/*.md',         // Documentation
+        'platforms/**/.github/**/*.md', // Heir memory files
+        '*.md'                        // Root-level files
+    ];
+    
+    const allMdFiles: vscode.Uri[] = [];
+    for (const targetPattern of targetPatterns) {
+        const files = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], targetPattern),
+            '**/node_modules/**',
+            1000  // Per-pattern limit
+        );
+        allMdFiles.push(...files);
+    }
     const knownFileBasenames = new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
 
     for (const pattern of patterns) {

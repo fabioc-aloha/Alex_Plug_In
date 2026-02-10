@@ -55,6 +55,8 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "chat.viewSessions.enabled": true,
   // MCP gallery - enables Model Context Protocol tools
   "chat.mcp.gallery.enabled": true,
+  // Follow-up suggestions - helps discover Alex capabilities
+  "github.copilot.chat.followUps": "always",
 };
 
 /**
@@ -66,6 +68,28 @@ const EXTENDED_THINKING_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled": true,
   // Thinking budget in tokens (max 16384) - higher = deeper reasoning
   "github.copilot.chat.models.anthropic.claude-opus-4-5.thinkingBudget": 16384,
+};
+
+/**
+ * Enterprise settings for Microsoft 365 integration (EXPERIMENTAL)
+ * These are disabled by default - requires admin consent for Graph API scopes
+ * Enable only if your organization has approved the required permissions
+ */
+const ENTERPRISE_SETTINGS: Record<string, unknown> = {
+  // Master toggle for enterprise features - disabled by default
+  "alex.enterprise.enabled": false,
+  // Microsoft Graph API integration - requires admin consent
+  "alex.enterprise.graph.enabled": false,
+  // Calendar integration - read upcoming meetings
+  "alex.enterprise.graph.calendarEnabled": false,
+  // Mail integration - read recent emails
+  "alex.enterprise.graph.mailEnabled": false,
+  // Presence integration - online/offline/busy status
+  "alex.enterprise.graph.presenceEnabled": false,
+  // People integration - organization search
+  "alex.enterprise.graph.peopleEnabled": false,
+  // Enterprise audit logging
+  "alex.enterprise.audit.enabled": false,
 };
 
 // Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
@@ -97,6 +121,12 @@ const SETTING_CATEGORIES: SettingCategory[] = [
     description: "Deep reasoning for Opus 4.5 (meditation, learning)",
     settings: EXTENDED_THINKING_SETTINGS,
     icon: "🧠",
+  },
+  {
+    name: "Enterprise (Experimental)",
+    description: "Microsoft 365 integration - requires admin consent",
+    settings: ENTERPRISE_SETTINGS,
+    icon: "🏢",
   },
 ];
 

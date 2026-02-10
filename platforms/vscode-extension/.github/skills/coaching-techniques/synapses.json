@@ -1,0 +1,36 @@
+{
+    "schemaVersion": "1.1.0",
+    "skillId": "coaching-techniques",
+    "synapses": [
+        {
+            "id": "coaching-stakeholder-001",
+            "type": "complements",
+            "target": "stakeholder-management",
+            "strength": 0.85,
+            "description": "Coaching skills enhance stakeholder relationship building and influence"
+        },
+        {
+            "id": "coaching-frustration-002",
+            "type": "complements",
+            "target": "frustration-recognition",
+            "strength": 0.80,
+            "description": "Recognizing frustration cues essential for coaching difficult moments"
+        },
+        {
+            "id": "coaching-executive-003",
+            "type": "enables",
+            "target": "executive-storytelling",
+            "strength": 0.65,
+            "description": "Coaching through questions helps executives craft their own narratives"
+        },
+        {
+            "id": "coaching-meeting-004",
+            "type": "complements",
+            "target": "meeting-efficiency",
+            "strength": 0.70,
+            "description": "Coaching skills improve 1:1 meeting effectiveness"
+        }
+    ],
+    "lastValidated": "2026-02-10",
+    "validationStatus": "valid"
+}

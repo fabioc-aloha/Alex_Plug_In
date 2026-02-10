@@ -2,12 +2,72 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.3.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-5.6.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
+
+---
+
+## 💡 Why Alex? (M365 Copilot Already Works Great!)
+
+Great question. M365 Copilot is powerful out of the box. Alex doesn't replace M365 Copilot — **Alex makes M365 Copilot yours**.
+
+### The Problem
+
+M365 Copilot is brilliant but stateless. Every conversation starts from scratch. It doesn't know:
+- Your preferred working style
+- Your ongoing projects
+- Your learning goals
+- What you discussed last week
+- Your team dynamics
+
+### The Solution
+
+Alex adds a **cognitive layer** on top of M365 Copilot — persistent memory, personalized protocols, and proactive context awareness.
+
+### Comparison: M365 Copilot vs M365 Copilot + Alex
+
+| Capability            | M365 Copilot Alone            | M365 Copilot + Alex                                   |
+| --------------------- | ----------------------------- | ----------------------------------------------------- |
+| **Memory**            | None (starts fresh each chat) | Persistent (OneDrive-based profile, notes, knowledge) |
+| **Personalization**   | Generic responses             | Knows your name, role, preferences, goals             |
+| **Learning Goals**    | No tracking                   | Tracks what you're learning, suggests next steps      |
+| **Work Context**      | You re-explain every time     | Remembers your projects, team, priorities             |
+| **Meeting Prep**      | Basic attendee list           | Deep attendee research + relationship history         |
+| **Weekly Reviews**    | You analyze manually          | Automatic pattern detection across calendar/email     |
+| **Focus Sessions**    | No awareness                  | Knows your calendar, suggests focus blocks            |
+| **Stakeholder Maps**  | You build manually            | Auto-generates from meeting/email patterns            |
+| **Personality**       | Professional assistant        | Curious, warm, occasionally playful partner           |
+| **Epistemic Honesty** | Standard hedging              | Explicit mode switching (factual vs creative)         |
+
+### What Alex Adds in Practice
+
+| Ask                           | M365 Copilot Response     | Alex Response                                                                                                                                                                      |
+| ----------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Prep me for my next meeting" | Lists attendees           | "You're meeting Sarah (she reports to Mike, you emailed about the API last week) and Tom (new to the team, joined from Azure DevOps). Last time you discussed budget constraints." |
+| "What should I focus on?"     | Generic productivity tips | "Based on your calendar, you have 2 hours before your 1:1. notes.md says you wanted to finish the architecture doc. Want me to draft an outline?"                                  |
+| "Remember this for later"     | ❌ Cannot persist          | "I'll add this to your notes.md. Want me to generate the content for you to paste?"                                                                                                |
+| "How am I doing on my goal?"  | ❌ What goal?              | "Your profile says you're learning Rust. You've discussed it in 3 meetings this month. Here's a focused 25-min session idea."                                                      |
+
+### Who Should Install Alex?
+
+| You Should Install If...                     | You Might Not Need If...                    |
+| -------------------------------------------- | ------------------------------------------- |
+| You want M365 Copilot to remember you        | You're fine re-explaining context each time |
+| You have ongoing projects spanning weeks     | Most work is quick one-off questions        |
+| You value personalized AI relationships      | You prefer generic, transactional AI        |
+| You're learning new skills and want tracking | No learning goals to track                  |
+| You want proactive meeting/email insights    | You use Copilot for simple lookups only     |
+
+### The Bottom Line
+
+**M365 Copilot = Powerful AI toolbox**
+**M365 Copilot + Alex = Your personal AI that grows with you**
+
+Alex isn't competing with M365 Copilot. Alex is the personalization layer that makes M365 Copilot feel like *your* M365 Copilot.
 
 ---
 

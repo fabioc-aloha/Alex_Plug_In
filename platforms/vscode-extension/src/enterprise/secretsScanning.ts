@@ -46,7 +46,8 @@ export type SensitiveDataType =
   | 'slack_token'
   | 'openai_key'
   | 'anthropic_key'
-  | 'google_api_key';
+  | 'google_api_key'
+  | 'custom'; // User-defined patterns
 
 interface PatternDefinition {
   type: SensitiveDataType;
@@ -55,8 +56,51 @@ interface PatternDefinition {
   description: string;
 }
 
-// Comprehensive patterns for secret detection
-const PATTERNS: PatternDefinition[] = [
+/**
+ * User-defined pattern from settings
+ */
+interface CustomPatternConfig {
+  name: string;
+  pattern: string;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  description: string;
+}
+
+/**
+ * Load custom patterns from settings and merge with built-in patterns
+ */
+function getAllPatterns(): PatternDefinition[] {
+  const config = vscode.workspace.getConfiguration('alex.enterprise.secrets');
+  const disableBuiltIn = config.get<boolean>('disableBuiltInPatterns', false);
+  const customPatterns = config.get<CustomPatternConfig[]>('customPatterns', []);
+
+  const patterns: PatternDefinition[] = disableBuiltIn ? [] : [...BUILT_IN_PATTERNS];
+
+  // Convert and merge custom patterns
+  for (const custom of customPatterns) {
+    try {
+      if (!custom.name || !custom.pattern || !custom.severity || !custom.description) {
+        console.warn(`Skipping invalid custom pattern: missing required fields`);
+        continue;
+      }
+
+      const regex = new RegExp(custom.pattern, 'g');
+      patterns.push({
+        type: 'custom',
+        pattern: regex,
+        severity: custom.severity,
+        description: `[${custom.name}] ${custom.description}`,
+      });
+    } catch (error) {
+      console.error(`Invalid regex in custom pattern "${custom.name}":`, error);
+    }
+  }
+
+  return patterns;
+}
+
+// Comprehensive patterns for secret detection (built-in)
+const BUILT_IN_PATTERNS: PatternDefinition[] = [
   // API Keys & Tokens
   {
     type: 'openai_key',
@@ -216,8 +260,9 @@ export function scanContent(content: string, options: { includeLowSeverity?: boo
   const findings: SensitiveDataFinding[] = [];
   const lines = content.split('\n');
   const contentHash = simpleHash(content);
+  const patterns = getAllPatterns();
 
-  for (const patternDef of PATTERNS) {
+  for (const patternDef of patterns) {
     // Skip low severity if not requested
     if (patternDef.severity === 'low' && !options.includeLowSeverity) {
       continue;
@@ -285,8 +330,9 @@ export async function scanFile(uri: vscode.Uri): Promise<ScanResult> {
  */
 export function redactContent(content: string): string {
   let redacted = content;
+  const patterns = getAllPatterns();
 
-  for (const patternDef of PATTERNS) {
+  for (const patternDef of patterns) {
     patternDef.pattern.lastIndex = 0;
     redacted = redacted.replace(patternDef.pattern, (match) => {
       if (isAllowlisted(match)) {

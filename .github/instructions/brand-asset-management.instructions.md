@@ -95,6 +95,52 @@ See `alex_docs/marketing/MARKETING-PLAN.md` → GK Banner Candidates table.
 
 ## Platform-Specific Guidelines
 
+### Heir-Specific Positioning (v5.6.0)
+
+Each heir positions against its native platform, NOT generic "Copilot":
+
+| Heir | Compares Against | Bottom Line |
+|------|------------------|-------------|
+| **VS Code** | **GitHub Copilot** | "GitHub Copilot = Powerful autocomplete → + Alex = Rocket strapped to your back" |
+| **M365** | **M365 Copilot** | "M365 Copilot = Powerful AI toolbox → + Alex = Personal AI that grows with you" |
+
+### Store Description Pattern
+
+**Structure** (validated v5.6.0):
+```
+🚀 STRAP A ROCKET TO YOUR BACK
+[Hook: You don't need X. You need thrust.]
+
+━━━━━ [PLATFORM] vs [PLATFORM] + ALEX ━━━━━
+▸ Capability: Before → After (6 rows)
+
+━━━━━ WHY ALEX? ━━━━━
+🚀 NO REFUELING BETWEEN LAUNCHES
+🎯 PRE-BUILT PROPULSION  
+🔍 INSPECT EVERY COMPONENT
+
+━━━━━ TAKE YOUR [NOUN] TO NEW HEIGHTS ━━━━━
+[Persona → Benefit mappings]
+
+━━━━━ LAUNCH SEQUENCES ━━━━━
+[Workflow examples]
+
+[Bottom line comparison]
+Stop walking. Start flying.
+```
+
+### Persona Copy Pattern
+
+| Persona | Pain | Alex Benefit |
+|---------|------|--------------|
+| Developer | Re-explaining context | Ship faster, 92 skills remember architecture |
+| Researcher | Literature scattered | Hypothesis → publication, accelerated |
+| Grad Student | Thesis overwhelm | Literature review on autopilot |
+| Tech Writer | Docs fall behind code | Docs that write themselves |
+| DevOps | Manual infra, config drift | Same infra, every time |
+| PM | Status chasing | 4-6× faster estimates |
+| Content Creator | Ideas scattered | Ideas → posts in minutes |
+
 ### GitHub (Animated SVG Supported)
 - Use `.github/assets/banner.svg` (animated rotating nouns)
 - Animation: 20s cycle, 10 personas, crossfade pattern
@@ -121,7 +167,13 @@ The `--density 150` flag ensures crisp text rendering.
 
 ## Synapses
 
-- [MARKETING-PLAN.md] (strong, reference, bidirectional) — Brand decisions source of truth
-- [release-management.instructions.md] (moderate, workflow, incoming) — Asset verification during release
-- [heir-skill-promotion.instructions.md] (weak, reference, outgoing) — Heir branding alignment
-- [GI-premium-tier-visual-metaphor-pattern-2026-02-06.md] (strong, pattern, outgoing) — Tiered branding pattern (Global Knowledge)
+- [.github/instructions/release-management.instructions.md] (Medium, Integrates, Backward) - "Asset verification during release"
+- [.github/instructions/heir-skill-promotion.instructions.md] (Low, Documents, Forward) - "Heir branding alignment"
+- [alex_docs/marketing/MARKETING-PLAN.md] (High, References, Forward) - "Full persona and tagline library"
+- [alex_docs/marketing/PERSONA-POWER-USER-VETERAN.md] (Medium, Validates, Forward) - "Target persona psychology"
+- [platforms/vscode-extension/README.md] (High, Deployed, Forward) - "VS Code store copy implementation"
+- [platforms/m365-copilot/appPackage/manifest.json] (High, Deployed, Forward) - "M365 store description implementation"
+
+### External Knowledge
+- GI-premium-tier-visual-metaphor-pattern-2026-02-06 (High, Validates) - "Tiered branding pattern in Global Knowledge"
+- GI-heir-specific-positioning-pattern-2026-02-10 (High, Documents) - "Platform-specific comparison messaging"

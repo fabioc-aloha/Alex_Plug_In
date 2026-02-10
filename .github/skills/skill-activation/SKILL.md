@@ -37,7 +37,7 @@ Search this index when processing any task request:
 | architecture-refinement | refine architecture, document pattern, consolidate files, update tracker |
 | ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
 | awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
-| bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge, skill creation |
+| bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
@@ -90,6 +90,7 @@ Search this index when processing any task request:
 | rubber-duck-debugging | explain problem, thinking partner, stuck debugging, talk through |
 | security-review | security audit, owasp check, vulnerability scan, auth review, stride |
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
+| skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
 | skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
 | socratic-questioning | ask questions, discover answer, probe assumption, socratic method |
 | svg-graphics | create svg, svg banner, svg icon, dark mode svg, scalable graphic |

@@ -1,0 +1,41 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "enterprise-integration",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-10",
+    "inheritance": "heir:vscode",
+    "temporary": false,
+    "connections": [
+        {
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "reason": "Enterprise patterns build on core VS Code extension patterns"
+        },
+        {
+            "target": ".github/skills/api-design/SKILL.md",
+            "type": "uses",
+            "strength": 0.7,
+            "reason": "Graph API client follows API design patterns"
+        },
+        {
+            "target": ".github/skills/security-review/SKILL.md",
+            "type": "requires",
+            "strength": 0.8,
+            "reason": "Enterprise auth requires security review"
+        },
+        {
+            "target": "platforms/vscode-extension/src/enterprise/microsoftGraph.ts",
+            "type": "implements",
+            "strength": 0.95,
+            "reason": "Primary implementation of Graph integration patterns"
+        },
+        {
+            "target": "platforms/vscode-extension/src/enterprise/enterpriseAuth.ts",
+            "type": "implements",
+            "strength": 0.9,
+            "reason": "Enterprise authentication implementation"
+        }
+    ]
+}

@@ -125,8 +125,8 @@ if (result.confidence < CONFIDENCE_THRESHOLD) {
 
 ## Synapses
 
-- [text-to-speech/SKILL.md] (strong, implements, bidirectional) - "Primary consumer of detection"
-- [accessibility/SKILL.md] (moderate, enables, forward) - "i18n accessibility features"
+- [.github/skills/text-to-speech/SKILL.md] (High, Enables, Bidirectional) - "Primary consumer of detection"
+- [.github/skills/accessibility/SKILL.md] (Medium, Enables, Forward) - "i18n accessibility features"
 
 ---
 

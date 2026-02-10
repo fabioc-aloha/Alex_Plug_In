@@ -1,0 +1,71 @@
+{
+    "version": "1.0.0",
+    "skill": "executive-storytelling",
+    "created": "2026-02-10",
+    "connectionCount": 5,
+    "synapses": [
+        {
+            "id": "EXEC-001",
+            "source": "executive-storytelling",
+            "target": "slide-design",
+            "type": "complements",
+            "strength": 0.9,
+            "description": "Storytelling provides content structure, slides provide visual design",
+            "bidirectional": true
+        },
+        {
+            "id": "EXEC-002",
+            "source": "executive-storytelling",
+            "target": "stakeholder-management",
+            "type": "supports",
+            "strength": 0.85,
+            "description": "Executive communication is key stakeholder management tool",
+            "bidirectional": false
+        },
+        {
+            "id": "EXEC-003",
+            "source": "executive-storytelling",
+            "target": "defense-presentation",
+            "type": "informs",
+            "strength": 0.8,
+            "description": "Executive storytelling principles apply to defense presentations",
+            "bidirectional": false
+        },
+        {
+            "id": "EXEC-004",
+            "source": "executive-storytelling",
+            "target": "airs-integration",
+            "type": "applies",
+            "strength": 0.7,
+            "description": "AIRS findings need executive framing for enterprise adoption",
+            "bidirectional": false
+        },
+        {
+            "id": "EXEC-005",
+            "source": "executive-storytelling",
+            "target": "frustration-recognition",
+            "type": "mitigates",
+            "strength": 0.5,
+            "description": "Clear communication reduces stakeholder frustration",
+            "bidirectional": false
+        }
+    ],
+    "activationPatterns": [
+        {
+            "trigger": "executive|senior leadership|C-suite|VP|director",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "elevator pitch|30 seconds|quick summary",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "SCQA|pyramid principle|minto",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "data storytelling|present findings|business case",
+            "confidence": 0.85
+        }
+    ]
+}

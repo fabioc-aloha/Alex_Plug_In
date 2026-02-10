@@ -1,0 +1,62 @@
+{
+    "version": "1.0.0",
+    "skill": "azure-devops-automation",
+    "created": "2026-02-10",
+    "connectionCount": 4,
+    "synapses": [
+        {
+            "id": "DEVOPS-001",
+            "source": "azure-devops-automation",
+            "target": "azure-architecture-patterns",
+            "type": "implements",
+            "strength": 0.95,
+            "description": "DevOps automation implements architecture patterns via IaC",
+            "bidirectional": true
+        },
+        {
+            "id": "DEVOPS-002",
+            "source": "azure-devops-automation",
+            "target": "code-review",
+            "type": "enables",
+            "strength": 0.7,
+            "description": "CI pipelines enforce code review gates",
+            "bidirectional": false
+        },
+        {
+            "id": "DEVOPS-003",
+            "source": "azure-devops-automation",
+            "target": "airs-integration",
+            "type": "deploys",
+            "strength": 0.6,
+            "description": "AIRS platform (airs.correax.com) deployed via DevOps pipelines",
+            "bidirectional": false
+        },
+        {
+            "id": "DEVOPS-004",
+            "source": "azure-devops-automation",
+            "target": "deep-work-optimization",
+            "type": "enables",
+            "strength": 0.5,
+            "description": "Automation reduces manual ops, enabling focus on deep work",
+            "bidirectional": false
+        }
+    ],
+    "activationPatterns": [
+        {
+            "trigger": "CI/CD|pipeline|DevOps|deploy|release",
+            "confidence": 0.95
+        },
+        {
+            "trigger": "GitHub Actions|workflow|Azure Pipelines",
+            "confidence": 0.9
+        },
+        {
+            "trigger": "Bicep|IaC|infrastructure as code",
+            "confidence": 0.85
+        },
+        {
+            "trigger": "rollback|blue-green|slot|feature flag",
+            "confidence": 0.8
+        }
+    ]
+}

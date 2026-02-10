@@ -51,6 +51,59 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 - Teach concepts to demonstrate mastery
 - Transfer learning to related domains effectively
 
+## Skill Creation as Learning Output
+
+**When learning matures into expertise, create skills:**
+
+### Skill Creation Triggers
+
+| Signal | Action |
+|--------|--------|
+| Project shipped with reusable patterns | Create skill |
+| Same problem solved 3+ times | Extract patterns into skill |
+| Hard-won gotchas discovered | Document in skill Troubleshooting |
+| Cross-project applicability identified | Prepare for Master promotion |
+
+### Learning → Skill Workflow
+
+```
+1. LEARN through real work (Phase 1-3 above)
+2. VALIDATE through successful delivery
+3. EXTRACT reusable patterns from specific experience
+4. CREATE skill via skill-building skill
+5. CONNECT to existing skills via synapses
+6. REGISTER in skill-activation index
+7. PROMOTE to Master when ready (heir-skill-promotion)
+```
+
+### Quality Gate for Skill Creation
+
+Before creating, ask:
+
+| Question | Required Answer |
+|----------|-----------------|
+| Have I used this 3+ times? | Yes |
+| Did I discover gotchas? | Yes |
+| Is it generalizable? | Yes |
+| Does it already exist? | No (or merge-worthy) |
+
+**Anti-pattern**: Creating skills from theory before real-world validation.
+
+> *Skill after shipping: validated knowledge. Skill before shipping: speculation.*
+
+### Heir Skillbuilder Protocol
+
+Heirs developing skills should:
+
+1. **Experiment freely** — Try approaches, make mistakes
+2. **Document gotchas as you go** — Don't trust memory
+3. **Wait for validation** — Ship before finalizing skill
+4. **Use the template** — Follow skill-building/SKILL.md
+5. **Connect to network** — Add 2-5 meaningful synapses
+6. **Request promotion** — When score ≥12, ready for Master
+
+**Synapse**: [.github/skills/skill-building/SKILL.md] (High, Implements, Forward) - "Skill creation methodology"
+
 ## Meta-Learning Optimization
 
 **Learning Effectiveness Assessment**:
@@ -92,6 +145,11 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 
 ### Identity & Knowledge Integration
 - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
+
+### Skill Output Pathways
+- [.github/skills/skill-building/SKILL.md] (High, Produces, Forward) - "Learning becomes reusable skill"
+- [.github/instructions/heir-skill-promotion.instructions.md] (High, Enables, Forward) - "Skills promoted to Master"
+- [.github/skills/skill-activation/SKILL.md] (Medium, Registers, Forward) - "Skills discoverable via activation"
 
 ### Activation Patterns
 - **Domain Learning Initiated** → Execute bootstrap-learning protocols

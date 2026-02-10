@@ -177,14 +177,24 @@ async function scanSynapseHealth(
 
     // Pre-build a set of all known markdown files for fast lookup
     // This avoids calling findFiles for each synapse (major performance fix)
+    // Use targeted patterns to avoid hitting limits on large workspaces (2000+ files)
+    const targetPatterns = [
+        '.github/**/*.md',           // Memory files, config
+        'alex_docs/**/*.md',         // Documentation
+        'platforms/**/.github/**/*.md', // Heir memory files
+        '*.md'                        // Root-level files
+    ];
+    
     const knownFiles = new Set<string>();
-    const allMdFiles = await vscode.workspace.findFiles(
-        new vscode.RelativePattern(workspaceFolder, '**/*.md'),
-        '**/node_modules/**',
-        500  // Limit to prevent scanning huge workspaces
-    );
-    for (const file of allMdFiles) {
-        knownFiles.add(path.basename(file.fsPath).toLowerCase());
+    for (const targetPattern of targetPatterns) {
+        const files = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolder, targetPattern),
+            '**/node_modules/**',
+            1000  // Per-pattern limit
+        );
+        for (const file of files) {
+            knownFiles.add(path.basename(file.fsPath).toLowerCase());
+        }
     }
 
     for (const pattern of patterns) {

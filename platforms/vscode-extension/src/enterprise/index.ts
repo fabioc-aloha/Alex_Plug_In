@@ -10,6 +10,7 @@
 export * from './enterpriseAuth';
 export * from './secretsScanning';
 export * from './auditLogging';
+export * from './microsoftGraph';
 
 import * as vscode from 'vscode';
 import {
