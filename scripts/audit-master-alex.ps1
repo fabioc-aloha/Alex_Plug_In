@@ -212,8 +212,8 @@ if (10 -in $runSections) {
     $srcPath = "$extPath/src"
     
     # Dead patterns
-    $windowOpen = Select-String -Path "$srcPath/**/*.ts" -Pattern 'window\.open\(' -Recurse -ErrorAction SilentlyContinue
-    $locationReload = Select-String -Path "$srcPath/**/*.ts" -Pattern 'location\.reload\(\)' -Recurse -ErrorAction SilentlyContinue
+    $windowOpen = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'window\.open\(' -ErrorAction SilentlyContinue
+    $locationReload = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'location\.reload\(\)' -ErrorAction SilentlyContinue
     
     if ($windowOpen) { Write-Host "  ⚠️ window.open() found (dead in WebViews)" -ForegroundColor Yellow; Add-Warning "window.open in WebView" }
     else { Write-Host "  ✅ No window.open()" -ForegroundColor Green }
@@ -269,7 +269,7 @@ if (13 -in $runSections) {
     $secretPatterns = @('api[_-]?key\s*[:=]\s*["\x27][\w-]{20,}', 'password\s*[:=]\s*["\x27][^"\x27]{8,}')
     $secretsFound = $false
     foreach ($pattern in $secretPatterns) {
-        $matches = Select-String -Path "$srcPath/**/*.ts" -Pattern $pattern -Recurse -ErrorAction SilentlyContinue |
+        $matches = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $pattern -ErrorAction SilentlyContinue |
         Where-Object { $_.Line -notmatch '^\s*(//|#|\*)' -and $_.Line -notmatch 'process\.env' }
         if ($matches) { $secretsFound = $true }
     }
@@ -278,7 +278,7 @@ if (13 -in $runSections) {
     else { Write-Host "  ✅ No secrets detected" -ForegroundColor Green }
     
     # CSP check
-    $csp = Select-String -Path "$srcPath/**/*.ts" -Pattern 'Content-Security-Policy|getNonce' -Recurse -ErrorAction SilentlyContinue
+    $csp = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'Content-Security-Policy|getNonce' -ErrorAction SilentlyContinue
     if ($csp) { Write-Host "  ✅ CSP implemented" -ForegroundColor Green }
     else { Write-Host "  ⚠️ No CSP found" -ForegroundColor Yellow }
 }
@@ -328,12 +328,18 @@ if (16 -in $runSections) {
 # === SECTION 17: API Compatibility ===
 if (17 -in $runSections) {
     Write-Section 17 "API Compatibility"
-    $deprecated = @('workspace.rootPath', 'ExtensionContext.storagePath')
+    # Search for actual deprecated API usage patterns, not custom variable names
+    # vscode.workspace.rootPath => use workspaceFolders[0].uri.fsPath
+    # context.storagePath => use context.globalStorageUri.fsPath
+    $deprecated = @{
+        'vscode.workspace.rootPath' = 'vscode\.workspace\.rootPath'
+        'context.storagePath'       = 'context\.storagePath[^U]'  # Exclude context.storagePathUri (not deprecated)
+    }
     $srcPath = "$extPath/src"
     $found = @()
-    foreach ($api in $deprecated) {
-        $matches = Select-String -Path "$srcPath/**/*.ts" -Pattern $api -Recurse -SimpleMatch -ErrorAction SilentlyContinue
-        if ($matches) { $found += $api }
+    foreach ($entry in $deprecated.GetEnumerator()) {
+        $matches = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $entry.Value -ErrorAction SilentlyContinue
+        if ($matches) { $found += $entry.Key }
     }
     if ($found) {
         Write-Host "  ⚠️ Deprecated APIs: $($found -join ', ')" -ForegroundColor Yellow
@@ -359,8 +365,8 @@ if (18 -in $runSections) {
 if (19 -in $runSections) {
     Write-Section 19 "Accessibility"
     $srcPath = "$extPath/src"
-    $aria = Select-String -Path "$srcPath/**/*.ts" -Pattern 'aria-|role=' -Recurse -ErrorAction SilentlyContinue
-    $cssVars = Select-String -Path "$srcPath/**/*.ts" -Pattern 'var\(--vscode-' -Recurse -ErrorAction SilentlyContinue
+    $aria = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'aria-|role=' -ErrorAction SilentlyContinue
+    $cssVars = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'var\(--vscode-' -ErrorAction SilentlyContinue
     
     Write-Host "  ARIA usage: $($aria.Count) | CSS variables: $($cssVars.Count)"
 }
@@ -368,7 +374,7 @@ if (19 -in $runSections) {
 # === SECTION 20: Localization ===
 if (20 -in $runSections) {
     Write-Section 20 "Localization"
-    $hasL10n = Test-Path "$extPath/l10n" -or Test-Path "$extPath/package.nls.json"
+    $hasL10n = (Test-Path "$extPath/l10n") -or (Test-Path "$extPath/package.nls.json")
     if ($hasL10n) { Write-Host "  ✅ l10n configured" -ForegroundColor Green }
     else { Write-Host "  ℹ️ No l10n (optional)" }
 }
