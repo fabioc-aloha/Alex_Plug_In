@@ -1197,6 +1197,11 @@
             "sampleRequest": "Show my architecture health"
           },
           {
+            "name": "model",
+            "description": "Get model selection advice - shows current model tier and recommends optimal model for your task",
+            "sampleRequest": "What model should I use for refactoring?"
+          },
+          {
             "name": "azure",
             "description": "Get Azure development guidance with MCP tool recommendations",
             "when": "config.alex.m365.enabled",

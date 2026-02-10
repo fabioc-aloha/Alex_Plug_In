@@ -13,7 +13,7 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
-import { getModelInfo, formatModelWarning, formatModelStatus, checkTaskModelMatch } from './modelIntelligence';
+import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch } from './modelIntelligence';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -335,6 +335,10 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
     
     if (request.command === 'status') {
         return await handleStatusCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'model') {
+        return await handleModelCommand(request, context, stream, token);
     }
 
     if (request.command === 'azure') {
@@ -661,6 +665,40 @@ ${modelStatus}
     });
 
     return { metadata: { command: 'status' } };
+}
+
+/**
+ * Handle /model command - Model Selection Advisor
+ */
+async function handleModelCommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+    
+    stream.progress('🧠 Analyzing model capabilities...');
+    
+    const modelInfo = getModelInfo(request);
+    const userPrompt = request.prompt.trim();
+    
+    // If user provided a task description, give specific advice
+    if (userPrompt) {
+        const advice = getModelAdvice(modelInfo, undefined, userPrompt);
+        stream.markdown(`## 🧠 Model Advisor
+
+**Current**: ${modelInfo.name} (${modelInfo.tierInfo.displayName})
+
+### For: "${userPrompt}"
+
+${formatModelAdvice(advice)}
+`);
+    } else {
+        // Show full dashboard
+        stream.markdown(formatModelDashboard(modelInfo));
+    }
+    
+    return { metadata: { command: 'model' } };
 }
 
 /**

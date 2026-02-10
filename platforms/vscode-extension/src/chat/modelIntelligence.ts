@@ -409,10 +409,212 @@ export function getModelRecommendation(taskKey: string): string {
 }
 
 // ============================================================================
+// MODEL SELECTION ADVISOR
+// ============================================================================
+
+/**
+ * Model recommendation with reasoning
+ */
+export interface ModelRecommendation {
+    action: 'upgrade' | 'downgrade' | 'keep';
+    reason: string;
+    currentTier: ModelTier;
+    suggestedTier?: ModelTier;
+    suggestedModels: string[];
+    savings?: string;
+}
+
+/**
+ * Available models for each tier (for recommendations)
+ */
+const TIER_MODEL_SUGGESTIONS: Record<ModelTier, string[]> = {
+    frontier: [
+        'Claude Opus 4.5',
+        'Claude Opus 4.6',
+        'GPT-5.2',
+        'GPT-5.2-Codex'
+    ],
+    capable: [
+        'Claude Sonnet 4.5',
+        'Claude Sonnet 4',
+        'GPT-5.1-Codex',
+        'GPT-4o',
+        'Gemini 2.5 Pro'
+    ],
+    efficient: [
+        'Claude Haiku 4.5',
+        'GPT-5 mini',
+        'GPT-4.1',
+        'Gemini 3 Flash'
+    ],
+    unknown: []
+};
+
+/**
+ * Analyze task intent from user prompt
+ */
+export function detectTaskFromPrompt(prompt: string): string | undefined {
+    const promptLower = prompt.toLowerCase();
+    
+    // Frontier tasks
+    if (/meditat|consolidat|reflect/.test(promptLower)) return 'meditation';
+    if (/self-actuali|deep assess|architecture review/.test(promptLower)) return 'selfActualization';
+    if (/refactor.*architecture|restructure|major redesign/.test(promptLower)) return 'architectureRefactoring';
+    if (/learn.*new|bootstrap|acquire.*skill|teach me/.test(promptLower)) return 'bootstrapLearning';
+    
+    // Capable tasks
+    if (/dream|maintenance|health check|synapse/.test(promptLower)) return 'dream';
+    if (/review.*code|code review|pr review/.test(promptLower)) return 'codeReview';
+    if (/debug|fix.*bug|troubleshoot|error/.test(promptLower)) return 'debugging';
+    if (/skill select|plan.*task|optimize.*skill/.test(promptLower)) return 'skillSelection';
+    
+    // Efficient tasks
+    if (/format|rename|simple edit|typo|spelling/.test(promptLower)) return 'simpleEdits';
+    if (/doc|readme|comment|jsdoc/.test(promptLower)) return 'documentation';
+    if (/what is|explain|look up|find|search/.test(promptLower)) return 'lookup';
+    
+    return undefined;
+}
+
+/**
+ * Get model selection advice based on current model and detected/specified task
+ */
+export function getModelAdvice(
+    currentModel: DetectedModel,
+    taskKey?: string,
+    prompt?: string
+): ModelRecommendation {
+    // Try to detect task from prompt if not specified
+    const detectedTask = taskKey || (prompt ? detectTaskFromPrompt(prompt) : undefined);
+    const task = detectedTask ? COGNITIVE_TASKS[detectedTask] : undefined;
+    
+    // If no task detected, provide general advice
+    if (!task) {
+        return {
+            action: 'keep',
+            reason: `Current model (${currentModel.name}) is suitable for general tasks.`,
+            currentTier: currentModel.tier,
+            suggestedModels: []
+        };
+    }
+    
+    const currentTierOrder = { frontier: 3, capable: 2, efficient: 1, unknown: 0 };
+    const requiredTierOrder = { frontier: 3, capable: 2, efficient: 1 };
+    
+    const currentOrder = currentTierOrder[currentModel.tier];
+    const requiredOrder = requiredTierOrder[task.minimumTier];
+    
+    // Check if upgrade needed
+    if (currentOrder < requiredOrder) {
+        return {
+            action: 'upgrade',
+            reason: `**${task.name}** requires ${task.minimumTier} tier. Current model may produce limited results.`,
+            currentTier: currentModel.tier,
+            suggestedTier: task.minimumTier as ModelTier,
+            suggestedModels: TIER_MODEL_SUGGESTIONS[task.minimumTier as ModelTier] || []
+        };
+    }
+    
+    // Check if downgrade possible (cost savings)
+    if (currentOrder > requiredOrder && currentModel.tier === 'frontier' && task.minimumTier === 'efficient') {
+        return {
+            action: 'downgrade',
+            reason: `**${task.name}** works fine on Efficient models. Consider switching to save costs.`,
+            currentTier: currentModel.tier,
+            suggestedTier: 'efficient',
+            suggestedModels: TIER_MODEL_SUGGESTIONS.efficient,
+            savings: 'Up to 90% cost reduction for simple tasks'
+        };
+    }
+    
+    // Current model is appropriate
+    return {
+        action: 'keep',
+        reason: `**${task.name}** — ${currentModel.name} is appropriate for this task.`,
+        currentTier: currentModel.tier,
+        suggestedModels: []
+    };
+}
+
+/**
+ * Format model advice for display in chat
+ */
+export function formatModelAdvice(advice: ModelRecommendation): string {
+    const actionEmoji = {
+        upgrade: '⬆️',
+        downgrade: '⬇️',
+        keep: '✅'
+    };
+    
+    let output = `${actionEmoji[advice.action]} ${advice.reason}`;
+    
+    if (advice.suggestedModels.length > 0) {
+        output += `\n\n**Suggested models:**\n${advice.suggestedModels.map(m => `- ${m}`).join('\n')}`;
+    }
+    
+    if (advice.savings) {
+        output += `\n\n💰 *${advice.savings}*`;
+    }
+    
+    return output;
+}
+
+/**
+ * Get comprehensive model dashboard for /model command
+ */
+export function formatModelDashboard(model: DetectedModel, prompt?: string): string {
+    const tierEmoji = {
+        frontier: '🚀',
+        capable: '⚡',
+        efficient: '💨',
+        unknown: '❓'
+    };
+    
+    const capabilities = model.tierInfo.capabilities;
+    
+    let output = `## 🧠 Model Intelligence
+
+### Current Model
+${tierEmoji[model.tier]} **${model.name}**
+- **Tier**: ${model.tierInfo.displayName}
+- **Context**: ${model.maxInputTokens.toLocaleString()} tokens
+- **Family**: ${model.family}
+- **Vendor**: ${model.vendor}
+
+### Capabilities
+| Capability | Status |
+|------------|--------|
+| Deep Reasoning | ${capabilities.deepReasoning ? '✅' : '❌'} |
+| Extended Context | ${capabilities.extendedContext ? '✅' : '❌'} |
+| Complex Architecture | ${capabilities.complexArchitecture ? '✅' : '❌'} |
+| Tool Calling | ${capabilities.toolCalling ? '✅' : '❌'} |
+`;
+
+    // Add task-specific advice if prompt provided
+    if (prompt) {
+        const advice = getModelAdvice(model, undefined, prompt);
+        output += `\n### Recommendation\n${formatModelAdvice(advice)}`;
+    } else {
+        output += `\n### Task Recommendations
+
+| Task Type | Minimum Tier | Current Model |
+|-----------|--------------|---------------|
+| Meditation, Self-Actualization, Architecture | Frontier | ${model.tier === 'frontier' ? '✅' : '⚠️ Upgrade recommended'} |
+| Code Review, Debugging, Dream | Capable | ${model.tier !== 'efficient' ? '✅' : '⚠️ Upgrade recommended'} |
+| Simple Edits, Documentation | Efficient | ✅ |
+
+*Use \`/model <task description>\` for specific advice.*`;
+    }
+    
+    return output;
+}
+
+// ============================================================================
 // EXPORTS
 // ============================================================================
 
 export {
     MODEL_TIERS,
-    COGNITIVE_TASKS
+    COGNITIVE_TASKS,
+    TIER_MODEL_SUGGESTIONS
 };

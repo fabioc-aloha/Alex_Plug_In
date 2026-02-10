@@ -24,11 +24,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Model Status in `/status`**: Shows current model tier, context capacity, and capabilities
 
+- **Model Selection Advisor** (`/model` command): Intelligent model recommendations
+  - `/model` — Shows full dashboard with current model capabilities
+  - `/model <task>` — Analyzes task and recommends optimal model tier
+  - Upgrade suggestions when task needs higher capability
+  - Downgrade suggestions for simple tasks (cost savings)
+  - Task detection from natural language prompts
+
 ### Technical
 
 - New `modelIntelligence.ts` module with detection patterns and task definitions
 - Integration with chat participant handler for proactive warnings
 - Context size heuristic fallback when model family cannot be detected
+- Task intent detection via regex pattern matching
 
 ---
 

@@ -18,7 +18,8 @@ v5.4.3 is complete. Alex now has:
 v5.5.0 in progress:
 - **Model Tier Detection** ✅ — Classify models as Frontier/Capable/Efficient
 - **Task-Model Matching** ✅ — Warn when cognitive tasks need higher-tier models
-- **Model Selection Advisor** 📋 — Recommend optimal model for task
+- **Model Selection Advisor** ✅ — `/model` command with upgrade/downgrade recommendations
+- **Model Performance Telemetry** 📋 — Track success rates (optional)
 
 ### Vision Forward
 
@@ -54,13 +55,14 @@ v5.5.0 in progress:
 | Model Tier Detection        |  Heir  |   2h   |   High   |   ✅    | Detect running model via VS Code/Copilot API     |
 | Task-Model Matching         | Master |   2h   |   High   |   ✅    | Map cognitive tasks to minimum model tier        |
 | Model Status in /status     |  Heir  |   1h   |   High   |   ✅    | Display current model tier and capabilities      |
-| Model Selection Advisor     |  Heir  |   3h   |  Medium  |   📋    | Advise model upgrade/downgrade; read user prefs  |
+| Model Selection Advisor     |  Heir  |   3h   |  Medium  |   ✅    | `/model` command with upgrade/downgrade advice   |
 | Model Performance Telemetry | Master |   2h   |   Low    |   📋    | Track task success rates per model tier (opt-in) |
 
 **Completed 2026-02-10**:
 - `modelIntelligence.ts` — Tier detection with patterns for Claude, GPT, Gemini
 - Warnings in `/meditate`, `/dream`, `/selfActualize`, `/learn` handlers
 - Model info display in `/status` command
+- `/model` command — Full dashboard + task-specific recommendations
 
 **Deferred from v5.3.1**:
 
