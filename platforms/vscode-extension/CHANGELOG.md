@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.4.3] - 2026-02-09
+
+> **TTS Language Fix & Heir Reset** — Proper language capitalization in code block summaries
+
+### Fixed
+
+- **TTS Language Names**: Code blocks now read as "TypeScript code block" instead of "typescript code block"
+- **TTS Image Handling**: Images processed before links to prevent regex conflicts
+- **User Profile Tool**: Removed obsolete markdown profile generation
+
+---
+
 ## [5.4.2] - 2026-02-09
 
 > **Heir Reset & Profile Consolidation** — Cleaner inheritance, single source of truth
