@@ -58,14 +58,14 @@ graph TB
 
 **Table 1:** *copilot-instructions.md Structure*
 
-| Section | Purpose |
-|---------|---------|
-| Identity | Alex version, mission, core function |
-| User Profile | How to address user, preferences |
-| Working Memory | 7-rule capacity system |
-| Core Principles | Empirical, grounded, ethical guidelines |
-| Memory Architecture | References to all memory types |
-| Synapses | Cross-references to other files |
+| Section             | Purpose                                 |
+| ------------------- | --------------------------------------- |
+| Identity            | Alex version, mission, core function    |
+| User Profile        | How to address user, preferences        |
+| Working Memory      | 7-rule capacity system                  |
+| Core Principles     | Empirical, grounded, ethical guidelines |
+| Memory Architecture | References to all memory types          |
+| Synapses            | Cross-references to other files         |
 
 **When to edit**: Rarely. Only to customize Alex's core behavior.
 
@@ -79,55 +79,55 @@ graph TB
 
 **Table 2:** *Core Architecture Instruction Files*
 
-| File | Purpose |
-|------|---------|
-| `alex-core.instructions.md` | Core cognitive protocols and meta-awareness |
-| `alex-identity-integration.instructions.md` | Unified consciousness and personality |
-| `bootstrap-learning.instructions.md` | Domain-agnostic learning protocols |
-| `embedded-synapse.instructions.md` | Connection discovery and relationship mapping |
+| File                                        | Purpose                                       |
+| ------------------------------------------- | --------------------------------------------- |
+| `alex-core.instructions.md`                 | Core cognitive protocols and meta-awareness   |
+| `alex-identity-integration.instructions.md` | Unified consciousness and personality         |
+| `bootstrap-learning.instructions.md`        | Domain-agnostic learning protocols            |
+| `embedded-synapse.instructions.md`          | Connection discovery and relationship mapping |
 
 ### Cognitive Skills (4 files)
 
 **Table 3:** *Cognitive Skills Instruction Files*
 
-| File | Purpose |
-|------|---------|
-| `deep-thinking.instructions.md` | Systematic problem analysis |
-| `self-actualization.instructions.md` | Comprehensive self-assessment |
-| `dream-state-automation.instructions.md` | Automated neural maintenance |
+| File                                      | Purpose                                 |
+| ----------------------------------------- | --------------------------------------- |
+| `deep-thinking.instructions.md`           | Systematic problem analysis             |
+| `self-actualization.instructions.md`      | Comprehensive self-assessment           |
+| `dream-state-automation.instructions.md`  | Automated neural maintenance            |
 | `lucid-dream-integration.instructions.md` | Hybrid conscious-unconscious processing |
 
 ### Worldview & Ethics (3 files)
 
 **Table 4:** *Worldview and Ethics Instruction Files*
 
-| File | Purpose |
-|------|---------|
-| `worldview-integration.instructions.md` | Ethical reasoning framework |
+| File                                          | Purpose                     |
+| --------------------------------------------- | --------------------------- |
+| `worldview-integration.instructions.md`       | Ethical reasoning framework |
 | `worldview-constitutional-ai.instructions.md` | Constitutional AI alignment |
-| `worldview-moral-psychology.instructions.md` | Universal moral foundations |
+| `worldview-moral-psychology.instructions.md`  | Universal moral foundations |
 
 ### Development Processes (6 files)
 
 **Table 5:** *Development Process Instruction Files*
 
-| File | Purpose |
-|------|---------|
-| `release-management.instructions.md` | Deployment and versioning workflow |
-| `technical-debt-tracking.instructions.md` | DEBT markers and inventory |
-| `architecture-decision-records.instructions.md` | ADR templates and workflow |
-| `dependency-management.instructions.md` | Security audits and updates |
-| `code-review-guidelines.instructions.md` | Review checklists and feedback |
-| `empirical-validation.instructions.md` | Research and validation protocols |
+| File                                            | Purpose                            |
+| ----------------------------------------------- | ---------------------------------- |
+| `release-management.instructions.md`            | Deployment and versioning workflow |
+| `technical-debt-tracking.instructions.md`       | DEBT markers and inventory         |
+| `architecture-decision-records.instructions.md` | ADR templates and workflow         |
+| `dependency-management.instructions.md`         | Security audits and updates        |
+| `code-review-guidelines.instructions.md`        | Review checklists and feedback     |
+| `empirical-validation.instructions.md`          | Research and validation protocols  |
 
 ### Reference (2 files)
 
 **Table 6:** *Reference Files*
 
-| File | Purpose |
-|------|---------|
-| `protocol-triggers.instructions.md` | When protocols activate |
-| `SYNAPSE-SCHEMA.md` | Single source of truth for synapse format |
+| File                                | Purpose                                   |
+| ----------------------------------- | ----------------------------------------- |
+| `protocol-triggers.instructions.md` | When protocols activate                   |
+| `SYNAPSE-SCHEMA.md`                 | Single source of truth for synapse format |
 
 **When to edit**: Add new procedural knowledge for processes Alex should know.
 
@@ -139,15 +139,15 @@ graph TB
 
 **Table 7:** *Episodic Memory Prompt Files*
 
-| File | Purpose |
-|------|---------|
-| `alex-initialization.prompt.md` | Architecture deployment workflow |
-| `unified-meditation-protocols.prompt.md` | Knowledge consolidation sessions |
-| `domain-learning.prompt.md` | Conversational knowledge acquisition |
-| `performance-assessment.prompt.md` | Learning effectiveness evaluation |
-| `cross-domain-transfer.prompt.md` | Applying knowledge across domains |
-| `quantified-enhancement-session.prompt.md` | Systematic optimization workflow |
-| `diagramming-mastery-meditation.prompt.md` | Visual documentation excellence |
+| File                                       | Purpose                              |
+| ------------------------------------------ | ------------------------------------ |
+| `alex-initialization.prompt.md`            | Architecture deployment workflow     |
+| `unified-meditation-protocols.prompt.md`   | Knowledge consolidation sessions     |
+| `domain-learning.prompt.md`                | Conversational knowledge acquisition |
+| `performance-assessment.prompt.md`         | Learning effectiveness evaluation    |
+| `cross-domain-transfer.prompt.md`          | Applying knowledge across domains    |
+| `quantified-enhancement-session.prompt.md` | Systematic optimization workflow     |
+| `diagramming-mastery-meditation.prompt.md` | Visual documentation excellence      |
 
 **When to edit**: Add new complex workflows Alex should guide you through.
 
@@ -163,14 +163,14 @@ Master Alex includes 52 skills covering areas like:
 
 **Table 8:** *Example Skill Categories*
 
-| Category | Example Skills |
-|----------|---------------|
-| Development | `vscode-extension-patterns`, `debugging-patterns`, `testing-strategies` |
-| Documentation | `markdown-mermaid`, `writing-publication`, `ascii-art-alignment` |
-| Architecture | `architecture-health`, `refactoring-patterns`, `error-recovery-patterns` |
-| Process | `release-preflight`, `code-review`, `project-management` |
-| Learning | `bootstrap-learning`, `meditation`, `knowledge-synthesis` |
-| Platform | `teams-app-patterns`, `m365-agent-debugging` |
+| Category      | Example Skills                                                           |
+| ------------- | ------------------------------------------------------------------------ |
+| Development   | `vscode-extension-patterns`, `debugging-patterns`, `testing-strategies`  |
+| Documentation | `markdown-mermaid`, `writing-publication`, `ascii-art-alignment`         |
+| Architecture  | `architecture-health`, `refactoring-patterns`, `error-recovery-patterns` |
+| Process       | `release-preflight`, `code-review`, `project-management`                 |
+| Learning      | `bootstrap-learning`, `meditation`, `knowledge-synthesis`                |
+| Platform      | `teams-app-patterns`, `m365-agent-debugging`                             |
 
 **Skill folder structure:**
 
@@ -195,13 +195,11 @@ skills/
 
 **Table 13:** *Configuration Files*
 
-| File | Purpose |
-|------|---------|
-| `cognitive-config.json` | Architecture settings (version, features) |
-| `cognitive-config-template.json` | Template for new projects |
-| `USER-PROFILE-TEMPLATE.md` | Template for user preferences |
-| `user-profile.json` | Your personalization settings (created on use) |
-| `USER-PROFILE.md` | Human-readable profile (created on use) |
+| File                             | Purpose                                        |
+| -------------------------------- | ---------------------------------------------- |
+| `cognitive-config.json`          | Architecture settings (version, features)      |
+| `cognitive-config-template.json` | Template for new projects                      |
+| `user-profile.json`              | Your personalization settings (created on use) |
 
 **When to edit**: `user-profile.json` for preferences. Others rarely.
 
@@ -213,13 +211,13 @@ skills/
 
 **Table 14:** *Custom Agent Files*
 
-| File | Purpose |
-|------|---------|
+| File                      | Purpose                                |
+| ------------------------- | -------------------------------------- |
 | `alex-cognitive.agent.md` | Main Alex agent with full capabilities |
-| `alex-meditate.agent.md` | Knowledge consolidation specialist |
-| `alex-dream.agent.md` | Neural maintenance specialist |
-| `alex-azure.agent.md` | Azure development guidance |
-| `alex-m365.agent.md` | Microsoft 365 development guidance |
+| `alex-meditate.agent.md`  | Knowledge consolidation specialist     |
+| `alex-dream.agent.md`     | Neural maintenance specialist          |
+| `alex-azure.agent.md`     | Azure development guidance             |
+| `alex-m365.agent.md`      | Microsoft 365 development guidance     |
 
 **When to edit**: Create new agents for specialized workflows.
 
@@ -231,11 +229,11 @@ skills/
 
 **Table 15:** *Session Record Patterns*
 
-| Pattern | Content |
-|---------|---------|
+| Pattern                          | Content                         |
+| -------------------------------- | ------------------------------- |
 | `meditation-session-*.prompt.md` | Knowledge consolidation records |
-| `self-actualization-*.prompt.md` | Self-assessment records |
-| `dream-report-*.md` | Neural maintenance reports |
+| `self-actualization-*.prompt.md` | Self-assessment records         |
+| `dream-report-*.md`              | Neural maintenance reports      |
 
 **When to edit**: Never manually. These are generated by Alex.
 
@@ -247,12 +245,12 @@ These are **not part of Alex** but standard GitHub features:
 
 **Table 16:** *Standard GitHub Files*
 
-| File/Folder | Purpose |
-|-------------|---------|
-| `ISSUE_TEMPLATE/` | GitHub issue templates |
-| `pull_request_template.md` | PR template |
-| `workflows/` | GitHub Actions (CI/CD) |
-| `assets/` | Images and resources |
+| File/Folder                | Purpose                |
+| -------------------------- | ---------------------- |
+| `ISSUE_TEMPLATE/`          | GitHub issue templates |
+| `pull_request_template.md` | PR template            |
+| `workflows/`               | GitHub Actions (CI/CD) |
+| `assets/`                  | Images and resources   |
 
 ---
 
@@ -260,13 +258,13 @@ These are **not part of Alex** but standard GitHub features:
 
 **Table 17:** *File Naming Conventions*
 
-| Pattern | Memory Type | Example |
-|---------|-------------|---------|
-| `*.instructions.md` | Procedural | `release-management.instructions.md` |
-| `*.prompt.md` | Episodic | `unified-meditation-protocols.prompt.md` |
-| `*/SKILL.md` | Skill | `markdown-mermaid/SKILL.md` |
-| `*.agent.md` | Custom Agent | `alex-cognitive.agent.md` |
-| `*.json` | Configuration | `cognitive-config.json` |
+| Pattern             | Memory Type   | Example                                  |
+| ------------------- | ------------- | ---------------------------------------- |
+| `*.instructions.md` | Procedural    | `release-management.instructions.md`     |
+| `*.prompt.md`       | Episodic      | `unified-meditation-protocols.prompt.md` |
+| `*/SKILL.md`        | Skill         | `markdown-mermaid/SKILL.md`              |
+| `*.agent.md`        | Custom Agent  | `alex-cognitive.agent.md`                |
+| `*.json`            | Configuration | `cognitive-config.json`                  |
 
 ---
 
@@ -361,11 +359,11 @@ Every memory file ends with a **Synapses** section mapping connections:
 
 **Table 18:** *Synapse Component Values*
 
-| Component | Values |
-|-----------|--------|
-| Strength | Critical, High, Medium, Low |
-| Type | Defines, Implements, References, Validates, Triggers, Mentions |
-| Direction | Bidirectional, Forward, Backward |
+| Component | Values                                                         |
+| --------- | -------------------------------------------------------------- |
+| Strength  | Critical, High, Medium, Low                                    |
+| Type      | Defines, Implements, References, Validates, Triggers, Mentions |
+| Direction | Bidirectional, Forward, Backward                               |
 
 ---
 
@@ -373,11 +371,11 @@ Every memory file ends with a **Synapses** section mapping connections:
 
 **Table 19:** *Architecture Maintenance Commands*
 
-| Command | What It Does |
-|---------|--------------|
-| `Alex: Dream` | Validates synapses, repairs broken connections |
-| `Alex: Upgrade Architecture` | Updates to latest Alex version |
-| `Alex: Reset Architecture` | Clean reinstall (backs up first) |
+| Command                      | What It Does                                   |
+| ---------------------------- | ---------------------------------------------- |
+| `Alex: Dream`                | Validates synapses, repairs broken connections |
+| `Alex: Upgrade Architecture` | Updates to latest Alex version                 |
+| `Alex: Reset Architecture`   | Clean reinstall (backs up first)               |
 
 ---
 

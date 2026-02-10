@@ -685,8 +685,14 @@ export function prepareTextForSpeech(markdown: string): string {
     text = text.replace(/```mermaid[\s\S]*?```/g, ' diagram shown here ');
     
     // Code blocks - summarize
+    const langNames: Record<string, string> = {
+        'typescript': 'TypeScript', 'javascript': 'JavaScript', 'python': 'Python',
+        'csharp': 'C#', 'cpp': 'C++', 'html': 'HTML', 'css': 'CSS', 'json': 'JSON',
+        'yaml': 'YAML', 'xml': 'XML', 'sql': 'SQL', 'bash': 'Bash', 'powershell': 'PowerShell'
+    };
     text = text.replace(/```(\w+)?[\s\S]*?```/g, (match, lang) => {
-        return lang ? ` ${lang} code block omitted ` : ' code block omitted ';
+        const displayLang = lang ? (langNames[lang.toLowerCase()] || lang.charAt(0).toUpperCase() + lang.slice(1)) : '';
+        return displayLang ? ` ${displayLang} code block omitted ` : ' code block omitted ';
     });
     
     // Tables - convert to spoken format
@@ -711,12 +717,12 @@ export function prepareTextForSpeech(markdown: string): string {
     // Inline code
     text = text.replace(/`([^`]+)`/g, '$1');
     
+    // Images (must be before links - both share similar syntax)
+    text = text.replace(/!\[([^\]]*)\]\([^)]+\)/g, 'image: $1');
+    
     // Links - keep text, mention if external
     text = text.replace(/\[([^\]]+)\]\(https?:[^)]+\)/g, '$1 (link)');
     text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-    
-    // Images
-    text = text.replace(/!\[([^\]]*)\]\([^)]+\)/g, 'image: $1');
     
     // Bold/italic (order matters - bold first)
     text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '$1');  // Bold italic

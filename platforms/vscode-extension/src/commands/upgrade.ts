@@ -492,21 +492,6 @@ async function runGapAnalysis(
     });
   }
 
-  const profileMdPath = path.join(backupPath, '.github', 'config', 'USER-PROFILE.md');
-  if (await fs.pathExists(profileMdPath)) {
-    const stats = await fs.stat(profileMdPath);
-    candidates.push({
-      type: 'profile',
-      sourcePath: '.github/config/USER-PROFILE.md',
-      targetPath: '.github/config/USER-PROFILE.md',
-      description: 'Your profile document',
-      sizeKB: Math.round(stats.size / 1024),
-      lastModified: stats.mtime,
-      recommended: true,
-      stale: false,
-    });
-  }
-
   // 5. Episodic records (always recommend)
   const episodicBackupPath = path.join(backupPath, '.github', 'episodic');
   if (await fs.pathExists(episodicBackupPath)) {

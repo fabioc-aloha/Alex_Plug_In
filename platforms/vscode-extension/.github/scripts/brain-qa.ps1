@@ -463,7 +463,7 @@ if (14 -in $runPhases) {
 # ============================================================
 if (15 -in $runPhases) {
     Write-Phase 15 "Config Files Validation"
-    $required = @("user-profile.json", "USER-PROFILE.md")
+    $required = @("user-profile.json")
     $masterOnlyCfg = @("MASTER-ALEX-PROTECTED.json", "cognitive-config.json")
     $configIssues = @()
     

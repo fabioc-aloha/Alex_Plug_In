@@ -421,7 +421,6 @@ These system files were modified from their original versions:
 ## 👤 User Profile
 
 - [x] `config/user-profile.json` — Your preferences (auto-restore recommended)
-- [x] `config/USER-PROFILE.md` — Your profile document
 
 ## 📜 Episodic Records
 
@@ -554,7 +553,6 @@ Some things should always be restored without asking:
 | Item                       | Reason                               |
 | -------------------------- | ------------------------------------ |
 | `config/user-profile.json` | Personal preferences                 |
-| `config/USER-PROFILE.md`   | User identity                        |
 | `episodic/` folder         | Session history (meditation, dreams) |
 
 These are pre-checked in the migration candidates document.

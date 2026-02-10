@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.4.2] - 2026-02-09
+
+> **Heir Reset & Profile Consolidation** — Cleaner inheritance, single source of truth
+
+### Changed
+
+- **User Profile JSON-Only**: Consolidated to `user-profile.json`, removed deprecated `.md` format
+- **Heir Reset Automation**: `sync-master-to-heir.ps1` now auto-resets P5-P7 slots and user profile
+- **Skill Count**: Updated from 77 to 78 skills (69 inheritable)
+
+### Fixed
+
+- **Heir copilot-instructions.md**: Now properly resets for publication (no Master-specific content)
+- **Build manifest**: Added 5-minute staleness window to preflight check
+
+---
+
 ## [5.4.1] - 2026-02-09
 
 > **TTS UX Enhancements** — Keyboard shortcuts, emojis, voice mode summarization

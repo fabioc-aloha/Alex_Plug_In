@@ -107,7 +107,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                    |
 | ----------------- | ----------------------------------------------------------------------------- |
 | **Chat & Agents** | `@alex` participant, 24 slash commands, 12 LM tools, 3 custom agents          |
-| **Intelligence**  | 77 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 78 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
 
@@ -351,8 +351,7 @@ If you haven't set up a profile, Alex will guide you through a friendly onboardi
 
 | File                               | Purpose                      |
 | ---------------------------------- | ---------------------------- |
-| `.github/config/user-profile.json` | Machine-readable preferences |
-| `.github/config/USER-PROFILE.md`   | Human-readable profile card  |
+| `.github/config/user-profile.json` | User preferences and profile |
 
 ### Updating Preferences
 
@@ -657,7 +656,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (77 skills)
+├── skills/                    # 🎓 Portable domain expertise (78 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...

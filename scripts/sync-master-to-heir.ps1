@@ -69,6 +69,9 @@ $AlwaysExclude = @(
     "workflows",
     "config/MASTER-ALEX-PROTECTED.json",
     "config/cognitive-config.json",
+    "config/user-profile.json",
+    "config/USER-PROFILE.md",
+    "config/USER-PROFILE-TEMPLATE.md",
     "episodic"
 )
 
@@ -196,6 +199,87 @@ if ($DryRun) {
     Write-Host "DRY RUN - No files were modified" -ForegroundColor Yellow
 }
 else {
+    # Post-process: Reset heir copilot-instructions.md for publication
+    $heirCopilotPath = Join-Path $TargetGithub "copilot-instructions.md"
+    if (Test-Path $heirCopilotPath) {
+        Write-Host ""
+        Write-Host "Resetting heir copilot-instructions.md..." -ForegroundColor Yellow
+        
+        $content = Get-Content $heirCopilotPath -Raw
+        $originalContent = $content
+        
+        # Reset P5-P7 slots to available
+        $content = $content -replace '\| \*\*P5\*\* \| [^|]+ \| Domain \| [^|]+ \|', '| **P5** | *(available)* | Domain | Assigned based on project detection |'
+        $content = $content -replace '\| \*\*P6\*\* \| [^|]+ \| Domain \| [^|]+ \|', '| **P6** | *(available)* | Domain | Assigned based on session goals |'
+        $content = $content -replace '\| \*\*P7\*\* \| [^|]+ \| Domain \| [^|]+ \|', '| **P7** | *(available)* | Domain | Assigned based on task context |'
+        
+        # Remove Master Alex default line
+        $content = $content -replace '- \*\*Master Alex default\*\*: [^\r\n]+\r?\n', ''
+        
+        # Reset Last Assessed
+        $content = $content -replace '\*\*Last Assessed\*\*: [^\r\n]+', '**Last Assessed**: *(awaiting first session)*'
+        
+        if ($content -ne $originalContent) {
+            Set-Content -Path $heirCopilotPath -Value $content -NoNewline
+            Write-Host "  ✅ Reset P5-P7 slots and Last Assessed" -ForegroundColor Green
+        }
+        else {
+            Write-Host "  ⏭️ Already reset" -ForegroundColor Gray
+        }
+    }
+    
+    # Post-process: Reset heir user-profile.json to starter template
+    $heirProfilePath = Join-Path $TargetGithub "config/user-profile.json"
+    if (Test-Path $heirProfilePath) {
+        Write-Host ""
+        Write-Host "Resetting heir user-profile.json..." -ForegroundColor Yellow
+        
+        $starterProfile = @{
+            name                 = ""
+            nickname             = ""
+            pronouns             = ""
+            formality            = "balanced"
+            detailLevel          = "balanced"
+            explanationStyle     = "mixed"
+            humor                = $true
+            encouragement        = $true
+            questionFrequency    = "moderate"
+            proactiveSuggestions = $true
+            primaryTechnologies  = @()
+            learningGoals        = @()
+            expertiseAreas       = @()
+            currentProjects      = @()
+            projectPersona       = $null
+            learningStyle        = @{
+                type        = "mixed"
+                preferences = @()
+            }
+            workStyle            = @{
+                planning     = ""
+                diagrams     = ""
+                mermaidStyle = "GitHub-compatible"
+            }
+            modelPreferences     = @{
+                default             = "claude-opus-4-5"
+                alertOnHeavyLifting = $true
+                heavyLiftingTasks   = @(
+                    "Meditation/consolidation sessions",
+                    "Self-actualization assessments",
+                    "Complex multi-file architecture refactoring",
+                    "Bootstrap learning (new skill acquisition)"
+                )
+                routineTasks        = @(
+                    "Code edits, debugging, simple refactors",
+                    "Documentation updates",
+                    "File searches and context gathering"
+                )
+            }
+        }
+        
+        $starterProfile | ConvertTo-Json -Depth 4 | Set-Content -Path $heirProfilePath
+        Write-Host "  ✅ Reset to starter template" -ForegroundColor Green
+    }
+    
     Write-Host ""
     Write-Host "✅ Sync complete!" -ForegroundColor Green
 }

@@ -77,6 +77,7 @@ $excludeItems = @(
     "config\cognitive-config.json",
     "config\user-profile.json",
     "config\USER-PROFILE.md",
+    "config\USER-PROFILE-TEMPLATE.md",
     
     # Master-only skills (not for heirs - these manage Master Alex specifically)
     "skills\heir-curation",

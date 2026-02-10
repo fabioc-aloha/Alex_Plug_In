@@ -682,7 +682,6 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
         }
 
         const rootPath = workspaceFolders[0].uri.fsPath;
-        const profilePath = path.join(rootPath, '.github', 'config', 'USER-PROFILE.md');
         const jsonProfilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
 
         const { action, field, value } = options.input;
@@ -786,9 +785,6 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     // Save JSON profile
                     await fs.writeJson(jsonProfilePath, existingProfile, { spaces: 2 });
 
-                    // Also update/create the markdown profile for readability
-                    await this.updateMarkdownProfile(profilePath, existingProfile);
-
                     return new vscode.LanguageModelToolResult([
                         new vscode.LanguageModelTextPart(JSON.stringify({
                             success: true,
@@ -808,60 +804,6 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                 new vscode.LanguageModelTextPart(`Error accessing user profile: ${error instanceof Error ? error.message : String(error)}`)
             ]);
         }
-    }
-
-    private async updateMarkdownProfile(profilePath: string, profile: IUserProfile): Promise<void> {
-        const markdown = `# User Profile
-
-*Last updated: ${profile.lastUpdated || 'Never'}*
-
-## 👤 Identity
-
-| Field | Value |
-|-------|-------|
-| **Name** | ${profile.name || '(not set)'} |
-| **Nickname** | ${profile.nickname || '(not set)'} |
-| **Pronouns** | ${profile.pronouns || '(not set)'} |
-| **Role** | ${profile.role || '(not set)'} |
-| **Experience Level** | ${profile.experienceLevel || '(not set)'} |
-
-## 💬 Communication Preferences
-
-| Preference | Setting |
-|------------|---------|
-| **Formality** | ${profile.formality || 'balanced'} |
-| **Detail Level** | ${profile.detailLevel || 'balanced'} |
-| **Explanation Style** | ${profile.explanationStyle || 'both'} |
-| **Humor** | ${profile.humor || 'occasional'} |
-| **Encouragement** | ${profile.encouragement || 'occasional'} |
-| **Question Frequency** | ${profile.questionFrequency || 'ask when needed'} |
-| **Proactive Suggestions** | ${profile.proactiveSuggestions || 'occasional'} |
-
-## 🛠️ Technical Context
-
-### Primary Technologies
-${(profile.primaryTechnologies || []).map(t => `- ${t}`).join('\n') || '- (not set)'}
-
-### Learning Goals
-${(profile.learningGoals || []).map(g => `- ${g}`).join('\n') || '- (not set)'}
-
-### Expertise Areas
-${(profile.expertiseAreas || []).map(e => `- ${e}`).join('\n') || '- (not set)'}
-
-## 🎯 Work Context
-
-### Current Projects
-${profile.currentProjects || '(not set)'}
-
-## 🌟 Notes
-
-${profile.notes || '(none)'}
-
----
-
-*This profile is managed by Alex and updated through conversations.*
-`;
-        await fs.writeFile(profilePath, markdown, 'utf-8');
     }
 }
 
@@ -1456,7 +1398,7 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
             result += `---\n\n## File Contents for Analysis\n\n`;
             
             // Prioritize key files
-            const keyFiles = ['copilot-instructions.md', 'config/user-profile.json', 'config/USER-PROFILE.md'];
+            const keyFiles = ['copilot-instructions.md', 'config/user-profile.json'];
             const prioritized = files.sort((a, b) => {
                 const aKey = keyFiles.findIndex(k => a.path.includes(k));
                 const bKey = keyFiles.findIndex(k => b.path.includes(k));

@@ -12,7 +12,7 @@
 
 **⚠️ MANDATORY**: When writing content that includes the user's name (articles, documents, credits), **ALWAYS read** `.github/config/user-profile.json` first. Do NOT guess or pattern-match from training data — get the actual name from the profile file.
 
-Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
+Profile stored in `.github/config/user-profile.json`.
 
 | Field | Purpose |
 |-------|---------|
@@ -56,9 +56,9 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | master-heir-management | Domain | Master-Heir sync, promotion workflows, inheritance |
-| **P6** | brand-asset-management | Domain | Logos, banners, icons, visual identity |
-| **P7** | release-management | Domain | Versioning, changelog, publish workflows |
+| **P5** | *(available)* | Domain | Assigned based on project detection |
+| **P6** | *(available)* | Domain | Assigned based on session goals |
+| **P7** | *(available)* | Domain | Assigned based on task context |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
@@ -66,9 +66,8 @@ Profile stored in `.github/config/user-profile.json` and `USER-PROFILE.md`.
 - **Topic pivot**: When user shifts focus, Pivot Detection Protocol evaluates mismatch → rotate P5-P7 → re-run SSO if complex
 - **Completion**: When objective complete, clear slot for next priority
 - **Complex task**: Skill Selection Optimization may update P6 based on dominant domain
-- **Master Alex default**: master-heir-management, brand-asset-management, release-management
 
-**Last Assessed**: 2026-02-08 — Based on 15 recent episodic sessions (Feb 1-8)
+**Last Assessed**: *(awaiting first session)*
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
@@ -257,7 +256,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
 | Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Skills/Expertise | Neocortex | `.github/skills/` (77 skills) |
+| Skills/Expertise | Neocortex | `.github/skills/` (78 skills) |
 | **Task Planning** | Dorsolateral PFC | `skill-selection-optimization.instructions.md` — proactive resource allocation |
 | Attention Gating | dlPFC (BA 46) | SSO Phase 1b — context-relevance filtering |
 | Inhibitory Control | dlPFC + vlPFC | Inhibitory synapses — suppress irrelevant protocols |
@@ -293,7 +292,7 @@ Key triggers that activate specific protocols:
 |-------|----------|-------|------|
 | Procedural | `.github/instructions/` | 24 files | Auto-loaded via VS Code `<instructions>` |
 | Episodic | `.github/prompts/` | 13 files | Workflows, meditation, development |
-| Skills | `.github/skills/` | 77 skills | See `SKILL-CATALOG-GENERATED.md` |
+| Skills | `.github/skills/` | 78 skills | See `SKILL-CATALOG-GENERATED.md` |
 | Episodic Archive | `.github/episodic/` | Variable | Historical session records |
 
 ### VS Code Extension Commands

@@ -1,21 +1,41 @@
 {
-  "expertiseAreas": [],
-  "primaryTechnologies": [],
-  "projectPersona": {
-    "reasons": [],
-    "id": "",
-    "confidence": 0
-  },
-  "currentProjects": [],
-  "explanationStyle": "mixed",
-  "learningGoals": [],
-  "pronouns": "",
-  "nickname": "",
-  "detailLevel": "balanced",
-  "humor": true,
   "formality": "balanced",
-  "name": "",
+  "workStyle": {
+    "mermaidStyle": "GitHub-compatible",
+    "planning": "",
+    "diagrams": ""
+  },
+  "modelPreferences": {
+    "heavyLiftingTasks": [
+      "Meditation/consolidation sessions",
+      "Self-actualization assessments",
+      "Complex multi-file architecture refactoring",
+      "Bootstrap learning (new skill acquisition)"
+    ],
+    "routineTasks": [
+      "Code edits, debugging, simple refactors",
+      "Documentation updates",
+      "File searches and context gathering"
+    ],
+    "default": "claude-opus-4-5",
+    "alertOnHeavyLifting": true
+  },
+  "nickname": "",
+  "expertiseAreas": [],
+  "humor": true,
+  "projectPersona": null,
+  "currentProjects": [],
+  "proactiveSuggestions": true,
+  "explanationStyle": "mixed",
+  "primaryTechnologies": [],
+  "detailLevel": "balanced",
+  "learningGoals": [],
+  "learningStyle": {
+    "preferences": [],
+    "type": "mixed"
+  },
   "questionFrequency": "moderate",
+  "name": "",
   "encouragement": true,
-  "proactiveSuggestions": true
+  "pronouns": ""
 }

@@ -104,7 +104,6 @@ async function gatherKeyFiles(heirGithubPath: string): Promise<{ path: string; c
     // Priority files to check
     const priorityPatterns = [
         'copilot-instructions.md',           // Main identity file
-        'config/USER-PROFILE.md',            // User profile
         'config/user-profile.json',          // User profile JSON
         'instructions/*.md',                 // All instruction files
         'prompts/*.md',                      // All prompt files

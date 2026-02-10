@@ -108,9 +108,8 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 
 | Keep in Heirs | Remove from Heirs |
 | ------------- | ----------------- |
-| `USER-PROFILE-TEMPLATE.md` | Personal `USER-PROFILE.md` |
 | `cognitive-config-template.json` | Personal `cognitive-config.json` |
-| `alex-manifest.json` | Personal `user-profile.json` |
+| `alex-manifest.json` | Personal `user-profile.json` (replaced with starter template) |
 
 **Note**: Heir ships with blank `user-profile.json` template — users populate during first run.
 
