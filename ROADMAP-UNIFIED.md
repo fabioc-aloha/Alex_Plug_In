@@ -1,6 +1,6 @@
-# Alex Cognitive Architecture — Roadmap v5.5-v6.0
+# Alex Cognitive Architecture — Roadmap v5.6-v6.0
 
-> **Phase: Model Intelligence & Enterprise Integration**
+> **Phase: Enterprise Systems Integration**
 
 ---
 
@@ -8,24 +8,17 @@
 
 ### Current State
 
-v5.4.3 is complete. Alex now has:
+v5.5.0 is complete. Alex now has:
 - **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
 - **Text-to-Speech** — Multi-language voice synthesis with 35 test cases
 - **Voice Mode** — Continuous reading, speak prompt, auto-summarization
 - **Keyboard Shortcuts** — Full accessibility support (Ctrl+Alt+R/V/P/D/A)
-- **Heir Automation** — Proper P5-P7 reset, user profile consolidation
-
-v5.5.0 in progress:
-- **Model Tier Detection** ✅ — Classify models as Frontier/Capable/Efficient
-- **Task-Model Matching** ✅ — Warn when cognitive tasks need higher-tier models
-- **Model Selection Advisor** ✅ — `/model` command with upgrade/downgrade recommendations
-- **Model Performance Telemetry** 📋 — Track success rates (optional)
+- **Model Intelligence** — Tier detection, task matching, `/model` advisor
 
 ### Vision Forward
 
 | Phase  | Focus                          | Timeline   |
 | ------ | ------------------------------ | ---------- |
-| v5.5.0 | Model Intelligence             | Feb 2026   |
 | v5.6.0 | Enterprise Systems Integration | Q2-Q3 2026 |
 | v6.0.0 | Semantic Skill Graph           | Q4 2026+   |
 
@@ -38,25 +31,24 @@ v5.5.0 in progress:
 | v5.3.0     | Enterprise Readiness   | Trust at Scale         | ✅ Complete |
 | v5.3.1     | CSP Security Fix       | Secure UX              | ✅ Complete |
 | v5.4.0-3   | Text-to-Speech & Voice | Accessible Cognition   | ✅ Complete |
-| **v5.5.0** | **Model Intelligence** | **Adaptive Cognition** | 🚧 Active   |
-| v5.6.0     | Enterprise Systems     | Deep Orchestration     | 📋 Planned  |
+| v5.5.0     | Model Intelligence     | Adaptive Cognition     | ✅ Complete |
+| **v5.6.0** | **Enterprise Systems** | **Deep Orchestration** | 📋 Planned  |
 | v6.0.0     | Semantic Skill Graph   | Emergent Intelligence  | 📋 Planned  |
 
 ---
 
 ## 🎯 Version Details
 
-### v5.5.0 — Model Intelligence (CURRENT)
+### v5.5.0 — Model Intelligence (COMPLETE)
 
 **Theme**: Smarter model utilization — detect, recommend, and optimize for the running LLM.
 
-| Task                        | Owner  | Effort | Priority | Status | Description                                      |
-| --------------------------- | :----: | :----: | :------: | :----: | ------------------------------------------------ |
-| Model Tier Detection        |  Heir  |   2h   |   High   |   ✅    | Detect running model via VS Code/Copilot API     |
-| Task-Model Matching         | Master |   2h   |   High   |   ✅    | Map cognitive tasks to minimum model tier        |
-| Model Status in /status     |  Heir  |   1h   |   High   |   ✅    | Display current model tier and capabilities      |
-| Model Selection Advisor     |  Heir  |   3h   |  Medium  |   ✅    | `/model` command with upgrade/downgrade advice   |
-| Model Performance Telemetry | Master |   2h   |   Low    |   📋    | Track task success rates per model tier (opt-in) |
+| Task                    | Owner  | Effort | Priority | Status | Description                                    |
+| ----------------------- | :----: | :----: | :------: | :----: | ---------------------------------------------- |
+| Model Tier Detection    |  Heir  |   2h   |   High   |   ✅    | Detect running model via VS Code/Copilot API   |
+| Task-Model Matching     | Master |   2h   |   High   |   ✅    | Map cognitive tasks to minimum model tier      |
+| Model Status in /status |  Heir  |   1h   |   High   |   ✅    | Display current model tier and capabilities    |
+| Model Selection Advisor |  Heir  |   3h   |  Medium  |   ✅    | `/model` command with upgrade/downgrade advice |
 
 **Completed 2026-02-10**:
 - `modelIntelligence.ts` — Tier detection with patterns for Claude, GPT, Gemini
@@ -128,13 +120,14 @@ v5.5.0 in progress:
 
 Items to pull from when capacity frees up:
 
-| Task                           | Owner | Effort | Priority | Description                             |
-| ------------------------------ | :---: | :----: | :------: | --------------------------------------- |
-| Learning Journeys              | Heir  |   3h   |  Medium  | Curated skill progressions              |
-| Session Replay                 | Heir  |   2h   |  Medium  | Save session transcripts + code changes |
-| Skill Recommendations          | Heir  |   3h   |  Medium  | Suggest skills based on file types      |
-| Context-Aware Skill Loading    | Heir  |   2h   |  Medium  | Auto-load skills based on workspace     |
-| Office Add-in (Word/Excel/PPT) | Heir  |   2w   |  Medium  | Alex sidebar in Office apps             |
+| Task                           | Owner  | Effort | Priority | Description                                      |
+| ------------------------------ | :----: | :----: | :------: | ------------------------------------------------ |
+| Local Model Usage Learning     | Master |   2h   |   Low    | Learn from your usage patterns to improve advice |
+| Learning Journeys              |  Heir  |   3h   |  Medium  | Curated skill progressions                       |
+| Session Replay                 |  Heir  |   2h   |  Medium  | Save session transcripts + code changes          |
+| Skill Recommendations          |  Heir  |   3h   |  Medium  | Suggest skills based on file types               |
+| Context-Aware Skill Loading    |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace              |
+| Office Add-in (Word/Excel/PPT) |  Heir  |   2w   |  Medium  | Alex sidebar in Office apps                      |
 
 ---
 
@@ -144,23 +137,24 @@ Items to pull from when capacity frees up:
 - `ROADMAP-UNIFIED-V3.5-V5.3-COMPLETED.md` — Full history v3.5-v5.3.0
 
 **Version History Summary**:
-| Version Range | Theme                  | Completion  |
-| ------------- | ---------------------- | ----------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness       | Jan 2026    |
-| v4.0.x        | Trust (CAIR/CSR)       | Jan 2026    |
-| v4.1.0-v4.3.0 | Skills & Architecture  | Feb 2026    |
-| v5.0.x-v5.2.0 | Team Scaling & UX      | Feb 2026    |
-| v5.3.0        | Enterprise Readiness   | Feb 8, 2026 |
-| v5.3.1        | CSP Security Fix       | Feb 8, 2026 |
-| v5.4.0-v5.4.3 | Text-to-Speech & Voice | Feb 9, 2026 |
+| Version Range | Theme                  | Completion   |
+| ------------- | ---------------------- | ------------ |
+| v3.6.0-v3.9.0 | Dawn → Awareness       | Jan 2026     |
+| v4.0.x        | Trust (CAIR/CSR)       | Jan 2026     |
+| v4.1.0-v4.3.0 | Skills & Architecture  | Feb 2026     |
+| v5.0.x-v5.2.0 | Team Scaling & UX      | Feb 2026     |
+| v5.3.0        | Enterprise Readiness   | Feb 8, 2026  |
+| v5.3.1        | CSP Security Fix       | Feb 8, 2026  |
+| v5.4.0-v5.4.3 | Text-to-Speech & Voice | Feb 9, 2026  |
+| v5.5.0        | Model Intelligence     | Feb 10, 2026 |
 
 ---
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.4.3                         |
-| **Current Heirs**          | VS Code (5.4.3), M365 (5.3.0) |
-| **Next Target**            | 5.5.0                         |
+| **Current Master Version** | 5.5.0                         |
+| **Current Heirs**          | VS Code (5.5.0), M365 (5.3.0) |
+| **Next Target**            | 5.6.0                         |
 | **Updated**                | 2026-02-10                    |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3) |
 
