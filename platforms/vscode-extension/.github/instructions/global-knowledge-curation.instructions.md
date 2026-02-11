@@ -176,4 +176,128 @@ Summary: 2 implemented, 1 retained, 1 archived, 1 deleted
 
 ---
 
+## Skill Inheritance from Global Knowledge
+
+Heirs can **inherit skills** from Global Knowledge rather than creating them from scratch. This enables rapid capability deployment across projects.
+
+### Two Inheritance Sources
+
+| Source | Location | Format | Transformation |
+|--------|----------|--------|----------------|
+| **Skill Registry** | `~/.alex/global-knowledge/skills/` | Ready-to-use folders | Direct copy |
+| **GK Patterns** | `~/.alex/global-knowledge/patterns/GK-*-skill*.md` | Embedded skills | Strip GK header |
+
+### Source 1: Skill Registry (Primary)
+
+The `skill-registry.json` contains 89+ production-ready skills:
+
+```json
+{
+  "skills": [
+    {
+      "id": "database-design",
+      "name": "Database Design",
+      "version": "1.0.0",
+      "inheritance": "inheritable",
+      "category": "engineering",
+      "folder": "database-design",
+      "projectSignals": ["**/schema*", "**/*sql*", "**/prisma*"],
+      "priority": "standard",
+      "tags": ["sql", "nosql", "modeling"]
+    }
+  ]
+}
+```
+
+**Inheritance Process**:
+1. Read `~/.alex/global-knowledge/skills/skill-registry.json`
+2. Filter skills not in project's `.github/skills/`
+3. Copy entire folder: `skills/{folder}/` → `.github/skills/{folder}/`
+4. Add inheritance tracking to `synapses.json`
+
+### Source 2: GK Pattern Extraction (Secondary)
+
+Some skills are embedded in GK pattern files (e.g., `GK-book-publishing-skill.md`):
+
+**Pattern File Structure**:
+```markdown
+# Book Publishing Skill
+
+**ID**: GK-book-publishing-skill  
+**Category**: documentation  
+**Tags**: publishing, pdf, pandoc  
+**Source**: AlexCook  
+**Created**: 2026-02-04T16:05:51.785Z  
+
+---
+
+---
+applyTo: "**/*book*,**/*publish*"
+---
+
+# Book Publishing Skill
+> [Actual skill content starts here]
+```
+
+**Extraction Process**:
+1. Find GK metadata block (ends at first `---\n---`)
+2. Extract content after the YAML frontmatter
+3. Create skill folder with extracted content
+4. Add inheritance tracking
+
+### Inheritance Tracking
+
+Add to the inherited skill's `synapses.json`:
+
+```json
+{
+  "skillId": "database-design",
+  "inheritedFrom": {
+    "source": "global-knowledge",
+    "registryId": "database-design",
+    "version": "1.0.0",
+    "inheritedAt": "2026-02-11T14:30:00Z"
+  },
+  "connections": [...]
+}
+```
+
+### Command: `Alex: Inherit Skill from Global`
+
+**Workflow**:
+```
+1. Load skill-registry.json
+2. Get existing project skills
+3. Compute available = registry - existing
+4. Show QuickPick with:
+   - Skill name and description
+   - Category and tags
+   - projectSignals for relevance
+5. User selects one or more
+6. For each selected:
+   a. Copy skill folder
+   b. Add inheritedFrom tracking
+   c. Log to output channel
+7. Regenerate SKILL-CATALOG-GENERATED.md
+8. Show success notification
+```
+
+### Validation After Inheritance
+
+Run `Alex: Dream (Neural Maintenance)` to validate:
+- Synapse connections are valid
+- No broken references
+- Schema compliance
+
+### When to Inherit vs. Create
+
+| Inherit from Global | Create New |
+|---------------------|------------|
+| Skill exists in registry | Novel domain expertise |
+| Standard patterns (testing, debugging) | Project-specific knowledge |
+| Quick capability deployment | Deep customization needed |
+| Proven, tested skills | Experimental approaches |
+
+---
+
 *Global Knowledge Curation: Keeping the collective memory clean and actionable*

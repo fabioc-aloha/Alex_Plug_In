@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.6.4",
+  "version": "5.6.5",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -315,6 +315,11 @@
         "command": "alex.generateSkillCatalog",
         "title": "Alex: Generate Skill Catalog",
         "icon": "$(list-tree)"
+      },
+      {
+        "command": "alex.inheritSkillFromGlobal",
+        "title": "Alex: Inherit Skill from Global Knowledge",
+        "icon": "$(cloud-download)"
       },
       {
         "command": "alex.importGitHubIssues",

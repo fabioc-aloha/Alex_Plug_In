@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.5] - 2026-02-11
+
+> **Global Knowledge Inheritance** — Skill inheritance command + Bicep AVM mastery
+
+### Added
+
+- **`Alex: Inherit Skill from Global Knowledge`** command — Heirs can pull skills from GK
+  - Multi-select QuickPick for batch skill inheritance
+  - Adds `inheritedFrom` tracking to `synapses.json`
+  - Master Alex protection warning (kill switch aware)
+
+- **`bicep-avm-mastery`** skill — Azure Verified Modules expertise
+  - 328 AVM module awareness via Bicep MCP `list_avm_metadata`
+  - Covers compute, networking, storage, identity, databases
+
+- **Dream inheritance lineage** — Dream reports now show inherited skill tracking
+  - `scanInheritanceLineage()` detects skills inherited from GK
+  - Version drift detection structure (ready for future use)
+
+- **ADR-009** — Global Knowledge sync direction decision documented
+  - Unidirectional: Master → Global → Heirs (no heir push-back)
+
+- **GK Pattern Format Standard v2** — YAML frontmatter with `gk*` prefixes
+  - All 27 GK patterns migrated to new format
+
+### Changed
+
+- Skills updated with MCP extension requirements and fallback patterns:
+  - `azure-architecture-patterns`: Requires Azure MCP, fallback to Azure docs
+  - `infrastructure-as-code`: Requires Bicep MCP, fallback to official docs
+  - `bicep-avm-mastery`: Requires Bicep MCP `list_avm_metadata`
+
+---
+
 ## [5.6.4] - 2026-02-11
 
 > **Release Automation** — Automated sync + skill-only publish path

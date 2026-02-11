@@ -28,6 +28,31 @@ export interface DreamReport {
     repairedSynapses: Synapse[];
     orphanedFiles: string[];
     docCountValidation?: DocCountValidation;
+    inheritanceLineage?: InheritanceLineage;
+}
+
+/**
+ * Inheritance tracking for skills inherited from Global Knowledge
+ */
+export interface InheritanceLineage {
+    inheritedSkills: InheritedSkillInfo[];
+    localSkills: number;
+    versionDriftWarnings: VersionDriftWarning[];
+}
+
+export interface InheritedSkillInfo {
+    skillId: string;
+    source: 'global-knowledge' | 'gk-pattern';
+    registryId?: string;
+    version: string;
+    inheritedAt: string;
+}
+
+export interface VersionDriftWarning {
+    skillId: string;
+    inheritedVersion: string;
+    currentGlobalVersion?: string;
+    message: string;
 }
 
 /**
@@ -269,6 +294,62 @@ export async function validateDocCounts(
 }
 
 /**
+ * Scan skills for inheritance lineage from Global Knowledge
+ */
+export async function scanInheritanceLineage(rootPath: string): Promise<InheritanceLineage> {
+    const skillsPath = path.join(rootPath, '.github', 'skills');
+    const inheritedSkills: InheritedSkillInfo[] = [];
+    let localSkills = 0;
+    const versionDriftWarnings: VersionDriftWarning[] = [];
+    
+    if (!await fs.pathExists(skillsPath)) {
+        return { inheritedSkills, localSkills, versionDriftWarnings };
+    }
+    
+    try {
+        const entries = await fs.readdir(skillsPath, { withFileTypes: true });
+        
+        for (const entry of entries) {
+            if (!entry.isDirectory()) {continue;}
+            
+            const synapsesPath = path.join(skillsPath, entry.name, 'synapses.json');
+            
+            if (await fs.pathExists(synapsesPath)) {
+                try {
+                    const synapsesContent = await fs.readFile(synapsesPath, 'utf8');
+                    const synapses = JSON.parse(synapsesContent);
+                    
+                    if (synapses.inheritedFrom) {
+                        const inherited = synapses.inheritedFrom;
+                        inheritedSkills.push({
+                            skillId: synapses.skillId || entry.name,
+                            source: inherited.source || 'global-knowledge',
+                            registryId: inherited.registryId,
+                            version: inherited.version || 'unknown',
+                            inheritedAt: inherited.inheritedAt || 'unknown'
+                        });
+                        
+                        // Check for version drift (placeholder - would need GK access)
+                        // In future: compare inherited.version to current GK version
+                    } else {
+                        localSkills++;
+                    }
+                } catch {
+                    // Invalid JSON or missing file
+                    localSkills++;
+                }
+            } else {
+                localSkills++;
+            }
+        }
+    } catch {
+        // Skills directory not readable
+    }
+    
+    return { inheritedSkills, localSkills, versionDriftWarnings };
+}
+
+/**
  * Check if a synapse target file exists
  */
 export async function validateSynapseTarget(
@@ -478,7 +559,11 @@ export async function runDreamCore(
     progress('Validating documentation counts...');
     const docCountValidation = await validateDocCounts(rootPath);
     
-    // 7. Generate report
+    // 7. Scan for inherited skills
+    progress('Checking inheritance lineage...');
+    const inheritanceLineage = await scanInheritanceLineage(rootPath);
+    
+    // 8. Generate report
     const report: DreamReport = {
         timestamp: new Date().toISOString(),
         totalFiles: allFiles.length,
@@ -486,7 +571,8 @@ export async function runDreamCore(
         brokenSynapses,
         repairedSynapses,
         orphanedFiles: [],
-        docCountValidation
+        docCountValidation,
+        inheritanceLineage
     };
     
     return { report, synapses: allSynapses };
@@ -534,6 +620,72 @@ ${validation.checks.map(c => {
 }
 
 /**
+ * Generate inheritance lineage section for report
+ */
+function generateInheritanceSection(lineage: InheritanceLineage): string {
+    const total = lineage.inheritedSkills.length + lineage.localSkills;
+    
+    if (lineage.inheritedSkills.length === 0 && lineage.versionDriftWarnings.length === 0) {
+        return `
+## 🧬 Skill Inheritance Lineage
+
+> All ${total} skills were developed locally (no Global Knowledge inheritance).
+
+---
+
+`;
+    }
+    
+    let section = `
+## 🧬 Skill Inheritance Lineage
+
+| Source | Count |
+|--------|-------|
+| 🌐 Inherited from Global Knowledge | ${lineage.inheritedSkills.length} |
+| 📝 Developed Locally | ${lineage.localSkills} |
+| **Total** | **${total}** |
+
+`;
+
+    if (lineage.inheritedSkills.length > 0) {
+        section += `
+### Inherited Skills
+
+| Skill | Source | Version | Inherited |
+|-------|--------|---------|-----------|
+${lineage.inheritedSkills.map(s => {
+    const date = s.inheritedAt !== 'unknown' 
+        ? new Date(s.inheritedAt).toLocaleDateString() 
+        : 'unknown';
+    return `| ${s.skillId} | ${s.source} | v${s.version} | ${date} |`;
+}).join('\n')}
+
+`;
+    }
+    
+    if (lineage.versionDriftWarnings.length > 0) {
+        section += `
+### ⚠️ Version Drift Warnings
+
+> Some inherited skills may have newer versions in Global Knowledge.
+
+| Skill | Inherited | Global | Action |
+|-------|-----------|--------|--------|
+${lineage.versionDriftWarnings.map(w => 
+    `| ${w.skillId} | v${w.inheritedVersion} | v${w.currentGlobalVersion || '?'} | Consider re-inheriting |`
+).join('\n')}
+
+`;
+    }
+    
+    section += `---
+
+`;
+    
+    return section;
+}
+
+/**
  * Generate markdown report content with Alex branding
  */
 export function generateReportMarkdown(report: DreamReport): string {
@@ -548,6 +700,9 @@ export function generateReportMarkdown(report: DreamReport): string {
     
     // Generate doc count validation section
     const docCountSection = report.docCountValidation ? generateDocCountSection(report.docCountValidation) : '';
+    
+    // Generate inheritance lineage section
+    const inheritanceSection = report.inheritanceLineage ? generateInheritanceSection(report.inheritanceLineage) : '';
     
     return `# 🧠 Alex Dream Protocol Report
 
@@ -568,8 +723,7 @@ export function generateReportMarkdown(report: DreamReport): string {
 | 🔧 Auto-Repaired | ${report.repairedSynapses.length} |
 
 ---
-${docCountSection}
-## 🔧 Repaired Synapses
+${docCountSection}${inheritanceSection}## 🔧 Repaired Synapses
 
 ${report.repairedSynapses.length === 0 ? '> _No repairs needed. All synapses were healthy._' : 
 `| Source | Old Target | New Target |

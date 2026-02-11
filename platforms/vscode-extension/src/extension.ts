@@ -28,6 +28,7 @@ import {
 } from "./commands/session";
 import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
+import { inheritSkillFromGlobal } from "./commands/inheritSkill";
 import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
@@ -2540,6 +2541,21 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
   context.subscriptions.push(skillCatalogDisposable);
+
+  // Inherit Skill from Global Knowledge command
+  const inheritSkillDisposable = vscode.commands.registerCommand(
+    "alex.inheritSkillFromGlobal",
+    async () => {
+      const endLog = telemetry.logTimed("command", "inherit_skill_from_global");
+      try {
+        await inheritSkillFromGlobal();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+  context.subscriptions.push(inheritSkillDisposable);
 
   // GitHub Integration commands (D1, D2)
   const importGitHubIssuesDisposable = vscode.commands.registerCommand(
