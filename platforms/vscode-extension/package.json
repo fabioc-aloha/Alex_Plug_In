@@ -322,6 +322,11 @@
         "icon": "$(cloud-download)"
       },
       {
+        "command": "alex.setupGlobalKnowledge",
+        "title": "Alex: Setup Global Knowledge",
+        "icon": "$(cloud)"
+      },
+      {
         "command": "alex.importGitHubIssues",
         "title": "Alex: Import GitHub Issues as Goals",
         "icon": "$(github)"

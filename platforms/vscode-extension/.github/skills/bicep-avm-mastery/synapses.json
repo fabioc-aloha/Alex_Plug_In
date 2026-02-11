@@ -1,0 +1,39 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "inheritance": "inheritable",
+    "version": "1.0.0",
+    "skill": "bicep-avm-mastery",
+    "created": "2026-02-11",
+    "connectionCount": 3,
+    "connections": [],
+    "synapses": [
+        {
+            "id": "BICEP-001",
+            "source": "bicep-avm-mastery",
+            "target": "infrastructure-as-code",
+            "type": "extends",
+            "strength": 0.95,
+            "description": "Bicep is an IaC tool covered in depth here",
+            "bidirectional": true
+        },
+        {
+            "id": "BICEP-002",
+            "source": "bicep-avm-mastery",
+            "target": "azure-architecture-patterns",
+            "type": "implements",
+            "strength": 0.9,
+            "description": "Bicep deploys architectures designed with WAF",
+            "bidirectional": true
+        },
+        {
+            "id": "BICEP-003",
+            "source": "bicep-avm-mastery",
+            "target": "azure-devops-automation",
+            "type": "uses",
+            "strength": 0.75,
+            "description": "CI/CD pipelines deploy Bicep code",
+            "bidirectional": false
+        }
+    ]
+}

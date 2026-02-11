@@ -29,6 +29,7 @@ import {
 import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
 import { inheritSkillFromGlobal } from "./commands/inheritSkill";
+import { ensureGlobalKnowledgeSetup, setupGlobalKnowledgeCommand } from "./commands/setupGlobalKnowledge";
 import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
@@ -158,6 +159,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   } catch (err) {
     console.warn('[Alex] Failed to initialize GK secrets:', err);
   }
+  
+  // Auto-setup Global Knowledge if not configured (non-blocking)
+  ensureGlobalKnowledgeSetup().catch(err => {
+    console.warn('[Alex] Global Knowledge auto-setup skipped:', err);
+  });
+  
   registerGlobalKnowledgeTools(context);
 
   // Register context menu commands (Ask Alex, Save to Knowledge, Search Related)
@@ -2556,6 +2563,21 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
   context.subscriptions.push(inheritSkillDisposable);
+
+  // Setup Global Knowledge command
+  const setupGKDisposable = vscode.commands.registerCommand(
+    "alex.setupGlobalKnowledge",
+    async () => {
+      const endLog = telemetry.logTimed("command", "setup_global_knowledge");
+      try {
+        await setupGlobalKnowledgeCommand();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+  context.subscriptions.push(setupGKDisposable);
 
   // GitHub Integration commands (D1, D2)
   const importGitHubIssuesDisposable = vscode.commands.registerCommand(

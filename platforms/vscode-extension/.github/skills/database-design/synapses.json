@@ -1,0 +1,77 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "database-design",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/api-design/SKILL.md",
+            "type": "informs",
+            "strength": 0.85,
+            "note": "Database schema shapes API data contracts"
+        },
+        {
+            "target": ".github/skills/performance-profiling/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "note": "Query profiling is database-specific performance work"
+        },
+        {
+            "target": ".github/skills/infrastructure-as-code/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "note": "Database provisioning often via IaC"
+        },
+        {
+            "target": ".github/skills/security-review/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "Database access control, encryption, PII handling"
+        },
+        {
+            "target": ".github/skills/refactoring-patterns/SKILL.md",
+            "type": "analogousDomain",
+            "strength": 0.7,
+            "note": "Schema migrations parallel code refactoring"
+        },
+        {
+            "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "note": "Azure SQL, Cosmos DB patterns"
+        }
+    ],
+    "activationBoost": [
+        "database",
+        "schema",
+        "SQL",
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Prisma",
+        "Drizzle",
+        "ORM",
+        "migration",
+        "normalization",
+        "index",
+        "query optimization",
+        "Cosmos DB",
+        "DynamoDB"
+    ],
+    "triggers": [
+        "database design",
+        "schema design",
+        "data modeling",
+        "query optimization",
+        "database migration",
+        "SQL query",
+        "index strategy",
+        "normalization"
+    ],
+    "inhibitors": [
+        "in-memory only",
+        "no persistence needed"
+    ]
+}

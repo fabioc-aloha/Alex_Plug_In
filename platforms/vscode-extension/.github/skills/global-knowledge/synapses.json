@@ -50,6 +50,12 @@
       "type": "validates",
       "strength": 0.85,
       "reason": "Schema integrity checks for index entries"
+    },
+    {
+      "target": "external:Alex-Global-Knowledge/skills/skill-registry.json",
+      "type": "distributes",
+      "strength": 0.9,
+      "reason": "Wishlist tracking and skill distribution to heirs"
     }
   ],
   "triggers": [
