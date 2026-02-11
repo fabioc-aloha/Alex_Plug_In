@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.3] - 2026-02-11
+
+### Fixed
+
+- **Skill sync hotfix**: 4 new skills were missing from v5.6.2 package
+  - `skill-development`, `proactive-assistance`, `status-reporting`, `scope-management` now included
+  - Heir now has 90 skills (6 correctly excluded: 4 master-only + 2 m365-only)
+
+---
+
+## [5.6.2] - 2026-02-11
+
+> **Skill Pull-Sync & Proactive Skills** — 4 new skills, heir pull mechanism
+
+### Added
+
+- **Skill Pull-Sync Mechanism**: Heirs can now pull new skills from Global Knowledge
+  - `skills/skill-registry.json` in GK repo lists available skills
+  - `/checkskills` — Discover new skills available
+  - `/pullskill <id>` — Install skill from GK
+  - `/skillsignal` — Report frequently needed wishlist skills
+  - `/fulfillwish <id>` — Practice wishlist skill in project context
+  - Project-skill matching: Detect project type and recommend relevant skills
+
+- **4 New Skills** (93→96):
+  - `skill-development` — Track desired skills, contextual acquisition, growth mindset
+  - `proactive-assistance` — Anticipate user needs, offer help before asked
+  - `status-reporting` — Stakeholder-friendly project updates and progress reports
+  - `scope-management` — Recognize scope creep, suggest MVP cuts
+
+### Changed
+
+- `global-knowledge-sync` — Added skills/ folder support and skill sync capability
+- Updated skill-activation index with new skill triggers
+- Updated SKILLS-CATALOG.md and SKILL-CATALOG-GENERATED.md
+
+---
+
 ## [5.6.1] - 2026-02-10
 
 ### Changed

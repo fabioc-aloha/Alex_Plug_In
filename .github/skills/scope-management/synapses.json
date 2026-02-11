@@ -1,0 +1,52 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "scope-management",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/proactive-assistance/SKILL.md",
+            "type": "Triggered-by",
+            "strength": 0.85,
+            "when": "complexity growth detected in session",
+            "yields": "proactive scope check suggestions"
+        },
+        {
+            "target": ".github/skills/status-reporting/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.8,
+            "when": "including scope health in status updates",
+            "yields": "scope metrics for stakeholder reports"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "Extends",
+            "strength": 0.9,
+            "when": "managing project boundaries and backlog",
+            "yields": "MVP definition and prioritization"
+        },
+        {
+            "target": ".github/skills/alex-effort-estimation/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.85,
+            "when": "scope changes affect estimates",
+            "yields": "re-estimation triggers and impact analysis"
+        },
+        {
+            "target": ".github/skills/root-cause-analysis/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.7,
+            "when": "investigating why scope keeps growing",
+            "yields": "root cause of scope creep patterns"
+        },
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.65,
+            "when": "helping stakeholders accept scope cuts",
+            "yields": "diplomatic communication approaches"
+        }
+    ]
+}

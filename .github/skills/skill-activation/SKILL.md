@@ -93,6 +93,7 @@ Search this index when processing any task request:
 | project-management | manage project, rapid iteration, session workflow, planning document |
 | project-scaffolding | scaffold project, create readme, init repo, hero banner, new project |
 | prompt-engineering | write prompt, chain of thought, few-shot, prompt template, system prompt |
+| proactive-assistance | anticipate needs, offer help, suggest next, nudge user, help before asked |
 | rag-architecture | build rag, vector search, embeddings, retrieval augmented, chunking |
 | refactoring-patterns | refactor code, extract function, code smell, safe refactor, inline |
 | release-preflight | preflight check, version sync, pre-release, bump version, validate release |
@@ -100,12 +101,14 @@ Search this index when processing any task request:
 | research-project-scaffold | scaffold research, literature matrix, research plan, data dictionary |
 | root-cause-analysis | find root cause, 5 whys, cause category, timeline analysis, fix prevent |
 | rubber-duck-debugging | explain problem, thinking partner, stuck debugging, talk through |
+| scope-management | scope creep, reduce scope, mvp, cut features, out of scope, defer |
 | security-review | security audit, owasp check, vulnerability scan, auth review, stride |
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
 | skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
 | skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
 | slide-design | design slides, slide layout, presentation design, visual slides, deck styling |
 | socratic-questioning | ask questions, discover answer, probe assumption, socratic method |
+| status-reporting | status update, progress report, weekly update, stakeholder email, sprint summary |
 | svg-graphics | create svg, svg banner, svg icon, dark mode svg, scalable graphic |
 | teams-app-patterns | teams app, teams manifest, adaptive card, teams bot, teams sso |
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd |

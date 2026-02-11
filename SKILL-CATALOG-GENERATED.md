@@ -1,10 +1,11 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-02-10
-> Total Skills: **92** (82 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
+> Generated: 2026-02-11
+> Total Skills: **96** (86 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
 > ⚠️ **Note**: This catalog is a simplified network diagram. See [alex_docs/skills/SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md) for complete inventory.
 > 🎉 **+12 skills promoted from sandbox heir** (frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling, slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense, azure-architecture-patterns, azure-devops-automation, airs-integration)
 > 🆕 **+1 meta-skill**: skill-building (guides heirs in creating promotable skills)
+> 🆕 **+1 growth skill**: skill-development (track wishlist, contextual skill acquisition)
 
 ---
 
@@ -27,6 +28,7 @@ flowchart LR
     subgraph Empathy["💚 Empathy & Coaching"]
         FR[frustration-recognition]
         CT[coaching-techniques]
+        PA[proactive-assistance]
     end
     subgraph Research["📚 Academic Research"]
         APD[academic-paper-drafting]
@@ -47,6 +49,7 @@ flowchart LR
         SA[self-actualization]
         SCG[skill-catalog-generator]
         SB[skill-building]
+        SDV[skill-development]
     end
     subgraph Documentation["📝 Documentation"]
         AAA[ascii-art-alignment]
@@ -85,6 +88,8 @@ flowchart LR
         IR[incident-response]
         RPF[release-preflight]
         RCA[root-cause-analysis]
+        SM[scope-management]
+        SR[status-reporting]
     end
     subgraph Visual["🎨 Visual"]
         IH[image-handling]
@@ -157,6 +162,14 @@ flowchart LR
     SA -.-> ARF
     SB --> BL & HC & SCG
     SB -.-> KS & ARF
+    SDV --> SB & BL & SA & M
+    SDV -.-> FR & CT & CL
+    PA --> FR & CL & SR & SM
+    PA -.-> ES
+    SR --> PA & SM & ES
+    SR -.-> GW
+    SM --> PA & SR & RCA
+    SM -.-> CT
     SCG --> MM & AH & KS
     SCG -.-> LP & PS
     SG --> PS & IH & MM
@@ -180,7 +193,7 @@ flowchart LR
     class CPP,VEP vscode
     class MAD,TAP m365
     class AR,AH,AAA,BL,CR,CL,DP,ERP,GW,IH,IR,LP,LCM,MM,MS,PRA,PS,RP,RCA,SCG,SG,TS,VE,WP,AAP,ADA inheritable
-    class FR,CT,APD,LR,CM,DD,AI,DW,ES,SD newskill
+    class FR,CT,APD,LR,CM,DD,AI,DW,ES,SD,SDV,PA,SR,SM newskill
     class CPP,GW,LMS,MAD,MS,PRA,TAP,VEP stale
 ```
 
@@ -206,9 +219,9 @@ flowchart LR
 
 ## Skills in Network Diagram
 
-> Skills shown below are those with synaptic connections. For complete 91-skill inventory, see [SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md).
+> Skills shown below are those with synaptic connections. For complete 93-skill inventory, see [SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md).
 
-### 💚 NEW - Promoted from Heir (12)
+### 💚 NEW - Promoted from Heir (13)
 
 | Skill                       | Category     | Connections |
 | --------------------------- | ------------ | ----------- |
@@ -224,6 +237,7 @@ flowchart LR
 | slide-design                | Productivity | 2           |
 | azure-architecture-patterns | Azure        | 2           |
 | azure-devops-automation     | Azure        | 2           |
+| skill-development           | Architecture | 7           |
 
 ### 🧊 Inheritable (29 shown)
 
