@@ -2047,7 +2047,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run clean && npm run package",
+    "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run package",
+    "sync-architecture": "node scripts/sync-architecture.js",
     "clean": "node -e \"const fs=require('fs');['dist','out'].forEach(d=>{if(fs.existsSync(d)){fs.rmSync(d,{recursive:true});console.log('Cleaned '+d+'/')}})\"",
     "compile": "npm run check-types && node esbuild.js",
     "check-types": "tsc --noEmit",

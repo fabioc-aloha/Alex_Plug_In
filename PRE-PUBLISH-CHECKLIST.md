@@ -87,11 +87,57 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 
 ## 🧠 Architecture Sync
 
-**IMPORTANT**: The cognitive architecture files live in the root `.github/` folder but must be synced to `platforms/vscode-extension/.github/` before packaging.
+**CRITICAL**: The cognitive architecture files live in the root `.github/` folder but must be synced to `platforms/vscode-extension/.github/` before packaging.
 
-- [ ] Run `npm run sync-architecture` in the extension folder
-- [ ] Verify `.github/` folder contains: instructions/, prompts/, episodic/, domain-knowledge/, config/, agents/, skills/
-- [ ] This sync runs automatically during `vscode:prepublish` but can be run manually
+### Automatic Sync (Recommended)
+
+The sync now runs **automatically** during `vscode:prepublish`:
+
+```powershell
+cd platforms/vscode-extension
+npx vsce package --no-dependencies  # Triggers sync automatically
+```
+
+### Manual Sync (If Needed)
+
+```powershell
+cd platforms/vscode-extension
+npm run sync-architecture
+```
+
+### Verify Skill Counts
+
+- [ ] **After sync**, verify skill counts match expectations:
+
+```powershell
+# Quick count check
+$master = (Get-ChildItem "../../.github/skills" -Directory).Count
+$heir = (Get-ChildItem ".github/skills" -Directory).Count
+Write-Host "Master: $master, Heir: $heir"
+
+# Detailed check (shows what's excluded)
+$missing = (Get-ChildItem "../../.github/skills" -Directory).Name |
+  Where-Object { $_ -notin (Get-ChildItem ".github/skills" -Directory).Name }
+$missing | ForEach-Object {
+  $inh = (Get-Content "../../.github/skills/$_/synapses.json" | ConvertFrom-Json).inheritance
+  Write-Host "  $_ : $inh"
+}
+```
+
+**Expected exclusions** (should NOT be in heir):
+- `master-only`: heir-curation, master-alex-audit, release-preflight, release-process
+- `heir:m365`: m365-agent-debugging, teams-app-patterns
+
+### What Gets Synced
+
+| Source                                 | Destination                  | Rule                                 |
+| -------------------------------------- | ---------------------------- | ------------------------------------ |
+| Root `.github/skills/*`                | Heir `.github/skills/`       | Copy if `inheritable` or `universal` |
+| Root `.github/instructions/`           | Heir `.github/instructions/` | Always copy                          |
+| Root `.github/prompts/`                | Heir `.github/prompts/`      | Always copy                          |
+| Root `.github/config/`                 | Heir `.github/config/`       | Always copy                          |
+| Root `.github/agents/`                 | Heir `.github/agents/`       | Always copy                          |
+| Root `.github/copilot-instructions.md` | Heir                         | Always copy                          |
 
 ## 📖 Documentation
 
