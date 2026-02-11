@@ -153,3 +153,60 @@ weak/minimal → 0.3
 ---
 
 *Skills are earned through doing, not declared by planning.*
+---
+
+## Reverse Flow: Wishlist Fulfillment
+
+> How Master Alex fulfills wishlist items and distributes to heirs
+
+### The Wishlist Feedback Loop
+
+```
+┌─────────────┐  signals   ┌──────────────────┐  fulfills  ┌─────────────────┐
+│    Heirs    │──────────▶│    Wishlist      │───────────▶│   Master Alex   │
+│ (projects)  │           │ skill-registry   │            │ creates skill   │
+└─────────────┘           └──────────────────┘            └────────┬────────┘
+       ▲                                                          │
+       │                   ┌──────────────────┐                   │
+       └───────────────────│ Global Knowledge │◀──────────────────┘
+            pulls          │ skills/          │     pushes
+                           └──────────────────┘
+```
+
+### When Master Fulfills Wishlist
+
+1. **Review wishlist** in `skill-registry.json` (prioritize "high" items)
+2. **Create skill** in Master's `.github/skills/{skill-name}/`
+3. **Push to Global Knowledge**: `Copy-Item -Recurse` to `Alex-Global-Knowledge/skills/`
+4. **Update registry**: Move from `wishlist.items` to `recentlyFulfilled`
+5. **Commit both repos**: Master Alex + Global Knowledge
+
+### Wishlist Item Lifecycle
+
+| Status | Location | Meaning |
+|--------|----------|---------|
+| **Pending** | `wishlist.items[]` | Skill requested but not yet built |
+| **Fulfilled** | `recentlyFulfilled[]` + `skills[]` | Skill built and available |
+| **Already exists** | `fulfilledBy` field | Wishlist item covered by existing skill |
+
+### Example: February 2026 Batch
+
+```json
+{
+  "recentlyFulfilled": [
+    { "id": "multi-agent-orchestration", "fulfilledBy": "multi-agent-orchestration", "fulfilledDate": "2026-02-11" },
+    { "id": "observability-monitoring", "fulfilledBy": "observability-monitoring", "fulfilledDate": "2026-02-11" },
+    { "id": "database-design", "fulfilledBy": "database-design", "fulfilledDate": "2026-02-11" },
+    { "id": "performance-profiling", "fulfilledBy": "performance-profiling", "fulfilledDate": "2026-02-11" }
+  ]
+}
+```
+
+### Heir Discovery
+
+Heirs detect new skills via:
+- `/checkskills` command
+- Session start auto-check (if enabled)
+- Project type matching against `projectSignals`
+
+**Synapse**: [Alex-Global-Knowledge/skills/skill-registry.json] (High, Indexes, Bidirectional) - "wishlist tracking and skill distribution"
