@@ -210,3 +210,44 @@ Heirs detect new skills via:
 - Project type matching against `projectSignals`
 
 **Synapse**: [Alex-Global-Knowledge/skills/skill-registry.json] (High, Indexes, Bidirectional) - "wishlist tracking and skill distribution"
+---
+
+## Extension Commands: Skill Inheritance
+
+### `Alex: Inherit Skill from Global Knowledge`
+
+Manual command for heirs to pull skills from Global Knowledge:
+
+```
+Command Palette → Alex: Inherit Skill from Global Knowledge
+```
+
+**Features**:
+- Multi-select QuickPick (batch inheritance)
+- Shows only `inheritance: "inheritable"` skills not already present
+- Adds `inheritedFrom` tracking to `synapses.json`
+- Master Alex protection warning (kill switch aware)
+
+**Inheritance Tracking**:
+```json
+{
+  "inheritedFrom": {
+    "source": "global-knowledge",
+    "registryId": "bicep-avm-mastery",
+    "version": "1.0.0",
+    "inheritedAt": "2026-02-11T15:00:00Z"
+  }
+}
+```
+
+### `Alex: Setup Global Knowledge`
+
+Configure Global Knowledge location:
+
+1. **Developer mode**: Links existing repo via junction symlink
+2. **End user mode**: Clones from GitHub to `~/.alex/global-knowledge/`
+
+**Auto-setup** runs silently on extension activation.
+
+**Synapse**: [platforms/vscode-extension/src/commands/inheritSkill.ts] (High, Implements, Forward) - "skill inheritance command"
+**Synapse**: [platforms/vscode-extension/src/commands/setupGlobalKnowledge.ts] (High, Implements, Forward) - "auto-setup functionality"
