@@ -1,0 +1,75 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "observability-monitoring",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/performance-profiling/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "note": "Observability identifies issues, profiling digs deeper"
+        },
+        {
+            "target": ".github/skills/incident-response/SKILL.md",
+            "type": "supports",
+            "strength": 0.95,
+            "note": "Observability data is critical during incident investigation"
+        },
+        {
+            "target": ".github/skills/infrastructure-as-code/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "Monitoring stack often deployed via IaC"
+        },
+        {
+            "target": ".github/skills/security-review/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "note": "Audit logging is part of observability"
+        },
+        {
+            "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+            "type": "informs",
+            "strength": 0.8,
+            "note": "Azure Monitor, App Insights integration"
+        },
+        {
+            "target": ".github/skills/debugging-patterns/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "note": "Distributed tracing enables production debugging"
+        }
+    ],
+    "activationBoost": [
+        "observability",
+        "monitoring",
+        "logging",
+        "metrics",
+        "traces",
+        "telemetry",
+        "OpenTelemetry",
+        "Prometheus",
+        "Grafana",
+        "Application Insights",
+        "CloudWatch",
+        "alerting",
+        "dashboard"
+    ],
+    "triggers": [
+        "observability",
+        "monitoring",
+        "logging strategy",
+        "metrics",
+        "distributed tracing",
+        "alerting",
+        "OpenTelemetry",
+        "production debugging"
+    ],
+    "inhibitors": [
+        "local development only",
+        "prototype"
+    ]
+}

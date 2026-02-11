@@ -1,0 +1,71 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "multi-agent-orchestration",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/appropriate-reliance/SKILL.md",
+            "type": "requires",
+            "strength": 0.9,
+            "note": "Must calibrate trust in delegated agent outputs"
+        },
+        {
+            "target": ".github/skills/prompt-engineering/SKILL.md",
+            "type": "requires",
+            "strength": 0.85,
+            "note": "Effective delegation requires well-crafted prompts"
+        },
+        {
+            "target": ".github/skills/skill-activation/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "SSO is a form of self-orchestration"
+        },
+        {
+            "target": ".github/skills/root-cause-analysis/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "note": "Debugging multi-agent failures requires systematic analysis"
+        },
+        {
+            "target": ".github/skills/llm-model-selection/SKILL.md",
+            "type": "informs",
+            "strength": 0.85,
+            "note": "Different agents may need different model tiers"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "analogousDomain",
+            "strength": 0.7,
+            "note": "Task decomposition parallels project planning"
+        }
+    ],
+    "activationBoost": [
+        "agent",
+        "multi-agent",
+        "orchestration",
+        "subagent",
+        "runSubagent",
+        "decompose",
+        "delegate",
+        "parallel",
+        "workflow",
+        "coordinate"
+    ],
+    "triggers": [
+        "multi-agent",
+        "orchestration",
+        "subagent",
+        "agent coordination",
+        "task decomposition",
+        "parallel execution",
+        "agent delegation"
+    ],
+    "inhibitors": [
+        "simple edit",
+        "single file change"
+    ]
+}
