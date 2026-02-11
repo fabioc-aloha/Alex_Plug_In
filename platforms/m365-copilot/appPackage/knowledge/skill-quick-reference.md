@@ -1,8 +1,8 @@
 # Alex Skills - Quick Reference
 
-> 16 core skills that shape how Alex thinks — from a catalog of 77 across all platforms
+> 16 core skills that shape how Alex thinks — from a catalog of 101 across all platforms
 
-These are the skills most relevant to M365 interactions. Alex has 77 total skills across platforms (including code-specific skills in VS Code).
+These are the skills most relevant to M365 interactions. Alex has 101 total skills across platforms (including code-specific skills in VS Code).
 
 ---
 
