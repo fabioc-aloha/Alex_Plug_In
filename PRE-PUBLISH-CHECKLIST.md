@@ -4,7 +4,42 @@ Use this checklist before each release to ensure quality and consistency.
 
 ---
 
-## 🔐 Authentication
+## � Decision: Skill-Only vs Full Release
+
+**First, determine what changed:**
+
+```powershell
+# Check what's changed since last release
+git diff --name-only HEAD~5
+```
+
+### If changes are ONLY in `.github/skills/`:
+
+- [ ] **Use Global Knowledge push** — no extension update needed!
+
+```powershell
+cd platforms/vscode-extension
+npm run push-skills-to-global
+```
+
+This will:
+1. Update `Alex-Global-Knowledge/skills/skill-registry.json`
+2. Commit and push to GK repo
+3. Tell you to notify heirs
+
+**Tell heirs** to sync: `/knowledge sync-skills` or run `Alex: Sync Skills from Global Knowledge`
+
+✅ **Done!** Skip the rest of this checklist.
+
+---
+
+### If changes include code, instructions, or prompts:
+
+Continue with the full release process below.
+
+---
+
+## �🔐 Authentication
 
 ⚠️ **PATs expire frequently** — Create a new one before EACH publish session.
 
