@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.4] - 2026-02-11
+
+> **Release Automation** — Automated sync + skill-only publish path
+
+### Added
+
+- **`sync-architecture.js`** — Automated master→heir sync during prepublish
+  - Copies skills (respects inheritance), instructions, prompts, config, agents
+  - Validates skill counts after sync
+  - Prevents "missing skills" bugs like v5.6.2
+
+- **`push-skills-to-global.js`** — Skill-only updates without extension release
+  - Updates `Alex-Global-Knowledge/skills/skill-registry.json`
+  - Auto-commits and pushes to GK repo
+  - For when only skills change, heirs pull from GK instead
+
+### Changed
+
+- `vscode:prepublish` now runs `sync-architecture` automatically
+- `PRE-PUBLISH-CHECKLIST.md` updated with decision branch: skill-only vs full release
+
+---
+
 ## [5.6.3] - 2026-02-11
 
 ### Fixed

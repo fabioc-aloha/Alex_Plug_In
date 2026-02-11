@@ -27,7 +27,7 @@ After creating the repo, initialize the structure:
 
 ```powershell
 # Create folders
-mkdir patterns, insights
+mkdir patterns, insights, skills
 
 # Create index.json
 @'
@@ -47,6 +47,7 @@ Cross-project learnings for Alex Cognitive Architecture.
 ## Structure
 - `patterns/` - Reusable solutions (GK-*.md)
 - `insights/` - Timestamped learnings (GI-*.md)
+- `skills/` - Skill registry for pull-sync
 - `index.json` - Master search index
 
 ## Usage
@@ -117,6 +118,38 @@ Promote a project's domain-knowledge file to global pattern.
 2. Convert to GK format with proper frontmatter
 3. Add source project attribution
 4. Save to `patterns/` folder
+
+### 5. Skill Pull-Sync (For Heirs)
+Discover and pull new skills from the GK repository.
+
+**Trigger**: `/checkskills`, session start (if auto-check enabled)
+
+**Process**:
+1. Read `skills/skill-registry.json` from GK
+2. Compare against local skills
+3. Report new/updated skills available
+4. Pull on demand via `/pullskill <id>`
+
+**Registry Structure** (`skills/skill-registry.json`):
+```json
+{
+  "version": "1.0.0",
+  "skills": [
+    {
+      "id": "skill-development",
+      "version": "1.0.0",
+      "inheritance": "inheritable",
+      "priority": "core",
+      "source": "master-alex"
+    }
+  ],
+  "wishlist": [...],
+  "projectTypeMatching": {...}
+}
+```
+
+**Project-Skill Matching**:
+Heirs detect project type and recommend relevant wishlist skills. See [skill-development](../skill-development/SKILL.md) for full protocol.
 
 ## Integration Points
 

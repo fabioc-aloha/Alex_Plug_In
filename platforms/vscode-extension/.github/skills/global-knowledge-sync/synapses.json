@@ -40,6 +40,12 @@
             "type": "accelerates",
             "strength": 0.7,
             "reason": "Problem Solving starter pattern includes rubber duck method"
+        },
+        {
+            "target": ".github/skills/skill-development/SKILL.md",
+            "type": "enables",
+            "strength": 0.85,
+            "reason": "Skill pull-sync enables heir wishlist fulfillment"
         }
     ],
     "triggers": [
@@ -48,6 +54,10 @@
         "promote to global",
         "sync knowledge",
         "global knowledge sync",
-        "gk sync"
+        "gk sync",
+        "checkskills",
+        "check skills",
+        "pullskill",
+        "pull skill"
     ]
 }

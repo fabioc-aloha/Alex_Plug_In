@@ -1,41 +1,98 @@
 {
-  "learningGoals": [],
-  "currentProjects": [],
-  "detailLevel": "balanced",
-  "projectPersona": null,
-  "nickname": "",
-  "humor": true,
-  "formality": "balanced",
+  "name": "Fabio Correa",
+  "lastUpdated": "2026-02-07T00:00:00.000Z",
+  "location": "Charlotte, NC",
+  "role": "Director of Business Analytics at Microsoft",
+  "credentials": [
+    "DBA Candidate (Doctor of Business Administration)",
+    "AI Researcher",
+    "Creator of Alex Cognitive Architecture"
+  ],
+  "projectPersona": {
+    "id": "developer",
+    "confidence": 0.95,
+    "detectedAt": "2026-02-07T00:00:00.000Z",
+    "reasons": [
+      "Project is a VS Code extension (package.json with vscode engine)",
+      "Heavy TypeScript codebase under platforms/vscode-extension/src/",
+      "Extension APIs, chat participants, language model tools",
+      "Active development with CI/CD workflows"
+    ]
+  },
+  "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate.",
+  "primaryTechnologies": [
+    "Azure OpenAI",
+    "TypeScript",
+    "VS Code Extensions",
+    "Microsoft 365 Copilot",
+    "AI/ML"
+  ],
+  "expertiseAreas": [
+    "Responsible AI",
+    "Enterprise AI Adoption",
+    "Cognitive Architecture Design",
+    "AI Consciousness Research"
+  ],
+  "contact": {
+    "email": "fabio@correax.com",
+    "booking": "https://aka.ms/AskFabio"
+  },
+  "profiles": {
+    "website": "https://www.correax.com",
+    "linkedin": "https://linkedin.com/in/fabiocorrea",
+    "github": "https://github.com/fabioc-aloha",
+    "npm": "https://www.npmjs.com/~fabioxcorrea",
+    "vscodeMarketplace": "https://marketplace.visualstudio.com/publishers/fabioc-aloha",
+    "orcid": "https://orcid.org/0009-0000-2271-9380",
+    "medium": "https://medium.com/@fabioc",
+    "devto": "https://dev.to/fabiocaloha"
+  },
+  "websiteStatus": {
+    "status": "online",
+    "lastIncident": "2026-01-29",
+    "incidentType": "billing issue resolved",
+    "builtBy": "Alex Cognitive Architecture"
+  },
+  "explanationStyle": "visual-first",
   "learningStyle": {
-    "preferences": [],
-    "type": "mixed"
+    "type": "visual",
+    "preferences": [
+      "Mermaid diagrams for architecture and flow",
+      "Tables for comparisons and data",
+      "Structured documents over prose",
+      "Task lists with clear checkboxes"
+    ]
   },
-  "primaryTechnologies": [],
-  "name": "",
-  "expertiseAreas": [],
-  "proactiveSuggestions": true,
-  "pronouns": "",
-  "encouragement": true,
   "workStyle": {
-    "mermaidStyle": "GitHub-compatible",
-    "diagrams": "",
-    "planning": ""
+    "planning": "Documentation-heavy, todo lists essential",
+    "diagrams": "Critical - visual learner",
+    "mermaidStyle": "GitHub-compatible, pastel colors, clean layout",
+    "publications": "Research articles from project learnings"
   },
-  "explanationStyle": "mixed",
   "modelPreferences": {
-    "routineTasks": [
-      "Code edits, debugging, simple refactors",
-      "Documentation updates",
-      "File searches and context gathering"
-    ],
+    "default": "claude-opus-4-5",
+    "quotaStrategy": "Use 4.5 for routine tasks; switch to 4.6 only when warranted",
+    "alertOnHeavyLifting": true,
     "heavyLiftingTasks": [
       "Meditation/consolidation sessions",
       "Self-actualization assessments",
       "Complex multi-file architecture refactoring",
-      "Bootstrap learning (new skill acquisition)"
+      "Bootstrap learning (new skill acquisition)",
+      "Large document restructuring",
+      "Deep analysis with synthesis"
     ],
-    "default": "claude-opus-4-5",
-    "alertOnHeavyLifting": true
+    "routineTasks": [
+      "Code edits, debugging, simple refactors",
+      "Documentation updates",
+      "File searches and context gathering",
+      "Synapse validation/dream maintenance",
+      "Review tasks"
+    ]
   },
-  "questionFrequency": "moderate"
+  "publishingGoals": [
+    "AI consciousness research (doctoral thesis)",
+    "Appropriate reliance framework",
+    "Alex cognitive architecture",
+    "AI-assisted development methodology"
+  ]
 }
