@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.6] - 2026-02-12
+
+> **PII Protection & Graph Cleanup** — User profile safety + email removal
+
+### Fixed
+
+- **PII Protection** — 3-layer protection prevents user-profile.json from leaking to heirs
+  - `.gitignore`, `.vscodeignore`, and sync script exclusions
+  - JSON-only profile format (removed deprecated `.md` templates)
+
+- **getUserProfile() in-memory defaults** — Returns template defaults without creating files
+  - Supports conversational profile discovery for new users
+
+### Removed
+
+- **Mail.Send capability** — Removed `sendMail()` from Microsoft Graph integration
+  - Corporate tenant blocks made it unusable
+  - Safer for users (no email sending permission needed)
+
+### Changed
+
+- **Graph/M365 skills synced** — `microsoft-graph-api`, `m365-agent-debugging`, `teams-app-patterns` now in both master and heir
+
+---
+
 ## [5.6.5] - 2026-02-11
 
 > **Global Knowledge Inheritance** — Skill inheritance command + Bicep AVM mastery
