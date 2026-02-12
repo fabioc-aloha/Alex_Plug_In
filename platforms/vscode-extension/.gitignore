@@ -2,3 +2,5 @@ node_modules/
 dist/
 .env
 *.vsix
+# PII Protection - Never commit user profiles (template.json IS committed)
+.github/config/user-profile.json

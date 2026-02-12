@@ -1204,6 +1204,8 @@ ${report.recommendations.length > 0 ? report.recommendations.map(r => `- ${r}`).
 
 /**
  * Helper function to get user profile from workspace
+ * Returns actual profile if exists, otherwise returns template defaults in-memory
+ * (without creating a file - profile is created through conversation)
  */
 export async function getUserProfile(): Promise<IUserProfile | null> {
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -1215,8 +1217,16 @@ export async function getUserProfile(): Promise<IUserProfile | null> {
     const jsonProfilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
 
     try {
+        // Return actual profile if it exists
         if (await fs.pathExists(jsonProfilePath)) {
             return await fs.readJson(jsonProfilePath);
+        }
+        
+        // Return template defaults in-memory (no file created)
+        // Profile file is created when user provides info through conversation
+        const templatePath = path.join(rootPath, '.github', 'config', 'user-profile.template.json');
+        if (await fs.pathExists(templatePath)) {
+            return await fs.readJson(templatePath);
         }
     } catch (error) {
         console.error('Error reading user profile:', error);

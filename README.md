@@ -349,9 +349,10 @@ If you haven't set up a profile, Alex will guide you through a friendly onboardi
 
 ### Profile Storage
 
-| File                               | Purpose                      |
-| ---------------------------------- | ---------------------------- |
-| `.github/config/user-profile.json` | User preferences and profile |
+| File                                        | Purpose                           |
+| ------------------------------------------- | --------------------------------- |
+| `.github/config/user-profile.json`          | Your preferences (created on use) |
+| `.github/config/user-profile.template.json` | Default values for new users      |
 
 ### Updating Preferences
 
@@ -662,7 +663,8 @@ After initialization, Alex manages this structure:
 └── config/                    # ⚙️ Architecture configuration
     ├── cognitive-config.json
     ├── MASTER-ALEX-PROTECTED.json
-    └── user-profile.json
+    ├── user-profile.json              # Your profile (created via conversation)
+    └── user-profile.template.json     # Defaults for new users
 ```
 
 ### Memory Types

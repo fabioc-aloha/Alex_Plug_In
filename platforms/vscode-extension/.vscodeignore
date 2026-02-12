@@ -49,6 +49,10 @@ esbuild.js
 # This file only exists in Master Alex and protects it from commands
 .github/config/MASTER-ALEX-PROTECTED.json
 
+# PII PROTECTION - User profile contains personal information
+# New users get a fresh profile created on first run (template.json IS packaged)
+.github/config/user-profile.json
+
 # Project-specific meditation sessions (only .prompt.md templates should be packaged)
 .github/episodic/meditation-*.md
 .github/episodic/chronicle-*.md

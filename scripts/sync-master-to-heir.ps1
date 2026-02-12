@@ -69,9 +69,9 @@ $AlwaysExclude = @(
     "workflows",
     "config/MASTER-ALEX-PROTECTED.json",
     "config/cognitive-config.json",
-    "config/user-profile.json",
-    "config/USER-PROFILE.md",
-    "config/USER-PROFILE-TEMPLATE.md",
+    "config/user-profile.json",       # PII - excluded, template.json IS synced
+    "config/USER-PROFILE.md",         # Deprecated - markdown profiles no longer used
+    "config/USER-PROFILE-TEMPLATE.md", # Deprecated - replaced by user-profile.template.json
     "episodic"
 )
 
