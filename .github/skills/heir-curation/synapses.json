@@ -31,6 +31,12 @@
       "type": "uses",
       "strength": 0.8,
       "reason": "Phase 12 validates heir reset for publication"
+    },
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "implements",
+      "strength": 0.9,
+      "reason": "PII protection critical for heir distribution"
     }
   ],
   "triggers": [

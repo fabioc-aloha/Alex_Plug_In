@@ -109,9 +109,20 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 | Keep in Heirs | Remove from Heirs |
 | ------------- | ----------------- |
 | `cognitive-config-template.json` | Personal `cognitive-config.json` |
-| `alex-manifest.json` | Personal `user-profile.json` (replaced with starter template) |
+| `alex-manifest.json` | Personal `user-profile.json` |
+| `user-profile.template.json` | Any file with actual user data |
 
-**Note**: Heir ships with blank `user-profile.json` template — users populate during first run.
+#### PII Protection (3-Layer Defense)
+
+**Critical**: User profiles contain PII and must NEVER leak to heirs.
+
+| Layer | File | Rule |
+|-------|------|------|
+| 1 | `.gitignore` | Exclude `user-profile.json` from git |
+| 2 | `.vscodeignore` | Exclude from VSIX package |
+| 3 | `sync-master-to-heir.ps1` | Skip during master→heir sync |
+
+**Template ships, data stays**: `user-profile.template.json` ships with sensible defaults. User's `user-profile.json` never leaves their machine.
 
 ### 5. Episodic Memory
 
