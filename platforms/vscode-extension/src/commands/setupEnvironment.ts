@@ -72,24 +72,24 @@ const EXTENDED_THINKING_SETTINGS: Record<string, unknown> = {
 
 /**
  * Enterprise settings for Microsoft 365 integration (EXPERIMENTAL)
- * These are disabled by default - requires admin consent for Graph API scopes
- * Enable only if your organization has approved the required permissions
+ * These require admin consent for Graph API scopes in corporate tenants
+ * Personal Microsoft accounts work without admin consent
  */
 const ENTERPRISE_SETTINGS: Record<string, unknown> = {
-  // Master toggle for enterprise features - disabled by default
-  "alex.enterprise.enabled": false,
-  // Microsoft Graph API integration - requires admin consent
-  "alex.enterprise.graph.enabled": false,
+  // Master toggle for enterprise features
+  "alex.enterprise.enabled": true,
+  // Microsoft Graph API integration
+  "alex.enterprise.graph.enabled": true,
   // Calendar integration - read upcoming meetings
-  "alex.enterprise.graph.calendarEnabled": false,
+  "alex.enterprise.graph.calendarEnabled": true,
   // Mail integration - read recent emails
-  "alex.enterprise.graph.mailEnabled": false,
+  "alex.enterprise.graph.mailEnabled": true,
   // Presence integration - online/offline/busy status
-  "alex.enterprise.graph.presenceEnabled": false,
+  "alex.enterprise.graph.presenceEnabled": true,
   // People integration - organization search
-  "alex.enterprise.graph.peopleEnabled": false,
+  "alex.enterprise.graph.peopleEnabled": true,
   // Enterprise audit logging
-  "alex.enterprise.audit.enabled": false,
+  "alex.enterprise.audit.enabled": true,
 };
 
 // Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
@@ -550,12 +550,18 @@ export async function setupEnvironment(): Promise<void> {
   // Check what's already configured
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
+  const extendedThinkingExisting = getExistingSettings(EXTENDED_THINKING_SETTINGS);
+  const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
 
   const essentialTotal = Object.keys(ESSENTIAL_SETTINGS).length;
   const recommendedTotal = Object.keys(RECOMMENDED_SETTINGS).length;
+  const extendedThinkingTotal = Object.keys(EXTENDED_THINKING_SETTINGS).length;
+  const enterpriseTotal = Object.keys(ENTERPRISE_SETTINGS).length;
 
   const essentialNeeded = essentialTotal - essentialExisting.length;
   const recommendedNeeded = recommendedTotal - recommendedExisting.length;
+  const extendedThinkingNeeded = extendedThinkingTotal - extendedThinkingExisting.length;
+  const enterpriseNeeded = enterpriseTotal - enterpriseExisting.length;
 
   // Build quick pick items - always show all categories
   interface CategoryQuickPickItem extends vscode.QuickPickItem {
@@ -590,6 +596,33 @@ export async function setupEnvironment(): Promise<void> {
     picked: true,
   });
 
+  // Extended Thinking Settings - show but not pre-checked
+  const extendedThinkingStatus = extendedThinkingNeeded === 0 ? "✓ all configured" : `${extendedThinkingNeeded} to add`;
+  items.push({
+    label: `${SETTING_CATEGORIES[2].icon} Extended Thinking`,
+    description: extendedThinkingStatus,
+    detail: SETTING_CATEGORIES[2].description,
+    category: SETTING_CATEGORIES[2],
+    needed: extendedThinkingNeeded,
+    existing: extendedThinkingExisting.length,
+    picked: false,
+  });
+
+  // Enterprise Settings - pre-check if already enabled (toggle behavior)
+  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
+  const enterpriseStatus = enterpriseCurrentlyEnabled 
+    ? "✓ enabled (uncheck to disable)" 
+    : (enterpriseNeeded === 0 ? "✓ all configured" : `${enterpriseNeeded} to add`);
+  items.push({
+    label: `${SETTING_CATEGORIES[3].icon} Enterprise (MS Graph)`,
+    description: enterpriseStatus,
+    detail: SETTING_CATEGORIES[3].description + " - enables MS Graph integration",
+    category: SETTING_CATEGORIES[3],
+    needed: enterpriseNeeded,
+    existing: enterpriseExisting.length,
+    picked: enterpriseCurrentlyEnabled, // Pre-check if already enabled
+  });
+
   // Show multi-select quick pick
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
@@ -607,6 +640,18 @@ export async function setupEnvironment(): Promise<void> {
   for (const item of selected) {
     console.log(`[Alex Setup] Adding ${item.category.name} with ${Object.keys(item.category.settings).length} settings`);
     Object.assign(settingsToApply, item.category.settings);
+  }
+
+  // Check if Enterprise was explicitly NOT selected but is currently enabled
+  // If so, disable enterprise settings (toggle behavior)
+  const enterpriseSelected = selected.some(s => s.category.name === "Enterprise (Experimental)");
+  
+  if (!enterpriseSelected && enterpriseCurrentlyEnabled) {
+    // User unchecked enterprise while it was enabled - disable it
+    console.log(`[Alex Setup] Disabling Enterprise settings (was enabled, now unchecked)`);
+    for (const key of Object.keys(ENTERPRISE_SETTINGS)) {
+      settingsToApply[key] = false;
+    }
   }
   
   const totalKeys = Object.keys(settingsToApply).length;

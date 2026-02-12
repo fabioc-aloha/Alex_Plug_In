@@ -1,0 +1,44 @@
+{
+    "skillId": "microsoft-graph-api",
+    "version": "1.0.0",
+    "lastUpdated": "2026-02-12",
+    "connections": [
+        {
+            "target": "enterprise-integration",
+            "type": "Foundational",
+            "strength": 0.95,
+            "description": "Provides API reference for enterprise Graph integration"
+        },
+        {
+            "target": "vscode-extension-patterns",
+            "type": "Supportive",
+            "strength": 0.7,
+            "description": "VS Code auth session API for token acquisition"
+        },
+        {
+            "target": "localization",
+            "type": "Supportive",
+            "strength": 0.5,
+            "description": "User.Read scope provides preferredLanguage"
+        },
+        {
+            "target": "performance-profiling",
+            "type": "Supportive",
+            "strength": 0.6,
+            "description": "Rate limiting and batching patterns"
+        }
+    ],
+    "activationPatterns": [
+        "microsoft graph",
+        "graph api",
+        "ms graph",
+        "/me/",
+        "graph.microsoft.com",
+        "calendar events",
+        "presence api",
+        "mail api",
+        "odata query",
+        "$select",
+        "$filter"
+    ]
+}

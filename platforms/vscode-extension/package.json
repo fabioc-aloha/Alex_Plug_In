@@ -87,6 +87,11 @@
         "icon": "$(sparkle)"
       },
       {
+        "command": "alex.testGraph",
+        "title": "Alex: Test Graph Integration",
+        "icon": "$(beaker)"
+      },
+      {
         "command": "alex.syncKnowledge",
         "title": "Alex: Sync Knowledge",
         "icon": "$(sync)"

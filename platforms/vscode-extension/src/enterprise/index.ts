@@ -29,6 +29,7 @@ import {
   disposeAuditLogging,
   audit,
 } from './auditLogging';
+import { registerGraphTestCommand } from './microsoftGraph';
 
 /**
  * Initialize all enterprise features
@@ -44,6 +45,7 @@ export function initializeEnterprise(context: vscode.ExtensionContext): void {
   registerEnterpriseAuthCommands(context);
   registerSecretsCommands(context);
   registerAuditCommands(context);
+  registerGraphTestCommand(context);
 
   // Log enterprise initialization
   audit.system('enterprise.initialized', {
