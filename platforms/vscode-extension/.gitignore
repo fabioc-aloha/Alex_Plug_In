@@ -4,3 +4,6 @@ dist/
 *.vsix
 # PII Protection - Never commit user profiles (template.json IS committed)
 .github/config/user-profile.json
+# Master-only config files - should never exist in heir
+.github/config/cognitive-config.json
+.github/config/MASTER-ALEX-PROTECTED.json

@@ -46,9 +46,9 @@ esbuild.js
 .github/pull_request_template.md
 .github/workflows/**
 
-# MASTER ALEX PROTECTION - Never include this marker in packages
-# This file only exists in Master Alex and protects it from commands
+# MASTER ALEX PROTECTION - Never include these master-only files in packages
 .github/config/MASTER-ALEX-PROTECTED.json
+.github/config/cognitive-config.json
 
 # PII PROTECTION - User profile contains personal information
 # New users get a fresh profile created on first run (template.json IS packaged)

@@ -56,9 +56,9 @@ Profile stored in `.github/config/user-profile.json`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | *(available)* | Domain | Session-specific skill assignment |
-| **P6** | *(available)* | Domain | Session-specific skill assignment |
-| **P7** | *(available)* | Domain | Session-specific skill assignment |
+| **P5** | *(available)* | Domain | *(assigned based on project context)* |
+| **P6** | *(available)* | Domain | *(assigned based on project context)* |
+| **P7** | *(available)* | Domain | *(assigned based on project context)* |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains

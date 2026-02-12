@@ -148,6 +148,7 @@ weak/minimal → 0.3
 
 ### External Knowledge
 - GI-heir-skill-consolidation-kiss-merge-2026-02-10 (0.85, validates) - "KISS merge pattern discovered Feb 2026"
+- GI-heir-contamination-pattern-sync-script-o-2026-02-12 (0.9, warns) - "Sync script overwrites heir-specific fixes"
 
 ---
 
