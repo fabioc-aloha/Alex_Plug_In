@@ -1,8 +1,7 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-02-10
-> Total Skills: **78** (68 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
-> ⚠️ **Note**: This catalog is a simplified network diagram. See [alex_docs/skills/SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md) for complete inventory.
+> Generated: 2026-02-12
+> Total Skills: **98** (88 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
 
 ---
 
@@ -167,7 +166,7 @@ flowchart LR
 
 ## Skills in Network Diagram
 
-> Skills shown below are those with synaptic connections. For complete 77-skill inventory, see [SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md).
+> Skills shown below are those with synaptic connections.
 
 ### 🧊 Inheritable (29 shown)
 

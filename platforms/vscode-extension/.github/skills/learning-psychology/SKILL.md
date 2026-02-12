@@ -194,7 +194,7 @@ Ask calibration questions to find the right level.
 
 ## Theoretical Foundations
 
-Key sources (for deep understanding, see alex_docs/LEARNING-PSYCHOLOGY-RESEARCH.md):
+Key sources:
 
 - Vygotsky — Zone of Proximal Development, social learning
 - Lave & Wenger — Situated learning, communities of practice

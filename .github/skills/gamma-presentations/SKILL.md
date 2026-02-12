@@ -342,8 +342,8 @@ Simply tell Alex what you want to create. **Alex will write the actual content f
 
 ```text
 "Create a presentation from README.md"
-"Turn ROADMAP-UNIFIED.md into a 15-slide deck"
-"Make a document from alex_docs/COGNITIVE-ARCHITECTURE.md"
+"Turn my CHANGELOG.md into a 15-slide deck"
+"Make a document from .github/skills/cognitive-architecture/SKILL.md"
 ```
 
 #### From Reference Documents
@@ -396,7 +396,7 @@ When asking Alex to create Gamma content, you can specify:
 ### Step-by-Step: Create from a Workspace File
 
 1. **Tell Alex the file path:**
-   > "Create a presentation from alex_docs/USER-MANUAL.md"
+   > "Create a presentation from README.md"
 
 2. **Alex reads the file** and sends content to Gamma API
 

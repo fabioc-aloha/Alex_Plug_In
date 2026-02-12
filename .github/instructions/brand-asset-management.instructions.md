@@ -61,7 +61,6 @@ All logos use 30° rotation for dynamic launch angle.
 | `platforms/vscode-extension/assets/icon.png` | 128x128 | 3.58 KB | Marketplace icon |
 | `platforms/m365-copilot/appPackage/color.png` | 192x192 | 10.61 KB | Teams color icon |
 | `platforms/m365-copilot/appPackage/outline.png` | 32x32 | 1.20 KB | Teams outline icon |
-| `alex_docs/marketing/logo-concepts/correa-x.svg` | 32x32 | - | Parent brand asset |
 
 ## GK Premium Branding (v5.0)
 
@@ -76,8 +75,6 @@ All logos use 30° rotation for dynamic launch angle.
 
 | Asset | Location | Status |
 |-------|----------|--------|
-| **Banner** | `alex_docs/marketing/banner-concepts/gk-space-station.svg` | ✅ SELECTED |
-| **Logo** | `alex_docs/marketing/logo-concepts/gk-space-station-logo.svg` | ✅ SELECTED |
 | **GK Repo** | `Alex-Global-Knowledge/assets/banner.svg` | ✅ DEPLOYED |
 
 ### GK Brand Elements
@@ -91,7 +88,7 @@ All logos use 30° rotation for dynamic launch angle.
 
 ### Concept Candidates (6 variations)
 
-See `alex_docs/marketing/MARKETING-PLAN.md` → GK Banner Candidates table.
+Refer to GK Banner Candidates table in marketing documentation.
 
 ## Platform-Specific Guidelines
 
@@ -169,10 +166,6 @@ The `--density 150` flag ensures crisp text rendering.
 
 - [.github/instructions/release-management.instructions.md] (Medium, Integrates, Backward) - "Asset verification during release"
 - [.github/instructions/heir-skill-promotion.instructions.md] (Low, Documents, Forward) - "Heir branding alignment"
-- [alex_docs/marketing/MARKETING-PLAN.md] (High, References, Forward) - "Full persona and tagline library"
-- [alex_docs/marketing/PERSONA-POWER-USER-VETERAN.md] (Medium, Validates, Forward) - "Target persona psychology"
-- [platforms/vscode-extension/README.md] (High, Deployed, Forward) - "VS Code store copy implementation"
-- [platforms/m365-copilot/appPackage/manifest.json] (High, Deployed, Forward) - "M365 store description implementation"
 
 ### External Knowledge
 - GI-premium-tier-visual-metaphor-pattern-2026-02-06 (High, Validates) - "Tiered branding pattern in Global Knowledge"

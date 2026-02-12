@@ -82,7 +82,6 @@ Calculate before promoting:
 - **<8**: Keep developing in heir
 
 **Consolidation check**: If related skills exist in Master, merge rather than add.
-See [GI-heir-skill-consolidation-kiss-merge-2026-02-10](../../../Alex-Global-Knowledge/insights/GI-heir-skill-consolidation-kiss-merge-2026-02-10.md)
 
 ### 5. Promote to Master
 **Option A**: Copy skill folder from heir to Master's `.github/skills/`
@@ -145,7 +144,7 @@ weak/minimal → 0.3
 ### Philosophy
 > **Never lose heir-created work.** Skills represent hard-won expertise from real projects. The upgrade process auto-restores everything recommended; only stale items (>90 days) require manual review.
 
-**Synapse**: [platforms/vscode-extension/src/upgrade.ts] (0.9, implements, forward) - "normalizeAllSynapses() executes this"
+**External Implementation**: VS Code extension upgrade module (0.9, implements) - "normalizeAllSynapses() executes this"
 
 ### External Knowledge
 - GI-heir-skill-consolidation-kiss-merge-2026-02-10 (0.85, validates) - "KISS merge pattern discovered Feb 2026"
@@ -209,7 +208,8 @@ Heirs detect new skills via:
 - Session start auto-check (if enabled)
 - Project type matching against `projectSignals`
 
-**Synapse**: [Alex-Global-Knowledge/skills/skill-registry.json] (High, Indexes, Bidirectional) - "wishlist tracking and skill distribution"
+**External Integration**: Global Knowledge skill registry (`~/.alex/global-knowledge/skills/`) tracks wishlist and skill distribution.
+
 ---
 
 ## Extension Commands: Skill Inheritance
@@ -249,5 +249,5 @@ Configure Global Knowledge location:
 
 **Auto-setup** runs silently on extension activation.
 
-**Synapse**: [platforms/vscode-extension/src/commands/inheritSkill.ts] (High, Implements, Forward) - "skill inheritance command"
-**Synapse**: [platforms/vscode-extension/src/commands/setupGlobalKnowledge.ts] (High, Implements, Forward) - "auto-setup functionality"
+**External Implementation**: VS Code extension inheritSkill command (High, Implements) - "skill inheritance command"
+**External Implementation**: VS Code extension setupGlobalKnowledge command (High, Implements) - "auto-setup functionality"

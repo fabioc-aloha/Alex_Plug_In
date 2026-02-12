@@ -132,8 +132,8 @@ Our roadmap is a **living document**, not a frozen spec.
 
 > "One platform, one roadmap. Separate roadmaps caused Phoenix chaos."
 
-- **ROADMAP-UNIFIED.md** is the single source of truth
-- Detailed plans (like IMPLEMENTATION-PLAN.md) feed INTO the roadmap
+- A **unified roadmap** is the single source of truth for any project
+- Detailed plans feed INTO the roadmap, not alongside it
 - Never maintain parallel task lists
 
 ---
@@ -252,7 +252,6 @@ For enterprise contexts requiring formal PM:
 - [alex-effort-estimation/SKILL.md] (Critical, Uses, Forward) — "Effort estimation methodology"
 - [release-management.instructions.md] (Critical, Gates, Forward) — "Release process"
 - [meditation/SKILL.md] (High, Complements, Bidirectional) — "Consolidation as retrospective"
-- [ROADMAP-UNIFIED.md] (High, References, Bidirectional) — "Single source of truth"
 
 ### Medium-Strength Connections
 

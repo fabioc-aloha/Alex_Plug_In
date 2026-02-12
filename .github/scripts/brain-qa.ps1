@@ -81,7 +81,7 @@ if (1 -in $runPhases) {
             $target = $conn.target
             # Skip special URL schemes (external links, global knowledge refs, etc)
             if ($target -match '^(external:|global-knowledge://|https?://|mailto:)') { continue }
-            if ($target -match "^\.github/|^alex_docs/|^platforms/|^[A-Z].*\.md$") {
+            if ($target -match "^\.github/|^[A-Z].*\.md$") {
                 $fullPath = Join-Path $rootPath $target
             }
             elseif ($target -match "^\.\./") {

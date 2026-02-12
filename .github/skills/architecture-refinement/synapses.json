@@ -10,12 +10,6 @@
       "context": "Operationalizes the extract-and-document phase of bootstrap learning"
     },
     {
-      "target": "alex_docs/skills/SKILL-ARCHITECTURE.md",
-      "type": "maintains",
-      "strength": 0.9,
-      "context": "Primary documentation target for skill-related learnings"
-    },
-    {
       "target": ".github/prompts/unified-meditation-protocols.prompt.md",
       "type": "feeds",
       "strength": 0.7,

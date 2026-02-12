@@ -17,18 +17,6 @@
             "reason": "Routes programmatic/data-driven requests to PptxGenJS skill"
         },
         {
-            "target": "alex_docs/gamma/MARP-AUTOMATION-PLAN.md",
-            "type": "references",
-            "strength": 0.85,
-            "reason": "Marp automation patterns and template workflows"
-        },
-        {
-            "target": "alex_docs/gamma/PRESENTATION-VISUALIZATION-ECOSYSTEM-2026.md",
-            "type": "references",
-            "strength": 0.8,
-            "reason": "Comprehensive ecosystem research for tool comparison"
-        },
-        {
             "target": ".github/skills/text-to-speech/SKILL.md",
             "type": "enhances",
             "strength": 0.7,

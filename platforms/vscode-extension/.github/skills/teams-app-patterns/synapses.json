@@ -15,18 +15,6 @@
       "reason": "Teams apps need release process"
     },
     {
-      "target": "platforms/m365-copilot/appPackage/declarativeAgent.json",
-      "type": "implements",
-      "strength": 0.9,
-      "reason": "Alex M365 agent uses patterns documented here"
-    },
-    {
-      "target": "platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md",
-      "type": "uses",
-      "strength": 0.85,
-      "reason": "Deployment checklist applies patterns in practice"
-    },
-    {
       "target": ".github/instructions/brand-asset-management.instructions.md",
       "type": "references",
       "strength": 0.75,

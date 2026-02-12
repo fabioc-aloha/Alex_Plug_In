@@ -1,11 +1,12 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-02-11
-> Total Skills: **96** (86 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
-> ⚠️ **Note**: This catalog is a simplified network diagram. See [alex_docs/skills/SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md) for complete inventory.
+> Generated: 2026-02-12
+> Total Skills: **102** (92 inheritable, 4 master-only, 1 universal, 3 VS Code, 2 M365)
+> ⚠️ **Note**: This catalog is a simplified network diagram. See SKILLS-CATALOG.md for complete inventory.
 > 🎉 **+12 skills promoted from sandbox heir** (frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling, slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense, azure-architecture-patterns, azure-devops-automation, airs-integration)
 > 🆕 **+1 meta-skill**: skill-building (guides heirs in creating promotable skills)
 > 🆕 **+1 growth skill**: skill-development (track wishlist, contextual skill acquisition)
+> 🆕 **+6 domain skills**: bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling
 
 ---
 
@@ -219,7 +220,7 @@ flowchart LR
 
 ## Skills in Network Diagram
 
-> Skills shown below are those with synaptic connections. For complete 93-skill inventory, see [SKILLS-CATALOG.md](alex_docs/skills/SKILLS-CATALOG.md).
+> Skills shown below are those with synaptic connections. For complete 102-skill inventory, see SKILLS-CATALOG.md.
 
 ### 💚 NEW - Promoted from Heir (13)
 

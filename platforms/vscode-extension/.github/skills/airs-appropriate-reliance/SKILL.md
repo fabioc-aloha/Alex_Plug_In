@@ -19,14 +19,6 @@ This skill contains knowledge about the AIRS-16 validated instrument, the propos
 - Preparing academic papers or research briefs
 - Meeting preparation with researchers
 
-## Assets
-
-| File | Purpose |
-| ---- | ------- |
-| `article/APPROPRIATE-RELIANCE-TECHNICAL-BRIEF.md` | Full technical brief with AR implementation |
-| `article/HOFMAN-MEETING-BRIEF.md` | Research meeting preparation template |
-| `alex_docs/AR-TELEMETRY-DESIGN.md` | Behavioral telemetry design for hypothesis validation |
-
 ---
 
 ## AIRS-16: AI Readiness Scale

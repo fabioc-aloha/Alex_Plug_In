@@ -44,7 +44,6 @@
     "metadata": {
         "created": "2025-02-07",
         "status": "active",
-        "priority": "high",
-        "implementation": "platforms/vscode-extension/src/generators/pptxGenerator.ts"
+        "priority": "high"
     }
 }

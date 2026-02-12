@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.7] - 2026-02-12
+
+> **Self-Containment & Synapse Integrity** — .github is now fully self-contained with zero external references
+
+### Fixed
+
+- **microsoft-graph-api synapses** — Schema v1.0 (bare skill IDs) upgraded to v2.1.0 (full `.github/skills/` paths)
+- **7 missing skills in activation index** — bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling, skill-development
+- **Source code path references** — 5 `platforms/vscode-extension/src/` references in instruction files converted to "External Implementation" notes
+- **Broken synapse targets** — Removed `alex_docs/`, `article/`, `platforms/src/`, `ROADMAP-UNIFIED.md` references from 12 synapse.json files
+- **brain-qa.ps1** — Validation pattern tightened to reject external paths outside `.github/`
+
+### Security
+
+- **Master-only file leak** — Removed `MASTER-ALEX-PROTECTED.json` and `cognitive-config.json` from heir config/
+- **Heir PII cleared** — user-profile.json reset to template defaults
+- **Heir P5-P7 reset** — Working memory slots reset to `*(available)*` (no master-specific assignments)
+
+### Changed
+
+- **Skill catalog count** — 96 → 102 (master), 96 → 98 (heir)
+- **Full self-containment** — All synapse connections use canonical `.github/skills/X/SKILL.md` paths
+
+---
+
 ## [5.6.6] - 2026-02-12
 
 > **PII Protection & Graph Cleanup** — User profile safety + email removal

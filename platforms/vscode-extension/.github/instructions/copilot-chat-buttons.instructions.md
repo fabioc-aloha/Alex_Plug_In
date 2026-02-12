@@ -87,7 +87,7 @@ After completing this task, call:
 
 ## Synapses
 
-- [platforms/vscode-extension/src/chat/participant.ts] (1.0, implementation, bidirectional) - "stream.button() and followupProvider implementation"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (0.9, enhancement, outgoing) - "action suggestions in meditation"
+- **External Implementation**: VS Code extension chat participant module (1.0, bidirectional) - "stream.button() and followupProvider implementation"
+- [.github/prompts/unified-meditation-protocols.prompt.md](../prompts/unified-meditation-protocols.prompt.md) (0.9, enhancement, outgoing) - "action suggestions in meditation"
 
 ````

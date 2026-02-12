@@ -41,6 +41,7 @@ Search this index when processing any task request:
 | awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
 | azure-architecture-patterns | azure patterns, cloud architecture, azure best practices, well-architected |
 | azure-devops-automation | azdo, azure devops, pipeline automation, ado automation, yaml pipeline |
+| bicep-avm-mastery | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
@@ -50,7 +51,9 @@ Search this index when processing any task request:
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
 | coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
-| creative-writing | write story, character arc, plot structure, dialogue, narrative |\n| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
+| creative-writing | write story, character arc, plot structure, dialogue, narrative |
+| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
+| database-design | design database, model schema, normalize tables, optimize query, choose database |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
@@ -82,7 +85,11 @@ Search this index when processing any task request:
 | meditation | meditate, consolidate knowledge, reflect session, memory integration |
 | meditation-facilitation | guide meditation, four r's, deep dive, self-actualize |
 | ⭐ microsoft-fabric | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance |
+| microsoft-graph-api | call graph api, integrate m365, graph authentication, read calendar, send mail |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
+| multi-agent-orchestration | orchestrate agents, decompose task, delegate subtask, coordinate agents |
+| observability-monitoring | instrument logs, collect metrics, add tracing, setup monitoring, create alerts |
+| performance-profiling | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
 | pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides, use auto |
 | ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, use slides, use pitch, use auto, slide deck options |
@@ -106,6 +113,7 @@ Search this index when processing any task request:
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
 | skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
 | skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
+| skill-development | develop skill, track learning, skill wishlist, practice capability, improve ability |
 | slide-design | design slides, slide layout, presentation design, visual slides, deck styling |
 | socratic-questioning | ask questions, discover answer, probe assumption, socratic method |
 | status-reporting | status update, progress report, weekly update, stakeholder email, sprint summary |

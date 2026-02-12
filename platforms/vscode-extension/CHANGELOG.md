@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.7] - 2026-02-12
+
+> **Self-Containment & Synapse Integrity** — .github is now fully self-contained with zero external references
+
+### Fixed
+
+- **Broken synapse targets** — Removed all external file references from synapse.json and instruction files
+- **microsoft-graph-api synapses** — Upgraded from legacy schema to v2.1.0 with proper paths
+- **7 missing skills in activation index** — bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling, skill-development
+
+### Security
+
+- **Heir publication safety** — Removed master-only config files, cleared PII, reset working memory slots
+
+### Changed
+
+- **Skill catalog count** — 96 → 98 skills (heir), 96 → 102 (master)
+- **Full self-containment** — All synapse connections use canonical `.github/` paths
+
+---
+
 ## [5.4.3] - 2026-02-09
 
 > **TTS Language Fix & Heir Reset** — Proper language capitalization in code block summaries
