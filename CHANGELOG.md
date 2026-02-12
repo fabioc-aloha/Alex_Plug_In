@@ -9,16 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.6.8] - 2026-02-12
 
-> **Heir Decontamination RCA** — sync-architecture.js now prevents PII leaks and master-specific content from shipping
+> **Heir Decontamination RCA + Persona Detection Fix** — sync-architecture.js prevents PII leaks; persona detection no longer false-positives on `.github/`
 
 ### Fixed
 
+- **Persona pattern matching bug** — Bidirectional substring match (`patternNormalized.includes(entryLower)`) caused `.github/workflows/` to match any `.github/` directory, falsely scoring DevOps for every Alex project. Replaced with typed matching: `fs.pathExists()` for path patterns, `endsWith()` for extensions, exact Set lookup for filenames
+- **Noisy `.github/` signal** — Removed `.github/` from power-user `projectPatterns` (every Alex-initialized project has it)
 - **RC1: Blind config copy** — `copyDirRecursive()` now excludes `user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json` from heir
 - **RC2: Master-specific content in copilot-instructions.md** — `applyHeirTransformations()` resets P5-P7 slots, removes "Master Alex default" line, fixes skill counts dynamically, resets "Last Assessed"
 - **RC3: Broken synapse references** — `HEIR_SYNAPSE_REMOVALS` strips ROADMAP-UNIFIED.md synapse from release-management.instructions.md
 - **RC4: No post-sync validation** — `validateHeirIntegrity()` blocks publish if PII, master-only files, or master content detected
 - **CRLF regex** — All heir transformation patterns now handle Windows line endings
 - **Ignore file hardening** — Added `cognitive-config.json` and `MASTER-ALEX-PROTECTED.json` to both `.gitignore` and `.vscodeignore`
+
+### Added
+
+- **Game Developer persona** — New persona with keywords (game, mystery, puzzle, narrative, rpg), skill `game-design`, patterns (game/, levels/, puzzles/, mechanics/), and LLM prompt support
 
 ---
 

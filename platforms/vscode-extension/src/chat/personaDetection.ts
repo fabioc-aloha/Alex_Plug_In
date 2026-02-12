@@ -189,6 +189,18 @@ export const PERSONAS: Persona[] = [
         projectPatterns: ['chapters/', 'manuscript/', 'outline/', 'characters/', '.fountain', 'book/', 'drafts/', 'scenes/', 'OUTLINE.md', 'outline.md', 'plot/', 'worldbuilding/']
     },
     {
+        id: 'game-developer',
+        name: 'Game Developer',
+        bannerNoun: 'GAMES',
+        hook: 'Design, build, play — iterate',
+        skill: 'game-design',
+        icon: '🎮',
+        accentColor: '#7C3AED',  // Deep Violet
+        keywords: ['game', 'gamedev', 'unity', 'unreal', 'godot', 'rpg', 'puzzle', 'interactive', 'narrative', 'mystery'],
+        techStack: ['unity', 'unreal', 'godot', 'c#', 'c++', 'lua', 'python', 'gdscript', 'renpy'],
+        projectPatterns: ['game/', 'levels/', 'sprites/', 'quests/', 'puzzles/', 'mechanics/', 'game-design/', 'GAME-DESIGN.md', 'inventory/', 'dialogues/', 'encounters/']
+    },
+    {
         id: 'project-manager',
         name: 'Project Manager',
         bannerNoun: 'PROJECTS',
@@ -258,7 +270,7 @@ export const PERSONAS: Persona[] = [
         accentColor: '#FBBF24',  // Gold
         keywords: ['power user', 'builder', 'maker', 'hacker', 'tinkerer', 'contributor'],
         techStack: ['typescript', 'python', 'bash', 'powershell', 'git'],
-        projectPatterns: ['skills/', '.github/', 'extensions/', 'plugins/']
+        projectPatterns: ['skills/', 'extensions/', 'plugins/']
     }
 ];
 
@@ -613,18 +625,35 @@ export async function detectPersona(
             try {
                 const rootPath = folder.uri.fsPath;
                 const entries = await fs.readdir(rootPath);
+                const entriesLowerSet = new Set(entries.map(e => e.toLowerCase()));
                 
-                for (const entry of entries) {
-                    const entryLower = entry.toLowerCase();
-                    for (const persona of PERSONAS) {
-                        for (const pattern of persona.projectPatterns) {
-                            const patternNormalized = pattern.replace(/\//g, '').toLowerCase();
-                            if (entryLower.includes(patternNormalized) || patternNormalized.includes(entryLower)) {
-                                const scoreEntry = scores.get(persona.id)!;
-                                scoreEntry.score += 1;
-                                if (!scoreEntry.reasons.includes(`Project has ${entry}`)) {
-                                    scoreEntry.reasons.push(`Project has ${entry}`);
-                                }
+                for (const persona of PERSONAS) {
+                    for (const pattern of persona.projectPatterns) {
+                        let matched = false;
+                        let displayName = pattern;
+                        
+                        if (pattern.includes('/')) {
+                            // Path pattern (e.g., 'src/', '.github/workflows/')
+                            // Check if the actual path exists in workspace
+                            const cleanPath = pattern.replace(/\/+$/, '');
+                            matched = await fs.pathExists(path.join(rootPath, cleanPath));
+                            displayName = pattern;
+                        } else if (/^\.[a-zA-Z]+$/.test(pattern)) {
+                            // Pure extension pattern (e.g., .tex, .bib, .fountain, .mdx)
+                            const ext = pattern.toLowerCase();
+                            matched = entries.some(e => e.toLowerCase().endsWith(ext));
+                            displayName = `*${pattern} files`;
+                        } else {
+                            // Exact file/directory name match (e.g., package.json, Dockerfile)
+                            matched = entriesLowerSet.has(pattern.toLowerCase());
+                            displayName = pattern;
+                        }
+                        
+                        if (matched) {
+                            const scoreEntry = scores.get(persona.id)!;
+                            scoreEntry.score += 1;
+                            if (!scoreEntry.reasons.includes(`Project has ${displayName}`)) {
+                                scoreEntry.reasons.push(`Project has ${displayName}`);
                             }
                         }
                     }
@@ -1036,11 +1065,12 @@ Based on the project structure and content, determine:
 - project-management: For project managers
 - infrastructure-as-code: For DevOps engineers
 - architecture-health: For enterprise architects
+- game-design: For game developers
 
 ## Response Format (JSON only)
 \`\`\`json
 {
-  "personaId": "developer|fiction-writer|researcher|technical-writer|data-engineer|presenter|project-manager|devops|architect|student|content-creator|academic",
+  "personaId": "developer|fiction-writer|game-developer|researcher|technical-writer|data-engineer|presenter|project-manager|devops|architect|student|content-creator|academic",
   "personaName": "Human-readable name",
   "skill": "most-relevant-skill-id",
   "confidence": 0.85,
@@ -1166,7 +1196,8 @@ function getSkillDescription(skillId: string): string {
         'architecture-health': 'System design, ADRs',
         'learning-psychology': 'Study techniques, concept mastery',
         'git-workflow': 'Version control, branching',
-        'brand-asset-management': 'Logos, banners, visual identity'
+        'brand-asset-management': 'Logos, banners, visual identity',
+        'game-design': 'Game mechanics, narrative design, puzzles'
     };
     
     return descriptions[skillId] || `${skillId} domain expertise`;
