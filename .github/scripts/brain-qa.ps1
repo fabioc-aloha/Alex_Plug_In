@@ -377,13 +377,16 @@ if (12 -in $runPhases) {
     if (Test-Path "$heirBase\.github") {
         $resetIssues = @()
         
-        # Check user-profile.json
+        # Check user-profile.json should NOT exist (PII protection - created at runtime from template)
         $profilePath = "$heirBase\.github\config\user-profile.json"
         if (Test-Path $profilePath) {
             $profile = Get-Content $profilePath | ConvertFrom-Json
-            if ($profile.name -ne "") { $resetIssues += "user-profile.json has non-empty name" }
-            if ($profile.nickname -ne "") { $resetIssues += "user-profile.json has non-empty nickname" }
+            if ($profile.name -ne "") { $resetIssues += "user-profile.json has non-empty name (PII leak)" }
+            if ($profile.nickname -ne "") { $resetIssues += "user-profile.json has non-empty nickname (PII leak)" }
         }
+        # Verify template exists (used to create profile at runtime)
+        $templatePath = "$heirBase\.github\config\user-profile.template.json"
+        if (-not (Test-Path $templatePath)) { $resetIssues += "user-profile.template.json missing (needed for runtime profile creation)" }
         
         # Check P5-P7 slots
         $copilotPath = "$heirBase\.github\copilot-instructions.md"
@@ -490,8 +493,8 @@ if (14 -in $runPhases) {
 # ============================================================
 if (15 -in $runPhases) {
     Write-Phase 15 "Config Files Validation"
-    $required = @("user-profile.json")
-    $masterOnlyCfg = @("MASTER-ALEX-PROTECTED.json", "cognitive-config.json")
+    $required = @("user-profile.template.json", "cognitive-config-template.json")
+    $masterOnlyCfg = @("MASTER-ALEX-PROTECTED.json", "cognitive-config.json", "user-profile.json")
     $configIssues = @()
     
     # Check heir has required configs

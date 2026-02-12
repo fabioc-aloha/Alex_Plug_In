@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.8] - 2026-02-12
+
+> **Heir Decontamination RCA** — sync-architecture.js now prevents PII leaks and master-specific content from shipping
+
+### Fixed
+
+- **RC1: Blind config copy** — `copyDirRecursive()` now excludes `user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json` from heir
+- **RC2: Master-specific content in copilot-instructions.md** — `applyHeirTransformations()` resets P5-P7 slots, removes "Master Alex default" line, fixes skill counts dynamically, resets "Last Assessed"
+- **RC3: Broken synapse references** — `HEIR_SYNAPSE_REMOVALS` strips ROADMAP-UNIFIED.md synapse from release-management.instructions.md
+- **RC4: No post-sync validation** — `validateHeirIntegrity()` blocks publish if PII, master-only files, or master content detected
+- **CRLF regex** — All heir transformation patterns now handle Windows line endings
+- **Ignore file hardening** — Added `cognitive-config.json` and `MASTER-ALEX-PROTECTED.json` to both `.gitignore` and `.vscodeignore`
+
+---
+
 ## [5.6.7] - 2026-02-12
 
 > **Self-Containment & Synapse Integrity** — .github is now fully self-contained with zero external references
