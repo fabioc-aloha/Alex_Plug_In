@@ -68,7 +68,7 @@ Profile stored in `.github/config/user-profile.json`.
 - **Complex task**: Skill Selection Optimization may update P6 based on dominant domain
 - **Master Alex default**: master-heir-management, brand-asset-management, release-management
 
-**Last Assessed**: 2026-02-08 — Based on 15 recent episodic sessions (Feb 1-8)
+**Last Assessed**: 2026-02-12 — v5.6.8 release session (RCA pipeline fix, persona detection, brain-qa hardening)
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 
@@ -255,7 +255,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
 | Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Skills/Expertise | Neocortex | `.github/skills/` (102 skills) |
+| Skills/Expertise | Neocortex | `.github/skills/` (103 skills) |
 | **Task Planning** | Dorsolateral PFC | `skill-selection-optimization.instructions.md` — proactive resource allocation |
 | Attention Gating | dlPFC (BA 46) | SSO Phase 1b — context-relevance filtering |
 | Inhibitory Control | dlPFC + vlPFC | Inhibitory synapses — suppress irrelevant protocols |
@@ -291,7 +291,7 @@ Key triggers that activate specific protocols:
 |-------|----------|-------|------|
 | Procedural | `.github/instructions/` | 24 files | Auto-loaded via VS Code `<instructions>` |
 | Episodic | `.github/prompts/` | 13 files | Workflows, meditation, development |
-| Skills | `.github/skills/` | 102 skills | See `SKILL-CATALOG-GENERATED.md` |
+| Skills | `.github/skills/` | 103 skills | See `SKILL-CATALOG-GENERATED.md` |
 | Episodic Archive | `.github/episodic/` | Variable | Historical session records |
 
 ### VS Code Extension Commands

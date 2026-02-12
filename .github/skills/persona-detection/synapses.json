@@ -1,0 +1,28 @@
+{
+    "skillId": "persona-detection",
+    "version": "1.0.0",
+    "inheritance": "heir:vscode",
+    "synapses": [
+        {
+            "target": ".github/skills/heir-curation/SKILL.md",
+            "strength": "High",
+            "type": "Integrates",
+            "direction": "Forward",
+            "activation": "Persona detection ships to heir via inheritance model"
+        },
+        {
+            "target": ".github/instructions/alex-core.instructions.md",
+            "strength": "Medium",
+            "type": "References",
+            "direction": "Forward",
+            "activation": "P6 working memory slot updated by persona detection"
+        },
+        {
+            "target": ".github/skills/release-process/SKILL.md",
+            "strength": "Medium",
+            "type": "Validates",
+            "direction": "Forward",
+            "activation": "Persona detection tested during pre-publish"
+        }
+    ]
+}

@@ -143,6 +143,7 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 - [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
 - [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
 - [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
+- [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
 
 ---
 
