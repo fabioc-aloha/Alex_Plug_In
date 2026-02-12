@@ -11,6 +11,11 @@
  * - heir:vscode: Already in heir, don't overwrite
  * - heir:m365: Skip (wrong heir)
  * 
+ * HEIR DECONTAMINATION:
+ * After copying, applies heir-specific transformations to remove master-only
+ * content (PII, master-specific slot values, skill counts, etc.).
+ * See applyHeirTransformations() for details.
+ * 
  * Run: npm run sync-architecture
  * Auto-runs: During vscode:prepublish
  */
@@ -35,6 +40,27 @@ const ARCHITECTURE_FOLDERS = ['instructions', 'prompts', 'config', 'agents', 'do
 // Files to sync from root .github
 const ARCHITECTURE_FILES = ['copilot-instructions.md'];
 
+// ============================================================
+// HEIR PROTECTION: Files that must NEVER be copied to heir
+// ============================================================
+
+// Master-only config files — contain PII or master-specific state
+const EXCLUDED_CONFIG_FILES = [
+    'user-profile.json',           // PII: contains user's real name, email, social profiles
+    'MASTER-ALEX-PROTECTED.json',  // Master kill-switch marker — must not exist in heir
+    'cognitive-config.json',       // Master-specific cognitive state
+];
+
+// Synapses in instruction files that reference master-only files
+// Format: { file: 'filename.md', pattern: /regex/, reason: 'why' }
+const HEIR_SYNAPSE_REMOVALS = [
+    {
+        file: 'release-management.instructions.md',
+        pattern: /^.*\[ROADMAP-UNIFIED\.md\].*\r?\n/m,
+        reason: 'ROADMAP-UNIFIED.md does not exist in heir'
+    },
+];
+
 function getInheritance(skillPath) {
     const synapsePath = path.join(skillPath, 'synapses.json');
     if (!fs.existsSync(synapsePath)) {
@@ -49,18 +75,24 @@ function getInheritance(skillPath) {
     }
 }
 
-function copyDirRecursive(src, dest) {
+function copyDirRecursive(src, dest, excludeFiles = []) {
     if (!fs.existsSync(dest)) {
         fs.mkdirSync(dest, { recursive: true });
     }
     
     const entries = fs.readdirSync(src, { withFileTypes: true });
     for (const entry of entries) {
+        // Skip excluded files
+        if (excludeFiles.includes(entry.name)) {
+            console.log(`   ⏭️  Excluded: ${entry.name}`);
+            continue;
+        }
+        
         const srcPath = path.join(src, entry.name);
         const destPath = path.join(dest, entry.name);
         
         if (entry.isDirectory()) {
-            copyDirRecursive(srcPath, destPath);
+            copyDirRecursive(srcPath, destPath, excludeFiles);
         } else {
             fs.copyFileSync(srcPath, destPath);
         }
@@ -139,9 +171,14 @@ function syncArchitectureFolders() {
             if (fs.existsSync(heirPath)) {
                 fs.rmSync(heirPath, { recursive: true });
             }
-            copyDirRecursive(masterPath, heirPath);
+            
+            // Apply file exclusions for config folder (PII + master-only files)
+            const exclusions = folder === 'config' ? EXCLUDED_CONFIG_FILES : [];
+            copyDirRecursive(masterPath, heirPath, exclusions);
+            
             const count = fs.readdirSync(masterPath).length;
-            console.log(`✅ ${folder}/ (${count} items)`);
+            const excluded = exclusions.length;
+            console.log(`✅ ${folder}/ (${count} items${excluded ? `, ${excluded} excluded` : ''})`);
         } else {
             console.log(`⚠️  ${folder}/ not found in master`);
         }
@@ -198,6 +235,207 @@ function verifyCounts() {
     }
 }
 
+// ============================================================
+// HEIR TRANSFORMATIONS: Master → Heir content adjustments
+// ============================================================
+
+function applyHeirTransformations() {
+    console.log('\n🔧 Applying heir-specific transformations...\n');
+    
+    let transformCount = 0;
+    
+    // --- Transform copilot-instructions.md ---
+    const copilotPath = path.join(HEIR_GITHUB, 'copilot-instructions.md');
+    if (fs.existsSync(copilotPath)) {
+        let content = fs.readFileSync(copilotPath, 'utf8');
+        const original = content;
+        
+        // 1. Reset P5/P6/P7 working memory slots to available
+        content = content.replace(
+            /\| \*\*P5\*\* \| .+ \| Domain \| .+ \|/,
+            '| **P5** | *(available)* | Domain | *(assigned based on project context)* |'
+        );
+        content = content.replace(
+            /\| \*\*P6\*\* \| .+ \| Domain \| .+ \|/,
+            '| **P6** | *(available)* | Domain | *(assigned based on project context)* |'
+        );
+        content = content.replace(
+            /\| \*\*P7\*\* \| .+ \| Domain \| .+ \|/,
+            '| **P7** | *(available)* | Domain | *(assigned based on project context)* |'
+        );
+        
+        // 2. Remove "Master Alex default" line (handles both LF and CRLF)
+        content = content.replace(/^- \*\*Master Alex default\*\*:.*\r?\n/m, '');
+        
+        // 3. Reset "Last Assessed" to generic
+        content = content.replace(
+            /\*\*Last Assessed\*\*:.+/,
+            '**Last Assessed**: Not yet assessed for this project'
+        );
+        
+        // 4. Fix skill counts (master has more skills than heir)
+        //    Count actual heir skills to get the right number
+        const heirSkillCount = fs.existsSync(HEIR_SKILLS)
+            ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
+            : 0;
+        const masterSkillCount = fs.existsSync(MASTER_SKILLS)
+            ? fs.readdirSync(MASTER_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
+            : 0;
+        
+        if (heirSkillCount > 0 && heirSkillCount !== masterSkillCount) {
+            // Replace in Neuroanatomical Mapping table
+            content = content.replace(
+                new RegExp(`\\.github/skills/\`\\s*\\(${masterSkillCount} skills\\)`),
+                `.github/skills/\` (${heirSkillCount} skills)`
+            );
+            // Replace in Memory Stores table  
+            content = content.replace(
+                new RegExp(`\\| ${masterSkillCount} skills \\|`),
+                `| ${heirSkillCount} skills |`
+            );
+        }
+        
+        if (content !== original) {
+            fs.writeFileSync(copilotPath, content, 'utf8');
+            const diffs = [];
+            if (content.includes('*(available)*')) diffs.push('P5-P7 slots');
+            if (!content.includes('Master Alex default')) diffs.push('Master default line');
+            if (content.includes('Not yet assessed')) diffs.push('Last Assessed');
+            if (heirSkillCount !== masterSkillCount) diffs.push(`skill count ${masterSkillCount}→${heirSkillCount}`);
+            console.log(`✅ copilot-instructions.md: ${diffs.join(', ')}`);
+            transformCount += diffs.length;
+        }
+    }
+    
+    // --- Remove master-only synapses from instruction files ---
+    for (const removal of HEIR_SYNAPSE_REMOVALS) {
+        const filePath = path.join(HEIR_GITHUB, 'instructions', removal.file);
+        if (fs.existsSync(filePath)) {
+            let content = fs.readFileSync(filePath, 'utf8');
+            const newContent = content.replace(removal.pattern, '');
+            if (newContent !== content) {
+                fs.writeFileSync(filePath, newContent, 'utf8');
+                console.log(`✅ ${removal.file}: removed synapse (${removal.reason})`);
+                transformCount++;
+            }
+        }
+    }
+    
+    // --- Delete any master-only files that leaked through ---
+    const masterOnlyFiles = [
+        path.join(HEIR_GITHUB, 'config', 'MASTER-ALEX-PROTECTED.json'),
+        path.join(HEIR_GITHUB, 'config', 'cognitive-config.json'),
+        path.join(HEIR_GITHUB, 'config', 'user-profile.json'),
+    ];
+    for (const filePath of masterOnlyFiles) {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`🗑️  Deleted leaked file: ${path.basename(filePath)}`);
+            transformCount++;
+        }
+    }
+    
+    console.log(`\n   Applied ${transformCount} transformation${transformCount !== 1 ? 's' : ''}`);
+    return transformCount;
+}
+
+// ============================================================
+// POST-SYNC VALIDATION: Catch contamination before it ships
+// ============================================================
+
+function validateHeirIntegrity() {
+    console.log('\n🛡️  Validating heir integrity...\n');
+    
+    const errors = [];
+    const warnings = [];
+    
+    // 1. Check for PII in user-profile.json
+    const profilePath = path.join(HEIR_GITHUB, 'config', 'user-profile.json');
+    if (fs.existsSync(profilePath)) {
+        const content = fs.readFileSync(profilePath, 'utf8');
+        // Check for non-empty name (indicates PII leak)
+        try {
+            const profile = JSON.parse(content);
+            if (profile.name && profile.name.trim() !== '') {
+                errors.push(`PII LEAK: user-profile.json contains name "${profile.name}"`);
+            }
+            if (profile.contact && profile.contact.email) {
+                errors.push(`PII LEAK: user-profile.json contains email "${profile.contact.email}"`);
+            }
+        } catch (e) {
+            warnings.push(`Could not parse user-profile.json: ${e.message}`);
+        }
+    }
+    
+    // 2. Check for master-only files
+    const masterOnlyFiles = ['MASTER-ALEX-PROTECTED.json', 'cognitive-config.json'];
+    for (const file of masterOnlyFiles) {
+        const filePath = path.join(HEIR_GITHUB, 'config', file);
+        if (fs.existsSync(filePath)) {
+            errors.push(`Master-only file leaked: config/${file}`);
+        }
+    }
+    
+    // 3. Check copilot-instructions.md for master-specific content
+    const copilotPath = path.join(HEIR_GITHUB, 'copilot-instructions.md');
+    if (fs.existsSync(copilotPath)) {
+        const content = fs.readFileSync(copilotPath, 'utf8');
+        
+        if (content.includes('Master Alex default')) {
+            errors.push('copilot-instructions.md contains "Master Alex default" line');
+        }
+        
+        // Check P5-P7 have master values (not transformed)
+        if (/\| \*\*P5\*\* \| master-heir-management/.test(content)) {
+            errors.push('copilot-instructions.md P5 slot has master value (not reset)');
+        }
+        
+        // Check skill count matches actual heir skills
+        const heirSkillCount = fs.existsSync(HEIR_SKILLS)
+            ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
+            : 0;
+        const masterSkillCount = fs.existsSync(MASTER_SKILLS)
+            ? fs.readdirSync(MASTER_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
+            : 0;
+        
+        if (heirSkillCount !== masterSkillCount) {
+            const countRegex = new RegExp(`${masterSkillCount} skills`);
+            if (countRegex.test(content)) {
+                errors.push(`copilot-instructions.md still shows master skill count (${masterSkillCount}) instead of heir count (${heirSkillCount})`);
+            }
+        }
+    }
+    
+    // 4. Check for ROADMAP-UNIFIED.md references in heir instructions
+    const releaseMgmt = path.join(HEIR_GITHUB, 'instructions', 'release-management.instructions.md');
+    if (fs.existsSync(releaseMgmt)) {
+        const content = fs.readFileSync(releaseMgmt, 'utf8');
+        if (content.includes('ROADMAP-UNIFIED.md')) {
+            warnings.push('release-management.instructions.md references ROADMAP-UNIFIED.md (master-only file)');
+        }
+    }
+    
+    // Report
+    if (errors.length === 0 && warnings.length === 0) {
+        console.log('✅ Heir integrity validated — no contamination detected\n');
+        return true;
+    }
+    
+    if (warnings.length > 0) {
+        console.log(`⚠️  ${warnings.length} warning(s):`);
+        warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+    }
+    
+    if (errors.length > 0) {
+        console.log(`❌ ${errors.length} CONTAMINATION ERROR(S):`);
+        errors.forEach(e => console.log(`   ❌ ${e}`));
+        console.log('\n🚫 HEIR IS CONTAMINATED — Fix before publishing!\n');
+        process.exit(1);
+    }
+    
+    return warnings.length === 0;
+}
+
 // Main
 console.log('═══════════════════════════════════════════');
 console.log('  Alex Architecture Sync (Master → Heir)');
@@ -206,7 +444,9 @@ console.log('══════════════════════�
 syncArchitectureFolders();
 syncArchitectureFiles();
 syncSkills();
+applyHeirTransformations();
 verifyCounts();
+validateHeirIntegrity();
 
 console.log('═══════════════════════════════════════════');
 console.log('  Sync complete!');
