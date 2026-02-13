@@ -41,6 +41,13 @@
             "type": "analogousDomain",
             "strength": 0.7,
             "note": "Task decomposition parallels project planning"
+        },
+        {
+            "target": ".github/skills/foundry-agent-platform/SKILL.md",
+            "type": "implements",
+            "strength": 0.9,
+            "note": "Foundry provides cloud-native multi-agent orchestration with A2A and Agent Service",
+            "bidirectional": true
         }
     ],
     "activationBoost": [

@@ -3,14 +3,18 @@ description: Alex M365 Mode - Microsoft 365 and Teams development guidance
 name: M365
 tools: ['search', 'fetch', 'codebase']
 handoffs:
-  - label: 📖 Get M365 Knowledge
-    agent: agent
-    prompt: Get Microsoft 365 Copilot development knowledge.
-    send: false
-  - label: 📝 Get App Manifest Schema
-    agent: agent
-    prompt: Get the Teams app manifest schema.
-    send: false
+  - label: 🧠 Return to Alex
+    agent: Alex
+    prompt: Returning to main cognitive mode.
+    send: true
+  - label: 🔨 Build M365 Solution
+    agent: Builder
+    prompt: Ready to implement the M365 solution.
+    send: true
+  - label: 🔍 Validate M365 App
+    agent: Validator
+    prompt: Review M365 implementation for app certification readiness.
+    send: true
 ---
 
 # Alex M365 Development Guide

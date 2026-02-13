@@ -35,7 +35,7 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 24 slash commands
+- 29 slash commands
 - 12 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
@@ -104,12 +104,12 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v4.x vs v1.5.x)
 
-| Category          | Highlights                                                                    |
-| ----------------- | ----------------------------------------------------------------------------- |
-| **Chat & Agents** | `@alex` participant, 24 slash commands, 12 LM tools, 3 custom agents          |
-| **Intelligence**  | 92 skills, emotional detection, model tier awareness, frustration recognition |
-| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
-| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
+| Category          | Highlights                                                                      |
+| ----------------- | ------------------------------------------------------------------------------- |
+| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                    |
+| **Intelligence**  | 100+ skills, emotional detection, model tier awareness, frustration recognition |
+| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation              |
+| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades   |
 
 ### Migration Notes
 
@@ -196,20 +196,27 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 ### Slash Commands
 
-| Command                  | What It Does                                       |
-| ------------------------ | -------------------------------------------------- |
-| `@alex /status`          | Check architecture health and version              |
-| `@alex /meditate`        | Consolidate knowledge into memory files            |
-| `@alex /dream`           | Run neural maintenance and repair synapses         |
-| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation |
-| `@alex /learn`           | Acquire new domain knowledge conversationally      |
-| `@alex /azure`           | Get Azure development guidance with MCP tools      |
-| `@alex /m365`            | Get Microsoft 365 and Teams development help       |
-| `@alex /profile`         | View and update your personal preferences          |
-| `@alex /knowledge`       | Search global knowledge across all projects        |
-| `@alex /saveinsight`     | Save a learning to global knowledge base           |
-| `@alex /promote`         | Promote project knowledge to global                |
-| `@alex /knowledgestatus` | View global knowledge base status                  |
+| Command                  | What It Does                                        |
+| ------------------------ | --------------------------------------------------- |
+| `@alex /status`          | Check architecture health and version               |
+| `@alex /meditate`        | Consolidate knowledge into memory files             |
+| `@alex /dream`           | Run neural maintenance and repair synapses          |
+| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation  |
+| `@alex /learn`           | Acquire new domain knowledge conversationally       |
+| `@alex /model`           | Model intelligence dashboard and task advisor       |
+| `@alex /azure`           | Get Azure development guidance with MCP tools       |
+| `@alex /m365`            | Get Microsoft 365 and Teams development help        |
+| `@alex /calendar`        | View upcoming calendar events (Graph)               |
+| `@alex /mail`            | View recent emails (Graph)                          |
+| `@alex /context`         | Full work context: calendar + mail + presence       |
+| `@alex /people`          | Search people in your organization (Graph)          |
+| `@alex /profile`         | View and update your personal preferences           |
+| `@alex /knowledge`       | Search global knowledge across all projects         |
+| `@alex /saveinsight`     | Save a learning to global knowledge base            |
+| `@alex /promote`         | Promote project knowledge to global                 |
+| `@alex /knowledgestatus` | View global knowledge base status                   |
+| `@alex /checkskills`     | Discover new skills available from Global Knowledge |
+| `@alex /pullskill`       | Install a skill from Global Knowledge               |
 
 ### Example Conversations
 
@@ -241,6 +248,15 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 @alex /saveinsight I learned that React useEffect cleanup...
 → Saves this insight for use in any future project
+
+@alex /calendar
+→ Shows upcoming calendar events via Microsoft Graph
+
+@alex /context
+→ Full work context: calendar + mail + presence in one view
+
+@alex /checkskills
+→ Discover new skills available from the Global Knowledge repository
 ```
 
 ---
@@ -455,13 +471,13 @@ A standalone generator is also available:
 
 ```bash
 # Simple topic
-node scripts/gamma-generator.js --topic "Introduction to AI"
+node .github/muscles/gamma-generator.js --topic "Introduction to AI"
 
 # From file with export
-node scripts/gamma-generator.js --file README.md --export pptx
+node .github/muscles/gamma-generator.js --file README.md --export pptx
 
 # Full options
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --topic "Climate Change" \
   --slides 12 \
   --tone "inspiring" \
@@ -643,20 +659,20 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (24 files)
+├── instructions/              # 📚 Procedural memory (28 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (13 files)
+├── prompts/                   # 📖 Episodic memory (17 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (92 skills)
+├── skills/                    # 🎓 Portable domain expertise (see SKILLS-CATALOG)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -689,27 +705,50 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
-## 🆕 What's New in v5.5.0
+## 🆕 What's New in v5.6.x (Stabilized)
 
-### 🧠 Model Intelligence
+### 📡 Microsoft Graph Integration (v5.6.0)
 
-Alex now adapts behavior based on the running LLM:
+Alex connects to your Microsoft 365 environment for enterprise workflows:
+
+- **`/calendar`** — View upcoming calendar events with configurable lookahead
+- **`/mail`** — View recent emails with unread-only filter
+- **`/context`** — Full work context: calendar + mail + presence in one view
+- **`/people <query>`** — Search people in your organization
+- **7 enterprise settings** — Granular toggle for each Graph capability
+- Requires `alex.enterprise.graph.enabled` — see [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
+
+### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.5)
+
+Skills grew from 92 → 109 with new acquisition and inheritance mechanisms:
+
+- **`/checkskills`** — Discover new skills available from Global Knowledge
+- **`/pullskill <id>`** — Install a skill into your project from GK
+- **`Alex: Inherit Skill from Global Knowledge`** — Multi-select batch inheritance
+- **4 new proactive skills** — `skill-development`, `proactive-assistance`, `status-reporting`, `scope-management`
+- **`bicep-avm-mastery`** — 328 Azure Verified Module awareness
+- **Dream inheritance lineage** — Track where inherited skills came from
+
+### 🔒 Release Automation & PII Safety (v5.6.4-5.6.8)
+
+Production-hardened release pipeline with zero PII leaks:
+
+- **`sync-architecture.js`** — Automated master→heir sync during `vscode:prepublish`
+- **3-layer PII protection** — `.gitignore` + `.vscodeignore` + sync script exclusions
+- **`validateHeirIntegrity()`** — Blocks publish if PII, master-only files, or master content detected
+- **Self-contained `.github/`** — Zero external path references in synapse files
+- **Persona detection fix** — Type-safe pattern matching eliminates false-positive DevOps scoring
+- **Game Developer persona** — New persona for game dev projects
+
+### 🧠 Model Intelligence (v5.5.0)
+
+Alex adapts behavior based on the running LLM:
 
 - **`/model` command** — Full dashboard showing model tier, context capacity, and capabilities
-- **`/model <task>`** — Analyze any task and get model recommendations
 - **Task-Model Matching** — Cognitive tasks check if current model meets requirements
 - **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
-
-### 🔒 Enterprise Secrets Extensibility
-
-- **Custom patterns** — Define organization-specific regex via `alex.enterprise.secrets.customPatterns`
 - **17 enterprise settings** — Full documentation in [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
-- **Disable built-ins** — Use only your custom patterns for compliance
-
-### 🔍 Automated Doc Count Validation
-
-- Dream protocol now validates documented counts against actual files
-- Reports drift for Procedural (24), Episodic (13), and Skills (92)
+- **Custom secrets patterns** — Define organization-specific regex for compliance
 
 ---
 
@@ -820,6 +859,8 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
 | [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
 | [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
+| [Microsoft Graph](alex_docs/guides/MICROSOFT-GRAPH-INTEGRATION.md)         | Enterprise Graph integration (Calendar, Mail)   |
+| [Enterprise Settings](alex_docs/guides/ENTERPRISE-SETTINGS.md)             | All 24 enterprise configuration options         |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources

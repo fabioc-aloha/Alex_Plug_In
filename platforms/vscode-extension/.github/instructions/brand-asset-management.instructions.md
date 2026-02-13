@@ -164,6 +164,7 @@ The `--density 150` flag ensures crisp text rendering.
 
 ## Synapses
 
+- [.github/skills/brand-asset-management/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
 - [.github/instructions/release-management.instructions.md] (Medium, Integrates, Backward) - "Asset verification during release"
 - [.github/instructions/heir-skill-promotion.instructions.md] (Low, Documents, Forward) - "Heir branding alignment"
 

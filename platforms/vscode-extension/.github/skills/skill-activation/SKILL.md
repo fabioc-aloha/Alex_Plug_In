@@ -88,8 +88,10 @@ Search this index when processing any task request:
 | microsoft-graph-api | call graph api, integrate m365, graph authentication, read calendar, send mail |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
 | multi-agent-orchestration | orchestrate agents, decompose task, delegate subtask, coordinate agents |
+| muscle-memory-recognition | repetitive task, automate this, script this, heavy lifting, we did this before, muscle |
 | observability-monitoring | instrument logs, collect metrics, add tracing, setup monitoring, create alerts |
 | performance-profiling | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code |
+| persona-detection | detect persona, project type, know your customer, welcome screen, sidebar persona, workspace classification |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
 | pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides, use auto |
 | ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, use slides, use pitch, use auto, slide deck options |

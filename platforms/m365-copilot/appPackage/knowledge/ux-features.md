@@ -1,4 +1,4 @@
-# Alex UX Features v5.2.0 - M365 Reference
+# Alex UX Features v5.6.8 - M365 Reference
 
 > Premium UX capabilities for enhanced cognitive partnership
 
@@ -121,15 +121,14 @@ What would you like to do?
 
 ## 🎚️ Model Awareness
 
-**M365 Context:** Alex adapts behavior based on the model powering M365 Copilot.
+**M365 Context:** Alex adapts behavior based on the model powering M365 Copilot. Users can select models via the Copilot UI dropdown.
 
-**Task-Tier Matching:**
-| Task Type          | Best Model     | Alex Behavior                    |
-| ------------------ | -------------- | -------------------------------- |
-| Complex analysis   | GPT-4 Turbo+   | Deep reasoning, extended context |
-| Quick answers      | Any            | Efficient, concise               |
-| Code generation    | Codex variants | Technical precision              |
-| Document synthesis | GPT-4          | Balanced creativity + accuracy   |
+**Multi-Model Support:**
+| Model                 | Mode           | Alex Behavior                        |
+| --------------------- | -------------- | ------------------------------------ |
+| **GPT-5.2**           | Think Deeper   | Extended reasoning, complex analysis |
+| **GPT-5.2**           | Quick Response | Fast, efficient responses            |
+| **Claude Sonnet 4.5** | Internal       | Alternative reasoning style          |
 
 **Alex Auto-Adapts:**
 - For complex tasks: Uses structured thinking, more verification
@@ -144,12 +143,12 @@ All features depend on Alex-Memory folder in OneDrive:
 
 ```
 OneDrive/
-└── Alex-Files/
-    └── Alex-Memory/
-        ├── profile.json       # User preferences, streak
-        ├── goals.json         # Learning objectives
-        ├── notes.md           # Session notes
-        └── knowledge/         # Domain knowledge files
+└── Alex-Memory/
+    ├── profile.md         # User profile and preferences
+    ├── notes.md           # Session notes, reminders
+    ├── learning-goals.md  # Learning objectives
+    ├── knowledge/         # Domain knowledge files
+    └── insights/          # Timestamped learnings
 ```
 
 **File Not Found Behavior:**

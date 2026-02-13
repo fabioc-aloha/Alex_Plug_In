@@ -62,6 +62,13 @@
             "strength": "moderate",
             "direction": "incoming",
             "context": "Skill scaffolding follows project scaffolding patterns"
+        },
+        {
+            "target": "research-first-development",
+            "type": "procedural",
+            "strength": "strong",
+            "direction": "incoming",
+            "context": "Research-first methodology generates skills via skill-building quality gates"
         }
     ]
 }

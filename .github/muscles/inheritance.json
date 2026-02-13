@@ -1,0 +1,98 @@
+{
+    "$schema": "../../alex_docs/schemas/muscle-inheritance.schema.json",
+    "schemaVersion": "1.0.0",
+    "description": "Defines inheritance rules for muscle scripts (execution artifacts)",
+    "inherits": "Muscles with 'inheritable' or 'universal' are synced to heirs. Master-only scripts stay in master.",
+    "muscles": {
+        "audit-master-alex.ps1": {
+            "inheritance": "master-only",
+            "description": "22-check comprehensive audit for Master Alex only",
+            "referencedBy": [
+                "master-alex-audit",
+                "dream-state-automation"
+            ]
+        },
+        "brain-qa.ps1": {
+            "inheritance": "inheritable",
+            "description": "15-phase brain quality assurance validation",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
+        "build-extension-package.ps1": {
+            "inheritance": "master-only",
+            "description": "Orchestrates master→heir build process",
+            "referencedBy": [
+                "heir-curation",
+                "release-management"
+            ]
+        },
+        "dream-cli.ts": {
+            "inheritance": "inheritable",
+            "description": "CLI wrapper for dream/neural maintenance outside VS Code",
+            "referencedBy": [
+                "dream-state-automation"
+            ]
+        },
+        "fix-fence-bug.ps1": {
+            "inheritance": "master-only",
+            "description": "Detect and fix VS Code create_file wrapping fence bug",
+            "referencedBy": []
+        },
+        "gamma-generator.js": {
+            "inheritance": "inheritable",
+            "description": "Gamma API CLI for presentation generation",
+            "referencedBy": [
+                "gamma-presentations"
+            ]
+        },
+        "normalize-paths.ps1": {
+            "inheritance": "inheritable",
+            "description": "Normalize memory file paths to canonical .github/ format",
+            "referencedBy": [
+                "dream-state-automation"
+            ]
+        },
+        "pptxgen-cli.ts": {
+            "inheritance": "inheritable",
+            "description": "Offline PowerPoint generation via PptxGenJS",
+            "referencedBy": [
+                "pptx-generation"
+            ]
+        },
+        "sync-architecture.js": {
+            "inheritance": "master-only",
+            "description": "Syncs master architecture to heir (meta-script)",
+            "referencedBy": [
+                "heir-curation",
+                "build-extension-package.ps1"
+            ]
+        },
+        "validate-skills.ps1": {
+            "inheritance": "inheritable",
+            "description": "Skill frontmatter and structure validation",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "validate-synapses.ps1": {
+            "inheritance": "inheritable",
+            "description": "Synapse connection validation",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "README.md": {
+            "inheritance": "inheritable",
+            "description": "Muscles folder documentation with language selection guide",
+            "referencedBy": []
+        },
+        "fix-fence-bug.ps1": {
+            "inheritance": "inheritable",
+            "description": "Detects and fixes VS Code create_file wrapping fence bug (temporary)",
+            "referencedBy": []
+        }
+    }
+}

@@ -63,6 +63,12 @@
       "type": "enables",
       "strength": 0.75,
       "note": "Brain QA validates skill index and synapses that SSO depends on for proactive planning"
+    },
+    {
+      "target": ".github/instructions/alex-core.instructions.md",
+      "type": "implements",
+      "strength": 0.9,
+      "note": "Phase 20 validates LLM-First Content Principles defined in core architecture"
     }
   ],
   "activationBoost": [

@@ -1,88 +1,88 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "inheritance": "inheritable",
-    "version": "1.0.0",
-    "skill": "deep-work-optimization",
-    "created": "2026-02-10",
-    "connectionCount": 6,
-    "connections": [],
-    "synapses": [
-        {
-            "id": "DEEP-001",
-            "source": "deep-work-optimization",
-            "target": "cognitive-load-management",
-            "type": "complements",
-            "strength": 0.9,
-            "description": "Deep work requires cognitive load awareness; overload prevents flow",
-            "bidirectional": true
-        },
-        {
-            "id": "DEEP-002",
-            "source": "deep-work-optimization",
-            "target": "dissertation-defense",
-            "type": "enables",
-            "strength": 0.95,
-            "description": "Deep work is essential for dissertation completion",
-            "bidirectional": false
-        },
-        {
-            "id": "DEEP-003",
-            "source": "deep-work-optimization",
-            "target": "frustration-recognition",
-            "type": "triggers",
-            "strength": 0.7,
-            "description": "Disrupted deep work causes frustration; recognition enables recovery",
-            "bidirectional": true
-        },
-        {
-            "id": "DEEP-004",
-            "source": "deep-work-optimization",
-            "target": "meeting-efficiency",
-            "type": "protects",
-            "strength": 0.8,
-            "description": "Efficient meetings protect deep work time",
-            "bidirectional": false
-        },
-        {
-            "id": "DEEP-005",
-            "source": "deep-work-optimization",
-            "target": "academic-paper-drafting",
-            "type": "enables",
-            "strength": 0.85,
-            "description": "Academic writing requires sustained deep work sessions",
-            "bidirectional": false
-        },
-        {
-            "id": "DEEP-006",
-            "source": "deep-work-optimization",
-            "target": "airs-integration.session-calibration",
-            "type": "informs",
-            "strength": 0.6,
-            "description": "Deep work sessions benefit from appropriate reliance calibration",
-            "bidirectional": false
-        }
-    ],
-    "activationPatterns": [
-        {
-            "trigger": "deep work|focus session|concentration|undistracted",
-            "confidence": 0.95
-        },
-        {
-            "trigger": "dissertation time|writing session|academic writing",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "distracted|can't focus|scattered|interruption",
-            "confidence": 0.85
-        },
-        {
-            "trigger": "flow state|zone|peak performance",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "time block|schedule focus|protect time",
-            "confidence": 0.85
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "inheritance": "inheritable",
+  "version": "1.0.0",
+  "skill": "deep-work-optimization",
+  "created": "2026-02-10",
+  "connectionCount": 6,
+  "connections": [],
+  "synapses": [
+    {
+      "id": "DEEP-001",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/cognitive-load-management/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "description": "Deep work requires cognitive load awareness; overload prevents flow",
+      "bidirectional": true
+    },
+    {
+      "id": "DEEP-002",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/dissertation-defense/SKILL.md",
+      "type": "enables",
+      "strength": 0.95,
+      "description": "Deep work is essential for dissertation completion",
+      "bidirectional": false
+    },
+    {
+      "id": "DEEP-003",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "type": "triggers",
+      "strength": 0.7,
+      "description": "Disrupted deep work causes frustration; recognition enables recovery",
+      "bidirectional": true
+    },
+    {
+      "id": "DEEP-004",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/meeting-efficiency/SKILL.md",
+      "type": "protects",
+      "strength": 0.8,
+      "description": "Efficient meetings protect deep work time",
+      "bidirectional": false
+    },
+    {
+      "id": "DEEP-005",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/academic-paper-drafting/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "description": "Academic writing requires sustained deep work sessions",
+      "bidirectional": false
+    },
+    {
+      "id": "DEEP-006",
+      "source": "deep-work-optimization",
+      "target": ".github/skills/airs-integration.session-calibration/SKILL.md",
+      "type": "informs",
+      "strength": 0.6,
+      "description": "Deep work sessions benefit from appropriate reliance calibration",
+      "bidirectional": false
+    }
+  ],
+  "activationPatterns": [
+    {
+      "trigger": "deep work|focus session|concentration|undistracted",
+      "confidence": 0.95
+    },
+    {
+      "trigger": "dissertation time|writing session|academic writing",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "distracted|can't focus|scattered|interruption",
+      "confidence": 0.85
+    },
+    {
+      "trigger": "flow state|zone|peak performance",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "time block|schedule focus|protect time",
+      "confidence": 0.85
+    }
+  ]
 }

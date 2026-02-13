@@ -1,6 +1,7 @@
 ---
 name: "Awareness Skill"
 description: "Proactive detection, self-correction, and epistemic vigilance"
+user-invokable: false
 ---
 
 # Awareness Skill

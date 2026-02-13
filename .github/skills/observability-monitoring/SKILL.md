@@ -1,4 +1,3 @@
-```skill
 ---
 name: "Observability & Monitoring"
 description: "Production visibility through logs, metrics, traces, and alerting — the three pillars of observability"
@@ -347,4 +346,3 @@ telemetry.logUsage('command.executed', {
 *"If you can't measure it, you can't improve it." — Peter Drucker*
 
 *Good observability means finding the problem before your users do.*
-```

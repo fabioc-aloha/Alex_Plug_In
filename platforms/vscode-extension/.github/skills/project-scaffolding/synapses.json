@@ -25,6 +25,12 @@
       "type": "enables",
       "strength": 0.85,
       "reason": "Proper gitignore and structure"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "reason": "Research-first adds knowledge layer before file scaffolding"
     }
   ],
   "triggers": [

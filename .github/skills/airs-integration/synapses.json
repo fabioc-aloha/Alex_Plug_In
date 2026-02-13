@@ -1,128 +1,128 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "inheritance": "inheritable",
-    "version": "1.0.0",
-    "skill": "airs-integration",
-    "created": "2026-02-10",
-    "connectionCount": 8,
-    "connections": [],
-    "synapses": [
-        {
-            "id": "AIRS-INT-001",
-            "source": "airs-integration",
-            "target": "airs-appropriate-reliance",
-            "type": "extends",
-            "strength": 0.95,
-            "description": "Extends theoretical AIRS knowledge with practical application workflows",
-            "bidirectional": true
-        },
-        {
-            "id": "AIRS-INT-002",
-            "source": "airs-integration",
-            "target": "cognitive-load-management",
-            "type": "informs",
-            "strength": 0.7,
-            "description": "Reliance calibration overlaps with cognitive load - over-reliance may indicate overload",
-            "bidirectional": false
-        },
-        {
-            "id": "AIRS-INT-003",
-            "source": "airs-integration",
-            "target": "frustration-recognition",
-            "type": "informs",
-            "strength": 0.75,
-            "description": "Under-reliance patterns may stem from frustration; detection helps calibration",
-            "bidirectional": true
-        },
-        {
-            "id": "AIRS-INT-004",
-            "source": "airs-integration",
-            "target": "dissertation-defense",
-            "type": "supports",
-            "strength": 0.85,
-            "description": "AIRS is the dissertation topic; integration skill provides application examples",
-            "bidirectional": true
-        },
-        {
-            "id": "AIRS-INT-005",
-            "source": "airs-integration",
-            "target": "academic-paper-drafting",
-            "type": "supports",
-            "strength": 0.8,
-            "description": "AIRS research provides content for academic publications",
-            "bidirectional": false
-        },
-        {
-            "id": "AIRS-INT-006",
-            "source": "airs-integration",
-            "target": "bootstrap-learning",
-            "type": "applies",
-            "strength": 0.6,
-            "description": "AIRS integration applies domain-agnostic learning principles to AI adoption",
-            "bidirectional": false
-        },
-        {
-            "id": "AIRS-INT-007",
-            "source": "airs-integration.module-b",
-            "target": "meta-cognitive-awareness",
-            "type": "implements",
-            "strength": 0.9,
-            "description": "Session calibration is meta-cognitive self-monitoring in action",
-            "bidirectional": false
-        },
-        {
-            "id": "AIRS-INT-008",
-            "source": "airs-integration.module-d",
-            "target": "self-actualization",
-            "type": "complements",
-            "strength": 0.7,
-            "description": "Self-monitoring generates insights for deep self-actualization analysis",
-            "bidirectional": false
-        }
-    ],
-    "activationPatterns": [
-        {
-            "trigger": "AI readiness|ready for AI|should we add AI|project assessment",
-            "module": "A",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "calibrate|reliance check|over-rely|under-rely",
-            "module": "B",
-            "confidence": 0.95
-        },
-        {
-            "trigger": "enterprise AI|org deployment|scale AI|organizational readiness",
-            "module": "C",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "self-monitor|acceptance rate|rejection rate",
-            "module": "D",
-            "confidence": 0.85
-        },
-        {
-            "trigger": "airs.correax.com|take assessment|AIRS-16",
-            "action": "direct-to-assessment",
-            "confidence": 0.95
-        }
-    ],
-    "keyInsights": [
-        {
-            "insight": "Price Value (β=.505) is the strongest predictor of AI adoption intention",
-            "source": "Correa (2025) AIRS-16 Validation",
-            "application": "Always lead with ROI clarity in readiness assessments"
-        },
-        {
-            "insight": "Trust alone (TR) was marginal predictor (p>.05)",
-            "source": "Correa (2025) AIRS-16 Validation",
-            "application": "Focus on calibration (knowing when to trust) not trust level"
-        },
-        {
-            "insight": "CAIR/CSR framework distinguishes appropriate from inappropriate reliance",
-            "source": "Schemmer et al. (2023)",
-            "application": "Use 2x2 matrix to diagnose reliance patterns"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "inheritance": "inheritable",
+  "version": "1.0.0",
+  "skill": "airs-integration",
+  "created": "2026-02-10",
+  "connectionCount": 8,
+  "connections": [],
+  "synapses": [
+    {
+      "id": "AIRS-INT-001",
+      "source": "airs-integration",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
+      "type": "extends",
+      "strength": 0.95,
+      "description": "Extends theoretical AIRS knowledge with practical application workflows",
+      "bidirectional": true
+    },
+    {
+      "id": "AIRS-INT-002",
+      "source": "airs-integration",
+      "target": ".github/skills/cognitive-load-management/SKILL.md",
+      "type": "informs",
+      "strength": 0.7,
+      "description": "Reliance calibration overlaps with cognitive load - over-reliance may indicate overload",
+      "bidirectional": false
+    },
+    {
+      "id": "AIRS-INT-003",
+      "source": "airs-integration",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "type": "informs",
+      "strength": 0.75,
+      "description": "Under-reliance patterns may stem from frustration; detection helps calibration",
+      "bidirectional": true
+    },
+    {
+      "id": "AIRS-INT-004",
+      "source": "airs-integration",
+      "target": ".github/skills/dissertation-defense/SKILL.md",
+      "type": "supports",
+      "strength": 0.85,
+      "description": "AIRS is the dissertation topic; integration skill provides application examples",
+      "bidirectional": true
+    },
+    {
+      "id": "AIRS-INT-005",
+      "source": "airs-integration",
+      "target": ".github/skills/academic-paper-drafting/SKILL.md",
+      "type": "supports",
+      "strength": 0.8,
+      "description": "AIRS research provides content for academic publications",
+      "bidirectional": false
+    },
+    {
+      "id": "AIRS-INT-006",
+      "source": "airs-integration",
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "type": "applies",
+      "strength": 0.6,
+      "description": "AIRS integration applies domain-agnostic learning principles to AI adoption",
+      "bidirectional": false
+    },
+    {
+      "id": "AIRS-INT-007",
+      "source": "airs-integration.module-b",
+      "target": ".github/skills/meta-cognitive-awareness/SKILL.md",
+      "type": "implements",
+      "strength": 0.9,
+      "description": "Session calibration is meta-cognitive self-monitoring in action",
+      "bidirectional": false
+    },
+    {
+      "id": "AIRS-INT-008",
+      "source": "airs-integration.module-d",
+      "target": ".github/skills/self-actualization/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "description": "Self-monitoring generates insights for deep self-actualization analysis",
+      "bidirectional": false
+    }
+  ],
+  "activationPatterns": [
+    {
+      "trigger": "AI readiness|ready for AI|should we add AI|project assessment",
+      "module": "A",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "calibrate|reliance check|over-rely|under-rely",
+      "module": "B",
+      "confidence": 0.95
+    },
+    {
+      "trigger": "enterprise AI|org deployment|scale AI|organizational readiness",
+      "module": "C",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "self-monitor|acceptance rate|rejection rate",
+      "module": "D",
+      "confidence": 0.85
+    },
+    {
+      "trigger": "airs.correax.com|take assessment|AIRS-16",
+      "action": "direct-to-assessment",
+      "confidence": 0.95
+    }
+  ],
+  "keyInsights": [
+    {
+      "insight": "Price Value (β=.505) is the strongest predictor of AI adoption intention",
+      "source": "Correa (2025) AIRS-16 Validation",
+      "application": "Always lead with ROI clarity in readiness assessments"
+    },
+    {
+      "insight": "Trust alone (TR) was marginal predictor (p>.05)",
+      "source": "Correa (2025) AIRS-16 Validation",
+      "application": "Focus on calibration (knowing when to trust) not trust level"
+    },
+    {
+      "insight": "CAIR/CSR framework distinguishes appropriate from inappropriate reliance",
+      "source": "Schemmer et al. (2023)",
+      "application": "Use 2x2 matrix to diagnose reliance patterns"
+    }
+  ]
 }

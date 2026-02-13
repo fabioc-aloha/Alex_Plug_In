@@ -1,0 +1,49 @@
+{
+    "skill": "muscle-memory-recognition",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "reason": "Muscle recognition is learning output - identifying what to automate"
+        },
+        {
+            "target": ".github/skills/research-first-development/SKILL.md",
+            "type": "applies",
+            "strength": 0.75,
+            "reason": "Research patterns before building muscles"
+        },
+        {
+            "target": ".github/skills/architecture-health/SKILL.md",
+            "type": "enables",
+            "strength": 0.7,
+            "reason": "Muscles improve architecture maintainability"
+        },
+        {
+            "target": ".github/instructions/heir-project-improvement.instructions.md",
+            "type": "informs",
+            "strength": 0.8,
+            "reason": "Muscles are part of project improvement trifectas"
+        },
+        {
+            "target": ".github/instructions/deep-thinking.instructions.md",
+            "type": "uses",
+            "strength": 0.6,
+            "reason": "Complex automation decisions benefit from deep analysis"
+        }
+    ],
+    "triggers": [
+        "repetitive task",
+        "automate this",
+        "script this",
+        "we did this before",
+        "muscle",
+        "heavy lifting",
+        "takes forever",
+        "error prone",
+        "every time"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

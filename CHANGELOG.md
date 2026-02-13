@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.6.9] - 2026-02-14
+
+> **Semantic Signals + Visual Polish** — Persona detection uses regex-based semantic rules; Mermaid diagrams adopt GitHub Pastel v2; Codespaces heir documented
+
+### Changed
+
+- **Persona detection: semantic signal architecture** — Replaced flat keyword/techStack/projectPatterns arrays with unified `PersonaSignal` system. Each signal has a category (identity, technology, structure, dependency, content), regex pattern, and per-signal weight. All 16 personas now defined via `buildPersona()` with weighted semantic rules instead of substring matching
+- **Priority 1-4 detection helpers** — `detectFromFocusSession()`, `detectFromSessionGoals()`, `detectFromProjectPhase()`, and `detectFromProjectGoals()` rewritten to use `matchTextAgainstSignals()` with regex matching
+- **Priority 6 scoring loop** — Profile analysis (tech, goals, expertise, projects) and workspace scanning now iterate signal categories with regex. Dependency and content signals enable deeper detection without LLM fallback
+- **Mermaid diagram palette** — All 6 Mermaid blocks across 5 documentation files updated to GitHub Pastel v2 with `%%{init}%%` directive, `classDef` semantic coloring, and `linkStyle default` stroke
+- **Welcome UI** — Skill library count updated (100+), P5-P7 Focus slots now show human-readable names, Persona Detection description reflects P5-P7, Extended Thinking mentions Opus 4.5/4.6
+
+### Added
+
+- **`PersonaSignal` interface** — 5 categories (identity, technology, structure, dependency, content) with regex patterns and weights
+- **`buildPersona()` helper** — Constructs Persona objects from signals, auto-derives legacy arrays for backward compatibility
+- **`matchTextAgainstSignals()` helper** — Unified regex-based signal matching for all priority detection functions
+- **Codespaces Heir doc** — `alex_docs/platforms/CODESPACES-HEIR.md` documenting zero-translation cloud deployment, devcontainer.json setup, persistence strategy, and team onboarding
+
+---
+
 ## [5.6.8] - 2026-02-12
 
 > **Heir Decontamination RCA + Persona Detection Fix** — sync-architecture.js prevents PII leaks; persona detection no longer false-positives on `.github/`
@@ -275,12 +296,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `alex.enterprise.secrets.disableBuiltInPatterns` — Use only custom patterns
   - Full pattern validation with clear error messages
 
+### Changed
+
+- **Muscles Architecture** (`.github/muscles/`): Established execution script folder — "Motor Cortex" analogy
+  - Scripts are muscles (execution artifacts), NOT a fourth memory system
+  - Trifecta files document *when and why* to flex the muscle; scripts *do the flexing*
+  - Script location rules: `inheritable` → `.github/muscles/` (synced to heirs), `master-only` → `scripts/`
+- **brain-qa SKILL.md**: Refactored 543→90 lines — extracted 525-line `brain-qa.ps1` (15-phase validation)
+- **release-preflight SKILL.md**: Refactored 426→105 lines — references existing `scripts/release-preflight.ps1`
+- **Systematic Skill Audit**: Reviewed all 77 skills for extractable automation
+  - 1 extracted (brain-qa), 6 already reference scripts, 28 documentation examples, 42 no code
+
 ### Technical
 
 - New `modelIntelligence.ts` module with detection patterns and task definitions
 - Integration with chat participant handler for proactive warnings
 - Context size heuristic fallback when model family cannot be detected
 - Task intent detection via regex pattern matching
+- New `.github/muscles/brain-qa.ps1` — 525-line PowerShell script with 15 validation phases
 
 ---
 

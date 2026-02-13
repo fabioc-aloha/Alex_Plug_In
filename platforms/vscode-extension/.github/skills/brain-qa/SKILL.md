@@ -1,4 +1,3 @@
-````skill
 ---
 name: "Brain QA"
 description: "Deep semantic validation of Alex's cognitive architecture - synapses, triggers, skill index, and Master-Heir synchronization"
@@ -13,19 +12,19 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ```powershell
 # Full 15-phase audit
-.github/scripts/brain-qa.ps1
+.github/muscles/brain-qa.ps1
 
 # Quick validation (phases 1-6)
-.github/scripts/brain-qa.ps1 -Mode quick
+.github/muscles/brain-qa.ps1 -Mode quick
 
 # Sync validation only (phases 5,7,8,13-15)
-.github/scripts/brain-qa.ps1 -Mode sync
+.github/muscles/brain-qa.ps1 -Mode sync
 
 # Specific phases
-.github/scripts/brain-qa.ps1 -Phase 1,5,7
+.github/muscles/brain-qa.ps1 -Phase 1,5,7
 
 # Auto-fix sync issues
-.github/scripts/brain-qa.ps1 -Mode sync -Fix
+.github/muscles/brain-qa.ps1 -Mode sync -Fix
 ```
 
 ## When to Use
@@ -71,7 +70,7 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 |-------|-----|
 | Broken synapse target | Update path in synapses.json |
 | Missing inheritance | Add `"inheritance": "inheritable"` to synapses.json |
-| Out of sync | Run with `-Fix` or use `sync-master-to-heir.ps1` |
+| Out of sync | Run with `-Fix` or use `build-extension-package.ps1` |
 | Boilerplate description | Write meaningful description in SKILL.md frontmatter |
 | Master-only leak | Remove protected files from heir |
 
@@ -90,6 +89,4 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ---
 
-*Script: `.github/scripts/brain-qa.ps1`*
-
-````
+*Script: `.github/muscles/brain-qa.ps1`*

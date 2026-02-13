@@ -1,3 +1,8 @@
+---
+name: "Executive Storytelling"
+description: "Data-driven narrative construction, stakeholder management, and influencing senior leadership decisions"
+---
+
 # Skill: Executive Storytelling
 
 > Data-driven narrative construction, stakeholder management, and meeting efficiency for influencing senior leadership decisions.

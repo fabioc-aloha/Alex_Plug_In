@@ -1,3 +1,8 @@
+---
+name: "PPTX Generation"
+description: "Programmatic PowerPoint creation via PptxGenJS with data-driven slides and Markdown conversion"
+---
+
 # PPTX Generation Skill
 
 **Domain**: Presentation Generation  
@@ -122,10 +127,10 @@ await generateAndSavePresentation(slides, { title: 'Q4 Review' }, 'review.pptx')
 
 ```bash
 # From markdown
-npx ts-node scripts/pptxgen-cli.ts --input slides.md --output deck.pptx
+npx ts-node .github/muscles/pptxgen-cli.ts --input slides.md --output deck.pptx
 
 # Quick content
-npx ts-node scripts/pptxgen-cli.ts --content "Welcome to Alex|Point 1|Point 2" -o quick.pptx
+npx ts-node .github/muscles/pptxgen-cli.ts --content "Welcome to Alex|Point 1|Point 2" -o quick.pptx
 ```
 
 ---

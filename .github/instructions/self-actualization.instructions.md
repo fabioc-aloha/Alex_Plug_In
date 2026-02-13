@@ -182,20 +182,20 @@ Or natural language:
 
 ### High-Strength Bidirectional Connections
 
-- [.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
-- [.github/instructions/dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
+- [.github/instructions/.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
+- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
+- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
 
 ### Medium-Strength Output Connections
 
-- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
-- [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
-- [.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
-- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-assessment resource planning for complex 5-phase protocol"
+- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
+- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
+- [.github/instructions/.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
+- [.github/instructions/.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-assessment resource planning for complex 5-phase protocol"
 
 ### Input Connections
 
-- [.github/prompts/performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
+- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
 
 **Primary Function**: Execute comprehensive self-assessment with synapse validation, version checking, memory architecture analysis, and session documentation.
 

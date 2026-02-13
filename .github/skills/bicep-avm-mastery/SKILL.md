@@ -1,4 +1,8 @@
-````skill
+---
+name: "Bicep AVM Mastery"
+description: "Azure Verified Modules (AVM), Bicep best practices, and MCP-powered infrastructure as code for Azure"
+---
+
 # Skill: Bicep AVM Mastery
 
 > Azure Verified Modules (AVM), Bicep best practices, and MCP-powered infrastructure as code for Azure.
@@ -417,5 +421,3 @@ az deployment group create \
 - [.github/skills/infrastructure-as-code/SKILL.md] (High, Extends, Bidirectional) - "Bicep is an IaC tool covered in depth here"
 - [.github/skills/azure-architecture-patterns/SKILL.md] (High, Implements, Bidirectional) - "Bicep deploys architectures designed with WAF"
 - [.github/skills/azure-devops-automation/SKILL.md] (Medium, Uses, Forward) - "CI/CD pipelines deploy Bicep code"
-
-````

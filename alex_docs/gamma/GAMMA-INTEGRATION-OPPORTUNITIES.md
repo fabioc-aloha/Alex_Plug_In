@@ -34,7 +34,7 @@ Each opportunity includes:
 
 ### What
 
-~~The `scripts/gamma-generator.js` file uses `API_VERSION = 'v0.2'` (line 26). Gamma deprecated v0.2 on January 16, 2026. The script stopped working.~~
+~~The `.github/muscles/gamma-generator.js` file uses `API_VERSION = 'v0.2'` (line 26). Gamma deprecated v0.2 on January 16, 2026. The script stopped working.~~
 
 **RESOLVED**: Migrated `API_VERSION` from `'v0.2'` to `'v1.0'`. Also added `--instructions` and `--image-source` CLI arguments.
 
@@ -251,7 +251,7 @@ Users who generate many presentations need organization. Alex can save to "Resea
 
 ### What
 
-Currently Gamma is only accessible via CLI (`node scripts/gamma-generator.js`). It should be available through Alex's VS Code chat interface.
+Currently Gamma is only accessible via CLI (`node .github/muscles/gamma-generator.js`). It should be available through Alex's VS Code chat interface.
 
 ### Why
 

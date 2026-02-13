@@ -1,3 +1,8 @@
+---
+name: "Research Project Scaffold"
+description: "Scaffolding academic research projects and refactoring existing ones for Alex-assisted workflows"
+---
+
 # Research Project Scaffold Skill
 
 > Scaffolding new academic research projects and refactoring existing ones for Alex-assisted workflows.

@@ -1,3 +1,9 @@
+---
+name: "skill-activation"
+description: "Internal metacognitive skill for automatic capability discovery — self-triggers when uncertain about available skills"
+user-invokable: false
+---
+
 # Skill Activation
 
 Meta-cognitive skill for automatic capability discovery. Self-triggers when uncertain.
@@ -44,6 +50,7 @@ Search this index when processing any task request:
 | bicep-avm-mastery | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
+| brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
 | citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |
@@ -57,6 +64,7 @@ Search this index when processing any task request:
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
+| dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
 | executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
@@ -88,6 +96,7 @@ Search this index when processing any task request:
 | microsoft-graph-api | call graph api, integrate m365, graph authentication, read calendar, send mail |
 | microsoft-sfi | security review, stride threat, secure by design, sfi compliance, threat model |
 | multi-agent-orchestration | orchestrate agents, decompose task, delegate subtask, coordinate agents |
+| muscle-memory-recognition | repetitive task, automate this, script this, heavy lifting, we did this before, muscle |
 | observability-monitoring | instrument logs, collect metrics, add tracing, setup monitoring, create alerts |
 | performance-profiling | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code |
 | persona-detection | detect persona, project type, know your customer, welcome screen, sidebar persona, workspace classification |
@@ -101,11 +110,13 @@ Search this index when processing any task request:
 | project-management | manage project, rapid iteration, session workflow, planning document |
 | project-scaffolding | scaffold project, create readme, init repo, hero banner, new project |
 | prompt-engineering | write prompt, chain of thought, few-shot, prompt template, system prompt |
+| prompt-activation | workflow prompt, episodic recall, session type, do you remember, prior context |
 | proactive-assistance | anticipate needs, offer help, suggest next, nudge user, help before asked |
 | rag-architecture | build rag, vector search, embeddings, retrieval augmented, chunking |
 | refactoring-patterns | refactor code, extract function, code smell, safe refactor, inline |
 | release-preflight | preflight check, version sync, pre-release, bump version, validate release |
 | release-process | publish extension, vsce publish, marketplace, pat token, vsix |
+| research-first-development | research first, 4-dimension gap, pre-project research, knowledge encoding |
 | research-project-scaffold | scaffold research, literature matrix, research plan, data dictionary |
 | root-cause-analysis | find root cause, 5 whys, cause category, timeline analysis, fix prevent |
 | rubber-duck-debugging | explain problem, thinking partner, stuck debugging, talk through |

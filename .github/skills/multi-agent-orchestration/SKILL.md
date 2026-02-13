@@ -1,4 +1,3 @@
-```skill
 ---
 name: "Multi-Agent Orchestration"
 description: "Coordinate multiple AI agents for complex tasks — decomposition, delegation, and synthesis"
@@ -315,4 +314,3 @@ When designing multi-agent workflows:
 ---
 
 *Multi-agent orchestration is powerful but not always necessary. Start simple, add agents when complexity demands it.*
-```

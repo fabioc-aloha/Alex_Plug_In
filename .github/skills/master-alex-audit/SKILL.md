@@ -52,29 +52,29 @@ Master Alex-specific audit procedures that leverage knowledge of:
 
 ## Production Scripts
 
-**Primary Script**: `scripts/audit-master-alex.ps1`
+**Primary Script**: `.github/muscles/audit-master-alex.ps1`
 
 ```powershell
 # Full audit (all 22 sections)
-.\scripts\audit-master-alex.ps1
+.\.github\muscles\audit-master-alex.ps1
 
 # Quick audit (master-specific only, sections 1-9)
-.\scripts\audit-master-alex.ps1 -Section quick
+.\.github\muscles\audit-master-alex.ps1 -Section quick
 
 # Specific sections
-.\scripts\audit-master-alex.ps1 -Section 4,7,13
+.\.github\muscles\audit-master-alex.ps1 -Section 4,7,13
 ```
 
 **Supporting Scripts**:
 
 | Script | Covers | Purpose |
 |--------|--------|---------|
-| `scripts/audit-master-alex.ps1` | 1-22 | Comprehensive audit |
+| `.github/muscles/audit-master-alex.ps1` | 1-22 | Comprehensive audit |
 | `scripts/release-preflight.ps1` | 1, 5, 12, 16 | Version sync, build, lint |
-| `scripts/sync-master-to-heir.ps1` | 2 | Heir folder sync |
-| `scripts/build-extension-package.ps1` | 3 | Skill inheritance |
-| `scripts/validate-synapses.ps1` | 7 | Synapse validation |
-| `scripts/validate-skills.ps1` | N/A | Skill frontmatter |
+| `.github/muscles/sync-architecture.js` | 2 | Heir folder sync |
+| `.github/muscles/build-extension-package.ps1` | 2, 3 | Full build (sync + compile + PII) |
+| `.github/muscles/validate-synapses.ps1` | 7 | Synapse validation |
+| `.github/muscles/validate-skills.ps1` | N/A | Skill frontmatter |
 
 ## Section Reference
 

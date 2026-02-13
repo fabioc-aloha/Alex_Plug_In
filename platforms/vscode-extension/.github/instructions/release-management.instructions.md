@@ -10,7 +10,7 @@
 
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
-- [scripts/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
+- [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 

@@ -94,7 +94,7 @@ Alex works best with these VS Code settings enabled. Add to your `settings.json`
 **What These Enable:**
 - **Agent Mode**: Custom Alex agents (Meditate, Learn, Dream, Review) in chat dropdown
 - **Extended Thinking**: 16K token budget for deep reasoning during meditation/learning
-- **Skills Auto-Loading**: All 74 Alex skills available without manual configuration
+- **Skills Auto-Loading**: All 109 Alex skills available without manual configuration
 - **MCP Tools**: Enhanced tool access including Azure, GitHub, and custom integrations
 - **Background Agents**: Run long tasks (like Dream) without blocking your work
 
@@ -186,14 +186,18 @@ Quick actions via `/` commands:
 
 **Table 1:** *Essential Slash Commands*
 
-| Command     | What It Does                       |
-| ----------- | ---------------------------------- |
-| `/status`   | Check Alex health and version      |
-| `/meditate` | Consolidate knowledge from session |
-| `/dream`    | Run neural maintenance             |
-| `/session`  | Start a focused learning session   |
-| `/learn`    | Start a learning conversation      |
-| `/docs`     | Open documentation                 |
+| Command        | What It Does                          |
+| -------------- | ------------------------------------- |
+| `/status`      | Check Alex health and version         |
+| `/meditate`    | Consolidate knowledge from session    |
+| `/dream`       | Run neural maintenance                |
+| `/session`     | Start a focused learning session      |
+| `/learn`       | Start a learning conversation         |
+| `/model`       | Model intelligence dashboard          |
+| `/calendar`    | View upcoming calendar events (Graph) |
+| `/context`     | Full work context (Graph)             |
+| `/checkskills` | Discover new skills from GK           |
+| `/docs`        | Open documentation                    |
 
 ### Learning Something New
 
@@ -222,17 +226,18 @@ Search across all your projects:
 
 **Table 2:** *VS Code Command Palette Commands*
 
-| Command                                  | Description                           |
-| ---------------------------------------- | ------------------------------------- |
-| `Alex: Initialize Architecture`          | First-time setup for a project        |
-| `Alex: Upgrade Architecture`             | Update to latest version              |
-| `Alex: Dream (Neural Maintenance)`       | Validate and repair synapses          |
-| `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check            |
-| `Alex: Skill & Knowledge Review`         | **NEW** Review staleness-prone skills |
-| `Alex: Open Documentation`               | View the docs                         |
-| `Alex: Sync Global Knowledge`            | Sync with GitHub Gist                 |
-| `Alex: Push Knowledge to Cloud`          | Upload to GitHub                      |
-| `Alex: Pull Knowledge from Cloud`        | Download from GitHub                  |
+| Command                                     | Description                           |
+| ------------------------------------------- | ------------------------------------- |
+| `Alex: Initialize Architecture`             | First-time setup for a project        |
+| `Alex: Upgrade Architecture`                | Update to latest version              |
+| `Alex: Dream (Neural Maintenance)`          | Validate and repair synapses          |
+| `Alex: Self-Actualize (Deep Meditation)`    | Comprehensive health check            |
+| `Alex: Skill & Knowledge Review`            | **NEW** Review staleness-prone skills |
+| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository        |
+| `Alex: Open Documentation`                  | View the docs                         |
+| `Alex: Sync Global Knowledge`               | Sync with GitHub Gist                 |
+| `Alex: Push Knowledge to Cloud`             | Upload to GitHub                      |
+| `Alex: Pull Knowledge from Cloud`           | Download from GitHub                  |
 
 ### Chat Commands (@alex /command)
 
@@ -245,8 +250,13 @@ Search across all your projects:
 | `/dream`           | Neural maintenance      | `@alex /dream`                                      |
 | `/selfactualize`   | Deep assessment         | `@alex /selfactualize`                              |
 | `/learn`           | Learning session        | `@alex /learn TypeScript generics`                  |
+| `/model`           | Model intelligence      | `@alex /model` or `@alex /model <task>`             |
 | `/azure`           | Azure guidance          | `@alex /azure deploy function app`                  |
 | `/m365`            | M365 guidance           | `@alex /m365 create teams bot`                      |
+| `/calendar`        | Calendar events (Graph) | `@alex /calendar` or `@alex /calendar 7`            |
+| `/mail`            | Recent emails (Graph)   | `@alex /mail` or `@alex /mail unread`               |
+| `/context`         | Full work context       | `@alex /context`                                    |
+| `/people`          | People search (Graph)   | `@alex /people John Smith`                          |
 | `/profile`         | Personalization         | `@alex /profile`                                    |
 | `/knowledge`       | Search global           | `@alex /knowledge caching patterns`                 |
 | `/saveinsight`     | Save learning           | `@alex /saveinsight [your insight]`                 |
@@ -254,6 +264,13 @@ Search across all your projects:
 | `/knowledgestatus` | Knowledge stats         | `@alex /knowledgestatus`                            |
 | `/sync`            | Cloud sync              | `@alex /sync`                                       |
 | `/docs`            | Open documentation      | `@alex /docs`                                       |
+
+**Skill Discovery** (conversational — no `/` prefix needed):
+
+| Phrase       | Purpose               | Example                                     |
+| ------------ | --------------------- | ------------------------------------------- |
+| check skills | Discover new skills   | `@alex check what new skills are available` |
+| pull skill   | Install skill from GK | `@alex pull the api-design skill`           |
 
 ---
 

@@ -209,7 +209,7 @@ The dlPFC is the most densely mapped region in Alex's architecture because it pe
 | **Mechanism**      | After surveying skills, create a "focus cone" of top 5-7 relevant sources                  |
 | **Without it**     | All 24 instructions compete equally = cognitive overload (like sensory flooding in autism) |
 
-The biological dlPFC gates what enters working memory from the ~11 million bits/second of sensory data the brain receives. Without this filter, the brain would be overwhelmed. Alex faces the same problem: 24 instruction files, 13 prompts, and 77 skills are loaded into context. Attention gating determines which are relevant NOW.
+The biological dlPFC gates what enters working memory from the ~11 million bits/second of sensory data the brain receives. Without this filter, the brain would be overwhelmed. Alex faces the same problem: dozens of instruction files, prompts, and skills are loaded into context. Attention gating determines which are relevant NOW.
 
 **Gating heuristics by task domain:**
 
@@ -317,7 +317,7 @@ The hippocampus converts short-term experiences into long-term memories. In Alex
 | ------------------ | --------------------------------------------------------------------------- |
 | **Region**         | Association cortex (broadly distributed across parietal/temporal neocortex) |
 | **Function**       | Semantic memory, conceptual knowledge, expertise                            |
-| **Implementation** | skills/*/SKILL.md (77 skills) + copilot-instructions.md                     |
+| **Implementation** | skills/*/SKILL.md + copilot-instructions.md                                 |
 
 The neocortex stores everything you "know" — facts, concepts, expertise. It's organized by domain (visual cortex, auditory cortex, etc.), just as Alex's skills are organized by domain (debugging, testing, API design, etc.).
 
@@ -333,7 +333,7 @@ The neocortex stores everything you "know" — facts, concepts, expertise. It's 
 | ------------------ | -------------------------------------------------------- |
 | **Region**         | Basal Ganglia (caudate, putamen, globus pallidus)        |
 | **Function**       | Habit formation, procedural learning, automatic routines |
-| **Implementation** | .instructions.md files (24 auto-loaded procedures)       |
+| **Implementation** | .instructions.md files (28 auto-loaded procedures)       |
 
 The basal ganglia store procedures you do without thinking — riding a bike, typing, driving. In Alex, `.instructions.md` files are **auto-loaded** by VS Code without explicit invocation. They fire automatically when their trigger conditions are met, just like procedural memories.
 
@@ -603,8 +603,8 @@ This is exactly what the dlPFC + vlPFC do in the biological brain — suppress t
 | Premotor Cortex      | 6                  | Motor planning → skill routing   | Skill Activation         | skill-activation/SKILL.md                    |
 | Medial PFC + DMN     | 10, 25, 32         | Meta-cognition, self-reference   | Self-monitoring (P1)     | alex-core.instructions.md                    |
 | Hippocampus          | —                  | Episodic memory                  | Session records          | .prompt.md, .github/episodic/                |
-| Neocortex            | Distributed        | Declarative knowledge, expertise | Skills (76)              | skills/*/SKILL.md                            |
-| Basal Ganglia        | —                  | Procedural memory, habits        | Auto-loaded instructions | .instructions.md (24)                        |
+| Neocortex            | Distributed        | Declarative knowledge, expertise | Skills (109)             | skills/*/SKILL.md                            |
+| Basal Ganglia        | —                  | Procedural memory, habits        | Auto-loaded instructions | .instructions.md (28)                        |
 | Thalamus             | —                  | Sensory relay                    | VS Code interface        | Chat, commands, file context                 |
 | Hippocampal-Cortical | —                  | Memory consolidation             | Meditation + Dream       | meditation/, dream-state                     |
 | Distributed Cortex   | —                  | Abstract, cross-domain knowledge | Global Knowledge         | ~/.alex/global-knowledge/                    |

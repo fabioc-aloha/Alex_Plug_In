@@ -1,0 +1,42 @@
+{
+    "name": "Alex Cognitive Architecture",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "github.copilot-chat",
+                "fabioc-aloha.alex-cognitive-architecture",
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode",
+                "davidanson.vscode-markdownlint",
+                "yzhang.markdown-all-in-one",
+                "bierner.markdown-mermaid"
+            ],
+            "settings": {
+                "chat.agent.enabled": true,
+                "chat.agentSkillsLocations": [
+                    ".github/skills"
+                ],
+                "chat.useAgentsMdFile": true,
+                "chat.mcp.gallery.enabled": true,
+                "chat.hooks.enabled": true,
+                "github.copilot.chat.copilotMemory.enabled": true,
+                "chat.requestQueuing.enabled": true,
+                "editor.formatOnSave": true,
+                "files.trimTrailingWhitespace": true,
+                "files.insertFinalNewline": true
+            }
+        },
+        "codespaces": {
+            "openFiles": [
+                ".github/copilot-instructions.md"
+            ]
+        }
+    },
+    "postCreateCommand": "echo '🧠 Alex Cognitive Architecture ready. Type @alex in Copilot Chat to begin.'",
+    "remoteUser": "node"
+}

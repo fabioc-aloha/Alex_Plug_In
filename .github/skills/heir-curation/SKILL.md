@@ -31,28 +31,29 @@ Use the pre-made scripts in `scripts/` folder:
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| `sync-master-to-heir.ps1` | Role-adapted sync based on inheritance | `.\scripts\sync-master-to-heir.ps1 -Heir vscode` |
+| `sync-architecture.js` | Canonical Master→Heir sync (inheritance + decontamination) | `cd platforms/vscode-extension && npm run sync-architecture` |
+| `build-extension-package.ps1` | Full build (sync + compile + PII scan) | `.\scripts\build-extension-package.ps1` |
 | `validate-synapses.ps1` | Validate all synapses.json files | `.\scripts\validate-synapses.ps1` |
 | `validate-skills.ps1` | Validate SKILL.md frontmatter | `.\scripts\validate-skills.ps1` |
-| `build-extension-package.ps1` | Build heir package | `.\scripts\build-extension-package.ps1` |
 
 ### Quick Commands
 
 ```powershell
-# Sync to VS Code heir (dry run first)
-.\scripts\sync-master-to-heir.ps1 -Heir vscode -DryRun
+# Sync architecture only (from extension dir)
+cd platforms/vscode-extension
+npm run sync-architecture
 
-# Sync to VS Code heir (execute)
-.\scripts\sync-master-to-heir.ps1 -Heir vscode
+# Full build (sync + compile + PII scan)
+.\scripts\build-extension-package.ps1
+
+# Full build dry run
+.\scripts\build-extension-package.ps1 -DryRun
 
 # Validate all synapses
 .\scripts\validate-synapses.ps1
 
 # Validate skills
 .\scripts\validate-skills.ps1
-
-# Build extension
-.\scripts\build-extension-package.ps1
 ```
 
 ## Query Commands
@@ -93,13 +94,7 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 .\scripts\validate-skills.ps1
 ```
 
-### 2. Sync Master → Heir
-```powershell
-.\scripts\sync-master-to-heir.ps1 -Heir vscode -DryRun  # Preview
-.\scripts\sync-master-to-heir.ps1 -Heir vscode          # Execute
-```
-
-### 3. Build Package
+### 2. Build Package (includes sync + compile + PII scan)
 ```powershell
 .\scripts\build-extension-package.ps1
 ```
@@ -120,7 +115,7 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 |-------|------|------|
 | 1 | `.gitignore` | Exclude `user-profile.json` from git |
 | 2 | `.vscodeignore` | Exclude from VSIX package |
-| 3 | `sync-master-to-heir.ps1` | Skip during master→heir sync |
+| 3 | `sync-architecture.js` | Skip during master→heir sync |
 
 **Template ships, data stays**: `user-profile.template.json` ships with sensible defaults. User's `user-profile.json` never leaves their machine.
 

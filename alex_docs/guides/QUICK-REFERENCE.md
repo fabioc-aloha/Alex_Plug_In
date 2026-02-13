@@ -6,14 +6,14 @@
 
 ## Use Cases at a Glance
 
-| Domain | Example Prompts |
-| --- | --- |
-| **Development** | *"Help me debug this"*, *"What patterns for error handling?"* |
-| **Writing** | *"Strengthen chapter 3"*, *"Maintain consistent voice"* |
-| **Research** | *"Synthesize these findings"*, *"Identify literature gaps"* |
-| **Management** | *"Assess ADKAR readiness"*, *"Decompose the WBS"* |
-| **Creative** | *"Tighten this dialogue"*, *"Strengthen the imagery"* |
-| **Design** | *"Design a banner"*, *"What's the best icon grid?"* |
+| Domain           | Example Prompts                                                  |
+| ---------------- | ---------------------------------------------------------------- |
+| **Development**  | *"Help me debug this"*, *"What patterns for error handling?"*    |
+| **Writing**      | *"Strengthen chapter 3"*, *"Maintain consistent voice"*          |
+| **Research**     | *"Synthesize these findings"*, *"Identify literature gaps"*      |
+| **Management**   | *"Assess ADKAR readiness"*, *"Decompose the WBS"*                |
+| **Creative**     | *"Tighten this dialogue"*, *"Strengthen the imagery"*            |
+| **Design**       | *"Design a banner"*, *"What's the best icon grid?"*              |
 | **Localization** | *"Set up i18n"*, *"Handle RTL languages"*, *"ICU pluralization"* |
 
 **See [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) for full templates.**
@@ -24,15 +24,22 @@
 
 **Table 1:** *Chat Commands Quick Reference*
 
-| Command | Description | Example |
-| --- | --- | --- |
-| `/knowledge` | Search global knowledge | `@alex /knowledge error handling` |
-| `/saveinsight` | Save a new insight | `@alex /saveinsight React useEffect cleanup...` |
-| `/promote` | Promote local skill to global | `@alex /promote .github/skills/api-design/SKILL.md` |
-| `/knowledgestatus` | View knowledge base stats | `@alex /knowledgestatus` |
-| `/session` | Start/manage learning session | `@alex /session React hooks` |
-| `/goals` | View learning goals & streak | `@alex /goals` |
-| `/sync` | Sync with cloud | `@alex /sync` |
+| Command            | Description                   | Example                                             |
+| ------------------ | ----------------------------- | --------------------------------------------------- |
+| `/knowledge`       | Search global knowledge       | `@alex /knowledge error handling`                   |
+| `/saveinsight`     | Save a new insight            | `@alex /saveinsight React useEffect cleanup...`     |
+| `/promote`         | Promote local skill to global | `@alex /promote .github/skills/api-design/SKILL.md` |
+| `/knowledgestatus` | View knowledge base stats     | `@alex /knowledgestatus`                            |
+| `/model`           | Model intelligence dashboard  | `@alex /model` or `@alex /model <task>`             |
+| `/calendar`        | View upcoming calendar events | `@alex /calendar` or `@alex /calendar 7`            |
+| `/mail`            | View recent emails            | `@alex /mail` or `@alex /mail unread`               |
+| `/context`         | Full work context (Graph)     | `@alex /context`                                    |
+| `/people`          | Search people in org          | `@alex /people John Smith`                          |
+| `/checkskills`     | Discover new skills from GK   | `@alex /checkskills`                                |
+| `/pullskill`       | Install skill from GK         | `@alex /pullskill <id>`                             |
+| `/session`         | Start/manage learning session | `@alex /session React hooks`                        |
+| `/goals`           | View learning goals & streak  | `@alex /goals`                                      |
+| `/sync`            | Sync with cloud               | `@alex /sync`                                       |
 
 ---
 
@@ -42,21 +49,22 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 2:** *VS Code Command Palette Commands*
 
-| Command | Description |
-| --- | --- |
-| `Alex: Initialize Architecture` | Deploy Alex to current project |
-| `Alex: Dream (Neural Maintenance)` | Run health check and maintenance |
-| `Alex: Upgrade Architecture` | Update to latest Alex version |
-| `Alex: Setup Environment` | Optimize VS Code settings for Alex |
-| `Alex: Sync Knowledge to Cloud` | Manual cloud sync |
-| `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
-| `Alex: Pause/Resume Session` | Pause or resume active session |
-| `Alex: Session Actions` | View/manage active session |
-| `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
-| `Alex: Create Learning Goal` | Create a new learning goal |
-| `Alex: Show Learning Goals` | View and manage learning goals |
-| `Alex: Skill & Knowledge Review` | **NEW** Review staleness-prone skills (security, privacy, AI, APIs) |
-| `Alex: Report Issue / View Diagnostics` | View local telemetry for bug reports |
+| Command                                     | Description                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------- |
+| `Alex: Initialize Architecture`             | Deploy Alex to current project                                      |
+| `Alex: Dream (Neural Maintenance)`          | Run health check and maintenance                                    |
+| `Alex: Upgrade Architecture`                | Update to latest Alex version                                       |
+| `Alex: Setup Environment`                   | Optimize VS Code settings for Alex                                  |
+| `Alex: Sync Knowledge to Cloud`             | Manual cloud sync                                                   |
+| `Alex: Start Learning Session`              | Begin Pomodoro-style focus session                                  |
+| `Alex: Pause/Resume Session`                | Pause or resume active session                                      |
+| `Alex: Session Actions`                     | View/manage active session                                          |
+| `Alex: Open Health Dashboard`               | Rich webview with architecture visualization                        |
+| `Alex: Create Learning Goal`                | Create a new learning goal                                          |
+| `Alex: Show Learning Goals`                 | View and manage learning goals                                      |
+| `Alex: Skill & Knowledge Review`            | **NEW** Review staleness-prone skills (security, privacy, AI, APIs) |
+| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository                                      |
+| `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports                                |
 
 ---
 
@@ -66,31 +74,31 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 3:** *Memory and Search MCP Tools*
 
-| Tool | Purpose | Unconscious? |
-| --- | --- | --- |
-| `alex_memory_search` | Search memory files | ✅ Auto-fallback to global |
-| `alex_global_knowledge_search` | Search global knowledge | – |
-| `alex_global_knowledge_status` | Knowledge base status | – |
+| Tool                           | Purpose                 | Unconscious?              |
+| ------------------------------ | ----------------------- | ------------------------- |
+| `alex_memory_search`           | Search memory files     | ✅ Auto-fallback to global |
+| `alex_global_knowledge_search` | Search global knowledge | –                         |
+| `alex_global_knowledge_status` | Knowledge base status   | –                         |
 
 ### Knowledge Management
 
 **Table 4:** *Knowledge Management MCP Tools*
 
-| Tool | Purpose | Unconscious? |
-| --- | --- | --- |
-| `alex_save_insight` | Save learning to global | ✅ Auto cloud sync |
+| Tool                     | Purpose                 | Unconscious?      |
+| ------------------------ | ----------------------- | ----------------- |
+| `alex_save_insight`      | Save learning to global | ✅ Auto cloud sync |
 | `alex_promote_knowledge` | Promote local to global | ✅ Auto cloud sync |
-| `alex_cloud_sync` | Sync with GitHub Gist | – |
+| `alex_cloud_sync`        | Sync with GitHub Gist   | –                 |
 
 ### Architecture Health
 
 **Table 5:** *Architecture Health MCP Tools*
 
-| Tool | Purpose |
-| --- | --- |
+| Tool                       | Purpose                       |
+| -------------------------- | ----------------------------- |
 | `alex_architecture_status` | Check Alex version and status |
-| `alex_synapse_health` | Validate synaptic connections |
-| `alex_self_actualization` | Deep architecture assessment |
+| `alex_synapse_health`      | Validate synaptic connections |
+| `alex_self_actualization`  | Deep architecture assessment  |
 
 ---
 
@@ -98,13 +106,13 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 6:** *Memory File Types and Locations*
 
-| Type | Location | Pattern | Purpose |
-| --- | --- | --- | --- |
-| Procedural | `.github/instructions/` | `*.instructions.md` | How-to processes |
-| Episodic | `.github/prompts/` | `*.prompt.md` | Complex workflows |
-| Skills | `.github/skills/` | `*/SKILL.md` | Domain expertise |
-| Global Pattern | `~/.alex/global-knowledge/patterns/` | `GK-*.md` | Cross-project patterns |
-| Global Insight | `~/.alex/global-knowledge/insights/` | `GI-*.md` | Timestamped learnings |
+| Type           | Location                             | Pattern             | Purpose                |
+| -------------- | ------------------------------------ | ------------------- | ---------------------- |
+| Procedural     | `.github/instructions/`              | `*.instructions.md` | How-to processes       |
+| Episodic       | `.github/prompts/`                   | `*.prompt.md`       | Complex workflows      |
+| Skills         | `.github/skills/`                    | `*/SKILL.md`        | Domain expertise       |
+| Global Pattern | `~/.alex/global-knowledge/patterns/` | `GK-*.md`           | Cross-project patterns |
+| Global Insight | `~/.alex/global-knowledge/insights/` | `GI-*.md`           | Timestamped learnings  |
 
 ---
 
@@ -112,21 +120,21 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 7:** *Knowledge Category Definitions*
 
-| Category | For |
-| --- | --- |
+| Category         | For                          |
+| ---------------- | ---------------------------- |
 | `error-handling` | Exception handling, recovery |
-| `api-design` | REST, GraphQL, APIs |
-| `testing` | Unit, integration, E2E |
-| `debugging` | Troubleshooting |
-| `performance` | Optimization |
-| `architecture` | System design |
-| `security` | Auth, encryption |
-| `deployment` | CI/CD, infrastructure |
-| `documentation` | Docs, diagrams |
-| `refactoring` | Code improvement |
-| `patterns` | Design patterns |
-| `tooling` | Dev tools |
-| `general` | Everything else |
+| `api-design`     | REST, GraphQL, APIs          |
+| `testing`        | Unit, integration, E2E       |
+| `debugging`      | Troubleshooting              |
+| `performance`    | Optimization                 |
+| `architecture`   | System design                |
+| `security`       | Auth, encryption             |
+| `deployment`     | CI/CD, infrastructure        |
+| `documentation`  | Docs, diagrams               |
+| `refactoring`    | Code improvement             |
+| `patterns`       | Design patterns              |
+| `tooling`        | Dev tools                    |
+| `general`        | Everything else              |
 
 ---
 
@@ -134,13 +142,13 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 8:** *Unconscious Process Triggers and Timing*
 
-| Process | Trigger | Timing |
-| --- | --- | --- |
-| Auto Global Search | Local search empty | Immediate |
-| Startup Sync | Extension activates | 10 seconds |
-| Periodic Sync | Timer | Every 5 minutes |
-| Post-Mod Sync | Save/promote | 2 seconds |
-| Auto-Insight | Conversation | Confidence ≥ 0.5 |
+| Process            | Trigger             | Timing           |
+| ------------------ | ------------------- | ---------------- |
+| Auto Global Search | Local search empty  | Immediate        |
+| Startup Sync       | Extension activates | 10 seconds       |
+| Periodic Sync      | Timer               | Every 5 minutes  |
+| Post-Mod Sync      | Save/promote        | 2 seconds        |
+| Auto-Insight       | Conversation        | Confidence ≥ 0.5 |
 
 ---
 
@@ -170,16 +178,16 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 9:** *Status Icon Meanings*
 
-| Icon | Meaning |
-| --- | --- |
-| ✅ | Working / Healthy / Connected |
-| ⏳ | In Progress / Syncing |
-| ⚠️ | Warning / Needs Attention |
-| ❌ | Error / Disconnected |
-| 🧠 | Conscious (user-initiated) |
-| 💤 | Unconscious (automatic) |
-| 🌐 | Global knowledge |
-| ☁️ | Cloud sync |
+| Icon | Meaning                       |
+| ---- | ----------------------------- |
+| ✅    | Working / Healthy / Connected |
+| ⏳    | In Progress / Syncing         |
+| ⚠️    | Warning / Needs Attention     |
+| ❌    | Error / Disconnected          |
+| 🧠    | Conscious (user-initiated)    |
+| 💤    | Unconscious (automatic)       |
+| 🌐    | Global knowledge              |
+| ☁️    | Cloud sync                    |
 
 ---
 
@@ -212,10 +220,10 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 **Table 10:** *VS Code Output Channels*
 
-| Channel | Content |
-| --- | --- |
-| Alex Cognitive Architecture | General extension logs |
-| Alex Unconscious Mind | Background sync and auto-operations |
+| Channel                     | Content                             |
+| --------------------------- | ----------------------------------- |
+| Alex Cognitive Architecture | General extension logs              |
+| Alex Unconscious Mind       | Background sync and auto-operations |
 
 ---
 
@@ -223,18 +231,18 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 **Table 11:** *Keyboard Shortcuts*
 
-| Action | Windows/Linux | macOS |
-| --- | --- | --- |
-| Start Learning Session | `Ctrl+Alt+P` | `Cmd+Alt+P` |
-| Pause/Resume Session | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
-| Search Knowledge | `Ctrl+Shift+K` | `Cmd+Shift+K` |
-| Run Dream Protocol | `Ctrl+Alt+D` | `Cmd+Alt+D` |
-| Self-Actualize | `Ctrl+Alt+S` | `Cmd+Alt+S` |
-| Sync Knowledge | `Ctrl+Alt+K` | `Cmd+Alt+K` |
-| Open Documentation | `Ctrl+Alt+H` | `Cmd+Alt+H` |
-| Open Chat | `Ctrl+Alt+I` | `Cmd+Alt+I` |
-| Command Palette | `Ctrl+Shift+P` | `Cmd+Shift+P` |
-| Output Panel | `Ctrl+Shift+U` | `Cmd+Shift+U` |
+| Action                 | Windows/Linux    | macOS           |
+| ---------------------- | ---------------- | --------------- |
+| Start Learning Session | `Ctrl+Alt+P`     | `Cmd+Alt+P`     |
+| Pause/Resume Session   | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
+| Search Knowledge       | `Ctrl+Shift+K`   | `Cmd+Shift+K`   |
+| Run Dream Protocol     | `Ctrl+Alt+D`     | `Cmd+Alt+D`     |
+| Self-Actualize         | `Ctrl+Alt+S`     | `Cmd+Alt+S`     |
+| Sync Knowledge         | `Ctrl+Alt+K`     | `Cmd+Alt+K`     |
+| Open Documentation     | `Ctrl+Alt+H`     | `Cmd+Alt+H`     |
+| Open Chat              | `Ctrl+Alt+I`     | `Cmd+Alt+I`     |
+| Command Palette        | `Ctrl+Shift+P`   | `Cmd+Shift+P`   |
+| Output Panel           | `Ctrl+Shift+U`   | `Cmd+Shift+U`   |
 
 ---
 
@@ -280,11 +288,11 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 **Table 12:** *Current Versions*
 
-| Component | Version |
-| --- | --- |
-| Alex Extension | See `@alex /status` |
-| Cognitive Architecture | See `.github/copilot-instructions.md` |
-| Global Knowledge Schema | 1.0.0 |
+| Component               | Version                               |
+| ----------------------- | ------------------------------------- |
+| Alex Extension          | See `@alex /status`                   |
+| Cognitive Architecture  | See `.github/copilot-instructions.md` |
+| Global Knowledge Schema | 1.0.0                                 |
 
 ---
 

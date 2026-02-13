@@ -88,9 +88,9 @@ Alex has Gamma integration since v4.1.0 (December 2025), but it targets the **de
   - Add connections for new v1.0 features
   - Add connection to Claude-Gamma MCP (cross-platform link)
 - [ ] 1.6 Test end-to-end
-  - `node scripts/gamma-generator.js --topic "Test" --format presentation`
-  - `node scripts/gamma-generator.js --file README.md --export pptx`
-  - `node scripts/gamma-generator.js --draft --topic "Test"`
+  - `node .github/muscles/gamma-generator.js --topic "Test" --format presentation`
+  - `node .github/muscles/gamma-generator.js --file README.md --export pptx`
+  - `node .github/muscles/gamma-generator.js --draft --topic "Test"`
 
 ### Estimated Effort
 

@@ -1,3 +1,8 @@
+---
+name: "Azure Architecture Patterns"
+description: "Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions"
+---
+
 # Skill: Azure Architecture Patterns
 
 > Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions.

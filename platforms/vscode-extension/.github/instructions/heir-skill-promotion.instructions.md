@@ -5,6 +5,7 @@
 **Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "heir develops expertise through learning"
 **Synapse**: [.github/skills/global-knowledge/SKILL.md] (High, Documents, Forward) - "promotion candidate patterns"
 **Synapse**: [.github/skills/skill-building/SKILL.md] (Critical, Implements, Bidirectional) - "skill creation methodology and quality gates"
+**Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement combines trifecta + research-first before promotion"
 
 ---
 
@@ -83,6 +84,19 @@ Calculate before promoting:
 
 **Consolidation check**: If related skills exist in Master, merge rather than add.
 
+### 4.7. Trifecta Completeness Check
+
+Before promoting, assess whether the capability is a trifecta candidate:
+
+| Question | Answer | Implication |
+|----------|--------|-------------|
+| Was this a trifecta in the heir? (skill + instruction + prompt) | Yes → promote all three | No → promote skill only |
+| Does the heir instruction contain platform-specific steps? | Yes → adapt or skip instruction | No → promote as-is |
+| Is the capability user-invocable in Master context? | Yes → promote the prompt | No → skip prompt |
+| Does it pass the heir Why Test? (see `trifecta-audit.instructions.md`) | Yes → trifecta candidate | No → single-file promotion |
+
+**Rule**: Never promote a trifecta partially. Either all applicable components promote, or document why some were excluded.
+
 ### 5. Promote to Master
 **Option A**: Copy skill folder from heir to Master's `.github/skills/`
 
@@ -90,7 +104,7 @@ Calculate before promoting:
 
 ### 6. Update Master's Catalog
 - Add to `copilot-instructions.md` skill list
-- Regenerate `SKILL-CATALOG-GENERATED.md`
+- Update `alex_docs/skills/SKILLS-CATALOG.md`
 
 ---
 

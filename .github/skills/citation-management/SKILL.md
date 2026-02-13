@@ -1,3 +1,8 @@
+---
+name: "Citation Management"
+description: "APA 7th formatting, citation integration, reference validation, and bibliography generation"
+---
+
 # Skill: Citation Management
 
 > APA 7th formatting, citation integration, reference validation, and bibliography generation.

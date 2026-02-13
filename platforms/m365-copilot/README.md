@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.6.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-5.6.9-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
@@ -223,7 +223,7 @@ This creates **additional deployment options** for Alex M365:
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
 flowchart TB
     subgraph Master["🧠 MASTER ALEX"]
-        DNA["Cognitive DNA<br/>101 Skills, Protocols, Identity"]
+        DNA["Cognitive DNA<br/>100+ Skills, Protocols, Identity"]
     end
 
     subgraph VSCode["👶 VS Code Heir"]
@@ -397,6 +397,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v5.3.0 🧠 Enterprise Readiness + Full M365 Integration
+**Alex M365** - v5.6.8 🧠 Enterprise Readiness + Full M365 Integration
 
 © 2026 CorreaX • AI That Learns How to Learn

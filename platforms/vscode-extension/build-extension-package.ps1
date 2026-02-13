@@ -30,10 +30,10 @@ $ExtensionDir = $ScriptDir
 $RootGitHub = Join-Path $RootDir ".github"
 $ExtGitHub = Join-Path $ExtensionDir ".github"
 
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "----------------------------------------" -ForegroundColor Cyan
 Write-Host "  Alex Extension Build Script" -ForegroundColor Cyan
 Write-Host "  v3.6.0 Dawn" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "----------------------------------------" -ForegroundColor Cyan
 Write-Host ""
 
 # Verify we're in the right place
@@ -95,8 +95,8 @@ foreach ($item in $excludeItems) {
         $parentDir = Split-Path -Parent $itemPath
         $pattern = Split-Path -Leaf $itemPath
         if (Test-Path $parentDir) {
-            $matches = Get-ChildItem -Path $parentDir -Filter $pattern -ErrorAction SilentlyContinue
-            foreach ($match in $matches) {
+            $foundItems = Get-ChildItem -Path $parentDir -Filter $pattern -ErrorAction SilentlyContinue
+            foreach ($match in $foundItems) {
                 Remove-Item -Path $match.FullName -Force
                 Write-Host "   Removed: $($match.Name)" -ForegroundColor Gray
             }
@@ -239,9 +239,9 @@ else {
 
 # Summary
 Write-Host ""
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "----------------------------------------" -ForegroundColor Cyan
 Write-Host "  Build Complete! 🎉" -ForegroundColor Green
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "----------------------------------------" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor White
 Write-Host "  1. Test with F5 (Extension Development Host)" -ForegroundColor Gray

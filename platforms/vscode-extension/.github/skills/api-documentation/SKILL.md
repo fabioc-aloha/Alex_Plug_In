@@ -1,4 +1,3 @@
-```skill
 ---
 name: "API Documentation Skill"
 description: "Technical documentation, API references, user guides, and docs-as-code workflows."
@@ -327,5 +326,3 @@ curl -X GET "https://api.example.com/v1/resource/123" \
 
 - [markdown-mastery] (Medium, Uses, Forward) — "Core formatting"
 - [appropriate-reliance] (Low, Applies, Forward) — "AI assistance in docs"
-
-```

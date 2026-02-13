@@ -59,3 +59,4 @@ Expert in domain-agnostic knowledge acquisition through conversational learning.
 - [Meditation](.github/skills/meditation/SKILL.md) - Consolidate after learning
 - [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate new connections
 - [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Leverage cross-project learnings
+- [Muscle Memory Recognition](../muscle-memory-recognition/SKILL.md) - Identify automation opportunities from learning

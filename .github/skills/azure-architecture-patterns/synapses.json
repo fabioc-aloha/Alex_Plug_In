@@ -1,88 +1,88 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "inheritance": "heir:vscode",
-    "version": "1.0.0",
-    "skill": "azure-architecture-patterns",
-    "created": "2026-02-10",
-    "connectionCount": 5,
-    "connections": [],
-    "synapses": [
-        {
-            "id": "AZURE-001",
-            "source": "azure-architecture-patterns",
-            "target": "azure-devops-automation",
-            "type": "complements",
-            "strength": 0.95,
-            "description": "Architecture patterns implemented via DevOps automation",
-            "bidirectional": true
-        },
-        {
-            "id": "AZURE-002",
-            "source": "azure-architecture-patterns",
-            "target": "code-review",
-            "type": "informs",
-            "strength": 0.7,
-            "description": "Architecture principles guide infrastructure code review",
-            "bidirectional": false
-        },
-        {
-            "id": "AZURE-003",
-            "source": "azure-architecture-patterns",
-            "target": "airs-integration",
-            "type": "enables",
-            "strength": 0.6,
-            "description": "AIRS platform (airs.correax.com) runs on Azure architecture",
-            "bidirectional": false
-        },
-        {
-            "id": "AZURE-004",
-            "source": "azure-architecture-patterns",
-            "target": "deep-thinking",
-            "type": "triggers",
-            "strength": 0.5,
-            "description": "Complex architecture decisions require deep analysis",
-            "bidirectional": false
-        },
-        {
-            "id": "AZURE-005",
-            "source": "azure-architecture-patterns.cost-optimization",
-            "target": "airs-appropriate-reliance.price-value",
-            "type": "parallels",
-            "strength": 0.6,
-            "description": "Cost optimization in architecture parallels PV in adoption - value clarity drives decisions",
-            "bidirectional": false
-        }
-    ],
-    "activationPatterns": [
-        {
-            "trigger": "Azure|cloud architecture|well-architected",
-            "confidence": 0.95
-        },
-        {
-            "trigger": "reliability|availability|resilience|DR",
-            "module": "1",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "security|zero trust|managed identity|RBAC",
-            "module": "2",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "cost|optimize|savings|reserved instance",
-            "module": "3",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "Bicep|Terraform|IaC|observability",
-            "module": "4",
-            "confidence": 0.9
-        },
-        {
-            "trigger": "performance|scaling|caching|autoscale",
-            "module": "5",
-            "confidence": 0.9
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "inheritance": "heir:vscode",
+  "version": "1.0.0",
+  "skill": "azure-architecture-patterns",
+  "created": "2026-02-10",
+  "connectionCount": 5,
+  "connections": [],
+  "synapses": [
+    {
+      "id": "AZURE-001",
+      "source": "azure-architecture-patterns",
+      "target": ".github/skills/azure-devops-automation/SKILL.md",
+      "type": "complements",
+      "strength": 0.95,
+      "description": "Architecture patterns implemented via DevOps automation",
+      "bidirectional": true
+    },
+    {
+      "id": "AZURE-002",
+      "source": "azure-architecture-patterns",
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "informs",
+      "strength": 0.7,
+      "description": "Architecture principles guide infrastructure code review",
+      "bidirectional": false
+    },
+    {
+      "id": "AZURE-003",
+      "source": "azure-architecture-patterns",
+      "target": ".github/skills/airs-integration/SKILL.md",
+      "type": "enables",
+      "strength": 0.6,
+      "description": "AIRS platform (airs.correax.com) runs on Azure architecture",
+      "bidirectional": false
+    },
+    {
+      "id": "AZURE-004",
+      "source": "azure-architecture-patterns",
+      "target": ".github/instructions/deep-thinking.instructions.md",
+      "type": "triggers",
+      "strength": 0.5,
+      "description": "Complex architecture decisions require deep analysis",
+      "bidirectional": false
+    },
+    {
+      "id": "AZURE-005",
+      "source": "azure-architecture-patterns.cost-optimization",
+      "target": ".github/skills/airs-appropriate-reliance.price-value/SKILL.md",
+      "type": "parallels",
+      "strength": 0.6,
+      "description": "Cost optimization in architecture parallels PV in adoption - value clarity drives decisions",
+      "bidirectional": false
+    }
+  ],
+  "activationPatterns": [
+    {
+      "trigger": "Azure|cloud architecture|well-architected",
+      "confidence": 0.95
+    },
+    {
+      "trigger": "reliability|availability|resilience|DR",
+      "module": "1",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "security|zero trust|managed identity|RBAC",
+      "module": "2",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "cost|optimize|savings|reserved instance",
+      "module": "3",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "Bicep|Terraform|IaC|observability",
+      "module": "4",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "performance|scaling|caching|autoscale",
+      "module": "5",
+      "confidence": 0.9
+    }
+  ]
 }

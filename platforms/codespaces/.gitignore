@@ -1,0 +1,6 @@
+# Codespaces platform - deployment tooling only
+# No build artifacts to ignore, but protect template integrity
+
+# OS
+.DS_Store
+Thumbs.db

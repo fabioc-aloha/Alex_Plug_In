@@ -476,7 +476,7 @@ Specify `--image-style` with "illustrations" for consistent, modern look:
 Always use `--open` to immediately review your deck:
 
 ```bash
-node scripts/gamma-generator.js -f content.md -e pptx --open
+node .github/muscles/gamma-generator.js -f content.md -e pptx --open
 ```
 
 #### 5. Iterate with Cost-Effective Models
@@ -883,22 +883,22 @@ Gamma provides a hosted MCP server for AI tool integration.
 
 A standalone Node.js script is available for command-line generation:
 
-**Location:** `scripts/gamma-generator.js`
+**Location:** `.github/muscles/gamma-generator.js`
 
 ### Quick Examples
 
 ```bash
 # Simple topic
-node scripts/gamma-generator.js --topic "Introduction to AI"
+node .github/muscles/gamma-generator.js --topic "Introduction to AI"
 
 # From file with PowerPoint export
-node scripts/gamma-generator.js --file README.md --export pptx
+node .github/muscles/gamma-generator.js --file README.md --export pptx
 
 # Generate and immediately open in PowerPoint 🚀
-node scripts/gamma-generator.js --file README.md --export pptx --open
+node .github/muscles/gamma-generator.js --file README.md --export pptx --open
 
 # Full customization with auto-open
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --file my-content.md \
   --slides 15 \
   --tone "professional and inspiring" \
@@ -938,7 +938,7 @@ The `--open` flag provides seamless workflow — generate and review in one comm
 
 ```bash
 # Create presentation and open immediately
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --file content.md \
   --export pptx \
   --open
@@ -957,7 +957,7 @@ For full control over content, use the **draft workflow**:
 
 ```bash
 # Create editable markdown template (no API call, no credits)
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --topic "AI Ethics for Developers" \
   --slides 10 \
   --tone "thoughtful and practical" \
@@ -1001,7 +1001,7 @@ Building AI that serves humanity
 
 ```bash
 # Now generate the real presentation
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --file ./exports/ai-ethics-for-developers-draft.md \
   --image-model ideogram \
   --export pptx \
@@ -1041,11 +1041,11 @@ node scripts/gamma-generator.js \
 
 ```bash
 # Quick workflow
-node scripts/gamma-generator.js -t "My Topic" --draft --open  # Edit the draft
-node scripts/gamma-generator.js -f exports/my-topic-draft.md -e pptx --open  # Generate
+node .github/muscles/gamma-generator.js -t "My Topic" --draft --open  # Edit the draft
+node .github/muscles/gamma-generator.js -f exports/my-topic-draft.md -e pptx --open  # Generate
 ```
 
-Run `node scripts/gamma-generator.js --help` for full documentation.
+Run `node .github/muscles/gamma-generator.js --help` for full documentation.
 
 ---
 

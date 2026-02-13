@@ -1,0 +1,50 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "dream-state",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "coordinates-with",
+            "strength": 0.85,
+            "when": "dream precedes meditation or post-meditation validation",
+            "yields": "Clean architecture before conscious consolidation"
+        },
+        {
+            "target": ".github/skills/architecture-health/SKILL.md",
+            "type": "implements",
+            "strength": 0.9,
+            "when": "health check or synapse validation requested",
+            "yields": "Network health metrics, broken connection detection"
+        },
+        {
+            "target": ".github/skills/brain-qa/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "when": "comprehensive 6-phase cognitive QA needed",
+            "yields": "Deep architecture validation, Master-Heir sync"
+        },
+        {
+            "target": ".github/skills/global-knowledge-sync/SKILL.md",
+            "type": "triggers",
+            "strength": 0.7,
+            "when": "Phase 4 GK synchronization during dream",
+            "yields": "Cross-project knowledge sync status"
+        },
+        {
+            "target": ".github/skills/self-actualization/SKILL.md",
+            "type": "enables",
+            "strength": 0.65,
+            "when": "dream reveals architecture issues needing deep assessment",
+            "yields": "Self-actualization assessment from dream diagnostics"
+        }
+    ],
+    "triggers": [
+        "dream",
+        "neural maintenance",
+        "health check",
+        "synapse validation",
+        "maintenance"
+    ]
+}

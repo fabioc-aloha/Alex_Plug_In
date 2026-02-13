@@ -7,7 +7,7 @@ import {
   HealthStatus,
 } from "../shared/healthCheck";
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult } from "../chat/personaDetection";
+import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult, PERSONA_SLOT_MAPPINGS } from "../chat/personaDetection";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
@@ -507,10 +507,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const personaHook = persona?.hook || 'Take Your Code to New Heights';
     const personaIcon = persona?.icon || '💻';
     const personaName = persona?.name || 'Developer';
-    const personaSkill = persona?.skill || 'code-quality';
+    const personaSkill = persona?.skill || 'code-review';
     
     // Use persona's accent color directly, with fallback to blue
     const personaAccent = persona?.accentColor || 'var(--vscode-charts-blue)';
+    
+    // P5-P7 slot context for focus display
+    const slotMapping = persona ? (PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' }) : { p5: 'code-review', p7: 'scope-management' };
+    const confidenceLabel = personaResult?.confidence != null ? `${Math.round(personaResult.confidence * 100)}%` : '';
+    const sourceLabel = personaResult?.source === 'llm' ? 'LLM' : personaResult?.source === 'cached' ? 'Cached' : 'Auto';
     
     // Skill name mapping for display
     const skillNameMap: Record<string, string> = {
@@ -526,7 +531,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       'incident-response': 'Security',
       'learning-psychology': 'Learning',
       'gamma-presentations': 'Presentations',
-      'git-workflow': 'Git Workflows'
+      'git-workflow': 'Git Workflows',
+      'game-design': 'Game Design',
+      'slide-design': 'Slide Design',
+      'scope-management': 'Scope Mgmt',
+      'deep-thinking': 'Deep Thinking',
+      'markdown-mermaid': 'Diagrams'
     };
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
@@ -727,6 +737,44 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .status-completed {
             font-size: 10px;
             color: var(--vscode-charts-green);
+            font-weight: 500;
+        }
+        .focus-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .focus-slot {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            background: var(--vscode-editor-background);
+        }
+        .focus-slot-label {
+            font-weight: 600;
+            color: var(--vscode-descriptionForeground);
+            min-width: 22px;
+        }
+        .focus-slot-value {
+            color: var(--vscode-foreground);
+            flex: 1;
+        }
+        .focus-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9px;
+            color: var(--vscode-descriptionForeground);
+            margin-top: 4px;
+            padding: 0 2px;
+        }
+        .focus-confidence {
+            background: color-mix(in srgb, var(--persona-accent) 20%, transparent);
+            padding: 1px 6px;
+            border-radius: 8px;
             font-weight: 500;
         }
         
@@ -1093,6 +1141,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         </div>
         
         <div class="section">
+            <div class="section-title" title="Working memory slots P5-P7 — assigned from ${personaName} persona">Focus</div>
+            <div class="focus-slots">
+                <div class="focus-slot"><span class="focus-slot-label">P5</span><span class="focus-slot-value">${skillNameMap[slotMapping.p5] || slotMapping.p5}</span></div>
+                <div class="focus-slot"><span class="focus-slot-label">P6</span><span class="focus-slot-value">${recommendedSkillName}</span></div>
+                <div class="focus-slot"><span class="focus-slot-label">P7</span><span class="focus-slot-value">${skillNameMap[slotMapping.p7] || slotMapping.p7}</span></div>
+            </div>
+            ${confidenceLabel ? `<div class="focus-meta"><span class="focus-confidence">${confidenceLabel}</span><span>${sourceLabel}</span></div>` : ''}
+        </div>
+        
+        <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
                 <div class="action-group-label">FOR YOU</div>
@@ -1213,7 +1271,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">📦</span>
                     <span class="action-text">Export for M365</span>
                 </button>
-                <button class="action-btn" data-cmd="setupEnvironment" title="Configure VS Code settings: Essential, Recommended, Extended Thinking">
+                <button class="action-btn" data-cmd="setupEnvironment" title="Configure VS Code settings: Essential, Recommended, Extended Thinking, Copilot Memory">
                     <span class="action-icon">⚙️</span>
                     <span class="action-text">Environment Setup</span>
                 </button>
@@ -1415,7 +1473,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights with GitHub remote access</li>
                             <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
-                            <li><strong>Skill Library</strong> - 75 portable skills with triggers and synaptic connections</li>
+                            <li><strong>Skill Library</strong> - 100+ portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
                         </ul>
                     </div>
@@ -1453,9 +1511,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <div class="feature-category-title">⚙️ Environment Setup</div>
                         <ul class="feature-list">
                             <li><strong>Essential Settings</strong> - instruction/prompt file locations, agent mode, skill loading</li>
-                            <li><strong>Recommended Settings</strong> - thinking tool, agent requests, MCP gallery</li>
-                            <li><strong>Extended Thinking</strong> - Opus 4.5 deep reasoning for meditation/learning</li>
-                            <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt P6 skill (GK premium)</li>
+                            <li><strong>Recommended Settings</strong> - thinking tool, agent requests, MCP gallery, Copilot Memory, hooks</li>
+                            <li><strong>Extended Thinking</strong> - Opus 4.5/4.6 deep reasoning for meditation/learning</li>
+                            <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt P5-P7 working memory (GK premium)</li>
                         </ul>
                     </div>
                     

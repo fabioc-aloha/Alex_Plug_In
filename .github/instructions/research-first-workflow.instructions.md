@@ -7,9 +7,10 @@ description: "Research-first development workflow — pre-project knowledge enco
 > Procedural memory for the Research → Teach → Plan → Execute paradigm
 
 **Synapse**: [.github/skills/research-first-development/SKILL.md] (Critical, Implements, Bidirectional) - "skill provides patterns; instruction provides procedures"
-**Synapse**: [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "gap analysis creates skills that SSO selects from"
-**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Extends, Forward) - "research phase uses bootstrap learning for unknown domains"
-**Synapse**: [.github/instructions/heir-skill-promotion.instructions.md] (High, Integrates, Forward) - "heir projects use this workflow, then promote skills"
+**Synapse**: [.github/instructions/.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "gap analysis creates skills that SSO selects from"
+**Synapse**: [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Extends, Forward) - "research phase uses bootstrap learning for unknown domains"
+**Synapse**: [.github/instructions/.github/instructions/heir-skill-promotion.instructions.md] (High, Integrates, Forward) - "heir projects use this workflow, then promote skills"
+**Synapse**: [.github/instructions/.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement teaches heirs to apply research-first"
 
 ---
 

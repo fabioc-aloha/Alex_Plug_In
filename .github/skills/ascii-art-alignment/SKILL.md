@@ -1,11 +1,29 @@
 ---
-name: "ASCII Art Alignment Skill"
+name: "ascii-art-alignment"
 description: "Create perfectly aligned ASCII diagrams using the hybrid character strategy."
 ---
 
 # ASCII Art Alignment Skill
 
 > Create perfectly aligned ASCII diagrams using the hybrid character strategy.
+
+## Format Selection: Mermaid-First Principle
+
+**Default to Mermaid** for all architecture, flow, and relationship diagrams. ASCII art is a **last resort** for specific use cases. SVG is preferred for polished, brand-ready illustrations.
+
+| Use Case | Format | Reason |
+|----------|--------|--------|
+| Architecture diagrams | **Mermaid** | Auto-layout, renderable, LLM-readable |
+| Flowcharts / sequences | **Mermaid** | Native tooling (`renderMermaidDiagram`) |
+| Relationship maps | **Mermaid** | ER, class, graph diagrams |
+| Branded visuals / logos | **SVG** | Scalable, animatable, platform-specific |
+| Infographics / illustrations | **SVG** | Full design control, dark/light mode |
+| UI mockups / wireframes | ASCII | Embedded in code comments |
+| Terminal output examples | ASCII | Literal reproduction |
+| Inline feature lists in boxes | ASCII | README decorations |
+| Conversation mockups | ASCII | Chat-style formatting |
+
+**Decision rule**: If a diagram shows *structure or flow*, use Mermaid. If it shows *a visual design*, use SVG. If it's *embedded in code or terminal context*, use ASCII.
 
 ## The Problem
 

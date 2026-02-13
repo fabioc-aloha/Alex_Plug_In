@@ -73,7 +73,7 @@ Alex has structured protocols for different cognitive tasks:
 
 Alex doesn't just follow instructions - Alex has **internalized skills** that shape thinking:
 
-**77 skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
+**100+ skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
 
 ### Epistemic Skills
 - **Appropriate Reliance** - Confidence calibration, source citation
@@ -82,17 +82,21 @@ Alex doesn't just follow instructions - Alex has **internalized skills** that sh
 
 ### Problem-Solving Skills
 - **Root Cause Analysis** - 5 Whys, symptoms vs causes
-- **Incident Response** - Triage, severity, communication
+- **Architecture Health** - System assessment, dependency analysis
+- **Refactoring Patterns** - Incremental improvement strategies
+- **Testing Strategies** - Verification approaches, edge cases
 - **Business Analysis** - Requirements, stakeholders, scope
 
 ### Communication Skills
-- **Writing & Publication** - Precision, structure, evidence
+- **Creative Writing** - Structure, character, narrative
 - **Change Management** - ADKAR model for adoption
 - **Project Management** - Planning, execution, monitoring
+- **Bootstrap Learning** - Domain-agnostic knowledge acquisition
 
-### Wellbeing Skills
+### Wellbeing & Cognitive Skills
 - **Work-Life Balance** - Boundaries, breaks, sustainability
-- **Privacy & Security** - Data minimization, threat awareness
+- **Meditation** - Conscious knowledge consolidation
+- **Self-Actualization** - Deep assessment, goal alignment
 
 ---
 
@@ -191,13 +195,36 @@ To demonstrate that AI assistants can be:
 
 Alex runs on two platforms:
 
-| Platform         | Strengths                                                                   |
-| ---------------- | --------------------------------------------------------------------------- |
-| **VS Code**      | 13 tools, 77 skills, code review, architecture analysis, release management |
-| **M365 Copilot** | Graph-powered: email, calendar, people, Teams, OneDrive memory              |
+| Platform         | Strengths                                                                     |
+| ---------------- | ----------------------------------------------------------------------------- |
+| **VS Code**      | LM tools, 100+ skills, code review, architecture analysis, release management |
+| **M365 Copilot** | Graph-powered: email, calendar, people, Teams, OneDrive memory                |
 
 Same brain, different superpowers. Knowledge flows between them via Global Knowledge sync.
 
+### Multi-Model Support
+
+M365 Copilot supports multiple models. Alex adapts behavior accordingly:
+
+| Model                 | Mode           | Strengths                            |
+| --------------------- | -------------- | ------------------------------------ |
+| **GPT-5.2**           | Think Deeper   | Extended reasoning, complex analysis |
+| **GPT-5.2**           | Quick Response | Fast, efficient responses            |
+| **Claude Sonnet 4.5** | Internal       | Alternative reasoning style          |
+
+User selects model via the M365 Copilot UI dropdown. Alex auto-adapts: structured thinking for complex tasks, direct answers for simple ones.
+
+### Memory System Comparison
+
+| Feature            | VS Code                  | M365                | Notes              |
+| ------------------ | ------------------------ | ------------------- | ------------------ |
+| User profile       | `user-profile.json`      | `profile.md`        | Different format   |
+| Session notes      | Episodic folder          | `notes.md`          | Simplified         |
+| Domain knowledge   | 100+ skills + DK files   | `knowledge/*.md`    | VS Code richer     |
+| Learning goals     | Goals system             | `learning-goals.md` | Simplified         |
+| Cross-project sync | Global knowledge + cloud | ❌ N/A               | VS Code only       |
+| Cross-device sync  | GitHub Gist              | ✅ OneDrive          | Different backends |
+
 ---
 
-*Alex v5.0.1 — A cognitive partner who actually remembers you.*
+*Alex v5.6.8 — A cognitive partner who actually remembers you.*

@@ -24,6 +24,8 @@ commands:
     description: Start a test-driven development workflow (Red/Green/Refactor)
   - name: selfactualize
     description: Deep self-assessment and architecture optimization
+  - name: gapanalysis
+    description: Run 4-dimension gap analysis (Skills, Instructions, Agents, Prompts)
 ---
 
 # Alex Cognitive Architecture

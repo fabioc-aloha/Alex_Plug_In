@@ -55,7 +55,7 @@ This ensures meditation sessions are productive rather than discovering broken a
 
 ## Related Skills
 
-- [Architecture Health](../architecture-health/SKILL.md) - Check neural network health
-- [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Acquire new domain knowledge
-- [Global Knowledge](../global-knowledge/SKILL.md) - Search cross-project patterns
-- [Skill Activation](../skill-activation/SKILL.md) - Proactive/reactive skill routing (SSO integration)
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Check neural network health
+- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Acquire new domain knowledge
+- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Search cross-project patterns
+- [Skill Activation](.github/skills/skill-activation/SKILL.md) - Proactive/reactive skill routing (SSO integration)

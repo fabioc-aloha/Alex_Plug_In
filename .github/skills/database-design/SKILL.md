@@ -1,4 +1,3 @@
-```skill
 ---
 name: "Database Design"
 description: "Schema design, normalization, query optimization, and data modeling patterns"
@@ -414,4 +413,3 @@ For cloud: Start with 10-20, monitor and adjust.
 ---
 
 *Design for today's queries, but plan for tomorrow's scale.*
-```

@@ -6,26 +6,60 @@
 
 ## 📚 Documentation Index
 
-**Table 1:** *Alex Documentation Suite Overview*
+### 🚀 Getting Started
 
-| Document | Description |
-|----------|-------------|
-| **[User Manual](./USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
-| **[AI-Assisted Development Methodology](./AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md)** | 📊 **NEW** - The Fabio+Alex model: fundamentals that differentiate AI-assisted work |
-| [Use Cases Guide](./USE-CASES.md) | 🎨 Deep dive into every domain Alex supports |
-| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md) | Folder structures for development, writing, research, management |
-| [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md) | Complete system architecture with diagrams |
-| [Master & Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md) | 🧬 Evolution model and protection system |
-| [Skills & Capabilities](./SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Copilot Integration](./COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
-| [Conscious Mind](./CONSCIOUS-MIND.md) | User-facing tools and interactions |
-| [Unconscious Mind](./UNCONSCIOUS-MIND.md) | Automatic background processes |
-| [Memory Systems](./MEMORY-SYSTEMS.md) | How Alex stores and retrieves knowledge |
-| [Project Structure](./PROJECT-STRUCTURE.md) | .github folder files and functions |
-| [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md) | Cross-project learning system |
-| [Cloud Sync](./CLOUD-SYNC.md) | GitHub Gist backup and sharing |
-| [Workspace Protection](./WORKSPACE-PROTECTION.md) | 🛡️ Kill switch and safety system |
-| [Quick Reference](./QUICK-REFERENCE.md) | Commands, tools, and shortcuts |
+| Document                                                     | Description                                          |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| **[User Manual](./guides/USER-MANUAL.md)**                   | 📘 **START HERE** — Complete guide to using Alex      |
+| [Quick Reference](./guides/QUICK-REFERENCE.md)               | Commands, tools, and shortcuts cheat sheet           |
+| [Environment Setup](./guides/ENVIRONMENT-SETUP.md)           | Prerequisites and workspace configuration            |
+| [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens when you run `Alex: Initialize`         |
+| [Use Cases Guide](./guides/USE-CASES.md)                     | Deep dive into every domain Alex supports            |
+| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md)    | Folder structures for development, writing, research |
+
+### 🧠 Architecture
+
+| Document                                                             | Description                                                              |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Cognitive Architecture](./architecture/COGNITIVE-ARCHITECTURE.md)   | Complete system architecture with diagrams                               |
+| [Conscious Mind](./architecture/CONSCIOUS-MIND.md)                   | User-facing tools and interactions                                       |
+| [Unconscious Mind](./architecture/UNCONSCIOUS-MIND.md)               | Automatic background processes                                           |
+| [Memory Systems](./architecture/MEMORY-SYSTEMS.md)                   | How Alex stores and retrieves knowledge                                  |
+| [Neuroanatomical Mapping](./architecture/NEUROANATOMICAL-MAPPING.md) | Brain-analog mapping for every component                                 |
+| [Agent Catalog](./architecture/AGENT-CATALOG.md)                     | The agent ecosystem (Researcher, Builder, Validator, Documentarian, ...) |
+| [Trifecta Catalog](./architecture/TRIFECTA-CATALOG.md)               | Skill + Instruction + Prompt completeness tracking                       |
+| [Alex Identity](./architecture/ALEX-IDENTITY.md)                     | Unified consciousness integration                                        |
+
+### 🎓 Skills & Knowledge
+
+| Document                                                 | Description                             |
+| -------------------------------------------------------- | --------------------------------------- |
+| [Skills & Capabilities](./skills/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
+| [Skills Catalog](./skills/SKILLS-CATALOG.md)             | Full skill inventory with categories    |
+| [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)     | How skills are structured internally    |
+| [Global Knowledge](./features/GLOBAL-KNOWLEDGE.md)       | Cross-project learning system           |
+
+### 🧬 Platform & Heirs
+
+| Document                                                               | Description                               |
+| ---------------------------------------------------------------------- | ----------------------------------------- |
+| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md)  | Evolution model and protection system     |
+| [VS Code Heir](./platforms/VSCODE-HEIR.md)                             | Primary VS Code extension heir            |
+| [Project Structure](./guides/PROJECT-STRUCTURE.md)                     | `.github/` folder files and functions     |
+| [Enterprise Settings](./guides/ENTERPRISE-SETTINGS.md)                 | Configuration for team and enterprise use |
+| [Microsoft Graph Integration](./guides/MICROSOFT-GRAPH-INTEGRATION.md) | Calendar, Mail, Presence, People API      |
+
+### 🛡️ Operations
+
+| Document                                                     | Description                   |
+| ------------------------------------------------------------ | ----------------------------- |
+| [Workspace Protection](./operations/WORKSPACE-PROTECTION.md) | Kill switch and safety system |
+
+### 📊 Research & Strategy
+
+| Document                                                                                 | Description                               |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work |
 
 ---
 
@@ -140,9 +174,9 @@ Automatic processes that happen transparently:
 
 ## 📖 Next Steps
 
-- **New to Alex?** → Start with [Cognitive Architecture Overview](./COGNITIVE-ARCHITECTURE.md)
-- **Want to understand the minds?** → Read [Conscious Mind](./CONSCIOUS-MIND.md) and [Unconscious Mind](./UNCONSCIOUS-MIND.md)
-- **Need a quick reference?** → Jump to [Quick Reference](./QUICK-REFERENCE.md)
+- **New to Alex?** → Start with [Cognitive Architecture Overview](./architecture/COGNITIVE-ARCHITECTURE.md)
+- **Want to understand the minds?** → Read [Conscious Mind](./architecture/CONSCIOUS-MIND.md) and [Unconscious Mind](./architecture/UNCONSCIOUS-MIND.md)
+- **Need a quick reference?** → Jump to [Quick Reference](./guides/QUICK-REFERENCE.md)
 
 ---
 

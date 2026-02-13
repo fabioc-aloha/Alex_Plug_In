@@ -1,4 +1,3 @@
-````skill
 ---
 name: "Release Preflight Skill"
 description: "Pre-checks, version consistency, and deployment discipline."
@@ -90,7 +89,8 @@ git add -A; git commit -m "release: v$v"; git tag "v$v"; git push --tags
 | `scripts/release-preflight.ps1` | Pre-release validation |
 | `scripts/release-vscode.ps1` | Full VS Code release |
 | `scripts/release-m365.ps1` | M365 agent packaging |
-| `scripts/sync-master-to-heir.ps1` | Sync Master → Heir |
+| `.github/muscles/build-extension-package.ps1` | Full build (sync + compile + PII scan) |
+| `.github/muscles/sync-architecture.js` | Canonical Master → Heir sync |
 
 ## Triggers
 
@@ -101,5 +101,3 @@ git add -A; git commit -m "release: v$v"; git tag "v$v"; git push --tags
 ---
 
 *Scripts: `scripts/release-preflight.ps1`, `scripts/release-vscode.ps1`*
-
-````

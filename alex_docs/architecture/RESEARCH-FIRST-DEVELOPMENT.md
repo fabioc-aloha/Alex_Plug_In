@@ -45,7 +45,6 @@ The Dead Letter heir discovered this the hard way — then solved it before writ
 ## The Solution: Research → Teach → Plan → Execute
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#dafbe1', 'tertiaryColor': '#fff8c5', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 flowchart TD
     subgraph P0["Phase 0: Research"]
         R1["Deep domain\nresearch"]
@@ -70,11 +69,6 @@ flowchart TD
     end
 
     P0 --> P1 --> P2 --> P3
-
-    style P0 fill:#dafbe1,stroke:#2e7d32
-    style P1 fill:#e3f2fd,stroke:#1565c0
-    style P2 fill:#fff8c5,stroke:#9a6700
-    style P3 fill:#f6f8fa,stroke:#656d76
 ```
 
 **Figure 1:** *The four phases form a pipeline where each phase gates the next. No phase begins until its predecessor's exit criteria are met.*
@@ -154,7 +148,18 @@ The Dead Letter project (AI mystery game) created this knowledge network *before
 
 ---
 
-## The Two-Agent Pattern
+## The Agent Ecosystem ✅ IMPLEMENTED
+
+Research-First Development is powered by a specialized agent ecosystem that maps to the development phases:
+
+| Agent          | File                       | Phase             | Mental Model                    |
+| -------------- | -------------------------- | ----------------- | ------------------------------- |
+| **Alex**       | `alex.agent.md`            | All               | Unified orchestrator            |
+| **Researcher** | `alex-researcher.agent.md` | Phase 0: Research | "What do I need to understand?" |
+| **Builder**    | `alex-builder.agent.md`    | Phase 3: Execute  | "How do I create this?"         |
+| **Validator**  | `alex-validator.agent.md`  | Phase 3: Execute  | "How do I break this?"          |
+
+### The Two-Agent Pattern (Builder + Validator)
 
 A key component is separating builder and validator mental models:
 
@@ -166,20 +171,33 @@ A key component is separating builder and validator mental models:
 These agents carry different context, different instructions, and different success criteria. Using one agent for both creates conflicting incentives.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
 flowchart LR
     REQ["Feature\nRequest"] --> B["🔨 Builder Agent\nConstructive"]
     B --> CODE["Implementation"]
     CODE --> V["🔍 Validator Agent\nAdversarial"]
     V -->|Pass| DONE["✅ Complete"]
     V -->|Fail| B
-
-    style B fill:#dafbe1,stroke:#2e7d32
-    style V fill:#ffebee,stroke:#c62828
-    style DONE fill:#e3f2fd,stroke:#1565c0
 ```
 
 **Figure 2:** *Builder creates; validator breaks. Failures loop back for rebuild. This mirrors how separate test and dev teams produce better software.*
+
+### Research-First Agent Flow
+
+The complete flow incorporates all specialized agents:
+
+```mermaid
+flowchart TD
+    START["New Project/Feature"] --> ALEX["🧠 Alex\nOrchestrator"]
+    ALEX --> RESEARCH["📚 Researcher\nPhase 0: Deep Dive"]
+    RESEARCH --> TEACH["Phase 1: Teach\n(Skills, Instructions)"]
+    TEACH --> GAP["Phase 2: Gap Analysis\n(/gapanalysis)"]
+    GAP --> BUILD["🔨 Builder\nPhase 3: Implement"]
+    BUILD --> VALIDATE["🔍 Validator\nReview & QA"]
+    VALIDATE -->|Issues| BUILD
+    VALIDATE -->|Pass| DONE["✅ Complete"]
+```
+
+**Figure 2b:** *The full agent flow. Alex orchestrates, Researcher explores, Builder implements, Validator validates.*
 
 ---
 
@@ -211,17 +229,17 @@ Research-First Development is the first capability to achieve the complete trife
 
 ### Trifecta Audit (February 2026)
 
-| Capability                 | Skill | Instruction | Prompt | Status                 |
-| -------------------------- | :---: | :---------: | :----: | ---------------------- |
-| Research-First Development |   ✅   |      ✅      |   ✅    | **Complete**           |
-| Bootstrap Learning         |   ✅   |      ✅      |   ❌    | Missing prompt         |
-| Meditation                 |   ❌   |      ✅      |   ✅    | Missing skill          |
-| Self-Actualization         |   ❌   |      ✅      |   ❌    | Missing skill + prompt |
-| Release Management         |   ❌   |      ✅      |   ❌    | Missing skill + prompt |
-| Dream/Neural Maintenance   |   ❌   |      ✅      |   ❌    | Missing skill + prompt |
-| Brand Asset Management     |   ❌   |      ✅      |   ❌    | Missing skill + prompt |
+| Capability                 | Skill | Instruction | Prompt | Status       |
+| -------------------------- | :---: | :---------: | :----: | ------------ |
+| Research-First Development |   ✅   |      ✅      |   ✅    | **Complete** |
+| Bootstrap Learning         |   ✅   |      ✅      |   ✅    | **Complete** |
+| Meditation                 |   ✅   |      ✅      |   ✅    | **Complete** |
+| Self-Actualization         |   ✅   |      ✅      |   ✅    | **Complete** |
+| Release Management         |   ✅   |      ✅      |   ✅    | **Complete** |
+| Dream/Neural Maintenance   |   ✅   |      ✅      |   ✅    | **Complete** |
+| Brand Asset Management     |   ✅   |      ✅      |   ✅    | **Complete** |
 
-This audit provides a clear roadmap for future sessions.
+All 7 trifecta candidates completed on 2026-02-13. See [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) for the full audit with "Why?" justifications.
 
 ---
 
@@ -286,7 +304,6 @@ This promotion represents several firsts for the Alex cognitive architecture:
 ### The Temporal Coverage Model
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
 timeline
     title Alex Temporal Coverage
     section Before Project
@@ -322,11 +339,24 @@ If you're an heir project reading this through Global Knowledge:
 │   ├── {project}-context.instructions.md    # Context hub
 │   └── {project}-workflow.instructions.md   # Dev workflow
 ├── agents/
-│   ├── {project}-dev.agent.md     # Builder agent
-│   └── {project}-qa.agent.md      # Validator agent
+│   ├── {project}-builder.agent.md # Project-specific builder
+│   └── {project}-qa.agent.md      # Project-specific validator
 └── prompts/
     └── review.prompt.md           # Code review workflow
 ```
+
+### Leveraging Master Agents
+
+Heirs automatically inherit Master Alex's core agents:
+
+| Agent                      | Inherited | When to Customize           |
+| -------------------------- | --------- | --------------------------- |
+| `alex.agent.md`            | ✅         | Rarely — main orchestrator  |
+| `alex-researcher.agent.md` | ✅         | Add domain-specific sources |
+| `alex-builder.agent.md`    | ✅         | Add project conventions     |
+| `alex-validator.agent.md`  | ✅         | Add project security rules  |
+
+Create project-specific agents only when inherited agents lack domain context.
 
 ### The Payoff
 The Dead Letter heir invested ~2 weeks in knowledge encoding. The payoff:

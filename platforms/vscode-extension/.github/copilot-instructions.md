@@ -228,6 +228,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Episodic | `.prompt.md` | Complex workflows |
 | Skills | `.github/skills/` | Portable domain expertise |
 | Synapses | `synapses.json` | Connection mapping (format: `SYNAPSE-SCHEMA.md`) |
+| **Muscles** | `.github/muscles/` | Execution scripts (trifecta-referenced) |
 | **Global Knowledge** | `~/.alex/global-knowledge/` | Cross-project learnings |
 | **Global Patterns** | `~/.alex/global-knowledge/patterns/` | Reusable patterns (GK-*) |
 | **Global Insights** | `~/.alex/global-knowledge/insights/` | Timestamped learnings (GI-*) |
@@ -254,7 +255,7 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Declarative Memory | Hippocampal-Neocortical | `copilot-instructions.md` |
 | Procedural Memory | Basal Ganglia | `.instructions.md` files (auto-loaded) |
 | Episodic Memory | Hippocampus + Temporal | `.prompt.md` files |
-| Skills/Expertise | Neocortex | `.github/skills/` (98 skills) |
+| Skills/Expertise | Neocortex | `.github/skills/` |
 | **Task Planning** | Dorsolateral PFC | `skill-selection-optimization.instructions.md` — proactive resource allocation |
 | Attention Gating | dlPFC (BA 46) | SSO Phase 1b — context-relevance filtering |
 | Inhibitory Control | dlPFC + vlPFC | Inhibitory synapses — suppress irrelevant protocols |
@@ -263,8 +264,9 @@ Recommend `Alex: Upgrade Architecture` if you see:
 | Working Memory | PFC + ACC | Chat session (4+3 rules) |
 | Meta-Cognition | Medial PFC + DMN | Self-monitoring + awareness |
 | Consolidation | Hippocampal-Cortical | Auto-triggers + meditation |
+| **Motor Execution** | Motor Cortex → Muscles | `.github/muscles/` — execution scripts, not memory |
 
-> **Note**: LLM = Alex's prefrontal cortex. Memory files are inert without it. Three cognitive layers process tasks: **session planning** (working memory slots) → **task planning** (skill selection optimization) → **execution routing** (skill activation).
+> **Note**: LLM = Alex's prefrontal cortex. Memory files are inert without it. Three cognitive layers process tasks: **session planning** (working memory slots) → **task planning** (skill selection optimization) → **execution routing** (skill activation). Scripts in `.github/muscles/` are the "muscles" — referenced by memory files but never a memory component themselves.
 
 ### Synapses (Protocol Triggers)
 
@@ -277,6 +279,9 @@ Key triggers that activate specific protocols:
 | "self-actualize", "deep assessment" | `self-actualization.instructions.md` |
 | "release", "publish", "deploy", "ship" | `release-management.instructions.md` |
 | "branding", "logo", "banner", "assets" | `brand-asset-management.instructions.md` |
+| "release", "publish" (prompt shortcut) | `release.prompt.md` |
+| "brand" (prompt shortcut) | `brand.prompt.md` |
+| "improve project", "create trifecta", "heir trifecta" | `heir-project-improvement.instructions.md` |
 | Complex task (3+ ops), multi-domain | `skill-selection-optimization.instructions.md` |
 | Domain pivot detected (P5-P7 mismatch) | `alex-core.instructions.md` Pivot Detection Protocol |
 | Simple task (1 op) | INHIBIT complex protocols (SSO, deep-thinking) |
@@ -286,12 +291,12 @@ Key triggers that activate specific protocols:
 
 ### Memory Stores (Auto-Loaded)
 
-| Store | Location | Count | Note |
-|-------|----------|-------|------|
-| Procedural | `.github/instructions/` | 24 files | Auto-loaded via VS Code `<instructions>` |
-| Episodic | `.github/prompts/` | 13 files | Workflows, meditation, development |
-| Skills | `.github/skills/` | 98 skills | See `SKILL-CATALOG-GENERATED.md` |
-| Episodic Archive | `.github/episodic/` | Variable | Historical session records |
+| Store | Location | Note |
+|-------|----------|------|
+| Procedural | `.github/instructions/` | Auto-loaded via VS Code `<instructions>` |
+| Episodic | `.github/prompts/` | Workflows, meditation, development |
+| Skills | `.github/skills/` | See `alex_docs/skills/SKILLS-CATALOG.md` |
+| Episodic Archive | `.github/episodic/` | Historical session records |
 
 ### VS Code Extension Commands
 

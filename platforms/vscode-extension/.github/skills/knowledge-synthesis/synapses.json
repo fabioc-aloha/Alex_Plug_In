@@ -19,6 +19,12 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "Goes beyond learning to integration"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "integrates",
+      "strength": 0.85,
+      "reason": "Research generates pre-project knowledge that synthesis organizes"
     }
   ],
   "triggers": [

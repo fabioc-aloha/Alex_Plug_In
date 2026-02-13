@@ -1,0 +1,22 @@
+{
+    "name": "Alex-Enabled Development",
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "fabioc-aloha.alex-cognitive-architecture",
+                "GitHub.copilot",
+                "GitHub.copilot-chat"
+            ],
+            "settings": {
+                "chat.agent.enabled": true,
+                "chat.agentSkillsLocations": [
+                    ".github/skills"
+                ],
+                "chat.useAgentsMdFile": true,
+                "chat.mcp.gallery.enabled": true
+            }
+        }
+    },
+    "postCreateCommand": "git clone https://github.com/${localEnv:GITHUB_USER}/Alex-Global-Knowledge.git ~/.alex/global-knowledge 2>/dev/null || echo 'ℹ️ Global Knowledge repo not found — set GITHUB_USER or clone manually'"
+}

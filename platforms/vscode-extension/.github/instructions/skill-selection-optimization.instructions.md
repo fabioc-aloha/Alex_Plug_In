@@ -220,5 +220,6 @@ These signals should inform future skill selection accuracy — no formal loggin
 - ← `.github/skills/meditation/SKILL.md` — WHEN: complex consolidation session | YIELDS: pre-meditation resource planning
 - ← `.github/instructions/dream-state-automation.instructions.md` — WHEN: dream validates synapse network | YIELDS: healthy dependency graph for SSO analysis
 - ← `.github/instructions/self-actualization.instructions.md` — WHEN: deep assessment needs resource planning | YIELDS: pre-assessment skill survey
+- ← `.github/skills/research-first-development/SKILL.md` — WHEN: gap analysis creates skills | YIELDS: enriched skill pool for SSO selection
 - ⊙ `.github/instructions/dream-state-automation.instructions.md` — INHIBITS: suppress SSO during dream state (unconscious processing doesn't need task planning)
 - ⊙ `.github/prompts/unified-meditation-protocols.prompt.md` — INHIBITS: suppress SSO for simple meditation (only activate for complex multi-phase consolidation)

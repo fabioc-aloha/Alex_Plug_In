@@ -535,13 +535,13 @@ A standalone generator is also available:
 
 ```bash
 # Simple topic
-node scripts/gamma-generator.js --topic "Introduction to AI"
+node .github/muscles/gamma-generator.js --topic "Introduction to AI"
 
 # From file with export
-node scripts/gamma-generator.js --file README.md --export pptx
+node .github/muscles/gamma-generator.js --file README.md --export pptx
 
 # Full options
-node scripts/gamma-generator.js \
+node .github/muscles/gamma-generator.js \
   --topic "Climate Change" \
   --slides 12 \
   --tone "inspiring" \

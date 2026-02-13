@@ -19,6 +19,18 @@
       "type": "enables",
       "strength": 0.9,
       "reason": "Learning builds trust"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "reason": "Bootstrap learning feeds research-first knowledge acquisition"
+    },
+    {
+      "target": ".github/skills/muscle-memory-recognition/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "reason": "Learning identifies repetitive patterns that become automation"
     }
   ],
   "triggers": [

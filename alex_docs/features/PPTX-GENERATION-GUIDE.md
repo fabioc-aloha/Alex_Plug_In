@@ -245,10 +245,10 @@ For automation or CI/CD pipelines:
 
 ```bash
 cd platforms/vscode-extension
-npx ts-node scripts/pptxgen-cli.ts --input docs/presentation.md --output output/deck.pptx
+npx ts-node .github/muscles/pptxgen-cli.ts --input docs/presentation.md --output output/deck.pptx
 
 # Quick deck from content
-npx ts-node scripts/pptxgen-cli.ts --content "Welcome|Point 1|Point 2" -o quick.pptx
+npx ts-node .github/muscles/pptxgen-cli.ts --content "Welcome|Point 1|Point 2" -o quick.pptx
 ```
 
 ### CLI Options

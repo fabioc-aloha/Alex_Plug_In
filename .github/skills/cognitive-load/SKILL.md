@@ -2,6 +2,7 @@
 name: "Cognitive Load Skill"
 description: "Don't overwhelm — chunk, scaffold, summarize first."
 applyTo: "**/*explain*,**/*teach*,**/*learn*,**/*help*"
+user-invokable: false
 ---
 
 # Cognitive Load Skill

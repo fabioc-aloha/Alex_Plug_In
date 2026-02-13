@@ -1,0 +1,52 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "brand-asset-management",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": ".github/skills/heir-curation/SKILL.md",
+            "type": "coordinates-with",
+            "strength": 0.75,
+            "when": "deploying brand assets to heir platforms",
+            "yields": "Consistent branding across VS Code, M365 heirs"
+        },
+        {
+            "target": ".github/skills/svg-graphics/SKILL.md",
+            "type": "uses",
+            "strength": 0.8,
+            "when": "creating or modifying SVG banners and logos",
+            "yields": "SVG asset creation, animated banner generation"
+        },
+        {
+            "target": ".github/skills/image-handling/SKILL.md",
+            "type": "uses",
+            "strength": 0.7,
+            "when": "generating PNG from SVG or managing raster assets",
+            "yields": "PNG generation, image optimization"
+        },
+        {
+            "target": ".github/skills/writing-publication/SKILL.md",
+            "type": "triggers",
+            "strength": 0.65,
+            "when": "generating persona copy or store descriptions",
+            "yields": "Marketing copy following store description pattern"
+        },
+        {
+            "target": ".github/skills/release-preflight/SKILL.md",
+            "type": "validates",
+            "strength": 0.7,
+            "when": "verifying brand assets before release",
+            "yields": "Asset completeness check during release preflight"
+        }
+    ],
+    "triggers": [
+        "branding",
+        "logo",
+        "banner",
+        "assets",
+        "brand",
+        "marketplace description",
+        "store listing"
+    ]
+}

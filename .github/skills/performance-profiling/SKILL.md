@@ -1,4 +1,3 @@
-```skill
 ---
 name: "Performance Profiling"
 description: "CPU, memory, network bottleneck analysis — systematic performance investigation"
@@ -436,4 +435,3 @@ Define acceptable limits:
 ---
 
 *The fastest code is code that doesn't run. The second fastest is code that runs once.*
-```

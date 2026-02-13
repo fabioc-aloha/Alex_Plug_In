@@ -2,11 +2,24 @@
  * Persona Detection Module
  * 
  * Identifies user personas from their profile and project context.
- * Uses LLM-based analysis for dynamic persona detection.
+ * Uses semantic signal rules for flexible, weighted detection.
+ * LLM-based analysis for dynamic persona detection when available.
  * 
  * v5.0.0 Feature: Know Your Customer
  * v5.1.0 Feature: LLM-based persona detection + P6 update
  * v5.1.1 Feature: Priority-based detection chain
+ * v5.6.9 Feature: Semantic rules replace flat keyword lists
+ * 
+ * DETECTION MODEL:
+ * Instead of flat keyword arrays, each persona defines weighted "signals":
+ *   - identity:   regex matched against user text (goals, expertise, focus)
+ *   - technology:  regex matched against detected tech stack
+ *   - structure:   workspace file/dir existence checks (path, extension, exact)
+ *   - dependency:  matched against package.json dependencies
+ *   - content:     regex matched against README/key file contents
+ * 
+ * Each signal carries its own weight, enabling fine-grained scoring
+ * and easy addition of new personas without changing detection logic.
  * 
  * PRIORITY CHAIN (highest to lowest):
  * 1. Focus - Current session topic from Pomodoro timer
@@ -50,7 +63,31 @@ const MAX_DIR_ENTRIES = 50;
 const MAX_SUBDIR_ENTRIES = 10;
 
 /**
- * Marketing persona definition
+ * A semantic detection signal.
+ * Replaces flat keyword/techStack/projectPattern arrays with
+ * typed, weighted, regex-capable matching rules.
+ */
+export interface PersonaSignal {
+    /**
+     * What category of evidence this signal represents:
+     * - identity:   matched against user-provided text (expertise, goals, focus topic)
+     * - technology:  matched against detected project technologies
+     * - structure:   workspace path/file existence (supports path/, .ext, exact name)
+     * - dependency:  matched against package.json dependency names
+     * - content:     matched against key file contents (README, package.json description)
+     */
+    category: 'identity' | 'technology' | 'structure' | 'dependency' | 'content';
+    /** Regex pattern string (case-insensitive). Supports alternation. */
+    pattern: string;
+    /** Score weight when matched (default conceptual ranges: 1-3) */
+    weight: number;
+}
+
+/**
+ * Marketing persona definition.
+ * Detection is driven by `signals` — an array of weighted semantic rules.
+ * The legacy `keywords`, `techStack`, and `projectPatterns` are derived
+ * automatically for backward compatibility.
  */
 export interface Persona {
     id: string;
@@ -60,6 +97,9 @@ export interface Persona {
     skill: string;
     icon: string;
     accentColor: string;  // Hex color for badges/pills
+    /** Weighted semantic signals that drive detection scoring */
+    signals: PersonaSignal[];
+    // --- Derived accessors (backward compat) ---
     keywords: string[];
     techStack: string[];
     projectPatterns: string[];
@@ -77,202 +117,336 @@ export interface LLMPersona {
 }
 
 /**
- * All defined personas from marketing plan
+ * Persona-to-P5/P7 slot mappings.
+ * P6 comes from persona.skill. P5 = primary support, P7 = complementary.
+ * Personas not listed default to code-review (P5) + scope-management (P7).
+ */
+export const PERSONA_SLOT_MAPPINGS: Record<string, { p5: string; p7: string }> = {
+    'developer':        { p5: 'code-review',                p7: 'git-workflow' },
+    'academic':         { p5: 'research-project-scaffold',  p7: 'creative-writing' },
+    'researcher':       { p5: 'research-project-scaffold',  p7: 'api-documentation' },
+    'technical-writer': { p5: 'api-documentation',          p7: 'markdown-mermaid' },
+    'architect':        { p5: 'architecture-health',        p7: 'code-review' },
+    'data-engineer':    { p5: 'microsoft-fabric',           p7: 'code-review' },
+    'devops':           { p5: 'infrastructure-as-code',     p7: 'git-workflow' },
+    'content-creator':  { p5: 'creative-writing',           p7: 'gamma-presentations' },
+    'fiction-writer':   { p5: 'creative-writing',           p7: 'scope-management' },
+    'game-developer':   { p5: 'game-design',                p7: 'creative-writing' },
+    'project-manager':  { p5: 'project-management',         p7: 'scope-management' },
+    'security':         { p5: 'incident-response',          p7: 'code-review' },
+    'student':          { p5: 'learning-psychology',        p7: 'deep-thinking' },
+    'job-seeker':       { p5: 'creative-writing',           p7: 'code-review' },
+    'presenter':        { p5: 'gamma-presentations',        p7: 'slide-design' },
+    'power-user':       { p5: 'git-workflow',               p7: 'scope-management' },
+};
+
+/**
+ * Build a Persona object from signals, auto-deriving keywords/techStack/projectPatterns
+ * for backward compatibility with code that reads those arrays.
+ */
+function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPatterns'> & { signals: PersonaSignal[] }): Persona {
+    const keywords: string[] = [];
+    const techStack: string[] = [];
+    const projectPatterns: string[] = [];
+    for (const s of base.signals) {
+        // Extract simple tokens from regex alternation for legacy arrays
+        const tokens = s.pattern.split('|').map(t => t.replace(/[\\^$.*+?()[\]{}]/g, '').trim()).filter(t => t.length > 0);
+        if (s.category === 'identity') { keywords.push(...tokens); }
+        else if (s.category === 'technology') { techStack.push(...tokens); }
+        else if (s.category === 'structure') { projectPatterns.push(...tokens); }
+    }
+    return { ...base, keywords, techStack, projectPatterns };
+}
+
+/**
+ * All defined personas — driven by semantic signal rules.
+ * Each persona's detection is controlled entirely by its `signals` array.
+ * Use identity signals for text matching, technology for stack detection,
+ * structure for workspace scanning, dependency for package.json, and
+ * content for file content analysis.
  */
 export const PERSONAS: Persona[] = [
-    {
+    buildPersona({
         id: 'developer',
         name: 'Developer',
         bannerNoun: 'CODE',
         hook: 'Ship faster, debug less',
         skill: 'code-review',
         icon: '💻',
-        accentColor: '#0078D4',  // Azure Blue
-        keywords: ['developer', 'engineer', 'programmer', 'coder', 'software'],
-        techStack: ['typescript', 'javascript', 'python', 'java', 'c#', 'go', 'rust', 'react', 'angular', 'vue', 'node'],
-        projectPatterns: ['src/', 'package.json', 'tsconfig.json', 'pom.xml', 'Cargo.toml', 'go.mod']
-    },
-    {
+        accentColor: '#0078D4',
+        signals: [
+            { category: 'identity',   pattern: 'developer|engineer|programmer|coder|software',                  weight: 2.0 },
+            { category: 'technology', pattern: 'typescript|javascript|python|java|c#|go|rust|react|angular|vue|node', weight: 2.0 },
+            { category: 'structure',  pattern: 'src/',                                                           weight: 1.0 },
+            { category: 'dependency', pattern: 'typescript|eslint|jest|mocha|webpack|vite|esbuild',               weight: 1.5 },
+            { category: 'content',    pattern: 'npm|build|compile|test|lint',                                    weight: 0.5 },
+        ]
+    }),
+    buildPersona({
         id: 'academic',
         name: 'Academic / Grad Student',
         bannerNoun: 'THESIS',
         hook: 'Literature review on autopilot',
         skill: 'research-project-scaffold',
         icon: '🎓',
-        accentColor: '#8B5CF6',  // Purple
-        keywords: ['student', 'phd', 'thesis', 'dissertation', 'academic', 'university', 'graduate', 'research'],
-        techStack: ['latex', 'bibtex', 'markdown', 'r', 'python', 'jupyter'],
-        projectPatterns: ['.tex', '.bib', 'thesis/', 'dissertation/', 'chapters/', 'references/']
-    },
-    {
+        accentColor: '#8B5CF6',
+        signals: [
+            { category: 'identity',   pattern: 'phd|thesis|dissertation|academic|university|graduate|postdoc',    weight: 2.5 },
+            { category: 'technology', pattern: 'latex|bibtex|r\\b|jupyter',                                      weight: 2.0 },
+            { category: 'structure',  pattern: '.tex|.bib|thesis/|dissertation/|chapters/|references/',           weight: 1.5 },
+            { category: 'content',    pattern: 'abstract|literature review|methodology|hypothesis|citation',      weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'researcher',
         name: 'Researcher',
         bannerNoun: 'RESEARCH',
         hook: 'Hypothesis to publication, accelerated',
         skill: 'research-project-scaffold',
         icon: '🔬',
-        accentColor: '#10B981',  // Emerald Green
-        keywords: ['researcher', 'scientist', 'lab', 'data', 'analysis', 'experiment', 'hypothesis'],
-        techStack: ['python', 'r', 'julia', 'matlab', 'jupyter', 'pandas', 'numpy'],
-        projectPatterns: ['data/', 'analysis/', 'experiments/', 'notebooks/', '.ipynb']
-    },
-    {
+        accentColor: '#10B981',
+        signals: [
+            { category: 'identity',   pattern: 'researcher|scientist|lab|experiment|hypothesis',                  weight: 2.5 },
+            { category: 'technology', pattern: 'python|r\\b|julia|matlab|jupyter|pandas|numpy|scipy',             weight: 2.0 },
+            { category: 'structure',  pattern: 'data/|analysis/|experiments/|notebooks/|.ipynb',                  weight: 1.5 },
+            { category: 'dependency', pattern: 'pandas|numpy|scipy|matplotlib|seaborn|scikit-learn',              weight: 1.5 },
+            { category: 'content',    pattern: 'dataset|experiment|finding|analysis|result',                      weight: 0.5 },
+        ]
+    }),
+    buildPersona({
         id: 'technical-writer',
         name: 'Technical Writer',
         bannerNoun: 'DOCUMENTATION',
         hook: 'Docs that write themselves',
         skill: 'api-documentation',
         icon: '📝',
-        accentColor: '#F59E0B',  // Amber
-        keywords: ['writer', 'documentation', 'docs', 'technical', 'api', 'manual'],
-        techStack: ['markdown', 'rst', 'asciidoc', 'docusaurus', 'sphinx', 'mkdocs'],
-        projectPatterns: ['docs/', 'documentation/', 'README.md', 'CONTRIBUTING.md', '.mdx']
-    },
-    {
+        accentColor: '#F59E0B',
+        signals: [
+            { category: 'identity',   pattern: 'writer|documentation|technical.?writ|api.?doc|manual',           weight: 2.5 },
+            { category: 'technology', pattern: 'markdown|rst|asciidoc|docusaurus|sphinx|mkdocs',                  weight: 2.0 },
+            { category: 'structure',  pattern: 'docs/|documentation/|.mdx',                                      weight: 1.5 },
+            { category: 'content',    pattern: 'getting started|api reference|installation|quick start',          weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'architect',
         name: 'Enterprise Architect',
         bannerNoun: 'ARCHITECTURE',
         hook: 'Self-documenting cognitive architecture',
         skill: 'architecture-health',
         icon: '🏗️',
-        accentColor: '#6366F1',  // Indigo
-        keywords: ['architect', 'system', 'enterprise', 'design', 'infrastructure'],
-        techStack: ['terraform', 'bicep', 'kubernetes', 'docker', 'azure', 'aws'],
-        projectPatterns: ['infra/', 'terraform/', 'bicep/', 'kubernetes/', 'helm/', 'ADR/']
-    },
-    {
+        accentColor: '#6366F1',
+        signals: [
+            { category: 'identity',   pattern: 'architect|system.?design|enterprise|infrastructure',              weight: 2.5 },
+            { category: 'technology', pattern: 'terraform|bicep|kubernetes|docker|azure|aws|gcp',                  weight: 2.0 },
+            { category: 'structure',  pattern: 'infra/|terraform/|bicep/|kubernetes/|helm/|ADR/',                  weight: 1.5 },
+            { category: 'content',    pattern: 'architecture|adr|decision record|microservice|scalab',             weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'data-engineer',
         name: 'Data Engineer',
         bannerNoun: 'DATA',
         hook: 'Governance on autopilot',
         skill: 'microsoft-fabric',
         icon: '📊',
-        accentColor: '#06B6D4',  // Cyan
-        keywords: ['data', 'engineer', 'etl', 'pipeline', 'warehouse', 'analytics', 'fabric', 'lakehouse'],
-        techStack: ['sql', 'python', 'spark', 'dbt', 'fabric', 'synapse', 'databricks'],
-        projectPatterns: ['pipelines/', 'etl/', 'dbt/', 'notebooks/', 'lakehouse/']
-    },
-    {
+        accentColor: '#06B6D4',
+        signals: [
+            { category: 'identity',   pattern: 'data.?engineer|etl|pipeline|warehouse|analytics|fabric|lakehouse', weight: 2.5 },
+            { category: 'technology', pattern: 'sql|spark|dbt|fabric|synapse|databricks|snowflake',                weight: 2.0 },
+            { category: 'structure',  pattern: 'pipelines/|etl/|dbt/|notebooks/|lakehouse/',                       weight: 1.5 },
+            { category: 'dependency', pattern: 'dbt-core|pyspark|great-expectations|apache-airflow',               weight: 1.5 },
+            { category: 'content',    pattern: 'medallion|bronze|silver|gold|data warehouse|lakehouse',             weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'devops',
         name: 'DevOps Engineer',
         bannerNoun: 'INFRASTRUCTURE',
         hook: 'Same infra, every time. Automated.',
         skill: 'infrastructure-as-code',
         icon: '⚙️',
-        accentColor: '#EF4444',  // Red
-        keywords: ['devops', 'sre', 'infrastructure', 'ci', 'cd', 'deployment', 'automation'],
-        techStack: ['terraform', 'ansible', 'docker', 'kubernetes', 'github-actions', 'azure-devops'],
-        projectPatterns: ['.github/workflows/', 'azure-pipelines.yml', 'Dockerfile', '.gitlab-ci.yml']
-    },
-    {
+        accentColor: '#EF4444',
+        signals: [
+            { category: 'identity',   pattern: 'devops|sre|ci/?cd|deployment|automation|platform.?eng',           weight: 2.5 },
+            { category: 'technology', pattern: 'terraform|ansible|docker|kubernetes|github-actions|azure-devops',  weight: 2.0 },
+            { category: 'structure',  pattern: '.github/workflows/|azure-pipelines.yml|Dockerfile|.gitlab-ci.yml', weight: 2.0 },
+            { category: 'content',    pattern: 'deploy|pipeline|continuous|infrastructure|helm|container',          weight: 0.5 },
+        ]
+    }),
+    buildPersona({
         id: 'content-creator',
         name: 'Content Creator',
         bannerNoun: 'CONTENT',
         hook: 'Ideas to posts in minutes',
         skill: 'creative-writing',
         icon: '✍️',
-        accentColor: '#EC4899',  // Pink
-        keywords: ['content', 'creator', 'blogger', 'writer', 'newsletter', 'social'],
-        techStack: ['markdown', 'ghost', 'wordpress', 'substack', 'notion'],
-        projectPatterns: ['posts/', 'articles/', 'blog/', 'content/', 'drafts/']
-    },
-    {
+        accentColor: '#EC4899',
+        signals: [
+            { category: 'identity',   pattern: 'content.?creat|blogger|newsletter|social.?media|copywriter',      weight: 2.5 },
+            { category: 'technology', pattern: 'markdown|ghost|wordpress|substack|notion',                         weight: 1.5 },
+            { category: 'structure',  pattern: 'posts/|articles/|blog/|content/|drafts/',                          weight: 1.5 },
+            { category: 'content',    pattern: 'publish|audience|seo|newsletter|content calendar',                  weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'fiction-writer',
         name: 'Fiction Writer',
         bannerNoun: 'WRITING',
         hook: 'Your story structure co-author',
         skill: 'creative-writing',
         icon: '📚',
-        accentColor: '#A855F7',  // Violet
-        keywords: ['fiction', 'novel', 'screenplay', 'story', 'author', 'creative', 'book', 'writing'],
-        techStack: ['markdown', 'scrivener', 'fountain', 'writing'],
-        projectPatterns: ['chapters/', 'manuscript/', 'outline/', 'characters/', '.fountain', 'book/', 'drafts/', 'scenes/', 'OUTLINE.md', 'outline.md', 'plot/', 'worldbuilding/']
-    },
-    {
+        accentColor: '#A855F7',
+        signals: [
+            { category: 'identity',   pattern: 'fiction|novel|screenplay|story|author|creative.?writ|book',        weight: 2.5 },
+            { category: 'technology', pattern: 'scrivener|fountain|writing',                                       weight: 2.0 },
+            { category: 'structure',  pattern: 'chapters/|manuscript/|outline/|characters/|.fountain|book/|scenes/|OUTLINE.md|plot/|worldbuilding/', weight: 1.5 },
+            { category: 'content',    pattern: 'chapter|character|protagonist|plot|narrative|dialogue',              weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'game-developer',
         name: 'Game Developer',
         bannerNoun: 'GAMES',
         hook: 'Design, build, play — iterate',
         skill: 'game-design',
         icon: '🎮',
-        accentColor: '#7C3AED',  // Deep Violet
-        keywords: ['game', 'gamedev', 'unity', 'unreal', 'godot', 'rpg', 'puzzle', 'interactive', 'narrative', 'mystery'],
-        techStack: ['unity', 'unreal', 'godot', 'c#', 'c++', 'lua', 'python', 'gdscript', 'renpy'],
-        projectPatterns: ['game/', 'levels/', 'sprites/', 'quests/', 'puzzles/', 'mechanics/', 'game-design/', 'GAME-DESIGN.md', 'inventory/', 'dialogues/', 'encounters/']
-    },
-    {
+        accentColor: '#7C3AED',
+        signals: [
+            { category: 'identity',   pattern: 'game.?dev|unity|unreal|godot|rpg|puzzle|interactive|narrative.?design', weight: 2.5 },
+            { category: 'technology', pattern: 'unity|unreal|godot|c#|c\\+\\+|lua|gdscript|renpy',                     weight: 2.0 },
+            { category: 'structure',  pattern: 'game/|levels/|sprites/|quests/|puzzles/|mechanics/|game-design/|GAME-DESIGN.md|inventory/|dialogues/|encounters/', weight: 1.5 },
+            { category: 'dependency', pattern: 'phaser|pixi|three|babylonjs|matter-js',                                 weight: 1.5 },
+            { category: 'content',    pattern: 'game.?loop|player|inventory|quest|level.?design|mechanic',               weight: 0.5 },
+        ]
+    }),
+    buildPersona({
         id: 'project-manager',
         name: 'Project Manager',
         bannerNoun: 'PROJECTS',
         hook: '4-6× faster than human estimates',
         skill: 'project-management',
         icon: '📋',
-        accentColor: '#14B8A6',  // Teal
-        keywords: ['project', 'manager', 'agile', 'scrum', 'sprint', 'roadmap'],
-        techStack: ['markdown', 'jira', 'azure-boards', 'notion', 'linear'],
-        projectPatterns: ['sprints/', 'roadmap/', 'epics/', 'backlog/']
-    },
-    {
+        accentColor: '#14B8A6',
+        signals: [
+            { category: 'identity',   pattern: 'project.?manag|agile|scrum|sprint|roadmap|kanban',                weight: 2.5 },
+            { category: 'technology', pattern: 'jira|azure-boards|notion|linear',                                 weight: 2.0 },
+            { category: 'structure',  pattern: 'sprints/|roadmap/|epics/|backlog/',                                weight: 1.5 },
+            { category: 'content',    pattern: 'sprint|user.?story|backlog|velocity|retrospective|standup',         weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'security',
         name: 'Security Engineer',
         bannerNoun: 'SECURITY',
         hook: 'Threat-aware by default',
         skill: 'incident-response',
         icon: '🔐',
-        accentColor: '#DC2626',  // Crimson
-        keywords: ['security', 'threat', 'audit', 'compliance', 'penetration', 'vulnerability'],
-        techStack: ['python', 'bash', 'powershell', 'terraform'],
-        projectPatterns: ['security/', 'audits/', 'compliance/', 'threat-models/']
-    },
-    {
+        accentColor: '#DC2626',
+        signals: [
+            { category: 'identity',   pattern: 'security|threat|audit|compliance|penetration|vulnerabilit',        weight: 2.5 },
+            { category: 'technology', pattern: 'python|bash|powershell|terraform',                                 weight: 1.0 },
+            { category: 'structure',  pattern: 'security/|audits/|compliance/|threat-models/',                     weight: 2.0 },
+            { category: 'content',    pattern: 'cve|owasp|threat model|incident|security review|pen.?test',        weight: 1.5 },
+        ]
+    }),
+    buildPersona({
         id: 'student',
         name: 'Student',
         bannerNoun: 'LEARNING',
         hook: 'Master concepts, not just memorize',
         skill: 'learning-psychology',
         icon: '📖',
-        accentColor: '#3B82F6',  // Blue
-        keywords: ['student', 'learning', 'study', 'course', 'class', 'homework'],
-        techStack: ['markdown', 'notion', 'obsidian'],
-        projectPatterns: ['notes/', 'study/', 'courses/', 'assignments/']
-    },
-    {
+        accentColor: '#3B82F6',
+        signals: [
+            { category: 'identity',   pattern: 'student|learning|study|course|class|homework|tutorial',            weight: 2.5 },
+            { category: 'technology', pattern: 'notion|obsidian',                                                  weight: 1.0 },
+            { category: 'structure',  pattern: 'notes/|study/|courses/|assignments/',                               weight: 1.5 },
+            { category: 'content',    pattern: 'lesson|assignment|quiz|exam|lecture|tutorial',                       weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'job-seeker',
         name: 'Job Seeker',
         bannerNoun: 'CAREER',
         hook: 'Stand out, get hired',
         skill: 'creative-writing',
         icon: '💼',
-        accentColor: '#84CC16',  // Lime
-        keywords: ['job', 'career', 'resume', 'interview', 'portfolio', 'linkedin'],
-        techStack: ['markdown', 'latex'],
-        projectPatterns: ['resume/', 'portfolio/', 'cover-letters/', 'cv/']
-    },
-    {
+        accentColor: '#84CC16',
+        signals: [
+            { category: 'identity',   pattern: 'job|career|resume|interview|portfolio|linkedin|cover.?letter',     weight: 2.5 },
+            { category: 'technology', pattern: 'markdown|latex',                                                    weight: 0.5 },
+            { category: 'structure',  pattern: 'resume/|portfolio/|cover-letters/|cv/',                             weight: 2.0 },
+            { category: 'content',    pattern: 'experience|position|responsibilities|qualification|skill.?set',     weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'presenter',
         name: 'Speaker / Presenter',
         bannerNoun: 'PRESENTATIONS',
         hook: 'Notes → polished slides in minutes',
         skill: 'gamma-presentations',
         icon: '🎤',
-        accentColor: '#F97316',  // Orange
-        keywords: ['speaker', 'presenter', 'slides', 'deck', 'talk', 'conference', 'workshop'],
-        techStack: ['markdown', 'marp', 'reveal.js', 'gamma'],
-        projectPatterns: ['slides/', 'decks/', 'presentations/', 'talks/']
-    },
-    {
+        accentColor: '#F97316',
+        signals: [
+            { category: 'identity',   pattern: 'speaker|presenter|slides|deck|talk|conference|workshop',           weight: 2.5 },
+            { category: 'technology', pattern: 'marp|reveal\\.?js|gamma',                                          weight: 2.0 },
+            { category: 'structure',  pattern: 'slides/|decks/|presentations/|talks/',                              weight: 1.5 },
+            { category: 'content',    pattern: 'slide|presentation|speaker.?notes|audience|keynote',                weight: 1.0 },
+        ]
+    }),
+    buildPersona({
         id: 'power-user',
         name: 'Power User / Builder',
         bannerNoun: 'PROJECTS',
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🚀',
-        accentColor: '#FBBF24',  // Gold
-        keywords: ['power user', 'builder', 'maker', 'hacker', 'tinkerer', 'contributor'],
-        techStack: ['typescript', 'python', 'bash', 'powershell', 'git'],
-        projectPatterns: ['skills/', 'extensions/', 'plugins/']
-    }
+        accentColor: '#FBBF24',
+        signals: [
+            { category: 'identity',   pattern: 'power.?user|builder|maker|hacker|tinkerer|contributor',            weight: 2.0 },
+            { category: 'technology', pattern: 'typescript|python|bash|powershell|git',                             weight: 1.0 },
+            { category: 'structure',  pattern: 'skills/|extensions/|plugins/',                                      weight: 1.5 },
+            { category: 'content',    pattern: 'extensi|plugin|customiz|automat|contribut',                         weight: 0.5 },
+        ]
+    }),
 ];
+
+// ============================================================================
+// SIGNAL MATCHING HELPERS
+// ============================================================================
+
+/**
+ * Test whether a text matches any identity or technology signals for a persona.
+ * Returns the best-matching persona and reason, or null.
+ */
+function matchTextAgainstSignals(
+    text: string,
+    categories: PersonaSignal['category'][],
+): { persona: Persona; confidence: number; reason: string } | null {
+    const textLower = text.toLowerCase();
+    let bestPersona: Persona | null = null;
+    let bestWeight = 0;
+    let bestReason = '';
+
+    for (const persona of PERSONAS) {
+        for (const signal of persona.signals) {
+            if (!categories.includes(signal.category)) { continue; }
+            try {
+                const re = new RegExp(signal.pattern, 'i');
+                if (re.test(textLower)) {
+                    if (signal.weight > bestWeight) {
+                        bestWeight = signal.weight;
+                        bestPersona = persona;
+                        bestReason = `Matched "${signal.pattern}" in text`;
+                    }
+                }
+            } catch { /* skip invalid regex */ }
+        }
+    }
+
+    return bestPersona ? { persona: bestPersona, confidence: 0, reason: bestReason } : null;
+}
 
 // ============================================================================
 // PRIORITY CHAIN DETECTION HELPERS
@@ -280,8 +454,7 @@ export const PERSONAS: Persona[] = [
 
 /**
  * PRIORITY 1: Detect persona from active Focus session (Pomodoro timer)
- * Highest priority - if user explicitly started a focus session with a topic,
- * that topic should drive persona detection.
+ * Uses semantic signal matching against session topic.
  */
 async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
     try {
@@ -295,29 +468,16 @@ async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 's
             return null;
         }
         
-        const topic = sessionState.topic.toLowerCase();
+        const topic = sessionState.topic;
         
-        // Match topic against persona keywords
-        for (const persona of PERSONAS) {
-            for (const keyword of persona.keywords) {
-                if (topic.includes(keyword)) {
-                    return {
-                        persona,
-                        confidence: CONFIDENCE_FOCUS,
-                        reasons: [`Active focus session: "${sessionState.topic}"`]
-                    };
-                }
-            }
-            // Also check tech stack
-            for (const tech of persona.techStack) {
-                if (topic.includes(tech)) {
-                    return {
-                        persona,
-                        confidence: CONFIDENCE_FOCUS_TECH,
-                        reasons: [`Focus session on ${tech}: "${sessionState.topic}"`]
-                    };
-                }
-            }
+        // Match topic against identity and technology signals
+        const match = matchTextAgainstSignals(topic, ['identity', 'technology']);
+        if (match) {
+            return {
+                persona: match.persona,
+                confidence: CONFIDENCE_FOCUS,
+                reasons: [`Active focus session: "${sessionState.topic}"`]
+            };
         }
     } catch (err) {
         console.debug('[Alex] Focus session state not available:', err);
@@ -327,7 +487,7 @@ async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 's
 
 /**
  * PRIORITY 2: Detect persona from current session goal
- * Second priority - explicit goals set for this session.
+ * Uses semantic signal matching against goal text.
  */
 async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
     if (!rootPath) { return null; }
@@ -341,20 +501,15 @@ async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDe
         const goalsData = await fs.readJson(goalsPath);
         const activeGoals = goalsData.goals?.filter((g: { completedAt?: string }) => !g.completedAt) || [];
         
-        // Check goal titles and tags for persona matches
         for (const goal of activeGoals) {
-            const goalText = `${goal.title} ${goal.description || ''} ${(goal.tags || []).join(' ')}`.toLowerCase();
-            
-            for (const persona of PERSONAS) {
-                for (const keyword of persona.keywords) {
-                    if (goalText.includes(keyword)) {
-                        return {
-                            persona,
-                            confidence: CONFIDENCE_GOAL,
-                            reasons: [`Active goal: "${goal.title}"`]
-                        };
-                    }
-                }
+            const goalText = `${goal.title} ${goal.description || ''} ${(goal.tags || []).join(' ')}`;
+            const match = matchTextAgainstSignals(goalText, ['identity', 'technology']);
+            if (match) {
+                return {
+                    persona: match.persona,
+                    confidence: CONFIDENCE_GOAL,
+                    reasons: [`Active goal: "${goal.title}"`]
+                };
             }
         }
     } catch (err) {
@@ -365,36 +520,35 @@ async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDe
 
 /**
  * PRIORITY 3: Detect persona from project phase
- * Third priority - current phase of the project lifecycle.
+ * Uses semantic pattern matching against roadmap content.
  */
 async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
     if (!rootPath) { return null; }
     
     try {
-        // Check for ROADMAP files that indicate current phase
         const roadmapPaths = [
             path.join(rootPath, 'ROADMAP.md'),
             path.join(rootPath, 'ROADMAP-UNIFIED.md'),
             path.join(rootPath, '.github', 'ROADMAP.md')
         ];
         
+        // Phase semantic rules: regex pattern → persona ID
+        const phaseRules: Array<{ pattern: RegExp; personaId: string }> = [
+            { pattern: /🔄 in progress|## current|active track|sprint \d+/i,                personaId: 'developer' },
+            { pattern: /documentation phase|docs sprint|writing phase|api docs/i,            personaId: 'technical-writer' },
+            { pattern: /release phase|publish|deployment|go.?live|launch/i,                  personaId: 'devops' },
+            { pattern: /architecture review|design phase|system design|adr/i,                personaId: 'architect' },
+            { pattern: /research phase|literature review|data collection|experiment/i,       personaId: 'researcher' },
+            { pattern: /presentation|demo prep|conference|talk prep/i,                       personaId: 'presenter' },
+            { pattern: /security audit|compliance review|pen.?test|threat model/i,           personaId: 'security' },
+        ];
+        
         for (const roadmapPath of roadmapPaths) {
             if (await fs.pathExists(roadmapPath)) {
                 const content = await fs.readFile(roadmapPath, 'utf8');
-                const contentLower = content.toLowerCase();
                 
-                // Look for current phase indicators
-                const phaseKeywords: Array<{ keywords: string[]; persona: string }> = [
-                    { keywords: ['🔄 in progress', '## current', 'active track'], persona: 'developer' },
-                    { keywords: ['documentation phase', 'docs sprint'], persona: 'technical-writer' },
-                    { keywords: ['release phase', 'publishing', 'deployment'], persona: 'devops' },
-                    { keywords: ['architecture review', 'design phase'], persona: 'architect' },
-                    { keywords: ['research phase', 'literature review'], persona: 'researcher' },
-                    { keywords: ['presentation', 'demo prep'], persona: 'presenter' }
-                ];
-                
-                for (const { keywords, persona: personaId } of phaseKeywords) {
-                    if (keywords.some(k => contentLower.includes(k))) {
+                for (const { pattern, personaId } of phaseRules) {
+                    if (pattern.test(content)) {
                         const persona = PERSONAS.find(p => p.id === personaId);
                         if (persona) {
                             return {
@@ -415,7 +569,7 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
 
 /**
  * PRIORITY 4: Detect persona from project learning goals
- * Fourth priority - what the user is trying to learn in this project.
+ * Uses semantic signal matching against goal text.
  */
 async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
     if (!rootPath) { return null; }
@@ -431,18 +585,13 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
         
         for (const goal of goals) {
             if (typeof goal !== 'string') { continue; }
-            const goalLower = goal.toLowerCase();
-            
-            for (const persona of PERSONAS) {
-                for (const keyword of persona.keywords) {
-                    if (goalLower.includes(keyword)) {
-                        return {
-                            persona,
-                            confidence: CONFIDENCE_LEARNING_GOALS,
-                            reasons: [`Learning goal: "${goal}"`]
-                        };
-                    }
-                }
+            const match = matchTextAgainstSignals(goal, ['identity', 'technology']);
+            if (match) {
+                return {
+                    persona: match.persona,
+                    confidence: CONFIDENCE_LEARNING_GOALS,
+                    reasons: [`Learning goal: "${goal}"`]
+                };
             }
         }
     } catch (err) {
@@ -546,7 +695,7 @@ export async function detectPersona(
         }
     }
     
-    // PRIORITY 6: Profile-based detection (existing logic)
+    // PRIORITY 6: Signal-based scoring across all evidence sources
     const scores: Map<string, { score: number; reasons: string[] }> = new Map();
     
     // Initialize all personas with 0 score
@@ -554,117 +703,142 @@ export async function detectPersona(
         scores.set(persona.id, { score: 0, reasons: [] });
     }
     
-    // Analyze user profile
+    // --- Collect evidence texts from user profile ---
+    const profileTexts: { text: string; label: string }[] = [];
     if (userProfile) {
-        // Check primary technologies
-        if (userProfile.primaryTechnologies) {
-            for (const tech of userProfile.primaryTechnologies) {
-                if (typeof tech !== 'string') { continue; }
-                const techLower = tech.toLowerCase();
-                for (const persona of PERSONAS) {
-                    if (persona.techStack.some(t => techLower.includes(t) || t.includes(techLower))) {
-                        const entry = scores.get(persona.id)!;
-                        entry.score += 2;
-                        entry.reasons.push(`Uses ${tech}`);
-                    }
-                }
-            }
+        for (const tech of (userProfile.primaryTechnologies || [])) {
+            if (typeof tech === 'string') { profileTexts.push({ text: tech, label: `Uses ${tech}` }); }
         }
-        
-        // Check learning goals
-        if (userProfile.learningGoals) {
-            for (const goal of userProfile.learningGoals) {
-                if (typeof goal !== 'string') { continue; }
-                const goalLower = goal.toLowerCase();
-                for (const persona of PERSONAS) {
-                    if (persona.keywords.some(k => goalLower.includes(k))) {
-                        const entry = scores.get(persona.id)!;
-                        entry.score += 1.5;
-                        entry.reasons.push(`Learning goal: ${goal}`);
-                    }
-                }
-            }
+        for (const goal of (userProfile.learningGoals || [])) {
+            if (typeof goal === 'string') { profileTexts.push({ text: goal, label: `Learning goal: ${goal}` }); }
         }
-        
-        // Check expertise areas
-        if (userProfile.expertiseAreas) {
-            for (const area of userProfile.expertiseAreas) {
-                if (typeof area !== 'string') { continue; }
-                const areaLower = area.toLowerCase();
-                for (const persona of PERSONAS) {
-                    if (persona.keywords.some(k => areaLower.includes(k))) {
-                        const entry = scores.get(persona.id)!;
-                        entry.score += 2.5;
-                        entry.reasons.push(`Expert in ${area}`);
-                    }
-                }
-            }
+        for (const area of (userProfile.expertiseAreas || [])) {
+            if (typeof area === 'string') { profileTexts.push({ text: area, label: `Expert in ${area}` }); }
         }
-        
-        // Check current projects (supports both string[] and object[] with name property)
-        if (userProfile.currentProjects) {
-            for (const project of userProfile.currentProjects) {
-                // Handle both string and object formats
-                const projectName = typeof project === 'string' ? project : (project as { name?: string })?.name;
-                if (!projectName || typeof projectName !== 'string') { continue; }
-                const projectLower = projectName.toLowerCase();
-                for (const persona of PERSONAS) {
-                    if (persona.keywords.some(k => projectLower.includes(k))) {
+        for (const project of (userProfile.currentProjects || [])) {
+            const name = typeof project === 'string' ? project : (project as { name?: string })?.name;
+            if (name && typeof name === 'string') { profileTexts.push({ text: name, label: `Working on ${name}` }); }
+        }
+    }
+    
+    // --- Score identity and technology signals against profile texts ---
+    for (const { text, label } of profileTexts) {
+        const textLower = text.toLowerCase();
+        for (const persona of PERSONAS) {
+            for (const signal of persona.signals) {
+                if (signal.category !== 'identity' && signal.category !== 'technology') { continue; }
+                try {
+                    const re = new RegExp(signal.pattern, 'i');
+                    if (re.test(textLower)) {
                         const entry = scores.get(persona.id)!;
-                        entry.score += 1;
-                        entry.reasons.push(`Working on ${projectName}`);
+                        entry.score += signal.weight;
+                        if (!entry.reasons.includes(label)) { entry.reasons.push(label); }
                     }
-                }
+                } catch { /* skip invalid regex */ }
             }
         }
     }
     
-    // Analyze workspace structure
+    // --- Score structure signals against workspace ---
     if (workspaceFolders && workspaceFolders.length > 0) {
         for (const folder of workspaceFolders) {
             try {
-                const rootPath = folder.uri.fsPath;
-                const entries = await fs.readdir(rootPath);
+                const wsRoot = folder.uri.fsPath;
+                const entries = await fs.readdir(wsRoot);
                 const entriesLowerSet = new Set(entries.map(e => e.toLowerCase()));
                 
                 for (const persona of PERSONAS) {
-                    for (const pattern of persona.projectPatterns) {
-                        let matched = false;
-                        let displayName = pattern;
-                        
-                        if (pattern.includes('/')) {
-                            // Path pattern (e.g., 'src/', '.github/workflows/')
-                            // Check if the actual path exists in workspace
-                            const cleanPath = pattern.replace(/\/+$/, '');
-                            matched = await fs.pathExists(path.join(rootPath, cleanPath));
-                            displayName = pattern;
-                        } else if (/^\.[a-zA-Z]+$/.test(pattern)) {
-                            // Pure extension pattern (e.g., .tex, .bib, .fountain, .mdx)
-                            const ext = pattern.toLowerCase();
-                            matched = entries.some(e => e.toLowerCase().endsWith(ext));
-                            displayName = `*${pattern} files`;
-                        } else {
-                            // Exact file/directory name match (e.g., package.json, Dockerfile)
-                            matched = entriesLowerSet.has(pattern.toLowerCase());
-                            displayName = pattern;
-                        }
-                        
-                        if (matched) {
-                            const scoreEntry = scores.get(persona.id)!;
-                            scoreEntry.score += 1;
-                            if (!scoreEntry.reasons.includes(`Project has ${displayName}`)) {
-                                scoreEntry.reasons.push(`Project has ${displayName}`);
+                    for (const signal of persona.signals) {
+                        if (signal.category !== 'structure') { continue; }
+                        // Structure patterns use the same | separator as regex;
+                        // each token is checked as path, extension, or exact name
+                        const structureTokens = signal.pattern.split('|').map(t => t.trim()).filter(Boolean);
+                        for (const token of structureTokens) {
+                            let matched = false;
+                            let displayName = token;
+                            
+                            if (token.includes('/')) {
+                                const cleanPath = token.replace(/\/+$/, '');
+                                matched = await fs.pathExists(path.join(wsRoot, cleanPath));
+                            } else if (/^\.[a-zA-Z]+$/.test(token)) {
+                                const ext = token.toLowerCase();
+                                matched = entries.some(e => e.toLowerCase().endsWith(ext));
+                                displayName = `*${token} files`;
+                            } else {
+                                matched = entriesLowerSet.has(token.toLowerCase());
+                            }
+                            
+                            if (matched) {
+                                const entry = scores.get(persona.id)!;
+                                entry.score += signal.weight;
+                                const reason = `Project has ${displayName}`;
+                                if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
                             }
                         }
                     }
                 }
                 
-                // Check for specific files
-                const checkFiles = ['package.json', 'tsconfig.json', 'pyproject.toml', 'Cargo.toml', 'go.mod', 'requirements.txt'];
-                for (const file of checkFiles) {
-                    const filePath = path.join(rootPath, file);
-                    if (await fs.pathExists(filePath)) {
-                        // Developer persona boost
+                // --- Score dependency signals against package.json ---
+                const packageJsonPath = path.join(wsRoot, 'package.json');
+                if (await fs.pathExists(packageJsonPath)) {
+                    try {
+                        const pkg = await fs.readJson(packageJsonPath);
+                        const allDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+                        const depsJoined = allDeps.join(' ').toLowerCase();
+                        
+                        for (const persona of PERSONAS) {
+                            for (const signal of persona.signals) {
+                                if (signal.category !== 'dependency') { continue; }
+                                try {
+                                    const re = new RegExp(signal.pattern, 'i');
+                                    if (re.test(depsJoined)) {
+                                        const entry = scores.get(persona.id)!;
+                                        entry.score += signal.weight;
+                                        const matched = depsJoined.match(re)?.[0] || signal.pattern;
+                                        const reason = `Dependency: ${matched}`;
+                                        if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                                    }
+                                } catch { /* skip */ }
+                            }
+                        }
+                    } catch { /* skip */ }
+                }
+                
+                // --- Score content signals against key file text ---
+                const contentFiles = [
+                    path.join(wsRoot, 'README.md'),
+                    path.join(wsRoot, 'package.json'),
+                ];
+                let contentText = '';
+                for (const cf of contentFiles) {
+                    try {
+                        if (await fs.pathExists(cf)) {
+                            const raw = await fs.readFile(cf, 'utf-8');
+                            contentText += ' ' + raw.slice(0, 2000); // cap to prevent perf issues
+                        }
+                    } catch { /* skip */ }
+                }
+                if (contentText) {
+                    for (const persona of PERSONAS) {
+                        for (const signal of persona.signals) {
+                            if (signal.category !== 'content') { continue; }
+                            try {
+                                const re = new RegExp(signal.pattern, 'i');
+                                if (re.test(contentText)) {
+                                    const entry = scores.get(persona.id)!;
+                                    entry.score += signal.weight;
+                                    const reason = `Content matches ${persona.name} signals`;
+                                    if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                                }
+                            } catch { /* skip */ }
+                        }
+                    }
+                }
+                
+                // Developer baseline boost for common dev files
+                const devFiles = ['package.json', 'tsconfig.json', 'pyproject.toml', 'Cargo.toml', 'go.mod', 'requirements.txt'];
+                for (const file of devFiles) {
+                    if (entriesLowerSet.has(file.toLowerCase())) {
                         const devEntry = scores.get('developer')!;
                         devEntry.score += 0.5;
                     }
@@ -940,11 +1114,11 @@ export async function detectAndUpdateProjectPersona(
         console.warn('[Alex] Failed to update user profile with persona:', err);
     }
     
-    // Update P6 working memory slot based on detected persona
+    // Update P5-P7 working memory slots based on detected persona
     try {
-        await updateWorkingMemoryP6(workspaceRoot, personaResult.persona.skill, personaResult.persona.name);
+        await updateWorkingMemorySlots(workspaceRoot, personaResult.persona);
     } catch (err) {
-        console.warn('[Alex] Failed to update P6 working memory:', err);
+        console.warn('[Alex] Failed to update P5-P7 working memory:', err);
     }
     
     return personaResult;
@@ -1122,6 +1296,7 @@ Respond with ONLY the JSON block, no other text.`;
             skill: parsed.skill || 'code-review',
             icon: '🎯',
             accentColor: '#0078D4',  // Default to Azure Blue
+            signals: [],
             keywords: [],
             techStack: detectedTech,
             projectPatterns: []
@@ -1140,8 +1315,54 @@ Respond with ONLY the JSON block, no other text.`;
 }
 
 /**
- * Update the P6 working memory slot in copilot-instructions.md
- * P6 is the session-specific skill slot that should match the detected persona
+ * Update P5, P6, and P7 working memory slots in copilot-instructions.md.
+ * P6 comes from the persona's primary skill. P5/P7 come from PERSONA_SLOT_MAPPINGS.
+ */
+export async function updateWorkingMemorySlots(
+    workspaceRoot: string,
+    persona: Persona
+): Promise<boolean> {
+    const instructionsPath = path.join(workspaceRoot, '.github', 'copilot-instructions.md');
+
+    if (!(await fs.pathExists(instructionsPath))) {
+        return false;
+    }
+
+    try {
+        let content = await fs.readFile(instructionsPath, 'utf-8');
+        const mapping = PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' };
+
+        const slots: Array<{ label: string; skillId: string }> = [
+            { label: 'P5', skillId: mapping.p5 },
+            { label: 'P6', skillId: persona.skill },
+            { label: 'P7', skillId: mapping.p7 },
+        ];
+
+        for (const slot of slots) {
+            const pattern = new RegExp(
+                `(\\| \\*\\*${slot.label}\\*\\* \\|)\\s*[^\\|]+\\s*(\\| Domain \\|)\\s*[^\\|]+\\s*\\|`
+            );
+            if (pattern.test(content)) {
+                const desc = getSkillDescription(slot.skillId);
+                content = content.replace(
+                    pattern,
+                    `$1 ${slot.skillId} $2 ${desc} (${persona.name}) |`
+                );
+            }
+        }
+
+        await fs.writeFile(instructionsPath, content, 'utf-8');
+        console.log(`[Alex] Updated P5-P7 for ${persona.name}: ${mapping.p5} / ${persona.skill} / ${mapping.p7}`);
+        return true;
+    } catch (err) {
+        console.warn('[Alex] Failed to update P5-P7:', err);
+        return false;
+    }
+}
+
+/**
+ * Legacy wrapper — updates only P6. Kept for backward compatibility.
+ * @deprecated Use updateWorkingMemorySlots() for full P5-P7 assignment.
  */
 export async function updateWorkingMemoryP6(
     workspaceRoot: string,
@@ -1149,30 +1370,25 @@ export async function updateWorkingMemoryP6(
     personaName: string
 ): Promise<boolean> {
     const instructionsPath = path.join(workspaceRoot, '.github', 'copilot-instructions.md');
-    
+
     if (!(await fs.pathExists(instructionsPath))) {
         return false;
     }
-    
+
     try {
         let content = await fs.readFile(instructionsPath, 'utf-8');
-        
-        // Find and update P6 row in the Working Memory table
-        // Pattern: | **P6** | some-skill-name | Domain | Description |
         const p6Pattern = /(\| \*\*P6\*\* \|)\s*[^\|]+\s*(\| Domain \|)\s*[^\|]+\s*\|/;
-        
+
         if (p6Pattern.test(content)) {
             const skillDescription = getSkillDescription(skillId);
             content = content.replace(
                 p6Pattern,
                 `$1 ${skillId} $2 ${skillDescription} (${personaName}) |`
             );
-            
             await fs.writeFile(instructionsPath, content, 'utf-8');
             console.log(`[Alex] Updated P6 to: ${skillId} for ${personaName}`);
             return true;
         }
-        
         return false;
     } catch (err) {
         console.warn('[Alex] Failed to update P6:', err);
@@ -1197,7 +1413,12 @@ function getSkillDescription(skillId: string): string {
         'learning-psychology': 'Study techniques, concept mastery',
         'git-workflow': 'Version control, branching',
         'brand-asset-management': 'Logos, banners, visual identity',
-        'game-design': 'Game mechanics, narrative design, puzzles'
+        'game-design': 'Game mechanics, narrative design, puzzles',
+        'scope-management': 'Scope control, trade-offs, prioritization',
+        'deep-thinking': 'Systematic analysis, episodic reasoning',
+        'markdown-mermaid': 'Diagram generation, visual documentation',
+        'slide-design': 'Slide layouts, visual storytelling',
+        'incident-response': 'Threat detection, security review'
     };
     
     return descriptions[skillId] || `${skillId} domain expertise`;
