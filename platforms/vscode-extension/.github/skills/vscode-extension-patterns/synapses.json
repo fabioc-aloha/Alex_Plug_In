@@ -1,6 +1,4 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.1.0",
   "skillId": "vscode-extension-patterns",
   "version": "1.1.0",
   "lastValidated": "2026-02-10",
@@ -13,15 +11,9 @@
       "reason": "Publishing workflow"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
-      "type": "implements",
-      "strength": 0.85,
-      "reason": "VS Code heir patterns"
-    },
-    {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
-      "strength": 0.80,
+      "strength": 0.8,
       "reason": "CSP, SecretStorage, telemetry compliance"
     },
     {

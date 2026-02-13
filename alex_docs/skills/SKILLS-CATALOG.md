@@ -11,8 +11,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 99    |
-| Master-Only | 8     |
+| Inheritable | 105   |
+| Master-Only | 2     |
 | Universal   | 1     |
 | Heir:vscode | 6     |
 | Heir:m365   | 2     |

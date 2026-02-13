@@ -4,7 +4,7 @@
   "skillId": "release-process",
   "version": "1.1.0",
   "lastUpdated": "2026-02-06",
-  "inheritance": "master-only",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/instructions/release-management.instructions.md",
@@ -26,13 +26,6 @@
       "strength": 0.7,
       "when": "Packaging extension for release",
       "yields": "Extension-specific release considerations"
-    },
-    {
-      "target": ".github/skills/heir-curation/SKILL.md",
-      "type": "coordinates",
-      "strength": 0.9,
-      "when": "Preparing release package",
-      "yields": "Heir sync validation steps"
     }
   ],
   "activationContexts": [

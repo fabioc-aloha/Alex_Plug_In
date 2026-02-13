@@ -190,7 +190,45 @@ function syncSkills() {
     return stats;
 }
 
-function syncArchitectureFolders() {
+function cleanBrokenSynapseReferences(skippedMasterOnly) {
+    if (skippedMasterOnly.length === 0) return;
+    console.log('\n🧹 Cleaning broken synapse references to master-only skills...\n');
+    
+    let cleanedCount = 0;
+    const heirSkillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name);
+    
+    for (const skillName of heirSkillDirs) {
+        const synapsePath = path.join(HEIR_SKILLS, skillName, 'synapses.json');
+        if (!fs.existsSync(synapsePath)) continue;
+        
+        try {
+            const synapse = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
+            if (!synapse.connections || !Array.isArray(synapse.connections)) continue;
+            
+            const original = synapse.connections.length;
+            synapse.connections = synapse.connections.filter(conn => {
+                const target = conn.target || '';
+                return !skippedMasterOnly.some(removed => target.includes(removed));
+            });
+            
+            if (synapse.connections.length < original) {
+                fs.writeFileSync(synapsePath, JSON.stringify(synapse, null, 2) + '\n', 'utf8');
+                cleanedCount++;
+                console.log(`   Cleaned: ${skillName} (removed ${original - synapse.connections.length} refs)`);
+            }
+        } catch (e) {
+            console.warn(`   ⚠️ Could not clean ${synapsePath}: ${e.message}`);
+        }
+    }
+    
+    if (cleanedCount > 0) {
+        console.log(`✅ Cleaned ${cleanedCount} synapse files`);
+    } else {
+        console.log('✅ No broken references found');
+    }
+}
     console.log('\n📁 Syncing architecture folders...\n');
     
     for (const folder of ARCHITECTURE_FOLDERS) {
@@ -497,7 +535,8 @@ cleanupLegacyFolders();
 
 syncArchitectureFolders();
 syncArchitectureFiles();
-syncSkills();
+const skillStats = syncSkills();
+cleanBrokenSynapseReferences(skillStats.skippedMasterOnly);
 applyHeirTransformations();
 verifyCounts();
 validateHeirIntegrity();

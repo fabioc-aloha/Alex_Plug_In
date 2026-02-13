@@ -2,7 +2,7 @@
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.0.0",
     "skill": "dream-state",
-    "inheritance": "master-only",
+    "inheritance": "inheritable",
     "connections": [
         {
             "target": ".github/skills/meditation/SKILL.md",

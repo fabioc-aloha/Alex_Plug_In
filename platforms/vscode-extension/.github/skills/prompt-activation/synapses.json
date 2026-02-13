@@ -3,7 +3,7 @@
     "schemaVersion": "2.0.0",
     "skill": "prompt-activation",
     "version": "1.0.0",
-    "inheritance": "master-only",
+    "inheritance": "inheritable",
     "connections": [
         {
             "target": ".github/skills/skill-activation/SKILL.md",

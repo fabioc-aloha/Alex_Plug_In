@@ -78,6 +78,7 @@ $excludeItems = @(
     "config\user-profile.json",
     "config\USER-PROFILE.md",
     "config\USER-PROFILE-TEMPLATE.md",
+    "config\MASTER-ALEX-PROTECTED.json",
     
     # Master-only skills (not for heirs - these manage Master Alex specifically)
     "skills\heir-curation",
@@ -108,6 +109,30 @@ foreach ($item in $excludeItems) {
             Write-Host "   Removed: $item" -ForegroundColor Gray
         }
     }
+}
+
+# Step 3b: Clean broken synapse references to removed master-only skills
+$removedSkills = @("heir-curation", "master-alex-audit")
+$synapseFiles = Get-ChildItem "$ExtGitHub\skills\*\synapses.json" -ErrorAction SilentlyContinue
+$cleanedCount = 0
+foreach ($sf in $synapseFiles) {
+    $json = Get-Content $sf.FullName -Raw | ConvertFrom-Json
+    $original = $json.connections.Count
+    $json.connections = @($json.connections | Where-Object {
+            $target = $_.target
+            $keep = $true
+            foreach ($removed in $removedSkills) {
+                if ($target -match $removed) { $keep = $false; break }
+            }
+            $keep
+        })
+    if ($json.connections.Count -lt $original) {
+        $json | ConvertTo-Json -Depth 10 | Set-Content $sf.FullName -Encoding UTF8
+        $cleanedCount++
+    }
+}
+if ($cleanedCount -gt 0) {
+    Write-Host "   Cleaned $cleanedCount synapse files (removed refs to master-only skills)" -ForegroundColor Gray
 }
 
 # Step 4: Verify essential files exist

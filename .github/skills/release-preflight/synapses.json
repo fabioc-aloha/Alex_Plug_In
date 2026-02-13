@@ -1,6 +1,6 @@
 {
   "skill": "release-preflight",
-  "inheritance": "master-only",
+  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/brain-qa/SKILL.md",

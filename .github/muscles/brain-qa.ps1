@@ -18,7 +18,16 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Split-Path -Parent (Split-Path -Parent $scriptDir)  # .github/scripts -> .github -> root
 $ghPath = Join-Path $rootPath ".github"
-$heirBase = Join-Path $rootPath "platforms\vscode-extension"
+# If platforms/vscode-extension exists, we're in master; otherwise we ARE the heir
+$candidateHeir = Join-Path $rootPath "platforms\vscode-extension"
+if (Test-Path $candidateHeir) {
+    $heirBase = $candidateHeir
+    $isRunningFromHeir = $false
+}
+else {
+    $heirBase = $rootPath
+    $isRunningFromHeir = $true
+}
 
 if (-not (Test-Path $ghPath)) {
     Write-Host "ERROR: .github not found at $ghPath" -ForegroundColor Red
@@ -242,6 +251,14 @@ if (6 -in $runPhases) {
 if (7 -in $runPhases) {
     Write-Phase 7 "Synapse File Sync"
     if (Test-Path "$heirBase\.github\skills") {
+        # Empirically detect master-only skills: present in master but absent from heir
+        $masterOnlySkills = @()
+        Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+            if (-not (Test-Path "$heirBase\.github\skills\$($_.Name)")) {
+                $masterOnlySkills += $_.Name
+            }
+        }
+        
         $diffs = @()
         Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
             $skill = $_.Name
@@ -250,7 +267,18 @@ if (7 -in $runPhases) {
             if ((Test-Path $masterSyn) -and (Test-Path $heirSyn)) {
                 $masterHash = (Get-FileHash $masterSyn).Hash
                 $heirHash = (Get-FileHash $heirSyn).Hash
-                if ($masterHash -ne $heirHash) { $diffs += $skill }
+                if ($masterHash -ne $heirHash) {
+                    # Check if diff is only due to master-only ref removal
+                    $masterJson = Get-Content $masterSyn -Raw | ConvertFrom-Json
+                    $heirJson = Get-Content $heirSyn -Raw | ConvertFrom-Json
+                    $filteredConns = @($masterJson.connections | Where-Object {
+                            $target = $_.target
+                            -not ($masterOnlySkills | Where-Object { $target -match $_ })
+                        })
+                    if ($filteredConns.Count -ne $heirJson.connections.Count) {
+                        $diffs += $skill
+                    }
+                }
             }
         }
         if ($diffs.Count -eq 0) { 
