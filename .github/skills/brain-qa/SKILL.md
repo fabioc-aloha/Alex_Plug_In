@@ -78,6 +78,15 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 | `schema` | 2,6,11,16,17 | Schema, frontmatter, and format validation |
 | `llm` | 10,20,21 | LLM-first content format validation |
 
+## Known Gaps (Future Phases)
+
+| Phase | Name | Validates |
+|-------|------|-----------|
+| 22 | Brain HTML Count Drift | Hardcoded counts in `docs/alex-brain-anatomy.html` match actual file counts (skills, instructions, muscles, prompts) |
+| 23 | Motor Cortex Mapping | Muscle inventory in brain diagrams matches `.github/muscles/` |
+
+> **Context**: Session 2026-02-13 discovered stale counts in brain HTML (muscles 13→11, procedures 29→28, skills 100+→116). Diagrams with hardcoded numbers will drift after any architecture change.
+
 ## Common Issues
 
 | Issue | Fix |
@@ -90,6 +99,7 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 | Missing YAML frontmatter | Add `---\nname:\ndescription:\n---` to SKILL.md |
 | ASCII art warning | Replace with Mermaid diagrams or tables |
 | Missing return-to-Alex | Add handoff to main Alex agent |
+| Brain HTML count drift | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
 
 ## Integration
 
