@@ -306,6 +306,7 @@ flowchart LR
         CT[coaching-techniques]
         DWO[deep-work-optimization]
         CSY[cognitive-symbiosis]
+        PROA[proactive-assistance]
     end
 
     subgraph Meta["🔮 Meta-Cognitive"]
@@ -325,6 +326,7 @@ flowchart LR
         DST[dream-state]
         PA[prompt-activation]
         MMR[muscle-memory-recognition]
+        SKD[skill-development]
     end
 
     subgraph Eng["🔧 Engineering"]
@@ -341,6 +343,10 @@ flowchart LR
         ADA[azure-devops-automation]
         AIRSI[airs-integration]
         RFD[research-first-development]
+        ADO[azure-deployment-operations]
+        BICP[bicep-avm-mastery]
+        DBD[database-design]
+        PPR[performance-profiling]
     end
 
     subgraph Ops["🚨 Operations"]
@@ -352,6 +358,9 @@ flowchart LR
         RF[release-preflight]
         CM[change-management]
         PM[project-management]
+        OBS[observability-monitoring]
+        SCM[scope-management]
+        STR[status-reporting]
     end
 
     subgraph Sec["🔐 Security & Privacy"]
@@ -369,6 +378,7 @@ flowchart LR
         MCP[mcp-development]
         LMS[llm-model-selection]
         FAP[foundry-agent-platform]
+        MAO[multi-agent-orchestration]
     end
 
     subgraph Data["📊 Data Analytics"]
@@ -424,6 +434,7 @@ flowchart LR
     subgraph M365["☁️ M365"]
         MAD[m365-agent-debugging]
         TAP[teams-app-patterns]
+        MGA[microsoft-graph-api]
     end
 
     subgraph Mstr["👑 Master"]
@@ -450,6 +461,7 @@ flowchart LR
     FR --> CT --> LP
     DWO --> CL & WLB
     CSY --> AR & AWR
+    PROA --> FR & AWR
 
     %% Meta-cognitive flow
     MED --> MF --> KS --> GK
@@ -466,6 +478,7 @@ flowchart LR
     DST --> AH & MED
     PA --> SKA & MED
     MMR --> AH & RP
+    SKD --> SCG & SKA & BL
 
     %% Engineering flow
     TS <--> RP
@@ -479,12 +492,19 @@ flowchart LR
     ADA --> GW & IAC
     AIRSI --> AR & AAP
     RFD --> BL & KS
+    ADO --> PD & AAP
+    BICP --> IAC & AAP
+    DBD --> API & TS
+    PPR --> DP & TS
 
     %% Ops flow
     DP --> ERP --> IR --> RCA --> PM_SKILL
     GW --> RF
     CM --> PM --> IR
     PD --> RF & GW
+    OBS --> IR & ERP
+    SCM --> PM & CM
+    STR --> PM & BA
 
     %% Security flow
     SR --> CR & IR
@@ -499,6 +519,7 @@ flowchart LR
     AAD --> MCP
     MCP --> API
     FAP --> AAD & MCP
+    MAO --> AAD & PE
 
     %% Data flow
     MF_DATA --> FNP --> GW
@@ -539,6 +560,7 @@ flowchart LR
     HC --> VEP & MAD
     VEP --> CPP --> LMS
     MAD --> TAP
+    MGA --> MAD & API
     RF --> VEP & TAP
     REL --> RF & HC
     EI --> SR & AAP
@@ -555,11 +577,11 @@ flowchart LR
     %% Styling - Staleness (dashed border)
     classDef stale stroke-dasharray:5 5,stroke-width:2px
 
-    class HC,MAA,REL,RF,BAM,HSM,DST,PA master
+    class HC,MAA master
     class VEP,CPP,AAP,ADA,EI,PER vscode
-    class MAD,TAP m365
+    class MAD,TAP,MGA m365
     class VEP,CPP,MAD,TAP,LMS,GW,PRA,SFI stale
-    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,FR,CT,DWO,CSY,AH,SCG,SB,AAU,GKS,MMR,TS,RP,DP,CR,PS,VSE,API,IAC,AIRSI,RFD,ERP,RCA,IR,PM_SKILL,PD,CM,PM,SR,PII,DSEC,PE,RAG,AAD,MCP,LMS,FAP,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,APD,CM_CITE,LR,DD,APID,CCC,BP,DH,DQA,SVG,IH,GD,GAM,TTS,SD,PPTX,PTS,BA,AEE,ES inheritable
+    class BL,LP,CL,AR,AIRS,AH_SKILL,AWR,SQ,RDD,WLB,FR,CT,DWO,CSY,PROA,AH,SCG,SB,AAU,GKS,MMR,SKD,TS,RP,DP,CR,PS,VSE,API,IAC,AIRSI,RFD,ADO,BICP,DBD,PPR,ERP,RCA,IR,PM_SKILL,PD,CM,PM,OBS,SCM,STR,SR,PII,DSEC,PE,RAG,AAD,MCP,LMS,FAP,MAO,MF_DATA,FNP,WP,MM,LM,AA,ACR,PRAC,RPS,CW,GR,LOC,APD,CM_CITE,LR,DD,APID,CCC,BP,DH,DQA,SVG,IH,GD,GAM,TTS,SD,PPTX,PTS,BA,AEE,ES inheritable
 ```
 
 ### Legend

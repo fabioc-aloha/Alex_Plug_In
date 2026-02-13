@@ -410,9 +410,9 @@ if (12 -in $runPhases) {
         # Check user-profile.json should NOT exist (PII protection - created at runtime from template)
         $profilePath = "$heirBase\.github\config\user-profile.json"
         if (Test-Path $profilePath) {
-            $profile = Get-Content $profilePath | ConvertFrom-Json
-            if ($profile.name -ne "") { $resetIssues += "user-profile.json has non-empty name (PII leak)" }
-            if ($profile.nickname -ne "") { $resetIssues += "user-profile.json has non-empty nickname (PII leak)" }
+            $userProfile = Get-Content $profilePath | ConvertFrom-Json
+            if ($userProfile.name -ne "") { $resetIssues += "user-profile.json has non-empty name (PII leak)" }
+            if ($userProfile.nickname -ne "") { $resetIssues += "user-profile.json has non-empty nickname (PII leak)" }
         }
         # Verify template exists (used to create profile at runtime)
         $templatePath = "$heirBase\.github\config\user-profile.template.json"
@@ -736,19 +736,6 @@ if (20 -in $runPhases) {
 # ============================================================
 if (21 -in $runPhases) {
     Write-Phase 21 "Emoji Semantic Consistency"
-    # Define expected emoji meanings across the codebase
-    $emojiSemantics = @{
-        "🔨" = "Builder|build|implement|create"
-        "🔍" = "Validator|validate|search|review|QA"
-        "📚" = "Researcher|research|learn|study"
-        "🧠" = "Alex|cognitive|brain|think"
-        "✅"  = "Pass|complete|success|done"
-        "❌"  = "Fail|error|block|issue"
-        "⚠️" = "Warn|warning|caution"
-        "☁️" = "Azure|cloud"
-        "🔷" = "M365|Microsoft"
-    }
-    
     # Just report emoji usage stats - emojis are semantic tokens, good for LLMs
     $emojiCount = 0
     Get-ChildItem "$ghPath\agents\*.md" | ForEach-Object {

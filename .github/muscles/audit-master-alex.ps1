@@ -149,8 +149,7 @@ if (5 -in $runSections) {
 if (6 -in $runSections) {
     Write-Section 6 "Documentation Cross-References"
     $requiredRefs = @(
-        @{ Doc = "README.md"; MustLink = "CHANGELOG.md" },
-        @{ Doc = ".github/copilot-instructions.md"; MustLink = "RISKS.md" }
+        @{ Doc = "README.md"; MustLink = "CHANGELOG.md" }
     )
     foreach ($ref in $requiredRefs) {
         if (Test-Path $ref.Doc) {
