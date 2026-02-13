@@ -191,12 +191,12 @@ Adversarial quality assurance.
 
 ## Limitations
 
-| Limitation              | Impact                        |
-| ----------------------- | ----------------------------- |
-| **No VS Code API**      | Lose 11 LM tools, 28 commands |
-| **No synapse network**  | Lose neural connectivity      |
-| **Consolidated agents** | Less flexible than VS Code    |
-| **Limited automation**  | No lifecycle hooks            |
+| Limitation              | Impact                         |
+| ----------------------- | ------------------------------ |
+| **No VS Code API**      | Lose 12 LM tools, 70+ commands |
+| **No synapse network**  | Lose neural connectivity       |
+| **Consolidated agents** | Less flexible than VS Code     |
+| **Limited automation**  | No lifecycle hooks             |
 
 ---
 

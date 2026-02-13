@@ -124,9 +124,12 @@ m365-copilot/
 
 ## Prerequisites
 
-- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) VS Code extension
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) VS Code extension (formerly Teams Toolkit)
+  - Includes `@m365agents` chat participant for guided development
 - M365 tenant with Copilot license
 - **No Azure subscription required!** ✨
+
+> 💡 **Tip**: Use the `@m365agents` chat participant in VS Code Copilot Chat for scaffolding, schema help, SSO setup, and troubleshooting M365 apps and agents.
 
 ## Getting Started
 
@@ -397,6 +400,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v5.6.8 🧠 Enterprise Readiness + Full M365 Integration
+**Alex M365** - v5.6.9 🧠 Enterprise Readiness + Full M365 Integration
 
 © 2026 CorreaX • AI That Learns How to Learn

@@ -6,7 +6,7 @@
 .PARAMETER Validate
     Only validate, don't provide upload instructions
 .PARAMETER Environment
-    Teams Toolkit environment (default: local)
+    M365 Agents Toolkit environment (default: local)
 .EXAMPLE
     .\release-m365.ps1
     .\release-m365.ps1 -Validate

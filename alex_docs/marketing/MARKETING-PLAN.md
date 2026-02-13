@@ -3,6 +3,8 @@
 <img src="banner-concepts/banner-rotating-nouns.svg" alt="Alex Animated Banner" width="1200">
 
 > Brand identity, personas, terminology, logo concepts, and outreach copy.
+>
+> **⚠️ Copy counts**: Skill/tool numbers in draft copy below are from initial writing. Before publication, replace with current counts from root `README.md` (currently 100+ skills).
 
 ## Target Personas
 

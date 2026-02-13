@@ -2,7 +2,7 @@
 
 ![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![Codespaces](https://img.shields.io/badge/Codespaces-Production-2ea043)](platforms/codespaces/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 > **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
 
@@ -25,10 +25,11 @@
 
 ## 📦 Available Platforms
 
-| Platform               | Status      | Get Started                                                                                                 |
-| ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
-| **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](platforms/m365-copilot/)                                                                    |
+| Platform               | Status       | Get Started                                                                                                 |
+| ---------------------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
+| **VS Code Extension**  | ✅ Published  | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | 🔄 Preview    | [Documentation](platforms/m365-copilot/)                                                                    |
+| **GitHub Codespaces**  | ✅ Production | [Documentation](platforms/codespaces/)                                                                      |
 
 ### VS Code Extension
 
@@ -54,6 +55,17 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 - Teams and People context
 
 📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
+
+### GitHub Codespaces
+
+Alex in the cloud with zero setup — the same VS Code extension runs identically in Codespaces:
+
+- Full extension with all 100+ skills
+- Auto-install via `devcontainer.json`
+- Global Knowledge auto-cloned from GitHub
+- Perfect 10/10 compatibility score
+
+📘 **[Codespaces Documentation](platforms/codespaces/)**
 
 ---
 
@@ -104,12 +116,12 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v4.x vs v1.5.x)
 
-| Category          | Highlights                                                                      |
-| ----------------- | ------------------------------------------------------------------------------- |
-| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                    |
-| **Intelligence**  | 100+ skills, emotional detection, model tier awareness, frustration recognition |
-| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation              |
-| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades   |
+| Category          | Highlights                                                                     |
+| ----------------- | ------------------------------------------------------------------------------ |
+| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                   |
+| **Intelligence**  | 116 skills, emotional detection, model tier awareness, frustration recognition |
+| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
+| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
 ### Migration Notes
 
@@ -410,20 +422,27 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#architecture_status` | Returns version and configuration  | "What's my Alex version?"             |
 | `#mcp_recommendations` | Suggests MCP tools for scenarios   | "What tools for Azure Functions?"     |
 | `#user_profile`        | Manages personal preferences       | "Update my profile preferences"       |
+| `#focus_context`       | Current focus session context      | "What am I working on?"               |
 | `#self_actualization`  | Comprehensive self-assessment      | "Run deep meditation"                 |
+| `#heir_validation`     | Validate heir architecture health  | "Check heir sync status"              |
 | `#global_knowledge`    | Search cross-project knowledge     | "Search knowledge for error handling" |
 | `#save_insight`        | Save learning to global base       | "Save this insight"                   |
 | `#promote_knowledge`   | Promote project file to global     | "Promote DK file"                     |
+| `#knowledge_status`    | View global knowledge stats        | "Show knowledge status"               |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
-Alex installs **3 custom agents** to `.github/agents/` for specialized workflows:
+Alex installs **7 custom agents** to `.github/agents/` for specialized workflows:
 
-| Agent     | Purpose                         | Capabilities                          |
-| --------- | ------------------------------- | ------------------------------------- |
-| **Alex**  | Main cognitive learning partner | Meditation, Dream, Skills, Knowledge  |
-| **Azure** | Azure development guidance      | Docs, Best Practices, MCP tools       |
-| **M365**  | Microsoft 365/Teams development | M365 Knowledge, Schemas, Code samples |
+| Agent             | Purpose                         | Capabilities                          |
+| ----------------- | ------------------------------- | ------------------------------------- |
+| **Alex**          | Main cognitive learning partner | Meditation, Dream, Skills, Knowledge  |
+| **Researcher**    | Deep domain exploration         | Literature review, gap analysis       |
+| **Builder**       | Constructive implementation     | Code generation, scaffolding          |
+| **Validator**     | Adversarial QA                  | Testing, security review, edge cases  |
+| **Documentarian** | Documentation accuracy          | Doc drift detection, stale content    |
+| **Azure**         | Azure development guidance      | Docs, Best Practices, MCP tools       |
+| **M365**          | Microsoft 365/Teams development | M365 Knowledge, Schemas, Code samples |
 
 Custom agents appear in the **Agents dropdown** in Copilot Chat. They define specialized tools, instructions, and handoffs for guided workflows.
 
@@ -669,10 +688,18 @@ After initialization, Alex manages this structure:
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
+├── agents/                    # 🎭 Custom agents (7 files)
+│   ├── alex.agent.md
+│   ├── alex-researcher.agent.md
+│   └── ...
+├── muscles/                   # 💪 Execution scripts (13 files)
+│   ├── brain-qa.ps1
+│   ├── sync-architecture.js
+│   └── ...
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (see SKILLS-CATALOG)
+├── skills/                    # 🎓 Portable domain expertise (116 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -720,7 +747,7 @@ Alex connects to your Microsoft 365 environment for enterprise workflows:
 
 ### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.5)
 
-Skills grew from 92 → 109 with new acquisition and inheritance mechanisms:
+Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
 
 - **`/checkskills`** — Discover new skills available from Global Knowledge
 - **`/pullskill <id>`** — Install a skill into your project from GK
@@ -806,7 +833,7 @@ Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant 
 
 #### 🧠 Brain QA Skill
 
-8-phase cognitive architecture validation — now mandatory Step 0 in release preflight
+21-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
 #### 💡 Smart Nudges
 

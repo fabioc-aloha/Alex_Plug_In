@@ -41,7 +41,7 @@ Write-Host "✅ Package encoded ($($packageBytes.Length) bytes)" -ForegroundColo
 Write-Host "`n🔍 Checking app catalog..." -ForegroundColor Yellow
 $headers = @{
     "Authorization" = "Bearer $token"
-    "Content-Type" = "application/json"
+    "Content-Type"  = "application/json"
 }
 
 try {
@@ -68,7 +68,7 @@ try {
         
         $updateHeaders = @{
             "Authorization" = "Bearer $token"
-            "Content-Type" = "multipart/form-data; boundary=$boundary"
+            "Content-Type"  = "multipart/form-data; boundary=$boundary"
         }
         
         $result = Invoke-RestMethod -Uri $updateUri -Headers $updateHeaders -Method Post -Body $bodyLines
@@ -96,7 +96,7 @@ catch {
         Write-Host "🌐 Opening Developer Portal..." -ForegroundColor Yellow
         Start-Process "https://dev.teams.microsoft.com/apps"
         Write-Host ""
-        Write-Host "Option 2: Install Teams Toolkit CLI" -ForegroundColor Cyan
+        Write-Host "Option 2: Install M365 Agents Toolkit CLI" -ForegroundColor Cyan
         Write-Host "   npm install -g @microsoft/teamsapp-cli" -ForegroundColor White
         Write-Host "   teamsapp auth login m365" -ForegroundColor White
         Write-Host "   teamsapp publish --manifest-path $PackagePath" -ForegroundColor White

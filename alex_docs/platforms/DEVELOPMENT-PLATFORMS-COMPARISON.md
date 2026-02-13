@@ -42,7 +42,7 @@ This document compares the native capabilities of AI **development platforms** (
 | **Auto-Learning**     | 🥇 Windsurf    | 🥈 Claude Code | Native per-workspace memories            |
 | **Multi-Platform**    | 🥇 Claude Code | 🥈 VS Code     | Terminal + VS Code + JetBrains + Web     |
 | **Agent System**      | 🥇 VS Code     | 🥈 Claude Code | Individual agents + handoffs + subagents |
-| **Developer Tools**   | 🥇 VS Code     | 🥈 Cursor      | 28 commands, 11 LM tools, full API       |
+| **Developer Tools**   | 🥇 VS Code     | 🥈 Cursor      | 70+ commands, 12 LM tools, full API      |
 | **AI-Native UX**      | 🥇 Cursor      | 🥈 Windsurf    | Built from ground up for AI              |
 | **Market Share**      | 🥇 VS Code     | 🥈 Cursor      | VS Code dominates, Cursor growing fast   |
 | **Terminal-Native**   | 🥇 Claude Code | 🥈 Codex CLI   | Full agentic terminal experience         |
@@ -121,7 +121,7 @@ This document compares the native capabilities of AI **development platforms** (
 | ------------------------ | :------------------: | :---------: | :---------: | :---------: | :-----------: | :-----------------: | :----------------: | :------------------: |
 | **Custom Instructions**  | ✅ `.instructions.md` |   ✅ Same    |      ❌      |      ❌      | ✅ `AGENTS.md` |    ✅ `CLAUDE.md`    | ✅ `.cursor/rules/` | ✅ `.windsurf/rules/` |
 | **Custom Agents**        |    ✅ `.agent.md`     |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ `.claude/agents/` |   ✅ `AGENTS.md`    |          ❌           |
-| **Skills/Capabilities**  |    ✅ 116+ skills     |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ `.claude/skills/` |      ✅ Import      |      Via rules       |
+| **Skills/Capabilities**  |    ✅ 100+ skills     |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ `.claude/skills/` |      ✅ Import      |      Via rules       |
 | **Lifecycle Hooks**      |      ✅ Preview       |  ✅ Preview  |      ❌      |      ❌      |       ❌       |  ✅ Full lifecycle   |         ❌          |          ❌           |
 | **Auto-Memory**          |          ❌           |      ❌      |      ❌      |      ❌      |       ❌       |    ✅ Per-project    |         ❌          |   ✅ Per-workspace    |
 | **Extension API**        |        ✅ Full        |   ✅ Full    |      ❌      |      ❌      |       ❌       |          ❌          |      Limited       |          ❌           |

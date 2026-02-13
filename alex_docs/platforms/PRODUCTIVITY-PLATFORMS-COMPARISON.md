@@ -245,8 +245,8 @@ This document compares AI **productivity platforms** (business assistants, knowl
 | **copilot-instructions.md** | → Manifest instructions | → GPT instructions 8K |      ❌ No custom       | → Gem instructions |
 | **.instructions.md (28)**   |   → SharePoint docs?    | ❌ Won't fit 20 files  |  ✅ Upload as sources   |       ❌ Lost       |
 | **.prompt.md (17)**         |   ❌ No prompt system    |        ❌ Lost         |  ✅ Upload as sources   |       ❌ Lost       |
-| **.agent.md (6)**           |     ⚠️ Single agent      |     ⚠️ Single GPT      |      ❌ No agents       |    ❌ No agents     |
-| **Skills (108)**            |     ⚠️ Select files      |   ⚠️ Top 20 as files   |   ✅ Upload SKILL.md    |       ❌ Lost       |
+| **.agent.md (7)**           |     ⚠️ Single agent      |     ⚠️ Single GPT      |      ❌ No agents       |    ❌ No agents     |
+| **Skills (100+)**           |     ⚠️ Select files      |   ⚠️ Top 20 as files   |   ✅ Upload SKILL.md    |       ❌ Lost       |
 | **synapses.json**           |      ❌ No concept       |     ❌ No concept      | ⚠️ Mind Map alternative |    ❌ No concept    |
 | **Extension commands**      |  ❌ Different paradigm   |        ❌ Lost         |         ❌ Lost         |       ❌ Lost       |
 

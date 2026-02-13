@@ -1,6 +1,6 @@
 # Foundry Agent Implementation Roadmap
 
-> Mapping Alex's 6-agent ecosystem to Microsoft Foundry Agent Service
+> Mapping Alex's 7-agent ecosystem to Microsoft Foundry Agent Service
 > **Status**: Planning (February 2026)
 > **Prerequisite**: [FOUNDRY-HEIR.md](./FOUNDRY-HEIR.md) Phase 0 complete
 > **Reference**: [FOUNDRY-CAPABILITIES-DIGEST.md](./FOUNDRY-CAPABILITIES-DIGEST.md)
@@ -9,7 +9,7 @@
 
 ## Current Agent Ecosystem
 
-Alex operates as a 6-agent family defined in `.github/agents/`:
+Alex operates as a 7-agent family defined in `.github/agents/`:
 
 | Agent                   | Role                                            | Model           | Key Tools                                 | Stance                      |
 | ----------------------- | ----------------------------------------------- | --------------- | ----------------------------------------- | --------------------------- |
@@ -59,7 +59,7 @@ Each agent retains its unique personality, instructions, and model preferences. 
 
 | Current Source            | Foundry Destination                     | Migration Method                      |
 | ------------------------- | --------------------------------------- | ------------------------------------- |
-| 108 `.github/skills/`     | Foundry IQ knowledge base + File Search | Upload skill files as documents       |
+| 100+ `.github/skills/`    | Foundry IQ knowledge base + File Search | Upload skill files as documents       |
 | `copilot-instructions.md` | Agent system instructions               | Embed in PromptAgentDefinition        |
 | `.instructions.md` files  | Agent instructions (extended)           | Concatenate relevant procedures       |
 | `.prompt.md` files        | Workflow definitions                    | Convert to declarative YAML workflows |
@@ -115,7 +115,7 @@ Available Specialists:
 
 ### Phase 2: Multi-Agent (Q2 2026)
 
-**Goal**: Full 6-agent ecosystem with orchestration.
+**Goal**: Full 7-agent ecosystem with orchestration.
 
 #### Tasks
 

@@ -2,13 +2,15 @@
 
 > **Complete inventory of every VS Code API Alex uses, mapped to VS Code source code internals**
 
-|                    |                                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Author**         | Fabio Correa                                                                                                                               |
-| **Date**           | February 7, 2026                                                                                                                           |
-| **Extension**      | `fabioc-aloha.alex-cognitive-architecture` v5.0.0                                                                                          |
-| **VS Code Engine** | `^1.109.0`                                                                                                                                 |
-| **Proposed APIs**  | None (Marketplace-safe)                                                                                                                    |
+|                    |                                                   |
+| ------------------ | ------------------------------------------------- |
+| **Author**         | Fabio Correa                                      |
+| **Date**           | February 7, 2026                                  |
+| **Extension**      | `fabioc-aloha.alex-cognitive-architecture` v5.0.0 |
+| **VS Code Engine** | `^1.109.0`                                        |
+| **Proposed APIs**  | None (Marketplace-safe)                           |
+
+> **⚠️ Counts snapshot**: Numbers in this analysis reflect v5.0.0 at time of writing. Authoritative current counts live in the root `README.md`.
 | **Related**        | [VSCODE-SOURCE-INTEGRATION-ANALYSIS.md](VSCODE-SOURCE-INTEGRATION-ANALYSIS.md), [VSCODE-CONTRIBUTION-PLAN.md](VSCODE-CONTRIBUTION-PLAN.md) |
 
 ---

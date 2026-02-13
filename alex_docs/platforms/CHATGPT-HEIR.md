@@ -57,7 +57,7 @@ ChatGPT Custom GPTs allow creating personalized AI assistants with instructions,
 | **Alex Personality** | Full port to instructions           | ✅ 100%       |
 | **Learning Partner** | Embedded in instructions            | ✅ 100%       |
 | **Core Principles**  | Embedded in instructions            | ✅ 100%       |
-| **Key Skills**       | Upload as knowledge files           | ⚠️ 20/108     |
+| **Key Skills**       | Upload as knowledge files           | ⚠️ ~20/100+   |
 | **Prompts**          | ❌ No workflow automation            | ❌ 0%         |
 | **Synapses**         | ❌ No connection mapping             | ❌ 0%         |
 | **Extension Tools**  | ⚠️ Via Custom Actions (requires API) | ⚠️ Optional   |

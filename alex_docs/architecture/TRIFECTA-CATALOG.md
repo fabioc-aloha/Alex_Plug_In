@@ -45,7 +45,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 | Script                                        | Referenced By                               |
 | --------------------------------------------- | ------------------------------------------- |
 | `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, master-alex-audit   |
-| `.github/muscles/brain-qa.ps1`                | brain-qa (15-phase validation)              |
+| `.github/muscles/brain-qa.ps1`                | brain-qa (21-phase validation)              |
 | `.github/muscles/build-extension-package.ps1` | heir-curation, release-management           |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
 | `.github/muscles/gamma-generator.js`          | gamma-presentations (CLI generation)        |
@@ -168,7 +168,7 @@ These instructions intentionally lack one or more components. The "Why?" test de
 
 ### Skill-Only (No instruction or prompt, just domain expertise)
 
-The vast majority of skills (92 of 106) are skill-only. This is correct — most skills are passive domain knowledge activated by `skill-activation` when needed. They don't need auto-loaded procedures or user commands.
+The vast majority of skills are skill-only. This is correct — most skills are passive domain knowledge activated by `skill-activation` when needed. They don't need auto-loaded procedures or user commands.
 
 Notable skill-only examples and why:
 - **`cognitive-load`**: Passive knowledge applied during any task — no procedure, no command
@@ -181,10 +181,10 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:    7 / 7 justified candidates
+Complete Trifectas:    8 justified candidates
 Procedural-Only:      21 (all justified)
 Prompt-Only:           8 (all justified)
-Skill-Only:           92 (standard — passive expertise)
+Skill-Only:           ~100 (standard — passive expertise)
 ```
 
 ### Network Diagram
@@ -192,7 +192,7 @@ Skill-Only:           92 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#f6f8fa'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (7)"]
+    subgraph COMPLETE["✅ Complete Trifectas (8)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -234,13 +234,13 @@ Before creating a skill, instruction, or prompt as a trifecta companion, pass th
 3. **Does it require auto-loaded steps?** → Must run every time = needs an instruction
 4. **Is it architecturally significant?** → Core cognitive function = trifecta candidate
 
-If you answer NO to any question, that component is unnecessary. **Not everything deserves three files.** The power of the trifecta is selectivity — these 7 capabilities earned it because they occupy a central role in the cognitive architecture.
+If you answer NO to any question, that component is unnecessary. **Not everything deserves three files.** The power of the trifecta is selectivity — these capabilities earned it because they occupy a central role in the cognitive architecture.
 
 ---
 
 ## Heir Trifectas
 
-Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's.
+Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's. Codespaces inherits the VS Code heir's trifectas directly (zero-translation).
 
 ### Heir Why Test
 
@@ -268,6 +268,10 @@ The same "Ask Why" philosophy applies, with adapted questions:
 | **Teams App Patterns**   | Skill only    | Core workflow, complex scaffolding, deep platform domain | Instruction + Prompt |
 | **Microsoft Graph API**  | Skill only    | Daily use, auth flow complexity, hard-won gotchas        | Instruction + Prompt |
 | **M365 Agent Debugging** | Skill only    | Complex, user-invoked, troubleshooting procedures        | Instruction + Prompt |
+
+### Codespaces Heir — Trifecta Candidates
+
+Codespaces runs the same VS Code extension binary — it inherits all VS Code trifectas and candidates with zero translation. No separate trifecta candidates exist for Codespaces.
 
 ### Promotion Path for Heir Trifectas
 

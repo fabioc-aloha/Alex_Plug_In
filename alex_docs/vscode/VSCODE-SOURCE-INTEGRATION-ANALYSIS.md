@@ -6,6 +6,8 @@
 **Purpose**: Identify undiscovered VS Code extension APIs and patterns that could enhance the Alex VS Code extension
 **Current Alex Version**: 5.0.0
 
+> **⚠️ Counts snapshot**: Numbers in this analysis reflect v5.0.0 at time of writing. Authoritative current counts live in the root `README.md`.
+
 ---
 
 ## Executive Summary

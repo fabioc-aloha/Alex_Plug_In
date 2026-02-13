@@ -229,6 +229,8 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
         console.log('✅ No broken references found');
     }
 }
+
+function syncArchitectureFolders() {
     console.log('\n📁 Syncing architecture folders...\n');
     
     for (const folder of ARCHITECTURE_FOLDERS) {

@@ -59,7 +59,7 @@ This creates a unique heir opportunity: **Alex as a curated knowledge base** rat
 | **Alex Personality** | ❌ Cannot inject system prompt | ❌ 0%         |
 | **Learning Partner** | ⚠️ Via source content          | ⚠️ 30%        |
 | **Core Principles**  | ✅ As uploaded document        | ✅ 100%       |
-| **Skills (108)**     | ✅ All can be uploaded         | ✅ 100%       |
+| **Skills (100+)**    | ✅ All can be uploaded         | ✅ 100%       |
 | **Prompts (17)**     | ✅ As methodology docs         | ✅ 100%       |
 | **Synapses**         | ❌ No equivalent               | ❌ 0%         |
 
@@ -126,7 +126,7 @@ The unique value of NotebookLM heir is **content transformation**:
 - Video overviews for visual learners
 - Auto-generated slides for team presentations
 
-**Use Case**: A developer wants to learn Alex methodology. Instead of reading 108 skill files, they listen to a 15-minute "Deep Dive" audio that explains the core concepts conversationally.
+**Use Case**: A developer wants to learn Alex methodology. Instead of reading 100+ skill files, they listen to a 15-minute "Deep Dive" audio that explains the core concepts conversationally.
 
 ---
 

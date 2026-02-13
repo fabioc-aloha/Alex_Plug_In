@@ -206,6 +206,10 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [vscode-extension-patterns](../../.github/skills/vscode-extension-patterns/SKILL.md) | heir:vscode | Extension API patterns     |
 | [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md) | heir:vscode | Chat API, streaming, tools |
 
+#### GitHub Codespaces
+
+Codespaces runs the same VS Code extension binary — it inherits all `heir:vscode` skills with zero translation. No platform-specific skills needed.
+
 #### M365 / Teams
 
 | Skill                                                                      | Inheritance | Purpose                      |
@@ -245,7 +249,9 @@ Master Alex
     │
     ├── heir:vscode ──► VS Code Extension Only
     │
-    └── heir:m365 ──► M365 Agent Only
+    ├── heir:m365 ──► M365 Agent Only
+    │
+    └── (Codespaces inherits VS Code heir skills — zero-translation)
 ```
 
 ---
@@ -272,17 +278,72 @@ flowchart TB
         ACT["skill-activation<br/>Action-keyword index"]
     end
 
+    subgraph MUSCLES["💪 Motor Execution"]
+        MUS["Muscle Scripts<br/>.github/muscles/<br/><small>Execution, not memory</small>"]
+    end
+
     LLM ==>|orchestrates| DM & PM & EM & SK
     SK --> SYN
     SYN --> ACT
     ACT -.->|triggers| SK
     SK -->|promotes to| GK
+    LLM ==>|commands| MUS
+    PM -.->|references| MUS
+    SK -.->|references| MUS
 
     style EXEC fill:#d4edda,stroke:#155724
     style LLM fill:#c3e6cb,stroke:#155724,stroke-width:2px
     style MEMORY fill:#e8f4f8,stroke:#0969da
     style SYNAPSES fill:#fff3cd,stroke:#856404
+    style MUSCLES fill:#f8d7da,stroke:#842029
+    style MUS fill:#f5c2c7,stroke:#842029
 ```
+
+---
+
+## Trifecta Coverage
+
+A **trifecta** is a capability encoded across all three memory systems:
+- **Skill** (SKILL.md) — Declarative domain patterns
+- **Instruction** (.instructions.md) — Procedural workflows
+- **Prompt** (.prompt.md) — Interactive episodic guides
+
+Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
+
+### Full Trifectas (8)
+
+| Capability             | Skill                      | Instruction             | Prompt                                 | Muscles                     |
+| ---------------------- | -------------------------- | ----------------------- | -------------------------------------- | --------------------------- |
+| **Bootstrap Learning** | bootstrap-learning         | bootstrap-learning      | learn, domain-learning                 | —                           |
+| **Brand Asset Mgmt**   | brand-asset-management     | brand-asset-management  | brand                                  | —                           |
+| **Code Review**        | code-review                | code-review-guidelines  | review                                 | —                           |
+| **Dream State**        | dream-state                | dream-state-automation  | dream                                  | dream-cli.ts                |
+| **Meditation**         | meditation                 | meditation              | meditate, unified-meditation-protocols | —                           |
+| **Release Management** | release-process            | release-management      | release                                | build-extension-package.ps1 |
+| **Research-First Dev** | research-first-development | research-first-workflow | gapanalysis                            | —                           |
+| **Self-Actualization** | self-actualization         | self-actualization      | selfactualize                          | —                           |
+
+### Partial Trifectas (7)
+
+| Capability               | Has                        | Missing     | Promotion Path                                  |
+| ------------------------ | -------------------------- | ----------- | ----------------------------------------------- |
+| Global Knowledge         | Skill + Instruction        | Prompt      | /knowledge slash command covers interactive use |
+| Heir Sync                | Skill + Instruction        | Prompt      | sync-architecture muscle compensates            |
+| Lucid Dream              | Shared Skill + Instruction | Own Prompt  | Shares dream-state skill                        |
+| Heir Project Improvement | Instruction + Prompt       | Skill       | heir-curation is related but not direct         |
+| Knowledge Synthesis      | Skill + Prompt             | Instruction | cross-domain-transfer prompt covers workflow    |
+| Diagramming              | Skill + Prompt             | Instruction | markdown-mermaid skill + meditation prompt      |
+| Testing/TDD              | Skill + Prompt             | Instruction | testing-strategies + tdd prompt                 |
+
+### Coverage Summary
+
+| Classification   | Count | %     |
+| ---------------- | ----- | ----- |
+| Full Trifecta    | 8     | 6.9%  |
+| Partial (2 of 3) | 7     | 6.0%  |
+| Instruction-only | 16    | 13.8% |
+| Prompt-only      | 3     | 2.6%  |
+| Skill-only       | ~82   | 70.7% |
 
 ---
 
@@ -621,12 +682,12 @@ flowchart LR
 
 | Subgraph         | Skills                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance, frustration-recognition, coaching-techniques, deep-work-optimization, cognitive-symbiosis                                                                                                         |
+| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance, frustration-recognition, coaching-techniques, deep-work-optimization, cognitive-symbiosis, proactive-assistance                                                                                   |
 | 🔮 Meta-Cognitive | meditation, meditation-facilitation, knowledge-synthesis, global-knowledge, global-knowledge-sync, self-actualization, architecture-health, architecture-refinement, skill-catalog-generator, skill-building, skill-development, architecture-audit, brain-qa, skill-activation, dream-state, prompt-activation, muscle-memory-recognition                                                                 |
-| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code, azure-architecture-patterns, azure-devops-automation, airs-integration, research-first-development                                                                                                                                   |
-| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management                                                                                                                                                                                                                                                 |
+| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code, azure-architecture-patterns, azure-devops-automation, airs-integration, research-first-development, bicep-avm-mastery, database-design, performance-profiling                                                                        |
+| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management, azure-deployment-operations, observability-monitoring, scope-management, status-reporting                                                                                                                                                      |
 | 🔐 Security       | security-review, microsoft-sfi, privacy-responsible-ai, pii-privacy-regulations, distribution-security                                                                                                                                                                                                                                                                                                     |
-| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform                                                                                                                                                                                                                                                                                        |
+| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform, multi-agent-orchestration, microsoft-graph-api                                                                                                                                                                                                                                        |
 | 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                                                                                                                                                                                  |
 | 📝 Docs & Writing | writing-publication, markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration, academic-paper-drafting, citation-management, literature-review, dissertation-defense, book-publishing, doc-hygiene, documentation-quality-assurance |
 | 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation, slide-design                                                                                                                                                                                                                                                                                           |
@@ -649,16 +710,24 @@ flowchart LR
         ACTUALIZE["⚡ Self-Actualization"]
     end
 
+    subgraph Execution["💪 Execution Layer"]
+        MUSCLES["Muscle Scripts<br/><small>.github/muscles/</small>"]
+        TRIFECTA["Trifecta Check<br/><small>Skill+Inst+Prompt</small>"]
+    end
+
     WORK -->|"triggers (manual)"| MEDITATE
     MEDITATE -->|"if issues found"| DREAM
     DREAM -->|"deep dive needed"| ACTUALIZE
     ACTUALIZE -->|"refreshed mind"| WORK
     WORK -->|"sleep mode (auto)"| DREAM
+    WORK -.->|"runs"| MUSCLES
+    MEDITATE -.->|"validates"| TRIFECTA
 
     style WORK fill:#d4edda,stroke:#155724
     style MEDITATE fill:#fff3cd,stroke:#856404
     style DREAM fill:#e0cffc,stroke:#6f42c1
     style ACTUALIZE fill:#cfe2ff,stroke:#0d6efd
+    style Execution fill:#f8d7da,stroke:#842029
 ```
 
 **When to use each:**
@@ -668,6 +737,8 @@ flowchart LR
 | 🧘 Meditation         | "meditate"                | Conscious consolidation, file persistence |
 | 💤 Dream              | "dream", auto-maintenance | Unconscious repair, synapse validation    |
 | ⚡ Self-Actualization | "self-actualize"          | Deep assessment, architecture review      |
+| 💪 Muscles            | During work               | Script execution (audit, build, validate) |
+| 🔺 Trifecta           | During meditation         | Capability completeness assessment        |
 
 ---
 
@@ -684,17 +755,23 @@ flowchart LR
         GLOBAL["🌐 Global Knowledge<br/><small>~/.alex/global-knowledge/</small>"]
     end
 
+    subgraph Trifecta["🔺 Trifecta Completeness"]
+        TRI["Skill + Instruction + Prompt<br/><small>8 full / 7 partial / 97 skill-only</small>"]
+    end
+
     SESSION -->|"meditation consolidates"| EPISODIC
     EPISODIC -->|"distills patterns"| PROCEDURAL
     PROCEDURAL -->|"generalizes expertise"| SKILLS
     SKILLS -->|"promotes cross-project"| GLOBAL
     GLOBAL -.->|"informs future"| SESSION
+    SKILLS & PROCEDURAL & EPISODIC -.->|"assessed by"| TRI
 
     style SESSION fill:#e8f4f8,stroke:#0969da
     style EPISODIC fill:#fff3cd,stroke:#856404
     style PROCEDURAL fill:#d4edda,stroke:#155724
     style SKILLS fill:#cfe2ff,stroke:#0d6efd
     style GLOBAL fill:#e0cffc,stroke:#6f42c1
+    style Trifecta fill:#f8d7da,stroke:#842029
 ```
 
 **Knowledge promotion criteria:**
@@ -704,6 +781,7 @@ flowchart LR
 | Episodic   | Procedural | Pattern used 3+ times    |
 | Procedural | Skill      | Domain expertise emerges |
 | Skill      | Global     | Applies across projects  |
+| Any 2      | Trifecta   | All 3 memory types exist |
 
 ---
 
@@ -712,30 +790,58 @@ flowchart LR
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa'}}}%%
 flowchart TB
-    subgraph Health["❤️ Brain QA Health Indicators"]
-        P1["Phase 1<br/>Synapse Targets"]
-        P15["Phase 1.5<br/>Inheritance Fields"]
-        P2["Phase 2<br/>Skill Index"]
-        P4["Phase 4<br/>Master-Heir Parity"]
-        P5["Phase 5<br/>Schema Format"]
-        P6["Phase 6<br/>Synapse Sync"]
-        P7["Phase 7<br/>Index Sync"]
-        P8["Phase 8<br/>Catalog Accuracy"]
+    subgraph Structural["🏗️ Structural Integrity (P1-P7)"]
+        P1["P1 Synapse Targets"]
+        P2["P2 Inheritance Fields"]
+        P3["P3 Skill Index"]
+        P4["P4 Trigger Semantics"]
+        P5["P5 Master-Heir Sync"]
+        P6["P6 Schema Format"]
+        P7["P7 Synapse File Sync"]
     end
 
-    P1 --> P15 --> P2 --> P4 --> P5 --> P6 --> P7 --> P8
+    subgraph Index["📇 Index & Catalog (P8-P10)"]
+        P8["P8 Activation Index"]
+        P9["P9 Catalog Accuracy"]
+        P10["P10 Mermaid Detection"]
+    end
 
-    style P1 fill:#d4edda,stroke:#155724
-    style P15 fill:#d4edda,stroke:#155724
-    style P2 fill:#d4edda,stroke:#155724
-    style P4 fill:#d4edda,stroke:#155724
-    style P5 fill:#d4edda,stroke:#155724
-    style P6 fill:#d4edda,stroke:#155724
-    style P7 fill:#d4edda,stroke:#155724
-    style P8 fill:#d4edda,stroke:#155724
+    subgraph Quality["✨ Content Quality (P11-P16)"]
+        P11["P11 Boilerplate Check"]
+        P12["P12 Heir Reset"]
+        P13["P13 Inst/Prompt Sync"]
+        P14["P14 Agents Structure"]
+        P15["P15 Config Files"]
+        P16["P16 YAML Frontmatter"]
+    end
+
+    subgraph Advanced["🔬 Advanced (P17-P21)"]
+        P17["P17 User-Invokable"]
+        P18["P18 Agent Handoffs"]
+        P19["P19 ApplyTo Coverage"]
+        P20["P20 LLM-First Format"]
+        P21["P21 Emoji Consistency"]
+    end
+
+    P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7
+    P7 --> P8 --> P9 --> P10
+    P10 --> P11 --> P12 --> P13 --> P14 --> P15 --> P16
+    P16 --> P17 --> P18 --> P19 --> P20 --> P21
+
+    style Structural fill:#d4edda,stroke:#155724
+    style Index fill:#e8f4f8,stroke:#0969da
+    style Quality fill:#fff3cd,stroke:#856404
+    style Advanced fill:#e0cffc,stroke:#6f42c1
 ```
 
-**Run `brain qa` to validate all phases. Green = healthy, Yellow = warning, Red = action needed.**
+**Run `brain qa` to validate all 21 phases. Green = healthy, Yellow = warning, Red = action needed.**
+
+| Group           | Phases  | Focus                                       |
+| --------------- | ------- | ------------------------------------------- |
+| Structural      | P1-P7   | Synapse integrity, inheritance, schema      |
+| Index & Catalog | P8-P10  | Activation index, catalog accuracy, Mermaid |
+| Content Quality | P11-P16 | Boilerplate, sync, config, frontmatter      |
+| Advanced        | P17-P21 | User-invokable, handoffs, format, emoji     |
 
 ---
 
@@ -744,38 +850,54 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328'}}}%%
 flowchart TB
-    subgraph Master["👑 Master Alex"]
-        M_INH["68 Inheritable Skills"]
-        M_ONLY["4 Master-Only Skills"]
+    subgraph Master["👑 Master Alex (116 total)"]
+        M_INH["98 Inheritable"]
+        M_UNI["1 Universal"]
+        M_ONLY["2 Master-Only"]
+        M_HV["6 heir:vscode"]
+        M_HM["2 heir:m365"]
+        M_NOSYN["7 No Synapses"]
     end
 
-    subgraph VSCode["💻 VS Code Heir"]
-        V_INH["68 Inherited"]
-        V_OWN["2 VS Code Specific"]
+    subgraph VSCode["💻 VS Code Heir (114)"]
+        V_INH["99 Inherited"]
+        V_OWN["6 VS Code Specific"]
+    end
+
+    subgraph Codespaces["☁️ Codespaces Heir (114)"]
+        CS_INH["Same as VS Code"]
+        CS_NOTE["Zero-translation"]
     end
 
     subgraph M365["☁️ M365 Heir"]
-        M365_INH["68 Inherited"]
+        M365_INH["99 Inherited"]
         M365_OWN["2 M365 Specific"]
     end
 
-    M_INH -->|"sync"| V_INH
-    M_INH -->|"sync"| M365_INH
+    M_INH & M_UNI -->|"sync"| V_INH
+    M_INH & M_UNI -->|"sync"| M365_INH
+    M_HV -->|"vscode only"| V_OWN
+    M_HM -->|"m365 only"| M365_OWN
+    V_INH & V_OWN -->|"identical"| CS_INH
     M_ONLY -.->|"blocked"| VSCode
     M_ONLY -.->|"blocked"| M365
+    M_ONLY -.->|"blocked"| Codespaces
 
     style Master fill:#fff3cd,stroke:#856404
     style VSCode fill:#e1f0ff,stroke:#0969da
+    style Codespaces fill:#dfe8f0,stroke:#24292f
     style M365 fill:#e6f4ea,stroke:#1a7f37
 ```
 
 **Inheritance values:**
-| Value         | Meaning                  | Sync Behavior      |
-| ------------- | ------------------------ | ------------------ |
-| `inheritable` | All heirs receive        | Master → All Heirs |
-| `master-only` | Master keeps exclusively | Not synced         |
-| `heir:vscode` | VS Code heir only        | Created in heir    |
-| `heir:m365`   | M365 heir only           | Created in heir    |
+| Value          | Count | Meaning                  | Sync Behavior      |
+| -------------- | ----- | ------------------------ | ------------------ |
+| `inheritable`  | 98    | All heirs receive        | Master → All Heirs |
+| `universal`    | 1     | Always everywhere        | Master → All Heirs |
+| `master-only`  | 2     | Master keeps exclusively | Not synced         |
+| `heir:vscode`  | 6     | VS Code heir only        | Master → VS Code   |
+| `heir:m365`    | 2     | M365 heir only           | Master → M365      |
+| *(no synapse)* | 7     | Missing synapses.json    | Synced by default  |
 
 ---
 
@@ -809,4 +931,4 @@ flowchart TB
 
 ---
 
-*Last updated: 2026-02-12*
+*Last updated: 2026-02-13*

@@ -2,7 +2,7 @@
 
 ![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![Codespaces](https://img.shields.io/badge/Codespaces-Production-2ea043)](platforms/codespaces/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 > **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
 
@@ -33,7 +33,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | Capability           | GitHub Copilot Alone       | GitHub Copilot + Alex                        |
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
-| **Skills**           | You re-prompt from scratch | 92 pre-built skills, inheritable             |
+| **Skills**           | You re-prompt from scratch | 116 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
@@ -75,7 +75,7 @@ Alex accelerates whatever you're building. Pick your trajectory:
 
 | You Are              | Your Pain                                          | Alex Gives You                                                            |
 | -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 92 skills remember your architecture.            |
+| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 116 skills remember your architecture.           |
 | **Researcher**       | Literature scattered, hypothesis drift             | Hypothesis → publication, accelerated. Cross-project knowledge compounds. |
 | **Grad Student**     | Thesis overwhelm, advisor context gaps             | Literature review on autopilot. Your writing remembers your research.     |
 | **Technical Writer** | Docs fall behind code, style drift                 | Docs that write themselves. Consistent voice across projects.             |
@@ -87,7 +87,7 @@ Alex accelerates whatever you're building. Pick your trajectory:
 
 | Capability                | What It Means                                   |
 | ------------------------- | ----------------------------------------------- |
-| **92 Skills**             | Pre-built propulsion. Don't reinvent prompts.   |
+| **116 Skills**            | Pre-built propulsion. Don't reinvent prompts.   |
 | **Cross-Project Memory**  | No refueling between launches. Knowledge flows. |
 | **Build Your Own Skills** | Custom boosters for your workflow.              |
 | **Open Source**           | Inspect every component. No black boxes.        |
@@ -104,10 +104,11 @@ Alex turns friction into flow:
 
 ## 📦 Available Platforms
 
-| Platform               | Status      | Get Started                                                                                                 |
-| ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
-| **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)              |
+| Platform               | Status       | Get Started                                                                                                 |
+| ---------------------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
+| **VS Code Extension**  | ✅ Published  | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | 🔄 Preview    | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)              |
+| **GitHub Codespaces**  | ✅ Production | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/codespaces)                |
 
 ### VS Code Extension
 
@@ -133,6 +134,17 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 - Teams and People context
 
 📘 **[M365 Copilot Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)**
+
+### GitHub Codespaces
+
+Alex in the cloud with zero setup — the same VS Code extension runs identically:
+
+- Full extension with all 100+ skills
+- Auto-install via `devcontainer.json`
+- Global Knowledge auto-cloned from GitHub
+- Perfect 10/10 compatibility score
+
+📘 **[Codespaces Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/codespaces)**
 
 ---
 
@@ -183,12 +195,12 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v4.x vs v1.5.x)
 
-| Category          | Highlights                                                                    |
-| ----------------- | ----------------------------------------------------------------------------- |
-| **Chat & Agents** | `@alex` participant, 29 slash commands, 12 LM tools, 3 custom agents          |
-| **Intelligence**  | 92 skills, emotional detection, model tier awareness, frustration recognition |
-| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation            |
-| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades |
+| Category          | Highlights                                                                     |
+| ----------------- | ------------------------------------------------------------------------------ |
+| **Chat & Agents** | `@alex` participant, 29 slash commands, 12 LM tools, 7 custom agents           |
+| **Intelligence**  | 116 skills, emotional detection, model tier awareness, frustration recognition |
+| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
+| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
 ### Migration Notes
 
@@ -478,16 +490,22 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#save_insight`        | Save learning to global base       | "Save this insight"                   |
 | `#promote_knowledge`   | Promote project file to global     | "Promote DK file"                     |
 | `#knowledge_status`    | View global knowledge stats        | "Show knowledge status"               |
+| `#focus_context`       | Pomodoro focus session context     | "What am I working on?"               |
+| `#heir_validation`     | Validate heir architecture health  | "Check heir integrity"                |
 
 ### 🎭 Custom Agents (VS Code 1.106+)
 
-Alex installs **3 custom agents** to `.github/agents/` for specialized workflows:
+Alex installs **7 custom agents** to `.github/agents/` for specialized workflows:
 
-| Agent     | Purpose                         | Capabilities                          |
-| --------- | ------------------------------- | ------------------------------------- |
-| **Alex**  | Main cognitive learning partner | Meditation, Dream, Skills, Knowledge  |
-| **Azure** | Azure development guidance      | Docs, Best Practices, MCP tools       |
-| **M365**  | Microsoft 365/Teams development | M365 Knowledge, Schemas, Code samples |
+| Agent             | Purpose                         | Capabilities                          |
+| ----------------- | ------------------------------- | ------------------------------------- |
+| **Alex**          | Main cognitive learning partner | Meditation, Dream, Skills, Knowledge  |
+| **Researcher**    | Deep domain exploration         | Literature review, gap analysis       |
+| **Builder**       | Constructive implementation     | Code generation, scaffolding          |
+| **Validator**     | Adversarial QA                  | Testing, security review, edge cases  |
+| **Documentarian** | Documentation accuracy          | Doc drift detection, stale content    |
+| **Azure**         | Azure development guidance      | Docs, Best Practices, MCP tools       |
+| **M365**          | Microsoft 365/Teams development | M365 Knowledge, Schemas, Code samples |
 
 Custom agents appear in the **Agents dropdown** in Copilot Chat. They define specialized tools, instructions, and handoffs for guided workflows.
 
@@ -495,16 +513,16 @@ Custom agents appear in the **Agents dropdown** in Copilot Chat. They define spe
 
 Use in any Copilot chat to activate specific modes:
 
-| Trigger                        | Effect                                                   |
-| ------------------------------ | -------------------------------------------------------- |
-| `Hello` / `Hi Alex`            | Auto self-actualization on session start                 |
-| `@meta-cognitive-awareness`    | Forces self-analysis of reasoning                        |
-| `@bootstrap-learning`          | Activates knowledge acquisition mode                     |
-| `@worldview-integration`       | Applies ethical reasoning frameworks                     |
-| `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole                   |
-| `meditate`                     | Triggers memory consolidation + self-actualization       |
-| `self-actualize`               | Full 8-phase architecture assessment with auto-promotion |
-| `Forget [topic]`               | Selective memory cleanup                                 |
+| Trigger                        | Effect                                                    |
+| ------------------------------ | --------------------------------------------------------- |
+| `Hello` / `Hi Alex`            | Auto self-actualization on session start                  |
+| `@meta-cognitive-awareness`    | Forces self-analysis of reasoning                         |
+| `@bootstrap-learning`          | Activates knowledge acquisition mode                      |
+| `@worldview-integration`       | Applies ethical reasoning frameworks                      |
+| `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole                    |
+| `meditate`                     | Triggers memory consolidation + self-actualization        |
+| `self-actualize`               | Full 21-phase architecture assessment with auto-promotion |
+| `Forget [topic]`               | Selective memory cleanup                                  |
 
 ---
 
@@ -723,20 +741,28 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (24 files)
+├── instructions/              # 📚 Procedural memory (28 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (13 files)
+├── prompts/                   # 📖 Episodic memory (17 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
+│   └── ...
+├── agents/                    # 🎭 Custom agents (7 files)
+│   ├── alex.agent.md
+│   ├── alex-researcher.agent.md
+│   └── ...
+├── muscles/                   # 💪 Execution scripts (13 files)
+│   ├── brain-qa.ps1
+│   ├── sync-architecture.js
 │   └── ...
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (92 skills)
+├── skills/                    # 🎓 Portable domain expertise (116 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -769,6 +795,43 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ---
 
+## 🆕 What's New in v5.6.x (Stabilized)
+
+### 📡 Microsoft Graph Integration (v5.6.0)
+
+Alex connects to your Microsoft 365 environment for enterprise workflows:
+
+- **`/calendar`** — View upcoming calendar events with configurable lookahead
+- **`/mail`** — View recent emails with unread-only filter
+- **`/context`** — Full work context: calendar + mail + presence in one view
+- **`/people <query>`** — Search people in your organization
+- **7 enterprise settings** — Granular toggle for each Graph capability
+- Requires `alex.enterprise.graph.enabled` — see [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
+
+### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.9)
+
+Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
+
+- **`/checkskills`** — Discover new skills available from Global Knowledge
+- **`/pullskill <id>`** — Install a skill into your project from GK
+- **`Alex: Inherit Skill from Global Knowledge`** — Multi-select batch inheritance
+- **21-phase Brain QA** — Comprehensive architecture health validation
+- **Trifecta model** — 8 capabilities encoded across all 3 memory systems
+- **7 custom agents** — Alex, Researcher, Builder, Validator, Documentarian, Azure, M365
+- **Muscle scripts** — 13 execution scripts for audit, build, sync, and validation
+
+### 🔒 Release Automation & PII Safety (v5.6.4-5.6.8)
+
+Production-hardened release pipeline with zero PII leaks:
+
+- **`sync-architecture.js`** — Automated master→heir sync during `vscode:prepublish`
+- **3-layer PII protection** — `.gitignore` + `.vscodeignore` + sync script exclusions
+- **`validateHeirIntegrity()`** — Blocks publish if PII, master-only files, or master content detected
+- **Self-contained `.github/`** — Zero external path references in synapse files
+- **Persona detection fix** — Type-safe pattern matching eliminates false-positive DevOps scoring
+
+---
+
 ## 🆕 What's New in v5.5.0
 
 ### 🧠 Model Intelligence
@@ -789,7 +852,7 @@ Alex now adapts behavior based on the running LLM:
 ### 🔍 Automated Doc Count Validation
 
 - Dream protocol now validates documented counts against actual files
-- Reports drift for Procedural (24), Episodic (13), and Skills (92)
+- Reports drift for Procedural (28), Episodic (17), and Skills (116)
 
 ---
 
@@ -806,7 +869,7 @@ Cross-project knowledge sharing is now built-in:
 
 ### 🎯 Persona-Aware UX
 
-- **Auto-detection** — Detects 15 user personas from profile and workspace files
+- **Auto-detection** — Detects 16 user personas from profile and workspace files
 - **Adaptive theming** — UI accent colors match detected persona
 - **Skill recommendations** — Suggests relevant skills based on persona
 
@@ -847,7 +910,7 @@ Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant 
 
 #### 🧠 Brain QA Skill
 
-8-phase cognitive architecture validation — now mandatory Step 0 in release preflight
+21-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
 #### 💡 Smart Nudges
 
@@ -898,7 +961,10 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
 | [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
-| [Global Knowledge Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md) | Cross-project knowledge sharing                 |
+| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
+| [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
+| [Microsoft Graph](alex_docs/guides/MICROSOFT-GRAPH-INTEGRATION.md)         | Enterprise Graph integration (Calendar, Mail)   |
+| [Enterprise Settings](alex_docs/guides/ENTERPRISE-SETTINGS.md)             | All 24 enterprise configuration options         |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources

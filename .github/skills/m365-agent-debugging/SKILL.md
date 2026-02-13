@@ -14,13 +14,28 @@ M365 Copilot and Teams platform APIs are in rapid evolution. Schema versions, ca
 **Refresh triggers:**
 
 - New declarativeAgent schema versions
-- Teams Toolkit updates
+- M365 Agents Toolkit updates (formerly Teams Toolkit)
 - New M365 Copilot capabilities
 - Developer Portal changes
 
-**Last validated:** February 2026 (Schema v1.6+)
+**Last validated:** February 2026 (Schema v1.6+, M365 Agents Toolkit with `@m365agents` chat participant)
 
-**Check current state:** [Declarative Agent Schema](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest), [Teams Toolkit](https://github.com/OfficeDev/TeamsFx)
+**Check current state:** [Declarative Agent Schema](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest), [M365 Agents Toolkit](https://github.com/OfficeDev/TeamsFx)
+
+---
+
+## Available MCP Tools
+
+The **M365 Agents Toolkit** exposes MCP tools via the `@m365agents` chat participant. Use these **before manual debugging**:
+
+| Tool | When to Use |
+| ---- | ----------- |
+| `mcp_m365agentstoo_get_schema` | Validate manifest structure — get the **current** app manifest (v1.19), declarative agent (v1.0), or API plugin (v2.1) schema |
+| `mcp_m365agentstoo_troubleshoot` | Diagnose common issues — schema validation failures, sideloading errors, conditional access blocks |
+| `mcp_m365agentstoo_get_knowledge` | Look up M365 Copilot development knowledge — capabilities, limits, best practices |
+| `mcp_m365agentstoo_get_code_snippets` | Find working examples — Teams AI, Teams JS, botbuilder code samples |
+
+**Workflow integration**: Always try `mcp_m365agentstoo_troubleshoot` first when a user reports an M365 agent issue. Use `mcp_m365agentstoo_get_schema` to verify manifest structure before manual schema checks.
 
 ---
 
@@ -85,15 +100,21 @@ Alpha=255 means opaque. Background pixels must be Alpha=0.
 
 ## Debugging Workflow
 
-1. **Validate**: `teamsapp validate --package-file <zip>` (must pass all checks)
+1. **MCP first**: Call `mcp_m365agentstoo_troubleshoot` with the error message or symptom — this often resolves the issue immediately
 
-2. **Check schema**:
+2. **Schema check**: Call `mcp_m365agentstoo_get_schema` with the relevant schema type (`app_manifest`, `declarative_agent_manifest`, `api_plugin_manifest`) to verify structure
+
+3. **Validate package**: `teamsapp validate --package-file <zip>` (must pass all checks)
+
+4. **Use `@m365agents` chat participant**: Ask `@m365agents` in VS Code Copilot Chat for interactive troubleshooting — it has scaffolding, schema help, and guided debugging
+
+5. **Manual schema check** (fallback):
    - ✅ `.../declarative-agent/v1.2/schema.json`
    - ❌ `.../declarative-agent/v1.3/schema.json` (doesn't exist)
 
-3. **Verify capabilities match schema version**
+6. **Verify capabilities match schema version**
 
-4. **Test icon transparency**:
+7. **Test icon transparency**:
 
 ```powershell
 Add-Type -AssemblyName System.Drawing
@@ -112,11 +133,13 @@ $bmp.Dispose()
 
 ## Symptom → Cause
 
-| Symptom | Likely Cause |
-| ------- | ------------ |
-| Agent not responding | Invalid schema version |
-| Only 1 conversation starter | Schema validation failed |
-| Validation errors on icon | Wrong transparency/size |
+| Symptom | Likely Cause | MCP Tool |
+| ------- | ------------ | -------- |
+| Agent not responding | Invalid schema version | `mcp_m365agentstoo_troubleshoot` |
+| Only 1 conversation starter | Schema validation failed | `mcp_m365agentstoo_get_schema` |
+| Validation errors on icon | Wrong transparency/size | — (manual check) |
+| Capability not working | Schema version mismatch | `mcp_m365agentstoo_get_knowledge` |
+| Sideloading fails | Admin policy or manifest error | `mcp_m365agentstoo_troubleshoot` |
 
 ## Memory via OneDrive
 

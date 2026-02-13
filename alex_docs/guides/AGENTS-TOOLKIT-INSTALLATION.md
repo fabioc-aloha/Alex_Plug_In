@@ -10,11 +10,11 @@ This guide provides instructions for installing the Microsoft 365 Agents Toolkit
 
 Before installing Agents Toolkit, ensure you have the following:
 
-| Requirement | Version | Download Link |
-|-------------|---------|---------------|
-| Visual Studio Code | Latest | [Download VS Code](https://code.visualstudio.com/Download) |
-| Node.js | 16 or later | [Download Node.js](https://nodejs.org/) |
-| NPM | 8 or later | Included with Node.js |
+| Requirement        | Version     | Download Link                                              |
+| ------------------ | ----------- | ---------------------------------------------------------- |
+| Visual Studio Code | Latest      | [Download VS Code](https://code.visualstudio.com/Download) |
+| Node.js            | 16 or later | [Download Node.js](https://nodejs.org/)                    |
+| NPM                | 8 or later  | Included with Node.js                                      |
 
 ---
 
@@ -89,6 +89,26 @@ Agents Toolkit for Visual Studio Code is also available in prerelease versions. 
 
 ---
 
+## Using `@m365agents` Chat Participant
+
+After installing the Agents Toolkit, you get access to the `@m365agents` chat participant in VS Code Copilot Chat. This provides:
+
+- **Scaffolding**: "I want to create a declarative agent"
+- **Schema help**: "What's the latest DA manifest schema?"
+- **SSO guidance**: "How do I add SSO to my Teams app?"
+- **Troubleshooting**: "My Teams app doesn't sideload"
+
+The toolkit also exposes **MCP tools** that Alex can use programmatically:
+
+| Tool                                  | Purpose                                |
+| ------------------------------------- | -------------------------------------- |
+| `mcp_m365agentstoo_get_knowledge`     | M365 Copilot development knowledge     |
+| `mcp_m365agentstoo_get_code_snippets` | Teams AI, Teams JS, botbuilder samples |
+| `mcp_m365agentstoo_get_schema`        | App manifest, agent, plugin schemas    |
+| `mcp_m365agentstoo_troubleshoot`      | Common M365 development issues         |
+
+---
+
 ## Next Steps
 
 After installing Agents Toolkit:
@@ -105,7 +125,7 @@ After installing Agents Toolkit:
 
 - **Learning Path**: [Build and deploy apps for Microsoft Teams using Teams Toolkit for Visual Studio Code](https://learn.microsoft.com/en-us/training/paths/m365-teams-toolkit-vsc/)
 
-  Teams Toolkit is an extension for Visual Studio Code and Visual Studio 2022. It helps developers create and deploy Teams apps with integrated identity, cloud storage, and other services across Microsoft 365 and Azure.
+  Microsoft 365 Agents Toolkit (formerly Teams Toolkit) is an extension for Visual Studio Code and Visual Studio 2022. It helps developers create and deploy Teams apps with integrated identity, cloud storage, and other services across Microsoft 365 and Azure. Includes the `@m365agents` chat participant for guided scaffolding and troubleshooting.
 
 ### Certification
 
@@ -119,13 +139,13 @@ After installing Agents Toolkit:
 
 ## Related Documentation
 
-| Topic | Link |
-|-------|------|
-| Teams Toolkit Documentation | [Microsoft Learn](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/) |
-| Developer Portal | [Teams Developer Portal](https://dev.teams.microsoft.com/home) |
-| Marketplace Extension | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) |
+| Topic                        | Link                                                                                                             |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Agents Toolkit Documentation | [Microsoft Learn](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/)                            |
+| Developer Portal             | [Teams Developer Portal](https://dev.teams.microsoft.com/home)                                                   |
+| Marketplace Extension        | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) |
 
 ---
 
-*Last updated: January 2026*
+*Last updated: February 2026*
 *Based on Microsoft documentation updated July 22, 2025*

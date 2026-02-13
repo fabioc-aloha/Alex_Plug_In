@@ -25,7 +25,7 @@ The Cognitive Dashboard is a unified VS Code webview that visualizes Alex's brai
 
 ### Tab 1: 🧠 Brain Health
 
-**Source**: Brain QA Phases (8 phases)
+**Source**: Brain QA Phases (21 phases)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐

@@ -241,7 +241,7 @@ Master Alex now has the proven wisdom. Future heirs will inherit it.
 | -------------------------------- | -------------------------------- |
 | VS Code: Global knowledge sync   | `global-knowledge/SKILL.md`      |
 | VS Code: Kill switch protection  | `WORKSPACE-PROTECTION.md`        |
-| VS Code: LM Tools API            | 11 MCP-style tools registered    |
+| VS Code: LM Tools API            | 12 LM tools registered           |
 | M365: Meeting context awareness  | `m365-context/SKILL.md` (future) |
 | Either: Elegant problem solution | Pattern in global knowledge      |
 

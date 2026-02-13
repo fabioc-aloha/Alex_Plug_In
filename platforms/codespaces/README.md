@@ -18,6 +18,7 @@ GitHub Codespaces runs a full VS Code instance in the cloud. Since Alex ships as
 | Global Knowledge                | GitHub repo auto-cloned on container creation |
 | Persona detection (P5-P7)       | Works from repo structure + user profile      |
 | Dream, meditate, self-actualize | Full command palette + chat participant       |
+| `@m365agents` chat participant  | M365 Agents Toolkit auto-installed            |
 
 ## Quick Start
 

@@ -10,9 +10,26 @@ applyTo: "**/*teams*,**/*manifest*,**/*m365*"
 
 ## ⚠️ Staleness Warning
 
-Teams platform evolves rapidly. **Last validated:** February 7, 2026 (TTK CLI 3.1.0, Manifest v1.19, DA v1.6)
+Teams platform evolves rapidly. **Last validated:** February 13, 2026 (M365 Agents Toolkit CLI 3.1.0, Manifest v1.19, DA v1.6)
 
-**Check:** [Teams Docs](https://learn.microsoft.com/en-us/microsoftteams/platform/), [Teams Toolkit](https://github.com/OfficeDev/TeamsFx)
+**Check:** [Teams Docs](https://learn.microsoft.com/en-us/microsoftteams/platform/), [M365 Agents Toolkit](https://github.com/OfficeDev/TeamsFx)
+
+> 💡 Use `@m365agents` chat participant in VS Code Copilot Chat for scaffolding, schema help, and troubleshooting.
+
+---
+
+## Available MCP Tools
+
+The `@m365agents` chat participant exposes MCP tools. **Use these programmatically** before falling back to manual docs:
+
+| Tool | Purpose | Example Use |
+| ---- | ------- | ----------- |
+| `mcp_m365agentstoo_get_schema` | Get current manifest schemas | Validate app manifest (v1.19), DA manifest (v1.0), API plugin (v2.1), M365 agents YAML |
+| `mcp_m365agentstoo_get_code_snippets` | Working code samples | Teams AI library, Teams JS SDK, botbuilder patterns |
+| `mcp_m365agentstoo_get_knowledge` | Development knowledge base | Copilot extensibility, capabilities, best practices |
+| `mcp_m365agentstoo_troubleshoot` | Diagnose issues | Sideloading, conditional access, schema errors |
+
+**When to use**: Any M365/Teams development task — call the relevant MCP tool first, then supplement with skill knowledge.
 
 ---
 
@@ -116,20 +133,38 @@ const token = await microsoftTeams.authentication.getAuthToken();
 
 ## Toolkit Commands
 
+The M365 Agents Toolkit (formerly Teams Toolkit) provides:
+
+**CLI commands:**
 ```powershell
 npx teamsapp package --env local
 npx teamsapp validate --package-file ...
 npx teamsapp preview --env local
 ```
 
+**MCP tools** (available when M365 Agents Toolkit extension is installed):
+```
+mcp_m365agentstoo_get_schema("app_manifest")       # Get Teams app manifest schema
+mcp_m365agentstoo_get_schema("declarative_agent_manifest")  # Get DA schema
+mcp_m365agentstoo_get_code_snippets("adaptive cards")       # Find code samples
+mcp_m365agentstoo_troubleshoot("sideloading fails")         # Diagnose issues
+```
+
+**`@m365agents` chat participant** — ask in VS Code Copilot Chat:
+- "I want to create a declarative agent"
+- "How to add SSO?"
+- "My Teams app doesn't sideload"
+- "Generate a manifest for my scenario"
+
 ## Common Issues
 
-| Issue | Solution |
-| ----- | -------- |
-| Manifest fails | Check schema version |
-| Bot not responding | Verify endpoint/tunnel |
-| Sideload fails | Enable custom apps in admin |
-| **Conditional access blocks teamsapp CLI** | Use manual Developer Portal upload |
+| Issue | Solution | MCP Tool |
+| ----- | -------- | -------- |
+| Manifest fails | Check schema version | `mcp_m365agentstoo_get_schema` |
+| Bot not responding | Verify endpoint/tunnel | `mcp_m365agentstoo_troubleshoot` |
+| Sideload fails | Enable custom apps in admin | `mcp_m365agentstoo_troubleshoot` |
+| Need code samples | Find working patterns | `mcp_m365agentstoo_get_code_snippets` |
+| **Conditional access blocks CLI** | `@m365agents` for guidance or manual Developer Portal upload | `mcp_m365agentstoo_troubleshoot` |
 
 ### Conditional Access Workaround
 

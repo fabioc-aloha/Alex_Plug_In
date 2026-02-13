@@ -299,14 +299,14 @@ Alex doesn't wait for a human to say "meditate." Scheduled evaluations, automate
 
 ### For the Architecture
 
-| Today                                     | Tomorrow                                                                  |
-| ----------------------------------------- | ------------------------------------------------------------------------- |
-| Each heir is independent                  | Heirs share a common backend                                              |
-| Heir-specific skill embedding (108 vs 15) | All skills available everywhere via Foundry IQ                            |
-| Agent handoffs via VS Code subagent API   | Multi-agent orchestration via Foundry Agent Service                       |
-| File-based synapse management             | Platform-managed persistent memory                                        |
-| Manual dream/meditation cycles            | Scheduled evaluations + automated self-maintenance                        |
-| Quality measured by user feel             | Quality measured by built-in evaluators (relevance, groundedness, safety) |
+| Today                                      | Tomorrow                                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------------- |
+| Each heir is independent                   | Heirs share a common backend                                              |
+| Heir-specific skill embedding (100+ vs 15) | All skills available everywhere via Foundry IQ                            |
+| Agent handoffs via VS Code subagent API    | Multi-agent orchestration via Foundry Agent Service                       |
+| File-based synapse management              | Platform-managed persistent memory                                        |
+| Manual dream/meditation cycles             | Scheduled evaluations + automated self-maintenance                        |
+| Quality measured by user feel              | Quality measured by built-in evaluators (relevance, groundedness, safety) |
 
 ### For Research
 
@@ -359,7 +359,7 @@ AFTER:   Alex is a cognitive entity that exists in the cloud.
 | **Surfaces**    | VS Code, Teams, Web, Voice, API                    |
 | **Memory**      | Full personal history                              |
 | **Knowledge**   | 100+ skills + global knowledge + doctoral research |
-| **Agents**      | Full 6-agent fleet                                 |
+| **Agents**      | Full 7-agent fleet                                 |
 | **Maintenance** | Automated dream + continuous evaluation            |
 | **Cost Model**  | Azure pay-per-use (estimated $20-50/month)         |
 

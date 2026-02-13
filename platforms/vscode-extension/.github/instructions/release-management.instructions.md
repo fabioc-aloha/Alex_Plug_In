@@ -17,7 +17,6 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
 - [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
-- [ROADMAP-UNIFIED.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
 - [.github/instructions/.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 
 ---

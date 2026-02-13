@@ -1465,6 +1465,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>Dream Protocol</strong> - Automated neural maintenance, synapse validation, and architecture health checks</li>
                             <li><strong>Self-Actualization</strong> - Deep meditation with comprehensive architecture assessment and knowledge promotion</li>
                             <li><strong>Meditation</strong> - Conscious knowledge consolidation via chat (@alex /meditate)</li>
+                            <li><strong>Brain QA</strong> - 21-phase health validation covering structure, indexes, content, and format</li>
+                            <li><strong>Muscle Scripts</strong> - Execution scripts for audit, build, sync, and validation tasks</li>
                         </ul>
                     </div>
                     
@@ -1473,8 +1475,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         <ul class="feature-list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights with GitHub remote access</li>
                             <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
-                            <li><strong>Skill Library</strong> - 100+ portable skills with triggers and synaptic connections</li>
+                            <li><strong>Skill Library</strong> - 116 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
+                            <li><strong>Trifecta Model</strong> - 8 capabilities encoded across all 3 memory systems (Skill+Instruction+Prompt)</li>
                         </ul>
                     </div>
                     
@@ -1504,6 +1507,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>M365 Export</strong> - Package knowledge for Microsoft 365 Copilot integration</li>
                             <li><strong>Architecture Upgrade</strong> - Seamless migration between versions with backup</li>
                             <li><strong>User Profile</strong> - Personalized communication style and preferences</li>
+                            <li><strong>Text-to-Speech</strong> - Voice synthesis for reading documents and content aloud</li>
+                            <li><strong>Research-First Dev</strong> - Pre-project knowledge encoding with 4-dimension gap analysis</li>
                         </ul>
                     </div>
                     

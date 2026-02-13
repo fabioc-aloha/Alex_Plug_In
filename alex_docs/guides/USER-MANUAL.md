@@ -94,7 +94,7 @@ Alex works best with these VS Code settings enabled. Add to your `settings.json`
 **What These Enable:**
 - **Agent Mode**: Custom Alex agents (Meditate, Learn, Dream, Review) in chat dropdown
 - **Extended Thinking**: 16K token budget for deep reasoning during meditation/learning
-- **Skills Auto-Loading**: All 109 Alex skills available without manual configuration
+- **Skills Auto-Loading**: All Alex skills available without manual configuration
 - **MCP Tools**: Enhanced tool access including Azure, GitHub, and custom integrations
 - **Background Agents**: Run long tasks (like Dream) without blocking your work
 

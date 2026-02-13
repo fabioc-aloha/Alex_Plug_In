@@ -56,9 +56,9 @@ Profile stored in `.github/config/user-profile.json`.
 | **P4b** | meditation-consolidation | Core | Memory file persistence, synapse enhancement |
 | **P4c** | dream-automation | Core | Unconscious processing, neural maintenance |
 | **P4d** | self-actualization | Core | Deep assessment, architecture optimization |
-| **P5** | master-heir-management | Domain | Master-Heir sync, promotion workflows, inheritance |
-| **P6** | brand-asset-management | Domain | Logos, banners, icons, visual identity |
-| **P7** | release-management | Domain | Versioning, changelog, publish workflows |
+| **P5** | *(available)* | Domain | *(assigned based on project context)* |
+| **P6** | *(available)* | Domain | *(assigned based on project context)* |
+| **P7** | *(available)* | Domain | *(assigned based on project context)* |
 
 **Slot Assignment Protocol**:
 - **Session start**: Assess project type → assign top 3 relevant skill domains
@@ -66,9 +66,8 @@ Profile stored in `.github/config/user-profile.json`.
 - **Topic pivot**: When user shifts focus, Pivot Detection Protocol evaluates mismatch → rotate P5-P7 → re-run SSO if complex
 - **Completion**: When objective complete, clear slot for next priority
 - **Complex task**: Skill Selection Optimization may update P6 based on dominant domain
-- **Master Alex default**: master-heir-management, brand-asset-management, release-management
 
-**Last Assessed**: 2026-02-12 — v5.6.8 release session (RCA pipeline fix, persona detection, brain-qa hardening)
+**Last Assessed**: Not yet assessed for this project
 
 **Active Principles**: KISS, DRY, Optimize-for-AI
 

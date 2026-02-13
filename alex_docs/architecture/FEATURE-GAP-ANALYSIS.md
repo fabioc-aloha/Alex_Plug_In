@@ -51,7 +51,7 @@ Based on validation testing, these formats work best for LLM parsing:
 
 | Feature                     | VS Code Support | Alex Implementation                   | Status |
 | --------------------------- | --------------- | ------------------------------------- | ------ |
-| `.agent.md` files           | ✅               | 6 agents                              | ✅      |
+| `.agent.md` files           | ✅               | 7 agents                              | ✅      |
 | YAML frontmatter            | ✅               | All agents have it                    | ✅      |
 | `name` property             | ✅               | All agents                            | ✅      |
 | `description` property      | ✅               | All agents                            | ✅      |
@@ -341,8 +341,8 @@ A feature-by-feature analysis of porting Alex from VS Code GitHub Copilot to Cla
 
 | Alex Component   | Count            | Claude Code Migration Path                           |
 | ---------------- | ---------------- | ---------------------------------------------------- |
-| **Agents**       | 6                | `.claude/agents/*.md` with frontmatter               |
-| **Skills**       | 109              | `.claude/skills/*.md` — would need schema adaptation |
+| **Agents**       | 7                | `.claude/agents/*.md` with frontmatter               |
+| **Skills**       | 100+             | `.claude/skills/*.md` — would need schema adaptation |
 | **Instructions** | 28               | `.claude/rules/*.md` with `paths` frontmatter        |
 | **Prompts**      | 17               | Could become skills or inline in CLAUDE.md           |
 | **Synapses**     | ~200 connections | No native equivalent — would lose connection mapping |

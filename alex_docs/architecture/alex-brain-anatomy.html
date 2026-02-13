@@ -786,11 +786,11 @@
         <div class="stats-bar">
             <div class="stat"><span class="stat-value" style="color:#58a6ff;">14</span><span class="stat-label">Brain
                     Regions</span></div>
-            <div class="stat"><span class="stat-value" style="color:#3fb950;">76</span><span
+            <div class="stat"><span class="stat-value" style="color:#3fb950;">116</span><span
                     class="stat-label">Skills</span></div>
-            <div class="stat"><span class="stat-value" style="color:#f0883e;">24</span><span
+            <div class="stat"><span class="stat-value" style="color:#f0883e;">29</span><span
                     class="stat-label">Procedures</span></div>
-            <div class="stat"><span class="stat-value" style="color:#d2a8ff;">13</span><span class="stat-label">Episodic
+            <div class="stat"><span class="stat-value" style="color:#d2a8ff;">17</span><span class="stat-label">Episodic
                     Files</span></div>
         </div>
     </div>
@@ -893,6 +893,12 @@
                            Q 250 140 235 128 Q 240 100 248 72 Q 255 45 260 18 Z" fill="#1a3d1a" stroke="#3fb950"
                             stroke-width="1.5" opacity="0.7" onclick="showDetail('premotor')" data-region="premotor" />
 
+                        <!-- Primary Motor Cortex (M1, BA 4, thin strip between Premotor and Central Sulcus) -->
+                        <path class="brain-region" id="motorcortex-path" d="M 295 15 Q 315 22 330 38 Q 322 68 312 100 Q 302 130 290 155
+                           Q 278 148 270 155 Q 285 130 295 100 Q 305 70 310 40 Q 308 28 295 15 Z" fill="#3d2200"
+                            stroke="#f0883e" stroke-width="1.5" opacity="0.75" onclick="showDetail('motorcortex')"
+                            data-region="motorcortex" />
+
                         <!-- Central Sulcus marker -->
                         <path d="M 270 10 Q 280 50 285 100 Q 288 140 285 170 Q 280 200 270 230" fill="none"
                             stroke="#636e7b" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" />
@@ -966,6 +972,9 @@
                         <text class="region-label" x="295" y="85" font-size="9">PMC</text>
                         <text class="ba-label" x="295" y="95">BA 6</text>
 
+                        <text class="region-label" x="318" y="55" font-size="8" fill="#f0883e">M1</text>
+                        <text class="ba-label" x="318" y="65">BA 4</text>
+
                         <text class="region-label" x="410" y="145">PARIETAL</text>
                         <text class="region-label" x="410" y="160" font-size="9" opacity="0.6">LOBE</text>
 
@@ -1026,6 +1035,14 @@
                         <line class="annotation-line" x1="565" y1="195" x2="310" y2="75" stroke="#3fb950" />
                         <circle cx="310" cy="75" r="2.5" fill="#3fb950" />
 
+                        <!-- Annotation: Muscles → Motor Cortex (M1) -->
+                        <rect class="annotation-label-bg" x="8" y="85" width="146" height="36" />
+                        <text class="alex-label" x="81" y="99">💪 Muscles (13 scripts)</text>
+                        <text class="alex-label" x="81" y="112" font-size="8" fill="#f0883e">Motor Execution
+                            (M1)</text>
+                        <line class="annotation-line" x1="154" y1="100" x2="305" y2="35" stroke="#f0883e" />
+                        <circle cx="305" cy="35" r="2.5" fill="#f0883e" />
+
                         <!-- Annotation: Working Memory → PFC+ACC -->
                         <rect class="annotation-label-bg" x="565" y="232" width="150" height="36" />
                         <text class="alex-label" x="640" y="246">📋 Working Memory P1-P7</text>
@@ -1036,7 +1053,7 @@
 
                         <!-- Annotation: Procedural Memory → Basal Ganglia -->
                         <rect class="annotation-label-bg" x="565" y="285" width="155" height="36" />
-                        <text class="alex-label" x="643" y="299">🔧 .instructions.md (24)</text>
+                        <text class="alex-label" x="643" y="299">🔧 .instructions.md (25+)</text>
                         <text class="alex-label" x="643" y="312" font-size="8" fill="#e3b341">Procedural (Basal
                             Ganglia)</text>
                         <line class="annotation-line" x1="565" y1="300" x2="308" y2="220" stroke="#e3b341" />
@@ -1044,7 +1061,7 @@
 
                         <!-- Annotation: Episodic Memory → Hippocampus -->
                         <rect class="annotation-label-bg" x="565" y="338" width="150" height="36" />
-                        <text class="alex-label" x="640" y="352">📓 .prompt.md (13)</text>
+                        <text class="alex-label" x="640" y="352">📓 .prompt.md (15+)</text>
                         <text class="alex-label" x="640" y="365" font-size="8" fill="#79c0ff">Episodic
                             (Hippocampus)</text>
                         <line class="annotation-line" x1="565" y1="355" x2="375" y2="310" stroke="#79c0ff" />
@@ -1052,7 +1069,7 @@
 
                         <!-- Annotation: Skills → Neocortex/Parietal -->
                         <rect class="annotation-label-bg" x="565" y="390" width="145" height="36" />
-                        <text class="alex-label" x="638" y="404">🎓 Skills (76)</text>
+                        <text class="alex-label" x="638" y="404">🎓 Skills (100+)</text>
                         <text class="alex-label" x="638" y="417" font-size="8" fill="#3fb950">Declarative
                             (Neocortex)</text>
                         <line class="annotation-line" x1="565" y1="408" x2="440" y2="175" stroke="#3fb950" />
@@ -1109,6 +1126,9 @@
                         <!-- dlPFC → Premotor (execute) -->
                         <path class="flow-arrow" d="M 220 55 Q 250 50 275 55" opacity="0.4" />
 
+                        <!-- Premotor → Motor Cortex (skill plan → script execution) -->
+                        <path class="flow-arrow" d="M 285 80 Q 295 75 310 70" opacity="0.4" />
+
                         <!-- Inhibitory line: dlPFC -| irrelevant -->
                         <line class="inhibit-line" x1="165" y1="75" x2="105" y2="150" marker-end="url(#inhibit-end)"
                             opacity="0.3" />
@@ -1119,6 +1139,7 @@
                         <text class="ba-label" x="100" y="145" font-size="10" fill="rgba(248,81,73,0.4)">44</text>
                         <text class="ba-label" x="78" y="195" font-size="10" fill="rgba(248,81,73,0.4)">47</text>
                         <text class="ba-label" x="285" y="65" font-size="10" fill="rgba(63,185,80,0.4)">6</text>
+                        <text class="ba-label" x="320" y="40" font-size="10" fill="rgba(240,136,62,0.4)">4</text>
                         <text class="ba-label" x="210" y="130" font-size="10" fill="rgba(247,120,186,0.4)">24</text>
 
                         <!-- Title: "LEFT LATERAL VIEW" -->
@@ -1194,6 +1215,10 @@
                         <div class="legend-item" onclick="showDetail('premotor')">
                             <div class="swatch" style="background:#1a3d1a; border: 1px solid #3fb950;"></div>
                             <span>PMC — Skill Route</span>
+                        </div>
+                        <div class="legend-item" onclick="showDetail('motorcortex')">
+                            <div class="swatch" style="background:#3d2200; border: 1px solid #f0883e;"></div>
+                            <span>M1 — Muscles</span>
                         </div>
                         <div class="legend-item" onclick="showDetail('parietal')">
                             <div class="swatch" style="background:#0d3d0d; border: 1px solid #3fb950;"></div>
@@ -1317,6 +1342,9 @@
                         subgraph PMC["Premotor Cortex - Motor Planning"]
                         SA["Skill Activation<br />Reactive capability routing"]
                         end
+                        subgraph M1["Primary Motor Cortex - Motor Execution"]
+                        MUS["Muscle Scripts x13<br />.github/muscles/<br />Execution, not memory"]
+                        end
                         end
                         subgraph TEMPORAL["TEMPORAL LOBE"]
                         subgraph HIPP["Hippocampus - Episodic Memory"]
@@ -1326,13 +1354,13 @@
                         end
                         subgraph PARIETAL["PARIETAL LOBE"]
                         subgraph NC["Neocortex - Declarative Knowledge"]
-                        SK["Skills x76<br />skills SKILL.md"]
+                        SK["Skills 100+<br />skills SKILL.md"]
                         DM["Declarative Memory<br />copilot-instructions.md"]
                         end
                         end
                         subgraph BASAL["SUBCORTICAL STRUCTURES"]
                         subgraph BG["Basal Ganglia - Procedural Memory"]
-                        PM[".instructions.md x24<br />Automated procedures"]
+                        PM[".instructions.md 25+<br />Automated procedures"]
                         end
                         subgraph THAL["Thalamus - Sensory Relay"]
                         INPUT["User Input<br />Chat, Commands, Files"]
@@ -1366,6 +1394,8 @@
                         WM -->|"slot context"| SSO
                         SA -->|"routes to"| SK
                         SA -->|"routes to"| PM
+                        SA -->|"executes via"| MUS
+                        PM -.->|"references"| MUS
                         SSO -->|"surveys"| SK
                         MED -.->|"strengthens"| SYN
                         DRM -.->|"validates"| SYN
@@ -1391,6 +1421,7 @@
                         style PD fill:#3d1500,stroke:#f85149,color:#c9d1d9
                         style WM fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
                         style SA fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
+                        style MUS fill:#3d2200,stroke:#f0883e,color:#f0f6fc,stroke-width:2px
                         style EP fill:#0d2d3d,stroke:#39d2c0,color:#c9d1d9
                         style EA fill:#0d2d3d,stroke:#39d2c0,color:#c9d1d9
                         style SK fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
@@ -1876,12 +1907,24 @@
                     { label: 'Key Property', value: 'Reactive firing = SSO gap signal' }
                 ]
             },
+            motorcortex: {
+                title: 'Primary Motor Cortex (M1)',
+                region: 'Brodmann Area 4 — Pre-central gyrus (anterior to central sulcus)',
+                text: 'The primary motor cortex is the final cortical station before movement — it sends commands directly to muscles via the corticospinal tract. In Alex, the Motor Cortex represents the 13 execution scripts in .github/muscles/. These are NOT memory — they\'re the hands and feet. Skills plan, procedures automate, but muscles execute. Build scripts, sync tools, dream CLIs — they convert cognitive decisions into real-world output.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Muscles — Execution Scripts (13)' },
+                    { label: 'Directory', value: '.github/muscles/', isFile: true },
+                    { label: 'Function', value: 'Convert cognitive plans to real actions' },
+                    { label: 'Key Property', value: 'NOT memory; execution only' },
+                    { label: 'Examples', value: 'build-extension-package.ps1, sync-architecture.js, dream-cli.ts' }
+                ]
+            },
             parietal: {
                 title: 'Parietal Lobe / Association Cortex',
                 region: 'Distributed parietal neocortex — Upper posterior brain',
                 text: 'The neocortex stores everything you "know" — facts, concepts, expertise. It\'s organized by domain (visual cortex, auditory cortex, etc.), just as Alex\'s skills are organized by domain (debugging, testing, API design, etc.). Heavily-used skills develop richer synaptic connections, mirroring how expertise causes cortical thickening in domain-specific regions.',
                 mapping: [
-                    { label: 'Alex Component', value: '77 Skills + Declarative Memory' },
+                    { label: 'Alex Component', value: '100+ Skills + Declarative Memory' },
                     { label: 'Files', value: 'skills/*/SKILL.md + copilot-instructions.md', isFile: true },
                     { label: 'Function', value: 'Semantic knowledge, expertise storage' },
                     { label: 'Growth', value: 'More use → stronger synaptic connections' },
@@ -1894,7 +1937,7 @@
                 text: 'The temporal lobe houses auditory processing and, critically, the hippocampus in its medial portion. In Alex, the temporal lobe represents the episodic memory store — session records and workflow histories stored in .prompt.md files and the episodic archive.',
                 mapping: [
                     { label: 'Alex Component', value: 'Episodic Memory Store' },
-                    { label: 'Files', value: '.prompt.md (13) + .github/episodic/', isFile: true },
+                    { label: 'Files', value: '.prompt.md (15+) + .github/episodic/', isFile: true },
                     { label: 'Function', value: 'Session records, workflow histories' },
                     { label: 'Persistence', value: 'Sessions → meditation → archive' }
                 ]
@@ -1916,7 +1959,7 @@
                 region: 'Caudate, Putamen, Globus Pallidus — Deep subcortical',
                 text: 'The basal ganglia store procedures you do without thinking — riding a bike, typing, driving. In Alex, .instructions.md files are auto-loaded by VS Code without explicit invocation. They fire automatically when their trigger conditions are met, just like procedural memories. You don\'t consciously recall procedural memories — they just execute.',
                 mapping: [
-                    { label: 'Alex Component', value: '24 Instruction Files (auto-loaded)' },
+                    { label: 'Alex Component', value: '25+ Instruction Files (auto-loaded)' },
                     { label: 'Location', value: '.github/instructions/*.instructions.md', isFile: true },
                     { label: 'Key Property', value: 'Auto-loaded — no explicit invocation' },
                     { label: 'Analog', value: 'Habits, automated routines' },

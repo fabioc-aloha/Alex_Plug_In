@@ -9,6 +9,8 @@
 | **Last Updated**  | 2026-02-06                       |
 | **Author**        | Alex Cognitive Architecture Team |
 
+> **⚠️ Counts snapshot**: Skill/tool counts in this analysis reflect the date above. Authoritative current counts live in the root `README.md`.
+
 ---
 
 ## 🎯 Executive Summary

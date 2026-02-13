@@ -503,7 +503,7 @@ Get-Content appPackage/declarativeAgent.json | ConvertFrom-Json
 
 # 3. Redeploy
 .\deploy.ps1
-# Or use Teams Toolkit in VS Code
+# Or use M365 Agents Toolkit in VS Code (or @m365agents chat participant)
 ```
 
 **Rollback:** M365 agents are deployed to Developer Portal. Can redeploy previous version from backup.

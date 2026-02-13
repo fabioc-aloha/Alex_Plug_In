@@ -9,7 +9,7 @@
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "implements",
-      "strength": 1.0,
+      "strength": 1,
       "when": "Starting any release workflow",
       "yields": "Complete release procedures and checklists"
     },

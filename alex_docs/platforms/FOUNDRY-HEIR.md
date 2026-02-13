@@ -319,10 +319,10 @@ The biggest opportunity is Foundry serving as a **shared backend** for multiple 
 | **Type**          | IDE Extension     | Declarative Agent | Cloud Agent Service      |
 | **Runtime**       | Desktop app       | M365 cloud        | Azure PaaS               |
 | **Users**         | Single developer  | Single user       | Multi-user               |
-| **Skills**        | 108 (file-based)  | 15 (embedded)     | Unlimited (IQ + RAG)     |
+| **Skills**        | 100+ (file-based) | 15 (embedded)     | Unlimited (IQ + RAG)     |
 | **Memory**        | Synapses (manual) | OneDrive          | Platform-managed         |
-| **Tools**         | 11 LM Tools + MCP | Web/SP/Graph      | 1,400+ catalog + MCP     |
-| **Agents**        | 6 via `.agent.md` | Single agent      | Multi-agent workflows    |
+| **Tools**         | 12 LM Tools + MCP | Web/SP/Graph      | 1,400+ catalog + MCP     |
+| **Agents**        | 7 via `.agent.md` | Single agent      | Multi-agent workflows    |
 | **Observability** | Dream command     | None              | Full OpenTelemetry       |
 | **Voice**         | TTS skill only    | None              | Realtime API             |
 | **Publishing**    | Marketplace       | M365 Store        | M365 + Teams + Web + API |

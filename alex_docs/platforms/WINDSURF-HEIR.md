@@ -141,7 +141,7 @@ Windsurf's auto-memories partially replicate what Alex achieves with the synapse
 | --------------------- | ---------------- | -------------- | ----------------------- |
 | **Main instructions** | Single file      | Multiple rules | Split at 12K boundaries |
 | **Agents**            | Individual files | ❌ None         | Embed in rules          |
-| **Skills**            | 108 folders      | Rules files    | Flatten + split         |
+| **Skills**            | 100+ folders     | Rules files    | Flatten + split         |
 | **Synapses**          | `synapses.json`  | Auto-memories  | Let platform learn      |
 
 ### ❌ Cannot Transfer
@@ -212,13 +212,13 @@ Windsurf supports system-level rules at:
 
 ## Limitations
 
-| Limitation                   | Impact                        |
-| ---------------------------- | ----------------------------- |
-| **12K character limit**      | Must split large files        |
-| **No agents**                | Lose agent ecosystem          |
-| **No skills folder**         | Flatten into rules            |
-| **No VS Code API**           | Lose 11 LM tools, 28 commands |
-| **Workspace-local memories** | No cross-project sync         |
+| Limitation                   | Impact                         |
+| ---------------------------- | ------------------------------ |
+| **12K character limit**      | Must split large files         |
+| **No agents**                | Lose agent ecosystem           |
+| **No skills folder**         | Flatten into rules             |
+| **No VS Code API**           | Lose 12 LM tools, 70+ commands |
+| **Workspace-local memories** | No cross-project sync          |
 
 ---
 
