@@ -94,6 +94,14 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 - Significant technical change → Consider if ADR is warranted
 - **Protocol Validation** → Significant decisions should have documented rationale
 
+## Project-Wide Rename Triggers
+
+- "Rename X to Y", "product renamed", "rebrand" → Project-wide grep audit
+- Pattern: Replace old name + add "(formerly OldName)" disambiguation on first mention
+- Scope: Active files only (skip archive/), touch synapses.json triggers
+- Post-audit: Run brain-qa to catch broken synapses
+- **Protocol Validation** → All active references updated, heir synced
+
 ## Dependency Management Triggers
 
 - "Check dependencies" → Run npm audit and npm outdated

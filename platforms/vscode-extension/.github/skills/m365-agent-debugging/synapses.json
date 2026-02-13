@@ -1,7 +1,20 @@
 {
   "skill": "m365-agent-debugging",
   "inheritance": "heir:m365",
-  "connections": [],
+  "connections": [
+    {
+      "target": ".github/skills/heir-curation/SKILL.md",
+      "type": "implements",
+      "strength": 0.85,
+      "context": "M365 heir debugging"
+    },
+    {
+      "target": ".github/skills/teams-app-patterns/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "context": "Shared MCP tools and @m365agents participant"
+    }
+  ],
   "activationPatterns": [
     "agent not working",
     "agent not responding",

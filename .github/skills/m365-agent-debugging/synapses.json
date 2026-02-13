@@ -7,6 +7,12 @@
       "type": "implements",
       "strength": 0.85,
       "context": "M365 heir debugging"
+    },
+    {
+      "target": ".github/skills/teams-app-patterns/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "context": "Shared MCP tools and @m365agents participant"
     }
   ],
   "activationPatterns": [
