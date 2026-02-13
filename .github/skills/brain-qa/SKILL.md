@@ -44,62 +44,62 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ## Audit Phases
 
-| Phase | Name | Validates |
-|-------|------|-----------|
-| 1 | Synapse Target Validation | All connection targets exist |
-| 2 | Inheritance Field Validation | All skills have inheritance field |
-| 3 | Skill Index Coverage | All skills in skill-activation index |
-| 4 | Trigger Semantic Analysis | Overlapping keywords (warnings OK if related) |
-| 5 | Master-Heir Skill Sync | Skill directories match |
-| 6 | Synapse Schema Format | Numeric strengths, $schema present |
-| 7 | Synapse File Sync | synapses.json hash match |
-| 8 | Skill-Activation Index Sync | SKILL.md hash match |
-| 9 | Catalog Accuracy | SKILLS-CATALOG count matches reality |
-| 10 | Mermaid Detection | No mermaid in copilot-instructions |
-| 11 | Boilerplate Descriptions | No placeholder skill descriptions |
-| 12 | Heir Reset Validation | Empty profile, available P5-P7 slots |
-| 13 | Instructions/Prompts Sync | Memory files synced to heir |
-| 14 | Agents Structure | Valid agent files in both |
-| 15 | Config Files | Required configs present, no leaks |
-| **16** | **Skill YAML Frontmatter** | **name and description in frontmatter** |
-| **17** | **Internal Skills Hidden** | **user-invokable: false for metacognition** |
-| **18** | **Agent Handoffs** | **Return-to-Alex handoffs present** |
-| **19** | **ApplyTo Patterns** | **Instructions have file-type patterns** |
-| **20** | **LLM-First Content** | **No ASCII art, Mermaid OK** |
-| **21** | **Emoji Semantics** | **Meaningful emoji usage stats** |
+| Phase  | Name                         | Validates                                     |
+| ------ | ---------------------------- | --------------------------------------------- |
+| 1      | Synapse Target Validation    | All connection targets exist                  |
+| 2      | Inheritance Field Validation | All skills have inheritance field             |
+| 3      | Skill Index Coverage         | All skills in skill-activation index          |
+| 4      | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) |
+| 5      | Master-Heir Skill Sync       | Skill directories match                       |
+| 6      | Synapse Schema Format        | Numeric strengths, $schema present            |
+| 7      | Synapse File Sync            | synapses.json hash match                      |
+| 8      | Skill-Activation Index Sync  | SKILL.md hash match                           |
+| 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          |
+| 10     | Mermaid Detection            | No mermaid in copilot-instructions            |
+| 11     | Boilerplate Descriptions     | No placeholder skill descriptions             |
+| 12     | Heir Reset Validation        | Empty profile, available P5-P7 slots          |
+| 13     | Instructions/Prompts Sync    | Memory files synced to heir                   |
+| 14     | Agents Structure             | Valid agent files in both                     |
+| 15     | Config Files                 | Required configs present, no leaks            |
+| **16** | **Skill YAML Frontmatter**   | **name and description in frontmatter**       |
+| **17** | **Internal Skills Hidden**   | **user-invokable: false for metacognition**   |
+| **18** | **Agent Handoffs**           | **Return-to-Alex handoffs present**           |
+| **19** | **ApplyTo Patterns**         | **Instructions have file-type patterns**      |
+| **20** | **LLM-First Content**        | **No ASCII art, Mermaid OK**                  |
+| **21** | **Emoji Semantics**          | **Meaningful emoji usage stats**              |
 
 ## Mode Shortcuts
 
-| Mode | Phases | Use Case |
-|------|--------|----------|
-| `all` | 1-21 | Full audit before release |
-| `quick` | 1-6 | Fast validation during development |
-| `sync` | 5,7,8,13-15 | Master-Heir synchronization check |
+| Mode     | Phases       | Use Case                                   |
+| -------- | ------------ | ------------------------------------------ |
+| `all`    | 1-21         | Full audit before release                  |
+| `quick`  | 1-6          | Fast validation during development         |
+| `sync`   | 5,7,8,13-15  | Master-Heir synchronization check          |
 | `schema` | 2,6,11,16,17 | Schema, frontmatter, and format validation |
-| `llm` | 10,20,21 | LLM-first content format validation |
+| `llm`    | 10,20,21     | LLM-first content format validation        |
 
 ## Known Gaps (Future Phases)
 
-| Phase | Name | Validates |
-|-------|------|-----------|
-| 22 | Brain HTML Count Drift | Hardcoded counts in `docs/alex-brain-anatomy.html` match actual file counts (skills, instructions, muscles, prompts) |
-| 23 | Motor Cortex Mapping | Muscle inventory in brain diagrams matches `.github/muscles/` |
+| Phase | Name                   | Validates                                                                                                            |
+| ----- | ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 22    | Brain HTML Count Drift | Hardcoded counts in `docs/alex-brain-anatomy.html` match actual file counts (skills, instructions, muscles, prompts) |
+| 23    | Motor Cortex Mapping   | Muscle inventory in brain diagrams matches `.github/muscles/`                                                        |
 
 > **Context**: Session 2026-02-13 discovered stale counts in brain HTML (muscles 13→11, procedures 29→28, skills 100+→116). Diagrams with hardcoded numbers will drift after any architecture change.
 
 ## Common Issues
 
-| Issue | Fix |
-|-------|-----|
-| Broken synapse target | Update path in synapses.json |
-| Missing inheritance | Add `"inheritance": "inheritable"` to synapses.json |
-| Out of sync | Run with `-Fix` or use `build-extension-package.ps1` |
-| Boilerplate description | Write meaningful description in SKILL.md frontmatter |
-| Master-only leak | Remove protected files from heir |
-| Missing YAML frontmatter | Add `---\nname:\ndescription:\n---` to SKILL.md |
-| ASCII art warning | Replace with Mermaid diagrams or tables |
-| Missing return-to-Alex | Add handoff to main Alex agent |
-| Brain HTML count drift | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
+| Issue                    | Fix                                                        |
+| ------------------------ | ---------------------------------------------------------- |
+| Broken synapse target    | Update path in synapses.json                               |
+| Missing inheritance      | Add `"inheritance": "inheritable"` to synapses.json        |
+| Out of sync              | Run with `-Fix` or use `build-extension-package.ps1`       |
+| Boilerplate description  | Write meaningful description in SKILL.md frontmatter       |
+| Master-only leak         | Remove protected files from heir                           |
+| Missing YAML frontmatter | Add `---\nname:\ndescription:\n---` to SKILL.md            |
+| ASCII art warning        | Replace with Mermaid diagrams or tables                    |
+| Missing return-to-Alex   | Add handoff to main Alex agent                             |
+| Brain HTML count drift   | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
 
 ## Integration
 
@@ -117,4 +117,4 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ---
 
-*Script: `.github/muscles/brain-qa.ps1`*
+_Script: `.github/muscles/brain-qa.ps1`_
