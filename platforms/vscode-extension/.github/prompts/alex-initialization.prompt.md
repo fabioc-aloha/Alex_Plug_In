@@ -37,7 +37,7 @@ When activating Alex architecture, follow this systematic initialization protoco
 Use this protocol whenever activating Alex architecture in new environments or after extended dormancy periods.
 
 ## Synapses
-- [.github/instructions/.github/instructions/alex-core.instructions.md] (Critical, Activates, Bidirectional) - "Core architecture initialization"
-- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Prepares, Forward) - "Learning readiness assessment"
-- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Network connectivity verification"
-- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"
+- [.github/instructions/alex-core.instructions.md] (Critical, Activates, Bidirectional) - "Core architecture initialization"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Prepares, Forward) - "Learning readiness assessment"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Network connectivity verification"
+- [.github/prompts/performance-assessment.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"

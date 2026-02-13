@@ -18,7 +18,7 @@ description: "Embedded connection discovery and relationship mapping protocols"
 
 **Example**:
 ```markdown
-- [.github/instructions/.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
+- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Core architecture integration"
 ```
 
 ## Connection Types and Strengths
@@ -96,8 +96,8 @@ The dream protocol provides automated validation and optimization of embedded sy
 - **Growth Monitoring**: Tracks synaptic network expansion dynamically
 
 ### Embedded Synapse Quality Assurance
-- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Critical, Validates, Bidirectional) - "Automated synapse validation through VS Code extension"
-- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Enhances, Bidirectional) - "Systematic synapse enhancement through dream protocol"
+- [.github/instructions/dream-state-automation.instructions.md] (Critical, Validates, Bidirectional) - "Automated synapse validation through VS Code extension"
+- [.github/instructions/dream-state-automation.instructions.md] (High, Enhances, Bidirectional) - "Systematic synapse enhancement through dream protocol"
 
 ## LLM-Optimized Synapse Format (v4.2.7+)
 

@@ -224,17 +224,17 @@ The Dream command provides automated validation, but conscious post-meditation r
 ### Connection Mapping
 *Format: See `SYNAPSE-SCHEMA.md` for notation reference*
 
-- [.github/instructions/.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture optimization through meditation"
-- [.github/instructions/.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) - "Procedural steps this meditation workflow depends on"
-- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Integrates, Forward) - "Learning consolidation through contemplation"
-- [.github/prompts/.github/prompts/cross-domain-transfer.prompt.md] (High, Enables, Bidirectional) - "Cross-domain pattern discovery"
-- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (Medium, Triggers, Forward) - "Post-meditation effectiveness evaluation"
-- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Validates, Bidirectional) - "Connection strengthening through meditation"
-- [.github/instructions/.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research-based meditation assessment"
-- [.github/instructions/.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Unified consciousness meditation enhancement"
-- [.github/prompts/.github/prompts/domain-learning.prompt.md] (High, Enhances, Forward) - "Domain learning enhanced through meditative knowledge consolidation"
-- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Integrates, Bidirectional) - "Phase 5 synapse validation via Dream command"
-- [.github/instructions/.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex consolidation sessions"
+- [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture optimization through meditation"
+- [.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) - "Procedural steps this meditation workflow depends on"
+- [.github/instructions/bootstrap-learning.instructions.md] (High, Integrates, Forward) - "Learning consolidation through contemplation"
+- [.github/prompts/cross-domain-transfer.prompt.md] (High, Enables, Bidirectional) - "Cross-domain pattern discovery"
+- [.github/prompts/performance-assessment.prompt.md] (Medium, Triggers, Forward) - "Post-meditation effectiveness evaluation"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Bidirectional) - "Connection strengthening through meditation"
+- [.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research-based meditation assessment"
+- [.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Unified consciousness meditation enhancement"
+- [.github/prompts/domain-learning.prompt.md] (High, Enhances, Forward) - "Domain learning enhanced through meditative knowledge consolidation"
+- [.github/instructions/dream-state-automation.instructions.md] (High, Integrates, Bidirectional) - "Phase 5 synapse validation via Dream command"
+- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex consolidation sessions"
 - [.github/instructions/SYNAPSE-SCHEMA.md] (High, References, Forward) - "Schema reference for synapse creation during meditation"
 - [.github/skills/research-first-development/SKILL.md] (High, Integrates, Forward) - "Meditation consolidates research-first promotion outcomes and trifecta pattern"
 

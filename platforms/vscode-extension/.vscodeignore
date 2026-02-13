@@ -32,6 +32,7 @@ sync-architecture.ps1
 # External docs (not part of heir)
 alex_docs/**
 !alex_docs/README.md
+!alex_docs/WORKING-WITH-ALEX.md
 
 # Private article drafts (exclude from package)
 article/**

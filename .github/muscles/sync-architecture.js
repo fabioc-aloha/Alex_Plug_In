@@ -274,14 +274,16 @@ function syncArchitectureFiles() {
 
     // Sync walkthrough media files (referenced by package.json walkthroughs)
     const walkthroughFiles = [
-        { src: path.join(MASTER_ROOT, 'alex_docs', 'README.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'README.md') }
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'README.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'README.md') },
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md') }
     ];
     for (const { src, dest } of walkthroughFiles) {
         if (fs.existsSync(src)) {
             const destDir = path.dirname(dest);
             if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
             fs.copyFileSync(src, dest);
-            console.log(`✅ alex_docs/README.md (walkthrough media)`);
+            const fileName = path.relative(HEIR_ROOT, dest).replace(/\\/g, '/');
+            console.log(`✅ ${fileName} (walkthrough media)`);
         }
     }
 }

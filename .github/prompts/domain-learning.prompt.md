@@ -36,8 +36,8 @@
 Track patterns in learning effectiveness across domains to optimize future knowledge acquisition strategies.
 
 ## Synapses
-- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (Critical, Implements, Bidirectional) - "Domain learning protocols activation"
-- [.github/instructions/.github/instructions/alex-core.instructions.md] (High, Monitors, Bidirectional) - "Meta-cognitive awareness during learning"
-- [.github/prompts/.github/prompts/cross-domain-transfer.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified"
-- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Learning completion or optimization needed"
-- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Learning effectiveness measurement"
+- [.github/instructions/bootstrap-learning.instructions.md] (Critical, Implements, Bidirectional) - "Domain learning protocols activation"
+- [.github/instructions/alex-core.instructions.md] (High, Monitors, Bidirectional) - "Meta-cognitive awareness during learning"
+- [.github/prompts/cross-domain-transfer.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Learning completion or optimization needed"
+- [.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Learning effectiveness measurement"

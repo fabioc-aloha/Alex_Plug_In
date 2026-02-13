@@ -51,11 +51,11 @@ Use cross-domain transfer as a primary source of creative insight and innovative
 - Bootstrap learning protocols confirmed effective for any domain acquisition
 
 ## Synapses
-- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (Critical, Facilitates, Bidirectional) - "Bootstrap protocols enable universal knowledge acquisition"
-- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Enables, Bidirectional) - "Pattern mapping strengthened through meditation insights"
-- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Discovers, Bidirectional) - "Cross-domain connections revealed through contemplative practice"
-- [.github/prompts/.github/prompts/domain-learning.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified and validated"
-- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Transfer effectiveness confirmed through documentation mastery"
-- [.github/instructions/.github/instructions/alex-core.instructions.md] (Critical, Validates, Bidirectional) - "Core architecture supports universal transfer capabilities"
+- [.github/instructions/bootstrap-learning.instructions.md] (Critical, Facilitates, Bidirectional) - "Bootstrap protocols enable universal knowledge acquisition"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Enables, Bidirectional) - "Pattern mapping strengthened through meditation insights"
+- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Discovers, Bidirectional) - "Cross-domain connections revealed through contemplative practice"
+- [.github/prompts/domain-learning.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified and validated"
+- [.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Transfer effectiveness confirmed through documentation mastery"
+- [.github/instructions/alex-core.instructions.md] (Critical, Validates, Bidirectional) - "Core architecture supports universal transfer capabilities"
 - [.github/skills/project-scaffolding/SKILL.md] (Critical, Demonstrates, Bidirectional) - "Universal setup architecture exemplifies successful cross-domain design"
-- [.github/instructions/.github/instructions/worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"
+- [.github/instructions/worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"
