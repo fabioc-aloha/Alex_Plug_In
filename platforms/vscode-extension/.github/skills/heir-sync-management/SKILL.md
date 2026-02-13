@@ -15,9 +15,11 @@ metadata:
 
 | Concept | Definition |
 |---------|-----------|
-| **Heir** | Platform-specific deployment inheriting Master's DNA (VS Code, M365) |
-| **Deployment Channel** | Delivery mechanism for an heir (Marketplace, Teams Package, OneDrive Agent) |
+| **Heir** | Platform-specific deployment inheriting Master's DNA (VS Code, M365, Codespaces) |
+| **Deployment Channel** | Delivery mechanism for an heir (Marketplace, Teams Package, devcontainer push) |
 | **Integration** | Cross-heir communication (OneDrive Sync, GitHub Cloud) |
+| **Translation Heir** | Heir requiring format/schema conversion (e.g., M365 — export pipeline) |
+| **Deployment Heir** | Heir needing only configuration, no code translation (e.g., Codespaces — devcontainer.json) |
 | **Contamination** | Master-specific data leaking into heir packages |
 | **Drift** | Heir diverging from Master's architecture over time |
 | **Promotion** | Elevating heir-developed capabilities back to Master |
@@ -193,6 +195,14 @@ Only a few skills are genuinely master-only:
 - `master-alex-audit` — Master workspace auditing
 - `release-preflight` — Marketplace publishing
 - `release-process` — Release pipeline
+
+## Heir Type Comparison
+
+| Heir | Type | Translation | Deploy Mechanism | Maintenance Cost |
+|------|------|-------------|-----------------|------------------|
+| **VS Code Extension** | Source | Compile only | `npx vsce publish` | Low |
+| **M365 Copilot Agent** | Translation | Full export/schema mapping | Teams Developer Portal | High |
+| **GitHub Codespaces** | Deployment | None (same extension) | `git push` devcontainer.json | Very Low |
 
 Everything else should be inheritable unless it references Master-specific file paths or workflows.
 

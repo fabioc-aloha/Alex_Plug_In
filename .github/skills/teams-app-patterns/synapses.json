@@ -19,6 +19,12 @@
       "type": "references",
       "strength": 0.75,
       "reason": "Icon generation workflow ensures brand consistency across platforms"
+    },
+    {
+      "target": ".github/skills/release-process/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.7,
+      "reason": "Multi-heir release triggers M365 packaging after VS Code publish"
     }
   ],
   "triggers": [

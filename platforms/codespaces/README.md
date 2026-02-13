@@ -47,6 +47,7 @@ Copy `devcontainer.json` from this directory to your project's `.devcontainer/` 
 | `devcontainer.json`       | Template devcontainer config with Alex + GK setup |
 | `deploy.ps1`              | Deploys devcontainer to any target repository     |
 | `DEPLOYMENT-CHECKLIST.md` | Step-by-step validation checklist                 |
+| `USER-MANUAL.md`          | End-user guide for using Alex in Codespaces       |
 
 ## Deploy Script Options
 
@@ -87,6 +88,7 @@ your-project/
 
 ## Documentation
 
+- [User Manual](USER-MANUAL.md) — complete guide to using Alex in Codespaces
 - [Detailed Heir Architecture](../../alex_docs/platforms/CODESPACES-HEIR.md) — full feature matrix, persistence strategy, team deployment
 - [Platform Comparison](../../alex_docs/platforms/DEVELOPMENT-PLATFORMS-COMPARISON.md) — all platforms side-by-side
 - [VS Code Heir](../../alex_docs/platforms/VSCODE-HEIR.md) — parent heir documentation

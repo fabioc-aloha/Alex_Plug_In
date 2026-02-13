@@ -33,6 +33,13 @@
       "strength": 0.9,
       "when": "Preparing release package",
       "yields": "Heir sync validation steps"
+    },
+    {
+      "target": ".github/skills/teams-app-patterns/SKILL.md",
+      "type": "enables",
+      "strength": 0.7,
+      "when": "Multi-heir release — M365 packaging step",
+      "yields": "M365 Teams app packaging and deployment procedures"
     }
   ],
   "activationContexts": [

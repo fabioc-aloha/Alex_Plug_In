@@ -204,6 +204,7 @@ Codespaces is unique among heirs: it's the **only platform that requires zero co
 
 | Resource             | Link                                                                       |
 | -------------------- | -------------------------------------------------------------------------- |
+| **User Manual**      | [USER-MANUAL.md](../../platforms/codespaces/USER-MANUAL.md)                |
 | GitHub Codespaces    | <https://docs.github.com/en/codespaces>                                    |
 | devcontainer.json    | <https://containers.dev/implementors/json_reference/>                      |
 | VS Code Heir         | [VSCODE-HEIR.md](VSCODE-HEIR.md)                                           |

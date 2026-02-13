@@ -432,4 +432,33 @@ vsce show fabioc-aloha.alex-cognitive-architecture --json | ConvertFrom-Json | S
 
 ---
 
-Last updated: January 19, 2026 - v2.0.0 BINILNILIUM
+## 🌐 Multi-Heir Publishing
+
+After VS Code extension is published, deploy the other heirs:
+
+### M365 Copilot Agent
+
+- [ ] Navigate to `platforms/m365-copilot/`
+- [ ] Run `& ..\..\scripts\release-m365.ps1` to build the Teams app package
+- [ ] Verify `appPackage/build/appPackage.final.zip` created
+- [ ] Upload to [Teams Developer Portal](https://dev.teams.microsoft.com/apps)
+- [ ] If AADSTS530084 error: manual upload required (enterprise conditional access)
+
+### GitHub Codespaces
+
+- [ ] Verify `platforms/codespaces/devcontainer.json` is committed to main
+- [ ] Verify extension ID in devcontainer matches published version
+- [ ] No separate publish needed — Codespaces pulls from Marketplace automatically
+
+### Version Consistency Check
+
+```powershell
+# Verify all heirs reference the same version
+Select-String -Path platforms/vscode-extension/package.json -Pattern '"version"'
+Select-String -Path platforms/m365-copilot/appPackage/manifest.json -Pattern '"version"'
+Select-String -Path platforms/codespaces/README.md -Pattern 'Alex-v'
+```
+
+---
+
+Last updated: February 14, 2026 - v3.0.0 (added Multi-Heir Publishing)
