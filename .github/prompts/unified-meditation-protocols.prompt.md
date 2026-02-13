@@ -235,6 +235,7 @@ The Dream command provides automated validation, but conscious post-meditation r
 - [.github/instructions/dream-state-automation.instructions.md] (High, Integrates, Bidirectional) - "Phase 5 synapse validation via Dream command"
 - [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex consolidation sessions"
 - [.github/instructions/SYNAPSE-SCHEMA.md] (High, References, Forward) - "Schema reference for synapse creation during meditation"
+- [.github/skills/research-first-development/SKILL.md] (High, Integrates, Forward) - "Meditation consolidates research-first promotion outcomes and trifecta pattern"
 
 ### Activation Patterns
 - Meditation complete → Document in meditation history

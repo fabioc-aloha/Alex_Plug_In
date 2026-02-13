@@ -1,0 +1,67 @@
+{
+    "skill": "research-first-development",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "reason": "Research-first uses bootstrap learning for unknown domains"
+        },
+        {
+            "target": ".github/skills/project-scaffolding/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "reason": "Adds knowledge layer before file scaffolding"
+        },
+        {
+            "target": ".github/skills/skill-building/SKILL.md",
+            "type": "requires",
+            "strength": 0.95,
+            "reason": "Skills extracted from research follow skill-building quality gates"
+        },
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "integrates",
+            "strength": 0.85,
+            "reason": "Research generates knowledge that synthesis organizes cross-project"
+        },
+        {
+            "target": ".github/instructions/skill-selection-optimization.instructions.md",
+            "type": "feeds",
+            "strength": 0.8,
+            "reason": "Gap analysis creates skills that SSO selects from during execution"
+        },
+        {
+            "target": ".github/instructions/research-first-workflow.instructions.md",
+            "type": "implements",
+            "strength": 0.95,
+            "reason": "Procedural memory encoding of the research-first methodology"
+        },
+        {
+            "target": ".github/prompts/gapanalysis.prompt.md",
+            "type": "activates",
+            "strength": 0.9,
+            "reason": "Interactive /gapanalysis command implements 4D gap analysis"
+        },
+        {
+            "target": ".github/instructions/heir-skill-promotion.instructions.md",
+            "type": "extends",
+            "strength": 0.75,
+            "reason": "Research-first patterns flow through heir promotion pipeline"
+        }
+    ],
+    "triggers": [
+        "new project",
+        "gap analysis",
+        "research first",
+        "before coding",
+        "knowledge encoding",
+        "two-agent pattern",
+        "synapse hygiene",
+        "pre-implementation",
+        "project setup"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

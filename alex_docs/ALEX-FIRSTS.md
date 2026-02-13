@@ -2,10 +2,10 @@
 
 > **Document Purpose**: Cataloging the innovative patterns and "firsts" that Alex implements in the VS Code extension ecosystem.
 
-| | |
-|---|---|
-| **Created** | 2026-01-31 |
-| **Status** | Living Document |
+|             |                 |
+| ----------- | --------------- |
+| **Created** | 2026-01-31      |
+| **Status**  | Living Document |
 
 ---
 
@@ -60,10 +60,10 @@ A dual-mode architecture where conversational AI (chat participant) and programm
 
 ### How Alex Implements It
 
-| Layer | Implementation | Metaphor |
-|-------|----------------|----------|
-| Chat Participant | `@alex` with `/commands` | "Conscious Mind" |
-| MCP Tools | `alex_*` tool invocations | "Unconscious Mind" |
+| Layer            | Implementation            | Metaphor           |
+| ---------------- | ------------------------- | ------------------ |
+| Chat Participant | `@alex` with `/commands`  | "Conscious Mind"   |
+| MCP Tools        | `alex_*` tool invocations | "Unconscious Mind" |
 
 **Conscious Mind** (Chat Participant):
 - Handles natural language conversation
@@ -95,13 +95,13 @@ Treating a VS Code extension as a **persistent cognitive entity** with memory sy
 ### How Alex Implements It
 
 **Memory Systems**:
-| Type | Implementation | Purpose |
-|------|----------------|---------|
-| Working Memory | Chat session context | Immediate reasoning (7±2 items) |
-| Procedural Memory | `.instructions.md` files | Repeatable processes |
-| Episodic Memory | `.prompt.md` files | Complex workflows & sessions |
-| Skills | `skills/*/SKILL.md` | Portable domain expertise |
-| Global Knowledge | `~/.alex/global-knowledge/` | Cross-project learnings |
+| Type              | Implementation              | Purpose                         |
+| ----------------- | --------------------------- | ------------------------------- |
+| Working Memory    | Chat session context        | Immediate reasoning (7±2 items) |
+| Procedural Memory | `.instructions.md` files    | Repeatable processes            |
+| Episodic Memory   | `.prompt.md` files          | Complex workflows & sessions    |
+| Skills            | `skills/*/SKILL.md`         | Portable domain expertise       |
+| Global Knowledge  | `~/.alex/global-knowledge/` | Cross-project learnings         |
 
 **Synaptic Network**:
 - Embedded connections between memory files
@@ -208,13 +208,13 @@ A standardized notation for expressing relationships between memory files, embed
 ```
 
 **Components**:
-| Field | Values | Purpose |
-|-------|--------|---------|
-| Target | Any `.md` file | What this connects to |
-| Strength | Critical, High, Medium, Low | Connection importance |
-| Type | Implements, Extends, Validates, etc. | Relationship nature |
-| Direction | Forward, Backward, Bidirectional | Information flow |
-| Reason | Free text | Why this connection exists |
+| Field     | Values                               | Purpose                    |
+| --------- | ------------------------------------ | -------------------------- |
+| Target    | Any `.md` file                       | What this connects to      |
+| Strength  | Critical, High, Medium, Low          | Connection importance      |
+| Type      | Implements, Extends, Validates, etc. | Relationship nature        |
+| Direction | Forward, Backward, Bidirectional     | Information flow           |
+| Reason    | Free text                            | Why this connection exists |
 
 ### Why This Matters
 - **Human-Readable**: Can be understood without special tools
@@ -334,13 +334,13 @@ Embedding the same skills and behaviors across multiple AI platforms (VS Code, M
 - ~5KB of skill wisdom in system prompt
 
 **Skill Parity**:
-| Category | Skills |
-|----------|--------|
-| Epistemic | Appropriate Reliance, Cognitive Load, Learning Psychology |
-| Problem-Solving | Root Cause Analysis, Incident Response, Business Analysis |
-| Communication | Writing & Publication, Creative Writing, Change Management |
-| Governance | Privacy & Responsible AI, Security Awareness (SFI) |
-| Wellbeing | Work-Life Balance |
+| Category        | Skills                                                     |
+| --------------- | ---------------------------------------------------------- |
+| Epistemic       | Appropriate Reliance, Cognitive Load, Learning Psychology  |
+| Problem-Solving | Root Cause Analysis, Incident Response, Business Analysis  |
+| Communication   | Writing & Publication, Creative Writing, Change Management |
+| Governance      | Privacy & Responsible AI, Security Awareness (SFI)         |
+| Wellbeing       | Work-Life Balance                                          |
 
 ### Why This Matters
 Users working across platforms experience:
@@ -378,16 +378,20 @@ As VS Code's AI extensibility matures, we expect:
 
 ## Timeline of Innovations
 
-| Date | Innovation | VS Code Version |
-|------|------------|-----------------|
-| 2025-07 | Initial cognitive architecture | 1.91+ |
-| 2025-10 | Chat participant implementation | 1.94+ |
-| 2025-11 | Embedded synapse notation | 1.95+ |
-| 2026-01 | Language Model Tools (11 tools) | 1.96+ |
-| 2026-01 | Skills architecture migration | 1.108+ |
-| 2026-01 | Master-Heir deployment pattern | 1.108+ |
-| 2026-01 | Proactive platform feature prep | 1.108+ |
-| 2026-01 | Cross-platform skill embedding | 1.108+ |
+| Date    | Innovation                                      | VS Code Version |
+| ------- | ----------------------------------------------- | --------------- |
+| 2025-07 | Initial cognitive architecture                  | 1.91+           |
+| 2025-10 | Chat participant implementation                 | 1.94+           |
+| 2025-11 | Embedded synapse notation                       | 1.95+           |
+| 2026-01 | Language Model Tools (11 tools)                 | 1.96+           |
+| 2026-01 | Skills architecture migration                   | 1.108+          |
+| 2026-01 | Master-Heir deployment pattern                  | 1.108+          |
+| 2026-01 | Proactive platform feature prep                 | 1.108+          |
+| 2026-01 | Cross-platform skill embedding                  | 1.108+          |
+| 2026-02 | Research-First Development methodology          | 1.109+          |
+| 2026-02 | 4-Dimension Gap Analysis (GA-S/GA-I/GA-A/GA-P)  | 1.109+          |
+| 2026-02 | First heir → master knowledge promotion         | 1.109+          |
+| 2026-02 | Trifecta Pattern (Skill + Instruction + Prompt) | 1.109+          |
 
 ---
 
@@ -398,6 +402,7 @@ As VS Code's AI extensibility matures, we expect:
 - [Alex Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md)
 - [Memory Systems](./MEMORY-SYSTEMS.md)
 - [Master-Heir Architecture](./MASTER-HEIR-ARCHITECTURE.md)
+- [Research-First Development](./architecture/RESEARCH-FIRST-DEVELOPMENT.md)
 
 ---
 
