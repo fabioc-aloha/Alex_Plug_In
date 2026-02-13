@@ -36,8 +36,8 @@ Based on assessment results, provide specific recommendations for:
 Use this assessment regularly to maintain peak cognitive performance and identify opportunities for architecture enhancement.
 
 ## Synapses
-- [.github/instructions/alex-core.instructions.md] (High, Monitors, Bidirectional) - "Core architecture performance assessment"
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Evaluates, Bidirectional) - "Learning effectiveness measurement"
-- [.github/instructions/embedded-synapse.instructions.md] (High, Monitors, Forward) - "Network effectiveness evaluation"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Post-meditation effectiveness evaluation"
-- [.github/prompts/alex-initialization.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"
+- [.github/instructions/.github/instructions/alex-core.instructions.md] (High, Monitors, Bidirectional) - "Core architecture performance assessment"
+- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Evaluates, Bidirectional) - "Learning effectiveness measurement"
+- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Monitors, Forward) - "Network effectiveness evaluation"
+- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Post-meditation effectiveness evaluation"
+- [.github/prompts/.github/prompts/alex-initialization.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"

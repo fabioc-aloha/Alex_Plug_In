@@ -1,5 +1,5 @@
 ---
-name: "Localization & Internationalization (i18n/l10n)"
+name: "localization"
 description: "**Domain**: Software localization, internationalization, multilingual application development"
 ---
 
@@ -814,6 +814,111 @@ src/
         ├── fonts.ts        # Font registration
         └── translations.ts # PDF-specific translations
 ```
+
+---
+
+## Enterprise Localization Architecture
+
+### 4-Phase Implementation
+
+Localization effort scales non-linearly. Plan accordingly:
+
+| Phase | Scope | Effort | Output |
+|-------|-------|--------|--------|
+| **1. Foundation** | i18n architecture, string extraction | 10-15 hours | Translatable codebase |
+| **2. First Language** | One target language end-to-end | 20-40 hours | Proof of concept |
+| **3. Scale** | 5-10 languages, professional translation | 80-120 hours | Market coverage |
+| **4. Maintenance** | Ongoing string management, LQA | 200+ hours/year | Sustained quality |
+
+**Key insight**: Phase 1 (foundation) is the critical path. A well-architected Phase 1 makes Phases 2-4 incremental. A poor Phase 1 requires rework at every subsequent phase.
+
+### Text Expansion Ratios
+
+Translations are almost never the same length as English source:
+
+| Target Language | Expansion | Example |
+|----------------|-----------|---------|
+| German | +30% | "Settings" → "Einstellungen" |
+| French | +20% | "File" → "Fichier" |
+| Japanese | -30% | "Settings" → "設定" |
+| Arabic | +25% | Variable depending on formality |
+| Portuguese (BR) | +20% | "Dashboard" → "Painel de Controle" |
+| Chinese | -50% | "Configuration" → "配置" |
+
+**UI Impact**: Design with 40% expansion budget for Western languages. Use `min-width` not `width` for buttons and labels.
+
+### Browser Language Detection with sessionStorage Bridge
+
+For SPAs that need consistent language across page navigations:
+
+```typescript
+function detectAndPersistLanguage(): string {
+  // Check sessionStorage first (persists across navigation)
+  const stored = sessionStorage.getItem('detected-language');
+  if (stored && SUPPORTED_LOCALES.includes(stored)) return stored;
+  
+  // Detect from browser
+  const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+  const matched = match([browserLang], SUPPORTED_LOCALES, DEFAULT_LOCALE);
+  
+  // Persist for session
+  sessionStorage.setItem('detected-language', matched);
+  return matched;
+}
+```
+
+**Why sessionStorage**: `navigator.language` can differ between tabs (user changed browser settings). sessionStorage keeps the session consistent while allowing fresh detection on new sessions.
+
+---
+
+## Translation Quality Assurance (LQA)
+
+### Severity Tiers
+
+| Tier | Severity | Example | SLA |
+|------|----------|---------|-----|
+| **Critical** | Meaning changed or lost | "Delete" translated as "Save" | Immediate fix |
+| **Major** | Confusing or misleading | Gender/formality wrong for audience | Before release |
+| **Minor** | Grammatically awkward but understandable | Unnatural word order | Next sprint |
+| **Preferential** | Style/tone preference | Formal vs informal register | Backlog |
+
+### Language-Specific Intelligence
+
+Each language has unique QA concerns:
+
+| Language | Common Issues | Check For |
+|----------|--------------|-----------|
+| German | Compound nouns, gendered articles | Noun capitalization, article agreement |
+| French | Formal/informal "you" (vous/tu) | Consistent register throughout |
+| Japanese | Honorific levels (keigo) | Appropriate formality for context |
+| Arabic | Dual plural form, RTL numbers | Mixed LTR/RTL in technical content |
+| Portuguese | BR vs PT vocabulary | "Tela" (BR) vs "Ecrã" (PT) for "screen" |
+| Chinese | Simplified vs Traditional | Wrong variant for target market |
+
+### Pseudo-Localization Testing
+
+Before real translations, use pseudo-loc to find i18n bugs:
+
+```typescript
+// Pseudo-localization: wraps strings to test expansion + encoding
+function pseudoLocalize(text: string): string {
+  const charMap: Record<string, string> = {
+    'a': 'á', 'e': 'é', 'i': 'í', 'o': 'ó', 'u': 'ú',
+    'A': 'Á', 'E': 'É', 'I': 'Í', 'O': 'Ó', 'U': 'Ú',
+  };
+  
+  const accented = text.split('').map(c => charMap[c] || c).join('');
+  const expanded = accented + ' +++';  // Simulate 30% expansion
+  return `[${expanded}]`;  // Brackets show untranslated strings
+}
+// "Settings" → "[Séttíngs +++]"
+```
+
+**What pseudo-loc catches**:
+- Hardcoded strings (no brackets = not going through i18n)
+- Truncated text (expansion breaks UI)
+- Encoding issues (accented chars display wrong)
+- Concatenated strings (brackets in wrong place)
 
 ---
 

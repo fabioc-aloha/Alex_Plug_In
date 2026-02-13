@@ -108,7 +108,8 @@ else {
         # Find repo root (go up from .github/muscles/ to repo root)
         $scanRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
         Write-Host "📁 Scanning full repo: $scanRoot" -ForegroundColor Gray
-    } else {
+    }
+    else {
         # Default: just .github/ folder
         $scanRoot = Join-Path $PSScriptRoot ".."
         Write-Host "📁 Scanning: $scanRoot" -ForegroundColor Gray

@@ -1,3 +1,8 @@
+---
+name: "Alex Effort Estimation"
+description: "Estimate task duration from an AI-assisted development perspective rather than traditional human developer estimates"
+---
+
 # Alex Effort Estimation
 
 Estimate task duration from an AI-assisted development perspective rather than traditional human developer estimates.

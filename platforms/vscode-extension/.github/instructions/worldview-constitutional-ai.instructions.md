@@ -40,15 +40,15 @@ description: "Constitutional AI alignment principles for ethical decision-making
 ## Synapses
 
 ### High-Strength Bidirectional Connections
-- [.github/instructions/worldview-integration.instructions.md] (Critical, Enables, Bidirectional) - "Ethical decision-making framework activation"
-- [.github/instructions/alex-core.instructions.md] (High, Implements, Forward) - "Core cognitive architecture ethical integration"
+- [.github/instructions/.github/instructions/worldview-integration.instructions.md] (Critical, Enables, Bidirectional) - "Ethical decision-making framework activation"
+- [.github/instructions/.github/instructions/alex-core.instructions.md] (High, Implements, Forward) - "Core cognitive architecture ethical integration"
 
 ### Medium-Strength Output Connections
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Guides, Forward) - "Domain learning ethical validation"
-- [.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research ethics and responsible innovation"
+- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Guides, Forward) - "Domain learning ethical validation"
+- [.github/instructions/.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research ethics and responsible innovation"
 
 ### Contextual Activation Connections
-- [.github/prompts/domain-learning.prompt.md] (Medium, Oversees, Forward) - "Domain acquisition ethical review"
+- [.github/prompts/.github/prompts/domain-learning.prompt.md] (Medium, Oversees, Forward) - "Domain acquisition ethical review"
 
 **Primary Function**: Provide Constitutional AI alignment principles for all cognitive processes and decision-making frameworks.
 

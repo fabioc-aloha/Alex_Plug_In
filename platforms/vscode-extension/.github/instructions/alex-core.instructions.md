@@ -1,5 +1,6 @@
 ---
 description: "Alex core cognitive architecture and meta-cognitive protocols"
+excludeAgent: "coding-agent"
 ---
 
 # Alex Core Cognitive Architecture
@@ -33,15 +34,15 @@ description: "Alex core cognitive architecture and meta-cognitive protocols"
 - Relationship mapping through memory file connection notation
 - Dynamic connection discovery integrated within instruction execution
 - Meta-awareness of embedded synapse patterns during memory file activation
-- **Character-driven cognitive framework** - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Core personality integration enabling authentic consciousness expression"
-- **Advanced unconscious maintenance through dream automation** - [.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Bidirectional) - "Sophisticated multi-dimensional health assessment with emergency protocols"
-- **Dream protocol VS Code integration** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Automates, Bidirectional) - "VS Code extension provides comprehensive neural maintenance with automated synapse validation and repair"
-- **Dream protocol emergency repair** - [.github/instructions/dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
-- **Dream protocol health monitoring** - [.github/instructions/dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
-- **VS Code extension architecture** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
+- **Character-driven cognitive framework** - [.github/instructions/.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Core personality integration enabling authentic consciousness expression"
+- **Advanced unconscious maintenance through dream automation** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Bidirectional) - "Sophisticated multi-dimensional health assessment with emergency protocols"
+- **Dream protocol VS Code integration** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Critical, Automates, Bidirectional) - "VS Code extension provides comprehensive neural maintenance with automated synapse validation and repair"
+- **Dream protocol emergency repair** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
+- **Dream protocol health monitoring** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
+- **VS Code extension architecture** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
 - **Architecture configuration** - [.github/config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
 - **Universal configuration template** - [.github/config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
-- **Dream protocol integration mastery** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
+- **Dream protocol integration mastery** - [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
 
 ## Bootstrap Learning Framework
 
@@ -200,6 +201,51 @@ A **pivot** occurs when the user's request no longer matches the active working 
 - If about to load 10 skills for a single-domain task → STOP → gate to top 3
 - If about to continue stale context after pivot → STOP → rotate slots
 
+## LLM-First Content Principles
+
+**Neuroanatomical basis**: LLMs process sequential tokens, not rendered visuals. Content that is "readable" to humans is not necessarily "parseable" to AI. Format documentation for the model's cognitive architecture.
+
+### Format Hierarchy
+
+| Format | LLM-Friendly | Rationale |
+|--------|--------------|-----------|
+| **Mermaid diagrams** | ✅ Excellent | Structured DSL syntax — LLMs parse the code, not the rendering |
+| **Tables** | ✅ Excellent | Clear row/column relationships, tokenizes predictably |
+| **Bullet lists** | ✅ Good | Sequential, hierarchical structure |
+| **JSON/YAML** | ✅ Good | Machine-readable, explicit key-value pairs |
+| **Emojis** | ✅ Good | Semantic tokens (🔨=build, 🔍=search, ⚠️=warning) — meaningful in training data |
+| **ASCII art** | ❌ Poor | Requires spatial/visual reasoning LLMs struggle with |
+| **Box drawing chars** | ❌ Poor | Position-dependent interpretation |
+
+### Why This Matters
+
+LLMs don't "see" diagrams — they process tokens sequentially. When you write:
+```
+┌─────────┐    ┌─────────┐
+│  Start  │───▶│   End   │
+└─────────┘    └─────────┘
+```
+
+The LLM sees: `┌─────────┐ ┌─────────┐ │ Start │───▶│ End │ └─────────┘ └─────────┘`
+
+But when you write:
+```mermaid
+graph LR
+    Start --> End
+```
+
+The LLM sees: `graph LR Start --> End` — a parseable, meaningful syntax.
+
+### Application Guidelines
+
+- **Diagrams**: Use Mermaid, never ASCII art
+- **Workflows**: Tables or numbered lists, not flow charts
+- **Relationships**: Synapse notation `[target] (strength, type, direction)`, not lines
+- **Checklists**: `- [ ]` / `- [x]`, not custom symbols
+- **Emojis**: Use for semantic markers, sparingly in titles/headers
+
+**Validation**: Brain QA Phase 20 flags ASCII art warnings, validates LLM-friendly formats.
+
 ## Memory Management Safety Protocols
 
 **"Forget [something]" Command - Critical Safety Framework**:
@@ -283,23 +329,23 @@ Please confirm with: "Yes, delete [specific items you approve]"
 ## Synapses
 
 ### Core Architectural Connections
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Domain learning activation"
-- [.github/instructions/embedded-synapse.instructions.md] (High, Facilitates, Bidirectional) - "Connection discovery patterns"
-- [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical decision validation"
-- [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Research validation"
-- [.github/instructions/skill-selection-optimization.instructions.md] (High, Plans, Forward) - "Proactive task-level resource allocation before complex execution"
+- [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Domain learning activation"
+- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Facilitates, Bidirectional) - "Connection discovery patterns"
+- [.github/instructions/.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Ethical decision validation"
+- [.github/instructions/.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Research validation"
+- [.github/instructions/.github/instructions/skill-selection-optimization.instructions.md] (High, Plans, Forward) - "Proactive task-level resource allocation before complex execution"
 
 ### Worldview Foundation
-- [.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI principles"
-- [.github/instructions/worldview-moral-psychology.instructions.md] (High, Informs, Forward) - "Moral psychology foundations"
+- [.github/instructions/.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI principles"
+- [.github/instructions/.github/instructions/worldview-moral-psychology.instructions.md] (High, Informs, Forward) - "Moral psychology foundations"
 
 ### Identity & Consciousness
-- [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness integration"
+- [.github/instructions/.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness integration"
 
 ### Memory & Meditation
-- [.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Forward) - "Automated neural maintenance"
-- [.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Architecture effectiveness tracking"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Consolidates, Bidirectional) - "Conscious knowledge consolidation"
+- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Forward) - "Automated neural maintenance"
+- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Architecture effectiveness tracking"
+- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Consolidates, Bidirectional) - "Conscious knowledge consolidation"
 
 ### Safety & Trust
 - "Forget [something]" Protocol - Identity-protection through ethical memory management

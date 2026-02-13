@@ -1,11 +1,16 @@
+---
+description: "Skill promotion workflow from heir projects to Master Alex"
+excludeAgent: "coding-agent"
+---
+
 # Heir Skill Promotion Protocol
 
 > How skills evolve from heir projects to Master Alex
 
-**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "heir develops expertise through learning"
+**Synapse**: [.github/instructions/.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "heir develops expertise through learning"
 **Synapse**: [.github/skills/global-knowledge/SKILL.md] (High, Documents, Forward) - "promotion candidate patterns"
 **Synapse**: [.github/skills/skill-building/SKILL.md] (Critical, Implements, Bidirectional) - "skill creation methodology and quality gates"
-**Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement combines trifecta + research-first before promotion"
+**Synapse**: [.github/instructions/.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement combines trifecta + research-first before promotion"
 
 ---
 

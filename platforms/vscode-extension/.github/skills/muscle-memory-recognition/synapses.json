@@ -27,7 +27,7 @@
             "reason": "Muscles are part of project improvement trifectas"
         },
         {
-            "target": ".github/skills/deep-thinking/SKILL.md",
+            "target": ".github/instructions/deep-thinking.instructions.md",
             "type": "uses",
             "strength": 0.6,
             "reason": "Complex automation decisions benefit from deep analysis"

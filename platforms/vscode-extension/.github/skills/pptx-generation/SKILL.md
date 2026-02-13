@@ -1,3 +1,8 @@
+---
+name: "PPTX Generation"
+description: "Programmatic PowerPoint creation via PptxGenJS with data-driven slides and Markdown conversion"
+---
+
 # PPTX Generation Skill
 
 **Domain**: Presentation Generation  

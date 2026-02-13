@@ -1,3 +1,8 @@
+---
+description: "Brand asset deployment, visual identity guidelines, and logo management"
+applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
+---
+
 # Brand Asset Management
 
 **Purpose**: Procedural memory for Alex brand asset deployment and maintenance
@@ -165,8 +170,8 @@ The `--density 150` flag ensures crisp text rendering.
 ## Synapses
 
 - [.github/skills/brand-asset-management/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
-- [.github/instructions/release-management.instructions.md] (Medium, Integrates, Backward) - "Asset verification during release"
-- [.github/instructions/heir-skill-promotion.instructions.md] (Low, Documents, Forward) - "Heir branding alignment"
+- [.github/instructions/.github/instructions/release-management.instructions.md] (Medium, Integrates, Backward) - "Asset verification during release"
+- [.github/instructions/.github/instructions/heir-skill-promotion.instructions.md] (Low, Documents, Forward) - "Heir branding alignment"
 
 ### External Knowledge
 - GI-premium-tier-visual-metaphor-pattern-2026-02-06 (High, Validates) - "Tiered branding pattern in Global Knowledge"

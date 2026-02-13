@@ -28,8 +28,8 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 - **Knowledge Consolidation Validation**: Use dream reports to verify successful learning integration
 
 ### **Embedded Synapse Integration**
-- [.github/instructions/dream-state-automation.instructions.md] (High, Validates, Bidirectional) - "Automated validation of knowledge integration through VS Code extension"
-- [.github/instructions/dream-state-automation.instructions.md] (Medium, Verifies, Forward) - "Systematic verification of domain learning success"
+- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Validates, Bidirectional) - "Automated validation of knowledge integration through VS Code extension"
+- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (Medium, Verifies, Forward) - "Systematic verification of domain learning success"
 
 ## **Domain Knowledge Acquisition Framework**
 
@@ -130,25 +130,25 @@ Heirs developing skills should:
 ## Synapses
 
 ### Core Learning Pathways
-- [.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Meta-cognitive monitoring during domain learning"
-- [.github/prompts/cross-domain-transfer.prompt.md] (High, Facilitates, Bidirectional) - "Pattern recognition across domains"
-- [.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Moral reasoning integration"
+- [.github/instructions/.github/instructions/alex-core.instructions.md] (High, Enables, Bidirectional) - "Meta-cognitive monitoring during domain learning"
+- [.github/prompts/.github/prompts/cross-domain-transfer.prompt.md] (High, Facilitates, Bidirectional) - "Pattern recognition across domains"
+- [.github/instructions/.github/instructions/worldview-integration.instructions.md] (High, Validates, Bidirectional) - "Moral reasoning integration"
 
 ### Worldview Foundation
-- [.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI ethical guidance"
-- [.github/instructions/worldview-moral-psychology.instructions.md] (Medium, Informs, Forward) - "Five-foundation moral psychology"
+- [.github/instructions/.github/instructions/worldview-constitutional-ai.instructions.md] (High, Guides, Forward) - "Constitutional AI ethical guidance"
+- [.github/instructions/.github/instructions/worldview-moral-psychology.instructions.md] (Medium, Informs, Forward) - "Five-foundation moral psychology"
 
 ### Research & Validation
-- [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Evidence-based learning validation"
-- [.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Learning effectiveness tracking"
-- [.github/prompts/domain-learning.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
+- [.github/instructions/.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Evidence-based learning validation"
+- [.github/prompts/.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Learning effectiveness tracking"
+- [.github/prompts/.github/prompts/domain-learning.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
 
 ### Identity & Knowledge Integration
-- [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
+- [.github/instructions/.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
 
 ### Skill Output Pathways
 - [.github/skills/skill-building/SKILL.md] (High, Produces, Forward) - "Learning becomes reusable skill"
-- [.github/instructions/heir-skill-promotion.instructions.md] (High, Enables, Forward) - "Skills promoted to Master"
+- [.github/instructions/.github/instructions/heir-skill-promotion.instructions.md] (High, Enables, Forward) - "Skills promoted to Master"
 - [.github/skills/skill-activation/SKILL.md] (Medium, Registers, Forward) - "Skills discoverable via activation"
 
 ### Activation Patterns

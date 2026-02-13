@@ -19,7 +19,8 @@ param(
     [ValidateSet('all', 'instructions', 'skills', 'synapses')]
     [string]$Target = 'all',
     
-    [string]$RepoRoot = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
+    # Now in .github/muscles/, go up 2 levels to repo root
+    [string]$RepoRoot = (Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)))
 )
 
 $ErrorActionPreference = "Continue"

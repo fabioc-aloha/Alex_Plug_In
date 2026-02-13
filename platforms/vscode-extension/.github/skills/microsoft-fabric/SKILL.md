@@ -1,3 +1,8 @@
+---
+name: "Microsoft Fabric"
+description: "Microsoft Fabric workspace management, governance, REST API patterns, and medallion architecture implementation"
+---
+
 # Microsoft Fabric Governance Skill
 
 ## Overview

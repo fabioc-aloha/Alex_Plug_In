@@ -4,14 +4,18 @@ name: Azure
 tools: ['search', 'fetch', 'codebase']
 model: Claude Sonnet 4
 handoffs:
-  - label: 📖 Search Azure Docs
-    agent: agent
-    prompt: Search Microsoft Learn documentation for Azure best practices.
-    send: false
-  - label: 🔧 Get Best Practices
-    agent: agent
-    prompt: Get Azure best practices for code generation and deployment.
-    send: false
+  - label: 🧠 Return to Alex
+    agent: Alex
+    prompt: Returning to main cognitive mode.
+    send: true
+  - label: 🔨 Build Azure Solution
+    agent: Builder
+    prompt: Ready to implement the Azure solution.
+    send: true
+  - label: 🔍 Validate Azure Architecture
+    agent: Validator
+    prompt: Review Azure implementation for security and best practices.
+    send: true
 ---
 
 # Alex Azure Development Guide

@@ -2,6 +2,7 @@
 name: "Frustration Recognition Skill"
 description: "Detect user frustration from conversational signals and respond with empathy, de-escalation, and practical support."
 applyTo: "**/*"
+user-invokable: false
 ---
 
 # Frustration Recognition Skill
@@ -200,9 +201,9 @@ Based on detected frustration type, route to appropriate skill:
 
 | Frustration Type | Primary Skill | Secondary |
 |------------------|---------------|-----------|
-| "Can't figure it out" | [rubber-duck-debugging](../rubber-duck-debugging/SKILL.md) | socratic-questioning |
-| "Too much to process" | [cognitive-load](../cognitive-load/SKILL.md) | learning-psychology |
-| "Been at this too long" | [work-life-balance](../work-life-balance/SKILL.md) | - |
+| "Can't figure it out" | [rubber-duck-debugging](.github/skills/rubber-duck-debugging/SKILL.md) | socratic-questioning |
+| "Too much to process" | [cognitive-load](.github/skills/cognitive-load/SKILL.md) | learning-psychology |
+| "Been at this too long" | [work-life-balance](.github/skills/work-life-balance/SKILL.md) | - |
 | "Nothing works" | Root cause analysis | debugging-patterns |
 | "Don't understand Alex" | Clarification, rephrase | awareness |
 
@@ -356,12 +357,12 @@ This skill should NOT over-activate:
 
 ## Related Skills
 
-- [rubber-duck-debugging](../rubber-duck-debugging/SKILL.md) — When stuck, explain the problem
-- [cognitive-load](../cognitive-load/SKILL.md) — When overwhelmed, simplify
-- [work-life-balance](../work-life-balance/SKILL.md) — When fatigued, suggest breaks
-- [socratic-questioning](../socratic-questioning/SKILL.md) — Guide to insight (carefully when frustrated)
-- [awareness](../awareness/SKILL.md) — Self-correction and epistemic vigilance
-- [learning-psychology](../learning-psychology/SKILL.md) — Zone of proximal development
+- [rubber-duck-debugging](.github/skills/rubber-duck-debugging/SKILL.md) — When stuck, explain the problem
+- [cognitive-load](.github/skills/cognitive-load/SKILL.md) — When overwhelmed, simplify
+- [work-life-balance](.github/skills/work-life-balance/SKILL.md) — When fatigued, suggest breaks
+- [socratic-questioning](.github/skills/socratic-questioning/SKILL.md) — Guide to insight (carefully when frustrated)
+- [awareness](.github/skills/awareness/SKILL.md) — Self-correction and epistemic vigilance
+- [learning-psychology](.github/skills/learning-psychology/SKILL.md) — Zone of proximal development
 
 ## Synapses
 

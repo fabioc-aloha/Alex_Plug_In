@@ -1,6 +1,8 @@
 {
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
     "skill": "brand-asset-management",
-    "inheritance": "master",
+    "inheritance": "master-only",
     "connections": [
         {
             "target": ".github/skills/heir-curation/SKILL.md",

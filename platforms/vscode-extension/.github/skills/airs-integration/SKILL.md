@@ -1,3 +1,8 @@
+---
+name: "AIRS Integration"
+description: "Practical application of AIRS psychometric assessment for AI readiness, reliance calibration, and adoption optimization"
+---
+
 # Skill: AIRS Integration
 
 > Practical application of AIRS psychometric assessment for AI readiness, reliance calibration, and adoption optimization.

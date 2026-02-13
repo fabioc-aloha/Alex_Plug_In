@@ -149,7 +149,7 @@ Discover and pull new skills from the GK repository.
 ```
 
 **Project-Skill Matching**:
-Heirs detect project type and recommend relevant wishlist skills. See [skill-development](../skill-development/SKILL.md) for full protocol.
+Heirs detect project type and recommend relevant wishlist skills. See [skill-development](.github/skills/skill-development/SKILL.md) for full protocol.
 
 ## Integration Points
 

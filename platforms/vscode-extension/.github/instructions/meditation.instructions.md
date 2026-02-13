@@ -12,13 +12,13 @@ description: "Procedural steps for knowledge consolidation meditation sessions"
 
 ## Synapses
 
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Implements, Bidirectional) - "Comprehensive meditation workflow this instruction supports"
-- [.github/instructions/dream-state-automation.instructions.md] (High, Coordinates, Bidirectional) - "Dream precedes meditation; Phase 5 validates via Dream"
-- [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture optimization through meditation"
-- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Bidirectional) - "Connection strengthening through meditation"
-- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex sessions"
+- [.github/prompts/.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Implements, Bidirectional) - "Comprehensive meditation workflow this instruction supports"
+- [.github/instructions/.github/instructions/dream-state-automation.instructions.md] (High, Coordinates, Bidirectional) - "Dream precedes meditation; Phase 5 validates via Dream"
+- [.github/instructions/.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture optimization through meditation"
+- [.github/instructions/.github/instructions/embedded-synapse.instructions.md] (High, Validates, Bidirectional) - "Connection strengthening through meditation"
+- [.github/instructions/.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex sessions"
 - [.github/skills/meditation/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
-- [.github/instructions/self-actualization.instructions.md] (Medium, Integrates, Bidirectional) - "Self-actualization may trigger meditation for consolidation"
+- [.github/instructions/.github/instructions/self-actualization.instructions.md] (Medium, Integrates, Bidirectional) - "Self-actualization may trigger meditation for consolidation"
 
 ---
 

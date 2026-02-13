@@ -306,11 +306,11 @@ For dissertations involving scale development (like AIRS):
 
 ## Related Skills
 
-- [gamma-presentations](../gamma-presentations/SKILL.md) — AI-powered presentation generation
-- [academic-research](../academic-research/SKILL.md) — Research methodology
-- [practitioner-research](../practitioner-research/SKILL.md) — DBA/practitioner methodology
-- [socratic-questioning](../socratic-questioning/SKILL.md) — Question handling techniques
-- [academic-paper-drafting](../academic-paper-drafting/SKILL.md) — Writing and publication
+- [gamma-presentations](.github/skills/gamma-presentations/SKILL.md) — AI-powered presentation generation
+- [academic-research](.github/skills/academic-research/SKILL.md) — Research methodology
+- [practitioner-research](.github/skills/practitioner-research/SKILL.md) — DBA/practitioner methodology
+- [socratic-questioning](.github/skills/socratic-questioning/SKILL.md) — Question handling techniques
+- [academic-paper-drafting](.github/skills/academic-paper-drafting/SKILL.md) — Writing and publication
 
 ---
 

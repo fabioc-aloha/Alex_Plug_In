@@ -1,3 +1,8 @@
+---
+name: "Azure Architecture Patterns"
+description: "Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions"
+---
+
 # Skill: Azure Architecture Patterns
 
 > Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions.
@@ -419,6 +424,134 @@ Event Sources → Event Grid → Azure Functions
 
 ---
 
+## Module 6: MCP Tool Integration
+
+### Required Extensions & MCP Servers
+
+| Component | ID / Name | Purpose |
+|-----------|-----------|--------|
+| **VS Code Extension** | `ms-azuretools.vscode-azure-github-copilot` | Azure GitHub Copilot integration |
+| **VS Code Extension** | `ms-azuretools.vscode-azureresourcegroups` | Azure resource management |
+| **VS Code Extension** | `ms-vscode.azure-account` | Azure authentication |
+| **MCP Server** | `azure-mcp` | 40+ Azure tools (cloudarchitect, docs, services) |
+
+**Installation**:
+```bash
+# VS Code Extensions
+code --install-extension ms-azuretools.vscode-azure-github-copilot
+code --install-extension ms-azuretools.vscode-azureresourcegroups
+code --install-extension ms-vscode.azure-account
+
+# MCP Server (via VS Code settings.json or mcp.json)
+# Enabled via chat.mcp.gallery.enabled = true
+```
+
+### Fallback Patterns (When MCP Unavailable)
+
+If Azure MCP tools are not available, use these alternatives:
+
+| MCP Tool | Fallback Approach |
+|----------|-------------------|
+| `cloudarchitect` | Use WAF Assessment: https://aka.ms/waf-assessment |
+| `documentation` | Search https://learn.microsoft.com/azure/architecture |
+| `get_bestpractices` | Reference Azure Architecture Center patterns |
+| Service-specific tools | Use Azure Portal or `az` CLI directly |
+
+**Manual Architecture Design Process**:
+1. Review WAF pillars checklist in Module 1-5
+2. Use Azure Architecture Center reference architectures
+3. Validate with Azure Advisor in portal
+4. Apply patterns from this skill's modules
+
+### Available Azure MCP Tools
+
+Alex has access to 40+ Azure MCP tools for real-time architecture assistance:
+
+| Category | Tools | Use Cases |
+|----------|-------|-----------|
+| **Architecture Design** | `mcp_azure_mcp_cloudarchitect` | Interactive architecture design, WAF guidance |
+| **Documentation** | `mcp_azure_mcp_documentation` | Search Azure docs, best practices |
+| **Best Practices** | `mcp_azure_mcp_get_bestpractices` | Code gen, deployment, Functions patterns |
+| **Compute** | `mcp_azure_mcp_aks`, `mcp_azure_mcp_appservice`, `mcp_azure_mcp_functionapp` | Container orchestration, web apps, serverless |
+| **Data** | `mcp_azure_mcp_cosmos`, `mcp_azure_mcp_sql`, `mcp_azure_mcp_postgres` | Database recommendations |
+| **Security** | `mcp_azure_mcp_keyvault`, `mcp_azure_mcp_role` | Secrets management, RBAC |
+| **Monitoring** | `mcp_azure_mcp_monitor`, `mcp_azure_mcp_applicationinsights` | Observability setup |
+| **DevOps** | `mcp_azure_mcp_deploy`, `mcp_azure_mcp_azd` | Deployment automation |
+
+### Cloud Architect Tool
+
+The `mcp_azure_mcp_cloudarchitect` tool provides **interactive guided architecture design**:
+
+```text
+Invocation → Ask about user/company → 
+  Gather requirements → 
+    Build architecture by tier → 
+      Present with ASCII diagrams
+
+Architecture Tiers:
+├── Infrastructure (VNets, VMs, Load Balancers)
+├── Platform (App Service, AKS, Functions)
+├── Application (Logic Apps, API Management)
+├── Data (SQL, Cosmos, Storage)
+├── Security (Key Vault, WAF, DDoS)
+└── Operations (Monitor, Log Analytics)
+```
+
+The tool tracks:
+- **Explicit requirements** — Directly stated by user
+- **Implicit requirements** — Inferred from context
+- **Assumed requirements** — Industry/domain defaults
+
+### Best Practices Tool
+
+Use `mcp_azure_mcp_get_bestpractices` with these resource/action combinations:
+
+| Resource | Actions |
+|----------|---------|
+| `codegen` | `all` — Code generation patterns |
+| `deployment` | `all` — Deployment best practices |
+| `functions` | `all` — Azure Functions patterns |
+| `swa` | `all` — Static Web App guidance |
+| `coding-agent` | `all` — MCP setup for repos |
+
+### When to Use MCP Tools
+
+| Scenario | Tool | Why |
+|----------|------|-----|
+| "Design new Azure solution" | `cloudarchitect` | Interactive, pillar-aligned |
+| "What's the best way to..." | `documentation` | Search official docs |
+| "Generate Azure code" | `get_bestpractices` + specific tools | Current patterns |
+| "Cost optimization review" | `cloudarchitect` + `monitor` | Full picture |
+| "Security assessment" | `keyvault` + `role` + `documentation` | Multi-tool analysis |
+
+### Example: Interactive Architecture Session
+
+```
+User: "Design a solution for a retail e-commerce platform"
+
+Alex invokes: mcp_azure_mcp_cloudarchitect with:
+  - intent: "Design e-commerce architecture"
+  - nextQuestionNeeded: true
+  - state: {initial}
+
+Tool asks: "What's your role and company size?"
+User: "CTO of a mid-size retailer"
+
+Tool continues gathering:
+  - Expected traffic patterns
+  - Data residency requirements  
+  - Budget constraints
+  - Compliance needs (PCI-DSS for payments)
+
+Tool outputs:
+  - Component table with SKU recommendations
+  - ASCII architecture diagram
+  - WAF pillar alignment
+  - Cost estimation
+```
+
+---
+
 ## Activation Patterns
 
 | Trigger | Response |
@@ -429,10 +562,12 @@ Event Sources → Event Grid → Azure Functions
 | "cost", "optimize", "savings" | Module 3 |
 | "IaC", "Bicep", "observability" | Module 4 |
 | "performance", "scaling", "caching" | Module 5 |
+| "MCP", "cloud architect tool", "Azure tools" | Module 6 |
+| "design architecture interactively" | Invoke cloudarchitect tool |
 
 ---
 
-*Skill created: 2026-02-10 | Category: Cloud/Infrastructure | Status: Active*
+*Skill updated: 2026-02-14 | Category: Cloud/Infrastructure | Status: Active | MCP-Enhanced: Yes*
 
 ---
 

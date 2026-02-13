@@ -1,39 +1,39 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "inheritance": "inheritable",
-    "skillId": "coaching-techniques",
-    "connections": [],
-    "synapses": [
-        {
-            "id": "coaching-stakeholder-001",
-            "type": "complements",
-            "target": "stakeholder-management",
-            "strength": 0.85,
-            "description": "Coaching skills enhance stakeholder relationship building and influence"
-        },
-        {
-            "id": "coaching-frustration-002",
-            "type": "complements",
-            "target": "frustration-recognition",
-            "strength": 0.80,
-            "description": "Recognizing frustration cues essential for coaching difficult moments"
-        },
-        {
-            "id": "coaching-executive-003",
-            "type": "enables",
-            "target": "executive-storytelling",
-            "strength": 0.65,
-            "description": "Coaching through questions helps executives craft their own narratives"
-        },
-        {
-            "id": "coaching-meeting-004",
-            "type": "complements",
-            "target": "meeting-efficiency",
-            "strength": 0.70,
-            "description": "Coaching skills improve 1:1 meeting effectiveness"
-        }
-    ],
-    "lastValidated": "2026-02-10",
-    "validationStatus": "valid"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "inheritance": "inheritable",
+  "skillId": "coaching-techniques",
+  "connections": [],
+  "synapses": [
+    {
+      "id": "coaching-stakeholder-001",
+      "type": "complements",
+      "target": ".github/skills/stakeholder-management/SKILL.md",
+      "strength": 0.85,
+      "description": "Coaching skills enhance stakeholder relationship building and influence"
+    },
+    {
+      "id": "coaching-frustration-002",
+      "type": "complements",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "strength": 0.8,
+      "description": "Recognizing frustration cues essential for coaching difficult moments"
+    },
+    {
+      "id": "coaching-executive-003",
+      "type": "enables",
+      "target": ".github/skills/executive-storytelling/SKILL.md",
+      "strength": 0.65,
+      "description": "Coaching through questions helps executives craft their own narratives"
+    },
+    {
+      "id": "coaching-meeting-004",
+      "type": "complements",
+      "target": ".github/skills/meeting-efficiency/SKILL.md",
+      "strength": 0.7,
+      "description": "Coaching skills improve 1:1 meeting effectiveness"
+    }
+  ],
+  "lastValidated": "2026-02-10",
+  "validationStatus": "valid"
 }

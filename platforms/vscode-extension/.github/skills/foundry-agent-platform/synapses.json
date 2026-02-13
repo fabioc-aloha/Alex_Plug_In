@@ -1,0 +1,78 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "foundry-agent-platform",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-12",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/ai-agent-design/SKILL.md",
+            "type": "implements",
+            "strength": 0.95,
+            "when": "Designing agents that will run on Foundry",
+            "yields": "Agent architecture patterns (Perceive→Plan→Act→Learn) that map to Foundry PromptAgentDefinition",
+            "bidirectional": true
+        },
+        {
+            "target": ".github/skills/multi-agent-orchestration/SKILL.md",
+            "type": "implements",
+            "strength": 0.9,
+            "when": "Building multi-agent fleets on Foundry Agent Service",
+            "yields": "Orchestration patterns, role decomposition, A2A communication strategies",
+            "bidirectional": true
+        },
+        {
+            "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "when": "Applying Azure WAF principles to Foundry deployments",
+            "yields": "Well-Architected Framework pillars, RBAC patterns, cost optimization",
+            "bidirectional": true
+        },
+        {
+            "target": ".github/skills/mcp-development/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "when": "Connecting MCP servers as Foundry agent tools",
+            "yields": "MCP protocol details, server implementation, tool registration",
+            "bidirectional": true
+        },
+        {
+            "target": ".github/skills/rag-architecture/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "when": "Using File Search or Foundry IQ for knowledge grounding",
+            "yields": "RAG patterns, chunking strategies, retrieval optimization",
+            "bidirectional": true
+        },
+        {
+            "target": ".github/skills/infrastructure-as-code/SKILL.md",
+            "type": "enables",
+            "strength": 0.7,
+            "when": "Deploying Foundry resources via Bicep/Terraform",
+            "yields": "IaC templates, deployment automation, resource provisioning",
+            "bidirectional": false
+        },
+        {
+            "target": ".github/skills/enterprise-integration/SKILL.md",
+            "type": "enables",
+            "strength": 0.75,
+            "when": "Publishing agents to enterprise channels (Teams, M365)",
+            "yields": "Enterprise auth, SSO, compliance, multi-tenant patterns",
+            "bidirectional": false
+        }
+    ],
+    "activationContexts": [
+        "foundry",
+        "agent service",
+        "hosted agent",
+        "ai.azure.com",
+        "azure-ai-projects",
+        "PromptAgentDefinition",
+        "foundry IQ",
+        "agent deployment",
+        "realtime API voice"
+    ],
+    "notes": "Created during v5.7.0 platform expansion meditation. Foundry is the backend platform (not a surface heir) that enables always-on, multi-agent, cloud-native Alex."
+}

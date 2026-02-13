@@ -1,3 +1,8 @@
+---
+name: "Deep Work Optimization"
+description: "Focus blocks, distraction management, and flow state triggers for cognitively demanding work"
+---
+
 # Skill: Deep Work Optimization
 
 > Focus blocks, distraction management, and flow state triggers for cognitively demanding work.

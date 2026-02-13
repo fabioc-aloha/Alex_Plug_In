@@ -1,7 +1,6 @@
 ---
-name: "Markdown & Mermaid"
+name: "markdown-mermaid"
 description: "Clear documentation through visual excellence"
-applyTo: "**/*.md,**/mermaid*,**/diagram*,**/*readme*,**/*emoji*,**/*unicode*"
 ---
 
 # Markdown & Mermaid
@@ -558,6 +557,27 @@ flowchart LR
 4. **Gray arrows** (#57606a) — Neutral, doesn't compete with nodes
 5. **1.5-2px stroke-width** — Visible but not heavy
 6. **edgeLabelBackground: '#fff'** — GitHub doesn't support transparent
+
+### Fishbowl Pastel Palette (Alternative)
+
+*Softer palette with uniform dark text. Good for governance, compliance, and presentation diagrams.*
+
+| Purpose | Fill | Stroke | Text |
+| ------- | ---- | ------ | ---- |
+| Primary | `#cce5ff` | `#4a90d9` | `#333` |
+| Light Blue | `#b3d9ff` | `#4a90d9` | `#333` |
+| Lavender | `#e6d5f2` | `#8b6eb3` | `#333` |
+| Mint | `#c2f0d8` | `#4db37d` | `#333` |
+| Cream | `#fff3b3` | `#d4a849` | `#333` |
+| Soft Pink | `#ffcccc` | `#cc6666` | `#333` |
+
+**Init directive (Fishbowl):**
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
+```
+
+**When to choose Fishbowl over GitHub Pastel v2**: Use Fishbowl when all nodes need equal visual weight (e.g., governance structures, compliance flows). Use GitHub Pastel v2 when nodes carry semantic meaning that should be color-coded by category.
 
 ### Per-Diagram Theming (MANDATORY for consistency)
 

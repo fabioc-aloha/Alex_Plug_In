@@ -50,6 +50,13 @@
       "relationship": "complements",
       "strength": 0.7,
       "context": "Agent testing requires specialized evaluation approaches"
+    },
+    {
+      "target": ".github/skills/foundry-agent-platform/SKILL.md",
+      "relationship": "implements",
+      "strength": 0.9,
+      "context": "Foundry Agent Service is the cloud runtime for agent design patterns",
+      "bidirectional": true
     }
   ],
   "activationTriggers": [

@@ -13,18 +13,19 @@ Memory files define *what* and *how*; muscles *do*.
 
 ## Current Inventory
 
-| Script                        | Language   | Lines | Purpose                    | Inheritance |
-| ----------------------------- | ---------- | ----- | -------------------------- | ----------- |
-| `audit-master-alex.ps1`       | PowerShell | 399   | 22-point pre-release audit | master-only |
-| `brain-qa.ps1`                | PowerShell | 521   | Deep structure validation  | inheritable |
-| `build-extension-package.ps1` | PowerShell | 275   | VSIX packaging             | master-only |
-| `dream-cli.ts`                | TypeScript | 96    | Neural maintenance CLI     | inheritable |
-| `gamma-generator.js`          | JavaScript | 690   | Markdown → Gamma slides    | inheritable |
-| `normalize-paths.ps1`         | PowerShell | 164   | Path consistency fixes     | inheritable |
-| `pptxgen-cli.ts`              | TypeScript | 116   | PowerPoint generation      | inheritable |
-| `sync-architecture.js`        | JavaScript | 481   | Master → Heir sync         | master-only |
-| `validate-skills.ps1`         | PowerShell | 98    | Skill file validation      | inheritable |
-| `validate-synapses.ps1`       | PowerShell | 143   | Synapse target validation  | inheritable |
+| Script                        | Language   | Lines | Purpose                      | Inheritance |
+| ----------------------------- | ---------- | ----- | ---------------------------- | ----------- |
+| `audit-master-alex.ps1`       | PowerShell | 399   | 22-point pre-release audit   | master-only |
+| `brain-qa.ps1`                | PowerShell | 521   | Deep structure validation    | inheritable |
+| `build-extension-package.ps1` | PowerShell | 295   | VSIX packaging               | master-only |
+| `dream-cli.ts`                | TypeScript | 96    | Neural maintenance CLI       | inheritable |
+| `fix-fence-bug.ps1`           | PowerShell | 127   | Detect/fix VS Code fence bug | master-only |
+| `gamma-generator.js`          | JavaScript | 690   | Markdown → Gamma slides      | inheritable |
+| `normalize-paths.ps1`         | PowerShell | 164   | Path consistency fixes       | inheritable |
+| `pptxgen-cli.ts`              | TypeScript | 134   | PowerPoint generation        | inheritable |
+| `sync-architecture.js`        | JavaScript | 481   | Master → Heir sync           | master-only |
+| `validate-skills.ps1`         | PowerShell | 98    | Skill file validation        | inheritable |
+| `validate-synapses.ps1`       | PowerShell | 143   | Synapse target validation    | inheritable |
 
 ## Language Selection
 
@@ -101,6 +102,20 @@ From heir via npm scripts:
 npm run sync-architecture
 npm run dream
 npm run validate-skills
+```
+
+### Special Requirements
+
+| Muscle                 | Requirement                                                                |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `pptxgen-cli.ts`       | **Must run from heir directory** — needs heir's node_modules for pptxgenjs |
+| `sync-architecture.js` | Must run from repo root (uses `npm run sync-architecture`)                 |
+| `gamma-generator.js`   | Requires Playwright (`npm install playwright` in heir)                     |
+
+```powershell
+# pptxgen-cli.ts example (run from heir context)
+cd platforms/vscode-extension
+npx tsx ../../.github/muscles/pptxgen-cli.ts --help
 ```
 
 ---

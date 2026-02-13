@@ -321,10 +321,10 @@ When heirs successfully practice a wishlist skill:
 
 ## Related Skills
 
-- [skill-building](../skill-building/SKILL.md) — How to *create* skills (for heirs)
-- [bootstrap-learning](../bootstrap-learning/SKILL.md) — Domain-agnostic learning
-- [self-actualization](../self-actualization/SKILL.md) — Deep self-assessment
-- [meditation](../meditation/SKILL.md) — Consolidation protocols
+- [skill-building](.github/skills/skill-building/SKILL.md) — How to *create* skills (for heirs)
+- [bootstrap-learning](.github/skills/bootstrap-learning/SKILL.md) — Domain-agnostic learning
+- [self-actualization](.github/skills/self-actualization/SKILL.md) — Deep self-assessment
+- [meditation](.github/skills/meditation/SKILL.md) — Consolidation protocols
 
 ---
 

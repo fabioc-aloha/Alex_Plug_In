@@ -170,9 +170,9 @@ When identifying a muscle opportunity:
 
 ## Related Skills
 
-- [Bootstrap Learning](../bootstrap-learning/SKILL.md) - Parent skill for learning-to-automation flow
-- [Research-First Development](../research-first-development/SKILL.md) - Research before building muscles
-- [Architecture Health](../architecture-health/SKILL.md) - Validate muscle integration
+- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Parent skill for learning-to-automation flow
+- [Research-First Development](.github/skills/research-first-development/SKILL.md) - Research before building muscles
+- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate muscle integration
 
 ## Synapses
 

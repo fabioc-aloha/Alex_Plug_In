@@ -1,3 +1,8 @@
+---
+name: "Azure DevOps Automation"
+description: "CI/CD pipelines, infrastructure as code, and deployment automation for Azure workloads"
+---
+
 # Skill: Azure DevOps Automation
 
 > CI/CD pipelines, infrastructure as code, and deployment automation for Azure workloads.

@@ -1,90 +1,90 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "inheritance": "inheritable",
-    "skillId": "academic-paper-drafting",
-    "version": "1.0.0",
-    "lastUpdated": "2026-02-10",
-    "connections": [],
-    "synapses": [
-        {
-            "target": "writing-publication",
-            "type": "conceptual",
-            "strength": "critical",
-            "direction": "incoming",
-            "context": "General academic writing patterns and principles"
-        },
-        {
-            "target": "academic-research",
-            "type": "conceptual",
-            "strength": "critical",
-            "direction": "incoming",
-            "context": "Research methodology and thesis/dissertation patterns"
-        },
-        {
-            "target": "practitioner-research",
-            "type": "procedural",
-            "strength": "strong",
-            "direction": "incoming",
-            "context": "Practitioner paper style for applied research"
-        },
-        {
-            "target": "knowledge-synthesis",
-            "type": "procedural",
-            "strength": "strong",
-            "direction": "incoming",
-            "context": "Literature review synthesis patterns"
-        },
-        {
-            "target": "dissertation-defense",
-            "type": "procedural",
-            "strength": "strong",
-            "direction": "bidirectional",
-            "context": "Dissertation-to-paper pipeline post-defense"
-        },
-        {
-            "target": "grant-writing",
-            "type": "conceptual",
-            "strength": "moderate",
-            "direction": "bidirectional",
-            "context": "Overlapping persuasive academic writing skills"
-        },
-        {
-            "target": "gamma-presentations",
-            "type": "procedural",
-            "strength": "moderate",
-            "direction": "outgoing",
-            "context": "Conference presentation slides from paper"
-        },
-        {
-            "target": "creative-writing",
-            "type": "conceptual",
-            "strength": "weak",
-            "direction": "incoming",
-            "context": "Narrative techniques for HBR-style articles"
-        }
-    ],
-    "activationPatterns": [
-        "paper",
-        "manuscript",
-        "journal",
-        "conference",
-        "CHI",
-        "HBR",
-        "Harvard Business Review",
-        "Cognitive Systems Research",
-        "Minds and Machines",
-        "publication",
-        "submit",
-        "draft",
-        "write paper",
-        "academic writing"
-    ],
-    "inhibitionPatterns": [],
-    "venueMapping": {
-        "CHI": "HCI, interaction design, user studies",
-        "HBR": "Business practice, executive audience",
-        "CSR": "Cognitive architecture, AI systems",
-        "M&M": "Philosophy of AI, consciousness"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "inheritance": "inheritable",
+  "skillId": "academic-paper-drafting",
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-10",
+  "connections": [],
+  "synapses": [
+    {
+      "target": ".github/skills/writing-publication/SKILL.md",
+      "type": "conceptual",
+      "strength": "critical",
+      "direction": "incoming",
+      "context": "General academic writing patterns and principles"
+    },
+    {
+      "target": ".github/skills/academic-research/SKILL.md",
+      "type": "conceptual",
+      "strength": "critical",
+      "direction": "incoming",
+      "context": "Research methodology and thesis/dissertation patterns"
+    },
+    {
+      "target": ".github/skills/practitioner-research/SKILL.md",
+      "type": "procedural",
+      "strength": "strong",
+      "direction": "incoming",
+      "context": "Practitioner paper style for applied research"
+    },
+    {
+      "target": ".github/skills/knowledge-synthesis/SKILL.md",
+      "type": "procedural",
+      "strength": "strong",
+      "direction": "incoming",
+      "context": "Literature review synthesis patterns"
+    },
+    {
+      "target": ".github/skills/dissertation-defense/SKILL.md",
+      "type": "procedural",
+      "strength": "strong",
+      "direction": "bidirectional",
+      "context": "Dissertation-to-paper pipeline post-defense"
+    },
+    {
+      "target": ".github/skills/grant-writing/SKILL.md",
+      "type": "conceptual",
+      "strength": "moderate",
+      "direction": "bidirectional",
+      "context": "Overlapping persuasive academic writing skills"
+    },
+    {
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "type": "procedural",
+      "strength": "moderate",
+      "direction": "outgoing",
+      "context": "Conference presentation slides from paper"
+    },
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "type": "conceptual",
+      "strength": "weak",
+      "direction": "incoming",
+      "context": "Narrative techniques for HBR-style articles"
     }
+  ],
+  "activationPatterns": [
+    "paper",
+    "manuscript",
+    "journal",
+    "conference",
+    "CHI",
+    "HBR",
+    "Harvard Business Review",
+    "Cognitive Systems Research",
+    "Minds and Machines",
+    "publication",
+    "submit",
+    "draft",
+    "write paper",
+    "academic writing"
+  ],
+  "inhibitionPatterns": [],
+  "venueMapping": {
+    "CHI": "HCI, interaction design, user studies",
+    "HBR": "Business practice, executive audience",
+    "CSR": "Cognitive architecture, AI systems",
+    "M&M": "Philosophy of AI, consciousness"
+  }
 }

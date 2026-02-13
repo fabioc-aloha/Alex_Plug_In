@@ -1,0 +1,67 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "prompt-activation",
+    "version": "1.0.0",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": ".github/skills/skill-activation/SKILL.md",
+            "type": "mirrors",
+            "strength": 0.95,
+            "note": "Same metacognitive pattern applied to different memory type - skill-activation for skills, prompt-activation for prompts"
+        },
+        {
+            "target": ".github/instructions/skill-selection-optimization.instructions.md",
+            "type": "extends",
+            "strength": 0.8,
+            "note": "SSO Phase 1b should also scan prompt index for proactive workflow loading"
+        },
+        {
+            "target": ".github/skills/muscle-memory-recognition/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "note": "Opportunity detection section identifies muscle candidates"
+        },
+        {
+            "target": ".github/prompts/unified-meditation-protocols.prompt.md",
+            "type": "surfaces",
+            "strength": 0.9,
+            "note": "End-of-session signals trigger meditation workflow recall"
+        },
+        {
+            "target": ".github/prompts/release.prompt.md",
+            "type": "surfaces",
+            "strength": 0.9,
+            "note": "Release keywords trigger release workflow recall"
+        },
+        {
+            "target": ".github/prompts/learn.prompt.md",
+            "type": "surfaces",
+            "strength": 0.9,
+            "note": "Learning intent triggers structured learning protocol"
+        },
+        {
+            "target": ".github/prompts/selfactualize.prompt.md",
+            "type": "surfaces",
+            "strength": 0.85,
+            "note": "Deep thinking requests activate self-actualization or meditation"
+        }
+    ],
+    "inhibitors": [
+        {
+            "condition": "Single-step task with no workflow",
+            "target": "prompt scanning",
+            "note": "Skip prompt scanning — overkill for simple operations"
+        }
+    ],
+    "activationBoost": [
+        "multi-step workflow",
+        "session type keywords",
+        "process guidance",
+        "pattern recognition",
+        "memory recall request",
+        "deep thinking",
+        "do you remember"
+    ]
+}

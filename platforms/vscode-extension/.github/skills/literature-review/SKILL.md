@@ -1,3 +1,8 @@
+---
+name: "Literature Review"
+description: "Systematic literature search, synthesis, gap identification, and narrative construction for academic research"
+---
+
 # Skill: Literature Review
 
 > Systematic literature search, synthesis, gap identification, and narrative construction for academic research.

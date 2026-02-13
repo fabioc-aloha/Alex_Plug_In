@@ -1,0 +1,67 @@
+{
+  "skill": "release-preflight",
+  "inheritance": "master-only",
+  "connections": [
+    {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "requires",
+      "strength": 0.95,
+      "note": "Run brain QA before any release"
+    },
+    {
+      "target": ".github/skills/git-workflow/SKILL.md",
+      "type": "requires",
+      "strength": 0.95
+    },
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "implements",
+      "strength": 0.9
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "applies-to",
+      "strength": 0.85
+    },
+    {
+      "target": ".github/skills/m365-agent-debugging/SKILL.md",
+      "type": "applies-to",
+      "strength": 0.8
+    },
+    {
+      "target": ".github/skills/release-process/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.95,
+      "note": "Preflight validates; release-process publishes. Always use together."
+    },
+    {
+      "target": ".github/skills/master-alex-audit/SKILL.md",
+      "type": "supports",
+      "strength": 0.85,
+      "note": "Audit before preflight — catches version drift, branding issues (v5.1.0 lesson)"
+    }
+  ],
+  "activationBoost": [
+    "release",
+    "publish",
+    "deploy",
+    "version",
+    "bump",
+    "marketplace",
+    "ship",
+    "pre-release",
+    "beta"
+  ],
+  "triggers": [
+    "release",
+    "deploy",
+    "ship",
+    "version",
+    "changelog",
+    "preflight",
+    "checklist",
+    "go-live"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

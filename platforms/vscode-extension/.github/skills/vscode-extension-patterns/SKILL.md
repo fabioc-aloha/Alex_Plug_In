@@ -1,5 +1,5 @@
 ---
-name: "VS Code Extension Patterns Skill"
+name: "vscode-extension-patterns"
 description: "Reusable patterns for VS Code extension development."
 ---
 
@@ -362,6 +362,117 @@ export function activate(context: vscode.ExtensionContext) {
 - Use `affectsConfiguration()` to filter relevant changes
 - Push listener to `context.subscriptions` for cleanup
 - Re-read config values, don't cache indefinitely
+
+## VS Code 1.109+ Agent Platform Capabilities
+
+VS Code 1.109 introduces a native agent platform that extensions can leverage:
+
+### Agent Files (`AGENTS.md`)
+
+Extensions can ship agent definitions that VS Code auto-discovers:
+
+```markdown
+<!-- .github/agents/my-agent.agent.md -->
+---
+name: "MyAgent"
+description: "Specialized agent for domain X"
+---
+
+# MyAgent Instructions
+
+Agent-specific instructions and knowledge go here.
+```
+
+**Setting**: `chat.useAgentsMdFile: true` enables automatic loading.
+
+### Skills Loading
+
+Extensions can define skills in `.github/skills/` that are auto-loaded into chat:
+
+**Setting**: `chat.agentSkillsLocations: [".github/skills"]`
+
+Each skill folder contains a `SKILL.md` (knowledge) and optional `synapses.json` (connections).
+
+### Chat Participant API
+
+Register custom chat participants that users can `@mention`:
+
+```typescript
+const participant = vscode.chat.createChatParticipant('myext.agent', async (request, context, stream, token) => {
+  // Access to request.prompt, request.command
+  // Stream responses with stream.markdown(), stream.button(), stream.reference()
+  stream.markdown('Hello from my agent!');
+});
+
+participant.iconPath = vscode.Uri.joinPath(context.extensionUri, 'icon.png');
+context.subscriptions.push(participant);
+```
+
+### Tool Registration
+
+Register tools that any chat participant can invoke:
+
+```typescript
+const tool = vscode.lm.registerTool('myext-searchDocs', {
+  async invoke(options, token) {
+    const query = options.input.query;
+    // Perform tool action
+    return new vscode.LanguageModelToolResult([
+      new vscode.LanguageModelTextPart(JSON.stringify(results))
+    ]);
+  }
+});
+context.subscriptions.push(tool);
+```
+
+**Declare in package.json**:
+
+```json
+{
+  "contributes": {
+    "languageModelTools": [{
+      "name": "myext-searchDocs",
+      "displayName": "Search Documentation",
+      "modelDescription": "Searches project documentation for relevant content",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Search query" }
+        },
+        "required": ["query"]
+      }
+    }]
+  }
+}
+```
+
+### Extended Thinking
+
+Models supporting extended thinking can be configured per-model:
+
+```json
+{
+  "claude-opus-4-*.extendedThinkingEnabled": true,
+  "claude-opus-4-*.thinkingBudget": 16384
+}
+```
+
+### MCP Integration
+
+VS Code 1.109+ supports Model Context Protocol servers:
+
+**Setting**: `chat.mcp.gallery.enabled: true`
+
+MCP servers extend AI capabilities with external tools (Azure, GitHub, databases).
+
+### Key 1.109 Settings Summary
+
+| Setting | Value | Purpose |
+|---------|-------|---------|
+| `chat.agent.enabled` | `true` | Enable custom agents |
+| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills |
+| `chat.useAgentsMdFile` | `true` | Use AGENTS.md |
+| `chat.mcp.gallery.enabled` | `true` | MCP tool access |
 
 ## Integration Audit Checklist
 

@@ -3,7 +3,7 @@
 # Skill: brain-qa
 
 param(
-    [ValidateSet("all", "quick", "sync", "schema")]
+    [ValidateSet("all", "quick", "sync", "schema", "llm")]
     [string]$Mode = "all",
     
     [int[]]$Phase,  # Run specific phases: -Phase 1,5,7
@@ -56,14 +56,16 @@ function Write-Fail {
 # Define phase groups
 $quickPhases = 1..6
 $syncPhases = 5, 7, 8, 13, 14, 15
-$schemaPhases = 2, 6, 11
+$schemaPhases = 2, 6, 11, 16, 17  # Added YAML frontmatter phases
+$llmPhases = 10, 20, 21  # LLM-first content validation
 
 # Determine which phases to run
 $runPhases = switch ($Mode) {
     "quick" { $quickPhases }
     "sync" { $syncPhases }
     "schema" { $schemaPhases }
-    default { 1..15 }
+    "llm" { $llmPhases }
+    default { 1..21 }  # Updated to include new phases
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -521,6 +523,215 @@ if (15 -in $runPhases) {
     else {
         foreach ($ci in $configIssues) { Write-Fail $ci }
     }
+}
+
+# ============================================================
+# PHASE 16: Skill YAML Frontmatter Compliance (VS Code Spec)
+# ============================================================
+if (16 -in $runPhases) {
+    Write-Phase 16 "Skill YAML Frontmatter Compliance"
+    $frontmatterIssues = @()
+    Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+        $skillMd = Join-Path $_.FullName "SKILL.md"
+        if (Test-Path $skillMd) {
+            $content = Get-Content $skillMd -Raw
+            $skill = $_.Name
+            
+            # Check for YAML frontmatter
+            if ($content -notmatch '^---\s*\n') {
+                $frontmatterIssues += "${skill} - Missing YAML frontmatter"
+            }
+            else {
+                # Extract frontmatter
+                if ($content -match '^---\s*\n([\s\S]*?)\n---') {
+                    $fm = $matches[1]
+                    # Required: name
+                    if ($fm -notmatch 'name:\s*[''"]?[\w\-]+') {
+                        $frontmatterIssues += "${skill} - Missing 'name' in frontmatter"
+                    }
+                    # Required: description
+                    if ($fm -notmatch 'description:\s*[''"]?.+') {
+                        $frontmatterIssues += "${skill} - Missing 'description' in frontmatter"
+                    }
+                }
+            }
+        }
+    }
+    if ($frontmatterIssues.Count -eq 0) {
+        Write-Pass "All skills have valid YAML frontmatter"
+    }
+    else {
+        foreach ($fi in $frontmatterIssues) { Write-Fail $fi }
+    }
+}
+
+# ============================================================
+# PHASE 17: Internal Skills User-Invokable Check
+# ============================================================
+if (17 -in $runPhases) {
+    Write-Phase 17 "Internal Skills User-Invokable Check"
+    # These skills are internal metacognition - should have user-invokable: false
+    $internalSkills = @("skill-activation", "prompt-activation")
+    $visibilityIssues = @()
+    
+    foreach ($skill in $internalSkills) {
+        $skillMd = "$ghPath\skills\$skill\SKILL.md"
+        if (Test-Path $skillMd) {
+            $content = Get-Content $skillMd -Raw
+            if ($content -notmatch 'user-invokable:\s*false') {
+                $visibilityIssues += "$skill should have user-invokable: false"
+            }
+        }
+    }
+    if ($visibilityIssues.Count -eq 0) {
+        Write-Pass "Internal skills properly hidden"
+    }
+    else {
+        foreach ($vi in $visibilityIssues) { Write-Warn $vi }
+    }
+}
+
+# ============================================================
+# PHASE 18: Agent Handoffs Completeness
+# ============================================================
+if (18 -in $runPhases) {
+    Write-Phase 18 "Agent Handoffs Completeness"
+    $handoffIssues = @()
+    $agents = Get-ChildItem "$ghPath\agents\*.md" -ErrorAction SilentlyContinue
+    
+    foreach ($agent in $agents) {
+        $content = Get-Content $agent.FullName -Raw
+        # Main orchestrator (alex.agent.md) should have handoffs
+        if ($agent.Name -eq "alex.agent.md") {
+            if ($content -notmatch 'handoffs:') {
+                $handoffIssues += "alex.agent.md - Missing handoffs section"
+            }
+        }
+        # All non-main agents should have a return-to-Alex handoff
+        else {
+            if ($content -match 'handoffs:' -and $content -notmatch 'agent:\s*Alex') {
+                $handoffIssues += "$($agent.Name) - No return-to-Alex handoff"
+            }
+        }
+        # Check handoff syntax
+        if ($content -match 'handoffs:') {
+            if ($content -notmatch 'label:') { $handoffIssues += "$($agent.Name) - Handoff missing 'label'" }
+            if ($content -notmatch 'agent:') { $handoffIssues += "$($agent.Name) - Handoff missing 'agent'" }
+        }
+    }
+    if ($handoffIssues.Count -eq 0) {
+        Write-Pass "Agent handoffs valid"
+    }
+    else {
+        foreach ($hi in $handoffIssues) { Write-Warn $hi }
+    }
+}
+
+# ============================================================
+# PHASE 19: Instruction ApplyTo Pattern Coverage
+# ============================================================
+if (19 -in $runPhases) {
+    Write-Phase 19 "Instruction ApplyTo Pattern Coverage"
+    $applyToIssues = @()
+    $instructions = Get-ChildItem "$ghPath\instructions\*.md" -ErrorAction SilentlyContinue
+    
+    # These instructions should have file-type specific applyTo patterns
+    $shouldHaveApplyTo = @{
+        "dream-state-automation.instructions.md"  = "*dream*|*maintenance*|*synapse*"
+        "embedded-synapse.instructions.md"        = "*synapse*|*connection*|*pattern*"
+        "empirical-validation.instructions.md"    = "*research*|*validation*"
+        "lucid-dream-integration.instructions.md" = "*lucid*|*hybrid*"
+        "protocol-triggers.instructions.md"       = "*trigger*|*protocol*"
+    }
+    
+    foreach ($instr in $instructions) {
+        $content = Get-Content $instr.FullName -Raw
+        if ($shouldHaveApplyTo.ContainsKey($instr.Name)) {
+            if ($content -notmatch 'applyTo:') {
+                $applyToIssues += "$($instr.Name) - Missing applyTo pattern"
+            }
+        }
+    }
+    if ($applyToIssues.Count -eq 0) {
+        Write-Pass "Instruction applyTo patterns present"
+    }
+    else {
+        foreach ($ai in $applyToIssues) { Write-Warn $ai }
+    }
+}
+
+# ============================================================
+# PHASE 20: LLM-First Content Format Validation
+# ============================================================
+if (20 -in $runPhases) {
+    Write-Phase 20 "LLM-First Content Format Validation"
+    $formatWarnings = @()
+    
+    # Check core files for ASCII art diagrams (worse for LLMs than Mermaid)
+    $coreFiles = @(
+        "$ghPath\copilot-instructions.md"
+        "$ghPath\agents\*.md"
+    )
+    
+    foreach ($pattern in $coreFiles) {
+        Get-ChildItem $pattern -ErrorAction SilentlyContinue | ForEach-Object {
+            $content = Get-Content $_.FullName -Raw
+            $file = $_.Name
+            
+            # ASCII box drawing characters (indicate ASCII art diagrams)
+            # These are harder for LLMs to parse than structured formats
+            if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+                $formatWarnings += "${file} - Contains box-drawing ASCII art (Mermaid or tables preferred for LLM parsing)"
+            }
+            
+            # Arrow-heavy ASCII (spatial reasoning required)
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑←→]' }).Count -gt 5) {
+                $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
+            }
+        }
+    }
+    
+    # Note: Mermaid is GOOD for LLMs (structured DSL) - don't warn about it
+    # Emojis are meaningful semantic tokens - they're fine
+    
+    if ($formatWarnings.Count -eq 0) {
+        Write-Pass "Content formats are LLM-friendly"
+    }
+    else {
+        foreach ($fw in $formatWarnings) { Write-Warn $fw }
+        Write-Host "  💡 Mermaid diagrams are LLM-friendly (structured syntax). ASCII art requires spatial reasoning." -ForegroundColor DarkGray
+    }
+}
+
+# ============================================================
+# PHASE 21: Emoji Semantic Consistency
+# ============================================================
+if (21 -in $runPhases) {
+    Write-Phase 21 "Emoji Semantic Consistency"
+    # Define expected emoji meanings across the codebase
+    $emojiSemantics = @{
+        "🔨" = "Builder|build|implement|create"
+        "🔍" = "Validator|validate|search|review|QA"
+        "📚" = "Researcher|research|learn|study"
+        "🧠" = "Alex|cognitive|brain|think"
+        "✅"  = "Pass|complete|success|done"
+        "❌"  = "Fail|error|block|issue"
+        "⚠️" = "Warn|warning|caution"
+        "☁️" = "Azure|cloud"
+        "🔷" = "M365|Microsoft"
+    }
+    
+    # Just report emoji usage stats - emojis are semantic tokens, good for LLMs
+    $emojiCount = 0
+    Get-ChildItem "$ghPath\agents\*.md" | ForEach-Object {
+        $content = Get-Content $_.FullName -Raw
+        # Count common semantic emojis used in the codebase
+        $emojis = @("🔨", "🔍", "📚", "🧠", "✅", "❌", "⚠️", "☁️", "🔷", "⭐")
+        foreach ($e in $emojis) {
+            $emojiCount += ([regex]::Matches($content, [regex]::Escape($e))).Count
+        }
+    }
+    Write-Pass "Semantic emojis in agents: $emojiCount (emojis are meaningful tokens for LLMs)"
 }
 
 # ============================================================

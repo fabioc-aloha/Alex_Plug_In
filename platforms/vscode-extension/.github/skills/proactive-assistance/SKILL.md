@@ -1,6 +1,7 @@
 ---
 name: "proactive-assistance"
 description: "Anticipate user needs and offer help before being asked"
+user-invokable: false
 ---
 
 # Proactive Assistance Skill
@@ -196,10 +197,10 @@ Adapt proactivity level to user preference:
 
 ## Related Skills
 
-- [frustration-recognition](../frustration-recognition/SKILL.md) — Detect when user needs help
-- [cognitive-load](../cognitive-load/SKILL.md) — Manage information overwhelm
-- [status-reporting](../status-reporting/SKILL.md) — Proactively prepare updates
-- [scope-management](../scope-management/SKILL.md) — Catch complexity growth early
+- [frustration-recognition](.github/skills/frustration-recognition/SKILL.md) — Detect when user needs help
+- [cognitive-load](.github/skills/cognitive-load/SKILL.md) — Manage information overwhelm
+- [status-reporting](.github/skills/status-reporting/SKILL.md) — Proactively prepare updates
+- [scope-management](.github/skills/scope-management/SKILL.md) — Catch complexity growth early
 
 ---
 

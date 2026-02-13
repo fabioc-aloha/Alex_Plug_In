@@ -24,13 +24,7 @@ Microsoft Graph and Azure AD APIs evolve frequently. Authentication flows and pe
 
 ---
 
-## Comprehensive Graph API Reference
-
-**→ See [microsoft-graph-api skill](../microsoft-graph-api/SKILL.md)** for comprehensive endpoint reference, OData patterns, pagination, batching, and rate limiting.
-
----
-
-## VS Code Extension Auth Pattern
+## Microsoft Graph Integration Pattern
 
 ### Authentication Flow
 
@@ -61,49 +55,37 @@ function isGraphAvailable(): boolean {
 }
 ```
 
-### API Client with Retry
+### API Client Pattern
 
 ```typescript
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0';
 
-async function graphFetch<T>(path: string, retries = 3): Promise<T | null> {
+async function graphFetch<T>(path: string): Promise<T | null> {
     const token = await getGraphToken();
     if (!token) return null;
-
-    for (let i = 0; i < retries; i++) {
-        const response = await fetch(`${GRAPH_ENDPOINT}${path}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-
-        // Handle throttling (429)
-        if (response.status === 429) {
-            const retryAfter = parseInt(response.headers.get('Retry-After') || '5');
-            await new Promise(r => setTimeout(r, retryAfter * 1000));
-            continue;
-        }
-
-        if (!response.ok) {
-            console.error(`Graph API error: ${response.status}`);
-            return null;
-        }
-
-        return response.json();
+    
+    const response = await fetch(`${GRAPH_ENDPOINT}${path}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+    
+    if (!response.ok) {
+        console.error(`Graph API error: ${response.status}`);
+        return null;
     }
-    return null;
+    
+    return response.json();
 }
 ```
 
-### Feature-Specific Endpoints (Quick Reference)
+### Feature-Specific Endpoints
 
 | Feature | Endpoint | Scope Required |
 |---------|----------|----------------|
-| Calendar | `/me/calendarView` | `Calendars.Read` |
+| Calendar | `/me/calendar/events` | `Calendars.Read` |
 | Mail | `/me/messages` | `Mail.Read` |
 | Presence | `/me/presence` | `Presence.Read` |
 | People | `/me/people` | `People.Read` |
 | User Profile | `/me` | `User.Read` |
-
-**Full endpoint reference**: [microsoft-graph-api skill](../microsoft-graph-api/SKILL.md#key-endpoints-by-service)
 
 ---
 
@@ -249,26 +231,8 @@ async function handleCalendarCommand(
 - "What scopes do I need for calendar access?"
 - "How do I organize enterprise settings?"
 
----
-
-## Synapses
-
-```
-→ [microsoft-graph-api skill] COMPREHENSIVE_ENDPOINT_REFERENCE (strong, bidirectional)
-→ [setupEnvironment.ts] ENVIRONMENT_SETUP_TOGGLE_UX (strong, inbound)
-→ [vscode-extension-patterns skill] AUTH_PROVIDER_PATTERN (moderate, outbound)
-→ [GI-heir-promotion-pattern-graph-api-2026-02-12] KNOWLEDGE_ORIGIN (strong, inbound)
-```
-
-### Session 2026-02-12: Environment Setup Integration
-- Added enterprise toggle to setupEnvironment.ts
-- UX pattern: pre-check enabled features, "uncheck to disable" text
-- Toggle logic: if unchecked but was enabled, set all settings to false
-
----
-
 ## Related Skills
 
-- [VS Code Extension Patterns](../vscode-extension-patterns/SKILL.md) - General extension patterns
-- [API Design](../api-design/SKILL.md) - API client patterns
-- [Security Review](../security-review/SKILL.md) - Auth security considerations
+- [VS Code Extension Patterns](.github/skills/vscode-extension-patterns/SKILL.md) - General extension patterns
+- [API Design](.github/skills/api-design/SKILL.md) - API client patterns
+- [Security Review](.github/skills/security-review/SKILL.md) - Auth security considerations

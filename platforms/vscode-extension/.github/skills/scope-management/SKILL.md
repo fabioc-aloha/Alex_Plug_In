@@ -254,10 +254,10 @@ Alert when:
 
 ## Related Skills
 
-- [proactive-assistance](../proactive-assistance/SKILL.md) — Detect scope growth early
-- [status-reporting](../status-reporting/SKILL.md) — Report scope health
-- [alex-effort-estimation](../alex-effort-estimation/SKILL.md) — Scope affects estimates
-- [project-management](../project-management/SKILL.md) — Overall project tracking
+- [proactive-assistance](.github/skills/proactive-assistance/SKILL.md) — Detect scope growth early
+- [status-reporting](.github/skills/status-reporting/SKILL.md) — Report scope health
+- [alex-effort-estimation](.github/skills/alex-effort-estimation/SKILL.md) — Scope affects estimates
+- [project-management](.github/skills/project-management/SKILL.md) — Overall project tracking
 
 ---
 

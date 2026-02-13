@@ -8,8 +8,8 @@
  */
 
 import * as path from 'path';
-import { parseMarkdownToSlides, generateAndSavePresentation, SlideContent, PresentationOptions } from '../src/generators/pptxGenerator';
-import * as fs from 'fs-extra';
+import * as fs from 'fs/promises';
+import { parseMarkdownToSlides, generateAndSavePresentation, SlideContent, PresentationOptions } from '../../platforms/vscode-extension/src/generators/pptxGenerator';
 
 // Simple argument parser
 function parseArgs(): Record<string, string> {
@@ -72,7 +72,9 @@ async function main(): Promise<void> {
     if (inputFile) {
         // Parse markdown file
         const mdPath = path.resolve(inputFile);
-        if (!await fs.pathExists(mdPath)) {
+        try {
+            await fs.access(mdPath);
+        } catch {
             console.error(`Error: File not found: ${mdPath}`);
             process.exit(1);
         }

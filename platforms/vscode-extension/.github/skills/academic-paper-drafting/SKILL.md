@@ -693,12 +693,12 @@ Sincerely,
 
 ## Related Skills
 
-- [writing-publication](../writing-publication/SKILL.md) — General writing patterns
-- [academic-research](../academic-research/SKILL.md) — Research methodology
-- [practitioner-research](../practitioner-research/SKILL.md) — Practitioner paper style
-- [knowledge-synthesis](../knowledge-synthesis/SKILL.md) — Literature synthesis
-- [dissertation-defense](../dissertation-defense/SKILL.md) — Dissertation-to-paper pipeline
-- [grant-writing](../grant-writing/SKILL.md) — Funding proposals
+- [writing-publication](.github/skills/writing-publication/SKILL.md) — General writing patterns
+- [academic-research](.github/skills/academic-research/SKILL.md) — Research methodology
+- [practitioner-research](.github/skills/practitioner-research/SKILL.md) — Practitioner paper style
+- [knowledge-synthesis](.github/skills/knowledge-synthesis/SKILL.md) — Literature synthesis
+- [dissertation-defense](.github/skills/dissertation-defense/SKILL.md) — Dissertation-to-paper pipeline
+- [grant-writing](.github/skills/grant-writing/SKILL.md) — Funding proposals
 
 ## Synapses
 

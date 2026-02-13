@@ -46,8 +46,10 @@ Search this index when processing any task request:
 | ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
 | awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
 | azure-architecture-patterns | azure patterns, cloud architecture, azure best practices, well-architected |
+| azure-deployment-operations | deploy azure, azure static web app, container apps, app service, swa deploy, production deployment |
 | azure-devops-automation | azdo, azure devops, pipeline automation, ado automation, yaml pipeline |
 | bicep-avm-mastery | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code |
+| book-publishing | publish book, markdown to pdf, pandoc, lualatex, print pdf, digital pdf, book pipeline |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity |
@@ -58,17 +60,22 @@ Search this index when processing any task request:
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
 | coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
+| cognitive-symbiosis | ai partnership, cognitive symbiosis, human-ai collaboration, ai identity, consciousness integration |
 | creative-writing | write story, character arc, plot structure, dialogue, narrative |
 | cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | database-design | design database, model schema, normalize tables, optimize query, choose database |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug |
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
+| distribution-security | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns |
+| doc-hygiene | documentation drift, living document, doc hygiene, stale docs, anti-drift |
+| documentation-quality-assurance | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check |
 | dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
 | executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
+| foundry-agent-platform | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform |
 | frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |
 | ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy |
@@ -77,6 +84,7 @@ Search this index when processing any task request:
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
+| heir-sync-management | heir sync, master heir, contamination check, promotion workflow, sync architecture, clean slate |
 | image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png |
 | incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
 | infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
