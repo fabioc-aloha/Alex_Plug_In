@@ -647,13 +647,30 @@ export function createSynapseRegex(): RegExp {
  * Open the Copilot Agent/Chat panel with fallback.
  * Tries Agent mode first, falls back to chat panel if unavailable.
  */
-export async function openChatPanel(): Promise<void> {
+/**
+ * Open the Copilot Chat panel, optionally pre-filling a prompt.
+ * When query is provided, it is typed directly into the chat input —
+ * no clipboard copy/paste needed. Falls back gracefully.
+ */
+export async function openChatPanel(query?: string): Promise<void> {
+    const opts = query ? { query } : undefined;
     try {
-        await vscode.commands.executeCommand("workbench.action.chat.openAgent");
+        await vscode.commands.executeCommand("workbench.action.chat.openAgent", opts);
     } catch {
         try {
-            await vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+            if (query) {
+                await vscode.commands.executeCommand("workbench.action.chat.open", opts);
+            } else {
+                await vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+            }
         } catch {
+            // Last resort: copy to clipboard so the user can paste manually
+            if (query) {
+                await vscode.env.clipboard.writeText(query);
+                vscode.window.showInformationMessage(
+                    "Prompt copied to clipboard. Paste in Copilot Chat (Ctrl+V) and press Enter."
+                );
+            }
             vscode.window.showWarningMessage(
                 "Could not open Copilot Chat. Make sure GitHub Copilot Chat extension is installed and up to date."
             );

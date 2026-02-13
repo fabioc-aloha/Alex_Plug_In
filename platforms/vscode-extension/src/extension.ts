@@ -851,12 +851,8 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
         // Open chat with audit prompt
         const auditType = selected.label.replace(/\$\([^)]+\)\s*/, '');
         
-        // Copy prompt to clipboard and open Agent mode
-        await vscode.env.clipboard.writeText(`Run ${auditType.toLowerCase()} on this project`);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🔍 ${auditType} prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        // Send prompt directly to Agent chat
+        await openChatPanel(`Run ${auditType.toLowerCase()} on this project`);
         
         endLog(true);
       } catch (error) {
@@ -898,12 +894,8 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
         const checkType = selected.label.replace(/\$\([^)]+\)\s*/, '');
         
-        // Copy prompt to clipboard and open Agent mode
-        await vscode.env.clipboard.writeText(`Run ${checkType.toLowerCase()} check for release`);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🚀 ${checkType} prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        // Send prompt directly to Agent chat
+        await openChatPanel(`Run ${checkType.toLowerCase()} check for release`);
 
         endLog(true);
       } catch (error) {
@@ -948,23 +940,14 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
         // If no text, open Agent chat with a general code review prompt
         if (!selectedText) {
           const prompt = `Review the code in the current workspace for issues, improvements, and best practices. Focus on:\n1. Code quality and readability\n2. Potential bugs or edge cases\n3. Performance considerations\n4. Security concerns\n5. Adherence to project conventions`;
-          await vscode.env.clipboard.writeText(prompt);
-          await openChatPanel();
-          vscode.window.showInformationMessage(
-            `📋 Code review prompt copied. Paste in Agent chat (Ctrl+V).`
-          );
+          await openChatPanel(prompt);
           endLog(true);
           return;
         }
         
-        // Copy prompt with selected code to clipboard and open Agent mode
+        // Send prompt with selected code directly to Agent chat
         const prompt = `Review this code from ${fileName} for issues, improvements, and best practices:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
-        await vscode.env.clipboard.writeText(prompt);
-        
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `📋 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1024,12 +1007,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
         }
         
         const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
-        await vscode.env.clipboard.writeText(prompt);
-        
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🐛 Code from ${fileName} copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1067,12 +1045,7 @@ You are my rubber duck. I need to explain my problem to you.
 
 **Start by asking:** "What problem are you trying to solve?"${context}`;
 
-        await vscode.env.clipboard.writeText(prompt);
-        
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          "🦆 Rubber duck prompt copied. Paste in Agent chat (Ctrl+V) to start."
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1137,11 +1110,7 @@ ${selectedText}
 
 Focus on: purpose, data flow, key design decisions, and any non-obvious behavior.`;
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `📚 Explanation prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1211,11 +1180,7 @@ Show:
 3. Explain each transformation and its benefit
 4. Any tradeoffs to consider`;
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🔧 Refactoring prompt for ${goal.value} copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1276,11 +1241,7 @@ For each finding:
 - Risk explanation
 - Secure fix with code example`;
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🛡️ Security review prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1343,11 +1304,7 @@ Include:
 
 Output ONLY the documented code, ready to paste.`;
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `📝 Documentation prompt (${docFormat}) copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1405,11 +1362,7 @@ For each change:
 - Explain WHY it's simpler (not just how)
 - Ensure no behavior changes`;
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `✨ Simplification prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -1469,36 +1422,29 @@ For each change:
           }
         }
 
-        const diagramType = selected.label.replace(/\$\([^)]+\)\s*/, '');
-        
-        // Create a new untitled markdown file with a template
-        const content = `# ${diagramType}
-
-${contextDescription}${contextCode ? `\`\`\`${languageId}\n${contextCode}\n\`\`\`\n\n` : ''}## Diagram
-
-\`\`\`mermaid
-${selected.value}
-    %% Use Copilot (Ctrl+I) here to generate the diagram
-    %% Or delete this and describe what you want
-\`\`\`
-`;
-        
-        const doc = await vscode.workspace.openTextDocument({
-          content,
-          language: "markdown"
-        });
-        const newEditor = await vscode.window.showTextDocument(doc);
-        
-        // Position cursor inside the mermaid block for easy Copilot invocation
-        const mermaidLine = content.split('\n').findIndex(line => line.includes(selected.value));
-        if (mermaidLine >= 0) {
-          const position = new vscode.Position(mermaidLine + 1, 4);
-          newEditor.selection = new vscode.Selection(position, position);
+        // If no context from selection/file, ask for a description
+        let userDescription = "";
+        if (!contextCode) {
+          const input = await vscode.window.showInputBox({
+            prompt: `Describe what the ${selected.label.replace(/\$\([^)]+\)\s*/, '')} should show`,
+            placeHolder: "e.g. User authentication flow with login, MFA, and session management",
+            ignoreFocusOut: true,
+          });
+          if (!input) {
+            endLog(true);
+            return;
+          }
+          userDescription = input;
         }
-        
-        vscode.window.showInformationMessage(
-          `📊 Press Ctrl+I to generate ${diagramType} with Copilot`
-        );
+
+        const diagramType = selected.label.replace(/\$\([^)]+\)\s*/, '');
+
+        // Build prompt for Agent chat to generate the diagram
+        const codeBlock = contextCode ? `\n\n\`\`\`${languageId}\n${contextCode}\n\`\`\`` : '';
+        const description = userDescription ? `\n\nDescription: ${userDescription}` : '';
+        const prompt = `Generate a Mermaid ${diagramType} (${selected.value}).${contextDescription ? `\n${contextDescription}` : ''}${codeBlock}${description}\n\nCreate the diagram in a new markdown file with the Mermaid code block. Make the diagram comprehensive and well-labeled.`;
+
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -2048,12 +1994,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         const frameworkName = framework.label.replace(/\$\([^)]+\)\s*/, '');
         
         const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
-        await vscode.env.clipboard.writeText(prompt);
-        
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🧪 Test prompt for ${fileName} copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {
@@ -2188,11 +2129,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
             break;
         }
         
-        await vscode.env.clipboard.writeText(prompt);
-        await openChatPanel();
-        vscode.window.showInformationMessage(
-          `🔍 ${reviewName} prompt copied. Paste in Agent chat (Ctrl+V).`
-        );
+        await openChatPanel(prompt);
         
         endLog(true);
       } catch (error) {

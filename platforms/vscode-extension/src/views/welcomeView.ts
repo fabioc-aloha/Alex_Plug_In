@@ -180,9 +180,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           const skill = message.skill || 'code-quality';
           const skillName = message.skillName || skill;
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
-          await vscode.env.clipboard.writeText(prompt);
-          await openChatPanel();
-          vscode.window.showInformationMessage(`${skillName} prompt copied. Paste in Agent chat (Ctrl+V).`);
+          await openChatPanel(prompt);
           break;
         }
         case "openMarketplace":
@@ -204,24 +202,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           vscode.commands.executeCommand("alex.enterprise.signIn");
           break;
         case "viewCalendar":
-          await vscode.env.clipboard.writeText("@alex /calendar");
-          await openChatPanel();
-          vscode.window.showInformationMessage("Calendar command copied. Paste in Agent chat (Ctrl+V).");
+          await openChatPanel("@alex /calendar");
           break;
         case "viewMail":
-          await vscode.env.clipboard.writeText("@alex /mail unread");
-          await openChatPanel();
-          vscode.window.showInformationMessage("Mail command copied. Paste in Agent chat (Ctrl+V).");
+          await openChatPanel("@alex /mail unread");
           break;
         case "viewContext":
-          await vscode.env.clipboard.writeText("@alex /context");
-          await openChatPanel();
-          vscode.window.showInformationMessage("Context command copied. Paste in Agent chat (Ctrl+V).");
+          await openChatPanel("@alex /context");
           break;
         case "searchPeople":
-          await vscode.env.clipboard.writeText("@alex /people ");
-          await openChatPanel();
-          vscode.window.showInformationMessage("People search copied. Paste in Agent chat (Ctrl+V) and add your search term.");
+          await openChatPanel("@alex /people ");
           break;
         case "refresh":
           this.refresh();
@@ -539,6 +529,34 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       'markdown-mermaid': 'Diagrams'
     };
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
+
+    // Persona-specific recommended quick actions
+    const personaActions: Record<string, Array<{ cmd: string; icon: string; label: string }>> = {
+      'developer':        [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateTests', icon: '🧪', label: 'Generate Tests' }],
+      'academic':         [{ cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
+      'researcher':       [{ cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
+      'technical-writer': [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }],
+      'architect':        [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }],
+      'data-engineer':    [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
+      'devops':           [{ cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'releasePreflight', icon: '🚀', label: 'Release Preflight' }],
+      'content-creator':  [{ cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'generateImageFromSelection', icon: '🖼️', label: 'Illustration' }],
+      'fiction-writer':   [{ cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }],
+      'game-developer':   [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
+      'project-manager':  [{ cmd: 'importGitHubIssues', icon: '📋', label: 'Import Issues' }, { cmd: 'reviewPR', icon: '👁️', label: 'Review PR' }, { cmd: 'showGoals', icon: '🎯', label: 'Goals' }],
+      'security':         [{ cmd: 'codeReview', icon: '👀', label: 'Security Review' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }],
+      'student':          [{ cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }, { cmd: 'rubberDuck', icon: '🦆', label: 'Rubber Duck' }, { cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }],
+      'job-seeker':       [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }],
+      'presenter':        [{ cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
+      'power-user':       [{ cmd: 'releasePreflight', icon: '🚀', label: 'Release Preflight' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'dream', icon: '💭', label: 'Dream' }],
+    };
+    const personaId = persona?.id || 'developer';
+    const recommendedActions = personaActions[personaId] || personaActions['developer']!;
+    const recommendedActionsHtml = recommendedActions.map(a =>
+      `<button class="action-btn recommended" data-cmd="${a.cmd}" title="Recommended for ${personaName}">
+                    <span class="action-icon">${a.icon}</span>
+                    <span class="action-text">${a.label}</span>
+                </button>`
+    ).join('\n                ');
 
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
@@ -1159,11 +1177,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">${recommendedSkillName}</span>
                     <span class="recommended-badge">\u2192</span>
                 </button>
+                ${recommendedActionsHtml}
                 
                 <div class="action-group-label">CORE</div>
                 <button class="action-btn" data-cmd="workingWithAlex" title="Learn how to work effectively with Alex">
                     <span class="action-icon">🎓</span>
                     <span class="action-text">Working with Alex</span>
+                </button>
+                <button class="action-btn" data-cmd="openBrainAnatomy" title="Explore Alex's cognitive brain anatomy">
+                    <span class="action-icon">🧠</span>
+                    <span class="action-text">Brain Anatomy</span>
                 </button>
                 <button class="action-btn" data-cmd="openChat">
                     <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
