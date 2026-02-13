@@ -1235,9 +1235,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🔍</span>
                     <span class="action-text">Search Knowledge</span>
                 </button>
-                <button class="action-btn" data-cmd="generateImageFromSelection" title="Generate an image from description">
+                <button class="action-btn" data-cmd="generateImageFromSelection" title="Generate an SVG illustration from description">
                     <span class="action-icon">🖼️</span>
-                    <span class="action-text">Generate Image</span>
+                    <span class="action-text">Generate Illustration</span>
                 </button>
                 <button class="action-btn" data-cmd="generateDiagram" title="Generate Mermaid diagrams from code or text">
                     <span class="action-icon">📊</span>

@@ -143,7 +143,7 @@
       },
       {
         "command": "alex.generateImageFromSelection",
-        "title": "Generate Image from Selection",
+        "title": "Generate Illustration from Description",
         "icon": "$(file-media)"
       },
       {

@@ -9,9 +9,190 @@ import {
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { autoIncrementGoals } from './goals';
 import { getLanguageIdFromPath, openChatPanel } from '../shared/utils';
+import { 
+    fetchIconifyIcon, 
+    fetchDiceBearAvatar, 
+    ICONIFY_PREFIXES, 
+    DICEBEAR_STYLES 
+} from '../services/illustrationService';
+import { 
+    STOCK_ILLUSTRATIONS, 
+    LUCIDE_ICONS, 
+    ICON_CATEGORIES, 
+    STOCK_CATEGORIES 
+} from '../generators/illustrationIcons';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
+}
+
+/**
+ * Generate an SVG illustration from a natural language description.
+ * 
+ * Strategy:
+ * 1. Use the LLM to interpret the description and generate SVG code
+ * 2. Falls back to keyword-matching against built-in icons/illustrations
+ * 3. Falls back to Iconify API for icon-style illustrations
+ * 4. Falls back to DiceBear for character/avatar requests
+ */
+async function generateIllustrationFromDescription(description: string): Promise<string | null> {
+    // Strategy 1: Use LLM to generate SVG directly
+    try {
+        const models = await vscode.lm.selectChatModels({ vendor: 'copilot', family: 'gpt-4o' });
+        if (models.length > 0) {
+            const model = models[0];
+            const messages = [
+                vscode.LanguageModelChatMessage.User(
+                    `You are an SVG illustration generator. Given a description, create a clean, modern SVG illustration.
+
+Rules:
+- Output ONLY the SVG code, no markdown fences, no explanation
+- Use a viewBox of "0 0 400 300" 
+- Use a professional color palette (blues: #0550ae, #ddf4ff; greens: #1a7f37, #dffbe0; grays: #57606a, #d0d7de)
+- Keep illustrations simple and geometric — abstract business/tech style
+- Use shapes (rect, circle, ellipse, path, line, polygon) with rounded corners where appropriate
+- Add subtle fills and strokes for depth
+- Include relevant text labels if the description implies them
+- The SVG must be self-contained (no external references)
+- Maximum complexity: ~50 SVG elements
+
+Description: ${description}`)
+            ];
+
+            const response = await model.sendRequest(messages, {}, new vscode.CancellationTokenSource().token);
+            let svgContent = '';
+            for await (const chunk of response.text) {
+                svgContent += chunk;
+            }
+
+            // Extract SVG from response (in case LLM wraps it)
+            const svgMatch = svgContent.match(/<svg[\s\S]*?<\/svg>/i);
+            if (svgMatch) {
+                return svgMatch[0];
+            }
+        }
+    } catch (err) {
+        console.warn('LLM SVG generation failed, falling back to keyword matching:', err);
+    }
+
+    // Strategy 2: Keyword-match against built-in stock illustrations
+    const descLower = description.toLowerCase();
+    
+    // Check stock illustrations by keyword
+    const stockKeywords: Record<string, string[]> = {
+        'collaboration': ['team', 'collaborate', 'together', 'group', 'meeting', 'partner'],
+        'growth': ['grow', 'increase', 'progress', 'chart', 'bar', 'revenue', 'sales'],
+        'innovation': ['innovat', 'idea', 'creative', 'lightbulb', 'brainstorm', 'new'],
+        'security': ['security', 'secure', 'lock', 'protect', 'shield', 'safe'],
+        'network': ['network', 'connect', 'node', 'graph', 'link', 'web'],
+        'process': ['process', 'flow', 'step', 'workflow', 'pipeline', 'sequence'],
+        'analytics': ['analytic', 'data', 'metric', 'dashboard', 'report', 'insight'],
+        'timeline': ['timeline', 'schedule', 'roadmap', 'milestone', 'plan', 'phase']
+    };
+
+    for (const [name, keywords] of Object.entries(stockKeywords)) {
+        if (keywords.some(kw => descLower.includes(kw))) {
+            const svg = STOCK_ILLUSTRATIONS[name];
+            if (svg) { return svg; }
+        }
+    }
+
+    // Strategy 3: Match Lucide icons by category
+    const iconKeywords: Record<string, string[]> = {
+        'brain': ['brain', 'ai', 'intelligence', 'cognitive', 'neural', 'think'],
+        'rocket': ['launch', 'rocket', 'deploy', 'start', 'fast', 'speed'],
+        'heart': ['heart', 'love', 'favorite', 'like', 'health', 'care'],
+        'star': ['star', 'rating', 'favorite', 'best', 'top', 'award'],
+        'shield': ['shield', 'protect', 'guard', 'defense', 'firewall'],
+        'globe': ['globe', 'world', 'global', 'international', 'earth', 'planet'],
+        'cloud': ['cloud', 'saas', 'hosting', 'storage', 'aws', 'azure'],
+        'users': ['user', 'people', 'person', 'team', 'human', 'community', 'cat', 'dog', 'animal'],
+        'lightbulb': ['light', 'bulb', 'idea', 'bright', 'eureka'],
+        'code': ['code', 'program', 'develop', 'software', 'script'],
+        'database': ['database', 'db', 'sql', 'storage', 'data'],
+        'server': ['server', 'backend', 'infrastructure', 'hosting'],
+        'lock': ['lock', 'password', 'auth', 'encrypt', 'secret'],
+        'zap': ['fast', 'instant', 'lightning', 'power', 'energy', 'electric'],
+        'sparkles': ['magic', 'sparkle', 'ai', 'generate', 'auto'],
+        'trophy': ['win', 'trophy', 'achievement', 'success', 'champion'],
+        'book': ['book', 'read', 'learn', 'education', 'knowledge', 'library'],
+        'mail': ['mail', 'email', 'message', 'send', 'inbox', 'letter']
+    };
+
+    for (const [iconName, keywords] of Object.entries(iconKeywords)) {
+        if (keywords.some(kw => descLower.includes(kw))) {
+            const iconSvg = LUCIDE_ICONS[iconName];
+            if (iconSvg) {
+                // Scale up the 24x24 icon to a proper illustration size
+                return wrapIconAsIllustration(iconSvg, iconName, description);
+            }
+        }
+    }
+
+    // Strategy 4: Try Iconify API for the most relevant term
+    const words = description.split(/\s+/).filter(w => w.length > 2);
+    for (const word of words) {
+        const normalized = word.toLowerCase().replace(/[^a-z0-9-]/g, '');
+        if (!normalized) { continue; }
+        
+        // Try material-design-icons first (largest set)
+        const svg = await fetchIconifyIcon('mdi', normalized, { width: 200, height: 200, color: '0550ae' });
+        if (svg) {
+            return svg;
+        }
+    }
+
+    // Strategy 5: DiceBear avatar as last resort for character descriptions
+    const characterWords = ['person', 'character', 'avatar', 'face', 'portrait', 'cat', 'dog', 'animal', 'bot', 'robot'];
+    if (characterWords.some(w => descLower.includes(w))) {
+        const avatar = await fetchDiceBearAvatar(description, 'bottts', { size: 200 });
+        if (avatar) { return avatar; }
+    }
+
+    return null;
+}
+
+/**
+ * Wrap a small Lucide icon into a proper illustration with label and background
+ */
+function wrapIconAsIllustration(iconSvg: string, iconName: string, description: string): string {
+    // Extract the inner content of the icon SVG (remove outer <svg> tags)
+    const innerContent = iconSvg
+        .replace(/<svg[^>]*>/, '')
+        .replace(/<\/svg>/, '');
+    
+    const label = description.length > 30 
+        ? description.substring(0, 27) + '...' 
+        : description;
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Background -->
+  <rect width="400" height="300" rx="16" fill="#f6f8fa" stroke="#d0d7de" stroke-width="2"/>
+  
+  <!-- Decorative circle -->
+  <circle cx="200" cy="120" r="70" fill="#ddf4ff" stroke="#0550ae" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Icon (scaled up from 24x24) -->
+  <g transform="translate(164, 84) scale(3)" stroke="#0550ae" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    ${innerContent}
+  </g>
+  
+  <!-- Label -->
+  <text x="200" y="240" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#24292f" font-weight="600">${escapeXml(label)}</text>
+  <text x="200" y="265" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#57606a">Generated by Alex</text>
+</svg>`;
+}
+
+/**
+ * Escape special XML characters in text content
+ */
+function escapeXml(text: string): string {
+    return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
 }
 
 /**
@@ -448,7 +629,7 @@ Project: ${workspaceFolders[0].name}
             if (!text) {
                 // No text - prompt for description
                 const userInput = await vscode.window.showInputBox({
-                    prompt: 'Describe the image you want to generate',
+                    prompt: 'Describe the illustration you want to generate',
                     placeHolder: 'e.g., A flowchart showing user authentication process',
                     ignoreFocusOut: true
                 });
@@ -461,10 +642,57 @@ Project: ${workspaceFolders[0].name}
                 prompt = text;
             }
 
-            // Open chat with image generation request
-            vscode.commands.executeCommand('workbench.action.chat.open', {
-                query: `@alex Generate an image based on this description:\n\n${prompt}`,
-                isPartialQuery: false
+            // Generate SVG illustration using LLM + Iconify/DiceBear
+            await vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                title: 'Generating illustration...',
+                cancellable: false
+            }, async () => {
+                try {
+                    const svg = await generateIllustrationFromDescription(prompt);
+                    if (!svg) {
+                        vscode.window.showWarningMessage(
+                            'Could not generate an illustration. Try a more specific description.'
+                        );
+                        return;
+                    }
+
+                    // Save SVG to workspace
+                    const workspaceFolders = vscode.workspace.workspaceFolders;
+                    if (!workspaceFolders) {
+                        vscode.window.showWarningMessage('No workspace folder found');
+                        return;
+                    }
+
+                    const slug = prompt
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '')
+                        .substring(0, 40);
+                    const fileName = `illustration-${slug}.svg`;
+                    const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets');
+                    const outputPath = path.join(outputDir, fileName);
+
+                    await fs.ensureDir(outputDir);
+                    await fs.writeFile(outputPath, svg, 'utf8');
+
+                    // Open the SVG file
+                    const doc = await vscode.workspace.openTextDocument(outputPath);
+                    await vscode.window.showTextDocument(doc);
+
+                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    vscode.window.showInformationMessage(
+                        `✅ Illustration saved: ${relativePath}`,
+                        'Open Preview'
+                    ).then(action => {
+                        if (action === 'Open Preview') {
+                            // Try to open SVG preview if available
+                            vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+                        }
+                    });
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to generate illustration: ${err}`);
+                }
             });
         }
     );
