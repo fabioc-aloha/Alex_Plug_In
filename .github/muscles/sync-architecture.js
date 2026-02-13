@@ -271,6 +271,19 @@ function syncArchitectureFiles() {
             console.log(`⚠️  ${file} not found in master`);
         }
     }
+
+    // Sync walkthrough media files (referenced by package.json walkthroughs)
+    const walkthroughFiles = [
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'README.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'README.md') }
+    ];
+    for (const { src, dest } of walkthroughFiles) {
+        if (fs.existsSync(src)) {
+            const destDir = path.dirname(dest);
+            if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+            fs.copyFileSync(src, dest);
+            console.log(`✅ alex_docs/README.md (walkthrough media)`);
+        }
+    }
 }
 
 function verifyCounts() {

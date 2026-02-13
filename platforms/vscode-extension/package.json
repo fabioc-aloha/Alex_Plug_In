@@ -1917,7 +1917,7 @@
           {
             "id": "alex.welcome",
             "title": "Meet Alex",
-            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **77 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
+            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **100+ skills**, **persistent memory**, and **cross-project knowledge sharing**.",
             "media": {
               "markdown": "alex_docs/README.md"
             }
