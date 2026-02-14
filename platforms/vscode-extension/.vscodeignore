@@ -13,10 +13,11 @@ src/**
 **/*.map
 out/**
 
-# Exclude TypeScript source files EXCEPT .github instructions
+# Exclude TypeScript source files EXCEPT .github instructions and muscles
 **/*.ts
 !.github/instructions/**
 !.github/prompts/**
+!.github/muscles/*.ts
 
 # Documentation for development (exclude from package)
 vsc-extension-quickstart.md

@@ -86,7 +86,7 @@ applyTo: "**/*audit*,**/*qa*,**/*review*,**/*validation*"
 4. Flag: tables listing different counts or structures, brain-analog mappings that contradict procedure files
 
 **Key targets**:
-- Working memory: is the slot model (P1-P7, P4a-d) described the same way in copilot-instructions, alex-core, SSO, and meditation?
+- Active Context: is the dynamic section (Persona, Objective, Focus Trifectas, Principles, Last Assessed) described consistently in copilot-instructions, alex-core, SSO, and meditation?
 - Memory tiers: declared in copilot-instructions, implemented in dream, validated by brain-qa — same categories?
 - Agent ecosystem: listed in copilot-instructions, files in .github/agents/ — same count and names?
 

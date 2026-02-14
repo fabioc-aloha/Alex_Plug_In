@@ -351,7 +351,9 @@ async function performInitialization(
     await applyMarkdownStyles();
 
     // Detect persona early - reused for GK offer and P6 update
-    let personaResult = await detectAndUpdateProjectPersona(rootPath);
+    // Don't update P5-P7 slots during init — deploy clean architecture with placeholder slots.
+    // The chat participant will assign persona-specific slots on first conversation.
+    let personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
     const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
     
     if (personaResult) {

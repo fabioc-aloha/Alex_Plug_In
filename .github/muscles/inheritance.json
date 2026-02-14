@@ -13,8 +13,15 @@
             ]
         },
         "brain-qa.ps1": {
+            "inheritance": "master-only",
+            "description": "32-phase brain QA validation (master-only, full phases)",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
+        "brain-qa-heir.ps1": {
             "inheritance": "inheritable",
-            "description": "31-phase brain quality assurance validation",
+            "description": "23-phase brain QA validation for heirs (renamed to brain-qa.ps1 during sync)",
             "referencedBy": [
                 "brain-qa"
             ]

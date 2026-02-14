@@ -10,7 +10,16 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ## Philosophy
 
-Brain QA is a **mental exercise**, not just a muscle exercise. The 31-phase script validates structure, but the skill's true value is teaching Alex *what to look for* beyond what scripts can automate:
+Brain QA is a **mental exercise**, not just a muscle exercise. The script validates structure, but the skill's true value is teaching Alex *what to look for* beyond what scripts can automate.
+
+Two scripts serve different contexts:
+
+| Script | Context | Phases | Inheritance |
+|--------|---------|--------|-------------|
+| `brain-qa.ps1` | Master Alex | 31 (full) | master-only |
+| `brain-qa-heir.ps1` | Heir deployments | 23 (heir-relevant) | inheritable |
+
+During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, so all contexts use the same filename. The master version includes cross-repo sync phases (5, 7, 8, 13) and master-only validations (26-29) that don't apply to heirs.
 
 | Dimension | Script Catches | Alex Catches (with this skill) |
 |-----------|---------------|-------------------------------|
@@ -24,6 +33,7 @@ Brain QA is a **mental exercise**, not just a muscle exercise. The 31-phase scri
 
 ## Quick Start
 
+### Master Context
 ```powershell
 # Full 31-phase audit
 .github/muscles/brain-qa.ps1
@@ -40,17 +50,28 @@ Brain QA is a **mental exercise**, not just a muscle exercise. The 31-phase scri
 # LLM-first content validation (phases 10,20,21)
 .github/muscles/brain-qa.ps1 -Mode llm
 
-# .github/ subfolder validation (phases 22-25)
-.github/muscles/brain-qa.ps1 -Phase 22,23,24,25
-
-# External folder validation (phases 26-31)
-.github/muscles/brain-qa.ps1 -Phase 26,27,28,29,30,31
-
 # Specific phases
 .github/muscles/brain-qa.ps1 -Phase 1,5,7
 
 # Auto-fix sync issues
 .github/muscles/brain-qa.ps1 -Mode sync -Fix
+```
+
+### Heir Context
+```powershell
+# Full heir audit (23 heir-relevant phases)
+.github/muscles/brain-qa.ps1
+
+# Quick validation (phases 1-4,6)
+.github/muscles/brain-qa.ps1 -Mode quick
+
+# Schema/frontmatter validation (phases 2,6,11,16,17)
+.github/muscles/brain-qa.ps1 -Mode schema
+
+# LLM content validation (phases 10,20,21)
+.github/muscles/brain-qa.ps1 -Mode llm
+
+# Note: -Mode sync is not available in heir (sync phases are master-only)
 ```
 
 ## When to Use
@@ -66,39 +87,39 @@ Brain QA is a **mental exercise**, not just a muscle exercise. The 31-phase scri
 
 ## Audit Phases
 
-| Phase  | Name                         | Validates                                     |
-| ------ | ---------------------------- | --------------------------------------------- |
-| 1      | Synapse Target Validation    | All connection targets exist                  |
-| 2      | Inheritance Field Validation | All skills have inheritance field             |
-| 3      | Skill Index Coverage         | All skills in skill-activation index          |
-| 4      | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) |
-| 5      | Master-Heir Skill Sync       | Skill directories match                       |
-| 6      | Synapse Schema Format        | Numeric strengths, $schema present            |
-| 7      | Synapse File Sync            | synapses.json hash match                      |
-| 8      | Skill-Activation Index Sync  | SKILL.md hash match                           |
-| 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          |
-| 10     | Core File Token Budget       | Size + ASCII art checks on core files         |
-| 11     | Boilerplate Descriptions     | No placeholder skill descriptions             |
-| 12     | Heir Reset Validation        | Empty profile, available P5-P7 slots          |
-| 13     | Instructions/Prompts Sync    | Memory files synced to heir                   |
-| 14     | Agents Structure             | Valid agent files in both                     |
-| 15     | Config Files                 | Required configs present, no leaks            |
-| 16     | Skill YAML Frontmatter       | name and description in frontmatter           |
-| 17     | Internal Skills Hidden        | user-invokable: false for metacognition       |
-| 18     | Agent Handoffs                | Return-to-Alex handoffs present               |
-| 19     | ApplyTo Patterns              | Instructions have file-type patterns          |
-| 20     | LLM-First Content             | No ASCII art, Mermaid OK                      |
-| 21     | Emoji Semantics               | Meaningful emoji usage stats                  |
-| 22     | Episodic Archive Health       | .github/episodic/ session records valid       |
-| 23     | Assets Validation             | .github/assets/ contains expected files       |
-| 24     | Issue/PR Templates            | GitHub templates present and valid            |
-| 25     | Root File Completeness        | Required .github/ root files exist            |
-| 26     | alex_docs Freshness           | Documentation not stale beyond threshold      |
-| 27     | M365 Heir Validation          | M365 heir structure and version alignment     |
-| 28     | Codespaces Heir Validation    | Codespaces devcontainer and config valid      |
-| 29     | Global Knowledge Sync         | GK repo index and counts consistent           |
-| 30     | Muscles Integrity             | All scripts referenced by trifectas exist     |
-| 31     | ROADMAP Version Alignment     | ROADMAP versions match package.json           |
+| Phase  | Name                         | Validates                                     | Heir? |
+| ------ | ---------------------------- | --------------------------------------------- | ----- |
+| 1      | Synapse Target Validation    | All connection targets exist                  | Yes |
+| 2      | Inheritance Field Validation | All skills have inheritance field             | Yes |
+| 3      | Skill Index Coverage         | All skills in skill-activation index          | Yes |
+| 4      | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) | Yes |
+| 5      | Master-Heir Skill Sync       | Skill directories match                       | No  |
+| 6      | Synapse Schema Format        | Numeric strengths, $schema present            | Yes |
+| 7      | Synapse File Sync            | synapses.json hash match                      | No  |
+| 8      | Skill-Activation Index Sync  | SKILL.md hash match                           | No  |
+| 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          | Yes (count-only) |
+| 10     | Core File Token Budget       | Size + ASCII art checks on core files         | Yes |
+| 11     | Boilerplate Descriptions     | No placeholder skill descriptions             | Yes |
+| 12     | Heir Reset Validation        | Empty profile, available P5-P7 slots          | Yes |
+| 13     | Instructions/Prompts Sync    | Memory files synced to heir                   | No  |
+| 14     | Agents Structure             | Valid agent files in both                     | Yes |
+| 15     | Config Files                 | Required configs present, no leaks            | Yes |
+| 16     | Skill YAML Frontmatter       | name and description in frontmatter           | Yes |
+| 17     | Internal Skills Hidden        | user-invokable: false for metacognition       | Yes |
+| 18     | Agent Handoffs                | Return-to-Alex handoffs present               | Yes |
+| 19     | ApplyTo Patterns              | Instructions have file-type patterns          | Yes |
+| 20     | LLM-First Content             | No ASCII art, Mermaid OK                      | Yes |
+| 21     | Emoji Semantics               | Meaningful emoji usage stats                  | Yes |
+| 22     | Episodic Archive Health       | .github/episodic/ session records valid       | Yes |
+| 23     | Assets Validation             | .github/assets/ contains expected files       | Yes |
+| 24     | Issue/PR Templates            | GitHub templates present and valid            | Yes |
+| 25     | Root File Completeness        | Required .github/ root files exist            | Yes |
+| 26     | alex_docs Freshness           | Documentation not stale beyond threshold      | No  |
+| 27     | M365 Heir Validation          | M365 heir structure and version alignment     | No  |
+| 28     | Codespaces Heir Validation    | Codespaces devcontainer and config valid      | No  |
+| 29     | Global Knowledge Sync         | GK repo index and counts consistent           | No  |
+| 30     | Muscles Integrity             | All scripts referenced by trifectas exist     | Yes |
+| 31     | ROADMAP Version Alignment     | ROADMAP versions match package.json           | Yes (config-only) |
 
 ## Mode Shortcuts
 

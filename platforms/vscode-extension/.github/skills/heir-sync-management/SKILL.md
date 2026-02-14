@@ -38,7 +38,6 @@ The sync script (`sync-architecture.js`) copies these folders from Master `.gith
 | `prompts/` | Episodic memory |
 | `config/` | Configuration (with exclusions) |
 | `agents/` | Agent definitions |
-| `domain-knowledge/` | Legacy DK files |
 | `muscles/` | Execution scripts |
 | `skills/` | Skills (filtered by inheritance) |
 

@@ -108,13 +108,13 @@ Automated sync during dream/meditation cycles.
 3. Regenerate `KNOWLEDGE-INDEX.md` if entries changed
 4. Report sync status in dream output
 
-### 4. Promote Local DK to Global
-Promote a project's domain-knowledge file to global pattern.
+### 4. Promote Local Skill to Global
+Promote a project's skill file to global pattern.
 
 **Trigger**: `/promote`, `make this global`
 
 **Process**:
-1. Select local file from `.github/domain-knowledge/` or skill
+1. Select local file from `.github/skills/` or skill
 2. Convert to GK format with proper frontmatter
 3. Add source project attribution
 4. Save to `patterns/` folder

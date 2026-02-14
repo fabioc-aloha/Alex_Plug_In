@@ -127,9 +127,9 @@ export interface DocCountConfig {
  * Updated manually when architecture changes
  */
 export const defaultDocCounts: DocCountConfig[] = [
-    { name: 'Procedural', path: '.github/instructions/', pattern: '*.instructions.md', documentedCount: 28 },
-    { name: 'Episodic', path: '.github/prompts/', pattern: '*.prompt.md', documentedCount: 17 },
-    { name: 'Skills', path: '.github/skills/', pattern: '*/SKILL.md', documentedCount: 116 }
+    { name: 'Procedural', path: '.github/instructions/', pattern: '*.instructions.md', documentedCount: 31 },
+    { name: 'Episodic', path: '.github/prompts/', pattern: '*.prompt.md', documentedCount: 19 },
+    { name: 'Skills', path: '.github/skills/', pattern: '*/SKILL.md', documentedCount: 114 }
 ];
 
 /**
@@ -771,7 +771,8 @@ ${report.brokenSynapses.length > 0 ? `- [ ] Review and repair ${report.brokenSyn
  */
 export async function saveReport(rootPath: string, report: DreamReport): Promise<string> {
     const reportContent = generateReportMarkdown(report);
-    const reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${Date.now()}.md`);
+    const dateStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${dateStr}-${Date.now()}.md`);
     await fs.ensureDir(path.dirname(reportPath));
     await fs.writeFile(reportPath, reportContent);
     return reportPath;

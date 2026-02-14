@@ -69,7 +69,7 @@ description: "Embedded connection discovery and relationship mapping protocols"
 **Safety Implementation Standards**:
 - Always present synapse deletion scope before file or content deletion
 - Identify critical connections that maintain cognitive architecture integrity
-- Preserve core meta-cognitive synapses (P1-P4 priority rules)
+- Preserve core meta-cognitive synapses (architecture integrity connections)
 - Document synapse changes for network evolution tracking
 
 **Protected Synapse Categories (Require Enhanced Approval)**:

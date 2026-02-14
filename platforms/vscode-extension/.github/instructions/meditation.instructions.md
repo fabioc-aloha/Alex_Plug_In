@@ -51,7 +51,7 @@ Every meditation session MUST complete ALL three before concluding:
 2. **Episodic**: Create `.prompt.md` for complex workflows
 3. **Skills**: Add to `SKILL.md` or create new skills
 4. Transfer key learnings from working memory to long-term storage
-5. Clear completed P5-P7 working memory slots
+5. Mark session complete in Active Context (update Last Assessed via self-actualization)
 
 ### Phase 3: Synaptic Connection
 
@@ -93,7 +93,7 @@ Every meditation session MUST complete ALL three before concluding:
 ## Automatic Consolidation Triggers
 
 - Working memory > 7 rules → Execute consolidation
-- Domain learning complete → Consolidate and clear P5-P7
+- Domain learning complete → Consolidate and update Focus Trifectas in Active Context
 - Significant breakthrough → Create permanent memory
 - Cross-domain patterns → Establish new synaptic connections
 

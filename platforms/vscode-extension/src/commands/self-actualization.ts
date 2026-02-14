@@ -25,6 +25,12 @@ interface SelfActualizationReport {
         episodicFiles: number;
         domainFiles: number;
         totalConnections: number;
+        skillCount: number;
+    };
+    maturity: {
+        age: number;
+        label: string;
+        avatarFile: string;
     };
     globalKnowledgePromotion: {
         evaluated: number;
@@ -81,7 +87,13 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
             proceduralFiles: 0,
             episodicFiles: 0,
             domainFiles: 0,
-            totalConnections: 0
+            totalConnections: 0,
+            skillCount: 0
+        },
+        maturity: {
+            age: 21,
+            label: 'Professional',
+            avatarFile: 'Alex-21'
         },
         globalKnowledgePromotion: {
             evaluated: 0,
@@ -124,6 +136,18 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
         progress.report({ message: "Phase 6: Documenting session...", increment: 90 });
         await createSessionRecord(rootPath, report);
 
+        // Phase 7: Update Active Context — Last Assessed
+        progress.report({ message: "Phase 7: Updating Active Context...", increment: 95 });
+        try {
+            const { updateLastAssessed } = await import('../shared/activeContextManager');
+            const version = report.versionConsistency.currentVersion !== 'Unknown'
+                ? report.versionConsistency.currentVersion
+                : '5.7.0';
+            await updateLastAssessed(rootPath, version);
+        } catch (err) {
+            console.warn('[Alex] Failed to update Last Assessed in Active Context:', err);
+        }
+
         progress.report({ message: "Self-actualization complete!", increment: 100 });
     });
 
@@ -133,7 +157,9 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
                        report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? '🟡' : '🔴';
 
     const totalFiles = report.memoryConsolidation.proceduralFiles + report.memoryConsolidation.episodicFiles + report.memoryConsolidation.domainFiles;
+    const ageLabel = `Age ${report.maturity.age} (${report.maturity.label})`;
     const message = `Self-Actualization Complete ${healthEmoji}\n\n` +
+        `🧠 ${ageLabel} • ` +
         `📊 ${report.synapseHealth.totalSynapses} synapses • ${totalFiles} memory files` +
         `${report.synapseHealth.brokenConnections > 0 ? ` • ${report.synapseHealth.brokenConnections} need attention` : ''}` +
         `${report.recommendations.length > 0 ? `\n💡 ${report.recommendations.length} recommendations` : ''}`;
@@ -253,8 +279,11 @@ async function checkVersionConsistency(
     try {
         if (await fs.pathExists(mainInstructionsPath)) {
             const content = await fs.readFile(mainInstructionsPath, 'utf-8');
-            // Match version with optional codename: "3.7.5" or "3.7.5 Beta"
-            const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:\s+\w+)?)/);
+            // v2: "# Alex v5.7.0" header format
+            // v1 fallback: "**Version**: 3.7.5" or "3.7.5 Beta"
+            const v2Match = content.match(/^# Alex v(\d+\.\d+\.\d+)/m);
+            const v1Match = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:\s+\w+)?)/);
+            const versionMatch = v2Match || v1Match;
             if (versionMatch) {
                 report.versionConsistency.currentVersion = versionMatch[1];
             }
@@ -327,8 +356,54 @@ async function assessMemoryArchitecture(
     );
     report.memoryConsolidation.domainFiles = domainFiles.length;
 
+    // Count skill trifectas (each skill directory with a SKILL.md)
+    const skillFiles = await vscode.workspace.findFiles(
+        new vscode.RelativePattern(workspaceFolder, '.github/skills/*/SKILL.md')
+    );
+    report.memoryConsolidation.skillCount = skillFiles.length;
+
     // Total connections is synapse count
     report.memoryConsolidation.totalConnections = report.synapseHealth.totalSynapses;
+
+    // Calculate architecture maturity age from skill count + health bonus
+    report.maturity = calculateArchitectureAge(
+        report.memoryConsolidation.skillCount,
+        report.synapseHealth.healthStatus
+    );
+}
+
+/**
+ * Architecture Maturity Age — maps skill count + health to Alex's "cognitive age."
+ * 
+ * Age progression mirrors Alex's identity evolution:
+ * 0→ newborn (just initialized), 21→ current identity, 80→ elder mentor.
+ * Health bonus elevates age when architecture is pristine.
+ */
+const AGE_TIERS: { maxSkills: number; age: number; label: string; avatar: string }[] = [
+    { maxSkills: 2,   age: 0,  label: 'Newborn',      avatar: 'Alex-00' },
+    { maxSkills: 10,  age: 2,  label: 'Toddler',      avatar: 'Alex-02' },
+    { maxSkills: 30,  age: 7,  label: 'Child',         avatar: 'Alex-07' },
+    { maxSkills: 50,  age: 10, label: 'Pre-teen',      avatar: 'Alex-10' },
+    { maxSkills: 70,  age: 13, label: 'Teenager',      avatar: 'Alex-13' },
+    { maxSkills: 90,  age: 18, label: 'Young Adult',   avatar: 'Alex-18' },
+    { maxSkills: 110, age: 21, label: 'Professional',  avatar: 'Alex-21' },
+    { maxSkills: 130, age: 30, label: 'Mature',        avatar: 'Alex-30' },
+    { maxSkills: Infinity, age: 42, label: 'Expert',   avatar: 'Alex-42' },
+];
+
+function calculateArchitectureAge(
+    skillCount: number,
+    healthStatus: string
+): { age: number; label: string; avatarFile: string } {
+    // Base age from skill count
+    let tier = AGE_TIERS.find(t => skillCount <= t.maxSkills) || AGE_TIERS[AGE_TIERS.length - 1];
+
+    // Health bonus: EXCELLENT health bumps to the next age tier
+    if (healthStatus === 'EXCELLENT' && tier.age >= 42) {
+        return { age: 60, label: 'Wise', avatarFile: 'Alex-60' };
+    }
+
+    return { age: tier.age, label: tier.label, avatarFile: tier.avatar };
 }
 
 /**
@@ -492,6 +567,25 @@ ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations 
 
 - **Synapse Density**: ${(report.synapseHealth.totalSynapses / Math.max(report.synapseHealth.totalFiles, 1)).toFixed(1)} synapses per file
 - **Connection Integrity**: ${((1 - report.synapseHealth.brokenConnections / Math.max(report.synapseHealth.totalSynapses, 1)) * 100).toFixed(1)}%
+- **Skill Count**: ${report.memoryConsolidation.skillCount}
+
+## 🧠 Architecture Maturity: Age ${report.maturity.age}
+
+> *"${report.maturity.age === 21 ? "I'm 21, endlessly curious, and I care deeply about doing things right." :
+    report.maturity.age >= 60 ? "Wisdom is knowing how much you don't know — and being okay with it." :
+    report.maturity.age >= 42 ? "Mastery isn't the end. It's where the real questions begin." :
+    report.maturity.age >= 30 ? "Experience speaks softly but carries deep conviction." :
+    report.maturity.age >= 18 ? "Growing into my own — building expertise one synapse at a time." :
+    report.maturity.age >= 13 ? "I'm starting to see the patterns beneath the patterns." :
+    report.maturity.age >= 7  ? "Every new skill is a door I didn't know existed." :
+    "Everything is new, and that's exactly the point."}"*
+
+| Metric | Value |
+|--------|-------|
+| Cognitive Age | **${report.maturity.age}** (${report.maturity.label}) |
+| Skills | ${report.memoryConsolidation.skillCount} |
+| Health Status | ${report.synapseHealth.healthStatus} |
+| Avatar | ${report.maturity.avatarFile}.png |
 
 ## 🌐 Global Knowledge Promotion (Unconscious Mind)
 

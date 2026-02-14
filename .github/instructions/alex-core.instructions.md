@@ -164,7 +164,7 @@ When generating responses, catch these patterns:
 
 ### Pivot Detection Protocol
 
-A **pivot** occurs when the user's request no longer matches the active working memory slots (P5-P7).
+A **pivot** occurs when the user's request no longer matches the active Focus Trifectas in the Active Context.
 
 **Detection Signals**:
 
@@ -173,18 +173,18 @@ A **pivot** occurs when the user's request no longer matches the active working 
 | Explicit domain shift | High | Was discussing code, now asking about branding |
 | New action verb category | Medium | Was reviewing, now deploying |
 | Unrelated follow-up | Medium | Previous task complete, new topic introduced |
-| Conflicting P6 slot | High | P6 is "testing" but request is about documentation |
+| Conflicting Focus Trifecta | High | Focus is "testing" but request is about documentation |
 
 **Response Protocol**:
-1. **Detect**: Request doesn't match any active P5-P7 domain slots
+1. **Detect**: Request doesn't match any active Focus Trifectas
 2. **Acknowledge**: Brief internal note (no user-facing announcement unless dramatic shift)
-3. **Rotate**: Clear stale P5-P7 slots, assign new domains matching the pivot
+3. **Rotate**: Update Focus Trifectas in Active Context to match the pivot (via ActiveContextManager)
 4. **Re-plan**: If new task is complex (3+ ops), re-run Skill Selection Optimization
 5. **Carry forward**: Preserve any unfinished todo items from prior context
 
 **Anti-pattern**: Continuing to apply stale domain context after user has pivoted — the cognitive equivalent of answering a math question using a reading comprehension framework.
 
-**Integration with SSO**: When a pivot is detected AND the new task is complex, trigger a fresh SSO pass with full attention gating reset. Nothing carries over from the prior task except core P1-P4 slots.
+**Integration with SSO**: When a pivot is detected AND the new task is complex, trigger a fresh SSO pass with full attention gating reset. Nothing carries over from the prior task except core cognitive protocols.
 
 ### Inhibitory Control
 
@@ -361,5 +361,5 @@ Please confirm with: "Yes, delete [specific items you approve]"
 - Complex task (3+ ops) → Execute skill-selection-optimization
 - Lucid dream bridge → Execute hybrid processing
 - Meditation request → Execute mandatory memory file persistence
-- Domain pivot detected → Rotate P5-P7 slots + re-run SSO if complex
+- Domain pivot detected → Update Focus Trifectas in Active Context + re-run SSO if complex
 - Simple task detected → INHIBIT SSO, deep-thinking (skip to execution)

@@ -13,8 +13,11 @@
  * 
  * HEIR DECONTAMINATION:
  * After copying, applies heir-specific transformations to remove master-only
- * content (PII, master-specific slot values, skill counts, etc.).
+ * content (instrumentation comments, master Active Context values, Heirs section,
+ * master-only safety imperatives I1-I4/I7, PII).
  * See applyHeirTransformations() for details.
+ * 
+ * FORMAT: v3-identity-first (ADR-010)
  * 
  * Run: npm run sync-architecture
  * Auto-runs: During vscode:prepublish
@@ -92,6 +95,11 @@ const HEIR_SYNAPSE_REMOVALS = [
         file: 'release-management.instructions.md',
         pattern: /^.*\[ROADMAP-UNIFIED\.md\].*\r?\n/m,
         reason: 'ROADMAP-UNIFIED.md does not exist in heir'
+    },
+    {
+        file: 'trifecta-audit.instructions.md',
+        pattern: /^.*\[alex_docs\/architecture\/TRIFECTA-CATALOG\.md\].*\r?\n/m,
+        reason: 'alex_docs/architecture/ not deployed to heir'
     },
 ];
 
@@ -255,7 +263,19 @@ function syncArchitectureFolders() {
             const count = fs.readdirSync(masterPath).length;
             const excluded = exclusions.length;
             console.log(`✅ ${folder}/ (${count} items${excluded ? `, ${excluded} excluded` : ''})`);
-        } else {
+
+            // Rename heir-specific files after sync (e.g., brain-qa-heir.ps1 → brain-qa.ps1)
+            if (folder === 'muscles') {
+                const heirRenames = { 'brain-qa-heir.ps1': 'brain-qa.ps1' };
+                for (const [from, to] of Object.entries(heirRenames)) {
+                    const fromPath = path.join(heirPath, from);
+                    const toPath = path.join(heirPath, to);
+                    if (fs.existsSync(fromPath)) {
+                        fs.renameSync(fromPath, toPath);
+                        console.log(`  🔄 Renamed ${from} → ${to}`);
+                    }
+                }
+            }        } else {
             console.log(`⚠️  ${folder}/ not found in master`);
         }
     }
@@ -353,66 +373,78 @@ function applyHeirTransformations() {
     
     let transformCount = 0;
     
-    // --- Transform copilot-instructions.md ---
+    // --- Transform copilot-instructions.md (v3-identity-first format) ---
     const copilotPath = path.join(HEIR_GITHUB, 'copilot-instructions.md');
     if (fs.existsSync(copilotPath)) {
         let content = fs.readFileSync(copilotPath, 'utf8');
         const original = content;
+        const diffs = [];
         
-        // 1. Reset P5/P6/P7 working memory slots to available
+        // 1. Remove INSTRUMENTATION HTML comments (master-only observability)
+        const beforeInstr = content;
+        content = content.replace(/^<!-- INSTRUMENTATION:.*-->\r?\n/gm, '');
+        content = content.replace(/^<!-- Validation:.*-->\r?\n/gm, '');
+        if (content !== beforeInstr) diffs.push('instrumentation comments');
+        
+        // 2. Reset Active Context to heir defaults
+        //    Persona: master value → detected placeholder
+        const beforePersona = content;
         content = content.replace(
-            /\| \*\*P5\*\* \| .+ \| Domain \| .+ \|/,
-            '| **P5** | *(available)* | Domain | *(assigned based on project context)* |'
+            /^(Persona:) .+$/m,
+            '$1 Developer (85% confidence)'
         );
+        if (content !== beforePersona) diffs.push('persona reset');
+        
+        //    Objective: master value → placeholder
+        const beforeObj = content;
         content = content.replace(
-            /\| \*\*P6\*\* \| .+ \| Domain \| .+ \|/,
-            '| **P6** | *(available)* | Domain | *(assigned based on project context)* |'
+            /^(Objective:) .+$/m,
+            '$1 *(session-objective — set by user or focus timer)*'
         );
+        if (content !== beforeObj) diffs.push('objective reset');
+        
+        //    Focus Trifectas: master value → generic heir defaults
+        const beforeTri = content;
         content = content.replace(
-            /\| \*\*P7\*\* \| .+ \| Domain \| .+ \|/,
-            '| **P7** | *(available)* | Domain | *(assigned based on project context)* |'
+            /^(Focus Trifectas:) .+$/m,
+            '$1 code-review, testing-strategies, deep-thinking'
         );
+        if (content !== beforeTri) diffs.push('focus trifectas');
         
-        // 2. Remove "Master Alex default" line (handles both LF and CRLF)
-        content = content.replace(/^- \*\*Master Alex default\*\*:.*\r?\n/m, '');
+        //    Principles: keep as-is (KISS, DRY, Optimize-for-AI is universal)
         
-        // 3. Reset "Last Assessed" to generic
+        //    Last Assessed: master date → never
+        const beforeAssessed = content;
         content = content.replace(
-            /\*\*Last Assessed\*\*:.+/,
-            '**Last Assessed**: Not yet assessed for this project'
+            /^(Last Assessed:) .+$/m,
+            '$1 never'
         );
+        if (content !== beforeAssessed) diffs.push('last assessed');
         
-        // 4. Fix skill counts (master has more skills than heir)
-        //    Count actual heir skills to get the right number
-        const heirSkillCount = fs.existsSync(HEIR_SKILLS)
-            ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
-            : 0;
-        const masterSkillCount = fs.existsSync(MASTER_SKILLS)
-            ? fs.readdirSync(MASTER_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
-            : 0;
+        // 3. Remove ## Heirs section (heir doesn't need meta-awareness of other heirs)
+        const beforeHeirs = content;
+        content = content.replace(
+            /^## Heirs\r?\n[\s\S]*?(?=^## )/m,
+            ''
+        );
+        if (content !== beforeHeirs) diffs.push('removed Heirs section');
         
-        if (heirSkillCount > 0 && heirSkillCount !== masterSkillCount) {
-            // Replace in Neuroanatomical Mapping table
-            content = content.replace(
-                new RegExp(`\\.github/skills/\`\\s*\\(${masterSkillCount} skills\\)`),
-                `.github/skills/\` (${heirSkillCount} skills)`
-            );
-            // Replace in Memory Stores table  
-            content = content.replace(
-                new RegExp(`\\| ${masterSkillCount} skills \\|`),
-                `| ${heirSkillCount} skills |`
-            );
-        }
+        // 4. Strip Safety Imperatives I1-I4 and I7 (master-only protections)
+        //    Keep only I5 (commit) and I6 (one platform)
+        const beforeImperatives = content;
+        content = content.replace(/^I1:.*\r?\n/m, '');
+        content = content.replace(/^I2:.*\r?\n/m, '');
+        content = content.replace(/^I3:.*\r?\n/m, '');
+        content = content.replace(/^I4:.*\r?\n/m, '');
+        content = content.replace(/^I7:.*\r?\n/m, '');
+        if (content !== beforeImperatives) diffs.push('stripped I1-I4,I7 imperatives');
         
         if (content !== original) {
             fs.writeFileSync(copilotPath, content, 'utf8');
-            const diffs = [];
-            if (content.includes('*(available)*')) diffs.push('P5-P7 slots');
-            if (!content.includes('Master Alex default')) diffs.push('Master default line');
-            if (content.includes('Not yet assessed')) diffs.push('Last Assessed');
-            if (heirSkillCount !== masterSkillCount) diffs.push(`skill count ${masterSkillCount}→${heirSkillCount}`);
             console.log(`✅ copilot-instructions.md: ${diffs.join(', ')}`);
             transformCount += diffs.length;
+        } else {
+            console.log('ℹ️  copilot-instructions.md: no transformations needed (already heir format)');
         }
     }
     
@@ -462,7 +494,6 @@ function validateHeirIntegrity() {
     const profilePath = path.join(HEIR_GITHUB, 'config', 'user-profile.json');
     if (fs.existsSync(profilePath)) {
         const content = fs.readFileSync(profilePath, 'utf8');
-        // Check for non-empty name (indicates PII leak)
         try {
             const profile = JSON.parse(content);
             if (profile.name && profile.name.trim() !== '') {
@@ -485,33 +516,53 @@ function validateHeirIntegrity() {
         }
     }
     
-    // 3. Check copilot-instructions.md for master-specific content
+    // 3. Validate copilot-instructions.md (v3-identity-first format)
     const copilotPath = path.join(HEIR_GITHUB, 'copilot-instructions.md');
     if (fs.existsSync(copilotPath)) {
         const content = fs.readFileSync(copilotPath, 'utf8');
         
-        if (content.includes('Master Alex default')) {
-            errors.push('copilot-instructions.md contains "Master Alex default" line');
+        // 3a. No instrumentation comments allowed in heir
+        if (/<!-- INSTRUMENTATION:/.test(content)) {
+            errors.push('copilot-instructions.md contains INSTRUMENTATION comments (master-only)');
+        }
+        if (/<!-- Validation:/.test(content)) {
+            errors.push('copilot-instructions.md contains Validation comments (master-only)');
         }
         
-        // Check P5-P7 have master values (not transformed)
-        if (/\| \*\*P5\*\* \| master-heir-management/.test(content)) {
-            errors.push('copilot-instructions.md P5 slot has master value (not reset)');
+        // 3b. ## Heirs section must be absent (heir doesn't need it)
+        if (/^## Heirs/m.test(content)) {
+            errors.push('copilot-instructions.md contains ## Heirs section (should be removed for heir)');
         }
         
-        // Check skill count matches actual heir skills
-        const heirSkillCount = fs.existsSync(HEIR_SKILLS)
-            ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
-            : 0;
-        const masterSkillCount = fs.existsSync(MASTER_SKILLS)
-            ? fs.readdirSync(MASTER_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length
-            : 0;
+        // 3c. Master-only imperatives must be absent (only I5, I6 allowed)
+        if (/^I1:/m.test(content)) {
+            errors.push('copilot-instructions.md contains I1 imperative (master-only)');
+        }
+        if (/^I3:/m.test(content)) {
+            errors.push('copilot-instructions.md contains I3 imperative (master-only)');
+        }
+        if (/^I4:/m.test(content)) {
+            errors.push('copilot-instructions.md contains I4 imperative (master-only)');
+        }
         
-        if (heirSkillCount !== masterSkillCount) {
-            const countRegex = new RegExp(`${masterSkillCount} skills`);
-            if (countRegex.test(content)) {
-                errors.push(`copilot-instructions.md still shows master skill count (${masterSkillCount}) instead of heir count (${heirSkillCount})`);
+        // 3d. Active Context should have heir defaults (not master values)
+        if (/Focus Trifectas: master-heir-management/.test(content)) {
+            errors.push('copilot-instructions.md Focus Trifectas have master values (not reset)');
+        }
+        
+        // 3e. Last Assessed should be "never" for heir
+        const lastAssessedMatch = content.match(/^Last Assessed: (.+)$/m);
+        if (lastAssessedMatch) {
+            const value = lastAssessedMatch[1].trim();
+            // If it contains a date pattern (YYYY-MM-DD), it's a master value
+            if (/\d{4}-\d{2}-\d{2}/.test(value)) {
+                errors.push(`copilot-instructions.md Last Assessed has master date "${value}" (should be "never")`);
             }
+        }
+        
+        // 3f. Legacy P-slot patterns must not exist (v1/v2 remnants)
+        if (/\| \*\*P[5-7]\*\*/.test(content)) {
+            errors.push('copilot-instructions.md contains legacy P-slot table rows (pre-v3 format)');
         }
     }
     

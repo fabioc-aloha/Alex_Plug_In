@@ -87,11 +87,6 @@
         "icon": "$(sparkle)"
       },
       {
-        "command": "alex.testGraph",
-        "title": "Alex: Test Graph Integration",
-        "icon": "$(beaker)"
-      },
-      {
         "command": "alex.syncKnowledge",
         "title": "Alex: Sync Knowledge",
         "icon": "$(sync)"
@@ -1186,52 +1181,6 @@
           "default": false,
           "scope": "machine",
           "description": "Disable built-in secret detection patterns (use only custom patterns)."
-        },
-        "alex.enterprise.graph.enabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable Microsoft Graph integration for calendar, mail, and presence."
-        },
-        "alex.enterprise.graph.calendarEnabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable calendar access for meeting context and scheduling."
-        },
-        "alex.enterprise.graph.mailEnabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable mail access for recent email context."
-        },
-        "alex.enterprise.graph.presenceEnabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable presence status (online/offline/busy)."
-        },
-        "alex.enterprise.graph.peopleEnabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable people API for contact suggestions."
-        },
-        "alex.enterprise.graph.calendarDaysAhead": {
-          "type": "number",
-          "default": 7,
-          "minimum": 1,
-          "maximum": 30,
-          "scope": "machine",
-          "description": "Number of days ahead to fetch calendar events."
-        },
-        "alex.enterprise.graph.mailMaxMessages": {
-          "type": "number",
-          "default": 10,
-          "minimum": 1,
-          "maximum": 50,
-          "scope": "machine",
-          "description": "Maximum number of recent emails to fetch."
         }
       }
     },
@@ -1426,30 +1375,6 @@
             "name": "verify",
             "description": "Request verification walkthrough for high-stakes decisions",
             "sampleRequest": "Walk me through verifying this decision"
-          },
-          {
-            "name": "calendar",
-            "description": "View your upcoming calendar events and meeting context (requires enterprise mode)",
-            "when": "config.alex.enterprise.enabled",
-            "sampleRequest": "What meetings do I have today?"
-          },
-          {
-            "name": "mail",
-            "description": "View recent emails for context awareness (requires enterprise mode)",
-            "when": "config.alex.enterprise.enabled",
-            "sampleRequest": "Show my unread emails"
-          },
-          {
-            "name": "context",
-            "description": "Get your work context: calendar, unread mail, and presence status (requires enterprise mode)",
-            "when": "config.alex.enterprise.enabled",
-            "sampleRequest": "What's my work context for today?"
-          },
-          {
-            "name": "people",
-            "description": "Find people in your organization (requires enterprise mode)",
-            "when": "config.alex.enterprise.enabled",
-            "sampleRequest": "Find people who work with Azure"
           }
         ]
       }

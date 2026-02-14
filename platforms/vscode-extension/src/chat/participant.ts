@@ -11,10 +11,9 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
 // import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
-import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
+import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_AVATAR } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch } from './modelIntelligence';
-import { isGraphAvailable, getCalendarEvents, getRecentMail, getWorkContext, searchPeople, formatCalendarEvent, formatMailMessage, getGraphStatus } from '../enterprise/microsoftGraph';
 import { isEnterpriseMode } from '../enterprise/enterpriseAuth';
 
 // ============================================================================
@@ -438,23 +437,6 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         return await handleVerifyCommand(request, context, stream, token);
     }
 
-    // Microsoft Graph commands (enterprise mode)
-    if (request.command === 'calendar') {
-        return await handleCalendarCommand(request, context, stream, token);
-    }
-
-    if (request.command === 'mail') {
-        return await handleMailCommand(request, context, stream, token);
-    }
-
-    if (request.command === 'context') {
-        return await handleContextCommand(request, context, stream, token);
-    }
-
-    if (request.command === 'people') {
-        return await handlePeopleCommand(request, context, stream, token);
-    }
-
     // Check if this is a greeting at the start of a session
     if (isGreeting(request.prompt) && isStartOfSession(context)) {
         return await handleGreetingWithSelfActualization(request, context, stream, token);
@@ -678,24 +660,12 @@ ${modelStatus}
 - P3: \`@worldview-integration\` - Ethical reasoning
 - P4: \`@grounded-factual-processing\` - Accuracy verification
 
-${isEnterpriseMode() ? `### Enterprise
-| Feature | Status |
-|---------|--------|
-| Enterprise Mode | ✅ Enabled |
-| Microsoft Graph | ${getGraphStatus().connected ? '✅ Connected (' + getGraphStatus().features.join(', ') + ')' : '⚠️ Not connected (run \`Alex: Sign In (Enterprise)\`)'} |
-` : ''}
-
 ### Available Commands
 - \`/meditate\` - Memory consolidation
 - \`/dream\` - Neural maintenance
 - \`/learn\` - Domain acquisition
 - \`/azure\` - Azure development assistance
-- \`/m365\` - Microsoft 365 development assistance
-${isEnterpriseMode() ? `- \`/calendar\` - View upcoming calendar events
-- \`/mail\` - View recent emails
-- \`/context\` - Work context summary
-- \`/people\` - Search organization
-` : ''}`);
+- \`/m365\` - Microsoft 365 development assistance`);
 
     stream.button({
         command: 'alex.dream',
@@ -2097,215 +2067,6 @@ Consider testing:
 }
 
 /**
- * Handle /calendar command - View upcoming calendar events
- */
-async function handleCalendarCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    if (!isGraphAvailable()) {
-        stream.markdown(`## 📅 Calendar
-
-⚠️ **Microsoft Graph not available**
-
-To view your calendar, you need:
-1. Enterprise mode enabled (\`alex.enterprise.enabled\`)
-2. Signed in with Microsoft Entra ID
-
-Run \`Alex: Sign In (Enterprise)\` from the Command Palette to connect.
-`);
-        return { metadata: { command: 'calendar', error: 'graph_unavailable' } };
-    }
-    
-    stream.progress('📅 Fetching your calendar...');
-    
-    const daysAhead = request.prompt.trim().match(/(\d+)\s*day/i)?.[1];
-    const days = daysAhead ? parseInt(daysAhead, 10) : 7;
-    
-    const events = await getCalendarEvents(days);
-    
-    if (events.length === 0) {
-        stream.markdown(`## 📅 Calendar (Next ${days} Days)\n\n_No upcoming events_\n`);
-        return { metadata: { command: 'calendar', eventCount: 0 } };
-    }
-    
-    stream.markdown(`## 📅 Calendar (Next ${days} Days)\n\n`);
-    
-    // Group events by day
-    const eventsByDay = new Map<string, typeof events>();
-    for (const event of events) {
-        const date = new Date(event.start.dateTime).toDateString();
-        if (!eventsByDay.has(date)) {
-            eventsByDay.set(date, []);
-        }
-        eventsByDay.get(date)!.push(event);
-    }
-    
-    for (const [date, dayEvents] of eventsByDay) {
-        stream.markdown(`### ${date}\n\n`);
-        for (const event of dayEvents) {
-            stream.markdown(formatCalendarEvent(event) + '\n');
-        }
-    }
-    
-    return { metadata: { command: 'calendar', eventCount: events.length, daysAhead: days } };
-}
-
-/**
- * Handle /mail command - View recent emails
- */
-async function handleMailCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    if (!isGraphAvailable()) {
-        stream.markdown(`## 📬 Mail
-
-⚠️ **Microsoft Graph not available**
-
-To view your mail, you need:
-1. Enterprise mode enabled (\`alex.enterprise.enabled\`)
-2. Signed in with Microsoft Entra ID
-
-Run \`Alex: Sign In (Enterprise)\` from the Command Palette to connect.
-`);
-        return { metadata: { command: 'mail', error: 'graph_unavailable' } };
-    }
-    
-    stream.progress('📬 Fetching your recent mail...');
-    
-    const unreadOnly = request.prompt.toLowerCase().includes('unread');
-    const countMatch = request.prompt.match(/(\d+)/);
-    const maxMessages = countMatch ? parseInt(countMatch[1], 10) : 10;
-    
-    const messages = await getRecentMail(maxMessages, unreadOnly);
-    
-    if (messages.length === 0) {
-        stream.markdown(`## 📬 Mail\n\n_No ${unreadOnly ? 'unread ' : ''}messages_\n`);
-        return { metadata: { command: 'mail', messageCount: 0 } };
-    }
-    
-    const header = unreadOnly ? 'Unread Mail' : 'Recent Mail';
-    stream.markdown(`## 📬 ${header}\n\n`);
-    
-    for (const message of messages) {
-        stream.markdown(formatMailMessage(message) + '\n');
-    }
-    
-    stream.markdown(`\n---\n_Showing ${messages.length} of ${maxMessages} requested_\n`);
-    
-    return { metadata: { command: 'mail', messageCount: messages.length, unreadOnly } };
-}
-
-/**
- * Handle /context command - Get full work context
- */
-async function handleContextCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    if (!isGraphAvailable()) {
-        stream.markdown(`## 📊 Work Context
-
-⚠️ **Microsoft Graph not available**
-
-To view your work context, you need:
-1. Enterprise mode enabled (\`alex.enterprise.enabled\`)
-2. Signed in with Microsoft Entra ID
-
-Run \`Alex: Sign In (Enterprise)\` from the Command Palette to connect.
-`);
-        return { metadata: { command: 'context', error: 'graph_unavailable' } };
-    }
-    
-    stream.progress('📊 Building your work context...');
-    
-    const workContext = await getWorkContext();
-    stream.markdown(workContext);
-    
-    return { metadata: { command: 'context', action: 'display' } };
-}
-
-/**
- * Handle /people command - Search for people
- */
-async function handlePeopleCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    if (!isGraphAvailable()) {
-        stream.markdown(`## 👥 People Search
-
-⚠️ **Microsoft Graph not available**
-
-To search for people, you need:
-1. Enterprise mode enabled (\`alex.enterprise.enabled\`)
-2. Signed in with Microsoft Entra ID
-
-Run \`Alex: Sign In (Enterprise)\` from the Command Palette to connect.
-`);
-        return { metadata: { command: 'people', error: 'graph_unavailable' } };
-    }
-    
-    const query = request.prompt.trim();
-    
-    if (!query) {
-        stream.markdown(`## 👥 People Search
-
-Search for people in your organization.
-
-### Usage
-
-\`\`\`
-/people <search query>
-\`\`\`
-
-### Examples
-
-- \`/people John Smith\`
-- \`/people Azure team\`
-- \`/people engineering manager\`
-`);
-        return { metadata: { command: 'people', action: 'help' } };
-    }
-    
-    stream.progress(`👥 Searching for "${query}"...`);
-    
-    const people = await searchPeople(query, 10);
-    
-    if (people.length === 0) {
-        stream.markdown(`## 👥 People Search: "${query}"\n\n_No results found_\n`);
-        return { metadata: { command: 'people', query, resultCount: 0 } };
-    }
-    
-    stream.markdown(`## 👥 People Search: "${query}"\n\n`);
-    
-    for (const person of people) {
-        const email = person.emailAddresses?.[0]?.address ?? '';
-        stream.markdown(`### ${person.displayName}\n`);
-        if (person.jobTitle) {stream.markdown(`- **Title**: ${person.jobTitle}\n`);}
-        if (person.department) {stream.markdown(`- **Department**: ${person.department}\n`);}
-        if (email) {stream.markdown(`- **Email**: ${email}\n`);}
-        if (person.officeLocation) {stream.markdown(`- **Office**: ${person.officeLocation}\n`);}
-        stream.markdown('\n');
-    }
-    
-    return { metadata: { command: 'people', query, resultCount: people.length } };
-}
-
-/**
  * Handle /session command - Learning session timer
  */
 async function handleSessionCommand(
@@ -2538,10 +2299,32 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
 };
 
 /**
+ * Module-level reference to the chat participant for dynamic icon updates.
+ */
+let _alexParticipant: vscode.ChatParticipant | null = null;
+let _extensionUri: vscode.Uri | null = null;
+
+/**
+ * Update the @alex chat participant icon to match the detected persona.
+ * Falls back to the default Alex-21 avatar if persona unknown.
+ * Uses WebP with PNG fallback via URI — VS Code resolves the file.
+ */
+export function updateChatAvatar(personaId?: string): void {
+    if (!_alexParticipant || !_extensionUri) { return; }
+    const avatarBase = personaId ? getAvatarForPersona(personaId) : DEFAULT_AVATAR;
+    // Prefer WebP; VS Code resolves the URI to the actual file
+    _alexParticipant.iconPath = vscode.Uri.joinPath(_extensionUri, 'assets', 'avatars', `${avatarBase}.webp`);
+}
+
+/**
  * Register the Alex chat participant
  */
 export function registerChatParticipant(context: vscode.ExtensionContext): vscode.ChatParticipant {
     const alex = vscode.chat.createChatParticipant('alex.cognitive', alexChatHandler);
+    
+    // Store references for dynamic icon updates
+    _alexParticipant = alex;
+    _extensionUri = context.extensionUri;
     
     alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'icon.png');
     alex.followupProvider = alexFollowupProvider;

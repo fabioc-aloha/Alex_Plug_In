@@ -20,7 +20,6 @@ description: "Trifecta audit protocol — systematic assessment of capability co
 - [.github/skills/architecture-health/SKILL.md] (High, Extends, Bidirectional) - "Trifecta audit extends architecture health beyond synapse validation"
 - [.github/skills/brain-qa/SKILL.md] (High, Extends, Bidirectional) - "Brain QA validates structure; trifecta audit validates purpose"
 - [.github/instructions/heir-project-improvement.instructions.md] (High, Implements, Forward) - "Heir improvement applies trifecta audit to heir-specific capabilities"
-- [alex_docs/architecture/TRIFECTA-CATALOG.md] (Critical, Generates, Forward) - "Audit results documented in the trifecta catalog"
 
 ---
 

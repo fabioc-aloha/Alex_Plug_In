@@ -135,7 +135,7 @@ if (Test-Path $readmePath) {
 $rootCopilotInstructions = Join-Path $repoRoot ".github\copilot-instructions.md"
 if (Test-Path $rootCopilotInstructions) {
     $content = Get-Content $rootCopilotInstructions -Raw
-    if ($content -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
+    if ($content -match '# Alex v(\d+\.\d+\.\d+)') {
         $copilotVersion = $Matches[1]
         if ($copilotVersion -ne $version) {
             $mismatches += "copilot-instructions.md: $copilotVersion"
@@ -211,7 +211,7 @@ $copilotInstructions = Join-Path $scriptDir ".github\copilot-instructions.md"
 if (Test-Path $copilotInstructions) {
     $content = Get-Content $copilotInstructions -Raw
     # Match version pattern like "3.5.3-PENT-TRI" or just "3.5.3"
-    $content = $content -replace '(?<=\*\*Version\*\*:\s*)\d+\.\d+\.\d+', $version
+    $content = $content -replace '(?<=# Alex v)\d+\.\d+\.\d+', $version
     Set-Content $copilotInstructions $content -NoNewline
     Write-Host "  ✓ .github/copilot-instructions.md" -ForegroundColor DarkGray
 }
@@ -220,7 +220,7 @@ if (Test-Path $copilotInstructions) {
 $rootCopilotInstructions = Join-Path $repoRoot ".github\copilot-instructions.md"
 if (Test-Path $rootCopilotInstructions) {
     $content = Get-Content $rootCopilotInstructions -Raw
-    $content = $content -replace '(?<=\*\*Version\*\*:\s*)\d+\.\d+\.\d+', $version
+    $content = $content -replace '(?<=# Alex v)\d+\.\d+\.\d+', $version
     Set-Content $rootCopilotInstructions $content -NoNewline
     Write-Host "  ✓ Root .github/copilot-instructions.md" -ForegroundColor DarkGray
 }

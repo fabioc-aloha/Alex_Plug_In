@@ -114,7 +114,7 @@ When scanning project knowledge for promotion candidates, use these patterns to 
 
 ### Automated Scoring (Score ≥5 = Candidate)
 
-The extension evaluates DK files with this scoring:
+The extension evaluates skill files with this scoring:
 
 | Criteria | Points | Detection |
 |----------|--------|-----------|
@@ -133,9 +133,9 @@ The extension evaluates DK files with this scoring:
 ```
 Is this knowledge?
 ├── Personal preference → Copilot Memory (not GK)
-├── Project-specific config → Keep in project DK
+├── Project-specific config → Keep in project skills
 ├── Would I search for this in another project?
-│   ├── No → Keep in project DK
+│   ├── No → Keep in project skills
 │   └── Yes → Continue...
 │       ├── Is it a reusable solution? → Pattern (GK-*)
 │       └── Is it a timestamped learning? → Insight (GI-*)
@@ -162,8 +162,8 @@ When curating from multiple projects:
 | Source Type | Priority | Rationale |
 |-------------|----------|-----------|
 | Master Alex episodic memories | Highest | Core cognitive learnings |
-| Production project DK files | High | Battle-tested knowledge |
-| Platform heir DK files | Medium | May have implementation-specific details |
+| Production project skill files | High | Battle-tested knowledge |
+| Platform heir skill files | Medium | May have implementation-specific details |
 | Research/experimental projects | Lower | May not be validated |
 | Archive content | Lowest | May be outdated |
 

@@ -1,0 +1,51 @@
+{
+    "skill": "heir-sync-management",
+    "version": "1.0.0",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": ".github/skills/brain-qa/SKILL.md",
+            "type": "coordinates",
+            "strength": 0.85,
+            "bidirectional": true,
+            "note": "brain-qa-heir.ps1 synced via rename pattern; brain-qa Phase 30 validates muscles per context"
+        },
+        {
+            "target": ".github/skills/heir-curation/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "note": "Sync is the execution layer; curation defines what should be synced"
+        },
+        {
+            "target": ".github/instructions/release-management.instructions.md",
+            "type": "enables",
+            "strength": 0.85,
+            "note": "Sync runs as prepublish step before packaging"
+        },
+        {
+            "target": ".github/copilot-instructions.md",
+            "type": "implements",
+            "strength": 0.8,
+            "note": "Implements Heir Evolution Principle and Safety Imperative I7"
+        },
+        {
+            "target": ".github/skills/release-preflight/SKILL.md",
+            "type": "enables",
+            "strength": 0.8,
+            "note": "Sync must complete cleanly before release preflight can proceed"
+        }
+    ],
+    "activationBoost": [
+        "heir sync",
+        "sync architecture",
+        "master heir",
+        "contamination",
+        "drift detection",
+        "sync-architecture.js",
+        "inheritance.json",
+        "heir rename",
+        "muscle sync"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

@@ -16,7 +16,8 @@ Memory files define *what* and *how*; muscles *do*.
 | Script                        | Language   | Lines | Purpose                      | Inheritance |
 | ----------------------------- | ---------- | ----- | ---------------------------- | ----------- |
 | `audit-master-alex.ps1`       | PowerShell | 399   | 22-point pre-release audit   | master-only |
-| `brain-qa.ps1`                | PowerShell | 521   | Deep structure validation    | inheritable |
+| `brain-qa.ps1`                | PowerShell | 1195  | 31-phase deep validation     | master-only |
+| `brain-qa-heir.ps1`           | PowerShell | 595   | 23-phase heir validation     | inheritable |
 | `build-extension-package.ps1` | PowerShell | 295   | VSIX packaging               | master-only |
 | `dream-cli.ts`                | TypeScript | 96    | Neural maintenance CLI       | inheritable |
 | `fix-fence-bug.ps1`           | PowerShell | 127   | Detect/fix VS Code fence bug | master-only |
@@ -54,8 +55,8 @@ Controlled by `inheritance.json`:
 
 ```json
 {
-  "master-only": ["audit-master-alex.ps1", "build-extension-package.ps1", "sync-architecture.js"],
-  "inheritable": ["brain-qa.ps1", "dream-cli.ts", "gamma-generator.js", ...]
+  "master-only": ["audit-master-alex.ps1", "brain-qa.ps1", "build-extension-package.ps1", "sync-architecture.js"],
+  "inheritable": ["brain-qa-heir.ps1", "dream-cli.ts", "gamma-generator.js", ...]
 }
 ```
 

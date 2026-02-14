@@ -15,7 +15,7 @@ applyTo: "**/*knowledge*,**/*insight*,**/*pattern*,**/*global*"
 | Before (project-specific) | After (abstracted) |
 | ------------------------- | ------------------ |
 | "In Alex extension, synapses.json breaks when files are renamed" | "Connection metadata breaks when target files are renamed" |
-| "We migrated DK files to skills/" | "When reorganizing knowledge files, update all internal references" |
+| "We migrated knowledge files to skills/" | "When reorganizing knowledge files, update all internal references" |
 | "Alex's dream runs brain-qa.ps1" | "Automated health checks should run validation scripts" |
 
 **Test**: Would this insight help someone who's never seen this project?

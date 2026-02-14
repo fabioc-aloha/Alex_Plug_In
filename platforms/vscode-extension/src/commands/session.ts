@@ -539,6 +539,17 @@ export async function startSession(
     // Persist state for Alex visibility
     saveSessionState();
 
+    // Update Active Context objective in copilot-instructions.md
+    try {
+        const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (wsRoot) {
+            const { updateObjective } = await import('../shared/activeContextManager');
+            await updateObjective(wsRoot, topic);
+        }
+    } catch (err) {
+        console.warn('[Alex] Failed to update Active Context objective:', err);
+    }
+
     // Show notification
     vscode.window.showInformationMessage(
         `🎯 Session started: "${topic}" (${durationMinutes} min)`,
@@ -741,6 +752,17 @@ export async function endSession(promptConsolidate: boolean = true): Promise<voi
 
     // Persist state for Alex visibility
     saveSessionState();
+
+    // Clear Active Context objective in copilot-instructions.md
+    try {
+        const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (wsRoot) {
+            const { updateObjective } = await import('../shared/activeContextManager');
+            await updateObjective(wsRoot, null);
+        }
+    } catch (err) {
+        console.warn('[Alex] Failed to clear Active Context objective:', err);
+    }
 
     // Auto-increment session goals
     try {

@@ -77,6 +77,13 @@
       "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory"
     },
     {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.85,
+      "bidirectional": true,
+      "note": "brain-qa-heir.ps1 is synced via heir-sync rename pattern; Phase 30 validates muscles per context"
+    },
+    {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "implements",
       "strength": 0.95,

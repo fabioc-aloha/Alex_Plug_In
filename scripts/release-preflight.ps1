@@ -84,7 +84,7 @@ else {
 $masterInstructions = Join-Path $rootPath ".github\copilot-instructions.md"
 if (Test-Path $masterInstructions) {
     $masterContent = Get-Content $masterInstructions -Raw
-    if ($masterContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+    if ($masterContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $masterVersion = $matches[1]
         Write-Host "   Master copilot-instructions.md: $masterVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $masterVersion) {
@@ -109,7 +109,7 @@ else {
 $heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
 if (Test-Path $heirInstructions) {
     $heirContent = Get-Content $heirInstructions -Raw
-    if ($heirContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+    if ($heirContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $heirVersion = $matches[1]
         Write-Host "   Heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $heirVersion) {

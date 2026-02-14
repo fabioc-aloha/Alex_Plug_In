@@ -7,3 +7,4 @@
 export * from './constants';
 export * from './utils';
 export * from './sanitize';
+export * from './activeContextManager';

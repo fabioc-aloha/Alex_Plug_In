@@ -53,7 +53,7 @@ The actual Alex code runs as the **same VS Code extension** — same binary, sam
 | `.github/agents/`         | ✅ Full             | Specialized cognitive agents              |
 | Sidebar welcome view      | ✅ Full             | Status, focus, quick actions              |
 | Health dashboard          | ✅ Full             | Webview panels work in browser            |
-| Persona detection         | ✅ Full             | P5-P7 working memory slots                |
+| Persona detection         | ✅ Full             | Focus Trifectas via Active Context        |
 | Global Knowledge (GK)     | ✅ Full             | GitHub repo — auto-clone via devcontainer |
 | Focus sessions (Pomodoro) | ✅ Full             | Timer runs in extension host              |
 | Export (M365)             | ✅ Full             | Generates export files                    |

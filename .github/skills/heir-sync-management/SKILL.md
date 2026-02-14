@@ -38,9 +38,23 @@ The sync script (`sync-architecture.js`) copies these folders from Master `.gith
 | `prompts/` | Episodic memory |
 | `config/` | Configuration (with exclusions) |
 | `agents/` | Agent definitions |
-| `domain-knowledge/` | Legacy DK files |
-| `muscles/` | Execution scripts |
+| `muscles/` | Execution scripts (with exclusions + renames) |
 | `skills/` | Skills (filtered by inheritance) |
+
+### Muscle Sync: Exclusion + Rename Pattern
+
+Muscles use a two-step sync process:
+
+1. **Exclusion**: `inheritance.json` marks scripts as `master-only` (excluded from copy) or `inheritable` (copied to heir)
+2. **Rename**: Some scripts have different names in Master vs Heir to avoid confusion:
+
+| Master Name | Heir Name | Why |
+|-------------|-----------|-----|
+| `brain-qa-heir.ps1` | `brain-qa.ps1` | Heir-specific phases only; renamed so extension finds it at expected path |
+
+The rename is handled by `sync-architecture.js` via the `heirRenames` map, applied after the initial copy.
+
+**Pattern**: When master and heir need fundamentally different scripts for the same purpose, create a `*-heir.*` variant in master (inheritable), and configure the sync to rename it in the heir. This avoids runtime detection branching while maintaining a single source of truth in master.
 
 ### What Must NEVER Sync
 

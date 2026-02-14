@@ -82,7 +82,7 @@ Write-Host "  package.json version: $pkgVersion" -ForegroundColor Gray
 $masterInstructionsPath = Join-Path $SourceGithub "copilot-instructions.md"
 if (Test-Path $masterInstructionsPath) {
     $masterContent = Get-Content $masterInstructionsPath -Raw
-    if ($masterContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+    if ($masterContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $masterVersion = $matches[1]
         Write-Host "  Master copilot-instructions.md: $masterVersion" -ForegroundColor Gray
         
@@ -92,7 +92,7 @@ if (Test-Path $masterInstructionsPath) {
             Write-Host "     package.json:              $pkgVersion" -ForegroundColor Red
             Write-Host "     copilot-instructions.md:   $masterVersion" -ForegroundColor Red
             Write-Host "" -ForegroundColor Red
-            Write-Host "  Fix: Update .github/copilot-instructions.md **Version** to $pkgVersion" -ForegroundColor Yellow
+            Write-Host "  Fix: Update .github/copilot-instructions.md version header to $pkgVersion" -ForegroundColor Yellow
             
             if (-not $DryRun) {
                 Write-Error "Build aborted due to version mismatch."
@@ -201,7 +201,7 @@ Write-Host "[5/6] Verifying heir version..." -ForegroundColor Yellow
 $heirInstructionsPath = Join-Path $TargetGithub "copilot-instructions.md"
 if (Test-Path $heirInstructionsPath) {
     $heirContent = Get-Content $heirInstructionsPath -Raw
-    if ($heirContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
+    if ($heirContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $heirVersion = $matches[1]
         if ($heirVersion -eq $pkgVersion) {
             Write-Host "  ✅ Heir version verified: $heirVersion" -ForegroundColor Green

@@ -21,7 +21,7 @@ This skill enables Alex to:
 Trigger this skill when:
 
 - A session resolves a recurring problem (document the pattern)
-- A DK file is migrated or consolidated (update trackers)
+- A skill file is migrated or consolidated (update trackers)
 - A new workflow emerges (capture in appropriate .instructions.md)
 - User feedback reveals a principle ("don't over-simplify")
 
@@ -33,7 +33,7 @@ Before session ends, ask:
 
 | Question | If Yes → Action |
 | -------- | --------------- |
-| Did we solve a problem that could recur? | Document in relevant skill or DK file |
+| Did we solve a problem that could recur? | Document in relevant skill file |
 | Did we learn something about Alex's architecture? | Update relevant .github/ documentation |
 | Did a file get created/deleted/consolidated? | Update migration trackers |
 | Did user correct AI behavior? | Add to skill's Anti-Patterns + document principle |

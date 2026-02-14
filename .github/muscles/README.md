@@ -15,17 +15,18 @@ Memory files define *what* and *how*; muscles *do*.
 
 | Script                        | Language   | Lines | Purpose                      | Inheritance |
 | ----------------------------- | ---------- | ----- | ---------------------------- | ----------- |
-| `audit-master-alex.ps1`       | PowerShell | 399   | 22-point pre-release audit   | master-only |
-| `brain-qa.ps1`                | PowerShell | 521   | Deep structure validation    | inheritable |
+| `audit-master-alex.ps1`       | PowerShell | 432   | 22-point pre-release audit   | master-only |
+| `brain-qa.ps1`                | PowerShell | 1273  | 32-phase deep validation     | master-only |
+| `brain-qa-heir.ps1`           | PowerShell | 840   | 25-phase heir validation     | inheritable |
 | `build-extension-package.ps1` | PowerShell | 295   | VSIX packaging               | master-only |
-| `dream-cli.ts`                | TypeScript | 96    | Neural maintenance CLI       | inheritable |
-| `fix-fence-bug.ps1`           | PowerShell | 127   | Detect/fix VS Code fence bug | master-only |
-| `gamma-generator.js`          | JavaScript | 690   | Markdown → Gamma slides      | inheritable |
-| `normalize-paths.ps1`         | PowerShell | 164   | Path consistency fixes       | inheritable |
-| `pptxgen-cli.ts`              | TypeScript | 134   | PowerPoint generation        | inheritable |
-| `sync-architecture.js`        | JavaScript | 481   | Master → Heir sync           | master-only |
-| `validate-skills.ps1`         | PowerShell | 98    | Skill file validation        | inheritable |
-| `validate-synapses.ps1`       | PowerShell | 143   | Synapse target validation    | inheritable |
+| `dream-cli.ts`                | TypeScript | 116   | Neural maintenance CLI       | inheritable |
+| `fix-fence-bug.ps1`           | PowerShell | 189   | Detect/fix VS Code fence bug | master-only |
+| `gamma-generator.js`          | JavaScript | 777   | Markdown → Gamma slides      | inheritable |
+| `normalize-paths.ps1`         | PowerShell | 194   | Path consistency fixes       | inheritable |
+| `pptxgen-cli.ts`              | TypeScript | 136   | PowerPoint generation        | inheritable |
+| `sync-architecture.js`        | JavaScript | 771   | Master → Heir sync           | master-only |
+| `validate-skills.ps1`         | PowerShell | 113   | Skill file validation        | inheritable |
+| `validate-synapses.ps1`       | PowerShell | 154   | Synapse target validation    | inheritable |
 
 ## Language Selection
 
@@ -54,8 +55,8 @@ Controlled by `inheritance.json`:
 
 ```json
 {
-  "master-only": ["audit-master-alex.ps1", "build-extension-package.ps1", "sync-architecture.js"],
-  "inheritable": ["brain-qa.ps1", "dream-cli.ts", "gamma-generator.js", ...]
+  "master-only": ["audit-master-alex.ps1", "brain-qa.ps1", "build-extension-package.ps1", "sync-architecture.js"],
+  "inheritable": ["brain-qa-heir.ps1", "dream-cli.ts", "gamma-generator.js", ...]
 }
 ```
 

@@ -81,7 +81,7 @@ try {
         $content = Get-Content $heirInstructions -Raw
         # IMPORTANT: Use ${1} syntax for backreference to avoid $1 + version = $1X.X.X ambiguity
         $replacement = '${1}' + $newVersion
-        $content = $content -replace '(\*\*Version\*\*:\s*)\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?', $replacement
+        $content = $content -replace '(# Alex v)\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?', $replacement
         Set-Content $heirInstructions $content -NoNewline
         Write-Host "   Updated heir copilot-instructions.md" -ForegroundColor Green
     }

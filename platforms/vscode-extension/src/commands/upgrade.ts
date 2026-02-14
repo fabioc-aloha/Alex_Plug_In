@@ -1103,7 +1103,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
     // This helps identify the right context for users with multiple personas across projects
     let personaDetected = false;
     try {
-      const personaResult = await detectAndUpdateProjectPersona(rootPath);
+      const personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
       if (personaResult) {
         personaDetected = true;
         console.log(`[Alex] Detected persona: ${personaResult.persona.name} (confidence: ${(personaResult.confidence * 100).toFixed(0)}%)`);

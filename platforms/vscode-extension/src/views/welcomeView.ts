@@ -7,7 +7,8 @@ import {
   HealthStatus,
 } from "../shared/healthCheck";
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult, PERSONA_SLOT_MAPPINGS } from "../chat/personaDetection";
+import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult, PERSONA_SLOT_MAPPINGS, getAvatarForPersona, DEFAULT_AVATAR, getEasterEggOverride, EasterEgg } from "../chat/personaDetection";
+import { readActiveContext, ActiveContext } from "../shared/activeContextManager";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
@@ -15,8 +16,8 @@ import { escapeHtml, getNonce } from "../shared/sanitize";
 import { isOperationInProgress } from "../extension";
 import { openChatPanel } from "../shared/utils";
 import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
+import { updateChatAvatar } from "../chat/participant";
 import { isEnterpriseMode } from "../enterprise/enterpriseAuth";
-import { isGraphAvailable } from "../enterprise/microsoftGraph";
 
 /**
  * Nudge types for contextual reminders
@@ -201,18 +202,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "enterpriseSignIn":
           vscode.commands.executeCommand("alex.enterprise.signIn");
           break;
-        case "viewCalendar":
-          await openChatPanel("@alex /calendar");
-          break;
-        case "viewMail":
-          await openChatPanel("@alex /mail unread");
-          break;
-        case "viewContext":
-          await openChatPanel("@alex /context");
-          break;
-        case "searchPeople":
-          await openChatPanel("@alex /people ");
-          break;
         case "refresh":
           this.refresh();
           break;
@@ -232,13 +221,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     }
 
     try {
-      // Gather all status data in parallel
-      const [health, goalsSummary, lastDreamDate, gkRepoPath] =
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      const wsRoot = workspaceFolders?.[0]?.uri.fsPath;
+
+      // Gather all status data in parallel (including Active Context from copilot-instructions)
+      const [health, goalsSummary, lastDreamDate, gkRepoPath, activeContext] =
         await Promise.all([
           checkHealth(false),
           getGoalsSummary(),
           this._getLastDreamDate(),
           detectGlobalKnowledgeRepo(),
+          wsRoot ? readActiveContext(wsRoot) : Promise.resolve(null),
         ]);
 
       const session = getCurrentSession();
@@ -246,10 +239,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       
       // Detect persona from user profile (needed for premium asset personalization)
       let personaResult: PersonaDetectionResult | null = null;
-      const workspaceFolders = vscode.workspace.workspaceFolders;
       if (workspaceFolders) {
         const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
         personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
+      }
+
+      // Update @alex chat avatar to match detected persona
+      if (personaResult?.persona) {
+        updateChatAvatar(personaResult.persona.id);
       }
       
       // Detect premium features and get appropriate assets (pass persona's bannerNoun)
@@ -277,6 +274,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         hasGlobalKnowledge,
         personaResult,
         premiumAssets,
+        activeContext,
       );
     } catch (err) {
       this._view.webview.html = this._getErrorHtml(err);
@@ -485,6 +483,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     hasGlobalKnowledge: boolean,
     personaResult: PersonaDetectionResult | null,
     premiumAssets: PremiumAssetSelection,
+    activeContext: ActiveContext | null,
   ): string {
     // Security: Generate nonce for CSP
     const nonce = getNonce();
@@ -494,18 +493,51 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Persona display
     const persona = personaResult?.persona;
+
+    // Avatar URIs — WebP primary, PNG fallback (both shipped in VSIX)
+    // Easter egg check: seasonal or project-name overrides take priority
+    const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
+    const easterEgg: EasterEgg | null = getEasterEggOverride(workspaceFolderName);
+    const personaAvatarBase = easterEgg ? easterEgg.avatarBase : (persona ? getAvatarForPersona(persona.id) : DEFAULT_AVATAR);
+    const avatarWebpUri = getAssetUri(webview, this._extensionUri, `avatars/${personaAvatarBase}.webp`);
+    const avatarPngUri = getAssetUri(webview, this._extensionUri, `avatars/${personaAvatarBase}.png`);
+    const easterEggBadge = easterEgg ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>` : '';
     const personaHook = persona?.hook || 'Take Your Code to New Heights';
     const personaIcon = persona?.icon || '💻';
     const personaName = persona?.name || 'Developer';
     const personaSkill = persona?.skill || 'code-review';
+    const bannerNoun = persona?.bannerNoun || 'CODE';
     
     // Use persona's accent color directly, with fallback to blue
     const personaAccent = persona?.accentColor || 'var(--vscode-charts-blue)';
     
-    // P5-P7 slot context for focus display
+    // Active Context — live state from copilot-instructions.md
     const slotMapping = persona ? (PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' }) : { p5: 'code-review', p7: 'scope-management' };
     const confidenceLabel = personaResult?.confidence != null ? `${Math.round(personaResult.confidence * 100)}%` : '';
     const sourceLabel = personaResult?.source === 'llm' ? 'LLM' : personaResult?.source === 'cached' ? 'Cached' : 'Auto';
+
+    // Focus Trifectas from Active Context (live) or fallback to persona slot mappings
+    const rawTrifectas = activeContext?.focusTrifectas;
+    const hasLiveTrifectas = rawTrifectas && !rawTrifectas.includes('*(') && rawTrifectas.trim().length > 0;
+    const trifectaIds = hasLiveTrifectas
+        ? rawTrifectas!.split(',').map(t => t.trim()).filter(Boolean)
+        : [slotMapping.p5, personaSkill, slotMapping.p7];
+    const trifectaTagsHtml = trifectaIds.map(id => {
+        const name = skillNameMap[id] || id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}">${name}</span>`;
+    }).join('\n                ');
+
+    // Objective from Active Context (hidden when session card is showing)
+    const rawObjective = activeContext?.objective;
+    const hasObjective = rawObjective && !rawObjective.includes('*(session-objective') && !session;
+
+    // Last Assessed from Active Context
+    const rawAssessed = activeContext?.lastAssessed || 'never';
+    const isNeverAssessed = rawAssessed === 'never' || rawAssessed.includes('never');
+    const assessedLabel = isNeverAssessed ? 'Not assessed' : rawAssessed.split(' — ')[0];
+
+    // Principles from Active Context
+    const principlesText = activeContext?.principles || 'KISS, DRY, Optimize-for-AI';
     
     // Skill name mapping for display
     const skillNameMap: Record<string, string> = {
@@ -526,7 +558,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       'slide-design': 'Slide Design',
       'scope-management': 'Scope Mgmt',
       'deep-thinking': 'Deep Thinking',
-      'markdown-mermaid': 'Diagrams'
+      'markdown-mermaid': 'Diagrams',
+      'testing-strategies': 'Testing',
+      'bootstrap-learning': 'Learning',
+      'master-heir-management': 'Heir Mgmt',
+      'brand-asset-management': 'Brand Assets',
+      'release-management': 'Releases',
+      'release-process': 'Releases',
+      'self-actualization': 'Self-Actualize',
+      'research-first-development': 'Research First',
+      'meditation': 'Meditation',
+      'dream-state': 'Dream State',
+      'brain-qa': 'Brain QA',
+      'heir-curation': 'Heir Curation',
     };
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
@@ -616,8 +660,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 48px;
-            height: 48px;
+            width: 32px;
+            height: 32px;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
             cursor: pointer;
@@ -625,6 +669,45 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .header-icon:hover {
             transform: scale(1.08);
+        }
+        .alex-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--persona-accent, var(--vscode-charts-blue));
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+        }
+        .header-avatar-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .header-avatar-group .header-icon {
+            position: absolute;
+            bottom: -4px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--vscode-sideBar-background);
+            border-radius: 50%;
+            padding: 1px;
+        }
+        .easter-egg-badge {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            font-size: 14px;
+            line-height: 1;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+            animation: egg-bounce 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes egg-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-2px); }
         }
         .header-title {
             font-size: 13px;
@@ -653,6 +736,36 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 4px;
             min-width: 0;
             flex: 1;
+        }
+        .rocket-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            letter-spacing: 0.3px;
+            color: var(--vscode-foreground);
+            background: linear-gradient(135deg,
+                color-mix(in srgb, var(--persona-accent) 10%, transparent),
+                color-mix(in srgb, var(--persona-accent) 5%, transparent));
+            border: 1px solid color-mix(in srgb, var(--persona-accent) 20%, transparent);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .rocket-bar:hover {
+            background: linear-gradient(135deg,
+                color-mix(in srgb, var(--persona-accent) 18%, transparent),
+                color-mix(in srgb, var(--persona-accent) 10%, transparent));
+        }
+        .rocket-bar .rocket-emoji {
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .rocket-bar strong {
+            color: var(--persona-accent);
+            font-weight: 600;
         }
         .premium-badge {
             background: var(--vscode-badge-background, #4d4d4d);
@@ -757,43 +870,82 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-charts-green);
             font-weight: 500;
         }
-        .focus-slots {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-        .focus-slot {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 10px;
-            padding: 3px 6px;
-            border-radius: 4px;
+        .context-card {
             background: var(--vscode-editor-background);
+            border-radius: 5px;
+            padding: 10px;
+            border-left: 2px solid var(--persona-accent);
         }
-        .focus-slot-label {
-            font-weight: 600;
-            color: var(--vscode-descriptionForeground);
-            min-width: 22px;
-        }
-        .focus-slot-value {
-            color: var(--vscode-foreground);
-            flex: 1;
-        }
-        .focus-meta {
+        .context-objective {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            padding: 4px 8px;
+            background: color-mix(in srgb, var(--persona-accent) 8%, transparent);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.12s ease;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 9px;
-            color: var(--vscode-descriptionForeground);
-            margin-top: 4px;
-            padding: 0 2px;
         }
-        .focus-confidence {
-            background: color-mix(in srgb, var(--persona-accent) 20%, transparent);
+        .context-objective:hover {
+            background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
+        }
+        .context-objective::before {
+            content: '🎯';
+            font-size: 10px;
+        }
+        .trifecta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .trifecta-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: color-mix(in srgb, var(--persona-accent) 12%, var(--vscode-badge-background));
+            color: var(--vscode-foreground);
+            cursor: pointer;
+            transition: all 0.12s ease;
+            border: 1px solid color-mix(in srgb, var(--persona-accent) 25%, transparent);
+        }
+        .trifecta-tag:hover {
+            background: color-mix(in srgb, var(--persona-accent) 25%, var(--vscode-badge-background));
+            transform: translateY(-1px);
+        }
+        .context-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .context-badge {
+            font-size: 9px;
             padding: 1px 6px;
             border-radius: 8px;
+            background: var(--vscode-badge-background);
+            color: var(--vscode-badge-foreground);
+            opacity: 0.8;
+        }
+        .context-badge.accent {
+            background: color-mix(in srgb, var(--persona-accent) 20%, transparent);
+            color: var(--vscode-foreground);
             font-weight: 500;
+        }
+        .context-badge.stale {
+            background: color-mix(in srgb, var(--vscode-charts-yellow) 25%, transparent);
+            color: var(--vscode-foreground);
+            cursor: pointer;
+        }
+        .context-badge[data-cmd] {
+            cursor: pointer;
+            transition: opacity 0.12s ease;
+        }
+        .context-badge[data-cmd]:hover {
+            opacity: 1;
         }
         
         .session-card {
@@ -1132,12 +1284,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
+            <div class="header-avatar-group">
+                <picture>
+                    <source srcset="${avatarWebpUri}" type="image/webp">
+                    <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" title="Alex as ${personaName}" />
+                </picture>
+                <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
+                ${easterEggBadge}
+            </div>
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
                 <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
             </div>
             <button class="refresh-btn" data-cmd="refresh" title="Refresh">↻</button>
+        </div>
+
+        <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more">
+            <span class="rocket-emoji">🚀</span>
+            <span>Take Your <strong>${bannerNoun}</strong> to New Heights</span>
         </div>
         
         ${sessionHtml}
@@ -1159,24 +1323,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         </div>
         
         <div class="section">
-            <div class="section-title" title="Working memory slots P5-P7 — assigned from ${personaName} persona">Focus</div>
-            <div class="focus-slots">
-                <div class="focus-slot"><span class="focus-slot-label">P5</span><span class="focus-slot-value">${skillNameMap[slotMapping.p5] || slotMapping.p5}</span></div>
-                <div class="focus-slot"><span class="focus-slot-label">P6</span><span class="focus-slot-value">${recommendedSkillName}</span></div>
-                <div class="focus-slot"><span class="focus-slot-label">P7</span><span class="focus-slot-value">${skillNameMap[slotMapping.p7] || slotMapping.p7}</span></div>
+            <div class="section-title">Active Context</div>
+            <div class="context-card">
+                ${hasObjective ? `<div class="context-objective" data-cmd="sessionActions" title="Session objective">${this._escapeHtml(rawObjective!)}</div>` : ''}
+                <div class="trifecta-tags">
+                    ${trifectaTagsHtml}
+                </div>
+                <div class="context-meta">
+                    ${confidenceLabel ? `<span class="context-badge accent">${personaIcon} ${confidenceLabel} ${sourceLabel}</span>` : ''}
+                    <span class="context-badge ${isNeverAssessed ? 'stale' : ''}" data-cmd="selfActualize" title="${isNeverAssessed ? 'Run self-actualization' : 'Last self-actualization'}">${isNeverAssessed ? '⚡ Assess' : '✓ ' + assessedLabel}</span>
+                    <span class="context-badge">${principlesText}</span>
+                </div>
             </div>
-            ${confidenceLabel ? `<div class="focus-meta"><span class="focus-confidence">${confidenceLabel}</span><span>${sourceLabel}</span></div>` : ''}
         </div>
         
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
                 <div class="action-group-label">FOR YOU</div>
-                <button class="action-btn recommended" data-cmd="launchRecommendedSkill" data-skill="${personaSkill}" data-skill-name="${recommendedSkillName}" title="Recommended for ${personaName}: ${recommendedSkillName}">
-                    <span class="action-icon">${personaIcon}</span>
-                    <span class="action-text">${recommendedSkillName}</span>
-                    <span class="recommended-badge">\u2192</span>
-                </button>
                 ${recommendedActionsHtml}
                 
                 <div class="action-group-label">CORE</div>
@@ -1312,29 +1476,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 
                 ${isEnterpriseMode() ? `<div class="action-group-label">ENTERPRISE</div>
-                ${isGraphAvailable() ? `
-                <button class="action-btn" data-cmd="viewContext" title="View calendar, mail, and presence">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Work Context</span>
-                </button>
-                <button class="action-btn" data-cmd="viewCalendar" title="View upcoming calendar events">
-                    <span class="action-icon">📅</span>
-                    <span class="action-text">Calendar</span>
-                </button>
-                <button class="action-btn" data-cmd="viewMail" title="View recent emails">
-                    <span class="action-icon">📬</span>
-                    <span class="action-text">Mail</span>
-                </button>
-                <button class="action-btn" data-cmd="searchPeople" title="Search for people in your organization">
-                    <span class="action-icon">👥</span>
-                    <span class="action-text">People Search</span>
-                </button>
-                ` : `
                 <button class="action-btn" data-cmd="enterpriseSignIn" title="Sign in with Microsoft Entra ID">
                     <span class="action-icon">🔐</span>
                     <span class="action-text">Sign In (Enterprise)</span>
                 </button>
-                `}` : ''}
+                ` : ''}
             </div>
         </div>
         
@@ -1541,7 +1687,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>Essential Settings</strong> - instruction/prompt file locations, agent mode, skill loading</li>
                             <li><strong>Recommended Settings</strong> - thinking tool, agent requests, MCP gallery, Copilot Memory, hooks</li>
                             <li><strong>Extended Thinking</strong> - Opus 4.5/4.6 deep reasoning for meditation/learning</li>
-                            <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt P5-P7 working memory (GK premium)</li>
+                            <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt Focus Trifectas (GK premium)</li>
                         </ul>
                     </div>
                     

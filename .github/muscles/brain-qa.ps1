@@ -1,6 +1,6 @@
 #Requires -Version 7.0
 # Brain QA - Deep semantic validation of Alex cognitive architecture
-# Location: .github/muscles/brain-qa.ps1 (inheritable)
+# Location: .github/muscles/brain-qa.ps1 (master-only)
 # Skill: brain-qa
 
 param(
@@ -19,16 +19,7 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Split-Path -Parent (Split-Path -Parent $scriptDir)  # .github/scripts -> .github -> root
 $ghPath = Join-Path $rootPath ".github"
-# If platforms/vscode-extension exists, we're in master; otherwise we ARE the heir
-$candidateHeir = Join-Path $rootPath "platforms\vscode-extension"
-if (Test-Path $candidateHeir) {
-    $heirBase = $candidateHeir
-    $isRunningFromHeir = $false
-}
-else {
-    $heirBase = $rootPath
-    $isRunningFromHeir = $true
-}
+$heirBase = Join-Path $rootPath "platforms\vscode-extension"
 
 if (-not (Test-Path $ghPath)) {
     Write-Host "ERROR: .github not found at $ghPath" -ForegroundColor Red
@@ -77,7 +68,7 @@ $runPhases = switch ($Mode) {
     "sync" { $syncPhases }
     "schema" { $schemaPhases }
     "llm" { $llmPhases }
-    default { 1..31 }  # All phases including .github/ and external folder audits
+    default { 1..32 }  # All phases including .github/ and external folder audits
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -435,13 +426,16 @@ if (12 -in $runPhases) {
         $templatePath = "$heirBase\.github\config\user-profile.template.json"
         if (-not (Test-Path $templatePath)) { $resetIssues += "user-profile.template.json missing (needed for runtime profile creation)" }
         
-        # Check P5-P7 slots
+        # Check Active Context section in copilot-instructions.md (v2 format)
         $copilotPath = "$heirBase\.github\copilot-instructions.md"
         if (Test-Path $copilotPath) {
             $copilot = Get-Content $copilotPath -Raw
-            if ($copilot -notmatch '\*\*P5\*\*.*\*\(available\)\*') { $resetIssues += "P5 not marked available" }
-            if ($copilot -notmatch '\*\*P6\*\*.*\*\(available\)\*') { $resetIssues += "P6 not marked available" }
-            if ($copilot -notmatch '\*\*P7\*\*.*\*\(available\)\*') { $resetIssues += "P7 not marked available" }
+            
+            # v3 Identity + Active Context: verify sections exist and have default heir values
+            if ($copilot -notmatch '## Identity') { $resetIssues += "Missing Identity section (v3 format)" }
+            if ($copilot -notmatch '## Active Context') { $resetIssues += "Missing Active Context section" }
+            if ($copilot -match 'Focus Trifectas:\s*master-heir-management') { $resetIssues += "Focus Trifectas has master-only values" }
+            if ($copilot -match 'Last Assessed:\s*\d{4}-') { $resetIssues += "Last Assessed should be 'never' in heir" }
             
             # Check for hardcoded names
             if ($copilot -match "Fabio|Correa|Calefato|Cardoso") { 
@@ -864,12 +858,7 @@ if (25 -in $runPhases) {
     Write-Phase 25 ".github/ Root Files Completeness"
     $expectedRootFiles = @(
         "copilot-instructions.md",
-        "README.md",
-        "alex-cognitive-architecture.md",
-        "ALEX-INTEGRATION.md",
-        "ASSISTANT-COMPATIBILITY.md",
-        "PROJECT-TYPE-TEMPLATES.md",
-        "VALIDATION-SUITE.md"
+        "README.md"
     )
     $missingRoot = @()
     foreach ($rf in $expectedRootFiles) {
@@ -948,7 +937,6 @@ if (26 -in $runPhases) {
     }
 }
 
-# ============================================================
 # PHASE 27: M365 Heir Health
 # ============================================================
 if (27 -in $runPhases) {
@@ -1076,8 +1064,9 @@ if (30 -in $runPhases) {
     # Check that muscles referenced in trifecta catalog exist
     $musclesPath = Join-Path $ghPath "muscles"
     $expectedMuscles = @(
-        "audit-master-alex.ps1", "brain-qa.ps1", "build-extension-package.ps1",
-        "dream-cli.ts", "gamma-generator.js", "normalize-paths.ps1",
+        "audit-master-alex.ps1", "brain-qa.ps1", "brain-qa-heir.ps1",
+        "build-extension-package.ps1",
+        "dream-cli.ts", "fix-fence-bug.ps1", "gamma-generator.js", "normalize-paths.ps1",
         "pptxgen-cli.ts", "sync-architecture.js", "validate-skills.ps1", "validate-synapses.ps1"
     )
     $missingMuscles = @()
@@ -1138,11 +1127,11 @@ if (31 -in $runPhases) {
         else { Write-Pass "cognitive-config.json version matches ($currentVersion)" }
     }
 
-    # Check copilot-instructions.md version header
+    # Check copilot-instructions.md version header (v3 format: # Alex v5.7.0)
     $ciPath = Join-Path $ghPath "copilot-instructions.md"
     if (Test-Path $ciPath) {
         $ciContent = Get-Content $ciPath -Raw
-        if ($ciContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
+        if ($ciContent -match '# Alex v(\d+\.\d+\.\d+)') {
             $ciVersion = $Matches[1]
             if ($ciVersion -ne $currentVersion) {
                 Write-Warn "copilot-instructions.md version ($ciVersion) != $currentVersion"
@@ -1171,6 +1160,88 @@ if (31 -in $runPhases) {
         else { Write-Pass "Heir CHANGELOG.md has entry for $currentVersion" }
     }
 }
+
+# ============================================================
+# PHASE 32: Prefrontal Cortex Evolution Validation
+# ============================================================
+if (32 -in $runPhases) {
+    Write-Phase 32 "Prefrontal Cortex Evolution Validation"
+    $ciPath = Join-Path $ghPath "copilot-instructions.md"
+    if (Test-Path $ciPath) {
+        $ciContent = Get-Content $ciPath -Raw
+
+        # 1. Identity section must exist (v3 format)
+        if ($ciContent -notmatch '## Identity') {
+            Write-Fail "copilot-instructions.md missing ## Identity section"
+        }
+        else { Write-Pass "Identity section present" }
+
+        # 2. Agents listed must match actual agent files on disk
+        $diskAgents = @()
+        $agentFiles = Get-ChildItem "$ghPath\agents\*.agent.md" -ErrorAction SilentlyContinue
+        if ($agentFiles) {
+            $diskAgents = $agentFiles | ForEach-Object { 
+                $_.BaseName -replace '\.agent$', '' -replace '^alex-?', ''
+            } | Where-Object { $_ -ne '' } | Sort-Object
+            $diskAgents = @('Alex') + $diskAgents
+        }
+
+        # Use multiline mode to grab the first content line after ## Agents + optional comment
+        if ($ciContent -match '(?m)^## Agents\r?\n(?:<!--[^>]+-->\r?\n)?(.+)$') {
+            $agentLine = $Matches[1].Trim()
+            $listedAgents = ($agentLine -split ',') | ForEach-Object { ($_ -split '\(')[0].Trim() } | Sort-Object
+            
+            $diskAgentNames = $diskAgents | Sort-Object
+            $missing = $diskAgentNames | Where-Object { $_ -notin $listedAgents }
+            $extra = $listedAgents | Where-Object { $_ -notin $diskAgentNames }
+            
+            if ($missing.Count -gt 0) { Write-Warn "Agents on disk but NOT in copilot-instructions: $($missing -join ', ')" }
+            if ($extra.Count -gt 0) { Write-Warn "Agents in copilot-instructions but NOT on disk: $($extra -join ', ')" }
+            if ($missing.Count -eq 0 -and $extra.Count -eq 0) {
+                Write-Pass "Agent list matches disk ($($diskAgentNames.Count) agents)"
+            }
+        }
+        else { Write-Warn "Could not parse Agents section from copilot-instructions.md" }
+
+        # 3. Listed trifectas must have corresponding skill directories
+        if ($ciContent -match 'Complete trifectas \((\d+)\):\s*(.+)') {
+            $listedCount = [int]$Matches[1]
+            $listedNames = ($Matches[2] -split ',') | ForEach-Object { $_.Trim() }
+            $missingSkills = @()
+            foreach ($name in $listedNames) {
+                $skillDir = Join-Path "$ghPath\skills" $name
+                if (-not (Test-Path $skillDir)) { $missingSkills += $name }
+            }
+
+            if ($listedCount -ne $listedNames.Count) {
+                Write-Warn "Trifecta count ($listedCount) doesn't match listed names ($($listedNames.Count))"
+            }
+            elseif ($missingSkills.Count -gt 0) {
+                Write-Warn "Listed trifectas missing skill directories: $($missingSkills -join ', ')"
+            }
+            else {
+                Write-Pass "All $listedCount listed trifectas have skill directories"
+            }
+        }
+        else { Write-Warn "Could not parse trifecta list from copilot-instructions.md" }
+
+        # 4. Active Context section must exist
+        if ($ciContent -notmatch '## Active Context') {
+            Write-Fail "copilot-instructions.md missing ## Active Context section"
+        }
+        else { Write-Pass "Active Context section present" }
+
+        # 5. User Profile section must exist
+        if ($ciContent -notmatch '## User Profile') {
+            Write-Fail "copilot-instructions.md missing ## User Profile section"
+        }
+        else { Write-Pass "User Profile section present" }
+    }
+    else {
+        Write-Fail "copilot-instructions.md not found"
+    }
+}
+
 Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host " BRAIN QA SUMMARY" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan

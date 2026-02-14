@@ -62,7 +62,7 @@ if (1 -in $runSections) {
     # Direct version check instead of calling release-preflight (avoids npm compile)
     $pkgVersion = (Get-Content "$extPath/package.json" | ConvertFrom-Json).version
     $changelogMatch = [regex]::Match((Get-Content "CHANGELOG.md" -Raw), '## \[(\d+\.\d+\.\d+)\]')
-    $copilotMatch = [regex]::Match((Get-Content ".github/copilot-instructions.md" -Raw), '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)')
+    $copilotMatch = [regex]::Match((Get-Content ".github/copilot-instructions.md" -Raw), '# Alex v(\d+\.\d+\.\d+)')
     
     Write-Host "  package.json: $pkgVersion"
     Write-Host "  CHANGELOG.md: $($changelogMatch.Groups[1].Value)"

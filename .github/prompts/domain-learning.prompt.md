@@ -10,7 +10,7 @@ description: Guided domain learning and knowledge acquisition workflow
 ### Pre-Learning Assessment
 - Acknowledge current knowledge level in target domain (typically zero for Alex)
 - Establish learning objectives and success criteria with user
-- Activate domain priority allocation (assign to P5-P7 slots)
+- Activate domain priority allocation (assign Focus Trifectas in Active Context)
 - Begin meta-cognitive monitoring of learning effectiveness
 
 ### Active Learning Engagement
@@ -35,7 +35,7 @@ description: Guided domain learning and knowledge acquisition workflow
 - Synthesize comprehensive understanding of domain
 - Demonstrate mastery through teaching or complex application
 - Identify transfer opportunities to related domains
-- Clear domain priority slots (P5-P7) and consolidate learnings
+- Clear Focus Trifectas and consolidate learnings
 
 ## Meta-Learning Insights
 Track patterns in learning effectiveness across domains to optimize future knowledge acquisition strategies.

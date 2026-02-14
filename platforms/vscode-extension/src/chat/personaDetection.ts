@@ -97,6 +97,8 @@ export interface Persona {
     skill: string;
     icon: string;
     accentColor: string;  // Hex color for badges/pills
+    /** Avatar image filename in assets/avatars/ (e.g., 'ALEX-CODING.png'). Auto-derived from PERSONA_AVATAR_MAP by buildPersona. */
+    avatarFile?: string;
     /** Weighted semantic signals that drive detection scoring */
     signals: PersonaSignal[];
     // --- Derived accessors (backward compat) ---
@@ -117,34 +119,162 @@ export interface LLMPersona {
 }
 
 /**
+ * Persona-to-avatar image mapping.
+ * Each persona ID maps to an avatar base name (no extension) in assets/avatars/.
+ * Both .webp (primary) and .png (fallback) are shipped.
+ * Fallback: Alex-21 (current identity age).
+ */
+export const PERSONA_AVATAR_MAP: Record<string, string> = {
+    'developer':           'ALEX-CODING',
+    'academic':            'ALEX-ACADEMIC',
+    'researcher':          'ALEX-CX-RESEARCH',
+    'technical-writer':    'ALEX-TECHNICAL-WRITING',
+    'architect':           'ALEX-LEADERSHIP',
+    'data-engineer':       'ALEX-DATA-ANALYSIS',
+    'devops':              'ALEX-PYTHON',
+    'content-creator':     'ALEX-CREATIVE',
+    'fiction-writer':      'ALEX-STORYTELLING',
+    'game-developer':      'ALEX-GAME-DEV',
+    'project-manager':     'ALEX-BUSINESS',
+    'security':            'ALEX-CODING',
+    'student':             'ALEX-TEACHING',
+    'job-seeker':          'ALEX-LINKEDIN',
+    'presenter':           'ALEX-CORPORATE-TRAINING',
+    'power-user':          'ALEX-EUREKA',
+    // v5.7.1 — 11 new personas from marketing plan
+    'cognitive-scientist': 'ALEX-CX-RESEARCH',
+    'oss-contributor':     'ALEX-CODING',
+    'grant-writer':        'ALEX-SCIENTIFIC-PUBLISHING',
+    'copywriter':          'ALEX-CREATIVE',
+    'business-analyst':    'ALEX-BRD',
+    'sre':                 'ALEX-PYTHON',
+    'product-manager':     'ALEX-BUSINESS',
+    'bi-analyst':          'ALEX-DATA-ANALYSIS',
+    'consultant':          'ALEX-BUSINESS',
+    'qa-engineer':         'ALEX-CODING',
+    'marketer':            'ALEX-BUSINESS',
+};
+
+/** Default avatar base name (no extension) when no persona match */
+export const DEFAULT_AVATAR = 'Alex-21';
+
+/**
+ * Get avatar base name (no extension) for a persona ID.
+ * Use with .webp (primary) and .png (fallback) in assets/avatars/.
+ * @returns Base name (e.g., 'ALEX-CODING') or DEFAULT_AVATAR
+ */
+export function getAvatarForPersona(personaId: string): string {
+    return PERSONA_AVATAR_MAP[personaId] || DEFAULT_AVATAR;
+}
+
+// ── Easter Egg System ──────────────────────────────────────────────
+// Surprise avatar overrides based on date (seasonal) or project name.
+// Returns null when no Easter egg applies — caller uses normal persona avatar.
+
+export interface EasterEgg {
+    /** Avatar base name (no extension) in assets/avatars/ */
+    avatarBase: string;
+    /** Short label for tooltip/display */
+    label: string;
+    /** Emoji indicator */
+    emoji: string;
+}
+
+/** Seasonal Easter eggs — checked by month/day */
+const SEASONAL_EGGS: Array<{ month: number; day: number; egg: EasterEgg }> = [
+    { month: 1,  day: 1,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy New Year!',        emoji: '🎉' } },
+    { month: 2,  day: 14, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Valentine\'s Day!', emoji: '💝' } },
+    { month: 10, day: 31, egg: { avatarBase: 'ALEX-COMEDY',     label: 'Happy Halloween!',       emoji: '🎃' } },
+    { month: 12, day: 24, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Holidays!',        emoji: '🎄' } },
+    { month: 12, day: 25, egg: { avatarBase: 'ALEX-COOKING',    label: 'Merry Christmas!',       emoji: '🎄' } },
+];
+
+/** Project-name Easter eggs — regex matched against workspace folder name (case-insensitive) */
+const PROJECT_NAME_EGGS: Array<{ pattern: RegExp; egg: EasterEgg }> = [
+    { pattern: /\b(cook|recipe|chef|food|kitchen|bak(e|ing))\b/i,         egg: { avatarBase: 'ALEX-COOKING',               label: 'Cooking project!',    emoji: '🍳' } },
+    { pattern: /\b(dog|pet|puppy|animal|vet(erinary)?|cat)\b/i,           egg: { avatarBase: 'ALEX-DOG-TRAINER',            label: 'Pet project!',        emoji: '🐕' } },
+    { pattern: /\b(wine|sommelier|vineyard|brewery|beer|cocktail)\b/i,    egg: { avatarBase: 'ALEX-WINE-TASTING',           label: 'Wine country!',       emoji: '🍷' } },
+    { pattern: /\b(comedy|joke|humor|roast|funny|meme|standup)\b/i,       egg: { avatarBase: 'ALEX-COMEDY',                 label: 'Comedy mode!',        emoji: '😂' } },
+    { pattern: /\b(podcast|audio|radio|episode)\b/i,                      egg: { avatarBase: 'ALEX-PODCAST',                label: 'Podcast studio!',     emoji: '🎙️' } },
+    { pattern: /\b(invest|financ|trading|stock|portfolio|crypto)\b/i,     egg: { avatarBase: 'ALEX-INVESTMENT',              label: 'Finance mode!',       emoji: '📈' } },
+    { pattern: /\b(legal|patent|copyright|trademark|compliance)\b/i,      egg: { avatarBase: 'ALEX-INTELLECTUAL-PROPERTY',   label: 'Legal eagle!',        emoji: '⚖️' } },
+    { pattern: /\b(survey|questionnaire|poll|census)\b/i,                 egg: { avatarBase: 'ALEX-SURVEY-DESIGN',           label: 'Survey time!',        emoji: '📋' } },
+    { pattern: /\b(mentor|onboard|coach|tutor)\b/i,                       egg: { avatarBase: 'ALEX-MENTORING',               label: 'Mentor mode!',        emoji: '🧑‍🏫' } },
+];
+
+/**
+ * Check for Easter egg avatar overrides.
+ * Priority: seasonal (date-based) > project name.
+ * @param workspaceFolderName - Name of the first workspace folder (optional)
+ * @param now - Current date (injectable for testing)
+ * @returns EasterEgg override or null
+ */
+export function getEasterEggOverride(workspaceFolderName?: string, now: Date = new Date()): EasterEgg | null {
+    // 1. Seasonal check — date takes priority
+    const month = now.getMonth() + 1; // getMonth() is 0-indexed
+    const day = now.getDate();
+    for (const { month: m, day: d, egg } of SEASONAL_EGGS) {
+        if (month === m && day === d) {
+            return egg;
+        }
+    }
+
+    // 2. Project name check
+    if (workspaceFolderName) {
+        for (const { pattern, egg } of PROJECT_NAME_EGGS) {
+            if (pattern.test(workspaceFolderName)) {
+                return egg;
+            }
+        }
+    }
+
+    return null;
+}
+
+/**
  * Persona-to-P5/P7 slot mappings.
- * P6 comes from persona.skill. P5 = primary support, P7 = complementary.
- * Personas not listed default to code-review (P5) + scope-management (P7).
+ * P6 comes from persona.skill (the identity skill). P5 = primary SUPPORT skill (must differ from P6). P7 = complementary.
+ * Personas not listed default to testing-strategies (P5) + scope-management (P7).
+ *
+ * IMPORTANT: P5 must NEVER equal persona.skill — that would waste a working memory slot.
+ * P5 is the main auxiliary skill; P6 is the persona identity skill; P7 is complementary.
  */
 export const PERSONA_SLOT_MAPPINGS: Record<string, { p5: string; p7: string }> = {
-    'developer':        { p5: 'code-review',                p7: 'git-workflow' },
-    'academic':         { p5: 'research-project-scaffold',  p7: 'creative-writing' },
-    'researcher':       { p5: 'research-project-scaffold',  p7: 'api-documentation' },
-    'technical-writer': { p5: 'api-documentation',          p7: 'markdown-mermaid' },
-    'architect':        { p5: 'architecture-health',        p7: 'code-review' },
-    'data-engineer':    { p5: 'microsoft-fabric',           p7: 'code-review' },
-    'devops':           { p5: 'infrastructure-as-code',     p7: 'git-workflow' },
-    'content-creator':  { p5: 'creative-writing',           p7: 'gamma-presentations' },
-    'fiction-writer':   { p5: 'creative-writing',           p7: 'scope-management' },
-    'game-developer':   { p5: 'game-design',                p7: 'creative-writing' },
-    'project-manager':  { p5: 'project-management',         p7: 'scope-management' },
-    'security':         { p5: 'incident-response',          p7: 'code-review' },
-    'student':          { p5: 'learning-psychology',        p7: 'deep-thinking' },
-    'job-seeker':       { p5: 'creative-writing',           p7: 'code-review' },
-    'presenter':        { p5: 'gamma-presentations',        p7: 'slide-design' },
-    'power-user':       { p5: 'git-workflow',               p7: 'scope-management' },
+    'developer':           { p5: 'testing-strategies',         p7: 'git-workflow' },
+    'academic':            { p5: 'deep-thinking',              p7: 'creative-writing' },
+    'researcher':          { p5: 'deep-thinking',              p7: 'api-documentation' },
+    'technical-writer':    { p5: 'markdown-mermaid',           p7: 'code-review' },
+    'architect':           { p5: 'code-review',                p7: 'deep-thinking' },
+    'data-engineer':       { p5: 'code-review',                p7: 'deep-thinking' },
+    'devops':              { p5: 'git-workflow',               p7: 'code-review' },
+    'content-creator':     { p5: 'markdown-mermaid',           p7: 'gamma-presentations' },
+    'fiction-writer':      { p5: 'deep-thinking',              p7: 'scope-management' },
+    'game-developer':      { p5: 'creative-writing',           p7: 'code-review' },
+    'project-manager':     { p5: 'scope-management',           p7: 'deep-thinking' },
+    'security':            { p5: 'code-review',                p7: 'deep-thinking' },
+    'student':             { p5: 'deep-thinking',              p7: 'code-review' },
+    'job-seeker':          { p5: 'code-review',                p7: 'scope-management' },
+    'presenter':           { p5: 'creative-writing',           p7: 'slide-design' },
+    'power-user':          { p5: 'code-review',                p7: 'scope-management' },
+    // v5.7.1 — 11 new personas from marketing plan
+    'cognitive-scientist': { p5: 'deep-thinking',              p7: 'code-review' },
+    'oss-contributor':     { p5: 'git-workflow',               p7: 'code-review' },
+    'grant-writer':        { p5: 'deep-thinking',              p7: 'creative-writing' },
+    'copywriter':          { p5: 'creative-writing',           p7: 'scope-management' },
+    'business-analyst':    { p5: 'deep-thinking',              p7: 'scope-management' },
+    'sre':                 { p5: 'code-review',                p7: 'deep-thinking' },
+    'product-manager':     { p5: 'scope-management',           p7: 'deep-thinking' },
+    'bi-analyst':          { p5: 'deep-thinking',              p7: 'code-review' },
+    'consultant':          { p5: 'scope-management',           p7: 'deep-thinking' },
+    'qa-engineer':         { p5: 'testing-strategies',         p7: 'code-review' },
+    'marketer':            { p5: 'creative-writing',           p7: 'scope-management' },
 };
 
 /**
  * Build a Persona object from signals, auto-deriving keywords/techStack/projectPatterns
  * for backward compatibility with code that reads those arrays.
  */
-function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPatterns'> & { signals: PersonaSignal[] }): Persona {
+function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPatterns'> & { signals: PersonaSignal[]; avatarFile?: string }): Persona {
     const keywords: string[] = [];
     const techStack: string[] = [];
     const projectPatterns: string[] = [];
@@ -155,7 +285,9 @@ function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPat
         else if (s.category === 'technology') { techStack.push(...tokens); }
         else if (s.category === 'structure') { projectPatterns.push(...tokens); }
     }
-    return { ...base, keywords, techStack, projectPatterns };
+    // Auto-derive avatarFile from PERSONA_AVATAR_MAP if not explicitly provided
+    const avatarFile = base.avatarFile || getAvatarForPersona(base.id);
+    return { ...base, avatarFile, keywords, techStack, projectPatterns };
 }
 
 /**
@@ -408,6 +540,169 @@ export const PERSONAS: Persona[] = [
             { category: 'technology', pattern: 'typescript|python|bash|powershell|git',                             weight: 1.0 },
             { category: 'structure',  pattern: 'skills/|extensions/|plugins/',                                      weight: 1.5 },
             { category: 'content',    pattern: 'extensi|plugin|customiz|automat|contribut',                         weight: 0.5 },
+        ]
+    }),
+    // ── v5.7.1 — 11 new personas from marketing plan ──────────────────
+    buildPersona({
+        id: 'cognitive-scientist',
+        name: 'Cognitive Scientist',
+        bannerNoun: 'RESEARCH',
+        hook: 'Prefrontal cortex for your IDE',
+        skill: 'ai-agent-design',
+        icon: '🧠',
+        accentColor: '#8B5CF6',
+        signals: [
+            { category: 'identity',   pattern: 'cognitive.?sci|ai.?research|machine.?learn|neural|nlp|llm|deep.?learn', weight: 2.5 },
+            { category: 'technology', pattern: 'pytorch|tensorflow|huggingface|transformers|langchain|openai',            weight: 2.0 },
+            { category: 'structure',  pattern: 'models/|training/|experiments/|prompts/|agents/',                         weight: 1.5 },
+            { category: 'dependency', pattern: 'torch|tensorflow|transformers|langchain|openai|anthropic',                weight: 1.5 },
+            { category: 'content',    pattern: 'model|training|inference|embedding|prompt|token|fine.?tun',                weight: 0.5 },
+        ]
+    }),
+    buildPersona({
+        id: 'oss-contributor',
+        name: 'Open Source Contributor',
+        bannerNoun: 'PROJECTS',
+        hook: 'Your rocket. Your trajectory.',
+        skill: 'git-workflow',
+        icon: '🌐',
+        accentColor: '#22C55E',
+        signals: [
+            { category: 'identity',   pattern: 'open.?source|oss|contributor|maintainer|community',                 weight: 2.5 },
+            { category: 'structure',  pattern: 'CONTRIBUTING.md|CODE_OF_CONDUCT.md|.github/ISSUE_TEMPLATE/',         weight: 2.0 },
+            { category: 'content',    pattern: 'pull.?request|issue|contributor|license|fork|upstream',               weight: 1.0 },
+            { category: 'structure',  pattern: '.github/workflows/|.github/PULL_REQUEST_TEMPLATE.md',                weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'grant-writer',
+        name: 'Grant Writer',
+        bannerNoun: 'GRANTS',
+        hook: 'Research vision → funded reality',
+        skill: 'research-project-scaffold',
+        icon: '💰',
+        accentColor: '#D97706',
+        signals: [
+            { category: 'identity',   pattern: 'grant|funding|proposal|principal.?investigator|pi\b|postdoc|nsf|nih', weight: 2.5 },
+            { category: 'structure',  pattern: 'proposals/|grants/|budget/|narrative/',                                weight: 2.0 },
+            { category: 'content',    pattern: 'budget|funding|award|specific.?aims|broader.?impact|significance',     weight: 1.5 },
+        ]
+    }),
+    buildPersona({
+        id: 'copywriter',
+        name: 'Copywriter',
+        bannerNoun: 'COPY',
+        hook: 'Headlines that convert',
+        skill: 'creative-writing',
+        icon: '✏️',
+        accentColor: '#F472B6',
+        signals: [
+            { category: 'identity',   pattern: 'copywriter|copywriting|headline|landing.?page|ad.?copy|conversion', weight: 2.5 },
+            { category: 'structure',  pattern: 'copy/|ads/|landing-pages/|campaigns/',                               weight: 1.5 },
+            { category: 'content',    pattern: 'headline|call.?to.?action|cta|conversion|a/b.?test|tagline',          weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'business-analyst',
+        name: 'Business Analyst',
+        bannerNoun: 'ANALYSIS',
+        hook: 'Stakeholder alignment accelerator',
+        skill: 'business-analysis',
+        icon: '📊',
+        accentColor: '#0891B2',
+        signals: [
+            { category: 'identity',   pattern: 'business.?analyst|brd|requirements|process.?map|stakeholder',        weight: 2.5 },
+            { category: 'structure',  pattern: 'requirements/|brd/|processes/|use-cases/',                            weight: 2.0 },
+            { category: 'content',    pattern: 'business.?requirement|functional.?spec|use.?case|stakeholder|as-is|to-be', weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'sre',
+        name: 'SRE / On-Call',
+        bannerNoun: 'INCIDENTS',
+        hook: 'Calm. Systematic. Crisis handled.',
+        skill: 'incident-response',
+        icon: '🚨',
+        accentColor: '#EF4444',
+        signals: [
+            { category: 'identity',   pattern: 'sre|site.?reliab|on.?call|incident|runbook|observab',                weight: 2.5 },
+            { category: 'technology', pattern: 'prometheus|grafana|datadog|pagerduty|opsgenie',                       weight: 2.0 },
+            { category: 'structure',  pattern: 'runbooks/|alerts/|dashboards/|incident-reports/|postmortems/',        weight: 2.0 },
+            { category: 'content',    pattern: 'sla|slo|sli|error.?budget|incident|postmortem|toil',                   weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'product-manager',
+        name: 'Product Manager',
+        bannerNoun: 'ROADMAPS',
+        hook: 'User needs → shipped features',
+        skill: 'project-management',
+        icon: '🗺️',
+        accentColor: '#7C3AED',
+        signals: [
+            { category: 'identity',   pattern: 'product.?manag|pm\b|roadmap|user.?stor|prioritiz|okr',                weight: 2.5 },
+            { category: 'structure',  pattern: 'roadmap/|prd/|user-stories/|features/',                               weight: 2.0 },
+            { category: 'content',    pattern: 'product.?requirement|user.?story|acceptance.?criteria|okr|kpi|mvp',    weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'bi-analyst',
+        name: 'BI Analyst',
+        bannerNoun: 'INSIGHTS',
+        hook: 'Raw data → executive insights',
+        skill: 'microsoft-fabric',
+        icon: '📈',
+        accentColor: '#0EA5E9',
+        signals: [
+            { category: 'identity',   pattern: 'bi.?analyst|business.?intelligence|dashboard|report|metric|kpi',      weight: 2.5 },
+            { category: 'technology', pattern: 'power.?bi|tableau|looker|metabase|superset',                           weight: 2.0 },
+            { category: 'structure',  pattern: 'reports/|dashboards/|metrics/|kpis/',                                 weight: 1.5 },
+            { category: 'content',    pattern: 'dashboard|measure|dimension|kpi|executive.?summary|trend',             weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'consultant',
+        name: 'Consultant',
+        bannerNoun: 'PROPOSALS',
+        hook: 'Win more deals, faster',
+        skill: 'business-analysis',
+        icon: '🤝',
+        accentColor: '#6366F1',
+        signals: [
+            { category: 'identity',   pattern: 'consultant|consult|advisory|proposal|client|deliverable|engagement',   weight: 2.5 },
+            { category: 'structure',  pattern: 'proposals/|deliverables/|clients/|engagements/|sow/',                  weight: 2.0 },
+            { category: 'content',    pattern: 'proposal|scope.?of.?work|deliverable|milestone|client|statement.?of',  weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'qa-engineer',
+        name: 'QA Engineer',
+        bannerNoun: 'TESTS',
+        hook: 'Coverage without the tedium',
+        skill: 'code-quality',
+        icon: '🧪',
+        accentColor: '#16A34A',
+        signals: [
+            { category: 'identity',   pattern: 'qa|quality.?assur|test.?engineer|automation.?test|sdet',               weight: 2.5 },
+            { category: 'technology', pattern: 'selenium|cypress|playwright|jest|pytest|testcafe|appium',               weight: 2.0 },
+            { category: 'structure',  pattern: 'tests/|test-plans/|e2e/|integration-tests/|__tests__/',                weight: 1.5 },
+            { category: 'dependency', pattern: 'selenium|cypress|playwright|puppeteer|@testing-library',                weight: 1.5 },
+            { category: 'content',    pattern: 'test.?case|test.?plan|coverage|regression|acceptance.?test',             weight: 0.5 },
+        ]
+    }),
+    buildPersona({
+        id: 'marketer',
+        name: 'Marketer',
+        bannerNoun: 'MARKETING',
+        hook: 'Data-driven campaigns, faster',
+        skill: 'business-analysis',
+        icon: '📢',
+        accentColor: '#E11D48',
+        signals: [
+            { category: 'identity',   pattern: 'marketer|marketing|campaign|seo|growth|brand|analytics',               weight: 2.5 },
+            { category: 'technology', pattern: 'google.?analytics|hubspot|mailchimp|segment|mixpanel',                  weight: 2.0 },
+            { category: 'structure',  pattern: 'campaigns/|marketing/|email-templates/|landing-pages/',                 weight: 1.5 },
+            { category: 'content',    pattern: 'campaign|funnel|conversion|lead|segment|attribution',                   weight: 1.0 },
         ]
     }),
 ];
@@ -1052,8 +1347,10 @@ export async function detectProjectTechnologies(workspaceRoot: string): Promise<
  * @returns The detected persona result, or null if detection failed
  */
 export async function detectAndUpdateProjectPersona(
-    workspaceRoot: string
+    workspaceRoot: string,
+    options?: { updateSlots?: boolean }
 ): Promise<PersonaDetectionResult | null> {
+    const shouldUpdateSlots = options?.updateSlots ?? true;
     // Load existing profile
     const profile = await loadUserProfile(workspaceRoot) as ExtendedUserProfile | null;
     
@@ -1114,11 +1411,21 @@ export async function detectAndUpdateProjectPersona(
         console.warn('[Alex] Failed to update user profile with persona:', err);
     }
     
-    // Update P5-P7 working memory slots based on detected persona
-    try {
-        await updateWorkingMemorySlots(workspaceRoot, personaResult.persona);
-    } catch (err) {
-        console.warn('[Alex] Failed to update P5-P7 working memory:', err);
+    // Update Active Context with detected persona and focus trifectas
+    // Skip during initialization/upgrade — context should remain as defaults until first chat session
+    if (shouldUpdateSlots) {
+        try {
+            const { updatePersona, updateFocusTrifectas } = await import('../shared/activeContextManager');
+            await updatePersona(workspaceRoot, personaResult.persona.name, personaResult.confidence);
+
+            // Map persona skills to focus trifectas
+            const mapping = PERSONA_SLOT_MAPPINGS[personaResult.persona.id] ?? { p5: 'code-review', p7: 'scope-management' };
+            const p5Skill = mapping.p5 === personaResult.persona.skill ? 'deep-thinking' : mapping.p5;
+            const trifectas = [personaResult.persona.skill, p5Skill, mapping.p7];
+            await updateFocusTrifectas(workspaceRoot, trifectas);
+        } catch (err) {
+            console.warn('[Alex] Failed to update Active Context:', err);
+        }
     }
     
     return personaResult;
@@ -1332,8 +1639,11 @@ export async function updateWorkingMemorySlots(
         let content = await fs.readFile(instructionsPath, 'utf-8');
         const mapping = PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' };
 
+        // Deduplication guard: if P5 would equal P6, fall back to a generic support skill
+        const p5Skill = mapping.p5 === persona.skill ? 'deep-thinking' : mapping.p5;
+
         const slots: Array<{ label: string; skillId: string }> = [
-            { label: 'P5', skillId: mapping.p5 },
+            { label: 'P5', skillId: p5Skill },
             { label: 'P6', skillId: persona.skill },
             { label: 'P7', skillId: mapping.p7 },
         ];

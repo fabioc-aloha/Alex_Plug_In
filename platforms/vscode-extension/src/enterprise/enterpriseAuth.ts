@@ -27,16 +27,8 @@ const ALEX_SCOPES = [
   'offline_access', // Refresh tokens
 ];
 
-// Graph API scopes for v5.6.0 enterprise integration
-const GRAPH_SCOPES = [
-  'Calendars.Read', // Read calendar events
-  'Mail.Read', // Read email messages
-  'Presence.Read', // Read online/offline/busy status
-  'People.Read', // Read frequent contacts
-];
-
-// Combined scopes for full enterprise functionality
-const ALL_ENTERPRISE_SCOPES = [...ALEX_SCOPES, ...GRAPH_SCOPES];
+// Combined scopes for enterprise functionality
+const ALL_ENTERPRISE_SCOPES = [...ALEX_SCOPES];
 
 // MSAL client for custom app authentication
 let msalClient: msal.PublicClientApplication | null = null;
@@ -202,7 +194,7 @@ export function canWrite(): boolean {
  * Supports both VS Code's built-in provider and custom app via MSAL
  */
 export async function authenticateWithEntraId(
-  options: { silent?: boolean; scopes?: string[]; includeGraphScopes?: boolean } = {}
+  options: { silent?: boolean; scopes?: string[] } = {}
 ): Promise<EnterpriseUser | null> {
   const config = getEnterpriseConfig();
   if (!config.enabled) {
@@ -210,8 +202,8 @@ export async function authenticateWithEntraId(
     return null;
   }
 
-  // Default to all enterprise scopes (including Graph) for full functionality
-  const scopes = options.scopes || (options.includeGraphScopes !== false ? ALL_ENTERPRISE_SCOPES : ALEX_SCOPES);
+  // Default to all enterprise scopes
+  const scopes = options.scopes || ALL_ENTERPRISE_SCOPES;
 
   // Use custom app authentication if configured
   if (config.auth.useCustomApp) {
