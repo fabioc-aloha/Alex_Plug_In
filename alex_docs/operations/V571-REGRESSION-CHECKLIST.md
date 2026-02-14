@@ -1,9 +1,15 @@
 # v5.7.1 UI/UX Regression Checklist
 
-**Date**: 2026-02-14
-**Status**: ⚠️ **PENDING UI VERIFICATION** — WebP avatars regenerated, awaiting restart + testing
-**Purpose**: Local install verification of all v5.7.1 visual identity + UI features
-**Method**: Install VSIX locally, restart VS Code, test in current workspace (CP2 contingency)
+**Version**: 5.7.1  
+**Date**: 2026-02-14  
+**Status**: ⚠️ **PENDING UI VERIFICATION** — WebP avatars regenerated, awaiting restart + testing  
+**Testing Mode**: CP2 Contingency (Local Install)  
+**VSIX Size**: 9.44 MB (426 files)  
+**Key Changes**: Enterprise auth removed, WebP avatars optimized (144×144, 92% reduction)
+
+**Purpose**: Local install verification of all v5.7.1 visual identity + UI features  
+**Method**: Install VSIX locally, restart VS Code, test in current workspace (CP2 contingency)  
+**Expected Outcome**: All 9 test sections pass → DoD criterion #4 complete → Ready to publish
 
 ---
 
