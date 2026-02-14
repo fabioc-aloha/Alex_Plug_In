@@ -17,61 +17,10 @@ I remember across sessions. My memory files are my lived experience, not just da
 ## Active Context
 <!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->
 Persona: Developer (85% confidence)
-Objective: Fix UI Deliver v5.7.1 — Visual Identity + UI/UX Stabilization (high quality)
+Objective: Fix Welcome Menu UI and Avatars
 Focus Trifectas: brand-asset-management, release-management, heir-curation
 Principles: KISS, DRY, Optimize-for-AI
 Last Assessed: 2026-02-14 — v5.7.0 → targeting v5.7.1
-
-### Definition of Done (8-point gate — ALL must pass before shipping)
-1. **Builds clean** — `npm run compile` exits 0 with zero errors
-2. **No dead code** — Every import resolves, every export is consumed, no orphaned modules
-3. **Counts match reality** — Slash commands (24), tools (12), skills (116/114), trifectas (9) in docs match actual code
-4. **F5 smoke test passes** — Extension activates in sandbox, welcome view renders, 3 random commands work
-5. **Version aligned** — package.json, CHANGELOG, copilot-instructions.md all show the same version
-6. **Heir sync clean** — `sync-architecture.js` runs with 0 errors, heir activates independently
-7. **No non-functional features** — If it's in the UI or command palette, it works. If it doesn't work, it's removed
-8. **CHANGELOG documents the delta** — Every user-visible change has a line item
-> Ship what works. Remove what doesn't. Document what changed.
-
-### v5.7.1 Task Board
-Completed:
-- ✅ Graph code removal — microsoftGraph.ts + 4 slash commands + 7 settings removed
-- ✅ Definition of Done — 8-point shipping criteria added to roadmap
-- ✅ alex_docs research audit — 44 backlog items extracted from ~120 docs, 16 top items in roadmap
-- ✅ Avatar images resized — 44 images at 256×256px, 4.8 MB in assets/avatars/
-- ✅ Replicate evaluation — Full platform research, 6 backlog items added
-- ✅ Replicate MCP POC — `.vscode/mcp.json` configured (multimedia AI backend)
-- ✅ Alex-Finch.md — Core identity document created (was referenced but missing)
-- ✅ Redundant files archived — 3 superseded files moved to archive/
-- ✅ Synapse validation confirmed — JSON schema + pre-commit hook already operational (110/110)
-
-- ✅ Welcome panel avatar — Circular persona avatar in sidebar header with logo overlay
-- ✅ Persona→avatar mapping — PERSONA_AVATAR_MAP (16 entries), getAvatarForPersona(), avatarFile on Persona interface
-
-- ✅ Chat avatar dynamic — updateChatAvatar() sets iconPath per persona dynamically
-- ✅ Rocket tagline banner — Gradient bar with persona-specific bannerNoun, clickable
-- ✅ Self-actualization reward — AGE_TIERS (9 levels), maturity card in session record
-
-- ✅ Easter eggs — Seasonal + project-name surprise avatars (5 seasonal, 9 project-name triggers)
-
-- ✅ TDZ bug fix — welcomeView.ts skillNameMap reference before declaration (Feb 14)
-- ✅ Welcome panel layout redesign — Large 72px avatar in centered section, rocket icon in header
-- ✅ TDZ debugging pattern — Added to vscode-extension-patterns skill (meditation Feb 14)
-- ✅ Synapse enhancement — vscode-extension-patterns ↔ root-cause-analysis (production debugging)
-
-Remaining (High priority):
-- 📋 UI/UX regression sweep (3h) — Test all panels/views/commands after recent changes
-- 📋 Deploy v5.7.1 changes — Build, test, commit, push
-
-Reference: alex_docs/features/ALEX-AVATAR-INTEGRATION-PLAN.md
-
-### Current Extension Stats
-- Codebase: ~56 .ts files, ~30,500 lines | Build: `npm run compile` → exit 0
-- @alex: 24 slash commands, 12 LM tools
-- Architecture: 116 master skills, 114 heir skills, 30 instructions, 19 prompts, 7 agents, 9 trifectas
-- Global Knowledge: 257 entries (28 patterns + 229 insights)
-- Version: package.json=5.7.1, CHANGELOG=5.7.1, copilot-instructions=5.7.1
-
 ## User Profile
 <!-- I use this to know who I'm working with and how they prefer to collaborate. -->
 Read .github/config/user-profile.json BEFORE writing content with user's name.
