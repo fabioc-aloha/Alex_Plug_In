@@ -1,6 +1,7 @@
 # v5.7.1 UI/UX Regression Checklist
 
 **Date**: 2026-02-14
+**Status**: ✅ **PRE-FLIGHT COMPLETE** — Enterprise auth removed, compiled, packaged, installed
 **Purpose**: F5 sandbox verification of all v5.7.1 visual identity + UI features
 **Method**: Press F5 in VS Code, open a test workspace, run through each section
 
@@ -8,7 +9,10 @@
 
 ## Pre-Flight
 
-- [ ] `npm run compile` exits 0 (**verified** — clean as of 2026-02-14)
+- [x] `npm run compile` exits 0 (**verified** — clean as of 2026-02-14)
+- [x] Enterprise auth removed (commit 5ba9fe2) — 763 lines deleted, 3 commands removed
+- [x] `npx @vscode/vsce package` — alex-cognitive-architecture-5.7.1.vsix created (9.84 MB)
+- [x] `code --install-extension` — installed locally
 - [ ] F5 launches Extension Development Host
 - [ ] Extension activates — "Alex Cognitive Architecture" appears in sidebar
 
@@ -113,12 +117,27 @@
 
 - [ ] No console errors in Extension Dev Host → Developer Tools
 - [ ] Extension deactivates cleanly on close
-- [ ] All passing? → Ready to ship v5.7.1
+- [ ] All passing? → Ready to publish to marketplace
+- [x] v5.7.1 packaged and installed locally (2026-02-14)
+- [x] Enterprise auth cleanup complete (commit 5ba9fe2)
 
 ---
 
 ## Discrepancy Notes (Fix During Sweep)
 
-- **LM tools count**: Active Context says "8 LM tools" but package.json declares **12** — update docs
-- **Chat avatar WebP**: If VS Code doesn't support `.webp` for `ChatParticipant.iconPath`, fall back to `.png`
-- **AGE_TIERS boundary**: 2 skills → Newborn? Or Toddler? Verify edge case at exactly 3 skills
+- [x] **LM tools count**: ~~Active Context says "8 LM tools" but package.json declares **12**~~ — **FIXED** in copilot-instructions.md
+- [ ] **Chat avatar WebP**: If VS Code doesn't support `.webp` for `ChatParticipant.iconPath`, fall back to `.png`
+- [ ] **AGE_TIERS boundary**: 2 skills → Newborn? Or Toddler? Verify edge case at exactly 3 skills
+
+---
+
+## Completion Log
+
+**2026-02-14 14:30** — Pre-flight complete:
+- ✅ Enterprise auth removed (enterpriseAuth.ts deleted, 3 commands removed, ~10 settings removed)
+- ✅ Clean compile (zero TypeScript errors)
+- ✅ VSIX packaged (9.84 MB, 425 files)
+- ✅ Installed locally via `code --install-extension`
+- ✅ Commits pushed to main (5ba9fe2)
+
+**Next**: F5 sandbox testing of all UI/UX features listed above
