@@ -266,6 +266,134 @@ Calculate before requesting Master promotion:
 
 ---
 
+## Recognizing Shallow vs Deep Content
+
+The biggest failure mode in skill creation is the **capabilities-list anti-pattern** — a skill that reads like a product brochure instead of encoding real knowledge.
+
+### The Capabilities-List Anti-Pattern
+
+```markdown
+# ❌ SHALLOW — adds zero value
+Expert in domain-agnostic knowledge acquisition.
+
+## Capabilities
+- Guide conversational knowledge acquisition
+- Create skill files
+- Build expertise through progressive questioning
+
+## When to Use
+- User wants to learn something new
+- Teaching Alex about a domain
+```
+
+**Why this fails**: An LLM already knows how to "guide conversational learning" generically. The skill adds nothing the model didn't already have. It's a capability *label*, not capability *knowledge*.
+
+### What Deep Looks Like
+
+```markdown
+# ✅ DEEP — encodes specific, actionable knowledge
+
+## Phase 2: Foundation — Nail the core concepts
+
+- Ask for the simplest possible explanation of each concept
+- Demand concrete examples, not abstractions
+- Test understanding by explaining it back
+- **Red flag**: If the explanation uses jargon from the same domain, you haven't bottomed out
+
+**Exit criteria**: Can explain core concepts without jargon.
+```
+
+### Depth Assessment Rubric
+
+| Signal | Shallow | Deep |
+|--------|---------|------|
+| Opening line | "Expert in X" / "Capabilities:" | Specific insight or principle |
+| Tables | Category labels only | Real data: thresholds, trade-offs, examples |
+| Sections | "When to Use" / "Input/Output" | Domain-specific knowledge modules |
+| Advice | Generic ("be careful") | Specific ("timeout after 30s because...") |
+| Examples | None or abstract | Concrete, copy-pasteable, with context |
+| Anti-patterns | Not mentioned | Named, explained, with alternatives |
+
+### The Litmus Test
+
+For each section, ask: **"Would an LLM produce something equally useful without this skill?"**
+
+- If **yes** → the section is shallow, rewrite or remove it
+- If **no** → the section earns its place
+
+---
+
+## Trifecta Decision Framework
+
+A **trifecta** = SKILL.md (declarative) + .instructions.md (procedural) + .prompt.md (interactive). Not every skill needs one.
+
+### When to Build a Trifecta
+
+| Signal | Needs Trifecta? | Why |
+|--------|:-:|------|
+| Skill describes a multi-step workflow | **Yes** | Steps need procedural memory (.instructions.md) |
+| Users need guided conversation | **Yes** | Interactive workflow needs episodic memory (.prompt.md) |
+| Skill is reference knowledge only | **No** | Table lookups don't need procedures |
+| Process is already covered by another trifecta | **No** | Avoid duplication |
+| Skill is used frequently + is error-prone | **Yes** | High value from step-by-step guidance |
+| Skill is domain expertise (patterns, anti-patterns) | **No** | SKILL.md alone is the right memory type |
+
+### Trifecta Components — What Goes Where
+
+| Component | Memory Type | Contains | Example |
+|-----------|-------------|----------|----------|
+| SKILL.md | Declarative ("what") | Domain knowledge, tables, thresholds, patterns | testing-strategies: pyramid, mock rules, coverage philosophy |
+| .instructions.md | Procedural ("how") | Step-by-step process, decision points, checkpoints | release-management: version bump → changelog → build → publish |
+| .prompt.md | Episodic ("interact") | Guided conversation, user Q&A, session templates | /learn: Socratic learning flow |
+
+**Rule**: If the skill's value is in its *reference data* (tables, thresholds, patterns), a SKILL.md alone is correct. Only add procedures/prompts when there's a genuine *process* to guide.
+
+### Building the Trifecta
+
+1. **Start with SKILL.md** — always create the declarative knowledge first
+2. **Observe usage** — is there a repeatable process emerging?
+3. **Add .instructions.md** — when you can write numbered steps with decision points
+4. **Add .prompt.md** — when users need an interactive guided experience
+5. **Register in catalogs** — update TRIFECTA-CATALOG.md
+
+---
+
+## Muscle Assessment
+
+A **muscle** is an execution script in `.github/muscles/` — the motor cortex of the architecture. Scripts, not memory.
+
+### When to Create a Muscle
+
+| Signal | Create Muscle? | Example |
+|--------|:-:|----------|
+| Same terminal commands run repeatedly | **Yes** | `brain-qa.ps1` — synapse validation |
+| File validation that could be automated | **Yes** | `validate-skills.ps1` — schema checking |
+| Multi-file transformations | **Yes** | `sync-architecture.js` — heir sync |
+| Decision-making that requires judgment | **No** | Code review (that's a skill, not a script) |
+| Creative work | **No** | Writing (LLM does this, not a script) |
+| One-time operation | **No** | Not worth automating |
+
+### Muscle Naming Convention
+
+| Pattern | Example | What It Does |
+|---------|---------|---------------|
+| `{verb}-{noun}.ps1` | `validate-synapses.ps1` | PowerShell validation |
+| `{verb}-{noun}.js` | `sync-architecture.js` | Node.js transformation |
+| `{noun}-{noun}.ps1` | `brain-qa.ps1` | PowerShell audit |
+
+### Muscle + Trifecta Integration
+
+A muscle is *referenced by* a trifecta but is never a memory component itself:
+
+```
+SKILL.md          → "What to check" (knowledge)
+.instructions.md  → "Step 5: Run brain-qa.ps1" (procedure)
+.prompt.md        → "Shall I run the health check?" (interaction)
+brain-qa.ps1      → Actually runs the check (execution)
+```
+
+---
+
 ## Anti-Patterns
 
 | ❌ Don't | ✅ Do Instead |
@@ -277,6 +405,9 @@ Calculate before requesting Master promotion:
 | Use project-specific names | Generalize (MyAppConfig → config patterns) |
 | Mega-skill (1000+ lines) | Split into focused skills |
 | Orphan skill (no connections) | Always connect to network |
+| Write capabilities lists | Encode real domain knowledge |
+| Build trifecta for reference skills | SKILL.md alone for lookup knowledge |
+| Create muscle for one-time tasks | Only automate repeating operations |
 
 ---
 
@@ -367,6 +498,7 @@ Add your skill to the action-keyword index:
 
 ## Synapses
 
+- [.github/instructions/skill-building.instructions.md] (Critical, Implements, Forward) - "Step-by-step procedure for creating and completing skills"
 - [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Learning becomes skill"
 - [.github/instructions/heir-skill-promotion.instructions.md] (Critical, Implements, Forward) - "Skill ready for promotion"
 - [.github/skills/skill-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"

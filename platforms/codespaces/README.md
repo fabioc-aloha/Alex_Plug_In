@@ -3,7 +3,7 @@
 > Zero-translation cloud heir — VS Code in the browser with full Alex capabilities
 
 [![Codespaces](https://img.shields.io/badge/GitHub-Codespaces-24292f)](https://docs.github.com/en/codespaces)
-[![Alex](https://img.shields.io/badge/Alex-v5.6.9-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![Alex](https://img.shields.io/badge/Alex-v5.7.0-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
 
 ---
 

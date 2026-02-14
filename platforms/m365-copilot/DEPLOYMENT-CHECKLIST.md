@@ -195,4 +195,4 @@ az ad app list --display-name "Alex" --query "[].{name:displayName, appId:appId}
 ---
 
 *Last updated: February 13, 2026*
-*Version: 5.6.9*
+*Version: 5.7.0*

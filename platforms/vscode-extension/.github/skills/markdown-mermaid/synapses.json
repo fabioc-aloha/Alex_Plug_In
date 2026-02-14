@@ -25,6 +25,12 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "Color theory, accessibility, contrast principles for diagram styling"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "validates",
+      "strength": 0.6,
+      "reason": "RCA methodology systematically identifies parser-specific pitfalls across diagram types"
     }
   ],
   "activationBoost": [
@@ -69,7 +75,15 @@
     "scan mermaid blocks",
     "fix all diagrams",
     "batch fix",
-    "document audit"
+    "document audit",
+    "classDiagram pitfall",
+    "architecture-beta",
+    "keyword collision",
+    "comma class list",
+    "stroke-dasharray",
+    "group icon",
+    "bracket label",
+    "cross-diagram compatibility"
   ],
   "triggers": [
     "mermaid",

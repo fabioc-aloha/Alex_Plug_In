@@ -69,6 +69,13 @@
       "strength": "strong",
       "direction": "incoming",
       "context": "Research-first methodology generates skills via skill-building quality gates"
+    },
+    {
+      "target": ".github/instructions/skill-building.instructions.md",
+      "type": "procedural",
+      "strength": "critical",
+      "direction": "outgoing",
+      "context": "Step-by-step procedure for creating, assessing, and completing skills"
     }
   ]
 }

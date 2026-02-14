@@ -297,11 +297,15 @@ async function freshInstall(extensionPath: string, rootPath: string): Promise<vo
     { src: 'copilot-instructions.md', dest: 'copilot-instructions.md' },
     { src: 'instructions', dest: 'instructions' },
     { src: 'prompts', dest: 'prompts' },
-    { src: 'episodic', dest: 'episodic' },
     { src: 'config', dest: 'config' },
     { src: 'agents', dest: 'agents' },
     { src: 'skills', dest: 'skills' },
+    { src: 'muscles', dest: 'muscles' },
+    { src: 'assets', dest: 'assets' },
   ];
+
+  // Folders created empty (populated at runtime, not shipped in VSIX)
+  const emptyFolders = ['episodic'];
 
   const extGithub = path.join(extensionPath, '.github');
   const destGithub = path.join(rootPath, '.github');
@@ -315,6 +319,11 @@ async function freshInstall(extensionPath: string, rootPath: string): Promise<vo
     if (await fs.pathExists(srcPath)) {
       await fs.copy(srcPath, destPath, { overwrite: true });
     }
+  }
+
+  // Create empty runtime folders
+  for (const folder of emptyFolders) {
+    await fs.ensureDir(path.join(destGithub, folder));
   }
 
   // Create fresh manifest

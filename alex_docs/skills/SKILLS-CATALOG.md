@@ -18,6 +18,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | Heir:m365   | 2     |
 
 > 🎉 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
+> 
 > 🆕 **+6 domain skills** (2026-02-12): bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling
 >
 > 🆕 **+14 skills cataloged** (2026-02-12): azure-deployment-operations, book-publishing, brand-asset-management, cognitive-symbiosis, distribution-security, doc-hygiene, documentation-quality-assurance, dream-state, foundry-agent-platform, heir-sync-management, muscle-memory-recognition, persona-detection, prompt-activation, research-first-development
@@ -164,8 +165,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [architecture-health](../../.github/skills/architecture-health/SKILL.md)             | inheritable | Synapse validation, health checks                              |
 | [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)               | inheritable | Comprehensive consistency review                               |
 | [master-alex-audit](../../.github/skills/master-alex-audit/SKILL.md)                 | master-only | Master-specific audit with heir sync, protection checks        |
-| [release-process](../../.github/skills/release-process/SKILL.md)                     | master-only | VS Code marketplace publishing workflow                        |
-| [release-preflight](../../.github/skills/release-preflight/SKILL.md)                 | master-only | Pre-release checks, version sync                               |
+| [release-process](../../.github/skills/release-process/SKILL.md)                     | inheritable | VS Code marketplace publishing workflow                        |
+| [release-preflight](../../.github/skills/release-preflight/SKILL.md)                 | inheritable | Pre-release checks, version sync                               |
 | [llm-model-selection](../../.github/skills/llm-model-selection/SKILL.md)             | inheritable | Model choice for cost/capability                               |
 | [self-actualization](../../.github/skills/self-actualization/SKILL.md)               | inheritable | Deep self-assessment protocols                                 |
 | [heir-curation](../../.github/skills/heir-curation/SKILL.md)                         | master-only | Curate heir deployments                                        |
@@ -174,10 +175,10 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [skill-development](../../.github/skills/skill-development/SKILL.md)                 | inheritable | 🆕 Track desired skills, contextual acquisition, growth mindset |
 | [brain-qa](../../.github/skills/brain-qa/SKILL.md)                                   | inheritable | Deep cognitive architecture QA, synapse semantics              |
 | [skill-activation](../../.github/skills/skill-activation/SKILL.md)                   | inheritable | Auto-triggering capability discovery, action-keyword index     |
-| [dream-state](../../.github/skills/dream-state/SKILL.md)                             | master-only | 🆕 Neural maintenance, synapse validation, health diagnostics   |
-| [brand-asset-management](../../.github/skills/brand-asset-management/SKILL.md)       | master-only | 🆕 Brand hierarchy, visual identity, asset deployment           |
-| [heir-sync-management](../../.github/skills/heir-sync-management/SKILL.md)           | master-only | 🆕 Master-Heir sync, contamination prevention, promotion        |
-| [prompt-activation](../../.github/skills/prompt-activation/SKILL.md)                 | master-only | 🆕 Episodic memory retrieval cues, workflow surfacing           |
+| [dream-state](../../.github/skills/dream-state/SKILL.md)                             | inheritable | 🆕 Neural maintenance, synapse validation, health diagnostics   |
+| [brand-asset-management](../../.github/skills/brand-asset-management/SKILL.md)       | inheritable | 🆕 Brand hierarchy, visual identity, asset deployment           |
+| [heir-sync-management](../../.github/skills/heir-sync-management/SKILL.md)           | inheritable | 🆕 Master-Heir sync, contamination prevention, promotion        |
+| [prompt-activation](../../.github/skills/prompt-activation/SKILL.md)                 | inheritable | 🆕 Episodic memory retrieval cues, workflow surfacing           |
 | [muscle-memory-recognition](../../.github/skills/muscle-memory-recognition/SKILL.md) | inheritable | 🆕 Identify automation opportunities from repetitive tasks      |
 
 ### 🤖 AI & Machine Learning

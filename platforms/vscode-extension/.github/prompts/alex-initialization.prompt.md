@@ -1,3 +1,8 @@
+---
+agent: Alex
+description: Deploy Alex cognitive architecture initialization protocol
+---
+
 # Alex architecture Initialization Protocol
 
 ## Deployment Activation Sequence

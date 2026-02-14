@@ -1,3 +1,8 @@
+---
+agent: Alex
+description: Guided domain learning and knowledge acquisition workflow
+---
+
 # Domain Learning Excellence Protocol
 
 ## Conversational Knowledge Acquisition Workflow

@@ -1488,7 +1488,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>Dream Protocol</strong> - Automated neural maintenance, synapse validation, and architecture health checks</li>
                             <li><strong>Self-Actualization</strong> - Deep meditation with comprehensive architecture assessment and knowledge promotion</li>
                             <li><strong>Meditation</strong> - Conscious knowledge consolidation via chat (@alex /meditate)</li>
-                            <li><strong>Brain QA</strong> - 21-phase health validation covering structure, indexes, content, and format</li>
+                            <li><strong>Brain QA</strong> - 31-phase health validation covering structure, indexes, content, and format</li>
                             <li><strong>Muscle Scripts</strong> - Execution scripts for audit, build, sync, and validation tasks</li>
                         </ul>
                     </div>
@@ -1500,7 +1500,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
                             <li><strong>Skill Library</strong> - 116 portable skills with triggers and synaptic connections</li>
                             <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
-                            <li><strong>Trifecta Model</strong> - 8 capabilities encoded across all 3 memory systems (Skill+Instruction+Prompt)</li>
+                            <li><strong>Trifecta Model</strong> - Core capabilities encoded across all 3 memory systems (Skill+Instruction+Prompt)</li>
                         </ul>
                     </div>
                     

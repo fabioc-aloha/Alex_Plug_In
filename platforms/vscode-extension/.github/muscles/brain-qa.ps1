@@ -1,3 +1,4 @@
+#Requires -Version 7.0
 # Brain QA - Deep semantic validation of Alex cognitive architecture
 # Location: .github/muscles/brain-qa.ps1 (inheritable)
 # Skill: brain-qa
@@ -64,9 +65,11 @@ function Write-Fail {
 
 # Define phase groups
 $quickPhases = 1..6
-$syncPhases = 5, 7, 8, 13, 14, 15
-$schemaPhases = 2, 6, 11, 16, 17  # Added YAML frontmatter phases
+$syncPhases = 5, 7, 8, 13, 14, 15, 27, 28  # Added heir health phases
+$schemaPhases = 2, 6, 11, 16, 17  # YAML frontmatter phases
 $llmPhases = 10, 20, 21  # LLM-first content validation
+$ghFolderPhases = 22..25  # .github/ subfolder coverage (episodic, assets, templates, root files)
+$fullAuditPhases = 26..31  # alex_docs, heirs, GK, scripts, version consistency
 
 # Determine which phases to run
 $runPhases = switch ($Mode) {
@@ -74,7 +77,7 @@ $runPhases = switch ($Mode) {
     "sync" { $syncPhases }
     "schema" { $schemaPhases }
     "llm" { $llmPhases }
-    default { 1..21 }  # Updated to include new phases
+    default { 1..31 }  # All phases including .github/ and external folder audits
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -351,28 +354,42 @@ if (9 -in $runPhases) {
 }
 
 # ============================================================
-# PHASE 10: Mermaid Detection in Core Files
+# PHASE 10: Core File Token Budget
 # ============================================================
 if (10 -in $runPhases) {
-    Write-Phase 10 "Mermaid Detection in Core Files"
+    Write-Phase 10 "Core File Token Budget"
+    # copilot-instructions.md is auto-loaded into EVERY chat session.
+    # Large content wastes context window tokens. Keep it lean.
+    $budgetWarnings = @()
     $coreFiles = @(
         "$ghPath\copilot-instructions.md",
         "$heirBase\.github\copilot-instructions.md"
     )
-    $hasMermaid = @()
     foreach ($file in $coreFiles) {
         if (Test-Path $file) {
             $content = Get-Content $file -Raw
-            if ($content -match '```mermaid') {
-                $hasMermaid += (Split-Path $file -Leaf)
+            $lineCount = ($content -split '\n').Count
+            $charCount = $content.Length
+            $label = Split-Path $file -Leaf
+            $parent = Split-Path (Split-Path $file -Parent) -Leaf
+            $id = "$parent/$label"
+
+            # Warn if over ~500 lines (rough token budget for always-loaded file)
+            if ($lineCount -gt 500) {
+                $budgetWarnings += "$id is $lineCount lines ($charCount chars) - consider trimming (auto-loaded every session)"
+            }
+
+            # ASCII art is bad for LLMs (requires spatial reasoning)
+            if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+                $budgetWarnings += "$id contains ASCII box-drawing art (use Mermaid or tables instead)"
             }
         }
     }
-    if ($hasMermaid.Count -eq 0) { 
-        Write-Pass "No mermaid in core files"
+    if ($budgetWarnings.Count -eq 0) {
+        Write-Pass "Core files within token budget"
     }
-    else { 
-        Write-Warn "Mermaid found in: $($hasMermaid -join ', ')"
+    else {
+        foreach ($bw in $budgetWarnings) { Write-Warn $bw }
     }
 }
 
@@ -719,15 +736,15 @@ if (20 -in $runPhases) {
         }
     }
     
-    # Note: Mermaid is GOOD for LLMs (structured DSL) - don't warn about it
-    # Emojis are meaningful semantic tokens - they're fine
+    # Mermaid is LLM-friendly (structured DSL) - only a token-budget concern
+    # in always-loaded files (checked in Phase 10). Emojis are semantic tokens.
     
     if ($formatWarnings.Count -eq 0) {
         Write-Pass "Content formats are LLM-friendly"
     }
     else {
         foreach ($fw in $formatWarnings) { Write-Warn $fw }
-        Write-Host "  💡 Mermaid diagrams are LLM-friendly (structured syntax). ASCII art requires spatial reasoning." -ForegroundColor DarkGray
+        Write-Host "  💡 Use Mermaid or tables instead of ASCII art — LLMs parse structured syntax better." -ForegroundColor DarkGray
     }
 }
 
@@ -750,8 +767,410 @@ if (21 -in $runPhases) {
 }
 
 # ============================================================
-# SUMMARY
+# PHASE 22: Episodic Archive Health
 # ============================================================
+if (22 -in $runPhases) {
+    Write-Phase 22 "Episodic Archive Health"
+    $episodicPath = Join-Path $ghPath "episodic"
+    if (Test-Path $episodicPath) {
+        $allEpisodic = Get-ChildItem "$episodicPath\*.md" -ErrorAction SilentlyContinue
+        $dreamReports = $allEpisodic | Where-Object { $_.Name -match '^dream-report-' }
+        $meditations = $allEpisodic | Where-Object { $_.Name -match '^meditation-' }
+        $selfActualizations = $allEpisodic | Where-Object { $_.Name -match '^self-actualization-' }
+        $sessions = $allEpisodic | Where-Object { $_.Name -match '^session-' }
+
+        Write-Pass "Episodic files: $($allEpisodic.Count) total ($($dreamReports.Count) dreams, $($meditations.Count) meditations, $($selfActualizations.Count) self-actualizations)"
+
+        # Detect orphaned .prompt.md files (legacy naming)
+        $legacyPrompts = $allEpisodic | Where-Object { $_.Name -match '\.prompt\.md$' }
+        if ($legacyPrompts.Count -gt 0) {
+            Write-Warn "Episodic has $($legacyPrompts.Count) legacy .prompt.md files (current convention: .md)"
+            foreach ($lp in $legacyPrompts) { Write-Warn "  Legacy: $($lp.Name)" }
+        }
+
+        # Detect undated episodic files (no YYYY-MM-DD pattern)
+        $undated = $allEpisodic | Where-Object { $_.Name -notmatch '\d{4}-\d{2}-\d{2}' -and $_.Name -ne '.markdownlint.json' }
+        if ($undated.Count -gt 0) {
+            Write-Warn "Episodic has $($undated.Count) undated files (may need archival review)"
+            foreach ($ud in $undated) { Write-Warn "  Undated: $($ud.Name)" }
+        }
+    }
+    else {
+        Write-Pass "No episodic/ folder (normal for heirs)"
+    }
+}
+
+# ============================================================
+# PHASE 23: .github/ Assets Validation
+# ============================================================
+if (23 -in $runPhases) {
+    Write-Phase 23 ".github/ Assets Validation"
+    $assetsPath = Join-Path $ghPath "assets"
+    if (Test-Path $assetsPath) {
+        $svgFiles = Get-ChildItem "$assetsPath\*.svg" -ErrorAction SilentlyContinue
+        $pngFiles = Get-ChildItem "$assetsPath\*.png" -ErrorAction SilentlyContinue
+        $totalAssets = (Get-ChildItem $assetsPath -File).Count
+
+        # Banner must exist (used in README, marketplace)
+        $hasBanner = (Test-Path (Join-Path $assetsPath "banner.svg")) -or (Test-Path (Join-Path $assetsPath "banner.png"))
+        if (-not $hasBanner) {
+            Write-Fail "Missing banner asset (banner.svg or banner.png)"
+        }
+        else { Write-Pass "Banner asset present" }
+
+        Write-Pass "Assets: $totalAssets files ($($svgFiles.Count) SVG, $($pngFiles.Count) PNG)"
+    }
+    else {
+        Write-Warn ".github/assets/ not found"
+    }
+}
+
+# ============================================================
+# PHASE 24: Issue & PR Templates
+# ============================================================
+if (24 -in $runPhases) {
+    Write-Phase 24 "Issue & PR Templates"
+    $issueTemplatePath = Join-Path $ghPath "ISSUE_TEMPLATE"
+    $prTemplatePath = Join-Path $ghPath "pull_request_template.md"
+
+    if (Test-Path $issueTemplatePath) {
+        $templates = Get-ChildItem "$issueTemplatePath\*.md" -ErrorAction SilentlyContinue
+        $expectedTemplates = @("bug_report.md", "feature_request.md")
+        $missingTemplates = @()
+        foreach ($t in $expectedTemplates) {
+            if (-not (Test-Path (Join-Path $issueTemplatePath $t))) { $missingTemplates += $t }
+        }
+        if ($missingTemplates.Count -gt 0) {
+            foreach ($mt in $missingTemplates) { Write-Warn "Missing issue template: $mt" }
+        }
+        else { Write-Pass "Issue templates present ($($templates.Count) templates)" }
+    }
+    else {
+        Write-Warn "ISSUE_TEMPLATE/ not found"
+    }
+
+    if (Test-Path $prTemplatePath) {
+        Write-Pass "PR template present"
+    }
+    else {
+        Write-Warn "pull_request_template.md not found"
+    }
+}
+
+# ============================================================
+# PHASE 25: .github/ Root Files Completeness
+# ============================================================
+if (25 -in $runPhases) {
+    Write-Phase 25 ".github/ Root Files Completeness"
+    $expectedRootFiles = @(
+        "copilot-instructions.md",
+        "README.md",
+        "alex-cognitive-architecture.md",
+        "ALEX-INTEGRATION.md",
+        "ASSISTANT-COMPATIBILITY.md",
+        "PROJECT-TYPE-TEMPLATES.md",
+        "VALIDATION-SUITE.md"
+    )
+    $missingRoot = @()
+    foreach ($rf in $expectedRootFiles) {
+        if (-not (Test-Path (Join-Path $ghPath $rf))) { $missingRoot += $rf }
+    }
+    if ($missingRoot.Count -gt 0) {
+        foreach ($mr in $missingRoot) { Write-Fail "Missing .github/ root file: $mr" }
+    }
+    else { Write-Pass "All .github/ root files present ($($expectedRootFiles.Count) files)" }
+
+    # Verify all expected subdirs exist
+    $expectedDirs = @("agents", "config", "episodic", "instructions", "muscles", "prompts", "skills", "assets", "ISSUE_TEMPLATE")
+    $missingDirs = @()
+    foreach ($d in $expectedDirs) {
+        if (-not (Test-Path (Join-Path $ghPath $d))) { $missingDirs += $d }
+    }
+    if ($missingDirs.Count -gt 0) {
+        foreach ($md in $missingDirs) { Write-Warn "Missing .github/ subfolder: $md" }
+    }
+    else { Write-Pass "All .github/ subfolders present ($($expectedDirs.Count) folders)" }
+}
+
+# ============================================================
+# PHASE 26: alex_docs/ Architecture Docs Freshness
+# ============================================================
+if (26 -in $runPhases) {
+    Write-Phase 26 "alex_docs/ Architecture Docs Freshness"
+    $docsPath = Join-Path $rootPath "alex_docs"
+    if (Test-Path $docsPath) {
+        $archPath = Join-Path $docsPath "architecture"
+        $expectedArchDocs = @(
+            "TRIFECTA-CATALOG.md", "COGNITIVE-ARCHITECTURE.md", "MEMORY-SYSTEMS.md",
+            "NEUROANATOMICAL-MAPPING.md", "AGENT-CATALOG.md", "SEMANTIC-SKILL-GRAPH.md"
+        )
+        $missingDocs = @()
+        foreach ($doc in $expectedArchDocs) {
+            $fp = Join-Path $archPath $doc
+            if (-not (Test-Path $fp)) { $missingDocs += $doc }
+        }
+        if ($missingDocs.Count -gt 0) {
+            foreach ($md in $missingDocs) { Write-Fail "Missing architecture doc: $md" }
+        }
+
+        # Check for stale version references in architecture docs
+        $staleVersions = @()
+        Get-ChildItem "$archPath\*.md" -ErrorAction SilentlyContinue | ForEach-Object {
+            $content = Get-Content $_.FullName -Raw
+            if ($content -match 'Alex v[23]\.\d+\.\d+') {
+                $staleVersions += "$($_.Name) references pre-v5 Alex version"
+            }
+        }
+        if ($staleVersions.Count -gt 0) {
+            foreach ($sv in $staleVersions) { Write-Warn $sv }
+        }
+
+        # Check skill catalog accuracy
+        $catalogPath = Join-Path $docsPath "skills\SKILLS-CATALOG.md"
+        if (Test-Path $catalogPath) {
+            $catalogContent = Get-Content $catalogPath -Raw
+            $masterSkillCount = (Get-ChildItem "$ghPath\skills\*\SKILL.md").Count
+            if ($catalogContent -match 'Total.*?(\d+)\s*skills') {
+                $catalogCount = [int]$Matches[1]
+                if ($catalogCount -ne $masterSkillCount) {
+                    Write-Warn "SKILLS-CATALOG.md says $catalogCount skills, actual: $masterSkillCount"
+                }
+                else { Write-Pass "SKILLS-CATALOG.md count matches ($masterSkillCount)" }
+            }
+        }
+
+        if ($missingDocs.Count -eq 0 -and $staleVersions.Count -eq 0) {
+            Write-Pass "Architecture docs present and version-current"
+        }
+    }
+    else {
+        Write-Warn "alex_docs/ folder not found (expected in master)"
+    }
+}
+
+# ============================================================
+# PHASE 27: M365 Heir Health
+# ============================================================
+if (27 -in $runPhases) {
+    Write-Phase 27 "M365 Heir Health"
+    $m365Path = Join-Path $rootPath "platforms\m365-copilot"
+    if (Test-Path $m365Path) {
+        # Version alignment
+        $m365PkgPath = Join-Path $m365Path "package.json"
+        $vscPkgPath = Join-Path $rootPath "platforms\vscode-extension\package.json"
+        if ((Test-Path $m365PkgPath) -and (Test-Path $vscPkgPath)) {
+            $m365Pkg = Get-Content $m365PkgPath -Raw | ConvertFrom-Json
+            $vscPkg = Get-Content $vscPkgPath -Raw | ConvertFrom-Json
+            if ($m365Pkg.version -ne $vscPkg.version) {
+                Write-Warn "M365 heir version ($($m365Pkg.version)) != VS Code heir ($($vscPkg.version))"
+            }
+            else { Write-Pass "M365 heir version aligned ($($m365Pkg.version))" }
+        }
+
+        # Check essential M365 files exist
+        $m365Required = @("teamsapp.yml", "appPackage\declarativeAgent.json", "README.md")
+        $m365Missing = @()
+        foreach ($f in $m365Required) {
+            if (-not (Test-Path (Join-Path $m365Path $f))) { $m365Missing += $f }
+        }
+        if ($m365Missing.Count -gt 0) {
+            foreach ($mf in $m365Missing) { Write-Fail "M365 heir missing: $mf" }
+        }
+        else { Write-Pass "M365 heir essential files present" }
+
+        # Badge vs package.json version check
+        $m365Readme = Join-Path $m365Path "README.md"
+        if (Test-Path $m365Readme) {
+            $readmeContent = Get-Content $m365Readme -Raw
+            if ($readmeContent -match 'badge/version-([0-9.]+)-') {
+                $badgeVer = $Matches[1]
+                if ($badgeVer -ne $m365Pkg.version) {
+                    Write-Warn "M365 README badge ($badgeVer) != package.json ($($m365Pkg.version))"
+                }
+            }
+        }
+    }
+    else {
+        Write-Pass "M365 heir not present (skipped)"
+    }
+}
+
+# ============================================================
+# PHASE 28: Codespaces Heir Health
+# ============================================================
+if (28 -in $runPhases) {
+    Write-Phase 28 "Codespaces Heir Health"
+    $csPath = Join-Path $rootPath "platforms\codespaces"
+    if (Test-Path $csPath) {
+        $csRequired = @("devcontainer.json", "README.md")
+        $csMissing = @()
+        foreach ($f in $csRequired) {
+            if (-not (Test-Path (Join-Path $csPath $f))) { $csMissing += $f }
+        }
+        if ($csMissing.Count -gt 0) {
+            foreach ($cf in $csMissing) { Write-Fail "Codespaces heir missing: $cf" }
+        }
+        else { Write-Pass "Codespaces heir essential files present" }
+    }
+    else {
+        Write-Pass "Codespaces heir not present (skipped)"
+    }
+}
+
+# ============================================================
+# PHASE 29: Global Knowledge Sync Validation
+# ============================================================
+if (29 -in $runPhases) {
+    Write-Phase 29 "Global Knowledge Sync Validation"
+    $gkPath = Join-Path (Split-Path $rootPath -Parent) "Alex-Global-Knowledge"
+    if (Test-Path $gkPath) {
+        # Index vs actual file count
+        $indexPath = Join-Path $gkPath "index.json"
+        if (Test-Path $indexPath) {
+            $index = Get-Content $indexPath -Raw | ConvertFrom-Json
+            $indexPatterns = ($index.entries | Where-Object { $_.type -eq "pattern" }).Count
+            $indexInsights = ($index.entries | Where-Object { $_.type -eq "insight" }).Count
+            $actualPatterns = (Get-ChildItem (Join-Path $gkPath "patterns\GK-*.md") -ErrorAction SilentlyContinue).Count
+            $actualInsights = (Get-ChildItem (Join-Path $gkPath "insights\GI-*.md") -ErrorAction SilentlyContinue).Count
+
+            if ($indexPatterns -ne $actualPatterns) {
+                Write-Warn "GK index patterns ($indexPatterns) != actual files ($actualPatterns)"
+            }
+            if ($indexInsights -ne $actualInsights) {
+                Write-Warn "GK index insights ($indexInsights) != actual files ($actualInsights)"
+            }
+            if ($indexPatterns -eq $actualPatterns -and $indexInsights -eq $actualInsights) {
+                Write-Pass "GK index matches disk: $actualPatterns patterns, $actualInsights insights"
+            }
+        }
+        else { Write-Warn "Global Knowledge index.json not found" }
+
+        # Check GK copilot-instructions counts match reality
+        $gkCopilot = Join-Path $gkPath ".github\copilot-instructions.md"
+        if (Test-Path $gkCopilot) {
+            $gkContent = Get-Content $gkCopilot -Raw
+            if ($gkContent -match '(\d+)\s*patterns') {
+                $docPatterns = [int]$Matches[1]
+                if ($docPatterns -ne $actualPatterns) {
+                    Write-Warn "GK copilot-instructions says $docPatterns patterns, actual: $actualPatterns"
+                }
+            }
+            if ($gkContent -match '(\d+)\s*insights') {
+                $docInsights = [int]$Matches[1]
+                if ($docInsights -ne $actualInsights) {
+                    Write-Warn "GK copilot-instructions says $docInsights insights, actual: $actualInsights"
+                }
+            }
+        }
+    }
+    else {
+        Write-Pass "Global Knowledge repo not found (skipped)"
+    }
+}
+
+# ============================================================
+# PHASE 30: Release Scripts & Muscles Integrity
+# ============================================================
+if (30 -in $runPhases) {
+    Write-Phase 30 "Release Scripts & Muscles Integrity"
+    # Check that muscles referenced in trifecta catalog exist
+    $musclesPath = Join-Path $ghPath "muscles"
+    $expectedMuscles = @(
+        "audit-master-alex.ps1", "brain-qa.ps1", "build-extension-package.ps1",
+        "dream-cli.ts", "gamma-generator.js", "normalize-paths.ps1",
+        "pptxgen-cli.ts", "sync-architecture.js", "validate-skills.ps1", "validate-synapses.ps1"
+    )
+    $missingMuscles = @()
+    foreach ($m in $expectedMuscles) {
+        if (-not (Test-Path (Join-Path $musclesPath $m))) { $missingMuscles += $m }
+    }
+    if ($missingMuscles.Count -gt 0) {
+        foreach ($mm in $missingMuscles) { Write-Fail "Missing muscle: $mm" }
+    }
+    else { Write-Pass "All trifecta-referenced muscles present ($($expectedMuscles.Count))" }
+
+    # Check release scripts
+    $scriptsPath = Join-Path $rootPath "scripts"
+    if (Test-Path $scriptsPath) {
+        $releaseScripts = @("release-vscode.ps1", "release-preflight.ps1")
+        $missingRelease = @()
+        foreach ($rs in $releaseScripts) {
+            if (-not (Test-Path (Join-Path $scriptsPath $rs))) { $missingRelease += $rs }
+        }
+        if ($missingRelease.Count -gt 0) {
+            foreach ($mr in $missingRelease) { Write-Warn "Missing release script: $mr" }
+        }
+        else { Write-Pass "Release scripts present" }
+    }
+}
+
+# ============================================================
+# PHASE 31: ROADMAP & Root Doc Version Consistency
+# ============================================================
+if (31 -in $runPhases) {
+    Write-Phase 31 "ROADMAP & Root Doc Version Consistency"
+    $vscPkgPath = Join-Path $rootPath "platforms\vscode-extension\package.json"
+    $currentVersion = "unknown"
+    if (Test-Path $vscPkgPath) {
+        $currentVersion = (Get-Content $vscPkgPath -Raw | ConvertFrom-Json).version
+    }
+
+    # Check ROADMAP references current version
+    $roadmapPath = Join-Path $rootPath "ROADMAP-UNIFIED.md"
+    if (Test-Path $roadmapPath) {
+        $rmContent = Get-Content $roadmapPath -Raw
+        if ($rmContent -match 'Current Master Version.*?(\d+\.\d+\.\d+)') {
+            $rmVersion = $Matches[1]
+            if ($rmVersion -ne $currentVersion) {
+                Write-Warn "ROADMAP says master version $rmVersion, package.json says $currentVersion"
+            }
+            else { Write-Pass "ROADMAP master version matches ($currentVersion)" }
+        }
+    }
+
+    # Check cognitive-config.json version
+    $configPath = Join-Path $ghPath "config\cognitive-config.json"
+    if (Test-Path $configPath) {
+        $config = Get-Content $configPath -Raw | ConvertFrom-Json
+        if ($config.version -ne $currentVersion) {
+            Write-Warn "cognitive-config.json version ($($config.version)) != $currentVersion"
+        }
+        else { Write-Pass "cognitive-config.json version matches ($currentVersion)" }
+    }
+
+    # Check copilot-instructions.md version header
+    $ciPath = Join-Path $ghPath "copilot-instructions.md"
+    if (Test-Path $ciPath) {
+        $ciContent = Get-Content $ciPath -Raw
+        if ($ciContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
+            $ciVersion = $Matches[1]
+            if ($ciVersion -ne $currentVersion) {
+                Write-Warn "copilot-instructions.md version ($ciVersion) != $currentVersion"
+            }
+            else { Write-Pass "copilot-instructions.md version matches ($currentVersion)" }
+        }
+    }
+
+    # Check root CHANGELOG has entry for current version
+    $clPath = Join-Path $rootPath "CHANGELOG.md"
+    if (Test-Path $clPath) {
+        $clContent = Get-Content $clPath -Raw
+        if ($clContent -notmatch "\[$currentVersion\]") {
+            Write-Warn "CHANGELOG.md missing entry for $currentVersion"
+        }
+        else { Write-Pass "CHANGELOG.md has entry for $currentVersion" }
+    }
+
+    # Check heir CHANGELOG has entry for current version
+    $heirClPath = Join-Path $rootPath "platforms\vscode-extension\CHANGELOG.md"
+    if (Test-Path $heirClPath) {
+        $heirClContent = Get-Content $heirClPath -Raw
+        if ($heirClContent -notmatch "\[$currentVersion\]") {
+            Write-Warn "Heir CHANGELOG.md missing entry for $currentVersion"
+        }
+        else { Write-Pass "Heir CHANGELOG.md has entry for $currentVersion" }
+    }
+}
 Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host " BRAIN QA SUMMARY" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan

@@ -1,3 +1,8 @@
+---
+agent: Alex
+description: Cross-domain knowledge transfer and pattern application
+---
+
 # Cross-Domain Transfer Excellence Protocol
 
 ## Knowledge Application Across Domains

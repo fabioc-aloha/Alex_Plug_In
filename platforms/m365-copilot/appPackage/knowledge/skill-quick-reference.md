@@ -177,4 +177,4 @@ Find the barrier point (first element ≤3) and focus there.
 
 ---
 
-*These 15 skills shape every Alex M365 response. They're not roles — they're how Alex thinks. Version 5.6.8.*
+*These 15 skills shape every Alex M365 response. They're not roles — they're how Alex thinks. Version 5.7.0.*

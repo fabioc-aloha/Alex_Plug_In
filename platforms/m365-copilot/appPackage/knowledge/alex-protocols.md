@@ -171,4 +171,4 @@
 
 ---
 
-*These protocols help you work with Alex as a true cognitive partner. Version 5.6.8.*
+*These protocols help you work with Alex as a true cognitive partner. Version 5.7.0.*

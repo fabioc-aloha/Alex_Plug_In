@@ -6,7 +6,7 @@
 | ----------- | ----------------------- |
 | **Status**  | 🔄 Active Implementation |
 | **VS Code** | 1.109 (January 2026)    |
-| **Alex**    | v5.6.8 → v5.7.0 target  |
+| **Alex**    | v5.7.0 (released)       |
 | **Updated** | 2026-02-13              |
 
 ---

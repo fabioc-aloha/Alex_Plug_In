@@ -692,6 +692,9 @@ After initialization, Alex manages this structure:
 │   ├── alex.agent.md
 │   ├── alex-researcher.agent.md
 │   └── ...
+├── assets/                    # 🎨 Visual identity (2 files)
+│   ├── banner.svg
+│   └── banner.png
 ├── muscles/                   # 💪 Execution scripts (13 files)
 │   ├── brain-qa.ps1
 │   ├── sync-architecture.js
@@ -717,7 +720,7 @@ After initialization, Alex manages this structure:
 | **Working Memory**    | Chat session       | 7-rule capacity for active processing |
 | **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols    |
 | **Episodic Memory**   | `.prompt.md`       | Complex workflows and sessions        |
-| **Domain Knowledge**  | `DK-*.md`          | Specialized expertise areas           |
+| **Skills/Expertise**  | `.github/skills/`  | Portable domain expertise             |
 
 ---
 
@@ -833,7 +836,7 @@ Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant 
 
 #### 🧠 Brain QA Skill
 
-21-phase cognitive architecture validation — now mandatory Step 0 in release preflight
+31-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
 #### 💡 Smart Nudges
 

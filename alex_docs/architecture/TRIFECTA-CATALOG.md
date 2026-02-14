@@ -45,7 +45,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 | Script                                        | Referenced By                               |
 | --------------------------------------------- | ------------------------------------------- |
 | `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, master-alex-audit   |
-| `.github/muscles/brain-qa.ps1`                | brain-qa (21-phase validation)              |
+| `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)              |
 | `.github/muscles/build-extension-package.ps1` | heir-curation, release-management           |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
 | `.github/muscles/gamma-generator.js`          | gamma-presentations (CLI generation)        |
@@ -58,7 +58,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (7)
+## Complete Trifectas (9)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -122,6 +122,27 @@ Capabilities with all three memory system components — each justified by the "
 | Instruction | `.github/instructions/bootstrap-learning.instructions.md` | Auto-loaded procedure: how to learn new domains, encoding steps                   |
 | Prompt      | `.github/prompts/learn.prompt.md`                         | `/learn` — user invokes guided learning session                                   |
 
+### Brain QA
+
+| Component   | File                                                  | Why It Exists                                                                                    |
+| ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/brain-qa/SKILL.md`                    | Domain knowledge: 31-phase validation, semantic/logic/code/architectural review dimensions       |
+| Instruction | `.github/instructions/semantic-audit.instructions.md` | Auto-loaded procedure: 4-dimension semantic audit (meaning, logic, code alignment, architecture) |
+| Prompt      | `.github/prompts/brainqa.prompt.md`                   | `/brainqa` — user invokes guided brain QA session (script + semantic review)                     |
+
+**Muscle**: `brain-qa.ps1` — the structural validation engine. The trifecta adds the semantic layer the script can't automate.
+
+### Master Alex Audit
+
+| Component   | File                                                  | Why It Exists                                                                           |
+| ----------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/master-alex-audit/SKILL.md`           | Domain knowledge: 22-section audit, semantic/logic/code/architectural review dimensions |
+| Instruction | `.github/instructions/semantic-audit.instructions.md` | Shared procedure: same 4-dimension semantic audit methodology used by brain-qa          |
+| Prompt      | `.github/prompts/masteraudit.prompt.md`               | `/masteraudit` — user invokes guided project audit (script + semantic review)           |
+
+**Muscle**: `audit-master-alex.ps1` — the structural validation engine. Master-only inheritance.
+**Shared instruction**: Both brain-qa and master-alex-audit reference the same `semantic-audit.instructions.md` — the 4-dimension review methodology is universal.
+
 ---
 
 ## Justified Non-Trifectas
@@ -181,10 +202,10 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:    8 justified candidates
+Complete Trifectas:    9 justified candidates
 Procedural-Only:      21 (all justified)
 Prompt-Only:           8 (all justified)
-Skill-Only:           ~100 (standard — passive expertise)
+Skill-Only:           ~98 (standard — passive expertise)
 ```
 
 ### Network Diagram
@@ -192,7 +213,7 @@ Skill-Only:           ~100 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#f6f8fa'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (8)"]
+    subgraph COMPLETE["✅ Complete Trifectas (9)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -200,6 +221,8 @@ flowchart LR
         REL["Release Management"]
         BAM["Brand Asset Management"]
         BL["Bootstrap Learning"]
+        BQA["Brain QA"]
+        MAA["Master Alex Audit"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -215,6 +238,8 @@ flowchart LR
     REL --- SK & INS & PR
     BAM --- SK & INS & PR
     BL --- SK & INS & PR
+    BQA --- SK & INS & PR
+    MAA --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da

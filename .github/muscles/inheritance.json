@@ -14,7 +14,7 @@
         },
         "brain-qa.ps1": {
             "inheritance": "inheritable",
-            "description": "15-phase brain quality assurance validation",
+            "description": "31-phase brain quality assurance validation",
             "referencedBy": [
                 "brain-qa"
             ]
@@ -35,7 +35,7 @@
             ]
         },
         "fix-fence-bug.ps1": {
-            "inheritance": "master-only",
+            "inheritance": "inheritable",
             "description": "Detect and fix VS Code create_file wrapping fence bug",
             "referencedBy": []
         },
@@ -87,11 +87,6 @@
         "README.md": {
             "inheritance": "inheritable",
             "description": "Muscles folder documentation with language selection guide",
-            "referencedBy": []
-        },
-        "fix-fence-bug.ps1": {
-            "inheritance": "inheritable",
-            "description": "Detects and fixes VS Code create_file wrapping fence bug (temporary)",
             "referencedBy": []
         }
     }

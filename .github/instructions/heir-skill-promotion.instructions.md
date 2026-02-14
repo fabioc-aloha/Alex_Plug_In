@@ -105,7 +105,7 @@ Before promoting, assess whether the capability is a trifecta candidate:
 ### 5. Promote to Master
 **Option A**: Copy skill folder from heir to Master's `.github/skills/`
 
-**Option B**: Use `alex_promote_knowledge` tool if it's a DK file
+**Option B**: Use `alex_knowledge_promote` tool to promote a skill to global knowledge
 
 ### 6. Update Master's Catalog
 - Add to `copilot-instructions.md` skill list

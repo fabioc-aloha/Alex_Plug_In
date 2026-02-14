@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.0] - 2026-02-14
+
+> **Structural Consistency & Folder Completeness** — All commands, docs, scripts, and manifests now reference the full .github/ folder structure
+
+### Fixed
+
+- **Initialize/Upgrade commands** — Added `muscles/` and `assets/` to deployment sources; `episodic/` now created as empty runtime directory instead of phantom copy
+- **Reset command** — `pathsToDelete` now includes `agents/`, `skills/`, `muscles/`, `assets/` for clean reset
+- **Manifest scan** — `createInitialManifest` now scans `config/`, `muscles/`, `assets/` directories
+- **.vscodeignore** — Removed incorrect `.github/assets/**` exclusion; assets (banner.svg/png) now ship in VSIX
+- **Version alignment** — 19 files updated from stale 5.6.8 to 5.7.0 (M365 app, alex_docs, .github/README)
+- **brain-qa SKILL.md** — Phase table updated from 21 to 31 phases with all mode shortcuts
+- **Trifecta count** — 8 → 7 (corrected across README, welcomeView)
+- **Memory Types table** — Replaced deprecated "Domain Knowledge | DK-*.md" with "Skills/Expertise"
+- **Architecture tree** — Added `assets/` folder to README diagrams
+- **Memory Stores table** — Added Config, Muscles, Assets to copilot-instructions.md
+- **sync-architecture.js description** — Added muscles, assets to sync folder list in CHANGELOG
+
+### Changed
+
+- **copilot-instructions.md** — Last Assessed updated to v5.7.0 consistency audit
+- **ROADMAP-UNIFIED.md** — Current version updated to 5.7.0
+
+---
+
 ## [5.6.9] - 2026-02-14
 
 > **Semantic Signals + Visual Polish** — Persona detection uses regex-based semantic rules; Mermaid diagrams adopt GitHub Pastel v2; Codespaces heir documented
@@ -140,7 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **`sync-architecture.js`** — Automated master→heir sync during prepublish
-  - Copies skills (respects inheritance), instructions, prompts, config, agents
+  - Copies skills (respects inheritance), instructions, prompts, config, agents, muscles, assets
   - Validates skill counts after sync
   - Prevents "missing skills" bugs like v5.6.2
 

@@ -5,7 +5,7 @@
 |              |                               |
 | ------------ | ----------------------------- |
 | **Status**   | ✅ Production                  |
-| **Version**  | 5.6.8 (February 2026)         |
+| **Version**  | 5.7.0 (February 2026)         |
 | **Engine**   | VS Code ^1.109.0              |
 | **Location** | `platforms/vscode-extension/` |
 
@@ -311,7 +311,7 @@ VS Code now reads Claude configuration files directly:
 
 ## Roadmap
 
-### Implemented (v5.6.8 + VS Code 1.109)
+### Implemented (v5.7.0 + VS Code 1.109)
 
 - ✅ Agent Skills contribution point (GA)
 - ✅ Custom agents via `.agent.md`

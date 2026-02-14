@@ -55,7 +55,7 @@ Master Alex is where the "living mind" resides. All procedural memory, domain kn
 | ---------------- | --------------------------------------------------- |
 | **Location**     | `platforms/vscode-extension/`                       |
 | **Deployment**   | VS Code Marketplace                                 |
-| **Status**       | ✅ Production (v5.6.8)                               |
+| **Status**       | ✅ Production (v5.7.0)                               |
 | **Role**         | Flagship deployment + primary R&D lab               |
 | **Capabilities** | Full command palette, LM tools, agents, 100+ skills |
 
@@ -326,7 +326,7 @@ This ensures quality. Only what has survived real-world use becomes part of the 
 
 | Phase | Heir        | Status       | Target                         |
 | ----- | ----------- | ------------ | ------------------------------ |
-| —     | VS Code     | ✅ Production | v5.6.8 live                    |
+| —     | VS Code     | ✅ Production | v5.7.0 live                    |
 | —     | M365        | ✅ Production | v1.6 schema                    |
 | 0     | Foundry     | 📋 Research   | Strategic evaluation (Q1 2026) |
 | 1     | Claude Code | 📋 Planning   | When demand exists             |

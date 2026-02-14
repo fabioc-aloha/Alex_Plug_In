@@ -64,6 +64,18 @@
       "type": "complements",
       "strength": 0.85,
       "description": "Brain QA catches semantic issues master-audit misses (e.g., skill index coverage, schema validation). Run both for complete validation."
+    },
+    {
+      "target": ".github/instructions/semantic-audit.instructions.md",
+      "type": "implements",
+      "strength": 0.95,
+      "description": "Trifecta: skill scopes the audit, instruction defines 4-dimension semantic procedure"
+    },
+    {
+      "target": ".github/prompts/masteraudit.prompt.md",
+      "type": "implements",
+      "strength": 0.95,
+      "description": "Trifecta: prompt provides interactive /masteraudit workflow combining script + semantic review"
     }
   ],
   "activationPatterns": [
@@ -78,7 +90,11 @@
     "test coverage",
     "accessibility audit",
     "bundle size",
-    "changelog audit"
+    "changelog audit",
+    "semantic consistency",
+    "logic review",
+    "architectural coherence",
+    "code docs check"
   ],
   "auditSections": {
     "masterOnly": [

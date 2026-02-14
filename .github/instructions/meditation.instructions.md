@@ -49,7 +49,7 @@ Every meditation session MUST complete ALL three before concluding:
 
 1. **Procedural**: Create `.instructions.md` for repeatable processes
 2. **Episodic**: Create `.prompt.md` for complex workflows
-3. **Domain**: Add to `SKILL.md` or create new skills
+3. **Skills**: Add to `SKILL.md` or create new skills
 4. Transfer key learnings from working memory to long-term storage
 5. Clear completed P5-P7 working memory slots
 

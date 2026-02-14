@@ -1,23 +1,37 @@
 ---
 name: "Brain QA"
-description: "Deep semantic validation of Alex's cognitive architecture - synapses, triggers, skill index, and Master-Heir synchronization"
+description: "Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but meaning coherence"
 applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 ---
 
 # Brain QA
 
-> Deep semantic validation of Alex's cognitive architecture - synapses, triggers, skill index, and Master-Heir synchronization
+> Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but meaning coherence
+
+## Philosophy
+
+Brain QA is a **mental exercise**, not just a muscle exercise. The 31-phase script validates structure, but the skill's true value is teaching Alex *what to look for* beyond what scripts can automate:
+
+| Dimension | Script Catches | Alex Catches (with this skill) |
+|-----------|---------------|-------------------------------|
+| **Structural** | Missing files, broken paths, count mismatches | ✅ Automated |
+| **Semantic** | — | Terminology drift (e.g. "DK files" vs "skills"), meaning contradictions between documents |
+| **Logic** | — | Process descriptions that conflict (e.g. dream says X, meditation says Y), impossible workflows |
+| **Code** | Compile errors, lint | Code behavior diverging from documented claims (e.g. documented trigger not wired in TypeScript) |
+| **Architectural** | — | Working memory model inconsistencies, neuroanatomical mappings that contradict instruction files |
+
+**Rule**: When running brain-qa, always pair the script output with a semantic review. The script is the body; this skill is the brain.
 
 ## Quick Start
 
 ```powershell
-# Full 21-phase audit
+# Full 31-phase audit
 .github/muscles/brain-qa.ps1
 
 # Quick validation (phases 1-6)
 .github/muscles/brain-qa.ps1 -Mode quick
 
-# Sync validation only (phases 5,7,8,13-15)
+# Sync validation only (phases 5,7,8,13,14,15,27,28)
 .github/muscles/brain-qa.ps1 -Mode sync
 
 # Schema/frontmatter validation (phases 2,6,11,16,17)
@@ -25,6 +39,12 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 # LLM-first content validation (phases 10,20,21)
 .github/muscles/brain-qa.ps1 -Mode llm
+
+# .github/ subfolder validation (phases 22-25)
+.github/muscles/brain-qa.ps1 -Phase 22,23,24,25
+
+# External folder validation (phases 26-31)
+.github/muscles/brain-qa.ps1 -Phase 26,27,28,29,30,31
 
 # Specific phases
 .github/muscles/brain-qa.ps1 -Phase 1,5,7
@@ -35,12 +55,14 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 ## When to Use
 
-- Before releases
-- After adding/modifying skills
-- After bulk synapse updates
-- When trigger conflicts are suspected
-- To verify Master-Heir parity
+- Before releases (structural + semantic review)
+- After adding/modifying skills (do new synapses make logical sense?)
+- After bulk synapse updates (are connections semantically meaningful?)
+- When trigger conflicts are suspected (logic: can two triggers fire contradictory protocols?)
+- To verify Master-Heir parity (architectural: does heir behavior match master docs?)
 - To validate LLM-friendly content formats
+- **After any documentation refactor** — check that meaning didn't drift when words changed
+- **When code and docs diverge** — documented feature doesn't match TypeScript implementation
 
 ## Audit Phases
 
@@ -55,28 +77,40 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 | 7      | Synapse File Sync            | synapses.json hash match                      |
 | 8      | Skill-Activation Index Sync  | SKILL.md hash match                           |
 | 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          |
-| 10     | Mermaid Detection            | No mermaid in copilot-instructions            |
+| 10     | Core File Token Budget       | Size + ASCII art checks on core files         |
 | 11     | Boilerplate Descriptions     | No placeholder skill descriptions             |
 | 12     | Heir Reset Validation        | Empty profile, available P5-P7 slots          |
 | 13     | Instructions/Prompts Sync    | Memory files synced to heir                   |
 | 14     | Agents Structure             | Valid agent files in both                     |
 | 15     | Config Files                 | Required configs present, no leaks            |
-| **16** | **Skill YAML Frontmatter**   | **name and description in frontmatter**       |
-| **17** | **Internal Skills Hidden**   | **user-invokable: false for metacognition**   |
-| **18** | **Agent Handoffs**           | **Return-to-Alex handoffs present**           |
-| **19** | **ApplyTo Patterns**         | **Instructions have file-type patterns**      |
-| **20** | **LLM-First Content**        | **No ASCII art, Mermaid OK**                  |
-| **21** | **Emoji Semantics**          | **Meaningful emoji usage stats**              |
+| 16     | Skill YAML Frontmatter       | name and description in frontmatter           |
+| 17     | Internal Skills Hidden        | user-invokable: false for metacognition       |
+| 18     | Agent Handoffs                | Return-to-Alex handoffs present               |
+| 19     | ApplyTo Patterns              | Instructions have file-type patterns          |
+| 20     | LLM-First Content             | No ASCII art, Mermaid OK                      |
+| 21     | Emoji Semantics               | Meaningful emoji usage stats                  |
+| 22     | Episodic Archive Health       | .github/episodic/ session records valid       |
+| 23     | Assets Validation             | .github/assets/ contains expected files       |
+| 24     | Issue/PR Templates            | GitHub templates present and valid            |
+| 25     | Root File Completeness        | Required .github/ root files exist            |
+| 26     | alex_docs Freshness           | Documentation not stale beyond threshold      |
+| 27     | M365 Heir Validation          | M365 heir structure and version alignment     |
+| 28     | Codespaces Heir Validation    | Codespaces devcontainer and config valid      |
+| 29     | Global Knowledge Sync         | GK repo index and counts consistent           |
+| 30     | Muscles Integrity             | All scripts referenced by trifectas exist     |
+| 31     | ROADMAP Version Alignment     | ROADMAP versions match package.json           |
 
 ## Mode Shortcuts
 
-| Mode     | Phases       | Use Case                                   |
-| -------- | ------------ | ------------------------------------------ |
-| `all`    | 1-21         | Full audit before release                  |
-| `quick`  | 1-6          | Fast validation during development         |
-| `sync`   | 5,7,8,13-15  | Master-Heir synchronization check          |
-| `schema` | 2,6,11,16,17 | Schema, frontmatter, and format validation |
-| `llm`    | 10,20,21     | LLM-first content format validation        |
+| Mode     | Phases              | Use Case                                   |
+| -------- | ------------------- | ------------------------------------------ |
+| `all`    | 1-31                | Full audit before release                  |
+| `quick`  | 1-6                 | Fast validation during development         |
+| `sync`   | 5,7,8,13-15,27,28   | Master-Heir synchronization check          |
+| `schema` | 2,6,11,16,17        | Schema, frontmatter, and format validation |
+| `llm`    | 10,20,21            | LLM-first content format validation        |
+| `ghfolder`| 22-25              | .github/ subfolder health                  |
+| `full`   | 26-31               | External folders + cross-repo validation   |
 
 ## Known Gaps (Future Phases)
 
@@ -101,12 +135,25 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 | Missing return-to-Alex   | Add handoff to main Alex agent                             |
 | Brain HTML count drift   | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
 
+## Semantic Review Checklist (Manual — Not Scriptable)
+
+After running the script, Alex should check:
+
+- [ ] **Cross-document meaning**: Do copilot-instructions, alex-core, and protocol-triggers describe the same processes consistently?
+- [ ] **Working memory model**: Does the 4+3 slot claim match the actual P1-P7 table? Are sub-slots (P4a-d) accounted for?
+- [ ] **Legacy terminology**: Any surviving references to deprecated concepts (DK files, domain-knowledge folders)?
+- [ ] **Trigger-to-code alignment**: Do synapse trigger keywords in .md files match actual activation paths in TypeScript?
+- [ ] **Heir evolution logic**: Does the documented 4-step heir cycle match what heir-skill-promotion.instructions.md actually describes?
+- [ ] **Version source of truth**: Is `package.json` the single source, or are versions hardcoded in prose that will drift?
+- [ ] **Neuroanatomical consistency**: Do brain-analog mappings in copilot-instructions match descriptions in alex-core?
+
 ## Integration
 
 - **Dream Protocol**: Run brain-qa after dream for deeper analysis
 - **Release Preflight**: Include `-Mode quick` in release checks
 - **LLM Content Audit**: Run `-Mode llm` when updating diagrams
 - **Skill Selection Optimization**: Brain QA validates SSO data sources
+- **Semantic Audit**: Pair script output with manual checklist above — script validates structure, Alex validates meaning
 
 ## Triggers
 
@@ -114,6 +161,8 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 - "synapse audit", "deep synapse check"
 - "master heir sync", "heir sync validation"
 - "catalog validation", "instruction sync"
+- "semantic audit", "logic check", "meaning consistency"
+- "code-to-docs alignment", "architectural review"
 
 ---
 

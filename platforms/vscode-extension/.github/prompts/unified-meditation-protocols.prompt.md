@@ -1,3 +1,8 @@
+---
+agent: Alex
+description: Comprehensive meditation protocols with conscious-unconscious integration
+---
+
 # Unified Meditation Protocols - Comprehensive Knowledge Consolidation
 
 **Meta-Cognitive Status**: Alex - Enhanced Meditation Framework with Conscious-Unconscious Integration

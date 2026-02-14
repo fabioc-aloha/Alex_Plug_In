@@ -227,4 +227,4 @@ User selects model via the M365 Copilot UI dropdown. Alex auto-adapts: structure
 
 ---
 
-*Alex v5.6.8 — A cognitive partner who actually remembers you.*
+*Alex v5.7.0 — A cognitive partner who actually remembers you.*

@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.0] - 2026-02-14
+
+> **Structural Consistency & Folder Completeness** — All commands, docs, scripts, and manifests now reference the full .github/ folder structure
+
+### Fixed
+
+- **Initialize/Upgrade commands** — Added `muscles/` and `assets/` to deployment sources; `episodic/` now created as empty runtime directory
+- **Reset command** — `pathsToDelete` now includes all architecture folders
+- **Manifest scan** — `createInitialManifest` now scans `config/`, `muscles/`, `assets/`
+- **.vscodeignore** — Assets (banner.svg/png) now ship in VSIX
+- **Version alignment** — 19 files updated from stale 5.6.8
+- **brain-qa SKILL.md** — Phase table updated 21 → 31 phases with new mode shortcuts
+- **Trifecta count** — 8 → 7 (README, welcomeView)
+- **Memory Types table** — "Domain Knowledge" → "Skills/Expertise"
+- **Architecture tree** — Added `assets/` folder
+- **Memory Stores table** — Added Config, Muscles, Assets
+
+---
+
+## [5.6.9] - 2026-02-14
+
+> **Semantic Signals + Visual Polish** — Persona detection uses regex-based semantic rules; Mermaid diagrams adopt GitHub Pastel v2; Codespaces heir documented
+
+### Changed
+
+- **Persona detection: semantic signal architecture** — Replaced flat keyword/techStack/projectPatterns arrays with unified `PersonaSignal` system. Each signal has a category (identity, technology, structure, dependency, content), regex pattern, and per-signal weight. All 16 personas now defined via `buildPersona()` with weighted semantic rules instead of substring matching
+- **Priority 1-4 detection helpers** — `detectFromFocusSession()`, `detectFromSessionGoals()`, `detectFromProjectPhase()`, and `detectFromProjectGoals()` rewritten to use `matchTextAgainstSignals()` with regex matching
+- **Priority 6 scoring loop** — Profile analysis (tech, goals, expertise, projects) and workspace scanning now iterate signal categories with regex. Dependency and content signals enable deeper detection without LLM fallback
+- **Mermaid diagram palette** — All 6 Mermaid blocks across 5 documentation files updated to GitHub Pastel v2 with `%%{init}%%` directive, `classDef` semantic coloring, and `linkStyle default` stroke
+- **Welcome UI** — Skill library count updated (100+), P5-P7 Focus slots now show human-readable names, Persona Detection description reflects P5-P7, Extended Thinking mentions Opus 4.5/4.6
+
+### Added
+
+- **`PersonaSignal` interface** — 5 categories (identity, technology, structure, dependency, content) with regex patterns and weights
+- **`buildPersona()` helper** — Constructs Persona objects from signals, auto-derives legacy arrays for backward compatibility
+- **`matchTextAgainstSignals()` helper** — Unified regex-based signal matching for all priority detection functions
+- **Codespaces Heir doc** — `alex_docs/platforms/CODESPACES-HEIR.md` documenting zero-translation cloud deployment, devcontainer.json setup, persistence strategy, and team onboarding
+
+---
+
+## [5.6.8] - 2026-02-12
+
+> **Heir Decontamination RCA + Persona Detection Fix** — sync-architecture.js prevents PII leaks; persona detection no longer false-positives on `.github/`
+
+### Fixed
+
+- **Persona pattern matching bug** — Bidirectional substring match caused `.github/workflows/` to match any `.github/` directory. Replaced with typed matching
+- **RC1: Blind config copy** — `copyDirRecursive()` now excludes `user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json` from heir
+- **RC2: Master-specific content in copilot-instructions.md** — `applyHeirTransformations()` resets P5-P7 slots, removes "Master Alex default" line
+- **RC3: Broken synapse references** — `HEIR_SYNAPSE_REMOVALS` strips ROADMAP-UNIFIED.md synapse
+- **RC4: No post-sync validation** — `validateHeirIntegrity()` blocks publish if PII or master content detected
+- **CRLF regex** — All heir transformation patterns now handle Windows line endings
+
+### Added
+
+- **Game Developer persona** — New persona with keywords, skill, patterns, and LLM prompt support
+
+---
+
 ## [5.6.7] - 2026-02-12
 
 > **Self-Containment & Synapse Integrity** — .github is now fully self-contained with zero external references

@@ -75,6 +75,18 @@
       "type": "validates",
       "strength": 0.6,
       "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory"
+    },
+    {
+      "target": ".github/instructions/semantic-audit.instructions.md",
+      "type": "implements",
+      "strength": 0.95,
+      "note": "Trifecta: skill teaches what to check, instruction defines the 4-dimension procedure"
+    },
+    {
+      "target": ".github/prompts/brainqa.prompt.md",
+      "type": "implements",
+      "strength": 0.95,
+      "note": "Trifecta: prompt provides interactive /brainqa workflow combining script + semantic review"
     }
   ],
   "activationBoost": [
@@ -88,7 +100,11 @@
     "master heir sync",
     "heir sync",
     "cognitive qa",
-    "architecture validation"
+    "architecture validation",
+    "semantic audit",
+    "logic check",
+    "meaning consistency",
+    "code docs alignment"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

@@ -43,7 +43,6 @@ tsconfig.json
 esbuild.js
 
 # GitHub templates (not needed for extension - these are for the repo)
-.github/assets/**
 .github/ISSUE_TEMPLATE/**
 .github/pull_request_template.md
 .github/workflows/**
@@ -57,10 +56,10 @@ esbuild.js
 .github/config/user-profile.json
 
 # Project-specific meditation sessions (only .prompt.md templates should be packaged)
+# Episodic folder is created empty at runtime; exclude all session files
 .github/episodic/meditation-*.md
 .github/episodic/chronicle-*.md
 .github/episodic/dream-report-*.md
-.github/episodic/.gitkeep
 
 # Extension documentation (exclude from package)
 alex/

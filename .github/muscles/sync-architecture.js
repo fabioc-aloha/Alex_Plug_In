@@ -35,7 +35,11 @@ const MASTER_SKILLS = path.join(MASTER_GITHUB, 'skills');
 const HEIR_SKILLS = path.join(HEIR_GITHUB, 'skills');
 
 // Folders to sync (non-skill architecture files)
-const ARCHITECTURE_FOLDERS = ['instructions', 'prompts', 'config', 'agents', 'domain-knowledge', 'muscles'];
+// NOTE: ISSUE_TEMPLATE/ and pull_request_template.md are GitHub-repo-only, NOT synced to heirs
+const ARCHITECTURE_FOLDERS = ['instructions', 'prompts', 'config', 'agents', 'assets', 'muscles'];
+
+// Folders to create empty in heir (populated at runtime)
+const EMPTY_HEIR_FOLDERS = ['episodic'];
 
 // Files to sync from root .github
 const ARCHITECTURE_FILES = [
@@ -254,6 +258,24 @@ function syncArchitectureFolders() {
         } else {
             console.log(`⚠️  ${folder}/ not found in master`);
         }
+    }
+
+    // Create empty folders in heir (populated at runtime by the extension)
+    for (const folder of EMPTY_HEIR_FOLDERS) {
+        const heirPath = path.join(HEIR_GITHUB, folder);
+        if (!fs.existsSync(heirPath)) {
+            fs.mkdirSync(heirPath, { recursive: true });
+        }
+        // Ensure it's empty (remove any leftover files)
+        const files = fs.readdirSync(heirPath);
+        if (files.length > 0) {
+            for (const file of files) {
+                fs.rmSync(path.join(heirPath, file), { recursive: true, force: true });
+            }
+        }
+        // Add .gitkeep to preserve empty folder in git
+        fs.writeFileSync(path.join(heirPath, '.gitkeep'), '', 'utf8');
+        console.log(`📂 ${folder}/ (empty — populated at runtime)`);
     }
 }
 
@@ -542,6 +564,139 @@ function cleanupLegacyFolders() {
     }
 }
 
+// ============================================================
+// FILE & SYNAPSE COUNT AUDIT
+// ============================================================
+
+function countFilesRecursive(dir) {
+    if (!fs.existsSync(dir)) return 0;
+    let count = 0;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (entry.isDirectory()) {
+            count += countFilesRecursive(path.join(dir, entry.name));
+        } else {
+            count++;
+        }
+    }
+    return count;
+}
+
+function countSynapseConnections(skillsDir) {
+    if (!fs.existsSync(skillsDir)) return { synapseFiles: 0, connections: 0 };
+    let synapseFiles = 0;
+    let connections = 0;
+    for (const entry of fs.readdirSync(skillsDir, { withFileTypes: true })) {
+        if (!entry.isDirectory()) continue;
+        const synPath = path.join(skillsDir, entry.name, 'synapses.json');
+        if (!fs.existsSync(synPath)) continue;
+        try {
+            const synapse = JSON.parse(fs.readFileSync(synPath, 'utf8'));
+            synapseFiles++;
+            if (Array.isArray(synapse.connections)) {
+                connections += synapse.connections.length;
+            }
+        } catch (e) { /* skip malformed */ }
+    }
+    return { synapseFiles, connections };
+}
+
+function auditFileCounts() {
+    console.log('\n📊 File & Synapse Count Audit\n');
+
+    const folders = ['agents', 'assets', 'config', 'instructions', 'muscles', 'prompts', 'skills', 'episodic'];
+    const pad = (s, n) => String(s).padStart(n);
+    const padR = (s, n) => String(s).padEnd(n);
+    let allMatch = true;
+
+    // Known expected differences per folder
+    const expectedDiffs = {
+        config: EXCLUDED_CONFIG_FILES.length,
+        muscles: getExcludedMuscles().length,
+        episodic: -1,  // special: heir is always empty
+    };
+
+    // Count master-only + m365-only skills
+    let nonHeirSkills = 0;
+    if (fs.existsSync(MASTER_SKILLS)) {
+        for (const d of fs.readdirSync(MASTER_SKILLS, { withFileTypes: true })) {
+            if (!d.isDirectory()) continue;
+            const inh = getInheritance(path.join(MASTER_SKILLS, d.name));
+            if (inh === 'master-only' || inh === 'heir:m365') nonHeirSkills++;
+        }
+    }
+
+    console.log(`  ${'Folder'.padEnd(15)} ${'Master'.padStart(6)}  ${'Heir'.padStart(6)}  Status`);
+    console.log(`  ${'─'.repeat(15)} ${'─'.repeat(6)}  ${'─'.repeat(6)}  ${'─'.repeat(12)}`);
+
+    for (const folder of folders) {
+        const mc = countFilesRecursive(path.join(MASTER_GITHUB, folder));
+        const hc = countFilesRecursive(path.join(HEIR_GITHUB, folder));
+
+        let status;
+        if (folder === 'episodic') {
+            // Heir episodic should have only .gitkeep
+            status = hc <= 1 ? '✅ empty OK' : `⚠️  has ${hc} files`;
+            if (hc > 1) allMatch = false;
+        } else if (folder === 'skills') {
+            // Skills have known exclusions (master-only, heir:m365) plus synapse cleaning diffs
+            status = hc > 0 ? '✅ curated' : '❌ EMPTY';
+            if (hc === 0) allMatch = false;
+        } else if (mc === hc) {
+            status = '✅ match';
+        } else {
+            const diff = mc - hc;
+            const expected = expectedDiffs[folder] || 0;
+            if (diff === expected) {
+                status = `✅ ${diff} excluded`;
+            } else {
+                status = `⚠️  diff ${diff}`;
+                allMatch = false;
+            }
+        }
+
+        console.log(`  ${padR(folder, 15)} ${pad(mc, 6)}  ${pad(hc, 6)}  ${status}`);
+    }
+
+    // Root .md files (pull_request_template.md is GitHub-only, not synced)
+    const GITHUB_ONLY_ROOT_FILES = ['pull_request_template.md'];
+    const masterRootMd = fs.readdirSync(MASTER_GITHUB).filter(f => f.endsWith('.md')).length;
+    const heirRootMd = fs.readdirSync(HEIR_GITHUB).filter(f => f.endsWith('.md')).length;
+    const expectedRootDiff = GITHUB_ONLY_ROOT_FILES.length;
+    const rootDiff = masterRootMd - heirRootMd;
+    let rootStatus;
+    if (masterRootMd === heirRootMd) {
+        rootStatus = '✅ match';
+    } else if (rootDiff === expectedRootDiff) {
+        rootStatus = `✅ ${rootDiff} GitHub-only`;
+    } else {
+        rootStatus = `⚠️  diff ${rootDiff}`;
+        allMatch = false;
+    }
+    console.log(`  ${padR('root .md', 15)} ${pad(masterRootMd, 6)}  ${pad(heirRootMd, 6)}  ${rootStatus}`);
+
+    // Synapse counts
+    console.log('');
+    const masterSyn = countSynapseConnections(MASTER_SKILLS);
+    const heirSyn = countSynapseConnections(HEIR_SKILLS);
+    const masterSkillDirs = fs.existsSync(MASTER_SKILLS)
+        ? fs.readdirSync(MASTER_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length : 0;
+    const heirSkillDirs = fs.existsSync(HEIR_SKILLS)
+        ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length : 0;
+
+    console.log(`  ${'Metric'.padEnd(15)} ${'Master'.padStart(6)}  ${'Heir'.padStart(6)}  Status`);
+    console.log(`  ${'─'.repeat(15)} ${'─'.repeat(6)}  ${'─'.repeat(6)}  ${'─'.repeat(20)}`);
+    console.log(`  ${padR('Skill dirs', 15)} ${pad(masterSkillDirs, 6)}  ${pad(heirSkillDirs, 6)}  ${nonHeirSkills} excluded (master/m365)`);
+    console.log(`  ${padR('Synapse files', 15)} ${pad(masterSyn.synapseFiles, 6)}  ${pad(heirSyn.synapseFiles, 6)}`);
+    console.log(`  ${padR('Connections', 15)} ${pad(masterSyn.connections, 6)}  ${pad(heirSyn.connections, 6)}  heir cleaned of master-only refs`);
+
+    console.log('');
+    if (allMatch) {
+        console.log('✅ All folder counts verified\n');
+    } else {
+        console.log('⚠️  Some counts differ — review above\n');
+    }
+}
+
 // Main
 console.log('═══════════════════════════════════════════');
 console.log('  Alex Architecture Sync (Master → Heir)');
@@ -557,6 +712,7 @@ cleanBrokenSynapseReferences(skillStats.skippedMasterOnly);
 applyHeirTransformations();
 verifyCounts();
 validateHeirIntegrity();
+auditFileCounts();
 
 console.log('═══════════════════════════════════════════');
 console.log('  Sync complete!');

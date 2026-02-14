@@ -521,7 +521,7 @@ Use in any Copilot chat to activate specific modes:
 | `@worldview-integration`       | Applies ethical reasoning frameworks                      |
 | `@grounded-factual-processing` | Ensures accuracy, eliminates hyperbole                    |
 | `meditate`                     | Triggers memory consolidation + self-actualization        |
-| `self-actualize`               | Full 21-phase architecture assessment with auto-promotion |
+| `self-actualize`               | Full 31-phase architecture assessment with auto-promotion |
 | `Forget [topic]`               | Selective memory cleanup                                  |
 
 ---
@@ -755,6 +755,9 @@ After initialization, Alex manages this structure:
 │   ├── alex.agent.md
 │   ├── alex-researcher.agent.md
 │   └── ...
+├── assets/                    # 🎨 Visual identity (2 files)
+│   ├── banner.svg
+│   └── banner.png
 ├── muscles/                   # 💪 Execution scripts (13 files)
 │   ├── brain-qa.ps1
 │   ├── sync-architecture.js
@@ -780,7 +783,7 @@ After initialization, Alex manages this structure:
 | **Working Memory**    | Chat session       | 7-rule capacity for active processing |
 | **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols    |
 | **Episodic Memory**   | `.prompt.md`       | Complex workflows and sessions        |
-| **Domain Knowledge**  | `DK-*.md`          | Specialized expertise areas           |
+| **Skills/Expertise**  | `.github/skills/`  | Portable domain expertise             |
 
 ---
 
@@ -815,8 +818,8 @@ Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
 - **`/checkskills`** — Discover new skills available from Global Knowledge
 - **`/pullskill <id>`** — Install a skill into your project from GK
 - **`Alex: Inherit Skill from Global Knowledge`** — Multi-select batch inheritance
-- **21-phase Brain QA** — Comprehensive architecture health validation
-- **Trifecta model** — 8 capabilities encoded across all 3 memory systems
+- **31-phase Brain QA** — Comprehensive architecture health validation
+- **Trifecta model** — Core capabilities encoded across all 3 memory systems
 - **7 custom agents** — Alex, Researcher, Builder, Validator, Documentarian, Azure, M365
 - **Muscle scripts** — 13 execution scripts for audit, build, sync, and validation
 
@@ -910,7 +913,7 @@ Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant 
 
 #### 🧠 Brain QA Skill
 
-21-phase cognitive architecture validation — now mandatory Step 0 in release preflight
+31-phase cognitive architecture validation — now mandatory Step 0 in release preflight
 
 #### 💡 Smart Nudges
 

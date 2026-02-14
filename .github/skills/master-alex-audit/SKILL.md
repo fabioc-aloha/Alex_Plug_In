@@ -1,11 +1,23 @@
 ---
 name: "Master Alex Audit"
-description: "Comprehensive project audit with 22 automated checks across security, quality, and health"
+description: "Semantic, logic, code, and architectural audit of the Master Alex project — 22 automated sections plus manual consistency review"
 ---
 
 # Master Alex Audit
 
-> Comprehensive project audit with 22 automated checks across security, quality, and health
+> Semantic, logic, code, and architectural audit of the Master Alex project — 22 automated sections plus manual consistency review
+
+## Philosophy
+
+The 22-section script checks structure. But a real audit asks *"does it all make sense together?"*:
+
+| Dimension | Script (Sections 1-22) | Alex (With This Skill) |
+|-----------|----------------------|------------------------|
+| **Structural** | File existence, counts, format compliance | ✅ Automated |
+| **Semantic** | — | Do instruction files describe the same concepts consistently? Does the M365 heir's system prompt match Master's copilot-instructions? |
+| **Logic** | — | Are documented workflows achievable? If copilot-instructions says "create DK files" but DK files don't exist, that's a logic error |
+| **Code** | TypeScript compile, lint, bundle size | Does the code implement what the docs claim? Are registered commands wired to the right handlers? |
+| **Architectural** | Version alignment, heir sync | Is the memory architecture (declarative/procedural/interactive) reflected accurately across all documentation? |
 
 ## Overview
 
@@ -29,6 +41,8 @@ Master Alex-specific audit procedures that leverage knowledge of:
 - "pre-release master check"
 - "dependency audit", "security audit", "ui audit"
 - "test coverage", "accessibility audit", "bundle size"
+- "semantic consistency", "logic review", "architectural coherence"
+- "code-to-docs check", "cross-heir alignment"
 - Before publishing heirs to marketplace
 
 ## Audit Quick Reference
@@ -118,3 +132,15 @@ See [synapses.json](synapses.json) for connections to:
 - `heir-curation` - Heir management
 - `architecture-health` - Structural integrity
 - `vscode-extension-patterns` - Extension-specific knowledge
+
+## Semantic Review Checklist (Manual — Not Scriptable)
+
+After running the script, Alex should check:
+
+- [ ] **Cross-heir semantic parity**: Does M365 system prompt describe Alex the same way copilot-instructions does?
+- [ ] **Deprecated terminology**: Any "DK files", "domain-knowledge/" references surviving in active files?
+- [ ] **Claim vs. reality**: Do README feature claims match actual implemented commands in package.json?
+- [ ] **Process logic**: Are documented workflows (heir evolution, meditation, dream) internally consistent?
+- [ ] **Architectural model**: Is the memory architecture (7 working memory slots, 3-tier trifecta) described the same way everywhere?
+- [ ] **Code behavior**: Do TypeScript command handlers match what instruction files say they do?
+- [ ] **Version source of truth**: Is package.json the canonical version, or are there prose versions that will drift?

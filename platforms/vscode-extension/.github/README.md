@@ -55,4 +55,4 @@ Instead of editing files directly:
 
 ---
 
-*Alex Cognitive Architecture v5.6.8 — Hybrid Enhanced Meta-Cognitive Framework*
+*Alex Cognitive Architecture v5.7.0 — Hybrid Enhanced Meta-Cognitive Framework*

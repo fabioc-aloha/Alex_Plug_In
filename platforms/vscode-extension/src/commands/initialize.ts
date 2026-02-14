@@ -154,6 +154,10 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
     path.join(rootPath, ".github", "episodic"),
     path.join(rootPath, ".github", "domain-knowledge"),
     path.join(rootPath, ".github", "config"), // Includes alex-manifest.json
+    path.join(rootPath, ".github", "agents"),
+    path.join(rootPath, ".github", "skills"),
+    path.join(rootPath, ".github", "muscles"),
+    path.join(rootPath, ".github", "assets"),
     path.join(rootPath, ".alex-manifest.json"), // Clean up legacy manifest location too
   ];
 
@@ -222,6 +226,7 @@ async function performInitialization(
 
   // Define source and destination paths
   // Note: domain-knowledge is deprecated - DK files are now migrated to skills
+  // Note: episodic/ is created empty (populated at runtime by meditation/dream sessions)
   const sources = [
     {
       src: path.join(extensionPath, ".github", "copilot-instructions.md"),
@@ -236,10 +241,6 @@ async function performInitialization(
       dest: path.join(rootPath, ".github", "prompts"),
     },
     {
-      src: path.join(extensionPath, ".github", "episodic"),
-      dest: path.join(rootPath, ".github", "episodic"),
-    },
-    {
       src: path.join(extensionPath, ".github", "config"),
       dest: path.join(rootPath, ".github", "config"),
     },
@@ -251,8 +252,21 @@ async function performInitialization(
       src: path.join(extensionPath, ".github", "skills"),
       dest: path.join(rootPath, ".github", "skills"),
     },
+    {
+      src: path.join(extensionPath, ".github", "muscles"),
+      dest: path.join(rootPath, ".github", "muscles"),
+    },
+    {
+      src: path.join(extensionPath, ".github", "assets"),
+      dest: path.join(rootPath, ".github", "assets"),
+    },
     // Note: markdown-light.css is now in .github/config/ and gets copied with config folder
     // applyMarkdownStyles() will copy it to .vscode/ for markdown.styles to work
+  ];
+
+  // Folders to create empty (populated at runtime, not shipped in VSIX)
+  const emptyFolders = [
+    path.join(rootPath, ".github", "episodic"),
   ];
 
   try {
@@ -308,6 +322,11 @@ async function performInitialization(
             });
             console.warn(`Source not found: ${item.src}`);
           }
+        }
+
+        // Create empty runtime folders
+        for (const folder of emptyFolders) {
+          await fs.ensureDir(folder);
         }
 
         // Create manifest with checksums of all deployed files
@@ -641,6 +660,9 @@ async function createInitialManifest(
     },
     // Note: domain-knowledge deprecated in v5.0 - DK files migrated to skills
     { dir: path.join(rootPath, ".github", "agents"), prefix: ".github/agents" },
+    { dir: path.join(rootPath, ".github", "config"), prefix: ".github/config" },
+    { dir: path.join(rootPath, ".github", "muscles"), prefix: ".github/muscles" },
+    { dir: path.join(rootPath, ".github", "assets"), prefix: ".github/assets" },
   ];
 
   // Add copilot-instructions.md

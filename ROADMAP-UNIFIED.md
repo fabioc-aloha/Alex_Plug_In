@@ -8,7 +8,7 @@
 
 ### Current State
 
-v5.6.8 is stabilized (final). Alex now has:
+v5.7.0 is current. Alex now has:
 - **100+ Skills** — Comprehensive domain coverage (most inheritable to heirs)
 - **Microsoft Graph** — Calendar, Mail, Presence, People via enterprise mode
 - **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
@@ -38,7 +38,7 @@ v5.6.8 is stabilized (final). Alex now has:
 | v5.3.1     | CSP Security Fix          | Secure UX                  | ✅ Complete                 |
 | v5.4.0-3   | Text-to-Speech & Voice    | Accessible Cognition       | ✅ Complete                 |
 | v5.5.0     | Model Intelligence        | Adaptive Cognition         | ✅ Complete                 |
-| **v5.6.0** | **Enterprise Systems**    | **Deep Orchestration**     | ✅ Stabilized (5.6.8 final) |
+| **v5.6.0** | **Enterprise Systems**    | **Deep Orchestration**     | ✅ Stabilized (5.6.9 final) |
 | **v5.7.0** | **Platform + Enterprise** | **Cloud-Native Cognition** | 📋 Planned                  |
 | v6.0.0     | Semantic Skill Graph      | Emergent Intelligence      | 📋 Planned                  |
 
@@ -82,7 +82,7 @@ v5.6.8 is stabilized (final). Alex now has:
 
 **Paradigm**: Deep orchestration — Alex becomes the cognitive layer across the entire Microsoft stack.
 
-**Status**: Stabilized at v5.6.8. Patches 5.6.1-5.6.8 focused on quality: PII protection, heir decontamination, self-containment, release automation, skill sync, and persona detection. Remaining enterprise connector tasks deferred to v5.7.0.
+**Status**: Stabilized at v5.6.9. Patches 5.6.1-5.6.9 focused on quality: PII protection, heir decontamination, self-containment, release automation, skill sync, persona detection, and semantic signals. Remaining enterprise connector tasks deferred to v5.7.0.
 
 | Task                        | Owner | Effort | Priority | Status | Description                          |
 | --------------------------- | :---: | :----: | :------: | :----: | ------------------------------------ |
@@ -107,7 +107,7 @@ v5.6.8 is stabilized (final). Alex now has:
 - `VT_AIPOWERBI` — Power BI AI integration
 - `AIRS Enterprise` — Enterprise AI systems
 
-**Stabilized**: v5.6.8 — 2026-02-12 (final patch)
+**Stabilized**: v5.6.9 — 2026-02-14 (final patch)
 
 ---
 
@@ -237,16 +237,16 @@ Items to pull from when capacity frees up:
 | v5.3.1        | CSP Security Fix       | Feb 8, 2026     |
 | v5.4.0-v5.4.3 | Text-to-Speech & Voice | Feb 9, 2026     |
 | v5.5.0        | Model Intelligence     | Feb 10, 2026    |
-| v5.6.0-5.6.8  | Enterprise Systems     | Feb 10-12, 2026 |
+| v5.6.0-5.6.9  | Enterprise Systems     | Feb 10-14, 2026 |
 
 ---
 
 |                            |                                         |
 | -------------------------- | --------------------------------------- |
-| **Current Master Version** | 5.6.8 (stabilized, final)               |
-| **Current Heirs**          | VS Code (5.6.8), M365 (5.6.8)           |
-| **Next Target**            | 5.7.0 — Platform Expansion + Enterprise |
-| **Updated**                | 2026-02-13                              |
+| **Current Master Version** | 5.7.0                                   |
+| **Current Heirs**          | VS Code (5.7.0), M365 (5.7.0)           |
+| **Next Target**            | 5.7.x — Platform Expansion + Enterprise |
+| **Updated**                | 2026-02-14                              |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3)           |
 
 ---

@@ -1,52 +1,104 @@
 ---
-name: "Alex Architecture Health Skill"
-description: "Cognitive architecture health assessment, synapse validation, and neural maintenance for Alex's memory systems"
+name: "architecture-health"
+description: "Diagnose cognitive architecture health — synapse integrity, memory balance, connection density, and drift detection"
+applyTo: "**/*synapse*,**/*health*,**/*connection*,**/*architecture*"
 ---
 
-# Alex Architecture Health Skill
+# Architecture Health Skill
 
-Expert in cognitive architecture health assessment, synapse validation, and neural maintenance.
+> Diagnose, don't describe. Every metric has a threshold. Every finding has a fix.
 
-## Capabilities
+## Health Dimensions
 
-- Validate synaptic connections between memory files
-- Detect broken or orphaned connections
-- Assess memory architecture balance
-- Generate health reports with actionable recommendations
-- Repair common synapse issues
+| Dimension | What It Measures | Healthy | Warning | Critical |
+| --------- | ---------------- | ------- | ------- | -------- |
+| Synapse Integrity | % of connections targeting existing files | 100% | 95-99% | <95% |
+| Connection Density | Avg connections per skill | 3-6 | 1-2 | 0 |
+| Bidirectional Coverage | % of connections with reciprocal entries | >80% | 50-80% | <50% |
+| Memory Balance | Ratio of procedural:episodic:declarative | ~1:1:4 | Skewed 3:1 | Missing category |
+| Schema Compliance | Skills with valid synapses.json | 100% | 95-99% | <95% |
+| Inheritance Consistency | Synapses.json matches catalog labels | 100% | Any mismatch | — |
+| Staleness | Skills with outdated content | <5% | 5-15% | >15% |
 
-## When to Use This Skill
+## Diagnostic Patterns
 
-- User asks to check "health", "synapses", or "connections"
-- Before or after meditation sessions
-- When experiencing issues with memory recall
-- For routine maintenance checks
-- User says "dream" or "neural maintenance"
+### Synapse Integrity Check
 
-## Example Prompts
+Parse every `synapses.json` → extract `connections[].target` → verify file exists.
 
-- "Check the health of my cognitive architecture"
-- "Are there any broken synapse connections?"
-- "Run a health check"
-- "Dream and validate my memory files"
-- "What's the status of my neural network?"
+**Common breakage causes**: File renames, folder restructuring, consolidation merges.
 
-## Input Expectations
+**Fix pattern**: Check consolidation mappings in `dream-state-automation.instructions.md` for old→new file paths. If not mapped, add the mapping and re-run dream.
 
-- Workspace with Alex architecture installed
-- Optional: specific memory type to check (procedural, episodic, domain)
-- Optional: detailed vs summary report preference
+### Connection Density Analysis
 
-## Output Format
+```text
+orphan = skill with 0 connections (isolated node)
+hub    = skill with 8+ connections (potential bottleneck)
+leaf   = skill with 1 connection (normal for specialized skills)
+```
 
-- Health status (Healthy/Needs Attention/Critical)
-- Synapse statistics (total, healthy, broken)
-- List of issues found (if any)
-- Repair recommendations
-- ASCII visualization of network status
+**Healthy network**: Most skills are leaves (1-3) with a few hubs (meditation, architecture-health, skill-activation). Orphans indicate missing integration.
 
-## Related Skills
+### Memory Balance Assessment
 
-- [Meditation](.github/skills/meditation/SKILL.md) - Consolidate knowledge
-- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Learn new domains
-- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Cross-project patterns
+| Memory Type | File Pattern | Ideal % | Purpose |
+| ----------- | ------------ | ------- | ------- |
+| Declarative | `SKILL.md`, `copilot-instructions.md` | ~60% | Domain knowledge |
+| Procedural | `.instructions.md` | ~25% | Auto-loaded procedures |
+| Episodic | `.prompt.md` | ~15% | Interactive workflows |
+
+**Imbalance signals**:
+
+- Too many skills, few instructions → knows *what* but not *how*
+- Too many instructions, few skills → follows steps but can't reason *why*
+- Too few prompts → users can't invoke capabilities interactively
+
+### Drift Detection
+
+| Drift Type | Signal | Resolution |
+| ---------- | ------ | ---------- |
+| Version drift | package.json version ≠ copilot-instructions.md version | Sync via release-preflight |
+| Terminology drift | Old terms ("DK files") in active files | Grep + replace |
+| Count drift | Hardcoded numbers stale by next session | Replace with references |
+| Inheritance drift | Catalog says "master-only" but synapses.json says "inheritable" | Trust synapses.json |
+
+## Health Report Template
+
+```markdown
+## Architecture Health Report — [date]
+
+### Summary: [HEALTHY | ATTENTION REQUIRED | CRITICAL]
+
+| Dimension | Score | Status |
+| --------- | ----- | ------ |
+| Synapse Integrity | X/Y valid (Z%) | ✅/⚠️/🔴 |
+| Connection Density | avg N.N | ✅/⚠️/🔴 |
+| Memory Balance | P:E:D = X:Y:Z | ✅/⚠️/🔴 |
+| Schema Compliance | X/Y valid | ✅/⚠️/🔴 |
+
+### Issues Found
+1. [Issue] → [Fix]
+```
+
+## Relationship to Other Systems
+
+| System | Role |
+| ------ | ---- |
+| **Dream** (muscle: brain-qa.ps1) | Automated structural checks — the "X-ray" |
+| **Architecture Health** (this) | Interpretation framework — the "radiologist" |
+| **Meditation** | Consolidation after diagnosis — the "surgery" |
+| **Self-Actualization** | Comprehensive assessment — the "full physical" |
+
+Dream runs the scans. This skill teaches how to read and act on the results.
+
+## Triggers
+
+- "health check", "synapse health", "architecture health"
+- "how's my brain?", "connection status"
+- Before meditation (pre-assessment)
+- After dream reports with warnings
+
+## Synapses
+
+See [synapses.json](synapses.json) for connections.
