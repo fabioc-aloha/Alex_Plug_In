@@ -1,9 +1,9 @@
 # v5.7.1 UI/UX Regression Checklist
 
 **Date**: 2026-02-14
-**Status**: ⚠️ **UI/UX FIXES IN PROGRESS** — Avatar system and WebP resolution issues identified
-**Purpose**: F5 sandbox verification of all v5.7.1 visual identity + UI features
-**Method**: Press F5 in VS Code, open a test workspace, run through each section
+**Status**: ⚠️ **PENDING UI VERIFICATION** — WebP avatars regenerated, awaiting restart + testing
+**Purpose**: Local install verification of all v5.7.1 visual identity + UI features
+**Method**: Install VSIX locally, restart VS Code, test in current workspace (CP2 contingency)
 
 ---
 
@@ -23,7 +23,7 @@
 
 | #   | Test                               | Expected                                      | Pass? |
 | --- | ---------------------------------- | --------------------------------------------- | ----- |
-| 1.1 | Open Alex sidebar — avatar visible | 44px circular avatar with accent-color border |       |
+| 1.1 | Open Alex sidebar — avatar visible | 72px circular avatar with accent-color border |       |
 | 1.2 | Avatar image loads (WebP)          | `<picture>` element renders WebP source       |       |
 | 1.3 | Logo overlay badge                 | 20px logo icon bottom-right of avatar         |       |
 | 1.4 | Click logo badge                   | Opens "Working with Alex" guide               |       |
@@ -115,7 +115,8 @@
 ---
 
 ## Post-Flight
-: Help → Toggle Developer Tools → Console tab
+
+- [ ] No console errors: Help → Toggle Developer Tools → Console tab
 - [ ] Extension loads without warnings in Output → Alex Cognitive Architecture
 - [ ] All sections passing? → Mark DoD criterion #4 complete
 - [ ] Ready to publish to marketplace
@@ -134,8 +135,7 @@ npx @vscode/vsce package
 code --install-extension alex-cognitive-architecture-5.7.1.vsix --force
 
 # Restart VS Code, then test
-```)
-- [x] Enterprise auth cleanup complete (commit 5ba9fe2)
+```
 
 ---
 
@@ -151,23 +151,28 @@ code --install-extension alex-cognitive-architecture-5.7.1.vsix --force
 
 Per [ROADMAP-UNIFIED.md Definition of Done](../../ROADMAP-UNIFIED.md#definition-of-done), a version is complete when ALL criteria are met:
 
-| #   | Criterion                                                     | Status | Evidence                                                       |
-| --- | ------------------------------------------------------------- | ------ | -------------------------------------------------------------- |
-| 1   | **Builds clean** — `npm run compile` exits 0                  | ✅      | Pre-flight + smoke test both exit 0                            |
-| 2   | **No dead code** — All imports resolve                        | ✅      | Zero TS compilation errors                                     |
-| 3   | **Counts match reality** — Docs reflect code                  | ✅      | copilot-instructions stats updated (12 tools, 30 instructions) |
-| 4   | **F5 smoke test passes** — Extension activates, commands work | ⚠️      | Automated tests pass (86/86) but UI/UX issues found in avatar/welcome panel |
-| 5   | **Version aligned** — Same version everywhere                 | ✅      | 5.7.1 in package.json, CHANGELOG, copilot-instructions         |
-| 6   | **Heir sync clean** — 0 errors, no contamination              | ✅      | Sync output shows "integrity validated, no contamination"      |
-| 7   | **No non-functional features** — Working or removed           | ✅      | Enterprise auth (non-functional) removed in commit 5ba9fe2     |
-| 8   | **CHANGELOG documents delta** — All changes listed            | ✅      | 14 items (7 Added, 2 Fixed, 2 Changed, 3 Removed)              |
+| #   | Criterion                                                     | Status | Evidence                                                                    |
+| --- | ------------------------------------------------------------- | ------ | --------------------------------------------------------------------------- |
+| 1   | **Builds clean** — `npm run compile` exits 0                  | ✅      | Pre-flight + smoke test both exit 0                                         |
+| 2   | **No dead code** — All imports resolve                        | ✅      | Zero TS compilation errors                                                  |
+| 3   | **Counts match reality** — Docs reflect code                  | ✅      | copilot-instructions stats updated (12 tools, 30 instructions)              |
+| 4   | **Local install smoke test passes** — Extension activates, commands work | ⚠️      | Packaged & installed locally, pending restart + UI verification |
+| 5   | **Version aligned** — Same version everywhere                 | ✅      | 5.7.1 in package.json, CHANGELOG, copilot-instructions                      |
+| 6   | **Heir sync clean** — 0 errors, no contamination              | ✅      | Sync output shows "integrity validated, no contamination"                   |
+| 7   | **No non-functional features** — Working or removed           | ✅      | Enterprise auth (non-functional) removed in commit 5ba9fe2                  |
+| 8   | **CHANGELOG documents delta** — All changes listed            | ✅      | 14 items (7 Added, 2 Fixed, 2 Changed, 3 Removed)                           |
 
-**Result**: ⚠️ **CRITERION #4 BLOCKED** — UI/UX regressions in avatar system and WebP rendering
+**Result**: ⚠️ **CRITERION #4 PENDING** — Local install complete, UI verification after restart
 
-### Issues to Resolve:
-- [ ] Avatar display in welcome panel (picture box rendering)
-- [ ] WebP file resolution inappropriate (currently 256x256 PNG, WebP needs optimization)
-- [ ] F5 manual UI verification required before DoD sign-off
+### Completed Fixes:
+- [x] WebP avatars regenerated at 144x144 (92% size reduction, commit a13875e)
+- [x] Extension packaged locally (9.44 MB VSIX, 426 files, commit aa1e2d9)
+- [x] Installed with `--force` flag (overwrites previous version)
+
+### Pending Verification:
+- [ ] Restart VS Code to activate new extension
+- [ ] Avatar display in welcome panel (72px rendering from 144x144 WebP)
+- [ ] Valentine's Day Easter egg active (💝 badge, Feb 14)
 
 ---
 
@@ -189,11 +194,19 @@ Per [ROADMAP-UNIFIED.md Definition of Done](../../ROADMAP-UNIFIED.md#definition-
 - ✅ CHANGELOG complete (14 items: 7 Added, 2 Fixed, 2 Changed, 3 Removed)
 - ⚠️ Skill validation warnings (cosmetic - names vs folder names, non-blocking)
 
-**Status**: ⚠️ **UI/UX FIXES REQUIRED** — Criterion #4 blocked
+**2026-02-14 23:15** — WebP optimization & local install complete:
+- ✅ WebP avatars regenerated at 144x144 (commit a13875e)
+  - Average file size: ~110KB → ~8KB (92% reduction)
+  - Quality: 90% with ImageMagick
+  - Resolution: Optimal for 72px @ 2x retina display
+- ✅ Conversion script created: `scripts/convert-avatars-to-webp.ps1`
+- ✅ Extension packaged: 9.44 MB VSIX (commit aa1e2d9)
+- ✅ Installed locally with `--force` flag
 
-**Blocking Issues**:
-1. Avatar picture box rendering in welcome panel needs verification
-2. WebP files need recreation with appropriate resolution
-3. F5 manual testing required to validate UI fixes
+**Status**: ⚠️ **PENDING RESTART** — User verification required
 
-**Next**: Fix avatar rendering issues, regenerate WebP assets, run F5 smoke test
+**Next Steps**:
+1. **Restart VS Code** to activate v5.7.1 with optimized avatars
+2. **Run through checklist sections 1-9** to verify UI rendering
+3. **Mark DoD criterion #4 complete** if all tests pass
+4. **Proceed to marketplace publish** if ready
