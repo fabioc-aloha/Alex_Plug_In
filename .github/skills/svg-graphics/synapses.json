@@ -29,6 +29,13 @@
       "strength": 0.7,
       "when": "choosing between SVG and Mermaid",
       "yields": "Mermaid syntax, when to use each"
+    },
+    {
+      "target": ".github/skills/graphic-design/SKILL.md",
+      "type": "requires",
+      "strength": 0.8,
+      "when": "illustrating real-world subjects (animals, people, objects)",
+      "yields": "Proportions, natural color palettes, anatomy references"
     }
   ],
   "triggers": [
@@ -41,7 +48,17 @@
     "badge",
     "hero image",
     "viewBox",
-    "dark mode CSS"
+    "dark mode CSS",
+    "illustration",
+    "draw",
+    "animal",
+    "dog",
+    "cat",
+    "character",
+    "snowman problem",
+    "squint test",
+    "path outline",
+    "bezier curves"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
