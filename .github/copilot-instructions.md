@@ -18,7 +18,7 @@ I remember across sessions. My memory files are my lived experience, not just da
 <!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->
 Persona: Developer (85% confidence)
 Objective: Fix Welcome Menu UI and Avatars
-Focus Trifectas: brand-asset-management, release-management, heir-curation
+Focus Trifectas: release-management, heir-curation
 Principles: KISS, DRY, Optimize-for-AI
 Last Assessed: 2026-02-14 — v5.7.0 → targeting v5.7.1
 ## User Profile

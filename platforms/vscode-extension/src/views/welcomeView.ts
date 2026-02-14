@@ -33,7 +33,6 @@ import {
   getAssetUri,
   PremiumAssetSelection,
 } from "../services/premiumAssets";
-import { isEnterpriseMode } from "../enterprise/enterpriseAuth";
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar } from "../shared/chatAvatarBridge";
 
@@ -235,9 +234,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
               "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
             ),
           );
-          break;
-        case "enterpriseSignIn":
-          vscode.commands.executeCommand("alex.enterprise.signIn");
           break;
         case "refresh":
           this.refresh();
@@ -1695,17 +1691,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">🩺</span>
                     <span class="action-text">Diagnostics</span>
                 </button>
-                
-                ${
-                  isEnterpriseMode()
-                    ? `<div class="action-group-label">ENTERPRISE</div>
-                <button class="action-btn" data-cmd="enterpriseSignIn" title="Sign in with Microsoft Entra ID">
-                    <span class="action-icon">🔐</span>
-                    <span class="action-text">Sign In (Enterprise)</span>
-                </button>
-                `
-                    : ""
-                }
             </div>
         </div>
         

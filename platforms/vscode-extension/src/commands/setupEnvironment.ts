@@ -79,23 +79,9 @@ const EXTENDED_THINKING_SETTINGS: Record<string, unknown> = {
 };
 
 /**
- * Enterprise settings for Microsoft 365 integration (EXPERIMENTAL)
- * These require admin consent for Graph API scopes in corporate tenants
- * Personal Microsoft accounts work without admin consent
+ * Enterprise security settings (secrets scanning and audit logging)
  */
 const ENTERPRISE_SETTINGS: Record<string, unknown> = {
-  // Master toggle for enterprise features
-  "alex.enterprise.enabled": true,
-  // Microsoft Graph API integration
-  "alex.enterprise.graph.enabled": true,
-  // Calendar integration - read upcoming meetings
-  "alex.enterprise.graph.calendarEnabled": true,
-  // Mail integration - read recent emails
-  "alex.enterprise.graph.mailEnabled": true,
-  // Presence integration - online/offline/busy status
-  "alex.enterprise.graph.presenceEnabled": true,
-  // People integration - organization search
-  "alex.enterprise.graph.peopleEnabled": true,
   // Enterprise audit logging
   "alex.enterprise.audit.enabled": true,
 };

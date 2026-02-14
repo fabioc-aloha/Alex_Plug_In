@@ -357,21 +357,6 @@
         "icon": "$(zap)"
       },
       {
-        "command": "alex.enterprise.signIn",
-        "title": "Alex: Enterprise Sign In",
-        "icon": "$(sign-in)"
-      },
-      {
-        "command": "alex.enterprise.signOut",
-        "title": "Alex: Enterprise Sign Out",
-        "icon": "$(sign-out)"
-      },
-      {
-        "command": "alex.enterprise.showAuthStatus",
-        "title": "Alex: Enterprise Auth Status",
-        "icon": "$(shield)"
-      },
-      {
         "command": "alex.enterprise.scanSecrets",
         "title": "Alex: Scan for Secrets",
         "icon": "$(search)"
@@ -1011,69 +996,6 @@
           "default": true,
           "scope": "machine",
           "description": "Include streak information in daily briefing."
-        },
-        "alex.enterprise.enabled": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Enable enterprise mode with Microsoft Entra ID authentication and enhanced security features."
-        },
-        "alex.enterprise.auth.useCustomApp": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Use a custom Entra ID app registration instead of VS Code's built-in Microsoft auth. Required for some corporate tenants that restrict first-party apps."
-        },
-        "alex.enterprise.auth.clientId": {
-          "type": "string",
-          "default": "",
-          "scope": "machine",
-          "description": "Your custom Entra ID application (client) ID. Register at https://entra.microsoft.com > App registrations."
-        },
-        "alex.enterprise.auth.tenantId": {
-          "type": "string",
-          "default": "common",
-          "scope": "machine",
-          "description": "Entra ID tenant ID. Use 'common' for multi-tenant, 'organizations' for work/school only, or your specific tenant ID."
-        },
-        "alex.enterprise.requireAuth": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Require authentication for all Alex operations in enterprise mode."
-        },
-        "alex.enterprise.minWriteRole": {
-          "type": "string",
-          "default": "contributor",
-          "enum": [
-            "viewer",
-            "contributor",
-            "admin",
-            "owner"
-          ],
-          "enumDescriptions": [
-            "Viewer - Read-only access",
-            "Contributor - Can modify content",
-            "Admin - Full access except ownership changes",
-            "Owner - Full access including role management"
-          ],
-          "scope": "machine",
-          "description": "Minimum role required for write operations in enterprise mode."
-        },
-        "alex.enterprise.allowedTenants": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [],
-          "scope": "machine",
-          "description": "List of allowed Entra ID tenant IDs. Leave empty to allow any tenant."
-        },
-        "alex.enterprise.auditEnabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable audit logging for enterprise operations."
         },
         "alex.enterprise.audit.enabled": {
           "type": "boolean",

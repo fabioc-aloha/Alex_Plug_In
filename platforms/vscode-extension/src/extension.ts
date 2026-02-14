@@ -131,7 +131,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     vscodeVersion: vscode.version,
   });
 
-  // Initialize enterprise features (SSO, secrets scanning, audit logging)
+  // Initialize enterprise security features (secrets scanning, audit logging)
   await initializeEnterprise(context);
 
   console.log("Alex Cognitive Architecture is now active!");
@@ -2725,7 +2725,7 @@ export function deactivate() {
     console.warn("Failed to save telemetry session:", err);
   });
 
-  // Clean up enterprise resources (audit logging, etc.)
+  // Clean up enterprise resources (secrets scanning, audit logging)
   disposeEnterprise();
 
   // Reset chat participant session state to prevent state bleeding

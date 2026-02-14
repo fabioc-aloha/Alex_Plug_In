@@ -14,7 +14,6 @@ import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_AVATAR } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch } from './modelIntelligence';
-import { isEnterpriseMode } from '../enterprise/enterpriseAuth';
 import { registerAvatarUpdater } from '../shared/chatAvatarBridge';
 
 // ============================================================================
@@ -1717,16 +1716,7 @@ async function handleHelpCommand(
 | \`/forget <topic>\` | Selectively remove information from memory |
 | \`/exportm365\` | Export memory for M365 Copilot |
 
-${isEnterpriseMode() ? `### 🏢 Enterprise (Microsoft Graph)
-
-| Command | Description |
-|---------|-------------|
-| \`/calendar\` | View upcoming calendar events |
-| \`/mail\` | View recent emails (add "unread" for unread only) |
-| \`/context\` | Full work context: calendar + mail + presence |
-| \`/people <query>\` | Search for people in your organization |
-
-` : ''}---
+---
 
 ### 🔧 Language Model Tools
 

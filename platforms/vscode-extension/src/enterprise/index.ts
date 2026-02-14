@@ -7,16 +7,10 @@
  * @version 5.3.0
  */
 
-export * from './enterpriseAuth';
 export * from './secretsScanning';
 export * from './auditLogging';
 
 import * as vscode from 'vscode';
-import {
-  registerEnterpriseAuthCommands,
-  disposeEnterpriseAuth,
-  isEnterpriseMode,
-} from './enterpriseAuth';
 import {
   registerSecretsCommands,
   initializeSecretsDiagnostics,
@@ -30,7 +24,7 @@ import {
 } from './auditLogging';
 
 /**
- * Initialize all enterprise features
+ * Initialize enterprise security features (secrets scanning and audit logging)
  */
 export function initializeEnterprise(context: vscode.ExtensionContext): void {
   // Initialize audit logging first (for logging other initialization)
@@ -40,23 +34,19 @@ export function initializeEnterprise(context: vscode.ExtensionContext): void {
   initializeSecretsDiagnostics(context);
 
   // Register commands
-  registerEnterpriseAuthCommands(context);
   registerSecretsCommands(context);
   registerAuditCommands(context);
 
   // Log enterprise initialization
-  audit.system('enterprise.initialized', {
-    enterpriseMode: isEnterpriseMode(),
-  });
+  audit.system('enterprise.initialized', {});
 
-  console.log('[Alex] Enterprise features initialized');
+  console.log('[Alex] Enterprise security features initialized (secrets scanning & audit logging)');
 }
 
 /**
  * Dispose all enterprise resources
  */
 export function disposeEnterprise(): void {
-  disposeEnterpriseAuth();
   disposeSecretsDiagnostics();
   disposeAuditLogging();
 }
