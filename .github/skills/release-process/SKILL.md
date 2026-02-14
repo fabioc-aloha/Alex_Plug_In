@@ -155,6 +155,29 @@ The `release-vscode.ps1` script handles all of these automatically.
 └─────────────────┘
 ```
 
+### Definition of Done Verification
+
+**Before publishing**, verify ALL 8 criteria from ROADMAP-UNIFIED.md:
+
+| # | Criterion | Validation Method |
+|---|-----------|-------------------|
+| 1 | Builds clean | `npm run compile` exits 0 with zero errors |
+| 2 | No dead code | All imports resolve, no orphaned modules |
+| 3 | Counts match reality | Slash commands, tools, skills, trifectas in docs = actual code |
+| 4 | F5 smoke test passes | Extension activates, welcome view renders, 3 random commands work |
+| 5 | Version aligned | package.json = CHANGELOG = copilot-instructions |
+| 6 | Heir sync clean | `sync-architecture.js` runs with 0 errors, no contamination |
+| 7 | No non-functional features | If in UI/command palette, it works. If broken, removed. |
+| 8 | CHANGELOG documents delta | Every user-visible change has a line item |
+
+**Pattern**: Use regression checklist as DoD tracker:
+- Create `alex_docs/operations/VXXX-REGRESSION-CHECKLIST.md`
+- Track verification status for each criterion
+- Document evidence (commit hashes, test counts, sync output)
+- Automated tests provide objective quality signal (test count = confidence metric)
+
+**Quality Gate**: If ANY criterion fails, DO NOT publish. Fix first.
+
 ### Manual Checklist
 
 If not using the script:

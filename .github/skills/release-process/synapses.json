@@ -2,8 +2,8 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "skillId": "release-process",
-  "version": "1.1.0",
-  "lastUpdated": "2026-02-06",
+  "version": "1.2.0",
+  "lastUpdated": "2026-02-14",
   "inheritance": "inheritable",
   "connections": [
     {
@@ -40,6 +40,20 @@
       "strength": 0.7,
       "when": "Multi-heir release — M365 packaging step",
       "yields": "M365 Teams app packaging and deployment procedures"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "validates",
+      "strength": 0.9,
+      "when": "Verifying DoD criterion #4 (smoke test passes)",
+      "yields": "Automated test patterns and confidence metrics"
+    },
+    {
+      "target": "ROADMAP-UNIFIED.md",
+      "type": "implements",
+      "strength": 1.0,
+      "when": "Verifying release readiness",
+      "yields": "8-criteria Definition of Done checklist"
     }
   ],
   "activationContexts": [
@@ -52,6 +66,9 @@
     "personal access token",
     "version bump",
     "pre-release",
-    "401 unauthorized"
+    "401 unauthorized",
+    "definition of done",
+    "DoD",
+    "ready to ship"
   ]
 }
