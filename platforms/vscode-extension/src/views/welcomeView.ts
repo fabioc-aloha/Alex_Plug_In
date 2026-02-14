@@ -7,23 +7,44 @@ import {
   HealthStatus,
 } from "../shared/healthCheck";
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectPersona, loadUserProfile, Persona, PersonaDetectionResult, PERSONA_SLOT_MAPPINGS, getAvatarForPersona, DEFAULT_AVATAR, getEasterEggOverride, EasterEgg } from "../chat/personaDetection";
-import { readActiveContext, ActiveContext } from "../shared/activeContextManager";
+import {
+  detectPersona,
+  loadUserProfile,
+  Persona,
+  PersonaDetectionResult,
+  PERSONA_SLOT_MAPPINGS,
+  getAvatarForPersona,
+  DEFAULT_AVATAR,
+  getEasterEggOverride,
+  EasterEgg,
+} from "../chat/personaDetection";
+import {
+  readActiveContext,
+  ActiveContext,
+} from "../shared/activeContextManager";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml, getNonce } from "../shared/sanitize";
-import { isOperationInProgress } from "../extension";
 import { openChatPanel } from "../shared/utils";
-import { detectPremiumFeatures, getPremiumAssets, getAssetUri, PremiumAssetSelection } from "../services/premiumAssets";
-import { updateChatAvatar } from "../chat/participant";
+import {
+  detectPremiumFeatures,
+  getPremiumAssets,
+  getAssetUri,
+  PremiumAssetSelection,
+} from "../services/premiumAssets";
 import { isEnterpriseMode } from "../enterprise/enterpriseAuth";
+import { isOperationInProgress } from "../shared/operationLock";
+import { updateChatAvatar } from "../shared/chatAvatarBridge";
+
+// --- DEBUG: trace module initialization order ---
+console.log("[Alex][WelcomeView] MODULE LOADED — top-level code executing");
 
 /**
  * Nudge types for contextual reminders
  */
 interface Nudge {
-  type: 'dream' | 'streak' | 'health' | 'tip' | 'focus' | 'mission';
+  type: "dream" | "streak" | "health" | "tip" | "focus" | "mission";
   icon: string;
   message: string;
   action?: string;
@@ -57,9 +78,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this._getLoadingHtml();
+    console.log("[Alex][WelcomeView] resolveWebviewView — loading HTML set, about to wire message handler");
 
     // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message) => {
+      console.log("[Alex][WelcomeView] message received:", message.command);
       // Commands that use operation lock - check before executing
       const lockedCommands = ["dream", "setupEnvironment"];
 
@@ -178,26 +201,40 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           vscode.commands.executeCommand("alex.skillReview");
           break;
         case "launchRecommendedSkill": {
-          const skill = message.skill || 'code-quality';
+          const skill = message.skill || "code-quality";
           const skillName = message.skillName || skill;
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
           await openChatPanel(prompt);
           break;
         }
         case "openMarketplace":
-          vscode.env.openExternal(vscode.Uri.parse("https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture"));
+          vscode.env.openExternal(
+            vscode.Uri.parse(
+              "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
+            ),
+          );
           break;
         case "openGitHub":
-          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"));
+          vscode.env.openExternal(
+            vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"),
+          );
           break;
         case "openBrainAnatomy":
-          vscode.env.openExternal(vscode.Uri.parse("https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html"));
+          vscode.env.openExternal(
+            vscode.Uri.parse(
+              "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
+            ),
+          );
           break;
         case "workingWithAlex":
           vscode.commands.executeCommand("alex.workingWithAlex");
           break;
         case "provideFeedback":
-          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues"));
+          vscode.env.openExternal(
+            vscode.Uri.parse(
+              "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
+            ),
+          );
           break;
         case "enterpriseSignIn":
           vscode.commands.executeCommand("alex.enterprise.signIn");
@@ -221,10 +258,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     }
 
     try {
+      console.log("[Alex][WelcomeView] refresh() — step 1: gathering workspace info");
       const workspaceFolders = vscode.workspace.workspaceFolders;
       const wsRoot = workspaceFolders?.[0]?.uri.fsPath;
 
-      // Gather all status data in parallel (including Active Context from copilot-instructions)
+      console.log("[Alex][WelcomeView] refresh() — step 2: Promise.all (health, goals, dream, gk, activeContext)");
       const [health, goalsSummary, lastDreamDate, gkRepoPath, activeContext] =
         await Promise.all([
           checkHealth(false),
@@ -233,36 +271,59 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           detectGlobalKnowledgeRepo(),
           wsRoot ? readActiveContext(wsRoot) : Promise.resolve(null),
         ]);
+      console.log("[Alex][WelcomeView] refresh() — step 2 done");
 
+      console.log("[Alex][WelcomeView] refresh() — step 3: getCurrentSession");
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
-      
-      // Detect persona from user profile (needed for premium asset personalization)
+
+      console.log("[Alex][WelcomeView] refresh() — step 4: detectPersona");
       let personaResult: PersonaDetectionResult | null = null;
       if (workspaceFolders) {
-        const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
-        personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
+        const userProfile = await loadUserProfile(
+          workspaceFolders[0].uri.fsPath,
+        );
+        personaResult = await detectPersona(
+          userProfile ?? undefined,
+          workspaceFolders,
+        );
       }
+      console.log("[Alex][WelcomeView] refresh() — step 4 done, persona =", personaResult?.persona?.id ?? "none");
 
-      // Update @alex chat avatar to match detected persona
+      console.log("[Alex][WelcomeView] refresh() — step 5: updateChatAvatar");
       if (personaResult?.persona) {
-        updateChatAvatar(personaResult.persona.id);
+        try {
+          updateChatAvatar(personaResult.persona.id);
+          console.log("[Alex][WelcomeView] refresh() — step 5 done");
+        } catch (avatarErr) {
+          console.error("[Alex][WelcomeView] updateChatAvatar failed (non-fatal):", avatarErr);
+        }
+      } else {
+        console.log("[Alex][WelcomeView] refresh() — step 5 skipped (no persona)");
       }
-      
-      // Detect premium features and get appropriate assets (pass persona's bannerNoun)
-      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
-      const bannerNoun = personaResult?.persona?.bannerNoun ?? 'CODE';
-      const premiumAssets = getPremiumAssets(premiumFlags, true, bannerNoun); // rotate banners with persona noun
-      
-      // Get workspace name for mission card context
-      const workspaceName = workspaceFolders?.[0]?.name ?? 'Workspace';
-      
-      // Get extension version
-      const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
-      const version = extension?.packageJSON?.version || '0.0.0';
 
-      // Generate nudges based on current state (includes mission card from premium assets)
-      const nudges = this._generateNudges(health, goalsSummary, lastDreamDate, session, premiumAssets, workspaceName);
+      console.log("[Alex][WelcomeView] refresh() — step 6: detectPremiumFeatures");
+      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
+      const bannerNoun = personaResult?.persona?.bannerNoun ?? "CODE";
+      const premiumAssets = getPremiumAssets(premiumFlags, true, bannerNoun);
+      console.log("[Alex][WelcomeView] refresh() — step 6 done");
+
+      const workspaceName = workspaceFolders?.[0]?.name ?? "Workspace";
+
+      const extension = vscode.extensions.getExtension(
+        "fabioc-aloha.alex-cognitive-architecture",
+      );
+      const version = extension?.packageJSON?.version || "0.0.0";
+
+      console.log("[Alex][WelcomeView] refresh() — step 7: generateNudges + render HTML");
+      const nudges = this._generateNudges(
+        health,
+        goalsSummary,
+        lastDreamDate,
+        session,
+        premiumAssets,
+        workspaceName,
+      );
 
       this._view.webview.html = this._getHtmlContent(
         this._view.webview,
@@ -276,7 +337,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         premiumAssets,
         activeContext,
       );
+      console.log("[Alex][WelcomeView] refresh() — DONE ✓");
     } catch (err) {
+      console.error("[Alex][WelcomeView] refresh() FAILED:", err);
+      console.error("[Alex][WelcomeView] Error stack:", err instanceof Error ? err.stack : String(err));
       this._view.webview.html = this._getErrorHtml(err);
     }
   }
@@ -287,17 +351,28 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private async _getLastDreamDate(): Promise<Date | null> {
     try {
       const workspaceFolders = vscode.workspace.workspaceFolders;
-      if (!workspaceFolders) {return null;}
-      
-      const episodicPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "episodic");
-      if (!fs.existsSync(episodicPath)) {return null;}
+      if (!workspaceFolders) {
+        return null;
+      }
 
-      const files = fs.readdirSync(episodicPath)
-        .filter(f => f.startsWith('dream-report-') && f.endsWith('.md'))
+      const episodicPath = path.join(
+        workspaceFolders[0].uri.fsPath,
+        ".github",
+        "episodic",
+      );
+      if (!fs.existsSync(episodicPath)) {
+        return null;
+      }
+
+      const files = fs
+        .readdirSync(episodicPath)
+        .filter((f) => f.startsWith("dream-report-") && f.endsWith(".md"))
         .sort()
         .reverse();
 
-      if (files.length === 0) {return null;}
+      if (files.length === 0) {
+        return null;
+      }
 
       // Parse timestamp from filename: dream-report-1738456789123.md
       const match = files[0].match(/dream-report-(\d+)\.md/);
@@ -305,7 +380,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         return new Date(parseInt(match[1], 10));
       }
     } catch (err) {
-      console.warn('[Alex] Failed to get last dream date:', err);
+      console.warn("[Alex] Failed to get last dream date:", err);
     }
     return null;
   }
@@ -316,11 +391,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private _generateNudges(
     health: HealthCheckResult,
-    goals: { activeGoals: LearningGoal[]; streakDays: number; completedToday: number },
+    goals: {
+      activeGoals: LearningGoal[];
+      streakDays: number;
+      completedToday: number;
+    },
     lastDreamDate: Date | null,
     session: Session | null,
     premiumAssets?: PremiumAssetSelection,
-    workspaceName?: string
+    workspaceName?: string,
   ): Nudge[] {
     const nudges: Nudge[] = [];
     const now = new Date();
@@ -328,12 +407,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Mission statement with workspace context (always shown when missionControl is enabled)
     if (premiumAssets?.missionStatement) {
-      const wsLabel = workspaceName ? `${workspaceName}: ` : '';
+      const wsLabel = workspaceName ? `${workspaceName}: ` : "";
       nudges.push({
-        type: 'mission',
-        icon: '🚀',
+        type: "mission",
+        icon: "🚀",
         message: `${wsLabel}${premiumAssets.missionStatement}`,
-        priority: 0  // Highest priority — mission statement always visible
+        priority: 0, // Highest priority — mission statement always visible
       });
     }
 
@@ -342,49 +421,51 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Check health issues (high priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
       nudges.push({
-        type: 'health',
-        icon: '⚠️',
+        type: "health",
+        icon: "⚠️",
         message: `${health.brokenSynapses} broken synapses need repair`,
-        action: 'dream',
-        actionLabel: 'Run Dream',
-        priority: 2
+        action: "dream",
+        actionLabel: "Run Dream",
+        priority: 2,
       });
     }
 
     // Check streak at risk (medium-high priority)
     if (goals.streakDays > 0 && goals.completedToday === 0) {
       nudges.push({
-        type: 'streak',
-        icon: '🔥',
+        type: "streak",
+        icon: "🔥",
         message: `${goals.streakDays}-day streak at risk! Complete a goal today.`,
-        action: 'showGoals',
-        actionLabel: 'View Goals',
-        priority: 3
+        action: "showGoals",
+        actionLabel: "View Goals",
+        priority: 3,
       });
     }
 
     // Check last dream date (medium priority)
     if (lastDreamDate) {
-      const daysSinceDream = Math.floor((now.getTime() - lastDreamDate.getTime()) / dayMs);
+      const daysSinceDream = Math.floor(
+        (now.getTime() - lastDreamDate.getTime()) / dayMs,
+      );
       if (daysSinceDream >= 7) {
         nudges.push({
-          type: 'dream',
-          icon: '💭',
+          type: "dream",
+          icon: "💭",
           message: `Haven't dreamed in ${daysSinceDream} days. Neural maintenance recommended.`,
-          action: 'dream',
-          actionLabel: 'Dream',
-          priority: 4
+          action: "dream",
+          actionLabel: "Dream",
+          priority: 4,
         });
       }
     } else {
       // Never dreamed in this workspace
       nudges.push({
-        type: 'dream',
-        icon: '💭',
-        message: 'Run Dream to validate your cognitive architecture.',
-        action: 'dream',
-        actionLabel: 'Dream',
-        priority: 6
+        type: "dream",
+        icon: "💭",
+        message: "Run Dream to validate your cognitive architecture.",
+        action: "dream",
+        actionLabel: "Dream",
+        priority: 6,
       });
     }
 
@@ -487,9 +568,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   ): string {
     // Security: Generate nonce for CSP
     const nonce = getNonce();
-    
+
     // Logo URI for webview - use premium asset if available
-    const logoUri = getAssetUri(webview, this._extensionUri, premiumAssets.logoPath);
+    const logoUri = getAssetUri(
+      webview,
+      this._extensionUri,
+      premiumAssets.logoPath,
+    );
 
     // Persona display
     const persona = personaResult?.persona;
@@ -497,110 +582,245 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Avatar URIs — WebP primary, PNG fallback (both shipped in VSIX)
     // Easter egg check: seasonal or project-name overrides take priority
     const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
-    const easterEgg: EasterEgg | null = getEasterEggOverride(workspaceFolderName);
-    const personaAvatarBase = easterEgg ? easterEgg.avatarBase : (persona ? getAvatarForPersona(persona.id) : DEFAULT_AVATAR);
-    const avatarWebpUri = getAssetUri(webview, this._extensionUri, `avatars/${personaAvatarBase}.webp`);
-    const avatarPngUri = getAssetUri(webview, this._extensionUri, `avatars/${personaAvatarBase}.png`);
-    const easterEggBadge = easterEgg ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>` : '';
-    const personaHook = persona?.hook || 'Take Your Code to New Heights';
-    const personaIcon = persona?.icon || '💻';
-    const personaName = persona?.name || 'Developer';
-    const personaSkill = persona?.skill || 'code-review';
-    const bannerNoun = persona?.bannerNoun || 'CODE';
-    
+    const easterEgg: EasterEgg | null =
+      getEasterEggOverride(workspaceFolderName);
+    const personaAvatarBase = easterEgg
+      ? easterEgg.avatarBase
+      : persona
+        ? getAvatarForPersona(persona.id)
+        : DEFAULT_AVATAR;
+    const avatarWebpUri = getAssetUri(
+      webview,
+      this._extensionUri,
+      `avatars/${personaAvatarBase}.webp`,
+    );
+    const avatarPngUri = getAssetUri(
+      webview,
+      this._extensionUri,
+      `avatars/${personaAvatarBase}.png`,
+    );
+    const easterEggBadge = easterEgg
+      ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>`
+      : "";
+    const personaHook = persona?.hook || "Take Your Code to New Heights";
+    const personaIcon = persona?.icon || "💻";
+    const personaName = persona?.name || "Developer";
+    const personaSkill = persona?.skill || "code-review";
+    const bannerNoun = persona?.bannerNoun || "CODE";
+
     // Use persona's accent color directly, with fallback to blue
-    const personaAccent = persona?.accentColor || 'var(--vscode-charts-blue)';
-    
+    const personaAccent = persona?.accentColor || "var(--vscode-charts-blue)";
+
     // Active Context — live state from copilot-instructions.md
-    const slotMapping = persona ? (PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' }) : { p5: 'code-review', p7: 'scope-management' };
-    const confidenceLabel = personaResult?.confidence != null ? `${Math.round(personaResult.confidence * 100)}%` : '';
-    const sourceLabel = personaResult?.source === 'llm' ? 'LLM' : personaResult?.source === 'cached' ? 'Cached' : 'Auto';
+    const slotMapping = persona
+      ? (PERSONA_SLOT_MAPPINGS[persona.id] ?? {
+          p5: "code-review",
+          p7: "scope-management",
+        })
+      : { p5: "code-review", p7: "scope-management" };
+    const confidenceLabel =
+      personaResult?.confidence != null
+        ? `${Math.round(personaResult.confidence * 100)}%`
+        : "";
+    const sourceLabel =
+      personaResult?.source === "llm"
+        ? "LLM"
+        : personaResult?.source === "cached"
+          ? "Cached"
+          : "Auto";
 
     // Focus Trifectas from Active Context (live) or fallback to persona slot mappings
     const rawTrifectas = activeContext?.focusTrifectas;
-    const hasLiveTrifectas = rawTrifectas && !rawTrifectas.includes('*(') && rawTrifectas.trim().length > 0;
+    const hasLiveTrifectas =
+      rawTrifectas &&
+      !rawTrifectas.includes("*(") &&
+      rawTrifectas.trim().length > 0;
     const trifectaIds = hasLiveTrifectas
-        ? rawTrifectas!.split(',').map(t => t.trim()).filter(Boolean)
-        : [slotMapping.p5, personaSkill, slotMapping.p7];
-    const trifectaTagsHtml = trifectaIds.map(id => {
-        const name = skillNameMap[id] || id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      ? rawTrifectas!
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      : [slotMapping.p5, personaSkill, slotMapping.p7];
+
+    // Skill name mapping for display (must be declared before trifectaTagsHtml which references it)
+    const skillNameMap: Record<string, string> = {
+      "code-quality": "Code Quality",
+      "code-review": "Code Review",
+      "research-project-scaffold": "Research Setup",
+      "api-documentation": "API Docs",
+      "architecture-health": "Architecture",
+      "microsoft-fabric": "Data Fabric",
+      "infrastructure-as-code": "IaC",
+      "creative-writing": "Creative Writing",
+      "project-management": "PM Dashboard",
+      "incident-response": "Security",
+      "learning-psychology": "Learning",
+      "gamma-presentations": "Presentations",
+      "git-workflow": "Git Workflows",
+      "game-design": "Game Design",
+      "slide-design": "Slide Design",
+      "scope-management": "Scope Mgmt",
+      "deep-thinking": "Deep Thinking",
+      "markdown-mermaid": "Diagrams",
+      "testing-strategies": "Testing",
+      "bootstrap-learning": "Learning",
+      "master-heir-management": "Heir Mgmt",
+      "brand-asset-management": "Brand Assets",
+      "release-management": "Releases",
+      "release-process": "Releases",
+      "self-actualization": "Self-Actualize",
+      "research-first-development": "Research First",
+      meditation: "Meditation",
+      "dream-state": "Dream State",
+      "brain-qa": "Brain QA",
+      "heir-curation": "Heir Curation",
+    };
+
+    const trifectaTagsHtml = trifectaIds
+      .map((id) => {
+        const name =
+          skillNameMap[id] ||
+          id
+            .split("-")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ");
         return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}">${name}</span>`;
-    }).join('\n                ');
+      })
+      .join("\n                ");
 
     // Objective from Active Context (hidden when session card is showing)
     const rawObjective = activeContext?.objective;
-    const hasObjective = rawObjective && !rawObjective.includes('*(session-objective') && !session;
+    const hasObjective =
+      rawObjective && !rawObjective.includes("*(session-objective") && !session;
 
     // Last Assessed from Active Context
-    const rawAssessed = activeContext?.lastAssessed || 'never';
-    const isNeverAssessed = rawAssessed === 'never' || rawAssessed.includes('never');
-    const assessedLabel = isNeverAssessed ? 'Not assessed' : rawAssessed.split(' — ')[0];
+    const rawAssessed = activeContext?.lastAssessed || "never";
+    const isNeverAssessed =
+      rawAssessed === "never" || rawAssessed.includes("never");
+    const assessedLabel = isNeverAssessed
+      ? "Not assessed"
+      : rawAssessed.split(" — ")[0];
 
     // Principles from Active Context
-    const principlesText = activeContext?.principles || 'KISS, DRY, Optimize-for-AI';
-    
-    // Skill name mapping for display
-    const skillNameMap: Record<string, string> = {
-      'code-quality': 'Code Quality',
-      'code-review': 'Code Review',
-      'research-project-scaffold': 'Research Setup',
-      'api-documentation': 'API Docs',
-      'architecture-health': 'Architecture',
-      'microsoft-fabric': 'Data Fabric',
-      'infrastructure-as-code': 'IaC',
-      'creative-writing': 'Creative Writing',
-      'project-management': 'PM Dashboard',
-      'incident-response': 'Security',
-      'learning-psychology': 'Learning',
-      'gamma-presentations': 'Presentations',
-      'git-workflow': 'Git Workflows',
-      'game-design': 'Game Design',
-      'slide-design': 'Slide Design',
-      'scope-management': 'Scope Mgmt',
-      'deep-thinking': 'Deep Thinking',
-      'markdown-mermaid': 'Diagrams',
-      'testing-strategies': 'Testing',
-      'bootstrap-learning': 'Learning',
-      'master-heir-management': 'Heir Mgmt',
-      'brand-asset-management': 'Brand Assets',
-      'release-management': 'Releases',
-      'release-process': 'Releases',
-      'self-actualization': 'Self-Actualize',
-      'research-first-development': 'Research First',
-      'meditation': 'Meditation',
-      'dream-state': 'Dream State',
-      'brain-qa': 'Brain QA',
-      'heir-curation': 'Heir Curation',
-    };
+    const principlesText =
+      activeContext?.principles || "KISS, DRY, Optimize-for-AI";
+
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
     // Persona-specific recommended quick actions
-    const personaActions: Record<string, Array<{ cmd: string; icon: string; label: string }>> = {
-      'developer':        [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateTests', icon: '🧪', label: 'Generate Tests' }],
-      'academic':         [{ cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
-      'researcher':       [{ cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
-      'technical-writer': [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }],
-      'architect':        [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }],
-      'data-engineer':    [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
-      'devops':           [{ cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'releasePreflight', icon: '🚀', label: 'Release Preflight' }],
-      'content-creator':  [{ cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'generateImageFromSelection', icon: '🖼️', label: 'Illustration' }],
-      'fiction-writer':   [{ cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'saveSelectionAsInsight', icon: '💡', label: 'Save Insight' }, { cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }],
-      'game-developer':   [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
-      'project-manager':  [{ cmd: 'importGitHubIssues', icon: '📋', label: 'Import Issues' }, { cmd: 'reviewPR', icon: '👁️', label: 'Review PR' }, { cmd: 'showGoals', icon: '🎯', label: 'Goals' }],
-      'security':         [{ cmd: 'codeReview', icon: '👀', label: 'Security Review' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'debugThis', icon: '🐛', label: 'Debug This' }],
-      'student':          [{ cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }, { cmd: 'rubberDuck', icon: '🦆', label: 'Rubber Duck' }, { cmd: 'searchRelatedKnowledge', icon: '🔍', label: 'Search Knowledge' }],
-      'job-seeker':       [{ cmd: 'codeReview', icon: '👀', label: 'Code Review' }, { cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'askAboutSelection', icon: '💬', label: 'Ask Alex' }],
-      'presenter':        [{ cmd: 'generatePptx', icon: '📰', label: 'Presentation' }, { cmd: 'readAloud', icon: '🔊', label: 'Read Aloud' }, { cmd: 'generateDiagram', icon: '📊', label: 'Generate Diagram' }],
-      'power-user':       [{ cmd: 'releasePreflight', icon: '🚀', label: 'Release Preflight' }, { cmd: 'runAudit', icon: '🔍', label: 'Project Audit' }, { cmd: 'dream', icon: '💭', label: 'Dream' }],
+    const personaActions: Record<
+      string,
+      Array<{ cmd: string; icon: string; label: string }>
+    > = {
+      developer: [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
+        { cmd: "generateTests", icon: "🧪", label: "Generate Tests" },
+      ],
+      academic: [
+        {
+          cmd: "searchRelatedKnowledge",
+          icon: "🔍",
+          label: "Search Knowledge",
+        },
+        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+      ],
+      researcher: [
+        {
+          cmd: "searchRelatedKnowledge",
+          icon: "🔍",
+          label: "Search Knowledge",
+        },
+        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+      ],
+      "technical-writer": [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
+      ],
+      architect: [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
+      ],
+      "data-engineer": [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+      ],
+      devops: [
+        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
+        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
+        { cmd: "releasePreflight", icon: "🚀", label: "Release Preflight" },
+      ],
+      "content-creator": [
+        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
+        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
+        {
+          cmd: "generateImageFromSelection",
+          icon: "🖼️",
+          label: "Illustration",
+        },
+      ],
+      "fiction-writer": [
+        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
+        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
+        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
+      ],
+      "game-developer": [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+      ],
+      "project-manager": [
+        { cmd: "importGitHubIssues", icon: "📋", label: "Import Issues" },
+        { cmd: "reviewPR", icon: "👁️", label: "Review PR" },
+        { cmd: "showGoals", icon: "🎯", label: "Goals" },
+      ],
+      security: [
+        { cmd: "codeReview", icon: "👀", label: "Security Review" },
+        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
+        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
+      ],
+      student: [
+        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
+        { cmd: "rubberDuck", icon: "🦆", label: "Rubber Duck" },
+        {
+          cmd: "searchRelatedKnowledge",
+          icon: "🔍",
+          label: "Search Knowledge",
+        },
+      ],
+      "job-seeker": [
+        { cmd: "codeReview", icon: "👀", label: "Code Review" },
+        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
+        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
+      ],
+      presenter: [
+        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
+        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
+        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
+      ],
+      "power-user": [
+        { cmd: "releasePreflight", icon: "🚀", label: "Release Preflight" },
+        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
+        { cmd: "dream", icon: "💭", label: "Dream" },
+      ],
     };
-    const personaId = persona?.id || 'developer';
-    const recommendedActions = personaActions[personaId] || personaActions['developer']!;
-    const recommendedActionsHtml = recommendedActions.map(a =>
-      `<button class="action-btn recommended" data-cmd="${a.cmd}" title="Recommended for ${personaName}">
+    const personaId = persona?.id || "developer";
+    const recommendedActions =
+      personaActions[personaId] || personaActions["developer"]!;
+    const recommendedActionsHtml = recommendedActions
+      .map(
+        (a) =>
+          `<button class="action-btn recommended" data-cmd="${a.cmd}" title="Recommended for ${personaName}">
                     <span class="action-icon">${a.icon}</span>
                     <span class="action-text">${a.label}</span>
-                </button>`
-    ).join('\n                ');
+                </button>`,
+      )
+      .join("\n                ");
 
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
@@ -670,30 +890,26 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header-icon:hover {
             transform: scale(1.08);
         }
+        .persona-avatar-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+            position: relative;
+        }
         .alex-avatar {
-            width: 44px;
-            height: 44px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--persona-accent, var(--vscode-charts-blue));
+            border: 3px solid var(--persona-accent, var(--vscode-charts-blue));
             flex-shrink: 0;
-            filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
-        .header-avatar-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .header-avatar-group .header-icon {
-            position: absolute;
-            bottom: -4px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            background: var(--vscode-sideBar-background);
-            border-radius: 50%;
-            padding: 1px;
+        .alex-avatar:hover {
+            transform: scale(1.05);
         }
         .easter-egg-badge {
             position: absolute;
@@ -1284,19 +1500,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-avatar-group">
-                <picture>
-                    <source srcset="${avatarWebpUri}" type="image/webp">
-                    <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" title="Alex as ${personaName}" />
-                </picture>
-                <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
-                ${easterEggBadge}
-            </div>
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
                 <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
             </div>
             <button class="refresh-btn" data-cmd="refresh" title="Refresh">↻</button>
+        </div>
+
+        <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills">
+            <picture>
+                <source srcset="${avatarWebpUri}" type="image/webp">
+                <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
+            </picture>
+            ${easterEggBadge}
         </div>
 
         <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more">
@@ -1311,13 +1528,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title clickable" data-cmd="healthDashboard" title="Click to open Health Dashboard">Status</div>
             <div class="status-grid" data-cmd="healthDashboard" style="cursor: pointer;" title="Click to open Health Dashboard">
-                <div class="status-item ${isHealthy ? 'status-good' : 'status-warn'}">
+                <div class="status-item ${isHealthy ? "status-good" : "status-warn"}">
                     <div class="status-label">Health</div>
-                    <div class="status-value"><span class="status-dot ${isHealthy ? 'dot-green' : health.brokenSynapses > 5 ? 'dot-red' : 'dot-yellow'}"></span>${healthText}</div>
+                    <div class="status-value"><span class="status-dot ${isHealthy ? "dot-green" : health.brokenSynapses > 5 ? "dot-red" : "dot-yellow"}"></span>${healthText}</div>
                 </div>
-                <div class="status-item ${streakDays > 0 ? 'status-good' : ''}">
+                <div class="status-item ${streakDays > 0 ? "status-good" : ""}">
                     <div class="status-label">Streak</div>
-                    <div class="status-value"><span class="status-dot ${streakDays > 0 ? 'dot-green' : 'dot-yellow'}"></span>${streakDays > 0 ? streakDays + ' days' : 'Start today!'}</div>
+                    <div class="status-value"><span class="status-dot ${streakDays > 0 ? "dot-green" : "dot-yellow"}"></span>${streakDays > 0 ? streakDays + " days" : "Start today!"}</div>
                 </div>
             </div>
         </div>
@@ -1325,13 +1542,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Active Context</div>
             <div class="context-card">
-                ${hasObjective ? `<div class="context-objective" data-cmd="sessionActions" title="Session objective">${this._escapeHtml(rawObjective!)}</div>` : ''}
+                ${hasObjective ? `<div class="context-objective" data-cmd="sessionActions" title="Session objective">${this._escapeHtml(rawObjective!)}</div>` : ""}
                 <div class="trifecta-tags">
                     ${trifectaTagsHtml}
                 </div>
                 <div class="context-meta">
-                    ${confidenceLabel ? `<span class="context-badge accent">${personaIcon} ${confidenceLabel} ${sourceLabel}</span>` : ''}
-                    <span class="context-badge ${isNeverAssessed ? 'stale' : ''}" data-cmd="selfActualize" title="${isNeverAssessed ? 'Run self-actualization' : 'Last self-actualization'}">${isNeverAssessed ? '⚡ Assess' : '✓ ' + assessedLabel}</span>
+                    ${confidenceLabel ? `<span class="context-badge accent">${personaIcon} ${confidenceLabel} ${sourceLabel}</span>` : ""}
+                    <span class="context-badge ${isNeverAssessed ? "stale" : ""}" data-cmd="selfActualize" title="${isNeverAssessed ? "Run self-actualization" : "Last self-actualization"}">${isNeverAssessed ? "⚡ Assess" : "✓ " + assessedLabel}</span>
                     <span class="context-badge">${principlesText}</span>
                 </div>
             </div>
@@ -1357,7 +1574,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Chat with Copilot</span>
                 </button>
                 <button class="action-btn" data-cmd="upgrade">
-                    <span class="action-icon">${hasGlobalKnowledge ? '🌐' : '⬆️'}</span>
+                    <span class="action-icon">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                     <span class="action-text">Initialize / Update</span>
                 </button>
                 <button class="action-btn" data-cmd="dream">
@@ -1369,11 +1586,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Self-Actualize</span>
                 </button>
                 
-                ${hasGlobalKnowledge ? `<div class="action-group-label">KNOWLEDGE</div>
+                ${
+                  hasGlobalKnowledge
+                    ? `<div class="action-group-label">KNOWLEDGE</div>
                 <button class="action-btn" data-cmd="knowledgeQuickPick">
                     <span class="action-icon">🔎</span>
                     <span class="action-text">Search Knowledge</span>
-                </button>` : ''}
+                </button>`
+                    : ""
+                }
                 
                 <div class="action-group-label">DEV TOOLS</div>
                 <button class="action-btn" data-cmd="codeReview" title="Get AI code review for selection or pasted code">
@@ -1475,12 +1696,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-text">Diagnostics</span>
                 </button>
                 
-                ${isEnterpriseMode() ? `<div class="action-group-label">ENTERPRISE</div>
+                ${
+                  isEnterpriseMode()
+                    ? `<div class="action-group-label">ENTERPRISE</div>
                 <button class="action-btn" data-cmd="enterpriseSignIn" title="Sign in with Microsoft Entra ID">
                     <span class="action-icon">🔐</span>
                     <span class="action-text">Sign In (Enterprise)</span>
                 </button>
-                ` : ''}
+                `
+                    : ""
+                }
             </div>
         </div>
         
@@ -1594,16 +1819,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private _getNudgesHtml(nudges: Nudge[]): string {
     if (nudges.length === 0) {
-      return '';
+      return "";
     }
 
-    const nudgesHtml = nudges.map(nudge => {
-      const typeClass = `nudge-${nudge.type}`;
-      const actionHtml = nudge.action 
-        ? `<button class="nudge-action" data-cmd="${nudge.action}">${nudge.actionLabel}</button>`
-        : '';
-      
-      return `
+    const nudgesHtml = nudges
+      .map((nudge) => {
+        const typeClass = `nudge-${nudge.type}`;
+        const actionHtml = nudge.action
+          ? `<button class="nudge-action" data-cmd="${nudge.action}">${nudge.actionLabel}</button>`
+          : "";
+
+        return `
         <div class="nudge-card ${typeClass}">
             <span class="nudge-icon">${nudge.icon}</span>
             <div class="nudge-content">
@@ -1611,7 +1837,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             </div>
             ${actionHtml}
         </div>`;
-    }).join('');
+      })
+      .join("");
 
     return `
         <div class="nudges-section">

@@ -60,40 +60,38 @@ import { registerUXCommands } from "./ux/uxFeatures";
 import { initializeEnterprise, disposeEnterprise } from "./enterprise";
 import * as telemetry from "./shared/telemetry";
 import { getNonce } from "./shared/sanitize";
+import {
+  isOperationInProgress,
+  setOperationInProgress,
+} from "./shared/operationLock";
 
-// Operation lock to prevent concurrent modifications
-let operationInProgress = false;
+// Re-export for backward compatibility (other modules may import from extension.ts)
+export { isOperationInProgress };
 
 // Status bar item for Alex health
 let statusBarItem: vscode.StatusBarItem;
-
-/**
- * Check if an Alex operation is currently in progress
- */
-export function isOperationInProgress(): boolean {
-  return operationInProgress;
-}
 
 async function withOperationLock<T>(
   operationName: string,
   operation: () => Promise<T>,
 ): Promise<T | undefined> {
-  if (operationInProgress) {
+  if (isOperationInProgress()) {
     vscode.window.showWarningMessage(
       `Another Alex operation is already in progress. Please wait for it to complete before running "${operationName}".`,
     );
     return undefined;
   }
 
-  operationInProgress = true;
+  setOperationInProgress(true);
   try {
     return await operation();
   } finally {
-    operationInProgress = false;
+    setOperationInProgress(false);
   }
 }
 
 export async function activate(context: vscode.ExtensionContext) {
+  console.log("[Alex][Extension] activate() called");
   // Get extension version for telemetry
   const extensionVersion = context.extension.packageJSON.version || "unknown";
 
@@ -148,7 +146,9 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   );
 
   // Register chat participant for @alex conversations
+  console.log("[Alex][Extension] about to registerChatParticipant");
   registerChatParticipant(context);
+  console.log("[Alex][Extension] registerChatParticipant done");
 
   // Register language model tools for AI-powered operations
   registerLanguageModelTools(context);
@@ -176,7 +176,9 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   );
 
   // Register welcome view in Activity Bar
+  console.log("[Alex][Extension] about to registerWelcomeView");
   const welcomeViewProvider = registerWelcomeView(context);
+  console.log("[Alex][Extension] registerWelcomeView done");
 
   // Register health dashboard webview
   registerHealthDashboard(context);

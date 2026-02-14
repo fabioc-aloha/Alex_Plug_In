@@ -363,6 +363,58 @@ export function activate(context: vscode.ExtensionContext) {
 - Push listener to `context.subscriptions` for cleanup
 - Re-read config values, don't cache indefinitely
 
+## Temporal Dead Zone (TDZ) in Production Builds
+
+**Problem**: Code works in development but crashes in production with "Cannot access 'X' before initialization" — the minifier exposes variable hoisting issues.
+
+**Root Cause**: Using `const`/`let` variables before they're declared in the same scope. Development transpilation may mask this; production minifiers reveal it.
+
+**Example Bug** (from real debugging session, Feb 14, 2026):
+
+```typescript
+// ❌ WRONG: TDZ violation (hidden until minified)
+const trifectaTagsHtml = trifectaTags.map(tag => {
+    return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
+}).join('');
+
+// ... 30+ lines of other code ...
+
+const skillNameMap: Record<string, string> = {
+    'meditation': 'Meditation',
+    'brain-qa': 'Brain QA',
+    // ... more mappings
+};
+```
+
+**Error at runtime**: `ReferenceError: Cannot access 'ft' before initialization` (where `ft` is minified name for `skillNameMap`).
+
+**Why development didn't catch it**:
+- TypeScript compiles successfully (no compiler error)
+- esbuild development mode didn't reveal the issue
+- Production minification changed evaluation order
+
+**Solution**: Move variable declarations before first use:
+
+```typescript
+// ✅ CORRECT: Declare before use
+const skillNameMap: Record<string, string> = {
+    'meditation': 'Meditation',
+    'brain-qa': 'Brain QA',
+};
+
+const trifectaTagsHtml = trifectaTagsArray.map(tag => {
+    return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
+}).join('');
+```
+
+**Prevention strategies**:
+1. **Test production builds locally** — always install packaged VSIX before releasing
+2. **Declare dependencies at top of scope** — don't scatter `const` declarations
+3. **Watch for callback references** — `.map()`, `.filter()` callbacks can't see later declarations
+4. **ESLint rule**: Enable `no-use-before-define` to catch in development
+
+**Debugging tip**: If production error shows "Cannot access 'X'" where X is a 2-letter variable like `ft`, `ab`, `xr` — look for TDZ issues with object literals or complex constants referenced in callbacks.
+
 ## VS Code 1.109+ Agent Platform Capabilities
 
 VS Code 1.109 introduces a native agent platform that extensions can leverage:

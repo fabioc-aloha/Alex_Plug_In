@@ -15,6 +15,7 @@ import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_A
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch } from './modelIntelligence';
 import { isEnterpriseMode } from '../enterprise/enterpriseAuth';
+import { registerAvatarUpdater } from '../shared/chatAvatarBridge';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -2325,6 +2326,9 @@ export function registerChatParticipant(context: vscode.ExtensionContext): vscod
     // Store references for dynamic icon updates
     _alexParticipant = alex;
     _extensionUri = context.extensionUri;
+    
+    // Register avatar updater with the bridge so welcomeView can call it without importing participant
+    registerAvatarUpdater(updateChatAvatar);
     
     alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'icon.png');
     alex.followupProvider = alexFollowupProvider;

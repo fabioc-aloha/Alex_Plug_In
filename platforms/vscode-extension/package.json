@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.7.0",
+  "version": "5.7.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -1987,7 +1987,6 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run package",
     "sync-architecture": "node ../../.github/muscles/sync-architecture.js",
     "push-skills-to-global": "node scripts/push-skills-to-global.js",
     "clean": "node -e \"const fs=require('fs');['dist','out'].forEach(d=>{if(fs.existsSync(d)){fs.rmSync(d,{recursive:true});console.log('Cleaned '+d+'/')}})\"",
@@ -2000,7 +1999,8 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
-    "dream": "tsx ../../.github/muscles/dream-cli.ts"
+    "dream": "tsx ../../.github/muscles/dream-cli.ts",
+    "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run package"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",

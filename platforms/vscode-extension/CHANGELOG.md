@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.1] - 2026-02-14
+
+> **Visual Identity & UI/UX Stabilization** — Enhanced persona-driven visual experience with dynamic avatars and refined welcome panel
+
+### Added
+
+- **Dynamic chat avatars** — Chat participant icon now changes based on detected persona (27 persona→avatar mappings)
+- **Persona-specific rocket banner** — "Take Your **[NOUN]** to New Heights" banner updates based on persona (CODE/THESIS/RESEARCH/etc.)
+- **Circular persona avatar** — Large 72px avatar in welcome panel with persona-appropriate image
+- **Avatar logo overlay** — Small Alex rocket logo on persona avatars for brand consistency
+- **Self-actualization maturity card** — Session records now show age-tier rewards (Age 21: Expert Problem-Solver)
+- **Easter eggs** — Seasonal avatars (5: New Year, Valentine's, Halloween, 2× Holidays) + project-name triggers (9: cooking, pets, wine, comedy, podcast, finance, legal, survey, mentor)
+- **AGE_TIERS system** — 9 maturity levels from "Emerging Learner" to "Visionary Architect"
+
+### Fixed
+
+- **TDZ error in welcomeView.ts** — Moved skillNameMap declaration before use (Feb 14 meditation RCA)
+- **Welcome panel layout** — Redesigned header with rocket icon and centered large avatar section
+
+### Changed
+
+- **PERSONA_AVATAR_MAP** — Expanded to 27 entries (was 16) with 11 new personas from marketing plan
+- **Stats accuracy** — Updated copilot-instructions: 12 LM tools (was 8), 30 instructions (was 31)
+
+---
+
 ## [5.7.0] - 2026-02-14
 
 > **Structural Consistency & Folder Completeness** — All commands, docs, scripts, and manifests now reference the full .github/ folder structure

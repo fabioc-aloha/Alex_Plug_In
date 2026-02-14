@@ -2,8 +2,8 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
   "skillId": "vscode-extension-patterns",
-  "version": "1.1.0",
-  "lastValidated": "2026-02-10",
+  "version": "1.2.0",
+  "lastValidated": "2026-02-14",
   "inheritance": "heir:vscode",
   "connections": [
     {
@@ -29,6 +29,12 @@
       "type": "extends",
       "strength": 0.75,
       "reason": "Enterprise patterns for Graph, Azure AD auth"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "uses",
+      "strength": 0.70,
+      "reason": "TDZ debugging and production build troubleshooting"
     }
   ],
   "activationPatterns": [
@@ -40,7 +46,10 @@
     "SecretStorage token migration",
     "CSP Content-Security-Policy",
     "telemetry opt-out compliance",
-    "onDidChangeConfiguration listener"
+    "onDidChangeConfiguration listener",
+    "temporal dead zone TDZ debugging",
+    "production build errors",
+    "minification issues"
   ],
   "triggers": [
     "extension",
@@ -52,8 +61,9 @@
     "contribution point",
     "SecretStorage",
     "CSP",
-    "telemetry"
-  ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+    "telemetry",
+    "TDZ",
+    "minifier",
+    "production build"
+  ]
 }
