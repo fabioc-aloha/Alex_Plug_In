@@ -1,7 +1,7 @@
 # v5.7.1 UI/UX Regression Checklist
 
 **Date**: 2026-02-14
-**Status**: ✅ **PRE-FLIGHT COMPLETE** — Enterprise auth removed, compiled, packaged, installed
+**Status**: ⚠️ **UI/UX FIXES IN PROGRESS** — Avatar system and WebP resolution issues identified
 **Purpose**: F5 sandbox verification of all v5.7.1 visual identity + UI features
 **Method**: Press F5 in VS Code, open a test workspace, run through each section
 
@@ -11,9 +11,10 @@
 
 - [x] `npm run compile` exits 0 (**verified** — clean as of 2026-02-14)
 - [x] Enterprise auth removed (commit 5ba9fe2) — 763 lines deleted, 3 commands removed
-- [x] `npx @vscode/vsce package` — alex-cognitive-architecture-5.7.1.vsix created (9.84 MB)
-- [x] `code --install-extension` — installed locally
-- [ ] F5 launches Extension Development Host
+- [x] WebP avatars regenerated at 144x144 (commit a13875e) — 92% size reduction
+- [x] Package extension: `npx @vscode/vsce package` — 9.44 MB VSIX created (426 files)
+- [x] Install locally: `code --install-extension alex-cognitive-architecture-5.7.1.vsix --force`
+- [ ] **RESTART VS Code** to activate new extension version
 - [ ] Extension activates — "Alex Cognitive Architecture" appears in sidebar
 
 ---
@@ -114,11 +115,26 @@
 ---
 
 ## Post-Flight
+: Help → Toggle Developer Tools → Console tab
+- [ ] Extension loads without warnings in Output → Alex Cognitive Architecture
+- [ ] All sections passing? → Mark DoD criterion #4 complete
+- [ ] Ready to publish to marketplace
 
-- [ ] No console errors in Extension Dev Host → Developer Tools
-- [ ] Extension deactivates cleanly on close
-- [ ] All passing? → Ready to publish to marketplace
-- [x] v5.7.1 packaged and installed locally (2026-02-14)
+## Installation Commands
+
+```powershell
+# From project root
+cd platforms/vscode-extension
+
+# Build and package (creates .vsix in platforms/vscode-extension/)
+npm run compile
+npx @vscode/vsce package
+
+# Install locally (replace existing version)
+code --install-extension alex-cognitive-architecture-5.7.1.vsix --force
+
+# Restart VS Code, then test
+```)
 - [x] Enterprise auth cleanup complete (commit 5ba9fe2)
 
 ---
@@ -140,13 +156,18 @@ Per [ROADMAP-UNIFIED.md Definition of Done](../../ROADMAP-UNIFIED.md#definition-
 | 1   | **Builds clean** — `npm run compile` exits 0                  | ✅      | Pre-flight + smoke test both exit 0                            |
 | 2   | **No dead code** — All imports resolve                        | ✅      | Zero TS compilation errors                                     |
 | 3   | **Counts match reality** — Docs reflect code                  | ✅      | copilot-instructions stats updated (12 tools, 30 instructions) |
-| 4   | **F5 smoke test passes** — Extension activates, commands work | ✅      | 86/86 automated tests passing, extension activates             |
+| 4   | **F5 smoke test passes** — Extension activates, commands work | ⚠️      | Automated tests pass (86/86) but UI/UX issues found in avatar/welcome panel |
 | 5   | **Version aligned** — Same version everywhere                 | ✅      | 5.7.1 in package.json, CHANGELOG, copilot-instructions         |
 | 6   | **Heir sync clean** — 0 errors, no contamination              | ✅      | Sync output shows "integrity validated, no contamination"      |
 | 7   | **No non-functional features** — Working or removed           | ✅      | Enterprise auth (non-functional) removed in commit 5ba9fe2     |
 | 8   | **CHANGELOG documents delta** — All changes listed            | ✅      | 14 items (7 Added, 2 Fixed, 2 Changed, 3 Removed)              |
 
-**Result**: ✅ **ALL 8 CRITERIA MET** — v5.7.1 ready to ship
+**Result**: ⚠️ **CRITERION #4 BLOCKED** — UI/UX regressions in avatar system and WebP rendering
+
+### Issues to Resolve:
+- [ ] Avatar display in welcome panel (picture box rendering)
+- [ ] WebP file resolution inappropriate (currently 256x256 PNG, WebP needs optimization)
+- [ ] F5 manual UI verification required before DoD sign-off
 
 ---
 
@@ -168,6 +189,11 @@ Per [ROADMAP-UNIFIED.md Definition of Done](../../ROADMAP-UNIFIED.md#definition-
 - ✅ CHANGELOG complete (14 items: 7 Added, 2 Fixed, 2 Changed, 3 Removed)
 - ⚠️ Skill validation warnings (cosmetic - names vs folder names, non-blocking)
 
-**Status**: **READY TO SHIP** — All DoD criteria met
+**Status**: ⚠️ **UI/UX FIXES REQUIRED** — Criterion #4 blocked
 
-**Next**: F5 sandbox testing optional for manual UI verification (automated tests passed)
+**Blocking Issues**:
+1. Avatar picture box rendering in welcome panel needs verification
+2. WebP files need recreation with appropriate resolution
+3. F5 manual testing required to validate UI fixes
+
+**Next**: Fix avatar rendering issues, regenerate WebP assets, run F5 smoke test
