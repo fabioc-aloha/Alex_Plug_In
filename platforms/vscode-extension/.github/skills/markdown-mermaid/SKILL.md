@@ -1092,6 +1092,186 @@ end
 style SG fill:#ddf4ff,stroke:#80ccff
 ```
 
+### classDiagram-Specific Pitfalls
+
+**Critical**: `classDiagram` has a **different parser** than `flowchart`. Syntax that works in flowcharts often breaks in class diagrams. Never assume cross-compatibility.
+
+#### Reserved Keyword Collisions
+
+`classDiagram` reserves more keywords than flowcharts. Using them as `classDef` names or class annotations collides with the parser.
+
+| Reserved Word | Why It Breaks | Safe Alternative |
+| ------------- | ------------- | ---------------- |
+| `abstract` | Parsed as `<<abstract>>` annotation | `abstractStyle`, `base`, `iface` |
+| `interface` | Parsed as `<<interface>>` annotation | `ifaceStyle`, `contract` |
+| `enumeration` | Parsed as `<<enumeration>>` annotation | `enumStyle`, `enumDef` |
+| `service` | Parsed as `<<service>>` annotation | `svcStyle`, `serviceType` |
+
+```text
+%% ❌ FAILS - "abstract" is a classDiagram keyword
+classDef abstract fill:#ddf4ff,stroke:#80ccff
+
+%% ❌ ALSO FAILS - "abstract" parsed as <<abstract>> annotation
+class MemorySystem abstract
+
+%% ✅ WORKS - renamed classDef avoids collision
+classDef base fill:#ddf4ff,stroke:#80ccff
+class MemorySystem base
+```
+
+#### Comma-Separated Class Lists
+
+`class A,B,C styleName` syntax works in **flowchart** but **NOT in classDiagram**. Each class needs its own `class X styleName` line.
+
+```text
+%% ❌ FAILS in classDiagram - comma syntax not supported
+class UserStore,SessionStore,CacheStore storage
+
+%% ✅ WORKS - one line per class
+class UserStore storage
+class SessionStore storage
+class CacheStore storage
+```
+
+**Note**: In `flowchart`, `class A,B,C styleName` **is** valid (skillCatalog.ts uses this correctly).
+
+#### classDef Property Limitations
+
+`classDef` in classDiagram only supports **SVG presentation attributes**. CSS text properties are silently ignored.
+
+| Works | Silently Ignored |
+| ----- | ---------------- |
+| `fill`, `stroke`, `stroke-width`, `color` | `font-weight`, `font-style`, `font-size` |
+| `rx` (border radius) | `text-decoration`, `letter-spacing` |
+| `opacity` | `padding`, `margin` |
+
+```text
+%% ❌ SILENTLY IGNORED - font-weight does nothing
+classDef important fill:#fff3e0,stroke:#ef6c00,font-weight:bold
+
+%% ✅ WORKS - use only SVG attributes
+classDef important fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+```
+
+#### stroke-dasharray Space Parsing
+
+The space in `stroke-dasharray:6 3` breaks Mermaid's comma-delimited property parser in `classDiagram`. In `flowchart` it may work.
+
+```text
+%% ❌ FAILS in classDiagram - space in value breaks parser
+classDef dashed stroke-dasharray:6 3
+
+%% ⚠️ MAY WORK - single value, no space
+classDef dashed stroke-dasharray:5
+
+%% ✅ SAFE in flowchart - space tolerated
+classDef dashed stroke-dasharray:5 5
+```
+
+**Rule**: In `classDiagram`, avoid `stroke-dasharray` entirely or use a single integer value. In `flowchart`, `stroke-dasharray:5 5` works.
+
+#### Decimal stroke-width
+
+Decimal values like `stroke-width:2.5px` can cause inconsistent rendering across Mermaid renderers.
+
+```text
+%% ⚠️ INCONSISTENT - decimal may not render
+classDef thick stroke-width:2.5px
+
+%% ✅ SAFE - integer values
+classDef thick stroke-width:2px
+classDef thicker stroke-width:3px
+```
+
+---
+
+### architecture-beta Pitfalls
+
+**Critical**: `architecture-beta` is an **experimental** diagram type with a much stricter tokenizer than mature types. Assume nothing works unless proven.
+
+#### Spaces in Bracket Labels
+
+Labels in `[...]` do **not** support spaces. Multi-word labels cause the parser to treat each word as a separate token.
+
+```text
+%% ❌ FAILS - space in bracket label
+service api(server)[API Gateway]
+
+%% ✅ WORKS - no spaces (use underscores or camelCase)
+service api(server)[APIGateway]
+service api(server)[Api_Gateway]
+```
+
+#### Hyphens in Labels
+
+Hyphens like `4-3-3` are parsed as **edge connectors** (`--` or `-`), not literal characters. There is no escape mechanism.
+
+```text
+%% ❌ FAILS - hyphens parsed as edge syntax
+service formation(server)[4-3-3]
+
+%% ✅ WORKS - no hyphens
+service formation(server)[Formation433]
+```
+
+#### Reserved IDs
+
+Common programming keywords may conflict with the parser:
+
+| Avoid | Safe Alternative |
+| ----- | ---------------- |
+| `var` | `varStore`, `envVar` |
+| `in` | `input`, `inbound` |
+| `out` | `output`, `outbound` |
+
+#### Comments May Not Work
+
+`%%` comments that work in all other diagram types **may cause parse errors** in `architecture-beta`.
+
+```text
+%% ❌ MAY FAIL - standard comments
+%% This is my architecture
+architecture-beta
+
+%% ✅ SAFE - no comments at all
+architecture-beta
+```
+
+#### Icons Only on service, Not group
+
+`(icon)` syntax only works on `service` declarations. Using it on `group` causes a parse error.
+
+```text
+%% ❌ FAILS - group does not accept (icon)
+group cloud(cloud)[Infrastructure]
+
+%% ✅ WORKS - group has only id and [label]
+group cloud[Infrastructure]
+
+%% ✅ WORKS - service accepts (icon)
+service api(server)[API]
+```
+
+**Rule**: `service id(icon)[Label]` — icon required. `group id[Label]` — no icon, no parentheses.
+
+---
+
+### Cross-Diagram Syntax Compatibility Matrix
+
+This table summarizes which syntax features work in which diagram types:
+
+| Feature | flowchart | classDiagram | architecture-beta |
+| ------- | --------- | ------------ | ----------------- |
+| `class A,B,C style` | ✅ | ❌ | N/A |
+| `classDef` with font-weight | ❌ (ignored) | ❌ (ignored) | N/A |
+| `stroke-dasharray:5 5` | ✅ | ❌ | N/A |
+| Spaces in `[labels]` | ✅ | N/A | ❌ |
+| Hyphens in labels | ✅ (quoted) | ✅ (quoted) | ❌ |
+| `%%` comments | ✅ | ✅ | ⚠️ |
+| `(icon)` on groups | N/A | N/A | ❌ |
+
+---
+
 ### Reserved Words in Labels and Titles
 
 **Problem**: Certain words are reserved syntax in specific diagram types. Using them as the **first word** in a task description or node label causes parse errors like `got 'callbackname'`, `got 'keyword'`, etc.
@@ -1132,6 +1312,25 @@ A --> end
 
 %% ✅ WORKS - quoted label
 A --> E["End"]
+```
+
+**classDiagram Reserved Words** (cause parse errors when used as `classDef` names or class annotations):
+
+| Reserved | Why | Safe Alternative |
+| -------- | --- | ---------------- |
+| `abstract` | Parsed as `<<abstract>>` stereotype | `base`, `abstractStyle`, `iface` |
+| `interface` | Parsed as `<<interface>>` stereotype | `ifaceStyle`, `contract` |
+| `enumeration` | Parsed as `<<enumeration>>` stereotype | `enumStyle`, `enumDef` |
+| `service` | Parsed as `<<service>>` stereotype | `svcStyle`, `serviceType` |
+
+```text
+%% ❌ FAILS - "abstract" treated as keyword
+classDef abstract fill:#ddf4ff,stroke:#80ccff
+class MemorySystem abstract
+
+%% ✅ WORKS - safe name
+classDef base fill:#ddf4ff,stroke:#80ccff
+class MemorySystem base
 ```
 
 **General Safety Rule**: If a parse error occurs on a label or title, wrap it in double quotes (`"text"`) or rephrase to avoid the reserved word. When in doubt, quote it.
