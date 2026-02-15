@@ -11,6 +11,7 @@ excludeAgent: "coding-agent"
 **Synapse**: [.github/skills/global-knowledge/SKILL.md] (High, Documents, Forward) - "promotion candidate patterns"
 **Synapse**: [.github/skills/skill-building/SKILL.md] (Critical, Implements, Bidirectional) - "skill creation methodology and quality gates"
 **Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement combines trifecta + research-first before promotion"
+**Synapse**: [.github/instructions/adversarial-oversight.instructions.md] (Critical, Gates, Required) - "Validator review required for skill promotion"
 
 ---
 

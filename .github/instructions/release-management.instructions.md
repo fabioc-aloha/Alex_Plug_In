@@ -20,6 +20,7 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [ROADMAP-UNIFIED.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 - [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
+- [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Gates, Required) - "Validator agent review required before release"
 
 ---
 
@@ -104,6 +105,37 @@ Proposed version: X.Y.Z
 2. Recommended version bump with justification
 3. Draft changelog entry for review
 4. Ask: "Should I update the version and changelog, or would you like to adjust anything?"
+
+### Step 4.5: Adversarial Validation Gate
+
+**🔴 MANDATORY for Marketplace releases**
+
+Before proceeding with version bump and publish:
+
+```text
+Action: Handoff to Validator agent for release review
+Scope: All changes since last release + release artifacts
+Deliverable: Validation report with ✅ approve / 🔴 block decision
+
+Blocker: If Validator blocks (🔴 Critical or 🟠 High issues), resolve before proceeding.
+```
+
+**Validator Review Checklist:**
+- [ ] CHANGELOG accurately reflects all changes
+- [ ] Version bump matches change scope (patch/minor/major)
+- [ ] No uncommitted changes or merge conflicts
+- [ ] Documentation updated for user-facing changes
+- [ ] No security regressions or exposed secrets
+- [ ] Heir sync verified (if multi-platform release)
+- [ ] Build artifacts clean (no errors, lint warnings acceptable)
+
+**Expedited Validation** (emergency hotfix only):
+- Limited to critical security OR production-down fixes
+- Minimum viable scope (< 50 lines)
+- Post-merge full validation scheduled
+- Override documented in commit/CHANGELOG
+
+See [adversarial-oversight.instructions.md] for complete Validator integration protocol.
 
 ---
 
