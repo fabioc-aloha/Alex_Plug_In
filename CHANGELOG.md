@@ -7,15 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [5.7.2] - Unreleased
+## [5.7.2] - 2026-02-15
 
-> **Development Version** — Next patch release in progress
+> **Maintenance Release** — Global Knowledge curation, skill count corrections, dependency management
 
 ### Added
 
+- **global-knowledge-maintenance trifecta** — Systematic curation procedures for Global Knowledge repository
+  - Automated index sync script (`sync-index.ps1`) for integrity validation
+  - Heir contribution tracking and promotion workflows
+  - Quality gates for pattern/insight management
+- **Global Knowledge index synchronization** — Fixed duplicate entry, added missing insight (271→272 entries)
+
 ### Changed
 
+- **README skill counts corrected** — Master: 119→120, VS Code heir: 119→117 (properly accounts for master-only and M365-specific skills)
+- **Disabled Dependabot** — Removed automated dependency PR generation (prefer manual control during deliberate release cycles)
+- **Architecture sync improvements** — Master→Heir sync now correctly reports 120 Master skills, 117 heir skills (108 inherited + 9 heir-specific)
+
 ### Fixed
+
+- **Global Knowledge index.json** — Removed duplicate pattern entry, synchronized counts (31 patterns, 241 insights)
 
 ---
 
