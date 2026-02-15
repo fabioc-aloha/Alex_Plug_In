@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.2] - Unreleased
+
+> **Development Version** — Next patch release in progress
+
+### Added
+
+### Changed
+
+### Fixed
+
+---
+
 ## [5.7.1] - 2026-02-15
 
 > **UI/UX Polish & Performance** — Extension audit cleanup, MS Graph leftovers removed, async I/O refactoring

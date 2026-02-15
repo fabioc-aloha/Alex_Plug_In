@@ -10,8 +10,8 @@
 
 ### Current State
 
-v5.7.1 is current. Alex now has:
-- **119 Skills** (117 inheritable to heirs) — Comprehensive domain coverage
+v5.7.2 is current. Alex now has:
+- **120 Skills** (117 inheritable to heirs) — Comprehensive domain coverage
 - **v3-Identity-First Brain** — copilot-instructions.md restructured: identity → routing → safety
 - **Prompt Pipeline Research** — Full mapping of how VS Code/Copilot injects context into LLM
 - **Visual Identity** — 44 avatar images (age progression + occupation variants) at 256×256px
@@ -47,8 +47,9 @@ v5.7.1 is current. Alex now has:
 | v5.5.0     | Model Intelligence                 | Adaptive Cognition      | ✅ Complete                 |
 | v5.6.0-9   | Enterprise Systems                 | Deep Orchestration      | ✅ Stabilized (5.6.9 final) |
 | v5.7.0     | Structural Consistency             | Purpose-Built Cognition | ✅ Shipped                  |
-| **v5.7.1** | **Visual Identity + UI/UX Polish** | **Stable Foundation**   | ✅ Shipped                  |
-| v5.7.2-9   | *reserved for UI/UX fixes*         |                         |                            |
+| v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation       | ✅ Shipped                  |
+| **v5.7.2** | **Development In Progress**        |                         | 🔄 Current                 |
+| v5.7.3-9   | *reserved for UI/UX fixes*         |                         |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition | 📋 Planned                  |
 | v5.8.2     | @alex Personality + Knowledge (P2) | Purpose-Built Cognition | 📋 Planned                  |
@@ -343,6 +344,9 @@ These items graduated to backlog from v6.x. They re-enter the roadmap only when 
 
 ### v5.7.1 (✅ SHIPPED — Visual Identity + UI/UX)
 
+**Theme**: Avatar UI, Extension Audit, Async I/O Refactoring
+**Shipped**: February 15, 2026
+
 ```
 Graph removal + Definition of Done + Replicate MCP POC + Alex-Finch.md + Synapse validation confirmed
 + Redundant files archived + Welcome panel avatar + Persona→avatar mapping + UI regression sweep
@@ -445,13 +449,14 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 | v5.6.0-5.6.9  | Enterprise Systems             | Feb 10-14, 2026 |
 | v5.7.0        | Structural Consistency         | Feb 14, 2026    |
 | v5.7.1        | Visual Identity + UI/UX Polish | Feb 15, 2026    |
+| **v5.7.2**    | **Development In Progress**    | **In Progress** |
 
 ---
 
 |                            |                                  |
 | -------------------------- | -------------------------------- |
-| **Current Master Version** | 5.7.1                            |
-| **Current Heirs**          | VS Code (5.7.1), M365 (5.7.1)    |
+| **Current Master Version** | 5.7.2                            |
+| **Current Heirs**          | VS Code (5.7.2), M365 (5.7.2)    |
 | **Next Target**            | 5.8.0 — @alex Enhanced Mode (P0) |
 | **Updated**                | 2026-02-15                       |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3)    |
