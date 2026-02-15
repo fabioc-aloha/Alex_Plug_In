@@ -77,7 +77,7 @@ Alex accelerates whatever you're building. Pick your trajectory:
 
 | You Are              | Your Pain                                          | Alex Gives You                                                            |
 | -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 119 skills remember your architecture.           |
+| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 117 skills remember your architecture.           |
 | **Researcher**       | Literature scattered, hypothesis drift             | Hypothesis → publication, accelerated. Cross-project knowledge compounds. |
 | **Grad Student**     | Thesis overwhelm, advisor context gaps             | Literature review on autopilot. Your writing remembers your research.     |
 | **Technical Writer** | Docs fall behind code, style drift                 | Docs that write themselves. Consistent voice across projects.             |
@@ -89,7 +89,7 @@ Alex accelerates whatever you're building. Pick your trajectory:
 
 | Capability                | What It Means                                   |
 | ------------------------- | ----------------------------------------------- |
-| **119 Skills**            | Pre-built propulsion. Don't reinvent prompts.   |
+| **117 Skills**            | Pre-built propulsion. Don't reinvent prompts.   |
 | **Cross-Project Memory**  | No refueling between launches. Knowledge flows. |
 | **Build Your Own Skills** | Custom boosters for your workflow.              |
 | **Open Source**           | Inspect every component. No black boxes.        |
@@ -200,7 +200,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                     |
 | ----------------- | ------------------------------------------------------------------------------ |
 | **Chat & Agents** | `@alex` participant, 29 slash commands, 12 LM tools, 7 custom agents           |
-| **Intelligence**  | 119 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 117 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
@@ -767,7 +767,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (119 skills)
+├── skills/                    # 🎓 Portable domain expertise (117 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...

@@ -18,6 +18,7 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
+- [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
 
 ---
 

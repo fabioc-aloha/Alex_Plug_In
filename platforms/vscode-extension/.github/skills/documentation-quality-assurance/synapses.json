@@ -12,6 +12,13 @@
       "type": "operational",
       "direction": "bidirectional",
       "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
+    },
+    {
+      "target": ".github/episodic/meditation-2026-02-15-roadmap-reorganization.md",
+      "strength": 0.8,
+      "type": "episodic",
+      "direction": "learns-from",
+      "context": "Progressive disclosure pattern learned from roadmap reorganization - reduces cognitive load in living documents"
     }
   ],
   "activationContexts": [

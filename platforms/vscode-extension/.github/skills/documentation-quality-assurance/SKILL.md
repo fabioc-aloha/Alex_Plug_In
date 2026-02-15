@@ -19,7 +19,7 @@ Hardcoded counts in documentation drift silently:
 
 | Document Says | Reality | Impact |
 |--------------|---------|--------|
-| "109 skills" | 116 skills (6 added) | Undermines credibility |
+| "109 skills" | 119 skills (10 added) | Undermines credibility |
 | "7 agents" | 8 agents (1 added) | Users miss new capability |
 | "28 instructions" | 30 instructions | Stale architecture picture |
 

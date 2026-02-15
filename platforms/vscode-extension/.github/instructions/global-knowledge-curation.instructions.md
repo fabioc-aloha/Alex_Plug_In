@@ -2,6 +2,8 @@
 
 > Master Alex periodically reviews global knowledge, implements for heirs when appropriate, and cleans up to maintain a curated knowledge base.
 
+**Related Skill**: [global-knowledge-maintenance](../skills/global-knowledge-maintenance/SKILL.md) — Includes automated index sync script
+
 ## Purpose
 
 Global knowledge (`~/.alex/global-knowledge/`) accumulates insights and patterns from all projects. Without curation, it becomes cluttered with:
@@ -173,6 +175,139 @@ Summary: 2 implemented, 1 retained, 1 archived, 1 deleted
 - Connects to: `unified-meditation-protocols.prompt.md` (may surface curation needs)
 - Connects to: `dream-state-automation.instructions.md` (could automate checks)
 - Connects to: `GI-gk-index-schema-drift-detection-2026-02-10` (index validation pattern)
+
+---
+
+## Complete Heir Skill Promotion Workflow (Validated February 2026)
+
+**Context**: Heirs create skills in Global Knowledge. Master Alex periodically discovers, promotes, and integrates them into core architecture.
+
+### End-to-End Procedural Pattern
+
+**Phase 1: Discovery**
+```powershell
+# Check GK skill registry
+$registry = Get-Content ~/.alex/global-knowledge/skills/skill-registry.json | ConvertFrom-Json
+$registrySkills = $registry.skills | Where-Object { $_.inheritance -eq 'inheritable' }
+
+# Check GK patterns for knowledge-only patterns
+$patterns = Get-ChildItem ~/.alex/global-knowledge/patterns/GK-*.md
+$knowledgeOnlyPatterns = $patterns | Where-Object { 
+    (Get-Content $_.FullName -Raw) -notmatch 'trifecta-complete' 
+}
+```
+
+**Phase 2: Triage and Assessment**
+1. **Full Trifectas** (SKILL.md + synapses.json in registry) → Ready for direct copy
+2. **Knowledge-Only Patterns** (GK-*.md in patterns/) → Need trifecta creation
+3. Assess which to promote based on:
+   - Relevance to Master Alex's core capabilities
+   - Quality and completeness of documentation
+   - Cross-project applicability vs. project-specific
+
+**Phase 3: Promotion Execution**
+
+For **Full Trifectas**:
+```powershell
+# Copy entire skill folder
+Copy-Item -Path "~/.alex/global-knowledge/skills/database-design/" `
+          -Destination ".github/skills/database-design/" `
+          -Recurse
+```
+
+For **Knowledge-Only Patterns**:
+1. Extract skill content from GK pattern file
+2. Create skill folder structure:
+   ```
+   .github/skills/{skill-name}/
+   ├── SKILL.md (from GK pattern content)
+   └── synapses.json (create new with proper schema)
+   ```
+3. Populate synapses.json with:
+   - Schema version 2.1.0
+   - Connections to related skills (6+ recommended)
+   - activationBoost keywords
+   - when/yields routing logic
+
+**Phase 4: Documentation Updates**
+
+Update skill count across all files (search for old count → replace with new):
+1. `.github/copilot-instructions.md` → "Total Skills: X"
+2. `CHANGELOG.md` → Add new skills under current version
+3. `README.md` → Multiple instances (architecture tree, features, etc.)
+4. `ROADMAP-UNIFIED.md` → Total and inheritable counts
+5. `platforms/vscode-extension/README.md` → Heir documentation
+6. `.github/skills/self-actualization/SKILL.md` → Self-reference
+7. `.github/skills/documentation-quality-assurance/SKILL.md` → Examples
+
+**Phase 5: Asset Generation (if applicable)**
+
+For skills that generate visual assets:
+```powershell
+# Run generation scripts
+node scripts/generate-{skill-assets}.js
+
+# Verify outputs in assets/
+Get-ChildItem assets/ -Filter "banner-*"
+```
+
+**Phase 6: Validation**
+
+1. **Syntax**: Check for errors in new skill files
+   ```powershell
+   # VS Code will show diagnostics
+   code .github/skills/{new-skill}/SKILL.md
+   ```
+
+2. **Synapses**: Verify all connection targets exist
+   ```powershell
+   # Run Dream to validate synaptic health
+   # Alex: Dream (Neural Maintenance)
+   ```
+
+3. **Documentation**: Confirm all skill counts match
+   ```powershell
+   # Search workspace for old count
+   # Ensure all instances updated
+   ```
+
+**Phase 7: Global Knowledge Cleanup**
+
+After successful promotion:
+```powershell
+# For full trifectas - remove from GK (now in Master)
+Remove-Item ~/.alex/global-knowledge/skills/{skill-name}/ -Recurse
+
+# For knowledge-only patterns - optionally archive
+Move-Item ~/.alex/global-knowledge/patterns/GK-{pattern}.md `
+          ~/.alex/archive/promoted/
+```
+
+### Real-World Example (February 15, 2026)
+
+**Discovered**:
+- 4 full trifectas in GK skill registry: database-design, multi-agent-orchestration, observability-monitoring, performance-profiling
+- 3 knowledge-only patterns: extension-audit-methodology, ai-character-reference-generation, ai-generated-readme-banners
+
+**Promoted**:
+- Created 3 new skill trifectas from knowledge-only patterns
+- Total: 119 skills (116 → 119)
+- Updated 7 documentation files
+- Generated 6 Ideogram banners ($0.48, stunning quality)
+
+**Time**: ~30 minutes for complete workflow
+**Cost**: $0.48 for banner generation
+**Quality**: Production-ready, validated trifectas
+
+### Automation Opportunities
+
+**Future Enhancement**: Create `/promote-gk-skill` command that:
+1. Scans GK for new skills
+2. Shows QuickPick for selection
+3. Executes promotion workflow
+4. Updates documentation automatically
+5. Runs Dream validation
+6. Generates summary report
 
 ---
 

@@ -45,7 +45,7 @@ Memory systems:
 
 <!-- brain-qa validates: trifecta count matches disk, completeness audited -->
 Complete trifectas (8): meditation, dream-state, self-actualization, release-process, brand-asset-management, research-first-development, brain-qa, bootstrap-learning
-Total Skills: 116 | Total Instructions: 30
+Total Skills: 119 | Total Instructions: 31
 
 Meta-routing:
 - Complex task (3+ ops) → skill-selection-optimization.instructions.md

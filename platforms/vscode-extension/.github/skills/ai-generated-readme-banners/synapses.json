@@ -1,0 +1,107 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "ai-generated-readme-banners",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-15",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/ai-character-reference-generation/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "when": "using Replicate API for image generation with Flux/Ideogram",
+            "yields": "Shared prompt engineering patterns, retry logic, safety filter handling"
+        },
+        {
+            "target": ".github/skills/prompt-engineering/SKILL.md",
+            "type": "requires",
+            "strength": 0.88,
+            "when": "crafting structured prompts with labeled sections",
+            "yields": "Effective typography composition and zone management for banners"
+        },
+        {
+            "target": ".github/skills/brand-asset-management/SKILL.md",
+            "type": "supports",
+            "strength": 0.9,
+            "when": "generating branded visual assets",
+            "yields": "Professional banner images with brand-consistent colors and typography"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "when": "enhancing documentation with visual elements",
+            "yields": "Comprehensive visual documentation approach combining banners and diagrams"
+        }
+    ],
+    "activationBoost": [
+        "readme banner",
+        "github banner",
+        "project branding",
+        "ideogram",
+        "ideogram v2",
+        "ultra-wide",
+        "cinematic banner",
+        "typography banner",
+        "photorealistic banner",
+        "visual branding",
+        "banner generation",
+        "replicate api",
+        "3:1 aspect ratio",
+        "layout variations",
+        "audience targeting",
+        "professional banner",
+        "rocket banner",
+        "brand colors"
+    ],
+    "when": {
+        "userIntent": [
+            "generate README banner",
+            "create project banner",
+            "visual branding for GitHub",
+            "replace ASCII art",
+            "professional README header",
+            "add typography to banner"
+        ],
+        "projectContext": [
+            "GitHub repository",
+            "project documentation",
+            "marketing materials",
+            "landing page",
+            "visual identity needs"
+        ],
+        "filePatterns": [
+            "README.md",
+            "**/generate-banner*.js",
+            "**/assets/banner*"
+        ]
+    },
+    "yields": {
+        "artifacts": [
+            "photorealistic 3:1 banner images (1536x512)",
+            "multiple layout variations (left, center, right)",
+            "generation scripts with rate limiting",
+            "banner-generation-report.json with metadata",
+            "README integration with comparison section",
+            "brand color documentation (hex codes)"
+        ],
+        "decisions": [
+            "clean banner vs typography embedded",
+            "Ideogram v2 (stunning quality, $0.08) vs Flux ($0.003-$0.04)",
+            "single banner vs multiple variants (audience targeting)",
+            "layout composition (left-aligned, centered, right-aligned)",
+            "color palette with exact hex codes",
+            "logo placement (corner positioning)",
+            "RECOMMENDED: Ideogram v2 for professional typography banners"
+        ],
+        "nextSteps": [
+            "integrate banners into README comparison section",
+            "create npm script: generate:banners",
+            "document banner style guide with hex codes",
+            "generate 3 layout variants for visual selection",
+            "add rate limiting (2s delay) for batch generation",
+            "save generation report with costs and URLs"
+        ]
+    }
+}
