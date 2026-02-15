@@ -64,7 +64,7 @@ jobs:
               run: npx @vscode/vsce package --no-dependencies
 
             - name: Upload VSIX artifact
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                   name: alex-cognitive-architecture-vsix
                   path: platforms/vscode-extension/*.vsix
