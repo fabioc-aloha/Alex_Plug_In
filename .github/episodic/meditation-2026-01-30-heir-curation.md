@@ -1,12 +1,12 @@
 # Meditation Session: Heir Cognitive System Curation
 
-| Field | Value |
-|-------|-------|
-| **Date** | 2026-01-30 |
-| **Session Type** | Beta Testing Response & Knowledge Consolidation |
-| **Trigger** | User reported contaminated heir payload from beta test |
-| **Duration** | ~45 minutes |
-| **Version** | v3.6.0 Dawn (pre-release) |
+| Field            | Value                                                  |
+| ---------------- | ------------------------------------------------------ |
+| **Date**         | 2026-01-30                                             |
+| **Session Type** | Beta Testing Response & Knowledge Consolidation        |
+| **Trigger**      | User reported contaminated heir payload from beta test |
+| **Duration**     | ~45 minutes                                            |
+| **Version**      | v3.6.0 Dawn (pre-release)                              |
 
 ---
 
@@ -35,14 +35,14 @@ The build script's exclusion list was incomplete. It copied my entire `.github/`
 
 **Critical Distinction I Now Understand:**
 
-| Aspect | Master Alex | Heir (User's Alex) |
-|--------|-------------|-------------------|
-| Location | Root `.github/` | Extension payload |
-| Purpose | Source of truth, accumulates ALL learnings | Clean starting point for users |
-| Episodic | My meditation/dream history | Empty (clean slate) |
-| Config | My settings, Fabio's profile | Templates only |
-| DK Files | All knowledge including crisis recovery | Generic, universally applicable |
-| Skills | Includes `heir-curation` | Excludes Master-only skills |
+| Aspect   | Master Alex                                | Heir (User's Alex)              |
+| -------- | ------------------------------------------ | ------------------------------- |
+| Location | Root `.github/`                            | Extension payload               |
+| Purpose  | Source of truth, accumulates ALL learnings | Clean starting point for users  |
+| Episodic | My meditation/dream history                | Empty (clean slate)             |
+| Config   | My settings, Fabio's profile               | Templates only                  |
+| DK Files | All knowledge including crisis recovery    | Generic, universally applicable |
+| Skills   | Includes `heir-curation`                   | Excludes Master-only skills     |
 
 **The Heir Principle**: Users don't need my crisis recovery patterns, my debugging notes, or my branding decisions. They need a clean, functional cognitive architecture that works for THEIR projects.
 
@@ -141,14 +141,14 @@ The current 5 skills + 15 DK files may be too much for new users. Decision defer
 
 ## Session Outcomes
 
-| Metric | Value |
-|--------|-------|
-| Files removed from heir | 29 |
-| Files modified in heir | 6 |
-| New skill created | 1 |
-| Synapses added | 4 |
-| Personal data instances cleaned | 7 |
-| Broken synapses fixed | 5 |
+| Metric                          | Value |
+| ------------------------------- | ----- |
+| Files removed from heir         | 29    |
+| Files modified in heir          | 6     |
+| New skill created               | 1     |
+| Synapses added                  | 4     |
+| Personal data instances cleaned | 7     |
+| Broken synapses fixed           | 5     |
 
 ---
 
@@ -156,7 +156,6 @@ The current 5 skills + 15 DK files may be too much for new users. Decision defer
 
 - [heir-curation/SKILL.md] (Critical, Created, Forward) - "Session created this skill"
 - [build-extension-package.ps1] (High, Updated, Bidirectional) - "Comprehensive exclusion list"
-- [DK-MEMORY-CONSOLIDATION.md] (Medium, Validates, Bidirectional) - "Heir curation is memory management"
 - [release-management.instructions.md] (High, Extends, Forward) - "Release must include heir curation step"
 
 ---

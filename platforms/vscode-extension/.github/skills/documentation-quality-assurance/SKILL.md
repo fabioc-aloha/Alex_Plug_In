@@ -55,6 +55,50 @@ Documentation is a load-bearing part of the system, not a separate artifact:
 | **Docs can break** | Stale docs actively mislead users |
 | **Docs need maintenance** | Schedule regular audits like code refactoring |
 
+## Document Header Pattern
+
+### Comprehensive Metadata Headers
+
+Operational documentation (regression checklists, deployment guides, QA procedures, release workflows) should include comprehensive headers that provide complete context at-a-glance.
+
+**Minimal Header (4 lines)** — Insufficient:
+```markdown
+**Date**: 2026-02-14
+**Status**: In Progress
+**Purpose**: Verify v5.7.1 UI features
+**Method**: Install and test
+```
+
+**Enhanced Header (10+ lines)** — Comprehensive:
+```markdown
+**Version**: 5.7.1
+**Date**: 2026-02-14
+**Status**: ⚠️ PENDING UI VERIFICATION — WebP avatars regenerated, awaiting restart + testing
+**Testing Mode**: CP2 Contingency (Local Install)
+**VSIX Size**: 9.44 MB (426 files)
+**Key Changes**: Enterprise auth removed, WebP avatars optimized (144×144, 92% reduction)
+
+**Purpose**: Local install verification of all v5.7.1 visual identity + UI features
+**Method**: Install VSIX locally, restart VS Code, test in current workspace (CP2 contingency)
+**Expected Outcome**: All 9 test sections pass → DoD criterion #4 complete → Ready to publish
+```
+
+### Header Field Guidelines
+
+| Field | Use For | Example |
+|-------|---------|---------|
+| **Version** | Software version being documented | `5.7.1`, `v3.2.0-beta` |
+| **Date** | ISO format date of creation/update | `2026-02-14` |
+| **Status** | Current state with emoji for scanning | `⚠️ PENDING`, `✅ COMPLETE`, `🚧 IN PROGRESS` |
+| **Testing Mode** | Validation approach or environment | `CP2 Contingency (Local Install)`, `F5 Extension Host`, `Production` |
+| **Size/Scope** | Package size, file count, or metrics | `9.44 MB (426 files)`, `3 breaking changes`, `86 tests` |
+| **Key Changes** | What's different in this version | `Enterprise auth removed, WebP optimized` |
+| **Purpose** | Why this document exists | One sentence explaining the goal |
+| **Method** | How the task will be performed | Step-by-step approach or workflow |
+| **Expected Outcome** | Success criteria | What "done" looks like |
+
+**Rule**: Include enough metadata that anyone can understand the document's context without reading the body. Operational docs reviewed during incidents need at-a-glance clarity.
+
 ## 5-Pass Quality Pipeline
 
 Run these passes in sequence on any document suite:

@@ -187,7 +187,6 @@ async function copyMarkdownCssToWorkspace(): Promise<boolean> {
 
   try {
     cssContent = await vscode.workspace.fs.readFile(githubConfigCss);
-    console.log("Using markdown CSS from workspace .github/config folder");
   } catch {
     // CSS not found in workspace config folder
   }
@@ -199,7 +198,6 @@ async function copyMarkdownCssToWorkspace(): Promise<boolean> {
     );
     try {
       cssContent = await vscode.workspace.fs.readFile(extensionConfigCss);
-      console.log("Using markdown CSS from extension .github/config folder:", extensionConfigCss.fsPath);
     } catch {
       // CSS not found in extension config folder
     }
@@ -214,7 +212,6 @@ async function copyMarkdownCssToWorkspace(): Promise<boolean> {
     for (const location of legacyLocations) {
       try {
         cssContent = await vscode.workspace.fs.readFile(vscode.Uri.file(location));
-        console.log("Using markdown CSS from legacy location:", location);
         break;
       } catch {
         // Try next location
@@ -476,7 +473,6 @@ async function applySettings(
 
       await config.update(key, value, vscode.ConfigurationTarget.Global);
       applied.push(key);
-      console.log(`[Alex Setup] ✅ Applied: ${key}`);
     } catch (error) {
       console.error(`[Alex Setup] ❌ Failed to apply ${key}:`, error);
       failed.push(key);
@@ -493,16 +489,11 @@ async function applySettings(
  * Instead, we copy the CSS to .vscode/ and use a workspace-relative path.
  */
 export async function applyMarkdownStyles(): Promise<boolean> {
-  console.log("[Alex] applyMarkdownStyles() called, cachedExtensionPath:", cachedExtensionPath);
-  
   // Copy CSS to workspace .vscode folder
   const copied = await copyMarkdownCssToWorkspace();
   if (!copied) {
-    console.error("[Alex] Failed to copy markdown CSS to workspace");
     return false;
   }
-
-  console.log("[Alex] CSS copied successfully, now setting markdown.styles");
   
   // Set markdown.styles as a WORKSPACE setting with relative path
   // The relative path ".vscode/markdown-light.css" works within the workspace
@@ -632,7 +623,6 @@ export async function setupEnvironment(): Promise<void> {
   // Collect all settings to apply
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
-    console.log(`[Alex Setup] Adding ${item.category.name} with ${Object.keys(item.category.settings).length} settings`);
     Object.assign(settingsToApply, item.category.settings);
   }
 
@@ -642,15 +632,12 @@ export async function setupEnvironment(): Promise<void> {
   
   if (!enterpriseSelected && enterpriseCurrentlyEnabled) {
     // User unchecked enterprise while it was enabled - disable it
-    console.log(`[Alex Setup] Disabling Enterprise settings (was enabled, now unchecked)`);
     for (const key of Object.keys(ENTERPRISE_SETTINGS)) {
       settingsToApply[key] = false;
     }
   }
   
   const totalKeys = Object.keys(settingsToApply).length;
-  console.log(`[Alex Setup] Total settings to apply: ${totalKeys}`);
-  console.log(`[Alex Setup] Settings keys:`, Object.keys(settingsToApply));
 
   // Show preview and ask for confirmation
   const preview = formatSettingsPreview(settingsToApply);

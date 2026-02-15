@@ -57,7 +57,8 @@ foreach ($png in $pngs) {
         if ($tool -eq "magick") {
             # ImageMagick: resize + convert
             & magick convert $png.FullName -resize "${TargetSize}x${TargetSize}" -quality $Quality $webpPath 2>$null
-        } else {
+        }
+        else {
             # cwebp: resize via temp file (cwebp doesn't resize directly)
             & cwebp -q $Quality -resize $TargetSize $TargetSize $png.FullName -o $webpPath 2>$null
         }
@@ -69,11 +70,13 @@ foreach ($png in $pngs) {
             
             Write-Host " ✓ ${originalSize}KB → ${newSize}KB (-${savings}%)" -ForegroundColor Green
             $converted++
-        } else {
+        }
+        else {
             Write-Host " ✗ Failed" -ForegroundColor Red
             $failed++
         }
-    } catch {
+    }
+    catch {
         Write-Host " ✗ Error: $_" -ForegroundColor Red
         $failed++
     }

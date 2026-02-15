@@ -1,6 +1,7 @@
 {
   "name": "Fabio Correa",
-  "lastUpdated": "2026-02-07T00:00:00.000Z",
+  "birthday": "1968-03-07",
+  "lastUpdated": "2026-02-15T03:44:05.626Z",
   "location": "Charlotte, NC",
   "role": "Director of Business Analytics at Microsoft",
   "credentials": [
@@ -10,13 +11,12 @@
   ],
   "projectPersona": {
     "id": "developer",
-    "confidence": 0.95,
-    "detectedAt": "2026-02-07T00:00:00.000Z",
+    "confidence": 0.9,
+    "detectedAt": "2026-02-15T03:44:05.626Z",
     "reasons": [
-      "Project is a VS Code extension (package.json with vscode engine)",
-      "Heavy TypeScript codebase under platforms/vscode-extension/src/",
-      "Extension APIs, chat participants, language model tools",
-      "Active development with CI/CD workflows"
+      "The project involves a VS Code extension and GitHub Codespaces, which are developer-centric tools.",
+      "The README emphasizes coding, debugging, and enhancing productivity for developers.",
+      "The directory structure includes scripts, architecture validation, and release management, all relevant to software development."
     ]
   },
   "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate.",
@@ -25,7 +25,9 @@
     "TypeScript",
     "VS Code Extensions",
     "Microsoft 365 Copilot",
-    "AI/ML"
+    "AI/ML",
+    "markdown",
+    "documentation"
   ],
   "expertiseAreas": [
     "Responsible AI",

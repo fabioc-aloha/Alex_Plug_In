@@ -99,7 +99,7 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
       result.dkLocations.push('root');
     }
   } catch (err) {
-    console.debug('[Alex] Error reading root for DK files:', err);
+    // Ignore - non-critical
   }
 
   // Check for DK files in .github/ directly (some old versions)
@@ -113,7 +113,7 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
       }
     }
   } catch (err) {
-    console.debug('[Alex] Error reading .github for DK files:', err);
+    // Ignore - non-critical
   }
 
   // Check for DK files in .github/domain-knowledge/ (3.0+)
@@ -126,7 +126,7 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
       }
     }
   } catch (err) {
-    console.debug('[Alex] Error reading domain-knowledge:', err);
+    // Ignore - non-critical
   }
 
   // Check for skills (3.4+)
@@ -162,7 +162,7 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
         }
       }
     } catch (err) {
-      console.debug('[Alex] Error reading version from copilot-instructions:', err);
+      // Ignore - fallback to manifest
     }
   }
 
@@ -177,7 +177,7 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
         }
       }
     } catch (err) {
-      console.debug('[Alex] Error reading version from manifest:', err);
+      // Ignore - non-critical
     }
   }
 
@@ -1093,7 +1093,7 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
       const dreamResult = await runDreamProtocol(context, { silent: true });
       dreamSuccess = dreamResult?.success ?? false;
     } catch (err) {
-      console.debug('[Alex] Dream validation failed (non-fatal):', err);
+      // Dream validation is optional
     }
 
     // Offer environment setup
@@ -1106,10 +1106,9 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
       const personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
       if (personaResult) {
         personaDetected = true;
-        console.log(`[Alex] Detected persona: ${personaResult.persona.name} (confidence: ${(personaResult.confidence * 100).toFixed(0)}%)`);
       }
     } catch (err) {
-      console.debug('[Alex] Persona detection failed (non-fatal):', err);
+      // Persona detection is optional
     }
 
     // Extract stats from captured stats object

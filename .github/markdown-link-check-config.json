@@ -1,0 +1,21 @@
+{
+    "ignorePatterns": [
+        {
+            "pattern": "^https://marketplace.visualstudio.com"
+        },
+        {
+            "pattern": "^https://github.com/.*/security/advisories/new"
+        }
+    ],
+    "timeout": "20s",
+    "retryOn429": true,
+    "retryCount": 3,
+    "aliveStatusCodes": [
+        200,
+        206,
+        301,
+        302,
+        307,
+        308
+    ]
+}

@@ -12,7 +12,6 @@ import {
   loadUserProfile,
   Persona,
   PersonaDetectionResult,
-  PERSONA_SLOT_MAPPINGS,
   getAvatarForPersona,
   DEFAULT_AVATAR,
   getEasterEggOverride,
@@ -35,9 +34,6 @@ import {
 } from "../services/premiumAssets";
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar } from "../shared/chatAvatarBridge";
-
-// --- DEBUG: trace module initialization order ---
-console.log("[Alex][WelcomeView] MODULE LOADED — top-level code executing");
 
 /**
  * Nudge types for contextual reminders
@@ -77,11 +73,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this._getLoadingHtml();
-    console.log("[Alex][WelcomeView] resolveWebviewView — loading HTML set, about to wire message handler");
 
     // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message) => {
-      console.log("[Alex][WelcomeView] message received:", message.command);
       // Commands that use operation lock - check before executing
       const lockedCommands = ["dream", "setupEnvironment"];
 
@@ -193,9 +187,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "searchRelatedKnowledge":
           vscode.commands.executeCommand("alex.searchRelatedKnowledge");
           break;
-        case "generateImageFromSelection":
-          vscode.commands.executeCommand("alex.generateImageFromSelection");
-          break;
         case "skillReview":
           vscode.commands.executeCommand("alex.skillReview");
           break;
@@ -246,6 +237,55 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
+   * Infer project display name from README.md, package.json, or workspace folder name
+   */
+  private async _inferProjectName(workspaceFolder?: vscode.WorkspaceFolder): Promise<string> {
+    if (!workspaceFolder) {
+      return "Project";
+    }
+
+    try {
+      // Try README.md first (look for first # heading)
+      const readmePath = path.join(workspaceFolder.uri.fsPath, "README.md");
+      if (fs.existsSync(readmePath)) {
+        const content = fs.readFileSync(readmePath, "utf-8");
+        const match = content.match(/^#\s+(.+?)$/m);
+        if (match && match[1]) {
+          // Clean up common patterns
+          let title = match[1].trim();
+          // Remove badges, emojis at start
+          title = title.replace(/^[\u{1F300}-\u{1F9FF}]\s*/u, "");
+          title = title.replace(/^\[!\[.*?\]\(.*?\)\]\(.*?\)\s*/g, "");
+          if (title.length > 0 && title.length < 50) {
+            return title;
+          }
+        }
+      }
+
+      // Try package.json (displayName or name field)
+      const packagePath = path.join(workspaceFolder.uri.fsPath, "package.json");
+      if (fs.existsSync(packagePath)) {
+        const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf-8"));
+        if (packageJson.displayName && typeof packageJson.displayName === "string") {
+          return packageJson.displayName;
+        }
+        if (packageJson.name && typeof packageJson.name === "string") {
+          // Convert kebab-case or snake_case to Title Case
+          const name = packageJson.name
+            .replace(/[-_]/g, " ")
+            .replace(/\b\w/g, (c: string) => c.toUpperCase());
+          return name;
+        }
+      }
+    } catch (err) {
+      console.error("[Alex][WelcomeView] Error inferring project name:", err);
+    }
+
+    // Fallback to workspace folder name
+    return workspaceFolder.name;
+  }
+
+  /**
    * Refresh the welcome view content
    */
   public async refresh(): Promise<void> {
@@ -254,64 +294,53 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     }
 
     try {
-      console.log("[Alex][WelcomeView] refresh() — step 1: gathering workspace info");
       const workspaceFolders = vscode.workspace.workspaceFolders;
       const wsRoot = workspaceFolders?.[0]?.uri.fsPath;
 
-      console.log("[Alex][WelcomeView] refresh() — step 2: Promise.all (health, goals, dream, gk, activeContext)");
-      const [health, goalsSummary, lastDreamDate, gkRepoPath, activeContext] =
-        await Promise.all([
-          checkHealth(false),
-          getGoalsSummary(),
-          this._getLastDreamDate(),
-          detectGlobalKnowledgeRepo(),
-          wsRoot ? readActiveContext(wsRoot) : Promise.resolve(null),
-        ]);
-      console.log("[Alex][WelcomeView] refresh() — step 2 done");
+      // Parallelize all async operations for faster loading
+      const [
+        health,
+        goalsSummary,
+        lastDreamDate,
+        gkRepoPath,
+        activeContext,
+        userProfile,
+        workspaceName,
+      ] = await Promise.all([
+        checkHealth(false),
+        getGoalsSummary(),
+        this._getLastDreamDate(),
+        detectGlobalKnowledgeRepo(),
+        wsRoot ? readActiveContext(wsRoot) : Promise.resolve(null),
+        wsRoot ? loadUserProfile(wsRoot) : Promise.resolve(null),
+        this._inferProjectName(workspaceFolders?.[0]),
+      ]);
 
-      console.log("[Alex][WelcomeView] refresh() — step 3: getCurrentSession");
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
 
-      console.log("[Alex][WelcomeView] refresh() — step 4: detectPersona");
-      let personaResult: PersonaDetectionResult | null = null;
-      if (workspaceFolders) {
-        const userProfile = await loadUserProfile(
-          workspaceFolders[0].uri.fsPath,
-        );
-        personaResult = await detectPersona(
-          userProfile ?? undefined,
-          workspaceFolders,
-        );
-      }
-      console.log("[Alex][WelcomeView] refresh() — step 4 done, persona =", personaResult?.persona?.id ?? "none");
+      // Detect persona synchronously (fast heuristic-based detection)
+      const personaResult = workspaceFolders
+        ? await detectPersona(userProfile ?? undefined, workspaceFolders)
+        : null;
 
-      console.log("[Alex][WelcomeView] refresh() — step 5: updateChatAvatar");
+      // Update chat avatar if persona detected
       if (personaResult?.persona) {
         try {
           updateChatAvatar(personaResult.persona.id);
-          console.log("[Alex][WelcomeView] refresh() — step 5 done");
         } catch (avatarErr) {
           console.error("[Alex][WelcomeView] updateChatAvatar failed (non-fatal):", avatarErr);
         }
-      } else {
-        console.log("[Alex][WelcomeView] refresh() — step 5 skipped (no persona)");
       }
 
-      console.log("[Alex][WelcomeView] refresh() — step 6: detectPremiumFeatures");
       const premiumFlags = await detectPremiumFeatures(gkRepoPath);
       const bannerNoun = personaResult?.persona?.bannerNoun ?? "CODE";
       const premiumAssets = getPremiumAssets(premiumFlags, true, bannerNoun);
-      console.log("[Alex][WelcomeView] refresh() — step 6 done");
-
-      const workspaceName = workspaceFolders?.[0]?.name ?? "Workspace";
 
       const extension = vscode.extensions.getExtension(
         "fabioc-aloha.alex-cognitive-architecture",
       );
       const version = extension?.packageJSON?.version || "0.0.0";
-
-      console.log("[Alex][WelcomeView] refresh() — step 7: generateNudges + render HTML");
       const nudges = this._generateNudges(
         health,
         goalsSummary,
@@ -332,8 +361,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         personaResult,
         premiumAssets,
         activeContext,
+        workspaceName,
       );
-      console.log("[Alex][WelcomeView] refresh() — DONE ✓");
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
       console.error("[Alex][WelcomeView] Error stack:", err instanceof Error ? err.stack : String(err));
@@ -375,8 +404,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       if (match) {
         return new Date(parseInt(match[1], 10));
       }
-    } catch (err) {
-      console.warn("[Alex] Failed to get last dream date:", err);
+    } catch {
+      // Silent fail - not critical
     }
     return null;
   }
@@ -401,16 +430,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
 
-    // Mission statement with workspace context (always shown when missionControl is enabled)
-    if (premiumAssets?.missionStatement) {
-      const wsLabel = workspaceName ? `${workspaceName}: ` : "";
-      nudges.push({
-        type: "mission",
-        icon: "🚀",
-        message: `${wsLabel}${premiumAssets.missionStatement}`,
-        priority: 0, // Highest priority — mission statement always visible
-      });
-    }
+    // Mission statement removed — duplicates rocket bar which now shows project name
+    // The rocket bar "Take Your {PROJECT} to New Heights" serves this purpose
 
     // Note: Focus session is already shown in the timer card, so no nudge needed here
 
@@ -561,6 +582,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     personaResult: PersonaDetectionResult | null,
     premiumAssets: PremiumAssetSelection,
     activeContext: ActiveContext | null,
+    workspaceName?: string,
   ): string {
     // Security: Generate nonce for CSP
     const nonce = getNonce();
@@ -604,16 +626,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const personaSkill = persona?.skill || "code-review";
     const bannerNoun = persona?.bannerNoun || "CODE";
 
-    // Use persona's accent color directly, with fallback to blue
-    const personaAccent = persona?.accentColor || "var(--vscode-charts-blue)";
+    // Use easter egg accent color if present, fallback to persona color, then blue
+    const personaAccent = easterEgg?.accentColor || persona?.accentColor || "var(--vscode-charts-blue)";
 
     // Active Context — live state from copilot-instructions.md
-    const slotMapping = persona
-      ? (PERSONA_SLOT_MAPPINGS[persona.id] ?? {
-          p5: "code-review",
-          p7: "scope-management",
-        })
-      : { p5: "code-review", p7: "scope-management" };
     const confidenceLabel =
       personaResult?.confidence != null
         ? `${Math.round(personaResult.confidence * 100)}%`
@@ -625,7 +641,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           ? "Cached"
           : "Auto";
 
-    // Focus Trifectas from Active Context (live) or fallback to persona slot mappings
+    // Focus Trifectas from Active Context (live only — no auto-population from persona)
     const rawTrifectas = activeContext?.focusTrifectas;
     const hasLiveTrifectas =
       rawTrifectas &&
@@ -636,7 +652,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean)
-      : [slotMapping.p5, personaSkill, slotMapping.p7];
+      : []; // Empty when no live trifectas (user hasn't started working yet)
 
     // Skill name mapping for display (must be declared before trifectaTagsHtml which references it)
     const skillNameMap: Record<string, string> = {
@@ -672,8 +688,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       "heir-curation": "Heir Curation",
     };
 
-    const trifectaTagsHtml = trifectaIds
-      .map((id) => {
+    const trifectaTagsHtml = trifectaIds.length > 0
+      ? trifectaIds.map((id) => {
         const name =
           skillNameMap[id] ||
           id
@@ -682,7 +698,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             .join(" ");
         return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}">${name}</span>`;
       })
-      .join("\n                ");
+      .join("\n                ")
+      : `<span class="trifecta-placeholder" style="opacity: 0.6; font-style: italic;">Focus trifectas will appear here when you start working</span>`;
 
     // Objective from Active Context (hidden when session card is showing)
     const rawObjective = activeContext?.objective;
@@ -754,11 +771,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       "content-creator": [
         { cmd: "generatePptx", icon: "📰", label: "Presentation" },
         { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
-        {
-          cmd: "generateImageFromSelection",
-          icon: "🖼️",
-          label: "Illustration",
-        },
       ],
       "fiction-writer": [
         { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
@@ -876,8 +888,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
             cursor: pointer;
@@ -892,26 +904,26 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             align-items: center;
             margin-bottom: 12px;
             position: relative;
+            width: 100%;
         }
         .alex-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
             object-fit: cover;
-            border: 3px solid var(--persona-accent, var(--vscode-charts-blue));
-            flex-shrink: 0;
+            border: 1px solid var(--persona-accent, var(--vscode-charts-blue));
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         .alex-avatar:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
         .easter-egg-badge {
             position: absolute;
-            top: -4px;
-            left: -4px;
-            font-size: 14px;
+            top: 8px;
+            left: 8px;
+            font-size: 32px;
             line-height: 1;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
             animation: egg-bounce 2s ease-in-out infinite;
@@ -949,11 +961,22 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             min-width: 0;
             flex: 1;
         }
+        .project-name {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--vscode-descriptionForeground);
+            margin: 8px 0;
+            padding: 6px 12px;
+            background: var(--vscode-input-background);
+            border-radius: 4px;
+            border: 1px solid var(--vscode-input-border, transparent);
+        }
         .rocket-bar {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
+            gap: 8px;
+            padding: 4px 8px;
             margin-bottom: 10px;
             border-radius: 6px;
             font-size: 11px;
@@ -972,7 +995,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 color-mix(in srgb, var(--persona-accent) 10%, transparent));
         }
         .rocket-bar .rocket-emoji {
-            font-size: 13px;
+            font-size: 12px;
             flex-shrink: 0;
         }
         .rocket-bar strong {
@@ -1505,12 +1528,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         </div>
 
         <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills">
-            <picture>
-                <source srcset="${avatarWebpUri}" type="image/webp">
-                <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
-            </picture>
+            <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
             ${easterEggBadge}
         </div>
+
+        ${workspaceName ? `<div class="project-name" title="Current workspace">${this._escapeHtml(workspaceName)}</div>` : ""}
 
         <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more">
             <span class="rocket-emoji">🚀</span>
@@ -1638,10 +1660,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 <button class="action-btn" data-cmd="searchRelatedKnowledge" title="Search Alex knowledge for related patterns">
                     <span class="action-icon">🔍</span>
                     <span class="action-text">Search Knowledge</span>
-                </button>
-                <button class="action-btn" data-cmd="generateImageFromSelection" title="Generate an SVG illustration from description">
-                    <span class="action-icon">🖼️</span>
-                    <span class="action-text">Generate Illustration</span>
                 </button>
                 <button class="action-btn" data-cmd="generateDiagram" title="Generate Mermaid diagrams from code or text">
                     <span class="action-icon">📊</span>

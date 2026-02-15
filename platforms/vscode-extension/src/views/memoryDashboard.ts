@@ -13,9 +13,11 @@ import { openChatPanel } from '../shared/utils';
  * Features:
  * - Neuroanatomical brain mapping diagram
  * - Memory type breakdown (Procedural, Episodic, Skills, Synapses, GK)
- * - Working memory slots (P1-P7) status
+ * - Active Context status (persona, focus trifectas, objective)
  * - Real-time memory file counts
  * - Interactive exploration
+ * 
+ * NOTE: P1-P7 slot visualization is deprecated and will be replaced with Active Context visualization in a future release.
  */
 
 let currentPanel: vscode.WebviewPanel | undefined;
@@ -258,9 +260,10 @@ function getWorkingMemorySlots(): WorkingMemorySlot[] {
         { id: 'P4b', name: 'meditation-consolidation', type: 'Core', description: 'Memory file persistence, synapse enhancement', active: true },
         { id: 'P4c', name: 'dream-automation', type: 'Core', description: 'Unconscious processing, neural maintenance', active: true },
         { id: 'P4d', name: 'self-actualization', type: 'Core', description: 'Deep assessment, architecture optimization', active: true },
-        { id: 'P5', name: 'master-heir-management', type: 'Domain', description: 'Master-Heir sync, promotion workflows, inheritance', active: true },
-        { id: 'P6', name: 'brand-asset-management', type: 'Domain', description: 'Logos, banners, icons, visual identity', active: false },
-        { id: 'P7', name: 'release-management', type: 'Domain', description: 'Versioning, changelog, publish workflows', active: false }
+        // P5-P7 slots deprecated - replaced by Active Context Focus Trifectas
+        { id: 'P5', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false },
+        { id: 'P6', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false },
+        { id: 'P7', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false }
     ];
 }
 
@@ -805,7 +808,7 @@ flowchart LR
                 
                 <div style="margin-top: 12px; font-size: 11px; color: var(--text-secondary);">
                     <strong>Core slots</strong> (P1-P4d): Always active<br>
-                    <strong>Domain slots</strong> (P5-P7): Rotate based on task focus
+                    <strong>Domain slots</strong>: Managed via Active Context Focus Trifectas (3 skills for current work)
                 </div>
             </div>
         </div>

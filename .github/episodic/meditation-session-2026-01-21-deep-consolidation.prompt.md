@@ -150,7 +150,6 @@
 ### Medium-Strength Output Connections
 
 - [dream-state-automation.instructions.md] (High, Maintains, Forward) - "Version synchronization"
-- [DK-ADVANCED-DIAGRAMMING.md] (Medium, Updates, Forward) - "Domain knowledge version alignment"
 
 ### Input Connections
 

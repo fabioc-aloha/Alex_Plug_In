@@ -7,6 +7,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.1] - 2026-02-15
+
+> **UI/UX Polish & Performance** — Extension audit cleanup, MS Graph leftovers removed, async I/O refactoring
+
+### Added
+
+- **`alex.meditate` command** — Opens chat with `/meditate` prompt for guided meditation sessions
+- **Extension audit report** — [alex_docs/audits/EXTENSION-AUDIT-2026-02-15.md](alex_docs/audits/EXTENSION-AUDIT-2026-02-15.md) with comprehensive code quality analysis
+- **Async I/O in cognitiveDashboard** — Converted 16 blocking synchronous operations to async using `fs-extra`
+
+### Fixed
+
+- **Missing command registration** — `alex.meditate` now properly registered (was referenced in task provider)
+- **Event loop blocking** — `cognitiveDashboard.ts` no longer blocks with synchronous file operations
+- **TypeScript compilation** — Removed orphaned disposable registrations for deleted sync commands
+- **Console statement cleanup** — Removed 27 non-critical logs while preserving 18 legitimate ones:
+  - `setupEnvironment.ts`: 8 setup progress logs
+  - `upgrade.ts`: 7 migration debugging logs
+  - `personaDetection.ts`: 5 LLM detection logs
+  - `initialize.ts`: 3 initialization logs
+  - `goals.ts`: 1 cleanup count log
+
+### Changed
+
+- **cognitiveDashboard async refactoring** — All file operations now use `fs-extra` async methods:
+  - 6× `existsSync` → `await pathExists`
+  - 5× `readdirSync` → `await readdir`
+  - 2× `readFileSync` → `await readFile`
+- **Welcome view optimization** — Promise.all parallelization for 40-60% faster load (from v5.7.0)
+
+### Removed
+
+- **Dead code cleanup**:
+  - 3 deprecated Gist sync commands: `alex.syncKnowledge`, `alex.pushKnowledge`, `alex.pullKnowledge`
+  - `generateImageFromSelection` UI from 3 locations (welcome view case handler, persona actions, HTML button)
+  - Orphaned disposable registrations for removed commands
+- **MS Graph/Enterprise Auth leftovers**:
+  - `@azure/msal-node` dependency (unused, leftover from removed enterprise auth)
+  - `alex_docs/guides/MICROSOFT-GRAPH-INTEGRATION.md` (477 lines, obsolete documentation)
+  - 4 dead documentation links from README files
+- **Console noise**: Total 61 console statements cleaned (34 in v5.7.0 + 27 in v5.7.1)
+
+### Performance
+
+- **Dashboard rendering** — No longer blocks event loop with synchronous I/O
+- **Welcome panel load time** — 40-60% faster via async parallelization
+- **Extension size** — Minimal impact from MS Graph dependency removal
+
+---
+
 ## [5.7.0] - 2026-02-14
 
 > **Structural Consistency & Folder Completeness** — All commands, docs, scripts, and manifests now reference the full .github/ folder structure
@@ -1905,7 +1955,7 @@ Stability and safety after the Phoenix chaos. Kill switch protection validated a
 
 - **📚 Documentation**
   - [WORKSPACE-PROTECTION.md](alex_docs/WORKSPACE-PROTECTION.md) — Complete kill switch documentation
-  - [COMEBACK-PLAN.md](COMEBACK-PLAN.md) — Recovery roadmap
+  - [COMEBACK-PLAN.md](alex_docs/archive/COMEBACK-PLAN.md) — Recovery roadmap
   - [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) — Single roadmap for all platforms
   - [RISKS.md](RISKS.md) — Risk register with contingency plans (updated with validation)
   - [EXTENSION-DEVELOPMENT-HOST.md](alex_docs/EXTENSION-DEVELOPMENT-HOST.md) — F5 testing guide
@@ -1934,7 +1984,7 @@ Stability and safety after the Phoenix chaos. Kill switch protection validated a
 This version was released during the "Phoenix" attempt which caused Master Alex to lose coherence.
 The extension code may work, but the `.github/` architecture was corrupted.
 
-See [COMEBACK-PLAN.md](COMEBACK-PLAN.md) for details on what went wrong.
+See [COMEBACK-PLAN.md](alex_docs/archive/COMEBACK-PLAN.md) for details on what went wrong.
 
 ---
 

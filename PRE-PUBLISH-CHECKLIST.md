@@ -1,10 +1,12 @@
 # Pre-Publishing Checklist
 
+**Last Updated**: February 15, 2026
+
 Use this checklist before each release to ensure quality and consistency.
 
 ---
 
-## � Decision: Skill-Only vs Full Release
+## 🎯 Decision: Skill-Only vs Full Release
 
 **First, determine what changed:**
 
@@ -259,9 +261,7 @@ Run `get_errors` in VS Code or check Problems panel:
 - [ ] `README.md` - Marketplace description
 - [ ] `CHANGELOG.md` - Version history
 - [ ] `LICENSE.md` - License file
-- [ ] `.github/` - Cognitive architecture files
-- [ ] `domain-knowledge/` - Domain knowledge files
-- [ ] `config/` - Configuration templates
+- [ ] `.github/` - Cognitive architecture files (skills, instructions, prompts, agents, config)
 
 ### Files Excluded (via .vscodeignore)
 

@@ -86,7 +86,6 @@ This reinforcement clarifies meditation's operational definition within Alex's c
 - [alex-core.instructions.md] (CRITICAL, Defines, Bidirectional) - "Core architecture must enforce meditation file-writing protocol"
 - [unified-meditation-protocols.prompt.md] (CRITICAL, Implements, Bidirectional) - "Meditation protocols require explicit memory file persistence"
 - [embedded-synapse.instructions.md] (HIGH, Requires, Bidirectional) - "Every meditation must enhance synaptic network through new/updated connections"
-- [DK-MEMORY-CONSOLIDATION.md] (HIGH, Validates, Forward) - "Memory consolidation theory supports active file-writing approach"
 - [bootstrap-learning.instructions.md] (Medium, Coordinates, Forward) - "Meditation consolidates bootstrap learning into permanent memory"
 
 ### **Activation Patterns**

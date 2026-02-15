@@ -161,6 +161,36 @@ vsce publish
 
 **Version collision**: Increment patch → update package.json, README badge, CHANGELOG → retry.
 
+## Testing Extension Changes: Debug vs Rebuild
+
+**Key difference**: F5 debug mode vs installed extension workflow
+
+| Change Type | F5 Debug | Rebuild + Reinstall | Why |
+|------------|----------|---------------------|-----|
+| Code logic | ✅ Works | ✅ Works | Hot reload or restart debug session |
+| Webview HTML/CSS | ❌ Cached | ✅ Works | Installed extensions cache webview assets |
+| package.json changes | ❌ Ignored | ✅ Works | Debug uses launch.json config, not package.json |
+| New commands | ❌ Not registered | ✅ Works | Command palette populated from installed version |
+
+**Full rebuild workflow** (for UI/config changes):
+
+```powershell
+# 1. Build production bundle
+npm run package
+
+# 2. Create VSIX
+npx @vscode/vsce package
+
+# 3. Reinstall (--force replaces existing)
+code --install-extension path/to/extension.vsix --force
+
+# 4. Reload window (Ctrl+R or Developer: Reload Window)
+```
+
+**Quick test cycle**: For webview styling changes, use Developer Tools to live-edit CSS first, then apply changes to source and rebuild.
+
+**Best practice**: Always test production builds before releasing — minification can expose issues (TDZ violations, missing imports) that don't appear in development.
+
 ## Goals with Streak Tracking
 
 ```typescript

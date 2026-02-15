@@ -1,7 +1,8 @@
 {
   "skill": "brain-qa",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "inheritance": "inheritable",
+  "lastValidated": "2026-02-15",
   "connections": [
     {
       "target": ".github/copilot-instructions.md",
@@ -91,7 +92,10 @@
     "semantic audit",
     "logic check",
     "meaning consistency",
-    "code docs alignment"
+    "code docs alignment",
+    "synapse repair",
+    "iterative validation",
+    "schema compliance"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

@@ -474,11 +474,10 @@ async function handleMeditateCommand(
             const personaResult = await detectAndUpdateProjectPersona(workspace.rootPath);
             if (personaResult) {
                 personaContext = `**Project Context**: ${personaResult.persona.icon} ${personaResult.persona.name}\n`;
-                personaContext += `**P6 Skill**: ${personaResult.persona.skill}\n\n`;
-                console.log(`[Alex] Meditation: Updated P6 to ${personaResult.persona.skill}`);
+                personaContext += `**Primary Skill**: ${personaResult.persona.skill}\n\n`;
             }
         } catch (err) {
-            console.log('[Alex] Meditation: Persona detection skipped');
+            // Persona detection is not critical
         }
     }
     
@@ -1129,11 +1128,9 @@ async function handleGreetingWithSelfActualization(
             const personaResult = await detectAndUpdateProjectPersona(workspace.rootPath);
             if (personaResult) {
                 personaInfo = `\n**Detected Context**: ${personaResult.persona.icon} ${personaResult.persona.name} (${(personaResult.confidence * 100).toFixed(0)}% confidence)\n`;
-                console.log(`[Alex] Greeting: Detected persona ${personaResult.persona.id}`);
             }
         } catch (err) {
             // Persona detection is not critical
-            console.log('[Alex] Greeting: Persona detection skipped');
         }
     }
     
@@ -2325,8 +2322,8 @@ export function registerChatParticipant(context: vscode.ExtensionContext): vscod
     // Register avatar updater with the bridge (function preserved but unused)
     registerAvatarUpdater(updateChatAvatar);
     
-    // Static rocket icon — simple and consistent
-    alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'rocket-icon.png');
+    // Static logo — matches welcome view header
+    alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'logo.svg');
     alex.followupProvider = alexFollowupProvider;
     
     // Handle feedback for telemetry

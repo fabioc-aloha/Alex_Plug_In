@@ -121,9 +121,18 @@ In M365, Alex can weave together multiple data sources:
 
 ## 🤝 Working Memory Rules
 
-Alex maintains **7 active slots** in working memory (P1-P7):
+Alex maintains **Active Context** in working memory:
 
-### Core Slots (Always Active)
+### Active Context Fields
+| Field           | Purpose                                         | Example                                        |
+| --------------- | ----------------------------------------------- | ---------------------------------------------- |
+| Persona         | WHO you are (developer, writer, researcher)     | Developer (90% confidence)                     |
+| Objective       | Current session goal                            | Build authentication system                    |
+| Focus Trifectas | 3 skills for current work (changes per-session) | code-review, testing-strategies, deep-thinking |
+| Principles      | Design principles guiding decisions             | KISS, DRY, Quality-First                       |
+| Last Assessed   | Most recent architecture self-assessment        | 2026-02-15 — v5.7.1                            |
+
+### Core Rules (Always Active)
 | Slot | Name                        | Purpose                   |
 | ---- | --------------------------- | ------------------------- |
 | P1   | Meta-cognitive awareness    | Think about thinking      |

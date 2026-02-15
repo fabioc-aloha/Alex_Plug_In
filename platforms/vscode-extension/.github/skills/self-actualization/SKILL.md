@@ -120,6 +120,83 @@ The architecture has three memory types. Healthy balance varies by maturity:
 | Full Meditation | Weekly | Moderate | Knowledge integration |
 | **Self-Actualization** | **Monthly** | **Deep** | **Comprehensive assessment + growth plan** |
 
+## Drift Remediation Protocol
+
+Self-actualization often detects **documentation drift** — when implementation evolves faster than documentation. Common drift categories:
+
+### 1. Version Reference Drift
+
+**Detection**: Self-actualization scans memory files for outdated version references (e.g., `v5.6.8` when current is `v5.7.1`)
+
+**Common locations**:
+- Skill examples: "as of v5.X.Y" annotations
+- Release notes embedded in skills
+- Instruction file headers
+- Comments with version-specific behavior
+
+**Remediation**:
+```typescript
+// Find all outdated version references
+grep -r "v5\.[0-6]\.\d+" .github/ --include="*.md"
+
+// Update via multi_replace or manual edit
+// Pattern: v5.6.8 → v5.7.1
+```
+
+### 2. Documentation Count Drift
+
+**Detection**: Compare copilot-instructions.md documented counts vs. actual file counts
+
+**Verification commands** (PowerShell):
+```powershell
+# Count actual skills (directories with SKILL.md)
+(Get-ChildItem -Path .\.github\skills -Directory | Where-Object { 
+  Test-Path "$($_.FullName)\SKILL.md" 
+}).Count
+
+# Count actual instructions
+(Get-ChildItem -Path .\.github\instructions -Filter "*.instructions.md").Count
+
+# Count prompts
+(Get-ChildItem -Path .\.github\prompts -Filter "*.prompt.md").Count
+```
+
+**Remediation**:
+Update copilot-instructions.md with actual counts:
+```markdown
+Total Skills: 116 | Total Instructions: 30
+```
+
+### 3. Memory Balance Drift
+
+**Detection**: Calculate P:E:D ratio, compare to maturity-appropriate target
+
+**Not always remediation needed** — growth causes natural shifts:
+- Adding skills → D increases (good)
+- Consolidating episodic → E decreases (good)
+- Removing redundant instructions → P decreases (good)
+
+**Action required when**:
+- Episodic debt (too many unconsolidated sessions)
+- Procedural bloat (overlapping instructions)
+- Skill stagnation (no new domain knowledge)
+
+### Pre-Publish Drift Check Workflow
+
+**Order** (run before `vsce package`):
+1. **Self-Actualization** → Detect all drift categories
+2. **Remediation** → Fix version refs, update counts
+3. **Verification** → Run PowerShell counts, grep version patterns
+4. **Build & Install** → Confirm clean heir sync, 0 TypeScript errors
+5. **User Testing** → Regression checklist
+
+**Real-world example** (v5.7.1):
+- Detected: persona-detection/SKILL.md had v5.6.8 references
+- Detected: copilot-instructions.md missing skill/instruction counts
+- Fixed: Updated 3 version instances, added counts
+- Verified: PowerShell confirmed 116 skills, 30 instructions
+- Result: Clean build, 0 contamination, ready for publish
+
 ## Synapses
 
 See [synapses.json](synapses.json) for connections.

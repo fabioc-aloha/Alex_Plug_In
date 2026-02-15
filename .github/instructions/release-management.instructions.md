@@ -19,6 +19,7 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [ROADMAP-UNIFIED.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
+- [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
 
 ---
 

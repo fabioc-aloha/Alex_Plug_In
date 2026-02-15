@@ -1,68 +1,69 @@
 {
-  "schemaVersion": "1.0.0",
-  "version": "1.1.0",
-  "skill": "documentation-quality-assurance",
-  "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
-  "inheritance": "inheritable",
-  "connections": [
-    {
-      "target": "release-process",
-      "strength": 0.85,
-      "type": "operational",
-      "direction": "bidirectional",
-      "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
-    },
-    {
-      "target": "../../ROADMAP-UNIFIED.md",
-      "strength": 1.0,
-      "type": "canonical-source",
-      "direction": "consumes",
-      "context": "Definition of Done criterion #3 (counts match reality) enforces doc QA"
-    },
-    {
-      "target": "../heir-curation/SKILL.md",
-      "strength": 0.7,
-      "type": "quality-gate",
-      "direction": "supports",
-      "context": "Heir validation uses doc QA patterns for sync verification"
-    }
-  ],
-  "activationContexts": [
-    "documentation audit",
-    "doc quality",
-    "CHANGELOG",
-    "broken links",
-    "stale docs",
-    "documentation drift",
-    "preflight validation",
-    "operational documentation",
-    "document headers"
-  ],
-  "yields": [
-    {
-      "concept": "5-pass quality pipeline",
-      "whenNeeded": "reviewing large documentation suites systematically"
-    },
-    {
-      "concept": "count elimination rules",
-      "whenNeeded": "hardcoded numbers in docs drift from reality"
-    },
-    {
-      "concept": "comprehensive header pattern",
-      "whenNeeded": "operational docs lack at-a-glance context (regression checklists, deployment guides)"
-    }
-  ],
-  "lastUpdated": "2026-02-14",
-  "changelog": [
-    {
-      "version": "1.1.0",
-      "date": "2026-02-14",
-      "changes": "Added comprehensive header pattern section with 9-field metadata template for operational documentation"
-    },
-    {
-      "version": "1.0.0",
-      "date": "2026-02-12",
-      "changes": "Initial skill creation with 5-pass pipeline, count elimination, and drift detection"
-    }
-  ]
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "1.0.0",
+    "version": "1.1.0",
+    "skill": "documentation-quality-assurance",
+    "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/release-process/SKILL.md",
+            "strength": 0.85,
+            "type": "operational",
+            "direction": "bidirectional",
+            "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
+        },
+        {
+            "target": "ROADMAP-UNIFIED.md",
+            "strength": 1.0,
+            "type": "canonical-source",
+            "direction": "consumes",
+            "context": "Definition of Done criterion #3 (counts match reality) enforces doc QA"
+        },
+        {
+            "target": "../heir-curation/SKILL.md",
+            "strength": 0.7,
+            "type": "quality-gate",
+            "direction": "supports",
+            "context": "Heir validation uses doc QA patterns for sync verification"
+        }
+    ],
+    "activationContexts": [
+        "documentation audit",
+        "doc quality",
+        "CHANGELOG",
+        "broken links",
+        "stale docs",
+        "documentation drift",
+        "preflight validation",
+        "operational documentation",
+        "document headers"
+    ],
+    "yields": [
+        {
+            "concept": "5-pass quality pipeline",
+            "whenNeeded": "reviewing large documentation suites systematically"
+        },
+        {
+            "concept": "count elimination rules",
+            "whenNeeded": "hardcoded numbers in docs drift from reality"
+        },
+        {
+            "concept": "comprehensive header pattern",
+            "whenNeeded": "operational docs lack at-a-glance context (regression checklists, deployment guides)"
+        }
+    ],
+    "lastUpdated": "2026-02-14",
+    "changelog": [
+        {
+            "version": "1.1.0",
+            "date": "2026-02-14",
+            "changes": "Added comprehensive header pattern section with 9-field metadata template for operational documentation"
+        },
+        {
+            "version": "1.0.0",
+            "date": "2026-02-12",
+            "changes": "Initial skill creation with 5-pass pipeline, count elimination, and drift detection"
+        }
+    ]
 }

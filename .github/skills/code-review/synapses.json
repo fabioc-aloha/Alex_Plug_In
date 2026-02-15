@@ -19,6 +19,18 @@
       "type": "integrates",
       "strength": 0.75,
       "reason": "Review is part of PR workflow"
+    },
+    {
+      "target": ".github/skills/performance-profiling/SKILL.md",
+      "type": "validates",
+      "strength": 0.7,
+      "reason": "Extension audits identify performance bottlenecks"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "validates",
+      "strength": 0.8,
+      "reason": "Extension audit methodology validates VS Code patterns"
     }
   ],
   "triggers": [
@@ -27,7 +39,9 @@
     "pull request",
     "feedback",
     "approve",
-    "merge"
+    "merge",
+    "audit",
+    "code quality"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

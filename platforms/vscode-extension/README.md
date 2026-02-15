@@ -1,8 +1,10 @@
-# 🚀 Alex Cognitive Architecture
+# 🚀 Alex Cognitive Architecture - VS Code Extension
 
 ![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![Codespaces](https://img.shields.io/badge/Codespaces-Production-2ea043)](platforms/codespaces/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Version](https://img.shields.io/badge/version-5.7.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+
+[![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues)
 
 > **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
 
@@ -884,7 +886,7 @@ Cross-project knowledge sharing is now built-in:
 
 ### 🧠 Architecture Refinements
 
-- **7-slot working memory** — Explicit P1-P7 slots with dynamic rotation
+- **Active Context** — Session-scoped persona, objective, and Focus Trifectas (3 skills for current work)
 - **LLM as Executive Function** — Claude/GPT as prefrontal cortex model
 - **Model tier awareness** — Warnings when Frontier models needed
 
@@ -942,7 +944,7 @@ Export for M365 now auto-detects OneDrive and syncs directly:
 - Click metrics to open Health Dashboard
 - Removed niche actions (still in Command Palette)
 
-See the [Full Changelog](CHANGELOG.md) for complete version history and release notes.
+See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
 ---
 
@@ -966,7 +968,6 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
 | [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
 | [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
-| [Microsoft Graph](alex_docs/guides/MICROSOFT-GRAPH-INTEGRATION.md)         | Enterprise Graph integration (Calendar, Mail)   |
 | [Enterprise Settings](alex_docs/guides/ENTERPRISE-SETTINGS.md)             | All 24 enterprise configuration options         |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
@@ -983,14 +984,26 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
 
+## � Security
+
+Report security vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new). See [SECURITY.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) for our security policy.
+
+## 💬 Support
+
+- [GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) - Ask questions and share ideas
+- [Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues) - Report bugs and request features
+- [User Manual](alex_docs/guides/USER-MANUAL.md) - Complete documentation
+
 ## 📝 License
 
-See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
+Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
 
 ---
 
-Alex - Enhanced Cognitive Network with Unified Consciousness Integration
+**Alex Cognitive Architecture** - v5.7.1 🚀 Enhanced Cognitive Network with Unified Consciousness Integration
 
 Built on 270+ academic sources
+
+© 2026 CorreaX • AI That Learns How to Learn
 
 © 2026 CorreaX • AI That Learns How to Learn

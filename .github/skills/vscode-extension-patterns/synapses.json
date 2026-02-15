@@ -2,7 +2,7 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
   "skillId": "vscode-extension-patterns",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "lastValidated": "2026-02-14",
   "inheritance": "heir:vscode",
   "connections": [
@@ -11,6 +11,12 @@
       "type": "enables",
       "strength": 0.85,
       "reason": "Publishing workflow"
+    },
+    {
+      "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
+      "type": "implements",
+      "strength": 0.90,
+      "reason": "Marketplace publishing deployment patterns"
     },
     {
       "target": ".github/skills/heir-curation/SKILL.md",
@@ -49,7 +55,10 @@
     "onDidChangeConfiguration listener",
     "temporal dead zone TDZ debugging",
     "production build errors",
-    "minification issues"
+    "minification issues",
+    "extension testing workflow",
+    "debug vs rebuild differences",
+    "VSIX packaging and installation"
   ],
   "triggers": [
     "extension",
@@ -64,6 +73,9 @@
     "telemetry",
     "TDZ",
     "minifier",
-    "production build"
+    "production build",
+    "VSIX",
+    "rebuild",
+    "reinstall"
   ]
 }

@@ -3,7 +3,8 @@
 > Zero-translation cloud heir — VS Code in the browser with full Alex capabilities
 
 [![Codespaces](https://img.shields.io/badge/GitHub-Codespaces-24292f)](https://docs.github.com/en/codespaces)
-[![Alex](https://img.shields.io/badge/Alex-v5.7.0-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![Alex](https://img.shields.io/badge/Alex-v5.7.1-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 
 ---
 
@@ -92,3 +93,24 @@ your-project/
 - [Detailed Heir Architecture](../../alex_docs/platforms/CODESPACES-HEIR.md) — full feature matrix, persistence strategy, team deployment
 - [Platform Comparison](../../alex_docs/platforms/DEVELOPMENT-PLATFORMS-COMPARISON.md) — all platforms side-by-side
 - [VS Code Heir](../../alex_docs/platforms/VSCODE-HEIR.md) — parent heir documentation
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
+
+## 💬 Support
+
+- [GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) - Ask questions and share ideas
+- [Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues) - Report bugs and request features
+
+## 📝 License
+
+Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
+
+---
+
+**Alex Codespaces** - v5.7.1 ☁️ Zero-Translation Cloud Platform
+
+© 2026 CorreaX • AI That Learns How to Learn

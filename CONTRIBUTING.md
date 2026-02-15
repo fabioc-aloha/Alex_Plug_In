@@ -1,5 +1,7 @@
 # Contributing to Alex Cognitive Architecture
 
+**Last Updated**: February 15, 2026
+
 Thank you for your interest in contributing to the Alex Cognitive Architecture project! This document provides guidelines and information for contributors.
 
 ## Table of Contents
@@ -31,17 +33,23 @@ This project adheres to the Contributor Covenant Code of Conduct. By participati
 
 ```
 Alex_Plug_In/
-├── src/                                 # Extension source code
-│   ├── commands/                        # Extension commands (Initialize, Dream)
-│   └── extension.ts                     # Main entry point
-├── .github/
+├── platforms/vscode-extension/          # VS Code extension project
+│   ├── src/                             # Extension source code
+│   │   ├── commands/                    # Extension commands (Initialize, Dream)
+│   │   └── extension.ts                 # Main entry point
+│   ├── .github/                         # Cognitive architecture (heir copy)
+│   ├── package.json                     # Extension manifest
+│   └── tsconfig.json                    # TypeScript configuration
+├── .github/                             # Master cognitive architecture (source of truth)
 │   ├── copilot-instructions.md          # Main cognitive framework
 │   ├── instructions/                    # Procedural memory (.instructions.md)
-│   └── prompts/                         # Episodic memory (.prompt.md)
-├── domain-knowledge/                    # Domain expertise (DK-*.md)
-├── scripts/                             # Legacy PowerShell automation
-├── package.json                         # Extension manifest
-└── tsconfig.json                        # TypeScript configuration
+│   ├── prompts/                         # Episodic memory (.prompt.md)
+│   ├── skills/                          # Domain expertise (SKILL.md files)
+│   ├── agents/                          # Agent definitions
+│   └── config/                          # Configuration files
+├── alex_docs/                           # Documentation
+├── article/                             # Research papers and articles
+└── scripts/                             # Automation tools
 ```
 
 ## Development Process
@@ -110,13 +118,13 @@ Alex: Dream (Neural Maintenance)
 
 ### File Type Conventions
 
-| Type | Pattern | Purpose |
-|------|---------|---------|
+| Type             | Pattern                  | Purpose                                  |
+| ---------------- | ------------------------ | ---------------------------------------- |
 | **Instructions** | `{name}.instructions.md` | Procedural memory - repeatable processes |
-| **Prompts** | `{name}.prompt.md` | Episodic memory - complex workflows |
-| **Domain Knowledge** | `DK-{NAME}-v{X.Y.Z}.md` | Specialized expertise with version tracking |
-| **Scripts** | `{name}.ps1` | PowerShell automation tools |
-| **Config** | `{name}.json` | Configuration and settings |
+| **Prompts**      | `{name}.prompt.md`       | Episodic memory - complex workflows      |
+| **Skills**       | `{name}/SKILL.md`        | Specialized expertise (replaces DK-*.md) |
+| **Scripts**      | `{name}.ps1`             | PowerShell automation tools              |
+| **Config**       | `{name}.json`            | Configuration and settings               |
 
 ## Memory File Guidelines
 
@@ -141,29 +149,31 @@ Detailed step-by-step procedures.
 [related-file.md] (high, bidirectional, procedural) - "when X condition occurs"
 ```
 
-### Creating Domain Knowledge Files
+### Creating Skill Files
+
+Skills follow a three-level progressive disclosure pattern. See [.github/skills/](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/.github/skills) for examples.
 
 ```markdown
-# DK-{TOPIC}-v{X.Y.Z}
+# Skill Name
 
-**Version**: {X.Y.Z} {IUPAC-NAME}
-**Status**: {Draft|Stable|Deprecated}
 **Domain**: {Category}
+**Trigger Keywords**: {action verbs that activate this skill}
 
-## Overview
-Comprehensive description of domain expertise.
+## Level 1: Quick Reference
 
-## Core Concepts
-Detailed knowledge content.
+One-paragraph summary visible in skill listings.
 
-## Application Patterns
-How to apply this knowledge.
+## Level 2: Procedural Guide
 
-## Research Foundation
-Citations and empirical backing.
+Step-by-step workflows and patterns.
+
+## Level 3: Deep Expertise
+
+Detailed knowledge, research citations, edge cases.
 
 ## Synaptic Connections
-Network of related knowledge domains.
+
+Connections encoded in `synapses.json` in the skill folder.
 ```
 
 ## Synaptic Network Integrity

@@ -602,9 +602,5 @@ export function registerGoalsCommands(context: vscode.ExtensionContext): void {
     );
     
     // Run cleanup on activation
-    cleanupExpiredGoals().then(removed => {
-        if (removed > 0) {
-            console.log(`Cleaned up ${removed} expired goals`);
-        }
-    });
+    cleanupExpiredGoals();
 }

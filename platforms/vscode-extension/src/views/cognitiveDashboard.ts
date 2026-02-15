@@ -11,7 +11,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import { getNonce } from '../shared/sanitize';
 
 /**
@@ -162,39 +162,39 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
     const githubPath = path.join(rootPath, '.github');
 
     try {
-      // Count skills
+      // Count skills (async)
       const skillsPath = path.join(githubPath, 'skills');
-      if (fs.existsSync(skillsPath)) {
-        const skillDirs = fs.readdirSync(skillsPath, { withFileTypes: true });
+      if (await fs.pathExists(skillsPath)) {
+        const skillDirs = await fs.readdir(skillsPath, { withFileTypes: true });
         data.memory.skillCount = skillDirs.filter(d => d.isDirectory()).length;
       }
 
-      // Count instructions
+      // Count instructions (async)
       const instructionsPath = path.join(githubPath, 'instructions');
-      if (fs.existsSync(instructionsPath)) {
-        const files = fs.readdirSync(instructionsPath);
+      if (await fs.pathExists(instructionsPath)) {
+        const files = await fs.readdir(instructionsPath);
         data.memory.instructionCount = files.filter(f => f.endsWith('.instructions.md')).length;
       }
 
-      // Count prompts
+      // Count prompts (async)
       const promptsPath = path.join(githubPath, 'prompts');
-      if (fs.existsSync(promptsPath)) {
-        const files = fs.readdirSync(promptsPath);
+      if (await fs.pathExists(promptsPath)) {
+        const files = await fs.readdir(promptsPath);
         data.memory.promptCount = files.filter(f => f.endsWith('.prompt.md')).length;
       }
 
-      // Count episodic memories
+      // Count episodic memories (async)
       const episodicPath = path.join(githubPath, 'episodic');
-      if (fs.existsSync(episodicPath)) {
-        const files = fs.readdirSync(episodicPath);
+      if (await fs.pathExists(episodicPath)) {
+        const files = await fs.readdir(episodicPath);
         data.memory.episodicCount = files.filter(f => f.endsWith('.md')).length;
       }
 
-      // Read goals
+      // Read goals (async)
       const goalsPath = path.join(githubPath, 'config', 'goals.json');
-      if (fs.existsSync(goalsPath)) {
+      if (await fs.pathExists(goalsPath)) {
         try {
-          const goalsContent = fs.readFileSync(goalsPath, 'utf-8');
+          const goalsContent = await fs.readFile(goalsPath, 'utf-8');
           const goals = JSON.parse(goalsContent);
           if (Array.isArray(goals.goals)) {
             data.goals.active = goals.goals.filter((g: any) => g.status === 'in-progress').length;
@@ -206,21 +206,21 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         }
       }
 
-      // Check synapse health by scanning skill directories
+      // Check synapse health by scanning skill directories (async)
       let totalSynapses = 0;
       let healthySynapses = 0;
       let brokenSynapses = 0;
 
-      if (fs.existsSync(skillsPath)) {
-        const skillDirs = fs.readdirSync(skillsPath, { withFileTypes: true })
+      if (await fs.pathExists(skillsPath)) {
+        const skillDirs = (await fs.readdir(skillsPath, { withFileTypes: true }))
           .filter(d => d.isDirectory());
 
         for (const dir of skillDirs) {
           const synapsePath = path.join(skillsPath, dir.name, 'synapses.json');
-          if (fs.existsSync(synapsePath)) {
+          if (await fs.pathExists(synapsePath)) {
             totalSynapses++;
             try {
-              const content = fs.readFileSync(synapsePath, 'utf-8');
+              const content = await fs.readFile(synapsePath, 'utf-8');
               JSON.parse(content); // Validates JSON
               healthySynapses++;
             } catch {
@@ -237,9 +237,9 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         ? (brokenSynapses > 5 ? 'critical' : 'warning') 
         : 'healthy';
 
-      // Collect recent activity from episodic
-      if (fs.existsSync(episodicPath)) {
-        const files = fs.readdirSync(episodicPath)
+      // Collect recent activity from episodic (async)
+      if (await fs.pathExists(episodicPath)) {
+        const files = (await fs.readdir(episodicPath))
           .filter(f => f.endsWith('.md'))
           .sort()
           .reverse()

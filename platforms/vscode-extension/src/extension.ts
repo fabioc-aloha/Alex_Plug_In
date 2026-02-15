@@ -91,7 +91,6 @@ async function withOperationLock<T>(
 }
 
 export async function activate(context: vscode.ExtensionContext) {
-  console.log("[Alex][Extension] activate() called");
   // Get extension version for telemetry
   const extensionVersion = context.extension.packageJSON.version || "unknown";
 
@@ -134,8 +133,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   // Initialize enterprise security features (secrets scanning, audit logging)
   await initializeEnterprise(context);
 
-  console.log("Alex Cognitive Architecture is now active!");
-
   // Set extension path for markdown CSS lookup
   // This allows setupEnvironment to find the bundled CSS file
   setExtensionPathForCss(context.extensionPath);
@@ -146,9 +143,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   );
 
   // Register chat participant for @alex conversations
-  console.log("[Alex][Extension] about to registerChatParticipant");
   registerChatParticipant(context);
-  console.log("[Alex][Extension] registerChatParticipant done");
 
   // Register language model tools for AI-powered operations
   registerLanguageModelTools(context);
@@ -176,9 +171,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   );
 
   // Register welcome view in Activity Bar
-  console.log("[Alex][Extension] about to registerWelcomeView");
   const welcomeViewProvider = registerWelcomeView(context);
-  console.log("[Alex][Extension] registerWelcomeView done");
 
   // Register health dashboard webview
   registerHealthDashboard(context);
@@ -435,6 +428,15 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     },
   );
 
+  // Meditate command - opens chat with /meditate prompt
+  const meditateDisposable = vscode.commands.registerCommand(
+    "alex.meditate",
+    async () => {
+      await openChatPanel("/meditate");
+    },
+  );
+  context.subscriptions.push(meditateDisposable);
+
   // Session timer commands
   initializeSessionStatusBar(context);
 
@@ -478,39 +480,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     "alex.sessionActions",
     async () => {
       await showSessionActions();
-    },
-  );
-
-  // Cloud sync commands (DEPRECATED - Gist sync removed)
-  const syncDisposable = vscode.commands.registerCommand(
-    "alex.syncKnowledge",
-    async () => {
-      vscode.window.showWarningMessage(
-        "☁️ Gist sync has been deprecated. Use Git to sync ~/.alex/global-knowledge/",
-        "Learn More"
-      ).then(selection => {
-        if (selection === "Learn More") {
-          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In#global-knowledge"));
-        }
-      });
-    },
-  );
-
-  const pushDisposable = vscode.commands.registerCommand(
-    "alex.pushKnowledge",
-    async () => {
-      vscode.window.showWarningMessage(
-        "☁️ Gist push has been deprecated. Use Git to push ~/.alex/global-knowledge/"
-      );
-    },
-  );
-
-  const pullDisposable = vscode.commands.registerCommand(
-    "alex.pullKnowledge",
-    async () => {
-      vscode.window.showWarningMessage(
-        "☁️ Gist pull has been deprecated. Use Git to pull ~/.alex/global-knowledge/"
-      );
     },
   );
 
@@ -2425,13 +2394,9 @@ Reference: .github/skills/git-workflow/SKILL.md`;
       clearHealthCache();
       updateStatusBar(context, true);
     }
-    // Log configuration changes if it affects telemetry (for debugging)
-    if (e.affectsConfiguration('alex.telemetry')) {
-      console.log('[Alex] Telemetry configuration changed');
-    }
     // Re-check M365 sync settings
     if (e.affectsConfiguration('alex.m365')) {
-      console.log('[Alex] M365 configuration changed - reload may be required for full effect');
+      // Silent - no action needed
     }
   });
   context.subscriptions.push(configChangeListener);
@@ -2449,9 +2414,6 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(endSessionDisposable);
   context.subscriptions.push(togglePauseDisposable);
   context.subscriptions.push(sessionActionsDisposable);
-  context.subscriptions.push(syncDisposable);
-  context.subscriptions.push(pushDisposable);
-  context.subscriptions.push(pullDisposable);
   context.subscriptions.push(openDocsDisposable);
   context.subscriptions.push(workingWithAlexDisposable);
   context.subscriptions.push(showStatusDisposable);

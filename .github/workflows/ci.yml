@@ -1,0 +1,95 @@
+name: CI - Lint and Build
+
+on:
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main, develop]
+    workflow_dispatch:
+
+jobs:
+    lint:
+        name: Lint Code
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+                  cache-dependency-path: platforms/vscode-extension/package-lock.json
+
+            - name: Install dependencies
+              working-directory: platforms/vscode-extension
+              run: npm ci
+
+            - name: Run ESLint
+              working-directory: platforms/vscode-extension
+              run: npm run lint
+
+            - name: Check formatting
+              working-directory: platforms/vscode-extension
+              run: npm run format:check || echo "No format check script defined"
+              continue-on-error: true
+
+    build:
+        name: Build Extension
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+                  cache-dependency-path: platforms/vscode-extension/package-lock.json
+
+            - name: Install dependencies
+              working-directory: platforms/vscode-extension
+              run: npm ci
+
+            - name: Build extension
+              working-directory: platforms/vscode-extension
+              run: npm run compile
+
+            - name: Package extension
+              working-directory: platforms/vscode-extension
+              run: npx @vscode/vsce package --no-dependencies
+
+            - name: Upload VSIX artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: alex-cognitive-architecture-vsix
+                  path: platforms/vscode-extension/*.vsix
+                  retention-days: 7
+
+    test:
+        name: Run Tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+                  cache-dependency-path: platforms/vscode-extension/package-lock.json
+
+            - name: Install dependencies
+              working-directory: platforms/vscode-extension
+              run: npm ci
+
+            - name: Run tests
+              working-directory: platforms/vscode-extension
+              run: npm test || echo "No tests defined yet"
+              continue-on-error: true

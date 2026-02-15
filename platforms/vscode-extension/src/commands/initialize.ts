@@ -350,14 +350,13 @@ async function performInitialization(
     // This ensures proper markdown rendering even if user skips settings wizard
     await applyMarkdownStyles();
 
-    // Detect persona early - reused for GK offer and P6 update
-    // Don't update P5-P7 slots during init — deploy clean architecture with placeholder slots.
-    // The chat participant will assign persona-specific slots on first conversation.
+    // Detect persona early - reused for GK offer
+    // Don't update Active Context during init — deploy clean architecture with placeholder state.
+    // The chat participant will update persona and focus trifectas on first conversation.
     let personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
     const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
     
     if (personaResult) {
-      console.log(`[Alex] Initialize: Detected persona ${personaResult.persona.id}, updated P6 to ${personaResult.persona.skill}`);
       telemetry.log("command", "initialize_persona_detected", {
         persona: personaResult.persona.id,
         skill: personaResult.persona.skill,
@@ -369,11 +368,6 @@ async function performInitialization(
     try {
       const existingGkRepo = await detectGlobalKnowledgeRepo();
       if (existingGkRepo) {
-        telemetry.log("command", "initialize_global_knowledge_found", {
-          repoPath: path.basename(existingGkRepo),
-        });
-        console.log(`[Alex] Found Global Knowledge repo at ${existingGkRepo}`);
-      } else {
         
         // Offer to create or connect to a GK repository with premium features teaser
         const parentDir = path.dirname(rootPath);
@@ -630,7 +624,6 @@ async function createInitialManifest(
   const legacyPath = getLegacyManifestPath(rootPath);
   if (await fs.pathExists(legacyPath)) {
     await fs.remove(legacyPath);
-    console.log("Removed legacy manifest from root");
   }
 
   // Get version from extension package.json

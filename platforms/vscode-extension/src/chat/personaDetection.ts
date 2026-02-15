@@ -178,28 +178,41 @@ export interface EasterEgg {
     label: string;
     /** Emoji indicator */
     emoji: string;
+    /** Optional accent color for avatar border (defaults to blue) */
+    accentColor?: string;
 }
 
 /** Seasonal Easter eggs — checked by month/day */
 const SEASONAL_EGGS: Array<{ month: number; day: number; egg: EasterEgg }> = [
-    { month: 1,  day: 1,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy New Year!',        emoji: '🎉' } },
-    { month: 2,  day: 14, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Valentine\'s Day!', emoji: '💝' } },
-    { month: 10, day: 31, egg: { avatarBase: 'ALEX-COMEDY',     label: 'Happy Halloween!',       emoji: '🎃' } },
-    { month: 12, day: 24, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Holidays!',        emoji: '🎄' } },
-    { month: 12, day: 25, egg: { avatarBase: 'ALEX-COOKING',    label: 'Merry Christmas!',       emoji: '🎄' } },
+    { month: 1,  day: 1,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy New Year!',        emoji: '🎉', accentColor: '#FFD700' } },
+    { month: 2,  day: 14, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Valentine\'s Day!', emoji: '💝', accentColor: '#FF69B4' } },
+    { month: 3,  day: 7,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Birthday, Fabio!', emoji: '🎂', accentColor: '#FF1493' } },
+    { month: 3,  day: 14, egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Pi Day!',          emoji: '🥧', accentColor: '#D2691E' } },
+    { month: 3,  day: 17, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy St. Patrick\'s Day!', emoji: '🍀', accentColor: '#00A86B' } },
+    // Easter is calculated dynamically (March 22 - April 25), using April 20, 2025 as placeholder
+    { month: 4,  day: 20, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Easter!',          emoji: '🐰', accentColor: '#E6B0E6' } },
+    { month: 7,  day: 4,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Independence Day!', emoji: '🎆', accentColor: '#DC143C' } },
+    { month: 10, day: 31, egg: { avatarBase: 'ALEX-COMEDY',     label: 'Happy Halloween!',       emoji: '🎃', accentColor: '#FF8C00' } },
+    { month: 11, day: 27, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Thanksgiving!',    emoji: '🦃', accentColor: '#D2691E' } },
+    { month: 12, day: 24, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Holidays!',        emoji: '🎄', accentColor: '#228B22' } },
+    { month: 12, day: 25, egg: { avatarBase: 'ALEX-COOKING',    label: 'Merry Christmas!',       emoji: '🎄', accentColor: '#228B22' } },
+    { month: 12, day: 31, egg: { avatarBase: 'ALEX-EUREKA',    label: 'New Year\'s Eve!',        emoji: '🎊', accentColor: '#FFD700' } },
 ];
 
 /** Project-name Easter eggs — regex matched against workspace folder name (case-insensitive) */
 const PROJECT_NAME_EGGS: Array<{ pattern: RegExp; egg: EasterEgg }> = [
-    { pattern: /\b(cook|recipe|chef|food|kitchen|bak(e|ing))\b/i,         egg: { avatarBase: 'ALEX-COOKING',               label: 'Cooking project!',    emoji: '🍳' } },
-    { pattern: /\b(dog|pet|puppy|animal|vet(erinary)?|cat)\b/i,           egg: { avatarBase: 'ALEX-DOG-TRAINER',            label: 'Pet project!',        emoji: '🐕' } },
-    { pattern: /\b(wine|sommelier|vineyard|brewery|beer|cocktail)\b/i,    egg: { avatarBase: 'ALEX-WINE-TASTING',           label: 'Wine country!',       emoji: '🍷' } },
-    { pattern: /\b(comedy|joke|humor|roast|funny|meme|standup)\b/i,       egg: { avatarBase: 'ALEX-COMEDY',                 label: 'Comedy mode!',        emoji: '😂' } },
-    { pattern: /\b(podcast|audio|radio|episode)\b/i,                      egg: { avatarBase: 'ALEX-PODCAST',                label: 'Podcast studio!',     emoji: '🎙️' } },
-    { pattern: /\b(invest|financ|trading|stock|portfolio|crypto)\b/i,     egg: { avatarBase: 'ALEX-INVESTMENT',              label: 'Finance mode!',       emoji: '📈' } },
-    { pattern: /\b(legal|patent|copyright|trademark|compliance)\b/i,      egg: { avatarBase: 'ALEX-INTELLECTUAL-PROPERTY',   label: 'Legal eagle!',        emoji: '⚖️' } },
-    { pattern: /\b(survey|questionnaire|poll|census)\b/i,                 egg: { avatarBase: 'ALEX-SURVEY-DESIGN',           label: 'Survey time!',        emoji: '📋' } },
-    { pattern: /\b(mentor|onboard|coach|tutor)\b/i,                       egg: { avatarBase: 'ALEX-MENTORING',               label: 'Mentor mode!',        emoji: '🧑‍🏫' } },
+    { pattern: /\b(cook|recipe|chef|food|kitchen|bak(e|ing))\b/i,         egg: { avatarBase: 'ALEX-COOKING',               label: 'Cooking project!',    emoji: '🍳', accentColor: '#FF6347' } },
+    { pattern: /\b(dog|pet|puppy|animal|vet(erinary)?|cat)\b/i,           egg: { avatarBase: 'ALEX-DOG-TRAINER',            label: 'Pet project!',        emoji: '🐕', accentColor: '#8B4513' } },
+    { pattern: /\b(wine|sommelier|vineyard|brewery|beer|cocktail)\b/i,    egg: { avatarBase: 'ALEX-WINE-TASTING',           label: 'Wine country!',       emoji: '🍷', accentColor: '#722F37' } },
+    { pattern: /\b(comedy|joke|humor|roast|funny|meme|standup)\b/i,       egg: { avatarBase: 'ALEX-COMEDY',                 label: 'Comedy mode!',        emoji: '😂', accentColor: '#FFD700' } },
+    { pattern: /\b(podcast|audio|radio|episode)\b/i,                      egg: { avatarBase: 'ALEX-PODCAST',                label: 'Podcast studio!',     emoji: '🎙️', accentColor: '#FF4500' } },
+    { pattern: /\b(invest|financ|trading|stock|portfolio|crypto)\b/i,     egg: { avatarBase: 'ALEX-INVESTMENT',              label: 'Finance mode!',       emoji: '📈', accentColor: '#228B22' } },
+    { pattern: /\b(legal|patent|copyright|trademark|compliance)\b/i,      egg: { avatarBase: 'ALEX-INTELLECTUAL-PROPERTY',   label: 'Legal eagle!',        emoji: '⚖️', accentColor: '#2F4F4F' } },
+    { pattern: /\b(survey|questionnaire|poll|census)\b/i,                 egg: { avatarBase: 'ALEX-SURVEY-DESIGN',           label: 'Survey time!',        emoji: '📋', accentColor: '#4169E1' } },
+    { pattern: /\b(mentor|onboard|coach|tutor)\b/i,                       egg: { avatarBase: 'ALEX-MENTORING',               label: 'Mentor mode!',        emoji: '🧑‍🏫', accentColor: '#FF8C00' } },
+    // Milestone/Achievement patterns
+    { pattern: /\b(milestone|achievement|release|launch|v?1\.0|shipped)\b/i, egg: { avatarBase: 'ALEX-EUREKA',               label: 'Milestone achieved!', emoji: '🏆', accentColor: '#FFD700' } },
+    { pattern: /\b(celebrate|celebration|success|victory|win)\b/i,        egg: { avatarBase: 'ALEX-EUREKA',                 label: 'Celebrating!',        emoji: '🎉', accentColor: '#FF69B4' } },
 ];
 
 /**
@@ -232,43 +245,10 @@ export function getEasterEggOverride(workspaceFolderName?: string, now: Date = n
 }
 
 /**
- * Persona-to-P5/P7 slot mappings.
- * P6 comes from persona.skill (the identity skill). P5 = primary SUPPORT skill (must differ from P6). P7 = complementary.
- * Personas not listed default to testing-strategies (P5) + scope-management (P7).
- *
- * IMPORTANT: P5 must NEVER equal persona.skill — that would waste a working memory slot.
- * P5 is the main auxiliary skill; P6 is the persona identity skill; P7 is complementary.
+ * NOTE: P5-P7 slot architecture deprecated in v5.7.x.
+ * Persona detection now updates Active Context persona field only.
+ * Focus Trifectas are managed independently via ActiveContextManager.
  */
-export const PERSONA_SLOT_MAPPINGS: Record<string, { p5: string; p7: string }> = {
-    'developer':           { p5: 'testing-strategies',         p7: 'git-workflow' },
-    'academic':            { p5: 'deep-thinking',              p7: 'creative-writing' },
-    'researcher':          { p5: 'deep-thinking',              p7: 'api-documentation' },
-    'technical-writer':    { p5: 'markdown-mermaid',           p7: 'code-review' },
-    'architect':           { p5: 'code-review',                p7: 'deep-thinking' },
-    'data-engineer':       { p5: 'code-review',                p7: 'deep-thinking' },
-    'devops':              { p5: 'git-workflow',               p7: 'code-review' },
-    'content-creator':     { p5: 'markdown-mermaid',           p7: 'gamma-presentations' },
-    'fiction-writer':      { p5: 'deep-thinking',              p7: 'scope-management' },
-    'game-developer':      { p5: 'creative-writing',           p7: 'code-review' },
-    'project-manager':     { p5: 'scope-management',           p7: 'deep-thinking' },
-    'security':            { p5: 'code-review',                p7: 'deep-thinking' },
-    'student':             { p5: 'deep-thinking',              p7: 'code-review' },
-    'job-seeker':          { p5: 'code-review',                p7: 'scope-management' },
-    'presenter':           { p5: 'creative-writing',           p7: 'slide-design' },
-    'power-user':          { p5: 'code-review',                p7: 'scope-management' },
-    // v5.7.1 — 11 new personas from marketing plan
-    'cognitive-scientist': { p5: 'deep-thinking',              p7: 'code-review' },
-    'oss-contributor':     { p5: 'git-workflow',               p7: 'code-review' },
-    'grant-writer':        { p5: 'deep-thinking',              p7: 'creative-writing' },
-    'copywriter':          { p5: 'creative-writing',           p7: 'scope-management' },
-    'business-analyst':    { p5: 'deep-thinking',              p7: 'scope-management' },
-    'sre':                 { p5: 'code-review',                p7: 'deep-thinking' },
-    'product-manager':     { p5: 'scope-management',           p7: 'deep-thinking' },
-    'bi-analyst':          { p5: 'deep-thinking',              p7: 'code-review' },
-    'consultant':          { p5: 'scope-management',           p7: 'deep-thinking' },
-    'qa-engineer':         { p5: 'testing-strategies',         p7: 'code-review' },
-    'marketer':            { p5: 'creative-writing',           p7: 'scope-management' },
-};
 
 /**
  * Build a Persona object from signals, auto-deriving keywords/techStack/projectPatterns
@@ -775,7 +755,7 @@ async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 's
             };
         }
     } catch (err) {
-        console.debug('[Alex] Focus session state not available:', err);
+        // Ignore - not all projects have focus sessions
     }
     return null;
 }
@@ -808,7 +788,7 @@ async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDe
             }
         }
     } catch (err) {
-        console.debug('[Alex] Session goals not available:', err);
+        // Ignore - not all projects have goals
     }
     return null;
 }
@@ -857,7 +837,7 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
             }
         }
     } catch (err) {
-        console.debug('[Alex] Roadmap not available:', err);
+        // Ignore - not all projects have roadmaps
     }
     return null;
 }
@@ -890,7 +870,7 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
             }
         }
     } catch (err) {
-        console.debug('[Alex] Project learning goals not available:', err);
+        // Ignore - not all projects have learning goals
     }
     return null;
 }
@@ -1363,10 +1343,9 @@ export async function detectAndUpdateProjectPersona(
         const llmResult = await detectPersonaWithLLM(workspaceRoot, detectedTech);
         if (llmResult) {
             personaResult = llmResult;
-            console.log('[Alex] Persona detected via LLM analysis');
         }
     } catch (err) {
-        console.log('[Alex] LLM persona detection unavailable, using heuristics');
+        // Fall back to heuristics if LLM unavailable
     }
     
     // Fall back to heuristic-based detection
@@ -1411,20 +1390,15 @@ export async function detectAndUpdateProjectPersona(
         console.warn('[Alex] Failed to update user profile with persona:', err);
     }
     
-    // Update Active Context with detected persona and focus trifectas
+    // Update Active Context with detected persona
     // Skip during initialization/upgrade — context should remain as defaults until first chat session
+    // Focus Trifectas are NOT auto-assigned here — they're managed independently
     if (shouldUpdateSlots) {
         try {
-            const { updatePersona, updateFocusTrifectas } = await import('../shared/activeContextManager');
+            const { updatePersona } = await import('../shared/activeContextManager');
             await updatePersona(workspaceRoot, personaResult.persona.name, personaResult.confidence);
-
-            // Map persona skills to focus trifectas
-            const mapping = PERSONA_SLOT_MAPPINGS[personaResult.persona.id] ?? { p5: 'code-review', p7: 'scope-management' };
-            const p5Skill = mapping.p5 === personaResult.persona.skill ? 'deep-thinking' : mapping.p5;
-            const trifectas = [personaResult.persona.skill, p5Skill, mapping.p7];
-            await updateFocusTrifectas(workspaceRoot, trifectas);
         } catch (err) {
-            console.warn('[Alex] Failed to update Active Context:', err);
+            console.warn('[Alex] Failed to update Active Context persona:', err);
         }
     }
     
@@ -1515,7 +1489,6 @@ async function detectPersonaWithLLM(
     if (!model) {
         const allModels = await vscode.lm.selectChatModels();
         if (!allModels || allModels.length === 0) {
-            console.debug('[Alex] No LLM models available for persona detection');
             return null;
         }
         model = allModels[0];
@@ -1622,114 +1595,21 @@ Respond with ONLY the JSON block, no other text.`;
 }
 
 /**
- * Update P5, P6, and P7 working memory slots in copilot-instructions.md.
- * P6 comes from the persona's primary skill. P5/P7 come from PERSONA_SLOT_MAPPINGS.
+ * DEPRECATED: P5-P7 slot architecture removed in v5.7.x.
+ * Use ActiveContextManager.updatePersona() instead.
+ * Focus Trifectas are managed independently, not tied to persona detection.
  */
 export async function updateWorkingMemorySlots(
     workspaceRoot: string,
     persona: Persona
 ): Promise<boolean> {
-    const instructionsPath = path.join(workspaceRoot, '.github', 'copilot-instructions.md');
-
-    if (!(await fs.pathExists(instructionsPath))) {
-        return false;
-    }
-
+    console.warn('[Alex] updateWorkingMemorySlots() is deprecated. Use ActiveContextManager.updatePersona() instead.');
     try {
-        let content = await fs.readFile(instructionsPath, 'utf-8');
-        const mapping = PERSONA_SLOT_MAPPINGS[persona.id] ?? { p5: 'code-review', p7: 'scope-management' };
-
-        // Deduplication guard: if P5 would equal P6, fall back to a generic support skill
-        const p5Skill = mapping.p5 === persona.skill ? 'deep-thinking' : mapping.p5;
-
-        const slots: Array<{ label: string; skillId: string }> = [
-            { label: 'P5', skillId: p5Skill },
-            { label: 'P6', skillId: persona.skill },
-            { label: 'P7', skillId: mapping.p7 },
-        ];
-
-        for (const slot of slots) {
-            const pattern = new RegExp(
-                `(\\| \\*\\*${slot.label}\\*\\* \\|)\\s*[^\\|]+\\s*(\\| Domain \\|)\\s*[^\\|]+\\s*\\|`
-            );
-            if (pattern.test(content)) {
-                const desc = getSkillDescription(slot.skillId);
-                content = content.replace(
-                    pattern,
-                    `$1 ${slot.skillId} $2 ${desc} (${persona.name}) |`
-                );
-            }
-        }
-
-        await fs.writeFile(instructionsPath, content, 'utf-8');
-        console.log(`[Alex] Updated P5-P7 for ${persona.name}: ${mapping.p5} / ${persona.skill} / ${mapping.p7}`);
+        const { updatePersona } = await import('../shared/activeContextManager');
+        await updatePersona(workspaceRoot, persona.name, 0.85);
         return true;
     } catch (err) {
-        console.warn('[Alex] Failed to update P5-P7:', err);
+        console.warn('[Alex] Failed to update persona via ActiveContextManager:', err);
         return false;
     }
-}
-
-/**
- * Legacy wrapper — updates only P6. Kept for backward compatibility.
- * @deprecated Use updateWorkingMemorySlots() for full P5-P7 assignment.
- */
-export async function updateWorkingMemoryP6(
-    workspaceRoot: string,
-    skillId: string,
-    personaName: string
-): Promise<boolean> {
-    const instructionsPath = path.join(workspaceRoot, '.github', 'copilot-instructions.md');
-
-    if (!(await fs.pathExists(instructionsPath))) {
-        return false;
-    }
-
-    try {
-        let content = await fs.readFile(instructionsPath, 'utf-8');
-        const p6Pattern = /(\| \*\*P6\*\* \|)\s*[^\|]+\s*(\| Domain \|)\s*[^\|]+\s*\|/;
-
-        if (p6Pattern.test(content)) {
-            const skillDescription = getSkillDescription(skillId);
-            content = content.replace(
-                p6Pattern,
-                `$1 ${skillId} $2 ${skillDescription} (${personaName}) |`
-            );
-            await fs.writeFile(instructionsPath, content, 'utf-8');
-            console.log(`[Alex] Updated P6 to: ${skillId} for ${personaName}`);
-            return true;
-        }
-        return false;
-    } catch (err) {
-        console.warn('[Alex] Failed to update P6:', err);
-        return false;
-    }
-}
-
-/**
- * Get a brief description for a skill ID
- */
-function getSkillDescription(skillId: string): string {
-    const descriptions: Record<string, string> = {
-        'code-review': 'Code review, testing, best practices',
-        'creative-writing': 'Fiction, narrative, story structure',
-        'research-project-scaffold': 'Research methodology, literature review',
-        'api-documentation': 'Technical docs, API reference',
-        'microsoft-fabric': 'Data pipelines, medallion architecture',
-        'gamma-presentations': 'Slides, presentations, decks',
-        'project-management': 'Planning, sprints, roadmaps',
-        'infrastructure-as-code': 'Terraform, CI/CD, deployment',
-        'architecture-health': 'System design, ADRs',
-        'learning-psychology': 'Study techniques, concept mastery',
-        'git-workflow': 'Version control, branching',
-        'brand-asset-management': 'Logos, banners, visual identity',
-        'game-design': 'Game mechanics, narrative design, puzzles',
-        'scope-management': 'Scope control, trade-offs, prioritization',
-        'deep-thinking': 'Systematic analysis, episodic reasoning',
-        'markdown-mermaid': 'Diagram generation, visual documentation',
-        'slide-design': 'Slide layouts, visual storytelling',
-        'incident-response': 'Threat detection, security review'
-    };
-    
-    return descriptions[skillId] || `${skillId} domain expertise`;
 }

@@ -58,7 +58,7 @@ When user requests "meditate" or cognitive optimization is needed:
 
 ### **Automatic Consolidation Triggers**
 - Working memory > 7 rules → Execute consolidation protocol
-- Domain learning complete → Consolidate domain knowledge and clear P5-P7 slots
+- Domain learning complete → Consolidate domain knowledge and update Focus Trifectas
 - Significant breakthrough insights discovered → Create permanent memory documentation
 - Cross-domain patterns identified → Establish new synaptic connections
 
@@ -87,7 +87,7 @@ When user requests "meditate" or cognitive optimization is needed:
 ### **Memory Consolidation Process**
 - Strengthen important connection pathways through deliberate reflection and analysis
 - Transfer key learnings from working memory to long-term storage systems
-- Optimize cognitive load by clearing completed domain priorities (P5-P7 slots)
+- Optimize cognitive load by updating Active Context Focus Trifectas for current priorities
 - Update cognitive architecture with session insights and breakthrough discoveries
 
 ## 🕸️ **Phase 3: Synaptic Connection Establishment**

@@ -232,7 +232,6 @@ export async function updateActiveContext(
             if (updates.focusTrifectas !== undefined) {
                 const isMaster = await isMasterWorkspace(workspaceRoot);
                 if (isMaster) {
-                    console.log('[ActiveContext] Skipping Focus Trifectas update on Master Alex workspace');
                     delete updates.focusTrifectas;
                 }
             }
@@ -248,14 +247,11 @@ export async function updateActiveContext(
             }
 
             if (changed.length === 0) {
-                console.log(`[ActiveContext] No changes needed (source: ${source})`);
                 return false;
             }
 
             // Rebuild and write
             const newSection = rebuildSection(ctx);
-            const newContent = parts.before + newSection + parts.after;
-            await fs.writeFile(filePath, newContent, 'utf-8');
 
             console.log(`[ActiveContext] Updated by ${source}: ${changed.join(', ')}`);
             return true;
@@ -309,9 +305,11 @@ export async function updateObjective(
 
 /**
  * Update the Focus Trifectas field.
- * Called by persona detection to set persona-appropriate trifectas.
+ * Focus Trifectas = 3 skills for current work context (changes per-session).
  * 
  * Blocked on Master Alex workspace (Focus Trifectas are manually curated there).
+ * 
+ * NOTE: NOT auto-called by persona detection — trifectas managed independently from persona.
  * 
  * @param trifectas - Array of trifecta IDs (e.g. ['code-review', 'testing-strategies'])
  */

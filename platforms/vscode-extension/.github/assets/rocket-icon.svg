@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <defs>
+    <linearGradient id="blue-rocket" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+  </defs>
+  <!-- Rocket body -->
+  <path d="M12 2 L9 9 L9 16 L15 16 L15 9 Z" fill="url(#blue-rocket)"/>
+  <!-- Nose cone -->
+  <path d="M12 2 L15 9 L9 9 Z" fill="#0078d4"/>
+  <!-- Window -->
+  <circle cx="12" cy="11" r="1.5" fill="#ffffff" opacity="0.9"/>
+  <!-- Left fin -->
+  <path d="M9 13 L6 18 L9 16 Z" fill="#005a9e"/>
+  <!-- Right fin -->
+  <path d="M15 13 L18 18 L15 16 Z" fill="#005a9e"/>
+  <!-- Flame -->
+  <path d="M10 16 L10 20 L12 18 L14 20 L14 16 Z" fill="#ff6b35" opacity="0.8"/>
+</svg>

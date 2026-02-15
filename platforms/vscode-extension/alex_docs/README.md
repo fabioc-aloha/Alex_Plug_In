@@ -41,13 +41,12 @@
 
 ### 🧬 Platform & Heirs
 
-| Document                                                               | Description                               |
-| ---------------------------------------------------------------------- | ----------------------------------------- |
-| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md)  | Evolution model and protection system     |
-| [VS Code Heir](./platforms/VSCODE-HEIR.md)                             | Primary VS Code extension heir            |
-| [Project Structure](./guides/PROJECT-STRUCTURE.md)                     | `.github/` folder files and functions     |
-| [Enterprise Settings](./guides/ENTERPRISE-SETTINGS.md)                 | Configuration for team and enterprise use |
-| [Microsoft Graph Integration](./guides/MICROSOFT-GRAPH-INTEGRATION.md) | Calendar, Mail, Presence, People API      |
+| Document                                                              | Description                               |
+| --------------------------------------------------------------------- | ----------------------------------------- |
+| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md) | Evolution model and protection system     |
+| [VS Code Heir](./platforms/VSCODE-HEIR.md)                            | Primary VS Code extension heir            |
+| [Project Structure](./guides/PROJECT-STRUCTURE.md)                    | `.github/` folder files and functions     |
+| [Enterprise Settings](./guides/ENTERPRISE-SETTINGS.md)                | Configuration for team and enterprise use |
 
 ### 🛡️ Operations
 

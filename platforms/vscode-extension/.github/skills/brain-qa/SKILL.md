@@ -158,10 +158,6 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | Incomplete synapse path  | Use full path: `.github/skills/name/SKILL.md` not `name`  |
 | Missing $schema property | Add `"$schema": "../SYNAPSE-SCHEMA.json"` to synapses.json |
 | Master-heir ref mismatch | Remove master-only files (ROADMAP-UNIFIED.md) from heir    |
-| Synapse references to master-only files | Enhance sync script to filter both skills AND files (dual target detection) |
-| Trifecta count includes master-only skills | Add transformation rule to adjust heir counts (9→8, remove heir-curation) |
-
-**Leakage Prevention Pattern (2026-02-14)**: When brain-qa detects master-only content in heir, the fix isn't just manual cleanup — enhance `sync-architecture.js` to prevent re-contamination. Add file paths to `masterOnlyFiles` array and create transformation rules in `applyHeirTransformations()`.
 
 ## Iterative Validation Workflow
 
