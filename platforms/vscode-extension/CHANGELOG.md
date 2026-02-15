@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Dynamic chat avatars** — Chat participant icon now changes based on detected persona (27 persona→avatar mappings)
+- **Static chat participant icon** — @alex chat uses consistent blue rocket icon for simplicity (dynamic persona avatars moved to backlog)
 - **Persona-specific rocket banner** — "Take Your **[NOUN]** to New Heights" banner updates based on persona (CODE/THESIS/RESEARCH/etc.)
 - **Circular persona avatar** — Large 72px avatar in welcome panel with persona-appropriate image
 - **Avatar logo overlay** — Small Alex rocket logo on persona avatars for brand consistency

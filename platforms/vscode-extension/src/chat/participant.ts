@@ -2290,37 +2290,43 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
 };
 
 /**
- * Module-level reference to the chat participant for dynamic icon updates.
+ * Module-level reference to the chat participant.
+ * Dynamic avatar functionality moved to backlog — using static rocket icon for simplicity.
  */
 let _alexParticipant: vscode.ChatParticipant | null = null;
 let _extensionUri: vscode.Uri | null = null;
 
 /**
  * Update the @alex chat participant icon to match the detected persona.
- * Falls back to the default Alex-21 avatar if persona unknown.
- * Uses WebP with PNG fallback via URI — VS Code resolves the file.
+ * BACKLOG: Dynamic avatar feature deferred. Keeping static rocket icon.
+ * This function is preserved for future enhancement but currently unused.
  */
 export function updateChatAvatar(personaId?: string): void {
-    if (!_alexParticipant || !_extensionUri) { return; }
-    const avatarBase = personaId ? getAvatarForPersona(personaId) : DEFAULT_AVATAR;
-    // Prefer WebP; VS Code resolves the URI to the actual file
-    _alexParticipant.iconPath = vscode.Uri.joinPath(_extensionUri, 'assets', 'avatars', `${avatarBase}.webp`);
+    // BACKLOG: Dynamic persona avatar feature deferred
+    // Currently using static rocket icon (set in registerChatParticipant)
+    return;
+    
+    // Original implementation preserved for future reference:
+    // if (!_alexParticipant || !_extensionUri) { return; }
+    // const avatarBase = personaId ? getAvatarForPersona(personaId) : DEFAULT_AVATAR;
+    // _alexParticipant.iconPath = vscode.Uri.joinPath(_extensionUri, 'assets', 'avatars', `${avatarBase}.webp`);
 }
 
 /**
- * Register the Alex chat participant
+ * Register the Alex chat participant with static rocket icon
  */
 export function registerChatParticipant(context: vscode.ExtensionContext): vscode.ChatParticipant {
     const alex = vscode.chat.createChatParticipant('alex.cognitive', alexChatHandler);
     
-    // Store references for dynamic icon updates
+    // Store references (preserved for potential future dynamic avatar feature)
     _alexParticipant = alex;
     _extensionUri = context.extensionUri;
     
-    // Register avatar updater with the bridge so welcomeView can call it without importing participant
+    // Register avatar updater with the bridge (function preserved but unused)
     registerAvatarUpdater(updateChatAvatar);
     
-    alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'icon.png');
+    // Static rocket icon — simple and consistent
+    alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'rocket-icon.png');
     alex.followupProvider = alexFollowupProvider;
     
     // Handle feedback for telemetry

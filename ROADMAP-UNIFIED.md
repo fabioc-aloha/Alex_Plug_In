@@ -232,7 +232,6 @@ Full codebase audit performed across code, heir sync, muscles, scripts, and arch
 | Welcome panel avatar         | Heir  |   3h   |   High   |   ✅    | Show Alex's face in welcome sidebar (age progression)         |
 | Persona→avatar mapping       | Heir  |   2h   |   High   |   ✅    | PersonaDetection returns avatarFile per persona               |
 | UI/UX regression sweep       | Heir  |   3h   |   High   |   📋    | Test all panels/views/commands after recent changes           |
-| Chat avatar dynamic          | Heir  |   2h   |  Medium  |   ✅    | updateChatAvatar() sets iconPath per persona dynamically      |
 | Rocket tagline banner        | Heir  |   2h   |  Medium  |   ✅    | Gradient bar with persona-specific bannerNoun, clickable      |
 | Self-actualization reward    | Heir  |   1h   |   Low    |   ✅    | AGE_TIERS (9 levels), maturity card in session record         |
 | Easter eggs                  | Heir  |   2h   |   Low    |   ✅    | Seasonal + project-name surprise avatars (9 triggers)         |
@@ -530,6 +529,7 @@ Items to pull from when capacity frees up:
 | Task                           | Owner  | Effort | Priority | Description                                                                                                      |
 | ------------------------------ | :----: | :----: | :------: | ---------------------------------------------------------------------------------------------------------------- |
 | Microsoft Graph Integration    |  Heir  |   1w   |   High   | Calendar, Mail, Presence, People — removed v5.7.1 (non-functional). Re-implement when auth flow works end-to-end |
+| Chat Avatar Dynamic            |  Heir  |   2h   |   Low    | Participant icon changes per persona — deferred in favor of static rocket icon for simplicity                    |
 | Foundry Voice Alex (Realtime)  |  Heir  |   1w   |  Medium  | Speech-to-speech via Realtime API WebSocket                                                                      |
 | Hosted Agent Container Deploy  |  Heir  |   3d   |  Medium  | Containerized Alex on managed infrastructure                                                                     |
 | Foundry → M365 Backend Unify   |  Heir  |   1w   |  Medium  | M365 heir routes through Foundry Agent Service                                                                   |
