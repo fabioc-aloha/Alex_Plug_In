@@ -1,7 +1,9 @@
 {
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
   "skillId": "vscode-extension-patterns",
-  "version": "1.1.0",
-  "lastValidated": "2026-02-10",
+  "version": "1.4.0",
+  "lastValidated": "2026-02-15",
   "inheritance": "heir:vscode",
   "connections": [
     {
@@ -21,6 +23,18 @@
       "type": "extends",
       "strength": 0.75,
       "reason": "Enterprise patterns for Graph, Azure AD auth"
+    },
+    {
+      "target": "alex_docs/guides/VSCODE-CHAT-SETTINGS-GUIDE.md",
+      "type": "documents",
+      "strength": 0.90,
+      "reason": "Comprehensive settings management pattern exemplar (47+ settings documented)"
+    },
+    {
+      "target": "platforms/vscode-extension/src/commands/setupEnvironment.ts",
+      "type": "implements",
+      "strength": 0.95,
+      "reason": "Tiered settings application with Essential/Recommended/Auto-Approval categories"
     }
   ],
   "activationPatterns": [
@@ -28,11 +42,16 @@
     "webview implementation",
     "publishing extension",
     "settings configuration",
+    "comprehensive settings management",
+    "documentation-first approach",
+    "tiered settings categories",
     "auto-detection features",
     "SecretStorage token migration",
     "CSP Content-Security-Policy",
     "telemetry opt-out compliance",
-    "onDidChangeConfiguration listener"
+    "onDidChangeConfiguration listener",
+    "VS Code 1.109+ chat settings",
+    "initialize/upgrade automation"
   ],
   "triggers": [
     "extension",
@@ -44,7 +63,10 @@
     "contribution point",
     "SecretStorage",
     "CSP",
-    "telemetry"
+    "telemetry",
+    "settings management",
+    "documentation pattern",
+    "PowerShell automation"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

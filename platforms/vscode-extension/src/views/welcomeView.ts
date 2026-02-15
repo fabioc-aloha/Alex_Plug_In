@@ -1914,9 +1914,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <div class="feature-category">
                         <div class="feature-category-title">⚙️ Environment Setup</div>
                         <ul class="feature-list">
-                            <li><strong>Essential Settings</strong> - instruction/prompt file locations, agent mode, skill loading</li>
-                            <li><strong>Recommended Settings</strong> - thinking tool, agent requests, MCP gallery, Copilot Memory, hooks</li>
-                            <li><strong>Extended Thinking</strong> - Opus 4.5/4.6 deep reasoning for meditation/learning</li>
+                            <li><strong>Essential Settings</strong> (7) - instruction/prompt file locations, agent mode, skill loading</li>
+                            <li><strong>Recommended Settings</strong> (24) - thinking tool, memory, subagents, MCP gallery, request queueing, UI</li>
+                            <li><strong>Auto-Approval Settings</strong> (5) - auto-run tools, file operations, terminal automation</li>
+                            <li><strong>Extended Thinking</strong> (2) - Opus 4.5/4.6 deep reasoning (16K token budget)</li>
                             <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt Focus Trifectas (GK premium)</li>
                         </ul>
                     </div>

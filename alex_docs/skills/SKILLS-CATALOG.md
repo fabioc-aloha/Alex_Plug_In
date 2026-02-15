@@ -18,7 +18,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | Heir:m365   | 2     |
 
 > 🎉 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
-> 
+>
 > 🆕 **+6 domain skills** (2026-02-12): bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling
 >
 > 🆕 **+14 skills cataloged** (2026-02-12): azure-deployment-operations, book-publishing, brand-asset-management, cognitive-symbiosis, distribution-security, doc-hygiene, documentation-quality-assurance, dream-state, foundry-agent-platform, heir-sync-management, muscle-memory-recognition, persona-detection, prompt-activation, research-first-development

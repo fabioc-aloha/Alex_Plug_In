@@ -92,7 +92,7 @@ document.addEventListener('click', (e) => {
 
 ## Safe Configuration Pattern
 
-**Tiered settings**: Essential (🔴) → Recommended (🟡) → Nice-to-Have (🟢)
+**Tiered settings**: Essential (🔴) → Recommended (🟡) → Auto-Approval (🟠) → Extended Thinking (🧠) → Enterprise (🔵)
 
 **Safety rules**:
 
@@ -100,6 +100,7 @@ document.addEventListener('click', (e) => {
 - Check `config.inspect(key)?.globalValue` before applying
 - Preview JSON before changes
 - User chooses categories
+- Preserve higher user values when applying recommendations
 
 ```typescript
 async function applySettings(settings: Record<string, unknown>) {
@@ -111,6 +112,82 @@ async function applySettings(settings: Record<string, unknown>) {
     }
 }
 ```
+
+## Comprehensive Settings Management Pattern
+
+**Pattern**: Documentation-first approach for complex settings ecosystems (VS Code 1.109+ chat settings).
+
+**Steps**:
+
+1. **Research Phase** — Comprehensive discovery
+   - Grep search for all related settings in codebase
+   - Read MS documentation for official settings
+   - Identify experimental/unstable features
+   - Document current user configuration
+
+2. **Documentation Phase** — Create reference materials before implementation
+   - **GUIDE**: Comprehensive reference (all settings, categories, use cases, warnings)
+   - **SUMMARY**: Current state snapshot (what user has, what's missing, recommendations)
+   - **APPLIED**: Change log document (what was applied, why, how to rollback)
+   - **JSON Template**: Copy-paste ready configuration file
+
+3. **Implementation Phase** — Safe automated application
+   - Create PowerShell/shell script for automation (platform-specific)
+   - **Always backup** before modifications (`settings.json.backup-{timestamp}`)
+   - Compare new vs existing, report changes (new, updated, skipped, preserved)
+   - **Preserve higher values** (user has 150, recommending 100? Keep 150)
+   - **Exclude unstable features** explicitly documented
+
+4. **Extension Integration** — Make it permanent
+   - Update `setupEnvironment.ts` ESSENTIAL_SETTINGS, RECOMMENDED_SETTINGS, etc.
+   - Add new categories if pattern discovered (e.g., AUTO_APPROVAL_SETTINGS)
+   - Integrate into Initialize/Upgrade commands (`offerEnvironmentSetup()`)
+   - Update Welcome sidebar with accurate counts
+
+5. **Validation Phase**
+   - Test script execution (fix syntax errors iteratively)
+   - Verify settings applied (check VS Code settings.json)
+   - Document excluded settings with reasons (hooks not stable, platform-specific)
+   - Commit documentation files to git
+
+**Key insights from Feb 2026 implementation**:
+
+- VS Code 1.109+ has 47+ chat-related settings across 6 categories
+- Hooks (`chat.hooks.enabled`) marked experimental but not stable yet
+- Auto-approval settings reduce friction (5 settings: autoRun, fileSystem.autoApprove, terminal.*)
+- Initialize/Upgrade should apply Essential + Recommended + Auto-Approval (36 total)
+- PowerShell inline commands unreliable — use `.ps1` file for complex scripts
+- Settings categories prevent overwhelming users (show 5 categories vs 47 individual settings)
+
+**When to use this pattern**:
+
+- Complex settings ecosystems (10+ related settings)
+- Rapidly evolving features (experimental → stable transitions)
+- User education needed (settings have non-obvious interdependencies)
+- Safety-critical configuration (wrong settings break functionality)
+
+**Template structure**:
+
+```
+docs/guides/
+├── FEATURE-SETTINGS-GUIDE.md         # Comprehensive reference
+├── FEATURE-SETTINGS-SUMMARY.md       # Current state snapshot  
+└── FEATURE-SETTINGS-APPLIED.md       # Change log (gitignore if sensitive)
+
+.vscode/
+└── recommended-feature-settings.jsonc # Template (gitignore)
+
+src/commands/
+└── setupEnvironment.ts                # Settings constants + apply logic
+```
+
+**Benefits**:
+
+- Users understand full capability before committing
+- Documentation serves as reference post-application
+- Safe rollback via timestamped backups
+- Extension automatically applies for new users
+- Audit trail of what was applied and why
 
 ## Auto-Detection with Confidence
 

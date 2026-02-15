@@ -42,7 +42,7 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   // Thinking tool for agents - experimental but documented
   "github.copilot.chat.agent.thinkingTool": true,
   // Max agent requests - verified in docs (default 25)
-  "chat.agent.maxRequests": 50,
+  "chat.agent.maxRequests": 100,
   // Participant detection - verified in docs
   "chat.detectParticipant.enabled": true,
   // Locale override - verified in docs
@@ -57,14 +57,58 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "chat.mcp.gallery.enabled": true,
   // Follow-up suggestions - helps discover Alex capabilities
   "github.copilot.chat.followUps": "always",
-  // Agent hooks - lifecycle automation at PreToolUse, PostToolUse, etc.
-  "chat.hooks.enabled": true,
+  // Agent hooks - lifecycle automation
+  // NOTE: Disabled - not stable in VS Code 1.109 as of Feb 2026
+  // "chat.hooks.enabled": true,
   // Copilot Memory - cross-session memory storage (persists between chats)
   "github.copilot.chat.copilotMemory.enabled": true,
+  // Memory tool - access to memory tool in chat
+  "github.copilot.chat.tools.memory.enabled": true,
   // Request queueing - queue messages for sequential processing
   "chat.requestQueuing.enabled": true,
+  // Auto-queue by default
+  "chat.requestQueuing.defaultAction": "queue",
   // Search subagent - enables web search capability in agent mode
   "github.copilot.chat.searchSubagent.enabled": true,
+  // Custom agents in subagents - flexibility for specialized agents
+  "chat.customAgentInSubagent.enabled": true,
+  // Unified agents bar - better UI
+  "chat.unifiedAgentsBar.enabled": true,
+  // Progress badge - visibility into ongoing operations
+  "chat.viewProgressBadge.enabled": true,
+  // Session orientation - stacked layout
+  "chat.viewSessions.orientation": "stacked",
+  // Show file changes in checkpoints - change tracking
+  "chat.checkpoints.showFileChanges": true,
+  // Restore last panel session - continuity
+  "chat.restoreLastPanelSession": true,
+  // MCP auto-start - start new and outdated servers automatically
+  "chat.mcp.autostart": "newAndOutdated",
+  // Code block progress - hide for cleaner output
+  "chat.agent.codeBlockProgress": false,
+  // NuGet assistance - for .NET projects
+  "chat.mcp.assisted.nuget.enabled": true,
+  // Include referenced instructions - better context awareness
+  "chat.includeReferencedInstructions": true,
+  // Use Agent Skills standard
+  "chat.useAgentSkills": true,
+};
+
+/**
+ * Auto-approval settings for better workflow efficiency
+ * These reduce friction for common operations while maintaining safety
+ */
+const AUTO_APPROVAL_SETTINGS: Record<string, unknown> = {
+  // Auto-run tools - reduces manual approval prompts
+  "chat.tools.autoRun": true,
+  // Auto-approve file system operations
+  "chat.tools.fileSystem.autoApprove": true,
+  // Use custom auto-approve rules only (ignore defaults)
+  "chat.tools.terminal.ignoreDefaultAutoApproveRules": true,
+  // Auto-reply to terminal prompts
+  "chat.tools.terminal.autoReplyToPrompts": true,
+  // Allow shell history for terminal commands
+  "chat.tools.terminal.preventShellHistory": false,
 };
 
 /**
@@ -109,6 +153,12 @@ const SETTING_CATEGORIES: SettingCategory[] = [
     description: "Improves the Alex experience",
     settings: RECOMMENDED_SETTINGS,
     icon: "🟡",
+  },
+  {
+    name: "Auto-Approval",
+    description: "Auto-run tools and file operations for better workflow",
+    settings: AUTO_APPROVAL_SETTINGS,
+    icon: "🟠",
   },
   {
     name: "Extended Thinking",
@@ -535,16 +585,19 @@ export async function setupEnvironment(): Promise<void> {
   // Check what's already configured
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
+  const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
   const extendedThinkingExisting = getExistingSettings(EXTENDED_THINKING_SETTINGS);
   const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
 
   const essentialTotal = Object.keys(ESSENTIAL_SETTINGS).length;
   const recommendedTotal = Object.keys(RECOMMENDED_SETTINGS).length;
+  const autoApprovalTotal = Object.keys(AUTO_APPROVAL_SETTINGS).length;
   const extendedThinkingTotal = Object.keys(EXTENDED_THINKING_SETTINGS).length;
   const enterpriseTotal = Object.keys(ENTERPRISE_SETTINGS).length;
 
   const essentialNeeded = essentialTotal - essentialExisting.length;
   const recommendedNeeded = recommendedTotal - recommendedExisting.length;
+  const autoApprovalNeeded = autoApprovalTotal - autoApprovalExisting.length;
   const extendedThinkingNeeded = extendedThinkingTotal - extendedThinkingExisting.length;
   const enterpriseNeeded = enterpriseTotal - enterpriseExisting.length;
 
@@ -581,13 +634,25 @@ export async function setupEnvironment(): Promise<void> {
     picked: true,
   });
 
+  // Auto-Approval Settings - always show, pre-checked
+  const autoApprovalStatus = autoApprovalNeeded === 0 ? "✓ all configured" : `${autoApprovalNeeded} to add`;
+  items.push({
+    label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`,
+    description: autoApprovalStatus,
+    detail: SETTING_CATEGORIES[2].description,
+    category: SETTING_CATEGORIES[2],
+    needed: autoApprovalNeeded,
+    existing: autoApprovalExisting.length,
+    picked: true,
+  });
+
   // Extended Thinking Settings - show but not pre-checked
   const extendedThinkingStatus = extendedThinkingNeeded === 0 ? "✓ all configured" : `${extendedThinkingNeeded} to add`;
   items.push({
-    label: `${SETTING_CATEGORIES[2].icon} Extended Thinking`,
+    label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`,
     description: extendedThinkingStatus,
-    detail: SETTING_CATEGORIES[2].description,
-    category: SETTING_CATEGORIES[2],
+    detail: SETTING_CATEGORIES[3].description,
+    category: SETTING_CATEGORIES[3],
     needed: extendedThinkingNeeded,
     existing: extendedThinkingExisting.length,
     picked: false,
@@ -599,10 +664,10 @@ export async function setupEnvironment(): Promise<void> {
     ? "✓ enabled (uncheck to disable)" 
     : (enterpriseNeeded === 0 ? "✓ all configured" : `${enterpriseNeeded} to add`);
   items.push({
-    label: `${SETTING_CATEGORIES[3].icon} Enterprise (MS Graph)`,
+    label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`,
     description: enterpriseStatus,
-    detail: SETTING_CATEGORIES[3].description + " - enables MS Graph integration",
-    category: SETTING_CATEGORIES[3],
+    detail: SETTING_CATEGORIES[4].description + " - enables MS Graph integration",
+    category: SETTING_CATEGORIES[4],
     needed: enterpriseNeeded,
     existing: enterpriseExisting.length,
     picked: enterpriseCurrentlyEnabled, // Pre-check if already enabled
@@ -715,21 +780,30 @@ export async function setupEnvironment(): Promise<void> {
 }
 
 /**
- * Quick setup that applies essential settings with minimal prompts
+ * Quick setup that applies essential and recommended settings with minimal prompts
  * Used during initialization/upgrade flow
  */
 export async function offerEnvironmentSetup(): Promise<boolean> {
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
+  const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
+  const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
+  
   const essentialNeeded =
     Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
+  const recommendedNeeded =
+    Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
+  const autoApprovalNeeded =
+    Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
+  
+  const totalNeeded = essentialNeeded + recommendedNeeded + autoApprovalNeeded;
 
-  // If essential settings are already configured, skip
-  if (essentialNeeded === 0) {
+  // If all critical settings are already configured, skip
+  if (totalNeeded === 0) {
     return false;
   }
 
   const choice = await vscode.window.showInformationMessage(
-    `Would you like to optimize VS Code for Alex?\n\nThis adds ${essentialNeeded} essential settings for full Alex functionality.\nYour existing settings will NOT be modified.`,
+    `Would you like to optimize VS Code for Alex?\n\nThis adds ${totalNeeded} settings for full Alex functionality:\n• ${essentialNeeded} essential (file locations, agent mode)\n• ${recommendedNeeded} recommended (memory, subagents, UI)\n• ${autoApprovalNeeded} auto-approval (workflow efficiency)\n\nYour existing settings will NOT be modified.`,
     "Yes, Add Settings",
     "Show Details",
     "Skip",
@@ -740,13 +814,18 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
     await setupEnvironment();
     return true;
   } else if (choice === "Yes, Add Settings") {
-    // Quick apply essential only
-    const result = await applySettings(ESSENTIAL_SETTINGS);
+    // Quick apply essential + recommended + auto-approval
+    const criticalSettings = {
+      ...ESSENTIAL_SETTINGS,
+      ...RECOMMENDED_SETTINGS,
+      ...AUTO_APPROVAL_SETTINGS,
+    };
+    const result = await applySettings(criticalSettings);
     // Also apply markdown styles as workspace setting
     await applyMarkdownStyles();
     if (result.applied.length > 0) {
       vscode.window.showInformationMessage(
-        `✅ Added ${result.applied.length} essential settings for Alex`,
+        `✅ Added ${result.applied.length} settings for Alex (${result.applied.length - essentialNeeded} already configured)`,
       );
     }
     return true;
