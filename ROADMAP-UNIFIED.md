@@ -356,6 +356,21 @@ Graph removal + Definition of Done + Replicate MCP POC + Alex-Finch.md + Synapse
 **Effort**: ~18h | **Impact**: Visible polish — users see a stable, clean, personal Alex with multimedia AI access
 **Shipped**: 2026-02-15
 
+### v5.7.2 (✅ SHIPPED — Global Knowledge Maintenance)
+
+**Theme**: Knowledge Infrastructure, Skill Count Accuracy, Dependency Cleanup
+**Shipped**: February 15, 2026
+
+```
+Global Knowledge maintenance trifecta (skill + script + synapses) + sync-index.ps1 automation
++ Skill count corrections (120 Master → 117 VS Code Heir) + Heir inheritance math pattern
++ Dependabot removal + Index synchronization (273 entries: 32 patterns, 241 insights)
+= Systematic GK curation + accurate skill counts + clean dependency management + validated index
+```
+
+**Effort**: ~8h | **Impact**: Foundation — ensures Global Knowledge integrity and heir synchronization accuracy
+**Shipped**: 2026-02-15
+
 ### v5.8.0 (@alex P0 — Identity + Memory)
 
 ```
@@ -449,7 +464,7 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 | v5.6.0-5.6.9  | Enterprise Systems             | Feb 10-14, 2026 |
 | v5.7.0        | Structural Consistency         | Feb 14, 2026    |
 | v5.7.1        | Visual Identity + UI/UX Polish | Feb 15, 2026    |
-| **v5.7.2**    | **Development In Progress**    | **In Progress** |
+| **v5.7.2**    | **Global Knowledge Maintenance** | **Feb 15, 2026** |
 
 ---
 
