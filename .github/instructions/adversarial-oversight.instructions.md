@@ -77,6 +77,7 @@ These operations **MUST** trigger Validator agent review:
 ### Standard Pattern: Builder → Validator → Merge
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
 flowchart LR
     BUILD["Builder  creates/implements"] --> REQUEST["Request  Validation"]
     REQUEST --> VALIDATOR["Validator  reviews adversarially"]
@@ -85,6 +86,16 @@ flowchart LR
     BLOCK --> FIX["Builder  addresses issues"]
     FIX --> VALIDATOR
     APPROVE --> MERGE["Merge/Release/Promote"]
+    
+    style BUILD fill:#cce5ff,stroke:#4a90d9,color:#333
+    style REQUEST fill:#b3d9ff,stroke:#4a90d9,color:#333
+    style VALIDATOR fill:#e6d5f2,stroke:#8b6eb3,color:#333
+    style BLOCK fill:#ffd6d6,stroke:#d73a49,color:#333
+    style APPROVE fill:#c2f0d8,stroke:#4db37d,color:#333
+    style FIX fill:#cce5ff,stroke:#4a90d9,color:#333
+    style MERGE fill:#c2f0d8,stroke:#4db37d,color:#333
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
 ```
 
 ### How to Trigger Validator
@@ -269,6 +280,7 @@ Adversarial oversight succeeds when:
 ## Quick Reference: When to Invoke Validator
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
 flowchart TD
     TASK["Task or Change"] --> CRITICAL{"Critical operation?"}
     CRITICAL -->|Yes| MANDATORY["🔴 MANDATORY  Validator Review"]
@@ -285,6 +297,20 @@ flowchart TD
     BLOCKED -->|Yes| FIX["Fix Issues"]
     BLOCKED -->|No| PROCEED["Proceed with Confidence"]
     FIX --> REVIEW
+    
+    style TASK fill:#b3d9ff,stroke:#4a90d9,color:#333
+    style CRITICAL fill:#e6d5f2,stroke:#8b6eb3,color:#333
+    style HIGH fill:#e6d5f2,stroke:#8b6eb3,color:#333
+    style MANDATORY fill:#ffd6d6,stroke:#d73a49,color:#333
+    style RECOMMENDED fill:#ffe8cc,stroke:#d9822b,color:#333
+    style OPTIONAL fill:#fff8dc,stroke:#9a6700,color:#333
+    style REVIEW fill:#e6d5f2,stroke:#8b6eb3,color:#333
+    style REPORT fill:#cce5ff,stroke:#4a90d9,color:#333
+    style BLOCKED fill:#e6d5f2,stroke:#8b6eb3,color:#333
+    style FIX fill:#ffe8cc,stroke:#d9822b,color:#333
+    style PROCEED fill:#c2f0d8,stroke:#4db37d,color:#333
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
 ```
 
 ---
