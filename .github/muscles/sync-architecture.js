@@ -204,7 +204,14 @@ function syncSkills() {
 
 function cleanBrokenSynapseReferences(skippedMasterOnly) {
     if (skippedMasterOnly.length === 0) return;
-    console.log('\n🧹 Cleaning broken synapse references to master-only skills...\n');
+    console.log('\n🧹 Cleaning broken synapse references to master-only resources...\n');
+    
+    // Master-only files that shouldn't be referenced in heir
+    const masterOnlyFiles = [
+        'ROADMAP-UNIFIED.md',
+        'alex_docs/architecture/',
+        'MASTER-ALEX-PROTECTED.json',
+    ];
     
     let cleanedCount = 0;
     const heirSkillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
@@ -222,7 +229,15 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
             const original = synapse.connections.length;
             synapse.connections = synapse.connections.filter(conn => {
                 const target = conn.target || '';
-                return !skippedMasterOnly.some(removed => target.includes(removed));
+                // Filter master-only skills
+                if (skippedMasterOnly.some(removed => target.includes(removed))) {
+                    return false;
+                }
+                // Filter master-only files
+                if (masterOnlyFiles.some(file => target.includes(file))) {
+                    return false;
+                }
+                return true;
             });
             
             if (synapse.connections.length < original) {
@@ -438,6 +453,14 @@ function applyHeirTransformations() {
         content = content.replace(/^I4:.*\r?\n/m, '');
         content = content.replace(/^I7:.*\r?\n/m, '');
         if (content !== beforeImperatives) diffs.push('stripped I1-I4,I7 imperatives');
+        
+        // 5. Remove heir-curation from complete trifectas list (master-only skill)
+        const beforeTrifectas = content;
+        content = content.replace(
+            /^(Complete trifectas \()9(\): .+), heir-curation,( .+)$/m,
+            '$1' + '8' + '$2,' + '$3'
+        );
+        if (content !== beforeTrifectas) diffs.push('removed heir-curation from trifectas');
         
         if (content !== original) {
             fs.writeFileSync(copilotPath, content, 'utf8');
