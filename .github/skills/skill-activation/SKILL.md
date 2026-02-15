@@ -33,6 +33,8 @@ Search this index when processing any task request:
 | academic-paper-drafting | draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing |
 | academic-research | write thesis, literature review, cite sources, research paper, dissertation |
 | ai-agent-design | design agent, react pattern, multi-agent, tool use, agent architecture |
+| ai-character-reference-generation | generate character reference, character consistency, flux character, visual reference set, character poses |
+| ai-generated-readme-banners | generate readme banner, github banner, ideogram banner, project branding, ultra-wide banner |
 | airs-appropriate-reliance | airs survey, measure adoption, psychometric scale, utaut, ai readiness |
 | airs-integration | airs assessment, readiness assessment, reliance calibration, ai adoption |
 | alex-effort-estimation | estimate effort, how long, task duration, ai time, planning |
@@ -74,6 +76,7 @@ Search this index when processing any task request:
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling |
 | enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
 | executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
+| extension-audit-methodology | audit extension, extension quality, debug audit, dead code, performance audit |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
 | foundry-agent-platform | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform |
 | frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |

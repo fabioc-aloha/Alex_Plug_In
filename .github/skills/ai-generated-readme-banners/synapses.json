@@ -33,13 +33,6 @@
             "strength": 0.7,
             "when": "enhancing documentation with visual elements",
             "yields": "Comprehensive visual documentation approach combining banners and diagrams"
-        },
-        {
-            "target": ".github/skills/api-integration/SKILL.md",
-            "type": "supports",
-            "strength": 0.8,
-            "when": "integrating with Replicate API for Flux and Ideogram models",
-            "yields": "Rate limiting, retry logic, metadata generation, URL handling quirks"
         }
     ],
     "activationBoost": [

@@ -17,18 +17,6 @@
             "type": "requires",
             "strength": 0.9,
             "note": "Character consistency requires detailed prompt engineering"
-        },
-        {
-            "target": ".github/skills/api-integration/SKILL.md",
-            "type": "supports",
-            "strength": 0.8,
-            "note": "Replicate API integration with retry handling"
-        },
-        {
-            "target": ".github/skills/error-handling/SKILL.md",
-            "type": "supports",
-            "strength": 0.85,
-            "note": "Safety filter handling, rate limiting, exponential backoff"
         }
     ],
     "activationBoost": [
