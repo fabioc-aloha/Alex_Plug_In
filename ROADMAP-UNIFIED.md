@@ -48,7 +48,7 @@ v5.7.2 is current. Alex now has:
 | v5.6.0-9   | Enterprise Systems                 | Deep Orchestration      | ✅ Stabilized (5.6.9 final) |
 | v5.7.0     | Structural Consistency             | Purpose-Built Cognition | ✅ Shipped                  |
 | v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation       | ✅ Shipped                  |
-| **v5.7.2** | **Development In Progress**        |                         | 🔄 Current                  |
+| **v5.7.2** | **Global Knowledge Maintenance**   | **Knowledge Infrastructure** | **✅ Shipped**              |
 | v5.7.3-9   | *reserved for UI/UX fixes*         |                         |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition | 📋 Planned                  |
@@ -451,19 +451,19 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 - `ROADMAP-UNIFIED-V3.5-V5.3-COMPLETED.md` — Full history v3.5-v5.3.0
 
 **Version History Summary**:
-| Version Range | Theme                          | Completion      |
-| ------------- | ------------------------------ | --------------- |
-| v3.6.0-v3.9.0 | Dawn → Awareness               | Jan 2026        |
-| v4.0.x        | Trust (CAIR/CSR)               | Jan 2026        |
-| v4.1.0-v4.3.0 | Skills & Architecture          | Feb 2026        |
-| v5.0.x-v5.2.0 | Team Scaling & UX              | Feb 2026        |
-| v5.3.0        | Enterprise Readiness           | Feb 8, 2026     |
-| v5.3.1        | CSP Security Fix               | Feb 8, 2026     |
-| v5.4.0-v5.4.3 | Text-to-Speech & Voice         | Feb 9, 2026     |
-| v5.5.0        | Model Intelligence             | Feb 10, 2026    |
-| v5.6.0-5.6.9  | Enterprise Systems             | Feb 10-14, 2026 |
-| v5.7.0        | Structural Consistency         | Feb 14, 2026    |
-| v5.7.1        | Visual Identity + UI/UX Polish | Feb 15, 2026    |
+| Version Range | Theme                            | Completion       |
+| ------------- | -------------------------------- | ---------------- |
+| v3.6.0-v3.9.0 | Dawn → Awareness                 | Jan 2026         |
+| v4.0.x        | Trust (CAIR/CSR)                 | Jan 2026         |
+| v4.1.0-v4.3.0 | Skills & Architecture            | Feb 2026         |
+| v5.0.x-v5.2.0 | Team Scaling & UX                | Feb 2026         |
+| v5.3.0        | Enterprise Readiness             | Feb 8, 2026      |
+| v5.3.1        | CSP Security Fix                 | Feb 8, 2026      |
+| v5.4.0-v5.4.3 | Text-to-Speech & Voice           | Feb 9, 2026      |
+| v5.5.0        | Model Intelligence               | Feb 10, 2026     |
+| v5.6.0-5.6.9  | Enterprise Systems               | Feb 10-14, 2026  |
+| v5.7.0        | Structural Consistency           | Feb 14, 2026     |
+| v5.7.1        | Visual Identity + UI/UX Polish   | Feb 15, 2026     |
 | **v5.7.2**    | **Global Knowledge Maintenance** | **Feb 15, 2026** |
 
 ---
