@@ -48,7 +48,7 @@ v5.7.2 is current. Alex now has:
 | v5.6.0-9   | Enterprise Systems                 | Deep Orchestration      | ✅ Stabilized (5.6.9 final) |
 | v5.7.0     | Structural Consistency             | Purpose-Built Cognition | ✅ Shipped                  |
 | v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation       | ✅ Shipped                  |
-| **v5.7.2** | **Development In Progress**        |                         | 🔄 Current                 |
+| **v5.7.2** | **Development In Progress**        |                         | 🔄 Current                  |
 | v5.7.3-9   | *reserved for UI/UX fixes*         |                         |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition | 📋 Planned                  |
