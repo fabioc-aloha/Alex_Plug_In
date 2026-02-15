@@ -2,6 +2,8 @@
 
 > Master Alex periodically reviews global knowledge, implements for heirs when appropriate, and cleans up to maintain a curated knowledge base.
 
+**Related Skill**: [global-knowledge-maintenance](../skills/global-knowledge-maintenance/SKILL.md) — Includes automated index sync script
+
 ## Purpose
 
 Global knowledge (`~/.alex/global-knowledge/`) accumulates insights and patterns from all projects. Without curation, it becomes cluttered with:

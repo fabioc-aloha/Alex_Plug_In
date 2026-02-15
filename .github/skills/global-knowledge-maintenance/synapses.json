@@ -1,0 +1,89 @@
+{
+    "skill": "global-knowledge-maintenance",
+    "description": "Curate and maintain Global Knowledge repository — audit index integrity, convert heir contributions to insights, and archive outdated patterns",
+    "inheritance": "master-only",
+    "connections": [
+        {
+            "target": "../heir-skill-promotion/SKILL.md",
+            "type": "bidirectional",
+            "strength": "strong",
+            "when": "Heirs create skills that land in Global Knowledge first",
+            "yields": "Documented heir contributions preserved as insights"
+        },
+        {
+            "target": "../../muscles/brain-qa.ps1",
+            "type": "uses",
+            "strength": "medium",
+            "when": "Running Phase 29 to detect GK sync issues",
+            "yields": "Validation of index integrity"
+        },
+        {
+            "target": "../../instructions/global-knowledge-curation.instructions.md",
+            "type": "implements",
+            "strength": "strong",
+            "when": "Following detailed curation workflow",
+            "yields": "Systematic knowledge lifecycle management"
+        },
+        {
+            "target": "../../instructions/meditation.instructions.md",
+            "type": "triggered-by",
+            "strength": "weak",
+            "when": "Meditation surfaces curation needs",
+            "yields": "Discovery of drift or outdated knowledge"
+        },
+        {
+            "target": "../../instructions/release-management.instructions.md",
+            "type": "supports",
+            "strength": "medium",
+            "when": "Pre-release curation ensures clean Global Knowledge state",
+            "yields": "Quality gate before publication"
+        },
+        {
+            "target": "external:Alex-Global-Knowledge/scripts/sync-index.ps1",
+            "type": "uses",
+            "strength": "strong",
+            "when": "Auditing and fixing index-to-disk sync",
+            "yields": "Automated index maintenance"
+        }
+    ],
+    "triggers": [
+        {
+            "type": "scheduled",
+            "pattern": "weekly maintenance review",
+            "confidence": 0.8
+        },
+        {
+            "type": "event",
+            "pattern": "brain-qa Phase 29 detects sync issues",
+            "confidence": 1.0
+        },
+        {
+            "type": "manual",
+            "pattern": "/curatek|/audit global|/clean knowledge",
+            "confidence": 0.9
+        },
+        {
+            "type": "event",
+            "pattern": "before major release (v*.0.0)",
+            "confidence": 0.85
+        }
+    ],
+    "resources": [
+        {
+            "type": "script",
+            "path": "external:Alex-Global-Knowledge/scripts/sync-index.ps1",
+            "purpose": "Automated index synchronization with disk"
+        },
+        {
+            "type": "instruction",
+            "path": "../../instructions/global-knowledge-curation.instructions.md",
+            "purpose": "Detailed curation workflow and triage decisions"
+        }
+    ],
+    "metadata": {
+        "created": "2026-02-15",
+        "domain": "meta-cognitive repository curation",
+        "complexity": "medium",
+        "automation_level": "semi-automated"
+    }
+}
