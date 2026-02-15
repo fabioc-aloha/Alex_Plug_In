@@ -137,6 +137,59 @@ Run these validations before every release:
 | Heir synapse IDs don't resolve | Broken references from Master copy |
 | Heir `package.json` has personal name | Sanitization missed |
 
+## Leakage Prevention Patterns
+
+### Master-Only Content Categories
+
+Content that must NEVER sync to heirs falls into three categories:
+
+| Category | Examples | Filter Method |
+|----------|----------|---------------|
+| **Skills** | heir-curation, master-alex-audit | `inheritance: "master-only"` in synapses.json |
+| **Files** | ROADMAP-UNIFIED.md, alex_docs/architecture/ | Path-based filtering in sync script |
+| **Metadata** | Complete trifecta count (9 vs 8), safety imperatives I1-I4 | Content transformation rules |
+
+### Dual Filtering Strategy (2026-02-14 Fix)
+
+**Problem**: `cleanBrokenSynapseReferences()` only filtered master-only **skills**, not master-only **files**.
+
+**Solution**: Enhanced function with dual target detection:
+
+```javascript
+// Master-only skills (from inheritance metadata)
+skippedMasterOnly.some(removed => target.includes(removed))
+
+// Master-only files (hardcoded registry)
+masterOnlyFiles.some(file => target.includes(file))
+```
+
+**Master-Only Files Registry**:
+- `ROADMAP-UNIFIED.md` — Master development roadmap
+- `alex_docs/architecture/` — Architecture documentation not deployed to heirs
+- `MASTER-ALEX-PROTECTED.json` — Kill-switch marker
+
+### Content Transformation Rules
+
+Some content needs **adjustment** not **removal**:
+
+| Content | Master Value | Heir Value | Transform Rule |
+|---------|--------------|------------|----------------|
+| Complete trifectas count | 9 | 8 | Remove heir-curation from list |
+| Safety imperatives | I1-I7 | I5-I6 only | Strip I1-I4, I7 (master workspace protection) |
+| Active Context Persona | Current session | Developer (85%) | Reset to default |
+| Last Assessed | Date | never | Clear assessment timestamp |
+
+**Implementation**: `applyHeirTransformations()` in sync-architecture.js
+
+### Validation Cascade (4-Stage Quality Gate)
+
+1. **Sync**: Copy files with skill/config exclusions
+2. **Transform**: Apply heir-specific content adjustments
+3. **Validate**: PII scan, master-only file detection
+4. **Audit**: Count verification, synapse connection integrity
+
+**Fail-Fast**: Any contamination detection halts the build (exit 1).
+
 ## Heir → Master Promotion
 
 ### 6-Step Promotion Workflow

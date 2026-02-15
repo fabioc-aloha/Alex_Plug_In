@@ -155,6 +155,32 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | ASCII art warning        | Replace with Mermaid diagrams or tables                    |
 | Missing return-to-Alex   | Add handoff to main Alex agent                             |
 | Brain HTML count drift   | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
+| Incomplete synapse path  | Use full path: `.github/skills/name/SKILL.md` not `name`  |
+| Missing $schema property | Add `"$schema": "../SYNAPSE-SCHEMA.json"` to synapses.json |
+| Master-heir ref mismatch | Remove master-only files (ROADMAP-UNIFIED.md) from heir    |
+| Synapse references to master-only files | Enhance sync script to filter both skills AND files (dual target detection) |
+| Trifecta count includes master-only skills | Add transformation rule to adjust heir counts (9→8, remove heir-curation) |
+
+**Leakage Prevention Pattern (2026-02-14)**: When brain-qa detects master-only content in heir, the fix isn't just manual cleanup — enhance `sync-architecture.js` to prevent re-contamination. Add file paths to `masterOnlyFiles` array and create transformation rules in `applyHeirTransformations()`.
+
+## Iterative Validation Workflow
+
+When repairing architecture issues, use this proven pattern:
+
+```
+1. Audit → Run brain-qa phase to identify errors
+2. Fix Errors → Address primary issues (paths, references)
+3. Re-validate → Run same phase to verify fixes
+4. Fix Schema → Address structural issues ($schema, inheritance)
+5. Final Check → Run quick mode to verify all phases pass
+```
+
+**Example from 2026-02-15 session:**
+- Phase 1 failed → Fixed incomplete synapse paths → Phase 1 passed
+- Phase 6 failed → Added $schema properties → Phase 6 passed
+- Phase 7 warned about sync differences → Expected after manual edits, auto-resolves at publish
+
+**Key principle:** Iterative validation catches cascading errors before they compound. Each phase builds on previous fixes.
 
 ## Semantic Review Checklist (Manual — Not Scriptable)
 
