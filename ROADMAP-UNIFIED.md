@@ -11,7 +11,7 @@
 ### Current State
 
 v5.7.1 is current. Alex now has:
-- **116 Skills** (114 inheritable to heirs) — Comprehensive domain coverage
+- **119 Skills** (117 inheritable to heirs) — Comprehensive domain coverage
 - **v3-Identity-First Brain** — copilot-instructions.md restructured: identity → routing → safety
 - **Prompt Pipeline Research** — Full mapping of how VS Code/Copilot injects context into LLM
 - **Visual Identity** — 44 avatar images (age progression + occupation variants) at 256×256px
@@ -660,7 +660,7 @@ Before any v5.7.x patch ships to Marketplace, ALL of the following must pass.
 | Check                           | Command / Method                                | Expected Result                            |
 | ------------------------------- | ----------------------------------------------- | ------------------------------------------ |
 | sync-architecture.js runs clean | `npm run sync-architecture`                     | 9 transformations, 0 errors                |
-| Heir skill count matches        | Compare `.github/skills/` master vs heir        | 114 of 116 skills present (2 master-only)  |
+| Heir skill count matches        | Compare `.github/skills/` master vs heir        | 117 of 119 skills present (2 master-only)  |
 | brain-qa audit                  | `/dream` or run `brain-qa.ps1`                  | 32 phases pass                             |
 | Trifecta count consistent       | Check README, welcomeView, copilot-instructions | All say same number                        |
 | copilot-instructions.md format  | Manual check                                    | v3-identity-first (Identity section first) |

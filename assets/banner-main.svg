@@ -1,0 +1,60 @@
+<svg width="1536" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#001a33;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0078d4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0078d4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1536" height="512" fill="url(#bgGradient)"/>
+  
+  <!-- Neural network pattern (left) -->
+  <g opacity="0.3">
+    <circle cx="100" cy="150" r="4" fill="#14b8a6"/>
+    <circle cx="150" cy="120" r="4" fill="#14b8a6"/>
+    <circle cx="200" cy="180" r="4" fill="#14b8a6"/>
+    <line x1="100" y1="150" x2="150" y2="120" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="150" y1="120" x2="200" y2="180" stroke="#14b8a6" stroke-width="1"/>
+  </g>
+  
+  <!-- Neural network pattern (right) -->
+  <g opacity="0.3">
+    <circle cx="1436" cy="300" r="4" fill="#7c3aed"/>
+    <circle cx="1386" cy="330" r="4" fill="#7c3aed"/>
+    <circle cx="1336" cy="280" r="4" fill="#7c3aed"/>
+    <line x1="1436" y1="300" x2="1386" y2="330" stroke="#7c3aed" stroke-width="1"/>
+    <line x1="1386" y1="330" x2="1336" y2="280" stroke="#7c3aed" stroke-width="1"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="768" y="220" font-family="Arial, sans-serif" font-size="120" font-weight="bold" 
+        text-anchor="middle" fill="url(#textGradient)" filter="url(#glow)">
+    ALEX
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="768" y="310" font-family="Arial, sans-serif" font-size="36" font-weight="300" 
+        text-anchor="middle" fill="#14b8a6">
+    Cognitive Architecture
+  </text>
+  
+  <!-- Note for generation -->
+  <text x="768" y="450" font-family="Arial, sans-serif" font-size="14" 
+        text-anchor="middle" fill="#6b7280" opacity="0.7">
+    Placeholder - Generate with: node scripts/generate-readme-banners.js
+  </text>
+</svg>

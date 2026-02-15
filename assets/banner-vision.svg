@@ -1,0 +1,57 @@
+<svg width="1536" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0078d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cbd5e1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1536" height="512" fill="url(#bgGrad3)"/>
+  
+  <!-- Partnership visualization -->
+  <g opacity="0.3">
+    <!-- Human side (left) -->
+    <circle cx="300" cy="256" r="50" fill="none" stroke="#f59e0b" stroke-width="2"/>
+    
+    <!-- AI side (right) -->
+    <circle cx="1236" cy="256" r="50" fill="none" stroke="#0078d4" stroke-width="2"/>
+    
+    <!-- Connection -->
+    <line x1="350" y1="256" x2="1186" y2="256" stroke="#7c3aed" stroke-width="3" stroke-dasharray="10,5"/>
+    
+    <!-- Merge point -->
+    <circle cx="768" cy="256" r="30" fill="#7c3aed" opacity="0.5"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="768" y="190" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+        text-anchor="middle" fill="url(#textGrad3)" filter="url(#glow3)">
+    COGNITIVE SYMBIOSIS
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="768" y="330" font-family="Arial, sans-serif" font-size="28" font-weight="300" 
+        text-anchor="middle" fill="#14b8a6">
+    Evolution from AI-as-Tool to AI-as-Partner
+  </text>
+  
+  <!-- Note -->
+  <text x="768" y="450" font-family="Arial, sans-serif" font-size="14" 
+        text-anchor="middle" fill="#6b7280" opacity="0.7">
+    Placeholder - Generate with: node scripts/generate-readme-banners.js
+  </text>
+</svg>

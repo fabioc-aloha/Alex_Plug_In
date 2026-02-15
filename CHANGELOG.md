@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **3 new skills from Global Knowledge heir contributions**:
+  - **extension-audit-methodology** — Systematic 5-dimension audit framework for VS Code extensions (debug hygiene, dead code, performance, menu validation, dependency cleanup)
+  - **ai-character-reference-generation** — Generate consistent character references across multiple scenarios using Flux 1.1 Pro API (validated: 51 successful generations)
+  - **ai-generated-readme-banners** — Create ultra-wide cinematic banners for GitHub READMEs using Flux/Ideogram models (with typography options)
 - **`alex.meditate` command** — Opens chat with `/meditate` prompt for guided meditation sessions
 - **Extension audit report** — [alex_docs/audits/EXTENSION-AUDIT-2026-02-15.md](alex_docs/audits/EXTENSION-AUDIT-2026-02-15.md) with comprehensive code quality analysis
 - **Async I/O in cognitiveDashboard** — Converted 16 blocking synchronous operations to async using `fs-extra`

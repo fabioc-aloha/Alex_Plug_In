@@ -1,0 +1,101 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "extension-audit-methodology",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-15",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "note": "Standard code review + specialized audit = comprehensive quality"
+        },
+        {
+            "target": ".github/skills/performance-profiling/SKILL.md",
+            "type": "requires",
+            "strength": 0.9,
+            "note": "Audit identifies performance candidates, profiling investigates deeply"
+        },
+        {
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+            "type": "supports",
+            "strength": 0.95,
+            "note": "Extension-specific audit methodology"
+        },
+        {
+            "target": ".github/skills/refactoring-patterns/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "Audit findings drive refactoring priorities"
+        },
+        {
+            "target": ".github/instructions/release-management.instructions.md",
+            "type": "supports",
+            "strength": 0.9,
+            "note": "Pre-release audit is part of release workflow"
+        },
+        {
+            "target": ".github/instructions/technical-debt-tracking.instructions.md",
+            "type": "supports",
+            "strength": 0.85,
+            "note": "Audit findings feed into debt backlog"
+        }
+    ],
+    "activationBoost": [
+        "audit",
+        "extension quality",
+        "pre-release",
+        "dead code",
+        "console cleanup",
+        "blocking I/O",
+        "menu validation",
+        "dependency hygiene",
+        "code quality grade"
+    ],
+    "when": {
+        "userIntent": [
+            "audit extension quality",
+            "find dead code",
+            "clean up console statements",
+            "prepare for release",
+            "identify performance issues",
+            "verify commands working"
+        ],
+        "projectContext": [
+            "VS Code extension project",
+            "before major release",
+            "after refactoring",
+            "performance concerns"
+        ],
+        "filePatterns": [
+            "package.json",
+            "src/extension.ts",
+            "**/dashboard.ts",
+            "**/views/**"
+        ]
+    },
+    "yields": {
+        "artifacts": [
+            "audit-report.md with executive summary and recommendations",
+            "categorized console statement list",
+            "dead code inventory with file locations",
+            "blocking I/O refactoring candidates",
+            "menu validation matrix",
+            "unused dependency list"
+        ],
+        "decisions": [
+            "which console statements to keep vs remove",
+            "which dead commands to fix vs delete",
+            "which blocking operations to refactor first",
+            "code quality grade (A+, A, B+, etc.)"
+        ],
+        "nextSteps": [
+            "implement audit recommendations by priority",
+            "recompile and verify zero TypeScript errors",
+            "smoke test all command palette items",
+            "update CHANGELOG with quality improvements"
+        ]
+    }
+}

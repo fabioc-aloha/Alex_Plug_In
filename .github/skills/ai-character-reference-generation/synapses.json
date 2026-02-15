@@ -1,0 +1,86 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "ai-character-reference-generation",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-15",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "note": "Both use Flux models with similar prompt engineering patterns"
+        },
+        {
+            "target": ".github/skills/prompt-engineering/SKILL.md",
+            "type": "requires",
+            "strength": 0.9,
+            "note": "Character consistency requires detailed prompt engineering"
+        },
+        {
+            "target": ".github/skills/api-integration/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "Replicate API integration with retry handling"
+        },
+        {
+            "target": ".github/skills/error-handling/SKILL.md",
+            "type": "supports",
+            "strength": 0.85,
+            "note": "Safety filter handling, rate limiting, exponential backoff"
+        }
+    ],
+    "activationBoost": [
+        "character reference",
+        "flux",
+        "replicate",
+        "image generation",
+        "character consistency",
+        "prompt engineering",
+        "visual reference",
+        "illustration",
+        "character design"
+    ],
+    "when": {
+        "userIntent": [
+            "generate character reference images",
+            "create consistent character poses",
+            "visual character design",
+            "character illustration workflow",
+            "setup character generation"
+        ],
+        "projectContext": [
+            "book project with characters",
+            "visual novel development",
+            "game concept art",
+            "story illustration",
+            "character design documentation"
+        ],
+        "filePatterns": [
+            "**/characters/**",
+            "**/generate-character*.js",
+            "**/character-profiles.md"
+        ]
+    },
+    "yields": {
+        "artifacts": [
+            "17 reference images per character (3:4 aspect ratio)",
+            "generation-report.json with costs and metadata",
+            "character-agnostic template script",
+            "scenario configuration files"
+        ],
+        "decisions": [
+            "which aesthetic style (noir, fantasy, realistic)",
+            "pose variety strategy (17 scenarios)",
+            "safety filter workarounds for poses",
+            "cost vs quality tradeoff (Flux Schnell vs Pro)"
+        ],
+        "nextSteps": [
+            "organize images by character and collection",
+            "validate visual consistency across poses",
+            "document character descriptions for reuse",
+            "create character profile markdown files"
+        ]
+    }
+}

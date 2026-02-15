@@ -14,7 +14,6 @@ description: "VS Code Marketplace publishing workflow, constraints, and best pra
 
 - [.github/instructions/release-management.instructions.md] (Critical, Coordinates, Bidirectional) - "Parent release workflow this publishing step supports"
 - [.github/instructions/brand-asset-management.instructions.md] (High, Constrains, Forward) - "Image format selection affected by marketplace constraints"
-- [.github/instructions/quality-assurance.instructions.md] (High, Gates, Forward) - "QA must pass before publishing"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (Critical, Implements, Bidirectional) - "Extension development patterns this deployment workflow serves"
 
 ---

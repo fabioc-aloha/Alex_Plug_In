@@ -26,6 +26,13 @@
             "type": "quality-gate",
             "direction": "supports",
             "context": "Heir validation uses doc QA patterns for sync verification"
+        },
+        {
+            "target": ".github/episodic/meditation-2026-02-15-roadmap-reorganization.md",
+            "strength": 0.8,
+            "type": "episodic",
+            "direction": "learns-from",
+            "context": "Progressive disclosure pattern learned from roadmap reorganization - reduces cognitive load in living documents"
         }
     ],
     "activationContexts": [

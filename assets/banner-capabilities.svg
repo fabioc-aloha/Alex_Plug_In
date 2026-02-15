@@ -1,0 +1,59 @@
+<svg width="1536" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0c1e33;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#312e81;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0078d4;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0078d4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1536" height="512" fill="url(#bgGrad2)"/>
+  
+  <!-- Visual metaphors -->
+  <g opacity="0.3">
+    <!-- Learning (left - synapses) -->
+    <circle cx="150" cy="256" r="30" fill="none" stroke="#0078d4" stroke-width="2"/>
+    <circle cx="150" cy="256" r="5" fill="#0078d4"/>
+    
+    <!-- Memory (center - crystal) -->
+    <polygon points="768,150 820,200 768,250 716,200" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    
+    <!-- Growth (right - tree) -->
+    <line x1="1386" y1="350" x2="1386" y2="250" stroke="#14b8a6" stroke-width="3"/>
+    <line x1="1386" y1="280" x2="1410" y2="260" stroke="#14b8a6" stroke-width="2"/>
+    <line x1="1386" y1="280" x2="1362" y2="260" stroke="#14b8a6" stroke-width="2"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="768" y="230" font-family="Arial, sans-serif" font-size="80" font-weight="bold" 
+        text-anchor="middle" fill="url(#textGrad2)" filter="url(#glow2)">
+    LEARN · REMEMBER · GROW
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="768" y="310" font-family="Arial, sans-serif" font-size="32" font-weight="300" 
+        text-anchor="middle" fill="#f3f4f6">
+    Your AI Learning Partner
+  </text>
+  
+  <!-- Note -->
+  <text x="768" y="450" font-family="Arial, sans-serif" font-size="14" 
+        text-anchor="middle" fill="#6b7280" opacity="0.7">
+    Placeholder - Generate with: node scripts/generate-readme-banners.js
+  </text>
+</svg>

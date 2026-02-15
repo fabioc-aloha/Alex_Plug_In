@@ -1,0 +1,86 @@
+{
+  "generated": "2026-02-15T19:59:27.690Z",
+  "duration": "192.9s",
+  "personas": 8,
+  "successful": 8,
+  "failed": 0,
+  "totalCost": "$0.64",
+  "costPerImage": "$0.08",
+  "model": "ideogram-ai/ideogram-v2",
+  "aspectRatio": "1:1",
+  "resolution": "1024x1024",
+  "results": [
+    {
+      "persona": "ALEX-DEVELOPER.png",
+      "title": "CODE",
+      "subtitle": "Ship Faster, Debug Less",
+      "url": "https://replicate.delivery/xezq/UBi2vzClj0LsFpRUCr2Hb5JPkmrfgKYIEKXdDohMTYK6teHWA/tmpdh1ry0nz.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-DEVELOPER.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-ACADEMIC.png",
+      "title": "THESIS",
+      "subtitle": "Research to Publication",
+      "url": "https://replicate.delivery/xezq/bv6Q6eYv8VWe5k7Bs3d22GweuKOdfhMmLueFc3ISDgvihrfhF/tmpaz4_pt5p.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-ACADEMIC.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-STUDENT.png",
+      "title": "LEARNING",
+      "subtitle": "Master Concepts, Not Memorize",
+      "url": "https://replicate.delivery/xezq/Z19RqmWwwk6GGxymulc2XdFc509Yj3qIef6VFtgr45xnc9HWA/tmpfqrnmjy3.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-STUDENT.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-RESEARCHER.png",
+      "title": "RESEARCH",
+      "subtitle": "Hypothesis to Discovery",
+      "url": "https://replicate.delivery/xezq/VIel6B7rh7TkLafQC0IMnIkbMuuKtGMrk10spGXQciN9c9HWA/tmp6a4harud.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-RESEARCHER.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-TECHNICAL-WRITER.png",
+      "title": "DOCS",
+      "subtitle": "Documentation Excellence",
+      "url": "https://replicate.delivery/xezq/YIhOY75geetl1EJfv0Ry4D5QzcGsaaUPjsMXFTB7YHmu66PsA/tmp7o93igzq.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-TECHNICAL-WRITER.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-DATA-ENGINEER.png",
+      "title": "DATA",
+      "subtitle": "Raw to Refined Intelligence",
+      "url": "https://replicate.delivery/xezq/1YztexdJ0PRqEStn8L8rvjmIvFmIKNh1dfbdjoOllivvd9HWA/tmplage7_vt.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-DATA-ENGINEER.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-BUSINESS-ANALYST.png",
+      "title": "INSIGHTS",
+      "subtitle": "Stakeholder Alignment",
+      "url": "https://replicate.delivery/xezq/95Xv3Cr7SAaiCVRnFU1Dd4YVIRS8wHZDy968yOWvxD2hXfDLA/tmpr7ge8o57.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-BUSINESS-ANALYST.png",
+      "status": "success",
+      "cost": 0.08
+    },
+    {
+      "persona": "ALEX-CREATIVE-WRITER.png",
+      "title": "STORIES",
+      "subtitle": "Narrative Excellence",
+      "url": "https://replicate.delivery/xezq/gkFSeOpiNB0PKqUCwiedDl71eMNvboT43R1az3UxnSe951fwC/tmpijhtj73a.png",
+      "filepath": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex2\\ALEX-CREATIVE-WRITER.png",
+      "status": "success",
+      "cost": 0.08
+    }
+  ]
+}

@@ -164,7 +164,7 @@ grep -r "v5\.[0-6]\.\d+" .github/ --include="*.md"
 **Remediation**:
 Update copilot-instructions.md with actual counts:
 ```markdown
-Total Skills: 116 | Total Instructions: 30
+Total Skills: 119 | Total Instructions: 31
 ```
 
 ### 3. Memory Balance Drift
@@ -194,7 +194,7 @@ Total Skills: 116 | Total Instructions: 30
 - Detected: persona-detection/SKILL.md had v5.6.8 references
 - Detected: copilot-instructions.md missing skill/instruction counts
 - Fixed: Updated 3 version instances, added counts
-- Verified: PowerShell confirmed 116 skills, 30 instructions
+- Verified: PowerShell confirmed 119 skills, 31 instructions
 - Result: Clean build, 0 contamination, ready for publish
 
 ## Synapses

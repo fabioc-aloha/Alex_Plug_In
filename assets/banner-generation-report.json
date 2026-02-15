@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-02-15T19:31:44.071Z",
+  "model": "ideogram-ai/ideogram-v2",
+  "results": [
+    {
+      "id": "rocket-code",
+      "filename": "banner-rocket-code.png",
+      "title": "CODE",
+      "subtitle": "Strap a Rocket to Your Back",
+      "url": "https://replicate.delivery/xezq/EyFwpmTsJrqQEBttCZE9n7lmkSNjABNf8oeEbv5vV4TwD9HWA/tmp3n1zdw9_.png",
+      "cost": 0.08
+    },
+    {
+      "id": "rocket-learning",
+      "filename": "banner-rocket-learning.png",
+      "title": "LEARNING",
+      "subtitle": "Strap a Rocket to Your Back",
+      "url": "https://replicate.delivery/xezq/DhPWDgaeAO3Eay8Hwehi7wUVeQgvfzR2sAWqB7bE2tMfgofhF/tmp70cqmy4l.png",
+      "cost": 0.08
+    },
+    {
+      "id": "rocket-career",
+      "filename": "banner-rocket-career.png",
+      "title": "CAREER",
+      "subtitle": "Strap a Rocket to Your Back",
+      "url": "https://replicate.delivery/xezq/2bnJAr8Oz5JaLNOs0mQV7QUZfeHUA66XEouon4SO7j3fI6PsA/tmp163dvequ.png",
+      "cost": 0.08
+    }
+  ],
+  "totalCost": 0.24
+}
