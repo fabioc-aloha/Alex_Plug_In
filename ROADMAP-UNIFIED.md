@@ -49,7 +49,10 @@ v5.7.2 is current. Alex now has:
 | v5.7.0     | Structural Consistency             | Purpose-Built Cognition      | ✅ Shipped                  |
 | v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation            | ✅ Shipped                  |
 | **v5.7.2** | **Global Knowledge Maintenance**   | **Knowledge Infrastructure** | **✅ Shipped**              |
-| v5.7.3-9   | *reserved for UI/UX fixes*         |                              |                            |
+| v5.7.3-4   | *reserved for UI/UX fixes*         |                              |                            |
+| v5.7.5     | Skill Intelligence                 | Context-Aware Guidance       | 📋 Planned                  |
+| v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | 📋 Planned                  |
+| v5.7.7-9   | *reserved for UI/UX fixes*         |                              |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition      | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition      | 📋 Planned                  |
 | v5.8.2     | @alex Personality + Knowledge (P2) | Purpose-Built Cognition      | 📋 Planned                  |
@@ -82,6 +85,57 @@ A version is **done** when ALL of the following are true:
 8. **CHANGELOG documents the delta** — Every user-visible change has a line item
 
 > **Principle**: Ship what works. Remove what doesn't. Document what changed.
+
+### v5.7.5 — Skill Intelligence (PLANNED)
+
+**Theme**: Make skills discoverable and contextually relevant — suggest the right capability at the right moment.
+
+**Paradigm**: Context-aware guidance — Alex proactively offers help based on what you're doing.
+
+**Prerequisite**: v5.7.2 shipped with Global Knowledge infrastructure stable.
+
+**Tagline**: The right skill, right when you need it.
+
+| Task                        | Owner | Effort | Priority | Status | Description                                                                     |
+| --------------------------- | :---: | :----: | :------: | :----: | ------------------------------------------------------------------------------- |
+| Skill-to-technology mapping | Heir  |   1h   |    P0    |   📋    | Map detected technologies to relevant skills (react → testing-strategies, etc.) |
+| Recommendation engine       | Heir  |   2h   |    P0    |   📋    | Suggest skills based on file type, workspace context, and behavioral patterns   |
+| Welcome View integration    | Heir  |   1h   |    P1    |   📋    | Display recommended skills in dashboard with one-click activation               |
+| Context-aware skill loading | Heir  |   2h   |    P1    |   📋    | Auto-prioritize relevant skills in context based on workspace/file type         |
+| User preference tracking    | Heir  |  30m   |    P2    |   📋    | Remember which suggestions user accepts/dismisses to improve recommendations    |
+
+**Milestone**: Users discover relevant skills without remembering all 120.
+
+**Effort**: ~6.5h | **Impact**: Proactive intelligence — Alex feels smarter and more helpful.
+
+**Target**: Q1 2026
+
+---
+
+### v5.7.6 — Office Add-in Platform Research (PLANNED)
+
+**Theme**: Explore feasibility of deploying Alex cognitive architecture to Microsoft Office (Word/Excel/PowerPoint) as an add-in.
+
+**Paradigm**: Platform exploration — research technical constraints, evaluate heir platform potential.
+
+**Prerequisite**: v5.7.5 shipped with skill intelligence stable.
+
+**Tagline**: One cognitive architecture, multiple platforms.
+
+| Task                           | Owner | Effort | Priority | Status | Description                                                                |
+| ------------------------------ | :---: | :----: | :------: | :----: | -------------------------------------------------------------------------- |
+| Office Add-in architecture doc | Alex  |   2h   |    P1    |   📋    | Document Office.js API, manifest formats, deployment models, task pane UX  |
+| Feasibility assessment         | Alex  |   1h   |    P1    |   📋    | Evaluate technical gaps: context injection, skill activation, persona flow |
+| Unified manifest research      | Alex  |  30m   |    P2    |   📋    | Research Office + Teams unified manifest for cross-platform deployment     |
+| Heir platform decision         | Alex  |  30m   |    P2    |   📋    | Decide: worthy heir platform vs. outside scope (document decision in ADR)  |
+
+**Milestone**: Clear understanding of Office Add-in platform capabilities and Alex compatibility.
+
+**Effort**: ~4h | **Impact**: Platform expansion insight — informs v6+ strategy.
+
+**Target**: Q1 2026 (research only, no implementation)
+
+---
 
 ### v5.8.x — @alex Enhanced Mode ⭐ (PLANNED)
 
@@ -276,14 +330,11 @@ Items to pull from when capacity frees up:
 | Task                           | Owner  | Effort | Priority | Description                                                                                                      |
 | ------------------------------ | :----: | :----: | :------: | ---------------------------------------------------------------------------------------------------------------- |
 | Microsoft Graph Integration    |  Heir  |   1w   |   High   | Calendar, Mail, Presence, People — removed v5.7.1 (non-functional). Re-implement when auth flow works end-to-end |
-| Chat Avatar Dynamic            |  Heir  |   2h   |   Low    | Participant icon changes per persona — deferred in favor of static rocket icon for simplicity                    |
 | Foundry Voice Alex (Realtime)  |  Heir  |   1w   |  Medium  | Speech-to-speech via Realtime API WebSocket                                                                      |
 | Hosted Agent Container Deploy  |  Heir  |   3d   |  Medium  | Containerized Alex on managed infrastructure                                                                     |
 | Foundry → M365 Backend Unify   |  Heir  |   1w   |  Medium  | M365 heir routes through Foundry Agent Service                                                                   |
 | Local Model Usage Learning     | Master |   2h   |   Low    | Learn from your usage patterns to improve advice                                                                 |
 | Learning Journeys              |  Heir  |   3h   |  Medium  | Curated skill progressions                                                                                       |
-| Skill Recommendations          |  Heir  |   3h   |  Medium  | Suggest skills based on file types                                                                               |
-| Context-Aware Skill Loading    |  Heir  |   2h   |  Medium  | Auto-load skills based on workspace                                                                              |
 | Office Add-in (Word/Excel/PPT) |  Heir  |   2w   |  Medium  | Alex sidebar in Office apps                                                                                      |
 
 ### Research Findings (from alex_docs/ audit — 2026-02-14)

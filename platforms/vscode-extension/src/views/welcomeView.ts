@@ -34,6 +34,7 @@ import {
 } from "../services/premiumAssets";
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar } from "../shared/chatAvatarBridge";
+import { getSkillRecommendations, SkillRecommendation } from "../chat/skillRecommendations";
 
 /**
  * Nudge types for contextual reminders
@@ -316,6 +317,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         this._inferProjectName(workspaceFolders?.[0]),
       ]);
 
+      // Get skill recommendations based on context (after persona detection)
+      let skillRecommendations: SkillRecommendation[] = [];
+
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
 
@@ -323,6 +327,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const personaResult = workspaceFolders
         ? await detectPersona(userProfile ?? undefined, workspaceFolders)
         : null;
+
+      // Get skill recommendations based on persona and active file
+      try {
+        const activeEditor = vscode.window.activeTextEditor;
+        const activeFilePath = activeEditor?.document.uri.fsPath;
+        skillRecommendations = await getSkillRecommendations(
+          wsRoot,
+          activeFilePath,
+          personaResult?.persona?.id
+        );
+      } catch (err) {
+        console.error("[Alex][WelcomeView] Failed to get skill recommendations:", err);
+      }
 
       // Update chat avatar if persona detected
       if (personaResult?.persona) {
@@ -362,6 +379,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         premiumAssets,
         activeContext,
         workspaceName,
+        skillRecommendations,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
@@ -583,6 +601,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     premiumAssets: PremiumAssetSelection,
     activeContext: ActiveContext | null,
     workspaceName?: string,
+    skillRecommendations?: SkillRecommendation[],
   ): string {
     // Security: Generate nonce for CSP
     const nonce = getNonce();
@@ -829,6 +848,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>`,
       )
       .join("\n                ");
+
+    // Skill recommendations HTML
+    const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
+      ? `<div class="skill-recommendations-section">
+                <div class="section-subtitle">💡 Recommended Skills</div>
+                <div class="skill-recommendations-list">
+                    ${skillRecommendations.map(rec => 
+                        `<button class="skill-recommendation-btn" data-cmd="launchRecommendedSkill" data-skill="${rec.skillId}" data-skill-name="${rec.displayName}" title="${rec.reason}">
+                            <span class="skill-rec-name">${rec.displayName}</span>
+                            <span class="skill-rec-reason">${rec.reason}</span>
+                        </button>`
+                    ).join('\n                    ')}
+                </div>
+            </div>`
+      : "";
 
     // Health indicator
     const isHealthy = health.status === HealthStatus.Healthy;
@@ -1321,6 +1355,57 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--persona-accent);
         }
         
+        /* Skill Recommendations Styles */
+        .skill-recommendations-section {
+            margin: 12px 0;
+            padding: 10px;
+            background: var(--vscode-editor-background);
+            border-radius: 6px;
+            border: 1px solid var(--vscode-widget-border);
+        }
+        .section-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--vscode-descriptionForeground);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .skill-recommendations-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .skill-recommendation-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 8px 10px;
+            background: var(--vscode-button-secondaryBackground);
+            color: var(--vscode-button-secondaryForeground);
+            border: none;
+            border-left: 2px solid var(--vscode-charts-blue);
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+        .skill-recommendation-btn:hover {
+            background: var(--vscode-button-secondaryHoverBackground);
+            border-left-color: var(--persona-accent);
+            transform: translateX(2px);
+        }
+        .skill-rec-name {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        .skill-rec-reason {
+            font-size: 9px;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
         .goals-stats {
             display: flex;
             gap: 12px;
@@ -1577,6 +1662,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <div class="action-list">
                 <div class="action-group-label">FOR YOU</div>
                 ${recommendedActionsHtml}
+                
+                ${skillRecommendationsHtml}
                 
                 <div class="action-group-label">CORE</div>
                 <button class="action-btn" data-cmd="workingWithAlex" title="Learn how to work effectively with Alex">

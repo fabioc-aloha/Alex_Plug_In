@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.5] - 2026-02-15
+
+> **Skill Intelligence** — Context-aware skill recommendations and smart skill loading
+
+### Added
+
+- **Skill Recommendations Engine** — Suggests relevant skills based on workspace context
+  - File-type recommendations (e.g., `.bicep` → `azure-architecture-patterns`, `bicep-avm-mastery`)
+  - Technology-based recommendations (detect React → suggest `testing-strategies`, `react-patterns`)
+  - Persona-based recommendations (Developer → `code-review`, Academic → `academic-paper-drafting`)
+  - Behavioral pattern recognition (future: commit frequency, error patterns)
+- **Welcome View skill recommendations** — Display top 5 recommended skills with one-click activation
+  - Shows skill name and reason for recommendation
+  - Integrated into "FOR YOU" quick actions section
+- **Context-aware skill loading** — Prioritize relevant skills in LLM context
+  - High priority: File-type + persona matches
+  - Medium priority: Technology stack + workspace context
+  - Low priority: Generic/organizational skills
+- **User preference tracking** — Remember accepted/dismissed recommendations
+  - Skills dismissed 3+ times won't be recommended again
+  - Stored in global VS Code settings for cross-workspace memory
+
+### Technical Details
+
+- New module: `src/chat/skillRecommendations.ts` — 350 lines, 3 exported functions
+- Technology mapping: 30+ technologies → 60+ skill associations
+- File extension mapping: 15 extensions → targeted skill suggestions
+- Persona mapping: 18 personas → curated skill sets
+- Welcome View: Integrated recommendation UI with hover tooltips and visual styling
+
+---
+
 ## [5.7.2] - 2026-02-15
 
 > **Maintenance Release** — Global Knowledge curation, skill count corrections, dependency management
