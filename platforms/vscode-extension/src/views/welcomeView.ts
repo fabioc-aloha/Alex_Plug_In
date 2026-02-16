@@ -87,148 +87,76 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         return;
       }
 
+      // Command map for simple vscode.commands.executeCommand calls
+      const commandMap: Record<string, string> = {
+        startSession: "alex.startSession",
+        sessionActions: "alex.sessionActions",
+        dream: "alex.dream",
+        selfActualize: "alex.selfActualize",
+        exportM365: "alex.exportForM365",
+        openDocs: "alex.openDocs",
+        upgrade: "alex.upgrade",
+        showStatus: "alex.showStatus",
+        showGoals: "alex.showGoals",
+        createGoal: "alex.createGoal",
+        setupEnvironment: "alex.setupEnvironment",
+        viewDiagnostics: "alex.viewBetaTelemetry",
+        generateSkillCatalog: "alex.generateSkillCatalog",
+        knowledgeQuickPick: "alex.knowledgeQuickPick",
+        healthDashboard: "alex.openHealthDashboard",
+        memoryDashboard: "alex.openMemoryDashboard",
+        runAudit: "alex.runAudit",
+        releasePreflight: "alex.releasePreflight",
+        debugThis: "alex.debugThis",
+        rubberDuck: "alex.rubberDuck",
+        codeReview: "alex.codeReview",
+        generateTests: "alex.generateTests",
+        generateDiagram: "alex.generateDiagram",
+        generatePptx: "alex.generatePptx",
+        importGitHubIssues: "alex.importGitHubIssues",
+        reviewPR: "alex.reviewPR",
+        readAloud: "alex.readAloud",
+        askAboutSelection: "alex.askAboutSelection",
+        saveSelectionAsInsight: "alex.saveSelectionAsInsight",
+        searchRelatedKnowledge: "alex.searchRelatedKnowledge",
+        skillReview: "alex.skillReview",
+        workingWithAlex: "alex.workingWithAlex",
+        meditate: "workbench.panel.chat.view.copilot.focus", // Could auto-type @alex /meditate
+      };
+
+      // External URL map
+      const externalUrlMap: Record<string, string> = {
+        openMarketplace: "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
+        openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
+        openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
+        provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
+      };
+
+      // Handle simple command execution
+      if (commandMap[message.command]) {
+        vscode.commands.executeCommand(commandMap[message.command]);
+        return;
+      }
+
+      // Handle external URLs
+      if (externalUrlMap[message.command]) {
+        vscode.env.openExternal(vscode.Uri.parse(externalUrlMap[message.command]));
+        return;
+      }
+
+      // Handle special cases
       switch (message.command) {
-        case "startSession":
-          vscode.commands.executeCommand("alex.startSession");
-          break;
-        case "sessionActions":
-          vscode.commands.executeCommand("alex.sessionActions");
-          break;
-        case "meditate":
-          vscode.commands.executeCommand(
-            "workbench.panel.chat.view.copilot.focus",
-          );
-          // Could auto-type @alex /meditate
-          break;
-        case "dream":
-          vscode.commands.executeCommand("alex.dream");
-          break;
-        case "selfActualize":
-          vscode.commands.executeCommand("alex.selfActualize");
-          break;
-        case "exportM365":
-          vscode.commands.executeCommand("alex.exportForM365");
-          break;
-        case "openDocs":
-          vscode.commands.executeCommand("alex.openDocs");
-          break;
-        case "upgrade":
-          vscode.commands.executeCommand("alex.upgrade");
-          break;
-        case "showStatus":
-          vscode.commands.executeCommand("alex.showStatus");
-          break;
-        case "showGoals":
-          vscode.commands.executeCommand("alex.showGoals");
-          break;
-        case "createGoal":
-          vscode.commands.executeCommand("alex.createGoal");
-          break;
-        case "setupEnvironment":
-          vscode.commands.executeCommand("alex.setupEnvironment");
-          break;
-        case "viewDiagnostics":
-          vscode.commands.executeCommand("alex.viewBetaTelemetry");
-          break;
         case "openChat":
-          // Open Agent mode directly (no clipboard clutter)
           openChatPanel();
-          break;
-        case "generateSkillCatalog":
-          vscode.commands.executeCommand("alex.generateSkillCatalog");
-          break;
-        case "knowledgeQuickPick":
-          vscode.commands.executeCommand("alex.knowledgeQuickPick");
-          break;
-        case "healthDashboard":
-          vscode.commands.executeCommand("alex.openHealthDashboard");
-          break;
-        case "memoryDashboard":
-          vscode.commands.executeCommand("alex.openMemoryDashboard");
-          break;
-        case "runAudit":
-          vscode.commands.executeCommand("alex.runAudit");
-          break;
-        case "releasePreflight":
-          vscode.commands.executeCommand("alex.releasePreflight");
-          break;
-        case "debugThis":
-          vscode.commands.executeCommand("alex.debugThis");
-          break;
-        case "rubberDuck":
-          vscode.commands.executeCommand("alex.rubberDuck");
-          break;
-        case "codeReview":
-          vscode.commands.executeCommand("alex.codeReview");
-          break;
-        case "generateTests":
-          vscode.commands.executeCommand("alex.generateTests");
-          break;
-        case "generateDiagram":
-          vscode.commands.executeCommand("alex.generateDiagram");
-          break;
-        case "generatePptx":
-          vscode.commands.executeCommand("alex.generatePptx");
-          break;
-        case "importGitHubIssues":
-          vscode.commands.executeCommand("alex.importGitHubIssues");
-          break;
-        case "reviewPR":
-          vscode.commands.executeCommand("alex.reviewPR");
-          break;
-        case "readAloud":
-          vscode.commands.executeCommand("alex.readAloud");
-          break;
-        case "askAboutSelection":
-          vscode.commands.executeCommand("alex.askAboutSelection");
-          break;
-        case "saveSelectionAsInsight":
-          vscode.commands.executeCommand("alex.saveSelectionAsInsight");
-          break;
-        case "searchRelatedKnowledge":
-          vscode.commands.executeCommand("alex.searchRelatedKnowledge");
-          break;
-        case "skillReview":
-          vscode.commands.executeCommand("alex.skillReview");
           break;
         case "launchRecommendedSkill": {
           const skill = message.skill || "code-quality";
           const skillName = message.skillName || skill;
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
-          // Track user accepted this recommendation
           await trackRecommendationFeedback(skill, true);
           await openChatPanel(prompt);
           break;
         }
-        case "openMarketplace":
-          vscode.env.openExternal(
-            vscode.Uri.parse(
-              "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
-            ),
-          );
-          break;
-        case "openGitHub":
-          vscode.env.openExternal(
-            vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In"),
-          );
-          break;
-        case "openBrainAnatomy":
-          vscode.env.openExternal(
-            vscode.Uri.parse(
-              "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
-            ),
-          );
-          break;
-        case "workingWithAlex":
-          vscode.commands.executeCommand("alex.workingWithAlex");
-          break;
-        case "provideFeedback":
-          vscode.env.openExternal(
-            vscode.Uri.parse(
-              "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
-            ),
-          );
-          break;
         case "refresh":
           this.refresh();
           break;
@@ -574,11 +502,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     </div>
     <script nonce="${nonce}">
         const vscode = acquireVsCodeApi();
+        function cmd(command, data) {
+            vscode.postMessage({ command, ...data });
+        }
         document.addEventListener('click', function(e) {
             const el = e.target.closest('[data-cmd]');
             if (el) {
                 e.preventDefault();
-                vscode.postMessage({ command: el.getAttribute('data-cmd') });
+                const command = el.getAttribute('data-cmd');
+                const skill = el.getAttribute('data-skill');
+                const skillName = el.getAttribute('data-skill-name');
+                if (skill) {
+                    cmd(command, { skill, skillName });
+                } else {
+                    cmd(command);
+                }
             }
         });
     </script>
@@ -1555,14 +1493,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 ${skillRecommendationsHtml}
                 
                 <div class="action-group-label">CORE</div>
-                <button class="action-btn" data-cmd="workingWithAlex" title="Learn how to work effectively with Alex">
-                    <span class="action-icon">🎓</span>
-                    <span class="action-text">Working with Alex</span>
-                </button>
-                <button class="action-btn" data-cmd="openBrainAnatomy" title="Explore Alex's cognitive brain anatomy">
-                    <span class="action-icon">🧠</span>
-                    <span class="action-text">Brain Anatomy</span>
-                </button>
+                ${this._actionButton('workingWithAlex', '🎓', 'Working with Alex', 'Learn how to work effectively with Alex')}
+                ${this._actionButton('openBrainAnatomy', '🧠', 'Brain Anatomy', 'Explore Alex\'s cognitive brain anatomy')}
                 <button class="action-btn" data-cmd="openChat">
                     <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
                     <span class="action-text">Chat with Copilot</span>
@@ -1571,120 +1503,45 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     <span class="action-icon">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                     <span class="action-text">Initialize / Update</span>
                 </button>
-                <button class="action-btn" data-cmd="dream">
-                    <span class="action-icon">💭</span>
-                    <span class="action-text">Dream</span>
-                </button>
-                <button class="action-btn" data-cmd="selfActualize">
-                    <span class="action-icon">✨</span>
-                    <span class="action-text">Self-Actualize</span>
-                </button>
+                ${this._actionButton('dream', '💭', 'Dream')}
+                ${this._actionButton('selfActualize', '✨', 'Self-Actualize')}
                 
                 ${
                   hasGlobalKnowledge
                     ? `<div class="action-group-label">KNOWLEDGE</div>
-                <button class="action-btn" data-cmd="knowledgeQuickPick">
-                    <span class="action-icon">🔎</span>
-                    <span class="action-text">Search Knowledge</span>
-                </button>`
+                ${this._actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge')}`
                     : ""
                 }
                 
                 <div class="action-group-label">DEV TOOLS</div>
-                <button class="action-btn" data-cmd="codeReview" title="Get AI code review for selection or pasted code">
-                    <span class="action-icon">👀</span>
-                    <span class="action-text">Code Review</span>
-                </button>
-                <button class="action-btn" data-cmd="debugThis" title="Debug code or error message">
-                    <span class="action-icon">🐛</span>
-                    <span class="action-text">Debug This</span>
-                </button>
-                <button class="action-btn" data-cmd="rubberDuck" title="Explain your problem to Alex as rubber duck">
-                    <span class="action-icon">🦆</span>
-                    <span class="action-text">Rubber Duck</span>
-                </button>
-                <button class="action-btn" data-cmd="generateTests" title="Generate tests for selection or pasted code">
-                    <span class="action-icon">🧪</span>
-                    <span class="action-text">Generate Tests</span>
-                </button>
-                <button class="action-btn" data-cmd="runAudit">
-                    <span class="action-icon">🔍</span>
-                    <span class="action-text">Project Audit</span>
-                </button>
-                <button class="action-btn" data-cmd="releasePreflight">
-                    <span class="action-icon">🚀</span>
-                    <span class="action-text">Release Preflight</span>
-                </button>
-                <button class="action-btn" data-cmd="importGitHubIssues" title="Import GitHub issues as learning goals">
-                    <span class="action-icon">📋</span>
-                    <span class="action-text">Import Issues</span>
-                </button>
-                <button class="action-btn" data-cmd="reviewPR" title="Generate AI-powered code review for pull requests">
-                    <span class="action-icon">👁️</span>
-                    <span class="action-text">Review PR</span>
-                </button>
+                ${this._actionButton('codeReview', '👀', 'Code Review', 'Get AI code review for selection or pasted code')}
+                ${this._actionButton('debugThis', '🐛', 'Debug This', 'Debug code or error message')}
+                ${this._actionButton('rubberDuck', '🦆', 'Rubber Duck', 'Explain your problem to Alex as rubber duck')}
+                ${this._actionButton('generateTests', '🧪', 'Generate Tests', 'Generate tests for selection or pasted code')}
+                ${this._actionButton('runAudit', '🔍', 'Project Audit')}
+                ${this._actionButton('releasePreflight', '🚀', 'Release Preflight')}
+                ${this._actionButton('importGitHubIssues', '📋', 'Import Issues', 'Import GitHub issues as learning goals')}
+                ${this._actionButton('reviewPR', '👁️', 'Review PR', 'Generate AI-powered code review for pull requests')}
                 
                 <div class="action-group-label">MULTIMODAL</div>
-                <button class="action-btn" data-cmd="askAboutSelection" title="Ask Alex about selected code or enter a question">
-                    <span class="action-icon">💬</span>
-                    <span class="action-text">Ask Alex</span>
-                </button>
-                <button class="action-btn" data-cmd="saveSelectionAsInsight" title="Save selection or type an insight to knowledge">
-                    <span class="action-icon">💡</span>
-                    <span class="action-text">Save Insight</span>
-                </button>
-                <button class="action-btn" data-cmd="searchRelatedKnowledge" title="Search Alex knowledge for related patterns">
-                    <span class="action-icon">🔍</span>
-                    <span class="action-text">Search Knowledge</span>
-                </button>
-                <button class="action-btn" data-cmd="generateDiagram" title="Generate Mermaid diagrams from code or text">
-                    <span class="action-icon">📊</span>
-                    <span class="action-text">Generate Diagram</span>
-                </button>
-                <button class="action-btn" data-cmd="generatePptx" title="Generate PowerPoint from markdown or selection">
-                    <span class="action-icon">📰</span>
-                    <span class="action-text">Generate Presentation</span>
-                </button>
-                <button class="action-btn" data-cmd="readAloud" title="Read selected text aloud using neural voices">
-                    <span class="action-icon">🔊</span>
-                    <span class="action-text">Read Aloud</span>
-                </button>
+                ${this._actionButton('askAboutSelection', '💬', 'Ask Alex', 'Ask Alex about selected code or enter a question')}
+                ${this._actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Save selection or type an insight to knowledge')}
+                ${this._actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Search Alex knowledge for related patterns')}
+                ${this._actionButton('generateDiagram', '📊', 'Generate Diagram', 'Generate Mermaid diagrams from code or text')}
+                ${this._actionButton('generatePptx', '📰', 'Generate Presentation', 'Generate PowerPoint from markdown or selection')}
+                ${this._actionButton('readAloud', '🔊', 'Read Aloud', 'Read selected text aloud using neural voices')}
                 
                 <div class="action-group-label">BALANCE</div>
-                <button class="action-btn" data-cmd="startSession">
-                    <span class="action-icon">🍅</span>
-                    <span class="action-text">Focus Session</span>
-                </button>
-                <button class="action-btn" data-cmd="showGoals">
-                    <span class="action-icon">🎯</span>
-                    <span class="action-text">Goals</span>
-                </button>
+                ${this._actionButton('startSession', '🍅', 'Focus Session')}
+                ${this._actionButton('showGoals', '🎯', 'Goals')}
                 
                 <div class="action-group-label">SYSTEM</div>
-                <button class="action-btn" data-cmd="memoryDashboard" title="View cognitive memory architecture">
-                    <span class="action-icon">🧠</span>
-                    <span class="action-text">Memory Architecture</span>
-                </button>
-                <button class="action-btn" data-cmd="exportM365" title="Package knowledge for M365 Copilot">
-                    <span class="action-icon">📦</span>
-                    <span class="action-text">Export for M365</span>
-                </button>
-                <button class="action-btn" data-cmd="setupEnvironment" title="Configure VS Code settings: Essential, Recommended, Extended Thinking, Copilot Memory">
-                    <span class="action-icon">⚙️</span>
-                    <span class="action-text">Environment Setup</span>
-                </button>
-                <button class="action-btn" data-cmd="openDocs">
-                    <span class="action-icon">📚</span>
-                    <span class="action-text">Docs</span>
-                </button>
-                <button class="action-btn" data-cmd="provideFeedback" title="Share feedback, ideas, or feature requests">
-                    <span class="action-icon">💬</span>
-                    <span class="action-text">Provide Feedback</span>
-                </button>
-                <button class="action-btn" data-cmd="viewDiagnostics" title="View diagnostics and report issues">
-                    <span class="action-icon">🩺</span>
-                    <span class="action-text">Diagnostics</span>
-                </button>
+                ${this._actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'View cognitive memory architecture')}
+                ${this._actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
+                ${this._actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings: Essential, Recommended, Extended Thinking, Copilot Memory')}
+                ${this._actionButton('openDocs', '📚', 'Docs')}
+                ${this._actionButton('provideFeedback', '💬', 'Provide Feedback', 'Share feedback, ideas, or feature requests')}
+                ${this._actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
             </div>
         </div>
         
@@ -1737,6 +1594,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
+  }
+
+  /**
+   * Generate action button HTML
+   */
+  private _actionButton(cmd: string, icon: string, label: string, title?: string): string {
+    const titleAttr = title ? ` title="${this._escapeHtml(title)}"` : '';
+    return `<button class="action-btn" data-cmd="${cmd}"${titleAttr}>
+                    <span class="action-icon">${icon}</span>
+                    <span class="action-text">${label}</span>
+                </button>`;
   }
 
   private _getGoalsHtml(goals: {
