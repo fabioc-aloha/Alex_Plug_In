@@ -732,6 +732,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         * {
             box-sizing: border-box;
             --persona-accent: ${personaAccent};
+            /* Design System - Spacing Scale (8px base) */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            /* Typography Scale (min 11px for accessibility) */
+            --font-xs: 11px;
+            --font-sm: 12px;
+            --font-md: 14px;
+            --font-lg: 16px;
+            /* Elevation/Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
         body {
             font-family: var(--vscode-font-family);
@@ -740,6 +755,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background-color: var(--vscode-sideBar-background);
             padding: 0;
             margin: 0;
+        }
+        /* Focus indicators for accessibility */
+        button:focus-visible,
+        [tabindex]:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--vscode-focusBorder);
+            outline-offset: 2px;
         }
         .container {
             padding: 4px 6px;
@@ -799,12 +821,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             50% { transform: translateY(-2px); }
         }
         .header-title {
-            font-size: 13px;
+            font-size: var(--font-md);
             font-weight: 600;
             letter-spacing: -0.2px;
         }
         .header-persona {
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-foreground);
             background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
             border: 1px solid color-mix(in srgb, var(--persona-accent) 30%, transparent);
@@ -828,7 +850,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .project-name {
             text-align: center;
-            font-size: 13px;
+            font-size: var(--font-md);
             font-weight: 500;
             color: var(--vscode-descriptionForeground);
             margin: 8px 0;
@@ -840,11 +862,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .rocket-bar {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 4px 8px;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
             margin-bottom: 10px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: var(--font-xs);
             letter-spacing: 0.3px;
             color: var(--vscode-foreground);
             background: linear-gradient(135deg,
@@ -860,7 +882,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 color-mix(in srgb, var(--persona-accent) 10%, transparent));
         }
         .rocket-bar .rocket-emoji {
-            font-size: 12px;
+            font-size: var(--font-sm);
             flex-shrink: 0;
         }
         .rocket-bar strong {
@@ -870,7 +892,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .premium-badge {
             background: var(--vscode-badge-background, #4d4d4d);
             color: var(--vscode-badge-foreground, #ccc);
-            font-size: 8px;
+            font-size: var(--font-xs);
             font-weight: 500;
             padding: 1px 5px;
             border-radius: 6px;
@@ -899,12 +921,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-bottom: 16px;
         }
         .section-title {
-            font-size: 10px;
+            font-size: var(--font-xs);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: 8px;
+            margin-bottom: var(--spacing-sm);
             opacity: 0.85;
         }
         
@@ -916,9 +938,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .status-item {
             background: var(--vscode-editor-background);
             border-radius: 5px;
-            padding: 8px 10px;
+            padding: var(--spacing-sm) 10px;
             border-left: 2px solid transparent;
             transition: all 0.12s ease;
+            box-shadow: var(--shadow-sm);
         }
         .status-item:hover {
             border-left-color: var(--vscode-focusBorder);
@@ -931,29 +954,42 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-left-color: var(--vscode-charts-yellow);
         }
         .status-label {
-            font-size: 9px;
+            font-size: var(--font-xs);
             color: var(--vscode-descriptionForeground);
             margin-bottom: 2px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
         .status-value {
-            font-size: 12px;
+            font-size: var(--font-sm);
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 5px;
         }
         .status-dot {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             flex-shrink: 0;
             box-shadow: 0 0 3px currentColor;
+            position: relative;
+        }
+        /* Accessibility: Icon labels for color-blind users */
+        .status-dot::after {
+            position: absolute;
+            font-size: 8px;
+            line-height: 8px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         .dot-green { background: var(--vscode-charts-green); color: var(--vscode-charts-green); }
+        .dot-green::after { content: '✓'; color: white; }
         .dot-yellow { background: var(--vscode-charts-yellow); color: var(--vscode-charts-yellow); }
+        .dot-yellow::after { content: '⚠'; color: black; font-weight: bold; }
         .dot-red { background: var(--vscode-charts-red); color: var(--vscode-charts-red); }
+        .dot-red::after { content: '✗'; color: white; }
         .status-num {
             font-weight: 600;
             font-size: 18px;
@@ -966,7 +1002,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-weight: normal;
         }
         .status-completed {
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-charts-green);
             font-weight: 500;
         }
@@ -975,6 +1011,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-radius: 5px;
             padding: 10px;
             border-left: 2px solid var(--persona-accent);
+            box-shadow: var(--shadow-sm);
         }
         .context-objective {
             font-size: 11px;
@@ -1002,8 +1039,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 4px;
         }
         .trifecta-tag {
-            font-size: 10px;
-            padding: 2px 8px;
+            font-size: var(--font-xs);
+            padding: 2px var(--spacing-sm);
             border-radius: 10px;
             background: color-mix(in srgb, var(--persona-accent) 12%, var(--vscode-badge-background));
             color: var(--vscode-foreground);
@@ -1023,7 +1060,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-top: 8px;
         }
         .context-badge {
-            font-size: 9px;
+            font-size: var(--font-xs);
             padding: 1px 6px;
             border-radius: 8px;
             background: var(--vscode-badge-background);
@@ -1054,6 +1091,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             padding: 10px;
             margin-bottom: 10px;
             border-left: 2px solid var(--vscode-charts-blue);
+            box-shadow: var(--shadow-sm);
         }
         .session-header {
             display: flex;
@@ -1084,11 +1122,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-top: 3px;
         }
         .session-status {
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-descriptionForeground);
         }
         .session-actions-link {
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-textLink-foreground);
             text-decoration: none;
             cursor: pointer;
@@ -1103,7 +1141,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 3px;
         }
         .action-group-label {
-            font-size: 9px;
+            font-size: var(--font-xs);
             font-weight: 500;
             color: var(--vscode-descriptionForeground);
             margin-top: 10px;
@@ -1119,16 +1157,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 10px;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 10px;
+            min-height: 44px; /* WCAG touch target */
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 11px;
+            font-size: var(--font-xs);
             text-align: left;
             transition: all 0.1s ease;
+            box-shadow: var(--shadow-sm);
         }
         .action-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
@@ -1144,7 +1184,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transform: translateX(1px);
         }
         .action-icon {
-            font-size: 12px;
+            font-size: var(--font-sm);
             width: 18px;
             text-align: center;
             display: flex;
@@ -1161,7 +1201,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             flex: 1;
         }
         .action-btn .premium-badge {
-            font-size: 9px;
+            font-size: var(--font-xs);
             margin-left: auto;
             opacity: 0.5;
         }
@@ -1180,7 +1220,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: color-mix(in srgb, var(--persona-accent) 15%, var(--vscode-button-secondaryHoverBackground));
         }
         .recommended-badge {
-            font-size: 11px;
+            font-size: var(--font-xs);
             margin-left: auto;
             opacity: 0.6;
             color: var(--persona-accent);
@@ -1195,7 +1235,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border: 1px solid var(--vscode-widget-border);
         }
         .section-subtitle {
-            font-size: 10px;
+            font-size: var(--font-xs);
             font-weight: 600;
             color: var(--vscode-descriptionForeground);
             margin-bottom: 8px;
@@ -1211,7 +1251,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: 8px 10px;
+            padding: var(--spacing-sm) 10px;
+            min-height: 44px; /* WCAG touch target */
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
@@ -1220,6 +1261,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             cursor: pointer;
             text-align: left;
             transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
         }
         .skill-recommendation-btn:hover {
             background: var(--vscode-button-secondaryHoverBackground);
@@ -1227,12 +1269,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             transform: translateX(2px);
         }
         .skill-rec-name {
-            font-size: 11px;
+            font-size: var(--font-xs);
             font-weight: 500;
             margin-bottom: 2px;
         }
         .skill-rec-reason {
-            font-size: 9px;
+            font-size: var(--font-xs);
             opacity: 0.7;
             font-style: italic;
         }
@@ -1240,7 +1282,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .goals-stats {
             display: flex;
             gap: 12px;
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-descriptionForeground);
             margin-bottom: 8px;
             opacity: 0.85;
@@ -1262,14 +1304,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-bottom: 4px;
         }
         .goal-title {
-            font-size: 11px;
+            font-size: var(--font-xs);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             flex: 1;
         }
         .goal-progress-text {
-            font-size: 9px;
+            font-size: var(--font-xs);
             color: var(--vscode-descriptionForeground);
             margin-left: 8px;
             opacity: 0.8;
@@ -1326,11 +1368,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             min-width: 0;
         }
         .nudge-message {
-            font-size: 11px;
+            font-size: var(--font-xs);
             line-height: 1.3;
         }
         .nudge-action {
-            font-size: 10px;
+            font-size: var(--font-xs);
             color: var(--vscode-textLink-foreground);
             background: none;
             border: none;
@@ -1387,7 +1429,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-bottom: 10px;
         }
         .feature-category-title {
-            font-size: 10px;
+            font-size: var(--font-xs);
             font-weight: 600;
             color: var(--vscode-foreground);
             margin-bottom: 4px;
@@ -1395,7 +1437,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .feature-list {
             margin: 0;
             padding-left: 14px;
-            font-size: 10px;
+            font-size: var(--font-xs);
             line-height: 1.5;
             color: var(--vscode-descriptionForeground);
         }
@@ -1419,12 +1461,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-button-secondaryForeground);
             border: none;
             border-radius: 4px;
-            padding: 4px 8px;
-            font-size: 10px;
+            padding: var(--spacing-sm);
+            min-height: 44px; /* WCAG touch target */
+            font-size: var(--font-xs);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: var(--spacing-xs);
             transition: all 0.1s ease;
         }
         .feature-link-btn:hover {
@@ -1435,22 +1478,22 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" />
+            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" tabindex="0" role="button" />
             <div class="header-text">
                 <span class="header-title">Alex Cognitive</span>
-                <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills">${personaIcon} ${personaName}</span>
+                <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills" tabindex="0" role="button">${personaIcon} ${personaName}</span>
             </div>
-            <button class="refresh-btn" data-cmd="refresh" title="Refresh">↻</button>
+            <button class="refresh-btn" data-cmd="refresh" title="Refresh" aria-label="Refresh welcome view">↻</button>
         </div>
 
-        <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills">
+        <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills" tabindex="0" role="button">
             <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
             ${easterEggBadge}
         </div>
 
         ${workspaceName ? `<div class="project-name" title="Current workspace">${this._escapeHtml(workspaceName)}</div>` : ""}
 
-        <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more">
+        <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more" tabindex="0" role="button">
             <span class="rocket-emoji">🚀</span>
             <span>Take Your <strong>${bannerNoun}</strong> to New Heights</span>
         </div>
@@ -1460,15 +1503,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         ${this._getNudgesHtml(nudges)}
         
         <div class="section">
-            <div class="section-title clickable" data-cmd="healthDashboard" title="Click to open Health Dashboard">Status</div>
-            <div class="status-grid" data-cmd="healthDashboard" style="cursor: pointer;" title="Click to open Health Dashboard">
+            <div class="section-title clickable" data-cmd="healthDashboard" title="Click to open Health Dashboard" tabindex="0" role="button">Status</div>
+            <div class="status-grid" data-cmd="healthDashboard" style="cursor: pointer;" title="Click to open Health Dashboard" tabindex="0" role="region" aria-label="Architecture health status">
                 <div class="status-item ${isHealthy ? "status-good" : "status-warn"}">
                     <div class="status-label">Health</div>
-                    <div class="status-value"><span class="status-dot ${isHealthy ? "dot-green" : health.brokenSynapses > 5 ? "dot-red" : "dot-yellow"}"></span>${healthText}</div>
+                    <div class="status-value"><span class="status-dot ${isHealthy ? "dot-green" : health.brokenSynapses > 5 ? "dot-red" : "dot-yellow"}" aria-label="${isHealthy ? "Healthy" : health.brokenSynapses > 5 ? "Critical" : "Warning"}"></span>${healthText}</div>
                 </div>
                 <div class="status-item ${streakDays > 0 ? "status-good" : ""}">
                     <div class="status-label">Streak</div>
-                    <div class="status-value"><span class="status-dot ${streakDays > 0 ? "dot-green" : "dot-yellow"}"></span>${streakDays > 0 ? streakDays + " days" : "Start today!"}</div>
+                    <div class="status-value"><span class="status-dot ${streakDays > 0 ? "dot-green" : "dot-yellow"}" aria-label="${streakDays > 0 ? "Active streak" : "No streak"}"></span>${streakDays > 0 ? streakDays + " days" : "Start today!"}</div>
                 </div>
             </div>
         </div>
@@ -1476,13 +1519,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Active Context</div>
             <div class="context-card">
-                ${hasObjective ? `<div class="context-objective" data-cmd="sessionActions" title="Session objective">${this._escapeHtml(rawObjective!)}</div>` : ""}
+                ${hasObjective ? `<div class="context-objective" data-cmd="sessionActions" title="Session objective" tabindex="0" role="button">${this._escapeHtml(rawObjective!)}</div>` : ""}
                 <div class="trifecta-tags">
                     ${trifectaTagsHtml}
                 </div>
                 <div class="context-meta">
                     ${confidenceLabel ? `<span class="context-badge accent">${personaIcon} ${confidenceLabel} ${sourceLabel}</span>` : ""}
-                    <span class="context-badge ${isNeverAssessed ? "stale" : ""}" data-cmd="selfActualize" title="${isNeverAssessed ? "Run self-actualization" : "Last self-actualization"}">${isNeverAssessed ? "⚡ Assess" : "✓ " + assessedLabel}</span>
+                    <span class="context-badge ${isNeverAssessed ? "stale" : ""}" data-cmd="selfActualize" title="${isNeverAssessed ? "Run self-actualization" : "Last self-actualization"}" tabindex="0" role="button">${isNeverAssessed ? "⚡ Assess" : "✓ " + assessedLabel}</span>
                     <span class="context-badge">${principlesText}</span>
                 </div>
             </div>
@@ -1490,18 +1533,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         
         <div class="section">
             <div class="section-title">Quick Actions</div>
-            <div class="action-list">
+            <nav class="action-list" aria-label="Quick actions" role="navigation">
                 ${skillRecommendationsHtml}
                 
                 <div class="action-group-label">CORE</div>
                 ${this._actionButton('workingWithAlex', '🎓', 'Working with Alex', 'Learn how to work effectively with Alex')}
                 ${this._actionButton('openBrainAnatomy', '🧠', 'Brain Anatomy', 'Explore Alex\'s cognitive brain anatomy')}
-                <button class="action-btn" data-cmd="openChat">
-                    <span class="action-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
+                <button class="action-btn" data-cmd="openChat" tabindex="0" role="button" aria-label="Chat with Copilot">
+                    <span class="action-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
                     <span class="action-text">Chat with Copilot</span>
                 </button>
-                <button class="action-btn" data-cmd="upgrade">
-                    <span class="action-icon">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
+                <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
+                    <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                     <span class="action-text">Initialize / Update</span>
                 </button>
                 ${this._actionButton('dream', '💭', 'Dream')}
@@ -1543,7 +1586,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 ${this._actionButton('openDocs', '📚', 'Docs')}
                 ${this._actionButton('provideFeedback', '💬', 'Provide Feedback', 'Share feedback, ideas, or feature requests')}
                 ${this._actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
-            </div>
+            </nav>
         </div>
         
         ${this._getGoalsHtml(goals)}
@@ -1598,12 +1641,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * Generate action button HTML
+   * Generate action button HTML with accessibility attributes
    */
   private _actionButton(cmd: string, icon: string, label: string, title?: string): string {
     const titleAttr = title ? ` title="${this._escapeHtml(title)}"` : '';
-    return `<button class="action-btn" data-cmd="${cmd}"${titleAttr}>
-                    <span class="action-icon">${icon}</span>
+    const ariaLabel = title ? this._escapeHtml(title) : label;
+    return `<button class="action-btn" data-cmd="${cmd}"${titleAttr} tabindex="0" role="button" aria-label="${ariaLabel}">
+                    <span class="action-icon" aria-hidden="true">${icon}</span>
                     <span class="action-text">${label}</span>
                 </button>`;
   }
@@ -1619,10 +1663,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       return `
         <div class="section">
             <div class="section-title">Learning Goals</div>
-            <div style="text-align: center; padding: 12px; opacity: 0.7;">
+            <div style="text-align: center; padding: 12px; opacity: 0.7;" role="region" aria-label="Create learning goals">
                 <p style="margin: 0 0 8px 0;">Set goals to track your progress</p>
-                <button class="action-btn primary" data-cmd="createGoal" style="display: inline-flex; width: auto;">
-                    <span class="action-icon">➕</span>
+                <button class="action-btn primary" data-cmd="createGoal" style="display: inline-flex; width: auto;" tabindex="0" role="button" aria-label="Create your first learning goal">
+                    <span class="action-icon" aria-hidden="true">➕</span>
                     <span class="action-text">Create Goal</span>
                 </button>
             </div>
@@ -1638,12 +1682,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         );
         const progressWidth = Math.min(progress, 100);
         return `
-            <div class="goal-item">
+            <div class="goal-item" role="article" aria-label="Goal: ${this._escapeHtml(goal.title)}">
                 <div class="goal-header">
                     <span class="goal-title">${this._escapeHtml(goal.title)}</span>
-                    <span class="goal-progress-text">${goal.currentCount}/${goal.targetCount}</span>
+                    <span class="goal-progress-text" aria-label="Progress: ${goal.currentCount} of ${goal.targetCount}">${goal.currentCount}/${goal.targetCount}</span>
                 </div>
-                <div class="goal-bar">
+                <div class="goal-bar" role="progressbar" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100" aria-label="${progress}% complete">
                     <div class="goal-bar-fill" style="width: ${progressWidth}%;"></div>
                 </div>
             </div>`;
@@ -1653,11 +1697,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     return `
         <div class="section">
             <div class="section-title">Learning Goals ${goals.streakDays > 0 ? `<span style="float: right;">🔥 ${goals.streakDays} day streak</span>` : ""}</div>
-            <div class="goals-stats">
+            <div class="goals-stats" role="status" aria-label="${goals.completedToday} completed today, ${goals.totalCompleted} total">
                 <span>✅ ${goals.completedToday} today</span>
                 <span>🏆 ${goals.totalCompleted} total</span>
             </div>
-            ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;">No active goals</div>'}
+            <div role="list" aria-label="Active learning goals">
+                ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;" role="status">No active goals</div>'}
+            </div>
         </div>`;
   }
 
@@ -1674,12 +1720,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       .map((nudge) => {
         const typeClass = `nudge-${nudge.type}`;
         const actionHtml = nudge.action
-          ? `<button class="nudge-action" data-cmd="${nudge.action}">${nudge.actionLabel}</button>`
+          ? `<button class="nudge-action" data-cmd="${nudge.action}" tabindex="0" role="button" aria-label="${this._escapeHtml(nudge.actionLabel || 'Take action')}">${this._escapeHtml(nudge.actionLabel || 'Take action')}</button>`
           : "";
 
         return `
-        <div class="nudge-card ${typeClass}">
-            <span class="nudge-icon">${nudge.icon}</span>
+        <div class="nudge-card ${typeClass}" role="article" aria-label="Nudge: ${this._escapeHtml(nudge.message)}">
+            <span class="nudge-icon" aria-hidden="true">${nudge.icon}</span>
             <div class="nudge-content">
                 <span class="nudge-message">${this._escapeHtml(nudge.message)}</span>
             </div>
@@ -1703,9 +1749,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <details>
                 <summary class="section-title clickable">📖 Features & Documentation</summary>
                 <div class="features-content">
-                    <div class="feature-category">
-                        <div class="feature-category-title">🧠 Cognitive Core</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="cognitive-core-title">
+                        <div class="feature-category-title" id="cognitive-core-title">🧠 Cognitive Core</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>Dream Protocol</strong> - Automated neural maintenance, synapse validation, and architecture health checks</li>
                             <li><strong>Self-Actualization</strong> - Deep meditation with comprehensive architecture assessment and knowledge promotion</li>
                             <li><strong>Meditation</strong> - Conscious knowledge consolidation via chat (@alex /meditate)</li>
@@ -1714,9 +1760,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">📚 Knowledge Management</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="knowledge-mgmt-title">
+                        <div class="feature-category-title" id="knowledge-mgmt-title">📚 Knowledge Management</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights with GitHub remote access</li>
                             <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
                             <li><strong>Skill Library</strong> - 116 portable skills with triggers and synaptic connections</li>
@@ -1725,9 +1771,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">⚖️ Work-Life Balance</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="balance-title">
+                        <div class="feature-category-title" id="balance-title">⚖️ Work-Life Balance</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>Focus Sessions</strong> - Pomodoro-style work sessions with breaks and automatic tracking</li>
                             <li><strong>Learning Goals</strong> - Track progress with targets, streaks, and achievements</li>
                             <li><strong>Health Dashboard</strong> - Visual architecture status and cognitive metrics</li>
@@ -1735,9 +1781,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">💬 Chat Integration</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="chat-title">
+                        <div class="feature-category-title" id="chat-title">💬 Chat Integration</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>@alex Chat Participant</strong> - Personality-driven conversations with memory</li>
                             <li><strong>12 Language Model Tools</strong> - Status, memory search, knowledge management</li>
                             <li><strong>Custom Agents</strong> - Specialized handoffs for meditation, dreams, Azure</li>
@@ -1745,9 +1791,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">🌐 Cross-Platform</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="cross-platform-title">
+                        <div class="feature-category-title" id="cross-platform-title">🌐 Cross-Platform</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>M365 Export</strong> - Package knowledge for Microsoft 365 Copilot integration</li>
                             <li><strong>Architecture Upgrade</strong> - Seamless migration between versions with backup</li>
                             <li><strong>User Profile</strong> - Personalized communication style and preferences</li>
@@ -1756,9 +1802,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">⚙️ Environment Setup</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="env-setup-title">
+                        <div class="feature-category-title" id="env-setup-title">⚙️ Environment Setup</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>Essential Settings</strong> (7) - instruction/prompt file locations, agent mode, skill loading</li>
                             <li><strong>Recommended Settings</strong> (24) - thinking tool, memory, subagents, MCP gallery, request queueing, UI</li>
                             <li><strong>Auto-Approval Settings</strong> (5) - auto-run tools, file operations, terminal automation</li>
@@ -1767,9 +1813,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">📁 Configuration Locations</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="config-title">
+                        <div class="feature-category-title" id="config-title">📁 Configuration Locations</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>.github/config/</strong> - All Alex configuration files</li>
                             <li><strong>user-profile.json</strong> - Communication preferences and project persona</li>
                             <li><strong>markdown-light.css</strong> - GitHub-style markdown preview theme</li>
@@ -1777,9 +1823,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-category">
-                        <div class="feature-category-title">📖 Documentation Guides</div>
-                        <ul class="feature-list">
+                    <div class="feature-category" role="article" aria-labelledby="docs-title">
+                        <div class="feature-category-title" id="docs-title">📖 Documentation Guides</div>
+                        <ul class="feature-list" role="list">
                             <li><strong>Work-Life Balance</strong> - Focus sessions, goals, streaks, and sustainable productivity</li>
                             <li><strong>M365 Export</strong> - Bridge your knowledge to Microsoft 365 Copilot</li>
                             <li><strong>Global Knowledge</strong> - Cross-project patterns and insights</li>
@@ -1787,13 +1833,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                         </ul>
                     </div>
                     
-                    <div class="feature-links">
-                        <button class="feature-link-btn" data-cmd="workingWithAlex">🎓 Working with Alex</button>
-                        <button class="feature-link-btn" data-cmd="openDocs">📚 Full Documentation</button>
-                        <button class="feature-link-btn" data-cmd="openBrainAnatomy">🧠 Brain Anatomy</button>
-                        <button class="feature-link-btn" data-cmd="openMarketplace">🏪 Marketplace</button>
-                        <button class="feature-link-btn" data-cmd="openGitHub">🐙 GitHub</button>
-                    </div>
+                    <nav class="feature-links" role="navigation" aria-label="Feature documentation links">
+                        <button class="feature-link-btn" data-cmd="workingWithAlex" tabindex="0" role="button" aria-label="Learn about working with Alex">🎓 Working with Alex</button>
+                        <button class="feature-link-btn" data-cmd="openDocs" tabindex="0" role="button" aria-label="Open full documentation">📚 Full Documentation</button>
+                        <button class="feature-link-btn" data-cmd="openBrainAnatomy" tabindex="0" role="button" aria-label="Explore brain anatomy">🧠 Brain Anatomy</button>
+                        <button class="feature-link-btn" data-cmd="openMarketplace" tabindex="0" role="button" aria-label="View on VS Code Marketplace">🏪 Marketplace</button>
+                        <button class="feature-link-btn" data-cmd="openGitHub" tabindex="0" role="button" aria-label="View on GitHub">🐙 GitHub</button>
+                    </nav>
                 </div>
             </details>
         </div>`;
