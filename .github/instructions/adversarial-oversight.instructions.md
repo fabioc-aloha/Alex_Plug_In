@@ -78,7 +78,7 @@ These operations **MUST** trigger Validator agent review:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
-flowchart LR
+flowchart TD
     BUILD["Builder  creates/implements"] --> REQUEST["Request  Validation"]
     REQUEST --> VALIDATOR["Validator  reviews adversarially"]
     VALIDATOR -->|Critical Issues| BLOCK["🔴 Block  with detailed notes"]

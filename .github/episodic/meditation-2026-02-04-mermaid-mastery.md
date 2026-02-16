@@ -30,6 +30,7 @@ Through systematic experimentation with the VS Code 1.109 Implementation Plan di
 Discovered that Mermaid's invisible link operator forces layout relationships between elements without visible arrows. This enables horizontal subgraph arrangement when subgraphs have no logical data flow connections.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'primaryBorderColor': '#57606a', 'lineColor': '#57606a', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph A["First"]
         direction TB

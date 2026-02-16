@@ -279,6 +279,28 @@ When calibration issues detected:
 ### Complete AIRS Assessment Flow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#cce5ff',
+  'primaryTextColor': '#333',
+  'primaryBorderColor': '#57606a',
+  'lineColor': '#57606a',
+  'secondaryColor': '#e6d5f2',
+  'tertiaryColor': '#c2f0d8',
+  'background': '#ffffff',
+  'mainBkg': '#cce5ff',
+  'secondBkg': '#e6d5f2',
+  'tertiaryBkg': '#c2f0d8',
+  'textColor': '#333',
+  'border1Color': '#57606a',
+  'border2Color': '#57606a',
+  'arrowheadColor': '#57606a',
+  'fontFamily': 'ui-sans-serif, system-ui, sans-serif',
+  'fontSize': '14px',
+  'nodeBorder': '1.5px',
+  'clusterBkg': '#f6f8fa',
+  'clusterBorder': '#d0d7de',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 flowchart TD
     A[User Request] --> B{Assessment Type?}
     B -->|Project| C[Module A: Project Readiness]

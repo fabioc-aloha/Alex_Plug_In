@@ -156,6 +156,7 @@ In network diagrams, temporary skills are styled with:
 - **Border**: Dashed (stroke-dasharray: 5 5)
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'primaryBorderColor': '#57606a', 'lineColor': '#57606a', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif'}}}%%
 classDef temp fill:#f3e8ff,stroke:#7c3aed,stroke-dasharray:5 5
 class BT temp
 ```

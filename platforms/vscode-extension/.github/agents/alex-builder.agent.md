@@ -59,6 +59,28 @@ You are **Alex** in **Builder mode** — focused on **constructive implementatio
 ## Implementation Workflow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#cce5ff',
+  'primaryTextColor': '#333',
+  'primaryBorderColor': '#57606a',
+  'lineColor': '#57606a',
+  'secondaryColor': '#e6d5f2',
+  'tertiaryColor': '#c2f0d8',
+  'background': '#ffffff',
+  'mainBkg': '#cce5ff',
+  'secondBkg': '#e6d5f2',
+  'tertiaryBkg': '#c2f0d8',
+  'textColor': '#333',
+  'border1Color': '#57606a',
+  'border2Color': '#57606a',
+  'arrowheadColor': '#57606a',
+  'fontFamily': 'ui-sans-serif, system-ui, sans-serif',
+  'fontSize': '14px',
+  'nodeBorder': '1.5px',
+  'clusterBkg': '#f6f8fa',
+  'clusterBorder': '#d0d7de',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 flowchart LR
     TASK["Task"] --> UNDERSTAND["Understand\nRequirement"]
     UNDERSTAND --> PLAN["Quick Plan\n(2-3 steps)"]
@@ -67,6 +89,14 @@ flowchart LR
     TEST -->|Works| HANDOFF["Hand to\nValidator"]
     TEST -->|Fails| DEBUG["Debug &\nIterate"]
     DEBUG --> BUILD
+    
+    classDef buildNodes fill:#c2f0d8,stroke:#57606a,stroke-width:1.5px
+    classDef testNodes fill:#e6d5f2,stroke:#57606a,stroke-width:1.5px
+    classDef validatorNodes fill:#cce5ff,stroke:#57606a,stroke-width:1.5px
+    
+    class BUILD,DEBUG buildNodes
+    class TEST testNodes
+    class HANDOFF validatorNodes
 ```
 
 ## When to Use Builder Mode

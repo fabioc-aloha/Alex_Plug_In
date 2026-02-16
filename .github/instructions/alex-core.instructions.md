@@ -230,6 +230,7 @@ The LLM sees: `┌─────────┐ ┌─────────�
 
 But when you write:
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'primaryBorderColor': '#57606a', 'lineColor': '#57606a', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif'}}}%%
 graph LR
     Start --> End
 ```
