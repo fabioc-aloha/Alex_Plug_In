@@ -149,7 +149,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                     |
 | ----------------- | ------------------------------------------------------------------------------ |
 | **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                   |
-| **Intelligence**  | 120 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 121 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
@@ -732,7 +732,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (120 skills)
+├── skills/                    # 🎓 Portable domain expertise (121 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -780,7 +780,7 @@ Alex connects to your Microsoft 365 environment for enterprise workflows:
 
 ### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.5)
 
-Skills grew from 92 → 120 with new acquisition and inheritance mechanisms:
+Skills grew from 92 → 121 with new acquisition and inheritance mechanisms:
 
 - **`/checkskills`** — Discover new skills available from Global Knowledge
 - **`/pullskill <id>`** — Install a skill into your project from GK
