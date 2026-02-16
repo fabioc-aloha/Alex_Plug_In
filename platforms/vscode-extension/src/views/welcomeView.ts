@@ -147,11 +147,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // Handle special cases
       switch (message.command) {
         case "openChat":
+          console.log('[Alex] Opening chat panel');
           openChatPanel();
           break;
         case "launchRecommendedSkill": {
           const skill = message.skill || "code-quality";
           const skillName = message.skillName || skill;
+          console.log('[Alex] Launching recommended skill:', { skill, skillName });
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
           await trackRecommendationFeedback(skill, true);
           await openChatPanel(prompt);

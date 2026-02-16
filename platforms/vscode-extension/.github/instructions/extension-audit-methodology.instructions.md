@@ -26,7 +26,7 @@ Auto-load systematic audit procedures for VS Code extensions across 5 critical q
 
 ---
 
-## The 5-Dimension Framework
+## The 6-Dimension Framework
 
 ### Dimension 1: Debug & Logging Audit
 
@@ -205,6 +205,74 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 
 ---
 
+### Dimension 6: Configuration & Manifest Validation
+
+**Purpose**: Ensure all runtime configuration usage matches package.json registration
+
+**New in v5.7.5**: Critical dimension to prevent silent runtime failures from unregistered configuration keys.
+
+**Automated validation script**:
+```powershell
+.\scripts\validate-manifest.ps1
+```
+
+**Manual verification**:
+
+**1. Configuration Updates**:
+```powershell
+# Find all config.update() calls
+Select-String -Path src -Pattern "getConfiguration.*\.update\(" -Recurse
+```
+
+**Cross-reference checklist**:
+- Each updated key exists in `package.json` `configuration.properties`, OR
+- Update is wrapped in try-catch with graceful degradation
+
+**2. Command Registration**:
+```powershell
+# Find all registerCommand() calls
+Select-String -Path src -Pattern "registerCommand\(['\"]alex\." -Recurse
+```
+
+**Cross-reference checklist**:
+- Each `registerCommand()` has matching entry in `contributes.commands`
+- Each declared command in `package.json` has implementation
+
+**Common failure patterns**:
+
+| Pattern | Symptom | Fix |
+|---------|---------|-----|
+| Dynamic config keys (user tracking) | ✗ Unable to write to User Settings | Wrap in try-catch |
+| Command registered but not declared | Hidden from Command Palette | Add to `package.json` |
+| Command declared but not implemented | Runtime error on invoke | Implement or remove |
+| Configuration read without default | `undefined` value | Always provide fallback |
+
+**Graceful degradation pattern** (for non-critical features):
+```typescript
+try {
+  await vscode.workspace.getConfiguration('alex.dynamic')
+    .update(key, value, ConfigurationTarget.Global);
+} catch (error) {
+  console.log(`[Alex] Skipping feature tracking: ${error}`);
+}
+```
+
+**When to use try-catch**:
+- Dynamic configuration keys (user preferences, counters)
+- Optional feature tracking (analytics, usage stats)
+- Any config that doesn't affect core functionality
+
+**When to register in package.json**:
+- User-facing settings (preferences, toggles)
+- Critical configuration (paths, API keys)
+- Settings with default values or validation
+
+**Target**: Zero unhandled configuration errors, 100% command coverage
+
+**See also**: [vscode-configuration-validation/SKILL.md](../skills/vscode-configuration-validation/SKILL.md)
+
+---
+
 ## Audit Report Template
 
 **Structure**:
@@ -228,6 +296,7 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 | Performance | W blocking ops | 0 | 🟡 |
 | Menu Validation | A/B working | 100% | 🟢 |
 | Dependencies | C unused | 0 | 🟢 |
+| Config/Manifest | D mismatches | 0 | 🟡 |
 
 **Overall Grade**: [A+/A/A-/B+/B/B-/C]
 
@@ -297,6 +366,19 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 
 ---
 
+### 6. Configuration & Manifest
+
+**Unregistered config updates** (D mismatches):
+- `alex.skillRecommendations.*.accepted` — Dynamic key, needs try-catch
+- `alex.custom.setting` — Used but not in package.json
+
+**Unregistered commands**:
+- `alex.hiddenCommand` — Registered but not declared (not discoverable)
+
+**Recommendation**: Add to package.json or wrap in try-catch for dynamic keys. Run `scripts/validate-manifest.ps1`.
+
+---
+
 ## Remediation Plan
 
 | Priority | Dimension | Action | Effort | Impact |
@@ -341,15 +423,15 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 
 ---
 
-## Real-World Application: Alex v5.7.1
+## Real-World Application: Alex v5.7.1 + v5.7.5
 
-**Audit results**:
+**v5.7.1 Audit results**:
 - Console statements: 46 found → 27 removed (18 kept)
 - Dead code: 3 deprecated Gist sync commands + `generateImageFromSelection` + 1 unused dep
 - Performance: 16 blocking sync operations in `cognitiveDashboard.ts`
 - Menu validation: 39/41 working (95%)
 
-**Remediation**:
+**v5.7.1 Remediation**:
 1. Removed 27 console statements (kept error handling + diagnostics)
 2. Deleted 3 deprecated commands from package.json + source
 3. Removed `generateImageFromSelection` UI from 3 locations
@@ -357,11 +439,19 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 5. Uninstalled `@azure/msal-node` (unused)
 6. Deleted 477-line obsolete MS Graph docs
 
-**Results**:
+**v5.7.5 Configuration Validation** (New Dimension):
+- Found: Skill recommendations tracking writing to unregistered `alex.skillRecommendations.*` keys
+- Impact: Quick Actions buttons completely non-functional (silent failure)
+- Root cause: Dynamic config keys for user preference tracking
+- Fix: Wrapped in try-catch with graceful degradation
+- Created: `validate-manifest.ps1` + `vscode-configuration-validation/SKILL.md`
+
+**Cumulative Results**:
 - Code quality: B+ → A+
 - TypeScript errors: 0
-- Extension size: 9.45 MB (optimized)
+- Extension size: 9.51 MB (optimized)
 - Total console removed (2 releases): 61 statements
+- Configuration errors: 1 critical → 0
 
 **Effort**: 8 hours audit + remediation → A+ quality
 
@@ -370,14 +460,14 @@ Select-String -Path src -Pattern "from '@azure/msal-node'" -Recurse
 ## Integration with Release Process
 
 **Pre-publish checklist**:
-- [ ] Run 5-dimension audit
+- [ ] Run 6-dimension audit (or use `scripts/validate-manifest.ps1`)
 - [ ] Remediate all Critical + High priority issues
 - [ ] Update audit report in docs/
 - [ ] Verify post-remediation checklist (compile, activate, smoke test)
 - [ ] Document changes in CHANGELOG.md
 - [ ] Version bump if significant cleanup (consider patch release)
 
-**Cadence**: Run full audit before every minor/major release, abbreviated audit before patches.
+**Cadence**: Run full audit before every minor/major release, abbreviated audit + manifest validation before patches.
 
 ---
 

@@ -292,18 +292,23 @@ export async function trackRecommendationFeedback(
     skillId: string,
     accepted: boolean
 ): Promise<void> {
-    const context = 'alex.skillRecommendations';
-    const key = `${skillId}.${accepted ? 'accepted' : 'dismissed'}`;
-    
-    // Get current count
-    const currentCount = vscode.workspace.getConfiguration(context).get<number>(key, 0);
-    
-    // Increment
-    await vscode.workspace.getConfiguration(context).update(
-        key,
-        currentCount + 1,
-        vscode.ConfigurationTarget.Global
-    );
+    try {
+        const context = 'alex.skillRecommendations';
+        const key = `${skillId}.${accepted ? 'accepted' : 'dismissed'}`;
+        
+        // Get current count
+        const currentCount = vscode.workspace.getConfiguration(context).get<number>(key, 0);
+        
+        // Increment
+        await vscode.workspace.getConfiguration(context).update(
+            key,
+            currentCount + 1,
+            vscode.ConfigurationTarget.Global
+        );
+    } catch (error) {
+        // Configuration not registered - fail silently to not block skill launching
+        console.log(`[Alex] Skipping recommendation tracking (config not registered): ${error}`);
+    }
 }
 
 /**

@@ -1,0 +1,109 @@
+{
+    "schemaVersion": "2.0.0",
+    "skillId": "vscode-configuration-validation",
+    "version": "1.0.0",
+    "inheritance": {
+        "universal": false,
+        "platforms": ["vscode-extension"]
+    },
+    "triggers": {
+        "problemContext": [
+            "VS Code extension configuration errors",
+            "Settings not persisting",
+            "Unable to write to User Settings",
+            "Command not found in Command Palette",
+            "Unregistered configuration key"
+        ],
+        "fileTypes": [
+            "package.json (VS Code extension manifest)",
+            "*.ts (using vscode.workspace.getConfiguration)",
+            "*.ts (using vscode.commands.registerCommand)"
+        ],
+        "keywords": [
+            "configuration validation",
+            "manifest validation",
+            "package.json validation",
+            "command registration",
+            "settings registration",
+            "getConfiguration",
+            "workspace.update",
+            "registerCommand"
+        ]
+    },
+    "yields": {
+        "capabilities": [
+            "Automated manifest validation script",
+            "Configuration key registration verification",
+            "Command registration cross-reference",
+            "Graceful degradation pattern for dynamic configs",
+            "Pre-release quality gate"
+        ],
+        "outputs": [
+            "Validation report (errors/warnings)",
+            "Configuration registration fixes",
+            "Try-catch wrappers for dynamic keys",
+            "Updated package.json with missing declarations"
+        ]
+    },
+    "connections": {
+        "skills": [
+            {
+                "id": "extension-audit-methodology",
+                "relationship": "parent",
+                "note": "Dimension 6 of the audit framework"
+            },
+            {
+                "id": "vscode-extension-patterns",
+                "relationship": "sibling",
+                "note": "Extension development best practices"
+            },
+            {
+                "id": "code-review",
+                "relationship": "sibling",
+                "note": "Configuration API usage review"
+            }
+        ],
+        "instructions": [
+            {
+                "id": "vscode-configuration-validation",
+                "relationship": "implements",
+                "note": "Auto-loads for configuration API usage"
+            },
+            {
+                "id": "extension-audit-methodology",
+                "relationship": "integrates",
+                "note": "Part of 6-dimension audit framework"
+            }
+        ],
+        "prompts": [
+            {
+                "id": "validate-config",
+                "relationship": "invokes",
+                "note": "User-facing validation command"
+            }
+        ],
+        "resources": [
+            {
+                "type": "script",
+                "path": "platforms/vscode-extension/scripts/validate-manifest.ps1",
+                "note": "Automated validation implementation"
+            }
+        ]
+    },
+    "metadata": {
+        "created": "2026-02-15",
+        "domain": "VS Code extension development",
+        "complexity": "intermediate",
+        "prerequisites": [
+            "Understanding of VS Code extension manifest",
+            "VS Code configuration API knowledge",
+            "TypeScript/JavaScript pattern matching"
+        ],
+        "realWorldExample": {
+            "incident": "Skill recommendations Quick Actions non-functional",
+            "rootCause": "Unregistered dynamic configuration keys (alex.skillRecommendations.*)",
+            "solution": "Try-catch wrapper with graceful degradation",
+            "impact": "Critical feature restored without package.json bloat"
+        }
+    }
+}

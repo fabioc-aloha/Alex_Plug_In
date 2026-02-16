@@ -375,6 +375,14 @@
         "command": "alex.enterprise.exportAuditLog",
         "title": "Alex: Export Audit Log",
         "icon": "$(export)"
+      },
+      {
+        "command": "alex.acknowledgeTangent",
+        "title": "Alex: Acknowledge Focus Tangent"
+      },
+      {
+        "command": "alex.refreshMemoryTree",
+        "title": "Alex: Refresh Memory Tree"
       }
     ],
     "markdown.previewStyles": [

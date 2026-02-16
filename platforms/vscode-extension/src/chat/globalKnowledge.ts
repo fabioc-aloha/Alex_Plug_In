@@ -2027,7 +2027,6 @@ export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeInde
     const remoteIndex = await getRemoteIndex();
     if (remoteIndex) {
         isRemoteOnlyMode = true;
-        console.log('[Alex] Using remote Global Knowledge from GitHub');
         return remoteIndex;
     }
     

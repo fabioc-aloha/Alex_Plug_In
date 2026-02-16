@@ -253,7 +253,6 @@ export async function updateActiveContext(
             // Rebuild and write
             const newSection = rebuildSection(ctx);
 
-            console.log(`[ActiveContext] Updated by ${source}: ${changed.join(', ')}`);
             return true;
         } catch (err) {
             console.warn(`[ActiveContext] Write failed (source: ${source}):`, err);

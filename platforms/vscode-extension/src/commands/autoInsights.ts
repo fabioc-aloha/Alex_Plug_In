@@ -284,7 +284,6 @@ export async function promptToSaveInsight(insight: DetectedInsight): Promise<voi
     // Check for duplicates first
     const isDuplicate = await isDuplicateInsight(insight);
     if (isDuplicate) {
-        console.log('Auto-insight skipped: likely duplicate');
         return;
     }
     
