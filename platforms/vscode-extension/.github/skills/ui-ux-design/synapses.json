@@ -1,0 +1,56 @@
+{
+    "skill": "ui-ux-design",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "type": "integrates",
+            "strength": 0.85,
+            "reason": "Accessibility audits are part of code review quality gates"
+        },
+        {
+            "target": ".github/skills/graphic-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Visual identity consistent with accessibility standards"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "validates",
+            "strength": 0.8,
+            "reason": "Automated accessibility testing validates WCAG compliance"
+        },
+        {
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+            "type": "applies-to",
+            "strength": 0.75,
+            "reason": "Webview UI patterns must follow accessibility standards"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "validates",
+            "strength": 0.5,
+            "reason": "Diagram accessibility (alt text, semantic structure)"
+        }
+    ],
+    "triggers": [
+        "accessibility",
+        "WCAG",
+        "a11y",
+        "UI",
+        "UX",
+        "user interface",
+        "user experience",
+        "design system",
+        "typography",
+        "spacing",
+        "contrast",
+        "touch target",
+        "keyboard navigation",
+        "screen reader",
+        "ARIA",
+        "focus indicator"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

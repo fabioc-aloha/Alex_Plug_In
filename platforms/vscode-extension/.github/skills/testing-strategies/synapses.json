@@ -28,6 +28,13 @@
       "reason": "Automated tests provide quality gate for shipping",
       "when": "Verifying release readiness (DoD criterion #4)",
       "yields": "Test pass count as confidence metric"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "validates",
+      "strength": 0.8,
+      "bidirectional": true,
+      "reason": "Automated accessibility testing validates WCAG compliance"
     }
   ],
   "triggers": [
