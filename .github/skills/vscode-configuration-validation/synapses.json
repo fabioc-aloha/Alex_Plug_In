@@ -4,7 +4,9 @@
     "version": "1.0.0",
     "inheritance": {
         "universal": false,
-        "platforms": ["vscode-extension"]
+        "platforms": [
+            "vscode-extension"
+        ]
     },
     "triggers": {
         "problemContext": [

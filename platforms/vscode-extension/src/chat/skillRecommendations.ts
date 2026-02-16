@@ -299,15 +299,27 @@ export async function trackRecommendationFeedback(
         // Get current count
         const currentCount = vscode.workspace.getConfiguration(context).get<number>(key, 0);
         
-        // Increment
-        await vscode.workspace.getConfiguration(context).update(
-            key,
-            currentCount + 1,
-            vscode.ConfigurationTarget.Global
-        );
+        // Increment - try Global first, fallback to Workspace if read-only
+        try {
+            await vscode.workspace.getConfiguration(context).update(
+                key,
+                currentCount + 1,
+                vscode.ConfigurationTarget.Global
+            );
+        } catch (globalError) {
+            // Global config might be read-only (corporate policy) - try workspace
+            await vscode.workspace.getConfiguration(context).update(
+                key,
+                currentCount + 1,
+                vscode.ConfigurationTarget.Workspace
+            );
+        }
     } catch (error) {
-        // Configuration not registered - fail silently to not block skill launching
-        console.log(`[Alex] Skipping recommendation tracking (config not registered): ${error}`);
+        // Configuration not registered or both targets failed - fail silently to not block skill launching
+        // Only log if it's an unexpected error (not registration-related)
+        if (error instanceof Error && !error.message.includes('not registered')) {
+            console.warn(`[Alex] Unexpected error tracking recommendation:`, error);
+        }
     }
 }
 

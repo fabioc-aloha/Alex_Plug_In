@@ -56,9 +56,9 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
     $content = Get-Content $filePath -Raw
     
     # Find all config.update() calls
-    $matches = [regex]::Matches($content, $configUpdatePattern)
+    $configMatches = [regex]::Matches($content, $configUpdatePattern)
     
-    foreach ($match in $matches) {
+    foreach ($match in $configMatches) {
         $context = $match.Groups[1].Value
         $key = $match.Groups[2].Value
         $fullKey = "$context.$key"
@@ -109,9 +109,9 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
     $content = Get-Content $filePath -Raw
     
     # Find all registerCommand() calls
-    $matches = [regex]::Matches($content, $commandPattern)
+    $commandMatches = [regex]::Matches($content, $commandPattern)
     
-    foreach ($match in $matches) {
+    foreach ($match in $commandMatches) {
         $command = $match.Groups[1].Value
         
         # Only check alex.* commands
