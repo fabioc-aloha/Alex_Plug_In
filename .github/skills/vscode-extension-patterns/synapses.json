@@ -53,6 +53,13 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Tiered settings application with Essential/Recommended/Auto-Approval categories"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "implements",
+      "strength": 0.75,
+      "bidirectional": true,
+      "reason": "Webview UI patterns must follow accessibility standards"
     }
   ],
   "activationPatterns": [

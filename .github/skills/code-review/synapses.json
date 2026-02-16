@@ -31,6 +31,13 @@
       "type": "validates",
       "strength": 0.8,
       "reason": "Extension audit methodology validates VS Code patterns"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "integrates",
+      "strength": 0.85,
+      "reason": "Accessibility audits are part of code review quality gates",
+      "bidirectional": true
     }
   ],
   "triggers": [

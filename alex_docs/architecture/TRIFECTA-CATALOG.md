@@ -1,6 +1,6 @@
 # Trifecta Catalog
 
-> **Last Audited**: 2026-02-13
+> **Last Audited**: 2026-02-15
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
@@ -58,7 +58,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (9)
+## Complete Trifectas (11)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -143,6 +143,27 @@ Capabilities with all three memory system components — each justified by the "
 **Muscle**: `audit-master-alex.ps1` — the structural validation engine. Master-only inheritance.
 **Shared instruction**: Both brain-qa and master-alex-audit reference the same `semantic-audit.instructions.md` — the 4-dimension review methodology is universal.
 
+### UI/UX Design
+
+| Component   | File                                                | Why It Exists                                                                                                                     |
+| ----------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/ui-ux-design/SKILL.md`              | Domain knowledge: WCAG 2.1 AA accessibility patterns, design system implementation, testing workflows                             |
+| Instruction | `.github/instructions/ui-ux-design.instructions.md` | Auto-loaded procedure: accessibility standards (typography ≥11px, contrast 4.5:1, touch ≥44px) for HTML/JSX/TSX/Vue/Svelte        |
+| Prompt      | `.github/prompts/ui-ux-audit.prompt.md`             | `/uiuxaudit` — user invokes systematic 5-phase accessibility audit (Visual → Accessibility → Design System → Testing → Reporting) |
+
+**Also has**: Bidirectional synapse connections to code-review (0.85), graphic-design (0.7), testing-strategies (0.8), vscode-extension-patterns (0.75)
+**Inheritance**: `inheritable` — promotes to all heirs
+
+### VS Code Configuration Validation
+
+| Component   | File                                                                   | Why It Exists                                                                                       |
+| ----------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/vscode-configuration-validation/SKILL.md`              | Domain knowledge: VS Code manifest validation patterns, runtime code vs declared config consistency |
+| Instruction | `.github/instructions/vscode-configuration-validation.instructions.md` | Auto-loaded procedure: validates extension manifest against actual code usage                       |
+| Prompt      | `.github/prompts/validate-config.prompt.md`                            | `/validateconfig` — user invokes manifest vs code audit workflow                                    |
+
+**Inheritance**: `heir:vscode` — VS Code heir-specific capability (no universal promotion)
+
 ---
 
 ## Justified Non-Trifectas
@@ -202,7 +223,7 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:    9 justified candidates
+Complete Trifectas:   11 justified candidates
 Procedural-Only:      21 (all justified)
 Prompt-Only:           8 (all justified)
 Skill-Only:           ~98 (standard — passive expertise)
@@ -213,7 +234,7 @@ Skill-Only:           ~98 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#f6f8fa'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (9)"]
+    subgraph COMPLETE["✅ Complete Trifectas (11)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -223,6 +244,8 @@ flowchart LR
         BL["Bootstrap Learning"]
         BQA["Brain QA"]
         MAA["Master Alex Audit"]
+        UIUX["UI/UX Design"]
+        VSCC["VS Code Configuration Validation"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -240,6 +263,8 @@ flowchart LR
     BL --- SK & INS & PR
     BQA --- SK & INS & PR
     MAA --- SK & INS & PR
+    UIUX --- SK & INS & PR
+    VSCC --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da
@@ -316,14 +341,15 @@ See `trifecta-audit.instructions.md` § "Heir Trifecta Implementation" for the f
 
 ## Audit Changelog
 
-| Date       | Action                                   | Result                                                                                                                                     |
-| ---------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026-02-13 | Initial trifecta refactoring             | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                       |
-| 2026-02-13 | Full audit with Why? protocol            | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                           |
-| 2026-02-13 | Created `trifecta-audit.instructions.md` | Formal audit protocol with anti-patterns                                                                                                   |
-| 2026-02-13 | Heir trifecta generalization             | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                             |
-| 2026-02-13 | Heir project improvement instruction     | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first         |
-| 2026-02-13 | Scripts are muscles doctrine             | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component |
+| Date       | Action                                                    | Result                                                                                                                                                                                                           |
+| ---------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-02-13 | Initial trifecta refactoring                              | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                             |
+| 2026-02-13 | Full audit with Why? protocol                             | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                 |
+| 2026-02-13 | Created `trifecta-audit.instructions.md`                  | Formal audit protocol with anti-patterns                                                                                                                                                                         |
+| 2026-02-13 | Heir trifecta generalization                              | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                   |
+| 2026-02-13 | Heir project improvement instruction                      | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                               |
+| 2026-02-13 | Scripts are muscles doctrine                              | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                       |
+| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas |
 
 ---
 

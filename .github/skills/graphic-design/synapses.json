@@ -35,6 +35,13 @@
       "target": ".github/skills/ascii-art-alignment/SKILL.md"
     },
     {
+      "bidirectional": true,
+      "reason": "Visual identity consistent with accessibility standards and WCAG compliance",
+      "type": "complements",
+      "strength": 0.7,
+      "target": ".github/skills/ui-ux-design/SKILL.md"
+    },
+    {
       "reason": "Document visual design and layout",
       "type": "supports",
       "strength": 0.4,

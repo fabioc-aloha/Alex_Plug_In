@@ -144,6 +144,7 @@ Search this index when processing any task request:
 | teams-app-patterns | teams app, teams manifest, adaptive card, teams bot, teams sso |
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd |
 | ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
+| ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |
 | vscode-environment | setup vscode, workspace settings, launch.json, extensions.json |
 | vscode-extension-patterns | webview pattern, extension api, tree provider, vscode extension |
 | work-life-balance | detect burnout, take break, late night, sustainable productivity |

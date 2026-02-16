@@ -44,6 +44,7 @@ This skill activates **automatically** when Alex:
 | `/review` | code review, PR review, feedback | Epistemic code review |
 | `/selfactualize` | deep assessment, self-analysis, architecture optimization | Comprehensive self-evaluation |
 | `/tdd` | red green refactor, test first, tdd cycle | Test-driven development workflow |
+| `/uiuxaudit` | accessibility audit, wcag check, ui review, ux review, design system audit | UI/UX accessibility audit workflow |
 
 ### Legacy Protocols (Require Manual Recall)
 

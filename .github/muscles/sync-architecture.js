@@ -457,8 +457,8 @@ function applyHeirTransformations() {
         // 5. Remove heir-curation from complete trifectas list (master-only skill)
         const beforeTrifectas = content;
         content = content.replace(
-            /^(Complete trifectas \()9(\): .+), heir-curation,( .+)$/m,
-            '$1' + '8' + '$2,' + '$3'
+            /^(Complete trifectas \()11(\): .+), heir-curation,( .+)$/m,
+            '$1' + '10' + '$2,' + '$3'
         );
         if (content !== beforeTrifectas) diffs.push('removed heir-curation from trifectas');
         
