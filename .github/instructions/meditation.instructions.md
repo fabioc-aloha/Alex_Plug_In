@@ -19,6 +19,7 @@ description: "Procedural steps for knowledge consolidation meditation sessions"
 - [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-meditation resource planning for complex sessions"
 - [.github/skills/meditation/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
 - [.github/instructions/self-actualization.instructions.md] (Medium, Integrates, Bidirectional) - "Self-actualization may trigger meditation for consolidation"
+- [.github/instructions/roadmap-maintenance.instructions.md] (Medium, Updates, Forward) - "Meditation insights may inform roadmap priorities"
 
 ---
 
