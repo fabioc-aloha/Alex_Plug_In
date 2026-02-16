@@ -741,120 +741,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
 
-    // Persona-specific recommended quick actions
-    const personaActions: Record<
-      string,
-      Array<{ cmd: string; icon: string; label: string }>
-    > = {
-      developer: [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
-        { cmd: "generateTests", icon: "🧪", label: "Generate Tests" },
-      ],
-      academic: [
-        {
-          cmd: "searchRelatedKnowledge",
-          icon: "🔍",
-          label: "Search Knowledge",
-        },
-        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-      ],
-      researcher: [
-        {
-          cmd: "searchRelatedKnowledge",
-          icon: "🔍",
-          label: "Search Knowledge",
-        },
-        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-      ],
-      "technical-writer": [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
-      ],
-      architect: [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
-      ],
-      "data-engineer": [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-      ],
-      devops: [
-        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
-        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
-        { cmd: "releasePreflight", icon: "🚀", label: "Release Preflight" },
-      ],
-      "content-creator": [
-        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
-        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
-      ],
-      "fiction-writer": [
-        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
-        { cmd: "saveSelectionAsInsight", icon: "💡", label: "Save Insight" },
-        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
-      ],
-      "game-developer": [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-      ],
-      "project-manager": [
-        { cmd: "importGitHubIssues", icon: "📋", label: "Import Issues" },
-        { cmd: "reviewPR", icon: "👁️", label: "Review PR" },
-        { cmd: "showGoals", icon: "🎯", label: "Goals" },
-      ],
-      security: [
-        { cmd: "codeReview", icon: "👀", label: "Security Review" },
-        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
-        { cmd: "debugThis", icon: "🐛", label: "Debug This" },
-      ],
-      student: [
-        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
-        { cmd: "rubberDuck", icon: "🦆", label: "Rubber Duck" },
-        {
-          cmd: "searchRelatedKnowledge",
-          icon: "🔍",
-          label: "Search Knowledge",
-        },
-      ],
-      "job-seeker": [
-        { cmd: "codeReview", icon: "👀", label: "Code Review" },
-        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
-        { cmd: "askAboutSelection", icon: "💬", label: "Ask Alex" },
-      ],
-      presenter: [
-        { cmd: "generatePptx", icon: "📰", label: "Presentation" },
-        { cmd: "readAloud", icon: "🔊", label: "Read Aloud" },
-        { cmd: "generateDiagram", icon: "📊", label: "Generate Diagram" },
-      ],
-      "power-user": [
-        { cmd: "releasePreflight", icon: "🚀", label: "Release Preflight" },
-        { cmd: "runAudit", icon: "🔍", label: "Project Audit" },
-        { cmd: "dream", icon: "💭", label: "Dream" },
-      ],
-    };
-    const personaId = persona?.id || "developer";
-    const recommendedActions =
-      personaActions[personaId] || personaActions["developer"]!;
-    const recommendedActionsHtml = recommendedActions
-      .map(
-        (a) =>
-          `<button class="action-btn recommended" data-cmd="${a.cmd}" title="Recommended for ${personaName}">
-                    <span class="action-icon">${a.icon}</span>
-                    <span class="action-text">${a.label}</span>
-                </button>`,
-      )
-      .join("\n                ");
-
     // Skill recommendations HTML
     const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
       ? `<div class="skill-recommendations-section">
-                <div class="section-subtitle">💡 Recommended Skills</div>
+                <div class="action-group-label">FOR YOU</div>
                 <div class="skill-recommendations-list">
                     ${skillRecommendations.map(rec => 
                         `<button class="skill-recommendation-btn" data-cmd="launchRecommendedSkill" data-skill="${rec.skillId}" data-skill-name="${rec.displayName}" title="${rec.reason}">
@@ -1662,9 +1552,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         <div class="section">
             <div class="section-title">Quick Actions</div>
             <div class="action-list">
-                <div class="action-group-label">FOR YOU</div>
-                ${recommendedActionsHtml}
-                
                 ${skillRecommendationsHtml}
                 
                 <div class="action-group-label">CORE</div>
