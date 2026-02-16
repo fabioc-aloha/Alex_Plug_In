@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.8.0] - 2026-02-15
+
+> **WCAG AA Compliance** — Professional design system and comprehensive accessibility improvements
+
+### Added
+
+- **Design System** — Consistent spacing and typography scales throughout the UI
+  - Typography scale: CSS variables for font sizes (11px minimum, 12px, 14px, 16px)
+  - Spacing scale: 8px-based system (4px, 8px, 16px, 24px, 32px) for visual rhythm
+  - Elevation system: Subtle shadows for visual depth on cards and interactive elements
+- **Accessibility Standards** — WCAG 2.1 AA compliance for screen readers and keyboard navigation
+  - ARIA labels on all interactive elements for screen reader compatibility
+  - Semantic HTML roles (`button`, `navigation`, `article`, `list`, `progressbar`, `region`, `status`)
+  - `tabindex="0"` on all clickable elements for keyboard accessibility
+  - `aria-valuenow/min/max` on progress bars for assistive technology
+  - Focus indicators (`:focus-visible`) with VS Code theme integration
+- **Color-blind Accessibility** — Icon labels on status indicators
+  - Status dots now show visual icons: ✓ (green), ⚠ (yellow), ✗ (red)
+  - No longer relying on color alone to communicate status
+- **Touch Target Compliance** — 44px minimum height on all buttons (WCAG mobile standard)
+  - Improved mobile and touch device user experience
+  - Better spacing for finger-friendly interaction
+
+### Changed
+
+- **Typography** — Increased minimum font size from 8-10px to 11px for readability
+  - Addresses accessibility issues on high-DPI displays
+  - Consistent font sizing using CSS variables
+- **Welcome View** — Complete UI overhaul with professional design quality
+  - Card-based layout with subtle elevation shadows
+  - Consistent spacing and visual hierarchy
+  - Semantic HTML structure for better accessibility
+
+### Fixed
+
+- **Screen Reader Compatibility** — Added missing semantic HTML and ARIA attributes
+- **Keyboard Navigation** — Visible focus indicators for all interactive elements
+
+---
+
 ## [5.7.5] - 2026-02-15
 
 > **Skill Intelligence** — Context-aware skill recommendations and smart skill loading
