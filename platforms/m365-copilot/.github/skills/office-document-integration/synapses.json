@@ -1,0 +1,96 @@
+{
+    "skill": "office-document-integration",
+    "inheritance": "heir:m365",
+    "platform": "M365",
+    "connections": [
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "enables",
+            "strength": 0.85,
+            "when": "inserting diagrams into Word or PowerPoint",
+            "yields": "Mermaid syntax, diagram types, Office.js insertion patterns"
+        },
+        {
+            "target": ".github/skills/svg-graphics/SKILL.md",
+            "type": "enables",
+            "strength": 0.75,
+            "when": "creating visual elements for PowerPoint slides",
+            "yields": "SVG creation, dark mode CSS, conversion to Office-compatible formats"
+        },
+        {
+            "target": ".github/skills/persona-detection/SKILL.md",
+            "type": "input-source",
+            "strength": 0.8,
+            "when": "selecting document template or style",
+            "yields": "Project persona, user role, context-appropriate formatting"
+        },
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "bidirectional",
+            "strength": 0.7,
+            "when": "analyzing Excel data or creating knowledge documents",
+            "yields": "Pattern recognition, insight extraction, cross-domain connections"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "output-to",
+            "strength": 0.65,
+            "when": "document content triggers new domain research",
+            "yields": "Learning protocols, question generation, knowledge gap identification"
+        },
+        {
+            "target": ".github/skills/incident-response/SKILL.md",
+            "type": "triggers",
+            "strength": 0.6,
+            "when": "urgent email or Teams message received",
+            "yields": "Calm triage, severity assessment, communication templates"
+        },
+        {
+            "target": ".github/instructions/brand-asset-management.instructions.md",
+            "type": "requires",
+            "strength": 0.8,
+            "when": "applying visual theme to Office documents",
+            "yields": "Color palette, logo usage, icon specifications"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "output-to",
+            "strength": 0.5,
+            "when": "Excel data suggests test case patterns",
+            "yields": "Test organization, coverage analysis, assertion patterns"
+        },
+        {
+            "target": ".github/skills/ui-ux-design/SKILL.md",
+            "type": "requires",
+            "strength": 0.7,
+            "when": "designing task pane interface",
+            "yields": "Layout principles, accessibility, progressive disclosure"
+        },
+        {
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+            "type": "complements",
+            "strength": 0.6,
+            "when": "comparing VS Code sidebar to Office task pane",
+            "yields": "Webview patterns, state management, async initialization"
+        }
+    ],
+    "triggers": [
+        "Office Add-in",
+        "Word integration",
+        "Excel integration",
+        "PowerPoint integration",
+        "Outlook integration",
+        "Office.js",
+        "task pane",
+        "insert into document",
+        "create slide",
+        "format spreadsheet",
+        "draft email",
+        "OneDrive memory",
+        "unified manifest",
+        "M365 Copilot",
+        "Alex-Memory folder"
+    ],
+    "$schema": "../../../.github/skills/SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

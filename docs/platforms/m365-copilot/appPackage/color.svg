@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffc857"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(60 16 16)">
+    <!-- A Negative Space Rocket Logo -->
+    <!-- Rocket body -->
+    <path d="M16,2.5 C16,2.5 10,7.5 10,15 L10,23 L13,24.5 L13,21 L19,21 L19,24.5 L22,23 L22,15 C22,7.5 16,2.5 16,2.5 Z" fill="url(#azureGrad)"/>
+    <!-- Fins -->
+    <polygon points="10,19 5,26 10,23" fill="url(#azureGrad)"/>
+    <polygon points="22,19 27,26 22,23" fill="url(#azureGrad)"/>
+    <!-- A cutout (negative space) -->
+    <path d="M16,6.5 L12.5,18 L14,18 L15,14 L17,14 L18,18 L19.5,18 Z M15.5,12.5 L16,9 L16.5,12.5 Z" fill="white"/>
+    <!-- Flames -->
+    <polygon points="13,23 16,28.5 19,23" fill="url(#flameGrad)"/>
+  </g>
+</svg>

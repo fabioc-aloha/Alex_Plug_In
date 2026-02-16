@@ -1,0 +1,46 @@
+{
+    "skill": "outlook-integration",
+    "inheritance": "heir:m365",
+    "platform": "M365",
+    "connections": [
+        {
+            "target": "../office-document-integration/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "when": "working in Outlook mail or calendar",
+            "yields": "Base Office.js patterns, memory access, OneDrive integration"
+        },
+        {
+            "target": ".github/skills/incident-response/SKILL.md",
+            "type": "triggers",
+            "strength": 0.8,
+            "when": "urgent email keywords detected (URGENT, DOWN, CRITICAL)",
+            "yields": "Triage protocols, calm communication, escalation paths"
+        },
+        {
+            "target": ".github/skills/persona-detection/SKILL.md",
+            "type": "input-source",
+            "strength": 0.75,
+            "when": "personalizing email tone and formatting",
+            "yields": "User role, communication style, recipient context"
+        },
+        {
+            "target": ".github/skills/writing-publication/SKILL.md",
+            "type": "requires",
+            "strength": 0.6,
+            "when": "drafting professional emails",
+            "yields": "Clear structure, concise language, actionable content"
+        }
+    ],
+    "triggers": [
+        "Outlook email",
+        "draft email",
+        "Outlook API",
+        "mail compose",
+        "email context",
+        "memory-augmented email",
+        "Mailbox API"
+    ],
+    "$schema": "../../../.github/skills/SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

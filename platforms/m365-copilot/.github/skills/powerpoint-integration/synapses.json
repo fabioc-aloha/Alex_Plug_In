@@ -1,0 +1,61 @@
+{
+    "skill": "powerpoint-integration",
+    "inheritance": "heir:m365",
+    "platform": "M365",
+    "connections": [
+        {
+            "target": "../office-document-integration/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "when": "working in Microsoft PowerPoint specifically",
+            "yields": "Base Office.js patterns, memory access, OneDrive integration"
+        },
+        {
+            "target": ".github/skills/svg-graphics/SKILL.md",
+            "type": "input-source",
+            "strength": 0.85,
+            "when": "creating visual elements or icons for slides",
+            "yields": "SVG creation, color theming, conversion to PNG for insertion"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "input-source",
+            "strength": 0.8,
+            "when": "adding diagrams to presentation slides",
+            "yields": "Flowchart, sequence, architecture diagrams as images"
+        },
+        {
+            "target": ".github/skills/ui-ux-design/SKILL.md",
+            "type": "requires",
+            "strength": 0.75,
+            "when": "designing slide layout and visual hierarchy",
+            "yields": "Layout principles, color contrast, accessibility guidelines"
+        },
+        {
+            "target": ".github/skills/persona-detection/SKILL.md",
+            "type": "input-source",
+            "strength": 0.7,
+            "when": "generating slides from focus trifectas",
+            "yields": "Current learning focus, skill areas, project goals"
+        },
+        {
+            "target": ".github/instructions/brand-asset-management.instructions.md",
+            "type": "requires",
+            "strength": 0.85,
+            "when": "applying visual identity to slides",
+            "yields": "Logo placement, color palette, icon library"
+        }
+    ],
+    "triggers": [
+        "PowerPoint presentation",
+        "PowerPoint.run",
+        "create slide",
+        "add shape",
+        "PowerPoint API",
+        "slide generation",
+        "presentation Alex",
+        "focus trifecta slides"
+    ],
+    "$schema": "../../../.github/skills/SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

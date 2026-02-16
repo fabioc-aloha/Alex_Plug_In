@@ -1,0 +1,48 @@
+{
+    "skill": "excel-integration",
+    "inheritance": "heir:m365",
+    "platform": "M365",
+    "connections": [
+        {
+            "target": "../office-document-integration/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "when": "working in Microsoft Excel specifically",
+            "yields": "Base Office.js patterns, memory access, OneDrive integration"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "bidirectional",
+            "strength": 0.7,
+            "when": "creating test case matrices or coverage tracking",
+            "yields": "Test organization, spreadsheet structuring, formula patterns"
+        },
+        {
+            "target": ".github/skills/observability-monitoring/SKILL.md",
+            "type": "output-to",
+            "strength": 0.65,
+            "when": "analyzing metrics or creating dashboards",
+            "yields": "KPI definitions, chart selection, threshold alerting"
+        },
+        {
+            "target": ".github/skills/persona-detection/SKILL.md",
+            "type": "input-source",
+            "strength": 0.6,
+            "when": "creating learning goal tracker for user",
+            "yields": "Focus trifectas, skill priorities, role-specific goals"
+        }
+    ],
+    "triggers": [
+        "Excel spreadsheet",
+        "Excel.run",
+        "create chart",
+        "insert formula",
+        "Excel API",
+        "learning goal tracker",
+        "data analysis Excel",
+        "workbook",
+        "worksheet"
+    ],
+    "$schema": "../../../.github/skills/SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

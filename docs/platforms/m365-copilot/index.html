@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex M365 Office Add-in</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .status-item::before {
+            content: '✅';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section li {
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .host-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .host-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Alex M365 Office Add-in</h1>
+        <p class="tagline">Strap a rocket to your back — now in Word, Excel, PowerPoint, and Outlook</p>
+
+        <div class="status">
+            <div class="status-item">Deployed to GitHub Pages</div>
+            <div class="status-item">Unified Manifest v1.19</div>
+            <div class="status-item">OneDrive Memory Integration</div>
+            <div class="status-item">100+ VS Code Skills Connected</div>
+        </div>
+
+        <div class="section">
+            <h2>Available In</h2>
+            <div class="host-grid">
+                <div class="host-card">📝 Word</div>
+                <div class="host-card">📊 Excel</div>
+                <div class="host-card">🎨 PowerPoint</div>
+                <div class="host-card">✉️ Outlook</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Features</h2>
+            <ul>
+                <li><strong>Memory-Augmented Templates</strong> — Documents that know your name, role, and goals</li>
+                <li><strong>Excel Custom Functions</strong> — Query your learning progress with formulas</li>
+                <li><strong>Smart Email Replies</strong> — Sentiment-aware response generation</li>
+                <li><strong>Focus Trifecta Slides</strong> — Auto-generate presentations from your goals</li>
+                <li><strong>Cognitive Synapses</strong> — 29 connections to VS Code skills</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Getting Started</h2>
+            <ul>
+                <li>Upload <span class="code">appPackage.dev.zip</span> to M365 Developer Portal</li>
+                <li>Create OneDrive folder: <span class="code">Alex-Memory/</span></li>
+                <li>Add <span class="code">profile.md</span>, <span class="code">focus-trifectas.md</span>, <span
+                        class="code">notes.md</span></li>
+                <li>Open Word/Excel/PowerPoint/Outlook → Home tab → Alex button</li>
+            </ul>
+        </div>
+
+        <div class="cta">
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In" class="button">📖 View Documentation</a>
+            <a href="https://dev.teams.microsoft.com/apps" class="button">🚀 Deploy to M365</a>
+        </div>
+
+        <div class="footer">
+            <p>Version 5.7.7 | Open Source | Apache 2.0 License</p>
+            <p>GitHub: <a href="https://github.com/fabioc-aloha/Alex_Plug_In"
+                    style="color: #fff;">fabioc-aloha/Alex_Plug_In</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Add subtle animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>

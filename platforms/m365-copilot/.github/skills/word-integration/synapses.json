@@ -1,0 +1,54 @@
+{
+    "skill": "word-integration",
+    "inheritance": "heir:m365",
+    "platform": "M365",
+    "connections": [
+        {
+            "target": "../office-document-integration/SKILL.md",
+            "type": "extends",
+            "strength": 0.9,
+            "when": "working in Microsoft Word specifically",
+            "yields": "Base Office.js patterns, memory access, OneDrive integration"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "input-source",
+            "strength": 0.9,
+            "when": "inserting diagrams as images",
+            "yields": "Mermaid syntax conversion to SVG/PNG for Word insertion"
+        },
+        {
+            "target": ".github/skills/writing-publication/SKILL.md",
+            "type": "enables",
+            "strength": 0.85,
+            "when": "drafting articles or documentation",
+            "yields": "Structure templates, heading hierarchy, publication standards"
+        },
+        {
+            "target": ".github/skills/academic-paper-drafting/SKILL.md",
+            "type": "enables",
+            "strength": 0.8,
+            "when": "writing research papers or technical reports",
+            "yields": "Citation formatting, abstract structure, methodology sections"
+        },
+        {
+            "target": ".github/instructions/alex-identity-integration.instructions.md",
+            "type": "input-source",
+            "strength": 0.7,
+            "when": "personalizing document greeting or signature",
+            "yields": "Alex identity, tone, personality traits"
+        }
+    ],
+    "triggers": [
+        "Word document",
+        "Word.run",
+        "insert paragraph",
+        "apply style",
+        "document body",
+        "Word API",
+        "template insertion",
+        "format text Word"
+    ],
+    "$schema": "../../../.github/skills/SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}
