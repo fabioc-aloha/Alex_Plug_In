@@ -50,9 +50,10 @@ v5.7.2 is current. Alex now has:
 | v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation            | ✅ Shipped                  |
 | **v5.7.2** | **Global Knowledge Maintenance**   | **Knowledge Infrastructure** | **✅ Shipped**              |
 | v5.7.3-4   | *reserved for UI/UX fixes*         |                              |                            |
-| v5.7.5     | Skill Intelligence                 | Context-Aware Guidance       | 📋 Planned                  |
+| **v5.7.5** | **Skill Intelligence**             | **Context-Aware Guidance**   | **✅ Shipped**              |
 | v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | 📋 Planned                  |
-| v5.7.7-9   | *reserved for UI/UX fixes*         |                              |                            |
+| v5.7.7     | Propose-to-Global Workflow         | Knowledge Contribution       | 📋 Planned                  |
+| v5.7.8-9   | *reserved for UI/UX fixes*         |                              |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition      | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition      | 📋 Planned                  |
 | v5.8.2     | @alex Personality + Knowledge (P2) | Purpose-Built Cognition      | 📋 Planned                  |
@@ -98,11 +99,11 @@ A version is **done** when ALL of the following are true:
 
 | Task                        | Owner | Effort | Priority | Status | Description                                                                     |
 | --------------------------- | :---: | :----: | :------: | :----: | ------------------------------------------------------------------------------- |
-| Skill-to-technology mapping | Heir  |   1h   |    P0    |   📋    | Map detected technologies to relevant skills (react → testing-strategies, etc.) |
-| Recommendation engine       | Heir  |   2h   |    P0    |   📋    | Suggest skills based on file type, workspace context, and behavioral patterns   |
-| Welcome View integration    | Heir  |   1h   |    P1    |   📋    | Display recommended skills in dashboard with one-click activation               |
-| Context-aware skill loading | Heir  |   2h   |    P1    |   📋    | Auto-prioritize relevant skills in context based on workspace/file type         |
-| User preference tracking    | Heir  |  30m   |    P2    |   📋    | Remember which suggestions user accepts/dismisses to improve recommendations    |
+| Skill-to-technology mapping | Heir  |   1h   |    P0    |   ✅    | Map detected technologies to relevant skills (react → testing-strategies, etc.) |
+| Recommendation engine       | Heir  |   2h   |    P0    |   ✅    | Suggest skills based on file type, workspace context, and behavioral patterns   |
+| Welcome View integration    | Heir  |   1h   |    P1    |   ✅    | Display recommended skills in dashboard with one-click activation               |
+| Context-aware skill loading | Heir  |   2h   |    P1    |   ✅    | Auto-prioritize relevant skills in context based on workspace/file type         |
+| User preference tracking    | Heir  |  30m   |    P2    |   ✅    | Remember which suggestions user accepts/dismisses to improve recommendations    |
 
 **Milestone**: Users discover relevant skills without remembering all 120.
 
@@ -134,6 +135,31 @@ A version is **done** when ALL of the following are true:
 **Effort**: ~4h | **Impact**: Platform expansion insight — informs v6+ strategy.
 
 **Target**: Q1 2026 (research only, no implementation)
+
+---
+
+### v5.7.7 — Propose-to-Global Workflow (PLANNED)
+
+**Theme**: Lightweight workflow for heirs to contribute skills back to Global Knowledge without full promotion ceremony.
+
+**Paradigm**: Knowledge contribution — reduce friction for sharing reusable patterns.
+
+**Prerequisite**: v5.7.6 shipped with Office Add-in research complete.
+
+**Tagline**: Share knowledge without ceremony.
+
+| Task                           | Owner | Effort | Priority | Status | Description                                                                  |
+| ------------------------------ | :---: | :----: | :------: | :----: | ---------------------------------------------------------------------------- |
+| Propose command implementation | Heir  |   2h   |    P1    |   📋    | `Alex: Propose Skill to Global Knowledge` — packages skill for GK submission |
+| YAML v2 frontmatter injection  | Heir  |   1h   |    P1    |   📋    | Auto-add `gk*` metadata fields when proposing (no manual editing)            |
+| GitHub PR workflow             | Heir  |  30m   |    P2    |   📋    | Generate PR description with skill summary, source project, usage examples   |
+| Validation checks              | Heir  |   1h   |    P2    |   📋    | Pre-propose validation: name conflicts, format compliance, completeness      |
+
+**Milestone**: Heirs can contribute skills to Global Knowledge in <5 minutes.
+
+**Effort**: ~4.5h | **Impact**: Democratizes knowledge sharing — reduces 30min manual process to 1-click.
+
+**Target**: Q1 2026
 
 ---
 
@@ -327,47 +353,39 @@ A version is **done** when ALL of the following are true:
 
 Items to pull from when capacity frees up:
 
-| Task                           | Owner  | Effort | Priority | Description                                                                                                      |
-| ------------------------------ | :----: | :----: | :------: | ---------------------------------------------------------------------------------------------------------------- |
-| Microsoft Graph Integration    |  Heir  |   1w   |   High   | Calendar, Mail, Presence, People — removed v5.7.1 (non-functional). Re-implement when auth flow works end-to-end |
-| Foundry Voice Alex (Realtime)  |  Heir  |   1w   |  Medium  | Speech-to-speech via Realtime API WebSocket                                                                      |
-| Hosted Agent Container Deploy  |  Heir  |   3d   |  Medium  | Containerized Alex on managed infrastructure                                                                     |
-| Foundry → M365 Backend Unify   |  Heir  |   1w   |  Medium  | M365 heir routes through Foundry Agent Service                                                                   |
-| Local Model Usage Learning     | Master |   2h   |   Low    | Learn from your usage patterns to improve advice                                                                 |
-| Learning Journeys              |  Heir  |   3h   |  Medium  | Curated skill progressions                                                                                       |
-| Office Add-in (Word/Excel/PPT) |  Heir  |   2w   |  Medium  | Alex sidebar in Office apps                                                                                      |
+| Task                          | Owner  | Effort | Priority | Description                                                                                                      |
+| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------------------------------------------------------------------------- |
+| Microsoft Graph Integration   |  Heir  |   1w   |   High   | Calendar, Mail, Presence, People — removed v5.7.1 (non-functional). Re-implement when auth flow works end-to-end |
+| Foundry Voice Alex (Realtime) |  Heir  |   1w   |  Medium  | Speech-to-speech via Realtime API WebSocket                                                                      |
+| Hosted Agent Container Deploy |  Heir  |   3d   |  Medium  | Containerized Alex on managed infrastructure                                                                     |
+| Foundry → M365 Backend Unify  |  Heir  |   1w   |  Medium  | M365 heir routes through Foundry Agent Service                                                                   |
+| Local Model Usage Learning    | Master |   2h   |   Low    | Learn from your usage patterns to improve advice                                                                 |
+| Learning Journeys             |  Heir  |   3h   |  Medium  | Curated skill progressions                                                                                       |
 
 ### Research Findings (from alex_docs/ audit — 2026-02-14)
 
-| Finding                           | Source Document                             | Priority | Description                                                                 |
-| --------------------------------- | ------------------------------------------- | :------: | --------------------------------------------------------------------------- |
-| VS Code 1.109 P0 features         | VSCODE-1.109-ADOPTION-PLAN.md               |    P0    | Agent Hooks + Copilot Memory — already planned for v5.9.0                   |
-| Architecture assessment gaps      | ARCHITECTURE-ASSESSMENT-2026-02-06.md       |    P1    | 146 sync points — Tier 2a/2b confirmed done (JSON schema + pre-commit hook) |
-| GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md               |    P1    | Standardize all GK files to YAML v2 frontmatter                             |
-| @alex enhancement plan            | ALEX-PARTICIPANT-ENHANCEMENT-PLAN.md        |    P1    | Multi-layer prompt engine — already planned for v5.8.x                      |
-| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md               |    P1    | 10 files need migration, priority order defined                             |
-| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md       |    P1    | 10 integration opportunities, all not started                               |
-| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md              |    P1    | Multiple items in progress, others not started                              |
-| Marp template automation          | MARP-AUTOMATION-PLAN.md                     |    P1    | Template-driven deck generation, zero new deps, ready to implement          |
-| PptxGenJS generator               | PPTXGENJS-IMPLEMENTATION-PLAN.md            |    P1    | Validated with 2 generated PPTX files, pure Node.js                         |
-| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                     |    P2    | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal       |
-| Cognitive Dashboard               | COGNITIVE-DASHBOARD-DESIGN.md               |    P2    | Unified webview for brain health, skill network, memory visualization       |
-| Image generation (DALL-E)         | ADR-007-image-generation.md                 |    P2    | Azure OpenAI DALL-E integration — accepted, not implemented                 |
-| Propose-to-Global workflow        | ADR-009-global-knowledge-sync-direction.md  |    P2    | Lighter path for heir contributions to Global Knowledge                     |
-| Academic paper finalization       | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md      |    P2    | 1706-line paper, 62-project case study — needs peer review prep             |
-| ~~Missing Alex-Finch.md~~         | alex/README.md                              |  ~~P2~~  | ✅ Created in v5.7.1 — `alex_docs/alex/Alex-Finch.md`                        |
-| ~~Redundant files cleanup~~       | COMPETITIVE-ANALYSIS-BACKUP, SKILL-WISHLIST |  ~~P3~~  | ✅ Archived in v5.7.1 — 3 files moved to `archive/`                          |
+| Finding                           | Source Document                             | Priority | Description                                                                  |
+| --------------------------------- | ------------------------------------------- | :------: | ---------------------------------------------------------------------------- |
+| GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md               |    P2    | Migrate final 4 patterns to YAML v2 frontmatter (28/32 complete in v5.6.5)   |
+| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md               |    P1    | 10 files need migration, priority order defined                              |
+| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md       |    P1    | 10 integration opportunities, all not started                                |
+| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md              |    P1    | Multiple items in progress, others not started                               |
+| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                     |    P2    | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal        |
+| Cognitive Dashboard               | COGNITIVE-DASHBOARD-DESIGN.md               |    P2    | Unified webview for brain health, skill network, memory visualization        |
+| Presentation automation           | gamma/MARP-AUTOMATION-PLAN.md + PPTXGENJS   |    P1    | Template-driven Marp + PptxGenJS generators with Replicate image integration |
+| Academic paper finalization       | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md      |    P2    | 1706-line paper, 62-project case study — needs peer review prep              |
+| ~~Missing Alex-Finch.md~~         | alex/README.md                              |  ~~P2~~  | ✅ Created in v5.7.1 — `alex_docs/alex/Alex-Finch.md`                         |
+| ~~Redundant files cleanup~~       | COMPETITIVE-ANALYSIS-BACKUP, SKILL-WISHLIST |  ~~P3~~  | ✅ Archived in v5.7.1 — 3 files moved to `archive/`                           |
 
 ### Replicate Platform Evaluation (2026-02-14)
 
-| Finding                            | Source Document         | Priority | Description                                                                         |
-| ---------------------------------- | ----------------------- | :------: | ----------------------------------------------------------------------------------- |
-| ~~Replicate MCP gallery entry~~    | REPLICATE-EVALUATION.md |  ~~P1~~  | ✅ Configured in v5.7.1 — `.vscode/mcp.json` with replicate-mcp                      |
-| Replicate image generation service | REPLICATE-EVALUATION.md |    P1    | `replicateService.ts` wrapping Node.js client for `/generate` — ADR-007 alternative |
-| Image upscaling via Replicate      | REPLICATE-EVALUATION.md |    P2    | Super-resolution for avatar images and presentation assets                          |
-| FLUX fine-tune for Alex brand      | REPLICATE-EVALUATION.md |    P2    | Custom LoRA trained on Alex's visual identity for consistent brand imagery          |
-| Presentation visuals pipeline      | REPLICATE-EVALUATION.md |    P2    | Auto-generate slide illustrations via Marp/PptxGenJS + Replicate                    |
-| Video generation capabilities      | REPLICATE-EVALUATION.md |    P3    | Animated tutorials and visual explanations via Wan 2.1                              |
+| Finding                         | Source Document         | Priority | Description                                                                |
+| ------------------------------- | ----------------------- | :------: | -------------------------------------------------------------------------- |
+| ~~Replicate MCP gallery entry~~ | REPLICATE-EVALUATION.md |  ~~P1~~  | ✅ Configured in v5.7.1 — `.vscode/mcp.json` with replicate-mcp             |
+| Runtime image generation        | REPLICATE-EVALUATION.md |    P1    | `replicateService.ts` for runtime image gen — replaces DALL-E (ADR-007)    |
+| Image upscaling via Replicate   | REPLICATE-EVALUATION.md |    P2    | Super-resolution for avatar images and presentation assets                 |
+| FLUX fine-tune for Alex brand   | REPLICATE-EVALUATION.md |    P2    | Custom LoRA trained on Alex's visual identity for consistent brand imagery |
+| Video generation capabilities   | REPLICATE-EVALUATION.md |    P3    | Animated tutorials and visual explanations via Wan 2.1                     |
 
 ### Platform Expansion (only if compelling trigger met)
 

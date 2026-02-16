@@ -34,7 +34,7 @@ import {
 } from "../services/premiumAssets";
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar } from "../shared/chatAvatarBridge";
-import { getSkillRecommendations, SkillRecommendation } from "../chat/skillRecommendations";
+import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
 
 /**
  * Nudge types for contextual reminders
@@ -195,6 +195,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           const skill = message.skill || "code-quality";
           const skillName = message.skillName || skill;
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
+          // Track user accepted this recommendation
+          await trackRecommendationFeedback(skill, true);
           await openChatPanel(prompt);
           break;
         }
