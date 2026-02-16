@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.8.0",
+  "version": "5.7.7",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -320,6 +320,11 @@
         "command": "alex.inheritSkillFromGlobal",
         "title": "Alex: Inherit Skill from Global Knowledge",
         "icon": "$(cloud-download)"
+      },
+      {
+        "command": "alex.proposeSkillToGlobal",
+        "title": "Alex: Propose Skill to Global Knowledge",
+        "icon": "$(cloud-upload)"
       },
       {
         "command": "alex.setupGlobalKnowledge",

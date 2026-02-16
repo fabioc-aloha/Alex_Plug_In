@@ -54,7 +54,7 @@ v5.7.5 is current. Alex now has:
 | v5.7.3-4   | *reserved for UI/UX fixes*         |                              |                            |
 | **v5.7.5** | **Skill Intelligence**             | **Context-Aware Guidance**   | **✅ Shipped**              |
 | v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | ✅ Complete (2026-02-15)    |
-| v5.7.7     | Propose-to-Global Workflow         | Knowledge Contribution       | 📋 Planned                  |
+| v5.7.7     | Propose-to-Global Workflow         | Knowledge Contribution       | ✅ Shipped (2026-02-15)     |
 | v5.7.8-9   | *reserved for UI/UX fixes*         |                              |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition      | 📋 Planned                  |
 | v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition      | 📋 Planned                  |
@@ -148,7 +148,7 @@ A version is **done** when ALL of the following are true:
 
 ---
 
-### v5.7.7 — Propose-to-Global Workflow (PLANNED)
+### v5.7.7 — Propose-to-Global Workflow ✅ **SHIPPED (2026-02-15)**
 
 **Theme**: Lightweight workflow for heirs to contribute skills back to Global Knowledge without full promotion ceremony.
 
@@ -160,16 +160,21 @@ A version is **done** when ALL of the following are true:
 
 | Task                           | Owner | Effort | Priority | Status | Description                                                                  |
 | ------------------------------ | :---: | :----: | :------: | :----: | ---------------------------------------------------------------------------- |
-| Propose command implementation | Heir  |   2h   |    P1    |   📋    | `Alex: Propose Skill to Global Knowledge` — packages skill for GK submission |
-| YAML v2 frontmatter injection  | Heir  |   1h   |    P1    |   📋    | Auto-add `gk*` metadata fields when proposing (no manual editing)            |
-| GitHub PR workflow             | Heir  |  30m   |    P2    |   📋    | Generate PR description with skill summary, source project, usage examples   |
-| Validation checks              | Heir  |   1h   |    P2    |   📋    | Pre-propose validation: name conflicts, format compliance, completeness      |
+| Propose command implementation | Heir  |   2h   |    P1    |   ✅    | `Alex: Propose Skill to Global Knowledge` — packages skill for GK submission |
+| YAML v2 frontmatter injection  | Heir  |   1h   |    P1    |   ✅    | Auto-add `gk*` metadata fields when proposing (no manual editing)            |
+| GitHub PR workflow             | Heir  |  30m   |    P2    |   ✅    | Generate PR description with skill summary, source project, usage examples   |
+| Validation checks              | Heir  |   1h   |    P2    |   ✅    | Pre-propose validation: name conflicts, format compliance, completeness      |
 
-**Milestone**: Heirs can contribute skills to Global Knowledge in <5 minutes.
+**Deliverables**:
+- `platforms/vscode-extension/src/commands/proposeSkill.ts` — Command implementation (650+ lines)
+- `platforms/vscode-extension/package.json` — Command registration
+- `platforms/vscode-extension/CHANGELOG.md` — v5.7.7 release notes
+
+**Milestone**: Heirs can contribute skills to Global Knowledge in <5 minutes. ✅
 
 **Effort**: ~4.5h | **Impact**: Democratizes knowledge sharing — reduces 30min manual process to 1-click.
 
-**Target**: Q1 2026
+**Target**: Q1 2026 ✅
 
 ---
 

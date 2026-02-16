@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.7.7] - 2026-02-15
+
+> **Propose-to-Global Workflow** — Lightweight workflow for heirs to contribute skills back to Global Knowledge in <5 minutes
+
+### Added
+
+- **`Alex: Propose Skill to Global Knowledge` command** — One-click workflow to package heir-created skills for Global Knowledge contribution
+- **YAML v2 frontmatter auto-injection** — Automatically adds `gk*` metadata fields (gkId, gkCategory, gkTags, gkSource, gkCreated) when proposing skills
+- **Skill validation scoring** — Pre-propose validation with promotion readiness score (0-12 points) based on completeness criteria
+- **GitHub PR description generator** — Auto-generates comprehensive PR description with validation results, checklist, and review guidelines
+- **Category and tag detection** — Smart detection of skill category and tags from content analysis
+- **Proposable skills filter** — Automatically excludes GK-inherited skills, shows only heir-created content
+- **Package preparation** — Copies skill to temp directory with injected metadata, ready for manual PR creation
+
+### Impact
+
+- **Democratizes knowledge sharing** — Reduces 30-minute manual promotion process to 5-minute guided workflow
+- **Reduces friction** — No manual YAML editing, no format memorization, no validation guesswork
+- **Maintains quality** — Validation checks ensure skills meet Global Knowledge standards before proposal
+
+---
+
 ## [5.7.1] - 2026-02-14
 
 > **Visual Identity & UI/UX Stabilization** — Enhanced persona-driven visual experience with dynamic avatars and refined welcome panel

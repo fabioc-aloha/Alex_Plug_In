@@ -103,10 +103,18 @@ Before promoting, assess whether the capability is a trifecta candidate:
 
 **Rule**: Never promote a trifecta partially. Either all applicable components promote, or document why some were excluded.
 
-### 5. Promote to Master
-**Option A**: Copy skill folder from heir to Master's `.github/skills/`
+### 5. Propose or Promote to Master
 
-**Option B**: Use `alex_knowledge_promote` tool to promote a skill to global knowledge
+**For Heirs (Lightweight Workflow)**: Use `Alex: Propose Skill to Global Knowledge` command
+- One-click workflow packages skill with YAML v2 frontmatter
+- Auto-validates skill (promotion readiness score 0-12)
+- Generates GitHub PR description
+- Copies skill to temp folder ready for manual PR
+- **Time**: <5 minutes from command to PR creation
+
+**Option A (Manual)**: Copy skill folder from heir to Master's `.github/skills/`
+
+**Option B (Tool)**: Use `alex_knowledge_promote` tool to promote a skill to global knowledge
 
 ### 6. Update Master's Catalog
 - Add to `copilot-instructions.md` skill list

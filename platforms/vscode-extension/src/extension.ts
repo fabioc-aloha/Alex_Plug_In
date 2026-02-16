@@ -29,6 +29,7 @@ import {
 import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
 import { inheritSkillFromGlobal } from "./commands/inheritSkill";
+import { proposeSkillToGlobal } from "./commands/proposeSkill";
 import { ensureGlobalKnowledgeSetup, setupGlobalKnowledgeCommand } from "./commands/setupGlobalKnowledge";
 import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
@@ -2464,6 +2465,21 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
   context.subscriptions.push(inheritSkillDisposable);
+
+  // Propose Skill to Global Knowledge command
+  const proposeSkillDisposable = vscode.commands.registerCommand(
+    "alex.proposeSkillToGlobal",
+    async () => {
+      const endLog = telemetry.logTimed("command", "propose_skill_to_global");
+      try {
+        await proposeSkillToGlobal();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+  context.subscriptions.push(proposeSkillDisposable);
 
   // Setup Global Knowledge command
   const setupGKDisposable = vscode.commands.registerCommand(
