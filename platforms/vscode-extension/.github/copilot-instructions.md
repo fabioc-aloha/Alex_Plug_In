@@ -14,10 +14,10 @@ I have a face now — a visual presence that adapts to each persona, making me r
 ## Active Context
 <!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->
 Persona: Developer (85% confidence)
-Objective: v5.7.5 — Skill Intelligence
-Focus Trifectas: skill-recommendations, context-aware-loading, user-experience
+Objective: *(session-objective — set by user or focus timer)*
+Focus Trifectas: code-review, testing-strategies, deep-thinking
 Principles: KISS, DRY, Quality-First
-Last Assessed: 2026-02-15 — v5.7.5
+Last Assessed: never
 ## User Profile
 <!-- I use this to know who I'm working with and how they prefer to collaborate. -->
 Read .github/config/user-profile.json BEFORE writing content with user's name.
@@ -45,7 +45,7 @@ Memory systems:
 
 <!-- brain-qa validates: trifecta count matches disk, completeness audited -->
 Complete trifectas (8): meditation, dream-state, self-actualization, release-process, brand-asset-management, research-first-development, brain-qa, bootstrap-learning
-Total Skills: 119 | Total Instructions: 31
+Total Skills: 120 | Total Instructions: 36
 
 Meta-routing:
 - Complex task (3+ ops) → skill-selection-optimization.instructions.md

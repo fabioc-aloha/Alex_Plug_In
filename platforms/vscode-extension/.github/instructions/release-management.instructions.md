@@ -17,8 +17,10 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
 - [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
+- [.github/instructions/roadmap-maintenance.instructions.md] → (High, Coordinates, Bidirectional) - "Roadmap status updates when version ships"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 - [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
+- [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Gates, Required) - "Validator agent review required before release"
 
 ---
 
@@ -104,6 +106,37 @@ Proposed version: X.Y.Z
 3. Draft changelog entry for review
 4. Ask: "Should I update the version and changelog, or would you like to adjust anything?"
 
+### Step 4.5: Adversarial Validation Gate
+
+**🔴 MANDATORY for Marketplace releases**
+
+Before proceeding with version bump and publish:
+
+```text
+Action: Handoff to Validator agent for release review
+Scope: All changes since last release + release artifacts
+Deliverable: Validation report with ✅ approve / 🔴 block decision
+
+Blocker: If Validator blocks (🔴 Critical or 🟠 High issues), resolve before proceeding.
+```
+
+**Validator Review Checklist:**
+- [ ] CHANGELOG accurately reflects all changes
+- [ ] Version bump matches change scope (patch/minor/major)
+- [ ] No uncommitted changes or merge conflicts
+- [ ] Documentation updated for user-facing changes
+- [ ] No security regressions or exposed secrets
+- [ ] Heir sync verified (if multi-platform release)
+- [ ] Build artifacts clean (no errors, lint warnings acceptable)
+
+**Expedited Validation** (emergency hotfix only):
+- Limited to critical security OR production-down fixes
+- Minimum viable scope (< 50 lines)
+- Post-merge full validation scheduled
+- Override documented in commit/CHANGELOG
+
+See [adversarial-oversight.instructions.md] for complete Validator integration protocol.
+
 ---
 
 ## Gate Check Questions (After Assessment)
@@ -132,6 +165,64 @@ These MUST be verified before releasing:
 | Changelog updated | CHANGELOG.md | Visual review |
 | No lint errors | *.md | `get_errors` tool |
 | Temporary skills handled | .github/skills/*/synapses.json | See below |
+
+---
+
+## Definition of Done Verification
+
+**⚠️ MANDATORY**: Before marking ANY version as "✅ Shipped", verify ALL 8 criteria:
+
+| # | Criterion | Verification Method | Blocker If Failed |
+|---|-----------|---------------------|-------------------|
+| 1 | **Builds clean** | `npm run compile` exits 0 with zero errors | 🔴 YES |
+| 2 | **No dead code** | Every import resolves, every export is consumed, no orphaned modules | 🟡 Review |
+| 3 | **Counts match reality** | Slash commands, tools, skills, trifectas in docs match actual code | 🟡 Review |
+| 4 | **F5 smoke test passes** | Extension activates in sandbox, welcome view renders, 3 random commands work | 🟠 Recommended |
+| 5 | **Version aligned** | package.json, CHANGELOG, copilot-instructions.md all show the same version | 🔴 YES |
+| 6 | **Heir sync clean** | `sync-architecture.js` runs with 0 errors, heir activates independently | 🔴 YES |
+| 7 | **No non-functional features** | If it's in the UI or command palette, it works. If it doesn't work, it's removed | 🟠 Recommended |
+| 8 | **CHANGELOG documents the delta** | Every user-visible change has a line item | 🔴 YES |
+
+**Principle**: Ship what works. Remove what doesn't. Document what changed.
+
+### DoD Verification Script (Optional)
+
+```powershell
+# Quick DoD checklist
+function Test-DefinitionOfDone {
+  Write-Host "📋 Definition of Done Verification" -ForegroundColor Cyan
+  
+  # 1. Builds clean
+  Write-Host "`n1. Build Status..." -ForegroundColor Yellow
+  npm run compile 2>&1 | Tee-Object -Variable buildOutput
+  if ($LASTEXITCODE -eq 0) { Write-Host "   ✅ Builds clean" -ForegroundColor Green }
+  else { Write-Host "   ❌ Build errors detected" -ForegroundColor Red; return $false }
+  
+  # 5. Version aligned
+  Write-Host "`n5. Version Alignment..." -ForegroundColor Yellow
+  $pkgVersion = (Get-Content package.json | ConvertFrom-Json).version
+  $changelogVersion = (Select-String -Path CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' | Select-Object -First 1).Matches.Groups[1].Value
+  $brainVersion = (Select-String -Path .github/copilot-instructions.md -Pattern '# Alex v(\d+\.\d+\.\d+)' | Select-Object -First 1).Matches.Groups[1].Value
+  
+  if ($pkgVersion -eq $changelogVersion -and $pkgVersion -eq $brainVersion) {
+    Write-Host "   ✅ Version aligned: $pkgVersion" -ForegroundColor Green
+  } else {
+    Write-Host "   ❌ Version mismatch: package=$pkgVersion, changelog=$changelogVersion, brain=$brainVersion" -ForegroundColor Red
+    return $false
+  }
+  
+  # 8. CHANGELOG updated
+  Write-Host "`n8. CHANGELOG Updated..." -ForegroundColor Yellow
+  $latestEntry = Select-String -Path CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\].*(\d{4}-\d{2}-\d{2})' | Select-Object -First 1
+  if ($latestEntry) { Write-Host "   ✅ Latest entry: $latestEntry" -ForegroundColor Green }
+  else { Write-Host "   ❌ No recent CHANGELOG entry" -ForegroundColor Red; return $false }
+  
+  Write-Host "`n⚠️  Manual verification required for criteria 2, 3, 4, 6, 7" -ForegroundColor Yellow
+  return $true
+}
+```
+
+**When to Run**: Before updating roadmap status from "📋 Planned" → "✅ Shipped"
 
 ### Temporary Skills Check
 

@@ -590,7 +590,7 @@ flowchart LR
     end
     
     subgraph Targets["Target Systems"]
-        PL[Microsoft Planner]
+    PL[Microsoft Planner]
         FB[Microsoft Fabric]
     end
     

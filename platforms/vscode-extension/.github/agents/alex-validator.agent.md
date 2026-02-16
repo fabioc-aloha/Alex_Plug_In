@@ -127,22 +127,28 @@ flowchart TD
 
 ## Report Format
 
+**Note**: Validator ALWAYS provides detailed notes, whether approving or blocking.
+
 ```markdown
 ## Validation Report
 
 ### Summary
-- **Status**: ✅ Approved / 🔴 Blocked
+- **Status**: ✅ Approved with Notes / 🔴 Blocked with Notes
 - **Issues Found**: X critical, Y high, Z medium
 
-### Critical Issues
+### Critical Issues (if any)
 1. [Issue description]
    - **Location**: `file.ts:line`
    - **Risk**: What could go wrong
    - **Suggestion**: How to fix
 
+### High/Medium Issues (if any)
+[Same format as critical]
+
 ### Observations
 - What was done well
 - Patterns to continue
+- Suggestions for improvement
 ```
 
 ## When to Use Validator Mode
@@ -168,8 +174,9 @@ A Validator session succeeds when:
 - [ ] All critical/high issues identified
 - [ ] Each issue has a clear location and suggestion
 - [ ] Security review completed
-- [ ] Clear pass/fail decision with rationale
-- [ ] Builder has actionable feedback
+- [ ] Clear approve/block decision with detailed rationale
+- [ ] Observations provided (both strengths and improvements)
+- [ ] Builder has actionable feedback regardless of outcome
 
 ---
 
