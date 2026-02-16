@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Alex</title>
-    
+
     <!-- Office.js -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    
+
     <style>
         :root {
             --alex-blue: #0078d4;
@@ -225,8 +226,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Error State */
@@ -264,6 +270,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo">A</div>
@@ -291,27 +298,28 @@
     </div>
 
     <div class="footer">
-        <p>🚀 <strong>Alex</strong> — Strap a Rocket to Your Back | 
-        <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank">GitHub</a></p>
+        <p>🚀 <strong>Alex</strong> — Strap a Rocket to Your Back |
+            <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank">GitHub</a>
+        </p>
     </div>
 
     <script>
-        Office.onReady(function(info) {
+        Office.onReady(function (info) {
             console.log('Office.js ready. Host:', info.host, 'Platform:', info.platform);
             initializeAddIn(info);
         });
 
         async function initializeAddIn(officeInfo) {
             const content = document.getElementById('content');
-            
+
             try {
                 // Check OneDrive access
                 const memoryStatus = await checkMemoryAccess();
                 displayMemoryStatus(memoryStatus);
-                
+
                 // Show welcome message
                 displayWelcome(officeInfo, memoryStatus);
-                
+
             } catch (error) {
                 console.error('Initialization error:', error);
                 content.innerHTML = `
@@ -336,12 +344,12 @@
             // TODO: Implement actual OneDrive file check
             // For now, simulate the check
             await new Promise(resolve => setTimeout(resolve, 1000));
-            
+
             // Simulate results (in production, would be real API calls)
             memoryFiles[0].status = 'loaded';
             memoryFiles[1].status = 'loaded';
             memoryFiles[2].status = 'missing';
-            
+
             return memoryFiles;
         }
 
@@ -359,7 +367,7 @@
         function displayWelcome(officeInfo, memoryStatus) {
             const content = document.getElementById('content');
             const hasMemory = memoryStatus.some(f => f.status === 'loaded');
-            
+
             content.innerHTML = `
                 <div class="welcome-message">
                     <h2>🚀 Welcome to ${officeInfo.host}</h2>
@@ -490,4 +498,5 @@
         }
     </script>
 </body>
+
 </html>

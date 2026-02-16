@@ -286,39 +286,39 @@ await PowerPoint.run(async (context) => {
 
 ### Word
 
-| Capability                         | Phase | Description                                   |
-| ---------------------------------- | ----- | --------------------------------------------- |
-| 📝 Template insertion               | 2     | Generate docs from persona-aware templates    |
-| ✍️ Writing assistance               | 2     | Style and tone based on Active Context        |
-| 📋 Research summary injection       | 2     | Insert DK-*.md content directly into document |
+| Capability                        | Phase | Description                                   |
+| --------------------------------- | ----- | --------------------------------------------- |
+| 📝 Template insertion              | 2     | Generate docs from persona-aware templates    |
+| ✍️ Writing assistance              | 2     | Style and tone based on Active Context        |
+| 📋 Research summary injection      | 2     | Insert DK-*.md content directly into document |
 | 🎯 Focus trifecta document structu | 3     | Organize headings by current focus areas      |
 
 ### Excel
 
-| Capability                     | Phase | Description                                 |
-| ------------------------------ | ----- | ------------------------------------------- |
-| 📊 Learning goal tracker        | 2     | Chart skill progress over time              |
-| 📈 Skill development visualize | 2     | Line charts from profile.md learning goals  |
-| 🔢 Custom functions (UDFs)      | 3     | `=ALEX.FOCUS()` returns current trifectas   |
-| 💡 Data analysis with context   | 2     | Analyze data using focus area as lens       |
+| Capability                    | Phase | Description                                |
+| ----------------------------- | ----- | ------------------------------------------ |
+| 📊 Learning goal tracker       | 2     | Chart skill progress over time             |
+| 📈 Skill development visualize | 2     | Line charts from profile.md learning goals |
+| 🔢 Custom functions (UDFs)     | 3     | `=ALEX.FOCUS()` returns current trifectas  |
+| 💡 Data analysis with context  | 2     | Analyze data using focus area as lens      |
 
 ### PowerPoint
 
-| Capability                        | Phase | Description                                   |
-| --------------------------------- | ----- | --------------------------------------------- |
-| 🎨 Slide generation                | 2     | Create slides from focus trifectas            |
-| 📊 Project visual summaries        | 2     | Auto-generate timeline/roadmap slides         |
-| 🎯 Memory-based presentations      | 2     | Pull insights from notes.md and DK-*.md       |
-| ✨ Persona-driven design           | 3     | Slide style adapts to Developer/Teacher/etc.  |
+| Capability                   | Phase | Description                                  |
+| ---------------------------- | ----- | -------------------------------------------- |
+| 🎨 Slide generation           | 2     | Create slides from focus trifectas           |
+| 📊 Project visual summaries   | 2     | Auto-generate timeline/roadmap slides        |
+| 🎯 Memory-based presentations | 2     | Pull insights from notes.md and DK-*.md      |
+| ✨ Persona-driven design      | 3     | Slide style adapts to Developer/Teacher/etc. |
 
 ### Outlook
 
-| Capability                    | Phase | Description                                 |
-| ----------------------------- | ----- | ------------------------------------------- |
-| ✉️ Email drafting              | 2     | Compose with memory-augmented context       |
-| 📅 Meeting prep                | 2     | Attendee research from M365 Copilot         |
-| 🔍 Conversation search         | 2     | Cognitive search across email threads       |
-| ⚡ Quick responses             | 3     | Style-aware reply suggestions               |
+| Capability            | Phase | Description                           |
+| --------------------- | ----- | ------------------------------------- |
+| ✉️ Email drafting      | 2     | Compose with memory-augmented context |
+| 📅 Meeting prep        | 2     | Attendee research from M365 Copilot   |
+| 🔍 Conversation search | 2     | Cognitive search across email threads |
+| ⚡ Quick responses     | 3     | Style-aware reply suggestions         |
 
 ---
 
@@ -326,13 +326,13 @@ await PowerPoint.run(async (context) => {
 
 ### Platform Constraints
 
-| Limitation                     | Impact                                             | Workaround                                 |
-| ------------------------------ | -------------------------------------------------- | ------------------------------------------ |
-| **No LLM built-in**            | Can't generate content without external API        | Use M365 Copilot in task pane (future)     |
-| **Web-hosted UI only**         | Requires internet connection                       | Graceful offline message                   |
-| **Single-threaded**            | No background processing                           | Show loading spinners during operations    |
-| **Limited offline**            | OneDrive API requires connectivity                 | Cache last-known memory state              |
-| **No multi-agent support**     | Can't orchestrate Alex sub-agents (Foundry-only)   | Keep task pane simple, link to M365 Copilot |
+| Limitation                 | Impact                                           | Workaround                                  |
+| -------------------------- | ------------------------------------------------ | ------------------------------------------- |
+| **No LLM built-in**        | Can't generate content without external API      | Use M365 Copilot in task pane (future)      |
+| **Web-hosted UI only**     | Requires internet connection                     | Graceful offline message                    |
+| **Single-threaded**        | No background processing                         | Show loading spinners during operations     |
+| **Limited offline**        | OneDrive API requires connectivity               | Cache last-known memory state               |
+| **No multi-agent support** | Can't orchestrate Alex sub-agents (Foundry-only) | Keep task pane simple, link to M365 Copilot |
 
 ### Excel-Specific
 
@@ -357,12 +357,12 @@ User → Office Add-in Task Pane → Microsoft Graph API → OneDrive/Alex-Memor
 
 ### Permissions Required
 
-| Permission                  | Scope                 | Justification                       |
-| --------------------------- | --------------------- | ----------------------------------- |
-| **Files.Read**              | OneDrive              | Read Alex-Memory folder             |
-| **Files.ReadWrite** (opt.)  | OneDrive              | Allow Alex to update notes.md       |
-| **User.Read**               | Microsoft Graph       | Get user profile (name, email)      |
-| **Contacts.Read** (opt.)    | Microsoft Graph       | Meeting attendee research (Outlook) |
+| Permission                 | Scope           | Justification                       |
+| -------------------------- | --------------- | ----------------------------------- |
+| **Files.Read**             | OneDrive        | Read Alex-Memory folder             |
+| **Files.ReadWrite** (opt.) | OneDrive        | Allow Alex to update notes.md       |
+| **User.Read**              | Microsoft Graph | Get user profile (name, email)      |
+| **Contacts.Read** (opt.)   | Microsoft Graph | Meeting attendee research (Outlook) |
 
 Users can **disable capabilities** via M365 admin center:
 - Disable OneDrive access → Alex shows "Memory not available" message
@@ -476,6 +476,6 @@ Users can **disable capabilities** via M365 admin center:
 
 ---
 
-**Updated**: 2026-02-15 (v5.7.6 — Phase 1 Complete)  
-**Maintainer**: Fabio Correa  
+**Updated**: 2026-02-15 (v5.7.6 — Phase 1 Complete)
+**Maintainer**: Fabio Correa
 **License**: Apache 2.0
