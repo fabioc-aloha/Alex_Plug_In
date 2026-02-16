@@ -682,7 +682,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Skill recommendations HTML
     const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
       ? `<div class="skill-recommendations-section">
-                <div class="action-group-label">FOR YOU</div>
                 <div class="skill-recommendations-list">
                     ${skillRecommendations.map(rec => 
                         `<button class="skill-recommendation-btn" data-cmd="launchRecommendedSkill" data-skill="${rec.skillId}" data-skill-name="${rec.displayName}" title="${rec.reason}">
