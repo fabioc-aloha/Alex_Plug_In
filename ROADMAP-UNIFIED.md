@@ -10,8 +10,9 @@
 
 ### Current State
 
-v5.7.2 is current. Alex now has:
+v5.7.5 is current. Alex now has:
 - **120 Skills** (117 inheritable to heirs) — Comprehensive domain coverage
+- **Skill Intelligence** — Context-aware recommendations (30 tech mappings, 15 file types, 18 personas) with user preference tracking
 - **v3-Identity-First Brain** — copilot-instructions.md restructured: identity → routing → safety
 - **Prompt Pipeline Research** — Full mapping of how VS Code/Copilot injects context into LLM
 - **Visual Identity** — 44 avatar images (age progression + occupation variants) at 256×256px

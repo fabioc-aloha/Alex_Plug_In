@@ -21,21 +21,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Welcome View skill recommendations** — Display top 5 recommended skills with one-click activation
   - Shows skill name and reason for recommendation
   - Integrated into "FOR YOU" quick actions section
+  - Click tracking: User preference recorded when recommendation clicked
 - **Context-aware skill loading** — Prioritize relevant skills in LLM context
   - High priority: File-type + persona matches
   - Medium priority: Technology stack + workspace context
   - Low priority: Generic/organizational skills
 - **User preference tracking** — Remember accepted/dismissed recommendations
+  - Click tracking: `trackRecommendationFeedback()` called on recommendation click
   - Skills dismissed 3+ times won't be recommended again
   - Stored in global VS Code settings for cross-workspace memory
 
+### Changed
+
+- **Master brain Active Context** — Synced to v5.7.5 (Objective: Skill Intelligence, Focus: skill-recommendations, context-aware-loading, user-experience)
+
 ### Technical Details
 
-- New module: `src/chat/skillRecommendations.ts` — 350 lines, 3 exported functions
-- Technology mapping: 30+ technologies → 60+ skill associations
+- New module: `src/chat/skillRecommendations.ts` — 322 lines, 4 exported functions
+  - `getSkillRecommendations()` — Generate ranked recommendations
+  - `getSkillLoadingContext()` — Context-aware skill prioritization
+  - `trackRecommendationFeedback()` — User preference tracking
+  - `wasRecommendationDismissed()` — Check dismissal threshold
+- Technology mapping: 30 technologies → 60+ skill associations
 - File extension mapping: 15 extensions → targeted skill suggestions
 - Persona mapping: 18 personas → curated skill sets
-- Welcome View: Integrated recommendation UI with hover tooltips and visual styling
+- Welcome View: Integrated recommendation UI with hover tooltips, visual styling, and click tracking
 
 ---
 
