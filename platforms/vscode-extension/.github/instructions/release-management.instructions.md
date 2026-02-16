@@ -16,11 +16,14 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
 - [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
+- [.github/muscles/sync-architecture.js] → (Critical, Enables, Forward) - "Master-to-heir sync runs during vsce package - validates skill inheritance"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [.github/instructions/roadmap-maintenance.instructions.md] → (High, Coordinates, Bidirectional) - "Roadmap status updates when version ships"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 - [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
 - [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Gates, Required) - "Validator agent review required before release"
+- [platforms/m365-copilot/package.json] → (High, Metadata, Parallel) - "M365 version must align with VS Code extension version"
+- [platforms/m365-copilot/appPackage/manifest.json] → (High, Metadata, Parallel) - "M365 manifest version tracks extension releases"
 
 ---
 
@@ -648,6 +651,141 @@ Before approving a PR:
 - [ ] Documentation updated if needed
 - [ ] Version bump appropriate for changes
 - [ ] CHANGELOG entry present
+
+---
+
+## Multi-Platform Release Coordination
+
+**Applies to**: Projects with multiple deployment targets (VS Code extension + M365 Copilot agent, etc.)
+
+### Version Synchronization Protocol
+
+When shipping a release across multiple platforms, version numbers MUST be aligned:
+
+| Platform | Version File | Location |
+|----------|--------------|----------|
+| VS Code Extension | `package.json` | `platforms/vscode-extension/package.json` |
+| M365 Copilot Agent | `package.json` | `platforms/m365-copilot/package.json` |
+| M365 App Manifest | `manifest.json` | `platforms/m365-copilot/appPackage/manifest.json` |
+| Root Project | CHANGELOG.md | `CHANGELOG.md` (root) |
+| Extension | CHANGELOG.md | `platforms/vscode-extension/CHANGELOG.md` |
+
+**Synchronization Order:**
+1. Update VS Code extension version first (source of truth)
+2. Update M365 versions to match
+3. Update root CHANGELOG with release notes
+4. Extension CHANGELOG auto-syncs during `vsce package` (architecture sync)
+
+### Multi-Platform Publishing Workflow
+
+**Step 1: VS Code Extension (Primary Platform)**
+```powershell
+cd platforms/vscode-extension
+npm run compile           # Verify build clean
+npx @vscode/vsce package  # Creates .vsix + runs architecture sync
+npx @vscode/vsce publish  # Publishes to marketplace
+```
+
+**Checkpoint**: Architecture sync runs during `vsce package`, updating heir `.github/` from master.
+
+**Step 2: M365 Copilot Agent (Secondary Platform)**
+```powershell
+cd platforms/m365-copilot
+npm run package          # Creates appPackage.local.zip
+npm run validate         # Optional - validates manifest (requires auth)
+```
+
+**Checkpoint**: Package ready for Teams Developer Portal upload or direct Teams sideload.
+
+**Step 3: Git Tagging** (After both platforms packaged)
+```powershell
+cd ../..                 # Return to root
+git tag vX.Y.Z -a -m "vX.Y.Z - Release Title"
+git push origin vX.Y.Z
+```
+
+### Heir Architecture Sync Verification
+
+During VS Code packaging, the `sync-architecture.js` script runs automatically:
+
+**Expected Output:**
+```
+✅ Copied: 110 skills
+⏭️  Skipped (master-only): 4
+⏭️  Skipped (heir:m365): 2
+✅ Skill sync verified!
+```
+
+**What to check:**
+- Skill count matches expectations (master - master-only = heir)
+- No contamination detected (heir has no master-only content)
+- Synapse cleaning removed broken references
+
+**If sync fails:** Do NOT proceed with publish. Fix sync issues first.
+
+### Version Alignment Checklist
+
+Before creating git tag, verify alignment:
+
+```powershell
+# VS Code extension
+$vsCodeVersion = (Get-Content platforms/vscode-extension/package.json | ConvertFrom-Json).version
+
+# M365 agent
+$m365PkgVersion = (Get-Content platforms/m365-copilot/package.json | ConvertFrom-Json).version
+$m365ManifestVersion = (Get-Content platforms/m365-copilot/appPackage/manifest.json | ConvertFrom-Json).version
+
+# CHANGELOGs
+$rootChangelogVersion = (Select-String -Path CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' | Select-Object -First 1).Matches.Groups[1].Value
+$extensionChangelogVersion = (Select-String -Path platforms/vscode-extension/CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' | Select-Object -First 1).Matches.Groups[1].Value
+
+Write-Host "VS Code: $vsCodeVersion"
+Write-Host "M365 Package: $m365PkgVersion"
+Write-Host "M365 Manifest: $m365ManifestVersion"
+Write-Host "Root CHANGELOG: $rootChangelogVersion"
+Write-Host "Extension CHANGELOG: $extensionChangelogVersion"
+
+if ($vsCodeVersion -eq $m365PkgVersion -and $vsCodeVersion -eq $m365ManifestVersion -and $vsCodeVersion -eq $rootChangelogVersion) {
+    Write-Host "✅ All versions aligned: $vsCodeVersion" -ForegroundColor Green
+} else {
+    Write-Host "❌ Version mismatch detected!" -ForegroundColor Red
+}
+```
+
+### Platform-Specific Deployment Notes
+
+**VS Code Marketplace:**
+- Published via `vsce publish` (requires PAT token)
+- Propagates in 2-5 minutes
+- Visible at: `https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture`
+
+**M365 Copilot Agent:**
+- Manual upload to Teams Developer Portal: https://dev.teams.microsoft.com/apps
+- OR direct Teams sideload: Teams → Apps → Upload custom app
+- Package file: `appPackage/build/appPackage.local.zip`
+
+**GitHub Release:**
+- Create after both platforms published
+- Attach both artifacts:
+  - `alex-cognitive-architecture-X.Y.Z.vsix` (VS Code)
+  - `appPackage.local.zip` (M365)
+- Use CHANGELOG excerpt for release notes
+
+### Multi-Platform Release Anti-Patterns
+
+❌ **Do NOT**:
+- Publish VS Code before updating M365 versions
+- Skip architecture sync verification (heir must match master)
+- Create git tag before both platforms packaged
+- Forget to update root CHANGELOG (only extension CHANGELOG)
+- Publish M365 with different version than VS Code
+
+✅ **Always**:
+- Update ALL version files before publishing any platform
+- Verify architecture sync completed successfully
+- Package both platforms **before** creating git tag
+- Test extension CHANGELOG synced to heir during packaging
+- Maintain single source of truth (VS Code version → M365)
 
 ---
 

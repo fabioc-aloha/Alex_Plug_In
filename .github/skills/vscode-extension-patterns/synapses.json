@@ -43,18 +43,6 @@
       "reason": "TDZ debugging and production build troubleshooting"
     },
     {
-      "target": "alex_docs/guides/VSCODE-CHAT-SETTINGS-GUIDE.md",
-      "type": "documents",
-      "strength": 0.90,
-      "reason": "Comprehensive settings management pattern exemplar (47+ settings documented)"
-    },
-    {
-      "target": "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-      "type": "implements",
-      "strength": 0.95,
-      "reason": "Tiered settings application with Essential/Recommended/Auto-Approval categories"
-    },
-    {
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "implements",
       "strength": 0.75,

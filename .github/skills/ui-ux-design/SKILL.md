@@ -1,3 +1,8 @@
+---
+name: "UI/UX Design"
+description: "User interface design, user experience optimization, accessibility compliance, design systems"
+---
+
 # UI/UX Design
 
 **Domain**: User interface design, user experience optimization, accessibility compliance, design systems  

@@ -7,6 +7,205 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.8.2] - 2026-02-16
+
+> **@alex Personality Polish (P2)** — Pre-seeded knowledge context, persona-driven prompts, and confidence signaling make @alex more helpful and self-aware
+
+### Added
+
+#### Prompt Engine Enhancements (v5.8.2 — P2: Personality Polish)
+
+- **Layer 9: Knowledge Context** — @alex pre-searches Global Knowledge for relevant patterns/insights based on query terms before responding (~200 tokens)
+  - Extracts top 5 key terms from user query (filtering stop words)
+  - Searches Global Knowledge index for top 3 relevant entries
+  - Compresses results to title + 1-sentence summary
+  - Injects relevant context to inform response before model sees the question
+- **Enhanced Layer 2: Persona-Driven Prompts** — @alex adapts communication style based on detected project persona (~150 tokens, was ~80)
+  - Reads persona from Active Context (Developer, Academic, Researcher, etc.)
+  - Injects persona-specific tone guidance (e.g., "Pragmatic, code-focused" for Developer)
+  - Shows recommended skill for detected persona
+  - Displays project banner noun (CODE, THESIS, RESEARCH, etc.)
+- **Enhanced Layer 10: Confidence Signaling** — @alex indicates confidence level in responses (~250 tokens, was ~200)
+  - **High confidence**: Direct answer with certainty ("This is...", "The solution is...")
+  - **Medium confidence**: Qualified answer ("Based on X, this likely...", "Typically...")
+  - **Low confidence**: Tentative answer ("I think...", "It might be...", "Consider...")
+  - **Outside confidence**: Honest limitation ("I don't have enough context to answer that")
+
+### Changed
+
+- **Token budget expansion** — Total prompt ~1,850 tokens (was ~1,350) with new knowledge layer and enhancements
+- **Persona-aware responses** — @alex now adjusts tone based on 16+ persona types with specific communication styles
+- **Knowledge-informed answers** — @alex sees relevant patterns/insights from Global Knowledge before answering, reducing hallucination risk
+
+### Impact
+
+- **Context-aware assistance** — @alex pre-loads relevant knowledge, providing more accurate answers without manual searching
+- **Persona adaptation** — Responses match project type (code-focused for developers, evidence-based for researchers, etc.)
+- **Trust through transparency** — Confidence signaling helps users calibrate reliance on @alex's answers
+- **Reduced hallucination** — Pre-seeded knowledge context grounds responses in verified patterns from Global Knowledge
+- **Better user experience** — @alex feels more like a specialized assistant for your domain, not a generic chatbot
+
+---
+
+## [5.7.7] - 2026-02-15
+
+> **Propose-to-Global Workflow** — Lightweight workflow for heirs to contribute skills back to Global Knowledge in <5 minutes
+
+### Added
+
+- **`Alex: Propose Skill to Global Knowledge` command** — One-click workflow to package heir-created skills for Global Knowledge contribution
+- **YAML v2 frontmatter auto-injection** — Automatically adds `gk*` metadata fields (gkId, gkCategory, gkTags, gkSource, gkCreated) when proposing skills
+- **Skill validation scoring** — Pre-propose validation with promotion readiness score (0-12 points) based on completeness criteria
+- **GitHub PR description generator** — Auto-generates comprehensive PR description with validation results, checklist, and review guidelines
+- **Category and tag detection** — Smart detection of skill category and tags from content analysis
+- **Proposable skills filter** — Automatically excludes GK-inherited skills, shows only heir-created content
+- **Package preparation** — Copies skill to temp directory with injected metadata, ready for manual PR creation
+
+### Impact
+
+- **Democratizes knowledge sharing** — Reduces 30-minute manual promotion process to 5-minute guided workflow
+- **Reduces friction** — No manual YAML editing, no format memorization, no validation guesswork
+- **Maintains quality** — Validation checks ensure skills meet Global Knowledge standards before proposal
+
+---
+
+## [5.8.1] - 2026-02-16
+
+- **Tool calling in @alex** — @alex chat participant now passes 12 Alex cognitive tools to language model via `sendRequest` options
+  - alex_cognitive_synapse_health
+  - alex_cognitive_memory_search
+  - alex_cognitive_architecture_status
+  - alex_platform_mcp_recommendations
+  - alex_cognitive_user_profile
+  - alex_cognitive_focus_context
+  - alex_cognitive_self_actualization
+  - alex_quality_heir_validation
+  - alex_knowledge_search
+  - alex_knowledge_save_insight
+  - alex_knowledge_promote
+  - alex_knowledge_status
+- **Tool result loop** — @alex handles `LanguageModelToolCallPart` and feeds tool results back to model for multi-turn tool orchestration
+- **File context from references** — @alex extracts `request.references` + active editor selection and includes them in prompt context
+- **Model-adaptive behavior** — @alex selects best available model (not hardcoded gpt-4o) and adapts prompt based on detected model tier
+- **Model-adaptive prompt rules** — Tier-specific guidance for language model:
+  - **Frontier** (Opus 4.5/4.6, GPT-5.2): Deep reasoning, extended thinking, thorough explanations
+  - **Capable** (Sonnet 4/4.5, GPT-5.1-Codex): Balanced depth, practical solutions
+  - **Efficient** (Haiku 4.5, GPT-5 mini): Concise, actionable, fast responses
+
+#### Quality Assurance Infrastructure
+
+- **Brain QA Phase 33: Pre-Sync Master Validation** — Catches contamination issues in master before they flow to heir (frontmatter, legacy files, PII, broken synapses)
+- **Enhanced sync-architecture.js validation** — Added 3 validators: YAML frontmatter checker, synapse target validator with relative path support, skill-activation index validator
+- **Skill scaffold template system** — `.github/templates/skill-template/` with SKILL.md, synapses.json, and README templates prevent frontmatter omission at creation time
+- **new-skill.ps1 generator** — Automated skill creation with kebab-case normalization, frontmatter population, and auto-open in VS Code
+- **Pre-commit hook infrastructure** — `.github/hooks/` with PowerShell validation script and installation automation (ready for future expansion)
+- **Phase 22 auto-fix** — `brain-qa.ps1 -Phase 22 -Fix` automatically archives legacy `.prompt.md` files to `archive/upgrades/`
+
+### Fixed
+
+- **Synapse path resolution bug** — validateSynapseTargets() now correctly handles relative paths (`../`, `../../`) with path.normalize()
+- **9 legacy episodic files** — Archived `.prompt.md` format files from `.github/episodic/` to `archive/upgrades/`
+- **5 broken synapse references** — Removed invalid references to ROADMAP-UNIFIED.md, heir-skill-promotion, alex_docs paths
+- **3 contaminated inheritable skills** — Removed master-only path references from documentation-quality-assurance, release-process
+- **Synapse auto-cleaning** — Enhanced cleanBrokenSynapseReferences() to remove external:, global-knowledge://, platforms/, alex_docs/ patterns
+
+### Changed
+
+- **Validation timing shift-left** — Quality gates moved from sync-time (downstream) to pre-commit/pre-sync (upstream)
+- **Layered defense architecture** — Template validation → Pre-commit hooks → Phase 33 → Sync validation → Integrity check
+- **Sync validation metrics** — Reduced from 18 errors to 0 errors; zero contamination issues in heir deployment
+- **@alex model selection** — No longer hardcoded to `gpt-4o` family; uses best available Copilot model
+
+### Impact
+
+- **@alex is purpose-built** — No longer a 2-message passthrough; now a 10-layer cognitive prompt engine with tool calling, file awareness, and model adaptation
+- **Tool orchestration** — @alex can search knowledge, check architecture status, validate heirs, and save insights automatically when needed by conversation
+- **Context-aware responses** — @alex sees referenced files and editor selection, providing more relevant answers
+- **Model intelligence** — @alex adapts reasoning depth to model tier capabilities (deep for Frontier, balanced for Capable, concise for Efficient)
+- **Prevention over detection** — Root cause elimination through upstream quality gates prevents downstream contamination
+- **Cleaner heir packages** — 119 skills deployed with 0 contamination issues (was 20 issues before RCA)
+- **Maintainability** — Template system ensures new skills start with correct structure, reducing manual validation burden
+
+---
+
+## [5.8.2] - 2026-02-16
+
+> **@alex Personality Polish (P2)** — Pre-seeded knowledge context, persona-driven prompts, and confidence signaling make @alex more helpful and self-aware
+
+### Added
+
+#### Prompt Engine Enhancements (v5.8.2 — P2: Personality Polish)
+
+- **Layer 9: Knowledge Context** — @alex pre-searches Global Knowledge for relevant patterns/insights based on query terms before responding (~200 tokens)
+  - Extracts top 5 key terms from user query (filtering stop words)
+  - Searches Global Knowledge index for top 3 relevant entries
+  - Compresses results to title + 1-sentence summary
+  - Injects relevant context to inform response before model sees the question
+- **Enhanced Layer 2: Persona-Driven Prompts** — @alex adapts communication style based on detected project persona (~150 tokens, was ~80)
+  - Reads persona from Active Context (Developer, Academic, Researcher, etc.)
+  - Injects persona-specific tone guidance (e.g., "Pragmatic, code-focused" for Developer)
+  - Shows recommended skill for detected persona
+  - Displays project banner noun (CODE, THESIS, RESEARCH, etc.)
+- **Enhanced Layer 10: Confidence Signaling** — @alex indicates confidence level in responses (~250 tokens, was ~200)
+  - **High confidence**: Direct answer with certainty ("This is...", "The solution is...")
+  - **Medium confidence**: Qualified answer ("Based on X, this likely...", "Typically...")
+  - **Low confidence**: Tentative answer ("I think...", "It might be...", "Consider...")
+  - **Outside confidence**: Honest limitation ("I don't have enough context to answer that")
+
+### Changed
+
+- **Token budget expansion** — Total prompt ~1,850 tokens (was ~1,350) with new knowledge layer and enhancements
+- **Persona-aware responses** — @alex now adjusts tone based on 16+ persona types with specific communication styles
+- **Knowledge-informed answers** — @alex sees relevant patterns/insights from Global Knowledge before answering, reducing hallucination risk
+
+### Impact
+
+- **Context-aware assistance** — @alex pre-loads relevant knowledge, providing more accurate answers without manual searching
+- **Persona adaptation** — Responses match project type (code-focused for developers, evidence-based for researchers, etc.)
+- **Trust through transparency** — Confidence signaling helps users calibrate reliance on @alex's answers
+- **Reduced hallucination** — Pre-seeded knowledge context grounds responses in verified patterns from Global Knowledge
+- **Better user experience** — @alex feels more like a specialized assistant for your domain, not a generic chatbot
+
+---
+
+## [5.8.0] - 2026-02-16
+
+> **@alex Prompt Engine (P0)** — Modular 10-layer prompt builder transforms @alex from passthrough to purpose-built cognitive assistant with full brain awareness
+
+### Added
+
+#### Prompt Engine Architecture (v5.8.0 — P0: Critical Path)
+
+- **`buildAlexSystemPrompt()` orchestrator** — Async function that coordinates all 10 prompt layers with parallel execution via `Promise.all`
+- **Layer 1: Identity Core** — Reads `.github/copilot-instructions.md` Identity + Safety Imperatives sections via regex extraction (~400 tokens)
+- **Layer 2: Active Context** — Injects persona, objective, focusTrifectas, and principles from brain's Active Context section (~80 tokens)
+- **Layer 3: Conversation History** — Compresses last 8 ChatContext turns (4 exchanges) to first sentence or 100 chars (~300 tokens)
+- **Layer 4: User Profile** — Formats IUserProfile fields with userName prominence for personalization (~150 tokens)
+- **Layer 5: Focus Session** — Includes Pomodoro session state + active goals + streak days for focus-aware assistance (~120 tokens)
+- **Layer 7: Model-Adaptive Rules** — Injects tier-specific guidance (frontier=deep, capable=balanced, efficient=concise) (~100 tokens)
+- **Layer 10: Response Guidelines** — Lists 12 Alex cognitive tools + core behavior rules + tool recommendation (~200 tokens)
+- **Token budgeting system** — Each layer has documented token budget allocation (total ~1,350 tokens vs. ~500 hardcoded)
+- **PromptContext interface** — Typed context object encapsulating workspaceRoot, profile, emotionalState, model, history, request
+
+### Changed
+
+- **@alex system prompt construction** — Replaced ~500 token hardcoded string with dynamic `buildAlexSystemPrompt()` call in `handleGeneralQuery()`
+- **Brain injection** — @alex now reads Identity from copilot-instructions.md instead of hardcoded "You are Alex..." fallback
+- **Conversation memory** — @alex includes last 4 chat exchanges in context (previously only saw current message)
+- **Active Context awareness** — @alex sees current persona, objective, and focus trifectas from brain state
+- **Modular architecture** — Each prompt layer is independently testable and tunable
+
+### Impact
+
+- **@alex is brain-aware** — No longer disconnected from Master Alex's identity; reads Identity section directly from brain file
+- **Conversation continuity** — @alex remembers previous exchanges, can reference earlier discussion points
+- **Context-driven adaptation** — @alex adjusts tone/depth based on persona (Developer vs. Researcher vs. Documentarian)
+- **Foundation for P1 enhancements** — v5.8.0 provides architectural foundation that v5.8.1 tool calling and file context layer on top of
+- **Scalable prompt engineering** — Adding new layers (Knowledge Context, Emotional Intelligence) requires adding one builder function
+- **Token visibility** — Explicit budget allocation makes prompt size predictable and tunable per layer
+
+---
+
 ## [5.7.7] - 2026-02-15
 
 > **Propose-to-Global Workflow** — Lightweight workflow for heirs to contribute skills back to Global Knowledge in <5 minutes

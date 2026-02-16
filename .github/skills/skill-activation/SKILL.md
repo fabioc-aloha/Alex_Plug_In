@@ -83,6 +83,7 @@ Search this index when processing any task request:
 | ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution |
+| global-knowledge-maintenance | curate gk, maintain knowledge, audit gk, convert insights, archive patterns, gk maintenance |
 | global-knowledge-sync | sync knowledge, push gk, pull gk, gk sync, cloud sync, promote to global |
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
@@ -145,6 +146,7 @@ Search this index when processing any task request:
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd |
 | ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
 | ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |
+| vscode-configuration-validation | validate config, manifest validation, package.json validation, command registration, settings registration, configuration errors |
 | vscode-environment | setup vscode, workspace settings, launch.json, extensions.json |
 | vscode-extension-patterns | webview pattern, extension api, tree provider, vscode extension |
 | work-life-balance | detect burnout, take break, late night, sustainable productivity |

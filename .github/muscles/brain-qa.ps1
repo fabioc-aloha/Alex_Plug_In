@@ -56,11 +56,11 @@ function Write-Fail {
 
 # Define phase groups
 $quickPhases = 1..6
-$syncPhases = 5, 7, 8, 13, 14, 15, 27, 28  # Added heir health phases
+$syncPhases = 5, 7, 8, 13, 14, 15, 27, 28, 33  # Added Phase 33: Pre-Sync Master Validation
 $schemaPhases = 2, 6, 11, 16, 17  # YAML frontmatter phases
 $llmPhases = 10, 20, 21  # LLM-first content validation
 $ghFolderPhases = 22..25  # .github/ subfolder coverage (episodic, assets, templates, root files)
-$fullAuditPhases = 26..31  # alex_docs, heirs, GK, scripts, version consistency
+$fullAuditPhases = 26..33  # alex_docs, heirs, GK, scripts, version consistency, pre-sync validation
 
 # Determine which phases to run
 $runPhases = switch ($Mode) {
@@ -68,7 +68,7 @@ $runPhases = switch ($Mode) {
     "sync" { $syncPhases }
     "schema" { $schemaPhases }
     "llm" { $llmPhases }
-    default { 1..32 }  # All phases including .github/ and external folder audits
+    default { 1..33 }  # All phases including pre-sync validation
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -775,11 +775,20 @@ if (22 -in $runPhases) {
 
         Write-Pass "Episodic files: $($allEpisodic.Count) total ($($dreamReports.Count) dreams, $($meditations.Count) meditations, $($selfActualizations.Count) self-actualizations)"
 
-        # Detect orphaned .prompt.md files (legacy naming)
+        # CRITICAL: Detect legacy .prompt.md files (MUST be migrated/archived)
         $legacyPrompts = $allEpisodic | Where-Object { $_.Name -match '\.prompt\.md$' }
         if ($legacyPrompts.Count -gt 0) {
-            Write-Warn "Episodic has $($legacyPrompts.Count) legacy .prompt.md files (current convention: .md)"
-            foreach ($lp in $legacyPrompts) { Write-Warn "  Legacy: $($lp.Name)" }
+            Write-Fail "Episodic has $($legacyPrompts.Count) legacy .prompt.md files - archive to archive/upgrades/"
+            foreach ($lp in $legacyPrompts) { 
+                Write-Fail "  Legacy format: $($lp.Name)"
+                if ($Fix) {
+                    $archivePath = Join-Path $rootPath "archive\upgrades"
+                    if (-not (Test-Path $archivePath)) { New-Item -ItemType Directory -Path $archivePath -Force | Out-Null }
+                    Move-Item $lp.FullName $archivePath -Force
+                    $script:fixed += "Archived legacy file: $($lp.Name)"
+                    Write-Pass "  → Archived to archive/upgrades/$($lp.Name)"
+                }
+            }
         }
 
         # Detect undated episodic files (no YYYY-MM-DD pattern)
@@ -787,6 +796,16 @@ if (22 -in $runPhases) {
         if ($undated.Count -gt 0) {
             Write-Warn "Episodic has $($undated.Count) undated files (may need archival review)"
             foreach ($ud in $undated) { Write-Warn "  Undated: $($ud.Name)" }
+        }
+
+        # Validate current naming conventions
+        $invalidNames = $allEpisodic | Where-Object { 
+            $_.Name -ne '.markdownlint.json' -and
+            $_.Name -notmatch '^(dream-report-|dream-|meditation-|self-actualization-|session-|chronicle-)' 
+        }
+        if ($invalidNames.Count -gt 0) {
+            Write-Fail "Episodic has $($invalidNames.Count) files with non-standard naming"
+            foreach ($in in $invalidNames) { Write-Fail "  Invalid name: $($in.Name)" }
         }
     }
     else {
@@ -1239,6 +1258,126 @@ if (32 -in $runPhases) {
     }
     else {
         Write-Fail "copilot-instructions.md not found"
+    }
+}
+
+# ============================================================
+# PHASE 33: Pre-Sync Master Validation (Prevent Heir Contamination)
+# ============================================================
+if (33 -in $runPhases) {
+    Write-Phase 33 "Pre-Sync Master Validation"
+    
+    # This phase validates master BEFORE syncing to heir
+    # Prevents contamination from spreading downstream
+    
+    # 1. All skills must have YAML frontmatter (already checked in Phase 16, but critical for sync)
+    $missingFM = @()
+    Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+        $skillMd = Join-Path $_.FullName "SKILL.md"
+        if ((Test-Path $skillMd) -and ((Get-Content $skillMd -Raw) -notmatch '^---\s*\n')) {
+            $missingFM += $_.Name
+        }
+    }
+    if ($missingFM.Count -gt 0) {
+        Write-Fail "Master has $($missingFM.Count) skills without YAML frontmatter - will break heir"
+        $missingFM | ForEach-Object { Write-Fail "  Missing frontmatter: $_" }
+    }
+    else {
+        Write-Pass "All master skills have YAML frontmatter"
+    }
+    
+    # 2. No legacy .prompt.md files in episodic (they'll sync to heir as broken references)
+    $episodicPath = Join-Path $ghPath "episodic"
+    if (Test-Path $episodicPath) {
+        $legacyPrompts = Get-ChildItem "$episodicPath\*.prompt.md" -ErrorAction SilentlyContinue
+        if ($legacyPrompts.Count -gt 0) {
+            Write-Fail "Master episodic has $($legacyPrompts.Count) legacy .prompt.md files - archive before sync"
+            $legacyPrompts | ForEach-Object { Write-Fail "  Legacy: $($_.Name)" }
+        }
+        else {
+            Write-Pass "No legacy .prompt.md files in episodic"
+        }
+    }
+    
+    # 3. No PII in master user-profile.json (protection layer before sync exclusion)
+    $profilePath = Join-Path $ghPath "config\user-profile.json"
+    if (Test-Path $profilePath) {
+        $profile = Get-Content $profilePath -Raw | ConvertFrom-Json
+        $hasPII = $false
+        if ($profile.name -and $profile.name.Trim() -ne '') {
+            Write-Warn "Master user-profile.json contains name: '$($profile.name)' (will be excluded from heir)"
+            $hasPII = $true
+        }
+        if ($profile.contact -and $profile.contact.email) {
+            Write-Warn "Master user-profile.json contains email (will be excluded from heir)"
+            $hasPII = $true
+        }
+        if (-not $hasPII) {
+            Write-Pass "Master user-profile.json is PII-free"
+        }
+    }
+    
+    # 4. Synapse references to non-existent files (will become broken in heir)
+    $brokenRefs = @()
+    Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+        $synPath = Join-Path $_.FullName "synapses.json"
+        if (Test-Path $synPath) {
+            $syn = Get-Content $synPath -Raw | ConvertFrom-Json
+            foreach ($conn in $syn.connections) {
+                $target = $conn.target
+                # Skip URIs
+                if ($target -match '^(external:|global-knowledge://|https?://)') { continue }
+                
+                # Resolve path
+                $fullPath = if ($target -match "^\.github/") {
+                    Join-Path $rootPath $target
+                }
+                elseif ($target -match "^\.\./") {
+                    [System.IO.Path]::GetFullPath((Join-Path $_.FullName $target))
+                }
+                else {
+                    Join-Path $_.FullName $target
+                }
+                
+                if (-not (Test-Path $fullPath)) {
+                    $brokenRefs += "$($_.Name): $target"
+                }
+            }
+        }
+    }
+    if ($brokenRefs.Count -gt 0) {
+        Write-Fail "Master has $($brokenRefs.Count) broken synapse references - fix before sync"
+        $brokenRefs | Select-Object -First 10 | ForEach-Object { Write-Fail "  $_" }
+        if ($brokenRefs.Count -gt 10) { Write-Fail "  ... and $($brokenRefs.Count - 10) more" }
+    }
+    else {
+        Write-Pass "All master synapse references are valid"
+    }
+    
+    # 5. Master-only files should not be referenced by inheritable skills
+    $contaminated = @()
+    Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+        $synPath = Join-Path $_.FullName "synapses.json"
+        if (Test-Path $synPath) {
+            $syn = Get-Content $synPath -Raw | ConvertFrom-Json
+            # Only check inheritable skills
+            if ($syn.inheritance -in @('inheritable', 'universal')) {
+                foreach ($conn in $syn.connections) {
+                    $target = $conn.target
+                    # Check for master-only paths
+                    if ($target -match '(ROADMAP-UNIFIED|alex_docs/|platforms/|MASTER-ALEX-PROTECTED|episodic/)') {
+                        $contaminated += "$($_.Name): references master-only path '$target'"
+                    }
+                }
+            }
+        }
+    }
+    if ($contaminated.Count -gt 0) {
+        Write-Fail "Inheritable skills reference master-only paths - will break in heir"
+        $contaminated | ForEach-Object { Write-Fail "  $_" }
+    }
+    else {
+        Write-Pass "No inheritable skills reference master-only paths"
     }
 }
 

@@ -1,0 +1,28 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "skill-name",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "id": "connection-id",
+            "target": "../../skills/skill-activation/SKILL.md",
+            "relationship": "Uses",
+            "strength": 0.8,
+            "description": "Example: Replace with actual related skill path"
+        }
+    ],
+    "activationTriggers": [
+        "keyword1",
+        "keyword2",
+        "phrase that triggers this skill"
+    ],
+    "yields": [
+        {
+            "skill": "follow-up-skill",
+            "when": "After completing X",
+            "reason": "Why this skill should activate next"
+        }
+    ]
+}

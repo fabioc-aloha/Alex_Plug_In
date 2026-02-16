@@ -49,7 +49,11 @@
         "keyboard navigation",
         "screen reader",
         "ARIA",
-        "focus indicator"
+        "focus indicator",
+        "user feedback",
+        "iterative design",
+        "CSS variables",
+        "font sizing"
     ],
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.0.0"

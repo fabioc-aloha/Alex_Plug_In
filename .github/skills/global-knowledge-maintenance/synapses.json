@@ -1,15 +1,9 @@
 {
+    "$schema": "../../schemas/synapse-schema-v2.json",
     "skill": "global-knowledge-maintenance",
     "description": "Curate and maintain Global Knowledge repository — audit index integrity, convert heir contributions to insights, and archive outdated patterns",
     "inheritance": "master-only",
     "connections": [
-        {
-            "target": "../heir-skill-promotion/SKILL.md",
-            "type": "bidirectional",
-            "strength": "strong",
-            "when": "Heirs create skills that land in Global Knowledge first",
-            "yields": "Documented heir contributions preserved as insights"
-        },
         {
             "target": "../../muscles/brain-qa.ps1",
             "type": "uses",

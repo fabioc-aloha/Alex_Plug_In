@@ -95,6 +95,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         selfActualize: "alex.selfActualize",
         exportM365: "alex.exportForM365",
         openDocs: "alex.openDocs",
+        agentVsChat: "alex.agentVsChat",
         upgrade: "alex.upgrade",
         showStatus: "alex.showStatus",
         showGoals: "alex.showGoals",
@@ -499,7 +500,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="error">
         <p>Failed to load Alex status</p>
-        <p style="font-size: 12px; opacity: 0.7;">${errorMessage}</p>
+        <p style="font-size: 18px; opacity: 0.7;">${errorMessage}</p>
         <button data-cmd="refresh">Retry</button>
     </div>
     <script nonce="${nonce}">
@@ -738,11 +739,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             --spacing-md: 16px;
             --spacing-lg: 24px;
             --spacing-xl: 32px;
-            /* Typography Scale (min 11px for accessibility) */
-            --font-xs: 11px;
-            --font-sm: 12px;
-            --font-md: 14px;
-            --font-lg: 16px;
+            /* Typography Scale (1.18x for better readability) */
+            --font-xs: 13px;
+            --font-sm: 14px;
+            --font-md: 16px;
+            --font-lg: 18px;
             /* Elevation/Shadows */
             --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.12);
@@ -810,7 +811,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             position: absolute;
             top: 8px;
             left: 8px;
-            font-size: 32px;
+            font-size: 39px;
             line-height: 1;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
             animation: egg-bounce 2s ease-in-out infinite;
@@ -907,7 +908,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-foreground);
             cursor: pointer;
             opacity: 0.5;
-            font-size: 14px;
+            font-size: 17px;
             padding: 4px;
             border-radius: 4px;
             transition: all 0.15s ease;
@@ -968,8 +969,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             gap: 5px;
         }
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             flex-shrink: 0;
             box-shadow: 0 0 3px currentColor;
@@ -978,8 +979,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         /* Accessibility: Icon labels for color-blind users */
         .status-dot::after {
             position: absolute;
-            font-size: 8px;
-            line-height: 8px;
+            font-size: 12px;
+            line-height: 12px;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
@@ -992,12 +993,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .dot-red::after { content: '✗'; color: white; }
         .status-num {
             font-weight: 600;
-            font-size: 18px;
+            font-size: 22px;
             color: var(--vscode-foreground);
             line-height: 1;
         }
         .status-unit {
-            font-size: 11px;
+            font-size: 16px;
             color: var(--vscode-descriptionForeground);
             font-weight: normal;
         }
@@ -1014,7 +1015,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             box-shadow: var(--shadow-sm);
         }
         .context-objective {
-            font-size: 11px;
+            font-size: 16px;
             font-weight: 500;
             margin-bottom: 8px;
             padding: 4px 8px;
@@ -1031,7 +1032,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .context-objective::before {
             content: '🎯';
-            font-size: 10px;
+            font-size: 15px;
         }
         .trifecta-tags {
             display: flex;
@@ -1100,17 +1101,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             margin-bottom: 3px;
         }
         .session-icon {
-            font-size: 14px;
+            font-size: 17px;
         }
         .session-title {
-            font-size: 11px;
+            font-size: 16px;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .session-timer {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 600;
             font-family: monospace;
             color: var(--vscode-charts-blue);
@@ -1138,14 +1139,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-list {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 1px;
         }
         .action-group-label {
             font-size: var(--font-xs);
             font-weight: 500;
             color: var(--vscode-descriptionForeground);
-            margin-top: 10px;
-            margin-bottom: 4px;
+            margin-top: 6px;
+            margin-bottom: 2px;
             padding-left: 2px;
             opacity: 0.7;
             letter-spacing: 0.3px;
@@ -1185,7 +1186,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-icon {
             font-size: var(--font-sm);
-            width: 18px;
+            width: 27px;
             text-align: center;
             display: flex;
             align-items: center;
@@ -1194,8 +1195,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             opacity: 0.9;
         }
         .action-icon svg {
-            width: 14px;
-            height: 14px;
+            width: 17px;
+            height: 17px;
         }
         .action-text {
             flex: 1;
@@ -1359,7 +1360,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: linear-gradient(90deg, var(--vscode-editor-background), rgba(163, 113, 247, 0.08));
         }
         .nudge-icon {
-            font-size: 14px;
+            font-size: 17px;
             flex-shrink: 0;
             opacity: 0.9;
         }
@@ -1406,7 +1407,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .features-section summary::before {
             content: '▸ ';
-            font-size: 10px;
+            font-size: 15px;
             margin-right: 4px;
             transition: transform 0.12s ease;
             display: inline-block;
@@ -1436,7 +1437,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .feature-list {
             margin: 0;
-            padding-left: 14px;
+            padding-left: 17px;
             font-size: var(--font-xs);
             line-height: 1.5;
             color: var(--vscode-descriptionForeground);
@@ -1835,6 +1836,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     
                     <nav class="feature-links" role="navigation" aria-label="Feature documentation links">
                         <button class="feature-link-btn" data-cmd="workingWithAlex" tabindex="0" role="button" aria-label="Learn about working with Alex">🎓 Working with Alex</button>
+                        <button class="feature-link-btn" data-cmd="agentVsChat" tabindex="0" role="button" aria-label="Compare agents and @alex chat mode">🤖 Agent vs @alex</button>
                         <button class="feature-link-btn" data-cmd="openDocs" tabindex="0" role="button" aria-label="Open full documentation">📚 Full Documentation</button>
                         <button class="feature-link-btn" data-cmd="openBrainAnatomy" tabindex="0" role="button" aria-label="Explore brain anatomy">🧠 Brain Anatomy</button>
                         <button class="feature-link-btn" data-cmd="openMarketplace" tabindex="0" role="button" aria-label="View on VS Code Marketplace">🏪 Marketplace</button>

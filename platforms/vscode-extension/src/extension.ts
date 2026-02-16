@@ -521,6 +521,26 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     },
   );
 
+  // Agent vs @alex Chat comparison guide
+  const agentVsChatDisposable = vscode.commands.registerCommand(
+    "alex.agentVsChat",
+    async () => {
+      const guidePath = vscode.Uri.joinPath(
+        context.extensionUri,
+        "alex_docs",
+        "guides",
+        "AGENT-VS-CHAT-COMPARISON.md",
+      );
+      try {
+        await vscode.commands.executeCommand("markdown.showPreview", guidePath);
+      } catch (err) {
+        console.log('[Alex] Markdown preview failed, opening as text:', err);
+        const doc = await vscode.workspace.openTextDocument(guidePath);
+        await vscode.window.showTextDocument(doc);
+      }
+    },
+  );
+
   // Status bar command - show quick status
   const showStatusDisposable = vscode.commands.registerCommand(
     "alex.showStatus",
@@ -2417,6 +2437,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(sessionActionsDisposable);
   context.subscriptions.push(openDocsDisposable);
   context.subscriptions.push(workingWithAlexDisposable);
+  context.subscriptions.push(agentVsChatDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
   context.subscriptions.push(runAuditDisposable);

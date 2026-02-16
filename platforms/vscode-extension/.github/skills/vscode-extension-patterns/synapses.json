@@ -13,6 +13,12 @@
       "reason": "Publishing workflow"
     },
     {
+      "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
+      "type": "implements",
+      "strength": 0.9,
+      "reason": "Marketplace publishing deployment patterns"
+    },
+    {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
       "strength": 0.8,
@@ -25,16 +31,17 @@
       "reason": "Enterprise patterns for Graph, Azure AD auth"
     },
     {
-      "target": "alex_docs/guides/VSCODE-CHAT-SETTINGS-GUIDE.md",
-      "type": "documents",
-      "strength": 0.90,
-      "reason": "Comprehensive settings management pattern exemplar (47+ settings documented)"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "reason": "TDZ debugging and production build troubleshooting"
     },
     {
-      "target": "platforms/vscode-extension/src/commands/setupEnvironment.ts",
+      "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "implements",
-      "strength": 0.95,
-      "reason": "Tiered settings application with Essential/Recommended/Auto-Approval categories"
+      "strength": 0.75,
+      "bidirectional": true,
+      "reason": "Webview UI patterns must follow accessibility standards"
     }
   ],
   "activationPatterns": [
@@ -51,7 +58,13 @@
     "telemetry opt-out compliance",
     "onDidChangeConfiguration listener",
     "VS Code 1.109+ chat settings",
-    "initialize/upgrade automation"
+    "initialize/upgrade automation",
+    "temporal dead zone TDZ debugging",
+    "production build errors",
+    "minification issues",
+    "extension testing workflow",
+    "debug vs rebuild differences",
+    "VSIX packaging and installation"
   ],
   "triggers": [
     "extension",
@@ -66,8 +79,12 @@
     "telemetry",
     "settings management",
     "documentation pattern",
-    "PowerShell automation"
-  ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+    "PowerShell automation",
+    "TDZ",
+    "minifier",
+    "production build",
+    "VSIX",
+    "rebuild",
+    "reinstall"
+  ]
 }

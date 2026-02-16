@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.7.7",
+  "version": "5.8.2",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -110,6 +110,11 @@
         "command": "alex.workingWithAlex",
         "title": "Alex: Working with Alex (Prompting Guide)",
         "icon": "$(mortar-board)"
+      },
+      {
+        "command": "alex.agentVsChat",
+        "title": "Alex: Agent vs @alex Chat Comparison",
+        "icon": "$(robot)"
       },
       {
         "command": "alex.showStatus",

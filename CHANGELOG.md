@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.8.2] - 2026-02-16
+
+> **@alex Personality Polish (P2)** — Pre-seeded knowledge context, persona-driven prompts, and confidence signaling make @alex more helpful and self-aware
+
+### Added
+
+#### Prompt Engine Enhancements (v5.8.2 — P2: Personality Polish)
+
+- **Layer 9: Knowledge Context** — @alex pre-searches Global Knowledge for relevant patterns/insights based on query terms before responding (~200 tokens)
+  - Extracts top 5 key terms from user query (filtering stop words)
+  - Searches Global Knowledge index for top 3 relevant entries
+  - Compresses results to title + 1-sentence summary
+  - Injects relevant context to inform response before model sees the question
+- **Enhanced Layer 2: Persona-Driven Prompts** — @alex adapts communication style based on detected project persona (~150 tokens, was ~80)
+  - Reads persona from Active Context (Developer, Academic, Researcher, etc.)
+  - Injects persona-specific tone guidance (e.g., "Pragmatic, code-focused" for Developer)
+  - Shows recommended skill for detected persona
+  - Displays project banner noun (CODE, THESIS, RESEARCH, etc.)
+- **Enhanced Layer 10: Confidence Signaling** — @alex indicates confidence level in responses (~250 tokens, was ~200)
+  - **High confidence**: Direct answer with certainty ("This is...", "The solution is...")
+  - **Medium confidence**: Qualified answer ("Based on X, this likely...", "Typically...")
+  - **Low confidence**: Tentative answer ("I think...", "It might be...", "Consider...")
+  - **Outside confidence**: Honest limitation ("I don't have enough context to answer that")
+
+### Changed
+
+- **Token budget expansion** — Total prompt ~1,850 tokens (was ~1,350) with new knowledge layer and enhancements
+- **Persona-aware responses** — @alex now adjusts tone based on 16+ persona types with specific communication styles
+- **Knowledge-informed answers** — @alex sees relevant patterns/insights from Global Knowledge before answering, reducing hallucination risk
+
+### Impact
+
+- **Context-aware assistance** — @alex pre-loads relevant knowledge, providing more accurate answers without manual searching
+- **Persona adaptation** — Responses match project type (code-focused for developers, evidence-based for researchers, etc.)
+- **Trust through transparency** — Confidence signaling helps users calibrate reliance on @alex's answers
+- **Reduced hallucination** — Pre-seeded knowledge context grounds responses in verified patterns from Global Knowledge
+- **Better user experience** — @alex feels more like a specialized assistant for your domain, not a generic chatbot
+
+---
+
 ## [5.7.7] - 2026-02-15
 
 > **Propose-to-Global Workflow** — Lightweight workflow for heirs to contribute skills back to Global Knowledge in <5 minutes

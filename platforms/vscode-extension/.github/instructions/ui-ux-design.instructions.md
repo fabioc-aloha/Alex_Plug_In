@@ -415,6 +415,88 @@ Before merging UI changes, verify:
 
 ---
 
+## Iterative Accessibility Refinement
+
+### User-Validated Design Improvements
+
+**Principle**: Accessibility improvements (especially typography and spacing) require real user validation. Mathematical scaling ratios don't predict human perception.
+
+**Iterative Refinement Pattern**
+
+1. **Initial Implementation**: Apply design standards with reasonable defaults
+   - Use established typography scales (1.125, 1.2, 1.333, 1.5, 1.618)
+   - Follow 8px spacing grid
+   - Target WCAG AA minimum requirements
+
+2. **Local Testing**: Deploy locally before marketplace/production release
+   - Install extension/app in real environment
+   - Use actual screen sizes and zoom levels user will experience
+   - Test with target user personas if available
+
+3. **User Feedback Loop**: Collect real-world perception data
+   - Direct user feedback: "too large", "too small", "just right"
+   - Observation: user squinting (too small), scrolling excessively (too large)
+   - Analytics: zoom level usage, readability complaints
+
+4. **Incremental Adjustment**: Make small changes based on feedback
+   - Typography: Adjust by 1-2px or 0.1-0.25x scale increments
+   - Spacing: Adjust by 1-2px (within 8px grid when possible)
+   - Never assume first attempt is final
+
+5. **Re-Validation**: Test adjusted design with same users
+   - Confirm improvement over previous iteration
+   - Continue loop until user satisfaction achieved
+
+**Example: Font Size Iteration** (Alex v5.8.2 Welcome View)
+
+| Iteration | Scale | Base Sizes | User Feedback | Result |
+|-----------|-------|------------|---------------|--------|
+| Original | 1.0x | 11px, 12px, 14px, 16px | "Too small, hard to read" | ❌ Rejected |
+| Attempt 1 | 1.5x | 16px, 18px, 21px, 24px | "Better, but still small" | ❌ Rejected |
+| Attempt 2 | 2.0x | 22px, 24px, 28px, 32px | "Way too large!" | ❌ Rejected |
+| Final | 1.18x | 13px, 14px, 16px, 18px | "Looks good" | ✅ Approved |
+
+**Key Insight**: The optimal scale (1.18x) was not predictable from standard typographic ratios. Required 3 iterations with user validation.
+
+**CSS Variable Design Pattern** (Enables Rapid Iteration)
+
+```css
+/* Define scale in one place */
+:root {
+  --font-xs: 13px;  /* Easily adjustable */
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 18px;
+}
+
+/* Use variables throughout */
+.section-title {
+  font-size: var(--font-xs); /* Changes globally when variable updated */
+}
+
+.action-btn {
+  font-size: var(--font-xs);
+  padding: var(--spacing-sm);
+}
+```
+
+**Benefit**: Changing 4 CSS variables updates entire interface. No need to track down dozens of hardcoded values.
+
+**When to Use This Pattern**
+
+- New UI components with uncertain user reception
+- Accessibility improvements to existing interfaces
+- Cross-cultural design (different reading preferences by locale)
+- Responsive design (different optimal sizes per screen size)
+
+**When NOT to Apply**
+
+- Established design systems with proven user testing
+- Components matching existing interface standards (consistency > optimization)
+- Minor internal tools with single user
+
+---
+
 ## Common UI/UX Code Smells
 
 **Immediate Red Flags**

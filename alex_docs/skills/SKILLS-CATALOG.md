@@ -7,15 +7,16 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 119
+## Skill Count: 122
 
-| Inheritance | Count |
-| ----------- | ----- |
-| Inheritable | 108   |
-| Master-Only | 2     |
-| Universal   | 1     |
-| Heir:vscode | 6     |
-| Heir:m365   | 2     |
+| Inheritance | Count                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------ |
+| Inheritable | 107                                                                                                    |
+| Master-Only | 4                                                                                                      |
+| Universal   | 1                                                                                                      |
+| Heir:vscode | 6                                                                                                      |
+| Heir:m365   | 2                                                                                                      |
+| Note        | 2 skills pending catalog documentation (global-knowledge-maintenance, vscode-configuration-validation) |
 
 > 🎉 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
 >

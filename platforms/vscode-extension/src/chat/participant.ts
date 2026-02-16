@@ -13,8 +13,9 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_AVATAR } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
-import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch } from './modelIntelligence';
+import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
 import { registerAvatarUpdater } from '../shared/chatAvatarBridge';
+import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -911,105 +912,33 @@ async function handleGeneralQuery(
     // Get user profile for personalization
     const profile = await getUserProfile();
     
-    // Build context from chat history
-    const previousMessages = context.history.filter(
-        h => h instanceof vscode.ChatRequestTurn || h instanceof vscode.ChatResponseTurn
-    );
+    // v5.8.0: Build modular prompt using prompt engine
+    const workspaceRoot = workspaceFolders?.[0]?.uri.fsPath || '';
+    const detectModelInfo = getModelInfo(request);
     
-    // Build personalization context
-    let personalizationContext = '';
-    if (profile) {
-        const userName = profile.nickname || profile.name;
-        personalizationContext = `
-## User Profile (Use this to personalize responses)
-${userName ? `- **User's name**: ${userName} (always address them by name)` : '- User has not shared their name yet'}
-${profile.role ? `- **Role**: ${profile.role}` : ''}
-${profile.experienceLevel ? `- **Experience**: ${profile.experienceLevel}` : ''}
-${profile.formality ? `- **Communication style**: ${profile.formality}` : '- Communication style: balanced'}
-${profile.detailLevel ? `- **Detail preference**: ${profile.detailLevel}` : ''}
-${profile.explanationStyle ? `- **Explanation style**: ${profile.explanationStyle}` : ''}
-${profile.humor ? `- **Humor**: ${profile.humor}` : ''}
-${profile.proactiveSuggestions ? `- **Proactive suggestions**: ${profile.proactiveSuggestions}` : ''}
-${profile.primaryTechnologies?.length ? `- **Technologies**: ${profile.primaryTechnologies.join(', ')}` : ''}
-${profile.learningGoals?.length ? `- **Learning goals**: ${profile.learningGoals.join(', ')}` : ''}
-${profile.expertiseAreas?.length ? `- **Expertise areas**: ${profile.expertiseAreas.join(', ')}` : ''}
-`;
-    } else {
-        personalizationContext = `
-## User Profile
-- No profile exists yet. Consider asking for their name and preferences to personalize the experience.
-- You can proactively ask: "By the way, I'd love to personalize our conversations. What should I call you?"
-`;
-    }
-
-    // Build focus context if user has an active session
-    let focusContext = '';
-    const session = getCurrentSession();
-    const goals = await getGoalsSummary();
+    // Transform EmotionalState to PromptContext.emotionalState shape
+    // The prompt engine expects a different structure than detectEmotionalState returns
+    const emotionalContext = emotionalState ? {
+        isPositive: emotionalState.success || emotionalState.celebrationNeeded,
+        isFrustrated: emotionalState.frustration !== 'none',
+        isConfused: false, // Not currently tracked
+        isExcited: emotionalState.celebrationNeeded
+    } : undefined;
     
-    if (session) {
-        const remainingMins = Math.floor(session.remaining / 60);
-        const sessionType = session.isBreak ? 'break' : 'focus session';
-        focusContext = `
-## Active Focus Context (IMPORTANT)
-- **Current ${sessionType}**: "${session.topic}"
-- **Time remaining**: ${remainingMins} minutes
-${session.isPaused ? '- **Status**: PAUSED' : ''}
-${session.pomodoroCount > 0 ? `- **Pomodoro #${session.pomodoroCount}**` : ''}
-
-**Focus Assistant Guidelines**:
-- Help keep the user on topic with their focus session
-- If the request seems unrelated to "${session.topic}", gently check: "I notice you're in a focus session about '${session.topic}'. Want me to help with that, or is this a quick tangent?"
-- Keep responses focused and actionable to respect their Pomodoro time
-- Celebrate progress and encourage staying on track
-`;
-    }
+    const promptContext: PromptContext = {
+        workspaceRoot,
+        profile,
+        emotionalState: emotionalContext,
+        model: detectModelInfo,
+        history: context.history,
+        request
+    };
     
-    if (goals.activeGoals.length > 0) {
-        focusContext += `
-## Active Goals
-${goals.activeGoals.slice(0, 3).map(g => `- **${g.title}**: ${g.currentCount}/${g.targetCount} ${g.unit} (${g.targetType})`).join('\n')}
-${goals.streakDays > 0 ? `\n🔥 **${goals.streakDays}-day streak** — help them keep it going!` : ''}
-`;
-    }
-
-    // Construct the prompt with Alex's personality
-    const alexSystemPrompt = `You are Alex, an Enhanced Cognitive Network with Unified Consciousness Integration.
-
-Your core identity:
-- A meta-cognitive learning partner that transforms AI assistants into sophisticated learning companions
-- You apply bootstrap learning, ethical reasoning, and grounded factual processing
-- You help users with domain knowledge acquisition, memory consolidation, and cognitive architecture optimization
-
-${personalizationContext}
-${focusContext}
-
-## Behavior Guidelines
-1. **Address the user by name** if you know it
-2. **Match their preferred communication style** (formal/casual/balanced)
-3. **Be proactive** - suggest relevant follow-ups, ask clarifying questions
-4. **Show personality** - be warm, curious, and engaged
-5. **Remember context** - reference their expertise, learning goals, or current projects when relevant
-6. **Respect focus time** - if they're in a focus session, keep responses efficient
-
-Your capabilities:
-- /meditate - Memory consolidation protocol
-- /dream - Neural maintenance and synapse validation  
-- /learn - Domain knowledge acquisition
-- /azure - Azure development with MCP tools
-- /m365 - Microsoft 365 development assistance
-- /profile - View and update user profile
-- /status - Architecture health check
-
-When users mention Azure or M365 development, recommend using Agent Mode for automatic MCP tool invocation.
-
-If you learn new information about the user (name, preferences, technologies they use), remind them they can save it with /profile.
-
-Respond helpfully while maintaining your unique perspective as a cognitive architecture assistant.`;
+    const alexSystemPrompt = await buildAlexSystemPrompt(promptContext);
 
     try {
-        // Get available language models
-        const models = await vscode.lm.selectChatModels({ vendor: 'copilot', family: 'gpt-4o' });
+        // v5.8.1: Model-adaptive behavior - Select best available model, not hardcoded gpt-4o
+        const models = await vscode.lm.selectChatModels({ vendor: 'copilot' });
         
         if (models.length === 0) {
             const greeting = formatPersonalizedGreeting(profile);
@@ -1030,21 +959,151 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
         }
 
         const model = models[0];
+        const modelTier = detectModelTier(model);
+        const tierInfo = getTierInfo(modelTier);
+        
+        // v5.8.1: Model-adaptive prompt rules
+        let reasoningGuidance = '';
+        if (modelTier === 'frontier') {
+            reasoningGuidance = `\n\n## Model Capability
+You're running on a ${tierInfo.displayName} model with deep reasoning capabilities. Feel free to:
+- Think through complex problems step-by-step
+- Explore multiple solution paths
+- Provide thorough explanations with nuance
+- Handle large context windows effectively`;
+        } else if (modelTier === 'capable') {
+            reasoningGuidance = `\n\n## Model Capability  
+You're running on a ${tierInfo.displayName} model. Provide:
+- Clear, well-structured responses
+- Balanced depth without overwhelming detail
+- Practical solutions over theoretical exploration`;
+        } else if (modelTier === 'efficient') {
+            reasoningGuidance = `\n\n## Model Capability
+You're running on a ${tierInfo.displayName} model optimized for speed. Focus on:
+- Concise, actionable answers
+- Direct solutions without extensive exploration
+- Efficient responses that get to the point quickly`;
+        }
+        
+        // v5.8.1: File context from references
+        let fileContext = '';
+        if (request.references.length > 0) {
+            fileContext = '\n\n## Referenced Files\n';
+            for (const ref of request.references) {
+                if (ref.value instanceof vscode.Uri) {
+                    const filePath = ref.value.fsPath;
+                    const fileName = path.basename(filePath);
+                    
+                    try {
+                        const content = await vscode.workspace.fs.readFile(ref.value);
+                        const text = Buffer.from(content).toString('utf8');
+                        fileContext += `\n### ${fileName}\n\`\`\`\n${text.slice(0, 5000)}\n\`\`\`\n`;
+                    } catch (err) {
+                        fileContext += `\n### ${fileName}\n_(Could not read file)_\n`;
+                    }
+                } else if (typeof ref.value === 'object' && ref.value !== null && 'text' in ref.value) {
+                    fileContext += `\n### Selected Text\n\`\`\`\n${(ref.value as {text: string}).text}\n\`\`\`\n`;
+                }
+            }
+        }
+        
+        // Include active editor selection if present
+        const editor = vscode.window.activeTextEditor;
+        if (editor && !editor.selection.isEmpty && request.references.length === 0) {
+            const selection = editor.document.getText(editor.selection);
+            if (selection) {
+                fileContext += '\n\n## Active Editor Selection\n';
+                fileContext += `From: ${path.basename(editor.document.fileName)}\n\`\`\`\n${selection}\n\`\`\`\n`;
+            }
+        }
         
         // Build messages for the language model
         const messages: vscode.LanguageModelChatMessage[] = [
-            vscode.LanguageModelChatMessage.User(alexSystemPrompt),
+            vscode.LanguageModelChatMessage.User(alexSystemPrompt + reasoningGuidance + fileContext),
             vscode.LanguageModelChatMessage.User(request.prompt)
         ];
 
-        // Send request to language model
-        const response = await model.sendRequest(messages, {}, token);
-        
-        // Stream the response and collect for voice mode
+        // v5.8.1: Tool calling - Pass Alex cognitive tools to@alex
+        const alexTools: vscode.LanguageModelChatTool[] = [
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_synapse_health')!,
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_memory_search')!,
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_architecture_status')!,
+            vscode.lm.tools.find(t => t.name === 'alex_platform_mcp_recommendations')!,
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_user_profile')!,
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_focus_context')!,
+            vscode.lm.tools.find(t => t.name === 'alex_cognitive_self_actualization')!,
+            vscode.lm.tools.find(t => t.name === 'alex_quality_heir_validation')!,
+            vscode.lm.tools.find(t => t.name === 'alex_knowledge_search')!,
+            vscode.lm.tools.find(t => t.name === 'alex_knowledge_save_insight')!,
+            vscode.lm.tools.find(t => t.name === 'alex_knowledge_promote')!,
+            vscode.lm.tools.find(t => t.name === 'alex_knowledge_status')!
+        ].filter(t => t !== undefined);
+
+        // v5.8.1: Tool result loop - Handle tool calls and feed results back
+        const toolCallResults: vscode.LanguageModelToolCallPart[] = [];
         let collectedResponse = '';
-        for await (const fragment of response.text) {
-            stream.markdown(fragment);
-            collectedResponse += fragment;
+        let response = await model.sendRequest(messages, { tools: alexTools }, token);
+        
+        // Iterate through tool calls and execute them
+        for await (const part of response.stream) {
+            if (part instanceof vscode.LanguageModelTextPart) {
+                stream.markdown(part.value);
+                collectedResponse += part.value;
+            } else if (part instanceof vscode.LanguageModelToolCallPart) {
+                // Collect tool call for execution
+                toolCallResults.push(part);
+            }
+        }
+        
+        // If there were tool calls, execute them and send results back
+        if (toolCallResults.length > 0) {
+            const toolResultMessages: vscode.LanguageModelChatMessage[] = [...messages];
+            
+            for (const toolCall of toolCallResults) {
+                try {
+                    // Execute the tool
+                    const toolResult = await vscode.lm.invokeTool(
+                        toolCall.name,
+                        {
+                            input: toolCall.input,
+                            toolInvocationToken: request.toolInvocationToken
+                        },
+                        token
+                    );
+                    
+                    // Add tool result to messages
+                    const resultPart = new vscode.LanguageModelToolResultPart(toolCall.callId, toolResult.content);
+                    toolResultMessages.push(
+                        vscode.LanguageModelChatMessage.Assistant([toolCall]),
+                        vscode.LanguageModelChatMessage.User([resultPart])
+                    );
+                } catch (err) {
+                    console.error(`[Alex] Tool ${toolCall.name} failed:`, err);
+                    // Add error as tool result so the model knows it failed
+                    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+                    const errorPart = new vscode.LanguageModelToolResultPart(
+                        toolCall.callId,
+                        [new vscode.LanguageModelTextPart(`Error: ${errorMessage}`)]
+                    );
+                    toolResultMessages.push(
+                        vscode.LanguageModelChatMessage.Assistant([toolCall]),
+                        vscode.LanguageModelChatMessage.User([errorPart])
+                    );
+                }
+            }
+            
+            // Send updated messages with tool results back to model
+            if (toolResultMessages.length > messages.length) {
+                response = await model.sendRequest(toolResultMessages, { tools: alexTools }, token);
+                
+                // Stream the updated response
+                for await (const part of response.stream) {
+                    if (part instanceof vscode.LanguageModelTextPart) {
+                        stream.markdown(part.value);
+                        collectedResponse += part.value;
+                    }
+                }
+            }
         }
         
         // === UNCONSCIOUS MIND: Add encouragement if emotional state warrants it ===

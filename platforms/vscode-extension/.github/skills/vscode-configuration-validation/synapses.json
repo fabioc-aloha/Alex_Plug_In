@@ -1,4 +1,5 @@
 {
+    "$schema": "../../schemas/synapse-schema-v2.json",
     "schemaVersion": "2.0.0",
     "skillId": "vscode-configuration-validation",
     "version": "1.0.0",

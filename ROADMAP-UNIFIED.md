@@ -10,7 +10,7 @@
 
 ### Current State
 
-v5.7.7 is current. Alex now has:
+v5.8.2 is current. Alex now has:
 - **122 Skills** (119 inheritable to heirs) — Comprehensive domain coverage
 - **Skill Intelligence** — Context-aware recommendations (30 tech mappings, 15 file types, 18 personas) with user preference tracking
 - **Propose-to-Global Workflow** — One-click skill contribution for heirs (<5 min vs. 30 min manual process)
@@ -42,34 +42,34 @@ v5.7.7 is current. Alex now has:
 
 ## Version Status
 
-| Version    | Focus                              | Paradigm                     | Status                     |
-| ---------- | ---------------------------------- | ---------------------------- | -------------------------- |
-| v5.3.0     | Enterprise Readiness               | Trust at Scale               | ✅ Complete                 |
-| v5.3.1     | CSP Security Fix                   | Secure UX                    | ✅ Complete                 |
-| v5.4.0-3   | Text-to-Speech & Voice             | Accessible Cognition         | ✅ Complete                 |
-| v5.5.0     | Model Intelligence                 | Adaptive Cognition           | ✅ Complete                 |
-| v5.6.0-9   | Enterprise Systems                 | Deep Orchestration           | ✅ Stabilized (5.6.9 final) |
-| v5.7.0     | Structural Consistency             | Purpose-Built Cognition      | ✅ Shipped                  |
-| v5.7.1     | Visual Identity + UI/UX Polish     | Stable Foundation            | ✅ Shipped                  |
-| **v5.7.2** | **Global Knowledge Maintenance**   | **Knowledge Infrastructure** | **✅ Shipped**              |
-| v5.7.3-4   | *reserved for UI/UX fixes*         |                              |                            |
-| **v5.7.5** | **Skill Intelligence**             | **Context-Aware Guidance**   | **✅ Shipped**              |
-| v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | ✅ Complete (2026-02-15)    |
-| v5.7.7     | Propose-to-Global Workflow         | Knowledge Contribution       | ✅ Shipped (2026-02-15)     |
-| v5.7.8-9   | *reserved for UI/UX fixes*         |                              |                            |
-| v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition      | 📋 Planned                  |
-| v5.8.1     | @alex Tools + File Context (P1)    | Purpose-Built Cognition      | 📋 Planned                  |
-| v5.8.2     | @alex Personality + Knowledge (P2) | Purpose-Built Cognition      | 📋 Planned                  |
-| v5.8.3-9   | *reserved for fixes/enhancements*  |                              |                            |
-| v5.9.0     | VS Code API Adoption               | Platform Leverage            | 📋 Planned                  |
-| v5.9.1     | Foundry POC (if compelling)        | Platform Leverage            | 📋 Planned                  |
-| v5.9.2     | Stabilization + Polish             | Production Maturity          | 📋 Planned                  |
-| v5.9.3-9   | *reserved for community feedback*  |                              |                            |
-| v6.0.0     | Autonomous Workflows               | Autonomous Cognition         | 📋 Planned                  |
-| v6.1.0     | Deep Memory + Learning Loops       | Autonomous Cognition         | 📋 Planned                  |
-| v6.2.0     | Skill Marketplace (if community)   | Autonomous Cognition         | 📋 Planned                  |
-| v6.3-9     | *reserved for fixes/enhancements*  |                              |                            |
-| v7.0.0     | Collaborative Intelligence         | Collective Cognition         | 📋 Planned                  |
+| Version    | Focus                               | Paradigm                     | Status                     |
+| ---------- | ----------------------------------- | ---------------------------- | -------------------------- |
+| v5.3.0     | Enterprise Readiness                | Trust at Scale               | ✅ Complete                 |
+| v5.3.1     | CSP Security Fix                    | Secure UX                    | ✅ Complete                 |
+| v5.4.0-3   | Text-to-Speech & Voice              | Accessible Cognition         | ✅ Complete                 |
+| v5.5.0     | Model Intelligence                  | Adaptive Cognition           | ✅ Complete                 |
+| v5.6.0-9   | Enterprise Systems                  | Deep Orchestration           | ✅ Stabilized (5.6.9 final) |
+| v5.7.0     | Structural Consistency              | Purpose-Built Cognition      | ✅ Shipped                  |
+| v5.7.1     | Visual Identity + UI/UX Polish      | Stable Foundation            | ✅ Shipped                  |
+| **v5.7.2** | **Global Knowledge Maintenance**    | **Knowledge Infrastructure** | **✅ Shipped**              |
+| v5.7.3-4   | *reserved for UI/UX fixes*          |                              |                            |
+| **v5.7.5** | **Skill Intelligence**              | **Context-Aware Guidance**   | **✅ Shipped**              |
+| v5.7.6     | Office Add-in Platform Research     | Platform Exploration         | ✅ Complete (2026-02-15)    |
+| v5.7.7     | Propose-to-Global Workflow          | Knowledge Contribution       | ✅ Shipped (2026-02-15)     |
+| v5.7.8-9   | *reserved for UI/UX fixes*          |                              |                            |
+| **v5.8.0** | **@alex Prompt Engine (P0)**        | **Purpose-Built Cognition**  | **✅ Shipped (2026-02-16)** |
+| **v5.8.1** | **@alex Tools + File Context (P1)** | **Purpose-Built Cognition**  | **✅ Shipped (2026-02-16)** |
+| **v5.8.2** | **@alex Personality Polish (P2)**   | **Purpose-Built Cognition**  | **✅ Shipped (2026-02-16)** |
+| v5.8.3-9   | *reserved for fixes/enhancements*   |                              |                            |
+| v5.9.0     | VS Code API Adoption                | Platform Leverage            | 📋 Planned                  |
+| v5.9.1     | Foundry POC (if compelling)         | Platform Leverage            | 📋 Planned                  |
+| v5.9.2     | Stabilization + Polish              | Production Maturity          | 📋 Planned                  |
+| v5.9.3-9   | *reserved for community feedback*   |                              |                            |
+| v6.0.0     | Autonomous Workflows                | Autonomous Cognition         | 📋 Planned                  |
+| v6.1.0     | Deep Memory + Learning Loops        | Autonomous Cognition         | 📋 Planned                  |
+| v6.2.0     | Skill Marketplace (if community)    | Autonomous Cognition         | 📋 Planned                  |
+| v6.3-9     | *reserved for fixes/enhancements*   |                              |                            |
+| v7.0.0     | Collaborative Intelligence          | Collective Cognition         | 📋 Planned                  |
 
 ---
 
@@ -191,42 +191,42 @@ A version is **done** when ALL of the following are true:
 
 **Tagline**: Agent mode is your **workshop**. @alex is your **mentor**.
 
-#### v5.8.0 — P0: Critical Path (ship first)
+#### v5.8.0 — P0: Critical Path (ship first) ✅ **SHIPPED (2026-02-16)**
 
 | Task                       | Owner | Effort | Priority | Status | Description                                             |
 | -------------------------- | :---: | :----: | :------: | :----: | ------------------------------------------------------- |
-| Prompt Engine module       | Heir  |   4h   |    P0    |   📋    | New `promptEngine.ts` — modular 10-layer prompt builder |
-| Brain injection (Identity) | Heir  |   2h   |    P0    |   📋    | Read copilot-instructions.md → inject Identity + Safety |
-| Active Context injection   | Heir  |   1h   |    P0    |   📋    | ActiveContextManager → persona, objective, focus areas  |
-| Conversation history       | Heir  |   2h   |    P0    |   📋    | Include last 4 exchanges from `context.history`         |
+| Prompt Engine module       | Heir  |   4h   |    P0    |   ✅    | New `promptEngine.ts` — modular 10-layer prompt builder |
+| Brain injection (Identity) | Heir  |   2h   |    P0    |   ✅    | Read copilot-instructions.md → inject Identity + Safety |
+| Active Context injection   | Heir  |   1h   |    P0    |   ✅    | ActiveContextManager → persona, objective, focus areas  |
+| Conversation history       | Heir  |   2h   |    P0    |   ✅    | Include last 4 exchanges from `context.history`         |
 
-**Milestone**: @alex that knows who it is and remembers the conversation.
+**Milestone**: ✅ @alex that knows who it is and remembers the conversation.
 
-#### v5.8.1 — P1: High Value (ship next)
+#### v5.8.1 — P1: High Value ✅ **SHIPPED (2026-02-16)**
 
 | Task                         | Owner | Effort | Priority | Status | Description                                               |
 | ---------------------------- | :---: | :----: | :------: | :----: | --------------------------------------------------------- |
-| Tool calling in @alex        | Heir  |   4h   |    P1    |   📋    | Pass 7-12 Alex tools via `sendRequest` options            |
-| Tool result loop             | Heir  |   3h   |    P1    |   📋    | Handle `LanguageModelToolCallPart` + feed results back    |
-| File context from references | Heir  |   2h   |    P1    |   📋    | Extract `request.references` + active editor selection    |
-| Model-adaptive behavior      | Heir  |   2h   |    P1    |   📋    | Replace hardcoded `gpt-4o` with tier-aware selection      |
-| Model-adaptive prompt rules  | Heir  |   1h   |    P1    |   📋    | Frontier=deep reasoning, Capable=balanced, Efficient=fast |
+| Tool calling in @alex        | Heir  |   4h   |    P1    |   ✅    | Pass 7-12 Alex tools via `sendRequest` options            |
+| Tool result loop             | Heir  |   3h   |    P1    |   ✅    | Handle `LanguageModelToolCallPart` + feed results back    |
+| File context from references | Heir  |   2h   |    P1    |   ✅    | Extract `request.references` + active editor selection    |
+| Model-adaptive behavior      | Heir  |   2h   |    P1    |   ✅    | Replace hardcoded `gpt-4o` with tier-aware selection      |
+| Model-adaptive prompt rules  | Heir  |   1h   |    P1    |   ✅    | Frontier=deep reasoning, Capable=balanced, Efficient=fast |
 
-**Milestone**: @alex can invoke tools, see files, and adapt to model tier.
+**Milestone**: ✅ @alex can invoke tools, see files, and adapt to model tier.
 
-#### v5.8.2 — P2: Personality Polish (refinement)
+#### v5.8.2 — P2: Personality Polish ✅ **SHIPPED (2026-02-16)**
 
 | Task                         | Owner | Effort | Priority | Status | Description                                              |
 | ---------------------------- | :---: | :----: | :------: | :----: | -------------------------------------------------------- |
-| Pre-seeded knowledge context | Heir  |   4h   |    P2    |   📋    | Auto-search memory for user's query terms before sending |
-| Persona-driven prompt        | Heir  |   2h   |    P2    |   📋    | Inject persona-specific tone, skills, banner noun        |
-| Confidence signaling         | Heir  |   1h   |    P2    |   📋    | Response guidelines: high/medium/low/outside confidence  |
-| User profile layer           | Heir  |   1h   |    P2    |   📋    | Inject personalization from user-profile.json            |
-| Focus session layer          | Heir  |   1h   |    P2    |   📋    | Inject Pomodoro timer, goals, streaks into prompt        |
+| Pre-seeded knowledge context | Heir  |   4h   |    P2    |   ✅    | Auto-search memory for user's query terms before sending |
+| Persona-driven prompt        | Heir  |   2h   |    P2    |   ✅    | Inject persona-specific tone, skills, banner noun        |
+| Confidence signaling         | Heir  |   1h   |    P2    |   ✅    | Response guidelines: high/medium/low/outside confidence  |
+| User profile layer           | Heir  |   1h   |    P2    |   ✅    | Inject personalization from user-profile.json (v5.8.0)   |
+| Focus session layer          | Heir  |   1h   |    P2    |   ✅    | Inject Pomodoro timer, goals, streaks (v5.8.0)           |
 
-**Milestone**: @alex adapts per persona, pre-loads knowledge, signals confidence.
+**Milestone**: ✅ @alex adapts per persona, pre-loads knowledge, signals confidence.
 
-**Target**: Q2 2026
+**Target**: ✅ Q2 2026 (Shipped 2026-02-16)
 
 ---
 
@@ -617,16 +617,17 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 | v5.7.1        | Visual Identity + UI/UX Polish   | Feb 15, 2026     |
 | **v5.7.2**    | **Global Knowledge Maintenance** | **Feb 15, 2026** |
 | **v5.7.5**    | **Skill Intelligence**           | **Feb 15, 2026** |
+| **v5.8.2**    | **@alex Enhanced Mode**          | **Feb 16, 2026** |
 
 ---
 
-|                            |                                  |
-| -------------------------- | -------------------------------- |
-| **Current Master Version** | 5.7.5                            |
-| **Current Heirs**          | VS Code (5.7.5), M365 (5.7.2)    |
-| **Next Target**            | 5.8.0 — @alex Enhanced Mode (P0) |
-| **Updated**                | 2026-02-15                       |
-| **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3)    |
+|                            |                               |
+| -------------------------- | ----------------------------- |
+| **Current Master Version** | 5.8.2                         |
+| **Current Heirs**          | VS Code (5.8.2), M365 (5.7.2) |
+| **Next Target**            | 5.9.0 — VS Code API Adoption  |
+| **Updated**                | 2026-02-15                    |
+| **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3) |
 
 ---
 

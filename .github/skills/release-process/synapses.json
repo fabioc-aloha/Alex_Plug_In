@@ -49,13 +49,6 @@
       "yields": "Automated test patterns and confidence metrics"
     },
     {
-      "target": "ROADMAP-UNIFIED.md",
-      "type": "implements",
-      "strength": 1.0,
-      "when": "Verifying release readiness",
-      "yields": "8-criteria Definition of Done checklist"
-    },
-    {
       "target": ".github/skills/documentation-quality-assurance/SKILL.md",
       "type": "validates",
       "strength": 0.85,

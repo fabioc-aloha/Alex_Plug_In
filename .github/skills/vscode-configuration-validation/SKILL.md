@@ -1,3 +1,8 @@
+---
+name: "VS Code Configuration Validation"
+description: "Validate VS Code extension manifest against runtime code usage"
+---
+
 # VS Code Extension Configuration Validation
 
 **Domain**: VS Code extension development, configuration management, quality assurance  

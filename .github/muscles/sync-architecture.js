@@ -203,17 +203,21 @@ function syncSkills() {
 }
 
 function cleanBrokenSynapseReferences(skippedMasterOnly) {
-    if (skippedMasterOnly.length === 0) return;
     console.log('\n🧹 Cleaning broken synapse references to master-only resources...\n');
     
-    // Master-only files that shouldn't be referenced in heir
-    const masterOnlyFiles = [
+    // Master-only files and paths that shouldn't be referenced in heir
+    const masterOnlyPatterns = [
         'ROADMAP-UNIFIED.md',
-        'alex_docs/architecture/',
+        'alex_docs/',                    // Documentation folder (master-only)
+        'platforms/',                    // Heir doesn't have platforms/
         'MASTER-ALEX-PROTECTED.json',
+        '.github/episodic/',             // Episodic memory is empty in heir
+        'external:',                     // External repo references (Global Knowledge)
+        'global-knowledge://',           // Global Knowledge URIs
     ];
     
     let cleanedCount = 0;
+    let totalRemoved = 0;
     const heirSkillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
         .filter(d => d.isDirectory())
         .map(d => d.name);
@@ -229,21 +233,41 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
             const original = synapse.connections.length;
             synapse.connections = synapse.connections.filter(conn => {
                 const target = conn.target || '';
-                // Filter master-only skills
+                
+                // Filter master-only skills (from inheritance classification)
                 if (skippedMasterOnly.some(removed => target.includes(removed))) {
                     return false;
                 }
-                // Filter master-only files
-                if (masterOnlyFiles.some(file => target.includes(file))) {
+                
+                // Filter master-only patterns
+                if (masterOnlyPatterns.some(pattern => target.includes(pattern))) {
                     return false;
                 }
+                
+                // Check if file-based target actually exists in heir
+                if (target.startsWith('.github/') || target.startsWith('../') || target.startsWith('../../')) {
+                    let targetPath;
+                    if (target.startsWith('.github/')) {
+                        targetPath = path.join(HEIR_ROOT, target);
+                    } else {
+                        // Relative from skills/ dir
+                        targetPath = path.join(HEIR_SKILLS, skillName, target);
+                    }
+                    
+                    if (!fs.existsSync(targetPath)) {
+                        return false; // File doesn't exist in heir
+                    }
+                }
+                
                 return true;
             });
             
-            if (synapse.connections.length < original) {
+            const removed = original - synapse.connections.length;
+            if (removed > 0) {
                 fs.writeFileSync(synapsePath, JSON.stringify(synapse, null, 2) + '\n', 'utf8');
                 cleanedCount++;
-                console.log(`   Cleaned: ${skillName} (removed ${original - synapse.connections.length} refs)`);
+                totalRemoved += removed;
+                console.log(`   Cleaned: ${skillName} (removed ${removed} refs)`);
             }
         } catch (e) {
             console.warn(`   ⚠️ Could not clean ${synapsePath}: ${e.message}`);
@@ -251,7 +275,7 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
     }
     
     if (cleanedCount > 0) {
-        console.log(`✅ Cleaned ${cleanedCount} synapse files`);
+        console.log(`\n✅ Cleaned ${cleanedCount} synapse files (${totalRemoved} references removed)`);
     } else {
         console.log('✅ No broken references found');
     }
@@ -620,6 +644,184 @@ function validateHeirIntegrity() {
 }
 
 // ============================================================
+// SKILL FRONTMATTER VALIDATION: Ensure YAML blocks exist
+// ============================================================
+
+function validateSkillFrontmatter() {
+    console.log('\n📋 Validating SKILL.md frontmatter...\n');
+    
+    const errors = [];
+    const warnings = [];
+    
+    if (!fs.existsSync(HEIR_SKILLS)) {
+        errors.push('Heir skills directory does not exist');
+        return { errors, warnings };
+    }
+    
+    const skillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name);
+    
+    for (const skillName of skillDirs) {
+        const skillPath = path.join(HEIR_SKILLS, skillName, 'SKILL.md');
+        if (!fs.existsSync(skillPath)) {
+            warnings.push(`${skillName}: missing SKILL.md`);
+            continue;
+        }
+        
+        const content = fs.readFileSync(skillPath, 'utf8');
+        
+        // Check for YAML frontmatter (must start with ---)
+        if (!content.startsWith('---')) {
+            errors.push(`${skillName}/SKILL.md: missing YAML frontmatter (must start with ---)`);
+            continue;
+        }
+        
+        // Extract frontmatter
+        const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (!frontmatterMatch) {
+            errors.push(`${skillName}/SKILL.md: malformed YAML frontmatter (missing closing ---)`);
+            continue;
+        }
+        
+        const frontmatter = frontmatterMatch[1];
+        
+        // Check required fields
+        if (!frontmatter.includes('name:')) {
+            errors.push(`${skillName}/SKILL.md: missing 'name:' field in frontmatter`);
+        }
+        if (!frontmatter.includes('description:')) {
+            errors.push(`${skillName}/SKILL.md: missing 'description:' field in frontmatter`);
+        }
+    }
+    
+    if (errors.length === 0 && warnings.length === 0) {
+        console.log('✅ All SKILL.md files have valid frontmatter\n');
+    } else {
+        if (warnings.length > 0) {
+            console.log(`⚠️  ${warnings.length} warning(s):`);
+            warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+        }
+        if (errors.length > 0) {
+            console.log(`❌ ${errors.length} frontmatter error(s):`);
+            errors.forEach(e => console.log(`   ❌ ${e}`));
+        }
+        console.log('');
+    }
+    
+    return { errors, warnings };
+}
+
+// ============================================================
+// SYNAPSE TARGET VALIDATION: Ensure all references exist
+// ============================================================
+
+function validateSynapseTargets() {
+    console.log('\n🔗 Validating synapse targets...\n');
+    
+    const errors = [];
+    const warnings = [];
+    
+    if (!fs.existsSync(HEIR_SKILLS)) {
+        errors.push('Heir skills directory does not exist');
+        return { errors, warnings };
+    }
+    
+    const skillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name);
+    
+    for (const skillName of skillDirs) {
+        const synapsePath = path.join(HEIR_SKILLS, skillName, 'synapses.json');
+        if (!fs.existsSync(synapsePath)) continue;
+        
+        try {
+            const synapse = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
+            if (!synapse.connections || !Array.isArray(synapse.connections)) continue;
+            
+            for (const conn of synapse.connections) {
+                const target = conn.target;
+                if (!target) {
+                    warnings.push(`${skillName}/synapses.json: connection missing 'target' field`);
+                    continue;
+                }
+                
+                // Resolve target path relative to heir structure
+                let targetPath;
+                if (target.startsWith('.github/')) {
+                    // Absolute from repo root
+                    targetPath = path.join(HEIR_ROOT, target);
+                } else if (target.startsWith('platforms/')) {
+                    // Heir doesn't have platforms/ — this is a master-only reference
+                    errors.push(`${skillName}/synapses.json: references master-only path "${target}"`);
+                    continue;
+                } else if (target.startsWith('../') || target.startsWith('../../')) {
+                    // Relative path from skill directory
+                    // Skills are at .github/skills/{skillName}/
+                    const skillDir = path.join(HEIR_SKILLS, skillName);
+                    targetPath = path.normalize(path.join(skillDir, target));
+                } else if (target.includes('/')) {
+                    // Assume it's a .github-relative path
+                    targetPath = path.join(HEIR_GITHUB, target);
+                } else if (!target.includes('://')) {
+                    // Single filename without path — might be root or unclear
+                    warnings.push(`${skillName}/synapses.json: ambiguous target "${target}" (no path)`);
+                    continue;
+                }
+                
+                // Check if target exists (skip URIs like global-knowledge://)
+                if (targetPath && !target.includes('://') && !fs.existsSync(targetPath)) {
+                    errors.push(`${skillName}/synapses.json: broken reference to "${target}" (file does not exist in heir)`);
+                }
+            }
+        } catch (e) {
+            warnings.push(`${skillName}/synapses.json: could not parse (${e.message})`);
+        }
+    }
+    
+    if (errors.length === 0 && warnings.length === 0) {
+        console.log('✅ All synapse targets validated\n');
+    } else {
+        if (warnings.length > 0) {
+            console.log(`⚠️  ${warnings.length} warning(s):`);
+            warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+        }
+        if (errors.length > 0) {
+            console.log(`❌ ${errors.length} broken synapse reference(s):`);
+            errors.forEach(e => console.log(`   ❌ ${e}`));
+        }
+        console.log('');
+    }
+    
+    return { errors, warnings };
+}
+
+// ============================================================
+// SKILL ACTIVATION INDEX VALIDATION
+// ============================================================
+
+function validateSkillActivationIndex() {
+    console.log('\n📇 Validating skill-activation skill...\n');
+    
+    const errors = [];
+    const warnings = [];
+    
+    // Check that skill-activation skill exists
+    const skillPath = path.join(HEIR_GITHUB, 'skills', 'skill-activation', 'SKILL.md');
+    if (!fs.existsSync(skillPath)) {
+        errors.push('skill-activation/SKILL.md does not exist (core metacognitive skill)');
+        return { errors, warnings };
+    }
+    
+    console.log('✅ skill-activation skill exists\n');
+    
+    // Note: The skill activation index is embedded within SKILL.md itself,
+    // not a separate file. Manual review is needed to ensure all skills are discoverable.
+    
+    return { errors, warnings };
+}
+
+// ============================================================
 // LEGACY CLEANUP: Remove deprecated folders from heir
 // ============================================================
 
@@ -785,8 +987,29 @@ const skillStats = syncSkills();
 cleanBrokenSynapseReferences(skillStats.skippedMasterOnly);
 applyHeirTransformations();
 verifyCounts();
-validateHeirIntegrity();
+
+// Run validation checks
+const frontmatterResult = validateSkillFrontmatter();
+const synapseResult = validateSynapseTargets();
+const indexResult = validateSkillActivationIndex();
+const integrityOk = validateHeirIntegrity();
 auditFileCounts();
+
+// Collect all validation errors
+const allErrors = [
+    ...frontmatterResult.errors,
+    ...synapseResult.errors,
+    ...indexResult.errors
+];
+
+if (allErrors.length > 0) {
+    console.log('\n⚠️  ═══════════════════════════════════════════');
+    console.log('⚠️   VALIDATION FAILURES DETECTED');
+    console.log('⚠️  ═══════════════════════════════════════════');
+    console.log(`\n❌ ${allErrors.length} error(s) found during sync validation.`);
+    console.log('   Review the output above and fix issues in MASTER before syncing again.\n');
+    console.log('   Note: Sync completed but heir may have quality issues.\n');
+}
 
 console.log('═══════════════════════════════════════════');
 console.log('  Sync complete!');
