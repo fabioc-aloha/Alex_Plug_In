@@ -376,33 +376,39 @@ Items to pull from when capacity frees up:
 
 **Decision**: Integrate into M365 heir via unified manifest (ADR-011)
 
-**Phase 1: Minimal Viable Add-in** (1 week):
+**Phase 1: Minimal Viable Add-in** ✅ **COMPLETE (v5.7.6)**:
 
-| Task                          | Owner  | Effort | Priority | Description                                    |
-| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
-| Update unified manifest       |  M365  |   2h   |  Medium  | Add `officeAddin` extension to manifest.json   |
-| Build task pane HTML          |  M365  |   4h   |  Medium  | Simple chat interface (matches M365 Copilot UX)|
-| Integrate OneDrive read       |  M365  |   3h   |  Medium  | Read profile.md, notes.md from task pane       |
-| Test in Word/Excel            |  M365  |   2h   |  Medium  | Sideload and validate basic functionality      |
-| Document integration          |  M365  |   1h   |  Medium  | Update M365 heir README with Office Add-in    |
+| Task                    | Owner | Effort | Priority | Status | Description                                     |
+| ----------------------- | :---: | :----: | :------: | :----: | ----------------------------------------------- |
+| Update unified manifest | M365  |   2h   |  Medium  |   ✅    | Add `officeAddin` extension to manifest.json    |
+| Build task pane HTML    | M365  |   4h   |  Medium  |   ✅    | Simple chat interface (matches M365 Copilot UX) |
+| Integrate OneDrive read | M365  |   3h   |  Medium  |   ✅    | Read profile.md, notes.md from task pane        |
+| Test in Word/Excel      | M365  |   2h   |  Medium  |   ⏳    | Sideload and validate basic functionality       |
+| Document integration    | M365  |   1h   |  Medium  |   ✅    | Update M365 heir README with Office Add-in      |
+
+**Deliverables**:
+- `platforms/m365-copilot/appPackage/manifest.json` — Updated with `extensions` array
+- `platforms/m365-copilot/taskpane/taskpane.html` — Task pane UI
+- `platforms/m365-copilot/taskpane/taskpane.js` — Office.js integration
+- `platforms/m365-copilot/OFFICE-ADDINS-README.md` — Complete documentation
 
 **Phase 2: Office-Specific Features** (2-3 weeks):
 
-| Task                          | Owner  | Effort | Priority | Description                                    |
-| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
-| Word: Template insertion      |  M365  |   1w   |   Low    | Generate docs from templates with persona      |
-| Excel: Learning goal tracker  |  M365  |   1w   |   Low    | Chart skill progress from profile.md           |
-| PowerPoint: Slide generation  |  M365  |   1w   |   Low    | Create slides from Active Context focus areas  |
-| Outlook: Email drafting       |  M365  |   1w   |   Low    | Compose emails with memory-augmented context   |
+| Task                         | Owner | Effort | Priority | Description                                   |
+| ---------------------------- | :---: | :----: | :------: | --------------------------------------------- |
+| Word: Template insertion     | M365  |   1w   |   Low    | Generate docs from templates with persona     |
+| Excel: Learning goal tracker | M365  |   1w   |   Low    | Chart skill progress from profile.md          |
+| PowerPoint: Slide generation | M365  |   1w   |   Low    | Create slides from Active Context focus areas |
+| Outlook: Email drafting      | M365  |   1w   |   Low    | Compose emails with memory-augmented context  |
 
 **Phase 3: Advanced Capabilities** (future):
 
-| Task                          | Owner  | Effort | Priority | Description                                    |
-| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
-| Real-time collaboration       |  M365  |   2w   |   Low    | Multi-user awareness in shared docs            |
-| Custom Excel functions        |  M365  |   1w   |   Low    | Alex UDFs for calculations                     |
-| Office script automation      |  M365  |   2w   |   Low    | Macro-style workflows with Office.js           |
-| Clipboard integration         |  M365  |   3d   |   Low    | Copy from M365 Copilot → paste in Office       |
+| Task                     | Owner | Effort | Priority | Description                              |
+| ------------------------ | :---: | :----: | :------: | ---------------------------------------- |
+| Real-time collaboration  | M365  |   2w   |   Low    | Multi-user awareness in shared docs      |
+| Custom Excel functions   | M365  |   1w   |   Low    | Alex UDFs for calculations               |
+| Office script automation | M365  |   2w   |   Low    | Macro-style workflows with Office.js     |
+| Clipboard integration    | M365  |   3d   |   Low    | Copy from M365 Copilot → paste in Office |
 
 **Reference Documentation**:
 - [OFFICE-ADDINS-RESEARCH.md](alex_docs/platforms/OFFICE-ADDINS-RESEARCH.md) — Full platform analysis

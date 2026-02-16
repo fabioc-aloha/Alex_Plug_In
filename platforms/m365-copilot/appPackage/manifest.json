@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
-  "version": "5.7.0",
+  "version": "5.7.6",
   "id": "2427e7a9-91a7-4ed9-a504-7b53c4dfad1d",
   "developer": {
     "name": "Fabio Correa",
@@ -49,5 +49,85 @@
   ],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"
-  }
+  },
+  "extensions": [
+    {
+      "requirements": {
+        "scopes": ["workbook", "document", "presentation", "mail"],
+        "capabilities": [
+          {
+            "name": "Mailbox",
+            "minVersion": "1.1"
+          }
+        ]
+      },
+      "runtimes": [
+        {
+          "requirements": {
+            "capabilities": [
+              {
+                "name": "Mailbox",
+                "minVersion": "1.1"
+              }
+            ]
+          },
+          "id": "alexTaskPaneRuntime",
+          "type": "general",
+          "code": {
+            "page": "https://fabioc-aloha.github.io/Alex_Plug_In/platforms/m365-copilot/taskpane/taskpane.html"
+          },
+          "lifetime": "short",
+          "actions": [
+            {
+              "id": "showTaskPane",
+              "type": "openPage",
+              "pinnable": true
+            }
+          ]
+        }
+      ],
+      "ribbons": [
+        {
+          "contexts": ["default"],
+          "tabs": [
+            {
+              "builtInTabId": "TabHome",
+              "groups": [
+                {
+                  "id": "AlexGroup",
+                  "label": "Alex",
+                  "controls": [
+                    {
+                      "id": "AlexButton",
+                      "type": "button",
+                      "label": "Alex",
+                      "icons": [
+                        {
+                          "size": 16,
+                          "url": "https://fabioc-aloha.github.io/Alex_Plug_In/platforms/m365-copilot/appPackage/outline.png"
+                        },
+                        {
+                          "size": 32,
+                          "url": "https://fabioc-aloha.github.io/Alex_Plug_In/platforms/m365-copilot/appPackage/outline.png"
+                        },
+                        {
+                          "size": 80,
+                          "url": "https://fabioc-aloha.github.io/Alex_Plug_In/platforms/m365-copilot/appPackage/color.png"
+                        }
+                      ],
+                      "supertip": {
+                        "title": "Alex - Your Cognitive Learning Partner",
+                        "description": "Open Alex task pane to access your OneDrive memory and get personalized assistance"
+                      },
+                      "actionId": "showTaskPane"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

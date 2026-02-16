@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alex</title>
+    
+    <!-- Office.js -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    
+    <style>
+        :root {
+            --alex-blue: #0078d4;
+            --alex-dark: #1a1a1a;
+            --alex-light: #f3f3f3;
+            --alex-text: #333;
+            --alex-border: #e1e1e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--alex-light);
+            color: var(--alex-text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--alex-blue) 0%, #005a9e 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--alex-blue);
+            font-size: 18px;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin: 2px 0 0 0;
+        }
+
+        /* Memory Status */
+        .memory-status {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--alex-border);
+        }
+
+        .memory-status h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--alex-text);
+        }
+
+        .memory-files {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .memory-file {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--alex-light);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .memory-file.loaded {
+            background: #e6f4ea;
+            border-left: 3px solid #34a853;
+        }
+
+        .memory-file.missing {
+            background: #fef3e0;
+            border-left: 3px solid #f9ab00;
+        }
+
+        .memory-file-icon {
+            font-size: 16px;
+        }
+
+        .memory-file-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .memory-file-status {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .welcome-message {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .welcome-message h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--alex-blue);
+        }
+
+        .welcome-message p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .welcome-message ul {
+            margin-left: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--alex-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #005a9e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--alex-blue);
+            border: 1px solid var(--alex-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--alex-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            border: 3px solid var(--alex-light);
+            border-top: 3px solid var(--alex-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-message {
+            background: #fce8e6;
+            border-left: 4px solid #d93025;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .error-message strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #d93025;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 12px 20px;
+            border-top: 1px solid var(--alex-border);
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--alex-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">A</div>
+        <div class="header-title">
+            <h1>Alex</h1>
+            <p>Your Cognitive Learning Partner</p>
+        </div>
+    </div>
+
+    <div class="memory-status">
+        <h2>📚 Memory Status</h2>
+        <div class="memory-files" id="memoryFiles">
+            <div class="memory-file">
+                <span class="memory-file-icon">⏳</span>
+                <span class="memory-file-name">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content" id="content">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Initializing Alex...</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🚀 <strong>Alex</strong> — Strap a Rocket to Your Back | 
+        <a href="https://github.com/fabioc-aloha/Alex_Plug_In" target="_blank">GitHub</a></p>
+    </div>
+
+    <script>
+        Office.onReady(function(info) {
+            console.log('Office.js ready. Host:', info.host, 'Platform:', info.platform);
+            initializeAddIn(info);
+        });
+
+        async function initializeAddIn(officeInfo) {
+            const content = document.getElementById('content');
+            
+            try {
+                // Check OneDrive access
+                const memoryStatus = await checkMemoryAccess();
+                displayMemoryStatus(memoryStatus);
+                
+                // Show welcome message
+                displayWelcome(officeInfo, memoryStatus);
+                
+            } catch (error) {
+                console.error('Initialization error:', error);
+                content.innerHTML = `
+                    <div class="error-message">
+                        <strong>⚠️ Initialization Failed</strong>
+                        <p>${error.message}</p>
+                        <p>Please make sure you have access to OneDrive and the Alex-Memory folder.</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function checkMemoryAccess() {
+            // Simulate checking OneDrive access
+            // In production, this would use Graph API through Office.js auth
+            const memoryFiles = [
+                { name: 'profile.md', path: 'Alex-Memory/profile.md', status: 'checking' },
+                { name: 'notes.md', path: 'Alex-Memory/notes.md', status: 'checking' },
+                { name: 'focus-trifectas.md', path: 'Alex-Memory/focus-trifectas.md', status: 'checking' }
+            ];
+
+            // TODO: Implement actual OneDrive file check
+            // For now, simulate the check
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Simulate results (in production, would be real API calls)
+            memoryFiles[0].status = 'loaded';
+            memoryFiles[1].status = 'loaded';
+            memoryFiles[2].status = 'missing';
+            
+            return memoryFiles;
+        }
+
+        function displayMemoryStatus(files) {
+            const memoryFilesDiv = document.getElementById('memoryFiles');
+            memoryFilesDiv.innerHTML = files.map(file => `
+                <div class="memory-file ${file.status}">
+                    <span class="memory-file-icon">${file.status === 'loaded' ? '✅' : '⚠️'}</span>
+                    <span class="memory-file-name">${file.name}</span>
+                    <span class="memory-file-status">${file.status === 'loaded' ? 'Loaded' : 'Not found'}</span>
+                </div>
+            `).join('');
+        }
+
+        function displayWelcome(officeInfo, memoryStatus) {
+            const content = document.getElementById('content');
+            const hasMemory = memoryStatus.some(f => f.status === 'loaded');
+            
+            content.innerHTML = `
+                <div class="welcome-message">
+                    <h2>🚀 Welcome to ${officeInfo.host}</h2>
+                    <p>Alex is now available in ${getHostName(officeInfo.host)}! This integration brings your cognitive learning partner directly into your document creation workflow.</p>
+                    
+                    ${hasMemory ? `
+                        <p><strong>✅ Memory Connected</strong> — Alex has access to your OneDrive memory and can provide personalized assistance based on your profile and notes.</p>
+                    ` : `
+                        <p><strong>⚠️ No Memory Found</strong> — Alex needs access to your Alex-Memory folder in OneDrive. Click "Setup Memory" to create the required files.</p>
+                    `}
+                    
+                    <p><strong>What Alex Can Do Here:</strong></p>
+                    <ul>
+                        ${getCapabilities(officeInfo.host)}
+                    </ul>
+                    
+                    <div class="action-buttons">
+                        ${hasMemory ? `
+                            <button class="btn btn-primary" onclick="openChatInterface()">
+                                💬 Chat with Alex
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewMemory()">
+                                📖 View Memory
+                            </button>
+                        ` : `
+                            <button class="btn btn-primary" onclick="setupMemory()">
+                                🛠️ Setup Memory
+                            </button>
+                            <button class="btn btn-secondary" onclick="learnMore()">
+                                📚 Learn More
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getHostName(host) {
+            const hosts = {
+                'Word': 'Word',
+                'Excel': 'Excel',
+                'PowerPoint': 'PowerPoint',
+                'Outlook': 'Outlook'
+            };
+            return hosts[host] || host;
+        }
+
+        function getCapabilities(host) {
+            const capabilities = {
+                'Word': [
+                    '<li>📝 Generate documents from templates with your persona</li>',
+                    '<li>✍️ Writing assistance based on your style and goals</li>',
+                    '<li>📋 Insert research summaries from your notes</li>',
+                    '<li>🎯 Apply your focus trifectas to document structure</li>'
+                ],
+                'Excel': [
+                    '<li>📊 Track learning goals and progress</li>',
+                    '<li>📈 Visualize skill development over time</li>',
+                    '<li>🔢 Calculate metrics based on your focus areas</li>',
+                    '<li>💡 Data analysis aligned with your objectives</li>'
+                ],
+                'PowerPoint': [
+                    '<li>🎨 Generate slides based on your focus trifectas</li>',
+                    '<li>📊 Create visual summaries of your projects</li>',
+                    '<li>🎯 Present insights from your Alex memory</li>',
+                    '<li>✨ Design with your persona in mind</li>'
+                ],
+                'Outlook': [
+                    '<li>✉️ Draft emails with memory-augmented context</li>',
+                    '<li>📅 Prepare for meetings with attendee research</li>',
+                    '<li>🔍 Search conversations with cognitive awareness</li>',
+                    '<li>⚡ Quick responses aligned with your style</li>'
+                ]
+            };
+            return (capabilities[host] || [
+                '<li>💬 Chat with Alex about your work</li>',
+                '<li>📚 Access your OneDrive memory</li>',
+                '<li>🎯 Get personalized assistance</li>'
+            ]).join('');
+        }
+
+        function openChatInterface() {
+            // TODO: Implement full chat interface
+            alert('Chat interface coming soon! For now, use Alex in M365 Copilot.');
+        }
+
+        function viewMemory() {
+            // TODO: Display memory contents
+            alert('Memory viewer coming soon!');
+        }
+
+        function setupMemory() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <div class="welcome-message">
+                    <h2>🛠️ Setup Alex Memory</h2>
+                    <p>Alex stores your memory in OneDrive at <code>Alex-Memory/</code>. To get started:</p>
+                    
+                    <ol style="margin: 16px 0; line-height: 1.8;">
+                        <li>Open OneDrive in your browser</li>
+                        <li>Create a folder called <strong>Alex-Memory</strong></li>
+                        <li>Create these files:
+                            <ul>
+                                <li><code>profile.md</code> — Your name, role, goals</li>
+                                <li><code>notes.md</code> — Session notes and reminders</li>
+                                <li><code>focus-trifectas.md</code> — Current focus areas</li>
+                            </ul>
+                        </li>
+                        <li>Return here and refresh</li>
+                    </ol>
+                    
+                    <p>Need templates? Visit <a href="https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot/onedrive-templates" target="_blank">GitHub templates</a></p>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.open('https://onedrive.live.com')">
+                            📁 Open OneDrive
+                        </button>
+                        <button class="btn btn-secondary" onclick="initializeAddIn({host: Office.context.host, platform: Office.context.platform})">
+                            🔄 Refresh
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function learnMore() {
+            window.open('https://github.com/fabioc-aloha/Alex_Plug_In', '_blank');
+        }
+    </script>
+</body>
+</html>

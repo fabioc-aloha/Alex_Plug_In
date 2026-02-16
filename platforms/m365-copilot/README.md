@@ -2,12 +2,15 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.7.1-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-5.7.6-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
+[![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
+
+**✨ NEW in v5.7.6**: Alex now runs in **Word, Excel, PowerPoint, and Outlook** via the unified manifest!
 
 ---
 
@@ -73,9 +76,26 @@ Alex isn't competing with M365 Copilot. Alex is the personalization layer that m
 
 ## 🎯 Overview
 
-This project brings Alex's cognitive capabilities to Microsoft 365 Copilot using **pure M365 native capabilities** - no external APIs or Azure services required!
+This project brings Alex's cognitive capabilities to **Microsoft 365** using the **unified manifest** — one file deploys to:
+
+- ✅ **M365 Copilot** (declarative agent with chat interface)
+- ✅ **Microsoft Teams** (personal tab)
+- ✅ **Outlook** (mail add-in + task pane)
+- ✅ **Word** (task pane for document assistance)
+- ✅ **Excel** (task pane for data analysis)
+- ✅ **PowerPoint** (task pane for slide generation)
+
+**Pure M365 native capabilities** - no external APIs or Azure services required!
+
+### M365 Copilot (Declarative Agent)
 
 Alex M365 is a **declarative agent** that uses M365 Copilot foundation models with custom instructions and OneDrive-based memory.
+
+### Office Add-ins (NEW in v5.7.6)
+
+Alex now runs as an **Office Add-in** with a task pane UI in Word, Excel, PowerPoint, and Outlook. Same OneDrive memory, same personality, different surfaces.
+
+**See**: [OFFICE-ADDINS-README.md](OFFICE-ADDINS-README.md) for full Office Add-in documentation.
 
 ### What Alex Can Do (v1.6 Schema)
 
@@ -104,15 +124,18 @@ Your data stays under your control!
 ```text
 m365-copilot/
 ├── appPackage/
-│   ├── manifest.json              # M365 App manifest (v1.19)
-│   ├── declarativeAgent.json      # Alex agent config (v1.6 schema) ✨
+│   ├── manifest.json              # Unified manifest (v1.19) — Teams + Office ✨
+│   ├── declarativeAgent.json      # Alex agent config (v1.6 schema)
 │   ├── instructions/              # Alex persona and embedded skills
-│   ├── knowledge/                 # 📚 EmbeddedKnowledge files (ready for future feature)
+│   ├── knowledge/                 # 📚 EmbeddedKnowledge files
 │   │   ├── alex-protocols.md      # Meditation, dream, self-actualization guides
 │   │   ├── cognitive-architecture.md  # How Alex thinks and learns
 │   │   └── skill-quick-reference.md   # All 15 embedded skills condensed
 │   ├── color.png                  # 192x192 color icon (A Negative Space Rocket)
 │   └── outline.png                # 32x32 outline icon (rocket silhouette)
+├── taskpane/                      # ✨ NEW: Office Add-in task pane
+│   ├── taskpane.html              # Task pane UI (Word/Excel/PowerPoint/Outlook)
+│   └── taskpane.js                # Office.js integration logic
 ├── env/
 │   ├── .env.dev
 │   └── .env.local
