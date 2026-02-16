@@ -53,7 +53,7 @@ v5.7.5 is current. Alex now has:
 | **v5.7.2** | **Global Knowledge Maintenance**   | **Knowledge Infrastructure** | **✅ Shipped**              |
 | v5.7.3-4   | *reserved for UI/UX fixes*         |                              |                            |
 | **v5.7.5** | **Skill Intelligence**             | **Context-Aware Guidance**   | **✅ Shipped**              |
-| v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | 📋 Planned                  |
+| v5.7.6     | Office Add-in Platform Research    | Platform Exploration         | ✅ Complete (2026-02-15)    |
 | v5.7.7     | Propose-to-Global Workflow         | Knowledge Contribution       | 📋 Planned                  |
 | v5.7.8-9   | *reserved for UI/UX fixes*         |                              |                            |
 | v5.8.0     | @alex Prompt Engine (P0)           | Purpose-Built Cognition      | 📋 Planned                  |
@@ -115,7 +115,7 @@ A version is **done** when ALL of the following are true:
 
 ---
 
-### v5.7.6 — Office Add-in Platform Research (PLANNED)
+### v5.7.6 — Office Add-in Platform Research (✅ COMPLETE)
 
 **Theme**: Explore feasibility of deploying Alex cognitive architecture to Microsoft Office (Word/Excel/PowerPoint) as an add-in.
 
@@ -125,18 +125,26 @@ A version is **done** when ALL of the following are true:
 
 **Tagline**: One cognitive architecture, multiple platforms.
 
+**Decision**: **Integrate into M365 heir** via unified manifest (ADR-011)
+
 | Task                           | Owner | Effort | Priority | Status | Description                                                                |
 | ------------------------------ | :---: | :----: | :------: | :----: | -------------------------------------------------------------------------- |
-| Office Add-in architecture doc | Alex  |   2h   |    P1    |   📋    | Document Office.js API, manifest formats, deployment models, task pane UX  |
-| Feasibility assessment         | Alex  |   1h   |    P1    |   📋    | Evaluate technical gaps: context injection, skill activation, persona flow |
-| Unified manifest research      | Alex  |  30m   |    P2    |   📋    | Research Office + Teams unified manifest for cross-platform deployment     |
-| Heir platform decision         | Alex  |  30m   |    P2    |   📋    | Decide: worthy heir platform vs. outside scope (document decision in ADR)  |
+| Office Add-in architecture doc | Alex  |   2h   |    P1    |   ✅    | Document Office.js API, manifest formats, deployment models, task pane UX  |
+| Feasibility assessment         | Alex  |   1h   |    P1    |   ✅    | Evaluate technical gaps: context injection, skill activation, persona flow |
+| Unified manifest research      | Alex  |  30m   |    P2    |   ✅    | Research Office + Teams unified manifest for cross-platform deployment     |
+| Heir platform decision         | Alex  |  30m   |    P2    |   ✅    | Decide: worthy heir platform vs. outside scope (document decision in ADR)  |
 
-**Milestone**: Clear understanding of Office Add-in platform capabilities and Alex compatibility.
+**Milestone**: ✅ **Decision: Office Add-ins integrate into M365 heir** — 90% shared infrastructure (unified manifest, OneDrive memory, Entra ID, deployment), natural workflow continuity (Teams chat → Office creation), complementary surfaces (conversational + document creation).
 
-**Effort**: ~4h | **Impact**: Platform expansion insight — informs v6+ strategy.
+**Effort**: ~4h | **Impact**: Strategic clarity — Office Add-ins become additional M365 heir surface alongside Teams/M365 Copilot.
 
-**Target**: Q1 2026 (research only, no implementation)
+**Completed**: 2026-02-15
+
+**Deliverables**:
+- [OFFICE-ADDINS-RESEARCH.md](alex_docs/platforms/OFFICE-ADDINS-RESEARCH.md) — Full platform analysis
+- [ADR-011](alex_docs/decisions/ADR-011-office-addins-m365-integration.md) — Architectural decision record
+
+**Next Steps**: Implementation added to backlog (see v5.x Backlog — Office Add-in Implementation)
 
 ---
 
@@ -364,20 +372,56 @@ Items to pull from when capacity frees up:
 | Local Model Usage Learning    | Master |   2h   |   Low    | Learn from your usage patterns to improve advice                                                                 |
 | Learning Journeys             |  Heir  |   3h   |  Medium  | Curated skill progressions                                                                                       |
 
+### Office Add-in Implementation (from v5.7.6 research — 2026-02-15)
+
+**Decision**: Integrate into M365 heir via unified manifest (ADR-011)
+
+**Phase 1: Minimal Viable Add-in** (1 week):
+
+| Task                          | Owner  | Effort | Priority | Description                                    |
+| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
+| Update unified manifest       |  M365  |   2h   |  Medium  | Add `officeAddin` extension to manifest.json   |
+| Build task pane HTML          |  M365  |   4h   |  Medium  | Simple chat interface (matches M365 Copilot UX)|
+| Integrate OneDrive read       |  M365  |   3h   |  Medium  | Read profile.md, notes.md from task pane       |
+| Test in Word/Excel            |  M365  |   2h   |  Medium  | Sideload and validate basic functionality      |
+| Document integration          |  M365  |   1h   |  Medium  | Update M365 heir README with Office Add-in    |
+
+**Phase 2: Office-Specific Features** (2-3 weeks):
+
+| Task                          | Owner  | Effort | Priority | Description                                    |
+| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
+| Word: Template insertion      |  M365  |   1w   |   Low    | Generate docs from templates with persona      |
+| Excel: Learning goal tracker  |  M365  |   1w   |   Low    | Chart skill progress from profile.md           |
+| PowerPoint: Slide generation  |  M365  |   1w   |   Low    | Create slides from Active Context focus areas  |
+| Outlook: Email drafting       |  M365  |   1w   |   Low    | Compose emails with memory-augmented context   |
+
+**Phase 3: Advanced Capabilities** (future):
+
+| Task                          | Owner  | Effort | Priority | Description                                    |
+| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------- |
+| Real-time collaboration       |  M365  |   2w   |   Low    | Multi-user awareness in shared docs            |
+| Custom Excel functions        |  M365  |   1w   |   Low    | Alex UDFs for calculations                     |
+| Office script automation      |  M365  |   2w   |   Low    | Macro-style workflows with Office.js           |
+| Clipboard integration         |  M365  |   3d   |   Low    | Copy from M365 Copilot → paste in Office       |
+
+**Reference Documentation**:
+- [OFFICE-ADDINS-RESEARCH.md](alex_docs/platforms/OFFICE-ADDINS-RESEARCH.md) — Full platform analysis
+- [ADR-011](alex_docs/decisions/ADR-011-office-addins-m365-integration.md) — Architectural decision record
+
 ### Research Findings (from alex_docs/ audit — 2026-02-14)
 
-| Finding                           | Source Document                             | Priority | Description                                                                  |
-| --------------------------------- | ------------------------------------------- | :------: | ---------------------------------------------------------------------------- |
-| GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md               |    P2    | Migrate final 4 patterns to YAML v2 frontmatter (28/32 complete in v5.6.5)   |
-| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md               |    P1    | 10 files need migration, priority order defined                              |
-| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md       |    P1    | 10 integration opportunities, all not started                                |
-| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md              |    P1    | Multiple items in progress, others not started                               |
-| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                     |    P2    | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal        |
-| Cognitive Dashboard               | COGNITIVE-DASHBOARD-DESIGN.md               |    P2    | Unified webview for brain health, skill network, memory visualization        |
-| Presentation automation           | gamma/MARP-AUTOMATION-PLAN.md + PPTXGENJS   |    P1    | Template-driven Marp + PptxGenJS generators with Replicate image integration |
-| Academic paper finalization       | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md      |    P2    | 1706-line paper, 62-project case study — needs peer review prep              |
-| ~~Missing Alex-Finch.md~~         | alex/README.md                              |  ~~P2~~  | ✅ Created in v5.7.1 — `alex_docs/alex/Alex-Finch.md`                         |
-| ~~Redundant files cleanup~~       | COMPETITIVE-ANALYSIS-BACKUP, SKILL-WISHLIST |  ~~P3~~  | ✅ Archived in v5.7.1 — 3 files moved to `archive/`                           |
+| Finding                           | Source Document                             | Priority | Description                                                                                  |
+| --------------------------------- | ------------------------------------------- | :------: | -------------------------------------------------------------------------------------------- |
+| GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md               |    P2    | Migrate final 4 patterns to YAML v2 frontmatter (28/32 complete in v5.6.5)                   |
+| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md               |    P1    | 10 files need migration, priority order defined                                              |
+| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md       |    P1    | 10 integration opportunities, all not started                                                |
+| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md              |    P1    | Multiple items in progress, others not started                                               |
+| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                     |    P2    | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal                        |
+| Cognitive Dashboard               | COGNITIVE-DASHBOARD-DESIGN.md               |    P2    | Unified webview for brain health, skill network, memory visualization                        |
+| Presentation automation           | gamma/MARP-AUTOMATION-PLAN.md + PPTXGENJS   |    P1    | Template-driven Marp + PptxGenJS generators with Replicate image integration                 |
+| Academic paper finalization       | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md      |    P2    | 1706-line paper, 62-project case study — needs peer review prep                              |
+| ~~Missing Alex-Finch.md~~         | alex/README.md                              |  ~~P2~~  | ✅ Created in v5.7.1 — `alex_docs/alex/Alex-Finch.md`                                         |
+| ~~Redundant files cleanup~~       | COMPETITIVE-ANALYSIS-BACKUP, SKILL-WISHLIST |  ~~P3~~  | ✅ Archived in v5.7.1 — 3 files moved to `archive/`                                           |
 | ~~UI/UX Design trifecta~~         | v5.8.0 accessibility session meditation     |  ~~P1~~  | ✅ Created 2026-02-15 — Complete trifecta (skill + instruction + prompt + synapses), 11 total |
 
 ### Replicate Platform Evaluation (2026-02-14)
