@@ -284,6 +284,41 @@ The `.vscode/` folder contains both:
 npx vsce ls | Select-String "\.vscode"
 ```
 
+### CHANGELOG and Version Badge Pre-Flight (Learned 2026-02-16)
+
+**Problem**: In multi-platform projects (e.g., root + platforms/vscode-extension), CHANGELOG and README badge versions can drift during rapid development, causing marketplace deployment with incorrect or incomplete documentation.
+
+**v5.8.2 Evidence**: Extension CHANGELOG dated 5.8.1 while root CHANGELOG advanced to 5.8.2; README badge remained at 5.7.1 during 5.8.2 release preparation.
+
+**Quality Gates** (MANDATORY before marketplace publish):
+
+1. **CHANGELOG Synchronization**
+   - **Check**: Root CHANGELOG entry matches platform CHANGELOG entry word-for-word
+   - **Files**: `CHANGELOG.md` (root) → `platforms/vscode-extension/CHANGELOG.md`
+   - **Automation**: `publish.ps1` validates version consistency  
+   - **Manual fix**: Copy latest version entry from root to platform, preserve chronological order
+
+2. **Version Badge Consistency**
+   - **Check**: README version badge matches `package.json` version
+   - **Files**: `README.md` badge URL, `platforms/vscode-extension/README.md` badge URL
+   - **Pattern**: `https://img.shields.io/badge/version-X.Y.Z-0078d4`
+   - **Manual fix**: Update badge URL to match current version
+
+**Verification Commands**:
+```powershell
+# Check CHANGELOG sync
+$rootVersion = Select-String -Path CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' | Select-Object -First 1
+$extVersion = Select-String -Path platforms/vscode-extension/CHANGELOG.md -Pattern '\[(\d+\.\d+\.\d+)\]' | Select-Object -First 1
+if ($rootVersion -ne $extVersion) { Write-Warning "CHANGELOG mismatch!" }
+
+# Check README badge
+$pkgVersion = (Get-Content platforms/vscode-extension/package.json | ConvertFrom-Json).version
+$badgeVersion = (Select-String -Path platforms/vscode-extension/README.md -Pattern 'version-(\d+\.\d+\.\d+)').Matches.Groups[1].Value
+if ($badgeVersion -ne $pkgVersion) { Write-Warning "README badge outdated: $badgeVersion (should be $pkgVersion)" }
+```
+
+**Impact**: Prevents publishing with incomplete release notes or misleading version indicators that confuse users.
+
 ### Forward-Pull Pattern (Learned 2026-02-07)
 
 **When planning a future release, check if any items can ship immediately as a patch.**

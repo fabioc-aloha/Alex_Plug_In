@@ -30,7 +30,10 @@
             "settings registration",
             "getConfiguration",
             "workspace.update",
-            "registerCommand"
+            "registerCommand",
+            "version badge sync",
+            "README badge",
+            "multi-file version consistency"
         ]
     },
     "yields": {
@@ -64,6 +67,11 @@
                 "id": "code-review",
                 "relationship": "sibling",
                 "note": "Configuration API usage review"
+            },
+            {
+                "id": "release-process",
+                "relationship": "sibling",
+                "note": "Version badge synchronization and multi-file configuration validation during release"
             }
         ],
         "instructions": [

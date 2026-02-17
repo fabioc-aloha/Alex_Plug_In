@@ -15,6 +15,7 @@ description: "VS Code Marketplace publishing workflow, constraints, and best pra
 - [.github/instructions/release-management.instructions.md] (Critical, Coordinates, Bidirectional) - "Parent release workflow this publishing step supports"
 - [.github/instructions/brand-asset-management.instructions.md] (High, Constrains, Forward) - "Image format selection affected by marketplace constraints"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (Critical, Implements, Bidirectional) - "Extension development patterns this deployment workflow serves"
+- [.github/instructions/ui-ux-design.instructions.md] (Medium, Follows, Bidirectional) - "UI polish often immediately precedes marketplace publishing"
 
 ---
 
@@ -147,20 +148,32 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 
 ### Personal Access Token (PAT) Setup
 
-1. Navigate to https://marketplace.visualstudio.com/manage
-2. Click user icon → Personal Access Tokens
-3. Create new token with:
-   - **Name**: "Alex Extension Publishing"
-   - **Organization**: Select your organization
-   - **Scopes**: Marketplace (Manage)
-   - **Expiration**: 90 days (renewable)
+**Critical: PATs expire frequently** — Create a fresh token before EACH publishing session to avoid 401 errors.
 
-4. Store token securely (required for each publish):
+1. Navigate to https://dev.azure.com/fabioc-aloha/_usersSettings/tokens (Azure DevOps, not VS Marketplace)
+2. Create new token with:
+   - **Name**: "VS Code Marketplace" (or descriptive name)
+   - **Organization**: **All accessible organizations** (critical requirement)
+   - **Scopes**: **Custom defined** → **Marketplace** → ✅ **Manage**
+   - **Expiration**: **30 days** (tokens expire quickly, 30-90 days typical)
+
+3. Copy token immediately (shown only once)
+
+4. Publish with token:
    ```powershell
    npx @vscode/vsce publish -p <YOUR_PAT_TOKEN_HERE>
    ```
 
-**Security Note**: Never commit PAT token to repository. Use environment variables or manual entry.
+**Common Failure: 401 Unauthorized**
+```
+ERROR  Failed request: (401)
+```
+→ **Solution**: Your PAT expired or is invalid. Create a new one and retry.
+
+**Security Note**: 
+- Never commit PAT token to repository
+- Tokens are single-use secrets, create fresh for each session
+- If publish succeeds, token is valid; if 401, token expired/invalid
 
 ---
 

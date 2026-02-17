@@ -20,6 +20,7 @@ import {
 import {
   readActiveContext,
   ActiveContext,
+  updatePersona,
 } from "../shared/activeContextManager";
 // Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
 import { getCurrentSession, Session } from "../commands/session";
@@ -274,12 +275,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         console.error("[Alex][WelcomeView] Failed to get skill recommendations:", err);
       }
 
-      // Update chat avatar if persona detected
-      if (personaResult?.persona) {
+      // Update chat avatar and save persona if detected
+      if (personaResult?.persona && wsRoot) {
         try {
           updateChatAvatar(personaResult.persona.id);
+          // Save persona to Active Context
+          await updatePersona(
+            wsRoot,
+            personaResult.persona.name,
+            personaResult.confidence
+          );
+          console.log(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
         } catch (avatarErr) {
-          console.error("[Alex][WelcomeView] updateChatAvatar failed (non-fatal):", avatarErr);
+          console.error("[Alex][WelcomeView] updateChatAvatar/updatePersona failed (non-fatal):", avatarErr);
         }
       }
 
@@ -500,7 +508,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="error">
         <p>Failed to load Alex status</p>
-        <p style="font-size: 18px; opacity: 0.7;">${errorMessage}</p>
+        <p style="font-size: 17px; opacity: 0.7;">${errorMessage}</p>
         <button data-cmd="refresh">Retry</button>
     </div>
     <script nonce="${nonce}">
@@ -770,9 +778,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
+            gap: 7px;
+            margin-bottom: 7px;
+            padding-bottom: 5px;
             border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
@@ -790,7 +798,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 7px;
             position: relative;
             width: 100%;
         }
@@ -811,7 +819,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             position: absolute;
             top: 8px;
             left: 8px;
-            font-size: 39px;
+            font-size: 38px;
             line-height: 1;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
             animation: egg-bounce 2s ease-in-out infinite;
@@ -822,12 +830,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             50% { transform: translateY(-2px); }
         }
         .header-title {
-            font-size: var(--font-md);
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: -0.2px;
         }
         .header-persona {
-            font-size: var(--font-xs);
+            font-size: 11px;
             color: var(--vscode-foreground);
             background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
             border: 1px solid color-mix(in srgb, var(--persona-accent) 30%, transparent);
@@ -854,8 +862,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             font-size: var(--font-md);
             font-weight: 500;
             color: var(--vscode-descriptionForeground);
-            margin: 8px 0;
-            padding: 6px 12px;
+            margin: 5px 0;
+            padding: 4px 9px;
             background: var(--vscode-input-background);
             border-radius: 4px;
             border: 1px solid var(--vscode-input-border, transparent);
@@ -865,7 +873,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             align-items: center;
             gap: var(--spacing-sm);
             padding: var(--spacing-xs) var(--spacing-sm);
-            margin-bottom: 10px;
+            margin-bottom: 7px;
             border-radius: 6px;
             font-size: var(--font-xs);
             letter-spacing: 0.3px;
@@ -908,7 +916,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-foreground);
             cursor: pointer;
             opacity: 0.5;
-            font-size: 17px;
+            font-size: 16px;
             padding: 4px;
             border-radius: 4px;
             transition: all 0.15s ease;
@@ -919,7 +927,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         
         .section {
-            margin-bottom: 16px;
+            margin-bottom: 10px;
         }
         .section-title {
             font-size: var(--font-xs);
@@ -927,19 +935,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             text-transform: uppercase;
             letter-spacing: 0.6px;
             color: var(--vscode-descriptionForeground);
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 5px;
             opacity: 0.85;
         }
         
         .status-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px;
+            gap: 3px;
         }
         .status-item {
             background: var(--vscode-editor-background);
             border-radius: 5px;
-            padding: var(--spacing-sm) 10px;
+            padding: 5px 7px;
             border-left: 2px solid transparent;
             transition: all 0.12s ease;
             box-shadow: var(--shadow-sm);
@@ -979,8 +987,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         /* Accessibility: Icon labels for color-blind users */
         .status-dot::after {
             position: absolute;
-            font-size: 12px;
-            line-height: 12px;
+            font-size: 11px;
+            line-height: 11px;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
@@ -993,12 +1001,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .dot-red::after { content: '✗'; color: white; }
         .status-num {
             font-weight: 600;
-            font-size: 22px;
+            font-size: 21px;
             color: var(--vscode-foreground);
             line-height: 1;
         }
         .status-unit {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--vscode-descriptionForeground);
             font-weight: normal;
         }
@@ -1010,14 +1018,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .context-card {
             background: var(--vscode-editor-background);
             border-radius: 5px;
-            padding: 10px;
+            padding: 7px;
             border-left: 2px solid var(--persona-accent);
             box-shadow: var(--shadow-sm);
         }
         .context-objective {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             padding: 4px 8px;
             background: color-mix(in srgb, var(--persona-accent) 8%, transparent);
             border-radius: 4px;
@@ -1032,12 +1040,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .context-objective::before {
             content: '🎯';
-            font-size: 15px;
+            font-size: 14px;
         }
         .trifecta-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
         }
         .trifecta-tag {
             font-size: var(--font-xs);
@@ -1057,8 +1065,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 6px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 5px;
         }
         .context-badge {
             font-size: var(--font-xs);
@@ -1089,29 +1097,29 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .session-card {
             background: var(--vscode-editor-background);
             border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 7px;
+            margin-bottom: 7px;
             border-left: 2px solid var(--vscode-charts-blue);
             box-shadow: var(--shadow-sm);
         }
         .session-header {
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 3px;
+            gap: 5px;
+            margin-bottom: 2px;
         }
         .session-icon {
-            font-size: 17px;
+            font-size: 16px;
         }
         .session-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .session-timer {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 600;
             font-family: monospace;
             color: var(--vscode-charts-blue);
@@ -1139,14 +1147,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-list {
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 0px;
         }
         .action-group-label {
             font-size: var(--font-xs);
             font-weight: 500;
             color: var(--vscode-descriptionForeground);
-            margin-top: 6px;
-            margin-bottom: 2px;
+            margin-top: 3px;
+            margin-bottom: 1px;
             padding-left: 2px;
             opacity: 0.7;
             letter-spacing: 0.3px;
@@ -1158,9 +1166,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn {
             display: flex;
             align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) 10px;
-            min-height: 44px; /* WCAG touch target */
+            gap: 6px;
+            padding: 5px 8px;
+            min-height: 36px; /* WCAG touch target */
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
@@ -1229,8 +1237,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         
         /* Skill Recommendations Styles */
         .skill-recommendations-section {
-            margin: 12px 0;
-            padding: 10px;
+            margin: 7px 0;
+            padding: 7px;
             background: var(--vscode-editor-background);
             border-radius: 6px;
             border: 1px solid var(--vscode-widget-border);
@@ -1246,14 +1254,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .skill-recommendations-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 3px;
         }
         .skill-recommendation-btn {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding: var(--spacing-sm) 10px;
-            min-height: 44px; /* WCAG touch target */
+            padding: 5px 8px;
+            min-height: 36px; /* WCAG touch target */
             background: var(--vscode-button-secondaryBackground);
             color: var(--vscode-button-secondaryForeground);
             border: none;
@@ -1332,16 +1340,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         
         /* Nudges Section Styles */
         .nudges-section {
-            margin-bottom: 16px;
+            margin-bottom: 10px;
         }
         .nudge-card {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
+            gap: 5px;
+            padding: 5px 7px;
             background: var(--vscode-editor-background);
             border-radius: 5px;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             border-left: 2px solid var(--vscode-charts-yellow);
             transition: all 0.1s ease;
         }
@@ -1360,7 +1368,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             background: linear-gradient(90deg, var(--vscode-editor-background), rgba(163, 113, 247, 0.08));
         }
         .nudge-icon {
-            font-size: 17px;
+            font-size: 16px;
             flex-shrink: 0;
             opacity: 0.9;
         }
@@ -1407,7 +1415,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .features-section summary::before {
             content: '▸ ';
-            font-size: 15px;
+            font-size: 14px;
             margin-right: 4px;
             transition: transform 0.12s ease;
             display: inline-block;
@@ -1452,9 +1460,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .feature-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-            padding-top: 10px;
+            gap: 3px;
+            margin-top: 7px;
+            padding-top: 7px;
             border-top: 1px solid var(--vscode-widget-border);
         }
         .feature-link-btn {
@@ -1462,8 +1470,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--vscode-button-secondaryForeground);
             border: none;
             border-radius: 4px;
-            padding: var(--spacing-sm);
-            min-height: 44px; /* WCAG touch target */
+            padding: 5px;
+            min-height: 36px; /* WCAG touch target */
             font-size: var(--font-xs);
             cursor: pointer;
             display: flex;

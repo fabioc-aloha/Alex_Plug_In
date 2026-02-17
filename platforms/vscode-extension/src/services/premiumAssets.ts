@@ -73,7 +73,7 @@ const PREMIUM_BANNERS: BannerConfig[] = [
  * Default (non-premium) assets
  */
 const DEFAULT_ASSETS: PremiumAssetSelection = {
-    logoPath: 'logo.svg',
+    logoPath: 'icon.png',
     bannerPath: 'banner.svg',
     bannerAlt: 'Strap a rocket to your back',
     featureHighlight: 'none',
@@ -83,7 +83,7 @@ const DEFAULT_ASSETS: PremiumAssetSelection = {
 /**
  * Premium logo for Global Knowledge enabled
  */
-const GK_LOGO_PATH = 'premium/gk-premium-minimal-logo.svg';
+const GK_LOGO_PATH = 'icon.png';
 
 /**
  * Session-based rotation index for variety
