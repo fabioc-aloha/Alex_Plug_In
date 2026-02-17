@@ -22,7 +22,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@microsoft/teamsapp-cli": "^3.1.0",
-    "@microsoft/teamsfx-cli": "^2.1.2",
     "sharp": "^0.34.5"
   }
 }
