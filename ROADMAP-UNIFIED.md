@@ -10,7 +10,7 @@
 
 ### Current State
 
-v5.8.2 is current. Alex now has:
+v5.8.3 is current. Alex now has:
 - **122 Skills** (119 inheritable to heirs) — Comprehensive domain coverage
 - **Skill Intelligence** — Context-aware recommendations (30 tech mappings, 15 file types, 18 personas) with user preference tracking
 - **Propose-to-Global Workflow** — One-click skill contribution for heirs (<5 min vs. 30 min manual process)
@@ -249,17 +249,17 @@ A version is **done** when ALL of the following are true:
 
 Items to pull from when capacity frees up:
 
-| Task                                 |   Owner    | Effort  |          Priority           | Description                                                                                                                                                        |
-| ------------------------------------ | :--------: | :-----: | :-------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Teams Deep Integration (v6.0)**    |  **M365**  | **12w** |        **📋 PLANNED**        | **Bot Framework + Message Extensions + Meeting Integration + Activity Feed — Complete implementation plan in `TEAMS-DEEP-INTEGRATION-PLAN.md` with 143-item deployment checklist** |
-| **Spec Kit M365 Knowledge**          |  **M365**  | **6h**  | ✅ **COMPLETE (2026-02-18)** | **Phase-based knowledge files + retrieval directives deployed**                                                                                                    |
-| **Spec Kit VS Code Instructions**    | **Master** | **8h**  |        **❌ WONTFIX**        | **Pattern doesn't transfer — VS Code auto-loading already optimal for topical organization**                                                                       |
-| **Microsoft Graph Integration**      |  **M365**  | **10h** | ✅ **COMPLETE (2026-02-18)** | **Phase 2 workflows (Morning Briefing, Meeting Prep) implemented using built-in M365 capabilities. Phase 3 (custom API plugins) on hold pending platform support** |
-| Foundry Voice Alex (Realtime)        |    Heir    |   1w    |           Medium            | Speech-to-speech via Realtime API WebSocket                                                                                                                        |
-| Hosted Agent Container Deploy     |    Heir    |   3d    |           Medium            | Containerized Alex on managed infrastructure                                                                                                                       |
-| Foundry → M365 Backend Unify      |    Heir    |   1w    |           Medium            | M365 heir routes through Foundry Agent Service                                                                                                                     |
-| Local Model Usage Learning        |   Master   |   2h    |             Low             | Learn from your usage patterns to improve advice                                                                                                                   |
-| Learning Journeys                 |    Heir    |   3h    |           Medium            | Curated skill progressions                                                                                                                                         |
+| Task                              |   Owner    | Effort  |          Priority           | Description                                                                                                                                                                        |
+| --------------------------------- | :--------: | :-----: | :-------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Teams Deep Integration (v6.0)** |  **M365**  | **12w** |        **📋 PLANNED**        | **Bot Framework + Message Extensions + Meeting Integration + Activity Feed — Complete implementation plan in `TEAMS-DEEP-INTEGRATION-PLAN.md` with 143-item deployment checklist** |
+| **Spec Kit M365 Knowledge**       |  **M365**  | **6h**  | ✅ **COMPLETE (2026-02-18)** | **Phase-based knowledge files + retrieval directives deployed**                                                                                                                    |
+| **Spec Kit VS Code Instructions** | **Master** | **8h**  |        **❌ WONTFIX**        | **Pattern doesn't transfer — VS Code auto-loading already optimal for topical organization**                                                                                       |
+| **Microsoft Graph Integration**   |  **M365**  | **10h** | ✅ **COMPLETE (2026-02-18)** | **Phase 2 workflows (Morning Briefing, Meeting Prep) implemented using built-in M365 capabilities. Phase 3 (custom API plugins) on hold pending platform support**                 |
+| Foundry Voice Alex (Realtime)     |    Heir    |   1w    |           Medium            | Speech-to-speech via Realtime API WebSocket                                                                                                                                        |
+| Hosted Agent Container Deploy     |    Heir    |   3d    |           Medium            | Containerized Alex on managed infrastructure                                                                                                                                       |
+| Foundry → M365 Backend Unify      |    Heir    |   1w    |           Medium            | M365 heir routes through Foundry Agent Service                                                                                                                                     |
+| Local Model Usage Learning        |   Master   |   2h    |             Low             | Learn from your usage patterns to improve advice                                                                                                                                   |
+| Learning Journeys                 |    Heir    |   3h    |           Medium            | Curated skill progressions                                                                                                                                                         |
 
 ### Spec Kit Knowledge Organization — M365 Copilot (Office Hours — 2026-02-18)
 

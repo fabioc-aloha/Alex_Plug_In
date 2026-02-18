@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.8.3] - 2026-02-17
+
+> **UI Polish** — Comprehensive welcome panel refinement with reduced font sizes and tighter spacing for a more compact, polished interface
+
+### Changed
+
+#### Welcome Panel UI Refinements
+
+- **Font size reductions** — Reduced 17 font sizes by 1-2px throughout welcome panel for more compact appearance
+  - Header title: 16px → 14px
+  - Header persona badge: 13px → 11px
+  - Status numbers: 22px → 21px
+  - Session timers: 22px → 21px
+  - All icons and labels reduced by 1px for consistency
+- **Spacing optimization** — Tightened margins, padding, and gaps across all sections by 2-6px
+  - Section margins: 16px → 10px
+  - Button padding: 8px 10px → 5px 7px
+  - Grid gaps: 6px → 3px
+  - Action list gap: 1px → 0px for tightest grouping
+- **Persona detection enhancement** — Refresh button now triggers persona detection and updates Active Context automatically
+
+### Impact
+
+- **Cleaner interface** — More content visible in limited sidebar space without sacrificing readability
+- **Improved information density** — Tighter spacing reveals more quick actions and status at a glance
+- **Better touch targets** — Maintained 36px minimum button heights for WCAG accessibility compliance
+- **Automatic context updates** — Persona changes reflected in Active Context without manual intervention
+
+---
+
 ## [5.8.2] - 2026-02-16
 
 > **@alex Personality Polish (P2)** — Pre-seeded knowledge context, persona-driven prompts, and confidence signaling make @alex more helpful and self-aware
