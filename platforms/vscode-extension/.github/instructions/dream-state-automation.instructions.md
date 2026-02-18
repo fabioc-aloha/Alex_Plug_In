@@ -13,6 +13,14 @@ description: "Automated neural maintenance and dream state processing protocols"
 **Validation Status**: EXCELLENT - Production ready with VS Code extension automation  
 **Implementation**: VS Code Extension with TypeScript-based neural maintenance automation
 
+## Synapses
+
+- [.github/instructions/meditation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream validates synapses during meditation Phase 5"
+- [.github/instructions/cognitive-health-validation.instructions.md] (High, Complements, Bidirectional) - "Dream validates synapses, brain-qa validates structure and sync"
+- [.github/instructions/embedded-synapse.instructions.md] (High, Implements, Bidirectional) - "Embedded synapse schema this automation validates"
+- [.github/skills/architecture-health/SKILL.md] (High, Implements, Forward) - "Architecture health diagnostics dream enables"
+- [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture neural maintenance"
+
 ## 🌙 **Dream State Cognitive Function**
 
 ###

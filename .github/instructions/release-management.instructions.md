@@ -24,6 +24,7 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
 - [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Gates, Required) - "Validator agent review required before release"
 - [.github/instructions/azure-enterprise-deployment.instructions.md] → (Medium, Patterns, Bidirectional) - "Similar pre-release validation checklists for deployment readiness"
+- [.github/instructions/cognitive-health-validation.instructions.md] → (Critical, Gates, Bidirectional) - "Pre-release validation requires clean brain-qa run (0 critical issues)"
 - [platforms/m365-copilot/package.json] → (High, Metadata, Parallel) - "M365 version must align with VS Code extension version"
 - [platforms/m365-copilot/appPackage/manifest.json] → (High, Metadata, Parallel) - "M365 manifest version tracks extension releases"
 

@@ -192,6 +192,7 @@ Or natural language:
 - [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
 - [.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
 - [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-assessment resource planning for complex 5-phase protocol"
+- [.github/instructions/cognitive-health-validation.instructions.md] (High, Triggers, Forward) - "Comprehensive architecture health validation may be triggered during self-actualization"
 
 ### Input Connections
 
