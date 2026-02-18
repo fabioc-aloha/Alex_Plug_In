@@ -1,10 +1,10 @@
 # Teams Deep Integration Plan — Alex v6.0+
 
-**Version**: 1.0  
-**Author**: Fabio Correa  
-**Date**: February 18, 2026  
-**Status**: Planning  
-**Target Release**: v6.0.0 (Q2 2026)  
+**Version**: 1.0
+**Author**: Fabio Correa
+**Date**: February 18, 2026
+**Status**: Planning
+**Target Release**: v6.0.0 (Q2 2026)
 
 ---
 
@@ -32,11 +32,11 @@
 
 **Timeline**: 3 phases over 12 weeks
 
-| Phase | Duration | Focus | Deliverables |
-|:------|:---------|:------|:-------------|
-| **Phase 1: Message Extensions** | 3 weeks | Search & Actions | Search memory, Save insights, Quick commands |
-| **Phase 2: Meeting Integration** | 4 weeks | Meetings & Cards | Meeting tabs, Adaptive cards, Pre/post-meeting workflows |
-| **Phase 3: Proactive & Collaborative** | 5 weeks | Notifications & Sharing | Activity feed, Team sessions, Presence |
+| Phase                                  | Duration | Focus                   | Deliverables                                             |
+| :------------------------------------- | :------- | :---------------------- | :------------------------------------------------------- |
+| **Phase 1: Message Extensions**        | 3 weeks  | Search & Actions        | Search memory, Save insights, Quick commands             |
+| **Phase 2: Meeting Integration**       | 4 weeks  | Meetings & Cards        | Meeting tabs, Adaptive cards, Pre/post-meeting workflows |
+| **Phase 3: Proactive & Collaborative** | 5 weeks  | Notifications & Sharing | Activity feed, Team sessions, Presence                   |
 
 ---
 
@@ -67,14 +67,14 @@
 
 ### Gaps Preventing Deep Integration
 
-| Gap | Impact | Blocker For |
-|:----|:-------|:------------|
-| **No Bot Framework** | Can't respond to @mentions, events | Message extensions, notifications |
-| **No composeExtensions** | Can't search from message box | Search memory, quick actions |
-| **No configurableTabs** | Can't add tabs to meetings/channels | Meeting prep, team workspaces |
-| **No activityFeed** | Can't send notifications | Weekly review reminders, meditation prompts |
-| **Static responses only** | No rich UI in chat | Adaptive cards for structured data |
-| **No real-time signaling** | Can't show presence/collaboration | Team sessions, co-editing indicators |
+| Gap                        | Impact                              | Blocker For                                 |
+| :------------------------- | :---------------------------------- | :------------------------------------------ |
+| **No Bot Framework**       | Can't respond to @mentions, events  | Message extensions, notifications           |
+| **No composeExtensions**   | Can't search from message box       | Search memory, quick actions                |
+| **No configurableTabs**    | Can't add tabs to meetings/channels | Meeting prep, team workspaces               |
+| **No activityFeed**        | Can't send notifications            | Weekly review reminders, meditation prompts |
+| **Static responses only**  | No rich UI in chat                  | Adaptive cards for structured data          |
+| **No real-time signaling** | Can't show presence/collaboration   | Team sessions, co-editing indicators        |
 
 ---
 
@@ -184,15 +184,15 @@
 
 ### Phase 1 Deliverables
 
-| Item | Description | Lines of Code (Est) |
-|:-----|:------------|:-------------------|
-| manifest.json updates | Add composeExtensions | ~80 lines |
-| Azure Function (messaging) | Bot webhook endpoint | ~300 lines |
-| Search handler | OneDrive + Global Knowledge search | ~200 lines |
-| Save action handler | Append to memory files | ~150 lines |
-| Quick commands handler | Protocol triggers | ~100 lines |
-| Adaptive card templates | Result cards | ~200 lines |
-| **Total** | | **~1,030 lines** |
+| Item                       | Description                        | Lines of Code (Est) |
+| :------------------------- | :--------------------------------- | :------------------ |
+| manifest.json updates      | Add composeExtensions              | ~80 lines           |
+| Azure Function (messaging) | Bot webhook endpoint               | ~300 lines          |
+| Search handler             | OneDrive + Global Knowledge search | ~200 lines          |
+| Save action handler        | Append to memory files             | ~150 lines          |
+| Quick commands handler     | Protocol triggers                  | ~100 lines          |
+| Adaptive card templates    | Result cards                       | ~200 lines          |
+| **Total**                  |                                    | **~1,030 lines**    |
 
 **Infrastructure**:
 - Azure Bot Service: ~$0/month (free tier)
@@ -321,7 +321,7 @@
 **Before (Current)**:
 ```
 User: "Prep for my next meeting"
-Alex: "Your next meeting is Q4 Planning at 2pm with Sarah Chen, Mike Torres, and Jennifer Wu. 
+Alex: "Your next meeting is Q4 Planning at 2pm with Sarah Chen, Mike Torres, and Jennifer Wu.
 Sarah is VP Product. Last email thread was Feb 10 about budget..."
 [wall of text]
 ```
@@ -338,7 +338,7 @@ Alex: [Displays interactive card with sections, expandable details, action butto
 // Azure Function response
 const card = {
   type: 'AdaptiveCard',
-  version: '1.5',
+  version: '1.5',  // Teams supports v1.5 (v1.6 available in Bot Framework Web Chat only)
   body: [
     {
       type: 'TextBlock',
@@ -413,16 +413,16 @@ const chats = await graphClient
 
 ### Phase 2 Deliverables
 
-| Item | Description | Lines of Code (Est) |
-|:-----|:------------|:-------------------|
-| Configurable tabs manifest | Meeting tab configuration | ~40 lines |
-| meeting-config.html | Tab setup UI | ~150 lines |
-| meeting-pre.html | Pre-meeting briefing | ~300 lines |
-| meeting-live.html | Live note-taking | ~400 lines |
-| meeting-post.html | Post-meeting summary | ~250 lines |
-| Meeting API handlers | Graph API integration | ~500 lines |
-| Adaptive card templates | 5-6 card types | ~400 lines |
-| **Total** | | **~2,040 lines** |
+| Item                       | Description               | Lines of Code (Est) |
+| :------------------------- | :------------------------ | :------------------ |
+| Configurable tabs manifest | Meeting tab configuration | ~40 lines           |
+| meeting-config.html        | Tab setup UI              | ~150 lines          |
+| meeting-pre.html           | Pre-meeting briefing      | ~300 lines          |
+| meeting-live.html          | Live note-taking          | ~400 lines          |
+| meeting-post.html          | Post-meeting summary      | ~250 lines          |
+| Meeting API handlers       | Graph API integration     | ~500 lines          |
+| Adaptive card templates    | 5-6 card types            | ~400 lines          |
+| **Total**                  |                           | **~2,040 lines**    |
 
 **Success Metrics**:
 - Meeting tab adoption: 30% of users within 4 weeks
@@ -437,13 +437,13 @@ const chats = await graphClient
 
 **Proactive triggers**:
 
-| Trigger | Timing | Message |
-|:--------|:-------|:--------|
-| **Weekly Review Ready** | Friday 3 PM | "Your weekly review is ready. [View now →]" |
-| **Meditation Reminder** | End of workday | "Consolidate today's work? [Meditate →]" |
-| **Meeting Prep Available** | 30 min before meeting | "Meeting prep ready: Q4 Planning with Sarah, Mike, Jennifer" |
-| **Overload Alert** | 4+ back-to-back meetings | "Workload check: You have 6 meetings today. [Review →]" |
-| **Goal Milestone** | Skill progress 25%/50%/75%/100% | "You've reached 50% on React mastery! [Next step →]" |
+| Trigger                    | Timing                          | Message                                                      |
+| :------------------------- | :------------------------------ | :----------------------------------------------------------- |
+| **Weekly Review Ready**    | Friday 3 PM                     | "Your weekly review is ready. [View now →]"                  |
+| **Meditation Reminder**    | End of workday                  | "Consolidate today's work? [Meditate →]"                     |
+| **Meeting Prep Available** | 30 min before meeting           | "Meeting prep ready: Q4 Planning with Sarah, Mike, Jennifer" |
+| **Overload Alert**         | 4+ back-to-back meetings        | "Workload check: You have 6 meetings today. [Review →]"      |
+| **Goal Milestone**         | Skill progress 25%/50%/75%/100% | "You've reached 50% on React mastery! [Next step →]"         |
 
 **Implementation**:
 
@@ -466,6 +466,7 @@ const chats = await graphClient
     ]
   }
 }
+// Note: The `systemDefault` activity type is currently in public developer preview (not GA)
 ```
 
 **Backend**: Azure Function with Timer Trigger
@@ -474,13 +475,13 @@ const chats = await graphClient
 // Runs every 15 minutes
 export async function checkNotifications(context: Context, timer: Timer) {
   const users = await getActiveUsers();
-  
+
   for (const user of users) {
     // Check if Friday 3 PM (local time)
     if (isFriday3PM(user.timezone)) {
       await sendActivityNotification(user, 'weeklyReview');
     }
-    
+
     // Check upcoming meetings (next 30 min)
     const upcomingMeetings = await getUpcomingMeetings(user);
     if (upcomingMeetings.length > 0 && !alreadyNotified(user, upcomingMeetings[0])) {
@@ -590,18 +591,18 @@ connection.on('PresenceUpdate', (data) => {
 <!-- GitHub Pages: index.html -->
 <div class="quick-actions">
   <h2>🚀 Quick Launch</h2>
-  
-  <a href="msteams://teams.microsoft.com/l/entity/..." 
+
+  <a href="msteams://teams.microsoft.com/l/entity/..."
      class="launch-button">
     📊 Weekly Review
   </a>
-  
-  <a href="msteams://teams.microsoft.com/l/entity/..." 
+
+  <a href="msteams://teams.microsoft.com/l/entity/..."
      class="launch-button">
     🧘 Meditate
   </a>
-  
-  <a href="msteams://teams.microsoft.com/l/entity/..." 
+
+  <a href="msteams://teams.microsoft.com/l/entity/..."
      class="launch-button">
     📅 Meeting Prep
   </a>
@@ -610,15 +611,15 @@ connection.on('PresenceUpdate', (data) => {
 
 ### Phase 3 Deliverables
 
-| Item | Description | Lines of Code (Est) |
-|:-----|:------------|:-------------------|
-| Activity feed manifest | Notification types | ~60 lines |
-| Timer function | Notification scheduler | ~300 lines |
-| Team workspace tab | Shared memory UI | ~500 lines |
-| SignalR hub | Real-time presence | ~200 lines |
-| Deep link launcher | Static tab updates | ~150 lines |
-| Team meditation handler | Collaborative consolidation | ~250 lines |
-| **Total** | | **~1,460 lines** |
+| Item                    | Description                 | Lines of Code (Est) |
+| :---------------------- | :-------------------------- | :------------------ |
+| Activity feed manifest  | Notification types          | ~60 lines           |
+| Timer function          | Notification scheduler      | ~300 lines          |
+| Team workspace tab      | Shared memory UI            | ~500 lines          |
+| SignalR hub             | Real-time presence          | ~200 lines          |
+| Deep link launcher      | Static tab updates          | ~150 lines          |
+| Team meditation handler | Collaborative consolidation | ~250 lines          |
+| **Total**               |                             | **~1,460 lines**    |
 
 **Infrastructure**:
 - Azure SignalR Service: ~$20/month (Free tier: 20 concurrent connections)
@@ -678,33 +679,33 @@ connection.on('PresenceUpdate', (data) => {
 
 ### Azure Resources
 
-| Resource | SKU | Purpose | Monthly Cost |
-|:---------|:----|:--------|:-------------|
-| **Azure Bot Service** | F0 (Free) | Bot registration | $0 |
-| **Azure Function App** | Consumption Y1 | Bot webhook, timers | ~$10 |
-| **Azure SignalR Service** | Free | Real-time presence (20 connections) | $0 |
-| **Application Insights** | Free tier (5 GB) | Logging, monitoring | $0 |
-| **Storage Account** | Standard LRS | Function state | $1 |
-| | | **Total** | **~$11/month** |
+| Resource                  | SKU              | Purpose                            | Monthly Cost                                       |
+| :------------------------ | :--------------- | :--------------------------------- | :------------------------------------------------- |
+| **Azure Bot Service**     | F0 (Free)        | Bot registration                   | $0                                                 |
+| **Azure Function App**    | Consumption Y1   | Bot webhook, timers                | $0-20 (free tier: 1M executions + 400K GB-s/month) |
+| **Azure SignalR Service** | Free             | Real-time presence (dev/test only) | $0 (20 connections)                                |
+| **Application Insights**  | Free tier (5 GB) | Logging, monitoring                | $0                                                 |
+| **Storage Account**       | Standard LRS     | Function state                     | $1                                                 |
+|                           |                  | **Total**                          | **~$1-35/month**                                   |
 
 ### Scaling (100 users)
 
-| Resource | SKU | Monthly Cost |
-|:---------|:----|:-------------|
-| Azure Function App | Consumption Y1 (500K executions) | ~$20 |
-| Azure SignalR Service | Standard (100 concurrent) | ~$25 |
-| Application Insights | 5-10 GB | ~$5 |
-| | **Total (100 users)** | **~$50/month** |
+| Resource              | SKU                              | Monthly Cost   |
+| :-------------------- | :------------------------------- | :------------- |
+| Azure Function App    | Consumption Y1 (500K executions) | ~$20           |
+| Azure SignalR Service | Standard (1,000 concurrent)      | ~$50 (1 unit)  |
+| Application Insights  | 5-10 GB                          | ~$5            |
+|                       | **Total (100 users)**            | **~$50/month** |
 
 ### Scaling (1,000 users)
 
-| Resource | SKU | Monthly Cost |
-|:---------|:----|:-------------|
-| Azure Function App | Premium EP1 (dedicated) | ~$150 |
-| Azure SignalR Service | Standard (1,000 concurrent) | ~$50 |
-| Application Insights | 20-30 GB | ~$20 |
-| Azure CDN | Standard Microsoft (for static assets) | ~$10 |
-| | **Total (1,000 users)** | **~$230/month** |
+| Resource              | SKU                                    | Monthly Cost    |
+| :-------------------- | :------------------------------------- | :-------------- |
+| Azure Function App    | Premium EP1 (dedicated)                | ~$150           |
+| Azure SignalR Service | Standard (1,000 concurrent)            | ~$50            |
+| Application Insights  | 20-30 GB                               | ~$20            |
+| Azure CDN             | Standard Microsoft (for static assets) | ~$10            |
+|                       | **Total (1,000 users)**                | **~$230/month** |
 
 ---
 
@@ -794,15 +795,15 @@ az monitor app-insights query \
 
 ## Risk Mitigation
 
-| Risk | Likelihood | Impact | Mitigation |
-|:-----|:-----------|:-------|:-----------|
-| **Bot Framework complexity** | Medium | High | Start with minimal MVP, use Bot Builder SDK templates |
-| **Azure cost overruns** | Low | Medium | Use free/consumption tiers, set budget alerts |
-| **Graph API throttling** | Medium | Medium | Implement exponential backoff, cache frequently accessed data |
-| **User adoption low** | Medium | High | Launch with power users first, collect feedback, iterate |
-| **Meeting tab performance** | Low | Medium | Lazy load data, show skeletons, optimize Graph queries |
-| **SignalR connection limits** | Low | Low | Free tier supports 20 concurrent (sufficient for MVP) |
-| **Adaptive Card compatibility** | Low | Low | Test on desktop + mobile, use schema v1.5 (broad support) |
+| Risk                            | Likelihood | Impact | Mitigation                                                    |
+| :------------------------------ | :--------- | :----- | :------------------------------------------------------------ |
+| **Bot Framework complexity**    | Medium     | High   | Start with minimal MVP, use Bot Builder SDK templates         |
+| **Azure cost overruns**         | Low        | Medium | Use free/consumption tiers, set budget alerts                 |
+| **Graph API throttling**        | Medium     | Medium | Implement exponential backoff, cache frequently accessed data |
+| **User adoption low**           | Medium     | High   | Launch with power users first, collect feedback, iterate      |
+| **Meeting tab performance**     | Low        | Medium | Lazy load data, show skeletons, optimize Graph queries        |
+| **SignalR connection limits**   | Low        | Low    | Free tier supports 20 concurrent (sufficient for MVP)         |
+| **Adaptive Card compatibility** | Low        | Low    | Test on desktop + mobile, use schema v1.5 (broad support)     |
 
 ---
 
@@ -810,22 +811,22 @@ az monitor app-insights query \
 
 ### MVP Success (Phase 1)
 
-| Metric | Target | How to Measure |
-|:-------|:-------|:---------------|
+| Metric                      | Target                          | How to Measure             |
+| :-------------------------- | :------------------------------ | :------------------------- |
 | **Message extension usage** | 60% of users try within 2 weeks | App Insights custom events |
-| **Memory saves** | 10+ insights/user/week | OneDrive file append count |
-| **Quick command usage** | 5+ commands/user/week | Bot command analytics |
-| **User satisfaction** | 4.2/5 stars | In-app feedback survey |
+| **Memory saves**            | 10+ insights/user/week          | OneDrive file append count |
+| **Quick command usage**     | 5+ commands/user/week           | Bot command analytics      |
+| **User satisfaction**       | 4.2/5 stars                     | In-app feedback survey     |
 
 ### Full Integration Success (Phase 3)
 
-| Metric | Target | How to Measure |
-|:-------|:-------|:---------------|
-| **Meeting tab adoption** | 40% of meetings use Alex tab | Teams usage analytics |
-| **Weekly review engagement** | 70% of users complete weekly | Notification click-through rate |
-| **Team workspace creation** | 15% of channels add Alex workspace | SharePoint folder creation count |
-| **Time saved per week** | 2+ hours average | User survey + usage time analysis |
-| **Retention (30-day)** | 80%+ | Active users day 30 / Active users day 1 |
+| Metric                       | Target                             | How to Measure                           |
+| :--------------------------- | :--------------------------------- | :--------------------------------------- |
+| **Meeting tab adoption**     | 40% of meetings use Alex tab       | Teams usage analytics                    |
+| **Weekly review engagement** | 70% of users complete weekly       | Notification click-through rate          |
+| **Team workspace creation**  | 15% of channels add Alex workspace | SharePoint folder creation count         |
+| **Time saved per week**      | 2+ hours average                   | User survey + usage time analysis        |
+| **Retention (30-day)**       | 80%+                               | Active users day 30 / Active users day 1 |
 
 ---
 
@@ -833,20 +834,20 @@ az monitor app-insights query \
 
 ### Week-by-Week Plan
 
-| Week | Phase | Focus | Deliverable |
-|:-----|:------|:------|:------------|
-| **1** | Phase 1 | Azure setup + Bot registration | Bot service running, local dev working |
-| **2** | Phase 1 | Search message extension | Search OneDrive memory from any chat |
-| **3** | Phase 1 | Action extension + quick commands | Save insights, trigger protocols |
-| **4** | Phase 2 | Meeting tab foundation | Configurable tab manifest + config UI |
-| **5** | Phase 2 | Pre-meeting briefing | Attendee research, context summary |
-| **6** | Phase 2 | Live notes + post-meeting | Note-taking UI, save to OneDrive |
-| **7** | Phase 2 | Adaptive cards | Rich card templates for all responses |
-| **8** | Phase 3 | Activity feed notifications | Weekly review, meeting prep reminders |
-| **9** | Phase 3 | Team workspace tab | Shared memory for channels |
-| **10** | Phase 3 | Real-time collaboration | SignalR presence, live editing indicators |
-| **11** | Phase 3 | Deep links + polish | Quick launch buttons, performance tuning |
-| **12** | Launch | Testing + launch prep | Beta testing, documentation, rollout |
+| Week   | Phase   | Focus                             | Deliverable                               |
+| :----- | :------ | :-------------------------------- | :---------------------------------------- |
+| **1**  | Phase 1 | Azure setup + Bot registration    | Bot service running, local dev working    |
+| **2**  | Phase 1 | Search message extension          | Search OneDrive memory from any chat      |
+| **3**  | Phase 1 | Action extension + quick commands | Save insights, trigger protocols          |
+| **4**  | Phase 2 | Meeting tab foundation            | Configurable tab manifest + config UI     |
+| **5**  | Phase 2 | Pre-meeting briefing              | Attendee research, context summary        |
+| **6**  | Phase 2 | Live notes + post-meeting         | Note-taking UI, save to OneDrive          |
+| **7**  | Phase 2 | Adaptive cards                    | Rich card templates for all responses     |
+| **8**  | Phase 3 | Activity feed notifications       | Weekly review, meeting prep reminders     |
+| **9**  | Phase 3 | Team workspace tab                | Shared memory for channels                |
+| **10** | Phase 3 | Real-time collaboration           | SignalR presence, live editing indicators |
+| **11** | Phase 3 | Deep links + polish               | Quick launch buttons, performance tuning  |
+| **12** | Launch  | Testing + launch prep             | Beta testing, documentation, rollout      |
 
 ---
 
@@ -876,6 +877,11 @@ az monitor app-insights query \
    - Pro: Better formatting, tables, links
    - Con: More complex editor
    - **Recommendation**: Start with plain text, add markdown in v6.1
+
+6. **Graph API rate limits and retry logic?**
+   - Standard tier: 10,000 requests per 10 minutes per user
+   - Throttling headers: `Retry-After`, `RateLimit-*` 
+   - **Recommendation**: Implement exponential backoff with retry middleware for all Graph API calls
 
 ---
 
@@ -931,6 +937,6 @@ This plan transforms Alex from a declarative agent to a **native Teams platform 
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: February 18, 2026  
+**Document Version**: 1.0
+**Last Updated**: February 18, 2026
 **Next Review**: March 1, 2026 (after Phase 1 completion)
