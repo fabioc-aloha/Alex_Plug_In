@@ -709,6 +709,433 @@ connection.on('PresenceUpdate', (data) => {
 
 ---
 
+## Azure Infrastructure Deployment
+
+### Complete Resource Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          AZURE SUBSCRIPTION                             │
+│                                                                         │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Resource Group: alex-teams-rg (East US)                          │  │
+│  │                                                                  │  │
+│  │  ┌────────────────────────┐      ┌──────────────────────────┐  │  │
+│  │  │ Entra App Registration │      │ Azure Bot Service (F0)   │  │  │
+│  │  │ alex-teams-bot         │──────│ alex-teams-bot           │  │  │
+│  │  │ • App ID               │      │ • Bot handle             │  │  │
+│  │  │ • Client Secret        │      │ • Messaging endpoint     │  │  │
+│  │  │ • Teams permissions    │      └──────────┬───────────────┘  │  │
+│  │  └────────────────────────┘                 │                   │  │
+│  │                                              │                   │  │
+│  │  ┌───────────────────────────────────────────┼────────────────┐ │  │
+│  │  │ Azure Function App (Consumption Y1)       ▼                │ │  │
+│  │  │ alex-teams-functions                                       │ │  │
+│  │  │                                                            │ │  │
+│  │  │  Functions:                                                │ │  │
+│  │  │  • /api/messaging        ◄─── Bot webhook                 │ │  │
+│  │  │  • /api/searchMemory     ◄─── Message extension search    │ │  │
+│  │  │  • /api/actionHandler    ◄─── Message extension actions   │ │  │
+│  │  │  • /api/tabConfig        ◄─── Meeting tab configuration   │ │  │
+│  │  │  • /api/notificationTimer◄─── Timer trigger (every 15min) │ │  │
+│  │  │                                                            │ │  │
+│  │  │  Environment Variables:                                    │ │  │
+│  │  │  • BOT_APP_ID                                              │ │  │
+│  │  │  • BOT_APP_PASSWORD                                        │ │  │
+│  │  │  • SIGNALR_CONNECTION_STRING                               │ │  │
+│  │  │  • APPLICATIONINSIGHTS_CONNECTION_STRING                   │ │  │
+│  │  └────────────────┬──────────────────┬────────────────────────┘ │  │
+│  │                   │                  │                          │  │
+│  │  ┌────────────────▼──────┐  ┌────────▼─────────────────────┐   │  │
+│  │  │ Storage Account       │  │ Azure SignalR Service (Free) │   │  │
+│  │  │ alexteamsstorage      │  │ alex-teams-signalr           │   │  │
+│  │  │ • Function state      │  │ • 20 concurrent connections  │   │  │
+│  │  │ • Blob storage        │  │ • Presence & notifications   │   │  │
+│  │  └───────────────────────┘  └──────────────────────────────┘   │  │
+│  │                                                                  │  │
+│  │  ┌────────────────────────────────────────────────────────────┐ │  │
+│  │  │ Application Insights                                       │ │  │
+│  │  │ alex-teams-insights                                        │ │  │
+│  │  │ • Bot telemetry                                            │ │  │
+│  │  │ • Function logs                                            │ │  │
+│  │  │ • Performance metrics                                      │ │  │
+│  │  └────────────────────────────────────────────────────────────┘ │  │
+│  │                                                                  │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                         │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ External Integrations                                            │  │
+│  │                                                                  │  │
+│  │  • Microsoft Graph API (user's tenant)                          │  │
+│  │    - OneDrive memory access                                     │  │
+│  │    - Calendar/Meetings API                                      │  │
+│  │    - Email/Messages API                                         │  │
+│  │                                                                  │  │
+│  │  • Teams Platform                                               │  │
+│  │    - Message extensions                                         │  │
+│  │    - Meeting tabs                                               │  │
+│  │    - Activity feed                                              │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Required Azure Resources
+
+| Resource                    | Name                   | SKU/Tier       | Purpose                                      | Dependencies                |
+| :-------------------------- | :--------------------- | :------------- | :------------------------------------------- | :-------------------------- |
+| **Resource Group**          | alex-teams-rg          | N/A            | Container for all resources                  | None                        |
+| **Entra App Registration**  | alex-teams-bot         | N/A            | Bot identity, Graph API permissions          | None                        |
+| **Azure Bot Service**       | alex-teams-bot         | F0 (Free)      | Bot Framework registration                   | Entra App                   |
+| **Function App**            | alex-teams-functions   | Consumption Y1 | Bot webhook, message extensions, timers      | Storage Account             |
+| **Storage Account**         | alexteamsstorage       | Standard LRS   | Function app state, blob storage             | None                        |
+| **SignalR Service**         | alex-teams-signalr     | Free           | Real-time presence, live notifications       | None                        |
+| **Application Insights**    | alex-teams-insights    | Free (5GB)     | Logging, monitoring, telemetry               | None                        |
+| **Teams App Registration**  | Alex (Teams manifest)  | N/A            | Teams platform integration                   | Bot Service, Entra App      |
+
+### Step-by-Step Deployment Script
+
+**Prerequisites:**
+- Azure CLI installed (`az --version` should work)
+- Logged into Azure (`az login`)
+- Teams Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
+
+**1. Set Variables**
+
+```powershell
+# Configuration
+$RESOURCE_GROUP = "alex-teams-rg"
+$LOCATION = "eastus"
+$BOT_NAME = "alex-teams-bot"
+$FUNCTION_APP_NAME = "alex-teams-functions"
+$STORAGE_ACCOUNT = "alexteamsstorage"  # Must be globally unique
+$SIGNALR_NAME = "alex-teams-signalr"
+$INSIGHTS_NAME = "alex-teams-insights"
+
+# Generate or use existing App ID/Password
+# Option 1: Create new Entra app
+$APP_REGISTRATION = az ad app create --display-name $BOT_NAME --sign-in-audience AzureADMultipleOrgs | ConvertFrom-Json
+$APP_ID = $APP_REGISTRATION.appId
+
+# Create client secret (save this immediately - only shown once!)
+$SECRET = az ad app credential reset --id $APP_ID --query password -o tsv
+Write-Host "🔐 SAVE THIS SECRET: $SECRET" -ForegroundColor Yellow
+```
+
+**2. Create Resource Group**
+
+```powershell
+az group create `
+  --name $RESOURCE_GROUP `
+  --location $LOCATION
+
+Write-Host "✅ Resource group created: $RESOURCE_GROUP"
+```
+
+**3. Create Storage Account**
+
+```powershell
+az storage account create `
+  --name $STORAGE_ACCOUNT `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION `
+  --sku Standard_LRS `
+  --kind StorageV2
+
+Write-Host "✅ Storage account created: $STORAGE_ACCOUNT"
+```
+
+**4. Create Application Insights**
+
+```powershell
+az monitor app-insights component create `
+  --app $INSIGHTS_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION `
+  --application-type web
+
+$INSIGHTS_KEY = az monitor app-insights component show `
+  --app $INSIGHTS_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --query instrumentationKey -o tsv
+
+$INSIGHTS_CONN_STRING = az monitor app-insights component show `
+  --app $INSIGHTS_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --query connectionString -o tsv
+
+Write-Host "✅ Application Insights created: $INSIGHTS_NAME"
+```
+
+**5. Create Azure SignalR Service**
+
+```powershell
+az signalr create `
+  --name $SIGNALR_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION `
+  --sku Free_F1 `
+  --unit-count 1 `
+  --service-mode Serverless
+
+$SIGNALR_CONN_STRING = az signalr key list `
+  --name $SIGNALR_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --query primaryConnectionString -o tsv
+
+Write-Host "✅ SignalR Service created: $SIGNALR_NAME"
+```
+
+**6. Create Azure Function App**
+
+```powershell
+az functionapp create `
+  --name $FUNCTION_APP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --storage-account $STORAGE_ACCOUNT `
+  --consumption-plan-location $LOCATION `
+  --runtime node `
+  --runtime-version 18 `
+  --functions-version 4 `
+  --os-type Windows `
+  --app-insights $INSIGHTS_NAME
+
+Write-Host "✅ Function App created: $FUNCTION_APP_NAME"
+```
+
+**7. Configure Function App Settings**
+
+```powershell
+az functionapp config appsettings set `
+  --name $FUNCTION_APP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --settings `
+    "BOT_APP_ID=$APP_ID" `
+    "BOT_APP_PASSWORD=$SECRET" `
+    "SIGNALR_CONNECTION_STRING=$SIGNALR_CONN_STRING" `
+    "APPLICATIONINSIGHTS_CONNECTION_STRING=$INSIGHTS_CONN_STRING" `
+    "MicrosoftAppType=MultiTenant" `
+    "MicrosoftAppTenantId=common"
+
+Write-Host "✅ Function App configured with environment variables"
+```
+
+**8. Create Azure Bot Service**
+
+```powershell
+# Get Function App messaging endpoint
+$FUNCTION_HOSTNAME = az functionapp show `
+  --name $FUNCTION_APP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --query defaultHostName -o tsv
+
+$MESSAGING_ENDPOINT = "https://$FUNCTION_HOSTNAME/api/messaging"
+
+# Create bot registration
+az bot create `
+  --resource-group $RESOURCE_GROUP `
+  --name $BOT_NAME `
+  --kind registration `
+  --sku F0 `
+  --appid $APP_ID `
+  --password $SECRET `
+  --endpoint $MESSAGING_ENDPOINT
+
+# Enable Teams channel
+az bot msteams create `
+  --resource-group $RESOURCE_GROUP `
+  --name $BOT_NAME
+
+Write-Host "✅ Bot Service created and Teams channel enabled: $BOT_NAME"
+Write-Host "   Messaging endpoint: $MESSAGING_ENDPOINT"
+```
+
+**9. Configure Entra App Permissions**
+
+```powershell
+# Add Microsoft Graph API permissions
+# OneDrive, Calendar, Mail, User read permissions
+
+Write-Host "⚠️  MANUAL STEP REQUIRED:"
+Write-Host "1. Go to: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnAPI/appId/$APP_ID"
+Write-Host "2. Add API Permissions:"
+Write-Host "   - Microsoft Graph > Delegated > Files.ReadWrite"
+Write-Host "   - Microsoft Graph > Delegated > Calendars.Read"
+Write-Host "   - Microsoft Graph > Delegated > Mail.Read"
+Write-Host "   - Microsoft Graph > Delegated > User.Read"
+Write-Host "3. Click 'Grant admin consent'"
+```
+
+**10. Deploy Function Code**
+
+```powershell
+cd platforms/m365-copilot/bot-backend
+
+# Build the TypeScript code
+npm run build
+
+# Deploy to Azure
+func azure functionapp publish $FUNCTION_APP_NAME
+
+Write-Host "✅ Function code deployed to: $FUNCTION_APP_NAME"
+```
+
+**11. Update Teams Manifest**
+
+```powershell
+# Update manifest.json with Bot ID
+$MANIFEST_PATH = "../appPackage/manifest.json"
+$manifest = Get-Content $MANIFEST_PATH | ConvertFrom-Json
+$manifest.bots[0].botId = $APP_ID
+$manifest.composeExtensions[0].botId = $APP_ID
+$manifest | ConvertTo-Json -Depth 10 | Set-Content $MANIFEST_PATH
+
+Write-Host "✅ Teams manifest updated with Bot ID: $APP_ID"
+```
+
+**12. Package and Test**
+
+```powershell
+# Package the Teams app
+teamsapp package --env dev
+
+Write-Host "✅ Teams app package created: appPackage/build/appPackage.dev.zip"
+Write-Host ""
+Write-Host "🎉 DEPLOYMENT COMPLETE!"
+Write-Host ""
+Write-Host "📋 RESOURCE SUMMARY:"
+Write-Host "   Resource Group:    $RESOURCE_GROUP"
+Write-Host "   Bot Name:          $BOT_NAME"
+Write-Host "   App ID:            $APP_ID"
+Write-Host "   Function App:      $FUNCTION_APP_NAME"
+Write-Host "   Messaging Endpoint: $MESSAGING_ENDPOINT"
+Write-Host ""
+Write-Host "🚀 NEXT STEPS:"
+Write-Host "1. Complete Entra App permissions (see manual step above)"
+Write-Host "2. Upload appPackage.dev.zip to Teams:"
+Write-Host "   Teams > Apps > Manage your apps > Upload an app > Upload a custom app"
+Write-Host "3. Test message extension: Open any chat > @ > Select Alex > Search"
+Write-Host "4. Monitor logs: Azure Portal > Application Insights > $INSIGHTS_NAME"
+```
+
+### Environment Configuration
+
+**Local Development (.env.local)**
+
+```bash
+# Bot Framework
+BOT_APP_ID=<your-app-id>
+BOT_APP_PASSWORD=<your-app-secret>
+MicrosoftAppType=MultiTenant
+MicrosoftAppTenantId=common
+
+# Azure Services
+SIGNALR_CONNECTION_STRING=<local-signalr-or-azure-connection-string>
+APPLICATIONINSIGHTS_CONNECTION_STRING=<not-required-locally>
+
+# Development
+NODE_ENV=development
+FUNCTIONS_WORKER_RUNTIME=node
+```
+
+**Production (Azure App Settings)**
+
+Set via Azure Portal or CLI (already done in step 7 above):
+- `BOT_APP_ID`: Entra app ID
+- `BOT_APP_PASSWORD`: Entra app secret
+- `SIGNALR_CONNECTION_STRING`: Azure SignalR connection string
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Application Insights connection string
+- `MicrosoftAppType`: MultiTenant
+- `MicrosoftAppTenantId`: common
+
+### Security Configuration
+
+**1. Managed Identity (Optional - for production)**
+
+```powershell
+# Enable system-assigned managed identity for Function App
+az functionapp identity assign `
+  --name $FUNCTION_APP_NAME `
+  --resource-group $RESOURCE_GROUP
+
+# Use managed identity instead of connection strings for:
+# - Storage Account access
+# - Application Insights
+# - SignalR Service
+```
+
+**2. Key Vault Integration (Recommended for secrets)**
+
+```powershell
+# Create Key Vault
+az keyvault create `
+  --name alex-teams-keyvault `
+  --resource-group $RESOURCE_GROUP `
+  --location $LOCATION
+
+# Store secrets
+az keyvault secret set --vault-name alex-teams-keyvault --name BotAppPassword --value $SECRET
+az keyvault secret set --vault-name alex-teams-keyvault --name SignalRConnectionString --value $SIGNALR_CONN_STRING
+
+# Reference in Function App:
+# @Microsoft.KeyVault(SecretUri=https://alex-teams-keyvault.vault.azure.net/secrets/BotAppPassword/)
+```
+
+**3. Network Security**
+
+```powershell
+# Restrict Function App to accept traffic only from:
+# - Azure Bot Service
+# - Teams platform
+# - Azure services
+
+az functionapp config access-restriction add `
+  --name $FUNCTION_APP_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --rule-name AllowBotService `
+  --action Allow `
+  --service-tag AzureCloud `
+  --priority 100
+```
+
+### Verification Checklist
+
+After deployment, verify:
+
+- [ ] **Resource Group**: All 6 resources created in `alex-teams-rg`
+- [ ] **Entra App**: App ID obtained, secret saved securely, permissions granted
+- [ ] **Bot Service**: F0 tier, Teams channel enabled, messaging endpoint set
+- [ ] **Function App**: Deployed code, environment variables configured
+- [ ] **Storage Account**: Accessible by Function App
+- [ ] **SignalR**: Connection string configured, serverless mode
+- [ ] **Application Insights**: Receiving telemetry from Function App
+- [ ] **Teams Manifest**: Bot ID updated, package created
+- [ ] **Test Bot Emulator**: Local `/api/messaging` responds to messages
+- [ ] **Test Teams**: Message extension search works
+
+### Monitoring & Diagnostics
+
+**View Function Logs:**
+```powershell
+# Real-time logs
+az webapp log tail --name $FUNCTION_APP_NAME --resource-group $RESOURCE_GROUP
+
+# Query Application Insights
+az monitor app-insights query `
+  --app $INSIGHTS_NAME `
+  --resource-group $RESOURCE_GROUP `
+  --analytics-query "traces | where message contains 'messaging' | take 50"
+```
+
+**Monitor Bot Activity:**
+```powershell
+# Bot channel analytics
+az bot show `
+  --name $BOT_NAME `
+  --resource-group $RESOURCE_GROUP
+```
+
+---
+
 ## Development Workflow
 
 ### Phase 1: Local Development
