@@ -1,0 +1,97 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/office-js/custom-functions.schema.json",
+    "functions": [
+        {
+            "id": "SKILLLEVEL",
+            "name": "ALEX.SKILLLEVEL",
+            "description": "Get current skill level from focus trifectas in your Alex memory",
+            "helpUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+            "result": {
+                "type": "string",
+                "dimensionality": "scalar"
+            },
+            "parameters": [
+                {
+                    "name": "skillName",
+                    "description": "Name of the skill to query (e.g., 'React', 'Python', 'TypeScript')",
+                    "type": "string",
+                    "dimensionality": "scalar"
+                }
+            ],
+            "options": {
+                "cancelable": false,
+                "stream": false,
+                "volatile": false
+            }
+        },
+        {
+            "id": "GOALSTATUS",
+            "name": "ALEX.GOALSTATUS",
+            "description": "Get goal completion percentage for a skill (0.0 to 1.0)",
+            "helpUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+            "result": {
+                "type": "number",
+                "dimensionality": "scalar"
+            },
+            "parameters": [
+                {
+                    "name": "skillName",
+                    "description": "Name of the skill to query progress for",
+                    "type": "string",
+                    "dimensionality": "scalar"
+                }
+            ],
+            "options": {
+                "cancelable": false,
+                "stream": false,
+                "volatile": false
+            }
+        },
+        {
+            "id": "NEXTSTEP",
+            "name": "ALEX.NEXTSTEP",
+            "description": "Get the next learning action for a skill from your focus trifectas",
+            "helpUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+            "result": {
+                "type": "string",
+                "dimensionality": "scalar"
+            },
+            "parameters": [
+                {
+                    "name": "skillName",
+                    "description": "Name of the skill to get next action for",
+                    "type": "string",
+                    "dimensionality": "scalar"
+                }
+            ],
+            "options": {
+                "cancelable": false,
+                "stream": false,
+                "volatile": false
+            }
+        },
+        {
+            "id": "MEMORYQUERY",
+            "name": "ALEX.MEMORYQUERY",
+            "description": "Query your Alex memory with natural language questions",
+            "helpUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
+            "result": {
+                "type": "string",
+                "dimensionality": "scalar"
+            },
+            "parameters": [
+                {
+                    "name": "query",
+                    "description": "Natural language query (e.g., 'What's my current focus?', 'What's my name?', 'What are my goals?')",
+                    "type": "string",
+                    "dimensionality": "scalar"
+                }
+            ],
+            "options": {
+                "cancelable": false,
+                "stream": false,
+                "volatile": true
+            }
+        }
+    ]
+}
