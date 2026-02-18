@@ -530,10 +530,10 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.8.2                         |
-| **Current Heirs**          | VS Code (5.8.2), M365 (5.7.2) |
+| **Current Master Version** | 5.8.3                         |
+| **Current Heirs**          | VS Code (5.8.3), M365 (5.9.0) |
 | **Next Target**            | 5.9.0 — VS Code API Adoption  |
-| **Updated**                | 2026-02-15                    |
+| **Updated**                | 2026-02-18                    |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3) |
 
 ---
