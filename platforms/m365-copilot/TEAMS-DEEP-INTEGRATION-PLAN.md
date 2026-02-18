@@ -8,6 +8,209 @@
 
 ---
 
+## Deployment Checklist
+
+Use this checklist to track progress from planning through production deployment.
+
+### Phase 0: Pre-Deployment Validation
+
+**Permissions & Access** ✓/✗
+- [ ] Azure subscription access confirmed (Contributor or Owner role)
+- [ ] Azure CLI installed and logged in (`az login`)
+- [ ] Can create resource groups (test: `az group create --dry-run`)
+- [ ] Entra ID app registration permissions verified OR admin contact identified
+- [ ] Resource providers registered (Web, BotService, SignalRService, Insights)
+- [ ] Teams Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
+
+**Policy Compliance** ✓/✗
+- [ ] Azure Policies reviewed (no blocking location/SKU/resource-type restrictions)
+- [ ] Region availability confirmed (East US or alternative)
+- [ ] Naming conventions documented (if org has restrictions)
+- [ ] Cost budget approved (~$1-35/month MVP, ~$50/month for 100 users)
+- [ ] Security/compliance review completed (if required by org)
+
+**Teams & Graph API** ✓/✗
+- [ ] Teams custom app upload enabled (or org catalog submission path identified)
+- [ ] Graph API permissions approved (Files.ReadWrite, Calendars.Read, Mail.Read, User.Read)
+- [ ] M365 Developer tenant available (optional - for testing)
+
+**Escalation Paths** ✓/✗
+- [ ] Azure admin contact identified (if permissions needed)
+- [ ] Entra admin contact identified (for app registration)
+- [ ] Teams admin contact identified (for custom app approval)
+- [ ] IT security/compliance contact identified (if architecture review needed)
+
+### Phase 1: Azure Infrastructure Setup
+
+**Entra App Registration** ✓/✗
+- [ ] App registration created (self-service OR admin-created)
+- [ ] Application (client) ID obtained
+- [ ] Client secret created and saved securely
+- [ ] Redirect URI configured: `https://token.botframework.com/.auth/web/redirect`
+- [ ] Graph API permissions added (Files.ReadWrite, Calendars.Read, Mail.Read, User.Read)
+- [ ] Admin consent granted (if required)
+
+**Azure Resources** ✓/✗
+- [ ] Resource group created (`alex-teams-rg`)
+- [ ] Storage account created (`alexteamsstorage`)
+- [ ] Application Insights created (`alex-teams-insights`)
+- [ ] SignalR Service created (`alex-teams-signalr`)
+- [ ] Function App created (`alex-teams-functions`)
+- [ ] Function App environment variables configured (BOT_APP_ID, BOT_APP_PASSWORD, etc.)
+- [ ] Azure Bot Service created (`alex-teams-bot`)
+- [ ] Bot messaging endpoint configured (Function App URL)
+- [ ] Teams channel enabled on bot
+
+**Security Configuration** ✓/✗
+- [ ] Managed Identity enabled on Function App (optional but recommended)
+- [ ] Key Vault created for secrets (optional but recommended)
+- [ ] Network access restrictions configured (optional)
+- [ ] Application Insights instrumentation key secured
+
+### Phase 2: Development & Testing
+
+**Local Development** ✓/✗
+- [ ] Bot Framework Emulator installed
+- [ ] Local Function App project initialized (`func init bot-backend`)
+- [ ] Dependencies installed (`npm install @microsoft/teams-js botbuilder`)
+- [ ] Local messaging endpoint created (`/api/messaging`)
+- [ ] Local test successful (echo bot in emulator)
+
+**Message Extensions** ✓/✗
+- [ ] Search extension implemented (`/api/searchMemory`)
+- [ ] Action extension implemented (`/api/actionHandler`)
+- [ ] Quick commands implemented (Meditate, Dream, Actualize)
+- [ ] OneDrive memory integration tested
+- [ ] Local testing in Bot Emulator successful
+
+**Meeting Integration** ✓/✗
+- [ ] Meeting tab configuration UI created (`/api/tabConfig`)
+- [ ] Pre-meeting briefing logic implemented
+- [ ] Live notes functionality implemented
+- [ ] Post-meeting summary implemented
+- [ ] Adaptive cards templates created
+
+**Adaptive Cards** ✓/✗
+- [ ] Card templates created (meeting briefing, search results, insights)
+- [ ] Card schema v1.5 validation completed
+- [ ] Action handlers implemented (Action.Submit, Action.OpenUrl)
+- [ ] Mobile rendering tested
+
+**Activity Feed** ✓/✗
+- [ ] Timer trigger function created (`/api/notificationTimer`)
+- [ ] Notification logic implemented (weekly review, meeting prep, overload alerts)
+- [ ] Activity types defined in manifest
+- [ ] Throttling implemented (20 notifications/minute/user limit)
+
+**Team Collaboration** ✓/✗
+- [ ] Team workspace tab implementation
+- [ ] SignalR real-time presence integration
+- [ ] Shared memory folder creation logic
+- [ ] Live editing indicators
+
+### Phase 3: Teams Manifest & Packaging
+
+**Manifest Updates** ✓/✗
+- [ ] Bot ID added to manifest (`manifest.json`)
+- [ ] `composeExtensions` section configured (message extensions)
+- [ ] `configurableTabs` section configured (meeting tabs)
+- [ ] `activities` section configured (activity feed)
+- [ ] Manifest schema version validated (v1.19+)
+- [ ] RSC permissions added (TeamsActivity.Send.User)
+- [ ] App icons created (color + outline)
+- [ ] Privacy policy URL updated
+- [ ] Terms of use URL updated
+
+**Testing & Validation** ✓/✗
+- [ ] Manifest validation passed (`teamsapp validate`)
+- [ ] App package built (`teamsapp package`)
+- [ ] Package uploaded to Teams (dev environment)
+- [ ] Message extension search tested in chat
+- [ ] Action extension tested (save insight)
+- [ ] Quick commands tested
+- [ ] Meeting tab tested (create meeting → add tab)
+- [ ] Adaptive cards rendering verified (desktop + mobile)
+- [ ] Activity feed notifications tested
+- [ ] End-to-end user flow tested
+
+### Phase 4: Deployment & Launch
+
+**Production Deployment** ✓/✗
+- [ ] Function code deployed to Azure (`func azure functionapp publish`)
+- [ ] Deployment smoke tests passed (messaging endpoint responds)
+- [ ] Application Insights logging verified
+- [ ] SignalR connections tested
+- [ ] Storage account accessible from Function App
+- [ ] Bot messaging endpoint reachable from Teams
+
+**Teams App Deployment** ✓/✗
+- [ ] Production app package created (`teamsapp package --env prod`)
+- [ ] App uploaded to Teams (production tenant OR submitted to org catalog)
+- [ ] Admin approval obtained (if org catalog submission)
+- [ ] App installed for beta testers
+- [ ] Beta testing period completed (recommended: 1-2 weeks)
+- [ ] Feedback collected and bugs fixed
+
+**Monitoring & Alerts** ✓/✗
+- [ ] Application Insights alerts configured (errors, performance)
+- [ ] Azure budget alerts set (~$100 threshold)
+- [ ] Bot analytics dashboard created
+- [ ] Usage metrics defined and tracked
+- [ ] On-call rotation established (if needed)
+
+### Phase 5: Post-Deployment Verification
+
+**Functionality Tests** ✓/✗
+- [ ] Message extension search returns results
+- [ ] Action extension saves insights to OneDrive
+- [ ] Quick commands trigger protocols
+- [ ] Meeting tabs load in meetings
+- [ ] Pre-meeting briefings generate correctly
+- [ ] Meeting notes save to OneDrive
+- [ ] Adaptive cards display correctly
+- [ ] Activity feed notifications deliver
+- [ ] Team workspace tabs create SharePoint folders
+- [ ] Real-time presence works via SignalR
+
+**Performance & Scale** ✓/✗
+- [ ] Response time < 2 seconds for searches
+- [ ] Response time < 1 second for quick commands
+- [ ] Meeting tab loads < 3 seconds
+- [ ] Notifications deliver within 1 minute of trigger
+- [ ] No throttling errors under normal load
+- [ ] Graph API rate limits respected
+- [ ] SignalR connections stable
+
+**Success Metrics (MVP - Phase 1)** ✓/✗
+- [ ] 60%+ of users try message extension within 2 weeks
+- [ ] 10+ insights saved per user per week
+- [ ] 5+ quick commands per user per week
+- [ ] User satisfaction ≥ 4.2/5 stars
+- [ ] Zero critical bugs reported
+
+**Success Metrics (Full Integration - Phase 3)** ✓/✗
+- [ ] 40%+ of meetings use Alex tab
+- [ ] 70%+ of users complete weekly review
+- [ ] 15%+ of channels add Alex workspace
+- [ ] 2+ hours saved per user per week (survey)
+- [ ] 80%+ retention at 30 days
+
+**Documentation & Training** ✓/✗
+- [ ] User guide published (how to use message extensions, meeting tabs)
+- [ ] Admin guide published (how to deploy, monitor, troubleshoot)
+- [ ] Video tutorial created (optional)
+- [ ] FAQ document created
+- [ ] Support channel established (Teams channel or email)
+
+**Rollout Plan** ✓/✗
+- [ ] Beta group identified (10-20 power users)
+- [ ] Beta feedback incorporated
+- [ ] Phased rollout plan created (10% → 50% → 100%)
+- [ ] Rollout communications sent
+- [ ] Full organization rollout completed
+
+---
+
 ## Executive Summary
 
 **Goal**: Transform Alex from a declarative agent accessed via Copilot to a **native Teams citizen** with deep integration across chat, meetings, channels, and collaboration surfaces.
@@ -1154,7 +1357,7 @@ API PERMISSIONS (Delegated - User Consent):
 ------------------------------------------
 Microsoft Graph:
 - Files.ReadWrite          → Access user's OneDrive memory files
-- Calendars.Read           → Read meeting details for briefings  
+- Calendars.Read           → Read meeting details for briefings
 - Mail.Read                → Search email history for context
 - User.Read                → Basic profile information
 
@@ -1225,7 +1428,7 @@ This would allow me to:
 ❌ Cannot manage other users' applications
 ❌ Cannot elevate my own privileges
 
-Alternative: If granting the role is not possible, I can submit individual 
+Alternative: If granting the role is not possible, I can submit individual
 requests for each app registration needed (see separate request email).
 
 Thanks,
@@ -1242,7 +1445,7 @@ Thanks,
 # 1. Resource Group
 az group create --name alex-teams-rg --location eastus
 
-# 2. Storage Account  
+# 2. Storage Account
 az storage account create \
   --name alexteamsstorage \
   --resource-group alex-teams-rg \
