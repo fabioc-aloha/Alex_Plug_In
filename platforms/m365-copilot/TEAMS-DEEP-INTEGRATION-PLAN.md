@@ -709,6 +709,409 @@ connection.on('PresenceUpdate', (data) => {
 
 ---
 
+## Pre-Deployment Policy & Permission Validation
+
+Before deploying Azure infrastructure, verify that your subscription and tenant policies allow the required resources and configurations.
+
+### Azure Subscription Permission Check
+
+**Required RBAC Roles:**
+
+```powershell
+# Check your current Azure subscription and roles
+az account show --query "{Subscription:name, TenantId:tenantId, User:user.name}" -o table
+
+# Check your role assignments
+az role assignment list --assignee $(az account show --query user.name -o tsv) --all -o table
+
+# Verify you have at least one of these roles:
+# ✅ Owner (full access)
+# ✅ Contributor (can create/manage resources, but not assign roles)
+# ⚠️  Reader (read-only - INSUFFICIENT for deployment)
+```
+
+**Minimum Required Permissions:**
+- Create resource groups
+- Create/configure Function Apps, Storage Accounts, Bot Service, SignalR, App Insights
+- Register Entra applications
+- Assign API permissions (or request admin consent)
+
+**Validation Command:**
+
+```powershell
+# Test if you can create a resource group (dry run)
+az group create --name test-permissions-check --location eastus --dry-run
+
+# If successful, you have sufficient subscription permissions
+# Clean up test (if it was created):
+# az group delete --name test-permissions-check --yes --no-wait
+```
+
+### Azure Policy Compliance Check
+
+**Check for Restrictive Policies:**
+
+```powershell
+# List all policies applied to your subscription
+az policy assignment list --query "[].{Name:name, Policy:displayName, Scope:scope}" -o table
+
+# Check for policies that might block deployment
+az policy assignment list --query "[?contains(displayName, 'Allowed locations')]" -o table
+az policy assignment list --query "[?contains(displayName, 'Allowed resource types')]" -o table
+az policy assignment list --query "[?contains(displayName, 'Require tag')]" -o table
+az policy assignment list --query "[?contains(displayName, 'SKU')]" -o table
+```
+
+**Common Blocking Policies:**
+
+| Policy Type                    | Impact                               | Mitigation                                       |
+| :----------------------------- | :----------------------------------- | :----------------------------------------------- |
+| **Allowed Locations Only**     | Can't deploy to East US              | Use allowed region (e.g., West Europe, West US)  |
+| **Allowed Resource Types**     | Can't create Function App or SignalR | Request exception or use allowed alternatives    |
+| **Required Tags**              | Deployment fails without tags        | Add tags to `az` commands: `--tags Env=Prod`     |
+| **Deny Public Network Access** | Can't expose Function App endpoint   | Use Private Endpoints or request exception       |
+| **SKU Restrictions**           | Can't use Consumption tier           | Use allowed SKU (e.g., Premium) - higher cost    |
+| **Naming Conventions**         | Resource names must match pattern    | Rename resources to match (e.g., `rg-alex-prod`) |
+
+**Validate Against Specific Policy:**
+
+```powershell
+# Simulate deployment to check policy compliance
+az deployment group what-if `
+  --resource-group alex-teams-rg `
+  --template-file azure-infrastructure-template.json `
+  --parameters botName=alex-teams-bot
+
+# Look for "Policy violation" errors in output
+```
+
+### Entra ID (Azure AD) Permission Check
+
+**Required Permissions for App Registration:**
+
+```powershell
+# Check if you can create Entra app registrations
+az ad app list --show-mine --query "length(@)" -o tsv
+
+# If 0 and you can't create apps, you need one of:
+# ✅ Application Administrator (tenant role)
+# ✅ Cloud Application Administrator
+# ✅ Global Administrator
+# ⚠️  User with "Users can register applications" enabled (tenant setting)
+```
+
+**Check Tenant Settings:**
+
+```powershell
+# Check if users can register applications (requires admin access to view)
+# Go to: Azure Portal > Entra ID > Users > User settings
+
+# Alternative: Try to create a test app registration
+az ad app create --display-name "permission-test-app" --query appId -o tsv
+
+# If successful, note the App ID and delete:
+# az ad app delete --id <app-id>
+```
+
+**Tenant Restrictions to Watch For:**
+
+| Restriction                         | Symptom                                       | Solution                                        |
+| :---------------------------------- | :-------------------------------------------- | :---------------------------------------------- |
+| **Users can't register apps**       | `az ad app create` fails                      | Request admin to create app or grant permission |
+| **Admin consent required for APIs** | Can't grant Graph API permissions             | Submit consent request to admin                 |
+| **Conditional Access Policies**     | Can't authenticate from certain locations/IPs | Ensure deployment machine/Azure complies        |
+| **MFA required for admin actions**  | Can't assign permissions without MFA          | Enable MFA on account                           |
+
+### Microsoft Graph API Permission Check
+
+**Required Graph Permissions:**
+
+```powershell
+# These permissions must be granted to the bot app registration:
+# Files.ReadWrite       - Access user's OneDrive memory
+# Calendars.Read        - Read meeting information
+# Mail.Read             - Search email history with attendees
+# User.Read             - Basic user profile
+# TeamsAppInstallation.ReadWriteForUser - Install Alex in user scope (optional)
+```
+
+**Permission Grant Check:**
+
+1. **Application requires admin consent?**
+   - **Delegated permissions** (Files.ReadWrite, Calendars.Read): User can consent
+   - **Application permissions** (if used): Requires admin consent
+
+2. **Tenant blocks user consent?**
+   ```powershell
+   # Check in Azure Portal:
+   # Entra ID > Enterprise applications > Consent and permissions > User consent settings
+   #
+   # If "Do not allow user consent" is selected:
+   #   → Must request admin consent for ALL permissions
+   ```
+
+**Pre-approval Strategy:**
+
+```powershell
+# Option 1: Request admin pre-approval
+# Send this to your IT admin:
+
+Write-Host @"
+I need to register a Teams bot application with these Graph API permissions:
+
+Delegated Permissions (user consent):
+- Files.ReadWrite         : Access user's OneDrive for memory storage
+- Calendars.Read          : Read meeting details for briefings
+- Mail.Read               : Search email history for context
+- User.Read               : Basic profile information
+
+Application requires:
+- Multi-tenant support (works across organizations)
+- Bot Framework registration (for Teams integration)
+
+Please approve or create app registration with ID: <app-id-here>
+"@
+
+# Option 2: Use restricted app (fewer permissions)
+# Start with User.Read only, add others after approval
+```
+
+### Teams Admin Center Validation
+
+**Check Teams App Policy:**
+
+```powershell
+# Check if custom app uploads are allowed in your tenant
+# Teams Admin Center > Teams apps > Setup policies
+
+# Required setting:
+# ✅ "Upload custom apps" = ON (for your users or specific policy)
+
+# If blocked, you'll see this error when uploading:
+# "Your organization's settings don't allow custom app uploads"
+```
+
+**Teams App Approval Workflow:**
+
+| Scenario                           | Can Upload Custom Apps? | Action Required                                |
+| :--------------------------------- | :---------------------- | :--------------------------------------------- |
+| **Personal tenant (M365 Dev)**     | ✅ Yes (default)         | None - just upload                             |
+| **Enterprise tenant (IT managed)** | ❌ Often blocked         | Submit app to org app catalog (admin approval) |
+| **Sandbox environment**            | ✅ Usually allowed       | Upload to test workspace                       |
+
+**Check Org App Catalog:**
+
+```powershell
+# If custom uploads are blocked, you must submit to org catalog:
+# Teams Admin Center > Teams apps > Manage apps > Submit to org catalog
+
+# Required info:
+# - App manifest.json
+# - App description & screenshots
+# - Privacy policy URL
+# - Terms of use URL
+# - Support contact
+
+# Approval time: 1-5 business days (varies by org)
+```
+
+### Bot Framework Service Terms Check
+
+**Accept Bot Framework Terms:**
+
+```powershell
+# First-time Bot Service deployment requires accepting terms
+# This happens automatically during first `az bot create`
+
+# If auto-accept fails, manually accept:
+# Azure Portal > Marketplace > Search "Bot Service" > Create
+# (This shows terms-of-service prompt)
+```
+
+### Pre-Deployment Checklist
+
+Run this validation script before deployment:
+
+```powershell
+Write-Host "🔍 Alex Teams Integration - Pre-Deployment Validation" -ForegroundColor Cyan
+Write-Host ""
+
+# 1. Azure CLI installed and logged in
+Write-Host "1. Checking Azure CLI..." -NoNewline
+try {
+    $azVersion = az version --query '\"azure-cli\"' -o tsv
+    Write-Host " ✅ v$azVersion" -ForegroundColor Green
+
+    $account = az account show --query name -o tsv
+    Write-Host "   Logged in to: $account" -ForegroundColor Gray
+} catch {
+    Write-Host " ❌ Not installed or not logged in" -ForegroundColor Red
+    Write-Host "   Run: az login" -ForegroundColor Yellow
+}
+
+# 2. Sufficient RBAC permissions
+Write-Host "2. Checking Azure permissions..." -NoNewline
+$roles = az role assignment list --assignee $(az account show --query user.name -o tsv) --query "[].roleDefinitionName" -o tsv
+if ($roles -match "Owner|Contributor") {
+    Write-Host " ✅ $($roles -join ', ')" -ForegroundColor Green
+} else {
+    Write-Host " ⚠️  Limited permissions: $($roles -join ', ')" -ForegroundColor Yellow
+    Write-Host "   You may need Owner or Contributor role" -ForegroundColor Yellow
+}
+
+# 3. Check for blocking policies
+Write-Host "3. Checking Azure Policies..." -NoNewline
+$policies = az policy assignment list --query "length(@)" -o tsv
+if ($policies -eq 0) {
+    Write-Host " ✅ No policies detected" -ForegroundColor Green
+} else {
+    Write-Host " ⚠️  $policies policies found - review for restrictions" -ForegroundColor Yellow
+    Write-Host "   Run: az policy assignment list -o table" -ForegroundColor Gray
+}
+
+# 4. Entra app registration permissions
+Write-Host "4. Checking Entra ID permissions..." -NoNewline
+try {
+    $testApp = az ad app create --display-name "test-permissions-$(Get-Random)" --query appId -o tsv 2>$null
+    if ($testApp) {
+        az ad app delete --id $testApp 2>$null
+        Write-Host " ✅ Can create app registrations" -ForegroundColor Green
+    }
+} catch {
+    Write-Host " ❌ Cannot create app registrations" -ForegroundColor Red
+    Write-Host "   Request 'Application Administrator' role from admin" -ForegroundColor Yellow
+}
+
+# 5. Required resource providers registered
+Write-Host "5. Checking resource providers..." -NoNewline
+$providers = @("Microsoft.Web", "Microsoft.BotService", "Microsoft.SignalRService", "Microsoft.Insights")
+$unregistered = @()
+foreach ($provider in $providers) {
+    $state = az provider show --namespace $provider --query registrationState -o tsv 2>$null
+    if ($state -ne "Registered") {
+        $unregistered += $provider
+    }
+}
+if ($unregistered.Count -eq 0) {
+    Write-Host " ✅ All required providers registered" -ForegroundColor Green
+} else {
+    Write-Host " ⚠️  Need to register: $($unregistered -join ', ')" -ForegroundColor Yellow
+    Write-Host "   Run: az provider register --namespace $($unregistered[0])" -ForegroundColor Gray
+}
+
+# 6. Teams Toolkit CLI
+Write-Host "6. Checking Teams Toolkit..." -NoNewline
+try {
+    $teamsapp = teamsapp --version 2>$null
+    if ($teamsapp) {
+        Write-Host " ✅ Installed" -ForegroundColor Green
+    } else {
+        Write-Host " ❌ Not found" -ForegroundColor Red
+        Write-Host "   Run: npm install -g @microsoft/teamsapp-cli" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host " ❌ Not found" -ForegroundColor Red
+    Write-Host "   Run: npm install -g @microsoft/teamsapp-cli" -ForegroundColor Yellow
+}
+
+# 7. Deployment region availability
+Write-Host "7. Checking region availability..." -NoNewline
+$location = "eastus"
+$available = az account list-locations --query "[?name=='$location'].displayName" -o tsv
+if ($available) {
+    Write-Host " ✅ East US available" -ForegroundColor Green
+} else {
+    Write-Host " ⚠️  East US not available, choose alternate region" -ForegroundColor Yellow
+}
+
+Write-Host ""
+Write-Host "📋 Summary:" -ForegroundColor Cyan
+Write-Host "   If all items show ✅ → Ready to deploy"
+Write-Host "   If any show ❌ → Fix before deployment"
+Write-Host "   If any show ⚠️  → Investigate potential issues"
+Write-Host ""
+Write-Host "💡 Next Step: Review deployment script in TEAMS-DEEP-INTEGRATION-PLAN.md"
+```
+
+**Expected Output (Ready to Deploy):**
+
+```
+🔍 Alex Teams Integration - Pre-Deployment Validation
+
+1. Checking Azure CLI... ✅ v2.57.0
+   Logged in to: My Azure Subscription
+2. Checking Azure permissions... ✅ Owner, Contributor
+3. Checking Azure Policies... ✅ No policies detected
+4. Checking Entra ID permissions... ✅ Can create app registrations
+5. Checking resource providers... ✅ All required providers registered
+6. Checking Teams Toolkit... ✅ Installed
+7. Checking region availability... ✅ East US available
+
+📋 Summary:
+   If all items show ✅ → Ready to deploy
+```
+
+### Common Blockers & Solutions
+
+| Blocker                              | Symptom                                         | Solution                                          |
+| :----------------------------------- | :---------------------------------------------- | :------------------------------------------------ |
+| **Insufficient Azure permissions**   | `az group create` fails with 403                | Request Contributor or Owner role on subscription |
+| **Can't register Entra apps**        | `az ad app create` fails                        | Request Application Administrator role            |
+| **Policy blocks resource types**     | Deployment fails with policy violation          | Request policy exemption or use allowed SKU       |
+| **Region restrictions**              | Can't deploy to East US                         | Use allowed region (e.g., `--location westus`)    |
+| **Teams custom apps blocked**        | Can't upload app in Teams                       | Submit to org app catalog for admin approval      |
+| **Graph API consent blocked**        | Can't grant permissions                         | Request admin consent via IT support ticket       |
+| **Resource provider not registered** | Deployment fails with "provider not registered" | Run `az provider register --namespace <provider>` |
+| **Naming restrictions**              | Resource name rejected                          | Follow org naming convention (e.g., `rg-*-prod`)  |
+| **Budget/cost limits**               | Deployment blocked by cost management           | Request budget increase or use free tiers only    |
+
+### Escalation Path
+
+If validation fails, escalate to:
+
+1. **Azure Subscription Owner** → Request Contributor role or policy exemption
+2. **Entra (Azure AD) Administrator** → Request app registration permissions, Graph API consent
+3. **Teams Administrator** → Request custom app upload permission or org catalog submission
+4. **IT Security/Compliance** → Justify business need, review architecture for security approval
+
+**Escalation Email Template:**
+
+```
+Subject: Teams Integration Deployment - Permissions Request
+
+Hi [Admin Team],
+
+I'm deploying an AI-powered Teams bot (Alex Cognitive Architecture) that requires:
+
+Azure Resources (all free/low-cost tiers):
+- Azure Bot Service (F0 - FREE)
+- Function App (Consumption - ~$1-20/month)
+- SignalR Service (Free tier)
+- Storage Account (~$1/month)
+- Application Insights (Free 5GB)
+
+Permissions Needed:
+1. Azure: Contributor role on subscription [subscription-name]
+2. Entra ID: Application Administrator role (to register bot app)
+3. Graph API: User consent for Files.ReadWrite, Calendars.Read, Mail.Read
+4. Teams: Custom app upload permission (or org catalog submission)
+
+Business Justification:
+- Reduces knowledge work overhead by 2+ hours/week per user
+- OneDrive-based memory (tenant data stays in tenant)
+- Enhances meeting preparation and follow-up
+- ROI: ~$100+/user/week in saved time
+
+Architecture diagram and security details: [link to this plan]
+
+Can we schedule a call to review?
+
+Thanks,
+[Your Name]
+```
+
+---
+
 ## Azure Infrastructure Deployment
 
 ### Complete Resource Architecture
@@ -781,16 +1184,16 @@ connection.on('PresenceUpdate', (data) => {
 
 ### Required Azure Resources
 
-| Resource                    | Name                   | SKU/Tier       | Purpose                                      | Dependencies                |
-| :-------------------------- | :--------------------- | :------------- | :------------------------------------------- | :-------------------------- |
-| **Resource Group**          | alex-teams-rg          | N/A            | Container for all resources                  | None                        |
-| **Entra App Registration**  | alex-teams-bot         | N/A            | Bot identity, Graph API permissions          | None                        |
-| **Azure Bot Service**       | alex-teams-bot         | F0 (Free)      | Bot Framework registration                   | Entra App                   |
-| **Function App**            | alex-teams-functions   | Consumption Y1 | Bot webhook, message extensions, timers      | Storage Account             |
-| **Storage Account**         | alexteamsstorage       | Standard LRS   | Function app state, blob storage             | None                        |
-| **SignalR Service**         | alex-teams-signalr     | Free           | Real-time presence, live notifications       | None                        |
-| **Application Insights**    | alex-teams-insights    | Free (5GB)     | Logging, monitoring, telemetry               | None                        |
-| **Teams App Registration**  | Alex (Teams manifest)  | N/A            | Teams platform integration                   | Bot Service, Entra App      |
+| Resource                   | Name                  | SKU/Tier       | Purpose                                 | Dependencies           |
+| :------------------------- | :-------------------- | :------------- | :-------------------------------------- | :--------------------- |
+| **Resource Group**         | alex-teams-rg         | N/A            | Container for all resources             | None                   |
+| **Entra App Registration** | alex-teams-bot        | N/A            | Bot identity, Graph API permissions     | None                   |
+| **Azure Bot Service**      | alex-teams-bot        | F0 (Free)      | Bot Framework registration              | Entra App              |
+| **Function App**           | alex-teams-functions  | Consumption Y1 | Bot webhook, message extensions, timers | Storage Account        |
+| **Storage Account**        | alexteamsstorage      | Standard LRS   | Function app state, blob storage        | None                   |
+| **SignalR Service**        | alex-teams-signalr    | Free           | Real-time presence, live notifications  | None                   |
+| **Application Insights**   | alex-teams-insights   | Free (5GB)     | Logging, monitoring, telemetry          | None                   |
+| **Teams App Registration** | Alex (Teams manifest) | N/A            | Teams platform integration              | Bot Service, Entra App |
 
 ### Step-by-Step Deployment Script
 
