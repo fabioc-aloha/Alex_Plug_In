@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.7.6-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-5.9.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -10,7 +10,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**✨ NEW in v5.7.6**: Alex now runs in **Word, Excel, PowerPoint, and Outlook** via the unified manifest!
+**✨ NEW in v5.9.0**: Office-specific features complete! Custom Excel formulas, Word templates, PowerPoint slide generation, Outlook email drafting, full chat interface, and collaboration awareness!
 
 ---
 
@@ -156,20 +156,46 @@ m365-copilot/
 
 ## Getting Started
 
-### 1. Package the Agent
+### Quick Start: Agent Builder UI 🆕
+
+**NEW**: Deploy Alex using M365 Copilot's native Agent Builder (no coding required!)
+
+1. Navigate to https://m365.cloud.microsoft/chat
+2. Click **Create agent** → **Configure** tab
+3. **Upload knowledge files** (drag-drop from `appPackage/knowledge/`):
+   - `skill-quick-reference.md` - 100+ cognitive skills
+   - `cognitive-architecture.md` - How Alex works
+   - `alex-protocols.md` - Meditation, dream protocols
+   - `help-commands.md` - Command reference
+4. **Copy instructions** from `appPackage/declarativeAgent.json`
+5. **Configure capabilities**: Enable OneDrive, Email, Teams, People, Meetings
+6. **Add conversation starters** from declarativeAgent.json
+7. **Publish** to your organization
+
+**Benefits**: Visual interface, embedded file management, real-time file readiness indicators
+
+📘 **Full Guide**: [AGENT-BUILDER-GUIDE.md](./AGENT-BUILDER-GUIDE.md) - Scoped connectors, sensitivity labels, advanced features
+
+---
+
+### Advanced: Code-First Deployment (M365 Agents Toolkit)
+
+For developers who need API plugins, version control, and full manifest control:
+
+#### 1. Package the Agent
 
 ```bash
 npm install
 npx teamsapp package --env dev
 ```
 
-### 2. Validate the Package
+#### 2. Validate the Package
 
 ```bash
 npx teamsapp validate --package-file appPackage/build/appPackage.dev.zip
 ```
 
-### 3. Deploy to M365
+#### 3. Deploy to M365
 
 ```bash
 npx teamsapp provision --env dev
@@ -180,7 +206,7 @@ Or sideload manually:
 1. Open Teams → Apps → Manage your apps
 2. Upload a custom app → Select `appPackage.dev.zip`
 
-### 4. Set Up OneDrive Memory
+#### 4. Set Up OneDrive Memory
 
 1. Create folder in OneDrive root: **Alex-Memory**
 2. Create files: `profile.md`, `notes.md`
@@ -402,11 +428,13 @@ Deploy Alex as a Q&A agent in your Teams Community. Community Agents are grounde
 
 ## 📚 Documentation
 
-| Document                                               | Description                       |
-| ------------------------------------------------------ | --------------------------------- |
-| [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md)      | Step-by-step deployment guide     |
-| [Schema Compatibility](./docs/SCHEMA-COMPATIBILITY.md) | v1.2 vs v1.5 vs v1.6 capabilities |
-| [Manifest Reference](./docs/MANIFEST-REFERENCE.md)     | M365 app manifest documentation   |
+| Document                                                             | Description                                           |
+| -------------------------------------------------------------------- | ----------------------------------------------------- |
+| [🆕 Agent Builder Enhancement Guide](./AGENT-BUILDER-GUIDE.md)        | Leverage M365 Copilot Agent Builder UI (drag-drop!)   |
+| [Deployment Checklist](./DEPLOYMENT-CHECKLIST.md)                    | Step-by-step deployment guide                         |
+| [Declarative Agent Reference](./docs/DECLARATIVE-AGENT-REFERENCE.md) | Complete reference for declarativeAgent.json settings |
+| [Schema Compatibility](./docs/SCHEMA-COMPATIBILITY.md)               | v1.2 vs v1.5 vs v1.6 capabilities                     |
+| [Manifest Reference](./docs/MANIFEST-REFERENCE.md)                   | M365 app manifest documentation                       |
 
 ## 🔗 Related
 

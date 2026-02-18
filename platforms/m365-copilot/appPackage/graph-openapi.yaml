@@ -1,0 +1,527 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph API for Alex
+  description: |
+    Microsoft Graph API endpoints for Alex M365 Copilot integration.
+    Provides access to Calendar, Mail, Presence, and People APIs
+    using delegated permissions via M365 SSO.
+  version: 1.0.0
+  contact:
+    name: Alex Cognitive Architecture
+    url: https://github.com/fabioc-aloha/Alex_Plug_In
+
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph API v1.0
+
+paths:
+  /me/calendarView:
+    get:
+      operationId: getCalendarView
+      summary: Get calendar events in date range
+      description: |
+        Retrieves calendar events for the authenticated user within a 
+        specified time window. Returns events with details including 
+        subject, start/end times, location, attendees, and meeting links.
+      parameters:
+        - name: startDateTime
+          in: query
+          required: true
+          description: Start of the calendar view (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+            example: "2026-02-18T00:00:00Z"
+        - name: endDateTime
+          in: query
+          required: true
+          description: End of the calendar view (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+            example: "2026-02-18T23:59:59Z"
+        - name: $top
+          in: query
+          required: false
+          description: Number of events to return
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+        - name: $select
+          in: query
+          required: false
+          description: Properties to include
+          schema:
+            type: string
+            example: "subject,start,end,location,organizer,attendees,webLink,onlineMeeting"
+        - name: $orderby
+          in: query
+          required: false
+          description: Sort order
+          schema:
+            type: string
+            default: "start/dateTime"
+      responses:
+        '200':
+          description: Calendar events retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+      security:
+        - oauth2: [Calendars.Read]
+
+  /me/events/{eventId}:
+    get:
+      operationId: getEvent
+      summary: Get detailed event information
+      description: |
+        Retrieves comprehensive details about a specific calendar event,
+        including attendees, attachments, body content, and response tracking.
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          description: The event ID
+          schema:
+            type: string
+        - name: $expand
+          in: query
+          required: false
+          description: Expand related entities (e.g., attachments)
+          schema:
+            type: string
+            example: "attachments"
+      responses:
+        '200':
+          description: Event details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      security:
+        - oauth2: [Calendars.Read]
+
+  /me/messages:
+    get:
+      operationId: getMessages
+      summary: Get recent email messages
+      description: |
+        Retrieves email messages from the user's inbox. Can filter by
+        read/unread status, importance, and other criteria.
+      parameters:
+        - name: $top
+          in: query
+          required: false
+          description: Number of messages to return
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+        - name: $filter
+          in: query
+          required: false
+          description: Filter criteria (e.g., isRead eq false)
+          schema:
+            type: string
+            example: "isRead eq false"
+        - name: $select
+          in: query
+          required: false
+          description: Properties to include
+          schema:
+            type: string
+            example: "subject,from,receivedDateTime,bodyPreview,importance,isRead,webLink"
+        - name: $orderby
+          in: query
+          required: false
+          description: Sort order
+          schema:
+            type: string
+            default: "receivedDateTime desc"
+      responses:
+        '200':
+          description: Messages retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+      security:
+        - oauth2: [Mail.Read]
+
+  /me/mailFolders/inbox/messages/$count:
+    get:
+      operationId: getUnreadCount
+      summary: Get unread email count
+      description: |
+        Returns the count of unread messages in the user's inbox.
+        Useful for dashboard widgets and notifications.
+      parameters:
+        - name: $filter
+          in: query
+          required: false
+          description: Filter to unread messages
+          schema:
+            type: string
+            default: "isRead eq false"
+      responses:
+        '200':
+          description: Count retrieved successfully
+          content:
+            text/plain:
+              schema:
+                type: integer
+                example: 12
+      security:
+        - oauth2: [Mail.Read]
+
+  /me/presence:
+    get:
+      operationId: getPresence
+      summary: Get user's presence status
+      description: |
+        Retrieves the authenticated user's current presence information
+        including availability (Available, Busy, Away, etc.) and activity
+        (InACall, InAMeeting, OutOfOffice, etc.).
+      responses:
+        '200':
+          description: Presence retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Presence'
+      security:
+        - oauth2: [Presence.Read]
+
+  /me/people:
+    get:
+      operationId: getPeople
+      summary: Search for people
+      description: |
+        Search for people relevant to the user, including colleagues,
+        contacts, and frequently contacted individuals. Returns people
+        ranked by relevance to the search query.
+      parameters:
+        - name: $search
+          in: query
+          required: false
+          description: Search query for people
+          schema:
+            type: string
+            example: "John"
+        - name: $top
+          in: query
+          required: false
+          description: Number of people to return
+          schema:
+            type: integer
+            default: 10
+            maximum: 50
+        - name: $select
+          in: query
+          required: false
+          description: Properties to include
+          schema:
+            type: string
+            example: "displayName,jobTitle,department,emailAddresses,phones"
+      responses:
+        '200':
+          description: People retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person'
+      security:
+        - oauth2: [People.Read]
+
+  /me:
+    get:
+      operationId: getUserProfile
+      summary: Get user profile
+      description: |
+        Retrieves the authenticated user's profile information including
+        display name, email, job title, department, office location, and manager.
+      parameters:
+        - name: $select
+          in: query
+          required: false
+          description: Properties to include
+          schema:
+            type: string
+            example: "displayName,mail,jobTitle,department,officeLocation,mobilePhone"
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - oauth2: [User.Read]
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Calendars.Read: Read user's calendar
+            Mail.Read: Read user's mail
+            Presence.Read: Read user's presence
+            People.Read: Read user's relevant people
+            User.Read: Read user's profile
+
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Event ID
+        subject:
+          type: string
+          description: Event title
+        bodyPreview:
+          type: string
+          description: Preview of event body
+        start:
+          $ref: '#/components/schemas/DateTimeTimeZone'
+        end:
+          $ref: '#/components/schemas/DateTimeTimeZone'
+        location:
+          $ref: '#/components/schemas/Location'
+        organizer:
+          $ref: '#/components/schemas/Recipient'
+        attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendee'
+        webLink:
+          type: string
+          description: Web link to open event
+        onlineMeeting:
+          $ref: '#/components/schemas/OnlineMeetingInfo'
+        isAllDay:
+          type: boolean
+        responseStatus:
+          $ref: '#/components/schemas/ResponseStatus'
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Message ID
+        subject:
+          type: string
+          description: Email subject
+        bodyPreview:
+          type: string
+          description: Preview of message body
+        from:
+          $ref: '#/components/schemas/Recipient'
+        toRecipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        receivedDateTime:
+          type: string
+          format: date-time
+          description: When message was received
+        importance:
+          type: string
+          enum: [low, normal, high]
+        isRead:
+          type: boolean
+        webLink:
+          type: string
+          description: Web link to open message
+
+    Presence:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+        availability:
+          type: string
+          description: Availability status
+          enum:
+            - Available
+            - AvailableIdle
+            - Away
+            - BeRightBack
+            - Busy
+            - BusyIdle
+            - DoNotDisturb
+            - Offline
+            - PresenceUnknown
+        activity:
+          type: string
+          description: Current activity
+          enum:
+            - Available
+            - Away
+            - BeRightBack
+            - Busy
+            - DoNotDisturb
+            - InACall
+            - InAConferenceCall
+            - Inactive
+            - InAMeeting
+            - Offline
+            - OffWork
+            - OutOfOffice
+            - PresenceUnknown
+            - Presenting
+            - UrgentInterruptionsOnly
+
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Person ID
+        displayName:
+          type: string
+          description: Display name
+        jobTitle:
+          type: string
+          description: Job title
+        department:
+          type: string
+          description: Department
+        emailAddresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/RankedEmailAddress'
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+        displayName:
+          type: string
+          description: Display name
+        mail:
+          type: string
+          description: Email address
+        userPrincipalName:
+          type: string
+          description: User principal name
+        jobTitle:
+          type: string
+          description: Job title
+        department:
+          type: string
+          description: Department
+        officeLocation:
+          type: string
+          description: Office location
+        mobilePhone:
+          type: string
+          description: Mobile phone
+
+    DateTimeTimeZone:
+      type: object
+      properties:
+        dateTime:
+          type: string
+          format: date-time
+        timeZone:
+          type: string
+
+    Location:
+      type: object
+      properties:
+        displayName:
+          type: string
+        locationUri:
+          type: string
+
+    Recipient:
+      type: object
+      properties:
+        emailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+
+    EmailAddress:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+
+    Attendee:
+      type: object
+      properties:
+        emailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        type:
+          type: string
+          enum: [required, optional, resource]
+
+    ResponseStatus:
+      type: object
+      properties:
+        response:
+          type: string
+          enum: [none, organizer, tentativelyAccepted, accepted, declined, notResponded]
+        time:
+          type: string
+          format: date-time
+
+    OnlineMeetingInfo:
+      type: object
+      properties:
+        joinUrl:
+          type: string
+          description: Teams meeting join URL
+        conferenceId:
+          type: string
+        tollNumber:
+          type: string
+
+    RankedEmailAddress:
+      type: object
+      properties:
+        address:
+          type: string
+        rank:
+          type: number
+
+    Phone:
+      type: object
+      properties:
+        type:
+          type: string
+        number:
+          type: string

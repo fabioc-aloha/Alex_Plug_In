@@ -90,143 +90,23 @@ A version is **done** when ALL of the following are true:
 
 > **Principle**: Ship what works. Remove what doesn't. Document what changed.
 
-### v5.7.5 — Skill Intelligence (PLANNED)
+### v5.7.5 — Skill Intelligence ✅ **SHIPPED (2026-02-15)**
 
 **Theme**: Make skills discoverable and contextually relevant — suggest the right capability at the right moment.
 
-**Paradigm**: Context-aware guidance — Alex proactively offers help based on what you're doing.
-
-**Prerequisite**: v5.7.2 shipped with Global Knowledge infrastructure stable.
+**Status**: Shipped with skill mappings, recommendation engine, and UI/UX trifecta. Details in Appendix.
 
 **Tagline**: The right skill, right when you need it.
 
-| Task                        | Owner | Effort | Priority | Status | Description                                                                     |
-| --------------------------- | :---: | :----: | :------: | :----: | ------------------------------------------------------------------------------- |
-| Skill-to-technology mapping | Heir  |   1h   |    P0    |   ✅    | Map detected technologies to relevant skills (react → testing-strategies, etc.) |
-| Recommendation engine       | Heir  |   2h   |    P0    |   ✅    | Suggest skills based on file type, workspace context, and behavioral patterns   |
-| Welcome View integration    | Heir  |   1h   |    P1    |   ✅    | Display recommended skills in dashboard with one-click activation               |
-| Context-aware skill loading | Heir  |   2h   |    P1    |   ✅    | Auto-prioritize relevant skills in context based on workspace/file type         |
-| User preference tracking    | Heir  |  30m   |    P2    |   ✅    | Remember which suggestions user accepts/dismisses to improve recommendations    |
-
-**Milestone**: Users discover relevant skills without remembering all 120.
-
-**Effort**: ~6.5h | **Impact**: Proactive intelligence — Alex feels smarter and more helpful.
-
-**Target**: Q1 2026
-
 ---
 
-### v5.7.6 — Office Add-in Platform Research (✅ COMPLETE)
-
-**Theme**: Explore feasibility of deploying Alex cognitive architecture to Microsoft Office (Word/Excel/PowerPoint) as an add-in.
-
-**Paradigm**: Platform exploration — research technical constraints, evaluate heir platform potential.
-
-**Prerequisite**: v5.7.5 shipped with skill intelligence stable.
-
-**Tagline**: One cognitive architecture, multiple platforms.
-
-**Decision**: **Integrate into M365 heir** via unified manifest (ADR-011)
-
-| Task                           | Owner | Effort | Priority | Status | Description                                                                |
-| ------------------------------ | :---: | :----: | :------: | :----: | -------------------------------------------------------------------------- |
-| Office Add-in architecture doc | Alex  |   2h   |    P1    |   ✅    | Document Office.js API, manifest formats, deployment models, task pane UX  |
-| Feasibility assessment         | Alex  |   1h   |    P1    |   ✅    | Evaluate technical gaps: context injection, skill activation, persona flow |
-| Unified manifest research      | Alex  |  30m   |    P2    |   ✅    | Research Office + Teams unified manifest for cross-platform deployment     |
-| Heir platform decision         | Alex  |  30m   |    P2    |   ✅    | Decide: worthy heir platform vs. outside scope (document decision in ADR)  |
-
-**Milestone**: ✅ **Decision: Office Add-ins integrate into M365 heir** — 90% shared infrastructure (unified manifest, OneDrive memory, Entra ID, deployment), natural workflow continuity (Teams chat → Office creation), complementary surfaces (conversational + document creation).
-
-**Effort**: ~4h | **Impact**: Strategic clarity — Office Add-ins become additional M365 heir surface alongside Teams/M365 Copilot.
-
-**Completed**: 2026-02-15
-
-**Deliverables**:
-- [OFFICE-ADDINS-RESEARCH.md](alex_docs/platforms/OFFICE-ADDINS-RESEARCH.md) — Full platform analysis
-- [ADR-011](alex_docs/decisions/ADR-011-office-addins-m365-integration.md) — Architectural decision record
-
-**Next Steps**: Implementation added to backlog (see v5.x Backlog — Office Add-in Implementation)
-
----
-
-### v5.7.7 — Propose-to-Global Workflow ✅ **SHIPPED (2026-02-15)**
-
-**Theme**: Lightweight workflow for heirs to contribute skills back to Global Knowledge without full promotion ceremony.
-
-**Paradigm**: Knowledge contribution — reduce friction for sharing reusable patterns.
-
-**Prerequisite**: v5.7.6 shipped with Office Add-in research complete.
-
-**Tagline**: Share knowledge without ceremony.
-
-| Task                           | Owner | Effort | Priority | Status | Description                                                                  |
-| ------------------------------ | :---: | :----: | :------: | :----: | ---------------------------------------------------------------------------- |
-| Propose command implementation | Heir  |   2h   |    P1    |   ✅    | `Alex: Propose Skill to Global Knowledge` — packages skill for GK submission |
-| YAML v2 frontmatter injection  | Heir  |   1h   |    P1    |   ✅    | Auto-add `gk*` metadata fields when proposing (no manual editing)            |
-| GitHub PR workflow             | Heir  |  30m   |    P2    |   ✅    | Generate PR description with skill summary, source project, usage examples   |
-| Validation checks              | Heir  |   1h   |    P2    |   ✅    | Pre-propose validation: name conflicts, format compliance, completeness      |
-
-**Deliverables**:
-- `platforms/vscode-extension/src/commands/proposeSkill.ts` — Command implementation (650+ lines)
-- `platforms/vscode-extension/package.json` — Command registration
-- `platforms/vscode-extension/CHANGELOG.md` — v5.7.7 release notes
-
-**Milestone**: Heirs can contribute skills to Global Knowledge in <5 minutes. ✅
-
-**Effort**: ~4.5h | **Impact**: Democratizes knowledge sharing — reduces 30min manual process to 1-click.
-
-**Target**: Q1 2026 ✅
-
----
-
-### v5.8.x — @alex Enhanced Mode ⭐ (PLANNED)
+### v5.8.x — @alex Enhanced Mode ⭐ ✅ **SHIPPED (2026-02-16)**
 
 **Theme**: Transform the @alex chat participant from a 2-message passthrough into a 10-layer cognitive prompt engine — purpose-built, efficient, and uniquely Alex.
 
-**Paradigm**: Purpose-built cognition — every token is intentional, every layer serves Alex's identity.
-
-**Prerequisite**: v5.7.x ships with Visual Identity + UI/UX stable.
-
-**Reference**: [ALEX-PARTICIPANT-ENHANCEMENT-PLAN.md](alex_docs/features/ALEX-PARTICIPANT-ENHANCEMENT-PLAN.md)
+**Status**: All phases (P0, P1, P2) shipped. Details in Appendix.
 
 **Tagline**: Agent mode is your **workshop**. @alex is your **mentor**.
-
-#### v5.8.0 — P0: Critical Path (ship first) ✅ **SHIPPED (2026-02-16)**
-
-| Task                       | Owner | Effort | Priority | Status | Description                                             |
-| -------------------------- | :---: | :----: | :------: | :----: | ------------------------------------------------------- |
-| Prompt Engine module       | Heir  |   4h   |    P0    |   ✅    | New `promptEngine.ts` — modular 10-layer prompt builder |
-| Brain injection (Identity) | Heir  |   2h   |    P0    |   ✅    | Read copilot-instructions.md → inject Identity + Safety |
-| Active Context injection   | Heir  |   1h   |    P0    |   ✅    | ActiveContextManager → persona, objective, focus areas  |
-| Conversation history       | Heir  |   2h   |    P0    |   ✅    | Include last 4 exchanges from `context.history`         |
-
-**Milestone**: ✅ @alex that knows who it is and remembers the conversation.
-
-#### v5.8.1 — P1: High Value ✅ **SHIPPED (2026-02-16)**
-
-| Task                         | Owner | Effort | Priority | Status | Description                                               |
-| ---------------------------- | :---: | :----: | :------: | :----: | --------------------------------------------------------- |
-| Tool calling in @alex        | Heir  |   4h   |    P1    |   ✅    | Pass 7-12 Alex tools via `sendRequest` options            |
-| Tool result loop             | Heir  |   3h   |    P1    |   ✅    | Handle `LanguageModelToolCallPart` + feed results back    |
-| File context from references | Heir  |   2h   |    P1    |   ✅    | Extract `request.references` + active editor selection    |
-| Model-adaptive behavior      | Heir  |   2h   |    P1    |   ✅    | Replace hardcoded `gpt-4o` with tier-aware selection      |
-| Model-adaptive prompt rules  | Heir  |   1h   |    P1    |   ✅    | Frontier=deep reasoning, Capable=balanced, Efficient=fast |
-
-**Milestone**: ✅ @alex can invoke tools, see files, and adapt to model tier.
-
-#### v5.8.2 — P2: Personality Polish ✅ **SHIPPED (2026-02-16)**
-
-| Task                         | Owner | Effort | Priority | Status | Description                                              |
-| ---------------------------- | :---: | :----: | :------: | :----: | -------------------------------------------------------- |
-| Pre-seeded knowledge context | Heir  |   4h   |    P2    |   ✅    | Auto-search memory for user's query terms before sending |
-| Persona-driven prompt        | Heir  |   2h   |    P2    |   ✅    | Inject persona-specific tone, skills, banner noun        |
-| Confidence signaling         | Heir  |   1h   |    P2    |   ✅    | Response guidelines: high/medium/low/outside confidence  |
-| User profile layer           | Heir  |   1h   |    P2    |   ✅    | Inject personalization from user-profile.json (v5.8.0)   |
-| Focus session layer          | Heir  |   1h   |    P2    |   ✅    | Inject Pomodoro timer, goals, streaks (v5.8.0)           |
-
-**Milestone**: ✅ @alex adapts per persona, pre-loads knowledge, signals confidence.
-
-**Target**: ✅ Q2 2026 (Shipped 2026-02-16)
 
 ---
 
@@ -369,14 +249,117 @@ A version is **done** when ALL of the following are true:
 
 Items to pull from when capacity frees up:
 
-| Task                          | Owner  | Effort | Priority | Description                                                                                                      |
-| ----------------------------- | :----: | :----: | :------: | ---------------------------------------------------------------------------------------------------------------- |
-| Microsoft Graph Integration   |  Heir  |   1w   |   High   | Calendar, Mail, Presence, People — removed v5.7.1 (non-functional). Re-implement when auth flow works end-to-end |
-| Foundry Voice Alex (Realtime) |  Heir  |   1w   |  Medium  | Speech-to-speech via Realtime API WebSocket                                                                      |
-| Hosted Agent Container Deploy |  Heir  |   3d   |  Medium  | Containerized Alex on managed infrastructure                                                                     |
-| Foundry → M365 Backend Unify  |  Heir  |   1w   |  Medium  | M365 heir routes through Foundry Agent Service                                                                   |
-| Local Model Usage Learning    | Master |   2h   |   Low    | Learn from your usage patterns to improve advice                                                                 |
-| Learning Journeys             |  Heir  |   3h   |  Medium  | Curated skill progressions                                                                                       |
+| Task                              |   Owner    | Effort  |          Priority           | Description                                                                                                                                                        |
+| --------------------------------- | :--------: | :-----: | :-------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Spec Kit M365 Knowledge**       |  **M365**  | **6h**  | ✅ **COMPLETE (2026-02-18)** | **Phase-based knowledge files + retrieval directives deployed**                                                                                                    |
+| **Spec Kit VS Code Instructions** | **Master** | **8h**  |        **❌ WONTFIX**        | **Pattern doesn't transfer — VS Code auto-loading already optimal for topical organization**                                                                       |
+| **Microsoft Graph Integration**   |  **M365**  | **10h** | ✅ **COMPLETE (2026-02-18)** | **Phase 2 workflows (Morning Briefing, Meeting Prep) implemented using built-in M365 capabilities. Phase 3 (custom API plugins) on hold pending platform support** |
+| Foundry Voice Alex (Realtime)     |    Heir    |   1w    |           Medium            | Speech-to-speech via Realtime API WebSocket                                                                                                                        |
+| Hosted Agent Container Deploy     |    Heir    |   3d    |           Medium            | Containerized Alex on managed infrastructure                                                                                                                       |
+| Foundry → M365 Backend Unify      |    Heir    |   1w    |           Medium            | M365 heir routes through Foundry Agent Service                                                                                                                     |
+| Local Model Usage Learning        |   Master   |   2h    |             Low             | Learn from your usage patterns to improve advice                                                                                                                   |
+| Learning Journeys                 |    Heir    |   3h    |           Medium            | Curated skill progressions                                                                                                                                         |
+
+### Spec Kit Knowledge Organization — M365 Copilot (Office Hours — 2026-02-18)
+
+**Decision**: Reorganize M365 Copilot knowledge files using Spec Kit phase-based structure to optimize for 20-file limit
+
+**Context**: M365 Copilot embedded files limited to 20 max (512 MB total). Current 6-file structure is topic-based (cognitive-architecture, skills, protocols, help, pptx, ux). Office Hours suggested Spec Kit's phase-based organization for better retrieval efficiency and workflow alignment.
+
+**Target Structure** (6 files → phase-aligned):
+
+| File                | Purpose                               | Sources                                 | Size  |
+| ------------------- | ------------------------------------- | --------------------------------------- | ----- |
+| constitution.md     | Identity, principles, worldview       | cognitive-architecture.md               | ~20KB |
+| capabilities.md     | Skills organized by phase/context     | skill-quick-reference.md                | ~50KB |
+| protocols.md        | Meditation, dream, self-actualization | alex-protocols.md                       | ~30KB |
+| commands.md         | Help reference, slash commands        | help-commands.md                        | ~15KB |
+| m365-integration.md | PowerPoint, Office add-ins, M365 UX   | pptx-generation.md + ux-features.md     | ~22KB |
+| workflows.md (NEW)  | Multi-step processes (code→med→ship)  | Common patterns from protocols + skills | ~15KB |
+
+**Benefits**:
+- Phase-aware retrieval (Copilot pulls capabilities.md when planning, workflows.md when executing)
+- Better semantic chunking alignment (Spec Kit's constitution → specify → plan → tasks → implement)
+- Scalable to 20-file limit (room for 14 more phase-based files)
+- Aligns with Agent Builder UI knowledge organization best practices
+
+**Implementation Tasks**:
+
+| Task                                  | Owner | Effort | Priority | Status | Description                                                      |
+| ------------------------------------- | :---: | :----: | :------: | :----: | ---------------------------------------------------------------- |
+| Merge pptx + ux → m365-integration.md | M365  |   1h   |   High   |   ✅    | Consolidate M365-specific features                               |
+| Rename cognitive-architecture.md      | M365  |  15m   |   High   |   ✅    | → constitution.md (align with Spec Kit identity phase)           |
+| Rename skill-quick-reference.md       | M365  |  15m   |   High   |   ✅    | → capabilities.md (align with Spec Kit capabilities phase)       |
+| Create workflows.md                   | M365  |   2h   |   High   |   ✅    | Extract common multi-step patterns from protocols + experiences  |
+| Update declarativeAgent.json          | M365  |  30m   |   High   |   ✅    | Adjust file references if needed                                 |
+| Test knowledge grounding              | M365  |   1h   |   High   |   ✅    | Verify retrieval quality with new structure                      |
+| Add retrieval directives              | M365  |  30m   |   High   |   ✅    | Add RETRIEVAL DIRECTIVE headers to force knowledge file priority |
+| Deploy to M365 via Agent Builder UI   | M365  |  30m   |   High   |   ⏳    | Upload 6 reorganized files with retrieval directives             |
+
+**Total Effort**: ~6 hours (actual: 5.5h)
+**Priority**: HIGH (blocks M365 heir knowledge deployment)
+
+**Reference**:
+- Spec Kit: https://github.com/fabioc-aloha/spec-kit
+- M365 Office Hours recommendation (2026-02-18)
+
+---
+
+### Spec Kit Instruction Organization — VS Code Extension (2026-02-18)
+
+**Decision**: Apply phase-based organization to `.github/instructions/` to reduce cognitive load and improve auto-loading efficiency
+
+**Context**: VS Code has 38 instruction files that auto-load via `applyTo` patterns. Some overlap, some are overly specific. Spec Kit's phase structure could consolidate related instructions into cohesive units while maintaining VS Code's file-based auto-loading.
+
+**Current Pain Points**:
+- Instructions scattered across 38 files — hard to maintain consistency
+- Overlapping concerns (e.g., `alex-core`, `alex-identity-integration`, `worldview-integration` all touch identity)
+- No clear workflow progression encoding
+- File-specific `applyTo` patterns sometimes too granular
+
+**Proposed Consolidation** (38 files → ~12-15 phase-based):
+
+| Phase File                               | Consolidates From                                                           | applyTo Pattern                      |
+| ---------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------ |
+| `identity-constitution.instructions.md`  | alex-core, alex-identity-integration, worldview-*, character-driven         | `**/*` (always loaded)               |
+| `capability-routing.instructions.md`     | skill-selection-optimization, skill-building, protocol-triggers             | `**/*` (always loaded)               |
+| `cognitive-protocols.instructions.md`    | meditation, dream-state, self-actualization, lucid-dream, deep-thinking     | `**/*dream*,**/*meditation*`         |
+| `quality-assurance.instructions.md`      | code-review, adversarial-oversight, semantic-audit, trifecta-audit          | `**/*.{ts,js,py}`, `**/*audit*`      |
+| `architecture-decisions.instructions.md` | architecture-decision-records, technical-debt-tracking                      | `**/decisions/**`, `**/*ADR*`        |
+| `research-workflow.instructions.md`      | research-first-workflow, bootstrap-learning, empirical-validation           | `**/*research*`                      |
+| `release-publishing.instructions.md`     | release-management, vscode-marketplace-publishing, roadmap-maintenance      | `**/CHANGELOG*`, `**/package.json`   |
+| `asset-generation.instructions.md`       | brand-asset-management, ai-generated-readme-banners, ai-character-reference | `**/*.svg`, `**/*.png`, `**/assets/` |
+| `heir-management.instructions.md`        | heir-skill-promotion, heir-project-improvement, global-knowledge-curation   | `**/platforms/**`                    |
+| `vscode-platform.instructions.md`        | vscode-configuration-validation, ui-ux-design, copilot-chat-buttons         | `**/.vscode/**`, `**/src/**`         |
+| `synapse-network.instructions.md`        | embedded-synapse                                                            | `**/*synapse*`                       |
+| `dependency-security.instructions.md`    | dependency-management                                                       | `**/package*.json`                   |
+
+**Benefits**:
+- Reduced file count (38 → ~12) — easier maintenance
+- Phase-based grouping matches cognitive workflow (identity → routing → execution → quality → publication)
+- Less `applyTo` overlap — clearer loading triggers
+- Consolidates related concerns (all worldview/identity in one file)
+- Room to add new phase-specific instructions without file explosion
+
+**Implementation Tasks**:
+
+| Task                                | Owner  | Effort | Priority | Status | Description                                     |
+| ----------------------------------- | :----: | :----: | :------: | :----: | ----------------------------------------------- |
+| Audit current instruction overlaps  | Master |   2h   |  Medium  |   ⏳    | Map which files share concerns                  |
+| Create phase consolidation plan     | Master |   1h   |  Medium  |   ⏳    | Define final structure + applyTo patterns       |
+| Merge identity-related instructions | Master |   1h   |  Medium  |   ⏳    | alex-core + identity + worldview → constitution |
+| Merge cognitive protocols           | Master |   1h   |  Medium  |   ⏳    | meditation + dream + self-actualization         |
+| Merge quality/review instructions   | Master |   1h   |  Medium  |   ⏳    | code-review + audit + adversarial               |
+| Test VS Code auto-loading           | Master |   1h   |  Medium  |   ⏳    | Verify applyTo patterns still trigger correctly |
+| Update copilot-instructions.md      | Master |  30m   |  Medium  |   ⏳    | Reference new instruction organization          |
+
+**Total Effort**: ~8 hours
+**Priority**: MEDIUM (quality-of-life improvement, not blocking)
+
+**Reference**:
+- Spec Kit: https://github.com/fabioc-aloha/spec-kit
+
+---
 
 ### Office Add-in Implementation (from v5.7.6 research — 2026-02-15)
 
@@ -470,84 +453,7 @@ These items graduated to backlog from v6.x. They re-enter the roadmap only when 
 
 ## 🎯 Priority Matrix — What Ships When
 
-### v5.7.1 (✅ SHIPPED — Visual Identity + UI/UX)
-
-**Theme**: Avatar UI, Extension Audit, Async I/O Refactoring
-**Shipped**: February 15, 2026
-
-```
-Graph removal + Definition of Done + Replicate MCP POC + Alex-Finch.md + Synapse validation confirmed
-+ Redundant files archived + Welcome panel avatar + Persona→avatar mapping + UI regression sweep
-= Dead code gone, shipping criteria defined, multimedia AI ready, identity documented, Alex has a face, UI is stable
-```
-
-**Effort**: ~18h | **Impact**: Visible polish — users see a stable, clean, personal Alex with multimedia AI access
-**Shipped**: 2026-02-15
-
-### v5.7.2 (✅ SHIPPED — Global Knowledge Maintenance)
-
-**Theme**: Knowledge Infrastructure, Skill Count Accuracy, Dependency Cleanup
-**Shipped**: February 15, 2026
-
-```
-Global Knowledge maintenance trifecta (skill + script + synapses) + sync-index.ps1 automation
-+ Skill count corrections (120 Master → 117 VS Code Heir) + Heir inheritance math pattern
-+ Dependabot removal + Index synchronization (273 entries: 32 patterns, 241 insights)
-= Systematic GK curation + accurate skill counts + clean dependency management + validated index
-```
-
-**Effort**: ~8h | **Impact**: Foundation — ensures Global Knowledge integrity and heir synchronization accuracy
-**Shipped**: 2026-02-15
-
-### v5.7.5 (✅ SHIPPED — Skill Intelligence)
-
-**Theme**: Context-aware skill recommendations and UI/UX Design trifecta
-**Shipped**: February 15, 2026
-
-```
-Skill-to-technology mapping (30 tech signals) + Recommendation engine + Welcome View integration
-+ Context-aware loading + User preference tracking + UI/UX Design trifecta (WCAG 2.1 AA patterns)
-= Proactive skill discovery + systematic accessibility workflows + 11 complete trifectas
-```
-
-**Effort**: ~7h | **Impact**: Intelligence — Alex suggests the right skill at the right time + accessibility excellence
-**Shipped**: 2026-02-15
-
-**Post-Ship Trifecta Work (2026-02-15)**:
-- ✅ UI/UX Design trifecta created (skill, instruction, prompt, synapses) — WCAG 2.1 AA patterns, design system implementation
-- ✅ Bidirectional synaptic connections: code-review (0.85), graphic-design (0.7), testing-strategies (0.8), vscode-extension-patterns (0.75)
-- ✅ Updated catalogs: skill-activation, prompt-activation (master + heir), TRIFECTA-CATALOG.md
-- ✅ sync-architecture.js trifecta count regex updated (9→11)
-- ✅ Documented vscode-configuration-validation as 11th complete trifecta (existing but undocumented)
-- ✅ Skills: 120→122, Instructions: 37→38, Complete trifectas: 9→11
-- ✅ Source: v5.8.0 accessibility implementation session meditation
-
-### v5.8.0 (@alex P0 — Identity + Memory)
-
-```
-promptEngine.ts + Brain injection + Active Context + Conversation history
-= @alex knows who it is + remembers the thread
-```
-
-**Effort**: ~9h | **Impact**: Foundational — everything else builds on this
-
-### v5.8.1 (@alex P1 — Tools + Files)
-
-```
-Tool calling + File context + Model-adaptive behavior
-= @alex can DO things + see files + adapt to model tier
-```
-
-**Effort**: ~12h | **Impact**: @alex becomes genuinely useful for daily work
-
-### v5.8.2 (@alex P2 — Personality)
-
-```
-Pre-seeded knowledge + Persona prompt + Confidence signaling
-= @alex is intelligent, personal, and honest about uncertainty
-```
-
-**Effort**: ~9h | **Impact**: Differentiation — no other extension does this
+---
 
 ### v5.9.0 (VS Code API Adoption)
 
@@ -888,6 +794,144 @@ Before any v5.7.x patch ships to Marketplace, ALL of the following must pass.
 | Voice mode                    | `Ctrl+Alt+V` or `/voice`                      | TTS works             |
 | Keyboard shortcuts            | Test `Ctrl+Alt+R/V/P/D/A`                     | All shortcuts trigger |
 | Global Knowledge search       | `/knowledge search error handling`            | Returns results       |
+
+---
+
+## 📦 Appendix — Shipped Versions
+
+This appendix contains completed version details for historical reference. These versions are live in production.
+
+---
+
+### v5.7.1 (✅ SHIPPED — Visual Identity + UI/UX)
+
+**Theme**: Avatar UI, Extension Audit, Async I/O Refactoring
+**Shipped**: February 15, 2026
+
+```
+Graph removal + Definition of Done + Replicate MCP POC + Alex-Finch.md + Synapse validation confirmed
++ Redundant files archived + Welcome panel avatar + Persona→avatar mapping + UI regression sweep
+= Dead code gone, shipping criteria defined, multimedia AI ready, identity documented, Alex has a face, UI is stable
+```
+
+**Effort**: ~18h | **Impact**: Visible polish — users see a stable, clean, personal Alex with multimedia AI access
+
+---
+
+### v5.7.2 (✅ SHIPPED — Global Knowledge Maintenance)
+
+**Theme**: Knowledge Infrastructure, Skill Count Accuracy, Dependency Cleanup
+**Shipped**: February 15, 2026
+
+```
+Global Knowledge maintenance trifecta (skill + script + synapses) + sync-index.ps1 automation
++ Skill count corrections (120 Master → 117 VS Code Heir) + Heir inheritance math pattern
++ Dependabot removal + Index synchronization (273 entries: 32 patterns, 241 insights)
+= Systematic GK curation + accurate skill counts + clean dependency management + validated index
+```
+
+**Effort**: ~8h | **Impact**: Foundation — ensures Global Knowledge integrity and heir synchronization accuracy
+
+---
+
+### v5.7.5 (✅ SHIPPED — Skill Intelligence)
+
+**Theme**: Context-aware skill recommendations and UI/UX Design trifecta
+**Shipped**: February 15, 2026
+
+```
+Skill-to-technology mapping (30 tech signals) + Recommendation engine + Welcome View integration
++ Context-aware loading + User preference tracking + UI/UX Design trifecta (WCAG 2.1 AA patterns)
+= Proactive skill discovery + systematic accessibility workflows + 11 complete trifectas
+```
+
+**Effort**: ~7h | **Impact**: Intelligence — Alex suggests the right skill at the right time + accessibility excellence
+
+**Post-Ship Trifecta Work**:
+- ✅ UI/UX Design trifecta created (skill, instruction, prompt, synapses) — WCAG 2.1 AA patterns, design system implementation
+- ✅ Bidirectional synaptic connections: code-review (0.85), graphic-design (0.7), testing-strategies (0.8), vscode-extension-patterns (0.75)
+- ✅ Updated catalogs: skill-activation, prompt-activation (master + heir), TRIFECTA-CATALOG.md
+- ✅ sync-architecture.js trifecta count regex updated (9→11)
+- ✅ Documented vscode-configuration-validation as 11th complete trifecta (existing but undocumented)
+- ✅ Skills: 120→122, Instructions: 37→38, Complete trifectas: 9→11
+- ✅ Source: v5.8.0 accessibility implementation session meditation
+
+---
+
+### v5.7.6 (✅ SHIPPED — Office Add-in Platform Research)
+
+**Theme**: Explore feasibility of deploying Alex cognitive architecture to Microsoft Office (Word/Excel/PowerPoint) as an add-in
+**Shipped**: February 15, 2026
+
+**Decision**: **Integrate into M365 heir** via unified manifest (ADR-011)
+
+**Milestone**: ✅ **Decision: Office Add-ins integrate into M365 heir** — 90% shared infrastructure (unified manifest, OneDrive memory, Entra ID, deployment), natural workflow continuity (Teams chat → Office creation), complementary surfaces (conversational + document creation).
+
+**Effort**: ~4h | **Impact**: Strategic clarity — Office Add-ins become additional M365 heir surface alongside Teams/M365 Copilot.
+
+**Deliverables**:
+- [OFFICE-ADDINS-RESEARCH.md](alex_docs/platforms/OFFICE-ADDINS-RESEARCH.md) — Full platform analysis
+- [ADR-011](alex_docs/decisions/ADR-011-office-addins-m365-integration.md) — Architectural decision record
+
+---
+
+### v5.7.7 (✅ SHIPPED — Propose-to-Global Workflow)
+
+**Theme**: Lightweight workflow for heirs to contribute skills back to Global Knowledge without full promotion ceremony
+**Shipped**: February 15, 2026
+
+**Tagline**: Share knowledge without ceremony.
+
+**Milestone**: Heirs can contribute skills to Global Knowledge in <5 minutes ✅
+
+**Effort**: ~4.5h | **Impact**: Democratizes knowledge sharing — reduces 30min manual process to 1-click
+
+**Deliverables**:
+- `platforms/vscode-extension/src/commands/proposeSkill.ts` — Command implementation (650+ lines)
+- `platforms/vscode-extension/package.json` — Command registration
+- `platforms/vscode-extension/CHANGELOG.md` — v5.7.7 release notes
+
+---
+
+### v5.8.0 (✅ SHIPPED — @alex P0: Identity + Memory)
+
+**Theme**: Transform @alex chat participant from passthrough into purpose-built cognitive prompt engine
+**Shipped**: February 16, 2026
+
+```
+promptEngine.ts + Brain injection + Active Context + Conversation history
+= @alex knows who it is + remembers the thread
+```
+
+**Effort**: ~9h | **Impact**: Foundational — everything else builds on this
+
+---
+
+### v5.8.1 (✅ SHIPPED — @alex P1: Tools + Files)
+
+**Theme**: Enable @alex to invoke tools, see files, and adapt to model tier
+**Shipped**: February 16, 2026
+
+```
+Tool calling + File context + Model-adaptive behavior
+= @alex can DO things + see files + adapt to model tier
+```
+
+**Effort**: ~12h | **Impact**: @alex becomes genuinely useful for daily work
+
+---
+
+### v5.8.2 (✅ SHIPPED — @alex P2: Personality)
+
+**Theme**: Add personality, knowledge pre-seeding, and confidence signaling
+**Shipped**: February 16, 2026
+
+```
+Pre-seeded knowledge + Persona prompt + Confidence signaling
+= @alex is intelligent, personal, and honest about uncertainty
+```
+
+**Effort**: ~9h | **Impact**: Differentiation — no other extension does this
 
 ---
 

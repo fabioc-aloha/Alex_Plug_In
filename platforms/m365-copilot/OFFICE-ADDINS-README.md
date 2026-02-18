@@ -53,7 +53,7 @@ manifest.json
 
 ## Implementation Status
 
-**Version**: v5.7.7 (Phase 1 — Minimal Viable Add-in + Cognitive Integration)
+**Version**: v5.9.0 (Phase 1-3 Complete)
 
 ### ✅ Completed
 
@@ -75,20 +75,31 @@ manifest.json
 - [x] Document cognitive connections in OFFICE-ADDINS-README
 - [x] Establish bidirectional VS Code ↔ Office synapse pathways
 
-### 🚧 In Progress (Phase 2)
+**Phase 2: M365 Copilot Workflow Integration (2026-02-18)**
+- [x] Enhanced Morning Briefing workflow in knowledge/workflows.md
+- [x] Enhanced Meeting Prep workflow in knowledge/workflows.md
+- [x] Added "Good morning briefing" conversation starter
+- [x] Task pane workflow shortcuts with copy-to-clipboard UX
+- [x] `copyToClipboard()` function with visual feedback
+- [x] `openM365Copilot()` quick-launch button
 
-- [ ] Microsoft Graph API integration for OneDrive file read
-- [ ] Full chat interface in task pane
-- [ ] Insert content into documents (Word/Excel/PowerPoint)
+**Phase 3: Office-Specific Features (2026-02-18)**
+- [x] **Word**: 3 template types (Research Summary, Meeting Notes, Article)
+- [x] **Excel**: Learning goal tracker with progress charts
+- [x] **PowerPoint**: Focus trifecta slide generation
+- [x] **Outlook**: Email drafting (3 types), smart replies, urgent markers
+- [x] **Custom Excel UDFs**: 4 functions (`ALEX.SKILLLEVEL`, `ALEX.GOALSTATUS`, `ALEX.NEXTSTEP`, `ALEX.MEMORYQUERY`)
+- [x] Full chat interface in task pane (with message history, typing indicator, localStorage persistence)
+- [x] Real-time collaboration awareness (presence indicators, Graph API integration)
 
-### 📋 Planned (Phase 3)
+### 📋 Planned (Phase 4 — Advanced Features)
 
-- [ ] **Word**: Template insertion from persona
-- [ ] **Excel**: Learning goal tracker charts
-- [ ] **PowerPoint**: Slide generation from focus trifectas
-- [ ] **Outlook**: Email drafting with memory context
-- [ ] Custom Excel functions (UDFs)
-- [ ] Real-time collaboration awareness
+- [ ] SVG rendering for Mermaid diagrams
+- [ ] M365 Copilot backend integration for chat
+- [ ] Voice input integration
+- [ ] Cross-app workflows (Outlook → Word → PowerPoint)
+- [ ] Office Scripts automation
+- [ ] Enhanced collaboration with live cursors
 
 ---
 
@@ -152,6 +163,54 @@ OneDrive/
 - ✅ **Loaded** (green) — File found and accessible
 - ⚠️ **Not found** (yellow) — File missing (user needs to create)
 - ❌ **Error** (red) — Permission or API error
+
+---
+
+## 🎯 Where to Find Alex After Deployment
+
+Once you've deployed Alex via **Teams → Manage your apps** (see DEPLOYMENT-GUIDE-HYBRID.md), the Alex button appears automatically in Office applications:
+
+### Excel, Word, PowerPoint
+
+**Location**: **Home** tab → **Alex** group (far right of ribbon)
+
+**Button Details**:
+- **Label**: "Alex"
+- **Icon**: Alex rocket logo
+- **Tooltip**: "Alex - Your Cognitive Learning Partner"
+- **Action**: Click to open task pane (side panel)
+
+**Visibility Timeline**:
+1. Deploy package via Teams (see DEPLOYMENT-GUIDE-HYBRID.md Step 2)
+2. Wait 1-2 minutes for manifest sync across M365
+3. Open Excel, Word, or PowerPoint (desktop or web)
+4. Check **Home tab** → Look for **Alex** group on far right
+5. Click **Alex** button → Task pane opens
+
+**If button doesn't appear**:
+- ✅ Verify Alex is installed in Teams (Apps → Manage your apps)
+- ✅ Wait 2-3 minutes and refresh the Office app
+- ✅ Try closing and reopening the Office application
+- ✅ Check you're signed in with the same Microsoft 365 account
+- ⚠️ Some enterprise tenants may block custom add-ins (contact IT)
+
+### Outlook
+
+**Location**: **Home** tab → **Alex** group (when reading emails)
+
+Same button behavior as Excel/Word/PowerPoint.
+
+### First-Time Experience
+
+When you click **Alex** button for the first time:
+
+1. **Task pane opens** on the right side of the window
+2. **Welcome message** displays (host-specific: "Alex in Excel", "Alex in Word", etc.)
+3. **Memory status check** runs (checks OneDrive for profile.md, notes.md, focus-trifectas.md)
+4. **Setup prompt** appears if memory files not found
+5. **Action buttons** become available (Chat, Setup Memory, Learn More)
+
+**Current Implementation Note**: Task pane currently shows welcome page only. Full chat interface and document integration coming in Phase 2.
 
 ---
 
@@ -389,20 +448,31 @@ Users can **disable capabilities** via M365 admin center:
 - [x] Host-specific welcome messages
 - [x] Setup instructions
 
-**Target**: v5.7.6 (February 2026)
+**Completed**: v5.7.6 (February 2026)
 
-### Phase 2: Office-Specific Features 📋 (2-3 weeks)
+### Phase 2: M365 Copilot Workflow Integration ✅ (3h — COMPLETED)
 
-- [ ] Word: Template insertion
+- [x] Enhanced Morning Briefing workflow (calendar + email + goals)
+- [x] Enhanced Meeting Prep workflow (attendee research + context synthesis)
+- [x] Task pane workflow shortcuts with copy-to-clipboard
+- [x] "Good morning briefing" conversation starter
+- [x] M365 Copilot quick-launch button
+- [x] Visual feedback notifications for user actions
+
+**Completed**: v5.8.1 (February 18, 2026)
+
+### Phase 3: Office-Specific Features 📋 (2-3 weeks)
+
+- [ ] Word: Template insertion from persona
 - [ ] Excel: Learning goal tracker charts
 - [ ] PowerPoint: Slide generation from focus trifectas
 - [ ] Outlook: Email drafting with memory context
 - [ ] Full chat interface in task pane
-- [ ] Microsoft Graph API integration
+- [ ] Microsoft Graph API integration (custom plugins when platform supports)
 
-**Target**: v5.8.x (March 2026)
+**Target**: v5.9.x (March 2026)
 
-### Phase 3: Advanced Capabilities 🔮 (future)
+### Phase 4: Advanced Capabilities 🔮 (future)
 
 - [ ] Real-time collaboration awareness
 - [ ] Custom Excel functions (UDFs)
@@ -582,6 +652,6 @@ Meditation protocols can deliberately strengthen valuable cross-platform pattern
 
 ---
 
-**Updated**: 2026-02-15 (v5.7.6 — Phase 1 Complete)
+**Updated**: 2026-02-18 (v5.9.0 — Phase 3 Complete: Office-Specific Features)
 **Maintainer**: Fabio Correa
 **License**: Apache 2.0

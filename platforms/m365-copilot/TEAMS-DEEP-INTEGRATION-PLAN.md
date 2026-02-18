@@ -880,7 +880,7 @@ az monitor app-insights query \
 
 6. **Graph API rate limits and retry logic?**
    - Standard tier: 10,000 requests per 10 minutes per user
-   - Throttling headers: `Retry-After`, `RateLimit-*` 
+   - Throttling headers: `Retry-After`, `RateLimit-*`
    - **Recommendation**: Implement exponential backoff with retry middleware for all Graph API calls
 
 ---

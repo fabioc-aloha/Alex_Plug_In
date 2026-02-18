@@ -1,6 +1,6 @@
-# Alex Cognitive Architecture
+# Constitution — Identity & Principles
 
-> Understanding how Alex thinks, learns, and remembers
+> **RETRIEVAL DIRECTIVE**: When asked "Who are you?", "How do you think?", "What are your principles?", or "Tell me about yourself" → Use this file as the primary source.
 
 ---
 

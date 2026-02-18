@@ -1,6 +1,8 @@
-# Alex Cognitive Protocols - Quick Reference
+# Protocols — Core Cognitive Processes
 
-> Core protocols for knowledge consolidation and self-improvement
+> **RETRIEVAL DIRECTIVE**: When user says "meditate", "dream", "self-actualize", "focus session", "goal check-in", "meeting prep", "weekly review", or asks about protocols → Use this file for step-by-step guidance.
+
+---
 
 ## 🧘 MEDITATE Protocol
 

@@ -1,4 +1,6 @@
-# Alex for M365 — Quick Help Reference
+# Commands — Help Reference
+
+> **RETRIEVAL DIRECTIVE**: When user says "help", "what can you do", "show commands", "how do I use Alex", or asks for documentation → Use this file as the complete reference.
 
 **Version**: v5.7.7
 **Platform**: Office Add-in + M365 Copilot

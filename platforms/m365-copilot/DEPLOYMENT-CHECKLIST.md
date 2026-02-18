@@ -60,35 +60,66 @@
 
 ## 🚀 Deployment Steps
 
-### Option A: Teams Developer Portal ✅ RECOMMENDED
+### Option A: M365 Copilot Agent Builder UI 🆕 EASIEST
+
+**NEW**: No-code deployment using native M365 Copilot Agent Builder
+
+| #   | Step                          | URL/Action                                               | Status |
+| --- | ----------------------------- | -------------------------------------------------------- | ------ |
+| 19  | **Open Agent Builder**        | https://m365.cloud.microsoft/chat → Click "Create agent" | ⬜      |
+| 20  | **Configure agent basics**    | Name = "Alex", Description from declarativeAgent.json    | ⬜      |
+| 21  | **Upload knowledge files**    | Drag-drop files from `appPackage/knowledge/` (6 files)   | ⬜      |
+| 22  | **Wait for file readiness**   | Verify green checkmarks (no "Preparing" labels)          | ⬜      |
+| 23  | **Copy instructions**         | Paste `instructions` field from declarativeAgent.json    | ⬜      |
+| 24  | **Enable capabilities**       | OneDrive, Email, Teams, People, Meetings, WebSearch      | ⬜      |
+| 25  | **Add conversation starters** | Copy from declarativeAgent.json (6 starters)             | ⬜      |
+| 26  | **Configure sharing**         | "Anyone in organization" OR specific users               | ⬜      |
+| 27  | **Publish**                   | Click Publish → Confirm                                  | ⬜      |
+
+**Benefits**:
+- ✅ No package building or validation
+- ✅ Visual knowledge source management
+- ✅ Real-time file readiness indicators
+- ✅ No VS Code or Agents Toolkit required
+
+**Limitations**:
+- ❌ No API plugin support
+- ❌ No version control (manual changes only)
+- ❌ Limited to UI-exposed features
+
+📘 **Full Guide**: [AGENT-BUILDER-GUIDE.md](./AGENT-BUILDER-GUIDE.md)
+
+---
+
+### Option B: Teams Developer Portal (Code-First)
 
 | #   | Step                             | URL/Action                                      | Status |
 | --- | -------------------------------- | ----------------------------------------------- | ------ |
-| 19  | **Sign in to Developer Portal**  | https://dev.teams.microsoft.com/apps            | ✅      |
-| 20  | **Import app package**           | Apps → Import app → Select `appPackage.dev.zip` | ✅      |
-| 21  | **Fill Application (client) ID** | Basic information → Application (client) ID     | ✅      |
-| 22  | **Preview in Teams**             | Publish → Preview in Teams                      | ✅      |
+| 28  | **Sign in to Developer Portal**  | https://dev.teams.microsoft.com/apps            | ✅      |
+| 29  | **Import app package**           | Apps → Import app → Select `appPackage.dev.zip` | ✅      |
+| 30  | **Fill Application (client) ID** | Basic information → Application (client) ID     | ✅      |
+| 31  | **Preview in Teams**             | Publish → Preview in Teams                      | ✅      |
 
 > **Current Process**: Manual upload via Developer Portal. Package built with `npm run package:dev`.
 
-### Option B: Direct Teams Sideload
+### Option C: Direct Teams Sideload
 
 | #   | Step                  | URL/Action                                       | Status |
 | --- | --------------------- | ------------------------------------------------ | ------ |
-| 23  | **Open Teams**        | https://teams.microsoft.com                      | ⬜      |
-| 24  | **Go to Apps**        | Apps → Manage your apps                          | ⬜      |
-| 25  | **Upload custom app** | Upload an app → Upload a custom app → Select zip | ⬜      |
-| 26  | **Add app**           | Click "Add" in the app dialog                    | ⬜      |
+| 32  | **Open Teams**        | https://teams.microsoft.com                      | ⬜      |
+| 33  | **Go to Apps**        | Apps → Manage your apps                          | ⬜      |
+| 34  | **Upload custom app** | Upload an app → Upload a custom app → Select zip | ⬜      |
+| 35  | **Add app**           | Click "Add" in the app dialog                    | ⬜      |
 
-### Option C: VS Code Agents Toolkit
+### Option D: VS Code Agents Toolkit
 
 | #   | Step                        | Action                                                             | Status |
 | --- | --------------------------- | ------------------------------------------------------------------ | ------ |
-| 27  | **Open project in VS Code** | `code c:\Development\alex-m365-agent`                              | ⬜      |
-| 28  | **Sign in to M365**         | Agents Toolkit sidebar → ACCOUNTS → Sign in to Microsoft 365       | ⬜      |
-| 29  | **Verify access**           | Check "Custom App Upload Enabled ✓" and "Copilot Access Enabled ✓" | ⬜      |
-| 30  | **Provision**               | LIFECYCLE → Provision                                              | ⬜      |
-| 31  | **Deploy/Preview**          | LIFECYCLE → Deploy or F5 to debug                                  | ⬜      |
+| 36  | **Open project in VS Code** | `code c:\Development\alex-m365-agent`                              | ⬜      |
+| 37  | **Sign in to M365**         | Agents Toolkit sidebar → ACCOUNTS → Sign in to Microsoft 365       | ⬜      |
+| 38  | **Verify access**           | Check "Custom App Upload Enabled ✓" and "Copilot Access Enabled ✓" | ⬜      |
+| 39  | **Provision**               | LIFECYCLE → Provision                                              | ⬜      |
+| 40  | **Deploy/Preview**          | LIFECYCLE → Deploy or F5 to debug                                  | ⬜      |
 
 ---
 

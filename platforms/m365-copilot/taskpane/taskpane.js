@@ -142,11 +142,11 @@ function displayWelcome(info) {
             <p>Alex is now available directly in ${hostName}! Get personalized assistance based on your OneDrive memory.</p>
             
             <div style="background: #f0f7ff; padding: 16px; border-radius: 8px; margin: 16px 0;">
-                <strong>What's New in v5.7.7:</strong>
+                <strong>What's New in v5.8.1:</strong>
                 <ul style="margin: 8px 0 0 20px; line-height: 1.8;">
-                    <li>✨ Cognitive integration — 29 synapse connections to VS Code skills</li>
-                    <li>📊 Office.js operations — Word, Excel, PowerPoint, Outlook</li>
-                    <li>🔗 Memory-augmented templates from OneDrive</li>
+                    <li>🌅 Enhanced Morning Briefing — calendar + email + goals integration</li>
+                    <li>📅 Enhanced Meeting Prep — attendee research + context synthesis</li>
+                    <li>💬 Quick Workflow Shortcuts — one-click access to M365 Copilot workflows</li>
                     <li>🎯 Host-specific action panels with skill activation</li>
                 </ul>
             </div>
@@ -156,6 +156,30 @@ function displayWelcome(info) {
                 ${capabilities}
             </ul>
             
+            <div style="background: #e8f5e9; padding: 16px; border-radius: 8px; margin: 16px 0; border-left: 4px solid #4caf50;">
+                <strong>⚡ Quick M365 Copilot Workflows</strong>
+                <p style="font-size: 13px; margin: 8px 0 12px 0; opacity: 0.9;">
+                    Use these prompts in M365 Copilot for enhanced workflows:
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                    <button class="btn" style="background: white; color: #333; border: 1px solid #ddd; text-align: left; padding: 10px 12px;" 
+                            onclick="copyToClipboard('Start my day - show my calendar, email highlights, goals, and suggest focus time')">
+                        🌅 <strong>Morning Briefing</strong> — Calendar, email, goals
+                    </button>
+                    <button class="btn" style="background: white; color: #333; border: 1px solid #ddd; text-align: left; padding: 10px 12px;"
+                            onclick="copyToClipboard('Prep for my next meeting - look up attendees, email history, and context')">
+                        📅 <strong>Meeting Prep</strong> — Attendee research & context
+                    </button>
+                    <button class="btn" style="background: white; color: #333; border: 1px solid #ddd; text-align: left; padding: 10px 12px;"
+                            onclick="copyToClipboard('Check my calendar - how many meetings do I have? Any back-to-backs? Wheres my focus time?')">
+                        ⚖️ <strong>Workload Check</strong> — Meeting count, focus blocks
+                    </button>
+                </div>
+                <p style="font-size: 12px; margin: 12px 0 0 0; opacity: 0.7;">
+                    💡 Click a workflow to copy the prompt, then paste in M365 Copilot
+                </p>
+            </div>
+            
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="showActionPanel()">
                     🚀 Show ${hostName} Actions
@@ -163,8 +187,8 @@ function displayWelcome(info) {
                 <button class="btn btn-secondary" onclick="showMemorySetup()">
                     🛠️ Setup Memory
                 </button>
-                <button class="btn btn-secondary" onclick="openGitHub()">
-                    📚 Learn More
+                <button class="btn btn-secondary" onclick="openM365Copilot()">
+                    💬 Open M365 Copilot
                 </button>
             </div>
         </div>
@@ -375,6 +399,95 @@ async function refreshMemory() {
  */
 function openGitHub() {
     window.open('https://github.com/fabioc-aloha/Alex_Plug_In', '_blank');
+}
+
+/**
+ * Open M365 Copilot in new tab
+ */
+function openM365Copilot() {
+    window.open('https://m365.cloud.microsoft/chat', '_blank');
+}
+
+/**
+ * Copy text to clipboard with visual feedback
+ * @param {string} text - Text to copy
+ */
+async function copyToClipboard(text) {
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+            showCopyNotification('✅ Copied! Paste in M365 Copilot');
+        } else {
+            // Fallback for browsers without clipboard API
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopyNotification('✅ Copied! Paste in M365 Copilot');
+            } catch (err) {
+                showCopyNotification('❌ Copy failed - please select and copy manually');
+            }
+            document.body.removeChild(textArea);
+        }
+    } catch (error) {
+        console.error('Copy to clipboard failed:', error);
+        showCopyNotification('❌ Copy failed - please select and copy manually');
+    }
+}
+
+/**
+ * Show temporary notification for copy action
+ * @param {string} message - Notification message
+ */
+function showCopyNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        font-size: 14px;
+        font-weight: 500;
+        animation: slideDown 0.3s ease;
+    `;
+    
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideDown 0.3s ease reverse';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+            document.head.removeChild(style);
+        }, 300);
+    }, 2500);
 }
 
 /**

@@ -1,0 +1,144 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
+    "schema_version": "v2.3",
+    "name_for_human": "Microsoft Graph",
+    "description_for_human": "Access your calendar, email, presence status, and contacts through Microsoft Graph.",
+    "description_for_model": "This plugin provides access to Microsoft Graph APIs for productivity features. Use getCalendarView to retrieve upcoming calendar events. Use getMessages to fetch recent emails. Use getPresence to check user's online status. Use getPeople to search contacts and colleagues. Use getEvent to get detailed meeting information including attendees and attachments. Use getUnreadCount to check unread email count. All operations use delegated permissions via M365 SSO - no separate authentication required.",
+    "logo_url": "https://developer.microsoft.com/graph/content/images/microsoft-graph.png",
+    "contact_email": "support@alexcognitive.dev",
+    "legal_info_url": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md",
+    "privacy_policy_url": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md",
+    "functions": [
+        {
+            "name": "getCalendarView",
+            "description": "Get upcoming calendar events within a date range. Returns event details including title, time, location, attendees, and meeting links. Use this for daily briefings, schedule checks, or meeting preparation.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$.value",
+                    "properties": {
+                        "title": "$.subject",
+                        "subtitle": "$.start.dateTime",
+                        "url": "$.webLink"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getEvent",
+            "description": "Get detailed information about a specific calendar event. Returns full event details including attendees, attachments, body content, and response status. Use this for meeting prep when you need comprehensive context.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "properties": {
+                        "title": "$.subject",
+                        "subtitle": "$.organizer.emailAddress.name"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getMessages",
+            "description": "Get recent email messages from the user's inbox. Returns message details including sender, subject, preview, importance, and received time. Use this for daily briefings or email summaries. Can filter by unread status.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$.value",
+                    "properties": {
+                        "title": "$.subject",
+                        "subtitle": "$.from.emailAddress.name",
+                        "url": "$.webLink"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getUnreadCount",
+            "description": "Get the count of unread emails in the user's inbox. Returns a simple count for dashboard widgets or notifications.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "properties": {
+                        "title": "$.count"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getPresence",
+            "description": "Get the user's current presence status (online, busy, away, offline, etc.) and availability. Use this to contextualize responses or suggest appropriate times for focus work.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "properties": {
+                        "title": "$.availability",
+                        "subtitle": "$.activity"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getPeople",
+            "description": "Search for people in the organization or the user's contacts. Returns relevant people based on search query, including name, email, job title, and department. Use this for meeting prep to research attendees.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$.value",
+                    "properties": {
+                        "title": "$.displayName",
+                        "subtitle": "$.jobTitle",
+                        "url": "$.userPrincipalName"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getUserProfile",
+            "description": "Get the authenticated user's profile information including display name, email, job title, department, office location, and manager. Use this for personalization and context awareness.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$",
+                    "properties": {
+                        "title": "$.displayName",
+                        "subtitle": "$.jobTitle"
+                    }
+                }
+            }
+        }
+    ],
+    "capabilities": {
+        "localization": {},
+        "conversation_starters": [
+            {
+                "text": "Show my schedule for today"
+            },
+            {
+                "text": "Do I have any unread emails?"
+            },
+            {
+                "text": "Am I free this afternoon?"
+            },
+            {
+                "text": "Prep me for my next meeting"
+            }
+        ]
+    },
+    "runtimes": [
+        {
+            "type": "OpenApi",
+            "auth": {
+                "type": "OAuthPluginVault",
+                "reference_id": "MICROSOFT_GRAPH_OAUTH"
+            },
+            "spec": {
+                "url": "graph-openapi.yaml"
+            },
+            "run_for_functions": [
+                "getCalendarView",
+                "getEvent",
+                "getMessages",
+                "getUnreadCount",
+                "getPresence",
+                "getPeople",
+                "getUserProfile"
+            ]
+        }
+    ]
+}

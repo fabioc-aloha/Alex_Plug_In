@@ -65,12 +65,29 @@ The M365 declarative agent manifest supports 12 capability types. Each capabilit
 
 ### Build Tools
 
-| Tool                             | Use Case                  | Capabilities                         |
-| -------------------------------- | ------------------------- | ------------------------------------ |
-| **Microsoft 365 Agents Toolkit** | VS Code-based development | Full manifest control, API plugins   |
-| **Copilot Studio**               | Low-code builder          | Visual designer, connectors          |
-| **Microsoft 365 Copilot**        | Native builder            | Quick agent creation, embedded files |
-| **SharePoint**                   | Site-scoped agents        | Document knowledge agents            |
+| Tool                             | Use Case                  | Capabilities                                                                |
+| -------------------------------- | ------------------------- | --------------------------------------------------------------------------- |
+| **Microsoft 365 Agents Toolkit** | VS Code-based development | Full manifest control, API plugins, local testing                           |
+| **Copilot Studio**               | Low-code builder          | Visual designer, connectors, workflow automation                            |
+| **Microsoft 365 Copilot**        | Native browser builder    | Quick agent creation, drag-drop file upload, visual knowledge configuration |
+| **SharePoint**                   | Site-scoped agents        | Document knowledge agents, automatic site context                           |
+
+#### Agent Builder UI (M365 Copilot)
+
+**New in 2026**: Native agent creation directly in M365 Copilot at https://m365.cloud.microsoft/chat
+
+**Features**:
+- 📁 Visual knowledge source picker (SharePoint, Teams, Email)
+- 📎 Drag-drop embedded file upload (up to 20 files, 512MB max)
+- 🔌 Connector scoping UI (select specific projects, repositories, folders)
+- 🏷️ Real-time sensitivity label visibility
+- ✅ File readiness indicators during indexing
+- 🎯 "Only use specified sources" toggle for strict knowledge control
+
+**Ideal for**: Non-developers, quick prototyping, embedded file knowledge
+**Limitations**: No API plugin support, no local testing, limited to UI-exposed features
+
+For manifest-based control and API plugins, use **Microsoft 365 Agents Toolkit**.
 
 ### Multi-Model Support
 
@@ -281,6 +298,60 @@ Run the export command. Progress notification shows:
 
 ---
 
+## Deployment Options
+
+### Option 1: Agent Builder UI (Easiest) 🆕
+
+**New in 2026**: No-code deployment using M365 Copilot's native Agent Builder.
+
+**Quick Steps**:
+1. Navigate to https://m365.cloud.microsoft/chat → **Create agent**
+2. Upload 6 knowledge files from `platforms/m365-copilot/appPackage/knowledge/`
+3. Copy instructions from `declarativeAgent.json`
+4. Enable capabilities (OneDrive, Email, Teams, People, Meetings)
+5. Add conversation starters
+6. Publish to organization
+
+**Time**: ~5 minutes
+**Skill Level**: Non-technical users
+**Version Control**: Manual (UI-based changes)
+
+📘 **Full Guide**: [platforms/m365-copilot/AGENT-BUILDER-GUIDE.md](../../platforms/m365-copilot/AGENT-BUILDER-GUIDE.md)
+🎯 **Quick Ref**: [platforms/m365-copilot/AGENT-BUILDER-QUICK-REF.md](../../platforms/m365-copilot/AGENT-BUILDER-QUICK-REF.md)
+
+### Option 2: Code-First Deployment (Advanced)
+
+**Via M365 Agents Toolkit** (for developers needing version control, API plugins, CI/CD):
+
+```bash
+cd platforms/m365-copilot
+npm install
+npx teamsapp package --env dev
+npx teamsapp validate --package-file appPackage/build/appPackage.dev.zip
+npx teamsapp provision --env dev
+```
+
+**Time**: ~30 minutes
+**Skill Level**: Developers
+**Version Control**: Git-tracked manifest files
+
+📘 **Full Guide**: [platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md](../../platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md)
+
+### Option 3: Hybrid Approach (Recommended)
+
+Combine code-first deployment with Agent Builder enhancements:
+
+1. **Deploy base agent** via M365 Agents Toolkit (version-controlled instructions/capabilities)
+2. **Enhance knowledge** via Agent Builder UI (visual embedded file management)
+3. **Update code** when instructions change (maintain source of truth in Git)
+
+**Benefits**:
+- ✅ Git version control for agent logic
+- ✅ Visual interface for knowledge sources
+- ✅ Best of both worlds
+
+---
+
 ## Limitations
 
 | Limitation               | Workaround                                        |
@@ -339,6 +410,7 @@ Azure Functions API for real-time sync:
 | **Extensibility Overview**          | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/>                               |
 | **Declarative Agent Manifest v1.6** | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest-1.6> |
 | **Knowledge Sources**               | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/knowledge-sources>              |
+| **Add Knowledge Sources**           | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-add-knowledge>    |
 | **Agent Instructions**              | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-instructions> |
 | **Microsoft 365 Agents Toolkit**    | <https://aka.ms/M365AgentsToolkit>                                                                     |
 | **Build Declarative Agents**        | <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/build-declarative-agents>       |

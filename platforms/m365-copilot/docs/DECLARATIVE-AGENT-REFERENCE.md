@@ -11,6 +11,7 @@ Complete reference for all settings in the declarativeAgent.json file.
 - [Core Properties](#core-properties)
 - [Instructions](#instructions)
 - [Capabilities](#capabilities)
+- [Knowledge Sources Configuration](#knowledge-sources-configuration)
 - [Conversation Starters](#conversation-starters)
 - [Actions (API Plugins)](#actions-api-plugins)
 
@@ -18,12 +19,12 @@ Complete reference for all settings in the declarativeAgent.json file.
 
 ## Core Properties
 
-| Field | Type | Required | Max Length | Description |
-|-------|------|----------|------------|-------------|
-| `$schema` | URL | Yes | - | Schema URL for validation (v1.2 or v1.6 only!) |
-| `version` | string | Yes | - | Schema version. Use `v1.2` (stable) or `v1.6` (latest) |
-| `name` | string | Yes | 100 chars | Display name for the agent |
-| `description` | string | Yes | 1000 chars | Agent description |
+| Field         | Type   | Required | Max Length | Description                                            |
+| ------------- | ------ | -------- | ---------- | ------------------------------------------------------ |
+| `$schema`     | URL    | Yes      | -          | Schema URL for validation (v1.2 or v1.6 only!)         |
+| `version`     | string | Yes      | -          | Schema version. Use `v1.2` (stable) or `v1.6` (latest) |
+| `name`        | string | Yes      | 100 chars  | Display name for the agent                             |
+| `description` | string | Yes      | 1000 chars | Agent description                                      |
 
 ```json
 {
@@ -42,8 +43,8 @@ Complete reference for all settings in the declarativeAgent.json file.
 
 The `instructions` field defines the agent's personality, behavior, and capabilities.
 
-| Field | Type | Max Length | Description |
-|-------|------|------------|-------------|
+| Field          | Type   | Max Length | Description                           |
+| -------------- | ------ | ---------- | ------------------------------------- |
 | `instructions` | string | 8000 chars | System prompt defining agent behavior |
 
 ### Best Practices
@@ -83,22 +84,22 @@ Define what data sources the agent can access.
 
 ### v1.2 Schema (Current - Stable)
 
-| Capability | Description |
-|------------|-------------|
+| Capability              | Description                                 |
+| ----------------------- | ------------------------------------------- |
 | `OneDriveAndSharePoint` | Access user's OneDrive and SharePoint files |
-| `WebSearch` | Search the web using Bing |
-| `GraphConnectors` | Access Graph connector data |
-| `GraphicArt` | Generate images (DALL-E) |
-| `CodeInterpreter` | Execute Python code |
+| `WebSearch`             | Search the web using Bing                   |
+| `GraphConnectors`       | Access Graph connector data                 |
+| `GraphicArt`            | Generate images (DALL-E)                    |
+| `CodeInterpreter`       | Execute Python code                         |
 
 ### v1.5+ Schema ONLY (Not available in v1.2!)
 
-| Capability | Description |
-|------------|-------------|
-| `TeamsMessages` | Access Teams chats and channels |
-| `Email` | Access Outlook emails |
-| `People` | Access organization people info |
-| `Meetings` | Access calendar meetings (v1.6 only) |
+| Capability      | Description                          |
+| --------------- | ------------------------------------ |
+| `TeamsMessages` | Access Teams chats and channels      |
+| `Email`         | Access Outlook emails                |
+| `People`        | Access organization people info      |
+| `Meetings`      | Access calendar meetings (v1.6 only) |
 
 ### OneDriveAndSharePoint
 
@@ -179,15 +180,132 @@ Without `items_by_url` or `items_by_sharepoint_ids`, it searches the user's enti
 
 ---
 
+## Knowledge Sources Configuration
+
+### Overview
+
+M365 Copilot agents can be grounded in multiple knowledge source types. Knowledge sources can be configured via:
+
+1. **Declarative Agent Manifest** (`declarativeAgent.json`) - Code-based configuration
+2. **Agent Builder UI** (M365 Copilot native) - Visual drag-drop interface
+
+### Configuration Methods
+
+#### Method 1: Manifest-Based (Agents Toolkit)
+
+Configure capabilities in `declarativeAgent.json` as shown in [Capabilities](#capabilities) section.
+
+#### Method 2: Agent Builder UI (M365 Copilot)
+
+**Access**: https://m365.cloud.microsoft/chat → **Create agent** → **Configure** tab
+
+**Knowledge Sources Available**:
+- 🌐 Public websites (up to 4 URLs, 2 levels deep)
+- 📁 SharePoint sites, files, folders (up to 100 files)
+- 💬 Teams chats and meetings (up to 5 specific chats, or all accessible)
+- 📧 Outlook emails (entire mailbox)
+- 📎 Embedded files (up to 20 files, direct upload)
+- 👥 People data (organizational profiles)
+- 🔌 Copilot connectors (Azure DevOps, Jira, GitHub, ServiceNow, etc.)
+
+### Embedded Files (Agent Builder Only)
+
+Upload files directly from your device for embedded knowledge.
+
+**Limits**:
+- Max 20 files per agent
+- Max 512 MB per file (Word, PDF, PowerPoint, Text)
+- Max 30 MB per file (Excel)
+- Supported formats: .doc, .docx, .pdf, .ppt, .pptx, .txt, .xls, .xlsx, .html*
+
+**Sensitivity Labels**:
+- Agent inherits highest priority label from embedded files
+- Only users with extract rights can install/use the agent
+- Labels apply to embedded content AND agent responses
+- ⚠️ **Information Barriers NOT supported** on embedded files
+
+**Unsupported**:
+- Double Key Encryption (DKE)
+- User-defined permissions
+- Files with extract rights disabled
+- Cross-tenant files with encryption
+- Password-protected files
+
+### Scoped Copilot Connectors
+
+Fine-grained control over connector data sources:
+
+| Connector                       | Scope Attribute                  |
+| ------------------------------- | -------------------------------- |
+| Azure DevOps Work Items         | Area path                        |
+| Azure DevOps Wiki               | Project                          |
+| Confluence                      | Space                            |
+| Google Drive                    | Folder                           |
+| GitHub (PRs, Issues, Knowledge) | Repository                       |
+| Jira                            | Project                          |
+| ServiceNow Knowledge            | Knowledge base                   |
+| ServiceNow Catalog              | Catalog                          |
+| ServiceNow Tickets              | Entity type/Category/Subcategory |
+
+**Example**: Scope Azure DevOps to specific area path
+1. Add Azure DevOps Work Items connector
+2. Select connections
+3. Choose "Select an area path"
+4. Search/select specific area path
+
+### Advanced Features
+
+#### Prioritize Knowledge Sources
+
+Toggle "Only use specified sources" to:
+- ✅ Answer search-based queries ONLY from your knowledge sources
+- ✅ Use general AI knowledge for non-search queries (math, translation)
+- ✅ Return fallback message if answer not found in sources
+
+**Use when**: You need strict knowledge control (compliance, proprietary info)
+**Avoid when**: You want general reasoning alongside custom knowledge
+
+#### File Readiness
+
+- Newly uploaded SharePoint files: **several minutes** to index
+- Visual indicator: "Preparing" label during indexing
+- Manual refresh: Reload button in Knowledge section
+- Renamed/deleted files: Auto-detected by agent
+
+### Configuration Best Practices
+
+| Principle       | Recommendation                                       |
+| --------------- | ---------------------------------------------------- |
+| **Conciseness** | Shorter documents perform better than large volumes  |
+| **Recency**     | Keep knowledge sources up-to-date                    |
+| **Relevance**   | Focused content improves accuracy over broad content |
+| **Excel Data**  | Single sheet per workbook for best results           |
+| **Permissions** | Use user-delegated permissions, not service accounts |
+| **Compliance**  | Respect existing sensitivity labels and permissions  |
+
+### Limitations
+
+- ❌ Restricted SharePoint Search blocks SharePoint as knowledge source
+- ❌ Communication sites may not appear in SharePoint picker
+- ❌ Cannot scope to individual meetings (only all meetings or specific chats)
+- ❌ Cannot scope email knowledge (entire mailbox only)
+- ❌ Embedded files NOT supported in GCC-M environments
+
+### Reference
+
+For complete details, see: [Add knowledge sources to your declarative agent](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-add-knowledge)
+
+---
+
 ## Conversation Starters
 
 Suggested prompts shown to users when they start a chat.
 
-| Field | Type | Max | Description |
-|-------|------|-----|-------------|
-| `conversation_starters` | array | 10 | Suggested prompts |
-| `conversation_starters[].title` | string | 50 chars | Button text |
-| `conversation_starters[].text` | string | 250 chars | Full prompt sent |
+| Field                           | Type   | Max       | Description       |
+| ------------------------------- | ------ | --------- | ----------------- |
+| `conversation_starters`         | array  | 10        | Suggested prompts |
+| `conversation_starters[].title` | string | 50 chars  | Button text       |
+| `conversation_starters[].text`  | string | 250 chars | Full prompt sent  |
 
 ### Best Practices
 
@@ -231,10 +349,10 @@ Suggested prompts shown to users when they start a chat.
 
 Connect the agent to external APIs.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `actions` | array | API plugin references |
-| `actions[].id` | string | Unique action ID |
+| Field            | Type      | Description                 |
+| ---------------- | --------- | --------------------------- |
+| `actions`        | array     | API plugin references       |
+| `actions[].id`   | string    | Unique action ID            |
 | `actions[].file` | file path | Path to API plugin manifest |
 
 ### API Plugin Structure
@@ -293,10 +411,10 @@ appPackage/
 
 ### Authentication Types
 
-| Type | Description |
-|------|-------------|
-| `None` | No authentication |
-| `OAuthPluginVault` | OAuth via Plugin Vault |
+| Type                | Description              |
+| ------------------- | ------------------------ |
+| `None`              | No authentication        |
+| `OAuthPluginVault`  | OAuth via Plugin Vault   |
 | `ApiKeyPluginVault` | API key via Plugin Vault |
 
 ---
@@ -344,12 +462,12 @@ appPackage/
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| Agent not responding | Check `id` matches manifest |
-| Capabilities not working | Ensure user has permissions |
+| Issue                         | Solution                       |
+| ----------------------------- | ------------------------------ |
+| Agent not responding          | Check `id` matches manifest    |
+| Capabilities not working      | Ensure user has permissions    |
 | Conversation starters missing | Max 10, check character limits |
-| Instructions truncated | Max 8000 characters |
+| Instructions truncated        | Max 8000 characters            |
 
 ### Validation
 
