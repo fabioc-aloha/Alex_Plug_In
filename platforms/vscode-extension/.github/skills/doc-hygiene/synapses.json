@@ -1,0 +1,37 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "doc-hygiene",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
+            "type": "sibling",
+            "strength": 0.9,
+            "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects"
+        },
+        {
+            "target": ".github/instructions/roadmap-maintenance.instructions.md",
+            "type": "related",
+            "strength": 0.75,
+            "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules"
+        },
+        {
+            "target": ".github/instructions/semantic-audit.instructions.md",
+            "type": "supports",
+            "strength": 0.8,
+            "reason": "Semantic audits enforce doc hygiene standards"
+        }
+    ],
+    "when": [
+        "User needs to prevent documentation drift",
+        "User encounters stale counts or hardcoded values in docs",
+        "User maintains living documents"
+    ],
+    "yields": [
+        "Anti-drift documentation rules",
+        "Count elimination patterns",
+        "Living document maintenance guidelines"
+    ]
+}

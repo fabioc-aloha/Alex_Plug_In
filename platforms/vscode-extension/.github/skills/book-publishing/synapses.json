@@ -1,0 +1,43 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "book-publishing",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "sibling",
+            "strength": 0.8,
+            "reason": "Similar document export pipeline but for KDP/print-ready output"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "depends-on",
+            "strength": 0.85,
+            "reason": "Diagrams in books must follow ATACCU quality standards"
+        },
+        {
+            "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
+            "type": "related",
+            "strength": 0.5,
+            "reason": "Cover art and visual assets for book publishing"
+        }
+    ],
+    "when": [
+        "User wants to publish a book via KDP",
+        "User needs Markdown-to-PDF via Pandoc and LuaLaTeX",
+        "User needs print-ready formatting with emoji rendering"
+    ],
+    "yields": [
+        "Print-ready PDF via LuaLaTeX",
+        "KDP-compatible book formatting",
+        "Emoji-rendered documents"
+    ],
+    "tools": {
+        "required": [
+            "pandoc",
+            "lualatex"
+        ]
+    }
+}

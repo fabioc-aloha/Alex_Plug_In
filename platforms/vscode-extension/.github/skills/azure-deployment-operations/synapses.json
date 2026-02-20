@@ -1,0 +1,31 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "azure-deployment-operations",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/instructions/azure-enterprise-deployment.instructions.md",
+            "type": "depends-on",
+            "strength": 0.95,
+            "reason": "Enterprise deployment patterns and pre-deployment validation"
+        },
+        {
+            "target": ".github/skills/secrets-management/SKILL.md",
+            "type": "related",
+            "strength": 0.7,
+            "reason": "Azure deployments require secure credential handling"
+        }
+    ],
+    "when": [
+        "User deploys to Azure Static Web Apps, Container Apps, or App Service",
+        "User needs phased rollout or pre-deployment validation",
+        "User asks about Azure infrastructure patterns"
+    ],
+    "yields": [
+        "Production deployment configurations",
+        "Pre-deployment validation checklists",
+        "Phased rollout strategies"
+    ]
+}
