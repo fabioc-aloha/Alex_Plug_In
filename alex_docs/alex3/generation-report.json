@@ -1,142 +1,30 @@
 {
-  "generatedAt": "2026-02-20T04:11:15.270Z",
-  "duration": "240.3s",
+  "generatedAt": "2026-02-20T04:14:37.874Z",
+  "duration": "7.0s",
   "dryRun": false,
   "seriesA": {
     "model": "ideogram-ai/ideogram-v2",
-    "count": 7,
-    "successful": 7,
+    "count": 6,
+    "successful": 0,
     "costPerImage": 0.08
   },
   "seriesB": {
     "model": "black-forest-labs/flux-1.1-pro",
     "count": 8,
-    "successful": 8,
+    "successful": 1,
     "costPerImage": 0.04
   },
-  "totalCost": "$0.88",
+  "totalCost": "$0.04",
   "outputDirs": {
     "agents": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\agents",
     "states": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\states"
   },
   "results": [
     {
-      "series": "A",
-      "filename": "AGENT-ALEX.png",
-      "title": "ORCHESTRATE",
-      "url": "https://replicate.delivery/xezq/cGe3SN4DRFVMGySkjgiwkuqd02HZ3JnHjg9RAi4aw4hDgsELA/tmpnqs9le_c.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-RESEARCHER.png",
-      "title": "RESEARCH",
-      "url": "https://replicate.delivery/xezq/VKJcLMYeVD3sHKPlQ9tFkNmAXhdirfEtKDvPWkGg6leeBklYB/tmplhbk2fpp.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-BUILDER.png",
-      "title": "BUILD",
-      "url": "https://replicate.delivery/xezq/6Ozrfc0NWaV5KCNjFOtO37K6ZH5dzP0InuReEuwZoXfsBySsA/tmp10ck9uj6.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-VALIDATOR.png",
-      "title": "VALIDATE",
-      "url": "https://replicate.delivery/xezq/0Tywxbeh6U0NXq9fX6AxaVXF4yI99qd9ErKFUG77ZafbCySsA/tmpnenskt2k.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-DOCUMENTARIAN.png",
-      "title": "DOCUMENT",
-      "url": "https://replicate.delivery/xezq/OAbtadhzAap0CdjSygbaAeZTXmKmYTUEhfATs6Q7PgFkBZJWA/tmptvafm9wk.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-AZURE.png",
-      "title": "AZURE",
-      "url": "https://replicate.delivery/xezq/ndSEvQrxVGbVFhK9gcNTTjNDDoz9uuypstZxTEWqoU1egsELA/tmpmw1bnww7.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "A",
-      "filename": "AGENT-M365.png",
-      "title": "M365",
-      "url": "https://replicate.delivery/xezq/bRVL8TOTdS5uJ5LTeMWvNeUtzeY0ieNF0GeV1DKerU61kQWiF/tmp5j5094pu.png",
-      "cost": 0.08,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-MEDITATION.png",
-      "title": "Meditation",
-      "url": "https://replicate.delivery/xezq/fngjwv7wdX2UVShcCp9k4QdkQa3NnsVqYMQ0bfGVqnHcCZJWA/tmpzsyqdo1i.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-DEBUGGING.png",
-      "title": "Debugging",
-      "url": "https://replicate.delivery/xezq/cKVO907boioiGlnP1lKkepAcgoHNDreg5iPUQegwkb1LFySsA/tmpz9g1sxvf.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-DISCOVERY.png",
-      "title": "Discovery",
-      "url": "https://replicate.delivery/xezq/IdXmwOUGG1K9NpmhIvKLjUtxq5tXceyGAKKJD2dVE93XhsELA/tmpuog9i1_z.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-PLANNING.png",
-      "title": "Planning",
-      "url": "https://replicate.delivery/xezq/TOt6d0I3Sy6aAhny4ofKk5YvdGi8RJqredpWe2dqKfcjLklYB/tmpryh85any.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-TEACHING.png",
-      "title": "Teaching",
-      "url": "https://replicate.delivery/xezq/s6Xf8vlm10zaASDBvpCxxzoD7QikePKzh92Y17GKz7GDDZJWA/tmp656gok7p.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-BUILDING.png",
-      "title": "Building",
-      "url": "https://replicate.delivery/xezq/6NdOmf2gYfiN8UU4xnF3v3hqTDJ5Cw8Bu8MptY84fvdaGySsA/tmpcz5uv4hu.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
       "series": "B",
       "filename": "STATE-REVIEWING.png",
       "title": "Code Review",
-      "url": "https://replicate.delivery/xezq/4xMAaAs2shY2I1Gf2BW0zw8DBT3ozFEz3SdpXj7ZMvDshsELA/tmpm86nnr9f.png",
-      "cost": 0.04,
-      "status": "success"
-    },
-    {
-      "series": "B",
-      "filename": "STATE-LEARNING.png",
-      "title": "Learning",
-      "url": "https://replicate.delivery/xezq/0f65s7ZXiYxkSKjDXsFar65Pk8txOCJZUDbNHXO9wnSxhsELA/tmppz0n0of_.png",
+      "url": "https://replicate.delivery/xezq/mYEP9Qomc7ofPS8ETpmTC8v72IkkhNX9cH8NBRRPjadWjsELA/tmpxy7i84k5.png",
       "cost": 0.04,
       "status": "success"
     }

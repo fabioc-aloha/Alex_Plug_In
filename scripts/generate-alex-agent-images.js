@@ -45,6 +45,8 @@ loadEnv({ path: path.join(ROOT, '.env') });
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
 const SERIES_ARG = (args.find(a => a.startsWith('--series=')) || '--series=all').split('=')[1];
+const ONLY_ARG = args.find(a => a.startsWith('--only='));
+const ONLY_FILTER = ONLY_ARG ? ONLY_ARG.split('=')[1].split(',').map(s => s.trim().toUpperCase()) : null;
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -233,7 +235,7 @@ const COGNITIVE_STATES = [
     subtitle: 'Adversarial Quality Check',
     scenario: 'Thorough code review — reading critically, annotating, finding the edge cases',
     attire: 'gray hoodie with flannel visible at neck, focused and critical posture',
-    pose: 'leaning back slightly, arms crossed while reading, one finger tapping chin in thought, eyes narrowed analytically at code on screen',
+    pose: 'leaning back slightly in chair, chin resting on one hand in classic thinking pose, eyes narrowed analytically at code on screen',
     environment: 'clean workspace, screen showing PR diff with highlighted sections, thoughtful marks and annotations visible',
     lighting: 'cool focused light from monitor and desk lamp, analytical and clear',
     mood: 'critical and careful, skeptical but fair, the reviewer who misses nothing',
@@ -425,16 +427,19 @@ async function main() {
   // ─── Series A: Agent Mode Banners ────────────────────────────────────────
   if (runA) {
     console.log('\n━━━ Series A: Agent Mode Banners (Ideogram v2) ━━━━━━━━━━━━━━━');
-    for (let i = 0; i < AGENT_MODES.length; i++) {
+    const filteredAgents = ONLY_FILTER 
+      ? AGENT_MODES.filter(a => ONLY_FILTER.some(f => a.filename.toUpperCase().includes(f)))
+      : AGENT_MODES;
+    for (let i = 0; i < filteredAgents.length; i++) {
       const result = await generate(
-        AGENT_MODES[i],
+        filteredAgents[i],
         buildAgentModePrompt,
         generateIdeogram,
         outAgents,
         0.08,
       );
       results.push({ series: 'A', ...result });
-      if (!DRY_RUN && i < AGENT_MODES.length - 1) {
+      if (!DRY_RUN && i < filteredAgents.length - 1) {
         process.stdout.write('  ⏳ Rate limiting (2s)...');
         await new Promise(r => setTimeout(r, 2000));
         process.stdout.write(' done\n');
@@ -446,16 +451,19 @@ async function main() {
   if (runB) {
     console.log('\n━━━ Series B: Cognitive State Portraits (FLUX 1.1 Pro) ━━━━━━━');
     console.log('  Character: Alex "Mini" Finch, 21yo — consistent across all portraits');
-    for (let i = 0; i < COGNITIVE_STATES.length; i++) {
+    const filteredStates = ONLY_FILTER
+      ? COGNITIVE_STATES.filter(s => ONLY_FILTER.some(f => s.filename.toUpperCase().includes(f)))
+      : COGNITIVE_STATES;
+    for (let i = 0; i < filteredStates.length; i++) {
       const result = await generate(
-        COGNITIVE_STATES[i],
+        filteredStates[i],
         buildPortraitPrompt,
         generateFlux,
         outStates,
         0.04,
       );
       results.push({ series: 'B', ...result });
-      if (!DRY_RUN && i < COGNITIVE_STATES.length - 1) {
+      if (!DRY_RUN && i < filteredStates.length - 1) {
         process.stdout.write('  ⏳ Rate limiting (2s)...');
         await new Promise(r => setTimeout(r, 2000));
         process.stdout.write(' done\n');
