@@ -60,6 +60,11 @@ End-of-sprint stabilization for v5.9.2 and v5.9.3. Identity refinement, process 
 - **Right-click menu updated**: "Convert to Word (then format & save as PDF)" reflects full workflow
 - **Compiled + packaged + installed locally**: verified all changes working
 
+### Avatar Race Condition Fix
+- **Root cause**: `detectCognitiveState` result was sent via async `executeCommand('alex.setCognitiveState')` in `handleGeneralQuery`. The response stream started before the roundtrip completed, so the icon was never updated in time.
+- **Fix**: Moved cognitive state detection + `updateChatAvatar()` to the top of `alexChatHandler` (synchronous, before any handler runs). Added `commandStateMap` for slash commands (`/meditate` → meditation, `/dream` → dream, etc.). Removed redundant `setCognitiveState` calls from individual handlers.
+- **Pattern**: When VS Code chat participant `iconPath` must reflect per-message context, set it synchronously before any `stream.markdown()` call. Async roundtrips via `executeCommand` lose the race.
+
 ## Open Questions
 
 - Should we add automated version sync validation to the deploy:local script?

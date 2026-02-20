@@ -334,6 +334,28 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> => {
     
+    // v5.9.3: Update avatar SYNCHRONOUSLY before any response streaming.
+    // Must happen before stream.markdown() to ensure VS Code captures the correct icon.
+    // Priority: slash command state > message-detected state > current state
+    const commandStateMap: Record<string, string> = {
+        'meditate': 'meditation',
+        'dream': 'dream',
+        'selfactualize': 'meditation',
+        'learn': 'learning',
+        'confidence': 'planning',
+        'verify': 'reviewing',
+        'creative': 'discovery',
+    };
+    
+    const commandState = request.command ? commandStateMap[request.command] : null;
+    const messageState = commandState ?? detectCognitiveState(request.prompt);
+    
+    if (messageState) {
+        updateChatAvatar({ cognitiveState: messageState });
+        // Also notify welcomeView so it stays in sync (fire-and-forget)
+        vscode.commands.executeCommand('alex.setCognitiveState', messageState);
+    }
+    
     // Handle slash commands
     if (request.command === 'meditate') {
         return await handleMeditateCommand(request, context, stream, token);
@@ -469,9 +491,6 @@ async function handleMeditateCommand(
     
     stream.progress('🧘 Initiating meditation protocol with self-actualization...');
     
-    // v5.9.1: Set cognitive state for dynamic avatar
-    vscode.commands.executeCommand('alex.setCognitiveState', 'meditation');
-    
     // Detect and update persona during meditation (deep context awareness)
     const workspace = validateWorkspace();
     let personaContext = '';
@@ -556,9 +575,6 @@ async function handleDreamCommand(
     }
     
     stream.progress('🌙 Entering dream state for neural maintenance...');
-    
-    // v5.9.1: Set cognitive state for dynamic avatar
-    vscode.commands.executeCommand('alex.setCognitiveState', 'dream');
     
     stream.markdown(`## 🌙 Dream Protocol
 
@@ -909,12 +925,8 @@ async function handleGeneralQuery(
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
-    // v5.9.1: Detect cognitive state from message for dynamic avatar
-    const detectedState = detectCognitiveState(request.prompt);
-    if (detectedState) {
-        console.log(`[Alex][Avatar] Detected cognitive state: ${detectedState} from message: "${request.prompt.substring(0, 50)}..."`);
-        vscode.commands.executeCommand('alex.setCognitiveState', detectedState);
-    }
+    // v5.9.3: Cognitive state detection and avatar update now handled in alexChatHandler
+    // before dispatch to prevent race condition with async executeCommand
     
     // === UNCONSCIOUS MIND: Track conversation for auto-insight detection ===
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -1270,9 +1282,6 @@ async function handleSelfActualizeCommand(
     }
     
     stream.progress('🧘 Initiating self-actualization protocol...');
-    
-    // v5.9.1: Set cognitive state for dynamic avatar
-    vscode.commands.executeCommand('alex.setCognitiveState', 'meditation');
     
     stream.markdown(`## 🧘 Self-Actualization Protocol
 
