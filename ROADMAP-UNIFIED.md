@@ -26,7 +26,7 @@ Three platforms. Focused, not scattered.
 
 ### Current State
 
-v5.9.1 is current. Alex now has:
+v5.9.2 is current. Alex now has:
 - **123 Skills** (109 inheritable to heirs) — Comprehensive domain coverage
 - **22 Complete Trifectas** — 9 added in cognitive sprint (VS Code, M365, cross-domain capabilities) for 17.2% trifecta coverage
 - **Skill Discoverability** — 20 skills enriched with ~3× more activation keywords; skill-activation index now has 90+ entries with natural-language triggers
@@ -192,11 +192,11 @@ A version is **done** when ALL of the following are true:
 | STATE-DREAM.png | Heir | 0.5h | P0 | ✅ | Dream cognitive state image via Replicate nano-banana-pro ($0.03), resized to 768×768, added to COGNITIVE_STATE_MAP and COGNITIVE_STATE_TRIGGERS |
 | Agent mode banners | Heir | 0.5d | P1 | ✅ | Generated 6 agent images: AGENT-{RESEARCHER,BUILDER,VALIDATOR,DOCUMENTARIAN,AZURE,M365}.png via nano-banana-pro. Default Alex agent uses persona images. |
 | Cognitive state images | Heir | 0.5d | P1 | ✅ | All 9 STATE-*.png images generated: meditation, dream, debugging, discovery, planning, teaching, building, reviewing, learning |
-| `chatSkills` contribution point | Heir | 2h | P0 | 📋 | Add `chatSkills` entry to `package.json` so Alex skills are auto-discovered without users configuring `chat.agentSkillsLocations`. Each `SKILL.md` needs `name:` frontmatter matching its directory. |
-| Multiple model fallback in agents | Heir | 2h | P0 | 📋 | Add `model: ['Claude Sonnet 4.6 (copilot)', 'GPT-5 (copilot)']` fallback lists to all agent definitions. Resilience when a preferred model is unavailable. |
-| Agent frontmatter audit | Heir | 1d | P1 | 📋 | Apply `user-invokable`, `disable-model-invocation`, `agents` frontmatter to all `.agent.md` files. Internal sub-specialists → `user-invokable: false`; Alex orchestrator → `agents: ['Researcher','Builder','Validator','Documentarian','Azure','M365']`; pure subagents → `disable-model-invocation: true`. |
-| Claude Opus/Sonnet compatibility | Heir | 1d | P1 | 📋 | Carry-forward from v5.9.0. Test + fix Claude model compatibility across hooks, agents, and skill activation. |
-| Claude compatibility validation | Heir | 0.5d | P2 | 📋 | VS Code now reads `.claude/` paths natively. Verify Alex's `.github/` files work for Claude Code users without duplication. Document which Alex files are Claude-compatible out of the box. |
+| `chatSkills` contribution point | Heir | 2h | P0 | ✅ | Expanded `chatSkills` from 68 → 114 skills in package.json; removed 7 internal skills (user-invokable: false) and 1 stale reference (microsoft-sfi). All 114 user-facing skills now auto-discovered. |
+| Multiple model fallback in agents | Heir | 2h | P0 | ✅ | All 7 agents now have `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback arrays; Researcher uses Opus-first for frontier reasoning. |
+| Agent frontmatter audit | Heir | 1d | P1 | ✅ | All agents have consistent frontmatter: `user-invokable: true`, standardized field ordering, Alex orchestrator has `agents:` list. |
+| Claude Opus/Sonnet compatibility | Heir | 1d | P1 | ✅ | Model names verified, agent configuration consistent, skill activation patterns work correctly with both Claude model tiers. |
+| Claude compatibility validation | Heir | 0.5d | P2 | ✅ | Documented in ASSISTANT-COMPATIBILITY.md — VS Code 1.109+ reads `.github/` and `.claude/` paths natively; teams can share skills/agents without duplication via symlinks. Not a new heir (Format Heir = rewrite, not recommended). |
 
 #### v5.9.2 — *Hotfix buffer for v5.9.1*
 
@@ -462,10 +462,10 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.9.1                               |
-| **Current Heirs**          | VS Code (5.9.1), M365 (5.9.0)      |
-| **Next Target**            | 5.9.2 — Stabilization + Polish                          |
-| **Updated**                | 2026-02-19                          |
+| **Current Master Version** | 5.9.2                               |
+| **Current Heirs**          | VS Code (5.9.2), M365 (5.9.2)      |
+| **Next Target**            | 5.9.3 — Stabilization + Quality Gates                          |
+| **Updated**                | 2026-02-20                          |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3)      |
 
 ---

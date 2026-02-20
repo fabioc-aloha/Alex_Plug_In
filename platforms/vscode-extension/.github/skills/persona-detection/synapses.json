@@ -1,16 +1,10 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0",
+  "schemaVersion": "1.0",
   "skill": "persona-detection",
   "version": "1.0.0",
   "inheritance": "heir:vscode",
   "connections": [
-    {
-      "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "integrates",
-      "strength": 0.85,
-      "note": "Persona detection ships to heir via inheritance model"
-    },
     {
       "target": ".github/instructions/alex-core.instructions.md",
       "type": "references",

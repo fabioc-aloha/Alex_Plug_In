@@ -3,12 +3,6 @@
   "inheritance": "heir:m365",
   "connections": [
     {
-      "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "implements",
-      "strength": 0.85,
-      "context": "M365 heir debugging"
-    },
-    {
       "target": ".github/skills/teams-app-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.85,
@@ -70,5 +64,5 @@
     "agent development"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "schemaVersion": "1.0"
 }

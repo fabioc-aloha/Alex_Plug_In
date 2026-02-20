@@ -1,8 +1,8 @@
 ---
 description: Alex Validator Mode - Adversarial quality assurance with skeptical analysis
 name: Validator
+model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch']
-model: Claude Sonnet 4
 user-invokable: true
 handoffs:
   - label: 🔨 Return to Builder

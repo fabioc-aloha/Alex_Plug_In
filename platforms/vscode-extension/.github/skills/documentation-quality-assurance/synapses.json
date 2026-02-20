@@ -1,6 +1,6 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.0",
   "version": "1.1.0",
   "skill": "documentation-quality-assurance",
   "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
@@ -12,13 +12,6 @@
       "type": "operational",
       "direction": "bidirectional",
       "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
-    },
-    {
-      "target": "../heir-sync-management/SKILL.md",
-      "strength": 0.7,
-      "type": "quality-gate",
-      "direction": "supports",
-      "context": "Heir validation uses doc QA patterns for sync verification"
     }
   ],
   "activationContexts": [
@@ -46,7 +39,7 @@
       "whenNeeded": "operational docs lack at-a-glance context (regression checklists, deployment guides)"
     }
   ],
-  "lastUpdated": "2026-02-14",
+  "lastUpdated": "2026-02-20T07:45:33.299Z",
   "changelog": [
     {
       "version": "1.1.0",

@@ -112,5 +112,5 @@
     "schema compliance"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "schemaVersion": "1.0"
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.1.0",
+  "schemaVersion": "1.0",
   "skillId": "vscode-extension-patterns",
   "version": "1.4.0",
   "lastValidated": "2026-02-15",
@@ -15,7 +15,7 @@
     {
       "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
       "type": "implements",
-      "strength": 0.90,
+      "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns"
     },
     {
@@ -27,7 +27,7 @@
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
-      "strength": 0.80,
+      "strength": 0.8,
       "reason": "CSP, SecretStorage, telemetry compliance"
     },
     {
@@ -39,7 +39,7 @@
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "uses",
-      "strength": 0.70,
+      "strength": 0.7,
       "reason": "TDZ debugging and production build troubleshooting"
     },
     {

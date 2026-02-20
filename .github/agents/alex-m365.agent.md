@@ -1,6 +1,7 @@
 ---
 description: Alex M365 Mode - Microsoft 365 and Teams development guidance
 name: M365
+model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'fetch', 'codebase']
 user-invokable: true
 handoffs:

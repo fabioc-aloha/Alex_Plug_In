@@ -1,9 +1,9 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0",
+  "schemaVersion": "1.0",
   "skillId": "release-process",
   "version": "1.4.0",
-  "lastUpdated": "2026-02-16",
+  "lastUpdated": "2026-02-20T07:45:33.330Z",
   "inheritance": "inheritable",
   "connections": [
     {

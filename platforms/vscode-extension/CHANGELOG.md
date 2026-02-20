@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.2] - 2026-02-20
+
+> **Pre-Publish Maintenance** — Synapse sync, chatSkills expansion, model fallbacks, and agent audit
+
+### Added
+
+- **chatSkills contribution expanded (68 → 114 skills)** — All user-invokable skills now registered; removed internal skills
+- **Model fallback arrays for all agents** — All 7 agents have `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback lists
+- **Agent frontmatter audit complete** — Consistent `user-invokable: true`, standardized model/tools ordering
+
+### Fixed
+
+- **10 synapses synced** — brain-qa dream maintenance
+- **Global Knowledge count** — Updated insight count 280 → 281
+- **Claude Opus/Sonnet compatibility** — Verified model names and agent configuration
+- **Claude in VS Code compatibility** — Documented in ASSISTANT-COMPATIBILITY.md; shared skills/agents work without duplication
+
+---
+
 ## [5.9.1] - 2026-02-20
 
 > **Dynamic Avatar State System** — Welcome panel avatar responds to cognitive states, agent modes, and active skills

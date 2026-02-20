@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.2] - 2026-02-20
+
+> **Pre-Publish Maintenance** — Synapse sync, chatSkills expansion, model fallbacks, and agent audit
+
+### Added
+
+- **chatSkills contribution expanded (68 → 114 skills)** — All user-invokable skills now registered with VS Code's native chatSkills contribution point; removed 7 internal skills and 1 stale reference
+- **Model fallback arrays for all agents** — All 7 agents now specify `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback lists for resilience when preferred model unavailable; Researcher uses `['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']` for frontier reasoning
+- **Agent frontmatter audit complete** — All agents have consistent frontmatter: `user-invokable: true`, standardized model/tools ordering, Alex orchestrator has `agents:` list
+
+### Fixed
+
+- **10 synapses synced** — brain-qa dream maintenance aligned synapses for brain-qa, brand-asset-management, documentation-quality-assurance, global-knowledge, m365-agent-debugging, persona-detection, release-process, secrets-management, security-review, vscode-extension-patterns
+- **Global Knowledge count** — Updated insight count 280 → 281 in copilot-instructions
+- **Claude Opus/Sonnet compatibility** — Verified model names, agent configuration, and skill activation patterns work correctly with both Claude model tiers
+- **Claude in VS Code compatibility** — Documented VS Code 1.109+ interoperability in ASSISTANT-COMPATIBILITY.md; teams using both GitHub Copilot and Claude can share `.github/skills/` and `.github/agents/` without duplication
+
+---
+
 ## [5.9.1] - 2026-02-20
 
 > **Dynamic Avatar State System** — Welcome panel avatar now responds to cognitive states, agent modes, active skills, and user personas with unified priority-chain resolution

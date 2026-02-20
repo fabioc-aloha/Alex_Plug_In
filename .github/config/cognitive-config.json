@@ -1,6 +1,6 @@
 {
   "architecture_name": "Alex Cognitive Architecture",
-  "version": "5.9.1",
+  "version": "5.9.2",
   "global_memory_files": [
     ".github/copilot-instructions.md"
   ],

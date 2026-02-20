@@ -1,11 +1,11 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0",
+  "schemaVersion": "1.0",
   "skillId": "security-review",
   "version": "2.0.0",
   "inheritance": "inheritable",
   "created": "2026-02-01",
-  "lastUpdated": "2026-02-19",
+  "lastUpdated": "2026-02-20T07:45:33.347Z",
   "description": "Security-focused code analysis, OWASP patterns, STRIDE threat modeling, Microsoft SFI",
   "connections": [
     {
@@ -49,12 +49,6 @@
       "type": "Implements",
       "strength": 0.9,
       "description": "Dependency security practices and vulnerability scanning"
-    },
-    {
-      "target": "global-knowledge://GI-csp-onclick-to-data-cmd-pattern-2026-02-08",
-      "type": "Documents",
-      "strength": 0.8,
-      "description": "CSP event delegation pattern for VS Code webviews"
     }
   ],
   "activationTriggers": [

@@ -10,6 +10,7 @@ param(
     [int[]]$Phase,  # Run specific phases: -Phase 1,5,7
     
     [switch]$Fix,   # Auto-fix where possible
+    [switch]$SkipSync,  # Skip pre-sync (useful to see drift before syncing)
     [switch]$Quiet
 )
 
@@ -72,6 +73,100 @@ $runPhases = switch ($Mode) {
 }
 
 if ($Phase) { $runPhases = $Phase }
+
+# ============================================================
+# PRE-SYNC: Ensure heir is up-to-date before comparisons
+# ============================================================
+# This prevents false positives after meditation sessions that modify master synapses.
+# The sync runs master→heir to ensure we're comparing "deployed" state, not "drift" state.
+#
+# Strategy:
+#   1. Run sync-architecture.cjs to copy skills/instructions/prompts/agents
+#   2. Force synapse sync to ensure synapses.json files match (handles meditation updates)
+#
+$needsSync = ($Mode -eq "all" -or $Mode -eq "sync") -and (-not $SkipSync)
+if ($needsSync) {
+    if (-not $Quiet) { Write-Host "`n=== [Pre-Sync] Master → Heir Synchronization ===" -ForegroundColor Magenta }
+    
+    # Step 1: Sync architecture (skills, instructions, prompts, etc.)
+    $syncScript = Join-Path $ghPath "muscles\sync-architecture.cjs"
+    if (Test-Path $syncScript) {
+        try {
+            $syncOutput = & node $syncScript 2>&1
+            if ($LASTEXITCODE -eq 0) {
+                if (-not $Quiet) { 
+                    Write-Host "  ✅ Architecture synchronized from master" -ForegroundColor Green 
+                    # Show key stats from sync output
+                    $syncOutput | Select-String -Pattern "skills|instructions|prompts|agents|muscles" | ForEach-Object {
+                        Write-Host "     $_" -ForegroundColor DarkGray
+                    }
+                }
+            }
+            else {
+                Write-Host "  ⚠️ Sync completed with warnings" -ForegroundColor Yellow
+                $warnings += "sync-architecture.cjs returned exit code $LASTEXITCODE"
+            }
+        }
+        catch {
+            Write-Host "  ❌ Sync failed: $_" -ForegroundColor Red
+            $issues += "Pre-sync failed: $_"
+        }
+    }
+    else {
+        Write-Host "  ⚠️ sync-architecture.cjs not found at $syncScript" -ForegroundColor Yellow
+        $warnings += "sync-architecture.cjs not found"
+    }
+    
+    # Step 2: Force synapse sync (handles meditation-induced updates)
+    # After meditation, master synapses.json files are updated with new connections.
+    # sync-architecture.cjs copies them, but Phase 7's comparison logic is more sophisticated.
+    # Running the Phase 7 sync logic here ensures apples-to-apples comparison.
+    if (-not $Quiet) { Write-Host "`n  🔗 Forcing synapse sync..." -ForegroundColor Magenta }
+    
+    if (Test-Path "$heirBase\.github\skills") {
+        $masterOnlySkills = @("master-heir-management", "heir-sync-management")
+        $heirSkills = Get-ChildItem "$heirBase\.github\skills" -Directory
+        $synapseSyncCount = 0
+        
+        foreach ($heirSkillDir in $heirSkills) {
+            $skill = $heirSkillDir.Name
+            $masterSyn = "$ghPath\skills\$skill\synapses.json"
+            $heirSyn = "$heirBase\.github\skills\$skill\synapses.json"
+            
+            if ((Test-Path $masterSyn) -and (Test-Path $heirSyn)) {
+                $masterHash = (Get-FileHash $masterSyn).Hash
+                $heirHash = (Get-FileHash $heirSyn).Hash
+                
+                if ($masterHash -ne $heirHash) {
+                    # Sync master → heir with master-only filtering
+                    $masterSynJson = Get-Content $masterSyn -Raw | ConvertFrom-Json
+                    $heirConns = @($masterSynJson.connections | Where-Object {
+                            $target = $_.target
+                            -not ($masterOnlySkills | Where-Object { $target -match $_ })
+                        })
+                    $masterSynJson.connections = $heirConns
+                    $masterSynJson | ConvertTo-Json -Depth 20 | Set-Content $heirSyn -Encoding UTF8NoBOM
+                    $synapseSyncCount++
+                }
+            }
+        }
+        
+        if ($synapseSyncCount -gt 0) {
+            if (-not $Quiet) { 
+                Write-Host "  ✅ Synced $synapseSyncCount synapse file(s)" -ForegroundColor Green 
+            }
+        }
+        else {
+            if (-not $Quiet) { 
+                Write-Host "  ✅ All synapses already in sync" -ForegroundColor Green 
+            }
+        }
+    }
+}
+elseif ($SkipSync -and -not $Quiet) {
+    Write-Host "`n=== [Pre-Sync] SKIPPED (-SkipSync flag) ===" -ForegroundColor DarkYellow
+    Write-Host "  ℹ️ Heir may be out of sync with master — comparisons may show drift" -ForegroundColor DarkYellow
+}
 
 # ============================================================
 # PHASE 1: Synapse Target Validation

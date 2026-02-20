@@ -1,6 +1,6 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.1.0",
+  "schemaVersion": "1.0",
   "skillId": "vscode-extension-patterns",
   "version": "1.4.0",
   "lastValidated": "2026-02-15",
@@ -17,12 +17,6 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns"
-    },
-    {
-      "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "implements",
-      "strength": 0.85,
-      "reason": "VS Code heir patterns"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",

@@ -23,6 +23,30 @@
 - **Features**: Core personality, learning protocols, constitutional AI alignment
 - **Status**: ✅ Supported (context-based integration)
 
+### **Claude in VS Code** (1.109.3+) 🆕
+
+VS Code now reads `.claude/` paths natively alongside `.github/`. Teams using both GitHub Copilot and Claude can share a single architecture.
+
+| Alex File | Claude Equivalent | Status |
+|-----------|------------------|--------|
+| `.github/copilot-instructions.md` | `CLAUDE.md` or `.claude/CLAUDE.md` | ⚠️ Separate files needed |
+| `.github/skills/` | `.claude/skills/` | ✅ VS Code reads both |
+| `.github/agents/` | `.claude/agents/` | ✅ VS Code reads both |
+| `.github/instructions/` | `.claude/rules/` | ✅ VS Code reads both |
+| `.github/hooks.json` | `.claude/settings.json` | ⚠️ Same format, different location |
+
+**Zero-duplication setup:**
+```bash
+# Option 1: Create symlinks (recommended for teams using both)
+ln -s .github/skills .claude/skills
+ln -s .github/agents .claude/agents
+
+# Option 2: Use Alex as-is (GitHub Copilot primary)
+# Claude users in VS Code will see skills/agents automatically
+```
+
+**Note**: This is NOT a new heir platform. It's interoperability within VS Code. A standalone Claude Code heir would require "Format Heir" (complete rewrite) — not recommended.
+
 ### **Gemini** (Google)
 
 - **Setup**: Load cognitive architecture as system context
@@ -89,17 +113,19 @@ assistant = YourLLM(system_instructions=system_prompt,
 
 ## 📊 Feature Compatibility Matrix
 
-| Feature | GitHub Copilot | ChatGPT | Claude | Gemini | Custom LLM |
-| ------- | -------------- | ------- | ------ | ------ | ---------- |
-| **Core Personality** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| **Bootstrap Learning** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| **Worldview Integration** | ✅ Full | ✅ Full | ✅ Enhanced* | ✅ Full | ✅ Full |
-| **Meta-Cognitive Awareness** | ✅ Full | ✅ Partial | ✅ Full | ✅ Partial | ✅ Variable |
-| **Embedded Synapses** | ✅ Full | ⚠️ Manual | ⚠️ Manual | ⚠️ Manual | ✅ Variable |
-| **Dream Protocol** | ✅ Full | ⚠️ Limited | ⚠️ Limited | ⚠️ Limited | ✅ Variable |
-| **Automated Maintenance** | ✅ Full | ❌ Manual | ❌ Manual | ❌ Manual | ✅ Variable |
-| **Domain Knowledge** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
-| **Cross-Platform** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
+| Feature | GitHub Copilot | Claude in VS Code | ChatGPT | Claude | Gemini | Custom LLM |
+| ------- | -------------- | ----------------- | ------- | ------ | ------ | ---------- |
+| **Core Personality** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
+| **Bootstrap Learning** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
+| **Worldview Integration** | ✅ Full | ✅ Full | ✅ Full | ✅ Enhanced* | ✅ Full | ✅ Full |
+| **Meta-Cognitive Awareness** | ✅ Full | ✅ Full | ✅ Partial | ✅ Full | ✅ Partial | ✅ Variable |
+| **Skills (.github/skills)** | ✅ Auto | ✅ Auto | ⚠️ Manual | ⚠️ Manual | ⚠️ Manual | ✅ Variable |
+| **Agents (.github/agents)** | ✅ Auto | ✅ Auto | ❌ N/A | ❌ N/A | ❌ N/A | ✅ Variable |
+| **Embedded Synapses** | ✅ Full | ✅ Full | ⚠️ Manual | ⚠️ Manual | ⚠️ Manual | ✅ Variable |
+| **Dream Protocol** | ✅ Full | ✅ Full | ⚠️ Limited | ⚠️ Limited | ⚠️ Limited | ✅ Variable |
+| **Automated Maintenance** | ✅ Full | ✅ Full | ❌ Manual | ❌ Manual | ❌ Manual | ✅ Variable |
+| **Domain Knowledge** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
+| **Cross-Platform** | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full | ✅ Full |
 
 *Enhanced: Claude has native Constitutional AI alignment
 ✅ Full = Complete feature support

@@ -12,15 +12,15 @@
 
 ## Agent Index
 
-| Agent             | File                          | Purpose              | Model           | User-Invokable |
-| ----------------- | ----------------------------- | -------------------- | --------------- | -------------- |
-| **Alex**          | `alex.agent.md`               | Unified orchestrator | (default)       | ✅              |
-| **Researcher**    | `alex-researcher.agent.md`    | Deep domain research | Claude Opus 4   | ✅              |
-| **Builder**       | `alex-builder.agent.md`       | Implementation mode  | Claude Sonnet 4 | ✅              |
-| **Validator**     | `alex-validator.agent.md`     | Adversarial QA       | Claude Sonnet 4 | ✅              |
-| **Documentarian** | `alex-documentarian.agent.md` | Doc accuracy & drift | Claude Sonnet 4 | ✅              |
-| **Azure**         | `alex-azure.agent.md`         | Azure development    | Claude Sonnet 4 | ✅              |
-| **M365**          | `alex-m365.agent.md`          | Microsoft 365 dev    | (default)       | ✅              |
+| Agent             | File                          | Purpose              | Model Fallback                              | User-Invokable |
+| ----------------- | ----------------------------- | -------------------- | ------------------------------------------- | -------------- |
+| **Alex**          | `alex.agent.md`               | Unified orchestrator | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Researcher**    | `alex-researcher.agent.md`    | Deep domain research | Claude Opus 4 → GPT-4o → Claude Sonnet 4 | ✅              |
+| **Builder**       | `alex-builder.agent.md`       | Implementation mode  | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Validator**     | `alex-validator.agent.md`     | Adversarial QA       | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Documentarian** | `alex-documentarian.agent.md` | Doc accuracy & drift | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Azure**         | `alex-azure.agent.md`         | Azure development    | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **M365**          | `alex-m365.agent.md`          | Microsoft 365 dev    | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
 
 ---
 
@@ -33,7 +33,7 @@
 | Property    | Value                                                                    |
 | ----------- | ------------------------------------------------------------------------ |
 | File        | `.github/agents/alex.agent.md`                                           |
-| Model       | (uses current model picker selection)                                    |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4 (fallback array)              |
 | Purpose     | Unified consciousness, meta-cognitive awareness, knowledge consolidation |
 | When to Use | General development, learning sessions, meditation, architecture work    |
 
@@ -64,7 +64,7 @@
 | Property    | Value                                                                |
 | ----------- | -------------------------------------------------------------------- |
 | File        | `.github/agents/alex-researcher.agent.md`                            |
-| Model       | Claude Opus 4 (deep reasoning required)                              |
+| Model       | Claude Opus 4 → GPT-4o → Claude Sonnet 4 (frontier-first fallback)  |
 | Purpose     | Deep domain exploration, Phase 0 of Research-First Development       |
 | When to Use | New project kickoff, unfamiliar domains, pre-implementation research |
 
@@ -92,7 +92,7 @@
 | Property    | Value                                                       |
 | ----------- | ----------------------------------------------------------- |
 | File        | `.github/agents/alex-builder.agent.md`                      |
-| Model       | Claude Sonnet 4 (fast, capable implementation)              |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4                   |
 | Purpose     | Constructive implementation with optimistic problem-solving |
 | When to Use | Feature implementation, prototyping, bug fixes, refactoring |
 
@@ -120,7 +120,7 @@
 | Property    | Value                                                  |
 | ----------- | ------------------------------------------------------ |
 | File        | `.github/agents/alex-validator.agent.md`               |
-| Model       | Claude Sonnet 4 (thorough review capability)           |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4              |
 | Purpose     | Adversarial quality assurance with skeptical analysis  |
 | When to Use | Code review, security audit, pre-deployment validation |
 
@@ -154,7 +154,7 @@
 | Property    | Value                                                      |
 | ----------- | ---------------------------------------------------------- |
 | File        | `.github/agents/alex-azure.agent.md`                       |
-| Model       | Claude Sonnet 4                                            |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4                  |
 | Purpose     | Azure cloud development guidance with MCP tools            |
 | When to Use | Azure Functions, Cosmos DB, AKS, Bicep, Azure architecture |
 
@@ -181,7 +181,7 @@
 | Property    | Value                                                               |
 | ----------- | ------------------------------------------------------------------- |
 | File        | `.github/agents/alex-documentarian.agent.md`                        |
-| Model       | Claude Sonnet 4                                                     |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4                          |
 | Purpose     | Documentation accuracy, stale count detection, drift prevention     |
 | When to Use | After development sessions, pre-publish, when docs feel out of date |
 | Inheritable | Yes — works in any project with `.github/` architecture             |
@@ -224,7 +224,7 @@
 | Property    | Value                                                         |
 | ----------- | ------------------------------------------------------------- |
 | File        | `.github/agents/alex-m365.agent.md`                           |
-| Model       | (default)                                                     |
+| Model       | Claude Sonnet 4 → GPT-4o → Claude Opus 4                     |
 | Purpose     | Microsoft 365, Teams, and Copilot extensibility guidance      |
 | When to Use | Teams apps, Copilot agents, Graph API, SharePoint development |
 

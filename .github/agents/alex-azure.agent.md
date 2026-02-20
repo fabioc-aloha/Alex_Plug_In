@@ -1,8 +1,8 @@
 ---
 description: Alex Azure Mode - Azure development guidance with MCP tools
 name: Azure
+model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'fetch', 'codebase']
-model: Claude Sonnet 4
 user-invokable: true
 handoffs:
   - label: 🧠 Return to Alex
