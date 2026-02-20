@@ -315,8 +315,10 @@ else {
 }
 
 # Publish
+# Note: --allow-package-secrets github bypasses a false positive on the ghp_ placeholder
+# string used in the secrets-management UI (e.g., "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 Write-Host "`n🚀 Publishing to VS Code Marketplace..." -ForegroundColor Yellow
-npx vsce publish --pat $env:VSCE_PAT @vsceArgs
+npx vsce publish --allow-package-secrets github --pat $env:VSCE_PAT @vsceArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Host "❌ Publishing failed" -ForegroundColor Red
     exit 1
