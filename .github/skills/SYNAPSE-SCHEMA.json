@@ -154,6 +154,36 @@
                 "type": "string"
             }
         },
+        "apiKeys": {
+            "type": "array",
+            "description": "API keys or environment variables required by this skill. brain-qa Phase 35 checks these and warns if absent.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "envVar": {
+                        "type": "string",
+                        "description": "Environment variable name (e.g. REPLICATE_API_TOKEN)"
+                    },
+                    "purpose": {
+                        "type": "string",
+                        "description": "What this key is used for"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "description": "true = skill non-functional without it; false = optional feature",
+                        "default": true
+                    },
+                    "getUrl": {
+                        "type": "string",
+                        "description": "URL where the user can obtain this key"
+                    }
+                },
+                "required": [
+                    "envVar",
+                    "purpose"
+                ]
+            }
+        },
         "notes": {
             "type": "string",
             "description": "Additional notes about the skill"

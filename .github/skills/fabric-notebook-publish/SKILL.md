@@ -8,6 +8,9 @@ description: "Seamless notebook publishing from VS Code to Microsoft Fabric via 
 **Domain**: Microsoft Fabric Notebook DevOps
 **Version**: 2.0.0
 **Status**: Active
+**Last Validated**: Feb 2026
+
+> ⚠️ **Staleness Watch**: Fabric's Git integration feature is still maturing. Watch for changes to sync behavior, supported item types (not all Fabric item types support Git sync), and whether GitHub support expands beyond ADO. Check [Fabric Git integration docs](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) for updates.
 
 ---
 

@@ -1,0 +1,70 @@
+{
+    "$schema": "https://json.schemastore.org/mcp.json",
+    "_meta": {
+        "description": "Alex Cognitive Architecture — Recommended MCP Server Catalog (v5.9.0)",
+        "purpose": "VS Code MCP server configurations that Alex agents are optimized to use. Copy desired servers into your .vscode/mcp.json file.",
+        "documentation": "https://code.visualstudio.com/docs/copilot/chat/mcp",
+        "lastUpdated": "2026-02-19"
+    },
+    "servers": {
+        "azure-mcp": {
+            "_description": "Azure resource management — used by the Azure agent for subscriptions, resources, and deployments",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@azure/mcp@latest",
+                "server",
+                "start"
+            ],
+            "type": "stdio",
+            "env": {
+                "AZURE_SUBSCRIPTION_ID": "${env:AZURE_SUBSCRIPTION_ID}"
+            }
+        },
+        "github-mcp": {
+            "_description": "GitHub repository access — file reading, PR review, issue management",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github@latest"
+            ],
+            "type": "stdio",
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+            }
+        },
+        "filesystem-mcp": {
+            "_description": "Local filesystem access — for reading project files outside the workspace",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem@latest",
+                "${workspaceFolder}"
+            ],
+            "type": "stdio"
+        },
+        "playwright-mcp": {
+            "_description": "Browser automation — for web research and UI validation tasks",
+            "command": "npx",
+            "args": [
+                "-y",
+                "@playwright/mcp@latest"
+            ],
+            "type": "stdio"
+        }
+    },
+    "_usage": {
+        "instructions": [
+            "1. Enable MCP gallery in VS Code: set 'chat.mcp.gallery.enabled': true in .vscode/settings.json",
+            "2. Create a .vscode/mcp.json file in your project",
+            "3. Copy the server configurations you need from 'servers' above into your mcp.json",
+            "4. Set environment variables for any servers that require authentication",
+            "5. VS Code will auto-discover and start the MCP servers when you open the workspace"
+        ],
+        "minimalMcpJson": {
+            "servers": {
+                "azure-mcp": "{ ... copy azure-mcp entry from servers above ... }"
+            }
+        }
+    }
+}

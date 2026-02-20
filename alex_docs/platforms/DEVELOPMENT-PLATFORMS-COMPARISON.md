@@ -4,7 +4,7 @@
 
 |             |                                                                |
 | ----------- | -------------------------------------------------------------- |
-| **Updated** | 2026-02-13                                                     |
+| **Updated** | 2026-02-19                                                     |
 | **Purpose** | Feature comparison across development IDEs                     |
 | **Related** | [Productivity Platforms](PRODUCTIVITY-PLATFORMS-COMPARISON.md) |
 
@@ -19,8 +19,8 @@ This document compares the native capabilities of AI **development platforms** (
 | Platform               | Vendor           | Native AI      | Interface | Alex Heir Status |
 | ---------------------- | ---------------- | -------------- | --------- | ---------------- |
 | **VS Code + Copilot**  | Microsoft/GitHub | GitHub Copilot | IDE       | ✅ Production     |
-| **GitHub Codespaces**  | Microsoft/GitHub | GitHub Copilot | Cloud IDE | ✅ Via Extension  |
-| **GitHub.com Copilot** | Microsoft/GitHub | GitHub Copilot | Web       | ❌ Not Planned    |
+| **GitHub Codespaces**  | Microsoft/GitHub | GitHub Copilot | Cloud IDE | ❌ Archived       |
+| **GitHub.com Copilot** | Microsoft/GitHub | GitHub Copilot | Web + Agent | ✅ Active heir    |
 | **VS Code CLI**        | Microsoft/GitHub | GitHub Copilot | Terminal  | ❌ Not Planned    |
 | **OpenAI Codex CLI**   | OpenAI           | GPT-4/o1       | Terminal  | 📋 Research       |
 | **Claude Code**        | Anthropic        | Claude         | Terminal  | 📋 Planning       |
@@ -46,8 +46,9 @@ This document compares the native capabilities of AI **development platforms** (
 | **AI-Native UX**      | 🥇 Cursor      | 🥈 Windsurf    | Built from ground up for AI              |
 | **Market Share**      | 🥇 VS Code     | 🥈 Cursor      | VS Code dominates, Cursor growing fast   |
 | **Terminal-Native**   | 🥇 Claude Code | 🥈 Codex CLI   | Full agentic terminal experience         |
-| **Cloud Development** | 🥇 Codespaces  | 🥈 Cursor      | Full VS Code in browser, Alex compatible |
-| **Code Review AI**    | 🥇 GitHub.com  | 🥈 Cursor      | Native PR/issue integration              |
+| **Autonomous Coding** | 🥇 GitHub Copilot Web | 🥈 Claude Code | Coding Agent creates PRs from issues, guided by Alex `.github/` instructions |
+| **Cloud Development** | 🥇 GitHub Copilot Web | 🥈 Codespaces  | Zero-cost .github/-only heir, deploy = git commit |
+| **Code Review AI**    | 🥇 GitHub.com  | 🥈 Cursor      | Copilot code review + Alex custom instructions      |
 | **Reasoning Models**  | 🥇 VS Code     | 🥈 Claude Code | Opus extended thinking, o1/o3 access     |
 
 ### Detailed Category Breakdown
@@ -107,7 +108,7 @@ This document compares the native capabilities of AI **development platforms** (
 | **AI-native development**      | Cursor        | Designed around AI from day one      |
 | **Terminal-first work**        | Claude Code   | Best CLI experience                  |
 | **Quick terminal answers**     | VS Code CLI   | Simplest UX, no session state        |
-| **Cloud development**          | Codespaces    | Full VS Code + Alex in browser       |
+| **Cloud development**          | GitHub Copilot Web | Zero-cost .github/-only, deploy = git commit |
 | **PR/code review AI**          | GitHub.com    | Native integration, no setup         |
 | **Deep reasoning tasks**       | Codex CLI     | o1/o3 models excel at complex logic  |
 
@@ -117,22 +118,22 @@ This document compares the native capabilities of AI **development platforms** (
 
 ### Feature Matrix
 
-| Feature                  |       VS Code        | Codespaces  | GitHub.com  | VS Code CLI |   Codex CLI   |     Claude Code     |       Cursor       |       Windsurf       |
+| Feature                  |       VS Code        | Codespaces  | GH Copilot Web | VS Code CLI |   Codex CLI   |     Claude Code     |       Cursor       |       Windsurf       |
 | ------------------------ | :------------------: | :---------: | :---------: | :---------: | :-----------: | :-----------------: | :----------------: | :------------------: |
-| **Custom Instructions**  | ✅ `.instructions.md` |   ✅ Same    |      ❌      |      ❌      | ✅ `AGENTS.md` |    ✅ `CLAUDE.md`    | ✅ `.cursor/rules/` | ✅ `.windsurf/rules/` |
+| **Custom Instructions**  | ✅ `.instructions.md` |   ✅ Same    | ✅ `.github/` |      ❌      | ✅ `AGENTS.md` |    ✅ `CLAUDE.md`    | ✅ `.cursor/rules/` | ✅ `.windsurf/rules/` |
 | **Custom Agents**        |    ✅ `.agent.md`     |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ `.claude/agents/` |   ✅ `AGENTS.md`    |          ❌           |
-| **Skills/Capabilities**  |    ✅ 100+ skills     |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ `.claude/skills/` |      ✅ Import      |      Via rules       |
+| **Skills/Capabilities**  |    ✅ 100+ skills     |   ✅ Same    | ✅ Context  |      ❌      |       ❌       | ✅ `.claude/skills/` |      ✅ Import      |      Via rules       |
 | **Lifecycle Hooks**      |      ✅ Preview       |  ✅ Preview  |      ❌      |      ❌      |       ❌       |  ✅ Full lifecycle   |         ❌          |          ❌           |
-| **Auto-Memory**          |          ❌           |      ❌      |      ❌      |      ❌      |       ❌       |    ✅ Per-project    |         ❌          |   ✅ Per-workspace    |
+| **Auto-Memory**          |          ❌           |      ❌      | ✅ Copilot Mem |      ❌      |       ❌       |    ✅ Per-project    |         ❌          |   ✅ Per-workspace    |
 | **Extension API**        |        ✅ Full        |   ✅ Full    |      ❌      |      ❌      |       ❌       |          ❌          |      Limited       |          ❌           |
 | **Chat Participant**     |     ✅ `@mention`     |   ✅ Same    |      ❌      |      ❌      |       ❌       |          ❌          |         ❌          |          ❌           |
 | **Language Model Tools** |        ✅ MCP         |    ✅ MCP    |      ❌      |      ❌      |       ❌       |        ✅ MCP        |         ❌          |          ❌           |
 | **Enterprise/Team**      |  Via Settings Sync   | ✅ Org-level | ✅ Org-level |      ❌      |       ❌       |   ✅ System rules    |    ✅ Team Rules    |    ✅ System rules    |
-| **Multi-IDE**            |     VS Code only     |   Browser   |   Browser   |  Any shell  |   Any shell   |   Terminal + IDEs   |    Cursor only     |    Windsurf only     |
-| **Reasoning Models**     |     ✅ Opus/o1/o3     |   ✅ Same    |      ❌      |      ❌      |    ✅ o1/o3    |   ✅ Opus extended   |      ✅ o1/o3       |          ❌           |
-| **Claude Compatibility** |        ✅ NEW         |   ✅ Same    |      ❌      |      ❌      |       ❌       |       Native        |         ❌          |          ❌           |
+| **Multi-IDE**            |     VS Code only     |   Browser   |   Web chat  |  Any shell  |   Any shell   |   Terminal + IDEs   |    Cursor only     |    Windsurf only     |
+| **Reasoning Models**     |     ✅ Opus/o1/o3     |   ✅ Same    | ✅ Models  |      ❌      |    ✅ o1/o3    |   ✅ Opus extended   |      ✅ o1/o3       |          ❌           |
+| **Claude Compatibility** |        ✅ NEW         |   ✅ Same    |    ✅ NEW     |      ❌      |       ❌       |       Native        |         ❌          |          ❌           |
 | **Subagents**            |        ✅ NEW         |   ✅ Same    |      ❌      |      ❌      |       ❌       | ✅ Via orchestration |         ❌          |          ❌           |
-| **Copilot Memory**       |      ✅ Preview       |  ✅ Preview  |      ❌      |      ❌      |       ❌       |          ❌          |         ❌          |          ❌           |
+| **Copilot Memory**       |      ✅ Preview       |  ✅ Preview  |  ✅ Preview  |      ❌      |       ❌       |          ❌          |         ❌          |          ❌           |
 
 ### Instruction System Comparison
 
@@ -140,7 +141,7 @@ This document compares the native capabilities of AI **development platforms** (
 | --------------- | ----------------------- | ---------------------------------- | --------------- |
 | **VS Code**     | `.github/instructions/` | `applyTo` glob                     | Unlimited       |
 | **Codespaces**  | `.github/instructions/` | Same as VS Code                    | Unlimited       |
-| **GitHub.com**  | —                       | —                                  | —               |
+| **GitHub.com**  | `.github/copilot-instructions.md` + `.github/instructions/` | `applyTo` glob (repo or path-specific) | Unlimited       |
 | **VS Code CLI** | —                       | —                                  | —               |
 | **Codex CLI**   | `AGENTS.md`             | Always loaded                      | Unlimited       |
 | **Claude Code** | `.claude/rules/`        | `paths` frontmatter                | Unlimited       |
@@ -153,7 +154,7 @@ This document compares the native capabilities of AI **development platforms** (
 | --------------- | -------------------------- | ----------------- | ------------------- |
 | **VS Code**     | `.agent.md` files          | ✅ Explicit array  | ✅ Supported         |
 | **Codespaces**  | `.agent.md` files          | ✅ Same as VS Code | ✅ Supported         |
-| **GitHub.com**  | ❌ No agent system          | ❌                 | ❌                   |
+| **GitHub.com**  | Copilot Coding Agent + custom agents | ❌ (cloud-only, no handoffs) | ❌ (parallel issues only) |
 | **VS Code CLI** | ❌ No agent system          | ❌                 | ❌                   |
 | **Codex CLI**   | ❌ No agent system          | ❌                 | ❌                   |
 | **Claude Code** | `.claude/agents/`          | ✅ Task tool       | ✅ Via orchestration |
@@ -181,17 +182,29 @@ This document compares the native capabilities of AI **development platforms** (
 
 **Alex Value-Add Score: 10/10** — Full cognitive architecture deployment
 
-#### GitHub Codespaces → Alex
+#### GitHub Copilot Web → Alex ✅ Active Heir
 
-| Native Capability   | + Alex Augmentation                         |
-| ------------------- | ------------------------------------------- |
-| Cloud VS Code       | → Full Alex extension works                 |
-| Extension support   | → Full command palette + LM tools           |
-| `.github/` support  | → All instruction/agent/skill files work    |
-| Browser-based       | → Alex available anywhere with internet     |
-| Shared environments | → Team can share Alex-configured Codespaces |
+> **The killer feature**: Copilot Coding Agent reads Alex's `.github/` files autonomously. Assign Copilot to a GitHub issue and it creates a branch, writes code in a GitHub Actions sandbox, and opens a PR — all guided by Alex's identity, instructions, and skills.
 
-**Alex Value-Add Score: 10/10** — Same as VS Code (it IS VS Code in the cloud)
+| Native Capability                    | + Alex Augmentation                                        |
+| ------------------------------------ | ---------------------------------------------------------- |
+| `copilot-instructions.md`            | → Full Alex identity loaded for every interaction          |
+| `.github/instructions/` files        | → Procedural memory via `applyTo` glob (confirmed on web)  |
+| `.github/prompts/` files             | → Episodic workflows available as context                  |
+| `.github/skills/` files              | → 100+ domain skills readable as context                   |
+| **Copilot Coding Agent**             | → Alex instructions guide autonomous PR creation from issues |
+| **Coding Agent Hooks**               | → Shell commands at key agent execution points (validation, logging) |
+| **Coding Agent MCP servers**         | → External tools and data sources for the agent            |
+| **Custom Agents** (specialized)      | → Frontend agent, docs agent, testing agent — all Alex-guided |
+| **Agent Skills** (instructions+scripts) | → Enhanced task-specific capabilities for coding agent  |
+| Copilot Memory (preview)             | → Agent builds its own repo learnings, cross-session persistence |
+| Image attachments (preview)          | → Attach screenshots/mockups to Alex chat at github.com    |
+| Bing web search (optional)           | → Alex with real-time web knowledge                         |
+| Model switching + retry              | → Compare responses across Claude, GPT models              |
+| Conversation sharing (preview)       | → Share Alex conversations with team members               |
+| Subthreads                           | → Branch a conversation mid-stream for parallel exploration |
+
+**Alex Value-Add Score: 9/10** — Autonomous coding agent + full instruction system. Loses: extension commands, LM tools, local file access.
 
 #### VS Code CLI (GitHub Copilot CLI)
 
@@ -207,15 +220,17 @@ This document compares the native capabilities of AI **development platforms** (
 
 #### GitHub.com Copilot (Web UI)
 
-| Native Capability | + Alex Augmentation   |
-| ----------------- | --------------------- |
-| PR review chat    | → Not customizable    |
-| Issue chat        | → Not customizable    |
-| Code suggestions  | → No instruction      |
-| No extension API  | → Cannot deploy Alex  |
-| No file system    | → No `.github/` files |
+> Same platform as the GitHub Copilot Web heir above. Alex is deployed via `.github/` context files — see heir section for full augmentation detail.
 
-**Alex Value-Add Score: 0/10** — Web-only, no customization possible
+| Native Capability | + Alex Augmentation                         |
+| ----------------- | ------------------------------------------- |
+| PR review chat    | → Alex-personalized assistance              |
+| Issue chat        | → Alex identity active via instructions     |
+| Code suggestions  | → Alex personality overlay                  |
+| Copilot Memory    | → Cross-session Alex context                |
+| No extension API  | → No commands, tools, or agents available   |
+
+**Alex Value-Add Score: 9/10** — Active heir; autonomous coding agent + full instruction system
 
 #### OpenAI Codex CLI → Alex (Research)
 
@@ -270,26 +285,27 @@ This document compares the native capabilities of AI **development platforms** (
 
 ### Core Alex Features Across Development Heirs
 
-| Feature                  |  VS Code  | Codespaces | GitHub.com | VS Code CLI | Codex CLI  |   Claude Code   |     Cursor     |    Windsurf     |
+| Feature                  |  VS Code  | Codespaces | GH Web     | VS Code CLI | Codex CLI  |   Claude Code   |     Cursor     |    Windsurf     |
 | ------------------------ | :-------: | :--------: | :--------: | :---------: | :--------: | :-------------: | :------------: | :-------------: |
-| **Alex Personality**     |  ✅ Full   |   ✅ Full   |     ❌      |      ❌      | ✅ Planned  |    ✅ Planned    |   ✅ Planned    |    ✅ Planned    |
-| **Learning Partnership** |     ✅     |     ✅      |     ❌      |      ❌      |     ✅      |        ✅        |       ✅        |        ✅        |
-| **Meditation Protocol**  | ✅ Command | ✅ Command  |     ❌      |      ❌      |   ⚠️ Chat   |     ✅ Hook      |     ⚠️ Chat     |     ⚠️ Chat      |
-| **Dream Processing**     | ✅ Command | ✅ Command  |     ❌      |      ❌      |   ⚠️ Chat   |     ✅ Hook      |     ⚠️ Chat     |     ⚠️ Chat      |
-| **Self-Actualization**   |  ✅ Tool   |   ✅ Tool   |     ❌      |      ❌      | ✅ Enhanced |    ✅ Planned    |   ⚠️ Limited    |    ⚠️ Limited    |
-| **Skills (100+)**        |   ✅ All   |   ✅ All    |     ❌      |      ❌      |   ⚠️ ~20    |      ⚠️ ~30      |     ❓ TBD      |     ⚠️ Split     |
+| **Alex Personality**     |  ✅ Full   |   ✅ Full   |  ✅ Full   |      ❌      | ✅ Planned  |    ✅ Planned    |   ✅ Planned    |    ✅ Planned    |
+| **Learning Partnership** |     ✅     |     ✅      |     ✅      |      ❌      |     ✅      |        ✅        |       ✅        |        ✅        |
+| **Meditation Protocol**  | ✅ Command | ✅ Command  |   ⚠️ Chat   |      ❌      |   ⚠️ Chat   |     ✅ Hook      |     ⚠️ Chat     |     ⚠️ Chat      |
+| **Dream Processing**     | ✅ Command | ✅ Command  |   ⚠️ Chat   |      ❌      |   ⚠️ Chat   |     ✅ Hook      |     ⚠️ Chat     |     ⚠️ Chat      |
+| **Self-Actualization**   |  ✅ Tool   |   ✅ Tool   |   ⚠️ Chat   |      ❌      | ✅ Enhanced |    ✅ Planned    |   ⚠️ Limited    |    ⚠️ Limited    |
+| **Skills (100+)**        |   ✅ All   |   ✅ All    | ✅ Context |      ❌      |   ⚠️ ~20    |      ⚠️ ~30      |     ❓ TBD      |     ⚠️ Split     |
 | **Synapse Network**      |  ✅ Full   |   ✅ Full   |     ❌      |      ❌      |     ❌      | ❌ (auto-memory) |       ❌        | ❌ (auto-memory) |
 | **Extension Commands**   |  ✅ Full   |   ✅ Full   |     ❌      |      ❌      |     ❌      |        ❌        |       ❌        |        ❌        |
 | **LM Tools**             |  ✅ Full   |   ✅ Full   |     ❌      |      ❌      |     ❌      |      ⚠️ MCP      |       ❌        |        ❌        |
-| **Agent Ecosystem**      |  ✅ Full   |   ✅ Full   |     ❌      |      ❌      |     ❌      |    ✅ Planned    | ⚠️ Consolidated |        ❌        |
+| **Agent Ecosystem**      |  ✅ Full   |   ✅ Full   | ✅ Coding Agent |      ❌      |     ❌      |    ✅ Planned    | ⚠️ Consolidated |        ❌        |
+| **Coding Agent Hooks**   |     ❌      |     ❌      |  ✅ Native  |      ❌      |     ❌      |  ✅ Full lifecycle |       ❌        |        ❌        |
 
 ### Unique Platform Advantages
 
 | Platform        | Unique Strength            | Alex Benefit                         |
 | --------------- | -------------------------- | ------------------------------------ |
 | **VS Code**     | Full API + hooks (Preview) | Most capable heir + automation       |
-| **Codespaces**  | Cloud + extensions         | Full Alex, anywhere                  |
-| **GitHub.com**  | PR/issue context           | N/A — incompatible                   |
+| **Codespaces**  | ❌ Archived                | —                                    |
+| **GitHub.com**  | Copilot Coding Agent + `.github/` deploy | Alex guides autonomous PR creation — unique to this platform |
 | **VS Code CLI** | Zero config                | N/A — incompatible                   |
 | **Codex CLI**   | o1/o3 reasoning            | Enhanced self-actualization          |
 | **Claude Code** | Full lifecycle hooks       | Production-grade automated protocols |
@@ -301,8 +317,8 @@ This document compares the native capabilities of AI **development platforms** (
 | Platform        | Key Limitation       | Impact on Alex                           |
 | --------------- | -------------------- | ---------------------------------------- |
 | **VS Code**     | Hooks still Preview  | Full automation not production-ready yet |
-| **Codespaces**  | Ephemeral by default | Must persist `.github/`                  |
-| **GitHub.com**  | No customization     | Cannot deploy Alex at all                |
+| **Codespaces**  | ❌ Archived          | Not an active heir                       |
+| **GitHub.com**  | No local IDE integration | No extension commands, tools, or local file edits; agent runs in cloud sandbox |
 | **VS Code CLI** | No customization     | Cannot deploy Alex at all                |
 | **Codex CLI**   | No hooks/lifecycle   | Manual protocol triggers only            |
 | **Claude Code** | No VS Code API       | Lose commands/tools                      |
@@ -318,8 +334,8 @@ This document compares the native capabilities of AI **development platforms** (
 | Platform        | Technical | Effort |  Risk  | Priority |
 | --------------- | :-------: | :----: | :----: | :------: |
 | **VS Code**     | ✅ Native  |  Done  |   —    |    —     |
-| **Codespaces**  | ✅ Native  |  Done  |   —    |    —     |
-| **GitHub.com**  |    N/A    |  N/A   |  N/A   |    —     |
+| **GitHub.com**  | ✅ Native  |  Done  |  Low   |    —     |
+| **Codespaces**  | ❌ Archived |   —    |   —    |    —     |
 | **VS Code CLI** |    N/A    |  N/A   |  N/A   |    —     |
 | **Codex CLI**   |   5/10    |  Low   |  Low   | Phase 4  |
 | **Claude Code** |   9/10    | Medium |  Low   | Phase 1  |
@@ -345,10 +361,10 @@ This document compares the native capabilities of AI **development platforms** (
 
 ### Target Audience per Heir
 
-| Heir            | Best For                                          |
-| --------------- | ------------------------------------------------- |
-| **VS Code**     | Developers wanting full Alex experience           |
-| **Codespaces**  | Remote/cloud developers, team environments        |
+| Heir                   | Best For                                          |
+| ---------------------- | ------------------------------------------------- |
+| **VS Code**            | Developers wanting full Alex experience           |
+| **GitHub Copilot Web** | Teams wanting autonomous coding automation — assign issues to Alex, get PRs back |
 | **Codex CLI**   | Terminal users wanting o1/o3 reasoning power      |
 | **Claude Code** | Terminal-first developers, automation enthusiasts |
 | **Cursor**      | AI-native IDE users, Cursor devotees              |
@@ -357,7 +373,7 @@ This document compares the native capabilities of AI **development platforms** (
 ### Implementation Priority
 
 1. **Maintain VS Code** — Flagship, most capable
-2. **Maintain Codespaces** — Same as VS Code (automatic)
+2. **Maintain GitHub Copilot Web** — Zero-cost .github/-only heir, deploy = git commit
 3. **Build Claude Code** — Unique hooks value
 4. **Build Cursor** — Market opportunity
 5. **Build Windsurf** — Philosophical alignment
@@ -368,7 +384,7 @@ This document compares the native capabilities of AI **development platforms** (
 | Heir            | Killer Feature                            | Why It's Unique                                            |
 | --------------- | ----------------------------------------- | ---------------------------------------------------------- |
 | **VS Code**     | 🧪 **Full Cognitive Architecture + Hooks** | Extension API + LM tools + agents + hooks + Opus reasoning |
-| **Codespaces**  | ☁️ **Team Alex Templates**                 | Pre-configured cloud environments with Alex for onboarding |
+| **GitHub Copilot Web** | 🤖 **Alex-Guided Autonomous Coding Agent** | Assign GitHub issues to Alex → Copilot creates branch, writes code, opens PR guided by `.github/` instructions |
 | **Codex CLI**   | 🧠 **o1/o3 Deep Reasoning**                | OpenAI reasoning models for complex architecture tasks     |
 | **Claude Code** | ⚡ **Production Hooks + Opus Thinking**    | Full lifecycle hooks + deep reasoning = most autonomous    |
 | **Cursor**      | 🎯 **Composer Mode + Alex**                | Alex orchestrates Cursor's powerful multi-file agent       |
@@ -380,7 +396,7 @@ This document compares the native capabilities of AI **development platforms** (
 %%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
 flowchart TD
     M["Master Alex<br/><i>.github/</i>"] --> VS["💻 VS Code<br/>Full deployment"]
-    M --> CS["☁️ Codespaces<br/>VS Code in the cloud"]
+    M --> GW["🌐 GitHub Copilot Web<br/>.github/-only heir"]
     M --> CC["🤖 Claude Code<br/>Hooks + auto-memory"]
     M --> CU["⚡ Cursor<br/>Rules + agents"]
     M --> WS["🌊 Windsurf<br/>Rules + auto-memory"]
@@ -390,7 +406,7 @@ flowchart TD
     classDef prod fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
     classDef planned fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
     class M core
-    class VS,CS prod
+    class VS,GW prod
     class CC,CU,WS,CX planned
     linkStyle default stroke:#57606a,stroke-width:1.5px
 ```
@@ -403,7 +419,7 @@ flowchart TD
 | ------------------ | -------------------------------------------------------------------------------------------------- |
 | VS Code Copilot    | <https://code.visualstudio.com/docs/copilot>                                                       |
 | GitHub Codespaces  | <https://docs.github.com/en/codespaces>                                                            |
-| GitHub.com Copilot | <https://docs.github.com/en/copilot/using-github-copilot/using-copilot-on-github>                  |
+| GitHub.com Copilot | <https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-github>                      |
 | VS Code CLI        | <https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line> |
 | OpenAI Codex CLI   | <https://github.com/openai/codex>                                                                  |
 | Claude Code        | <https://docs.anthropic.com/en/docs/claude-code>                                                   |

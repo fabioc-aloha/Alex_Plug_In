@@ -3,6 +3,7 @@ description: Alex Builder Mode - Constructive implementation with optimistic pro
 name: Builder
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch']
 model: Claude Sonnet 4
+user-invokable: true
 handoffs:
   - label: 🔍 Request QA Review
     agent: Validator

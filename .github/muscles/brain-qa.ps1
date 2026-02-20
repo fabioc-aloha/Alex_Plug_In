@@ -56,11 +56,11 @@ function Write-Fail {
 
 # Define phase groups
 $quickPhases = 1..6
-$syncPhases = 5, 7, 8, 13, 14, 15, 27, 28, 33  # Added Phase 33: Pre-Sync Master Validation
+$syncPhases = 5, 7, 8, 13, 14, 15, 27, 28, 33, 34  # Phase 33: Pre-Sync Validation | Phase 34: Self-Containment
 $schemaPhases = 2, 6, 11, 16, 17  # YAML frontmatter phases
 $llmPhases = 10, 20, 21  # LLM-first content validation
 $ghFolderPhases = 22..25  # .github/ subfolder coverage (episodic, assets, templates, root files)
-$fullAuditPhases = 26..33  # alex_docs, heirs, GK, scripts, version consistency, pre-sync validation
+$fullAuditPhases = 26..35  # alex_docs, heirs, GK, scripts, version consistency, pre-sync, self-containment, API keys
 
 # Determine which phases to run
 $runPhases = switch ($Mode) {
@@ -68,7 +68,7 @@ $runPhases = switch ($Mode) {
     "sync" { $syncPhases }
     "schema" { $schemaPhases }
     "llm" { $llmPhases }
-    default { 1..33 }  # All phases including pre-sync validation
+    default { 1..35 }  # All phases including API key warnings
 }
 
 if ($Phase) { $runPhases = $Phase }
@@ -269,7 +269,11 @@ if (7 -in $runPhases) {
                             $target = $_.target
                             -not ($masterOnlySkills | Where-Object { $target -match $_ })
                         })
-                    if ($filteredConns.Count -ne $heirJson.connections.Count) {
+                    # Compare full content after filtering (not just count) — catches new fields like apiKeys
+                    $masterJson.connections = $filteredConns
+                    $expectedNorm = ($masterJson | ConvertTo-Json -Depth 20 -Compress)
+                    $heirNorm = ($heirJson | ConvertTo-Json -Depth 20 -Compress)
+                    if ($expectedNorm -ne $heirNorm) {
                         $diffs += $skill
                     }
                 }
@@ -282,7 +286,16 @@ if (7 -in $runPhases) {
             Write-Fail "Out of sync: $($diffs -join ', ')"
             if ($Fix) {
                 foreach ($skill in $diffs) {
-                    Copy-Item "$ghPath\skills\$skill\synapses.json" "$heirBase\.github\skills\$skill\synapses.json" -Force
+                    $masterSynPath = "$ghPath\skills\$skill\synapses.json"
+                    $heirSynPath = "$heirBase\.github\skills\$skill\synapses.json"
+                    $masterSynJson = Get-Content $masterSynPath -Raw | ConvertFrom-Json
+                    # Strip master-only connections before writing to heir
+                    $heirConns = @($masterSynJson.connections | Where-Object {
+                            $target = $_.target
+                            -not ($masterOnlySkills | Where-Object { $target -match $_ })
+                        })
+                    $masterSynJson.connections = $heirConns
+                    $masterSynJson | ConvertTo-Json -Depth 20 | Set-Content $heirSynPath -Encoding UTF8NoBOM
                     $fixed += "Synced $skill/synapses.json"
                 }
             }
@@ -938,8 +951,8 @@ if (26 -in $runPhases) {
         if (Test-Path $catalogPath) {
             $catalogContent = Get-Content $catalogPath -Raw
             $masterSkillCount = (Get-ChildItem "$ghPath\skills\*\SKILL.md").Count
-            if ($catalogContent -match 'Total.*?(\d+)\s*skills') {
-                $catalogCount = [int]$Matches[1]
+            if ($catalogContent -match '(?m)^#{1,6}\s+Skill Count[:\s]+(?<n>\d+)|Total[^\n]*?(?<n>\d+)\s*skills') {
+                $catalogCount = [int]$Matches['n']
                 if ($catalogCount -ne $masterSkillCount) {
                     Write-Warn "SKILLS-CATALOG.md says $catalogCount skills, actual: $masterSkillCount"
                 }
@@ -1378,6 +1391,151 @@ if (33 -in $runPhases) {
     }
     else {
         Write-Pass "No inheritable skills reference master-only paths"
+    }
+}
+
+# ============================================================
+# PHASE 34: Brain Self-Containment Check
+# Verifies all references inside .github/ resolve within .github/
+# Catches: escaped synapse targets, escaped markdown links, ..// typos,
+# hardcoded absolute paths in non-ephemeral files
+# ============================================================
+if (34 -in $runPhases) {
+    Write-Phase 34 "Brain Self-Containment Check"
+
+    # Known-OK exceptions — files that intentionally reference outside .github/
+    $scExceptions = @(
+        'episodic',   # Session records cleared on heir deployment; past-session paths are harmless
+        'SUPPORT.md'  # GitHub Community Health File — links to repo-root docs by design
+    )
+
+    # Helper: returns $null if target stays inside $ghPath, otherwise returns the escaped value
+    function Test-SelfContained {
+        param([string]$sourceFile, [string]$target)
+        if (-not $target -or $target.Trim() -eq '') { return $null }
+        if ($target -match '^(https?://|#|mailto:|external:|global-knowledge://)') { return $null }
+        if ($target -match '^\.github/') { return $null }   # explicit .github/ prefix is always OK
+        if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name
+        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path — always bad
+        # Relative path — resolve and verify it stays inside .github/
+        $baseDir = Split-Path $sourceFile -Parent
+        $resolved = [System.IO.Path]::GetFullPath((Join-Path $baseDir $target))
+        if ($resolved.StartsWith($ghPath, [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
+        return $target
+    }
+
+    function Test-KnownScException {
+        param([string]$shortPath)
+        foreach ($exc in $scExceptions) { if ($shortPath -match [regex]::Escape($exc)) { return $true } }
+        return $false
+    }
+
+    $scIssues = @()
+
+    # 1. Synapse targets — must all resolve within .github/
+    Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json" | ForEach-Object {
+        $f = $_
+        try {
+            $j = Get-Content $f.FullName -Raw | ConvertFrom-Json
+            foreach ($conn in $j.connections) {
+                $escaped = Test-SelfContained -sourceFile $f.FullName -target $conn.target
+                if ($null -ne $escaped) {
+                    $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+                    if (-not (Test-KnownScException $short)) {
+                        $scIssues += "[synapse] $short -> $escaped"
+                    }
+                }
+            }
+        }
+        catch { $scIssues += "[parse-error] $($f.Name): $($_.Exception.Message)" }
+    }
+
+    # 2. Markdown link targets (code fences stripped to avoid false positives)
+    $linkRx = [regex]'\[([^\]]*)\]\(([^)]+)\)'
+    Get-ChildItem "$ghPath" -Recurse -Include "*.md" | ForEach-Object {
+        $f = $_
+        $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+        if (Test-KnownScException $short) { return }
+        $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
+        if (-not $content) { return }
+        # Strip code fences and inline code to avoid scanning example links
+        $stripped = $content -replace '(?ms)```[^`]*```', ''
+        $stripped = $stripped -replace '(?m)`[^`]+`', ''
+        foreach ($m in $linkRx.Matches($stripped)) {
+            $href = $m.Groups[2].Value
+            if ($href -match '^(https?://|#|mailto:)') { continue }
+            $escaped = Test-SelfContained -sourceFile $f.FullName -target $href
+            if ($null -ne $escaped) { $scIssues += "[md-link] $short -> $escaped" }
+        }
+        # 3. Double-slash typo ..// — always a bug, never intentional
+        if ($content -match '\.\.//') {
+            $badLines = ($content -split "`n" | Select-String '\.\.//' |
+                ForEach-Object { $_.LineNumber }) -join ', '
+            $scIssues += "[..// typo] $short (lines: $badLines)"
+        }
+    }
+
+    $synapseCount = (Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json").Count
+    $mdCount = (Get-ChildItem "$ghPath" -Recurse -Include "*.md").Count
+    if ($scIssues.Count -eq 0) {
+        Write-Pass "Brain is fully self-contained ($synapseCount synapse files, $mdCount markdown files scanned)"
+    }
+    else {
+        foreach ($i in $scIssues) { Write-Fail $i }
+    }
+}
+
+# ============================================================
+# PHASE 35: API Key Availability Warnings
+# ============================================================
+if (35 -in $runPhases) {
+    Write-Phase 35 "API Key Availability Check"
+    # Collect all apiKeys requirements from synapses.json files
+    $keyMap = @{}  # envVar -> @{ skills=[]; purpose=''; required=$true; getUrl='' }
+    Get-ChildItem "$ghPath\skills" -Recurse -Filter "synapses.json" | ForEach-Object {
+        $json = Get-Content $_.FullName -Raw | ConvertFrom-Json
+        $skill = $_.DirectoryName | Split-Path -Leaf
+        if ($json.apiKeys) {
+            foreach ($req in $json.apiKeys) {
+                $k = $req.envVar
+                if (-not $keyMap.ContainsKey($k)) {
+                    $keyMap[$k] = @{ skills = @(); purpose = $req.purpose; required = $req.required; getUrl = $req.getUrl }
+                }
+                $keyMap[$k].skills += $skill
+            }
+        }
+    }
+
+    if ($keyMap.Count -eq 0) {
+        Write-Pass "No skills declare API key requirements"
+    }
+    else {
+        $missingKeys = @()
+        foreach ($envVar in $keyMap.Keys | Sort-Object) {
+            $entry = $keyMap[$envVar]
+            # Check process, then user, then machine scope
+            $val = [System.Environment]::GetEnvironmentVariable($envVar)
+            if (-not $val) { $val = [System.Environment]::GetEnvironmentVariable($envVar, 'User') }
+            if (-not $val) { $val = [System.Environment]::GetEnvironmentVariable($envVar, 'Machine') }
+
+            if ($val) {
+                Write-Pass "$envVar — set (skills: $($entry.skills -join ', '))"
+            }
+            else {
+                $tag = if ($entry.required) { "required" } else { "optional" }
+                $skills = $entry.skills -join ', '
+                $hint = if ($entry.getUrl) { " | Get it: $($entry.getUrl)" } else { "" }
+                Write-Warn "$envVar not set ($tag) — needed by: $skills | $($entry.purpose)$hint"
+                $missingKeys += $envVar
+            }
+        }
+        if ($missingKeys.Count -eq 0) {
+            Write-Pass "All $($keyMap.Count) declared API key(s) are present"
+        }
+        else {
+            Write-Warn "$($missingKeys.Count) API key(s) missing — affected skills will fail at runtime"
+            Write-Warn "Keys may also be stored in VS Code SecretStorage (not checkable from PowerShell)"
+        }
     }
 }
 

@@ -14,7 +14,7 @@
             "yields": "Photorealistic banners with brand colors and typography"
         },
         {
-            "target": ".github/skills/heir-curation/SKILL.md",
+            "target": ".github/skills/heir-sync-management/SKILL.md",
             "type": "coordinates-with",
             "strength": 0.75,
             "when": "deploying brand assets to heir platforms",

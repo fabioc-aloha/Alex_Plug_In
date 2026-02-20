@@ -3,7 +3,7 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": ".github/skills/microsoft-sfi/SKILL.md",
+      "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.7,
       "reason": "Privacy is part of security"

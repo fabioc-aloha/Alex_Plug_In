@@ -2,10 +2,11 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "skillId": "security-review",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "inheritance": "inheritable",
   "created": "2026-02-01",
-  "description": "Security-focused code analysis, OWASP patterns, threat modeling",
+  "lastUpdated": "2026-02-19",
+  "description": "Security-focused code analysis, OWASP patterns, STRIDE threat modeling, Microsoft SFI",
   "connections": [
     {
       "target": ".github/skills/incident-response/SKILL.md",
@@ -38,10 +39,16 @@
       "description": "Security testing is specialized testing"
     },
     {
-      "target": ".github/skills/microsoft-sfi/SKILL.md",
+      "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+      "type": "Complements",
+      "strength": 0.7,
+      "description": "Security enables privacy protection"
+    },
+    {
+      "target": ".github/instructions/dependency-management.instructions.md",
       "type": "Implements",
       "strength": 0.9,
-      "description": "Implements Microsoft Secure Future Initiative patterns"
+      "description": "Dependency security practices and vulnerability scanning"
     },
     {
       "target": "global-knowledge://GI-csp-onclick-to-data-cmd-pattern-2026-02-08",
@@ -55,6 +62,7 @@
     "vulnerability",
     "OWASP",
     "threat model",
+    "STRIDE",
     "penetration test",
     "security audit",
     "credential",
@@ -70,6 +78,12 @@
     "audit logging",
     "enterprise security",
     "Entra ID",
-    "RBAC"
+    "RBAC",
+    "Microsoft SFI",
+    "Secure Future Initiative",
+    "secure by design",
+    "secure by default",
+    "CVE",
+    "dependency security"
   ]
 }

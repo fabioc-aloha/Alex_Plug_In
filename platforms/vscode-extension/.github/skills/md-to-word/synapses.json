@@ -1,0 +1,73 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "md-to-word",
+    "version": "2.1.0",
+    "inheritance": "inheritable",
+    "muscle": ".github/muscles/md-to-word.py",
+    "connections": [
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "depends-on",
+            "strength": 0.95,
+            "reason": "Mermaid diagrams must follow ATACCU before export to ensure quality"
+        },
+        {
+            "target": ".github/skills/brand-asset-management/SKILL.md",
+            "type": "related",
+            "strength": 0.7,
+            "reason": "SVG banners and visual assets should follow brand guidelines"
+        },
+        {
+            "target": ".github/skills/pptx-generation/SKILL.md",
+            "type": "sibling",
+            "strength": 0.85,
+            "reason": "Similar document export workflow for PowerPoint presentations"
+        },
+        {
+            "target": ".github/skills/svg-graphics/SKILL.md",
+            "type": "supports",
+            "strength": 0.6,
+            "reason": "SVG to PNG conversion enables Word compatibility"
+        },
+        {
+            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
+            "type": "enables",
+            "strength": 0.8,
+            "reason": "Enables professional document distribution to stakeholders"
+        }
+    ],
+    "when": [
+        "User requests Word document export",
+        "User says 'convert to word' or 'export docx'",
+        "User needs stakeholder-ready documentation",
+        "Markdown has Mermaid diagrams needing export",
+        "User wants professional formatted output",
+        "Preparing documents for executive review"
+    ],
+    "yields": [
+        "Professional .docx document",
+        "PNG images from Mermaid diagrams (90% page fit)",
+        "Styled tables with Microsoft blue headers",
+        "Tables with smart pagination (no orphan headers)",
+        "Centered images preserving aspect ratio",
+        "Properly spaced bullet lists and headings"
+    ],
+    "tools": {
+        "required": [
+            "pandoc",
+            "mermaid-cli (mmdc)",
+            "python-docx"
+        ],
+        "optional": [
+            "svgexport"
+        ]
+    },
+    "heir-adoption": {
+        "priority": "high",
+        "copy-files": [
+            ".github/muscles/md-to-word.py"
+        ],
+        "install": "winget install pandoc; npm i -g @mermaid-js/mermaid-cli; pip install python-docx"
+    }
+}

@@ -2,7 +2,7 @@
 
 **Auto-loaded when**: Working with README files, project branding, marketing assets
 **Domain**: Ultra-wide banner generation with professional typography using AI image generation
-**Synapses**: [ai-generated-readme-banners/SKILL.md](..//skills/ai-generated-readme-banners/SKILL.md)
+**Synapses**: [ai-generated-readme-banners/SKILL.md](../skills/ai-generated-readme-banners/SKILL.md)
 
 ---
 

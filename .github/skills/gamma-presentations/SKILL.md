@@ -8,6 +8,8 @@ applyTo: "**/*presentation*,**/*slides*,**/*deck*,**/*gamma*,**/*pitch*"
 
 > Generate professional presentations with expert storytelling consulting based on Duarte methodology.
 
+> ⚠️ **Staleness Watch** (Last validated: Feb 2026 — API v0.2): Gamma is a SaaS product that ships new features and content types frequently. Check [gamma.app/api](https://gamma.app/api) for endpoint changes, new `contentType` values, credit pricing, and theme updates before advising on API calls.
+
 Gamma is an AI-powered platform with 50M+ users for creating presentations, documents, social posts, and websites. This skill enables Alex to generate polished content programmatically **with professional presentation consulting**.
 
 ## Presentation Consulting Methodology

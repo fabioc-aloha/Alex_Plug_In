@@ -19,7 +19,7 @@
       "reason": "Marketplace publishing deployment patterns"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
+      "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "implements",
       "strength": 0.85,
       "reason": "VS Code heir patterns"

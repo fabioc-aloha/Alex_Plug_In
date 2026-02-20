@@ -1,6 +1,6 @@
 # Trifecta Catalog
 
-> **Last Audited**: 2026-02-15
+> **Last Audited**: 2026-02-19
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
@@ -58,7 +58,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (11)
+## Complete Trifectas (14)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -164,6 +164,53 @@ Capabilities with all three memory system components — each justified by the "
 
 **Inheritance**: `heir:vscode` — VS Code heir-specific capability (no universal promotion)
 
+### Heir Curation
+
+| Component   | File                                                    | Why It Exists                                                                                         |
+| ----------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/heir-curation/SKILL.md`                 | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns                        |
+| Instruction | `.github/instructions/heir-skill-promotion.instructions.md` | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow                      |
+| Prompt      | `.github/prompts/promotetomaster.prompt.md`             | `/promotetomaster` — user invokes skill promotion from heir to Master Alex                            |
+
+**Muscle**: `sync-architecture.js` — automated master→heir synchronization with PII protection
+**Inheritance**: `inheritable` — all heirs can promote skills back to Master
+
+### Markdown to Word Conversion
+
+| Component   | File                                                | Why It Exists                                                                                    |
+| ----------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/md-to-word/SKILL.md`                | Domain knowledge: markdown→docx conversion patterns, diagram embedding, style preservation       |
+| Instruction | `.github/instructions/md-to-word.instructions.md`   | Auto-loaded procedure: pandoc workflow, python-docx integration, mermaid→image conversion        |
+| Prompt      | `.github/prompts/word.prompt.md`                    | `/word` — user invokes markdown to Word document conversion with diagrams                        |
+
+**Muscle**: `md-to-word.py` — Python script for conversion with diagram support
+**Inheritance**: `inheritable` — useful for academic and professional documentation across all heirs
+
+### Gamma Presentation Generation
+
+| Component   | File                                                      | Why It Exists                                                                                  |
+| ----------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/gamma-presentation/SKILL.md`              | Domain knowledge: Gamma.app API patterns, presentation structure, card types                   |
+| Instruction | `.github/instructions/gamma-presentation.instructions.md` | Auto-loaded procedure: API authentication, content generation, export workflows                |
+| Prompt      | `.github/prompts/gamma.prompt.md`                         | `/gamma` — user invokes Gamma presentation generation from markdown                            |
+
+**Muscle**: `gamma-generator.js` — Node.js CLI for Gamma API integration
+**Inheritance**: `inheritable` — presentation generation valuable across academic and business heirs
+**Integration**: Uses secrets-management trifecta for GAMMA_API_KEY storage
+
+### Secrets Management
+
+| Component   | File                                                      | Why It Exists                                                                                           |
+| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/secrets-management/SKILL.md`              | Domain knowledge: VS Code SecretStorage API, platform encryption patterns, token lifecycle management   |
+| Instruction | `.github/instructions/secrets-management.instructions.md` | Auto-loaded procedure: SecretStorage integration, .env detection, migration strategies, security checklist |
+| Prompt      | `.github/prompts/secrets.prompt.md`                       | `/secrets` — user invokes token management and .env secret detection workflow                           |
+
+**Service**: `secretsManager.ts` — Centralized credential storage (750+ lines) with OS-encrypted SecretStorage API
+**Commands**: `alex.manageSecrets` (token UI), `alex.detectEnvSecrets` (.env scanning)
+**Inheritance**: `inheritable` — critical for any heir handling API credentials
+**Platform encryption**: Windows Credential Manager, macOS Keychain, Linux Secret Service
+
 ---
 
 ## Justified Non-Trifectas
@@ -223,10 +270,10 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   11 justified candidates
+Complete Trifectas:   14 justified candidates
 Procedural-Only:      21 (all justified)
 Prompt-Only:           8 (all justified)
-Skill-Only:           ~98 (standard — passive expertise)
+Skill-Only:          ~110 (standard — passive expertise)
 ```
 
 ### Network Diagram
@@ -246,6 +293,10 @@ flowchart LR
         MAA["Master Alex Audit"]
         UIUX["UI/UX Design"]
         VSCC["VS Code Configuration Validation"]
+        HC["Heir Curation"]
+        MD2W["Markdown to Word"]
+        GAMMA["Gamma Presentation"]
+        SEC["Secrets Management"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -290,7 +341,7 @@ If you answer NO to any question, that component is unnecessary. **Not everythin
 
 ## Heir Trifectas
 
-Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's. Codespaces inherits the VS Code heir's trifectas directly (zero-translation).
+Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's. The GitHub Copilot Web heir is `.github/`-only and inherits skill knowledge files but has no extension-based trifecta candidates.
 
 ### Heir Why Test
 
@@ -319,9 +370,9 @@ The same "Ask Why" philosophy applies, with adapted questions:
 | **Microsoft Graph API**  | Skill only    | Daily use, auth flow complexity, hard-won gotchas        | Instruction + Prompt |
 | **M365 Agent Debugging** | Skill only    | Complex, user-invoked, troubleshooting procedures        | Instruction + Prompt |
 
-### Codespaces Heir — Trifecta Candidates
+### GitHub Copilot Web Heir — Trifecta Candidates
 
-Codespaces runs the same VS Code extension binary — it inherits all VS Code trifectas and candidates with zero translation. No separate trifecta candidates exist for Codespaces.
+The GitHub Copilot Web heir is `.github/`-only — no TypeScript extension. It inherits skill knowledge files from Master but has no commands, tools, or executable trifectas. Skills function as readable context, not activatable capabilities. No separate trifecta candidates exist.
 
 ### Promotion Path for Heir Trifectas
 
@@ -350,6 +401,7 @@ See `trifecta-audit.instructions.md` § "Heir Trifecta Implementation" for the f
 | 2026-02-13 | Heir project improvement instruction                      | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                               |
 | 2026-02-13 | Scripts are muscles doctrine                              | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                       |
 | 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas |
+| 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas | Added 3 complete trifectas: **heir-curation** (skill promotion workflow), **md-to-word** (document conversion with diagrams), **gamma-presentation** (presentation generation), **secrets-management** (VS Code SecretStorage API, .env detection, platform encryption). Total: 11 → 14 complete trifectas |
 
 ---
 

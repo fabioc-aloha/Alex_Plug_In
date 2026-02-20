@@ -30,12 +30,6 @@
       "note": "Brain QA for cognitive architecture, master-alex-audit for code/project"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
-      "type": "validates",
-      "strength": 0.90,
-      "note": "Phase 12 catches heir P5-P7 drift; validates Master-Heir sync (v5.4.0 lesson)"
-    },
-    {
       "target": ".github/instructions/dream-state-automation.instructions.md",
       "type": "extends",
       "strength": 0.7,

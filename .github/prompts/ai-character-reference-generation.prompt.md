@@ -2,7 +2,7 @@
 
 **Invoke with**: `/ai-character-reference-generation` or "generate character reference set"
 **Domain**: Visual consistency for fictional characters across multiple scenarios
-**Synapses**: [ai-character-reference-generation/SKILL.md](..//skills/ai-character-reference-generation/SKILL.md)
+**Synapses**: [ai-character-reference-generation/SKILL.md](../skills/ai-character-reference-generation/SKILL.md)
 
 ---
 

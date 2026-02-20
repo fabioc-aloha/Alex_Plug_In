@@ -22,11 +22,11 @@
       "context": "Synthesize learnings into reusable patterns"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
+      "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "procedural",
       "strength": "strong",
       "direction": "outgoing",
-      "context": "Skills created by heirs need curation for promotion"
+      "context": "Skills created by heirs need sync management for promotion"
     },
     {
       "target": ".github/skills/skill-activation/SKILL.md",

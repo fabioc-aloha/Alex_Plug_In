@@ -1,0 +1,52 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skill": "secrets-management",
+  "version": "1.1.0",
+  "lastValidated": "2026-02-19",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.85,
+      "when": "implementing VS Code extension APIs and patterns",
+      "yields": "Extension context access, command registration, activation lifecycle"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.75,
+      "when": "designing token management UI with quick picks and input boxes",
+      "yields": "User-friendly token entry flow, warning message patterns, status indicators"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "when": "testing SecretStorage across platforms and error scenarios",
+      "yields": "Platform-specific testing, manual verification, automated test patterns"
+    },
+    {
+      "target": ".github/instructions/gamma-presentation.instructions.md",
+      "type": "enables",
+      "strength": 0.8,
+      "when": "Gamma features require API key from SecretStorage",
+      "yields": "Secure token retrieval for Gamma integration"
+    }
+  ],
+  "triggers": [
+    "API key",
+    "token",
+    "secret",
+    "credential",
+    "password",
+    "SecretStorage",
+    "keychain",
+    "credential manager",
+    "secure storage",
+    "environment variable migration",
+    ".env file",
+    "token management"
+  ]
+}

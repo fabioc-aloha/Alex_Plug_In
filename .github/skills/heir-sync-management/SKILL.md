@@ -1,6 +1,6 @@
 ---
 name: "heir-sync-management"
-description: "Master-Heir synchronization, contamination prevention, and promotion workflows"
+description: "Master-Heir synchronization, inheritance model, contamination prevention, and promotion workflows"
 metadata:
   inheritance: master-only
 ---
@@ -9,7 +9,29 @@ metadata:
 
 > Safely synchronize cognitive architecture from Master to Heirs without contamination.
 
-**Scope**: Master-only skill. Covers sync pipelines, PII protection, drift detection, skill promotion, and clean-slate distribution.
+**Scope**: Master-only skill. Covers inheritance model, sync pipelines, PII protection, drift detection, skill promotion, and clean-slate distribution.
+
+## Core Principle
+
+**The `inheritance` field in each skill's `synapses.json` determines whether it ships to heirs.**
+
+No hardcoded lists. No manual tracking. The brain knows what belongs where.
+
+---
+
+## Inheritance Model
+
+Each skill's `synapses.json` has an `inheritance` field with one of these values:
+
+| Value | Meaning |
+|-------|---------|
+| `inheritable` | Ships to ALL heirs |
+| `master-only` | Stays in Master Alex only |
+| `universal` | Ships everywhere (core infrastructure) |
+| `heir:vscode` | VS Code extension heir only |
+| `heir:m365` | M365 Copilot heir only |
+
+---
 
 ## Core Concepts
 
@@ -25,6 +47,73 @@ metadata:
 | **Promotion** | Elevating heir-developed capabilities back to Master |
 
 **Rule**: Never confuse delivery mechanism with inheritance relationship — the "what" (identity/DNA) stays constant, only the "how" (delivery) varies.
+
+---
+
+## Scripts Reference
+
+Use the pre-made scripts in `scripts/` folder:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `sync-architecture.js` | Canonical Master→Heir sync (inheritance + decontamination) | `cd platforms/vscode-extension && npm run sync-architecture` |
+| `build-extension-package.ps1` | Full build (sync + compile + PII scan) | `.\scripts\build-extension-package.ps1` |
+| `validate-synapses.ps1` | Validate all synapses.json files | `.\scripts\validate-synapses.ps1` |
+| `validate-skills.ps1` | Validate SKILL.md frontmatter | `.\scripts\validate-skills.ps1` |
+
+### Quick Commands
+
+```powershell
+# Sync architecture only (from extension dir)
+cd platforms/vscode-extension
+npm run sync-architecture
+
+# Full build (sync + compile + PII scan)
+.\scripts\build-extension-package.ps1
+
+# Full build dry run
+.\scripts\build-extension-package.ps1 -DryRun
+
+# Validate all synapses
+.\scripts\validate-synapses.ps1
+
+# Validate skills
+.\scripts\validate-skills.ps1
+```
+
+---
+
+## Query Commands
+
+For ad-hoc inheritance queries:
+
+```powershell
+# Count by inheritance type
+Get-ChildItem ".github/skills" -Directory | ForEach-Object {
+    $synapse = Join-Path $_.FullName "synapses.json"
+    if (Test-Path $synapse) {
+        (Get-Content $synapse -Raw | ConvertFrom-Json).inheritance
+    }
+} | Group-Object | Select-Object Name, Count | Sort-Object Count -Descending
+
+# Find master-only skills
+Get-ChildItem ".github/skills" -Directory | ForEach-Object {
+    $synapse = Join-Path $_.FullName "synapses.json"
+    if (Test-Path $synapse) {
+        $json = Get-Content $synapse -Raw | ConvertFrom-Json
+        if ($json.inheritance -eq "master-only") { $_.Name }
+    }
+}
+
+# Change a skill's inheritance
+$skill = "skill-name"; $newValue = "inheritable"
+$path = ".github/skills/$skill/synapses.json"
+$json = Get-Content $path -Raw | ConvertFrom-Json
+$json.inheritance = $newValue
+$json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
+```
+
+---
 
 ## Sync Architecture
 
@@ -65,6 +154,8 @@ The rename is handled by `sync-architecture.js` via the `heirRenames` map, appli
 | Master-only skills | Only useful for managing the Master repo |
 | API keys, PATs, secrets | Environment-specific credentials |
 | Working memory with populated P5-P7 | Gives new users pre-filled slots instead of clean defaults |
+
+---
 
 ## 3-Layer PII Protection
 
@@ -108,6 +199,8 @@ Post-copy regex scan that blocks packaging on violations:
 
 **Anti-pattern**: Manual checklists. The copy function itself must be architecturally incapable of leaking.
 
+---
+
 ## Clean Slate Distribution
 
 ### Template Generation
@@ -128,6 +221,8 @@ After copying files, apply these transformations:
 2. **Generate template files** — Fresh starters with clear defaults
 3. **Remove broken synapse references** — Master synapse IDs that don't exist in heir
 4. **Validate file structure** — Ensure all expected files exist (even if empty templates)
+
+---
 
 ## Drift Detection
 
@@ -151,6 +246,8 @@ Run these validations before every release:
 | Heir has master-only skills | Exclusion filter not working |
 | Heir synapse IDs don't resolve | Broken references from Master copy |
 | Heir `package.json` has personal name | Sanitization missed |
+
+---
 
 ## Heir → Master Promotion
 
@@ -189,6 +286,8 @@ When porting from Python heirs to TypeScript Master:
 | `async def` | `async function` |
 | `try/except` | `try/catch` |
 
+---
+
 ## Skill Inheritance Classification
 
 ### Curation Rule
@@ -197,18 +296,21 @@ Ask: "Is this skill ONLY useful for managing the Alex repo itself?"
 
 | Answer | Classification | Example |
 |--------|---------------|---------|
-| Yes, master-repo only | `master-only` | release-preflight, heir-curation |
+| Yes, master-repo only | `master-only` | release-preflight, heir-curation, heir-sync-management |
 | No, any developer benefits | `inheritable` | deep-thinking, meditation, security-review |
 
 ### Truly Master-Only Skills (small list)
 
 Only a few skills are genuinely master-only:
 
-- `heir-curation` — Managing what heirs receive
 - `heir-sync-management` — This skill
 - `master-alex-audit` — Master workspace auditing
 - `release-preflight` — Marketplace publishing
 - `release-process` — Release pipeline
+
+Everything else should be inheritable unless it references Master-specific file paths or workflows.
+
+---
 
 ## Heir Type Comparison
 
@@ -218,7 +320,7 @@ Only a few skills are genuinely master-only:
 | **M365 Copilot Agent** | Translation | Full export/schema mapping | Teams Developer Portal | High |
 | **GitHub Codespaces** | Deployment | None (same extension) | `git push` devcontainer.json | Very Low |
 
-Everything else should be inheritable unless it references Master-specific file paths or workflows.
+---
 
 ## Heir-Specific Positioning
 
@@ -231,6 +333,8 @@ Each platform heir must position against its **native competitor**, not a generi
 
 Store descriptions, README headers, and comparison tables must use platform-specific language and keywords.
 
+---
+
 ## Release Pipeline Integration
 
 The release script must enforce sync before packaging:
@@ -242,3 +346,94 @@ The release script must enforce sync before packaging:
 5. Package and publish
 
 **Rule**: It must be impossible to publish stale content through the official release process.
+
+---
+
+## Curation Validation Checklist
+
+### Pre-Release Gate
+
+```powershell
+# 1. Validate Architecture
+.\scripts\validate-synapses.ps1
+.\scripts\validate-skills.ps1
+
+# 2. Build Package (includes sync + compile + PII scan)
+.\scripts\build-extension-package.ps1
+
+# 3. Verify no contamination
+# (build script blocks on PII violations)
+```
+
+---
+
+## When to Change Inheritance
+
+| Scenario | Action |
+|----------|--------|
+| New skill created | Set `inheritance` in synapses.json (default: `inheritable`) |
+| Skill becomes Master-specific | Change to `master-only` |
+| Skill should be heir-specific | Change to `heir:vscode` or `heir:m365` |
+| Heirs missing a skill they need | Verify `inheritance` is not `master-only` |
+| Heirs behaving differently | Check if cognitive skills have correct inheritance |
+
+---
+
+## Post-Rename Cascade Check
+
+When a skill directory is renamed (or consolidated into another skill), synapse references throughout the architecture silently break. Brain-qa Phase 1 detects them, but you must repair every occurrence.
+
+**Scope of impact (observed 2026-02-19)**: Renaming `heir-curation` → `heir-sync-management` left 9 stale references in synapses.json files across the architecture.
+
+### Discovery
+
+```powershell
+# Find all synapses.json files still referencing the old skill name
+Get-ChildItem ".github\skills" -Recurse -Filter "synapses.json" |
+  Select-String -Pattern "old-skill-name" |
+  Select-Object Path, LineNumber, Line
+```
+
+### Repair
+
+For each file found, update the `"target"` field:
+```json
+// Old (broken)
+"target": ".github/skills/old-skill-name/SKILL.md"
+
+// New (correct)
+"target": ".github/skills/new-skill-name/SKILL.md"
+```
+
+### Validation
+
+```powershell
+# Confirm no broken targets remain
+pwsh -File ".github\muscles\brain-qa.ps1" -Phase 1
+# Should output: All synapse targets valid
+```
+
+### Prevention
+
+After any skill rename:
+1. Run discovery grep above immediately
+2. Fix all references in one pass  
+3. Run brain-qa Phase 1 to confirm clean
+4. Run brain-qa Phase 7 sync check to update heir copies
+
+> **Key insight**: If a skill is being *consolidated* (merged into another), also check that the consuming skill's synapse targets are updated to full `.github/skills/X/SKILL.md` paths — bare skill names ("markdown-mermaid") pass directory existence checks but fail Phase 33 pre-sync validation.
+
+---
+
+## Synapses
+
+- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
+- [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
+- [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
+- [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
+
+---
+
+*Consolidated: 2026-02-19*
+*Sources: heir-sync-management + heir-curation*
+*Last Updated: 2026-02-19*

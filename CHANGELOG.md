@@ -7,6 +7,197 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.0] - 2026-02-19
+
+> **VS Code API Adoption + Brain-QA Infrastructure** — Free platform leverage via 1.109 agent hooks, Copilot Memory, subagents, and Plan Agent; plus API key observability and synapse sync hardening
+
+### Added
+
+#### VS Code 1.109+ — Agent Hooks (P0)
+
+- **`.github/hooks.json`** — VS Code agent lifecycle hook configuration: SessionStart, SessionStop, PreToolUse, PostToolUse
+- **`session-start.js`** — Loads user profile, active goals, and meditation overdue status into session context on every agent session start
+- **`session-stop.js`** — Appends session entry to `session-metrics.json`; suggests `/meditate` if session ran ≥30 minutes
+- **`pre-tool-use.js`** — Safety gate: warns when restricted commands (Initialize/Reset Architecture) are attempted on Master Alex workspace
+- **`post-tool-use.js`** — Logs tool name + success to `session-tool-log.json` for synapse activation analysis during meditation sessions
+- All telemetry is **local only** — no data leaves the machine
+
+#### VS Code 1.109+ — Copilot Memory (P0)
+
+- **`copilot-instructions.md`** updated with Copilot Memory section: defines what belongs in memory vs. files vs. synapses
+- **`.vscode/settings.json`** updated with `github.copilot.chat.copilotMemory.enabled: true`
+- Memory curation added to meditation protocol: review and prune stale entries during `/meditate`
+
+#### VS Code 1.109+ — Subagents (P1)
+
+- All 6 specialist agents now have `user-invokable: true` for parallel subagent execution:
+  - `alex-researcher.agent.md` — Deep domain research (Claude Opus 4)
+  - `alex-builder.agent.md` — Implementation mode (Claude Sonnet 4)
+  - `alex-validator.agent.md` — Adversarial QA (Claude Sonnet 4)
+  - `alex-documentarian.agent.md` — Documentation mode (Claude Sonnet 4)
+  - `alex-azure.agent.md` — Azure development (Claude Sonnet 4)
+  - `alex-m365.agent.md` — M365/Teams development (Claude Sonnet 4)
+- Settings added: `chat.customAgentInSubagent.enabled`, `github.copilot.chat.searchSubagent.enabled`
+
+#### VS Code 1.109+ — Plan Agent (P1)
+
+- **`/plan` prompt** (`plan.prompt.md`) — 4-phase structured implementation workflow: Discovery → Alignment → Design → Refinement
+- Three Alex-specific plan templates: Architecture Refactoring, New Skill, Release Preparation
+- Integrates with skill-selection-optimization for complex task planning
+
+#### `.vscode/settings.json` — Full 1.109 Settings Block
+
+- Added all recommended VS Code 1.109+ settings: `chat.hooks.enabled`, `copilotMemory`, subagent settings, request queuing, agents control
+- Claude adaptive thinking: `claude-sonnet-4-*.adaptiveThinkingEnabled`
+- Full documented config with inline comments
+
+#### Phase 35 — API Key Availability Check (brain-qa.ps1)
+
+- **New brain-qa phase** scans all `synapses.json` files for `apiKeys` declarations and checks each `envVar` at Process/User/Machine scope
+- **Warns (never fails)** when a required key is missing — exit code stays 0; output shows skill names, purpose, and acquisition URL
+- **`apiKeys` schema** added to `SYNAPSE-SCHEMA.json` — array of `{ envVar, purpose, required, getUrl }` objects
+- **Two skills declared** their runtime API key requirements:
+  - `ai-character-reference-generation` → `REPLICATE_API_TOKEN` (Flux/Ideogram character image generation)
+  - `ai-generated-readme-banners` → `REPLICATE_API_TOKEN` (Ideogram v2 / Flux banner generation)
+
+#### Meditation Consolidation — 2026-02-19 Brain-QA Healing Session
+
+- **Episodic record** — `.github/episodic/meditation-2026-02-19-brain-qa-healing.md` created: 5 key insights, memory map table, synaptic connections from the 34→0 issue resolution sprint
+- **`heir-sync-management` SKILL.md enhanced** — Added § Post-Rename Cascade Check with PowerShell discovery/repair/validation protocol
+- **Synapse strengthened** — `heir-sync-management/synapses.json` v1.0.0→1.1.0, brain-qa connection strength 0.85→0.90
+
+### Fixed
+
+#### Phase 7 — Synapse Sync Detection Hardening
+
+- **Root cause**: diff detection compared only connection *counts* — new top-level fields (e.g. `apiKeys`) silently failed to propagate to heir
+- **Fix**: full content comparison using `ConvertTo-Json -Compress` after filtering master-only connections — any field change now triggers a sync
+- **Impact**: `apiKeys` correctly propagated to heir for both Replicate skill synapse files
+
+### Notes
+
+- Extension package version bumped to `5.9.0`
+- All changes synced to VS Code heir via brain-qa -Mode sync -Fix
+- Hook scripts are Node.js (no new dependencies); graceful no-ops when optional context files are absent
+- `user-invokable: true` on specialist agents requires VS Code 1.109+ Copilot — no-op on older versions
+
+---
+
+## [5.8.5] - 2026-02-19
+
+> **Cognitive Architecture Enhancement** — Trifecta completion sprint, skill discoverability enrichment, and staleness management expansion
+
+### Added
+
+#### Trifecta Completion Sprint (+9 complete trifectas — 22 total)
+
+- **6 VS Code + M365 Platform Trifectas** — Chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging: each with full SKILL.md + instructions.md + prompt
+- **3 Cross-Domain Trifectas** — Markdown-mermaid, testing-strategies, knowledge-synthesis: converted partial trifectas to complete by creating missing instruction files
+- **All 15 new instruction files** synced to VS Code heir (49 total heir instructions)
+
+#### Skill Discoverability — Keyword Index Enrichment
+
+- **20 skills enriched** in `skill-activation` SKILL.md index — ~3× more activation terms per skill entry
+- **New trifecta skills**: chat-participant-patterns (register participant, @mention, LM tool), vscode-extension-patterns (extension not activating, agent hooks 1.109, CSP webview), mcp-development (give copilot access to data, tool for agent, MCP inspector), microsoft-graph-api (MSAL, graph permissions, delta query), teams-app-patterns (declarative agent, DA v1.6, teamsapp CLI), m365-agent-debugging (agent not responding, schema version mismatch, conversation starters)
+- **Platform enrichment**: markdown-mermaid (ATACCU, diagram not rendering), testing-strategies (testing pyramid, AAA pattern, flaky tests), knowledge-synthesis (save this globally, promote to pattern)
+- **Existing thin skills**: llm-model-selection, security-review, privacy-responsible-ai (EU AI Act, GDPR), git-workflow (worktrees, cherry-pick), debugging-patterns, root-cause-analysis, architecture-health, global-knowledge, prompt-engineering, error-recovery-patterns, api-design
+- **Stale entry removed**: `microsoft-sfi` row deleted from index (already consolidated into `security-review`)
+
+#### Staleness Management Expansion
+
+- **16 staleness-prone skills tracked** in SKILLS-CATALOG.md (expanded from 8) with Why Stale, Refresh Triggers, Owner, and Last Updated columns
+- **8 new entries added**: gamma-presentations (SaaS product evolution), mcp-development (spec actively versioned), microsoft-fabric (monthly feature releases), fabric-notebook-publish (Git integration maturing), microsoft-graph-api (beta→v1.0 graduation), bicep-avm-mastery (AVM registry monthly updates), foundry-agent-platform (preview architecture shifts), ai-character-reference-generation (model version deprecation)
+
+#### Skill Content Refresh (6 skills updated with staleness headers + corrections)
+
+- **mcp-development** (v1.0.0→1.1.0) — Transport section rewritten: deprecated HTTP+SSE replaced by Streamable HTTP (MCP spec 2025-03-26); `StreamableHTTPServerTransport` code example added; three references to `HTTP+SSE` corrected throughout (terminology table, ASCII diagram, transport section)
+- **gamma-presentations** — Staleness watch header added: API v0.2, monitors content types, credit pricing, theme updates
+- **microsoft-fabric** — Staleness watch header added: REST API v1 stable, new endpoints monthly; links to Fabric release notes
+- **fabric-notebook-publish** — Staleness watch header + Last Validated (Feb 2026): notes Git integration scope gaps (not all item types support Git sync)
+- **bicep-avm-mastery** (v1.0.0→1.1.0) — Staleness watch added; advises using live `mcp_bicep_list_avm_metadata` over hardcoded module counts
+- **ai-character-reference-generation** — Staleness watch added: Replicate model deprecation risk, `flux-1.1-pro-ultra` surfaced as upgrade path
+
+### Notes
+
+- No extension code changes — pure cognitive architecture and documentation release
+- All changes synced to VS Code heir platform
+
+---
+
+## [5.8.4] - 2026-02-19
+
+> **Secrets Management** — Comprehensive credential security with VS Code SecretStorage API, .env file detection, and platform-native encrypted storage
+
+### Added
+
+#### Secrets Management Trifecta
+
+- **Complete trifecta** — SKILL.md (342 lines), instructions.md (567+ lines), /secrets prompt, synapses.json with 6 validated connections
+- **Centralized secretsManager.ts** (750+ lines) — Single service for all credential operations across the extension
+- **VS Code SecretStorage API integration** — Platform-native encrypted storage (Windows Credential Manager, macOS Keychain, Linux Secret Service)
+- **Token configuration registry** — 5 supported tokens: GitHub, Gamma, Replicate, OpenAI, Anthropic with metadata (displayName, description, getUrl, placeholder, envVar)
+- **Synchronous access pattern** — Token cache (Map) enables sync retrieval from async SecretStorage
+- **Token management UI** — Quick pick interface showing all tokens with status indicators ($(check)/$(x))
+- **Password-masked input** — Input boxes use `password: true` for secure token entry
+- **"Get API Key" button** — Opens service URL directly from input prompt for easy token acquisition
+
+#### Environment Variable Migration
+
+- **Automatic migration** — Detects env vars (process.env) and copies to SecretStorage on extension activation
+- **Initialize integration** — Migrates secrets when deploying Alex to new projects
+- **Upgrade integration** — Migrates secrets when upgrading existing Alex installations
+- **Non-destructive strategy** — Keeps env vars as fallback, never overwrites user-configured tokens
+- **Backward compatibility** — Falls back to env vars if SecretStorage empty, ensuring zero-breaking changes
+
+#### .env File Detection & Migration 🆕
+
+- **Workspace scanning** — `alex.detectEnvSecrets` command scans all .env files for credentials
+- **Regex-based parsing** — Pattern: `/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*([^#\n]+)/i` with keyword matching
+- **Secret keyword detection** — Identifies: API_KEY, TOKEN, SECRET, PASSWORD, PASS, AUTH, CREDENTIAL, PRIVATE_KEY
+- **Smart exclusions** — Skips .env.example, .env.template, .env.sample, and node_modules
+- **Token classification** — Distinguishes recognized tokens (matches TOKEN_CONFIGS) from custom secrets
+- **Auto-migration** — One-click migration of recognized tokens (e.g., GAMMA_API_KEY) to SecretStorage
+- **Manual review UI** — Multi-select quick pick for custom secrets requiring user review
+- **Code migration guide** — HTML webview with platform-specific examples (VS Code extensions, Node.js apps, scripts)
+- **Welcome panel integration** — "🔍 Detect .env Secrets" quick action button in SYSTEM section
+- **Command Palette access** — "Alex: Detect & Migrate .env Secrets" with $(search) icon
+
+#### Command Integration
+
+- **alex.manageSecrets** — Opens token management palette (Command Palette + Welcome panel button)
+- **alex.detectEnvSecrets** — Scans workspace for .env secrets and launches migration workflow
+
+#### Feature Integration
+
+- **Gamma commands updated** — All 3 gamma commands (alex.generateGammaPresentations, alex.convertToGamma, alex.generateGammaDiagram) now use SecretStorage
+- **Warning templates** — Missing token warnings include "Configure API Key" button that opens management UI
+- **telemetry integration** — All secrets commands tracked with telemetry.logTimed()
+
+### Changed
+
+- **Token retrieval pattern** — Features now call `getToken()` instead of direct `process.env` access
+- **Sync access enabled** — Pre-loaded cache allows synchronous token retrieval without await
+- **Platform-agnostic security** — OS-level encryption on all platforms (Windows/macOS/Linux)
+
+### Security
+
+- **OS-encrypted storage** — Credentials stored in platform keyring, not plaintext files
+- **Reduced git commit risk** — Proactive .env scanning prevents accidental credential commits
+- **No token logging** — getToken() implementations redact tokens from console output
+- **Password input masking** — All token entry UIs use masked input for visual security
+- **Namespace isolation** — Keys use `alex.vscode.tokenName` format to prevent collisions
+
+### Impact
+
+- **Proactive security** — Alex now detects insecure .env files and guides migration to encrypted storage
+- **Team consistency** — Standardized secret management across all Alex features
+- **Zero-friction UX** — Auto-migration + code guide enables secure patterns without breaking changes
+- **Platform compliance** — VS Code SecretStorage is the recommended credential storage API (replaced deprecated keytar)
+- **Cross-platform reliability** — Same security guarantees on Windows, macOS, and Linux
+- **Documentation complete** — secrets-management trifecta provides comprehensive guidance for heirs
+
+---
+
 ## [5.8.3] - 2026-02-17
 
 > **UI Polish** — Comprehensive welcome panel refinement with reduced font sizes and tighter spacing for a more compact, polished interface

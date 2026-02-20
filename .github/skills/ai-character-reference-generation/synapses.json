@@ -19,6 +19,14 @@
             "note": "Character consistency requires detailed prompt engineering"
         }
     ],
+    "apiKeys": [
+        {
+            "envVar": "REPLICATE_API_TOKEN",
+            "purpose": "Runs Flux/Ideogram models on Replicate for character image generation",
+            "required": true,
+            "getUrl": "https://replicate.com/account/api-tokens"
+        }
+    ],
     "activationBoost": [
         "character reference",
         "flux",

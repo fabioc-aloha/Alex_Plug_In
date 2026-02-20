@@ -2,7 +2,7 @@
 
 **Auto-loaded when**: Working with character development, fiction writing, visual reference generation
 **Domain**: Character consistency patterns for visual narratives using Flux 1.1 Pro
-**Synapses**: [ai-character-reference-generation/SKILL.md](..//skills/ai-character-reference-generation/SKILL.md)
+**Synapses**: [ai-character-reference-generation/SKILL.md](../skills/ai-character-reference-generation/SKILL.md)
 
 ---
 

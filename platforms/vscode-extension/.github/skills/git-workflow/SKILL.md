@@ -122,6 +122,27 @@ git stash list                  # See all stashes
 git stash drop                  # Delete top stash
 ```
 
+## Worktrees (Agent Isolation)
+
+VS Code background agents use `git worktree` to isolate changes. Understanding worktrees is useful when debugging agent sessions.
+
+```powershell
+# Create a worktree for isolated work
+git worktree add ../project-feature feature-branch
+
+# List all worktrees
+git worktree list
+
+# Remove a worktree (prune stale links)
+git worktree remove ../project-feature
+git worktree prune
+```
+
+**VS Code integration** (1.109+):
+- `git.worktreeIncludeFiles` — copy gitignored files (e.g., `.env`) into agent worktrees
+- Background agents auto-commit at end of each turn within their worktree
+- Check Agent Sessions view to see which worktree an agent is using
+
 ## Anti-Patterns
 
 - ❌ `git push --force` on shared branches

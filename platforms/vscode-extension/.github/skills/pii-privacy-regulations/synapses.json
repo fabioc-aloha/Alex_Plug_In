@@ -10,7 +10,7 @@
       "reason": "Deep dive into regulatory compliance aspects"
     },
     {
-      "target": ".github/skills/microsoft-sfi/SKILL.md",
+      "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.75,
       "bidirectional": true,

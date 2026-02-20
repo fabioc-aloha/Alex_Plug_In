@@ -2,7 +2,7 @@
 
 **Auto-loaded when**: Working with VS Code extension development, code quality reviews, technical debt cleanup
 **Domain**: 5-dimension audit framework for VS Code extension quality assurance
-**Synapses**: [extension-audit-methodology/SKILL.md](..//skills/extension-audit-methodology/SKILL.md)
+**Synapses**: [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
 
 ---
 

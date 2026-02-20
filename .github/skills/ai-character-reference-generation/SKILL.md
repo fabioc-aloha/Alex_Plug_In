@@ -8,6 +8,8 @@ applyTo: "**/*character*,**/*reference*,**/*generate*,**/*replicate*"
 
 > Create 17+ consistent character poses from detailed prompts — no reference images needed.
 
+> ⚠️ **Staleness Watch** (Last validated: Feb 2026 — Flux 1.1 Pro): Image generation models on Replicate release new versions and deprecate old ones. Before generating, verify the model identifier at [replicate.com/black-forest-labs](https://replicate.com/black-forest-labs). **Upgrade path**: `black-forest-labs/flux-1.1-pro-ultra` provides higher resolution (up to 4MP) with the same API surface. Input parameter schema may change between model versions.
+
 ---
 
 ## Summary

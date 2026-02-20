@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.8.3",
+  "version": "5.9.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -297,6 +297,37 @@
         "icon": "$(file-media)"
       },
       {
+        "command": "alex.convertToWord",
+        "title": "Alex: Convert to Word",
+        "icon": "$(file-text)"
+      },
+      {
+        "command": "alex.convertToWordWithOptions",
+        "title": "Alex: Convert to Word with Options...",
+        "icon": "$(file-text)"
+      },
+      {
+        "command": "alex.generateGammaPresentation",
+        "title": "Alex: Generate Gamma Presentation",
+        "icon": "$(presentation)"
+      },
+      {
+        "command": "alex.generateGammaFromFile",
+        "title": "Alex: Generate Gamma from File",
+        "icon": "$(presentation)"
+      },
+      {
+        "command": "alex.generateGammaWithOptions",
+        "title": "Alex: Generate Gamma (Advanced)...",
+        "icon": "$(presentation)"
+      },
+      {
+        "command": "alex.generatePersonaImages",
+        "title": "Alex: Generate Persona Images",
+        "icon": "$(symbol-color)",
+        "category": "Alex"
+      },
+      {
         "command": "alex.generateTests",
         "title": "Alex: Generate Tests",
         "icon": "$(beaker)"
@@ -310,6 +341,16 @@
         "command": "alex.setupEnvironment",
         "title": "Alex: Setup Environment",
         "icon": "$(gear)"
+      },
+      {
+        "command": "alex.manageSecrets",
+        "title": "Alex: Manage API Keys & Secrets",
+        "icon": "$(key)"
+      },
+      {
+        "command": "alex.detectEnvSecrets",
+        "title": "Alex: Detect & Migrate .env Secrets",
+        "icon": "$(search)"
       },
       {
         "command": "alex.viewBetaTelemetry",
@@ -522,12 +563,32 @@
           "when": "resourceExtname == '.md' || resourceExtname == '.txt'"
         },
         {
+          "command": "alex.convertToWord",
+          "group": "3_generate@3",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.convertToWordWithOptions",
+          "group": "3_generate@4",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.generateGammaFromFile",
+          "group": "3_generate@5",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.generateGammaWithOptions",
+          "group": "3_generate@6",
+          "when": "resourceExtname == '.md'"
+        },
+        {
           "command": "alex.generateImageFromSelection",
-          "group": "3_generate@3"
+          "group": "3_generate@7"
         },
         {
           "command": "alex.generateDiagram",
-          "group": "3_generate@4",
+          "group": "3_generate@8",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
         {
@@ -1939,7 +2000,7 @@
     "pretest": "npm run compile-tests && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
+    "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies --allow-package-secrets github && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
     "dream": "tsx ../../.github/muscles/dream-cli.ts",
     "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run package"
   },

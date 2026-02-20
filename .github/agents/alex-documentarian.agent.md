@@ -3,6 +3,7 @@ description: Alex Documentation Mode - Keeps documentation accurate, current, an
 name: Documentarian
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch']
 model: Claude Sonnet 4
+user-invokable: true
 handoffs:
   - label: 🔨 Return to Builder
     agent: Builder

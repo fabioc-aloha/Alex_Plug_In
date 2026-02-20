@@ -2,7 +2,7 @@
 
 **Invoke with**: `/extension-audit-methodology` or "audit extension quality"
 **Domain**: Systematic 5-dimension quality assurance for VS Code extensions
-**Synapses**: [extension-audit-methodology/SKILL.md](..//skills/extension-audit-methodology/SKILL.md)
+**Synapses**: [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
 
 ---
 
@@ -49,7 +49,7 @@ $date = Get-Date -Format "yyyy-MM-dd"
 New-Item "alex_docs/audits/audit-report-$date.md" -ItemType File
 ```
 
-**Report template**: Use structure from [extension-audit-methodology/SKILL.md](..//skills/extension-audit-methodology/SKILL.md)
+**Report template**: Use structure from [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
 
 ---
 

@@ -60,7 +60,7 @@ function Write-Fail {
 }
 
 # Heir-valid phases (master-only phases omitted)
-$heirPhases = @(1, 2, 3, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 31, 32)
+$heirPhases = @(1, 2, 3, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 31, 32, 34)
 
 # Define phase groups
 $quickPhases = @(1, 2, 3, 4, 6)
@@ -806,6 +806,97 @@ if (32 -in $runPhases) {
     }
     else {
         Write-Fail "copilot-instructions.md not found"
+    }
+}
+
+# ============================================================
+# PHASE 34: Brain Self-Containment Check
+# Verifies all references inside .github/ resolve within .github/
+# Catches: escaped synapse targets, escaped markdown links, ..// typos,
+# hardcoded absolute paths in non-ephemeral files
+# ============================================================
+if (34 -in $runPhases) {
+    Write-Phase 34 "Brain Self-Containment Check"
+
+    # Known-OK exceptions — files that intentionally reference outside .github/
+    $scExceptions = @(
+        'episodic',   # Session records cleared on heir deployment; past-session paths are harmless
+        'SUPPORT.md'  # GitHub Community Health File — links to repo-root docs by design
+    )
+
+    # Helper: returns $null if target stays inside $ghPath, otherwise returns the escaped value
+    function Test-SelfContained {
+        param([string]$sourceFile, [string]$target)
+        if (-not $target -or $target.Trim() -eq '') { return $null }
+        if ($target -match '^(https?://|#|mailto:|external:|global-knowledge://)') { return $null }
+        if ($target -match '^\.github/') { return $null }   # explicit .github/ prefix is always OK
+        if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name
+        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path — always bad
+        # Relative path — resolve and verify it stays inside .github/
+        $baseDir = Split-Path $sourceFile -Parent
+        $resolved = [System.IO.Path]::GetFullPath((Join-Path $baseDir $target))
+        if ($resolved.StartsWith($ghPath, [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
+        return $target
+    }
+
+    function Test-KnownScException {
+        param([string]$shortPath)
+        foreach ($exc in $scExceptions) { if ($shortPath -match [regex]::Escape($exc)) { return $true } }
+        return $false
+    }
+
+    $scIssues = @()
+
+    # 1. Synapse targets — must all resolve within .github/
+    Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json" | ForEach-Object {
+        $f = $_
+        try {
+            $j = Get-Content $f.FullName -Raw | ConvertFrom-Json
+            foreach ($conn in $j.connections) {
+                $escaped = Test-SelfContained -sourceFile $f.FullName -target $conn.target
+                if ($null -ne $escaped) {
+                    $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+                    if (-not (Test-KnownScException $short)) {
+                        $scIssues += "[synapse] $short -> $escaped"
+                    }
+                }
+            }
+        }
+        catch { $scIssues += "[parse-error] $($f.Name): $($_.Exception.Message)" }
+    }
+
+    # 2. Markdown link targets (code fences stripped to avoid false positives)
+    $linkRx = [regex]'\[([^\]]*)\]\(([^)]+)\)'
+    Get-ChildItem "$ghPath" -Recurse -Include "*.md" | ForEach-Object {
+        $f = $_
+        $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+        if (Test-KnownScException $short) { return }
+        $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
+        if (-not $content) { return }
+        # Strip code fences and inline code to avoid scanning example links
+        $stripped = $content -replace '(?ms)```[^`]*```', ''
+        $stripped = $stripped -replace '(?m)`[^`]+`', ''
+        foreach ($m in $linkRx.Matches($stripped)) {
+            $href = $m.Groups[2].Value
+            if ($href -match '^(https?://|#|mailto:)') { continue }
+            $escaped = Test-SelfContained -sourceFile $f.FullName -target $href
+            if ($null -ne $escaped) { $scIssues += "[md-link] $short -> $escaped" }
+        }
+        # 3. Double-slash typo ..// — always a bug, never intentional
+        if ($content -match '\.\.//') {
+            $badLines = ($content -split "`n" | Select-String '\.\.//' |
+                ForEach-Object { $_.LineNumber }) -join ', '
+            $scIssues += "[..// typo] $short (lines: $badLines)"
+        }
+    }
+
+    $synapseCount = (Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json").Count
+    $mdCount = (Get-ChildItem "$ghPath" -Recurse -Include "*.md").Count
+    if ($scIssues.Count -eq 0) {
+        Write-Pass "Brain is fully self-contained ($synapseCount synapse files, $mdCount markdown files scanned)"
+    }
+    else {
+        foreach ($i in $scIssues) { Write-Fail $i }
     }
 }
 

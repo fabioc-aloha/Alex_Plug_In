@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.0] - 2026-02-19
+
+> **VS Code API Adoption** — Agent hooks, Copilot Memory, subagents, Plan Agent, and brain-qa infrastructure hardening
+
+### Added
+
+- **Agent Hooks** — `.github/hooks.json` with SessionStart/Stop/PreToolUse/PostToolUse; context loading, meditation suggestions, safety gates, tool telemetry
+- **Copilot Memory** — `copilotMemory.enabled`; memory guidelines in copilot-instructions.md; meditation curation protocol
+- **Subagents** — `user-invokable: true` on all 6 specialist agents (Researcher, Builder, Validator, Documentarian, Azure, M365) for parallel execution
+- **Plan Agent** — `/plan` prompt with 4-phase workflow and 3 Alex-specific templates
+- **brain-qa Phase 35** — API key availability check: warns when `REPLICATE_API_TOKEN` missing for image generation skills
+- **`apiKeys` schema** — Declarative API key documentation in `SYNAPSE-SCHEMA.json`; two skills now declare their runtime key requirements
+- **Phase 7 sync hardening** — Full-content comparison (was count-only) ensures all synapse field changes propagate to heir
+- **`.vscode/settings.json`** — Full 1.109 recommended settings block with inline documentation
+
+### Notes
+
+- Hook scripts are dependency-free Node.js; graceful no-ops when optional config files are absent
+- `user-invokable: true` requires VS Code 1.109+ Copilot extension — no-op on older versions
+
+---
+
+## [5.8.5] - 2026-02-19
+
+> **Cognitive Architecture Enhancement** — Trifecta completion sprint, skill discoverability enrichment, and staleness management expansion
+
+### Added
+
+- **22 complete trifectas** — +9 new: chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis
+- **Skill discoverability** — 20 skills enriched in skill-activation index with ~3× more keyword terms
+- **Staleness management** — 16 staleness-prone skills tracked with refresh triggers and ownership
+- **6 skills content-refreshed** — mcp-development transport rewrite, staleness headers added to gamma-presentations, microsoft-fabric, bicep-avm-mastery, fabric-notebook-publish, ai-character-reference-generation
+- **49 instruction files** synced to VS Code heir
+
+### Notes
+
+- No extension code changes — pure cognitive architecture and documentation release
+
+---
+
 ## [5.8.3] - 2026-02-17
 
 > **UI Polish** — Comprehensive welcome panel refinement with reduced font sizes and tighter spacing for a more compact, polished interface

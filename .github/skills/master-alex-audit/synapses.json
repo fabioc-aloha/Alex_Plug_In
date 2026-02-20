@@ -18,10 +18,10 @@
       "description": "Master audit should precede any release preflight"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
+      "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "bidirectional",
       "strength": 0.85,
-      "description": "Audit verifies heir sync status, curation implements fixes"
+      "description": "Audit verifies heir sync status, sync management implements fixes"
     },
     {
       "target": ".github/skills/architecture-health/SKILL.md",

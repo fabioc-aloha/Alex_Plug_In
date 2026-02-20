@@ -2,7 +2,7 @@
 
 ![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![Codespaces](https://img.shields.io/badge/Codespaces-Production-2ea043)](platforms/codespaces/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![GitHub Copilot Web](https://img.shields.io/badge/GitHub%20Copilot-Web-24292f)](platforms/github-copilot-web/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![GitHub discussions](https://img.shields.io/github/discussions/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) [![GitHub contributors](https://img.shields.io/github/contributors/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/graphs/contributors)
 
@@ -59,7 +59,7 @@
 | ---------------------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
 | **VS Code Extension**  | ✅ Published  | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
 | **M365 Copilot Agent** | 🔄 Preview    | [Documentation](platforms/m365-copilot/)                                                                    |
-| **GitHub Codespaces**  | ✅ Production | [Documentation](platforms/codespaces/)                                                                      |
+| **GitHub Copilot Web** | ✅ Active     | [Documentation](platforms/github-copilot-web/)                                                              |
 
 ### VS Code Extension
 
@@ -86,16 +86,16 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 
 📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
 
-### GitHub Codespaces
+### GitHub Copilot Web
 
-Alex in the cloud with zero setup — the same VS Code extension runs identically in Codespaces:
+Alex on `github.com/copilot` and `github.dev` — no installation required:
 
-- Full extension with all 100+ skills
-- Auto-install via `devcontainer.json`
-- Global Knowledge auto-cloned from GitHub
-- Perfect 10/10 compatibility score
+- Identity, skills, and prompts loaded from `.github/` automatically
+- Works in repository chat, PR reviews, and github.dev
+- No extension, no compute cost, no setup
+- Tuned for web context (no VS Code tools)
 
-📘 **[Codespaces Documentation](platforms/codespaces/)**
+📘 **[GitHub Copilot Web Documentation](platforms/github-copilot-web/)**
 
 ---
 

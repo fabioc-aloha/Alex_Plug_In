@@ -9,16 +9,17 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ## Skill Count: 122
 
-| Inheritance | Count                                                                                                  |
-| ----------- | ------------------------------------------------------------------------------------------------------ |
-| Inheritable | 107                                                                                                    |
-| Master-Only | 4                                                                                                      |
-| Universal   | 1                                                                                                      |
-| Heir:vscode | 6                                                                                                      |
-| Heir:m365   | 2                                                                                                      |
-| Note        | 2 skills pending catalog documentation (global-knowledge-maintenance, vscode-configuration-validation) |
+| Inheritance | Count |
+| ----------- | ----- |
+| Inheritable | 108   |
+| Master-Only | 4     |
+| Universal   | 1     |
+| Heir:vscode | 7     |
+| Heir:m365   | 2     |
 
-> 🎉 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
+> � **+9 trifectas completed + skill discoverability enriched** (2026-02-19): chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis now full trifectas (22 total). skill-activation index enriched with ~3× keywords across 20 skills. 16 staleness-prone skills tracked.
+>
+> 🆕 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
 >
 > 🆕 **+6 domain skills** (2026-02-12): bicep-avm-mastery, database-design, microsoft-graph-api, multi-agent-orchestration, observability-monitoring, performance-profiling
 >
@@ -102,11 +103,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill                                                                            | Inheritance | Purpose                                                |
 | -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------ |
-| [security-review](../../.github/skills/security-review/SKILL.md)                 | inheritable | OWASP, threat modeling, security-focused code review   |
-| [microsoft-sfi](../../.github/skills/microsoft-sfi/SKILL.md)                     | inheritable | Microsoft Secure Future Initiative (6 pillars, STRIDE) |
-| [pii-privacy-regulations](../../.github/skills/pii-privacy-regulations/SKILL.md) | inheritable | GDPR & Australian Privacy Principles compliance        |
-| [privacy-responsible-ai](../../.github/skills/privacy-responsible-ai/SKILL.md)   | inheritable | Privacy by design, RAI principles, bias mitigation     |
-| [distribution-security](../../.github/skills/distribution-security/SKILL.md)     | inheritable | 🆕 Defense-in-depth, PII scanning, secure packaging     |
+| [security-review](../../.github/skills/security-review/SKILL.md)                 | inheritable | OWASP, STRIDE, Microsoft SFI (6 pillars), security-focused code review |
+| [pii-privacy-regulations](../../.github/skills/pii-privacy-regulations/SKILL.md) | inheritable | GDPR & Australian Privacy Principles compliance                     |
+| [privacy-responsible-ai](../../.github/skills/privacy-responsible-ai/SKILL.md)   | inheritable | Privacy by design, RAI principles, bias mitigation                  |
+| [distribution-security](../../.github/skills/distribution-security/SKILL.md)     | inheritable | 🆕 Defense-in-depth, PII scanning, secure packaging                  |
+| [secrets-management](../../.github/skills/secrets-management/SKILL.md)           | inheritable | 🆕 VS Code SecretStorage API, .env detection, platform encryption    |
 
 ### 📝 Documentation & Communication
 
@@ -119,6 +120,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [grant-writing](../../.github/skills/grant-writing/SKILL.md)                                     | inheritable | Research funding applications, NSF/NIH patterns               |
 | [creative-writing](../../.github/skills/creative-writing/SKILL.md)                               | inheritable | Narrative, storytelling, engagement                           |
 | [markdown-mermaid](../../.github/skills/markdown-mermaid/SKILL.md)                               | inheritable | Diagrams and visualization                                    |
+| [md-to-word](../../.github/skills/md-to-word/SKILL.md)                                           | inheritable | 🆕 Markdown→Word conversion with diagrams, pandoc/python-docx  |
 | [lint-clean-markdown](../../.github/skills/lint-clean-markdown/SKILL.md)                         | inheritable | Clean, consistent markdown                                    |
 | [ascii-art-alignment](../../.github/skills/ascii-art-alignment/SKILL.md)                         | inheritable | Text-based diagrams                                           |
 | [localization](../../.github/skills/localization/SKILL.md)                                       | inheritable | i18n, l10n, translation workflows                             |
@@ -170,7 +172,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [release-preflight](../../.github/skills/release-preflight/SKILL.md)                 | inheritable | Pre-release checks, version sync                               |
 | [llm-model-selection](../../.github/skills/llm-model-selection/SKILL.md)             | inheritable | Model choice for cost/capability                               |
 | [self-actualization](../../.github/skills/self-actualization/SKILL.md)               | inheritable | Deep self-assessment protocols                                 |
-| [heir-curation](../../.github/skills/heir-curation/SKILL.md)                         | master-only | Curate heir deployments                                        |
+| [global-knowledge-maintenance](../../.github/skills/global-knowledge-maintenance/SKILL.md) | master-only | 🆕 Global Knowledge curation, index sync, pattern promotion   |
 | [skill-catalog-generator](../../.github/skills/skill-catalog-generator/SKILL.md)     | inheritable | Generate skill catalogs with network diagrams                  |
 | [skill-building](../../.github/skills/skill-building/SKILL.md)                       | inheritable | 🆕 Create effective skills, promotion workflow, quality gates   |
 | [skill-development](../../.github/skills/skill-development/SKILL.md)                 | inheritable | 🆕 Track desired skills, contextual acquisition, growth mindset |
@@ -206,11 +208,12 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | Skill                                                                                | Inheritance | Purpose                    |
 | ------------------------------------------------------------------------------------ | ----------- | -------------------------- |
 | [vscode-extension-patterns](../../.github/skills/vscode-extension-patterns/SKILL.md) | heir:vscode | Extension API patterns     |
+| [vscode-configuration-validation](../../.github/skills/vscode-configuration-validation/SKILL.md) | heir:vscode | 🆕 Manifest validation, config consistency |
 | [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md) | heir:vscode | Chat API, streaming, tools |
 
-#### GitHub Codespaces
+#### GitHub Copilot Web
 
-Codespaces runs the same VS Code extension binary — it inherits all `heir:vscode` skills with zero translation. No platform-specific skills needed.
+The GitHub Copilot Web heir is `.github/`-only — skills sync as context files, not activatable extensions. Inherits all `inheritable` skills. No `heir:vscode` or `heir:m365` skills. No platform-specific skills currently defined (`heir:web` tag reserved for future use).
 
 #### M365 / Teams
 
@@ -225,16 +228,24 @@ Codespaces runs the same VS Code extension binary — it inherits all `heir:vsco
 
 These skills depend on rapidly evolving technology or regulations:
 
-| Skill                     | Why Stale                 | Refresh Triggers                   | Updated By   |
-| ------------------------- | ------------------------- | ---------------------------------- | ------------ |
-| vscode-extension-patterns | Monthly VS Code releases  | API changes, deprecations          | VS Code heir |
-| chat-participant-patterns | Proposed APIs evolving    | API graduation, new features       | VS Code heir |
-| m365-agent-debugging      | Schema versions change    | New schema, capabilities           | M365 heir    |
-| teams-app-patterns        | Platform evolution        | Toolkit updates, manifest versions | M365 heir    |
-| llm-model-selection       | New models frequently     | Model announcements, pricing       | Master       |
-| git-workflow              | GitHub features evolve    | CLI updates, Actions changes       | Master       |
-| privacy-responsible-ai    | Regulations change        | New laws, AI regulations           | Master       |
-| microsoft-sfi             | Security landscape shifts | New vulnerabilities, practices     | Master       |
+| Skill                     | Why Stale                 | Refresh Triggers                   | Updated By   | Last Updated |
+| ------------------------- | ------------------------- | ---------------------------------- | ------------ | ------------ |
+| vscode-extension-patterns        | Monthly VS Code releases         | API changes, deprecations               | VS Code heir | Feb 2026     |
+| chat-participant-patterns        | Proposed APIs evolving           | API graduation, new features            | VS Code heir | Feb 2026     |
+| m365-agent-debugging             | Schema versions change           | New schema, capabilities                | M365 heir    | Feb 2026     |
+| teams-app-patterns               | Platform evolution               | Toolkit updates, manifest versions      | M365 heir    | Feb 2026     |
+| llm-model-selection              | New models frequently            | Model announcements, pricing            | Master       | Feb 2026     |
+| git-workflow                     | GitHub features evolve           | CLI updates, Actions changes            | Master       | Feb 2026     |
+| privacy-responsible-ai           | Regulations change               | New laws, AI regulations                | Master       | Feb 2026     |
+| security-review                  | Security landscape shifts        | New CVEs, SFI updates, OWASP changes    | Master       | Feb 2026     |
+| gamma-presentations              | SaaS product evolution           | New AI features, UI changes, new content types | Master  | Feb 2026     |
+| mcp-development                  | Protocol spec versioned actively | New spec versions, Streamable HTTP, tool schema changes | Master | Feb 2026 |
+| microsoft-fabric                 | Rapid platform growth (GA 2023)  | Monthly feature releases, API changes   | Master       | Feb 2026     |
+| fabric-notebook-publish          | Fabric Git integration evolving  | Feature flags, Git sync workflow changes | Master      | Feb 2026     |
+| microsoft-graph-api              | API versioning + beta graduation | New workloads, beta→v1.0, permission scope changes | Master | Feb 2026  |
+| bicep-avm-mastery                | AVM registry monthly updates     | New modules, module version bumps       | Master       | Feb 2026     |
+| foundry-agent-platform           | Azure AI Foundry architecture    | Agent features, SDK, portal changes     | Master       | Feb 2026     |
+| ai-character-reference-generation | Image gen API model changes     | Replicate model versions, DALL·E updates, new providers | Master | Feb 2026 |
 
 **Update Flow:** Platform heirs update their skills first (they encounter changes in practice), then promote stable updates to Master. Master updates inheritable skills directly.
 
@@ -253,7 +264,7 @@ Master Alex
     │
     ├── heir:m365 ──► M365 Agent Only
     │
-    └── (Codespaces inherits VS Code heir skills — zero-translation)
+    └── heir:web (reserved) ──► GitHub Copilot Web Only
 ```
 
 ---
@@ -312,7 +323,7 @@ A **trifecta** is a capability encoded across all three memory systems:
 
 Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 
-### Full Trifectas (8)
+### Full Trifectas (17)
 
 | Capability             | Skill                      | Instruction             | Prompt                                 | Muscles                     |
 | ---------------------- | -------------------------- | ----------------------- | -------------------------------------- | --------------------------- |
@@ -324,8 +335,17 @@ Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 | **Release Management** | release-process            | release-management      | release                                | build-extension-package.ps1 |
 | **Research-First Dev** | research-first-development | research-first-workflow | gapanalysis                            | —                           |
 | **Self-Actualization** | self-actualization         | self-actualization      | selfactualize                          | —                           |
+| **Chat Participants**  | chat-participant-patterns  | chat-participant-patterns | chat-participant                     | —                           |
+| **VS Code Extension**  | vscode-extension-patterns  | vscode-extension-patterns | vscode-extension-audit               | —                           |
+| **MCP Development**    | mcp-development            | mcp-development         | mcp-server                             | —                           |
+| **Microsoft Graph**    | microsoft-graph-api        | microsoft-graph-api     | graph-api                              | —                           |
+| **Teams App Patterns** | teams-app-patterns         | teams-app-patterns      | teams-app                              | —                           |
+| **M365 Agent Debug**   | m365-agent-debugging       | m365-agent-debugging    | m365-agent-debug                       | —                           |
+| **Diagramming**        | markdown-mermaid           | markdown-mermaid        | diagramming-mastery-meditation         | —                           |
+| **Testing/TDD**        | testing-strategies         | testing-strategies      | tdd                                    | —                           |
+| **Knowledge Synthesis**| knowledge-synthesis        | knowledge-synthesis     | cross-domain-transfer                  | —                           |
 
-### Partial Trifectas (7)
+### Partial Trifectas (4)
 
 | Capability               | Has                        | Missing     | Promotion Path                                  |
 | ------------------------ | -------------------------- | ----------- | ----------------------------------------------- |
@@ -333,19 +353,16 @@ Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 | Heir Sync                | Skill + Instruction        | Prompt      | sync-architecture muscle compensates            |
 | Lucid Dream              | Shared Skill + Instruction | Own Prompt  | Shares dream-state skill                        |
 | Heir Project Improvement | Instruction + Prompt       | Skill       | heir-curation is related but not direct         |
-| Knowledge Synthesis      | Skill + Prompt             | Instruction | cross-domain-transfer prompt covers workflow    |
-| Diagramming              | Skill + Prompt             | Instruction | markdown-mermaid skill + meditation prompt      |
-| Testing/TDD              | Skill + Prompt             | Instruction | testing-strategies + tdd prompt                 |
 
 ### Coverage Summary
 
 | Classification   | Count | %     |
 | ---------------- | ----- | ----- |
-| Full Trifecta    | 8     | 6.9%  |
-| Partial (2 of 3) | 7     | 6.0%  |
-| Instruction-only | 16    | 13.8% |
-| Prompt-only      | 3     | 2.6%  |
-| Skill-only       | ~82   | 70.7% |
+| Full Trifecta    | 17    | 13.9% |
+| Partial (2 of 3) | 4     | 3.3%  |
+| Instruction-only | 16    | 13.1% |
+| Prompt-only      | 3     | 2.5%  |
+| Skill-only       | ~82   | 67.2% |
 
 ---
 
@@ -428,7 +445,6 @@ flowchart LR
 
     subgraph Sec["🔐 Security & Privacy"]
         SR[security-review]
-        SFI[microsoft-sfi]
         PRA[privacy-responsible-ai]
         PII[pii-privacy-regulations]
         DSEC[distribution-security]
@@ -501,7 +517,6 @@ flowchart LR
     end
 
     subgraph Mstr["👑 Master"]
-        HC[heir-curation]
         MAA[master-alex-audit]
         REL[release-process]
         RF[release-preflight]
@@ -688,7 +703,7 @@ flowchart LR
 | 🔮 Meta-Cognitive | meditation, meditation-facilitation, knowledge-synthesis, global-knowledge, global-knowledge-sync, self-actualization, architecture-health, architecture-refinement, skill-catalog-generator, skill-building, skill-development, architecture-audit, brain-qa, skill-activation, dream-state, prompt-activation, muscle-memory-recognition                                                                 |
 | 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code, azure-architecture-patterns, azure-devops-automation, airs-integration, research-first-development, bicep-avm-mastery, database-design, performance-profiling                                                                        |
 | 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management, azure-deployment-operations, observability-monitoring, scope-management, status-reporting                                                                                                                                                      |
-| 🔐 Security       | security-review, microsoft-sfi, privacy-responsible-ai, pii-privacy-regulations, distribution-security                                                                                                                                                                                                                                                                                                     |
+| 🔐 Security       | security-review, privacy-responsible-ai, pii-privacy-regulations, distribution-security, secrets-management                                                                                                                                                                                                                                                                                                  |
 | 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform, multi-agent-orchestration, microsoft-graph-api                                                                                                                                                                                                                                        |
 | 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                                                                                                                                                                                  |
 | 📝 Docs & Writing | writing-publication, markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration, academic-paper-drafting, citation-management, literature-review, dissertation-defense, book-publishing, doc-hygiene, documentation-quality-assurance |
@@ -696,7 +711,7 @@ flowchart LR
 | 💼 Business       | business-analysis, alex-effort-estimation, executive-storytelling                                                                                                                                                                                                                                                                                                                                          |
 | 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns, persona-detection                                                                                                                                                                                                                                                                                                                                    |
 | ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                                                                                                                                                                                                                   |
-| 👑 Master         | heir-curation, master-alex-audit, release-process, release-preflight                                                                                                                                                                                                                                                                                                                                       |
+| 👑 Master         | heir-sync-management, master-alex-audit, release-process, release-preflight                                                                                                                                                                                                                                                                                                                               |
 
 ---
 
@@ -866,9 +881,9 @@ flowchart TB
         V_OWN["6 VS Code Specific"]
     end
 
-    subgraph Codespaces["☁️ Codespaces Heir (114)"]
-        CS_INH["Same as VS Code"]
-        CS_NOTE["Zero-translation"]
+    subgraph WebHeir["🌐 GitHub Copilot Web Heir"]
+        W_INH["99 Inherited (context files)"]
+        W_NOTE["No extension code"]
     end
 
     subgraph M365["☁️ M365 Heir"]
@@ -878,16 +893,16 @@ flowchart TB
 
     M_INH & M_UNI -->|"sync"| V_INH
     M_INH & M_UNI -->|"sync"| M365_INH
+    M_INH & M_UNI -->|"sync"| W_INH
     M_HV -->|"vscode only"| V_OWN
     M_HM -->|"m365 only"| M365_OWN
-    V_INH & V_OWN -->|"identical"| CS_INH
     M_ONLY -.->|"blocked"| VSCode
     M_ONLY -.->|"blocked"| M365
-    M_ONLY -.->|"blocked"| Codespaces
+    M_ONLY -.->|"blocked"| WebHeir
 
     style Master fill:#fff3cd,stroke:#856404
     style VSCode fill:#e1f0ff,stroke:#0969da
-    style Codespaces fill:#dfe8f0,stroke:#24292f
+    style WebHeir fill:#dfe8f0,stroke:#24292f
     style M365 fill:#e6f4ea,stroke:#1a7f37
 ```
 

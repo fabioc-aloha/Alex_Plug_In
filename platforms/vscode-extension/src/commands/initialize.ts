@@ -7,6 +7,7 @@ import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
 import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import { detectAndUpdateProjectPersona, PERSONAS } from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
+import { migrateSecretsFromEnvironment } from "../services/secretsManager";
 
 interface FileManifestEntry {
   type: "system" | "hybrid" | "user-created";
@@ -591,6 +592,15 @@ async function performInitialization(
     telemetry.log("command", "initialize_user_choice", {
       choice: result || "dismissed",
     });
+
+    // Migrate environment variables to secure storage
+    try {
+      await migrateSecretsFromEnvironment();
+    } catch (migrationErr) {
+      // Non-fatal - log but continue
+      console.warn("[Alex] Failed to migrate secrets:", migrationErr);
+    }
+
     done(true, { copiedCount, skippedCount });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);

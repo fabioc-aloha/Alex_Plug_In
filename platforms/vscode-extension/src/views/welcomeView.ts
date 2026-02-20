@@ -102,6 +102,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         showGoals: "alex.showGoals",
         createGoal: "alex.createGoal",
         setupEnvironment: "alex.setupEnvironment",
+        manageSecrets: "alex.manageSecrets",
+        detectEnvSecrets: "alex.detectEnvSecrets",
         viewDiagnostics: "alex.viewBetaTelemetry",
         generateSkillCatalog: "alex.generateSkillCatalog",
         knowledgeQuickPick: "alex.knowledgeQuickPick",
@@ -1592,6 +1594,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 ${this._actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'View cognitive memory architecture')}
                 ${this._actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
                 ${this._actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings: Essential, Recommended, Extended Thinking, Copilot Memory')}
+                ${this._actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI, and other services')}
+                ${this._actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
                 ${this._actionButton('openDocs', '📚', 'Docs')}
                 ${this._actionButton('provideFeedback', '💬', 'Provide Feedback', 'Share feedback, ideas, or feature requests')}
                 ${this._actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}

@@ -10,9 +10,22 @@ applyTo: "**/*participant*,**/*chat*,**/*copilot*,**/lm/**"
 
 ## ⚠️ Staleness Warning
 
-Chat APIs evolve with VS Code releases. **Last validated:** February 2026 (VS Code 1.108+)
+Chat APIs evolve with VS Code releases. **Last validated:** February 2026 (VS Code 1.109+)
 
-**Check:** [Chat API](https://code.visualstudio.com/api/extension-guides/ai/chat), [LM API](https://code.visualstudio.com/api/extension-guides/ai/language-model), [Tools API](https://code.visualstudio.com/api/extension-guides/ai/tools)
+**Check:** [Chat API](https://code.visualstudio.com/api/extension-guides/ai/chat), [LM API](https://code.visualstudio.com/api/extension-guides/ai/language-model), [Tools API](https://code.visualstudio.com/api/extension-guides/ai/tools), [AI Extensibility Overview](https://code.visualstudio.com/api/extension-guides/ai/ai-extensibility-overview)
+
+---
+
+## When to Use Chat Participant vs. Skills/Tools
+
+| Approach | Use When | VS Code API |
+| -------- | --------- | ----------- |
+| **Chat Participant** | Need full control of prompt + response, domain-specific @-mention | `vscode.chat.createChatParticipant` |
+| **LM Tool** | Domain capability invoked automatically in agent sessions | `vscode.lm.registerTool` |
+| **Agent Skill** (SKILL.md) | Domain knowledge embedded into any agent session (no code) | `chat.useAgentSkills` + SKILL.md file |
+| **MCP Server** | Cross-platform tool providing data/actions to any MCP client | MCP SDK |
+
+→ Prefer Skills for domain knowledge. Reserve participants for full prompt orchestration.
 
 ---
 

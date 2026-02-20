@@ -175,7 +175,7 @@ Junie is JetBrains' AI coding agent, integrated with IntelliJ IDEA and other Jet
 | Platform        | Technical Feasibility | Market Value | Effort  | Priority     |
 | --------------- | --------------------- | ------------ | ------- | ------------ |
 | **VS Code**     | 10/10                 | 10/10        | ✅ Done  | ✅ Production |
-| **Codespaces**  | 10/10                 | 8/10         | ✅ Done  | ✅ Production |
+| **GitHub Copilot Web** | 10/10                 | 9/10         | ✅ Done  | ✅ Active     |
 | **Claude Code** | 9/10                  | 8/10         | Medium  | 🔜 Phase 1    |
 | **Cursor**      | 8/10                  | 7/10         | Medium  | 🔜 Phase 2    |
 | **Windsurf**    | 6/10                  | 6/10         | High    | ⏳ Phase 3    |

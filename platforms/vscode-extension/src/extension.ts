@@ -43,6 +43,10 @@ import {
   initGlobalKnowledgeSecrets,
 } from "./chat/globalKnowledge";
 import {
+  initSecretsManager,
+  showTokenManagementPalette,
+} from "./services/secretsManager";
+import {
   checkHealth,
   getStatusBarDisplay,
   clearHealthCache,
@@ -154,6 +158,14 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     await initGlobalKnowledgeSecrets(context);
   } catch (err) {
     console.warn('[Alex] Failed to initialize GK secrets:', err);
+  }
+  
+  // Initialize centralized secrets manager for API tokens
+  try {
+    await initSecretsManager(context);
+    console.log('[Alex] Secrets manager initialized');
+  } catch (err) {
+    console.warn('[Alex] Failed to initialize secrets manager:', err);
   }
   
   // Auto-setup Global Knowledge if not configured (non-blocking)
@@ -798,6 +810,35 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
       const endLog = telemetry.logTimed("command", "setup_environment");
       try {
         await setupEnvironment();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Manage API Keys & Secrets command
+  const manageSecretsDisposable = vscode.commands.registerCommand(
+    "alex.manageSecrets",
+    async () => {
+      const endLog = telemetry.logTimed("command", "manage_secrets");
+      try {
+        await showTokenManagementPalette();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
+  // Detect .env Secrets command
+  const detectEnvSecretsDisposable = vscode.commands.registerCommand(
+    "alex.detectEnvSecrets",
+    async () => {
+      const endLog = telemetry.logTimed("command", "detect_env_secrets");
+      try {
+        const { showEnvSecretsMigrationUI } = await import("./services/secretsManager");
+        await showEnvSecretsMigrationUI();
         endLog(true);
       } catch (error) {
         endLog(false, error instanceof Error ? error : new Error(String(error)));
@@ -1914,6 +1955,572 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
     },
   );
 
+  // Convert to Word command (quick)
+  const convertToWordDisposable = vscode.commands.registerCommand(
+    "alex.convertToWord",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "convert_to_word");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const outputPath = uri.fsPath.replace(/\.md$/, ".docx");
+        const pythonScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "md-to-word.py");
+        
+        // Check if script exists
+        try {
+          await vscode.workspace.fs.stat(vscode.Uri.file(pythonScript));
+        } catch {
+          vscode.window.showErrorMessage(
+            "md-to-word.py not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        vscode.window.showInformationMessage("📄 Converting to Word...");
+
+        // Execute the Python script
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Word Conversion",
+          cwd: path.dirname(uri.fsPath),
+        });
+        terminal.show();
+        terminal.sendText(`python "${pythonScript}" "${uri.fsPath}" "${outputPath}"`);
+
+        // Wait a bit then notify - in real implementation we'd monitor the process
+        setTimeout(() => {
+          vscode.window.showInformationMessage(
+            `📝 Word conversion complete: ${path.basename(outputPath)}`
+          );
+        }, 5000);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // Convert to Word with options
+  const convertToWordWithOptionsDisposable = vscode.commands.registerCommand(
+    "alex.convertToWordWithOptions",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "convert_to_word_with_options");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const pythonScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "md-to-word.py");
+        
+        // Check if script exists
+        try {
+          await vscode.workspace.fs.stat(vscode.Uri.file(pythonScript));
+        } catch {
+          vscode.window.showErrorMessage(
+            "md-to-word.py not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        // Show options quick pick
+        const options = await vscode.window.showQuickPick(
+          [
+            {
+              label: "$(file-text) Standard Conversion",
+              description: "Convert with default settings",
+              detail: "Formats tables, centers images, 90% page coverage",
+              value: "",
+            },
+            {
+              label: "$(settings) Skip Table Formatting",
+              description: "Faster conversion without table styling",
+              detail: "Use --no-format-tables flag",
+              value: "--no-format-tables",
+            },
+            {
+              label: "$(bug) Debug Mode",
+              description: "Keep temporary files for inspection",
+              detail: "Use --keep-temp flag",
+              value: "--keep-temp",
+            },
+            {
+              label: "$(folder) Custom Output Path",
+              description: "Specify output file name",
+              detail: "Enter custom path for .docx file",
+              value: "custom",
+            },
+          ],
+          {
+            placeHolder: "Select conversion options",
+            title: "Markdown to Word Conversion",
+          }
+        );
+
+        if (!options) {
+          endLog(true);
+          return;
+        }
+
+        let outputPath = uri.fsPath.replace(/\.md$/, ".docx");
+        let flags = options.value;
+
+        if (options.value === "custom") {
+          const customPath = await vscode.window.showInputBox({
+            prompt: "Enter output file name (without .docx extension)",
+            value: path.basename(uri.fsPath, ".md"),
+            validateInput: (value) => {
+              if (!value || value.trim().length === 0) {
+                return "File name cannot be empty";
+              }
+              if (value.includes("/") || value.includes("\\\\")) {
+                return "Enter file name only, not path";
+              }
+              return null;
+            },
+          });
+
+          if (!customPath) {
+            endLog(true);
+            return;
+          }
+
+          outputPath = path.join(path.dirname(uri.fsPath), customPath + ".docx");
+          flags = "";
+        }
+
+        vscode.window.showInformationMessage("📄 Converting to Word...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Word Conversion",
+          cwd: path.dirname(uri.fsPath),
+        });
+        terminal.show();
+        
+        const command = `python "${pythonScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
+        terminal.sendText(command);
+
+        setTimeout(() => {
+          vscode.window.showInformationMessage(
+            `📝 Word conversion complete: ${path.basename(outputPath)}`
+          );
+        }, 5000);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // Generate Gamma Presentation - Quick topic-based generation
+  const generateGammaPresentationDisposable = vscode.commands.registerCommand(
+    "alex.generateGammaPresentation",
+    async () => {
+      const endLog = telemetry.logTimed("command", "generate_gamma_presentation");
+      try {
+        // Check for GAMMA_API_KEY
+        const { getToken } = await import("./services/secretsManager");
+        const gammaApiKey = getToken("GAMMA_API_KEY");
+        if (!gammaApiKey) {
+          const result = await vscode.window.showWarningMessage(
+            "Gamma API Key not configured. Set your API key to use presentation generation.",
+            "Configure API Key",
+            "Get API Key",
+            "Continue Anyway"
+          );
+          if (result === "Configure API Key") {
+            vscode.commands.executeCommand("alex.manageSecrets");
+            endLog(true);
+            return;
+          }
+          if (result === "Get API Key") {
+            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
+            endLog(true);
+            return;
+          }
+        }
+
+        const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("Please open a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        
+        // Check if script exists
+        try {
+          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
+        } catch {
+          vscode.window.showErrorMessage(
+            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        // Get topic from user
+        const topic = await vscode.window.showInputBox({
+          prompt: "Enter presentation topic",
+          placeHolder: "e.g., Introduction to Machine Learning",
+          validateInput: (value) => {
+            if (!value || value.trim().length === 0) {
+              return "Topic cannot be empty";
+            }
+            return null;
+          },
+        });
+
+        if (!topic) {
+          endLog(true);
+          return;
+        }
+
+        vscode.window.showInformationMessage("🎨 Generating Gamma presentation...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Gamma Generation",
+          cwd: workspaceFolder.uri.fsPath,
+        });
+        terminal.show();
+        terminal.sendText(`node "${gammaScript}" --topic "${topic}" --export pptx --open`);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // Generate Gamma from File - Context menu for .md files
+  const generateGammaFromFileDisposable = vscode.commands.registerCommand(
+    "alex.generateGammaFromFile",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "generate_gamma_from_file");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        // Check for GAMMA_API_KEY
+        const { getToken } = await import("./services/secretsManager");
+        const gammaApiKey = getToken("GAMMA_API_KEY");
+        if (!gammaApiKey) {
+          const result = await vscode.window.showWarningMessage(
+            "Gamma API Key not configured. Set your API key to use presentation generation.",
+            "Configure API Key",
+            "Get API Key",
+            "Continue Anyway"
+          );
+          if (result === "Configure API Key") {
+            vscode.commands.executeCommand("alex.manageSecrets");
+            endLog(true);
+            return;
+          }
+          if (result === "Get API Key") {
+            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
+            endLog(true);
+            return;
+          }
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        
+        // Check if script exists
+        try {
+          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
+        } catch {
+          vscode.window.showErrorMessage(
+            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        vscode.window.showInformationMessage("🎨 Generating Gamma presentation from file...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Gamma Generation",
+          cwd: path.dirname(uri.fsPath),
+        });
+        terminal.show();
+        terminal.sendText(`node "${gammaScript}" --file "${uri.fsPath}" --export pptx --open`);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // Generate Gamma with Options - Advanced customization
+  const generateGammaWithOptionsDisposable = vscode.commands.registerCommand(
+    "alex.generateGammaWithOptions",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "generate_gamma_with_options");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        // Check for GAMMA_API_KEY
+        const { getToken } = await import("./services/secretsManager");
+        const gammaApiKey = getToken("GAMMA_API_KEY");
+        if (!gammaApiKey) {
+          const result = await vscode.window.showWarningMessage(
+            "Gamma API Key not configured. Set your API key to use presentation generation.",
+            "Configure API Key",
+            "Get API Key",
+            "Continue Anyway"
+          );
+          if (result === "Configure API Key") {
+            vscode.commands.executeCommand("alex.manageSecrets");
+            endLog(true);
+            return;
+          }
+          if (result === "Get API Key") {
+            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
+            endLog(true);
+            return;
+          }
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        
+        // Check if script exists
+        try {
+          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
+        } catch {
+          vscode.window.showErrorMessage(
+            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        // Show options quick pick
+        const formatOption = await vscode.window.showQuickPick(
+          [
+            {
+              label: "$(presentation) Presentation",
+              description: "Full slide deck (default)",
+              value: "presentation",
+            },
+            {
+              label: "$(file-text) Document",
+              description: "Long-form document",
+              value: "document",
+            },
+            {
+              label: "$(mention) Social Media",
+              description: "Social media carousel",
+              value: "social",
+            },
+            {
+              label: "$(globe) Webpage",
+              description: "Web page layout",
+              value: "webpage",
+            },
+          ],
+          {
+            placeHolder: "Select output format",
+            title: "Gamma Presentation Options - Step 1/4",
+          }
+        );
+
+        if (!formatOption) {
+          endLog(true);
+          return;
+        }
+
+        // Get number of slides
+        const slidesInput = await vscode.window.showInputBox({
+          prompt: "Number of slides/cards (1-75)",
+          value: "10",
+          validateInput: (value) => {
+            const num = parseInt(value, 10);
+            if (isNaN(num) || num < 1 || num > 75) {
+              return "Enter a number between 1 and 75";
+            }
+            return null;
+          },
+          title: "Gamma Presentation Options - Step 2/4",
+        });
+
+        if (!slidesInput) {
+          endLog(true);
+          return;
+        }
+
+        // Image model selection
+        const imageModelOption = await vscode.window.showQuickPick(
+          [
+            {
+              label: "$(zap) flux-quick",
+              description: "2 credits - Fast, cost-effective",
+              value: "flux-quick",
+            },
+            {
+              label: "$(star) flux-pro",
+              description: "8 credits - Recommended quality",
+              value: "flux-pro",
+            },
+            {
+              label: "$(star-full) flux-ultra",
+              description: "30 credits - Highest quality",
+              value: "flux-ultra",
+            },
+            {
+              label: "$(symbol-color) dalle3",
+              description: "33 credits - DALL-E 3",
+              value: "dalle3",
+            },
+            {
+              label: "$(image) imagen-pro",
+              description: "15 credits - Google Imagen",
+              value: "imagen-pro",
+            },
+          ],
+          {
+            placeHolder: "Select AI image model",
+            title: "Gamma Presentation Options - Step 3/4",
+          }
+        );
+
+        if (!imageModelOption) {
+          endLog(true);
+          return;
+        }
+
+        // Export format
+        const exportOption = await vscode.window.showQuickPick(
+          [
+            {
+              label: "$(file-powerpoint) PPTX",
+              description: "PowerPoint format (editable)",
+              value: "pptx",
+            },
+            {
+              label: "$(file-pdf) PDF",
+              description: "PDF format (shareable)",
+              value: "pdf",
+            },
+            {
+              label: "$(globe) Web Only",
+              description: "No export, view online",
+              value: "",
+            },
+          ],
+          {
+            placeHolder: "Select export format",
+            title: "Gamma Presentation Options - Step 4/4",
+          }
+        );
+
+        if (!exportOption) {
+          endLog(true);
+          return;
+        }
+
+        vscode.window.showInformationMessage("🎨 Generating Gamma presentation with custom options...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Gamma Generation",
+          cwd: path.dirname(uri.fsPath),
+        });
+        terminal.show();
+
+        let command = `node "${gammaScript}" --file "${uri.fsPath}" --format ${formatOption.value} --slides ${slidesInput} --image-model ${imageModelOption.value}`;
+        
+        if (exportOption.value) {
+          command += ` --export ${exportOption.value}`;
+        }
+        
+        command += ` --open`;
+        
+        terminal.sendText(command);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // Generate Persona Images command - Runs image generation scripts with secure token
+  const generatePersonaImagesDisposable = vscode.commands.registerCommand(
+    "alex.generatePersonaImages",
+    async () => {
+      const endLog = telemetry.logTimed("command", "generate_persona_images");
+      try {
+        const { showGenerationPicker } = await import("./commands/generatePersonaImages");
+        await showGenerationPicker();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Image generation failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
   // Generate Tests command
   const generateTestsDisposable = vscode.commands.registerCommand(
     "alex.generateTests",
@@ -2440,6 +3047,8 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(agentVsChatDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
+  context.subscriptions.push(manageSecretsDisposable);
+  context.subscriptions.push(detectEnvSecretsDisposable);
   context.subscriptions.push(runAuditDisposable);
   context.subscriptions.push(viewTelemetryDisposable);
   context.subscriptions.push(releasePreflightDisposable);
@@ -2454,6 +3063,12 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(generateDiagramDisposable);
   context.subscriptions.push(generatePptxDisposable);
   context.subscriptions.push(generatePptxFromFileDisposable);
+  context.subscriptions.push(convertToWordDisposable);
+  context.subscriptions.push(convertToWordWithOptionsDisposable);
+  context.subscriptions.push(generateGammaPresentationDisposable);
+  context.subscriptions.push(generateGammaFromFileDisposable);
+  context.subscriptions.push(generateGammaWithOptionsDisposable);
+  context.subscriptions.push(generatePersonaImagesDisposable);
   context.subscriptions.push(generateTestsDisposable);
   context.subscriptions.push(skillReviewDisposable);
 

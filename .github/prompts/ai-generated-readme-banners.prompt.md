@@ -2,7 +2,7 @@
 
 **Invoke with**: `/ai-generated-readme-banners` or "generate README banner"
 **Domain**: Professional ultra-wide banner generation for GitHub repositories and documentation
-**Synapses**: [ai-generated-readme-banners/SKILL.md](..//skills/ai-generated-readme-banners/SKILL.md)
+**Synapses**: [ai-generated-readme-banners/SKILL.md](../skills/ai-generated-readme-banners/SKILL.md)
 
 ---
 

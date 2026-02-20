@@ -20,9 +20,9 @@ Privacy regulations and AI ethics guidelines evolve continuously.
 - Major incident learnings
 - Annual transparency reports (Microsoft, Google)
 
-**Last validated:** February 2026
+**Last validated:** February 2026 (EU AI Act prohibitions active Aug 2025, GDPR/CCPA current)
 
-**Check current state:** [Microsoft RAI](https://www.microsoft.com/en-us/ai/responsible-ai), [Google AI Principles](https://ai.google/responsibility/responsible-ai-practices/), [GDPR](https://gdpr.eu/), [CCPA](https://oag.ca.gov/privacy/ccpa)
+**Check current state:** [Microsoft RAI](https://www.microsoft.com/en-us/ai/responsible-ai), [Google AI Principles](https://ai.google/responsibility/responsible-ai-practices/), [GDPR](https://gdpr.eu/), [CCPA](https://oag.ca.gov/privacy/ccpa), [EU AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 
 ---
 
@@ -253,6 +253,18 @@ async function deleteUserData(userId: string) {
 | LGPD | Brazil | Similar to GDPR |
 | PIPL | China | Data localization, consent |
 | HIPAA | US Healthcare | Health data protection |
+| **EU AI Act** | EU | Risk-based classification; prohibited AI systems banned Aug 2025; GPAI (general-purpose AI) rules apply 2025+; full obligations for high-risk AI by Aug 2026 |
+
+### EU AI Act Risk Tiers (Active 2025+)
+
+| Tier | Examples | Status |
+| ---- | -------- | ------ |
+| **Unacceptable Risk** (prohibited) | Social scoring, real-time biometric surveillance | Banned since Aug 2, 2025 |
+| **High Risk** | Employment AI, credit scoring, medical devices | Conformity assessment + registration required |
+| **Limited Risk** | Chatbots, deepfakes | Transparency obligations (must disclose AI) |
+| **Minimal Risk** | Spam filters, AI games | No mandatory requirements |
+
+**For AI product builders**: Check if your AI system classifies as "high risk" — if yes, you need a risk management system, data governance plan, human oversight mechanisms, and EU registration before market launch (deadline: Aug 2026).
 
 ## AI Incident Response
 

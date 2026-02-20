@@ -35,6 +35,14 @@
             "yields": "Comprehensive visual documentation approach combining banners and diagrams"
         }
     ],
+    "apiKeys": [
+        {
+            "envVar": "REPLICATE_API_TOKEN",
+            "purpose": "Runs Ideogram v2 / Flux models on Replicate for banner generation",
+            "required": true,
+            "getUrl": "https://replicate.com/account/api-tokens"
+        }
+    ],
     "activationBoost": [
         "readme banner",
         "github banner",

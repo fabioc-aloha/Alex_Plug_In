@@ -7,6 +7,15 @@
 
 ---
 
+## Synapses
+
+- [.github/instructions/vscode-marketplace-publishing.instructions.md] (Medium, Precedes, Forward) - "UI polish often precedes marketplace publishing"
+- [.github/instructions/release-management.instructions.md] (High, Coordinates, Bidirectional) - "UI refinements are part of release workflow"
+- [.github/skills/vscode-extension-patterns/SKILL.md] (High, Implements, Bidirectional) - "Extension UI patterns this standard enforces"
+- [.github/instructions/code-review-guidelines.instructions.md] (High, Validates, Bidirectional) - "Code review validates UI/UX compliance"
+
+---
+
 ## Design System Enforcement
 
 ### Typography Standards
@@ -79,6 +88,10 @@
 - Minimum size: 44×44 CSS pixels
 - Applies to: Buttons, links, checkboxes, radio buttons, custom interactive elements
 - Recommended: 48×48px for primary actions
+- **Practical minimum for compact UIs**: 36×36px CSS pixels (below standard but above absolute minimum)
+  - Use when space is constrained (sidebars, compact panels)
+  - Ensure adequate spacing between targets (minimum 8px)
+  - Document deviation from 44px standard in code comments
 
 **Spacing Between Targets**
 - Minimum: 8px between adjacent interactive elements
@@ -96,6 +109,13 @@
   width: 48px;
   height: 48px;
   padding: 12px; /* Centers 24px icon */
+}
+
+/* Compact UI variant (use sparingly) */
+.compact-button {
+  min-height: 36px; /* Below standard, documented exception */
+  padding: 5px 8px;
+  /* Ensure 8px+ gap to adjacent interactive elements */
 }
 ```
 
@@ -360,6 +380,61 @@ const styles = `
 - Clear visual hierarchy (primary vs secondary actions)
 - Keyboard accessible (Enter/Space triggers)
 - Focus indicators visible
+
+---
+
+## Iterative UI Refinement Workflow
+
+**When to Use Iterative Refinement**
+- User requests "make it more compact" or "tighten spacing"
+- Space-constrained UIs (sidebars, compact panels, mobile views)
+- Visual density improvements without breaking layout
+- Font size optimization while maintaining readability
+
+**Three-Pass Reduction Strategy**
+
+**Pass 1: Identify Safe Reduction Candidates**
+```bash
+# Scan for font sizes with headroom (>12px can usually go to 11px minimum)
+# Scan for spacing with multiples (16px → 12px → 10px, 8px → 6px → 4px)
+```
+
+Target priorities:
+1. **Large spacing values first** (24px → 16px has more visual impact than 4px → 3px)
+2. **Icons and labels second** (visual hierarchy preserved if all reduced equally)
+3. **Body text last** (maintain readability, cautious reductions)
+
+**Pass 2: Apply Reductions in Batches**
+- Group related elements (e.g., all card padding, all button min-heights)
+- Reduce by 1-2px for fonts, 2-4px for spacing
+- Use `multi_replace_string_in_file` for efficiency
+- **Critical**: Verify changes with `read_file` after batch operations
+  - Tool may report "failed" when changes actually succeeded
+  - Read affected lines to confirm current state before retry
+
+**Pass 3: Verify Accessibility Boundaries**
+- No fonts below 11px (WCAG minimum)
+- No touch targets below 36px min-height (practical minimum, document exception)
+- Adequate spacing between interactive elements (8px+ minimum)
+- Text contrast maintained (4.5:1 for normal text)
+
+**Testing Between Passes**
+```bash
+# Launch Extension Development Host (F5) to visually inspect
+# Check for layout breaks, readability issues, crowding
+# User feedback: "reduce more" → next pass, "perfect" → done
+```
+
+**Common Reduction Patterns**
+| Element Type | Safe Reduction | Absolute Minimum |
+|--------------|----------------|------------------|
+| Body text | 16px → 15px → 14px | 12px (readable) |
+| Secondary text | 14px → 13px → 12px | 11px (WCAG) |
+| Icon sizes | 18px → 17px → 16px | 14px (visible) |
+| Card padding | 16px → 12px → 10px → 8px | 4px (breathing room) |
+| Section margins | 24px → 16px → 12px → 10px | 8px (visual separation) |
+| Grid gaps | 8px → 6px → 4px → 3px | 1px (minimal separation) |
+| Button min-height | 44px → 38px → 36px | 36px (compact touch target) |
 
 ---
 

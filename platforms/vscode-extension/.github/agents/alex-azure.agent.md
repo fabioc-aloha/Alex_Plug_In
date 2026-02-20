@@ -3,6 +3,7 @@ description: Alex Azure Mode - Azure development guidance with MCP tools
 name: Azure
 tools: ['search', 'fetch', 'codebase']
 model: Claude Sonnet 4
+user-invokable: true
 handoffs:
   - label: 🧠 Return to Alex
     agent: Alex

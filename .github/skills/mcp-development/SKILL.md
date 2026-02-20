@@ -7,8 +7,10 @@ description: "**Domain**: AI Infrastructure"
 
 > **Domain**: AI Infrastructure
 > **Inheritance**: inheritable
-> **Version**: 1.0.0
-> **Last Updated**: 2026-02-01
+> **Version**: 1.1.0
+> **Last Updated**: 2026-02-19
+
+> ⚠️ **Staleness Watch**: MCP spec is actively versioned. Streamable HTTP replaced HTTP+SSE for remote servers (spec 2025-03-26). Check [MCP Changelog](https://modelcontextprotocol.io/changelog) when advising on transport selection.
 
 ---
 
@@ -54,7 +56,7 @@ After MCP:
 | **Host** | AI application (Claude Desktop, VS Code, etc.) |
 | **Client** | MCP client within the host, manages server connections |
 | **Server** | Provides tools, resources, and prompts via MCP |
-| **Transport** | Communication layer (stdio, HTTP+SSE) |
+| **Transport** | Communication layer (stdio, Streamable HTTP) |
 
 ### MCP Architecture
 
@@ -68,7 +70,7 @@ After MCP:
 │  │ MCP Client  │  Manages protocol, routing, lifecycle      │
 │  └──────┬──────┘                                            │
 │         │                                                   │
-│    Transport Layer (stdio / HTTP+SSE)                       │
+│    Transport Layer (stdio / Streamable HTTP)                │
 │         │                                                   │
 └─────────┼───────────────────────────────────────────────────┘
           │
@@ -322,23 +324,33 @@ Default for local servers:
 - Simple deployment
 - Best for local tools
 
-### HTTP + SSE (Remote)
+### Streamable HTTP (Remote) — Current Standard
 
-For remote/shared servers:
+For remote/shared servers (replaces deprecated HTTP+SSE as of MCP spec 2025-03-26):
 
 ```text
 ┌────────────┐         HTTPS          ┌────────────┐
 │   Client   │ ◄─────────────────────► │   Server   │
-│            │    POST /message        │            │
-│            │    GET  /sse (stream)   │            │
+│            │    POST /mcp            │            │
+│            │    (streaming response) │            │
 └────────────┘                         └────────────┘
 ```
 
 **Characteristics:**
+- Single HTTP endpoint handles both request and streaming response
 - Network-accessible
-- Supports authentication
+- Supports authentication (Bearer tokens)
 - Scalable (multiple clients)
 - Requires security hardening
+
+> ⚠️ **HTTP+SSE is deprecated.** Old servers used `POST /message` + `GET /sse`. If you encounter an HTTP+SSE server, it is using the legacy transport. Prefer Streamable HTTP for all new remote servers.
+
+```typescript
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+
+const transport = new StreamableHTTPServerTransport({ path: "/mcp" });
+await server.connect(transport);
+```
 
 ---
 

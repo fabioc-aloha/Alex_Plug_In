@@ -28,7 +28,7 @@
       "yields": "Extension-specific release considerations"
     },
     {
-      "target": ".github/skills/heir-curation/SKILL.md",
+      "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "coordinates",
       "strength": 0.9,
       "when": "Preparing release package",

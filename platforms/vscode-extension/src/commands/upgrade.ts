@@ -27,6 +27,7 @@ import { runDreamProtocol } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
 import { initializeArchitecture } from "./initialize";
 import { detectAndUpdateProjectPersona } from "../chat/personaDetection";
+import { migrateSecretsFromEnvironment } from "../services/secretsManager";
 
 // ============================================================================
 // TYPES
@@ -1109,6 +1110,14 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
       }
     } catch (err) {
       // Persona detection is optional
+    }
+
+    // Migrate environment variables to secure storage
+    try {
+      await migrateSecretsFromEnvironment();
+    } catch (migrationErr) {
+      // Non-fatal - log but continue
+      console.warn("[Alex] Failed to migrate secrets:", migrationErr);
     }
 
     // Extract stats from captured stats object

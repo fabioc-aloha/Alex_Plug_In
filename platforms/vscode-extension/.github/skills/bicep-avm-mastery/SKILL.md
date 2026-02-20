@@ -12,11 +12,14 @@ description: "Azure Verified Modules (AVM), Bicep best practices, and MCP-powere
 | Field | Value |
 |-------|-------|
 | **Skill ID** | bicep-avm-mastery |
-| **Version** | 1.0.0 |
+| **Version** | 1.1.0 |
 | **Category** | Cloud/Infrastructure |
 | **Difficulty** | Advanced |
 | **Prerequisites** | Basic Azure, infrastructure-as-code |
 | **Related Skills** | azure-architecture-patterns, infrastructure-as-code |
+| **Last Validated** | Feb 2026 |
+
+> ⚠️ **Staleness Watch**: The AVM registry grows monthly — module counts and version numbers change frequently. Always use [`mcp_bicep_list_avm_metadata`](https://azure.github.io/Azure-Verified-Modules/) to enumerate current modules rather than relying on hardcoded counts. Watch for new module categories and `avm/res` vs `avm/ptn` naming changes.
 
 ---
 

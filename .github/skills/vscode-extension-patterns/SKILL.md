@@ -524,7 +524,7 @@ const trifectaTagsHtml = trifectaTagsArray.map(tag => {
 
 ## VS Code 1.109+ Agent Platform Capabilities
 
-VS Code 1.109 introduces a native agent platform that extensions can leverage:
+VS Code 1.109 (January 2026) introduces a native agent platform that extensions can leverage:
 
 ### Agent Files (`AGENTS.md`)
 
@@ -535,6 +535,9 @@ Extensions can ship agent definitions that VS Code auto-discovers:
 ---
 name: "MyAgent"
 description: "Specialized agent for domain X"
+user-invokable: true         # Show in agents dropdown (default: true)
+disable-model-invocation: false  # Allow model to invoke as subagent
+agents: ['Validator', 'Builder'] # Limit which subagents this agent can use
 ---
 
 # MyAgent Instructions
@@ -543,14 +546,66 @@ Agent-specific instructions and knowledge go here.
 ```
 
 **Setting**: `chat.useAgentsMdFile: true` enables automatic loading.
+**Custom locations**: `chat.agentFilesLocations: { "~/.vscode/agents": true }`.
 
-### Skills Loading
+### Skills Loading (GA in 1.109)
 
 Extensions can define skills in `.github/skills/` that are auto-loaded into chat:
 
 **Setting**: `chat.agentSkillsLocations: [".github/skills"]`
 
 Each skill folder contains a `SKILL.md` (knowledge) and optional `synapses.json` (connections).
+
+**Distribute skills with your extension** (new in 1.109):
+
+```json
+// package.json
+{
+  "contributes": {
+    "chatSkills": [
+      { "path": "./skills/my-skill" }
+    ]
+  }
+}
+```
+
+The `path` must point to a directory containing a `SKILL.md` with `name:` in its frontmatter matching the parent directory name.
+
+**Skills as slash commands**: Users can type `/` in chat to see and invoke skills directly.
+
+### Agent Hooks (Preview, 1.109.3+)
+
+Run custom shell commands at key lifecycle points in agent sessions:
+
+```json
+// .vscode/settings.json — configure hooks
+{
+  "chat.hooks.enabled": true
+}
+```
+
+Hook events: `PreToolUse`, `PostToolUse`, `SessionStart`, `Stop`, `SubagentStart`, `SubagentStop`.
+
+Users trigger with `/hooks` command in chat. Same format as Claude Code hooks — reuse configurations.
+
+```bash
+# Example: Run linter on every file edit (PreToolUse hook)
+# Hook output can block the tool call if exit code > 0
+```
+
+### Claude Compatibility (1.109.3+)
+
+VS Code now reads Claude configuration files directly:
+
+| File | Purpose |
+| ---- | ------- |
+| `CLAUDE.md`, `.claude/CLAUDE.md`, `~/.claude/CLAUDE.md` | Instructions |
+| `.claude/rules/*.md` | Additional instruction files |
+| `.claude/agents/*.md` | Agent definitions |
+| `.claude/skills/` | Skill definitions |
+| `.claude/settings.json`, `~/.claude/settings.json` | Hook configurations |
+
+Teams using both VS Code + Claude Code can share a single configuration tree.
 
 ### Chat Participant API
 
@@ -605,6 +660,25 @@ context.subscriptions.push(tool);
 }
 ```
 
+### QuickInput Button Finalized APIs (1.109)
+
+Two new finalized APIs for `QuickPick` and `InputBox`:
+
+```typescript
+// Button location control
+buttons: [{
+  iconPath: new vscode.ThemeIcon('gear'),
+  tooltip: 'Settings',
+  location: vscode.QuickInputButtonLocation.Inline  // or .Title, .Input
+}]
+
+// Toggle button (on/off state)
+buttons: [{
+  iconPath: new vscode.ThemeIcon('eye'),
+  toggle: { checked: false }  // tracks state
+}]
+```
+
 ### Extended Thinking
 
 Models supporting extended thinking can be configured per-model:
@@ -632,6 +706,7 @@ MCP servers extend AI capabilities with external tools (Azure, GitHub, databases
 | `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills |
 | `chat.useAgentsMdFile` | `true` | Use AGENTS.md |
 | `chat.mcp.gallery.enabled` | `true` | MCP tool access |
+| `chat.hooks.enabled` | `true` | Lifecycle hooks (Preview) |
 
 ## Integration Audit Checklist
 

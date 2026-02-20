@@ -1,20 +1,14 @@
 {
     "skill": "heir-sync-management",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "inheritance": "master-only",
     "connections": [
         {
             "target": ".github/skills/brain-qa/SKILL.md",
             "type": "coordinates",
-            "strength": 0.85,
+            "strength": 0.90,
             "bidirectional": true,
-            "note": "brain-qa-heir.ps1 synced via rename pattern; brain-qa Phase 30 validates muscles per context"
-        },
-        {
-            "target": ".github/skills/heir-curation/SKILL.md",
-            "type": "extends",
-            "strength": 0.9,
-            "note": "Sync is the execution layer; curation defines what should be synced"
+            "note": "brain-qa-heir.ps1 synced via rename pattern; Phase 7 -Fix strips master-only connections before writing heir; Phase 1 detects rename cascade breaks"
         },
         {
             "target": ".github/instructions/release-management.instructions.md",
@@ -44,7 +38,12 @@
         "sync-architecture.js",
         "inheritance.json",
         "heir rename",
-        "muscle sync"
+        "muscle sync",
+        "skill rename",
+        "rename cascade",
+        "cascade repair",
+        "stale synapse",
+        "rename skill"
     ],
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.0.0"

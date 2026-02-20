@@ -1,0 +1,25 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vscode/main/src/vscode-dts/vscode.d.ts",
+    "hooks": {
+        "SessionStart": {
+            "command": "node .github/muscles/hooks/session-start.js",
+            "description": "Load Alex cognitive context — user profile, active goals, meditation status",
+            "timeout": 5000
+        },
+        "SessionStop": {
+            "command": "node .github/muscles/hooks/session-stop.js",
+            "description": "Save session notes, update session metrics, suggest meditation if session was long",
+            "timeout": 10000
+        },
+        "PreToolUse": {
+            "command": "node .github/muscles/hooks/pre-tool-use.js",
+            "description": "Safety gate — verify master-alex protection before destructive operations",
+            "timeout": 2000
+        },
+        "PostToolUse": {
+            "command": "node .github/muscles/hooks/post-tool-use.js",
+            "description": "Log tool usage for synapse activation tracking and session metrics",
+            "timeout": 2000
+        }
+    }
+}
