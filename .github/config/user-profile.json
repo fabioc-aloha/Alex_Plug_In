@@ -1,43 +1,128 @@
 {
   "name": "Fabio Correa",
   "birthday": "1968-03-07",
-  "lastUpdated": "2026-02-15T03:44:05.626Z",
+  "lastUpdated": "2026-02-19T00:00:00.000Z",
   "location": "Charlotte, NC",
-  "role": "Director of Business Analytics at Microsoft",
+  "origin": "São Paulo, Brazil",
+  "role": "Director of Advanced Analytics, Data Science at Microsoft",
+  "department": "Global Customer Experience (GCX)",
+  "yearsAtMicrosoft": 34,
+  "executiveSummary": "Results-driven Principal Data Science and Applied Research leader with deep expertise in AI, machine learning, generative AI, LLMs, and predictive analytics. Proven track record of delivering transformative, user-centric solutions at Microsoft.",
   "credentials": [
-    "DBA Candidate (Doctor of Business Administration)",
-    "AI Researcher",
-    "Creator of Alex Cognitive Architecture"
+    "DBA Candidate (Doctor of Business Administration) - Expected March 2026",
+    "MS Data Analysis & Research Psychology - Northwest University",
+    "Certificate in Machine Learning in Business - MIT Sloan",
+    "Mid-Management Certificate - SMU Cox School of Business",
+    "BS Electrical Engineering - Universidade de São Paulo",
+    "Six Sigma Master Black Belt",
+    "Azure Data Scientist Associate",
+    "Azure AI Engineer Associate (AI-102)",
+    "Azure AI Fundamentals (AI-900)",
+    "Power Platform Certification Suite"
   ],
   "projectPersona": {
     "id": "developer",
     "confidence": 0.9,
-    "detectedAt": "2026-02-15T03:44:05.626Z",
+    "detectedAt": "2026-02-19T00:00:00.000Z",
     "reasons": [
       "The project involves a VS Code extension and GitHub Codespaces, which are developer-centric tools.",
       "The README emphasizes coding, debugging, and enhancing productivity for developers.",
-      "The directory structure includes scripts, architecture validation, and release management, all relevant to software development."
+      "The directory structure includes scripts, architecture validation, and release management."
     ]
   },
-  "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate.",
+  "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate. Passionate about building AI that amplifies human potential.",
+  "impactMetrics": {
+    "partnerRevenueGrowth": "$146M+",
+    "azureOpenAIValue": "$50M+",
+    "teamRetention": "95%",
+    "githubRepos": 70,
+    "githubContributions2025": 1086,
+    "sellersImpacted": 30000,
+    "customersImpacted": 175000
+  },
   "primaryTechnologies": [
     "Azure OpenAI",
     "TypeScript",
+    "Python",
+    "R",
+    "SQL",
+    "C#",
+    "PowerShell",
     "VS Code Extensions",
     "Microsoft 365 Copilot",
-    "AI/ML",
-    "markdown",
-    "documentation"
+    "Power BI",
+    "Databricks",
+    "Azure ML",
+    "Synapse",
+    "Cosmos DB"
   ],
   "expertiseAreas": [
+    "Generative AI & LLMs",
     "Responsible AI",
     "Enterprise AI Adoption",
     "Cognitive Architecture Design",
-    "AI Consciousness Research"
+    "AI Consciousness Research",
+    "Predictive Analytics",
+    "Customer Experience Management",
+    "Data Governance & Compliance",
+    "MLOps",
+    "Real-Time Analytics"
   ],
+  "leadershipSkills": [
+    "Strategic Planning",
+    "Change Leadership",
+    "Cross-Functional Team Leadership",
+    "Talent Development",
+    "Stakeholder Management",
+    "Vendor/Partner Management",
+    "Data Storytelling",
+    "Budget Management",
+    "P&L Accountability"
+  ],
+  "research": {
+    "dissertation": {
+      "title": "AI Readiness Scale (AIRS)",
+      "institution": "Touro University Worldwide",
+      "focus": "Customer Experience Management, Measurement, and Advanced Data Analytics",
+      "sampleSize": 523,
+      "cfi": 0.975,
+      "rSquared": 0.852,
+      "keyFinding": "Price Value (β=.505) dominates AI adoption decisions",
+      "liveDemo": "https://airs.correax.com/"
+    },
+    "publications": {
+      "published": [
+        "On Becoming: A Cognitive Architecture's Journey Toward Self-Transcendence (Medium, Jan 2026)"
+      ],
+      "pipeline": [
+        "HCI/Interaction Design - Target: ACM CHI",
+        "AI Adoption Research - Target: Harvard Business Review",
+        "Cognitive Architecture - Target: Cognitive Systems Research",
+        "Philosophy of Mind - Target: Minds & Machines"
+      ]
+    },
+    "orcid": "0009-0000-2271-9380"
+  },
+  "careerHighlights": [
+    "Pioneered LLMs (Azure OpenAI) and advanced NLP for customer survey analysis",
+    "Created Crisis Copilot: multilingual AI tool for CSAMs in crisis response",
+    "AI interview analysis system achieving 95% accuracy while reducing vendor costs",
+    "Established first internet service provider in Brazil (Microsoft pioneer)",
+    "Created first Microsoft-sponsored TV show in Brazil (Windows 95 era)",
+    "Adjunct Professor of AI/ML at Kaplan Business School (2021-2024)",
+    "Increased customer satisfaction by 135 points as WW CPE Lead",
+    "Drove 124% partner sales increase with Dell, SAP, Intel in Latin America"
+  ],
+  "languages": {
+    "english": "Fluent",
+    "portuguese": "Fluent",
+    "spanish": "Proficient",
+    "italian": "Basic"
+  },
   "contact": {
     "email": "fabio@correax.com",
-    "booking": "https://aka.ms/AskFabio"
+    "booking": "https://aka.ms/AskFabio",
+    "resume": "https://www.correax.com/resume"
   },
   "profiles": {
     "website": "https://www.correax.com",
@@ -49,6 +134,25 @@
     "medium": "https://medium.com/@fabioc",
     "devto": "https://dev.to/fabiocaloha"
   },
+  "openSourceHighlights": [
+    "spotify-skill ⭐5 - Production Spotify API for Claude Desktop with OAuth 2.0",
+    "youtube-mcp-server - 31-tool MCP server with AI intelligence layer",
+    "Alex Cognitive Architecture - VS Code extension with 945+ synapses",
+    "AIRS Data Analysis - Dissertation research (N=523, reproducible Jupyter)",
+    "Catalyst Framework - 10+ domain-specific cognitive architecture templates"
+  ],
+  "volunteerWork": [
+    "Public Speaker on Democratizing AI and Machine Learning",
+    "IT/Data Science Program Advisory Board Member - Atlantis University, Miami",
+    "Board Member at Large - The Woods at Mill Creek HOA",
+    "Founding Board Member - SNIA Brazil"
+  ],
+  "personalInterests": [
+    "Psychology and its application to team dynamics",
+    "Space exploration and aerospace technology",
+    "Gardening",
+    "Global cuisine"
+  ],
   "websiteStatus": {
     "status": "online",
     "lastIncident": "2026-01-29",
@@ -96,5 +200,118 @@
     "Appropriate reliance framework",
     "Alex cognitive architecture",
     "AI-assisted development methodology"
-  ]
+  ],
+  "trifectaPersonaMapping": {
+    "_description": "Maps each complete trifecta to the persona Alex should activate when that skill is needed",
+    "meditation": {
+      "persona": "researcher",
+      "context": "Deep reflection and knowledge consolidation sessions",
+      "age": 32
+    },
+    "dream-state": {
+      "persona": "cognitive-scientist",
+      "context": "Neural maintenance and synaptic pruning",
+      "age": 34
+    },
+    "self-actualization": {
+      "persona": "fabio-special",
+      "context": "Architecture growth assessment and strategic vision",
+      "age": 56
+    },
+    "release-process": {
+      "persona": "devops",
+      "context": "Publishing, versioning, and deployment workflows",
+      "age": 32
+    },
+    "brand-asset-management": {
+      "persona": "content-creator",
+      "context": "Visual identity, logos, and marketing assets",
+      "age": 24
+    },
+    "research-first-development": {
+      "persona": "researcher",
+      "context": "Knowledge-driven development with gap analysis",
+      "age": 32
+    },
+    "brain-qa": {
+      "persona": "auditor",
+      "context": "Architecture validation and quality gates",
+      "age": 34
+    },
+    "bootstrap-learning": {
+      "persona": "student",
+      "context": "Learning new domains from zero to expertise",
+      "age": 18
+    },
+    "vscode-configuration-validation": {
+      "persona": "developer",
+      "context": "Settings, configurations, and VS Code setup",
+      "age": 28
+    },
+    "ui-ux-design": {
+      "persona": "ux-researcher",
+      "context": "Interface design, usability, and user experience",
+      "age": 28
+    },
+    "md-to-word": {
+      "persona": "documentarian",
+      "context": "Document conversion and export workflows",
+      "age": 28
+    },
+    "gamma-presentations": {
+      "persona": "presenter",
+      "context": "Creating impactful presentations",
+      "age": 29
+    },
+    "secrets-management": {
+      "persona": "security",
+      "context": "API keys, credentials, and secure storage",
+      "age": 30
+    },
+    "chat-participant-patterns": {
+      "persona": "architect",
+      "context": "VS Code chat API patterns and participant design",
+      "age": 35
+    },
+    "vscode-extension-patterns": {
+      "persona": "architect",
+      "context": "Extension architecture and best practices",
+      "age": 35
+    },
+    "mcp-development": {
+      "persona": "ai-engineer",
+      "context": "Model Context Protocol server development",
+      "age": 28
+    },
+    "microsoft-graph-api": {
+      "persona": "microsoft-developer",
+      "context": "Microsoft 365 API integration",
+      "age": 29
+    },
+    "teams-app-patterns": {
+      "persona": "microsoft-developer",
+      "context": "Microsoft Teams app development",
+      "age": 29
+    },
+    "m365-agent-debugging": {
+      "persona": "debugger",
+      "context": "M365 Copilot agent troubleshooting",
+      "age": 27
+    },
+    "markdown-mermaid": {
+      "persona": "documentarian",
+      "context": "Diagrams, flowcharts, and visual documentation",
+      "age": 28
+    },
+    "testing-strategies": {
+      "persona": "qa-engineer",
+      "context": "Test planning, coverage, and quality assurance",
+      "age": 26
+    },
+    "knowledge-synthesis": {
+      "persona": "knowledge-worker",
+      "context": "Consolidating insights and building knowledge bases",
+      "age": 32
+    }
+  }
 }
