@@ -8,12 +8,12 @@
  *   Note: Default Alex mode uses persona images instead of a banner.
  *   Output: alex_docs/alex3/agents/
  *
- * Series B — COGNITIVE STATE PORTRAITS (FLUX 1.1 Pro, 768x1024, character portrait)
+ * Series B — COGNITIVE STATE PORTRAITS (nano-banana-pro, 1024x1024, reference-based)
  *   Alex "Mini" Finch (age 21) in task-specific cognitive states.
- *   Shows what Alex is actively doing / focused on right now.
+ *   Uses reference image for face consistency (same as personas).
  *   Output: alex_docs/alex3/states/
  *
- * Total: 14 images | Cost estimate: $0.48 (Series A) + $0.32 (Series B) = ~$0.80
+ * Total: 14 images | Cost estimate: $0.48 (Series A) + $0.20 (Series B) = ~$0.68
  *
  * Usage:
  *   $env:REPLICATE_API_TOKEN = "r8_..."
@@ -51,6 +51,11 @@ const ONLY_FILTER = ONLY_ARG ? ONLY_ARG.split('=')[1].split(',').map(s => s.trim
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
+
+// Reference image for nano-banana-pro (cognitive states)
+const REFERENCE_IMAGE = path.join(ROOT, 'alex_docs', 'alex3', 'alex-reference.png');
+const REFERENCE_AGE = 15;
+const OPERATIONAL_AGE = 21;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SERIES A — AGENT MODE BANNERS
@@ -144,7 +149,7 @@ MOOD: Empowering, confident, upward trajectory
 // ─────────────────────────────────────────────────────────────────────────────
 // SERIES B — COGNITIVE STATE PORTRAITS
 // Character: Alex "Mini" Finch, 21 years old, consistent appearance
-// Model: black-forest-labs/flux-1.1-pro ($0.04/image)
+// Model: google/nano-banana-pro ($0.025/image) with reference image
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Immutable character definition — applied to EVERY portrait for visual consistency
@@ -180,7 +185,7 @@ const COGNITIVE_STATES = [
     subtitle: 'Root Cause Analysis',
     scenario: 'Intense debugging session, hunting an elusive bug with methodical focus',
     attire: 'gray hoodie over plaid flannel, slightly leaning forward',
-    pose: 'leaning forward at desk, left elbow on table, chin resting on hand, right hand hovering over keyboard, eyes intense and narrowed at multiple screens',
+    pose: 'leaning forward at desk, focused on screen, eyes intense and narrowed studying code intently',
     environment: 'dimly lit developer workspace, three monitors showing code with highlighted error lines in red, coffee cup to one side, dark background',
     lighting: 'cool blue-white monitor glow illuminating face from front, dramatic contrast with dark background',
     mood: 'sharp focus, analytical, puzzle-solving intensity, slight frustration transforming to determination',
@@ -255,34 +260,31 @@ const COGNITIVE_STATES = [
 
 function buildPortraitPrompt(state) {
   const traits = ALEX_CHARACTER.physicalTraits.join(', ');
+  const ageDelta = OPERATIONAL_AGE - REFERENCE_AGE;
   return `
-Cinematic portrait photograph, professional lighting, shallow depth of field, 85mm lens.
+IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE ${REFERENCE_AGE}. Generate an image of THIS SAME PERSON at age ${OPERATIONAL_AGE} (${ageDelta} years older than the reference).
 
-SUBJECT: Young man named Alex, ${ALEX_CHARACTER.age}.
-PHYSICAL TRAITS: ${traits}.
-ATTIRE: ${state.attire}.
+IDENTITY PRESERVATION (HIGHEST PRIORITY):
+- The reference image shows the person at age ${REFERENCE_AGE} — use this as the source of truth for facial identity
+- The output must look like the SAME PERSON as the reference, transformed to age ${OPERATIONAL_AGE}
+- Preserve: exact facial bone structure, nose shape, eye shape, lip shape
+- Preserve: ${traits}
+- The person in the output should be immediately recognizable as the person in the reference
 
-SCENARIO: ${state.scenario}
+COGNITIVE STATE — "${state.title}":
+- State: ${state.subtitle}
+- Activity: ${state.scenario}
+- Attire: ${state.attire}
+- Pose: ${state.pose}
+- Setting: ${state.environment}
+- Lighting: ${state.lighting}
+- Mood: ${state.mood}
 
-POSE AND COMPOSITION:
-${state.pose}
-
-ENVIRONMENT: ${state.environment}
-
-LIGHTING: ${state.lighting}
-
-MOOD AND EXPRESSION: ${state.mood}
-
-TECHNICAL:
-- Portrait orientation 3:4 (768x1024)
-- Photorealistic, cinematic quality
-- Bokeh background, sharp subject
-- Professional grade photography
-- Ultra-detailed face, accurate expression
-- No text overlays
-- Authentic, not stock-photo-generic
-
-STYLE: Cinematic realism, professional portrait photography, high production value
+PORTRAIT COMPOSITION:
+- Face clearly visible, showing the internal experience
+- Natural lighting, authentic and warm
+- Format: Square 1:1 (1024x1024)
+- Style: Photorealistic portrait, cinematic quality, shallow depth of field
 `.trim();
 }
 
@@ -317,31 +319,39 @@ async function generateIdeogram(prompt, filename) {
   return url;
 }
 
-async function generateFlux(prompt, filename) {
+// Encode reference image for nano-banana-pro
+async function encodeImageToDataURI(imagePath) {
+  const buffer = await fs.readFile(imagePath);
+  const base64 = buffer.toString('base64');
+  const ext = path.extname(imagePath).toLowerCase();
+  const mime = ext === '.png' ? 'image/png' : ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' : 'image/png';
+  return `data:${mime};base64,${base64}`;
+}
+
+// Global reference data URI (loaded once in main)
+let referenceDataURI = null;
+
+async function generateNanaBanana(prompt, filename, outputPath) {
   if (DRY_RUN) {
-    console.log(`   [DRY-RUN] Would call black-forest-labs/flux-1.1-pro`);
+    console.log(`   [DRY-RUN] Would call google/nano-banana-pro`);
     return null;
   }
-  const output = await replicate.run('black-forest-labs/flux-1.1-pro', {
+
+  const output = await replicate.run('google/nano-banana-pro', {
     input: {
-      prompt,
-      aspect_ratio: '3:4',
+      prompt: prompt,
+      image_input: [referenceDataURI],
+      aspect_ratio: '1:1',
       output_format: 'png',
-      output_quality: 90,
-      safety_tolerance: 2,
-      prompt_upsampling: true,
+      safety_filter_level: 'block_only_high',
     },
   });
 
-  let url;
-  if (Array.isArray(output)) url = output[0];
-  else if (typeof output === 'string') url = output;
-  else if (output && typeof output.url === 'function') url = output.url().toString();
-  else if (output?.url) url = output.url;
-  if (typeof url === 'object' && url?.href) url = url.href;
-
-  if (!url) throw new Error(`No URL in FLUX response: ${JSON.stringify(output)}`);
-  return url;
+  // Modern Replicate API: output is a FileObject, write directly
+  const { writeFile } = await import('fs/promises');
+  await writeFile(outputPath, output);
+  
+  return outputPath;
 }
 
 async function downloadImage(url, filepath) {
@@ -387,6 +397,30 @@ async function generate(item, buildPromptFn, modelFn, outputDir, costPerImage) {
   }
 }
 
+// Generate with reference image (nano-banana-pro writes directly to file)
+async function generateWithReference(item, buildPromptFn, outputDir, costPerImage) {
+  console.log(`\n  Generating: ${item.filename}`);
+  console.log(`  Title: "${item.title}" — ${item.scenario?.slice(0, 60) + '...'}`);
+
+  const prompt = buildPromptFn(item);
+
+  if (DRY_RUN) {
+    console.log('\n  --- PROMPT PREVIEW ---');
+    console.log(prompt.slice(0, 400) + '...\n');
+    return { filename: item.filename, status: 'dry-run', cost: 0 };
+  }
+
+  try {
+    const filepath = path.join(outputDir, item.filename);
+    await generateNanaBanana(prompt, item.filename, filepath);
+    console.log(`  ✓ Saved: ${path.basename(filepath)}`);
+    return { filename: item.filename, title: item.title, cost: costPerImage, status: 'success' };
+  } catch (err) {
+    console.error(`  ✗ Failed: ${err.message}`);
+    return { filename: item.filename, status: 'failed', error: err.message };
+  }
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN
 // ─────────────────────────────────────────────────────────────────────────────
@@ -403,7 +437,7 @@ async function main() {
 
   const agentCount = runA ? AGENT_MODES.length : 0;
   const stateCount = runB ? COGNITIVE_STATES.length : 0;
-  const totalCost = agentCount * 0.08 + stateCount * 0.04;
+  const totalCost = agentCount * 0.08 + stateCount * 0.025;
 
   const outBase = path.join(ROOT, 'alex_docs', 'alex3');
   const outAgents = path.join(outBase, 'agents');
@@ -412,11 +446,21 @@ async function main() {
   await fs.ensureDir(outAgents);
   await fs.ensureDir(outStates);
 
+  // Load reference image for nano-banana-pro (cognitive states)
+  if (runB && !DRY_RUN) {
+    if (!await fs.pathExists(REFERENCE_IMAGE)) {
+      console.error(`ERROR: Reference image not found: ${REFERENCE_IMAGE}`);
+      process.exit(1);
+    }
+    referenceDataURI = await encodeImageToDataURI(REFERENCE_IMAGE);
+    console.log(`📷 Reference image loaded (${Math.round(referenceDataURI.length / 1024)} KB)`);
+  }
+
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('  Alex Agent Mode & Cognitive State Image Generator');
   console.log('═══════════════════════════════════════════════════════════════');
   console.log(`  Series A (agent banners): ${agentCount} images × $0.08 = $${(agentCount * 0.08).toFixed(2)}`);
-  console.log(`  Series B (state portraits): ${stateCount} images × $0.04 = $${(stateCount * 0.04).toFixed(2)}`);
+  console.log(`  Series B (state portraits): ${stateCount} images × $0.025 = $${(stateCount * 0.025).toFixed(2)}`);
   console.log(`  Total estimated cost:  $${totalCost.toFixed(2)}`);
   console.log(`  Dry-run mode:  ${DRY_RUN}`);
   console.log('═══════════════════════════════════════════════════════════════\n');
@@ -449,18 +493,17 @@ async function main() {
 
   // ─── Series B: Cognitive State Portraits ─────────────────────────────────
   if (runB) {
-    console.log('\n━━━ Series B: Cognitive State Portraits (FLUX 1.1 Pro) ━━━━━━━');
-    console.log('  Character: Alex "Mini" Finch, 21yo — consistent across all portraits');
+    console.log('\n━━━ Series B: Cognitive State Portraits (nano-banana-pro) ━━━━');
+    console.log('  Character: Alex "Mini" Finch, 21yo — reference-based generation');
     const filteredStates = ONLY_FILTER
       ? COGNITIVE_STATES.filter(s => ONLY_FILTER.some(f => s.filename.toUpperCase().includes(f)))
       : COGNITIVE_STATES;
     for (let i = 0; i < filteredStates.length; i++) {
-      const result = await generate(
+      const result = await generateWithReference(
         filteredStates[i],
         buildPortraitPrompt,
-        generateFlux,
         outStates,
-        0.04,
+        0.025,
       );
       results.push({ series: 'B', ...result });
       if (!DRY_RUN && i < filteredStates.length - 1) {
@@ -475,14 +518,14 @@ async function main() {
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);
   const successA = results.filter(r => r.series === 'A' && r.status === 'success').length;
   const successB = results.filter(r => r.series === 'B' && r.status === 'success').length;
-  const actualCost = successA * 0.08 + successB * 0.04;
+  const actualCost = successA * 0.08 + successB * 0.025;
 
   const report = {
     generatedAt: new Date().toISOString(),
     duration: `${duration}s`,
     dryRun: DRY_RUN,
     seriesA: { model: 'ideogram-ai/ideogram-v2', count: agentCount, successful: successA, costPerImage: 0.08 },
-    seriesB: { model: 'black-forest-labs/flux-1.1-pro', count: stateCount, successful: successB, costPerImage: 0.04 },
+    seriesB: { model: 'google/nano-banana-pro', count: stateCount, successful: successB, costPerImage: 0.025 },
     totalCost: `$${actualCost.toFixed(2)}`,
     outputDirs: { agents: outAgents, states: outStates },
     results,

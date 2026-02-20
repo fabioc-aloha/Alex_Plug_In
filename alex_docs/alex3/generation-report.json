@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-20T04:14:37.874Z",
-  "duration": "7.0s",
+  "generatedAt": "2026-02-20T04:19:10.312Z",
+  "duration": "35.4s",
   "dryRun": false,
   "seriesA": {
     "model": "ideogram-ai/ideogram-v2",
@@ -9,12 +9,12 @@
     "costPerImage": 0.08
   },
   "seriesB": {
-    "model": "black-forest-labs/flux-1.1-pro",
+    "model": "google/nano-banana-pro",
     "count": 8,
     "successful": 1,
-    "costPerImage": 0.04
+    "costPerImage": 0.025
   },
-  "totalCost": "$0.04",
+  "totalCost": "$0.03",
   "outputDirs": {
     "agents": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\agents",
     "states": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\states"
@@ -22,10 +22,9 @@
   "results": [
     {
       "series": "B",
-      "filename": "STATE-REVIEWING.png",
-      "title": "Code Review",
-      "url": "https://replicate.delivery/xezq/mYEP9Qomc7ofPS8ETpmTC8v72IkkhNX9cH8NBRRPjadWjsELA/tmpxy7i84k5.png",
-      "cost": 0.04,
+      "filename": "STATE-DEBUGGING.png",
+      "title": "Debugging",
+      "cost": 0.025,
       "status": "success"
     }
   ]
