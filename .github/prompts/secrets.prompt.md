@@ -1,4 +1,3 @@
-```prompt
 ---
 description: Manage API keys and secrets with VS Code SecretStorage
 agent: Alex
@@ -92,5 +91,3 @@ Beginning secrets management. What service needs credential storage, or would yo
 
 
 > **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
-
-```

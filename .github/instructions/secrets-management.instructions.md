@@ -1,4 +1,3 @@
-```instructions
 ---
 description: "Secure credential storage, VS Code SecretStorage API, token management, environment variable migration"
 applyTo: "**/secrets*.ts,**/credentials*.ts,**/tokens*.ts,**/*Secret*.ts"
@@ -679,5 +678,3 @@ suite('Secrets Manager', () => {
 - **Pre-v1.42**: Used `keytar` (native module, install issues)
 - **v1.42+**: VS Code SecretStorage API (built-in, platform-abstracted)
 - **Current**: Standard pattern for all credential storage
-
-```

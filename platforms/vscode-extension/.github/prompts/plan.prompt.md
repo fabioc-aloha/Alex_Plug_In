@@ -1,4 +1,3 @@
-```prompt
 ---
 description: Run a structured 4-phase implementation plan using the VS Code Plan Agent
 mode: agent
@@ -101,5 +100,3 @@ Refinement: Run full brain-qa (all 35 phases), verify exit 0
 Ask the user what they're planning to implement, then walk through Phase 1 Discovery together.
 
 > **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
-
-```
