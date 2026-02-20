@@ -345,29 +345,41 @@ export const SKILL_TO_PERSONA_MAP: Record<string, string> = {
     // Cognitive skills
     'meditation':              'cognitive-scientist',
     'self-actualization':      'cognitive-scientist',
+    'dream-state':             'cognitive-scientist',
     'deep-thinking':           'researcher',
     'bootstrap-learning':      'student',
+    'knowledge-synthesis':     'technical-writer',
     
     // Development skills
     'code-review':             'code-reviewer',
     'testing-strategies':      'qa-engineer',
     'vscode-extension-patterns': 'developer',
+    'vscode-configuration-validation': 'developer',
+    'chat-participant-patterns': 'developer',
     'root-cause-analysis':     'debugger',
     'incident-response':       'sre',
+    'release-process':         'devops',
+    'secrets-management':      'security',
     
     // Documentation skills
     'markdown-mermaid':        'documentarian',
-    'knowledge-synthesis':     'technical-writer',
+    'md-to-word':              'documentarian',
+    'gamma-presentations':     'content-creator',
+    'brand-asset-management':  'content-creator',
     
-    // Architecture skills
+    // Architecture & Design skills
     'architecture-health':     'architect',
+    'ui-ux-design':            'ux-researcher',
     
     // Research skills
-    'research-first-workflow': 'researcher',
+    'research-first-development': 'researcher',
     
-    // Cloud skills  
+    // Cloud & Platform skills
     'azure-enterprise-deployment': 'cloud-architect',
     'mcp-development':         'ai-engineer',
+    'microsoft-graph-api':     'microsoft-developer',
+    'teams-app-patterns':      'microsoft-developer',
+    'm365-agent-debugging':    'microsoft-developer',
     
     // Quality skills
     'adversarial-oversight':   'qa-engineer',
@@ -379,15 +391,43 @@ export const SKILL_TO_PERSONA_MAP: Record<string, string> = {
  * Some skills naturally put the user in a cognitive state.
  */
 export const SKILL_TO_STATE_MAP: Record<string, string> = {
+    // Cognitive states
     'meditation':              'meditation',
     'self-actualization':      'meditation',
-    'code-review':             'reviewing',
-    'root-cause-analysis':     'debugging',
-    'bootstrap-learning':      'learning',
-    'research-first-workflow': 'planning',
+    'dream-state':             'dream',
+    'knowledge-synthesis':     'discovery',
+    
+    // Planning states
+    'research-first-development': 'planning',
     'architecture-health':     'planning',
-    'testing-strategies':      'reviewing',
     'deep-thinking':           'planning',
+    
+    // Building states
+    'release-process':         'building',
+    'brand-asset-management':  'building',
+    'md-to-word':              'building',
+    'gamma-presentations':     'building',
+    'secrets-management':      'building',
+    'chat-participant-patterns': 'building',
+    'vscode-extension-patterns': 'building',
+    'mcp-development':         'building',
+    'teams-app-patterns':      'building',
+    'markdown-mermaid':        'building',
+    
+    // Reviewing states
+    'code-review':             'reviewing',
+    'testing-strategies':      'reviewing',
+    'brain-qa':                'reviewing',
+    'vscode-configuration-validation': 'reviewing',
+    'ui-ux-design':            'reviewing',
+    
+    // Learning states
+    'bootstrap-learning':      'learning',
+    'microsoft-graph-api':     'learning',
+    
+    // Debugging states
+    'root-cause-analysis':     'debugging',
+    'm365-agent-debugging':    'debugging',
 };
 
 // ============================================================================

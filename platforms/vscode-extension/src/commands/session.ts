@@ -371,6 +371,8 @@ async function acknowledgeTangent(): Promise<void> {
             updateSessionStatusBar();
             updateFocusTrackingStatusBar();
             saveSessionState();
+            // Refresh welcome view so persona re-detects with new topic
+            vscode.commands.executeCommand('alex.refreshWelcomeView');
             vscode.window.showInformationMessage(`🎯 Focus updated to: "${newTopic}"`);
         }
     } else if (action.label.includes('End')) {
@@ -549,6 +551,9 @@ export async function startSession(
     } catch (err) {
         console.warn('[Alex] Failed to update Active Context objective:', err);
     }
+
+    // Refresh welcome view immediately so avatar updates based on session topic
+    vscode.commands.executeCommand('alex.refreshWelcomeView');
 
     // Show notification
     vscode.window.showInformationMessage(
@@ -764,6 +769,9 @@ export async function endSession(promptConsolidate: boolean = true): Promise<voi
         console.warn('[Alex] Failed to clear Active Context objective:', err);
     }
 
+    // Refresh welcome view immediately so avatar reverts from session context
+    vscode.commands.executeCommand('alex.refreshWelcomeView');
+
     // Auto-increment session goals
     try {
         await autoIncrementGoals('session');
@@ -842,6 +850,9 @@ export async function togglePauseSession(): Promise<void> {
 
     updateSessionStatusBar();
     saveSessionState();
+
+    // Refresh welcome view to update session display
+    vscode.commands.executeCommand('alex.refreshWelcomeView');
 }
 
 /**
