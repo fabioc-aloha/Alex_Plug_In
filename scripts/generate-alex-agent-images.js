@@ -4,8 +4,8 @@
  * Generates two complementary image series for the Alex Cognitive Architecture:
  * 
  * Series A — AGENT MODE BANNERS (Ideogram v2, 1024x1024, rocket template)
- *   One image per VS Code cognitive agent. Consistent with the alex2/ series.
- *   Shows what mode Alex is currently operating in.
+ *   One image per VS Code specialized agent. Consistent with the alex2/ series.
+ *   Note: Default Alex mode uses persona images instead of a banner.
  *   Output: alex_docs/alex3/agents/
  *
  * Series B — COGNITIVE STATE PORTRAITS (FLUX 1.1 Pro, 768x1024, character portrait)
@@ -13,7 +13,7 @@
  *   Shows what Alex is actively doing / focused on right now.
  *   Output: alex_docs/alex3/states/
  *
- * Total: 15 images | Cost estimate: $0.56 (Series A) + $0.32 (Series B) = ~$0.88
+ * Total: 14 images | Cost estimate: $0.48 (Series A) + $0.32 (Series B) = ~$0.80
  *
  * Usage:
  *   $env:REPLICATE_API_TOKEN = "r8_..."
@@ -57,13 +57,7 @@ const replicate = new Replicate({
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AGENT_MODES = [
-  {
-    filename: 'AGENT-ALEX.png',
-    title: 'ORCHESTRATE',
-    subtitle: 'Your Meta-Cognitive Partner',
-    color: '#0078d4',           // Azure blue — the master orchestrator
-    description: 'Alex main cognitive mode — routes, synthesizes, remembers',
-  },
+  // Note: Default "Alex" orchestrator mode uses persona images instead of a banner
   {
     filename: 'AGENT-RESEARCHER.png',
     title: 'RESEARCH',

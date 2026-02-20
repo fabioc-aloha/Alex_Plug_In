@@ -14,7 +14,7 @@ This folder contains all generated Alex images for the cognitive architecture vi
 |--------|----------|---------|--------|--------|
 | **Age Progression** | `age-progression/` | Character consistency across life stages | 13 | ✅ Complete |
 | **Personas** | `personas/` | Welcome window professional contexts | 63 | ✅ Complete |
-| **Agent Modes** | `agents/` | VS Code agent mode banners | 7 | ✅ Complete |
+| **Agent Modes** | `agents/` | VS Code specialized agent banners | 6 | ✅ Complete |
 | **Cognitive States** | `states/` | Task-specific activity portraits | 8 | ✅ Complete |
 
 ---
@@ -182,7 +182,7 @@ COMPOSITION:
 
 ---
 
-## Series 3 — Agent Mode Banners (PLANNED)
+## Series 3 — Agent Mode Banners (COMPLETE)
 
 **Location**: `agents/`
 **Script**: `scripts/generate-alex-agent-images.js`
@@ -190,9 +190,10 @@ COMPOSITION:
 
 Shows which VS Code cognitive agent mode Alex is operating in.
 
+> **Note**: Default Alex mode (orchestrator) uses **persona images** based on active trifecta rather than a dedicated banner. Agent banners are only shown for specialized modes.
+
 | File | Agent | NOUN | Mode Color |
 |------|-------|------|------------|
-| `AGENT-ALEX.png` | Alex (Orchestrator) | ORCHESTRATE | Azure Blue `#0078d4` |
 | `AGENT-RESEARCHER.png` | Researcher | RESEARCH | Deep Purple `#7c3aed` |
 | `AGENT-BUILDER.png` | Builder | BUILD | Forest Green `#16a34a` |
 | `AGENT-VALIDATOR.png` | Validator | VALIDATE | Alert Red `#dc2626` |
@@ -202,7 +203,7 @@ Shows which VS Code cognitive agent mode Alex is operating in.
 
 ---
 
-## Series 4 — Cognitive State Portraits (PLANNED)
+## Series 4 — Cognitive State Portraits (COMPLETE)
 
 **Location**: `states/`
 **Script**: `scripts/generate-alex-agent-images.js`
