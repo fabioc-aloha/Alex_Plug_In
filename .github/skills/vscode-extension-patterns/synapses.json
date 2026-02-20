@@ -48,6 +48,18 @@
       "strength": 0.75,
       "bidirectional": true,
       "reason": "Webview UI patterns must follow accessibility standards"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "reason": "Avatar system uses brand assets (90 images across personas, ages, agents, states)"
+    },
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging"
     }
   ],
   "activationPatterns": [
@@ -70,7 +82,10 @@
     "minification issues",
     "extension testing workflow",
     "debug vs rebuild differences",
-    "VSIX packaging and installation"
+    "VSIX packaging and installation",
+    "avatar system",
+    "welcome sidebar",
+    "cognitive state switching"
   ],
   "triggers": [
     "extension",
