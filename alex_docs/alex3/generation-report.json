@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-02-20T04:04:42.260Z",
-  "duration": "247.8s",
+  "generatedAt": "2026-02-20T04:11:15.270Z",
+  "duration": "240.3s",
   "dryRun": false,
   "seriesA": {
     "model": "ideogram-ai/ideogram-v2",
@@ -24,7 +24,7 @@
       "series": "A",
       "filename": "AGENT-ALEX.png",
       "title": "ORCHESTRATE",
-      "url": "https://replicate.delivery/xezq/eJBdpPt5tl1FcClkLPlTYHIJqU6zuWi2oUJYpjThcDV8csELA/tmp2okmq9pc.png",
+      "url": "https://replicate.delivery/xezq/cGe3SN4DRFVMGySkjgiwkuqd02HZ3JnHjg9RAi4aw4hDgsELA/tmpnqs9le_c.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -32,7 +32,7 @@
       "series": "A",
       "filename": "AGENT-RESEARCHER.png",
       "title": "RESEARCH",
-      "url": "https://replicate.delivery/xezq/K5AChb6qNeU8LqfxiUpKp7a6oyhmIgLfO2YTSeR7cimeRHLxC/tmppb86bkat.png",
+      "url": "https://replicate.delivery/xezq/VKJcLMYeVD3sHKPlQ9tFkNmAXhdirfEtKDvPWkGg6leeBklYB/tmplhbk2fpp.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -40,7 +40,7 @@
       "series": "A",
       "filename": "AGENT-BUILDER.png",
       "title": "BUILD",
-      "url": "https://replicate.delivery/xezq/SLhiffEiZutufpKyCx9XFiIplYVDP8HeWe7cPgDruaHepOWiF/tmps2cdbznn.png",
+      "url": "https://replicate.delivery/xezq/6Ozrfc0NWaV5KCNjFOtO37K6ZH5dzP0InuReEuwZoXfsBySsA/tmp10ck9uj6.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -48,7 +48,7 @@
       "series": "A",
       "filename": "AGENT-VALIDATOR.png",
       "title": "VALIDATE",
-      "url": "https://replicate.delivery/xezq/wnmESY2Y0c4uHpcKyb1SUBuzibXFd9fBb8Rfu36jv7Nf1xSsA/tmp9wtc2mf6.png",
+      "url": "https://replicate.delivery/xezq/0Tywxbeh6U0NXq9fX6AxaVXF4yI99qd9ErKFUG77ZafbCySsA/tmpnenskt2k.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -56,7 +56,7 @@
       "series": "A",
       "filename": "AGENT-DOCUMENTARIAN.png",
       "title": "DOCUMENT",
-      "url": "https://replicate.delivery/xezq/ppaaGRXvh6qxMxxRX2XkSHeMnlzJsekZMS50pWfxGe0eaHLxC/tmpuv5c7by9.png",
+      "url": "https://replicate.delivery/xezq/OAbtadhzAap0CdjSygbaAeZTXmKmYTUEhfATs6Q7PgFkBZJWA/tmptvafm9wk.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -64,7 +64,7 @@
       "series": "A",
       "filename": "AGENT-AZURE.png",
       "title": "AZURE",
-      "url": "https://replicate.delivery/xezq/Kg0ObMWDVqoKOpIRCtPhaqts1huyXpk3ZsegCkfqroHv7YJWA/tmpqbgsj53b.png",
+      "url": "https://replicate.delivery/xezq/ndSEvQrxVGbVFhK9gcNTTjNDDoz9uuypstZxTEWqoU1egsELA/tmpmw1bnww7.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -72,7 +72,7 @@
       "series": "A",
       "filename": "AGENT-M365.png",
       "title": "M365",
-      "url": "https://replicate.delivery/xezq/DFpl7B1MXs63IRbwrhBlxfbFzKpZ7OhQC7kHqBAftVVH8YJWA/tmprdx31ohg.png",
+      "url": "https://replicate.delivery/xezq/bRVL8TOTdS5uJ5LTeMWvNeUtzeY0ieNF0GeV1DKerU61kQWiF/tmp5j5094pu.png",
       "cost": 0.08,
       "status": "success"
     },
@@ -80,7 +80,7 @@
       "series": "B",
       "filename": "STATE-MEDITATION.png",
       "title": "Meditation",
-      "url": "https://replicate.delivery/xezq/wv8q4hHGDDblPZnlCHGZfZl02evEdUW29C8EsHEPO3jP8YJWA/tmp_eoaq7yh.png",
+      "url": "https://replicate.delivery/xezq/fngjwv7wdX2UVShcCp9k4QdkQa3NnsVqYMQ0bfGVqnHcCZJWA/tmpzsyqdo1i.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -88,7 +88,7 @@
       "series": "B",
       "filename": "STATE-DEBUGGING.png",
       "title": "Debugging",
-      "url": "https://replicate.delivery/xezq/mcugm5XAoyKuDRa7ZVytwKfotU4ZkAjs1qzQcn40hZGMeYJWA/tmp1xcki5wq.png",
+      "url": "https://replicate.delivery/xezq/cKVO907boioiGlnP1lKkepAcgoHNDreg5iPUQegwkb1LFySsA/tmpz9g1sxvf.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -96,7 +96,7 @@
       "series": "B",
       "filename": "STATE-DISCOVERY.png",
       "title": "Discovery",
-      "url": "https://replicate.delivery/xezq/DnzQtP0ZrB7GHR00Zg6mff61jiedjeKfaoQNPecr2LcjIPWiF/tmpi7hcgnsu.png",
+      "url": "https://replicate.delivery/xezq/IdXmwOUGG1K9NpmhIvKLjUtxq5tXceyGAKKJD2dVE93XhsELA/tmpuog9i1_z.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -104,7 +104,7 @@
       "series": "B",
       "filename": "STATE-PLANNING.png",
       "title": "Planning",
-      "url": "https://replicate.delivery/xezq/LBrgklwfwk2aVq1ejH3mzlDESpXRkKsZna2K70JPX9Vx8YJWA/tmpjwy8nifq.png",
+      "url": "https://replicate.delivery/xezq/TOt6d0I3Sy6aAhny4ofKk5YvdGi8RJqredpWe2dqKfcjLklYB/tmpryh85any.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -112,7 +112,7 @@
       "series": "B",
       "filename": "STATE-TEACHING.png",
       "title": "Teaching",
-      "url": "https://replicate.delivery/xezq/yn8uje0xuuyrfEE38f3TxgXY6vPcHlxlIRzNeeMcG4NlnHLxC/tmp5rbbhj3u.png",
+      "url": "https://replicate.delivery/xezq/s6Xf8vlm10zaASDBvpCxxzoD7QikePKzh92Y17GKz7GDDZJWA/tmp656gok7p.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -120,7 +120,7 @@
       "series": "B",
       "filename": "STATE-BUILDING.png",
       "title": "Building",
-      "url": "https://replicate.delivery/xezq/M3t0OEXrmtJLMBd7KIPfHfWSegI66IRaF5yVCrm95YqM6xSsA/tmp02lkavnv.png",
+      "url": "https://replicate.delivery/xezq/6NdOmf2gYfiN8UU4xnF3v3hqTDJ5Cw8Bu8MptY84fvdaGySsA/tmpcz5uv4hu.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -128,7 +128,7 @@
       "series": "B",
       "filename": "STATE-REVIEWING.png",
       "title": "Code Review",
-      "url": "https://replicate.delivery/xezq/OWbUc6nMqdr5GpnWFcFje1CyyUlax5ZI9eL6Y6fCflW90jlYB/tmpmnw5eerd.png",
+      "url": "https://replicate.delivery/xezq/4xMAaAs2shY2I1Gf2BW0zw8DBT3ozFEz3SdpXj7ZMvDshsELA/tmpm86nnr9f.png",
       "cost": 0.04,
       "status": "success"
     },
@@ -136,7 +136,7 @@
       "series": "B",
       "filename": "STATE-LEARNING.png",
       "title": "Learning",
-      "url": "https://replicate.delivery/xezq/phFYQkv2eF36KaHcb88PvSXLeM6ePfKnEVy5qW5tcxGl1jlYB/tmprbrph6di.png",
+      "url": "https://replicate.delivery/xezq/0f65s7ZXiYxkSKjDXsFar65Pk8txOCJZUDbNHXO9wnSxhsELA/tmppz0n0of_.png",
       "cost": 0.04,
       "status": "success"
     }
