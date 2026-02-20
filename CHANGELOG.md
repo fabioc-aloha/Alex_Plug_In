@@ -44,9 +44,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`updateChatAvatar()` enabled** — Previously backlogged function now active; uses `resolveAvatar()` for consistent priority resolution
 - **API confirmation** — VS Code `ChatParticipant.iconPath` is writable (not readonly), enabling runtime updates
 
+#### Natural Language Cognitive Detection
+
+- **`detectCognitiveState()` in general queries** — Natural language like "let's meditate" or "time for a dream session" now triggers appropriate avatar state
+- **Dual execution paths** — @alex participant uses code-based detection; regular Copilot mode uses prompt instructions for `alex.setCognitiveState` command
+
 ### Fixed
 
 - **Meditate command avatar** — `/meditate` prompt now correctly triggers meditation avatar state via `alex.setCognitiveState`
+- **Dream command avatar** — `/dream` prompt now triggers dream state avatar
+- **Selfactualize command avatar** — `/selfactualize` prompt now triggers meditation state avatar
 - **10 out-of-sync synapses** — brain-qa `-Fix` flag synced: brain-qa, brand-asset-management, documentation-quality-assurance, global-knowledge, m365-agent-debugging, persona-detection, release-process, secrets-management, security-review, vscode-extension-patterns
 
 ### Notes
