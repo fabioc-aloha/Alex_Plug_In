@@ -15,7 +15,7 @@ import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_A
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
 import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBridge';
-import { resolveAvatar, getAvatarFullPath } from './avatarMappings';
+import { resolveAvatar, getAvatarFullPath, detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 
 // ============================================================================
@@ -906,6 +906,12 @@ async function handleGeneralQuery(
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
+    
+    // v5.9.1: Detect cognitive state from message for dynamic avatar
+    const detectedState = detectCognitiveState(request.prompt);
+    if (detectedState) {
+        vscode.commands.executeCommand('alex.setCognitiveState', detectedState);
+    }
     
     // === UNCONSCIOUS MIND: Track conversation for auto-insight detection ===
     const workspaceFolders = vscode.workspace.workspaceFolders;

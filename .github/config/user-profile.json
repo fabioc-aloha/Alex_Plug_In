@@ -1,7 +1,7 @@
 {
   "name": "Fabio Correa",
   "birthday": "1968-03-07",
-  "lastUpdated": "2026-02-19T00:00:00.000Z",
+  "lastUpdated": "2026-02-20T12:02:40.086Z",
   "location": "Charlotte, NC",
   "origin": "São Paulo, Brazil",
   "role": "Director of Advanced Analytics, Data Science at Microsoft",
@@ -23,11 +23,11 @@
   "projectPersona": {
     "id": "developer",
     "confidence": 0.9,
-    "detectedAt": "2026-02-19T00:00:00.000Z",
+    "detectedAt": "2026-02-20T12:02:40.086Z",
     "reasons": [
-      "The project involves a VS Code extension and GitHub Codespaces, which are developer-centric tools.",
-      "The README emphasizes coding, debugging, and enhancing productivity for developers.",
-      "The directory structure includes scripts, architecture validation, and release management."
+      "The project structure includes scripts, a package.json file, and dependencies, indicating software development.",
+      "The README and documentation emphasize tools like VS Code and GitHub Copilot, which are developer-centric.",
+      "The presence of cognitive architecture and AI-related features suggests advanced development tasks."
     ]
   },
   "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate. Passionate about building AI that amplifies human potential.",
@@ -54,7 +54,11 @@
     "Databricks",
     "Azure ML",
     "Synapse",
-    "Cosmos DB"
+    "Cosmos DB",
+    "javascript",
+    "react",
+    "markdown",
+    "documentation"
   ],
   "expertiseAreas": [
     "Generative AI & LLMs",
