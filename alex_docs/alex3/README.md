@@ -13,9 +13,9 @@ This folder contains all generated Alex images for the cognitive architecture vi
 | Series | Location | Purpose | Images | Status |
 |--------|----------|---------|--------|--------|
 | **Age Progression** | `age-progression/` | Character consistency across life stages | 13 | ✅ Complete |
-| **Personas** | `personas/` | Welcome window professional contexts | 27 | 🔄 Planned |
-| **Agent Modes** | `agents/` | VS Code agent mode banners | 7 | 📋 Planned |
-| **Cognitive States** | `states/` | Task-specific activity portraits | 8 | 📋 Planned |
+| **Personas** | `personas/` | Welcome window professional contexts | 63 | ✅ Complete |
+| **Agent Modes** | `agents/` | VS Code agent mode banners | 7 | ✅ Complete |
+| **Cognitive States** | `states/` | Task-specific activity portraits | 8 | ✅ Complete |
 
 ---
 
