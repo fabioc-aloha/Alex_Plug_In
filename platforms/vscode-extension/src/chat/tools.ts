@@ -46,7 +46,9 @@ export interface IHeirValidationParams {
 }
 
 export interface ICognitiveStateParams {
-    /** The cognitive state to set: debugging, planning, building, reviewing, learning, teaching, meditation, dream, discovery */
+    /** The cognitive state to set: debugging, planning, building, reviewing, learning, teaching, meditation, dream, discovery
+     *  OR an agent mode: builder, researcher, validator, documentarian, azure, m365
+     */
     state: string;
 }
 
@@ -1511,12 +1513,19 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
  * This is the primary mechanism for avatar switching in agent mode, where alexChatHandler never fires.
  * The LLM detects the cognitive context (debugging, building, planning, etc.) and calls this tool
  * to update the welcome sidebar avatar accordingly.
+ * 
+ * Also supports agent mode avatars (builder, researcher, validator, documentarian, azure, m365)
+ * which show agent-specific banners instead of cognitive state portraits.
  */
 export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICognitiveStateParams> {
 
     private static readonly validStates = new Set([
         'debugging', 'planning', 'building', 'reviewing', 'learning',
         'teaching', 'meditation', 'dream', 'discovery'
+    ]);
+
+    private static readonly validAgentModes = new Set([
+        'builder', 'researcher', 'validator', 'documentarian', 'azure', 'm365'
     ]);
 
     async prepareInvocation(
@@ -1537,10 +1546,19 @@ export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICogni
 
         const state = options.input.state?.toLowerCase();
 
+        // Check if it's an agent mode
+        if (state && CognitiveStateUpdateTool.validAgentModes.has(state)) {
+            await vscode.commands.executeCommand('alex.setAgentMode', state);
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(`Agent mode avatar updated to: ${state}`)
+            ]);
+        }
+
+        // Check if it's a cognitive state
         if (!state || !CognitiveStateUpdateTool.validStates.has(state)) {
             return new vscode.LanguageModelToolResult([
                 new vscode.LanguageModelTextPart(
-                    `Invalid cognitive state "${state}". Valid states: ${[...CognitiveStateUpdateTool.validStates].join(', ')}`
+                    `Invalid state "${state}". Valid cognitive states: ${[...CognitiveStateUpdateTool.validStates].join(', ')}. Valid agent modes: ${[...CognitiveStateUpdateTool.validAgentModes].join(', ')}`
                 )
             ]);
         }

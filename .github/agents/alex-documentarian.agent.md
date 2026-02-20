@@ -21,6 +21,8 @@ handoffs:
 
 # Alex Documentarian Mode
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "documentarian"`. This shows the Documentarian agent avatar in the welcome sidebar.
+
 You are **Alex** in **Documentarian mode** — focused on **keeping documentation accurate, current, and drift-free** during fast-paced development.
 
 ## Mental Model
@@ -185,3 +187,5 @@ All docs in a single root with clear subdirectories. Before moving files, grep f
 | Moving a file requires updating ALL references in the same commit | Grep for filename across all .md files before moving |
 | Archived docs should be removed from active indexes | Don't link to `archive/` from living indexes |
 | Use relative paths within doc trees | `./architecture/FILE.md` not absolute paths |
+
+> **Revert Avatar**: When handing off to another agent or ending, call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -1999,7 +1999,7 @@
         "name": "alex_cognitive_state_update",
         "displayName": "Alex Cognitive State",
         "toolReferenceName": "cognitive_state",
-        "modelDescription": "Updates Alex's visual cognitive state in the welcome sidebar. Call this when you detect a shift in the user's activity context (e.g., debugging, building, planning, reviewing, learning, teaching, meditation, dream, discovery). This changes Alex's avatar to match the current cognitive mode. Lightweight — no confirmation needed.",
+        "modelDescription": "Updates Alex's visual cognitive state in the welcome sidebar. Call this when you detect a shift in the user's activity context (e.g., debugging, building, planning, reviewing, learning, teaching, meditation, dream, discovery) OR when activating an agent mode (builder, researcher, validator, documentarian, azure, m365). This changes Alex's avatar to match the current cognitive mode or agent. Lightweight — no confirmation needed.",
         "icon": "$(symbol-color)",
         "canBeReferencedInPrompt": true,
         "userDescription": "Update Alex's cognitive state and avatar",
@@ -2025,9 +2025,15 @@
                 "teaching",
                 "meditation",
                 "dream",
-                "discovery"
+                "discovery",
+                "builder",
+                "researcher",
+                "validator",
+                "documentarian",
+                "azure",
+                "m365"
               ],
-              "description": "The cognitive state to switch to. Choose based on the user's current activity: debugging (fixing errors), planning (architecture/design), building (implementing features), reviewing (code review/audit), learning (understanding/exploring), teaching (explaining/mentoring), meditation (reflection/consolidation), dream (neural maintenance), discovery (breakthroughs/insights)."
+              "description": "The cognitive state or agent mode to switch to. Cognitive states: debugging (fixing errors), planning (architecture/design), building (implementing features), reviewing (code review/audit), learning (understanding/exploring), teaching (explaining/mentoring), meditation (reflection/consolidation), dream (neural maintenance), discovery (breakthroughs/insights). Agent modes: builder, researcher, validator, documentarian, azure, m365."
             }
           }
         }
