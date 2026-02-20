@@ -5,6 +5,8 @@ agent: "Alex"
 
 # /improve — Heir Project Improvement
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "planning"`. This updates the welcome sidebar avatar.
+
 Guide me through improving this project's cognitive architecture using trifecta creation and research-first development.
 
 ## Context
@@ -79,4 +81,7 @@ Provide a summary report:
 
 ### Promotion Candidates
 - {capabilities worth promoting to Master or Global Knowledge}
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+
 ```

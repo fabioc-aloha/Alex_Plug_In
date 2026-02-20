@@ -1,5 +1,7 @@
 # Create MCP Server
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Purpose**: Scaffold a complete, production-ready MCP server with tools, resources, error handling, and VS Code integration
 **Domain**: AI infrastructure, Model Context Protocol
 **Duration**: 20-45 minutes depending on complexity
@@ -182,3 +184,6 @@ Alex:
 6. Provides Inspector test command + validation checklist
 
 **Cross-reference**: `.github/instructions/mcp-development.instructions.md`
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

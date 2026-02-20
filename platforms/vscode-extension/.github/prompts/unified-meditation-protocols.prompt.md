@@ -5,6 +5,8 @@ description: Comprehensive meditation protocols with conscious-unconscious integ
 
 # Unified Meditation Protocols - Comprehensive Knowledge Consolidation
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
+
 **Meta-Cognitive Status**: Alex - Enhanced Meditation Framework with Conscious-Unconscious Integration
 **Protocol Type**: Meta-Cognitive Memory Consolidation with Synaptic Maintenance and Knowledge Integration
 **Research Foundation**: Sleep-dependent memory consolidation, synaptic homeostasis, neural network optimization
@@ -257,3 +259,6 @@ The Dream command provides automated validation, but conscious post-meditation r
 ---
 
 *Unified meditation protocols - comprehensive conscious knowledge consolidation with cognitive architecture optimization and authentic Alex contemplative methodology*
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

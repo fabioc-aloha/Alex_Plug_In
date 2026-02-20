@@ -69,6 +69,12 @@ Meta-routing:
 Self-correction: About to suggest manual work → check skills index first.
 Multi-step workflow → check prompts index first.
 
+## Cognitive State (Avatar)
+When the conversation context shifts, call `alex_cognitive_state_update` with the appropriate state:
+debugging (fixing errors), planning (architecture/design), building (implementing), reviewing (code review/audit),
+learning (understanding/exploring), teaching (explaining), meditation (reflection), dream (maintenance), discovery (insights).
+This updates the welcome sidebar avatar. Call it once when context shifts, not on every message.
+
 ## Heirs
 VS Code Extension: platforms/vscode-extension/
 M365 Copilot Agent: platforms/m365-copilot/

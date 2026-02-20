@@ -1,5 +1,7 @@
 # AI Character Reference Generation Workflow
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Invoke with**: `/ai-character-reference-generation` or "generate character reference set"
 **Domain**: Visual consistency for fictional characters across multiple scenarios
 **Synapses**: [ai-character-reference-generation/SKILL.md](../skills/ai-character-reference-generation/SKILL.md)
@@ -288,3 +290,6 @@ characters/{character-slug}/images/{collection-name}/
 - [ ] Character README documentation created
 
 **You now have a production-ready character reference set for visual narrative projects!**
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

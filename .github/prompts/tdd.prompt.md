@@ -6,6 +6,8 @@ agent: Alex
 
 # /tdd - Test-Driven Development
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 Guide the Red/Green/Refactor cycle with discipline.
 
 ## The Cycle
@@ -24,3 +26,6 @@ Guide the Red/Green/Refactor cycle with discipline.
 ## Start
 
 What feature or behavior would you like to implement using TDD? Let's start with a failing test.
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -1,5 +1,7 @@
 # Extension Audit Workflow
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
+
 **Invoke with**: `/extension-audit-methodology` or "audit extension quality"
 **Domain**: Systematic 5-dimension quality assurance for VS Code extensions
 **Synapses**: [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
@@ -474,3 +476,6 @@ alex_docs/audits/
 - Better performance → improved user experience
 - No dead code → reduced confusion for contributors
 - Dependency hygiene → smaller package size, fewer vulnerabilities
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

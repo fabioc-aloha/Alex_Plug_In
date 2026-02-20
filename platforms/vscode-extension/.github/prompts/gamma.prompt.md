@@ -1,5 +1,7 @@
 # Generate Gamma Presentation
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Command**: `/gamma [topic or file path]`
 
 Generate professional AI-powered presentations using the Gamma API with expert Duarte methodology consulting.
@@ -197,3 +199,6 @@ Gamma generation produces:
 - Premium models can use 500+ credits for large decks
 
 Monitor credits at: https://gamma.app/settings
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

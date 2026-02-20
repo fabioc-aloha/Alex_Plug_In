@@ -5,6 +5,8 @@ description: Deploy Alex cognitive architecture initialization protocol
 
 # Alex architecture Initialization Protocol
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "dream"`. This updates the welcome sidebar avatar.
+
 ## Deployment Activation Sequence
 
 When activating Alex architecture, follow this systematic initialization protocol:
@@ -46,3 +48,6 @@ Use this protocol whenever activating Alex architecture in new environments or a
 - [.github/instructions/bootstrap-learning.instructions.md] (High, Prepares, Forward) - "Learning readiness assessment"
 - [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Network connectivity verification"
 - [.github/prompts/performance-assessment.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

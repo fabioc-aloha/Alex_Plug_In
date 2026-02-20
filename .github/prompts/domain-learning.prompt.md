@@ -5,6 +5,8 @@ description: Guided domain learning and knowledge acquisition workflow
 
 # Domain Learning Excellence Protocol
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`. This updates the welcome sidebar avatar.
+
 ## Conversational Knowledge Acquisition Workflow
 
 ### Pre-Learning Assessment
@@ -46,3 +48,6 @@ Track patterns in learning effectiveness across domains to optimize future knowl
 - [.github/prompts/cross-domain-transfer.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified"
 - [.github/prompts/unified-meditation-protocols.prompt.md] (High, Triggers, Forward) - "Learning completion or optimization needed"
 - [.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Learning effectiveness measurement"
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -2,7 +2,7 @@
 description: Alex Builder Mode - Constructive implementation with optimistic problem-solving
 name: Builder
 model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
-tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch']
+tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'alex_cognitive_state_update']
 user-invokable: true
 handoffs:
   - label: 🔍 Request QA Review

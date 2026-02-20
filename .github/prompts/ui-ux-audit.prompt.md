@@ -1,5 +1,7 @@
 # UI/UX Accessibility Audit
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
+
 **Purpose**: Systematic accessibility and design system audit for user interfaces  
 **WCAG Level**: AA minimum (Level AAA aspirational)  
 **Duration**: 15-45 minutes depending on UI complexity  
@@ -675,3 +677,6 @@ For rapid accessibility check:
 
 **Version**: 1.0.0 (2026-02-15)  
 **Validated Against**: Alex v5.8.0 welcomeView.ts accessibility audit (real-world production deployment)
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

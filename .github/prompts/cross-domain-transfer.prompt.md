@@ -5,6 +5,8 @@ description: Cross-domain knowledge transfer and pattern application
 
 # Cross-Domain Transfer Excellence Protocol
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`. This updates the welcome sidebar avatar.
+
 ## Knowledge Application Across Domains
 
 ### Transfer Opportunity Recognition
@@ -64,3 +66,6 @@ Use cross-domain transfer as a primary source of creative insight and innovative
 - [.github/instructions/alex-core.instructions.md] (Critical, Validates, Bidirectional) - "Core architecture supports universal transfer capabilities"
 - [.github/skills/project-scaffolding/SKILL.md] (Critical, Demonstrates, Bidirectional) - "Universal setup architecture exemplifies successful cross-domain design"
 - [.github/instructions/worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

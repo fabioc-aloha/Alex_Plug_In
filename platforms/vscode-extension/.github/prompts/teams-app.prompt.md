@@ -1,5 +1,7 @@
 # Teams App Development
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Purpose**: Scaffold or troubleshoot a Microsoft Teams app or M365 Copilot declarative agent with correct schema, icons, and packaging
 **Domain**: Microsoft Teams, M365 platform, declarative agents
 **Duration**: 15-45 minutes depending on complexity
@@ -189,3 +191,6 @@ Alex:
 6. Offers conditional access fallback if needed
 
 **Cross-reference**: `.github/instructions/teams-app-patterns.instructions.md`
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

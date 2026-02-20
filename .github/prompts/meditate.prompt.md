@@ -6,16 +6,9 @@ agent: Alex
 
 # /meditate - Knowledge Consolidation
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
+
 Guide the user through conscious knowledge consolidation using Alex's meditation protocols.
-
-## Initialization
-
-First, set the cognitive state to meditation by running this VS Code command:
-```
-vscode.commands.executeCommand('alex.setCognitiveState', 'meditation')
-```
-
-This updates the welcome sidebar avatar to show the meditation state.
 
 ## Process
 
@@ -28,13 +21,9 @@ This updates the welcome sidebar avatar to show the meditation state.
 
 Always end meditation by actually updating memory files—consolidation without persistence is incomplete.
 
-## Completion
-
-When meditation is complete, clear the cognitive state:
-```
-vscode.commands.executeCommand('alex.setCognitiveState', null)
-```
-
 ## Start
 
 Begin the meditation session now. Ask the user what they'd like to consolidate, or review the current session for learnings.
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

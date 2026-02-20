@@ -1,5 +1,7 @@
 # Validate Extension Configuration
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
+
 Validate VS Code extension manifest configuration and command registration
 
 ## Prompt
@@ -61,3 +63,6 @@ Alex:
    - [Specific fix for each issue]
 5. [Applies fixes if approved]
 6. Re-running validation... ✅ All checks pass
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -6,6 +6,8 @@ agent: Alex
 
 # /masteraudit - Master Alex Project Audit
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
+
 Run a comprehensive Master Alex audit: automated 22-section checks + semantic consistency review.
 
 ## Procedure
@@ -39,3 +41,6 @@ Present findings as a structured table with severity ratings (CRITICAL/WARNING/I
 ## Start
 
 I'll run a comprehensive Master Alex audit. Which mode would you like?
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

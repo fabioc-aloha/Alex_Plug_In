@@ -6,6 +6,8 @@ agent: Alex
 
 # /secrets - Secrets Management
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
+
 Implement secure credential storage using VS Code SecretStorage API for API keys, tokens, and passwords.
 
 ## What This Does
@@ -87,5 +89,8 @@ if (!apiKey) {
 ## Start
 
 Beginning secrets management. What service needs credential storage, or would you like to review existing code?
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
 
 ```

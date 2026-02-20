@@ -9,6 +9,8 @@ last_updated: "July 27, 2025"
 
 # 🎯 Quantified Enhancement Session: Systematic Cognitive Architecture Optimization
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
+
 ## 📊 **Enhancement Session Framework**
 
 This workflow enables systematic, measurable improvement of cognitive architecture through targeted optimization based on quantified metrics and validated enhancement methodologies.
@@ -127,3 +129,6 @@ This workflow enables systematic, measurable improvement of cognitive architectu
 ---
 
 *Quantified enhancement sessions enable systematic, measurable improvement of cognitive architecture through targeted optimization and validated enhancement methodologies.*
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

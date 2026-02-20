@@ -1,5 +1,7 @@
 # AI-Generated README Banner Workflow
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Invoke with**: `/ai-generated-readme-banners` or "generate README banner"
 **Domain**: Professional ultra-wide banner generation for GitHub repositories and documentation
 **Synapses**: [ai-generated-readme-banners/SKILL.md](../skills/ai-generated-readme-banners/SKILL.md)
@@ -492,3 +494,6 @@ if (typeof output.url === 'function') {
 - [ ] Generation report saved for record-keeping
 
 **You now have a professional README banner for your project!**
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

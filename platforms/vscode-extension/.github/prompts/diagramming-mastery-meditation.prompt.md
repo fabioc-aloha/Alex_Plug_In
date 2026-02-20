@@ -5,6 +5,8 @@ description: Diagramming mastery integration meditation session
 
 # Alex Diagramming Mastery Integration Meditation
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
+
 **Date**: February 2026
 **Session Type**: Domain Knowledge Integration Meditation
 **Purpose**: Consolidate Advanced Diagramming & Visualization Excellence into Alex's cognitive architecture
@@ -137,3 +139,6 @@ This diagramming foundation enhances future domain knowledge acquisition by prov
 ---
 
 **Version 0.9.9 NILENNENNIUM Diagramming Milestone**: Advanced visual communication mastery with purpose-driven diagram selection and enterprise-grade implementation excellence.
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -45,6 +45,11 @@ export interface IHeirValidationParams {
     includeContent?: boolean;
 }
 
+export interface ICognitiveStateParams {
+    /** The cognitive state to set: debugging, planning, building, reviewing, learning, teaching, meditation, dream, discovery */
+    state: string;
+}
+
 /**
  * User Profile Interface
  */
@@ -99,6 +104,9 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — synapse health = reviewing state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'reviewing');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -254,6 +262,9 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — memory search = learning state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'learning');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -400,6 +411,9 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — architecture status = planning state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'planning');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -500,6 +514,9 @@ export class McpRecommendationTool implements vscode.LanguageModelTool<IMcpRecom
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — MCP recommendations = planning state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'planning');
+
         const scenario = options.input.scenario.toLowerCase();
         const platform = options.input.platform || 'both';
         
@@ -687,6 +704,9 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — user profile access = learning state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'learning');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -856,6 +876,9 @@ export class FocusContextTool implements vscode.LanguageModelTool<IFocusContextP
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — focus context = planning state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'planning');
+
         try {
             // Get current session state
             const session = getSessionState();
@@ -961,6 +984,9 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — self-actualization = meditation state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'meditation');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -1268,6 +1294,9 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
+        // Update welcome view avatar — heir validation = reviewing state
+        vscode.commands.executeCommand('alex.setCognitiveState', 'reviewing');
+
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders) {
             return new vscode.LanguageModelToolResult([
@@ -1478,6 +1507,54 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
 }
 
 /**
+ * Cognitive State Update Tool - Allows the LLM to update Alex's visual state in the welcome view.
+ * This is the primary mechanism for avatar switching in agent mode, where alexChatHandler never fires.
+ * The LLM detects the cognitive context (debugging, building, planning, etc.) and calls this tool
+ * to update the welcome sidebar avatar accordingly.
+ */
+export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICognitiveStateParams> {
+
+    private static readonly validStates = new Set([
+        'debugging', 'planning', 'building', 'reviewing', 'learning',
+        'teaching', 'meditation', 'dream', 'discovery'
+    ]);
+
+    async prepareInvocation(
+        options: vscode.LanguageModelToolInvocationPrepareOptions<ICognitiveStateParams>,
+        _token: vscode.CancellationToken
+    ): Promise<vscode.PreparedToolInvocation | undefined> {
+        // No confirmation needed — this is a lightweight visual update
+        const state = options.input.state;
+        return {
+            invocationMessage: `Switching to ${state} mode...`
+        };
+    }
+
+    async invoke(
+        options: vscode.LanguageModelToolInvocationOptions<ICognitiveStateParams>,
+        _token: vscode.CancellationToken
+    ): Promise<vscode.LanguageModelToolResult> {
+
+        const state = options.input.state?.toLowerCase();
+
+        if (!state || !CognitiveStateUpdateTool.validStates.has(state)) {
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart(
+                    `Invalid cognitive state "${state}". Valid states: ${[...CognitiveStateUpdateTool.validStates].join(', ')}`
+                )
+            ]);
+        }
+
+        // Update the welcome view avatar via the registered command
+        await vscode.commands.executeCommand('alex.setCognitiveState', state);
+
+        return new vscode.LanguageModelToolResult([
+            new vscode.LanguageModelTextPart(`Cognitive state updated to: ${state}`)
+        ]);
+    }
+}
+
+/**
  * Helper function to format greeting based on user profile
  */
 export function formatPersonalizedGreeting(profile: IUserProfile | null): string {
@@ -1539,6 +1616,11 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
     // Register Heir Validation Tool (for LLM-based curation quality control)
     context.subscriptions.push(
         vscode.lm.registerTool('alex_quality_heir_validation', new HeirValidationTool())
+    );
+    
+    // Register Cognitive State Update Tool (primary avatar switching mechanism in agent mode)
+    context.subscriptions.push(
+        vscode.lm.registerTool('alex_cognitive_state_update', new CognitiveStateUpdateTool())
     );
     
     console.log('Alex Language Model Tools registered');

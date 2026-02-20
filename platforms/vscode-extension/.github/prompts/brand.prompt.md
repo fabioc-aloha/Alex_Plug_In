@@ -5,6 +5,8 @@ agent: Alex
 
 # /brand - Brand Asset Management
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 Manage Alex brand hierarchy, visual assets, and platform-specific branding guidelines.
 
 ## Process
@@ -25,3 +27,6 @@ Manage Alex brand hierarchy, visual assets, and platform-specific branding guide
 ## Start
 
 Beginning brand management. What platform or asset would you like to work on?
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

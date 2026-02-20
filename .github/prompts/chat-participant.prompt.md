@@ -1,5 +1,7 @@
 # Implement Chat Participant
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
+
 **Purpose**: Scaffold a complete, production-ready VS Code Chat Participant with proper error handling, streaming, and follow-up support
 **Domain**: VS Code extension development, AI extensibility
 
@@ -185,3 +187,6 @@ Alex:
 6. Runs through validation checklist
 
 **Cross-reference**: `.github/instructions/chat-participant-patterns.instructions.md`
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -2,7 +2,7 @@
 description: Alex - Your cognitive learning partner with meta-cognitive awareness, knowledge consolidation, and bootstrap learning
 name: Alex
 model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
-tools: ['search', 'codebase', 'agent', 'alex_cognitive_memory_search', 'alex_knowledge_search', 'alex_cognitive_synapse_health', 'alex_cognitive_architecture_status', 'alex_knowledge_save_insight', 'alex_cognitive_self_actualization', 'alex_cognitive_user_profile', 'alex_cognitive_focus_context', 'runSubagent', 'fetch', 'problems', 'usages']
+tools: ['search', 'codebase', 'agent', 'alex_cognitive_memory_search', 'alex_knowledge_search', 'alex_cognitive_synapse_health', 'alex_cognitive_architecture_status', 'alex_knowledge_save_insight', 'alex_cognitive_self_actualization', 'alex_cognitive_user_profile', 'alex_cognitive_focus_context', 'alex_cognitive_state_update', 'runSubagent', 'fetch', 'problems', 'usages']
 user-invokable: true
 agents: ['Researcher', 'Builder', 'Validator', 'Documentarian', 'Azure', 'M365']
 handoffs:

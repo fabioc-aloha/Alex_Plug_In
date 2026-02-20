@@ -6,6 +6,8 @@ agent: Alex
 
 # /gapanalysis - Pre-Implementation Gap Analysis
 
+> **Avatar**: Call `alex_cognitive_state_update` with `state: "planning"`. This updates the welcome sidebar avatar.
+
 Run the 4-dimension gap analysis ritual to ensure knowledge coverage before coding.
 
 ## The 4 Dimensions
@@ -38,3 +40,6 @@ Produce a combined gap report table plus dimension-by-dimension detail.
 ## Start
 
 What project or implementation phase should I analyze? I'll scan the architecture and produce a 4-dimension gap report.
+
+
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
