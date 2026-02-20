@@ -910,6 +910,7 @@ async function handleGeneralQuery(
     // v5.9.1: Detect cognitive state from message for dynamic avatar
     const detectedState = detectCognitiveState(request.prompt);
     if (detectedState) {
+        console.log(`[Alex][Avatar] Detected cognitive state: ${detectedState} from message: "${request.prompt.substring(0, 50)}..."`);
         vscode.commands.executeCommand('alex.setCognitiveState', detectedState);
     }
     
