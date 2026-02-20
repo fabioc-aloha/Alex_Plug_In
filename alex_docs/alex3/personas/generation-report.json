@@ -1,0 +1,26 @@
+{
+  "generated": "2026-02-20T03:19:36.254Z",
+  "model": "google/nano-banana-pro",
+  "referenceImage": "alex_docs\\alex3\\alex-reference.png",
+  "referenceAge": 15,
+  "outputDir": "alex_docs\\alex3\\personas",
+  "dryRun": false,
+  "results": [
+    {
+      "id": "data-engineer",
+      "noun": "DATA",
+      "age": 27,
+      "filename": "PERSONA-DATA-ENGINEER.png",
+      "success": true,
+      "prompt": "IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age 27 (12 years older than the reference).\n\nIDENTITY PRESERVATION (HIGHEST PRIORITY):\n- The reference image shows the person at age 15 — use this as the source of truth for facial identity\n- The output must look like the SAME PERSON as the reference, transformed to age 27\n- Preserve: exact facial bone structure, nose shape, eye shape, lip shape\n- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin with light freckles across nose and cheeks, intelligent curious expression\n- The person in the output should be immediately recognizable as the person in the reference\n\nAGE TRANSFORMATION:\n- Reference age: 15 years old\n- Target age: 27 years old\n- Transformation: 12 years older\n- Apply natural age-appropriate changes for a 27-year-old professional\n\nSCENE — \"DATA\" Context:\n- Activity: Analyzing data pipelines and ETL workflows\n- Attire: casual sweater, data science team style\n- Setting: Data engineering workspace with Jupyter notebooks and data flow diagrams visible\n- Expression: analytical focus, finding patterns in complexity\n\nCOMPOSITION:\n- Show Alex from chest/shoulders up with some environment context\n- Face clearly visible, welcoming and approachable\n- Natural workspace lighting, warm and professional\n- Format: Square 1:1 (1024x1024)\n- Style: photorealistic portrait, natural lighting, professional quality"
+    },
+    {
+      "id": "power-user",
+      "noun": "CUSTOMIZATION",
+      "age": 23,
+      "filename": "PERSONA-POWER-USER.png",
+      "success": true,
+      "prompt": "IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age 23 (8 years older than the reference).\n\nIDENTITY PRESERVATION (HIGHEST PRIORITY):\n- The reference image shows the person at age 15 — use this as the source of truth for facial identity\n- The output must look like the SAME PERSON as the reference, transformed to age 23\n- Preserve: exact facial bone structure, nose shape, eye shape, lip shape\n- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin with light freckles across nose and cheeks, intelligent curious expression\n- The person in the output should be immediately recognizable as the person in the reference\n\nAGE TRANSFORMATION:\n- Reference age: 15 years old\n- Target age: 23 years old\n- Transformation: 8 years older\n- Apply natural age-appropriate changes for a 23-year-old professional\n\nSCENE — \"CUSTOMIZATION\" Context:\n- Activity: Customizing development environment, building extensions\n- Attire: maker/hacker casual, comfortable tinkerer\n- Setting: Personalized dev setup with custom tools and configurations\n- Expression: builder excitement, making tools work perfectly\n\nCOMPOSITION:\n- Show Alex from chest/shoulders up with some environment context\n- Face clearly visible, welcoming and approachable\n- Natural workspace lighting, warm and professional\n- Format: Square 1:1 (1024x1024)\n- Style: photorealistic portrait, natural lighting, professional quality"
+    }
+  ]
+}

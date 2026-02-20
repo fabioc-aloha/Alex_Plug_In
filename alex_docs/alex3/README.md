@@ -2,8 +2,8 @@
 
 This folder contains all generated Alex images for the cognitive architecture visual identity system.
 
-**Model**: google/nano-banana-pro (Replicate)  
-**Reference**: Alex at age 15 (`alex-reference.png`)  
+**Model**: google/nano-banana-pro (Replicate)
+**Reference**: Alex at age 15 (`alex-reference.png`)
 **Generator Scripts**: `scripts/generate-alex-*.js`
 
 ---
@@ -21,8 +21,8 @@ This folder contains all generated Alex images for the cognitive architecture vi
 
 ## Series 1 — Age Progression (COMPLETE)
 
-**Location**: `age-progression/`  
-**Script**: `scripts/generate-alex-age-progression.js`  
+**Location**: `age-progression/`
+**Script**: `scripts/generate-alex-age-progression.js`
 **Cost**: ~$0.025/image × 13 = ~$0.33
 
 Shows Alex at different life stages, maintaining face consistency from the age-15 reference.
@@ -46,14 +46,14 @@ Shows Alex at different life stages, maintaining face consistency from the age-1
 ### Age Progression Prompt Template
 
 ```
-IMPORTANT: This is a reference-based age transformation. The attached reference 
-image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age 
+IMPORTANT: This is a reference-based age transformation. The attached reference
+image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age
 {TARGET_AGE} ({AGE_DELTA} years older/younger than the reference).
 
 IDENTITY PRESERVATION (HIGHEST PRIORITY):
 - The reference image shows the person at age 15 — use this as the source of truth
 - Preserve: exact facial bone structure, nose shape, eye shape, lip shape
-- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin 
+- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin
   with light freckles across nose and cheeks, intelligent curious expression
 - The person in the output should be immediately recognizable as the reference
 
@@ -80,8 +80,8 @@ TECHNICAL REQUIREMENTS:
 
 ## Series 2 — Persona Images (PLANNED)
 
-**Location**: `personas/`  
-**Script**: `scripts/generate-alex-persona-images.js`  
+**Location**: `personas/`
+**Script**: `scripts/generate-alex-persona-images.js`
 **Cost**: ~$0.025/image × 27 = ~$0.68
 
 Shows Alex in professional contexts matching each detected persona. Age is chosen to be contextually appropriate for the profession.
@@ -151,14 +151,14 @@ Shows Alex in professional contexts matching each detected persona. Age is chose
 ### Persona Prompt Template
 
 ```
-IMPORTANT: This is a reference-based age transformation. The attached reference 
-image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age 
+IMPORTANT: This is a reference-based age transformation. The attached reference
+image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age
 {TARGET_AGE} ({AGE_DELTA} years older than the reference).
 
 IDENTITY PRESERVATION (HIGHEST PRIORITY):
 - The reference image shows the person at age 15
 - Preserve: exact facial bone structure, nose shape, eye shape, lip shape
-- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin 
+- Preserve: curly ginger copper-red hair, striking blue-green eyes, fair skin
   with light freckles across nose and cheeks, intelligent curious expression
 
 AGE TRANSFORMATION:
@@ -184,8 +184,8 @@ COMPOSITION:
 
 ## Series 3 — Agent Mode Banners (PLANNED)
 
-**Location**: `agents/`  
-**Script**: `scripts/generate-alex-agent-images.js`  
+**Location**: `agents/`
+**Script**: `scripts/generate-alex-agent-images.js`
 **Template**: Rocket composition matching [alex2/](../alex2/README.md) banners
 
 Shows which VS Code cognitive agent mode Alex is operating in.
@@ -204,8 +204,8 @@ Shows which VS Code cognitive agent mode Alex is operating in.
 
 ## Series 4 — Cognitive State Portraits (PLANNED)
 
-**Location**: `states/`  
-**Script**: `scripts/generate-alex-agent-images.js`  
+**Location**: `states/`
+**Script**: `scripts/generate-alex-agent-images.js`
 **Character**: Alex "Mini" Finch, age 21
 
 Portrait-style images showing Alex in task-specific cognitive states.
