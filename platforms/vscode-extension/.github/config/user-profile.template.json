@@ -24,7 +24,7 @@
         "mermaidStyle": "GitHub-compatible"
     },
     "modelPreferences": {
-        "default": "claude-opus-4-6",
+        "default": "claude-opus-4-5",
         "alertOnHeavyLifting": true,
         "heavyLiftingTasks": [
             "Meditation/consolidation sessions",

@@ -3,8 +3,8 @@
  * 
  * Generates two complementary image series for the Alex Cognitive Architecture:
  * 
- * Series A — AGENT MODE BANNERS (Ideogram v2, 1024x1024, rocket template)
- *   One image per VS Code specialized agent. Consistent with the alex2/ series.
+ * Series A — AGENT MODE BANNERS (nano-banana-pro, 1024x1024, reference-based)
+ *   One image per VS Code specialized agent showing Alex in that mode.
  *   Note: Default Alex mode uses persona images instead of a banner.
  *   Output: alex_docs/alex3/agents/
  *
@@ -13,7 +13,7 @@
  *   Uses reference image for face consistency (same as personas).
  *   Output: alex_docs/alex3/states/
  *
- * Total: 14 images | Cost estimate: $0.48 (Series A) + $0.20 (Series B) = ~$0.68
+ * Total: 14 images | Cost estimate: $0.35 (~$0.025/image)
  *
  * Usage:
  *   $env:REPLICATE_API_TOKEN = "r8_..."
@@ -52,97 +52,124 @@ const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
-// Reference image for nano-banana-pro (cognitive states)
+// Reference images
 const REFERENCE_IMAGE = path.join(ROOT, 'alex_docs', 'alex3', 'alex-reference.png');
+const LOGO_IMAGE = path.join(ROOT, 'platforms', 'vscode-extension', 'assets', 'logo.png');
 const REFERENCE_AGE = 15;
 const OPERATIONAL_AGE = 21;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SERIES A — AGENT MODE BANNERS
-// Template: same rocket composition as alex2/, title = agent mode name
-// Model: ideogram-ai/ideogram-v2 ($0.08/image)
+// Alex in specialized agent mode contexts — each visually distinct
+// Model: google/nano-banana-pro ($0.025/image) with reference image
 // ─────────────────────────────────────────────────────────────────────────────
 
 const AGENT_MODES = [
   // Note: Default "Alex" orchestrator mode uses persona images instead of a banner
   {
     filename: 'AGENT-RESEARCHER.png',
-    title: 'RESEARCH',
-    subtitle: 'Explore Before You Build',
+    title: 'RESEARCHER',
     color: '#7c3aed',           // Deep purple — intellectual depth
-    description: 'Research mode — deep domain exploration, Phase 0',
+    scene: 'Deep research and exploration before building anything',
+    pose: 'leaning forward with curiosity, eyes scanning multiple sources, one hand on chin thinking',
+    environment: 'workspace surrounded by open books, research papers, multiple browser tabs on screen showing documentation and API references, sticky notes with connections drawn between concepts',
+    attire: 'gray hoodie, comfortable research mode, glasses pushed up on forehead',
+    mood: 'curious, exploratory, gathering knowledge, the detective finding patterns',
+    lighting: 'warm desk lamp mixed with cool monitor glow, purple ambient accent',
   },
   {
     filename: 'AGENT-BUILDER.png',
-    title: 'BUILD',
-    subtitle: 'Implement With Confidence',
+    title: 'BUILDER',
     color: '#16a34a',           // Forest green — construction, growth
-    description: 'Builder mode — optimistic implementation, confident execution',
+    scene: 'Actively implementing code with confidence and momentum',
+    pose: 'hands on keyboard typing rapidly, slight forward lean, focused but relaxed smile of flow state',
+    environment: 'clean developer setup, large monitor showing code actively being written, terminal with successful build output, green checkmarks visible',
+    attire: 'gray hoodie sleeves pushed up ready for work, comfortable and productive',
+    mood: 'confident, optimistic, building something great, creative momentum',
+    lighting: 'bright focused workspace light, green accent glow from successful builds on screen',
   },
   {
     filename: 'AGENT-VALIDATOR.png',
-    title: 'VALIDATE',
-    subtitle: 'Break It Before Users Do',
-    color: '#dc2626',           // Alert red — adversarial, critical
-    description: 'Validator mode — skeptical QA, adversarial review',
+    title: 'VALIDATOR',
+    color: '#dc2626',           // Alert red — adversarial, critical  
+    scene: 'Adversarial quality assurance — finding bugs before users do',
+    pose: 'leaning back slightly with arms crossed, one eyebrow raised skeptically, scrutinizing expression',
+    environment: 'screen showing code with red error highlights and failing tests, checklist with items being crossed off, bug tracking interface visible',
+    attire: 'gray hoodie, serious posture, reading glasses on',
+    mood: 'skeptical, critical, adversarial but fair, the quality guardian who misses nothing',
+    lighting: 'cool analytical light, red warning glow from error messages on screen',
   },
   {
     filename: 'AGENT-DOCUMENTARIAN.png',
-    title: 'DOCUMENT',
-    subtitle: 'Knowledge That Lasts',
+    title: 'DOCUMENTARIAN',
     color: '#14b8a6',           // Electric teal — clarity, precision
-    description: 'Documentarian mode — drift-free docs, complete coverage',
+    scene: 'Creating clear documentation that will help future developers',
+    pose: 'thoughtfully composing text, occasionally looking up to structure thoughts, organized and methodical',
+    environment: 'clean workspace with markdown files open, architecture diagrams on secondary screen, well-organized folder structure visible, API documentation being written',
+    attire: 'gray hoodie, neat and organized appearance matching the work',
+    mood: 'precise, helpful, creating clarity from complexity, the knowledge architect',
+    lighting: 'bright even light for clear thinking, teal accent from documentation previews',
   },
   {
     filename: 'AGENT-AZURE.png',
     title: 'AZURE',
-    subtitle: 'Cloud Architecture Mastery',
     color: '#0ea5e9',           // Sky blue — Microsoft cloud
-    description: 'Azure agent mode — cloud infra, deployment, MCP tools',
+    scene: 'Architecting cloud infrastructure and deployments on Azure',
+    pose: 'gesturing at cloud architecture diagram, confident cloud architect stance, explaining or planning',
+    environment: 'screens showing Azure portal with resource groups, Bicep/ARM templates, deployment pipelines, cloud architecture diagram with connected services',
+    attire: 'gray hoodie with subtle Microsoft/Azure vibe, professional but comfortable',
+    mood: 'authoritative, cloud-native thinking, infrastructure mastery, the cloud architect',
+    lighting: 'cool blue Azure-branded lighting, professional tech environment',
   },
   {
     filename: 'AGENT-M365.png',
     title: 'M365',
-    subtitle: 'Microsoft 365 Expertise',
     color: '#2563eb',           // Microsoft blue — M365 ecosystem
-    description: 'M365 agent mode — Teams, Copilot extensibility, Graph API',
+    scene: 'Building Microsoft 365 integrations and Teams experiences',
+    pose: 'working on collaborative tools, engaged with Teams/M365 interfaces, building integrations',
+    environment: 'screens showing Microsoft Teams app development, Graph API explorer, Copilot extensibility, adaptive cards being designed',
+    attire: 'gray hoodie, Microsoft ecosystem developer vibe',
+    mood: 'collaborative, integration-focused, extending the Microsoft platform, the M365 specialist',
+    lighting: 'Microsoft blue accent lighting, modern collaborative workspace feel',
   },
 ];
 
 function buildAgentModePrompt(agent) {
+  const traits = ALEX_CHARACTER.physicalTraits.join(', ');
+  const ageDelta = OPERATIONAL_AGE - REFERENCE_AGE;
   return `
-Professional technology banner with crisp typography (1:1 square format, 1024x1024).
+TWO REFERENCE IMAGES PROVIDED:
+1. FIRST IMAGE: Alex at age ${REFERENCE_AGE} — use for face/identity
+2. SECOND IMAGE: Blue rocket logo — incorporate naturally into scene
 
-CRITICAL: Text must be EXACTLY as specified with no errors or artifacts.
+IDENTITY PRESERVATION (HIGHEST PRIORITY):
+- Generate THIS SAME PERSON at age ${OPERATIONAL_AGE} (${ageDelta} years older than reference)
+- Preserve: exact facial bone structure, nose shape, eye shape, lip shape
+- Preserve: ${traits}
+- Must be immediately recognizable as the reference person
 
-TITLE TEXT (MAIN FOCUS - HUGE):
-"${agent.title}"
-Massive bold sans-serif, all caps, centered horizontally
-Positioned in upper-center area
-Color: ${agent.color} with bright glow effect
-Crystal clear edges, highly legible
+AGENT MODE — "${agent.title}":
+- Activity: ${agent.scene}
+- Pose: ${agent.pose}
+- Environment: ${agent.environment}
+- Attire: ${agent.attire}
+- Mood: ${agent.mood}
+- Color accent: ${agent.color} in lighting or environment
 
-SUBTITLE TEXT:
-"${agent.subtitle}"
-Clean modern sans-serif, positioned below title, centered
-White (#ffffff) with soft glow, smaller but readable
+LOGO PLACEMENT (PROMINENT & MEMORABLE):
+- The blue rocket logo MUST be prominently visible in the scene
+- PRIMARY placement: on Alex's clothing (hoodie, t-shirt print, jacket patch)
+- SECONDARY placement: flag or banner in background, large wall poster, prominent desk item
+- Make the logo a memorable part of the scene, not hidden
+- Logo should be crisp, clear, and unmistakable
 
-VISUAL:
-- Center-left: Sleek modern rocket at 30° upward diagonal
-- Rocket: ${agent.color} metallic finish, prominent but not overwhelming
-- Thrust flame: Bright orange-yellow (#ff6b35), energetic
-- Subtle "A" negative-space cutout on rocket body
-- Large radial glow behind rocket matching ${agent.color}
-
-BACKGROUND:
-- Deep space gradient: top #0a0e1a → bottom #050810
-- Scattered minimal white stars
-- Soft particle effects in thrust trail
-- Clean, professional, not cluttered
-
-STYLE: Photorealistic 3D, Blender/Cinema4D quality, sharp focus, cinematic, premium corporate
-
-MOOD: Empowering, confident, upward trajectory
+COMPOSITION:
+- Cinematic portrait capturing Alex fully in ${agent.title} mode
+- Face clearly visible, expression matching the mood
+- Rich environmental details that tell the story of what this agent does
+- NO TEXT OR TYPOGRAPHY — let the scene speak
+- Format: Square 1:1 (1024x1024)
+- Style: Photorealistic, cinematic quality, shallow depth of field
 `.trim();
 }
 
@@ -262,17 +289,22 @@ function buildPortraitPrompt(state) {
   const traits = ALEX_CHARACTER.physicalTraits.join(', ');
   const ageDelta = OPERATIONAL_AGE - REFERENCE_AGE;
   return `
-IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE ${REFERENCE_AGE}. Generate an image of THIS SAME PERSON at age ${OPERATIONAL_AGE} (${ageDelta} years older than the reference).
+TWO REFERENCE IMAGES PROVIDED:
+1. FIRST IMAGE: Alex at age ${REFERENCE_AGE} — use for face/identity
+2. SECOND IMAGE: Blue rocket logo — add as small clothing patch
 
 IDENTITY PRESERVATION (HIGHEST PRIORITY):
-- The reference image shows the person at age ${REFERENCE_AGE} — use this as the source of truth for facial identity
-- The output must look like the SAME PERSON as the reference, transformed to age ${OPERATIONAL_AGE}
+- Generate THIS SAME PERSON at age ${OPERATIONAL_AGE} (${ageDelta} years older than reference)
 - Preserve: exact facial bone structure, nose shape, eye shape, lip shape
 - Preserve: ${traits}
-- The person in the output should be immediately recognizable as the person in the reference
+- Must be immediately recognizable as the reference person
+
+LOGO PLACEMENT (SUBTLE):
+- Add the blue rocket logo as a small stitched patch on the hoodie or shirt
+- One patch only, subtle and natural-looking
+- Like a favorite brand patch on clothing
 
 COGNITIVE STATE — "${state.title}":
-- State: ${state.subtitle}
 - Activity: ${state.scenario}
 - Attire: ${state.attire}
 - Pose: ${state.pose}
@@ -280,9 +312,9 @@ COGNITIVE STATE — "${state.title}":
 - Lighting: ${state.lighting}
 - Mood: ${state.mood}
 
-PORTRAIT COMPOSITION:
-- Face clearly visible, showing the internal experience
-- Natural lighting, authentic and warm
+COMPOSITION:
+- Face clearly visible, showing the internal cognitive experience
+- NO TEXT OR TYPOGRAPHY in the image
 - Format: Square 1:1 (1024x1024)
 - Style: Photorealistic portrait, cinematic quality, shallow depth of field
 `.trim();
@@ -328,19 +360,21 @@ async function encodeImageToDataURI(imagePath) {
   return `data:${mime};base64,${base64}`;
 }
 
-// Global reference data URI (loaded once in main)
+// Global reference data URIs (loaded once in main)
 let referenceDataURI = null;
+let logoDataURI = null;
 
-async function generateNanaBanana(prompt, filename, outputPath) {
+async function generateNanaBanana(prompt, filename, outputPath, imageInputs = null) {
   if (DRY_RUN) {
     console.log(`   [DRY-RUN] Would call google/nano-banana-pro`);
     return null;
   }
 
+  const images = imageInputs || [referenceDataURI];
   const output = await replicate.run('google/nano-banana-pro', {
     input: {
       prompt: prompt,
-      image_input: [referenceDataURI],
+      image_input: images,
       aspect_ratio: '1:1',
       output_format: 'png',
       safety_filter_level: 'block_only_high',
@@ -398,9 +432,10 @@ async function generate(item, buildPromptFn, modelFn, outputDir, costPerImage) {
 }
 
 // Generate with reference image (nano-banana-pro writes directly to file)
-async function generateWithReference(item, buildPromptFn, outputDir, costPerImage) {
+async function generateWithReference(item, buildPromptFn, outputDir, costPerImage, imageInputs = null) {
   console.log(`\n  Generating: ${item.filename}`);
-  console.log(`  Title: "${item.title}" — ${item.scenario?.slice(0, 60) + '...'}`);
+  const desc = item.scenario || item.scene || item.description || '';
+  console.log(`  Title: "${item.title}" — ${desc.slice(0, 60)}${desc.length > 60 ? '...' : ''}`);
 
   const prompt = buildPromptFn(item);
 
@@ -412,7 +447,7 @@ async function generateWithReference(item, buildPromptFn, outputDir, costPerImag
 
   try {
     const filepath = path.join(outputDir, item.filename);
-    await generateNanaBanana(prompt, item.filename, filepath);
+    await generateNanaBanana(prompt, item.filename, filepath, imageInputs);
     console.log(`  ✓ Saved: ${path.basename(filepath)}`);
     return { filename: item.filename, title: item.title, cost: costPerImage, status: 'success' };
   } catch (err) {
@@ -437,7 +472,8 @@ async function main() {
 
   const agentCount = runA ? AGENT_MODES.length : 0;
   const stateCount = runB ? COGNITIVE_STATES.length : 0;
-  const totalCost = agentCount * 0.08 + stateCount * 0.025;
+  const costPerImage = 0.025;
+  const totalCost = (agentCount + stateCount) * costPerImage;
 
   const outBase = path.join(ROOT, 'alex_docs', 'alex3');
   const outAgents = path.join(outBase, 'agents');
@@ -446,21 +482,29 @@ async function main() {
   await fs.ensureDir(outAgents);
   await fs.ensureDir(outStates);
 
-  // Load reference image for nano-banana-pro (cognitive states)
-  if (runB && !DRY_RUN) {
+  // Load reference images for nano-banana-pro
+  if ((runA || runB) && !DRY_RUN) {
     if (!await fs.pathExists(REFERENCE_IMAGE)) {
       console.error(`ERROR: Reference image not found: ${REFERENCE_IMAGE}`);
       process.exit(1);
     }
     referenceDataURI = await encodeImageToDataURI(REFERENCE_IMAGE);
     console.log(`📷 Reference image loaded (${Math.round(referenceDataURI.length / 1024)} KB)`);
+    
+    // Load logo for both series
+    if (!await fs.pathExists(LOGO_IMAGE)) {
+      console.error(`ERROR: Logo image not found: ${LOGO_IMAGE}`);
+      process.exit(1);
+    }
+    logoDataURI = await encodeImageToDataURI(LOGO_IMAGE);
+    console.log(`🚀 Logo image loaded (${Math.round(logoDataURI.length / 1024)} KB)`);
   }
 
   console.log('═══════════════════════════════════════════════════════════════');
   console.log('  Alex Agent Mode & Cognitive State Image Generator');
   console.log('═══════════════════════════════════════════════════════════════');
-  console.log(`  Series A (agent banners): ${agentCount} images × $0.08 = $${(agentCount * 0.08).toFixed(2)}`);
-  console.log(`  Series B (state portraits): ${stateCount} images × $0.025 = $${(stateCount * 0.025).toFixed(2)}`);
+  console.log(`  Series A (agent banners): ${agentCount} images × $${costPerImage} = $${(agentCount * costPerImage).toFixed(2)}`);
+  console.log(`  Series B (state portraits): ${stateCount} images × $${costPerImage} = $${(stateCount * costPerImage).toFixed(2)}`);
   console.log(`  Total estimated cost:  $${totalCost.toFixed(2)}`);
   console.log(`  Dry-run mode:  ${DRY_RUN}`);
   console.log('═══════════════════════════════════════════════════════════════\n');
@@ -470,17 +514,18 @@ async function main() {
 
   // ─── Series A: Agent Mode Banners ────────────────────────────────────────
   if (runA) {
-    console.log('\n━━━ Series A: Agent Mode Banners (Ideogram v2) ━━━━━━━━━━━━━━━');
+    console.log('\n━━━ Series A: Agent Mode Banners (nano-banana-pro) ━━━━━━━━━━━');
+    console.log('  Character: Alex "Mini" Finch, 21yo — reference-based generation');
     const filteredAgents = ONLY_FILTER 
       ? AGENT_MODES.filter(a => ONLY_FILTER.some(f => a.filename.toUpperCase().includes(f)))
       : AGENT_MODES;
     for (let i = 0; i < filteredAgents.length; i++) {
-      const result = await generate(
+      const result = await generateWithReference(
         filteredAgents[i],
         buildAgentModePrompt,
-        generateIdeogram,
         outAgents,
-        0.08,
+        costPerImage,
+        [referenceDataURI, logoDataURI],  // Alex face + rocket logo
       );
       results.push({ series: 'A', ...result });
       if (!DRY_RUN && i < filteredAgents.length - 1) {
@@ -503,7 +548,8 @@ async function main() {
         filteredStates[i],
         buildPortraitPrompt,
         outStates,
-        0.025,
+        costPerImage,
+        [referenceDataURI, logoDataURI],  // Alex face + subtle logo patch
       );
       results.push({ series: 'B', ...result });
       if (!DRY_RUN && i < filteredStates.length - 1) {
@@ -518,14 +564,14 @@ async function main() {
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);
   const successA = results.filter(r => r.series === 'A' && r.status === 'success').length;
   const successB = results.filter(r => r.series === 'B' && r.status === 'success').length;
-  const actualCost = successA * 0.08 + successB * 0.025;
+  const actualCost = (successA + successB) * costPerImage;
 
   const report = {
     generatedAt: new Date().toISOString(),
     duration: `${duration}s`,
     dryRun: DRY_RUN,
-    seriesA: { model: 'ideogram-ai/ideogram-v2', count: agentCount, successful: successA, costPerImage: 0.08 },
-    seriesB: { model: 'google/nano-banana-pro', count: stateCount, successful: successB, costPerImage: 0.025 },
+    seriesA: { model: 'google/nano-banana-pro', count: agentCount, successful: successA, costPerImage },
+    seriesB: { model: 'google/nano-banana-pro', count: stateCount, successful: successB, costPerImage },
     totalCost: `$${actualCost.toFixed(2)}`,
     outputDirs: { agents: outAgents, states: outStates },
     results,

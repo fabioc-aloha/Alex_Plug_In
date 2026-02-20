@@ -1989,7 +1989,7 @@
     ]
   },
   "scripts": {
-    "sync-architecture": "node ../../.github/muscles/sync-architecture.js",
+    "sync-architecture": "node ../../.github/muscles/sync-architecture.cjs",
     "push-skills-to-global": "node scripts/push-skills-to-global.js",
     "clean": "node -e \"const fs=require('fs');['dist','out'].forEach(d=>{if(fs.existsSync(d)){fs.rmSync(d,{recursive:true});console.log('Cleaned '+d+'/')}})\"",
     "compile": "npm run check-types && node esbuild.js",

@@ -120,43 +120,106 @@ export interface LLMPersona {
 
 /**
  * Persona-to-avatar image mapping.
- * Each persona ID maps to an avatar base name (no extension) in assets/avatars/.
+ * Each persona ID maps to an avatar path (no extension) relative to assets/avatars/.
+ * v5.9.1: Now uses organized subdirectories:
+ *   - personas/PERSONA-* for role-based avatars
+ *   - ages/Alex-* for age-based fallback
  * Both .webp (primary) and .png (fallback) are shipped.
- * Fallback: Alex-21 (current identity age).
+ * Fallback: ages/Alex-21 (current identity age).
  */
 export const PERSONA_AVATAR_MAP: Record<string, string> = {
-    'developer':           'ALEX-CODING',
-    'academic':            'ALEX-ACADEMIC',
-    'researcher':          'ALEX-CX-RESEARCH',
-    'technical-writer':    'ALEX-TECHNICAL-WRITING',
-    'architect':           'ALEX-LEADERSHIP',
-    'data-engineer':       'ALEX-DATA-ANALYSIS',
-    'devops':              'ALEX-PYTHON',
-    'content-creator':     'ALEX-CREATIVE',
-    'fiction-writer':      'ALEX-STORYTELLING',
-    'game-developer':      'ALEX-GAME-DEV',
-    'project-manager':     'ALEX-BUSINESS',
-    'security':            'ALEX-CODING',
-    'student':             'ALEX-TEACHING',
-    'job-seeker':          'ALEX-LINKEDIN',
-    'presenter':           'ALEX-CORPORATE-TRAINING',
-    'power-user':          'ALEX-EUREKA',
-    // v5.7.1 — 11 new personas from marketing plan
-    'cognitive-scientist': 'ALEX-CX-RESEARCH',
-    'oss-contributor':     'ALEX-CODING',
-    'grant-writer':        'ALEX-SCIENTIFIC-PUBLISHING',
-    'copywriter':          'ALEX-CREATIVE',
-    'business-analyst':    'ALEX-BRD',
-    'sre':                 'ALEX-PYTHON',
-    'product-manager':     'ALEX-BUSINESS',
-    'bi-analyst':          'ALEX-DATA-ANALYSIS',
-    'consultant':          'ALEX-BUSINESS',
-    'qa-engineer':         'ALEX-CODING',
-    'marketer':            'ALEX-BUSINESS',
+    // Core developer personas
+    'developer':           'personas/PERSONA-DEVELOPER',
+    'fullstack-developer': 'personas/PERSONA-FULLSTACK-DEVELOPER',
+    'mobile-developer':    'personas/PERSONA-MOBILE-DEVELOPER',
+    'game-developer':      'personas/PERSONA-GAME-DEVELOPER',
+    'code-reviewer':       'personas/PERSONA-CODE-REVIEWER',
+    'debugger':            'personas/PERSONA-DEBUGGER',
+    
+    // Cloud & Infrastructure
+    'architect':           'personas/PERSONA-ARCHITECT',
+    'solutions-architect': 'personas/PERSONA-SOLUTIONS-ARCHITECT',
+    'cloud-architect':     'personas/PERSONA-CLOUD-ARCHITECT',
+    'devops':              'personas/PERSONA-DEVOPS',
+    'sre':                 'personas/PERSONA-SRE',
+    'dba':                 'personas/PERSONA-DBA',
+    'database-developer':  'personas/PERSONA-DATABASE-DEVELOPER',
+    
+    // Platform-specific
+    'microsoft-developer': 'personas/PERSONA-MICROSOFT-DEVELOPER',
+    'aws-developer':       'personas/PERSONA-AWS-DEVELOPER',
+    'fabric-developer':    'personas/PERSONA-FABRIC-DEVELOPER',
+    'openai-developer':    'personas/PERSONA-OPENAI-DEVELOPER',
+    'oracle-developer':    'personas/PERSONA-ORACLE-DEVELOPER',
+    
+    // AI & ML
+    'ai-engineer':         'personas/PERSONA-AI-ENGINEER',
+    'ml-ops':              'personas/PERSONA-ML-OPS',
+    'cognitive-scientist': 'personas/PERSONA-COGNITIVE-SCIENTIST',
+    
+    // Data
+    'data-engineer':       'personas/PERSONA-DATA-ENGINEER',
+    'bi-analyst':          'personas/PERSONA-BI-ANALYST',
+    
+    // Research & Academic
+    'academic':            'personas/PERSONA-ACADEMIC',
+    'researcher':          'personas/PERSONA-RESEARCHER',
+    'cx-researcher':       'personas/PERSONA-CX-RESEARCHER',
+    'ux-researcher':       'personas/PERSONA-UX-RESEARCHER',
+    
+    // Writing & Documentation
+    'technical-writer':    'personas/PERSONA-TECHNICAL-WRITER',
+    'documentarian':       'personas/PERSONA-DOCUMENTARIAN',
+    'content-creator':     'personas/PERSONA-CONTENT-CREATOR',
+    'copywriter':          'personas/PERSONA-COPYWRITER',
+    'fiction-writer':      'personas/PERSONA-FICTION-WRITER',
+    'grant-writer':        'personas/PERSONA-GRANT-WRITER',
+    'book-author':         'personas/PERSONA-BOOK-AUTHOR',
+    
+    // Business & Management
+    'business-analyst':    'personas/PERSONA-BUSINESS-ANALYST',
+    'product-manager':     'personas/PERSONA-PRODUCT-MANAGER',
+    'project-manager':     'personas/PERSONA-PROJECT-MANAGER',
+    'consultant':          'personas/PERSONA-CONSULTANT',
+    'marketer':            'personas/PERSONA-MARKETER',
+    'startup-founder':     'personas/PERSONA-STARTUP-FOUNDER',
+    'tech-lead':           'personas/PERSONA-TECH-LEAD',
+    
+    // Quality & Security
+    'qa-engineer':         'personas/PERSONA-QA-ENGINEER',
+    'security':            'personas/PERSONA-SECURITY',
+    'auditor':             'personas/PERSONA-AUDITOR',
+    'red-team':            'personas/PERSONA-RED-TEAM',
+    
+    // Teaching & Learning
+    'student':             'personas/PERSONA-STUDENT',
+    'bootcamp-grad':       'personas/PERSONA-BOOTCAMP-GRAD',
+    'teaching-assistant':  'personas/PERSONA-TEACHING-ASSISTANT',
+    'presenter':           'personas/PERSONA-PRESENTER',
+    
+    // Career
+    'job-seeker':          'personas/PERSONA-JOB-SEEKER',
+    'oss-contributor':     'personas/PERSONA-OSS-CONTRIBUTOR',
+    
+    // Special & Fun
+    'power-user':          'personas/PERSONA-POWER-USER',
+    'knowledge-worker':    'personas/PERSONA-KNOWLEDGE-WORKER',
+    'questionnaire-developer': 'personas/PERSONA-QUESTIONNAIRE-DEVELOPER',
+    'gcx-team':            'personas/PERSONA-GCX-TEAM',
+    
+    // Fun/Easter egg personas
+    'hacker':              'personas/PERSONA-HACKER',
+    'night-owl':           'personas/PERSONA-NIGHT-OWL',
+    'coffee-coder':        'personas/PERSONA-COFFEE-CODER',
+    'rubber-duck':         'personas/PERSONA-RUBBER-DUCK',
+    'stack-overflow':      'personas/PERSONA-STACK-OVERFLOW',
+    'imposter':            'personas/PERSONA-IMPOSTER',
+    'mad-scientist':       'personas/PERSONA-MAD-SCIENTIST',
+    'fabio-special':       'personas/PERSONA-FABIO-SPECIAL',
 };
 
-/** Default avatar base name (no extension) when no persona match */
-export const DEFAULT_AVATAR = 'Alex-21';
+/** Default avatar path (no extension) when no persona match - age 21 Alex */
+export const DEFAULT_AVATAR = 'ages/Alex-21';
 
 /**
  * Get avatar base name (no extension) for a persona ID.

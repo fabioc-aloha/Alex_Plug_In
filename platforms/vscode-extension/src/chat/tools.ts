@@ -52,6 +52,7 @@ export interface IUserProfile {
     name?: string;
     nickname?: string;
     pronouns?: string;
+    birthday?: string;       // ISO date string (e.g., "1968-03-07") for age-based avatar
     role?: string;
     experienceLevel?: string;
     formality?: 'casual' | 'balanced' | 'formal';

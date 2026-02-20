@@ -18,6 +18,12 @@ import {
   EasterEgg,
 } from "../chat/personaDetection";
 import {
+  resolveAvatar,
+  getAgeAvatar,
+  AvatarContext,
+  AvatarResult,
+} from "../chat/avatarMappings";
+import {
   readActiveContext,
   ActiveContext,
   updatePersona,
@@ -321,6 +327,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         personaResult,
         premiumAssets,
         activeContext,
+        userProfile,
         workspaceName,
         skillRecommendations,
       );
@@ -553,6 +560,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     personaResult: PersonaDetectionResult | null,
     premiumAssets: PremiumAssetSelection,
     activeContext: ActiveContext | null,
+    userProfile: { birthday?: string; name?: string } | null,
     workspaceName?: string,
     skillRecommendations?: SkillRecommendation[],
   ): string {
@@ -569,25 +577,47 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Persona display
     const persona = personaResult?.persona;
 
-    // Avatar URIs — WebP primary, PNG fallback (both shipped in VSIX)
-    // Easter egg check: seasonal or project-name overrides take priority
+    // Avatar URIs — v5.9.1 Enhanced with age fallback
+    // Priority: Easter egg > Persona > Age-based > Default (Alex-21)
+    // Uses organized subdirectories: personas/, ages/, agents/, states/
     const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
     const easterEgg: EasterEgg | null =
       getEasterEggOverride(workspaceFolderName);
-    const personaAvatarBase = easterEgg
-      ? easterEgg.avatarBase
-      : persona
-        ? getAvatarForPersona(persona.id)
-        : DEFAULT_AVATAR;
+    
+    // Get avatar path with age-based fallback from user profile
+    let avatarPath: string;
+    let avatarSource: string = 'default';
+    
+    if (easterEgg) {
+      // Easter eggs use legacy flat structure
+      avatarPath = easterEgg.avatarBase;
+      avatarSource = 'easter-egg';
+    } else if (persona) {
+      // Use persona-based avatar from new organized structure
+      avatarPath = getAvatarForPersona(persona.id);
+      avatarSource = 'persona';
+    } else if (userProfile?.birthday) {
+      // No persona detected — use age-based fallback from user profile
+      const ageAvatar = getAgeAvatar(userProfile.birthday);
+      if (ageAvatar) {
+        avatarPath = `ages/${ageAvatar}`;
+        avatarSource = 'age';
+      } else {
+        avatarPath = DEFAULT_AVATAR;
+      }
+    } else {
+      avatarPath = DEFAULT_AVATAR;
+    }
+    
     const avatarWebpUri = getAssetUri(
       webview,
       this._extensionUri,
-      `avatars/${personaAvatarBase}.webp`,
+      `avatars/${avatarPath}.webp`,
     );
     const avatarPngUri = getAssetUri(
       webview,
       this._extensionUri,
-      `avatars/${personaAvatarBase}.png`,
+      `avatars/${avatarPath}.png`,
     );
     const easterEggBadge = easterEgg
       ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>`
@@ -603,7 +633,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Active Context — live state from copilot-instructions.md
     const confidenceLabel =
-      personaResult?.confidence != null
+      personaResult?.confidence !== null && personaResult?.confidence !== undefined
         ? `${Math.round(personaResult.confidence * 100)}%`
         : "";
     const sourceLabel =
