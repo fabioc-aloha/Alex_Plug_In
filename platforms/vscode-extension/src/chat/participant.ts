@@ -467,6 +467,9 @@ async function handleMeditateCommand(
     
     stream.progress('🧘 Initiating meditation protocol with self-actualization...');
     
+    // v5.9.1: Set cognitive state for dynamic avatar
+    vscode.commands.executeCommand('alex.setCognitiveState', 'meditation');
+    
     // Detect and update persona during meditation (deep context awareness)
     const workspace = validateWorkspace();
     let personaContext = '';
@@ -551,6 +554,9 @@ async function handleDreamCommand(
     }
     
     stream.progress('🌙 Entering dream state for neural maintenance...');
+    
+    // v5.9.1: Set cognitive state for dynamic avatar
+    vscode.commands.executeCommand('alex.setCognitiveState', 'dream');
     
     stream.markdown(`## 🌙 Dream Protocol
 
@@ -1249,6 +1255,9 @@ async function handleSelfActualizeCommand(
     }
     
     stream.progress('🧘 Initiating self-actualization protocol...');
+    
+    // v5.9.1: Set cognitive state for dynamic avatar
+    vscode.commands.executeCommand('alex.setCognitiveState', 'meditation');
     
     stream.markdown(`## 🧘 Self-Actualization Protocol
 
