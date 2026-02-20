@@ -43,7 +43,7 @@ export const TOKEN_CONFIGS: Record<string, TokenConfig> = {
         displayName: 'GitHub Token',
         description: 'Personal access token for Global Knowledge repository access',
         getUrl: 'https://github.com/settings/tokens/new?description=Alex%20Global%20Knowledge&scopes=repo',
-        placeholder: 'ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        placeholder: 'Paste your token here',
     },
     GAMMA_API_KEY: {
         key: SECRETS.GAMMA_API_KEY,
