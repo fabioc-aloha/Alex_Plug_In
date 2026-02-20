@@ -34,6 +34,7 @@ import { ensureGlobalKnowledgeSetup, setupGlobalKnowledgeCommand } from "./comma
 import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
+import { saveSessionEmotion } from "./chat/emotionalMemory";
 import { registerLanguageModelTools } from "./chat/tools";
 import {
   registerGlobalKnowledgeTools,
@@ -3349,6 +3350,14 @@ async function checkVersionUpgrade(
  * Note: Background sync timer cleanup is handled via context.subscriptions
  */
 export function deactivate() {
+  // v5.9.3: Save emotional memory arc before shutdown
+  const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+  if (wsRoot) {
+    saveSessionEmotion(wsRoot).catch((err) => {
+      console.warn("[Alex] Failed to save emotional memory:", err);
+    });
+  }
+
   // Save beta telemetry session
   telemetry.log("lifecycle", "extension_deactivate");
   telemetry.saveSession().catch((err) => {

@@ -8,7 +8,17 @@ version: "2.0.0"
 
 > One command to professional Word documents with perfect diagram sizing
 
-Convert any Markdown document—including complex Mermaid diagrams—into polished Word (.docx) files ready for stakeholders, executives, and external audiences.
+Convert any Markdown document, including complex Mermaid diagrams, into polished Word (.docx) files ready for stakeholders, executives, and external audiences.
+
+## Document Publishing Workflow
+
+The complete workflow from Markdown to final PDF:
+
+1. **Convert to Word**: run `md-to-word.py` to generate a .docx with styled tables, centered diagrams, and formatted headings
+2. **Manual formatting**: open in Word and make final adjustments (page breaks, margins, headers/footers, custom styling)
+3. **Save as PDF**: use Word's File > Save As > PDF to produce the final PDF with full fidelity
+
+This skill handles step 1. Steps 2 and 3 are manual because Word provides superior PDF rendering, font embedding, and layout control compared to automated Markdown-to-PDF pipelines.
 
 ## Why This Skill?
 

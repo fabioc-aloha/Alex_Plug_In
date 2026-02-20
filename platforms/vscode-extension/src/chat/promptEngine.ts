@@ -28,6 +28,7 @@ import { DetectedModel, ModelTier, getTierInfo } from './modelIntelligence';
 import { getCurrentSession } from '../commands/session';
 import { getGoalsSummary } from '../commands/goals';
 import { searchGlobalKnowledge } from './globalKnowledge';
+import { loadMoodContext } from './emotionalMemory';
 import { PERSONAS, Persona } from './personaDetection';
 
 // ============================================================================
@@ -64,6 +65,7 @@ export async function buildAlexSystemPrompt(ctx: PromptContext): Promise<string>
         buildConversationHistoryLayer(ctx), // Layer 3: Recent exchanges
         buildUserProfileLayer(ctx),        // Layer 4: Personalization
         buildFocusSessionLayer(ctx),       // Layer 5: Pomodoro/goals
+        buildEmotionalMemoryLayer(ctx),    // Layer 6: Mood-aware context from emotional memory
         buildKnowledgeContextLayer(ctx),   // Layer 9: Pre-seeded knowledge
         buildModelAdaptiveLayer(ctx),      // Layer 7: Tier-specific rules
         buildResponseGuidelinesLayer(ctx), // Layer 10: Formatting + confidence
@@ -361,6 +363,52 @@ async function buildFocusSessionLayer(ctx: PromptContext): Promise<string> {
     }
 
     return parts.length > 0 ? parts.join('\n') : '';
+}
+
+// ============================================================================
+// Layer 6: Emotional Memory
+// ============================================================================
+
+/**
+ * v5.9.3: Inject mood-aware context from persistent emotional memory.
+ * Reads recent session emotional arcs and adjusts Alex's tone based
+ * on the user's emotional trajectory across sessions.
+ * 
+ * This is NOT sentiment analysis on the current message — that's Layer 2.
+ * This is a record of how recent sessions *felt*, informing Alex's approach.
+ * 
+ * Token budget: ~150 tokens
+ */
+async function buildEmotionalMemoryLayer(ctx: PromptContext): Promise<string> {
+    try {
+        const moodContext = await loadMoodContext(ctx.workspaceRoot);
+        if (!moodContext) { return ''; }
+
+        const parts: string[] = ['## Emotional Context (Recent Sessions)'];
+
+        // Tone guidance based on emotional trajectory
+        parts.push(`**Tone Adjustment**: ${moodContext.toneGuidance}`);
+
+        // Recent session mood summaries (compact)
+        if (moodContext.recentSessions.length > 0) {
+            parts.push('');
+            parts.push('**Recent session moods**:');
+            for (const session of moodContext.recentSessions) {
+                parts.push(`- ${session.date}: ${session.mood} — ${session.summary}`);
+            }
+        }
+
+        // Streak warning for persistent negative patterns
+        if (moodContext.recentMood === 'negative' && moodContext.streak >= 3) {
+            parts.push('');
+            parts.push(`⚠️ **${moodContext.streak} consecutive difficult sessions.** Lead with empathy. Acknowledge their effort before jumping into solutions.`);
+        }
+
+        return parts.join('\n');
+    } catch (err) {
+        console.warn('[PromptEngine] Failed to build emotional memory layer:', err);
+        return '';
+    }
 }
 
 // ============================================================================

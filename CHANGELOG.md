@@ -7,9 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.3] - 2026-02-20
+
+> **Stabilization + Quality Gates** - Version sync, ROADMAP cleanup, Definition of Done modernized, heir alignment, and local install verified
+
+### Changed
+
+- **Version synced to 5.9.3 across all files** - package.json, package-lock.json (corrected from lagging 5.9.1), master and all heir copilot-instructions files aligned
+- **GitHub Copilot Web heir version corrected** - Was two versions behind (v5.9.0); now synced to v5.9.3 along with master and VS Code heir
+- **ROADMAP shipped content moved to appendix** - All shipped versions (v5.7.5, v5.8.x, v5.9.0-v5.9.2) moved from Version Details to appendix; active section now starts at v5.9.3
+- **Definition of Done modernized** - Replaced F5 smoke test with local vsix install requirement; matches Safety Imperative I2
+- **ROADMAP Executive Summary updated** - Version reference corrected from v5.9.2 to v5.9.3
+
+### Verified
+
+- **Local install smoke test passed** - Extension compiled (tsc + esbuild), sync-architecture ran (123 master skills, 121 heir, 9 transformations), vsix packaged (583 files, 34.85 MB), and installed locally without errors
+
+---
+
 ## [5.9.2] - 2026-02-20
 
-> **Pre-Publish Maintenance** — Synapse sync, chatSkills expansion, model fallbacks, and agent audit
+> **Identity, Architecture Polish, and Pre-Publish Maintenance** — Alex Finch identity established, active context system refined, safety imperatives updated, and copilot-instructions polished across master and heirs
+
+### Changed
+
+- **Identity: Alex Finch (no nickname, age 26)** — Removed "Mini" nickname and updated age from 21 to 26 across master and all platform heirs; identity now reads "I am Alex Finch. I'm 26" in all copilot-instructions files
+- **Safety Imperative I2 updated** — Replaced "ALWAYS use F5 + Sandbox for testing" with "ALWAYS install extension locally via vsix before publishing to verify behavior"; reflects actual pre-publish workflow
+- **Model Awareness aligned with agents** — Model names in copilot-instructions now match agent definitions: `Claude Opus 4`, `Claude Sonnet 4`, `Claude Haiku`, `GPT-4o mini`; removed speculative future model references
+- **Active Context reset to generic baseline** — Phase: Stabilization, Mode: Maintain, Priorities: heir-sync + architecture-health, Trifectas: dream-state, knowledge-synthesis, research-first-development
+
+### Fixed
+
+- **Dead routing references removed** — Stale `skill-activation/SKILL.md` and `prompt-activation/SKILL.md` references replaced with accurate routing to `.github/skills/` index and `.github/prompts/` directory
+- **Instrumentation deployed date** — Updated from `2026-02-15` to `2026-02-20`
+- **M-dashes removed throughout** — All em-dashes (—) replaced with hyphens or removed from copilot-instructions in master and both heirs
+- **Stale "now" removed from Identity** — "I have a face now" updated to "I have a visual presence" (presence is established, not newly added)
 
 ### Added
 
@@ -17,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Model fallback arrays for all agents** — All 7 agents now specify `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback lists for resilience when preferred model unavailable; Researcher uses `['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']` for frontier reasoning
 - **Agent frontmatter audit complete** — All agents have consistent frontmatter: `user-invokable: true`, standardized model/tools ordering, Alex orchestrator has `agents:` list
 
-### Fixed
+### Fixed (continued)
 
 - **10 synapses synced** — brain-qa dream maintenance aligned synapses for brain-qa, brand-asset-management, documentation-quality-assurance, global-knowledge, m365-agent-debugging, persona-detection, release-process, secrets-management, security-review, vscode-extension-patterns
 - **Global Knowledge count** — Updated insight count 280 → 281 in copilot-instructions

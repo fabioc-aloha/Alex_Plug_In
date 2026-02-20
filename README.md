@@ -12,34 +12,6 @@
 
 ---
 
-### 🎨 Banner Options for Comparison
-
-**Typography Banners (AI-Generated)**
-
-![ALEX - Cognitive Architecture](assets/banner-main.png)
-
-![LEARN · REMEMBER · GROW - Your AI Learning Partner](assets/banner-capabilities.png)
-
-![COGNITIVE SYMBIOSIS - Evolution from AI-as-Tool to AI-as-Partner](assets/banner-vision.png)
-
-**Rocket Banners (AI-Generated)**
-
-![Strap a Rocket to Your Back - CODE](assets/banner-rocket-code.png)
-
-![Strap a Rocket to Your Back - LEARNING](assets/banner-rocket-learning.png)
-
-![Strap a Rocket to Your Back - CAREER](assets/banner-rocket-career.png)
-
-**Rocket Banners (SVG)**
-
-![Rocket Banner - Left Layout](assets/banner-rocket-1.svg)
-
-![Rocket Banner - Centered](assets/banner-rocket-2.svg)
-
-![Rocket Banner - Right Layout](assets/banner-rocket-3.svg)
-
----
-
 ## 🎯 Who is Alex?
 
 **Alex Finch** — a cognitive architecture embodying **cognitive symbiosis**: the evolution from AI-as-tool to AI-as-partner. Named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:

@@ -6,6 +6,7 @@ import { startSession, getCurrentSession, isSessionActive, endSession } from '..
 import { getGoalsSummary, showGoalsQuickPick, showCreateGoalDialog, autoIncrementGoals } from '../commands/goals';
 import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
+import { recordEmotionalSignal, resetEmotionalState } from './emotionalMemory';
 import { validateWorkspace } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
@@ -210,6 +211,7 @@ export function resetSessionState(): void {
     frustrationLevel = 0;
     lastFrustrationCheck = 0;
     conversationBuffer = [];
+    resetEmotionalState(); // v5.9.3: Reset emotional memory tracking
 }
 
 /**
@@ -922,6 +924,12 @@ async function handleGeneralQuery(
     // === UNCONSCIOUS MIND: Emotional Intelligence ===
     const emotionalState = detectEmotionalState(request.prompt);
     const encouragement = generateEncouragement(emotionalState);
+    
+    // v5.9.3: Record emotional signal for persistent emotional memory
+    const frustrationNum = emotionalState.frustration === 'high' ? 3 
+        : emotionalState.frustration === 'moderate' ? 2 
+        : emotionalState.frustration === 'mild' ? 1 : 0;
+    recordEmotionalSignal(request.prompt, frustrationNum, emotionalState.success);
     
     // Get user profile for personalization
     const profile = await getUserProfile();

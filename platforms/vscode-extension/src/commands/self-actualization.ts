@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
+import { getMeditationEmotionalReview, saveSessionEmotion } from '../chat/emotionalMemory';
 import { getAlexWorkspaceFolder, createSynapseRegex } from '../shared/utils';
 
 /**
@@ -129,12 +130,17 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
         await autoPromoteKnowledge(rootPath, report);
 
         // Phase 5: Generate Recommendations
-        progress.report({ message: "Phase 5: Generating recommendations...", increment: 75 });
+        progress.report({ message: "Phase 5: Generating recommendations...", increment: 70 });
         generateRecommendations(report);
+
+        // Phase 5.5: Emotional Pattern Review
+        progress.report({ message: "Phase 5.5: Reviewing emotional patterns...", increment: 80 });
+        const emotionalReview = await getMeditationEmotionalReview(rootPath);
+        await saveSessionEmotion(rootPath);
 
         // Phase 6: Create Meditation Session Record
         progress.report({ message: "Phase 6: Documenting session...", increment: 90 });
-        await createSessionRecord(rootPath, report);
+        await createSessionRecord(rootPath, report, emotionalReview ?? undefined);
 
         // Phase 7: Update Active Context — Last Assessed
         progress.report({ message: "Phase 7: Updating Active Context...", increment: 95 });
@@ -514,7 +520,8 @@ function generateRecommendations(report: SelfActualizationReport): void {
  */
 async function createSessionRecord(
     rootPath: string,
-    report: SelfActualizationReport
+    report: SelfActualizationReport,
+    emotionalReview?: string
 ): Promise<void> {
     const episodicPath = path.join(rootPath, '.github', 'episodic');
     await fs.ensureDir(episodicPath);
@@ -559,7 +566,11 @@ async function createSessionRecord(
 - **Current Version**: ${report.versionConsistency.currentVersion}
 - **Outdated References Found**: ${report.versionConsistency.outdatedReferences}
 
-## 💡 Recommendations
+## � Emotional Pattern Review
+
+${emotionalReview || '*No emotional data recorded yet. Emotional patterns will appear after a few sessions.*'}
+
+## �💡 Recommendations
 
 ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations - architecture is optimal!'}
 

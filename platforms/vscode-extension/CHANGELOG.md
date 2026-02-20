@@ -7,18 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.3] - 2026-02-20
+
+> **Stabilization + Quality Gates** - Version sync, ROADMAP cleanup, Definition of Done modernized, heir alignment, and local install verified
+
+### Changed
+
+- **Version synced to 5.9.3 across all files** - package.json, package-lock.json (corrected from lagging 5.9.1), master and all heir copilot-instructions files aligned
+- **GitHub Copilot Web heir version corrected** - Was two versions behind (v5.9.0); now synced to v5.9.3 along with master and VS Code heir
+- **ROADMAP shipped content moved to appendix** - Shipped versions moved from Version Details to appendix
+- **Definition of Done modernized** - F5 smoke test replaced with local vsix install; matches Safety Imperative I2
+
+### Verified
+
+- **Local install smoke test passed** - Compiled, packaged (583 files, 34.85 MB), and installed locally without errors
+
+---
+
 ## [5.9.2] - 2026-02-20
 
-> **Pre-Publish Maintenance** — Synapse sync, chatSkills expansion, model fallbacks, and agent audit
+> **Identity, Architecture Polish, and Pre-Publish Maintenance** — Alex Finch identity established, active context system refined, safety imperatives updated, and copilot-instructions polished across master and heirs
 
-### Added
+### Changed
 
-- **chatSkills contribution expanded (68 → 114 skills)** — All user-invokable skills now registered; removed internal skills
-- **Model fallback arrays for all agents** — All 7 agents have `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback lists
-- **Agent frontmatter audit complete** — Consistent `user-invokable: true`, standardized model/tools ordering
+- **Identity: Alex Finch (no nickname, age 26)** — Removed "Mini" nickname and updated age from 21 to 26 across master and all platform heirs
+- **Safety Imperative I2 updated** — Replaced F5+Sandbox testing with local vsix install before publishing
+- **Model Awareness aligned with agents** — Model names now match agent definitions: `Claude Opus 4`, `Claude Sonnet 4`, `Claude Haiku`, `GPT-4o mini`
+- **Active Context reset to generic baseline** — Phase: Stabilization, Mode: Maintain, Priorities: heir-sync + architecture-health
 
 ### Fixed
 
+- **Dead routing references removed** — Stale `skill-activation/SKILL.md` and `prompt-activation/SKILL.md` replaced with accurate routing to skills/prompts directories
+- **M-dashes removed throughout** — All em-dashes replaced in copilot-instructions across master and both heirs
+- **Instrumentation deployed date** — Updated from `2026-02-15` to `2026-02-20`
+- **chatSkills contribution expanded (68 → 114 skills)** — All user-invokable skills now registered; removed internal skills
+- **Model fallback arrays for all agents** — All 7 agents have `model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']` fallback lists
+- **Agent frontmatter audit complete** — Consistent `user-invokable: true`, standardized model/tools ordering
 - **10 synapses synced** — brain-qa dream maintenance
 - **Global Knowledge count** — Updated insight count 280 → 281
 - **Claude Opus/Sonnet compatibility** — Verified model names and agent configuration

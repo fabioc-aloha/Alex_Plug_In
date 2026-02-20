@@ -1,6 +1,6 @@
 ---
 name: "Writing & Publication Skill"
-description: "Patterns for technical writing, academic publication, and content strategy."
+description: "Patterns for technical writing, academic publication, content strategy, and Word-compatible research formatting."
 ---
 
 # Writing & Publication Skill
@@ -111,6 +111,67 @@ description: "Patterns for technical writing, academic publication, and content 
 - [ ] Page limit respected
 - [ ] Code available (if applicable)
 
+## Word-Compatible Research Writing Style
+
+Conventions for research documents authored in Markdown and converted to Word via Pandoc or md-to-word.
+
+### Punctuation Rules
+
+| Instead of | Use | When |
+| ---------- | --- | ---- |
+| Em-dash (—) | Colon (:) | Elaboration or definition: "The framework provides: integration across domains" |
+| Em-dash (—) | Comma (,) | Parenthetical aside: "The model, originally designed for therapy, applies broadly" |
+| Em-dash (—) | Semicolon (;) | Related independent clauses: "The theory is sound; the implementation follows" |
+| Em-dash (—) | Period (.) | Full sentence break: "This completes Phase 1. The next phase begins" |
+| Double-hyphen (--) | Same as above | Never use -- as a substitute; apply proper punctuation directly |
+
+### Definition List Formatting
+
+Use bold term followed by colon, no dash separators:
+
+```markdown
+<!-- Bad -->
+**Term** — description
+**Term** -- description
+
+<!-- Good -->
+**Term**: description
+```
+
+### Formal Tone
+
+| Avoid | Use |
+| ----- | --- |
+| Contractions (isn't, it's, don't) | Full forms (is not, it is, do not) |
+| Em-dashes for drama | Colons for precision |
+| First person plural ("we find") | Active voice with subject ("the analysis reveals") |
+
+### Markdown Elements to Avoid for Word
+
+| Element | Problem | Alternative |
+| ------- | ------- | ----------- |
+| `---` horizontal rules | Renders as full-width line in Word | Use headings or blank lines for separation |
+| `\n` in Mermaid labels | Not rendered; breaks labels | Use `<br/>` for line breaks |
+| Nested blockquotes | Inconsistent Word rendering | Use single-level blockquotes only |
+| HTML tags in body text | May not convert | Use pure Markdown |
+
+### APA 7 Conventions for Markdown
+
+- **In-text citations**: parenthetical `(Author, Year)` or narrative `Author (Year)`
+- **References**: alphabetical by last name, hanging indent, sentence-case titles
+- **Title page**: title, authors, date, abstract paragraph (no page numbers in Markdown)
+- **Headings**: H1 for title, H2 for major sections, H3 for subsections (maps to APA levels)
+- **Tables**: include descriptive captions above, notes below
+- **Figures**: Mermaid diagrams count as figures; caption with "Figure N." prefix
+
+### Mermaid Diagram Conventions for Research
+
+- Use `%%{init: {'theme': 'base', 'themeVariables': {...}}}%%` for consistent styling
+- Line breaks: `<br/>` only; never `\n`
+- Keep node text concise; move detail to surrounding prose
+- GitHub Pastel v2 palette for professional appearance
+- Export as PNG before Word conversion if diagram fidelity is critical
+
 ## Tools
 
 | Tool | Purpose |
@@ -119,6 +180,8 @@ description: "Patterns for technical writing, academic publication, and content 
 | Grammarly | Grammar/style |
 | Zotero | References |
 | Connected Papers | Literature discovery |
+| Pandoc | Markdown to Word conversion |
+| md-to-word skill | Markdown + Mermaid to Word pipeline |
 
 ## Synapses
 

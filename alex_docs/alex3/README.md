@@ -207,7 +207,7 @@ Shows which VS Code cognitive agent mode Alex is operating in.
 
 **Location**: `states/`
 **Script**: `scripts/generate-alex-agent-images.js`
-**Character**: Alex "Mini" Finch, age 21
+**Character**: Alex Finch, age 26
 
 Portrait-style images showing Alex in task-specific cognitive states.
 

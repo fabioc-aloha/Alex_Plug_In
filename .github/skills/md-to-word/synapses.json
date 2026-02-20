@@ -35,6 +35,12 @@
             "type": "enables",
             "strength": 0.8,
             "reason": "Enables professional document distribution to stakeholders"
+        },
+        {
+            "target": ".github/skills/writing-publication/SKILL.md",
+            "type": "depends-on",
+            "strength": 0.85,
+            "reason": "Research documents must follow Word-Compatible Research Writing Style before conversion"
         }
     ],
     "when": [
@@ -43,7 +49,8 @@
         "User needs stakeholder-ready documentation",
         "Markdown has Mermaid diagrams needing export",
         "User wants professional formatted output",
-        "Preparing documents for executive review"
+        "Preparing documents for executive review",
+        "User wants PDF output from a research document (workflow: Word then Save As PDF)"
     ],
     "yields": [
         "Professional .docx document",
