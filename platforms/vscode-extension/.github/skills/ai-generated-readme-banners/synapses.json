@@ -56,12 +56,27 @@
         "visual branding",
         "banner generation",
         "replicate api",
+        "replicate",
         "3:1 aspect ratio",
         "layout variations",
         "audience targeting",
         "professional banner",
         "rocket banner",
-        "brand colors"
+        "brand colors",
+        "generate banner",
+        "create banner",
+        "make banner",
+        "header image",
+        "hero image",
+        "cover image",
+        "social banner",
+        "twitter banner",
+        "linkedin banner",
+        "og image",
+        "open graph",
+        "flux banner",
+        "ai banner",
+        "generate header"
     ],
     "when": {
         "userIntent": [

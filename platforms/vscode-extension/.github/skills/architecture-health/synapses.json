@@ -22,6 +22,18 @@
     "broken connections",
     "dream"
   ],
+  "activationBoost": [
+    "synapse health", "architecture check", "validation",
+    "broken connections", "dream", "health check",
+    "architecture health", "cognitive health", "brain health",
+    "synapse validation", "connection validation", "link validation",
+    "orphan files", "dead links", "broken synapses",
+    "network health", "skill health", "memory health",
+    "diagnostic", "health report", "status check",
+    "is my architecture healthy", "check health",
+    "validate architecture", "architecture audit",
+    "fix broken", "repair connections", "integrity check"
+  ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

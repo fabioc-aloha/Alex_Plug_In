@@ -37,6 +37,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dream triggers** — Added 'dream', 'dreaming', 'neural maintenance', 'unconscious processing' to `COGNITIVE_STATE_TRIGGERS`
 - **COGNITIVE_STATE_MAP** — Added 'dream' → 'STATE-DREAM.png' mapping
 
+#### Chat Participant Dynamic Avatar
+
+- **`@alex` icon now dynamic** — Chat participant `iconPath` updates in real-time based on cognitive state, agent mode, and persona
+- **`chatAvatarBridge.ts` enhanced** — Interface expanded to accept full `ChatAvatarContext` with agentMode, cognitiveState, personaId, birthday
+- **`updateChatAvatar()` enabled** — Previously backlogged function now active; uses `resolveAvatar()` for consistent priority resolution
+- **API confirmation** — VS Code `ChatParticipant.iconPath` is writable (not readonly), enabling runtime updates
+
 ### Fixed
 
 - **Meditate command avatar** — `/meditate` prompt now correctly triggers meditation avatar state via `alex.setCognitiveState`

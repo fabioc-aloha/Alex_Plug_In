@@ -214,11 +214,20 @@ Add `avatarFile` to each `buildPersona()` call.
 2. Wire into Health Dashboard
 3. Wire into self-actualization output
 
-### Phase 5: Chat Avatar (Research Needed)
+### Phase 5: Chat Avatar ✅ COMPLETE (v5.9.1)
 
-1. Investigate VS Code chat participant `iconPath` dynamic update capability
-2. If static only → use Alex-21 as permanent avatar
-3. If dynamic → update based on persona on each detection cycle
+**Research Result**: VS Code `ChatParticipant.iconPath` IS writable (not readonly). Dynamic updates work.
+
+**Implementation** (2026-02-20):
+1. Enhanced `chatAvatarBridge.ts` with `ChatAvatarContext` interface
+2. Enabled `updateChatAvatar()` in `participant.ts` — uses `resolveAvatar()` for unified priority resolution
+3. `setCognitiveState()` and `setAgentMode()` now propagate to chat participant icon
+4. Priority chain: Agent Mode > Cognitive State > Persona > Age > Default
+
+**Files Modified**:
+- `src/shared/chatAvatarBridge.ts` — context-based interface
+- `src/chat/participant.ts` — enabled dynamic avatar updates
+- `src/views/welcomeView.ts` — broadcasts context on state changes
 
 ---
 
@@ -246,15 +255,15 @@ Add `avatarFile` to each `buildPersona()` call.
 
 ## Priority Order
 
-| #   | Feature                          | Impact   | Effort  | Priority |
-| --- | -------------------------------- | -------- | ------- | -------- |
-| 1   | Persona avatar in welcome header | High     | Low     | **P0**   |
-| 2   | Rocket tagline bar               | High     | Low     | **P0**   |
-| 3   | Thumbnail asset pipeline         | Required | Medium  | **P0**   |
-| 4   | Architecture age calculation     | Medium   | Medium  | **P1**   |
-| 5   | Chat participant avatar          | Medium   | Low-Med | **P1**   |
-| 6   | Self-actualization age reveal    | Low-Med  | Low     | **P2**   |
-| 7   | Easter eggs                      | Low      | Low     | **P3**   |
+| #   | Feature                          | Impact   | Effort  | Priority | Status |
+| --- | -------------------------------- | -------- | ------- | -------- | ------ |
+| 1   | Persona avatar in welcome header | High     | Low     | **P0**   | ✅ Done |
+| 2   | Rocket tagline bar               | High     | Low     | **P0**   | ✅ Done |
+| 3   | Thumbnail asset pipeline         | Required | Medium  | **P0**   | ✅ Done |
+| 4   | Architecture age calculation     | Medium   | Medium  | **P1**   | 🔄 Partial |
+| 5   | Chat participant avatar          | Medium   | Low-Med | **P1**   | ✅ Done (v5.9.1) |
+| 6   | Self-actualization age reveal    | Low-Med  | Low     | **P2**   | |
+| 7   | Easter eggs                      | Low      | Low     | **P3**   | ✅ Done |
 
 ---
 

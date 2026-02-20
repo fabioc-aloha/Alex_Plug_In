@@ -14,7 +14,8 @@ import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_AVATAR } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
-import { registerAvatarUpdater } from '../shared/chatAvatarBridge';
+import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBridge';
+import { resolveAvatar, getAvatarFullPath } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 
 // ============================================================================
@@ -2347,42 +2348,67 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
 
 /**
  * Module-level reference to the chat participant.
- * Dynamic avatar functionality moved to backlog — using static rocket icon for simplicity.
+ * v5.9.1: Dynamic avatar functionality enabled — updates based on cognitive state and persona.
  */
 let _alexParticipant: vscode.ChatParticipant | null = null;
 let _extensionUri: vscode.Uri | null = null;
 
 /**
- * Update the @alex chat participant icon to match the detected persona.
- * BACKLOG: Dynamic avatar feature deferred. Keeping static rocket icon.
- * This function is preserved for future enhancement but currently unused.
+ * Update the @alex chat participant icon based on context.
+ * Uses resolveAvatar for consistent priority resolution:
+ * agentMode > cognitiveState > persona > age > default
+ * 
+ * v5.9.1: Dynamic avatar feature enabled.
  */
-export function updateChatAvatar(personaId?: string): void {
-    // BACKLOG: Dynamic persona avatar feature deferred
-    // Currently using static rocket icon (set in registerChatParticipant)
-    return;
+export function updateChatAvatar(context?: ChatAvatarContext): void {
+    if (!_alexParticipant || !_extensionUri) {
+        console.log('[Alex][Avatar] Participant not registered yet, skipping avatar update');
+        return;
+    }
+
+    // Build context for avatar resolution
+    const avatarContext = {
+        agentMode: context?.agentMode ?? null,
+        cognitiveState: context?.cognitiveState ?? null,
+        personaId: context?.personaId ?? null,
+        birthday: context?.birthday ?? null,
+    };
+
+    // Resolve the best avatar for current context
+    const result = resolveAvatar(avatarContext);
     
-    // Original implementation preserved for future reference:
-    // if (!_alexParticipant || !_extensionUri) { return; }
-    // const avatarBase = personaId ? getAvatarForPersona(personaId) : DEFAULT_AVATAR;
-    // _alexParticipant.iconPath = vscode.Uri.joinPath(_extensionUri, 'assets', 'avatars', `${avatarBase}.webp`);
+    // Build full path to avatar image
+    const avatarPath = vscode.Uri.joinPath(
+        _extensionUri, 
+        'assets', 
+        'avatars', 
+        `${result.path}.png`
+    );
+
+    // Update the chat participant icon
+    _alexParticipant.iconPath = avatarPath;
+    
+    console.log(`[Alex][Avatar] Updated to ${result.filename} (source: ${result.source}${result.label ? `, ${result.label}` : ''})`);
 }
 
 /**
- * Register the Alex chat participant with static rocket icon
+ * Register the Alex chat participant with dynamic avatar support.
+ * v5.9.1: Avatar updates based on cognitive state, agent mode, and persona.
  */
 export function registerChatParticipant(context: vscode.ExtensionContext): vscode.ChatParticipant {
     const alex = vscode.chat.createChatParticipant('alex.cognitive', alexChatHandler);
     
-    // Store references (preserved for potential future dynamic avatar feature)
+    // Store references for dynamic avatar updates
     _alexParticipant = alex;
     _extensionUri = context.extensionUri;
     
-    // Register avatar updater with the bridge (function preserved but unused)
+    // Register avatar updater with the bridge
     registerAvatarUpdater(updateChatAvatar);
     
-    // Static logo — matches welcome view header
-    alex.iconPath = vscode.Uri.joinPath(context.extensionUri, 'assets', 'logo.svg');
+    // Initial avatar — will be updated by welcomeView on persona detection
+    // Start with default (Alex-21) which resolveAvatar returns when no context
+    updateChatAvatar({});
+    
     alex.followupProvider = alexFollowupProvider;
     
     // Handle feedback for telemetry

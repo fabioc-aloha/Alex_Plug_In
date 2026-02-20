@@ -38,7 +38,7 @@ import {
   PremiumAssetSelection,
 } from "../services/premiumAssets";
 import { isOperationInProgress } from "../shared/operationLock";
-import { updateChatAvatar } from "../shared/chatAvatarBridge";
+import { updateChatAvatar, ChatAvatarContext } from "../shared/chatAvatarBridge";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
 
 /**
@@ -63,17 +63,34 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private _extensionUri: vscode.Uri;
   private _cognitiveState: string | null = null;
   private _agentMode: string | null = null;
+  private _currentPersonaId: string | null = null;
+  private _userBirthday: string | null = null;
 
   constructor(extensionUri: vscode.Uri) {
     this._extensionUri = extensionUri;
   }
 
   /**
+   * Build context for chat avatar updates.
+   * Combines current state with cached persona/profile info.
+   */
+  private _buildAvatarContext(): ChatAvatarContext {
+    return {
+      agentMode: this._agentMode,
+      cognitiveState: this._cognitiveState,
+      personaId: this._currentPersonaId,
+      birthday: this._userBirthday,
+    };
+  }
+
+  /**
    * Set the current cognitive state and refresh the view.
+   * v5.9.1: Also updates chat avatar to match cognitive state.
    * @param state - Cognitive state name (meditation, debugging, etc.) or null to clear
    */
   public setCognitiveState(state: string | null): void {
     this._cognitiveState = state;
+    updateChatAvatar(this._buildAvatarContext());
     this.refresh();
   }
 
@@ -86,10 +103,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   /**
    * Set the current agent mode and refresh the view.
+   * v5.9.1: Also updates chat avatar to match agent mode.
    * @param agent - Agent name (Researcher, Builder, Validator, etc.) or null to clear
    */
   public setAgentMode(agent: string | null): void {
     this._agentMode = agent;
+    updateChatAvatar(this._buildAvatarContext());
     this.refresh();
   }
 
@@ -303,10 +322,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
 
+      // Cache user birthday for avatar age fallback
+      this._userBirthday = userProfile?.birthday ?? null;
+
       // Detect persona synchronously (fast heuristic-based detection)
       const personaResult = workspaceFolders
         ? await detectPersona(userProfile ?? undefined, workspaceFolders)
         : null;
+
+      // Cache persona for avatar updates during state changes
+      this._currentPersonaId = personaResult?.persona?.id ?? null;
 
       // Get skill recommendations based on persona and active file
       try {
@@ -322,16 +347,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       }
 
       // Update chat avatar and save persona if detected
-      if (personaResult?.persona && wsRoot) {
+      // v5.9.1: Now uses full context including cognitive state and agent mode
+      if (wsRoot) {
         try {
-          updateChatAvatar(personaResult.persona.id);
-          // Save persona to Active Context
-          await updatePersona(
-            wsRoot,
-            personaResult.persona.name,
-            personaResult.confidence
-          );
-          console.log(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
+          updateChatAvatar(this._buildAvatarContext());
+          // Save persona to Active Context if detected
+          if (personaResult?.persona) {
+            await updatePersona(
+              wsRoot,
+              personaResult.persona.name,
+              personaResult.confidence
+            );
+            console.log(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
+          }
         } catch (avatarErr) {
           console.error("[Alex][WelcomeView] updateChatAvatar/updatePersona failed (non-fatal):", avatarErr);
         }

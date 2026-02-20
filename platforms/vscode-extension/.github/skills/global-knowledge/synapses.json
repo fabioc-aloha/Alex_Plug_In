@@ -22,12 +22,6 @@
       "reason": "Prior knowledge speeds learning"
     },
     {
-      "target": "external:Alex-Global-Knowledge/index.json",
-      "type": "stores",
-      "strength": 0.9,
-      "reason": "Primary storage for cross-project patterns and insights"
-    },
-    {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
       "type": "informs",
       "strength": 0.9,
@@ -44,18 +38,6 @@
       "type": "triggers",
       "strength": 0.8,
       "reason": "Auto-promotion during meditation sessions"
-    },
-    {
-      "target": "external:Alex-Global-Knowledge/insights/GI-gk-index-schema-drift-detection-2026-02-10.md",
-      "type": "validates",
-      "strength": 0.85,
-      "reason": "Schema integrity checks for index entries"
-    },
-    {
-      "target": "external:Alex-Global-Knowledge/skills/skill-registry.json",
-      "type": "distributes",
-      "strength": 0.9,
-      "reason": "Wishlist tracking and skill distribution to heirs"
     }
   ],
   "triggers": [
@@ -68,6 +50,48 @@
     "promotion",
     "promote",
     "candidate"
+  ],
+  "activationBoost": [
+    "knowledge",
+    "insight",
+    "pattern",
+    "cross-project",
+    "global",
+    "reusable",
+    "promotion",
+    "promote",
+    "candidate",
+    "global knowledge",
+    "cross-project knowledge",
+    "shared knowledge",
+    "knowledge base",
+    "knowledge repository",
+    "knowledge index",
+    "save insight",
+    "capture pattern",
+    "store knowledge",
+    "promote to global",
+    "share across projects",
+    "reusable pattern",
+    "GK-",
+    "GI-",
+    "knowledge search",
+    "search knowledge",
+    "find pattern",
+    "lookup insight",
+    "knowledge query",
+    "knowledge sync",
+    "sync knowledge",
+    "knowledge status",
+    "Alex-Global-Knowledge",
+    "global repo",
+    "knowledge repo",
+    "what patterns exist",
+    "existing patterns",
+    "prior art",
+    "cross-project learning",
+    "organizational knowledge",
+    "team knowledge"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

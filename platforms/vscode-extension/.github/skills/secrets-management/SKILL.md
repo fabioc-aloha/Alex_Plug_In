@@ -436,4 +436,3 @@ if (Test-Path .env) {
 - [VS Code SecretStorage API](https://code.visualstudio.com/api/references/vscode-api#SecretStorage)
 - [VS Code Extension Samples - SecretStorage](https://github.com/microsoft/vscode-extension-samples/tree/main/secrets-sample)
 - [Keytar (deprecated, replaced by SecretStorage)](https://github.com/atom/node-keytar)
-

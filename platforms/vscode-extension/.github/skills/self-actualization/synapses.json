@@ -33,6 +33,20 @@
     "comprehensive assessment",
     "architecture review"
   ],
+  "activationBoost": [
+    "self-actualize", "self actualize", "self-actualization",
+    "deep meditation", "comprehensive assessment", "architecture review",
+    "full system scan", "architecture health", "deep assessment",
+    "cognitive health", "brain health", "synapse health",
+    "memory balance", "knowledge gaps", "skill coverage",
+    "growth assessment", "maturity check", "capability audit",
+    "how healthy is my architecture", "architecture check",
+    "comprehensive review", "deep dive review", "full analysis",
+    "system health", "cognitive audit", "brain audit",
+    "skill inventory", "knowledge inventory", "trifecta coverage",
+    "architecture optimization", "performance assessment",
+    "growth metrics", "learning progress", "capability growth"
+  ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

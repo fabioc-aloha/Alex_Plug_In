@@ -69,5 +69,21 @@
             ".github/muscles/md-to-word.py"
         ],
         "install": "winget install pandoc; npm i -g @mermaid-js/mermaid-cli; pip install python-docx"
-    }
+    },
+    "triggers": [
+        "convert to word", "export docx", "markdown to word",
+        "create word document", "generate docx", "word export"
+    ],
+    "activationBoost": [
+        "convert to word", "export docx", "markdown to word",
+        "create word document", "generate docx", "word export",
+        "md to word", "md to docx", "markdown export",
+        "word document", "docx", ".docx", "Microsoft Word",
+        "export document", "stakeholder document", "executive report",
+        "professional document", "formatted document",
+        "pandoc", "python-docx", "mermaid to png",
+        "export for sharing", "shareable document",
+        "document generation", "report generation",
+        "convert markdown", "transform markdown"
+    ]
 }

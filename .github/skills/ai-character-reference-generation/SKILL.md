@@ -1,7 +1,25 @@
 ---
 name: "AI Character Reference Generation"
-description: "Generate consistent visual character references across multiple scenarios using Flux 1.1 Pro API with prompt engineering patterns"
-applyTo: "**/*character*,**/*reference*,**/*generate*,**/*replicate*"
+description: "Generate consistent visual character references across multiple scenarios using Flux and nano-banana-pro on Replicate"
+applyTo: "**/*character*,**/*reference*,**/*generate*,**/*replicate*,**/*avatar*,**/*portrait*"
+triggers:
+  - "generate character"
+  - "create character"
+  - "character image"
+  - "generate portrait"
+  - "create portrait"
+  - "generate avatar"
+  - "create avatar"
+  - "generate photo"
+  - "ai portrait"
+  - "ai avatar"
+  - "replicate"
+  - "flux"
+  - "nano-banana"
+  - "face consistency"
+  - "reference face"
+  - "profile picture"
+  - "headshot"
 ---
 
 # AI Character Reference Generation

@@ -59,6 +59,19 @@
     "deep thought",
     "what did we learn"
   ],
+  "activationBoost": [
+    "meditate", "meditation", "reflect", "consolidate",
+    "what did we learn", "session learnings", "knowledge consolidation",
+    "synthesis", "integrate knowledge", "review session",
+    "capture insights", "learning session", "deep thought",
+    "end of session", "wrap up", "summarize learnings",
+    "extract patterns", "save knowledge", "memory update",
+    "cognitive maintenance", "brain maintenance", "neural cleanup",
+    "knowledge persistence", "session notes", "document learnings",
+    "insights from today", "what we discovered", "key takeaways",
+    "consolidate memory", "update memory", "store knowledge",
+    "architecture reflection", "skill reflection", "growth review"
+  ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

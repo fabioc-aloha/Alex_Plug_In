@@ -50,6 +50,18 @@
     "audit",
     "code quality"
   ],
+  "activationBoost": [
+    "review", "code review", "PR", "pull request", "feedback",
+    "approve", "merge", "audit", "code quality", "review this",
+    "review my code", "check my code", "code feedback",
+    "quality check", "pr review", "review PR", "review pull request",
+    "code audit", "security review", "accessibility audit",
+    "look at this code", "is this correct", "code correct",
+    "best practices", "code smell", "refactor suggestion",
+    "improve this code", "code improvement", "suggestions",
+    "nitpick", "blocking feedback", "non-blocking feedback",
+    "approve PR", "request changes", "LGTM"
+  ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

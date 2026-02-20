@@ -46,5 +46,19 @@
         "health check",
         "synapse validation",
         "maintenance"
+    ],
+    "activationBoost": [
+        "dream", "dreaming", "neural maintenance", "brain maintenance",
+        "health check", "synapse validation", "maintenance",
+        "synapse health", "connection health", "network health",
+        "broken connections", "repair synapses", "fix connections",
+        "validate architecture", "check architecture", "architecture health",
+        "unconscious processing", "background maintenance",
+        "auto repair", "automatic maintenance", "self repair",
+        "cognitive cleanup", "brain cleanup", "neural cleanup",
+        "orphan detection", "broken links", "dead connections",
+        "synapse repair", "connection repair", "network repair",
+        "health metrics", "diagnostic scan", "architecture scan",
+        "memory integrity", "knowledge validation", "skill validation"
     ]
 }

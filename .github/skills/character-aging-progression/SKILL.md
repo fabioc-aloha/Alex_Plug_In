@@ -1,7 +1,20 @@
 ---
 name: "Character Aging Progression"
 description: "Generate visually consistent character images across different life stages using nano-banana-pro with age-specific prompts"
-applyTo: "**/*aging*,**/*age-progression*,**/*life-stage*"
+applyTo: "**/*aging*,**/*age-progression*,**/*life-stage*,**/*avatar*"
+triggers:
+  - "age progression"
+  - "aging"
+  - "make me older"
+  - "make me younger"
+  - "age me"
+  - "years old"
+  - "aging trifecta"
+  - "face aging"
+  - "nano-banana"
+  - "life stages"
+  - "generate age"
+  - "create age"
 ---
 
 # Character Aging Progression

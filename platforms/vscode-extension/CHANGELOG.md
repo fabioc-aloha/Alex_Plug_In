@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **Meditate avatar** — `/meditate` now correctly triggers meditation state avatar
+- **Chat participant avatar now dynamic** — `@alex` icon updates in real-time based on `resolveAvatar()` priority chain (previously static `logo.svg`)
 
 ---
 

@@ -35,20 +35,6 @@
       "yields": "Secure token retrieval for Gamma integration"
     },
     {
-      "target": "global-knowledge://patterns/GK-environment-variable-migration-patterns.md",
-      "type": "uses",
-      "strength": 0.85,
-      "when": "migrating from env vars to secure storage",
-      "yields": "Non-destructive migration, backward compatibility patterns"
-    },
-    {
-      "target": "global-knowledge://patterns/GK-async-sync-bridge-patterns.md",
-      "type": "uses",
-      "strength": 0.75,
-      "when": "providing synchronous access to async SecretStorage",
-      "yields": "Cache-based sync access pattern, pre-loading strategy"
-    },
-    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "enables",
       "strength": 0.7,
@@ -72,5 +58,47 @@
     "export secrets",
     "external tool access",
     "PowerShell script secrets"
+  ],
+  "activationBoost": [
+    "API key",
+    "token",
+    "secret",
+    "credential",
+    "password",
+    "SecretStorage",
+    "keychain",
+    "credential manager",
+    "secure storage",
+    "environment variable",
+    ".env file",
+    "token management",
+    "export secrets",
+    "external tool access",
+    "PowerShell script secrets",
+    "store API key",
+    "save token",
+    "manage secrets",
+    "VS Code secrets",
+    "extension secrets",
+    "secure token",
+    "API token",
+    "access token",
+    "bearer token",
+    "PAT",
+    "personal access token",
+    "GitHub token",
+    "Replicate token",
+    "Gamma API key",
+    "Azure credentials",
+    "OAuth secret",
+    "secret rotation",
+    "token refresh",
+    "credential refresh",
+    "env var migration",
+    "secure credential",
+    "token storage",
+    "how to store API key",
+    "where to put token",
+    "secrets in extension"
   ]
 }

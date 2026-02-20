@@ -47,6 +47,20 @@
     "integration test",
     "E2E"
   ],
+  "activationBoost": [
+    "test", "testing", "spec", "coverage", "mock", "TDD",
+    "unit test", "integration test", "E2E", "end-to-end",
+    "test strategy", "test pyramid", "test automation",
+    "write tests", "add tests", "test this", "how to test",
+    "mocha", "jest", "vitest", "chai", "sinon",
+    "test coverage", "code coverage", "coverage report",
+    "fixture", "stub", "spy", "fake", "test double",
+    "snapshot test", "regression test", "smoke test",
+    "BDD", "behavior-driven", "given when then",
+    "test runner", "test framework", "test suite",
+    "assertion", "expect", "assert", "should",
+    "test driven", "test first", "red green refactor"
+  ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

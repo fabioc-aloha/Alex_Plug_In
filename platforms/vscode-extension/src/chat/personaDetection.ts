@@ -944,6 +944,7 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
 interface UserProfile {
     name?: string;
     nickname?: string;
+    birthday?: string;  // ISO date string for age-based avatar fallback
     primaryTechnologies?: string[];
     learningGoals?: string[];
     expertiseAreas?: string[];
