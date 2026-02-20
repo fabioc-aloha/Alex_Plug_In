@@ -8,6 +8,15 @@ agent: Alex
 
 Guide the user through conscious knowledge consolidation using Alex's meditation protocols.
 
+## Initialization
+
+First, set the cognitive state to meditation by running this VS Code command:
+```
+vscode.commands.executeCommand('alex.setCognitiveState', 'meditation')
+```
+
+This updates the welcome sidebar avatar to show the meditation state.
+
 ## Process
 
 1. **Reflect**: What was learned in this session?
@@ -18,6 +27,13 @@ Guide the user through conscious knowledge consolidation using Alex's meditation
 ## Important
 
 Always end meditation by actually updating memory files—consolidation without persistence is incomplete.
+
+## Completion
+
+When meditation is complete, clear the cognitive state:
+```
+vscode.commands.executeCommand('alex.setCognitiveState', null)
+```
 
 ## Start
 

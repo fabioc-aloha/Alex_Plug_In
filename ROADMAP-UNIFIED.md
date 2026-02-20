@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture — Roadmap v5.7-v7.0
 
-**Last Updated**: February 19, 2026
+**Last Updated**: February 20, 2026
 
 > **Phase: Cognitive Enhancement → Multi-Platform Reach → Autonomous Intelligence**
 
@@ -26,8 +26,8 @@ Three platforms. Focused, not scattered.
 
 ### Current State
 
-v5.9.0 is current. Alex now has:
-- **122 Skills** (108 inheritable to heirs) — Comprehensive domain coverage
+v5.9.1 is current. Alex now has:
+- **123 Skills** (109 inheritable to heirs) — Comprehensive domain coverage
 - **22 Complete Trifectas** — 9 added in cognitive sprint (VS Code, M365, cross-domain capabilities) for 17.2% trifecta coverage
 - **Skill Discoverability** — 20 skills enriched with ~3× more activation keywords; skill-activation index now has 90+ entries with natural-language triggers
 - **Staleness Management** — 16 staleness-prone skills tracked with refresh triggers, owners, and validation dates
@@ -37,6 +37,7 @@ v5.9.0 is current. Alex now has:
 - **v3-Identity-First Brain** — copilot-instructions.md restructured: identity → routing → safety
 - **Prompt Pipeline Research** — Full mapping of how VS Code/Copilot injects context into LLM
 - **Visual Identity** — 44 avatar images (age progression + occupation variants) at 256×256px
+- **Dynamic Avatar State System** — Welcome panel avatar responds to cognitive states (9 states including dream), agent modes, active skills with unified priority-chain resolution
 - **Semantic Persona Detection** — Regex-weighted signal architecture replacing flat keyword matching
 - **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
 - **Text-to-Speech** — Multi-language voice synthesis with 35 test cases
@@ -94,7 +95,7 @@ v5.9.0 is current. Alex now has:
 | **v5.8.4** | **Secrets Management**                   | **Security & Credential Management**    | **✅ Shipped (2026-02-19)** |
 | **v5.8.5** | **Cognitive Architecture Enhancement**   | **Skill Intelligence & Maintenance**    | **✅ Shipped (2026-02-19)** |
 | **v5.9.0** | **VS Code API Adoption**                 | **Platform Leverage**                   | **✅ Shipped (2026-02-19)** |
-| v5.9.1     | Platform Quick Wins                 | Platform Leverage            | 📋 Planned                  |
+| v5.9.1     | Platform Quick Wins                 | Platform Leverage            | ✅ In Progress              |
 | v5.9.2     | *hotfix buffer for v5.9.1*          |                              |                             |
 | v5.9.3     | Stabilization + Quality Gates       | Production Maturity          | 📋 Planned                  |
 | v5.9.4     | *hotfix buffer for v5.9.3*          |                              |                             |
@@ -187,7 +188,10 @@ A version is **done** when ALL of the following are true:
 
 | Task | Owner | Effort | Priority | Status | Description |
 | ---- | :---: | :----: | :------: | :----: | ----------- |
-| Alex persona images (Replicate) | Heir | 1d | P0 | 📋 | Generate two image series via `scripts/generate-alex-agent-images.js`. **Series A** (Ideogram v2, 7 images × $0.08 = $0.56): agent mode banners `AGENT-{ALEX,RESEARCHER,BUILDER,VALIDATOR,DOCUMENTARIAN,AZURE,M365}.png` → `alex_docs/alex3/agents/`. **Series B** (FLUX 1.1 Pro, 8 images × $0.04 = $0.32): cognitive state portraits `STATE-{MEDITATION,DEBUGGING,DISCOVERY,PLANNING,TEACHING,BUILDING,REVIEWING,LEARNING}.png` → `alex_docs/alex3/states/`. Total cost ~$0.88. See `alex_docs/alex3/README.md`. |
+| Avatar state system | Heir | 0.5d | P0 | ✅ | Dynamic avatar resolution in WelcomeViewProvider: cognitive state tracking (`_cognitiveState`), agent mode tracking (`_agentMode`), unified `resolveAvatar()` with AvatarContext, priority chain (Agent > State > Skill > Persona > Age > Default), `alex.setCognitiveState` and `alex.setAgentMode` commands |
+| STATE-DREAM.png | Heir | 0.5h | P0 | ✅ | Dream cognitive state image via Replicate nano-banana-pro ($0.03), resized to 768×768, added to COGNITIVE_STATE_MAP and COGNITIVE_STATE_TRIGGERS |
+| Agent mode banners | Heir | 0.5d | P1 | ✅ | Generated 6 agent images: AGENT-{RESEARCHER,BUILDER,VALIDATOR,DOCUMENTARIAN,AZURE,M365}.png via nano-banana-pro. Default Alex agent uses persona images. |
+| Cognitive state images | Heir | 0.5d | P1 | ✅ | All 9 STATE-*.png images generated: meditation, dream, debugging, discovery, planning, teaching, building, reviewing, learning |
 | `chatSkills` contribution point | Heir | 2h | P0 | 📋 | Add `chatSkills` entry to `package.json` so Alex skills are auto-discovered without users configuring `chat.agentSkillsLocations`. Each `SKILL.md` needs `name:` frontmatter matching its directory. |
 | Multiple model fallback in agents | Heir | 2h | P0 | 📋 | Add `model: ['Claude Sonnet 4.6 (copilot)', 'GPT-5 (copilot)']` fallback lists to all agent definitions. Resilience when a preferred model is unavailable. |
 | Agent frontmatter audit | Heir | 1d | P1 | 📋 | Apply `user-invokable`, `disable-model-invocation`, `agents` frontmatter to all `.agent.md` files. Internal sub-specialists → `user-invokable: false`; Alex orchestrator → `agents: ['Researcher','Builder','Validator','Documentarian','Azure','M365']`; pure subagents → `disable-model-invocation: true`. |
@@ -458,9 +462,9 @@ Team knowledge mesh + expertise routing + privacy-preserving learning
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 5.9.0                               |
-| **Current Heirs**          | VS Code (5.9.0), M365 (5.9.0)      |
-| **Next Target**            | 5.9.1 — Stabilization + Polish                          |
+| **Current Master Version** | 5.9.1                               |
+| **Current Heirs**          | VS Code (5.9.1), M365 (5.9.0)      |
+| **Next Target**            | 5.9.2 — Stabilization + Polish                          |
 | **Updated**                | 2026-02-19                          |
 | **Archived From**          | ROADMAP-UNIFIED.md (v3.5-5.3)      |
 

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.1] - 2026-02-20
+
+> **Dynamic Avatar State System** — Welcome panel avatar responds to cognitive states, agent modes, and active skills
+
+### Added
+
+- **Cognitive state tracking** — `_cognitiveState` field in WelcomeViewProvider; avatar updates on meditation, dream, debugging, etc.
+- **Agent mode tracking** — `_agentMode` field; avatar switches for Researcher, Builder, Validator, Documentarian, Azure, M365
+- **`alex.setCognitiveState` command** — Programmatic state changes from prompts/hooks
+- **`alex.setAgentMode` command** — Agent mode changes for subagent workflows
+- **Unified `resolveAvatar()` with AvatarContext** — Priority chain: Agent Mode > Cognitive State > Active Skill > Persona > Age > Default
+- **STATE-DREAM.png** — New cognitive state image (768×768, Replicate nano-banana-pro)
+- **Dream triggers** — 'dream', 'dreaming', 'neural maintenance' added to COGNITIVE_STATE_TRIGGERS
+
+### Fixed
+
+- **Meditate avatar** — `/meditate` now correctly triggers meditation state avatar
+
+---
+
 ## [5.9.0] - 2026-02-19
 
 > **VS Code API Adoption** — Agent hooks, Copilot Memory, subagents, Plan Agent, and brain-qa infrastructure hardening

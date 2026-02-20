@@ -2,8 +2,8 @@
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.1.0",
     "skill": "ai-character-reference-generation",
-    "version": "1.0.0",
-    "lastValidated": "2026-02-15",
+    "version": "1.1.0",
+    "lastValidated": "2026-02-20",
     "inheritance": "inheritable",
     "connections": [
         {
@@ -22,7 +22,7 @@
     "apiKeys": [
         {
             "envVar": "REPLICATE_API_TOKEN",
-            "purpose": "Runs Flux/Ideogram models on Replicate for character image generation",
+            "purpose": "Runs Flux/nano-banana/Ideogram models on Replicate for character image generation",
             "required": true,
             "getUrl": "https://replicate.com/account/api-tokens"
         }
@@ -36,7 +36,10 @@
         "prompt engineering",
         "visual reference",
         "illustration",
-        "character design"
+        "character design",
+        "nano-banana",
+        "face consistency",
+        "avatar generation"
     ],
     "when": {
         "userIntent": [

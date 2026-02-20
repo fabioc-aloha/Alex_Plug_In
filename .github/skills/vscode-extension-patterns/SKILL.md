@@ -268,6 +268,39 @@ code --install-extension path/to/extension.vsix --force
 
 **Best practice**: Always test production builds before releasing — minification can expose issues (TDZ violations, missing imports) that don't appear in development.
 
+## Asset Optimization for Extension Size
+
+**Problem**: Large image assets dominate extension package size. Avatar/icon images generated at 2048×2048 can bloat extensions to 500+ MB.
+
+**Solution**: Resize images to display-appropriate dimensions:
+
+| Display Context | Recommended Size | Rationale |
+|-----------------|------------------|-----------|
+| Sidebar views | 768×768 | 300px display × 2 (retina) + headroom |
+| Status bar icons | 32×32 | 16px display × 2 (retina) |
+| Activity bar | 48×48 | 24px display × 2 (retina) |
+| Marketplace icon | 256×256 | 128px min + retina |
+
+**Bulk resize with sharp**:
+
+```javascript
+const sharp = require('sharp');
+const fs = require('fs');
+
+async function optimizeImages(dir, targetSize = 768) {
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.png'));
+    for (const file of files) {
+        const buffer = await sharp(`${dir}/${file}`)
+            .resize(targetSize, targetSize, { fit: 'cover' })
+            .png({ compressionLevel: 9 })
+            .toBuffer();
+        fs.writeFileSync(`${dir}/${file}`, buffer);
+    }
+}
+```
+
+**Real impact**: Alex extension 553 MB → 33 MB (94% reduction) by resizing avatars from 2048×2048 to 768×768.
+
 ## Goals with Streak Tracking
 
 ```typescript
@@ -329,6 +362,7 @@ function getToken(): string | null {
 - Cache at module level for sync access
 - Migrate existing settings tokens on first run
 - Mark old setting as deprecated in package.json
+- **External tool access**: SecretStorage is inaccessible to CLI/scripts — provide export-to-.env command for bridging (see `secrets-management` skill)
 
 ## Webview CSP Security
 

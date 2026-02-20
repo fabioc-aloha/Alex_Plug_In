@@ -2,8 +2,8 @@
     "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.1.0",
     "skill": "secrets-management",
-    "version": "1.1.0",
-    "lastValidated": "2026-02-19",
+    "version": "1.2.0",
+    "lastValidated": "2026-02-20",
     "inheritance": "inheritable",
     "connections": [
         {
@@ -47,6 +47,13 @@
             "strength": 0.75,
             "when": "providing synchronous access to async SecretStorage",
             "yields": "Cache-based sync access pattern, pre-loading strategy"
+        },
+        {
+            "target": ".github/skills/brain-qa/SKILL.md",
+            "type": "enables",
+            "strength": 0.7,
+            "when": "brain-qa.ps1 requires API tokens for skill validation",
+            "yields": "Exported .env file with REPLICATE_API_TOKEN for script access"
         }
     ],
     "triggers": [
@@ -61,6 +68,9 @@
         "secure storage",
         "environment variable migration",
         ".env file",
-        "token management"
+        "token management",
+        "export secrets",
+        "external tool access",
+        "PowerShell script secrets"
     ]
 }

@@ -846,6 +846,21 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     },
   );
 
+  // Export Secrets to .env command
+  const exportSecretsDisposable = vscode.commands.registerCommand(
+    "alex.exportSecretsToEnv",
+    async () => {
+      const endLog = telemetry.logTimed("command", "export_secrets_to_env");
+      try {
+        const { showExportSecretsUI } = await import("./services/secretsManager");
+        await showExportSecretsUI();
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+      }
+    },
+  );
+
   // Run Project Audit command
   const runAuditDisposable = vscode.commands.registerCommand(
     "alex.runAudit",
@@ -3049,6 +3064,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(setupEnvDisposable);
   context.subscriptions.push(manageSecretsDisposable);
   context.subscriptions.push(detectEnvSecretsDisposable);
+  context.subscriptions.push(exportSecretsDisposable);
   context.subscriptions.push(runAuditDisposable);
   context.subscriptions.push(viewTelemetryDisposable);
   context.subscriptions.push(releasePreflightDisposable);

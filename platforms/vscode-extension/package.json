@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -40,6 +40,14 @@
     "Machine Learning",
     "Education"
   ],
+  "pricing": "Free",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Core commands available; architecture initialization requires workspace trust"
+    },
+    "virtualWorkspaces": true
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -175,6 +183,16 @@
         "command": "alex.refreshWelcomeView",
         "title": "Alex: Refresh Welcome View",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "alex.setCognitiveState",
+        "title": "Alex: Set Cognitive State",
+        "icon": "$(symbol-color)"
+      },
+      {
+        "command": "alex.setAgentMode",
+        "title": "Alex: Set Agent Mode",
+        "icon": "$(person)"
       },
       {
         "command": "alex.createGoal",
@@ -351,6 +369,11 @@
         "command": "alex.detectEnvSecrets",
         "title": "Alex: Detect & Migrate .env Secrets",
         "icon": "$(search)"
+      },
+      {
+        "command": "alex.exportSecretsToEnv",
+        "title": "Alex: Export Secrets to .env",
+        "icon": "$(export)"
       },
       {
         "command": "alex.viewBetaTelemetry",

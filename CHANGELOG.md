@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.1] - 2026-02-20
+
+> **Dynamic Avatar State System** — Welcome panel avatar now responds to cognitive states, agent modes, active skills, and user personas with unified priority-chain resolution
+
+### Added
+
+#### Avatar State Tracking
+
+- **Cognitive state tracking** — `WelcomeViewProvider` now tracks `_cognitiveState` and refreshes avatar on state changes (meditation, dream, debugging, discovery, planning, teaching, building, reviewing, learning)
+- **Agent mode tracking** — `_agentMode` field triggers avatar switch when entering specialist agent modes (Researcher, Builder, Validator, Documentarian, Azure, M365)
+- **`alex.setCognitiveState` command** — Programmatic cognitive state changes from prompts and hooks
+- **`alex.setAgentMode` command** — Programmatic agent mode changes for subagent workflows
+
+#### Unified Avatar Resolution
+
+- **`resolveAvatar()` with AvatarContext** — Single function handles all avatar resolution with priority chain:
+  1. Agent Mode → `AGENT-{mode}.png`
+  2. Cognitive State → `STATE-{state}.png`
+  3. Active Skill (from trifectas) → skill-triggered persona
+  4. Persona ID → `Alex-{persona}.png`
+  5. Age Fallback → `Alex-{age}.png` from user birthday
+  6. Default → `Alex-21.png`
+- **AvatarContext interface** — Unified context object: `{ agentMode?, cognitiveState?, activeSkill?, personaId?, birthday? }`
+
+#### STATE-DREAM.png
+
+- **Dream state image** — Generated via Replicate nano-banana-pro ($0.03), resized to 768×768
+- **Dream triggers** — Added 'dream', 'dreaming', 'neural maintenance', 'unconscious processing' to `COGNITIVE_STATE_TRIGGERS`
+- **COGNITIVE_STATE_MAP** — Added 'dream' → 'STATE-DREAM.png' mapping
+
+### Fixed
+
+- **Meditate command avatar** — `/meditate` prompt now correctly triggers meditation avatar state via `alex.setCognitiveState`
+- **10 out-of-sync synapses** — brain-qa `-Fix` flag synced: brain-qa, brand-asset-management, documentation-quality-assurance, global-knowledge, m365-agent-debugging, persona-detection, release-process, secrets-management, security-review, vscode-extension-patterns
+
+### Notes
+
+- Avatar state system is internal to WelcomeViewProvider — no external API changes
+- Cognitive states are session-scoped; cleared on window reload
+- Completes partial delivery of v5.9.1 roadmap "Alex persona images" P0 task (cognitive state portraits)
+
+---
+
 ## [5.9.0] - 2026-02-19
 
 > **VS Code API Adoption + Brain-QA Infrastructure** — Free platform leverage via 1.109 agent hooks, Copilot Memory, subagents, and Plan Agent; plus API key observability and synapse sync hardening

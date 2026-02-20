@@ -9,7 +9,7 @@
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "implements",
-      "strength": 1,
+      "strength": 1.0,
       "when": "Starting any release workflow",
       "yields": "Complete release procedures and checklists"
     },
@@ -26,6 +26,13 @@
       "strength": 0.7,
       "when": "Packaging extension for release",
       "yields": "Extension-specific release considerations"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "coordinates",
+      "strength": 0.9,
+      "when": "Preparing release package",
+      "yields": "Heir sync validation steps"
     },
     {
       "target": ".github/skills/teams-app-patterns/SKILL.md",

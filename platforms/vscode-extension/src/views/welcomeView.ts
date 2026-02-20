@@ -19,9 +19,7 @@ import {
 } from "../chat/personaDetection";
 import {
   resolveAvatar,
-  getAgeAvatar,
   AvatarContext,
-  AvatarResult,
 } from "../chat/avatarMappings";
 import {
   readActiveContext,
@@ -63,9 +61,43 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   private _view?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
+  private _cognitiveState: string | null = null;
+  private _agentMode: string | null = null;
 
   constructor(extensionUri: vscode.Uri) {
     this._extensionUri = extensionUri;
+  }
+
+  /**
+   * Set the current cognitive state and refresh the view.
+   * @param state - Cognitive state name (meditation, debugging, etc.) or null to clear
+   */
+  public setCognitiveState(state: string | null): void {
+    this._cognitiveState = state;
+    this.refresh();
+  }
+
+  /**
+   * Get the current cognitive state.
+   */
+  public getCognitiveState(): string | null {
+    return this._cognitiveState;
+  }
+
+  /**
+   * Set the current agent mode and refresh the view.
+   * @param agent - Agent name (Researcher, Builder, Validator, etc.) or null to clear
+   */
+  public setAgentMode(agent: string | null): void {
+    this._agentMode = agent;
+    this.refresh();
+  }
+
+  /**
+   * Get the current agent mode.
+   */
+  public getAgentMode(): string | null {
+    return this._agentMode;
   }
 
   public resolveWebviewView(
@@ -131,7 +163,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         searchRelatedKnowledge: "alex.searchRelatedKnowledge",
         skillReview: "alex.skillReview",
         workingWithAlex: "alex.workingWithAlex",
-        meditate: "workbench.panel.chat.view.copilot.focus", // Could auto-type @alex /meditate
+        // meditate handled as special case below to set cognitive state
       };
 
       // External URL map
@@ -169,6 +201,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           await openChatPanel(prompt);
           break;
         }
+        case "meditate":
+          // Set cognitive state to meditation and open chat panel
+          console.log('[Alex] Entering meditation state');
+          this.setCognitiveState('meditation');
+          vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+          break;
         case "refresh":
           this.refresh();
           break;
@@ -517,7 +555,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="error">
         <p>Failed to load Alex status</p>
-        <p style="font-size: 17px; opacity: 0.7;">${errorMessage}</p>
+        <p style="font-size: var(--font-xs); opacity: 0.7;">${errorMessage}</p>
         <button data-cmd="refresh">Retry</button>
     </div>
     <script nonce="${nonce}">
@@ -577,36 +615,48 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Persona display
     const persona = personaResult?.persona;
 
-    // Avatar URIs — v5.9.1 Enhanced with age fallback
-    // Priority: Easter egg > Persona > Age-based > Default (Alex-21)
+    // Focus Trifectas from Active Context - parse early for avatar resolution
+    const rawTrifectas = activeContext?.focusTrifectas;
+    const hasLiveTrifectas =
+      rawTrifectas &&
+      !rawTrifectas.includes("*(") &&
+      rawTrifectas.trim().length > 0;
+    const trifectaIds = hasLiveTrifectas
+      ? rawTrifectas!
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      : []; // Empty when no live trifectas (user hasn't started working yet)
+
+    // Avatar URIs — v5.9.2 Enhanced with unified resolveAvatar() 
+    // Priority: Easter egg > Agent > Cognitive State > Skill State > Skill Persona > Persona > Age > Default
     // Uses organized subdirectories: personas/, ages/, agents/, states/
     const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
     const easterEgg: EasterEgg | null =
       getEasterEggOverride(workspaceFolderName);
     
-    // Get avatar path with age-based fallback from user profile
+    // Build avatar context for unified resolution
+    const avatarContext: AvatarContext = {
+      agentMode: this._agentMode,
+      cognitiveState: this._cognitiveState,
+      activeSkill: trifectaIds.length > 0 ? trifectaIds[0] : null,
+      personaId: persona?.id || null,
+      birthday: userProfile?.birthday || null,
+    };
+    
+    // Resolve avatar using unified priority chain
     let avatarPath: string;
     let avatarSource: string = 'default';
     
     if (easterEgg) {
-      // Easter eggs use legacy flat structure
+      // Easter eggs use legacy flat structure (bypass unified resolution)
       avatarPath = easterEgg.avatarBase;
       avatarSource = 'easter-egg';
-    } else if (persona) {
-      // Use persona-based avatar from new organized structure
-      avatarPath = getAvatarForPersona(persona.id);
-      avatarSource = 'persona';
-    } else if (userProfile?.birthday) {
-      // No persona detected — use age-based fallback from user profile
-      const ageAvatar = getAgeAvatar(userProfile.birthday);
-      if (ageAvatar) {
-        avatarPath = `ages/${ageAvatar}`;
-        avatarSource = 'age';
-      } else {
-        avatarPath = DEFAULT_AVATAR;
-      }
     } else {
-      avatarPath = DEFAULT_AVATAR;
+      // Use unified avatar resolution for everything else
+      const avatarResult = resolveAvatar(avatarContext);
+      avatarPath = avatarResult.path;
+      avatarSource = avatarResult.source;
     }
     
     const avatarWebpUri = getAssetUri(
@@ -642,19 +692,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         : personaResult?.source === "cached"
           ? "Cached"
           : "Auto";
-
-    // Focus Trifectas from Active Context (live only — no auto-population from persona)
-    const rawTrifectas = activeContext?.focusTrifectas;
-    const hasLiveTrifectas =
-      rawTrifectas &&
-      !rawTrifectas.includes("*(") &&
-      rawTrifectas.trim().length > 0;
-    const trifectaIds = hasLiveTrifectas
-      ? rawTrifectas!
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean)
-      : []; // Empty when no live trifectas (user hasn't started working yet)
 
     // Skill name mapping for display (must be declared before trifectaTagsHtml which references it)
     const skillNameMap: Record<string, string> = {
@@ -1033,12 +1070,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .dot-red::after { content: '✗'; color: white; }
         .status-num {
             font-weight: 600;
-            font-size: 21px;
+            font-size: var(--font-md);
             color: var(--vscode-foreground);
             line-height: 1;
         }
         .status-unit {
-            font-size: 15px;
+            font-size: var(--font-xs);
             color: var(--vscode-descriptionForeground);
             font-weight: normal;
         }
@@ -1055,7 +1092,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             box-shadow: var(--shadow-sm);
         }
         .context-objective {
-            font-size: 15px;
+            font-size: var(--font-sm);
             font-weight: 500;
             margin-bottom: 5px;
             padding: 4px 8px;
@@ -1914,6 +1951,30 @@ export function registerWelcomeView(
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.refreshWelcomeView", () => {
       provider.refresh();
+    }),
+  );
+
+  // Register cognitive state command - allows chat/prompts to change avatar
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.setCognitiveState", (state: string | null) => {
+      provider.setCognitiveState(state);
+      if (state) {
+        console.log(`[Alex] Cognitive state set to: ${state}`);
+      } else {
+        console.log('[Alex] Cognitive state cleared');
+      }
+    }),
+  );
+
+  // Register agent mode command - allows switching to agent-specific avatars
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.setAgentMode", (agent: string | null) => {
+      provider.setAgentMode(agent);
+      if (agent) {
+        console.log(`[Alex] Agent mode set to: ${agent}`);
+      } else {
+        console.log('[Alex] Agent mode cleared');
+      }
     }),
   );
 

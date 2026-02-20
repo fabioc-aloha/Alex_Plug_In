@@ -283,6 +283,17 @@ const COGNITIVE_STATES = [
     lighting: 'warm reading lamp, cozy and focused, inviting atmosphere for deep absorption',
     mood: 'curious, open, absorbing everything, the learner in their natural habitat',
   },
+  {
+    filename: 'STATE-DREAM.png',
+    title: 'Dream',
+    subtitle: 'Neural Maintenance',
+    scenario: 'Deep dream state — unconscious processing, neural maintenance, background consolidation while asleep',
+    attire: 'gray hoodie with flannel peeking through, head tilted to rest on folded arms',
+    pose: 'head resting on folded arms at desk, eyes closed, peaceful sleeping expression, gentle breathing, completely at rest',
+    environment: 'dimly lit workspace at night, monitors in power-save mode with faint glow, soft translucent neural network patterns floating dreamlike above, scattered notes from the day\'s work, moonlight through window',
+    lighting: 'very soft moonlight ambient, faint monitor standby glow, ethereal dreamlike quality with floating connections above',
+    mood: 'peaceful unconscious processing, the mind working while resting, neural pathways strengthening in sleep',
+  },
 ];
 
 function buildPortraitPrompt(state) {

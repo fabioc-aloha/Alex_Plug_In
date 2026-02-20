@@ -197,6 +197,91 @@ export async function migrateSecretsFromEnvironment() {
 
 **Reason**: Env vars might be used by other tools, scripts, or CI/CD pipelines.
 
+## Export Secrets to .env (Reverse Migration)
+
+### The Problem
+
+VS Code SecretStorage is secure but **inaccessible to external tools**:
+- PowerShell scripts (like `brain-qa.ps1`) can't read SecretStorage
+- CLI tools (Replicate, OpenAI) expect environment variables
+- CI/CD pipelines need `.env` files
+
+### The Solution: Bidirectional Flow
+
+```
+┌─────────────────┐      migrate       ┌──────────────────┐
+│   .env file     │  ───────────────►  │  SecretStorage   │
+│  (unencrypted)  │                    │   (encrypted)    │
+│                 │  ◄───────────────  │                  │
+└─────────────────┘      export        └──────────────────┘
+```
+
+### Export Command
+
+**Command**: `alex.exportSecretsToEnv` ("Alex: Export Secrets to .env")
+
+**Behavior**:
+1. Reads all configured secrets from SecretStorage
+2. Writes to `.env` file in workspace root
+3. Adds/updates "Alex Secrets Export" section
+4. Preserves existing `.env` content
+
+### Export Implementation
+
+```typescript
+export async function exportSecretsToEnv(targetFolder?: string): Promise<{ exported: number; filePath: string | null }> {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) return { exported: 0, filePath: null };
+
+    const folder = targetFolder || workspaceFolders[0].uri.fsPath;
+    const envPath = path.join(folder, '.env');
+
+    const lines: string[] = [
+        '# Alex Secrets Export',
+        `# Generated: ${new Date().toISOString()}`,
+        '# WARNING: Keep this file gitignored.',
+        '',
+    ];
+
+    for (const [name, config] of Object.entries(TOKEN_CONFIGS)) {
+        if (!config.envVar) continue;
+        const token = getToken(name as keyof typeof TOKEN_CONFIGS);
+        if (token) {
+            lines.push(`# ${config.displayName}`);
+            lines.push(`${config.envVar}=${token}`);
+            lines.push('');
+        }
+    }
+
+    fs.writeFileSync(envPath, lines.join('\\n'), 'utf8');
+    return { exported: lines.filter(l => l.includes('=')).length, filePath: envPath };
+}
+```
+
+### Workflow for Scripts
+
+1. **First time**: Configure secrets via `alex.manageSecrets`
+2. **Before running scripts**: Export via `alex.exportSecretsToEnv`
+3. **In PowerShell**: Source the .env file:
+
+```powershell
+# Source .env in PowerShell
+Get-Content .env | ForEach-Object {
+    if ($_ -match '^([A-Z_]+)=(.+)$') {
+        [Environment]::SetEnvironmentVariable($Matches[1], $Matches[2], 'Process')
+    }
+}
+```
+
+### Security Considerations
+
+| Aspect | Guidance |
+|--------|----------|
+| **gitignore** | `.env` is already in `.gitignore` |
+| **Scope** | Export creates session-local file |
+| **Cleanup** | Delete `.env` after use if sensitive |
+| **CI/CD** | Use proper CI secrets management instead |
+
 ## .env File Detection & Migration
 
 ### Detection Pattern

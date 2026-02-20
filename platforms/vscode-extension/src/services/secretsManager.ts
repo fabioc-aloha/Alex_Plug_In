@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
 
 /**
  * Centralized secrets management for Alex extension
@@ -222,6 +224,131 @@ export async function clearAllTokens(): Promise<void> {
 }
 
 /**
+ * Export secrets from SecretStorage to .env file
+ * Makes secrets accessible to external scripts and tools
+ * @param targetFolder Optional folder path, defaults to first workspace folder
+ * @returns Object with exported count and file path
+ */
+export async function exportSecretsToEnv(targetFolder?: string): Promise<{ exported: number; filePath: string | null }> {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+        vscode.window.showWarningMessage('No workspace folder open. Cannot export secrets.');
+        return { exported: 0, filePath: null };
+    }
+
+    const folder = targetFolder || workspaceFolders[0].uri.fsPath;
+    const envPath = path.join(folder, '.env');
+
+    // Build .env content from stored secrets
+    const lines: string[] = [
+        '# Alex Secrets Export',
+        `# Generated: ${new Date().toISOString()}`,
+        '# WARNING: This file contains sensitive data. Keep it gitignored.',
+        '',
+    ];
+
+    let exportedCount = 0;
+
+    for (const [name, config] of Object.entries(TOKEN_CONFIGS)) {
+        if (!config.envVar) {
+            continue; // Skip tokens without env var mapping
+        }
+
+        const token = getToken(name as keyof typeof TOKEN_CONFIGS);
+        if (token) {
+            lines.push(`# ${config.displayName}`);
+            lines.push(`${config.envVar}=${token}`);
+            lines.push('');
+            exportedCount++;
+        }
+    }
+
+    if (exportedCount === 0) {
+        vscode.window.showInformationMessage('No secrets to export. Configure API keys first.');
+        return { exported: 0, filePath: null };
+    }
+
+    // Check if .env exists and has content
+    let existingContent = '';
+    try {
+        if (fs.existsSync(envPath)) {
+            existingContent = fs.readFileSync(envPath, 'utf8');
+        }
+    } catch {
+        // File doesn't exist or can't be read, that's fine
+    }
+
+    // If existing .env has Alex export section, replace it; otherwise append
+    const alexSectionMarker = '# Alex Secrets Export';
+    let newContent: string;
+
+    if (existingContent.includes(alexSectionMarker)) {
+        // Replace existing Alex section
+        const beforeAlex = existingContent.split(alexSectionMarker)[0].trimEnd();
+        newContent = beforeAlex + (beforeAlex ? '\n\n' : '') + lines.join('\n');
+    } else if (existingContent.trim()) {
+        // Append to existing content
+        newContent = existingContent.trimEnd() + '\n\n' + lines.join('\n');
+    } else {
+        // New file
+        newContent = lines.join('\n');
+    }
+
+    try {
+        fs.writeFileSync(envPath, newContent, 'utf8');
+        console.log(`[Alex][SecretsManager] Exported ${exportedCount} secrets to ${envPath}`);
+        return { exported: exportedCount, filePath: envPath };
+    } catch (error) {
+        vscode.window.showErrorMessage(`Failed to write .env file: ${error}`);
+        return { exported: 0, filePath: null };
+    }
+}
+
+/**
+ * Show UI for exporting secrets to .env file
+ */
+export async function showExportSecretsUI(): Promise<void> {
+    const statuses = getTokenStatuses();
+    const configuredCount = Object.values(statuses).filter(Boolean).length;
+
+    if (configuredCount === 0) {
+        vscode.window.showInformationMessage(
+            'No secrets configured. Use "Alex: Manage API Keys" to add tokens first.'
+        );
+        return;
+    }
+
+    const confirm = await vscode.window.showWarningMessage(
+        `Export ${configuredCount} secret(s) to .env file?\n\n` +
+        'This makes secrets accessible to scripts and external tools. ' +
+        'Ensure .env is in your .gitignore.',
+        { modal: true },
+        'Export to .env',
+        'Cancel'
+    );
+
+    if (confirm !== 'Export to .env') {
+        return;
+    }
+
+    const result = await exportSecretsToEnv();
+
+    if (result.filePath) {
+        const openFile = await vscode.window.showInformationMessage(
+            `✅ Exported ${result.exported} secret(s) to .env\n\n` +
+            'Scripts can now access these via environment variables.',
+            'Open .env',
+            'OK'
+        );
+
+        if (openFile === 'Open .env') {
+            const doc = await vscode.workspace.openTextDocument(result.filePath);
+            await vscode.window.showTextDocument(doc);
+        }
+    }
+}
+
+/**
  * Prompt user to enter a token
  * @param tokenName Key from TOKEN_CONFIGS
  * @returns True if token was set, false if cancelled
@@ -310,6 +437,13 @@ export async function showTokenManagementPalette(): Promise<void> {
     });
 
     items.push({
+        label: '$(export) Export to .env',
+        description: 'Make secrets available to scripts',
+        detail: 'Write configured secrets to .env file for external tools',
+        tokenName: '__EXPORT__' as any,
+    });
+
+    items.push({
         label: '$(trash) Clear All Tokens',
         description: 'Remove all stored tokens',
         detail: 'Use with caution - this will clear all API keys',
@@ -336,6 +470,11 @@ export async function showTokenManagementPalette(): Promise<void> {
             'Visit these URLs to get your API keys:\n\n' + message,
             { modal: true },
         );
+        return;
+    }
+
+    if (selected.tokenName === '__EXPORT__') {
+        await showExportSecretsUI();
         return;
     }
 

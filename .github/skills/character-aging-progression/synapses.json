@@ -1,0 +1,75 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "character-aging-progression",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-20",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/ai-character-reference-generation/SKILL.md",
+            "type": "extends",
+            "strength": 0.95,
+            "note": "Builds on character reference generation with age-specific prompts"
+        },
+        {
+            "target": ".github/skills/persona-detection/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "note": "Age progression avatars used in persona fallback system"
+        },
+        {
+            "target": ".github/skills/brand-asset-management/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "note": "Age avatars are part of visual brand identity"
+        }
+    ],
+    "apiKeys": [
+        {
+            "envVar": "REPLICATE_API_TOKEN",
+            "purpose": "Runs nano-banana-pro model on Replicate for age-consistent face generation",
+            "required": true,
+            "getUrl": "https://replicate.com/account/api-tokens"
+        }
+    ],
+    "activationBoost": [
+        "age progression",
+        "aging process",
+        "character ages",
+        "life stages",
+        "age avatars",
+        "nano-banana",
+        "birthday fallback",
+        "age-appropriate",
+        "childhood to elderhood",
+        "senior avatar",
+        "child avatar"
+    ],
+    "when": {
+        "userIntent": [
+            "generate age progression images",
+            "create character at different ages",
+            "aging avatar set",
+            "life stage illustrations",
+            "age-based character variants"
+        ],
+        "projectContext": [
+            "visual identity system",
+            "avatar generation",
+            "character design project"
+        ]
+    },
+    "yields": {
+        "artifacts": [
+            "age progression image set (13 images)",
+            "generation report JSON",
+            "age-to-avatar mapping"
+        ],
+        "concepts": [
+            "age-specific prompt engineering",
+            "face consistency across ages",
+            "visual identity preservation"
+        ]
+    }
+}

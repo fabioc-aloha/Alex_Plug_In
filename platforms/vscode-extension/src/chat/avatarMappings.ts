@@ -250,6 +250,7 @@ export function getAgentAvatar(agentName: string): string | null {
  */
 export const COGNITIVE_STATE_MAP: Record<string, string> = {
     'meditation':   'STATE-MEDITATION',
+    'dream':        'STATE-DREAM',
     'debugging':    'STATE-DEBUGGING',
     'discovery':    'STATE-DISCOVERY',
     'planning':     'STATE-PLANNING',
@@ -290,8 +291,11 @@ export const COGNITIVE_STATE_TRIGGERS: Record<string, string[]> = {
         'show how', 'demonstrate', 'walk through'
     ],
     'meditation': [
-        'meditate', 'consolidate', 'reflect', 'neural maintenance',
-        'dream state', 'synapse'
+        'meditate', 'consolidate', 'reflect', 'synapse'
+    ],
+    'dream': [
+        'dream', 'neural maintenance', 'sleep', 'unconscious',
+        'background processing', 'night mode'
     ],
     'discovery': [
         'eureka', 'found it', 'realized', 'breakthrough', 'insight',

@@ -59,6 +59,7 @@ Search this index when processing any task request:
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
 | citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension, @mention, register participant, language model api, lm tool, agent skill vs participant, build copilot participant, create @participant, ai extension, copilot chat extension, llm in extension |
+| character-aging-progression | age progression, aging character, life stages, generate ages, avatar aging, birthday images, age-based avatar |
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
 | coaching-techniques | coach user, mentoring, skill development, learning support, feedback |

@@ -100,6 +100,26 @@ graph TD
     I -->|Cancel| K[Return Null]
 ```
 
+### Bidirectional Secrets Flow
+
+SecretStorage is secure but inaccessible to external tools (CLI, PowerShell scripts, CI/CD). Solution: bidirectional flow.
+
+```mermaid
+graph LR
+    subgraph "Import (Migration)"
+        ENV1[.env file] -->|alex.migrateEnvSecrets| SS1[SecretStorage]
+    end
+    subgraph "Export (External Access)"
+        SS2[SecretStorage] -->|alex.exportSecretsToEnv| ENV2[.env file]
+    end
+    SS1 -.->|Same storage| SS2
+```
+
+| Direction | Command | Use Case |
+|-----------|---------|----------|
+| **Import** | `Alex: Migrate .env to Secrets` | Secure existing plaintext tokens |
+| **Export** | `Alex: Export Secrets to .env` | Enable external tool access |
+
 ### Migration Strategy
 
 | Phase | Action | Safety Measure |
@@ -240,6 +260,7 @@ const envPattern = /^\s*([A-Z_][A-Z0-9_]*)\s*=\s*([^#\n]+)/i;
 
 **User Commands**:
 - `Alex: Detect & Migrate .env Secrets` - Scan workspace for .env files
+- `Alex: Export Secrets to .env` - Write SecretStorage tokens to .env for external tool access
 - Quick action button in Welcome panel - "🔍 Detect .env Secrets"
 
 **Migration UI Flow**:
@@ -263,6 +284,81 @@ After migration, users must update their code:
 - ✅ Prevents accidental commits to version control
 - ✅ Consistent secret management across team
 
+### Export Secrets to .env (External Tool Access)
+
+VS Code SecretStorage is inaccessible to PowerShell scripts, CLI tools, and CI/CD pipelines. The export command bridges this gap.
+
+**Why Export is Needed**:
+- PowerShell scripts (like `brain-qa.ps1`) can't access SecretStorage
+- External tools (Replicate CLI, OpenAI CLI) need env vars or .env
+- CI/CD pipelines require explicit secret injection
+
+**Export Implementation**:
+```typescript
+async function exportSecretsToEnv(): Promise<void> {
+    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+    if (!workspaceFolder) return;
+    
+    const envPath = path.join(workspaceFolder.uri.fsPath, '.env');
+    const secrets: string[] = [];
+    
+    // Collect cached secrets
+    for (const [key, value] of tokenCache.entries()) {
+        if (value) {
+            // Find env var name from config
+            const config = Object.values(TOKEN_CONFIGS)
+                .find(c => c.key === key);
+            if (config?.envVar) {
+                secrets.push(`${config.envVar}=${value}`);
+            }
+        }
+    }
+    
+    if (secrets.length === 0) {
+        vscode.window.showWarningMessage('No secrets to export');
+        return;
+    }
+    
+    // Read existing .env, replace Alex section
+    let content = '';
+    if (fs.existsSync(envPath)) {
+        content = fs.readFileSync(envPath, 'utf-8');
+        // Remove existing Alex section
+        content = content.replace(
+            /\n?# Alex Secrets Export[\s\S]*?(?=\n#|$)/g, ''
+        ).trim();
+    }
+    
+    // Append new section
+    const section = `\n\n# Alex Secrets Export (auto-generated)\n${secrets.join('\n')}`;
+    fs.writeFileSync(envPath, content + section, 'utf-8');
+    
+    vscode.window.showInformationMessage(
+        `Exported ${secrets.length} secret(s) to .env`
+    );
+}
+```
+
+**PowerShell Script Usage**:
+```powershell
+# Source the .env file in PowerShell
+if (Test-Path .env) {
+    Get-Content .env | ForEach-Object {
+        if ($_ -match '^([^#=]+)=(.*)$') {
+            [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim())
+        }
+    }
+}
+
+# Now $env:REPLICATE_API_TOKEN is available
+```
+
+**Security Considerations**:
+- ⚠️ Exported .env contains plaintext secrets — add to `.gitignore`
+- ⚠️ Re-export if tokens change in SecretStorage
+- ✅ Markers identify Alex-managed section for safe updates
+- ✅ Non-destructive — preserves existing .env content
+
 ## Implementation Checklist
 
 ### Service Setup
@@ -282,8 +378,10 @@ After migration, users must update their code:
 ### UI Components
 - [ ] Command: "Manage API Keys & Secrets"
 - [ ] Command: "Detect & Migrate .env Secrets"
+- [ ] Command: "Export Secrets to .env"
 - [ ] Quick pick: List all tokens with status
 - [ ] Quick pick: Review detected .env secrets
+- [ ] Quick pick: Export confirmation with file open option
 - [ ] Input prompt: Individual token entry with validation
 - [ ] Warning template: Feature-specific token missing
 - [ ] Success confirmation: Token saved message
@@ -311,6 +409,8 @@ After migration, users must update their code:
 - "Add API key management for the new service"
 - "Migrate from environment variables to SecretStorage"
 - "Detect secrets in my .env files"
+- "Export my secrets to .env for script access"
+- "How do I access tokens from PowerShell scripts?"
 - "Review this code for credential security issues"
 - "Implement token management UI"
 - "Why isn't my token persisting across sessions?"
@@ -336,4 +436,3 @@ After migration, users must update their code:
 - [VS Code SecretStorage API](https://code.visualstudio.com/api/references/vscode-api#SecretStorage)
 - [VS Code Extension Samples - SecretStorage](https://github.com/microsoft/vscode-extension-samples/tree/main/secrets-sample)
 - [Keytar (deprecated, replaced by SecretStorage)](https://github.com/atom/node-keytar)
-

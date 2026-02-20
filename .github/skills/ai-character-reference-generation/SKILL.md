@@ -12,6 +12,39 @@ applyTo: "**/*character*,**/*reference*,**/*generate*,**/*replicate*"
 
 ---
 
+## Model Selection Guide
+
+### Recommended Models by Use Case
+
+| Use Case | Model | Cost | Notes |
+|----------|-------|------|-------|
+| **Face Consistency (Default)** | `google/nano-banana-pro` | $0.025/image | **Best for maintaining face identity** — uses reference image + prompt. Maintains Alex identity across 90+ avatar images. |
+| **Detailed Scenes** | `black-forest-labs/flux-1.1-pro` | $0.04/image | High-quality scenes without face reference. Good for backgrounds and environments. |
+| **Agent Banners** | `ideogram-ai/ideogram-v2` | $0.08/image | Best for stylized text + character combinations. Prominent branding. |
+| **High Resolution** | `black-forest-labs/flux-1.1-pro-ultra` | $0.06/image | Up to 4MP output. Use when print-quality needed. |
+
+### Face Consistency Pattern (Nano-Banana Pro)
+
+**The Key Insight**: For consistent character faces across multiple poses/scenarios, use a reference face image with nano-banana-pro:
+
+```javascript
+const response = await replicate.run("google/nano-banana-pro", {
+  input: {
+    prompt: `${CHARACTER_DESC}, ${scenario.attire}, ${scenario.pose}, ${STYLE}`,
+    image: await toDataURI("path/to/reference-face.png"),  // Key: face reference
+    aspect_ratio: "1:1",  // Square for avatars
+    output_format: "png"
+  }
+});
+```
+
+**Cost Analysis**:
+- 90 avatar images × $0.025 = $2.25 total (nano-banana)
+- vs 90 × $0.04 = $3.60 (Flux 1.1 Pro)
+- **Savings**: 37.5% while maintaining face consistency
+
+---
+
 ## Summary
 
 Complete workflow for generating consistent visual character references across multiple scenarios using Flux 1.1 Pro API. Validated through 51 successful image generations across 3 character types.
@@ -177,13 +210,27 @@ async function retryWithBackoff(fn, maxRetries = 3) {
 
 ## Cost and Performance
 
-- **Model**: Flux 1.1 Pro
+### Default: Nano-Banana Pro (Face Consistency)
+- **Model**: `google/nano-banana-pro` (recommended)
+- **Cost**: $0.025 per image
+- **Generation Time**: ~15-30 seconds per image
+- **Best For**: Character avatars, portraits, face consistency
+- **Requires**: Reference face image
+
+### Alternative: Flux 1.1 Pro (Scene Flexibility)
+- **Model**: `black-forest-labs/flux-1.1-pro`
 - **Cost**: $0.04 per image
 - **Generation Time**: ~30-60 seconds per image
+- **Best For**: Full scenes, no reference image needed
 - **Aspect Ratio**: 3:4 portrait recommended
 - **Output Format**: PNG at quality 100 for archival
 
-**Economic Viability**: $0.68 per character for 17-scenario reference set
+**Economic Comparison**:
+| Character Set | Nano-Banana | Flux 1.1 Pro |
+|---------------|-------------|--------------|
+| 17 scenarios  | $0.43       | $0.68        |
+| 90 avatars    | $2.25       | $3.60        |
+| Full set (100+)| ~$2.50     | ~$4.00       |
 
 ---
 
