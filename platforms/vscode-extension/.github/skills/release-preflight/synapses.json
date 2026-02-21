@@ -33,6 +33,12 @@
       "type": "coordinates",
       "strength": 0.95,
       "note": "Preflight validates; release-process publishes. Always use together."
+    },
+    {
+      "target": ".github/skills/master-alex-audit/SKILL.md",
+      "type": "supports",
+      "strength": 0.85,
+      "note": "Audit before preflight — catches version drift, branding issues (v5.1.0 lesson)"
     }
   ],
   "activationBoost": [

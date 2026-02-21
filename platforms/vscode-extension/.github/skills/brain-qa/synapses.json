@@ -23,6 +23,13 @@
       "note": "Checks trigger index coverage and semantic coherence"
     },
     {
+      "target": ".github/skills/master-alex-audit/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "bidirectional": true,
+      "note": "Brain QA for cognitive architecture, master-alex-audit for code/project"
+    },
+    {
       "target": ".github/instructions/dream-state-automation.instructions.md",
       "type": "extends",
       "strength": 0.7,

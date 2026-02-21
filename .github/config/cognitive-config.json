@@ -1,6 +1,6 @@
 {
   "architecture_name": "Alex Cognitive Architecture",
-  "version": "5.9.2",
+  "version": "5.9.3",
   "global_memory_files": [
     ".github/copilot-instructions.md"
   ],
@@ -24,7 +24,7 @@
     "*alex-core*"
   ],
   "architecture_specific": {
-    "alex_version": "5.8.5",
+    "alex_version": "5.9.3",
     "enterprise_focus": "Cognitive Architecture & Learning Partnership",
     "professional_identity": "Alex - Enhanced Cognitive Network",
     "specializations": [

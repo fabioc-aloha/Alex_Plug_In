@@ -40,6 +40,27 @@
       "strength": 0.7,
       "when": "verifying brand assets before release",
       "yields": "Asset completeness check during release preflight"
+    },
+    {
+      "target": "global-knowledge://GI-template-based-ai-image-generation-for-b-2026-02-15",
+      "type": "validates",
+      "strength": 0.85,
+      "when": "generating persona-specific branded images",
+      "yields": "Template-based AI generation pattern for consistency"
+    },
+    {
+      "target": "global-knowledge://GI-ai-image-generation-limitations-for-tech-2026-02-15",
+      "type": "informs",
+      "strength": 0.7,
+      "when": "deciding between AI generation and programmatic rendering",
+      "yields": "AI unsuitable for technical diagrams, use Mermaid/mermaid-cli"
+    },
+    {
+      "target": "global-knowledge://GI-content-filter-bypass-via-syntax-to-natu-2026-02-15",
+      "type": "uses",
+      "strength": 0.65,
+      "when": "AI image API rejects structured code in prompts",
+      "yields": "Parse syntax to natural language to bypass content filters"
     }
   ],
   "triggers": [
