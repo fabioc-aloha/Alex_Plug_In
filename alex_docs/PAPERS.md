@@ -24,21 +24,38 @@ All academic papers, research documents, and publication-ready manuscripts have 
 
 ## What's in AlexPapers
 
+### Repository Structure
+
+Papers are organized by topic in dedicated folders:
+
+```
+AlexPapers/
+├── response-agarwal-2026/     # MSR 2027 response + empirical figures
+├── empirical-studies/         # Validation methodology & case study
+├── academic-paper/            # Main manuscript + 14 venue versions
+├── cognitive-debt/            # IEEE Software article
+├── appropriate-reliance/      # FAccT 2027 framework + versions
+├── briefs/                    # Research collaboration briefs
+├── meta/                      # Publication strategy & editorial angles
+├── research/                  # Shared background research
+└── methodology/               # Research methods & protocols
+```
+
 ### Primary Publications
 
 | Document | Status | Target Venue |
 |----------|--------|--------------|
-| [RESPONSE-AI-IDES-VS-AGENTS.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/RESPONSE-AI-IDES-VS-AGENTS.md) | Draft | MSR 2027 |
-| [ACADEMIC-PAPER.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/ACADEMIC-PAPER.md) | Draft | CHI 2027 |
-| [COGNITIVE-DEBT-ARTICLE.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/COGNITIVE-DEBT-ARTICLE.md) | Draft | IEEE Software |
-| [APPROPRIATE-RELIANCE-TECHNICAL-BRIEF.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/APPROPRIATE-RELIANCE-TECHNICAL-BRIEF.md) | Draft | FAccT 2027 |
+| [RESPONSE-AI-IDES-VS-AGENTS.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/response-agarwal-2026/RESPONSE-AI-IDES-VS-AGENTS.md) | Draft | MSR 2027 |
+| [ACADEMIC-PAPER.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/academic-paper/ACADEMIC-PAPER.md) | Draft | CHI 2027 |
+| [COGNITIVE-DEBT-ARTICLE.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/cognitive-debt/COGNITIVE-DEBT-ARTICLE.md) | Draft | IEEE Software |
+| [APPROPRIATE-RELIANCE-TECHNICAL-BRIEF.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/appropriate-reliance/APPROPRIATE-RELIANCE-TECHNICAL-BRIEF.md) | Draft | FAccT 2027 |
 
 ### Empirical Studies
 
 | Document | Purpose |
 |----------|---------|
-| [REPLICATION-GUIDE.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/REPLICATION-GUIDE.md) | Methodology for validating Alex productivity claims using DiD analysis |
-| [CASE-STUDY-DATA.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/CASE-STUDY-DATA.md) | N=1 illustrative case study data collection framework |
+| [REPLICATION-GUIDE.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/empirical-studies/REPLICATION-GUIDE.md) | Methodology for validating Alex productivity claims using DiD analysis |
+| [CASE-STUDY-DATA.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/empirical-studies/CASE-STUDY-DATA.md) | N=1 illustrative case study data collection framework |
 
 ### Research Foundation
 
@@ -46,9 +63,10 @@ All academic papers, research documents, and publication-ready manuscripts have 
 |-----------|----------|
 | [research/](https://github.com/fabioc-aloha/AlexPapers/tree/main/research) | Background research: Siegel neurobiology, learning psychology, competitive analysis, AI methodology |
 | [methodology/](https://github.com/fabioc-aloha/AlexPapers/tree/main/methodology) | Research-first development protocol |
-| [versions/](https://github.com/fabioc-aloha/AlexPapers/tree/main/versions) | 14 venue-specific manuscript adaptations (CHI, CSCW, IEEE, etc.) |
-| [appropriate-reliance/](https://github.com/fabioc-aloha/AlexPapers/tree/main/appropriate-reliance) | 5 versions of appropriate reliance framework |
-| [assets/](https://github.com/fabioc-aloha/AlexPapers/tree/main/assets) | Figures, diagrams, empirical plots |
+| [academic-paper/versions/](https://github.com/fabioc-aloha/AlexPapers/tree/main/academic-paper/versions) | 14 venue-specific manuscript adaptations (CHI, CSCW, IEEE, NeurIPS, etc.) |
+| [appropriate-reliance/](https://github.com/fabioc-aloha/AlexPapers/tree/main/appropriate-reliance) | 5 versions of appropriate reliance framework + supporting PDFs |
+| [briefs/](https://github.com/fabioc-aloha/AlexPapers/tree/main/briefs) | Research collaboration briefs |
+| [meta/](https://github.com/fabioc-aloha/AlexPapers/tree/main/meta) | Publication strategy, target venues, editorial angles |
 
 ---
 
@@ -67,7 +85,7 @@ All academic papers, research documents, and publication-ready manuscripts have 
 - Organizational learning through AI cognitive architectures
 - Knowledge management in AI-human teams
 
-See [PUBLICATION-STRATEGY.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/PUBLICATION-STRATEGY.md) for full roadmap.
+See [PUBLICATION-STRATEGY.md](https://github.com/fabioc-aloha/AlexPapers/blob/main/meta/PUBLICATION-STRATEGY.md) for full roadmap.
 
 ---
 
@@ -99,12 +117,12 @@ If you're conducting research on Alex:
 
 ## Migration History
 
-**Date**: February 21, 2026  
-**Migrated From**: `Alex_Plug_In/article/` → `AlexPapers/`  
-**Reason**: Separate research lifecycle from code development  
+**Date**: February 21, 2026
+**Migrated From**: `Alex_Plug_In/article/` → `AlexPapers/`
+**Reason**: Separate research lifecycle from code development
 **Files Moved**: 54 documents (papers, research, methodology, versions, assets)
 
 ---
 
-**Last Updated**: February 21, 2026  
+**Last Updated**: February 21, 2026
 **Maintained By**: Fabio Correa (@fabioc-aloha)
