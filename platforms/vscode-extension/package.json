@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.9.3",
+  "version": "5.9.8",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -153,6 +153,16 @@
         "command": "alex.generateImageFromSelection",
         "title": "Generate Illustration from Description",
         "icon": "$(file-media)"
+      },
+      {
+        "command": "alex.generateAIImage",
+        "title": "Alex: Generate AI Image",
+        "icon": "$(file-media)"
+      },
+      {
+        "command": "alex.editImageWithPrompt",
+        "title": "Alex: Edit Image with AI",
+        "icon": "$(edit)"
       },
       {
         "command": "alex.knowledgeQuickPick",
@@ -514,7 +524,7 @@
         {
           "submenu": "alex.explorerMenu",
           "group": "alex@1",
-          "when": "resourceExtname =~ /\\.(md|txt|json|ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|yaml|yml|html|css|scss|sh|ps1|xml)$/"
+          "when": "resourceExtname =~ /\\.(md|txt|json|ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql|yaml|yml|html|css|scss|sh|ps1|xml|png|jpg|jpeg|webp|gif)$/"
         }
       ],
       "alex.explorerMenu": [
@@ -610,6 +620,16 @@
           "group": "3_generate@7"
         },
         {
+          "command": "alex.generateAIImage",
+          "group": "3_generate@8",
+          "when": "resourceExtname == '.md' || resourceExtname == '.txt'"
+        },
+        {
+          "command": "alex.editImageWithPrompt",
+          "group": "3_generate@9",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp|gif)$/"
+        },
+        {
           "command": "alex.generateDiagram",
           "group": "3_generate@8",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
@@ -689,12 +709,16 @@
           "group": "4_create@1"
         },
         {
-          "command": "alex.generateDiagram",
+          "command": "alex.generateAIImage",
           "group": "4_create@2"
         },
         {
-          "command": "alex.generatePptx",
+          "command": "alex.generateDiagram",
           "group": "4_create@3"
+        },
+        {
+          "command": "alex.generatePptx",
+          "group": "4_create@4"
         },
         {
           "command": "alex.readAloud",
@@ -2031,9 +2055,10 @@
                 "validator",
                 "documentarian",
                 "azure",
-                "m365"
+                "m365",
+                "persona"
               ],
-              "description": "The cognitive state or agent mode to switch to. Cognitive states: debugging (fixing errors), planning (architecture/design), building (implementing features), reviewing (code review/audit), learning (understanding/exploring), teaching (explaining/mentoring), meditation (reflection/consolidation), dream (neural maintenance), discovery (breakthroughs/insights). Agent modes: builder, researcher, validator, documentarian, azure, m365."
+              "description": "The cognitive state or agent mode to switch to. Cognitive states: debugging (fixing errors), planning (architecture/design), building (implementing features), reviewing (code review/audit), learning (understanding/exploring), teaching (explaining/mentoring), meditation (reflection/consolidation), dream (neural maintenance), discovery (breakthroughs/insights). Agent modes: builder, researcher, validator, documentarian, azure, m365. Special: persona (reset to project-appropriate avatar after protocols)."
             }
           }
         }

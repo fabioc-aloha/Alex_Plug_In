@@ -28,4 +28,4 @@ Guide the Red/Green/Refactor cycle with discipline.
 What feature or behavior would you like to implement using TDD? Let's start with a failing test.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

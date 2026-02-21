@@ -191,6 +191,15 @@ export interface IGlobalKnowledgeEntry {
     modified: string;
     summary: string;
     filePath: string;
+    // v5.9.6: Forgetting Curve — freshness tracking fields (optional, added lazily)
+    /** ISO timestamp of the most recent reference (skill activation, search, or mention) */
+    lastReferenced?: string;
+    /** Cumulative reference count across all interaction types */
+    referenceCount?: number;
+    /** Cached composite freshness score 0.0–1.0 (recomputed on read) */
+    freshnessScore?: number;
+    /** Decay profile — determines how fast this entry fades without use */
+    decayProfile?: 'aggressive' | 'moderate' | 'slow' | 'permanent';
 }
 
 /**

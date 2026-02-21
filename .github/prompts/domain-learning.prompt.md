@@ -50,4 +50,4 @@ Track patterns in learning effectiveness across domains to optimize future knowl
 - [.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Learning effectiveness measurement"
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

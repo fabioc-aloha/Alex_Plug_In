@@ -29,6 +29,8 @@ import { getCurrentSession } from '../commands/session';
 import { getGoalsSummary } from '../commands/goals';
 import { searchGlobalKnowledge } from './globalKnowledge';
 import { loadMoodContext } from './emotionalMemory';
+import { PeripheralContext } from './peripheralVision';
+import { CoverageScore } from './honestUncertainty';
 import { PERSONAS, Persona } from './personaDetection';
 
 // ============================================================================
@@ -43,10 +45,20 @@ export interface PromptContext {
         isFrustrated: boolean;
         isConfused: boolean;
         isExcited: boolean;
+        // Siegel session health (v5.9.3)
+        riverZone?: 'chaos' | 'flow' | 'rigidity';
+        riverWarning?: string;
+        windowZone?: 'hyperarousal' | 'within' | 'hypoarousal';
+        windowAdaptation?: string;
+        isLidFlipped?: boolean;
     };
     model: DetectedModel;
     history: readonly (vscode.ChatRequestTurn | vscode.ChatResponseTurn)[];
     request: vscode.ChatRequest;
+    /** v5.9.4: Peripheral Vision — workspace + peer project ambient context */
+    peripheral?: PeripheralContext;
+    /** v5.9.5: Honest Uncertainty — knowledge coverage score for the current query */
+    coverage?: CoverageScore;
 }
 
 // ============================================================================
@@ -66,9 +78,11 @@ export async function buildAlexSystemPrompt(ctx: PromptContext): Promise<string>
         buildUserProfileLayer(ctx),        // Layer 4: Personalization
         buildFocusSessionLayer(ctx),       // Layer 5: Pomodoro/goals
         buildEmotionalMemoryLayer(ctx),    // Layer 6: Mood-aware context from emotional memory
+        buildPeripheralVisionLayer(ctx),   // Layer 8: Workspace + peer project ambient awareness
         buildKnowledgeContextLayer(ctx),   // Layer 9: Pre-seeded knowledge
         buildModelAdaptiveLayer(ctx),      // Layer 7: Tier-specific rules
         buildResponseGuidelinesLayer(ctx), // Layer 10: Formatting + confidence
+        buildHonestUncertaintyLayer(ctx),  // Layer 11: Epistemic calibration signal
     ]);
 
     // Filter out empty layers and join with double newlines
@@ -381,27 +395,51 @@ async function buildFocusSessionLayer(ctx: PromptContext): Promise<string> {
  */
 async function buildEmotionalMemoryLayer(ctx: PromptContext): Promise<string> {
     try {
+        const parts: string[] = [];
+
+        // --- Cross-session mood context (from historical episodic log) ---
         const moodContext = await loadMoodContext(ctx.workspaceRoot);
-        if (!moodContext) { return ''; }
+        if (moodContext) {
+            parts.push('## Emotional Context (Recent Sessions)');
+            parts.push(`**Tone Adjustment**: ${moodContext.toneGuidance}`);
 
-        const parts: string[] = ['## Emotional Context (Recent Sessions)'];
+            if (moodContext.recentSessions.length > 0) {
+                parts.push('');
+                parts.push('**Recent session moods**:');
+                for (const session of moodContext.recentSessions) {
+                    parts.push(`- ${session.date}: ${session.mood} — ${session.summary}`);
+                }
+            }
 
-        // Tone guidance based on emotional trajectory
-        parts.push(`**Tone Adjustment**: ${moodContext.toneGuidance}`);
-
-        // Recent session mood summaries (compact)
-        if (moodContext.recentSessions.length > 0) {
-            parts.push('');
-            parts.push('**Recent session moods**:');
-            for (const session of moodContext.recentSessions) {
-                parts.push(`- ${session.date}: ${session.mood} — ${session.summary}`);
+            if (moodContext.recentMood === 'negative' && moodContext.streak >= 3) {
+                parts.push('');
+                parts.push(`⚠️ **${moodContext.streak} consecutive difficult sessions.** Lead with empathy. Acknowledge their effort before jumping into solutions.`);
             }
         }
 
-        // Streak warning for persistent negative patterns
-        if (moodContext.recentMood === 'negative' && moodContext.streak >= 3) {
+        // --- Session-level Siegel guidance (current session only) ---
+        const { riverZone, riverWarning, windowZone, windowAdaptation, isLidFlipped } = ctx.emotionalState ?? {};
+        const hasSiegelGuidance = isLidFlipped ||
+            (riverZone && riverZone !== 'flow') ||
+            (windowZone && windowZone !== 'within');
+
+        if (hasSiegelGuidance) {
             parts.push('');
-            parts.push(`⚠️ **${moodContext.streak} consecutive difficult sessions.** Lead with empathy. Acknowledge their effort before jumping into solutions.`);
+            parts.push('## Current Session (Siegel Integration Health)');
+
+            if (isLidFlipped) {
+                parts.push('🚨 **Lid-Flip Detected**: User has had 3+ high-frustration messages in quick succession. (1) Validate the emotion first. (2) Offer one small concrete step. (3) Keep your response shorter than usual. Do not jump straight to solutions.');
+            }
+
+            if (riverZone === 'chaos' && riverWarning) {
+                parts.push(`🌊 **River Drift — Chaos**: ${riverWarning}`);
+            } else if (riverZone === 'rigidity' && riverWarning) {
+                parts.push(`🧊 **River Drift — Rigidity**: ${riverWarning}`);
+            }
+
+            if (windowZone && windowZone !== 'within' && windowAdaptation) {
+                parts.push(`**Window of Tolerance (${windowZone})**: ${windowAdaptation}`);
+            }
         }
 
         return parts.join('\n');
@@ -409,6 +447,157 @@ async function buildEmotionalMemoryLayer(ctx: PromptContext): Promise<string> {
         console.warn('[PromptEngine] Failed to build emotional memory layer:', err);
         return '';
     }
+}
+
+// ============================================================================
+// Layer 8: Peripheral Vision
+// ============================================================================
+
+/**
+ * v5.9.4: Ambient workspace awareness — git state, recently modified files,
+ * dependency manifests, test framework, and sibling projects in the parent folder.
+ *
+ * The peer-project expansion is deliberate: knowing that AlexPapers,
+ * Alex-Global-Knowledge, and other sibling repos exist (and their git state)
+ * lets Alex give context-aware cross-project guidance without being asked.
+ *
+ * Token budget: ~200 tokens
+ */
+async function buildPeripheralVisionLayer(ctx: PromptContext): Promise<string> {
+    const p = ctx.peripheral;
+    if (!p) { return ''; }
+
+    const parts: string[] = ['## Peripheral Vision (Workspace Awareness)'];
+
+    // --- Current workspace git status ---
+    if (p.git) {
+        const g = p.git;
+        const files = g.uncommittedCount === 1
+            ? '1 uncommitted file'
+            : g.uncommittedCount > 0
+                ? `${g.uncommittedCount} uncommitted files`
+                : 'clean';
+        parts.push(`**Git**: branch \`${g.branch}\` | ${files}`);
+        if (g.lastCommits.length > 0) {
+            parts.push(`**Recent commits**: ${g.lastCommits.map(c => `"${c}"`).join(' · ')}`);
+        }
+    }
+
+    // --- Package managers / manifests ---
+    if (p.detectedManifests.length > 0) {
+        parts.push(`**Package managers**: ${p.detectedManifests.join(', ')}`);
+    }
+
+    // --- Test framework ---
+    if (p.testFramework) {
+        parts.push(`**Test framework**: ${p.testFramework}`);
+    }
+
+    // --- Test runner results (v5.9.7) ---
+    if (p.testRunnerStatus) {
+        const ts = p.testRunnerStatus;
+        const lastRunStr = ts.daysSinceLastRun === null
+            ? 'no results on disk'
+            : ts.daysSinceLastRun < 1
+                ? 'run today'
+                : `${ts.daysSinceLastRun}d ago`;
+
+        if (ts.totalTests > 0) {
+            const passIcon = ts.lastRunPassed ? '✅' : '❌';
+            const rateStr = ts.passRate !== null ? ` (${ts.passRate}% pass)` : '';
+            parts.push(`**Tests**: ${passIcon} ${ts.totalTests} tests | ${ts.failedTests} failed${rateStr} | last run ${lastRunStr}`);
+        } else {
+            parts.push(`**Tests**: ${ts.framework} detected | ${lastRunStr}`);
+        }
+    }
+
+    // --- Dependency freshness (v5.9.7) ---
+    if (p.dependencyFreshness && !p.dependencyFreshness.error) {
+        const df = p.dependencyFreshness;
+        if (df.outdated.length === 0) {
+            parts.push('**Dependencies**: all packages up to date ✅');
+        } else {
+            const majors = df.outdated.filter(d => d.severity === 'major');
+            const minors = df.outdated.filter(d => d.severity === 'minor');
+            const patches = df.outdated.filter(d => d.severity === 'patch');
+            const summary: string[] = [];
+            if (majors.length > 0) { summary.push(`${majors.length} major`); }
+            if (minors.length > 0) { summary.push(`${minors.length} minor`); }
+            if (patches.length > 0) { summary.push(`${patches.length} patch`); }
+            parts.push(`**Dependencies**: ${df.outdated.length} outdated (${summary.join(', ')})`);
+            // Surface the breaking ones by name (max 3)
+            const topBreaking = df.outdated.slice(0, 3).map(d =>
+                `\`${d.name}\` ${d.current}→${d.latest}`
+            );
+            parts.push(`  Needs update: ${topBreaking.join(', ')}${df.outdated.length > 3 ? ` +${df.outdated.length - 3} more` : ''}`);
+        }
+    }
+
+    // --- Recently modified files ---
+    if (p.recentChanges.length > 0) {
+        const changes = p.recentChanges.slice(0, 5).map(c => {
+            const age = c.minsAgo < 60
+                ? `${c.minsAgo}m ago`
+                : `${Math.round(c.minsAgo / 60)}h ago`;
+            return `\`${c.file}\` (${age})`;
+        });
+        parts.push(`**Recently modified**: ${changes.join(', ')}`);
+    }
+
+    // --- File watcher observations (v5.9.8) ---
+    if (p.fileWatcherObservations) {
+        const obs = p.fileWatcherObservations;
+        const hasSomething = obs.hotFiles.length > 0 || obs.stalledFiles.length > 0 || obs.todoHotspots.length > 0;
+
+        if (hasSomething) {
+            parts.push('');
+            parts.push('**Focus Patterns** (background observer):');
+
+            if (obs.hotFiles.length > 0) {
+                const files = obs.hotFiles.slice(0, 4).map(f => `\`${f}\``).join(', ');
+                parts.push(`  Hot files this week: ${files}${obs.hotFiles.length > 4 ? ` +${obs.hotFiles.length - 4} more` : ''}`);
+            }
+
+            if (obs.stalledFiles.length > 0) {
+                const files = obs.stalledFiles.slice(0, 4).map(f => `\`${f}\``).join(', ');
+                parts.push(`  Uncommitted changes: ${files}${obs.stalledFiles.length > 4 ? ` +${obs.stalledFiles.length - 4} more` : ''}`);
+            }
+
+            if (obs.todoHotspots.length > 0) {
+                const spots = obs.todoHotspots.slice(0, 3).map(h =>
+                    `\`${h.file}\` (${h.todoCount})`
+                ).join(', ');
+                parts.push(`  TODO hotspots: ${spots}`);
+            }
+        }
+    }
+
+    // --- Peer projects in parent folder ---
+    if (p.peerProjects.length > 0) {
+        parts.push('');
+        parts.push(`**Peer Projects** in \`${p.parentFolder}\`:`);
+        for (const peer of p.peerProjects.slice(0, 6)) {
+            const techStr = peer.tech.join(', ');
+            const gitParts: string[] = [];
+            if (peer.branch) { gitParts.push(`\`${peer.branch}\``); }
+            if (peer.uncommittedCount !== undefined && peer.uncommittedCount > 0) {
+                gitParts.push(`${peer.uncommittedCount} uncommitted`);
+            } else if (peer.uncommittedCount === 0) {
+                gitParts.push('clean');
+            }
+            if (peer.lastCommit) { gitParts.push(`"${peer.lastCommit}"`); }
+            const gitStr = gitParts.length > 0 ? ` | ${gitParts.join(' | ')}` : '';
+            parts.push(`- **${peer.name}** (${techStr})${gitStr}`);
+        }
+        if (p.peerProjects.length > 6) {
+            parts.push(`- _(+${p.peerProjects.length - 6} more in ${p.parentFolder})_`);
+        }
+    }
+
+    // Return nothing if only the header was added (empty scan result)
+    if (parts.length === 1) { return ''; }
+
+    return parts.join('\n');
 }
 
 // ============================================================================
@@ -535,4 +724,39 @@ When answering, indicate your confidence level:
 - Check focus session state
 
 When users mention Azure or M365 development, recommend using Agent Mode for automatic MCP tool invocation.`;
+}
+// ============================================================================
+// Layer 11: Honest Uncertainty — Epistemic Calibration
+// ============================================================================
+
+/**
+ * v5.9.5: Inject knowledge coverage signal to calibrate Alex's confidence tone.
+ *
+ * This layer does NOT add a visible badge or number to the user-facing response.
+ * It is a behavioral instruction: it changes *how Alex phrases things* based on
+ * how well the knowledge base actually covers the query.
+ *
+ *   🟢 high      — 2+ patterns or skill match; respond with confidence
+ *   🟡 medium    — 1 pattern or 2+ insights; use qualified language
+ *   🟠 low       — 1 insight only; flag thin coverage, offer what you know
+ *   🔴 uncertain — nothing in KB; reason from first principles, say so honestly
+ *
+ * Token budget: ~80 tokens (small but behaviorally impactful)
+ */
+async function buildHonestUncertaintyLayer(ctx: PromptContext): Promise<string> {
+    const coverage = ctx.coverage;
+    if (!coverage) { return ''; }
+
+    const parts: string[] = ['## Epistemic Calibration (Knowledge Coverage)'];
+    parts.push(coverage.signal);
+
+    if (coverage.matchedSkills.length > 0) {
+        parts.push(`**Matched skills**: ${coverage.matchedSkills.join(', ')} — lean on these in your response.`);
+    }
+
+    if (coverage.whatINeed) {
+        parts.push(`**If asked what would help**: "${coverage.whatINeed}"`);
+    }
+
+    return parts.join('\n');
 }

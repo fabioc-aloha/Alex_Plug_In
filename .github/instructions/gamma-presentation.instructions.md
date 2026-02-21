@@ -137,6 +137,20 @@ Common issues:
 
 ---
 
+## Resources
+
+**Starter Kit**: `.github/skills/gamma-presentations/resources/GAMMA-API-STARTER-KIT.md`
+
+Quick reference for:
+- Decision guide (format × image model selection)
+- Credit estimation formulas
+- Prerequisites checklist
+- API parameter reference
+- All 16+ image models with costs
+- Troubleshooting common errors
+
+---
+
 ## Related Skills
 
 - `markdown-mermaid`: Diagrams can enhance presentation content

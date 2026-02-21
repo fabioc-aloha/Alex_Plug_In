@@ -7,7 +7,138 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [5.9.3] - 2026-02-20
+## [5.9.8] - 2026-02-21
+
+> **Background File Watcher** — Silent ambient observer. Alex now silently tracks which files you keep returning to, what work is sitting uncommitted, and where your TODO backlog is building up — and weaves that awareness into every response.
+
+### Added
+
+#### Background File Watcher — Ambient Workspace Observation
+
+- **`fileWatcher.ts`** — New module implementing the background file observer. Zero UI, zero notifications, zero interruptions. Runs quietly from `activate()` and writes observations to `.github/episodic/peripheral/file-observations.json`.
+- **Hot file tracking** — `vscode.window.onDidChangeActiveTextEditor` increments an in-memory open-count log per file. Files opened ≥5 times in a rolling 7-day window are classified as "hot". Timestamps are pruned on every flush.
+- **Stalled work detection** — On every write-debounced flush (2s), `git status --porcelain` is run to capture files that are modified on disk but not yet committed. Capped at 10 files; ignored directories (node_modules, .git, dist, etc.) are excluded.
+- **TODO/FIXME hotspot scanning** — On each flush, the 15 most-recently-opened files are scanned for `TODO`/`FIXME`/`HACK`/`XXX` comments. Top 5 by count are stored as `todoHotspots[]`. String scanning is synchronous and fast on source files.
+- **`registerFileWatcher(context, workspaceRoot)`** — Exported function called from `extension.ts` after `registerChatParticipant`. Returns a `vscode.Disposable` pushed onto `context.subscriptions` for clean deactivation.
+- **`loadPeripheralObservations(workspaceRoot)`** — Async function that reads the persisted JSON. Called concurrently in `gatherPeripheralContext()` alongside peer project discovery and recent file scan.
+- **`PeripheralObservations` type** — `{ hotFiles, stalledFiles, todoHotspots, lastUpdated }`. `TodoHotspot` carries `file`, `todoCount`, `scannedAt`.
+- **`PeripheralContext.fileWatcherObservations?`** — New optional field added to `PeripheralContext` in `peripheralVision.ts`.
+- **Layer 8 rendering** — `buildPeripheralVisionLayer` in `promptEngine.ts` now renders a **Focus Patterns** block when observations exist: hot files, uncommitted files, and TODO hotspot list with counts.
+- **Bootstrap from disk** — On first activation, existing persisted observations seed the in-memory open-log so previous-session hot files survive restarts.
+
+---
+
+## [5.9.7] - 2026-02-21
+
+> **P2 Feature Completion** — All remaining actionable P2 items shipped across Peripheral Vision, Honest Uncertainty, and The Forgetting Curve. Alex now notices outdated dependencies mid-conversation, knows when tests last ran, and learns from your 👍/👎 signals.
+
+### Added
+
+#### User Feedback Loop — Epistemic Calibration Signal
+
+- **`FeedbackEntry` type** — New type in `honestUncertainty.ts`: `{ date, topic, level, helpful }`. Records the correlation between Alex's confidence level and user satisfaction.
+- **`recordCalibrationFeedback()`** — Fire-and-forget append to `.github/episodic/calibration/feedback-log.json` (500-entry rolling window). Called from `onDidReceiveFeedback` in `registerChatParticipant()`.
+- **Native VS Code 👍/👎 wired to calibration** — `onDidReceiveFeedback` now reads `coverageLevel` + `coverageTopic` from the result metadata and persists a `FeedbackEntry`. Over time, this reveals which domains Alex systematically under- or over-estimates.
+- **Coverage metadata in result** — General handler return now includes `coverageLevel` and `coverageTopic` fields in `IAlexChatResult.metadata`, making them available to the feedback handler without additional lookups.
+- **Low/uncertain followup shortcuts** — When coverage is `low` or `uncertain`, `alexFollowupProvider` adds `/saveinsight` and `/knowledge <topic>` followup buttons to help the user contribute knowledge that fills the gap.
+
+#### Dependency Freshness Tracker
+
+- **`getDependencyFreshness(workspaceRoot)`** — New export from `peripheralVision.ts`. Runs `npm outdated --json` (10s timeout, 5-minute per-workspace cache). Handles npm's non-zero exit code on outdated packages by parsing stdout from the thrown error. Returns `DependencyFreshnessResult` with classified package list and error field if scan failed.
+- **`DependencyFreshnessResult` + `OutdatedPackage` types** — `OutdatedPackage` carries `name`, `current`, `wanted`, `latest`, and `severity` (`major`/`minor`/`patch`) derived from semver diff. Sorted most-breaking-first.
+- **Lazy execution** — `getDependencyFreshness` is called inside `gatherPeripheralContext` only when `package.json` exists in the workspace root. Skipped silently for non-npm projects.
+- **Layer 8 rendering** — `buildPeripheralVisionLayer` in `promptEngine.ts` now surfaces: "all packages up to date ✅" **or** count breakdown by severity + top-3 package names with current→latest diff.
+
+#### Test Runner Awareness
+
+- **`getTestRunnerStatus(workspaceRoot, framework?)`** — New export from `peripheralVision.ts`. Reads well-known test result files: `.jest-test-results.json`, `test-results.json` (Vitest JSON reporter), `coverage/coverage-summary.json`. Returns `TestRunnerStatus` with `lastRunAt`, `daysSinceLastRun`, `totalTests`, `failedTests`, `passRate`, `lastRunPassed`.
+- **`TestRunnerStatus` type** — Structured result with all run metrics. `null` fields when data isn't available (framework known but no results file on disk).
+- **Layer 8 rendering** — When test results are available: `✅/❌ 123 tests | 2 failed (98.4% pass) | last run 1.2d ago`. When no results file exists: `jest detected | no results on disk`.
+- **Wired into `PeripheralContext`** — Two new optional fields: `dependencyFreshness?` and `testRunnerStatus?`.
+
+### Changed
+
+- **`peripheralVision.ts`** — Doc comment updated to v5.9.7; mentions dependency freshness, test runner results, and the 10s npm timeout.
+
+---
+
+## [5.9.6] - 2026-02-21
+
+> **The Forgetting Curve** — Graceful knowledge decay. Living memory stays sharp; unused insights fade toward cold storage — not deleted, deliberately forgotten.
+
+### Added
+
+#### The Forgetting Curve — Graceful Knowledge Decay
+
+- **`forgettingCurve.ts`** — New module implementing usage-weighted freshness scoring for all global knowledge entries. The core metaphor: memory is not a filing cabinet — what gets reinforced grows stronger, what fades can be recovered but no longer crowds the active workspace.
+- **`computeFreshnessScore()`** — Composite score `(refScore × 0.6) + (recencyScore × 0.4)`. Reference score saturates at 20 uses. Recency score decays logarithmically: `1 / (1 + log10(1 + daysSince / halfLife))`. Returns freshness label: `thriving` (>0.6), `active` (0.3–0.6), `fading` (0.1–0.3), `dormant` (<0.1), `permanent` (never decays).
+- **Four decay profiles** — `aggressive` (14-day half-life, debugging/project-specific knowledge), `moderate` (60d, most domain insights), `slow` (180d, architecture/security/patterns), `permanent` (core principles, never archived). Auto-assigned by knowledge category; overridable per entry via `decayProfile` field.
+- **`IGlobalKnowledgeEntry` extended** — Added four optional freshness fields to the shared interface: `lastReferenced`, `referenceCount`, `freshnessScore`, `decayProfile`. Backward-compatible — all fields are optional, existing entries without them score conservatively.
+- **Reference counting** — `queueReferenceTouch(entryId)` wired into `searchGlobalKnowledge` in `globalKnowledge.ts`. Fire-and-forget batch queue (15-entry threshold or 30s timeout) flushes accumulated counts to `index.json` — never blocks the search path, never contends on disk I/O.
+- **`getDecayReport()`** — Reads the full knowledge index, computes freshness for every entry, returns a `DecayReport` with top-10 thriving/active and worst-5 fading/dormant entries, plus permanent count. Called during self-actualization Phase 5.5 concurrently with the calibration summary.
+- **Meditation Knowledge Freshness section** — Self-actualization session records now include a `📉 Knowledge Freshness` section: distribution counts, dormant entry names with scores, and a recommendation to run Dream for cold storage if dormant entries exist.
+- **`runForgettingCeremony(workspaceRoot, threshold?)`** — Dream cycle forgetting ceremony. Moves entries below the freshness threshold from `insights/` or `patterns/` to `insights/archive/` or `patterns/archive/`. Entries with `permanent` profile are never moved. Logs the transition to `.github/episodic/forgetting-ceremony-{date}.md`. Nothing is ever deleted — only moved.
+- **Archive logging** — Forgetting ceremony produces a human-readable episodic record listing every archived entry with its reason (score, reference count, days since last use). Users can review and restore any entry by moving the file back.
+
+---
+
+ — Calibrated epistemic humility. Alex now knows what it doesn't know, and says so with precision.
+
+### Added
+
+#### Honest Uncertainty — Knowledge Coverage Scoring
+
+- **`honestUncertainty.ts`** — New module implementing the Honest Uncertainty framework. `scoreKnowledgeCoverage(query, workspaceRoot)` searches global patterns, insights, and local `.github/skills/` to determine how well the knowledge base covers the current query.
+- **Four confidence levels** — `high` (2+ pattern matches or skill match), `medium` (1 pattern or 2+ insights), `low` (1 insight only), `uncertain` (no knowledge base coverage). Each level maps to a named behavioral instruction, not a badge.
+- **Behavioral signal injection** — Layer 11 in `promptEngine.ts` (`buildHonestUncertaintyLayer`) injects a confidence signal that shapes *how Alex phrases responses*: 🟢 respond with confidence, 🟡 use qualified language, 🟠 flag thin coverage, 🔴 reason from first principles and say so honestly. Never a visible number or badge.
+- **Skill name matching** — Local `.github/skills/` directory is scanned for folder names matching query terms. Skill matches bump confidence one tier (curated + tested knowledge).
+- **`whatINeed` transparency** — For `low` and `uncertain` levels, `CoverageScore.whatINeed` is populated and injected into the prompt: when a user asks what would help, Alex responds with specific, actionable asks (working example, error output, docs, or spec).
+- **Calibration log** — Every scored request is fire-and-forget logged to `.github/episodic/calibration/calibration-log.json` (rolling 500-entry window). Persists: date, topic summary, confidence level, match count.
+- **Meditation calibration review** — `getCalibrationSummary()` surfaces confidence distribution + uncertain topic clusters in the Phase 5.5 self-actualization session record. Imported by `self-actualization.ts`, runs concurrently with emotional review.
+- **Concurrent execution** — `scoreKnowledgeCoverage` runs concurrently with `gatherPeripheralContext` in `participant.ts` via `Promise.all` — zero added latency to the response path.
+
+---
+
+## [5.9.4] - 2026-02-21
+
+> **Avatar System Completion + Emotional Intelligence (Siegel)** - Complete avatar coverage across all protocol surfaces, plus Daniel Siegel's Interpersonal Neurobiology implemented as real-time session health monitoring
+
+### Added
+
+#### Siegel Session Health — River of Integration, Window of Tolerance, Lid-Flip
+
+- **`assessRiverOfIntegration()`** - Detects whether the current session is drifting toward chaos (high frustration rate, escalating signals) or rigidity (persistent confusion, no progress). Returns zone + correction warning. Based on Siegel's River of Integration metaphor from *Mindsight* (2010).
+- **`assessWindowOfTolerance()`** - Detects hyperarousal (3+ high-frustration signals in last 5 messages) and hypoarousal (flat disengagement with no excitement/flow/success). Returns zone + tone adaptation guidance. Based on Siegel's Window of Tolerance from *The Developing Mind* (1999/2020).
+- **`isLidFlipped()`** - Returns true when 3+ high-frustration signals occur within the last 5 messages, indicating the user has "flipped their lid" (prefrontal regulation lost). Based on Siegel's Hand Model of the Brain from *The Whole-Brain Child* (2011).
+- **`RiverAssessment` / `WindowAssessment` types** - Structured return types with zone, drift score/adaptation, and optional warning.
+- **Siegel prompt injection** - `buildEmotionalMemoryLayer` in `promptEngine.ts` now includes a **Current Session (Siegel Integration Health)** section when session is outside healthy flow. Lid-flip triggers validation-first guidance; chaos/rigidity zones trigger course-correction instructions; window-of-tolerance zones inject tone adaptation.
+
+#### Emotional Memory Completion
+
+- **`isConfused` fixed** - Was hardcoded `false` in `emotionalContext`; now reads directly from the recorded signal's `confusion` field.
+- **`isExcited` enhanced** - Now combines `celebrationNeeded` from `detectEmotionalState` with `excitement` from `recordEmotionalSignal` for richer detection.
+- **Signal return value used** - `recordEmotionalSignal` return value now captured in `participant.ts` to populate `isConfused`/`isExcited` accurately.
+
+#### Avatar System Completion
+
+- **All 34 prompt protocols** updated with cognitive state blockquote instructions (set at start, revert at end).
+- **All 7 agent files** updated with agent mode avatar switching.
+- **Avatar race condition** fixed: synchronous `updateChatAvatar()` call before streaming.
+- **Complete trigger coverage** verified for all trifectas and session types.
+
+#### Peripheral Vision — Ambient Workspace Awareness
+
+- **`peripheralVision.ts`** - New module giving Alex ambient awareness of the workspace and its sibling projects. Scans: git status (branch, uncommitted files, last 3 commits), recently modified files (24-hour window), dependency manifest detection (npm/yarn/pip/cargo/go), test framework detection (jest/vitest/mocha/pytest), and peer project discovery in the parent folder.
+- **Peer project expansion** - On every request, Alex now discovers and profiles sibling projects in the parent directory (e.g., `C:\Development\`). Each peer project shows detected tech stack, git branch, uncommitted file count, and last commit message. Capped at 8 peer projects with 60-second cache.
+- **Layer 8 — Peripheral Vision** - New `buildPeripheralVisionLayer()` in `promptEngine.ts` injects workspace ambient context between the Emotional Memory (Layer 6) and Knowledge Context (Layer 9) layers. Includes git state, recently modified files, package managers, test framework, and full peer project list.
+- **60-second cache** - All peripheral I/O is cached per workspace root; `invalidatePeripheralCache()` export for post-operation refresh.
+- **Technology detection** - Identifies TypeScript/Node.js, Python, Rust, Go, Java, Ruby, PHP, C/C++, LaTeX, Bicep/Azure, and Markdown projects from file markers.
+
+- **Daniel Siegel IPNB report** - 732-line research report integrating Siegel's Triangle of Well-Being, River of Integration, Mindsight, Hand Model, Wheel of Awareness, Healthy Mind Platter, and Window of Tolerance into Alex's architecture. Maps all frameworks to existing subsystems and proposes 5 concrete implementations.
+- **AlexPapers repository** - Academic papers migrated to dedicated `C:\Development\AlexPapers` repository; `alex_docs/PAPERS.md` index published.
+
+---
+
 
 > **Stabilization + Quality Gates** - Version sync, ROADMAP cleanup, Definition of Done modernized, heir alignment, and local install verified
 

@@ -68,4 +68,4 @@ Use cross-domain transfer as a primary source of creative insight and innovative
 - [.github/instructions/worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

@@ -292,4 +292,4 @@ characters/{character-slug}/images/{collection-name}/
 **You now have a production-ready character reference set for visual narrative projects!**
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

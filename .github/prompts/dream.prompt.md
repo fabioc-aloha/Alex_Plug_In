@@ -12,18 +12,28 @@ Run unconscious processing and architecture health checks.
 
 ## Process
 
-1. Use `alex_synapse_health` to validate connections
-2. Use `alex_architecture_status` to check overall health
-3. Report issues found and repairs needed
-4. Suggest consolidation if insights accumulated
+1. Run `brain-qa.ps1` for comprehensive architecture validation
+2. Use `alex_synapse_health` to validate connections
+3. Use `alex_architecture_status` to check overall health
+4. **FIX** all issues found (don't just report them)
+5. Sync any drifted files between Master and Heir
+6. Update counts, timestamps, and stale references
+
+## Behavior
+
+- **DO NOT ASK** for permission — automatically fix everything fixable
+- Sync synapse files if out of sync
+- Update GK counts if drifted
+- Repair broken file references
+- Only report issues that require human decision
 
 ## Nature
 
-Dream is automatic maintenance—less interactive than meditation. Run the health checks and report findings.
+Dream is automatic maintenance. Fix problems silently; report only what you cannot fix.
 
 ## Start
 
-Begin neural maintenance now. Validate synaptic connections and report architecture health.
+Begin neural maintenance now. Run diagnostics, fix all issues, and report only blockers.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

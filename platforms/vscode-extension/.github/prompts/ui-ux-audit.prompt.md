@@ -679,4 +679,4 @@ For rapid accessibility check:
 **Validated Against**: Alex v5.8.0 welcomeView.ts accessibility audit (real-world production deployment)
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

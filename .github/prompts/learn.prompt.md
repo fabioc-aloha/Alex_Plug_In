@@ -27,4 +27,4 @@ Use the Socratic method—ask questions rather than lecture. Guide discovery thr
 What would you like to learn? I'll assess your current knowledge and create a learning plan.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

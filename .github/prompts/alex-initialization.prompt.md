@@ -50,4 +50,4 @@ Use this protocol whenever activating Alex architecture in new environments or a
 - [.github/prompts/performance-assessment.prompt.md] (High, Triggers, Forward) - "Post-initialization system check"
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

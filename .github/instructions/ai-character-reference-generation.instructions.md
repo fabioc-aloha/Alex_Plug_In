@@ -6,6 +6,12 @@
 
 ---
 
+## Resources
+
+> **REQUIRED READING**: Before generating images, read the [Replicate API Starter Kit](../skills/ai-character-reference-generation/resources/REPLICATE-API-STARTER-KIT.md) for authentication, model selection, and critical gotchas.
+
+---
+
 ## Purpose
 
 Auto-load procedural steps for generating visually consistent character references across multiple scenarios using AI image generation. Maintains character identity while varying poses, environments, and narrative contexts.

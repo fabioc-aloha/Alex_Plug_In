@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import * as https from 'https';
 import { 
     searchGlobalKnowledge, 
     createGlobalInsight, 
@@ -21,9 +22,263 @@ import {
     ICON_CATEGORIES, 
     STOCK_CATEGORIES 
 } from '../generators/illustrationIcons';
+import { getToken } from '../services/secretsManager';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
+}
+
+interface ReplicatePrediction {
+    id: string;
+    status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled';
+    output?: string | string[];
+    error?: string;
+}
+
+// Maximum image dimension for API upload (to avoid payload size issues)
+const MAX_IMAGE_DIMENSION = 1024;
+
+/**
+ * Resize image buffer if needed to stay within dimension limits
+ */
+async function resizeImageIfNeeded(buffer: Buffer | Uint8Array, maxDim: number = MAX_IMAGE_DIMENSION): Promise<Buffer> {
+    const inputBuffer = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
+    // Use sharp if available, otherwise return original (acceptable for small images)
+    try {
+        const sharp = await import('sharp');
+        const metadata = await sharp.default(inputBuffer).metadata();
+        
+        if (!metadata.width || !metadata.height) {
+            return inputBuffer;
+        }
+        
+        if (metadata.width <= maxDim && metadata.height <= maxDim) {
+            return inputBuffer;
+        }
+        
+        // Resize maintaining aspect ratio
+        const resized = await sharp.default(inputBuffer)
+            .resize(maxDim, maxDim, { fit: 'inside', withoutEnlargement: true })
+            .png()
+            .toBuffer();
+            
+        return resized;
+    } catch {
+        // Sharp not available, return original
+        return inputBuffer;
+    }
+}
+
+/**
+ * Call Replicate API using model name (uses latest version)
+ */
+async function callReplicateModelAPI(
+    apiToken: string,
+    modelName: string,
+    input: Record<string, unknown>
+): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            input
+        });
+
+        // Use model-based endpoint for latest version
+        const options = {
+            hostname: 'api.replicate.com',
+            port: 443,
+            path: `/v1/models/${modelName}/predictions`,
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiToken}`,
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(data),
+                'Prefer': 'wait'  // Wait for completion
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            const chunks: Buffer[] = [];
+            res.on('data', (chunk) => chunks.push(chunk));
+            res.on('end', async () => {
+                try {
+                    const body = Buffer.concat(chunks).toString();
+                    const prediction: ReplicatePrediction = JSON.parse(body);
+                    
+                    if (prediction.error) {
+                        reject(new Error(prediction.error));
+                        return;
+                    }
+                    
+                    if (prediction.status === 'succeeded' && prediction.output) {
+                        // Output could be URL or direct data
+                        const output = prediction.output;
+                        if (Array.isArray(output) && output.length > 0) {
+                            resolve(output[0]);
+                        } else if (typeof output === 'string') {
+                            resolve(output);
+                        } else {
+                            resolve(null);
+                        }
+                        return;
+                    }
+                    
+                    if (!prediction.id) {
+                        reject(new Error(body));
+                        return;
+                    }
+                    
+                    // Poll for completion if not using Prefer: wait
+                    const result = await pollPrediction(apiToken, prediction.id);
+                    resolve(result);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+
+        req.on('error', reject);
+        req.write(data);
+        req.end();
+    });
+}
+
+/**
+ * Call Replicate API to create and poll a prediction (version-based)
+ */
+async function callReplicateAPI(
+    apiToken: string,
+    modelVersion: string,
+    input: Record<string, unknown>
+): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            version: modelVersion,
+            input
+        });
+
+        const options = {
+            hostname: 'api.replicate.com',
+            port: 443,
+            path: '/v1/predictions',
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiToken}`,
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(data)
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let body = '';
+            res.on('data', (chunk) => body += chunk);
+            res.on('end', async () => {
+                try {
+                    const prediction: ReplicatePrediction = JSON.parse(body);
+                    if (!prediction.id) {
+                        reject(new Error(body));
+                        return;
+                    }
+                    
+                    // Poll for completion
+                    const result = await pollPrediction(apiToken, prediction.id);
+                    resolve(result);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+
+        req.on('error', reject);
+        req.write(data);
+        req.end();
+    });
+}
+
+/**
+ * Poll a Replicate prediction until completion
+ */
+async function pollPrediction(apiToken: string, predictionId: string): Promise<string | null> {
+    const maxAttempts = 120; // 2 minutes max
+    const pollInterval = 1000; // 1 second
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        await new Promise(r => setTimeout(r, pollInterval));
+
+        const prediction = await getPrediction(apiToken, predictionId);
+        
+        if (prediction.status === 'succeeded') {
+            const output = prediction.output;
+            if (Array.isArray(output)) {
+                return output[0] || null;
+            }
+            return typeof output === 'string' ? output : null;
+        }
+        
+        if (prediction.status === 'failed' || prediction.status === 'canceled') {
+            throw new Error(prediction.error || `Prediction ${prediction.status}`);
+        }
+    }
+    
+    throw new Error('Prediction timed out');
+}
+
+/**
+ * Get prediction status from Replicate
+ */
+function getPrediction(apiToken: string, predictionId: string): Promise<ReplicatePrediction> {
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'api.replicate.com',
+            port: 443,
+            path: `/v1/predictions/${predictionId}`,
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${apiToken}`
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let body = '';
+            res.on('data', (chunk) => body += chunk);
+            res.on('end', () => {
+                try {
+                    resolve(JSON.parse(body));
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+
+        req.on('error', reject);
+        req.end();
+    });
+}
+
+/**
+ * Download an image from URL and save to file
+ */
+async function downloadImage(url: string, outputPath: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const urlObj = new URL(url);
+        const protocol = urlObj.protocol === 'https:' ? https : https;
+        
+        protocol.get(url, (res) => {
+            if (res.statusCode === 301 || res.statusCode === 302) {
+                // Follow redirect
+                downloadImage(res.headers.location!, outputPath).then(resolve).catch(reject);
+                return;
+            }
+            
+            const chunks: Buffer[] = [];
+            res.on('data', (chunk) => chunks.push(chunk));
+            res.on('end', async () => {
+                const buffer = Buffer.concat(chunks);
+                await fs.writeFile(outputPath, buffer);
+                resolve();
+            });
+            res.on('error', reject);
+        }).on('error', reject);
+    });
 }
 
 /**
@@ -697,9 +952,324 @@ Project: ${workspaceFolders[0].name}
         }
     );
 
+    // Generate AI Image from file content
+    const generateAIImageDisposable = vscode.commands.registerCommand(
+        'alex.generateAIImage',
+        async (uri?: vscode.Uri) => {
+            // Check for Replicate API token
+            const apiToken = getToken('REPLICATE_API_TOKEN');
+            if (!apiToken) {
+                const result = await vscode.window.showWarningMessage(
+                    'Replicate API Token not configured. Set your API token to generate AI images.',
+                    'Configure API Token',
+                    'Get API Token',
+                    'Cancel'
+                );
+                if (result === 'Configure API Token') {
+                    vscode.commands.executeCommand('alex.manageSecrets');
+                }
+                if (result === 'Get API Token') {
+                    vscode.env.openExternal(vscode.Uri.parse('https://replicate.com/account/api-tokens'));
+                }
+                return;
+            }
+
+            let prompt: string;
+
+            // If URI provided, read file content as prompt
+            if (uri) {
+                try {
+                    const content = await vscode.workspace.fs.readFile(uri);
+                    prompt = new TextDecoder().decode(content);
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to read file: ${err}`);
+                    return;
+                }
+            } else {
+                // Prompt for description
+                const userInput = await vscode.window.showInputBox({
+                    prompt: 'Describe the image you want to generate',
+                    placeHolder: 'e.g., A serene mountain landscape at sunset with a lake',
+                    ignoreFocusOut: true
+                });
+                
+                if (!userInput) {
+                    return;
+                }
+                prompt = userInput;
+            }
+
+            // Model selection
+            const modelOption = await vscode.window.showQuickPick([
+                {
+                    label: '$(zap) flux-schnell',
+                    description: 'Fast, ~4 steps, low cost',
+                    value: 'black-forest-labs/flux-schnell',
+                    version: 'f2ab8a5bfe79f02f0789a146cf5e73d2a4ff2684a98c2b303d1e1ff3814271db'
+                },
+                {
+                    label: '$(star) flux-dev',
+                    description: 'High quality, recommended',
+                    value: 'black-forest-labs/flux-dev',
+                    version: '5a89e2e87e60e559bc50ffdc3a19c1adef0e6fd36c47b0b39b1a7889a2d9e145'
+                },
+                {
+                    label: '$(flame) flux-pro',
+                    description: 'Best quality, highest cost',
+                    value: 'black-forest-labs/flux-pro',
+                    version: 'f2c6b1fdc43477ebf6c287adcc8a6f9e4b9b8b22a4f5fa9b8b8ebf0c7c8a8b8'
+                },
+                {
+                    label: '$(symbol-color) SDXL',
+                    description: 'Stable Diffusion XL',
+                    value: 'stability-ai/sdxl',
+                    version: '7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc'
+                }
+            ], {
+                placeHolder: 'Select AI model for image generation',
+                title: 'AI Image Generation - Select Model'
+            });
+
+            if (!modelOption) {
+                return;
+            }
+
+            // Aspect ratio selection
+            const aspectOption = await vscode.window.showQuickPick([
+                { label: '1:1 Square', value: '1:1' },
+                { label: '16:9 Widescreen', value: '16:9' },
+                { label: '9:16 Portrait', value: '9:16' },
+                { label: '4:3 Standard', value: '4:3' },
+                { label: '3:4 Portrait', value: '3:4' }
+            ], {
+                placeHolder: 'Select aspect ratio',
+                title: 'AI Image Generation - Aspect Ratio'
+            });
+
+            if (!aspectOption) {
+                return;
+            }
+
+            await vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                title: 'Generating AI image...',
+                cancellable: false
+            }, async (progress) => {
+                try {
+                    progress.report({ message: 'Creating prediction...' });
+
+                    const imageUrl = await callReplicateAPI(
+                        apiToken,
+                        (modelOption as any).version,
+                        {
+                            prompt: prompt.substring(0, 2000), // Limit prompt length
+                            aspect_ratio: aspectOption.value,
+                            output_format: 'png'
+                        }
+                    );
+
+                    if (!imageUrl) {
+                        vscode.window.showErrorMessage('Failed to generate image - no output received');
+                        return;
+                    }
+
+                    progress.report({ message: 'Downloading image...' });
+
+                    // Save to workspace
+                    const workspaceFolders = vscode.workspace.workspaceFolders;
+                    if (!workspaceFolders) {
+                        vscode.window.showWarningMessage('No workspace folder found');
+                        return;
+                    }
+
+                    const timestamp = Date.now();
+                    const fileName = `ai-image-${timestamp}.png`;
+                    const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets', 'generated');
+                    const outputPath = path.join(outputDir, fileName);
+
+                    await fs.ensureDir(outputDir);
+                    await downloadImage(imageUrl, outputPath);
+
+                    // Open the image
+                    vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+
+                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    vscode.window.showInformationMessage(
+                        `✅ AI image saved: ${relativePath}`,
+                        'Copy Path'
+                    ).then(action => {
+                        if (action === 'Copy Path') {
+                            vscode.env.clipboard.writeText(relativePath);
+                        }
+                    });
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to generate AI image: ${err}`);
+                }
+            });
+        }
+    );
+
+    // Edit image with AI prompt
+    const editImageWithPromptDisposable = vscode.commands.registerCommand(
+        'alex.editImageWithPrompt',
+        async (uri?: vscode.Uri) => {
+            // Check for Replicate API token
+            const apiToken = getToken('REPLICATE_API_TOKEN');
+            if (!apiToken) {
+                const result = await vscode.window.showWarningMessage(
+                    'Replicate API Token not configured. Set your API token to edit images with AI.',
+                    'Configure API Token',
+                    'Get API Token',
+                    'Cancel'
+                );
+                if (result === 'Configure API Token') {
+                    vscode.commands.executeCommand('alex.manageSecrets');
+                }
+                if (result === 'Get API Token') {
+                    vscode.env.openExternal(vscode.Uri.parse('https://replicate.com/account/api-tokens'));
+                }
+                return;
+            }
+
+            // Get image file
+            let imageUri: vscode.Uri | undefined = uri;
+            if (!imageUri) {
+                const files = await vscode.window.showOpenDialog({
+                    canSelectFiles: true,
+                    canSelectFolders: false,
+                    canSelectMany: false,
+                    filters: {
+                        'Images': ['png', 'jpg', 'jpeg', 'webp', 'gif']
+                    },
+                    title: 'Select image to edit'
+                });
+                if (!files || files.length === 0) {
+                    return;
+                }
+                imageUri = files[0];
+            }
+
+            // Validate it's an image file
+            const ext = path.extname(imageUri.fsPath).toLowerCase();
+            if (!['.png', '.jpg', '.jpeg', '.webp', '.gif'].includes(ext)) {
+                vscode.window.showWarningMessage('Please select an image file (PNG, JPG, JPEG, WEBP, GIF)');
+                return;
+            }
+
+            // Get edit prompt
+            const editPrompt = await vscode.window.showInputBox({
+                prompt: 'Describe the desired result (reference image will be used for face/style consistency)',
+                placeHolder: 'e.g., Same person in a professional business suit, office background',
+                ignoreFocusOut: true
+            });
+
+            if (!editPrompt) {
+                return;
+            }
+
+            // Aspect ratio selection
+            const aspectOption = await vscode.window.showQuickPick([
+                { label: '1:1 Square', value: '1:1' },
+                { label: '16:9 Widescreen', value: '16:9' },
+                { label: '9:16 Portrait', value: '9:16' },
+                { label: '4:3 Standard', value: '4:3' },
+                { label: '3:4 Vertical', value: '3:4' }
+            ], {
+                placeHolder: 'Select output aspect ratio',
+                title: 'AI Image Edit - Aspect Ratio'
+            });
+
+            if (!aspectOption) {
+                return;
+            }
+
+            await vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                title: 'Editing image with AI...',
+                cancellable: false
+            }, async (progress) => {
+                try {
+                    progress.report({ message: 'Reading and resizing image...' });
+
+                    // Read image and resize if needed
+                    const rawBuffer = await fs.readFile(imageUri.fsPath);
+                    const imageBuffer = await resizeImageIfNeeded(Buffer.from(rawBuffer), MAX_IMAGE_DIMENSION);
+                    
+                    // Encode as data URI
+                    const base64 = imageBuffer.toString('base64');
+                    const mimeType = ext === '.png' ? 'image/png' : 
+                                   ext === '.gif' ? 'image/gif' :
+                                   ext === '.webp' ? 'image/webp' : 'image/jpeg';
+                    const dataUri = `data:${mimeType};base64,${base64}`;
+
+                    progress.report({ message: 'Processing with nano-banana-pro...' });
+
+                    // Use nano-banana-pro for face/style consistent editing
+                    const result = await callReplicateModelAPI(
+                        apiToken,
+                        'google/nano-banana-pro',
+                        {
+                            prompt: editPrompt,
+                            image_input: [dataUri],
+                            aspect_ratio: aspectOption.value,
+                            output_format: 'png',
+                            safety_filter_level: 'block_only_high'
+                        }
+                    );
+
+                    if (!result) {
+                        vscode.window.showErrorMessage('Failed to edit image - no output received');
+                        return;
+                    }
+
+                    progress.report({ message: 'Saving result...' });
+
+                    // Save edited image
+                    const workspaceFolders = vscode.workspace.workspaceFolders;
+                    if (!workspaceFolders) {
+                        vscode.window.showWarningMessage('No workspace folder found');
+                        return;
+                    }
+
+                    const originalName = path.basename(imageUri.fsPath, ext);
+                    const timestamp = Date.now();
+                    const fileName = `${originalName}-edited-${timestamp}.png`;
+                    const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets', 'edited');
+                    const outputPath = path.join(outputDir, fileName);
+
+                    await fs.ensureDir(outputDir);
+                    
+                    // Download the result image from URL
+                    await downloadImage(result, outputPath);
+
+                    // Open the edited image
+                    vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+
+                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    vscode.window.showInformationMessage(
+                        `✅ Edited image saved: ${relativePath}`,
+                        'Copy Path',
+                        'Open Original'
+                    ).then(action => {
+                        if (action === 'Copy Path') {
+                            vscode.env.clipboard.writeText(relativePath);
+                        }
+                        if (action === 'Open Original') {
+                            vscode.commands.executeCommand('vscode.open', imageUri);
+                        }
+                    });
+                } catch (err) {
+                    vscode.window.showErrorMessage(`Failed to edit image: ${err}`);
+                }
+            });
+        }
+    );
+
     context.subscriptions.push(askAboutSelectionDisposable);
     context.subscriptions.push(saveSelectionAsInsightDisposable);
     context.subscriptions.push(searchRelatedKnowledgeDisposable);
     context.subscriptions.push(knowledgeQuickPickDisposable);
     context.subscriptions.push(generateImageFromSelectionDisposable);
+    context.subscriptions.push(generateAIImageDisposable);
+    context.subscriptions.push(editImageWithPromptDisposable);
 }

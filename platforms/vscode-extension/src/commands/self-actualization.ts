@@ -3,6 +3,8 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
 import { getMeditationEmotionalReview, saveSessionEmotion } from '../chat/emotionalMemory';
+import { getCalibrationSummary } from '../chat/honestUncertainty';
+import { getDecayReport } from '../chat/forgettingCurve';
 import { getAlexWorkspaceFolder, createSynapseRegex } from '../shared/utils';
 
 /**
@@ -133,14 +135,18 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
         progress.report({ message: "Phase 5: Generating recommendations...", increment: 70 });
         generateRecommendations(report);
 
-        // Phase 5.5: Emotional Pattern Review
-        progress.report({ message: "Phase 5.5: Reviewing emotional patterns...", increment: 80 });
-        const emotionalReview = await getMeditationEmotionalReview(rootPath);
+        // Phase 5.5: Emotional Pattern Review + Knowledge Freshness
+        progress.report({ message: "Phase 5.5: Reviewing patterns + knowledge freshness...", increment: 80 });
+        const [emotionalReview, calibrationSummary, decayReport] = await Promise.all([
+            getMeditationEmotionalReview(rootPath),
+            getCalibrationSummary(rootPath),
+            getDecayReport(),
+        ]);
         await saveSessionEmotion(rootPath);
 
         // Phase 6: Create Meditation Session Record
         progress.report({ message: "Phase 6: Documenting session...", increment: 90 });
-        await createSessionRecord(rootPath, report, emotionalReview ?? undefined);
+        await createSessionRecord(rootPath, report, emotionalReview ?? undefined, calibrationSummary ?? undefined, decayReport ?? undefined);
 
         // Phase 7: Update Active Context — Last Assessed
         progress.report({ message: "Phase 7: Updating Active Context...", increment: 95 });
@@ -521,7 +527,9 @@ function generateRecommendations(report: SelfActualizationReport): void {
 async function createSessionRecord(
     rootPath: string,
     report: SelfActualizationReport,
-    emotionalReview?: string
+    emotionalReview?: string,
+    calibration?: import('../chat/honestUncertainty').CalibrationSummary,
+    decayReport?: import('../chat/forgettingCurve').DecayReport
 ): Promise<void> {
     const episodicPath = path.join(rootPath, '.github', 'episodic');
     await fs.ensureDir(episodicPath);
@@ -569,12 +577,25 @@ async function createSessionRecord(
 ## � Emotional Pattern Review
 
 ${emotionalReview || '*No emotional data recorded yet. Emotional patterns will appear after a few sessions.*'}
+## 🎯 Epistemic Calibration (Honest Uncertainty)
 
+${calibration ? `**Total responses tracked**: ${calibration.totalResponses}
+**Confidence distribution**: 🟢 high ${Math.round(calibration.distribution.high * 100)}% | 🟡 medium ${Math.round(calibration.distribution.medium * 100)}% | 🟠 low ${Math.round(calibration.distribution.low * 100)}% | 🔴 uncertain ${Math.round(calibration.distribution.uncertain * 100)}%
+${calibration.uncertainTopics.length > 0 ? `**Topics with thin knowledge coverage**: ${calibration.uncertainTopics.join(', ')}
+*Consider building skills or global patterns in these areas.*` : '*No recurring uncertain topics — knowledge coverage looks healthy.*'}` : '*No calibration data yet. Confidence tracking will appear after a few sessions.*'}
 ## �💡 Recommendations
 
 ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations - architecture is optimal!'}
 
-## 📈 Metrics
+## � Knowledge Freshness (Forgetting Curve)
+
+${decayReport ? `**Total entries tracked**: ${decayReport.totalEntries} | 🏛️ ${decayReport.permanentCount} permanent
+**Freshness distribution**: 🌱 thriving ${decayReport.thriving.length} | 🌿 active ${decayReport.active.length} | 🍂 fading ${decayReport.fading.length} | 💤 dormant ${decayReport.dormant.length}
+${decayReport.dormant.length > 0 ? `**Dormant entries (candidates for cold storage)**: ${decayReport.dormant.slice(0, 5).map(e => `${e.title} (score: ${e.freshness.score.toFixed(2)})`).join(', ')}
+*Run \`Alex: Dream\` to archive dormant entries and keep living memory sharp.*` : '*All entries are active — knowledge base is healthy.*'}
+${decayReport.fading.length > 0 ? `**Fading entries (low usage)**: ${decayReport.fading.slice(0, 3).map(e => e.title).join(', ')}` : ''}` : '*No freshness data yet. Reference counts will begin accumulating with global knowledge searches.*'}
+
+## �📈 Metrics
 
 - **Synapse Density**: ${(report.synapseHealth.totalSynapses / Math.max(report.synapseHealth.totalFiles, 1)).toFixed(1)} synapses per file
 - **Connection Integrity**: ${((1 - report.synapseHealth.brokenConnections / Math.max(report.synapseHealth.totalSynapses, 1)) * 100).toFixed(1)}%

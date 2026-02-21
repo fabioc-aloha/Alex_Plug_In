@@ -99,4 +99,4 @@ Refinement: Run full brain-qa (all 35 phases), verify exit 0
 
 Ask the user what they're planning to implement, then walk through Phase 1 Discovery together.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

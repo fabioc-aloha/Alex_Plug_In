@@ -141,4 +141,4 @@ This diagramming foundation enhances future domain knowledge acquisition by prov
 **Version 0.9.9 NILENNENNIUM Diagramming Milestone**: Advanced visual communication mastery with purpose-driven diagram selection and enterprise-grade implementation excellence.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

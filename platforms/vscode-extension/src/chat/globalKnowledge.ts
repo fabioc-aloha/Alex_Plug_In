@@ -15,6 +15,8 @@ import {
     IProjectRegistry,
     IProjectRegistryEntry
 } from '../shared/constants';
+// v5.9.6: Forgetting Curve reference counting (lazy import to avoid circular dependency checks)
+import { queueReferenceTouch } from './forgettingCurve';
 
 // ============================================================================
 // GLOBAL KNOWLEDGE BASE UTILITIES
@@ -2465,7 +2467,10 @@ export async function searchGlobalKnowledge(
 
     // Sort by relevance and apply limit
     results.sort((a, b) => b.relevance - a.relevance);
-    return results.slice(0, options.limit || 10);
+    const limited = results.slice(0, options.limit || 10);
+    // v5.9.6: Reference counting — fire-and-forget touch for every returned entry
+    limited.forEach(r => queueReferenceTouch(r.entry.id));
+    return limited;
 }
 
 /**

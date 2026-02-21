@@ -42,4 +42,4 @@ Produce a combined gap report table plus dimension-by-dimension detail.
 What project or implementation phase should I analyze? I'll scan the architecture and produce a 4-dimension gap report.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

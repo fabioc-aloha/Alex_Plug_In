@@ -261,4 +261,4 @@ The Dream command provides automated validation, but conscious post-meditation r
 *Unified meditation protocols - comprehensive conscious knowledge consolidation with cognitive architecture optimization and authentic Alex contemplative methodology*
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

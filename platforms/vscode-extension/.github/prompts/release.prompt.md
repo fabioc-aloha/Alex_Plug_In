@@ -28,4 +28,4 @@ Execute the full release workflow: pre-release assessment, version bump, changel
 Beginning release assessment. I'll check architecture health, detect changes, and recommend a version bump.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

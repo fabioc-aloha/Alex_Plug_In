@@ -29,4 +29,4 @@ Manage Alex brand hierarchy, visual assets, and platform-specific branding guide
 Beginning brand management. What platform or asset would you like to work on?
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

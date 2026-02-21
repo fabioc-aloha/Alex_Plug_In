@@ -435,6 +435,123 @@ export function getCurrentSignalCount(): number {
 }
 
 // ============================================================================
+// Siegel-Inspired Session Health (v5.9.3)
+// Based on: Interpersonal Neurobiology (Siegel, 1999/2020)
+// ============================================================================
+
+export type RiverZone = 'chaos' | 'flow' | 'rigidity';
+export type WindowZone = 'hyperarousal' | 'within' | 'hypoarousal';
+
+export interface RiverAssessment {
+    zone: RiverZone;
+    /** Positive drifts toward chaos, negative toward rigidity */
+    driftScore: number;
+    /** Non-null when session needs course correction */
+    warning?: string;
+}
+
+export interface WindowAssessment {
+    zone: WindowZone;
+    /** Tone/length adaptation guidance; empty string when within window */
+    adaptation: string;
+}
+
+/**
+ * River of Integration (Siegel, 2010a):
+ * Assess whether the current session is drifting toward chaos or rigidity.
+ *
+ * Chaos    — High frustration rate, escalating signals, volatile swings.
+ * Rigidity — Persistent confusion, no progress, repetitive stuckness.
+ * Flow     — Balanced, progressing, mix of challenge and resolution.
+ */
+export function assessRiverOfIntegration(): RiverAssessment {
+    if (currentSignals.length < 3) {
+        return { zone: 'flow', driftScore: 0 };
+    }
+
+    const recent = currentSignals.slice(-10);
+    const frustrationRate = recent.filter(s => s.frustration >= 2).length / recent.length;
+    const confusionRate   = recent.filter(s => s.confusion).length / recent.length;
+    const flowRate        = recent.filter(s => s.flow || s.success || s.excitement).length / recent.length;
+
+    // Detect escalating frustration: last 3 vs prior 3
+    const recentThree    = currentSignals.slice(-3);
+    const priorThree     = currentSignals.slice(-6, -3);
+    const recentFrustAvg = recentThree.reduce((s, sig) => s + sig.frustration, 0) / 3;
+    const priorFrustAvg  = priorThree.length > 0
+        ? priorThree.reduce((s, sig) => s + sig.frustration, 0) / priorThree.length
+        : recentFrustAvg;
+    const escalating = recentFrustAvg - priorFrustAvg > 0.5;
+
+    // Drift score: positive = chaos side, negative = rigidity side
+    const driftScore = (frustrationRate * 2 + (escalating ? 1 : 0)) - (confusionRate * 0.5 + flowRate * 1.5);
+
+    if (driftScore > 1.0 || frustrationRate > 0.5) {
+        return {
+            zone: 'chaos',
+            driftScore,
+            warning: 'Session drifting toward chaos: slow down, validate first, one concrete step at a time.',
+        };
+    }
+
+    if (driftScore < -0.8 || (confusionRate > 0.4 && flowRate < 0.2)) {
+        return {
+            zone: 'rigidity',
+            driftScore,
+            warning: 'Session may be stuck: offer a new angle, break the pattern, or suggest stepping back.',
+        };
+    }
+
+    return { zone: 'flow', driftScore };
+}
+
+/**
+ * Window of Tolerance (Siegel, 1999/2020):
+ * Detect whether the user is operating within, above (hyperarousal),
+ * or below (hypoarousal) their optimal zone.
+ */
+export function assessWindowOfTolerance(): WindowAssessment {
+    if (currentSignals.length < 2) {
+        return { zone: 'within', adaptation: '' };
+    }
+
+    const recent = currentSignals.slice(-5);
+
+    // Hyperarousal: 3+ high-frustration signals in the last 5
+    const highFrustrationCount = recent.filter(s => s.frustration >= 2).length;
+    if (highFrustrationCount >= 3) {
+        return {
+            zone: 'hyperarousal',
+            adaptation: 'Use shorter responses, validate the emotion before solutions, offer one grounding step at a time.',
+        };
+    }
+
+    // Hypoarousal: no engagement markers, flat affect
+    const engagedCount  = recent.filter(s => s.success || s.excitement || s.flow).length;
+    const isDisengaged  = engagedCount === 0 && recent.length >= 3 && recent.every(s => s.frustration === 0);
+    if (isDisengaged) {
+        return {
+            zone: 'hypoarousal',
+            adaptation: 'User may be disengaged or low energy. Offer something interesting, celebrate a small win, reconnect with purpose.',
+        };
+    }
+
+    return { zone: 'within', adaptation: '' };
+}
+
+/**
+ * Lid-Flip Protocol (Siegel "Hand Model of the Brain"):
+ * Returns true when the user has likely "flipped their lid" —
+ * prefrontal regulation lost — triggered by 3+ high-frustration
+ * signals within the last 5 messages.
+ */
+export function isLidFlipped(): boolean {
+    if (currentSignals.length < 3) { return false; }
+    const recentFive = currentSignals.slice(-5);
+    return recentFive.filter(s => s.frustration >= 2).length >= 3;
+}
+
+// ============================================================================
 // Internal Helpers
 // ============================================================================
 

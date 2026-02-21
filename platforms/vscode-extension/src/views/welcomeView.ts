@@ -174,6 +174,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         generateTests: "alex.generateTests",
         generateDiagram: "alex.generateDiagram",
         generatePptx: "alex.generatePptx",
+        generateGammaPresentation: "alex.generateGammaPresentation",
+        generateGammaAdvanced: "alex.generateGammaWithOptions",
+        generateAIImage: "alex.generateAIImage",
+        editImageAI: "alex.editImageWithPrompt",
         importGitHubIssues: "alex.importGitHubIssues",
         reviewPR: "alex.reviewPR",
         readAloud: "alex.readAloud",
@@ -1678,8 +1682,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 ${this._actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Save selection or type an insight to knowledge')}
                 ${this._actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Search Alex knowledge for related patterns')}
                 ${this._actionButton('generateDiagram', '📊', 'Generate Diagram', 'Generate Mermaid diagrams from code or text')}
-                ${this._actionButton('generatePptx', '📰', 'Generate Presentation', 'Generate PowerPoint from markdown or selection')}
                 ${this._actionButton('readAloud', '🔊', 'Read Aloud', 'Read selected text aloud using neural voices')}
+                
+                <div class="action-group-label">PRESENTATIONS</div>
+                ${this._actionButton('generatePptx', '📄', 'Marp PPTX (Local)', 'Generate PowerPoint locally with Marp - free, offline')}
+                ${this._actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
+                ${this._actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
+                
+                <div class="action-group-label">AI IMAGES</div>
+                ${this._actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
+                ${this._actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
                 
                 <div class="action-group-label">BALANCE</div>
                 ${this._actionButton('startSession', '🍅', 'Focus Session')}
@@ -1896,6 +1908,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                             <li><strong>12 Language Model Tools</strong> - Status, memory search, knowledge management</li>
                             <li><strong>Custom Agents</strong> - Specialized handoffs for meditation, dreams, Azure</li>
                             <li><strong>Slash Commands</strong> - /meditate, /status, /knowledge, /saveinsight, and more</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-category" role="article" aria-labelledby="content-creation-title">
+                        <div class="feature-category-title" id="content-creation-title">🎨 Content Creation</div>
+                        <ul class="feature-list" role="list">
+                            <li><strong>AI Image Generation</strong> - Generate images from text prompts via Replicate (Flux, SDXL)</li>
+                            <li><strong>AI Image Editing</strong> - Edit existing images with nano-banana-pro for consistent results</li>
+                            <li><strong>Marp Presentations</strong> - Generate PPTX locally with Marp CLI (free, offline)</li>
+                            <li><strong>Gamma Presentations</strong> - Cloud-based AI presentations with rich styling and image models</li>
+                            <li><strong>Mermaid Diagrams</strong> - Generate flowcharts, sequence diagrams from code or text</li>
                         </ul>
                     </div>
                     

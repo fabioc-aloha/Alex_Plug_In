@@ -34,6 +34,7 @@ import { ensureGlobalKnowledgeSetup, setupGlobalKnowledgeCommand } from "./comma
 import { importGitHubIssuesAsGoals, reviewPullRequest } from "./commands/githubIntegration";
 import { registerTTSCommands } from "./commands/readAloud";
 import { registerChatParticipant, resetSessionState } from "./chat/participant";
+import { registerFileWatcher } from "./chat/fileWatcher";
 import { saveSessionEmotion } from "./chat/emotionalMemory";
 import { registerLanguageModelTools } from "./chat/tools";
 import {
@@ -150,6 +151,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
   // Register chat participant for @alex conversations
   registerChatParticipant(context);
+
+  // v5.9.8: Background file watcher — ambient workspace observation (hot files, stalled work, TODO hotspots)
+  const workspaceRootForWatcher = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
+  if (workspaceRootForWatcher) {
+    context.subscriptions.push(registerFileWatcher(context, workspaceRootForWatcher));
+  }
 
   // Register language model tools for AI-powered operations
   registerLanguageModelTools(context);
@@ -2252,6 +2259,23 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           return;
         }
 
+        // Check for Node.js
+        try {
+          const { execSync } = await import("child_process");
+          execSync("node --version", { stdio: "ignore" });
+        } catch {
+          const result = await vscode.window.showErrorMessage(
+            "Node.js is required for Gamma generation but was not found.",
+            "Download Node.js",
+            "Cancel"
+          );
+          if (result === "Download Node.js") {
+            vscode.env.openExternal(vscode.Uri.parse("https://nodejs.org/"));
+          }
+          endLog(false);
+          return;
+        }
+
         // Check for GAMMA_API_KEY
         const { getToken } = await import("./services/secretsManager");
         const gammaApiKey = getToken("GAMMA_API_KEY");
@@ -2322,6 +2346,23 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
           endLog(true);
+          return;
+        }
+
+        // Check for Node.js
+        try {
+          const { execSync } = await import("child_process");
+          execSync("node --version", { stdio: "ignore" });
+        } catch {
+          const result = await vscode.window.showErrorMessage(
+            "Node.js is required for Gamma generation but was not found.",
+            "Download Node.js",
+            "Cancel"
+          );
+          if (result === "Download Node.js") {
+            vscode.env.openExternal(vscode.Uri.parse("https://nodejs.org/"));
+          }
+          endLog(false);
           return;
         }
 
@@ -2421,37 +2462,42 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           return;
         }
 
-        // Image model selection
+        // Image model selection with accurate credit costs
         const imageModelOption = await vscode.window.showQuickPick(
           [
             {
               label: "$(zap) flux-quick",
-              description: "2 credits - Fast, cost-effective",
+              description: "~2 credits/image - Fast testing",
               value: "flux-quick",
             },
             {
               label: "$(star) flux-pro",
-              description: "8 credits - Recommended quality",
+              description: "~15 credits/image - Recommended",
               value: "flux-pro",
             },
             {
-              label: "$(star-full) flux-ultra",
-              description: "30 credits - Highest quality",
-              value: "flux-ultra",
+              label: "$(star-full) ideogram",
+              description: "~20 credits/image - Premium quality",
+              value: "ideogram",
             },
             {
               label: "$(symbol-color) dalle3",
-              description: "33 credits - DALL-E 3",
+              description: "~33 credits/image - DALL-E 3",
               value: "dalle3",
             },
             {
               label: "$(image) imagen-pro",
-              description: "15 credits - Google Imagen",
+              description: "~12 credits/image - Google Imagen",
               value: "imagen-pro",
+            },
+            {
+              label: "$(flame) flux-ultra",
+              description: "~40 credits/image - Highest quality",
+              value: "flux-ultra",
             },
           ],
           {
-            placeHolder: "Select AI image model",
+            placeHolder: "Select AI image model (affects credits)",
             title: "Gamma Presentation Options - Step 3/4",
           }
         );

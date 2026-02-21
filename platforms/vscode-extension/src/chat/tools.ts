@@ -1535,7 +1535,7 @@ export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICogni
         // No confirmation needed — this is a lightweight visual update
         const state = options.input.state;
         return {
-            invocationMessage: `Switching to ${state} mode...`
+            invocationMessage: state === 'persona' ? 'Detecting project persona...' : `Switching to ${state} mode...`
         };
     }
 
@@ -1545,6 +1545,18 @@ export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICogni
     ): Promise<vscode.LanguageModelToolResult> {
 
         const state = options.input.state?.toLowerCase();
+
+        // Special "persona" state: clear cognitive state and re-detect project persona
+        // This is used at the end of protocols (meditation, dream, etc.) to return
+        // to the appropriate persona-based avatar for the current project
+        if (state === 'persona') {
+            await vscode.commands.executeCommand('alex.setCognitiveState', null);
+            await vscode.commands.executeCommand('alex.setAgentMode', null);
+            await vscode.commands.executeCommand('alex.refreshWelcomeView');
+            return new vscode.LanguageModelToolResult([
+                new vscode.LanguageModelTextPart('Avatar reset to project persona')
+            ]);
+        }
 
         // Check if it's an agent mode
         if (state && CognitiveStateUpdateTool.validAgentModes.has(state)) {
@@ -1558,7 +1570,7 @@ export class CognitiveStateUpdateTool implements vscode.LanguageModelTool<ICogni
         if (!state || !CognitiveStateUpdateTool.validStates.has(state)) {
             return new vscode.LanguageModelToolResult([
                 new vscode.LanguageModelTextPart(
-                    `Invalid state "${state}". Valid cognitive states: ${[...CognitiveStateUpdateTool.validStates].join(', ')}. Valid agent modes: ${[...CognitiveStateUpdateTool.validAgentModes].join(', ')}`
+                    `Invalid state "${state}". Valid cognitive states: ${[...CognitiveStateUpdateTool.validStates].join(', ')}. Valid agent modes: ${[...CognitiveStateUpdateTool.validAgentModes].join(', ')}. Use "persona" to reset to project-appropriate avatar.`
                 )
             ]);
         }

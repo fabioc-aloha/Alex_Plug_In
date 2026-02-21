@@ -6,6 +6,12 @@
 
 ---
 
+## Resources
+
+> **REQUIRED READING**: Before generating images, read the [Replicate API Starter Kit](../skills/ai-generated-readme-banners/resources/REPLICATE-API-STARTER-KIT.md) for authentication, model selection, and critical gotchas.
+
+---
+
 ## Purpose
 
 Auto-load procedural steps for generating stunning 3:1 ultra-wide README banners with photorealistic quality and professional typography. Optimized for GitHub repositories, documentation portals, and project landing pages.

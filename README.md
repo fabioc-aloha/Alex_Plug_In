@@ -527,6 +527,48 @@ node .github/muscles/gamma-generator.js \
 
 ---
 
+## 🖼️ AI Image Generation
+
+Alex can generate and edit images using the **Replicate API** with models like Flux, SDXL, and nano-banana-pro.
+
+### Quick Start
+
+1. **Get API Key:** [replicate.com/account/api-tokens](https://replicate.com/account/api-tokens)
+
+2. **Set via Secrets Manager:**
+   - Click **API Keys & Secrets** in Alex Welcome View
+   - Select **Replicate API Token**
+   - Paste your token
+
+3. **Generate Images:**
+   - Right-click any `.md` or `.txt` file → **Generate AI Image from File**
+   - Or use Command Palette: `Alex: Generate AI Image`
+
+4. **Edit Images:**
+   - Right-click any image file (png, jpg, webp) → **Edit Image with AI Prompt**
+   - Uses **nano-banana-pro** for consistent face/style preservation
+
+### Available Models
+
+| Model | Speed | Quality | Best For |
+|-------|-------|---------|----------|
+| `flux-schnell` | Fast | Good | Prototyping, quick iterations |
+| `flux-dev` | Medium | Better | General purpose |
+| `flux-pro` | Slow | Best | Production quality |
+| `sdxl` | Medium | Great | Detailed illustrations |
+
+### Image Editing
+
+The **nano-banana-pro** model provides:
+- Face consistency across edits
+- Style preservation from reference images
+- Automatic image resizing (1024px max)
+- ~$0.025/image on Replicate
+
+📘 **[Full Replicate Skill Documentation](.github/skills/replicate-api/resources/REPLICATE-API-STARTER-KIT.md)**
+
+---
+
 ## ☁️ MCP Integrations
 
 Alex provides intelligent guidance for **Azure** and **Microsoft 365** development through MCP (Model Context Protocol) tools.

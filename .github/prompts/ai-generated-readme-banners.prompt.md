@@ -496,4 +496,4 @@ if (typeof output.url === 'function') {
 **You now have a professional README banner for your project!**
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

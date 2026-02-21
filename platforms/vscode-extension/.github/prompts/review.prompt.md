@@ -27,4 +27,4 @@ Always state confidence. Never present uncertain findings as certain.
 What code would you like me to review? Share files, a PR, or describe the area to examine.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

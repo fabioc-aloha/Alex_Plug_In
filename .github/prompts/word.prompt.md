@@ -58,6 +58,6 @@ winget install pandoc
 npm install -g @mermaid-js/mermaid-cli
 pip install python-docx
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: null` to restore default avatar.
+> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.
 
 ```

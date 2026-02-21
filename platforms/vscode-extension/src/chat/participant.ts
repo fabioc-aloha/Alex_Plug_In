@@ -6,7 +6,9 @@ import { startSession, getCurrentSession, isSessionActive, endSession } from '..
 import { getGoalsSummary, showGoalsQuickPick, showCreateGoalDialog, autoIncrementGoals } from '../commands/goals';
 import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
-import { recordEmotionalSignal, resetEmotionalState } from './emotionalMemory';
+import { recordEmotionalSignal, resetEmotionalState, assessRiverOfIntegration, assessWindowOfTolerance, isLidFlipped as checkLidFlipped } from './emotionalMemory';
+import { gatherPeripheralContext } from './peripheralVision';
+import { scoreKnowledgeCoverage, recordCalibrationFeedback } from './honestUncertainty';
 import { validateWorkspace } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
@@ -319,6 +321,10 @@ interface IAlexChatResult extends vscode.ChatResult {
         unreadOnly?: boolean;
         query?: string;
         resultCount?: number;
+        /** Coverage level at time of response — used by feedback handler to correlate 👍/👎 with epistemic accuracy */
+        coverageLevel?: string;
+        /** Topic summary for feedback correlation */
+        coverageTopic?: string;
         [key: string]: unknown; // Allow additional properties
     };
 }
@@ -941,7 +947,12 @@ async function handleGeneralQuery(
     const frustrationNum = emotionalState.frustration === 'high' ? 3 
         : emotionalState.frustration === 'moderate' ? 2 
         : emotionalState.frustration === 'mild' ? 1 : 0;
-    recordEmotionalSignal(request.prompt, frustrationNum, emotionalState.success);
+    const lastSignal = recordEmotionalSignal(request.prompt, frustrationNum, emotionalState.success);
+
+    // v5.9.3 Siegel: Assess session health after recording signal
+    const riverStatus  = assessRiverOfIntegration();
+    const windowStatus = assessWindowOfTolerance();
+    const lidFlipped   = checkLidFlipped();
     
     // Get user profile for personalization
     const profile = await getUserProfile();
@@ -949,14 +960,25 @@ async function handleGeneralQuery(
     // v5.8.0: Build modular prompt using prompt engine
     const workspaceRoot = workspaceFolders?.[0]?.uri.fsPath || '';
     const detectModelInfo = getModelInfo(request);
-    
+
+    // v5.9.4 + v5.9.5: Gather peripheral vision and knowledge coverage concurrently
+    const [peripheral, coverage] = await Promise.all([
+        gatherPeripheralContext(workspaceRoot),
+        scoreKnowledgeCoverage(request.prompt, workspaceRoot),
+    ]);
+
     // Transform EmotionalState to PromptContext.emotionalState shape
-    // The prompt engine expects a different structure than detectEmotionalState returns
     const emotionalContext = emotionalState ? {
         isPositive: emotionalState.success || emotionalState.celebrationNeeded,
         isFrustrated: emotionalState.frustration !== 'none',
-        isConfused: false, // Not currently tracked
-        isExcited: emotionalState.celebrationNeeded
+        isConfused: lastSignal.confusion,      // v5.9.3: now read from actual signal
+        isExcited: emotionalState.celebrationNeeded || lastSignal.excitement,
+        // Siegel session health
+        riverZone: riverStatus.zone,
+        riverWarning: riverStatus.warning,
+        windowZone: windowStatus.zone,
+        windowAdaptation: windowStatus.adaptation,
+        isLidFlipped: lidFlipped,
     } : undefined;
     
     const promptContext: PromptContext = {
@@ -965,7 +987,9 @@ async function handleGeneralQuery(
         emotionalState: emotionalContext,
         model: detectModelInfo,
         history: context.history,
-        request
+        request,
+        peripheral,  // v5.9.4: ambient workspace + peer project awareness
+        coverage,    // v5.9.5: knowledge coverage / honest uncertainty calibration
     };
     
     const alexSystemPrompt = await buildAlexSystemPrompt(promptContext);
@@ -1163,7 +1187,13 @@ You're running on a ${tierInfo.displayName} model optimized for speed. Focus on:
         }
     }
 
-    return { metadata: { command: 'general' } };
+    return {
+        metadata: {
+            command: 'general',
+            coverageLevel: coverage?.level,
+            coverageTopic: coverage ? [...request.prompt.toLowerCase().split(/\W+/).filter(w => w.length > 3)].slice(0, 4).join(' ') : undefined,
+        },
+    };
 }
 
 /**
@@ -2348,6 +2378,13 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
         }
 
         if (result.metadata.command === 'general') {
+            // v5.9.7: Surface knowledge gap when coverage was low/uncertain
+            if (result.metadata.coverageLevel === 'low' || result.metadata.coverageLevel === 'uncertain') {
+                followups.push(
+                    { prompt: '/saveinsight', label: '💡 Save this as a new insight' },
+                    { prompt: `/knowledge ${result.metadata.coverageTopic ?? ''}`.trim(), label: '🔍 Search existing knowledge' }
+                );
+            }
             // Proactively suggest profile setup if not done
             followups.push(
                 { prompt: '/profile', label: '👤 View/setup profile' },
@@ -2444,9 +2481,19 @@ export function registerChatParticipant(context: vscode.ExtensionContext): vscod
     
     alex.followupProvider = alexFollowupProvider;
     
-    // Handle feedback for telemetry
+    // Handle feedback for telemetry + calibration correlation
     alex.onDidReceiveFeedback((feedback: vscode.ChatResultFeedback) => {
-        console.log('Alex received feedback:', feedback.kind === vscode.ChatResultFeedbackKind.Helpful ? 'helpful' : 'unhelpful');
+        const helpful = feedback.kind === vscode.ChatResultFeedbackKind.Helpful;
+        console.log('Alex received feedback:', helpful ? 'helpful' : 'unhelpful');
+
+        // v5.9.7: Correlate 👍/👎 with epistemic accuracy
+        const meta = (feedback.result as IAlexChatResult).metadata;
+        const level = meta?.coverageLevel as import('./honestUncertainty').ConfidenceLevel | undefined;
+        const topic = typeof meta?.coverageTopic === 'string' ? meta.coverageTopic : 'general';
+        if (level) {
+            const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
+            recordCalibrationFeedback(workspaceRoot, topic, level, helpful).catch(() => {});
+        }
     });
     
     context.subscriptions.push(alex);
