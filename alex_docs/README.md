@@ -54,11 +54,12 @@
 | ------------------------------------------------------------ | ----------------------------- |
 | [Workspace Protection](./operations/WORKSPACE-PROTECTION.md) | Kill switch and safety system |
 
-### 📊 Research & Strategy
+### 📊 Research & Publications
 
-| Document                                                                                 | Description                               |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work |
+| Document                                                                                 | Description                                              |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **[📚 Papers & Research →](./PAPERS.md)**                                               | **Academic papers repository (single source of truth)**  |
+| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work                |
 
 ---
 
