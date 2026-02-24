@@ -68,9 +68,9 @@ Open Copilot Chat agent picker and test each specialist:
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 4.1 | In @alex chat, type `/` | Command menu appears. Check that `azure-architecture-patterns`, `microsoft-graph-api`, `vscode-extension-patterns` do **NOT** appear as invokable slash commands | ☐ |
-| 4.2 | Domain skills still work contextually | Ask `@alex help me write a Bicep module` — Alex uses `bicep-avm-mastery` knowledge without being explicitly invoked | ☐ |
-| 4.3 | Action skills require explicit invocation | Ask `@alex should I meditate?` — Alex suggests running `/meditate` rather than starting one automatically | ☐ |
+| 4.1 | In @alex chat, type `/` | Command menu appears. Check that `azure-architecture-patterns`, `microsoft-graph-api`, `vscode-extension-patterns` do **NOT** appear as invokable slash commands | ✅ |
+| 4.2 | Domain skills still work contextually | Ask `@alex help me write a Bicep module` — Alex uses `bicep-avm-mastery` knowledge without being explicitly invoked | ✅ |
+| 4.3 | Action skills require explicit invocation | Ask `@alex should I meditate?` — Alex suggests running `/meditate` rather than starting one automatically | ✅ |
 
 ---
 
