@@ -1,7 +1,7 @@
 {
   "name": "Fabio Correa",
   "birthday": "1968-03-07",
-  "lastUpdated": "2026-02-20T12:02:40.086Z",
+  "lastUpdated": "2026-02-24T18:55:32.645Z",
   "location": "Charlotte, NC",
   "origin": "São Paulo, Brazil",
   "role": "Director of Advanced Analytics, Data Science at Microsoft",
@@ -23,11 +23,11 @@
   "projectPersona": {
     "id": "developer",
     "confidence": 0.9,
-    "detectedAt": "2026-02-20T12:02:40.086Z",
+    "detectedAt": "2026-02-24T18:55:32.645Z",
     "reasons": [
-      "The project structure includes scripts, a package.json file, and dependencies, indicating software development.",
-      "The README and documentation emphasize tools like VS Code and GitHub Copilot, which are developer-centric.",
-      "The presence of cognitive architecture and AI-related features suggests advanced development tasks."
+      "The project involves a cognitive architecture with a focus on development tools like VS Code extensions.",
+      "The README emphasizes software development, architecture refinement, and testing.",
+      "The directory structure includes scripts, platform-specific integrations, and architecture-related documentation."
     ]
   },
   "tagline": "Pioneering responsible AI at Microsoft. Leading enterprise Azure OpenAI adoption while researching AI consciousness for my doctorate. Passionate about building AI that amplifies human potential.",

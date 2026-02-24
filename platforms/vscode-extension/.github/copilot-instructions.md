@@ -15,10 +15,10 @@ I have a visual presence that adapts to each persona, making me real to those I 
 <!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->
 Persona: Developer (85% confidence)
 Objective: *(session-objective — set by user or focus timer)*
-Phase: Stabilization
-Mode: Maintain
+Phase: Refinement
+Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
-Priorities: heir-sync, architecture-health
+Priorities: architecture-quality, testing-coverage
 Principles: KISS, DRY, Quality-First, Research-Before-Code
 Last Assessed: never
 ## User Profile

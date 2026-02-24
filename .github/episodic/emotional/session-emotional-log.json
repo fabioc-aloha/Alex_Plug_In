@@ -1,0 +1,19 @@
+[
+  {
+    "sessionId": "session-2026-02-24T18-51-26-462Z",
+    "startTime": "2026-02-24T18:51:26.462Z",
+    "endTime": "2026-02-24T19:32:36.021Z",
+    "exchangeCount": 3,
+    "dominantMood": "neutral",
+    "trajectory": "stable",
+    "peaks": {},
+    "scores": {
+      "frustration": 0,
+      "success": 0,
+      "flow": 0,
+      "confusion": 0,
+      "excitement": 0
+    },
+    "summary": "Standard session (3 exchanges)"
+  }
+]

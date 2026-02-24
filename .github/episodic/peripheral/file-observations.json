@@ -1,19 +1,22 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.9.vsix",
-      "todoCount": 20,
-      "scannedAt": 1771946803336
+      "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
+      "todoCount": 1,
+      "scannedAt": 1771965712368
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1771946803336
+      "scannedAt": 1771965712368
+    },
+    {
+      "file": "TEST-GUIDE.md",
+      "todoCount": 1,
+      "scannedAt": 1771965712368
     }
   ],
-  "lastUpdated": 1771946803336
+  "lastUpdated": 1771965712368
 }
