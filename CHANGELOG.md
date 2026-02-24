@@ -44,6 +44,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Scenario models routing** — `scenario_models` added to `declarativeAgent.json`: `cognitive_deep` routes meditation/self-actualization/architecture operations to GPT-4o; `productivity_light` routes calendar/email/presence lookups to GPT-4o-mini.
 - **Conversation starters expanded 7 → 12** — Added: "🗓️ What's on my plate?", "🧠 Self-actualization", "🔍 Search my knowledge", "🎯 Sync my goals", "💡 Get AI insights and action items from my last meeting".
 
+### Fixed
+
+- **Avatar revert mandate** — Added `**IMPORTANT**` instruction to `copilot-instructions.md`, `meditation.instructions.md`, and `dream-state-automation.instructions.md` requiring `alex_cognitive_state_update` with `state: "persona"` as the final step of every dream/meditate session. Propagated to both vscode-extension and github-copilot-web heirs.
+- **`.claude/` heir sync** — `sync-architecture.cjs` now copies `.claude/CLAUDE.md` + `.claude/settings.json` to `platforms/vscode-extension/.claude/` on every build. Previously the Claude bridge was master-only.
+- **`cognitive-config.json` version drift** — Bumped `version` and `alex_version` fields from `5.9.3` to `5.9.9`.
+- **Broken synapse repair** — Fixed stale reference in `meditation-2026-02-20-avatar-system-completion.md`: `2026-02-20-stabilization-meditation.md` → `meditation-2026-02-20-stabilization.md`.
+- **`package-lock.json` version drift** — Bumped both version entries from `5.9.8` to `5.9.9`.
+
+### Documentation
+
+- **Activation pass test guide** — `alex_docs/guides/TEST-ACTIVATION-PASS.md`: 40 checks across 9 phases (extension present, status bar, 13 core commands, views, chat participant, LM tools, background services, error tolerance, avatar revert). Pass threshold: all 40 green; Phase 1–5 fail or `CRITICAL` error = release block.
+
 ---
 
 ## [5.9.8] - 2026-02-21

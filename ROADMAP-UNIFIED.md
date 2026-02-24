@@ -26,7 +26,7 @@ Three platforms. Focused, not scattered.
 
 ### Current State
 
-v5.9.8 is current. Alex now has:
+v5.9.9 is current. Alex now has:
 - **Identity: Alex Finch** (no nickname, age 26) — consistent across master and all platform heirs
 - **123 Skills** (109 inheritable to heirs) — Comprehensive domain coverage
 - **22 Complete Trifectas** — 9 added in cognitive sprint (VS Code, M365, cross-domain capabilities) for 17.2% trifecta coverage
@@ -65,6 +65,14 @@ v5.9.8 is current. Alex now has:
 - **The Forgetting Curve** — Usage-weighted freshness scoring for all global knowledge entries: `referenceCount × 0.6 + recencyDecay × 0.4`. Four decay profiles (aggressive 14d, moderate 60d, slow 180d, permanent). Reference counting wired into every `searchGlobalKnowledge` call. Meditation decay report surfaces thriving/active/fading/dormant entry clusters. Dream ceremony moves dormant entries to cold storage — recoverable, never deleted.
 - **P2 Feature Completion** — All actionable P2 items across Peripheral Vision, Honest Uncertainty, and The Forgetting Curve shipped: dependency freshness tracker (`npm outdated --json`, 5min cache, major/minor/patch classification), test runner awareness (file-based heuristics for jest/vitest results, pass rate + last-run age), user feedback loop (VS Code native 👍/👎 correlated with confidence level via `feedback-log.json`), plus followup suggestions when coverage is `low` or `uncertain`.
 - **Background File Watcher** — Silent ambient observer: hot files (opened ≥5× in 7 days), stalled work (uncommitted git changes), TODO/FIXME hotspots in recently-touched files. Persisted to `.github/episodic/peripheral/file-observations.json`, injected as **Focus Patterns** in Layer 8. Zero user interruptions — Alex just knows.
+- **Skill Frontmatter Gating** — `disable-model-invocation: true` on 6 action skills; `user-invokable: false` on 16 domain skills. Model loads contextually but users control explicit invocation.
+- **Agent Orchestration Hierarchy** — `agents:` frontmatter in all 6 specialist agents, formalizing valid subagent relationships. Researcher → Builder + Validator; Builder → Validator; Validator → Documentarian.
+- **Quality Gate Hooks** — `PreToolUse` hooks enforce version drift check before publish and compile reminder on `.ts` edits. Deterministic — run regardless of model behavior.
+- **Claude Code Bridge** — `.claude/CLAUDE.md` + `.claude/settings.json` make Alex's architecture usable in Claude Code sessions. Synced to vscode-extension heir via `sync-architecture.cjs`.
+- **agentCustomizationSkill Disabled** — `chat.agentCustomizationSkill.enabled: false` prevents VS Code 1.109's built-in skill from overriding Alex's `vscode-extension-patterns` and `skill-development` skills.
+- **M365 Platform Harvest** — Plugin schema v2.4; `getMeetingAiInsights` Graph v1.0 endpoint; `scenario_models` routing (GPT-4o for deep cognition, GPT-4o-mini for productivity); conversation starters expanded from 7 to 12.
+- **Avatar Revert Mandate** — `**IMPORTANT**` instruction propagated to all heirs (vscode-extension + github-copilot-web): dream/meditate sessions must call `alex_cognitive_state_update` with `state: "persona"` as final step.
+- **Activation Pass Test Guide** — `alex_docs/guides/TEST-ACTIVATION-PASS.md`: 40 checks across 9 phases covering extension presence, status bar, commands, views, chat participant, LM tools, background services, error tolerance, and avatar revert.
 
 ### Vision Forward
 
