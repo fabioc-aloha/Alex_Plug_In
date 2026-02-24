@@ -1,10 +1,19 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "TEST-GUIDE.md",
-    "platforms/vscode-extension/package-lock.json"
+    "github/episodic/peripheral/file-observations.json"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1771945283370
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.9.vsix",
+      "todoCount": 20,
+      "scannedAt": 1771946803336
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1771946803336
+    }
+  ],
+  "lastUpdated": 1771946803336
 }

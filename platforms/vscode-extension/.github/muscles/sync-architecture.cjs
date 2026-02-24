@@ -367,6 +367,20 @@ function syncArchitectureFiles() {
             console.log(`✅ ${fileName} (walkthrough media)`);
         }
     }
+
+    // Sync .claude/ bridge (Claude Code compatibility — CLAUDE.md + settings.json)
+    const masterClaude = path.join(MASTER_ROOT, '.claude');
+    const heirClaude = path.join(HEIR_ROOT, '.claude');
+    if (fs.existsSync(masterClaude)) {
+        if (!fs.existsSync(heirClaude)) fs.mkdirSync(heirClaude, { recursive: true });
+        const claudeFiles = fs.readdirSync(masterClaude).filter(f => fs.statSync(path.join(masterClaude, f)).isFile());
+        let claudeCount = 0;
+        for (const f of claudeFiles) {
+            fs.copyFileSync(path.join(masterClaude, f), path.join(heirClaude, f));
+            claudeCount++;
+        }
+        console.log(`✅ .claude/ (${claudeCount} files)`);
+    }
 }
 
 function verifyCounts() {
