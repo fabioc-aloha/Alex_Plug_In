@@ -53,14 +53,14 @@ Open Copilot Chat agent picker and test each specialist:
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 3.1 | Switch to **Researcher** agent | Available in agent picker; researcher persona active | ☐ |
-| 3.2 | Ask Researcher to research a topic | After response, handoff buttons appear: "🔨 Ready to Build", "🔍 Ready for QA Planning" | ☐ |
-| 3.3 | Click "🔨 Ready to Build" handoff | Switches to Builder agent with context | ☐ |
-| 3.4 | Switch to **Builder** agent directly | Available; "🔍 Request QA Review" handoff visible after response | ☐ |
-| 3.5 | Switch to **Validator** agent | Available; adversarial critique tone; "📚 Document This" handoff present | ☐ |
-| 3.6 | Switch to **Azure** agent | Available; Azure-focused responses; MCP tools active if configured | ☐ |
-| 3.7 | Switch to **M365** agent | Available; Teams/Graph-focused responses | ☐ |
-| 3.8 | Switch to **Documentarian** agent | Available; doc-quality focus | ☐ |
+| 3.1 | Switch to **Researcher** agent | Available in agent picker; researcher persona active | ✅ |
+| 3.2 | Ask Researcher to research a topic | After response, handoff buttons appear: "🔨 Ready to Build", "🔍 Ready for QA Planning" | ✅ |
+| 3.3 | Click "🔨 Ready to Build" handoff | Switches to Builder agent with context | ✅ |
+| 3.4 | Switch to **Builder** agent directly | Available; "🔍 Request QA Review" handoff visible after response | ✅ |
+| 3.5 | Switch to **Validator** agent | Available; adversarial critique tone; "📚 Document This" handoff present | ✅ |
+| 3.6 | Switch to **Azure** agent | Available; Azure-focused responses; MCP tools active if configured | ✅ |
+| 3.7 | Switch to **M365** agent | Available; Teams/Graph-focused responses | ✅ |
+| 3.8 | Switch to **Documentarian** agent | Available; doc-quality focus | ✅ |
 
 ---
 
