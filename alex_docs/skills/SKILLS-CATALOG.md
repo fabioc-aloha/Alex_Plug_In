@@ -147,7 +147,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | Skill                                                                    | Inheritance | Purpose                                                   |
 | ------------------------------------------------------------------------ | ----------- | --------------------------------------------------------- |
 | [svg-graphics](../../.github/skills/svg-graphics/SKILL.md)               | inheritable | SVG banners, logos, icons, visual identity                |
-| [image-handling](../../.github/skills/image-handling/SKILL.md)           | inheritable | Format conversion, optimization, sizing                   |
+| [image-handling](../../.github/skills/image-handling/SKILL.md)           | inheritable | AI image generation via Replicate (Flux, Ideogram, SDXL, Seedream), model selection, format conversion, optimization |
 | [graphic-design](../../.github/skills/graphic-design/SKILL.md)           | inheritable | Visual composition, branding, aesthetics                  |
 | [gamma-presentations](../../.github/skills/gamma-presentations/SKILL.md) | inheritable | AI presentations, documents, social content via Gamma API |
 | [text-to-speech](../../.github/skills/text-to-speech/SKILL.md)           | inheritable | TTS synthesis, chunking, audio content generation         |

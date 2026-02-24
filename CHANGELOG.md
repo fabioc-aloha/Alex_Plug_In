@@ -56,6 +56,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Activation pass test guide** — `alex_docs/guides/TEST-ACTIVATION-PASS.md`: 40 checks across 9 phases (extension present, status bar, 13 core commands, views, chat participant, LM tools, background services, error tolerance, avatar revert). Pass threshold: all 40 green; Phase 1–5 fail or `CRITICAL` error = release block.
 
+### Skill Enhancements
+
+- **`image-handling` skill — Replicate model selection** — Added comprehensive AI image generation guidance: 7-model comparison table (Flux Schnell, Flux Dev, Flux 1.1 Pro, Ideogram v2, Ideogram v2 Turbo, SDXL, Seedream 5 Lite) with costs and use cases; model selection decision guide keyed to user intent; LoRA support reference; aspect ratio reference. 14 new trigger words added including `flux schnell`, `flux dev`, `ideogram`, `sdxl`, `seedream`, `text in image`, `replicate model`. Enables Alex to route image generation requests to the correct Replicate model automatically.
+
 ---
 
 ## [5.9.8] - 2026-02-21
