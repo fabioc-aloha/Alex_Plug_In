@@ -391,11 +391,10 @@ export const SKILL_TO_PERSONA_MAP: Record<string, string> = {
  * Some skills naturally put the user in a cognitive state.
  */
 export const SKILL_TO_STATE_MAP: Record<string, string> = {
-    // Cognitive states
-    'meditation':              'meditation',
-    'self-actualization':      'meditation',
-    'dream-state':             'dream',
-    'knowledge-synthesis':     'discovery',
+    // NOTE: Reflective/cognitive skills (dream-state, meditation, self-actualization,
+    // knowledge-synthesis) are intentionally NOT mapped here. These skills appear in
+    // long-term Focus Trifectas, so mapping them would permanently override the avatar.
+    // Their avatars are set by explicit setCognitiveState() calls during active sessions.
     
     // Planning states
     'research-first-development': 'planning',
