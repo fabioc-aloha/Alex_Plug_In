@@ -317,10 +317,67 @@ Items to pull from when capacity frees up:
 | Finding                           | Source Document                           | Priority | Status | Description                                                                  |
 | --------------------------------- | ----------------------------------------- | :------: | :----: | ---------------------------------------------------------------------------- |
 | GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md             |    P2    | 🔵 Open | Migrate final 4 patterns to YAML v2 frontmatter (28/32 complete in v5.6.5)   |
-| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md             |    P1    | 🔵 Open | 10 files need migration, priority order defined. No v5.9.x progress — still open.|
+| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md             |    P1    | ⚠️ Partial | 3 of 10 files migrated (2026-02-24): `contextMenu.ts` (all Replicate + episodic saves), `fileWatcher.ts` (episodic persist/load), `healthCheck.ts` (workspace stat + read). Remaining 7: `synapse-core.ts`, `tools.ts`, `memoryTreeProvider.ts`, `session.ts`, `self-actualization.ts`, `skillCatalog.ts`, `heirValidation.ts`. Global-path files (`globalKnowledge.ts`, `goals.ts`, `forgettingCurve.ts`) intentionally kept on fs-extra per ADR-008. |
 | VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md     |    P1    | ⚠️ Partial | 10 integration opportunities. v5.9.9 addresses: `chatSkills` GA (skill frontmatter), `agents:` frontmatter, agent hooks quality gates, built-in skill disable. Remaining: re-audit after v5.9.9 ships. |
 | Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md            |    P1    | ⚠️ Partial | v5.9.9 addresses: skill frontmatter gating, model fallback YAML, agent orchestration, Claude bridge, MCP Apps prototype. Re-audit after v5.9.9 to close remaining items. |
-| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                   |    P2    | 🔵 Open | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal. v5.9.9 skill frontmatter gating improves discoverability via `user-invokable` but does not replace semantic embedding. Full proposal still open. |
+| Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                   |    P2    | 🔵 Open | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal. v5.9.9 skill frontmatter gating improves discoverability via `user-invokable` but does not replace semantic embedding. **See dedicated section below.** |
+
+---
+
+### 🧠 Semantic Skill Graph — Planned
+
+**Source**: `alex_docs/architecture/SEMANTIC-SKILL-GRAPH.md`
+**Status**: Not started — Phase 1 is the right next investment once Replicate service and fs-extra migration are stable
+**Paradigm**: Compiled Cognitive Runtime — from keyword matching to semantic understanding
+
+**Problem**: Skill discovery degrades as skill count grows. The 87-row keyword table in `skill-activation/SKILL.md` is hand-maintained and misses semantic connections. Known failures: asking about "tokens" activates the wrong skill; "memory" routes to general knowledge rather than forgetting curve. As we approach 130+ skills, the hand-curated keyword table becomes a bottleneck.
+
+**Solution**: Replace (or augment with a fallback to) keyword matching with vector embeddings. Parse all SKILL.md files + synapses.json, embed with Azure OpenAI text-embedding-3-small, compute cosine similarity at query time, and cache the compiled graph between dream sessions.
+
+**Implementation Phases**:
+
+| # | Phase | Impact | Effort | Dependency | Status |
+|---|-------|--------|--------|-----------|--------|
+| 1 | Proof of Concept (standalone script) | 🔴 HIGH | 1 week | Azure OpenAI API key | ⬜ Not started |
+| 2 | Extension Integration | 🔴 HIGH | 1 week | Phase 1 validated | ⬜ Not started |
+| 3 | Synapse Discovery Dashboard | 🟡 MEDIUM | 1 week | Phase 2 complete | ⬜ Not started |
+| 4 | Global Knowledge Integration | 🟡 MEDIUM | 1 week | Phase 2 complete | ⬜ Not started |
+
+**Phase 1 — Proof of Concept**:
+- Parse all 123 `SKILL.md` files + each `synapses.json`
+- Chunk each skill into ~300-token segments
+- Embed with `text-embedding-3-small` (~$0.002 total, 1536-dim vectors)
+- Compute pairwise cosine similarity, merge with explicit synapses
+- K-means clustering to discover implicit skill clusters
+- Build query function: `findRelevantSkills(userMessage)` → ranked list
+- Validate against 3 known keyword-matching failures
+
+**Phase 2 — Extension Integration**:
+- Add `alex.recompileSkills` command: generates `compiled-skill-graph.json` from all skill files
+- Integrate into Dream maintenance: auto-recompile when SKILL.md files change
+- Add semantic query path to `skill-activation/SKILL.md` lookup — keyword match first, vector fallback if confidence < threshold
+- Staleness detection: graph expires after 7 days or when skill files change
+
+**Phase 3 — Synapse Discovery Dashboard**:
+- Generate `discovered-synapses.md` — skills Alex didn't know were related
+- TreeView showing discovered connections with strength scores
+- Promote / Dismiss actions to curate discovered synapses into `synapses.json`
+
+**Phase 4 — Global Knowledge Integration**:
+- Embed `GK-*` patterns and `GI-*` insights into the graph
+- Cross-project query pipeline: a question matches both local skills and global knowledge
+- Store global vectors in `~/.alex/compiled/` (persistent across workspaces)
+
+**Key Design Decisions**:
+- Phase 1 validates the entire approach with **zero VS Code API dependency** — a standalone script callable from any terminal
+- If cosine similarity does not outperform keyword matching on the 3 known failures → abandon at Phase 1 (sunk cost: $0.002)
+- Keyword matching is kept as a fallback — never removed, only augmented
+- Compiled graph is cached JSON, not a database — works offline, loads in <50ms
+- `alex.recompileSkills` is a manual + scheduled command, never automatic on every request
+
+**Trigger for Phase 1**: Azure OpenAI API key configured in SecretStorage + > 130 skills in the catalog
+
+---
 | Cognitive Dashboard               | COGNITIVE-DASHBOARD-DESIGN.md             |    P2    | ⚠️ Partial | v5.9.9 MCP Apps prototype (synapse health renderer) is the first tile of this dashboard. v6.0.0 Workspace health dashboard is the status bar widget layer. Full unified webview still in backlog. |
 | Presentation automation           | gamma/MARP-AUTOMATION-PLAN.md + PPTXGENJS |    P1    | 🔵 Open | Template-driven Marp + PptxGenJS generators with Replicate image integration. No progress in v5.9.x. |
 | Academic paper finalization       | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md    |    P2    | 🔵 Open | 1706-line paper, 62-project case study — needs peer review prep              |
@@ -330,7 +387,7 @@ Items to pull from when capacity frees up:
 
 | Finding                       | Source Document         | Priority | Description                                                                |
 | ----------------------------- | ----------------------- | :------: | -------------------------------------------------------------------------- |
-| Runtime image generation      | REPLICATE-EVALUATION.md |    P1    | `replicateService.ts` for runtime image gen — replaces DALL-E (ADR-007)    |
+| Runtime image generation      | REPLICATE-EVALUATION.md |    P1    | ✅ Delivered | `replicateService.ts` built: 7-model catalog, model-based API (no stale version hashes), intent-to-model routing, vscode.workspace.fs download, Quick Pick with recommended model highlighting. `generateAIImage` + `editImageWithPrompt` commands updated to use service. |
 | Image upscaling via Replicate | REPLICATE-EVALUATION.md |    P2    | Super-resolution for avatar images and presentation assets                 |
 | FLUX fine-tune for Alex brand | REPLICATE-EVALUATION.md |    P2    | Custom LoRA trained on Alex's visual identity for consistent brand imagery |
 | Video generation capabilities | REPLICATE-EVALUATION.md |    P3    | Animated tutorials and visual explanations via Wan 2.1                     |

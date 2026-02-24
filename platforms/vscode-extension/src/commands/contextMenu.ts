@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import * as https from 'https';
 import { 
     searchGlobalKnowledge, 
     createGlobalInsight, 
@@ -23,16 +22,17 @@ import {
     STOCK_CATEGORIES 
 } from '../generators/illustrationIcons';
 import { getToken } from '../services/secretsManager';
+import {
+    generateImage,
+    downloadImageToWorkspace,
+    createPrediction,
+    pollPrediction,
+    selectModelForPrompt,
+    buildModelQuickPickItems
+} from '../services/replicateService';
 
 interface KnowledgeQuickPickItem extends vscode.QuickPickItem {
     filePath?: string;
-}
-
-interface ReplicatePrediction {
-    id: string;
-    status: 'starting' | 'processing' | 'succeeded' | 'failed' | 'canceled';
-    output?: string | string[];
-    error?: string;
 }
 
 // Maximum image dimension for API upload (to avoid payload size issues)
@@ -69,217 +69,8 @@ async function resizeImageIfNeeded(buffer: Buffer | Uint8Array, maxDim: number =
     }
 }
 
-/**
- * Call Replicate API using model name (uses latest version)
- */
-async function callReplicateModelAPI(
-    apiToken: string,
-    modelName: string,
-    input: Record<string, unknown>
-): Promise<string | null> {
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify({
-            input
-        });
-
-        // Use model-based endpoint for latest version
-        const options = {
-            hostname: 'api.replicate.com',
-            port: 443,
-            path: `/v1/models/${modelName}/predictions`,
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiToken}`,
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data),
-                'Prefer': 'wait'  // Wait for completion
-            }
-        };
-
-        const req = https.request(options, (res) => {
-            const chunks: Buffer[] = [];
-            res.on('data', (chunk) => chunks.push(chunk));
-            res.on('end', async () => {
-                try {
-                    const body = Buffer.concat(chunks).toString();
-                    const prediction: ReplicatePrediction = JSON.parse(body);
-                    
-                    if (prediction.error) {
-                        reject(new Error(prediction.error));
-                        return;
-                    }
-                    
-                    if (prediction.status === 'succeeded' && prediction.output) {
-                        // Output could be URL or direct data
-                        const output = prediction.output;
-                        if (Array.isArray(output) && output.length > 0) {
-                            resolve(output[0]);
-                        } else if (typeof output === 'string') {
-                            resolve(output);
-                        } else {
-                            resolve(null);
-                        }
-                        return;
-                    }
-                    
-                    if (!prediction.id) {
-                        reject(new Error(body));
-                        return;
-                    }
-                    
-                    // Poll for completion if not using Prefer: wait
-                    const result = await pollPrediction(apiToken, prediction.id);
-                    resolve(result);
-                } catch (err) {
-                    reject(err);
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.write(data);
-        req.end();
-    });
-}
-
-/**
- * Call Replicate API to create and poll a prediction (version-based)
- */
-async function callReplicateAPI(
-    apiToken: string,
-    modelVersion: string,
-    input: Record<string, unknown>
-): Promise<string | null> {
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify({
-            version: modelVersion,
-            input
-        });
-
-        const options = {
-            hostname: 'api.replicate.com',
-            port: 443,
-            path: '/v1/predictions',
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiToken}`,
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data)
-            }
-        };
-
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', (chunk) => body += chunk);
-            res.on('end', async () => {
-                try {
-                    const prediction: ReplicatePrediction = JSON.parse(body);
-                    if (!prediction.id) {
-                        reject(new Error(body));
-                        return;
-                    }
-                    
-                    // Poll for completion
-                    const result = await pollPrediction(apiToken, prediction.id);
-                    resolve(result);
-                } catch (err) {
-                    reject(err);
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.write(data);
-        req.end();
-    });
-}
-
-/**
- * Poll a Replicate prediction until completion
- */
-async function pollPrediction(apiToken: string, predictionId: string): Promise<string | null> {
-    const maxAttempts = 120; // 2 minutes max
-    const pollInterval = 1000; // 1 second
-
-    for (let attempt = 0; attempt < maxAttempts; attempt++) {
-        await new Promise(r => setTimeout(r, pollInterval));
-
-        const prediction = await getPrediction(apiToken, predictionId);
-        
-        if (prediction.status === 'succeeded') {
-            const output = prediction.output;
-            if (Array.isArray(output)) {
-                return output[0] || null;
-            }
-            return typeof output === 'string' ? output : null;
-        }
-        
-        if (prediction.status === 'failed' || prediction.status === 'canceled') {
-            throw new Error(prediction.error || `Prediction ${prediction.status}`);
-        }
-    }
-    
-    throw new Error('Prediction timed out');
-}
-
-/**
- * Get prediction status from Replicate
- */
-function getPrediction(apiToken: string, predictionId: string): Promise<ReplicatePrediction> {
-    return new Promise((resolve, reject) => {
-        const options = {
-            hostname: 'api.replicate.com',
-            port: 443,
-            path: `/v1/predictions/${predictionId}`,
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${apiToken}`
-            }
-        };
-
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', (chunk) => body += chunk);
-            res.on('end', () => {
-                try {
-                    resolve(JSON.parse(body));
-                } catch (err) {
-                    reject(err);
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.end();
-    });
-}
-
-/**
- * Download an image from URL and save to file
- */
-async function downloadImage(url: string, outputPath: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-        const urlObj = new URL(url);
-        const protocol = urlObj.protocol === 'https:' ? https : https;
-        
-        protocol.get(url, (res) => {
-            if (res.statusCode === 301 || res.statusCode === 302) {
-                // Follow redirect
-                downloadImage(res.headers.location!, outputPath).then(resolve).catch(reject);
-                return;
-            }
-            
-            const chunks: Buffer[] = [];
-            res.on('data', (chunk) => chunks.push(chunk));
-            res.on('end', async () => {
-                const buffer = Buffer.concat(chunks);
-                await fs.writeFile(outputPath, buffer);
-                resolve();
-            });
-            res.on('error', reject);
-        }).on('error', reject);
-    });
-}
+// Note: Replicate API functions (createPrediction, pollPrediction, generateImage, downloadImageToWorkspace)
+// are provided by ../services/replicateService. The inline implementations have been removed.
 
 /**
  * Generate an SVG illustration from a natural language description.
@@ -590,8 +381,11 @@ Project: ${workspaceFolders[0].name}
 `;
 
                     try {
-                        await fs.ensureDir(episodicPath);
-                        await fs.writeFile(filePath, content, 'utf8');
+                        await vscode.workspace.fs.createDirectory(vscode.Uri.file(episodicPath));
+                        await vscode.workspace.fs.writeFile(
+                            vscode.Uri.file(filePath),
+                            Buffer.from(content, 'utf8')
+                        );
                         
                         const relativePath = vscode.workspace.asRelativePath(filePath);
                         vscode.window.showInformationMessage(
@@ -928,21 +722,22 @@ Project: ${workspaceFolders[0].name}
                     const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets');
                     const outputPath = path.join(outputDir, fileName);
 
-                    await fs.ensureDir(outputDir);
-                    await fs.writeFile(outputPath, svg, 'utf8');
+                    const outputUri = vscode.Uri.file(outputPath);
+                    await vscode.workspace.fs.createDirectory(vscode.Uri.file(outputDir));
+                    await vscode.workspace.fs.writeFile(outputUri, Buffer.from(svg, 'utf8'));
 
                     // Open the SVG file
-                    const doc = await vscode.workspace.openTextDocument(outputPath);
+                    const doc = await vscode.workspace.openTextDocument(outputUri);
                     await vscode.window.showTextDocument(doc);
 
-                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    const relativePath = vscode.workspace.asRelativePath(outputUri);
                     vscode.window.showInformationMessage(
                         `✅ Illustration saved: ${relativePath}`,
                         'Open Preview'
                     ).then(action => {
                         if (action === 'Open Preview') {
                             // Try to open SVG preview if available
-                            vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+                            vscode.commands.executeCommand('vscode.open', outputUri);
                         }
                     });
                 } catch (err) {
@@ -992,42 +787,21 @@ Project: ${workspaceFolders[0].name}
                     placeHolder: 'e.g., A serene mountain landscape at sunset with a lake',
                     ignoreFocusOut: true
                 });
-                
+
                 if (!userInput) {
                     return;
                 }
                 prompt = userInput;
             }
 
-            // Model selection
-            const modelOption = await vscode.window.showQuickPick([
-                {
-                    label: '$(zap) flux-schnell',
-                    description: 'Fast, ~4 steps, low cost',
-                    value: 'black-forest-labs/flux-schnell',
-                    version: 'f2ab8a5bfe79f02f0789a146cf5e73d2a4ff2684a98c2b303d1e1ff3814271db'
-                },
-                {
-                    label: '$(star) flux-dev',
-                    description: 'High quality, recommended',
-                    value: 'black-forest-labs/flux-dev',
-                    version: '5a89e2e87e60e559bc50ffdc3a19c1adef0e6fd36c47b0b39b1a7889a2d9e145'
-                },
-                {
-                    label: '$(flame) flux-pro',
-                    description: 'Best quality, highest cost',
-                    value: 'black-forest-labs/flux-pro',
-                    version: 'f2c6b1fdc43477ebf6c287adcc8a6f9e4b9b8b22a4f5fa9b8b8ebf0c7c8a8b8'
-                },
-                {
-                    label: '$(symbol-color) SDXL',
-                    description: 'Stable Diffusion XL',
-                    value: 'stability-ai/sdxl',
-                    version: '7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc'
-                }
-            ], {
-                placeHolder: 'Select AI model for image generation',
-                title: 'AI Image Generation - Select Model'
+            // Suggest the best model based on the prompt
+            const suggestedModel = selectModelForPrompt(prompt);
+
+            // Model selection — all 7 models, recommended one highlighted
+            const modelItems = buildModelQuickPickItems(suggestedModel.id);
+            const modelOption = await vscode.window.showQuickPick(modelItems, {
+                placeHolder: 'Select AI model (✨ = recommended for your prompt)',
+                title: 'Alex — AI Image Generation'
             });
 
             if (!modelOption) {
@@ -1040,10 +814,11 @@ Project: ${workspaceFolders[0].name}
                 { label: '16:9 Widescreen', value: '16:9' },
                 { label: '9:16 Portrait', value: '9:16' },
                 { label: '4:3 Standard', value: '4:3' },
-                { label: '3:4 Portrait', value: '3:4' }
+                { label: '3:4 Portrait', value: '3:4' },
+                { label: '3:2 Landscape', value: '3:2' }
             ], {
                 placeHolder: 'Select aspect ratio',
-                title: 'AI Image Generation - Aspect Ratio'
+                title: 'Alex — AI Image Generation'
             });
 
             if (!aspectOption) {
@@ -1052,30 +827,27 @@ Project: ${workspaceFolders[0].name}
 
             await vscode.window.withProgress({
                 location: vscode.ProgressLocation.Notification,
-                title: 'Generating AI image...',
+                title: `Generating image with ${modelOption.model.label}…`,
                 cancellable: false
             }, async (progress) => {
                 try {
-                    progress.report({ message: 'Creating prediction...' });
-
-                    const imageUrl = await callReplicateAPI(
+                    const imageUrl = await generateImage(
                         apiToken,
-                        (modelOption as any).version,
+                        modelOption.model.id,
                         {
-                            prompt: prompt.substring(0, 2000), // Limit prompt length
-                            aspect_ratio: aspectOption.value,
-                            output_format: 'png'
-                        }
+                            prompt,
+                            aspectRatio: aspectOption.value,
+                            outputFormat: 'png'
+                        },
+                        progress
                     );
 
                     if (!imageUrl) {
-                        vscode.window.showErrorMessage('Failed to generate image - no output received');
+                        vscode.window.showErrorMessage('Failed to generate image — no output received from Replicate');
                         return;
                     }
 
-                    progress.report({ message: 'Downloading image...' });
-
-                    // Save to workspace
+                    // Save to workspace using vscode.workspace.fs (sandbox-safe)
                     const workspaceFolders = vscode.workspace.workspaceFolders;
                     if (!workspaceFolders) {
                         vscode.window.showWarningMessage('No workspace folder found');
@@ -1084,16 +856,19 @@ Project: ${workspaceFolders[0].name}
 
                     const timestamp = Date.now();
                     const fileName = `ai-image-${timestamp}.png`;
-                    const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets', 'generated');
-                    const outputPath = path.join(outputDir, fileName);
+                    const outputUri = vscode.Uri.joinPath(
+                        workspaceFolders[0].uri,
+                        'assets',
+                        'generated',
+                        fileName
+                    );
 
-                    await fs.ensureDir(outputDir);
-                    await downloadImage(imageUrl, outputPath);
+                    await downloadImageToWorkspace(imageUrl, outputUri, progress);
 
                     // Open the image
-                    vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+                    vscode.commands.executeCommand('vscode.open', outputUri);
 
-                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    const relativePath = vscode.workspace.asRelativePath(outputUri);
                     vscode.window.showInformationMessage(
                         `✅ AI image saved: ${relativePath}`,
                         'Copy Path'
@@ -1189,23 +964,23 @@ Project: ${workspaceFolders[0].name}
                 cancellable: false
             }, async (progress) => {
                 try {
-                    progress.report({ message: 'Reading and resizing image...' });
+                    progress.report({ message: 'Reading and resizing image…' });
 
-                    // Read image and resize if needed
-                    const rawBuffer = await fs.readFile(imageUri.fsPath);
-                    const imageBuffer = await resizeImageIfNeeded(Buffer.from(rawBuffer), MAX_IMAGE_DIMENSION);
-                    
-                    // Encode as data URI
+                    // Read image and resize if needed (uses vscode.workspace.fs — sandbox-safe)
+                    const rawBytes = await vscode.workspace.fs.readFile(imageUri);
+                    const imageBuffer = await resizeImageIfNeeded(Buffer.from(rawBytes), MAX_IMAGE_DIMENSION);
+
+                    // Encode as data URI for Replicate image_input
                     const base64 = imageBuffer.toString('base64');
-                    const mimeType = ext === '.png' ? 'image/png' : 
+                    const mimeType = ext === '.png' ? 'image/png' :
                                    ext === '.gif' ? 'image/gif' :
                                    ext === '.webp' ? 'image/webp' : 'image/jpeg';
                     const dataUri = `data:${mimeType};base64,${base64}`;
 
-                    progress.report({ message: 'Processing with nano-banana-pro...' });
+                    progress.report({ message: 'Processing image with AI…' });
 
-                    // Use nano-banana-pro for face/style consistent editing
-                    const result = await callReplicateModelAPI(
+                    // Use google/nano-banana-pro for face/style-consistent editing
+                    let prediction = await createPrediction(
                         apiToken,
                         'google/nano-banana-pro',
                         {
@@ -1217,14 +992,21 @@ Project: ${workspaceFolders[0].name}
                         }
                     );
 
+                    if (prediction.status !== 'succeeded' && prediction.id) {
+                        prediction = await pollPrediction(apiToken, prediction.id);
+                    }
+
+                    const outputArr = prediction.output;
+                    const result = Array.isArray(outputArr) ? outputArr[0] : outputArr;
+
                     if (!result) {
-                        vscode.window.showErrorMessage('Failed to edit image - no output received');
+                        vscode.window.showErrorMessage('Failed to edit image — no output received');
                         return;
                     }
 
-                    progress.report({ message: 'Saving result...' });
+                    progress.report({ message: 'Saving result…' });
 
-                    // Save edited image
+                    // Save edited image using vscode.workspace.fs (sandbox-safe)
                     const workspaceFolders = vscode.workspace.workspaceFolders;
                     if (!workspaceFolders) {
                         vscode.window.showWarningMessage('No workspace folder found');
@@ -1234,18 +1016,17 @@ Project: ${workspaceFolders[0].name}
                     const originalName = path.basename(imageUri.fsPath, ext);
                     const timestamp = Date.now();
                     const fileName = `${originalName}-edited-${timestamp}.png`;
-                    const outputDir = path.join(workspaceFolders[0].uri.fsPath, 'assets', 'edited');
-                    const outputPath = path.join(outputDir, fileName);
+                    const outputUri = vscode.Uri.joinPath(
+                        workspaceFolders[0].uri,
+                        'assets', 'edited', fileName
+                    );
 
-                    await fs.ensureDir(outputDir);
-                    
-                    // Download the result image from URL
-                    await downloadImage(result, outputPath);
+                    await downloadImageToWorkspace(result as string, outputUri, progress);
 
                     // Open the edited image
-                    vscode.commands.executeCommand('vscode.open', vscode.Uri.file(outputPath));
+                    vscode.commands.executeCommand('vscode.open', outputUri);
 
-                    const relativePath = vscode.workspace.asRelativePath(outputPath);
+                    const relativePath = vscode.workspace.asRelativePath(outputUri);
                     vscode.window.showInformationMessage(
                         `✅ Edited image saved: ${relativePath}`,
                         'Copy Path',

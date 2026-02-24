@@ -20,7 +20,7 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import { readFileSync } from 'fs';
 import { execSync } from 'child_process';
 
 // ============================================================================
@@ -126,7 +126,7 @@ function getStalledFiles(): string[] {
 /** Count TODO/FIXME/HACK/XXX in a file. Returns 0 on read error. */
 function countTodos(absPath: string): number {
     try {
-        const content = fs.readFileSync(absPath, 'utf-8');
+        const content = readFileSync(absPath, 'utf-8');
         return (content.match(TODO_PATTERN) || []).length;
     } catch {
         return 0;
@@ -140,9 +140,9 @@ function countTodos(absPath: string): number {
 async function loadObservations(): Promise<PeripheralObservations | null> {
     if (!_workspaceRoot) { return null; }
     try {
-        const filePath = path.join(_workspaceRoot, OBSERVATION_FILE);
-        if (!await fs.pathExists(filePath)) { return null; }
-        return await fs.readJson(filePath) as PeripheralObservations;
+        const fileUri = vscode.Uri.file(path.join(_workspaceRoot, OBSERVATION_FILE));
+        const bytes = await vscode.workspace.fs.readFile(fileUri);
+        return JSON.parse(new TextDecoder().decode(bytes)) as PeripheralObservations;
     } catch {
         return null;
     }
@@ -200,9 +200,12 @@ async function persist(): Promise<void> {
     };
 
     try {
-        const filePath = path.join(_workspaceRoot, OBSERVATION_FILE);
-        await fs.ensureDir(path.dirname(filePath));
-        await fs.writeJson(filePath, observations, { spaces: 2 });
+        const fileUri = vscode.Uri.file(path.join(_workspaceRoot, OBSERVATION_FILE));
+        await vscode.workspace.fs.createDirectory(vscode.Uri.file(path.dirname(path.join(_workspaceRoot, OBSERVATION_FILE))));
+        await vscode.workspace.fs.writeFile(
+            fileUri,
+            Buffer.from(JSON.stringify(observations, null, 2), 'utf8')
+        );
     } catch (err) {
         console.warn('[FileWatcher] Failed to persist observations:', err);
     }

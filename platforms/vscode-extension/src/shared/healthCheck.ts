@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
 import * as path from 'path';
 import { updateAlexInstalledStatus } from './telemetry';
 import { createSynapseRegex } from './utils';
@@ -89,7 +88,13 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
     const alexPath = path.join(rootPath, '.github', 'copilot-instructions.md');
     
     // Check if Alex is initialized
-    const initialized = await fs.pathExists(alexPath);
+    let initialized = false;
+    try {
+        await vscode.workspace.fs.stat(vscode.Uri.file(alexPath));
+        initialized = true;
+    } catch {
+        initialized = false;
+    }
     
     if (!initialized) {
         cachedResult = {
@@ -152,7 +157,7 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
             for (const file of files) {
                 totalFiles++;
                 try {
-                    const content = await fs.readFile(file.fsPath, 'utf-8');
+                    const content = new TextDecoder().decode(await vscode.workspace.fs.readFile(file));
                     
                     // Skip code blocks
                     let inCodeBlock = false;

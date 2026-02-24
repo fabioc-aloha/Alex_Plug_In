@@ -60,6 +60,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`image-handling` skill — Replicate model selection** — Added comprehensive AI image generation guidance: 7-model comparison table (Flux Schnell, Flux Dev, Flux 1.1 Pro, Ideogram v2, Ideogram v2 Turbo, SDXL, Seedream 5 Lite) with costs and use cases; model selection decision guide keyed to user intent; LoRA support reference; aspect ratio reference. 14 new trigger words added including `flux schnell`, `flux dev`, `ideogram`, `sdxl`, `seedream`, `text in image`, `replicate model`. Enables Alex to route image generation requests to the correct Replicate model automatically.
 
+### Architecture Improvements
+
+#### `replicateService.ts` — Proper Replicate Service Layer
+
+- **`src/services/replicateService.ts`** — New dedicated service extracted from inline code in `contextMenu.ts`. Provides: 7-model catalog with `REPLICATE_MODELS` constant (all IDs verified live via API — no stale version hashes); `generateImage()` high-level function with `Prefer: wait` + polling fallback; `createPrediction()` and `pollPrediction()` for direct API access; `downloadImageToWorkspace()` using `vscode.workspace.fs` (sandbox-safe); `selectModelForPrompt()` intent-to-model router; `buildModelQuickPickItems()` with recommended model highlighting.
+- **`generateAIImage` command updated** — Now uses `replicateService`: shows all 7 models with `✨ Recommended` marker on the best-fit model for the user's prompt (e.g., typing "logo with text" auto-recommends Ideogram v2). Replaced stale version hashes with model-based endpoint. Added 3:2 Landscape aspect ratio.
+- **`editImageWithPrompt` command updated** — Refactored to use `createPrediction` + `pollPrediction` from service; replaced `fs.readFile` with `vscode.workspace.fs.readFile`; replaced `fs.ensureDir` + `downloadImage` with `downloadImageToWorkspace`.
+- **ADR-007 status** — Replicate replaces DALL-E as the image generation backend. Runtime image generation now live. Image upscaling + FLUX brand fine-tune remain P2 backlog items.
+
+#### `fs-extra → vscode.workspace.fs` Migration (ADR-008)
+
+- **3 files migrated** — `contextMenu.ts`, `fileWatcher.ts`, `healthCheck.ts` now use `vscode.workspace.fs` for all workspace-scoped file operations. Global-path files (`~/.alex/`) intentionally kept on fs-extra per ADR-008.
+- **`fileWatcher.ts`** — `loadObservations()` and `persist()` now use `vscode.workspace.fs.readFile` / `createDirectory` / `writeFile`. Sync `countTodos()` switched from `fs-extra` to native Node.js `readFileSync`. `fs-extra` import removed entirely.
+- **`healthCheck.ts`** — `fs.pathExists(alexPath)` replaced with `vscode.workspace.fs.stat()` + try/catch. `fs.readFile(file.fsPath)` replaced with `vscode.workspace.fs.readFile(file)` + `TextDecoder`. `fs-extra` import removed entirely.
+- **`contextMenu.ts`** — Episodic insight saves, SVG illustration saves, AI image downloads all migrated. Inline Replicate API functions removed (now in `replicateService.ts`). `https` import removed. Two remaining `fs-extra` usages (for legacy code paths) documented.
+
+#### Semantic Skill Graph — ROADMAP Detail
+
+- **ROADMAP `### 🧠 Semantic Skill Graph`** section added with full 4-phase breakdown: Phase 1 (PoC standalone script, validates approach at $0.002), Phase 2 (extension integration with `alex.recompileSkills` command), Phase 3 (synapse discovery dashboard), Phase 4 (global knowledge integration). Key design decisions documented: keyword fallback always kept, compiled graph is cached JSON (loads in <50ms), Phase 1 is the abandonment gate.
+
 ---
 
 ## [5.9.8] - 2026-02-21
