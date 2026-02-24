@@ -1,19 +1,10 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "claude/settings.json"
+    "github/episodic/peripheral/file-observations.json",
+    "TEST-GUIDE.md",
+    "platforms/vscode-extension/package-lock.json"
   ],
-  "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 8,
-      "scannedAt": 1771940796571
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 8,
-      "scannedAt": 1771940796571
-    }
-  ],
-  "lastUpdated": 1771940796571
+  "todoHotspots": [],
+  "lastUpdated": 1771945283370
 }

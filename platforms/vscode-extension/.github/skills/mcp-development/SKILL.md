@@ -100,12 +100,15 @@ Functions the AI can execute:
 // Tool definition
 {
   name: "search_issues",
-  description: "Search GitHub issues in a repository",
+  description: "Search GitHub issues in a repository"
+user-invokable: false,
   inputSchema: {
     type: "object",
     properties: {
-      repo: { type: "string", description: "owner/repo format" },
-      query: { type: "string", description: "Search query" },
+      repo: { type: "string", description: "owner/repo format"
+user-invokable: false },
+      query: { type: "string", description: "Search query"
+user-invokable: false },
       state: {
         type: "string",
         enum: ["open", "closed", "all"],
@@ -133,7 +136,8 @@ Data the AI can read:
 {
   uri: "github://repo/owner/repo-name/issues",
   name: "Repository Issues",
-  description: "All issues in the repository",
+  description: "All issues in the repository"
+user-invokable: false,
   mimeType: "application/json"
 }
 
@@ -141,7 +145,8 @@ Data the AI can read:
 {
   uriTemplate: "github://repo/{owner}/{repo}/issues/{id}",
   name: "GitHub Issue",
-  description: "A specific GitHub issue",
+  description: "A specific GitHub issue"
+user-invokable: false,
   mimeType: "application/json"
 }
 ```
@@ -158,16 +163,19 @@ Reusable prompt templates:
 ```typescript
 {
   name: "code_review",
-  description: "Generate a code review for changes",
+  description: "Generate a code review for changes"
+user-invokable: false,
   arguments: [
     {
       name: "diff",
-      description: "The code diff to review",
+      description: "The code diff to review"
+user-invokable: false,
       required: true
     },
     {
       name: "focus",
-      description: "Areas to focus on (security, performance, style)",
+      description: "Areas to focus on (security, performance, style)"
+user-invokable: false,
       required: false
     }
   ]
@@ -197,6 +205,7 @@ server.tool(
     location: {
       type: "string",
       description: "City name or coordinates"
+user-invokable: false
     }
   },
   async ({ location }) => {

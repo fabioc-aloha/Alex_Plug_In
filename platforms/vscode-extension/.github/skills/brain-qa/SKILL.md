@@ -1,8 +1,8 @@
 ---
 name: "Brain QA"
 description: "Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but meaning coherence"
-applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 disable-model-invocation: true
+applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 ---
 
 # Brain QA

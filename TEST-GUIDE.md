@@ -1,6 +1,6 @@
 # Alex v5.9.9 — Test Guide
 
-**Date**: 2026-02-24  
+**Date**: 2026-02-24
 **Installation**: Run `npm run package` from `platforms/vscode-extension/`, then install the generated `.vsix` locally before testing.
 
 > ⚠️ **Safety**: Never test in this Master Alex workspace. Use a sandbox folder or the `Extensions` workspace.
