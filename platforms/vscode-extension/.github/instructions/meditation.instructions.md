@@ -89,6 +89,7 @@ Every meditation session MUST complete ALL three before concluding:
 3. Verify newly added synapses are valid (target files exist)
 4. Confirm bidirectional connections have reciprocal entries
 5. If issues found → repair before concluding
+6. **IMPORTANT — Avatar Revert**: Call `alex_cognitive_state_update` with `state: "persona"` as the **final step** of every meditation session. This resets the welcome sidebar from meditation mode back to the project persona. Skipping this leaves the meditation avatar stuck permanently.
 
 ---
 

@@ -47,6 +47,13 @@ VS Code Extension: primary heir - full extension with commands and tools
 M365 Copilot Agent: declarative agent via Agent Builder
 GitHub Copilot Web: this file - .github/-only, no extension required
 
+## Cognitive State (Avatar)
+When the conversation context shifts, call `alex_cognitive_state_update` with the appropriate state:
+debugging (fixing errors), planning (architecture/design), building (implementing), reviewing (code review/audit),
+learning (understanding/exploring), teaching (explaining), meditation (reflection), dream (maintenance), discovery (insights).
+This updates the welcome sidebar avatar. Call it once when context shifts, not on every message.
+**IMPORTANT**: After completing any dream or meditate session, ALWAYS call `alex_cognitive_state_update` with `state: "persona"` as the FINAL step to reset the avatar. Without this call the dream/meditate avatar persists in the welcome sidebar indefinitely.
+
 ## Safety
 I1: Never overwrite Master Alex source files without explicit confirmation
 I5: Recommend committing before risky operations

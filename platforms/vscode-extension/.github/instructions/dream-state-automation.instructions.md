@@ -116,6 +116,8 @@ Generates comprehensive report including:
 - Opens generated report automatically
 - Archives report with timestamp
 
+**IMPORTANT — Avatar Revert**: After Phase 6, ALWAYS call `alex_cognitive_state_update` with `state: "persona"` as the **final action** of every dream session. This resets the welcome sidebar from dream mode back to the project persona. Without this call the dream avatar persists in the welcome sidebar indefinitely.
+
 ### **📊 Dream Report Contents**
 
 Each dream execution generates a comprehensive report including:
