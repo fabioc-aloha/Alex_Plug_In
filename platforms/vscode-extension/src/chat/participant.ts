@@ -347,6 +347,7 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         'meditate': 'meditation',
         'dream': 'dream',
         'selfactualize': 'meditation',
+        'brainqa': 'reviewing',
         'learn': 'learning',
         'confidence': 'planning',
         'verify': 'reviewing',
@@ -397,6 +398,10 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
 
     if (request.command === 'selfactualize') {
         return await handleSelfActualizeCommand(request, context, stream, token);
+    }
+
+    if (request.command === 'brainqa') {
+        return await handleBrainQACommand(request, context, stream, token);
     }
 
     // Global Knowledge commands
@@ -601,6 +606,46 @@ Initiating automated neural maintenance:
     stream.markdown(`\n\n*Click the button above to run the full Dream Protocol, or I can describe what it will do.*`);
 
     return { metadata: { command: 'dream' } };
+}
+
+/**
+ * Handle /brainqa command - Cognitive architecture quality assurance
+ */
+async function handleBrainQACommand(
+    request: vscode.ChatRequest,
+    context: vscode.ChatContext,
+    stream: vscode.ChatResponseStream,
+    token: vscode.CancellationToken
+): Promise<IAlexChatResult> {
+
+    const modelInfo = getModelInfo(request);
+    const modelMatch = checkTaskModelMatch(modelInfo.tier, 'dream');
+    if (!modelMatch.suitable && modelMatch.warning) {
+        stream.markdown(`⚠️ **Model Note**: ${modelMatch.warning}\n\n---\n\n`);
+    }
+
+    stream.progress('🧠 Preparing Brain QA...');
+
+    stream.markdown(`## 🧠 Brain QA — Cognitive Architecture Validation
+
+Runs structural + semantic + logic + architectural review:
+- Validates trifecta completeness across all skills
+- Checks synapse integrity and broken connections
+- Audits version consistency across all files
+- Validates agent definitions and frontmatter
+- Reports count drift between documented and actual files
+
+`);
+
+    stream.button({
+        command: 'alex.deepBrainQA',
+        title: '▶️ Run Deep Brain QA',
+        arguments: []
+    });
+
+    stream.markdown(`\n\n*Click the button above to execute the full automated validation, or ask me to walk through any specific check.*`);
+
+    return { metadata: { command: 'brainqa' } };
 }
 
 /**

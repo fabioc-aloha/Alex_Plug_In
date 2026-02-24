@@ -1447,6 +1447,11 @@
             "sampleRequest": "Deep assessment of my cognitive architecture"
           },
           {
+            "name": "brainqa",
+            "description": "Run Brain QA — structural validation, synapse integrity, trifecta completeness, version consistency, and architectural review",
+            "sampleRequest": "Validate my cognitive architecture"
+          },
+          {
             "name": "learn",
             "description": "Acquire new domain knowledge through conversational learning",
             "sampleRequest": "Teach me about React Server Components"
