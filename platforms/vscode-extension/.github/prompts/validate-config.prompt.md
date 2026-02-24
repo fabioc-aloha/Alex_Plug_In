@@ -1,3 +1,7 @@
+---
+description: Validate VS Code extension manifest consistency: command registration, configuration keys, and graceful degradation patterns
+---
+
 # Validate Extension Configuration
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.

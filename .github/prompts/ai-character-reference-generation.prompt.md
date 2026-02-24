@@ -1,3 +1,7 @@
+---
+description: Generate 15+ visually consistent character reference images for books, games, or visual novels using Flux 1.1 Pro
+---
+
 # AI Character Reference Generation Workflow
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.

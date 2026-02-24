@@ -1,3 +1,7 @@
+---
+description: Systematic VS Code extension review for API correctness, security, resource management, and 1.109+ agent platform readiness
+---
+
 # VS Code Extension Audit
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.

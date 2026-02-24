@@ -1,3 +1,7 @@
+---
+description: Scaffold or troubleshoot a Microsoft Teams app or M365 Copilot declarative agent with correct schema, icons, and packaging
+---
+
 # Teams App Development
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.

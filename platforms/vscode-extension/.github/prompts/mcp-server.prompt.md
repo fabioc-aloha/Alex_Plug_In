@@ -1,3 +1,7 @@
+---
+description: Scaffold a complete MCP server with tools, resources, error handling, and VS Code workspace integration
+---
+
 # Create MCP Server
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.

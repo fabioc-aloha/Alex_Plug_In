@@ -1,3 +1,7 @@
+---
+description: Generate AI-powered presentations using the Gamma API with Duarte methodology consulting and PPTX/PDF export
+---
+
 # Generate Gamma Presentation
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.

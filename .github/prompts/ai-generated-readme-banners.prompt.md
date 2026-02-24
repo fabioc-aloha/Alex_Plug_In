@@ -1,3 +1,7 @@
+---
+description: Generate ultra-wide 3:1 README banners with professional typography and photorealistic visuals using Ideogram v2
+---
+
 # AI-Generated README Banner Workflow
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.

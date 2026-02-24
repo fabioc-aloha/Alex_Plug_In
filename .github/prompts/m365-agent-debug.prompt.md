@@ -1,3 +1,7 @@
+---
+description: Systematically diagnose and fix a non-functional M365 Copilot declarative agent across 6 diagnostic layers
+---
+
 # Debug M365 Declarative Agent
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "debugging"`. This updates the welcome sidebar avatar.

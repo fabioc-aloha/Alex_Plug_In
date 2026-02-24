@@ -1,3 +1,7 @@
+---
+description: Systematic 5-dimension quality audit for VS Code extensions: debug cleanliness, dead code, performance, menus, and dependencies
+---
+
 # Extension Audit Workflow
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.

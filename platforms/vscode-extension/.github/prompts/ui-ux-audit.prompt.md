@@ -1,3 +1,7 @@
+---
+description: Systematic WCAG AA accessibility and UI/UX audit covering typography, keyboard navigation, screen reader support, and design tokens
+---
+
 # UI/UX Accessibility Audit
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.

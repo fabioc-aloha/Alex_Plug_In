@@ -1,3 +1,7 @@
+---
+description: Implement a production-ready Microsoft Graph API integration with least-privilege scopes, auth, error handling, and pagination
+---
+
 # Microsoft Graph API Integration
 
 > **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
