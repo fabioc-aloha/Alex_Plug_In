@@ -80,9 +80,9 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 5.1 | In a Copilot agent session, edit any `.ts` file | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'` | ☐ |
-| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v5.9.9` | ☐ |
-| 5.3 | Revert package.json version to `5.9.9` | No drift warning on next publish attempt | ☐ |
+| 5.1 | In a Copilot agent session, edit any `.ts` file | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'` | ✅ |
+| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v5.9.9` | 👤 |
+| 5.3 | Revert package.json version to `5.9.9` | No drift warning on next publish attempt | 👤 |
 
 ---
 
@@ -90,9 +90,9 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 6.1 | Open repo in Claude Code (if available) | `.claude/CLAUDE.md` is auto-loaded as project context | ☐ |
-| 6.2 | Check `.claude/settings.json` is valid JSON | No parse errors; `contextPaths` points to `.github/` assets | ☐ |
-| 6.3 | Claude Code respects `preToolUse` hook | Same Q1/Q2 gates fire in Claude Code sessions | ☐ |
+| 6.1 | Open repo in Claude Code (if available) | `.claude/CLAUDE.md` is auto-loaded as project context | 👤 |
+| 6.2 | Check `.claude/settings.json` is valid JSON | No parse errors; `contextPaths` points to `.github/` assets | ✅ |
+| 6.3 | Claude Code respects `preToolUse` hook | Same Q1/Q2 gates fire in Claude Code sessions | 👤 |
 
 ---
 
@@ -100,8 +100,8 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 7.1 | Open VS Code Settings, search `agentCustomizationSkill` | Value is `false` | ☐ |
-| 7.2 | Confirm Alex's `vscode-extension-patterns` skill responds to VS Code extension questions | Ask `@alex how do I register a command in VS Code?` — Alex uses its own skill, not VS Code's built-in skill | ☐ |
+| 7.1 | Open VS Code Settings, search `agentCustomizationSkill` | Value is `false` | ✅ |
+| 7.2 | Confirm Alex's `vscode-extension-patterns` skill responds to VS Code extension questions | Ask `@alex how do I register a command in VS Code?` — Alex uses its own skill, not VS Code's built-in skill | 👤 |
 
 ---
 
@@ -109,9 +109,9 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 8.1 | Open 5+ files rapidly, then ask `@alex What am I working on?` | Alex mentions "hot files" in its peripheral awareness context | ☐ |
-| 8.2 | Leave a file modified but uncommitted, then check `@alex` context | Alex references stalled uncommitted changes | ☐ |
-| 8.3 | Check `.github/episodic/peripheral/file-observations.json` | File exists and has recent `hotFiles`, `stalledFiles`, `todoHotspots` entries | ☐ |
+| 8.1 | Open 5+ files rapidly, then ask `@alex What am I working on?` | Alex mentions "hot files" in its peripheral awareness context | 👤 |
+| 8.2 | Leave a file modified but uncommitted, then check `@alex` context | Alex references stalled uncommitted changes | 👤 |
+| 8.3 | Check `.github/episodic/peripheral/file-observations.json` | File exists and has recent `hotFiles`, `stalledFiles`, `todoHotspots` entries | ✅ |
 
 ---
 
@@ -119,9 +119,9 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 9.1 | Ask `@alex` something highly uncertain (obscure API version) | Alex expresses calibrated uncertainty: "I'm not confident about…" rather than hallucinating | ☐ |
-| 9.2 | Give 👍 or 👎 on a response (if feedback UI is visible) | Feedback logged to `.github/episodic/calibration/feedback-log.json` | ☐ |
-| 9.3 | Check `.github/episodic/memory/` for forgetting curve files | `decay-config.json` or similar exists with usage weights | ☐ |
+| 9.1 | Ask `@alex` something highly uncertain (obscure API version) | Alex expresses calibrated uncertainty: "I'm not confident about…" rather than hallucinating | 👤 |
+| 9.2 | Give 👍 or 👎 on a response (if feedback UI is visible) | Feedback logged to `.github/episodic/calibration/feedback-log.json` | 👤 |
+| 9.3 | Check `.github/episodic/memory/` for forgetting curve files | `decay-config.json` or similar exists with usage weights | ⏭️ N/A — forgetting curve uses `calibration/calibration-log.json`, no `memory/` folder |
 
 ---
 
@@ -131,16 +131,16 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 | # | Command | Expected | Pass |
 |---|---------|----------|------|
-| 10.1 | `Alex: Status` | Shows active workspace, version 5.9.9 | ☐ |
-| 10.2 | `Alex: Dream` | Opens chat with dream prompt pre-filled | ☐ |
-| 10.3 | `Alex: Self-Actualize` | Opens chat with self-actualization prompt | ☐ |
-| 10.4 | `Alex: Deep Brain QA` | Runs architecture validation | ☐ |
-| 10.5 | `Alex: Sync Knowledge` | Syncs global knowledge (prompts for path if not set) | ☐ |
-| 10.6 | `Alex: Documentation` | Opens external docs URL | ☐ |
-| 10.7 | `Alex: Working with Alex` | Opens prompting guide webview | ☐ |
-| 10.8 | `Alex: Agent vs @alex Chat Comparison` | Opens comparison webview | ☐ |
-| 10.9 | Right-click selected text → `Ask Alex about this` | Opens chat with selection as context | ☐ |
-| 10.10 | Right-click selected text → `Save to Alex Knowledge` | Saves selection as a knowledge entry | ☐ |
+| 10.1 | `Alex: Status` | Shows active workspace, version 5.9.9 | 👤 |
+| 10.2 | `Alex: Dream` | Opens chat with dream prompt pre-filled | 👤 |
+| 10.3 | `Alex: Self-Actualize` | Opens chat with self-actualization prompt | 👤 |
+| 10.4 | `Alex: Deep Brain QA` | Runs architecture validation | 👤 |
+| 10.5 | `Alex: Sync Knowledge` | Syncs global knowledge (prompts for path if not set) | 👤 |
+| 10.6 | `Alex: Documentation` | Opens external docs URL | 👤 |
+| 10.7 | `Alex: Working with Alex` | Opens prompting guide webview | 👤 |
+| 10.8 | `Alex: Agent vs @alex Chat Comparison` | Opens comparison webview | 👤 |
+| 10.9 | Right-click selected text → `Ask Alex about this` | Opens chat with selection as context | 👤 |
+| 10.10 | Right-click selected text → `Save to Alex Knowledge` | Saves selection as a knowledge entry | 👤 |
 
 ---
 
@@ -148,9 +148,9 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 11.1 | Run `Alex: Setup AI Environment` | Wizard appears to configure API keys | ☐ |
-| 11.2 | Run `Alex: Manage Secrets` | SecretStorage-backed secret manager opens | ☐ |
-| 11.3 | Confirm API keys are NOT in `.env` files in workspace | `SecretStorage` is the only storage mechanism; no plaintext keys | ☐ |
+| 11.1 | Run `Alex: Setup AI Environment` | Wizard appears to configure API keys | 👤 |
+| 11.2 | Run `Alex: Manage Secrets` | SecretStorage-backed secret manager opens | 👤 |
+| 11.3 | Confirm API keys are NOT in `.env` files in workspace | `SecretStorage` is the only storage mechanism; no plaintext keys | ✅ |
 
 ---
 
@@ -158,9 +158,9 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 12.1 | Start debugging a file | Welcome panel avatar updates to 🐛 debugging state | ☐ |
-| 12.2 | Switch to `@alex /dream` | Avatar updates to 🌙 dream state | ☐ |
-| 12.3 | Switch back to normal coding | Avatar returns to default developer state | ☐ |
+| 12.1 | Start debugging a file | Welcome panel avatar updates to 🐛 debugging state | 👤 |
+| 12.2 | Switch to `@alex /dream` | Avatar updates to 🌙 dream state | 👤 |
+| 12.3 | Switch back to normal coding | Avatar returns to default developer state | ✅ |
 
 ---
 
@@ -180,6 +180,17 @@ npm run package           # builds .vsix
 code --install-extension platforms/vscode-extension/alex-cognitive-architecture-5.9.9.vsix
 # Reload VS Code window after install (Ctrl+Shift+P → "Developer: Reload Window")
 ```
+
+---
+
+## Legend
+
+| Symbol | Meaning |
+|--------|---------|
+| ✅ | Verified (automated or user-confirmed) |
+| 👤 | Requires user interaction — run manually |
+| ⏭️ | N/A — test updated to reflect actual implementation |
+| ☐ | Not yet tested |
 
 ---
 
