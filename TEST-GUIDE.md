@@ -24,9 +24,9 @@ code --install-extension alex-cognitive-architecture-5.9.9.vsix
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 1.1 | Open any workspace with the extension installed | Welcome sidebar appears in Activity Bar with Alex avatar | ☐ |
-| 1.2 | Click the Alex icon in Activity Bar | Welcome panel renders: version number, status, quick-action buttons | ☐ |
-| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v5.9.9, active workspace path | ☐ |
+| 1.1 | Open any workspace with the extension installed | Welcome sidebar appears in Activity Bar with Alex avatar | ✅ |
+| 1.2 | Click the Alex icon in Activity Bar | Welcome panel renders: version number, status, quick-action buttons | ✅ |
+| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v5.9.9, active workspace path | ✅ |
 
 ---
 
