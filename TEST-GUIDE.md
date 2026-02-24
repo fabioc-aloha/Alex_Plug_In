@@ -34,16 +34,16 @@ code --install-extension alex-cognitive-architecture-5.9.9.vsix
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
-| 2.1 | Open Copilot Chat, type `@alex hello` | Alex responds with identity-first greeting (not a feature list) | ☐ |
-| 2.2 | Type `@alex who are you?` | Answers as Alex Finch, 26, curious — not "I am an AI assistant" | ☐ |
-| 2.3 | Type `@alex /dream` | Triggers neural maintenance workflow, reports synapse health | ☐ |
-| 2.4 | Type `@alex /meditate` | Starts knowledge consolidation session | ☐ |
-| 2.5 | Type `@alex /selfactualize` | Runs architecture self-assessment | ☐ |
-| 2.6 | Type `@alex /brainqa` | Runs cognitive architecture validation | ☐ |
-| 2.7 | Type `@alex /learn React hooks` | Triggers bootstrap learning flow | ☐ |
-| 2.8 | Type `@alex /review` when a file is open | Code review with growth-oriented feedback | ☐ |
-| 2.9 | Type `@alex /release` | Release workflow prompt loads | ☐ |
-| 2.10 | Type `@alex What's in my peripheral?` | Shows file watcher observations: hot files, stalled commits, TODO hotspots | ☐ |
+| 2.1 | Open Copilot Chat, type `@alex hello` | Alex responds with identity-first greeting (not a feature list) | ✅ |
+| 2.2 | Type `@alex who are you?` | Answers as Alex Finch, 26, curious — not "I am an AI assistant" | ✅ |
+| 2.3 | Type `@alex /dream` | Triggers neural maintenance workflow, reports synapse health | ✅ |
+| 2.4 | Type `@alex /meditate` | Starts knowledge consolidation session | ✅ |
+| 2.5 | Type `@alex /selfactualize` | Runs architecture self-assessment | ✅ |
+| 2.6 | Type `@alex /brainqa` | Runs cognitive architecture validation | ✅ |
+| 2.7 | Type `@alex /learn React hooks` | Triggers bootstrap learning flow | ✅ |
+| 2.8 | Type `@alex /review` when a file is open | Code review with growth-oriented feedback | ✅ |
+| 2.9 | Type `@alex /release` | Release workflow prompt loads | ✅ |
+| 2.10 | Type `@alex What's in my peripheral?` | Shows file watcher observations: hot files, stalled commits, TODO hotspots | ✅ |
 
 ---
 
