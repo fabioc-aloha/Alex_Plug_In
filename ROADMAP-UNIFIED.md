@@ -116,8 +116,8 @@ v5.9.8 is current. Alex now has:
 | **v5.9.6** | **The Forgetting Curve — Graceful Knowledge Decay**     | **Living Memory**                    | **✅ Shipped (2026-02-21)** |
 | **v5.9.7** | **P2 Feature Completion (Peripheral Vision + Honest Uncertainty + Forgetting Curve)** | **Calibrated Intelligence** | **✅ Shipped (2026-02-21)** |
 | **v5.9.8** | **Background File Watcher + Peripheral Vision P1 Completion**                        | **Ambient Awareness**       | **✅ Shipped (2026-02-21)** |
-| v5.9.9     | VS Code 1.109 Architecture Reinforcement                                               | Platform Leverage            | 🔄 Next Target              |
-| v5.9.10    | Proposed API Adoption                                                                  | Platform Leverage            | ⏳ Gated (proposed APIs)    |
+| **v5.9.9** | **Platform Architecture Reinforcement**                                                | **Platform Leverage**        | **✅ Shipped (2026-02-24)** |
+| v5.9.10    | Proposed API Adoption                                                                  | Platform Leverage            | 🔄 Next Target (gated on proposed APIs) |
 | v6.0.0     | Autonomous Workflows                    | Autonomous Cognition                 | 📋 Planned (v5.9.x prerequisites shipped) |
 | v6.1.0     | Deep Memory + Learning Loops            | Autonomous Cognition                 | 📋 Planned (2 of 5 tasks partially shipped) |
 | v6.2.0     | Skill Marketplace (if community)        | Autonomous Cognition                 | 📋 Planned                  |
@@ -143,11 +143,11 @@ A version is **done** when ALL of the following are true:
 
 > **Principle**: Ship what works. Remove what doesn't. Document what changed.
 
-### v5.9.9 — Platform Architecture Reinforcement
+### v5.9.9 — Platform Architecture Reinforcement ✅ Shipped 2026-02-24
 
 **Theme**: Harvest everything VS Code 1.109 and M365 extensibility GA'd that Alex can use today — no proposed APIs, no gates, ships clean.
 
-**Estimated effort**: ~2 weeks | **Gate**: Internal — ships when all tasks verified and both heirs synced
+**Shipped**: 2026-02-24 | All P0/P1/P2 tasks complete. P3 tasks (MCP Apps prototype, Retrieval API) deferred to v6.x.
 
 | Task | Owner | Effort | Priority | Status | Description |
 | --- | :---: | :----: | :------: | :----: | --- |
