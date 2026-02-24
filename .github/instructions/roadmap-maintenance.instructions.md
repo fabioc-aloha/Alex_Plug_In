@@ -143,6 +143,29 @@ Research Started → Research Findings (unscheduled)
    - All tasks: 📋 → ✅ (if complete)
    - OR update individual task status if partially complete
 
+---
+
+## Three-State Status Vocabulary
+
+Binary status (`Planned` / `Shipped`) misses the most common real-world state: **work is complete but not yet published or released**. Use three states to avoid roadmaps that lie.
+
+| Status | Emoji | Meaning |
+|--------|:-----:|---------|
+| In scaffold | 📋 | Structure exists; substantive logic not yet written |
+| Implemented | 🔨 | Real code written and logically complete; not yet compiled/tested/published |
+| Shipped | ✅ | Compiled, tested, and published to users |
+
+**Why the middle state matters**: A roadmap that jumps from `📋 In scaffold` to `✅ Shipped` creates a false picture during the implementation phase — where most time is actually spent. A feature that's 80% to ship looks identical to one that's 0% to ship without `🔨 Implemented`.
+
+### Application Rule
+
+When auditing a roadmap item:
+1. Does a `src/` or equivalent exist with real logic (not just boilerplate)? → `🔨 Implemented`
+2. Has it passed compile, test, and been published to users? → `✅ Shipped`
+3. Neither? → `📋 In scaffold`
+
+For extension-specific roadmaps, "Implemented" means `extension.ts` has real command registrations and logic. "Shipped" means `npx vsce publish` has run successfully.
+
 3. **Update Current State Section**
    - Bump version number (e.g., "v5.7.2 is current" → "v5.7.5 is current")
    - Add shipped features to capabilities list

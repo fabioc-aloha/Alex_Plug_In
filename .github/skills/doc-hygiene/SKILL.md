@@ -58,6 +58,50 @@ All other files should use **descriptive references** instead of counts.
 | Version number doesn't match current release | Update or archive |
 | References to removed/renamed files | Fix or remove reference |
 
+## TODO Files as Self-Models
+
+> A TODO list that contains completed work is worse than no TODO list.
+
+TODO.md is not just a task list — it is a **self-model**. When an AI or developer reads it at session start, they form a mental picture of what exists and what doesn't. Completed tasks masquerading as pending create two failure modes:
+
+1. **Rediscovery tax** — work already done gets re-investigated, re-planned, or partially re-implemented
+2. **False urgency** — energy is directed at "building" something already built instead of the actual bottleneck (e.g., compile verification, publishing)
+
+### The Anti-Pattern
+
+```markdown
+# TODO
+- [ ] Port secretScanner.ts from Alex     ← already done
+- [ ] Implement FileObservationStore       ← already done
+- [ ] Scaffold extension.ts for all 15     ← already done
+```
+
+This file says the project is 0% done. It's actually 80% done.
+
+### The Fix: ✅ Done Section First
+
+Every TODO.md should open with a `✅ Done — Audited [date]` section listing confirmed-complete work. Pending tasks follow. The reader's first act is orientation, not assumption.
+
+```markdown
+## ✅ Done — Audited 2026-02-24
+- [x] secretScanner.ts ported to shared/utils/
+- [x] All 15 extension.ts files implemented
+
+## 🔥 Next
+- [ ] npm run compile — verify TypeScript
+- [ ] F5 smoke test in Extension Development Host
+```
+
+### Maintenance Rule
+
+During every meditation or sprint transition: **audit TODO.md first**. Move completed items to Done. A stale self-model wastes more time than the audit costs.
+
+| Check | Frequency |
+|-------|-----------|
+| Move completed items to ✅ Done | Every sprint transition |
+| Verify Done items are actually done (spot-check) | Monthly |
+| Archive TODO if project phase is complete | At phase close |
+
 ### Living vs Historical Documents
 
 | Type | Examples | Count Policy |

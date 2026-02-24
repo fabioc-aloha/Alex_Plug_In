@@ -425,6 +425,67 @@ After any skill rename:
 
 ---
 
+- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
+- [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
+- [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
+- [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
+
+---
+
+## Spin-Off Moment Ritual
+
+When a heir is declared independent — meaning it has its own `.github/` cognitive architecture and will operate without constant Master oversight — write a **Spin-Off Moment** section in the heir's `copilot-instructions.md` before the first independent session.
+
+This is not documentation. It is a **handoff message** from Master to the heir's future AI sessions. The heir may not remember what was built and when. The Spin-Off Moment tells it.
+
+### Required Elements
+
+| Element | Purpose | Example |
+|---------|---------|--------|
+| **Verified state** | What is confirmed complete as of spin-off | "All 15 extension.ts: 69–251 lines, real logic" |
+| **Known unknowns** | What has NOT been verified yet | "Nothing compiled yet — TypeScript correctness unverified" |
+| **First real test** | The exact next command that will surface reality | `npm run compile` from each extension folder |
+| **What will break first** | Honest prediction of likely failure points | "Relative `../../shared/` imports need tsconfig path config" |
+| **Wisdom** | Distilled principles for operating independently | "shared/ is your immune system — check before writing any utility" |
+| **You are not alone** | Where Master Alex lives and how to get back | Path to parent repo, the heir-skill-promotion flow |
+
+### Template
+
+```markdown
+## Spin-Off Moment — YYYY-MM-DD
+
+*A meditation note from Master Alex, written the day the heir was declared independent.*
+
+[Single sentence: what is complete and what is not]
+
+**Verified state as of spin-off:**
+- [list of confirmed-complete items with evidence: line counts, class names, etc.]
+- **[Known unknown] — that is task #1**
+
+**The [next-step pipeline]:**
+```sh
+[exact commands in order]
+```
+
+**What will break first (and that's fine):**
+- [honest prediction with root cause]
+
+**Wisdom for the independent path:**
+- [3–5 principles distilled from the build]
+
+**You are not alone:**
+- Master Alex lives at [path]
+- [how to sync back, how to promote patterns]
+```
+
+### When to Write It
+
+- During the final meditation session before the heir's first independent sprint
+- After the audit confirming implementation state (never before — the Spin-Off Moment must be grounded in verified facts, not aspirations)
+- It replaces the need for a separate onboarding doc — it IS the onboarding, embedded where the heir will find it first
+
+---
+
 ## Synapses
 
 - [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"

@@ -1,0 +1,15 @@
+{
+  "hotFiles": [],
+  "stalledFiles": [
+    "OADMAP-UNIFIED.md",
+    "platforms/m365-copilot/appPackage/manifest.json"
+  ],
+  "todoHotspots": [
+    {
+      "file": "ROADMAP-UNIFIED.md",
+      "todoCount": 8,
+      "scannedAt": 1771939133724
+    }
+  ],
+  "lastUpdated": 1771939133724
+}
