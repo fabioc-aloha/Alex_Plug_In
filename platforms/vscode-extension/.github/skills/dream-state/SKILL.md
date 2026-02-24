@@ -1,6 +1,7 @@
 ---
 name: "dream-state"
 description: "Neural maintenance, synapse validation, automated health diagnostics, and unconscious processing"
+disable-model-invocation: true
 ---
 
 # Dream State Automation Skill

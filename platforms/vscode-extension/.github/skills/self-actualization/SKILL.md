@@ -1,6 +1,7 @@
 ---
 name: "self-actualization"
 description: "Comprehensive cognitive self-assessment — honest evaluation of architecture health, growth, and optimization opportunities"
+disable-model-invocation: true
 ---
 
 # Self-Actualization Skill

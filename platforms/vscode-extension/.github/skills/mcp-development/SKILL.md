@@ -1,6 +1,7 @@
 ---
 name: "MCP Development Skill"
 description: "**Domain**: AI Infrastructure"
+user-invokable: false
 ---
 
 # MCP Development Skill

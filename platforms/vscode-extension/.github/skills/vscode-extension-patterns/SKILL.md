@@ -1,6 +1,7 @@
 ---
 name: "vscode-extension-patterns"
 description: "Reusable patterns for VS Code extension development."
+user-invokable: false
 ---
 
 # VS Code Extension Patterns Skill

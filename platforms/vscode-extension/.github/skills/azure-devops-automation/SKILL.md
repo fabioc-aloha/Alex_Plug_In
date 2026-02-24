@@ -1,6 +1,7 @@
 ---
 name: "Azure DevOps Automation"
 description: "CI/CD pipelines, infrastructure as code, and deployment automation for Azure workloads"
+user-invokable: false
 ---
 
 # Skill: Azure DevOps Automation

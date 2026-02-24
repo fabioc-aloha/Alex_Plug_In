@@ -1,6 +1,7 @@
 ---
 name: "microsoft-graph-api"
 description: "Comprehensive Microsoft Graph API reference for M365 service integration"
+user-invokable: false
 ---
 
 # Microsoft Graph API Skill

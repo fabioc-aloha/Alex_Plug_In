@@ -2,6 +2,7 @@
 name: "Chat Participant Patterns Skill"
 description: "VS Code Chat API patterns."
 applyTo: "**/*participant*,**/*chat*,**/*copilot*,**/lm/**"
+user-invokable: false
 ---
 
 # Chat Participant Patterns Skill

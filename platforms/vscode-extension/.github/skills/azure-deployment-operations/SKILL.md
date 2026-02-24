@@ -3,6 +3,7 @@ name: "azure-deployment-operations"
 description: "Production deployment patterns for Azure Static Web Apps, Container Apps, App Service, and infrastructure"
 metadata:
   inheritance: inheritable
+user-invokable: false
 ---
 
 # Azure Deployment Operations

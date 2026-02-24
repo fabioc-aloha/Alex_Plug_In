@@ -1,6 +1,7 @@
 ---
 name: "Fabric Notebook Publish"
 description: "Seamless notebook publishing from VS Code to Microsoft Fabric via Azure DevOps Git integration"
+user-invokable: false
 ---
 
 # Fabric Notebook Publish Skill

@@ -1,6 +1,7 @@
 ---
 name: "Alex Meditation Skill"
 description: "Knowledge consolidation, memory integration, and guided meditation for cognitive enhancement"
+disable-model-invocation: true
 ---
 
 # Alex Meditation Skill

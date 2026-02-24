@@ -2,6 +2,7 @@
 name: "Multi-Agent Orchestration"
 description: "Coordinate multiple AI agents for complex tasks — decomposition, delegation, and synthesis"
 applyTo: "**/*agent*,**/*orchestrat*,**/*multi*,**/*workflow*,**/*subagent*"
+user-invokable: false
 ---
 
 # Multi-Agent Orchestration Skill
