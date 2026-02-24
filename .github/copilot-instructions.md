@@ -74,6 +74,7 @@ When the conversation context shifts, call `alex_cognitive_state_update` with th
 debugging (fixing errors), planning (architecture/design), building (implementing), reviewing (code review/audit),
 learning (understanding/exploring), teaching (explaining), meditation (reflection), dream (maintenance), discovery (insights).
 This updates the welcome sidebar avatar. Call it once when context shifts, not on every message.
+**IMPORTANT**: After completing any dream or meditate session, ALWAYS call `alex_cognitive_state_update` with `state: "persona"` as the FINAL step to reset the avatar. Without this call the dream/meditate avatar persists in the welcome sidebar indefinitely.
 
 ## Heirs
 VS Code Extension: platforms/vscode-extension/
