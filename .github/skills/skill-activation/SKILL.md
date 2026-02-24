@@ -90,7 +90,7 @@ Search this index when processing any task request:
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
 | heir-sync-management | heir sync, master heir, contamination check, promotion workflow, sync architecture, clean slate |
-| image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png |
+| image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png, generate image, flux schnell, flux dev, flux pro, flux 1.1, ideogram, ideogram v2, sdxl, stable diffusion, seedream, which model for image, text in image, replicate model, choose model |
 | incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
 | infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
 | knowledge-synthesis | synthesize knowledge, abstract pattern, promote insight, cross-project learning, save this globally, this is a pattern, remember this for other projects, store globally, promote to pattern, gk insight, reusable learning, abstract from project |

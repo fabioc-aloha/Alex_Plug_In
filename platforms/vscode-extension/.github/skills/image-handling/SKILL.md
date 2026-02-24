@@ -34,6 +34,23 @@ triggers:
   - "transform image"
   - "upscale"
   - "enhance image"
+  - "flux schnell"
+  - "flux dev"
+  - "flux pro"
+  - "flux 1.1"
+  - "ideogram"
+  - "ideogram v2"
+  - "stable diffusion"
+  - "sdxl"
+  - "seedream"
+  - "which model"
+  - "best model for image"
+  - "choose model"
+  - "text in image"
+  - "image with text"
+  - "replicate model"
+  - "run model"
+  - "generate with replicate"
 ---
 
 # Image Handling Skill
@@ -124,6 +141,55 @@ Get-ChildItem *.svg | ForEach-Object {
   magick $_.Name -resize 256x256 $out
 }
 ```
+
+## Replicate Model Selection
+
+Match user intent to the right model. When a user names a specific model or describes a need, use this table.
+
+| Model | Replicate ID | Cost | Best For | Trigger Words |
+|-------|-------------|------|----------|---------------|
+| **Flux Schnell** | `black-forest-labs/flux-schnell` | $0.003 | Fast iteration, prototyping | "flux schnell", "quick image", "fast generation" |
+| **Flux Dev** | `black-forest-labs/flux-dev` | $0.025 | High quality no-text images | "flux dev", "high quality image" |
+| **Flux 1.1 Pro** | `black-forest-labs/flux-1.1-pro` | $0.04 | Production, photorealistic | "flux pro", "flux 1.1", "production image" |
+| **Ideogram v2** | `ideogram-ai/ideogram-v2` | $0.08 | Text in images, typography banners | "ideogram", "text in image", "image with text", "banner" |
+| **Ideogram v2 Turbo** | `ideogram-ai/ideogram-v2-turbo` | $0.05 | Fast typography | "ideogram turbo", "fast text image" |
+| **SDXL** | `stability-ai/sdxl` | $0.009 | Classic diffusion, LoRA styles | "sdxl", "stable diffusion", "stable diffusion xl" |
+| **Seedream 5 Lite** | `bytedance/seedream-5-lite` | varies | 2K/3K with built-in reasoning | "seedream", "bytedance", "high resolution" |
+
+### Model Selection Guide
+
+- **"quick" / "test" / "prototype"** → Flux Schnell ($0.003, 4 steps)
+- **"high quality" / "production"** → Flux 1.1 Pro ($0.04)
+- **Text must appear in the image** → Ideogram v2 (only model with crystal-clear typography)
+- **Painting style / custom LoRA** → SDXL or Flux Dev with LoRA weights
+- **Largest / highest resolution output** → Seedream 5 Lite (2K or 3K)
+- **README banner with text** → Ideogram v2 with `3:1` ratio; see `ai-generated-readme-banners` skill
+- **README banner without text** → Flux 1.1 Pro with `21:9` ratio
+
+### LoRA Support (Flux Dev / SDXL)
+
+Both Flux Dev and SDXL accept LoRA weights:
+
+```javascript
+// Replicate format
+extra_lora: "fofr/flux-pixar-cars"
+// HuggingFace format
+extra_lora: "huggingface.co/owner/model-name"
+// CivitAI format
+extra_lora: "civitai.com/models/<id>"
+// Direct URL
+extra_lora: "https://example.com/weights.safetensors"
+```
+
+### Aspect Ratio Reference
+
+| Ratio | Models | Use Case |
+|-------|--------|----------|
+| `21:9` | Flux (all) | Ultra-wide README banner |
+| `3:1` | Ideogram | Wide banner with typography |
+| `16:9` | All | Standard widescreen |
+| `1:1` | All | Square, avatar, icon |
+| `9:16` | All | Mobile, portrait |
 
 ## Synapses
 
