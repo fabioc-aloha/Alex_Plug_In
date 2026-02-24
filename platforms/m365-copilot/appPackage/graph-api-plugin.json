@@ -1,6 +1,6 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.3/schema.json",
-    "schema_version": "v2.3",
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+    "schema_version": "v2.4",
     "name_for_human": "Microsoft Graph",
     "description_for_human": "Access your calendar, email, presence status, and contacts through Microsoft Graph.",
     "description_for_model": "This plugin provides access to Microsoft Graph APIs for productivity features. Use getCalendarView to retrieve upcoming calendar events. Use getMessages to fetch recent emails. Use getPresence to check user's online status. Use getPeople to search contacts and colleagues. Use getEvent to get detailed meeting information including attendees and attachments. Use getUnreadCount to check unread email count. All operations use delegated permissions via M365 SSO - no separate authentication required.",
@@ -101,11 +101,27 @@
                     }
                 }
             }
+        },
+        {
+            "name": "getMeetingAiInsights",
+            "description": "Get AI-generated insights from a specific online meeting — structured action items, meeting notes, and mentions. GA on Graph v1.0 (Dec 2025): GET /me/online-meetings/{meetingId}/aiInsights. Use during meeting prep to show action items from the last occurrence of a recurring meeting, not just attendee lists.",
+            "capabilities": {
+                "response_semantics": {
+                    "data_path": "$.value",
+                    "properties": {
+                        "title": "$.title",
+                        "subtitle": "$.createdDateTime"
+                    }
+                }
+            }
         }
     ],
     "capabilities": {
         "localization": {},
         "conversation_starters": [
+            {
+                "text": "Get AI insights and action items from my last meeting"
+            },
             {
                 "text": "Show my schedule for today"
             },
@@ -137,7 +153,8 @@
                 "getUnreadCount",
                 "getPresence",
                 "getPeople",
-                "getUserProfile"
+                "getUserProfile",
+                "getMeetingAiInsights"
             ]
         }
     ]

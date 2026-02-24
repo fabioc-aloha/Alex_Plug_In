@@ -1,6 +1,7 @@
 ---
 name: "Teams App Patterns Skill"
 description: "Full Teams app development patterns."
+user-invokable: false
 applyTo: "**/*teams*,**/*manifest*,**/*m365*"
 ---
 

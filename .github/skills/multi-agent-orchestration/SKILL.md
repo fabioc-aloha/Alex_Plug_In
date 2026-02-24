@@ -1,6 +1,7 @@
 ---
 name: "Multi-Agent Orchestration"
 description: "Coordinate multiple AI agents for complex tasks — decomposition, delegation, and synthesis"
+user-invokable: false
 applyTo: "**/*agent*,**/*orchestrat*,**/*multi*,**/*workflow*,**/*subagent*"
 ---
 
@@ -205,12 +206,14 @@ await runSubagent({
   prompt: `Search the codebase for all error handling patterns.
            Return a JSON array of: {file, line, pattern, quality}`,
   description: "Find error patterns"
+user-invokable: false
 });
 
 // Bad: Vague delegation
 await runSubagent({
   prompt: "Look for problems in the code",  // Too vague
   description: "Find issues"
+user-invokable: false
 });
 ```
 

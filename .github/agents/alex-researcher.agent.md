@@ -4,6 +4,7 @@ name: Researcher
 model: ['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']
 tools: ['search', 'codebase', 'fetch', 'runSubagent', 'alex_knowledge_search', 'alex_save_insight', 'alex_cognitive_state_update']
 user-invokable: true
+agents: ['Builder', 'Validator']
 handoffs:
   - label: 🔨 Ready to Build
     agent: Builder

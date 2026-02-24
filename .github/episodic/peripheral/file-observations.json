@@ -1,15 +1,25 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "OADMAP-UNIFIED.md",
-    "platforms/m365-copilot/appPackage/manifest.json"
+    "github/agents/alex-azure.agent.md",
+    "CHANGELOG.md",
+    "ROADMAP-UNIFIED.md",
+    "platforms/m365-copilot/appPackage/alex-knowledge-plugin.json",
+    "platforms/m365-copilot/appPackage/declarativeAgent.json",
+    "platforms/m365-copilot/appPackage/graph-api-plugin.json",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
+      "file": "CHANGELOG.md",
+      "todoCount": 8,
+      "scannedAt": 1771940374995
+    },
+    {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 8,
-      "scannedAt": 1771939133724
+      "scannedAt": 1771940374995
     }
   ],
-  "lastUpdated": 1771939133724
+  "lastUpdated": 1771940374995
 }

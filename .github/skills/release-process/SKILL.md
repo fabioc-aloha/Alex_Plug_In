@@ -1,6 +1,7 @@
 ---
 name: "Release Process Skill"
 description: "Complete release automation for VS Code Marketplace publishing"
+disable-model-invocation: true
 ---
 
 # Release Process Skill

@@ -1,6 +1,7 @@
 ---
 name: "foundry-agent-platform"
 description: "Microsoft Foundry agent deployment, orchestration, and cloud-native AI service patterns"
+user-invokable: false
 ---
 
 # Foundry Agent Platform Skill

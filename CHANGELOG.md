@@ -7,7 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.9] - 2026-02-24
+
+> **Platform Architecture Reinforcement** — Harvest everything VS Code 1.109 and M365 extensibility GA'd. Skill frontmatter gating, agent orchestration hierarchy, quality gate hooks, Claude Code bridge, and M365 plugin schema upgrade. No proposed APIs, ships clean.
+
+### Added
+
+#### Skill Frontmatter Gating
+
+- **`disable-model-invocation: true`** added to 6 action skills: `meditation`, `meditation-facilitation`, `dream-state`, `self-actualization`, `brain-qa`, `release-process`. These require explicit user invocation — the model will not self-invoke them during normal conversation.
+- **`user-invokable: false`** added to 16 domain skills: all Azure/M365/platform skills including `azure-architecture-patterns`, `azure-deployment-operations`, `microsoft-graph-api`, `vscode-extension-patterns`, `mcp-development`, and more. They load contextually but stay hidden from the `/` command menu.
+
+#### Agent Orchestration Hierarchy
+
+- **`agents:` frontmatter** added to all 6 specialist agents, formalizing valid subagent relationships. Researcher can call Builder + Validator. Builder can call Validator. Validator can call Documentarian. Azure + M365 can call Researcher. Alex (orchestrator) was already pre-configured.
+
+#### Quality Gate Hooks (pre-tool-use.js)
+
+- **Q1 — Version drift check**: Before any publish command (`vsce publish` / `npm publish`), the hook compares `package.json` version against the version in `copilot-instructions.md` and warns if they differ. Enforces Definition of Done item 5.
+- **Q2 — TypeScript compile reminder**: On `.ts` file edits, emits a reminder to run `npm run compile`. Surfaces errors at edit time, not at publish time.
+- Both checks are non-blocking — they warn in output but don't prevent execution.
+
+#### Claude Code Compatibility Bridge
+
+- **`.claude/CLAUDE.md`** — Project orientation document for Claude Code sessions. Points to `.github/` as source of truth, lists Safety Imperatives I1–I5, and documents build commands.
+- **`.claude/settings.json`** — Claude Code settings: maps `contextPaths` to Alex's `.github/` assets, wires `preToolUse` hook, sets tool permissions (allow `.github/` writes, deny force-push and direct publish), and sets `ALEX_WORKSPACE=master` env.
+
+#### VS Code Settings
+
+- **`chat.agentCustomizationSkill.enabled: false`** — Disables VS Code 1.109's built-in agent customization skill to prevent it from overriding Alex's `vscode-extension-patterns` and `skill-development` skills.
+
+#### M365 Heir — Extensibility Platform Harvest
+
+- **Plugin schema v2.4** — Both `alex-knowledge-plugin.json` and `graph-api-plugin.json` upgraded from v2.3 to v2.4. Unlocks MCP server `runtimes` type (prerequisite for v6.0 MCP bridge path).
+- **`getMeetingAiInsights`** — New function in `graph-api-plugin.json`. Uses Graph v1.0 GA endpoint `GET /me/online-meetings/{meetingId}/aiInsights` to return structured `actionItems`, `meetingNotes`, and `mentions` from meeting recordings. Wired into capabilities and run_for_functions.
+- **Scenario models routing** — `scenario_models` added to `declarativeAgent.json`: `cognitive_deep` routes meditation/self-actualization/architecture operations to GPT-4o; `productivity_light` routes calendar/email/presence lookups to GPT-4o-mini.
+- **Conversation starters expanded 7 → 12** — Added: "🗓️ What's on my plate?", "🧠 Self-actualization", "🔍 Search my knowledge", "🎯 Sync my goals", "💡 Get AI insights and action items from my last meeting".
+
+---
+
 ## [5.9.8] - 2026-02-21
+
 
 > **Background File Watcher** — Silent ambient observer. Alex now silently tracks which files you keep returning to, what work is sitting uncommitted, and where your TODO backlog is building up — and weaves that awareness into every response.
 

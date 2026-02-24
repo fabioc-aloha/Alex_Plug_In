@@ -80,6 +80,18 @@
             ]
         }
     ],
+    "scenario_models": [
+        {
+            "scenario_id": "cognitive_deep",
+            "description": "Deep introspective sessions: meditation, self-actualization, dream-state, synapse health, architecture review",
+            "model": "gpt-4o"
+        },
+        {
+            "scenario_id": "productivity_light",
+            "description": "Lightweight productivity queries: calendar check, email count, presence status, quick meeting lookup",
+            "model": "gpt-4o-mini"
+        }
+    ],
     "conversation_starters": [
         {
             "title": "❓ Show me what you can do",
@@ -108,6 +120,22 @@
         {
             "title": "🧘 Meditate",
             "text": "Let's meditate - consolidate what I learned today into memory"
+        },
+        {
+            "title": "🗓️ What's on my plate?",
+            "text": "What's on my plate for the week? Show meetings, top emails, and anything that needs my attention."
+        },
+        {
+            "title": "🧠 Self-actualization",
+            "text": "Self-actualization session — assess my cognitive architecture, review growth, and suggest improvements"
+        },
+        {
+            "title": "🔍 Search my knowledge",
+            "text": "Search my knowledge base for [topic] — find patterns and insights from past projects"
+        },
+        {
+            "title": "🎯 Sync my goals",
+            "text": "Sync my learning goals and knowledge base — review progress and update what I'm working toward"
         }
     ]
 }

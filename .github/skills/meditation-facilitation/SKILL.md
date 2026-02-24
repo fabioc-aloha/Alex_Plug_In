@@ -1,6 +1,7 @@
 ---
 name: "meditation-facilitation"
 description: "Conscious knowledge consolidation — the interactive counterpart to automated dream processing"
+disable-model-invocation: true
 applyTo: "**/*meditat*,**/*reflect*,**/*consolidat*"
 ---
 

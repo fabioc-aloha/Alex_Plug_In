@@ -1,6 +1,7 @@
 ---
 name: "Bicep AVM Mastery"
 description: "Azure Verified Modules (AVM), Bicep best practices, and MCP-powered infrastructure as code for Azure"
+user-invokable: false
 ---
 
 # Skill: Bicep AVM Mastery
