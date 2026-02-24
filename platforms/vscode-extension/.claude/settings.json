@@ -1,0 +1,32 @@
+{
+    "$schema": "https://docs.anthropic.com/claude-code/settings.schema.json",
+    "_comment": "Alex Cognitive Architecture — Claude Code Settings Bridge v5.9.9",
+    "model": "claude-sonnet-4-5",
+    "contextPaths": [
+        ".github/copilot-instructions.md",
+        ".github/agents",
+        ".github/skills",
+        ".github/instructions",
+        ".github/config/MASTER-ALEX-PROTECTED.json"
+    ],
+    "hooks": {
+        "preToolUse": "node .github/muscles/hooks/pre-tool-use.js"
+    },
+    "permissions": {
+        "allow": [
+            "Bash(node:.github/muscles/hooks/*.js)",
+            "Read(.github/**)",
+            "Write(src/**)",
+            "Write(.github/**)"
+        ],
+        "deny": [
+            "Bash(git push --force*)",
+            "Bash(*npm publish*)",
+            "Bash(*vsce publish*)"
+        ]
+    },
+    "env": {
+        "ALEX_WORKSPACE": "master",
+        "ALEX_VERSION": "5.9.9"
+    }
+}
