@@ -984,6 +984,200 @@ Or use these quick options:
     return { metadata: { command: 'profile', action: 'view' } };
 }
 
+// === HELPER FUNCTIONS FOR handleGeneralQuery (NASA R4 extraction) ===
+
+interface UnconsciousMindContext {
+    emotionalState: ReturnType<typeof detectEmotionalState>;
+    encouragement: string | null;
+    lastSignal: ReturnType<typeof recordEmotionalSignal>;
+    riverStatus: ReturnType<typeof assessRiverOfIntegration>;
+    windowStatus: ReturnType<typeof assessWindowOfTolerance>;
+    lidFlipped: boolean;
+}
+
+/**
+ * Gather unconscious mind context: emotional state, Siegel integration, and encouragement
+ */
+function gatherUnconsciousMindContext(prompt: string, sourceProject?: string): UnconsciousMindContext {
+    trackConversationForInsights(prompt, sourceProject);
+    
+    const emotionalState = detectEmotionalState(prompt);
+    const encouragement = generateEncouragement(emotionalState);
+    
+    const frustrationNum = emotionalState.frustration === 'high' ? 3 
+        : emotionalState.frustration === 'moderate' ? 2 
+        : emotionalState.frustration === 'mild' ? 1 : 0;
+    const lastSignal = recordEmotionalSignal(prompt, frustrationNum, emotionalState.success);
+
+    const riverStatus = assessRiverOfIntegration();
+    const windowStatus = assessWindowOfTolerance();
+    const lidFlipped = checkLidFlipped();
+    
+    return { emotionalState, encouragement, lastSignal, riverStatus, windowStatus, lidFlipped };
+}
+
+/**
+ * Build model-tier specific reasoning guidance
+ */
+function buildReasoningGuidance(modelTier: string, tierInfo: { displayName: string }): string {
+    if (modelTier === 'frontier') {
+        return `\n\n## Model Capability
+You're running on a ${tierInfo.displayName} model with deep reasoning capabilities. Feel free to:
+- Think through complex problems step-by-step
+- Explore multiple solution paths
+- Provide thorough explanations with nuance
+- Handle large context windows effectively`;
+    } else if (modelTier === 'capable') {
+        return `\n\n## Model Capability  
+You're running on a ${tierInfo.displayName} model. Provide:
+- Clear, well-structured responses
+- Balanced depth without overwhelming detail
+- Practical solutions over theoretical exploration`;
+    } else if (modelTier === 'efficient') {
+        return `\n\n## Model Capability
+You're running on a ${tierInfo.displayName} model optimized for speed. Focus on:
+- Concise, actionable answers
+- Direct solutions without extensive exploration
+- Efficient responses that get to the point quickly`;
+    }
+    return '';
+}
+
+/**
+ * Build file context from request references and active editor
+ */
+async function buildFileContextFromReferences(request: vscode.ChatRequest): Promise<string> {
+    let fileContext = '';
+    
+    if (request.references.length > 0) {
+        fileContext = '\n\n## Referenced Files\n';
+        for (const ref of request.references) {
+            if (ref.value instanceof vscode.Uri) {
+                const filePath = ref.value.fsPath;
+                const fileName = path.basename(filePath);
+                
+                try {
+                    const content = await vscode.workspace.fs.readFile(ref.value);
+                    const text = Buffer.from(content).toString('utf8');
+                    fileContext += `\n### ${fileName}\n\`\`\`\n${text.slice(0, 5000)}\n\`\`\`\n`;
+                } catch (err) {
+                    fileContext += `\n### ${fileName}\n_(Could not read file)_\n`;
+                }
+            } else if (typeof ref.value === 'object' && ref.value !== null && 'text' in ref.value) {
+                fileContext += `\n### Selected Text\n\`\`\`\n${(ref.value as {text: string}).text}\n\`\`\`\n`;
+            }
+        }
+    }
+    
+    // Include active editor selection if no references provided
+    const editor = vscode.window.activeTextEditor;
+    if (editor && !editor.selection.isEmpty && request.references.length === 0) {
+        const selection = editor.document.getText(editor.selection);
+        if (selection) {
+            fileContext += '\n\n## Active Editor Selection\n';
+            fileContext += `From: ${path.basename(editor.document.fileName)}\n\`\`\`\n${selection}\n\`\`\`\n`;
+        }
+    }
+    
+    return fileContext;
+}
+
+/**
+ * Get available Alex cognitive tools for model requests
+ */
+function getAlexCognitiveTools(): vscode.LanguageModelChatTool[] {
+    const toolNames = [
+        'alex_cognitive_synapse_health',
+        'alex_cognitive_memory_search',
+        'alex_cognitive_architecture_status',
+        'alex_platform_mcp_recommendations',
+        'alex_cognitive_user_profile',
+        'alex_cognitive_focus_context',
+        'alex_cognitive_self_actualization',
+        'alex_quality_heir_validation',
+        'alex_knowledge_search',
+        'alex_knowledge_save_insight',
+        'alex_knowledge_promote',
+        'alex_knowledge_status'
+    ];
+    return toolNames
+        .map(name => vscode.lm.tools.find(t => t.name === name)!)
+        .filter(t => t !== undefined);
+}
+
+/**
+ * Execute model request with tool loop - streams response and handles tool calls
+ * Returns the collected response text for post-processing
+ */
+async function executeModelWithTools(
+    model: vscode.LanguageModelChat,
+    messages: vscode.LanguageModelChatMessage[],
+    alexTools: vscode.LanguageModelChatTool[],
+    stream: vscode.ChatResponseStream,
+    request: vscode.ChatRequest,
+    token: vscode.CancellationToken
+): Promise<string> {
+    const toolCallResults: vscode.LanguageModelToolCallPart[] = [];
+    let collectedResponse = '';
+    let response = await model.sendRequest(messages, { tools: alexTools }, token);
+    
+    // Iterate through stream and collect tool calls
+    for await (const part of response.stream) {
+        if (part instanceof vscode.LanguageModelTextPart) {
+            stream.markdown(part.value);
+            collectedResponse += part.value;
+        } else if (part instanceof vscode.LanguageModelToolCallPart) {
+            toolCallResults.push(part);
+        }
+    }
+    
+    // If there were tool calls, execute them and send results back
+    if (toolCallResults.length > 0) {
+        const toolResultMessages: vscode.LanguageModelChatMessage[] = [...messages];
+        
+        for (const toolCall of toolCallResults) {
+            try {
+                const toolResult = await vscode.lm.invokeTool(
+                    toolCall.name,
+                    { input: toolCall.input, toolInvocationToken: request.toolInvocationToken },
+                    token
+                );
+                
+                const resultPart = new vscode.LanguageModelToolResultPart(toolCall.callId, toolResult.content);
+                toolResultMessages.push(
+                    vscode.LanguageModelChatMessage.Assistant([toolCall]),
+                    vscode.LanguageModelChatMessage.User([resultPart])
+                );
+            } catch (err) {
+                console.error(`[Alex] Tool ${toolCall.name} failed:`, err);
+                const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+                const errorPart = new vscode.LanguageModelToolResultPart(
+                    toolCall.callId,
+                    [new vscode.LanguageModelTextPart(`Error: ${errorMessage}`)]
+                );
+                toolResultMessages.push(
+                    vscode.LanguageModelChatMessage.Assistant([toolCall]),
+                    vscode.LanguageModelChatMessage.User([errorPart])
+                );
+            }
+        }
+        
+        // Send updated messages with tool results back to model
+        if (toolResultMessages.length > messages.length) {
+            response = await model.sendRequest(toolResultMessages, { tools: alexTools }, token);
+            
+            for await (const part of response.stream) {
+                if (part instanceof vscode.LanguageModelTextPart) {
+                    stream.markdown(part.value);
+                    collectedResponse += part.value;
+                }
+            }
+        }
+    }
+    
+    return collectedResponse;
+}
+
 /**
  * Handle general queries using the language model
  */
@@ -997,25 +1191,11 @@ async function handleGeneralQuery(
     // v5.9.3: Cognitive state detection and avatar update now handled in alexChatHandler
     // before dispatch to prevent race condition with async executeCommand
     
-    // === UNCONSCIOUS MIND: Track conversation for auto-insight detection ===
+    // === UNCONSCIOUS MIND: Gather emotional/integration context ===
     const workspaceFolders = vscode.workspace.workspaceFolders;
     const sourceProject = workspaceFolders ? path.basename(workspaceFolders[0].uri.fsPath) : undefined;
-    trackConversationForInsights(request.prompt, sourceProject);
-    
-    // === UNCONSCIOUS MIND: Emotional Intelligence ===
-    const emotionalState = detectEmotionalState(request.prompt);
-    const encouragement = generateEncouragement(emotionalState);
-    
-    // v5.9.3: Record emotional signal for persistent emotional memory
-    const frustrationNum = emotionalState.frustration === 'high' ? 3 
-        : emotionalState.frustration === 'moderate' ? 2 
-        : emotionalState.frustration === 'mild' ? 1 : 0;
-    const lastSignal = recordEmotionalSignal(request.prompt, frustrationNum, emotionalState.success);
-
-    // v5.9.3 Siegel: Assess session health after recording signal
-    const riverStatus  = assessRiverOfIntegration();
-    const windowStatus = assessWindowOfTolerance();
-    const lidFlipped   = checkLidFlipped();
+    const unconsciousCtx = gatherUnconsciousMindContext(request.prompt, sourceProject);
+    const { emotionalState, encouragement, lastSignal, riverStatus, windowStatus, lidFlipped } = unconsciousCtx;
     
     // Get user profile for personalization
     const profile = await getUserProfile();
@@ -1088,60 +1268,11 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
             recordModelUsage(workspaceRoot, modelTier).catch(() => {/* fire-and-forget */});
         }
         
-        // v5.8.1: Model-adaptive prompt rules
-        let reasoningGuidance = '';
-        if (modelTier === 'frontier') {
-            reasoningGuidance = `\n\n## Model Capability
-You're running on a ${tierInfo.displayName} model with deep reasoning capabilities. Feel free to:
-- Think through complex problems step-by-step
-- Explore multiple solution paths
-- Provide thorough explanations with nuance
-- Handle large context windows effectively`;
-        } else if (modelTier === 'capable') {
-            reasoningGuidance = `\n\n## Model Capability  
-You're running on a ${tierInfo.displayName} model. Provide:
-- Clear, well-structured responses
-- Balanced depth without overwhelming detail
-- Practical solutions over theoretical exploration`;
-        } else if (modelTier === 'efficient') {
-            reasoningGuidance = `\n\n## Model Capability
-You're running on a ${tierInfo.displayName} model optimized for speed. Focus on:
-- Concise, actionable answers
-- Direct solutions without extensive exploration
-- Efficient responses that get to the point quickly`;
-        }
+        // v5.8.1: Model-adaptive prompt rules (NASA R4 extracted)
+        const reasoningGuidance = buildReasoningGuidance(modelTier, tierInfo);
         
-        // v5.8.1: File context from references
-        let fileContext = '';
-        if (request.references.length > 0) {
-            fileContext = '\n\n## Referenced Files\n';
-            for (const ref of request.references) {
-                if (ref.value instanceof vscode.Uri) {
-                    const filePath = ref.value.fsPath;
-                    const fileName = path.basename(filePath);
-                    
-                    try {
-                        const content = await vscode.workspace.fs.readFile(ref.value);
-                        const text = Buffer.from(content).toString('utf8');
-                        fileContext += `\n### ${fileName}\n\`\`\`\n${text.slice(0, 5000)}\n\`\`\`\n`;
-                    } catch (err) {
-                        fileContext += `\n### ${fileName}\n_(Could not read file)_\n`;
-                    }
-                } else if (typeof ref.value === 'object' && ref.value !== null && 'text' in ref.value) {
-                    fileContext += `\n### Selected Text\n\`\`\`\n${(ref.value as {text: string}).text}\n\`\`\`\n`;
-                }
-            }
-        }
-        
-        // Include active editor selection if present
-        const editor = vscode.window.activeTextEditor;
-        if (editor && !editor.selection.isEmpty && request.references.length === 0) {
-            const selection = editor.document.getText(editor.selection);
-            if (selection) {
-                fileContext += '\n\n## Active Editor Selection\n';
-                fileContext += `From: ${path.basename(editor.document.fileName)}\n\`\`\`\n${selection}\n\`\`\`\n`;
-            }
-        }
+        // v5.8.1: File context from references (NASA R4 extracted)
+        const fileContext = await buildFileContextFromReferences(request);
         
         // Build messages for the language model
         const messages: vscode.LanguageModelChatMessage[] = [
@@ -1149,88 +1280,11 @@ You're running on a ${tierInfo.displayName} model optimized for speed. Focus on:
             vscode.LanguageModelChatMessage.User(request.prompt)
         ];
 
-        // v5.8.1: Tool calling - Pass Alex cognitive tools to@alex
-        const alexTools: vscode.LanguageModelChatTool[] = [
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_synapse_health')!,
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_memory_search')!,
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_architecture_status')!,
-            vscode.lm.tools.find(t => t.name === 'alex_platform_mcp_recommendations')!,
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_user_profile')!,
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_focus_context')!,
-            vscode.lm.tools.find(t => t.name === 'alex_cognitive_self_actualization')!,
-            vscode.lm.tools.find(t => t.name === 'alex_quality_heir_validation')!,
-            vscode.lm.tools.find(t => t.name === 'alex_knowledge_search')!,
-            vscode.lm.tools.find(t => t.name === 'alex_knowledge_save_insight')!,
-            vscode.lm.tools.find(t => t.name === 'alex_knowledge_promote')!,
-            vscode.lm.tools.find(t => t.name === 'alex_knowledge_status')!
-        ].filter(t => t !== undefined);
+        // v5.8.1: Tool calling - Pass Alex cognitive tools to @alex (NASA R4 extracted)
+        const alexTools = getAlexCognitiveTools();
 
-        // v5.8.1: Tool result loop - Handle tool calls and feed results back
-        const toolCallResults: vscode.LanguageModelToolCallPart[] = [];
-        let collectedResponse = '';
-        let response = await model.sendRequest(messages, { tools: alexTools }, token);
-        
-        // Iterate through tool calls and execute them
-        for await (const part of response.stream) {
-            if (part instanceof vscode.LanguageModelTextPart) {
-                stream.markdown(part.value);
-                collectedResponse += part.value;
-            } else if (part instanceof vscode.LanguageModelToolCallPart) {
-                // Collect tool call for execution
-                toolCallResults.push(part);
-            }
-        }
-        
-        // If there were tool calls, execute them and send results back
-        if (toolCallResults.length > 0) {
-            const toolResultMessages: vscode.LanguageModelChatMessage[] = [...messages];
-            
-            for (const toolCall of toolCallResults) {
-                try {
-                    // Execute the tool
-                    const toolResult = await vscode.lm.invokeTool(
-                        toolCall.name,
-                        {
-                            input: toolCall.input,
-                            toolInvocationToken: request.toolInvocationToken
-                        },
-                        token
-                    );
-                    
-                    // Add tool result to messages
-                    const resultPart = new vscode.LanguageModelToolResultPart(toolCall.callId, toolResult.content);
-                    toolResultMessages.push(
-                        vscode.LanguageModelChatMessage.Assistant([toolCall]),
-                        vscode.LanguageModelChatMessage.User([resultPart])
-                    );
-                } catch (err) {
-                    console.error(`[Alex] Tool ${toolCall.name} failed:`, err);
-                    // Add error as tool result so the model knows it failed
-                    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-                    const errorPart = new vscode.LanguageModelToolResultPart(
-                        toolCall.callId,
-                        [new vscode.LanguageModelTextPart(`Error: ${errorMessage}`)]
-                    );
-                    toolResultMessages.push(
-                        vscode.LanguageModelChatMessage.Assistant([toolCall]),
-                        vscode.LanguageModelChatMessage.User([errorPart])
-                    );
-                }
-            }
-            
-            // Send updated messages with tool results back to model
-            if (toolResultMessages.length > messages.length) {
-                response = await model.sendRequest(toolResultMessages, { tools: alexTools }, token);
-                
-                // Stream the updated response
-                for await (const part of response.stream) {
-                    if (part instanceof vscode.LanguageModelTextPart) {
-                        stream.markdown(part.value);
-                        collectedResponse += part.value;
-                    }
-                }
-            }
-        }
+        // v5.8.1: Execute model with tool loop (NASA R4 extracted)
+        let collectedResponse = await executeModelWithTools(model, messages, alexTools, stream, request, token);
         
         // === UNCONSCIOUS MIND: Add encouragement if emotional state warrants it ===
         if (encouragement) {

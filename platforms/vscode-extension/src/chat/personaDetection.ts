@@ -962,6 +962,235 @@ export interface PersonaDetectionResult {
     source?: 'cached' | 'detected' | 'llm'; // Where the persona came from
 }
 
+/** Internal scoring entry for persona detection */
+interface PersonaScoreEntry {
+    score: number;
+    reasons: string[];
+}
+
+/** Profile text evidence for signal matching */
+interface ProfileEvidence {
+    text: string;
+    label: string;
+}
+
+// ============================================================================
+// SIGNAL SCORING HELPERS (NASA R4 extraction)
+// ============================================================================
+
+/**
+ * Score identity and technology signals against profile texts
+ * @param profileTexts - Collected evidence from user profile
+ * @param scores - Mutable score map to update
+ */
+function scoreProfileSignals(
+    profileTexts: ProfileEvidence[],
+    scores: Map<string, PersonaScoreEntry>
+): void {
+    for (const { text, label } of profileTexts) {
+        const textLower = text.toLowerCase();
+        for (const persona of PERSONAS) {
+            for (const signal of persona.signals) {
+                if (signal.category !== 'identity' && signal.category !== 'technology') { continue; }
+                try {
+                    const re = new RegExp(signal.pattern, 'i');
+                    if (re.test(textLower)) {
+                        const entry = scores.get(persona.id)!;
+                        entry.score += signal.weight;
+                        if (!entry.reasons.includes(label)) { entry.reasons.push(label); }
+                    }
+                } catch { /* skip invalid regex */ }
+            }
+        }
+    }
+}
+
+/**
+ * Score structure signals against workspace directory
+ * @param wsRoot - Workspace root path
+ * @param entries - Directory entry names
+ * @param scores - Mutable score map to update
+ */
+async function scoreStructureSignals(
+    wsRoot: string,
+    entries: string[],
+    scores: Map<string, PersonaScoreEntry>
+): Promise<void> {
+    const entriesLowerSet = new Set(entries.map(e => e.toLowerCase()));
+    
+    for (const persona of PERSONAS) {
+        for (const signal of persona.signals) {
+            if (signal.category !== 'structure') { continue; }
+            const structureTokens = signal.pattern.split('|').map(t => t.trim()).filter(Boolean);
+            for (const token of structureTokens) {
+                let matched = false;
+                let displayName = token;
+                
+                if (token.includes('/')) {
+                    const cleanPath = token.replace(/\/+$/, '');
+                    matched = await workspaceFs.pathExists(path.join(wsRoot, cleanPath));
+                } else if (/^\.[a-zA-Z]+$/.test(token)) {
+                    const ext = token.toLowerCase();
+                    matched = entries.some(e => e.toLowerCase().endsWith(ext));
+                    displayName = `*${token} files`;
+                } else {
+                    matched = entriesLowerSet.has(token.toLowerCase());
+                }
+                
+                if (matched) {
+                    const entry = scores.get(persona.id)!;
+                    entry.score += signal.weight;
+                    const reason = `Project has ${displayName}`;
+                    if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                }
+            }
+        }
+    }
+    
+    // Developer baseline boost for common dev files
+    const devFiles = ['package.json', 'tsconfig.json', 'pyproject.toml', 'Cargo.toml', 'go.mod', 'requirements.txt'];
+    for (const file of devFiles) {
+        if (entriesLowerSet.has(file.toLowerCase())) {
+            const devEntry = scores.get('developer')!;
+            devEntry.score += 0.5;
+        }
+    }
+}
+
+/**
+ * Score dependency signals against package.json
+ * @param wsRoot - Workspace root path
+ * @param scores - Mutable score map to update
+ */
+async function scoreDependencySignals(
+    wsRoot: string,
+    scores: Map<string, PersonaScoreEntry>
+): Promise<void> {
+    const packageJsonPath = path.join(wsRoot, 'package.json');
+    if (!await workspaceFs.pathExists(packageJsonPath)) { return; }
+    
+    try {
+        const pkg = await workspaceFs.readJson(packageJsonPath) as { 
+            dependencies?: Record<string, string>; 
+            devDependencies?: Record<string, string> 
+        };
+        const allDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+        const depsJoined = allDeps.join(' ').toLowerCase();
+        
+        for (const persona of PERSONAS) {
+            for (const signal of persona.signals) {
+                if (signal.category !== 'dependency') { continue; }
+                try {
+                    const re = new RegExp(signal.pattern, 'i');
+                    if (re.test(depsJoined)) {
+                        const entry = scores.get(persona.id)!;
+                        entry.score += signal.weight;
+                        const matched = depsJoined.match(re)?.[0] || signal.pattern;
+                        const reason = `Dependency: ${matched}`;
+                        if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                    }
+                } catch { /* skip */ }
+            }
+        }
+    } catch { /* skip */ }
+}
+
+/**
+ * Score content signals against README and package.json description
+ * @param wsRoot - Workspace root path
+ * @param scores - Mutable score map to update
+ */
+async function scoreContentSignals(
+    wsRoot: string,
+    scores: Map<string, PersonaScoreEntry>
+): Promise<void> {
+    const contentFiles = [
+        path.join(wsRoot, 'README.md'),
+        path.join(wsRoot, 'package.json'),
+    ];
+    let contentText = '';
+    for (const cf of contentFiles) {
+        try {
+            if (await workspaceFs.pathExists(cf)) {
+                const raw = await workspaceFs.readFile(cf);
+                contentText += ' ' + raw.slice(0, 2000); // cap to prevent perf issues
+            }
+        } catch { /* skip */ }
+    }
+    if (!contentText) { return; }
+    
+    for (const persona of PERSONAS) {
+        for (const signal of persona.signals) {
+            if (signal.category !== 'content') { continue; }
+            try {
+                const re = new RegExp(signal.pattern, 'i');
+                if (re.test(contentText)) {
+                    const entry = scores.get(persona.id)!;
+                    entry.score += signal.weight;
+                    const reason = `Content matches ${persona.name} signals`;
+                    if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                }
+            } catch { /* skip */ }
+        }
+    }
+}
+
+/**
+ * Select the best persona from accumulated scores
+ * @param scores - Accumulated scores from all signal sources
+ * @returns Best persona result or null
+ */
+function selectBestPersona(scores: Map<string, PersonaScoreEntry>): PersonaDetectionResult | null {
+    let bestPersona: Persona | null = null;
+    let bestScore = 0;
+    let bestReasons: string[] = [];
+    
+    for (const persona of PERSONAS) {
+        const entry = scores.get(persona.id)!;
+        if (entry.score > bestScore) {
+            bestScore = entry.score;
+            bestPersona = persona;
+            bestReasons = entry.reasons;
+        }
+    }
+    
+    if (bestPersona && bestScore >= 1) {
+        const confidence = Math.min(bestScore / 10, 1);
+        return {
+            persona: bestPersona,
+            confidence,
+            reasons: bestReasons.slice(0, 5),
+            source: 'detected'
+        };
+    }
+    return null;
+}
+
+/**
+ * Collect evidence texts from user profile for signal matching
+ * @param userProfile - User profile data
+ * @returns Array of text/label pairs for matching
+ */
+function collectProfileEvidence(userProfile?: UserProfile): ProfileEvidence[] {
+    const profileTexts: ProfileEvidence[] = [];
+    if (!userProfile) { return profileTexts; }
+    
+    for (const tech of (userProfile.primaryTechnologies || [])) {
+        if (typeof tech === 'string') { profileTexts.push({ text: tech, label: `Uses ${tech}` }); }
+    }
+    for (const goal of (userProfile.learningGoals || [])) {
+        if (typeof goal === 'string') { profileTexts.push({ text: goal, label: `Learning goal: ${goal}` }); }
+    }
+    for (const area of (userProfile.expertiseAreas || [])) {
+        if (typeof area === 'string') { profileTexts.push({ text: area, label: `Expert in ${area}` }); }
+    }
+    for (const project of (userProfile.currentProjects || [])) {
+        const name = typeof project === 'string' ? project : (project as { name?: string })?.name;
+        if (name && typeof name === 'string') { profileTexts.push({ text: name, label: `Working on ${name}` }); }
+    }
+    return profileTexts;
+}
+
 /**
  * Detect the most likely persona based on priority chain.
  * 
@@ -1011,8 +1240,6 @@ export async function detectPersona(
     const extendedProfile = userProfile as ExtendedUserProfile | undefined;
     if (extendedProfile?.projectPersona) {
         const savedPersona = extendedProfile.projectPersona;
-        
-        // Defensive: if detectedAt is missing, treat as recently detected
         let ageInDays = 0;
         if (savedPersona.detectedAt) {
             const detectedAt = new Date(savedPersona.detectedAt);
@@ -1020,8 +1247,6 @@ export async function detectPersona(
                 ageInDays = (Date.now() - detectedAt.getTime()) / (1000 * 60 * 60 * 24);
             }
         }
-        
-        // Use cached persona if less than 7 days old (or if no date, assume valid)
         if (ageInDays < 7) {
             const matchedPersona = PERSONAS.find(p => p.id === savedPersona.id);
             if (matchedPersona) {
@@ -1036,186 +1261,34 @@ export async function detectPersona(
     }
     
     // PRIORITY 6: Signal-based scoring across all evidence sources
-    const scores: Map<string, { score: number; reasons: string[] }> = new Map();
-    
-    // Initialize all personas with 0 score
+    const scores = new Map<string, PersonaScoreEntry>();
     for (const persona of PERSONAS) {
         scores.set(persona.id, { score: 0, reasons: [] });
     }
     
-    // --- Collect evidence texts from user profile ---
-    const profileTexts: { text: string; label: string }[] = [];
-    if (userProfile) {
-        for (const tech of (userProfile.primaryTechnologies || [])) {
-            if (typeof tech === 'string') { profileTexts.push({ text: tech, label: `Uses ${tech}` }); }
-        }
-        for (const goal of (userProfile.learningGoals || [])) {
-            if (typeof goal === 'string') { profileTexts.push({ text: goal, label: `Learning goal: ${goal}` }); }
-        }
-        for (const area of (userProfile.expertiseAreas || [])) {
-            if (typeof area === 'string') { profileTexts.push({ text: area, label: `Expert in ${area}` }); }
-        }
-        for (const project of (userProfile.currentProjects || [])) {
-            const name = typeof project === 'string' ? project : (project as { name?: string })?.name;
-            if (name && typeof name === 'string') { profileTexts.push({ text: name, label: `Working on ${name}` }); }
-        }
-    }
+    // Collect and score profile evidence (NASA R4 compliance)
+    const profileTexts = collectProfileEvidence(userProfile);
+    scoreProfileSignals(profileTexts, scores);
     
-    // --- Score identity and technology signals against profile texts ---
-    for (const { text, label } of profileTexts) {
-        const textLower = text.toLowerCase();
-        for (const persona of PERSONAS) {
-            for (const signal of persona.signals) {
-                if (signal.category !== 'identity' && signal.category !== 'technology') { continue; }
-                try {
-                    const re = new RegExp(signal.pattern, 'i');
-                    if (re.test(textLower)) {
-                        const entry = scores.get(persona.id)!;
-                        entry.score += signal.weight;
-                        if (!entry.reasons.includes(label)) { entry.reasons.push(label); }
-                    }
-                } catch { /* skip invalid regex */ }
-            }
-        }
-    }
-    
-    // --- Score structure signals against workspace ---
     if (workspaceFolders && workspaceFolders.length > 0) {
         for (const folder of workspaceFolders) {
             try {
                 const wsRoot = folder.uri.fsPath;
                 const dirEntries = await workspaceFs.readDirectory(wsRoot);
-                const entries = dirEntries.map(([name, _]) => name);
-                const entriesLowerSet = new Set(entries.map(e => e.toLowerCase()));
+                const entries = dirEntries.map(([name]) => name);
                 
-                for (const persona of PERSONAS) {
-                    for (const signal of persona.signals) {
-                        if (signal.category !== 'structure') { continue; }
-                        // Structure patterns use the same | separator as regex;
-                        // each token is checked as path, extension, or exact name
-                        const structureTokens = signal.pattern.split('|').map(t => t.trim()).filter(Boolean);
-                        for (const token of structureTokens) {
-                            let matched = false;
-                            let displayName = token;
-                            
-                            if (token.includes('/')) {
-                                const cleanPath = token.replace(/\/+$/, '');
-                                matched = await workspaceFs.pathExists(path.join(wsRoot, cleanPath));
-                            } else if (/^\.[a-zA-Z]+$/.test(token)) {
-                                const ext = token.toLowerCase();
-                                matched = entries.some(e => e.toLowerCase().endsWith(ext));
-                                displayName = `*${token} files`;
-                            } else {
-                                matched = entriesLowerSet.has(token.toLowerCase());
-                            }
-                            
-                            if (matched) {
-                                const entry = scores.get(persona.id)!;
-                                entry.score += signal.weight;
-                                const reason = `Project has ${displayName}`;
-                                if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
-                            }
-                        }
-                    }
-                }
-                
-                // --- Score dependency signals against package.json ---
-                const packageJsonPath = path.join(wsRoot, 'package.json');
-                if (await workspaceFs.pathExists(packageJsonPath)) {
-                    try {
-                        const pkg = await workspaceFs.readJson(packageJsonPath) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
-                        const allDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
-                        const depsJoined = allDeps.join(' ').toLowerCase();
-                        
-                        for (const persona of PERSONAS) {
-                            for (const signal of persona.signals) {
-                                if (signal.category !== 'dependency') { continue; }
-                                try {
-                                    const re = new RegExp(signal.pattern, 'i');
-                                    if (re.test(depsJoined)) {
-                                        const entry = scores.get(persona.id)!;
-                                        entry.score += signal.weight;
-                                        const matched = depsJoined.match(re)?.[0] || signal.pattern;
-                                        const reason = `Dependency: ${matched}`;
-                                        if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
-                                    }
-                                } catch { /* skip */ }
-                            }
-                        }
-                    } catch { /* skip */ }
-                }
-                
-                // --- Score content signals against key file text ---
-                const contentFiles = [
-                    path.join(wsRoot, 'README.md'),
-                    path.join(wsRoot, 'package.json'),
-                ];
-                let contentText = '';
-                for (const cf of contentFiles) {
-                    try {
-                        if (await workspaceFs.pathExists(cf)) {
-                            const raw = await workspaceFs.readFile(cf);
-                            contentText += ' ' + raw.slice(0, 2000); // cap to prevent perf issues
-                        }
-                    } catch { /* skip */ }
-                }
-                if (contentText) {
-                    for (const persona of PERSONAS) {
-                        for (const signal of persona.signals) {
-                            if (signal.category !== 'content') { continue; }
-                            try {
-                                const re = new RegExp(signal.pattern, 'i');
-                                if (re.test(contentText)) {
-                                    const entry = scores.get(persona.id)!;
-                                    entry.score += signal.weight;
-                                    const reason = `Content matches ${persona.name} signals`;
-                                    if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
-                                }
-                            } catch { /* skip */ }
-                        }
-                    }
-                }
-                
-                // Developer baseline boost for common dev files
-                const devFiles = ['package.json', 'tsconfig.json', 'pyproject.toml', 'Cargo.toml', 'go.mod', 'requirements.txt'];
-                for (const file of devFiles) {
-                    if (entriesLowerSet.has(file.toLowerCase())) {
-                        const devEntry = scores.get('developer')!;
-                        devEntry.score += 0.5;
-                    }
-                }
-            } catch {
-                // Ignore errors reading directory
-            }
+                await scoreStructureSignals(wsRoot, entries, scores);
+                await scoreDependencySignals(wsRoot, scores);
+                await scoreContentSignals(wsRoot, scores);
+            } catch { /* Ignore errors reading directory */ }
         }
     }
     
-    // Find persona with highest score
-    let bestPersona: Persona | null = null;
-    let bestScore = 0;
-    let bestReasons: string[] = [];
+    // Select best persona from scores
+    const result = selectBestPersona(scores);
+    if (result) { return result; }
     
-    for (const persona of PERSONAS) {
-        const entry = scores.get(persona.id)!;
-        if (entry.score > bestScore) {
-            bestScore = entry.score;
-            bestPersona = persona;
-            bestReasons = entry.reasons;
-        }
-    }
-    
-    // If profile-based detection found something, return it
-    if (bestPersona && bestScore >= 1) {
-        const confidence = Math.min(bestScore / 10, 1);
-        return {
-            persona: bestPersona,
-            confidence,
-            reasons: bestReasons.slice(0, 5), // Top 5 reasons
-            source: 'detected'
-        };
-    }
-    
-    // PRIORITY 6: Default fallback to Developer
+    // FALLBACK: Default to Developer
     const developerPersona = PERSONAS.find(p => p.id === 'developer')!;
     return {
         persona: developerPersona,
