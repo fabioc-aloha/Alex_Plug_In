@@ -11,8 +11,9 @@
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import * as workspaceFs from '../shared/workspaceFs';
 import { getNonce } from '../shared/sanitize';
+import { WorkspaceGoalsData } from '../shared/constants';
 
 /**
  * Dashboard data structure
@@ -164,41 +165,41 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
     try {
       // Count skills (async)
       const skillsPath = path.join(githubPath, 'skills');
-      if (await fs.pathExists(skillsPath)) {
-        const skillDirs = await fs.readdir(skillsPath, { withFileTypes: true });
-        data.memory.skillCount = skillDirs.filter(d => d.isDirectory()).length;
+      if (await workspaceFs.pathExists(skillsPath)) {
+        const skillDirs = await workspaceFs.readDirectory(skillsPath);
+        data.memory.skillCount = skillDirs.filter(([_, fileType]) => fileType === vscode.FileType.Directory).length;
       }
 
       // Count instructions (async)
       const instructionsPath = path.join(githubPath, 'instructions');
-      if (await fs.pathExists(instructionsPath)) {
-        const files = await fs.readdir(instructionsPath);
-        data.memory.instructionCount = files.filter(f => f.endsWith('.instructions.md')).length;
+      if (await workspaceFs.pathExists(instructionsPath)) {
+        const files = await workspaceFs.readDirectory(instructionsPath);
+        data.memory.instructionCount = files.filter(([name, _]) => name.endsWith('.instructions.md')).length;
       }
 
       // Count prompts (async)
       const promptsPath = path.join(githubPath, 'prompts');
-      if (await fs.pathExists(promptsPath)) {
-        const files = await fs.readdir(promptsPath);
-        data.memory.promptCount = files.filter(f => f.endsWith('.prompt.md')).length;
+      if (await workspaceFs.pathExists(promptsPath)) {
+        const files = await workspaceFs.readDirectory(promptsPath);
+        data.memory.promptCount = files.filter(([name, _]) => name.endsWith('.prompt.md')).length;
       }
 
       // Count episodic memories (async)
       const episodicPath = path.join(githubPath, 'episodic');
-      if (await fs.pathExists(episodicPath)) {
-        const files = await fs.readdir(episodicPath);
-        data.memory.episodicCount = files.filter(f => f.endsWith('.md')).length;
+      if (await workspaceFs.pathExists(episodicPath)) {
+        const files = await workspaceFs.readDirectory(episodicPath);
+        data.memory.episodicCount = files.filter(([name, _]) => name.endsWith('.md')).length;
       }
 
       // Read goals (async)
       const goalsPath = path.join(githubPath, 'config', 'goals.json');
-      if (await fs.pathExists(goalsPath)) {
+      if (await workspaceFs.pathExists(goalsPath)) {
         try {
-          const goalsContent = await fs.readFile(goalsPath, 'utf-8');
-          const goals = JSON.parse(goalsContent);
+          const goalsContent = await workspaceFs.readFile(goalsPath);
+          const goals: WorkspaceGoalsData = JSON.parse(goalsContent);
           if (Array.isArray(goals.goals)) {
-            data.goals.active = goals.goals.filter((g: any) => g.status === 'in-progress').length;
-            data.goals.completed = goals.goals.filter((g: any) => g.status === 'completed').length;
+            data.goals.active = goals.goals.filter((g) => g.status === 'in-progress').length;
+            data.goals.completed = goals.goals.filter((g) => g.status === 'completed').length;
           }
           data.goals.streak = typeof goals.streak === 'number' ? goals.streak : 0;
         } catch {
@@ -211,16 +212,16 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       let healthySynapses = 0;
       let brokenSynapses = 0;
 
-      if (await fs.pathExists(skillsPath)) {
-        const skillDirs = (await fs.readdir(skillsPath, { withFileTypes: true }))
-          .filter(d => d.isDirectory());
+      if (await workspaceFs.pathExists(skillsPath)) {
+        const skillDirs = (await workspaceFs.readDirectory(skillsPath))
+          .filter(([_, fileType]) => fileType === vscode.FileType.Directory);
 
-        for (const dir of skillDirs) {
-          const synapsePath = path.join(skillsPath, dir.name, 'synapses.json');
-          if (await fs.pathExists(synapsePath)) {
+        for (const [dirName, _] of skillDirs) {
+          const synapsePath = path.join(skillsPath, dirName, 'synapses.json');
+          if (await workspaceFs.pathExists(synapsePath)) {
             totalSynapses++;
             try {
-              const content = await fs.readFile(synapsePath, 'utf-8');
+              const content = await workspaceFs.readFile(synapsePath);
               JSON.parse(content); // Validates JSON
               healthySynapses++;
             } catch {
@@ -238,8 +239,10 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         : 'healthy';
 
       // Collect recent activity from episodic (async)
-      if (await fs.pathExists(episodicPath)) {
-        const files = (await fs.readdir(episodicPath))
+      if (await workspaceFs.pathExists(episodicPath)) {
+        const entries = await workspaceFs.readDirectory(episodicPath);
+        const files = entries
+          .map(([name, _]) => name)
           .filter(f => f.endsWith('.md'))
           .sort()
           .reverse()

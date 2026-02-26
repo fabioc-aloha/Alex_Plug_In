@@ -962,12 +962,15 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
   }
 
   // Confirm upgrade (loop to allow viewing What's New and returning to dialog)
+  // NASA R2: Bounded loop with max iterations (user interaction loop, very unlikely to hit limit)
+  const MAX_DIALOG_ITERATIONS = 100;
   const versionInfo = detection.installedVersion 
     ? `v${detection.installedVersion} → v${extensionVersion}`
     : `${detection.version} structure → v${extensionVersion}`;
 
   let confirm: string | undefined;
-  while (true) {
+  let dialogIterations = 0;
+  while (dialogIterations++ < MAX_DIALOG_ITERATIONS) {
     confirm = await vscode.window.showInformationMessage(
       `🔄 Upgrade: ${versionInfo}\n\n` +
       "This upgrade will:\n\n" +

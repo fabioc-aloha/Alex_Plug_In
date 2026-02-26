@@ -8,7 +8,7 @@ import { processForInsights, detectInsights, getAutoInsightsConfig } from '../co
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 import { recordEmotionalSignal, resetEmotionalState, assessRiverOfIntegration, assessWindowOfTolerance, isLidFlipped as checkLidFlipped } from './emotionalMemory';
 import { gatherPeripheralContext } from './peripheralVision';
-import { scoreKnowledgeCoverage, recordCalibrationFeedback } from './honestUncertainty';
+import { scoreKnowledgeCoverage, recordCalibrationFeedback, recordModelUsage, getModelUsageSummary } from './honestUncertainty';
 import { validateWorkspace } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
@@ -781,6 +781,24 @@ ${formatModelAdvice(advice)}
     } else {
         // Show full dashboard
         stream.markdown(formatModelDashboard(modelInfo));
+        
+        // v5.9.10: Add model usage insights from local tracking
+        const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (workspaceRoot) {
+            const usage = await getModelUsageSummary(workspaceRoot);
+            if (usage && usage.totalInvocations >= 5) {
+                const tierOrder = ['frontier', 'capable', 'efficient', 'unknown'];
+                const sortedTiers = Object.entries(usage.distribution)
+                    .sort((a, b) => tierOrder.indexOf(a[0]) - tierOrder.indexOf(b[0]));
+                
+                let usageSection = `\n### 📊 Your Model Usage\n*Based on ${usage.totalInvocations} conversations*\n\n`;
+                usageSection += '| Tier | Usage |\n|------|-------|\n';
+                for (const [tier, pct] of sortedTiers) {
+                    usageSection += `| ${tier} | ${pct}% |\n`;
+                }
+                stream.markdown(usageSection);
+            }
+        }
     }
     
     return { metadata: { command: 'model' } };
@@ -1064,6 +1082,11 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
         const model = models[0];
         const modelTier = detectModelTier(model);
         const tierInfo = getTierInfo(modelTier);
+        
+        // v5.9.10: Record model tier usage for /model advisor insights
+        if (workspaceRoot) {
+            recordModelUsage(workspaceRoot, modelTier).catch(() => {/* fire-and-forget */});
+        }
         
         // v5.8.1: Model-adaptive prompt rules
         let reasoningGuidance = '';

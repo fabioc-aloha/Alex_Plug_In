@@ -259,6 +259,27 @@ Escalate to senior reviewer if:
 - Payment processing
 - External API credentials
 
+### Reviewing Mission-Critical Code (NASA Standards)
+
+For safety-critical, mission-critical, or high-reliability projects, apply NASA/JPL Power of 10 rules during review:
+
+| Rule | Check For | Blocking? |
+|------|-----------|----------|
+| **R1** Bounded Recursion | Recursive functions without `maxDepth` | 🔴 Yes |
+| **R2** Fixed Loop Bounds | `while` loops without `MAX_ITERATIONS` counter | 🔴 Yes |
+| **R3** Bounded Collections | Arrays/maps without size limits | 🔴 Yes |
+| **R4** Function Size | Functions > 60 lines | 🟠 High |
+| **R5** Assertions | Critical paths without `assert()` calls | 🟠 High |
+| **R6** Minimal Scope | Variables declared far from use | 🟡 Medium |
+| **R7** Return Handling | Unchecked return values | 🟡 Medium |
+| **R8** Nesting Depth | > 4 levels of nesting | 🟠 High |
+| **R9** Defensive Access | `obj.prop.prop` without optional chaining | 🟡 Medium |
+| **R10** Strict Compilation | Compiler warnings present | 🟡 Medium |
+
+**Reference**: `.github/instructions/nasa-code-standards.instructions.md`
+
+**Detection**: User mentions "mission-critical", "safety-critical", "NASA standards", or "high reliability"
+
 ---
 
 ## Anti-Patterns

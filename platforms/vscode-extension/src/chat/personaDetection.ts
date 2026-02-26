@@ -34,6 +34,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import * as os from 'os';
+import * as workspaceFs from '../shared/workspaceFs';
 
 // ============================================================================
 // CONFIDENCE THRESHOLDS & LIMITS
@@ -832,11 +833,11 @@ async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDe
     
     try {
         const goalsPath = path.join(rootPath, '.github', 'config', 'goals.json');
-        if (!await fs.pathExists(goalsPath)) {
+        if (!await workspaceFs.pathExists(goalsPath)) {
             return null;
         }
         
-        const goalsData = await fs.readJson(goalsPath);
+        const goalsData = await workspaceFs.readJson(goalsPath) as { goals?: Array<{ completedAt?: string; title?: string; description?: string; tags?: string[] }> };
         const activeGoals = goalsData.goals?.filter((g: { completedAt?: string }) => !g.completedAt) || [];
         
         for (const goal of activeGoals) {
@@ -882,8 +883,8 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
         ];
         
         for (const roadmapPath of roadmapPaths) {
-            if (await fs.pathExists(roadmapPath)) {
-                const content = await fs.readFile(roadmapPath, 'utf8');
+            if (await workspaceFs.pathExists(roadmapPath)) {
+                const content = await workspaceFs.readFile(roadmapPath);
                 
                 for (const { pattern, personaId } of phaseRules) {
                     if (pattern.test(content)) {
@@ -914,11 +915,11 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
     
     try {
         const profilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
-        if (!await fs.pathExists(profilePath)) {
+        if (!await workspaceFs.pathExists(profilePath)) {
             return null;
         }
         
-        const profile = await fs.readJson(profilePath);
+        const profile = await workspaceFs.readJson(profilePath) as { learningGoals?: string[] };
         const goals = profile.learningGoals || [];
         
         for (const goal of goals) {
@@ -1083,7 +1084,8 @@ export async function detectPersona(
         for (const folder of workspaceFolders) {
             try {
                 const wsRoot = folder.uri.fsPath;
-                const entries = await fs.readdir(wsRoot);
+                const dirEntries = await workspaceFs.readDirectory(wsRoot);
+                const entries = dirEntries.map(([name, _]) => name);
                 const entriesLowerSet = new Set(entries.map(e => e.toLowerCase()));
                 
                 for (const persona of PERSONAS) {
@@ -1098,7 +1100,7 @@ export async function detectPersona(
                             
                             if (token.includes('/')) {
                                 const cleanPath = token.replace(/\/+$/, '');
-                                matched = await fs.pathExists(path.join(wsRoot, cleanPath));
+                                matched = await workspaceFs.pathExists(path.join(wsRoot, cleanPath));
                             } else if (/^\.[a-zA-Z]+$/.test(token)) {
                                 const ext = token.toLowerCase();
                                 matched = entries.some(e => e.toLowerCase().endsWith(ext));
@@ -1119,9 +1121,9 @@ export async function detectPersona(
                 
                 // --- Score dependency signals against package.json ---
                 const packageJsonPath = path.join(wsRoot, 'package.json');
-                if (await fs.pathExists(packageJsonPath)) {
+                if (await workspaceFs.pathExists(packageJsonPath)) {
                     try {
-                        const pkg = await fs.readJson(packageJsonPath);
+                        const pkg = await workspaceFs.readJson(packageJsonPath) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
                         const allDeps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
                         const depsJoined = allDeps.join(' ').toLowerCase();
                         
@@ -1151,8 +1153,8 @@ export async function detectPersona(
                 let contentText = '';
                 for (const cf of contentFiles) {
                     try {
-                        if (await fs.pathExists(cf)) {
-                            const raw = await fs.readFile(cf, 'utf-8');
+                        if (await workspaceFs.pathExists(cf)) {
+                            const raw = await workspaceFs.readFile(cf);
                             contentText += ' ' + raw.slice(0, 2000); // cap to prevent perf issues
                         }
                     } catch { /* skip */ }
@@ -1234,8 +1236,8 @@ export async function loadUserProfile(workspaceRoot: string): Promise<UserProfil
     
     for (const profilePath of profilePaths) {
         try {
-            if (await fs.pathExists(profilePath)) {
-                return await fs.readJson(profilePath);
+            if (await workspaceFs.pathExists(profilePath)) {
+                return await workspaceFs.readJson(profilePath) as UserProfile;
             }
         } catch {
             // Continue to next path
@@ -1328,7 +1330,8 @@ export async function detectProjectTechnologies(workspaceRoot: string): Promise<
     };
     
     try {
-        const entries = await fs.readdir(workspaceRoot);
+        const dirEntries = await workspaceFs.readDirectory(workspaceRoot);
+        const entries = dirEntries.map(([name, _]) => name);
         
         for (const [tech, indicators] of Object.entries(techIndicators)) {
             for (const indicator of indicators) {
@@ -1341,8 +1344,11 @@ export async function detectProjectTechnologies(workspaceRoot: string): Promise<
                 } else if (indicator.endsWith('/')) {
                     // Directory check
                     const dir = indicator.slice(0, -1);
-                    if (entries.includes(dir) && (await fs.stat(path.join(workspaceRoot, dir))).isDirectory()) {
-                        if (!detected.includes(tech)) {detected.push(tech);}
+                    if (entries.includes(dir)) {
+                        const statResult = await workspaceFs.stat(path.join(workspaceRoot, dir));
+                        if (statResult && statResult.type === vscode.FileType.Directory) {
+                            if (!detected.includes(tech)) {detected.push(tech);}
+                        }
                     }
                 } else {
                     // File check
@@ -1355,9 +1361,9 @@ export async function detectProjectTechnologies(workspaceRoot: string): Promise<
         
         // Check package.json for specific frameworks
         const packageJsonPath = path.join(workspaceRoot, 'package.json');
-        if (await fs.pathExists(packageJsonPath)) {
+        if (await workspaceFs.pathExists(packageJsonPath)) {
             try {
-                const pkg = await fs.readJson(packageJsonPath);
+                const pkg = await workspaceFs.readJson(packageJsonPath) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
                 const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
                 
                 if (allDeps.react || allDeps['react-dom']) {
@@ -1428,8 +1434,8 @@ export async function detectAndUpdateProjectPersona(
     const profilePath = path.join(workspaceRoot, '.github', 'config', 'user-profile.json');
     
     try {
-        if (await fs.pathExists(profilePath)) {
-            const currentProfile = await fs.readJson(profilePath) as ExtendedUserProfile;
+        if (await workspaceFs.pathExists(profilePath)) {
+            const currentProfile = await workspaceFs.readJson(profilePath) as ExtendedUserProfile;
             
             // Merge detected technologies with existing (avoid duplicates)
             const existingTech = currentProfile.primaryTechnologies || [];
@@ -1448,7 +1454,7 @@ export async function detectAndUpdateProjectPersona(
                 lastUpdated: new Date().toISOString()
             };
             
-            await fs.writeJson(profilePath, updatedProfile, { spaces: 2 });
+            await workspaceFs.writeJson(profilePath, updatedProfile);
         }
     } catch (err) {
         console.warn('[Alex] Failed to update user profile with persona:', err);

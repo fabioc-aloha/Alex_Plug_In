@@ -17,6 +17,7 @@ import {
     VERSION_NUMBER_REGEX,
     getHealthStatus 
 } from './constants';
+import * as workspaceFs from './workspaceFs';
 
 /**
  * Singleton output channel for kill switch logging
@@ -201,12 +202,12 @@ export async function getInstalledAlexVersion(
 ): Promise<string | null> {
     const instructionsPath = path.join(rootPath, '.github', 'copilot-instructions.md');
     
-    if (!await fs.pathExists(instructionsPath)) {
+    if (!await workspaceFs.pathExists(instructionsPath)) {
         return null;
     }
 
     try {
-        const content = await fs.readFile(instructionsPath, 'utf8');
+        const content = await workspaceFs.readFile(instructionsPath);
         const regex = numericOnly ? VERSION_NUMBER_REGEX : VERSION_EXTRACT_REGEX;
         const match = content.match(regex);
         return match ? match[1] : null;
@@ -233,7 +234,7 @@ export async function getExtensionVersion(extensionPath: string): Promise<string
  */
 export async function isAlexInstalled(rootPath: string): Promise<boolean> {
     const markerFile = path.join(rootPath, '.github', 'copilot-instructions.md');
-    return fs.pathExists(markerFile);
+    return workspaceFs.pathExists(markerFile);
 }
 
 /**
@@ -293,7 +294,7 @@ export async function scanSynapseHealth(
         for (const file of files) {
             result.totalFiles++;
             try {
-                const content = await fs.readFile(file.fsPath, 'utf-8');
+                const content = await workspaceFs.readFile(file.fsPath);
                 const lines = content.split('\n');
                 
                 let inCodeBlock = false;
@@ -453,9 +454,9 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
     // Layer 0.5: MASTER ALEX MARKER FILE - Check for protection marker
     // This file only exists in Master Alex and cannot be created by Alex: Initialize
     const masterAlexMarker = path.join(rootPath, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
-    if (await fs.pathExists(masterAlexMarker)) {
+    if (await workspaceFs.pathExists(masterAlexMarker)) {
         try {
-            const markerContent = await fs.readJson(masterAlexMarker);
+            const markerContent = await workspaceFs.readJson(masterAlexMarker) as { protected?: boolean; workspace?: string };
             if (markerContent.protected === true && markerContent.workspace === 'master-alex') {
                 outputChannel.warn(`🚨 MASTER ALEX MARKER DETECTED: ${masterAlexMarker}`);
                 return {
@@ -503,7 +504,7 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
         ];
         
         for (const indicator of masterAlexIndicators) {
-            const exists = await fs.pathExists(indicator);
+            const exists = await workspaceFs.pathExists(indicator);
             outputChannel.info(`Checking indicator ${indicator}: ${exists}`);
             if (exists) {
                 outputChannel.info(`✅ Protected by auto-detect: ${indicator}`);

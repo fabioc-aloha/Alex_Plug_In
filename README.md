@@ -38,8 +38,8 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 29 slash commands
-- 12 Language Model tools
+- 26 slash commands
+- 13 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
 
@@ -121,7 +121,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                     |
 | ----------------- | ------------------------------------------------------------------------------ |
 | **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                   |
-| **Intelligence**  | 122 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 123 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
@@ -220,10 +220,6 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /model`           | Model intelligence dashboard and task advisor       |
 | `@alex /azure`           | Get Azure development guidance with MCP tools       |
 | `@alex /m365`            | Get Microsoft 365 and Teams development help        |
-| `@alex /calendar`        | View upcoming calendar events (Graph)               |
-| `@alex /mail`            | View recent emails (Graph)                          |
-| `@alex /context`         | Full work context: calendar + mail + presence       |
-| `@alex /people`          | Search people in your organization (Graph)          |
 | `@alex /profile`         | View and update your personal preferences           |
 | `@alex /knowledge`       | Search global knowledge across all projects         |
 | `@alex /saveinsight`     | Save a learning to global knowledge base            |
@@ -262,12 +258,6 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 @alex /saveinsight I learned that React useEffect cleanup...
 → Saves this insight for use in any future project
-
-@alex /calendar
-→ Shows upcoming calendar events via Microsoft Graph
-
-@alex /context
-→ Full work context: calendar + mail + presence in one view
 
 @alex /checkskills
 → Discover new skills available from the Global Knowledge repository
@@ -550,12 +540,15 @@ Alex can generate and edit images using the **Replicate API** with models like F
 
 ### Available Models
 
-| Model | Speed | Quality | Best For |
-|-------|-------|---------|----------|
-| `flux-schnell` | Fast | Good | Prototyping, quick iterations |
-| `flux-dev` | Medium | Better | General purpose |
-| `flux-pro` | Slow | Best | Production quality |
-| `sdxl` | Medium | Great | Detailed illustrations |
+| Model | Cost | Speed | Best For |
+|-------|------|-------|----------|
+| `flux-schnell` | $0.003 | Fast | Prototyping, quick iterations |
+| `sdxl` | $0.009 | Medium | Artistic styles, LoRA fine-tuning |
+| `flux-dev` | $0.025 | Medium | High-quality with LoRA support |
+| `flux-pro` | $0.04 | Slow | Production-quality photorealistic |
+| `ideogram-turbo` | $0.05 | Fast | Fast text-in-image (logos, banners) |
+| `ideogram` | $0.08 | Medium | Best text rendering (signage, typography) |
+| `seedream` | varies | Medium | High-resolution 2K/3K outputs |
 
 ### Image Editing
 
@@ -722,13 +715,13 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (28 files)
+├── instructions/              # 📚 Procedural memory (52 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (17 files)
+├── prompts/                   # 📖 Episodic memory (34 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -739,14 +732,14 @@ After initialization, Alex manages this structure:
 ├── assets/                    # 🎨 Visual identity (2 files)
 │   ├── banner.svg
 │   └── banner.png
-├── muscles/                   # 💪 Execution scripts (13 files)
+├── muscles/                   # 💪 Execution scripts (17 files)
 │   ├── brain-qa.ps1
 │   ├── sync-architecture.js
 │   └── ...
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (122 skills)
+├── skills/                    # 🎓 Portable domain expertise (123 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -781,18 +774,7 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ## 🆕 What's New in v5.6.x (Stabilized)
 
-### 📡 Microsoft Graph Integration (v5.6.0)
-
-Alex connects to your Microsoft 365 environment for enterprise workflows:
-
-- **`/calendar`** — View upcoming calendar events with configurable lookahead
-- **`/mail`** — View recent emails with unread-only filter
-- **`/context`** — Full work context: calendar + mail + presence in one view
-- **`/people <query>`** — Search people in your organization
-- **7 enterprise settings** — Granular toggle for each Graph capability
-- Requires `alex.enterprise.graph.enabled` — see [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
-
-### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.5)
+###  Skill Pull-Sync & Growth (v5.6.2-5.6.5)
 
 Skills grew from 92 → 121 with new acquisition and inheritance mechanisms:
 
@@ -821,8 +803,6 @@ Alex adapts behavior based on the running LLM:
 - **`/model` command** — Full dashboard showing model tier, context capacity, and capabilities
 - **Task-Model Matching** — Cognitive tasks check if current model meets requirements
 - **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
-- **17 enterprise settings** — Full documentation in [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
-- **Custom secrets patterns** — Define organization-specific regex for compliance
 
 ---
 
@@ -933,7 +913,6 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
 | [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
 | [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
-| [Enterprise Settings](alex_docs/guides/ENTERPRISE-SETTINGS.md)             | All 24 enterprise configuration options         |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources
@@ -966,7 +945,7 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** - v5.7.1 🚀 Enhanced Cognitive Network with Unified Consciousness Integration
+**Alex Cognitive Architecture** - v5.9.9 🚀 Platform Architecture Reinforcement
 
 Built on 270+ academic sources
 

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as workspaceFs from '../shared/workspaceFs';
 import { searchGlobalKnowledge } from './globalKnowledge';
 import { validateUserProfile, safeJsonParse, createConfigBackup } from '../shared/sanitize';
 import { getSessionState, PersistedSessionState } from '../commands/session';
@@ -177,7 +177,7 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
                 }
                 totalFiles++;
                 try {
-                    const content = await fs.readFile(file.fsPath, 'utf-8');
+                    const content = await workspaceFs.readFile(file.fsPath);
                     const lines = content.split('\n');
                     
                     let inCodeBlock = false;
@@ -311,7 +311,7 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
                     ]);
                 }
                 try {
-                    const content = await fs.readFile(file.fsPath, 'utf-8');
+                    const content = await workspaceFs.readFile(file.fsPath);
                     const lines = content.split('\n');
                     const matches: string[] = [];
                     
@@ -426,7 +426,7 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
         const rootPath = workspaceFolders[0].uri.fsPath;
         const markerFile = path.join(rootPath, '.github', 'copilot-instructions.md');
         
-        const isInstalled = await fs.pathExists(markerFile);
+        const isInstalled = await workspaceFs.pathExists(markerFile);
         
         if (!isInstalled) {
             return new vscode.LanguageModelToolResult([
@@ -457,7 +457,7 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
         // Get version from main file
         let version = 'Unknown';
         try {
-            const content = await fs.readFile(markerFile, 'utf-8');
+            const content = await workspaceFs.readFile(markerFile);
             const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
             if (versionMatch) {
                 version = versionMatch[1];
@@ -724,13 +724,13 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
         try {
             switch (action) {
                 case 'exists':
-                    const exists = await fs.pathExists(jsonProfilePath);
+                    const exists = await workspaceFs.pathExists(jsonProfilePath);
                     return new vscode.LanguageModelToolResult([
                         new vscode.LanguageModelTextPart(JSON.stringify({ exists, path: jsonProfilePath }))
                     ]);
 
                 case 'get':
-                    if (!await fs.pathExists(jsonProfilePath)) {
+                    if (!await workspaceFs.pathExists(jsonProfilePath)) {
                         return new vscode.LanguageModelToolResult([
                             new vscode.LanguageModelTextPart(JSON.stringify({
                                 exists: false,
@@ -746,12 +746,12 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     }
                     
                     // P0: Safe JSON parsing with error recovery
-                    const profileContent = await fs.readFile(jsonProfilePath, 'utf-8');
+                    const profileContent = await workspaceFs.readFile(jsonProfilePath);
                     const parseResult = safeJsonParse<IUserProfile>(profileContent);
                     
                     if (!parseResult.success) {
                         // Create backup before reporting error
-                        await createConfigBackup(jsonProfilePath, fs);
+                        await createConfigBackup(jsonProfilePath);
                         return new vscode.LanguageModelToolResult([
                             new vscode.LanguageModelTextPart(JSON.stringify({
                                 error: true,
@@ -792,12 +792,12 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     }
 
                     // Ensure config directory exists
-                    await fs.ensureDir(path.join(rootPath, '.github', 'config'));
+                    await workspaceFs.ensureDir(path.join(rootPath, '.github', 'config'));
 
                     // Read existing profile or create new one
                     let existingProfile: IUserProfile = {};
-                    if (await fs.pathExists(jsonProfilePath)) {
-                        existingProfile = await fs.readJson(jsonProfilePath);
+                    if (await workspaceFs.pathExists(jsonProfilePath)) {
+                        existingProfile = await workspaceFs.readJson(jsonProfilePath) as IUserProfile;
                     }
 
                     // Handle array fields
@@ -818,7 +818,7 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     existingProfile.lastUpdated = new Date().toISOString();
 
                     // Save JSON profile
-                    await fs.writeJson(jsonProfilePath, existingProfile, { spaces: 2 });
+                    await workspaceFs.writeJson(jsonProfilePath, existingProfile);
 
                     return new vscode.LanguageModelToolResult([
                         new vscode.LanguageModelTextPart(JSON.stringify({
@@ -1002,8 +1002,8 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         let currentVersion = 'Unknown';
         try {
             const mainInstructionsPath = path.join(rootPath, '.github', 'copilot-instructions.md');
-            if (await fs.pathExists(mainInstructionsPath)) {
-                const content = await fs.readFile(mainInstructionsPath, 'utf-8');
+            if (await workspaceFs.pathExists(mainInstructionsPath)) {
+                const content = await workspaceFs.readFile(mainInstructionsPath);
                 const versionMatch = content.match(/\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/);
                 if (versionMatch) {
                     currentVersion = versionMatch[1];
@@ -1066,7 +1066,7 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
                 }
                 report.synapseHealth.totalFiles++;
                 try {
-                    const content = await fs.readFile(file.fsPath, 'utf-8');
+                    const content = await workspaceFs.readFile(file.fsPath);
                     const lines = content.split('\n');
                     
                     let inCodeBlock = false;
@@ -1144,7 +1144,7 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         let sessionFile = '';
         if (options.input.createReport !== false) {
             const episodicPath = path.join(rootPath, '.github', 'episodic');
-            await fs.ensureDir(episodicPath);
+            await workspaceFs.ensureDir(episodicPath);
 
             const date = new Date();
             const dateStr = date.toISOString().split('T')[0];
@@ -1188,7 +1188,7 @@ ${report.recommendations.length > 0 ? report.recommendations.map(r => `- ${r}`).
 
 *Generated by Alex Self-Actualization Protocol*
 `;
-            await fs.writeFile(sessionFile, content, 'utf-8');
+            await workspaceFs.writeFile(sessionFile, content);
         }
 
         // Build result
@@ -1247,15 +1247,15 @@ export async function getUserProfile(): Promise<IUserProfile | null> {
 
     try {
         // Return actual profile if it exists
-        if (await fs.pathExists(jsonProfilePath)) {
-            return await fs.readJson(jsonProfilePath);
+        if (await workspaceFs.pathExists(jsonProfilePath)) {
+            return await workspaceFs.readJson<IUserProfile>(jsonProfilePath);
         }
         
         // Return template defaults in-memory (no file created)
         // Profile file is created when user provides info through conversation
         const templatePath = path.join(rootPath, '.github', 'config', 'user-profile.template.json');
-        if (await fs.pathExists(templatePath)) {
-            return await fs.readJson(templatePath);
+        if (await workspaceFs.pathExists(templatePath)) {
+            return await workspaceFs.readJson<IUserProfile>(templatePath);
         }
     } catch (error) {
         console.error('Error reading user profile:', error);
@@ -1309,7 +1309,7 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
         const rootPath = workspaceFolders[0].uri.fsPath;
         const heirGithubPath = path.join(rootPath, 'platforms', 'vscode-extension', '.github');
         
-        if (!await fs.pathExists(heirGithubPath)) {
+        if (!await workspaceFs.pathExists(heirGithubPath)) {
             return new vscode.LanguageModelToolResult([
                 new vscode.LanguageModelTextPart(
                     '❌ Heir .github folder not found.\n\n' +
@@ -1377,7 +1377,7 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
             for (const filePath of matchingFiles) {
                 totalFiles++;
                 try {
-                    const content = await fs.readFile(filePath, 'utf-8');
+                    const content = await workspaceFs.readFile(filePath);
                     const relativePath = path.relative(heirGithubPath, filePath).replace(/\\/g, '/');
                     
                     // Check regex patterns
@@ -1481,25 +1481,25 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
         const dir = path.dirname(pattern);
         const filePattern = path.basename(pattern);
         
-        if (!await fs.pathExists(dir)) {
+        if (!await workspaceFs.pathExists(dir)) {
             return results;
         }
         
         if (filePattern.includes('*')) {
-            const entries = await fs.readdir(dir, { withFileTypes: true });
+            const entries = await workspaceFs.readDirectory(dir);
             const regex = new RegExp('^' + filePattern.replace(/\*/g, '.*') + '$');
             
-            for (const entry of entries) {
-                if (entry.isFile() && regex.test(entry.name)) {
-                    results.push(path.join(dir, entry.name));
-                } else if (entry.isDirectory() && filePattern === '*') {
+            for (const [name, fileType] of entries) {
+                if (fileType === vscode.FileType.File && regex.test(name)) {
+                    results.push(path.join(dir, name));
+                } else if (fileType === vscode.FileType.Directory && filePattern === '*') {
                     // Handle skills/*/SKILL.md pattern
-                    const subFiles = await this.findMatchingFiles(pattern.replace('*/', entry.name + '/'));
+                    const subFiles = await this.findMatchingFiles(pattern.replace('*/', name + '/'));
                     results.push(...subFiles);
                 }
             }
         } else {
-            if (await fs.pathExists(pattern)) {
+            if (await workspaceFs.pathExists(pattern)) {
                 results.push(pattern);
             }
         }

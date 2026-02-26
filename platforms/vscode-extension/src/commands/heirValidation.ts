@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as workspaceFs from '../shared/workspaceFs';
 
 /**
  * Heir Validation Result
@@ -34,7 +34,8 @@ export async function runHeirValidation(): Promise<HeirValidationResult | undefi
     const rootPath = workspaceFolders[0].uri.fsPath;
     const heirGithubPath = path.join(rootPath, 'platforms', 'vscode-extension', '.github');
     
-    if (!await fs.pathExists(heirGithubPath)) {
+    // v5.9.10: Use workspace.fs for workspace files (ADR-008)
+    if (!await workspaceFs.pathExists(heirGithubPath)) {
         vscode.window.showErrorMessage(
             'Heir .github folder not found. Run build-extension-package.ps1 first.'
         );
@@ -119,7 +120,7 @@ async function gatherKeyFiles(heirGithubPath: string): Promise<{ path: string; c
         
         for (const filePath of matchingFiles) {
             try {
-                const content = await fs.readFile(filePath, 'utf-8');
+                const content = await workspaceFs.readFile(filePath);
                 const relativePath = path.relative(heirGithubPath, filePath).replace(/\\/g, '/');
                 
                 // Only include files with content (skip empty files)
@@ -143,28 +144,29 @@ async function findMatchingFiles(pattern: string): Promise<string[]> {
     const dir = path.dirname(pattern);
     const filePattern = path.basename(pattern);
     
-    if (!await fs.pathExists(dir)) {
+    // v5.9.10: Use workspace.fs for workspace files (ADR-008)
+    if (!await workspaceFs.pathExists(dir)) {
         return results;
     }
     
     if (filePattern.includes('*')) {
         // Handle wildcards
-        const entries = await fs.readdir(dir, { withFileTypes: true });
+        const entries = await workspaceFs.readDirectory(dir);
         const regex = new RegExp('^' + filePattern.replace(/\*/g, '.*') + '$');
         
-        for (const entry of entries) {
-            if (entry.isFile() && regex.test(entry.name)) {
-                results.push(path.join(dir, entry.name));
-            } else if (entry.isDirectory() && filePattern === '*') {
+        for (const [name, fileType] of entries) {
+            if (fileType === vscode.FileType.File && regex.test(name)) {
+                results.push(path.join(dir, name));
+            } else if (fileType === vscode.FileType.Directory && filePattern === '*') {
                 // Handle skills/*/SKILL.md pattern
-                const subPattern = pattern.replace('*/', entry.name + '/');
+                const subPattern = pattern.replace('*/', name + '/');
                 const subResults = await findMatchingFiles(subPattern);
                 results.push(...subResults);
             }
         }
     } else {
         // Exact match
-        if (await fs.pathExists(pattern)) {
+        if (await workspaceFs.pathExists(pattern)) {
             results.push(pattern);
         }
     }

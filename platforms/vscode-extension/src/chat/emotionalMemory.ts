@@ -17,7 +17,7 @@
  */
 
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
+import * as workspaceFs from '../shared/workspaceFs';
 import * as path from 'path';
 
 // ============================================================================
@@ -247,13 +247,13 @@ export async function saveSessionEmotion(workspaceRoot: string): Promise<string 
     const logPath = path.join(emotionalDir, SESSION_LOG_FILE);
 
     try {
-        await fs.ensureDir(emotionalDir);
+        await workspaceFs.ensureDir(emotionalDir);
 
         // Load existing log
         let sessions: SessionEmotionalArc[] = [];
-        if (await fs.pathExists(logPath)) {
+        if (await workspaceFs.pathExists(logPath)) {
             try {
-                sessions = await fs.readJson(logPath);
+                sessions = await workspaceFs.readJson<SessionEmotionalArc[]>(logPath) ?? [];
             } catch {
                 sessions = [];
             }
@@ -267,7 +267,7 @@ export async function saveSessionEmotion(workspaceRoot: string): Promise<string 
             sessions = sessions.slice(-MAX_RECENT_SESSIONS * 3);
         }
 
-        await fs.writeJson(logPath, sessions, { spaces: 2 });
+        await workspaceFs.writeJson(logPath, sessions);
 
         // Reset in-memory state
         resetEmotionalState();
@@ -286,12 +286,12 @@ export async function saveSessionEmotion(workspaceRoot: string): Promise<string 
 export async function loadMoodContext(workspaceRoot: string): Promise<MoodContext | null> {
     const logPath = path.join(workspaceRoot, '.github', 'episodic', EMOTIONAL_DIR, SESSION_LOG_FILE);
 
-    if (!await fs.pathExists(logPath)) {
+    if (!await workspaceFs.pathExists(logPath)) {
         return null;
     }
 
     try {
-        const sessions: SessionEmotionalArc[] = await fs.readJson(logPath);
+        const sessions: SessionEmotionalArc[] = await workspaceFs.readJson<SessionEmotionalArc[]>(logPath) ?? [];
         if (sessions.length === 0) {
             return null;
         }
@@ -362,12 +362,12 @@ export async function loadMoodContext(workspaceRoot: string): Promise<MoodContex
 export async function getMeditationEmotionalReview(workspaceRoot: string): Promise<string | null> {
     const logPath = path.join(workspaceRoot, '.github', 'episodic', EMOTIONAL_DIR, SESSION_LOG_FILE);
 
-    if (!await fs.pathExists(logPath)) {
+    if (!await workspaceFs.pathExists(logPath)) {
         return null;
     }
 
     try {
-        const sessions: SessionEmotionalArc[] = await fs.readJson(logPath);
+        const sessions: SessionEmotionalArc[] = await workspaceFs.readJson<SessionEmotionalArc[]>(logPath) ?? [];
         if (sessions.length < 3) {
             return null; // Need at least 3 sessions for meaningful patterns
         }

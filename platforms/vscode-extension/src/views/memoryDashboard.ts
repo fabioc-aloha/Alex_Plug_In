@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import * as workspaceFs from '../shared/workspaceFs';
 import { checkHealth, HealthCheckResult, HealthStatus } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary, detectGlobalKnowledgeRepo } from '../chat/globalKnowledge';
 import { escapeHtml, getNonce } from '../shared/sanitize';
@@ -187,39 +187,39 @@ async function getMemoryStats(rootPath: string): Promise<MemoryStats> {
     try {
         // Instructions
         const instrPath = path.join(githubPath, 'instructions');
-        if (await fs.pathExists(instrPath)) {
-            const files = await fs.readdir(instrPath);
-            stats.instructions = files.filter(f => f.endsWith('.md')).length;
+        if (await workspaceFs.pathExists(instrPath)) {
+            const files = await workspaceFs.readDirectory(instrPath);
+            stats.instructions = files.filter(([name, _]) => name.endsWith('.md')).length;
         }
         
         // Prompts
         const promptsPath = path.join(githubPath, 'prompts');
-        if (await fs.pathExists(promptsPath)) {
-            const files = await fs.readdir(promptsPath);
-            stats.prompts = files.filter(f => f.endsWith('.md')).length;
+        if (await workspaceFs.pathExists(promptsPath)) {
+            const files = await workspaceFs.readDirectory(promptsPath);
+            stats.prompts = files.filter(([name, _]) => name.endsWith('.md')).length;
         }
         
         // Skills
         const skillsPath = path.join(githubPath, 'skills');
-        if (await fs.pathExists(skillsPath)) {
-            const entries = await fs.readdir(skillsPath, { withFileTypes: true });
-            stats.skills = entries.filter(e => e.isDirectory()).length;
+        if (await workspaceFs.pathExists(skillsPath)) {
+            const entries = await workspaceFs.readDirectory(skillsPath);
+            stats.skills = entries.filter(([_, fileType]) => fileType === vscode.FileType.Directory).length;
         }
         
         // Episodic
         const episodicPath = path.join(githubPath, 'episodic');
-        if (await fs.pathExists(episodicPath)) {
-            const files = await fs.readdir(episodicPath);
-            stats.episodic = files.filter(f => f.endsWith('.md')).length;
+        if (await workspaceFs.pathExists(episodicPath)) {
+            const files = await workspaceFs.readDirectory(episodicPath);
+            stats.episodic = files.filter(([name, _]) => name.endsWith('.md')).length;
         }
         
         // Count synapses
-        if (await fs.pathExists(skillsPath)) {
-            const entries = await fs.readdir(skillsPath, { withFileTypes: true });
-            for (const entry of entries) {
-                if (entry.isDirectory()) {
-                    const synapsePath = path.join(skillsPath, entry.name, 'synapses.json');
-                    if (await fs.pathExists(synapsePath)) {
+        if (await workspaceFs.pathExists(skillsPath)) {
+            const entries = await workspaceFs.readDirectory(skillsPath);
+            for (const [name, fileType] of entries) {
+                if (fileType === vscode.FileType.Directory) {
+                    const synapsePath = path.join(skillsPath, name, 'synapses.json');
+                    if (await workspaceFs.pathExists(synapsePath)) {
                         stats.synapses++;
                     }
                 }
@@ -232,13 +232,13 @@ async function getMemoryStats(rootPath: string): Promise<MemoryStats> {
             const patternsPath = path.join(gkRepo, 'patterns');
             const insightsPath = path.join(gkRepo, 'insights');
             
-            if (await fs.pathExists(patternsPath)) {
-                const files = await fs.readdir(patternsPath);
-                stats.globalPatterns = files.filter(f => f.endsWith('.md')).length;
+            if (await workspaceFs.pathExists(patternsPath)) {
+                const files = await workspaceFs.readDirectory(patternsPath);
+                stats.globalPatterns = files.filter(([name, _]) => name.endsWith('.md')).length;
             }
-            if (await fs.pathExists(insightsPath)) {
-                const files = await fs.readdir(insightsPath);
-                stats.globalInsights = files.filter(f => f.endsWith('.md')).length;
+            if (await workspaceFs.pathExists(insightsPath)) {
+                const files = await workspaceFs.readDirectory(insightsPath);
+                stats.globalInsights = files.filter(([name, _]) => name.endsWith('.md')).length;
             }
         }
     } catch (err) {

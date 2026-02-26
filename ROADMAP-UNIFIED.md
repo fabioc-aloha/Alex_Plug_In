@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture — Roadmap v5.7-v7.0
 
-**Last Updated**: February 24, 2026
+**Last Updated**: February 26, 2026
 
 > **Phase: Cognitive Enhancement → Multi-Platform Reach → Autonomous Intelligence**
 
@@ -26,7 +26,8 @@ Three platforms. Focused, not scattered.
 
 ### Current State
 
-v5.9.9 is current. Alex now has:
+v5.9.10 is current. Alex now has:
+- **Workspace File API Migration** — All workspace-scoped file operations migrated from fs-extra to vscode.workspace.fs per ADR-008; new workspaceFs.ts utility module; enables virtual filesystem compatibility (SSH, WSL, Codespaces, containers)
 - **Identity: Alex Finch** (no nickname, age 26) — consistent across master and all platform heirs
 - **123 Skills** (109 inheritable to heirs) — Comprehensive domain coverage
 - **22 Complete Trifectas** — 9 added in cognitive sprint (VS Code, M365, cross-domain capabilities) for 17.2% trifecta coverage
@@ -43,7 +44,6 @@ v5.9.9 is current. Alex now has:
 - **Visual Identity** — 44 avatar images (age progression + occupation variants) at 256×256px
 - **Dynamic Avatar State System** — Welcome panel avatar responds to cognitive states (9 states including dream), agent modes, active skills with unified priority-chain resolution
 - **Semantic Persona Detection** — Regex-weighted signal architecture replacing flat keyword matching
-- **Enterprise Security** — Entra ID SSO, RBAC, secrets scanning, audit logging
 - **Text-to-Speech** — Multi-language voice synthesis with 35 test cases
 - **Voice Mode** — Continuous reading, speak prompt, auto-summarization
 - **Model Intelligence** — Tier detection, task matching, `/model` advisor
@@ -125,11 +125,13 @@ v5.9.9 is current. Alex now has:
 | **v5.9.7** | **P2 Feature Completion (Peripheral Vision + Honest Uncertainty + Forgetting Curve)** | **Calibrated Intelligence** | **✅ Shipped (2026-02-21)** |
 | **v5.9.8** | **Background File Watcher + Peripheral Vision P1 Completion**                        | **Ambient Awareness**       | **✅ Shipped (2026-02-21)** |
 | **v5.9.9** | **Platform Architecture Reinforcement**                                                | **Platform Leverage**        | **✅ Shipped (2026-02-24)** |
-| v5.9.10    | Proposed API Adoption                                                                  | Platform Leverage            | 🔄 Next Target (gated on proposed APIs) |
+| **v5.9.10** | **Workspace File API Migration + Cleanup**                                            | **Virtual FS Compatibility** | **✅ Shipped (2026-02-26)** |
 | v6.0.0     | Autonomous Workflows                    | Autonomous Cognition                 | 📋 Planned (v5.9.x prerequisites shipped) |
 | v6.1.0     | Deep Memory + Learning Loops            | Autonomous Cognition                 | 📋 Planned (2 of 5 tasks partially shipped) |
 | v6.2.0     | Skill Marketplace (if community)        | Autonomous Cognition                 | 📋 Planned                  |
-| v6.3-9     | *reserved for fixes/enhancements*       |                                      |                            |
+| v6.3-4     | *reserved for fixes/enhancements*       |                                      |                            |
+| v6.5.0     | Proposed API Adoption                   | Platform Leverage                    | 🔒 Gated (waits on VS Code stable APIs) |
+| v6.6-9     | *reserved for fixes/enhancements*       |                                      |                            |
 | v7.0.0     | Collaborative Intelligence              | Collective Cognition                 | 📋 Planned                  |
 
 ---
@@ -150,55 +152,6 @@ A version is **done** when ALL of the following are true:
 8. **CHANGELOG documents the delta** — Every user-visible change has a line item
 
 > **Principle**: Ship what works. Remove what doesn't. Document what changed.
-
-### v5.9.9 — Platform Architecture Reinforcement ✅ Shipped 2026-02-24
-
-**Theme**: Harvest everything VS Code 1.109 and M365 extensibility GA'd that Alex can use today — no proposed APIs, no gates, ships clean.
-
-**Shipped**: 2026-02-24 | All P0/P1/P2 tasks complete. P3 tasks (MCP Apps prototype, Retrieval API) deferred to v6.x.
-
-| Task | Owner | Effort | Priority | Status | Description |
-| --- | :---: | :----: | :------: | :----: | --- |
-| Skill frontmatter gating — all 114 skills | Heir | 2d | P1 | ✅ | Add `user-invokable` and `disable-model-invocation` frontmatter to every SKILL.md. Domain skills (`azure`, `meditation`, `dream-state`) get `user-invokable: false` so the model loads them contextually but they don't clutter the `/` menu. Action skills (`meditate`, `dream`, `self-actualization`) get `disable-model-invocation: true` so the user explicitly invokes them. Triage/utility skills stay fully open. |
-| Agent `agents:` frontmatter — orchestrator + specialists | Heir | 0.5d | P1 | ✅ | Add `agents:` list to `Alex.agent.md` declaring all 7 specialists as valid subagents. Each specialist agent declares a narrower list (e.g., Builder can call Validator but not M365). Formalizes the orchestration hierarchy that's currently implicit in prose instructions. |
-| Model fallback in agent YAML | Heir | 0.5d | P2 | ✅ | Replace or supplement TypeScript model fallback arrays with native `model: ['Claude Opus 4 (copilot)', 'Claude Sonnet 4.5 (copilot)']` in each `.agent.md` frontmatter. Makes model preference visible and editable without recompiling the extension. |
-| Disable built-in `agentCustomizationSkill` | Master | 0.5d | P1 | ✅ | Set `chat.agentCustomizationSkill.enabled: false` in `.vscode/settings.json`. VS Code 1.109 ships a built-in skill for creating agents/skills/instructions — Alex's `vscode-extension-patterns` and `skill-development` skills cover this domain with Alex-specific conventions. Prevent the built-in from overriding them. |
-| Agent hooks — quality gate enforcement | Heir | 1.5d | P1 | ✅ | Expand `hooks.json` with `PreToolUse` hooks on `createFile`/`editFile`/`runTerminal` to auto-enforce Definition of Done. Example: block publish command if version drift detected between package.json and copilot-instructions.md; warn on file edit if `npm run compile` is failing. Hooks are deterministic — they run regardless of model behavior. |
-| Claude compatibility bridge | Master | 0.5d | P2 | ✅ | Create `.claude/` folder structure pointing to Alex's `.github/` assets: `agents/` symlinks to `.github/agents/*.agent.md`, `skills/` symlinks to `.github/skills/`, `settings.json` maps hooks. VS Code 1.109 reads `.claude/` natively — Alex's architecture becomes usable in Claude Code sessions without a separate setup. |
-| MCP Apps prototype — synapse health renderer | Heir | 2d | P3 | 📋 | Prototype an MCP App that renders the synapse health report and brain anatomy visualization as an interactive webview inside chat — using MCP Apps (stable, no proposed API needed) instead of waiting for `chatOutputRenderer` to go stable. Reference: `digitarald/mcp-apps-playground`. |
-
-#### M365 Heir — Extensibility Platform 2025–2026 Harvest
-
-**Context**: M365 extensibility platform shipped significant upgrades between May 2025 and Jan 2026. Alex M365 heir is on plugin schema v2.3 and manifest version 5.9.0. This block closes the gap.
-
-| Task | Owner | Effort | Priority | Status | Description |
-| --- | :---: | :----: | :------: | :----: | --- |
-| manifest.json version sync (5.9.0 → 5.9.8) | M365 Heir | trivial | P0 | ✅ | Pure drift fix — `"version": "5.9.0"` in `appPackage/manifest.json` should read `5.9.8` to match the extension. No functional change. |
-| Plugin manifest v2.3 → v2.4 — both plugins | M365 Heir | 0.5d | P1 | ✅ | Upgrade `$schema` and `schema_version` in both `alex-knowledge-plugin.json` and `graph-api-plugin.json` from v2.3 to v2.4. v2.4 (May 2025) adds: MCP server as a valid `runtimes` type (connect the VS Code extension's MCP server directly to M365 Copilot), improved `confirmation` card schema, and enhanced file reference handling. Unlocks MCP bridge path in v6.0. |
-| Meeting AI Insights — `getMeetingAiInsights` function | M365 Heir | 1d | P1 | ✅ | Add `getMeetingAiInsights` to `graph-api-plugin.json`. GA'd on Graph v1.0 (Dec 2025): `GET /me/online-meetings/{meetingId}/aiInsights` returns structured `actionItems`, `meetingNotes`, and `mentions`. Wire into the "Prep for my next meeting" conversation starter — currently only looks up attendees via `getPeople`; with AI Insights it shows action items from the *last* occurrence of a recurring meeting. |
-| Scenario models routing — cognitive depth tiers | M365 Heir | 0.5d | P2 | ✅ | Add `scenario_models` capability to `declarativeAgent.json` (available since manifest v1.4, Alex is on v1.6). Map deep cognitive operations (meditation, self-actualization, dream-state) to Frontier model; quick productivity ops (calendar check, email count, presence) to Efficient model. Reduces cost for lightweight operations while preserving quality for introspective sessions. |
-| Conversation starters expansion — 7 → 12 | M365 Heir | 0.5d | P2 | ✅ | Platform supports up to 12 conversation starters; Alex M365 heir uses 7. Add 5 purposeful additions: "Sync my learning goals and knowledge base", "Search my knowledge base for [topic]", "Self-actualization session — assess my cognitive architecture", "What's on my plate for the week?", "Run a synapse health check". |
-| M365 Copilot Retrieval API — semantic memory search | M365 Heir | 2d | P3 | 📋 | Retrieval API went GA (pay-as-you-go, Jan 2026) — semantic search across all SharePoint content and connectors. Evaluate adding a `searchMemory` function in `alex-knowledge-plugin.json` that routes to Retrieval API instead of (or alongside) the existing `searchKnowledge` OpenAPI function. Enables vector-grounded memory recall from OneDrive-stored notes without custom RAG infrastructure. |
-
----
-
-### v5.9.10 — Proposed API Adoption
-
-**Theme**: Leverage proposed VS Code APIs from v1.109.5 as they finalize — dynamic skill injection, native API key config UI, interactive chat renderers.
-
-**Status as of 2026-02-24**: All three target APIs confirmed still in proposal stage in VS Code v1.109.5. Gate is actively blocking. Holding until promotion to stable.
-
-**Gate**: External — waits on VS Code promoting proposed APIs to stable. Anticipated in v1.110 (March 2026) or later. Ships after v5.9.9.
-
-| API | Proposal File | Owner | Effort | Priority | Status | Notes |
-| --- | --- | :---: | :----: | :------: | :----: | --- |
-| Chat prompt files (`chatPromptFiles`) | `vscode.proposed.chatPromptFiles.d.ts` | Heir | 2d | P1 | 🔒 Proposed | `registerSkillProvider`, `registerCustomAgentProvider`, `registerInstructionsProvider` all defined; mermaid-chat-features is the reference impl. When stable: inject Alex skills/agents dynamically from TypeScript — e.g., auto-load `azure` skill when `.bicep` files are open. |
-| LM Configuration (`lmConfiguration`) | `vscode.proposed.lmConfiguration.d.ts` | Heir | 1d | P1 | 🔒 Proposed | `languageModelChatProviders` contribution schema defined in package.json; explicitly labeled proposed in VS Code 1.109 release notes. When stable: migrate Replicate, Azure OpenAI, and Graph API key setup to native VS Code config UI — replaces custom settings panels. |
-| Chat output renderer (`chatOutputRenderer`) | `vscode.proposed.chatOutputRenderer.d.ts` | Heir | 3d | P2 | 🔒 Proposed | API shape finalized (`registerChatOutputRenderer`, `ChatOutputWebview`); actively iterating in 1.109 (`onDidDispose` added this release). When stable: render cognitive dashboard, synapse health reports, and brain anatomy as interactive webviews inside chat — no separate panel. |
-
-> **Trigger**: When VS Code ships a release that promotes any of the above to stable, re-evaluate and ship those tasks in the next version.
-
----
 
 > **Platform Documentation** ✅ Complete — Foundry + VS Code 1.109 analysis docs in `alex_docs/platforms/`. Details in Appendix.
 
@@ -264,6 +217,24 @@ A version is **done** when ALL of the following are true:
 
 ---
 
+### v6.5.0 — Proposed API Adoption (GATED)
+
+**Theme**: Leverage proposed VS Code APIs as they finalize — dynamic skill injection, native API key config UI, interactive chat renderers.
+
+**Gate**: External — waits on VS Code promoting proposed APIs to stable. Originally anticipated v1.110 (March 2026); timeline uncertain.
+
+| API | Proposal File | Owner | Effort | Priority | Status | Notes |
+| --- | --- | :---: | :----: | :------: | :----: | --- |
+| Chat prompt files (`chatPromptFiles`) | `vscode.proposed.chatPromptFiles.d.ts` | Heir | 2d | P1 | 🔒 Proposed | `registerSkillProvider`, `registerCustomAgentProvider`, `registerInstructionsProvider` all defined; mermaid-chat-features is the reference impl. When stable: inject Alex skills/agents dynamically from TypeScript — e.g., auto-load `azure` skill when `.bicep` files are open. |
+| LM Configuration (`lmConfiguration`) | `vscode.proposed.lmConfiguration.d.ts` | Heir | 1d | P1 | 🔒 Proposed | `languageModelChatProviders` contribution schema defined in package.json; explicitly labeled proposed in VS Code 1.109 release notes. When stable: migrate Replicate, Azure OpenAI, and Graph API key setup to native VS Code config UI — replaces custom settings panels. |
+| Chat output renderer (`chatOutputRenderer`) | `vscode.proposed.chatOutputRenderer.d.ts` | Heir | 3d | P2 | 🔒 Proposed | API shape finalized (`registerChatOutputRenderer`, `ChatOutputWebview`); actively iterating in 1.109 (`onDidDispose` added this release). When stable: render cognitive dashboard, synapse health reports, and brain anatomy as interactive webviews inside chat — no separate panel. |
+
+> **Trigger**: When VS Code ships a release that promotes any of the above to stable, re-evaluate and ship.
+
+**Target**: When VS Code APIs go stable (TBD)
+
+---
+
 ### v7.0.0 — Collaborative Intelligence (PLANNED)
 
 **Theme**: Multiple Alex instances collaborate across a team — sharing insights, coordinating reviews, and building collective organizational intelligence. Alex evolves from personal assistant to team cognition layer.
@@ -294,7 +265,7 @@ Items to pull from when capacity frees up:
 | **Teams Deep Integration (v6.0)** | **M365** | **12w** | **📋 PLANNED** | **Bot Framework + Message Extensions + Meeting Integration + Activity Feed — Complete implementation plan in `TEAMS-DEEP-INTEGRATION-PLAN.md` with 143-item deployment checklist. v5.9.9 M365 tasks (Meeting AI Insights, plugin v2.4, conversation starters) deliver the meeting layer; Deep Integration remains the full Teams platform build — still distinct and full-scope.** |
 | **Foundry POC** (was v5.9.1)      | **Heir** | **1w**  |    **Low**    | **Foundry project + Alex orchestrator + Teams publish + baseline eval. Trigger: real user/team requests Alex in Teams.**                                                                                                        |
 | MCP Apps packaging                |   Heir   |   3d    |      P2       | Package Alex tools (meditation, dream, self-actualization) as installable MCP Apps with rich interactive UI. Official SDK now available: `modelcontextprotocol/ext-apps`. **Sequence after v5.9.9 MCP Apps prototype (synapse health renderer) ships — that prototype validates the tech; this task packages the cognitive tools as user-installable apps.** |
-| Terminal sandboxing for hooks     |   Heir   |   1d    |  ⚡ Now Urgent  | Agent hooks shipped in v5.9.8 — `hooks.json` is live and running shell commands at `PreToolUse`/`PostToolUse`. Document `chat.tools.terminal.sandbox.enabled` for macOS/Linux users *now* before hook adoption grows. Windows unaffected but cross-platform users are exposed. Pull into v5.9.9 if capacity allows. |
+| Terminal sandboxing for hooks     |   Heir   |   1d    |  ✅ Done  | Documented in SECURITY.md, copilot-instructions.md, and .vscode/settings.json (v5.9.10). |
 | Agent sessions welcome page eval  |   Heir   |  0.5d   |      P3       | Evaluate whether Alex's welcome panel should integrate with or complement VS Code's new `agentSessionsWelcomePage` (`workbench.startupEditor`). v5.9.9 disables `agentCustomizationSkill` to prevent built-in skill takeover — same audit logic applies to the welcome page. Run alongside v5.9.9 work. |
 | 🧪 Camera awareness (experimental) |   Heir   |   3d    |      P3       | **Opt-in, local-only.** Webview + `getUserMedia()` + MediaPipe Face Mesh for presence/fatigue/engagement detection. Zero cloud, zero recording, all WASM. Moved from v5.9.3 Peripheral Vision — too experimental for near-term. |
 | Hosted Agent Container Deploy     |   Heir   |   3d    |    Medium     | Containerized Alex on managed infrastructure (VS Code/M365 hosting)                                                                                                                                                             |
@@ -579,6 +550,36 @@ I reason ethically from conviction, not rules. But ethical reasoning takes time 
 
 ## 📖 Appendix: Completed Version History
 
+### v5.9.10 — Workspace File API Migration + Cleanup ✅ SHIPPED (2026-02-26)
+
+**Theme**: Virtual filesystem compatibility — migrate all workspace-scoped async file operations from Node.js `fs-extra` to VS Code's native `vscode.workspace.fs` API per ADR-008.
+
+- **workspaceFs.ts utility** — New module (`src/shared/workspaceFs.ts`) providing async wrappers around `vscode.workspace.fs`: `pathExists`, `readFile`, `writeFile`, `readJson`, `writeJson`, `ensureDir`, `readDirectory`, `stat`, `copyFile`, `rename`
+- **12 files migrated** — promptEngine.ts, activeContextManager.ts, synapse-core.ts, cognitiveDashboard.ts, memoryDashboard.ts, healthDashboard.ts, utils.ts, personaDetection.ts, emotionalMemory.ts, honestUncertainty.ts, tools.ts, sanitize.ts
+- **~100 operations converted** — Directory traversal, JSON reading/writing, file existence checks, stat operations
+- **Key pattern change** — `fs.readdir(dir, {withFileTypes: true})` → `workspaceFs.readDirectory(dir)` returns `[name, FileType][]` tuples
+- **Enterprise cleanup** — Removed non-functional enterprise secrets scanning and audit logging (commands, settings, module)
+- **Terminal sandboxing docs** — macOS/Linux security guidance added for `chat.tools.terminal.sandbox.enabled`
+
+**ADR-008 Compliance**: Files using `os.homedir()`, `getAlexGlobalPath()`, or `GLOBAL_KNOWLEDGE_PATHS` intentionally kept with fs-extra — they operate outside workspace scope and require Node.js filesystem access.
+
+---
+
+### v5.9.9 — Platform Architecture Reinforcement ✅ SHIPPED (2026-02-24)
+
+**Theme**: Harvest everything VS Code 1.109 and M365 extensibility GA'd that Alex can use today — no proposed APIs, no gates, ships clean.
+
+- **Skill frontmatter gating** — `disable-model-invocation: true` on 6 action skills; `user-invokable: false` on 16 domain skills
+- **Agent orchestration hierarchy** — `agents:` frontmatter formalizes valid subagent relationships across all 7 agents
+- **Model fallback in YAML** — Native `model: []` arrays in `.agent.md` frontmatter, no TypeScript recompile needed
+- **agentCustomizationSkill disabled** — Prevents VS Code 1.109 built-in from overriding Alex's skill conventions
+- **Agent hooks (quality gates)** — `PreToolUse` hooks enforce version drift check and compile reminder
+- **Claude Code bridge** — `.claude/CLAUDE.md` + `settings.json` make Alex architecture usable in Claude Code sessions
+- **M365 Platform Harvest** — Plugin schema v2.4, `getMeetingAiInsights` Graph endpoint, `scenario_models` routing, conversation starters 7→12
+- **Enterprise features removed** — Attempted secrets scanning and audit logging; did not work; removed cleanly per Definition of Done
+
+---
+
 ### v5.9.8 — Background File Watcher ✅ SHIPPED (2026-02-21)
 
 **Theme**: Silent ambient observer — Alex silently tracks hot files, uncommitted work, and TODO hotspots and weaves that awareness into every response.
@@ -751,9 +752,7 @@ I reason ethically from conviction, not rules. But ethical reasoning takes time 
 - Warnings in `/meditate`, `/dream`, `/selfActualize`, `/learn` handlers
 - Model info display in `/status` command
 - `/model` command — Full dashboard + task-specific recommendations
-- Enterprise Settings Docs — All 17 settings documented in `alex_docs/guides/ENTERPRISE-SETTINGS.md`
 - Automated Doc Count Validation — Dream protocol verifies instruction/skill counts match actuals
-- Secrets Pattern Extensibility — User-defined regex patterns via `alex.enterprise.secrets.customPatterns`
 - **Heir Evolution Cycle**: 12 skills promoted from sandbox heir (79→92 total skills)
 - **Skill Consolidation**: Merged 4 granular skills into 2 comprehensive ones (KISS principle)
 - **skill-building Skill**: 376-line meta-skill for heir skill creation and promotion
@@ -978,7 +977,6 @@ Before any v5.7.x patch ships to Marketplace, ALL of the following must pass.
 | Check                         | Method                                        | Expected Result       |
 | ----------------------------- | --------------------------------------------- | --------------------- |
 | Initialize on fresh workspace | `Alex: Initialize Architecture` in new folder | All files deployed    |
-| Enterprise mode (if enabled)  | Set `alex.enterprise.enabled: true`           | Auth + secrets work   |
 | Voice mode                    | `Ctrl+Alt+V` or `/voice`                      | TTS works             |
 | Keyboard shortcuts            | Test `Ctrl+Alt+R/V/P/D/A`                     | All shortcuts trigger |
 | Global Knowledge search       | `/knowledge search error handling`            | Returns results       |
@@ -1196,6 +1194,17 @@ SecretStorage API + Token management UI + .env detection
 
 **Trifecta count**: 11→14 (added secrets-management, gamma-presentation, md-to-word)
 **Skill count**: 122→124
+
+---
+
+### v5.9.10 Prep (✅ Completed 2026-02-26)
+
+**Theme**: Clean up non-functional features before proposed API adoption.
+
+**Delivered**:
+- **Enterprise Features Removed** — `src/enterprise/` deleted (auditLogging.ts, secretsScanning.ts, index.ts); 4 commands removed from package.json; 11 settings removed. Features did not work as designed; archived to `archive/ENTERPRISE-SETTINGS-removed-v5.9.10.md`.
+
+**Impact**: Cleaner codebase — no dead code when proposed APIs ship.
 
 ---
 

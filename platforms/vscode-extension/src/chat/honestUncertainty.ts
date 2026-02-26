@@ -26,7 +26,8 @@
  */
 
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import * as vscode from 'vscode';
+import * as workspaceFs from '../shared/workspaceFs';
 import { searchGlobalKnowledge } from './globalKnowledge';
 
 // ============================================================================
@@ -61,6 +62,25 @@ export interface CalibrationEntry {
     matchCount: number;
 }
 
+/**
+ * Model usage tracking for /model advisor insights (v5.9.10)
+ */
+export interface ModelUsageEntry {
+    /** ISO timestamp */
+    date: string;
+    /** Model tier: frontier | capable | efficient | unknown */
+    tier: string;
+}
+
+export interface ModelUsageSummary {
+    /** Total model invocations tracked */
+    totalInvocations: number;
+    /** Count per tier */
+    byTier: Record<string, number>;
+    /** Distribution (0-1) per tier */
+    distribution: Record<string, number>;
+}
+
 export interface CalibrationSummary {
     totalResponses: number;
     byLevel: Record<ConfidenceLevel, number>;
@@ -69,6 +89,8 @@ export interface CalibrationSummary {
     recentEntries: CalibrationEntry[];
     /** Top topics where uncertainty was highest (for study) */
     uncertainTopics: string[];
+    /** v5.9.10: Model tier usage patterns */
+    modelUsage?: ModelUsageSummary;
 }
 
 // ============================================================================
@@ -101,12 +123,12 @@ const WHAT_I_NEED: Record<ConfidenceLevel, string | undefined> = {
 async function matchLocalSkills(workspaceRoot: string, queryWords: string[]): Promise<string[]> {
     try {
         const skillsDir = path.join(workspaceRoot, '.github', 'skills');
-        if (!await fs.pathExists(skillsDir)) { return []; }
+        if (!await workspaceFs.pathExists(skillsDir)) { return []; }
 
-        const entries = await fs.readdir(skillsDir, { withFileTypes: true });
+        const entries = await workspaceFs.readDirectory(skillsDir);
         const skillNames = entries
-            .filter(e => e.isDirectory())
-            .map(e => e.name.toLowerCase());
+            .filter(([_, fileType]) => fileType === vscode.FileType.Directory)
+            .map(([name, _]) => name.toLowerCase());
 
         return skillNames.filter(name => {
             const nameParts = name.split('-');
@@ -130,8 +152,8 @@ const MAX_CALIBRATION_ENTRIES = 500;
 async function loadCalibrationLog(workspaceRoot: string): Promise<CalibrationEntry[]> {
     try {
         const filePath = path.join(workspaceRoot, CALIBRATION_FILE);
-        if (!await fs.pathExists(filePath)) { return []; }
-        const data = await fs.readJson(filePath);
+        if (!await workspaceFs.pathExists(filePath)) { return []; }
+        const data = await workspaceFs.readJson<CalibrationEntry[]>(filePath);
         return Array.isArray(data) ? data : [];
     } catch {
         return [];
@@ -142,7 +164,7 @@ async function appendCalibrationEntry(workspaceRoot: string, entry: CalibrationE
     if (!workspaceRoot) { return; }
     try {
         const filePath = path.join(workspaceRoot, CALIBRATION_FILE);
-        await fs.ensureDir(path.dirname(filePath));
+        await workspaceFs.ensureDir(path.dirname(filePath));
 
         const entries = await loadCalibrationLog(workspaceRoot);
         entries.push(entry);
@@ -152,7 +174,7 @@ async function appendCalibrationEntry(workspaceRoot: string, entry: CalibrationE
             ? entries.slice(entries.length - MAX_CALIBRATION_ENTRIES)
             : entries;
 
-        await fs.writeJson(filePath, trimmed, { spaces: 2 });
+        await workspaceFs.writeJson(filePath, trimmed);
     } catch (err) {
         // Never fail the main response path due to calibration I/O
         console.warn('[HonestUncertainty] Failed to write calibration entry:', err);
@@ -298,7 +320,9 @@ export interface FeedbackEntry {
 }
 
 const FEEDBACK_FILE = path.join('.github', 'episodic', 'calibration', 'feedback-log.json');
+const MODEL_USAGE_FILE = path.join('.github', 'episodic', 'calibration', 'model-usage-log.json');
 const MAX_FEEDBACK_ENTRIES = 500;
+const MAX_MODEL_USAGE_ENTRIES = 500;
 
 /**
  * Append a single user feedback signal to the feedback log.
@@ -313,12 +337,12 @@ export async function recordCalibrationFeedback(
     if (!workspaceRoot) { return; }
     try {
         const filePath = path.join(workspaceRoot, FEEDBACK_FILE);
-        await fs.ensureDir(path.dirname(filePath));
+        await workspaceFs.ensureDir(path.dirname(filePath));
 
         let entries: FeedbackEntry[] = [];
         try {
-            if (await fs.pathExists(filePath)) {
-                const raw = await fs.readJson(filePath);
+            if (await workspaceFs.pathExists(filePath)) {
+                const raw = await workspaceFs.readJson<FeedbackEntry[]>(filePath);
                 entries = Array.isArray(raw) ? raw : [];
             }
         } catch { /* treat corrupt file as empty */ }
@@ -329,15 +353,88 @@ export async function recordCalibrationFeedback(
             ? entries.slice(entries.length - MAX_FEEDBACK_ENTRIES)
             : entries;
 
-        await fs.writeJson(filePath, trimmed, { spaces: 2 });
+        await workspaceFs.writeJson(filePath, trimmed);
     } catch (err) {
         console.warn('[HonestUncertainty] Failed to write feedback entry:', err);
     }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Model Usage Learning (v5.9.10)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Record which model tier was used for a conversation.
+ * Fire-and-forget — errors are silently logged.
+ */
+export async function recordModelUsage(
+    workspaceRoot: string,
+    tier: string
+): Promise<void> {
+    if (!workspaceRoot || !tier) { return; }
+    try {
+        const filePath = path.join(workspaceRoot, MODEL_USAGE_FILE);
+        await workspaceFs.ensureDir(path.dirname(filePath));
+
+        let entries: ModelUsageEntry[] = [];
+        try {
+            if (await workspaceFs.pathExists(filePath)) {
+                const raw = await workspaceFs.readJson<ModelUsageEntry[]>(filePath);
+                entries = Array.isArray(raw) ? raw : [];
+            }
+        } catch { /* treat corrupt file as empty */ }
+
+        entries.push({ date: new Date().toISOString(), tier });
+
+        const trimmed = entries.length > MAX_MODEL_USAGE_ENTRIES
+            ? entries.slice(entries.length - MAX_MODEL_USAGE_ENTRIES)
+            : entries;
+
+        await workspaceFs.writeJson(filePath, trimmed);
+    } catch (err) {
+        console.warn('[HonestUncertainty] Failed to write model usage entry:', err);
+    }
+}
+
+/**
+ * Get model usage summary for /model advisor insights.
+ */
+export async function getModelUsageSummary(workspaceRoot: string): Promise<ModelUsageSummary | null> {
+    if (!workspaceRoot) { return null; }
+    try {
+        const filePath = path.join(workspaceRoot, MODEL_USAGE_FILE);
+        if (!await workspaceFs.pathExists(filePath)) { return null; }
+
+        const raw = await workspaceFs.readJson<ModelUsageEntry[]>(filePath);
+        const entries: ModelUsageEntry[] = Array.isArray(raw) ? raw : [];
+        if (entries.length === 0) { return null; }
+
+        const byTier: Record<string, number> = {};
+        for (const entry of entries) {
+            byTier[entry.tier] = (byTier[entry.tier] ?? 0) + 1;
+        }
+
+        const distribution: Record<string, number> = {};
+        for (const [t, count] of Object.entries(byTier)) {
+            distribution[t] = +((count / entries.length) * 100).toFixed(1);
+        }
+
+        return {
+            totalInvocations: entries.length,
+            byTier,
+            distribution,
+        };
+    } catch {
+        return null;
+    }
+}
+
 export async function getCalibrationSummary(workspaceRoot: string): Promise<CalibrationSummary | null> {
     try {
-        const entries = await loadCalibrationLog(workspaceRoot);
+        const [entries, modelUsage] = await Promise.all([
+            loadCalibrationLog(workspaceRoot),
+            getModelUsageSummary(workspaceRoot),
+        ]);
         if (entries.length === 0) { return null; }
 
         const byLevel: Record<ConfidenceLevel, number> = {
@@ -368,6 +465,7 @@ export async function getCalibrationSummary(workspaceRoot: string): Promise<Cali
             distribution,
             recentEntries: entries.slice(-10).reverse(),
             uncertainTopics,
+            modelUsage: modelUsage ?? undefined,
         };
     } catch {
         return null;

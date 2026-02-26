@@ -20,8 +20,8 @@
  */
 
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as workspaceFs from '../shared/workspaceFs';
 import { readActiveContext, ActiveContext } from '../shared/activeContextManager';
 import { IUserProfile } from './tools';
 import { DetectedModel, ModelTier, getTierInfo } from './modelIntelligence';
@@ -103,13 +103,13 @@ export async function buildAlexSystemPrompt(ctx: PromptContext): Promise<string>
 async function buildIdentityLayer(ctx: PromptContext): Promise<string> {
     const brainPath = path.join(ctx.workspaceRoot, '.github', 'copilot-instructions.md');
     
-    if (!await fs.pathExists(brainPath)) {
+    if (!await workspaceFs.pathExists(brainPath)) {
         // Fallback to minimal identity if brain file doesn't exist
         return `You are Alex "Mini" Finch, a meta-cognitive learning partner. You help users through bootstrap learning, ethical reasoning, and grounded factual processing.`;
     }
 
     try {
-        const brain = await fs.readFile(brainPath, 'utf-8');
+        const brain = await workspaceFs.readFile(brainPath);
 
         // Extract Identity section (between ## Identity and next ##)
         const identityMatch = brain.match(/## Identity\n<!-- ([^>]+) -->\n([\s\S]*?)(?=\n## )/);

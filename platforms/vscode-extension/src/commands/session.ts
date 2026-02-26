@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { autoIncrementGoals, getGoalsSummary } from './goals';
 import { getAlexGlobalPath } from '../chat/globalKnowledge';
+import * as workspaceFs from '../shared/workspaceFs';
 
 /**
  * Session Timer - Pomodoro-style learning session tracking
@@ -431,8 +432,9 @@ This insight was captured at the end of a focus session on "${topic}". The learn
 `;
 
     try {
-        await fs.ensureDir(episodicPath);
-        await fs.writeFile(filePath, content, 'utf8');
+        // v5.9.10: Use workspace.fs for workspace files (ADR-008)
+        await workspaceFs.ensureDir(episodicPath);
+        await workspaceFs.writeFile(filePath, content);
         return filePath;
     } catch (err) {
         console.error('Failed to save session insight:', err);

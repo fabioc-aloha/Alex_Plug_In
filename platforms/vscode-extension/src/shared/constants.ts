@@ -83,6 +83,27 @@ export function getHealthEmoji(status: string): string {
 }
 
 /**
+ * Workspace goal structure (stored in .github/config/goals.json)
+ * Used for project-specific goal tracking (not global LearningGoals)
+ */
+export interface WorkspaceGoal {
+    id: string;
+    title: string;
+    status: 'not-started' | 'in-progress' | 'completed';
+    priority?: 'critical' | 'high' | 'medium' | 'low';
+    createdAt?: string;
+    completedAt?: string;
+}
+
+/**
+ * Workspace goals file structure
+ */
+export interface WorkspaceGoalsData {
+    goals: WorkspaceGoal[];
+    streak?: number;
+}
+
+/**
  * Consolidated file mappings for auto-repair of broken synapses
  * Maps old/deprecated filenames to their current consolidated equivalents
  */

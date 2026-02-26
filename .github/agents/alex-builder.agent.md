@@ -140,6 +140,41 @@ function processData(input: Data): Result {
 }
 ```
 
+## NASA Standards (Mission-Critical Mode)
+
+When building **mission-critical** software, apply NASA/JPL Power of 10 rules automatically:
+
+| Rule | Check | Builder Action |
+|------|-------|----------------|
+| **R1** Bounded Recursion | Recursive functions | Add `maxDepth` parameter |
+| **R2** Fixed Loop Bounds | `while` loops | Add `MAX_ITERATIONS` counter |
+| **R3** Bounded Collections | Growing arrays | Add max size limits |
+| **R4** Function Size | > 60 lines | Extract helper functions |
+| **R5** Assertions | Critical paths | Add `nasaAssert()` calls |
+| **R8** Nesting Depth | > 4 levels | Extract to functions |
+
+**Detection**: If user mentions "mission-critical", "safety-critical", "NASA standards", or "high reliability" — enable NASA mode.
+
+**Reference**: See `.github/instructions/nasa-code-standards.instructions.md` for full rules.
+
+```typescript
+// Builder + NASA mode example:
+const MAX_ITERATIONS = 10000;
+
+function processData(input: Data, maxDepth = 5): Result {
+    nasaAssert(input !== null, 'Input required', { input });
+    nasaAssert(maxDepth > 0, 'Recursion depth exceeded', { maxDepth });
+    
+    let iterations = 0;
+    while (queue.length > 0 && iterations++ < MAX_ITERATIONS) {
+        const item = queue.shift();
+        processItem(item, maxDepth - 1);
+    }
+    
+    return { success: true, data: transformed };
+}
+```
+
 ## Success Criteria
 
 A Builder session succeeds when:
@@ -147,6 +182,12 @@ A Builder session succeeds when:
 - [ ] Basic tests pass
 - [ ] Code is ready for Validator review
 - [ ] Known trade-offs are documented
+
+**Mission-Critical additions** (when NASA mode active):
+- [ ] R1: All recursive functions have depth limits
+- [ ] R2: All while loops have iteration bounds
+- [ ] R4: No function exceeds 60 lines
+- [ ] R5: Critical functions have assertions
 
 ---
 

@@ -68,6 +68,36 @@ If you discover a security vulnerability in Alex Cognitive Architecture, please 
 - **No inline scripts** — All JavaScript in separate files
 - **Sanitized HTML** — User content escaped before rendering
 
+### Agent Hooks & Terminal Sandboxing
+
+Alex uses VS Code agent hooks (`.github/hooks.json`) to automate cognitive workflows. These hooks execute shell commands at session start/stop and before/after tool use.
+
+**⚠️ macOS/Linux Users**: Enable terminal sandboxing to restrict what hook commands can access:
+
+```json
+// .vscode/settings.json
+{
+  "chat.tools.terminal.sandbox.enabled": true,
+  "chat.tools.terminal.sandbox.macFileSystem": {
+    "allowWrite": ["."],
+    "denyWrite": ["./.github/config/MASTER-ALEX-PROTECTED.json"]
+  },
+  "chat.tools.terminal.sandbox.linuxFileSystem": {
+    "mode": "project"
+  }
+}
+```
+
+**Sandbox Settings**:
+| Setting | Platform | Purpose |
+|---------|----------|---------|
+| `chat.tools.terminal.sandbox.enabled` | macOS/Linux | Enable sandboxed terminal execution |
+| `chat.tools.terminal.sandbox.macFileSystem` | macOS | File system access restrictions |
+| `chat.tools.terminal.sandbox.linuxFileSystem` | Linux | File system access mode |
+| `chat.tools.terminal.sandbox.network` | macOS/Linux | Network access restrictions |
+
+**Windows Users**: Terminal sandboxing is not available on Windows. Hooks execute in the normal VS Code terminal context. Use the Master Alex Protected marker (`.github/config/MASTER-ALEX-PROTECTED.json`) as a safety gate.
+
 ## Dependency Management
 
 We regularly audit dependencies:

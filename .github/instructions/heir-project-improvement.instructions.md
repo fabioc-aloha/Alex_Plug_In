@@ -318,6 +318,26 @@ Research-first and trifecta creation work together:
 | **No synapse wiring** | Files exist but Alex can't discover connections | Wire 2-4 synapses at creation time, always |
 | **"Just start coding"** | AI has no context, guesses at patterns | Research → Teach → Plan → Execute |
 
+### Mission-Critical Projects (NASA Standards)
+
+For **safety-critical**, **mission-critical**, or **high-reliability** heir projects, adopt NASA/JPL Power of 10 standards:
+
+```markdown
+## Pre-Phase Checklist (Mission-Critical)
+- [ ] All recursive functions have `maxDepth` parameter
+- [ ] All `while` loops have `MAX_ITERATIONS` counter
+- [ ] All arrays/maps have maximum size limits
+- [ ] No function exceeds 60 lines
+- [ ] Critical paths have ≥2 assertions
+- [ ] Maximum 4 levels of nesting
+- [ ] Optional chaining on all object access
+- [ ] Compiler warnings = 0
+```
+
+**Reference**: `.github/instructions/nasa-code-standards.instructions.md`
+
+**When to apply**: User mentions "mission-critical", "safety-critical", "NASA standards", "high reliability", or the heir manages critical infrastructure (medical, aerospace, financial, infrastructure).
+
 ### When Improvements Should Promote to Master
 
 | Signal | Action |

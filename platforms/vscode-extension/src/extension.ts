@@ -64,7 +64,6 @@ import { registerMemoryTreeView } from "./views/memoryTreeProvider";
 import { registerCognitiveDashboard } from "./views/cognitiveDashboard";
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
 import { registerUXCommands } from "./ux/uxFeatures";
-import { initializeEnterprise, disposeEnterprise } from "./enterprise";
 import * as telemetry from "./shared/telemetry";
 import { getNonce } from "./shared/sanitize";
 import {
@@ -136,9 +135,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     extensionVersion,
     vscodeVersion: vscode.version,
   });
-
-  // Initialize enterprise security features (secrets scanning, audit logging)
-  await initializeEnterprise(context);
 
   // Set extension path for markdown CSS lookup
   // This allows setupEnvironment to find the bundled CSS file
@@ -3409,9 +3405,6 @@ export function deactivate() {
   telemetry.saveSession().catch((err) => {
     console.warn("Failed to save telemetry session:", err);
   });
-
-  // Clean up enterprise resources (secrets scanning, audit logging)
-  disposeEnterprise();
 
   // Reset chat participant session state to prevent state bleeding
   resetSessionState();

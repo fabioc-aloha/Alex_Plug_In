@@ -3,8 +3,9 @@
  * Used by both VS Code dream command and CLI scripts
  */
 
-import * as fs from 'fs-extra';
+import * as vscode from 'vscode';
 import * as path from 'path';
+import * as workspaceFs from './workspaceFs';
 import { SYNAPSE_REGEX } from './constants';
 
 export interface Synapse {
@@ -165,30 +166,40 @@ function matchPattern(filePath: string, pattern: string, rootPath: string): bool
     return regex.test(relativePath);
 }
 
+/** NASA R1: Maximum recursion depth for directory traversal */
+const MAX_RECURSION_DEPTH = 10;
+
 /**
  * Recursively find all .md files in a directory
+ * NASA R1 compliant: bounded recursion with maxDepth parameter
  */
-async function findMdFilesRecursive(dir: string, rootPath: string): Promise<string[]> {
+async function findMdFilesRecursive(dir: string, rootPath: string, maxDepth: number = MAX_RECURSION_DEPTH): Promise<string[]> {
+    // NASA R1: Bounded recursion check
+    if (maxDepth <= 0) {
+        console.warn(`[NASA R1] Max recursion depth reached at: ${dir}`);
+        return [];
+    }
+    
     const results: string[] = [];
     
     try {
-        const entries = await fs.readdir(dir, { withFileTypes: true });
+        const entries = await workspaceFs.readDirectory(dir);
         
-        for (const entry of entries) {
-            const fullPath = path.join(dir, entry.name);
+        for (const [name, fileType] of entries) {
+            const fullPath = path.join(dir, name);
             
             // Skip node_modules and hidden directories (except .github)
-            if (entry.isDirectory()) {
-                if (entry.name === 'node_modules') {
+            if (fileType === vscode.FileType.Directory) {
+                if (name === 'node_modules') {
                     continue;
                 }
-                if (entry.name.startsWith('.') && entry.name !== '.github') {
+                if (name.startsWith('.') && name !== '.github') {
                     continue;
                 }
                 
-                const subResults = await findMdFilesRecursive(fullPath, rootPath);
+                const subResults = await findMdFilesRecursive(fullPath, rootPath, maxDepth - 1);
                 results.push(...subResults);
-            } else if (entry.isFile() && entry.name.endsWith('.md')) {
+            } else if (fileType === vscode.FileType.File && name.endsWith('.md')) {
                 results.push(fullPath);
             }
         }
@@ -206,7 +217,7 @@ export async function findMemoryFiles(rootPath: string): Promise<string[]> {
     const allFiles: string[] = [];
     const githubPath = path.join(rootPath, '.github');
     
-    if (!await fs.pathExists(githubPath)) {
+    if (!await workspaceFs.pathExists(githubPath)) {
         return allFiles;
     }
     
@@ -249,26 +260,27 @@ export async function validateDocCounts(
         let actualCount = 0;
         
         try {
-            if (await fs.pathExists(dirPath)) {
+            if (await workspaceFs.pathExists(dirPath)) {
                 if (config.pattern.startsWith('*/')) {
                     // Skill pattern: count subdirectories with SKILL.md
                     const subPattern = config.pattern.slice(2);
-                    const entries = await fs.readdir(dirPath, { withFileTypes: true });
-                    for (const entry of entries) {
-                        if (entry.isDirectory()) {
-                            const skillFile = path.join(dirPath, entry.name, subPattern);
-                            if (await fs.pathExists(skillFile)) {
+                    const entries = await workspaceFs.readDirectory(dirPath);
+                    for (const [name, fileType] of entries) {
+                        if (fileType === vscode.FileType.Directory) {
+                            const skillFile = path.join(dirPath, name, subPattern);
+                            if (await workspaceFs.pathExists(skillFile)) {
                                 actualCount++;
                             }
                         }
                     }
                 } else {
                     // Simple file pattern
-                    const entries = await fs.readdir(dirPath);
+                    const entries = await workspaceFs.readDirectory(dirPath);
+                    const names = entries.map(([name, _]) => name);
                     const patternRegex = new RegExp(
                         '^' + config.pattern.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$'
                     );
-                    actualCount = entries.filter(e => patternRegex.test(e)).length;
+                    actualCount = names.filter(name => patternRegex.test(name)).length;
                 }
             }
         } catch {
@@ -302,27 +314,27 @@ export async function scanInheritanceLineage(rootPath: string): Promise<Inherita
     let localSkills = 0;
     const versionDriftWarnings: VersionDriftWarning[] = [];
     
-    if (!await fs.pathExists(skillsPath)) {
+    if (!await workspaceFs.pathExists(skillsPath)) {
         return { inheritedSkills, localSkills, versionDriftWarnings };
     }
     
     try {
-        const entries = await fs.readdir(skillsPath, { withFileTypes: true });
+        const entries = await workspaceFs.readDirectory(skillsPath);
         
-        for (const entry of entries) {
-            if (!entry.isDirectory()) {continue;}
+        for (const [dirName, fileType] of entries) {
+            if (fileType !== vscode.FileType.Directory) {continue;}
             
-            const synapsesPath = path.join(skillsPath, entry.name, 'synapses.json');
+            const synapsesPath = path.join(skillsPath, dirName, 'synapses.json');
             
-            if (await fs.pathExists(synapsesPath)) {
+            if (await workspaceFs.pathExists(synapsesPath)) {
                 try {
-                    const synapsesContent = await fs.readFile(synapsesPath, 'utf8');
+                    const synapsesContent = await workspaceFs.readFile(synapsesPath);
                     const synapses = JSON.parse(synapsesContent);
                     
                     if (synapses.inheritedFrom) {
                         const inherited = synapses.inheritedFrom;
                         inheritedSkills.push({
-                            skillId: synapses.skillId || entry.name,
+                            skillId: synapses.skillId || dirName,
                             source: inherited.source || 'global-knowledge',
                             registryId: inherited.registryId,
                             version: inherited.version || 'unknown',
@@ -379,14 +391,14 @@ export async function validateSynapseTarget(
     
     // 4. Check direct path from root
     const absolutePath = path.join(rootPath, targetName);
-    if (await fs.pathExists(absolutePath)) {
+    if (await workspaceFs.pathExists(absolutePath)) {
         return true;
     }
     
     // 5. Check relative to source file
     const sourceDir = path.dirname(sourceFile);
     const relativePath = path.join(sourceDir, targetName);
-    if (await fs.pathExists(relativePath)) {
+    if (await workspaceFs.pathExists(relativePath)) {
         return true;
     }
     
@@ -406,7 +418,7 @@ export async function parseSynapsesFromFile(
     
     let content: string;
     try {
-        content = await fs.readFile(filePath, 'utf-8');
+        content = await workspaceFs.readFile(filePath);
     } catch (error) {
         console.error(`Failed to read file ${filePath}:`, error);
         return synapses;
@@ -469,7 +481,7 @@ export async function repairSynapse(synapse: Synapse): Promise<boolean> {
     }
     
     try {
-        const fileContent = await fs.readFile(synapse.sourceFile, 'utf-8');
+        const fileContent = await workspaceFs.readFile(synapse.sourceFile);
         const escapedTarget = synapse.targetFile.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const regex = new RegExp(`\\[${escapedTarget}\\]`, 'g');
         
@@ -478,7 +490,7 @@ export async function repairSynapse(synapse: Synapse): Promise<boolean> {
         }
         
         const newContent = fileContent.replace(regex, `[${newTarget}]`);
-        await fs.writeFile(synapse.sourceFile, newContent, 'utf-8');
+        await workspaceFs.writeFile(synapse.sourceFile, newContent);
         
         synapse.repaired = true;
         synapse.newTarget = newTarget;
@@ -773,7 +785,7 @@ export async function saveReport(rootPath: string, report: DreamReport): Promise
     const reportContent = generateReportMarkdown(report);
     const dateStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const reportPath = path.join(rootPath, '.github', 'episodic', `dream-report-${dateStr}-${Date.now()}.md`);
-    await fs.ensureDir(path.dirname(reportPath));
-    await fs.writeFile(reportPath, reportContent);
+    await workspaceFs.ensureDir(path.dirname(reportPath));
+    await workspaceFs.writeFile(reportPath, reportContent);
     return reportPath;
 }

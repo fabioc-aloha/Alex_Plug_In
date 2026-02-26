@@ -7,6 +7,7 @@
  */
 
 import * as crypto from 'crypto';
+import * as workspaceFs from './workspaceFs';
 
 /**
  * Generate a cryptographically secure nonce for Content Security Policy
@@ -370,16 +371,14 @@ export function safeJsonParse<T>(content: string): SafeJsonResult<T> {
  * Create a backup of a file before modifying it
  * 
  * @param filePath - Path to the file to backup
- * @param fs - fs-extra module
  * @returns Path to backup file or undefined if backup failed
  */
 export async function createConfigBackup(
-    filePath: string, 
-    fs: typeof import('fs-extra')
+    filePath: string
 ): Promise<string | undefined> {
     try {
         const backupPath = `${filePath}.backup.${Date.now()}`;
-        await fs.copy(filePath, backupPath);
+        await workspaceFs.copyFile(filePath, backupPath);
         return backupPath;
     } catch {
         return undefined;

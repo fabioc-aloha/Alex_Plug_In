@@ -7,6 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.10] - 2026-02-26 — NASA Edition 🚀
+
+> **NASA Standards & Mission-Critical Compliance** — Adopt NASA/JPL Power of 10 code quality rules for mission-critical software development. Extension code audited and made compliant with bounded recursion and loop limits.
+
+### Added
+
+- **NASA/JPL Power of 10 standards integration** — New `.github/instructions/nasa-code-standards.instructions.md` adapts NASA's mission-critical code quality rules for TypeScript, enabling high-reliability software development
+- **Builder agent NASA mode** — Builder agent auto-detects mission-critical projects and applies NASA standards: bounded recursion, fixed loop bounds, function size limits, assertion density, and more
+- **Code review NASA checklist** — `code-review-guidelines.instructions.md` now includes mission-critical review checklist with blocking severity for R1-R3 violations
+- **Heir project NASA guidance** — `heir-project-improvement.instructions.md` includes mission-critical pre-phase checklist for heirs developing safety-critical software
+- **workspaceFs utility module** — New `src/shared/workspaceFs.ts` providing async wrappers around `vscode.workspace.fs` API: `pathExists`, `readFile`, `writeFile`, `readJson`, `writeJson`, `ensureDir`, `readDirectory`, `stat`, `copyFile`, `rename`
+- **Terminal sandboxing documentation** — macOS/Linux security note added to SECURITY.md, copilot-instructions.md, and settings.json for `chat.tools.terminal.sandbox.enabled`
+
+### Changed
+
+- **NASA R1 compliance: Bounded recursion** — `findMdFilesRecursive()` in synapse-core.ts now has `maxDepth` parameter (default: 10) preventing stack overflow from deeply nested directories
+- **NASA R2 compliance: Fixed loop bounds** — Upgrade dialog loop in upgrade.ts now has `MAX_DIALOG_ITERATIONS` safety limit (100)
+- **fs-extra → vscode.workspace.fs migration** — Per ADR-008 (Workspace File API Strategy), migrated all workspace-scoped file operations from Node.js `fs-extra` to VS Code's native `vscode.workspace.fs` API for virtual filesystem compatibility (SSH, WSL, Codespaces, containers). Files migrated:
+  - `promptEngine.ts` — Brain file reading
+  - `activeContextManager.ts` — Protected marker and instructions reading
+  - `synapse-core.ts` — Memory file scanning, synapse repair, report saving
+  - `cognitiveDashboard.ts` — Skill/instruction/prompt/episodic counting
+  - `memoryDashboard.ts` — Memory stats collection
+  - `healthDashboard.ts` — Health category scanning
+  - `utils.ts` — Version reading, Alex installation check, synapse health scan
+  - `personaDetection.ts` — Workspace structure scanning, package.json reading, profile updates
+  - `emotionalMemory.ts` — Emotional session logging
+  - `honestUncertainty.ts` — Calibration logging, feedback tracking
+  - `tools.ts` — Synapse health, memory search, architecture status tools
+  - `sanitize.ts` — Config backup operations
+
+### Removed
+
+- **Enterprise secrets scanning** — `alex.enterprise.scanSecrets`, `alex.enterprise.scanWorkspace` commands removed (did not work as expected)
+- **Enterprise audit logging** — `alex.enterprise.viewAuditLog`, `alex.enterprise.exportAuditLog` commands removed
+- **Enterprise settings** — All 11 `alex.enterprise.*` settings removed from package.json
+- **Enterprise module** — `src/enterprise/` folder deleted (auditLogging.ts, secretsScanning.ts, index.ts)
+- **Unused fs-extra import** — Removed from contextMenu.ts (was importing but not using)
+
+### Fixed
+
+- **@ts-ignore removal** — Replaced all `@ts-ignore` comments with type-safe patterns:
+  - `inheritSkill.ts` — QuickPick custom data now uses Map instead of property injection
+  - `proposeSkill.ts` — Same pattern, plus new HeirSkill interface for type-safe skill operations
+- **Type safety improvements** — Eliminated `any` types:
+  - `healthDashboard.ts` — `any[]` → `LearningGoal[]` for goals parameter
+  - `cognitiveDashboard.ts` — Goals filtering now type-safe with WorkspaceGoalsData
+  - `uxFeatures.ts` — Same pattern for daily briefing goals
+- **DRY type consolidation** — Moved WorkspaceGoal/WorkspaceGoalsData interfaces to shared/constants.ts, eliminating duplication across cognitiveDashboard.ts and uxFeatures.ts
+
+### Technical Notes
+
+Files intentionally kept with fs-extra (per ADR-008 — global paths require Node.js filesystem):
+- `session.ts`, `goals.ts`, `globalKnowledge.ts`, `forgettingCurve.ts` — Use `~/.alex/` global paths
+- `setupGlobalKnowledge.ts`, `exportForM365.ts` — Symlinks and OneDrive paths
+- `inheritSkill.ts`, `proposeSkill.ts` — Mixed global/workspace operations
+- `logoService.ts`, `pptxGenerator.ts`, `audioPlayer.ts` — Sync methods for bundled assets
+
+---
+
 ## [5.9.9] - 2026-02-24
 
 > **Platform Architecture Reinforcement** — Harvest everything VS Code 1.109 and M365 extensibility GA'd. Skill frontmatter gating, agent orchestration hierarchy, quality gate hooks, Claude Code bridge, and M365 plugin schema upgrade. No proposed APIs, ships clean.

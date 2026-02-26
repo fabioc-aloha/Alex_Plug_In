@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs-extra';
 import { checkHealth, getCachedHealth, HealthCheckResult } from '../shared/healthCheck';
 import { getAlexGlobalPath, getGlobalKnowledgePath } from '../chat/globalKnowledge';
+import * as workspaceFs from '../shared/workspaceFs';
 
 /**
  * Alex Memory Tree Provider
@@ -184,18 +184,19 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
         
         if (!this.rootPath) { return []; }
         const skillsDir = path.join(this.rootPath, '.github', 'skills');
-        if (!await fs.pathExists(skillsDir)) { return []; }
+        // v5.9.10: Use workspace.fs for workspace files (ADR-008)
+        if (!await workspaceFs.pathExists(skillsDir)) { return []; }
 
-        const entries = await fs.readdir(skillsDir, { withFileTypes: true });
+        const entries = await workspaceFs.readDirectory(skillsDir);
         const items: MemoryTreeItemData[] = [];
 
-        for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
-            if (!entry.isDirectory()) { continue; }
-            const skillFile = path.join(skillsDir, entry.name, 'SKILL.md');
-            if (await fs.pathExists(skillFile)) {
+        for (const [name, fileType] of [...entries].sort((a, b) => a[0].localeCompare(b[0]))) {
+            if (fileType !== vscode.FileType.Directory) { continue; }
+            const skillFile = path.join(skillsDir, name, 'SKILL.md');
+            if (await workspaceFs.pathExists(skillFile)) {
                 items.push({
                     type: 'file',
-                    label: entry.name,
+                    label: name,
                     filePath: skillFile,
                     icon: 'book',
                 });
@@ -247,10 +248,14 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
         if (cached) { return cached; }
         
         const gkPath = getGlobalKnowledgePath(subfolder);
-        if (!await fs.pathExists(gkPath)) { return []; }
+        // v5.9.10: Global knowledge uses fs-extra (global path, ADR-008)
+        // but we can still use workspaceFs for path checking
+        if (!await workspaceFs.pathExists(gkPath)) { return []; }
 
-        const files = (await fs.readdir(gkPath))
-            .filter(f => f.endsWith('.md'))
+        const entries = await workspaceFs.readDirectory(gkPath);
+        const files = entries
+            .filter(([f]) => f.endsWith('.md'))
+            .map(([f]) => f)
             .sort();
 
         const items = files.map(f => ({
@@ -270,14 +275,16 @@ export class MemoryTreeProvider implements vscode.TreeDataProvider<MemoryTreeIte
         
         if (!this.rootPath) { return []; }
         const dirPath = path.join(this.rootPath, relDir);
-        if (!await fs.pathExists(dirPath)) { return []; }
+        if (!await workspaceFs.pathExists(dirPath)) { return []; }
 
-        const files = (await fs.readdir(dirPath))
-            .filter(f => {
+        const entries = await workspaceFs.readDirectory(dirPath);
+        const files = entries
+            .filter(([f]) => {
                 // Simple glob match for *.ext pattern
                 const ext = glob.replace('*', '');
                 return f.endsWith(ext);
             })
+            .map(([f]) => f)
             .sort();
 
         const items = files.map(f => ({

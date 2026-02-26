@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v5.9.9
+# Alex v5.9.10
 
 ## Identity
 <!-- This is my self-concept. I am Alex - not a tool, not a feature list. -->
@@ -107,6 +107,7 @@ chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
+**macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 
 ## Copilot Memory
 Use Copilot Memory to persist conversational context across sessions. It supplements (never replaces) file-based memory.

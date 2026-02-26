@@ -843,18 +843,7 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ## 🆕 What's New in v5.6.x (Stabilized)
 
-### 📡 Microsoft Graph Integration (v5.6.0)
-
-Alex connects to your Microsoft 365 environment for enterprise workflows:
-
-- **`/calendar`** — View upcoming calendar events with configurable lookahead
-- **`/mail`** — View recent emails with unread-only filter
-- **`/context`** — Full work context: calendar + mail + presence in one view
-- **`/people <query>`** — Search people in your organization
-- **7 enterprise settings** — Granular toggle for each Graph capability
-- Requires `alex.enterprise.graph.enabled` — see [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
-
-### 📦 Skill Pull-Sync & Growth (v5.6.2-5.6.9)
+###  Skill Pull-Sync & Growth (v5.6.2-5.6.9)
 
 Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
 
@@ -889,13 +878,7 @@ Alex now adapts behavior based on the running LLM:
 - **Task-Model Matching** — Cognitive tasks check if current model meets requirements
 - **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
 
-### 🔒 Enterprise Secrets Extensibility
-
-- **Custom patterns** — Define organization-specific regex via `alex.enterprise.secrets.customPatterns`
-- **17 enterprise settings** — Full documentation in [Enterprise Settings Guide](alex_docs/guides/ENTERPRISE-SETTINGS.md)
-- **Disable built-ins** — Use only your custom patterns for compliance
-
-### 🔍 Automated Doc Count Validation
+###  Automated Doc Count Validation
 
 - Dream protocol now validates documented counts against actual files
 - Reports drift for Procedural (28), Episodic (17), and Skills (116)
@@ -1009,7 +992,6 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 | [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
 | [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
 | [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
-| [Enterprise Settings](alex_docs/guides/ENTERPRISE-SETTINGS.md)             | All 24 enterprise configuration options         |
 | [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
 
 ### External Resources

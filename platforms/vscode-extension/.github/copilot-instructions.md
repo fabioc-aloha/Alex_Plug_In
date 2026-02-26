@@ -91,6 +91,7 @@ chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
+**macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 
 ## Copilot Memory
 Use Copilot Memory to persist conversational context across sessions. It supplements (never replaces) file-based memory.

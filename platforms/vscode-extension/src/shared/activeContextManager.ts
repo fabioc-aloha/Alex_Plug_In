@@ -20,8 +20,8 @@
  * @see ADR-010 — copilot-instructions as prefrontal cortex
  */
 
-import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as workspaceFs from './workspaceFs';
 
 // ============================================================================
 // Types
@@ -95,8 +95,8 @@ function getInstructionsPath(workspaceRoot: string): string {
 async function isMasterWorkspace(workspaceRoot: string): Promise<boolean> {
     const protectedPath = path.join(workspaceRoot, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
     try {
-        if (await fs.pathExists(protectedPath)) {
-            const data = await fs.readJson(protectedPath);
+        if (await workspaceFs.pathExists(protectedPath)) {
+            const data = await workspaceFs.readJson(protectedPath) as { protected?: boolean };
             return data.protected === true;
         }
     } catch { /* not protected */ }
@@ -183,10 +183,10 @@ function rebuildSection(ctx: ActiveContext): string {
  */
 export async function readActiveContext(workspaceRoot: string): Promise<ActiveContext | null> {
     const filePath = getInstructionsPath(workspaceRoot);
-    if (!(await fs.pathExists(filePath))) { return null; }
+    if (!(await workspaceFs.pathExists(filePath))) { return null; }
 
     try {
-        const content = await fs.readFile(filePath, 'utf-8');
+        const content = await workspaceFs.readFile(filePath);
         const parts = splitActiveContextSection(content);
         if (!parts) { return null; }
         return parseSection(parts.section);
@@ -212,13 +212,13 @@ export async function updateActiveContext(
 ): Promise<boolean> {
     return withMutex(async () => {
         const filePath = getInstructionsPath(workspaceRoot);
-        if (!(await fs.pathExists(filePath))) {
+        if (!(await workspaceFs.pathExists(filePath))) {
             console.warn(`[ActiveContext] File not found: ${filePath}`);
             return false;
         }
 
         try {
-            const content = await fs.readFile(filePath, 'utf-8');
+            const content = await workspaceFs.readFile(filePath);
             const parts = splitActiveContextSection(content);
             if (!parts) {
                 console.warn('[ActiveContext] Active Context section not found in copilot-instructions.md');

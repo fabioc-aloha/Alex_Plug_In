@@ -25,6 +25,16 @@ interface ValidationResult {
     score: number;
 }
 
+interface HeirSkill {
+    folder: string;
+    name: string;
+    metadata: SkillMetadata;
+    category: string;
+    validationScore: number;
+    inheritedFromGK: boolean;
+    content: string;
+}
+
 const GLOBAL_KNOWLEDGE_PATH = path.join(os.homedir(), '.alex', 'global-knowledge');
 const VALID_CATEGORIES = [
     'architecture', 'api-design', 'debugging', 'deployment', 'documentation',
@@ -107,15 +117,18 @@ export async function proposeSkillToGlobal(): Promise<void> {
             
             progress.report({ message: 'Preparing selection...', increment: 20 });
             
-            // Create QuickPick items
-            const items: vscode.QuickPickItem[] = proposableSkills.map(skill => ({
-                label: `$(package) ${skill.name}`,
-                description: skill.metadata?.description || skill.folder,
-                detail: `Category: ${skill.category || 'uncategorized'} · Score: ${skill.validationScore}/12`,
-                picked: false,
-                // @ts-ignore - custom property
-                skillData: skill
-            }));
+            // Create QuickPick items with type-safe data association
+            const skillMap = new Map<string, HeirSkill>();
+            const items: vscode.QuickPickItem[] = proposableSkills.map(skill => {
+                const label = `$(package) ${skill.name}`;
+                skillMap.set(label, skill);
+                return {
+                    label,
+                    description: skill.metadata?.description || skill.folder,
+                    detail: `Category: ${skill.category || 'uncategorized'} · Score: ${skill.validationScore}/12`,
+                    picked: false
+                };
+            });
 
             // Show single-select QuickPick
             const selected = await vscode.window.showQuickPick(items, {
@@ -129,8 +142,10 @@ export async function proposeSkillToGlobal(): Promise<void> {
                 return;
             }
 
-            // @ts-ignore - custom property
-            const skill = selected.skillData;
+            const skill = skillMap.get(selected.label);
+            if (!skill) {
+                return;
+            }
             
             progress.report({ message: `Validating ${skill.name}...`, increment: 20 });
 
@@ -210,8 +225,8 @@ export async function proposeSkillToGlobal(): Promise<void> {
 /**
  * Get heir skills (excluding inherited ones)
  */
-async function getHeirSkills(skillsPath: string): Promise<any[]> {
-    const skills: any[] = [];
+async function getHeirSkills(skillsPath: string): Promise<HeirSkill[]> {
+    const skills: HeirSkill[] = [];
     
     if (!await fs.pathExists(skillsPath)) {
         return skills;
@@ -347,7 +362,7 @@ function calculateValidationScore(content: string, metadata: SkillMetadata): num
 /**
  * Validate skill for proposal
  */
-async function validateSkill(skill: any, outputChannel: vscode.OutputChannel): Promise<ValidationResult> {
+async function validateSkill(skill: HeirSkill, outputChannel: vscode.OutputChannel): Promise<ValidationResult> {
     const errors: string[] = [];
     const warnings: string[] = [];
     
@@ -405,7 +420,7 @@ async function validateSkill(skill: any, outputChannel: vscode.OutputChannel): P
 /**
  * Collect proposal metadata from user
  */
-async function collectProposalMetadata(skill: any, workspacePath: string): Promise<GKYamlFrontmatter | null> {
+async function collectProposalMetadata(skill: HeirSkill, workspacePath: string): Promise<GKYamlFrontmatter | null> {
     // Detect project name from workspace
     const projectName = path.basename(workspacePath);
     
@@ -485,7 +500,7 @@ function detectTags(content: string, metadata: SkillMetadata): string[] {
  * Package skill for proposal with GK metadata
  */
 async function packageSkillForProposal(
-    skill: any,
+    skill: HeirSkill,
     projectSkillsPath: string,
     metadata: GKYamlFrontmatter,
     outputChannel: vscode.OutputChannel
@@ -536,7 +551,7 @@ ${skill.metadata.applyTo ? `applyTo: "${skill.metadata.applyTo}"` : ''}
 /**
  * Generate GitHub PR description
  */
-function generatePRDescription(skill: any, metadata: GKYamlFrontmatter, validation: ValidationResult): string {
+function generatePRDescription(skill: HeirSkill, metadata: GKYamlFrontmatter, validation: ValidationResult): string {
     return `## Propose Skill: ${skill.name}
 
 **Category**: ${metadata.gkCategory}  

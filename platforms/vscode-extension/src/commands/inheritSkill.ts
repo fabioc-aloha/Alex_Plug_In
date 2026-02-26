@@ -116,16 +116,18 @@ export async function inheritSkillFromGlobal(): Promise<void> {
             
             progress.report({ message: 'Preparing selection...', increment: 20 });
             
-            // Create QuickPick items
-            const items: vscode.QuickPickItem[] = availableSkills.map(skill => ({
-                label: `$(package) ${skill.name}`,
-                description: `v${skill.version} · ${skill.category}`,
-                detail: skill.description || `Tags: ${skill.tags.join(', ')}`,
-                picked: false,
-                // Store skill data for later
-                // @ts-ignore - custom property
-                skillData: skill
-            }));
+            // Create QuickPick items with type-safe data association
+            const skillMap = new Map<string, SkillRegistryEntry>();
+            const items: vscode.QuickPickItem[] = availableSkills.map(skill => {
+                const label = `$(package) ${skill.name}`;
+                skillMap.set(label, skill);
+                return {
+                    label,
+                    description: `v${skill.version} · ${skill.category}`,
+                    detail: skill.description || `Tags: ${skill.tags.join(', ')}`,
+                    picked: false
+                };
+            });
 
             // Show multi-select QuickPick
             const selected = await vscode.window.showQuickPick(items, {
@@ -147,8 +149,8 @@ export async function inheritSkillFromGlobal(): Promise<void> {
             let failCount = 0;
 
             for (const item of selected) {
-                // @ts-ignore - custom property
-                const skill: SkillRegistryEntry = item.skillData;
+                const skill = skillMap.get(item.label);
+                if (!skill) { continue; }
                 
                 try {
                     await inheritSkill(skill, projectSkillsPath, outputChannel);

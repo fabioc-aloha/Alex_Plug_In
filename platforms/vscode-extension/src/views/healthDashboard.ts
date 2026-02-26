@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import * as workspaceFs from '../shared/workspaceFs';
 import { 
     checkHealth, 
     HealthCheckResult, 
     HealthStatus
 } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { getGoalsSummary } from '../commands/goals';
+import { getGoalsSummary, LearningGoal } from '../commands/goals';
 import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 import { escapeHtml, getNonce } from '../shared/sanitize';
@@ -180,7 +180,7 @@ async function getWebviewContent(
     extUri: vscode.Uri,
     health: HealthCheckResult,
     knowledge: { totalPatterns: number; totalInsights: number } | null,
-    goals: { activeGoals: any[]; completedToday: number; streakDays: number; totalCompleted: number },
+    goals: { activeGoals: LearningGoal[]; completedToday: number; streakDays: number; totalCompleted: number },
     session: ReturnType<typeof getCurrentSession>,
     version: string | null,
     personaResult: PersonaDetectionResult | null
@@ -917,9 +917,9 @@ async function buildMemoryBreakdownAsync(): Promise<{ icon: string; name: string
     // Count files in each directory
     for (const cat of categories) {
         try {
-            if (await fs.pathExists(cat.path)) {
-                const files = await fs.readdir(cat.path);
-                cat.count = files.filter(f => f.endsWith('.md')).length;
+            if (await workspaceFs.pathExists(cat.path)) {
+                const files = await workspaceFs.readDirectory(cat.path);
+                cat.count = files.filter(([name, _]) => name.endsWith('.md')).length;
             }
         } catch {
             // Ignore errors

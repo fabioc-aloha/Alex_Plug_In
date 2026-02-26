@@ -11,6 +11,7 @@
 import * as vscode from 'vscode';
 import { synthesize, prepareTextForSpeech, playWithWebview, detectLanguage, getVoiceForLanguage } from '../tts';
 import { summarizeForSpeech, LONG_CONTENT_WORD_THRESHOLD } from '../commands/readAloud';
+import { WorkspaceGoalsData } from '../shared/constants';
 
 // Extension context for TTS playback
 let extensionContext: vscode.ExtensionContext | undefined;
@@ -431,10 +432,10 @@ async function collectBriefingData(workspaceUri: vscode.Uri): Promise<DailyBrief
     const goalsUri = vscode.Uri.joinPath(workspaceUri, '.github', 'config', 'goals.json');
     try {
       const goalsContent = await vscode.workspace.fs.readFile(goalsUri);
-      const goals = JSON.parse(Buffer.from(goalsContent).toString());
+      const goals: WorkspaceGoalsData = JSON.parse(Buffer.from(goalsContent).toString());
       if (Array.isArray(goals.goals)) {
-        data.goalsInProgress = goals.goals.filter((g: any) => g.status === 'in-progress').length;
-        data.goalsCompleted = goals.goals.filter((g: any) => g.status === 'completed').length;
+        data.goalsInProgress = goals.goals.filter((g) => g.status === 'in-progress').length;
+        data.goalsCompleted = goals.goals.filter((g) => g.status === 'completed').length;
       }
       if (typeof goals.streak === 'number') {
         data.streak = goals.streak;

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getAlexWorkspaceFolder } from '../shared/utils';
+import * as workspaceFs from '../shared/workspaceFs';
 
 interface Connection {
     target: string;
@@ -59,7 +59,7 @@ export async function generateSkillCatalog(): Promise<void> {
 
     const skillsPath = path.join(workspaceResult.workspaceFolder.uri.fsPath, '.github', 'skills');
     
-    if (!await fs.pathExists(skillsPath)) {
+    if (!await workspaceFs.pathExists(skillsPath)) {
         vscode.window.showErrorMessage('Skills folder not found. Run Alex: Initialize first.');
         return;
     }
@@ -81,9 +81,9 @@ export async function generateSkillCatalog(): Promise<void> {
         
         progress.report({ message: 'Saving catalog...', increment: 40 });
         
-        // Save to file
+        // Save to file (v5.9.10: using workspace.fs per ADR-008)
         const catalogPath = path.join(workspaceResult.workspaceFolder!.uri.fsPath, 'SKILL-CATALOG-GENERATED.md');
-        await fs.writeFile(catalogPath, catalog);
+        await workspaceFs.writeFile(catalogPath, catalog);
         
         progress.report({ increment: 10 });
         
@@ -105,19 +105,18 @@ export async function generateSkillCatalog(): Promise<void> {
 
 async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
     const skills: SkillInfo[] = [];
-    const folders = await fs.readdir(skillsPath);
+    const entries = await workspaceFs.readDirectory(skillsPath);
 
-    for (const folder of folders) {
+    for (const [folder, fileType] of entries) {
+        if (fileType !== vscode.FileType.Directory) { continue; }
         const skillPath = path.join(skillsPath, folder);
-        const stat = await fs.stat(skillPath);
-        if (!stat.isDirectory()) {continue;}
         
         const synapsesPath = path.join(skillPath, 'synapses.json');
         
-        if (!await fs.pathExists(synapsesPath)) {continue;}
+        if (!await workspaceFs.pathExists(synapsesPath)) {continue;}
 
         try {
-            const synapses: SynapsesJson = await fs.readJson(synapsesPath);
+            const synapses: SynapsesJson = await workspaceFs.readJson(synapsesPath);
             const connections = normalizeConnections(synapses.connections);
             
             skills.push({
