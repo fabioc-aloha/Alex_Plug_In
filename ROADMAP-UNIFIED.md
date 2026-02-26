@@ -283,14 +283,14 @@ Items to pull from when capacity frees up:
 
 **Reference**: [ADR-011](alex_docs/decisions/ADR-011-office-addins-m365-integration.md)
 
-### Research Findings (from alex_docs/ audit — 2026-02-14, status updated 2026-02-24)
+### Research Findings (from alex_docs/ audit — 2026-02-14, status updated 2026-02-26)
 
 | Finding                           | Source Document                           | Priority | Status | Description                                                                  |
 | --------------------------------- | ----------------------------------------- | :------: | :----: | ---------------------------------------------------------------------------- |
 | GK pattern format inconsistency   | GK-PATTERN-FORMAT-STANDARD.md             |    P2    | 🔵 Open | Migrate final 4 patterns to YAML v2 frontmatter (28/32 complete in v5.6.5)   |
-| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md             |    P1    | ✅ Complete | All 10 workspace-scoped files migrated to workspaceFs (2026-02-24): `contextMenu.ts`, `fileWatcher.ts`, `healthCheck.ts`, `synapse-core.ts`, `tools.ts`, `memoryTreeProvider.ts`, `session.ts`, `self-actualization.ts`, `skillCatalog.ts`, `heirValidation.ts`. Global-path files (`globalKnowledge.ts`, `goals.ts`, `forgettingCurve.ts`, `peripheralVision.ts`, `personaDetection.ts` hybrid) intentionally kept on fs-extra per ADR-008. |
-| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md     |    P1    | ⚠️ Partial | 10 integration opportunities. v5.9.9 addresses: `chatSkills` GA (skill frontmatter), `agents:` frontmatter, agent hooks quality gates, built-in skill disable. Remaining: re-audit after v5.9.9 ships. |
-| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md            |    P1    | ⚠️ Partial | v5.9.9 addresses: skill frontmatter gating, model fallback YAML, agent orchestration, Claude bridge, MCP Apps prototype. Re-audit after v5.9.9 to close remaining items. |
+| fs-extra → vscode.workspace.fs    | ADR-008-workspace-file-api.md             |    P1    | ✅ Complete | All 10 workspace-scoped files migrated to workspaceFs (2026-02-26). Global-path files intentionally kept on fs-extra per ADR-008. |
+| VS Code source integration        | VSCODE-SOURCE-INTEGRATION-ANALYSIS.md     |    P1    | ✅ Complete | Re-audited 2026-02-26. 9 proposed APIs remain blocked for Marketplace. Alt paths implemented: tool naming convention (B1), chatSkills GA (#5), built-in patterns (#10). Skills: 55→114, Tools: 13 (all tagged). |
+| Copilot API enhancement checklist | VSCODE-COPILOT-API-ANALYSIS.md            |    P1    | ✅ Complete | Re-audited 2026-02-26. Stable enhancements #1-7 done (tags, naming, samples, when clauses, disambiguation). Proposed #9-13 remain blocked. Walkthrough (#8) deferred. |
 | Semantic Skill Graph              | SEMANTIC-SKILL-GRAPH.md                   |    P2    | 🔵 Open | Embedding-based skill discovery using Azure OpenAI — 4-phase proposal. v5.9.9 skill frontmatter gating improves discoverability via `user-invokable` but does not replace semantic embedding. **See dedicated section below.** |
 
 ---

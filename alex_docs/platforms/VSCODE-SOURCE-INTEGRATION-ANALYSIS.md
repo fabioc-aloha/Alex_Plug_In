@@ -1,12 +1,30 @@
 # VS Code Source Code Analysis: Alex Integration Opportunities
 
-**Date**: 2026-02-07
+**Date**: 2026-02-07 (Re-audited: 2026-02-26)
 **Analyst**: Alex Cognitive Architecture (Opus 4.6)
 **Source**: [microsoft/vscode](https://github.com/microsoft/vscode) main branch
 **Purpose**: Identify undiscovered VS Code extension APIs and patterns that could enhance the Alex VS Code extension
-**Current Alex Version**: 5.0.0
+**Current Alex Version**: 5.9.10
 
 > **⚠️ Counts snapshot**: Numbers in this analysis reflect v5.0.0 at time of writing. Authoritative current counts live in the root `README.md`.
+
+---
+
+## Re-Audit Summary (v5.9.10 — 2026-02-26)
+
+| Feature | v5.0.0 | v5.9.10 | Change |
+|---------|--------|---------|--------|
+| Chat Skills | 55 | **114** | +107% growth |
+| Language Model Tools | 11 | 13 | +2 (focus + state) |
+| Tool Naming Convention | Not done | `alex_cognitive_*`, `alex_knowledge_*`, `alex_platform_*` | ✅ Alt path B1 complete |
+| Chat Commands | 31 | 26 | Rationalized |
+| Agents | Code-only | 7 file-based (`.github/agents/`) | ✅ New capability |
+| Workspace File API | fs-extra only | workspaceFs for workspace ops | ✅ ADR-008 complete |
+| Tool Tags | Missing | All 13 tagged | ✅ Done |
+| Disambiguation | 4 categories | 4 categories + examples | ✅ Enhanced |
+| sampleRequest | Missing | All commands have samples | ✅ Done |
+
+**Proposed APIs**: All 9 proposed-API opportunities remain blocked for VS Code Marketplace. Alt paths (B1, B3, C1-5) have been implemented where feasible.
 
 ---
 
@@ -15,7 +33,7 @@
 Analysis of the VS Code source code reveals **10 major integration opportunities** across Chat Context Providers, Tool Sets, MCP infrastructure, Dynamic Participants, Skill/Prompt Providers, Embeddings, and more. Alex currently uses only a fraction of the available extension surface area. The most impactful gaps are:
 
 1. **No context injection** — Alex doesn't inject memory/persona/session context into other chat participants
-2. **No tool grouping** — 11 tools appear individually instead of as a cohesive "Alex" tool set
+2. **No tool grouping** — ~~11~~ 13 tools appear individually instead of as a cohesive "Alex" tool set (naming convention applied as workaround)
 3. **No dynamic skill loading** — Skills are statically declared in package.json instead of loaded from global knowledge
 4. **No MCP server exposure** — Alex's tools aren't available to external agents/tools via MCP
 
@@ -25,16 +43,16 @@ Analysis of the VS Code source code reveals **10 major integration opportunities
 
 | #   | Opportunity                           | Impact        | Effort    | API Status | Phase  | Status            |
 | --- | ------------------------------------- | ------------- | --------- | ---------- | ------ | ----------------- |
-| 1   | Chat Context Providers                | 🔴 HIGH        | Medium    | Proposed   | v5.1   | ⬜ Not started     |
-| 2   | Dynamic Chat Participants             | 🟡 MEDIUM      | Medium    | Proposed   | v5.2   | ⬜ Not started     |
-| 3   | Tool Sets & Advanced Tool Definitions | 🔴 HIGH        | Low       | Proposed   | v5.1   | 🔄 Alt path (B1)   |
+| 1   | Chat Context Providers                | 🔴 HIGH        | Medium    | Proposed   | v5.1   | ⬜ Blocked         |
+| 2   | Dynamic Chat Participants             | 🟡 MEDIUM      | Medium    | Proposed   | v5.2   | ⬜ Blocked         |
+| 3   | Tool Sets & Advanced Tool Definitions | 🔴 HIGH        | Low       | Proposed   | v5.1   | ✅ Alt path (B1)   |
 | 4   | MCP Server Definition Provider        | 🟡 MEDIUM      | High      | Proposed   | v5.1   | 🔄 Alt path (B3)   |
-| 5   | Skill & Prompt File Provider          | 🟡 MEDIUM-HIGH | Medium    | Proposed   | v5.2   | ⬜ Not started     |
-| 6   | Language Model Chat Provider          | 🟢 LOW         | Very High | Proposed   | Future | ⬜ Not started     |
+| 5   | Skill & Prompt File Provider          | 🟡 MEDIUM-HIGH | Medium    | Proposed   | v5.2   | ✅ chatSkills GA   |
+| 6   | Language Model Chat Provider          | 🟢 LOW         | Very High | Proposed   | Future | ⬜ Dead end        |
 | 7   | Embeddings API                        | 🟡 MEDIUM      | Medium    | Proposed   | v5.1   | 🔄 Alt path (C1-5) |
-| 8   | Thinking Parts / Extended Thinking    | 🟢 LOW-MEDIUM  | Low       | Proposed   | v5.2   | ⬜ Not started     |
-| 9   | Chat Sessions Provider                | 🟡 MEDIUM      | High      | Proposed   | v5.3   | ⬜ Not started     |
-| 10  | Built-in Extension Patterns           | 🟢 LOW-MEDIUM  | Varies    | Stable     | v5.1   | 🔄 In progress     |
+| 8   | Thinking Parts / Extended Thinking    | 🟢 LOW-MEDIUM  | Low       | Proposed   | v5.2   | ⬜ Blocked         |
+| 9   | Chat Sessions Provider                | 🟡 MEDIUM      | High      | Proposed   | v5.3   | ⬜ Blocked         |
+| 10  | Built-in Extension Patterns           | 🟢 LOW-MEDIUM  | Varies    | Stable     | v5.1   | ✅ Done            |
 
 ---
 

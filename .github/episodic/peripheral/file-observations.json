@@ -1,24 +1,27 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "OADMAP-UNIFIED.md"
+    "github/episodic/peripheral/file-observations.json",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/platforms/VSCODE-COPILOT-API-ANALYSIS.md",
+    "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772124738454
+      "scannedAt": 1772126182713
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1772124738454
+      "scannedAt": 1772126182713
     },
     {
-      "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
+      "file": "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md",
       "todoCount": 1,
-      "scannedAt": 1772124738454
+      "scannedAt": 1772126182713
     }
   ],
-  "lastUpdated": 1772124738454
+  "lastUpdated": 1772126182713
 }

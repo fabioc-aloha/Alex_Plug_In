@@ -5,13 +5,38 @@
 |                    |                                                   |
 | ------------------ | ------------------------------------------------- |
 | **Author**         | Fabio Correa                                      |
-| **Date**           | February 7, 2026                                  |
-| **Extension**      | `fabioc-aloha.alex-cognitive-architecture` v5.0.0 |
+| **Date**           | February 7, 2026 (Re-audited: February 26, 2026)  |
+| **Extension**      | `fabioc-aloha.alex-cognitive-architecture` v5.9.10 |
 | **VS Code Engine** | `^1.109.0`                                        |
 | **Proposed APIs**  | None (Marketplace-safe)                           |
 
-> **⚠️ Counts snapshot**: Numbers in this analysis reflect v5.0.0 at time of writing. Authoritative current counts live in the root `README.md`.
+> **⚠️ Counts snapshot**: Numbers below updated in v5.9.10 re-audit. Authoritative current counts live in the root `README.md`.
 | **Related**        | [VSCODE-SOURCE-INTEGRATION-ANALYSIS.md](VSCODE-SOURCE-INTEGRATION-ANALYSIS.md), [VSCODE-CONTRIBUTION-PLAN.md](VSCODE-CONTRIBUTION-PLAN.md) |
+
+---
+
+## Re-Audit Summary (v5.9.10 — 2026-02-26)
+
+| Category | v5.0.0 | v5.9.10 | Status |
+|----------|--------|---------|--------|
+| Chat Skills | 53 | **114** | ✅ +115% growth |
+| Language Model Tools | 13 | 13 | ✅ All tagged + named |
+| Slash Commands | 27 | 26 | ✅ Rationalized |
+| VS Code Commands | 44 | ~40 | ✅ Enterprise removed |
+| Configuration Keys | 8 | 6 | ✅ Enterprise removed |
+| Tool Tags | Missing | All 13 | ✅ Done |
+| Tool Naming | Random | `alex_cognitive_*` | ✅ Consistent |
+| Disambiguation | No examples | Examples added | ✅ Done |
+| sampleRequest | Missing | All commands | ✅ Done |
+| chatSkills frontmatter | Not used | Full metadata | ✅ Done |
+
+**Enhancement Status Update:**
+- #1-2: ✅ Done (tools declared + tagged)
+- #3: ✅ Done (when clauses on commands)
+- #4-5: ✅ Done (skill frontmatter)
+- #6-7: ✅ Done (disambiguation + samples)
+- #8: ⬜ Deferred (walkthrough)
+- #9-13: ⬜ Blocked (proposed APIs)
 
 ---
 
