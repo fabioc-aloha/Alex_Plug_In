@@ -75,6 +75,8 @@ export interface IUserProfile {
     currentProjects?: string;
     notes?: string;
     lastUpdated?: string;
+    // Index signature for dynamic field access (NASA R10 compliance)
+    [key: string]: string | string[] | undefined;
 }
 
 /**
@@ -775,9 +777,11 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     }
                     
                     const profile = validation.sanitized || parseResult.data;
-                    if (field) {
+                    if (field && profile) {
+                        // Type-safe dynamic field access via index signature
+                        const profileRecord = profile as IUserProfile;
                         return new vscode.LanguageModelToolResult([
-                            new vscode.LanguageModelTextPart(JSON.stringify({ [field]: (profile as any)[field] }))
+                            new vscode.LanguageModelTextPart(JSON.stringify({ [field]: profileRecord[field] }))
                         ]);
                     }
                     return new vscode.LanguageModelToolResult([
@@ -802,16 +806,16 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
 
                     // Handle array fields
                     if (['primaryTechnologies', 'learningGoals', 'expertiseAreas'].includes(field)) {
-                        const currentArray = existingProfile[field as keyof IUserProfile] as string[] || [];
+                        const currentArray = existingProfile[field] as string[] || [];
                         if (Array.isArray(currentArray)) {
                             if (!currentArray.includes(value)) {
-                                (existingProfile as any)[field] = [...currentArray, value];
+                                existingProfile[field] = [...currentArray, value];
                             }
                         } else {
-                            (existingProfile as any)[field] = [value];
+                            existingProfile[field] = [value];
                         }
                     } else {
-                        (existingProfile as any)[field] = value;
+                        existingProfile[field] = value;
                     }
 
                     // Update timestamp

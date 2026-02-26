@@ -1,33 +1,25 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/agents/alex-builder.agent.md",
-    "CHANGELOG.md",
-    "README.md",
-    "ROADMAP-UNIFIED.md",
-    "SECURITY.md",
-    "alex_docs/README.md",
-    "alex_docs/guides/ENTERPRISE-SETTINGS.md",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/alex_docs/README.md"
+    "github/episodic/peripheral/file-observations.json",
+    "platforms/vscode-extension/src/chat/tools.ts"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772123192093
+      "scannedAt": 1772123664069
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1772123192093
+      "scannedAt": 1772123664069
     },
     {
       "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
       "todoCount": 1,
-      "scannedAt": 1772123192093
+      "scannedAt": 1772123664069
     }
   ],
-  "lastUpdated": 1772123192093
+  "lastUpdated": 1772123664069
 }
