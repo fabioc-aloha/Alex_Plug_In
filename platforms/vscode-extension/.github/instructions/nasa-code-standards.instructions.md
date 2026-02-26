@@ -359,6 +359,9 @@ Before committing code in mission-critical projects, verify:
 | R4 | globalKnowledge.ts | `fetchFromGitHub` | 110 | HTTP lifecycle: cache→auth→request→redirect→error; must stay together |
 | R4 | globalKnowledge.ts | `detectGlobalKnowledgeRepo` | 94 | Multi-strategy detection cascade |
 | R4 | forgettingCurve.ts | `runForgettingCeremony` | 84 | Memory consolidation ceremony steps |
+| R4 | initialize.ts | `performInitialization` | 427 | Entry point orchestrator with HTML template |
+| R4 | upgrade.ts | `upgradeArchitecture` | 263 | Entry point orchestrator with user dialogs |
+| R4 | readAloud.ts | `readAloud` | 239 | Entry point orchestrator with UI flow |
 
 ### 🟡 Tracked Technical Debt
 
@@ -373,6 +376,8 @@ Before committing code in mission-critical projects, verify:
 | Rule | Issue | Resolution | Date |
 |------|-------|------------|------|
 | R10 | `as any` (4x) in tools.ts | Added index signature to `IUserProfile` | 2026-02-26 |
+| R4 | `detectPersona` 247 lines | Extracted 6 helpers → 91 lines | 2026-02-26 |
+| R4 | `handleGeneralQuery` 276 lines | Extracted 5 helpers → 133 lines | 2026-02-26 |
 
 ---
 

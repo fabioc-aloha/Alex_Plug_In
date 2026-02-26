@@ -1,25 +1,24 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/src/chat/tools.ts"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772123664069
+      "scannedAt": 1772124338562
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1772123664069
+      "scannedAt": 1772124338562
     },
     {
       "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
       "todoCount": 1,
-      "scannedAt": 1772123664069
+      "scannedAt": 1772124338562
     }
   ],
-  "lastUpdated": 1772123664069
+  "lastUpdated": 1772124338562
 }
