@@ -61,6 +61,13 @@
       "strength": 0.8,
       "when": "Checking version badge consistency and configuration sync",
       "yields": "Version badge synchronization patterns, multi-file configuration validation"
+    },
+    {
+      "target": ".github/instructions/roadmap-maintenance.instructions.md",
+      "type": "coordinates",
+      "strength": 0.8,
+      "when": "Post-publish roadmap version table update",
+      "yields": "Roadmap current/next version alignment — learned from v5.9.11 version drift catch"
     }
   ],
   "activationContexts": [
