@@ -1,6 +1,6 @@
-# Alex v5.9.9 — Test Guide
+# Alex v5.9.11 — Test Guide
 
-**Date**: 2026-02-24
+**Date**: 2026-02-26
 **Installation**: Run `npm run package` from `platforms/vscode-extension/`, then install the generated `.vsix` locally before testing.
 
 > ⚠️ **Safety**: Never test in this Master Alex workspace. Use a sandbox folder or the `Extensions` workspace.
@@ -12,8 +12,8 @@
 ```sh
 cd platforms/vscode-extension
 npm run compile        # verify 0 errors first
-npm run package        # generates alex-cognitive-architecture-5.9.9.vsix
-code --install-extension alex-cognitive-architecture-5.9.9.vsix
+npm run package        # generates alex-cognitive-architecture-5.9.11.vsix
+code --install-extension alex-cognitive-architecture-5.9.11.vsix
 ```
 
 ---
@@ -26,7 +26,7 @@ code --install-extension alex-cognitive-architecture-5.9.9.vsix
 |---|------|----------|------|
 | 1.1 | Open any workspace with the extension installed | Welcome sidebar appears in Activity Bar with Alex avatar | ✅ |
 | 1.2 | Click the Alex icon in Activity Bar | Welcome panel renders: version number, status, quick-action buttons | ✅ |
-| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v5.9.9, active workspace path | ✅ |
+| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v5.9.11, active workspace path | ✅ |
 
 ---
 
@@ -47,7 +47,7 @@ code --install-extension alex-cognitive-architecture-5.9.9.vsix
 
 ---
 
-### 3. Agent Modes (v5.9.9 — `agents:` frontmatter)
+### 3. Agent Modes (v5.9.11 — `agents:` frontmatter)
 
 Open Copilot Chat agent picker and test each specialist:
 
@@ -64,7 +64,7 @@ Open Copilot Chat agent picker and test each specialist:
 
 ---
 
-### 4. Skill Frontmatter Gating (v5.9.9)
+### 4. Skill Frontmatter Gating (v5.9.11)
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
@@ -74,19 +74,19 @@ Open Copilot Chat agent picker and test each specialist:
 
 ---
 
-### 5. Quality Gate Hooks — `pre-tool-use.js` (v5.9.9)
+### 5. Quality Gate Hooks — `pre-tool-use.js` (v5.9.11)
 
 These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Development\Alex_Plug_In`).
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
 | 5.1 | In a Copilot agent session, edit any `.ts` file | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'` | ✅ |
-| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v5.9.9` | 👤 |
-| 5.3 | Revert package.json version to `5.9.9` | No drift warning on next publish attempt | 👤 |
+| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v5.9.11` | 👤 |
+| 5.3 | Revert package.json version to `5.9.11` | No drift warning on next publish attempt | 👤 |
 
 ---
 
-### 6. `.claude/` Compatibility Bridge (v5.9.9)
+### 6. `.claude/` Compatibility Bridge (v5.9.11)
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
@@ -96,7 +96,7 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 
 ---
 
-### 7. VS Code Settings — `agentCustomizationSkill` Disabled (v5.9.9)
+### 7. VS Code Settings — `agentCustomizationSkill` Disabled (v5.9.11)
 
 | # | Test | Expected | Pass |
 |---|------|----------|------|
@@ -131,7 +131,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 | # | Command | Expected | Pass |
 |---|---------|----------|------|
-| 10.1 | `Alex: Status` | Shows active workspace, version 5.9.9 | 👤 |
+| 10.1 | `Alex: Status` | Shows active workspace, version 5.9.11 | 👤 |
 | 10.2 | `Alex: Dream` | Opens chat with dream prompt pre-filled | 👤 |
 | 10.3 | `Alex: Self-Actualize` | Opens chat with self-actualization prompt | 👤 |
 | 10.4 | `Alex: Deep Brain QA` | Runs architecture validation | 👤 |
@@ -173,11 +173,11 @@ npm run compile           # TypeScript → dist/ (must exit 0)
 npm run package           # builds .vsix
 ```
 
-**Expected output**: `alex-cognitive-architecture-5.9.9.vsix` in `platforms/vscode-extension/`
+**Expected output**: `alex-cognitive-architecture-5.9.11.vsix` in `platforms/vscode-extension/`
 
 ```sh
 # Install locally
-code --install-extension platforms/vscode-extension/alex-cognitive-architecture-5.9.9.vsix
+code --install-extension platforms/vscode-extension/alex-cognitive-architecture-5.9.11.vsix
 # Reload VS Code window after install (Ctrl+Shift+P → "Developer: Reload Window")
 ```
 
@@ -194,8 +194,8 @@ code --install-extension platforms/vscode-extension/alex-cognitive-architecture-
 
 ---
 
-## Known Gaps (Not in 5.9.9 scope)
+## Known Gaps (Not in 5.9.11 scope)
 
 - MCP Apps synapse health renderer → deferred to v6.x
 - M365 Retrieval API → deferred to v6.x
-- Proposed API adoption (chatPromptFiles, lmConfiguration, chatOutputRenderer) → v5.9.10 (gated on VS Code promoting to stable)
+- Proposed API adoption (chatPromptFiles, lmConfiguration, chatOutputRenderer) → gated on VS Code promoting to stable

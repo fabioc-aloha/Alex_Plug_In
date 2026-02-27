@@ -809,13 +809,13 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (52 files)
+├── instructions/              # 📚 Procedural memory (55 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (34 files)
+├── prompts/                   # 📖 Episodic memory (35 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -833,7 +833,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (123 skills)
+├── skills/                    # 🎓 Portable domain expertise (124 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -1040,10 +1040,8 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** - v5.9.9 🚀 Platform Architecture Reinforcement
+**Alex Cognitive Architecture** — v5.9.11
 
 Built on 270+ academic sources
-
-© 2026 CorreaX • AI That Learns How to Learn
 
 © 2026 CorreaX • AI That Learns How to Learn

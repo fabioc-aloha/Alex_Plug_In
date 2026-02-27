@@ -1,6 +1,6 @@
 # Pre-Publishing Checklist
 
-**Last Updated**: February 15, 2026
+**Last Updated**: February 26, 2026
 
 Use this checklist before each release to ensure quality and consistency.
 
@@ -461,4 +461,4 @@ Select-String -Path platforms/github-copilot-web/.github/copilot-instructions.md
 
 ---
 
-Last updated: February 14, 2026 - v3.0.0 (added Multi-Heir Publishing)
+Last updated: February 26, 2026 - v3.1.0 (updated for v5.9.11 multi-heir workflow)

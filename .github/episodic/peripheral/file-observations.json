@@ -1,34 +1,37 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/episodic/peripheral/file-observations.json",
+    "CONTRIBUTING.md",
+    "PRE-PUBLISH-CHECKLIST.md",
+    "PUBLISHING.md",
+    "README.md",
+    "TEST-GUIDE.md",
+    "alex_docs/guides/TEST-ACTIVATION-PASS.md",
+    "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md",
+    "platforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.11.vsix",
-      "todoCount": 20,
-      "scannedAt": 1772156159230
+      "file": "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md",
+      "todoCount": 1,
+      "scannedAt": 1772158751522
     },
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.10.vsix",
-      "todoCount": 20,
-      "scannedAt": 1772156159230
+      "file": "platforms/vscode-extension/README.md",
+      "todoCount": 1,
+      "scannedAt": 1772158751522
     },
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 8,
-      "scannedAt": 1772156159230
+      "file": "TEST-GUIDE.md",
+      "todoCount": 1,
+      "scannedAt": 1772158751522
     },
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 8,
-      "scannedAt": 1772156159230
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1772156159230
+      "file": "README.md",
+      "todoCount": 1,
+      "scannedAt": 1772158751522
     }
   ],
-  "lastUpdated": 1772156159230
+  "lastUpdated": 1772158751522
 }
