@@ -95,19 +95,14 @@
         "icon": "$(sparkle)"
       },
       {
-        "command": "alex.syncKnowledge",
-        "title": "Alex: Sync Knowledge",
-        "icon": "$(sync)"
+        "command": "alex.meditate",
+        "title": "Alex: Meditate",
+        "icon": "$(heart)"
       },
       {
-        "command": "alex.pushKnowledge",
-        "title": "Alex: Push to Cloud",
-        "icon": "$(cloud-upload)"
-      },
-      {
-        "command": "alex.pullKnowledge",
-        "title": "Alex: Pull from Cloud",
-        "icon": "$(cloud-download)"
+        "command": "alex.northStar",
+        "title": "Alex: Define North Star",
+        "icon": "$(star-full)"
       },
       {
         "command": "alex.openDocs",
@@ -118,6 +113,11 @@
         "command": "alex.workingWithAlex",
         "title": "Alex: Working with Alex (Prompting Guide)",
         "icon": "$(mortar-board)"
+      },
+      {
+        "command": "alex.cognitiveLevels",
+        "title": "Alex: Cognitive Levels & Subscription Guide",
+        "icon": "$(layers)"
       },
       {
         "command": "alex.agentVsChat",
@@ -2107,9 +2107,10 @@
     "pretest": "npm run compile-tests && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
+    "quality-gate": "node scripts/quality-gate.cjs",
     "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies --allow-package-secrets github && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
     "dream": "tsx ../../.github/muscles/dream-cli.ts",
-    "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run package"
+    "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run quality-gate && npm run package"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",

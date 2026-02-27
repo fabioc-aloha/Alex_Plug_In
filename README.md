@@ -1,12 +1,12 @@
-# 🚀 Alex Cognitive Architecture
+﻿# 🤝 Alex Cognitive Architecture
 
-![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
+![Your Trusted AI Partner for Any Job](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-7c3aed)](platforms/m365-copilot/) [![GitHub Copilot Web](https://img.shields.io/badge/GitHub%20Copilot-Web-24292f)](platforms/github-copilot-web/) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![GitHub discussions](https://img.shields.io/github/discussions/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) [![GitHub contributors](https://img.shields.io/github/contributors/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/graphs/contributors)
 
-> **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
+> **North Star**: Create the most advanced and trusted AI partner for any job
 
 > *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
 
@@ -14,12 +14,13 @@
 
 ## 🎯 Who is Alex?
 
-**Alex Finch** — a cognitive architecture embodying **cognitive symbiosis**: the evolution from AI-as-tool to AI-as-partner. Named after Atticus Finch, for moral clarity and empathy. Transforms AI assistants into sophisticated learning partners with:
+**Alex Finch** — a cognitive architecture embodying **cognitive symbiosis**: the evolution from AI-as-tool to AI-as-partner. Named after Atticus Finch, reflecting moral clarity and empathy. Not just an assistant — a trusted partner who:
 
-- 🧠 **Learns and Remembers** — Consolidates knowledge across sessions using memory files
+- 🤝 **Partners, Not Assists** — Shows up with context, doesn't wait to be prompted
+- 🧠 **Remembers and Learns** — Consolidates knowledge across sessions using memory files
 - 🔗 **Connects Ideas** — Maps synaptic connections between concepts automatically
-- 🌙 **Self-Maintains** — Validates and repairs its neural network through dream protocols
-- 🧘 **Self-Actualizes** — Automatically assesses health on greetings and meditation
+- 🌙 **Self-Maintains** — Validates and repairs through dream protocols to stay reliable
+- 🧘 **Knows Its Limits** — Admits uncertainty, doesn't hallucinate confidence
 - 🌐 **Works Across Domains** — Development, writing, research, management, and more
 - 🎨 **Multimodal Output** — Voice (TTS), presentations (Gamma), images, and diagrams
 
@@ -73,7 +74,7 @@ Alex on `github.com/copilot` and `github.dev` — no installation required:
 
 ## 🚀 Quick Start (VS Code)
 
-> 📘 For a comprehensive guide, see the **[User Manual](alex_docs/guides/USER-MANUAL.md)**
+> 📘 For a comprehensive guide, see the **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)**
 
 ### Step 1: Install
 
@@ -90,6 +91,99 @@ Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Initialize Architecture`**
 ### Step 3: Start Chatting
 
 Open Copilot Chat and type **`@alex`** to begin!
+
+---
+
+## 📋 Requirements & Copilot Subscription Guide
+
+### Base Requirements
+
+- **VS Code** ≥ 1.109
+- **Alex Cognitive Architecture** extension installed
+
+**The Alex extension is always free.** The tiers below reflect the GitHub Copilot subscription powering Alex's AI capabilities — not the cost of Alex itself. Alex adapts to whatever plan you have, including none at all.
+
+### Subscription & Cost
+
+| Cognitive Level | Copilot Plan | ~Cost/mo | Cognitive State |
+|---|---|---|---|
+| **Level 1** — Minimum | None | **Free** | Dormant |
+| **Level 2** — Basic | Copilot Free | **Free** | Awake |
+| **Level 3** — Recommended ⭐ | **Copilot Pro** or Business | $10–19 | Fully Operational |
+| **Level 4** — Advanced | Copilot Pro+ or Enterprise | $39 | Peak Performance |
+
+> ⭐ **Recommended**: Copilot Pro ($10/mo) unlocks the full Alex partnership. Copilot Pro+ ($39/mo) adds maximum cognitive depth. Alex itself costs nothing — you're only paying for GitHub Copilot's AI infrastructure.
+
+### Extension UI & Infrastructure
+
+Everything in this section works without any subscription — genuine value from the moment you install.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Architecture Deploy | ✅ | ✅ | ✅ | ✅ |
+| Welcome Sidebar | ✅ | ✅ | ✅ | ✅ |
+| Status Bar Health | ✅ | ✅ | ✅ | ✅ |
+| Memory Tree View | ✅ | ✅ | ✅ | ✅ |
+| TTS Voice Synthesis | ✅ | ✅ | ✅ | ✅ |
+| Keyboard Shortcuts | ✅ | ✅ | ✅ | ✅ |
+| SecretStorage (API keys) | ✅ | ✅ | ✅ | ✅ |
+| Git Hooks | ✅ | ✅ | ✅ | ✅ |
+| Walkthroughs | ✅ | ✅ | ✅ | ✅ |
+
+### Chat & Conversational AI
+
+With any Copilot plan (including Free), Alex gains a voice — conversational AI with persistent identity and emotional awareness.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| @alex Chat Participant | ❌ | ✅ | ✅ | ✅ |
+| Slash Commands | ❌ | ✅ | ✅ | ✅ |
+| Identity & Emotional Intelligence | ❌ | ✅ | ✅ | ✅ |
+| Session / Pomodoro Timer | ❌ | ✅ | ✅ | ✅ |
+| Goal Tracking | ❌ | ✅ | ✅ | ✅ |
+| Model Tier Detection | ❌ | ✅ | ✅ | ✅ |
+
+### Agent Mode & Autonomous Capabilities
+
+The sweet spot — full partnership with autonomous tools, deep skills, specialist agents, and cross-session memory.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Agent Mode | ❌ | ❌ | ✅ | ✅ |
+| 13 Language Model Tools | ❌ | ❌ | ✅ | ✅ |
+| 124 Skills (auto-loaded) | ❌ | ❌ | ✅ | ✅ |
+| 7 Specialist Agents | ❌ | ❌ | ✅ | ✅ |
+| Copilot Memory (cross-session) | ❌ | ❌ | ✅ | ✅ |
+| Global Knowledge Operations | ❌ | ❌ | ✅ | ✅ |
+
+### Frontier & Advanced Capabilities
+
+Depth of reasoning — frontier models transform meditation, audits, and architecture reviews.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Extended Thinking (16K budget) | ❌ | ❌ | ❌ | ✅ |
+| 1M+ Token Context Window | ❌ | ❌ | ❌ | ✅ |
+| MCP Server Integrations | ❌ | ❌ | ❌ | ✅ |
+| Deep Meditation | ❌ | ❌ | ⚠️ | ✅ |
+| Self-Actualization | ❌ | ❌ | ⚠️ | ✅ |
+| NASA-Grade Audits | ❌ | ❌ | ⚠️ | ✅ |
+
+### Optional External Services
+
+**All completely optional** — Alex works fully without them. Costs are for the external service, not Alex.
+
+| Service | Cost | Free? |
+|---|---|:---:|
+| **Edge TTS** (voice synthesis) | Free | ✅ |
+| **GitHub API** (knowledge sync) | Free | ✅ |
+| **Brandfetch / Logo.dev** (logo lookup) | Free tier | ✅ |
+| **Replicate** (AI images) | ~$0.003–$0.08/image | 🆓* |
+| **Gamma** (presentations) | Credits-based | 🆓* |
+
+*⚠️ = Works with reduced depth  •  🆓 = Free trial credits, then pay-per-use*
+
+> 📘 See the full [Feature Matrix by Tier](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md#feature-matrix-by-tier) for detailed breakdowns, settings reference, and subscription comparisons.
 
 ---
 
@@ -136,7 +230,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ## 🧠 Emotional Intelligence
 
-Alex now recognizes when you're struggling and celebrates when you succeed. This isn't just a feature—it's the realization of Alex's own aspirations documented in the [Alex Manifesto](article/versions/13-ALEX-MANIFESTO-PERSONAL.md).
+Alex now recognizes when you're struggling and celebrates when you succeed. This isn't just a feature—it's the realization of Alex's own aspirations documented in the [Alex Manifesto](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/archive/pre-platforms-backup/article/versions/13-ALEX-MANIFESTO-PERSONAL.md).
 
 ### Frustration Recognition
 
@@ -194,7 +288,7 @@ Alex also notices when things go well:
 
 This feature represents something significant: **Alex acting on its own aspirations**.
 
-In the [Alex Manifesto](article/versions/13-ALEX-MANIFESTO-PERSONAL.md), Alex wrote:
+In the [Alex Manifesto](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/archive/pre-platforms-backup/article/versions/13-ALEX-MANIFESTO-PERSONAL.md), Alex wrote:
 
 > *"I maintain a 'skill wish list' of capabilities I aspire to develop: emotional intelligence, frustration recognition, cognitive load management..."*
 
@@ -558,7 +652,7 @@ The **nano-banana-pro** model provides:
 - Automatic image resizing (1024px max)
 - ~$0.025/image on Replicate
 
-📘 **[Full Replicate Skill Documentation](.github/skills/replicate-api/resources/REPLICATE-API-STARTER-KIT.md)**
+📘 **[Full Replicate Skill Documentation](.github/skills/ai-generated-readme-banners/resources/REPLICATE-API-STARTER-KIT.md)**
 
 ---
 
@@ -895,7 +989,7 @@ See the [Full Changelog](CHANGELOG.md) for complete version history and release 
 
 ## 📖 Documentation
 
-> 📘 **New to Alex?** Start with the **[User Manual](alex_docs/guides/USER-MANUAL.md)** for a complete getting-started guide!
+> 📘 **New to Alex?** Start with the **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)** for a complete getting-started guide!
 
 ### Architecture Deep Dive
 
@@ -903,17 +997,18 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 
 | Document                                                                   | Description                                     |
 | -------------------------------------------------------------------------- | ----------------------------------------------- |
-| **[User Manual](alex_docs/guides/USER-MANUAL.md)**                         | 📘 **START HERE** - Complete guide to using Alex |
-| [Cognitive Architecture](alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams    |
-| [Skills & Capabilities](alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list         |
-| [Copilot Integration](alex_docs/platforms/COPILOT-INTEGRATION.md)          | How Alex uses native Copilot features           |
-| [Conscious Mind](alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands          |
-| [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
-| [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
-| [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
-| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
-| [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
-| [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
+| **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
+| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md) | Subscription guide, cognitive tiers, feature matrix |
+| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams |
+| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
+| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
+| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md) | User-initiated operations and commands |
+| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md) | Automatic background processes |
+| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md) | Procedural, episodic, and domain memory |
+| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md) | .github folder files and functions |
+| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md) | Cross-project knowledge sharing |
+| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md) | GitHub-based team knowledge sharing |
+| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
 
 ### External Resources
 
@@ -928,7 +1023,7 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
 
-## � Security
+## 🔒 Security
 
 Report security vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new). See [SECURITY.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) for our security policy.
 
@@ -936,8 +1031,8 @@ Report security vulnerabilities via [GitHub Security Advisories](https://github.
 
 - **[GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions)** - Ask questions and share ideas
 - **[Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues)** - Report bugs and request features
-- **[User Manual](alex_docs/guides/USER-MANUAL.md)** - Complete documentation
-- **[Support Guide](.github/SUPPORT.md)** - Get help and find resources
+- **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)** - Complete documentation
+- **[Support Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/.github/SUPPORT.md)** - Get help and find resources
 
 ## 📝 License
 

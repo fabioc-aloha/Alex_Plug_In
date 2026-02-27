@@ -35,6 +35,15 @@
       "strength": 0.8,
       "bidirectional": true,
       "reason": "Automated accessibility testing validates WCAG compliance"
+    },
+    {
+      "target": ".github/instructions/automated-quality-gates.instructions.md",
+      "type": "implements",
+      "strength": 0.9,
+      "bidirectional": true,
+      "reason": "Quality gates are static analysis tests wired into the build pipeline",
+      "when": "Adding new quality gates or reviewing test coverage",
+      "yields": "Automated regression prevention through build-time validation"
     }
   ],
   "triggers": [

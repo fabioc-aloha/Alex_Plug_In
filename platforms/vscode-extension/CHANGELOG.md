@@ -23,7 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **NASA R1 compliance: Bounded recursion** — `findMdFilesRecursive()` in synapse-core.ts now has `maxDepth` parameter (default: 10) preventing stack overflow from deeply nested directories
+- **NASA R1 compliance: Bounded walk functions** — `collectSystemFiles.walk()` and `getFolderSize.walk()` in upgrade.ts now have `MAX_WALK_DEPTH=10` depth parameter preventing unbounded directory traversal
 - **NASA R2 compliance: Fixed loop bounds** — Upgrade dialog loop in upgrade.ts now has `MAX_DIALOG_ITERATIONS` safety limit (100)
+- **NASA R2 compliance: Text chunking bounds** — `splitTextIntoChunks()` in ttsService.ts now has `MAX_ITERATIONS` counter preventing potential infinite loops on malformed input
+- **NASA R5 compliance: Entry assertions** — Added `nasaAssert()` calls to `resolveWebviewView()` in welcomeView.ts validating webviewView and extensionUri
+- **Full codebase NASA audit** — All 72 TypeScript files audited against NASA Power of 10 rules; 3 violations found and fixed, 10 functions documented as acknowledged exceptions with architectural justifications
+- **Testing strategies NASA integration** — testing-strategies SKILL.md updated with bounded behavior testing patterns (R1/R2/R3), assertion coverage testing (R5), and critical path coverage targets
+- **Code review NASA integration** — code-review SKILL.md updated with mission-critical review section: blocking violations (R1-R3), high priority (R4/R5/R8), medium priority (R6/R7/R9/R10)
+- **Heir sync restored** — 3 missing skills, 1 instruction, 1 prompt synced to vscode-extension heir (124/124 skills aligned)
 - **fs-extra → vscode.workspace.fs migration** — Per ADR-008 (Workspace File API Strategy), migrated all workspace-scoped file operations from Node.js `fs-extra` to VS Code's native `vscode.workspace.fs` API for virtual filesystem compatibility (SSH, WSL, Codespaces, containers). Files migrated:
   - `promptEngine.ts` — Brain file reading
   - `activeContextManager.ts` — Protected marker and instructions reading

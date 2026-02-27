@@ -35,6 +35,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as os from 'os';
 import * as workspaceFs from '../shared/workspaceFs';
+import { assertBounded, assertDefined, assertNonEmpty } from '../shared/assertions';
 
 // ============================================================================
 // CONFIDENCE THRESHOLDS & LIMITS
@@ -1465,6 +1466,7 @@ export async function detectProjectTechnologies(workspaceRoot: string): Promise<
 /**
  * Detect persona and update user profile with project-specific context.
  * Called during upgrade to help identify the right persona for this project.
+ * NASA R5: Runtime assertions for input validation
  * 
  * @param workspaceRoot - Path to the workspace root
  * @returns The detected persona result, or null if detection failed
@@ -1473,6 +1475,10 @@ export async function detectAndUpdateProjectPersona(
     workspaceRoot: string,
     options?: { updateSlots?: boolean }
 ): Promise<PersonaDetectionResult | null> {
+    // NASA R5: Validate required input
+    assertDefined(workspaceRoot, 'workspaceRoot is required for persona detection');
+    assertNonEmpty(workspaceRoot, 'workspaceRoot');
+    
     const shouldUpdateSlots = options?.updateSlots ?? true;
     // Load existing profile
     const profile = await loadUserProfile(workspaceRoot) as ExtendedUserProfile | null;

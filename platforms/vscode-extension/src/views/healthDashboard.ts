@@ -12,6 +12,8 @@ import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
+import { getPersonaAccent } from '../shared/skillConstants';
+import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
 
 /**
  * Health Dashboard - Rich webview visualization of Alex cognitive architecture
@@ -109,11 +111,16 @@ let extensionUri: vscode.Uri | undefined;
 
 /**
  * Refresh dashboard content
+ * 
+ * NASA R5: Critical function with assertion density
  */
 async function refreshDashboard(): Promise<void> {
     if (!currentPanel || !extensionUri) {
         return;
     }
+    
+    // NASA R5: Validate panel state
+    nasaAssert(currentPanel.webview !== undefined, 'Webview must be defined during refresh');
     
     try {
         const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -151,26 +158,7 @@ async function refreshDashboard(): Promise<void> {
     }
 }
 
-/**
- * Persona accent color mapping
- */
-const personaAccentMap: Record<string, string> = {
-    'developer': 'var(--vscode-charts-blue)',
-    'academic': '#2aa198',
-    'researcher': '#2aa198',
-    'technical-writer': 'var(--vscode-charts-green)',
-    'architect': 'var(--vscode-charts-orange, #f0883e)',
-    'data-engineer': 'var(--vscode-charts-orange, #f0883e)',
-    'devops': 'var(--vscode-charts-green)',
-    'content-creator': 'var(--vscode-charts-yellow)',
-    'fiction-writer': '#2aa198',
-    'project-manager': 'var(--vscode-charts-blue)',
-    'security': 'var(--vscode-charts-red)',
-    'student': '#2aa198',
-    'job-seeker': 'var(--vscode-charts-green)',
-    'presenter': 'var(--vscode-charts-yellow)',
-    'power-user': 'var(--vscode-charts-blue)'
-};
+// Persona accent colors now imported from shared/skillConstants.ts (DRY)
 
 /**
  * Generate the webview HTML content
@@ -185,12 +173,17 @@ async function getWebviewContent(
     version: string | null,
     personaResult: PersonaDetectionResult | null
 ): Promise<string> {
+    // NASA R5: Entry point assertions
+    nasaAssert(webview !== undefined, 'getWebviewContent: webview must be defined');
+    nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
+    nasaAssertBounded(health.totalSynapses, 0, 100000, 'health.totalSynapses');
+
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthColor = isHealthy ? '#4CAF50' : (health.brokenSynapses > 5 ? '#F44336' : '#FF9800');
     
-    // Get persona accent color
+    // Get persona accent color (from shared constants)
     const persona = personaResult?.persona;
-    const personaAccent = persona ? personaAccentMap[persona.id] || '#2aa198' : '#2aa198';
+    const personaAccent = getPersonaAccent(persona?.id);
     
     // Logo URI
     const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));

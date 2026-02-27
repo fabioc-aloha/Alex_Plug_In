@@ -1,6 +1,5 @@
 ---
 description: "Run brain QA — structural script + semantic/logic/code/architectural review"
-mode: agent
 agent: Alex
 ---
 

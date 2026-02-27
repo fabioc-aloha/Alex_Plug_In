@@ -364,18 +364,25 @@ async function createFreshManifest(extensionPath: string, rootPath: string): Pro
 
 /**
  * Collect all system files for manifest
+ * NASA R1: Bounded recursion with maxDepth
  */
+const MAX_WALK_DEPTH = 10;
+
 async function collectSystemFiles(dir: string): Promise<string[]> {
   const files: string[] = [];
 
-  async function walk(currentDir: string) {
+  async function walk(currentDir: string, depth: number = 0) {
+    if (depth >= MAX_WALK_DEPTH) {
+      console.warn(`[NASA] Max walk depth reached at: ${currentDir}`);
+      return;
+    }
     if (!await fs.pathExists(currentDir)) {return;}
     
     const entries = await fs.readdir(currentDir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
       if (entry.isDirectory()) {
-        await walk(fullPath);
+        await walk(fullPath, depth + 1);
       } else if (entry.name.endsWith('.md') || entry.name.endsWith('.json')) {
         files.push(fullPath);
       }
@@ -528,16 +535,21 @@ async function runGapAnalysis(
 
 /**
  * Calculate folder size in KB
+ * NASA R1: Bounded recursion with maxDepth
  */
 async function getFolderSize(folderPath: string): Promise<number> {
   let totalSize = 0;
 
-  async function walk(dir: string) {
+  async function walk(dir: string, depth: number = 0) {
+    if (depth >= MAX_WALK_DEPTH) {
+      console.warn(`[NASA] Max walk depth reached at: ${dir}`);
+      return;
+    }
     const entries = await fs.readdir(dir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        await walk(fullPath);
+        await walk(fullPath, depth + 1);
       } else {
         const stats = await fs.stat(fullPath);
         totalSize += stats.size;

@@ -1,12 +1,12 @@
-# 🚀 Alex Cognitive Architecture - VS Code Extension
+﻿# 🤝 Alex Cognitive Architecture - VS Code Extension
 
-![Take Your CODE to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
+![Your Trusted AI Partner for Any Job](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Version](https://img.shields.io/badge/version-5.8.2-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0078d4)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues)
 
-> **Strap a Rocket to Your Back** — Take Your Code, Research, Learning & Career to New Heights
+> **North Star**: Create the most advanced and trusted AI partner for any job
 
 > *"You will spend less time writing syntax and debugging, and more time commanding the computer to execute complex intent."* — Sam Altman, January 2026
 
@@ -14,11 +14,11 @@
 
 ## 💡 Why Alex? (You Already Have GitHub Copilot)
 
-You don't need training wheels. You need thrust.
+You need a partner, not just a tool.
 
-Alex doesn't replace GitHub Copilot — **Alex makes GitHub Copilot remember**.
+Alex doesn't replace GitHub Copilot — **Alex gives GitHub Copilot memory, consistency, and trust**.
 
-### The Problem
+### The Trust Gap
 
 GitHub Copilot is brilliant but stateless. Every project starts from scratch. It doesn't know:
 - Your coding patterns from last project
@@ -26,22 +26,22 @@ GitHub Copilot is brilliant but stateless. Every project starts from scratch. It
 - What worked (and what failed) across your repos
 - The skills you've been building for months
 
-### The Solution
+### The Partnership Solution
 
-Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, reusable skills, and cross-project knowledge.
+Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, earned trust, and cross-project partnership.
 
 ### Comparison: GitHub Copilot vs GitHub Copilot + Alex
 
 | Capability           | GitHub Copilot Alone       | GitHub Copilot + Alex                        |
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
-| **Skills**           | You re-prompt from scratch | 116 pre-built skills, inheritable            |
+| **Trust**            | Rebuild context every time | Consistency through shared history           |
+| **Skills**           | You re-prompt from scratch | 124 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
-| **Customization**    | Generic responses          | User profile + persona detection             |
+| **Honesty**          | Generic confidence         | Admits uncertainty, knows its limits         |
 | **Architecture**     | None                       | Full cognitive architecture with inheritance |
-| **MS Graph**         | Not integrated             | Calendar, mail, people context               |
 
 ### What Alex Adds in Practice
 
@@ -52,32 +52,32 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | "Remember this trick"     | ❌ Cannot persist        | "Saved to Global Knowledge. Available in all your projects."            |
 | "Prep for standup"        | ❌ No calendar           | "You have 3 meetings today. Last week you discussed the API migration." |
 
-### Who Should Install Alex?
+### Who Should Partner with Alex?
 
-| Install If...                       | Skip If...                          |
+| Partner If...                       | Skip If...                          |
 | ----------------------------------- | ----------------------------------- |
-| You want GitHub Copilot with memory | You prefer starting fresh each time |
-| You work across multiple projects   | Single-repo transactional work      |
+| You want an AI that remembers | You prefer starting fresh each time |
+| You value trust and consistency   | Single-repo transactional work      |
 | You build reusable patterns         | No interest in skill libraries      |
-| You value open-source inspection    | Black-box tools are fine            |
+| You want open-source transparency    | Black-box tools are fine            |
 | You want AI that grows with you     | Generic assistant is sufficient     |
 
-### The Bottom Line
+### The Partnership Difference
 
 **GitHub Copilot = Powerful autocomplete**
-**GitHub Copilot + Alex = Your rocket strapped to your back**
+**GitHub Copilot + Alex = Your trusted AI partner**
 
-Alex isn't competing with GitHub Copilot. Alex is the propulsion system that compounds your velocity.
+Alex isn't competing with GitHub Copilot. Alex transforms occasional assistance into genuine partnership — one that remembers, learns, and earns trust.
 
 ---
 
-## 🎯 Take Your [NOUN] to New Heights
+## 🎯 Your Partner for Any Job
 
-Alex accelerates whatever you're building. Pick your trajectory:
+Alex adapts to whatever you're building. Find your workflow:
 
 | You Are              | Your Pain                                          | Alex Gives You                                                            |
 | -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 117 skills remember your architecture.           |
+| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 124 skills remember your architecture.           |
 | **Researcher**       | Literature scattered, hypothesis drift             | Hypothesis → publication, accelerated. Cross-project knowledge compounds. |
 | **Grad Student**     | Thesis overwhelm, advisor context gaps             | Literature review on autopilot. Your writing remembers your research.     |
 | **Technical Writer** | Docs fall behind code, style drift                 | Docs that write themselves. Consistent voice across projects.             |
@@ -89,18 +89,18 @@ Alex accelerates whatever you're building. Pick your trajectory:
 
 | Capability                | What It Means                                   |
 | ------------------------- | ----------------------------------------------- |
-| **117 Skills**            | Pre-built propulsion. Don't reinvent prompts.   |
-| **Cross-Project Memory**  | No refueling between launches. Knowledge flows. |
-| **Build Your Own Skills** | Custom boosters for your workflow.              |
-| **Open Source**           | Inspect every component. No black boxes.        |
+| **124 Skills**            | Proven capabilities. Don't reinvent prompts.   |
+| **Cross-Project Memory**  | No re-explaining. Knowledge persists.          |
+| **Build Your Own Skills** | Custom expertise for your workflow.            |
+| **Open Source**           | Inspect every component. Trust through transparency. |
 
-### The Rocket Ship Effect
+### The Partnership Effect
 
-> *"You have a thought and you can just do it. That's like having a rocket ship strapped to your back."*
+> *"Partner, not tool. Partner, not assistant."* — North Star
 
 Alex turns friction into flow:
 - **Before**: Explain context → Prompt → Get result → Re-explain next time
-- **After**: Thought → Result → *Knowledge compounds*
+- **After**: Thought → Result → *Trust compounds*
 
 ---
 
@@ -146,6 +146,88 @@ Alex on `github.com/copilot` and `github.dev` — no installation required:
 - No extension, no compute cost, no setup
 
 📘 **[GitHub Copilot Web Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/github-copilot-web)**
+
+---
+
+## 📋 Requirements & Pricing
+
+### Base Requirements
+
+- **VS Code** ≥ 1.109
+- **Alex Cognitive Architecture** extension installed (free)
+
+**The Alex extension is always free.** The tiers below reflect the GitHub Copilot subscription powering Alex's AI capabilities — not the cost of Alex itself.
+
+### Subscription & Cost
+
+| Cognitive Level | Copilot Plan | ~Cost/mo | Cognitive State |
+|---|---|---|---|
+| **Minimum** | None | **Free** | Dormant |
+| **Basic** | Copilot Free | **Free** | Awake |
+| **Recommended** ⭐ | Copilot Pro / Business | $10–19 | Fully Operational |
+| **Advanced** | Copilot Pro+ / Enterprise | $39 | Peak Performance |
+
+> ⭐ **Recommended**: Copilot Pro ($10/mo) unlocks the full Alex partnership. Alex itself is free.
+
+### Extension UI & Infrastructure
+
+Works without any subscription — genuine value from the moment you install.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Architecture Deploy | ✅ | ✅ | ✅ | ✅ |
+| Welcome Sidebar | ✅ | ✅ | ✅ | ✅ |
+| Status Bar / Memory Tree | ✅ | ✅ | ✅ | ✅ |
+| TTS Voice Synthesis | ✅ | ✅ | ✅ | ✅ |
+| SecretStorage / Git Hooks | ✅ | ✅ | ✅ | ✅ |
+| Walkthroughs | ✅ | ✅ | ✅ | ✅ |
+
+### Chat & Conversational AI
+
+With any Copilot plan (including Free), Alex gains conversational AI with persistent identity.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| @alex Chat Participant | ❌ | ✅ | ✅ | ✅ |
+| Slash Commands | ❌ | ✅ | ✅ | ✅ |
+| Identity & Emotional Intelligence | ❌ | ✅ | ✅ | ✅ |
+| Session / Goal Tracking | ❌ | ✅ | ✅ | ✅ |
+
+### Agent Mode & Autonomous Capabilities
+
+Full partnership — autonomous tools, deep skills, specialist agents, cross-session memory.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Agent Mode | ❌ | ❌ | ✅ | ✅ |
+| 13 Language Model Tools | ❌ | ❌ | ✅ | ✅ |
+| 124 Skills / 7 Agents | ❌ | ❌ | ✅ | ✅ |
+| Copilot Memory | ❌ | ❌ | ✅ | ✅ |
+| Global Knowledge | ❌ | ❌ | ✅ | ✅ |
+
+### Frontier & Advanced Capabilities
+
+Depth of reasoning — frontier models for meditation, audits, and architecture.
+
+| Feature | Minimum | Basic | Recommended | Advanced |
+|---|:---:|:---:|:---:|:---:|
+| Extended Thinking / 1M+ Context | ❌ | ❌ | ❌ | ✅ |
+| MCP Server Integrations | ❌ | ❌ | ❌ | ✅ |
+| Deep Meditation / Self-Actualization | ❌ | ❌ | ⚠️ | ✅ |
+| NASA-Grade Audits | ❌ | ❌ | ⚠️ | ✅ |
+
+### Optional External Services
+
+**All completely optional** — Alex works fully without them.
+
+| Service | Cost | Free? |
+|---|---|:---:|
+| **Edge TTS** / **GitHub API** | Free | ✅ |
+| **Brandfetch** / **Logo.dev** | Free tier | ✅ |
+| **Replicate** (AI images) | ~$0.003–$0.08/image | 🆓* |
+| **Gamma** (presentations) | Credits-based | 🆓* |
+
+*⚠️ = Works with reduced depth  •  🆓 = Free trial credits, then pay-per-use*
 
 ---
 
@@ -199,7 +281,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | Category          | Highlights                                                                     |
 | ----------------- | ------------------------------------------------------------------------------ |
 | **Chat & Agents** | `@alex` participant, 29 slash commands, 12 LM tools, 7 custom agents           |
-| **Intelligence**  | 117 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence**  | 124 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
 | **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
 
@@ -808,7 +890,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (117 skills)
+├── skills/                    # 🎓 Portable domain expertise (124 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -1007,7 +1089,7 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
 
-## � Security
+## 🔒 Security
 
 Report security vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new). See [SECURITY.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) for our security policy.
 
@@ -1023,10 +1105,8 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** - v5.7.1 🚀 Enhanced Cognitive Network with Unified Consciousness Integration
+**Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job 🚀
 
 Built on 270+ academic sources
-
-© 2026 CorreaX • AI That Learns How to Learn
 
 © 2026 CorreaX • AI That Learns How to Learn

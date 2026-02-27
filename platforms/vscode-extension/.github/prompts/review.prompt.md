@@ -1,6 +1,5 @@
 ---
 description: Perform epistemic code review with confidence calibration
-mode: agent
 agent: Alex
 ---
 

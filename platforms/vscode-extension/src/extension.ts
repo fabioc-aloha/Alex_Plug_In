@@ -57,6 +57,7 @@ import {
   registerStreakProvider,
 } from "./shared/healthCheck";
 import { isWorkspaceProtected, getLanguageIdFromPath, openChatPanel } from "./shared/utils";
+import { requireCognitiveLevel, detectCognitiveLevel, invalidateCognitiveLevelCache } from "./shared/cognitiveTier";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
 import { registerMemoryDashboard } from "./views/memoryDashboard";
@@ -270,6 +271,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   let dreamDisposable = vscode.commands.registerCommand(
     "alex.dream",
     async () => {
+      if (!(await requireCognitiveLevel('alex.dream'))) { return; }
       const done = telemetry.logTimed("command", "dream");
       await withOperationLock("Dream Protocol", async () => {
         try {
@@ -405,6 +407,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   let selfActualizeDisposable = vscode.commands.registerCommand(
     "alex.selfActualize",
     async () => {
+      if (!(await requireCognitiveLevel('alex.selfActualize'))) { return; }
       const done = telemetry.logTimed("command", "self_actualize");
       await withOperationLock("Self-Actualization", async () => {
         try {
@@ -449,10 +452,22 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const meditateDisposable = vscode.commands.registerCommand(
     "alex.meditate",
     async () => {
+      if (!(await requireCognitiveLevel('alex.meditate'))) { return; }
       await openChatPanel("/meditate");
     },
   );
   context.subscriptions.push(meditateDisposable);
+
+  // North Star command - opens chat with /northstar prompt for vision definition
+  const northStarDisposable = vscode.commands.registerCommand(
+    "alex.northStar",
+    async () => {
+      if (!(await requireCognitiveLevel('alex.northStar'))) { return; }
+      telemetry.log("command", "north_star");
+      await openChatPanel("/northstar");
+    },
+  );
+  context.subscriptions.push(northStarDisposable);
 
   // Session timer commands
   initializeSessionStatusBar(context);
@@ -527,6 +542,25 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
         context.extensionUri,
         "alex_docs",
         "WORKING-WITH-ALEX.md",
+      );
+      try {
+        await vscode.commands.executeCommand("markdown.showPreview", guidePath);
+      } catch {
+        const doc = await vscode.workspace.openTextDocument(guidePath);
+        await vscode.window.showTextDocument(doc);
+      }
+    },
+  );
+
+  // Cognitive Levels & Subscription Guide
+  const cognitiveLevelsDisposable = vscode.commands.registerCommand(
+    "alex.cognitiveLevels",
+    async () => {
+      const guidePath = vscode.Uri.joinPath(
+        context.extensionUri,
+        "alex_docs",
+        "architecture",
+        "VSCODE-BRAIN-INTEGRATION.md",
       );
       try {
         await vscode.commands.executeCommand("markdown.showPreview", guidePath);
@@ -869,6 +903,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const runAuditDisposable = vscode.commands.registerCommand(
     "alex.runAudit",
     async () => {
+      if (!(await requireCognitiveLevel('alex.runAudit'))) { return; }
       const endLog = telemetry.logTimed("command", "run_audit");
       try {
         // Show audit options - generic for any project type
@@ -918,6 +953,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const releasePreflightDisposable = vscode.commands.registerCommand(
     "alex.releasePreflight",
     async () => {
+      if (!(await requireCognitiveLevel('alex.releasePreflight'))) { return; }
       const endLog = telemetry.logTimed("command", "release_preflight");
       try {
         const preflightChecks = [
@@ -960,6 +996,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const codeReviewDisposable = vscode.commands.registerCommand(
     "alex.codeReview",
     async (uri?: vscode.Uri) => {
+      if (!(await requireCognitiveLevel('alex.codeReview'))) { return; }
       const endLog = telemetry.logTimed("command", "code_review");
       try {
         let selectedText = '';
@@ -1012,6 +1049,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const debugThisDisposable = vscode.commands.registerCommand(
     "alex.debugThis",
     async (uri?: vscode.Uri) => {
+      if (!(await requireCognitiveLevel('alex.debugThis'))) { return; }
       const endLog = telemetry.logTimed("command", "debug_this");
       try {
         let selectedText = '';
@@ -1072,6 +1110,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   const rubberDuckDisposable = vscode.commands.registerCommand(
     "alex.rubberDuck",
     async () => {
+      if (!(await requireCognitiveLevel('alex.rubberDuck'))) { return; }
       const endLog = telemetry.logTimed("command", "rubber_duck");
       try {
         // Get optional context from selection
@@ -2583,6 +2622,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
   const generateTestsDisposable = vscode.commands.registerCommand(
     "alex.generateTests",
     async (uri?: vscode.Uri) => {
+      if (!(await requireCognitiveLevel('alex.generateTests'))) { return; }
       const endLog = telemetry.logTimed("command", "generate_tests");
       try {
         let selectedText = '';
@@ -3084,6 +3124,14 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     if (e.affectsConfiguration('alex.m365')) {
       // Silent - no action needed
     }
+    // Invalidate cognitive tier cache when relevant settings change
+    if (e.affectsConfiguration('chat.agent') ||
+        e.affectsConfiguration('chat.extendedThinking') ||
+        e.affectsConfiguration('chat.mcp') ||
+        e.affectsConfiguration('claude-opus') ||
+        e.affectsConfiguration('github.copilot.chat')) {
+      invalidateCognitiveLevelCache();
+    }
   });
   context.subscriptions.push(configChangeListener);
 
@@ -3102,6 +3150,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   context.subscriptions.push(sessionActionsDisposable);
   context.subscriptions.push(openDocsDisposable);
   context.subscriptions.push(workingWithAlexDisposable);
+  context.subscriptions.push(cognitiveLevelsDisposable);
   context.subscriptions.push(agentVsChatDisposable);
   context.subscriptions.push(showStatusDisposable);
   context.subscriptions.push(setupEnvDisposable);
@@ -3150,6 +3199,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   const inheritSkillDisposable = vscode.commands.registerCommand(
     "alex.inheritSkillFromGlobal",
     async () => {
+      if (!(await requireCognitiveLevel('alex.inheritSkillFromGlobal'))) { return; }
       const endLog = telemetry.logTimed("command", "inherit_skill_from_global");
       try {
         await inheritSkillFromGlobal();
@@ -3165,6 +3215,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   const proposeSkillDisposable = vscode.commands.registerCommand(
     "alex.proposeSkillToGlobal",
     async () => {
+      if (!(await requireCognitiveLevel('alex.proposeSkillToGlobal'))) { return; }
       const endLog = telemetry.logTimed("command", "propose_skill_to_global");
       try {
         await proposeSkillToGlobal();
@@ -3209,6 +3260,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
   const reviewPRDisposable = vscode.commands.registerCommand(
     "alex.reviewPR",
     async () => {
+      if (!(await requireCognitiveLevel('alex.reviewPR'))) { return; }
       const endLog = telemetry.logTimed("command", "review_pr");
       try {
         await reviewPullRequest();

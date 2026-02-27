@@ -338,23 +338,43 @@ Before committing code in mission-critical projects, verify:
 
 ## Alex Extension Compliance Status
 
-**Last Audit**: 2026-02-26 (v5.9.10 NASA Edition)
+**Last Audit**: 2026-02-26 (v5.9.11 Full Codebase Audit - 72 TypeScript files)
 
 ### ✅ Compliant
 
 | Rule | Status | Notes |
 |------|--------|-------|
-| R1 | ✅ Fixed | `findMdFilesRecursive` bounded with `maxDepth=10` |
-| R2 | ✅ Fixed | Upgrade dialog loop bounded with `MAX_DIALOG_ITERATIONS=100` |
+| R1 | ✅ Fixed | All recursive functions bounded: `findMdFilesRecursive`, `collectSystemFiles.walk`, `getFolderSize.walk`, `walkDir` |
+| R2 | ✅ Fixed | All while loops bounded: upgrade dialog, TTS text chunking |
 | R3 | ✅ OK | Array pushes bounded by external constraints (file counts) |
-| R6 | ✅ OK | Consistent use of `const` |
+| R5 | ✅ Added | `nasaAssert()` + `assertDefined()` utilities; assertions in view entry points, chat handler, tools, synapse-core |
+| R6 | ✅ OK | Consistent use of `const`; DRY constants extracted to modules |
+| R8 | ✅ OK | No nesting >4 levels found; complex logic extracted to helpers |
 | R9 | ✅ OK | Optional chaining used throughout |
 | R10 | ✅ OK | `strict: true` in tsconfig |
+
+### 🆕 v5.9.11 Improvements (2026-02-26)
+
+| Rule | Change | Files Affected |
+|------|--------|----------------|
+| R1 | Added `MAX_WALK_DEPTH=10` bounds to recursive walk functions | `upgrade.ts` |
+| R2 | Added `MAX_ITERATIONS` counter to text chunking loop | `ttsService.ts` |
+| R3 (DRY) | Extracted `SKILL_DISPLAY_NAMES` to shared constant | `shared/skillConstants.ts` |
+| R3 (DRY) | Extracted `PERSONA_ACCENT_COLORS` and `PERSONA_HEX_COLORS` | `shared/skillConstants.ts` |
+| R3 (DRY) | Created `webviewStyles.ts` for shared CSS generation | `shared/webviewStyles.ts` |
+| R5 | Created `nasaAssert.ts` utility module | `shared/nasaAssert.ts` |
+| R5 | Added entry assertions to `refresh()` in views | `welcomeView.ts`, `healthDashboard.ts`, `memoryDashboard.ts` |
+| R5 | Added entry assertions to `_getHtmlContent()` | `welcomeView.ts`, `healthDashboard.ts`, `memoryDashboard.ts` |
+| R5 | Added entry assertions to `resolveWebviewView()` | `welcomeView.ts` |
+| R6 | Imported shared constants, removed inline duplicates | All view files |
 
 ### 🟠 Acknowledged Exceptions
 
 | Rule | File | Function | Lines | Justification |
 |------|------|----------|-------|---------------|
+| R4 | extension.ts | `activateInternal` | ~3100 | VS Code activation pattern: sequential command registration; inherently large single entry point |
+| R4 | welcomeView.ts | `_getHtmlContent` | ~1090 | HTML template generator with ~740 lines inline CSS (CSP-required); cohesive single-template pattern |
+| R4 | participant.ts | `handleGeneralQuery` | 130 | Chat handler with 5 extracted helpers (down from 276); orchestrates LLM interaction |
 | R4 | avatarMappings.ts | `resolveAvatar` | 104 | 8-priority cascade with early returns; cohesion preserved |
 | R4 | globalKnowledge.ts | `fetchFromGitHub` | 110 | HTTP lifecycle: cache→auth→request→redirect→error; must stay together |
 | R4 | globalKnowledge.ts | `detectGlobalKnowledgeRepo` | 94 | Multi-strategy detection cascade |
@@ -375,6 +395,12 @@ Before committing code in mission-critical projects, verify:
 
 | Rule | Issue | Resolution | Date |
 |------|-------|------------|------|
+| R1 | `collectSystemFiles.walk` unbounded | Added `depth` param with `MAX_WALK_DEPTH=10` | 2026-02-26 |
+| R1 | `getFolderSize.walk` unbounded | Added `depth` param with `MAX_WALK_DEPTH=10` | 2026-02-26 |
+| R2 | `splitTextIntoChunks` while loop | Added `MAX_ITERATIONS` counter | 2026-02-26 |
+| R5 | No assertion utility | Created `shared/nasaAssert.ts` | 2026-02-26 |
+| R3/DRY | Duplicate `skillNameMap` | Consolidated to `shared/skillConstants.ts` | 2026-02-26 |
+| R3/DRY | Duplicate `personaAccentMap` (3x) | Consolidated to `shared/skillConstants.ts` | 2026-02-26 |
 | R10 | `as any` (4x) in tools.ts | Added index signature to `IUserProfile` | 2026-02-26 |
 | R4 | `detectPersona` 247 lines | Extracted 6 helpers → 91 lines | 2026-02-26 |
 | R4 | `handleGeneralQuery` 276 lines | Extracted 5 helpers → 133 lines | 2026-02-26 |

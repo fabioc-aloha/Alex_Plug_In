@@ -2,7 +2,7 @@
 
 **Auto-loaded when**: Writing VS Code extension code — activation, commands, webviews, configuration, TreeView, or Agent Platform features
 **Domain**: VS Code extension development, API patterns, agent platform
-**Synapses**: [vscode-extension-patterns/SKILL.md](../skills/vscode-extension-patterns/SKILL.md)
+**Synapses**: [vscode-extension-patterns/SKILL.md](../skills/vscode-extension-patterns/SKILL.md) | [GI-replace-string-full-rewrite-duplication-bug](~/.alex/global-knowledge/insights/GI-replace-string-full-rewrite-duplication-bug-2026-02-25.md) (High, Warns, Forward) - "Use create_file for full rewrites — replace_string_in_file appends on large replacements causing TS duplicate errors"
 
 ---
 

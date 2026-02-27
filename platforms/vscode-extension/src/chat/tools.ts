@@ -6,6 +6,7 @@ import { validateUserProfile, safeJsonParse, createConfigBackup } from '../share
 import { getSessionState, PersistedSessionState } from '../commands/session';
 import { getGoalsSummary, LearningGoal } from '../commands/goals';
 import { createSynapseRegex } from '../shared/utils';
+import { assertDefined } from '../shared/assertions';
 
 /**
  * Tool input parameters interfaces
@@ -107,6 +108,9 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
         options: vscode.LanguageModelToolInvocationOptions<ISynapseHealthParams>,
         token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
+        // NASA R5: Validate inputs
+        assertDefined(options, 'Tool invocation options required');
+        assertDefined(token, 'CancellationToken required');
         
         // Update welcome view avatar — synapse health = reviewing state
         vscode.commands.executeCommand('alex.setCognitiveState', 'reviewing');

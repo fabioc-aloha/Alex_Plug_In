@@ -6,6 +6,8 @@ import { getGlobalKnowledgeSummary, detectGlobalKnowledgeRepo } from '../chat/gl
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
 import { openChatPanel } from '../shared/utils';
+import { getPersonaHexColor } from '../shared/skillConstants';
+import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
 
 /**
  * Memory Architecture Dashboard - Premium visualization of Alex's cognitive memory structure
@@ -123,11 +125,16 @@ export async function openMemoryDashboard(context: vscode.ExtensionContext): Pro
 
 /**
  * Refresh dashboard content
+ * 
+ * NASA R5: Critical function with assertion density
  */
 async function refreshDashboard(): Promise<void> {
     if (!currentPanel || !extensionUri) {
         return;
     }
+    
+    // NASA R5: Validate panel state
+    nasaAssert(currentPanel.webview !== undefined, 'Webview must be defined during refresh');
     
     try {
         const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -267,30 +274,10 @@ function getWorkingMemorySlots(): WorkingMemorySlot[] {
     ];
 }
 
-/**
- * Persona accent color mapping - use hex colors for Mermaid compatibility
- */
-const personaAccentMap: Record<string, string> = {
-    'developer': '#3794ff',      // VS Code blue
-    'academic': '#2aa198',       // Teal
-    'researcher': '#2aa198',     // Teal
-    'technical-writer': '#89d185', // VS Code green
-    'architect': '#f0883e',      // Orange
-    'data-engineer': '#f0883e',  // Orange
-    'devops': '#89d185',         // VS Code green
-    'content-creator': '#cca700', // VS Code yellow
-    'fiction-writer': '#2aa198', // Teal
-    'project-manager': '#3794ff', // VS Code blue
-    'security': '#f14c4c',       // VS Code red
-    'student': '#2aa198',        // Teal
-    'job-seeker': '#89d185',     // VS Code green
-    'presenter': '#cca700',      // VS Code yellow
-    'power-user': '#3794ff'      // VS Code blue
-};
+// Persona accent colors now imported from shared/skillConstants.ts (DRY)
+// Uses hex colors for Mermaid diagram compatibility
 
-/**
- * Generate webview content
- */
+/**\n * Generate webview content\n * \n * NASA R5: Critical function with assertion density\n */
 async function getWebviewContent(
     webview: vscode.Webview,
     extUri: vscode.Uri,
@@ -301,13 +288,19 @@ async function getWebviewContent(
     gkSummary: { totalPatterns: number; totalInsights: number } | null,
     personaResult: PersonaDetectionResult | null
 ): Promise<string> {
+    // NASA R5: Entry point assertions
+    nasaAssert(webview !== undefined, 'getWebviewContent: webview must be defined');
+    nasaAssertBounded(stats.instructions, 0, 10000, 'stats.instructions');
+    nasaAssertBounded(stats.skills, 0, 10000, 'stats.skills');
+    nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
+
     const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
     const isHealthy = health.status === HealthStatus.Healthy;
     const healthColor = isHealthy ? '#4CAF50' : '#FF9800';
     
-    // Get persona accent color
+    // Get persona accent color (from shared constants)
     const persona = personaResult?.persona;
-    const personaAccent = persona ? personaAccentMap[persona.id] || '#2aa198' : '#2aa198';
+    const personaAccent = getPersonaHexColor(persona?.id);
     
     const totalMemory = stats.instructions + stats.prompts + stats.skills + stats.episodic;
     const totalGK = stats.globalPatterns + stats.globalInsights;

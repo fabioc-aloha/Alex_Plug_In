@@ -124,7 +124,13 @@ if ($needsSync) {
     if (-not $Quiet) { Write-Host "`n  🔗 Forcing synapse sync..." -ForegroundColor Magenta }
     
     if (Test-Path "$heirBase\.github\skills") {
-        $masterOnlySkills = @("master-heir-management", "heir-sync-management")
+        # Dynamic detection: skills in master but not heir are master-only
+        $masterOnlySkills = @()
+        Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
+            if (-not (Test-Path "$heirBase\.github\skills\$($_.Name)")) {
+                $masterOnlySkills += $_.Name
+            }
+        }
         $heirSkills = Get-ChildItem "$heirBase\.github\skills" -Directory
         $synapseSyncCount = 0
         

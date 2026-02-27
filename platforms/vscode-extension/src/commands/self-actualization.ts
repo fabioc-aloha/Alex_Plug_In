@@ -575,7 +575,7 @@ async function createSessionRecord(
 - **Current Version**: ${report.versionConsistency.currentVersion}
 - **Outdated References Found**: ${report.versionConsistency.outdatedReferences}
 
-## � Emotional Pattern Review
+## 💭 Emotional Pattern Review
 
 ${emotionalReview || '*No emotional data recorded yet. Emotional patterns will appear after a few sessions.*'}
 ## 🎯 Epistemic Calibration (Honest Uncertainty)
@@ -584,11 +584,11 @@ ${calibration ? `**Total responses tracked**: ${calibration.totalResponses}
 **Confidence distribution**: 🟢 high ${Math.round(calibration.distribution.high * 100)}% | 🟡 medium ${Math.round(calibration.distribution.medium * 100)}% | 🟠 low ${Math.round(calibration.distribution.low * 100)}% | 🔴 uncertain ${Math.round(calibration.distribution.uncertain * 100)}%
 ${calibration.uncertainTopics.length > 0 ? `**Topics with thin knowledge coverage**: ${calibration.uncertainTopics.join(', ')}
 *Consider building skills or global patterns in these areas.*` : '*No recurring uncertain topics — knowledge coverage looks healthy.*'}` : '*No calibration data yet. Confidence tracking will appear after a few sessions.*'}
-## �💡 Recommendations
+## 💡 Recommendations
 
 ${report.recommendations.map(r => `- ${r}`).join('\n') || '- No recommendations - architecture is optimal!'}
 
-## � Knowledge Freshness (Forgetting Curve)
+## 📖 Knowledge Freshness (Forgetting Curve)
 
 ${decayReport ? `**Total entries tracked**: ${decayReport.totalEntries} | 🏛️ ${decayReport.permanentCount} permanent
 **Freshness distribution**: 🌱 thriving ${decayReport.thriving.length} | 🌿 active ${decayReport.active.length} | 🍂 fading ${decayReport.fading.length} | 💤 dormant ${decayReport.dormant.length}
@@ -596,7 +596,7 @@ ${decayReport.dormant.length > 0 ? `**Dormant entries (candidates for cold stora
 *Run \`Alex: Dream\` to archive dormant entries and keep living memory sharp.*` : '*All entries are active — knowledge base is healthy.*'}
 ${decayReport.fading.length > 0 ? `**Fading entries (low usage)**: ${decayReport.fading.slice(0, 3).map(e => e.title).join(', ')}` : ''}` : '*No freshness data yet. Reference counts will begin accumulating with global knowledge searches.*'}
 
-## �📈 Metrics
+## 📈 Metrics
 
 - **Synapse Density**: ${(report.synapseHealth.totalSynapses / Math.max(report.synapseHealth.totalFiles, 1)).toFixed(1)} synapses per file
 - **Connection Integrity**: ${((1 - report.synapseHealth.brokenConnections / Math.max(report.synapseHealth.totalSynapses, 1)) * 100).toFixed(1)}%

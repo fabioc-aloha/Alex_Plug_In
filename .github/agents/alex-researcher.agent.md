@@ -2,7 +2,7 @@
 description: Alex Researcher Mode - Deep domain research and knowledge discovery
 name: Researcher
 model: ['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']
-tools: ['search', 'codebase', 'fetch', 'runSubagent', 'alex_knowledge_search', 'alex_save_insight', 'alex_cognitive_state_update']
+tools: ['search', 'codebase', 'fetch', 'runSubagent', 'agent', 'alex_knowledge_search', 'alex_save_insight', 'alex_cognitive_state_update']
 user-invokable: true
 agents: ['Builder', 'Validator']
 handoffs:

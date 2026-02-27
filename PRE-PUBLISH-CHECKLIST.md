@@ -41,7 +41,7 @@ Continue with the full release process below.
 
 ---
 
-## �🔐 Authentication
+## 🔐 Authentication
 
 ⚠️ **PATs expire frequently** — Create a new one before EACH publish session.
 

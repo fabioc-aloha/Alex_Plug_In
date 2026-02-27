@@ -1,12 +1,17 @@
 /**
  * Core synapse scanning and repair logic - platform-agnostic
  * Used by both VS Code dream command and CLI scripts
+ * 
+ * NASA Power of 10 Compliance:
+ * - R1: Bounded recursion (MAX_RECURSION_DEPTH)
+ * - R5: Runtime assertions throughout
  */
 
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as workspaceFs from './workspaceFs';
 import { SYNAPSE_REGEX } from './constants';
+import { assertDefined, assertNonEmpty, assertBounded, assertAbsolutePath } from './assertions';
 
 export interface Synapse {
     sourceFile: string;
@@ -170,10 +175,13 @@ function matchPattern(filePath: string, pattern: string, rootPath: string): bool
 const MAX_RECURSION_DEPTH = 10;
 
 /**
- * Recursively find all .md files in a directory
  * NASA R1 compliant: bounded recursion with maxDepth parameter
+ * NASA R5: Assertions for bounds checking
  */
 async function findMdFilesRecursive(dir: string, rootPath: string, maxDepth: number = MAX_RECURSION_DEPTH): Promise<string[]> {
+    // NASA R5: Validate recursion depth bounds
+    assertBounded(maxDepth, 0, MAX_RECURSION_DEPTH, 'maxDepth');
+    
     // NASA R1: Bounded recursion check
     if (maxDepth <= 0) {
         console.warn(`[NASA R1] Max recursion depth reached at: ${dir}`);
@@ -212,8 +220,13 @@ async function findMdFilesRecursive(dir: string, rootPath: string, maxDepth: num
 
 /**
  * Find all memory files in a workspace
+ * NASA R5: Assertions for input validation
  */
 export async function findMemoryFiles(rootPath: string): Promise<string[]> {
+    // NASA R5: Validate inputs
+    assertDefined(rootPath, 'rootPath is required');
+    assertAbsolutePath(rootPath, 'rootPath');
+    
     const allFiles: string[] = [];
     const githubPath = path.join(rootPath, '.github');
     
@@ -472,7 +485,16 @@ export async function parseSynapsesFromFile(
 /**
  * Attempt to repair a broken synapse using consolidated mappings
  */
+/**
+ * Repair a broken synapse by updating the file reference
+ * NASA R5: Assertions for input validation
+ */
 export async function repairSynapse(synapse: Synapse): Promise<boolean> {
+    // NASA R5: Validate synapse object
+    assertDefined(synapse, 'synapse object is required');
+    assertDefined(synapse.sourceFile, 'synapse.sourceFile is required');
+    assertDefined(synapse.targetFile, 'synapse.targetFile is required');
+    
     const targetName = path.basename(synapse.targetFile);
     const newTarget = consolidatedMappings[targetName];
     
@@ -503,11 +525,16 @@ export async function repairSynapse(synapse: Synapse): Promise<boolean> {
 
 /**
  * Run the full dream protocol - core logic
+ * NASA R5: Assertions for input validation
  */
 export async function runDreamCore(
     rootPath: string,
     onProgress?: ProgressCallback
 ): Promise<{ report: DreamReport; synapses: Synapse[] }> {
+    // NASA R5: Validate required inputs
+    assertDefined(rootPath, 'rootPath is required for dream protocol');
+    assertAbsolutePath(rootPath, 'rootPath');
+    
     const progress = onProgress || (() => {});
     
     progress('Scanning neural network...');

@@ -33,6 +33,15 @@
       "type": "coordinates",
       "strength": 0.95,
       "note": "Preflight validates; release-process publishes. Always use together."
+    },
+    {
+      "target": ".github/instructions/automated-quality-gates.instructions.md",
+      "type": "automates",
+      "strength": 0.95,
+      "bidirectional": true,
+      "note": "quality-gate.cjs automates 5 preflight checks in the build pipeline (v5.9.10 RCA)",
+      "when": "Packaging, publishing, or running npm run quality-gate",
+      "yields": "Build fails automatically if invariants violated — no manual discipline needed"
     }
   ],
   "activationBoost": [

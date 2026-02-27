@@ -292,6 +292,7 @@ const MAX_BACKOFF_MS = 16000;         // Cap backoff at 16 seconds
 /**
  * Split text into chunks for reliable synthesis
  * Splits on paragraph/sentence boundaries when possible
+ * NASA R2: Bounded loop with explicit iteration limit
  */
 function splitTextIntoChunks(text: string): string[] {
     if (text.length <= MAX_CHUNK_CHARS) {
@@ -301,7 +302,11 @@ function splitTextIntoChunks(text: string): string[] {
     const chunks: string[] = [];
     let remaining = text;
     
-    while (remaining.length > 0) {
+    // NASA R2: Explicit bound - max iterations = ceiling(text.length / MIN_CHUNK_SIZE)
+    const MAX_ITERATIONS = Math.ceil(text.length / 100) + 10; // Safety margin
+    let iterations = 0;
+    
+    while (remaining.length > 0 && iterations++ < MAX_ITERATIONS) {
         if (remaining.length <= MAX_CHUNK_CHARS) {
             chunks.push(remaining);
             break;

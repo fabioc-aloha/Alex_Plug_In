@@ -1,6 +1,5 @@
 ---
 description: Deep self-assessment and architecture optimization
-mode: agent
 agent: Alex
 ---
 

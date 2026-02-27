@@ -354,9 +354,13 @@ function syncArchitectureFiles() {
     }
 
     // Sync walkthrough media files (referenced by package.json walkthroughs)
+    // NOTE: alex_docs/README.md is NOT synced — the heir maintains its own
+    // self-contained mono document (all content inline with anchor navigation)
+    // because the master's README.md links to 25+ docs not packaged in the VSIX.
     const walkthroughFiles = [
-        { src: path.join(MASTER_ROOT, 'alex_docs', 'README.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'README.md') },
-        { src: path.join(MASTER_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md') }
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md') },
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'architecture', 'VSCODE-BRAIN-INTEGRATION.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'architecture', 'VSCODE-BRAIN-INTEGRATION.md') },
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md') }
     ];
     for (const { src, dest } of walkthroughFiles) {
         if (fs.existsSync(src)) {

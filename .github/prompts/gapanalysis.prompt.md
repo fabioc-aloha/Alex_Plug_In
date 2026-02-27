@@ -1,6 +1,5 @@
 ---
 description: Run 4-dimension gap analysis (Skills, Instructions, Agents, Prompts) before implementation
-mode: agent
 agent: Alex
 ---
 

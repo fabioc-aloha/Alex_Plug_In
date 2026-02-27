@@ -1,6 +1,5 @@
 ---
 description: "Run Master Alex audit — 22 automated sections + semantic/logic/code/architectural review"
-mode: agent
 agent: Alex
 ---
 

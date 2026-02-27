@@ -1,6 +1,5 @@
 ---
 description: Start a test-driven development workflow (Red/Green/Refactor)
-mode: agent
 agent: Alex
 ---
 

@@ -1,6 +1,5 @@
 ---
 description: Start a structured learning session on a topic
-mode: agent
 agent: Alex
 ---
 

@@ -34,6 +34,8 @@ sync-architecture.ps1
 alex_docs/**
 !alex_docs/README.md
 !alex_docs/WORKING-WITH-ALEX.md
+!alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md
+!alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md
 
 # Private article drafts (exclude from package)
 article/**

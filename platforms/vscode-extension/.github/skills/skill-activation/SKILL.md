@@ -94,6 +94,7 @@ Search this index when processing any task request:
 | incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
 | infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
 | knowledge-synthesis | synthesize knowledge, abstract pattern, promote insight, cross-project learning, save this globally, this is a pattern, remember this for other projects, store globally, promote to pattern, gk insight, reusable learning, abstract from project |
+| north-star | north star, define vision, project purpose, ambitious goal, mission statement, why we build, nasa quality, guiding principle, check alignment, vision check, goal alignment, are we aligned, does this serve the north star, strategic direction |
 | learning-psychology | teach naturally, zone proximal, adaptive learning, learning partnership |
 | lint-clean-markdown | fix markdown lint, blank lines, md032, clean markdown, lint rules |
 | llm-model-selection | choose model, opus vs sonnet, claude model, cost optimization, model tier, which model should i use, best model for, claude 4.6, model comparison, gpt vs claude, haiku vs sonnet, frontier vs capable, model pricing, context window, extended thinking, adaptive thinking |

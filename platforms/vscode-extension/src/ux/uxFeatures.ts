@@ -12,6 +12,7 @@ import * as vscode from 'vscode';
 import { synthesize, prepareTextForSpeech, playWithWebview, detectLanguage, getVoiceForLanguage } from '../tts';
 import { summarizeForSpeech, LONG_CONTENT_WORD_THRESHOLD } from '../commands/readAloud';
 import { WorkspaceGoalsData } from '../shared/constants';
+import { detectCognitiveLevel } from '../shared/cognitiveTier';
 
 // Extension context for TTS playback
 let extensionContext: vscode.ExtensionContext | undefined;
@@ -117,6 +118,9 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
 
   // Detect model on activation and periodically
   detectAndUpdateModelTier();
+
+  // Detect cognitive level on activation (populates cache for welcome view badges)
+  detectCognitiveLevel().catch(() => { /* non-critical */ });
 }
 
 /**

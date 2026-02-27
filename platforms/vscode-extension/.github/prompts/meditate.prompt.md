@@ -1,6 +1,5 @@
 ---
 description: Begin a guided meditation session for knowledge consolidation
-mode: agent
 agent: Alex
 ---
 

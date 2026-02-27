@@ -1,6 +1,5 @@
 ---
 description: Convert Markdown with Mermaid diagrams to professional Word document
-mode: agent
 agent: Alex
 ---
 

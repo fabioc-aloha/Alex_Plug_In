@@ -80,18 +80,6 @@
             ]
         }
     ],
-    "scenario_models": [
-        {
-            "scenario_id": "cognitive_deep",
-            "description": "Deep introspective sessions: meditation, self-actualization, dream-state, synapse health, architecture review",
-            "model": "gpt-4o"
-        },
-        {
-            "scenario_id": "productivity_light",
-            "description": "Lightweight productivity queries: calendar check, email count, presence status, quick meeting lookup",
-            "model": "gpt-4o-mini"
-        }
-    ],
     "conversation_starters": [
         {
             "title": "❓ Show me what you can do",

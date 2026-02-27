@@ -16,7 +16,6 @@ applyTo: "**/azure/**,**/infrastructure/**,**/*deploy*.{ps1,sh,md}"
 - [.github/instructions/research-first-workflow.instructions.md] (High, Uses, Forward) - "Pre-deployment validation is research phase for infrastructure work"
 - [.github/instructions/empirical-validation.instructions.md] (High, Implements, Bidirectional) - "Validation commands provide empirical evidence of deployment readiness"
 - [.github/instructions/release-management.instructions.md] (Medium, Patterns, Bidirectional) - "Similar pre-release validation checklists"
-- [platforms/m365-copilot/TEAMS-DEEP-INTEGRATION-PLAN.md] (Critical, Exemplifies, Forward) - "Reference implementation with 143-item deployment checklist"
 
 ---
 

@@ -31,6 +31,7 @@ import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml, getNonce } from "../shared/sanitize";
 import { openChatPanel } from "../shared/utils";
+import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from "../shared/cognitiveTier";
 import {
   detectPremiumFeatures,
   getPremiumAssets,
@@ -40,6 +41,9 @@ import {
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar, ChatAvatarContext } from "../shared/chatAvatarBridge";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
+import { getSkillDisplayName } from "../shared/skillConstants";
+import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
+// Note: webviewStyles.ts available for future CSS extraction (DRY)
 
 /**
  * Nudge types for contextual reminders
@@ -119,11 +123,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     return this._agentMode;
   }
 
+  /**
+   * Called when the webview is first shown.
+   * NASA R5: Critical entry point with assertion density
+   */
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken,
   ) {
+    // NASA R5: Validate entry point preconditions
+    nasaAssert(webviewView !== undefined, 'resolveWebviewView: webviewView must be defined');
+    nasaAssert(this._extensionUri !== undefined, 'resolveWebviewView: extensionUri must be initialized');
+    
     this._view = webviewView;
 
     webviewView.webview.options = {
@@ -151,6 +163,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         sessionActions: "alex.sessionActions",
         dream: "alex.dream",
         selfActualize: "alex.selfActualize",
+        northStar: "alex.northStar",
         exportM365: "alex.exportForM365",
         openDocs: "alex.openDocs",
         agentVsChat: "alex.agentVsChat",
@@ -186,6 +199,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         searchRelatedKnowledge: "alex.searchRelatedKnowledge",
         skillReview: "alex.skillReview",
         workingWithAlex: "alex.workingWithAlex",
+        cognitiveLevels: "alex.cognitiveLevels",
         // meditate handled as special case below to set cognitive state
       };
 
@@ -291,6 +305,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   /**
    * Refresh the welcome view content
+   * 
+   * NASA R5: Critical function with assertion density
    */
   public async refresh(): Promise<void> {
     if (!this._view) {
@@ -300,6 +316,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     try {
       const workspaceFolders = vscode.workspace.workspaceFolders;
       const wsRoot = workspaceFolders?.[0]?.uri.fsPath;
+
+      // NASA R5: Validate view state
+      nasaAssert(this._view.webview !== undefined, 'Webview must be defined during refresh');
 
       // Parallelize all async operations for faster loading
       const [
@@ -634,6 +653,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     workspaceName?: string,
     skillRecommendations?: SkillRecommendation[],
   ): string {
+    // NASA R5: Entry point assertions
+    nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
+    nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
+    nasaAssertBounded(goals.streakDays, 0, 9999, 'goals.streakDays');
+    nasaAssertBounded(nudges.length, 0, 10, 'nudges.length');
+
     // Security: Generate nonce for CSP
     const nonce = getNonce();
 
@@ -725,48 +750,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           ? "Cached"
           : "Auto";
 
-    // Skill name mapping for display (must be declared before trifectaTagsHtml which references it)
-    const skillNameMap: Record<string, string> = {
-      "code-quality": "Code Quality",
-      "code-review": "Code Review",
-      "research-project-scaffold": "Research Setup",
-      "api-documentation": "API Docs",
-      "architecture-health": "Architecture",
-      "microsoft-fabric": "Data Fabric",
-      "infrastructure-as-code": "IaC",
-      "creative-writing": "Creative Writing",
-      "project-management": "PM Dashboard",
-      "incident-response": "Security",
-      "learning-psychology": "Learning",
-      "gamma-presentations": "Presentations",
-      "git-workflow": "Git Workflows",
-      "game-design": "Game Design",
-      "slide-design": "Slide Design",
-      "scope-management": "Scope Mgmt",
-      "deep-thinking": "Deep Thinking",
-      "markdown-mermaid": "Diagrams",
-      "testing-strategies": "Testing",
-      "bootstrap-learning": "Learning",
-      "master-heir-management": "Heir Mgmt",
-      "brand-asset-management": "Brand Assets",
-      "release-management": "Releases",
-      "release-process": "Releases",
-      "self-actualization": "Self-Actualize",
-      "research-first-development": "Research First",
-      meditation: "Meditation",
-      "dream-state": "Dream State",
-      "brain-qa": "Brain QA",
-      "heir-curation": "Heir Curation",
-    };
+    // Skill display names now imported from shared/skillConstants.ts (DRY)
 
     const trifectaTagsHtml = trifectaIds.length > 0
       ? trifectaIds.map((id) => {
-        const name =
-          skillNameMap[id] ||
-          id
-            .split("-")
-            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-            .join(" ");
+        const name = getSkillDisplayName(id);
         return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}">${name}</span>`;
       })
       .join("\n                ")
@@ -789,7 +777,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const principlesText =
       activeContext?.principles || "KISS, DRY, Optimize-for-AI";
 
-    const recommendedSkillName = skillNameMap[personaSkill] || personaSkill;
+    const recommendedSkillName = getSkillDisplayName(personaSkill);
 
     // Skill recommendations HTML
     const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
@@ -969,7 +957,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             border-radius: 4px;
             border: 1px solid var(--vscode-input-border, transparent);
         }
-        .rocket-bar {
+        .partnership-bar {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
@@ -986,16 +974,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             cursor: pointer;
             transition: background 0.15s ease;
         }
-        .rocket-bar:hover {
+        .partnership-bar:hover {
             background: linear-gradient(135deg,
                 color-mix(in srgb, var(--persona-accent) 18%, transparent),
                 color-mix(in srgb, var(--persona-accent) 10%, transparent));
         }
-        .rocket-bar .rocket-emoji {
+        .partnership-bar .partner-icon {
             font-size: var(--font-sm);
             flex-shrink: 0;
         }
-        .rocket-bar strong {
+        .partnership-bar strong {
             color: var(--persona-accent);
             font-weight: 600;
         }
@@ -1322,6 +1310,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .action-btn.premium:hover .premium-badge {
             opacity: 0.8;
         }
+        .tier-lock {
+            font-size: 9px;
+            margin-left: auto;
+            opacity: 0.55;
+            white-space: nowrap;
+            padding: 1px 4px;
+            border-radius: 3px;
+            background: color-mix(in srgb, var(--vscode-charts-yellow) 15%, transparent);
+            color: var(--vscode-descriptionForeground);
+        }
         .action-btn.recommended {
             border-left: 2px solid var(--persona-accent);
             background: color-mix(in srgb, var(--persona-accent) 8%, var(--vscode-button-secondaryBackground));
@@ -1603,9 +1601,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
         ${workspaceName ? `<div class="project-name" title="Current workspace">${this._escapeHtml(workspaceName)}</div>` : ""}
 
-        <div class="rocket-bar" data-cmd="workingWithAlex" title="Take Your ${bannerNoun} to New Heights — Click to learn more" tabindex="0" role="button">
-            <span class="rocket-emoji">🚀</span>
-            <span>Take Your <strong>${bannerNoun}</strong> to New Heights</span>
+        <div class="partnership-bar" data-cmd="workingWithAlex" title="Your trusted AI partner — Click to learn how we work together" tabindex="0" role="button">
+            <span class="partner-icon">🤝</span>
+            <span>Your Trusted Partner for <strong>${bannerNoun}</strong></span>
         </div>
         
         ${sessionHtml}
@@ -1646,19 +1644,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             <nav class="action-list" aria-label="Quick actions" role="navigation">
                 ${skillRecommendationsHtml}
                 
-                <div class="action-group-label">CORE</div>
-                ${this._actionButton('workingWithAlex', '🎓', 'Working with Alex', 'Learn how to work effectively with Alex')}
-                ${this._actionButton('openBrainAnatomy', '🧠', 'Brain Anatomy', 'Explore Alex\'s cognitive brain anatomy')}
-                <button class="action-btn" data-cmd="openChat" tabindex="0" role="button" aria-label="Chat with Copilot">
+                <div class="action-group-label">PARTNERSHIP</div>
+                <button class="action-btn" data-cmd="openChat" tabindex="0" role="button" aria-label="Start a conversation with Alex">
                     <span class="action-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.25 9a.75.75 0 0 1 .75.75v1.5a.25.25 0 0 0 .25.25h1.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 8.75 13h-1.5A1.75 1.75 0 0 1 5.5 11.25v-1.5A.75.75 0 0 1 6.25 9Z"/><path d="M7.25 1a.75.75 0 0 1 .75.75V3h.5a3.25 3.25 0 0 1 3.163 4.001l.087.094 1.25 1.25a.75.75 0 0 1-1.06 1.06l-.94-.94-.251.228A3.25 3.25 0 0 1 8.5 9.5h-.5v.75a.75.75 0 0 1-1.5 0V9.5h-.5A3.25 3.25 0 0 1 6 3h.5V1.75A.75.75 0 0 1 7.25 1ZM8.5 4.5h-3a1.75 1.75 0 0 0 0 3.5h3a1.75 1.75 0 0 0 0-3.5Z"/><path d="M6.75 6a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm2.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></svg></span>
-                    <span class="action-text">Chat with Copilot</span>
+                    <span class="action-text">Let's Talk</span>
                 </button>
+                ${this._actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
+                ${this._actionButton('workingWithAlex', '🎓', 'How We Work', 'Learn how to collaborate effectively')}
+                ${this._actionButton('cognitiveLevels', '🧬', 'Cognitive Levels', 'Subscription guide — what unlocks at each tier')}
+                ${this._actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
+                
+                <div class="action-group-label">TRUST & GROWTH</div>
+                ${this._actionButton('dream', '💭', 'Dream', 'Neural maintenance — keeps me reliable')}
+                ${this._actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment — honest about my capabilities')}
                 <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
                     <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                     <span class="action-text">Initialize / Update</span>
                 </button>
-                ${this._actionButton('dream', '💭', 'Dream')}
-                ${this._actionButton('selfActualize', '✨', 'Self-Actualize')}
+                ${this._actionButton('openBrainAnatomy', '🧠', 'How I Think', 'Explore my cognitive architecture')}
                 
                 ${
                   hasGlobalKnowledge
@@ -1667,33 +1670,32 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                     : ""
                 }
                 
-                <div class="action-group-label">DEV TOOLS</div>
-                ${this._actionButton('codeReview', '👀', 'Code Review', 'Get AI code review for selection or pasted code')}
-                ${this._actionButton('debugThis', '🐛', 'Debug This', 'Debug code or error message')}
-                ${this._actionButton('rubberDuck', '🦆', 'Rubber Duck', 'Explain your problem to Alex as rubber duck')}
-                ${this._actionButton('generateTests', '🧪', 'Generate Tests', 'Generate tests for selection or pasted code')}
-                ${this._actionButton('runAudit', '🔍', 'Project Audit')}
+                <div class="action-group-label">BUILD TOGETHER</div>
+                ${this._actionButton('codeReview', '👀', 'Code Review', 'Review for correctness and growth')}
+                ${this._actionButton('debugThis', '🐛', 'Debug This', 'Let\'s find the issue together')}
+                ${this._actionButton('generateTests', '🧪', 'Generate Tests', 'Build confidence in your code')}
+                ${this._actionButton('runAudit', '🔍', 'Project Audit', 'Comprehensive quality check')}
                 ${this._actionButton('releasePreflight', '🚀', 'Release Preflight')}
-                ${this._actionButton('importGitHubIssues', '📋', 'Import Issues', 'Import GitHub issues as learning goals')}
-                ${this._actionButton('reviewPR', '👁️', 'Review PR', 'Generate AI-powered code review for pull requests')}
+                ${this._actionButton('importGitHubIssues', '📋', 'Import Issues', 'Import GitHub issues as goals')}
+                ${this._actionButton('reviewPR', '👁️', 'Review PR', 'AI-powered pull request review')}
                 
-                <div class="action-group-label">MULTIMODAL</div>
-                ${this._actionButton('askAboutSelection', '💬', 'Ask Alex', 'Ask Alex about selected code or enter a question')}
-                ${this._actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Save selection or type an insight to knowledge')}
-                ${this._actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Search Alex knowledge for related patterns')}
-                ${this._actionButton('generateDiagram', '📊', 'Generate Diagram', 'Generate Mermaid diagrams from code or text')}
-                ${this._actionButton('readAloud', '🔊', 'Read Aloud', 'Read selected text aloud using neural voices')}
+                <div class="action-group-label">LEARN & CREATE</div>
+                ${this._actionButton('askAboutSelection', '💬', 'Ask Alex', 'Ask about code or concepts')}
+                ${this._actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
+                ${this._actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Find patterns from past work')}
+                ${this._actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
+                ${this._actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
                 
-                <div class="action-group-label">PRESENTATIONS</div>
+                <div class="action-group-label">PRESENT & SHARE</div>
                 ${this._actionButton('generatePptx', '📄', 'Marp PPTX (Local)', 'Generate PowerPoint locally with Marp - free, offline')}
                 ${this._actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
                 ${this._actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
                 
-                <div class="action-group-label">AI IMAGES</div>
+                <div class="action-group-label">VISUALIZE</div>
                 ${this._actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
                 ${this._actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
                 
-                <div class="action-group-label">BALANCE</div>
+                <div class="action-group-label">WELLBEING</div>
                 ${this._actionButton('startSession', '🍅', 'Focus Session')}
                 ${this._actionButton('showGoals', '🎯', 'Goals')}
                 
@@ -1766,9 +1768,23 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private _actionButton(cmd: string, icon: string, label: string, title?: string): string {
     const titleAttr = title ? ` title="${this._escapeHtml(title)}"` : '';
     const ariaLabel = title ? this._escapeHtml(title) : label;
+
+    // Show tier badge if the command is gated above current level
+    let tierBadge = '';
+    const commandId = `alex.${cmd}`;
+    const req = getFeatureRequirement(commandId);
+    if (req) {
+      const cached = getCachedCognitiveLevel();
+      const currentLevel = cached?.level ?? 1;
+      if (currentLevel < req.minimumLevel) {
+        const tierEmoji: Record<CognitiveLevel, string> = { 1: '📁', 2: '💬', 3: '🤖', 4: '🧠' };
+        tierBadge = ` <span class="tier-lock" title="Requires Level ${req.minimumLevel}">${tierEmoji[req.minimumLevel] || '🔒'} L${req.minimumLevel}</span>`;
+      }
+    }
+
     return `<button class="action-btn" data-cmd="${cmd}"${titleAttr} tabindex="0" role="button" aria-label="${ariaLabel}">
                     <span class="action-icon" aria-hidden="true">${icon}</span>
-                    <span class="action-text">${label}</span>
+                    <span class="action-text">${label}${tierBadge}</span>
                 </button>`;
   }
 

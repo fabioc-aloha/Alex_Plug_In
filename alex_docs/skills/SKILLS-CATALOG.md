@@ -7,17 +7,17 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 123
+## Skill Count: 124
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 108   |
+| Inheritable | 109   |
 | Master-Only | 4     |
 | Universal   | 1     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
 
-> � **+9 trifectas completed + skill discoverability enriched** (2026-02-19): chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis now full trifectas (22 total). skill-activation index enriched with ~3× keywords across 20 skills. 16 staleness-prone skills tracked.
+> 🆕 **+10 trifectas completed + skill discoverability enriched** (2026-02-26): chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star now full trifectas (23 total). skill-activation index enriched with ~3× keywords across 20 skills. 16 staleness-prone skills tracked.
 >
 > 🆕 **+12 skills promoted from sandbox heir** (2026-02-10): frustration-recognition, coaching-techniques, deep-work-optimization, executive-storytelling (+stakeholder-management, +meeting-efficiency merged), slide-design, academic-paper-drafting, literature-review, citation-management, dissertation-defense (+defense-presentation, +defense-qa-practice merged), azure-architecture-patterns, azure-devops-automation, airs-integration
 >
@@ -96,6 +96,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [project-deployment](../../.github/skills/project-deployment/SKILL.md)           | inheritable | Universal deployment patterns (npm, PyPI, NuGet, Cargo) |
 | [change-management](../../.github/skills/change-management/SKILL.md)             | inheritable | Organizational change, stakeholder buy-in               |
 | [project-management](../../.github/skills/project-management/SKILL.md)           | inheritable | Planning, tracking, resource allocation                 |
+| [north-star](../../.github/skills/north-star/SKILL.md)                           | inheritable | 🆕 Project vision, mission alignment, NASA-quality standards |
 | [scope-management](../../.github/skills/scope-management/SKILL.md)               | inheritable | 🆕 Recognize scope creep, suggest MVP cuts               |
 | [status-reporting](../../.github/skills/status-reporting/SKILL.md)               | inheritable | 🆕 Stakeholder-friendly project updates                  |
 
@@ -323,27 +324,34 @@ A **trifecta** is a capability encoded across all three memory systems:
 
 Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 
-### Full Trifectas (17)
+### Full Trifectas (23)
 
 | Capability             | Skill                      | Instruction             | Prompt                                 | Muscles                     |
 | ---------------------- | -------------------------- | ----------------------- | -------------------------------------- | --------------------------- |
 | **Bootstrap Learning** | bootstrap-learning         | bootstrap-learning      | learn, domain-learning                 | —                           |
+| **Brain QA**           | brain-qa                   | cognitive-health-validation | dream                               | brain-qa.ps1                |
 | **Brand Asset Mgmt**   | brand-asset-management     | brand-asset-management  | brand                                  | —                           |
+| **Chat Participants**  | chat-participant-patterns  | chat-participant-patterns | chat-participant                     | —                           |
 | **Code Review**        | code-review                | code-review-guidelines  | review                                 | —                           |
 | **Dream State**        | dream-state                | dream-state-automation  | dream                                  | dream-cli.ts                |
+| **Gamma Presentations**| gamma-presentations        | gamma-presentation      | gamma                                  | —                           |
+| **Knowledge Synthesis**| knowledge-synthesis        | knowledge-synthesis     | cross-domain-transfer                  | —                           |
+| **M365 Agent Debug**   | m365-agent-debugging       | m365-agent-debugging    | m365-agent-debug                       | —                           |
+| **Markdown Mermaid**   | markdown-mermaid           | markdown-mermaid        | diagramming-mastery-meditation         | —                           |
+| **MCP Development**    | mcp-development            | mcp-development         | mcp-server                             | —                           |
+| **MD to Word**         | md-to-word                 | md-to-word              | md-to-word                             | —                           |
 | **Meditation**         | meditation                 | meditation              | meditate, unified-meditation-protocols | —                           |
+| **Microsoft Graph**    | microsoft-graph-api        | microsoft-graph-api     | graph-api                              | —                           |
+| **North Star**         | north-star                 | north-star              | northstar                              | —                           |
 | **Release Management** | release-process            | release-management      | release                                | build-extension-package.ps1 |
 | **Research-First Dev** | research-first-development | research-first-workflow | gapanalysis                            | —                           |
+| **Secrets Management** | secrets-management         | secrets-management      | secrets                                | —                           |
 | **Self-Actualization** | self-actualization         | self-actualization      | selfactualize                          | —                           |
-| **Chat Participants**  | chat-participant-patterns  | chat-participant-patterns | chat-participant                     | —                           |
-| **VS Code Extension**  | vscode-extension-patterns  | vscode-extension-patterns | vscode-extension-audit               | —                           |
-| **MCP Development**    | mcp-development            | mcp-development         | mcp-server                             | —                           |
-| **Microsoft Graph**    | microsoft-graph-api        | microsoft-graph-api     | graph-api                              | —                           |
 | **Teams App Patterns** | teams-app-patterns         | teams-app-patterns      | teams-app                              | —                           |
-| **M365 Agent Debug**   | m365-agent-debugging       | m365-agent-debugging    | m365-agent-debug                       | —                           |
-| **Diagramming**        | markdown-mermaid           | markdown-mermaid        | diagramming-mastery-meditation         | —                           |
 | **Testing/TDD**        | testing-strategies         | testing-strategies      | tdd                                    | —                           |
-| **Knowledge Synthesis**| knowledge-synthesis        | knowledge-synthesis     | cross-domain-transfer                  | —                           |
+| **UI/UX Design**       | ui-ux-design               | ui-ux-design            | accessibility                          | —                           |
+| **VS Code Extension**  | vscode-extension-patterns  | vscode-extension-patterns | vscode-extension-audit               | —                           |
+| **VSCode Config**      | vscode-configuration-validation | vscode-configuration-validation | vscode-settings               | —                           |
 
 ### Partial Trifectas (4)
 
@@ -358,11 +366,11 @@ Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 
 | Classification   | Count | %     |
 | ---------------- | ----- | ----- |
-| Full Trifecta    | 17    | 13.9% |
+| Full Trifecta    | 23    | 18.7% |
 | Partial (2 of 3) | 4     | 3.3%  |
-| Instruction-only | 16    | 13.1% |
-| Prompt-only      | 3     | 2.5%  |
-| Skill-only       | ~82   | 67.2% |
+| Instruction-only | 12    | 9.8%  |
+| Prompt-only      | 3     | 2.4%  |
+| Skill-only       | ~81   | 65.9% |
 
 ---
 

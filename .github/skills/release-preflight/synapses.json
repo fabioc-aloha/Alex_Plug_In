@@ -39,6 +39,15 @@
       "type": "supports",
       "strength": 0.85,
       "note": "Audit before preflight — catches version drift, branding issues (v5.1.0 lesson)"
+    },
+    {
+      "target": ".github/instructions/automated-quality-gates.instructions.md",
+      "type": "automates",
+      "strength": 0.95,
+      "bidirectional": true,
+      "note": "quality-gate.cjs automates 5 preflight checks in the build pipeline (v5.9.10 RCA)",
+      "when": "Packaging, publishing, or running npm run quality-gate",
+      "yields": "Build fails automatically if invariants violated — no manual discipline needed"
     }
   ],
   "activationBoost": [

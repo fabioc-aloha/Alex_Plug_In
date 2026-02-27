@@ -20,6 +20,7 @@ import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboa
 import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBridge';
 import { resolveAvatar, getAvatarFullPath, detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
+import { assertDefined } from '../shared/assertions';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -1180,6 +1181,7 @@ async function executeModelWithTools(
 
 /**
  * Handle general queries using the language model
+ * NASA R5: Runtime assertions for input validation
  */
 async function handleGeneralQuery(
     request: vscode.ChatRequest,
@@ -1187,6 +1189,10 @@ async function handleGeneralQuery(
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
+    // NASA R5: Validate required inputs
+    assertDefined(request, 'ChatRequest is required');
+    assertDefined(stream, 'ChatResponseStream is required');
+    assertDefined(token, 'CancellationToken is required');
     
     // v5.9.3: Cognitive state detection and avatar update now handled in alexChatHandler
     // before dispatch to prevent race condition with async executeCommand

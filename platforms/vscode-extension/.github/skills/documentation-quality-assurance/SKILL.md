@@ -9,11 +9,51 @@ metadata:
 
 > Prevent documentation rot through systematic audits, automated validation, and pipeline-enforced quality gates.
 
-**Scope**: Inheritable skill. Covers drift detection, preflight validation, count elimination, link integrity, 5-pass quality pipeline, staleness detection, and large-project organization.
+**Scope**: Inheritable skill. Covers drift detection, preflight validation, semantic accuracy, link integrity, 5-pass quality pipeline, staleness detection, and large-project organization.
 
 **Complements**: The Documentarian agent uses this skill as its knowledge foundation. This skill is the "what" — the agent is the "who".
 
-## The Count Problem
+## Audit Priority: Semantics Over Syntax
+
+**The most damaging documentation errors are semantic, not syntactic.** A wrong count is annoying. A false claim about functionality is dangerous.
+
+### Audit Priority Hierarchy
+
+| Priority | Issue Type | Impact | Example |
+|----------|-----------|--------|---------|
+| **P0 Critical** | Phantom features | Users try to use something that doesn't exist | "Entra ID SSO enabled" (code never implemented) |
+| **P0 Critical** | False security claims | Trust violations, compliance failures | "All data encrypted" (encryption not implemented) |
+| **P1 High** | Contradictions | User confusion, decision paralysis | README says X, CHANGELOG says Y |
+| **P1 High** | Stale capability claims | Users miss real features or expect removed ones | Docs describe v3 API but v5 is current |
+| **P2 Medium** | Broken cross-references | Navigation friction | Link to deleted file |
+| **P3 Low** | Count drift | Credibility erosion | "109 skills" when there are 123 |
+| **P3 Low** | Formatting issues | Aesthetic concerns | Bad table alignment |
+
+### Semantic Audit Questions
+
+Before any documentation audit, ask these questions **in order**:
+
+1. **Does this feature actually exist?** — Check if documented functionality has corresponding implementation
+2. **Is this claim still true?** — Validate assertions against current codebase state
+3. **Are there contradictions?** — Cross-check related documents for conflicting information
+4. **Is the version current?** — Compare documented versions against package.json/CHANGELOG
+5. **Do examples work?** — Test code snippets against actual API/CLI behavior
+6. **Do links resolve?** — Verify internal and external references (automate this)
+7. **Are counts accurate?** — Check hardcoded numbers against canonical sources (automate this)
+
+**Rule**: Questions 1-5 require human judgment. Questions 6-7 can be automated. Never spend human attention on automatable checks at the expense of semantic review.
+
+### Common Semantic Bugs
+
+| Bug Pattern | Detection Method | Fix |
+|-------------|------------------|-----|
+| **Phantom configuration** | Grep settings docs, verify in package.json | Remove undeclared settings or add to manifest |
+| **Removed feature still documented** | Search for deleted code references | Remove or archive documentation |
+| **Future feature documented as shipped** | Compare roadmap "planned" vs "shipped" markers | Move to correct section |
+| **Version mismatch** | Regex for version patterns, compare to source of truth | Align all occurrences |
+| **Model/API hallucination** | Verify external references against official docs | Correct or remove |
+
+## The Count Problem (P3)
 
 Hardcoded counts in documentation drift silently:
 
@@ -99,19 +139,22 @@ Operational documentation (regression checklists, deployment guides, QA procedur
 
 **Rule**: Include enough metadata that anyone can understand the document's context without reading the body. Operational docs reviewed during incidents need at-a-glance clarity.
 
-## 5-Pass Quality Pipeline
+## 6-Pass Quality Pipeline
 
 Run these passes in sequence on any document suite:
 
-| Pass | Focus | Catches |
-|------|-------|---------|
-| 1. **Brand** | Voice, tone, naming consistency | "Copilot" vs "Alex", passive voice, jargon |
-| 2. **Architecture** | Structural accuracy, counts, versions | Stale numbers, outdated diagrams |
-| 3. **Cross-Reference** | Link integrity, orphan files | Broken links, unreferenced docs |
-| 4. **Lint** | Formatting, markdown validity | Bad tables, broken code blocks |
-| 5. **Consolidation** | Redundancy, overlap, merge candidates | Two docs covering same topic |
+| Pass | Focus | Catches | Type |
+|------|-------|---------|------|
+| 1. **Semantic** | Claims match reality, features exist | Phantom features, false claims, contradictions | 🧠 Human |
+| 2. **Architecture** | Structural accuracy, diagrams current | Outdated visuals, wrong relationships | 🧠 Human |
+| 3. **Brand** | Voice, tone, naming consistency | "Copilot" vs "Alex", passive voice, jargon | 🧠 Human |
+| 4. **Cross-Reference** | Link integrity, orphan files | Broken links, unreferenced docs | 🤖 Automatable |
+| 5. **Lint** | Formatting, markdown validity, counts | Bad tables, stale numbers, code blocks | 🤖 Automatable |
+| 6. **Consolidation** | Redundancy, overlap, merge candidates | Two docs covering same topic | 🧠 Human |
 
-**Rule**: Don't merge passes — each pass has a single focus. Multi-focus reviews miss more than single-focus reviews applied sequentially.
+**Rule 1**: Don't merge passes — each pass has a single focus.
+**Rule 2**: Complete all semantic passes (1-3) before mechanical passes (4-5). A perfectly formatted lie is still a lie.
+**Rule 3**: Never allow automated tooling to "pass" a doc suite until human semantic review is complete.
 
 ## Preflight Validation
 
@@ -271,17 +314,29 @@ Every doc suite serves multiple readers:
 
 ## Doc Audit Checklist
 
-Run this 7-item checklist for any documentation review:
+Run this 10-item checklist for any documentation review. **Semantic checks first.**
+
+### Phase 1: Semantic Accuracy (🧠 Human Required)
 
 | # | Check | Method |
 |---|-------|--------|
-| 1 | All links resolve | Automated link checker |
-| 2 | No hardcoded counts | Grep for common count patterns |
-| 3 | Version strings current | Compare against package.json/CHANGELOG |
-| 4 | Code examples execute | Copy-paste test critical examples |
-| 5 | File references exist | Verify every referenced file path |
-| 6 | No orphan files | Cross-reference scan |
-| 7 | Consistent terminology | Search for variant spellings/names |
+| 1 | **Documented features exist** | For each feature claim, verify code/config exists |
+| 2 | **No false capability claims** | Check "shipped" items against actual implementation |
+| 3 | **No contradictions** | Cross-check related docs for conflicting statements |
+| 4 | **Examples work** | Copy-paste test critical examples |
+
+### Phase 2: Mechanical Accuracy (🤖 Automatable)
+
+| # | Check | Method |
+|---|-------|--------|
+| 5 | All links resolve | Automated link checker |
+| 6 | No hardcoded counts | Grep for common count patterns |
+| 7 | Version strings current | Compare against package.json/CHANGELOG |
+| 8 | File references exist | Verify every referenced file path |
+| 9 | No orphan files | Cross-reference scan |
+| 10 | Consistent terminology | Search for variant spellings/names |
+
+**Rule**: Never mark a doc suite "clean" based only on Phase 2 passing. Phase 1 semantic checks are non-negotiable.
 
 ## CHANGELOG Best Practices
 

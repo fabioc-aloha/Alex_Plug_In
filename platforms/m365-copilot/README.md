@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.9.3-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-5.9.10-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -10,7 +10,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**✨ NEW in v5.9.3**: Identity refinement (Alex Finch, 26), avatar system with 90 images across personas/ages/agents/states, emotional memory integration, stabilization sprint.
+**✨ NEW in v5.9.10**: NASA/JPL Power of 10 code standards, North Star alignment framework, bounded recursion and loop compliance, 5 quality gates, fs-extra → workspace.fs migration, AlexLearn teaching heir.
 
 ---
 

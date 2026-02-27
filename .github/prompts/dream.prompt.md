@@ -1,6 +1,5 @@
 ---
 description: Run neural maintenance to validate and repair synaptic connections
-mode: agent
 agent: Alex
 ---
 

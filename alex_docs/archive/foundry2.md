@@ -5269,7 +5269,7 @@ html
         }
 
         async function init(peerConnection) {
-            logMessage("� Continuing WebRTC setup with existing peer connection...");
+            logMessage("🔄 Continuing WebRTC setup with existing peer connection...");
 
             // Set up to play remote audio from the model.
             const audioElement = document.createElement('audio');
@@ -5346,7 +5346,7 @@ html
                 logMessage('❌ Data channel error: ' + error);
             });            // Add connection state logging
             peerConnection.onconnectionstatechange = () => {
-                logMessage("� Connection state: " + peerConnection.connectionState);
+                logMessage("🔗 Connection state: " + peerConnection.connectionState);
             };
 
             peerConnection.oniceconnectionstatechange = () => {

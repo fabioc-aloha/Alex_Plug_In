@@ -12,7 +12,12 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    // NASA Power of 10 Rule 10: Strict compilation flags
+    // noUnusedLocals: Deferred to v6.0 (252 existing warnings to fix)
+    // noUnusedParameters: Deferred to v6.0 (requires API signature changes)
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": [
     "node_modules",

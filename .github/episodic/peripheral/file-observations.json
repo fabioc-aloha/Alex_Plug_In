@@ -1,27 +1,43 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
+    "github/agents/alex-azure.agent.md",
+    "CHANGELOG.md",
+    "PRE-PUBLISH-CHECKLIST.md",
+    "README.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/platforms/VSCODE-COPILOT-API-ANALYSIS.md",
-    "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md"
+    "alex_docs/research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md",
+    "alex_docs/research/DANIEL-SIEGEL-REPORT.docx",
+    "alex_docs/research/DANIEL-SIEGEL-REPORT.md",
+    "alex_docs/research/LEARNING-PSYCHOLOGY-RESEARCH.md",
+    "alex_docs/research/NASA-CODE-STANDARDS-ANALYSIS.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.10.vsix",
+      "todoCount": 20,
+      "scannedAt": 1772152519472
+    },
+    {
+      "file": "CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772126182713
+      "scannedAt": 1772152519472
     },
     {
-      "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772126182713
+      "scannedAt": 1772152519472
     },
     {
-      "file": "alex_docs/platforms/VSCODE-SOURCE-INTEGRATION-ANALYSIS.md",
+      "file": "README.md",
       "todoCount": 1,
-      "scannedAt": 1772126182713
+      "scannedAt": 1772152519472
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1772152519472
     }
   ],
-  "lastUpdated": 1772126182713
+  "lastUpdated": 1772152519472
 }

@@ -1,7 +1,6 @@
 ---
 name: "testing-strategies"
 description: "Systematic testing for confidence without over-testing — the right test at the right level"
-applyTo: "**/*test*,**/*spec*,**/*.test.*,**/*.spec.*"
 ---
 
 # Testing Strategies Skill
@@ -90,6 +89,50 @@ test('should calculate discount when order exceeds $100', () => {
 | Fast (< 100ms unit) | Slow due to unnecessary setup |
 | Readable as documentation | Requires reading source to understand |
 | Deterministic | Flaky (passes sometimes) |
+
+## Mission-Critical Testing (NASA Standards)
+
+For safety-critical or high-reliability projects, apply NASA/JPL Power of 10 testing patterns:
+
+### Bounded Behavior Testing
+
+| What to Test | Why | Example |
+| ------------ | --- | ------- |
+| Recursion with depth | R1: Prevent stack overflow | `test('walk() stops at maxDepth', () => { walk(deep, 5); expect(visited).length.lessThan(100); })` |
+| Loop iteration limits | R2: Prevent infinite loops | `test('parser terminates on malformed input', () => { expect(() => parse(corrupt, { maxIterations: 1000 })).not.toHang(); })` |
+| Collection size bounds | R3: Prevent memory exhaustion | `test('cache evicts when full', () => { fillCache(1000); expect(cache.size).toBeLessThanOrEqual(MAX_CACHE); })` |
+
+### Assertion Coverage Testing
+
+| Pattern | What to Test | NASA Rule |
+| ------- | ------------ | --------- |
+| Entry assertions | Function preconditions hold | R5 |
+| Boundary assertions | Range checks are enforced | R3, R5 |
+| State assertions | Invariants preserved | R5 |
+
+```typescript
+// Test that assertions fire on invalid input
+test('validateUser throws on undefined', () => {
+    expect(() => validateUser(undefined)).toThrow('assertion failed');
+});
+
+// Test that bounds are enforced
+test('processItems rejects oversized batch', () => {
+    const items = new Array(10001).fill({});
+    expect(() => processItems(items)).toThrow('exceeds MAX_BATCH_SIZE');
+});
+```
+
+### Critical Path Coverage
+
+| Path Type | Coverage Target | Testing Approach |
+| --------- | --------------- | ---------------- |
+| Error handlers | 100% | Force each error condition |
+| Boundary conditions | 100% | Test at limit, limit-1, limit+1 |
+| Timeout/cancellation | 100% | Test early abort, late abort |
+| Resource cleanup | 100% | Force failure after acquisition |
+
+**Reference**: `.github/instructions/nasa-code-standards.instructions.md`
 
 ## TDD Cycle
 
