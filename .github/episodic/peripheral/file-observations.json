@@ -1,43 +1,32 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/agents/alex-azure.agent.md",
-    "CHANGELOG.md",
-    "PRE-PUBLISH-CHECKLIST.md",
-    "README.md",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md",
-    "alex_docs/research/DANIEL-SIEGEL-REPORT.docx",
-    "alex_docs/research/DANIEL-SIEGEL-REPORT.md",
-    "alex_docs/research/LEARNING-PSYCHOLOGY-RESEARCH.md",
-    "alex_docs/research/NASA-CODE-STANDARDS-ANALYSIS.md"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.10.vsix",
       "todoCount": 20,
-      "scannedAt": 1772152519472
+      "scannedAt": 1772152900131
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772152519472
+      "scannedAt": 1772152900131
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772152519472
+      "scannedAt": 1772152900131
     },
     {
       "file": "README.md",
       "todoCount": 1,
-      "scannedAt": 1772152519472
+      "scannedAt": 1772152900131
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772152519472
+      "scannedAt": 1772152900131
     }
   ],
-  "lastUpdated": 1772152519472
+  "lastUpdated": 1772152900131
 }
