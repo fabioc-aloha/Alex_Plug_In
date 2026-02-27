@@ -1,32 +1,34 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json"
+  ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.12.vsix",
       "todoCount": 20,
-      "scannedAt": 1772160427896
+      "scannedAt": 1772160602094
     },
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772160427896
+      "scannedAt": 1772160602094
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772160427896
+      "scannedAt": 1772160602094
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772160427896
+      "scannedAt": 1772160602094
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772160427896
+      "scannedAt": 1772160602094
     }
   ],
-  "lastUpdated": 1772160427896
+  "lastUpdated": 1772160602094
 }

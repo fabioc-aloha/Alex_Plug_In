@@ -68,6 +68,13 @@
       "strength": 0.8,
       "when": "Post-publish roadmap version table update",
       "yields": "Roadmap current/next version alignment — learned from v5.9.11 version drift catch"
+    },
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "validates",
+      "strength": 0.7,
+      "when": "Pre-publish credential verification — PAT expiry blocked v5.9.12 publish with 401",
+      "yields": "PAT lifecycle awareness, credential validity checks before publish attempts"
     }
   ],
   "activationContexts": [
