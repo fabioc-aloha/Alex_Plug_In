@@ -24,10 +24,10 @@ Mode: Build
 Focus Trifectas: knowledge-synthesis, research-first-development, testing-strategies
 Priorities: north-star-alignment, autonomous-partnership, outcome-learning
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v5.9.12 Documentation Hygiene Edition — comprehensive doc audit, version drift elimination, doc-hygiene→release-process synapse
+Recent: v5.9.12 Documentation Hygiene Edition — published to Marketplace 2026-02-27, PAT lifecycle hardening
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
-Last Assessed: 2026-02-26
+Last Assessed: 2026-02-27
 ## User Profile
 <!-- I use this to know who I'm working with and how they prefer to collaborate. -->
 Read .github/config/user-profile.json BEFORE writing content with user's name.

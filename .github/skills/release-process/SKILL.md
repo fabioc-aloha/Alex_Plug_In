@@ -75,6 +75,11 @@ $env:VSCE_PAT = "your-token-here"
 VSCE_PAT=your-token-here
 ```
 
+> **Dual `.env` Warning**: Both `Alex_Plug_In/.env` (root) AND `platforms/vscode-extension/.env` (heir)
+> may contain a `VSCE_PAT`. The publish command runs from the heir directory and reads the **heir's** `.env`.
+> If you update the root, also update the heir — or vice versa. PAT mismatch between these files has
+> caused 401 errors across consecutive releases (v5.9.11, v5.9.12).
+
 **Option 3: System Environment** (Persistent)
 ```powershell
 [Environment]::SetEnvironmentVariable("VSCE_PAT", "your-token", "User")
@@ -86,8 +91,20 @@ VSCE_PAT=your-token-here
 |-------|-------|----------|
 | 401 Unauthorized | PAT expired or invalid | Create new PAT |
 | 401 Unauthorized | Wrong scope | Ensure "Marketplace (Manage)" scope |
+| 401 Unauthorized | Wrong `.env` updated | Ensure `platforms/vscode-extension/.env` has the token |
 | 403 Forbidden | Not publisher owner | Check publisher membership |
 | Token not found | .env not loaded | Check file path, run preflight |
+
+### Retry After PAT Fix
+
+When publish fails with 401 and you've already built a valid `.vsix`, skip the full prepublish cycle:
+
+```powershell
+# Set new PAT and publish pre-built package (skips sync/quality-gate/compile)
+$env:VSCE_PAT = "new-token"; npx vsce publish --packagePath alex-cognitive-architecture-X.Y.Z.vsix
+```
+
+This saves ~2 minutes vs a full `npx vsce publish` which re-runs the entire prepublish pipeline.
 
 ---
 

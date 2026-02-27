@@ -25,7 +25,7 @@ v5.9.12 shipped zero code changes — only documentation hygiene fixes. The rele
 
 ## Architecture State
 
-- **Version**: 5.9.12 (committed, pushed, NOT published — PAT expired)
-- **HEAD**: 6bde3f6
-- **Publish Status**: BLOCKED — Azure DevOps PAT needs renewal
-- **Action Required**: Regenerate PAT at dev.azure.com, update `.env`, then `vsce publish`
+- **Version**: 5.9.12 (published to Marketplace on 2026-02-27)
+- **HEAD**: 57885f1
+- **Publish Status**: COMPLETED — PAT renewed by user session, published via `--packagePath` optimization
+- **Resolution**: Fresh PAT created with Marketplace→Manage scope, both `.env` files synced
