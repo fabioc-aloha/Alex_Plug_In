@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.11] - 2026-02-26
+
+> **Post-Publish Synapse Hardening** — Meditation-driven synapse integrity fixes, relative path normalization, and Brain-QA integration as publish gate.
+
+### Changed
+
+- **Synapse path normalization** — Fixed 11 relative synapse paths to full `.github/` paths
+- **Brain-QA as publish gate** — Added `cognitive-health-validation` synapse to `automated-quality-gates.instructions.md`
+- **Active Context updated** — Recent field reflects v5.9.10 NASA Edition publish completion
+
+### Added
+
+- **Episodic memory** — Meditation consolidating 6 key learnings from the publish hardening session
+- **Global Knowledge insights** — Publish hardening and marketplace link resolution patterns
+
+---
+
 ## [5.9.10] - 2026-02-26 — NASA Edition 🚀
 
 > **NASA Standards & Mission-Critical Compliance** — Adopt NASA/JPL Power of 10 code quality rules for mission-critical software development. Extension code audited and made compliant with bounded recursion and loop limits.

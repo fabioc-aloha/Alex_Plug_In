@@ -1,38 +1,37 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "platforms/m365-copilot/appPackage/manifest.json",
-    "platforms/m365-copilot/package.json",
-    "platforms/vscode-extension/package.json"
+    "github/config/cognitive-config.json",
+    "ROADMAP-UNIFIED.md",
+    "platforms/m365-copilot/README.md",
+    "platforms/vscode-extension/CHANGELOG.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.10.vsix",
       "todoCount": 20,
-      "scannedAt": 1772155262381
+      "scannedAt": 1772155955808
+    },
+    {
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 8,
+      "scannedAt": 1772155955808
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772155262381
+      "scannedAt": 1772155955808
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772155262381
+      "scannedAt": 1772155955808
     },
     {
-      "file": "README.md",
+      "file": "ROADMAP-UNIFIED.md",
       "todoCount": 1,
-      "scannedAt": 1772155262381
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772155262381
+      "scannedAt": 1772155955808
     }
   ],
-  "lastUpdated": 1772155262381
+  "lastUpdated": 1772155955808
 }

@@ -169,7 +169,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 | Version | Focus | Status |
 |---------|-------|:------:|
-| v5.9.10 | Workspace File API Migration + NASA Edition | ✅ Current |
+| v5.9.11 | Post-Publish Synapse Hardening | ✅ Current |
 | **v6.0.0** | **The Partnership Release** | **📋 Next** |
 | v7.0.0+ | Collaborative Intelligence | Backlogged |
 
@@ -177,8 +177,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                       |
 | -------------------------- | ------------------------------------- |
-| **Current Master Version** | 5.9.10                                |
-| **Current Heirs**          | VS Code (5.9.10), M365 (5.9.3)        |
+| **Current Master Version** | 5.9.11                                |
+| **Current Heirs**          | VS Code (5.9.11), M365 (5.9.11)       |
 | **Next Target**            | 6.0.0 — The Partnership Release       |
 | **Updated**                | 2026-02-26                            |
 
@@ -186,7 +186,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v5.9.10)
+### Current State Summary (v5.9.11)
 
 Alex now has:
 - **124 Skills** (124 inheritable to heirs, fully synced)
@@ -204,6 +204,7 @@ Alex now has:
 
 | Version | Theme | Date |
 |---------|-------|------|
+| v5.9.11 | Post-Publish Synapse Hardening | 2026-02-26 |
 | v5.9.10 | Workspace File API Migration + NASA Edition | 2026-02-26 |
 | v5.9.9 | Platform Architecture Reinforcement | 2026-02-24 |
 | v5.9.8 | Background File Watcher | 2026-02-21 |
