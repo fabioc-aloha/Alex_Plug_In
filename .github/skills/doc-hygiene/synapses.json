@@ -22,6 +22,12 @@
             "type": "supports",
             "strength": 0.8,
             "reason": "Semantic audits enforce doc hygiene standards"
+        },
+        {
+            "target": ".github/skills/release-process/SKILL.md",
+            "type": "coordinates",
+            "strength": 0.8,
+            "reason": "Release workflows should trigger doc hygiene sweeps — 3 consecutive releases missed secondary doc updates (TEST-GUIDE, operational docs, heir READMEs)"
         }
     ],
     "when": [

@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: knowledge-synthesis, research-first-development, testing-strategies
 Priorities: north-star-alignment, autonomous-partnership, outcome-learning
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v5.9.11 published — audit-driven version drift fixes, v6.0.0 4-phase build plan mapped (outcome learning → episodic recall → autonomous detection → polish)
+Recent: v5.9.11 docs fully aligned — comprehensive hygiene pass fixed 8 files (version drift, stale counts, dated references), new doc-hygiene→release-process synapse added
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-02-26
