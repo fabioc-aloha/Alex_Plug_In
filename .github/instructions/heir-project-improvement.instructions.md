@@ -10,6 +10,7 @@ description: "Practical guide for heirs to create project trifectas and apply re
 **Synapse**: [.github/instructions/research-first-workflow.instructions.md] (Critical, Extends, Bidirectional) - "research-first provides methodology; this instruction teaches heirs to run it"
 **Synapse**: [.github/instructions/heir-skill-promotion.instructions.md] (High, Feeds, Forward) - "discoveries from heir improvement may promote to Master"
 **Synapse**: [.github/skills/research-first-development/SKILL.md] (High, Uses, Forward) - "4D gap analysis model and research-first patterns"
+**Synapse**: [AlexLearn heir] (Medium, Exemplifies, Forward) - "content-domain heir with teaching trifecta, persona overlays, and independent content source of truth"
 
 ---
 

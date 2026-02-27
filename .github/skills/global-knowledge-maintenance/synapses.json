@@ -79,5 +79,6 @@
         "domain": "meta-cognitive repository curation",
         "complexity": "medium",
         "automation_level": "semi-automated"
-    }
+    },
+    "schemaVersion": "2.0.0"
 }
