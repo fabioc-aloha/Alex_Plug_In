@@ -18,6 +18,7 @@ applyTo: "**/quality-gate*,**/scripts/quality*,**/*prepublish*,**/package.json"
 - [.github/skills/release-preflight/SKILL.md] (Critical, Automates, Bidirectional) - "Gates automate preflight checks that were previously manual-only"
 - [.github/instructions/vscode-extension-patterns.instructions.md] (High, Validates, Forward) - "Ensures extension packaging follows VS Code patterns"
 - [.github/instructions/extension-audit-methodology.instructions.md] (Medium, Complements, Forward) - "Audit findings become new quality gates"
+- [.github/instructions/cognitive-health-validation.instructions.md] (High, Validates, Bidirectional) - "Brain-QA 35-phase validation as pre-publish deep audit gate (v5.9.10 meditation insight)"
 
 ---
 

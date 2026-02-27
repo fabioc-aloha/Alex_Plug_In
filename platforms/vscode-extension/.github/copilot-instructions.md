@@ -20,7 +20,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, outcome-learning
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: AlexLearn heir created — self-sufficient teaching workspace with 5 persona workshop overlays
+Recent: v5.9.10 NASA Edition published to VS Code Marketplace — 7-gate deep audit, all heirs aligned
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: never
