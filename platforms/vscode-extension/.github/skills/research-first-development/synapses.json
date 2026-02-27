@@ -49,6 +49,12 @@
             "type": "extends",
             "strength": 0.75,
             "reason": "Research-first patterns flow through heir promotion pipeline"
+        },
+        {
+            "target": ".github/skills/north-star/SKILL.md",
+            "type": "aligns",
+            "strength": 0.85,
+            "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping"
         }
     ],
     "triggers": [

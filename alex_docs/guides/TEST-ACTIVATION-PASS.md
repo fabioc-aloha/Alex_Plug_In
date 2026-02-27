@@ -19,7 +19,7 @@
 | # | Check | Expected | Pass |
 |---|-------|----------|------|
 | 1.1 | Run `code --list-extensions \| grep alex` | `fabioc-aloha.alex-cognitive-architecture` | ☐ |
-| 1.2 | Extensions view shows extension with correct version (5.9.11) | Version matches `package.json` | ☐ |
+| 1.2 | Extensions view shows extension with correct version (5.9.12) | Version matches `package.json` | ☐ |
 | 1.3 | Activation event is `onStartupFinished` | Extension active after VS Code finishes loading (no manual trigger needed) | ☐ |
 
 ---

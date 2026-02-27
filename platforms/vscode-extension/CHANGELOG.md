@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.12] - 2026-02-26
+
+> **Documentation Hygiene Edition** — Comprehensive documentation audit eliminating version drift, stale counts, and dated references across 8 files. New doc-hygiene→release-process synapse added.
+
+### Changed
+
+- **README.md alignment** — File counts and footer version corrected
+- **TEST-GUIDE.md** — 12 stale v5.9.9 references updated
+- **Operational docs** — CONTRIBUTING, PRE-PUBLISH-CHECKLIST, PUBLISHING dates updated
+- **Heir README counts** — Instructions 28→55, prompts 17→35
+- **alex_docs** — TEST-ACTIVATION-PASS and VSCODE-SOURCE-INTEGRATION-ANALYSIS version refs fixed
+
+### Added
+
+- **Synapse: doc-hygiene → release-process** (0.80) — release workflows trigger doc hygiene sweeps
+- **Episodic memory** — Documentation hygiene meditation with 4 key learnings
+
+---
+
 ## [5.9.11] - 2026-02-26
 
 > **Post-Publish Synapse Hardening** — Meditation-driven synapse integrity fixes, relative path normalization, and Brain-QA integration as publish gate.

@@ -4,7 +4,7 @@
 **Analyst**: Alex Cognitive Architecture (Opus 4.6)
 **Source**: [microsoft/vscode](https://github.com/microsoft/vscode) main branch
 **Purpose**: Identify undiscovered VS Code extension APIs and patterns that could enhance the Alex VS Code extension
-**Current Alex Version**: 5.9.11
+**Current Alex Version**: 5.9.12
 
 > **⚠️ Counts snapshot**: Numbers in this analysis reflect v5.0.0 at time of writing. Authoritative current counts live in the root `README.md`.
 

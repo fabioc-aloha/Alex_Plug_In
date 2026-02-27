@@ -1040,7 +1040,7 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** — v5.9.11
+**Alex Cognitive Architecture** — v5.9.12
 
 Built on 270+ academic sources
 

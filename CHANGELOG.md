@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.12] - 2026-02-26
+
+> **Documentation Hygiene Edition** — Comprehensive documentation audit eliminating version drift, stale file counts, and outdated dates across 8 files. New doc-hygiene→release-process synapse ensures future releases trigger documentation sweeps.
+
+### Changed
+
+- **README.md alignment** — Instructions count 52→55, prompts 34→35, skills 123→124, footer version v5.9.9→v5.9.12, removed duplicate copyright line
+- **TEST-GUIDE.md full update** — 12 stale v5.9.9 references updated to v5.9.12 across install commands, test expectations, section headers, and known gaps
+- **Operational docs dates** — CONTRIBUTING.md, PRE-PUBLISH-CHECKLIST.md, PUBLISHING.md dates updated from February 15 to February 26
+- **Heir VS Code README counts** — Instructions 28→55, prompts 17→35 — eliminated 2x count divergence
+- **alex_docs version references** — TEST-ACTIVATION-PASS.md (v5.9.9→v5.9.12), VSCODE-SOURCE-INTEGRATION-ANALYSIS.md (v5.9.10→v5.9.12)
+
+### Added
+
+- **New synapse: doc-hygiene → release-process** (0.80 strength) — encodes the lesson that release workflows should trigger documentation hygiene sweeps to prevent systemic drift
+- **Episodic memory** — `meditation-2026-02-26-documentation-hygiene-pass.md` consolidating 4 key learnings about documentation drift patterns
+
+---
+
 ## [5.9.11] - 2026-02-26
 
 > **Post-Publish Synapse Hardening** — Meditation-driven synapse integrity fixes, relative path normalization, and Brain-QA integration as publish gate.
