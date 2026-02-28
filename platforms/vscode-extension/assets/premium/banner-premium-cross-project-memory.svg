@@ -8,27 +8,27 @@
     
     <!-- Azure blue -->
     <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
     </linearGradient>
     
     <!-- Flame -->
     <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffc857"/>
-      <stop offset="100%" stop-color="#ff6b35"/>
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#f97316"/>
     </linearGradient>
     
     <!-- Large glow behind rocket -->
     <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.2"/>
-      <stop offset="70%" stop-color="#0078d4" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.2"/>
+      <stop offset="70%" stop-color="#0d9488" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
     </radialGradient>
     
     <!-- Fuel gradient -->
     <linearGradient id="fuel" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#ff6b35" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#ffc857" stop-opacity="0.3"/>
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0.3"/>
     </linearGradient>
   </defs>
   
@@ -49,22 +49,22 @@
   <!-- Fuel tank indicator (left side) - showing "full" for persistent memory -->
   <g transform="translate(130, 200)" opacity="0.6">
     <!-- Tank outline -->
-    <rect x="0" y="0" width="30" height="120" rx="15" fill="none" stroke="#0078d4" stroke-width="2"/>
+    <rect x="0" y="0" width="30" height="120" rx="15" fill="none" stroke="#0d9488" stroke-width="2"/>
     <!-- Fuel level (full) -->
     <rect x="4" y="8" width="22" height="104" rx="11" fill="url(#fuel)"/>
     <!-- Tank cap -->
-    <rect x="8" y="-8" width="14" height="10" rx="3" fill="#0078d4"/>
+    <rect x="8" y="-8" width="14" height="10" rx="3" fill="#0d9488"/>
     <!-- Fuel symbol -->
-    <text x="15" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ff6b35" text-anchor="middle" font-weight="bold">∞</text>
+    <text x="15" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#f97316" text-anchor="middle" font-weight="bold">∞</text>
     <text x="15" y="160" font-family="Segoe UI, Arial, sans-serif" font-size="9" fill="#888888" text-anchor="middle">FUEL</text>
   </g>
   
   <!-- Memory chip icons (right side) representing persistent storage -->
   <g transform="translate(1080, 230)" opacity="0.5">
     <!-- Chip 1 -->
-    <rect x="0" y="0" width="50" height="35" rx="3" fill="#0078d4"/>
+    <rect x="0" y="0" width="50" height="35" rx="3" fill="#0d9488"/>
     <rect x="5" y="5" width="40" height="25" rx="2" fill="#080810"/>
-    <g fill="#0078d4">
+    <g fill="#0d9488">
       <rect x="10" y="10" width="8" height="5"/>
       <rect x="22" y="10" width="8" height="5"/>
       <rect x="34" y="10" width="8" height="5"/>
@@ -73,7 +73,7 @@
       <rect x="34" y="20" width="8" height="5"/>
     </g>
     <!-- Chip pins -->
-    <g fill="#0078d4">
+    <g fill="#0d9488">
       <rect x="-3" y="8" width="6" height="3"/>
       <rect x="-3" y="15" width="6" height="3"/>
       <rect x="-3" y="22" width="6" height="3"/>
@@ -84,9 +84,9 @@
     
     <!-- Chip 2 -->
     <g transform="translate(0, 50)">
-      <rect x="0" y="0" width="50" height="35" rx="3" fill="#0078d4"/>
+      <rect x="0" y="0" width="50" height="35" rx="3" fill="#0d9488"/>
       <rect x="5" y="5" width="40" height="25" rx="2" fill="#080810"/>
-      <g fill="#0078d4">
+      <g fill="#0d9488">
         <rect x="10" y="10" width="8" height="5"/>
         <rect x="22" y="10" width="8" height="5"/>
         <rect x="34" y="10" width="8" height="5"/>
@@ -94,7 +94,7 @@
         <rect x="22" y="20" width="8" height="5"/>
         <rect x="34" y="20" width="8" height="5"/>
       </g>
-      <g fill="#0078d4">
+      <g fill="#0d9488">
         <rect x="-3" y="8" width="6" height="3"/>
         <rect x="-3" y="15" width="6" height="3"/>
         <rect x="-3" y="22" width="6" height="3"/>
@@ -119,7 +119,7 @@
     <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
     <!-- Flame -->
     <polygon points="22,68 30,90 38,68" fill="url(#flame)"/>
-    <polygon points="24,68 30,85 36,68" fill="#ffc857"/>
+    <polygon points="24,68 30,85 36,68" fill="#f97316"/>
   </g>
   
   <!-- Tagline -->
@@ -127,20 +127,20 @@
   
   <!-- Subtitle: Cross-Project Memory -->
   <text x="680" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#888888" text-anchor="middle">
-    <tspan fill="#888888">Your </tspan><tspan fill="#0078d4" font-weight="bold">MEMORY</tspan><tspan fill="#888888"> Persists Across Projects</tspan>
+    <tspan fill="#888888">Your </tspan><tspan fill="#0d9488" font-weight="bold">MEMORY</tspan><tspan fill="#888888"> Persists Across Projects</tspan>
   </text>
   
   <!-- Premium feature badge -->
   <g transform="translate(1045, 85)">
-    <rect x="0" y="0" width="195" height="28" rx="14" fill="#ff6b35" opacity="0.9"/>
+    <rect x="0" y="0" width="195" height="28" rx="14" fill="#f97316" opacity="0.9"/>
     <text x="97" y="19" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">CROSS-PROJECT MEMORY</text>
   </g>
   
   <!-- CorreaX mark bottom left -->
   <g transform="translate(30, 580) scale(1.0)" opacity="0.7">
-    <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14c3.866 0 7.389-1.568 9.928-4.1l-3.535-3.536A9.002 9.002 0 0116 25c-4.97 0-9-4.03-9-9s4.03-9 9-9c2.29 0 4.38.857 5.971 2.268l3.464-3.639C22.993 3.352 19.66 2 16 2z" fill="#0078d4"/>
-    <path d="M20 10l-4 6 4 6h4l-4-6 4-6h-4z" fill="#0078d4"/>
-    <path d="M24 10l4 6-4 6h4l4-6-4-6h-4z" fill="#0078d4" opacity="0.5"/>
+    <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14c3.866 0 7.389-1.568 9.928-4.1l-3.535-3.536A9.002 9.002 0 0116 25c-4.97 0-9-4.03-9-9s4.03-9 9-9c2.29 0 4.38.857 5.971 2.268l3.464-3.639C22.993 3.352 19.66 2 16 2z" fill="#0d9488"/>
+    <path d="M20 10l-4 6 4 6h4l-4-6 4-6h-4z" fill="#0d9488"/>
+    <path d="M24 10l4 6-4 6h4l4-6-4-6h-4z" fill="#0d9488" opacity="0.5"/>
   </g>
   <text x="68" y="608" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#888888">CorreaX</text>
 </svg>

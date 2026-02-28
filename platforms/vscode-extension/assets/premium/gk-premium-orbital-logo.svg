@@ -8,20 +8,20 @@
     
     <!-- Azure blue -->
     <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
     </linearGradient>
     
     <!-- Flame -->
     <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffc857"/>
-      <stop offset="100%" stop-color="#ff6b35"/>
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#f97316"/>
     </linearGradient>
     
     <!-- Glow -->
     <radialGradient id="glow" cx="50%" cy="50%" r="40%">
-      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
     </radialGradient>
   </defs>
   
@@ -32,10 +32,10 @@
   <circle cx="64" cy="60" r="50" fill="url(#glow)"/>
   
   <!-- Orbital ring (ellipse tilted) -->
-  <ellipse cx="64" cy="60" rx="52" ry="18" fill="none" stroke="#0078d4" stroke-width="1.5" opacity="0.4" transform="rotate(-15 64 60)"/>
+  <ellipse cx="64" cy="60" rx="52" ry="18" fill="none" stroke="#0d9488" stroke-width="1.5" opacity="0.4" transform="rotate(-15 64 60)"/>
   
   <!-- Orbital nodes (projects in orbit) -->
-  <g fill="#0078d4">
+  <g fill="#0d9488">
     <circle cx="15" cy="50" r="5" opacity="0.3"/>
     <circle cx="15" cy="50" r="3" opacity="0.8"/>
     <circle cx="113" cy="70" r="5" opacity="0.3"/>
@@ -53,6 +53,6 @@
     <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
     <!-- Flame -->
     <polygon points="22,68 30,85 38,68" fill="url(#flame)"/>
-    <polygon points="24,68 30,82 36,68" fill="#ffc857"/>
+    <polygon points="24,68 30,82 36,68" fill="#f97316"/>
   </g>
 </svg>

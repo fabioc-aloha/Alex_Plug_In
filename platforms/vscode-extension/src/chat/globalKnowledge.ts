@@ -883,7 +883,7 @@ function getAnimatedBannerSvg(): string {
     <!-- DOCKED ROCKET (A Negative Space) -->
     <ellipse cx="245" cy="55" rx="20" ry="20" fill="url(#dockGlow)"/>
     <rect x="180" y="50" width="25" height="10" fill="url(#hull)"/>
-    <circle cx="205" cy="55" r="8" fill="#2d3748" stroke="#00ff88" stroke-width="2"/>
+    <circle cx="205" cy="55" r="8" fill="#2d3748" stroke="#2dd4bf" stroke-width="2"/>
     
     <g transform="translate(205, 55) rotate(-90)">
       <g transform="scale(0.7)">
@@ -891,8 +891,8 @@ function getAnimatedBannerSvg(): string {
         <polygon points="15,55 5,70 15,67" fill="url(#azure)"/>
         <polygon points="45,55 55,70 45,67" fill="url(#azure)"/>
         <path d="M30,15 L21,50 L24,50 L26,42 L34,42 L36,50 L39,50 Z M28,38 L30,22 L32,38 Z" fill="#080810"/>
-        <circle cx="8" cy="60" r="3" fill="#ffc857" opacity="0.4"/>
-        <circle cx="52" cy="60" r="3" fill="#ffc857" opacity="0.4"/>
+        <circle cx="8" cy="60" r="3" fill="#fb923c" opacity="0.4"/>
+        <circle cx="52" cy="60" r="3" fill="#fb923c" opacity="0.4"/>
       </g>
     </g>
     
@@ -919,8 +919,8 @@ function getAnimatedBannerSvg(): string {
       <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#f97316">💡 Insights</text>
     </g>
     <g transform="translate(210, 0)">
-      <rect x="0" y="0" width="90" height="28" rx="14" fill="#00ff88" fill-opacity="0.15" stroke="#00ff88" stroke-width="1" stroke-opacity="0.4"/>
-      <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#00ff88">🔗 Synced</text>
+      <rect x="0" y="0" width="90" height="28" rx="14" fill="#2dd4bf" fill-opacity="0.15" stroke="#2dd4bf" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#2dd4bf">🔗 Synced</text>
     </g>
     <g transform="translate(310, 0)">
       <rect x="0" y="0" width="105" height="28" rx="14" fill="#f97316" fill-opacity="0.15" stroke="#f97316" stroke-width="1" stroke-opacity="0.4"/>
@@ -930,17 +930,17 @@ function getAnimatedBannerSvg(): string {
   
   <!-- Docking status indicator -->
   <g transform="translate(530, 210)">
-    <rect width="200" height="24" rx="12" fill="#00ff88" fill-opacity="0.1" stroke="#00ff88" stroke-width="1" stroke-opacity="0.3"/>
-    <circle cx="18" cy="12" r="5" fill="#00ff88">
+    <rect width="200" height="24" rx="12" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-width="1" stroke-opacity="0.3"/>
+    <circle cx="18" cy="12" r="5" fill="#2dd4bf">
       <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <text x="32" y="16" font-family="Segoe UI, sans-serif" font-size="11" fill="#00ff88">DOCKED &amp; SYNCED</text>
+    <text x="32" y="16" font-family="Segoe UI, sans-serif" font-size="11" fill="#2dd4bf">DOCKED &amp; SYNCED</text>
   </g>
   
   <!-- v5.0 badge -->
   <g transform="translate(530, 245)">
     <rect width="100" height="22" rx="11" fill="url(#solar)" fill-opacity="0.2"/>
-    <text x="50" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#ffc857">🚀 Premium v5.0</text>
+    <text x="50" y="15" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#f97316">🚀 Premium v5.0</text>
   </g>
   
   <!-- CorreaX mark bottom right -->
