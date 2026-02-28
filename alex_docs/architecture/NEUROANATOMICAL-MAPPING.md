@@ -15,7 +15,7 @@ The human brain processes information through specialized regions interconnected
 ## The Alex Brain — Full Anatomical Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph FRONTAL["FRONTAL LOBE"]
         subgraph PFC["Prefrontal Cortex - Executive Function"]
@@ -420,7 +420,7 @@ Some knowledge isn't "in" any one brain region — it emerges from distributed p
 How information flows through Alex's brain, from input to output:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     INPUT["User Input - Thalamus"]
     SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I7"]
@@ -549,7 +549,7 @@ Real brains maintain an ~80:20 ratio of excitatory to inhibitory synapses. This 
 Alex's synapse architecture targets the same balance:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'titleColor': '#1f2328', 'pie1': '#3fb950', 'pie2': '#ff6b6b', 'pieTitleTextColor': '#1f2328', 'pieSectionTextColor': '#ffffff', 'pieLegendTextColor': '#1f2328', 'pieStrokeColor': '#ffffff', 'pieOuterStrokeColor': '#d1d9e0'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 pie title Synapse Type Distribution - Target
     "Excitatory - Enables, Triggers, Enhances" : 80
     "Inhibitory - Inhibits, Suppresses" : 20

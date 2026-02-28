@@ -28,6 +28,7 @@
 ### Implementation Timeline
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 gantt
     title Semantic Skill Graph — Implementation Phases
     dateFormat YYYY-MM-DD
@@ -63,7 +64,7 @@ gantt
 ### Architecture Overview
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph NOW["Current: Keyword Matching"]
         direction TB
@@ -114,7 +115,7 @@ flowchart LR
     style FALL fill:#bbdefb,stroke:#1e88e5
     style DISC fill:#e1bee7,stroke:#8e24aa
     style GK fill:#e1bee7,stroke:#8e24aa
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 ---
@@ -174,7 +175,7 @@ The current architecture treats skills like an interpreted language — the LLM 
 The proposal: **compile skills into a semantic graph** optimized for retrieval, while keeping the current `.md` + `.json` files as editable source code.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph SRC["Source Code: human-editable"]
         SK["SKILL.md files"]
@@ -199,9 +200,9 @@ flowchart LR
     COMPILE --> GRA
     COMPILE --> CLU
 
-    style SRC fill:#f6f8fa,stroke:#57606a,stroke-width:2px
-    style OUT fill:#f6f8fa,stroke:#57606a,stroke-width:2px
-    style COMPILE fill:#c4a35a,stroke:#57606a,color:#fff,stroke-width:2px
+    style SRC fill:#1e293b,stroke:#475569,stroke-width:2px
+    style OUT fill:#1e293b,stroke:#475569,stroke-width:2px
+    style COMPILE fill:#c4a35a,stroke:#475569,color:#fff,stroke-width:2px
     style SK fill:#bbdefb,stroke:#1e88e5
     style SY fill:#bbdefb,stroke:#1e88e5
     style DK fill:#c8e6c9,stroke:#43a047
@@ -209,7 +210,7 @@ flowchart LR
     style VEC fill:#e1bee7,stroke:#8e24aa
     style GRA fill:#e1bee7,stroke:#8e24aa
     style CLU fill:#e1bee7,stroke:#8e24aa
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 ### The Compiler Analogy
@@ -230,7 +231,7 @@ flowchart LR
 ### 3.1 Compilation Pipeline
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     P["🔍 Parse Sources<br/>75 skills, 20 procedures<br/>25 patterns, 166 insights"]
     C["✂️ Chunk Content<br/>~400 chunks<br/>~300-500 tokens each"]
@@ -243,9 +244,9 @@ flowchart LR
 
     style P fill:#bbdefb,stroke:#1e88e5,stroke-width:2px
     style C fill:#c8e6c9,stroke:#43a047,stroke-width:2px
-    style E fill:#c4a35a,stroke:#57606a,color:#fff,stroke-width:2px
+    style E fill:#c4a35a,stroke:#475569,color:#fff,stroke-width:2px
     style B fill:#e1bee7,stroke:#8e24aa,stroke-width:2px
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 #### Step 1 — Parse Sources
@@ -295,7 +296,7 @@ embed("Color theory: complementary, analogous, triadic schemes")
 Combine explicit synapses with semantic similarity:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph LR
     subgraph EXP["Explicit Edges: from synapses.json"]
         MM1["markdown-mermaid"] -->|0.9| GD1["graphic-design"]
@@ -308,8 +309,8 @@ graph LR
         GD3["graphic-design:chunk 3"] -.->|0.78| SVG["svg-graphics:chunk 2"]
     end
 
-    style EXP fill:#f6f8fa,stroke:#57606a,stroke-width:2px
-    style DIS fill:#f6f8fa,stroke:#57606a,stroke-width:2px
+    style EXP fill:#1e293b,stroke:#475569,stroke-width:2px
+    style DIS fill:#1e293b,stroke:#475569,stroke-width:2px
 
     style MM1 fill:#bbdefb,stroke:#1e88e5
     style GD1 fill:#c8e6c9,stroke:#43a047
@@ -320,7 +321,7 @@ graph LR
     style GD3 fill:#e1bee7,stroke:#8e24aa
     style AW fill:#e1bee7,stroke:#8e24aa
     style SVG fill:#e1bee7,stroke:#8e24aa
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 Merged graph = explicit + discovered, deduped, max(strength).
@@ -328,7 +329,7 @@ Merged graph = explicit + discovered, deduped, max(strength).
 Clusters emerge from dense subgraphs:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph VO["Cluster: Visual Output"]
         direction TB
@@ -458,7 +459,7 @@ Three files produced by compilation, stored in `.alex/compiled/`:
 When a user request arrives, the compiled graph enables a fundamentally different activation path:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     subgraph KW["Current: Keyword Matching"]
         direction LR
@@ -483,15 +484,15 @@ flowchart TB
 
     style KW fill:#ffcdd2,stroke:#e53935,stroke-width:2px
     style SEM fill:#c8e6c9,stroke:#43a047,stroke-width:2px
-    style Q1 fill:#f6f8fa,stroke:#57606a
-    style Q2 fill:#f6f8fa,stroke:#57606a
+    style Q1 fill:#1e293b,stroke:#475569
+    style Q2 fill:#1e293b,stroke:#475569
     style SCAN fill:#ffcdd2,stroke:#e53935
     style MATCH1 fill:#ffcdd2,stroke:#e53935
     style LOAD1 fill:#ffcdd2,stroke:#e53935
     style DONE1 fill:#ffcdd2,stroke:#e53935
     style EMB fill:#bbdefb,stroke:#1e88e5
     style COS fill:#bbdefb,stroke:#1e88e5
-    style TOP fill:#c4a35a,stroke:#57606a,color:#fff
+    style TOP fill:#c4a35a,stroke:#475569,color:#fff
     style C1 fill:#e1bee7,stroke:#8e24aa
     style C2 fill:#e1bee7,stroke:#8e24aa
     style C3 fill:#e1bee7,stroke:#8e24aa
@@ -499,7 +500,7 @@ flowchart TB
     style C5 fill:#e1bee7,stroke:#8e24aa
     style EXPAND fill:#c8e6c9,stroke:#43a047
     style FINAL fill:#c8e6c9,stroke:#43a047
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 The Mermaid color problem **never happens again** because the query "make diagrams consistent" is semantically close to both the Mermaid palette chunk AND the graphic-design color theory chunk. The system finds the combination automatically.
@@ -521,7 +522,7 @@ The compiled graph should be rebuilt when source files change. This runs as a ba
 ### Staleness Detection
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     ACT["Extension activates"] --> HASH["Compute hash of<br/>all skill sources"]
     HASH --> CMP{"hash ==<br/>sourceHash?"}
@@ -529,12 +530,12 @@ flowchart LR
     CMP -->|No| RECOMP["Trigger background<br/>recompile"]
     RECOMP --> LOAD
 
-    style ACT fill:#f6f8fa,stroke:#57606a
+    style ACT fill:#1e293b,stroke:#475569
     style HASH fill:#bbdefb,stroke:#1e88e5
-    style CMP fill:#c4a35a,stroke:#57606a,color:#fff
+    style CMP fill:#c4a35a,stroke:#475569,color:#fff
     style LOAD fill:#c8e6c9,stroke:#43a047
     style RECOMP fill:#e1bee7,stroke:#8e24aa
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 ---
@@ -544,7 +545,7 @@ flowchart LR
 The compiled graph doesn't replace the existing system — it wraps it.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 block-beta
     columns 1
 
@@ -567,7 +568,7 @@ block-beta
     artifacts --> source
 
     style semantic fill:#e1bee7,stroke:#8e24aa,stroke-width:2px
-    style artifacts fill:#c4a35a,stroke:#57606a,color:#fff,stroke-width:2px
+    style artifacts fill:#c4a35a,stroke:#475569,color:#fff,stroke-width:2px
     style source fill:#bbdefb,stroke:#1e88e5,stroke-width:2px
     style A fill:#e1bee7,stroke:#8e24aa
     style B fill:#e1bee7,stroke:#8e24aa
@@ -598,7 +599,7 @@ Today, synapses are manually curated. You wrote `markdown-mermaid → graphic-de
 The compilation step produces a **similarity matrix** across all skill chunks. Any pair with cosine similarity > 0.75 that ISN'T already in `synapses.json` is a **discovered synapse** — a connection that exists semantically but was never made explicit.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph LR
     PE["prompt-engineering"] -.->|"0.81 — Chunking info for LLM"| CL["cognitive-load"]
     PM["post-mortem"] -.->|"0.79 — 5-whys overlap"| RCA["root-cause-analysis"]
@@ -613,7 +614,7 @@ graph LR
     style RD fill:#e1bee7,stroke:#8e24aa
     style SR fill:#bbdefb,stroke:#1e88e5
     style SFI fill:#e1bee7,stroke:#8e24aa
-    linkStyle default stroke:#57606a,stroke-width:1.5px
+    linkStyle default stroke:#475569,stroke-width:1.5px
 ```
 
 After compilation, you could review these and either:
@@ -638,7 +639,7 @@ This turns the compilation step into a **synapse discovery tool** — the graph 
 ### Recommended: Hybrid Approach
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph BG["Compilation: background"]
         direction TB
@@ -661,10 +662,10 @@ flowchart LR
     style RT fill:#c8e6c9,stroke:#43a047,stroke-width:2px
 
     style DREAM fill:#bbdefb,stroke:#1e88e5
-    style API fill:#c4a35a,stroke:#57606a,color:#fff
+    style API fill:#c4a35a,stroke:#475569,color:#fff
     style VEC fill:#e1bee7,stroke:#8e24aa
     style STORE fill:#e1bee7,stroke:#8e24aa
-    style Q fill:#f6f8fa,stroke:#57606a
+    style Q fill:#1e293b,stroke:#475569
     style QEMB fill:#c8e6c9,stroke:#43a047
     style COS fill:#c8e6c9,stroke:#43a047
     style TOPK fill:#c8e6c9,stroke:#43a047

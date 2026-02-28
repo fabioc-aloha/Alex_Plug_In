@@ -17,7 +17,7 @@
 Today, Alex exists inside specific applications:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     subgraph Today["ALEX TODAY"]
         direction TB
@@ -61,7 +61,7 @@ flowchart TD
 **Alex as a Service (AaaS)**: A cloud-hosted cognitive partner that is available everywhere, remembers everything, and gets better on its own.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     subgraph AaaS["ALEX AS A SERVICE"]
         Core["☁️ ALEX CLOUD CORE<br/>Unified Memory • 100+ Skills<br/>Agent Fleet • Observability<br/>Auto-Maintenance • Global Knowledge"]

@@ -5,7 +5,7 @@
 > **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
 >
 > **Date**: February 28, 2026
-> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 35/42 tasks done
+> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 38/42 tasks done
 >
 > **⛔ HOLD — DO NOT PUBLISH**: No deliverables shall be published or deployed until their milestone's publish gate is passed. Each milestone requires explicit green light from the plan owner. See §11 Milestone Gates for the gate-by-gate workflow.
 >
@@ -33,7 +33,7 @@
 | M1 — Publisher Logo | ✅ 2026-02-28 | 3/3 | ✅ Gate passed |
 | M2 — Shared Logos & Favicons | ✅ 2026-02-28 | 6/6 | ✅ Gate passed |
 | M3 — CX Extension Standardization | ⬜ Pending Fabio | 11/11 | 🔄 Tasks done, awaiting gate |
-| M4 — README Banners & Docs | ⬜ Pending Fabio | 8/10 (4.8–4.10 ⬜) | 🔄 In progress |
+| M4 — README Banners & Docs | ⬜ Pending Fabio | 10/10 | 🔄 Tasks done, awaiting gate |
 | M5 — Alex Extension | ⬜ Pending Fabio | 6/6 | 🔄 Tasks done, awaiting gate |
 | M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 4/7 (6.2, 6.3, 6.6 ⬜) | 🔄 In progress |
 
@@ -52,7 +52,7 @@
 | 11 | Extensions Brand Guide | 1 | 1 | M3 |
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 6 | M5 |
-| 14 | Documentation Assets | 3 | 0 | M4 |
+| 14 | Documentation Assets | 3 | 3 | M4 |
 | 15 | Verification & Sign-off | 7 | 3 | M2, M6 |
 | | **Total** | **42** | **34** | |
 
@@ -186,9 +186,9 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 4.8 | Create Mermaid theme snippet (DK §12) | 1 snippet file | ⬜ |
-| 4.9 | Audit architecture diagrams for palette | `alex_docs/architecture/` | ⬜ |
-| 4.10 | Standardize badge colors to CorreaX | All READMEs | ⬜ |
+| 4.8 | Create Mermaid theme snippet (DK §12) | `alex_docs/snippets/correax-mermaid-theme.md` | ✅ |
+| 4.9 | Audit architecture diagrams for palette | `alex_docs/architecture/` — all 43 blocks updated (replaced GitHub light theme with CorreaX dark) | ✅ |
+| 4.10 | Standardize badge colors to CorreaX | `README.md` + `platforms/vscode-extension/README.md` — `0078d4`→`0d9488`, `7c3aed`→`6366f1`, `24292f`→`334155`, `blue`→`0d9488` | ✅ |
 
 **Gate**: ✋ M4
 

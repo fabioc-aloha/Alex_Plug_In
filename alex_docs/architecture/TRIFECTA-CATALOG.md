@@ -279,7 +279,7 @@ Skill-Only:          ~110 (standard — passive expertise)
 ### Network Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#f6f8fa'}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph COMPLETE["✅ Complete Trifectas (11)"]
         RFD["Research-First Development"]

@@ -45,28 +45,7 @@ The Dead Letter heir discovered this the hard way — then solved it before writ
 ## The Solution: Research → Teach → Plan → Execute
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
-  'primaryColor': '#cce5ff',
-  'primaryTextColor': '#333',
-  'primaryBorderColor': '#57606a',
-  'lineColor': '#57606a',
-  'secondaryColor': '#e6d5f2',
-  'tertiaryColor': '#c2f0d8',
-  'background': '#ffffff',
-  'mainBkg': '#cce5ff',
-  'secondBkg': '#e6d5f2',
-  'tertiaryBkg': '#c2f0d8',
-  'textColor': '#333',
-  'border1Color': '#57606a',
-  'border2Color': '#57606a',
-  'arrowheadColor': '#57606a',
-  'fontFamily': 'ui-sans-serif, system-ui, sans-serif',
-  'fontSize': '14px',
-  'nodeBorder': '1.5px',
-  'clusterBkg': '#f6f8fa',
-  'clusterBorder': '#d0d7de',
-  'edgeLabelBackground': '#ffffff'
-}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     subgraph P0["Phase 0: Research"]
         R1["Deep domain\nresearch"]
@@ -193,28 +172,7 @@ A key component is separating builder and validator mental models:
 These agents carry different context, different instructions, and different success criteria. Using one agent for both creates conflicting incentives.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
-  'primaryColor': '#cce5ff',
-  'primaryTextColor': '#333',
-  'primaryBorderColor': '#57606a',
-  'lineColor': '#57606a',
-  'secondaryColor': '#e6d5f2',
-  'tertiaryColor': '#c2f0d8',
-  'background': '#ffffff',
-  'mainBkg': '#cce5ff',
-  'secondBkg': '#e6d5f2',
-  'tertiaryBkg': '#c2f0d8',
-  'textColor': '#333',
-  'border1Color': '#57606a',
-  'border2Color': '#57606a',
-  'arrowheadColor': '#57606a',
-  'fontFamily': 'ui-sans-serif, system-ui, sans-serif',
-  'fontSize': '14px',
-  'nodeBorder': '1.5px',
-  'clusterBkg': '#f6f8fa',
-  'clusterBorder': '#d0d7de',
-  'edgeLabelBackground': '#ffffff'
-}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     REQ["Feature\nRequest"] --> B["🔨 Builder Agent\nConstructive"]
     B --> CODE["Implementation"]
@@ -230,28 +188,7 @@ flowchart LR
 The complete flow incorporates all specialized agents:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
-  'primaryColor': '#cce5ff',
-  'primaryTextColor': '#333',
-  'primaryBorderColor': '#57606a',
-  'lineColor': '#57606a',
-  'secondaryColor': '#e6d5f2',
-  'tertiaryColor': '#c2f0d8',
-  'background': '#ffffff',
-  'mainBkg': '#cce5ff',
-  'secondBkg': '#e6d5f2',
-  'tertiaryBkg': '#c2f0d8',
-  'textColor': '#333',
-  'border1Color': '#57606a',
-  'border2Color': '#57606a',
-  'arrowheadColor': '#57606a',
-  'fontFamily': 'ui-sans-serif, system-ui, sans-serif',
-  'fontSize': '14px',
-  'nodeBorder': '1.5px',
-  'clusterBkg': '#f6f8fa',
-  'clusterBorder': '#d0d7de',
-  'edgeLabelBackground': '#ffffff'
-}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     START["New Project/Feature"] --> ALEX["🧠 Alex\nOrchestrator"]
     ALEX --> RESEARCH["📚 Researcher\nPhase 0: Deep Dive"]
@@ -370,13 +307,7 @@ This promotion represents several firsts for the Alex cognitive architecture:
 ### The Temporal Coverage Model
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
-  'primaryColor': '#cce5ff',
-  'primaryTextColor': '#333',
-  'primaryBorderColor': '#57606a',
-  'lineColor': '#57606a',
-  'fontFamily': 'ui-sans-serif, system-ui, sans-serif'
-}}}%%
+%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 timeline
     title Alex Temporal Coverage
     section Before Project
