@@ -5,9 +5,9 @@
 > **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
 >
 > **Date**: February 28, 2026
-> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 40/42 tasks done
+> **Status**: ✅ COMPLETE · **Last Updated**: 2026-02-28 · **Progress**: 42/42 tasks done
 >
-> **⛔ HOLD — DO NOT PUBLISH**: No deliverables shall be published or deployed until their milestone's publish gate is passed. Each milestone requires explicit green light from the plan owner. See §11 Milestone Gates for the gate-by-gate workflow.
+> **✅ HOLD LIFTED 2026-02-28** — Plan owner (Fabio) has given final sign-off. All 42 tasks complete. All milestones passed. All Alex brand assets cleared for publishing and deployment.
 >
 > **Release Gate Process** (per milestone):
 > 1. All tasks in the milestone pass the Definition of Done (§9)
@@ -32,10 +32,10 @@
 | Gate 0 — Decisions | ✅ 2026-02-28 | 6/6 D decisions | ✅ Signed off |
 | M1 — Publisher Logo | ✅ 2026-02-28 | 3/3 | ✅ Gate passed |
 | M2 — Shared Logos & Favicons | ✅ 2026-02-28 | 6/6 | ✅ Gate passed |
-| M3 — CX Extension Standardization | ⬜ Pending Fabio | 11/11 | 🔄 Tasks done, awaiting gate |
-| M4 — README Banners & Docs | ⬜ Pending Fabio | 10/10 | 🔄 Tasks done, awaiting gate |
-| M5 — Alex Extension | ⬜ Pending Fabio | 6/6 | 🔄 Tasks done, awaiting gate |
-| M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 6/7 (6.6 ⬜) | 🔄 In progress |
+| M3 — CX Extension Standardization | ✅ 2026-02-28 | 11/11 | ✅ Gate passed |
+| M4 — README Banners & Docs | ✅ 2026-02-28 | 10/10 | ✅ Gate passed |
+| M5 — Alex Extension | ✅ 2026-02-28 | 6/6 | ✅ Gate passed |
+| M6 — Verification & HOLD Lift | ✅ 2026-02-28 | 7/7 | ✅ HOLD LIFTED |
 
 | # | Asset Category | Tasks | Done | Milestone |
 |---|---------------|-------|------|-----------|
@@ -53,8 +53,8 @@
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 6 | M5 |
 | 14 | Documentation Assets | 3 | 3 | M4 |
-| 15 | Verification & Sign-off | 7 | 5 | M2, M6 |
-| | **Total** | **42** | **40** | |
+| 15 | Verification & Sign-off | 7 | 7 | M2, M6 |
+| | **Total** | **42** | **42** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -202,9 +202,9 @@
 | 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ✅ |
 | 6.4 | Add brand compliance to dream protocol | Dream automation | ✅ |
 | 6.5 | Baseline KPI measurements (§10) | See §10 table | ✅ |
-| 6.6 | Plan owner final sign-off → **HOLD lifted** | Written approval | ⬜ |
+| 6.6 | Plan owner final sign-off → **HOLD lifted** | Written approval | ✅ 2026-02-28 |
 
-**Gate**: 2.6 under ✋ M2 · 6.1–6.6 under ✋ M6 (Final)
+**Gate**: ✅ All M6 gates passed · HOLD lifted 2026-02-28
 
 </details>
 
