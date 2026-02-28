@@ -864,17 +864,52 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         .container {
             padding: 4px 6px;
         }
+        /* CorreaX banner-style header — accent bar + ghost watermark + series label */
         .header {
+            position: relative;
+            overflow: hidden;
+            background: var(--vscode-editor-widget-background, var(--vscode-sideBar-background));
+            border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
+            padding: 10px 10px 10px 14px;
+            margin-bottom: 8px;
+        }
+        .header-accent-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--persona-accent, var(--vscode-charts-blue));
+        }
+        .header-watermark {
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 52px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.04);
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+        .header-series {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--persona-accent, var(--vscode-charts-blue));
+            opacity: 0.85;
+            margin-bottom: 3px;
+        }
+        .header-main {
             display: flex;
             align-items: center;
             gap: 7px;
-            margin-bottom: 7px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--vscode-widget-border);
         }
         .header-icon {
-            width: 48px;
-            height: 48px;
+            width: 36px;
+            height: 36px;
             flex-shrink: 0;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
             cursor: pointer;
@@ -1586,12 +1621,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 <body>
     <div class="container">
         <div class="header">
-            <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" tabindex="0" role="button" />
-            <div class="header-text">
-                <span class="header-title">Alex Cognitive</span>
-                <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills" tabindex="0" role="button">${personaIcon} ${personaName}</span>
+            <div class="header-accent-bar"></div>
+            <div class="header-watermark">ALEX</div>
+            <div class="header-series">ALEX COGNITIVE</div>
+            <div class="header-main">
+                <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex Cognitive v${version} — Click to learn how to work with Alex" tabindex="0" role="button" />
+                <div class="header-text">
+                    <span class="header-title">Alex Cognitive</span>
+                    <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills" tabindex="0" role="button">${personaIcon} ${personaName}</span>
+                </div>
+                <button class="refresh-btn" data-cmd="refresh" title="Refresh" aria-label="Refresh welcome view">↻</button>
             </div>
-            <button class="refresh-btn" data-cmd="refresh" title="Refresh" aria-label="Refresh welcome view">↻</button>
         </div>
 
         <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills" tabindex="0" role="button">

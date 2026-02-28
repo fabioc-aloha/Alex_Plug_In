@@ -381,7 +381,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Hypothesis to publication, accelerated',
         skill: 'research-project-scaffold',
         icon: '🔬',
-        accentColor: '#10B981',
+        accentColor: '#0d9488',  // CorreaX teal — aligned to brand system
         signals: [
             { category: 'identity',   pattern: 'researcher|scientist|lab|experiment|hypothesis',                  weight: 2.5 },
             { category: 'technology', pattern: 'python|r\\b|julia|matlab|jupyter|pandas|numpy|scipy',             weight: 2.0 },
@@ -397,7 +397,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Docs that write themselves',
         skill: 'api-documentation',
         icon: '📝',
-        accentColor: '#F59E0B',
+        accentColor: '#f97316',  // CorreaX coral — aligned to brand system
         signals: [
             { category: 'identity',   pattern: 'writer|documentation|technical.?writ|api.?doc|manual',           weight: 2.5 },
             { category: 'technology', pattern: 'markdown|rst|asciidoc|docusaurus|sphinx|mkdocs',                  weight: 2.0 },

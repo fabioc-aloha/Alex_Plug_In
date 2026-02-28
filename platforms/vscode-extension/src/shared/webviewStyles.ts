@@ -40,6 +40,20 @@ export const DESIGN_TOKENS = {
   },
   // Touch target (WCAG compliance)
   minTouchTarget: "36px",
+  // CorreaX brand colors — maintain visual consistency across all CorreaX surfaces
+  // See DK-correax-brand.md for full design system specification
+  colors: {
+    indigoCore:   "#6366f1",
+    indigoLight:  "#818cf8",
+    tealCore:     "#0d9488",
+    tealLight:    "#2dd4bf",
+    coralCore:    "#f97316",
+    coralLight:   "#fb923c",
+    roseCore:     "#f43f5e",
+    roseLight:    "#fb7185",
+    bgDark:       "#0f172a",
+    bgCard:       "#1e293b",
+  },
 } as const;
 
 /**
