@@ -5,7 +5,7 @@
 > **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
 >
 > **Date**: February 28, 2026
-> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 34/42 tasks done
+> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 35/42 tasks done
 >
 > **⛔ HOLD — DO NOT PUBLISH**: No deliverables shall be published or deployed until their milestone's publish gate is passed. Each milestone requires explicit green light from the plan owner. See §11 Milestone Gates for the gate-by-gate workflow.
 >
@@ -33,7 +33,7 @@
 | M1 — Publisher Logo | ✅ 2026-02-28 | 3/3 | ✅ Gate passed |
 | M2 — Shared Logos & Favicons | ✅ 2026-02-28 | 6/6 | ✅ Gate passed |
 | M3 — CX Extension Standardization | ⬜ Pending Fabio | 11/11 | 🔄 Tasks done, awaiting gate |
-| M4 — README Banners & Docs | ⬜ Pending Fabio | 7/10 (4.6 🔄, 4.8–4.10 ⬜) | 🔄 In progress |
+| M4 — README Banners & Docs | ⬜ Pending Fabio | 8/10 (4.8–4.10 ⬜) | 🔄 In progress |
 | M5 — Alex Extension | ⬜ Pending Fabio | 6/6 | 🔄 Tasks done, awaiting gate |
 | M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 4/7 (6.2, 6.3, 6.6 ⬜) | 🔄 In progress |
 
@@ -100,7 +100,7 @@
 | ID | Thumbnail | Task | Target File(s) | Status |
 |----|-----------|------|----------------|--------|
 | 2.3 | <img src="../platforms/vscode-extension/assets/favicon.svg" width="32" height="32" alt="ext favicon"> <img src="../../Extensions/brand/logos/favicon.svg" width="32" height="32" alt="ext-brand favicon"> <img src="../../AlexLearn/website/public/favicon.svg" width="32" height="32" alt="learn-web favicon"> | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ✅ |
-| 4.6 | *(pending)* | Export `favicon.ico` (16, 32, 48 multi-size) per property — `favicon.png` (32px) exported; `.ico` multi-size pending | 3 ICO files | 🔄 |
+| 4.6 | <img src="../platforms/vscode-extension/assets/favicon.svg" width="32" height="32" alt="favicon"> | Export `favicon.ico` (16, 32, 48 multi-size) per property — generated via resvg-js + ImageMagick | 3 × `favicon.ico` (`vscode-extension/assets/`, `AlexLearn/website/public/`, `Extensions/brand/logos/`) | ✅ |
 
 **Gate**: 2.3 under ✋ M2 · 4.6 under ✋ M4
 
