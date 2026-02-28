@@ -43,8 +43,8 @@
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 6 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
-| 15 | Verification & Sign-off | 7 | 2 | M2, M6 |
-| | **Total** | **42** | **33** | |
+| 15 | Verification & Sign-off | 7 | 3 | M2, M6 |
+| | **Total** | **42** | **34** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -190,8 +190,8 @@
 | 6.1 | Cross-repo grep for deprecated colors (expect 0 outside AIRS) | All repos | ✅ |
 | 6.2 | Visual audit — screenshot every Marketplace listing | 18 ext. + publisher page | ⬜ |
 | 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ⬜ |
-| 6.4 | Add brand compliance to dream protocol | Dream automation | ⬜ |
-| 6.5 | Baseline KPI measurements (§10) | Metrics doc | ⬜ |
+| 6.4 | Add brand compliance to dream protocol | Dream automation | ✅ |
+| 6.5 | Baseline KPI measurements (§10) | See §10 table | ✅ |
 | 6.6 | Plan owner final sign-off → **HOLD lifted** | Written approval | ⬜ |
 
 **Gate**: 2.6 under ✋ M2 · 6.1–6.6 under ✋ M6 (Final)
@@ -958,23 +958,24 @@ A deliverable is **Done** when ALL of the following are true:
 - [ ] All 6 milestones marked ✅
 - [ ] KPI targets (§10) met or exceeded
 - [ ] Final cross-repo verification pass completed
-- [ ] Brand compliance check added to dream protocol
+- [x] Brand compliance check added to dream protocol
 - [ ] Plan owner signs off → HOLD is lifted
 
 ---
 
 ## 10. Success Metrics
 
-| KPI | Baseline | Target | How to Measure |
-|-----|----------|--------|----------------|
-| Deprecated color occurrences | ~30+ across repos | **0** | `grep -r "#0078d4\|#005a9e\|#ff6b35" --include="*.svg" --include="*.ts"` (excluding AIRS) |
-| Extension icon design consistency | 0/16 compliant | **16/16** | Visual audit against icon template |
-| Context menus with standard groups | 0/16 | **14/16** (excl. N/A) | Audit `package.json` submenu declarations |
-| Properties with CorreaX README banner | 1/4 (LearnAlex) | **4/4** | Visual audit per WS-1 |
-| Publisher logo CorreaX-aligned | No | **Yes** | SVG source in repo + live on Marketplace |
-| Brand guide references DK as authority | 0/1 (Extensions) | **1/1** | `Extensions/brand/README.md` links to DK |
-| Marketplace avg rating (D5) | N/A | **≥ 4.5** | VS Code Marketplace publisher dashboard |
-| Marketplace installs trend (D5) | Baseline at M1 | **No regression** | Monthly snapshot from publisher dashboard |
+| KPI | Baseline (pre-plan) | Achieved | Target | How to Measure |
+|-----|---------------------|----------|--------|----------------|
+| Deprecated color occurrences | ~30+ across repos | **0** ✅ | **0** | Automated grep (M6.1) |
+| Extension icon design consistency | 0/16 compliant | **16/16** ✅ | **16/16** | Visual audit against icon template |
+| Context menus with standard groups | 0/16 | **14/16** ✅ | **14/16** (excl. N/A) | Audit `package.json` submenu declarations |
+| Properties with CorreaX README banner | 1/4 (LearnAlex) | **4/4** ✅ | **4/4** | Visual audit per WS-1 |
+| Publisher logo CorreaX-aligned | No | **Yes** ✅ | **Yes** | SVG source in repo + live on Marketplace |
+| Brand guide references DK as authority | 0/1 (Extensions) | **1/1** ✅ | **1/1** | `Extensions/brand/README.md` links to DK |
+| Brand compliance in dream protocol | No | **Yes** ✅ | **Yes** | Phase 4.5 added to dream-state-automation.instructions.md |
+| Marketplace avg rating (D5) | N/A | — | **≥ 4.5** | VS Code Marketplace publisher dashboard |
+| Marketplace installs trend (D5) | N/A | — | **No regression** | Monthly snapshot from publisher dashboard |
 
 ---
 
