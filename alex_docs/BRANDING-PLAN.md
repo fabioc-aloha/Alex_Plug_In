@@ -43,8 +43,8 @@
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 6 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
-| 15 | Verification & Sign-off | 7 | 1 | M2, M6 |
-| | **Total** | **42** | **32** | |
+| 15 | Verification & Sign-off | 7 | 2 | M2, M6 |
+| | **Total** | **42** | **33** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -187,7 +187,7 @@
 | ID | Task | Scope | Status |
 |----|------|-------|--------|
 | 2.6 | Visual diff — before/after screenshots per recolor | Screenshot set | ✅ |
-| 6.1 | Cross-repo grep for deprecated colors (expect 0 outside AIRS) | All repos | ⬜ |
+| 6.1 | Cross-repo grep for deprecated colors (expect 0 outside AIRS) | All repos | ✅ |
 | 6.2 | Visual audit — screenshot every Marketplace listing | 18 ext. + publisher page | ⬜ |
 | 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ⬜ |
 | 6.4 | Add brand compliance to dream protocol | Dream automation | ⬜ |
