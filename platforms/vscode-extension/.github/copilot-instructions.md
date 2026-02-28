@@ -17,13 +17,13 @@ Persona: Developer (85% confidence)
 Objective: *(session-objective — set by user or focus timer)*
 Phase: Planning
 Mode: Build
-Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
+Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, v6.0-partnership-release
 Principles: KISS, DRY, Quality-First, Research-Before-Code
 Recent: CorreaX brand sprint complete (42/42) — HOLD lifted, v5.9.13 published 2026-02-28. BRANDING-PLAN archived.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
-Last Assessed: 2026-02-28
+Last Assessed: never
 ## User Profile
 <!-- I use this to know who I'm working with and how they prefer to collaborate. -->
 Read .github/config/user-profile.json BEFORE writing content with user's name.

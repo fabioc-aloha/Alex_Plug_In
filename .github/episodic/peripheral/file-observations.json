@@ -1,36 +1,34 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/meditation-2026-02-28-v6-planning.md",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/package-lock.json"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.13.vsix",
+      "todoCount": 20,
+      "scannedAt": 1772320801387
+    },
+    {
       "file": "CHANGELOG.md",
       "todoCount": 8,
-      "scannedAt": 1772319982090
+      "scannedAt": 1772320801387
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772319982090
+      "scannedAt": 1772320801387
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 1,
-      "scannedAt": 1772319982090
+      "scannedAt": 1772320801387
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772319982090
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1772319982090
+      "scannedAt": 1772320801387
     }
   ],
-  "lastUpdated": 1772319982090
+  "lastUpdated": 1772320801387
 }
