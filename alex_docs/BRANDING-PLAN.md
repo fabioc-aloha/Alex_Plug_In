@@ -55,7 +55,7 @@
 |----|-----------|------|----------------|--------|
 | 1.1 | <img src="../../Extensions/brand/logos/publisher-logo.svg" width="48" height="48" alt="Publisher logo"> | Design `publisher-logo.svg` — CX mark on `#0f172a`, circular-crop safe | `Extensions/brand/logos/publisher-logo.svg` | ✅ |
 | 1.2 | <img src="../../Extensions/brand/logos/publisher-logo.png" width="48" height="48" alt="Publisher logo PNG"> | Export `publisher-logo.png` at 256×256 | `Extensions/brand/logos/publisher-logo.png` | ✅ |
-| 1.3 | <img src="../../Extensions/brand/logos/publisher-logo-48px.png" width="48" height="48" alt="48px crop check"> | Visual review — circular crop at 256, 128, 48 px | Screenshots | ✅ |
+| 1.3 | <img src="../../Extensions/brand/logos/publisher-logo.png" width="48" height="48" alt="48px crop check"> | Visual review — circular crop at 256, 128, 48 px | Screenshots | ✅ |
 
 **Gate**: ✋ M1 → Fabio approves → upload to Marketplace portal
 
@@ -63,7 +63,7 @@
 
 | ID | Thumbnail | Task | Target File(s) | Status |
 |----|-----------|------|----------------|--------|
-| 2.1 | <img src="../platforms/vscode-extension/assets/logo-recolored.png" width="32" height="32" alt="ext"> <img src="../../AlexLearn/logo-recolored.png" width="32" height="32" alt="learn"> <img src="../../Alex-Global-Knowledge/assets/logo-recolored.png" width="32" height="32" alt="gk"> <img src="../../Extensions/brand/logos/logo-recolored.png" width="32" height="32" alt="ext-brand"> | Recolor body: `#0078d4/#005a9e` → `#38bdf8/#0284c7` | 5 × `logo.svg` (see §3.1 inventory) | ✅ |
+| 2.1 | <img src="../platforms/vscode-extension/assets/logo.svg" width="32" height="32" alt="ext"> <img src="../../AlexLearn/logo.svg" width="32" height="32" alt="learn"> <img src="../../AlexLearn/website/public/logo.svg" width="32" height="32" alt="learn-web"> <img src="../../Alex-Global-Knowledge/assets/logo.svg" width="32" height="32" alt="gk"> <img src="../../Extensions/brand/logos/logo.svg" width="32" height="32" alt="ext-brand"> | Recolor body: `#0078d4/#005a9e` → `#38bdf8/#0284c7` | 5 × `logo.svg` (see §3.1 inventory) | ✅ |
 | 2.2 | *(same as 2.1 — flames updated in same pass)* | Recolor flames: `#ff6b35` → `#f97316` | Same 5 files | ✅ |
 | 4.7 | *(pending)* | Export `logo.png` at 128, 256, 512 per property | 4 properties × 3 sizes | ⬜ |
 
@@ -73,7 +73,7 @@
 
 | ID | Thumbnail | Task | Target File(s) | Status |
 |----|-----------|------|----------------|--------|
-| 2.4 | <img src="../../AlexLearn/correax-recolored.png" width="48" height="48" alt="CorreaX wordmark recolored"> | Recolor Azure Blue → sky blue | `AlexLearn/correax.svg` + `AlexLearn/website/public/correax.svg` | ✅ |
+| 2.4 | <img src="../../AlexLearn/correax.svg" width="80" height="32" alt="CorreaX wordmark"> <img src="../../AlexLearn/website/public/correax.svg" width="80" height="32" alt="CorreaX wordmark web"> | Recolor Azure Blue → sky blue | `AlexLearn/correax.svg` + `AlexLearn/website/public/correax.svg` | ✅ |
 
 **Gate**: ✋ M2
 
@@ -89,7 +89,7 @@
 
 | ID | Thumbnail | Task | Target File(s) | Status |
 |----|-----------|------|----------------|--------|
-| 2.3 | <img src="../platforms/vscode-extension/assets/favicon-recolored.png" width="32" height="32" alt="ext favicon"> <img src="../../Extensions/brand/logos/favicon-recolored.png" width="32" height="32" alt="ext-brand favicon"> | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ✅ |
+| 2.3 | <img src="../platforms/vscode-extension/assets/favicon.svg" width="32" height="32" alt="ext favicon"> <img src="../../Extensions/brand/logos/favicon.svg" width="32" height="32" alt="ext-brand favicon"> <img src="../../AlexLearn/website/public/favicon.svg" width="32" height="32" alt="learn-web favicon"> | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ✅ |
 | 4.6 | *(pending)* | Export `favicon.ico` (16, 32, 48 multi-size) per property | 3 ICO files | ⬜ |
 
 **Gate**: 2.3 under ✋ M2 · 4.6 under ✋ M4
