@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
     <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
     </linearGradient>
     <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffc857"/>
-      <stop offset="100%" stop-color="#ff6b35"/>
+      <stop offset="100%" stop-color="#f97316"/>
     </linearGradient>
   </defs>
   <g transform="rotate(60 16 16)">

@@ -29,11 +29,11 @@
 
 | # | Asset Category | Tasks | Done | Milestone |
 |---|---------------|-------|------|-----------|
-| 1 | Publisher Logo | 3 | 0 | M1 |
-| 2 | Rocket Logos (5 copies) | 3 | 0 | M2, M4 |
-| 3 | CorreaX Wordmark | 1 | 0 | M2 |
+| 1 | Publisher Logo | 3 | 3 | M1 |
+| 2 | Rocket Logos (5 copies) | 3 | 2 | M2, M4 |
+| 3 | CorreaX Wordmark | 1 | 1 | M2 |
 | 4 | Knowledge Graph Logo | 1 | 1 | M2 |
-| 5 | Favicons (3 files) | 2 | 0 | M2, M4 |
+| 5 | Favicons (3 files) | 2 | 1 | M2, M4 |
 | 6 | Apple Touch Icons | 1 | 0 | M4 |
 | 7 | CX Extension Icons (16) | 2 | 0 | M3 |
 | 8 | CX Extension Banners (16) | 1 | 0 | M3 |
@@ -43,37 +43,37 @@
 | 12 | Context Menus (16 ext.) | 6 | 0 | M3 |
 | 13 | Alex Extension UI | 6 | 0 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
-| 15 | Verification & Sign-off | 7 | 0 | M2, M6 |
-| | **Total** | **42** | **1** | |
+| 15 | Verification & Sign-off | 7 | 1 | M2, M6 |
+| | **Total** | **42** | **9** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
 
 #### 1. Publisher Logo
 
-| ID | Task | Target File(s) | Status |
-|----|------|----------------|--------|
-| 1.1 | Design `publisher-logo.svg` — CX mark on `#0f172a`, circular-crop safe | `Extensions/brand/logos/publisher-logo.svg` | ⬜ |
-| 1.2 | Export `publisher-logo.png` at 256×256 | `Extensions/brand/logos/publisher-logo.png` | ⬜ |
-| 1.3 | Visual review — circular crop at 256, 128, 48 px | Screenshots | ⬜ |
+| ID | Thumbnail | Task | Target File(s) | Status |
+|----|-----------|------|----------------|--------|
+| 1.1 | <img src="../../Extensions/brand/logos/publisher-logo.svg" width="48" height="48" alt="Publisher logo"> | Design `publisher-logo.svg` — CX mark on `#0f172a`, circular-crop safe | `Extensions/brand/logos/publisher-logo.svg` | ✅ |
+| 1.2 | <img src="../../Extensions/brand/logos/publisher-logo.png" width="48" height="48" alt="Publisher logo PNG"> | Export `publisher-logo.png` at 256×256 | `Extensions/brand/logos/publisher-logo.png` | ✅ |
+| 1.3 | <img src="../../Extensions/brand/logos/publisher-logo-48px.png" width="48" height="48" alt="48px crop check"> | Visual review — circular crop at 256, 128, 48 px | Screenshots | ✅ |
 
 **Gate**: ✋ M1 → Fabio approves → upload to Marketplace portal
 
 #### 2. Rocket Logos (5 copies)
 
-| ID | Task | Target File(s) | Status |
-|----|------|----------------|--------|
-| 2.1 | Recolor body: `#0078d4/#005a9e` → `#38bdf8/#0284c7` | 5 × `logo.svg` (see §3.1 inventory) | ⬜ |
-| 2.2 | Recolor flames: `#ff6b35` → `#f97316` | Same 5 files | ⬜ |
-| 4.7 | Export `logo.png` at 128, 256, 512 per property | 4 properties × 3 sizes | ⬜ |
+| ID | Thumbnail | Task | Target File(s) | Status |
+|----|-----------|------|----------------|--------|
+| 2.1 | <img src="../platforms/vscode-extension/assets/logo-recolored.png" width="32" height="32" alt="ext"> <img src="../../AlexLearn/logo-recolored.png" width="32" height="32" alt="learn"> <img src="../../Alex-Global-Knowledge/assets/logo-recolored.png" width="32" height="32" alt="gk"> <img src="../../Extensions/brand/logos/logo-recolored.png" width="32" height="32" alt="ext-brand"> | Recolor body: `#0078d4/#005a9e` → `#38bdf8/#0284c7` | 5 × `logo.svg` (see §3.1 inventory) | ✅ |
+| 2.2 | *(same as 2.1 — flames updated in same pass)* | Recolor flames: `#ff6b35` → `#f97316` | Same 5 files | ✅ |
+| 4.7 | *(pending)* | Export `logo.png` at 128, 256, 512 per property | 4 properties × 3 sizes | ⬜ |
 
 **Gate**: 2.1–2.2 under ✋ M2 · 4.7 under ✋ M4
 
 #### 3. CorreaX Wordmark
 
-| ID | Task | Target File(s) | Status |
-|----|------|----------------|--------|
-| 2.4 | Recolor Azure Blue → sky blue | `AlexLearn/correax.svg` | ⬜ |
+| ID | Thumbnail | Task | Target File(s) | Status |
+|----|-----------|------|----------------|--------|
+| 2.4 | <img src="../../AlexLearn/correax-recolored.png" width="48" height="48" alt="CorreaX wordmark recolored"> | Recolor Azure Blue → sky blue | `AlexLearn/correax.svg` + `AlexLearn/website/public/correax.svg` | ✅ |
 
 **Gate**: ✋ M2
 
@@ -87,10 +87,10 @@
 
 #### 5. Favicons (3 files)
 
-| ID | Task | Target File(s) | Status |
-|----|------|----------------|--------|
-| 2.3 | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ⬜ |
-| 4.6 | Export `favicon.ico` (16, 32, 48 multi-size) per property | 3 ICO files | ⬜ |
+| ID | Thumbnail | Task | Target File(s) | Status |
+|----|-----------|------|----------------|--------|
+| 2.3 | <img src="../platforms/vscode-extension/assets/favicon-recolored.png" width="32" height="32" alt="ext favicon"> <img src="../../Extensions/brand/logos/favicon-recolored.png" width="32" height="32" alt="ext-brand favicon"> | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ✅ |
+| 4.6 | *(pending)* | Export `favicon.ico` (16, 32, 48 multi-size) per property | 3 ICO files | ⬜ |
 
 **Gate**: 2.3 under ✋ M2 · 4.6 under ✋ M4
 
@@ -186,7 +186,7 @@
 
 | ID | Task | Scope | Status |
 |----|------|-------|--------|
-| 2.6 | Visual diff — before/after screenshots per recolor | Screenshot set | ⬜ |
+| 2.6 | Visual diff — before/after screenshots per recolor | Screenshot set | ✅ |
 | 6.1 | Cross-repo grep for deprecated colors (expect 0 outside AIRS) | All repos | ⬜ |
 | 6.2 | Visual audit — screenshot every Marketplace listing | 18 ext. + publisher page | ⬜ |
 | 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ⬜ |
@@ -1008,7 +1008,7 @@ A deliverable is **Done** when ALL of the following are true:
 
 | Approved | Date | Notes |
 |----------|------|-------|
-| ⬜ | — | — |
+| ✅ | 2026-02-28 | Fabio approved — upload publisher-logo.png to Marketplace portal |
 
 ---
 
