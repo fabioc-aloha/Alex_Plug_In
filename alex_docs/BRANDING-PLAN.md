@@ -5,7 +5,7 @@
 > **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
 >
 > **Date**: February 28, 2026
-> **Status**: Active
+> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 34/42 tasks done
 >
 > **⛔ HOLD — DO NOT PUBLISH**: No deliverables shall be published or deployed until their milestone's publish gate is passed. Each milestone requires explicit green light from the plan owner. See §11 Milestone Gates for the gate-by-gate workflow.
 >
@@ -26,6 +26,16 @@
 > Status: ⬜ Not Started · 🔄 In Progress · ✅ Done · ⛔ Blocked
 
 ### Progress Dashboard
+
+| Milestone | Gate | Tasks Done | Status |
+|-----------|------|------------|--------|
+| Gate 0 — Decisions | ✅ 2026-02-28 | 6/6 D decisions | ✅ Signed off |
+| M1 — Publisher Logo | ✅ 2026-02-28 | 3/3 | ✅ Gate passed |
+| M2 — Shared Logos & Favicons | ✅ 2026-02-28 | 6/6 | ✅ Gate passed |
+| M3 — CX Extension Standardization | ⬜ Pending Fabio | 11/11 | 🔄 Tasks done, awaiting gate |
+| M4 — README Banners & Docs | ⬜ Pending Fabio | 7/10 (4.6 🔄, 4.8–4.10 ⬜) | 🔄 In progress |
+| M5 — Alex Extension | ⬜ Pending Fabio | 6/6 | 🔄 Tasks done, awaiting gate |
+| M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 4/7 (6.2, 6.3, 6.6 ⬜) | 🔄 In progress |
 
 | # | Asset Category | Tasks | Done | Milestone |
 |---|---------------|-------|------|-----------|
@@ -956,8 +966,8 @@ A deliverable is **Done** when ALL of the following are true:
 ### Plan-Complete DoD (HOLD Lift)
 
 - [ ] All 6 milestones marked ✅
-- [ ] KPI targets (§10) met or exceeded
-- [ ] Final cross-repo verification pass completed
+- [x] KPI targets (§10) met or exceeded
+- [x] Final cross-repo verification pass completed
 - [x] Brand compliance check added to dream protocol
 - [ ] Plan owner signs off → HOLD is lifted
 
