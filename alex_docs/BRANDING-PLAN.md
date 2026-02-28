@@ -5,7 +5,7 @@
 > **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
 >
 > **Date**: February 28, 2026
-> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 38/42 tasks done
+> **Status**: Active · **Last Updated**: 2026-02-28 · **Progress**: 40/42 tasks done
 >
 > **⛔ HOLD — DO NOT PUBLISH**: No deliverables shall be published or deployed until their milestone's publish gate is passed. Each milestone requires explicit green light from the plan owner. See §11 Milestone Gates for the gate-by-gate workflow.
 >
@@ -35,7 +35,7 @@
 | M3 — CX Extension Standardization | ⬜ Pending Fabio | 11/11 | 🔄 Tasks done, awaiting gate |
 | M4 — README Banners & Docs | ⬜ Pending Fabio | 10/10 | 🔄 Tasks done, awaiting gate |
 | M5 — Alex Extension | ⬜ Pending Fabio | 6/6 | 🔄 Tasks done, awaiting gate |
-| M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 4/7 (6.2, 6.3, 6.6 ⬜) | 🔄 In progress |
+| M6 — Verification & HOLD Lift | ⬜ Pending Fabio | 6/7 (6.6 ⬜) | 🔄 In progress |
 
 | # | Asset Category | Tasks | Done | Milestone |
 |---|---------------|-------|------|-----------|
@@ -43,7 +43,7 @@
 | 2 | Rocket Logos (5 copies) | 3 | 3 | M2, M4 |
 | 3 | CorreaX Wordmark | 1 | 1 | M2 |
 | 4 | Knowledge Graph Logo | 1 | 1 | M2 |
-| 5 | Favicons (3 files) | 2 | 1 | M2, M4 |
+| 5 | Favicons (3 files) | 2 | 2 | M2, M4 |
 | 6 | Apple Touch Icons | 1 | 1 | M4 |
 | 7 | CX Extension Icons (16) | 2 | 2 | M3 |
 | 8 | CX Extension Banners (16) | 1 | 1 | M3 |
@@ -53,8 +53,8 @@
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 6 | M5 |
 | 14 | Documentation Assets | 3 | 3 | M4 |
-| 15 | Verification & Sign-off | 7 | 3 | M2, M6 |
-| | **Total** | **42** | **34** | |
+| 15 | Verification & Sign-off | 7 | 5 | M2, M6 |
+| | **Total** | **42** | **40** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -198,8 +198,8 @@
 |----|------|-------|--------|
 | 2.6 | Visual diff — before/after screenshots per recolor | Screenshot set | ✅ |
 | 6.1 | Cross-repo grep for deprecated colors (expect 0 outside AIRS) | All repos | ✅ |
-| 6.2 | Visual audit — screenshot every Marketplace listing | 18 ext. + publisher page | ⬜ |
-| 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ⬜ |
+| 6.2 | Visual audit — screenshot every Marketplace listing | 18 ext. + publisher page | ✅ |
+| 6.3 | Verify CorreaX mark consistency across all locations | Per §3 catalog | ✅ |
 | 6.4 | Add brand compliance to dream protocol | Dream automation | ✅ |
 | 6.5 | Baseline KPI measurements (§10) | See §10 table | ✅ |
 | 6.6 | Plan owner final sign-off → **HOLD lifted** | Written approval | ⬜ |
