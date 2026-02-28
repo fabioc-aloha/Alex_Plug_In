@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture — Roadmap v6.0
 
-**Last Updated**: February 26, 2026
+**Last Updated**: February 28, 2026
 
 ---
 
@@ -169,7 +169,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 | Version | Focus | Status |
 |---------|-------|:------:|
-| v5.9.12 | Documentation Hygiene Edition | ✅ Current |
+| v5.9.13 | CorreaX Brand Release | ✅ Current |
+| v5.9.12 | Documentation Hygiene Edition | ✅ Shipped |
 | **v6.0.0** | **The Partnership Release** | **📋 Next** |
 | v7.0.0+ | Collaborative Intelligence | Backlogged |
 
@@ -177,20 +178,21 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                       |
 | -------------------------- | ------------------------------------- |
-| **Current Master Version** | 5.9.12                                |
-| **Current Heirs**          | VS Code (5.9.12), M365 (5.9.12)       |
+| **Current Master Version** | 5.9.13                                |
+| **Current Heirs**          | VS Code (5.9.13), M365 (5.9.12)       |
 | **Next Target**            | 6.0.0 — The Partnership Release       |
-| **Updated**                | 2026-02-26                            |
+| **Updated**                | 2026-02-28                            |
 
 ---
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v5.9.12)
+### Current State Summary (v5.9.13)
 
 Alex now has:
-- **124 Skills** (124 inheritable to heirs, fully synced)
+- **125 Skills** (123 inheritable to heirs, fully synced)
 - **23 Complete Trifectas** — comprehensive domain coverage including north-star
+- **CorreaX Brand System** — unified visual identity across all 5 properties, 42/42 tasks complete
 - **NASA Power of 10 Edition** — Full codebase audit (72 files), 3 violations fixed, 10/10 rules documented
 - **Workspace File API Migration** — virtual filesystem compatibility (SSH, WSL, Codespaces)
 - **Agent Hooks** — SessionStart/Stop/PreToolUse/PostToolUse automation
@@ -204,6 +206,7 @@ Alex now has:
 
 | Version | Theme | Date |
 |---------|-------|------|
+| v5.9.13 | CorreaX Brand Release | 2026-02-28 |
 | v5.9.12 | Documentation Hygiene Edition | 2026-02-26 |
 | v5.9.11 | Post-Publish Synapse Hardening | 2026-02-26 |
 | v5.9.10 | Workspace File API Migration + NASA Edition | 2026-02-26 |
