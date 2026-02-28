@@ -1,3 +1,10 @@
+---
+name: correax-brand
+description: CorreaX visual design system — color tokens, typography, banner patterns, and component architecture
+triggerPhrases: ["design system", "brand colors", "CorreaX palette", "typography", "banner pattern", "design tokens", "color system", "accent colors", "CSS variables", "brand identity", "visual identity"]
+heirs: [vscode, m365, web]
+---
+
 # CorreaX Brand & Design Language
 
 **Domain**: Visual design system, color tokens, typography, component patterns, WCAG compliance
