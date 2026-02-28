@@ -443,7 +443,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Same infra, every time. Automated.',
         skill: 'infrastructure-as-code',
         icon: '⚙️',
-        accentColor: '#EF4444',
+        accentColor: '#f43f5e',  // CorreaX rose — urgency/action/energy
         signals: [
             { category: 'identity',   pattern: 'devops|sre|ci/?cd|deployment|automation|platform.?eng',           weight: 2.5 },
             { category: 'technology', pattern: 'terraform|ansible|docker|kubernetes|github-actions|azure-devops',  weight: 2.0 },
@@ -458,7 +458,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Ideas to posts in minutes',
         skill: 'creative-writing',
         icon: '✍️',
-        accentColor: '#EC4899',
+        accentColor: '#fb7185',  // CorreaX rose-light — creative energy
         signals: [
             { category: 'identity',   pattern: 'content.?creat|blogger|newsletter|social.?media|copywriter',      weight: 2.5 },
             { category: 'technology', pattern: 'markdown|ghost|wordpress|substack|notion',                         weight: 1.5 },
@@ -473,7 +473,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Your story structure co-author',
         skill: 'creative-writing',
         icon: '📚',
-        accentColor: '#A855F7',
+        accentColor: '#818cf8',  // CorreaX indigo-light — imagination/narrative
         signals: [
             { category: 'identity',   pattern: 'fiction|novel|screenplay|story|author|creative.?writ|book',        weight: 2.5 },
             { category: 'technology', pattern: 'scrivener|fountain|writing',                                       weight: 2.0 },
@@ -488,7 +488,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Design, build, play — iterate',
         skill: 'game-design',
         icon: '🎮',
-        accentColor: '#7C3AED',
+        accentColor: '#6366f1',  // CorreaX indigo — code-adjacent creative dev
         signals: [
             { category: 'identity',   pattern: 'game.?dev|unity|unreal|godot|rpg|puzzle|interactive|narrative.?design', weight: 2.5 },
             { category: 'technology', pattern: 'unity|unreal|godot|c#|c\\+\\+|lua|gdscript|renpy',                     weight: 2.0 },
@@ -504,7 +504,7 @@ export const PERSONAS: Persona[] = [
         hook: '4-6× faster than human estimates',
         skill: 'project-management',
         icon: '📋',
-        accentColor: '#14B8A6',
+        accentColor: '#2dd4bf',  // CorreaX teal-light — coordination/flow
         signals: [
             { category: 'identity',   pattern: 'project.?manag|agile|scrum|sprint|roadmap|kanban',                weight: 2.5 },
             { category: 'technology', pattern: 'jira|azure-boards|notion|linear',                                 weight: 2.0 },
@@ -519,7 +519,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Threat-aware by default',
         skill: 'incident-response',
         icon: '🔐',
-        accentColor: '#DC2626',
+        accentColor: '#f43f5e',  // CorreaX rose — threat/risk/alert
         signals: [
             { category: 'identity',   pattern: 'security|threat|audit|compliance|penetration|vulnerabilit',        weight: 2.5 },
             { category: 'technology', pattern: 'python|bash|powershell|terraform',                                 weight: 1.0 },
@@ -534,7 +534,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Master concepts, not just memorize',
         skill: 'learning-psychology',
         icon: '📖',
-        accentColor: '#3B82F6',
+        accentColor: '#818cf8',  // CorreaX indigo-light — learning/exploration
         signals: [
             { category: 'identity',   pattern: 'student|learning|study|course|class|homework|tutorial',            weight: 2.5 },
             { category: 'technology', pattern: 'notion|obsidian',                                                  weight: 1.0 },
@@ -549,7 +549,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Stand out, get hired',
         skill: 'creative-writing',
         icon: '💼',
-        accentColor: '#84CC16',
+        accentColor: '#2dd4bf',  // CorreaX teal-light — growth/opportunity
         signals: [
             { category: 'identity',   pattern: 'job|career|resume|interview|portfolio|linkedin|cover.?letter',     weight: 2.5 },
             { category: 'technology', pattern: 'markdown|latex',                                                    weight: 0.5 },
@@ -564,7 +564,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Notes → polished slides in minutes',
         skill: 'gamma-presentations',
         icon: '🎤',
-        accentColor: '#F97316',
+        accentColor: '#f97316',  // CorreaX coral — warm/stage energy
         signals: [
             { category: 'identity',   pattern: 'speaker|presenter|slides|deck|talk|conference|workshop',           weight: 2.5 },
             { category: 'technology', pattern: 'marp|reveal\\.?js|gamma',                                          weight: 2.0 },
@@ -579,7 +579,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🚀',
-        accentColor: '#FBBF24',
+        accentColor: '#fb923c',  // CorreaX coral-light — builder energy
         signals: [
             { category: 'identity',   pattern: 'power.?user|builder|maker|hacker|tinkerer|contributor',            weight: 2.0 },
             { category: 'technology', pattern: 'typescript|python|bash|powershell|git',                             weight: 1.0 },
@@ -595,7 +595,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Prefrontal cortex for your IDE',
         skill: 'ai-agent-design',
         icon: '🧠',
-        accentColor: '#8B5CF6',
+        accentColor: '#818cf8',  // CorreaX indigo-light — intellect/AI/mind
         signals: [
             { category: 'identity',   pattern: 'cognitive.?sci|ai.?research|machine.?learn|neural|nlp|llm|deep.?learn', weight: 2.5 },
             { category: 'technology', pattern: 'pytorch|tensorflow|huggingface|transformers|langchain|openai',            weight: 2.0 },
@@ -611,7 +611,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🌐',
-        accentColor: '#22C55E',
+        accentColor: '#2dd4bf',  // CorreaX teal-light — open community/growth
         signals: [
             { category: 'identity',   pattern: 'open.?source|oss|contributor|maintainer|community',                 weight: 2.5 },
             { category: 'structure',  pattern: 'CONTRIBUTING.md|CODE_OF_CONDUCT.md|.github/ISSUE_TEMPLATE/',         weight: 2.0 },
@@ -626,7 +626,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Research vision → funded reality',
         skill: 'research-project-scaffold',
         icon: '💰',
-        accentColor: '#D97706',
+        accentColor: '#f97316',  // CorreaX coral — writing/warm contexts
         signals: [
             { category: 'identity',   pattern: 'grant|funding|proposal|principal.?investigator|pi\b|postdoc|nsf|nih', weight: 2.5 },
             { category: 'structure',  pattern: 'proposals/|grants/|budget/|narrative/',                                weight: 2.0 },
@@ -640,7 +640,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Headlines that convert',
         skill: 'creative-writing',
         icon: '✏️',
-        accentColor: '#F472B6',
+        accentColor: '#fb7185',  // CorreaX rose-light — creative/conversion energy
         signals: [
             { category: 'identity',   pattern: 'copywriter|copywriting|headline|landing.?page|ad.?copy|conversion', weight: 2.5 },
             { category: 'structure',  pattern: 'copy/|ads/|landing-pages/|campaigns/',                               weight: 1.5 },
@@ -654,7 +654,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Stakeholder alignment accelerator',
         skill: 'business-analysis',
         icon: '📊',
-        accentColor: '#0891B2',
+        accentColor: '#0d9488',  // CorreaX teal — analytical/structured
         signals: [
             { category: 'identity',   pattern: 'business.?analyst|brd|requirements|process.?map|stakeholder',        weight: 2.5 },
             { category: 'structure',  pattern: 'requirements/|brd/|processes/|use-cases/',                            weight: 2.0 },
@@ -668,7 +668,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Calm. Systematic. Crisis handled.',
         skill: 'incident-response',
         icon: '🚨',
-        accentColor: '#EF4444',
+        accentColor: '#f43f5e',  // CorreaX rose — incidents/urgency/alerting
         signals: [
             { category: 'identity',   pattern: 'sre|site.?reliab|on.?call|incident|runbook|observab',                weight: 2.5 },
             { category: 'technology', pattern: 'prometheus|grafana|datadog|pagerduty|opsgenie',                       weight: 2.0 },
@@ -683,7 +683,7 @@ export const PERSONAS: Persona[] = [
         hook: 'User needs → shipped features',
         skill: 'project-management',
         icon: '🗺️',
-        accentColor: '#7C3AED',
+        accentColor: '#6366f1',  // CorreaX indigo — leadership/strategy/product
         signals: [
             { category: 'identity',   pattern: 'product.?manag|pm\b|roadmap|user.?stor|prioritiz|okr',                weight: 2.5 },
             { category: 'structure',  pattern: 'roadmap/|prd/|user-stories/|features/',                               weight: 2.0 },
@@ -697,7 +697,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Raw data → executive insights',
         skill: 'microsoft-fabric',
         icon: '📈',
-        accentColor: '#0EA5E9',
+        accentColor: '#2dd4bf',  // CorreaX teal-light — data insights/intelligence
         signals: [
             { category: 'identity',   pattern: 'bi.?analyst|business.?intelligence|dashboard|report|metric|kpi',      weight: 2.5 },
             { category: 'technology', pattern: 'power.?bi|tableau|looker|metabase|superset',                           weight: 2.0 },
@@ -712,7 +712,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Win more deals, faster',
         skill: 'business-analysis',
         icon: '🤝',
-        accentColor: '#6366F1',
+        accentColor: '#6366f1',  // CorreaX indigo — aligned to brand system
         signals: [
             { category: 'identity',   pattern: 'consultant|consult|advisory|proposal|client|deliverable|engagement',   weight: 2.5 },
             { category: 'structure',  pattern: 'proposals/|deliverables/|clients/|engagements/|sow/',                  weight: 2.0 },
@@ -726,7 +726,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Coverage without the tedium',
         skill: 'code-quality',
         icon: '🧪',
-        accentColor: '#16A34A',
+        accentColor: '#0d9488',  // CorreaX teal — quality/validation/green checks
         signals: [
             { category: 'identity',   pattern: 'qa|quality.?assur|test.?engineer|automation.?test|sdet',               weight: 2.5 },
             { category: 'technology', pattern: 'selenium|cypress|playwright|jest|pytest|testcafe|appium',               weight: 2.0 },
@@ -742,7 +742,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Data-driven campaigns, faster',
         skill: 'business-analysis',
         icon: '📢',
-        accentColor: '#E11D48',
+        accentColor: '#f43f5e',  // CorreaX rose — attention/energy/conversion
         signals: [
             { category: 'identity',   pattern: 'marketer|marketing|campaign|seo|growth|brand|analytics',               weight: 2.5 },
             { category: 'technology', pattern: 'google.?analytics|hubspot|mailchimp|segment|mixpanel',                  weight: 2.0 },

@@ -735,8 +735,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const personaSkill = persona?.skill || "code-review";
     const bannerNoun = persona?.bannerNoun || "CODE";
 
-    // Use easter egg accent color if present, fallback to persona color, then blue
-    const personaAccent = easterEgg?.accentColor || persona?.accentColor || "var(--vscode-charts-blue)";
+    // Use easter egg accent color if present, fallback to persona color, then CorreaX indigo primary
+    const personaAccent = easterEgg?.accentColor || persona?.accentColor || "#6366f1";
 
     // Active Context — live state from copilot-instructions.md
     const confidenceLabel =

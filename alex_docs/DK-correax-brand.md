@@ -482,17 +482,52 @@ Used in Markdown documentation:
 
 ## 13. Persona Accent Colors (Extension)
 
-The Alex VS Code extension uses persona-specific accent colors.
-Alignment with CorreaX palette:
+All 27 personas now use CorreaX palette tokens. Each token carries semantic intent:
 
-| Persona | Current | Target | Notes |
-|---------|---------|--------|-------|
-| Developer | `#0078D4` | `#0078D4` | Keep — intentional Microsoft blue |
-| Academic | `#8B5CF6` | `#8B5CF6` | Keep — purple, distinct from brand |
-| Researcher | `#10B981` | `#0d9488` | Align to CorreaX teal |
-| Technical Writer | `#F59E0B` | `#f97316` | Align to CorreaX coral |
-| Architect | `#6366F1` | `#6366f1` | Already matches! |
-| Data Engineer | `#06B6D4` | `#06B6D4` | Keep — cyan, distinct from teal |
+| Token | Hex | Semantic role |
+|-------|-----|---------------|
+| `--accent-indigo` | `#6366f1` | leadership, strategy, architecture, default |
+| `--accent-indigo-light` | `#818cf8` | learning, creativity, intellect, imagination |
+| `--accent-teal` | `#0d9488` | research, analysis, quality, data |
+| `--accent-teal-light` | `#2dd4bf` | coordination, community, growth, insights |
+| `--accent-coral` | `#f97316` | writing, warmth, stage energy |
+| `--accent-coral-light` | `#fb923c` | builder energy, warm urgency |
+| `--accent-rose` | `#f43f5e` | risk, security, incidents, high-attention |
+| `--accent-rose-light` | `#fb7185` | creative, content, conversion |
+
+### Complete Mapping
+
+| Persona | Color | Token | Notes |
+|---------|-------|-------|-------|
+| Developer | `#0078D4` | — | Intentional Microsoft blue per brand agreement |
+| Academic | `#8B5CF6` | — | Purple — kept distinct from brand accents |
+| Data Engineer | `#06B6D4` | — | Cyan — kept distinct from teal |
+| Researcher | `#0d9488` | teal | CorreaX teal |
+| Technical Writer | `#f97316` | coral | CorreaX coral |
+| Architect | `#6366f1` | indigo | CorreaX indigo |
+| Consultant | `#6366f1` | indigo | leadership/strategy |
+| Product Manager | `#6366f1` | indigo | leadership/strategy |
+| Game Developer | `#6366f1` | indigo | code-adjacent creative |
+| Business Analyst | `#0d9488` | teal | analytical/structured |
+| QA Engineer | `#0d9488` | teal | quality/validation |
+| Project Manager | `#2dd4bf` | teal-light | coordination/flow |
+| Job Seeker | `#2dd4bf` | teal-light | growth/opportunity |
+| OSS Contributor | `#2dd4bf` | teal-light | community/growth |
+| BI Analyst | `#2dd4bf` | teal-light | data insights |
+| Speaker / Presenter | `#f97316` | coral | stage/warm energy |
+| Grant Writer | `#f97316` | coral | writing/warm contexts |
+| Power User / Builder | `#fb923c` | coral-light | builder energy |
+| DevOps Engineer | `#f43f5e` | rose | urgency/action |
+| Security Engineer | `#f43f5e` | rose | threat/risk |
+| SRE / On-Call | `#f43f5e` | rose | incidents/alerting |
+| Marketer | `#f43f5e` | rose | attention/conversion |
+| Fiction Writer | `#818cf8` | indigo-light | imagination/narrative |
+| Student | `#818cf8` | indigo-light | learning/exploration |
+| Cognitive Scientist | `#818cf8` | indigo-light | intellect/AI/mind |
+| Content Creator | `#fb7185` | rose-light | creative energy |
+| Copywriter | `#fb7185` | rose-light | creative/conversion |
+
+**Fallback** (no persona detected): `#6366f1` (CorreaX indigo primary)
 
 ---
 
