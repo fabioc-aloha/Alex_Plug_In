@@ -1,34 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/copilot-instructions.md",
+    "alex_docs/BRANDING-PLAN.md"
   ],
-  "todoHotspots": [
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-5.9.12.vsix",
-      "todoCount": 20,
-      "scannedAt": 1772194227269
-    },
-    {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 8,
-      "scannedAt": 1772194227269
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 8,
-      "scannedAt": 1772194227269
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1772194227269
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772194227269
-    }
-  ],
-  "lastUpdated": 1772194227269
+  "todoHotspots": [],
+  "lastUpdated": 1772295191231
 }
