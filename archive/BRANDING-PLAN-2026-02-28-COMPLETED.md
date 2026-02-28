@@ -1,39 +1,13 @@
 # Branding Consistency Plan
 
-> ✅ **COMPLETED 2026-02-28** — 42/42 tasks done. HOLD lifted. v5.9.13 published to VS Code Marketplace.
-
-**Full task history**: [archive/BRANDING-PLAN-2026-02-28-COMPLETED.md](../archive/BRANDING-PLAN-2026-02-28-COMPLETED.md)
-
-**Active design authority**: [DK-correax-brand.md](DK-correax-brand.md) — CorreaX design tokens remain the reference for all future brand decisions.
-
-## What Was Accomplished
-
-| Milestone | Tasks | Completed |
-|-----------|-------|-----------|
-| Gate 0 — Decisions (D1–D6) | 6 | 2026-02-28 |
-| M1 — Publisher Logo | 3 | 2026-02-28 |
-| M2 — Shared Logos & Favicons | 6 | 2026-02-28 |
-| M3 — CX Extension Standardization | 11 | 2026-02-28 |
-| M4 — README Banners & Docs | 10 | 2026-02-28 |
-| M5 — Alex Extension UI | 6 | 2026-02-28 |
-| M6 — Verification & HOLD Lift | 7 | 2026-02-28 |
-| **Total** | **42** | **42** |
-
-## Key Outcomes
-
-- All 5 Alex properties aligned to CorreaX dark-first design language
-- 16 CX extension icons + banners regenerated from unified template
-- Publisher logo (`fabioc-aloha`) updated on VS Code Marketplace
-- favicon.ico upgraded to 7-size multi-res (16/24/32/48/64/128/256px)
-- apple-touch-icon.png at 180×180 across all 3 web properties
-- 43 Mermaid diagram blocks updated to CorreaX dark theme
-- Zero deprecated colors (`#0078d4`, `#005a9e`, `#ff6b35`) in scope
-- Brand compliance added to dream protocol
-- v5.9.13 shipped with all brand assets
-
-## Plan Owner
-
-**Fabio Corrêa** — final sign-off 2026-02-28.
+> **Objective**: Apply the CorreaX design language uniformly across all Alex properties — READMEs, documentation, banners, and UI.
+>
+> **Authority**: `alex_docs/DK-correax-brand.md` (design tokens + components) · `AlexLearn/business/BRANDING.md` (brand strategy)
+>
+> **Date**: February 28, 2026
+> **Status**: ✅ COMPLETE · **Last Updated**: 2026-02-28 · **Progress**: 42/42 tasks done
+>
+> **✅ HOLD LIFTED 2026-02-28** — Plan owner (Fabio) has given final sign-off. All 42 tasks complete. All milestones passed. All Alex brand assets cleared for publishing and deployment.
 >
 > **Release Gate Process** (per milestone):
 > 1. All tasks in the milestone pass the Definition of Done (§9)
