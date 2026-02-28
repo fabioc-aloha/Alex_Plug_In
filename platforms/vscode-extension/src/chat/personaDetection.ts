@@ -412,7 +412,7 @@ export const PERSONAS: Persona[] = [
         hook: 'Self-documenting cognitive architecture',
         skill: 'architecture-health',
         icon: '🏗️',
-        accentColor: '#6366F1',
+        accentColor: '#6366f1',  // CorreaX indigo — aligned to brand system
         signals: [
             { category: 'identity',   pattern: 'architect|system.?design|enterprise|infrastructure',              weight: 2.5 },
             { category: 'technology', pattern: 'terraform|bicep|kubernetes|docker|azure|aws|gcp',                  weight: 2.0 },
@@ -1724,7 +1724,7 @@ Respond with ONLY the JSON block, no other text.`;
             hook: `Alex-assisted ${parsed.personaName || 'development'}`,
             skill: parsed.skill || 'code-review',
             icon: '🎯',
-            accentColor: '#0078D4',  // Default to Azure Blue
+            accentColor: '#0078D4',  // Developer blue — intentional per DK §13
             signals: [],
             keywords: [],
             techStack: detectedTech,

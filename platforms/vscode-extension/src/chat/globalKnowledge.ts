@@ -747,7 +747,7 @@ sync-metadata.json
  * Professional design with animated knowledge categories.
  */
 function getAnimatedBannerSvg(): string {
-    // Space Station + Docked Rocket concept - "Your Mission Control for Cross-Project Wisdom"
+    // Knowledge Graph concept - "Your Mission Control for Cross-Project Wisdom"
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
   <defs>
     <!-- Deep space gradient (on-brand) -->
@@ -756,17 +756,17 @@ function getAnimatedBannerSvg(): string {
       <stop offset="100%" stop-color="#0d1520"/>
     </linearGradient>
     
-    <!-- Azure blue (brand primary) -->
+    <!-- CorreaX teal (GK property primary) -->
     <linearGradient id="azure" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0078d4"/>
-      <stop offset="100%" stop-color="#005a9e"/>
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
     </linearGradient>
     
-    <!-- Flame/thrust orange (brand accent) - solar panels -->
+    <!-- Coral accent (CorreaX coral) - decorative elements -->
     <linearGradient id="solar" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff6b35"/>
-      <stop offset="50%" stop-color="#ffc857"/>
-      <stop offset="100%" stop-color="#ff6b35"/>
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="50%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#f97316"/>
     </linearGradient>
     
     <!-- Station hull metallic -->
@@ -778,14 +778,14 @@ function getAnimatedBannerSvg(): string {
     
     <!-- Glow effect -->
     <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#0078d4" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#0d9488" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0d9488" stop-opacity="0"/>
     </radialGradient>
     
     <!-- Docking ring glow -->
     <radialGradient id="dockGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#00ff88" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
     </radialGradient>
   </defs>
   
@@ -809,7 +809,7 @@ function getAnimatedBannerSvg(): string {
   
   <!-- Earth in background (subtle) -->
   <circle cx="1150" cy="350" r="180" fill="#1a3a52" opacity="0.3"/>
-  <circle cx="1150" cy="350" r="180" fill="none" stroke="#0078d4" stroke-width="1" opacity="0.2"/>
+  <circle cx="1150" cy="350" r="180" fill="none" stroke="#0d9488" stroke-width="1" opacity="0.2"/>
   
   <!-- Main glow behind station -->
   <ellipse cx="320" cy="150" rx="200" ry="120" fill="url(#glow)"/>
@@ -823,14 +823,14 @@ function getAnimatedBannerSvg(): string {
       <rect x="-80" y="-3" width="80" height="6" fill="url(#hull)"/>
       <!-- Upper panel -->
       <rect x="-145" y="-35" width="65" height="30" fill="url(#solar)" opacity="0.9"/>
-      <rect x="-145" y="-35" width="65" height="30" fill="none" stroke="#ff6b35" stroke-width="1"/>
-      <line x1="-145" y1="-20" x2="-80" y2="-20" stroke="#ff8c42" stroke-width="0.5"/>
-      <line x1="-112" y1="-35" x2="-112" y2="-5" stroke="#ff8c42" stroke-width="0.5"/>
+      <rect x="-145" y="-35" width="65" height="30" fill="none" stroke="#f97316" stroke-width="1"/>
+      <line x1="-145" y1="-20" x2="-80" y2="-20" stroke="#fb923c" stroke-width="0.5"/>
+      <line x1="-112" y1="-35" x2="-112" y2="-5" stroke="#fb923c" stroke-width="0.5"/>
       <!-- Lower panel -->
       <rect x="-145" y="5" width="65" height="30" fill="url(#solar)" opacity="0.9"/>
-      <rect x="-145" y="5" width="65" height="30" fill="none" stroke="#ff6b35" stroke-width="1"/>
-      <line x1="-145" y1="20" x2="-80" y2="20" stroke="#ff8c42" stroke-width="0.5"/>
-      <line x1="-112" y1="5" x2="-112" y2="35" stroke="#ff8c42" stroke-width="0.5"/>
+      <rect x="-145" y="5" width="65" height="30" fill="none" stroke="#f97316" stroke-width="1"/>
+      <line x1="-145" y1="20" x2="-80" y2="20" stroke="#fb923c" stroke-width="0.5"/>
+      <line x1="-112" y1="5" x2="-112" y2="35" stroke="#fb923c" stroke-width="0.5"/>
     </g>
     
     <!-- SOLAR PANEL ARRAYS (Right) -->
@@ -839,14 +839,14 @@ function getAnimatedBannerSvg(): string {
       <rect x="0" y="-3" width="60" height="6" fill="url(#hull)"/>
       <!-- Upper panel -->
       <rect x="60" y="-35" width="65" height="30" fill="url(#solar)" opacity="0.9"/>
-      <rect x="60" y="-35" width="65" height="30" fill="none" stroke="#ff6b35" stroke-width="1"/>
-      <line x1="60" y1="-20" x2="125" y2="-20" stroke="#ff8c42" stroke-width="0.5"/>
-      <line x1="92" y1="-35" x2="92" y2="-5" stroke="#ff8c42" stroke-width="0.5"/>
+      <rect x="60" y="-35" width="65" height="30" fill="none" stroke="#f97316" stroke-width="1"/>
+      <line x1="60" y1="-20" x2="125" y2="-20" stroke="#fb923c" stroke-width="0.5"/>
+      <line x1="92" y1="-35" x2="92" y2="-5" stroke="#fb923c" stroke-width="0.5"/>
       <!-- Lower panel -->
       <rect x="60" y="5" width="65" height="30" fill="url(#solar)" opacity="0.9"/>
-      <rect x="60" y="5" width="65" height="30" fill="none" stroke="#ff6b35" stroke-width="1"/>
-      <line x1="60" y1="20" x2="125" y2="20" stroke="#ff8c42" stroke-width="0.5"/>
-      <line x1="92" y1="5" x2="92" y2="35" stroke="#ff8c42" stroke-width="0.5"/>
+      <rect x="60" y="5" width="65" height="30" fill="none" stroke="#f97316" stroke-width="1"/>
+      <line x1="60" y1="20" x2="125" y2="20" stroke="#fb923c" stroke-width="0.5"/>
+      <line x1="92" y1="5" x2="92" y2="35" stroke="#fb923c" stroke-width="0.5"/>
     </g>
     
     <!-- MAIN TRUSS (horizontal backbone) -->
@@ -858,18 +858,18 @@ function getAnimatedBannerSvg(): string {
     <g transform="translate(130, 30)">
       <rect x="0" y="0" width="50" height="75" rx="8" fill="url(#azure)"/>
       <rect x="10" y="15" width="30" height="20" rx="4" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
-      <ellipse cx="25" cy="25" rx="12" ry="8" fill="#0078d4" opacity="0.3"/>
-      <circle cx="12" cy="55" r="5" fill="#0a1628" stroke="#005a9e" stroke-width="1"/>
-      <circle cx="38" cy="55" r="5" fill="#0a1628" stroke="#005a9e" stroke-width="1"/>
-      <text x="25" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#0078d4">GK</text>
+      <ellipse cx="25" cy="25" rx="12" ry="8" fill="#0d9488" opacity="0.3"/>
+      <circle cx="12" cy="55" r="5" fill="#0a1628" stroke="#2dd4bf" stroke-width="1"/>
+      <circle cx="38" cy="55" r="5" fill="#0a1628" stroke="#2dd4bf" stroke-width="1"/>
+      <text x="25" y="95" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#0d9488">GK</text>
     </g>
     
     <!-- HABITAT MODULE (Left) -->
     <g transform="translate(60, 40)">
       <rect x="0" y="0" width="70" height="30" rx="6" fill="url(#azure)"/>
-      <line x1="15" y1="3" x2="15" y2="27" stroke="#005a9e" stroke-width="0.5"/>
-      <line x1="35" y1="3" x2="35" y2="27" stroke="#005a9e" stroke-width="0.5"/>
-      <line x1="55" y1="3" x2="55" y2="27" stroke="#005a9e" stroke-width="0.5"/>
+      <line x1="15" y1="3" x2="15" y2="27" stroke="#2dd4bf" stroke-width="0.5"/>
+      <line x1="35" y1="3" x2="35" y2="27" stroke="#2dd4bf" stroke-width="0.5"/>
+      <line x1="55" y1="3" x2="55" y2="27" stroke="#2dd4bf" stroke-width="0.5"/>
       <circle cx="25" cy="15" r="6" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
       <circle cx="45" cy="15" r="6" fill="#0a1628" stroke="#00d4ff" stroke-width="1"/>
     </g>
@@ -905,26 +905,26 @@ function getAnimatedBannerSvg(): string {
   
   <!-- Epic subtitle -->
   <text x="530" y="140" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#888888">
-    <tspan>Your </tspan><tspan fill="#0078d4" font-weight="bold">MISSION CONTROL</tspan><tspan> for Cross-Project Wisdom</tspan>
+    <tspan>Your </tspan><tspan fill="#0d9488" font-weight="bold">MISSION CONTROL</tspan><tspan> for Cross-Project Wisdom</tspan>
   </text>
   
   <!-- Feature pills -->
   <g transform="translate(530, 165)">
     <g>
-      <rect x="0" y="0" width="100" height="28" rx="14" fill="#0078d4" fill-opacity="0.15" stroke="#0078d4" stroke-width="1" stroke-opacity="0.4"/>
-      <text x="50" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#0078d4">📁 Patterns</text>
+      <rect x="0" y="0" width="100" height="28" rx="14" fill="#0d9488" fill-opacity="0.15" stroke="#0d9488" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="50" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#0d9488">📁 Patterns</text>
     </g>
     <g transform="translate(110, 0)">
-      <rect x="0" y="0" width="90" height="28" rx="14" fill="#ff6b35" fill-opacity="0.15" stroke="#ff6b35" stroke-width="1" stroke-opacity="0.4"/>
-      <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#ff6b35">💡 Insights</text>
+      <rect x="0" y="0" width="90" height="28" rx="14" fill="#f97316" fill-opacity="0.15" stroke="#f97316" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#f97316">💡 Insights</text>
     </g>
     <g transform="translate(210, 0)">
       <rect x="0" y="0" width="90" height="28" rx="14" fill="#00ff88" fill-opacity="0.15" stroke="#00ff88" stroke-width="1" stroke-opacity="0.4"/>
       <text x="45" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#00ff88">🔗 Synced</text>
     </g>
     <g transform="translate(310, 0)">
-      <rect x="0" y="0" width="105" height="28" rx="14" fill="#ff6b35" fill-opacity="0.15" stroke="#ff6b35" stroke-width="1" stroke-opacity="0.4"/>
-      <text x="52" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#ff6b35">👥 Shareable</text>
+      <rect x="0" y="0" width="105" height="28" rx="14" fill="#f97316" fill-opacity="0.15" stroke="#f97316" stroke-width="1" stroke-opacity="0.4"/>
+      <text x="52" y="19" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#f97316">👥 Shareable</text>
     </g>
   </g>
   
@@ -945,9 +945,9 @@ function getAnimatedBannerSvg(): string {
   
   <!-- CorreaX mark bottom right -->
   <g transform="translate(1080, 250)" opacity="0.6">
-    <path d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12s4.701 10.5 10.5 10.5c2.9 0 5.542-1.176 7.446-3.075l-2.651-2.652A6.75 6.75 0 0112 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75c1.718 0 3.285.643 4.478 1.701l2.598-2.729A10.46 10.46 0 0012 1.5z" fill="#0078d4"/>
-    <path d="M15 7.5l-3 4.5 3 4.5h3l-3-4.5 3-4.5h-3z" fill="#0078d4"/>
-    <path d="M18 7.5l3 4.5-3 4.5h3l3-4.5-3-4.5h-3z" fill="#0078d4" opacity="0.5"/>
+    <path d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12s4.701 10.5 10.5 10.5c2.9 0 5.542-1.176 7.446-3.075l-2.651-2.652A6.75 6.75 0 0112 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75c1.718 0 3.285.643 4.478 1.701l2.598-2.729A10.46 10.46 0 0012 1.5z" fill="#0d9488"/>
+    <path d="M15 7.5l-3 4.5 3 4.5h3l-3-4.5 3-4.5h-3z" fill="#0d9488"/>
+    <path d="M18 7.5l3 4.5-3 4.5h3l3-4.5-3-4.5h-3z" fill="#0d9488" opacity="0.5"/>
   </g>
   <text x="1116" y="278" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">CorreaX</text>
 </svg>`;

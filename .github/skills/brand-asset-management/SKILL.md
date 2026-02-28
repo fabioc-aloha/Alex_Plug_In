@@ -41,16 +41,16 @@ Expert in Alex brand hierarchy, visual identity systems, asset deployment, and p
 | Tagline | "Strap a Rocket to Your Back" |
 | Subtitle Template | "Take Your [NOUN] to New Heights" |
 | Primary Icon | `$(rocket)` codicon |
-| Colors | Azure blue (#0078d4) + thrust orange (#ff6b35) |
+| Colors | sky blue (#38bdf8) + coral (#f97316) + indigo (#6366f1) — CorreaX dark palette |
 
 ### GK Premium Branding
 
 | Tier | Symbol | Meaning |
 |------|--------|---------|
 | Standard | A Negative Space Rocket | Individual project acceleration |
-| Premium (GK) | Space Station + Docked Rocket | Cross-project knowledge hub |
+| Premium (GK) | Knowledge Graph Network | Cross-project knowledge hub |
 | GK Tagline | "Your MISSION CONTROL for Cross-Project Wisdom" |
-| GK Colors | Azure + orange + sync green (#00ff88) |
+| GK Colors | teal (#0d9488) + teal-light (#2dd4bf) — CorreaX knowledge tier |
 
 ### Asset Locations
 
