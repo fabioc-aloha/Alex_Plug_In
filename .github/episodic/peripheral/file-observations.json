@@ -1,9 +1,16 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "alex_docs/BRANDING-PLAN.md"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/BRANDING-PLAN.md",
+    "learn/README.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1772295191231
+  "todoHotspots": [
+    {
+      "file": "docs/alex-brain-anatomy.html",
+      "todoCount": 2,
+      "scannedAt": 1772302635238
+    }
+  ],
+  "lastUpdated": 1772302635238
 }
