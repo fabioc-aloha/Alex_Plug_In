@@ -35,16 +35,16 @@
 | 4 | Knowledge Graph Logo | 1 | 1 | M2 |
 | 5 | Favicons (3 files) | 2 | 1 | M2, M4 |
 | 6 | Apple Touch Icons | 1 | 0 | M4 |
-| 7 | CX Extension Icons (16) | 2 | 0 | M3 |
-| 8 | CX Extension Banners (16) | 1 | 0 | M3 |
-| 9 | PWA Icons (8 sizes) | 1 | 0 | M3 |
+| 7 | CX Extension Icons (16) | 2 | 2 | M3 |
+| 8 | CX Extension Banners (16) | 1 | 1 | M3 |
+| 9 | PWA Icons (8 sizes) | 1 | 1 | M3 |
 | 10 | README Banners (4 repos) | 4 | 0 | M4 |
-| 11 | Extensions Brand Guide | 1 | 0 | M3 |
-| 12 | Context Menus (16 ext.) | 6 | 0 | M3 |
+| 11 | Extensions Brand Guide | 1 | 1 | M3 |
+| 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 0 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
 | 15 | Verification & Sign-off | 7 | 1 | M2, M6 |
-| | **Total** | **42** | **9** | |
+| | **Total** | **42** | **20** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -106,8 +106,8 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 3.2 | Design shared CX icon SVG template (128×128, dark bg, CX badge, accent bar) | 1 template file | ⬜ |
-| 3.3 | Generate 16 extension icons from template (SVG → PNG) | 16 × `icon.svg` + `icon.png` | ⬜ |
+| 3.2 | Design shared CX icon SVG template (128×128, dark bg, CX badge, accent bar) | 1 template file | ✅ |
+| 3.3 | Generate 16 extension icons from template (SVG → PNG) | 16 × `icon.svg` + `icon.png` | ✅ |
 
 **Gate**: ✋ M3
 
@@ -115,7 +115,7 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 3.4 | Regenerate 16 banners — CorreaX dark, accent bar, series label | 16 × `banner.svg` + `banner.png` | ⬜ |
+| 3.4 | Regenerate 16 banners — CorreaX dark, accent bar, series label | 16 × `banner.svg` + `banner.png` | ✅ |
 
 **Gate**: ✋ M3
 
@@ -123,7 +123,7 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 3.5 | Update 8 PWA icons to dark-first + update README | `Extensions/brand/icons/` (8 SVGs + README) | ⬜ |
+| 3.5 | Update 8 PWA icons to dark-first + update README | `Extensions/brand/icons/` (8 SVGs + README) | ✅ |
 
 **Gate**: ✋ M3
 
@@ -142,7 +142,7 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 3.1 | Overhaul `brand/README.md` — dark-first, DK authority, CorreaX palette | `Extensions/brand/README.md` (~1,469 lines) | ⬜ |
+| 3.1 | Overhaul `brand/README.md` — dark-first, DK authority, CorreaX palette | `Extensions/brand/README.md` (~1,469 lines) | ✅ |
 
 **Gate**: ✋ M3
 
@@ -150,12 +150,12 @@
 
 | ID | Task | Scope | Status |
 |----|------|-------|--------|
-| 3.6 | Add `$(tools)` icon to `cx.tools` submenu | 14 `package.json` files | ⬜ |
-| 3.7 | Normalize group IDs: `1_analysis` / `2_transform` / `3_generate` / `4_info` | 14 `package.json` files | ⬜ |
-| 3.8 | Add `explorer/context` to `brandfetch-logo-fetcher` + `replicate-image-studio` | 2 `package.json` files | ⬜ |
-| 3.9 | Resolve `dev-wellbeing` / `focus-timer` context menu (per D6) | 2 extensions | ⬜ |
-| 3.10 | Review `when` clauses — gate by file type | 14 extensions | ⬜ |
-| 3.11 | Update Extensions README with "✅ Context Menu" badges | 1 file | ⬜ |
+| 3.6 | Add `$(tools)` icon to `cx.tools` submenu | 14 `package.json` files | ✅ |
+| 3.7 | Normalize group IDs: `1_analysis` / `2_transform` / `3_generate` / `4_info` | 14 `package.json` files | ✅ |
+| 3.8 | Add `explorer/context` to `brandfetch-logo-fetcher` + `replicate-image-studio` | 2 `package.json` files | ✅ |
+| 3.9 | Resolve `dev-wellbeing` / `focus-timer` context menu (per D6) | 2 extensions | ✅ N/A |
+| 3.10 | Review `when` clauses — gate by file type | 14 extensions | ✅ |
+| 3.11 | Update Extensions README with "✅ Context Menu" badges | 1 file | ✅ |
 
 **Gate**: ✋ M3
 
@@ -835,34 +835,34 @@ baseline; accent color swaps per persona (see DK §13).
 
 **Goal**: Unify the context-menu (right-click) experience across all CX extensions so users see a consistent, branded submenu wherever they right-click.
 
-#### Current State Audit
+#### Current State Audit (Pre-M3)
 
 | Property | Alex Extension | CX Extensions (14 of 16) | `dev-wellbeing` / `focus-timer` |
 |----------|---------------|--------------------------|----------------------------------|
-| **Submenu ID** | `alex.contextMenu` / `alex.explorerMenu` | `cx.tools` | *(none — no context menu)* |
-| **Label** | `🚀 Alex` | `🔷 CX Tools` | — |
-| **Icon** | `$(rocket)` | *(none declared)* | — |
-| **editor/context** | ✅ | ✅ | ❌ |
-| **explorer/context** | ✅ (file-type gated) | ✅ (12) / ❌ (2: `brandfetch`, `replicate`) | ❌ |
-| **Group naming** | `1_ask`, `2_save`, `3_search`/`3_generate`, `4_create`/`4_voice`, `5_github` | Varies: `navigation@N`, `1_modification@N`, `7_modification@N` | — |
+| **Submenu ID** | `alex.contextMenu` / `alex.explorerMenu` | `cx.tools` | *(none — workspace-level, N/A)* |
+| **Label** | `🚀 Alex` | ~~`🔷 CX Tools`~~ → `$(tools) CX Tools` ✅ | — |
+| **Icon** | `$(rocket)` | `$(tools)` ✅ | — |
+| **editor/context** | ✅ | ✅ | N/A |
+| **explorer/context** | ✅ (file-type gated) | ✅ (14/14 — brandfetch + replicate fixed) ✅ | N/A |
+| **Group naming** | `1_ask`, `2_save`, `3_search`/`3_generate`, `4_create`/`4_voice`, `5_github` | `1_analysis` / `2_transform` / `3_generate` / `4_info` ✅ | — |
 
-#### Issues
+#### M3 Fixes Applied ✅
 
-1. **No icon field on CX submenu** — VS Code `submenus[].icon` is omitted → falls back to generic.
-2. **2 extensions missing entirely** — `dev-wellbeing` and `focus-timer` contribute no context menu at all.
-3. **2 extensions missing explorer/context** — `brandfetch-logo-fetcher` and `replicate-image-studio` only register `editor/context`, not `explorer/context`.
-4. **Group naming drift** — CX extensions use inconsistent group IDs (`navigation@N`, `1_modification@N`, `7_modification@N`), making insertion order unpredictable when multiple CX extensions are installed together.
+1. ~~**No icon field on CX submenu**~~ → `$(tools)` added to all 14 submenus.
+2. ~~**2 extensions missing entirely**~~ → `dev-wellbeing` and `focus-timer` confirmed workspace-level (N/A per D6).
+3. ~~**2 extensions missing explorer/context**~~ → `brandfetch-logo-fetcher` and `replicate-image-studio` now have `explorer/context`.
+4. ~~**Group naming drift**~~ → all 14 extensions now use `1_analysis@N` / `2_transform@N` / `3_generate@N` / `4_info@N`.
 
-#### Target Design
+#### Implemented Design
 
 | Property | Standard |
 |----------|----------|
 | **Submenu ID** | `cx.tools` (shared across all CX extensions) |
-| **Label** | `🔷 CX Tools` |
-| **Icon** | `$(tools)` or custom CX icon reference |
-| **Contexts** | Both `editor/context` **and** `explorer/context` in every extension that has actions |
-| **Group naming convention** | `1_analysis` (scan/lint), `2_transform` (convert/export), `3_generate` (create new files), `4_info` (report/status) — shared across all CX extensions |
-| **Alex extension** | Keeps its own `🚀 Alex` submenu — this is the cognitive partner, not a tool. See note below. |
+| **Label** | `$(tools) CX Tools` |
+| **Icon** | `$(tools)` codicon |
+| **Contexts** | Both `editor/context` **and** `explorer/context` for all file-level extensions |
+| **Group naming convention** | `1_analysis` (scan/lint), `2_transform` (convert/export), `3_generate` (create new files), `4_info` (report/status) |
+| **Alex extension** | Keeps its own `🚀 Alex` submenu — cognitive partner, not a tool. |
 
 > **Design decision**: Alex (🚀) and CX Tools (🔷) remain **separate submenus by design**.
 > Alex = cognitive partner (ask, explain, review). CX Tools = utility belt (convert, scan, export).
