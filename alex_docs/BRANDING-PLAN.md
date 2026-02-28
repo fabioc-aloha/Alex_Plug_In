@@ -41,10 +41,10 @@
 | 10 | README Banners (4 repos) | 4 | 4 | M4 |
 | 11 | Extensions Brand Guide | 1 | 1 | M3 |
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
-| 13 | Alex Extension UI | 6 | 0 | M5 |
+| 13 | Alex Extension UI | 6 | 6 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
 | 15 | Verification & Sign-off | 7 | 1 | M2, M6 |
-| | **Total** | **42** | **26** | |
+| | **Total** | **42** | **32** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -163,12 +163,12 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 5.1 | Audit DESIGN_TOKENS against DK §2 | `src/views/webviewStyles.ts` | ⬜ |
-| 5.2 | Fix persona accent colors per DK §13 | `src/personaDetection.ts` | ⬜ |
-| 5.3 | Remove old blue/orange refs from SKILL.md | `brand-asset-management/SKILL.md` | ⬜ |
-| 5.4 | Audit sidebar panels for token usage | Settings, onboarding, premium panels | ⬜ |
-| 5.5 | Verify welcome panel matches DK §4 | `src/views/welcomeView.ts` | ⬜ |
-| 5.6 | Full compile + local install test | `npm run compile && npm run package` | ⬜ |
+| 5.1 | Audit DESIGN_TOKENS against DK §2 | `src/views/webviewStyles.ts` | ✅ |
+| 5.2 | Fix persona accent colors per DK §13 | `src/personaDetection.ts` | ✅ |
+| 5.3 | Remove old blue/orange refs from SKILL.md | `brand-asset-management/SKILL.md` | ✅ |
+| 5.4 | Audit sidebar panels for token usage | Settings, onboarding, premium panels | ✅ |
+| 5.5 | Verify welcome panel matches DK §4 | `src/views/welcomeView.ts` | ✅ |
+| 5.6 | Full compile + local install test | `npm run compile && npm run package` | ✅ |
 
 **Gate**: ✋ M5
 
