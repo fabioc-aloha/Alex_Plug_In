@@ -1,0 +1,102 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "1.0",
+  "skill": "correax-brand",
+  "version": "1.0.0",
+  "lastValidated": "2026-02-28",
+  "inheritance": "inheritable",
+  "description": "CorreaX visual design system — colors, typography, components, WCAG compliance",
+  "connections": [
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.9,
+      "when": "deploying or referencing brand assets that must follow the CorreaX design language",
+      "yields": "Consistent asset deployment aligned with design tokens and visual identity"
+    },
+    {
+      "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.75,
+      "when": "generating banner images that must use CorreaX palette and typography",
+      "yields": "AI-generated banners with correct brand colors and composition"
+    },
+    {
+      "target": ".github/skills/svg-graphics/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "when": "creating SVG graphics that follow CorreaX visual identity",
+      "yields": "SVG assets using CorreaX color tokens and design patterns"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.8,
+      "when": "making UI/UX decisions that reference the CorreaX component library",
+      "yields": "Accessible, consistent interface designs following the design system"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "when": "building webview components with CorreaX design tokens and VS Code fallbacks",
+      "yields": "Extension webviews that match the CorreaX visual identity"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.6,
+      "when": "syncing brand assets to heir projects that must align with the design system",
+      "yields": "Heir projects maintain visual consistency with the CorreaX brand"
+    }
+  ],
+  "triggers": {
+    "keywords": [
+      "design system",
+      "brand colors",
+      "correax palette",
+      "typography",
+      "banner pattern",
+      "design tokens",
+      "color system",
+      "accent colors",
+      "css variables",
+      "brand identity",
+      "visual identity",
+      "indigo",
+      "teal",
+      "coral",
+      "rose",
+      "WCAG",
+      "contrast",
+      "persona accent",
+      "series label",
+      "ghost watermark",
+      "accent bar"
+    ],
+    "activationBoost": [
+      "CorreaX",
+      "LearnAlex",
+      "design language",
+      "color palette",
+      "#6366f1",
+      "#0d9488",
+      "#f43f5e",
+      "#f97316",
+      "--accent-indigo",
+      "--bg-card",
+      "webview styles",
+      "brand guidelines",
+      "visual consistency",
+      "font weight 300"
+    ]
+  },
+  "globalKnowledge": [
+    {
+      "id": "GK-dk-correax-brand-design-language",
+      "relevance": "Promoted pattern — full CorreaX design language available in Global Knowledge"
+    }
+  ],
+  "when": "User asks about brand colors, design tokens, CSS variables, typography choices, component patterns, visual identity, or WCAG compliance for any CorreaX product",
+  "yields": "Authoritative color values, typography specs, component CSS, VS Code token mappings, and accessibility compliance guidance"
+}
