@@ -30,21 +30,21 @@
 | # | Asset Category | Tasks | Done | Milestone |
 |---|---------------|-------|------|-----------|
 | 1 | Publisher Logo | 3 | 3 | M1 |
-| 2 | Rocket Logos (5 copies) | 3 | 2 | M2, M4 |
+| 2 | Rocket Logos (5 copies) | 3 | 3 | M2, M4 |
 | 3 | CorreaX Wordmark | 1 | 1 | M2 |
 | 4 | Knowledge Graph Logo | 1 | 1 | M2 |
 | 5 | Favicons (3 files) | 2 | 1 | M2, M4 |
-| 6 | Apple Touch Icons | 1 | 0 | M4 |
+| 6 | Apple Touch Icons | 1 | 1 | M4 |
 | 7 | CX Extension Icons (16) | 2 | 2 | M3 |
 | 8 | CX Extension Banners (16) | 1 | 1 | M3 |
 | 9 | PWA Icons (8 sizes) | 1 | 1 | M3 |
-| 10 | README Banners (4 repos) | 4 | 0 | M4 |
+| 10 | README Banners (4 repos) | 4 | 4 | M4 |
 | 11 | Extensions Brand Guide | 1 | 1 | M3 |
 | 12 | Context Menus (16 ext.) | 6 | 6 | M3 |
 | 13 | Alex Extension UI | 6 | 0 | M5 |
 | 14 | Documentation Assets | 3 | 0 | M4 |
 | 15 | Verification & Sign-off | 7 | 1 | M2, M6 |
-| | **Total** | **42** | **20** | |
+| | **Total** | **42** | **26** | |
 
 <details>
 <summary>Full task breakdown by asset (click to expand)</summary>
@@ -65,7 +65,7 @@
 |----|-----------|------|----------------|--------|
 | 2.1 | <img src="../platforms/vscode-extension/assets/logo.svg" width="32" height="32" alt="ext"> <img src="../../AlexLearn/logo.svg" width="32" height="32" alt="learn"> <img src="../../AlexLearn/website/public/logo.svg" width="32" height="32" alt="learn-web"> <img src="../../Alex-Global-Knowledge/assets/logo.svg" width="32" height="32" alt="gk"> <img src="../../Extensions/brand/logos/logo.svg" width="32" height="32" alt="ext-brand"> | Recolor body: `#0078d4/#005a9e` → `#38bdf8/#0284c7` | 5 × `logo.svg` (see §3.1 inventory) | ✅ |
 | 2.2 | *(same as 2.1 — flames updated in same pass)* | Recolor flames: `#ff6b35` → `#f97316` | Same 5 files | ✅ |
-| 4.7 | *(pending)* | Export `logo.png` at 128, 256, 512 per property | 4 properties × 3 sizes | ⬜ |
+| 4.7 | *(done)* | Export `logo.png` at 128, 256, 512 per property | 4 properties × 3 sizes | ✅ |
 
 **Gate**: 2.1–2.2 under ✋ M2 · 4.7 under ✋ M4
 
@@ -90,7 +90,7 @@
 | ID | Thumbnail | Task | Target File(s) | Status |
 |----|-----------|------|----------------|--------|
 | 2.3 | <img src="../platforms/vscode-extension/assets/favicon.svg" width="32" height="32" alt="ext favicon"> <img src="../../Extensions/brand/logos/favicon.svg" width="32" height="32" alt="ext-brand favicon"> <img src="../../AlexLearn/website/public/favicon.svg" width="32" height="32" alt="learn-web favicon"> | Recolor 3 favicons: Azure Blue → sky blue | 3 × `favicon.svg` (see §3.2 inventory) | ✅ |
-| 4.6 | *(pending)* | Export `favicon.ico` (16, 32, 48 multi-size) per property | 3 ICO files | ⬜ |
+| 4.6 | *(pending)* | Export `favicon.ico` (16, 32, 48 multi-size) per property — `favicon.png` (32px) exported; `.ico` multi-size pending | 3 ICO files | 🔄 |
 
 **Gate**: 2.3 under ✋ M2 · 4.6 under ✋ M4
 
@@ -98,7 +98,7 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 4.5 | Create `apple-touch-icon.svg` → PNG for Extensions, GK, Master Alex | 3 new SVGs + 3 PNGs | ⬜ |
+| 4.5 | Create `apple-touch-icon.svg` → PNG for Extensions, GK, Master Alex | 3 new SVGs + 3 PNGs | ✅ |
 
 **Gate**: ✋ M4
 
@@ -131,10 +131,10 @@
 
 | ID | Task | Target File(s) | Status |
 |----|------|----------------|--------|
-| 4.1 | Master Alex — audit + regenerate | `Alex_Plug_In/assets/banner.svg` | ⬜ |
-| 4.2 | LearnAlex — verify compliance | `AlexLearn/assets/banners/readme.svg` | ⬜ |
-| 4.3 | Extensions — audit + regenerate | `Extensions/brand/logos/banner-extensions.svg` | ⬜ |
-| 4.4 | Global Knowledge — audit + regenerate banner + logo | `Alex-Global-Knowledge/assets/banner.svg` | ⬜ |
+| 4.1 | Master Alex — audit + regenerate | `Alex_Plug_In/.github/assets/banner.svg` | ✅ |
+| 4.2 | LearnAlex — verify compliance | `AlexLearn/assets/banners/readme.svg` | ✅ |
+| 4.3 | Extensions — audit + regenerate | `Extensions/brand/logos/banner-extensions.svg` | ✅ |
+| 4.4 | Global Knowledge — audit + regenerate banner + logo | `Alex-Global-Knowledge/assets/banner.svg` | ✅ |
 
 **Gate**: ✋ M4
 
