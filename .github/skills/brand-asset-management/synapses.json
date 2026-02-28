@@ -3,9 +3,16 @@
   "schemaVersion": "1.0",
   "skill": "brand-asset-management",
   "version": "1.0.0",
-  "lastValidated": "2026-02-15",
+  "lastValidated": "2026-02-28",
   "inheritance": "inheritable",
   "connections": [
+    {
+      "target": ".github/skills/correax-brand/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.9,
+      "when": "referencing the CorreaX design language for color tokens, typography, and component patterns",
+      "yields": "Brand assets aligned with the authoritative CorreaX design system"
+    },
     {
       "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
       "type": "uses",
