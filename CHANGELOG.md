@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.9.13] - 2026-02-28
+
+> **CorreaX Brand Edition** — Full brand system deployment (42/42 tasks). Multi-size favicons, apple-touch-icons, CorreaX dark neural network banner, palette applied to extension source, brand compliance scan in dream protocol, and correax-brand trifecta.
+
+### Added
+
+- **correax-brand trifecta** — New skill, instructions, and synapses encoding the full CorreaX design system (palette, typography, banner patterns, asset naming conventions)
+- **north-star trifecta** — Skill, instructions, and prompts encoding the North Star alignment framework and evaluation criteria
+- **Multi-size favicon.ico** — 7-size ICO bundle (16/24/32/48/64/128/256px) for vscode-extension property
+- **apple-touch-icon.png** — 180×180px Apple touch icon for all web-facing Alex properties
+- **CorreaX dark banner** — Neural network motif artwork deployed as extension marketplace banner
+- **Brand compliance scan** — Automated CorreaX palette validation added to dream protocol Phase 4.5
+- **Episodic memory** — `meditation-2026-02-28-v6-planning.md` consolidating v6.0 execution order, heir sync decisions, and next-steps roadmap
+
+### Changed
+
+- **CorreaX palette in extension source** — `colors.ts`, Global Knowledge SVG assets, and skill files updated to use CorreaX brand tokens (Midnight Slate, Plasma Violet, Neural Cyan, Quantum Gold)
+- **Mermaid theme** — CorreaX theme snippet added; architecture diagrams use brand colors
+- **Badge color standardization** — All README badges aligned to CorreaX palette
+- **BRANDING-PLAN.md archived** — Replaced with clean pointer; full 1091-line task history moved to `archive/BRANDING-PLAN-2026-02-28-COMPLETED.md`
+- **ROADMAP-UNIFIED.md updated** — v5.9.13 recorded as current, v6.0 partnership release as next milestone
+- **All heirs synced to v5.9.13** — AlexLearn, Extensions, AIRS Enterprise Active Contexts aligned to post-CorreaX state
+
+---
+
 ## [5.9.12] - 2026-02-26
 
 > **Documentation Hygiene Edition** — Comprehensive documentation audit eliminating version drift, stale file counts, and outdated dates across 8 files. New doc-hygiene→release-process synapse ensures future releases trigger documentation sweeps.

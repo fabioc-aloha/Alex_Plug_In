@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <rect width="180" height="180" rx="32" fill="#0f172a"/>
+  <!-- Rocket mark centred, scaled up -->
+  <g transform="translate(90 90) scale(2.8) translate(-16 -16)">
+    <defs>
+      <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#0284c7"/>
+      </linearGradient>
+      <linearGradient id="f" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffc857"/>
+        <stop offset="100%" stop-color="#f97316"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="16" cy="20" rx="6" ry="9" fill="url(#g)"/>
+    <polygon points="16,3 19,12 16,11 13,12" fill="url(#f)"/>
+    <ellipse cx="10" cy="20" rx="2.5" ry="4" fill="url(#g)" opacity="0.8"/>
+    <ellipse cx="22" cy="20" rx="2.5" ry="4" fill="url(#g)" opacity="0.8"/>
+    <ellipse cx="16" cy="30" rx="3" ry="2" fill="#6366f1" opacity="0.7"/>
+  </g>
+  <!-- Accent stripe bottom -->
+  <rect x="0" y="170" width="180" height="10" fill="#6366f1" opacity="0.55"/>
+</svg>

@@ -3,6 +3,12 @@
     "inheritance": "inheritable",
     "connections": [
         {
+            "target": ".github/skills/correax-brand/SKILL.md",
+            "type": "coordinates-with",
+            "strength": 0.8,
+            "reason": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions"
+        },
+        {
             "target": ".github/skills/code-review/SKILL.md",
             "type": "integrates",
             "strength": 0.85,
