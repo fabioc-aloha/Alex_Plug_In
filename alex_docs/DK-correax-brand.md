@@ -177,7 +177,7 @@ This is the signature CorreaX UI component. Used on every content page of LearnA
     transform: translateY(-50%);
     font-size: 130px;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.03);         /* 3% opacity — visible only on themes */
+    color: rgba(255, 255, 255, 0.15);         /* 15% opacity — subtle but visible watermark */
     pointer-events: none;
     line-height: 1;
 }
@@ -252,7 +252,7 @@ In a VS Code sidebar webview, the banner adapts to the VS Code color scheme:
 ```html
 <div class="page-header" style="position: relative; overflow: hidden; background: var(--vscode-editor-widget-background); border-bottom: 1px solid var(--vscode-panel-border); padding: 14px 10px 12px 16px; margin-bottom: 10px;">
     <div class="header-accent-bar" style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--persona-accent);"></div>
-    <div class="header-watermark" style="position: absolute; right: -4px; top: 50%; transform: translateY(-60%); font-size: 60px; font-weight: 700; color: rgba(255,255,255,0.03); pointer-events: none; user-select: none; line-height: 1;">ALEX</div>
+    <div class="header-watermark" style="position: absolute; right: -4px; top: 50%; transform: translateY(-60%); font-size: 60px; font-weight: 700; color: rgba(255,255,255,0.15); pointer-events: none; user-select: none; line-height: 1;">ALEX</div>
     <div style="font-size: 9px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--persona-accent); opacity: 0.85; margin-bottom: 4px;">ALEX COGNITIVE</div>
     <div style="font-size: 15px; font-weight: 300; color: var(--vscode-foreground);">Title Here</div>
     <div style="font-size: 11px; color: var(--vscode-descriptionForeground);">Subtitle here</div>
