@@ -219,7 +219,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Expertise** | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically |
 | **Proactive** | Code review nudges on save, stalled work detection, 4 built-in workflows |
 | **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents |
-| **Intelligence** | 123 skills, emotional detection, model tier awareness, frustration recognition |
+| **Intelligence** | 125 skills, emotional detection, model tier awareness, frustration recognition |
 | **Memory** | Global knowledge + session history + outcome tracking |
 | **UX** | User profiles, smart nudges, one-click upgrades |
 
