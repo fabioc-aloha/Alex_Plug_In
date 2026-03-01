@@ -55,6 +55,7 @@ Search this index when processing any task request:
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
 | brain-qa | brain qa, brain audit, synapse audit, deep check, trigger audit, heir sync, cognitive validation |
 | brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity |
+| correax-brand | design system, brand colors, CorreaX palette, typography, banner pattern, design tokens, color system, accent colors, CSS variables, brand identity, visual identity |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
 | citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |

@@ -35,6 +35,20 @@
       "yields": "Secure token retrieval for Gamma integration"
     },
     {
+      "target": "global-knowledge://patterns/GK-environment-variable-migration-patterns.md",
+      "type": "uses",
+      "strength": 0.85,
+      "when": "migrating from env vars to secure storage",
+      "yields": "Non-destructive migration, backward compatibility patterns"
+    },
+    {
+      "target": "global-knowledge://patterns/GK-async-sync-bridge-patterns.md",
+      "type": "uses",
+      "strength": 0.75,
+      "when": "providing synchronous access to async SecretStorage",
+      "yields": "Cache-based sync access pattern, pre-loading strategy"
+    },
+    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "enables",
       "strength": 0.7,

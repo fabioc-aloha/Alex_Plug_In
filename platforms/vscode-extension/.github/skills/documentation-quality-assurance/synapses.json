@@ -12,6 +12,13 @@
       "type": "operational",
       "direction": "bidirectional",
       "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "strength": 0.7,
+      "type": "quality-gate",
+      "direction": "supports",
+      "context": "Heir validation uses doc QA patterns for sync verification"
     }
   ],
   "activationContexts": [
