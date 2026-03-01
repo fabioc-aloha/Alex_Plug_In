@@ -43,6 +43,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 - 13 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
+- **v6.0.0** Episodic memory, outcome learning, workflows, expertise model
 
 See [Quick Start](#-quick-start-vs-code) for installation.
 
@@ -210,14 +211,17 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-### What's New (v4.x vs v1.5.x)
+### What's New (v6.0.0 — The Partnership Release)
 
-| Category          | Highlights                                                                     |
-| ----------------- | ------------------------------------------------------------------------------ |
-| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents                   |
-| **Intelligence**  | 123 skills, emotional detection, model tier awareness, frustration recognition |
-| **Memory**        | Global knowledge + OneDrive sync, auto-promotion during meditation             |
-| **UX**            | User profiles, smart nudges (dream/streak/sync reminders), one-click upgrades  |
+| Category | Highlights |
+| --------- | ---------- |
+| **Partnership** | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows |
+| **Expertise** | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically |
+| **Proactive** | Code review nudges on save, stalled work detection, 4 built-in workflows |
+| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents |
+| **Intelligence** | 123 skills, emotional detection, model tier awareness, frustration recognition |
+| **Memory** | Global knowledge + session history + outcome tracking |
+| **UX** | User profiles, smart nudges, one-click upgrades |
 
 ### Migration Notes
 
@@ -1040,7 +1044,7 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** — v5.9.12
+**Alex Cognitive Architecture** — v6.0.0
 
 Built on 270+ academic sources
 

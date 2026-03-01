@@ -32,26 +32,26 @@ Three platforms. Focused, not scattered.
 
 ---
 
-## 🎯 v6.0.0 — The Partnership Release
+## 🎯 v6.0.0 — The Partnership Release ✅ Shipped
 
-**North Star Alignment**: Everything in this release directly makes Alex a better partner.
+**Shipped**: 2026-02-28 · Commit `b690c20` · Tag `v6.0.0`
 
 **Paradigm**: Autonomous Partnership — Alex doesn't wait to be asked. Alex anticipates, remembers, learns, and earns trust.
 
-**Foundation already shipped in v5.9.x**: Agent hooks provide the event bus. Background File Watcher provides ambient awareness. The Forgetting Curve handles knowledge decay. Honest Uncertainty calibrates confidence. These are the building blocks — v6.0.0 adds the *decision-making* and *memory* layers that transform tools into partnership.
+**Foundation shipped in v5.9.x**: Agent hooks provide the event bus. Background File Watcher provides ambient awareness. The Forgetting Curve handles knowledge decay. Honest Uncertainty calibrates confidence. v6.0.0 adds the *decision-making* and *memory* layers that transform tools into partnership.
 
 ### Core Partnership Capabilities
 
-| Task | Priority | Effort | Description | North Star Alignment |
-|------|:--------:|:------:|-------------|---------------------|
-| **Autonomous task detection** | Critical | 1w | Consume Background File Watcher signals to proactively propose next steps — "you have 3 uncommitted files from 4 days ago, want to review them?" | *Partner shows up* |
-| **Multi-step workflow engine** | Critical | 2w | Chain agent calls into declarative YAML workflows — plan → research → build → validate → document as a single invocation. | *Partner handles any job* |
-| **Outcome learning loop** | Critical | 1w | Track accuracy of Alex's advice: did the fix work? Did the pattern stick? Wire 👍/👎 signals into knowledge confidence scoring. | *Partner learns what works* |
-| **Episodic memory** | Critical | 1w | Save and retrieve full session transcripts + code changes. Enable "what were we building last Tuesday?" recall. | *Partner remembers* |
-| **User expertise model** | High | 1w | Track user expertise growth per domain. Adapt explanation depth automatically. Alex grows with the user. | *Partner adapts* |
-| **Proactive code review triggers** | High | 3d | Auto-suggest code review when uncommitted diff size exceeds threshold after commit. | *Partner brings context* |
-| **Auto-dream scheduling** | High | 3d | Fully automated dream execution on schedule without user confirmation — VS Code task scheduler integration. | *Partner maintains itself* |
-| **Workspace health status bar** | Medium | 3d | Real-time cognitive health indicator — color-coded health tiers in status bar, always visible. | *Partner is transparent* |
+| Feature | Status | Description | North Star Alignment |
+|---------|:------:|-------------|---------------------|
+| **Episodic memory** | ✅ Shipped | Session records at `~/.alex/episodic/sessions.json`. Commands: `alex.recallSession`, `alex.showSessionHistory`. | *Partner remembers* |
+| **Outcome learning loop** | ✅ Shipped | 👍/👎 tracking with per-domain confidence scoring. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`. | *Partner learns what works* |
+| **Autonomous task detection** | ✅ Shipped | Reads peripheral observations every 30 min, surfaces stalled work via notifications. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`. | *Partner shows up* |
+| **Multi-step workflow engine** | ✅ Shipped | JSON workflows at `.alex/workflows/`. 4 built-in: Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep. Commands: `alex.runWorkflow`, `alex.listWorkflows`. | *Partner handles any job* |
+| **User expertise model** | ✅ Shipped | 10-domain interaction tracking (novice→expert). Injects calibration hint into every `@alex` prompt. Command: `alex.showExpertiseModel`. | *Partner adapts* |
+| **Proactive code review triggers** | ✅ Shipped | On save, debounced 60s → `git diff --stat HEAD` → nudge if >200 lines changed. Built into task detector. | *Partner brings context* |
+| **Auto-dream scheduling** | 📋 v6.1 | Fully automated dream execution on schedule — VS Code task scheduler integration. | *Partner maintains itself* |
+| **Workspace health status bar** | 📋 v6.1 | Color-coded health tiers in status bar, always visible. | *Partner is transparent* |
 
 ### Definition of Done (v6.0.0)
 
@@ -67,7 +67,7 @@ A version is **done** when ALL of the following are true:
 
 > **Principle**: Ship what makes Alex a better partner. Defer what doesn't.
 
-**Target**: Q1-Q2 2026
+**Status**: ✅ All criteria met — v6.0.0 shipped 2026-02-28
 
 ---
 
@@ -88,7 +88,7 @@ Items that don't directly serve the North Star, or are gated on external factors
 | Task | Gate | Effort | Description |
 |------|------|:------:|-------------|
 | **Proposed API Adoption** | VS Code promotes proposed APIs to stable | 1w | `chatPromptFiles`, `lmConfiguration`, `chatOutputRenderer` — dynamic skill injection, native config UI, chat webviews. |
-| **Semantic Skill Graph** | v6.0.0 shipped + Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings. Nice-to-have discoverability enhancement, not core partnership. |
+| **Semantic Skill Graph** | v6.0.0 shipped ✅ + Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings. Nice-to-have discoverability enhancement, not core partnership. |
 
 ### Future Vision (v7.0+)
 
@@ -169,33 +169,37 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 | Version | Focus | Status |
 |---------|-------|:------:|
-| v5.9.13 | CorreaX Brand Release | ✅ Current |
-| v5.9.12 | Documentation Hygiene Edition | ✅ Shipped |
-| **v6.0.0** | **The Partnership Release** | **📋 Next** |
+| v5.9.13 | CorreaX Brand Release | ✅ Shipped |
+| **v6.0.0** | **The Partnership Release** | **✅ Current** |
+| v6.1.0 | Partnership Polish — auto-dream, health status bar | 📋 Next |
 | v7.0.0+ | Collaborative Intelligence | Backlogged |
 
 ---
 
-|                            |                                       |
-| -------------------------- | ------------------------------------- |
-| **Current Master Version** | 5.9.13                                |
-| **Current Heirs**          | VS Code (5.9.13), M365 (5.9.12)       |
-| **Next Target**            | 6.0.0 — The Partnership Release       |
-| **Updated**                | 2026-02-28                            |
+|                            |                                               |
+| -------------------------- | --------------------------------------------- |
+| **Current Master Version** | 6.0.0                                         |
+| **Current Heirs**          | VS Code (6.0.0), M365 (5.9.12)                |
+| **Next Target**            | 6.1.0 — Auto-dream + health status bar polish |
+| **Updated**                | 2026-02-28                                    |
 
 ---
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v5.9.13)
+### Current State Summary (v6.0.0)
 
 Alex now has:
 - **125 Skills** (123 inheritable to heirs, fully synced)
 - **23 Complete Trifectas** — comprehensive domain coverage including north-star
-- **CorreaX Brand System** — unified visual identity across all 5 properties, 42/42 tasks complete
-- **NASA Power of 10 Edition** — Full codebase audit (72 files), 3 violations fixed, 10/10 rules documented
-- **Workspace File API Migration** — virtual filesystem compatibility (SSH, WSL, Codespaces)
-- **Agent Hooks** — SessionStart/Stop/PreToolUse/PostToolUse automation
+- **89 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
+- **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
+- **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
+- **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
+- **Multi-Step Workflow Engine** — 4 built-in JSON workflows, extensible via `.alex/workflows/`
+- **User Expertise Model** — 10-domain expertise tracking (novice → expert) with automatic prompt calibration
+- **Proactive Code Review Triggers** — git diff threshold nudges on save
+- **CorreaX Brand System** — unified visual identity across all 5 properties
 - **Background File Watcher** — ambient awareness of hot files, stalled work, TODO hotspots
 - **Honest Uncertainty** — confidence scoring on every request
 - **The Forgetting Curve** — usage-weighted knowledge decay
@@ -206,6 +210,7 @@ Alex now has:
 
 | Version | Theme | Date |
 |---------|-------|------|
+| v6.0.0 | The Partnership Release | 2026-02-28 |
 | v5.9.13 | CorreaX Brand Release | 2026-02-28 |
 | v5.9.12 | Documentation Hygiene Edition | 2026-02-26 |
 | v5.9.11 | Post-Publish Synapse Hardening | 2026-02-26 |
