@@ -118,11 +118,11 @@ else {
 # ------------------------------------------------------------
 # Step 2: Sync Architecture (delegates to sync-architecture.js)
 # ------------------------------------------------------------
-Write-Host "[2/6] Syncing architecture (via sync-architecture.js)..." -ForegroundColor Yellow
+Write-Host "[2/6] Syncing architecture (via sync-architecture.cjs)..." -ForegroundColor Yellow
 if (-not $DryRun) {
-    $syncScript = Join-Path $PSScriptRoot "sync-architecture.js"
+    $syncScript = Join-Path $PSScriptRoot "sync-architecture.cjs"
     if (-not (Test-Path $syncScript)) {
-        Write-Error "sync-architecture.js not found at $syncScript"
+        Write-Error "sync-architecture.cjs not found at $syncScript"
         exit 1
     }
     
