@@ -44,7 +44,7 @@ The CorreaX design language defines the visual identity for all CorreaX products
 1. **Never use `#6366f1` as text on dark backgrounds** — fails WCAG AA. Use `#818cf8` (light variant) instead.
 2. **Page titles are always light weight** — `font-weight: 300`, not bold.
 3. **Series labels** — 10px / 600 weight / 5px letter-spacing / uppercase.
-4. **The banner pattern** (accent bar + ghost watermark + series label) is the signature CorreaX component — use on every content page header.
+4. **The banner pattern** (accent bar + ghost watermark + series label) is the signature CorreaX component — use on every content page header. Ghost watermark opacity = `0.15` (`rgba(255,255,255,0.15)`) — subtle but visible. `0.03` was too faint (corrected v6.0.1).
 5. **Prose max-width** — `820px` centered, with `h2` top-border separators.
 
 ### VS Code Extension Token Mapping

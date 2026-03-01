@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, v6.0-partnership-release
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.0.0 The Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review. All 6 features implemented and wired.
+Recent: v6.0.1 published — ALEX watermark visibility fix (opacity 0.03→0.15 in banner.svg + brand doc). 23 complete trifectas (was 14). Catalogs regenerated 2026-02-28. vscode-configuration-validation synapses.json inheritance field repaired.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-02-28
