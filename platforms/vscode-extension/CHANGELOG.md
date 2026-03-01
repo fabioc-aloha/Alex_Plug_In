@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.0] - 2026-02-28
+
+> **The Partnership Release** — Episodic memory, outcome learning, autonomous task detection, multi-step workflow engine, user expertise model, and proactive code review triggers.
+
+### Added
+
+- **Episodic Memory** — Persistent session records at `~/.alex/episodic/sessions.json`. Commands: `alex.recallSession`, `alex.showSessionHistory`
+- **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`
+- **Autonomous Task Detection** — Proactive stalled-work and TODO hotspot detection on 30-min interval. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`
+- **Workflow Engine** — 4 built-in JSON workflows (Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep). Commands: `alex.runWorkflow`, `alex.listWorkflows`
+- **User Expertise Model** — 10-domain expertise calibration (novice→expert) injected into every @alex prompt. Command: `alex.showExpertiseModel`
+- **Proactive Code Review** — Auto-nudge when `git diff --stat HEAD` exceeds 200 lines changed (60s debounce, 30min cooldown)
+
+---
+
 ## [5.9.12] - 2026-02-26
 
 > **Documentation Hygiene Edition** — Comprehensive documentation audit eliminating version drift, stale counts, and dated references across 8 files. New doc-hygiene→release-process synapse added.
