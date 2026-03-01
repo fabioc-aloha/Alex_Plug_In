@@ -2,32 +2,39 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "alex_docs/DK-correax-brand.md",
     "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
-    "scripts/gen-skill-catalog.cjs"
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json",
+    "scripts/release-vscode.ps1"
   ],
   "todoHotspots": [
     {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.0.2.vsix",
+      "todoCount": 21,
+      "scannedAt": 1772338618563
+    },
+    {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772337994417
+      "scannedAt": 1772338618563
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772337994417
+      "scannedAt": 1772338618563
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1772337994417
+      "scannedAt": 1772338618563
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772337994417
+      "scannedAt": 1772338618563
     }
   ],
-  "lastUpdated": 1772337994417
+  "lastUpdated": 1772338618563
 }

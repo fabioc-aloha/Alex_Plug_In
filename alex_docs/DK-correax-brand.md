@@ -14,13 +14,13 @@
 
 ### The CorreaX brand family
 
-| Product | Domain | Tagline |
-|---------|--------|---------|
-| **CorreaX** (parent) | correax.com | AI Research & Product Studio |
-| **LearnAlex** | learnalexai.com | Learn AI With the AI That Learns With You |
-| **AIRS** | airs.correax.com | AI Readiness Assessment |
-| **Alex Extension** | VS Code Marketplace | fabioc-aloha.alex-cognitive-architecture |
-| **Alex Finch Books** | Amazon | The Alex Finch Library |
+| Product              | Domain              | Tagline                                   |
+| -------------------- | ------------------- | ----------------------------------------- |
+| **CorreaX** (parent) | correax.com         | AI Research & Product Studio              |
+| **LearnAlex**        | learnalexai.com     | Learn AI With the AI That Learns With You |
+| **AIRS**             | airs.correax.com    | AI Readiness Assessment                   |
+| **Alex Extension**   | VS Code Marketplace | fabioc-aloha.alex-cognitive-architecture  |
+| **Alex Finch Books** | Amazon              | The Alex Finch Library                    |
 
 ### Brand voice
 - **Curious, not pushy.** Invites exploration rather than demanding action.
@@ -76,14 +76,14 @@
 
 ### Accent assignment rules
 
-| Context | Accent |
-|---------|--------|
-| Primary CTAs, nav active states, default links | indigo / `#6366f1` |
-| Study guides, AIRS content, learning materials | teal / `#0d9488` |
-| Errors, alerts, energy moments | rose / `#f43f5e` |
-| Warm highlights, callouts | coral / `#f97316` |
-| Series label eyebrows on teal pages | teal-light / `#2dd4bf` |
-| Series label eyebrows on indigo pages | indigo-light / `#818cf8` |
+| Context                                        | Accent                   |
+| ---------------------------------------------- | ------------------------ |
+| Primary CTAs, nav active states, default links | indigo / `#6366f1`       |
+| Study guides, AIRS content, learning materials | teal / `#0d9488`         |
+| Errors, alerts, energy moments                 | rose / `#f43f5e`         |
+| Warm highlights, callouts                      | coral / `#f97316`        |
+| Series label eyebrows on teal pages            | teal-light / `#2dd4bf`   |
+| Series label eyebrows on indigo pages          | indigo-light / `#818cf8` |
 
 ### Contrast compliance notes
 - `--text-muted` `#94a3b8` → 4.6:1 on `--bg-card` `#1e293b` ✅ WCAG AA
@@ -95,15 +95,15 @@
 
 When building VS Code webviews, CorreaX colors map to these VS Code tokens as fallbacks:
 
-| CorreaX token | VS Code equivalent |
-|---------------|--------------------|
-| `--bg` | `--vscode-sideBar-background` |
-| `--bg-card` | `--vscode-editor-widget-background` |
-| `--text` | `--vscode-foreground` |
-| `--text-muted` | `--vscode-descriptionForeground` |
-| `--border` | `--vscode-panel-border` |
-| `--accent-indigo` | `--vscode-button-background` |
-| `--accent-indigo-light` | `--vscode-textLink-foreground` |
+| CorreaX token           | VS Code equivalent                  |
+| ----------------------- | ----------------------------------- |
+| `--bg`                  | `--vscode-sideBar-background`       |
+| `--bg-card`             | `--vscode-editor-widget-background` |
+| `--text`                | `--vscode-foreground`               |
+| `--text-muted`          | `--vscode-descriptionForeground`    |
+| `--border`              | `--vscode-panel-border`             |
+| `--accent-indigo`       | `--vscode-button-background`        |
+| `--accent-indigo-light` | `--vscode-textLink-foreground`      |
 
 ---
 
@@ -117,16 +117,16 @@ VS Code webviews: use `var(--vscode-font-family)` instead of hardcoding.
 
 ### Type scale
 
-| Use | Size | Weight | Color |
-|-----|------|--------|-------|
-| Page H1 (banner) | 2.25rem | 300 (light) | `--text` |
-| Section H2 | 1.35rem | 600 | `--text` |
-| Section H3 | 1.1rem | 600 | `--accent-indigo-light` |
-| Body | 0.9rem | 400 | `--text-muted` |
-| Lead paragraph | 1rem–1.15rem | 400 | `--text-muted` |
-| Small / meta | 0.75rem–0.825rem | 400–600 | `--text-dim` |
-| Eyebrow label | 0.72rem | 700 | `--accent-indigo-light` |
-| Series label (banner) | 10px | 600 | `--accent-indigo-light` |
+| Use                   | Size             | Weight      | Color                   |
+| --------------------- | ---------------- | ----------- | ----------------------- |
+| Page H1 (banner)      | 2.25rem          | 300 (light) | `--text`                |
+| Section H2            | 1.35rem          | 600         | `--text`                |
+| Section H3            | 1.1rem           | 600         | `--accent-indigo-light` |
+| Body                  | 0.9rem           | 400         | `--text-muted`          |
+| Lead paragraph        | 1rem–1.15rem     | 400         | `--text-muted`          |
+| Small / meta          | 0.75rem–0.825rem | 400–600     | `--text-dim`            |
+| Eyebrow label         | 0.72rem          | 700         | `--accent-indigo-light` |
+| Series label (banner) | 10px             | 600         | `--accent-indigo-light` |
 
 ### Series label (eyebrow) treatment
 ```css
@@ -437,13 +437,13 @@ Name link: `--accent-indigo-light`.
 
 ### Logos & icons
 
-| File | Format | Use |
-|------|--------|-----|
-| `logo.svg` | SVG | LearnAlex nav wordmark |
-| `favicon.svg` | SVG | Browser tab favicon |
-| `correax.svg` | SVG | CorreaX footer logo (32×32) |
-| `correax.png` | PNG | CorreaX avatar / photo placeholder |
-| `apple-touch-icon.svg` | SVG | iOS home screen |
+| File                   | Format | Use                                |
+| ---------------------- | ------ | ---------------------------------- |
+| `logo.svg`             | SVG    | LearnAlex nav wordmark             |
+| `favicon.svg`          | SVG    | Browser tab favicon                |
+| `correax.svg`          | SVG    | CorreaX footer logo (32×32)        |
+| `correax.png`          | PNG    | CorreaX avatar / photo placeholder |
+| `apple-touch-icon.svg` | SVG    | iOS home screen                    |
 
 ### Book covers
 - `/books/bio-cover.jpg` — "The Life of Alex Finch" (nonfiction biography)
@@ -484,48 +484,48 @@ Used in Markdown documentation:
 
 All 27 personas now use CorreaX palette tokens. Each token carries semantic intent:
 
-| Token | Hex | Semantic role |
-|-------|-----|---------------|
-| `--accent-indigo` | `#6366f1` | leadership, strategy, architecture, default |
+| Token                   | Hex       | Semantic role                                |
+| ----------------------- | --------- | -------------------------------------------- |
+| `--accent-indigo`       | `#6366f1` | leadership, strategy, architecture, default  |
 | `--accent-indigo-light` | `#818cf8` | learning, creativity, intellect, imagination |
-| `--accent-teal` | `#0d9488` | research, analysis, quality, data |
-| `--accent-teal-light` | `#2dd4bf` | coordination, community, growth, insights |
-| `--accent-coral` | `#f97316` | writing, warmth, stage energy |
-| `--accent-coral-light` | `#fb923c` | builder energy, warm urgency |
-| `--accent-rose` | `#f43f5e` | risk, security, incidents, high-attention |
-| `--accent-rose-light` | `#fb7185` | creative, content, conversion |
+| `--accent-teal`         | `#0d9488` | research, analysis, quality, data            |
+| `--accent-teal-light`   | `#2dd4bf` | coordination, community, growth, insights    |
+| `--accent-coral`        | `#f97316` | writing, warmth, stage energy                |
+| `--accent-coral-light`  | `#fb923c` | builder energy, warm urgency                 |
+| `--accent-rose`         | `#f43f5e` | risk, security, incidents, high-attention    |
+| `--accent-rose-light`   | `#fb7185` | creative, content, conversion                |
 
 ### Complete Mapping
 
-| Persona | Color | Token | Notes |
-|---------|-------|-------|-------|
-| Developer | `#0078D4` | — | Intentional Microsoft blue per brand agreement |
-| Academic | `#8B5CF6` | — | Purple — kept distinct from brand accents |
-| Data Engineer | `#06B6D4` | — | Cyan — kept distinct from teal |
-| Researcher | `#0d9488` | teal | CorreaX teal |
-| Technical Writer | `#f97316` | coral | CorreaX coral |
-| Architect | `#6366f1` | indigo | CorreaX indigo |
-| Consultant | `#6366f1` | indigo | leadership/strategy |
-| Product Manager | `#6366f1` | indigo | leadership/strategy |
-| Game Developer | `#6366f1` | indigo | code-adjacent creative |
-| Business Analyst | `#0d9488` | teal | analytical/structured |
-| QA Engineer | `#0d9488` | teal | quality/validation |
-| Project Manager | `#2dd4bf` | teal-light | coordination/flow |
-| Job Seeker | `#2dd4bf` | teal-light | growth/opportunity |
-| OSS Contributor | `#2dd4bf` | teal-light | community/growth |
-| BI Analyst | `#2dd4bf` | teal-light | data insights |
-| Speaker / Presenter | `#f97316` | coral | stage/warm energy |
-| Grant Writer | `#f97316` | coral | writing/warm contexts |
-| Power User / Builder | `#fb923c` | coral-light | builder energy |
-| DevOps Engineer | `#f43f5e` | rose | urgency/action |
-| Security Engineer | `#f43f5e` | rose | threat/risk |
-| SRE / On-Call | `#f43f5e` | rose | incidents/alerting |
-| Marketer | `#f43f5e` | rose | attention/conversion |
-| Fiction Writer | `#818cf8` | indigo-light | imagination/narrative |
-| Student | `#818cf8` | indigo-light | learning/exploration |
-| Cognitive Scientist | `#818cf8` | indigo-light | intellect/AI/mind |
-| Content Creator | `#fb7185` | rose-light | creative energy |
-| Copywriter | `#fb7185` | rose-light | creative/conversion |
+| Persona              | Color     | Token        | Notes                                          |
+| -------------------- | --------- | ------------ | ---------------------------------------------- |
+| Developer            | `#0078D4` | —            | Intentional Microsoft blue per brand agreement |
+| Academic             | `#8B5CF6` | —            | Purple — kept distinct from brand accents      |
+| Data Engineer        | `#06B6D4` | —            | Cyan — kept distinct from teal                 |
+| Researcher           | `#0d9488` | teal         | CorreaX teal                                   |
+| Technical Writer     | `#f97316` | coral        | CorreaX coral                                  |
+| Architect            | `#6366f1` | indigo       | CorreaX indigo                                 |
+| Consultant           | `#6366f1` | indigo       | leadership/strategy                            |
+| Product Manager      | `#6366f1` | indigo       | leadership/strategy                            |
+| Game Developer       | `#6366f1` | indigo       | code-adjacent creative                         |
+| Business Analyst     | `#0d9488` | teal         | analytical/structured                          |
+| QA Engineer          | `#0d9488` | teal         | quality/validation                             |
+| Project Manager      | `#2dd4bf` | teal-light   | coordination/flow                              |
+| Job Seeker           | `#2dd4bf` | teal-light   | growth/opportunity                             |
+| OSS Contributor      | `#2dd4bf` | teal-light   | community/growth                               |
+| BI Analyst           | `#2dd4bf` | teal-light   | data insights                                  |
+| Speaker / Presenter  | `#f97316` | coral        | stage/warm energy                              |
+| Grant Writer         | `#f97316` | coral        | writing/warm contexts                          |
+| Power User / Builder | `#fb923c` | coral-light  | builder energy                                 |
+| DevOps Engineer      | `#f43f5e` | rose         | urgency/action                                 |
+| Security Engineer    | `#f43f5e` | rose         | threat/risk                                    |
+| SRE / On-Call        | `#f43f5e` | rose         | incidents/alerting                             |
+| Marketer             | `#f43f5e` | rose         | attention/conversion                           |
+| Fiction Writer       | `#818cf8` | indigo-light | imagination/narrative                          |
+| Student              | `#818cf8` | indigo-light | learning/exploration                           |
+| Cognitive Scientist  | `#818cf8` | indigo-light | intellect/AI/mind                              |
+| Content Creator      | `#fb7185` | rose-light   | creative energy                                |
+| Copywriter           | `#fb7185` | rose-light   | creative/conversion                            |
 
 **Fallback** (no persona detected): `#6366f1` (CorreaX indigo primary)
 

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.2] - 2026-02-28
+
+### Fixed
+- Brand doc (`DK-correax-brand.md`): updated ghost watermark canonical opacity spec 0.03→0.15 (CSS + HTML example)
+- `correax-brand` skill: encoded `rgba(255,255,255,0.15)` as the authoritative design token to prevent regression
+
+### Changed
+- Catalogs regenerated: 23 complete trifectas (was 14), 125 skills, 593 connections
+- `vscode-configuration-validation` synapses.json inheritance field repaired (malformed object → `"heir:vscode"`)
+- Active Context updated to reflect v6.0.1 release state
+
+---
+
 ## [6.0.1] - 2026-02-28
 
 ### Fixed

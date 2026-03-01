@@ -56,7 +56,7 @@ try {
 
     # 1a. Sync Master Alex to extension (ensures .github/ is fresh)
     Write-Host "`n🔄 Syncing Master Alex to extension package..." -ForegroundColor Yellow
-    & "$scriptDir\build-extension-package.ps1"
+    & "$repoRoot\.github\muscles\build-extension-package.ps1"
     if ($LASTEXITCODE -ne 0) { throw "Build/sync failed!" }
     Write-Host "   ✅ Extension .github/ synced from Master Alex" -ForegroundColor Green
 

@@ -215,101 +215,101 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Chat Participant Patterns
 
-| Component   | File                                                             | Why It Exists                                                                                          |
-| ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/chat-participant-patterns/SKILL.md`              | Domain knowledge: VS Code chat participant API, slash command scaffolding, LM tool registration        |
-| Instruction | `.github/instructions/chat-participant-patterns.instructions.md` | Auto-loaded procedure: participant handler patterns, streaming API, tool use workflow                  |
-| Prompt      | `.github/prompts/chat-participant.prompt.md`                     | `/chat-participant` — user invokes scaffold workflow for new chat participant                          |
+| Component   | File                                                             | Why It Exists                                                                                   |
+| ----------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/chat-participant-patterns/SKILL.md`              | Domain knowledge: VS Code chat participant API, slash command scaffolding, LM tool registration |
+| Instruction | `.github/instructions/chat-participant-patterns.instructions.md` | Auto-loaded procedure: participant handler patterns, streaming API, tool use workflow           |
+| Prompt      | `.github/prompts/chat-participant.prompt.md`                     | `/chat-participant` — user invokes scaffold workflow for new chat participant                   |
 
 **Inheritance**: `heir:vscode` — VS Code extension development capability
 
 ### VS Code Extension Patterns
 
-| Component   | File                                                             | Why It Exists                                                                                          |
-| ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/vscode-extension-patterns/SKILL.md`              | Domain knowledge: activation events, contribution points, webview patterns, packaging                  |
-| Instruction | `.github/instructions/vscode-extension-patterns.instructions.md` | Auto-loaded procedure: extension development standards, API usage, ADR compliance                      |
-| Prompt      | `.github/prompts/extension-audit-methodology.prompt.md`          | `/extension-audit` — systematic 5-dimension quality audit for VS Code extensions                       |
+| Component   | File                                                             | Why It Exists                                                                         |
+| ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/vscode-extension-patterns/SKILL.md`              | Domain knowledge: activation events, contribution points, webview patterns, packaging |
+| Instruction | `.github/instructions/vscode-extension-patterns.instructions.md` | Auto-loaded procedure: extension development standards, API usage, ADR compliance     |
+| Prompt      | `.github/prompts/extension-audit-methodology.prompt.md`          | `/extension-audit` — systematic 5-dimension quality audit for VS Code extensions      |
 
 **Inheritance**: `heir:vscode` — core to VS Code heir identity
 
 ### MCP Development
 
-| Component   | File                                               | Why It Exists                                                                                           |
-| ----------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/mcp-development/SKILL.md`           | Domain knowledge: Model Context Protocol architecture, tool/resource/prompt design, server packaging    |
-| Instruction | `.github/instructions/mcp-development.instructions.md` | Auto-loaded procedure: MCP server scaffolding, transport setup, capability registration                |
-| Prompt      | `.github/prompts/mcp-server.prompt.md`              | `/mcp-server` — user invokes MCP server scaffold and tool design workflow                               |
+| Component   | File                                                   | Why It Exists                                                                                        |
+| ----------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/mcp-development/SKILL.md`              | Domain knowledge: Model Context Protocol architecture, tool/resource/prompt design, server packaging |
+| Instruction | `.github/instructions/mcp-development.instructions.md` | Auto-loaded procedure: MCP server scaffolding, transport setup, capability registration              |
+| Prompt      | `.github/prompts/mcp-server.prompt.md`                 | `/mcp-server` — user invokes MCP server scaffold and tool design workflow                            |
 
 **Inheritance**: `inheritable` — MCP development valuable across all coding heirs
 
 ### Microsoft Graph API
 
-| Component   | File                                                   | Why It Exists                                                                                         |
-| ----------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/microsoft-graph-api/SKILL.md`           | Domain knowledge: Graph API surface, auth flows (MSAL), endpoint patterns, OData queries              |
-| Instruction | `.github/instructions/microsoft-graph-api.instructions.md` | Auto-loaded procedure: auth setup, API call patterns, pagination, permissions                     |
-| Prompt      | `.github/prompts/graph-api.prompt.md`                   | `/graph-api` — user invokes Graph API integration workflow                                            |
+| Component   | File                                                       | Why It Exists                                                                            |
+| ----------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/microsoft-graph-api/SKILL.md`              | Domain knowledge: Graph API surface, auth flows (MSAL), endpoint patterns, OData queries |
+| Instruction | `.github/instructions/microsoft-graph-api.instructions.md` | Auto-loaded procedure: auth setup, API call patterns, pagination, permissions            |
+| Prompt      | `.github/prompts/graph-api.prompt.md`                      | `/graph-api` — user invokes Graph API integration workflow                               |
 
 **Inheritance**: `inheritable` — Graph API used across M365, Teams, and general Microsoft integration heirs
 
 ### Teams App Patterns
 
-| Component   | File                                                    | Why It Exists                                                                                          |
-| ----------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/teams-app-patterns/SKILL.md`             | Domain knowledge: Teams app manifest, bot/tab/message extension scaffolding, deployment               |
-| Instruction | `.github/instructions/teams-app-patterns.instructions.md` | Auto-loaded procedure: Teams Toolkit workflow, app registration, Teams-specific API patterns          |
-| Prompt      | `.github/prompts/teams-app.prompt.md`                    | `/teams-app` — user invokes Teams app scaffold and deployment workflow                                 |
+| Component   | File                                                      | Why It Exists                                                                                |
+| ----------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/teams-app-patterns/SKILL.md`              | Domain knowledge: Teams app manifest, bot/tab/message extension scaffolding, deployment      |
+| Instruction | `.github/instructions/teams-app-patterns.instructions.md` | Auto-loaded procedure: Teams Toolkit workflow, app registration, Teams-specific API patterns |
+| Prompt      | `.github/prompts/teams-app.prompt.md`                     | `/teams-app` — user invokes Teams app scaffold and deployment workflow                       |
 
 **Inheritance**: `heir:m365` — Microsoft 365 heir-specific capability
 
 ### M365 Agent Debugging
 
-| Component   | File                                                       | Why It Exists                                                                                         |
-| ----------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/m365-agent-debugging/SKILL.md`              | Domain knowledge: declarative agent debugging, Developer Portal, troubleshooting conditional access   |
-| Instruction | `.github/instructions/m365-agent-debugging.instructions.md` | Auto-loaded procedure: AADSTS error resolution, manual upload workflow, Teams testing steps           |
-| Prompt      | `.github/prompts/m365-agent-debug.prompt.md`                | `/m365-agent-debug` — user invokes M365 declarative agent diagnostic workflow                         |
+| Component   | File                                                        | Why It Exists                                                                                       |
+| ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/m365-agent-debugging/SKILL.md`              | Domain knowledge: declarative agent debugging, Developer Portal, troubleshooting conditional access |
+| Instruction | `.github/instructions/m365-agent-debugging.instructions.md` | Auto-loaded procedure: AADSTS error resolution, manual upload workflow, Teams testing steps         |
+| Prompt      | `.github/prompts/m365-agent-debug.prompt.md`                | `/m365-agent-debug` — user invokes M365 declarative agent diagnostic workflow                       |
 
 **Inheritance**: `heir:m365` — M365 heir-specific troubleshooting capability
 
 ### Markdown & Mermaid
 
-| Component   | File                                                   | Why It Exists                                                                                          |
-| ----------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/markdown-mermaid/SKILL.md`              | Domain knowledge: Mermaid diagram types, syntax, VS Code rendering, diagram selection heuristics       |
-| Instruction | `.github/instructions/markdown-mermaid.instructions.md` | Auto-loaded procedure: diagram type selection, syntax patterns, troubleshooting rendering              |
-| Prompt      | `.github/prompts/diagramming-mastery-meditation.prompt.md` | `/diagramming` — user invokes Mermaid mastery integration meditation session                        |
+| Component   | File                                                       | Why It Exists                                                                                    |
+| ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/markdown-mermaid/SKILL.md`                 | Domain knowledge: Mermaid diagram types, syntax, VS Code rendering, diagram selection heuristics |
+| Instruction | `.github/instructions/markdown-mermaid.instructions.md`    | Auto-loaded procedure: diagram type selection, syntax patterns, troubleshooting rendering        |
+| Prompt      | `.github/prompts/diagramming-mastery-meditation.prompt.md` | `/diagramming` — user invokes Mermaid mastery integration meditation session                     |
 
 **Inheritance**: `inheritable` — documentation visualization across all heirs
 
 ### Testing Strategies
 
-| Component   | File                                                      | Why It Exists                                                                                          |
-| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/testing-strategies/SKILL.md`               | Domain knowledge: test pyramid, integration vs unit vs e2e tradeoffs, confidence-without-over-testing  |
-| Instruction | `.github/instructions/testing-strategies.instructions.md`  | Auto-loaded procedure: test selection, coverage strategy, boundary testing patterns                    |
-| Prompt      | `.github/prompts/tdd.prompt.md`                            | `/tdd` — user invokes guided test-driven development workflow                                          |
+| Component   | File                                                      | Why It Exists                                                                                         |
+| ----------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/testing-strategies/SKILL.md`              | Domain knowledge: test pyramid, integration vs unit vs e2e tradeoffs, confidence-without-over-testing |
+| Instruction | `.github/instructions/testing-strategies.instructions.md` | Auto-loaded procedure: test selection, coverage strategy, boundary testing patterns                   |
+| Prompt      | `.github/prompts/tdd.prompt.md`                           | `/tdd` — user invokes guided test-driven development workflow                                         |
 
 **Inheritance**: `inheritable` — testing discipline universal across all coding heirs
 
 ### Knowledge Synthesis
 
-| Component   | File                                                       | Why It Exists                                                                                          |
-| ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/knowledge-synthesis/SKILL.md`               | Domain knowledge: abstraction levels, cross-project pattern extraction, GI/GK storage hierarchy       |
-| Instruction | `.github/instructions/knowledge-synthesis.instructions.md`  | Auto-loaded procedure: when to abstract, how to generalize, storage level selection                    |
-| Prompt      | `.github/prompts/cross-domain-transfer.prompt.md`           | `/cross-domain` — user invokes cross-domain knowledge transfer and pattern application                 |
+| Component   | File                                                       | Why It Exists                                                                                   |
+| ----------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/knowledge-synthesis/SKILL.md`              | Domain knowledge: abstraction levels, cross-project pattern extraction, GI/GK storage hierarchy |
+| Instruction | `.github/instructions/knowledge-synthesis.instructions.md` | Auto-loaded procedure: when to abstract, how to generalize, storage level selection             |
+| Prompt      | `.github/prompts/cross-domain-transfer.prompt.md`          | `/cross-domain` — user invokes cross-domain knowledge transfer and pattern application          |
 
 **Inheritance**: `inheritable` — cross-project learning universal across all heirs
 
 ### North Star
 
-| Component   | File                                                | Why It Exists                                                                                                    |
-| ----------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/north-star/SKILL.md`                 | Domain knowledge: North Star definition, success metrics, alignment patterns, anti-drift heuristics              |
-| Instruction | `.github/instructions/north-star.instructions.md`   | Auto-loaded procedure: North Star alignment check before major decisions, drift detection                        |
-| Prompt      | `.github/prompts/northstar.prompt.md`                | `/northstar` — user invokes North Star alignment review and strategic focus session                              |
+| Component   | File                                              | Why It Exists                                                                                       |
+| ----------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/north-star/SKILL.md`              | Domain knowledge: North Star definition, success metrics, alignment patterns, anti-drift heuristics |
+| Instruction | `.github/instructions/north-star.instructions.md` | Auto-loaded procedure: North Star alignment check before major decisions, drift detection           |
+| Prompt      | `.github/prompts/northstar.prompt.md`             | `/northstar` — user invokes North Star alignment review and strategic focus session                 |
 
 **Inheritance**: `inheritable` — strategic alignment universal across all heirs
 
@@ -458,19 +458,19 @@ The same "Ask Why" philosophy applies, with adapted questions:
 
 ### VS Code Heir — Trifecta Candidates
 
-| Capability                     | Current State  | Notes                                                        |
-| ------------------------------ | -------------- | ------------------------------------------------------------ |
-| **Chat Participant Patterns**  | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
-| **MCP Development**            | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
-| **VS Code Extension Patterns** | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
+| Capability                     | Current State | Notes                                                    |
+| ------------------------------ | ------------- | -------------------------------------------------------- |
+| **Chat Participant Patterns**  | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
+| **MCP Development**            | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
+| **VS Code Extension Patterns** | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
 
 ### M365 Heir — Trifecta Candidates
 
-| Capability               | Current State  | Notes                                                        |
-| ------------------------ | -------------- | ------------------------------------------------------------ |
-| **Teams App Patterns**   | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
-| **Microsoft Graph API**  | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
-| **M365 Agent Debugging** | ✅ Complete     | Full trifecta: Skill + Instruction + Prompt (2026-02-28)     |
+| Capability               | Current State | Notes                                                    |
+| ------------------------ | ------------- | -------------------------------------------------------- |
+| **Teams App Patterns**   | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
+| **Microsoft Graph API**  | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
+| **M365 Agent Debugging** | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
 
 ### GitHub Copilot Web Heir — Trifecta Candidates
 
@@ -494,16 +494,16 @@ See `trifecta-audit.instructions.md` § "Heir Trifecta Implementation" for the f
 
 ## Audit Changelog
 
-| Date       | Action                                                                      | Result                                                                                                                                                                                                                                                                                                     |
-| ---------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-02-13 | Initial trifecta refactoring                                                | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                                                                                                                       |
-| 2026-02-13 | Full audit with Why? protocol                                               | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                                                                                                           |
-| 2026-02-13 | Created `trifecta-audit.instructions.md`                                    | Formal audit protocol with anti-patterns                                                                                                                                                                                                                                                                   |
-| 2026-02-13 | Heir trifecta generalization                                                | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                                                                                                             |
-| 2026-02-13 | Heir project improvement instruction                                        | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                                                                                                                         |
-| 2026-02-13 | Scripts are muscles doctrine                                                | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                                                                                                                 |
-| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas                   | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas                                                                                           |
-| 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas | Added 4 complete trifectas: **heir-curation**, **md-to-word**, **gamma-presentation**, **secrets-management**. Total: 11 → 15 complete trifectas |
+| Date       | Action                                                                                                                                 | Result                                                                                                                                                                                                                                                   |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-02-13 | Initial trifecta refactoring                                                                                                           | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                                                                     |
+| 2026-02-13 | Full audit with Why? protocol                                                                                                          | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                                                         |
+| 2026-02-13 | Created `trifecta-audit.instructions.md`                                                                                               | Formal audit protocol with anti-patterns                                                                                                                                                                                                                 |
+| 2026-02-13 | Heir trifecta generalization                                                                                                           | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                                                           |
+| 2026-02-13 | Heir project improvement instruction                                                                                                   | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                                                                       |
+| 2026-02-13 | Scripts are muscles doctrine                                                                                                           | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                                                               |
+| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas                                                                              | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas                                         |
+| 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas                                                            | Added 4 complete trifectas: **heir-curation**, **md-to-word**, **gamma-presentation**, **secrets-management**. Total: 11 → 15 complete trifectas                                                                                                         |
 | 2026-02-28 | Chat Participant, VS Code Extension, MCP, Graph API, Teams, M365 Debugging, Markdown-Mermaid, Testing, Knowledge Synthesis, North Star | Completed 9 heir trifectas — all previously "Skill only" candidates now have Instruction + Prompt. Total: 15 → 23 complete trifectas. Also fixed `vscode-configuration-validation` synapses.json malformed inheritance field (`object → "heir:vscode"`). |
 
 ---
