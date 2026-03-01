@@ -59,6 +59,8 @@ export interface PromptContext {
     peripheral?: PeripheralContext;
     /** v5.9.5: Honest Uncertainty — knowledge coverage score for the current query */
     coverage?: CoverageScore;
+    /** v6.0.0: User Expertise Model — domain-calibrated response depth hint */
+    expertiseHint?: string;
 }
 
 // ============================================================================
@@ -81,12 +83,26 @@ export async function buildAlexSystemPrompt(ctx: PromptContext): Promise<string>
         buildPeripheralVisionLayer(ctx),   // Layer 8: Workspace + peer project ambient awareness
         buildKnowledgeContextLayer(ctx),   // Layer 9: Pre-seeded knowledge
         buildModelAdaptiveLayer(ctx),      // Layer 7: Tier-specific rules
+        buildExpertiseLayer(ctx),          // Layer 10b: v6.0.0 User expertise calibration
         buildResponseGuidelinesLayer(ctx), // Layer 10: Formatting + confidence
         buildHonestUncertaintyLayer(ctx),  // Layer 11: Epistemic calibration signal
     ]);
 
     // Filter out empty layers and join with double newlines
     return layers.filter(Boolean).join('\n\n');
+}
+
+// ============================================================================
+// Layer 10b: User Expertise Model (v6.0.0)
+// ============================================================================
+
+/**
+ * Inject a calibration hint based on the user's observed expertise level in the current domain.
+ * Tells Alex how deep to go — skip basics for experts, explain carefully for novices.
+ */
+async function buildExpertiseLayer(ctx: PromptContext): Promise<string> {
+    if (!ctx.expertiseHint) { return ''; }
+    return `## User Expertise Calibration (v6.0.0)\n${ctx.expertiseHint}`;
 }
 
 // ============================================================================

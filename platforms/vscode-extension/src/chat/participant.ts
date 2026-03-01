@@ -21,6 +21,8 @@ import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBr
 import { resolveAvatar, getAvatarFullPath, detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 import { assertDefined } from '../shared/assertions';
+import { appendToEpisodicDraft } from '../services/episodicMemory';
+import { classifyDomain, getSystemPromptHint, recordInteraction } from '../services/expertiseModel';
 
 // ============================================================================
 // UNCONSCIOUS MIND: AUTO-INSIGHT DETECTION
@@ -1239,6 +1241,7 @@ async function handleGeneralQuery(
         request,
         peripheral,  // v5.9.4: ambient workspace + peer project awareness
         coverage,    // v5.9.5: knowledge coverage / honest uncertainty calibration
+        expertiseHint: getSystemPromptHint(classifyDomain(request.prompt)), // v6.0.0: expertise calibration
     };
     
     const alexSystemPrompt = await buildAlexSystemPrompt(promptContext);
@@ -1300,6 +1303,10 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
 
         // Voice Mode: Read response aloud if enabled (fire and forget)
         speakIfVoiceModeEnabled(collectedResponse).catch(() => {});
+
+        // v6.0.0: Episodic memory + expertise model — fire-and-forget background updates
+        appendToEpisodicDraft(request.prompt, peripheral?.fileWatcherObservations?.stalledFiles ?? [], workspaceRoot).catch(() => {});
+        recordInteraction(request.prompt).catch(() => {});
 
     } catch (err) {
         if (err instanceof vscode.LanguageModelError) {

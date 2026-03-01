@@ -67,14 +67,34 @@ The CorreaX design language defines the visual identity for all CorreaX products
 | **AIRS** | Azure Blue `#0078D4` ← enterprise |
 | **Alex Extension** | Persona-driven (indigo default) |
 
-### Persona → CorreaX Accent Alignment
+### Persona → CorreaX Accent Alignment (27 personas, fully aligned as of v5.9.13)
 
-| Persona | Hex | Maps to |
-|---------|-----|---------|
-| Developer | `#0078D4` | Microsoft blue (keep) |
-| Architect | `#6366f1` | CorreaX indigo (aligned) |
-| Researcher | `#0d9488` | CorreaX teal (aligned) |
-| Technical Writer | `#f97316` | CorreaX coral (aligned) |
+All 27 Alex personas use CorreaX tokens. Three intentional exceptions preserve platform/domain identity.
+
+**Semantic groupings:**
+
+| Token | Hex | Role | Personas |
+|-------|-----|------|----------|
+| rose | `#f43f5e` | Risk · Security · Urgency | DevOps Engineer, Security Engineer, SRE / On-Call, Marketer |
+| rose-light | `#fb7185` | Creative · Narrative | Content Creator, Copywriter |
+| teal | `#0d9488` | Analysis · Research · Quality | Researcher, Business Analyst, QA Engineer |
+| teal-light | `#2dd4bf` | Process · Coordination · Growth | Project Manager, Job Seeker, OSS Contributor, BI Analyst |
+| indigo | `#6366f1` | Strategy · Leadership · Architecture | Enterprise Architect, Consultant, Product Manager, Game Developer |
+| indigo-light | `#818cf8` | Knowledge · Education · Cognition | Fiction Writer, Student, Cognitive Scientist |
+| coral | `#f97316` | Communication · Persuasion · Impact | Technical Writer, Speaker / Presenter, Grant Writer |
+| coral-light | `#fb923c` | Building · Hands-on Craft | Power User / Builder |
+
+**Intentional non-CorreaX exceptions (by design):**
+
+| Persona | Hex | Reason |
+|---------|-----|--------|
+| Developer | `#0078D4` | Microsoft blue — platform identity |
+| Academic / Grad Student | `#8B5CF6` | Purple — academic/scholarly tradition |
+| Data Engineer | `#06B6D4` | Cyan — data pipeline aesthetic |
+
+**Fallback** (no persona detected): `#6366f1` (CorreaX indigo primary — never `var(--vscode-charts-blue)`)
+
+Full table with line references: `platforms/vscode-extension/src/chat/personaDetection.ts` · DK §13.
 
 ## Resources
 

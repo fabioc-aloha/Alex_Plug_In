@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.0] - 2026-03-01
+
+> **The Partnership Release** — Six deep-integration features that make Alex a cognitive partner, not just a chat interface. Alex now remembers your sessions, learns from outcomes, detects your work context autonomously, guides multi-step workflows, adapts to your expertise level, and proactively triggers code reviews.
+
+### Added
+
+- **Episodic Memory** (`services/episodicMemory.ts`) — Persistent session records at `~/.alex/episodic/sessions.json`. Alex recalls "what were we building last Tuesday?" across sessions. Commands: `alex.recallSession`, `alex.showSessionHistory`
+- **Outcome Learning Loop** (`services/outcomeTracker.ts`) — 👍/👎 tracking per @alex exchange with per-domain confidence scoring. Alex calibrates advice certainty from observed outcomes. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`
+- **Autonomous Task Detection** (`services/taskDetector.ts`) — Proactively surfaces stalled work and TODO hotspots from peripheral vision observations on a 30-minute interval. 4-hour dismiss cooldown. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`
+- **Multi-Step Workflow Engine** (`services/workflowEngine.ts`) — JSON workflow definitions at `.alex/workflows/`. Includes 4 built-in workflows: Plan→Build→Review, Debug→Fix→Verify, Research-First Development, Release Preparation. Commands: `alex.runWorkflow`, `alex.listWorkflows`
+- **User Expertise Model** (`services/expertiseModel.ts`) — Domain interaction frequency across 10 domains (coding, debugging, architecture, testing, devops, data, security, ai-ml, documentation, general) mapped to novice/intermediate/advanced/expert. Injects calibration hint into every @alex prompt via `PromptContext.expertiseHint`. Command: `alex.showExpertiseModel`
+- **Proactive Code Review Triggers** — Built into `taskDetector.ts`: on save, debounces 60s and checks `git diff --stat HEAD`. If >200 lines changed, surfaces a code review nudge with 30-minute cooldown
+- **Layer 10b in promptEngine.ts** — `buildExpertiseLayer()` injects user expertise calibration for every @alex interaction
+- **10 new VS Code commands** registered and declared in `package.json`
+
+### Changed
+
+- **`PromptContext` interface** — Added `expertiseHint?: string` field (v6.0.0 expertise calibration)
+- **participant.ts** — `@alex` handler now appends to episodic draft and records domain interactions after every response (fire-and-forget)
+- **extension.ts** — Imports and initializes all 5 new services; registers 10 new commands; flushes episodic draft on deactivation
+- **package.json** — v6.0.0, 10 new command declarations
+
+---
+
 ## [5.9.13] - 2026-02-28
 
 > **CorreaX Brand Edition** — Full brand system deployment (42/42 tasks). Multi-size favicons, apple-touch-icons, CorreaX dark neural network banner, palette applied to extension source, brand compliance scan in dream protocol, and correax-brand trifecta.

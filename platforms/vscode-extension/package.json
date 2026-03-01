@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "5.9.13",
+  "version": "6.0.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -419,6 +419,56 @@
         "command": "alex.reviewPR",
         "title": "Alex: Review Pull Request",
         "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "alex.recallSession",
+        "title": "Alex: Recall Past Sessions",
+        "icon": "$(history)"
+      },
+      {
+        "command": "alex.showSessionHistory",
+        "title": "Alex: Show Session History",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "alex.recordPositiveOutcome",
+        "title": "Alex: 👍 This was helpful",
+        "icon": "$(thumbsup)"
+      },
+      {
+        "command": "alex.recordNegativeOutcome",
+        "title": "Alex: 👎 Needs improvement",
+        "icon": "$(thumbsdown)"
+      },
+      {
+        "command": "alex.showOutcomeStats",
+        "title": "Alex: Show Outcome Statistics",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "alex.showPendingTasks",
+        "title": "Alex: Show Pending Tasks",
+        "icon": "$(tasklist)"
+      },
+      {
+        "command": "alex.forceCheckTasks",
+        "title": "Alex: Force Check Pending Tasks",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "alex.runWorkflow",
+        "title": "Alex: Run Workflow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "alex.listWorkflows",
+        "title": "Alex: List Workflows",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "alex.showExpertiseModel",
+        "title": "Alex: Show Expertise Model",
+        "icon": "$(mortar-board)"
       },
       {
         "command": "alex.toggleVoice",

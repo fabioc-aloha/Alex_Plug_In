@@ -48,6 +48,11 @@ import {
   initSecretsManager,
   showTokenManagementPalette,
 } from "./services/secretsManager";
+import { initOutcomeTracker, recordPositiveOutcomeCommand, recordNegativeOutcomeCommand, showOutcomeStatsCommand } from "./services/outcomeTracker";
+import { initTaskDetector, showPendingTasksCommand, forceCheckTasksCommand } from "./services/taskDetector";
+import { initExpertiseModel, showExpertiseModelCommand } from "./services/expertiseModel";
+import { flushEpisodicDraft, recallSessionCommand, showSessionHistoryCommand } from "./services/episodicMemory";
+import { runWorkflowCommand, listWorkflowsCommand } from "./services/workflowEngine";
 import {
   checkHealth,
   getStatusBarDisplay,
@@ -172,6 +177,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   } catch (err) {
     console.warn('[Alex] Failed to initialize secrets manager:', err);
   }
+
+  // v6.0.0: Initialize partnership services
+  initOutcomeTracker(context);
+  initExpertiseModel(context);
+  initTaskDetector(context, vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? '');
+  context.subscriptions.push({ dispose: () => { flushEpisodicDraft().catch(() => {}); } });
   
   // Auto-setup Global Knowledge if not configured (non-blocking)
   ensureGlobalKnowledgeSetup().catch(err => {
@@ -3271,6 +3282,20 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     },
   );
   context.subscriptions.push(reviewPRDisposable);
+
+  // v6.0.0: Partnership Release commands
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.recallSession", recallSessionCommand),
+    vscode.commands.registerCommand("alex.showSessionHistory", showSessionHistoryCommand),
+    vscode.commands.registerCommand("alex.recordPositiveOutcome", recordPositiveOutcomeCommand),
+    vscode.commands.registerCommand("alex.recordNegativeOutcome", recordNegativeOutcomeCommand),
+    vscode.commands.registerCommand("alex.showOutcomeStats", showOutcomeStatsCommand),
+    vscode.commands.registerCommand("alex.showPendingTasks", showPendingTasksCommand),
+    vscode.commands.registerCommand("alex.forceCheckTasks", forceCheckTasksCommand),
+    vscode.commands.registerCommand("alex.runWorkflow", runWorkflowCommand),
+    vscode.commands.registerCommand("alex.listWorkflows", listWorkflowsCommand),
+    vscode.commands.registerCommand("alex.showExpertiseModel", showExpertiseModelCommand),
+  );
 }
 
 /**
