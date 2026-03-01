@@ -357,10 +357,10 @@ Click → opens dashboard.
 
 ## References
 
-- [SKILLS-CATALOG.md](SKILLS-CATALOG.md) - Mermaid diagrams
-- [brain-qa SKILL.md](../.github/skills/brain-qa/SKILL.md) - QA phases
-- [MEMORY-SYSTEMS.md](MEMORY-SYSTEMS.md) - Memory architecture
-- [COGNITIVE-ARCHITECTURE.md](COGNITIVE-ARCHITECTURE.md) - Overall design
+- [SKILLS-CATALOG.md](../skills/SKILLS-CATALOG.md) - Mermaid diagrams
+- [brain-qa SKILL.md](../../.github/skills/brain-qa/SKILL.md) - QA phases
+- [MEMORY-SYSTEMS.md](../architecture/MEMORY-SYSTEMS.md) - Memory architecture
+- [COGNITIVE-ARCHITECTURE.md](../architecture/COGNITIVE-ARCHITECTURE.md) - Overall design
 
 ---
 

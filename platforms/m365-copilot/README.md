@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-5.9.12-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-6.0.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -10,7 +10,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**✨ NEW in v5.9.12**: Comprehensive documentation hygiene — version drift elimination, file count alignment, doc-hygiene→release-process synapse.
+**✨ NEW in v6.0.0**: The Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
 
 ---
 
@@ -460,6 +460,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v5.7.1 🧠 Enterprise Readiness + Full M365 Integration
+**Alex M365** - v6.0.0 🧠 The Partnership Release
 
 © 2026 CorreaX • AI That Learns How to Learn

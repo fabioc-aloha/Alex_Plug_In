@@ -2,6 +2,8 @@
 
 > Automatic processes that run transparently without user intervention
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Conscious Mind](./CONSCIOUS-MIND.md) · [Memory Systems](./MEMORY-SYSTEMS.md)
+
 ---
 
 ## Overview
@@ -66,10 +68,10 @@ Automatically backs up your global knowledge to GitHub Gist without any user act
 
 **Table 1:** *Background Sync Triggers*
 
-| Trigger | Timing |
-| --- | --- |
-| Startup | 10 seconds after VS Code activates |
-| Periodic | Every 5 minutes while VS Code is open |
+| Trigger           | Timing                                                |
+| ----------------- | ----------------------------------------------------- |
+| Startup           | 10 seconds after VS Code activates                    |
+| Periodic          | Every 5 minutes while VS Code is open                 |
 | Post-modification | 2 seconds after saving insight or promoting knowledge |
 
 ### How It Works
@@ -253,14 +255,14 @@ The unconscious mind has sensible defaults but can be observed:
 
 **Table 2:** *Unconscious Mind Configuration Defaults*
 
-| Setting | Default | Description |
-| --- | --- | --- |
-| Background sync interval | 5 minutes | Time between automatic syncs |
-| Minimum sync interval | 1 minute | Prevents sync spam |
-| Startup delay | 10 seconds | Wait before first sync |
-| Post-modification delay | 2 seconds | Wait after changes |
-| Insight confidence threshold | 0.5 | Minimum score to auto-save |
-| Conversation buffer size | 5 messages | Recent messages analyzed |
+| Setting                      | Default    | Description                  |
+| ---------------------------- | ---------- | ---------------------------- |
+| Background sync interval     | 5 minutes  | Time between automatic syncs |
+| Minimum sync interval        | 1 minute   | Prevents sync spam           |
+| Startup delay                | 10 seconds | Wait before first sync       |
+| Post-modification delay      | 2 seconds  | Wait after changes           |
+| Insight confidence threshold | 0.5        | Minimum score to auto-save   |
+| Conversation buffer size     | 5 messages | Recent messages analyzed     |
 
 ---
 
@@ -338,9 +340,9 @@ Automatically evaluates and promotes valuable skill knowledge (SKILL.md files) t
 
 **Table 2.5:** *Auto-Promotion Triggers*
 
-| Trigger | Timing |
-| --- | --- |
-| Self-Actualization | Phase 4 of the protocol |
+| Trigger             | Timing                         |
+| ------------------- | ------------------------------ |
+| Self-Actualization  | Phase 4 of the protocol        |
 | Meditation Sessions | During knowledge consolidation |
 
 ### How It Works
@@ -400,15 +402,15 @@ Files need a minimum score of **5 points** to be promoted:
 
 **Table 2.6:** *Auto-Promotion Scoring*
 
-| Criterion | Points | Description |
-| --- | --- | --- |
-| Has Synapses | +3 | Contains synapse connections to other files |
-| Well-Structured | +2 | Has 3+ H2 sections |
-| Has Tags | +1 | Tags defined in file header |
-| Substantial Content | +1 | File size > 1KB |
-| Rich Content | +2 | File size > 5KB |
-| Has Examples | +2 | Contains code blocks |
-| General Applicability | +1 to +3 | Contains pattern/best practice language |
+| Criterion             | Points   | Description                                 |
+| --------------------- | -------- | ------------------------------------------- |
+| Has Synapses          | +3       | Contains synapse connections to other files |
+| Well-Structured       | +2       | Has 3+ H2 sections                          |
+| Has Tags              | +1       | Tags defined in file header                 |
+| Substantial Content   | +1       | File size > 1KB                             |
+| Rich Content          | +2       | File size > 5KB                             |
+| Has Examples          | +2       | Contains code blocks                        |
+| General Applicability | +1 to +3 | Contains pattern/best practice language     |
 
 ### Excluded Files
 
@@ -425,13 +427,13 @@ After each meditation, the report shows:
 ```markdown
 ## 🌐 Global Knowledge Promotion (Unconscious Mind)
 
-| Metric | Value |
-|--------|-------|
-| Skills Evaluated | 46 |
-| Auto-Promoted | 3 |
-| Updated | 2 |
-| Skipped (needs improvement) | 4 |
-| Already Global (unchanged) | 2 |
+| Metric                      | Value |
+| --------------------------- | ----- |
+| Skills Evaluated            | 46    |
+| Auto-Promoted               | 3     |
+| Updated                     | 2     |
+| Skipped (needs improvement) | 4     |
+| Already Global (unchanged)  | 2     |
 
 ### Newly Promoted Knowledge
 - 📐 **Advanced Diagramming**
@@ -514,12 +516,12 @@ The unconscious mind is designed to fail silently:
 
 **Table 3:** *Failure Scenarios and Behaviors*
 
-| Scenario | Behavior |
-| --- | --- |
-| No GitHub auth | Sync skipped, logged |
-| Network error | Retry on next interval |
-| Insight detection fails | Continue conversation |
-| Global search fails | Return local results only |
+| Scenario                | Behavior                  |
+| ----------------------- | ------------------------- |
+| No GitHub auth          | Sync skipped, logged      |
+| Network error           | Retry on next interval    |
+| Insight detection fails | Continue conversation     |
+| Global search fails     | Return local results only |
 
 No user notifications for routine failures - just logged for debugging.
 

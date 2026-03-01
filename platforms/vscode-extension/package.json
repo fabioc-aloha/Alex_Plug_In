@@ -165,6 +165,11 @@
         "icon": "$(edit)"
       },
       {
+        "command": "alex.upscaleImage",
+        "title": "Alex: Upscale Image with AI",
+        "icon": "$(zoom-in)"
+      },
+      {
         "command": "alex.knowledgeQuickPick",
         "title": "Alex: Search Knowledge",
         "icon": "$(search)"
@@ -660,8 +665,13 @@
           "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp|gif)$/"
         },
         {
+          "command": "alex.upscaleImage",
+          "group": "3_generate@10",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp)$/"
+        },
+        {
           "command": "alex.generateDiagram",
-          "group": "3_generate@8",
+          "group": "3_generate@11",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
         {
@@ -743,12 +753,20 @@
           "group": "4_create@2"
         },
         {
-          "command": "alex.generateDiagram",
+          "command": "alex.editImageWithPrompt",
           "group": "4_create@3"
         },
         {
-          "command": "alex.generatePptx",
+          "command": "alex.upscaleImage",
           "group": "4_create@4"
+        },
+        {
+          "command": "alex.generateDiagram",
+          "group": "4_create@5"
+        },
+        {
+          "command": "alex.generatePptx",
+          "group": "4_create@6"
         },
         {
           "command": "alex.readAloud",
@@ -1490,6 +1508,21 @@
             "name": "verify",
             "description": "Request verification walkthrough for high-stakes decisions",
             "sampleRequest": "Walk me through verifying this decision"
+          },
+          {
+            "name": "journey",
+            "description": "Start a curated learning journey tailored to your role (frontend-developer, backend-developer, devops-engineer, etc.)",
+            "sampleRequest": "Start the frontend-developer journey"
+          },
+          {
+            "name": "marp",
+            "description": "Create a Marp markdown presentation with Alex branding, ready for PDF/PPTX export",
+            "sampleRequest": "Create a presentation about our architecture"
+          },
+          {
+            "name": "presentation",
+            "description": "Generate a professional presentation — routes to Gamma, Marp, or PptxGenJS based on your needs",
+            "sampleRequest": "Build a pitch deck for investors"
           }
         ]
       }

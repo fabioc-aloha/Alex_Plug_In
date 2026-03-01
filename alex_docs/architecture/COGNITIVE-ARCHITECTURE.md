@@ -2,6 +2,8 @@
 
 > A comprehensive guide to Alex's dual-mind AI system
 
+**Related**: [Conscious Mind](./CONSCIOUS-MIND.md) · [Unconscious Mind](./UNCONSCIOUS-MIND.md) · [Memory Systems](./MEMORY-SYSTEMS.md) · [Neuroanatomical Mapping](./NEUROANATOMICAL-MAPPING.md)
+
 ---
 
 ## Introduction

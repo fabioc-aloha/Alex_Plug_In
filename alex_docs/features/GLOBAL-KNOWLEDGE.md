@@ -2,6 +2,8 @@
 
 > Cross-project learning that travels with you
 
+**Related**: [Team Sharing](./GLOBAL-KNOWLEDGE-SHARING.md) · [Pattern Format](../architecture/GK-PATTERN-FORMAT-STANDARD.md) · [ADR-009](../decisions/ADR-009-global-knowledge-sync-direction.md)
+
 ---
 
 ## Overview
@@ -145,21 +147,21 @@ Knowledge is organized into categories:
 
 **Table 1:** *Global Knowledge Categories*
 
-| Category | Description |
-| --- | --- |
+| Category         | Description                        |
+| ---------------- | ---------------------------------- |
 | `error-handling` | Exception handling, error recovery |
-| `api-design` | REST, GraphQL, API patterns |
-| `testing` | Unit, integration, E2E testing |
-| `debugging` | Troubleshooting, diagnostics |
-| `performance` | Optimization, profiling |
-| `architecture` | System design, patterns |
-| `security` | Auth, encryption, vulnerabilities |
-| `deployment` | CI/CD, infrastructure |
-| `documentation` | Docs, comments, diagrams |
-| `refactoring` | Code improvement |
-| `patterns` | Design patterns |
-| `tooling` | Dev tools, configuration |
-| `general` | Everything else |
+| `api-design`     | REST, GraphQL, API patterns        |
+| `testing`        | Unit, integration, E2E testing     |
+| `debugging`      | Troubleshooting, diagnostics       |
+| `performance`    | Optimization, profiling            |
+| `architecture`   | System design, patterns            |
+| `security`       | Auth, encryption, vulnerabilities  |
+| `deployment`     | CI/CD, infrastructure              |
+| `documentation`  | Docs, comments, diagrams           |
+| `refactoring`    | Code improvement                   |
+| `patterns`       | Design patterns                    |
+| `tooling`        | Dev tools, configuration           |
+| `general`        | Everything else                    |
 
 ---
 
@@ -316,16 +318,16 @@ Results are ranked by relevance score:
 
 **Table 2:** *Search Relevance Scoring Weights*
 
-| Match Type | Weight |
-| --- | --- |
-| Title contains query | +10 |
-| Title word match | +3 per word |
-| Tag exact match | +5 |
-| Tag word match | +2 per word |
-| Summary contains query | +3 |
-| Summary word match | +1 per word |
-| Category match | +2 |
-| Content word match | +0.5 per occurrence |
+| Match Type             | Weight              |
+| ---------------------- | ------------------- |
+| Title contains query   | +10                 |
+| Title word match       | +3 per word         |
+| Tag exact match        | +5                  |
+| Tag word match         | +2 per word         |
+| Summary contains query | +3                  |
+| Summary word match     | +1 per word         |
+| Category match         | +2                  |
+| Content word match     | +0.5 per occurrence |
 
 Results are sorted by total score, highest first.
 

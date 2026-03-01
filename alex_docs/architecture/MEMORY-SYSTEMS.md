@@ -2,6 +2,8 @@
 
 > How Alex stores, organizes, and retrieves knowledge
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Global Knowledge](../features/GLOBAL-KNOWLEDGE.md) · [Neuroanatomical Mapping](./NEUROANATOMICAL-MAPPING.md)
+
 ---
 
 ## Overview
@@ -55,12 +57,12 @@ flowchart TB
 
 **Table 1:** *Working Memory Characteristics*
 
-| Property | Value |
-| --- | --- |
-| Location | Chat session context |
+| Property | Value                       |
+| -------- | --------------------------- |
+| Location | Chat session context        |
 | Capacity | 7±2 rules (cognitive limit) |
-| Lifespan | Current session only |
-| Access | Immediate |
+| Lifespan | Current session only        |
+| Access   | Immediate                   |
 
 ### Structure
 
@@ -143,11 +145,11 @@ When to use this procedure
 
 **Table 2:** *Procedural Memory Examples*
 
-| File | Purpose |
-| --- | --- |
-| `dream-state-automation.instructions.md` | Neural maintenance protocol |
-| `release-management.instructions.md` | How to publish releases |
-| `bootstrap-learning.instructions.md` | Knowledge acquisition process |
+| File                                     | Purpose                       |
+| ---------------------------------------- | ----------------------------- |
+| `dream-state-automation.instructions.md` | Neural maintenance protocol   |
+| `release-management.instructions.md`     | How to publish releases       |
+| `bootstrap-learning.instructions.md`     | Knowledge acquisition process |
 
 ---
 
@@ -194,11 +196,11 @@ Key learnings from this session
 
 **Table 3:** *Episodic Memory Examples*
 
-| File | Purpose |
-| --- | --- |
-| `unified-meditation-protocols.prompt.md` | How to run meditation |
-| `meditation-2026-01-24.prompt.md` | Record of a meditation |
-| `dream-report-*.md` | Neural maintenance reports |
+| File                                     | Purpose                    |
+| ---------------------------------------- | -------------------------- |
+| `unified-meditation-protocols.prompt.md` | How to run meditation      |
+| `meditation-2026-01-24.prompt.md`        | Record of a meditation     |
+| `dream-report-*.md`                      | Neural maintenance reports |
 
 ---
 
@@ -430,14 +432,14 @@ Memory files are connected via synapses:
 
 ## Memory Capacity Guidelines
 
-| Memory Type | Recommended Max | Reason |
-| --- | --- | --- |
-| Working Memory | 7 rules | Cognitive limit |
-| Procedural Files | 20-30 | Keep focused |
-| Episodic Files | Unlimited | History is valuable |
-| Skill Folders | 10-20 per project | Avoid sprawl |
-| Global Patterns | Unlimited | Cross-project value |
-| Global Insights | Unlimited | Timestamped history |
+| Memory Type      | Recommended Max   | Reason              |
+| ---------------- | ----------------- | ------------------- |
+| Working Memory   | 7 rules           | Cognitive limit     |
+| Procedural Files | 20-30             | Keep focused        |
+| Episodic Files   | Unlimited         | History is valuable |
+| Skill Folders    | 10-20 per project | Avoid sprawl        |
+| Global Patterns  | Unlimited         | Cross-project value |
+| Global Insights  | Unlimited         | Timestamped history |
 
 ---
 

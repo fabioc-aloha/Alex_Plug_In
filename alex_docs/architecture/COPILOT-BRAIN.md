@@ -3,6 +3,8 @@
 > **Audience**: Human developers working on Alex
 > **Machine counterpart**: `.github/copilot-instructions.md` (the actual file read by VS Code)
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [VS Code Brain Integration](../guides/VSCODE-BRAIN-INTEGRATION.md) · [Alex Identity](./ALEX-IDENTITY.md)
+
 ## What Is It?
 
 `copilot-instructions.md` is Alex's **prefrontal cortex** — the always-on cognitive state that VS Code injects into every LLM request. It's the first thing Alex reads, every time.

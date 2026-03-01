@@ -508,14 +508,14 @@ How we know AaaS is working:
 
 ## Related Documents
 
-| Document                                                                        | Relationship                                          |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| [FOUNDRY-HEIR.md](../platforms/FOUNDRY-HEIR.md)                                 | Technical Foundry assessment (AaaS runtime)           |
-| [FOUNDRY-CAPABILITIES-DIGEST.md](../platforms/FOUNDRY-CAPABILITIES-DIGEST.md)   | Complete Foundry capability reference                 |
-| [FOUNDRY-AGENT-IMPLEMENTATION.md](../platforms/FOUNDRY-AGENT-IMPLEMENTATION.md) | Agent-to-Foundry mapping roadmap                      |
-| [MASTER-HEIR-ARCHITECTURE.md](../platforms/MASTER-HEIR-ARCHITECTURE.md)         | Heir family architecture                              |
-| [VSCODE-1.109-ADOPTION-PLAN.md](../platforms/VSCODE-1.109-ADOPTION-PLAN.md)     | VS Code feature adoption plan                         |
-| [ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md)                                  | Unified project roadmap (v5.7.0 = Platform Expansion) |
+| Document                                                                      | Relationship                                           |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [FOUNDRY-HEIR.md](../archive/FOUNDRY-HEIR.md)                                 | Technical Foundry assessment (AaaS runtime) [archived] |
+| [FOUNDRY-CAPABILITIES-DIGEST.md](../archive/FOUNDRY-CAPABILITIES-DIGEST.md)   | Complete Foundry capability reference [archived]       |
+| [FOUNDRY-AGENT-IMPLEMENTATION.md](../archive/FOUNDRY-AGENT-IMPLEMENTATION.md) | Agent-to-Foundry mapping roadmap [archived]            |
+| [MASTER-HEIR-ARCHITECTURE.md](../platforms/MASTER-HEIR-ARCHITECTURE.md)       | Heir family architecture                               |
+| [VSCODE-1.109-ADOPTION-PLAN.md](../archive/VSCODE-1.109-ADOPTION-PLAN.md)     | VS Code feature adoption plan [archived]               |
+| [ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md)                                | Unified project roadmap (v5.7.0 = Platform Expansion)  |
 
 ---
 

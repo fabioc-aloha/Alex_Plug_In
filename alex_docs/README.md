@@ -38,14 +38,15 @@
 | [Skills Catalog](./skills/SKILLS-CATALOG.md)             | Full skill inventory with categories    |
 | [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)     | How skills are structured internally    |
 | [Global Knowledge](./features/GLOBAL-KNOWLEDGE.md)       | Cross-project learning system           |
+| [Team Sharing](./features/GLOBAL-KNOWLEDGE-SHARING.md)   | GitHub-based knowledge sharing          |
 
 ### 🧬 Platform & Heirs
 
-| Document                                                              | Description                               |
-| --------------------------------------------------------------------- | ----------------------------------------- |
-| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md) | Evolution model and protection system     |
-| [VS Code Heir](./platforms/VSCODE-HEIR.md)                            | Primary VS Code extension heir            |
-| [Project Structure](./guides/PROJECT-STRUCTURE.md)                    | `.github/` folder files and functions     |
+| Document                                                              | Description                           |
+| --------------------------------------------------------------------- | ------------------------------------- |
+| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md) | Evolution model and protection system |
+| [VS Code Heir](./platforms/VSCODE-HEIR.md)                            | Primary VS Code extension heir        |
+| [Project Structure](./guides/PROJECT-STRUCTURE.md)                    | `.github/` folder files and functions |
 
 ### 🛡️ Operations
 
@@ -55,10 +56,10 @@
 
 ### 📊 Research & Publications
 
-| Document                                                                                 | Description                                              |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **[📚 Papers & Research →](./PAPERS.md)**                                               | **Academic papers repository (single source of truth)**  |
-| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work                |
+| Document                                                                                 | Description                                             |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **[📚 Papers & Research →](./PAPERS.md)**                                                 | **Academic papers repository (single source of truth)** |
+| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work               |
 
 ---
 

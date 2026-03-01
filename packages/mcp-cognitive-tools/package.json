@@ -1,0 +1,44 @@
+{
+  "name": "@alex/mcp-cognitive-tools",
+  "version": "1.0.0",
+  "description": "Alex Cognitive Architecture MCP Server - exposes cognitive tools via Model Context Protocol",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "alex-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "alex",
+    "cognitive-architecture",
+    "ai-tools"
+  ],
+  "author": "Alex Cognitive Architecture",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioc-aloha/Alex_Plug_In.git",
+    "directory": "packages/mcp-cognitive-tools"
+  }
+}

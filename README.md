@@ -28,18 +28,18 @@
 
 ## 📦 Available Platforms
 
-| Platform               | Status       | Get Started                                                                                                 |
-| ---------------------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
-| **VS Code Extension**  | ✅ Published  | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
-| **M365 Copilot Agent** | 🔄 Preview    | [Documentation](platforms/m365-copilot/)                                                                    |
-| **GitHub Copilot Web** | ✅ Active     | [Documentation](platforms/github-copilot-web/)                                                              |
+| Platform               | Status      | Get Started                                                                                                 |
+| ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **M365 Copilot Agent** | 🔄 Preview   | [Documentation](platforms/m365-copilot/)                                                                    |
+| **GitHub Copilot Web** | ✅ Active    | [Documentation](platforms/github-copilot-web/)                                                              |
 
 ### VS Code Extension
 
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 26 slash commands
+- 29 slash commands
 - 13 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
@@ -106,12 +106,12 @@ Open Copilot Chat and type **`@alex`** to begin!
 
 ### Subscription & Cost
 
-| Cognitive Level | Copilot Plan | ~Cost/mo | Cognitive State |
-|---|---|---|---|
-| **Level 1** — Minimum | None | **Free** | Dormant |
-| **Level 2** — Basic | Copilot Free | **Free** | Awake |
-| **Level 3** — Recommended ⭐ | **Copilot Pro** or Business | $10–19 | Fully Operational |
-| **Level 4** — Advanced | Copilot Pro+ or Enterprise | $39 | Peak Performance |
+| Cognitive Level             | Copilot Plan                | ~Cost/mo | Cognitive State   |
+| --------------------------- | --------------------------- | -------- | ----------------- |
+| **Level 1** — Minimum       | None                        | **Free** | Dormant           |
+| **Level 2** — Basic         | Copilot Free                | **Free** | Awake             |
+| **Level 3** — Recommended ⭐ | **Copilot Pro** or Business | $10–19   | Fully Operational |
+| **Level 4** — Advanced      | Copilot Pro+ or Enterprise  | $39      | Peak Performance  |
 
 > ⭐ **Recommended**: Copilot Pro ($10/mo) unlocks the full Alex partnership. Copilot Pro+ ($39/mo) adds maximum cognitive depth. Alex itself costs nothing — you're only paying for GitHub Copilot's AI infrastructure.
 
@@ -119,68 +119,68 @@ Open Copilot Chat and type **`@alex`** to begin!
 
 Everything in this section works without any subscription — genuine value from the moment you install.
 
-| Feature | Minimum | Basic | Recommended | Advanced |
-|---|:---:|:---:|:---:|:---:|
-| Architecture Deploy | ✅ | ✅ | ✅ | ✅ |
-| Welcome Sidebar | ✅ | ✅ | ✅ | ✅ |
-| Status Bar Health | ✅ | ✅ | ✅ | ✅ |
-| Memory Tree View | ✅ | ✅ | ✅ | ✅ |
-| TTS Voice Synthesis | ✅ | ✅ | ✅ | ✅ |
-| Keyboard Shortcuts | ✅ | ✅ | ✅ | ✅ |
-| SecretStorage (API keys) | ✅ | ✅ | ✅ | ✅ |
-| Git Hooks | ✅ | ✅ | ✅ | ✅ |
-| Walkthroughs | ✅ | ✅ | ✅ | ✅ |
+| Feature                  | Minimum | Basic | Recommended | Advanced |
+| ------------------------ | :-----: | :---: | :---------: | :------: |
+| Architecture Deploy      |    ✅    |   ✅   |      ✅      |    ✅     |
+| Welcome Sidebar          |    ✅    |   ✅   |      ✅      |    ✅     |
+| Status Bar Health        |    ✅    |   ✅   |      ✅      |    ✅     |
+| Memory Tree View         |    ✅    |   ✅   |      ✅      |    ✅     |
+| TTS Voice Synthesis      |    ✅    |   ✅   |      ✅      |    ✅     |
+| Keyboard Shortcuts       |    ✅    |   ✅   |      ✅      |    ✅     |
+| SecretStorage (API keys) |    ✅    |   ✅   |      ✅      |    ✅     |
+| Git Hooks                |    ✅    |   ✅   |      ✅      |    ✅     |
+| Walkthroughs             |    ✅    |   ✅   |      ✅      |    ✅     |
 
 ### Chat & Conversational AI
 
 With any Copilot plan (including Free), Alex gains a voice — conversational AI with persistent identity and emotional awareness.
 
-| Feature | Minimum | Basic | Recommended | Advanced |
-|---|:---:|:---:|:---:|:---:|
-| @alex Chat Participant | ❌ | ✅ | ✅ | ✅ |
-| Slash Commands | ❌ | ✅ | ✅ | ✅ |
-| Identity & Emotional Intelligence | ❌ | ✅ | ✅ | ✅ |
-| Session / Pomodoro Timer | ❌ | ✅ | ✅ | ✅ |
-| Goal Tracking | ❌ | ✅ | ✅ | ✅ |
-| Model Tier Detection | ❌ | ✅ | ✅ | ✅ |
+| Feature                           | Minimum | Basic | Recommended | Advanced |
+| --------------------------------- | :-----: | :---: | :---------: | :------: |
+| @alex Chat Participant            |    ❌    |   ✅   |      ✅      |    ✅     |
+| Slash Commands                    |    ❌    |   ✅   |      ✅      |    ✅     |
+| Identity & Emotional Intelligence |    ❌    |   ✅   |      ✅      |    ✅     |
+| Session / Pomodoro Timer          |    ❌    |   ✅   |      ✅      |    ✅     |
+| Goal Tracking                     |    ❌    |   ✅   |      ✅      |    ✅     |
+| Model Tier Detection              |    ❌    |   ✅   |      ✅      |    ✅     |
 
 ### Agent Mode & Autonomous Capabilities
 
 The sweet spot — full partnership with autonomous tools, deep skills, specialist agents, and cross-session memory.
 
-| Feature | Minimum | Basic | Recommended | Advanced |
-|---|:---:|:---:|:---:|:---:|
-| Agent Mode | ❌ | ❌ | ✅ | ✅ |
-| 13 Language Model Tools | ❌ | ❌ | ✅ | ✅ |
-| 124 Skills (auto-loaded) | ❌ | ❌ | ✅ | ✅ |
-| 7 Specialist Agents | ❌ | ❌ | ✅ | ✅ |
-| Copilot Memory (cross-session) | ❌ | ❌ | ✅ | ✅ |
-| Global Knowledge Operations | ❌ | ❌ | ✅ | ✅ |
+| Feature                        | Minimum | Basic | Recommended | Advanced |
+| ------------------------------ | :-----: | :---: | :---------: | :------: |
+| Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
+| 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
+| 125 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
+| 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
+| Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
+| Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
 
 ### Frontier & Advanced Capabilities
 
 Depth of reasoning — frontier models transform meditation, audits, and architecture reviews.
 
-| Feature | Minimum | Basic | Recommended | Advanced |
-|---|:---:|:---:|:---:|:---:|
-| Extended Thinking (16K budget) | ❌ | ❌ | ❌ | ✅ |
-| 1M+ Token Context Window | ❌ | ❌ | ❌ | ✅ |
-| MCP Server Integrations | ❌ | ❌ | ❌ | ✅ |
-| Deep Meditation | ❌ | ❌ | ⚠️ | ✅ |
-| Self-Actualization | ❌ | ❌ | ⚠️ | ✅ |
-| NASA-Grade Audits | ❌ | ❌ | ⚠️ | ✅ |
+| Feature                        | Minimum | Basic | Recommended | Advanced |
+| ------------------------------ | :-----: | :---: | :---------: | :------: |
+| Extended Thinking (16K budget) |    ❌    |   ❌   |      ❌      |    ✅     |
+| 1M+ Token Context Window       |    ❌    |   ❌   |      ❌      |    ✅     |
+| MCP Server Integrations        |    ❌    |   ❌   |      ❌      |    ✅     |
+| Deep Meditation                |    ❌    |   ❌   |      ⚠️      |    ✅     |
+| Self-Actualization             |    ❌    |   ❌   |      ⚠️      |    ✅     |
+| NASA-Grade Audits              |    ❌    |   ❌   |      ⚠️      |    ✅     |
 
 ### Optional External Services
 
 **All completely optional** — Alex works fully without them. Costs are for the external service, not Alex.
 
-| Service | Cost | Free? |
-|---|---|:---:|
-| **Edge TTS** (voice synthesis) | Free | ✅ |
-| **GitHub API** (knowledge sync) | Free | ✅ |
-| **Brandfetch / Logo.dev** (logo lookup) | Free tier | ✅ |
-| **Replicate** (AI images) | ~$0.003–$0.08/image | 🆓* |
-| **Gamma** (presentations) | Credits-based | 🆓* |
+| Service                                 | Cost                | Free? |
+| --------------------------------------- | ------------------- | :---: |
+| **Edge TTS** (voice synthesis)          | Free                |   ✅   |
+| **GitHub API** (knowledge sync)         | Free                |   ✅   |
+| **Brandfetch / Logo.dev** (logo lookup) | Free tier           |   ✅   |
+| **Replicate** (AI images)               | ~$0.003–$0.08/image |  🆓*   |
+| **Gamma** (presentations)               | Credits-based       |  🆓*   |
 
 *⚠️ = Works with reduced depth  •  🆓 = Free trial credits, then pay-per-use*
 
@@ -213,15 +213,17 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v6.0.0 — The Partnership Release)
 
-| Category | Highlights |
-| --------- | ---------- |
-| **Partnership** | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows |
-| **Expertise** | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically |
-| **Proactive** | Code review nudges on save, stalled work detection, 4 built-in workflows |
-| **Chat & Agents** | `@alex` participant, slash commands, LM tools, custom agents |
-| **Intelligence** | 125 skills, emotional detection, model tier awareness, frustration recognition |
-| **Memory** | Global knowledge + session history + outcome tracking |
-| **UX** | User profiles, smart nudges, one-click upgrades |
+| Category          | Highlights                                                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------- |
+| **Partnership**   | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows       |
+| **Expertise**     | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically   |
+| **Proactive**     | Code review nudges on save, stalled work detection, 4 built-in workflows                      |
+| **Chat & Agents** | `@alex` participant, 29 slash commands, 13 LM tools, 7 custom agents                          |
+| **Intelligence**  | 125 skills, emotional detection, model tier awareness, expertise calibration                  |
+| **Memory**        | Global knowledge + session history + outcome tracking + episodic records                      |
+| **UX**            | User profiles, smart nudges, one-click upgrades, 8 learning journeys, presentation automation |
+| **Images**        | AI image upscaling (4 models), image editing, generation                                      |
+| **MCP**           | Standalone MCP cognitive tools server (`npx @alex/mcp-cognitive-tools`)                       |
 
 ### Migration Notes
 
@@ -308,23 +310,66 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 
 ### Slash Commands
 
+#### Core Cognitive Operations
+
+| Command                | What It Does                                       |
+| ---------------------- | -------------------------------------------------- |
+| `@alex /status`        | Check architecture health and version              |
+| `@alex /meditate`      | Consolidate knowledge into memory files            |
+| `@alex /dream`         | Run neural maintenance and repair synapses         |
+| `@alex /selfactualize` | Comprehensive self-assessment with deep meditation |
+| `@alex /brainqa`       | Run Brain QA — structural validation and integrity |
+| `@alex /learn`         | Acquire new domain knowledge conversationally      |
+| `@alex /model`         | Model intelligence dashboard and task advisor      |
+
+#### Platform Integrations
+
+| Command        | What It Does                                  |
+| -------------- | --------------------------------------------- |
+| `@alex /azure` | Get Azure development guidance with MCP tools |
+| `@alex /m365`  | Get Microsoft 365 and Teams development help  |
+
+#### Personal Settings
+
+| Command          | What It Does                                        |
+| ---------------- | --------------------------------------------------- |
+| `@alex /profile` | View and update your personal preferences           |
+| `@alex /session` | Start or manage a focused Pomodoro work session     |
+| `@alex /goals`   | View and manage learning goals with streak tracking |
+| `@alex /docs`    | Open Alex cognitive architecture documentation      |
+| `@alex /help`    | Show all available Alex commands and capabilities   |
+
+#### Content Creation
+
+| Command               | What It Does                                           |
+| --------------------- | ------------------------------------------------------ |
+| `@alex /journey`      | Start a curated learning journey tailored to your role |
+| `@alex /marp`         | Create a Marp markdown presentation with Alex branding |
+| `@alex /presentation` | Generate a presentation (Gamma, Marp, or PptxGenJS)    |
+| `@alex /creative`     | Switch to creative/brainstorming collaboration mode    |
+| `@alex /exportm365`   | Export Alex memory for M365 Copilot integration        |
+
+#### Knowledge Management
+
 | Command                  | What It Does                                        |
 | ------------------------ | --------------------------------------------------- |
-| `@alex /status`          | Check architecture health and version               |
-| `@alex /meditate`        | Consolidate knowledge into memory files             |
-| `@alex /dream`           | Run neural maintenance and repair synapses          |
-| `@alex /selfactualize`   | Comprehensive self-assessment with deep meditation  |
-| `@alex /learn`           | Acquire new domain knowledge conversationally       |
-| `@alex /model`           | Model intelligence dashboard and task advisor       |
-| `@alex /azure`           | Get Azure development guidance with MCP tools       |
-| `@alex /m365`            | Get Microsoft 365 and Teams development help        |
-| `@alex /profile`         | View and update your personal preferences           |
 | `@alex /knowledge`       | Search global knowledge across all projects         |
 | `@alex /saveinsight`     | Save a learning to global knowledge base            |
 | `@alex /promote`         | Promote project knowledge to global                 |
 | `@alex /knowledgestatus` | View global knowledge base status                   |
 | `@alex /checkskills`     | Discover new skills available from Global Knowledge |
 | `@alex /pullskill`       | Install a skill from Global Knowledge               |
+| `@alex /sync`            | Sync global knowledge with GitHub (bidirectional)   |
+| `@alex /push`            | Push local global knowledge to GitHub Gist          |
+| `@alex /pull`            | Pull global knowledge from GitHub Gist              |
+
+#### Safety & Verification
+
+| Command             | What It Does                                               |
+| ------------------- | ---------------------------------------------------------- |
+| `@alex /forget`     | Selectively remove information from Alex's memory          |
+| `@alex /confidence` | Explain confidence levels and when to verify AI responses  |
+| `@alex /verify`     | Request verification walkthrough for high-stakes decisions |
 
 ### Example Conversations
 
@@ -638,15 +683,15 @@ Alex can generate and edit images using the **Replicate API** with models like F
 
 ### Available Models
 
-| Model | Cost | Speed | Best For |
-|-------|------|-------|----------|
-| `flux-schnell` | $0.003 | Fast | Prototyping, quick iterations |
-| `sdxl` | $0.009 | Medium | Artistic styles, LoRA fine-tuning |
-| `flux-dev` | $0.025 | Medium | High-quality with LoRA support |
-| `flux-pro` | $0.04 | Slow | Production-quality photorealistic |
-| `ideogram-turbo` | $0.05 | Fast | Fast text-in-image (logos, banners) |
-| `ideogram` | $0.08 | Medium | Best text rendering (signage, typography) |
-| `seedream` | varies | Medium | High-resolution 2K/3K outputs |
+| Model            | Cost   | Speed  | Best For                                  |
+| ---------------- | ------ | ------ | ----------------------------------------- |
+| `flux-schnell`   | $0.003 | Fast   | Prototyping, quick iterations             |
+| `sdxl`           | $0.009 | Medium | Artistic styles, LoRA fine-tuning         |
+| `flux-dev`       | $0.025 | Medium | High-quality with LoRA support            |
+| `flux-pro`       | $0.04  | Slow   | Production-quality photorealistic         |
+| `ideogram-turbo` | $0.05  | Fast   | Fast text-in-image (logos, banners)       |
+| `ideogram`       | $0.08  | Medium | Best text rendering (signage, typography) |
+| `seedream`       | varies | Medium | High-resolution 2K/3K outputs             |
 
 ### Image Editing
 
@@ -655,6 +700,19 @@ The **nano-banana-pro** model provides:
 - Style preservation from reference images
 - Automatic image resizing (1024px max)
 - ~$0.025/image on Replicate
+
+### Image Upscaling
+
+Enhance and upscale existing images:
+- Right-click any image file (png, jpg, webp) → **Upscale Image with AI**
+- Or use Command Palette: `Alex: Upscale Image`
+
+| Model              | Scale | Cost    | Best For                  |
+| ------------------ | ----- | ------- | ------------------------- |
+| `real-esrgan`      | 4x    | ~$0.002 | Photos, natural scenes    |
+| `swinir`           | 4x    | ~$0.005 | General purpose upscaling |
+| `codeformer`       | 2x    | ~$0.008 | Faces and portraits       |
+| `clarity-upscaler` | 4x    | ~$0.10  | Maximum quality, creative |
 
 📘 **[Full Replicate Skill Documentation](.github/skills/ai-generated-readme-banners/resources/REPLICATE-API-STARTER-KIT.md)**
 
@@ -819,7 +877,7 @@ After initialization, Alex manages this structure:
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (35 files)
+├── prompts/                   # 📖 Episodic memory (38 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -837,7 +895,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (124 skills)
+├── skills/                    # 🎓 Portable domain expertise (125 skills)
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -999,20 +1057,20 @@ See the [Full Changelog](CHANGELOG.md) for complete version history and release 
 
 Comprehensive documentation is included with the extension in the `alex_docs/` folder:
 
-| Document                                                                   | Description                                     |
-| -------------------------------------------------------------------------- | ----------------------------------------------- |
-| **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)** | 📘 **START HERE** - Complete guide to using Alex |
-| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md) | Subscription guide, cognitive tiers, feature matrix |
-| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams |
-| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md) | How Alex uses native Copilot features |
-| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md) | User-initiated operations and commands |
-| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md) | Automatic background processes |
-| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md) | Procedural, episodic, and domain memory |
-| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md) | .github folder files and functions |
-| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md) | Cross-project knowledge sharing |
-| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md) | GitHub-based team knowledge sharing |
-| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md) | Commands and shortcuts cheat sheet |
+| Document                                                                                                                          | Description                                         |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)**                         | 📘 **START HERE** - Complete guide to using Alex     |
+| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md)                                                 | Subscription guide, cognitive tiers, feature matrix |
+| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams        |
+| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list             |
+| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md)  | How Alex uses native Copilot features               |
+| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands              |
+| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                      |
+| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory             |
+| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions                  |
+| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                     |
+| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing                 |
+| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet                  |
 
 ### External Resources
 
@@ -1044,7 +1102,7 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex Cognitive Architecture** — v6.0.0
+**Alex Cognitive Architecture**
 
 Built on 270+ academic sources
 

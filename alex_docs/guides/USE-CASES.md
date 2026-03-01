@@ -2,6 +2,8 @@
 
 > Beyond Code: How Alex Supports Every Knowledge Domain
 
+**Related**: [User Manual](./USER-MANUAL.md) · [Quick Reference](./QUICK-REFERENCE.md) · [Working with Alex](../WORKING-WITH-ALEX.md)
+
 ---
 
 ## Overview

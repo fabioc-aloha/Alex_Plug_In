@@ -2,6 +2,8 @@
 
 > User-initiated operations and explicit interactions
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Unconscious Mind](./UNCONSCIOUS-MIND.md) · [Memory Systems](./MEMORY-SYSTEMS.md)
+
 ---
 
 ## Overview

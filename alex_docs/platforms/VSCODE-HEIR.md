@@ -9,6 +9,8 @@
 | **Engine**   | VS Code ^1.109.0              |
 | **Location** | `platforms/vscode-extension/` |
 
+**Related**: [Chat Settings Guide](../guides/VSCODE-CHAT-SETTINGS-GUIDE.md) · [Brain Integration](../architecture/VSCODE-BRAIN-INTEGRATION.md) · [Copilot API Analysis](./VSCODE-COPILOT-API-ANALYSIS.md)
+
 ---
 
 ## Executive Summary

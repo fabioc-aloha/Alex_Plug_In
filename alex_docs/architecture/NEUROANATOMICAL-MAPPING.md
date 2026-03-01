@@ -2,6 +2,8 @@
 
 > A complete mapping of Alex's cognitive architecture to human brain anatomy
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Memory Systems](./MEMORY-SYSTEMS.md) · [Brain Anatomy Visual](../../docs/alex-brain-anatomy.html)
+
 ---
 
 ## Overview

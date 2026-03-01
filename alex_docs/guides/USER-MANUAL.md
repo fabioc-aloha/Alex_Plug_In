@@ -2,6 +2,8 @@
 
 > Complete guide to using Alex Cognitive Architecture
 
+**Related**: [Quick Reference](./QUICK-REFERENCE.md) · [Use Cases](./USE-CASES.md) · [Working with Alex](../WORKING-WITH-ALEX.md)
+
 ---
 
 ## Table of Contents

@@ -5,6 +5,8 @@
 > **Date**: 2026-02-14
 > **Version**: v5.7.0
 
+**Related**: [Copilot Brain](./COPILOT-BRAIN.md) · [VS Code Brain Integration](./VSCODE-BRAIN-INTEGRATION.md) · [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md)
+
 ---
 
 ## Executive Summary

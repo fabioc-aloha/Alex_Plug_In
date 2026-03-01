@@ -4,6 +4,8 @@
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Skills Catalog](../skills/SKILLS-CATALOG.md) · [Agent Catalog](./AGENT-CATALOG.md)
+
 The trifecta pattern encodes architecturally significant capabilities across all three memory systems. **Not every file needs a trifecta.** This catalog tracks which capabilities have earned one — and why.
 
 ---
@@ -166,33 +168,33 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Heir Curation
 
-| Component   | File                                                    | Why It Exists                                                                                         |
-| ----------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/heir-curation/SKILL.md`                 | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns                        |
-| Instruction | `.github/instructions/heir-skill-promotion.instructions.md` | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow                      |
-| Prompt      | `.github/prompts/promotetomaster.prompt.md`             | `/promotetomaster` — user invokes skill promotion from heir to Master Alex                            |
+| Component   | File                                                        | Why It Exists                                                                   |
+| ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/heir-curation/SKILL.md`                     | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns  |
+| Instruction | `.github/instructions/heir-skill-promotion.instructions.md` | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow |
+| Prompt      | `.github/prompts/promotetomaster.prompt.md`                 | `/promotetomaster` — user invokes skill promotion from heir to Master Alex      |
 
 **Muscle**: `sync-architecture.js` — automated master→heir synchronization with PII protection
 **Inheritance**: `inheritable` — all heirs can promote skills back to Master
 
 ### Markdown to Word Conversion
 
-| Component   | File                                                | Why It Exists                                                                                    |
-| ----------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/md-to-word/SKILL.md`                | Domain knowledge: markdown→docx conversion patterns, diagram embedding, style preservation       |
-| Instruction | `.github/instructions/md-to-word.instructions.md`   | Auto-loaded procedure: pandoc workflow, python-docx integration, mermaid→image conversion        |
-| Prompt      | `.github/prompts/word.prompt.md`                    | `/word` — user invokes markdown to Word document conversion with diagrams                        |
+| Component   | File                                              | Why It Exists                                                                              |
+| ----------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/md-to-word/SKILL.md`              | Domain knowledge: markdown→docx conversion patterns, diagram embedding, style preservation |
+| Instruction | `.github/instructions/md-to-word.instructions.md` | Auto-loaded procedure: pandoc workflow, python-docx integration, mermaid→image conversion  |
+| Prompt      | `.github/prompts/word.prompt.md`                  | `/word` — user invokes markdown to Word document conversion with diagrams                  |
 
 **Muscle**: `md-to-word.py` — Python script for conversion with diagram support
 **Inheritance**: `inheritable` — useful for academic and professional documentation across all heirs
 
 ### Gamma Presentation Generation
 
-| Component   | File                                                      | Why It Exists                                                                                  |
-| ----------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/gamma-presentation/SKILL.md`              | Domain knowledge: Gamma.app API patterns, presentation structure, card types                   |
-| Instruction | `.github/instructions/gamma-presentation.instructions.md` | Auto-loaded procedure: API authentication, content generation, export workflows                |
-| Prompt      | `.github/prompts/gamma.prompt.md`                         | `/gamma` — user invokes Gamma presentation generation from markdown                            |
+| Component   | File                                                      | Why It Exists                                                                   |
+| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/gamma-presentation/SKILL.md`              | Domain knowledge: Gamma.app API patterns, presentation structure, card types    |
+| Instruction | `.github/instructions/gamma-presentation.instructions.md` | Auto-loaded procedure: API authentication, content generation, export workflows |
+| Prompt      | `.github/prompts/gamma.prompt.md`                         | `/gamma` — user invokes Gamma presentation generation from markdown             |
 
 **Muscle**: `gamma-generator.js` — Node.js CLI for Gamma API integration
 **Inheritance**: `inheritable` — presentation generation valuable across academic and business heirs
@@ -200,11 +202,11 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Secrets Management
 
-| Component   | File                                                      | Why It Exists                                                                                           |
-| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/secrets-management/SKILL.md`              | Domain knowledge: VS Code SecretStorage API, platform encryption patterns, token lifecycle management   |
+| Component   | File                                                      | Why It Exists                                                                                              |
+| ----------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/secrets-management/SKILL.md`              | Domain knowledge: VS Code SecretStorage API, platform encryption patterns, token lifecycle management      |
 | Instruction | `.github/instructions/secrets-management.instructions.md` | Auto-loaded procedure: SecretStorage integration, .env detection, migration strategies, security checklist |
-| Prompt      | `.github/prompts/secrets.prompt.md`                       | `/secrets` — user invokes token management and .env secret detection workflow                           |
+| Prompt      | `.github/prompts/secrets.prompt.md`                       | `/secrets` — user invokes token management and .env secret detection workflow                              |
 
 **Service**: `secretsManager.ts` — Centralized credential storage (750+ lines) with OS-encrypted SecretStorage API
 **Commands**: `alex.manageSecrets` (token UI), `alex.detectEnvSecrets` (.env scanning)
@@ -392,15 +394,15 @@ See `trifecta-audit.instructions.md` § "Heir Trifecta Implementation" for the f
 
 ## Audit Changelog
 
-| Date       | Action                                                    | Result                                                                                                                                                                                                           |
-| ---------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-02-13 | Initial trifecta refactoring                              | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                             |
-| 2026-02-13 | Full audit with Why? protocol                             | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                 |
-| 2026-02-13 | Created `trifecta-audit.instructions.md`                  | Formal audit protocol with anti-patterns                                                                                                                                                                         |
-| 2026-02-13 | Heir trifecta generalization                              | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                   |
-| 2026-02-13 | Heir project improvement instruction                      | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                               |
-| 2026-02-13 | Scripts are muscles doctrine                              | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                       |
-| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas |
+| Date       | Action                                                                      | Result                                                                                                                                                                                                                                                                                                     |
+| ---------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-02-13 | Initial trifecta refactoring                                                | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                                                                                                                       |
+| 2026-02-13 | Full audit with Why? protocol                                               | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                                                                                                           |
+| 2026-02-13 | Created `trifecta-audit.instructions.md`                                    | Formal audit protocol with anti-patterns                                                                                                                                                                                                                                                                   |
+| 2026-02-13 | Heir trifecta generalization                                                | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                                                                                                             |
+| 2026-02-13 | Heir project improvement instruction                                        | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                                                                                                                         |
+| 2026-02-13 | Scripts are muscles doctrine                                                | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                                                                                                                 |
+| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas                   | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas                                                                                           |
 | 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas | Added 3 complete trifectas: **heir-curation** (skill promotion workflow), **md-to-word** (document conversion with diagrams), **gamma-presentation** (presentation generation), **secrets-management** (VS Code SecretStorage API, .env detection, platform encryption). Total: 11 → 14 complete trifectas |
 
 ---

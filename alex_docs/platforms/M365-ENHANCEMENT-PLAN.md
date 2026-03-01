@@ -2,12 +2,12 @@
 
 > **Phased plan to evolve Alex's M365 presence from declarative agent to cross-platform cognitive partner**
 
-|                |                                                                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Author**     | Fabio Correa                                                                                                                                     |
-| **Date**       | February 7, 2026                                                                                                                                 |
-| **Depends On** | [M365-COPILOT-ECOSYSTEM-ANALYSIS.md](M365-COPILOT-ECOSYSTEM-ANALYSIS.md), [M365-INTEGRATION-OPPORTUNITIES.md](M365-INTEGRATION-OPPORTUNITIES.md) |
-| **Roadmap**    | [ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md)                                                                                                   |
+|                |                                                                                                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Author**     | Fabio Correa                                                                                                                                                                   |
+| **Date**       | February 7, 2026                                                                                                                                                               |
+| **Depends On** | [M365-HEIR.md](M365-HEIR.md), [M365-COPILOT-ECOSYSTEM-ANALYSIS.md](M365-COPILOT-ECOSYSTEM-ANALYSIS.md), [M365-INTEGRATION-OPPORTUNITIES.md](M365-INTEGRATION-OPPORTUNITIES.md) |
+| **Roadmap**    | [ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md)                                                                                                                                 |
 
 ---
 

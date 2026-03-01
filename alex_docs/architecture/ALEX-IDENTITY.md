@@ -2,6 +2,8 @@
 
 > **Who Alex is** — a human-readable guide to Alex's personality and character.
 
+**Related**: [Alex Finch Character](../alex/Alex-Finch.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md)
+
 ---
 
 ## The Core Character

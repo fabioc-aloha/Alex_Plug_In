@@ -269,9 +269,9 @@ if (13 -in $runSections) {
     $secretPatterns = @('api[_-]?key\s*[:=]\s*["\x27][\w-]{20,}', 'password\s*[:=]\s*["\x27][^"\x27]{8,}')
     $secretsFound = $false
     foreach ($pattern in $secretPatterns) {
-        $matches = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $pattern -ErrorAction SilentlyContinue |
+        $results = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $pattern -ErrorAction SilentlyContinue |
         Where-Object { $_.Line -notmatch '^\s*(//|#|\*)' -and $_.Line -notmatch 'process\.env' }
-        if ($matches) { $secretsFound = $true }
+        if ($results) { $secretsFound = $true }
     }
     
     if ($secretsFound) { Write-Host "  ⚠️ Potential secrets in code" -ForegroundColor Yellow; Add-Warning "Potential secrets" }
@@ -338,8 +338,8 @@ if (17 -in $runSections) {
     $srcPath = "$extPath/src"
     $found = @()
     foreach ($entry in $deprecated.GetEnumerator()) {
-        $matches = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $entry.Value -ErrorAction SilentlyContinue
-        if ($matches) { $found += $entry.Key }
+        $results = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern $entry.Value -ErrorAction SilentlyContinue
+        if ($results) { $found += $entry.Key }
     }
     if ($found) {
         Write-Host "  ⚠️ Deprecated APIs: $($found -join ', ')" -ForegroundColor Yellow
@@ -376,7 +376,7 @@ if (20 -in $runSections) {
     Write-Section 20 "Localization"
     $hasL10n = (Test-Path "$extPath/l10n") -or (Test-Path "$extPath/package.nls.json")
     if ($hasL10n) { Write-Host "  ✅ l10n configured" -ForegroundColor Green }
-    else { Write-Host "  ℹ️ No l10n (optional)" }
+    else { Write-Host "  [Info] No l10n (optional)" }
 }
 
 # === SECTION 21: Asset Integrity ===

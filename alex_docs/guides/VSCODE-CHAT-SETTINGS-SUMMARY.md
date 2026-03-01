@@ -114,7 +114,7 @@ Based on Alex workflows:
 - [VS Code Copilot Docs](https://code.visualstudio.com/docs/copilot)
 - [Agent Skills Standard](https://agentskills.io/)
 - [Alex VSCODE-HEIR.md](../platforms/VSCODE-HEIR.md)
-- [Alex 1.109 Adoption Plan](../platforms/VSCODE-1.109-ADOPTION-PLAN.md)
+- [Alex 1.109 Adoption Plan](../archive/VSCODE-1.109-ADOPTION-PLAN.md) [archived]
 
 ---
 

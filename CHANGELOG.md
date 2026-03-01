@@ -21,8 +21,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Proactive Code Review Triggers** — Built into `taskDetector.ts`: on save, debounces 60s and checks `git diff --stat HEAD`. If >200 lines changed, surfaces a code review nudge with 30-minute cooldown
 - **Layer 10b in promptEngine.ts** — `buildExpertiseLayer()` injects user expertise calibration for every @alex interaction
 - **10 new VS Code commands** registered and declared in `package.json`
+- **Image Upscaling** (`commands/contextMenu.ts`, `services/replicateService.ts`) — 4 Replicate-powered upscaling models (`real-esrgan`, `swinir`, `codeformer`, `clarity-upscaler`). Right-click any image → **Upscale Image with AI**. Saves to `assets/upscaled/`. Command: `alex.upscaleImage`
+- **MCP Cognitive Tools Package** (`packages/mcp-cognitive-tools/`) — Standalone MCP server publishing 5 cognitive tools (`alex_synapse_health`, `alex_memory_search`, `alex_architecture_status`, `alex_knowledge_search`, `alex_knowledge_save`) usable by any MCP-compatible host. Entry: `npx @alex/mcp-cognitive-tools`
+- **Learning Journeys** (`.github/prompts/journey.prompt.md`) — 8 curated role-based learning paths (frontend-developer, backend-developer, fullstack-developer, devops-engineer, technical-writer, researcher, ai-engineer, alex-architect) with progress tracking at `.alex/journeys/*.json`
+- **Presentation Automation** (`.github/prompts/marp.prompt.md`, `.github/prompts/presentation.prompt.md`) — Unified `/presentation` router dispatches to Gamma (marketing decks), Marp (tech talks), or PptxGenJS (data reports). Alex-branded Marp CSS theme included
+- **3 new slash commands** (`/journey`, `/marp`, `/presentation`) registered in `package.json` chatParticipants
 
 ### Changed
+
+- **`3_generate@8` group collision fixed** — `generateDiagram` moved from `3_generate@8` to `3_generate@11` in explorer context menu to resolve conflict with `generateAIImage`
+- **Editor context menu expanded** — Added `editImageWithPrompt` (4_create@3) and `upscaleImage` (4_create@4) to `alex.contextMenu` editor right-click group
 
 - **`PromptContext` interface** — Added `expertiseHint?: string` field (v6.0.0 expertise calibration)
 - **participant.ts** — `@alex` handler now appends to episodic draft and records domain interactions after every response (fire-and-forget)

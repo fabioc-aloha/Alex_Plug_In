@@ -2,6 +2,8 @@
 
 > Commands, tools, and shortcuts at a glance
 
+**Related**: [User Manual](./USER-MANUAL.md) · [Use Cases](./USE-CASES.md) · [Chat Settings](./VSCODE-CHAT-SETTINGS-GUIDE.md)
+
 ---
 
 ## Use Cases at a Glance

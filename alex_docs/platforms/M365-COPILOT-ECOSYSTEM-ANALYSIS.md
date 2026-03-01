@@ -2,14 +2,14 @@
 
 > **Complete inventory of the M365 Copilot declarative agent platform, mapped to Alex's current and potential capabilities**
 
-|                    |                                                                                                                              |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Author**         | Fabio Correa                                                                                                                 |
-| **Date**           | February 7, 2026                                                                                                             |
-| **Agent**          | Alex M365 Copilot Declarative Agent v5.0.1                                                                                   |
-| **Schema**         | Declarative Agent v1.6 (latest)                                                                                              |
-| **Teams Manifest** | v1.19                                                                                                                        |
-| **Related**        | [M365-INTEGRATION-OPPORTUNITIES.md](M365-INTEGRATION-OPPORTUNITIES.md), [M365-ENHANCEMENT-PLAN.md](M365-ENHANCEMENT-PLAN.md) |
+|                    |                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Author**         | Fabio Correa                                                                                                                                               |
+| **Date**           | February 7, 2026                                                                                                                                           |
+| **Agent**          | Alex M365 Copilot Declarative Agent v5.0.1                                                                                                                 |
+| **Schema**         | Declarative Agent v1.6 (latest)                                                                                                                            |
+| **Teams Manifest** | v1.19                                                                                                                                                      |
+| **Related**        | [M365-HEIR.md](M365-HEIR.md), [M365-INTEGRATION-OPPORTUNITIES.md](M365-INTEGRATION-OPPORTUNITIES.md), [M365-ENHANCEMENT-PLAN.md](M365-ENHANCEMENT-PLAN.md) |
 
 ---
 

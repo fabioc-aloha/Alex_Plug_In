@@ -2,6 +2,8 @@
 
 > Master the art of AI partnership through dialog engineering and collaborative development
 
+**Related**: [User Manual](./guides/USER-MANUAL.md) · [Use Cases](./guides/USE-CASES.md) · [Alex Identity](./architecture/ALEX-IDENTITY.md)
+
 ---
 
 ## Introduction

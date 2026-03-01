@@ -2,6 +2,8 @@
 
 > Your knowledge, everywhere you code — via GitHub
 
+**Main Doc**: [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md) · **Related**: [ADR-009](../decisions/ADR-009-global-knowledge-sync-direction.md)
+
 ---
 
 ## Overview

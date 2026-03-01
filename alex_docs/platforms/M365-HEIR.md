@@ -9,6 +9,8 @@
 | **Target**   | Microsoft 365 Copilot      |
 | **Location** | `platforms/m365-copilot/`  |
 
+**Related**: [Ecosystem Analysis](./M365-COPILOT-ECOSYSTEM-ANALYSIS.md) · [Enhancement Plan](./M365-ENHANCEMENT-PLAN.md) · [Integration Opportunities](./M365-INTEGRATION-OPPORTUNITIES.md)
+
 ---
 
 ## Executive Summary

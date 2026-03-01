@@ -4,6 +4,8 @@
 **VS Code Version**: 1.109+
 **GitHub Copilot Chat**: 0.37.6+
 
+**Quick Reference**: [Settings Summary](./VSCODE-CHAT-SETTINGS-SUMMARY.md) · **Related**: [VS Code Heir](../platforms/VSCODE-HEIR.md)
+
 ---
 
 ## Overview
@@ -384,8 +386,8 @@ Some settings in your config may be:
 - [VS Code Chat Tools Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-tools)
 - [MCP Servers Guide](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)
 - [Agent Skills Standard](https://agentskills.io/)
-- [Alex VSCODE-HEIR.md](./VSCODE-HEIR.md) — Platform-specific documentation
-- [Alex VSCODE-1.109-ADOPTION-PLAN.md](../platforms/VSCODE-1.109-ADOPTION-PLAN.md) — Feature adoption roadmap
+- [Alex VSCODE-HEIR.md](../platforms/VSCODE-HEIR.md) — Platform-specific documentation
+- [Alex VSCODE-1.109-ADOPTION-PLAN.md](../archive/VSCODE-1.109-ADOPTION-PLAN.md) — Feature adoption roadmap [archived]
 
 ---
 
