@@ -1,43 +1,31 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
+    "github/copilot-instructions.md",
     "CHANGELOG.md",
-    "README.md",
-    "ROADMAP-UNIFIED.md",
-    "\"TESTE/Fabio Correa.png\"",
-    "TESTE/Fabio-21.jpg",
-    "TESTE/Fabio-30.jpg",
-    "TESTE/Fabio-42.jpg",
-    "TESTE/Fabio-55.jpg",
-    "TESTE/Fabio-62.jpg"
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.0.0.vsix",
-      "todoCount": 21,
-      "scannedAt": 1772335933350
-    },
-    {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772335933350
+      "scannedAt": 1772337355819
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772335933350
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772335933350
+      "scannedAt": 1772337355819
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1772335933350
+      "scannedAt": 1772337355819
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1772337355819
     }
   ],
-  "lastUpdated": 1772335933350
+  "lastUpdated": 1772337355819
 }

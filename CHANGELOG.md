@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [6.0.0] - 2026-03-01
+## [6.0.1] - 2026-02-28
+
+### Fixed
+- Banner: increased ALEX watermark visibility (opacity 0.03→0.15)
+
+---
+
+## [6.0.0] - 2026-02-28
 
 > **The Partnership Release** — Six deep-integration features that make Alex a cognitive partner, not just a chat interface. Alex now remembers your sessions, learns from outcomes, detects your work context autonomously, guides multi-step workflows, adapts to your expertise level, and proactively triggers code reviews.
 
