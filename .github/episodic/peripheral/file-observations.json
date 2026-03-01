@@ -2,30 +2,32 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/package.json"
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/skills/SKILLS-CATALOG.md",
+    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
+    "scripts/gen-skill-catalog.cjs"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772337355819
+      "scannedAt": 1772337994417
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772337355819
+      "scannedAt": 1772337994417
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1772337355819
+      "scannedAt": 1772337994417
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772337355819
+      "scannedAt": 1772337994417
     }
   ],
-  "lastUpdated": 1772337355819
+  "lastUpdated": 1772337994417
 }
