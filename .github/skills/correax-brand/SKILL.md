@@ -1,7 +1,20 @@
 ---
 name: correax-brand
 description: CorreaX visual design system — color tokens, typography, banner patterns, and component architecture
-triggerPhrases: ["design system", "brand colors", "CorreaX palette", "typography", "banner pattern", "design tokens", "color system", "accent colors", "CSS variables", "brand identity", "visual identity"]
+triggerPhrases:
+  [
+    "design system",
+    "brand colors",
+    "CorreaX palette",
+    "typography",
+    "banner pattern",
+    "design tokens",
+    "color system",
+    "accent colors",
+    "CSS variables",
+    "brand identity",
+    "visual identity",
+  ]
 heirs: [vscode, m365, web]
 ---
 
@@ -18,26 +31,26 @@ The CorreaX design language defines the visual identity for all CorreaX products
 
 ### Core Palette (from memory)
 
-| Token | Hex | Role |
-|-------|-----|------|
-| `--bg` | `#0f172a` | Deep navy page background |
-| `--bg-card` | `#1e293b` | Card/panel backgrounds |
-| `--accent-indigo` | `#6366f1` | **Primary** — CTAs, buttons, default accent |
-| `--accent-teal` | `#0d9488` | **Secondary** — study guides, AIRS, learning |
-| `--accent-rose` | `#f43f5e` | **Tertiary** — warnings, destructive, energy |
-| `--accent-coral` | `#f97316` | **Quaternary** — highlights, warm contexts |
-| `--text` | `#f1f5f9` | Primary text (near white) |
-| `--text-muted` | `#94a3b8` | Secondary text (slate) |
-| `--border` | `#334155` | Default borders |
+| Token             | Hex       | Role                                         |
+| ----------------- | --------- | -------------------------------------------- |
+| `--bg`            | `#0f172a` | Deep navy page background                    |
+| `--bg-card`       | `#1e293b` | Card/panel backgrounds                       |
+| `--accent-indigo` | `#6366f1` | **Primary** — CTAs, buttons, default accent  |
+| `--accent-teal`   | `#0d9488` | **Secondary** — study guides, AIRS, learning |
+| `--accent-rose`   | `#f43f5e` | **Tertiary** — warnings, destructive, energy |
+| `--accent-coral`  | `#f97316` | **Quaternary** — highlights, warm contexts   |
+| `--text`          | `#f1f5f9` | Primary text (near white)                    |
+| `--text-muted`    | `#94a3b8` | Secondary text (slate)                       |
+| `--border`        | `#334155` | Default borders                              |
 
 ### Light Variants (for text on dark backgrounds)
 
-| Token | Hex | Contrast on `--bg-card` |
-|-------|-----|------------------------|
-| `--accent-indigo-light` | `#818cf8` | 4.5:1 ✅ AA |
-| `--accent-teal-light` | `#2dd4bf` | 7.0:1 ✅ AAA |
-| `--accent-rose-light` | `#fb7185` | — |
-| `--accent-coral-light` | `#fb923c` | — |
+| Token                   | Hex       | Contrast on `--bg-card` |
+| ----------------------- | --------- | ----------------------- |
+| `--accent-indigo-light` | `#818cf8` | 4.5:1 ✅ AA             |
+| `--accent-teal-light`   | `#2dd4bf` | 7.0:1 ✅ AAA            |
+| `--accent-rose-light`   | `#fb7185` | —                       |
+| `--accent-coral-light`  | `#fb923c` | —                       |
 
 ### Key Decisions
 
@@ -49,23 +62,23 @@ The CorreaX design language defines the visual identity for all CorreaX products
 
 ### VS Code Extension Token Mapping
 
-| CorreaX | VS Code Fallback |
-|---------|-----------------|
-| `--bg` | `--vscode-sideBar-background` |
-| `--bg-card` | `--vscode-editor-widget-background` |
-| `--text` | `--vscode-foreground` |
-| `--text-muted` | `--vscode-descriptionForeground` |
-| `--border` | `--vscode-panel-border` |
-| `--accent-indigo` | `--vscode-button-background` |
+| CorreaX           | VS Code Fallback                    |
+| ----------------- | ----------------------------------- |
+| `--bg`            | `--vscode-sideBar-background`       |
+| `--bg-card`       | `--vscode-editor-widget-background` |
+| `--text`          | `--vscode-foreground`               |
+| `--text-muted`    | `--vscode-descriptionForeground`    |
+| `--border`        | `--vscode-panel-border`             |
+| `--accent-indigo` | `--vscode-button-background`        |
 
 ### Brand Family
 
-| Product | Color Context |
-|---------|---------------|
+| Product              | Color Context                          |
+| -------------------- | -------------------------------------- |
 | **CorreaX** (parent) | Sky Blue `#87CEEB` ← brand.correax.com |
-| **LearnAlex** | Indigo `#6366f1` ← primary |
-| **AIRS** | Azure Blue `#0078D4` ← enterprise |
-| **Alex Extension** | Persona-driven (indigo default) |
+| **LearnAlex**        | Indigo `#6366f1` ← primary             |
+| **AIRS**             | Azure Blue `#0078D4` ← enterprise      |
+| **Alex Extension**   | Persona-driven (indigo default)        |
 
 ### Persona → CorreaX Accent Alignment (27 personas, fully aligned as of v5.9.13)
 
@@ -73,24 +86,24 @@ All 27 Alex personas use CorreaX tokens. Three intentional exceptions preserve p
 
 **Semantic groupings:**
 
-| Token | Hex | Role | Personas |
-|-------|-----|------|----------|
-| rose | `#f43f5e` | Risk · Security · Urgency | DevOps Engineer, Security Engineer, SRE / On-Call, Marketer |
-| rose-light | `#fb7185` | Creative · Narrative | Content Creator, Copywriter |
-| teal | `#0d9488` | Analysis · Research · Quality | Researcher, Business Analyst, QA Engineer |
-| teal-light | `#2dd4bf` | Process · Coordination · Growth | Project Manager, Job Seeker, OSS Contributor, BI Analyst |
-| indigo | `#6366f1` | Strategy · Leadership · Architecture | Enterprise Architect, Consultant, Product Manager, Game Developer |
-| indigo-light | `#818cf8` | Knowledge · Education · Cognition | Fiction Writer, Student, Cognitive Scientist |
-| coral | `#f97316` | Communication · Persuasion · Impact | Technical Writer, Speaker / Presenter, Grant Writer |
-| coral-light | `#fb923c` | Building · Hands-on Craft | Power User / Builder |
+| Token        | Hex       | Role                                 | Personas                                                          |
+| ------------ | --------- | ------------------------------------ | ----------------------------------------------------------------- |
+| rose         | `#f43f5e` | Risk · Security · Urgency            | DevOps Engineer, Security Engineer, SRE / On-Call, Marketer       |
+| rose-light   | `#fb7185` | Creative · Narrative                 | Content Creator, Copywriter                                       |
+| teal         | `#0d9488` | Analysis · Research · Quality        | Researcher, Business Analyst, QA Engineer                         |
+| teal-light   | `#2dd4bf` | Process · Coordination · Growth      | Project Manager, Job Seeker, OSS Contributor, BI Analyst          |
+| indigo       | `#6366f1` | Strategy · Leadership · Architecture | Enterprise Architect, Consultant, Product Manager, Game Developer |
+| indigo-light | `#818cf8` | Knowledge · Education · Cognition    | Fiction Writer, Student, Cognitive Scientist                      |
+| coral        | `#f97316` | Communication · Persuasion · Impact  | Technical Writer, Speaker / Presenter, Grant Writer               |
+| coral-light  | `#fb923c` | Building · Hands-on Craft            | Power User / Builder                                              |
 
 **Intentional non-CorreaX exceptions (by design):**
 
-| Persona | Hex | Reason |
-|---------|-----|--------|
-| Developer | `#0078D4` | Microsoft blue — platform identity |
+| Persona                 | Hex       | Reason                                |
+| ----------------------- | --------- | ------------------------------------- |
+| Developer               | `#0078D4` | Microsoft blue — platform identity    |
 | Academic / Grad Student | `#8B5CF6` | Purple — academic/scholarly tradition |
-| Data Engineer | `#06B6D4` | Cyan — data pipeline aesthetic |
+| Data Engineer           | `#06B6D4` | Cyan — data pipeline aesthetic        |
 
 **Fallback** (no persona detected): `#6366f1` (CorreaX indigo primary — never `var(--vscode-charts-blue)`)
 

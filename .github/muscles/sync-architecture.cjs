@@ -66,6 +66,37 @@ const EXCLUDED_CONFIG_FILES = [
     'cognitive-config.json',       // Master-specific cognitive state
 ];
 
+// Skill sub-paths that contain PII and must NEVER be copied to heirs.
+// After a skill is copied, these files are replaced with a clean empty template.
+// Format: { [skillName]: Array<{ subPath: string, template: string }> }
+const SKILL_PII_SUBPATHS = {
+    'visual-memory': [
+        {
+            // visual-memory.json may contain base64-encoded reference photos (PII).
+            // Heirs receive an empty template — they populate their own.
+            subPath: 'visual-memory/visual-memory.json',
+            template: JSON.stringify({
+                schema: 'visual-memory-v1',
+                _comment: 'Populate this file with your project\'s reference subjects. Photos should be resized to 512px @ 85% JPEG quality before base64-encoding. See SKILL.md for preparation instructions.',
+                generated: '',
+                subjects: {
+                    _template_subject: {
+                        _comment: 'Rename this key to your subject\'s name (e.g., \'alex\', \'fabio\'). Remove _template_ prefix.',
+                        description: 'Brief visual description of the subject',
+                        ageInfo: { referenceAge: 0, birthYear: 0, photoDate: 'YYYY-MM' },
+                        images: [
+                            { filename: 'subject-1.jpg', dataUri: 'data:image/jpeg;base64,<encode your 512px photo here>', notes: 'Front-facing, natural lighting' },
+                            { filename: 'subject-2.jpg', dataUri: 'data:image/jpeg;base64,<encode your 512px photo here>', notes: '3/4 profile, natural lighting' }
+                        ]
+                    }
+                },
+                voices: {},
+                videoStyles: {}
+            }, null, 2) + '\n'
+        }
+    ]
+};
+
 // Get excluded muscles from inheritance.json (master-only scripts)
 function getExcludedMuscles() {
     const inheritancePath = path.join(MASTER_GITHUB, 'muscles', 'inheritance.json');
@@ -174,14 +205,26 @@ function syncSkills() {
                 break;
             case 'inheritable':
             case 'universal':
-            default:
+            default: {
                 // Copy to heir
                 if (fs.existsSync(heirSkillPath)) {
                     fs.rmSync(heirSkillPath, { recursive: true });
                 }
                 copyDirRecursive(masterSkillPath, heirSkillPath);
+
+                // Replace PII sub-paths with clean templates
+                const piiEntries = SKILL_PII_SUBPATHS[skillName] || [];
+                for (const { subPath, template } of piiEntries) {
+                    const heirSubPath = path.join(heirSkillPath, ...subPath.split('/'));
+                    if (fs.existsSync(heirSubPath)) {
+                        fs.writeFileSync(heirSubPath, template, 'utf8');
+                        console.log(`   🔒 PII scrubbed: ${skillName}/${subPath}`);
+                    }
+                }
+
                 stats.copied.push(skillName);
                 break;
+            }
         }
     }
     

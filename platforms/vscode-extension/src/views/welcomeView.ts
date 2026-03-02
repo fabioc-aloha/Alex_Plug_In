@@ -32,18 +32,19 @@ import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { escapeHtml, getNonce } from "../shared/sanitize";
 import { openChatPanel } from "../shared/utils";
 import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from "../shared/cognitiveTier";
-import {
-  detectPremiumFeatures,
-  getPremiumAssets,
-  getAssetUri,
-  PremiumAssetSelection,
-} from "../services/premiumAssets";
 import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar, ChatAvatarContext } from "../shared/chatAvatarBridge";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
 import { getSkillDisplayName } from "../shared/skillConstants";
 import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 // Note: webviewStyles.ts available for future CSS extraction (DRY)
+
+/**
+ * Resolve a webview-safe URI for an asset in the extension's assets/ folder.
+ */
+function getAssetUri(webview: vscode.Webview, extensionUri: vscode.Uri, assetPath: string): vscode.Uri {
+  return webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'assets', ...assetPath.split('/')));
+}
 
 /**
  * Nudge types for contextual reminders
@@ -388,10 +389,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
       }
 
-      const premiumFlags = await detectPremiumFeatures(gkRepoPath);
-      const bannerNoun = personaResult?.persona?.bannerNoun ?? "CODE";
-      const premiumAssets = getPremiumAssets(premiumFlags, true, bannerNoun);
-
       const extension = vscode.extensions.getExtension(
         "fabioc-aloha.alex-cognitive-architecture",
       );
@@ -401,7 +398,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         goalsSummary,
         lastDreamDate,
         session,
-        premiumAssets,
         workspaceName,
       );
 
@@ -414,7 +410,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         nudges,
         hasGlobalKnowledge,
         personaResult,
-        premiumAssets,
         activeContext,
         userProfile,
         workspaceName,
@@ -480,7 +475,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     },
     lastDreamDate: Date | null,
     session: Session | null,
-    premiumAssets?: PremiumAssetSelection,
     workspaceName?: string,
   ): Nudge[] {
     const nudges: Nudge[] = [];
@@ -647,7 +641,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     nudges: Nudge[],
     hasGlobalKnowledge: boolean,
     personaResult: PersonaDetectionResult | null,
-    premiumAssets: PremiumAssetSelection,
     activeContext: ActiveContext | null,
     userProfile: { birthday?: string; name?: string } | null,
     workspaceName?: string,
@@ -662,11 +655,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Security: Generate nonce for CSP
     const nonce = getNonce();
 
-    // Logo URI for webview - use premium asset if available
+    // Logo URI for webview
     const logoUri = getAssetUri(
       webview,
       this._extensionUri,
-      premiumAssets.logoPath,
+      'icon.png',
     );
 
     // Persona display
@@ -1022,17 +1015,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             color: var(--persona-accent);
             font-weight: 600;
         }
-        .premium-badge {
-            background: var(--vscode-badge-background, #4d4d4d);
-            color: var(--vscode-badge-foreground, #ccc);
-            font-size: var(--font-xs);
-            font-weight: 500;
-            padding: 1px 5px;
-            border-radius: 6px;
-            letter-spacing: 0.2px;
-            margin-left: 4px;
-            opacity: 0.6;
-        }
         .refresh-btn {
             margin-left: auto;
             background: none;
@@ -1332,18 +1314,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         .action-text {
             flex: 1;
-        }
-        .action-btn .premium-badge {
-            font-size: var(--font-xs);
-            margin-left: auto;
-            opacity: 0.5;
-        }
-        .action-btn.premium {
-            border-left: 2px solid var(--vscode-charts-yellow);
-            opacity: 0.95;
-        }
-        .action-btn.premium:hover .premium-badge {
-            opacity: 0.8;
         }
         .tier-lock {
             font-size: 9px;
