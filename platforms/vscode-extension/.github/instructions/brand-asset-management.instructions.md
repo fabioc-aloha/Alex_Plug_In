@@ -67,14 +67,9 @@ All logos use 30° rotation for dynamic launch angle.
 | `platforms/m365-copilot/appPackage/color.png` | 192x192 | 10.61 KB | Teams color icon |
 | `platforms/m365-copilot/appPackage/outline.png` | 32x32 | 1.20 KB | Teams outline icon |
 
-## GK Premium Branding (v5.0)
+## GK Branding
 
-**Metaphor Evolution**: Rocket strapped to back → Docked at space station
-
-| Tier | Symbol | Meaning |
-|------|--------|---------|
-| **Standard** | A Negative Space Rocket | Individual project acceleration |
-| **Premium (GK)** | Space Station + Docked Rocket | Cross-project knowledge hub |
+**Metaphor**: A Negative Space Rocket — individual project acceleration, universally available to all users.
 
 ### GK Assets
 

@@ -1417,7 +1417,7 @@ Files intentionally kept with fs-extra (per ADR-008 — global paths require Nod
 
 ## [5.0.0] - 2026-02-06
 
-> **Global Knowledge** — Cross-project knowledge sharing, persona-aware UX, premium branding
+> **Global Knowledge** — Cross-project knowledge sharing and persona-aware UX
 
 ### Added
 
@@ -1431,11 +1431,6 @@ Files intentionally kept with fs-extra (per ADR-008 — global paths require Nod
   - Detects user persona from profile and workspace (Developer, Academic, Researcher, etc.)
   - Adapts UI accent colors and recommendations based on persona
   - 15 marketing personas with confidence scoring
-
-- **⭐ Premium Asset Switcher**
-  - Dynamic logo/banner selection based on GK repository status
-  - Premium badge styling (discreet grayscale aesthetic)
-  - 5 premium logo concepts for Global Knowledge branding
 
 - **🔗 Global Knowledge Sync Skill**
   - New inheritable skill for GK repository integration
@@ -1454,8 +1449,7 @@ Files intentionally kept with fs-extra (per ADR-008 — global paths require Nod
   - Removed all keyboard shortcut hints from UI buttons
   - Cleaner, less cluttered interface throughout
 
-- **📊 Premium Badge Styling**
-  - More discreet grayscale styling for premium features
+- **🎨 Persona Accent Colors**
   - Nuanced persona accent colors (badge, recommended button, progress bars)
   - Replaced purple with teal across UI
 

@@ -2,7 +2,7 @@
 
 ![Your Trusted AI Partner for Any Job](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.png)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![Responsible AI](https://img.shields.io/badge/Responsible%20AI-Microsoft%20RAI-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md) [![Secure Future Initiative](https://img.shields.io/badge/Security-SFI%20Compliant-107c41)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) [![Privacy First](https://img.shields.io/badge/Privacy-Local%20First-6366f1)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![Responsible AI](https://img.shields.io/badge/Responsible%20AI-Microsoft%20RAI-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md) [![Secure Future Initiative](https://img.shields.io/badge/Security-SFI%20Compliant-107c41)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) [![Privacy First](https://img.shields.io/badge/Privacy-Local%20First-6366f1)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md) [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers)
 
 > **North Star**: Create the most advanced and trusted AI partner for any job
 
@@ -994,12 +994,13 @@ After initialization, Alex manages this structure:
 
 ### Memory Types
 
-| Type                  | Location           | Purpose                               |
-| --------------------- | ------------------ | ------------------------------------- |
-| **Working Memory**    | Chat session       | 7-rule capacity for active processing |
-| **Procedural Memory** | `.instructions.md` | Repeatable processes and protocols    |
-| **Episodic Memory**   | `.prompt.md`       | Complex workflows and sessions        |
-| **Skills/Expertise**  | `.github/skills/`  | Portable domain expertise             |
+| Type                  | Location                  | Purpose                                             |
+| --------------------- | ------------------------- | --------------------------------------------------- |
+| **Working Memory**    | Chat session              | 7-rule capacity for active processing               |
+| **Procedural Memory** | `.instructions.md`        | Repeatable processes and protocols                  |
+| **Episodic Memory**   | `.prompt.md`              | Complex workflows and sessions                      |
+| **Skills/Expertise**  | `.github/skills/`         | Portable domain expertise                           |
+| **Visual Memory**     | `skills/*/visual-memory/` | Embedded reference media for self-sufficient skills |
 
 ---
 
@@ -1200,22 +1201,22 @@ Alex is **local-first**. No account required. No telemetry. No surprises.
 
 Alex implements Microsoft's [Responsible AI Standard](https://www.microsoft.com/en-us/ai/responsible-ai) across all six principles:
 
-| RAI Principle           | How Alex Implements It                                                                                                              |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Transparency**        | Alex signals uncertainty explicitly. Phrases like *"Based on the docs..."* or *"I'm not certain"* are deliberate epistemic markers. |
-| **Accountability**      | Fully open source. Every prompt, memory file, and decision pattern is inspectable on GitHub.                                        |
-| **Fairness**            | Neutral, professional language. Persona-aware responses adapt tone, not content. No discriminatory outputs.                         |
-| **Reliability & Safety**| Relies on GitHub Copilot's built-in content safety filters. Alex adds `/confidence` and `/verify` commands for high-stakes work.    |
-| **Human Oversight**     | Ethics, strategy, and personnel decisions **always defer to human judgment**. Alex flags these categories explicitly.               |
-| **Appropriate Reliance**| Implements the CAIR framework — Alex actively calibrates when to trust its output vs. prompt you to verify independently.           |
+| RAI Principle            | How Alex Implements It                                                                                                              |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Transparency**         | Alex signals uncertainty explicitly. Phrases like *"Based on the docs..."* or *"I'm not certain"* are deliberate epistemic markers. |
+| **Accountability**       | Fully open source. Every prompt, memory file, and decision pattern is inspectable on GitHub.                                        |
+| **Fairness**             | Neutral, professional language. Persona-aware responses adapt tone, not content. No discriminatory outputs.                         |
+| **Reliability & Safety** | Relies on GitHub Copilot's built-in content safety filters. Alex adds `/confidence` and `/verify` commands for high-stakes work.    |
+| **Human Oversight**      | Ethics, strategy, and personnel decisions **always defer to human judgment**. Alex flags these categories explicitly.               |
+| **Appropriate Reliance** | Implements the CAIR framework — Alex actively calibrates when to trust its output vs. prompt you to verify independently.           |
 
 **AI Safety commands built in:**
 
-| Command             | Purpose                                                           |
-| ------------------- | ----------------------------------------------------------------- |
-| `@alex /confidence` | Explains confidence levels and when to verify AI responses        |
-| `@alex /verify`     | Walks you through verification steps for high-stakes decisions    |
-| `@alex /forget`     | Selectively removes information from Alex's memory                |
+| Command             | Purpose                                                        |
+| ------------------- | -------------------------------------------------------------- |
+| `@alex /confidence` | Explains confidence levels and when to verify AI responses     |
+| `@alex /verify`     | Walks you through verification steps for high-stakes decisions |
+| `@alex /forget`     | Selectively removes information from Alex's memory             |
 
 📄 [GitHub Copilot Trust & Safety](https://docs.github.com/copilot/overview-of-github-copilot/about-github-copilot-individual#safety)
 
@@ -1227,30 +1228,30 @@ Alex is designed and operated in alignment with Microsoft's [Secure Future Initi
 
 #### Pillar 1 — Secure by Design
 
-| Area                  | Implementation                                                           |
-| --------------------- | ------------------------------------------------------------------------ |
+| Area                   | Implementation                                                            |
+| ---------------------- | ------------------------------------------------------------------------- |
 | Minimal attack surface | No remote code execution, no `eval()`, no dynamic imports from user input |
-| VS Code sandbox       | Runs inside VS Code's extension host — OS-level process isolation        |
-| Dependency hygiene    | Minimal third-party dependencies; reviewed in every release              |
-| Input sanitization    | All webview content uses nonces + CSP; HTML escaped via `sanitize.ts`    |
+| VS Code sandbox        | Runs inside VS Code's extension host — OS-level process isolation         |
+| Dependency hygiene     | Minimal third-party dependencies; reviewed in every release               |
+| Input sanitization     | All webview content uses nonces + CSP; HTML escaped via `sanitize.ts`     |
 
 #### Pillar 2 — Secure by Default
 
-| Area                  | Implementation                                                             |
-| --------------------- | -------------------------------------------------------------------------- |
-| Cloud sync off        | GitHub sync is opt-in — disabled by default, requires explicit user action |
-| Secret storage        | API keys (Replicate, Gamma, GitHub) stored in VS Code SecretStorage only   |
-| Private repos         | Global Knowledge GitHub Gist is created as **private** by default         |
-| No plaintext secrets  | Zero credential storage in workspace files or settings.json               |
+| Area                 | Implementation                                                             |
+| -------------------- | -------------------------------------------------------------------------- |
+| Cloud sync off       | GitHub sync is opt-in — disabled by default, requires explicit user action |
+| Secret storage       | API keys (Replicate, Gamma, GitHub) stored in VS Code SecretStorage only   |
+| Private repos        | Global Knowledge GitHub Gist is created as **private** by default          |
+| No plaintext secrets | Zero credential storage in workspace files or settings.json                |
 
 #### Pillar 3 — Secure Operations
 
-| Area                  | Implementation                                                             |
-| --------------------- | -------------------------------------------------------------------------- |
-| No PII in logs        | Console output is scrubbed; user profile stored locally only              |
-| Signed packages       | Extension published via signed VS Code Marketplace pipeline               |
-| Vulnerability policy  | Public `SECURITY.md` with responsible disclosure process                  |
-| PII pipeline protection | 3-layer PII guard: `.gitignore` + `.vscodeignore` + publish-time scan    |
+| Area                    | Implementation                                                        |
+| ----------------------- | --------------------------------------------------------------------- |
+| No PII in logs          | Console output is scrubbed; user profile stored locally only          |
+| Signed packages         | Extension published via signed VS Code Marketplace pipeline           |
+| Vulnerability policy    | Public `SECURITY.md` with responsible disclosure process              |
+| PII pipeline protection | 3-layer PII guard: `.gitignore` + `.vscodeignore` + publish-time scan |
 
 📄 [Compliance Audit](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/audits/COMPLIANCE-AUDIT.md) · [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md)
 

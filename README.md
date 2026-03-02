@@ -979,12 +979,6 @@ Cross-project knowledge sharing is now built-in:
 - **Adaptive theming** — UI accent colors match detected persona
 - **Skill recommendations** — Suggests relevant skills based on persona
 
-### ⭐ Premium Asset System
-
-- **Dynamic branding** — Logo switches based on GK status
-- **GK badge** — Discreet "GK" badge when Global Knowledge is enabled
-- **Grayscale aesthetic** — Professional, non-distracting premium indicators
-
 ### 🧠 Architecture Refinements
 
 - **Active Context** — Session-scoped persona, objective, and Focus Trifectas (3 skills for current work)

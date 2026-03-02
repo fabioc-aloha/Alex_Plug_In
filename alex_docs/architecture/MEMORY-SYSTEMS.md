@@ -22,6 +22,7 @@ flowchart TB
         PM["📋 Procedural\n.instructions.md"]
         EM["📝 Episodic\n.prompt.md"]
         SK["🎓 Skills\nskills/*/SKILL.md"]
+        VM["📷 Visual Memory\nskills/*/visual-memory/"]
     end
 
     subgraph GLOBAL_LAYER["🌐 Global (User)"]
@@ -35,6 +36,7 @@ flowchart TB
     WM ==>|"Consolidate"| PM
     WM ==>|"Record"| EM
     WM ==>|"Learn"| SK
+    SK -->|"Embed media"| VM
 
     PM -.->|"Promote"| GK
     SK -.->|"Promote"| GK
@@ -266,6 +268,76 @@ Examples:
 - `api-design/SKILL.md`
 - `react-hooks/SKILL.md`
 - `testing-strategies/SKILL.md`
+
+---
+
+## Visual Memory (Embedded Media)
+
+### Purpose
+
+Stores **reference media directly inside skills** as embedded data URIs — making skills fully self-sufficient with zero external path dependencies. Promoted from AlexBooks (2026-03-01).
+
+### Three Sub-Types
+
+**Table VM-1:** *Visual Memory Sub-Types*
+
+| Type       | Storage                                    | Use Case                                           |
+| ---------- | ------------------------------------------ | -------------------------------------------------- |
+| **Visual** | Base64 JPEG in `visual-memory.json`        | Face-consistent AI portrait generation             |
+| **Audio**  | WAV/MP3 file paths in `visual-memory.json` | TTS voice cloning (`chatterbox-turbo`, `qwen-tts`) |
+| **Video**  | JSON prompt templates                      | Consistent motion style                            |
+
+### Location
+
+```text
+.github/skills/
+└── persona-name/
+    ├── SKILL.md
+    ├── synapses.json
+    └── visual-memory/
+        ├── index.json              ← metadata only (no data URIs)
+        ├── visual-memory.json      ← full base64 data URIs
+        └── subject.jpg             ← optional originals
+```
+
+### Photo Specifications
+
+| Property              | Value                                   |
+| --------------------- | --------------------------------------- |
+| **Format**            | JPEG                                    |
+| **Max dimension**     | 512px (longest edge)                    |
+| **Quality**           | 85%                                     |
+| **File size**         | 40–80 KB each                           |
+| **Count per subject** | 5–8 photos                              |
+| **Diversity**         | Different angles, expressions, lighting |
+
+### Critical Generation Rule
+
+When providing reference photos: **NEVER describe physical appearance** (hair color, eye color, skin tone, facial features). Only describe scene, clothing, expression, and action. The model reads the photos directly. Appearance descriptions conflict with the reference images and reduce consistency.
+
+**Correct prompt anchor:**
+```
+"EXACTLY the person shown in the reference images"
+```
+
+### Implementation Pattern
+
+```json
+// visual-memory.json
+{
+  "version": "1.0",
+  "subject": "Alex Finch",
+  "photos": [
+    {
+      "id": "ref-001",
+      "description": "Front-facing portrait, neutral expression",
+      "dataUri": "data:image/jpeg;base64,/9j/4AAQ..."
+    }
+  ],
+  "audioSamples": [],
+  "videoTemplates": []
+}
+```
 
 ---
 

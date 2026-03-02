@@ -155,6 +155,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [gamma-presentations](../../.github/skills/gamma-presentations/SKILL.md) | inheritable | AI presentations, documents, social content via Gamma API                                                            |
 | [text-to-speech](../../.github/skills/text-to-speech/SKILL.md)           | inheritable | TTS synthesis, chunking, audio content generation                                                                    |
 | [pptx-generation](../../.github/skills/pptx-generation/SKILL.md)         | inheritable | PowerPoint generation via python-pptx, slide layouts                                                                 |
+| [visual-memory](../../.github/skills/visual-memory/SKILL.md)             | inheritable | 🆕 Embedded reference media (base64) for face-consistent AI generation and self-sufficient skills                     |
 
 ### 💼 Business & Analysis
 
