@@ -1182,9 +1182,43 @@ Comprehensive documentation is included with the extension in the `alex_docs/` f
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
 
-## 🔒 Security
+## 🔒 Privacy & Responsible AI
 
-Report security vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new). See [SECURITY.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) for our security policy.
+### Privacy First
+
+Alex is built **local-first**. Your data stays on your machine:
+
+| What Alex does NOT do              | What Alex does                                       |
+| ---------------------------------- | ---------------------------------------------------- |
+| ❌ Collect usage telemetry          | ✅ Store all memory in local `.github/` files you own |
+| ❌ Track your code or conversations | ✅ Send text to Edge TTS (transient, not stored)      |
+| ❌ Share data with third parties    | ✅ Sync to YOUR GitHub repo (opt-in only)             |
+| ❌ Require an account or login      | ✅ Encrypt API keys via VS Code SecretStorage         |
+
+See the full [Privacy Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md).
+
+### Responsible AI
+
+Alex implements Microsoft's Responsible AI principles:
+
+- **Transparency** — Alex clearly signals uncertainty. Phrases like "Based on the docs..." or "I'm not certain" are deliberate epistemic markers.
+- **Human oversight** — Ethics, strategy, and personnel decisions always defer to human judgment. Alex flags these explicitly.
+- **Appropriate reliance** — Alex implements the CAIR (Cognitive-Affective Influences on Reliance) framework: it actively calibrates when you should trust its output vs. verify independently.
+- **No harmful content** — Content safety relies on GitHub Copilot's built-in filters — see [GitHub Copilot Trust & Safety](https://docs.github.com/copilot/overview-of-github-copilot/about-github-copilot-individual#safety).
+- **Fairness** — Neutral, professional language. No discriminatory outputs.
+- **Accountability** — Open source. You can inspect every prompt, memory file, and decision pattern.
+
+### SFI (Secure Future Initiative) Compliance
+
+| Principle         | Implementation                                                  |
+| ----------------- | --------------------------------------------------------------- |
+| Secure by Design  | Minimal dependencies; VS Code sandbox; no `eval()`              |
+| Secure by Default | Cloud sync off by default; secrets via VS Code SecretStorage    |
+| Secure Operations | No PII in logs; signed Marketplace packages; public SECURITY.md |
+
+See the full [Compliance Audit](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/audits/COMPLIANCE-AUDIT.md) and [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md).
+
+Report vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new).
 
 ## 💬 Support
 

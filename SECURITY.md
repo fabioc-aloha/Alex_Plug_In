@@ -4,9 +4,9 @@
 
 | Version | Supported             |
 | ------- | --------------------- |
-| 5.x.x   | ✅ Actively supported  |
-| 4.x.x   | ⚠️ Security fixes only |
-| < 4.0   | ❌ No longer supported |
+| 6.x.x   | ✅ Actively supported  |
+| 5.x.x   | ⚠️ Security fixes only |
+| < 5.0   | ❌ No longer supported |
 
 ## Reporting a Vulnerability
 
@@ -89,12 +89,12 @@ Alex uses VS Code agent hooks (`.github/hooks.json`) to automate cognitive workf
 ```
 
 **Sandbox Settings**:
-| Setting | Platform | Purpose |
-|---------|----------|---------|
-| `chat.tools.terminal.sandbox.enabled` | macOS/Linux | Enable sandboxed terminal execution |
-| `chat.tools.terminal.sandbox.macFileSystem` | macOS | File system access restrictions |
-| `chat.tools.terminal.sandbox.linuxFileSystem` | Linux | File system access mode |
-| `chat.tools.terminal.sandbox.network` | macOS/Linux | Network access restrictions |
+| Setting                                       | Platform    | Purpose                             |
+| --------------------------------------------- | ----------- | ----------------------------------- |
+| `chat.tools.terminal.sandbox.enabled`         | macOS/Linux | Enable sandboxed terminal execution |
+| `chat.tools.terminal.sandbox.macFileSystem`   | macOS       | File system access restrictions     |
+| `chat.tools.terminal.sandbox.linuxFileSystem` | Linux       | File system access mode             |
+| `chat.tools.terminal.sandbox.network`         | macOS/Linux | Network access restrictions         |
 
 **Windows Users**: Terminal sandboxing is not available on Windows. Hooks execute in the normal VS Code terminal context. Use the Master Alex Protected marker (`.github/config/MASTER-ALEX-PROTECTED.json`) as a safety gate.
 
