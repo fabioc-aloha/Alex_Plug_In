@@ -43,7 +43,8 @@ Before writing any Mermaid code, answer these:
 □ Layout direction chosen (LR preferred for flow, TD for hierarchy)
 □ Subgraph strategy decided (Medallion vs Lineage vs Pipeline)
 □ Color assignments mapped (what color = what meaning)
-□ Init directive ready: %%{init: {'theme': 'base', 'themeVariables': ...}}%%
+□ Multi-line node labels use <br/> NOT \n
+□ Init directive ready: %%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent', ...}}}%%
 ```
 
 ### Quality Gate (Steps C-C-U)
@@ -52,9 +53,11 @@ After creating the diagram, verify ALL of these:
 
 ```text
 □ Init directive is FIRST line inside mermaid block
+□ edgeLabelBackground is 'transparent' (NOT '#ffffff' — breaks in dark mode)
 □ ALL nodes have style/classDef (no unstyled nodes)
 □ Colors are GitHub Pastel v2 (NOT saturated: no #51cf66, #339af0, #fab005)
 □ linkStyle default stroke:#57606a,stroke-width:1.5px (flowcharts)
+□ Node labels use <br/> for line breaks, NOT \n
 □ Diagram rendered and visually inspected
 □ No dimension > 3x the other (use subgroups to balance)
 □ Figure label added below diagram block
@@ -67,6 +70,8 @@ After creating the diagram, verify ALL of these:
 | --------- | -------------------------- |
 | Saturated colors instead of pastels | **Apply Skills** — load palette first |
 | Missing init directive | **Apply Skills** — it's step 3 |
+| `edgeLabelBackground: '#ffffff'` used | **Apply Skills** — use `'transparent'` (dark mode safe) |
+| `\n` in node labels (renders as literal text) | **Create** — use `<br/>` for line breaks |
 | Missing linkStyle | **Create** — every flowchart needs it |
 | Lopsided layout (7-way fan-out) | **Think** — choose layout pattern |
 | Diagram only in chat, not in file | **Update** — write to `.md` file |
@@ -442,7 +447,7 @@ web_server.style.fill: "#f3e5f5"
 Copy this template for every new diagram. It sets the GitHub Pastel v2 palette defaults:
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'transparent', 'lineColor': '#57606a' }}}%%
 flowchart LR
     A[Source]:::blue --> B[Process]:::gold --> C[Output]:::green
 
@@ -540,7 +545,7 @@ linkStyle default stroke:#57606a,stroke-width:1.5px
 **Complete Example**:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': 'transparent'}}}%%
 flowchart LR
     A[Source] --> |Transform| B[Target]
     
@@ -574,7 +579,7 @@ flowchart LR
 **Init directive (Fishbowl):**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': 'transparent'}}}%%
 ```
 
 **When to choose Fishbowl over GitHub Pastel v2**: Use Fishbowl when all nodes need equal visual weight (e.g., governance structures, compliance flows). Use GitHub Pastel v2 when nodes carry semantic meaning that should be color-coded by category.
@@ -586,7 +591,7 @@ Add as FIRST line inside mermaid block:
 **Default init directive (GitHub Pastel v2):**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'transparent', 'lineColor': '#57606a' }}}%%
 ```
 
 **Standard GitHub-compatible theme (legacy):**
@@ -797,6 +802,33 @@ Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4
 | `\ud83c\udfc6` | 🏆 | Trophy |
 | `\ud83e\udd16` | 🤖 | Robot |
 | `\ud83d\udcda` | 📚 | Books |
+
+### Edge Label Dark Background
+
+**Problem**: Arrow labels (`|text|`) appear with dark boxes in VS Code dark mode or break rendering
+
+**Root cause**: `edgeLabelBackground: '#ffffff'` hardcodes a white background — visible as a jarring white box in dark themes.
+
+**Fix**: Always use `transparent`:
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent', 'lineColor': '#57606a'}}}%%
+```
+
+This removes the background box entirely while keeping label text readable on any theme.
+
+> ⚠️ Never use `theme: 'dark'` — it forces dark backgrounds on all elements including edge labels regardless of `edgeLabelBackground`.
+
+### Multi-Line Node Labels (`\n` vs `<br/>`)
+
+**Problem**: `\n` in node labels renders as a literal backslash-n in VS Code and some Mermaid versions:
+
+```text
+❌ A["First line\nSecond line"]   ← may render as "First line\nSecond line"
+✅ A["First line<br/>Second line"] ← always works
+```
+
+**Rule**: Always use `<br/>` for multi-line node labels in flowcharts.
 
 ### Dark Mermaid Backgrounds
 

@@ -11,6 +11,7 @@
 Alex implements a **hierarchical memory system** inspired by human cognition. Different types of memory serve different purposes and have different lifespans.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
 flowchart TB
     subgraph WM_LAYER["⏱️ Volatile"]
         WM["🧠 Working Memory<br/>7±2 rules | Session only"]
@@ -87,6 +88,7 @@ Working memory is divided into:
 When working memory needs to persist:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
 flowchart LR
     WM[Working Memory]
 
@@ -406,6 +408,7 @@ Stores **cross-project wisdom** - patterns and insights that apply anywhere.
 When searching for knowledge:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
 flowchart TD
     QUERY[Search Query]
 
@@ -436,6 +439,7 @@ flowchart TD
 Moving knowledge from local to global:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
 flowchart LR
     subgraph "Local (Project)"
         SK[SKILL.md]

@@ -4,25 +4,24 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/src/views/welcomeView.ts"
+    "alex_docs/architecture/MEMORY-SYSTEMS.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772480943533
+      "scannedAt": 1772481366997
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1772480943533
+      "scannedAt": 1772481366997
     },
     {
       "file": "README.md",
       "todoCount": 1,
-      "scannedAt": 1772480943533
+      "scannedAt": 1772481366997
     }
   ],
-  "lastUpdated": 1772480943533
+  "lastUpdated": 1772481366997
 }
