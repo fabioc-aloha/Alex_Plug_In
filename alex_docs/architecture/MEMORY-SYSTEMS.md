@@ -11,37 +11,36 @@
 Alex implements a **hierarchical memory system** inspired by human cognition. Different types of memory serve different purposes and have different lifespans.
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     subgraph WM_LAYER["⏱️ Volatile"]
-        WM["🧠 Working Memory\n7±2 rules | Session only"]
+        WM["🧠 Working Memory<br/>7±2 rules | Session only"]
     end
 
     subgraph LOCAL_LAYER["📁 Local (Project)"]
         direction LR
-        PM["📋 Procedural\n.instructions.md"]
-        EM["📝 Episodic\n.prompt.md"]
-        SK["🎓 Skills\nskills/*/SKILL.md"]
-        VM["📷 Visual Memory\nskills/*/visual-memory/"]
+        PM["📋 Procedural<br/>.instructions.md"]
+        EM["📝 Episodic<br/>.prompt.md"]
+        SK["🎓 Skills<br/>skills/*/SKILL.md"]
+        VM["📷 Visual Memory<br/>skills/*/visual-memory/"]
     end
 
     subgraph GLOBAL_LAYER["🌐 Global (User)"]
-        GK["🌍 Global Knowledge\n~/.alex/"]
+        GK["🌍 Global Knowledge<br/>~/.alex/"]
     end
 
     subgraph CLOUD_LAYER["☁️ Cloud (Backup)"]
-        GIST["📤 GitHub Gist\nMulti-machine sync"]
+        GIST["📤 GitHub Gist<br/>Multi-machine sync"]
     end
 
-    WM ==>|"Consolidate"| PM
-    WM ==>|"Record"| EM
-    WM ==>|"Learn"| SK
-    SK -->|"Embed media"| VM
+    WM ==>|Consolidate| PM
+    WM ==>|Record| EM
+    WM ==>|Learn| SK
+    SK -->|Embed media| VM
 
-    PM -.->|"Promote"| GK
-    SK -.->|"Promote"| GK
+    PM -.->|Promote| GK
+    SK -.->|Promote| GK
 
-    GK <-->|"Sync"| GIST
+    GK <-->|Sync| GIST
 
     style WM_LAYER fill:#ffebee,stroke:#c62828
     style LOCAL_LAYER fill:#e8f5e9,stroke:#2e7d32
@@ -88,13 +87,12 @@ Working memory is divided into:
 When working memory needs to persist:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     WM[Working Memory]
 
-    WM -->|"Repeated procedure"| PM[Procedural Memory]
-    WM -->|"Session record"| EM[Episodic Memory]
-    WM -->|"Domain expertise"| SK[Skills]
+    WM -->|Repeated procedure| PM[Procedural Memory]
+    WM -->|Session record| EM[Episodic Memory]
+    WM -->|Domain expertise| SK[Skills]
 
     PM -->|".instructions.md"| FS[File System]
     EM -->|".prompt.md"| FS
@@ -408,7 +406,6 @@ Stores **cross-project wisdom** - patterns and insights that apply anywhere.
 When searching for knowledge:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     QUERY[Search Query]
 
@@ -439,7 +436,6 @@ flowchart TD
 Moving knowledge from local to global:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph "Local (Project)"
         SK[SKILL.md]
