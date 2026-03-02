@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.3] - 2026-03-02
+
+### Fixed
+- Extension README: resolved 4 Marketplace compliance issues — self-referential link (line 125), broken `article/versions/13-ALEX-MANIFESTO-PERSONAL.md` links (lines 300 & 358), broken `replicate-api` skill path (line 671)
+
+### Changed
+- Root README: DRY refactor — removed 700-line duplicate of extension README; replaced with compact Features table linking to learnalex.correax.com
+- Both READMEs: removed "Chat with Alex" section (superseded by learnalex.correax.com website)
+- Docs: replaced all GitHub Gist references with private GitHub repo throughout
+
+---
+
 ## [6.0.2] - 2026-02-28
 
 ### Fixed
