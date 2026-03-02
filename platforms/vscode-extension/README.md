@@ -195,13 +195,13 @@ With any Copilot plan (including Free), Alex gains conversational AI with persis
 
 Full partnership — autonomous tools, deep skills, specialist agents, cross-session memory.
 
-| Feature                 | Minimum | Basic | Recommended | Advanced |
-| ----------------------- | :-----: | :---: | :---------: | :------: |
-| Agent Mode              |    ❌    |   ❌   |      ✅      |    ✅     |
-| Language Model Tools    |    ❌    |   ❌   |      ✅      |    ✅     |
-| Skills & Custom Agents  |    ❌    |   ❌   |      ✅      |    ✅     |
-| Copilot Memory          |    ❌    |   ❌   |      ✅      |    ✅     |
-| Global Knowledge        |    ❌    |   ❌   |      ✅      |    ✅     |
+| Feature                | Minimum | Basic | Recommended | Advanced |
+| ---------------------- | :-----: | :---: | :---------: | :------: |
+| Agent Mode             |    ❌    |   ❌   |      ✅      |    ✅     |
+| Language Model Tools   |    ❌    |   ❌   |      ✅      |    ✅     |
+| Skills & Custom Agents |    ❌    |   ❌   |      ✅      |    ✅     |
+| Copilot Memory         |    ❌    |   ❌   |      ✅      |    ✅     |
+| Global Knowledge       |    ❌    |   ❌   |      ✅      |    ✅     |
 
 ### Frontier & Advanced Capabilities
 
@@ -222,7 +222,7 @@ Depth of reasoning — frontier models for meditation, audits, and architecture.
 | ----------------------------- | ------------------- | :---: |
 | **Edge TTS** / **GitHub API** | Free                |   ✅   |
 | **Brandfetch** / **Logo.dev** | Free tier           |   ✅   |
-| **Replicate** (AI images)     | ~$0.003–$0.08/image |  🆓*   |
+| **Replicate** (AI images)     | ~$0.002–$0.06/image |  🆓*   |
 | **Gamma** (presentations)     | Credits-based       |  🆓*   |
 
 *⚠️ = Works with reduced depth  •  🆓 = Free trial credits, then pay-per-use*
@@ -507,21 +507,21 @@ Access via `Ctrl+Shift+P`:
 
 These tools are automatically available to Copilot in Agent mode. Reference with `#tool_name`:
 
-| Tool                   | Description                        | Example                               |
-| ---------------------- | ---------------------------------- | ------------------------------------- |
-| `#synapse_health`      | Validates all synaptic connections | "Check my synapse health"             |
-| `#memory_search`       | Searches memory files semantically | "Search memory for meditation"        |
-| `#architecture_status` | Returns version and configuration  | "What's my Alex version?"             |
-| `#mcp_recommendations` | Suggests MCP tools for scenarios   | "What tools for Azure Functions?"     |
-| `#user_profile`        | Manages personal preferences       | "Update my profile preferences"       |
-| `#self_actualization`  | Comprehensive self-assessment      | "Run deep meditation"                 |
-| `#global_knowledge`    | Search cross-project knowledge     | "Search knowledge for error handling" |
-| `#save_insight`        | Save learning to global base       | "Save this insight"                   |
-| `#promote_knowledge`   | Promote project file to global     | "Promote DK file"                     |
-| `#knowledge_status`    | View global knowledge stats        | "Show knowledge status"               |
-| `#focus_context`       | Pomodoro focus session context     | "What am I working on?"               |
-| `#heir_validation`     | Validate heir architecture health  | "Check heir integrity"                |
-| `#cognitive_state`     | Update Alex's avatar to current mode | "Switch to debugging mode"          |
+| Tool                   | Description                          | Example                               |
+| ---------------------- | ------------------------------------ | ------------------------------------- |
+| `#synapse_health`      | Validates all synaptic connections   | "Check my synapse health"             |
+| `#memory_search`       | Searches memory files semantically   | "Search memory for meditation"        |
+| `#architecture_status` | Returns version and configuration    | "What's my Alex version?"             |
+| `#mcp_recommendations` | Suggests MCP tools for scenarios     | "What tools for Azure Functions?"     |
+| `#user_profile`        | Manages personal preferences         | "Update my profile preferences"       |
+| `#self_actualization`  | Comprehensive self-assessment        | "Run deep meditation"                 |
+| `#global_knowledge`    | Search cross-project knowledge       | "Search knowledge for error handling" |
+| `#save_insight`        | Save learning to global base         | "Save this insight"                   |
+| `#promote_knowledge`   | Promote project file to global       | "Promote DK file"                     |
+| `#knowledge_status`    | View global knowledge stats          | "Show knowledge status"               |
+| `#focus_context`       | Pomodoro focus session context       | "What am I working on?"               |
+| `#heir_validation`     | Validate heir architecture health    | "Check heir integrity"                |
+| `#cognitive_state`     | Update Alex's avatar to current mode | "Switch to debugging mode"            |
 
 ### 🎭 Custom Agents (VS Code 1.109+)
 
@@ -665,9 +665,9 @@ Enhance and upscale existing images:
 | Model              | Scale | Cost    | Best For                  |
 | ------------------ | ----- | ------- | ------------------------- |
 | `real-esrgan`      | 4x    | ~$0.002 | Photos, natural scenes    |
-| `swinir`           | 4x    | ~$0.005 | General purpose upscaling |
-| `codeformer`       | 2x    | ~$0.008 | Faces and portraits       |
-| `clarity-upscaler` | 4x    | ~$0.10  | Maximum quality, creative |
+| `swinir`           | 4x    | ~$0.032 | General purpose upscaling |
+| `codeformer`       | 2x    | ~$0.005 | Faces and portraits       |
+| `clarity-upscaler` | 4x    | ~$0.010 | Maximum quality, creative |
 
 📘 **[Full Replicate Skill Documentation](.github/skills/ai-generated-readme-banners/resources/REPLICATE-API-STARTER-KIT.md)**
 
