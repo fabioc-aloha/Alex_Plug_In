@@ -4,27 +4,34 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "MENTOR-SERVICE-PLAN.md",
-    "README.md",
-    "alex_docs/README.md",
-    "alex_docs/architecture/MEMORY-SYSTEMS.md",
-    "alex_docs/skills/SKILLS-CAPABILITIES.md",
-    "platforms/m365-copilot/api/README.md",
-    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/alex_docs/README.md"
+    "README.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772481586242
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.0.3.vsix",
+      "todoCount": 17,
+      "scannedAt": 1772483796098
     },
     {
-      "file": "platforms/vscode-extension/README.md",
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772483796098
+    },
+    {
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772483796098
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1772483796098
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772481586242
+      "scannedAt": 1772483796098
     }
   ],
-  "lastUpdated": 1772481586242
+  "lastUpdated": 1772483796098
 }

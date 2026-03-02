@@ -240,17 +240,17 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 The VS Code extension includes everything described below — see the **[VS Code Extension README](platforms/vscode-extension/README.md)** for the complete feature reference:
 
-| Feature Area | What You Get |
-| --- | --- |
+| Feature Area               | What You Get                                                     |
+| -------------------------- | ---------------------------------------------------------------- |
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
-| **Global Knowledge Base** | Cross-project patterns and insights that persist in `~/.alex/` |
-| **User Profiles** | Personalized tone, detail level, and tech stack awareness |
-| **125+ Skills** | Portable domain expertise — from coding to research to Azure |
-| **7 Custom Agents** | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| **13 LM Tools** | Memory search, synapse health, knowledge save/promote, and more |
-| **Gamma Presentations** | AI-generated slides, docs, and social content via Gamma API |
-| **AI Image Generation** | Flux, SDXL, and nano-banana-pro via Replicate API |
-| **MCP Integrations** | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server |
+| **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
+| **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
+| **125+ Skills**            | Portable domain expertise — from coding to research to Azure     |
+| **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
+| **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
+| **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |
+| **AI Image Generation**    | Flux, SDXL, and nano-banana-pro via Replicate API                |
+| **MCP Integrations**       | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server |
 | **Architecture Structure** | Full `.github/` cognitive framework with memory types and agents |
 
 ---
@@ -263,21 +263,21 @@ The VS Code extension includes everything described below — see the **[VS Code
 
 Comprehensive documentation is included with the extension in the `alex_docs/` folder:
 
-| Document                                                                                                                          | Description                                         |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| **[learnalex.correax.com](https://learnalex.correax.com/)**                                                                        | 📘 **START HERE** — Study guides, training, and full documentation |
-| [User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)                             | Complete guide to using Alex                         |
-| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md)                                                 | Subscription guide, cognitive tiers, feature matrix |
-| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams        |
-| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list             |
-| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md)  | How Alex uses native Copilot features               |
-| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands              |
-| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                      |
-| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory             |
-| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions                  |
-| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                     |
-| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing                 |
-| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet                  |
+| Document                                                                                                                          | Description                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **[learnalex.correax.com](https://learnalex.correax.com/)**                                                                       | 📘 **START HERE** — Study guides, training, and full documentation |
+| [User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)                             | Complete guide to using Alex                                      |
+| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md)                                                 | Subscription guide, cognitive tiers, feature matrix               |
+| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams                      |
+| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list                           |
+| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md)  | How Alex uses native Copilot features                             |
+| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands                            |
+| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                                    |
+| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory                           |
+| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions                                |
+| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                                   |
+| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing                               |
+| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet                                |
 
 ### External Resources
 
