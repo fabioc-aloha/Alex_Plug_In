@@ -27,7 +27,10 @@ if ($changedSkills) {
     foreach ($file in $changedSkills) {
         if (Test-Path $file) {
             $content = Get-Content $file -Raw
-            if ($content -notmatch '^---\s*\n') {
+            if ($content -match '^```') {
+                $errors += "${file}: Wrapped in code fence — run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
+            }
+            elseif ($content -notmatch '^---\s*\r?\n') {
                 $errors += "${file}: Missing YAML frontmatter (must start with ---)"
             }
             elseif ($content -match '^---\s*\n([\s\S]*?)\n---') {
@@ -41,6 +44,25 @@ if ($changedSkills) {
             }
             else {
                 $errors += "${file}: Malformed YAML frontmatter (missing closing ---)"
+            }
+        }
+    }
+}
+
+# ============================================================
+# CHECK 1b: .instructions.md and .prompt.md fence detection
+# ============================================================
+$changedTriFiles = $stagedFiles | Where-Object { $_ -match '\.(instructions|prompt)\.md$' }
+if ($changedTriFiles) {
+    Write-Host "  Validating trifecta file headers..." -ForegroundColor Gray
+    foreach ($file in $changedTriFiles) {
+        if (Test-Path $file) {
+            $content = Get-Content $file -Raw
+            if ($content -match '^```') {
+                $errors += "${file}: Wrapped in code fence — run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
+            }
+            elseif ($content -notmatch '^---\s*\r?\n') {
+                $errors += "${file}: Missing YAML frontmatter (must start with ---)"
             }
         }
     }
