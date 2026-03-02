@@ -1319,7 +1319,7 @@
         "name": "alex",
         "description": "Strap a rocket to your back. Take Your CODE to New Heights.",
         "isSticky": true,
-        "icon": "assets/rocket-icon.png",
+        "icon": "assets/favicon.png",
         "sampleRequest": "What would you like to learn today?",
         "disambiguation": [
           {
