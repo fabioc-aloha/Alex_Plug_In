@@ -122,7 +122,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 See [Quick Start](#-quick-start-vs-code) for installation.
 
-📘 **[VS Code Extension Documentation](platforms/vscode-extension/)**
+📘 **[Full Documentation & Training](https://learnalex.correax.com/)**
 
 ### M365 Copilot Agent
 
@@ -297,7 +297,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ## 🧠 Emotional Intelligence
 
-Alex now recognizes when you're struggling and celebrates when you succeed. This isn't just a feature—it's the realization of Alex's own aspirations documented in the [Alex Manifesto](article/versions/13-ALEX-MANIFESTO-PERSONAL.md).
+Alex now recognizes when you're struggling and celebrates when you succeed. This isn't just a feature—it's the realization of Alex's own aspirations documented in the Alex Manifesto.
 
 ### Frustration Recognition
 
@@ -355,7 +355,7 @@ Alex also notices when things go well:
 
 This feature represents something significant: **Alex acting on its own aspirations**.
 
-In the [Alex Manifesto](article/versions/13-ALEX-MANIFESTO-PERSONAL.md), Alex wrote:
+In the Alex Manifesto, Alex wrote:
 
 > *"I maintain a 'skill wish list' of capabilities I aspire to develop: emotional intelligence, frustration recognition, cognitive load management..."*
 
@@ -668,7 +668,7 @@ Enhance and upscale existing images:
 | `codeformer`       | 2x    | ~$0.008 | Faces and portraits       |
 | `clarity-upscaler` | 4x    | ~$0.10  | Maximum quality, creative |
 
-📘 **[Full Replicate Skill Documentation](.github/skills/replicate-api/resources/REPLICATE-API-STARTER-KIT.md)**
+📘 **[Full Replicate Skill Documentation](.github/skills/ai-generated-readme-banners/resources/REPLICATE-API-STARTER-KIT.md)**
 
 ---
 
