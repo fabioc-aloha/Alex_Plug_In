@@ -75,7 +75,7 @@ Alex adapts to whatever you're building. Find your workflow:
 
 | You Are              | Your Pain                                          | Alex Gives You                                                            |
 | -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. 124 skills remember your architecture.           |
+| **Developer**        | Re-explaining context, debugging the same patterns | Ship faster, debug less. Proven skills remember your architecture.        |
 | **Researcher**       | Literature scattered, hypothesis drift             | Hypothesis → publication, accelerated. Cross-project knowledge compounds. |
 | **Grad Student**     | Thesis overwhelm, advisor context gaps             | Literature review on autopilot. Your writing remembers your research.     |
 | **Technical Writer** | Docs fall behind code, style drift                 | Docs that write themselves. Consistent voice across projects.             |
@@ -87,7 +87,7 @@ Alex adapts to whatever you're building. Find your workflow:
 
 | Capability                | What It Means                                        |
 | ------------------------- | ---------------------------------------------------- |
-| **124 Skills**            | Proven capabilities. Don't reinvent prompts.         |
+| **Proven Skills**         | Proven capabilities. Don't reinvent prompts.         |
 | **Cross-Project Memory**  | No re-explaining. Knowledge persists.                |
 | **Build Your Own Skills** | Custom expertise for your workflow.                  |
 | **Open Source**           | Inspect every component. Trust through transparency. |
@@ -115,8 +115,8 @@ Alex turns friction into flow:
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 29 slash commands
-- 12 Language Model tools
+- Slash commands for every workflow
+- Language Model tools for Agent mode
 - Dream/meditation protocols
 - Global knowledge base with GitHub sharing
 
@@ -198,8 +198,8 @@ Full partnership — autonomous tools, deep skills, specialist agents, cross-ses
 | Feature                 | Minimum | Basic | Recommended | Advanced |
 | ----------------------- | :-----: | :---: | :---------: | :------: |
 | Agent Mode              |    ❌    |   ❌   |      ✅      |    ✅     |
-| 13 Language Model Tools |    ❌    |   ❌   |      ✅      |    ✅     |
-| 125 Skills / 7 Agents   |    ❌    |   ❌   |      ✅      |    ✅     |
+| Language Model Tools    |    ❌    |   ❌   |      ✅      |    ✅     |
+| Skills & Custom Agents  |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory          |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge        |    ❌    |   ❌   |      ✅      |    ✅     |
 
@@ -281,8 +281,8 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Partnership**   | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows                      |
 | **Expertise**     | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically                  |
 | **Proactive**     | Code review nudges on save, stalled work detection, 4 built-in workflows                                     |
-| **Chat & Agents** | `@alex` participant, 29 slash commands, 13 LM tools, 7 custom agents                                         |
-| **Intelligence**  | 124 skills, emotional detection, model tier awareness, frustration recognition, expertise calibration        |
+| **Chat & Agents** | `@alex` participant, slash commands, LM tools, and custom agents                                             |
+| **Intelligence**  | Extensive skills, emotional detection, model tier awareness, frustration recognition, expertise calibration  |
 | **Memory**        | Global knowledge + session history + outcome tracking + episodic records                                     |
 | **UX**            | User profiles, smart nudges, one-click upgrades, image upscaling, learning journeys, presentation automation |
 
@@ -881,7 +881,7 @@ After initialization, Alex manages this structure:
 ├── episodic/                  # 📝 Session records
 │   ├── self-actualization-*.prompt.md
 │   └── meditation-session-*.prompt.md
-├── skills/                    # 🎓 Portable domain expertise (125 skills)
+├── skills/                    # 🎓 Portable domain expertise
 │   ├── academic-research/SKILL.md
 │   ├── ai-agent-design/SKILL.md
 │   └── ...
@@ -965,8 +965,8 @@ Alex now adapts behavior based on the running LLM:
 
 Cross-project knowledge sharing is now built-in:
 
-- **4 slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`
-- **4 agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`
+- **Slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`
+- **Agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`
 - **Team sharing** — Share your GK GitHub repo with team members for instant knowledge sync
 - **GK init integrated** — `Alex: Initialize Architecture` now scaffolds GK automatically
 
