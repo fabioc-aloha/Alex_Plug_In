@@ -1,0 +1,76 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skill": "visual-memory",
+  "version": "1.0.0",
+  "lastValidated": "2026-03-02",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/ai-character-reference-generation/SKILL.md",
+      "type": "extends",
+      "strength": 0.95,
+      "note": "Visual memory enables self-sufficient face-consistent generation without external photo folders"
+    },
+    {
+      "target": ".github/skills/character-aging-progression/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "note": "Age progression requires consistent reference — visual memory provides portable self-contained refs"
+    },
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "requires",
+      "strength": 0.8,
+      "note": "Photo preparation (resize, optimize, convert) depends on image manipulation tools"
+    },
+    {
+      "target": ".github/skills/text-to-speech/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "note": "Audio memory pattern stores voice samples for TTS cloning alongside visual references"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "complements",
+      "strength": 0.65,
+      "note": "Brand visual identity can be captured as visual memory for consistent generation across projects"
+    },
+    {
+      "target": ".github/skills/distribution-security/SKILL.md",
+      "type": "requires",
+      "strength": 0.75,
+      "note": "Reference photos of real people are PII — visual-memory.json must be excluded from public distribution and scanned before publishing"
+    }
+  ],
+  "activationBoost": [
+    "visual memory",
+    "reference photos",
+    "add to visual memory",
+    "add reference photos",
+    "face consistent",
+    "face consistency",
+    "embed photos",
+    "base64 photos",
+    "base64 reference",
+    "self-sufficient skill",
+    "portable skill",
+    "voice cloning",
+    "add voice sample",
+    "add to audio memory",
+    "convert to base64",
+    "resize photos",
+    "new subject",
+    "add person to memory",
+    "add subject",
+    "visual-memory.json",
+    "reference-portrait",
+    "nano-banana-pro",
+    "image_input"
+  ],
+  "inhibit": [
+    "generic image generation without likeness requirement",
+    "diagram or infographic generation",
+    "SVG or vector generation"
+  ]
+}
