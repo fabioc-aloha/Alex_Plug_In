@@ -1,4 +1,3 @@
-```prompt
 ---
 description: "Add visual memory (reference photos, voice samples, or video styles) to a skill for self-sufficient face-consistent generation"
 ---
@@ -219,7 +218,3 @@ Before publishing a project with populated visual memory:
 - ✅ Real people's photos = PII → exclude from public packages
 - ✅ Add to `.vscodeignore` or `.gitignore` as needed
 - ✅ Never commit visual-memory.json with real portraits to a public repo
-
-```
-
-```

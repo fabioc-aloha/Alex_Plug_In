@@ -1,4 +1,3 @@
-```skill
 ---
 name: "visual-memory"
 description: "Embed reference media (photos, voice, video templates) as base64 data URIs in skills for self-sufficient, portable, consistent generation"
@@ -336,5 +335,3 @@ Store consistent motion style as JSON — not actual video files:
 | Version control nightmare  | JSON in version control              |
 | Different results per machine  | Exact consistency everywhere      |
 | ~2MB unoptimized originals | ~50MB → 500KB optimized               |
-
-```

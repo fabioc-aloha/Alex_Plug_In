@@ -1,4 +1,3 @@
-```instructions
 ---
 description: "Self-sufficient skills with embedded reference media — visual, audio, and video memory management for face-consistent generation"
 applyTo: "**/visual-memory*,**/reference-portrait*,**/face-consistent*"
@@ -108,7 +107,3 @@ Generate a photo of EXACTLY the person shown in the reference images.
 - ✅ Add to `.vscodeignore` or `.gitignore` if heir is public
 - ✅ Run distribution security scan before packaging
 - ✅ Never commit real people's photos to a public repository
-
-```
-
-```
