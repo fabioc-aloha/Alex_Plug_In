@@ -15,5 +15,5 @@
   <circle cx="1120" cy="190" r="8" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.18"/>
   <text x="40" y="100" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="600" fill="#94a3b8" letter-spacing="5">ALEX COGNITIVE ARCHITECTURE</text>
   <text x="40" y="172" font-family="'Segoe UI', system-ui, sans-serif" font-size="52" font-weight="300" fill="#f1f5f9">Alex Finch</text>
-  <text x="40" y="218" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="400" fill="#94a3b8">Your cognitive AI partner for VS Code · correax.com/alex</text>
+  <text x="40" y="218" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="400" fill="#94a3b8">Your cognitive AI partner for VS Code</text>
 </svg>
