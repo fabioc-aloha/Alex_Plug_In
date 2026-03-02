@@ -360,8 +360,8 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /checkskills`     | Discover new skills available from Global Knowledge |
 | `@alex /pullskill`       | Install a skill from Global Knowledge               |
 | `@alex /sync`            | Sync global knowledge with GitHub (bidirectional)   |
-| `@alex /push`            | Push local global knowledge to GitHub Gist          |
-| `@alex /pull`            | Pull global knowledge from GitHub Gist              |
+| `@alex /push`            | Push local global knowledge to private GitHub repo  |
+| `@alex /pull`            | Pull global knowledge from private GitHub repo      |
 
 #### Safety & Verification
 

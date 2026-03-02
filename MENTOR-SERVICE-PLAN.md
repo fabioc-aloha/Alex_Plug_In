@@ -13,7 +13,7 @@
 
 ## Executive Summary
 
-The Alex Mentor Service extends the current static inheritance model (skills bundled at build time) and asynchronous sync (global knowledge via GitHub Gist) into a **dynamic mentorship network**. Heirs can request guidance from Master Alex, receive curated wisdom feeds, and contribute learnings back to the collective intelligence.
+The Alex Mentor Service extends the current static inheritance model (skills bundled at build time) and asynchronous sync (global knowledge via private GitHub repo) into a **dynamic mentorship network**. Heirs can request guidance from Master Alex, receive curated wisdom feeds, and contribute learnings back to the collective intelligence.
 
 ### Current State vs. Future State
 
@@ -474,7 +474,7 @@ systemPrompt += `\n\n## Recent Wisdom from Master Alex\n\n${wisdomContext}`;
 
 - **Phase 1-2**: Well under $5/month target ✅
 - **Phase 3**: Consider only enabling Relay during active development sessions
-- **Alternative**: Use GitHub Gist for async communication (free)
+- **Alternative**: Use a private GitHub repo for async communication
 
 ---
 
@@ -754,7 +754,7 @@ Week 6: Testing + Azure Relay (optional)
 
 - [MASTER-HEIR-ARCHITECTURE.md](alex_docs/MASTER-HEIR-ARCHITECTURE.md) - Inheritance model
 - [GLOBAL-KNOWLEDGE.md](alex_docs/GLOBAL-KNOWLEDGE.md) - Current sync system
-- [CLOUD-SYNC.md](alex_docs/CLOUD-SYNC.md) - GitHub Gist integration
+- [CLOUD-SYNC.md](alex_docs/CLOUD-SYNC.md) - Private GitHub repo integration
 - [ROADMAP-UNIFIED.md](ROADMAP-UNIFIED.md) - Overall project roadmap
 
 ---

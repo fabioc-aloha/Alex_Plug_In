@@ -30,7 +30,7 @@ flowchart TB
     end
 
     subgraph CLOUD_LAYER["☁️ Cloud (Backup)"]
-        GIST["📤 GitHub Gist<br/>Multi-machine sync"]
+        GIST["📤 Private GitHub Repo<br/>Multi-machine sync"]
     end
 
     WM ==>|Consolidate| PM
@@ -458,7 +458,7 @@ flowchart LR
     end
 
     subgraph "Cloud"
-        GIST[GitHub Gist]
+        GIST[Private GitHub Repo]
     end
 
     SK --> CMD

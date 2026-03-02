@@ -232,7 +232,7 @@ User selects model via the M365 Copilot UI dropdown. Alex auto-adapts: structure
 | Domain knowledge   | 100+ skills + DK files   | `knowledge/*.md`    | VS Code richer     |
 | Learning goals     | Goals system             | `learning-goals.md` | Simplified         |
 | Cross-project sync | Global knowledge + cloud | ❌ N/A               | VS Code only       |
-| Cross-device sync  | GitHub Gist              | ✅ OneDrive          | Different backends |
+| Cross-device sync  | Private GitHub repo      | ✅ OneDrive          | Different backends |
 
 ---
 

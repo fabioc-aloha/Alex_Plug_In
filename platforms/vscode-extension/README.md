@@ -421,8 +421,8 @@ Alex registers as a **Chat Participant** in GitHub Copilot. Just mention `@alex`
 | `@alex /checkskills`     | Discover new skills available from Global Knowledge |
 | `@alex /pullskill`       | Install a skill from Global Knowledge               |
 | `@alex /sync`            | Sync global knowledge with GitHub (bidirectional)   |
-| `@alex /push`            | Push local global knowledge to GitHub Gist          |
-| `@alex /pull`            | Pull global knowledge from GitHub Gist              |
+| `@alex /push`            | Push local global knowledge to private GitHub repo  |
+| `@alex /pull`            | Pull global knowledge from private GitHub repo      |
 
 #### Safety & Verification
 
@@ -1224,7 +1224,7 @@ Alex is designed and operated in alignment with Microsoft's [Secure Future Initi
 | -------------------- | -------------------------------------------------------------------------- |
 | Cloud sync off       | GitHub sync is opt-in — disabled by default, requires explicit user action |
 | Secret storage       | API keys (Replicate, Gamma, GitHub) stored in VS Code SecretStorage only   |
-| Private repos        | Global Knowledge GitHub Gist is created as **private** by default          |
+| Private repos        | Global Knowledge is synced to a **private** GitHub repo by default         |
 | No plaintext secrets | Zero credential storage in workspace files or settings.json                |
 
 #### Pillar 3 — Secure Operations

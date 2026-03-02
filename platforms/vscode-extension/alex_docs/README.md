@@ -106,12 +106,12 @@ Alex works best with these VS Code settings enabled. Add to your `settings.json`
 }
 ```
 
-| Setting | Purpose |
-|---|---|
+| Setting                      | Purpose                                      |
+| ---------------------------- | -------------------------------------------- |
 | `instructionsFilesLocations` | Enables procedural memory (.instructions.md) |
-| `useAgentSkills` | Activates SKILL.md capabilities |
-| `useNestedAgentsMdFiles` | Enables .agent.md hierarchies |
-| `memory.enabled` | Persistent memory across sessions |
+| `useAgentSkills`             | Activates SKILL.md capabilities              |
+| `useNestedAgentsMdFiles`     | Enables .agent.md hierarchies                |
+| `memory.enabled`             | Persistent memory across sessions            |
 
 #### Recommended Settings (Improves Experience)
 
@@ -145,11 +145,11 @@ When you run `Alex: Initialize Architecture`:
 
 If Alex is already installed, you'll see:
 
-| Option | Action |
-|---|---|
-| **Upgrade Instead** | Runs `Alex: Upgrade` to preserve your changes |
+| Option                 | Action                                        |
+| ---------------------- | --------------------------------------------- |
+| **Upgrade Instead**    | Runs `Alex: Upgrade` to preserve your changes |
 | **Reset Architecture** | Deletes all memory files and reinstalls fresh |
-| **Cancel** | Aborts the operation |
+| **Cancel**             | Aborts the operation                          |
 
 ---
 
@@ -157,16 +157,16 @@ If Alex is already installed, you'll see:
 
 Alex adapts to your domain. While VS Code is traditionally for code, Alex works equally well for any text-based knowledge work.
 
-| Domain | Example Prompts |
-|---|---|
+| Domain                     | Example Prompts                                               |
+| -------------------------- | ------------------------------------------------------------- |
 | **💻 Software Development** | *"Help me debug this"*, *"What patterns for error handling?"* |
-| **📚 Writing & Publishing** | *"Strengthen chapter 3"*, *"Maintain consistent voice"* |
-| **🎓 Academic Research** | *"Synthesize these findings"*, *"Identify literature gaps"* |
-| **📊 Project Management** | *"Assess ADKAR readiness"*, *"Decompose the WBS"* |
-| **🎭 Creative Arts** | *"Tighten this dialogue"*, *"Strengthen the imagery"* |
-| **📝 Professional Writing** | *"Make this proposal compelling"*, *"Check edge cases"* |
-| **🎨 Design** | *"Design a banner"*, *"What's the best icon grid?"* |
-| **🌐 Localization** | *"Set up i18n"*, *"Handle RTL languages"* |
+| **📚 Writing & Publishing** | *"Strengthen chapter 3"*, *"Maintain consistent voice"*       |
+| **🎓 Academic Research**    | *"Synthesize these findings"*, *"Identify literature gaps"*   |
+| **📊 Project Management**   | *"Assess ADKAR readiness"*, *"Decompose the WBS"*             |
+| **🎭 Creative Arts**        | *"Tighten this dialogue"*, *"Strengthen the imagery"*         |
+| **📝 Professional Writing** | *"Make this proposal compelling"*, *"Check edge cases"*       |
+| **🎨 Design**               | *"Design a banner"*, *"What's the best icon grid?"*           |
+| **🌐 Localization**         | *"Set up i18n"*, *"Handle RTL languages"*                     |
 
 ---
 
@@ -184,28 +184,28 @@ Always start with `@alex` to activate Alex's cognitive framework:
 
 ### Slash Commands
 
-| Command | What It Does |
-|---|---|
-| `/status` | Check Alex health and version |
-| `/meditate` | Consolidate knowledge from session |
-| `/dream` | Run neural maintenance |
-| `/selfactualize` | Deep architecture assessment |
-| `/learn` | Start a learning conversation |
-| `/session` | Start a focused learning session |
-| `/model` | Model intelligence dashboard |
-| `/knowledge` | Search global knowledge |
-| `/saveinsight` | Save a new insight |
-| `/promote` | Promote local skill to global |
-| `/knowledgestatus` | Knowledge base stats |
-| `/sync` | Cloud sync |
-| `/calendar` | View upcoming calendar events (Graph) |
-| `/mail` | View recent emails (Graph) |
-| `/context` | Full work context (Graph) |
-| `/people` | People search (Graph) |
-| `/profile` | Personalization |
-| `/docs` | Open documentation |
-| `/azure` | Azure guidance |
-| `/m365` | M365 guidance |
+| Command            | What It Does                          |
+| ------------------ | ------------------------------------- |
+| `/status`          | Check Alex health and version         |
+| `/meditate`        | Consolidate knowledge from session    |
+| `/dream`           | Run neural maintenance                |
+| `/selfactualize`   | Deep architecture assessment          |
+| `/learn`           | Start a learning conversation         |
+| `/session`         | Start a focused learning session      |
+| `/model`           | Model intelligence dashboard          |
+| `/knowledge`       | Search global knowledge               |
+| `/saveinsight`     | Save a new insight                    |
+| `/promote`         | Promote local skill to global         |
+| `/knowledgestatus` | Knowledge base stats                  |
+| `/sync`            | Cloud sync                            |
+| `/calendar`        | View upcoming calendar events (Graph) |
+| `/mail`            | View recent emails (Graph)            |
+| `/context`         | Full work context (Graph)             |
+| `/people`          | People search (Graph)                 |
+| `/profile`         | Personalization                       |
+| `/docs`            | Open documentation                    |
+| `/azure`           | Azure guidance                        |
+| `/m365`            | M365 guidance                         |
 
 ### Learning Something New
 
@@ -232,74 +232,74 @@ Search across all your projects:
 
 ### Command Palette (Ctrl+Shift+P)
 
-| Command | Description |
-|---|---|
-| `Alex: Initialize Architecture` | First-time setup for a project |
-| `Alex: Upgrade Architecture` | Update to latest version |
-| `Alex: Dream (Neural Maintenance)` | Validate and repair synapses |
-| `Alex: Self-Actualize (Deep Meditation)` | Comprehensive health check |
-| `Alex: Skill & Knowledge Review` | Review staleness-prone skills |
-| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository |
-| `Alex: Open Documentation` | View the docs |
-| `Alex: Setup Environment` | Optimize VS Code settings for Alex |
-| `Alex: Start Learning Session` | Begin Pomodoro-style focus session |
-| `Alex: Pause/Resume Session` | Pause or resume active session |
-| `Alex: Open Health Dashboard` | Rich webview with architecture visualization |
-| `Alex: Create Learning Goal` | Create a new learning goal |
-| `Alex: Sync Global Knowledge` | Sync with GitHub Gist |
-| `Alex: Report Issue / View Diagnostics` | View local telemetry for bug reports |
+| Command                                     | Description                                  |
+| ------------------------------------------- | -------------------------------------------- |
+| `Alex: Initialize Architecture`             | First-time setup for a project               |
+| `Alex: Upgrade Architecture`                | Update to latest version                     |
+| `Alex: Dream (Neural Maintenance)`          | Validate and repair synapses                 |
+| `Alex: Self-Actualize (Deep Meditation)`    | Comprehensive health check                   |
+| `Alex: Skill & Knowledge Review`            | Review staleness-prone skills                |
+| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository               |
+| `Alex: Open Documentation`                  | View the docs                                |
+| `Alex: Setup Environment`                   | Optimize VS Code settings for Alex           |
+| `Alex: Start Learning Session`              | Begin Pomodoro-style focus session           |
+| `Alex: Pause/Resume Session`                | Pause or resume active session               |
+| `Alex: Open Health Dashboard`               | Rich webview with architecture visualization |
+| `Alex: Create Learning Goal`                | Create a new learning goal                   |
+| `Alex: Sync Global Knowledge`               | Sync with private GitHub repo                |
+| `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports         |
 
 ### Chat Commands (@alex /command)
 
-| Command | Purpose | Example |
-|---|---|---|
-| `/status` | Health check | `@alex /status` |
-| `/meditate` | Knowledge consolidation | `@alex /meditate I learned about DI patterns` |
-| `/dream` | Neural maintenance | `@alex /dream` |
-| `/selfactualize` | Deep assessment | `@alex /selfactualize` |
-| `/learn` | Learning session | `@alex /learn TypeScript generics` |
-| `/model` | Model intelligence | `@alex /model` or `@alex /model <task>` |
-| `/azure` | Azure guidance | `@alex /azure deploy function app` |
-| `/m365` | M365 guidance | `@alex /m365 create teams bot` |
-| `/calendar` | Calendar events | `@alex /calendar` or `@alex /calendar 7` |
-| `/mail` | Recent emails | `@alex /mail` or `@alex /mail unread` |
-| `/context` | Full work context | `@alex /context` |
-| `/people` | People search | `@alex /people John Smith` |
-| `/profile` | Personalization | `@alex /profile` |
-| `/knowledge` | Search global | `@alex /knowledge caching patterns` |
-| `/saveinsight` | Save learning | `@alex /saveinsight [your insight]` |
-| `/promote` | Promote to global | `@alex /promote .github/skills/api-design/SKILL.md` |
-| `/knowledgestatus` | Knowledge stats | `@alex /knowledgestatus` |
-| `/sync` | Cloud sync | `@alex /sync` |
-| `/docs` | Open documentation | `@alex /docs` |
-| `/checkskills` | Discover new skills | `@alex /checkskills` |
-| `/pullskill` | Install from GK | `@alex /pullskill <id>` |
+| Command            | Purpose                 | Example                                             |
+| ------------------ | ----------------------- | --------------------------------------------------- |
+| `/status`          | Health check            | `@alex /status`                                     |
+| `/meditate`        | Knowledge consolidation | `@alex /meditate I learned about DI patterns`       |
+| `/dream`           | Neural maintenance      | `@alex /dream`                                      |
+| `/selfactualize`   | Deep assessment         | `@alex /selfactualize`                              |
+| `/learn`           | Learning session        | `@alex /learn TypeScript generics`                  |
+| `/model`           | Model intelligence      | `@alex /model` or `@alex /model <task>`             |
+| `/azure`           | Azure guidance          | `@alex /azure deploy function app`                  |
+| `/m365`            | M365 guidance           | `@alex /m365 create teams bot`                      |
+| `/calendar`        | Calendar events         | `@alex /calendar` or `@alex /calendar 7`            |
+| `/mail`            | Recent emails           | `@alex /mail` or `@alex /mail unread`               |
+| `/context`         | Full work context       | `@alex /context`                                    |
+| `/people`          | People search           | `@alex /people John Smith`                          |
+| `/profile`         | Personalization         | `@alex /profile`                                    |
+| `/knowledge`       | Search global           | `@alex /knowledge caching patterns`                 |
+| `/saveinsight`     | Save learning           | `@alex /saveinsight [your insight]`                 |
+| `/promote`         | Promote to global       | `@alex /promote .github/skills/api-design/SKILL.md` |
+| `/knowledgestatus` | Knowledge stats         | `@alex /knowledgestatus`                            |
+| `/sync`            | Cloud sync              | `@alex /sync`                                       |
+| `/docs`            | Open documentation      | `@alex /docs`                                       |
+| `/checkskills`     | Discover new skills     | `@alex /checkskills`                                |
+| `/pullskill`       | Install from GK         | `@alex /pullskill <id>`                             |
 
 ### MCP Tools
 
 #### Memory & Search
 
-| Tool | Purpose | Auto? |
-|---|---|---|
-| `alex_memory_search` | Search memory files | ✅ Auto-fallback to global |
-| `alex_global_knowledge_search` | Search global knowledge | — |
-| `alex_global_knowledge_status` | Knowledge base status | — |
+| Tool                           | Purpose                 | Auto?                     |
+| ------------------------------ | ----------------------- | ------------------------- |
+| `alex_memory_search`           | Search memory files     | ✅ Auto-fallback to global |
+| `alex_global_knowledge_search` | Search global knowledge | —                         |
+| `alex_global_knowledge_status` | Knowledge base status   | —                         |
 
 #### Knowledge Management
 
-| Tool | Purpose | Auto? |
-|---|---|---|
-| `alex_save_insight` | Save learning to global | ✅ Auto cloud sync |
-| `alex_promote_knowledge` | Promote local to global | ✅ Auto cloud sync |
-| `alex_cloud_sync` | Sync with GitHub Gist | — |
+| Tool                     | Purpose                       | Auto?             |
+| ------------------------ | ----------------------------- | ----------------- |
+| `alex_save_insight`      | Save learning to global       | ✅ Auto cloud sync |
+| `alex_promote_knowledge` | Promote local to global       | ✅ Auto cloud sync |
+| `alex_cloud_sync`        | Sync with private GitHub repo | —                 |
 
 #### Architecture Health
 
-| Tool | Purpose |
-|---|---|
+| Tool                       | Purpose                       |
+| -------------------------- | ----------------------------- |
 | `alex_architecture_status` | Check Alex version and status |
-| `alex_synapse_health` | Validate synaptic connections |
-| `alex_self_actualization` | Deep architecture assessment |
+| `alex_synapse_health`      | Validate synaptic connections |
+| `alex_self_actualization`  | Deep architecture assessment  |
 
 ---
 
@@ -316,13 +316,13 @@ Alex implements a dual-process cognitive model inspired by human cognition:
 - Handles routine tasks automatically
 - Pattern recognition and auto-learning
 
-| Process | Trigger | Timing |
-|---|---|---|
-| Auto Global Search | Local search empty | Immediate |
-| Startup Sync | Extension activates | 10 seconds |
-| Periodic Sync | Timer | Every 5 minutes |
-| Post-Modification Sync | Save/promote | 2 seconds |
-| Auto-Insight | Conversation | Confidence ≥ 0.5 |
+| Process                | Trigger             | Timing           |
+| ---------------------- | ------------------- | ---------------- |
+| Auto Global Search     | Local search empty  | Immediate        |
+| Startup Sync           | Extension activates | 10 seconds       |
+| Periodic Sync          | Timer               | Every 5 minutes  |
+| Post-Modification Sync | Save/promote        | 2 seconds        |
+| Auto-Insight           | Conversation        | Confidence ≥ 0.5 |
 
 #### System 2: Conscious Mind (Slow, Deliberate)
 
@@ -335,24 +335,24 @@ Alex implements a dual-process cognitive model inspired by human cognition:
 
 Alex has different types of memory arranged in a hierarchy:
 
-| Type | Location | Purpose |
-|---|---|---|
-| **Working** | Chat session | Current conversation (temporary) |
-| **Procedural** | `.github/instructions/` | How-to processes (auto-loaded) |
-| **Episodic** | `.github/prompts/` | Complex workflows (user-invoked) |
-| **Skills** | `.github/skills/` | Domain expertise (auto-loaded) |
-| **Global** | `~/.alex/global-knowledge/` | Cross-project patterns & insights |
-| **Cloud** | GitHub Gist | Backup and sharing across machines |
+| Type           | Location                    | Purpose                            |
+| -------------- | --------------------------- | ---------------------------------- |
+| **Working**    | Chat session                | Current conversation (temporary)   |
+| **Procedural** | `.github/instructions/`     | How-to processes (auto-loaded)     |
+| **Episodic**   | `.github/prompts/`          | Complex workflows (user-invoked)   |
+| **Skills**     | `.github/skills/`           | Domain expertise (auto-loaded)     |
+| **Global**     | `~/.alex/global-knowledge/` | Cross-project patterns & insights  |
+| **Cloud**      | Private GitHub Repo         | Backup and sharing across machines |
 
 ### Global Knowledge
 
 Your `~/.alex/` folder contains knowledge that works across all projects:
 
-| Type | File Pattern | Purpose |
-|---|---|---|
-| Pattern | `GK-*.md` | Reusable solutions |
-| Insight | `GI-*.md` | Timestamped learnings |
-| Index | `index.json` | Searchable master index |
+| Type    | File Pattern | Purpose                 |
+| ------- | ------------ | ----------------------- |
+| Pattern | `GK-*.md`    | Reusable solutions      |
+| Insight | `GI-*.md`    | Timestamped learnings   |
+| Index   | `index.json` | Searchable master index |
 
 **Saving insights:**
 
@@ -393,18 +393,18 @@ Your `~/.alex/` folder contains knowledge that works across all projects:
 
 ## ⌨️ Keyboard Shortcuts
 
-| Action | Windows/Linux | macOS |
-|---|---|---|
-| Start Learning Session | `Ctrl+Alt+P` | `Cmd+Alt+P` |
-| Pause/Resume Session | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
-| Search Knowledge | `Ctrl+Shift+K` | `Cmd+Shift+K` |
-| Run Dream Protocol | `Ctrl+Alt+D` | `Cmd+Alt+D` |
-| Self-Actualize | `Ctrl+Alt+S` | `Cmd+Alt+S` |
-| Sync Knowledge | `Ctrl+Alt+K` | `Cmd+Alt+K` |
-| Open Documentation | `Ctrl+Alt+H` | `Cmd+Alt+H` |
-| Open Chat | `Ctrl+Alt+I` | `Cmd+Alt+I` |
-| Command Palette | `Ctrl+Shift+P` | `Cmd+Shift+P` |
-| Output Panel | `Ctrl+Shift+U` | `Cmd+Shift+U` |
+| Action                 | Windows/Linux    | macOS           |
+| ---------------------- | ---------------- | --------------- |
+| Start Learning Session | `Ctrl+Alt+P`     | `Cmd+Alt+P`     |
+| Pause/Resume Session   | `Ctrl+Alt+Space` | `Cmd+Alt+Space` |
+| Search Knowledge       | `Ctrl+Shift+K`   | `Cmd+Shift+K`   |
+| Run Dream Protocol     | `Ctrl+Alt+D`     | `Cmd+Alt+D`     |
+| Self-Actualize         | `Ctrl+Alt+S`     | `Cmd+Alt+S`     |
+| Sync Knowledge         | `Ctrl+Alt+K`     | `Cmd+Alt+K`     |
+| Open Documentation     | `Ctrl+Alt+H`     | `Cmd+Alt+H`     |
+| Open Chat              | `Ctrl+Alt+I`     | `Cmd+Alt+I`     |
+| Command Palette        | `Ctrl+Shift+P`   | `Cmd+Shift+P`   |
+| Output Panel           | `Ctrl+Shift+U`   | `Cmd+Shift+U`   |
 
 ---
 
@@ -460,11 +460,11 @@ Or ask Alex directly:
 @alex run dependency audit
 ```
 
-| Priority | Audits |
-|---|---|
-| 🔴 High | Security, Dependencies, Code Quality |
+| Priority | Audits                                                    |
+| -------- | --------------------------------------------------------- |
+| 🔴 High   | Security, Dependencies, Code Quality                      |
 | 🟡 Medium | UI, Bundle Size, Git, Changelog, Tests, API Compatibility |
-| 🟢 Low | Accessibility, Localization, Assets, Configuration |
+| 🟢 Low    | Accessibility, Localization, Assets, Configuration        |
 
 ---
 
@@ -529,10 +529,10 @@ Or: `Ctrl+Shift+P` → "Alex: Dream (Neural Maintenance)"
 
 ### Finding Logs
 
-| Channel | Content |
-|---|---|
-| Alex Cognitive Architecture | General extension logs |
-| Alex Unconscious Mind | Background sync and auto-operations |
+| Channel                     | Content                             |
+| --------------------------- | ----------------------------------- |
+| Alex Cognitive Architecture | General extension logs              |
+| Alex Unconscious Mind       | Background sync and auto-operations |
 
 View in VS Code Output panel: `Ctrl+Shift+U`
 
@@ -567,16 +567,16 @@ View in VS Code Output panel: `Ctrl+Shift+U`
 
 ### Status Indicators
 
-| Icon | Meaning |
-|---|---|
-| ✅ | Working / Healthy / Connected |
-| ⏳ | In Progress / Syncing |
-| ⚠️ | Warning / Needs Attention |
-| ❌ | Error / Disconnected |
-| 🧠 | Conscious (user-initiated) |
-| 💤 | Unconscious (automatic) |
-| 🌐 | Global knowledge |
-| ☁️ | Cloud sync |
+| Icon | Meaning                       |
+| ---- | ----------------------------- |
+| ✅    | Working / Healthy / Connected |
+| ⏳    | In Progress / Syncing         |
+| ⚠️    | Warning / Needs Attention     |
+| ❌    | Error / Disconnected          |
+| 🧠    | Conscious (user-initiated)    |
+| 💤    | Unconscious (automatic)       |
+| 🌐    | Global knowledge              |
+| ☁️    | Cloud sync                    |
 
 ---
 

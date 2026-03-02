@@ -398,7 +398,7 @@ Once your files are in OneDrive, ask the Alex declarative agent:
 
 ### 3. Keeping in Sync
 
-Your VS Code Alex extension syncs to GitHub Gists. The M365 agent reads
+Your VS Code Alex extension syncs to a private GitHub repo. The M365 agent reads
 from OneDrive. For bi-directional sync:
 
 1. Export periodically using "Alex: Export for M365"

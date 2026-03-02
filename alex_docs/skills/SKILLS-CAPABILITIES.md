@@ -83,12 +83,12 @@ graph TB
 
 **Table 4:** *Platform Integration Skills*
 
-| Skill                   | Status | Description                           |
-| ----------------------- | ------ | ------------------------------------- |
-| **Azure MCP Tools**     | ✅ Core | 50+ Azure tools with best practices   |
-| **M365 MCP Tools**      | ✅ Core | Teams, Copilot extensibility guidance |
-| **GitHub Gist Sync**    | ✅ Core | Cloud backup and multi-machine sync   |
-| **Copilot Integration** | ✅ Core | Chat participant, tools, agents       |
+| Skill                        | Status | Description                           |
+| ---------------------------- | ------ | ------------------------------------- |
+| **Azure MCP Tools**          | ✅ Core | 50+ Azure tools with best practices   |
+| **M365 MCP Tools**           | ✅ Core | Teams, Copilot extensibility guidance |
+| **Private GitHub Repo Sync** | ✅ Core | Cloud backup and multi-machine sync   |
+| **Copilot Integration**      | ✅ Core | Chat participant, tools, agents       |
 
 ### Knowledge Management
 

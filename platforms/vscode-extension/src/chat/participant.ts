@@ -1835,7 +1835,7 @@ Opening the documentation index...
 | **Memory Systems** | How Alex stores and retrieves knowledge |
 | **Project Structure** | .github folder files and functions |
 | **Global Knowledge** | Cross-project learning system |
-| **Cloud Sync** | GitHub Gist backup and sharing |
+| **Cloud Sync** | Private GitHub repo backup and sharing |
 | **Quick Reference** | Commands, tools, and shortcuts |
 
 `);

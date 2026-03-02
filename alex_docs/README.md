@@ -108,7 +108,7 @@ flowchart TB
     end
 
     subgraph CLOUD["☁️ Cloud"]
-        GIST["📤 GitHub Gist"]
+        GIST["📤 Private GitHub Repo"]
     end
 
     CM --> WM
@@ -168,7 +168,7 @@ Automatic processes that happen transparently:
 1. **Working Memory** - Current chat session (7±2 rules)
 2. **Local Memory** - Project-specific files in `.github/`
 3. **Global Memory** - Cross-project knowledge in `~/.alex/`
-4. **Cloud Memory** - GitHub Gist backup for sharing/recovery
+4. **Cloud Memory** - Private GitHub repo backup for sharing/recovery
 
 ---
 

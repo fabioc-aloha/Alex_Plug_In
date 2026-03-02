@@ -6,7 +6,7 @@
 
 This API infrastructure was built for an earlier architecture that used:
 - Azure Functions to host a Knowledge API
-- GitHub Gists for cross-platform memory sync
+- Private GitHub repo for cross-platform memory sync
 - OpenAPI spec to connect with M365 Copilot
 
 ## Why It's Not Used
@@ -25,12 +25,12 @@ This infrastructure may be reactivated if:
 
 ## Files Preserved
 
-| File | Purpose |
-|------|---------|
-| `src/index.ts` | Azure Functions entry point (12 endpoints) |
-| `src/functions/*.ts` | Individual function handlers |
-| `src/services/gistService.ts` | GitHub Gist sync service (939 lines) |
-| `package.json` | Dependencies for Azure Functions |
+| File                          | Purpose                                      |
+| ----------------------------- | -------------------------------------------- |
+| `src/index.ts`                | Azure Functions entry point (12 endpoints)   |
+| `src/functions/*.ts`          | Individual function handlers                 |
+| `src/services/gistService.ts` | Private GitHub repo sync service (939 lines) |
+| `package.json`                | Dependencies for Azure Functions             |
 
 ## Also Dormant
 
