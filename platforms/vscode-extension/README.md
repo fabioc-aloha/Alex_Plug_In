@@ -231,7 +231,7 @@ Depth of reasoning — frontier models for meditation, audits, and architecture.
 
 ## 🚀 Quick Start (VS Code)
 
-> 📘 For a comprehensive guide, see the **[User Manual](alex_docs/guides/USER-MANUAL.md)**
+> 🌐 **New to Alex?** Visit **[learnalex.correax.com](https://learnalex.correax.com/)** for study guides, documentation, and training.
 
 ### Step 1: Install
 
@@ -1140,34 +1140,17 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 
 ---
 
-## 📖 Documentation
+## 📖 Documentation & Training
 
-> 📘 **New to Alex?** Start with the **[User Manual](alex_docs/guides/USER-MANUAL.md)** for a complete getting-started guide!
+> 🌐 **[learnalex.correax.com](https://learnalex.correax.com/)** — Study guides, documentation, and training on how to partner with Alex.
 
-### Architecture Deep Dive
+Everything you need to learn Alex, understand the architecture, and get the most out of your partnership:
 
-Comprehensive documentation is included with the extension in the `alex_docs/` folder:
-
-| Document                                                                   | Description                                     |
-| -------------------------------------------------------------------------- | ----------------------------------------------- |
-| **[User Manual](alex_docs/guides/USER-MANUAL.md)**                         | 📘 **START HERE** - Complete guide to using Alex |
-| [Cognitive Architecture](alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams    |
-| [Skills & Capabilities](alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list         |
-| [Copilot Integration](alex_docs/platforms/COPILOT-INTEGRATION.md)          | How Alex uses native Copilot features           |
-| [Conscious Mind](alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands          |
-| [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                  |
-| [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory         |
-| [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions              |
-| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                 |
-| [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing             |
-| [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet              |
-
-### External Resources
-
-| Resource                                                                              | Description               |
-| ------------------------------------------------------------------------------------- | ------------------------- |
-| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history  |
-| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In)                           | TypeScript implementation |
+| Resource                                                                              | Description                                                       |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **[learnalex.correax.com](https://learnalex.correax.com/)**                           | 📘 **START HERE** — Study guides, training, and full documentation |
+| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history                                          |
+| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In)                           | TypeScript implementation                                         |
 
 ---
 
@@ -1259,9 +1242,9 @@ Alex is designed and operated in alignment with Microsoft's [Secure Future Initi
 
 ## 💬 Support
 
+- [learnalex.correax.com](https://learnalex.correax.com/) - Study guides, documentation and training
 - [GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) - Ask questions and share ideas
 - [Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues) - Report bugs and request features
-- [User Manual](alex_docs/guides/USER-MANUAL.md) - Complete documentation
 
 ## 📝 License
 

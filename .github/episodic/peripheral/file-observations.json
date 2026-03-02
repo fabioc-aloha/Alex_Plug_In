@@ -4,28 +4,25 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "README.md",
-    "alex_docs/architecture/MEMORY-SYSTEMS.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/README.md"
+    "platforms/vscode-extension/README.md",
+    "platforms/vscode-extension/src/views/welcomeView.ts"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772480811275
+      "scannedAt": 1772480943533
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1772480811275
+      "scannedAt": 1772480943533
     },
     {
       "file": "README.md",
       "todoCount": 1,
-      "scannedAt": 1772480811275
+      "scannedAt": 1772480943533
     }
   ],
-  "lastUpdated": 1772480811275
+  "lastUpdated": 1772480943533
 }

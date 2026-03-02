@@ -210,6 +210,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
         openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
         provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
+        learnAlex: "https://learnalex.correax.com/",
       };
 
       // Handle simple command execution
@@ -1661,6 +1662,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
                 </button>
                 ${this._actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
                 ${this._actionButton('workingWithAlex', '🎓', 'How We Work', 'Learn how to collaborate effectively')}
+                ${this._actionButton('learnAlex', '📖', 'Learn Alex', 'Study guides, documentation and training at learnalex.correax.com')}
                 ${this._actionButton('cognitiveLevels', '🧬', 'Cognitive Levels', 'Subscription guide — what unlocks at each tier')}
                 ${this._actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
                 
