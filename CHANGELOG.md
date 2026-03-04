@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.0] - 2026-03-03
+
+> **Environment & Cognitive Tier Hardening** — Extended thinking detection fix (critical), extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh.
+
+### Added
+- Extension dependency checking with one-click install for GitHub Copilot, Copilot Chat, Mermaid Preview
+- Multi-account GitHub detection (personal + enterprise) in cognitive tier
+- Account-aware setup guidance with upgrade tips for Frontier model access
+- Real-time cognitive tier refresh on Copilot settings changes
+
+### Fixed
+- **CRITICAL**: Extended thinking detection was reading wrong config keys — Level 4 (Advanced) was unreachable for all users
+- L4 badge race condition causing welcome view to default to Level 1
+- Misleading account classification (business → unknown)
+- Markdown in plain text dialogs, unsafe sign-in command
+
+### Changed
+- Package size reduced: 534 → 525 files (~3.4 MB lighter)
+
+---
+
 ## [6.0.3] - 2026-03-02
 
 ### Fixed

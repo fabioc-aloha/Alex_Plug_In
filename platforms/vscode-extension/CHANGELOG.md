@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.1.0] - 2026-03-03
+
 > **Environment & Cognitive Tier Hardening** — Extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh, and extended thinking detection fix.
 
 ### Added

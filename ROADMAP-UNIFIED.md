@@ -211,6 +211,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.0.1     | Banner Visibility Fix      | ✅ Shipped  |
 | v6.0.2     | Brand Doc + Trifecta Audit | ✅ Shipped  |
 | v6.0.3     | Marketplace Compliance     | ✅ Shipped  |
+| v6.1.0     | Cognitive Tier Hardening   | ✅ Shipped  |
 | **v6.5.0** | **The Trust Release**      | **🎯 Next** |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -218,8 +219,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 6.0.3                         |
-| **Current Heirs**          | VS Code (6.0.3), M365 (6.0.3) |
+| **Current Master Version** | 6.1.0                         |
+| **Current Heirs**          | VS Code (6.1.0), M365 (6.1.0) |
 | **Next Target**            | v6.5.0 — The Trust Release    |
 | **Updated**                | 2026-03-03                    |
 
@@ -227,7 +228,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v6.0.3)
+### Current State Summary (v6.1.0)
 
 Alex now has:
 - **126 Skills** (124 inheritable to heirs, fully synced)
@@ -250,6 +251,7 @@ Alex now has:
 
 | Version | Theme                                       | Date       |
 | ------- | ------------------------------------------- | ---------- |
+| v6.1.0  | Cognitive Tier Hardening                    | 2026-03-03 |
 | v6.0.3  | Marketplace Compliance + Doc Hygiene        | 2026-03-02 |
 | v6.0.2  | Brand Doc Correction + Trifecta Audit       | 2026-02-28 |
 | v6.0.1  | Banner Opacity Fix                          | 2026-02-28 |
