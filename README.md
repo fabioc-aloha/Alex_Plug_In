@@ -166,7 +166,7 @@ The sweet spot — full partnership with autonomous tools, deep skills, speciali
 | ------------------------------ | :-----: | :---: | :---------: | :------: |
 | Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
 | 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
-| 126 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
+| 128 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -233,9 +233,9 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Dependencies**   | Extension dependency check with one-click install for Copilot and Mermaid Preview             |
 | **Multi-Account**  | GitHub personal + enterprise account detection in cognitive tier                              |
 | **AI Media**       | 5 skills updated: Ideogram v3, nano-banana-2, Flux Kontext, veo-3.1-fast, qwen3-tts          |
-| **Trifectas**      | `image-handling` and `character-aging-progression` trifectas completed (26 total)             |
+| **Trifectas**      | 36 complete trifectas — 10 new: debugging, refactoring, security-review, root-cause-analysis + 6 more |
 | **Partnership**   | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows       |
-| **Intelligence**  | 126 skills, emotional detection, model tier awareness, expertise calibration                  |
+| **Intelligence**  | 128 skills, emotional detection, model tier awareness, expertise calibration                  |
 | **Memory**        | Global knowledge + session history + outcome tracking + episodic records                      |
 | **MCP**           | Standalone MCP cognitive tools server (`npx @alex/mcp-cognitive-tools`)                       |
 
@@ -259,7 +259,7 @@ The VS Code extension includes everything described below — see the **[VS Code
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
 | **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
 | **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **126 Skills**             | Portable domain expertise — from coding to research to Azure     |
+| **128 Skills**             | Portable domain expertise — from coding to research to Azure     |
 | **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
 | **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
 | **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |

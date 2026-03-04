@@ -265,8 +265,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 ### Current State Summary (v6.1.5)
 
 Alex now has:
-- **126 Skills** (124 inheritable to heirs, fully synced)
-- **26 Complete Trifectas** — comprehensive domain coverage including north-star
+- **128 Skills** (124 inheritable to heirs, fully synced)
+- **36 Complete Trifectas** — comprehensive domain coverage including north-star
 - **90 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
 - **4 Platform Heirs** — VS Code Extension, M365 Copilot Agent, GitHub Copilot Web, Agent Plugin
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces

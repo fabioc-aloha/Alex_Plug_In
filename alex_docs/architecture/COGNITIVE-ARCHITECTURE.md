@@ -388,7 +388,7 @@ flowchart TB
         direction LR
         PROC["📑 Procedural\n56 .instructions.md"]
         EPIS["📓 Episodic\n39 .prompt.md"]
-        SKILLS["🧊 Skills\n126 skills"]
+        SKILLS["🧊 Skills\n128 skills"]
         GK["🌐 Global Knowledge\nPatterns + Insights"]
     end
 

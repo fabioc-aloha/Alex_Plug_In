@@ -71,7 +71,7 @@ After installation:
 | **Weekly Reviews**          | Automated summaries of meetings, emails, and progress                  |
 | **Focus Sessions**          | Calendar-aware Pomodoro timing and workload analysis                   |
 | **Cognitive Consolidation** | "Meditation" sessions to consolidate learnings into memory             |
-| **126 Skills**              | Pre-built cognitive capabilities from research to analysis             |
+| **128 Skills**              | Pre-built cognitive capabilities from research to analysis             |
 | **Word & PowerPoint**       | Declarative agent available in Word and PowerPoint (not just Chat)     |
 
 ### What Makes Alex Different
@@ -542,7 +542,7 @@ A: No. Only M365 Exchange mailboxes. Personal Gmail/Outlook.com not supported.
 
 ### Capabilities
 
-**Q: What are Alex's "126 skills"?**
+**Q: What are Alex's "128 skills"?**
 A: Pre-built cognitive capabilities like root cause analysis, strategic planning, research synthesis, decision frameworks, etc. Say "Show me your skills" for full list.
 
 **Q: Can I create custom skills?**

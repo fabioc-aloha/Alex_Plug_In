@@ -40,7 +40,7 @@ VS Code 1.110+ supports [agent plugins](https://code.visualstudio.com/docs/copil
 | Install | Extensions sidebar | `@agentPlugins` in Extensions sidebar | Commit to repo |
 | Commands | 90 registered commands | Slash commands via prompts | None |
 | Agents | 7 specialist agents | 7 specialist agents | None |
-| Skills | 126 skills | 84 plugin-ready skills | All (read-only) |
+| Skills | 128 skills | 84 plugin-ready skills | All (read-only) |
 | Hooks | 4 lifecycle hooks | 1 lifecycle hook (PreToolUse) | None |
 | MCP | Via extension activation | `.mcp.json` standalone | None |
 | Memory | SecretStorage + file + episodic | File memory only | File memory only |
@@ -127,7 +127,7 @@ This heir is synced from Master Alex during release. To deploy:
 
 ---
 
-## Skill Selection — Complete Inventory (126 Skills)
+## Skill Selection — Complete Inventory (128 Skills)
 
 Every Alex skill listed below with its trifecta status, inheritance, dependencies, and plugin readiness. Use this to decide what to include.
 

@@ -9,7 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.1.5] - 2026-03-04
 
-> **Heir Protection Fix** — Removed `alex_docs/` false positive from Master Alex auto-detection that blocked heir upgrades.
+> **Heir Protection Fix + Trifecta Gap Closure + M365 Polish** — Removed false positive from Master auto-detection, closed trifecta gap from 26→36, M365 orphan cleanup and mobile docs.
+
+### Added
+- 10 new complete trifectas (26→36): `image-handling`, `character-aging-progression`, `visual-memory`, `code-review`, `root-cause-analysis`, `refactoring-patterns`, `debugging-patterns`, `security-review`, `skill-building`, `global-knowledge`
+- 6 new prompts: `/rca`, `/refactor`, `/debug`, `/security-review`, `/skill-building`, `/knowledge`
+- 4 new instructions: `root-cause-analysis`, `refactoring-patterns`, `debugging-patterns`, `security-review`
+- 2 new skills: `agent-debug-panel` (7 debug scenarios), `terminal-image-rendering` (Kitty graphics protocol)
+- MCP standalone distribution: 704KB esbuild bundle at `plugin/mcp/index.js`
+
+### Changed
+- TRIFECTA-CATALOG.md: full audit — 10 new entries, Mermaid diagram, health summary updated
+- M365 USER-MANUAL.md: mobile support FAQ updated (declarative agent works in Teams mobile)
+- Skill and trifecta counts updated across all documentation (128 skills, 36 trifectas)
+
+### Removed
+- 4 orphan M365 plugin files: `alex-knowledge-plugin.json`, `graph-api-plugin.json`, `openapi.yaml`, `graph-openapi.yaml`
 
 ### Fixed
 - `alex_docs/` removed from Master Alex auto-detection indicators — heirs with `alex_docs/NORTH-STAR.md` were falsely identified as Master Alex, blocking `Alex: Upgrade` (reported by AlexLearn)

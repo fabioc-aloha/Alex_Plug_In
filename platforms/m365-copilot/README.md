@@ -11,7 +11,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**v6.1.5**: Manifest v1.25, GPT 5.1+ hardened instructions, conversation starters aligned to v1.6 limit (6 max), Word & PowerPoint declarative agent support, Teams Toolkit → M365 Agents Toolkit rename, EmbeddedKnowledge readiness. 126 skills (26 complete trifectas), M365 heir sync script, .github/ expanded with 84 plugin-ready skills + 22 instructions + 11 prompts. **v6.0.0** introduced the Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
+**v6.1.5**: Manifest v1.25, GPT 5.1+ hardened instructions, conversation starters aligned to v1.6 limit (6 max), Word & PowerPoint declarative agent support, Teams Toolkit → M365 Agents Toolkit rename, EmbeddedKnowledge readiness. 128 skills (36 complete trifectas), M365 heir sync script, .github/ expanded with 84 plugin-ready skills + 22 instructions + 11 prompts. **v6.0.0** introduced the Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
 
 ---
 
@@ -464,6 +464,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.1.5 | 126 Skills | The Partnership Release
+**Alex M365** - v6.1.5 | 128 Skills | The Partnership Release
 
 (C) 2026 CorreaX - AI That Learns How to Learn

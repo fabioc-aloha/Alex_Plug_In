@@ -24,7 +24,7 @@ I have **126 cognitive skills** organized across 16 categories, with 15 core ski
 14. **Testing Strategies** — Test pyramid, behavior verification, edge case coverage
 15. **Work-Life Balance** — Boundary awareness, prioritization, stress recognition
 
-**Total catalog**: 126 skills across all platforms (VS Code extension includes all 126, M365 focuses on the most relevant)
+**Total catalog**: 128 skills across all platforms (VS Code extension includes all 128, M365 focuses on the most relevant)
 
 ---
 

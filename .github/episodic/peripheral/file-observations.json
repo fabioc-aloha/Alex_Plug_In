@@ -1,26 +1,38 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
+    "github/episodic/peripheral/file-observations.json",
+    "CHANGELOG.md",
+    "PUBLISHING.md",
+    "README.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "platforms/m365-copilot/USER-MANUAL.md",
-    "platforms/m365-copilot/appPackage/alex-knowledge-plugin.json",
-    "platforms/m365-copilot/appPackage/graph-api-plugin.json",
-    "platforms/m365-copilot/appPackage/graph-openapi.yaml",
-    "platforms/m365-copilot/appPackage/openapi.yaml"
+    "TEST-GUIDE.md",
+    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+    "platforms/agent-plugin/README.md",
+    "platforms/m365-copilot/README.md",
+    "platforms/m365-copilot/USER-MANUAL.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772666081380
+      "scannedAt": 1772666835571
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772666081380
+      "scannedAt": 1772666835571
+    },
+    {
+      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+      "todoCount": 1,
+      "scannedAt": 1772666835571
+    },
+    {
+      "file": "TEST-GUIDE.md",
+      "todoCount": 1,
+      "scannedAt": 1772666835571
     }
   ],
-  "lastUpdated": 1772666081380
+  "lastUpdated": 1772666835571
 }
