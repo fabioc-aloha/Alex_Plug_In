@@ -1,24 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/config/cognitive-config.json",
+    "github/copilot-instructions.md",
     "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
     "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/shared/cognitiveTier.ts",
-    "platforms/vscode-extension/src/ux/uxFeatures.ts"
+    "BUG-alex-docs-false-positive-2026-03-04.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772619402390
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1772619402390
+      "scannedAt": 1772652002077
     }
   ],
-  "lastUpdated": 1772619402390
+  "lastUpdated": 1772652002077
 }

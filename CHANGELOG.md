@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.5] - 2026-03-04
+
+> **Heir Protection Fix** — Removed `alex_docs/` false positive from Master Alex auto-detection that blocked heir upgrades.
+
+### Fixed
+- `alex_docs/` removed from Master Alex auto-detection indicators — heirs with `alex_docs/NORTH-STAR.md` were falsely identified as Master Alex, blocking `Alex: Upgrade` (reported by AlexLearn)
+
+---
+
 ## [6.1.4] - 2026-03-04
 
 > **Cognitive Tier Fix + Model Updates** — Fixed L4 detection for current extended thinking settings, added GPT-5.3, collapsed sidebar sections by default.
