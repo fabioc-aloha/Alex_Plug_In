@@ -41,19 +41,19 @@
   </g>
   
   <!-- Main title -->
-  <text x="768" y="220" font-family="Arial, sans-serif" font-size="120" font-weight="bold" 
+  <text x="768" y="220" font-family="Arial, sans-serif" font-size="148" font-weight="800" 
         text-anchor="middle" fill="url(#textGradient)" filter="url(#glow)">
     ALEX
   </text>
   
   <!-- Subtitle -->
-  <text x="768" y="310" font-family="Arial, sans-serif" font-size="36" font-weight="300" 
+  <text x="768" y="310" font-family="Arial, sans-serif" font-size="44" font-weight="600" 
         text-anchor="middle" fill="#14b8a6">
     Cognitive Architecture
   </text>
   
   <!-- Note for generation -->
-  <text x="768" y="450" font-family="Arial, sans-serif" font-size="14" 
+  <text x="768" y="450" font-family="Arial, sans-serif" font-size="17" 
         text-anchor="middle" fill="#6b7280" opacity="0.7">
     Placeholder - Generate with: node scripts/generate-readme-banners.js
   </text>

@@ -171,6 +171,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **Extended Thinking**               | `claude-opus-4-5.extendedThinkingEnabled` | Deep reasoning mode for meditation, self-actualization, and architecture decisions |
 | **Thinking Budget**                 | `claude-opus-4-5.thinkingBudget: 16384`   | Maximum thinking tokens for complex cognitive tasks                                |
 | **Thinking Tool**                   | `github.copilot.chat.agent.thinkingTool`  | Enables the thinking tool for agents                                               |
+| **Thinking Phrases**                | `chat.agent.thinking.phrases`             | Alex-personality progress messages (replaces generic "Thinking...")                 |
 | **Follow-ups**                      | `github.copilot.chat.followUps: "always"` | Helps discover Alex capabilities through suggested follow-ups                      |
 | **Include Referenced Instructions** | `chat.includeReferencedInstructions`      | Better context awareness from instruction file references                          |
 

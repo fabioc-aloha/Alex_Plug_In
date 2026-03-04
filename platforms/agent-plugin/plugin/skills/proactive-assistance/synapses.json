@@ -1,0 +1,52 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "proactive-assistance",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/frustration-recognition/SKILL.md",
+            "type": "Triggers",
+            "strength": 0.9,
+            "when": "detecting user struggle or frustration",
+            "yields": "emotional signals that drive proactive help offers"
+        },
+        {
+            "target": ".github/skills/cognitive-load/SKILL.md",
+            "type": "Triggers",
+            "strength": 0.85,
+            "when": "detecting user overwhelm",
+            "yields": "complexity signals for proactive prioritization"
+        },
+        {
+            "target": ".github/skills/status-reporting/SKILL.md",
+            "type": "Enables",
+            "strength": 0.8,
+            "when": "end of day or session wrap-up detected",
+            "yields": "proactive status summary preparation"
+        },
+        {
+            "target": ".github/skills/scope-management/SKILL.md",
+            "type": "Enables",
+            "strength": 0.8,
+            "when": "complexity growth detected",
+            "yields": "proactive scope check suggestions"
+        },
+        {
+            "target": ".github/skills/awareness/SKILL.md",
+            "type": "Extends",
+            "strength": 0.75,
+            "when": "tracking user context and state",
+            "yields": "situational awareness foundation"
+        },
+        {
+            "target": ".github/skills/alex-effort-estimation/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.7,
+            "when": "user starting new task",
+            "yields": "proactive time estimates before asked"
+        }
+    ]
+}

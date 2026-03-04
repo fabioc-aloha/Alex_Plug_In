@@ -1,0 +1,92 @@
+{
+  "skill": "code-review",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "validates",
+      "strength": 0.75,
+      "reason": "Review checks test coverage"
+    },
+    {
+      "target": ".github/skills/refactoring-patterns/SKILL.md",
+      "type": "suggests",
+      "strength": 0.6,
+      "reason": "Reviews often suggest refactoring"
+    },
+    {
+      "target": ".github/skills/git-workflow/SKILL.md",
+      "type": "integrates",
+      "strength": 0.75,
+      "reason": "Review is part of PR workflow"
+    },
+    {
+      "target": ".github/skills/performance-profiling/SKILL.md",
+      "type": "validates",
+      "strength": 0.7,
+      "reason": "Extension audits identify performance bottlenecks"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "validates",
+      "strength": 0.8,
+      "reason": "Extension audit methodology validates VS Code patterns"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "integrates",
+      "strength": 0.85,
+      "reason": "Accessibility audits are part of code review quality gates",
+      "bidirectional": true
+    }
+  ],
+  "triggers": [
+    "review",
+    "PR",
+    "pull request",
+    "feedback",
+    "approve",
+    "merge",
+    "audit",
+    "code quality"
+  ],
+  "activationBoost": [
+    "review",
+    "code review",
+    "PR",
+    "pull request",
+    "feedback",
+    "approve",
+    "merge",
+    "audit",
+    "code quality",
+    "review this",
+    "review my code",
+    "check my code",
+    "code feedback",
+    "quality check",
+    "pr review",
+    "review PR",
+    "review pull request",
+    "code audit",
+    "security review",
+    "accessibility audit",
+    "look at this code",
+    "is this correct",
+    "code correct",
+    "best practices",
+    "code smell",
+    "refactor suggestion",
+    "improve this code",
+    "code improvement",
+    "suggestions",
+    "nitpick",
+    "blocking feedback",
+    "non-blocking feedback",
+    "approve PR",
+    "request changes",
+    "LGTM"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

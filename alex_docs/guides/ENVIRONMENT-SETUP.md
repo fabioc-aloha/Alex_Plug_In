@@ -38,7 +38,24 @@ These settings are **required** for Alex to function:
   "github.copilot.chat.followUps": "always",
   "chat.agent.todoList": {
     "position": "panel"
-  }
+  },
+  "chat.agent.thinking.phrases": [
+    "Meditating on this...",
+    "Consulting synapses...",
+    "Traversing knowledge graph...",
+    "Consolidating memory...",
+    "Activating neural pathways...",
+    "Searching episodic memory...",
+    "Synthesizing knowledge...",
+    "Connecting the dots...",
+    "Entering focused state...",
+    "Examining patterns...",
+    "Following the thread...",
+    "Deep in thought...",
+    "Warming up neurons...",
+    "Running cognitive analysis...",
+    "Consulting the architecture..."
+  ]
 }
 ```
 
@@ -49,6 +66,7 @@ These settings are **required** for Alex to function:
 | `detectParticipant` | Auto-routes to @alex |
 | `followUps: always` | Better conversational flow |
 | `todoList: panel` | Better visibility |
+| `thinking.phrases` | Alex-personality progress messages (replaces generic "Thinking...") |
 
 ---
 

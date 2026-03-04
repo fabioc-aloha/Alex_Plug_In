@@ -1,0 +1,75 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "performance-profiling",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/observability-monitoring/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "note": "Monitoring surfaces issues, profiling investigates deeply"
+        },
+        {
+            "target": ".github/skills/database-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "note": "Query performance is database-specific profiling"
+        },
+        {
+            "target": ".github/skills/debugging-patterns/SKILL.md",
+            "type": "analogousDomain",
+            "strength": 0.8,
+            "note": "Performance debugging uses similar systematic approaches"
+        },
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "type": "supports",
+            "strength": 0.7,
+            "note": "Performance considerations during code review"
+        },
+        {
+            "target": ".github/skills/refactoring-patterns/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "note": "Performance optimization often involves refactoring"
+        },
+        {
+            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+            "type": "supports",
+            "strength": 0.8,
+            "note": "Extension-specific profiling patterns"
+        }
+    ],
+    "activationBoost": [
+        "performance",
+        "profiling",
+        "benchmark",
+        "bottleneck",
+        "slow",
+        "latency",
+        "CPU",
+        "memory",
+        "heap",
+        "flame graph",
+        "optimization",
+        "cache",
+        "throughput"
+    ],
+    "triggers": [
+        "performance profiling",
+        "slow",
+        "bottleneck",
+        "benchmark",
+        "memory leak",
+        "CPU usage",
+        "latency issue",
+        "optimization"
+    ],
+    "inhibitors": [
+        "prototype phase",
+        "correctness first"
+    ]
+}

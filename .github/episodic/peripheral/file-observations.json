@@ -1,19 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "devcontainer/devcontainer.json",
+    "README.md",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/DK-correax-brand.md",
+    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+    "alex_docs/guides/ENVIRONMENT-SETUP.md",
+    "assets/banner-capabilities.png",
+    "assets/banner-capabilities.svg",
+    "assets/banner-main.png",
+    "assets/banner-main.svg"
   ],
   "todoHotspots": [
     {
-      "file": "docs/platforms/m365-copilot/taskpane/office-operations.js",
+      "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772653010249
-    },
-    {
-      "file": "scripts/generate-alex-persona-images.js",
-      "todoCount": 1,
-      "scannedAt": 1772653010249
+      "scannedAt": 1772662345953
     }
   ],
-  "lastUpdated": 1772653010249
+  "lastUpdated": 1772662345953
 }

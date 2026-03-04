@@ -434,7 +434,7 @@ npm run package:dev
 | Resource                  | URL                                                                 |
 | ------------------------- | ------------------------------------------------------------------- |
 | **M365 Developer Portal** | https://dev.teams.microsoft.com/apps                                |
-| **Teams Toolkit**         | https://aka.ms/teams-toolkit                                        |
+| **M365 Agents Toolkit** | https://aka.ms/teams-toolkit                                        |
 | **Office Add-ins Docs**   | https://learn.microsoft.com/office/dev/add-ins/                     |
 | **GitHub Pages Hosting**  | https://fabioc-aloha.github.io/Alex_Plug_In/platforms/m365-copilot/ |
 | **User Manual**           | [USER-MANUAL.md](./USER-MANUAL.md)                                  |

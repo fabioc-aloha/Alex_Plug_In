@@ -130,7 +130,7 @@ Alex maintains **Active Context** in working memory:
 | Objective       | Current session goal                            | Build authentication system                    |
 | Focus Trifectas | 3 skills for current work (changes per-session) | code-review, testing-strategies, deep-thinking |
 | Principles      | Design principles guiding decisions             | KISS, DRY, Quality-First                       |
-| Last Assessed   | Most recent architecture self-assessment        | 2026-02-15 — v5.7.1                            |
+| Last Assessed   | Most recent architecture self-assessment        | 2026-03-04 — v6.1.5                            |
 
 ### Core Rules (Always Active)
 | Slot | Name                        | Purpose                   |
@@ -236,4 +236,4 @@ User selects model via the M365 Copilot UI dropdown. Alex auto-adapts: structure
 
 ---
 
-*Alex v5.7.0 — A cognitive partner who actually remembers you.*
+*Alex v6.1.5 — A cognitive partner who actually remembers you.*

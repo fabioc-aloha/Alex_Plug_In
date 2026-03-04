@@ -20,7 +20,7 @@ Use this checklist to track progress from planning through production deployment
 - [ ] Can create resource groups (test: `az group create --dry-run`)
 - [ ] Entra ID app registration permissions verified OR admin contact identified
 - [ ] Resource providers registered (Web, BotService, SignalRService, Insights)
-- [ ] Teams Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
+- [ ] M365 Agents Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
 
 **Policy Compliance** ✓/✗
 - [ ] Azure Policies reviewed (no blocking location/SKU/resource-type restrictions)
@@ -1202,8 +1202,8 @@ if ($unregistered.Count -eq 0) {
     Write-Host "   Run: az provider register --namespace $($unregistered[0])" -ForegroundColor Gray
 }
 
-# 6. Teams Toolkit CLI
-Write-Host "6. Checking Teams Toolkit..." -NoNewline
+# 6. M365 Agents Toolkit CLI
+Write-Host "6. Checking M365 Agents Toolkit..." -NoNewline
 try {
     $teamsapp = teamsapp --version 2>$null
     if ($teamsapp) {
@@ -1247,7 +1247,7 @@ Write-Host "💡 Next Step: Review deployment script in TEAMS-DEEP-INTEGRATION-P
 3. Checking Azure Policies... ✅ No policies detected
 4. Checking Entra ID permissions... ✅ Can create app registrations
 5. Checking resource providers... ✅ All required providers registered
-6. Checking Teams Toolkit... ✅ Installed
+6. Checking M365 Agents Toolkit... ✅ Installed
 7. Checking region availability... ✅ East US available
 
 📋 Summary:
@@ -1624,7 +1624,7 @@ Write-Host "✅ Using admin-provided app registration: $APP_ID"
 **Prerequisites:**
 - Azure CLI installed (`az --version` should work)
 - Logged into Azure (`az login`)
-- Teams Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
+- M365 Agents Toolkit CLI installed (`npm install -g @microsoft/teamsapp-cli`)
 
 **1. Set Variables**
 

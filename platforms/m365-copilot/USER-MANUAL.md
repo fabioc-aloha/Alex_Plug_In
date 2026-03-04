@@ -1,7 +1,7 @@
 # Alex for Microsoft 365 — User Manual
-**Version 5.9.0 | February 2026**
+**Version 6.1.5 | March 2026**
 
-Welcome to Alex! Your AI cognitive partner with persistent memory, M365 context awareness, and 100+ cognitive skills.
+Welcome to Alex! Your AI cognitive partner with persistent memory, M365 context awareness, and 126 cognitive skills.
 
 ---
 
@@ -71,7 +71,8 @@ After installation:
 | **Weekly Reviews**          | Automated summaries of meetings, emails, and progress                  |
 | **Focus Sessions**          | Calendar-aware Pomodoro timing and workload analysis                   |
 | **Cognitive Consolidation** | "Meditation" sessions to consolidate learnings into memory             |
-| **100+ Skills**             | Pre-built cognitive capabilities from research to analysis             |
+| **126 Skills**              | Pre-built cognitive capabilities from research to analysis             |
+| **Word & PowerPoint**       | Declarative agent available in Word and PowerPoint (not just Chat)     |
 
 ### What Makes Alex Different
 
@@ -102,6 +103,12 @@ After installation:
 2. Look for Alex in declarative agents
 3. Click to activate
 
+**In Word / PowerPoint**:
+1. Open a document or presentation
+2. Open **Copilot** sidebar
+3. Select **Alex** from agent picker
+4. Alex has document context for grounded assistance
+
 ### Conversation Starters
 
 Click these to get started quickly:
@@ -131,12 +138,6 @@ Click these to get started quickly:
 - Email volume and key threads
 - Teams activity highlights
 - Progress toward goals
-
-**⚖️  Am I overloaded?**
-- Calendar analysis (meeting density)
-- Back-to-back detection
-- Focus time availability
-- Burnout risk assessment
 
 **🧘 Meditate**
 - Cognitive consolidation (NOT wellness meditation)
@@ -500,7 +501,7 @@ A: No, Alex requires internet for M365 Copilot and Microsoft Graph API.
 A: Not yet. Mobile support (iOS/Android Teams) planned for v6.x.
 
 **Q: What's the difference between Alex and M365 Copilot?**
-A: Alex is a **declarative agent** running *on top* of M365 Copilot. It adds persistent memory, M365 context awareness, and 100+ pre-built skills.
+A: Alex is a **declarative agent** running *on top* of M365 Copilot. It adds persistent memory, M365 context awareness, and 126 pre-built skills.
 
 ---
 
@@ -538,11 +539,11 @@ A: No. Only M365 Exchange mailboxes. Personal Gmail/Outlook.com not supported.
 
 ### Capabilities
 
-**Q: What are Alex's "100+ skills"?**
+**Q: What are Alex's "126 skills"?**
 A: Pre-built cognitive capabilities like root cause analysis, strategic planning, research synthesis, decision frameworks, etc. Say "Show me your skills" for full list.
 
 **Q: Can I create custom skills?**
-A: Not in v5.9.0. Custom skill builder coming in v7.x (Enterprise).
+A: Not in v6.1.5. Custom skill builder coming in a future release.
 
 **Q: Does Alex replace my need for M365 Copilot?**
 A: No, Alex **extends** M365 Copilot. You need a Copilot license to use Alex.

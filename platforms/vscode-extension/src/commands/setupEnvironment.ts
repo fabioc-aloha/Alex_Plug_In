@@ -234,6 +234,24 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "chat.includeReferencedInstructions": true,
   // Use Agent Skills standard
   "chat.useAgentSkills": true,
+  // Alex thinking phrases - personality-driven progress messages (VS Code 1.110+)
+  "chat.agent.thinking.phrases": [
+    "Meditating on this...",
+    "Consulting synapses...",
+    "Traversing knowledge graph...",
+    "Consolidating memory...",
+    "Activating neural pathways...",
+    "Searching episodic memory...",
+    "Synthesizing knowledge...",
+    "Connecting the dots...",
+    "Entering focused state...",
+    "Examining patterns...",
+    "Following the thread...",
+    "Deep in thought...",
+    "Warming up neurons...",
+    "Running cognitive analysis...",
+    "Consulting the architecture...",
+  ],
 };
 
 /**

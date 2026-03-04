@@ -1,0 +1,58 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "post-mortem",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
+  "created": "2026-02-01",
+  "description": "Blameless retrospectives, learning from failures",
+  "connections": [
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "FollowsFrom",
+      "strength": 0.9,
+      "description": "Post-mortem follows incident response"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "Requires",
+      "strength": 0.9,
+      "description": "Post-mortems require root cause analysis"
+    },
+    {
+      "target": ".github/skills/project-management/SKILL.md",
+      "type": "Relates",
+      "strength": 0.7,
+      "description": "Action items become project work"
+    },
+    {
+      "target": ".github/skills/change-management/SKILL.md",
+      "type": "Triggers",
+      "strength": 0.7,
+      "description": "Post-mortems often trigger process changes"
+    },
+    {
+      "target": ".github/skills/learning-psychology/SKILL.md",
+      "type": "Implements",
+      "strength": 0.7,
+      "description": "Blameless culture enables learning"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "Informs",
+      "strength": 0.7,
+      "description": "Post-mortems inform better testing"
+    }
+  ],
+  "activationTriggers": [
+    "post-mortem",
+    "postmortem",
+    "retrospective",
+    "incident review",
+    "what went wrong",
+    "lessons learned",
+    "blameless",
+    "after action",
+    "RCA meeting"
+  ]
+}

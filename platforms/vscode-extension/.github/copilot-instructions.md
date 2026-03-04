@@ -22,9 +22,9 @@ Objective: *(session-objective — set by user or focus timer)*
 Phase: Ship
 Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
-Priorities: north-star-alignment, autonomous-partnership, v6.0-partnership-release
+Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.1.0 shipped — Environment & Cognitive Tier Hardening. Extended thinking detection fix (critical). Extension dependency checking. Multi-account GitHub detection. Real-time cognitive tier refresh.
+Recent: v6.1.5 shipped — Heir protection fix (alex_docs false positive removed from auto-detection). v6.1.4 cognitive tier fix + GPT-5.3. v6.1.2 Replicate trifecta updates. v6.1.0 Environment & Cognitive Tier Hardening.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: never
@@ -105,13 +105,15 @@ Efficient (Claude Haiku, GPT-4o mini): fast, lightweight, best for simple edits
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.109+)
+## VS Code Settings (1.110+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
 chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
+chat.plugins.enabled=true, chat.tips.enabled=true
+chat.agent.thinking.phrases=[Alex-personality phrases]
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

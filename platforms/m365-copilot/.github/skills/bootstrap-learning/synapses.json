@@ -1,0 +1,85 @@
+{
+  "skill": "bootstrap-learning",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/learning-psychology/SKILL.md",
+      "type": "applies",
+      "strength": 0.8,
+      "reason": "Bootstrap uses learning science"
+    },
+    {
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "type": "applies",
+      "strength": 0.8,
+      "reason": "Scaffolded learning manages load"
+    },
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "type": "enables",
+      "strength": 0.9,
+      "reason": "Learning builds trust"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "reason": "Bootstrap learning feeds research-first knowledge acquisition"
+    },
+    {
+      "target": ".github/skills/muscle-memory-recognition/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "reason": "Learning identifies repetitive patterns that become automation"
+    }
+  ],
+  "triggers": [
+    "teach me",
+    "learn about",
+    "new domain",
+    "unfamiliar with",
+    "explain"
+  ],
+  "activationBoost": [
+    "teach me",
+    "learn about",
+    "new domain",
+    "unfamiliar with",
+    "explain",
+    "I don't know",
+    "never used",
+    "first time",
+    "how do I learn",
+    "where do I start",
+    "getting started",
+    "bootstrap",
+    "ramp up",
+    "onboard",
+    "onboarding",
+    "learning path",
+    "skill acquisition",
+    "knowledge gap",
+    "from zero",
+    "from scratch",
+    "beginner",
+    "novice",
+    "tutorial",
+    "fundamentals",
+    "basics",
+    "introduction",
+    "learning journey",
+    "skill development",
+    "capability building",
+    "domain expertise",
+    "become expert",
+    "master this",
+    "scaffolded learning",
+    "progressive disclosure",
+    "step by step",
+    "knowledge acquisition",
+    "domain learning",
+    "skill learning"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

@@ -2,7 +2,7 @@
 
 ![Your Trusted AI Partner for Any Job](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-6366f1)](platforms/m365-copilot/) [![GitHub Copilot Web](https://img.shields.io/badge/GitHub%20Copilot-Web-334155)](platforms/github-copilot-web/) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](LICENSE.md)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Agent Plugin](https://img.shields.io/badge/Agent%20Plugin-New-22c55e)](platforms/agent-plugin/) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-6366f1)](platforms/m365-copilot/) [![GitHub Copilot Web](https://img.shields.io/badge/GitHub%20Copilot-Web-334155)](platforms/github-copilot-web/) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](LICENSE.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![GitHub discussions](https://img.shields.io/github/discussions/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) [![GitHub contributors](https://img.shields.io/github/contributors/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/graphs/contributors)
 
@@ -31,6 +31,7 @@
 | Platform               | Status      | Get Started                                                                                                 |
 | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
 | **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
+| **Agent Plugin**       | 🆕 New       | [Documentation](platforms/agent-plugin/)                                                                    |
 | **M365 Copilot Agent** | 🔄 Preview   | [Documentation](platforms/m365-copilot/)                                                                    |
 | **GitHub Copilot Web** | ✅ Active    | [Documentation](platforms/github-copilot-web/)                                                              |
 
@@ -57,8 +58,21 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 - OneDrive memory integration
 - Email drafting for reminders
 - Teams and People context
+- Declarative agent in Word and PowerPoint (not just Chat)
+- Manifest v1.25, schema v1.6, GPT 5.1+ hardened instructions
 
 📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
+
+### Agent Plugin
+
+Alex as an installable VS Code agent plugin (1.110+) — no extension required:
+
+- 84 skills, 7 agents, 22 instructions, 11 prompts
+- Install from plugin marketplace, local path, or git repo
+- All knowledge-based capabilities without extension overhead
+- MCP cognitive tools server included
+
+📘 **[Agent Plugin Documentation](platforms/agent-plugin/)**
 
 ### GitHub Copilot Web
 
@@ -245,7 +259,7 @@ The VS Code extension includes everything described below — see the **[VS Code
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
 | **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
 | **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **125+ Skills**            | Portable domain expertise — from coding to research to Azure     |
+| **126 Skills**             | Portable domain expertise — from coding to research to Azure     |
 | **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
 | **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
 | **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |

@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+        "alex-cognitive-tools": {
+            "command": "node",
+            "args": [
+                "${pluginPath}/../../packages/mcp-cognitive-tools/dist/index.js"
+            ],
+            "env": {
+                "ALEX_PLUGIN_PATH": "${pluginPath}"
+            },
+            "_comment": "Path resolves within the Alex monorepo. For standalone distribution, update to the installed MCP package path.",
+            "tools": [
+                "*"
+            ]
+        }
+    }
+}

@@ -1,0 +1,82 @@
+{
+  "skill": "graphic-design",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Visual storytelling and narrative design",
+      "type": "complements",
+      "strength": 0.85,
+      "target": ".github/skills/creative-writing/SKILL.md"
+    },
+    {
+      "reason": "Extension branding, icons, and UI design",
+      "type": "applies",
+      "strength": 0.85,
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
+      "type": "extends",
+      "strength": 0.9,
+      "target": ".github/skills/markdown-mermaid/SKILL.md"
+    },
+    {
+      "reason": "Visual information processing and hierarchy",
+      "type": "applies",
+      "strength": 0.65,
+      "target": ".github/skills/cognitive-load/SKILL.md"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Text-based visual design and alignment",
+      "type": "complements",
+      "strength": 0.65,
+      "target": ".github/skills/ascii-art-alignment/SKILL.md"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Visual identity consistent with accessibility standards and WCAG compliance",
+      "type": "complements",
+      "strength": 0.7,
+      "target": ".github/skills/ui-ux-design/SKILL.md"
+    },
+    {
+      "reason": "Document visual design and layout",
+      "type": "supports",
+      "strength": 0.4,
+      "target": ".github/skills/writing-publication/SKILL.md"
+    },
+    {
+      "reason": "AI-generated illustrations, model selection, and image format handling",
+      "type": "complements",
+      "strength": 0.75,
+      "target": ".github/skills/image-handling/SKILL.md",
+      "bidirectional": true
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "design",
+    "visual",
+    "layout",
+    "typography",
+    "color",
+    "logo",
+    "branding",
+    "UI design",
+    "mockup",
+    "color palette",
+    "contrast ratio",
+    "WCAG",
+    "pastel colors",
+    "diagram colors",
+    "mermaid colors",
+    "illustration",
+    "illustrate",
+    "book illustration",
+    "visual variety"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

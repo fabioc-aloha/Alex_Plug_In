@@ -1,0 +1,9 @@
+{
+    "hooks": {
+        "PreToolUse": {
+            "command": "node ${pluginPath}/muscles/hooks/pre-tool-use.js",
+            "description": "Safety gate — verify workspace protection before destructive operations",
+            "timeout": 2000
+        }
+    }
+}

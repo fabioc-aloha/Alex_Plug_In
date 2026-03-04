@@ -40,19 +40,19 @@
   </g>
   
   <!-- Main title -->
-  <text x="768" y="230" font-family="Arial, sans-serif" font-size="80" font-weight="bold" 
+  <text x="768" y="230" font-family="Arial, sans-serif" font-size="100" font-weight="800" 
         text-anchor="middle" fill="url(#textGrad2)" filter="url(#glow2)">
     LEARN · REMEMBER · GROW
   </text>
   
   <!-- Subtitle -->
-  <text x="768" y="310" font-family="Arial, sans-serif" font-size="32" font-weight="300" 
+  <text x="768" y="310" font-family="Arial, sans-serif" font-size="40" font-weight="600" 
         text-anchor="middle" fill="#f3f4f6">
     Your AI Learning Partner
   </text>
   
   <!-- Note -->
-  <text x="768" y="450" font-family="Arial, sans-serif" font-size="14" 
+  <text x="768" y="450" font-family="Arial, sans-serif" font-size="17" 
         text-anchor="middle" fill="#6b7280" opacity="0.7">
     Placeholder - Generate with: node scripts/generate-readme-banners.js
   </text>

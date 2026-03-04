@@ -2,15 +2,16 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-6.1.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-6.1.5-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
 [![Schema](https://img.shields.io/badge/schema-v1.6-green)](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/)
+[![Manifest](https://img.shields.io/badge/manifest-v1.25-blue)](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema)
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**✨ NEW in v6.0.2**: Brand consistency pass (CorreaX ghost watermark fix), 23 complete trifectas, catalog regenerated. **v6.0.0** introduced the Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
+**v6.1.5**: Manifest v1.25, GPT 5.1+ hardened instructions, conversation starters aligned to v1.6 limit (6 max), Word & PowerPoint declarative agent support, Teams Toolkit → M365 Agents Toolkit rename, EmbeddedKnowledge readiness. 126 skills (26 complete trifectas), M365 heir sync script, .github/ expanded with 84 plugin-ready skills + 22 instructions + 11 prompts. **v6.0.0** introduced the Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
 
 ---
 
@@ -80,10 +81,10 @@ This project brings Alex's cognitive capabilities to **Microsoft 365** using the
 
 - ✅ **M365 Copilot** (declarative agent with chat interface)
 - ✅ **Microsoft Teams** (personal tab)
+- ✅ **Microsoft Word** (declarative agent + task pane)
+- ✅ **Microsoft PowerPoint** (declarative agent + task pane)
 - ✅ **Outlook** (mail add-in + task pane)
-- ✅ **Word** (task pane for document assistance)
 - ✅ **Excel** (task pane for data analysis)
-- ✅ **PowerPoint** (task pane for slide generation)
 
 **Pure M365 native capabilities** - no external APIs or Azure services required!
 
@@ -124,13 +125,16 @@ Your data stays under your control!
 ```text
 m365-copilot/
 ├── appPackage/
-│   ├── manifest.json              # Unified manifest (v1.19) — Teams + Office ✨
+│   ├── manifest.json              # Unified manifest (v1.25) — Teams + Office ✨
 │   ├── declarativeAgent.json      # Alex agent config (v1.6 schema)
 │   ├── instructions/              # Alex persona and embedded skills
 │   ├── knowledge/                 # 📚 EmbeddedKnowledge files
 │   │   ├── alex-protocols.md      # Meditation, dream, self-actualization guides
-│   │   ├── cognitive-architecture.md  # How Alex thinks and learns
-│   │   └── skill-quick-reference.md   # All 15 embedded skills condensed
+│   │   ├── capabilities.md        # 15 core skills condensed for M365 context
+│   │   ├── constitution.md        # Identity, memory systems, principles
+│   │   ├── help-commands.md       # Command reference for all Office surfaces
+│   │   ├── m365-integration.md    # PowerPoint, Office, & UX features
+│   │   └── workflows.md           # Multi-step cognitive and productivity workflows
 │   ├── color.png                  # 192x192 color icon (A Negative Space Rocket)
 │   └── outline.png                # 32x32 outline icon (rocket silhouette)
 ├── taskpane/                      # ✨ NEW: Office Add-in task pane
@@ -163,10 +167,12 @@ m365-copilot/
 1. Navigate to https://m365.cloud.microsoft/chat
 2. Click **Create agent** → **Configure** tab
 3. **Upload knowledge files** (drag-drop from `appPackage/knowledge/`):
-   - `skill-quick-reference.md` - 100+ cognitive skills
-   - `cognitive-architecture.md` - How Alex works
-   - `alex-protocols.md` - Meditation, dream protocols
-   - `help-commands.md` - Command reference
+   - `capabilities.md` — 15 core skills condensed for M365
+   - `constitution.md` — Identity, memory systems, principles
+   - `alex-protocols.md` — Meditation, dream, self-actualization protocols
+   - `help-commands.md` — Command reference
+   - `workflows.md` — Multi-step productivity workflows
+   - `m365-integration.md` — PowerPoint, Office, UX features
 4. **Copy instructions** from `appPackage/declarativeAgent.json`
 5. **Configure capabilities**: Enable OneDrive, Email, Teams, People, Meetings
 6. **Add conversation starters** from declarativeAgent.json
@@ -228,16 +234,14 @@ Or sideload manually:
 
 ## Conversation Starters
 
-- 👋 **Meet Alex** - "Hey Alex! Tell me about yourself"
-- 📝 **Set up memory** - "Help me set up my OneDrive memory"
-- 📅 **Meeting prep** - "Prep me for my next meeting"
-- 📧 **Email catch-up** - "What important emails should I know about?"
-- 👥 **Who is...** - "Tell me about the people I'm meeting with today"
-- 💬 **Teams recap** - "What's been discussed in my Teams channels?"
-- 📊 **Weekly review** - "Let's do a weekly review"
-- 🧠 **Meditate** - "Let's meditate - consolidate what I learned"
-- 💭 **Dream** - "Dream - review my memory and suggest updates"
-- 🎯 **Self-actualize** - "Self-actualize - how am I doing on my goals?"
+- ❓ **Show me what you can do** — Full command list across M365 Copilot, Word, Excel, PowerPoint, Outlook
+- 👋 **Learn about me** — Alex looks up your profile, calendar, and team
+- 🌅 **Good morning briefing** — Calendar, email highlights, goals, focus time
+- 📅 **Prep for my next meeting** — Attendee research with context
+- 📊 **Weekly review** — Meetings, emails, Teams activity recap
+- 🧘 **Meditate** — Cognitive consolidation of today's learnings
+
+> **Note**: The declarative agent schema v1.6 supports a maximum of 6 conversation starters. Additional commands (workload check, self-actualization, goal sync, knowledge search) are available through natural language — just ask!
 
 ---
 
@@ -460,6 +464,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.0.2 🧠 The Partnership Release
+**Alex M365** - v6.1.5 | 126 Skills | The Partnership Release
 
-© 2026 CorreaX • AI That Learns How to Learn
+(C) 2026 CorreaX - AI That Learns How to Learn

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <!-- Background -->
+  <rect width="1200" height="300" fill="#0f172a"/>
+  
+  <!-- Left accent bar (indigo) -->
+  <rect x="0" y="0" width="4" height="300" fill="#6366f1"/>
+  
+  <!-- Ghost watermark -->
+  <text x="1180" y="260" font-family="'Segoe UI', system-ui, sans-serif" font-size="160" font-weight="800" fill="#f1f5f9" opacity="0.10" text-anchor="end">ROADMAP</text>
+  
+  <!-- Neural network decoration (right side) -->
+  <line x1="880" y1="60" x2="960" y2="120" stroke="#6366f1" stroke-width="1.5" opacity="0.18"/>
+  <line x1="960" y1="120" x2="1040" y2="80" stroke="#818cf8" stroke-width="1.5" opacity="0.15"/>
+  <line x1="1040" y1="80" x2="1120" y2="140" stroke="#6366f1" stroke-width="1.5" opacity="0.15"/>
+  <line x1="960" y1="120" x2="1000" y2="200" stroke="#818cf8" stroke-width="1.5" opacity="0.12"/>
+  <line x1="1000" y1="200" x2="1100" y2="220" stroke="#6366f1" stroke-width="1.5" opacity="0.12"/>
+  <line x1="1120" y1="140" x2="1100" y2="220" stroke="#818cf8" stroke-width="1.5" opacity="0.10"/>
+  
+  <!-- Progress path (horizontal dotted line through middle) -->
+  <line x1="880" y1="150" x2="1180" y2="150" stroke="#6366f1" stroke-width="1" stroke-dasharray="8 6" opacity="0.20"/>
+  
+  <!-- Milestone dots on path -->
+  <circle cx="920" cy="150" r="5" fill="#22c55e" opacity="0.6"/>
+  <circle cx="980" cy="150" r="5" fill="#22c55e" opacity="0.6"/>
+  <circle cx="1040" cy="150" r="5" fill="#22c55e" opacity="0.6"/>
+  <circle cx="1100" cy="150" r="6" fill="#6366f1" opacity="0.8"/>
+  <circle cx="1160" cy="150" r="4" fill="#94a3b8" opacity="0.4"/>
+  
+  <!-- Neural nodes -->
+  <circle cx="880" cy="60" r="8" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.25"/>
+  <circle cx="960" cy="120" r="12" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.22"/>
+  <circle cx="1040" cy="80" r="7" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.20"/>
+  <circle cx="1120" cy="140" r="9" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.18"/>
+  <circle cx="1000" cy="200" r="10" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.20"/>
+  <circle cx="1100" cy="220" r="7" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.16"/>
+  
+  <!-- Series label -->
+  <text x="40" y="85" font-family="'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="700" fill="#94a3b8" letter-spacing="5">ALEX COGNITIVE ARCHITECTURE</text>
+  
+  <!-- Title -->
+  <text x="40" y="185" font-family="'Segoe UI', system-ui, sans-serif" font-size="86" font-weight="700" fill="#f1f5f9">Roadmap</text>
+  
+  <!-- Subtitle -->
+  <text x="40" y="240" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="600" fill="#94a3b8">The path from partnership to trust</text>
+</svg>

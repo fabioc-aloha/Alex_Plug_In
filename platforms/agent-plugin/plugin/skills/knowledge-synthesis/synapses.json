@@ -1,0 +1,73 @@
+{
+  "skill": "knowledge-synthesis",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "type": "follows",
+      "strength": 0.7,
+      "reason": "Synthesis often happens during meditation"
+    },
+    {
+      "target": ".github/skills/learning-psychology/SKILL.md",
+      "type": "applies",
+      "strength": 0.8,
+      "reason": "Synthesis is elaborative encoding"
+    },
+    {
+      "target": ".github/instructions/bootstrap-learning.instructions.md",
+      "type": "extends",
+      "strength": 0.8,
+      "reason": "Goes beyond learning to integration"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "integrates",
+      "strength": 0.85,
+      "reason": "Research generates pre-project knowledge that synthesis organizes"
+    }
+  ],
+  "triggers": [
+    "promote knowledge",
+    "save insight",
+    "cross-project",
+    "pattern",
+    "we learned",
+    "reusable"
+  ],
+  "activationBoost": [
+    "promote knowledge",
+    "save insight",
+    "cross-project",
+    "pattern",
+    "we learned",
+    "reusable",
+    "knowledge synthesis",
+    "synthesize",
+    "abstract pattern",
+    "extract pattern",
+    "generalize learning",
+    "this could be reused",
+    "other projects could use",
+    "save to global",
+    "promote to global",
+    "global pattern",
+    "knowledge abstraction",
+    "pattern extraction",
+    "insight capture",
+    "cross-cutting concern",
+    "universal pattern",
+    "shareable knowledge",
+    "distill learning",
+    "crystallize knowledge",
+    "pattern recognition",
+    "meta-pattern",
+    "higher-order pattern",
+    "transferable knowledge",
+    "knowledge encoding",
+    "encode insight",
+    "formalize learning"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

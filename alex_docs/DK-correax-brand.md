@@ -176,8 +176,8 @@ This is the signature CorreaX UI component. Used on every content page of LearnA
     top: 50%;
     transform: translateY(-50%);
     font-size: 130px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.15);         /* 15% opacity — subtle but visible watermark */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.10);         /* 10% opacity — subtle ghost watermark */
     pointer-events: none;
     line-height: 1;
 }
@@ -199,8 +199,8 @@ This is the signature CorreaX UI component. Used on every content page of LearnA
 
 /* Series label (eyebrow) */
 .page-header .series-label {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
     letter-spacing: 5px;
     color: var(--accent-indigo-light);
     text-transform: uppercase;
@@ -213,8 +213,8 @@ This is the signature CorreaX UI component. Used on every content page of LearnA
 
 /* H1 title */
 .page-header h1 {
-    font-size: 2.25rem;
-    font-weight: 300;                         /* Light weight — elegant, not bold */
+    font-size: 2.75rem;
+    font-weight: 600;                         /* Semi-bold — prominent, confident */
     color: var(--text);
     margin: 0 0 0.4rem;
     max-width: 820px;
@@ -222,7 +222,8 @@ This is the signature CorreaX UI component. Used on every content page of LearnA
 
 /* Subtitle */
 .page-header .subtitle {
-    font-size: 0.875rem;
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--text-muted);
     letter-spacing: 0.03em;
 }

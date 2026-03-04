@@ -26,6 +26,8 @@
                 "chat.hooks.enabled": true,
                 "github.copilot.chat.copilotMemory.enabled": true,
                 "chat.requestQueuing.enabled": true,
+                "chat.plugins.enabled": true,
+                "chat.tips.enabled": true,
                 "editor.formatOnSave": true,
                 "files.trimTrailingWhitespace": true,
                 "files.insertFinalNewline": true

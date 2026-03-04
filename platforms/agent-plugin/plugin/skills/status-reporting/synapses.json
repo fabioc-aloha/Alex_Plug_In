@@ -1,0 +1,52 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "status-reporting",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/proactive-assistance/SKILL.md",
+            "type": "Triggered-by",
+            "strength": 0.85,
+            "when": "end of day or session detected",
+            "yields": "proactive status report preparation"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "Extends",
+            "strength": 0.9,
+            "when": "pulling project tracking data",
+            "yields": "task and milestone information for reports"
+        },
+        {
+            "target": ".github/skills/scope-management/SKILL.md",
+            "type": "Integrates",
+            "strength": 0.8,
+            "when": "including scope health in status",
+            "yields": "scope creep and complexity metrics"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.75,
+            "when": "crafting executive-level updates",
+            "yields": "narrative techniques for impact"
+        },
+        {
+            "target": ".github/skills/alex-effort-estimation/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.7,
+            "when": "including timeline projections",
+            "yields": "calibrated estimates for reports"
+        },
+        {
+            "target": ".github/skills/git-workflow/SKILL.md",
+            "type": "Reads",
+            "strength": 0.7,
+            "when": "gathering accomplishment data",
+            "yields": "commit history and PR summaries"
+        }
+    ]
+}

@@ -163,11 +163,11 @@ Your deployment package is **ready to go**:
 
 ---
 
-### Option 3: VS Code Teams Toolkit (Developers)
+### Option 3: VS Code M365 Agents Toolkit (Developers)
 
 **Prerequisites**:
 - VS Code installed
-- Teams Toolkit extension installed
+- M365 Agents Toolkit extension installed
 
 **Steps**:
 ```powershell
@@ -176,7 +176,7 @@ cd c:\Development\Alex_Plug_In\platforms\m365-copilot
 code .
 
 # 2. In VS Code:
-# - Open Teams Toolkit sidebar (left)
+# - Open M365 Agents Toolkit sidebar (left)
 # - Click "ACCOUNTS" section
 # - Sign in to Microsoft 365
 

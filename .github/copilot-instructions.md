@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.1.5 shipped — Heir protection fix (alex_docs false positive removed from auto-detection). v6.1.4 cognitive tier fix + GPT-5.3. v6.1.2 Replicate trifecta updates. v6.1.0 Environment & Cognitive Tier Hardening.
+Recent: v6.1.5 — Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.2 Replicate trifecta updates. v6.1.0 Environment & Cognitive Tier Hardening.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-03-04
@@ -98,6 +98,7 @@ This updates the welcome sidebar avatar. Call it once when context shifts, not o
 VS Code Extension: platforms/vscode-extension/
 M365 Copilot Agent: platforms/m365-copilot/
 GitHub Copilot Web: platforms/github-copilot-web/ (`.github/`-only heir, no extension code)
+Agent Plugin: platforms/agent-plugin/ (plugin distribution heir — curated skills, agents, instructions, prompts, hooks, MCP)
 AlexLearn: c:\Development\AlexLearn (content-domain heir — teaching workshops, persona overlays, Marp slides)
 Evolution: heirs experiment → stability proven → Master absorbs manually
 Kill switch: .github/config/MASTER-ALEX-PROTECTED.json
@@ -123,13 +124,15 @@ Efficient (Claude Haiku, GPT-4o mini): fast, lightweight, best for simple edits
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.109+)
+## VS Code Settings (1.110+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
 chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
+chat.plugins.enabled=true, chat.tips.enabled=true
+chat.agent.thinking.phrases=[Alex-personality phrases]
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

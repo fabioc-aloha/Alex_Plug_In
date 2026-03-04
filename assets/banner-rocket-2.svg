@@ -65,10 +65,10 @@
   </g>
   
   <!-- Title centered below rocket -->
-  <text x="768" y="420" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="bold" fill="url(#purple)" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
+  <text x="768" y="420" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="800" fill="url(#purple)" text-anchor="middle" letter-spacing="3">STRAP A ROCKET TO YOUR BACK</text>
   
   <!-- Subtitle -->
-  <text x="768" y="465" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#888888" text-anchor="middle">Take Your LEARNING to New Heights</text>
+  <text x="768" y="465" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#888888" text-anchor="middle">Take Your LEARNING to New Heights</text>
   
   <!-- CorreaX mark bottom right -->
   <g transform="translate(1430, 450) scale(0.7)" opacity="0.6">

@@ -1,0 +1,65 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "awareness",
+  "version": "1.1.0",
+  "lastUpdated": "2026-02-06",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "strength": 1.0,
+      "type": "extends",
+      "when": "Calibrating confidence levels",
+      "yields": "Confidence frameworks, user trust patterns",
+      "bidirectional": false
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "strength": 1.0,
+      "type": "complements",
+      "when": "Detecting or preventing hallucinations",
+      "yields": "Detection heuristics, prevention strategies",
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "strength": 0.9,
+      "type": "enables",
+      "when": "Learning from corrections",
+      "yields": "Error integration patterns, learning protocols",
+      "bidirectional": false
+    },
+    {
+      "target": ".github/skills/self-actualization/SKILL.md",
+      "strength": 0.9,
+      "type": "informs",
+      "when": "Running self-assessment",
+      "yields": "Awareness metrics, calibration data",
+      "bidirectional": false
+    },
+    {
+      "target": ".github/instructions/alex-core.instructions.md",
+      "strength": 1.0,
+      "type": "implements",
+      "when": "Executing graceful correction",
+      "yields": "Correction protocols, epistemic humility patterns",
+      "bidirectional": true
+    },
+    {
+      "target": ".github/instructions/protocol-triggers.instructions.md",
+      "strength": 0.9,
+      "type": "triggers",
+      "when": "Detection heuristics fire",
+      "yields": "Protocol activation rules",
+      "bidirectional": false
+    }
+  ],
+  "activationContexts": [
+    "confidence calibration",
+    "uncertainty",
+    "self-correction",
+    "epistemic vigilance",
+    "awareness check"
+  ]
+}

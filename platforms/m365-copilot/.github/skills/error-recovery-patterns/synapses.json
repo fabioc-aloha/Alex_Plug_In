@@ -1,0 +1,34 @@
+{
+  "skill": "error-recovery-patterns",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "type": "follows",
+      "strength": 0.7,
+      "reason": "Recovery happens after finding the error"
+    },
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "reason": "Recovery is part of incident handling"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "enables",
+      "strength": 0.9,
+      "reason": "Recovery paths need testing"
+    }
+  ],
+  "triggers": [
+    "retry",
+    "fallback",
+    "rollback",
+    "circuit breaker",
+    "graceful degradation",
+    "error handling"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

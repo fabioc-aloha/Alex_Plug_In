@@ -1,0 +1,44 @@
+{
+  "skill": "academic-research",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Academic writing standards and publication workflows",
+      "type": "complements",
+      "strength": 0.85,
+      "target": ".github/skills/writing-publication/SKILL.md"
+    },
+    {
+      "reason": "Knowledge acquisition methodology for literature reviews",
+      "type": "uses",
+      "strength": 0.85,
+      "target": ".github/skills/bootstrap-learning/SKILL.md"
+    },
+    {
+      "reason": "Research problem analysis and gap identification",
+      "type": "applies",
+      "strength": 0.65,
+      "target": ".github/skills/root-cause-analysis/SKILL.md"
+    },
+    {
+      "reason": "Information chunking in academic writing",
+      "type": "considers",
+      "strength": 0.4,
+      "target": ".github/skills/cognitive-load/SKILL.md"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "academic",
+    "research",
+    "literature review",
+    "citation",
+    "peer review",
+    "methodology",
+    "thesis",
+    "dissertation",
+    "scholarly"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

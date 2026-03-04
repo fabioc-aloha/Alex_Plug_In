@@ -1,0 +1,43 @@
+{
+  "skill": "writing-publication",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "context": "Diagrams for papers and articles"
+    },
+    {
+      "target": ".github/skills/lint-clean-markdown/SKILL.md",
+      "type": "enables",
+      "strength": 0.6,
+      "context": "Clean markdown for documentation"
+    },
+    {
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "type": "validates",
+      "strength": 0.6,
+      "context": "Evidence-based claims"
+    }
+  ],
+  "activationPatterns": [
+    "writing article",
+    "academic paper",
+    "publication strategy",
+    "responding to reviews",
+    "documentation writing"
+  ],
+  "triggers": [
+    "write",
+    "publish",
+    "article",
+    "blog",
+    "documentation",
+    "editing",
+    "proofread",
+    "manuscript"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

@@ -1,0 +1,109 @@
+{
+    "skill": "research-first-development",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "reason": "Research-first uses bootstrap learning for unknown domains"
+        },
+        {
+            "target": ".github/skills/project-scaffolding/SKILL.md",
+            "type": "extends",
+            "strength": 0.85,
+            "reason": "Adds knowledge layer before file scaffolding"
+        },
+        {
+            "target": ".github/skills/skill-building/SKILL.md",
+            "type": "requires",
+            "strength": 0.95,
+            "reason": "Skills extracted from research follow skill-building quality gates"
+        },
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "integrates",
+            "strength": 0.85,
+            "reason": "Research generates knowledge that synthesis organizes cross-project"
+        },
+        {
+            "target": ".github/instructions/skill-selection-optimization.instructions.md",
+            "type": "feeds",
+            "strength": 0.8,
+            "reason": "Gap analysis creates skills that SSO selects from during execution"
+        },
+        {
+            "target": ".github/instructions/research-first-workflow.instructions.md",
+            "type": "implements",
+            "strength": 0.95,
+            "reason": "Procedural memory encoding of the research-first methodology"
+        },
+        {
+            "target": ".github/prompts/gapanalysis.prompt.md",
+            "type": "activates",
+            "strength": 0.9,
+            "reason": "Interactive /gapanalysis command implements 4D gap analysis"
+        },
+        {
+            "target": ".github/instructions/heir-skill-promotion.instructions.md",
+            "type": "extends",
+            "strength": 0.75,
+            "reason": "Research-first patterns flow through heir promotion pipeline"
+        },
+        {
+            "target": ".github/skills/north-star/SKILL.md",
+            "type": "aligns",
+            "strength": 0.85,
+            "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping"
+        }
+    ],
+    "triggers": [
+        "new project",
+        "gap analysis",
+        "research first",
+        "before coding",
+        "knowledge encoding",
+        "two-agent pattern",
+        "synapse hygiene",
+        "pre-implementation",
+        "project setup"
+    ],
+    "activationBoost": [
+        "new project",
+        "gap analysis",
+        "research first",
+        "before coding",
+        "knowledge encoding",
+        "two-agent pattern",
+        "synapse hygiene",
+        "pre-implementation",
+        "project setup",
+        "start new project",
+        "research before code",
+        "learn before build",
+        "skill gap",
+        "knowledge gap",
+        "4D gap analysis",
+        "four dimension gap",
+        "what do I need to know",
+        "domain knowledge",
+        "domain expertise",
+        "unfamiliar technology",
+        "new framework",
+        "new platform",
+        "research phase",
+        "discovery phase",
+        "exploration phase",
+        "create skill",
+        "build skill",
+        "skill creation",
+        "encode knowledge",
+        "capture expertise",
+        "document learning",
+        "pre-project research",
+        "preparation",
+        "groundwork"
+    ],
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0"
+}

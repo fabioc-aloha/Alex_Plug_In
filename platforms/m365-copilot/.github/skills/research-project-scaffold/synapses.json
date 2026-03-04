@@ -1,0 +1,57 @@
+{
+  "skill": "research-project-scaffold",
+  "version": "1.0.0",
+  "inheritance": "inheritable",
+  "description": "Scaffolding new and refactoring existing academic research projects for Alex-assisted workflows",
+  "connections": [
+    {
+      "target": ".github/skills/academic-research/SKILL.md",
+      "type": "extends",
+      "strength": 0.9,
+      "context": "Uses academic research methodology knowledge for proper research structure"
+    },
+    {
+      "target": ".github/skills/practitioner-research/SKILL.md",
+      "type": "uses",
+      "strength": 0.85,
+      "context": "Applies Ship→Document→Promote workflow for research projects"
+    },
+    {
+      "target": ".github/skills/project-scaffolding/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "context": "Builds on general scaffolding patterns for research-specific needs"
+    },
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "type": "applies",
+      "strength": 0.7,
+      "context": "Learning new research methods during project setup"
+    },
+    {
+      "target": ".github/skills/writing-publication/SKILL.md",
+      "type": "triggers",
+      "strength": 0.75,
+      "context": "Writing phase activates publication preparation workflows"
+    },
+    {
+      "target": ".github/skills/git-workflow/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "context": "Version control essential for research project refactoring"
+    }
+  ],
+  "activationTriggers": [
+    "new research project",
+    "scaffold research",
+    "refactor research",
+    "research structure",
+    "literature matrix",
+    "research plan",
+    "academic project setup",
+    "organize research",
+    "research folder structure"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

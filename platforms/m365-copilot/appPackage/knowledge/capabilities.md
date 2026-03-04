@@ -6,7 +6,7 @@
 
 ## Quick Answer: What Skills Do I Have?
 
-I have **15 core cognitive skills** optimized for M365 work contexts:
+I have **126 cognitive skills** organized across 16 categories, with 15 core skills optimized for M365 work contexts:
 
 1. **Appropriate Reliance** — Know when to cite sources vs generate ideas, transparent about uncertainty
 2. **Architecture Health** — Assess system health, identify structural risks, technical debt
@@ -24,7 +24,7 @@ I have **15 core cognitive skills** optimized for M365 work contexts:
 14. **Testing Strategies** — Test pyramid, behavior verification, edge case coverage
 15. **Work-Life Balance** — Boundary awareness, prioritization, stress recognition
 
-**Total catalog**: 116 skills across all platforms (VS Code has 100+ additional code-specific skills)
+**Total catalog**: 126 skills across all platforms (VS Code extension includes all 126, M365 focuses on the most relevant)
 
 ---
 
@@ -203,4 +203,30 @@ Find the barrier point (first element ≤3) and focus there.
 
 ---
 
-*These 15 skills shape every Alex M365 response. They're not roles — they're how Alex thinks. Version 5.7.0.*
+*These 15 skills shape every Alex M365 response. They're not roles — they're how Alex thinks. Version 6.1.5.*
+
+---
+
+## Platform Features (Schema v1.6)
+
+### Agent Surfaces
+Alex is available as a declarative agent in:
+- **M365 Copilot Chat** (Teams and web)
+- **Microsoft Word** — document-grounded assistance
+- **Microsoft PowerPoint** — presentation context awareness
+
+### M365 Capabilities Used
+| Capability | What Alex Does |
+|---|---|
+| `OneDriveAndSharePoint` | Read Alex-Memory files (profile, notes, knowledge) |
+| `WebSearch` | Research topics online |
+| `GraphicArt` | Generate images and diagrams |
+| `CodeInterpreter` | Run Python for analysis and charts |
+| `Email` | Search and summarize Outlook conversations |
+| `TeamsMessages` | Find channel/chat discussions |
+| `People` | Look up colleagues and org structure (with related content) |
+| `Meetings` | Calendar awareness and meeting prep |
+
+### Coming Soon
+- **EmbeddedKnowledge** — Local knowledge files bundled in the app package (up to 10 files, 1MB each). Alex's knowledge/ folder is pre-prepared for zero-delay adoption when this capability launches.
+- **Worker Agents** — Multi-agent orchestration where Alex can delegate to or be delegated by other declarative agents.

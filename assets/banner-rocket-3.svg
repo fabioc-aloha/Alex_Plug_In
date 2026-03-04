@@ -67,11 +67,11 @@
   </g>
   
   <!-- Title (left aligned) -->
-  <text x="100" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="bold" fill="white" letter-spacing="2">STRAP A ROCKET</text>
-  <text x="100" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="bold" fill="url(#teal)" letter-spacing="2">TO YOUR BACK</text>
+  <text x="100" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="70" font-weight="800" fill="white" letter-spacing="2">STRAP A ROCKET</text>
+  <text x="100" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="70" font-weight="800" fill="url(#teal)" letter-spacing="2">TO YOUR BACK</text>
   
   <!-- Subtitle -->
-  <text x="100" y="330" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#888888">Take Your CAREER to New Heights</text>
+  <text x="100" y="330" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="600" fill="#888888">Take Your CAREER to New Heights</text>
   
   <!-- CorreaX mark bottom center -->
   <g transform="translate(750, 450) scale(0.75)" opacity="0.7">

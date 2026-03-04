@@ -1,0 +1,45 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "alex-effort-estimation",
+    "version": "1.1.0",
+    "lastUpdated": "2026-02-06",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "enhances",
+            "strength": 0.85,
+            "when": "Estimating learning timelines",
+            "yields": "Learning acceleration patterns"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "enhances",
+            "strength": 0.85,
+            "when": "Planning task timelines",
+            "yields": "Project breakdown patterns"
+        },
+        {
+            "target": ".github/skills/release-process/SKILL.md",
+            "type": "enhances",
+            "strength": 0.7,
+            "when": "Estimating release effort",
+            "yields": "Release workflow complexity factors"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "references",
+            "strength": 0.7,
+            "when": "Factoring test effort into estimates",
+            "yields": "Test coverage effort patterns"
+        }
+    ],
+    "activationContexts": [
+        "effort estimation",
+        "how long will",
+        "time estimate",
+        "complexity assessment",
+        "roadmap planning"
+    ]
+}

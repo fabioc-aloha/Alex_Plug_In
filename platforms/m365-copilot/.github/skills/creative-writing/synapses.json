@@ -1,0 +1,56 @@
+{
+  "skill": "creative-writing",
+  "connections": [
+    {
+      "bidirectional": true,
+      "reason": "Publishing creative work and manuscript preparation",
+      "type": "extends",
+      "strength": 0.85,
+      "target": ".github/skills/writing-publication/SKILL.md"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Research for historical fiction and non-fiction elements",
+      "type": "complements",
+      "strength": 0.65,
+      "target": ".github/skills/academic-research/SKILL.md"
+    },
+    {
+      "bidirectional": true,
+      "reason": "Book project scaffolding and folder structure",
+      "type": "extends",
+      "strength": 0.75,
+      "target": ".github/skills/project-scaffolding/SKILL.md"
+    },
+    {
+      "reason": "Reader experience and information pacing",
+      "type": "applies",
+      "strength": 0.65,
+      "target": ".github/skills/cognitive-load/SKILL.md"
+    },
+    {
+      "reason": "Balancing AI assistance with authentic creative voice",
+      "type": "applies",
+      "strength": 0.4,
+      "target": ".github/skills/appropriate-reliance/SKILL.md"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "story",
+    "narrative",
+    "character",
+    "plot",
+    "fiction",
+    "creative",
+    "prose",
+    "dialogue",
+    "worldbuilding",
+    "book",
+    "novel",
+    "manuscript",
+    "chapter"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

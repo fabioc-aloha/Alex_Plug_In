@@ -1,0 +1,72 @@
+{
+  "skill": "practitioner-research",
+  "connections": [
+    {
+      "target": ".github/skills/academic-research/SKILL.md",
+      "type": "extends",
+      "strength": 0.9,
+      "reason": "Practitioner-specific extension of academic research methods",
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/writing-publication/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "reason": "Research methodology produces publication-ready documents"
+    },
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "reason": "Practice-first approach is core bootstrap learning pattern"
+    },
+    {
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "type": "requires",
+      "strength": 0.85,
+      "reason": "Visual research requires Mermaid diagramming excellence"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "applies",
+      "strength": 0.75,
+      "reason": "Pattern analysis across projects uses RCA techniques"
+    },
+    {
+      "target": ".github/skills/post-mortem/SKILL.md",
+      "type": "uses",
+      "strength": 0.6,
+      "reason": "Chronicle pattern for documenting research incidents"
+    },
+    {
+      "target": ".github/skills/knowledge-synthesis/SKILL.md",
+      "type": "enhances",
+      "strength": 0.7,
+      "reason": "Cross-project pattern recognition is knowledge synthesis"
+    },
+    {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "reason": "Global insights become research evidence"
+    }
+  ],
+  "inheritance": "inheritable",
+  "triggers": [
+    "research",
+    "methodology",
+    "case study",
+    "longitudinal",
+    "publication",
+    "evidence",
+    "prior art",
+    "literature review",
+    "academic paper",
+    "fact-check",
+    "structured abstract",
+    "practitioner research",
+    "ship document promote"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

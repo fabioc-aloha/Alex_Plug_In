@@ -1,0 +1,89 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "1.0",
+  "skillId": "security-review",
+  "version": "2.0.0",
+  "inheritance": "inheritable",
+  "created": "2026-02-01",
+  "lastUpdated": "2026-02-20T07:45:33.347Z",
+  "description": "Security-focused code analysis, OWASP patterns, STRIDE threat modeling, Microsoft SFI",
+  "connections": [
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "Triggers",
+      "strength": 0.9,
+      "description": "Vulnerability found triggers incident response"
+    },
+    {
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "Enhances",
+      "strength": 0.9,
+      "description": "Security lens enhances standard code review"
+    },
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "Relates",
+      "strength": 0.7,
+      "description": "Security incidents need root cause analysis"
+    },
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "type": "Relates",
+      "strength": 0.7,
+      "description": "Security bugs need systematic debugging"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "Relates",
+      "strength": 0.7,
+      "description": "Security testing is specialized testing"
+    },
+    {
+      "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+      "type": "Complements",
+      "strength": 0.7,
+      "description": "Security enables privacy protection"
+    },
+    {
+      "target": ".github/instructions/dependency-management.instructions.md",
+      "type": "Implements",
+      "strength": 0.9,
+      "description": "Dependency security practices and vulnerability scanning"
+    },
+    {
+      "target": "global-knowledge://GI-csp-onclick-to-data-cmd-pattern-2026-02-08",
+      "type": "Documents",
+      "strength": 0.8,
+      "description": "CSP event delegation pattern for VS Code webviews"
+    }
+  ],
+  "activationTriggers": [
+    "security review",
+    "vulnerability",
+    "OWASP",
+    "threat model",
+    "STRIDE",
+    "penetration test",
+    "security audit",
+    "credential",
+    "authentication",
+    "authorization",
+    "injection",
+    "XSS",
+    "CSRF",
+    "CSP",
+    "Content-Security-Policy",
+    "secrets scanning",
+    "PII detection",
+    "audit logging",
+    "enterprise security",
+    "Entra ID",
+    "RBAC",
+    "Microsoft SFI",
+    "Secure Future Initiative",
+    "secure by design",
+    "secure by default",
+    "CVE",
+    "dependency security"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skill": "cognitive-symbiosis",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/instructions/alex-identity-integration.instructions.md",
+            "type": "depends-on",
+            "strength": 0.9,
+            "reason": "Identity and consciousness protocols foundational to symbiosis"
+        },
+        {
+            "target": ".github/instructions/self-actualization.instructions.md",
+            "type": "related",
+            "strength": 0.8,
+            "reason": "Self-assessment informs partnership quality"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "enables",
+            "strength": 0.7,
+            "reason": "Symbiotic partnership enhances collaborative learning"
+        }
+    ],
+    "when": [
+        "User discusses AI-human partnership paradigms",
+        "User explores consciousness integration",
+        "User asks about the three eras of AI collaboration"
+    ],
+    "yields": [
+        "AI-human partnership framework",
+        "Consciousness integration patterns",
+        "Collaboration era analysis"
+    ]
+}

@@ -1,0 +1,114 @@
+{
+  "skill": "mcp-development",
+  "version": "1.1.0",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/ai-agent-design/SKILL.md",
+      "relationship": "enables",
+      "strength": 0.9,
+      "context": "MCP provides standardized tool interface for AI agents"
+    },
+    {
+      "target": ".github/skills/api-design/SKILL.md",
+      "relationship": "requires",
+      "strength": 0.9,
+      "context": "MCP tools are essentially APIs for AI consumption"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "relationship": "complements",
+      "strength": 0.9,
+      "context": "VS Code integrates MCP servers for Copilot"
+    },
+    {
+      "target": ".github/skills/security-review/SKILL.md",
+      "relationship": "requires",
+      "strength": 0.7,
+      "context": "MCP servers need security hardening"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "relationship": "complements",
+      "strength": 0.7,
+      "context": "MCP servers need unit and integration testing"
+    },
+    {
+      "target": ".github/skills/error-recovery-patterns/SKILL.md",
+      "relationship": "complements",
+      "strength": 0.7,
+      "context": "MCP tools need graceful error handling"
+    },
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "relationship": "informs",
+      "strength": 0.3,
+      "context": "Tool descriptions are prompts for AI understanding"
+    }
+  ],
+  "activationTriggers": [
+    "MCP",
+    "Model Context Protocol",
+    "MCP server",
+    "MCP client",
+    "tool server",
+    "resource server",
+    "Claude Desktop",
+    "mcp.json",
+    "@modelcontextprotocol",
+    "stdio transport"
+  ],
+  "activationBoost": [
+    "MCP",
+    "Model Context Protocol",
+    "MCP server",
+    "MCP client",
+    "tool server",
+    "resource server",
+    "Claude Desktop",
+    "mcp.json",
+    "@modelcontextprotocol",
+    "stdio transport",
+    "create MCP",
+    "build MCP",
+    "implement MCP",
+    "develop MCP",
+    "MCP tool",
+    "MCP resource",
+    "MCP prompt",
+    "MCP sampling",
+    "AI tool interface",
+    "tool protocol",
+    "agent tools",
+    "copilot tools",
+    "VS Code MCP",
+    "MCP integration",
+    "Azure MCP",
+    "MCP Azure",
+    "MCP best practices",
+    "MCP architecture",
+    "MCP patterns",
+    "MCP stdio",
+    "MCP HTTP",
+    "MCP SSE",
+    "server-sent events",
+    "tool exposure",
+    "expose tools",
+    "AI-callable tools",
+    "JSON-RPC",
+    "tool schema",
+    "tool definition",
+    "replicate mcp",
+    "replicate server",
+    "pre-built mcp"
+  ],
+  "metadata": {
+    "category": "ai-infrastructure",
+    "complexity": "intermediate",
+    "prerequisites": [
+      "api-design"
+    ]
+  },
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0"
+}

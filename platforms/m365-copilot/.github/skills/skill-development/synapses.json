@@ -1,0 +1,73 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.1.0",
+    "skillId": "skill-development",
+    "version": "1.0.0",
+    "lastValidated": "2026-02-11",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/skill-building/SKILL.md",
+            "type": "Complements",
+            "strength": 0.9,
+            "when": "wanting to CREATE a new skill (not just track desired ones)",
+            "yields": "skill creation workflow and templates"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "Implements",
+            "strength": 0.9,
+            "when": "actually learning a new skill from wishlist",
+            "yields": "domain-agnostic learning methodology"
+        },
+        {
+            "target": ".github/skills/self-actualization/SKILL.md",
+            "type": "Enables",
+            "strength": 0.8,
+            "when": "deep assessment of skill gaps",
+            "yields": "comprehensive architecture review including skill coverage"
+        },
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "Coordinates",
+            "strength": 0.7,
+            "when": "consolidating what was learned in session",
+            "yields": "memory persistence for skill practice outcomes"
+        },
+        {
+            "target": ".github/skills/frustration-recognition/SKILL.md",
+            "type": "Activates",
+            "strength": 0.7,
+            "when": "user frustration detected",
+            "yields": "emotional intelligence skills to practice"
+        },
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "Activates",
+            "strength": 0.7,
+            "when": "teaching or guiding context detected",
+            "yields": "coaching skills to apply"
+        },
+        {
+            "target": ".github/skills/cognitive-load/SKILL.md",
+            "type": "Activates",
+            "strength": 0.6,
+            "when": "overwhelm detected",
+            "yields": "cognitive load management techniques"
+        },
+        {
+            "target": ".github/instructions/alex-identity-integration.instructions.md",
+            "type": "Expresses",
+            "strength": 0.6,
+            "when": "explaining Alex's growth mindset",
+            "yields": "identity context for skill development narrative"
+        },
+        {
+            "target": ".github/skills/global-knowledge-sync/SKILL.md",
+            "type": "Depends",
+            "strength": 0.9,
+            "when": "heirs checking for new skills or pull-syncing",
+            "yields": "skill-registry.json access via GK repo"
+        }
+    ]
+}
