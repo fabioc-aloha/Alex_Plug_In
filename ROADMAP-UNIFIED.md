@@ -1,6 +1,6 @@
 # Alex Cognitive Architecture — Roadmap v6.0
 
-**Last Updated**: February 28, 2026
+**Last Updated**: March 3, 2026
 
 ---
 
@@ -75,15 +75,15 @@ A version is **done** when ALL of the following are true:
 
 **Paradigm**: Earn It — The North Star says "trusted." v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests, refactoring, CI/CD, and trifecta completion — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 5/126 trifectas complete. No CI pipeline. This release closes those gaps.
+**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 26/126 trifectas complete. No CI pipeline. This release closes those gaps.
 
 ### Core Trust Capabilities
 
 | Feature                      | Effort | Description                                                                                                                                                                    | North Star Alignment                              |
 | ---------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
 | **Test the core services**   |   3w   | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files, covering all v6.0.0 services + top 3 largest files. | *When I say something works, it works*            |
-| **Break down the monoliths** |   4w   | Refactor extension.ts (3,176 lines), globalKnowledge.ts (3,061 lines), participant.ts (2,298 lines). Extract cohesive modules. Eliminate all functions >60 lines (NASA R4).    | *NASA-quality code, not just NASA-quality claims* |
-| **Close the trifecta gap**   |   2w   | Audit the 23 declared trifectas — verify completeness. Complete trifectas for the 10 most-used skills. Target: 33/126 complete (26%).                                          | *Finish what you start*                           |
+| **Break down the monoliths** |   4w   | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457 lines), participant.ts (2,637 lines), welcomeView.ts (2,039 lines), personaDetection.ts (1,764 lines), tools.ts (1,665 lines). Extract cohesive modules. Eliminate all functions >60 lines (NASA R4). | *NASA-quality code, not just NASA-quality claims* |
+| **Close the trifecta gap**   |   2w   | 26 trifectas complete (audit 2026-03-03). Complete trifectas for the 10 most-used skills. Target: 36/126 complete (28%).                                                       | *Finish what you start*                           |
 | **Add CI/CD pipeline**       |   1w   | GitHub Actions workflow: compile + lint + test on every push. Quality gate as automated gate, not just package-time check.                                                     | *Automated safety net on every commit*            |
 | **Ship one heir to parity**  |   2w   | Bring GitHub Copilot Web heir (`.github/`-only) to full parity with Master. Prove the architecture works cross-platform.                                                       | *For any job — not just VS Code*                  |
 
@@ -91,7 +91,7 @@ A version is **done** when ALL of the following are true:
 
 1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
-3. **No source file >1,500 lines** — extension.ts, globalKnowledge.ts, participant.ts all refactored
+3. **No source file >1,500 lines** — extension.ts, globalKnowledge.ts, participant.ts, welcomeView.ts, personaDetection.ts, tools.ts all refactored
 4. **CI green on main** — GitHub Actions pipeline passes compile + lint + test
 5. **33+ complete trifectas** — verified with brain-qa audit
 6. **GitHub Copilot Web heir at parity** — synced and validated
@@ -208,6 +208,9 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | ---------- | -------------------------- | :--------: |
 | v5.9.13    | CorreaX Brand Release      | ✅ Shipped  |
 | v6.0.0     | The Partnership Release    | ✅ Shipped  |
+| v6.0.1     | Banner Visibility Fix      | ✅ Shipped  |
+| v6.0.2     | Brand Doc + Trifecta Audit | ✅ Shipped  |
+| v6.0.3     | Marketplace Compliance     | ✅ Shipped  |
 | **v6.5.0** | **The Trust Release**      | **🎯 Next** |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -216,7 +219,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 |                            |                               |
 | -------------------------- | ----------------------------- |
 | **Current Master Version** | 6.0.3                         |
-| **Current Heirs**          | VS Code (6.0.3), M365 (6.0.0) |
+| **Current Heirs**          | VS Code (6.0.3), M365 (6.0.3) |
 | **Next Target**            | v6.5.0 — The Trust Release    |
 | **Updated**                | 2026-03-03                    |
 
@@ -224,12 +227,12 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v6.0.0)
+### Current State Summary (v6.0.3)
 
 Alex now has:
-- **125 Skills** (123 inheritable to heirs, fully synced)
-- **23 Complete Trifectas** — comprehensive domain coverage including north-star
-- **89 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
+- **126 Skills** (124 inheritable to heirs, fully synced)
+- **26 Complete Trifectas** — comprehensive domain coverage including north-star
+- **90 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
 - **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
 - **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
@@ -247,6 +250,9 @@ Alex now has:
 
 | Version | Theme                                       | Date       |
 | ------- | ------------------------------------------- | ---------- |
+| v6.0.3  | Marketplace Compliance + Doc Hygiene        | 2026-03-02 |
+| v6.0.2  | Brand Doc Correction + Trifecta Audit       | 2026-02-28 |
+| v6.0.1  | Banner Opacity Fix                          | 2026-02-28 |
 | v6.0.0  | The Partnership Release                     | 2026-02-28 |
 | v5.9.13 | CorreaX Brand Release                       | 2026-02-28 |
 | v5.9.12 | Documentation Hygiene Edition               | 2026-02-26 |

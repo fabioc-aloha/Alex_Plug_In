@@ -152,7 +152,7 @@ The sweet spot — full partnership with autonomous tools, deep skills, speciali
 | ------------------------------ | :-----: | :---: | :---------: | :------: |
 | Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
 | 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
-| 125 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
+| 126 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -219,7 +219,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Expertise**     | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically   |
 | **Proactive**     | Code review nudges on save, stalled work detection, 4 built-in workflows                      |
 | **Chat & Agents** | `@alex` participant, 29 slash commands, 13 LM tools, 7 custom agents                          |
-| **Intelligence**  | 125 skills, emotional detection, model tier awareness, expertise calibration                  |
+| **Intelligence**  | 126 skills, emotional detection, model tier awareness, expertise calibration                  |
 | **Memory**        | Global knowledge + session history + outcome tracking + episodic records                      |
 | **UX**            | User profiles, smart nudges, one-click upgrades, 8 learning journeys, presentation automation |
 | **Images**        | AI image upscaling (4 models), image editing, generation                                      |

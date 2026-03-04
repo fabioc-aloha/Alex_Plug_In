@@ -35,6 +35,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.3] - 2026-03-02
+
+### Fixed
+- Extension README: resolved 4 Marketplace compliance issues — self-referential link, broken article links, broken `replicate-api` skill path
+
+### Changed
+- Root README: DRY refactor — removed 700-line duplicate of extension README; replaced with compact Features table
+- Both READMEs: removed "Chat with Alex" section (superseded by learnalex.correax.com)
+- Docs: replaced all GitHub Gist references with private GitHub repo
+
+---
+
 ## [6.0.0] - 2026-02-28
 
 > **The Partnership Release** — Episodic memory, outcome learning, autonomous task detection, multi-step workflow engine, user expertise model, and proactive code review triggers.
