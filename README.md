@@ -211,18 +211,18 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-### What's New (v6.0.0 — The Partnership Release)
+### What's New (v6.1.x)
 
-| Category          | Highlights                                                                                    |
-| ----------------- | --------------------------------------------------------------------------------------------- |
+| Category           | Highlights                                                                                    |
+| ------------------ | --------------------------------------------------------------------------------------------- |
+| **Cognitive Tier** | Extended thinking detection fixed (was unreachable for all users), real-time tier refresh     |
+| **Dependencies**   | Extension dependency check with one-click install for Copilot and Mermaid Preview             |
+| **Multi-Account**  | GitHub personal + enterprise account detection in cognitive tier                              |
+| **AI Media**       | 5 skills updated: Ideogram v3, nano-banana-2, Flux Kontext, veo-3.1-fast, qwen3-tts          |
+| **Trifectas**      | `image-handling` and `character-aging-progression` trifectas completed (26 total)             |
 | **Partnership**   | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows       |
-| **Expertise**     | Per-domain expertise model (novice → expert) — Alex calibrates response depth automatically   |
-| **Proactive**     | Code review nudges on save, stalled work detection, 4 built-in workflows                      |
-| **Chat & Agents** | `@alex` participant, 29 slash commands, 13 LM tools, 7 custom agents                          |
 | **Intelligence**  | 126 skills, emotional detection, model tier awareness, expertise calibration                  |
 | **Memory**        | Global knowledge + session history + outcome tracking + episodic records                      |
-| **UX**            | User profiles, smart nudges, one-click upgrades, 8 learning journeys, presentation automation |
-| **Images**        | AI image upscaling (4 models), image editing, generation                                      |
 | **MCP**           | Standalone MCP cognitive tools server (`npx @alex/mcp-cognitive-tools`)                       |
 
 ### Migration Notes

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.2] - 2026-03-03
+
+> **Replicate Trifecta Updates + Documentation Hygiene** — Model landscape refresh across 5 skills, 2 new trifectas completed, doc archive pass 2.
+
+### Added
+- `image-handling` trifecta completed — instruction + prompt files created
+- `character-aging-progression` trifecta completed — instruction + prompt files created
+
+### Changed
+- Updated Replicate model landscape across 5 skills: Ideogram v3 (turbo/balanced/quality), `nano-banana-2`, `flux-kontext-pro/max`, `flux-2-pro/max`, `recraft-v4`, `veo-3.1-fast`, `sora-2`, `qwen/qwen3-tts`, `minimax/speech-2.8-turbo`
+- `ideogram-v3-turbo` ($0.03) is now the default typography recommendation (63% cheaper than v2)
+- Archived 6 outdated docs to `alex_archive/`: 3 point-in-time audit reports, `REPLICATE-EVALUATION.md` (superseded by skills), Ideogram v2 gallery, stale `brain-qa-output.txt`
+
+### Fixed
+- `character-aging-progression/SKILL.md`: `image_input` must be an array `[dataURI]`, not a single string — was silently breaking face consistency
+- Audio model reference updated: `qwen-tts` → `qwen/qwen3-tts` across all skills
+- Skill frontmatter: removed unsupported `applyTo`/`triggers` attributes, fixed `name` to kebab-case in 3 SKILL.md files
+
+---
+
 ## [6.1.0] - 2026-03-03
 
 > **Environment & Cognitive Tier Hardening** — Extended thinking detection fix (critical), extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh.

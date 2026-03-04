@@ -1,4 +1,4 @@
-# Alex v6.0.3 — Test Guide
+# Alex v6.1.2 — Test Guide
 
 **Date**: 2026-03-03
 **Installation**: Run `npm run package` from `platforms/vscode-extension/`, then install the generated `.vsix` locally before testing.
@@ -12,8 +12,8 @@
 ```sh
 cd platforms/vscode-extension
 npm run compile        # verify 0 errors first
-npm run package        # generates alex-cognitive-architecture-6.0.3.vsix
-code --install-extension alex-cognitive-architecture-6.0.3.vsix
+npm run package        # generates alex-cognitive-architecture-6.1.2.vsix
+code --install-extension alex-cognitive-architecture-6.1.2.vsix
 ```
 
 ---
@@ -26,7 +26,7 @@ code --install-extension alex-cognitive-architecture-6.0.3.vsix
 | --- | -------------------------------------------------------- | ------------------------------------------------------------------- | ---- |
 | 1.1 | Open any workspace with the extension installed          | Welcome sidebar appears in Activity Bar with Alex avatar            | ✅    |
 | 1.2 | Click the Alex icon in Activity Bar                      | Welcome panel renders: version number, status, quick-action buttons | ✅    |
-| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v6.0.3, active workspace path             | ✅    |
+| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v6.1.2, active workspace path             | ✅    |
 
 ---
 
@@ -81,7 +81,7 @@ These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Develo
 | #   | Test                                                                                                                            | Expected                                                                                     | Pass |
 | --- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---- |
 | 5.1 | In a Copilot agent session, edit any `.ts` file                                                                                 | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'` | ✅    |
-| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v6.0.3` | 👤    |
+| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v6.1.2` | 👤    |
 | 5.3 | Revert package.json version to `6.0.3`                                                                                          | No drift warning on next publish attempt                                                     | 👤    |
 
 ---
