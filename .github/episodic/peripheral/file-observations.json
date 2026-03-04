@@ -1,17 +1,19 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/package.json",
-    "BUG-alex-docs-false-positive-2026-03-04.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772652002077
+      "file": "docs/platforms/m365-copilot/taskpane/office-operations.js",
+      "todoCount": 2,
+      "scannedAt": 1772653010249
+    },
+    {
+      "file": "scripts/generate-alex-persona-images.js",
+      "todoCount": 1,
+      "scannedAt": 1772653010249
     }
   ],
-  "lastUpdated": 1772652002077
+  "lastUpdated": 1772653010249
 }

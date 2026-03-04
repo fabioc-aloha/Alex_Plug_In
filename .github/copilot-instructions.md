@@ -26,12 +26,12 @@ Objective: _(session-objective — set by user or focus timer)_
 Phase: Ship
 Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
-Priorities: north-star-alignment, autonomous-partnership, v6.0-partnership-release
+Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.1.0 shipped — Environment & Cognitive Tier Hardening. Extended thinking detection fix (critical). Extension dependency checking. Multi-account GitHub detection. Real-time cognitive tier refresh.
+Recent: v6.1.5 shipped — Heir protection fix (alex_docs false positive removed from auto-detection). v6.1.4 cognitive tier fix + GPT-5.3. v6.1.2 Replicate trifecta updates. v6.1.0 Environment & Cognitive Tier Hardening.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
-Last Assessed: 2026-02-28
+Last Assessed: 2026-03-04
 
 ## User Profile
 
