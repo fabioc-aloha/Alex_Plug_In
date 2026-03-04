@@ -1,7 +1,7 @@
 # AI Character Reference Generation Instructions
 
 **Auto-loaded when**: Working with character development, fiction writing, visual reference generation
-**Domain**: Character consistency patterns for visual narratives using Flux 1.1 Pro
+**Domain**: Character consistency patterns for visual narratives using Nano-Banana Pro (face refs) and Flux 1.1 Pro
 **Synapses**: [ai-character-reference-generation/SKILL.md](../skills/ai-character-reference-generation/SKILL.md)
 
 ---
@@ -110,9 +110,35 @@ TECHNICAL REQUIREMENTS:
 }
 ```
 
-### 4. Generation Engine Setup
+### 4. Face Reference Setup (Optional but Recommended)
 
-**Flux 1.1 Pro Configuration**:
+If you have reference photos of the character (from a previous generation or real photos), using face references dramatically improves consistency. Store references in `visual-memory.json` or pass as data URIs.
+
+**Preparing Face References**:
+
+```powershell
+# Resize to 512px @ 85% quality for optimal API performance
+magick input.jpg -resize 512x512 -quality 85 output.jpg
+
+# Convert to base64 data URI
+$bytes = [IO.File]::ReadAllBytes("output.jpg")
+$b64 = [Convert]::ToBase64String($bytes)
+$uri = "data:image/jpeg;base64,$b64"
+```
+
+Optimal specs: 512px longest edge, 85% JPEG, ~40-80KB per photo. More references = better consistency (nano-banana supports up to 14).
+
+### 5. Generation Engine Setup
+
+**Model Selection**:
+
+| Model | When to Use | Cost | Face Refs |
+|-------|------------|------|-----------|
+| **Nano-Banana Pro** | Have reference photos → best face consistency | $0.025/img | Up to 14 via `image_input` array |
+| **Flux 2 Pro** | Higher quality + reference photos | $0.045/img | Up to 8 via `input_images` |
+| **Flux 1.1 Pro** | No reference photos, prompt-only consistency | $0.04/img | ❌ None |
+
+**Nano-Banana Pro (Recommended when you have face refs)**:
 
 ```javascript
 import Replicate from 'replicate';
@@ -121,6 +147,30 @@ const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
+// Load face reference data URIs (up to 14)
+const faceRefs = loadFaceReferences(); // Array of data URI strings
+
+async function generateScene(scenario) {
+  const prompt = buildPrompt(CHARACTER, scenario, STYLE);
+  
+  const output = await replicate.run("google/nano-banana-pro", {
+    input: {
+      prompt,
+      image_input: faceRefs,      // Array of data URIs (up to 14)
+      aspect_ratio: "3:4",        // Portrait orientation
+      output_format: "png",
+    }
+  });
+  
+  return output;
+}
+```
+
+**CRITICAL**: `image_input` accepts an **array** of data URIs, not a single string. More references = better face fidelity.
+
+**Flux 1.1 Pro (No reference photos)**:
+
+```javascript
 async function generateScene(scenario) {
   const prompt = buildPrompt(CHARACTER, scenario, STYLE);
   
@@ -141,9 +191,9 @@ async function generateScene(scenario) {
 **Safety Filter Considerations**:
 - Child character poses sometimes trigger false positives
 - Avoid ambiguous poses: "sitting with knees drawn up" → "sitting cross-legged"
-- Set `safety_tolerance: 2` for non-sensitive content
+- Set `safety_tolerance: 2` for non-sensitive content (Flux 1.1 Pro only)
 
-### 5. Batch Processing with Retry
+### 6. Batch Processing with Retry
 
 **Handle rate limits and transient errors**:
 
@@ -178,12 +228,17 @@ for (const scenario of SCENARIOS) {
 ## Cost and Performance
 
 **Economics**:
-- **Model**: Flux 1.1 Pro
-- **Cost**: $0.04 per image
-- **17-scenario reference set**: $0.68 per character
+
+| Model | Per Image | 17-Scenario Set | Face Refs |
+|-------|-----------|-----------------|-----------|
+| Nano-Banana Pro | $0.025 | **$0.43** | ✅ Up to 14 |
+| Flux 1.1 Pro | $0.04 | $0.68 | ❌ None |
+| Flux 2 Pro | $0.045 | $0.77 | ✅ Up to 8 |
+
+- **Recommended**: Nano-Banana Pro ($0.43/set) — best consistency + lowest cost
 - **Generation time**: 30-60 seconds per image
 
-**ROI**: Professional character reference sheets typically cost $200-$500 from illustrators. AI generation: $0.68.
+**ROI**: Professional character reference sheets typically cost $200-$500 from illustrators. AI generation: $0.43-$0.77.
 
 ---
 
@@ -272,6 +327,8 @@ characters/
 ## Integration with Other Skills
 
 **Synergies**:
+- [visual-memory](visual-memory.instructions.md) — Store face reference photos for cross-session character consistency
+- [image-handling](../skills/image-handling/SKILL.md) — Model selection guide, face reference API patterns, video animation
 - [ai-generated-readme-banners](ai-generated-readme-banners.instructions.md) — Same prompt engineering patterns, different aspect ratios
 - [bootstrap-learning](bootstrap-learning.instructions.md) — Character development requires domain research
 - [brand-asset-management](brand-asset-management.instructions.md) — Character references are visual brand assets

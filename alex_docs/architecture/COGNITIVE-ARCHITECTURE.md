@@ -386,9 +386,9 @@ flowchart TB
 
     subgraph Memory["💾 Memory Stores"]
         direction LR
-        PROC["📑 Procedural\n25 .instructions.md"]
-        EPIS["📓 Episodic\n13 .prompt.md"]
-        SKILLS["🧊 Skills\n77 skills"]
+        PROC["📑 Procedural\n56 .instructions.md"]
+        EPIS["📓 Episodic\n39 .prompt.md"]
+        SKILLS["🧊 Skills\n126 skills"]
         GK["🌐 Global Knowledge\nPatterns + Insights"]
     end
 

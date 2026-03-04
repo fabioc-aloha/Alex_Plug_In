@@ -337,17 +337,11 @@ This ensures quality. Only what has survived real-world use becomes part of the 
 
 ## Related Documentation
 
-| Document                                                                       | Purpose                          |
-| ------------------------------------------------------------------------------ | -------------------------------- |
-| [VSCODE-HEIR.md](./VSCODE-HEIR.md)                                             | VS Code heir details             |
-| [M365-HEIR.md](./M365-HEIR.md)                                                 | M365 heir details                |
-| [FOUNDRY-HEIR.md](./FOUNDRY-HEIR.md)                                           | Foundry platform plan & research |
-| [CLAUDE-CODE-HEIR.md](./CLAUDE-CODE-HEIR.md)                                   | Claude Code implementation plan  |
-| [CURSOR-HEIR.md](./CURSOR-HEIR.md)                                             | Cursor feasibility research      |
-| [WINDSURF-HEIR.md](./WINDSURF-HEIR.md)                                         | Windsurf feasibility research    |
-| [DEVELOPMENT-PLATFORMS-COMPARISON.md](./DEVELOPMENT-PLATFORMS-COMPARISON.md)   | IDE/terminal platform comparison |
-| [PRODUCTIVITY-PLATFORMS-COMPARISON.md](./PRODUCTIVITY-PLATFORMS-COMPARISON.md) | Productivity platform comparison |
-| [OTHER-POTENTIAL-HEIRS.md](./OTHER-POTENTIAL-HEIRS.md)                         | Additional platform research     |
+| Document                             | Purpose                          |
+| ------------------------------------ | -------------------------------- |
+| [VSCODE-HEIR.md](./VSCODE-HEIR.md)   | VS Code heir details             |
+| [M365-HEIR.md](./M365-HEIR.md)       | M365 heir details                |
+| [FOUNDRY-HEIR.md](./FOUNDRY-HEIR.md) | Foundry platform plan & research |
 
 ---
 

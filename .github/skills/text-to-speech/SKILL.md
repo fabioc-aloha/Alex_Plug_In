@@ -637,3 +637,60 @@ Alex automatically detects the language of your text and selects an appropriate 
 | Section navigation | Planned | "Skip to next heading" |
 | Bookmark resume | Planned | Resume from last position |
 | Speed presets | Planned | 1x, 1.5x, 2x reading speeds |
+
+---
+
+## Replicate Cloud TTS (Content Creation)
+
+For use cases beyond real-time document reading — audiobooks, video narration, voice cloning — Replicate offers paid TTS models.
+
+| Model | Replicate ID | Cost | Voice Cloning | Languages |
+|-------|-------------|------|---------------|----------|
+| **Speech Turbo** | `minimax/speech-2.8-turbo` | $0.06/1k tokens | ❌ | 40+ |
+| **Chatterbox Turbo** | `resemble-ai/chatterbox-turbo` | $0.025/1k chars | ✅ (5s sample) | English |
+| **Qwen TTS** | `qwen/qwen3-tts` | $0.02/1k chars | ✅ | 10 |
+
+### When to Use Cloud TTS vs Edge TTS
+
+| Scenario | Use | Why |
+|----------|-----|-----|
+| Read document in VS Code | **Edge TTS** | Free, instant, integrated in extension |
+| Audiobook narration | **Replicate** | Higher quality, voice cloning option |
+| Video voiceover | **Replicate** | Emotion control, voice design |
+| Custom voice from sample | **Replicate** | Chatterbox/Qwen clone from 5s audio |
+| Voice from description | **Replicate Qwen** | "Warm British female voice" → synthesized |
+| Max language coverage | **Edge TTS** | 32 languages, zero cost |
+
+### Voice Cloning Pattern
+
+```javascript
+// Clone a voice from a 5+ second audio sample
+const output = await replicate.run("resemble-ai/chatterbox-turbo", {
+  input: {
+    text: "Content to speak in the cloned voice",
+    audio_prompt: audioDataURI  // 5+ seconds WAV/MP3
+  }
+});
+```
+
+### Emotion Control (Speech Turbo)
+
+Emotions: `auto`, `happy`, `sad`, `angry`, `fearful`, `disgusted`, `surprised`
+
+Voice presets: `Wise_Woman`, `Deep_Voice_Man`, `Casual_Guy`, `Lively_Girl`, `Young_Knight`, `Abbess`, + more
+
+### Voice Design (Qwen TTS)
+
+Create a voice from natural language:
+
+```javascript
+const output = await replicate.run("qwen/qwen3-tts", {
+  input: {
+    text: "Content to speak",
+    tts_mode: "voice_design",
+    voice_description: "A warm, friendly female voice with a slight British accent"
+  }
+});
+```
+
+See the **image-handling** skill for the full Replicate model catalog.

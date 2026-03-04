@@ -46,6 +46,13 @@
       "type": "supports",
       "strength": 0.4,
       "target": ".github/skills/writing-publication/SKILL.md"
+    },
+    {
+      "reason": "AI-generated illustrations, model selection, and image format handling",
+      "type": "complements",
+      "strength": 0.75,
+      "target": ".github/skills/image-handling/SKILL.md",
+      "bidirectional": true
     }
   ],
   "inheritance": "inheritable",
@@ -64,7 +71,11 @@
     "WCAG",
     "pastel colors",
     "diagram colors",
-    "mermaid colors"
+    "mermaid colors",
+    "illustration",
+    "illustrate",
+    "book illustration",
+    "visual variety"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"

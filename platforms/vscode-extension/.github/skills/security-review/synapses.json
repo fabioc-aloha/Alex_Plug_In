@@ -49,6 +49,12 @@
       "type": "Implements",
       "strength": 0.9,
       "description": "Dependency security practices and vulnerability scanning"
+    },
+    {
+      "target": "global-knowledge://GI-csp-onclick-to-data-cmd-pattern-2026-02-08",
+      "type": "Documents",
+      "strength": 0.8,
+      "description": "CSP event delegation pattern for VS Code webviews"
     }
   ],
   "activationTriggers": [

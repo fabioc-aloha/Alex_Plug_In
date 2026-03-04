@@ -1024,7 +1024,7 @@ if (26 -in $runPhases) {
         $archPath = Join-Path $docsPath "architecture"
         $expectedArchDocs = @(
             "TRIFECTA-CATALOG.md", "COGNITIVE-ARCHITECTURE.md", "MEMORY-SYSTEMS.md",
-            "NEUROANATOMICAL-MAPPING.md", "AGENT-CATALOG.md", "SEMANTIC-SKILL-GRAPH.md"
+            "NEUROANATOMICAL-MAPPING.md", "AGENT-CATALOG.md"
         )
         $missingDocs = @()
         foreach ($doc in $expectedArchDocs) {

@@ -63,8 +63,6 @@ If any check fails, rewrite the section before continuing.
 > - ❌ `NEVER` start the file with ` ```skill `, ` ```instructions `, ` ```prompt `, or any fence
 > - ✅ The file MUST start directly with `---` (YAML frontmatter) or `{` (JSON)
 > - The `create_file` tool writes raw bytes — wrapping content in a fence IS the bug
->
-> **RCA**: [alex_docs/operations/RCA-fence-bug.md](../../alex_docs/operations/RCA-fence-bug.md)
 
 ### If creating .instructions.md:
 

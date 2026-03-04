@@ -1,6 +1,8 @@
 {
   "skill": "image-handling",
   "inheritance": "inheritable",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
   "connections": [
     {
       "target": ".github/skills/svg-graphics/SKILL.md",
@@ -23,6 +25,36 @@
       "strength": 0.7,
       "when": "creating extension icons",
       "yields": "Icon size requirements, package.json icon field"
+    },
+    {
+      "target": ".github/skills/visual-memory/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "when": "storing face reference photos as base64 for cross-session consistency",
+      "yields": "visual-memory.json storage, reference photo encoding patterns",
+      "bidirectional": true
+    },
+    {
+      "target": ".github/skills/ai-character-reference-generation/SKILL.md",
+      "type": "enables",
+      "strength": 0.85,
+      "when": "generating character portraits with face references via nano-banana/flux-2-pro",
+      "yields": "Model selection, image_input API patterns, batch generation"
+    },
+    {
+      "target": ".github/skills/text-to-speech/SKILL.md",
+      "type": "complements",
+      "strength": 0.6,
+      "when": "cloud TTS models for video narration or audiobook content creation",
+      "yields": "Replicate TTS model catalog, voice cloning patterns"
+    },
+    {
+      "target": ".github/skills/graphic-design/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "when": "generating illustrations for documents or books",
+      "yields": "Illustration principles, contextual placement, width guidelines",
+      "bidirectional": true
     }
   ],
   "triggers": [
@@ -34,7 +66,15 @@
     "optimize",
     "favicon",
     "icon sizes",
-    "sharp-cli"
+    "sharp-cli",
+    "generate video",
+    "video from image",
+    "animate",
+    "generate svg",
+    "vector graphic",
+    "face reference",
+    "voice clone",
+    "cloud tts"
   ],
   "activationBoost": [
     "generate image",
@@ -47,6 +87,7 @@
     "stable diffusion",
     "sdxl",
     "nano-banana",
+    "nano-banana-pro",
     "ideogram",
     "ai image",
     "ai generate",
@@ -69,8 +110,32 @@
     "midjourney style",
     "screenshot to",
     "logo generation",
-    "icon generation"
-  ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+    "icon generation",
+    "generate video",
+    "create video",
+    "video from image",
+    "animate image",
+    "veo",
+    "veo-3",
+    "kling",
+    "kling-v3",
+    "grok video",
+    "recraft",
+    "recraft svg",
+    "generate svg",
+    "vector output",
+    "face reference",
+    "face consistency",
+    "reference photo",
+    "flux-2-pro",
+    "image_input",
+    "input_images",
+    "voice clone",
+    "chatterbox",
+    "speech turbo",
+    "qwen tts",
+    "replicate tts",
+    "cloud tts",
+    "seedream"
+  ]
 }

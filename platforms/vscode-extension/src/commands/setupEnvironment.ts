@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as os from "os";
+import { detectCognitiveLevel } from "../shared/cognitiveTier";
 
 /**
  * Get the global Alex directory path (~/.alex)
@@ -8,6 +9,147 @@ import * as os from "os";
 function getGlobalAlexDir(): string {
   return path.join(os.homedir(), ".alex");
 }
+
+// ============================================================================
+// RECOMMENDED EXTENSIONS
+// ============================================================================
+
+interface RecommendedExtension {
+  id: string;
+  name: string;
+  /** Why this extension matters for Alex */
+  purpose: string;
+  /** Cognitive level unlocked by this extension */
+  unlocksLevel: number;
+  /** Is Alex usable without it? */
+  required: boolean;
+}
+
+/**
+ * Extensions that Alex works best with.
+ * Ordered by importance — required first, then nice-to-have.
+ */
+const RECOMMENDED_EXTENSIONS: RecommendedExtension[] = [
+  {
+    id: "github.copilot",
+    name: "GitHub Copilot",
+    purpose: "AI language models — enables all AI-powered features (Levels 2-4)",
+    unlocksLevel: 2,
+    required: false, // Alex Level 1 works without it
+  },
+  {
+    id: "github.copilot-chat",
+    name: "GitHub Copilot Chat",
+    purpose: "Chat interface, agent mode, @alex participant, slash commands",
+    unlocksLevel: 2,
+    required: false,
+  },
+  {
+    id: "bierner.markdown-mermaid",
+    name: "Markdown Preview Mermaid",
+    purpose: "Mermaid diagram rendering in documentation previews",
+    unlocksLevel: 0,
+    required: false,
+  },
+];
+
+/**
+ * Check which recommended extensions are installed.
+ * Returns arrays of installed and missing extensions.
+ */
+export function checkRecommendedExtensions(): {
+  installed: RecommendedExtension[];
+  missing: RecommendedExtension[];
+} {
+  const installed: RecommendedExtension[] = [];
+  const missing: RecommendedExtension[] = [];
+
+  for (const ext of RECOMMENDED_EXTENSIONS) {
+    if (vscode.extensions.getExtension(ext.id)) {
+      installed.push(ext);
+    } else {
+      missing.push(ext);
+    }
+  }
+
+  return { installed, missing };
+}
+
+/**
+ * Offer to install missing extensions with one-click install.
+ * Shows a multi-select quick pick and installs all selected.
+ * @returns number of extensions installed
+ */
+export async function offerExtensionInstall(): Promise<number> {
+  const { missing } = checkRecommendedExtensions();
+
+  if (missing.length === 0) {
+    return 0;
+  }
+
+  // Build quick pick items
+  interface ExtPickItem extends vscode.QuickPickItem {
+    ext: RecommendedExtension;
+  }
+
+  const items: ExtPickItem[] = missing.map((ext) => ({
+    label: ext.name,
+    description: ext.id,
+    detail: ext.purpose,
+    picked: ext.unlocksLevel >= 2, // Pre-select Copilot extensions
+    ext,
+  }));
+
+  const selected = await vscode.window.showQuickPick(items, {
+    canPickMany: true,
+    placeHolder: "Select extensions to install (Copilot extensions unlock AI features)",
+    title: "🧩 Recommended Extensions for Alex",
+  });
+
+  if (!selected || selected.length === 0) {
+    return 0;
+  }
+
+  let installedCount = 0;
+  await vscode.window.withProgress(
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Installing extensions for Alex...",
+      cancellable: false,
+    },
+    async (progress) => {
+      for (const item of selected) {
+        progress.report({ message: `Installing ${item.ext.name}...` });
+        try {
+          await vscode.commands.executeCommand(
+            "workbench.extensions.installExtension",
+            item.ext.id,
+          );
+          installedCount++;
+        } catch (err) {
+          console.error(`[Alex] Failed to install ${item.ext.id}:`, err);
+        }
+      }
+    },
+  );
+
+  if (installedCount > 0) {
+    const reloadChoice = await vscode.window.showInformationMessage(
+      `✅ Installed ${installedCount} extension${installedCount > 1 ? "s" : ""}. Reload window to activate?`,
+      "Reload Now",
+      "Later",
+    );
+    if (reloadChoice === "Reload Now") {
+      vscode.commands.executeCommand("workbench.action.reloadWindow");
+    }
+  }
+
+  return installedCount;
+}
+
+// ============================================================================
+// SETTINGS DEFINITIONS
+// ============================================================================
 
 /**
  * Essential settings required for Alex to function properly
@@ -582,7 +724,29 @@ function formatSettingsPreview(settings: Record<string, unknown>): string {
  * Main command: Setup Alex Environment
  */
 export async function setupEnvironment(): Promise<void> {
-  // Check what's already configured
+  // Phase 1: Check for missing extensions FIRST
+  const { missing: missingExts } = checkRecommendedExtensions();
+  if (missingExts.length > 0) {
+    const copilotMissing = missingExts.some(
+      (e) => e.id === "github.copilot" || e.id === "github.copilot-chat",
+    );
+    const extNames = missingExts.map((e) => e.name).join(", ");
+    const severity = copilotMissing ? "⚠️" : "💡";
+    const msg = copilotMissing
+      ? `${severity} GitHub Copilot is not installed — AI features (Levels 2-4) are unavailable.\n\nMissing: ${extNames}`
+      : `${severity} Optional extension${missingExts.length > 1 ? "s" : ""} not found: ${extNames}`;
+
+    const choice = await vscode.window.showInformationMessage(
+      msg,
+      "Install Extensions",
+      "Skip",
+    );
+    if (choice === "Install Extensions") {
+      await offerExtensionInstall();
+    }
+  }
+
+  // Phase 2: Check what settings are already configured
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
   const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
@@ -780,10 +944,95 @@ export async function setupEnvironment(): Promise<void> {
 }
 
 /**
- * Quick setup that applies essential and recommended settings with minimal prompts
- * Used during initialization/upgrade flow
+ * Quick setup that applies essential and recommended settings with minimal prompts.
+ * Used during initialization/upgrade flow.
+ *
+ * Flow: Check extensions → Apply settings → Done
  */
 export async function offerEnvironmentSetup(): Promise<boolean> {
+  // Phase 1: Check for missing Copilot extensions and offer install
+  const { missing: missingExts } = checkRecommendedExtensions();
+  const copilotMissing = missingExts.some(
+    (e) => e.id === "github.copilot" || e.id === "github.copilot-chat",
+  );
+
+  if (copilotMissing) {
+    const extChoice = await vscode.window.showInformationMessage(
+      "🧩 GitHub Copilot is not installed.\n\n" +
+        "Alex works at Level 1 (free) without it, but installing Copilot unlocks:\n" +
+        "• AI chat, code review, debugging\n" +
+        "• Agent mode with tools & skills\n" +
+        "• Meditation, Dream, Self-Actualization\n\n" +
+        "Install now?",
+      "Install Copilot",
+      "Skip (Level 1 Only)",
+    );
+    if (extChoice === "Install Copilot") {
+      await offerExtensionInstall();
+    }
+  } else if (missingExts.length > 0) {
+    // Only non-Copilot extensions missing — quick mention
+    const names = missingExts.map((e) => e.name).join(", ");
+    const extChoice = await vscode.window.showInformationMessage(
+      `💡 Optional: ${names} can enhance your experience.`,
+      "Install",
+      "Skip",
+    );
+    if (extChoice === "Install") {
+      await offerExtensionInstall();
+    }
+  }
+
+  // Phase 1.5: Check GitHub account & frontier model access
+  // Only relevant when Copilot is installed
+  if (!copilotMissing) {
+    try {
+      const cogResult = await detectCognitiveLevel(true);
+      const account = cogResult.gitHubAccount;
+
+      if (account.signedIn && cogResult.hasModels && cogResult.bestModelTier !== 'frontier') {
+        // Signed in with models but no frontier — account might be on a lower plan
+        const accountMsg = account.sessionCount > 1
+          ? `Signed in as "${account.label}" (${account.sessionCount} accounts detected). ` +
+            `Current plan provides ${cogResult.bestModelTier}-tier models. ` +
+            `Frontier models (Level 4) need Copilot Pro or Business. ` +
+            `Your other account may have a higher plan — switch via the Accounts menu (bottom-left).`
+          : `Signed in as "${account.label}" with ${cogResult.bestModelTier}-tier models. ` +
+            `Frontier models (Level 4) require Copilot Pro or Business. ` +
+            `If you have another GitHub account with a higher plan, add it via the Accounts menu (bottom-left).`;
+
+        const acctChoice = await vscode.window.showInformationMessage(
+          `🔑 ${accountMsg}`,
+          "Open Accounts",
+          "Check Plans",
+          "OK",
+        );
+
+        if (acctChoice === "Open Accounts") {
+          vscode.commands.executeCommand("workbench.action.accounts");
+        } else if (acctChoice === "Check Plans") {
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/settings/copilot"));
+        }
+      } else if (!account.signedIn && cogResult.copilotInstalled && !cogResult.hasModels) {
+        // Copilot installed but not signed in
+        const signInChoice = await vscode.window.showInformationMessage(
+          "🔑 GitHub Copilot is installed but you're not signed in.\n\n" +
+          "Sign in to activate AI models. If you have multiple GitHub accounts " +
+          "(personal + work), choose the one with Copilot Pro or Business for best results.",
+          "Sign In",
+          "Skip",
+        );
+
+        if (signInChoice === "Sign In") {
+          vscode.commands.executeCommand("workbench.action.accounts");
+        }
+      }
+    } catch {
+      // Cognitive detection unavailable — skip account check
+    }
+  }
+
+  // Phase 2: Check and apply settings
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
   const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
@@ -810,7 +1059,7 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
   );
 
   if (choice === "Show Details") {
-    // Run the full setup flow
+    // Run the full setup flow (skips extension check since we just did it)
     await setupEnvironment();
     return true;
   } else if (choice === "Yes, Add Settings") {

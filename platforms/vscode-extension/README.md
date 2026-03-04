@@ -245,7 +245,11 @@ Or search "**Alex Cognitive Architecture**" in VS Code Extensions (`Ctrl+Shift+X
 
 Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Initialize Architecture`**
 
-### Step 3: Start Chatting
+### Step 3: Setup Environment
+
+Run **`Alex: Setup Environment`** — automatically detects missing extensions (GitHub Copilot, Copilot Chat), checks your GitHub account, and applies recommended settings.
+
+### Step 4: Start Chatting
 
 Open Copilot Chat and type **`@alex`** to begin!
 
@@ -285,6 +289,17 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Intelligence**  | Extensive skills, emotional detection, model tier awareness, frustration recognition, expertise calibration  |
 | **Memory**        | Global knowledge + session history + outcome tracking + episodic records                                     |
 | **UX**            | User profiles, smart nudges, one-click upgrades, image upscaling, learning journeys, presentation automation |
+
+### What's New (v6.0.1–6.0.3 — Hardening)
+
+| Category              | Highlights                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Environment Setup** | Extension dependency checker — detects missing Copilot/Chat extensions and offers one-click install          |
+| **Multi-Account**     | GitHub personal + enterprise account detection with upgrade guidance for Frontier model access               |
+| **Cognitive Tier**    | Real-time tier refresh when settings change — welcome view and status bar always reflect current environment |
+| **Extended Thinking** | Fixed critical bug where Level 4 (Advanced) was unreachable due to wrong config key detection                |
+| **Package**           | 3.4 MB lighter (525 files) — removed MP3s, build scripts, dev artifacts from published package               |
+| **Marketplace**       | README link compliance (4 broken links fixed), extension pack soft-recommends GitHub Copilot + Chat          |
 
 ### Migration Notes
 

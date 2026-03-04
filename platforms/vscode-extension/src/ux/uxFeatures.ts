@@ -113,6 +113,13 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
         voiceModeEnabled = vscode.workspace.getConfiguration('alex.voice').get('enabled', false);
         updateVoiceModeStatusBar();
       }
+      // Re-detect model tier when Copilot or chat settings change
+      if (e.affectsConfiguration('github.copilot') ||
+          e.affectsConfiguration('chat.agent') ||
+          e.affectsConfiguration('chat.mcp') ||
+          e.affectsConfiguration('claude-opus')) {
+        detectAndUpdateModelTier();
+      }
     })
   );
 
@@ -120,7 +127,10 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
   detectAndUpdateModelTier();
 
   // Detect cognitive level on activation (populates cache for welcome view badges)
-  detectCognitiveLevel().catch(() => { /* non-critical */ });
+  detectCognitiveLevel().then(() => {
+    // Refresh welcome view once detection is done so tier badges reflect actual level
+    vscode.commands.executeCommand('alex.refreshWelcomeView').then(undefined, () => { /* view may not exist yet */ });
+  }).catch(() => { /* non-critical */ });
 }
 
 /**

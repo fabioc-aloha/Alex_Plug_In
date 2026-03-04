@@ -36,6 +36,11 @@
   "engines": {
     "vscode": "^1.109.0"
   },
+  "extensionDependencies": [],
+  "extensionPack": [
+    "github.copilot",
+    "github.copilot-chat"
+  ],
   "categories": [
     "AI",
     "Machine Learning",

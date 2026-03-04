@@ -150,6 +150,7 @@ Search this index when processing any task request:
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd, add tests for this, how to test, test strategy, coverage gaps, jest, vitest, mocha, testing pyramid, integration test, e2e test, what to mock, flaky tests, aaa pattern, test refactor |
 | ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
 | ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |
+| visual-memory | visual memory, reference portrait, face consistency, base64 reference, character photo set, subject photo, embedded media, face-consistent generation |
 | vscode-configuration-validation | validate config, manifest validation, package.json validation, command registration, settings registration, configuration errors |
 | vscode-environment | setup vscode, workspace settings, launch.json, extensions.json |
 | vscode-extension-patterns | webview pattern, extension api, tree provider, vscode extension, build extension, vs code plugin, extension not activating, command not working, context.subscriptions, csp webview, extension publish, contributes, package.json manifest, agent hooks 1.109, chat skills distribution, claude compat vscode, quickinput api |

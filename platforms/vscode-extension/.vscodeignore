@@ -29,6 +29,15 @@ UPGRADE-INSTRUCTIONS.md
 
 # Build scripts (exclude from package)
 sync-architecture.ps1
+publish.ps1
+build-extension-package.ps1
+scripts/**
+
+# Claude Code config (not needed by extension users)
+.claude/**
+
+# Skill example media (heavy, not needed at runtime)
+**/*.mp3
 
 # External docs (not part of heir)
 alex_docs/**

@@ -3135,13 +3135,18 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     if (e.affectsConfiguration('alex.m365')) {
       // Silent - no action needed
     }
-    // Invalidate cognitive tier cache when relevant settings change
+    // Invalidate cognitive tier cache when relevant settings change, then re-detect
     if (e.affectsConfiguration('chat.agent') ||
         e.affectsConfiguration('chat.extendedThinking') ||
         e.affectsConfiguration('chat.mcp') ||
         e.affectsConfiguration('claude-opus') ||
-        e.affectsConfiguration('github.copilot.chat')) {
+        e.affectsConfiguration('github.copilot.chat') ||
+        e.affectsConfiguration('github.copilot.chat.models')) {
       invalidateCognitiveLevelCache();
+      // Re-detect and refresh welcome view so tier badges update immediately
+      detectCognitiveLevel(true).then(() => {
+        vscode.commands.executeCommand('alex.refreshWelcomeView').then(undefined, () => {});
+      }).catch(() => {});
     }
   });
   context.subscriptions.push(configChangeListener);

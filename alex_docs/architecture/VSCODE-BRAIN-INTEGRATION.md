@@ -5,7 +5,7 @@
 **Version**: 1.0 — Alex v5.9.10 (NASA Edition)
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
-**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Prompt Pipeline](./PROMPT-PIPELINE-ANATOMY.md) · [Chat Settings Guide](../guides/VSCODE-CHAT-SETTINGS-GUIDE.md)
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md)
 
 ---
 

@@ -77,6 +77,13 @@
       "strength": 0.3,
       "when": "TTS hotfix release",
       "yields": "PAT-based publishing protocol"
+    },
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "when": "Cloud TTS via Replicate for video narration, audiobooks, or content creation",
+      "yields": "Replicate TTS model catalog (speech-turbo, chatterbox-turbo, qwen-tts), voice cloning patterns"
     }
   ],
   "activationContexts": [
@@ -133,7 +140,17 @@
     "read prompt",
     "speak prompt response",
     "proofread by ear",
-    "audio proofreading"
+    "audio proofreading",
+    "voice cloning",
+    "clone voice",
+    "chatterbox",
+    "chatterbox turbo",
+    "qwen tts",
+    "speech turbo",
+    "replicate tts",
+    "cloud tts",
+    "voice design",
+    "emotion control"
   ],
   "metadata": {
     "created": "2026-02-05",

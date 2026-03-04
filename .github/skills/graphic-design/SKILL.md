@@ -366,6 +366,55 @@ dominant-baseline="auto|middle|central|hanging"
 | lg | 16px | Cards, pills |
 | full | 9999px | Circles, pills |
 
+## Illustration Principles
+
+Universal principles for placing illustrations in any document — READMEs, docs, presentations, books.
+
+### Principle 1: Contextual Placement
+
+> **An image should answer: "Why HERE?"**
+
+Place images at the exact moment they illustrate. An image that appears next to the content it depicts reinforces understanding; a decorative image placed arbitrarily adds noise.
+
+### Principle 2: Visual Variety
+
+> **Readers should be surprised by each image, not numb to them.**
+
+Avoid repeating the same visual formula. Vary: composition, subject matter, perspective, color palette, and image type (diagram, screenshot, illustration, photo).
+
+### Principle 3: Narrative Function
+
+Every illustration should serve one of these purposes:
+
+| Function | Description | Example |
+|----------|-------------|--------|
+| **Anchor** | Mark a pivotal moment or concept | Architecture diagram at design section |
+| **Reveal** | Show something text describes | Screenshot of the UI being discussed |
+| **Transition** | Signal a tonal or topic shift | Banner between major sections |
+| **Character** | Deepen connection to a person/persona | Avatar at persona introduction |
+| **Setting** | Establish context or environment | Deployment diagram for infrastructure |
+| **Evidence** | Visual proof or data | Chart, graph, or test results |
+
+### Principle 4: Format Consistency
+
+**HTML for precise control:**
+```html
+<p align="center">
+<img src="assets/IMAGE.png" alt="Descriptive alt text" width="60%">
+</p>
+```
+
+**Width guidelines:**
+
+| Asset Type | Width | Use |
+|------------|-------|-----|
+| Full-width banners | 100% | Section headers, hero images |
+| Feature illustrations | 60% | In-content diagrams, screenshots |
+| Spot illustrations | 40-50% | Inline accents, small diagrams |
+| Icons/badges | 20-30% | Status indicators, inline elements |
+
+---
+
 ## Design Review Checklist
 
 ### Visual Quality

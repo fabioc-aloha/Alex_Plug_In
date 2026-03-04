@@ -1,5 +1,5 @@
 ---
-description: Generate 15+ visually consistent character reference images for books, games, or visual novels using Flux 1.1 Pro
+description: Generate 15+ visually consistent character reference images using Nano-Banana Pro (face refs) or Flux 1.1 Pro
 ---
 
 # AI Character Reference Generation Workflow
@@ -14,10 +14,10 @@ description: Generate 15+ visually consistent character reference images for boo
 
 ## Workflow Overview
 
-This guided workflow helps you generate 15+ visually consistent character reference images using Flux 1.1 Pro. Perfect for books, visual novels, games, or any narrative project requiring character illustration consistency.
+This guided workflow helps you generate 15+ visually consistent character reference images. Choose between face-reference-based generation (Nano-Banana Pro) for maximum consistency or prompt-only generation (Flux 1.1 Pro).
 
 **Duration**: 20-30 minutes (character definition) + 15-20 minutes (generation)
-**Cost**: $0.68 for 17-scenario reference set
+**Cost**: $0.43 with Nano-Banana Pro / $0.68 with Flux 1.1 Pro (17 scenarios)
 **Output**: 17 PNG images (3:4 portrait) with visual consistency
 
 ---
@@ -50,6 +50,35 @@ Physical Traits (be VERY specific):
 - [ ] Other: __________________
 
 **Style Description**: Write 2-3 sentences describing the visual mood for ALL images.
+
+---
+
+## Phase 1.5: Face Reference Setup (Recommended)
+
+### Step 2.5: Gather Face References
+
+Using face reference photos dramatically improves consistency. If you have existing images of the character (from a previous generation or real photos), prepare them:
+
+**Prepare reference images**:
+```powershell
+# Resize to 512px, 85% JPEG quality
+magick input.jpg -resize 512x512 -quality 85 ref-001.jpg
+```
+
+**Optimal specs**: 512px longest edge, 85% JPEG quality, ~40-80KB per photo.
+
+**Storage options**:
+1. **visual-memory.json** — Embed as base64 data URIs for cross-session persistence (see `visual-memory` skill)
+2. **Local directory** — Keep as files, load at generation time
+3. **None** — Skip this; use Flux 1.1 Pro prompt-only approach instead
+
+**Model choice based on references**:
+
+| Have References? | Recommended Model | Max Refs | Cost/Image |
+|-----------------|-------------------|----------|------------|
+| ✅ Yes (1-14 photos) | Nano-Banana Pro | 14 | $0.025 |
+| ✅ Yes (1-8 photos) | Flux 2 Pro (higher quality) | 8 | $0.045 |
+| ❌ No | Flux 1.1 Pro | — | $0.04 |
 
 ---
 
@@ -123,6 +152,12 @@ export const CHARACTER = {
 };
 
 export const STYLE = "[aesthetic descriptor from Step 2]";
+
+// Face references (if using Nano-Banana Pro / Flux 2 Pro)
+export const FACE_REFS = [
+  // Array of data URI strings from Phase 1.5
+  // Leave empty [] to use Flux 1.1 Pro instead
+];
 ```
 
 **Create scenarios.js** with your 17 scenarios from Step 3.
@@ -131,7 +166,46 @@ export const STYLE = "[aesthetic descriptor from Step 2]";
 
 ## Phase 4: Generation
 
-### Step 6: Run Generation Script
+### Step 6: Choose Generation Model
+
+**With face references (Nano-Banana Pro)**:
+```javascript
+async function generateScene(scenario) {
+  const prompt = buildPrompt(CHARACTER, scenario, STYLE);
+  
+  const output = await replicate.run("google/nano-banana-pro", {
+    input: {
+      prompt,
+      image_input: FACE_REFS,    // Array of data URIs (up to 14)
+      aspect_ratio: "3:4",
+      output_format: "png",
+    }
+  });
+  return output;
+}
+```
+
+**CRITICAL**: `image_input` accepts an **array** of data URIs, not a single string.
+
+**Without face references (Flux 1.1 Pro)**:
+```javascript
+async function generateScene(scenario) {
+  const prompt = buildPrompt(CHARACTER, scenario, STYLE);
+  
+  const output = await replicate.run("black-forest-labs/flux-1.1-pro", {
+    input: {
+      prompt,
+      aspect_ratio: "3:4",
+      output_format: "png",
+      output_quality: 100,
+      safety_tolerance: 2
+    }
+  });
+  return output;
+}
+```
+
+### Step 7: Run Generation
 
 **Execute**:
 ```bash
@@ -145,7 +219,7 @@ node scripts/generate-character-reference.js
 
 **Duration**: 15-20 minutes for 17 images
 
-### Step 7: Quality Validation
+### Step 8: Quality Validation
 
 **Review checklist**:
 - [ ] Character recognizable across all 17 images
@@ -162,7 +236,7 @@ node scripts/generate-character-reference.js
 
 ## Phase 5: Organization
 
-### Step 8: File Management
+### Step 9: File Management
 
 **Organize outputs**:
 ```
@@ -181,7 +255,7 @@ characters/{character-slug}/images/{collection-name}/
 - Scenario metadata
 - Replicate URLs for re-access
 
-### Step 9: Documentation
+### Step 10: Documentation
 
 **Create README.md in character directory**:
 - Character profile summary
@@ -194,15 +268,22 @@ characters/{character-slug}/images/{collection-name}/
 
 ## Cost Summary
 
-**Per Character Reference Set**:
-- 17 scenarios × $0.04 = **$0.68**
+**Per Character Reference Set (17 scenarios)**:
+
+| Model | Per Image | Total | Face Refs |
+|-------|-----------|-------|-----------|
+| Nano-Banana Pro | $0.025 | **$0.43** | ✅ Up to 14 |
+| Flux 1.1 Pro | $0.04 | $0.68 | ❌ None |
+| Flux 2 Pro | $0.045 | $0.77 | ✅ Up to 8 |
+
+- **Recommended**: Nano-Banana Pro — best consistency at lowest cost
 - Generation time: 15-20 minutes
-- Output: 17 high-quality PNG images (3:4 portrait, 100% quality)
+- Output: 17 high-quality PNG images (3:4 portrait)
 
 **Comparison**:
 - Professional illustrator: $200-$500 for character reference sheet
-- AI generation: $0.68
-- **Savings**: 99.7%
+- AI generation: $0.43-$0.77
+- **Savings**: 99.6-99.8%
 
 ---
 

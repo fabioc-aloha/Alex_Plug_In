@@ -97,7 +97,10 @@
     "AI-callable tools",
     "JSON-RPC",
     "tool schema",
-    "tool definition"
+    "tool definition",
+    "replicate mcp",
+    "replicate server",
+    "pre-built mcp"
   ],
   "metadata": {
     "category": "ai-infrastructure",

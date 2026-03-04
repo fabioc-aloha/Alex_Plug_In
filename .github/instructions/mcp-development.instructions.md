@@ -177,3 +177,44 @@ Before shipping an MCP server:
 - [ ] Transport selected appropriately (stdio for local, HTTP for remote)
 - [ ] Server name and version declared in `McpServer` constructor
 - [ ] Tested with `npx @modelcontextprotocol/inspector` before integration
+
+---
+
+## Pre-Built MCP Servers
+
+### Replicate MCP (AI Model Generation)
+
+The official Replicate MCP server wraps all Replicate HTTP API operations, enabling conversational image/video/audio generation.
+
+**Package**: `replicate-mcp` (v0.9.0+)  
+**License**: Apache-2.0  
+**Docs**: https://replicate.com/docs/reference/mcp
+
+**VS Code setup** (`.vscode/mcp.json`):
+```json
+{
+    "servers": {
+        "replicate": {
+            "command": "npx",
+            "args": ["-y", "replicate-mcp"],
+            "env": {
+                "REPLICATE_API_TOKEN": "${input:replicateToken}"
+            }
+        }
+    },
+    "inputs": [
+        {
+            "id": "replicateToken",
+            "type": "promptString",
+            "description": "Replicate API token",
+            "password": true
+        }
+    ]
+}
+```
+
+**Available operations**: `models.search`, `models.list`, `models.get`, `predictions.create`, `predictions.get`, `predictions.list`
+
+**When to use**: Model exploration, one-off generations, comparing models. For production pipelines with visual memory and domain knowledge, prefer a project-specific CLI or custom MCP server.
+
+**Alpha feature**: `replicate-mcp@alpha --tools=code` enables TypeScript code execution in a Deno sandbox for multi-step workflows.

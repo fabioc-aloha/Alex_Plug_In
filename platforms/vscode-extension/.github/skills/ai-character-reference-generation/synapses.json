@@ -17,6 +17,18 @@
             "type": "requires",
             "strength": 0.9,
             "note": "Character consistency requires detailed prompt engineering"
+        },
+        {
+            "target": ".github/skills/visual-memory/SKILL.md",
+            "type": "consumes",
+            "strength": 0.9,
+            "note": "Face reference photos stored in visual-memory.json for cross-session character consistency"
+        },
+        {
+            "target": ".github/skills/image-handling/SKILL.md",
+            "type": "uses",
+            "strength": 0.85,
+            "note": "Model selection guide, face reference API patterns (image_input, input_images), video animation"
         }
     ],
     "apiKeys": [

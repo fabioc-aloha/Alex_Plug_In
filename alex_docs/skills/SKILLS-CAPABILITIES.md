@@ -17,6 +17,14 @@ graph TB
         HS3[Architecture Design]
         HS4[Documentation]
         HS5[MCP Integration]
+        HS6[Media Production]
+    end
+
+    subgraph "Media Production Cluster"
+        MP1[Image & Video Gen]
+        MP2[Face-Consistent Portraits]
+        MP3[Visual Memory]
+        MP4[Text-to-Speech]
     end
 
     subgraph "Soft Skills"
@@ -36,9 +44,11 @@ graph TB
     HS1 --> SS1
     SS1 --> WL3
     SS2 --> WL4
+    HS6 --> MP1 & MP2 & MP3 & MP4
+    MP3 --> MP2
 ```
 
-**Figure 1:** *Alex Skills Taxonomy - Hard skills, soft skills, and growth aspirations*
+**Figure 1:** *Alex Skills Taxonomy - Hard skills (incl. media production cluster), soft skills, and growth aspirations*
 
 ---
 
@@ -120,11 +130,16 @@ graph TB
 | **Business Analysis**        | ✅ Acquired | `skills/business-analysis/SKILL.md`  |
 | **Localization (i18n/l10n)** | ✅ Acquired | `skills/localization/SKILL.md`       |
 
-**Table 5c:** *Creative & Visual Skills*
+**Table 5c:** *Creative, Visual & Media Production Skills*
 
-| Skill              | Status     | Location                         |
-| ------------------ | ---------- | -------------------------------- |
-| **Graphic Design** | ✅ Acquired | `skills/graphic-design/SKILL.md` |
+| Skill                                 | Status     | Location                                            |
+| ------------------------------------- | ---------- | --------------------------------------------------- |
+| **Graphic Design**                    | ✅ Acquired | `skills/graphic-design/SKILL.md`                    |
+| **Image & Video Generation**          | ✅ Acquired | `skills/image-handling/SKILL.md`                    |
+| **AI Character Reference Generation** | ✅ Acquired | `skills/ai-character-reference-generation/SKILL.md` |
+| **Visual Memory (Face Refs)**         | ✅ Acquired | `skills/visual-memory/SKILL.md`                     |
+| **Text-to-Speech (Local + Cloud)**    | ✅ Acquired | `skills/text-to-speech/SKILL.md`                    |
+| **SVG Graphics**                      | ✅ Acquired | `skills/svg-graphics/SKILL.md`                      |
 
 ---
 

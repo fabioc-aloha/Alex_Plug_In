@@ -50,8 +50,6 @@ Three platforms. Focused, not scattered.
 | **Multi-step workflow engine**     | ✅ Shipped | JSON workflows at `.alex/workflows/`. 4 built-in: Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep. Commands: `alex.runWorkflow`, `alex.listWorkflows`. | *Partner handles any job*   |
 | **User expertise model**           | ✅ Shipped | 10-domain interaction tracking (novice→expert). Injects calibration hint into every `@alex` prompt. Command: `alex.showExpertiseModel`.                                  | *Partner adapts*            |
 | **Proactive code review triggers** | ✅ Shipped | On save, debounced 60s → `git diff --stat HEAD` → nudge if >200 lines changed. Built into task detector.                                                                 | *Partner brings context*    |
-| **Auto-dream scheduling**          |  📋 v6.1   | Fully automated dream execution on schedule — VS Code task scheduler integration.                                                                                        | *Partner maintains itself*  |
-| **Workspace health status bar**    |  📋 v6.1   | Color-coded health tiers in status bar, always visible.                                                                                                                  | *Partner is transparent*    |
 
 ### Definition of Done (v6.0.0)
 
@@ -71,9 +69,48 @@ A version is **done** when ALL of the following are true:
 
 ---
 
+## 🛡️ v6.5.0 — The Trust Release
+
+**Target**: Q2 2026
+
+**Paradigm**: Earn It — The North Star says "trusted." v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests, refactoring, CI/CD, and trifecta completion — the foundation that makes "trusted" a fact, not a promise.
+
+**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 5/126 trifectas complete. No CI pipeline. This release closes those gaps.
+
+### Core Trust Capabilities
+
+| Feature                      | Effort | Description                                                                                                                                                                    | North Star Alignment                              |
+| ---------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| **Test the core services**   |   3w   | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files, covering all v6.0.0 services + top 3 largest files. | *When I say something works, it works*            |
+| **Break down the monoliths** |   4w   | Refactor extension.ts (3,176 lines), globalKnowledge.ts (3,061 lines), participant.ts (2,298 lines). Extract cohesive modules. Eliminate all functions >60 lines (NASA R4).    | *NASA-quality code, not just NASA-quality claims* |
+| **Close the trifecta gap**   |   2w   | Audit the 23 declared trifectas — verify completeness. Complete trifectas for the 10 most-used skills. Target: 33/126 complete (26%).                                          | *Finish what you start*                           |
+| **Add CI/CD pipeline**       |   1w   | GitHub Actions workflow: compile + lint + test on every push. Quality gate as automated gate, not just package-time check.                                                     | *Automated safety net on every commit*            |
+| **Ship one heir to parity**  |   2w   | Bring GitHub Copilot Web heir (`.github/`-only) to full parity with Master. Prove the architecture works cross-platform.                                                       | *For any job — not just VS Code*                  |
+
+### Definition of Done (v6.5.0)
+
+1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
+2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
+3. **No source file >1,500 lines** — extension.ts, globalKnowledge.ts, participant.ts all refactored
+4. **CI green on main** — GitHub Actions pipeline passes compile + lint + test
+5. **33+ complete trifectas** — verified with brain-qa audit
+6. **GitHub Copilot Web heir at parity** — synced and validated
+7. **North Star Trust score ≥7/10** — re-assessed at ship time
+
+> **Principle**: Don't add features. Prove the existing ones deserve trust.
+
+---
+
 ## 📋 Backlog
 
 Items that don't directly serve the North Star, or are gated on external factors. Pull when the partnership foundation is solid.
+
+### Partnership Polish (Deferred from v6.1)
+
+| Task                            | Effort | Description                                                                       | North Star Alignment       |
+| ------------------------------- | :----: | --------------------------------------------------------------------------------- | -------------------------- |
+| **Auto-dream scheduling**       |   2w   | Fully automated dream execution on schedule — VS Code task scheduler integration. | *Partner maintains itself* |
+| **Workspace health status bar** |   1w   | Color-coded health tiers in status bar, always visible.                           | *Partner is transparent*   |
 
 ### Conditional Features (Trigger-Dependent)
 
@@ -167,21 +204,21 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📊 Version Status
 
-| Version    | Focus                                              |    Status     |
-| ---------- | -------------------------------------------------- | :-----------: |
-| v5.9.13    | CorreaX Brand Release                              |   ✅ Shipped   |
-| **v6.0.0** | **The Partnership Release**                        | **✅ Current** |
-| v6.1.0     | Partnership Polish — auto-dream, health status bar |    📋 Next     |
-| v7.0.0+    | Collaborative Intelligence                         |  Backlogged   |
+| Version    | Focus                      |   Status   |
+| ---------- | -------------------------- | :--------: |
+| v5.9.13    | CorreaX Brand Release      | ✅ Shipped  |
+| v6.0.0     | The Partnership Release    | ✅ Shipped  |
+| **v6.5.0** | **The Trust Release**      | **🎯 Next** |
+| v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
-|                            |                                               |
-| -------------------------- | --------------------------------------------- |
-| **Current Master Version** | 6.0.0                                         |
-| **Current Heirs**          | VS Code (6.0.0), M365 (6.0.0)                 |
-| **Next Target**            | 6.1.0 — Auto-dream + health status bar polish |
-| **Updated**                | 2026-02-28                                    |
+|                            |                               |
+| -------------------------- | ----------------------------- |
+| **Current Master Version** | 6.0.3                         |
+| **Current Heirs**          | VS Code (6.0.3), M365 (6.0.0) |
+| **Next Target**            | v6.5.0 — The Trust Release    |
+| **Updated**                | 2026-03-03                    |
 
 ---
 

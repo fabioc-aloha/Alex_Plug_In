@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+> **Environment & Cognitive Tier Hardening** — Extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh, and extended thinking detection fix.
+
+### Added
+
+- **Extension Dependency Checking** — `Setup Environment` now detects missing recommended extensions (GitHub Copilot, GitHub Copilot Chat, Mermaid Preview) and offers one-click install via multi-select dialog
+- **Extension Pack declaration** — `package.json` now declares `extensionPack: ["github.copilot", "github.copilot-chat"]` as soft recommendations for the Marketplace
+- **Multi-Account GitHub Detection** — New `GitHubAccountInfo` in `cognitiveTier.ts` detects personal and enterprise GitHub accounts via `vscode.authentication.getSession('github')` and `'github-enterprise'`
+- **Account-Aware Setup Guidance** — `Setup Environment` Phase 1.5 provides account type classification and upgrade tips for users who need Frontier model access
+- **Real-Time Cognitive Tier Refresh** — Config change listener in `extension.ts` re-detects cognitive level and refreshes welcome view when Copilot settings change (including `github.copilot.chat.models`)
+- **Model Tier Status Bar Refresh** — `uxFeatures.ts` now re-detects model tier on Copilot configuration changes, preventing stale status bar display
+
+### Fixed
+
+- **CRITICAL: Extended thinking detection unreachable** — Detection was reading wrong config keys (`claude-opus-4-6.extendedThinkingEnabled` top-level). Now correctly reads `github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled`. Level 4 (Advanced) was previously unreachable for all users.
+- **L4 badge race condition** — `getCachedCognitiveLevel()` returned null before async detection completed, causing welcome view to default to Level 1 with persistent badge. Now refreshes welcome view after detection completes.
+- **Misleading account classification** — Capable-tier account hint changed from 'business' to 'unknown' (cannot distinguish Pro from Business at runtime)
+- **Markdown in plain text dialogs** — Removed `**bold**` syntax from `showInformationMessage` calls (not rendered in native dialogs)
+- **Unsafe sign-in command** — Changed `github.copilot.signIn` to `workbench.action.accounts` (guaranteed to exist)
+
+### Changed
+
+- **Package optimization** — `.vscodeignore` updated to exclude MP3 files, build scripts, dev scripts, and `.claude/` config. Package dropped from 534 to 525 files (~3.4 MB lighter)
+- **`.gitignore` updated** — Added `.vscode-test/` to prevent 2.9 GB test runtime from being tracked
+
+---
+
 ## [6.0.0] - 2026-02-28
 
 > **The Partnership Release** — Episodic memory, outcome learning, autonomous task detection, multi-step workflow engine, user expertise model, and proactive code review triggers.

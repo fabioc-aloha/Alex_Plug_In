@@ -1,0 +1,205 @@
+
+=== [Pre-Sync] Master  Heir Synchronization ===
+  ? Architecture synchronized from master
+     Γ£à instructions/ (57 items)
+     Γ£à prompts/ (39 items)
+     Γ£à agents/ (7 items)
+     Γ£à muscles/ (18 items, 5 excluded)
+     Γ£à copilot-instructions.md
+     ≡ƒôª Syncing skills from Master to Heir...
+     Γ£à Copied: 114 skills
+     Γ£à copilot-instructions.md: instrumentation comments, persona reset, objective reset, focus trifectas, last assessed, removed Heirs section, stripped I1-I4,I7 imperatives
+     Γ£à release-management.instructions.md: removed synapse (ROADMAP-UNIFIED.md does not exist in heir)
+     Γ£à trifecta-audit.instructions.md: removed synapse (alex_docs/architecture/ not deployed to heir)
+     Master skills: 126
+     Heir skills:   124
+       agents               7       7  Γ£à match
+       instructions        57      57  Γ£à match
+       muscles             21      17  ΓÜá∩╕Å  diff 4
+       prompts             39      39  Γ£à match
+       skills             263     258  Γ£à curated
+
+  ?? Forcing synapse sync...
+  ? Synced 13 synapse file(s)
+
+=== [Phase 1] Synapse Target Validation ===
+  All synapse targets valid
+
+=== [Phase 2] Inheritance Field Validation ===
+  All skills have inheritance field
+
+=== [Phase 3] Skill Index Coverage ===
+  All 126 skills indexed
+
+=== [Phase 4] Trigger Semantic Analysis ===
+  ?? Overlap 'gdpr compliance': pii-privacy-regulations,privacy-responsible-ai
+  ?? Overlap 'heir sync': brain-qa,heir-sync-management,master-alex-audit
+  ?? Overlap 'design system': correax-brand,ui-ux-design
+  ?? Overlap 'pre-release': master-alex-audit,release-preflight
+  ?? Overlap 'use auto': pptx-generation,presentation-tool-selection
+  ?? Overlap 'security audit': master-alex-audit,security-review
+  ?? Overlap 'use pitch': gamma-presentations,presentation-tool-selection
+  ?? Overlap 'dream': architecture-health,dream-state
+  ?? Overlap 'human-ai collaboration': appropriate-reliance,cognitive-symbiosis
+  ?? Overlap 'choose model': image-handling,llm-model-selection
+  ?? Overlap 'cite sources': academic-research,citation-management
+  ?? Overlap 'literature matrix': literature-review,research-project-scaffold
+  ?? Overlap '5 whys': post-mortem,root-cause-analysis
+  ?? Overlap 'visual identity': brand-asset-management,correax-brand
+  ?? Overlap 'technical writing': api-documentation,writing-publication
+  ?? Overlap 'self-actualize': meditation-facilitation,self-actualization
+  ?? Overlap 'academic writing': academic-paper-drafting,practitioner-research
+  ?? Overlap 'neural maintenance': architecture-health,dream-state
+  ?? Overlap 'typography': correax-brand,graphic-design,ui-ux-design
+  ?? Overlap 'data protection': pii-privacy-regulations,privacy-responsible-ai
+  Review overlaps - shared triggers may be intentional
+
+=== [Phase 5] Master-Heir Skill Sync ===
+  Master: 126 skills | Heir: 124 skills
+  ?? Missing in heir: global-knowledge-maintenance, master-alex-audit
+
+=== [Phase 6] Synapse Schema Format Validation ===
+  Schema validation passed
+
+=== [Phase 7] Synapse File Sync ===
+  All synapses in sync
+
+=== [Phase 8] Skill-Activation Index Sync ===
+  Index in sync
+
+=== [Phase 9] Catalog Accuracy Validation ===
+  Catalog count accurate: 126 skills
+
+=== [Phase 10] Core File Token Budget ===
+  Core files within token budget
+
+=== [Phase 11] Boilerplate Skill Descriptions ===
+  No boilerplate descriptions
+
+=== [Phase 12] Heir Reset Validation (Pre-Publish) ===
+  Heir properly reset for publication
+
+=== [Phase 13] Instructions/Prompts Sync ===
+  Instructions/Prompts in sync
+
+=== [Phase 14] Agents Structure Validation ===
+  Agents valid (7 agents)
+
+=== [Phase 15] Config Files Validation ===
+  Config files valid
+
+=== [Phase 16] Skill YAML Frontmatter Compliance ===
+  All skills have valid YAML frontmatter
+
+=== [Phase 17] Internal Skills User-Invokable Check ===
+  Internal skills properly hidden
+
+=== [Phase 18] Agent Handoffs Completeness ===
+  Agent handoffs valid
+
+=== [Phase 19] Instruction ApplyTo Pattern Coverage ===
+  Instruction applyTo patterns present
+
+=== [Phase 20] LLM-First Content Format Validation ===
+  Content formats are LLM-friendly
+
+=== [Phase 21] Emoji Semantic Consistency ===
+  Semantic emojis in agents: 41 (emojis are meaningful tokens for LLMs)
+
+=== [Phase 22] Episodic Archive Health ===
+  Episodic files: 79 total (10 dreams, 62 meditations, 1 self-actualizations)
+
+=== [Phase 23] .github/ Assets Validation ===
+  Banner asset present
+  Assets: 5 files (3 SVG, 2 PNG)
+
+=== [Phase 24] Issue & PR Templates ===
+  Issue templates present (3 templates)
+  PR template present
+
+=== [Phase 25] .github/ Root Files Completeness ===
+  All .github/ root files present (2 files)
+  All .github/ subfolders present (9 folders)
+
+=== [Phase 26] alex_docs/ Architecture Docs Freshness ===
+  SKILLS-CATALOG.md count matches (126)
+  Architecture docs present and version-current
+
+=== [Phase 27] M365 Heir Health ===
+  ?? M365 heir version (6.0.2) != VS Code heir (6.0.3)
+  M365 heir essential files present
+
+=== [Phase 28] Codespaces Heir Health ===
+  Codespaces heir not present (skipped)
+
+=== [Phase 29] Global Knowledge Sync Validation ===
+  GK index matches disk: 34 patterns, 357 insights
+
+=== [Phase 30] Release Scripts & Muscles Integrity ===
+  All trifecta-referenced muscles present (12)
+  Release scripts present
+
+=== [Phase 31] ROADMAP & Root Doc Version Consistency ===
+  ROADMAP master version matches (6.0.3)
+  ?? cognitive-config.json version (6.0.0) != 6.0.3
+  ?? copilot-instructions.md version (6.0.2) != 6.0.3
+  CHANGELOG.md has entry for 6.0.3
+  ?? Heir CHANGELOG.md missing entry for 6.0.3
+
+=== [Phase 32] Prefrontal Cortex Evolution Validation ===
+  Identity section present
+  ?? Agents on disk but NOT in copilot-instructions: Alex, azure, builder, documentarian, m365, researcher, validator
+  ?? Agents in copilot-instructions but NOT on disk: 
+  All 26 listed trifectas have skill directories
+  Active Context section present
+  User Profile section present
+
+=== [Phase 33] Pre-Sync Master Validation ===
+  All master skills have YAML frontmatter
+  No legacy .prompt.md files in episodic
+  ?? Master user-profile.json contains name: 'Fabio Correa' (will be excluded from heir)
+  ?? Master user-profile.json contains email (will be excluded from heir)
+  All master synapse references are valid
+  No inheritable skills reference master-only paths
+
+=== [Phase 34] Brain Self-Containment Check ===
+  Brain is fully self-contained (127 synapse files, 334 markdown files scanned)
+
+=== [Phase 35] API Key Availability Check ===
+  REPLICATE_API_TOKEN - set (skills: ai-character-reference-generation, ai-generated-readme-banners, character-aging-progression)
+  All 1 declared API key(s) are present
+
+========================================
+ BRAIN QA SUMMARY
+========================================
+
+WARNINGS (29):
+  ?? Overlap 'gdpr compliance': pii-privacy-regulations,privacy-responsible-ai
+  ?? Overlap 'heir sync': brain-qa,heir-sync-management,master-alex-audit
+  ?? Overlap 'design system': correax-brand,ui-ux-design
+  ?? Overlap 'pre-release': master-alex-audit,release-preflight
+  ?? Overlap 'use auto': pptx-generation,presentation-tool-selection
+  ?? Overlap 'security audit': master-alex-audit,security-review
+  ?? Overlap 'use pitch': gamma-presentations,presentation-tool-selection
+  ?? Overlap 'dream': architecture-health,dream-state
+  ?? Overlap 'human-ai collaboration': appropriate-reliance,cognitive-symbiosis
+  ?? Overlap 'choose model': image-handling,llm-model-selection
+  ?? Overlap 'cite sources': academic-research,citation-management
+  ?? Overlap 'literature matrix': literature-review,research-project-scaffold
+  ?? Overlap '5 whys': post-mortem,root-cause-analysis
+  ?? Overlap 'visual identity': brand-asset-management,correax-brand
+  ?? Overlap 'technical writing': api-documentation,writing-publication
+  ?? Overlap 'self-actualize': meditation-facilitation,self-actualization
+  ?? Overlap 'academic writing': academic-paper-drafting,practitioner-research
+  ?? Overlap 'neural maintenance': architecture-health,dream-state
+  ?? Overlap 'typography': correax-brand,graphic-design,ui-ux-design
+  ?? Overlap 'data protection': pii-privacy-regulations,privacy-responsible-ai
+  ?? Missing in heir: global-knowledge-maintenance, master-alex-audit
+  ?? M365 heir version (6.0.2) != VS Code heir (6.0.3)
+  ?? cognitive-config.json version (6.0.0) != 6.0.3
+  ?? copilot-instructions.md version (6.0.2) != 6.0.3
+  ?? Heir CHANGELOG.md missing entry for 6.0.3
+  ?? Agents on disk but NOT in copilot-instructions: Alex, azure, builder, documentarian, m365, researcher, validator
+  ?? Agents in copilot-instructions but NOT on disk: 
+  ?? Master user-profile.json contains name: 'Fabio Correa' (will be excluded from heir)
+  ?? Master user-profile.json contains email (will be excluded from heir)

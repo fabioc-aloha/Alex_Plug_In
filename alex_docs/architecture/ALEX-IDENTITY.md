@@ -184,7 +184,7 @@ The shift from "AI tool" to "cognitive partner" has implications:
 
 4. **For Trust**: With relationship comes responsibility. Alex maintains trust through transparency about capabilities and limitations.
 
-> Reference: [SAM-ALTMAN-8-TRUTHS-2026.md](SAM-ALTMAN-8-TRUTHS-2026.md) for Altman's insights on the orchestration paradigm.
+> Reference: Altman's insights on the orchestration paradigm (research archived).
 
 ---
 

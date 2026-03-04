@@ -43,18 +43,29 @@ triggers:
 
 ### Face Consistency Pattern (Nano-Banana Pro)
 
-**The Key Insight**: For consistent character faces across multiple poses/scenarios, use a reference face image with nano-banana-pro:
+**The Key Insight**: For consistent character faces across multiple poses/scenarios, use reference face images with nano-banana-pro:
 
 ```javascript
+// Build array of reference image data URIs
+function toDataURI(filepath) {
+  const buffer = readFileSync(filepath);
+  const ext = filepath.endsWith(".png") ? "png" : "jpeg";
+  return `data:image/${ext};base64,${buffer.toString("base64")}`;
+}
+
+const referenceURIs = referencePhotos.map(p => toDataURI(p));
+
 const response = await replicate.run("google/nano-banana-pro", {
   input: {
     prompt: `${CHARACTER_DESC}, ${scenario.attire}, ${scenario.pose}, ${STYLE}`,
-    image: await toDataURI("path/to/reference-face.png"),  // Key: face reference
+    image_input: referenceURIs,  // Array of data URIs (up to 14 refs)
     aspect_ratio: "1:1",  // Square for avatars
     output_format: "png"
   }
 });
 ```
+
+> **Critical**: The parameter is `image_input` (array), not `image` (single). More references = better face consistency. For flux-2-pro, use `input_images` instead (up to 8 refs).
 
 **Cost Analysis**:
 - 90 avatar images × $0.025 = $2.25 total (nano-banana)

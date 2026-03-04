@@ -60,7 +60,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (23)
+## Complete Trifectas (26)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -108,6 +108,16 @@ Capabilities with all three memory system components — each justified by the "
 
 **Also has**: `release-preflight/SKILL.md` (pre-release validation — companion skill, not duplicate)
 
+### Extension Audit Methodology
+
+| Component   | File                                                               | Why It Exists                                                                                              |
+| ----------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/extension-audit-methodology/SKILL.md`              | Domain knowledge: 5-dimension audit — debug hygiene, dead code, performance, menu validation, dependencies |
+| Instruction | `.github/instructions/extension-audit-methodology.instructions.md` | Auto-loaded procedure: systematic audit steps, checklist validation, regression prevention                 |
+| Prompt      | `.github/prompts/extension-audit-methodology.prompt.md`            | `/extension-audit-methodology` — user invokes comprehensive extension audit workflow                       |
+
+**Inheritance**: `heir:vscode` — VS Code extension-specific audit capability
+
 ### Brand Asset Management
 
 | Component   | File                                                          | Why It Exists                                                                         |
@@ -115,6 +125,28 @@ Capabilities with all three memory system components — each justified by the "
 | Skill       | `.github/skills/brand-asset-management/SKILL.md`              | Domain knowledge: brand hierarchy, locked elements, persona copy, platform guidelines |
 | Instruction | `.github/instructions/brand-asset-management.instructions.md` | Auto-loaded procedure: asset locations, generation commands, deployment steps         |
 | Prompt      | `.github/prompts/brand.prompt.md`                             | `/brand` — user invokes brand management workflow                                     |
+
+### AI Character Reference Generation
+
+| Component   | File                                                                     | Why It Exists                                                                                            |
+| ----------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/ai-character-reference-generation/SKILL.md`              | Domain knowledge: face-consistent portrait generation via Nano-Banana Pro / Flux 2 Pro, model comparison |
+| Instruction | `.github/instructions/ai-character-reference-generation.instructions.md` | Auto-loaded procedure: reference photo setup, model selection, `image_input` array format, cost guidance |
+| Prompt      | `.github/prompts/ai-character-reference-generation.prompt.md`            | `/ai-character-reference-generation` — user invokes portrait generation with face reference workflow     |
+
+**Synapse connections**: visual-memory (0.95), image-handling (0.9), graphic-design (0.7), mcp-development (0.6)
+**Inheritance**: `inheritable` — face-consistent generation applicable across all heirs
+
+### AI-Generated README Banners
+
+| Component   | File                                                               | Why It Exists                                                                                                |
+| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/ai-generated-readme-banners/SKILL.md`              | Domain knowledge: ultra-wide cinematic banners via Ideogram v2, typography, professional README compositions |
+| Instruction | `.github/instructions/ai-generated-readme-banners.instructions.md` | Auto-loaded procedure: prompt templates, aspect ratios, model parameters, quality control                    |
+| Prompt      | `.github/prompts/ai-generated-readme-banners.prompt.md`            | `/ai-generated-readme-banners` — user invokes guided banner generation workflow                              |
+
+**Synapse connections**: brand-asset-management (0.9), prompt-engineering (0.88), ai-character-reference-generation (0.85), markdown-mermaid (0.7)
+**Inheritance**: `inheritable` — README banner generation applicable across all heirs
 
 ### Bootstrap Learning
 
@@ -372,7 +404,7 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   23 justified candidates
+Complete Trifectas:   26 justified candidates
 Procedural-Only:      21 (all justified)
 Prompt-Only:           8 (all justified)
 Skill-Only:          ~100 (standard — passive expertise)
@@ -383,13 +415,16 @@ Skill-Only:          ~100 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (23)"]
+    subgraph COMPLETE["✅ Complete Trifectas (26)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
         DS["Dream / Neural Maintenance"]
         REL["Release Management"]
         BAM["Brand Asset Management"]
+        ACRG["AI Character Ref Gen"]
+        AGRB["AI README Banners"]
+        EAM["Extension Audit Method."]
         BL["Bootstrap Learning"]
         BQA["Brain QA"]
         MAA["Master Alex Audit"]
@@ -399,6 +434,16 @@ flowchart LR
         MD2W["Markdown to Word"]
         GAMMA["Gamma Presentation"]
         SEC["Secrets Management"]
+        CPP["Chat Participant Patterns"]
+        VEP["VS Code Extension Patterns"]
+        MCPD["MCP Development"]
+        MGA["Microsoft Graph API"]
+        TAP["Teams App Patterns"]
+        M365D["M365 Agent Debugging"]
+        MMRM["Markdown Mermaid"]
+        TS["Testing Strategies"]
+        KS["Knowledge Synthesis"]
+        NS["North Star"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -407,20 +452,39 @@ flowchart LR
         PR["💬 Prompt (Guide)"]
     end
 
+    subgraph PRODUCTION["🎨 Production Cluster"]
+        ACRG --- SK & INS & PR
+        BAM --- SK & INS & PR
+        GAMMA --- SK & INS & PR
+    end
+
     RFD --- SK & INS & PR
     MED --- SK & INS & PR
     SA --- SK & INS & PR
     DS --- SK & INS & PR
     REL --- SK & INS & PR
-    BAM --- SK & INS & PR
     BL --- SK & INS & PR
     BQA --- SK & INS & PR
     MAA --- SK & INS & PR
     UIUX --- SK & INS & PR
     VSCC --- SK & INS & PR
+    HC --- SK & INS & PR
+    MD2W --- SK & INS & PR
+    SEC --- SK & INS & PR
+    CPP --- SK & INS & PR
+    VEP --- SK & INS & PR
+    MCPD --- SK & INS & PR
+    MGA --- SK & INS & PR
+    TAP --- SK & INS & PR
+    M365D --- SK & INS & PR
+    MMRM --- SK & INS & PR
+    TS --- SK & INS & PR
+    KS --- SK & INS & PR
+    NS --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da
+    style PRODUCTION fill:#fff3cd,stroke:#856404
     style SK fill:#cfe2ff,stroke:#0d6efd
     style INS fill:#fff3cd,stroke:#856404
     style PR fill:#e0cffc,stroke:#6f42c1
@@ -494,17 +558,19 @@ See `trifecta-audit.instructions.md` § "Heir Trifecta Implementation" for the f
 
 ## Audit Changelog
 
-| Date       | Action                                                                                                                                 | Result                                                                                                                                                                                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-02-13 | Initial trifecta refactoring                                                                                                           | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                                                                     |
-| 2026-02-13 | Full audit with Why? protocol                                                                                                          | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                                                         |
-| 2026-02-13 | Created `trifecta-audit.instructions.md`                                                                                               | Formal audit protocol with anti-patterns                                                                                                                                                                                                                 |
-| 2026-02-13 | Heir trifecta generalization                                                                                                           | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                                                           |
-| 2026-02-13 | Heir project improvement instruction                                                                                                   | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                                                                       |
-| 2026-02-13 | Scripts are muscles doctrine                                                                                                           | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                                                               |
-| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas                                                                              | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas                                         |
-| 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas                                                            | Added 4 complete trifectas: **heir-curation**, **md-to-word**, **gamma-presentation**, **secrets-management**. Total: 11 → 15 complete trifectas                                                                                                         |
-| 2026-02-28 | Chat Participant, VS Code Extension, MCP, Graph API, Teams, M365 Debugging, Markdown-Mermaid, Testing, Knowledge Synthesis, North Star | Completed 9 heir trifectas — all previously "Skill only" candidates now have Instruction + Prompt. Total: 15 → 23 complete trifectas. Also fixed `vscode-configuration-validation` synapses.json malformed inheritance field (`object → "heir:vscode"`). |
+| Date       | Action                                                                                                                                 | Result                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-02-13 | Initial trifecta refactoring                                                                                                           | Completed 6 capabilities (meditation instruction, release prompt, dream skill, brand skill + prompt)                                                                                                                                                                                                                                                                                                                                                                                 |
+| 2026-02-13 | Full audit with Why? protocol                                                                                                          | 7 complete trifectas, 21 justified procedural-only, 8 prompt-only, 92 skill-only                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 2026-02-13 | Created `trifecta-audit.instructions.md`                                                                                               | Formal audit protocol with anti-patterns                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2026-02-13 | Heir trifecta generalization                                                                                                           | Added heir Why Test, VS Code + M365 candidates, promotion path                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 2026-02-13 | Heir project improvement instruction                                                                                                   | Created `heir-project-improvement.instructions.md` + `/improve` prompt — teaches heirs to build trifectas and apply research-first                                                                                                                                                                                                                                                                                                                                                   |
+| 2026-02-13 | Scripts are muscles doctrine                                                                                                           | Added "Scripts Are Muscles, Not Memories" section — clarifies scripts are execution artifacts referenced by trifectas, not a 4th component                                                                                                                                                                                                                                                                                                                                           |
+| 2026-02-15 | UI/UX Design + VS Code Configuration Validation trifectas                                                                              | Added 2 complete trifectas: **ui-ux-design** (inheritable, from v5.8.0 accessibility session) and **vscode-configuration-validation** (heir:vscode, existing but undocumented). Total: 9 → 11 complete trifectas                                                                                                                                                                                                                                                                     |
+| 2026-02-19 | Heir Curation, MD-to-Word, Gamma Presentation, Secrets Management trifectas                                                            | Added 4 complete trifectas: **heir-curation**, **md-to-word**, **gamma-presentation**, **secrets-management**. Total: 11 → 15 complete trifectas                                                                                                                                                                                                                                                                                                                                     |
+| 2026-02-28 | Chat Participant, VS Code Extension, MCP, Graph API, Teams, M365 Debugging, Markdown-Mermaid, Testing, Knowledge Synthesis, North Star | Completed 9 heir trifectas — all previously "Skill only" candidates now have Instruction + Prompt. Total: 15 → 23 complete trifectas. Also fixed `vscode-configuration-validation` synapses.json malformed inheritance field (`object → "heir:vscode"`).                                                                                                                                                                                                                             |
+| 2026-03-03 | AI Character Reference Generation promoted to full trifecta; production cluster synapse updates                                        | Added 24th trifecta: **ai-character-reference-generation** (SKILL.md + instructions.md + prompt.md). Fixed CRITICAL API bug (`image` → `image_input` array). Updated 5 synapses.json files with media production cross-connections (image-handling ↔ visual-memory ↔ char-ref ↔ graphic-design ↔ TTS). Enriched image-handling with video generation (Veo-3, Grok, Kling v3), face refs (Nano-Banana Pro, Flux 2 Pro), cloud TTS, Recraft v4 SVG. Total: 23 → 24 complete trifectas. |
+| 2026-03-03 | Uncataloged skill discovery — 4 skills added, 2 full trifectas documented                                                              | Cataloged 4 missing skills: **ai-generated-readme-banners** (full trifecta, inheritable), **extension-audit-methodology** (full trifecta, heir:vscode), **character-aging-progression** (skill-only), **correax-brand** (skill-only). Updated all category tables, network diagrams, coverage summaries. Total: 24 → 26 complete trifectas.                                                                                                                                          |
 
 ---
 
