@@ -11,20 +11,20 @@ Accumulated documentation from v3.x–v5.x era was cluttering the active tree. R
 
 ## Categories
 
-| Folder          | Count | Reason                                                                                                          |
-| --------------- | ----- | --------------------------------------------------------------------------------------------------------------- |
-| root/                 | 3  | MENTOR-SERVICE-PLAN (never advanced), RISKS (Jan 2026 comeback era), brain-qa-output.txt (stale v6.0.x output)       |
-| exports/              | 5  | Old vsix (v5.7.1), AlexPapers redirect stubs, stale pptx                                                              |
-| features/             | 4  | Shipped plans (avatar, participant, telemetry, coaching loop)                                                         |
-| architecture/         | 6  | Pre-v6 designs (generic framework v0.9.9, prompt pipeline v5.7, skill graph, gap analysis, service vision)            |
-| operations/           | 2  | Completed recovery (Phoenix), stale migration plan                                                                    |
-| marketing/            | 58 | Entire folder — old banner/logo SVG concepts, marketing plan, persona, visual identity                                |
-| platforms/            | 17 | 7 speculative heirs (ChatGPT, Cursor, Windsurf, NotebookLM, Gemini, Claude Code, Other), 10 stale analysis docs      |
-| guides/               | 2  | VS Code chat settings guide + summary (rapidly outdated)                                                              |
-| research/             | 5  | AlexPapers redirects (Altman, Siegel), Claude Opus 4.6 old news, PAPERS.md stub, REPLICATE-EVALUATION.md (superseded by trifecta skills) |
-| alex-v1-images/       | 56 | Alex v1/v2 persona images superseded by alex3/                                                                        |
-| audits/               | 3  | *(Pass 2)* Point-in-time reports: Architecture Assessment 2026-02-06, v5.9.2 Audit 2026-02-20, Extension Audit 2026-02-15 |
-| diagram-visualization/| 1  | *(Pass 2)* Ideogram v2 diagram gallery — superseded by updated image-handling + ai-generated-readme-banners skills    |
+| Folder | Count | Reason |
+| --- | --- | --- |
+| root/ | 3 | MENTOR-SERVICE-PLAN (never advanced), RISKS (Jan 2026 comeback era), brain-qa-output.txt (stale v6.0.x output) |
+| exports/ | 5 | Old vsix (v5.7.1), AlexPapers redirect stubs, stale pptx |
+| features/ | 4 | Shipped plans (avatar, participant, telemetry, coaching loop) |
+| architecture/ | 6 | Pre-v6 designs (generic framework v0.9.9, prompt pipeline v5.7, skill graph, gap analysis, service vision) |
+| operations/ | 2 | Completed recovery (Phoenix), stale migration plan |
+| marketing/ | 58 | Entire folder — old banner/logo SVG concepts, marketing plan, persona, visual identity |
+| platforms/ | 17 | 7 speculative heirs (ChatGPT, Cursor, Windsurf, NotebookLM, Gemini, Claude Code, Other), 10 stale analysis docs |
+| guides/ | 2 | VS Code chat settings guide + summary (rapidly outdated) |
+| research/ | 5 | AlexPapers redirects (Altman, Siegel), Claude Opus 4.6 old news, PAPERS.md stub, REPLICATE-EVALUATION.md (superseded by trifecta skills) |
+| alex-v1-images/ | 56 | Alex v1/v2 persona images superseded by alex3/ |
+| audits/ | 3 | *(Pass 2)* Point-in-time reports: Architecture Assessment 2026-02-06, v5.9.2 Audit 2026-02-20, Extension Audit 2026-02-15 |
+| diagram-visualization/ | 1 | *(Pass 2)* Ideogram v2 diagram gallery — superseded by updated image-handling + ai-generated-readme-banners skills |
 
 ## Broken Links Repaired
 
