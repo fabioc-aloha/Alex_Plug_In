@@ -166,29 +166,44 @@ Match user intent to the right model. When a user names a specific model or desc
 | **Flux Schnell** | `black-forest-labs/flux-schnell` | $0.003 | Fast iteration, prototyping | "flux schnell", "quick image", "fast generation" |
 | **Flux Dev** | `black-forest-labs/flux-dev` | $0.025 | High quality no-text images | "flux dev", "high quality image" |
 | **Flux 1.1 Pro** | `black-forest-labs/flux-1.1-pro` | $0.04 | Production, photorealistic | "flux pro", "flux 1.1", "production image" |
-| **Ideogram v2** | `ideogram-ai/ideogram-v2` | $0.08 | Text in images, typography banners | "ideogram", "text in image", "image with text", "banner" |
-| **Ideogram v2 Turbo** | `ideogram-ai/ideogram-v2-turbo` | $0.05 | Fast typography | "ideogram turbo", "fast text image" |
+| **Flux 2 Pro** | `black-forest-labs/flux-2-pro` | ~$0.05+ | High quality with reference images (up to 8 refs), text rendering | "flux 2", "flux-2-pro", "high quality refs" |
+| **Flux 2 Max** | `black-forest-labs/flux-2-max` | higher | Highest fidelity BFL output | "flux 2 max", "highest quality" |
+| **Flux Kontext Pro** | `black-forest-labs/flux-kontext-pro` | $0.04 | Text-based image editing, style transfer, outfit changes | "edit image", "kontext", "change background", "outfit" |
+| **Flux Kontext Max** | `black-forest-labs/flux-kontext-max` | $0.08 | Premium editing + improved typography in edited images | "kontext max", "premium edit" |
+| **Ideogram v2** | `ideogram-ai/ideogram-v2` | $0.08 | Banner typography (proven, stable API) | "ideogram v2", "banner with text" |
+| **Ideogram v3 Turbo** | `ideogram-ai/ideogram-v3-turbo` | $0.03 | Fast typography generation | "ideogram turbo", "fast text image", "ideogram v3" |
+| **Ideogram v3 Balanced** | `ideogram-ai/ideogram-v3-balanced` | $0.06 | Balanced quality/speed typography | "ideogram balanced" |
+| **Ideogram v3 Quality** | `ideogram-ai/ideogram-v3-quality` | $0.09 | Highest quality typography | "ideogram quality", "best ideogram" |
+| **Nano-Banana Pro** | `google/nano-banana-pro` | $0.025 | Face-consistent portraits with reference photos (up to 14 refs), 4K | "nano-banana", "face consistency", "portrait", "reference photo" |
+| **Nano-Banana 2** | `google/nano-banana-2` | $0.067/1K | Faster alternative to nano-banana-pro, same 14-ref API | "nano-banana-2", "fast portrait", "gemini flash image" |
 | **SDXL** | `stability-ai/sdxl` | $0.009 | Classic diffusion, LoRA styles | "sdxl", "stable diffusion", "stable diffusion xl" |
-| **Seedream 5 Lite** | `bytedance/seedream-5-lite` | varies | 2K/3K with built-in reasoning | "seedream", "bytedance", "high resolution" |
-| **Nano-Banana Pro** | `google/nano-banana-pro` | $0.025 | Face-consistent portraits with reference photos (up to 14 refs) | "nano-banana", "face consistency", "portrait", "reference photo" |
-| **Flux 2 Pro** | `black-forest-labs/flux-2-pro` | $0.045 | High quality with reference images (up to 8 refs) | "flux 2", "flux-2-pro", "high quality refs" |
-| **Recraft v4 SVG** | `recraft-ai/recraft-v4-pro-svg` | $0.30 | Native SVG vector output, editable paths | "recraft", "svg", "vector", "generate svg" |
+| **Seedream 5 Lite** | `bytedance/seedream-5-lite` | varies | 2K/3K with built-in reasoning, example-based editing | "seedream", "bytedance", "high resolution" |
+| **Recraft v4** | `recraft-ai/recraft-v4` | varies | Design taste, strong composition, text rendering | "recraft", "design image", "art directed" |
+| **Recraft v4 SVG** | `recraft-ai/recraft-v4-svg` | varies | Production-ready SVG vector images | "recraft svg", "vector", "generate svg" |
+| **Recraft v4 Pro SVG** | `recraft-ai/recraft-v4-pro-svg` | $0.30 | High quality SVG with detailed paths | "recraft pro svg", "detailed svg" |
 
 ### Model Selection Guide
 
 - **"quick" / "test" / "prototype"** → Flux Schnell ($0.003, 4 steps)
-- **"high quality" / "production"** → Flux 1.1 Pro ($0.04)
-- **Text must appear in the image** → Ideogram v2 (only model with crystal-clear typography)
+- **"high quality" / "production"** → Flux 1.1 Pro ($0.04) or Flux 2 Pro for multi-ref
+- **Text must appear in the image** → Ideogram v3 Turbo ($0.03) or v3 Quality ($0.09); v2 still works
+- **Simple/fast text in image** → Ideogram v3 Turbo ($0.03, fastest + cheapest)
+- **Edit an existing image** → Flux Kontext Pro ($0.04, text-prompted editing)
+- **Premium image editing** → Flux Kontext Max ($0.08, better typography in edits)
 - **Painting style / custom LoRA** → SDXL or Flux Dev with LoRA weights
-- **Largest / highest resolution output** → Seedream 5 Lite (2K or 3K)
-- **README banner with text** → Ideogram v2 with `3:1` ratio; see `ai-generated-readme-banners` skill
+- **Largest / highest resolution output** → Seedream 5 Lite (up to 3K) or Nano-Banana Pro (up to 4K)
+- **README banner with text** → Ideogram v3 Turbo `3:1` ratio ($0.03); see `ai-generated-readme-banners` skill
 - **README banner without text** → Flux 1.1 Pro with `21:9` ratio
-- **Face-consistent portraits** → Nano-Banana Pro ($0.025, pass reference photos via `image_input` array)
-- **Multi-reference high quality** → Flux 2 Pro ($0.045, `input_images` up to 8 refs)
-- **Vector/SVG logo or graphic** → Recraft v4 SVG ($0.30, native SVG output)
-- **Short video clip (≤8s)** → Veo-3 ($0.50/video, auto audio)
-- **Longer video (≤15s)** → Grok Video ($0.05/sec, auto audio + lip-sync)
-- **Cinematic video** → Kling v3 ($0.22/sec, 1080p, multi-shot)
+- **Face-consistent portraits (fast)** → Nano-Banana 2 ($0.067/1K, `image_input` array, same API as Pro)
+- **Face-consistent portraits (quality)** → Nano-Banana Pro ($0.025, `image_input` up to 14 refs)
+- **Multi-reference high quality** → Flux 2 Pro (~$0.05+, `input_images` up to 8 refs)
+- **Highest fidelity** → Flux 2 Max
+- **Vector/SVG logo or graphic** → Recraft v4 SVG (native SVG output) or Recraft v4 Pro SVG ($0.30)
+- **Art-directed design** → Recraft v4 (strong composition, design taste)
+- **Short video clip (≤8s)** → Veo-3.1-fast (faster/cheaper successor to Veo-3, auto audio)
+- **Longer video (≤15s)** → Grok Video (`xai/grok-imagine-video`, $0.05/sec, auto audio + lip-sync)
+- **Cinematic video** → Kling v3 (`kwaivgi/kling-v3-video`, 1080p, multi-shot, ≤15s)
+- **Realistic home-video quality** → Sora-2 (`openai/sora-2`, synced audio)
 
 ### LoRA Support (Flux Dev / SDXL)
 
@@ -270,8 +285,13 @@ Generate video from a still image or text prompt via Replicate. All video models
 | Model | Replicate ID | Cost | Duration | Audio | Best For |
 |-------|-------------|------|----------|-------|----------|
 | **Veo-3** | `google/veo-3` | $0.50/video | 4, 6, or 8s only | ✅ Auto | Short clips with synced audio |
+| **Veo-3.1-fast** | `google/veo-3.1-fast` | lower | 4-8s | ✅ Context-aware audio | Newer/faster Veo 3, last-frame support |
+| **Veo-3.1** | `google/veo-3.1` | higher | 4-8s | ✅ Context-aware audio | Highest fidelity successor to Veo 3 |
 | **Grok Video** | `xai/grok-imagine-video` | $0.05/sec | 1-15s | ✅ Auto (music, SFX, lip-sync) | Longer videos, best audio |
-| **Kling v3** | `kwaivgi/kling-v3-video` | $0.22/sec | 3-15s | ✅ Optional (pass `--audio`) | Cinematic quality, 1080p |
+| **Kling v3** | `kwaivgi/kling-v3-video` | $0.22/sec | 3-15s | ✅ Native | Cinematic quality, 1080p, multi-shot |
+| **Kling v3 Omni** | `kwaivgi/kling-v3-omni-video` | varies | 3-15s | ✅ Native | Multi-modal: text, ref image, editing |
+| **Sora-2** | `openai/sora-2` | varies | flexible | ✅ Synced | Home-video realism, flexible prompting |
+| **WAN 2.5 fast** | `wan-video/wan-2.5-t2v-fast` | low | 5-10s | ❌ | Open-source, fast, cost-effective |
 
 ### Duration Constraints
 

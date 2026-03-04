@@ -67,7 +67,7 @@ Short voice samples for TTS cloning. Referenced by path (audio files are too lar
 | Sample rate | 16kHz+                             |
 | Content     | Natural speech, no background noise|
 
-**When to use**: Voice cloning with `chatterbox-turbo` or `qwen-tts`.
+**When to use**: Voice cloning with `chatterbox-turbo` or `qwen/qwen3-tts`.
 
 ### Video Memory (Style Templates)
 
@@ -226,8 +226,10 @@ The reference photos speak for themselves. Only describe:
 
 | Model              | Parameter      | Max Refs | Notes               |
 | ------------------ | -------------- | -------- | ------------------- |
-| `nano-banana-pro`  | `image_input`  | 14       | Array of data URIs  |
+| `nano-banana-pro`  | `image_input`  | 14       | Array of data URIs, 4K output |
+| `nano-banana-2`    | `image_input`  | 14       | Faster/cheaper alternative (Gemini 3.1 Flash) |
 | `flux-2-pro`       | `input_images` | 8        | Array of data URIs  |
+| `flux-2-flex`      | `input_images` | 10       | Max-quality editing |
 | `ideogram-v2`      | ❌ None        | —        | No face reference   |
 
 ### Prompt Anchor Pattern
@@ -271,8 +273,8 @@ RIGHT: EXACTLY the person from [Name B]'s reference images, wearing [clothing].
 | Model              | Cost             | Voice Cloning |
 | ------------------ | ---------------- | ------------- |
 | `chatterbox-turbo` | $0.025/1k chars  | ✅            |
-| `qwen-tts`         | $0.02/1k chars   | ✅            |
-| `speech-turbo`     | $0.06/1k tokens  | ❌            |
+| `qwen/qwen3-tts`   | $0.02/1k chars   | ✅ (3 modes: Voice, Clone, Design) |
+| `minimax/speech-2.8-turbo` | $0.06/1k tokens | ❌ (40+ languages, emotion control) |
 
 ---
 

@@ -56,6 +56,7 @@ Workflow for generating age-progression image sets that maintain character ident
 ### Model Selection
 
 **Recommended**: `google/nano-banana-pro` — Best face consistency with reference image
+**Alternative**: `google/nano-banana-2` — Faster generation (Gemini 3.1 Flash), same API surface
 
 ```javascript
 const AGES = [3, 7, 13, 15, 18, 21, 25, 30, 42, 55, 62, 68, 75];
@@ -68,7 +69,7 @@ async function generateAgeProgression(characterConfig, referenceImage) {
     const result = await replicate.run("google/nano-banana-pro", {
       input: {
         prompt,
-        image: await toDataURI(referenceImage),
+        image_input: [await toDataURI(referenceImage)],  // Array of data URIs (up to 14)
         aspect_ratio: "1:1",
         output_format: "png"
       }
@@ -79,6 +80,8 @@ async function generateAgeProgression(characterConfig, referenceImage) {
   return results;
 }
 ```
+
+> **Critical**: Use `image_input` (array) not `image` (single string). Pass at least one reference image; more references improve face consistency.
 
 ### Age-Specific Prompt Templates
 
@@ -151,9 +154,11 @@ Choose a reference that shows:
 
 | Set Size | Model | Cost | Time |
 |----------|-------|------|------|
-| 13 ages | nano-banana-pro | $0.33 | ~7 min |
-| 13 ages × 2 variants | nano-banana-pro | $0.65 | ~14 min |
-| Full persona set (63) | nano-banana-pro | $1.58 | ~35 min |
+| 13 ages | `nano-banana-pro` | $0.33 | ~7 min |
+| 13 ages | `nano-banana-2` (1K) | $0.87 | ~4 min (faster) |
+| 13 ages × 2 variants | `nano-banana-pro` | $0.65 | ~14 min |
+| Full persona set (63) | `nano-banana-pro` | $1.58 | ~35 min |
+| Full persona set (63) | `nano-banana-2` (1K) | $4.22 | ~20 min |
 
 **Best Practice**: Generate ages 21 and 42 first to validate consistency before full set.
 
