@@ -38,7 +38,6 @@
   },
   "extensionDependencies": [],
   "extensionPack": [
-    "github.copilot",
     "github.copilot-chat"
   ],
   "categories": [
@@ -546,11 +545,13 @@
         {
           "type": "webview",
           "id": "alex.cognitiveDashboard",
-          "name": "Cognitive Dashboard"
+          "name": "Cognitive Dashboard",
+          "visibility": "collapsed"
         },
         {
           "id": "alex.memoryTree",
-          "name": "Memory Architecture"
+          "name": "Memory Architecture",
+          "visibility": "collapsed"
         }
       ]
     },
