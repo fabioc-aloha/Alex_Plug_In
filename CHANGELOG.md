@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.4] - 2026-03-04
+
+> **Cognitive Tier Fix + Model Updates** — Fixed L4 detection for current extended thinking settings, added GPT-5.3, collapsed sidebar sections by default.
+
+### Added
+- GPT-5.3 added to frontier tier model maps
+- Frontier regex now auto-catches future GPT-5.x models (`gpt-5\.[2-9]`)
+
+### Changed
+- Cognitive Dashboard and Memory Architecture sidebar sections collapsed by default for cleaner first-run experience
+- Removed deprecated `github.copilot` from `extensionPack` — now only `github.copilot-chat`
+- Brain QA output compacted (phases + warnings/summary only, use `-Detail` for verbose)
+- Brain QA agent cross-reference regex fixed for Windows CRLF line endings
+
+### Fixed
+- **Critical**: Cognitive tier detection now reads `github.copilot.chat.agent.thinkingTool` (current setting path) — was only checking deprecated paths, causing L4 users to show as L3
+- Visual memory heir sync template updated with voices/videoStyles sections
+- `cognitive-config.json` version synced to 6.1.3
+
+---
+
 ## [6.1.2] - 2026-03-03
 
 > **Replicate Trifecta Updates + Documentation Hygiene** — Model landscape refresh across 5 skills, 2 new trifectas completed, doc archive pass 2.

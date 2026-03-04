@@ -42,6 +42,7 @@ const MODEL_TIER_MAP: Record<string, ModelTier> = {
   'claude-opus-4.5': 'frontier',
   'claude-opus-4.6': 'frontier',
   'gpt-5.2': 'frontier',
+  'gpt-5.3': 'frontier',
   'gpt-5-turbo': 'frontier',
   // Capable tier
   'claude-sonnet-4': 'capable',

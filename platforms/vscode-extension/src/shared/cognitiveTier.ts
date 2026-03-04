@@ -362,7 +362,7 @@ export async function detectCognitiveLevel(forceRefresh = false): Promise<Cognit
             for (const model of models) {
                 const id = `${model.family} ${model.name} ${model.id}`.toLowerCase();
 
-                if (/opus|gpt-5\.2|o1-pro|o3/.test(id)) {
+                if (/opus|gpt-5\.[2-9]|gpt-5-turbo|o1-pro|o3/.test(id)) {
                     bestModelTier = 'frontier';
                     break; // Can't do better than frontier
                 } else if (/sonnet|gpt-4o|gpt-5|gemini.*pro|o1/.test(id) && bestModelTier !== 'frontier') {
@@ -382,9 +382,14 @@ export async function detectCognitiveLevel(forceRefresh = false): Promise<Cognit
     const agentModeEnabled = chatConfig.get<boolean>('agent.enabled', false);
 
     // ── Step 3: Check extended thinking ─────────────────────────────
-    // The actual settings are nested under github.copilot.chat.models.anthropic.*
+    // VS Code has used multiple setting paths across versions:
+    //   - github.copilot.chat.agent.thinkingTool (current, 1.109+)
+    //   - chat.extendedThinking.enabled (older)
+    //   - github.copilot.chat.models.anthropic.claude-opus-4-*.extendedThinkingEnabled (per-model)
+    const copilotAgentConfig = vscode.workspace.getConfiguration('github.copilot.chat.agent');
     const copilotModelsConfig = vscode.workspace.getConfiguration('github.copilot.chat.models.anthropic');
     const extendedThinkingEnabled =
+        copilotAgentConfig.get<boolean>('thinkingTool', false) ||
         chatConfig.get<boolean>('extendedThinking.enabled', false) ||
         copilotModelsConfig.get<boolean>('claude-opus-4-6.extendedThinkingEnabled', false) ||
         copilotModelsConfig.get<boolean>('claude-opus-4-5.extendedThinkingEnabled', false);
