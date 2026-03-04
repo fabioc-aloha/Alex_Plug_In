@@ -3,38 +3,21 @@
     "platforms/vscode-extension/README.md"
   ],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "MENTOR-SERVICE-PLAN.md",
-    "RISKS.md",
-    "ROADMAP-UNIFIED.md",
-    "TEST-GUIDE.md",
-    "alex_docs/PAPERS.md",
-    "alex_docs/alex/ALEX-ACADEMIC.png",
-    "alex_docs/alex/ALEX-AZURE-SQL.png",
-    "alex_docs/alex/ALEX-BRD.png",
-    "alex_docs/alex/ALEX-BUSINESS.png"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_archive/doc-audit-2026-03-03/MANIFEST.md",
+    "alex_docs/audits/ARCHITECTURE-ASSESSMENT-2026-02-06.md -> alex_archive/doc-audit-2026-03-03/audits/ARCHITECTURE-ASSESSMENT-2026-02-06.md",
+    "alex_docs/audits/AUDIT-REPORT-2026-02-20.md -> alex_archive/doc-audit-2026-03-03/audits/AUDIT-REPORT-2026-02-20.md",
+    "alex_docs/audits/EXTENSION-AUDIT-2026-02-15.md -> alex_archive/doc-audit-2026-03-03/audits/EXTENSION-AUDIT-2026-02-15.md",
+    "alex_docs/diagram-visualization/DIAGRAMS.md -> alex_archive/doc-audit-2026-03-03/diagram-visualization/DIAGRAMS.md",
+    "alex_docs/research/REPLICATE-EVALUATION.md -> alex_archive/doc-audit-2026-03-03/research/REPLICATE-EVALUATION.md",
+    "brain-qa-output.txt -> alex_archive/doc-audit-2026-03-03/root/brain-qa-output.txt"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1772585869212
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772585869212
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1772585869212
-    },
-    {
-      "file": "platforms/vscode-extension/README.md",
-      "todoCount": 1,
-      "scannedAt": 1772585869212
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772588966724
     }
   ],
-  "lastUpdated": 1772585869212
+  "lastUpdated": 1772588966724
 }
