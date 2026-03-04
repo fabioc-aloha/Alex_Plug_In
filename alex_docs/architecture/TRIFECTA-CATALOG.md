@@ -1,6 +1,6 @@
 # Trifecta Catalog
 
-> **Last Audited**: 2026-02-28
+> **Last Audited**: 2026-03-04
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
@@ -60,7 +60,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (26)
+## Complete Trifectas (36)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -345,6 +345,107 @@ Capabilities with all three memory system components — each justified by the "
 
 **Inheritance**: `inheritable` — strategic alignment universal across all heirs
 
+### Image Handling
+
+| Component   | File                                                | Why It Exists                                                                             |
+| ----------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/image-handling/SKILL.md`              | Domain knowledge: format selection, conversion rules, Replicate model selection for AI gen |
+| Instruction | `.github/instructions/image-handling.instructions.md` | Auto-loaded procedure: format rules, conversion steps, model parameters                   |
+| Prompt      | `.github/prompts/image-handling.prompt.md`            | `/image-handling` — user invokes image format selection and AI generation workflow         |
+
+**Inheritance**: `inheritable` — image handling universal across all heirs
+
+### Character Aging Progression
+
+| Component   | File                                                                  | Why It Exists                                                                         |
+| ----------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/character-aging-progression/SKILL.md`                  | Domain knowledge: life-stage accuracy, age-specific prompts, nano-banana-pro parameters |
+| Instruction | `.github/instructions/character-aging-progression.instructions.md`    | Auto-loaded procedure: age progression generation, identity consistency rules          |
+| Prompt      | `.github/prompts/character-aging-progression.prompt.md`               | `/character-aging-progression` — user invokes age progression generation workflow      |
+
+**Synapse connections**: ai-character-reference-generation (0.95), visual-memory (0.9)
+**Inheritance**: `inheritable` — character consistency applicable across all heirs
+
+### Visual Memory
+
+| Component   | File                                                    | Why It Exists                                                                            |
+| ----------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/visual-memory/SKILL.md`                  | Domain knowledge: embedded reference photos, face-consistent generation, base64 encoding  |
+| Instruction | `.github/instructions/visual-memory.instructions.md`    | Auto-loaded procedure: reference photo setup, visual-memory.json structure, API params    |
+| Prompt      | `.github/prompts/visual-memory.prompt.md`               | `/visual-memory` — user invokes visual memory subject management                         |
+
+**Inheritance**: `inheritable` — self-sufficient skills with embedded media refs
+
+### Code Review
+
+| Component   | File                                                          | Why It Exists                                                                         |
+| ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/code-review/SKILL.md`                          | Domain knowledge: 3-pass review, comment prefixes, epistemic confidence calibration    |
+| Instruction | `.github/instructions/code-review-guidelines.instructions.md` | Auto-loaded procedure: review quality gates, feedback guidelines, severity classification |
+| Prompt      | `.github/prompts/review.prompt.md`                            | `/review` — user invokes epistemic code review with confidence calibration             |
+
+**Inheritance**: `inheritable` — code review discipline universal across all coding heirs
+
+### Root Cause Analysis
+
+| Component   | File                                                              | Why It Exists                                                                         |
+| ----------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/root-cause-analysis/SKILL.md`                      | Domain knowledge: 5 Whys, binary search debugging, cause categories, timeline reconstruction |
+| Instruction | `.github/instructions/root-cause-analysis.instructions.md`        | Auto-loaded procedure: 6-step investigation protocol, category-based fix patterns      |
+| Prompt      | `.github/prompts/root-cause-analysis.prompt.md`                   | `/rca` — user invokes systematic root cause investigation                              |
+
+**Inheritance**: `inheritable` — debugging methodology universal across all heirs
+
+### Refactoring Patterns
+
+| Component   | File                                                            | Why It Exists                                                                         |
+| ----------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/refactoring-patterns/SKILL.md`                    | Domain knowledge: code smells, safe moves, refactor vs rewrite decision               |
+| Instruction | `.github/instructions/refactoring-patterns.instructions.md`      | Auto-loaded procedure: safe workflow, file decomposition for monoliths, smell→fix mapping |
+| Prompt      | `.github/prompts/refactor.prompt.md`                             | `/refactor` — user invokes guided refactoring session                                  |
+
+**Inheritance**: `inheritable` — refactoring discipline universal across all coding heirs
+
+### Debugging Patterns
+
+| Component   | File                                                          | Why It Exists                                                                         |
+| ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/debugging-patterns/SKILL.md`                    | Domain knowledge: debugging mindset, binary search, stack trace reading, error categories |
+| Instruction | `.github/instructions/debugging-patterns.instructions.md`      | Auto-loaded procedure: 6-step debug protocol, isolation techniques, hypothesis testing  |
+| Prompt      | `.github/prompts/debug.prompt.md`                              | `/debug` — user invokes systematic debugging session                                   |
+
+**Inheritance**: `inheritable` — debugging methodology universal across all heirs
+
+### Security Review
+
+| Component   | File                                                        | Why It Exists                                                                         |
+| ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/security-review/SKILL.md`                    | Domain knowledge: OWASP Top 10, STRIDE, Microsoft SFI, dependency audit patterns      |
+| Instruction | `.github/instructions/security-review.instructions.md`      | Auto-loaded procedure: 6-point security checklist, STRIDE threat assessment, reporting  |
+| Prompt      | `.github/prompts/security-review.prompt.md`                 | `/security-review` — user invokes security review with OWASP and STRIDE checks         |
+
+**Inheritance**: `inheritable` — security review critical across all coding heirs
+
+### Skill Building
+
+| Component   | File                                                    | Why It Exists                                                                         |
+| ----------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/skill-building/SKILL.md`                  | Domain knowledge: skill creation workflow, depth rubric, trifecta assessment           |
+| Instruction | `.github/instructions/skill-building.instructions.md`    | Auto-loaded procedure: phase-by-phase skill creation, registration, depth validation   |
+| Prompt      | `.github/prompts/skill-building.prompt.md`               | `/skill-building` — user invokes guided skill creation from real-world experience      |
+
+**Inheritance**: `inheritable` — meta-skill for building skills across all heirs
+
+### Global Knowledge
+
+| Component   | File                                                               | Why It Exists                                                                         |
+| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/global-knowledge/SKILL.md`                          | Domain knowledge: GK/GI patterns, knowledge types, memory system differentiation       |
+| Instruction | `.github/instructions/global-knowledge-curation.instructions.md`  | Auto-loaded procedure: curation workflow, triage decisions, promotion criteria          |
+| Prompt      | `.github/prompts/knowledge.prompt.md`                              | `/knowledge` — user invokes global knowledge search, save, promote, or curate          |
+
+**Inheritance**: `inheritable` — cross-project knowledge management universal
+
 ---
 
 ## Justified Non-Trifectas
@@ -358,13 +459,11 @@ These instructions intentionally lack one or more components. The "Why?" test de
 | `alex-core`                     | IS the core — it's the hub, not a teachable domain    | Always auto-loaded, never user-invoked by name    |
 | `alex-identity-integration`     | Identity is constant, not a domain to teach           | Always auto-loaded, never user-invoked            |
 | `architecture-decision-records` | Format spec, not domain knowledge                     | ADRs are created inline, not via command          |
-| `code-review-guidelines`        | Has `code-review` skill already (different scope)     | Review triggered by `review.prompt.md`            |
 | `copilot-chat-buttons`          | UI pattern rules, not teachable concepts              | Always auto-loaded for button rendering           |
 | `deep-thinking`                 | Cognitive mode, not a domain                          | Auto-activates on complex tasks, not user-invoked |
 | `dependency-management`         | Procedural rules only (pin versions, audit)           | No interactive workflow needed                    |
 | `embedded-synapse`              | Format spec for connection syntax                     | Always auto-loaded when editing synapses          |
 | `empirical-validation`          | Research principles, auto-applied                     | No user-facing workflow                           |
-| `global-knowledge-curation`     | Has `global-knowledge` skill (different scope)        | Curation happens during meditation                |
 | `heir-skill-promotion`          | Has `heir-curation` skill (different scope)           | Promotion is a meditation-triggered process       |
 | `language-detection-patterns`   | Pattern matching rules, not teachable                 | Always auto-loaded, no user command               |
 | `lucid-dream-integration`       | Extension of dream protocol, not standalone           | Dream prompt covers invocation                    |
@@ -386,7 +485,6 @@ These instructions intentionally lack one or more components. The "Why?" test de
 | `domain-learning`                | Guided session, bootstrap-learning instruction covers procedure | Bootstrap-learning skill covers domain           |
 | `performance-assessment`         | Post-session evaluation, ad hoc                                 | No persistent domain to teach                    |
 | `quantified-enhancement-session` | Specialized meditation variant                                  | Subsumed by meditation skill                     |
-| `review`                         | Thin wrapper invoking code-review skill                         | Code-review skill exists                         |
 | `tdd`                            | Guided workflow for TDD                                         | Testing-strategies skill covers domain           |
 
 ### Skill-Only (No instruction or prompt, just domain expertise)
@@ -404,10 +502,10 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   26 justified candidates
-Procedural-Only:      21 (all justified)
+Complete Trifectas:   36 justified candidates
+Procedural-Only:      17 (all justified)
 Prompt-Only:           8 (all justified)
-Skill-Only:          ~100 (standard — passive expertise)
+Skill-Only:          ~90 (standard — passive expertise)
 ```
 
 ### Network Diagram
@@ -415,7 +513,7 @@ Skill-Only:          ~100 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (26)"]
+    subgraph COMPLETE["✅ Complete Trifectas (36)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -444,6 +542,16 @@ flowchart LR
         TS["Testing Strategies"]
         KS["Knowledge Synthesis"]
         NS["North Star"]
+        IH["Image Handling"]
+        CAP["Character Aging"]
+        VM["Visual Memory"]
+        CR["Code Review"]
+        RCA["Root Cause Analysis"]
+        RP["Refactoring Patterns"]
+        DP["Debugging Patterns"]
+        SR["Security Review"]
+        SB["Skill Building"]
+        GKN["Global Knowledge"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -481,6 +589,16 @@ flowchart LR
     TS --- SK & INS & PR
     KS --- SK & INS & PR
     NS --- SK & INS & PR
+    IH --- SK & INS & PR
+    CAP --- SK & INS & PR
+    VM --- SK & INS & PR
+    CR --- SK & INS & PR
+    RCA --- SK & INS & PR
+    RP --- SK & INS & PR
+    DP --- SK & INS & PR
+    SR --- SK & INS & PR
+    SB --- SK & INS & PR
+    GKN --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da

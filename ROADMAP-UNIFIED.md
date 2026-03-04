@@ -102,7 +102,7 @@ A version is **done** when ALL of the following are true:
 
 **Paradigm**: Earn It — The North Star says "trusted." v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests, refactoring, CI/CD, and trifecta completion — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 26/126 trifectas complete. No CI pipeline. This release closes those gaps.
+**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 36/126 trifectas complete. No CI pipeline. This release closes those gaps.
 
 ### Core
 
@@ -110,7 +110,7 @@ A version is **done** when ALL of the following are true:
 | --- | :---: | --- |
 | **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
 | **Break down the monoliths** | 4w | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457), participant.ts (2,637), welcomeView.ts (2,039), personaDetection.ts (1,764), tools.ts (1,665). Eliminate all functions >60 lines |
-| **Close the trifecta gap** | 2w | Complete trifectas for the 10 most-used skills. Target: 36/126 complete (28%) |
+| ~~**Close the trifecta gap**~~ | ~~2w~~ | ✅ Done — 26 → 36 trifectas (+10). Recognized 4 hidden (image-handling, character-aging, visual-memory, code-review). Created 6 new (root-cause-analysis, refactoring, debugging, security-review, skill-building, global-knowledge) |
 | **Add CI/CD pipeline** | 1w | GitHub Actions: compile + lint + test on every push |
 | **Ship one heir to parity** | 2w | Bring GitHub Copilot Web heir to full parity with Master |
 
@@ -130,11 +130,11 @@ A version is **done** when ALL of the following are true:
 
 | Task | Effort | Description |
 | --- | :---: | --- |
-| **sensitivity_label support** | 2h | Add sensitivity_label to declarativeAgent.json |
-| **GPT 5.1+ instruction patterns audit** | 3h | Full audit against all 9 GPT 5.1+ design patterns |
-| **Mobile support (iOS/Android)** | 2h | Test and document M365 Copilot mobile experience |
-| **Orphan plugin/OpenAPI files** | 2h | Remove or integrate orphan files in appPackage/ |
-| **Instruction duplication** | 1h | Consolidate inline instructions (6.7KB) and alex-system-prompt.md (7.5KB) |
+| **sensitivity_label support** | 2h | Deferred — v1.6 schema does not yet support this field |
+| ~~**GPT 5.1+ instruction patterns audit**~~ | ~~3h~~ | ✅ Done — All 9 GPT 5.1+ patterns already present |
+| ~~**Mobile support (iOS/Android)**~~ | ~~2h~~ | ✅ Done — Documented: declarative agent works in Teams mobile, Office Add-ins desktop-only |
+| ~~**Orphan plugin/OpenAPI files**~~ | ~~2h~~ | ✅ Done — Removed 4 unreferenced files (alex-knowledge-plugin.json, graph-api-plugin.json, openapi.yaml, graph-openapi.yaml) |
+| ~~**Instruction duplication**~~ | ~~1h~~ | ✅ No action needed — healthy separation (inline = decision tree, knowledge/ = reference) |
 
 ### Definition of Done (v6.5.0)
 
@@ -142,7 +142,7 @@ A version is **done** when ALL of the following are true:
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
 3. **No source file >1,500 lines** — all 6 monoliths refactored
 4. **CI green on main** — GitHub Actions pipeline passes compile + lint + test
-5. **33+ complete trifectas** — verified with brain-qa audit
+5. **36+ complete trifectas** — ✅ Already achieved (36 as of 2026-03-04)
 6. **GitHub Copilot Web heir at parity** — synced and validated
 7. **North Star Trust score ≥7/10** — re-assessed at ship time
 

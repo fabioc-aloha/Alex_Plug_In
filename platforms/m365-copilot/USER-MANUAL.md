@@ -498,7 +498,10 @@ A: Currently in beta. Pricing TBD for general release (likely part of M365 Copil
 A: No, Alex requires internet for M365 Copilot and Microsoft Graph API.
 
 **Q: Can I use Alex on mobile?**
-A: Not yet. Mobile support (iOS/Android Teams) planned for v6.x.
+A: Yes, with limitations. The declarative agent works in **Teams mobile** (iOS/Android) — chat-based workflows like meeting prep, person lookup, and weekly review all work. Adaptive cards render correctly on mobile. However:
+- Office Add-in task panes (Word, Excel, PowerPoint) are not optimized for mobile touch UI
+- OneDrive memory file access works via Teams mobile chat
+- Voice input supported through Teams mobile dictation
 
 **Q: What's the difference between Alex and M365 Copilot?**
 A: Alex is a **declarative agent** running *on top* of M365 Copilot. It adds persistent memory, M365 context awareness, and 126 pre-built skills.
@@ -1167,7 +1170,7 @@ A: Alex is currently in beta. Pricing TBD for general release.
 A: No, Alex requires internet for Office.js and Microsoft Graph API calls.
 
 **Q: Can I use Alex on mobile?**
-A: Not yet. Mobile support (iOS/Android) planned for v6.x.
+A: The declarative agent works in Teams mobile (iOS/Android). Office Add-in task panes are desktop-only.
 
 **Q: What data does Alex collect?**
 A: See [Privacy & Security](#privacy--security) section below.

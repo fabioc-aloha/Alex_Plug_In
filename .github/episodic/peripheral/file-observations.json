@@ -1,21 +1,26 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
+    "github/copilot-instructions.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/WORKING-WITH-ALEX.md",
-    "alex_docs/guides/ENVIRONMENT-SETUP.md",
-    "platforms/agent-plugin/README.md",
-    "platforms/agent-plugin/sync-plugin.ps1",
-    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-    "platforms/agent-plugin/plugin/mcp/"
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "platforms/m365-copilot/USER-MANUAL.md",
+    "platforms/m365-copilot/appPackage/alex-knowledge-plugin.json",
+    "platforms/m365-copilot/appPackage/graph-api-plugin.json",
+    "platforms/m365-copilot/appPackage/graph-openapi.yaml",
+    "platforms/m365-copilot/appPackage/openapi.yaml"
   ],
   "todoHotspots": [
     {
-      "file": "alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772665095281
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772666081380
+    },
+    {
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772666081380
     }
   ],
-  "lastUpdated": 1772665095281
+  "lastUpdated": 1772666081380
 }
