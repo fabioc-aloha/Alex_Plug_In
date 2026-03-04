@@ -2,14 +2,20 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "assets/banner-roadmap.svg"
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/WORKING-WITH-ALEX.md",
+    "alex_docs/guides/ENVIRONMENT-SETUP.md",
+    "platforms/agent-plugin/README.md",
+    "platforms/agent-plugin/sync-plugin.ps1",
+    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
+    "platforms/agent-plugin/plugin/mcp/"
   ],
   "todoHotspots": [
     {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1772662467785
+      "file": "alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1772665095281
     }
   ],
-  "lastUpdated": 1772662467785
+  "lastUpdated": 1772665095281
 }

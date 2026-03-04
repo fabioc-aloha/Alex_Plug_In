@@ -67,6 +67,7 @@ These settings are **required** for Alex to function:
 | `followUps: always` | Better conversational flow |
 | `todoList: panel` | Better visibility |
 | `thinking.phrases` | Alex-personality progress messages (replaces generic "Thinking...") |
+| `enableImages` | Render images inline in terminal via Kitty graphics protocol |
 
 ---
 

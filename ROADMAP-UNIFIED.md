@@ -72,6 +72,30 @@ A version is **done** when ALL of the following are true:
 
 ---
 
+## ✅ v6.1.5 — M365 Schema + Agent Plugin + Polish (Shipped 2026-03-04)
+
+| Task | Description |
+| --- | --- |
+| Manifest v1.19 → v1.25 | Upgraded M365 app manifest schema to latest v1.25 |
+| GPT 5.1+ system prompt hardening | Literal-execution header, self-evaluation gate, atomic tasks |
+| Conversation starters v1.6 | Trimmed 11 → 6 starters (v1.6 schema max) |
+| Word & PowerPoint agent surfaces | Documented declarative agent support across docs |
+| Teams Toolkit → M365 Agents Toolkit | Renamed all references across 3 docs (10 refs) |
+| EmbeddedKnowledge readiness | knowledge/ folder pre-prepared for zero-delay adoption |
+| capabilities.md v1.6 features | Platform features, M365 capabilities table, agent surfaces |
+| Agent Plugin heir | Full platform: 84 skills, 7 agents, 22 instructions, 11 prompts |
+| M365 heir version alignment | All files aligned to v6.1.5 (was scattered 5.7.7–6.1.0) |
+| M365 sync script | sync-m365.ps1 with backup/restore |
+| Thinking phrases | 15 cognitive-themed progress phrases via `chat.agent.thinking.phrases` |
+| Agent Plugin audit | 11 parity checks, 4 issues fixed |
+| M365 heir audit | 8-dimension audit, 4 fixes, 2 items deferred |
+| Banner redesign | 8 SVGs, 10 PNGs, brand doc tokens updated, roadmap banner |
+| Agent Debug Panel skill | Skill with 7 debug scenarios + WORKING-WITH-ALEX.md update |
+| Kitty terminal images | `terminal.integrated.enableImages` + skill with Node.js/imgcat/chafa |
+| MCP standalone bundle | 704KB self-contained esbuild bundle, zero dependencies |
+
+---
+
 ## 🛡️ v6.5.0 — The Trust Release
 
 **Target**: Q2 2026
@@ -80,21 +104,43 @@ A version is **done** when ALL of the following are true:
 
 **North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 26/126 trifectas complete. No CI pipeline. This release closes those gaps.
 
-### Core Trust Capabilities
+### Core
 
-| Feature                      | Effort | Description                                                                                                                                                                    | North Star Alignment                              |
-| ---------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| **Test the core services**   |   3w   | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files, covering all v6.0.0 services + top 3 largest files. | *When I say something works, it works*            |
-| **Break down the monoliths** |   4w   | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457 lines), participant.ts (2,637 lines), welcomeView.ts (2,039 lines), personaDetection.ts (1,764 lines), tools.ts (1,665 lines). Extract cohesive modules. Eliminate all functions >60 lines (NASA R4). | *NASA-quality code, not just NASA-quality claims* |
-| **Close the trifecta gap**   |   2w   | 26 trifectas complete (audit 2026-03-03). Complete trifectas for the 10 most-used skills. Target: 36/126 complete (28%).                                                       | *Finish what you start*                           |
-| **Add CI/CD pipeline**       |   1w   | GitHub Actions workflow: compile + lint + test on every push. Quality gate as automated gate, not just package-time check.                                                     | *Automated safety net on every commit*            |
-| **Ship one heir to parity**  |   2w   | Bring GitHub Copilot Web heir (`.github/`-only) to full parity with Master. Prove the architecture works cross-platform.                                                       | *For any job — not just VS Code*                  |
+| Task | Effort | Description |
+| --- | :---: | --- |
+| **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
+| **Break down the monoliths** | 4w | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457), participant.ts (2,637), welcomeView.ts (2,039), personaDetection.ts (1,764), tools.ts (1,665). Eliminate all functions >60 lines |
+| **Close the trifecta gap** | 2w | Complete trifectas for the 10 most-used skills. Target: 36/126 complete (28%) |
+| **Add CI/CD pipeline** | 1w | GitHub Actions: compile + lint + test on every push |
+| **Ship one heir to parity** | 2w | Bring GitHub Copilot Web heir to full parity with Master |
+
+### Quick Wins (VS Code 1.110)
+
+| Task | Effort | Description |
+| --- | :---: | --- |
+| **Explore subagent model config** | 1h | Configure `chat.exploreAgent.defaultModel` for codebase research speed |
+| **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
+| **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
+| **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
+| **Portable mode detection** | 2h | Use stable `env.isAppPortable` for USB-portable deployments |
+| **Terminal sandbox trust domains** | 1h | Configure `chat.tools.terminal.sandbox.network` trusted domains |
+| **OS notifications for confirmations** | 1h | Set `chat.notifyWindowOnConfirmation` to `always` |
+
+### M365 Polish
+
+| Task | Effort | Description |
+| --- | :---: | --- |
+| **sensitivity_label support** | 2h | Add sensitivity_label to declarativeAgent.json |
+| **GPT 5.1+ instruction patterns audit** | 3h | Full audit against all 9 GPT 5.1+ design patterns |
+| **Mobile support (iOS/Android)** | 2h | Test and document M365 Copilot mobile experience |
+| **Orphan plugin/OpenAPI files** | 2h | Remove or integrate orphan files in appPackage/ |
+| **Instruction duplication** | 1h | Consolidate inline instructions (6.7KB) and alex-system-prompt.md (7.5KB) |
 
 ### Definition of Done (v6.5.0)
 
 1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
-3. **No source file >1,500 lines** — extension.ts, globalKnowledge.ts, participant.ts, welcomeView.ts, personaDetection.ts, tools.ts all refactored
+3. **No source file >1,500 lines** — all 6 monoliths refactored
 4. **CI green on main** — GitHub Actions pipeline passes compile + lint + test
 5. **33+ complete trifectas** — verified with brain-qa audit
 6. **GitHub Copilot Web heir at parity** — synced and validated
@@ -106,116 +152,44 @@ A version is **done** when ALL of the following are true:
 
 ## 📋 Backlog
 
-Items that don't directly serve the North Star, or are gated on external factors. Pull when the partnership foundation is solid.
+### Larger Items (As Capacity Allows)
 
-### Partnership Polish (Deferred from v6.1)
+| Task | Effort | Description |
+| --- | :---: | --- |
+| Agentic browser testing | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
+| Office Add-in Phase 2 | 2w | Word templates, Excel trackers, PowerPoint gen |
+| FLUX fine-tune for brand | 3d | Custom LoRA for consistent Alex imagery |
+| Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile |
+| Academic paper finalization | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
 
-| Task                            | Effort | Description                                                                       | North Star Alignment       |
-| ------------------------------- | :----: | --------------------------------------------------------------------------------- | -------------------------- |
-| **Auto-dream scheduling**       |   2w   | Fully automated dream execution on schedule — VS Code task scheduler integration. | *Partner maintains itself* |
-| **Workspace health status bar** |   1w   | Color-coded health tiers in status bar, always visible.                           | *Partner is transparent*   |
+### Conditional (Trigger-Dependent)
 
-### VS Code 1.110 Unlocks (March 2026)
+| Task | Trigger | Effort | Description |
+| --- | --- | :---: | --- |
+| Foundry POC | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
+| Teams Deep Integration | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
 
-*Free leverage from platform updates. No proposed APIs — ships on stable.*
+### Gated (External Dependencies)
 
-| Task | Effort | Status | Description | Benefits & Use Cases | North Star Alignment |
-| --- | :---: | :---: | --- | --- | --- |
-| **Agent Plugin packaging** | 2w | ✅ Done | Package Alex as an installable agent plugin (skills + instructions + prompts + hooks + MCP bundled). The 1.110 plugin system (`chat.plugins.enabled`) matches Alex's `.github/` architecture exactly. Full `platforms/agent-plugin/` heir shipped v6.1.5 with 84 skills, 7 agents, 22 instructions, 11 prompts. | **Benefit**: One-click install replaces the current multi-step Initialize workflow. **Use cases**: Onboard new team members instantly; distribute Alex to open-source projects; publish to the `copilot-plugins` / `awesome-copilot` marketplaces; version and update Alex independently of the VS Code extension. | *For any job — install Alex in one click* |
-| **Agentic browser testing** | 1w | Open | Enable `workbench.browser.enableChatTools` and create a skill for agent-driven browser verification. Agent can open pages, screenshot, click, and validate UI changes autonomously. | **Benefit**: Close the develop→verify loop — agent writes code AND confirms it works visually. **Use cases**: Agent builds a webview panel, then opens it in the integrated browser and screenshots the result; automated smoke-test of welcome panel HTML after CSS changes; validate Marp slides render correctly; end-to-end testing of heir web apps without external Playwright setup. | *Partner verifies its own work* |
-| **Alex thinking phrases** | 2h | ✅ Done | Set `chat.agent.thinking.phrases` with Alex-personality loading messages ("Meditating on this...", "Consulting synapses...", "Traversing knowledge graph..."). Cosmetic but reinforces identity. 15 cognitive-themed phrases added to setupEnvironment.ts RECOMMENDED_SETTINGS. | **Benefit**: Reinforces Alex's personality during every interaction — users feel the partner, not a generic tool. **Use cases**: Replace stock "Thinking..." with cognitive-state-aware phrases; differentiate Alex from default Copilot; delight factor during long reasoning steps; heirs can customize phrases per project persona. | *Partner has personality* |
-| **Explore subagent model config** | 1h | Open | Configure `chat.exploreAgent.defaultModel` to optimize the read-only Explore subagent for codebase research speed during Plan agent sessions. | **Benefit**: Faster codebase research at lower cost — Explore runs on efficient models while Plan keeps the frontier model. **Use cases**: Speed up `/plan` sessions that scan Alex's 126 skills and 42K lines of code; reduce token cost for research-heavy sessions; tune model per workspace (small projects use Haiku, large monorepos use Flash). | *Partner researches efficiently* |
-| **Agent Debug Panel integration** | 3d | Open | Document `Developer: Open Agent Debug Panel` in troubleshooting guides. Create a skill for debugging skill/hook/agent loading issues using the new real-time event panel. | **Benefit**: Real-time visibility into why a skill wasn't loaded or a hook didn't fire — replaces guesswork with data. **Use cases**: Debug "why didn't Alex use my new instruction?"; inspect system prompt assembly to verify trifecta loading; trace tool call sequences during complex agent workflows; validate hook execution order; onboard contributors who need to understand Alex's internals. | *Partner is transparent* |
-| **`/create-*` skill generation guide** | 1d | Open | Document how `/create-skill`, `/create-instruction`, `/create-agent`, `/create-prompt`, `/create-hook` commands generate Alex-compatible trifecta files directly from conversation. | **Benefit**: Users create new Alex capabilities without leaving the chat — lowers the barrier to extending Alex. **Use cases**: After debugging an issue, `/create-skill` captures the procedure as a reusable skill; `/create-instruction` turns coding corrections into project conventions; `/create-agent` spins up a specialist persona from a conversation; heirs use `/create-hook` to add lifecycle automation without reading docs. | *Partner teaches its own patterns* |
-| **`usages` + `rename` tool adoption** | 2d | Open | Create instruction patterns that prefer the new LSP-powered `listCodeUsages` and `renameSymbol` tools over grep-based refactoring. Higher precision, better performance. | **Benefit**: Semantic refactoring that understands scope, types, and references — no more grep false positives on common names. **Use cases**: Rename a service class across 40+ files with zero false matches; find all callers of `episodicMemory.recordSession()` without matching comments or strings; safe cross-file renames during the v6.5.0 monolith breakup; instruction tells agent "use #rename" for refactoring tasks. | *Partner uses the best tool for the job* |
-| **Session fork workflows** | 1d | Open | Document `/fork` and checkpoint-based session forking in working-with-alex guide. Enables branching exploration without losing original context. | **Benefit**: Explore alternative approaches without losing your place — try a risky refactor in a fork, keep the safe path in the original. **Use cases**: Fork before attempting a large refactor to preserve rollback; branch a planning session to compare two architecture options; fork at a decision point during meditation to explore "what if" scenarios; mentor-style workflow where the main session stays clean while a fork experiments. | *Partner supports exploratory thinking* |
-| **Kitty graphics in terminal** | 2d | Open | Enable `terminal.integrated.enableImages` and explore rendering visual-memory portraits, architecture diagrams, and brand assets directly in the integrated terminal. | **Benefit**: Visual output in the terminal without opening separate files — diagrams and images inline with command output. **Use cases**: Display architecture diagrams from `generate-diagram-visualizations.js` directly in terminal; show Alex avatar states during dream/meditation sessions; render brand assets for quick visual QA; preview generated banner images without leaving the terminal workflow. | *Partner communicates visually* |
-| **Portable mode detection** | 2h | Open | Use the now-stable `env.isAppPortable` API to adjust file paths and storage behavior when running in portable mode. Enables USB-portable Alex deployments. | **Benefit**: Alex works correctly on USB/portable VS Code installations — no hardcoded paths break. **Use cases**: Conference demo setup on a USB drive; air-gapped development environments; student/workshop distribution where users don't install VS Code system-wide; detect portable mode and redirect `~/.alex/` storage to the portable data directory. | *For any job — even portable* |
-| **Terminal sandbox trust domains** | 1h | Open | Configure `chat.tools.terminal.sandbox.network` trusted domains for hook safety. Improved macOS/Linux sandbox no longer requires ripgrep install. | **Benefit**: Hooks and terminal commands run in a sandboxed environment with explicit network allow-lists — defense in depth. **Use cases**: Allow `npm install` and `git` operations while blocking unexpected network access; protect against supply-chain attacks during automated build steps; simplified sandbox setup on macOS (no extra installs); configure per-project trust based on known API endpoints. | *Partner is secure by default* |
-| **Collapsible terminal in chat** | — | ✅ Free | Already enabled by default in 1.110 (`chat.tools.terminal.simpleCollapsible`). Terminal tool calls collapse to summary headers — cleaner multi-step agent output. | **Benefit**: Multi-step agent workflows no longer drown in terminal output — scan summaries, expand only what matters. **Use cases**: Every `npm run compile`, `git diff`, and `npm run package` collapses to a one-line header; complex dream/meditation sessions with 10+ tool calls become readable; code review workflows show results concisely; users focus on agent reasoning, not raw output. | *Free improvement — no action needed* |
-| **OS notifications for confirmations** | 1h | Open | Set `chat.notifyWindowOnConfirmation` to `always` so agent confirmation prompts reach users even when focused on other VS Code tabs. | **Benefit**: Never miss an agent asking for approval — notifications reach you even when you're in another file or split editor. **Use cases**: Long-running background agent tasks that need confirmation mid-flow; agent pauses for destructive operation approval while user is reading docs; dream sessions that require user input at checkpoints; multi-monitor setups where chat isn't always visible. | *Partner stays connected* |
+| Task | Gate | Effort | Description |
+| --- | --- | :---: | --- |
+| Semantic Skill Graph | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
+| EmbeddedKnowledge adoption | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
+| Worker agent orchestration | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
 
-### Conditional Features (Trigger-Dependent)
+---
 
-| Task                       | Trigger                                       | Effort | Description                                                                                                                   |
-| -------------------------- | --------------------------------------------- | :----: | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Skill Marketplace**      | 500+ active users OR 3+ teams creating skills |   6w   | `.alexskill` packages, registry, install/uninstall from chat. Community layer — not core to individual partnership.           |
-| **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish.                                                                          |
-| **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration. Full enterprise Teams build — see `TEAMS-DEEP-INTEGRATION-PLAN.md`. |
+## 🔮 v7.0+ — Collaborative Intelligence (Future Vision)
 
-### Gated Features (External Dependencies)
+| Task | Description |
+| --- | --- |
+| **Team knowledge mesh** | Federated knowledge across team Alex instances |
+| **Collaborative code review** | Alex instances exchange insights across PRs |
+| **Organizational learning** | Team patterns from individual sessions |
+| **Expertise routing** | Cross-instance queries ("Ask Sarah's Alex about K8s") |
+| **Privacy-preserving learning** | Differential privacy for team aggregation |
 
-| Task                      | Gate                                              | Effort | Description                                                                                                                                                                        |
-| ------------------------- | ------------------------------------------------- | :----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Proposed API Adoption** | VS Code promotes proposed APIs to stable          |   1w   | `chatPromptFiles`, `lmConfiguration`, `chatOutputRenderer` — dynamic skill injection, native config UI, chat webviews. (`env.isAppPortable` finalized in 1.110 — see Portable mode detection above.) |
-| **Semantic Skill Graph**  | v6.0.0 shipped ✅ + Azure OpenAI key + 150+ skills |   4w   | Replace keyword matching with vector embeddings. Nice-to-have discoverability enhancement, not core partnership.                                                                   |
-
-### Future Vision (v7.0+)
-
-| Task                            | Description                                           | North Star Note                                                    |
-| ------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------ |
-| **Team knowledge mesh**         | Federated knowledge across team Alex instances        | Collective cognition — different North Star (team, not individual) |
-| **Collaborative code review**   | Alex instances exchange insights across PRs           | Enterprise feature                                                 |
-| **Organizational learning**     | Team patterns from individual sessions                | Enterprise feature                                                 |
-| **Expertise routing**           | Cross-instance queries ("Ask Sarah's Alex about K8s") | Enterprise feature                                                 |
-| **Privacy-preserving learning** | Differential privacy for team aggregation             | Enterprise prerequisite                                            |
-
-> **Note**: v7.0.0 Collaborative Intelligence represents a *different* North Star — organizational cognition rather than personal partnership. Deferred until the individual partnership is exceptional.
-
-### Infrastructure & Polish (As Capacity Allows)
-
-| Task                          | Effort | Status | Description                                               |
-| ----------------------------- | :----: | :----: | --------------------------------------------------------- |
-| MCP Apps packaging            |   3d   | ✅ Done | `packages/mcp-cognitive-tools` — 5 tools via MCP stdio    |
-| Learning Journeys UX          |   3h   | ✅ Done | `journey.prompt.md` — 8 curated progressions              |
-| Image upscaling via Replicate |   2d   | ✅ Done | 4 models in replicateService, `alex.upscaleImage` command |
-| Presentation automation       |   1w   | ✅ Done | `marp.prompt.md` + `presentation.prompt.md` routers       |
-| Office Add-in Phase 2         |   2w   |  Open  | Word templates, Excel trackers, PowerPoint gen            |
-| FLUX fine-tune for brand      |   3d   |  Open  | Custom LoRA for consistent Alex imagery                   |
-
-### M365 Schema Alignment & Agent Plugin (v6.1.5 — 2026-03-04)
-
-| Task | Effort | Status | Description | North Star Alignment |
-| --- | :---: | :---: | --- | --- |
-| **Manifest v1.19 → v1.25** | 1h | ✅ Done | Upgraded M365 app manifest schema to latest v1.25 | *Partner stays current* |
-| **GPT 5.1+ system prompt hardening** | 2h | ✅ Done | Literal-execution header, explicit capability references in workflows, self-evaluation gate, atomic tasks | *Partner instructions are reliable* |
-| **Conversation starters v1.6 alignment** | 1h | ✅ Done | Trimmed 11 → 6 starters (v1.6 schema max). Removed: overloaded, what's on my plate, self-actualization, search knowledge, sync goals | *Partner follows the spec* |
-| **Word & PowerPoint agent surfaces** | 1h | ✅ Done | Documented declarative agent support in Word and PowerPoint across README, USER-MANUAL, capabilities.md | *For any job — not just Chat* |
-| **Teams Toolkit → M365 Agents Toolkit** | 1h | ✅ Done | Renamed all references across 3 docs (10 refs) | *Partner uses correct names* |
-| **EmbeddedKnowledge readiness** | 30m | ✅ Done | Documented upcoming capability in capabilities.md. knowledge/ folder pre-prepared for zero-delay adoption | *Partner anticipates* |
-| **capabilities.md v1.6 features** | 30m | ✅ Done | Added platform features section, M365 capabilities table, agent surfaces, coming soon | *Partner knows what it can do* |
-| **Agent Plugin heir created** | 4h | ✅ Done | Full agent-plugin platform: README, marketplace.json, sync script, user manual, hooks, 84 plugin-ready skills | *For any job — one-click install* |
-| **M365 heir version alignment** | 2h | ✅ Done | All M365 files aligned to v6.1.5 (was scattered across 5.7.7/5.9.0/6.0.0/6.0.2/6.1.0). Skill count aligned to 126 | *Partner is consistent* |
-| **M365 sync script** | 2h | ✅ Done | sync-m365.ps1 with M365-specific backup/restore. Verified: 90 skills, 23 instructions, 13 prompts | *Partner maintains itself* |
-| **Alex thinking phrases** | 2h | ✅ Done | 15 cognitive-themed progress phrases added to setupEnvironment.ts RECOMMENDED_SETTINGS via `chat.agent.thinking.phrases`. Documented in ENVIRONMENT-SETUP.md, VSCODE-BRAIN-INTEGRATION.md, copilot-instructions.md | *Partner has personality* |
-| **Agent Plugin audit** | 2h | ✅ Done | 11 parity checks passed, 4 issues fixed: MCP path documented, README hooks count, USER-MANUAL skill categories, marketplace.json declarations | *Partner is verified* |
-| **M365 heir audit** | 3h | ✅ Done | 8-dimension audit: all parity checks passed. 4 issues fixed (README accuracy ×3, knowledge file version drift ×3 files). 2 items logged to pending (orphan files, instruction duplication) | *Partner is verified* |
-
-### M365 Pending Items (Post v6.1.5)
-
-| Task | Effort | Status | Description | North Star Alignment |
-| --- | :---: | :---: | --- | --- |
-| **EmbeddedKnowledge adoption** | 2h | Gated | Enable EmbeddedKnowledge capability when Microsoft makes it GA. knowledge/ folder already prepared (max 10 files, 1MB each) | *Partner adopts instantly* |
-| **Worker agent orchestration** | 1w | Gated | Configure Alex as worker_agent target for multi-agent delegation when v1.6 worker_agents exits preview | *Partner collaborates* |
-| **sensitivity_label support** | 2h | Open | Add sensitivity_label to declarativeAgent.json for enterprise data classification compliance | *Partner is enterprise-ready* |
-| **GPT 5.1+ instruction patterns audit** | 3h | Open | Full audit of inline instructions against all 9 GPT 5.1+ design patterns (deterministic workflows, parallel/sequential, explicit decision rules, output contracts, clean markdown, self-evaluation, reasoning steering, literal-execution, evaluation prompts) | *Partner instructions are optimal* |
-| **Mobile support (iOS/Android)** | 2h | Open | Test and document M365 Copilot mobile experience for Alex declarative agent | *For any job — even mobile* |
-| **Orphan plugin/OpenAPI files** | 2h | Open | `alex-knowledge-plugin.json`, `graph-api-plugin.json`, `openapi.yaml`, `graph-openapi.yaml` exist in appPackage/ but are not wired into declarativeAgent.json `actions` array. Either remove or integrate as API plugins (requires Azure Functions backend) | *Partner is clean* |
-| **Instruction duplication** | 1h | Open | declarativeAgent.json `instructions` field (6.7KB inline) and `instructions/alex-system-prompt.md` (7.5KB) overlap significantly (both GPT 5.1+ headers, Self-Evaluation Gates, same workflows). Consolidate to remove redundancy — inline is what the runtime reads, file is for Agent Builder copy-paste | *Partner is DRY* |
-
-### Agent Plugin Pending Items (Post v6.1.5 Audit)
-
-| Task | Effort | Status | Description | North Star Alignment |
-| --- | :---: | :---: | --- | --- |
-| **MCP standalone distribution** | 4h | Open | `.mcp.json` path (`${pluginPath}/../../packages/...`) resolves only within the monorepo. For standalone distribution, either publish `mcp-cognitive-tools` to npm or bundle `dist/` into the plugin directory | *For any job — works anywhere* |
-
-### Research Findings (Open Items)
-
-| Finding                         | Priority | Status  | Description                                                   |
-| ------------------------------- | :------: | :-----: | ------------------------------------------------------------- |
-| GK pattern format inconsistency |    P2    | ✅ Done  | Migrated all patterns to YAML v2 frontmatter (2026-02-28)     |
-| Cognitive Dashboard             |    P2    | Partial | Full unified webview — synapse health renderer is first tile  |
-| Academic paper finalization     |    P2    |  Open   | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
+> **Note**: v7.0.0 represents a *different* North Star — organizational cognition rather than personal partnership. Deferred until the individual partnership is exceptional.
 
 ---
 

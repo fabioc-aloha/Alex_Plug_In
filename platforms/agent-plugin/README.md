@@ -59,6 +59,8 @@ agent-plugin/
 │   ├── copilot-instructions.md   # Alex identity (plugin-tuned)
 │   ├── .mcp.json                 # MCP cognitive tools server
 │   ├── hooks.json                # Lifecycle hooks
+│   ├── mcp/                      # Self-contained MCP server (esbuild bundle)
+│   │   └── index.js              # 704KB single-file, zero dependencies
 │   ├── agents/                   # Specialist agent definitions
 │   │   ├── alex.agent.md
 │   │   ├── alex-researcher.agent.md

@@ -283,6 +283,29 @@ $skillCount = (Get-ChildItem (Join-Path $pluginDir 'skills') -Directory -ErrorAc
 $instrCount = (Get-ChildItem (Join-Path $pluginDir 'instructions') -Filter '*.instructions.md' -ErrorAction SilentlyContinue).Count
 $promptCount = (Get-ChildItem (Join-Path $pluginDir 'prompts') -Filter '*.prompt.md' -ErrorAction SilentlyContinue).Count
 
+# 5. MCP bundle — self-contained single-file server
+Write-Host "`n[5/5] MCP bundle" -ForegroundColor Yellow
+$mcpSrc = Join-Path $repoRoot 'packages\mcp-cognitive-tools'
+$mcpDst = Join-Path $pluginDir 'mcp'
+if (-not $DryRun) {
+    if (-not (Test-Path $mcpDst)) {
+        New-Item -ItemType Directory -Path $mcpDst -Force | Out-Null
+    }
+    Push-Location $mcpSrc
+    npx esbuild dist/index.js --bundle --platform=node --target=node18 --outfile="$mcpDst\index.js" --format=cjs --minify 2>&1 | Out-Null
+    Pop-Location
+    if (Test-Path (Join-Path $mcpDst 'index.js')) {
+        $mcpSize = [math]::Round((Get-Item (Join-Path $mcpDst 'index.js')).Length / 1KB)
+        Write-Step "Bundled MCP server (${mcpSize}KB self-contained)"
+    }
+    else {
+        Write-Host "  ! MCP bundle failed — run 'npm install' in packages/mcp-cognitive-tools" -ForegroundColor DarkYellow
+    }
+}
+else {
+    Write-Step "[DRY RUN] Would bundle MCP server"
+}
+
 Write-Host "`n[DONE] Plugin sync complete" -ForegroundColor Green
 Write-Host "   Agents:       $agentCount" -ForegroundColor DarkGray
 Write-Host "   Skills:       $skillCount" -ForegroundColor DarkGray

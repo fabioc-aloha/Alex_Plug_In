@@ -252,6 +252,8 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
     "Running cognitive analysis...",
     "Consulting the architecture...",
   ],
+  // Terminal image support - render images inline via Kitty graphics protocol (VS Code 1.110+)
+  "terminal.integrated.enableImages": true,
 };
 
 /**
