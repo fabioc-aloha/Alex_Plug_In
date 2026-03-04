@@ -497,10 +497,11 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
     
     if (autoProtect) {
         // Check for Master Alex indicators
+        // NOTE: alex_docs/ is NOT unique to Master Alex — heirs can also have it.
+        // Only the platforms/ structure reliably identifies the Master Alex monorepo.
         const masterAlexIndicators = [
             path.join(rootPath, 'platforms', 'vscode-extension'),
             path.join(rootPath, 'platforms', 'm365-copilot'),
-            path.join(rootPath, 'alex_docs'),  // Unique to Master Alex
         ];
         
         for (const indicator of masterAlexIndicators) {
