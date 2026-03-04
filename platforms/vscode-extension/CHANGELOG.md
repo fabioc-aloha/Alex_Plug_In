@@ -11,6 +11,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.2] - 2026-03-03
+
+> **Replicate Trifecta Updates + Documentation Hygiene** — Model landscape refresh across 5 skills, 2 new trifectas completed, doc archive pass 2.
+
+### Added
+- `image-handling` trifecta completed — instruction + prompt files created
+- `character-aging-progression` trifecta completed — instruction + prompt files created
+
+### Changed
+- Updated Replicate model landscape across 5 skills
+- `ideogram-v3-turbo` ($0.03) is now the default typography recommendation
+- Archived 6 outdated docs to `alex_archive/`
+
+### Fixed
+- `character-aging-progression/SKILL.md`: `image_input` must be an array
+- Audio model reference updated: `qwen-tts` → `qwen/qwen3-tts`
+- Skill frontmatter: removed unsupported attributes, fixed `name` to kebab-case
+
+---
+
 ## [6.1.0] - 2026-03-03
 
 > **Environment & Cognitive Tier Hardening** — Extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh, and extended thinking detection fix.

@@ -11,6 +11,7 @@ param(
     
     [switch]$Fix,   # Auto-fix where possible
     [switch]$SkipSync,  # Skip pre-sync (useful to see drift before syncing)
+    [switch]$Detail,    # Show all pass messages (default: compact output)
     [switch]$Quiet
 )
 
@@ -29,23 +30,27 @@ if (-not (Test-Path $ghPath)) {
 
 Push-Location $rootPath
 
+if (-not $Quiet) { 
+    Write-Host "Brain QA — Mode: $Mode | Phases: $($runPhases -join ',') | Use -Detail for verbose output" -ForegroundColor DarkGray 
+}
+
 $issues = @()
 $warnings = @()
 $fixed = @()
 
 function Write-Phase {
     param([int]$Num, [string]$Name)
-    if (-not $Quiet) { Write-Host "`n=== [Phase $Num] $Name ===" -ForegroundColor Cyan }
+    if (-not $Quiet) { Write-Host "  [$Num] $Name" -ForegroundColor Cyan }
 }
 
 function Write-Pass { 
     param([string]$Msg)
-    if (-not $Quiet) { Write-Host "  $Msg" -ForegroundColor Green }
+    if ($Detail -and -not $Quiet) { Write-Host "  ✅ $Msg" -ForegroundColor Green }
 }
 
 function Write-Warn {
     param([string]$Msg)
-    if (-not $Quiet) { Write-Host "  ⚠️ $Msg" -ForegroundColor Yellow }
+    if ($Detail -and -not $Quiet) { Write-Host "  ⚠️ $Msg" -ForegroundColor Yellow }
     $script:warnings += $Msg
 }
 
@@ -86,7 +91,7 @@ if ($Phase) { $runPhases = $Phase }
 #
 $needsSync = ($Mode -eq "all" -or $Mode -eq "sync") -and (-not $SkipSync)
 if ($needsSync) {
-    if (-not $Quiet) { Write-Host "`n=== [Pre-Sync] Master → Heir Synchronization ===" -ForegroundColor Magenta }
+    if (-not $Quiet) { Write-Host "  [Pre-Sync] Master → Heir Synchronization" -ForegroundColor Magenta }
     
     # Step 1: Sync architecture (skills, instructions, prompts, etc.)
     $syncScript = Join-Path $ghPath "muscles\sync-architecture.cjs"
@@ -94,12 +99,8 @@ if ($needsSync) {
         try {
             $syncOutput = & node $syncScript 2>&1
             if ($LASTEXITCODE -eq 0) {
-                if (-not $Quiet) { 
-                    Write-Host "  ✅ Architecture synchronized from master" -ForegroundColor Green 
-                    # Show key stats from sync output
-                    $syncOutput | Select-String -Pattern "skills|instructions|prompts|agents|muscles" | ForEach-Object {
-                        Write-Host "     $_" -ForegroundColor DarkGray
-                    }
+                if ($Detail -and -not $Quiet) { 
+                    Write-Host "  ✅ Architecture synchronized" -ForegroundColor Green 
                 }
             }
             else {
@@ -121,7 +122,7 @@ if ($needsSync) {
     # After meditation, master synapses.json files are updated with new connections.
     # sync-architecture.cjs copies them, but Phase 7's comparison logic is more sophisticated.
     # Running the Phase 7 sync logic here ensures apples-to-apples comparison.
-    if (-not $Quiet) { Write-Host "`n  🔗 Forcing synapse sync..." -ForegroundColor Magenta }
+    if (-not $Quiet) { Write-Host "  🔗 Synapse sync..." -ForegroundColor Magenta }
     
     if (Test-Path "$heirBase\.github\skills") {
         # Dynamic detection: skills in master but not heir are master-only
@@ -158,20 +159,19 @@ if ($needsSync) {
         }
         
         if ($synapseSyncCount -gt 0) {
-            if (-not $Quiet) { 
+            if ($Detail -and -not $Quiet) { 
                 Write-Host "  ✅ Synced $synapseSyncCount synapse file(s)" -ForegroundColor Green 
             }
         }
         else {
-            if (-not $Quiet) { 
+            if ($Detail -and -not $Quiet) { 
                 Write-Host "  ✅ All synapses already in sync" -ForegroundColor Green 
             }
         }
     }
 }
 elseif ($SkipSync -and -not $Quiet) {
-    Write-Host "`n=== [Pre-Sync] SKIPPED (-SkipSync flag) ===" -ForegroundColor DarkYellow
-    Write-Host "  ℹ️ Heir may be out of sync with master — comparisons may show drift" -ForegroundColor DarkYellow
+    Write-Host "  [Pre-Sync] SKIPPED (-SkipSync flag)" -ForegroundColor DarkYellow
 }
 
 # ============================================================
@@ -1319,9 +1319,12 @@ if (32 -in $runPhases) {
             $diskAgents = @('Alex') + $diskAgents
         }
 
-        # Use multiline mode to grab the first content line after ## Agents + optional comment
-        if ($ciContent -match '(?m)^## Agents\r?\n(?:<!--[^>]+-->\r?\n)?(.+)$') {
-            $agentLine = $Matches[1].Trim()
+        # Extract Agents section, skip blank lines and HTML comments, find first content line
+        if ($ciContent -match '(?ms)^## Agents\s*$(.*?)(?=^## |\z)') {
+            $agentSection = $Matches[1]
+            $agentLine = ($agentSection -split '\r?\n' | Where-Object { $_.Trim() -and $_ -notmatch '^\s*<!--' } | Select-Object -First 1)
+            if (-not $agentLine) { $agentLine = '' }
+            $agentLine = $agentLine.Trim()
             $listedAgents = ($agentLine -split ',') | ForEach-Object { ($_ -split '\(')[0].Trim() } | Sort-Object
             
             $diskAgentNames = $diskAgents | Sort-Object

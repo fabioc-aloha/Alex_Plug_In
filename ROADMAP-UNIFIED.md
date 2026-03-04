@@ -219,8 +219,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                               |
 | -------------------------- | ----------------------------- |
-| **Current Master Version** | 6.1.0                         |
-| **Current Heirs**          | VS Code (6.1.0), M365 (6.1.0) |
+| **Current Master Version** | 6.1.2                         |
+| **Current Heirs**          | VS Code (6.1.2), M365 (6.1.0) |
 | **Next Target**            | v6.5.0 — The Trust Release    |
 | **Updated**                | 2026-03-03                    |
 

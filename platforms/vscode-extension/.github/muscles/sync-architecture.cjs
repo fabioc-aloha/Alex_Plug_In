@@ -86,12 +86,28 @@ const SKILL_PII_SUBPATHS = {
                         ageInfo: { referenceAge: 0, birthYear: 0, photoDate: 'YYYY-MM' },
                         images: [
                             { filename: 'subject-1.jpg', dataUri: 'data:image/jpeg;base64,<encode your 512px photo here>', notes: 'Front-facing, natural lighting' },
-                            { filename: 'subject-2.jpg', dataUri: 'data:image/jpeg;base64,<encode your 512px photo here>', notes: '3/4 profile, natural lighting' }
+                            { filename: 'subject-2.jpg', dataUri: 'data:image/jpeg;base64,<encode your 512px photo here>', notes: '3/4 profile, varied lighting' }
                         ]
                     }
                 },
-                voices: {},
-                videoStyles: {}
+                voices: {
+                    _comment: 'Optional: add voice samples for TTS cloning',
+                    _template_voice: {
+                        description: 'Natural speaking voice',
+                        audioFile: 'visual-memory/voices/sample.wav',
+                        duration: '10s',
+                        model: 'chatterbox-turbo'
+                    }
+                },
+                videoStyles: {
+                    _comment: 'Optional: store consistent motion prompt templates',
+                    _template_style: {
+                        description: 'Portrait animation style',
+                        promptTemplate: 'Head turns slowly, subtle smile, natural breathing, soft lighting',
+                        model: 'veo-3',
+                        defaultDuration: 6
+                    }
+                }
             }, null, 2) + '\n'
         }
     ]
