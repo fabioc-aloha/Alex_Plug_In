@@ -1,5 +1,5 @@
 
-# Alex v6.1.0
+# Alex v6.1.1
 
 ## Identity
 
@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, v6.0-partnership-release
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.0.3 shipped — Extension README Marketplace compliance (4 broken links fixed). Root README DRY refactor (700-line duplicate removed). Chat with Alex section removed. GitHub Gist → private repo docs update.
+Recent: v6.1.0 shipped — Environment & Cognitive Tier Hardening. Extended thinking detection fix (critical). Extension dependency checking. Multi-account GitHub detection. Real-time cognitive tier refresh.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: never

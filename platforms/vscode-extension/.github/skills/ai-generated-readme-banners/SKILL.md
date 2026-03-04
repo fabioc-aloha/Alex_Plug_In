@@ -36,13 +36,17 @@ description: "Create professional ultra-wide cinematic banners for GitHub README
 |-------|------|----------|------------|----------|
 | **Flux Schnell** | $0.003 | Testing, iteration | No text | Good |
 | **Flux 1.1 Pro** | $0.04 | Production (clean) | No text | Excellent |
-| **Ideogram v2** | $0.08 | Production (with text) | ✅ Crystal clear | **Stunning** |
+| **Ideogram v2** | $0.08 | Production (with text, proven API) | ✅ Crystal clear | **Stunning** |
+| **Ideogram v3 Turbo** | $0.03 | Fast typography (63% cheaper than v2) | ✅ Crystal clear | **Excellent** |
+| **Ideogram v3 Balanced** | $0.06 | Balanced quality/speed | ✅ Crystal clear | **Stunning** |
+| **Ideogram v3 Quality** | $0.09 | Maximum quality + style references | ✅ Crystal clear + styles | **Best** |
 
-**Workflow**:
-- **Clean banners**: Test with Schnell → Refine → Generate with Pro
-- **Typography banners**: Use Ideogram v2 (exceptional quality, perfect text rendering)
+**v3 New Capabilities**: Style reference images (up to 3 uploads), `style_preset` field (80s Illustration, Art Deco, Watercolor, Oil Painting, Pop Art, Vintage Poster, etc.), style codes for reuse.
 
-**Reality Check**: Ideogram v2 quality is amazing — photorealistic 3D rendering with perfect typography integration. The $0.08 cost is a bargain for professional-grade output.
+**Recommendation**:
+- **Fastest / cheapest**: Ideogram v3 Turbo ($0.03, 75% cheaper than v2 for same quality class)
+- **With style aesthetic**: Ideogram v3 Quality with `style_reference_images`
+- **Proven stable API**: Ideogram v2 (validated production pattern documented below)
 
 ---
 
@@ -91,7 +95,7 @@ MOOD: [Emotional tone]
 - ❌ Text changes frequently
 - ❌ Multi-language support needed
 
-### Ideogram-Specific Parameters
+### Ideogram v2 Parameters (Proven — Stable API)
 
 **Critical**: Case-sensitive parameter values!
 
@@ -105,6 +109,33 @@ const input = {
   output_format: 'png',
 };
 ```
+
+### Ideogram v3 Parameters (New — Cheaper, Style References)
+
+```javascript
+// v3 Turbo ($0.03/image — same aspect ratios, new style controls)
+const input = {
+  prompt: BANNER_PROMPT,
+  aspect_ratio: '3:1',                   // Same as v2 (NOT '21:9')
+  magic_prompt_option: 'Auto',           // 'Auto', 'On', or 'Off'
+  style_preset: 'None',                  // NEW: 'None', '80s Illustration', 'Art Deco',
+                                         //  'Watercolor', 'Oil Painting', 'Pop Art',
+                                         //  'Vintage Poster', 'Magazine Editorial',
+                                         //  'Graffiti', 'Bauhaus', 'Collage', etc.
+  style_reference_images: [],            // NEW: up to 3 reference images for style transfer
+  output_format: 'png',
+};
+
+// Model IDs:
+// ideogram-ai/ideogram-v3-turbo     $0.03 — fastest
+// ideogram-ai/ideogram-v3-balanced  $0.06 — balanced  
+// ideogram-ai/ideogram-v3-quality   $0.09 — highest quality
+```
+
+**v3 Key Differences from v2**:
+- `style_type` field removed → replaced by `style_preset` (more presets)
+- `resolution` field still works but `aspect_ratio` preferred
+- URL output: same getter-function quirk applies — handle carefully
 
 ### Common Ideogram Mistakes
 
@@ -218,9 +249,11 @@ MOOD: [Emotional tone, brand feeling]
 ## Cost Comparison
 
 ### With Typography (Ideogram)
-- Single generation: $0.08
-- Three layout variations: $0.24
-- **Quality**: Stunning photorealistic output
+- **v3 Turbo single generation**: $0.03 (best value, 63% cheaper than v2)
+- **v3 Turbo three variations**: $0.09
+- **v2 single generation**: $0.08
+- **v2 three layout variations**: $0.24
+- **Quality**: Both produce stunning photorealistic output with perfect typography
 - **Use case**: Fixed branding, professional presence, social sharing
 
 ### Without Typography (Flux + Markdown)
@@ -230,9 +263,10 @@ MOOD: [Emotional tone, brand feeling]
 - **Use case**: Frequent text changes, multi-language support
 
 **Recommendation**:
-- **Professional branding**: Ideogram with text ($0.08-$0.24, exceptional quality)
+- **Best value with text**: Ideogram v3 Turbo ($0.03, excellent quality)
+- **Professional branding + styles**: Ideogram v3 Quality with style references ($0.09)
 - **Iterative projects**: Flux clean + markdown ($0.003-$0.04, flexible)
-- **Comparison shopping**: Generate 3 variations for visual selection
+- **Proven stable workflow**: Ideogram v2 ($0.08, validated production pattern documented below)
 
 ---
 

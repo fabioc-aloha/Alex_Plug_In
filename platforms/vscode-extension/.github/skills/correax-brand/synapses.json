@@ -41,13 +41,6 @@
       "strength": 0.65,
       "when": "building webview components with CorreaX design tokens and VS Code fallbacks",
       "yields": "Extension webviews that match the CorreaX visual identity"
-    },
-    {
-      "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "coordinates-with",
-      "strength": 0.6,
-      "when": "syncing brand assets to heir projects that must align with the design system",
-      "yields": "Heir projects maintain visual consistency with the CorreaX brand"
     }
   ],
   "triggers": {

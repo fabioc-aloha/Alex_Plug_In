@@ -1,7 +1,7 @@
 {
-  "sourceVersion": "6.0.0",
-  "sourceCommit": "bf944be",
-  "filesCopied": 451,
-  "syncEngine": "sync-architecture.cjs",
-  "generatedAt": "2026-02-28 12:00:00"
+  "sourceCommit": "ffd0e0f",
+  "syncEngine": "sync-architecture.js",
+  "generatedAt": "2026-03-03 20:53:46",
+  "sourceVersion": "6.1.0",
+  "filesCopied": 400
 }

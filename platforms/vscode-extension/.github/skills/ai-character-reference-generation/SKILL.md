@@ -26,7 +26,7 @@ triggers:
 
 > Create 17+ consistent character poses from detailed prompts — no reference images needed.
 
-> ⚠️ **Staleness Watch** (Last validated: Feb 2026 — Flux 1.1 Pro): Image generation models on Replicate release new versions and deprecate old ones. Before generating, verify the model identifier at [replicate.com/black-forest-labs](https://replicate.com/black-forest-labs). **Upgrade path**: `black-forest-labs/flux-1.1-pro-ultra` provides higher resolution (up to 4MP) with the same API surface. Input parameter schema may change between model versions.
+> ⚠️ **Staleness Watch** (Last validated: July 2025 — Flux 1.1 Pro; Feb 2026 — nano-banana-pro): Image generation models on Replicate release new versions and deprecate old ones. Before generating, verify the model identifier at [replicate.com/black-forest-labs](https://replicate.com/black-forest-labs). **Upgrade path**: `black-forest-labs/flux-1.1-pro-ultra` provides higher resolution (up to 4MP) with the same API surface. `black-forest-labs/flux-2-pro` adds multi-reference editing. `google/nano-banana-2` is the faster/cheaper successor to nano-banana-pro (same `image_input` API). Input parameter schema may change between model versions.
 
 ---
 
@@ -36,9 +36,11 @@ triggers:
 
 | Use Case | Model | Cost | Notes |
 |----------|-------|------|-------|
-| **Face Consistency (Default)** | `google/nano-banana-pro` | $0.025/image | **Best for maintaining face identity** — uses reference image + prompt. Maintains Alex identity across 90+ avatar images. |
+| **Face Consistency (Recommended)** | `google/nano-banana-pro` | $0.025/image | **Best for maintaining face identity** — uses reference image + prompt. Up to 14 refs, 4K output. |
+| **Face Consistency (Fast/Cheap)** | `google/nano-banana-2` | $0.067/1K img | Same `image_input` API as nano-banana-pro. Faster (Gemini 3.1 Flash), similar quality. |
 | **Detailed Scenes** | `black-forest-labs/flux-1.1-pro` | $0.04/image | High-quality scenes without face reference. Good for backgrounds and environments. |
-| **Agent Banners** | `ideogram-ai/ideogram-v2` | $0.08/image | Best for stylized text + character combinations. Prominent branding. |
+| **Multi-Reference High Quality** | `black-forest-labs/flux-2-pro` | ~$0.05+ | Up to 8 refs via `input_images`. Text rendering + photorealism. |
+| **Agent Banners** | `ideogram-ai/ideogram-v3-turbo` | $0.03/image | Best for stylized text + character combinations. Cheapest typography option. |
 | **High Resolution** | `black-forest-labs/flux-1.1-pro-ultra` | $0.06/image | Up to 4MP output. Use when print-quality needed. |
 
 ### Face Consistency Pattern (Nano-Banana Pro)
@@ -246,7 +248,14 @@ async function retryWithBackoff(fn, maxRetries = 3) {
 - **Best For**: Character avatars, portraits, face consistency
 - **Requires**: Reference face image
 
-### Alternative: Flux 1.1 Pro (Scene Flexibility)
+### Fast Alternative: Nano-Banana 2 (Same API, Faster)
+- **Model**: `google/nano-banana-2` (Gemini 3.1 Flash Image)
+- **Cost**: $0.067 per 1K output image ($0.101/2K, $0.151/4K)
+- **Generation Time**: Faster than nano-banana-pro
+- **API**: Identical `image_input` parameter (array, up to 14 refs)
+- **Best For**: High-volume generation, rapid iteration
+
+### Scene Model: Flux 1.1 Pro (No Reference)
 - **Model**: `black-forest-labs/flux-1.1-pro`
 - **Cost**: $0.04 per image
 - **Generation Time**: ~30-60 seconds per image
@@ -255,11 +264,13 @@ async function retryWithBackoff(fn, maxRetries = 3) {
 - **Output Format**: PNG at quality 100 for archival
 
 **Economic Comparison**:
-| Character Set | Nano-Banana | Flux 1.1 Pro |
-|---------------|-------------|--------------|
-| 17 scenarios  | $0.43       | $0.68        |
-| 90 avatars    | $2.25       | $3.60        |
-| Full set (100+)| ~$2.50     | ~$4.00       |
+| Character Set | nano-banana-pro | nano-banana-2 | flux-1.1-pro |
+|---------------|-----------------|---------------|--------------|
+| 17 scenarios  | $0.43           | $1.14 (1K)    | $0.68        |
+| 90 avatars    | $2.25           | $6.03 (1K)    | $3.60        |
+| Full set (100+)| ~$2.50         | ~$6.70 (1K)   | ~$4.00       |
+
+> **Note**: nano-banana-2's per-image cost at 1K is higher than nano-banana-pro, but it's significantly faster — trade cost for speed when doing rapid iteration.
 
 ---
 
