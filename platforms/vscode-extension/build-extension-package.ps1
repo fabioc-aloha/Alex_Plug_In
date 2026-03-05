@@ -81,8 +81,9 @@ $excludeItems = @(
     "config\MASTER-ALEX-PROTECTED.json",
     
     # Master-only skills (not for heirs - these manage Master Alex specifically)
-    "skills\heir-curation",
+    "skills\heir-sync-management",
     "skills\master-alex-audit",
+    "skills\global-knowledge-maintenance",
     
     # Assets that are repo-specific
     "assets\banner.svg"

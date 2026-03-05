@@ -555,13 +555,7 @@ function applyHeirTransformations() {
         content = content.replace(/^I7:.*\r?\n/m, '');
         if (content !== beforeImperatives) diffs.push('stripped I1-I4,I7 imperatives');
         
-        // 5. Remove heir-curation from complete trifectas list (master-only skill)
-        const beforeTrifectas = content;
-        content = content.replace(
-            /^(Complete trifectas \()11(\): .+), heir-curation,( .+)$/m,
-            '$1' + '10' + '$2,' + '$3'
-        );
-        if (content !== beforeTrifectas) diffs.push('removed heir-curation from trifectas');
+        // 5. (No trifecta list adjustment needed — master-only skills are not in the trifectas list)
         
         if (content !== original) {
             fs.writeFileSync(copilotPath, content, 'utf8');
