@@ -323,7 +323,8 @@ if (Test-Path $DistroRepo) {
 
     if ($DryRun) {
         Write-Step "[DRY RUN] Would copy plugin/ to $distroPlugin"
-    } else {
+    }
+    else {
         if (Test-Path $distroPlugin) {
             Remove-Item $distroPlugin -Recurse -Force
         }
@@ -338,13 +339,15 @@ if (Test-Path $DistroRepo) {
         if ($status) {
             $changed = ($status | Measure-Object).Count
             Write-Step "$changed file(s) changed — commit and push when ready"
-        } else {
+        }
+        else {
             Write-Step "No changes — already in sync"
         }
         Pop-Location
     }
     Write-Host ""
-} else {
+}
+else {
     Write-Host "`n[SKIP] AlexAgent repo not found at $DistroRepo — use -DistroRepo to specify path" -ForegroundColor DarkGray
     Write-Host ""
 }

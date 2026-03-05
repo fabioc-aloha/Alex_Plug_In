@@ -24,7 +24,7 @@ Just ask naturally:
 | 📄 Research Summary       | Insert research template with your name/role | profile.md           |
 | 📋 Meeting Notes          | Insert meeting template with current focus   | profile.md, notes.md |
 | ✍️ Article Template       | Insert blog post outline                     | profile.md           |
-| 📐 Insert Mermaid Diagram | Add flowchart (placeholder in v5.7.7)        | None                 |
+| 📐 Insert Mermaid Diagram | Add flowchart (placeholder)        | None                 |
 
 ---
 

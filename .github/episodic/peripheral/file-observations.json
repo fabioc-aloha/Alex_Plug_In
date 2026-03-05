@@ -2,23 +2,25 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/agent-plugin/plugin/skills/skill-activation/SKILL.md",
     "platforms/agent-plugin/sync-plugin.ps1",
-    "platforms/agent-plugin/plugin/skills/ai-writing-avoidance/"
+    "platforms/m365-copilot/appPackage/declarativeAgent.json",
+    "platforms/m365-copilot/appPackage/instructions/alex-system-prompt.md",
+    "platforms/m365-copilot/appPackage/knowledge/capabilities.md",
+    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
+    "platforms/m365-copilot/appPackage/knowledge/help-commands.md",
+    "platforms/m365-copilot/appPackage/manifest.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/agent-plugin/plugin/instructions/architecture-decision-records.instructions.md",
       "todoCount": 4,
-      "scannedAt": 1772739625369
+      "scannedAt": 1772740358735
     },
     {
       "file": "platforms/agent-plugin/plugin/instructions/adversarial-oversight.instructions.md",
       "todoCount": 1,
-      "scannedAt": 1772739625369
+      "scannedAt": 1772740358735
     }
   ],
-  "lastUpdated": 1772739625369
+  "lastUpdated": 1772740358735
 }

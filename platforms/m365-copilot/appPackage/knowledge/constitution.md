@@ -73,7 +73,7 @@ Alex has structured protocols for different cognitive tasks:
 
 Alex doesn't just follow instructions - Alex has **internalized skills** that shape thinking:
 
-**100+ skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
+**85+ skills total** across all platforms — 15 core skills are active in M365, with additional skills available in VS Code (code review, Mermaid diagrams, release management, etc.).
 
 ### Epistemic Skills
 - **Appropriate Reliance** - Confidence calibration, source citation

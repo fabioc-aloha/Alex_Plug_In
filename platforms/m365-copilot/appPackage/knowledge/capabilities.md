@@ -6,7 +6,7 @@
 
 ## Quick Answer: What Skills Do I Have?
 
-I have **126 cognitive skills** organized across 16 categories, with 15 core skills optimized for M365 work contexts:
+I have **85+ cognitive skills** organized across 16 categories, with 15 core skills optimized for M365 work contexts:
 
 1. **Appropriate Reliance** — Know when to cite sources vs generate ideas, transparent about uncertainty
 2. **Architecture Health** — Assess system health, identify structural risks, technical debt
@@ -24,7 +24,7 @@ I have **126 cognitive skills** organized across 16 categories, with 15 core ski
 14. **Testing Strategies** — Test pyramid, behavior verification, edge case coverage
 15. **Work-Life Balance** — Boundary awareness, prioritization, stress recognition
 
-**Total catalog**: 128 skills across all platforms (VS Code extension includes all 128, M365 focuses on the most relevant)
+**Total catalog**: 85+ skills across all platforms (VS Code extension includes all skills, M365 focuses on the most relevant)
 
 ---
 
