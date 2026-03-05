@@ -31,13 +31,6 @@
       "strength": "medium",
       "when": "Pre-release curation ensures clean Global Knowledge state",
       "yields": "Quality gate before publication"
-    },
-    {
-      "target": "external:Alex-Global-Knowledge/scripts/sync-index.ps1",
-      "type": "uses",
-      "strength": "strong",
-      "when": "Auditing and fixing index-to-disk sync",
-      "yields": "Automated index maintenance"
     }
   ],
   "triggers": [
@@ -49,7 +42,7 @@
     {
       "type": "event",
       "pattern": "brain-qa Phase 29 detects sync issues",
-      "confidence": 1.0
+      "confidence": 1
     },
     {
       "type": "manual",
