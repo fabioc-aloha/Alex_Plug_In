@@ -46,9 +46,11 @@ Load `.github/skills/gamma-presentations/SKILL.md` when detecting:
 2. **Duarte Methodology Consulting**: Expert storytelling structure based on Nancy Duarte's proven framework
 3. **Two-Step Workflow**: Draft markdown → User edits → Final generation
 4. **Multiple Formats**: presentation, document, social, webpage
-5. **Advanced Image Control**: 16 AI models from flux-quick (2 credits) to gpt-image-hd (120 credits)
+5. **Advanced Image Control**: 40+ AI models across 4 tiers — from flux-2-klein (2 credits) to recraft-v4-pro (125 credits), plus 6 video models
 6. **Export Options**: PPTX or PDF with auto-download
 7. **Smart Content Handling**: Auto-condense for long files (>10K chars)
+8. **Template Generation**: Create from existing Gamma templates (beta)
+9. **MCP Integration**: Hosted MCP server for Claude, Make, Zapier, and more
 
 ---
 
@@ -67,7 +69,7 @@ node .github/muscles/gamma-generator.js \
   --slides 12 \
   --tone "inspiring and actionable" \
   --audience "business leaders" \
-  --image-model flux-pro \
+  --image-model flux-2-pro \
   --export pptx \
   --open
 

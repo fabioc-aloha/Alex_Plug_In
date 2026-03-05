@@ -2,37 +2,22 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "PUBLISHING.md",
-    "README.md",
     "ROADMAP-UNIFIED.md",
-    "TEST-GUIDE.md",
-    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-    "platforms/agent-plugin/README.md",
-    "platforms/m365-copilot/README.md",
-    "platforms/m365-copilot/USER-MANUAL.md"
+    "platforms/vscode-extension/src/chat/globalKnowledge.ts",
+    "platforms/vscode-extension/src/chat/participant.ts",
+    "platforms/vscode-extension/src/chat/personaDetection.ts",
+    "platforms/vscode-extension/src/chat/tools.ts",
+    "platforms/vscode-extension/src/extension.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts",
+    "alex_docs/features/GAMMA-PRESENTATIONS.md",
+    "platforms/vscode-extension/src/chat/globalKnowledgeContent.ts"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772666835571
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772666835571
-    },
-    {
-      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+      "file": "platforms/vscode-extension/src/extension.ts",
       "todoCount": 1,
-      "scannedAt": 1772666835571
-    },
-    {
-      "file": "TEST-GUIDE.md",
-      "todoCount": 1,
-      "scannedAt": 1772666835571
+      "scannedAt": 1772674944860
     }
   ],
-  "lastUpdated": 1772666835571
+  "lastUpdated": 1772674944860
 }

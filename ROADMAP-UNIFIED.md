@@ -111,7 +111,7 @@ A version is **done** when ALL of the following are true:
 | **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
 | **Break down the monoliths** | 4w | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457), participant.ts (2,637), welcomeView.ts (2,039), personaDetection.ts (1,764), tools.ts (1,665). Eliminate all functions >60 lines |
 | ~~**Close the trifecta gap**~~ | ~~2w~~ | ✅ Done — 26 → 36 trifectas (+10). Recognized 4 hidden (image-handling, character-aging, visual-memory, code-review). Created 6 new (root-cause-analysis, refactoring, debugging, security-review, skill-building, global-knowledge) |
-| **Add CI/CD pipeline** | 1w | GitHub Actions: compile + lint + test on every push |
+| ~~**Add CI/CD pipeline**~~ | ~~1w~~ | ❌ Will not implement — quality gates enforced via hooks (`pre-tool-use.js`) and manual `npm run compile` |
 | **Ship one heir to parity** | 2w | Bring GitHub Copilot Web heir to full parity with Master |
 
 ### Quick Wins (VS Code 1.110)
@@ -141,7 +141,7 @@ A version is **done** when ALL of the following are true:
 1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
 3. **No source file >1,500 lines** — all 6 monoliths refactored
-4. **CI green on main** — GitHub Actions pipeline passes compile + lint + test
+4. ~~**CI green on main**~~ — Will not implement; quality enforced via hooks + manual compile
 5. **36+ complete trifectas** — ✅ Already achieved (36 as of 2026-03-04)
 6. **GitHub Copilot Web heir at parity** — synced and validated
 7. **North Star Trust score ≥7/10** — re-assessed at ship time
