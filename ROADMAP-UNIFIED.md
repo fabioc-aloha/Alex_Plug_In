@@ -30,7 +30,6 @@ Four platforms. Focused, not scattered.
 | ---------------------- | ------------------------------- | :------: | ---------------------------------------------------------------------------------------- |
 | **VS Code Extension**  | `platforms/vscode-extension/`   | ✅ Active | Full TypeScript extension — primary heir                                                 |
 | **M365 Copilot Agent** | `platforms/m365-copilot/`       | ✅ Active | Declarative agent via Agent Builder + Office Add-ins                                     |
-| **GitHub Copilot Web** | `platforms/github-copilot-web/` | ✅ Active | `.github/`-only heir — Alex instructions guide Copilot Chat and the Copilot Coding Agent |
 | **Agent Plugin**       | `platforms/agent-plugin/`       | ✅ Active | Curated plugin bundle — skills, agents, instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
 
 ---
@@ -112,16 +111,16 @@ A version is **done** when ALL of the following are true:
 | Task | Effort | Description |
 | --- | :---: | --- |
 | **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
-| **Break down the monoliths** | 4w | Refactor extension.ts (3,496 lines), globalKnowledge.ts (3,457), participant.ts (2,637), welcomeView.ts (2,039), personaDetection.ts (1,764), tools.ts (1,665). Eliminate all functions >60 lines |
+| **Break down the monoliths** | 3w | 62% reduction achieved on original 6 monoliths. Remaining: extension.ts (1,292), globalKnowledge.ts (916) + globalKnowledgeOps.ts (1,234) + globalKnowledgeContent.ts (982), participant.ts (973), welcomeView.ts (517) + welcomeViewHtml.ts (1,448), personaDetection.ts (1,062), tools.ts decomposed ✅. **New monoliths discovered**: contextMenu.ts (1,278), upgrade.ts (1,209), pptxGenerator.ts (1,035), commandsPresentation.ts (1,024). **73 functions >60 lines**: 11 critical (>200L), 22 major (100–200L), 40 minor (61–100L). Top offenders: `registerPresentationCommands` (1,148L), `activateInternal` (1,069L), `registerDeveloperCommands` (963L). See [alex_docs/audits/MONOLITH-ASSESSMENT.md](alex_docs/audits/MONOLITH-ASSESSMENT.md) |
 | ~~**Close the trifecta gap**~~ | ~~2w~~ | ✅ Done — 26 → 36 trifectas (+10). Recognized 4 hidden (image-handling, character-aging, visual-memory, code-review). Created 6 new (root-cause-analysis, refactoring, debugging, security-review, skill-building, global-knowledge) |
 | ~~**Add CI/CD pipeline**~~ | ~~1w~~ | ❌ Will not implement — quality gates enforced via hooks (`pre-tool-use.js`) and manual `npm run compile` |
-| **Ship one heir to parity** | 2w | Bring GitHub Copilot Web heir to full parity with Master |
+| ~~**Ship one heir to parity**~~ | ~~2w~~ | ❌ Discontinued — GitHub Copilot Web heir removed (not worth the effort; Agent Plugin covers the same use case better) |
 
 ### Quick Wins (VS Code 1.110)
 
 | Task | Effort | Description |
 | --- | :---: | --- |
-| **Explore subagent model config** | 1h | Configure `chat.exploreAgent.defaultModel` for codebase research speed |
+| ~~**Explore subagent model config**~~ | ~~1h~~ | ✅ Done — `chat.exploreAgent.defaultModel` set to `claude-sonnet-4` in setupEnvironment.ts, devcontainer.json, copilot-instructions.md, and docs |
 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
 | **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
 | **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
@@ -142,11 +141,11 @@ A version is **done** when ALL of the following are true:
 ### Definition of Done (v6.5.0)
 
 1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
-2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
-3. **No source file >1,500 lines** — all 6 monoliths refactored
+2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file (currently 73 violations)
+3. **No source file >1,500 lines** — 8 files currently exceed this (down from 6 original monoliths to 8 files >1K lines including new splits)
 4. ~~**CI green on main**~~ — Will not implement; quality enforced via hooks + manual compile
 5. **36+ complete trifectas** — ✅ Already achieved (36 as of 2026-03-04)
-6. **GitHub Copilot Web heir at parity** — synced and validated
+6. ~~**GitHub Copilot Web heir at parity**~~ — Discontinued (heir removed)
 7. **North Star Trust score ≥7/10** — re-assessed at ship time
 
 > **Principle**: Don't add features. Prove the existing ones deserve trust.
@@ -274,7 +273,7 @@ Alex now has:
 - **128 Skills** (124 inheritable to heirs, fully synced)
 - **36 Complete Trifectas** — comprehensive domain coverage including north-star
 - **90 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
-- **4 Platform Heirs** — VS Code Extension, M365 Copilot Agent, GitHub Copilot Web, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
+- **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
 - **Agent Plugin** — 84 plugin-ready skills, 7 agents, 22 instructions, 11 prompts
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall

@@ -55,7 +55,8 @@ These settings are **required** for Alex to function:
     "Warming up neurons...",
     "Running cognitive analysis...",
     "Consulting the architecture..."
-  ]
+  ],
+  "chat.exploreAgent.defaultModel": "claude-sonnet-4"
 }
 ```
 
@@ -68,6 +69,7 @@ These settings are **required** for Alex to function:
 | `todoList: panel` | Better visibility |
 | `thinking.phrases` | Alex-personality progress messages (replaces generic "Thinking...") |
 | `enableImages` | Render images inline in terminal via Kitty graphics protocol |
+| `exploreAgent.defaultModel` | Faster model for Explore subagent codebase research |
 
 ---
 

@@ -331,7 +331,7 @@ All agents can hand off to each other through the main Alex orchestrator:
                         ↕
               ┌──────────────────────────────────┐
               │      Platform Specialists         │
-              │  ☁️ Azure  │  🔷 M365 │ 🌐 GitHub Copilot Web │
+              │  ☁️ Azure  │  🔷 M365 │
               └──────────────────────────────────┘
 ```
 

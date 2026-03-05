@@ -151,6 +151,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **Nested Agents**              | `chat.useNestedAgentsMdFiles`                | Allows agent files in subdirectories                                                                          |
 | **Custom Agents in Subagents** | `chat.customAgentInSubagent.enabled`         | Alex's specialist agents (Builder, Researcher, Validator, etc.) can be invoked as subagents                   |
 | **Search Subagent**            | `github.copilot.chat.searchSubagent.enabled` | Enables web search capability within agent conversations                                                      |
+| **Explore Subagent Model**     | `chat.exploreAgent.defaultModel`             | Faster model (claude-sonnet-4) for read-only codebase research — balances speed and quality                   |
 | **Participant Detection**      | `chat.detectParticipant.enabled`             | Auto-routes queries to `@alex` via disambiguation categories                                                  |
 | **Max Agent Requests**         | `chat.agent.maxRequests`                     | Default 25 is too low for complex tasks; Alex recommends 100                                                  |
 | **MCP Gallery**                | `chat.mcp.gallery.enabled`                   | Enables Model Context Protocol tools for Azure, Bicep, and other MCP servers                                  |

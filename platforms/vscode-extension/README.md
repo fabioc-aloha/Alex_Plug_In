@@ -108,7 +108,6 @@ Alex turns friction into flow:
 | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
 | **VS Code Extension**  | ✅ Published | [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) |
 | **M365 Copilot Agent** | 🔄 Preview   | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)              |
-| **GitHub Copilot Web** | ✅ Active    | [Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/github-copilot-web)        |
 
 ### VS Code Extension
 
@@ -134,16 +133,6 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 - Teams and People context
 
 📘 **[M365 Copilot Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/m365-copilot)**
-
-### GitHub Copilot Web
-
-Alex on `github.com/copilot` and `github.dev` — no installation required:
-
-- Identity, skills, and prompts loaded from `.github/` automatically
-- Works in repository chat, PR reviews, and github.dev
-- No extension, no compute cost, no setup
-
-📘 **[GitHub Copilot Web Documentation](https://github.com/fabioc-aloha/Alex_Plug_In/tree/main/platforms/github-copilot-web)**
 
 ---
 

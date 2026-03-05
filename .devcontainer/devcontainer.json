@@ -27,6 +27,7 @@
                 "github.copilot.chat.copilotMemory.enabled": true,
                 "github.copilot.chat.searchSubagent.enabled": true,
                 "chat.customAgentInSubagent.enabled": true,
+                "chat.exploreAgent.defaultModel": "claude-sonnet-4",
                 "chat.requestQueuing.enabled": true,
                 "chat.agentsControl.enabled": true,
                 "chat.plugins.enabled": true,

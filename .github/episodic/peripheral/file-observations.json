@@ -1,23 +1,33 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/config/cognitive-config.json",
+    "devcontainer/devcontainer.json",
     "CHANGELOG.md",
+    "PRE-PUBLISH-CHECKLIST.md",
     "README.md",
     "ROADMAP-UNIFIED.md",
-    "platforms/agent-plugin/marketplace.json",
-    "platforms/m365-copilot/README.md",
-    "platforms/m365-copilot/appPackage/declarativeAgent.json",
-    "platforms/m365-copilot/appPackage/instructions/alex-system-prompt.md",
-    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
-    "platforms/m365-copilot/appPackage/knowledge/help-commands.md"
+    "alex_docs/architecture/AGENT-CATALOG.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+    "alex_docs/guides/ENVIRONMENT-SETUP.md",
+    "alex_docs/platforms/GITHUB-COPILOT-WEB-HEIR.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/agent-plugin/plugin/instructions/adversarial-oversight.instructions.md",
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772743418640
+    },
+    {
+      "file": "ROADMAP-UNIFIED.md",
+      "todoCount": 2,
+      "scannedAt": 1772743418640
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1772741708516
+      "scannedAt": 1772743418640
     }
   ],
-  "lastUpdated": 1772741708516
+  "lastUpdated": 1772743418640
 }

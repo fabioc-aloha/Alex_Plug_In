@@ -89,7 +89,6 @@ foreach ($skill in $skills) {
 As new heirs emerge, add platform-specific values:
 
 - `heir:cli` — Future CLI tool heir
-- `heir:web` — Future web interface heir
 - `heir:teams` — Future Teams bot heir
 
 ## The Philosophy

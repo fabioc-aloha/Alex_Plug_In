@@ -222,9 +222,9 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md)             | heir:vscode | Chat API, streaming, tools                                       |
 | [extension-audit-methodology](../../.github/skills/extension-audit-methodology/SKILL.md)         | heir:vscode | 5-dimension extension audit: debug, dead code, perf, menus, deps |
 
-#### GitHub Copilot Web
+#### GitHub Copilot Web (DISCONTINUED)
 
-The GitHub Copilot Web heir is `.github/`-only — skills sync as context files, not activatable extensions. Inherits all `inheritable` skills. No `heir:vscode` or `heir:m365` skills. No platform-specific skills currently defined (`heir:web` tag reserved for future use).
+~~The GitHub Copilot Web heir was `.github/`-only — discontinued 2026-03-05. Agent Plugin covers the same use case better.~~
 
 #### M365 / Teams
 
@@ -275,7 +275,7 @@ Master Alex
     │
     ├── heir:m365 ──► M365 Agent Only
     │
-    └── heir:web (reserved) ──► GitHub Copilot Web Only
+    └── heir:web (discontinued) ──► Removed 2026-03-05
 ```
 
 ---
@@ -917,11 +917,6 @@ flowchart TB
         V_OWN["6 VS Code Specific"]
     end
 
-    subgraph WebHeir["🌐 GitHub Copilot Web Heir"]
-        W_INH["99 Inherited (context files)"]
-        W_NOTE["No extension code"]
-    end
-
     subgraph M365["☁️ M365 Heir"]
         M365_INH["99 Inherited"]
         M365_OWN["2 M365 Specific"]
@@ -929,16 +924,13 @@ flowchart TB
 
     M_INH & M_UNI -->|"sync"| V_INH
     M_INH & M_UNI -->|"sync"| M365_INH
-    M_INH & M_UNI -->|"sync"| W_INH
     M_HV -->|"vscode only"| V_OWN
     M_HM -->|"m365 only"| M365_OWN
     M_ONLY -.->|"blocked"| VSCode
     M_ONLY -.->|"blocked"| M365
-    M_ONLY -.->|"blocked"| WebHeir
 
     style Master fill:#fff3cd,stroke:#856404
     style VSCode fill:#e1f0ff,stroke:#0969da
-    style WebHeir fill:#dfe8f0,stroke:#24292f
     style M365 fill:#e6f4ea,stroke:#1a7f37
 ```
 

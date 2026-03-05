@@ -625,7 +625,7 @@ If you answer NO to any question, that component is unnecessary. **Not everythin
 
 ## Heir Trifectas
 
-Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's. The GitHub Copilot Web heir is `.github/`-only and inherits skill knowledge files but has no extension-based trifecta candidates.
+Heirs inherit the trifecta model but apply it to **platform-specific capabilities**, not architecture-wide cognitive functions. A VS Code heir's core capabilities are different from an M365 heir's.
 
 ### Heir Why Test
 
@@ -654,9 +654,9 @@ The same "Ask Why" philosophy applies, with adapted questions:
 | **Microsoft Graph API**  | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
 | **M365 Agent Debugging** | ✅ Complete    | Full trifecta: Skill + Instruction + Prompt (2026-02-28) |
 
-### GitHub Copilot Web Heir — Trifecta Candidates
+### GitHub Copilot Web Heir (DISCONTINUED)
 
-The GitHub Copilot Web heir is `.github/`-only — no TypeScript extension. It inherits skill knowledge files from Master but has no commands, tools, or executable trifectas. Skills function as readable context, not activatable capabilities. No separate trifecta candidates exist.
+~~Discontinued 2026-03-05. Was `.github/`-only — no TypeScript extension. Agent Plugin covers the same use case better.~~
 
 ### Promotion Path for Heir Trifectas
 

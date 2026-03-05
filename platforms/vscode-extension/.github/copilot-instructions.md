@@ -111,6 +111,7 @@ chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useA
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
 chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
+chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 chat.plugins.enabled=true, chat.tips.enabled=true
 chat.agent.thinking.phrases=[Alex-personality phrases]

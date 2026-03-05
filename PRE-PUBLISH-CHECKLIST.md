@@ -444,19 +444,12 @@ After VS Code extension is published, deploy the other heirs:
 - [ ] Upload to [Teams Developer Portal](https://dev.teams.microsoft.com/apps)
 - [ ] If AADSTS530084 error: manual upload required (enterprise conditional access)
 
-### GitHub Copilot Web
-
-- [ ] Verify `platforms/github-copilot-web/.github/copilot-instructions.md` is up to date
-- [ ] Confirm version reference matches current release
-- [ ] No separate publish needed — deploy by committing `.github/` to target repo
-
 ### Version Consistency Check
 
 ```powershell
 # Verify all heirs reference the same version
 Select-String -Path platforms/vscode-extension/package.json -Pattern '"version"'
 Select-String -Path platforms/m365-copilot/appPackage/manifest.json -Pattern '"version"'
-Select-String -Path platforms/github-copilot-web/.github/copilot-instructions.md -Pattern 'Alex v'
 ```
 
 ---

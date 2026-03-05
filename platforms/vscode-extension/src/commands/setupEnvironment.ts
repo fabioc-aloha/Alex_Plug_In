@@ -214,6 +214,9 @@ const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.searchSubagent.enabled": true,
   // Custom agents in subagents - flexibility for specialized agents
   "chat.customAgentInSubagent.enabled": true,
+  // Explore subagent model - faster model for codebase research (search_subagent)
+  // Claude Sonnet 4 balances speed and quality for read-only exploration
+  "chat.exploreAgent.defaultModel": "claude-sonnet-4",
   // Unified agents bar - better UI
   "chat.unifiedAgentsBar.enabled": true,
   // Progress badge - visibility into ongoing operations

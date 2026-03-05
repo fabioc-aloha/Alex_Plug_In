@@ -34,18 +34,18 @@ VS Code 1.110+ supports [agent plugins](https://code.visualstudio.com/docs/copil
 
 ## Differences from Other Heirs
 
-| Aspect | VS Code Extension | Agent Plugin | GitHub Copilot Web |
-| ------ | ----------------- | ------------ | ------------------ |
-| Delivery | `.vsix` on Marketplace | Plugin marketplace or local path | `.github/` in repo |
-| Install | Extensions sidebar | `@agentPlugins` in Extensions sidebar | Commit to repo |
-| Commands | 90 registered commands | Slash commands via prompts | None |
-| Agents | 7 specialist agents | 7 specialist agents | None |
-| Skills | 128 skills | 84 plugin-ready skills | All (read-only) |
-| Hooks | 4 lifecycle hooks | 1 lifecycle hook (PreToolUse) | None |
-| MCP | Via extension activation | `.mcp.json` standalone | None |
-| Memory | SecretStorage + file + episodic | File memory only | File memory only |
-| Personas | Full detection | Chat-only detection | Repo structure only |
-| Update path | Marketplace publish | Git pull / plugin update | Commit to repo |
+| Aspect | VS Code Extension | Agent Plugin |
+| ------ | ----------------- | ------------ |
+| Delivery | `.vsix` on Marketplace | Plugin marketplace or local path |
+| Install | Extensions sidebar | `@agentPlugins` in Extensions sidebar |
+| Commands | 90 registered commands | Slash commands via prompts |
+| Agents | 7 specialist agents | 7 specialist agents |
+| Skills | 128 skills | 84 plugin-ready skills |
+| Hooks | 4 lifecycle hooks | 1 lifecycle hook (PreToolUse) |
+| MCP | Via extension activation | `.mcp.json` standalone |
+| Memory | SecretStorage + file + episodic | File memory only |
+| Personas | Full detection | Chat-only detection |
+| Update path | Marketplace publish | Git pull / plugin update |
 
 ---
 
