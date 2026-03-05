@@ -31,7 +31,7 @@ Four platforms. Focused, not scattered.
 | **VS Code Extension**  | `platforms/vscode-extension/`   | ✅ Active | Full TypeScript extension — primary heir                                                 |
 | **M365 Copilot Agent** | `platforms/m365-copilot/`       | ✅ Active | Declarative agent via Agent Builder + Office Add-ins                                     |
 | **GitHub Copilot Web** | `platforms/github-copilot-web/` | ✅ Active | `.github/`-only heir — Alex instructions guide Copilot Chat and the Copilot Coding Agent |
-| **Agent Plugin**       | `platforms/agent-plugin/`       | 🆕 New   | Curated plugin bundle — skills, agents, instructions via VS Code 1.110 plugin system     |
+| **Agent Plugin**       | `platforms/agent-plugin/`       | ✅ Active | Curated plugin bundle — skills, agents, instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
 
 ---
 
@@ -84,6 +84,9 @@ A version is **done** when ALL of the following are true:
 | EmbeddedKnowledge readiness | knowledge/ folder pre-prepared for zero-delay adoption |
 | capabilities.md v1.6 features | Platform features, M365 capabilities table, agent surfaces |
 | Agent Plugin heir | Full platform: 84 skills, 7 agents, 22 instructions, 11 prompts |
+| AlexAgent distribution repo | Standalone public repo with install scripts, setup scripts, on-brand banner |
+| AI Writing Avoidance trifecta | Skill + instruction + prompt for detecting and fixing AI writing tells |
+| sync-plugin.ps1 AlexAgent publish | `-DistroRepo` param copies plugin bundle to distribution repo |
 | M365 heir version alignment | All files aligned to v6.1.5 (was scattered 5.7.7–6.1.0) |
 | M365 sync script | sync-m365.ps1 with backup/restore |
 | Thinking phrases | 15 cognitive-themed progress phrases via `chat.agent.thinking.phrases` |
@@ -256,7 +259,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
 | **Current Master Version** | 6.1.8                                          |
-| **Current Heirs**          | VS Code (6.1.8), M365 (6.1.8), Plugin (6.1.7) |
+| **Current Heirs**          | VS Code (6.1.8), M365 (6.1.8), Plugin (6.1.8) |
 | **Next Target**            | v6.5.0 — The Trust Release                     |
 | **Updated**                | 2026-03-05                                     |
 
@@ -270,7 +273,7 @@ Alex now has:
 - **128 Skills** (124 inheritable to heirs, fully synced)
 - **36 Complete Trifectas** — comprehensive domain coverage including north-star
 - **90 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
-- **4 Platform Heirs** — VS Code Extension, M365 Copilot Agent, GitHub Copilot Web, Agent Plugin
+- **4 Platform Heirs** — VS Code Extension, M365 Copilot Agent, GitHub Copilot Web, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
 - **Agent Plugin** — 84 plugin-ready skills, 7 agents, 22 instructions, 11 prompts
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall

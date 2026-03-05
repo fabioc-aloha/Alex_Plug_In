@@ -1,0 +1,63 @@
+{
+    "$schema": "../schemas/synapses.schema.json",
+    "schemaVersion": "1.0.0",
+    "skillName": "ai-writing-avoidance",
+    "description": "Connections for authentic writing and AI pattern detection",
+    "inheritance": {
+        "parent": null,
+        "children": []
+    },
+    "lastValidated": "2026-03-05",
+    "connections": [
+        {
+            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
+            "relationship": "enhances",
+            "strength": 0.9,
+            "when": "Reviewing documents for quality",
+            "yields": "Comprehensive quality check including AI pattern detection"
+        },
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "relationship": "complements",
+            "strength": 0.6,
+            "when": "Reviewing documentation in code reviews",
+            "yields": "Apply systematic review patterns to prose"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "relationship": "supports",
+            "strength": 0.7,
+            "when": "Teaching writing skills",
+            "yields": "Framework for explaining AI tells to learners"
+        },
+        {
+            "target": ".github/instructions/documentation-quality-assurance.instructions.md",
+            "relationship": "pairs-with",
+            "strength": 0.85,
+            "when": "Running document audits",
+            "yields": "Combined quality and authenticity checking"
+        },
+        {
+            "target": "alex_docs/research/AI-WRITING-TELLS.md",
+            "relationship": "references",
+            "strength": 0.8,
+            "when": "Understanding the research basis",
+            "yields": "Background context on AI detection patterns"
+        }
+    ],
+    "activationContext": {
+        "triggers": [
+            "writing policy",
+            "document review",
+            "editing content",
+            "checking for AI",
+            "authentic voice",
+            "professional writing"
+        ],
+        "inhibitors": [
+            "code generation",
+            "technical documentation",
+            "API references"
+        ]
+    }
+}

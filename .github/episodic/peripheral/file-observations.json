@@ -2,9 +2,23 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
+    "CHANGELOG.md",
+    "ROADMAP-UNIFIED.md",
+    "platforms/agent-plugin/plugin/skills/skill-activation/SKILL.md",
     "platforms/agent-plugin/sync-plugin.ps1",
-    "alex_docs/research/AI-WRITING-TELLS.md"
+    "platforms/agent-plugin/plugin/skills/ai-writing-avoidance/"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1772738721713
+  "todoHotspots": [
+    {
+      "file": "platforms/agent-plugin/plugin/instructions/architecture-decision-records.instructions.md",
+      "todoCount": 4,
+      "scannedAt": 1772739625369
+    },
+    {
+      "file": "platforms/agent-plugin/plugin/instructions/adversarial-oversight.instructions.md",
+      "todoCount": 1,
+      "scannedAt": 1772739625369
+    }
+  ],
+  "lastUpdated": 1772739625369
 }

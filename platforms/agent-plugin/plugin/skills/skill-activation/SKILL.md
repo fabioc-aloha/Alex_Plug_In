@@ -32,6 +32,7 @@ Search this index when processing any task request:
 |-------|-----------------|
 | academic-paper-drafting | draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing |
 | academic-research | write thesis, literature review, cite sources, research paper, dissertation |
+| agent-debug-panel | agent debug, debug panel, skill not loading, hook not firing, instruction not matching, why didn't skill activate, agent routing, debug agent |
 | ai-agent-design | design agent, react pattern, multi-agent, tool use, agent architecture |
 | ai-character-reference-generation | generate character reference, character consistency, flux character, visual reference set, character poses |
 | ai-generated-readme-banners | generate readme banner, github banner, ideogram banner, project branding, ultra-wide banner |
@@ -147,6 +148,7 @@ Search this index when processing any task request:
 | status-reporting | status update, progress report, weekly update, stakeholder email, sprint summary |
 | svg-graphics | create svg, svg banner, svg icon, dark mode svg, scalable graphic |
 | teams-app-patterns | teams app, teams manifest, adaptive card, teams bot, teams sso, declarative agent, m365 copilot agent, teams validate, sideload teams, declarativeagent schema, da v1.6, m365 agents toolkit, teamsapp cli, teams app package, teams icon, copilot extensibility |
+| terminal-image-rendering | terminal image, kitty graphics, imgcat, inline image, terminal avatar, enable images, integrated terminal image, iterm2 protocol, chafa |
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd, add tests for this, how to test, test strategy, coverage gaps, jest, vitest, mocha, testing pyramid, integration test, e2e test, what to mock, flaky tests, aaa pattern, test refactor |
 | ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
 | ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |

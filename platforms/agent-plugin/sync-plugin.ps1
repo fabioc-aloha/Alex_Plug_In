@@ -75,6 +75,7 @@ $curatedSkills = @(
     'documentation-quality-assurance'
     'doc-hygiene'
     'writing-publication'
+    'ai-writing-avoidance'
     'academic-research'
     'practitioner-research'
     'research-project-scaffold'

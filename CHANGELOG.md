@@ -9,13 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.1.8] - 2026-03-05
 
-> **Doc Alignment Hotfix** — Version consistency fix post-meditation.
+> **Doc Alignment Hotfix + AI Writing + AlexAgent Distribution** — Version consistency fix, new skill trifecta, and standalone plugin distribution repo.
+
+### Added
+- **AI Writing Avoidance trifecta**: skill, instruction, prompt (`/audit-writing`), synapses — detect and fix AI writing tells
+- **AI Writing Tells research document** (`alex_docs/research/AI-WRITING-TELLS.md`) — comprehensive catalog of AI writing patterns
+- **AlexAgent standalone distribution repo** — `github.com/fabioc-aloha/AlexAgent` for plugin-only installation without the full extension
+- `setup.ps1` / `setup.sh` — lightweight post-clone VS Code settings configuration scripts
+- `sync-plugin.ps1` `-DistroRepo` parameter — publish plugin bundle to AlexAgent repo in one command
+
+### Changed
+- AlexAgent README: VS Code UI clone as primary install, one-liner scripts as secondary, CLI in appendix
+- AlexAgent banner: on-brand CorreaX design (flat `#0f172a`, left-aligned, ring nodes, ghost watermark)
 
 ### Fixed
 - `copilot-instructions.md` version header aligned to 6.1.8
 - `cognitive-config.json` version field updated
 - Heir CHANGELOG entry for stable release added
 - Legacy episodic file archived
+- PII leak: removed personal name reference from `deep-work-optimization` skill in plugin
 
 ---
 
