@@ -1,33 +1,27 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "devcontainer/devcontainer.json",
+    "github/copilot-instructions.md",
     "CHANGELOG.md",
-    "PRE-PUBLISH-CHECKLIST.md",
-    "README.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/architecture/AGENT-CATALOG.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-    "alex_docs/guides/ENVIRONMENT-SETUP.md",
-    "alex_docs/platforms/GITHUB-COPILOT-WEB-HEIR.md"
+    "alex_docs/skills/SKILLS-CATALOG.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772743418640
+      "scannedAt": 1772745064240
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772743418640
+      "scannedAt": 1772745064240
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1772743418640
+      "scannedAt": 1772745064240
     }
   ],
-  "lastUpdated": 1772743418640
+  "lastUpdated": 1772745064240
 }

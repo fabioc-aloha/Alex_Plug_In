@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. GH Copilot Web heir discontinued (Agent Plugin covers use case better). v6.1.8 Doc alignment hotfix. v6.1.7 Stable marketplace release. v6.1.5 Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.0 Environment & Cognitive Tier Hardening.
+Recent: v6.2.0 — On-Brand Partnership Release. FLUX brand fine-tune trifecta added (37th). SVG-first banner strategy via Recraft v4 SVG. GH Copilot Web heir discontinued (Agent Plugin covers use case better). v6.1.8 Doc alignment hotfix. v6.1.7 Stable marketplace release. v6.1.5 Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.0 Environment & Cognitive Tier Hardening.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-03-05
@@ -71,7 +71,7 @@ Memory systems:
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (36): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge
+Complete trifectas (37): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune
 See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
 
 Meta-routing:

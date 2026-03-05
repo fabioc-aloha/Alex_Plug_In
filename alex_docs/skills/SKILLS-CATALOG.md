@@ -9,11 +9,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 128
+## Skill Count: 129
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 115   |
+| Inheritable | 116   |
 | Master-Only | 3     |
 | Universal   | 1     |
 | Heir:vscode | 7     |
@@ -161,6 +161,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [ai-character-reference-generation](../../.github/skills/ai-character-reference-generation/SKILL.md) | inheritable | Face-consistent character portraits via Nano-Banana Pro / Flux 2 Pro with visual-memory reference photos                                                       |
 | [ai-generated-readme-banners](../../.github/skills/ai-generated-readme-banners/SKILL.md)             | inheritable | Ultra-wide cinematic README banners via Ideogram v2 with typography, professional composition                                                                  |
 | [character-aging-progression](../../.github/skills/character-aging-progression/SKILL.md)             | inheritable | Age-progression portrait sets (13 life stages) via Nano-Banana Pro with face consistency                                                                       |
+| [flux-brand-finetune](../../.github/skills/flux-brand-finetune/SKILL.md)                             | inheritable | 🆕 Custom FLUX LoRA training on Replicate for consistent brand character imagery (~$1.50 training, $0.003/image generation)                                     |
 
 ### 💼 Business & Analysis
 

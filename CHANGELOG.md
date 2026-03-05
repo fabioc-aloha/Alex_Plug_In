@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **M365 EmbeddedKnowledge RAG** — 6 knowledge files now declared as embedded capabilities (were orphaned on disk)
 - **M365 Meditate workflow** — cognitive consolidation added to conversation starters and store description
+- **FLUX brand fine-tune trifecta** (37th) — Complete LoRA training workflow skill + instruction + prompt. Two trainers: `replicate/fast-flux-trainer` (~$1.50/2min), `ostris/flux-dev-lora-trainer` (~$0.98/10min). Trigger word discipline, training data requirements, visual-memory integration
+- **SVG-first banner strategy** — Recraft v4 SVG (`recraft-ai/recraft-v4-svg`) promoted to default banner format. Scalable, theme-aware, lightweight, VCS-friendly. Raster (Ideogram/Flux) demoted to explicit fallbacks
 
 ### Removed
 - **GitHub Copilot Web heir discontinued** — `platforms/github-copilot-web/` removed; not worth the effort at ~1.5% parity. Agent Plugin covers the same use case better.

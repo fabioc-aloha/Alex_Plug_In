@@ -62,7 +62,7 @@ Memory systems:
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (36): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge
+Complete trifectas (37): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune
 See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
 
 Meta-routing:

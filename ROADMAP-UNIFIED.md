@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 4, 2026
+**Last Updated**: March 5, 2026
 
 ---
 
@@ -144,7 +144,7 @@ A version is **done** when ALL of the following are true:
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file (currently 73 violations)
 3. **No source file >1,500 lines** — 8 files currently exceed this (down from 6 original monoliths to 8 files >1K lines including new splits)
 4. ~~**CI green on main**~~ — Will not implement; quality enforced via hooks + manual compile
-5. **36+ complete trifectas** — ✅ Already achieved (36 as of 2026-03-04)
+5. **36+ complete trifectas** — ✅ Already achieved (37 as of 2026-03-05)
 6. ~~**GitHub Copilot Web heir at parity**~~ — Discontinued (heir removed)
 7. **North Star Trust score ≥7/10** — re-assessed at ship time
 
@@ -160,7 +160,7 @@ A version is **done** when ALL of the following are true:
 | --- | :---: | --- |
 | Agentic browser testing | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
 | Office Add-in Phase 2 | 2w | Word templates, Excel trackers, PowerPoint gen |
-| FLUX fine-tune for brand | 3d | Custom LoRA for consistent Alex imagery |
+| ~~FLUX fine-tune for brand~~ | ~~3d~~ | ~~Custom LoRA for consistent Alex imagery~~ — **DONE** v6.2.0: `flux-brand-finetune` trifecta (skill + instruction + prompt) |
 | Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile |
 | Academic paper finalization | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
 

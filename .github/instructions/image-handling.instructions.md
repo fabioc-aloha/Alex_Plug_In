@@ -25,13 +25,14 @@ When a user asks to generate an image, video, or audio via Replicate, read `.git
 
 ### Image Generation Priority
 
-1. **Has reference face images** → `google/nano-banana-pro` (`image_input` array, up to 14 refs)
-2. **Fast face generation** → `google/nano-banana-2` (same `image_input` API, Gemini 3.1 Flash)
-3. **Text must appear in image** → `ideogram-ai/ideogram-v3-turbo` ($0.03, 3:1 for banners)
-4. **Edit an existing image** → `black-forest-labs/flux-kontext-pro` (text-prompted editing)
-5. **Production image, no text** → `black-forest-labs/flux-1.1-pro` or `flux-2-pro` (multi-ref)
-6. **Vector SVG output** → `recraft-ai/recraft-v4-svg` or `recraft-ai/recraft-v4-pro-svg`
-7. **Fast prototype** → `black-forest-labs/flux-schnell` ($0.003)
+1. **Banner** → `recraft-ai/recraft-v4-svg` (SVG default — scalable, theme-aware, lightweight); fallback to Ideogram v3 Turbo for raster with text
+2. **Has reference face images** → `google/nano-banana-pro` (`image_input` array, up to 14 refs)
+3. **Fast face generation** → `google/nano-banana-2` (same `image_input` API, Gemini 3.1 Flash)
+4. **Text must appear in image** → `ideogram-ai/ideogram-v3-turbo` ($0.03, 3:1 for banners)
+5. **Edit an existing image** → `black-forest-labs/flux-kontext-pro` (text-prompted editing)
+6. **Production image, no text** → `black-forest-labs/flux-1.1-pro` or `flux-2-pro` (multi-ref)
+7. **Vector SVG output** → `recraft-ai/recraft-v4-svg` or `recraft-ai/recraft-v4-pro-svg`
+8. **Fast prototype** → `black-forest-labs/flux-schnell` ($0.003)
 
 ### Video Generation Priority
 

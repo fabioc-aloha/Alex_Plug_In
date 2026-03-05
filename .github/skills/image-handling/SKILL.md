@@ -127,8 +127,10 @@ Match user intent to the right model. When a user names a specific model or desc
 - **Premium image editing** → Flux Kontext Max ($0.08, better typography in edits)
 - **Painting style / custom LoRA** → SDXL or Flux Dev with LoRA weights
 - **Largest / highest resolution output** → Seedream 5 Lite (up to 3K) or Nano-Banana Pro (up to 4K)
-- **README banner with text** → Ideogram v3 Turbo `3:1` ratio ($0.03); see `ai-generated-readme-banners` skill
-- **README banner without text** → Flux 1.1 Pro with `21:9` ratio
+- **README banner (default, SVG)** → Recraft v4 SVG (`recraft-ai/recraft-v4-svg`, native SVG output, scalable); see `ai-generated-readme-banners` skill
+- **README banner (premium SVG)** → Recraft v4 Pro SVG ($0.30, detailed vector paths)
+- **README banner (raster, with text)** → Ideogram v3 Turbo `3:1` ratio ($0.03)
+- **README banner (raster, no text)** → Flux 1.1 Pro with `21:9` ratio
 - **Face-consistent portraits (fast)** → Nano-Banana 2 ($0.067/1K, `image_input` array, same API as Pro)
 - **Face-consistent portraits (quality)** → Nano-Banana Pro ($0.025, `image_input` up to 14 refs)
 - **Multi-reference high quality** → Flux 2 Pro (~$0.05+, `input_images` up to 8 refs)
