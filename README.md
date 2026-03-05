@@ -225,19 +225,14 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-### What's New (v6.1.x)
+### What's New (v6.2.0 — On-Brand Partnership Release)
 
 | Category           | Highlights                                                                                    |
 | ------------------ | --------------------------------------------------------------------------------------------- |
-| **Cognitive Tier** | Extended thinking detection fixed (was unreachable for all users), real-time tier refresh     |
-| **Dependencies**   | Extension dependency check with one-click install for Copilot and Mermaid Preview             |
-| **Multi-Account**  | GitHub personal + enterprise account detection in cognitive tier                              |
-| **AI Media**       | 5 skills updated: Ideogram v3, nano-banana-2, Flux Kontext, veo-3.1-fast, qwen3-tts          |
-| **Trifectas**      | 36 complete trifectas — 10 new: debugging, refactoring, security-review, root-cause-analysis + 6 more |
-| **Partnership**   | Episodic memory, outcome learning loop, autonomous task detection, multi-step workflows       |
-| **Intelligence**  | 128 skills, emotional detection, model tier awareness, expertise calibration                  |
-| **Memory**        | Global knowledge + session history + outcome tracking + episodic records                      |
-| **MCP**           | Standalone MCP cognitive tools server (`npx @alex/mcp-cognitive-tools`)                       |
+| **M365 Branding**  | Store description, README, manifest rewritten to partnership voice — zero rocket metaphors     |
+| **M365 RAG**       | EmbeddedKnowledge capability added — 6 knowledge files now active for retrieval               |
+| **M365 Optimize**  | Instructions slimmed 58% (6,679 → 2,773 chars), workflows delegated to knowledge files        |
+| **Version Align**  | All heirs bumped to 6.2.0: VS Code, M365, Agent Plugin, GitHub Copilot Web                    |
 
 ### Migration Notes
 

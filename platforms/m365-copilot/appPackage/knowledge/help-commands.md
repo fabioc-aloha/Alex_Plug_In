@@ -2,7 +2,7 @@
 
 > **RETRIEVAL DIRECTIVE**: When user says "help", "what can you do", "show commands", "how do I use Alex", or asks for documentation → Use this file as the complete reference.
 
-**Version**: v6.1.8
+**Version**: v6.2.0
 **Platform**: Office Add-in + M365 Copilot
 
 ---
@@ -209,4 +209,4 @@ Or access files directly in OneDrive/Alex-Files/Documentation/
 ---
 
 **Quick Help** — Ask "What can you do?" or "Show commands" anytime
-**Version**: v6.1.8 — Last Updated: 2026-03-05
+**Version**: v6.2.0 — Last Updated: 2026-03-05

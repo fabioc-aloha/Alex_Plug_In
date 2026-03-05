@@ -2,7 +2,7 @@
     "name": "alex-cognitive-architecture",
     "metadata": {
         "description": "Alex Cognitive Architecture — AI partner with cognitive skills, specialist agents, and lifecycle hooks for any project.",
-        "version": "6.1.5",
+        "version": "6.2.0",
         "homepage": "https://github.com/fabioc-aloha/Alex_Plug_In",
         "license": "Apache-2.0"
     },
@@ -14,8 +14,8 @@
         {
             "name": "alex-cognitive-architecture",
             "source": "plugin",
-            "description": "AI partner with 84 skills, 7 specialist agents, 22 auto-loaded instructions, 11 prompt workflows, lifecycle hooks, and MCP cognitive tools.",
-            "version": "6.1.5",
+            "description": "AI partner with 85+ skills, 7 specialist agents, 22 auto-loaded instructions, 11 prompt workflows, lifecycle hooks, and MCP cognitive tools.",
+            "version": "6.2.0",
             "skills": [
                 "./skills/*"
             ],

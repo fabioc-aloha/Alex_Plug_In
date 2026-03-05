@@ -251,6 +251,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.1.5     | M365 Schema + Agent Plugin | ✅ Shipped  |
 | v6.1.7     | Stable Marketplace Release | ✅ Shipped  |
 | v6.1.8     | Doc Alignment Hotfix       | ✅ Shipped  |
+| v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
 | **v6.5.0** | **The Trust Release**      | **🎯 Next** |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -258,8 +259,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.1.8                                          |
-| **Current Heirs**          | VS Code (6.1.8), M365 (6.1.8), Plugin (6.1.8) |
+| **Current Master Version** | 6.2.0                                          |
+| **Current Heirs**          | VS Code (6.2.0), M365 (6.2.0), Plugin (6.2.0) |
 | **Next Target**            | v6.5.0 — The Trust Release                     |
 | **Updated**                | 2026-03-05                                     |
 
@@ -267,7 +268,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v6.1.8)
+### Current State Summary (v6.2.0)
 
 Alex now has:
 - **128 Skills** (124 inheritable to heirs, fully synced)
@@ -293,6 +294,7 @@ Alex now has:
 
 | Version | Theme                                       | Date       |
 | ------- | ------------------------------------------- | ---------- |
+| v6.2.0  | On-Brand Partnership Release             | 2026-03-05 |
 | v6.1.8  | Doc Alignment Hotfix                        | 2026-03-05 |
 | v6.1.7  | Stable Marketplace Release                  | 2026-03-05 |
 | v6.1.5  | M365 Schema Alignment + Agent Plugin        | 2026-03-04 |

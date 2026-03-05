@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-6.1.8-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-6.2.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -11,26 +11,21 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**v6.1.8**: EmbeddedKnowledge RAG, slimmed instructions (58% reduction), version alignment.
+**v6.2.0**: On-Brand Partnership Release — EmbeddedKnowledge RAG, partnership voice, slimmed instructions.
 
 ---
 
 ## 💡 Why Alex? (M365 Copilot Already Works Great!)
 
-Great question. M365 Copilot is powerful out of the box. Alex doesn't replace M365 Copilot — **Alex makes M365 Copilot yours**.
+Great question. M365 Copilot is powerful out of the box. Alex doesn't replace it \u2014 **Alex makes it yours**.
 
 ### The Problem
 
-M365 Copilot is brilliant but stateless. Every conversation starts from scratch. It doesn't know:
-- Your preferred working style
-- Your ongoing projects
-- Your learning goals
-- What you discussed last week
-- Your team dynamics
+M365 Copilot is brilliant but stateless. Every conversation starts from scratch. It doesn't know your working style, your ongoing projects, your learning goals, what you discussed last week, or your team dynamics.
 
 ### The Solution
 
-Alex adds a **cognitive layer** on top of M365 Copilot — persistent memory, personalized protocols, and proactive context awareness.
+Alex adds a **cognitive partnership layer** on top of M365 Copilot \u2014 persistent memory, personalized workflows, and proactive context awareness. Partner, not tool.
 
 ### Comparison: M365 Copilot vs M365 Copilot + Alex
 
@@ -69,9 +64,9 @@ Alex adds a **cognitive layer** on top of M365 Copilot — persistent memory, pe
 ### The Bottom Line
 
 **M365 Copilot = Powerful AI toolbox**
-**M365 Copilot + Alex = Your personal AI that grows with you**
+**M365 Copilot + Alex = Your AI partner that grows with you**
 
-Alex isn't competing with M365 Copilot. Alex is the personalization layer that makes M365 Copilot feel like *your* M365 Copilot.
+Alex isn't competing with M365 Copilot. Alex is the partnership layer that makes M365 Copilot feel like *your* M365 Copilot.
 
 ---
 
@@ -466,6 +461,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.1.8 | EmbeddedKnowledge RAG | The Partnership Release
+**Alex M365** - v6.2.0 | On-Brand Partnership Release
 
-(C) 2026 CorreaX - AI That Learns How to Learn
+(C) 2026 CorreaX \u2014 The Most Advanced and Trusted AI Partner for Any Job

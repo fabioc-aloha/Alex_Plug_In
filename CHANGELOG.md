@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.2.0] - 2026-03-05
+
+> **The On-Brand Partnership Release** — M365 heir rebranded to partnership voice, EmbeddedKnowledge RAG, store description overhaul, full version alignment.
+
+### Added
+- **M365 EmbeddedKnowledge RAG** — 6 knowledge files now declared as embedded capabilities (were orphaned on disk)
+- **M365 Meditate workflow** — cognitive consolidation added to conversation starters and store description
+
+### Changed
+- **M365 store description rewritten** — rocket/thrust metaphor replaced with partnership voice aligned to North Star and CorreaX brand
+- **M365 manifest `name.full`** — "Strap a Rocket to Your Back" → "Your Trusted AI Partner for M365"
+- **M365 `description.short`** — partnership-first messaging (71/80 chars)
+- **M365 `description.full`** — complete rewrite: MEET ALEX, WHY PARTNERSHIP MATTERS, WHAT ALEX DOES, WORKFLOWS, SKILLS (2,341/4,000 chars)
+- **M365 declarativeAgent description** — feature list → partnership tagline
+- **M365 README hero** — 🚀 → 🤝, partnership tagline, "cognitive partnership layer"
+- **M365 README footer** — aligned to North Star: "The Most Advanced and Trusted AI Partner for Any Job"
+- **M365 instructions slimmed** — 6,679 → 2,773 chars (58% reduction), workflows delegated to knowledge files
+- **Agent Plugin marketplace.json** — version 6.2.0, skill count updated to 85+
+- **GitHub Copilot Web heir** — version header updated to 6.2.0
+
+### Fixed
+- M365 knowledge files orphaned (existed on disk but no EmbeddedKnowledge capability declared)
+- M365 instructions overloaded (duplicate content between inline instructions and knowledge files)
+- Version alignment across all heirs: VS Code, M365, Agent Plugin, GitHub Copilot Web
+- Stale skill counts in M365 knowledge files (126/128/100 → 85+)
+
+---
+
 ## [6.1.8] - 2026-03-05
 
 > **Doc Alignment Hotfix + AI Writing + AlexAgent Distribution** — Version consistency fix, new skill trifecta, and standalone plugin distribution repo.
