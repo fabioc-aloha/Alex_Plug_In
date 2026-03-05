@@ -1,26 +1,33 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "ROADMAP-UNIFIED.md",
+    "TEST-GUIDE.md",
+    "platforms/agent-plugin/USER-MANUAL.md",
+    "platforms/agent-plugin/plugin/copilot-instructions.md",
+    "platforms/m365-copilot/README.md",
+    "platforms/m365-copilot/USER-MANUAL.md",
+    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
+    "platforms/m365-copilot/appPackage/knowledge/help-commands.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1772682028650
+    },
+    {
+      "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772677897828
+      "scannedAt": 1772682028650
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "file": "TEST-GUIDE.md",
       "todoCount": 1,
-      "scannedAt": 1772677897828
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1772677897828
+      "scannedAt": 1772682028650
     }
   ],
-  "lastUpdated": 1772677897828
+  "lastUpdated": 1772682028650
 }

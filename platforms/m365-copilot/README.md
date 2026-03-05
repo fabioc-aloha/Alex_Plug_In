@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-6.1.5-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-6.1.7-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -11,7 +11,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**v6.1.5**: Manifest v1.25, GPT 5.1+ hardened instructions, conversation starters aligned to v1.6 limit (6 max), Word & PowerPoint declarative agent support, Teams Toolkit → M365 Agents Toolkit rename, EmbeddedKnowledge readiness. 128 skills (36 complete trifectas), M365 heir sync script, .github/ expanded with 84 plugin-ready skills + 22 instructions + 11 prompts. **v6.0.0** introduced the Partnership Release — episodic memory, outcome learning, task detection, workflow engine, expertise model, proactive code review.
+**v6.1.7**: Stable marketplace release.
 
 ---
 
@@ -464,6 +464,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.1.5 | 128 Skills | The Partnership Release
+**Alex M365** - v6.1.7 | 128 Skills | The Partnership Release
 
 (C) 2026 CorreaX - AI That Learns How to Learn

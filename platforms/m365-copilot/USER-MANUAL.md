@@ -546,7 +546,7 @@ A: No. Only M365 Exchange mailboxes. Personal Gmail/Outlook.com not supported.
 A: Pre-built cognitive capabilities like root cause analysis, strategic planning, research synthesis, decision frameworks, etc. Say "Show me your skills" for full list.
 
 **Q: Can I create custom skills?**
-A: Not in v6.1.5. Custom skill builder coming in a future release.
+A: Not in v6.1.7. Custom skill builder coming in a future release.
 
 **Q: Does Alex replace my need for M365 Copilot?**
 A: No, Alex **extends** M365 Copilot. You need a Copilot license to use Alex.

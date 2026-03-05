@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.7] - 2026-03-05
+
+> **Stable Release** — Promoted to stable on VS Code Marketplace.
+
+### Changed
+- Published as stable release (previously pre-release)
+- Version alignment across all documentation
+
+---
+
 ## [6.1.5] - 2026-03-04
 
 > **Heir Protection Fix + Trifecta Gap Closure + M365 Polish** — Removed false positive from Master auto-detection, closed trifecta gap from 26→36, M365 orphan cleanup and mobile docs.

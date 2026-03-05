@@ -246,6 +246,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.0.3     | Marketplace Compliance     | ✅ Shipped  |
 | v6.1.0     | Cognitive Tier Hardening   | ✅ Shipped  |
 | v6.1.5     | M365 Schema + Agent Plugin | ✅ Shipped  |
+| v6.1.7     | Stable Marketplace Release | ✅ Shipped  |
 | **v6.5.0** | **The Trust Release**      | **🎯 Next** |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -262,7 +263,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v6.1.5)
+### Current State Summary (v6.1.7)
 
 Alex now has:
 - **128 Skills** (124 inheritable to heirs, fully synced)
@@ -288,6 +289,7 @@ Alex now has:
 
 | Version | Theme                                       | Date       |
 | ------- | ------------------------------------------- | ---------- |
+| v6.1.7  | Stable Marketplace Release                  | 2026-03-05 |
 | v6.1.5  | M365 Schema Alignment + Agent Plugin        | 2026-03-04 |
 | v6.1.0  | Cognitive Tier Hardening                    | 2026-03-03 |
 | v6.0.3  | Marketplace Compliance + Doc Hygiene        | 2026-03-02 |
