@@ -11,6 +11,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.5] - 2026-03-04
+
+> **Heir Protection Fix + Trifecta Gap Closure** — Removed false positive from Master auto-detection, closed trifecta gap from 26→36.
+
+### Added
+- 10 new complete trifectas (26→36)
+- 2 new skills: `agent-debug-panel`, `terminal-image-rendering`
+- MCP standalone distribution: 704KB esbuild bundle
+
+### Fixed
+- `alex_docs/` removed from Master Alex auto-detection indicators — heirs were falsely identified as Master
+
+---
+
+## [6.1.4] - 2026-03-04
+
+> **Cognitive Tier Fix + Model Updates** — Fixed L4 detection, added GPT-5.3.
+
+### Added
+- GPT-5.3 added to frontier tier model maps
+
+### Fixed
+- **Critical**: Cognitive tier detection now reads correct setting path
+
+---
+
 ## [6.1.2] - 2026-03-03
 
 > **Replicate Trifecta Updates + Documentation Hygiene** — Model landscape refresh across 5 skills, 2 new trifectas completed, doc archive pass 2.

@@ -3,7 +3,7 @@
   "schemaVersion": "1.0",
   "skillId": "vscode-extension-patterns",
   "version": "1.4.0",
-  "lastValidated": "2026-02-15",
+  "lastValidated": "2026-03-04",
   "inheritance": "heir:vscode",
   "connections": [
     {
@@ -17,6 +17,12 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "implements",
+      "strength": 0.85,
+      "reason": "VS Code heir patterns"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
@@ -69,7 +75,9 @@
     "CSP Content-Security-Policy",
     "telemetry opt-out compliance",
     "onDidChangeConfiguration listener",
-    "VS Code 1.109+ chat settings",
+    "VS Code 1.110+ chat settings",
+    "thinking phrases configuration",
+    "setupEnvironment setting tiers",
     "initialize/upgrade automation",
     "temporal dead zone TDZ debugging",
     "production build errors",

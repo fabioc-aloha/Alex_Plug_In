@@ -10,7 +10,7 @@ applyTo: "**/*presentation*,**/*slides*,**/*deck*,**/*gamma*,**/*pitch*"
 
 > ⚠️ **Staleness Watch** (Last validated: Mar 2026 — API v1.0 GA): Check [developers.gamma.app](https://developers.gamma.app/) for endpoint changes and pricing updates.
 
-For the full user guide, consulting methodology, and illustrations reference, see [alex_docs/features/GAMMA-PRESENTATIONS.md](../../../alex_docs/features/GAMMA-PRESENTATIONS.md).
+> 📖 **Full Documentation**: The complete user guide with Duarte methodology, consulting workflow, and illustrations reference is available in Master Alex at `alex_docs/features/GAMMA-PRESENTATIONS.md`.
 
 ---
 
@@ -352,5 +352,5 @@ node .github/muscles/gamma-generator.js -f exports/ai-ethics-draft.md -e pptx --
 
 ## Related
 
-- [alex_docs/features/GAMMA-PRESENTATIONS.md](../../../alex_docs/features/GAMMA-PRESENTATIONS.md) — Full user guide + Duarte methodology
+- `alex_docs/features/GAMMA-PRESENTATIONS.md` — Full user guide + Duarte methodology (Master Alex only)
 - [.github/instructions/gamma-presentation.instructions.md](../../instructions/gamma-presentation.instructions.md) — Auto-activation rules

@@ -610,6 +610,7 @@ The best prompt engineers share these traits:
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization
+- **Agent Debug Panel**: `Developer: Open Agent Debug Panel` — real-time visibility into skill loading, instruction matching, hook execution, and tool calls. Use when a skill isn't activating or a hook isn't firing.
 - **Report Issues**: `Alex: Report Issue / View Diagnostics`
 
 ---

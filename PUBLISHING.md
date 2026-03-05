@@ -4,6 +4,57 @@
 
 This document contains instructions for publishing and managing the Alex Cognitive Architecture extension on the Visual Studio Code Marketplace.
 
+## Quick Reference
+
+| Task | Command | Location |
+|------|---------|----------|
+| Install locally | `npm run install:local` | `platforms/vscode-extension/` |
+| Package + Install | `npm run install:local:package` | `platforms/vscode-extension/` |
+| Quick publish | `.\publish.ps1` | `platforms/vscode-extension/` |
+| Full release | `.\release-vscode.ps1 -BumpType patch` | `scripts/` |
+
+## Scripts Overview
+
+### Local Development
+
+```powershell
+# From platforms/vscode-extension/
+npm run install:local           # Install existing .vsix
+npm run install:local:package   # Build and install
+npm run deploy:local            # Alias for install:local:package
+
+# Or directly:
+pwsh scripts/install-local.ps1 -Package -Force
+```
+
+### Quick Publish
+
+```powershell
+# From platforms/vscode-extension/
+.\publish.ps1                   # Pre-release publish
+.\publish.ps1 -Stable           # Stable publish
+.\publish.ps1 -PackageOnly      # Package only (no publish)
+```
+
+### Full Release (Recommended)
+
+```powershell
+# From repo root
+.\scripts\release-vscode.ps1 -BumpType patch       # Patch release
+.\scripts\release-vscode.ps1 -BumpType minor       # Minor release
+.\scripts\release-vscode.ps1 -BumpType major       # Major release
+.\scripts\release-vscode.ps1 -BumpType patch -DryRun  # Test run
+```
+
+The full release script:
+1. Runs preflight checks
+2. Syncs Master → Heir architecture
+3. Bumps version in package.json
+4. Updates CHANGELOG
+5. Commits and tags
+6. Pushes to remote
+7. Publishes to marketplace
+
 ## Publisher Setup
 
 ### Creating a Publisher

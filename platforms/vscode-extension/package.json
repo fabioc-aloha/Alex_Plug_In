@@ -2198,7 +2198,9 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "quality-gate": "node scripts/quality-gate.cjs",
-    "deploy:local": "npm run clean && npm run compile && node -e \"require('fs').readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>{require('fs').unlinkSync(f);console.log('Removed old '+f)})\" && npx vsce package --no-dependencies --allow-package-secrets github && node -e \"const f=require('fs').readdirSync('.').filter(x=>x.endsWith('.vsix')).sort().pop();if(f){console.log('Installing '+f);require('child_process').execSync('code --install-extension '+f+' --force',{stdio:'inherit'})}else{process.exit(1)}\"",
+    "install:local": "pwsh -ExecutionPolicy Bypass -File scripts/install-local.ps1",
+    "install:local:package": "pwsh -ExecutionPolicy Bypass -File scripts/install-local.ps1 -Package",
+    "deploy:local": "npm run install:local:package",
     "dream": "tsx ../../.github/muscles/dream-cli.ts",
     "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run quality-gate && npm run package"
   },
