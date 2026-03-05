@@ -15,7 +15,8 @@
                 "selector": "default",
                 "format": [
                     "camelCase"
-                ]
+                ],
+                "leadingUnderscore": "allow"
             },
             {
                 "selector": "variable",
@@ -23,7 +24,8 @@
                     "camelCase",
                     "UPPER_CASE",
                     "PascalCase"
-                ]
+                ],
+                "leadingUnderscore": "allow"
             },
             {
                 "selector": "parameter",
@@ -49,14 +51,26 @@
                 "format": null
             },
             {
+                "selector": "typeProperty",
+                "format": null
+            },
+            {
                 "selector": "classProperty",
+                "format": [
+                    "camelCase",
+                    "UPPER_CASE"
+                ],
+                "leadingUnderscore": "allow"
+            },
+            {
+                "selector": "classMethod",
                 "format": [
                     "camelCase"
                 ],
                 "leadingUnderscore": "allow"
             },
             {
-                "selector": "classMethod",
+                "selector": "function",
                 "format": [
                     "camelCase"
                 ],
