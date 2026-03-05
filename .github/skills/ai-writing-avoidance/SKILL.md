@@ -1,3 +1,8 @@
+---
+name: ai-writing-avoidance
+description: "Help writers produce content that sounds genuinely human by avoiding telltale AI-generated text patterns"
+---
+
 # AI Writing Avoidance
 
 **Domain**: Document quality assurance, policy writing, authentic voice preservation
