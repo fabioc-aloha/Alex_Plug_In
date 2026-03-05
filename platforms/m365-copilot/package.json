@@ -1,6 +1,6 @@
 {
   "name": "alex-m365-agent",
-  "version": "6.1.5",
+  "version": "6.1.7",
   "description": "Alex Cognitive Architecture - Take Your Work to New Heights with M365 Copilot",
   "scripts": {
     "package": "teamsapp package --env local",

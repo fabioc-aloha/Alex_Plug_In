@@ -8,7 +8,7 @@
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "extends",
-      "strength": 1,
+      "strength": 1.0,
       "description": "Builds upon generic audit checklist with Master-specific knowledge"
     },
     {
@@ -16,6 +16,12 @@
       "type": "prerequisite",
       "strength": 0.9,
       "description": "Master audit should precede any release preflight"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "bidirectional",
+      "strength": 0.85,
+      "description": "Audit verifies heir sync status, sync management implements fixes"
     },
     {
       "target": ".github/skills/architecture-health/SKILL.md",
