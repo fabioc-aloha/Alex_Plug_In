@@ -56,13 +56,22 @@ try {
         $inspectDir = Join-Path $buildDir "inspect"
         Expand-Archive -Path $basePkg.FullName -DestinationPath $inspectDir -Force
         
-        # Create final package with resolved manifest + declarativeAgent
+        # Create final package with resolved manifest + declarativeAgent + knowledge
         $finalDir = Join-Path $buildDir "final"
         New-Item -ItemType Directory -Path $finalDir -Force | Out-Null
         Copy-Item (Join-Path $inspectDir "manifest.json") $finalDir
         Copy-Item (Join-Path $appPackageDir "declarativeAgent.json") $finalDir
         Copy-Item (Join-Path $appPackageDir "color.png") $finalDir
         Copy-Item (Join-Path $appPackageDir "outline.png") $finalDir
+        
+        # Include knowledge files for EmbeddedKnowledge capability
+        $knowledgeDir = Join-Path $appPackageDir "knowledge"
+        if (Test-Path $knowledgeDir) {
+            $finalKnowledge = Join-Path $finalDir "knowledge"
+            New-Item -ItemType Directory -Path $finalKnowledge -Force | Out-Null
+            Copy-Item "$knowledgeDir\*" $finalKnowledge -Recurse
+            Write-Host "   Included knowledge files" -ForegroundColor Gray
+        }
         
         $finalPkg = Join-Path $buildDir "appPackage.final.zip"
         Compress-Archive -Path "$finalDir\*" -DestinationPath $finalPkg -Force
@@ -96,8 +105,8 @@ try {
     $verifyDir = Join-Path $buildDir "verify"
     Expand-Archive -Path $pkg.FullName -DestinationPath $verifyDir -Force
     $verifyFiles = Get-ChildItem $verifyDir
-    Write-Host "`n📋 Package contents:" -ForegroundColor Yellow
-    $verifyFiles | ForEach-Object { Write-Host "   - $($_.Name) ($([math]::Round($_.Length/1KB, 1)) KB)" -ForegroundColor Gray }
+    Write-Host "`nPackage contents:" -ForegroundColor Yellow
+    $verifyFiles | ForEach-Object { $sizeKB = [math]::Round($_.Length / 1KB, 1); Write-Host "   - $($_.Name) ($sizeKB KB)" -ForegroundColor Gray }
     
     if (-not (Test-Path (Join-Path $verifyDir "declarativeAgent.json"))) {
         throw "❌ CRITICAL: declarativeAgent.json missing from package!"

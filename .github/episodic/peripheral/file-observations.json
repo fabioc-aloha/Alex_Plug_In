@@ -1,27 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/skills/SKILLS-CATALOG.md"
+    "github/episodic/peripheral/file-observations.json",
+    "platforms/m365-copilot/appPackage/declarativeAgent.json",
+    "platforms/m365-copilot/appPackage/knowledge/alex-protocols.md",
+    "platforms/m365-copilot/appPackage/knowledge/capabilities.md",
+    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
+    "platforms/m365-copilot/appPackage/knowledge/help-commands.md",
+    "platforms/m365-copilot/appPackage/knowledge/m365-integration.md",
+    "platforms/m365-copilot/appPackage/knowledge/workflows.md",
+    "scripts/release-m365.ps1",
+    "platforms/m365-copilot/appPackage/knowledge/alex-protocols.txt"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772745064240
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1772745064240
-    },
-    {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1772745064240
+      "scannedAt": 1772745357349
     }
   ],
-  "lastUpdated": 1772745064240
+  "lastUpdated": 1772745357349
 }

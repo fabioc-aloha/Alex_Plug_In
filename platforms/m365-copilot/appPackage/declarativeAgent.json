@@ -34,22 +34,22 @@
             "name": "EmbeddedKnowledge",
             "files": [
                 {
-                    "file": "knowledge/alex-protocols.md"
+                    "file": "knowledge/alex-protocols.txt"
                 },
                 {
-                    "file": "knowledge/capabilities.md"
+                    "file": "knowledge/capabilities.txt"
                 },
                 {
-                    "file": "knowledge/constitution.md"
+                    "file": "knowledge/constitution.txt"
                 },
                 {
-                    "file": "knowledge/help-commands.md"
+                    "file": "knowledge/help-commands.txt"
                 },
                 {
-                    "file": "knowledge/m365-integration.md"
+                    "file": "knowledge/m365-integration.txt"
                 },
                 {
-                    "file": "knowledge/workflows.md"
+                    "file": "knowledge/workflows.txt"
                 }
             ]
         }
