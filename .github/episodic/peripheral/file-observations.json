@@ -2,36 +2,37 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/config/cognitive-config.json",
+    "CHANGELOG.md",
     "ROADMAP-UNIFIED.md",
-    "platforms/m365-copilot/package.json",
-    "platforms/vscode-extension/CHANGELOG.md"
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772682295804
+      "scannedAt": 1772682659066
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1772682295804
+      "scannedAt": 1772682659066
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772682295804
+      "scannedAt": 1772682659066
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772682295804
+      "scannedAt": 1772682659066
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1772682295804
+      "scannedAt": 1772682659066
     }
   ],
-  "lastUpdated": 1772682295804
+  "lastUpdated": 1772682659066
 }

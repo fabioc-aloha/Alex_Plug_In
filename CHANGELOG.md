@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.1.8] - 2026-03-05
+
+> **Doc Alignment Hotfix** — Version consistency fix post-meditation.
+
+### Fixed
+- `copilot-instructions.md` version header aligned to 6.1.8
+- `cognitive-config.json` version field updated
+- Heir CHANGELOG entry for stable release added
+- Legacy episodic file archived
+
+---
+
 ## [6.1.7] - 2026-03-05
 
 > **Stable Release** — Promoted to stable on VS Code Marketplace.
