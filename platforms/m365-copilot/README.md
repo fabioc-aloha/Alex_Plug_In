@@ -11,7 +11,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**v6.1.8**: Doc alignment hotfix.
+**v6.1.8**: EmbeddedKnowledge RAG, slimmed instructions (58% reduction), version alignment.
 
 ---
 
@@ -100,16 +100,17 @@ Alex now runs as an **Office Add-in** with a task pane UI in Word, Excel, PowerP
 
 ### What Alex Can Do (v1.6 Schema)
 
-| Capability            | Description                                             |
-| --------------------- | ------------------------------------------------------- |
-| 📖 **OneDrive**        | READ your Alex-Memory files (profile, notes, knowledge) |
-| 🔍 **WebSearch**       | Research topics online                                  |
-| 🎨 **GraphicArt**      | Generate images and diagrams                            |
-| 🐍 **CodeInterpreter** | Run Python code for calculations                        |
-| 📧 **Email**           | Search and summarize Outlook conversations              |
-| 💬 **Teams**           | Find discussions across channels and chats              |
-| 👥 **People**          | Look up colleagues and org structure                    |
-| 📅 **Meetings**        | Meeting prep and calendar awareness                     |
+| Capability               | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| 📖 **OneDrive**           | READ your Alex-Memory files (profile, notes, knowledge) |
+| 🔍 **WebSearch**          | Research topics online                                  |
+| 🎨 **GraphicArt**         | Generate images and diagrams                            |
+| 🐍 **CodeInterpreter**    | Run Python code for calculations                        |
+| 📧 **Email**              | Search and summarize Outlook conversations              |
+| 💬 **Teams**              | Find discussions across channels and chats              |
+| 👥 **People**             | Look up colleagues and org structure                    |
+| 📅 **Meetings**           | Meeting prep and calendar awareness                     |
+| 📚 **EmbeddedKnowledge**  | RAG over 6 bundled knowledge files (protocols, skills, workflows) |
 
 ### Memory Workflow
 
@@ -147,7 +148,7 @@ m365-copilot/
 └── package.json
 ```
 
-> **📚 EmbeddedKnowledge Ready**: The `knowledge/` folder contains pre-prepared files for Microsoft's upcoming EmbeddedKnowledge capability. When the feature launches, Alex will have zero-delay adoption!
+> **📚 EmbeddedKnowledge Active**: The `knowledge/` folder is declared as an `EmbeddedKnowledge` capability in `declarativeAgent.json`. M365 Copilot performs RAG retrieval over these 6 files at query time — Alex's detailed workflows, protocols, and skills live here instead of being crammed into the instructions string.
 
 ## Prerequisites
 
@@ -221,16 +222,17 @@ Or sideload manually:
 
 ## M365 Capabilities (v1.6 Schema)
 
-| Capability              | What Alex Does With It        |
-| ----------------------- | ----------------------------- |
-| `OneDriveAndSharePoint` | Read your memory files        |
-| `WebSearch`             | Research topics online        |
-| `GraphicArt`            | Generate images               |
-| `CodeInterpreter`       | Run Python code               |
-| `Email`                 | Search Outlook conversations  |
-| `TeamsMessages`         | Find channel/chat discussions |
-| `People`                | Look up colleagues            |
-| `Meetings`              | Calendar and meeting prep     |
+| Capability              | What Alex Does With It                                         |
+| ----------------------- | -------------------------------------------------------------- |
+| `OneDriveAndSharePoint` | Read your memory files (profile, notes, knowledge)             |
+| `WebSearch`             | Research topics online                                         |
+| `GraphicArt`            | Generate images and visualizations                             |
+| `CodeInterpreter`       | Run Python code for analysis, charts, file generation          |
+| `Email`                 | Search Outlook conversations, surface action items             |
+| `TeamsMessages`         | Find channel/chat discussions and context                      |
+| `People`                | Look up colleagues, org structure, relationships               |
+| `Meetings`              | Calendar awareness, meeting prep, workload check               |
+| `EmbeddedKnowledge`     | RAG over 6 bundled knowledge files (protocols, skills, workflows) |
 
 ## Conversation Starters
 
@@ -279,7 +281,7 @@ This creates **additional deployment options** for Alex M365:
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'edgeLabelBackground': '#fff'}}}%%
 flowchart TB
     subgraph Master["🧠 MASTER ALEX"]
-        DNA["Cognitive DNA<br/>100+ Skills, Protocols, Identity"]
+        DNA["Cognitive DNA<br/>Skills, Protocols, Identity"]
     end
 
     subgraph VSCode["👶 VS Code Heir"]
@@ -464,6 +466,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.1.8 | 128 Skills | The Partnership Release
+**Alex M365** - v6.1.8 | EmbeddedKnowledge RAG | The Partnership Release
 
 (C) 2026 CorreaX - AI That Learns How to Learn
