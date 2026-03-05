@@ -2,38 +2,9 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md",
-    "platforms/m365-copilot/README.md",
-    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
-    "platforms/m365-copilot/appPackage/knowledge/help-commands.md",
-    "platforms/m365-copilot/package.json"
+    "platforms/agent-plugin/sync-plugin.ps1",
+    "alex_docs/research/AI-WRITING-TELLS.md"
   ],
-  "todoHotspots": [
-    {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772682903623
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1772682903623
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1772682903623
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1772682903623
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772682903623
-    }
-  ],
-  "lastUpdated": 1772682903623
+  "todoHotspots": [],
+  "lastUpdated": 1772738721713
 }

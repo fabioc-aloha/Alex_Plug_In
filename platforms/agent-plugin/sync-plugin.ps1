@@ -13,7 +13,8 @@
 #>
 
 param(
-    [switch]$DryRun
+    [switch]$DryRun,
+    [string]$DistroRepo = "C:\Development\AlexAgent"
 )
 
 $ErrorActionPreference = 'Stop'
@@ -311,3 +312,38 @@ Write-Host "   Agents:       $agentCount" -ForegroundColor DarkGray
 Write-Host "   Skills:       $skillCount" -ForegroundColor DarkGray
 Write-Host "   Instructions: $instrCount" -ForegroundColor DarkGray
 Write-Host "   Prompts:      $promptCount`n" -ForegroundColor DarkGray
+
+# ── Publish to AlexAgent distribution repo ──
+if (Test-Path $DistroRepo) {
+    Write-Host "[PUBLISH] Syncing to AlexAgent distribution repo" -ForegroundColor Green
+    Write-Host "   Target: $DistroRepo" -ForegroundColor DarkGray
+
+    $distroPlugin = Join-Path $DistroRepo "plugin"
+
+    if ($DryRun) {
+        Write-Step "[DRY RUN] Would copy plugin/ to $distroPlugin"
+    } else {
+        if (Test-Path $distroPlugin) {
+            Remove-Item $distroPlugin -Recurse -Force
+        }
+        Copy-Item $pluginDir $distroPlugin -Recurse -Force
+
+        $distroFiles = (Get-ChildItem $distroPlugin -Recurse -File).Count
+        Write-Step "Copied $distroFiles files to AlexAgent repo"
+
+        # Show changes
+        Push-Location $DistroRepo
+        $status = git status --short
+        if ($status) {
+            $changed = ($status | Measure-Object).Count
+            Write-Step "$changed file(s) changed — commit and push when ready"
+        } else {
+            Write-Step "No changes — already in sync"
+        }
+        Pop-Location
+    }
+    Write-Host ""
+} else {
+    Write-Host "`n[SKIP] AlexAgent repo not found at $DistroRepo — use -DistroRepo to specify path" -ForegroundColor DarkGray
+    Write-Host ""
+}
