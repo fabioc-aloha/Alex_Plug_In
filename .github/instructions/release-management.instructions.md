@@ -173,6 +173,11 @@ These MUST be verified before releasing:
 | No lint errors | *.md | `get_errors` tool |
 | Temporary skills handled | .github/skills/*/synapses.json | See below |
 
+**PowerShell replacement pitfall**:
+- When using `-replace` with backreferences like `$1` and appending a version string, do not concatenate naively if the version starts with a digit.
+- Prefer `${1}${version}`, a replacement callback, or `'{0}{1}' -f $matches[1], $version` style construction.
+- Example failure: `'$1' + $version` can become ambiguous and produce malformed version updates.
+
 ---
 
 ## Definition of Done Verification

@@ -63,7 +63,7 @@ node --version  # Should be v18+ recommended
 ```
 
 ### 3. NO npm Install Needed!
-The `gamma-generator.js` muscle uses only native Node.js modules (fs, path, https).
+The `gamma-generator.cjs` muscle uses only native Node.js modules (fs, path, https).
 No `npm install` required.
 
 ### 4. Set Environment Variable
@@ -125,15 +125,16 @@ or
 
 ```bash
 # Simple topic
-node .github/muscles/gamma-generator.js --topic "AI Ethics" --export pptx --open
+node .github/muscles/gamma-generator.cjs --topic "AI Ethics" --export pptx --open --slides 10 --dimensions 16x9
 
 # From markdown file
-node .github/muscles/gamma-generator.js --file ./my-content.md --export pptx --open
+node .github/muscles/gamma-generator.cjs --file ./my-content.md --export pptx --open --slides 10 --dimensions 16x9
 
 # Advanced customization
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --topic "Q4 Results" \
   --slides 15 \
+  --dimensions 16x9 \
   --tone "professional, confident" \
   --audience "executives" \
   --image-model flux-pro \
@@ -242,14 +243,16 @@ node .github/muscles/gamma-generator.js \
 
 ```bash
 # Step 1: Generate draft markdown
-node .github/muscles/gamma-generator.js --topic "My Topic" --draft
+node .github/muscles/gamma-generator.cjs --topic "My Topic" --draft
 
 # Step 2: Edit the generated markdown file
 # Opens: ./exports/my-topic-draft.md
 
 # Step 3: Generate from edited file
-node .github/muscles/gamma-generator.js --file ./exports/my-topic-draft.md --export pptx --open
+node .github/muscles/gamma-generator.cjs --file ./exports/my-topic-draft.md --export pptx --open --slides 12 --dimensions 16x9
 ```
+
+For file-based presentations, always pass `--slides` and `--dimensions 16x9`. Gamma auto-split is not reliable if you need one section per slide.
 
 ---
 
@@ -276,7 +279,7 @@ Fix: Increase timeout with --timeout 300000 (5 min)
 Tip: Reduce numCards or use simpler image model
 ```
 
-### "gamma-generator.js not found"
+### "gamma-generator.cjs not found"
 ```
 Cause: Alex architecture not initialized in workspace
 Fix: Run "Alex: Initialize Architecture" command
@@ -342,7 +345,7 @@ Gamma provides a **hosted MCP server** called "Gamma Connector" for Claude and o
 3. Click Connect → Allow access to your Gamma account
 
 ### Note for VS Code/Copilot
-Gamma's MCP is **hosted** (not local like Replicate). It requires OAuth connection through Claude's connector system. For VS Code, use the `gamma-generator.js` script directly instead.
+Gamma's MCP is **hosted** (not local like Replicate). It requires OAuth connection through Claude's connector system. For VS Code, use the `gamma-generator.cjs` script directly instead.
 
 ---
 

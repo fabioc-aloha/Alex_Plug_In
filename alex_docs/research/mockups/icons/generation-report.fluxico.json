@@ -1,0 +1,219 @@
+{
+  "generatedAt": "2026-03-06T05:38:27.464Z",
+  "startedAt": "2026-03-06T05:36:49.790Z",
+  "profile": "fluxico",
+  "model": "miike-ai/flux-ico:478cae37f1aec0fde7977fdd54b272aaeabede7d8060801841920c16306369a9",
+  "assetCount": 22,
+  "estimatedCostUsd": 0.29,
+  "delayMs": 1000,
+  "dryRun": false,
+  "force": true,
+  "onlyGroups": [
+    "tabs"
+  ],
+  "summary": {
+    "success": 22,
+    "failed": 0,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-a.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: a simple dashboard panel with exactly three stacked status bars of descending length. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/B0V3HkQLz4pVHpBoJ7yTpJmxymB6tU8bV0pbQNlTWze6zAHLA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-b.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: a clean telemetry dial with one circular center point and one straight needle. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/eeaKb1jIGJrAjk98dYXnlGzf4zMlAFJj7LEXbK0BgXY0PDcsA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-c.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: a single monitoring waveform crossing a compact dashboard strip from left to right. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/e08SZ9Yij9zjfU8QP4oTqIb0pyfUedzXz8nnD3Pwuq74fMwxC/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-a.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: single friendly specialist silhouette. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/080goQCq9QofJCJKU2G6oTE1QxluXeCt4BaHFzsGznQCoBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-b.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: small coordinated team cluster. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ef6qqMsezxYbWJPZtkxJhprYXZyB3glFWKHoTw7Yl3aMQDcsA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-c.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: networked nodes forming an agent triangle. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/B5MXGxVTzw7QOJNDLiadP7WiPo7WcFdoPIQ4GStxeeOLoBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-a.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: modular capability grid. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tZojqduVizrAE9W3fBsWeRfEqirua2etrXPWAJsdieS7BNwxC/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-b.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: spark-shaped capability shard. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/0vtYjdanvqboDxA3pHg3i5MYfDFpMlftx5mkzmkphx9ToBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-c.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: curated star module cluster. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ePtoHHj68fkylUZydJGtWJnPw9k0SM3npL0bNpw4d73XoBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-a.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: layered neural symmetry. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/7waNXTpepoQyHaHNtuNaZeFyFMpfvvJbdmlzzXbU2624QDcsA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-b.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: orbital cognition rings around a core. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/LLnGT5tnfmXDRKvYzdgvn42HVB6mOCh5tyCiUKAm5lHQ0AHLA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-c.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: focus target with nested awareness. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/DgxSyYC2GfUpOSvqGB47cnlL1EskrCQEonEsYeWTsOakoBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-d.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: connected neural arc with synapse nodes. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Sb1rUti0ceRHaCtV5BZfFgOgHkRi9mfpPvpGW4ZYwKURRDcsA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-e.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: perception eye fused with cognition core. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/xu85tSReyB1XEyELQpbJLpffftk9mK4e6d1BztkT6NkgFNwxC/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "f",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-f.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: clustered neuron constellation. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ul3OhfkY8aTRAihuSHDGWvjPY3RDKz87de2wX9k5yZWxoBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "g",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-g.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: structured reasoning ladder inside a mind shape. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/heODqNwqfokDkEs0n8f8zPxjY2sPeGnte3NyNIbvrVupGNwxC/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "h",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-h.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: wave-based thought field. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Gaw4JugG8bZmHNYILzOqTtaZPwR4x4cDOafqo7vozp3c0AHLA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "i",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-i.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: faceted prism for reflective intelligence. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/lffc2nffWwx6zSsE1vNujbW842PmfExQOVZXxjxghqatHNwxC/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "j",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-j.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: star-core insight emblem. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/mr4d8qZJLnp2D5khcYUpFRhsnGSRXOwU0qFFXdIgNNdQagjF/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-a.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: clean document sheet. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/iN8SEduwr5LUDtpR2WMzLvm3fER1MbFTRkHXo5gxPvsj0AHLA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-b.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: open reference book. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ezd4gysreCuKZU7LjyvZUQCgSzE8cY7AP24EsGiCGYnPpBOWA/out-0.png",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-c.png",
+      "prompt": "ICO Create a production-ready tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: bookmark archive glyph. Visual style: Command Center sidebar tab icon, minimal UI pictogram, clean geometric vector icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Deliver a flat PNG concept image for icon review; this is concept art, not final SVG. - Square 1:1 composition, centered icon, transparent or plain light background, size 1024x1024. - Bold, simple geometry readable at 16px to 24px. - Use only basic geometric primitives: circles, straight lines, rectangles, arcs, and simple polygons. - Modern product-icon feel with intentional depth, but no raster texture unless required by the model. - The result must read like a software UI icon, not an illustration, poster, tattoo, crest, sigil, totem, ornament, or tribal motif. - No decorative flourishes, no filigree, no glyph-like calligraphy, no mystical symbolism, no aggressive patterning. - One primary symbol only, with a clear silhouette and controlled negative space. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Prefer flat icon semantics over expressive art direction. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/zfqLkWcM5JQZCyyNErLbq9pYSf5xCL5YXLbtXYmBaJFTpBOWA/out-0.png",
+      "status": "success"
+    }
+  ]
+}

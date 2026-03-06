@@ -12,9 +12,22 @@ applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
 
 | Level | Brand | Symbol | Usage |
 |-------|-------|--------|-------|
-| **Parent** | CorreaX | C split X mark | Footer attribution, legal |
-| **Product** | Alex | A Negative Space Rocket | All Alex-specific assets |
-| **Platform** | Per-heir | Logo variants | VS Code, M365, GitHub |
+| **Company** | CorreaX | CorreaX wordmark + CX geometric mark | Company identity, footer attribution, legal, publisher-level brand |
+| **Product family** | Alex | Alex product marks and product-brand messaging | Collection of Alex projects and products |
+| **Product / platform** | Per-heir Alex product | Logo variants by product context | VS Code extension, M365 agent, plugin, websites |
+| **UI surface** | Command Center and other Alex UIs | In-product icons, badges, tabs, avatars | Interface-level expression inside a product |
+
+### Hierarchy rule
+
+- CorreaX and CX logos represent the company brand.
+- Alex represents the product brand spanning multiple projects and products.
+- Command Center is one of several Alex UI surfaces, not a separate brand.
+
+### Reference rule
+
+- Use **LearnAlex** as the strongest reference for website-level on-brand UI within the CorreaX and Alex ecosystem.
+- Use sibling repos such as AlexAgent as examples of **Alex product branding**, not necessarily as the canonical source for full UI treatment.
+- When designing Command Center, translate the LearnAlex tone and token discipline into a denser, utility-first sidebar surface instead of copying website chrome literally.
 
 ## Core Brand Elements
 
@@ -30,7 +43,7 @@ applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
 The Alex logo system and marketplace/banner branding are **not** the default style for Command Center UI micro-assets.
 
 - For extension-local tab icons, state avatars, persona icons, agent icons, and badges, use the CorreaX UI asset rules in `alex_docs/DK-correax-brand.md`.
-- Treat the rocket metaphor and azure/orange pair as product-brand assets, not the everyday visual language for sidebar micro-icons.
+- Treat company marks as company-brand assets and Alex hero marks as product-brand assets, not the everyday visual language for sidebar micro-icons.
 - In-product assets must optimize for semantic clarity at 16px to 24px, with state and function taking priority over logo resemblance.
 
 ### Website Palette (alex.correax.com)

@@ -780,14 +780,14 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
         
         // Check if script exists
         try {
           await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
         } catch {
           vscode.window.showErrorMessage(
-            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+            "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
           endLog(false);
           return;
@@ -887,14 +887,14 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
         
         // Check if script exists
         try {
           await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
         } catch {
           vscode.window.showErrorMessage(
-            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+            "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
           endLog(false);
           return;
@@ -977,14 +977,14 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.js");
+        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
         
         // Check if script exists
         try {
           await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
         } catch {
           vscode.window.showErrorMessage(
-            "gamma-generator.js not found. Please ensure Alex architecture is initialized."
+            "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
           endLog(false);
           return;

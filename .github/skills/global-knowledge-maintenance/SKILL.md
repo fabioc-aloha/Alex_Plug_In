@@ -1,7 +1,7 @@
 ---
 name: global-knowledge-maintenance
 description: Curate and maintain Global Knowledge repository — audit index integrity, convert heir contributions to insights, and archive outdated patterns
-user-invokable: true
+user-invocable: true
 ---
 
 # Global Knowledge Maintenance
@@ -46,11 +46,12 @@ This skill provides systematic curation to keep Global Knowledge valuable and ac
 
 ### 1. Index Integrity Audit
 
-**Script**: `Alex-Global-Knowledge/scripts/sync-index.ps1`
+**Script**: `~/.alex/global-knowledge/scripts/sync-index.ps1`
 
 **Actions**:
 ```powershell
-cd ~/Alex-Global-Knowledge  # Or C:\Development\Alex-Global-Knowledge
+cd ~/.alex/global-knowledge  # Preferred canonical checkout
+# Or use a sibling dev clone only if you intentionally keep one
 .\scripts\sync-index.ps1      # Report only
 .\scripts\sync-index.ps1 -Fix # Auto-fix
 ```
@@ -186,7 +187,7 @@ Final State:
 
 ## Resources
 
-- Script: [sync-index.ps1](../../scripts/sync-index.ps1) (in Alex-Global-Knowledge)
+- Script: `~/.alex/global-knowledge/scripts/sync-index.ps1`
 - Instructions: [global-knowledge-curation.instructions.md](../../instructions/global-knowledge-curation.instructions.md)
 - Brain QA Phase 29: Global Knowledge Sync Validation
 

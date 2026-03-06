@@ -36,14 +36,14 @@ The Command Center will be built as a **staged UI refactor**, not as a single fu
 
 - The first implementation milestone is **not** a full gut-and-replace.
 - SVG avatar migration is treated as a **blocking technical spike**, not an assumed foundation.
-- The first real milestone focuses on **Mission Control + Docs** because they are highest value and lowest architectural risk.
+- The first real milestone focuses on **Mission Command + Docs** because they are highest value and lowest architectural risk.
 - The Agents, Skill Store, and Mind tabs remain part of the design target, but their richer behavior is deferred until their data contracts are explicit.
-- The Docs tab is framed as **curated AlexLearn alignment**, not a full mirror of the website.
+- The Docs tab is framed as **the bridge to LearnAlex as a companion surface**, using curated AlexLearn alignment rather than a full mirror of the website.
 
 ### What stays the same
 
 - Final tab architecture remains:
-  - Mission Ctrl
+  - Mission Command
   - Agents
   - Skill Store
   - Mind
@@ -93,11 +93,11 @@ This section embeds the key artifacts from the feasibility report so this master
 
 | # | Tab | Purpose | First-wave Status |
 |---|-----|---------|-------------------|
-| 1 | Mission Ctrl | Operational dashboard: status, nudges, commands, settings, actions | Build in early wave |
+| 1 | Mission Command | Operational dashboard: status, nudges, commands, settings, actions | Build in early wave |
 | 2 | Agents | Agent management: registry, status, threads, routing context | Deferred to contract-backed wave |
 | 3 | Skill Store | Skill catalog: browse, toggle, search, organization | Deferred to contract-backed wave |
 | 4 | Mind | Cognitive architecture: health, memory, uncertainty, meditation | Reduced scope until runtime model is explicit |
-| 5 | Docs | Onboarding, study guides, self-study, facilitator resources, local docs | Build in early wave |
+| 5 | Docs | Onboarding, study guides, self-study, facilitator resources, local docs, and LearnAlex bridge | Build in early wave |
 
 ### Approved Mockup Inventory
 
@@ -105,7 +105,7 @@ These are the visual source-of-truth artifacts for the UI direction.
 
 | File | Tab | Dimensions | Notes |
 |------|-----|------------|-------|
-| `mockups/command-center-v2-mission-control.svg` | Mission Ctrl | 560x800 | Operational dashboard layout |
+| `mockups/command-center-v2-mission-control.svg` | Mission Command | 560x800 | Operational dashboard layout |
 | `mockups/command-center-v2-agent-hub.svg` | Agents | 560x870 | Agent registry and thread concepts |
 | `mockups/command-center-v2-skill-store.svg` | Skill Store | 560x812 | Skill browsing and toggles |
 | `mockups/command-center-v2-mind.svg` | Mind | 560x960 | Cognitive architecture dashboard |
@@ -130,7 +130,7 @@ The icon-design artifacts are already generated and should be treated as design 
 
 | Category | Count | Notes |
 |----------|-------|-------|
-| Tab bar icons | 5 | Mission Ctrl, Agents, Skill Store, Mind, Docs |
+| Tab bar icons | 5 | Mission Command, Agents, Skill Store, Mind, Docs |
 | Cognitive state icons | 9 | building, debugging, planning, reviewing, learning, teaching, meditation, dream, discovery |
 | Agent mode icons | 7 | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
 | Persona category icons | 16 | Mapped to the 33 AlexLearn workshop personas |
@@ -144,7 +144,7 @@ The icon-design artifacts are already generated and should be treated as design 
 | Main interaction model | Single long scroll | Tabbed navigation |
 | Welcome surface | Mixed operational + identity + docs content | Focused per-tab information architecture |
 | Docs discovery | Scattered commands and links | Dedicated Docs tab |
-| Learning portal alignment | Indirect | Direct AlexLearn surfacing |
+| Learning portal alignment | Indirect | Direct LearnAlex companion-surface bridge |
 | Avatar system | 112 PNG/WebP assets | SVG-first or hybrid strategy after spike |
 
 ### Embedded Docs Artifact Summary
@@ -161,6 +161,16 @@ The Docs tab content model from the feasibility report is preserved here as the 
 - Learn Alex Online CTA
 - Partnership guide
 
+**Product relationship:**
+- LearnAlex is the companion web surface for the Alex VS Code extension
+- The Docs tab is the intentional bridge between the extension and that companion surface
+- The tab should route users into LearnAlex's strongest pathways while also surfacing local extension documentation
+
+**Alignment rule:**
+- LearnAlex personas and targeted use cases are the source of truth for the new Docs-tab persona grid
+- Persona categories used in icons, badges, and companion-facing UI should stay aligned to that LearnAlex taxonomy
+- The extension should not create a parallel persona vocabulary for the new UI when a LearnAlex equivalent already exists
+
 **AlexLearn-aligned primary surfaces:**
 - `/setup-guide`
 - `/self-study`
@@ -174,11 +184,11 @@ The Docs tab content model from the feasibility report is preserved here as the 
 - `/responsible-ai`
 - `/workshop/{persona}` for 33 personas
 
-### Embedded Mission Ctrl Artifact Summary
+### Embedded Mission Command Artifact Summary
 
-The Mission Ctrl layout target from the feasibility report is preserved here as a design target, but implementation must respect the UI-first constraints of this master plan.
+The Mission Command layout target from the feasibility report is preserved here as a design target, but implementation must respect the UI-first constraints of this master plan.
 
-**Mission Ctrl candidate cards from the design target:**
+**Mission Command candidate cards from the design target:**
 - Architecture Status Banner
 - Smart Nudges
 - Quick Command Bar
@@ -248,7 +258,7 @@ This prevents hidden data work from being disguised as presentation work.
 
 ### 5. Curate, Don’t Mirror
 
-The Docs tab should surface the strongest AlexLearn pathways, not duplicate the full website.
+The Docs tab should surface the strongest LearnAlex companion pathways, not duplicate the full website.
 
 ---
 
@@ -257,7 +267,7 @@ The Docs tab should surface the strongest AlexLearn pathways, not duplicate the 
 ### In Scope for the UI-first master plan
 
 - tabbed Command Center shell inside the existing welcome view surface
-- Mission Control visual layout
+- Mission Command visual layout
 - Docs tab aligned to AlexLearn's primary learning surfaces
 - approved icon system as design source of truth
 - keyboard-first tab navigation requirements
@@ -280,7 +290,7 @@ The Docs tab should surface the strongest AlexLearn pathways, not duplicate the 
 
 The final Command Center is a single sidebar surface with five tabs:
 
-1. **Mission Ctrl** — status, nudges, commands, settings, actions
+1. **Mission Command** — status, nudges, commands, settings, actions
 2. **Agents** — agent registry, state, threads, routing context
 3. **Skill Store** — skill catalog, toggles, search, organization
 4. **Mind** — architecture, health, memory, uncertainty, meditation
@@ -291,7 +301,7 @@ The final Command Center is a single sidebar surface with five tabs:
 The first meaningful release is smaller:
 
 1. Tab shell working inside the existing welcome view
-2. Mission Ctrl tab implemented with current runtime data
+2. Mission Command tab implemented with current runtime data
 3. Docs tab implemented with AlexLearn-aligned content and local-doc entry points
 4. Remaining tabs present as structured placeholders or reduced-scope surfaces
 5. Existing avatar path still allowed if SVG migration is not yet proven
@@ -334,7 +344,7 @@ This tracker is the execution checklist for the UI-first rollout. Use it for seq
 | 4 | Contract triage complete | Status, context-budget, recently-used, and Mind-model work is split into existing, derived, and new data | 2, 3 | Planned |
 | 5 | Shell shipped | Stable tab bar, tab switching, empty states, and view-state restoration exist in-product | 3, 4 | Planned |
 | 6 | Docs tab shipped | AlexLearn-aligned learning pathways and local-doc entry points are usable in the shell | 5 | Planned |
-| 7 | Mission Ctrl shipped | Operational dashboard replaces the current welcome-view core value with trustworthy data only | 5, 4 | Planned |
+| 7 | Mission Command shipped | Operational dashboard replaces the current welcome-view core value with trustworthy data only | 5, 4 | Planned |
 | 8 | Consolidation approved | Redundant sidebar surfaces can be removed without regressing normal workflows | 6, 7 | Planned |
 | 9 | Advanced tabs expanded | Agents, Skill Store, and Mind move beyond placeholder or reduced-scope states on explicit contracts | 8 | Planned |
 
@@ -458,7 +468,7 @@ The Docs tab is **curated AlexLearn alignment**, not a complete copy of learnale
 
 ---
 
-## Wave 4 - Mission Ctrl (First Operational Tab)
+## Wave 4 - Mission Command (First Operational Tab)
 
 **Goal**: Deliver the main operational dashboard using current runtime data.
 
@@ -477,14 +487,14 @@ The Docs tab is **curated AlexLearn alignment**, not a complete copy of learnale
 
 ### Data policy
 
-Every Mission Ctrl card must be tagged internally as:
+Every Mission Command card must be tagged internally as:
 - existing data
 - derived data
 - deferred because it needs new tracking
 
 ### Exit Criteria
 
-- Mission Ctrl is immediately more useful than the current welcome view
+- Mission Command is immediately more useful than the current welcome view
 - no card depends on invented or misleading data
 
 ---
@@ -606,10 +616,10 @@ This register tracks the execution risks that can materially delay, derail, or d
 |----|------|-------------|--------|-------------------------|----------|-------|--------|
 | R1 | SVG avatar path proves awkward or brittle across chat participant and webview surfaces | High | High | SVG works inconsistently, adds update friction, or complicates runtime asset handling | Run the avatar spike first; choose full SVG, hybrid, or compact PNG fallback based on evidence | UI + runtime spike owner | Open |
 | R2 | Hidden backend or contract work is mistaken for simple UI work | High | High | A tab design depends on undefined status semantics, new telemetry, or unclear persistence behavior | Classify every card as existing, derived, or new data before implementation; defer contract-heavy elements | Feature lead | Open |
-| R3 | Sidebar density collapses usability at 300px width | Medium | High | Tabs require long-scroll browsing, cards feel cramped, or primary actions disappear below the fold | Prioritize Docs and Mission Ctrl first; reduce default density; push overflow into lower disclosure levels | UX lead | Open |
+| R3 | Sidebar density collapses usability at 300px width | Medium | High | Tabs require long-scroll browsing, cards feel cramped, or primary actions disappear below the fold | Prioritize Docs and Mission Command first; reduce default density; push overflow into lower disclosure levels | UX lead | Open |
 | R4 | Plan drift reappears through stale counts, renamed concepts, or conflicting docs | Medium | Medium | Milestones, tab names, or artifact counts diverge across planning docs | Keep this master plan as the execution source of truth and treat feasibility/design docs as supporting rationale only | Planning owner | Open |
 | R5 | Command migration or sidebar consolidation breaks user expectations | Medium | High | Existing commands lose discoverability, old views disappear too early, or replacement flows feel incomplete | Delay redirects and removals until replacement behavior is stable and tested in normal workflows | Extension owner | Open |
-| R6 | Mission Ctrl shows untrustworthy or misleading operational data | Medium | High | Cards rely on guessed values, stale status, or mixed live and conceptual data | Gate Mission Ctrl cards behind explicit data classification and remove any card that cannot defend its source | Runtime contract owner | Open |
+| R6 | Mission Command shows untrustworthy or misleading operational data | Medium | High | Cards rely on guessed values, stale status, or mixed live and conceptual data | Gate Mission Command cards behind explicit data classification and remove any card that cannot defend its source | Runtime contract owner | Open |
 | R7 | Mind tab overpromises introspection that the runtime model cannot yet support | Medium | High | Mockup concepts outpace actual measurable architecture data or blur conceptual vs live signals | Keep Mind reduced-scope until model contracts are explicit; separate narrated architecture from measured runtime state | Cognitive model owner | Open |
 | R8 | Recently-used and personalization features ship without a stable persistence model | Medium | Medium | Quick Actions or recent sections behave inconsistently across workspace or machine boundaries | Define persistence scope before adaptive UX ships; implement tracking before dependent features go live | Personalization owner | Open |
 
@@ -643,7 +653,7 @@ This register tracks the execution risks that can materially delay, derail, or d
 - local docs grouped clearly
 - no false "site mirror" obligation encoded
 
-### Milestone D - Mission Ctrl complete
+### Milestone D - Mission Command complete
 
 - status and actions are clearer than the current welcome view
 - only trustworthy data is shown
@@ -661,7 +671,7 @@ This is intentionally conservative.
 | Candidate | Scope |
 |----------|-------|
 | v6.x planning cycle | master plan, spikes, shell groundwork |
-| v6.x UI milestone | shell + Docs + Mission Ctrl |
+| v6.x UI milestone | shell + Docs + Mission Command |
 | v6.x consolidation milestone | sidebar simplification after proof |
 | v7.x advanced milestone | richer Agents / Skill Store / Mind once contracts are real |
 
@@ -675,7 +685,7 @@ This avoids tying the entire concept to one large release jump.
 
 - tab shell
 - Docs tab
-- Mission Ctrl tab
+- Mission Command tab
 - keyboard-first interaction
 - empty states
 - curated AlexLearn integration
@@ -713,7 +723,7 @@ These are the non-negotiables for UI-first delivery.
 2. Do not treat SVG as an architectural dependency until the avatar spike is complete.
 3. Do not present speculative telemetry as if it were live runtime data.
 4. Do not build Agents, Skill Store, or Mind beyond reduced-scope states without explicit contracts.
-5. Do not let icon approvals or visual polish block shell, Docs, or Mission Ctrl delivery.
+5. Do not let icon approvals or visual polish block shell, Docs, or Mission Command delivery.
 6. Do not frame Docs as a full Learn Alex mirror; keep it curated and sidebar-appropriate.
 7. Do not remove keyboard-first behavior during the refactor; tab navigation and command access must stay fast.
 8. Do not mix existing data, derived data, and not-yet-instrumented data in one card without clear internal classification.

@@ -168,7 +168,12 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ```
 ERROR  Failed request: (401)
 ```
-→ **Solution**: Your PAT expired or is invalid. Create a new one and retry.
+→ **Solution**: Your PAT expired, is invalid, was created in the wrong Azure DevOps organization, or is missing `Marketplace (Manage)`. Create a fresh token in the publisher's Azure DevOps org or use `All accessible organizations`, then retry.
+
+**Important nuance**:
+- A PAT can appear valid for login checks and still fail `vsce publish` with 401.
+- The publisher is tied to a specific Azure DevOps organization, so organization mismatch is a real failure mode.
+- Treat 401 as: token expired OR wrong org OR missing Marketplace scope, not just "bad token".
 
 **Security Note**: 
 - Never commit PAT token to repository

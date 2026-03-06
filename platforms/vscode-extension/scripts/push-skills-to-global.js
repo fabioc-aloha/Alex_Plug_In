@@ -14,6 +14,7 @@
  */
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { execSync } = require('child_process');
 
@@ -23,8 +24,12 @@ const HEIR_ROOT = path.resolve(SCRIPT_DIR, '..');
 const MASTER_ROOT = path.resolve(HEIR_ROOT, '..', '..');
 const MASTER_SKILLS = path.join(MASTER_ROOT, '.github', 'skills');
 
-// Global Knowledge paths (sibling repo)
-const GK_ROOT = path.resolve(MASTER_ROOT, '..', 'Alex-Global-Knowledge');
+// Global Knowledge paths
+const GK_CANDIDATES = [
+    path.join(os.homedir(), '.alex', 'global-knowledge'),
+    path.resolve(MASTER_ROOT, '..', 'Alex-Global-Knowledge')
+];
+const GK_ROOT = GK_CANDIDATES.find(candidate => fs.existsSync(candidate)) || GK_CANDIDATES[0];
 const GK_SKILLS_DIR = path.join(GK_ROOT, 'skills');
 const GK_REGISTRY = path.join(GK_SKILLS_DIR, 'skill-registry.json');
 
@@ -94,9 +99,13 @@ function main() {
     // Verify GK repo exists
     if (!fs.existsSync(GK_ROOT)) {
         console.error(`❌ Global Knowledge repo not found at: ${GK_ROOT}`);
-        console.error('   Clone it: git clone https://github.com/fabioc-aloha/Alex-Global-Knowledge.git');
+        console.error(`   Expected one of:`);
+        GK_CANDIDATES.forEach(candidate => console.error(`   - ${candidate}`));
+        console.error('   Clone it locally or run Alex: Initialize to create the home-directory repo.');
         process.exit(1);
     }
+
+    console.log(`📍 Using Global Knowledge repo: ${GK_ROOT}\n`);
     
     // Ensure skills directory exists in GK
     if (!fs.existsSync(GK_SKILLS_DIR)) {

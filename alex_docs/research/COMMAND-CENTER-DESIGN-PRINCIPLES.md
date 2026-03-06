@@ -4,17 +4,19 @@
 **Status**: Consolidated insights for implementation guidance, polished after second-opinion audit
 **Session**: 5-tab iterative design review with per-tab approval cycle
 
+**Brand context**: CorreaX is the company brand, Alex is the product-family brand, and Command Center is one Alex UI surface inside the VS Code extension. LearnAlex is the best current reference for website-level on-brand UI in this ecosystem and acts as the extension's companion learning surface.
+
 ---
 
 ## Final Tab Architecture
 
 | # | Tab | Purpose | Approval |
 |---|-----|---------|----------|
-| 1 | Mission Ctrl | Operational dashboard — status, commands, nudges, secrets, settings | ✅ |
+| 1 | Mission Command | Operational dashboard — status, commands, nudges, secrets, settings | ✅ |
 | 2 | Agents | Agent management — cognitive state, parallel agents, registry, threads | ✅ |
 | 3 | Skill Store | Skill catalog — browse, toggle, search, 3-tier organization | ✅ |
 | 4 | Mind | Cognitive introspection — brain health, memory, age, uncertainty, meditation | ✅ |
-| 5 | Docs | Documentation hub — nudges, local guides, architecture, learnalex.correax.com | ✅ |
+| 5 | Docs | Documentation hub and LearnAlex bridge — nudges, local guides, architecture, companion-site pathways | ✅ |
 
 ---
 
@@ -24,7 +26,7 @@
 
 The 300px sidebar constraint is a design *advantage*. Every element must justify its space. If it doesn't serve the user's immediate intent, it belongs on a deeper tab or behind a search.
 
-**Rule**: No decorative-only elements on the Mission Control tab. Every pixel must inform or activate.
+**Rule**: No decorative-only elements on the Mission Command tab. Every pixel must inform or activate.
 
 ### 2. Data Layer Leads, Presentation Follows
 
@@ -63,7 +65,7 @@ The same user debugging TypeScript should see different Quick Actions than when 
 
 VS Code users are keyboard-first. Tab switching needs:
 - `Ctrl+1` through `Ctrl+5` when sidebar has focus
-- Command palette entries: "Alex: Switch to Mission Control", etc.
+- Command palette entries: "Alex: Switch to Mission Command", etc.
 - Arrow key navigation between tab items
 - Focus trap within active tab content
 
@@ -84,7 +86,7 @@ Empty state pattern:
 
 The "recently used" tracker isn't a 0.5-day feature — it's the foundation for:
 - Agents tab "Recent Threads" section
-- Mission Control context-adaptive Quick Actions
+- Mission Command context-adaptive Quick Actions
 - Future: personalized nudges
 - Future: usage analytics for tab prioritization
 
@@ -98,8 +100,8 @@ Implementation order, risk management, and contract gating are governed by `COMM
 
 ## Design Risk: Phase Coupling
 
-The gantt chart couples SVG avatar migration with Mission Control layout. These can be decoupled:
-- **Phase 1a**: Tab bar + Mission Control layout with *existing* PNG avatars
+The gantt chart couples SVG avatar migration with Mission Command layout. These can be decoupled:
+- **Phase 1a**: Tab bar + Mission Command layout with *existing* PNG avatars
 - **Phase 1b**: SVG avatar migration (can ship independently)
 
 Decoupling derisks the critical path — tab layout can ship and validate without waiting for SVG icon design.
@@ -114,12 +116,18 @@ Decoupling derisks the critical path — tab layout can ship and validate withou
 
 ### Activity → Docs
 - **Rationale**: Activity/diff tracking is better served at the agent level (per-thread). Documentation hub is more useful as a persistent sidebar surface
-- **Key addition**: learnalex.correax.com CTA as expansion pathway for learning content
+- **Key addition**: the Docs tab becomes the explicit bridge between the VS Code extension and LearnAlex as its companion surface
 - **Nudge system reuse**: Tips & Nudges section reuses existing `Nudge` interface from `welcomeViewHtml.ts`
 
+### LearnAlex Relationship
+- **Role**: LearnAlex is the companion web experience for the Alex VS Code extension, not a separate competing product surface
+- **Bridge**: the Docs tab is the intentional bridge between the in-editor experience and the broader LearnAlex learning environment
+- **Design implication**: the Docs tab should connect users to LearnAlex's strongest pathways without trying to clone the full website inside the sidebar
+- **Taxonomy implication**: the personas and use cases targeted in LearnAlex should drive the extension's persona categories, relevant badge language, and companion-facing UI elements
+
 ### Tab Order Change
-- **Original**: Mission Ctrl | Agents | Skill Store | Mind | Activity
-- **Final**: Mission Ctrl | Agents | Skill Store | Mind | Docs
+- **Original**: Mission Command | Agents | Skill Store | Mind | Activity
+- **Final**: Mission Command | Agents | Skill Store | Mind | Docs
 - Mind placed 4th because it's the differentiator — users discover it naturally
 
 ## SVG Mockup Design System
@@ -193,7 +201,7 @@ After 3 rounds of tab renaming, the feasibility doc required 11+ replacements. *
 |---------|-----|----------|-------|
 | Keyboard tab switching | All | P0 | Keybindings + arrow nav |
 | Empty states | All | P0 | Coaching moments for new users |
-| Quick Action personalization | Mission Ctrl | P1 | Depends on recently-used data |
+| Quick Action personalization | Mission Command | P1 | Depends on recently-used data |
 | Skill favoriting | Skill Store | P2 | Star/pin preferred skills |
 | Agent pinning | Agents | P2 | Pin preferred agents to top |
 | Search history | Agents, Skill Store | P3 | Remember previous searches |
@@ -205,7 +213,7 @@ After 3 rounds of tab renaming, the feasibility doc required 11+ replacements. *
 ### Active v2 Mockups (approved)
 | File | Tab | Dimensions | Annotations |
 |------|-----|------------|-------------|
-| `command-center-v2-mission-control.svg` | Mission Ctrl | 560×800 | 8 |
+| `command-center-v2-mission-control.svg` | Mission Command | 560×800 | 8 |
 | `command-center-v2-agent-hub.svg` | Agents | 560×870 | 8 |
 | `command-center-v2-skill-store.svg` | Skill Store | 560×812 | 7 |
 | `command-center-v2-mind.svg` | Mind | 560×960 | 9 |

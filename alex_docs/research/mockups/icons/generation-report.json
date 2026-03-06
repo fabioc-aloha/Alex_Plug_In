@@ -1,0 +1,1314 @@
+{
+  "generatedAt": "2026-03-06T06:08:00.384Z",
+  "startedAt": "2026-03-06T05:17:17.640Z",
+  "model": "recraft-ai/recraft-v4-svg",
+  "assetCount": 144,
+  "estimatedCostUsd": 11.52,
+  "delayMs": 2000,
+  "dryRun": false,
+  "force": true,
+  "onlyGroups": null,
+  "summary": {
+    "success": 143,
+    "failed": 1,
+    "skipped": 0
+  },
+  "results": [
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-a.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: stacked command readouts and dashboard strips. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/sXGhm1QeGqxKdqhvAhZAf9nxXH9uKt0p4zeouo1Lf0MCXF4YB/tmpa8uiu5jp.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-b.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: radial command gauge with decisive pointer energy. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/uOAS6RvpofW0LaFHbI9pTwnSHuv3BI1PeqZ6IXrgQ31GWBOWA/tmpdqxlo6ju.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mission",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mission-c.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mission Command. Semantic role: operational dashboard, command overview, status-first home tab. Variant concept: system pulse waveform for live mission telemetry. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with electric-violet accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/22ySdDoG7lryFR6CK9BUUn7TGBeEP9K0dLcsT9EZOMtNrAHLA/tmp_2ybt41d.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-a.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: single friendly specialist silhouette. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tjIvjFUXiWLeNizg3SkfJRypwVe3ehT4rEIbGXSnO2bDbF4YB/tmp02c5tku7.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-b.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: small coordinated team cluster. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tyfzyhQMQ8wldCffGF8farSt6WeNf5CllYsn7NRTvgwKxVgjF/tmp_kyeywry.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "agents",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/agents-c.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Agents. Semantic role: specialist agent hub, team coordination, delegated capability. Variant concept: networked nodes forming an agent triangle. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cool collaborative highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/SGYJYgLjFpLGO9P1GcZmcpsnoViZsYlGfoPShsWvy9RsrAHLA/tmpyzlx_6gh.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-a.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: modular capability grid. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/CjBggygTddKIA55z6wE02ZrwfCOd7r3JDannGhbuCSl2rAHLA/tmpi2_0ubkx.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-b.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: spark-shaped capability shard. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/X1I5JNddA8YWOtHnadRXra7aJ6ZUpPR1ZP2b1fSZgfWBYBOWA/tmppsy9z201.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "skills",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/skills-c.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Skill Store. Semantic role: capability catalog, skill browsing, modular powers. Variant concept: curated star module cluster. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with luminous capability accents. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/weEPK5DZjIUFZiKjKLHfbH7ydIGrnpmOc2KGBfCbgK5qwCcsA/tmpntufxw6j.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-a.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: layered neural symmetry. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/P9E0CnHERW7LIJDgiKCxGydl1jobveOPvC5KXRct7i5VsAHLA/tmpikpily0w.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-b.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: orbital cognition rings around a core. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/8pQnfD01ToxkN6yD3iZZl7aM8LyBQ8vdGwc18hNcduNgsAHLA/tmptpwz0x0w.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-c.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: focus target with nested awareness. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/MzsH0NheAo1UCSPHRMKy4e2FIiThI3BlIpyW7fbwceAWlF4YB/tmpjb3mgwor.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-d.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: connected neural arc with synapse nodes. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/8KeLJHlAfeWXqI5vJ0kXNlfElmRHX5sitXLvQonMbo5tmF4YB/tmp860u8hsc.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-e.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: perception eye fused with cognition core. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/4X9eJeWYsCkda0noxlty59QpxekAkpO0zWyNtf3uniwDoF4YB/tmp71zhujne.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "f",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-f.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: clustered neuron constellation. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/k0OlyzfEofnNo058Wcvycop9tcHBtdWz83777aCXH6OWaBOWA/tmpo0bga5ji.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "g",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-g.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: structured reasoning ladder inside a mind shape. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/5ffHFU4mPznWy0nsByq3gm57HNXtLUPhNR4bC0B3oE1qaBOWA/tmphm0u5oxc.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "h",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-h.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: wave-based thought field. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/corcHF3y58JDB9G9STAoAzkAZ1orxlnkknmrtysINOHwWgjF/tmpiewt0jn_.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "i",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-i.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: faceted prism for reflective intelligence. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/5bRWW8k420LOLNmE0LfyV3hWSiMrvN6UnlPOQYySbHWrtAHLA/tmpfsm9ihqk.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "mind",
+      "variant": "j",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/mind-j.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Mind. Semantic role: cognitive architecture, introspection, memory, reasoning and health. Variant concept: star-core insight emblem. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with cerebral silver highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/PJfJGY8fvVgeUJhNf4jQSWAqw7Ci4pHRSXmjAMYJ7YKvuF4YB/tmpid6nn5xu.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-a.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: clean document sheet. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/iE8Wj4LHRjpYNdgz0gMrtJTjVchofpdFs7qvvVeTWL3f3CcsA/tmpmm_qkhj1.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-b.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: open reference book. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/1pR2NFhRUA4zNNz8StqRlpWk0voKW2AQ9DbxwcOAFeqJuAHLA/tmpb1lqvw0i.svg",
+      "status": "success"
+    },
+    {
+      "group": "tabs",
+      "slug": "docs",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/tabs/docs-c.svg",
+      "prompt": "Create a production-ready SVG tab icon for the Alex Command Center UI. Subject: Docs. Semantic role: documentation hub, learning bridge, study materials and references. Variant concept: bookmark archive glyph. Visual style: Command Center sidebar tab icon. Outer silhouette: rounded rectangle badge. Palette direction: indigo with crisp editorial highlights. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/BZf1h4KWiM2CTatMspOMozoTnV82pjT16fjoOKIGB72mcBOWA/tmpaj_bpgrz.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "building",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/building-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Building. Semantic role: active implementation, construction, shipping. Variant concept: upward build arrow. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/2H5UeoEM6ASgdaosQoRKsZNN2M63KJZyfFeO58qNbER25CcsA/tmp7kvfo7cr.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "building",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/building-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Building. Semantic role: active implementation, construction, shipping. Variant concept: solid triangular build form. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/2WXWeN11DRU3V6wHWPU6mCauPm7DeAcXce0kswYOgKKg6CcsA/tmpm9stjjau.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "building",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/building-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Building. Semantic role: active implementation, construction, shipping. Variant concept: structural plus or cross construction mark. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/kRR0UMrGK04SKdClFLFyxT5fEgqddfYoaOiqVdYcTrPldBOWA/tmp1ryakd0z.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "debugging",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/debugging-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Debugging. Semantic role: bug fixing, fault isolation, problem solving under scrutiny. Variant concept: inspected error ring with slash. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/xMI4FM6rCT7bK1s8clxvRJv8C0zrBnCfjCeWDemn9iFw7CcsA/tmpv_egsey1.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "debugging",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/debugging-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Debugging. Semantic role: bug fixing, fault isolation, problem solving under scrutiny. Variant concept: alert pillar with critical point. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/GpfUEpUCA805Yqsvtx3K5PNe4xfNC1ffCSbteZl4TrSOjXgjF/tmpsr07ducj.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "debugging",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/debugging-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Debugging. Semantic role: bug fixing, fault isolation, problem solving under scrutiny. Variant concept: debug insect silhouette built from geometry. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ECNSpx5eWbWSUypeJqQS55cih2DQlnWlXK3eWXzRxDZC9CcsA/tmpl7bgx0vv.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "planning",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/planning-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Planning. Semantic role: architecture, sequencing, roadmapping, strategic structure. Variant concept: diamond roadmap marker. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/25IZ4Hxte0yreUlBeIvcZcZfpepIkMdpcCjqaf0mPL3YtXgjF/tmpf4e9lhpi.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "planning",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/planning-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Planning. Semantic role: architecture, sequencing, roadmapping, strategic structure. Variant concept: stacked planning rows. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/xpZaPBS5umLjMdBhOaKwfACM0Iu1ZSYu9UPhYXUVQkvkvAHLA/tmp2amxbbfb.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "planning",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/planning-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Planning. Semantic role: architecture, sequencing, roadmapping, strategic structure. Variant concept: branching decision tree. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/yujzkN14w2IwPJkyepPOMhIgHqvMnVBBz1fgyRX0h5CdfCcsA/tmpq0_0spm4.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "reviewing",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/reviewing-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Reviewing. Semantic role: quality gate, validation, scrutiny, confidence checks. Variant concept: approval checkmark. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/v548UKFhHbJ4CtPXcy11ncAfLFOZ14YVXg1SS7bUgs84vAHLA/tmp9bkimc3a.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "reviewing",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/reviewing-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Reviewing. Semantic role: quality gate, validation, scrutiny, confidence checks. Variant concept: eye for review and inspection. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/8xEaj7T6zi4ZPRCE5MeVed4od8eckqe8uezTENyMuLF1AMwxC/tmpgctvobrn.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "reviewing",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/reviewing-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Reviewing. Semantic role: quality gate, validation, scrutiny, confidence checks. Variant concept: magnifier for verification. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/eGsrLjfSsNgBz0ivnTxj1ykl3sjWr8G9ufPL2E5NeCTyBG4YB/tmps69vqjst.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "learning",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/learning-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Learning. Semantic role: study, understanding, concept building and growth. Variant concept: open learning book. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/1FMXhKWFPQ6fIKIXlPQdqZ9meexwuaqW5U7wCjHSfejHGMwxC/tmp81pm0mvb.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "learning",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/learning-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Learning. Semantic role: study, understanding, concept building and growth. Variant concept: lightbulb idea mark. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/AROIAhAYLjolP1kBffuy66Rzpfbpptge8BzfBeAotPVBTYgjF/tmp4nsupfvu.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "learning",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/learning-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Learning. Semantic role: study, understanding, concept building and growth. Variant concept: graduation cap knowledge symbol. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/DcinOFFM9fVWOS3xaBNLhO8kRes9Y3OE0tj043FWj1bghBOWA/tmpaf6n1w84.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "teaching",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/teaching-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Teaching. Semantic role: explaining, broadcasting, guiding, instruction. Variant concept: speaker cone. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fOiSEBW3lSSiXKI9PWaGREjQfSbEAlxutRZHrsQRocp1hBOWA/tmp0t322luj.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "teaching",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/teaching-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Teaching. Semantic role: explaining, broadcasting, guiding, instruction. Variant concept: lectern or board. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/OPfgzVQZ7A0EESdXnuz0dVjs4hH96im5cvcXId1T7kOFxAHLA/tmpipxzyaij.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "teaching",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/teaching-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Teaching. Semantic role: explaining, broadcasting, guiding, instruction. Variant concept: signal waves from a teaching core. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "status": "failed",
+      "error": "Request to https://api.replicate.com/v1/models/recraft-ai/recraft-v4-svg/predictions failed with status 429 Too Many Requests: {\"detail\":\"Request was throttled. Your rate limit for creating predictions is reduced to 6 requests per minute with a burst of 1 requests while you have less than $5.0 in credit. Your rate limit resets in ~4s.\",\"status\":429,\"retry_after\":4}\n."
+    },
+    {
+      "group": "states",
+      "slug": "meditation",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/meditation-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Meditation. Semantic role: calm reflection, centered awareness, deep thought. Variant concept: balanced arch and spine. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/BcnZZG64Spo0JBurpHR9Qz4PIaNZfghTKPI8Uf5R80k0iBOWA/tmpfed7rt0b.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "meditation",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/meditation-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Meditation. Semantic role: calm reflection, centered awareness, deep thought. Variant concept: half-halo serenity arc. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/PrK7l9eFmjzexUqI0PmVt6mbaMB2C1wXWP6r2pvRy8gLjBOWA/tmpqtdiiznp.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "meditation",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/meditation-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Meditation. Semantic role: calm reflection, centered awareness, deep thought. Variant concept: paired meditative circles. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/knd31wgMblJgCl4YtgObGxU7JoQRS37uNBPBcqcMrvM4YgjF/tmpjfurlq0l.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "dream",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/dream-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Dream. Semantic role: maintenance, subconscious synthesis, dream-state automation. Variant concept: crescent moon. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/0kJwvxUdEP4GJV7kVh734mWdf5PDKMgV4UQTskD7hOQByAHLA/tmpzwcexzkw.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "dream",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/dream-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Dream. Semantic role: maintenance, subconscious synthesis, dream-state automation. Variant concept: crescent with star. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/kxtOy9aSujoWJJlE2kCMeQjfQDi4dgW8qjb25taeXdmtIDcsA/tmpl8ujaotq.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "dream",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/dream-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Dream. Semantic role: maintenance, subconscious synthesis, dream-state automation. Variant concept: dream cloud with subtle motion. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Rte89WHEBQUKAKtKG4D4zo3Fj2cKdzVhv5ogrtlgKnBVyAHLA/tmp36gk_o0h.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "discovery",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/states/discovery-a.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Discovery. Semantic role: insight, revelation, finding new patterns. Variant concept: lit discovery bulb. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/BhPeQvwq8fhn00BCYtbglCeRYenqN5kNgpZgNey4qnN6nMwxC/tmpqmi8ayxp.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "discovery",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/states/discovery-b.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Discovery. Semantic role: insight, revelation, finding new patterns. Variant concept: spark burst. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/C9zQepvdcawPQqDo8xbqEn3CtKtyqhpLS1fe3HRI7KLpKDcsA/tmpdquouerc.svg",
+      "status": "success"
+    },
+    {
+      "group": "states",
+      "slug": "discovery",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/states/discovery-c.svg",
+      "prompt": "Create a production-ready SVG state avatar for the Alex Command Center UI. Subject: Discovery. Semantic role: insight, revelation, finding new patterns. Variant concept: compass-like reveal target. Visual style: compact cognitive-state avatar. Outer silhouette: circle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fg45KyqrH9wRbC68Rr5bMOPgbrDE9zRXj5XPgQhBrcB1yAHLA/tmpcq5pdk1e.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "alex",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/alex-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Alex. Semantic role: orchestrator, central intelligence, trusted AI partner. Variant concept: connected constellation of three minds. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/UKQMtSeXmV0PF6enIhtYQstuKN0NEXUl3r5ofH08A9aDMDcsA/tmptyvk2dni.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "alex",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/alex-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Alex. Semantic role: orchestrator, central intelligence, trusted AI partner. Variant concept: guiding star emblem. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/0xpN3nw2yiKFClIZK1yXIUE7rLPysnQs48WsBxG7R9ulZgjF/tmp97r13z74.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "alex",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/alex-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Alex. Semantic role: orchestrator, central intelligence, trusted AI partner. Variant concept: paired orbit rings for dual awareness. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/VbbLWVtct86OFlb3IekPpwknv6eXLZftbMKHF19qaafraG4YB/tmpknwwkgj4.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "researcher",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/researcher-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Researcher. Semantic role: investigation, evidence gathering, deep search and synthesis. Variant concept: magnifier. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/U4P9SUAReQxNK6F0BdgS8e1I0plgEOQJW6zPCLLSXLieNDcsA/tmpot4ey4e8.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "researcher",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/researcher-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Researcher. Semantic role: investigation, evidence gathering, deep search and synthesis. Variant concept: lab flask. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/JHTkzUVN2N7nD9kT7VS6fMLop2g3mTcwIQqAnk5HIRkpzAHLA/tmpp8udmyr0.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "researcher",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/researcher-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Researcher. Semantic role: investigation, evidence gathering, deep search and synthesis. Variant concept: evidence trend path. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/wlNiaNlU0vpRHVleGuv0Q9c21CblRCCZCzlHRbuDoFfpnBOWA/tmp7jjxmzum.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: foundational hammer-like construction block. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/3xFjjAu0lewrcaEvXQo0coDdtPQGVJejTJwYQBGbUXCePDcsA/tmpagxg93ue.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: precision gear and core. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/mvbwYgUCeetzXUUaofL0VXBvenuRDXlyT4ekvhhnZZpXCNwxC/tmpngpd42mz.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: architectural frame and beam. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/nPVRCBz2erRsH6RHVww4ygh4TzFs0Onqf6ewXRm9efTCFNwxC/tmphqle3xp5.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-d.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: tool-and-draft merge. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/8t3lO1230ka1HxNwdd9hRsNWjFh8ihL6zrOWG3NfGXteoBOWA/tmp1noserx5.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-e.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: assembly blocks connected by a build path. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/A0ez806YHwTQMyj55nq7oap1HYYnORz9y0pZBlg8kplp0AHLA/tmptb_ufjyl.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "f",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-f.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: modular cut-and-fit construction pieces. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/hCffRxRVXxjqJ0USdRHfheUwWYF82zlWhYUk54VDFXe5MNwxC/tmpoe61de8i.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "g",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-g.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: composed platform scaffold. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/XwQ7ZcCvHxoZLBozOKZx1fDfvekTcMY4mG4bkTIw83P2TDcsA/tmph6rldvxu.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "h",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-h.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: upward structure with a central spine. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/AWiwZj0uoN5JKpL9nOMVHiXUpNaNHhtyBzBo6VT2fr2I1AHLA/tmpjqqnil_x.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "i",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-i.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: ship-it trajectory line through crafted nodes. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/1dtA2Exs5D7tDdFHmzfg49xj1IxXtReFzAiqfh0ABYqOVDcsA/tmp2m0s6gex.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "builder",
+      "variant": "j",
+      "outputPath": "alex_docs/research/mockups/icons/agents/builder-j.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Builder. Semantic role: implementation, craftsmanship, construction and delivery. Variant concept: stacked build system with grounded base. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/JOphkt7oYDqRON8sEUfXy46tfUJquWLW2DRAVxRItnN7qBOWA/tmp2totq39o.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "validator",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/validator-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Validator. Semantic role: adversarial review, risk detection, verification. Variant concept: shield with check. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fQY8nz1A7uTufk2oJV9LefigPcgu6CEGcqLNPKFsfplLaNwxC/tmp7kl4lluw.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "validator",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/validator-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Validator. Semantic role: adversarial review, risk detection, verification. Variant concept: verification ring. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/xs0MekbEkWXWPKBZ0d2pnNxvIoLrmhKOhor2ZJJ57HVz1AHLA/tmpvlb8thfz.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "validator",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/validator-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Validator. Semantic role: adversarial review, risk detection, verification. Variant concept: balanced review scale. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/z2zuNjtr4HrIG5yz22UW2qe3Z1weNHjTo92qbKlQ8GW7rBOWA/tmpjsgvk3k1.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "documentarian",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/documentarian-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Documentarian. Semantic role: documentation quality, capture, editorial clarity and preservation. Variant concept: clean page. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Ze78rAFvoQX4VSa3IFBZGYY0SeDixztRUJ3csrRLIu9WsBOWA/tmp13zn52_v.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "documentarian",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/documentarian-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Documentarian. Semantic role: documentation quality, capture, editorial clarity and preservation. Variant concept: bound document. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Oeh63kUxDaVhWSyUjWvEZYsf0zgyzecyEoNvLMfFCeZclNwxC/tmpfb87_ysj.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "documentarian",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/documentarian-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Documentarian. Semantic role: documentation quality, capture, editorial clarity and preservation. Variant concept: folded spec sheet. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/EVLwfd7GXLSdVStDQABsK2VqJmzfd8eKMw6J0dO6DqE9ZDcsA/tmpcares0_r.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "documentarian",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/agents/documentarian-d.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Documentarian. Semantic role: documentation quality, capture, editorial clarity and preservation. Variant concept: annotated file with pencil energy. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/4XltEtZrgO6bAtpS8nJiDONyUZ04Rz8NvcunLVOLbiOVbgjF/tmp8p7sdnco.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "documentarian",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/agents/documentarian-e.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Documentarian. Semantic role: documentation quality, capture, editorial clarity and preservation. Variant concept: open reference book. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ZtTsZllBDWbuOFoquJnIYHjHmcbpDF35xk72hQCt2kdabgjF/tmpz1vk2bx6.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: angular cloud-platform shard, Azure-inspired but not the official logo. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/MsmRzaYjYWJVEJWlTLCPpJINtNDQnSVesEPM3mq8oG5ftBOWA/tmp8yndlv0w.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: cloud with upward platform arrow. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/yYrqW6kINCo3DtXbwA8ks0ZTeT556o2UBp5SGQTYRSkK3AHLA/tmpb3hi0hme.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: stacked cloud infrastructure racks. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/4zf4GySpnpxeL0vuFq0NbrNhYGIYAmDVQyJxxefdoafm1NwxC/tmpw3ssvdvc.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-d.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: faceted cloud triangle, Azure-inspired but original. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/P8pSqEeBowTPHaNcPXtByyzJEqHQe4UKEifZlQltAMEDeG4YB/tmp9gc7tvud.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-e.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: angular platform peak with supporting line. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/BAeL2P0UZmRjekfUjyeGodXD61PuGA61XIVKjXeKeJTV1bgjF/tmpi4z7eexr.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "f",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-f.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: cloud shard with bridge bar. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/s7PLclevabS1Si6YyFlGD42oTfmNPj3l8RcAhvdWYe9XfG4YB/tmpjd6v1c98.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "g",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-g.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: outlined faceted cloud mark, Azure-inspired but original. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/FIhNvg78YNoHIpuFgCRivgnOD9RuXRcUkptAZuMUkBfB4AHLA/tmps9m330eq.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "h",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-h.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: open angular peak with inner support. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ltP3rm9JUWZyGJIfLgeEmewnwF15jsZcuCwBeLSqersCDOwxC/tmp7facobd4.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "i",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-i.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: platform bar crossing a cloud core. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Mt55Soehbsx4A6le7QcHeletA4eVLf8HR0cOPZ1DpvZZLcgjF/tmp71lstkwc.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "azure",
+      "variant": "j",
+      "outputPath": "alex_docs/research/mockups/icons/agents/azure-j.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: Azure. Semantic role: cloud platform guidance, infrastructure, deployment and Azure-native operations. Variant concept: faceted platform chevron, Azure-inspired but original. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: azure blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/eEwNCawdQS1QQKbTF1qbFe3jU9iHt2DuwqLRWf9a40mEiDcsA/tmpgynit3mi.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-a.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: collaboration tile grid. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Uz6yehg6wvTf00fejluzgY8mHCfhYK6hPFmfLvmlqZBtVcgjF/tmpa6qc9d3c.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-b.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: workspace tile plus productivity mark. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/viwduDUejvSlCqvcH4Faj4NfrOvgciCu7TkYthkJf2MWjDcsA/tmpm3y38w12.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-c.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: diamond workspace hub. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/c1eKoTXfpbkxcEf5S7zhMM7sSyuP3438My4eANGryce4POwxC/tmp9xi3lmd5.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "d",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-d.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: folded panel workspace, Microsoft-365-inspired but original. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/WOQ1T3rVznYPFhCley9IUIpftdU164EtfjAXXStZQgDrkDcsA/tmpcvc76eo1.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "e",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-e.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: outlined folded workspace panel. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/UfOmUD4nJhRPbyjVzUeYChHxzLMdDZiNLUon0EgU3KbqyBOWA/tmp0rbcmfso.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "f",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-f.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: angled workspace shard. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/TPrKUfRiGeu2pkdcMV8KPFnFkgXCXusXe7xs7OZcpux9lDcsA/tmpshlc6lwm.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "g",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-g.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: outlined workspace fold system. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/dcj5ceYEgJTWdyfKNEP8eFzwSMtjD12AIRtKj8CgLf4ONH4YB/tmpq3mqfctn.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "h",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-h.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: connected folded workspace planes. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/pZxRLiFz905DCV0pUWv47sJ0Aj91vrsbYVN8DmN78XN6cgjF/tmpkz3cat2i.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "i",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-i.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: workspace prism with center bar. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ZON7mRaThs5OMtOic1CM0QqAdNrqapjp40RrTW6L6RRf5AHLA/tmpyzipu25g.svg",
+      "status": "success"
+    },
+    {
+      "group": "agents",
+      "slug": "m365",
+      "variant": "j",
+      "outputPath": "alex_docs/research/mockups/icons/agents/m365-j.svg",
+      "prompt": "Create a production-ready SVG agent avatar for the Alex Command Center UI. Subject: M365. Semantic role: Microsoft 365 workflows, productivity, collaboration and workspace orchestration. Variant concept: folded productivity mosaic with center point. Visual style: specialist agent identity icon. Outer silhouette: hexagonal badge. Palette direction: orange-red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/D3VgAuxTOToXFxeXTm0CgcF97KK3mkfxtpTD7G2LjYyU0BOWA/tmpjkiwo635.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "software",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/software-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Software. Semantic role: software developers, coding and implementation work. Variant concept: paired code chevrons. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/wXP4MvEzzqr6KdFhDXeCF1pqiwt1B0gOuQfixOfQlgjQpDcsA/tmpw515p68z.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "software",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/software-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Software. Semantic role: software developers, coding and implementation work. Variant concept: prompt and terminal line. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fUN5ZBzy9nxfQEh5M3RA1no6f9PEjctirf65hhvWmj32TH4YB/tmp_ytpzkzk.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "software",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/software-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Software. Semantic role: software developers, coding and implementation work. Variant concept: logic grid. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ZIEa7W4FIgJsCt7WwxpgFQC7U09dC06NgXRfM7DbEfpS1BOWA/tmptgmtpczx.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "engineering",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/engineering-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Engineering. Semantic role: engineering systems, reliability and technical problem solving. Variant concept: gear core. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/irXmIvciJcqYJRQeb8YhA5VMAXOXLDM0Tiyu18Pc9jn16AHLA/tmpfajsg08c.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "engineering",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/engineering-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Engineering. Semantic role: engineering systems, reliability and technical problem solving. Variant concept: structural wave build. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/0Eede9I8QDrvKkLZYvHQRe1DXd3o4tlLSkEFTRZpvLnCsDcsA/tmpt4bi95yj.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "engineering",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/engineering-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Engineering. Semantic role: engineering systems, reliability and technical problem solving. Variant concept: modular system blocks. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tBbKR1S2MiLGNNmfCC6lphFwhPNTBdjWYhJ0HtMfJGhW2BOWA/tmp4v5lfa0f.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "science",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/science-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Science. Semantic role: scientists and AI researchers, experimentation and inquiry. Variant concept: atomic orbit. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/TT0vXXfegEvPP0FkhgJZ9FR0lHSiWtrsmBoR98uNgtcr2BOWA/tmpvon6c6yh.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "science",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/science-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Science. Semantic role: scientists and AI researchers, experimentation and inquiry. Variant concept: lab vessel. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/DvKeu2p7Hv02Y6fHZOMTwsQreTV25AXeJwNhxhhc20fC4OwxC/tmpf8a354sv.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "science",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/science-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Science. Semantic role: scientists and AI researchers, experimentation and inquiry. Variant concept: research instrument. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: teal. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/f7Qu6YEnOesKnEc5DfRHu9nAmPid2Np510cpfXagqDL1dH4YB/tmp95jdj8af.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "data",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/data-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Data. Semantic role: data analysts and visual storytellers, measurement and insight. Variant concept: bar chart. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: cyan. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Ljl2uC5kbvYPKVfi58An41KZAsKQ4ejrdXRSCjBHJmUw3BOWA/tmp7oet0t76.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "data",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/data-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Data. Semantic role: data analysts and visual storytellers, measurement and insight. Variant concept: data cylinder. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: cyan. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/lTyHo1W6yq7eQKnAaDmQYNKfYEp2gc6lb9Jw0gqOhVPF4BOWA/tmpv7ka3qd7.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "data",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/data-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Data. Semantic role: data analysts and visual storytellers, measurement and insight. Variant concept: analytics dial. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: cyan. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/hFMoPVjKAp6rFFuC31R730PCsey1sfdtCeHPgFXpo7T1wDcsA/tmpioiqakt9.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "design",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/design-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Design. Semantic role: designers, product aesthetics and interface craft. Variant concept: creative wedge. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: purple. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/RW56kmX5BfVzFyKzLgi4m7VkeVfGZqivRLmw5URy6LScxDcsA/tmpp4fgxgu8.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "design",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/design-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Design. Semantic role: designers, product aesthetics and interface craft. Variant concept: three-shape composition. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: purple. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/KzNBZkgeEZV5PiUFjkrafyzfFVXi5gBRIWnXq8ofdgPMkH4YB/tmpzhqgm8i6.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "design",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/design-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Design. Semantic role: designers, product aesthetics and interface craft. Variant concept: stylus-inspired mark. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: purple. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/egxcbsyPfDoCJE4Mkifoe1eAjLc6ZClV1FfWQ0MT5x70VeAHLA/tmptyrsxbwd.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "creative",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/creative-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Creative. Semantic role: writers, creators, performers and narrative makers. Variant concept: ink feather sweep. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/f3Vsn366T3UGdKaPmgcVGZLpdenTIqJAleQvnbMtdhMYzDcsA/tmp3rppmlpi.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "creative",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/creative-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Creative. Semantic role: writers, creators, performers and narrative makers. Variant concept: microphone or spotlight stem. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/nGNhgbTFgU6nBp5RC8S1SzHDVXxkVjlfNJWdgz90JDUA9AHLA/tmptyn0hqcs.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "creative",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/creative-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Creative. Semantic role: writers, creators, performers and narrative makers. Variant concept: double-lens creativity mark. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: violet. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/jH83LaJ1X9piOpl8YN5f8E1CpCHCF4JKt2sue3Nvfv4r0DcsA/tmprvt1imk8.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "documentation",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/documentation-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Documentation. Semantic role: technical writers and document-focused practitioners. Variant concept: annotated page. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/msd6iMyF3NZ8KV1uM0GQnjnCxRJefOfDebNvCjKPRSkrqH4YB/tmpbj7lblik.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "documentation",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/documentation-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Documentation. Semantic role: technical writers and document-focused practitioners. Variant concept: folded doc sheet. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/ldk7FhRd9vYZO97ul4vWF1ZODCPXw58MUN6JVdTIg39veAHLA/tmpe2rwxi5j.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "documentation",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/documentation-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Documentation. Semantic role: technical writers and document-focused practitioners. Variant concept: stacked doc pages. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: amber. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/q1skNyPOwArnCNa9xkh5vTUSFwHp11CtzLZcTZKL8eIq9AHLA/tmp7r_jte_0.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "business",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/business-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Business. Semantic role: consultants, knowledge workers and executives. Variant concept: briefcase. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: slate. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Z4HZ6Vic6XrjPtJbnYTIeeQFhyeBPJuQ3pyjWqoEsfKguH4YB/tmpeihr1k03.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "business",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/business-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Business. Semantic role: consultants, knowledge workers and executives. Variant concept: building block business form. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: slate. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tFeRcFf6QnizzExDfvtU0D7bB1XUDM7GIM8WulhKNvt63DcsA/tmpt2yahjrj.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "business",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/business-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Business. Semantic role: consultants, knowledge workers and executives. Variant concept: paired stakeholder circles. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: slate. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/BMnTQhYbm7qpIBt31c3LB6mgURCsNBhADtxhI0pEsWrEfAHLA/tmpc1r369iy.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "finance",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/finance-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Finance. Semantic role: finance professionals, reporting and value measurement. Variant concept: currency ring. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/0KUb88fbRehMfIdSKhk3idYtfY3DlfLLFpNIjLybUzyfJfAHLA/tmpg0fc54j7.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "finance",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/finance-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Finance. Semantic role: finance professionals, reporting and value measurement. Variant concept: growth line. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/OmNy8hEfKa0eMEzSab1YofveoMU8IllHgf8E6LQnxZXjnPwxC/tmpifilxzjp.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "finance",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/finance-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Finance. Semantic role: finance professionals, reporting and value measurement. Variant concept: ledger grid. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: green. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/IGoPw3CeiTWARyUcpwyt00B0SHe7s7rUinYCIEj6OfVg6DcsA/tmpvona37pn.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "product",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/product-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Product. Semantic role: product managers, project managers and entrepreneurs. Variant concept: roadmap blocks. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: orange. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/eU9fQziHDruqaU6YFzUaEJTncXBiDeFUliXCnwxg3Mea2H4YB/tmpaob01wr5.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "product",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/product-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Product. Semantic role: product managers, project managers and entrepreneurs. Variant concept: prioritization star. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: orange. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/hh8QdNGXOfQkTKO5bgukltwHYkkoAj0E9Fdt2poShZB9eBOWA/tmpe_t1rfbo.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "product",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/product-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Product. Semantic role: product managers, project managers and entrepreneurs. Variant concept: directional ship plan. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: orange. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/DPzpxDGIZi7sKR8GEmvW7oLPjcuZMHlPVoLEJESeX7GIfBOWA/tmprorrjvju.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "marketing",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/marketing-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Marketing. Semantic role: marketing, sales and attention strategy. Variant concept: megaphone. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: coral. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/HKzwdrgGIQ6uClDWPvjOStvbVfnKqcKvGHYe4G0PWM1keDcsA/tmpl763d427.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "marketing",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/marketing-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Marketing. Semantic role: marketing, sales and attention strategy. Variant concept: target rings. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: coral. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/1LgouN8pKWoWP9TbuzbrHBRIPV7nVsqpJmNaeOMSwRPcfBOWA/tmp1zcd0qc6.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "marketing",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/marketing-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Marketing. Semantic role: marketing, sales and attention strategy. Variant concept: spotlight peak. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: coral. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/PifrzRTuLfvwzULLwuD1yVuVU7SIOL0bTXzDegrbvjqbeH4YB/tmprtyzr0re.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "education",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/education-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Education. Semantic role: teachers, students, facilitators and learning communities. Variant concept: graduation cap. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/zQ5WXK7CzQJxKhaintYnKS1HJRPG24MVs25YX6rb2xfwfBOWA/tmppqe4wn0c.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "education",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/education-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Education. Semantic role: teachers, students, facilitators and learning communities. Variant concept: bookshelf pair. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/xNMhaovkwMKVGBtS3Mg3HB79hM91HstORzE33sB5Y9o9fAHLA/tmpuvg6s1pa.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "education",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/education-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Education. Semantic role: teachers, students, facilitators and learning communities. Variant concept: learning bulb. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: emerald. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/p5yHCDt1qeUoP6xgdacDPPJLePVgp11m09odFVzcqkHLACOWA/tmpofug8jjt.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "healthcare",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/healthcare-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Healthcare. Semantic role: healthcare professionals and counselors. Variant concept: care heart with cross. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/tjpnFR4efGuWrkyxIk5kXz8s9gQY3Rdz44ri5guEjUbgACOWA/tmpiqc1p0_r.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "healthcare",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/healthcare-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Healthcare. Semantic role: healthcare professionals and counselors. Variant concept: support figure. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/v3BNjuCKB25WCRLHvoBA1NLjEBnGyvew7poz5JTfEq03ACOWA/tmp6bwhbhxl.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "healthcare",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/healthcare-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Healthcare. Semantic role: healthcare professionals and counselors. Variant concept: clinical waveform. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: red. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/5u5BJneJenpG5EYphAy7mhA0aflR0W0bta3Xf96FkWDtEI4YB/tmpwd_h3fxy.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "legal",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/legal-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Legal. Semantic role: lawyers, legal review and policy judgment. Variant concept: balanced justice motif. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/Pufi2lo7eZiC80UZXGS1UcYQwvMowWDam7idIlFTialgBCOWA/tmpodon06ra.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "legal",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/legal-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Legal. Semantic role: lawyers, legal review and policy judgment. Variant concept: gavel or authority pillar. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fu8GSgzZeNg2EkKwfMRAhAqJaa7CcvHbDyMlJp8FnrwoDEcsA/tmp0yq1vxww.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "legal",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/legal-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Legal. Semantic role: lawyers, legal review and policy judgment. Variant concept: shielded compliance mark. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: gold. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/USMhqyoNFQ5pKNq7UHL0Q4PbRD3T8WG25hT3gDtGXMKiggjF/tmp_oixcwpz.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "people",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/people-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: People. Semantic role: HR, people operations, CX leaders and nonprofit leaders. Variant concept: community pair. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: pink. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/wRdfDmAptnzteUoy8eBJe7p1d2NKyWnfSAzCwW3la7VvTQwxC/tmpo3i95d17.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "people",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/people-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: People. Semantic role: HR, people operations, CX leaders and nonprofit leaders. Variant concept: empathy circle. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: pink. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/u9lGf4XOgwUqJiQouq1WedTGsyEJEhm7QT7x156VdIxxCCOWA/tmp5ml_t3_d.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "people",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/people-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: People. Semantic role: HR, people operations, CX leaders and nonprofit leaders. Variant concept: care heart community mark. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: pink. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/cuJFcl2n8kJlHFKLd6AQb5tjM5Z8qVjy2SXbXWMshB5xggjF/tmp8fgg9kwx.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "career",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/personas/career-a.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Career. Semantic role: job seekers, growth, readiness and professional momentum. Variant concept: career clock or timing mark. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: sky blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/fvRY8lkMfEv7tEyVtc3ewaQf2ffaLL9L7QWu2YEGwARx2ggjF/tmpy1mtpq00.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "career",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/personas/career-b.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Career. Semantic role: job seekers, growth, readiness and professional momentum. Variant concept: launch path. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: sky blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/5q1I4W6TrQrEJ9gVf92JgAZSoNnkmiHfhrN10UVZZKFvDCOWA/tmpanxb2ztc.svg",
+      "status": "success"
+    },
+    {
+      "group": "personas",
+      "slug": "career",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/personas/career-c.svg",
+      "prompt": "Create a production-ready SVG persona avatar for the Alex Command Center UI. Subject: Career. Semantic role: job seekers, growth, readiness and professional momentum. Variant concept: briefcase with approval check. Visual style: LearnAlex-aligned condensed persona category icon. Outer silhouette: squircle badge. Palette direction: sky blue. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/vqxKMiemkmyrAa95xVRbKW6e6fms51Y9NQ9kYVGrrZDHIEcsA/tmprf9snga_.svg",
+      "status": "success"
+    },
+    {
+      "group": "default",
+      "slug": "default",
+      "variant": "a",
+      "outputPath": "alex_docs/research/mockups/icons/default/default-a.svg",
+      "prompt": "Create a production-ready SVG default avatar for the Alex Command Center UI. Subject: Neutral Fallback. Semantic role: neutral Alex fallback state when no richer context is active. Variant concept: calm centered target. Visual style: neutral fallback Alex icon. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/HkQjHb8fdDSoWSh9zK47fcluciwae4auwJc4qcXwZGPwIEcsA/tmp9lfeoyf4.svg",
+      "status": "success"
+    },
+    {
+      "group": "default",
+      "slug": "default",
+      "variant": "b",
+      "outputPath": "alex_docs/research/mockups/icons/default/default-b.svg",
+      "prompt": "Create a production-ready SVG default avatar for the Alex Command Center UI. Subject: Neutral Fallback. Semantic role: neutral Alex fallback state when no richer context is active. Variant concept: guiding spark emblem. Visual style: neutral fallback Alex icon. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/DPQyZzrV8aaAC9pSoTjWq3GNwWXkSkrYqWmhvo0HaTHLhgjF/tmphaeaf_6o.svg",
+      "status": "success"
+    },
+    {
+      "group": "default",
+      "slug": "default",
+      "variant": "c",
+      "outputPath": "alex_docs/research/mockups/icons/default/default-c.svg",
+      "prompt": "Create a production-ready SVG default avatar for the Alex Command Center UI. Subject: Neutral Fallback. Semantic role: neutral Alex fallback state when no richer context is active. Variant concept: friendly minimal face. Visual style: neutral fallback Alex icon. Outer silhouette: circle badge. Palette direction: indigo. Requirements: - Native SVG vector output. - Square 1:1 composition, centered icon, transparent background. - Bold, simple geometry readable at 16px to 24px. - Modern product-icon feel with intentional depth, but no raster texture. - No text, letters, words, numerals, UI frames, devices, mockups, or screenshots. - No copyrighted logos, mascots, or trademark replicas. - Use clean paths and distinct negative space. - Keep it suitable for a VS Code sidebar and approval-sheet thumbnails. This is a micro-asset inside the Alex product, not a company logo or hero illustration.",
+      "deliveryUrl": "https://replicate.delivery/xezq/1xUOQYUjlo50FNMmVrljuFnhMM7PXHID9WtJf8LoEQGgCBHLA/tmp09ejkdkp.svg",
+      "status": "success"
+    }
+  ]
+}

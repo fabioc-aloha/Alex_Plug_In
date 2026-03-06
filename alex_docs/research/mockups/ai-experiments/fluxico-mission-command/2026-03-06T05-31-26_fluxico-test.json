@@ -1,0 +1,15 @@
+{
+  "model": "miike-ai/flux-ico:478cae37f1aec0fde7977fdd54b272aaeabede7d8060801841920c16306369a9",
+  "prompt": "ICO minimal mission command dashboard icon, exactly three horizontal status bars stacked vertically, flat product icon, clean geometric shapes, navy and cyan, centered on plain light background, no ornament, no tattoo, no tribal art, no illustration, no text",
+  "input": {
+    "prompt": "ICO minimal mission command dashboard icon, exactly three horizontal status bars stacked vertically, flat product icon, clean geometric shapes, navy and cyan, centered on plain light background, no ornament, no tattoo, no tribal art, no illustration, no text",
+    "aspect_ratio": "1:1",
+    "output_format": "png",
+    "go_fast": true
+  },
+  "outputUrls": [
+    "https://replicate.delivery/xezq/e3sl0tOBF63aeUjnbr1MZUV5rINwu1nSVu0sb93aZ1fcFDcsA/out-0.png"
+  ],
+  "elapsedSeconds": 12.8,
+  "savedImage": "2026-03-06T05-31-26_fluxico-test.png"
+}

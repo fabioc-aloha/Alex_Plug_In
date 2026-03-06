@@ -587,13 +587,13 @@ A standalone generator is also available:
 
 ```bash
 # Simple topic
-node .github/muscles/gamma-generator.js --topic "Introduction to AI"
+node .github/muscles/gamma-generator.cjs --topic "Introduction to AI"
 
 # From file with export
-node .github/muscles/gamma-generator.js --file README.md --export pptx
+node .github/muscles/gamma-generator.cjs --file README.md --export pptx
 
 # Full options
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --topic "Climate Change" \
   --slides 12 \
   --tone "inspiring" \

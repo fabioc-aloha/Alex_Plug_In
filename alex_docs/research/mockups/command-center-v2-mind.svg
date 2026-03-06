@@ -34,7 +34,7 @@
   <!-- Tab Bar -->
   <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
   <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
-  <text x="38" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mission Ctrl</text>
+  <text x="38" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mission Command</text>
   <text x="106" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Agents</text>
   <text x="165" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Skill Store</text>
   <!-- Active: Mind -->

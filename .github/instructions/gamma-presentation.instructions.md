@@ -26,12 +26,12 @@ Load `.github/skills/gamma-presentations/SKILL.md` when detecting:
 ### Simple Presentation Request
 **Pattern**: "Create a presentation about [topic]"  
 **Route**: Read gamma-presentations skill → Execute gamma muscle  
-**Capability**: `.github/muscles/gamma-generator.js`
+**Capability**: `.github/muscles/gamma-generator.cjs`
 
 ### Presentation from File
 **Pattern**: "Convert this markdown to slides"  
 **Route**: Read gamma-presentations skill → Execute gamma muscle with file input  
-**Capability**: `.github/muscles/gamma-generator.js --file <path>`
+**Capability**: `.github/muscles/gamma-generator.cjs --file <path> --slides N --dimensions 16x9`
 
 ### Advanced Customization
 **Pattern**: "Create a presentation with custom images/tone/format"  
@@ -58,15 +58,16 @@ Load `.github/skills/gamma-presentations/SKILL.md` when detecting:
 
 ```bash
 # Simple topic-based generation
-node .github/muscles/gamma-generator.js --topic "Introduction to AI" --export pptx
+node .github/muscles/gamma-generator.cjs --topic "Introduction to AI" --export pptx --slides 10 --dimensions 16x9
 
 # From markdown file
-node .github/muscles/gamma-generator.js --file README.md --export pptx --open
+node .github/muscles/gamma-generator.cjs --file README.md --export pptx --open --slides 12 --dimensions 16x9
 
 # Advanced customization
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --topic "Climate Solutions" \
   --slides 12 \
+  --dimensions 16x9 \
   --tone "inspiring and actionable" \
   --audience "business leaders" \
   --image-model flux-2-pro \
@@ -74,10 +75,12 @@ node .github/muscles/gamma-generator.js \
   --open
 
 # Two-step workflow (draft → edit → generate)
-node .github/muscles/gamma-generator.js --topic "AI Ethics" --draft --draft-output ./deck.md
+node .github/muscles/gamma-generator.cjs --topic "AI Ethics" --draft --draft-output ./deck.md
 # ... user edits deck.md ...
-node .github/muscles/gamma-generator.js --file ./deck.md --export pptx --open
+node .github/muscles/gamma-generator.cjs --file ./deck.md --export pptx --open --slides 15 --dimensions 16x9
 ```
+
+> ⚠️ **Critical**: For file-based generation, always pass both `--slides` and `--dimensions 16x9`. Without `--slides`, Gamma auto-splits content unpredictably. Without `--dimensions`, Gamma can default to fluid layout.
 
 ---
 
@@ -99,7 +102,7 @@ When users provide rough content, follow the **Duarte methodology** consulting p
 - **GAMMA_API_KEY**: Required environment variable
   - Get from: https://gamma.app/settings
   - Set in: System environment or `.env` file
-- **Node.js**: Required for gamma-generator.js execution
+- **Node.js**: Required for gamma-generator.cjs execution
 - **Exports Directory**: Auto-created at `./exports` or custom path via `--output`
 
 ---

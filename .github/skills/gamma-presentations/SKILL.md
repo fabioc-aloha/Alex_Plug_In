@@ -320,16 +320,18 @@ Gamma provides a hosted MCP server (Claude, Make, Zapier, Workato, N8N).
 
 ## CLI Script
 
-**Location:** `.github/muscles/gamma-generator.js`
+**Location:** `.github/muscles/gamma-generator.cjs`
 
 ```bash
 # From file with export + auto-open
-node .github/muscles/gamma-generator.js -f README.md -e pptx --open
+node .github/muscles/gamma-generator.cjs -f README.md -e pptx --open -n 12 -d 16x9
 
 # Draft workflow (no credits)
-node .github/muscles/gamma-generator.js -t "AI Ethics" --draft --open
-node .github/muscles/gamma-generator.js -f exports/ai-ethics-draft.md -e pptx --open
+node .github/muscles/gamma-generator.cjs -t "AI Ethics" --draft --open
+node .github/muscles/gamma-generator.cjs -f exports/ai-ethics-draft.md -e pptx --open -n 12 -d 16x9
 ```
+
+> ⚠️ **Critical**: For file-based generation, always pass both `--slides` and `--dimensions 16x9`. Without `--slides`, Gamma can condense multiple sections into fewer slides. Without `--dimensions`, Gamma may default to fluid layout.
 
 | Option | Short | Description |
 |--------|-------|-------------|

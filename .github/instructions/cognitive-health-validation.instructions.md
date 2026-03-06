@@ -116,6 +116,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 - Trigger overlaps (Phase 4) - Related skills share activation patterns
 - Master-only skills (Phase 5) - global-knowledge-maintenance, heir-curation, master-alex-audit
 - Different heir versions (Phase 27) - M365 and VS Code on different release cycles
+- Cross-root path false positives - Some health tooling can misread valid references to sibling-platform files such as `platforms/m365-copilot/...` when resolution is performed from the wrong root
 - PII in master (Phase 33) - Stripped during heir sync, expected
 - Undated dream files (Phase 19) - Housekeeping, not blocking
 
@@ -348,6 +349,7 @@ Does it indicate unintended drift? (new warning)
 - Phase 5: Master-only skills (3 expected: global-knowledge-maintenance, heir-curation, master-alex-audit)
 - Phase 19: Undated dream files (housekeeping, deferred)
 - Phase 27: M365 heir version ≠ VS Code heir version (different release cycles)
+- Cross-root path warnings on valid sibling-platform references (verify from repo root before treating as broken)
 - Phase 33: PII in master user-profile.json (stripped during heir sync)
 
 **Critical Issues to Fix Immediately:**

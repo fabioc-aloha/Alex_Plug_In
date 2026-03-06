@@ -12,15 +12,44 @@
 
 ## 1. Brand Identity
 
+### Brand hierarchy
+
+The brand stack has three levels and should be treated differently in design work:
+
+| Level | Brand | Meaning | Typical expressions |
+| ----- | ----- | ------- | ------------------- |
+| **Company** | **CorreaX** | The parent company brand | CorreaX wordmark, CX geometric mark, corporate/legal attribution |
+| **Product family** | **Alex** | The umbrella product brand covering multiple projects and products | Alex extension identity, Alex platform messaging, Alex-specific product marks |
+| **UI surface** | **Command Center** | A specific interface inside the Alex VS Code extension | Sidebar tabs, badges, icons, avatars, in-product navigation |
+
 ### The CorreaX brand family
 
-| Product              | Domain              | Tagline                                   |
-| -------------------- | ------------------- | ----------------------------------------- |
-| **CorreaX** (parent) | correax.com         | AI Research & Product Studio              |
-| **LearnAlex**        | learnalexai.com     | Learn AI With the AI That Learns With You |
-| **AIRS**             | airs.correax.com    | AI Readiness Assessment                   |
-| **Alex Extension**   | VS Code Marketplace | fabioc-aloha.alex-cognitive-architecture  |
-| **Alex Finch Books** | Amazon              | The Alex Finch Library                    |
+| Product / Surface     | Domain / Context     | Role |
+| --------------------- | -------------------- | ---- |
+| **CorreaX**           | correax.com          | Company brand |
+| **LearnAlex**         | learnalexai.com      | CorreaX product |
+| **AIRS**              | airs.correax.com     | CorreaX product |
+| **Alex Extension**    | VS Code Marketplace  | Alex product |
+| **Command Center**    | Alex VS Code sidebar | Alex UI surface |
+| **Alex Finch Books**  | Amazon               | Alex product line |
+
+### Logo responsibility
+
+- **CorreaX** and the **CX logos** represent the company brand.
+- **Alex** represents a collection of products and projects under that company umbrella.
+- **Command Center** is not a separate brand. It is one UI surface within the Alex product family.
+
+### Reference implementations
+
+- **LearnAlex** is the best reference for **website-level on-brand UI**: full navigation, page chrome, tokenized accents, prose styling, and dark-surface component patterns.
+- Alex sibling repos often follow **Alex product branding** at the product level, but not every repo needs the same website-style UI layer that LearnAlex has.
+- **Command Center** should borrow from LearnAlex for on-brand UI behavior and tone, while remaining optimized for sidebar density and in-product utility.
+
+### Persona and use-case source of truth
+
+- **LearnAlex** is the source of truth for the persona and use-case taxonomy being targeted by the new Command Center UI.
+- Persona categories, Docs-tab study-guide groupings, and companion-facing UI labels in the extension should derive from LearnAlex's workshop personas and learning pathways.
+- Badge labels, persona labels, and related UI taxonomy should align with those LearnAlex targets instead of drifting into a separate extension-only vocabulary.
 
 ### Brand voice
 - **Curious, not pushy.** Invites exploration rather than demanding action.
@@ -536,21 +565,22 @@ All 27 personas now use CorreaX palette tokens. Each token carries semantic inte
 
 ### Scope
 
-This section governs **in-product micro-assets** for the Alex VS Code extension Command Center:
+This section governs **in-product micro-assets** for the Command Center UI inside the Alex VS Code extension:
 - tab icons
 - cognitive-state avatars
 - agent-mode icons
 - persona-category icons
 - badges, counts, and status chips
 
-These assets are part of the product UI, not marketing identity. They must optimize for clarity, trust, and recognition at sidebar scale.
+These assets are part of a specific Alex UI surface, not a standalone brand and not company-level marketing identity. They must optimize for clarity, trust, and recognition at sidebar scale.
 
 ### Brand Layering Rule
 
-CorreaX remains the visual foundation for the Command Center, but micro-assets follow a different priority than logos and banners.
+CorreaX remains the visual foundation for the Command Center, but micro-assets follow a different priority than company logos, product logos, and banners.
 
 - Use the CorreaX dark UI palette, spacing discipline, and semantic accent system as the base language.
-- Reserve the rocket mark, hero-logo treatment, and azure/orange launch metaphor for product branding, banners, marketplace art, and logo surfaces.
+- Treat LearnAlex as the primary reference for website-style on-brand UI patterns built from that language.
+- Reserve CorreaX and CX company marks for company attribution surfaces, and reserve Alex hero marks, rocket motifs, and launch-metaphor treatments for product branding, banners, marketplace art, and logo surfaces.
 - In the Command Center, icons and avatars should communicate **state, role, and function** before brand theater.
 
 ### Construction Grammar
@@ -599,6 +629,7 @@ CorreaX remains the visual foundation for the Command Center, but micro-assets f
 - Status badges should use one accent plus neutral structure, never a rainbow of independent colors.
 - Taxonomy badges should be lower-contrast than primary CTAs so they do not hijack hierarchy.
 - Use filled pills for urgent counts, outline or soft-fill chips for secondary status, and dot-plus-label only where space allows.
+- Persona- and Docs-related badge taxonomy should stay aligned with LearnAlex personas and use cases where those badges represent companion-surface pathways.
 
 ### Command Center Avoid List
 

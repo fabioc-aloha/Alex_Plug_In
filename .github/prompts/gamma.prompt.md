@@ -38,7 +38,7 @@ For presentations that need editing before generation:
 ```
 /gamma My Topic --draft
 # Alex creates draft markdown → You edit → Continue below
-/gamma --file ./my-topic-draft.md --export pptx --open
+/gamma --file ./my-topic-draft.md --slides 12 --dimensions 16x9 --export pptx --open
 ```
 
 ---
@@ -116,7 +116,7 @@ For presentations that need editing before generation:
 
 ### From Existing Markdown
 ```
-/gamma --file ./README.md --slides 10 --export pptx
+/gamma --file ./README.md --slides 10 --dimensions 16x9 --export pptx
 ```
 
 ---
@@ -148,7 +148,7 @@ Before first use:
 2. Set environment variable:
    - **Windows**: `setx GAMMA_API_KEY "your-key-here"`
    - **macOS/Linux**: `export GAMMA_API_KEY="your-key-here"`
-3. Verify: `node .github/muscles/gamma-generator.js --help`
+3. Verify: `node .github/muscles/gamma-generator.cjs --help`
 
 ---
 
@@ -191,16 +191,18 @@ Gamma generation produces:
 → Check balance at gamma.app/settings, upgrade plan if needed
 
 **Exit code 1**
-→ Check Gamma API status, verify API key is valid
+→ Check Gamma API status, verify API key is valid, and confirm you are invoking `gamma-generator.cjs`
 
 ---
 
 ## Cost Management
 
-- Default presentation (10 slides, flux-pro): ~80 credits
+- Default presentation (10 slides, flux-pro): ~185-190 credits
 - Use `--image-model flux-quick` for drafts: ~20 credits
 - Long presentations (30+ slides): 200-300 credits
 - Premium models can use 500+ credits for large decks
+
+For markdown-driven decks, set `--slides` explicitly to match the number of sections you want Gamma to preserve.
 
 Monitor credits at: https://gamma.app/settings
 

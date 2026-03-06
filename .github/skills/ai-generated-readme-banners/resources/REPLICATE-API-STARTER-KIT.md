@@ -230,6 +230,65 @@ Output: image URL
 
 ---
 
+## Community Model Gotchas
+
+These patterns showed up repeatedly in real usage and matter more than the happy-path examples.
+
+### 1. Use Versioned Model Refs When Needed
+
+Many community models work in the Replicate UI page but return `404 Not Found` when invoked through the SDK with only `owner/model`.
+
+Use the versioned form when the bare model ref fails:
+
+```javascript
+const output = await replicate.run(
+  "miike-ai/flux-ico:478cae37f1aec0fde7977fdd54b272aaeabede7d8060801841920c16306369a9",
+  { input }
+);
+```
+
+If you are testing a community model, check its Versions page first and keep the exact version hash in your script or report.
+
+### 2. Respect Trigger Words
+
+Community LoRA-style models often need their trigger token in the prompt or the output drifts badly.
+
+Examples:
+
+- `miike-ai/flux-ico` → include `ICO`
+- `appmeloncreator/platmoji-beta` → include `emoji`
+
+Example:
+
+```javascript
+const prompt = "ICO minimal dashboard icon, three stacked status bars, flat product icon";
+```
+
+### 3. Distinguish Concept Models From Final Asset Models
+
+- Use raster community models like `flux-ico` and `platmoji-beta` for fast icon ideation
+- Use deterministic SVG construction or carefully selected vector models for final shipping assets
+- Do not assume SVG output is automatically better for tiny UI icons
+
+`recraft-ai/recraft-v4-svg` is excellent for larger vector compositions, but it remains too art-directed for tightly constrained micro-icon geometry.
+
+### 4. Use Replicate's Retry Hints
+
+Rate limits for lower-credit accounts can be very strict. When Replicate returns `429`, prefer its `retry_after` hint over a fixed backoff.
+
+```javascript
+const retryAfterMatch = error.message.match(/retry_after":(\d+)/i);
+const waitSeconds = retryAfterMatch ? Number(retryAfterMatch[1]) : 2;
+```
+
+### 5. Normalize Output Shapes
+
+Different Replicate models return outputs differently: strings, arrays, nested `output`, or objects with a `url()` getter.
+
+Build one normalization helper and reuse it everywhere.
+
+---
+
 ## Basic Usage Patterns
 
 ### Pattern 1: Simple Image Generation

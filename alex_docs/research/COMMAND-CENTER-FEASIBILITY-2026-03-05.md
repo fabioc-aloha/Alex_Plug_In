@@ -39,7 +39,7 @@ The tracker below is preserved as historical feasibility planning context and sh
 | 0.11 | Establish Command Center shell (tab bar + CSS + switching) | 0 | Not Started | 5 empty tabs, working sidebar, no data fetch |
 | 0.12 | Tab state persistence + recently-used tracking | 0 | Not Started | `globalState` remembers last active tab |
 | 0.13 | Compile + smoke test | 0 | Not Started | Extension activates, sidebar shows empty shell |
-| | **Phase 1 — Mission Control + SVG Avatars** | | | |
+| | **Phase 1 — Mission Command + SVG Avatars** | | | |
 | 1.1 | Spike: validate SVG `iconPath` for `ChatParticipant` | 1 | Not Started | Blocking: type check confirms Uri accepted; runtime test needed for data-URI |
 | 1.2 | Design SVG icon set (~25 icons: 9 state, 6 agent, ~10 persona) | 1 | Not Started | Shape=category, color=state, CorreaX palette |
 | 1.3 | SVG template functions in `svgIcons.ts` | 1 | Not Started | Replaces PNG pipeline with inline SVG |
@@ -51,7 +51,7 @@ The tracker below is preserved as historical feasibility planning context and sh
 | 1.9 | Context Budget bar + Personality Toggle | 1 | Not Started | Context window % + Precise/Chatty switch |
 | | **Phase 2 — Agents Tab** | | | |
 | 2.1 | Agent Registry (7 agents with status badges) | 2 | Not Started | ACTIVE / QUEUED / ROUTING / IDLE |
-| 2.2 | Cognitive State display (mini avatar + reasoning meter) | 2 | Not Started | Received from Mission Control scope |
+| 2.2 | Cognitive State display (mini avatar + reasoning meter) | 2 | Not Started | Received from Mission Command scope |
 | 2.3 | Search bar + filter + color-coded borders | 2 | Not Started | Green=active, indigo=queued, gray=idle |
 | 2.4 | Recent Agent Threads + thread detail toggle | 2 | Not Started | Verbose/Standard/Terse switch |
 | 2.5 | Create Custom Agent CTA | 2 | Not Started | Dashed-border placeholder |
@@ -104,7 +104,7 @@ gantt
     Tab state persistence + recently-used    :p0h, after p0g, 1d
     Compile + smoke test                     :p0i, after p0h, 1d
 
-    section Phase 1 — Mission Control + SVG Avatars
+    section Phase 1 — Mission Command + SVG Avatars
     SVG iconPath spike                       :p1a, after p0i, 1d
     SVG icon set (~25 icons)                 :p1b, after p1a, 2d
     SVG templates + avatar bridge update     :p1c, after p1b, 1d
@@ -165,7 +165,7 @@ These appear in the Command Center tab strip. Indigo palette (#6366f1 → #818cf
 
 | # | Position | Description | Option A | Option B | Option C | Approved |
 |---|----------|-------------|----------|----------|----------|----------|
-| 1 | Mission Control | Dashboard / status overview | ![A](mockups/icons/tabs/mission-a.svg) | ![B](mockups/icons/tabs/mission-b.svg) | ![C](mockups/icons/tabs/mission-c.svg) | |
+| 1 | Mission Command | Dashboard / status overview | ![A](mockups/icons/tabs/mission-a.svg) | ![B](mockups/icons/tabs/mission-b.svg) | ![C](mockups/icons/tabs/mission-c.svg) | |
 | 2 | Agents | Agent hub / team management | ![A](mockups/icons/tabs/agents-a.svg) | ![B](mockups/icons/tabs/agents-b.svg) | ![C](mockups/icons/tabs/agents-c.svg) | |
 | 3 | Skill Store | Skill catalog / capabilities | ![A](mockups/icons/tabs/skills-a.svg) | ![B](mockups/icons/tabs/skills-b.svg) | ![C](mockups/icons/tabs/skills-c.svg) | |
 | 4 | Mind | Brain / cognitive architecture | ![A](mockups/icons/tabs/mind-a.svg) | ![B](mockups/icons/tabs/mind-b.svg) | ![C](mockups/icons/tabs/mind-c.svg) | |
@@ -438,7 +438,7 @@ After cleanup, the gutted `welcomeViewHtml.ts` produces:
     <button class="cc-refresh" title="Refresh">↻</button>
   </header>
   <nav class="cc-tabs">
-    <button class="cc-tab active" data-tab="mission">Mission Ctrl</button>
+    <button class="cc-tab active" data-tab="mission">Mission Command</button>
     <button class="cc-tab" data-tab="agents">Agents</button>
     <button class="cc-tab" data-tab="skills">Skill Store</button>
     <button class="cc-tab" data-tab="mind">Mind</button>
@@ -446,7 +446,7 @@ After cleanup, the gutted `welcomeViewHtml.ts` produces:
   </nav>
   <main class="cc-content">
     <section class="cc-panel active" data-panel="mission">
-      <p class="cc-placeholder">Mission Control — coming in Phase 1</p>
+      <p class="cc-placeholder">Mission Command — coming in Phase 1</p>
     </section>
     <!-- 4 more empty panels -->
   </main>
@@ -524,7 +524,7 @@ The current welcome view renders **~36 action buttons** across 7 categories in a
 ```mermaid
 graph LR
     subgraph Sidebar["Alex Cognitive v6.x  ↻"]
-        TabBar["Mission Ctrl | Agents | Skill Store | Mind | Docs"]
+        TabBar["Mission Command | Agents | Skill Store | Mind | Docs"]
         TabBar --> Content["← Tab content here →"]
     end
     style Sidebar fill:#e8e0f0,stroke:#b4a7d6,color:#3c3553
@@ -532,7 +532,7 @@ graph LR
     style Content fill:#f3eff8,stroke:none,color:#6b5f82
 ```
 
-#### Header Bar — Refresh Button (↻)
+### Header Bar — Refresh Button (↻)
 
 The refresh button (top-right of header) triggers a **full state reload** via `alex.refreshWelcomeView`. This parallelizes 6 async data fetches:
 
@@ -555,11 +555,11 @@ After those resolve, it also:
 
 **Design note for Command Center**: The refresh button behavior carries over unchanged. Each tab's content is regenerated from the same cached data — the tab bar is client-side JS switching visibility, not triggering new fetches. Only the ↻ button triggers a full reload.
 
-#### Tab: Mission Control (Default) ✅
+#### Tab: Mission Command (Default) ✅
 
-![Mission Control Tab Mockup](mockups/command-center-v2-mission-control.svg)
+![Mission Command Tab Mockup](mockups/command-center-v2-mission-control.svg)
 
-- **Architecture Status Banner** (top priority) — 3 conditional states shown at the top of Mission Control:
+- **Architecture Status Banner** (top priority) — 3 conditional states shown at the top of Mission Command:
   - **✓ Up to Date** — green: version, health status, last-checked timestamp, refresh button
   - **⬆ Update Available** — amber: version diff, changelog summary, "Update Now" + "Release Notes" buttons
   - **⚡ Not Initialized** — red: no `.github/` detected, "Initialize Architecture" primary CTA + "Learn More"
@@ -580,8 +580,8 @@ After those resolve, it also:
 
 ![Agent Hub Tab Mockup](mockups/command-center-v2-agent-hub.svg)
 
-- **Cognitive State** — mini avatar with current phase/mode/focus, reasoning effort meter (3-bar visual) *(received from Mission Control)*
-- **Parallel Agents** — side-by-side cards showing Builder (running) + Validator (reviewing) simultaneously *(received from Mission Control)*
+- **Cognitive State** — mini avatar with current phase/mode/focus, reasoning effort meter (3-bar visual) *(received from Mission Command)*
+- **Parallel Agents** — side-by-side cards showing Builder (running) + Validator (reviewing) simultaneously *(received from Mission Command)*
 - **Auto-Routing** — agents switch automatically based on intent; no manual selection needed
 - **Active Agent Banner** — shows which agent is currently handling the task and why it was routed
 - **Agent Registry** — all 7 agents (Alex, Builder, Validator, Researcher, Documentarian, Azure, M365) with live status badges: ACTIVE, QUEUED, ROUTING, IDLE
@@ -633,7 +633,7 @@ The tab that no other AI assistant has — Alex's introspective dashboard, a win
 
 ![Docs Tab Mockup](mockups/command-center-v2-docs.svg)
 
-The documentation hub — local resources, workshop study guides, and a gateway to expanded learning on learnalex.correax.com. Mirrors the AlexLearn website structure so users get a consistent experience between the extension and the web portal.
+The documentation hub — local resources, workshop study guides, and the bridge to LearnAlex as the extension's companion web experience. It mirrors the strongest AlexLearn pathways so users get a consistent experience between the editor and the companion site.
 
 - **Tips & Nudges** — context-aware suggestions that adapt to user state (health warnings, streak reminders, feature discovery, meditation prompts). Each nudge has an action link. Dismissible.
 
@@ -709,7 +709,9 @@ The documentation hub — local resources, workshop study guides, and a gateway 
 
 - **Partnership** — Working with Alex guide — dialog engineering and collaboration patterns
 
-> **AlexLearn alignment note**: The Docs tab mirrors the structure and content of learnalex.correax.com. Workshop study guides are sourced from `c:\Development\AlexLearn\website\src\content\workshops\` (33 persona directories, each containing a STUDY-GUIDE.md). Facilitator materials are sourced from `c:\Development\AlexLearn\website\src\content\learn\`. When AlexLearn adds new personas or resources, the Docs tab card grid should be updated to match.
+> **AlexLearn companion note**: LearnAlex is the companion web surface for the Alex VS Code extension, and the Docs tab is the bridge between the two in the new UI. Workshop study guides are sourced from `c:\Development\AlexLearn\website\src\content\workshops\` (33 persona directories, each containing a STUDY-GUIDE.md). Facilitator materials are sourced from `c:\Development\AlexLearn\website\src\content\learn\`. When LearnAlex adds new personas or resources, the Docs tab card grid should be updated to match the strongest companion pathways rather than attempting a full site mirror.
+
+> **Taxonomy alignment note**: The LearnAlex personas and use cases being targeted are also the source of truth for the extension's new persona categories, Docs-tab labels, and companion-facing badge language. The UI may condense those targets for sidebar scale, but it should not invent a separate parallel taxonomy.
 
 > **Original tab concept was Activity** — replaced with Docs to provide a documentation-first experience. Activity/diff review features are better served at the agent level. Original mockup preserved at: `mockups/command-center-more.svg`
 
@@ -743,7 +745,7 @@ Alternatively, for a lighter initial payload: render only the active tab and sen
 | Phase | Work Items | Effort | Risk |
 |-------|-----------|--------|------|
 | **0 — Clean Slate** | Archive avatars + stale code, gut welcome view, remove sidebar views, extract cognitiveState.ts, update extension.ts + package.json + references, establish Command Center shell with tab bar + CSS + persistence | 3-4 days | Low — archival + minimal new code |
-| **1 — Mission Control + SVG** | SVG iconPath spike, design ~25 SVG icons, SVG template functions, avatar bridge update, Architecture Banner, Smart Nudges, Quick Command Bar, Activity Feed, Secret/Settings Manager, Context Budget, Personality Toggle | 6-7 days | Medium — SVG spike is blocking |
+| **1 — Mission Command + SVG** | SVG iconPath spike, design ~25 SVG icons, SVG template functions, avatar bridge update, Architecture Banner, Smart Nudges, Quick Command Bar, Activity Feed, Secret/Settings Manager, Context Budget, Personality Toggle | 6-7 days | Medium — SVG spike is blocking |
 | **2 — Agents Tab** | Agent Registry (7 agents + badges), Cognitive State display, search + filter, Recent Threads, Custom Agent CTA | 3 days | Low |
 | **3 — Skill Store** | Skill catalog data layer, 3-tier catalog + toggles, skill cards + trifecta badges, Context Budget Impact, search + GitHub CTA | 3-4 days | Medium — needs data layer |
 | **4 — Mind Tab** | Brain Health banner, Memory Architecture cards (5 modalities), Cognitive Age, Knowledge Freshness, Meditation & Growth, Honest Uncertainty, Cognitive Actions, Global Knowledge, Identity card | 3-4 days | Low — data sources exist |
@@ -867,7 +869,7 @@ This leaves `alex.welcomeView` as the **sole view** in the sidebar — the tabbe
 
 ### Success Criteria
 
-1. **Zero scrolling** on Mission Control tab — everything fits in one viewport
+1. **Zero scrolling** on Mission Command tab — everything fits in one viewport
 2. **< 200ms** tab switch time
 3. **Skills are browseable** — search 130 skills by name without opening chat
 4. **Recently Used** shows top 5 most-used tools
@@ -916,7 +918,7 @@ Research conducted against `@types/vscode` (VS Code 1.110+) to validate feasibil
 |----------------|------|-----|
 | `maxInputTokens` | `number` | Total context window size — denominator for budget bar |
 | `countTokens(text)` | `Thenable<number>` | Count tokens in a string or message — numerator for budget bar |
-| `name`, `family`, `vendor`, `version` | `string` | Display model info in Mission Control header |
+| `name`, `family`, `vendor`, `version` | `string` | Display model info in Mission Command header |
 
 - `LanguageModelAccessInformation.canSendRequest(chat)` returns `boolean | undefined` — can show permission status.
 - `LanguageModelAccessInformation.onDidChange` fires when access changes — can reactively update the badge.
@@ -1110,7 +1112,7 @@ After analyzing the [OpenAI Codex Competitive Analysis](CODEX-COMPETITIVE-ANALYS
 
 | Current Tab | Reimagined Tab | Key Codex Borrowings |
 |-------------|----------------|---------------------|
-| **Home** | **🎛️ Mission Control** | Live agent feed, Queue/Steer, personality toggle, reasoning effort viz, context budget, inline diff preview |
+| **Home** | **🎛️ Mission Command** | Live agent feed, Queue/Steer, personality toggle, reasoning effort viz, context budget, inline diff preview |
 | **Tools** | **🤖 Agent Hub** | Specialist agent cards with color-coded personalities, thread detail control (Verbose/Standard/Terse), custom agent creation, agent thread history |
 | **Skills** | **🏪 Skill Store** | Toggle on/off switches per skill, 3-tier catalog (Installed/Curated/Experimental), install from GitHub, branded icons with usage stats |
 | **Status** | **🧠 Mind** | Cognitive architecture health, 5 memory modalities, cognitive age, knowledge freshness, meditation & growth, honest uncertainty, global knowledge |
@@ -1126,7 +1128,7 @@ See [mockups/](mockups/) for the 5 approved tab designs:
 
 | Tab | Mockup |
 |-----|--------|
-| Mission Control | [command-center-v2-mission-control.svg](mockups/command-center-v2-mission-control.svg) |
+| Mission Command | [command-center-v2-mission-control.svg](mockups/command-center-v2-mission-control.svg) |
 | Agent Hub | [command-center-v2-agent-hub.svg](mockups/command-center-v2-agent-hub.svg) |
 | Skill Store | [command-center-v2-skill-store.svg](mockups/command-center-v2-skill-store.svg) |
 | Mind | [command-center-v2-mind.svg](mockups/command-center-v2-mind.svg) |
@@ -1136,8 +1138,8 @@ See [mockups/](mockups/) for the 5 approved tab designs:
 
 | Feature | Source Tab | Impact |
 |---------|-----------|--------|
-| Queue & Steer | Mission Control | User control over agent autonomy |
-| Personality modes | Mission Control | Tunable communication style |
+| Queue & Steer | Mission Command | User control over agent autonomy |
+| Personality modes | Mission Command | Tunable communication style |
 | Agent cards with Launch | Agent Hub | Visual agent management |
 | Thread detail control | Agent Hub | Output verbosity control |
 | Skill toggle switches | Skill Store | Per-skill enable/disable |

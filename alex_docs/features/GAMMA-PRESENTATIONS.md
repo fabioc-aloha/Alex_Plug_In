@@ -479,7 +479,7 @@ Main message here
 Always use `--open` to immediately review:
 
 ```bash
-node .github/muscles/gamma-generator.js -f content.md -e pptx --open
+node .github/muscles/gamma-generator.cjs -f content.md -e pptx --open
 ```
 
 ### 5. Iterate with Cost-Effective Models
@@ -522,22 +522,22 @@ Check balance: [gamma.app/settings/billing](https://gamma.app/settings/billing)
 
 ## CLI Tool
 
-**Location:** `.github/muscles/gamma-generator.js`
+**Location:** `.github/muscles/gamma-generator.cjs`
 
 ### Quick Examples
 
 ```bash
 # Simple topic
-node .github/muscles/gamma-generator.js --topic "Introduction to AI"
+node .github/muscles/gamma-generator.cjs --topic "Introduction to AI"
 
 # From file with PowerPoint export
-node .github/muscles/gamma-generator.js --file README.md --export pptx
+node .github/muscles/gamma-generator.cjs --file README.md --export pptx
 
 # Generate and immediately open
-node .github/muscles/gamma-generator.js --file README.md --export pptx --open
+node .github/muscles/gamma-generator.cjs --file README.md --export pptx --open
 
 # Full customization
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --file my-content.md \
   --slides 15 \
   --tone "professional and inspiring" \
@@ -579,7 +579,7 @@ For full control over content:
 #### Step 1: Generate Draft (no credits)
 
 ```bash
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --topic "AI Ethics for Developers" \
   --slides 10 \
   --draft \
@@ -593,7 +593,7 @@ Fill in your content in the generated file.
 #### Step 3: Generate Final
 
 ```bash
-node .github/muscles/gamma-generator.js \
+node .github/muscles/gamma-generator.cjs \
   --file ./exports/ai-ethics-draft.md \
   --image-model ideogram-v3 \
   --export pptx \
