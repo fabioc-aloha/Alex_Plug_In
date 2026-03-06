@@ -12,6 +12,9 @@
 
 | # | Task | Phase | Status | Notes |
 |---|------|-------|--------|-------|
+| | **Phase 0A — SVG Icon Design** | | | |
+| 0A.1 | Generate 90 SVG icon options (30 positions × 3 each) | 0A | Done | `mockups/icons/` — 5 categories |
+| 0A.2 | Review & approve all 30 icon positions | 0A | Not Started | Mark A/B/C in Approved column |
 | | **Phase 0 — Clean Slate** | | | |
 | 0.1 | Archive `assets/avatars/` to `archive/avatars/` (112 PNGs, 26 MB) | 0 | Not Started | `.vsix` drops from ~28 MB to ~2 MB; originals preserved |
 | 0.2 | Extract `cognitiveState.ts` from avatarMappings | 0 | Not Started | Preserves `detectCognitiveState()`, triggers, interfaces |
@@ -73,8 +76,12 @@ gantt
     dateFormat X
     axisFormat %s days
 
+    section Phase 0A — Icon Design
+    Generate 90 SVG icon options        :done, p0z, 0, 1d
+    Review & approve 30 icon positions   :p0y, after p0z, 1d
+
     section Phase 0 — Clean Slate
-    Archive avatars + extract cognitiveState :p0a, 0, 1d
+    Archive avatars + extract cognitiveState :p0a, after p0y, 1d
     Archive avatarMappings.ts                :p0b, after p0a, 1d
     Gut welcomeViewHtml.ts + welcomeView.ts  :p0c, 0, 1d
     Remove dashboard + tree sidebar views    :p0d, after p0c, 1d
@@ -120,6 +127,139 @@ gantt
     Verify sole-view + doc updates           :p6b, after p6a, 1d
     End-to-end test + accessibility pass     :p6c, after p6b, 1d
 ```
+
+---
+
+## Phase 0A — SVG Icon Design Approval
+
+Before implementation starts, every icon position in the Command Center UI needs an approved design. This phase catalogs all 30 icon positions across 5 categories, with 3 design options each (90 SVGs total). Mark your choice in the **Approved** column.
+
+**Design system:**
+- All icons use the CorreaX gradient palette with a `linearGradient` fill
+- Container shape encodes category: **rounded rect** (tabs), **circle** (states), **hexagon** (agents), **squircle** (personas/default)
+- 3 options per position offer different visual metaphors — choose the one that best communicates the concept at glance
+
+**Source files:** `alex_docs/research/mockups/icons/` — regenerate with `generate-icon-options.ps1`
+
+### Tab Bar Icons (5)
+
+These appear in the Command Center tab strip. Indigo palette (#6366f1 → #818cf8), rounded rectangle container.
+
+| # | Position | Description | Option A | Option B | Option C | Approved |
+|---|----------|-------------|----------|----------|----------|----------|
+| 1 | Mission Control | Dashboard / status overview | ![A](mockups/icons/tabs/mission-a.svg) | ![B](mockups/icons/tabs/mission-b.svg) | ![C](mockups/icons/tabs/mission-c.svg) | |
+| 2 | Agents | Agent hub / team management | ![A](mockups/icons/tabs/agents-a.svg) | ![B](mockups/icons/tabs/agents-b.svg) | ![C](mockups/icons/tabs/agents-c.svg) | |
+| 3 | Skill Store | Skill catalog / capabilities | ![A](mockups/icons/tabs/skills-a.svg) | ![B](mockups/icons/tabs/skills-b.svg) | ![C](mockups/icons/tabs/skills-c.svg) | |
+| 4 | Mind | Brain / cognitive architecture | ![A](mockups/icons/tabs/mind-a.svg) | ![B](mockups/icons/tabs/mind-b.svg) | ![C](mockups/icons/tabs/mind-c.svg) | |
+| 5 | Docs | Documentation / reference | ![A](mockups/icons/tabs/docs-a.svg) | ![B](mockups/icons/tabs/docs-b.svg) | ![C](mockups/icons/tabs/docs-c.svg) | |
+
+**Option legend:**
+- Mission: A = Signal bars, B = Gauge/speedometer, C = Pulse/heartbeat
+- Agents: A = Person bust, B = Two people, C = Network nodes
+- Skills: A = 2×2 grid, B = Lightning bolt, C = Star
+- Mind: A = Brain lobes, B = Atom/orbits, C = Concentric circles (zen eye)
+- Docs: A = Document with lines, B = Open book, C = Bookmark
+
+### Cognitive State Icons (9)
+
+Shown as the avatar in sidebar and Copilot Chat. Circle container, color indicates state.
+
+| # | State | Color | Description | Option A | Option B | Option C | Approved |
+|---|-------|-------|-------------|----------|----------|----------|----------|
+| 6 | Building | Indigo | Active construction / implementation | ![A](mockups/icons/states/building-a.svg) | ![B](mockups/icons/states/building-b.svg) | ![C](mockups/icons/states/building-c.svg) | |
+| 7 | Debugging | Red | Error investigation / fixing | ![A](mockups/icons/states/debugging-a.svg) | ![B](mockups/icons/states/debugging-b.svg) | ![C](mockups/icons/states/debugging-c.svg) | |
+| 8 | Planning | Blue | Architecture / design decisions | ![A](mockups/icons/states/planning-a.svg) | ![B](mockups/icons/states/planning-b.svg) | ![C](mockups/icons/states/planning-c.svg) | |
+| 9 | Reviewing | Teal | Code review / quality assessment | ![A](mockups/icons/states/reviewing-a.svg) | ![B](mockups/icons/states/reviewing-b.svg) | ![C](mockups/icons/states/reviewing-c.svg) | |
+| 10 | Learning | Green | Knowledge absorption / study | ![A](mockups/icons/states/learning-a.svg) | ![B](mockups/icons/states/learning-b.svg) | ![C](mockups/icons/states/learning-c.svg) | |
+| 11 | Teaching | Amber | Explaining / presenting | ![A](mockups/icons/states/teaching-a.svg) | ![B](mockups/icons/states/teaching-b.svg) | ![C](mockups/icons/states/teaching-c.svg) | |
+| 12 | Meditation | Emerald | Reflection / consolidation | ![A](mockups/icons/states/meditation-a.svg) | ![B](mockups/icons/states/meditation-b.svg) | ![C](mockups/icons/states/meditation-c.svg) | |
+| 13 | Dream | Purple | Neural maintenance / sleep | ![A](mockups/icons/states/dream-a.svg) | ![B](mockups/icons/states/dream-b.svg) | ![C](mockups/icons/states/dream-c.svg) | |
+| 14 | Discovery | Gold | Insight / eureka moment | ![A](mockups/icons/states/discovery-a.svg) | ![B](mockups/icons/states/discovery-b.svg) | ![C](mockups/icons/states/discovery-c.svg) | |
+
+**Option legend:**
+- Building: A = Up arrow, B = Triangle, C = Plus/cross
+- Debugging: A = Circle with X, B = Exclamation, C = Bug with antennae
+- Planning: A = Diamond, B = Horizontal lines, C = Fork/branch
+- Reviewing: A = Checkmark, B = Eye, C = Magnifying glass
+- Learning: A = Open book, B = Lightbulb (outline), C = Graduation cap
+- Teaching: A = Megaphone, B = Person at podium, C = Broadcast waves
+- Meditation: A = Lotus arch, B = Enso circle (broken ring), C = Infinity (two circles)
+- Dream: A = Crescent moon, B = Moon + star, C = Cloud with Zzz
+- Discovery: A = Lightbulb (glow), B = 4-point sparkle, C = Compass
+
+### Agent Mode Icons (7)
+
+Shown when a specialist agent is active. Hexagonal container, color per agent.
+
+| # | Agent | Color | Description | Option A | Option B | Option C | Approved |
+|---|-------|-------|-------------|----------|----------|----------|----------|
+| 15 | Alex | Indigo | Orchestrator / default | ![A](mockups/icons/agents/alex-a.svg) | ![B](mockups/icons/agents/alex-b.svg) | ![C](mockups/icons/agents/alex-c.svg) | |
+| 16 | Researcher | Blue | Deep exploration / analysis | ![A](mockups/icons/agents/researcher-a.svg) | ![B](mockups/icons/agents/researcher-b.svg) | ![C](mockups/icons/agents/researcher-c.svg) | |
+| 17 | Builder | Green | Constructive implementation | ![A](mockups/icons/agents/builder-a.svg) | ![B](mockups/icons/agents/builder-b.svg) | ![C](mockups/icons/agents/builder-c.svg) | |
+| 18 | Validator | Red | QA / adversarial review | ![A](mockups/icons/agents/validator-a.svg) | ![B](mockups/icons/agents/validator-b.svg) | ![C](mockups/icons/agents/validator-c.svg) | |
+| 19 | Documentarian | Amber | Documentation / writing | ![A](mockups/icons/agents/documentarian-a.svg) | ![B](mockups/icons/agents/documentarian-b.svg) | ![C](mockups/icons/agents/documentarian-c.svg) | |
+| 20 | Azure | Azure Blue | Cloud infrastructure | ![A](mockups/icons/agents/azure-a.svg) | ![B](mockups/icons/agents/azure-b.svg) | ![C](mockups/icons/agents/azure-c.svg) | |
+| 21 | M365 | MS Orange | Microsoft 365 integration | ![A](mockups/icons/agents/m365-a.svg) | ![B](mockups/icons/agents/m365-b.svg) | ![C](mockups/icons/agents/m365-c.svg) | |
+
+**Option legend:**
+- Alex: A = "A" monogram, B = 5-point star, C = Infinity loops
+- Researcher: A = Magnifying glass, B = Lab flask, C = Question mark
+- Builder: A = Hammer, B = Gear/cog, C = Crane
+- Validator: A = Shield + check, B = Check in circle, C = Balance/scales
+- Documentarian: A = Document with lines, B = Scroll, C = Quotation mark
+- Azure: A = Cloud (filled), B = Cloud with upload arrow, C = Server stack
+- M365: A = 4 squares (MS logo), B = "M" monogram, C = Diamond
+
+### Core Persona Icons (8)
+
+Shown when a persona is active and no agent/state overrides. Squircle container (high border radius), color per persona category.
+
+| # | Persona | Color | Description | Option A | Option B | Option C | Approved |
+|---|---------|-------|-------------|----------|----------|----------|----------|
+| 22 | Developer | Indigo | Code / engineering | ![A](mockups/icons/personas/developer-a.svg) | ![B](mockups/icons/personas/developer-b.svg) | ![C](mockups/icons/personas/developer-c.svg) | |
+| 23 | Architect | Blue | System design / structure | ![A](mockups/icons/personas/architect-a.svg) | ![B](mockups/icons/personas/architect-b.svg) | ![C](mockups/icons/personas/architect-c.svg) | |
+| 24 | Designer | Purple | Visual / UX creativity | ![A](mockups/icons/personas/designer-a.svg) | ![B](mockups/icons/personas/designer-b.svg) | ![C](mockups/icons/personas/designer-c.svg) | |
+| 25 | Writer | Amber | Content / prose | ![A](mockups/icons/personas/writer-a.svg) | ![B](mockups/icons/personas/writer-b.svg) | ![C](mockups/icons/personas/writer-c.svg) | |
+| 26 | Data | Teal | Analytics / databases | ![A](mockups/icons/personas/data-a.svg) | ![B](mockups/icons/personas/data-b.svg) | ![C](mockups/icons/personas/data-c.svg) | |
+| 27 | Academic | Green | Research / education | ![A](mockups/icons/personas/academic-a.svg) | ![B](mockups/icons/personas/academic-b.svg) | ![C](mockups/icons/personas/academic-c.svg) | |
+| 28 | DevOps | Red | CI/CD / infrastructure | ![A](mockups/icons/personas/devops-a.svg) | ![B](mockups/icons/personas/devops-b.svg) | ![C](mockups/icons/personas/devops-c.svg) | |
+| 29 | Security | Gold | Protection / authentication | ![A](mockups/icons/personas/security-a.svg) | ![B](mockups/icons/personas/security-b.svg) | ![C](mockups/icons/personas/security-c.svg) | |
+
+**Option legend:**
+- Developer: A = Code brackets `</>`, B = Terminal prompt `>_`, C = Hash `#` grid
+- Architect: A = Building facade, B = Blueprint grid, C = Pyramid/triangle
+- Designer: A = Pen tool cursor, B = Color palette (3 circles), C = Paintbrush
+- Writer: A = Quill/feather, B = Italic serif "A", C = Pilcrow ¶
+- Data: A = Bar chart, B = Database cylinder, C = Pie chart
+- Academic: A = Graduation cap, B = Atom orbits, C = Book spine
+- DevOps: A = Infinity loop, B = Gear with spokes, C = Circular arrows (CI/CD)
+- Security: A = Padlock, B = Shield (filled), C = Key
+
+### Default / Fallback Icon (1)
+
+Used when no specific state, agent, or persona is active. Circle container, indigo.
+
+| # | Icon | Description | Option A | Option B | Option C | Approved |
+|---|------|-------------|----------|----------|----------|----------|
+| 30 | Alex Default | Neutral / idle state | ![A](mockups/icons/default/default-a.svg) | ![B](mockups/icons/default/default-b.svg) | ![C](mockups/icons/default/default-c.svg) | |
+
+**Option legend:**
+- Default: A = Bold "A" monogram, B = 4-point sparkle, C = Minimal smiley face
+
+### Approval Summary
+
+| Category | Count | Container Shape | Color Strategy |
+|----------|-------|----------------|----------------|
+| Tab Bar | 5 | Rounded Rectangle | Unified indigo |
+| Cognitive States | 9 | Circle | Color = state meaning |
+| Agent Modes | 7 | Hexagon | Color = agent identity |
+| Core Personas | 8 | Squircle | Color = persona domain |
+| Default | 1 | Circle | Indigo (brand default) |
+| **Total** | **30 positions** | — | **90 options to review** |
+
+**How to approve**: Mark your selection (A, B, or C) in the **Approved** column. After all 30 positions are approved, Phase 1 implementation (task 1.2) will produce the final SVG template functions using the selected designs.
+
+**Open in VS Code Preview** (`Ctrl+Shift+V`) to see all thumbnails rendered inline.
 
 ---
 
