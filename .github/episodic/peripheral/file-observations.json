@@ -3,17 +3,8 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/mockups/comparison-home-vs-mission-control.svg",
-    "alex_docs/research/mockups/comparison-more-vs-activity.svg",
-    "alex_docs/research/mockups/comparison-skills-vs-skill-store.svg",
-    "alex_docs/research/mockups/comparison-status-vs-automations.svg",
-    "alex_docs/research/mockups/comparison-tools-vs-agent-hub.svg",
-    "alex_docs/audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1772769809059
+  "lastUpdated": 1772769851373
 }
