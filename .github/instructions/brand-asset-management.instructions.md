@@ -25,6 +25,14 @@ applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
 | **Primary Icon** | `$(rocket)` codicon | ✅ LOCKED |
 | **Colors** | Azure blue (#0078d4) + thrust orange (#ff6b35) | ✅ LOCKED |
 
+## Command Center Micro-Asset Exception
+
+The Alex logo system and marketplace/banner branding are **not** the default style for Command Center UI micro-assets.
+
+- For extension-local tab icons, state avatars, persona icons, agent icons, and badges, use the CorreaX UI asset rules in `alex_docs/DK-correax-brand.md`.
+- Treat the rocket metaphor and azure/orange pair as product-brand assets, not the everyday visual language for sidebar micro-icons.
+- In-product assets must optimize for semantic clarity at 16px to 24px, with state and function taking priority over logo resemblance.
+
 ### Website Palette (alex.correax.com)
 
 The landing page (`docs/index.html`) uses a distinct dark-themed palette optimized for web:

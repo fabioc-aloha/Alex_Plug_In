@@ -152,9 +152,9 @@ gantt
 Before implementation starts, every icon position in the Command Center UI needs an approved design. This phase catalogs all 38 icon positions across 5 categories, with 3 design options each (114 SVGs total). Mark your choice in the **Approved** column.
 
 **Design system:**
-- All icons use the CorreaX gradient palette with a `linearGradient` fill
-- Container shape encodes category: **rounded rect** (tabs), **circle** (states), **hexagon** (agents), **squircle** (personas/default)
-- 3 options per position offer different visual metaphors — choose the one that best communicates the concept at glance
+- This generated set is exploratory and predates the stricter Command Center UI asset rules in `alex_docs/DK-correax-brand.md`
+- Container shape still encodes category: **rounded rect** (tabs), **circle** (states), **hexagon** (agents), **squircle** (personas/default)
+- Final implementation-grade assets should use vector-only symbols, a consistent stroke/depth grammar, and CorreaX-led semantic accents
 - Persona categories expanded from 8 to 16 to cover all 33 AlexLearn workshop personas (learnalex.correax.com)
 
 **Source files:** `alex_docs/research/mockups/icons/` — regenerate with `generate-icon-options.ps1`

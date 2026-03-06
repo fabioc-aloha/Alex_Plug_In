@@ -124,6 +124,15 @@ Decoupling derisks the critical path — tab layout can ship and validate withou
 
 ## SVG Mockup Design System
 
+Command Center icons, avatars, and badges should follow the Command Center UI asset system in `alex_docs/DK-correax-brand.md`.
+
+The currently generated SVG approval boards are exploratory and predate that stricter asset standard. They are good enough for concept review, but not yet the final quality bar for implementation.
+
+Before implementation-grade assets are approved, regenerate them with:
+- vector symbols instead of text glyphs
+- one consistent stroke/depth grammar across all families
+- CorreaX-led semantic accent discipline for tabs, states, personas, and badges
+
 ### Canvas
 - **Width**: 560px total = 320px UI mockup + 240px annotation column
 - **Height**: Variable per tab (800–960px)

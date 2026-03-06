@@ -532,7 +532,85 @@ All 27 personas now use CorreaX palette tokens. Each token carries semantic inte
 
 ---
 
-## 14. Implementation Checklist
+## 14. Command Center UI Asset System
+
+### Scope
+
+This section governs **in-product micro-assets** for the Alex VS Code extension Command Center:
+- tab icons
+- cognitive-state avatars
+- agent-mode icons
+- persona-category icons
+- badges, counts, and status chips
+
+These assets are part of the product UI, not marketing identity. They must optimize for clarity, trust, and recognition at sidebar scale.
+
+### Brand Layering Rule
+
+CorreaX remains the visual foundation for the Command Center, but micro-assets follow a different priority than logos and banners.
+
+- Use the CorreaX dark UI palette, spacing discipline, and semantic accent system as the base language.
+- Reserve the rocket mark, hero-logo treatment, and azure/orange launch metaphor for product branding, banners, marketplace art, and logo surfaces.
+- In the Command Center, icons and avatars should communicate **state, role, and function** before brand theater.
+
+### Construction Grammar
+
+- Design on a 24-unit internal grid and export freely as SVG.
+- Keep a 2-unit safe area so symbols hold up at 16px and 20px render sizes.
+- Default stroke weight: 1.75 units with rounded line caps and joins.
+- Outer containers may use up to 2.25-unit strokes when needed for legibility.
+- Limit symbols to one primary metaphor and at most two internal visual layers.
+
+### Family Grammar
+
+| Family | Container | Color logic | Role |
+| ------ | --------- | ----------- | ---- |
+| Tab icons | Rounded rectangle / panel form | Indigo-led, muted when inactive | Navigation and feature identity |
+| State avatars | Circle | Semantic accent by cognitive state | What Alex is doing right now |
+| Agent icons | Rounded hexagon | Indigo base, optional platform accent | Specialist mode identity |
+| Persona icons | Squircle / rounded badge | Persona mapping from section 13 | User-context category, not literal portraiture |
+| Badges | Pill, dot, or compact count chip | Neutral base + single accent | Status, counts, and lightweight taxonomy |
+
+### Surface Treatment
+
+- Avoid flat raw fills with no tonal hierarchy.
+- Use subtle depth: base fill plus either a top-edge highlight, inner shadow, or restrained same-hue gradient.
+- Gradients should stay within the same hue family and be used to improve separation, not to add spectacle.
+- Foreground symbols should remain high-contrast, typically near-white on dark surfaces.
+
+### Symbol Rules
+
+- Do not use text glyphs, letters, punctuation, or initials as the primary icon metaphor.
+- Do not use emoji-style symbols.
+- Do not attempt tiny face illustrations inside micro-assets.
+- Prefer simple vector metaphors that still read at 16px.
+- If a concept is too abstract, choose a clear category metaphor rather than falling back to a letter.
+
+### Color Rules
+
+- Default Command Center emphasis should come from CorreaX indigo, teal, coral, and rose families.
+- Persona-category icons should use the semantic mapping defined in section 13.
+- Existing intentional exceptions may remain when already meaningful in-product, such as Developer blue, Academic purple, and Data cyan.
+- Critical alerts and blocking error states should reserve rose/red-adjacent treatment; do not spend that color on decorative accents.
+
+### Badge Rules
+
+- Count badges should prioritize legibility over ornament; the number must remain readable at a glance.
+- Status badges should use one accent plus neutral structure, never a rainbow of independent colors.
+- Taxonomy badges should be lower-contrast than primary CTAs so they do not hijack hierarchy.
+- Use filled pills for urgent counts, outline or soft-fill chips for secondary status, and dot-plus-label only where space allows.
+
+### Command Center Avoid List
+
+- No primary icons built from letters like `A`, `M`, `$`, `?`, or `¶`
+- No mixed container language within the same family
+- No glossy or noisy gradients
+- No full-spectrum palette drift beyond defined semantic exceptions
+- No badge styles that visually compete with primary action buttons
+
+---
+
+## 15. Implementation Checklist
 
 When starting a new CorreaX product UI:
 

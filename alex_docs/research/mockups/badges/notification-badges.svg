@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="180" viewBox="0 0 780 180">
+  <rect width="780" height="180" fill="#1e1e1e" rx="12"/>
+  <text x="24" y="28" font-family="Segoe UI, sans-serif" font-size="16" fill="#ffffff" font-weight="600">Notification / Count Badge Options</text>
+
+  <g transform="translate(24,52)">
+    <text x="104" y="0" font-family="Segoe UI, sans-serif" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="600">A</text>
+    <rect x="0" y="14" width="208" height="84" rx="10" fill="#252526" stroke="#3c3c3c"/>
+    <circle cx="48" cy="44" r="18" fill="#ef4444"/>
+    <text x="48" y="49" font-family="Segoe UI, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">3</text>
+    <text x="78" y="49" font-family="Segoe UI, sans-serif" font-size="11" fill="#d4d4d4">Classic circular count badge</text>
+  </g>
+
+  <g transform="translate(286,52)">
+    <text x="104" y="0" font-family="Segoe UI, sans-serif" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="600">B</text>
+    <rect x="0" y="14" width="208" height="84" rx="10" fill="#252526" stroke="#3c3c3c"/>
+    <rect x="18" y="30" width="34" height="24" rx="12" fill="#ef4444"/>
+    <text x="35" y="46" font-family="Segoe UI, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="700">12</text>
+    <text x="66" y="46" font-family="Segoe UI, sans-serif" font-size="11" fill="#d4d4d4">Rounded-rect quantity badge</text>
+  </g>
+
+  <g transform="translate(548,52)">
+    <text x="104" y="0" font-family="Segoe UI, sans-serif" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="600">C</text>
+    <rect x="0" y="14" width="208" height="84" rx="10" fill="#252526" stroke="#3c3c3c"/>
+    <circle cx="30" cy="42" r="7" fill="#ef4444"/>
+    <text x="52" y="46" font-family="Segoe UI, sans-serif" font-size="11" fill="#d4d4d4">Minimal alert dot</text>
+    <text x="16" y="78" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888">Smallest visual interruption</text>
+  </g>
+</svg>
