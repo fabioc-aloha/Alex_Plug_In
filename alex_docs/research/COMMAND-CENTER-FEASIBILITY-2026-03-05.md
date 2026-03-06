@@ -13,8 +13,8 @@
 | # | Task | Phase | Status | Notes |
 |---|------|-------|--------|-------|
 | | **Phase 0A — SVG Icon Design** | | | |
-| 0A.1 | Generate 90 SVG icon options (30 positions × 3 each) | 0A | Done | `mockups/icons/` — 5 categories |
-| 0A.2 | Review & approve all 30 icon positions | 0A | Not Started | Mark A/B/C in Approved column |
+| 0A.1 | Generate SVG icon options (38 positions × 3 each = 114 total) | 0A | Done | `mockups/icons/` — 5 categories, 16 persona categories |
+| 0A.2 | Review & approve all 38 icon positions | 0A | Not Started | Mark A/B/C in Approved column |
 | | **Phase 0 — Clean Slate** | | | |
 | 0.1 | Archive `assets/avatars/` to `archive/avatars/` (112 PNGs, 26 MB) | 0 | Not Started | `.vsix` drops from ~28 MB to ~2 MB; originals preserved |
 | 0.2 | Extract `cognitiveState.ts` from avatarMappings | 0 | Not Started | Preserves `detectCognitiveState()`, triggers, interfaces |
@@ -58,11 +58,14 @@
 | 4.4 | Meditation & Growth + Honest Uncertainty | 4 | Not Started | Streak, emotional pattern, confidence bars |
 | 4.5 | Cognitive Actions (/meditate, /dream, /self-actualize) | 4 | Not Started | Quick-launch buttons |
 | 4.6 | Global Knowledge + Identity card | 4 | Not Started | Insight count, promoted this cycle, Alex Finch card |
-| | **Phase 5 — Docs Tab** | | | |
+| | **Phase 5 — Docs Tab (AlexLearn-aligned)** | | | |
 | 5.1 | Tips & Nudges engine (context-aware suggestions) | 5 | Not Started | Health warnings, streak reminders, discovery |
-| 5.2 | Getting Started grid (4 key local docs) | 5 | Not Started | User Manual, Quick Ref, Env Setup, Use Cases |
-| 5.3 | Architecture + Operations doc grids | 5 | Not Started | 2×3 + 2×2 compact card layouts |
-| 5.4 | Learn Alex Online CTA + Partnership guide | 5 | Not Started | learnalex.correax.com link |
+| 5.2 | Getting Started grid (Setup Guide, User Manual, Quick Ref, Env Setup) | 5 | Not Started | Mirrors learnalex.correax.com setup flow |
+| 5.3 | Workshop Study Guides — persona selector grid (33 personas) | 5 | Not Started | Card grid linking to learnalex.correax.com/workshop/{persona} |
+| 5.4 | Self-Study & Exercises section (30/60/90-day path + hands-on) | 5 | Not Started | Links to /self-study and /exercises |
+| 5.5 | Facilitator Materials (Session Plan, Slides, Demo Scripts, Handout, Pre-Read) | 5 | Not Started | Collapsible section for workshop organizers |
+| 5.6 | Architecture + Operations doc grids | 5 | Not Started | 2×3 + 2×2 compact card layouts (local docs) |
+| 5.7 | Learn Alex Online CTA + Partnership guide | 5 | Not Started | learnalex.correax.com hero banner + Working with Alex |
 | | **Phase 6 — Final Polish** | | | |
 | 6.1 | Redirect legacy commands to Command Center | 6 | Not Started | `showCognitiveDashboard` → Mind tab, etc. |
 | 6.2 | Verify sole-view state (no orphan registrations) | 6 | Not Started | Only `alex.welcomeView` in package.json |
@@ -77,7 +80,7 @@ gantt
     axisFormat %s days
 
     section Phase 0A — Icon Design
-    Generate 90 SVG icon options        :done, p0z, 0, 1d
+    Generate 114 SVG icon options       :done, p0z, 0, 1d
     Review & approve 30 icon positions   :p0y, after p0z, 1d
 
     section Phase 0 — Clean Slate
@@ -117,13 +120,17 @@ gantt
     Meditation + Uncertainty + Actions       :p4d, after p4c, 1d
     Global Knowledge + Identity card         :p4e, after p4d, 1d
 
-    section Phase 5 — Docs Tab
+    section Phase 5 — Docs Tab (AlexLearn-aligned)
     Tips & Nudges engine                     :p5a, after p4e, 1d
-    Getting Started + Architecture grids     :p5b, after p5a, 1d
-    Operations + Learn Online + Partnership  :p5c, after p5b, 1d
+    Getting Started + Setup Guide grid       :p5b, after p5a, 1d
+    Workshop Study Guides (33 personas)      :p5c, after p5b, 1d
+    Self-Study + Exercises section           :p5d, after p5c, 1d
+    Facilitator Materials (collapsible)      :p5e, after p5d, 1d
+    Architecture + Operations grids          :p5f, after p5e, 1d
+    Learn Online CTA + Partnership           :p5g, after p5f, 1d
 
     section Phase 6 — Final Polish
-    Redirect legacy commands                 :p6a, after p5c, 1d
+    Redirect legacy commands                 :p6a, after p5g, 1d
     Verify sole-view + doc updates           :p6b, after p6a, 1d
     End-to-end test + accessibility pass     :p6c, after p6b, 1d
 ```
@@ -132,12 +139,13 @@ gantt
 
 ## Phase 0A — SVG Icon Design Approval
 
-Before implementation starts, every icon position in the Command Center UI needs an approved design. This phase catalogs all 30 icon positions across 5 categories, with 3 design options each (90 SVGs total). Mark your choice in the **Approved** column.
+Before implementation starts, every icon position in the Command Center UI needs an approved design. This phase catalogs all 38 icon positions across 5 categories, with 3 design options each (114 SVGs total). Mark your choice in the **Approved** column.
 
 **Design system:**
 - All icons use the CorreaX gradient palette with a `linearGradient` fill
 - Container shape encodes category: **rounded rect** (tabs), **circle** (states), **hexagon** (agents), **squircle** (personas/default)
 - 3 options per position offer different visual metaphors — choose the one that best communicates the concept at glance
+- Persona categories expanded from 8 to 16 to cover all 33 AlexLearn workshop personas (learnalex.correax.com)
 
 **Source files:** `alex_docs/research/mockups/icons/` — regenerate with `generate-icon-options.ps1`
 
@@ -210,30 +218,84 @@ Shown when a specialist agent is active. Hexagonal container, color per agent.
 - Azure: A = Cloud (filled), B = Cloud with upload arrow, C = Server stack
 - M365: A = 4 squares (MS logo), B = "M" monogram, C = Diamond
 
-### Core Persona Icons (8)
+### Persona Category Icons (16) — Aligned with AlexLearn Workshop Study Guides
 
-Shown when a persona is active and no agent/state overrides. Squircle container (high border radius), color per persona category.
+Shown when a persona is active and no agent/state overrides. Squircle container (high border radius), color per persona category. Expanded from 8 to 16 categories to cover all 33 AlexLearn workshop personas (learnalex.correax.com).
 
-| # | Persona | Color | Description | Option A | Option B | Option C | Approved |
-|---|---------|-------|-------------|----------|----------|----------|----------|
-| 22 | Developer | Indigo | Code / engineering | ![A](mockups/icons/personas/developer-a.svg) | ![B](mockups/icons/personas/developer-b.svg) | ![C](mockups/icons/personas/developer-c.svg) | |
-| 23 | Architect | Blue | System design / structure | ![A](mockups/icons/personas/architect-a.svg) | ![B](mockups/icons/personas/architect-b.svg) | ![C](mockups/icons/personas/architect-c.svg) | |
-| 24 | Designer | Purple | Visual / UX creativity | ![A](mockups/icons/personas/designer-a.svg) | ![B](mockups/icons/personas/designer-b.svg) | ![C](mockups/icons/personas/designer-c.svg) | |
-| 25 | Writer | Amber | Content / prose | ![A](mockups/icons/personas/writer-a.svg) | ![B](mockups/icons/personas/writer-b.svg) | ![C](mockups/icons/personas/writer-c.svg) | |
-| 26 | Data | Teal | Analytics / databases | ![A](mockups/icons/personas/data-a.svg) | ![B](mockups/icons/personas/data-b.svg) | ![C](mockups/icons/personas/data-c.svg) | |
-| 27 | Academic | Green | Research / education | ![A](mockups/icons/personas/academic-a.svg) | ![B](mockups/icons/personas/academic-b.svg) | ![C](mockups/icons/personas/academic-c.svg) | |
-| 28 | DevOps | Red | CI/CD / infrastructure | ![A](mockups/icons/personas/devops-a.svg) | ![B](mockups/icons/personas/devops-b.svg) | ![C](mockups/icons/personas/devops-c.svg) | |
-| 29 | Security | Gold | Protection / authentication | ![A](mockups/icons/personas/security-a.svg) | ![B](mockups/icons/personas/security-b.svg) | ![C](mockups/icons/personas/security-c.svg) | |
+| # | Category Icon | Color | AlexLearn Personas Covered | Option A | Option B | Option C | Approved |
+|---|---------------|-------|---------------------------|----------|----------|----------|----------|
+| 22 | Software | Indigo | Software Developers | ![A](mockups/icons/personas/software-a.svg) | ![B](mockups/icons/personas/software-b.svg) | ![C](mockups/icons/personas/software-c.svg) | |
+| 23 | Engineering | Blue | Engineers | ![A](mockups/icons/personas/engineering-a.svg) | ![B](mockups/icons/personas/engineering-b.svg) | ![C](mockups/icons/personas/engineering-c.svg) | |
+| 24 | Science | Teal | Scientists, AI Researchers | ![A](mockups/icons/personas/science-a.svg) | ![B](mockups/icons/personas/science-b.svg) | ![C](mockups/icons/personas/science-c.svg) | |
+| 25 | Data | Cyan | Data Analysts, Visual Storytellers | ![A](mockups/icons/personas/data-a.svg) | ![B](mockups/icons/personas/data-b.svg) | ![C](mockups/icons/personas/data-c.svg) | |
+| 26 | Design | Purple | Designers (UX/UI) | ![A](mockups/icons/personas/design-a.svg) | ![B](mockups/icons/personas/design-b.svg) | ![C](mockups/icons/personas/design-c.svg) | |
+| 27 | Creative | Violet | Creative Writers, Content Creators, Podcasters, Standup Comics, Journalists | ![A](mockups/icons/personas/creative-a.svg) | ![B](mockups/icons/personas/creative-b.svg) | ![C](mockups/icons/personas/creative-c.svg) | |
+| 28 | Documentation | Amber | Technical Writers | ![A](mockups/icons/personas/documentation-a.svg) | ![B](mockups/icons/personas/documentation-b.svg) | ![C](mockups/icons/personas/documentation-c.svg) | |
+| 29 | Business | Slate | Consultants, Knowledge Workers, Executives (CxO) | ![A](mockups/icons/personas/business-a.svg) | ![B](mockups/icons/personas/business-b.svg) | ![C](mockups/icons/personas/business-c.svg) | |
+| 30 | Finance | Green | Finance Professionals | ![A](mockups/icons/personas/finance-a.svg) | ![B](mockups/icons/personas/finance-b.svg) | ![C](mockups/icons/personas/finance-c.svg) | |
+| 31 | Product | Orange | Product Managers, Project Managers, Entrepreneurs | ![A](mockups/icons/personas/product-a.svg) | ![B](mockups/icons/personas/product-b.svg) | ![C](mockups/icons/personas/product-c.svg) | |
+| 32 | Marketing | Coral | Marketing Professionals, Sales Professionals, Real Estate Professionals | ![A](mockups/icons/personas/marketing-a.svg) | ![B](mockups/icons/personas/marketing-b.svg) | ![C](mockups/icons/personas/marketing-c.svg) | |
+| 33 | Education | Emerald | Teachers & Educators, Students, Researchers & Professors | ![A](mockups/icons/personas/education-a.svg) | ![B](mockups/icons/personas/education-b.svg) | ![C](mockups/icons/personas/education-c.svg) | |
+| 34 | Healthcare | Red | Healthcare Professionals, Psychology Counselors | ![A](mockups/icons/personas/healthcare-a.svg) | ![B](mockups/icons/personas/healthcare-b.svg) | ![C](mockups/icons/personas/healthcare-c.svg) | |
+| 35 | Legal | Gold | Lawyers | ![A](mockups/icons/personas/legal-a.svg) | ![B](mockups/icons/personas/legal-b.svg) | ![C](mockups/icons/personas/legal-c.svg) | |
+| 36 | People | Pink | HR & People Ops, CX Leaders, Nonprofit Leaders | ![A](mockups/icons/personas/people-a.svg) | ![B](mockups/icons/personas/people-b.svg) | ![C](mockups/icons/personas/people-c.svg) | |
+| 37 | Career | Sky | Job Seekers | ![A](mockups/icons/personas/career-a.svg) | ![B](mockups/icons/personas/career-b.svg) | ![C](mockups/icons/personas/career-c.svg) | |
 
 **Option legend:**
-- Developer: A = Code brackets `</>`, B = Terminal prompt `>_`, C = Hash `#` grid
-- Architect: A = Building facade, B = Blueprint grid, C = Pyramid/triangle
-- Designer: A = Pen tool cursor, B = Color palette (3 circles), C = Paintbrush
-- Writer: A = Quill/feather, B = Italic serif "A", C = Pilcrow ¶
+- Software: A = Code brackets `</>`, B = Terminal prompt `>_`, C = Hash `#` grid
+- Engineering: A = Gear with spokes, B = Wrench, C = Circuit board
+- Science: A = Atom orbits, B = Flask/beaker, C = Microscope
 - Data: A = Bar chart, B = Database cylinder, C = Pie chart
-- Academic: A = Graduation cap, B = Atom orbits, C = Book spine
-- DevOps: A = Infinity loop, B = Gear with spokes, C = Circular arrows (CI/CD)
-- Security: A = Padlock, B = Shield (filled), C = Key
+- Design: A = Pen tool cursor, B = Color palette (3 circles), C = Paintbrush
+- Creative: A = Quill/feather, B = Microphone, C = Drama masks
+- Documentation: A = Document with pen, B = Italic serif "A", C = Pilcrow ¶
+- Business: A = Briefcase, B = Building facade, C = Handshake
+- Finance: A = Dollar sign, B = Line chart trending up, C = Calculator
+- Product: A = Roadmap/flag, B = Kanban board, C = Rocket
+- Marketing: A = Megaphone, B = Target/bullseye, C = Trending arrow
+- Education: A = Graduation cap, B = Book spine, C = Apple
+- Healthcare: A = Heart with plus, B = Stethoscope, C = Caduceus
+- Legal: A = Scales of justice, B = Gavel, C = Shield with checkmark
+- People: A = Two people silhouette, B = Handshake circle, C = Heart in hand
+- Career: A = Compass, B = Ascending stairs, C = Briefcase with star
+
+**AlexLearn → Icon Category mapping (all 33 personas):**
+
+| AlexLearn Persona | Tag | Icon Category |
+|-------------------|-----|---------------|
+| Software Developers | Software | Software |
+| Engineers | Engineering | Engineering |
+| AI Researchers | AI Research | Science |
+| Scientists | Science | Science |
+| Data Analysts | Data | Data |
+| Visual Storytellers | Data Visualization | Data |
+| Designers (UX/UI) | Design | Design |
+| Creative Writers | Creative Writing | Creative |
+| Content Creators | Content | Creative |
+| Podcasters | Podcasting | Creative |
+| Standup Comics | Comedy | Creative |
+| Journalists | Journalism | Creative |
+| Technical Writers | Documentation | Documentation |
+| Consultants | Consulting | Business |
+| Knowledge Workers | Business | Business |
+| Executives (CxO) | Leadership | Business |
+| Finance Professionals | Finance | Finance |
+| Product Managers | Product | Product |
+| Project Managers | Project Management | Product |
+| Entrepreneurs | Startup | Product |
+| Marketing Professionals | Marketing | Marketing |
+| Sales Professionals | Sales | Marketing |
+| Real Estate Professionals | Real Estate | Marketing |
+| Teachers & Educators | Teaching | Education |
+| Students | Learning | Education |
+| Researchers & Professors | Academic | Education |
+| Healthcare Professionals | Healthcare | Healthcare |
+| Psychology Counselors | Counseling | Healthcare |
+| Lawyers | Legal | Legal |
+| HR & People Ops | HR | People |
+| CX Leaders | Customer Experience | People |
+| Nonprofit Leaders | Nonprofit | People |
+| Job Seekers | Career | Career |
 
 ### Default / Fallback Icon (1)
 
@@ -253,11 +315,11 @@ Used when no specific state, agent, or persona is active. Circle container, indi
 | Tab Bar | 5 | Rounded Rectangle | Unified indigo |
 | Cognitive States | 9 | Circle | Color = state meaning |
 | Agent Modes | 7 | Hexagon | Color = agent identity |
-| Core Personas | 8 | Squircle | Color = persona domain |
+| Persona Categories | 16 | Squircle | Color = persona domain (covers 33 AlexLearn workshop personas) |
 | Default | 1 | Circle | Indigo (brand default) |
-| **Total** | **30 positions** | — | **90 options to review** |
+| **Total** | **38 positions** | — | **114 options to review** |
 
-**How to approve**: Mark your selection (A, B, or C) in the **Approved** column. After all 30 positions are approved, Phase 1 implementation (task 1.2) will produce the final SVG template functions using the selected designs.
+**How to approve**: Mark your selection (A, B, or C) in the **Approved** column. After all 38 positions are approved, Phase 1 implementation (task 1.2) will produce the final SVG template functions using the selected designs.
 
 **Open in VS Code Preview** (`Ctrl+Shift+V`) to see all thumbnails rendered inline.
 
@@ -557,22 +619,87 @@ The tab that no other AI assistant has — Alex's introspective dashboard, a win
 
 > **Original tab concept was Automations** — rejected twice during design review as too generic and not North Star-aligned. Replaced with Mind to showcase Alex's unique cognitive architecture. Original mockup preserved at: `mockups/command-center-status.svg`
 
-#### Tab: Docs ✅
+#### Tab: Docs ✅ (Aligned with learnalex.correax.com)
 
 ![Docs Tab Mockup](mockups/command-center-v2-docs.svg)
 
-The documentation hub — local resources at your fingertips with contextual nudges and a gateway to expanded learning online.
+The documentation hub — local resources, workshop study guides, and a gateway to expanded learning on learnalex.correax.com. Mirrors the AlexLearn website structure so users get a consistent experience between the extension and the web portal.
 
 - **Tips & Nudges** — context-aware suggestions that adapt to user state (health warnings, streak reminders, feature discovery, meditation prompts). Each nudge has an action link. Dismissible.
-- **Getting Started** — 4 key local docs with color-coded category bars:
+
+- **Getting Started** — 4 key setup cards (mirrors learnalex.correax.com "Before You Start" flow):
   - 📘 User Manual — complete partnership guide (start here)
   - ⚡ Quick Reference — commands, tools, shortcuts cheat sheet
-  - 🔧 Environment Setup — prerequisites and workspace config
-  - 🎯 Use Cases Guide — deep dive into every domain Alex supports
+  - 🔧 Setup Guide — prerequisites and workspace config (matches learnalex.correax.com/setup-guide)
+  - 🎯 Environment Setup — VS Code settings and extension configuration
+
+- **Workshop Study Guides** — scrollable card grid of all 33 AlexLearn persona study guides. Each card shows:
+  - Category tag (e.g., "Software", "Healthcare", "Leadership")
+  - Persona title (e.g., "Software Developers", "Healthcare Professionals")
+  - Brief description of use cases covered
+  - Click → opens learnalex.correax.com/workshop/{persona} in browser
+  - Persona categories (33 study guides):
+
+  | # | Tag | Persona | Description |
+  |---|-----|---------|-------------|
+  | 1 | Career | Job Seekers | Resumes, cover letters, LinkedIn, portfolios, interview prep |
+  | 2 | AI Research | AI Researchers | Literature review, experiment design, scientific writing |
+  | 3 | Consulting | Consultants | Proposals, frameworks, deliverables, client management |
+  | 4 | Content | Content Creators | Ideation, scripting, series planning, audience building |
+  | 5 | Creative Writing | Creative Writers | Plot, character, dialogue, structure, revision |
+  | 6 | Customer Experience | CX Leaders | Journey mapping, voice of customer, service design, metrics |
+  | 7 | Data | Data Analysts | EDA, SQL, data storytelling, metric definition, A/B testing |
+  | 8 | Design | Designers (UX/UI) | Research synthesis, documentation, critique, UX writing |
+  | 9 | Engineering | Engineers | Design justification, technical specs, failure analysis, reports |
+  | 10 | Startup | Entrepreneurs | Strategy, fundraising, customer understanding, hiring, operations |
+  | 11 | Leadership | Executives (CxO) | Strategic decisions, board communication, organizational leadership |
+  | 12 | Finance | Finance Professionals | Financial analysis, client communication, investment research, reporting |
+  | 13 | Healthcare | Healthcare Professionals | Clinical documentation, patient communication, medical literature |
+  | 14 | HR | HR & People Ops | Recruiting, policies, communications, people programs |
+  | 15 | Journalism | Journalists | Story development, research, interview prep, verification, writing |
+  | 16 | Business | Knowledge Workers | Executive briefings, scenario analysis, meeting prep, data narratives |
+  | 17 | Legal | Lawyers | Research, briefs, contracts, client communication |
+  | 18 | Marketing | Marketing Professionals | Campaign briefs, copy, brand voice, multi-format content |
+  | 19 | Nonprofit | Nonprofit Leaders | Grant writing, donor communication, program design, advocacy |
+  | 20 | Podcasting | Podcasters | Episode planning, guest research, show notes, audience growth |
+  | 21 | Product | Product Managers | PRDs, user research, roadmaps, stakeholder alignment |
+  | 22 | Project Management | Project Managers | Status reports, risk registers, stakeholder communications |
+  | 23 | Counseling | Psychology Counselors | Documentation, treatment planning, case conceptualization, psychoeducation |
+  | 24 | Real Estate | Real Estate Professionals | Listing copy, client communication, offer strategy, market analysis |
+  | 25 | Academic | Researchers & Professors | Literature structure, grant writing, peer review, teaching materials |
+  | 26 | Sales | Sales Professionals | Prospecting, discovery calls, proposals, objection handling |
+  | 27 | Science | Scientists | Hypothesis, experimental design, data interpretation, manuscripts |
+  | 28 | Software | Software Developers | ADRs, code review, debugging, architecture documentation |
+  | 29 | Comedy | Standup Comics | Premises, punch-up, tags, set structure, voice |
+  | 30 | Learning | Students | Understanding concepts, essay structure, exam prep, career skills |
+  | 31 | Teaching | Teachers & Educators | Lesson planning, differentiation, assessment, feedback |
+  | 32 | Documentation | Technical Writers | API docs, user guides, release notes, content strategy |
+  | 33 | Data Visualization | Visual Storytellers | Power BI, Copilot, chart design, leadership narratives, persuasion |
+
+  > **Tip**: Cards show a category-colored left border matching the persona icon color. The "Tip" from AlexLearn applies: "You're not limited to one guide. A Product Manager might combine PM + Developers. A founder might use Executives + Sales + Marketing."
+
+- **Self-Study & Exercises** — two action cards:
+  - 📖 Self-Study Guide — 30/60/90-day practice path (→ learnalex.correax.com/self-study)
+  - ✏️ Hands-On Exercises — 3 guided exercises, 10 minutes total (→ learnalex.correax.com/exercises)
+
+- **Facilitator Materials** — collapsible section for workshop organizers:
+  - 📋 Session Plan — 90-minute workshop structure
+  - 🎞️ Slides — Marp presentation deck
+  - 🎭 Demo Scripts — live demonstration scripts
+  - 📄 Participant Handout — printable reference sheet
+  - 📚 Pre-Read — pre-workshop reading material
+  - 📐 GitHub Guide — repo setup and contribution guide
+  - 🤖 Responsible AI — ethical usage guidelines
+
 - **Architecture** — 2×3 compact grid of architecture docs (Cognitive Architecture, Memory Systems, Conscious Mind, Unconscious Mind, Agent Catalog, Trifecta Catalog) with doc count badge
+
 - **Operations** — 2×2 grid (Workspace Protection, Project Structure, Heir Architecture, Research Papers)
-- **Learn Alex Online** — prominent CTA card linking to learnalex.correax.com with "Open in Browser" button. Study guides, tutorials, training, workshops.
+
+- **Learn Alex Online** — prominent CTA card linking to learnalex.correax.com with "Open in Browser" button. Full workshop series, study guides, tutorials, training.
+
 - **Partnership** — Working with Alex guide — dialog engineering and collaboration patterns
+
+> **AlexLearn alignment note**: The Docs tab mirrors the structure and content of learnalex.correax.com. Workshop study guides are sourced from `c:\Development\AlexLearn\website\src\content\workshops\` (33 persona directories, each containing a STUDY-GUIDE.md). Facilitator materials are sourced from `c:\Development\AlexLearn\website\src\content\learn\`. When AlexLearn adds new personas or resources, the Docs tab card grid should be updated to match.
 
 > **Original tab concept was Activity** — replaced with Docs to provide a documentation-first experience. Activity/diff review features are better served at the agent level. Original mockup preserved at: `mockups/command-center-more.svg`
 
@@ -610,9 +737,9 @@ Alternatively, for a lighter initial payload: render only the active tab and sen
 | **2 — Agents Tab** | Agent Registry (7 agents + badges), Cognitive State display, search + filter, Recent Threads, Custom Agent CTA | 3 days | Low |
 | **3 — Skill Store** | Skill catalog data layer, 3-tier catalog + toggles, skill cards + trifecta badges, Context Budget Impact, search + GitHub CTA | 3-4 days | Medium — needs data layer |
 | **4 — Mind Tab** | Brain Health banner, Memory Architecture cards (5 modalities), Cognitive Age, Knowledge Freshness, Meditation & Growth, Honest Uncertainty, Cognitive Actions, Global Knowledge, Identity card | 3-4 days | Low — data sources exist |
-| **5 — Docs Tab** | Tips & Nudges engine, Getting Started grid, Architecture + Operations grids, Learn Alex Online CTA, Partnership guide | 2 days | Low |
+| **5 — Docs Tab** | Tips & Nudges engine, Getting Started grid, Workshop Study Guides (33 persona cards), Self-Study & Exercises, Facilitator Materials (collapsible), Architecture + Operations grids, Learn Alex Online CTA, Partnership guide | 3-4 days | Low |
 | **6 — Final Polish** | Redirect legacy commands, verify sole-view state, update documentation, end-to-end testing, accessibility pass | 2-3 days | Low |
-| **Total** | **42 tasks across 7 phases** | **~22-25 days** | **Low-Medium** |
+| **Total** | **49 tasks across 7 phases** | **~24-27 days** | **Low-Medium** |
 
 #### Pros
 - Zero new infrastructure — stays inside existing WebviewViewProvider
@@ -689,7 +816,7 @@ See [Gantt chart at top of document](#implementation-tracker).
 | 3 collapsible sidebar sections | 1 clean view — tabs replace sections |
 | Cognitive Dashboard section rarely used | Absorbed into Mind tab |
 | Memory Architecture tree duplicates data | Absorbed into Mind tab |
-| No documentation hub in sidebar | Docs tab — local guides, architecture, online portal |
+| No documentation hub in sidebar | Docs tab — local guides, 33 AlexLearn workshop study guides, self-study path, facilitator materials, online portal |
 
 ### Migration Safety
 
@@ -912,9 +1039,9 @@ Replace all PNG avatars with a small set of **custom SVG icons** that:
 |----------|-------|-----------|-------|
 | Cognitive states | 9 | ~18 KB | building, debugging, planning, reviewing, learning, teaching, meditation, dream, discovery |
 | Agent modes | 6 | ~12 KB | Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| Core personas | 8-10 | ~20 KB | Developer, Architect, Designer, Writer, Data, Academic, etc. (collapsed from 63) |
+| Core personas | 16 | ~32 KB | Software, Engineering, Science, Data, Design, Creative, Documentation, Business, Finance, Product, Marketing, Education, Healthcare, Legal, People, Career (mapped from 33 AlexLearn workshop personas) |
 | Default/fallback | 1 | ~2 KB | Alex neutral icon |
-| **Total** | **~25 SVGs** | **< 50 KB** | vs. 112 PNGs at 26.43 MB |
+| **Total** | **~32 SVGs** | **< 64 KB** | vs. 112 PNGs at 26.43 MB |
 
 ### Design Principles
 

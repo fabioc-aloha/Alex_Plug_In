@@ -10,19 +10,19 @@ foreach ($dir in @("tabs", "states", "agents", "personas", "default")) {
 
 function Save-Svg([string]$Path, [string]$C1, [string]$C2, [string]$Bg, [string]$Sym) {
     $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="64" height="64">' +
-           '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
-           '<stop offset="0" stop-color="' + $C1 + '"/>' +
-           '<stop offset="1" stop-color="' + $C2 + '"/>' +
-           '</linearGradient></defs>' +
-           $Bg + '<g fill="white">' + $Sym + '</g></svg>'
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="' + $C1 + '"/>' +
+    '<stop offset="1" stop-color="' + $C2 + '"/>' +
+    '</linearGradient></defs>' +
+    $Bg + '<g fill="white">' + $Sym + '</g></svg>'
     [System.IO.File]::WriteAllText($Path, $svg)
 }
 
 # Container shapes
 $circ = '<circle cx="24" cy="24" r="22" fill="url(#g)"/>'
 $rect = '<rect x="2" y="2" width="44" height="44" rx="10" fill="url(#g)"/>'
-$hex  = '<path d="M24 2L44 13V35L24 46L4 35V13Z" fill="url(#g)"/>'
-$sq   = '<rect x="2" y="2" width="44" height="44" rx="16" fill="url(#g)"/>'
+$hex = '<path d="M24 2L44 13V35L24 46L4 35V13Z" fill="url(#g)"/>'
+$sq = '<rect x="2" y="2" width="44" height="44" rx="16" fill="url(#g)"/>'
 
 # ============================================================
 # TAB ICONS (indigo, rounded rect container)
@@ -143,48 +143,89 @@ Save-Svg "$base\agents\m365-b.svg" "#d83b01" "#ff6a39" $hex '<text x="24" y="32"
 Save-Svg "$base\agents\m365-c.svg" "#d83b01" "#ff6a39" $hex '<path d="M24 12l12 12-12 12-12-12z" fill="none" stroke="white" stroke-width="2.5"/><circle cx="24" cy="24" r="3"/>'
 
 # ============================================================
-# PERSONA ICONS (squircle container, persona-specific colors)
+# PERSONA CATEGORY ICONS (squircle container, category-specific colors)
+# 16 categories covering all 33 AlexLearn workshop personas
 # ============================================================
 
-# Developer (indigo)
-Save-Svg "$base\personas\developer-a.svg" "#6366f1" "#818cf8" $sq '<path d="M18 18l-6 6 6 6M30 18l6 6-6 6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
-Save-Svg "$base\personas\developer-b.svg" "#6366f1" "#818cf8" $sq '<path d="M14 18l6 6-6 6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="30" x2="34" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
-Save-Svg "$base\personas\developer-c.svg" "#6366f1" "#818cf8" $sq '<line x1="20" y1="13" x2="18" y2="35" stroke="white" stroke-width="2.5"/><line x1="28" y1="13" x2="30" y2="35" stroke="white" stroke-width="2.5"/><line x1="14" y1="20" x2="34" y2="20" stroke="white" stroke-width="2"/><line x1="14" y1="28" x2="34" y2="28" stroke="white" stroke-width="2"/>'
+# Software (indigo) — Software Developers
+Save-Svg "$base\personas\software-a.svg" "#6366f1" "#818cf8" $sq '<path d="M18 18l-6 6 6 6M30 18l6 6-6 6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+Save-Svg "$base\personas\software-b.svg" "#6366f1" "#818cf8" $sq '<path d="M14 18l6 6-6 6" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="30" x2="34" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
+Save-Svg "$base\personas\software-c.svg" "#6366f1" "#818cf8" $sq '<line x1="20" y1="13" x2="18" y2="35" stroke="white" stroke-width="2.5"/><line x1="28" y1="13" x2="30" y2="35" stroke="white" stroke-width="2.5"/><line x1="14" y1="20" x2="34" y2="20" stroke="white" stroke-width="2"/><line x1="14" y1="28" x2="34" y2="28" stroke="white" stroke-width="2"/>'
 
-# Architect (blue)
-Save-Svg "$base\personas\architect-a.svg" "#3b82f6" "#93c5fd" $sq '<path d="M24 12l12 6v16H12V18z" fill="none" stroke="white" stroke-width="2"/><rect x="20" y="26" width="8" height="8"/>'
-Save-Svg "$base\personas\architect-b.svg" "#3b82f6" "#93c5fd" $sq '<rect x="14" y="14" width="20" height="20" fill="none" stroke="white" stroke-width="2"/><line x1="14" y1="24" x2="34" y2="24" stroke="white" stroke-width="1.5"/><line x1="24" y1="14" x2="24" y2="34" stroke="white" stroke-width="1.5"/>'
-Save-Svg "$base\personas\architect-c.svg" "#3b82f6" "#93c5fd" $sq '<path d="M24 12l12 22H12z" fill="none" stroke="white" stroke-width="2.5"/><line x1="18" y1="26" x2="30" y2="26" stroke="white" stroke-width="1.5"/>'
+# Engineering (blue) — Engineers
+Save-Svg "$base\personas\engineering-a.svg" "#3b82f6" "#93c5fd" $sq '<circle cx="24" cy="24" r="6" fill="none" stroke="white" stroke-width="2.5"/><path d="M24 12v4M24 32v4M12 24h4M32 24h4M16.5 16.5l3 3M28.5 28.5l3 3M31.5 16.5l-3 3M19.5 28.5l-3 3" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
+Save-Svg "$base\personas\engineering-b.svg" "#3b82f6" "#93c5fd" $sq '<path d="M14 30l4-8 4 4 4-12 4 8 4-4 4 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+Save-Svg "$base\personas\engineering-c.svg" "#3b82f6" "#93c5fd" $sq '<rect x="14" y="14" width="10" height="10" rx="1" fill="none" stroke="white" stroke-width="2"/><rect x="24" y="14" width="10" height="10" rx="1" fill="none" stroke="white" stroke-width="2"/><rect x="14" y="24" width="10" height="10" rx="1" fill="none" stroke="white" stroke-width="2"/><circle cx="29" cy="29" r="5" fill="none" stroke="white" stroke-width="2"/>'
 
-# Designer (purple)
-Save-Svg "$base\personas\designer-a.svg" "#a855f7" "#c4b5fd" $sq '<path d="M24 14l6 16-6-4-6 4z"/>'
-Save-Svg "$base\personas\designer-b.svg" "#a855f7" "#c4b5fd" $sq '<circle cx="18" cy="19" r="4"/><circle cx="30" cy="19" r="4"/><circle cx="24" cy="30" r="4"/>'
-Save-Svg "$base\personas\designer-c.svg" "#a855f7" "#c4b5fd" $sq '<rect x="22" y="14" width="4" height="12" rx="1"/><path d="M18 26c0 4 2.5 8 6 8s6-4 6-8z"/>'
+# Science (teal) — Scientists, AI Researchers
+Save-Svg "$base\personas\science-a.svg" "#14b8a6" "#5eead4" $sq '<circle cx="24" cy="24" r="3"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5" transform="rotate(-60 24 24)"/>'
+Save-Svg "$base\personas\science-b.svg" "#14b8a6" "#5eead4" $sq '<path d="M20 12v12l-6 10h20l-6-10V12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="18" y1="12" x2="30" y2="12" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="28" r="1.5"/><circle cx="27" cy="30" r="1"/>'
+Save-Svg "$base\personas\science-c.svg" "#14b8a6" "#5eead4" $sq '<circle cx="24" cy="16" r="3" fill="none" stroke="white" stroke-width="2"/><line x1="24" y1="19" x2="24" y2="30" stroke="white" stroke-width="2"/><path d="M20 34l4-4 4 4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="26" x2="32" y2="26" stroke="white" stroke-width="2" stroke-linecap="round"/>'
 
-# Writer (amber)
-Save-Svg "$base\personas\writer-a.svg" "#f59e0b" "#fcd34d" $sq '<path d="M32 12c-12 4-16 12-16 22l4-4c0-4 4-10 14-14z"/>'
-Save-Svg "$base\personas\writer-b.svg" "#f59e0b" "#fcd34d" $sq '<text x="24" y="33" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-style="italic">A</text>'
-Save-Svg "$base\personas\writer-c.svg" "#f59e0b" "#fcd34d" $sq '<text x="24" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-size="24">&#182;</text>'
+# Data (cyan) — Data Analysts, Visual Storytellers
+Save-Svg "$base\personas\data-a.svg" "#06b6d4" "#67e8f9" $sq '<rect x="14" y="26" width="5" height="10" rx="1"/><rect x="22" y="18" width="5" height="18" rx="1"/><rect x="30" y="22" width="5" height="14" rx="1"/>'
+Save-Svg "$base\personas\data-b.svg" "#06b6d4" "#67e8f9" $sq '<ellipse cx="24" cy="16" rx="10" ry="4" fill="none" stroke="white" stroke-width="2"/><path d="M14 16v16c0 2.2 4.5 4 10 4s10-1.8 10-4V16" fill="none" stroke="white" stroke-width="2"/><path d="M14 24c0 2.2 4.5 4 10 4s10-1.8 10-4" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\data-c.svg" "#06b6d4" "#67e8f9" $sq '<circle cx="24" cy="24" r="10" fill="none" stroke="white" stroke-width="2"/><path d="M24 24V14" stroke="white" stroke-width="2"/><path d="M24 24l7 7" stroke="white" stroke-width="2"/><path d="M24 24l-8 4" stroke="white" stroke-width="2"/>'
 
-# Data (teal)
-Save-Svg "$base\personas\data-a.svg" "#14b8a6" "#5eead4" $sq '<rect x="14" y="26" width="5" height="10" rx="1"/><rect x="22" y="18" width="5" height="18" rx="1"/><rect x="30" y="22" width="5" height="14" rx="1"/>'
-Save-Svg "$base\personas\data-b.svg" "#14b8a6" "#5eead4" $sq '<ellipse cx="24" cy="16" rx="10" ry="4" fill="none" stroke="white" stroke-width="2"/><path d="M14 16v16c0 2.2 4.5 4 10 4s10-1.8 10-4V16" fill="none" stroke="white" stroke-width="2"/><path d="M14 24c0 2.2 4.5 4 10 4s10-1.8 10-4" fill="none" stroke="white" stroke-width="2"/>'
-Save-Svg "$base\personas\data-c.svg" "#14b8a6" "#5eead4" $sq '<circle cx="24" cy="24" r="10" fill="none" stroke="white" stroke-width="2"/><path d="M24 24V14" stroke="white" stroke-width="2"/><path d="M24 24l7 7" stroke="white" stroke-width="2"/><path d="M24 24l-8 4" stroke="white" stroke-width="2"/>'
+# Design (purple) — Designers (UX/UI)
+Save-Svg "$base\personas\design-a.svg" "#a855f7" "#c4b5fd" $sq '<path d="M24 14l6 16-6-4-6 4z"/>'
+Save-Svg "$base\personas\design-b.svg" "#a855f7" "#c4b5fd" $sq '<circle cx="18" cy="19" r="4"/><circle cx="30" cy="19" r="4"/><circle cx="24" cy="30" r="4"/>'
+Save-Svg "$base\personas\design-c.svg" "#a855f7" "#c4b5fd" $sq '<rect x="22" y="14" width="4" height="12" rx="1"/><path d="M18 26c0 4 2.5 8 6 8s6-4 6-8z"/>'
 
-# Academic (green)
-Save-Svg "$base\personas\academic-a.svg" "#22c55e" "#86efac" $sq '<path d="M10 22l14-6 14 6-14 6z"/><path d="M16 25v7c4 2 12 2 16 0v-7" fill="none" stroke="white" stroke-width="2"/>'
-Save-Svg "$base\personas\academic-b.svg" "#22c55e" "#86efac" $sq '<circle cx="24" cy="24" r="3"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="12" ry="5" fill="none" stroke="white" stroke-width="1.5" transform="rotate(-60 24 24)"/>'
-Save-Svg "$base\personas\academic-c.svg" "#22c55e" "#86efac" $sq '<rect x="16" y="16" width="7" height="18" rx="1" fill="none" stroke="white" stroke-width="2"/><rect x="25" y="16" width="7" height="18" rx="1" fill="none" stroke="white" stroke-width="2"/><line x1="23" y1="18" x2="23" y2="32" stroke="white" stroke-width="2"/>'
+# Creative (violet) — Creative Writers, Content Creators, Podcasters, Standup Comics, Journalists
+Save-Svg "$base\personas\creative-a.svg" "#8b5cf6" "#a78bfa" $sq '<path d="M32 12c-12 4-16 12-16 22l4-4c0-4 4-10 14-14z"/>'
+Save-Svg "$base\personas\creative-b.svg" "#8b5cf6" "#a78bfa" $sq '<circle cx="24" cy="18" r="4" fill="none" stroke="white" stroke-width="2"/><line x1="24" y1="22" x2="24" y2="30" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M18 34h12" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+Save-Svg "$base\personas\creative-c.svg" "#8b5cf6" "#a78bfa" $sq '<circle cx="20" cy="26" r="6" fill="none" stroke="white" stroke-width="2"/><circle cx="28" cy="26" r="6" fill="none" stroke="white" stroke-width="2"/><path d="M22 14c0 0-4 4-4 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M26 14c0 0 4 4 4 8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>'
 
-# DevOps (red)
-Save-Svg "$base\personas\devops-a.svg" "#ef4444" "#fca5a5" $sq '<circle cx="17" cy="24" r="7" fill="none" stroke="white" stroke-width="2.5"/><circle cx="31" cy="24" r="7" fill="none" stroke="white" stroke-width="2.5"/>'
-Save-Svg "$base\personas\devops-b.svg" "#ef4444" "#fca5a5" $sq '<circle cx="24" cy="24" r="6" fill="none" stroke="white" stroke-width="2.5"/><path d="M24 12v4M24 32v4M12 24h4M32 24h4M16.5 16.5l3 3M28.5 28.5l3 3M31.5 16.5l-3 3M19.5 28.5l-3 3" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
-Save-Svg "$base\personas\devops-c.svg" "#ef4444" "#fca5a5" $sq '<path d="M32 20a10 10 0 0 0-16 0" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M16 28a10 10 0 0 0 16 0" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M32 20l-3-3M32 20l3-1" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M16 28l3 3M16 28l-3 1" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+# Documentation (amber) — Technical Writers
+Save-Svg "$base\personas\documentation-a.svg" "#f59e0b" "#fcd34d" $sq '<rect x="14" y="12" width="16" height="22" rx="2" fill="none" stroke="white" stroke-width="2"/><line x1="18" y1="18" x2="26" y2="18" stroke="white" stroke-width="1.5"/><line x1="18" y1="22" x2="26" y2="22" stroke="white" stroke-width="1.5"/><line x1="18" y1="26" x2="23" y2="26" stroke="white" stroke-width="1.5"/><path d="M28 24l6 6v4H28V24z" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\documentation-b.svg" "#f59e0b" "#fcd34d" $sq '<text x="24" y="33" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-style="italic">A</text>'
+Save-Svg "$base\personas\documentation-c.svg" "#f59e0b" "#fcd34d" $sq '<text x="24" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-size="24">&#182;</text>'
 
-# Security (gold)
-Save-Svg "$base\personas\security-a.svg" "#eab308" "#fde047" $sq '<rect x="16" y="22" width="16" height="14" rx="2"/><path d="M20 22v-6a4 4 0 0 1 8 0v6" fill="none" stroke="white" stroke-width="2.5"/>'
-Save-Svg "$base\personas\security-b.svg" "#eab308" "#fde047" $sq '<path d="M24 12l10 4v10c0 6-4 10-10 12-6-2-10-6-10-12V16z"/>'
-Save-Svg "$base\personas\security-c.svg" "#eab308" "#fde047" $sq '<circle cx="20" cy="24" r="5" fill="none" stroke="white" stroke-width="2.5"/><line x1="25" y1="24" x2="35" y2="24" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="31" y1="24" x2="31" y2="29" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="35" y1="24" x2="35" y2="28" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+# Business (slate) — Consultants, Knowledge Workers, Executives
+Save-Svg "$base\personas\business-a.svg" "#64748b" "#94a3b8" $sq '<rect x="14" y="18" width="20" height="16" rx="2" fill="none" stroke="white" stroke-width="2.5"/><path d="M20 18v-4a4 4 0 0 1 8 0v4" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\business-b.svg" "#64748b" "#94a3b8" $sq '<path d="M24 12l12 6v16H12V18z" fill="none" stroke="white" stroke-width="2"/><rect x="20" y="26" width="8" height="8"/>'
+Save-Svg "$base\personas\business-c.svg" "#64748b" "#94a3b8" $sq '<circle cx="18" cy="24" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="30" cy="24" r="4" fill="none" stroke="white" stroke-width="2"/><path d="M22 24h4" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="22" x2="24" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
+
+# Finance (green) — Finance Professionals
+Save-Svg "$base\personas\finance-a.svg" "#22c55e" "#86efac" $sq '<text x="24" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" font-weight="bold">$</text>'
+Save-Svg "$base\personas\finance-b.svg" "#22c55e" "#86efac" $sq '<path d="M14 28l5-6 5 4 5-10 5 8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="24" r="2"/>'
+Save-Svg "$base\personas\finance-c.svg" "#22c55e" "#86efac" $sq '<rect x="14" y="16" width="20" height="16" rx="2" fill="none" stroke="white" stroke-width="2"/><line x1="14" y1="22" x2="34" y2="22" stroke="white" stroke-width="1.5"/><line x1="14" y1="28" x2="34" y2="28" stroke="white" stroke-width="1.5"/><line x1="22" y1="16" x2="22" y2="32" stroke="white" stroke-width="1.5"/><line x1="30" y1="16" x2="30" y2="32" stroke="white" stroke-width="1.5"/>'
+
+# Product (orange) — Product Managers, Project Managers, Entrepreneurs
+Save-Svg "$base\personas\product-a.svg" "#f97316" "#fdba74" $sq '<path d="M14 14h8v8h-8zM26 14h8v8h-8zM14 26h8v8h-8z" fill="none" stroke="white" stroke-width="2"/><line x1="26" y1="30" x2="34" y2="30" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="26" y1="34" x2="34" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+Save-Svg "$base\personas\product-b.svg" "#f97316" "#fdba74" $sq '<path d="M24 12l3 8h8l-6.5 5 2.5 8L24 28l-7 5 2.5-8L13 20h8z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>'
+Save-Svg "$base\personas\product-c.svg" "#f97316" "#fdba74" $sq '<path d="M20 34V18l-6 4" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="18" y1="34" x2="30" y2="34" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M28 12l4 4-4 4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+
+# Marketing (coral) — Marketing, Sales, Real Estate Professionals
+Save-Svg "$base\personas\marketing-a.svg" "#f43f5e" "#fda4af" $sq '<path d="M12 20v8l16-6v18l-16-6V20" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><path d="M28 22l6-4v12l-6-4" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>'
+Save-Svg "$base\personas\marketing-b.svg" "#f43f5e" "#fda4af" $sq '<circle cx="24" cy="24" r="10" fill="none" stroke="white" stroke-width="2"/><circle cx="24" cy="24" r="6" fill="none" stroke="white" stroke-width="2"/><circle cx="24" cy="24" r="2"/>'
+Save-Svg "$base\personas\marketing-c.svg" "#f43f5e" "#fda4af" $sq '<path d="M16 28l8-16 8 16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="12" r="2.5"/>'
+
+# Education (emerald) — Teachers, Students, Researchers & Professors
+Save-Svg "$base\personas\education-a.svg" "#10b981" "#6ee7b7" $sq '<path d="M10 22l14-6 14 6-14 6z"/><path d="M16 25v7c4 2 12 2 16 0v-7" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\education-b.svg" "#10b981" "#6ee7b7" $sq '<rect x="16" y="16" width="7" height="18" rx="1" fill="none" stroke="white" stroke-width="2"/><rect x="25" y="16" width="7" height="18" rx="1" fill="none" stroke="white" stroke-width="2"/><line x1="23" y1="18" x2="23" y2="32" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\education-c.svg" "#10b981" "#6ee7b7" $sq '<circle cx="24" cy="20" r="6" fill="none" stroke="white" stroke-width="2"/><path d="M20 26v6a4 4 0 0 0 8 0v-6" fill="none" stroke="white" stroke-width="2"/><line x1="24" y1="14" x2="24" y2="10" stroke="white" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="15" x2="30" y2="12" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+
+# Healthcare (red) — Healthcare Professionals, Psychology Counselors
+Save-Svg "$base\personas\healthcare-a.svg" "#ef4444" "#fca5a5" $sq '<path d="M24 34c-8-6-14-10-14-16a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 6-6 10-14 16z" fill="none" stroke="white" stroke-width="2"/><line x1="24" y1="18" x2="24" y2="26" stroke="white" stroke-width="2.5"/><line x1="20" y1="22" x2="28" y2="22" stroke="white" stroke-width="2.5"/>'
+Save-Svg "$base\personas\healthcare-b.svg" "#ef4444" "#fca5a5" $sq '<circle cx="24" cy="18" r="6" fill="none" stroke="white" stroke-width="2"/><path d="M16 18l-4 8h4v8M32 18l4 8h-4v8" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+Save-Svg "$base\personas\healthcare-c.svg" "#ef4444" "#fca5a5" $sq '<path d="M14 24h8l2-6 4 12 2-6h8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+
+# Legal (gold) — Lawyers
+Save-Svg "$base\personas\legal-a.svg" "#eab308" "#fde047" $sq '<line x1="24" y1="10" x2="24" y2="34" stroke="white" stroke-width="2.5"/><line x1="14" y1="18" x2="34" y2="18" stroke="white" stroke-width="2"/><circle cx="14" cy="22" r="3" fill="none" stroke="white" stroke-width="1.5"/><circle cx="34" cy="22" r="3" fill="none" stroke="white" stroke-width="1.5"/><line x1="18" y1="34" x2="30" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
+Save-Svg "$base\personas\legal-b.svg" "#eab308" "#fde047" $sq '<rect x="18" y="28" width="12" height="6" rx="1" fill="none" stroke="white" stroke-width="2"/><line x1="24" y1="28" x2="24" y2="18" stroke="white" stroke-width="3"/><circle cx="24" cy="16" r="4" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\legal-c.svg" "#eab308" "#fde047" $sq '<path d="M24 12l10 4v10c0 6-4 10-10 12-6-2-10-6-10-12V16z" fill="none" stroke="white" stroke-width="2"/><path d="M20 24l3 3 6-7" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+
+# People (pink) — HR & People Ops, CX Leaders, Nonprofit Leaders
+Save-Svg "$base\personas\people-a.svg" "#ec4899" "#f9a8d4" $sq '<circle cx="20" cy="18" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="32" cy="18" r="4" fill="none" stroke="white" stroke-width="2"/><path d="M12 32c0-5 3.5-8 8-8s8 3 8 8" fill="none" stroke="white" stroke-width="2"/><path d="M24 32c0-5 3.5-8 8-8s8 3 8 8" fill="none" stroke="white" stroke-width="2"/>'
+Save-Svg "$base\personas\people-b.svg" "#ec4899" "#f9a8d4" $sq '<circle cx="24" cy="24" r="10" fill="none" stroke="white" stroke-width="2"/><circle cx="20" cy="20" r="3" fill="none" stroke="white" stroke-width="1.5"/><circle cx="28" cy="20" r="3" fill="none" stroke="white" stroke-width="1.5"/><path d="M18 28a6 6 0 0 0 12 0" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>'
+Save-Svg "$base\personas\people-c.svg" "#ec4899" "#f9a8d4" $sq '<path d="M24 34c-6-4-12-8-12-14a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 6-6 10-12 14z" fill="none" stroke="white" stroke-width="2"/><path d="M20 22l-2 6h4z" fill="white" opacity="0.5"/>'
+
+# Career (sky) — Job Seekers
+Save-Svg "$base\personas\career-a.svg" "#0ea5e9" "#7dd3fc" $sq '<circle cx="24" cy="24" r="10" fill="none" stroke="white" stroke-width="2"/><path d="M24 16v8l5 3" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 12l2 4-2-1-2 1z"/>'
+Save-Svg "$base\personas\career-b.svg" "#0ea5e9" "#7dd3fc" $sq '<path d="M16 34l2-8 4 2 2-10 2 10 4-2 2 8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="16" x2="24" y2="12" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="12" r="2"/>'
+Save-Svg "$base\personas\career-c.svg" "#0ea5e9" "#7dd3fc" $sq '<rect x="14" y="18" width="20" height="16" rx="2" fill="none" stroke="white" stroke-width="2.5"/><path d="M20 18v-4a4 4 0 0 1 8 0v4" fill="none" stroke="white" stroke-width="2"/><path d="M20 24l3 3 6-6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
 
 # ============================================================
 # DEFAULT ICON (circle container, indigo)
@@ -193,9 +234,9 @@ Save-Svg "$base\default\default-a.svg" "#6366f1" "#818cf8" $circ '<text x="24" y
 Save-Svg "$base\default\default-b.svg" "#6366f1" "#818cf8" $circ '<path d="M24 10l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/>'
 Save-Svg "$base\default\default-c.svg" "#6366f1" "#818cf8" $circ '<circle cx="19" cy="21" r="2.5"/><circle cx="29" cy="21" r="2.5"/><path d="M18 30a8 8 0 0 0 12 0" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>'
 
-Write-Host "Generated 90 icon SVGs in: $base" -ForegroundColor Green
+Write-Host "Generated 114 icon SVGs in: $base" -ForegroundColor Green
 Write-Host "  tabs/     : 15 files (5 icons x 3 options)"
 Write-Host "  states/   : 27 files (9 icons x 3 options)"
 Write-Host "  agents/   : 21 files (7 icons x 3 options)"
-Write-Host "  personas/ : 24 files (8 icons x 3 options)"
+Write-Host "  personas/ : 48 files (16 icons x 3 options)"
 Write-Host "  default/  :  3 files (1 icon  x 3 options)"
