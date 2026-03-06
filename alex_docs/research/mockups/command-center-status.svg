@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="780" viewBox="0 0 320 780">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="greenBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="redBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="memBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="780" fill="#1e1e1e"/>
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="320" height="42" fill="#252526"/>
+  <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+  <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">COGNITIVE ARCHITECTURE</text>
+  <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Alex Cognitive</text>
+  <text x="290" y="26" font-family="Segoe UI, sans-serif" font-size="14" fill="#666666" text-anchor="middle">↻</text>
+
+  <!-- Tab Bar -->
+  <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+  <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+  <text x="33" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Home</text>
+  <text x="92" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Tools</text>
+  <text x="148" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Skills</text>
+  <!-- Active: Status -->
+  <rect x="178" y="46" width="56" height="26" rx="4" fill="#1e1e1e"/>
+  <text x="206" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle" font-weight="600">Status</text>
+  <rect x="178" y="73" width="56" height="2" rx="1" fill="#6366f1"/>
+  <text x="262" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">More</text>
+
+  <!-- Overall Health Ring -->
+  <g transform="translate(160, 120)">
+    <!-- Outer ring background -->
+    <circle cx="0" cy="0" r="32" fill="none" stroke="#333333" stroke-width="5"/>
+    <!-- Health fill (96%) -->
+    <circle cx="0" cy="0" r="32" fill="none" stroke="#22c55e" stroke-width="5"
+            stroke-dasharray="193 201" stroke-dashoffset="50"
+            transform="rotate(-90)" opacity="0.8"/>
+    <text x="0" y="4" font-family="Segoe UI, sans-serif" font-size="16" fill="#e0e0e0" text-anchor="middle" font-weight="700">96%</text>
+    <text x="0" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#888888" text-anchor="middle">HEALTH</text>
+  </g>
+
+  <!-- Stat Grid (2x2) -->
+  <g transform="translate(12, 162)">
+    <!-- Synapses -->
+    <rect x="0" y="0" width="142" height="56" rx="6" fill="#252526"/>
+    <text x="12" y="22" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Synapses</text>
+    <text x="12" y="42" font-family="Segoe UI, sans-serif" font-size="20" fill="#e0e0e0" font-weight="700">247</text>
+    <text x="60" y="42" font-family="Segoe UI, sans-serif" font-size="10" fill="#4ade80">+12 ↗</text>
+
+    <!-- Healthy -->
+    <rect x="154" y="0" width="142" height="56" rx="6" fill="#252526"/>
+    <text x="166" y="22" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Healthy</text>
+    <text x="166" y="42" font-family="Segoe UI, sans-serif" font-size="20" fill="#22c55e" font-weight="700">238</text>
+
+    <!-- Broken -->
+    <rect x="0" y="64" width="142" height="56" rx="6" fill="#252526"/>
+    <text x="12" y="86" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Broken</text>
+    <text x="12" y="106" font-family="Segoe UI, sans-serif" font-size="20" fill="#f87171" font-weight="700">9</text>
+    <text x="42" y="106" font-family="Segoe UI, sans-serif" font-size="10" fill="#f87171">−3 ↘</text>
+
+    <!-- Trifectas -->
+    <rect x="154" y="64" width="142" height="56" rx="6" fill="#252526"/>
+    <text x="166" y="86" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Trifectas</text>
+    <text x="166" y="106" font-family="Segoe UI, sans-serif" font-size="20" fill="#818cf8" font-weight="700">37</text>
+    <text x="198" y="106" font-family="Segoe UI, sans-serif" font-size="10" fill="#818cf8">/37</text>
+  </g>
+
+  <!-- Memory Architecture -->
+  <g transform="translate(12, 296)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">MEMORY ARCHITECTURE</text>
+
+    <rect x="0" y="12" width="296" height="120" rx="6" fill="#252526"/>
+
+    <!-- Skills bar -->
+    <text x="12" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Skills</text>
+    <text x="280" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc" text-anchor="end" font-weight="600">130</text>
+    <rect x="72" y="24" width="170" height="8" rx="4" fill="#333333"/>
+    <rect x="72" y="24" width="170" height="8" rx="4" fill="url(#memBar)" opacity="0.7"/>
+
+    <!-- Instructions bar -->
+    <text x="12" y="56" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Instructions</text>
+    <text x="280" y="56" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc" text-anchor="end" font-weight="600">58</text>
+    <rect x="72" y="46" width="170" height="8" rx="4" fill="#333333"/>
+    <rect x="72" y="46" width="106" height="8" rx="4" fill="url(#memBar)" opacity="0.6"/>
+
+    <!-- Prompts bar -->
+    <text x="12" y="78" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Prompts</text>
+    <text x="280" y="78" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc" text-anchor="end" font-weight="600">22</text>
+    <rect x="72" y="68" width="170" height="8" rx="4" fill="#333333"/>
+    <rect x="72" y="68" width="56" height="8" rx="4" fill="url(#memBar)" opacity="0.5"/>
+
+    <!-- Agents bar -->
+    <text x="12" y="100" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Agents</text>
+    <text x="280" y="100" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc" text-anchor="end" font-weight="600">7</text>
+    <rect x="72" y="90" width="170" height="8" rx="4" fill="#333333"/>
+    <rect x="72" y="90" width="22" height="8" rx="4" fill="url(#memBar)" opacity="0.4"/>
+
+    <!-- Muscles -->
+    <text x="12" y="122" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Muscles</text>
+    <text x="280" y="122" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc" text-anchor="end" font-weight="600">5</text>
+    <rect x="72" y="112" width="170" height="8" rx="4" fill="#333333"/>
+    <rect x="72" y="112" width="16" height="8" rx="4" fill="url(#memBar)" opacity="0.35"/>
+  </g>
+
+  <!-- Cognitive State -->
+  <g transform="translate(12, 446)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">COGNITIVE STATE</text>
+
+    <rect x="0" y="12" width="296" height="62" rx="6" fill="#252526"/>
+    <!-- State indicator -->
+    <rect x="0" y="12" width="3" height="62" rx="1.5" fill="#22c55e"/>
+    <text x="16" y="34" font-family="Segoe UI, sans-serif" font-size="22">🔨</text>
+    <text x="48" y="34" font-family="Segoe UI, sans-serif" font-size="13" fill="#e0e0e0" font-weight="600">Building</text>
+    <text x="48" y="50" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Persona: Developer · Phase: Ship</text>
+    <text x="48" y="66" font-family="Segoe UI, sans-serif" font-size="10" fill="#666666">Active for 34 min</text>
+  </g>
+
+  <!-- Recent Activity -->
+  <g transform="translate(12, 530)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RECENT ACTIVITY</text>
+
+    <rect x="0" y="12" width="296" height="148" rx="6" fill="#252526"/>
+
+    <!-- Activity item 1 -->
+    <circle cx="16" cy="32" r="4" fill="#22c55e" opacity="0.6"/>
+    <text x="28" y="36" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Code review completed</text>
+    <text x="280" y="36" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="end">2m ago</text>
+
+    <rect x="12" y="46" width="272" height="1" fill="#333333"/>
+
+    <!-- Activity item 2 -->
+    <circle cx="16" cy="62" r="4" fill="#818cf8" opacity="0.6"/>
+    <text x="28" y="66" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Synapse network optimized</text>
+    <text x="280" y="66" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="end">15m ago</text>
+
+    <rect x="12" y="76" width="272" height="1" fill="#333333"/>
+
+    <!-- Activity item 3 -->
+    <circle cx="16" cy="92" r="4" fill="#f59e0b" opacity="0.6"/>
+    <text x="28" y="96" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">3 broken synapses repaired</text>
+    <text x="280" y="96" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="end">1h ago</text>
+
+    <rect x="12" y="106" width="272" height="1" fill="#333333"/>
+
+    <!-- Activity item 4 -->
+    <circle cx="16" cy="122" r="4" fill="#6366f1" opacity="0.6"/>
+    <text x="28" y="126" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">flux-brand-finetune skill added</text>
+    <text x="280" y="126" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="end">3h ago</text>
+
+    <rect x="12" y="136" width="272" height="1" fill="#333333"/>
+
+    <!-- Activity item 5 -->
+    <circle cx="16" cy="152" r="4" fill="#22c55e" opacity="0.6"/>
+    <text x="28" y="156" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">v6.2.0 release published</text>
+    <text x="280" y="156" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="end">5h ago</text>
+  </g>
+
+  <!-- Open Full Dashboard button -->
+  <g transform="translate(12, 694)">
+    <rect x="0" y="0" width="296" height="34" rx="6" fill="#0e639c"/>
+    <text x="148" y="22" font-family="Segoe UI, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="500">Open Full Health Dashboard 📊</text>
+  </g>
+
+  <!-- Last scan timestamp -->
+  <g transform="translate(12, 740)">
+    <text x="148" y="4" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">Last brain-qa scan: 34 min ago · Next: auto on dream</text>
+  </g>
+</svg>

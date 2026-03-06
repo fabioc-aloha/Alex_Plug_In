@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="800" viewBox="0 0 560 800">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="800" fill="#1e1e1e"/>
+
+  <!-- Header with personality toggle -->
+  <rect x="0" y="0" width="320" height="42" fill="#252526"/>
+  <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+  <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">MISSION CONTROL</text>
+  <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Alex · Building</text>
+  <!-- Personality toggle -->
+  <rect x="210" y="8" width="100" height="26" rx="13" fill="#2d2d2d" stroke="#3c3c3c" stroke-width="0.5"/>
+  <rect x="212" y="10" width="48" height="22" rx="11" fill="#6366f1"/>
+  <text x="224" y="25" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Precise</text>
+  <text x="276" y="25" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888" text-anchor="middle">Chatty</text>
+  <!-- Refresh -->
+  <text x="296" y="26" font-family="Segoe UI, sans-serif" font-size="14" fill="#666666" text-anchor="middle">↻</text>
+
+  <!-- Tab Bar — text labels -->
+  <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+  <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+  <!-- Active: Mission Ctrl -->
+  <rect x="2" y="46" width="72" height="26" rx="4" fill="#1e1e1e"/>
+  <text x="38" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0" text-anchor="middle" font-weight="600">Mission Ctrl</text>
+  <rect x="2" y="73" width="72" height="2" rx="1" fill="#6366f1"/>
+  <text x="106" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Agents</text>
+  <text x="165" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Skill Store</text>
+  <text x="234" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mind</text>
+  <text x="296" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Docs</text>
+
+  <!-- ─── Architecture Status Banner ─── -->
+  <g transform="translate(12, 84)">
+    <!-- State A: Up to date (shown) -->
+    <rect x="0" y="0" width="296" height="32" rx="6" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="0.5"/>
+    <text x="10" y="14" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e" font-weight="600">✓ ARCHITECTURE UP TO DATE</text>
+    <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">v6.2.0 · .github/ healthy · Last checked: 2m ago</text>
+    <text x="266" y="20" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">↻</text>
+
+    <!-- State B: Update available (annotation) -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="296" height="46" rx="6" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="0.5"/>
+      <text x="10" y="14" font-family="Segoe UI, sans-serif" font-size="9" fill="#f59e0b" font-weight="600">⬆ UPDATE AVAILABLE</text>
+      <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">v6.2.0 → v6.3.0 · 4 new skills, 2 instruction updates</text>
+      <rect x="10" y="30" width="84" height="14" rx="3" fill="rgba(245,158,11,0.2)"/>
+      <text x="52" y="40" font-family="Segoe UI, sans-serif" font-size="9" fill="#fbbf24" text-anchor="middle" font-weight="500">Update Now</text>
+      <rect x="100" y="30" width="68" height="14" rx="3" fill="transparent"/>
+      <text x="134" y="40" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="middle">Release Notes</text>
+    </g>
+
+    <!-- State C: Not initialized (annotation) -->
+    <g transform="translate(0, 96)">
+      <rect x="0" y="0" width="296" height="62" rx="6" fill="rgba(239,68,68,0.06)" stroke="#ef4444" stroke-width="0.5"/>
+      <text x="10" y="14" font-family="Segoe UI, sans-serif" font-size="9" fill="#ef4444" font-weight="600">⚡ ALEX NOT INITIALIZED</text>
+      <text x="10" y="28" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">No .github/ architecture detected in this workspace.</text>
+      <text x="10" y="40" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Initialize to enable skills, agents, and full cognitive features.</text>
+      <rect x="10" y="46" width="112" height="14" rx="3" fill="#6366f1"/>
+      <text x="66" y="56" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="500">Initialize Architecture</text>
+      <rect x="128" y="46" width="70" height="14" rx="3" fill="transparent" stroke="#4c4c4c" stroke-width="0.5"/>
+      <text x="163" y="56" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888" text-anchor="middle">Learn More</text>
+    </g>
+
+    <!-- Annotation: 3 states -->
+    <rect x="0" y="168" width="296" height="30" rx="4" fill="rgba(99,102,241,0.04)" stroke="#6366f1" stroke-width="0.5" stroke-dasharray="3 3" stroke-opacity="0.3"/>
+    <text x="10" y="180" font-family="Segoe UI, sans-serif" font-size="8" fill="#818cf8">↑ 3 conditional states: Up to Date / Update Available / Not Initialized</text>
+    <text x="10" y="192" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Only one banner shows at a time. Checks on sidebar open + refresh.</text>
+  </g>
+
+  <!-- ─── Live Activity Feed ─── -->
+  <g transform="translate(12, 290)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">LIVE ACTIVITY</text>
+    <text x="248" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">View All →</text>
+
+    <!-- Active agent card -->
+    <rect x="0" y="10" width="296" height="68" rx="6" fill="#252526" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.4"/>
+    <circle cx="20" cy="32" r="10" fill="rgba(34,197,94,0.15)"/>
+    <text x="20" y="36" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">🔨</text>
+    <circle cx="28" cy="24" r="4" fill="#22c55e" opacity="0.8"/>
+    <text x="38" y="28" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Builder</text>
+    <text x="92" y="28" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">is implementing...</text>
+    <text x="38" y="44" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Refactoring welcomeView.ts → tabbed UI</text>
+    <!-- Progress bar -->
+    <rect x="38" y="52" width="200" height="4" rx="2" fill="#333333"/>
+    <rect x="38" y="52" width="140" height="4" rx="2" fill="url(#greenGrad)"/>
+    <text x="244" y="56" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">70%</text>
+    <!-- Queue/Steer controls -->
+    <rect x="38" y="62" width="56" height="16" rx="8" fill="rgba(99,102,241,0.15)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="48" y="73" font-family="Segoe UI, sans-serif" font-size="9" fill="#818cf8">⏸ Queue</text>
+    <rect x="100" y="62" width="50" height="16" rx="8" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="110" y="73" font-family="Segoe UI, sans-serif" font-size="9" fill="#fbbf24">↗ Steer</text>
+  </g>
+
+  <!-- ─── Quick Command Bar (with queue badge) ─── -->
+  <g transform="translate(12, 378)">
+    <rect x="0" y="0" width="296" height="36" rx="6" fill="#3c3c3c" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="12" y="22" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888">Ask Alex anything...</text>
+    <!-- Queue badge integrated -->
+    <rect x="198" y="8" width="38" height="20" rx="10" fill="rgba(129,140,248,0.15)" stroke="#818cf8" stroke-width="0.5" stroke-opacity="0.4"/>
+    <text x="217" y="22" font-family="Segoe UI, sans-serif" font-size="8" fill="#818cf8" text-anchor="middle">Q: 1</text>
+    <rect x="244" y="6" width="44" height="24" rx="4" fill="#6366f1"/>
+    <text x="266" y="22" font-family="Segoe UI, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="500">Send</text>
+  </g>
+
+  <!-- ─── Smart Nudges ─── -->
+  <g transform="translate(12, 424)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SMART NUDGES</text>
+
+    <rect x="0" y="10" width="296" height="28" rx="4" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="10" y="28" font-family="Segoe UI, sans-serif" font-size="10" fill="#b0b0b0">⚠️ 4 broken synapses</text>
+    <rect x="200" y="14" width="50" height="20" rx="3" fill="rgba(245,158,11,0.15)"/>
+    <text x="210" y="28" font-family="Segoe UI, sans-serif" font-size="9" fill="#fbbf24">Dream</text>
+    <rect x="254" y="14" width="34" height="20" rx="3" fill="transparent"/>
+    <text x="260" y="28" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">Later</text>
+
+    <rect x="0" y="42" width="296" height="28" rx="4" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="10" y="60" font-family="Segoe UI, sans-serif" font-size="10" fill="#b0b0b0">✅ 8 uncommitted changes detected</text>
+    <rect x="200" y="46" width="50" height="20" rx="3" fill="rgba(34,197,94,0.15)"/>
+    <text x="210" y="60" font-family="Segoe UI, sans-serif" font-size="9" fill="#4ade80">Review</text>
+    <rect x="254" y="46" width="34" height="20" rx="3" fill="transparent"/>
+    <text x="260" y="60" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">Later</text>
+  </g>
+
+  <!-- ─── Secret Manager (NEW) ─── -->
+  <g transform="translate(12, 506)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SECRET MANAGER</text>
+    <text x="248" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Manage →</text>
+
+    <rect x="0" y="10" width="296" height="96" rx="6" fill="#252526"/>
+    <!-- Secret 1: Active -->
+    <rect x="0" y="10" width="3" height="28" rx="1.5" fill="#22c55e"/>
+    <text x="14" y="22" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">🔑</text>
+    <text x="30" y="22" font-family="Cascadia Code, Consolas, monospace" font-size="9" fill="#cccccc">REPLICATE_API_TOKEN</text>
+    <text x="200" y="22" font-family="Cascadia Code, Consolas, monospace" font-size="9" fill="#666666">●●●●●a3f</text>
+    <text x="272" y="22" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e">✓</text>
+    <rect x="280" y="14" width="12" height="12" rx="2" fill="rgba(99,102,241,0.1)"/>
+    <text x="286" y="23" font-family="Segoe UI, sans-serif" font-size="8" fill="#818cf8" text-anchor="middle">✎</text>
+
+    <!-- Secret 2: Active -->
+    <rect x="0" y="38" width="3" height="28" rx="1.5" fill="#22c55e"/>
+    <text x="14" y="50" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">🔑</text>
+    <text x="30" y="50" font-family="Cascadia Code, Consolas, monospace" font-size="9" fill="#cccccc">GITHUB_PAT</text>
+    <text x="200" y="50" font-family="Cascadia Code, Consolas, monospace" font-size="9" fill="#666666">●●●●●8e2</text>
+    <text x="272" y="50" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e">✓</text>
+    <rect x="280" y="42" width="12" height="12" rx="2" fill="rgba(99,102,241,0.1)"/>
+    <text x="286" y="51" font-family="Segoe UI, sans-serif" font-size="8" fill="#818cf8" text-anchor="middle">✎</text>
+
+    <!-- Secret 3: Not set -->
+    <rect x="0" y="66" width="3" height="28" rx="1.5" fill="#f59e0b"/>
+    <text x="14" y="78" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">🔑</text>
+    <text x="30" y="78" font-family="Cascadia Code, Consolas, monospace" font-size="9" fill="#cccccc">AZURE_TOKEN</text>
+    <text x="200" y="78" font-family="Segoe UI, sans-serif" font-size="9" fill="#f59e0b">Not set</text>
+    <text x="272" y="78" font-family="Segoe UI, sans-serif" font-size="9" fill="#f59e0b">⚠</text>
+    <rect x="280" y="70" width="12" height="12" rx="2" fill="rgba(245,158,11,0.15)"/>
+    <text x="286" y="79" font-family="Segoe UI, sans-serif" font-size="8" fill="#fbbf24" text-anchor="middle">+</text>
+
+    <!-- Add Secret button -->
+    <rect x="10" y="92" width="80" height="14" rx="3" fill="rgba(99,102,241,0.12)"/>
+    <text x="50" y="102" font-family="Segoe UI, sans-serif" font-size="9" fill="#818cf8" text-anchor="middle">+ Add Secret</text>
+  </g>
+
+  <!-- ─── Settings Manager (NEW) ─── -->
+  <g transform="translate(12, 618)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SETTINGS</text>
+    <text x="248" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Full Settings →</text>
+
+    <rect x="0" y="10" width="296" height="104" rx="6" fill="#252526"/>
+
+    <!-- Reasoning Effort: 3-segment toggle -->
+    <text x="10" y="28" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Reasoning Effort</text>
+    <rect x="170" y="16" width="30" height="18" rx="3" fill="#2d2d2d"/>
+    <text x="185" y="29" font-family="Segoe UI, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Low</text>
+    <rect x="202" y="16" width="30" height="18" rx="3" fill="#2d2d2d"/>
+    <text x="217" y="29" font-family="Segoe UI, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Med</text>
+    <rect x="234" y="16" width="34" height="18" rx="3" fill="#6366f1"/>
+    <text x="251" y="29" font-family="Segoe UI, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">High</text>
+
+    <!-- Extended Thinking: ON/OFF pill -->
+    <text x="10" y="50" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Extended Thinking</text>
+    <rect x="220" y="38" width="48" height="18" rx="9" fill="#2d2d2d" stroke="#3c3c3c" stroke-width="0.5"/>
+    <rect x="222" y="40" width="22" height="14" rx="7" fill="#22c55e"/>
+    <text x="233" y="50" font-family="Segoe UI, sans-serif" font-size="7" fill="#ffffff" text-anchor="middle">ON</text>
+    <text x="254" y="50" font-family="Segoe UI, sans-serif" font-size="7" fill="#666666" text-anchor="middle">OFF</text>
+
+    <!-- Auto-Dream: schedule display -->
+    <text x="10" y="72" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Auto-Dream</text>
+    <rect x="170" y="60" width="98" height="18" rx="3" fill="#2d2d2d"/>
+    <text x="219" y="73" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0" text-anchor="middle">Scheduled (24h)</text>
+
+    <!-- Auto-Approval: ON/OFF pill -->
+    <text x="10" y="94" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Auto-Approval</text>
+    <rect x="220" y="82" width="48" height="18" rx="9" fill="#2d2d2d" stroke="#3c3c3c" stroke-width="0.5"/>
+    <rect x="222" y="84" width="22" height="14" rx="7" fill="#22c55e"/>
+    <text x="233" y="94" font-family="Segoe UI, sans-serif" font-size="7" fill="#ffffff" text-anchor="middle">ON</text>
+    <text x="254" y="94" font-family="Segoe UI, sans-serif" font-size="7" fill="#666666" text-anchor="middle">OFF</text>
+  </g>
+
+  <!-- ─── Context Budget (full-width) ─── -->
+  <g transform="translate(12, 736)">
+    <rect x="0" y="0" width="296" height="32" rx="6" fill="#252526"/>
+    <text x="10" y="14" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888" font-weight="600">CONTEXT BUDGET</text>
+    <text x="115" y="14" font-family="Cascadia Code, Consolas, monospace" font-size="11" fill="#f59e0b" font-weight="600">68%</text>
+    <text x="148" y="14" font-family="Segoe UI, sans-serif" font-size="8" fill="#a0a0a0">used</text>
+    <rect x="10" y="22" width="276" height="4" rx="2" fill="#333333"/>
+    <rect x="10" y="22" width="188" height="4" rx="2" fill="url(#orangeGrad)"/>
+  </g>
+
+  <!-- ─── Redistribution Annotation ─── -->
+  <g transform="translate(12, 778)">
+    <rect x="0" y="0" width="296" height="16" rx="4" fill="rgba(99,102,241,0.04)" stroke="#6366f1" stroke-width="0.5" stroke-dasharray="3 3" stroke-opacity="0.3"/>
+    <text x="10" y="11" font-family="Segoe UI, sans-serif" font-size="7" fill="#818cf8">Cognitive State + Parallel Agents → Agents | Recent Diffs + Queued Messages → Activity</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="160" y="796" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">v7.0.0 · Command Center</text>
+
+  <!-- ═══ ANNOTATION COLUMN ═══ -->
+  <rect x="320" y="0" width="240" height="800" fill="#181820"/>
+  <line x1="320" y1="0" x2="320" y2="800" stroke="#2a2a2a" stroke-width="1"/>
+  <text x="440" y="30" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555" letter-spacing="2" font-weight="600" text-anchor="middle">ANNOTATIONS</text>
+  <g font-family="Segoe UI, sans-serif">
+    <!-- Personality Toggle -->
+    <line x1="336" y1="21" x2="314" y2="21" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,18.5 308,21 314,23.5" fill="#4a4a6a"/>
+    <text x="340" y="18" font-size="9" fill="#a78bfa" font-weight="600">Personality Toggle</text>
+    <text x="340" y="29" font-size="8" fill="#888888">Precise vs Chatty response style</text>
+
+    <!-- Architecture Status Banner -->
+    <line x1="336" y1="100" x2="314" y2="100" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,97.5 308,100 314,102.5" fill="#4a4a6a"/>
+    <text x="340" y="93" font-size="9" fill="#a78bfa" font-weight="600">Architecture Status</text>
+    <text x="340" y="104" font-size="8" fill="#888888">3-state: Up to Date / Update</text>
+    <text x="340" y="114" font-size="8" fill="#888888">Available / Not Initialized</text>
+
+    <!-- Live Activity Feed -->
+    <line x1="336" y1="324" x2="314" y2="324" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,321.5 308,324 314,326.5" fill="#4a4a6a"/>
+    <text x="340" y="321" font-size="9" fill="#a78bfa" font-weight="600">Live Activity Feed</text>
+    <text x="340" y="332" font-size="8" fill="#888888">Real-time agent progress</text>
+    <text x="340" y="342" font-size="8" fill="#888888">with pause and steer controls</text>
+
+    <!-- Quick Command Bar -->
+    <line x1="336" y1="396" x2="314" y2="396" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,393.5 308,396 314,398.5" fill="#4a4a6a"/>
+    <text x="340" y="393" font-size="9" fill="#a78bfa" font-weight="600">Quick Command Bar</text>
+    <text x="340" y="404" font-size="8" fill="#888888">Inline prompt — skip chat panel</text>
+
+    <!-- Smart Nudges -->
+    <line x1="336" y1="450" x2="314" y2="450" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,447.5 308,450 314,452.5" fill="#4a4a6a"/>
+    <text x="340" y="447" font-size="9" fill="#a78bfa" font-weight="600">Smart Nudges</text>
+    <text x="340" y="458" font-size="8" fill="#888888">Contextual warnings with</text>
+    <text x="340" y="468" font-size="8" fill="#888888">one-click action buttons</text>
+
+    <!-- Secret Manager -->
+    <line x1="336" y1="555" x2="314" y2="555" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,552.5 308,555 314,557.5" fill="#4a4a6a"/>
+    <text x="340" y="552" font-size="9" fill="#a78bfa" font-weight="600">Secret Manager</text>
+    <text x="340" y="563" font-size="8" fill="#888888">API token dashboard — masked</text>
+    <text x="340" y="573" font-size="8" fill="#888888">values with quick-set buttons</text>
+
+    <!-- Settings Manager -->
+    <line x1="336" y1="670" x2="314" y2="670" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,667.5 308,670 314,672.5" fill="#4a4a6a"/>
+    <text x="340" y="667" font-size="9" fill="#a78bfa" font-weight="600">Settings Manager</text>
+    <text x="340" y="678" font-size="8" fill="#888888">Tiered config with visual toggles</text>
+
+    <!-- Context Budget -->
+    <line x1="336" y1="752" x2="314" y2="752" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,749.5 308,752 314,754.5" fill="#4a4a6a"/>
+    <text x="340" y="749" font-size="9" fill="#a78bfa" font-weight="600">Context Budget</text>
+    <text x="340" y="760" font-size="8" fill="#888888">Context window usage at a glance</text>
+  </g>
+</svg>

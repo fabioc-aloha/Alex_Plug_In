@@ -36,6 +36,13 @@
       "strength": 0.8,
       "when": "illustrating real-world subjects (animals, people, objects)",
       "yields": "Proportions, natural color palettes, anatomy references"
+    },
+    {
+      "target": "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
+      "type": "implements",
+      "strength": 0.8,
+      "when": "creating Command Center mockups or sidebar UI SVGs",
+      "yields": "Color tokens, annotation system, tab bar layout, canvas dimensions"
     }
   ],
   "triggers": [

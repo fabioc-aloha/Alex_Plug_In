@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="820" viewBox="0 0 680 820">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="autoGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- LABELS -->
+  <text x="160" y="16" font-family="Segoe UI, sans-serif" font-size="12" fill="#6366f1" text-anchor="middle" font-weight="700" letter-spacing="2">ORIGINAL — STATUS</text>
+  <text x="520" y="16" font-family="Segoe UI, sans-serif" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="700" letter-spacing="2">REIMAGINED — AUTOMATIONS</text>
+
+  <!-- ============================================ -->
+  <!-- LEFT PANEL: ORIGINAL STATUS TAB -->
+  <!-- ============================================ -->
+  <g transform="translate(0, 24)">
+    <rect width="320" height="780" fill="#1e1e1e" rx="8" stroke="#3c3c3c" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="320" height="42" fill="#252526" rx="8"/>
+    <rect x="0" y="34" width="320" height="8" fill="#252526"/>
+    <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+    <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">COGNITIVE ARCHITECTURE</text>
+    <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Alex Cognitive</text>
+
+    <!-- Tab Bar -->
+    <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+    <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+    <text x="33" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Home</text>
+    <text x="92" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Tools</text>
+    <text x="148" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Skills</text>
+    <rect x="178" y="46" width="58" height="26" rx="4" fill="#1e1e1e"/>
+    <text x="206" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle" font-weight="600">Status</text>
+    <rect x="178" y="73" width="58" height="2" rx="1" fill="#6366f1"/>
+    <text x="275" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">More</text>
+
+    <!-- Synapse Health -->
+    <g transform="translate(12, 86)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SYNAPSE HEALTH</text>
+      <rect x="0" y="12" width="296" height="80" rx="6" fill="#252526"/>
+      <text x="16" y="34" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0">Connection Density</text>
+      <rect x="16" y="40" width="264" height="6" rx="3" fill="#3c3c3c"/>
+      <rect x="16" y="40" width="220" height="6" rx="3" fill="#22c55e"/>
+      <text x="264" y="54" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0" text-anchor="end">83%</text>
+
+      <text x="16" y="66" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0">Trifecta Completeness</text>
+      <rect x="16" y="72" width="264" height="6" rx="3" fill="#3c3c3c"/>
+      <rect x="16" y="72" width="238" height="6" rx="3" fill="#6366f1"/>
+      <text x="264" y="86" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0" text-anchor="end">90%</text>
+    </g>
+
+    <!-- Memory Usage -->
+    <g transform="translate(12, 186)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">MEMORY USAGE</text>
+      <rect x="0" y="12" width="296" height="70" rx="6" fill="#252526"/>
+      <text x="16" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Skills:</text>
+      <text x="80" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">130 loaded</text>
+      <text x="16" y="50" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Instructions:</text>
+      <text x="100" y="50" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">48 active</text>
+      <text x="16" y="66" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Prompts:</text>
+      <text x="80" y="66" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">11 registered</text>
+    </g>
+
+    <!-- Architecture -->
+    <g transform="translate(12, 276)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">ARCHITECTURE</text>
+      <rect x="0" y="12" width="296" height="100" rx="6" fill="#252526"/>
+      <text x="16" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Version:</text>
+      <text x="80" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">v6.2.0</text>
+      <text x="16" y="48" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Agents:</text>
+      <text x="80" y="48" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">7 active</text>
+      <text x="16" y="64" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Heirs:</text>
+      <text x="80" y="64" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">3 synced</text>
+      <text x="16" y="80" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Last Dream:</text>
+      <text x="100" y="80" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0">2h ago</text>
+      <text x="16" y="96" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Brain QA:</text>
+      <text x="100" y="96" font-family="Segoe UI, sans-serif" font-size="10" fill="#22c55e">PASS</text>
+    </g>
+
+    <!-- Recent Activity (simple log) -->
+    <g transform="translate(12, 394)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RECENT ACTIVITY</text>
+      <rect x="0" y="12" width="296" height="96" rx="6" fill="#252526"/>
+      <text x="16" y="32" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">10:42</text>
+      <text x="48" y="32" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Brain QA passed</text>
+      <text x="16" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">10:38</text>
+      <text x="48" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Dream state completed</text>
+      <text x="16" y="64" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">09:15</text>
+      <text x="48" y="64" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Heir sync: 3 platforms</text>
+      <text x="16" y="80" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">09:10</text>
+      <text x="48" y="80" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Version bump v6.2.0</text>
+      <text x="16" y="96" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">08:55</text>
+      <text x="48" y="96" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Meditation session</text>
+    </g>
+
+    <!-- Limitations -->
+    <g transform="translate(12, 520)">
+      <rect x="0" y="0" width="296" height="92" rx="6" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="10" y="18" font-family="Segoe UI, sans-serif" font-size="10" fill="#f59e0b" font-weight="600">LIMITATIONS</text>
+      <text x="10" y="34" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• Static dashboard — no background tasks</text>
+      <text x="10" y="46" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• No scheduled / recurring automations</text>
+      <text x="10" y="58" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• No CI / pipeline integration</text>
+      <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• Activity is just a text log</text>
+      <text x="10" y="82" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• No way to trigger actions from status</text>
+    </g>
+
+    <text x="160" y="766" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">v6.5.0 · Current Design</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- RIGHT PANEL: REIMAGINED AUTOMATIONS TAB -->
+  <!-- ============================================ -->
+  <g transform="translate(360, 24)">
+    <rect width="320" height="780" fill="#1e1e1e" rx="8" stroke="#22c55e" stroke-width="1" stroke-opacity="0.4"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="320" height="42" fill="#252526" rx="8"/>
+    <rect x="0" y="34" width="320" height="8" fill="#252526"/>
+    <rect x="0" y="0" width="4" height="42" fill="url(#autoGrad)"/>
+    <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#22c55e" letter-spacing="3" font-weight="600">AUTOMATIONS</text>
+    <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">3 Running · 2 Scheduled</text>
+
+    <!-- Icon Tab Bar -->
+    <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+    <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+    <text x="20" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🎛️</text>
+    <text x="68" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🤖</text>
+    <text x="140" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🏪</text>
+    <rect x="176" y="46" width="32" height="26" rx="4" fill="#1e1e1e"/>
+    <text x="192" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">⚡</text>
+    <rect x="176" y="73" width="32" height="2" rx="1" fill="#22c55e"/>
+    <text x="260" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">📊</text>
+
+    <!-- Active Automations (CODEX BACKGROUND TASKS INSPIRED) -->
+    <g transform="translate(12, 86)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RUNNING NOW</text>
+
+      <!-- Task 1: Issue Triage -->
+      <rect x="0" y="12" width="296" height="64" rx="6" fill="#252526"/>
+      <rect x="0" y="12" width="3" height="64" rx="1.5" fill="#22c55e"/>
+      <circle cx="24" cy="30" r="4" fill="#22c55e">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="36" y="34" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Issue Triage</text>
+      <text x="36" y="50" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Auto-labels, deduplicates, assigns priority</text>
+      <text x="36" y="64" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Watching: fabioc-aloha/alex · 12 triaged today</text>
+      <!-- Toggle -->
+      <rect x="252" y="24" width="34" height="18" rx="9" fill="#22c55e"/>
+      <circle cx="277" cy="33" r="7" fill="#ffffff"/>
+
+      <!-- Task 2: CI Monitor -->
+      <rect x="0" y="82" width="296" height="64" rx="6" fill="#252526"/>
+      <rect x="0" y="82" width="3" height="64" rx="1.5" fill="#f59e0b"/>
+      <circle cx="24" cy="100" r="4" fill="#f59e0b">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="36" y="104" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">CI Pipeline Monitor</text>
+      <text x="36" y="120" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Watches builds, surfaces failures, suggests fixes</text>
+      <text x="36" y="134" font-family="Segoe UI, sans-serif" font-size="8" fill="#f59e0b">⚠ 1 failure detected — click to view</text>
+      <rect x="252" y="94" width="34" height="18" rx="9" fill="#22c55e"/>
+      <circle cx="277" cy="103" r="7" fill="#ffffff"/>
+
+      <!-- Task 3: Dream Scheduler -->
+      <rect x="0" y="152" width="296" height="64" rx="6" fill="#252526"/>
+      <rect x="0" y="152" width="3" height="64" rx="1.5" fill="#6366f1"/>
+      <circle cx="24" cy="170" r="4" fill="#6366f1">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="36" y="174" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Dream State (Nightly)</text>
+      <text x="36" y="190" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Synapse validation, memory consolidation</text>
+      <text x="36" y="204" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Schedule: daily 3:00 AM · Last ran: 7h ago</text>
+      <rect x="252" y="164" width="34" height="18" rx="9" fill="#22c55e"/>
+      <circle cx="277" cy="173" r="7" fill="#ffffff"/>
+    </g>
+
+    <!-- Scheduled -->
+    <g transform="translate(12, 318)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SCHEDULED</text>
+
+      <rect x="0" y="12" width="296" height="52" rx="6" fill="#252526"/>
+      <rect x="0" y="12" width="3" height="52" rx="1.5" fill="#3c3c3c"/>
+      <text x="16" y="32" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0">📋 Release Brief Generator</text>
+      <text x="16" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Runs on git tag · Generates changelog summary</text>
+      <text x="16" y="58" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Trigger: v* tag push · Next: pending</text>
+
+      <rect x="0" y="70" width="296" height="52" rx="6" fill="#252526"/>
+      <rect x="0" y="70" width="3" height="52" rx="1.5" fill="#3c3c3c"/>
+      <text x="16" y="90" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0">🔄 Heir Sync Check</text>
+      <text x="16" y="106" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Validates 3 heirs against Master every 6h</text>
+      <text x="16" y="116" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Next run: 2h 14m · Last: all synced</text>
+    </g>
+
+    <!-- Run History (CODEX ACTIVITY-LIKE TIMELINE) -->
+    <g transform="translate(12, 456)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RUN HISTORY</text>
+
+      <!-- Timeline -->
+      <rect x="12" y="14" width="2" height="120" fill="#3c3c3c"/>
+
+      <circle cx="13" cy="24" r="5" fill="#22c55e"/>
+      <text x="26" y="22" font-family="Segoe UI, sans-serif" font-size="9" fill="#e0e0e0">Issue Triage</text>
+      <text x="26" y="34" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">10:42 — labeled 3 issues, closed 1 dupe</text>
+
+      <circle cx="13" cy="54" r="5" fill="#22c55e"/>
+      <text x="26" y="52" font-family="Segoe UI, sans-serif" font-size="9" fill="#e0e0e0">Dream State</text>
+      <text x="26" y="64" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">03:00 — 4 synapses refreshed, 2 pruned</text>
+
+      <circle cx="13" cy="84" r="5" fill="#f59e0b"/>
+      <text x="26" y="82" font-family="Segoe UI, sans-serif" font-size="9" fill="#e0e0e0">CI Monitor</text>
+      <text x="26" y="94" font-family="Segoe UI, sans-serif" font-size="8" fill="#f59e0b">09:30 — test failure in extension.test.ts</text>
+
+      <circle cx="13" cy="114" r="5" fill="#22c55e"/>
+      <text x="26" y="112" font-family="Segoe UI, sans-serif" font-size="9" fill="#e0e0e0">Heir Sync</text>
+      <text x="26" y="124" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">06:00 — 3/3 heirs synced, 0 drift</text>
+    </g>
+
+    <!-- Create Automation -->
+    <g transform="translate(12, 596)">
+      <rect x="0" y="0" width="296" height="36" rx="6" fill="transparent" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="148" y="22" font-family="Segoe UI, sans-serif" font-size="10" fill="#22c55e" text-anchor="middle">+ Create New Automation</text>
+    </g>
+
+    <!-- Annotations -->
+    <g transform="translate(12, 652)">
+      <rect x="0" y="0" width="296" height="92" rx="6" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="10" y="18" font-family="Segoe UI, sans-serif" font-size="10" fill="#22c55e" font-weight="600">NEW FROM CODEX</text>
+      <text x="10" y="34" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Always-on background tasks with toggles</text>
+      <text x="10" y="46" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Scheduled runners (cron-style)</text>
+      <text x="10" y="58" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ CI pipeline monitoring + fix suggestions</text>
+      <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Run history timeline with outcomes</text>
+      <text x="10" y="82" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Issue triage + auto-labeling</text>
+    </g>
+
+    <text x="160" y="766" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e" text-anchor="middle">v7.0.0 · Reimagined Design</text>
+  </g>
+</svg>

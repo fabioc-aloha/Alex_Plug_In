@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="920" viewBox="0 0 560 920">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="920" fill="#1e1e1e"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="320" height="42" fill="#252526"/>
+  <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+  <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">DOCS</text>
+  <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Documentation &amp; Learning</text>
+  <rect x="270" y="10" width="40" height="22" rx="4" fill="#2d2d2d"/>
+  <text x="290" y="25" font-family="Segoe UI, sans-serif" font-size="12" fill="#888888" text-anchor="middle">↻</text>
+
+  <!-- Tab Bar -->
+  <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+  <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+  <text x="38" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mission Ctrl</text>
+  <text x="106" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Agents</text>
+  <text x="165" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Skill Store</text>
+  <text x="234" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mind</text>
+  <!-- Active: Docs -->
+  <rect x="268" y="46" width="50" height="26" rx="4" fill="#1e1e1e"/>
+  <text x="293" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0" text-anchor="middle" font-weight="600">Docs</text>
+  <rect x="268" y="73" width="50" height="2" rx="1" fill="#6366f1"/>
+
+  <!-- ─── SMART NUDGES ─── -->
+  <g transform="translate(12, 86)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">TIPS &amp; NUDGES</text>
+    <text x="254" y="0" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Dismiss all</text>
+
+    <!-- Nudge 1: New user tip -->
+    <rect x="0" y="14" width="296" height="38" rx="6" fill="rgba(99,102,241,0.06)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="12" y="30" font-family="Segoe UI, sans-serif" font-size="12" fill="#b0b0b0">💡</text>
+    <text x="32" y="30" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Try /meditate to consolidate recent learnings</text>
+    <text x="32" y="44" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1" font-weight="500">Run now →</text>
+
+    <!-- Nudge 2: Context tip -->
+    <rect x="0" y="60" width="296" height="38" rx="6" fill="rgba(245,158,11,0.06)" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="12" y="76" font-family="Segoe UI, sans-serif" font-size="12" fill="#b0b0b0">📖</text>
+    <text x="32" y="76" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">5 skills are fading — review Knowledge Freshness</text>
+    <text x="32" y="90" font-family="Segoe UI, sans-serif" font-size="9" fill="#f59e0b" font-weight="500">Open Mind tab →</text>
+
+    <!-- Nudge 3: Feature discovery -->
+    <rect x="0" y="106" width="296" height="38" rx="6" fill="rgba(34,197,94,0.06)" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="12" y="122" font-family="Segoe UI, sans-serif" font-size="12" fill="#b0b0b0">🎯</text>
+    <text x="32" y="122" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">New: Skill Store lets you toggle skills on/off</text>
+    <text x="32" y="136" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e" font-weight="500">Explore Skill Store →</text>
+  </g>
+
+  <!-- ─── GETTING STARTED ─── -->
+  <g transform="translate(12, 242)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">GETTING STARTED</text>
+
+    <rect x="0" y="14" width="296" height="44" rx="6" fill="#252526"/>
+    <rect x="0" y="14" width="3" height="44" rx="1.5" fill="#6366f1"/>
+    <text x="14" y="31" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">📘 User Manual</text>
+    <text x="14" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Complete partnership guide — start here</text>
+    <text x="272" y="38" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Open →</text>
+
+    <rect x="0" y="66" width="296" height="44" rx="6" fill="#252526"/>
+    <rect x="0" y="66" width="3" height="44" rx="1.5" fill="#22c55e"/>
+    <text x="14" y="83" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">⚡ Quick Reference</text>
+    <text x="14" y="100" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Commands, tools, and shortcuts cheat sheet</text>
+    <text x="272" y="90" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Open →</text>
+
+    <rect x="0" y="118" width="296" height="44" rx="6" fill="#252526"/>
+    <rect x="0" y="118" width="3" height="44" rx="1.5" fill="#f59e0b"/>
+    <text x="14" y="135" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">🔧 Environment Setup</text>
+    <text x="14" y="152" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Prerequisites and workspace configuration</text>
+    <text x="272" y="142" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Open →</text>
+
+    <rect x="0" y="170" width="296" height="44" rx="6" fill="#252526"/>
+    <rect x="0" y="170" width="3" height="44" rx="1.5" fill="#818cf8"/>
+    <text x="14" y="187" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">🎯 Use Cases Guide</text>
+    <text x="14" y="204" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Deep dive into every domain Alex supports</text>
+    <text x="272" y="194" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Open →</text>
+  </g>
+
+  <!-- ─── ARCHITECTURE ─── -->
+  <g transform="translate(12, 474)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">ARCHITECTURE</text>
+    <text x="256" y="0" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555">6 docs</text>
+
+    <rect x="0" y="14" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="12" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🧠 Cognitive Arch</text>
+    <text x="12" y="46" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">System architecture</text>
+
+    <rect x="152" y="14" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="164" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">💾 Memory Systems</text>
+    <text x="164" y="46" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Storage &amp; retrieval</text>
+
+    <rect x="0" y="62" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="12" y="82" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🌟 Conscious Mind</text>
+    <text x="12" y="94" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">User-facing tools</text>
+
+    <rect x="152" y="62" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="164" y="82" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🌙 Unconscious Mind</text>
+    <text x="164" y="94" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Background processes</text>
+
+    <rect x="0" y="110" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="12" y="130" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🤖 Agent Catalog</text>
+    <text x="12" y="142" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">7 specialist agents</text>
+
+    <rect x="152" y="110" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="164" y="130" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🔗 Trifecta Catalog</text>
+    <text x="164" y="142" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">37 complete trifectas</text>
+  </g>
+
+  <!-- ─── OPERATIONS & RESEARCH ─── -->
+  <g transform="translate(12, 642)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">OPERATIONS</text>
+
+    <rect x="0" y="14" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="12" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🛡️ Protection</text>
+    <text x="12" y="46" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Workspace safety</text>
+
+    <rect x="152" y="14" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="164" y="34" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">📋 Project Structure</text>
+    <text x="164" y="46" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">.github/ anatomy</text>
+
+    <rect x="0" y="62" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="12" y="82" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🧬 Heir Architecture</text>
+    <text x="12" y="94" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Evolution model</text>
+
+    <rect x="152" y="62" width="144" height="40" rx="6" fill="#252526"/>
+    <text x="164" y="82" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">📊 Research Papers</text>
+    <text x="164" y="94" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Academic publications</text>
+  </g>
+
+  <!-- ─── LEARN ALEX ONLINE ─── -->
+  <g transform="translate(12, 758)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">LEARN ALEX ONLINE</text>
+
+    <rect x="0" y="14" width="296" height="72" rx="8" fill="rgba(99,102,241,0.08)" stroke="#6366f1" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="148" y="36" font-family="Segoe UI, sans-serif" font-size="13" fill="#e0e0e0" text-anchor="middle" font-weight="600">🌐 learnalex.correax.com</text>
+    <text x="148" y="54" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0" text-anchor="middle">Study guides · Tutorials · Training · Workshops</text>
+    <rect x="98" y="62" width="100" height="18" rx="9" fill="#6366f1"/>
+    <text x="148" y="74" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="600">Open in Browser →</text>
+  </g>
+
+  <!-- ─── WORKING WITH ALEX ─── -->
+  <g transform="translate(12, 848)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">PARTNERSHIP</text>
+
+    <rect x="0" y="14" width="296" height="44" rx="6" fill="#252526"/>
+    <rect x="0" y="14" width="3" height="44" rx="1.5" fill="url(#greenGrad)"/>
+    <text x="14" y="31" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">🤝 Working with Alex</text>
+    <text x="14" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Dialog engineering &amp; collaboration patterns</text>
+    <text x="272" y="38" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1">Open →</text>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- ANNOTATION COLUMN (x 330 → 560) -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <rect x="320" y="0" width="240" height="920" fill="#181820"/>
+
+  <!-- Arrow 1: Tips & Nudges -->
+  <line x1="310" y1="110" x2="338" y2="110" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,107 344,110 338,113" fill="#4a4a6a"/>
+  <rect x="348" y="94" width="196" height="50" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="110" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">Context-Aware Nudges</text>
+  <text x="358" y="122" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">Nudges adapt to user state:</text>
+  <text x="358" y="132" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">health, streak, tips, features</text>
+
+  <!-- Arrow 2: Getting Started -->
+  <line x1="310" y1="300" x2="338" y2="300" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,297 344,300 338,303" fill="#4a4a6a"/>
+  <rect x="348" y="278" width="196" height="62" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="294" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">Local alex_docs/ Resources</text>
+  <text x="358" y="306" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">Each card opens the local .md</text>
+  <text x="358" y="318" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">file in VS Code editor. Color</text>
+  <text x="358" y="330" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">bars match doc category.</text>
+
+  <!-- Arrow 3: Architecture grid -->
+  <line x1="310" y1="520" x2="338" y2="520" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,517 344,520 338,523" fill="#4a4a6a"/>
+  <rect x="348" y="498" width="196" height="62" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="514" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">Compact Grid Layout</text>
+  <text x="358" y="526" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">2×3 grid for architecture docs.</text>
+  <text x="358" y="538" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">Click opens in editor. Count</text>
+  <text x="358" y="550" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">badge shows total doc files.</text>
+
+  <!-- Arrow 4: Operations grid -->
+  <line x1="310" y1="680" x2="338" y2="680" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,677 344,680 338,683" fill="#4a4a6a"/>
+  <rect x="348" y="660" width="196" height="50" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="676" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">Ops &amp; Research</text>
+  <text x="358" y="688" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">Workspace protection, project</text>
+  <text x="358" y="700" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">structure, heir model, papers</text>
+
+  <!-- Arrow 5: Learn Alex Online -->
+  <line x1="310" y1="800" x2="338" y2="800" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,797 344,800 338,803" fill="#4a4a6a"/>
+  <rect x="348" y="778" width="196" height="62" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="794" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">learnalex.correax.com</text>
+  <text x="358" y="806" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">External learning portal with</text>
+  <text x="358" y="818" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">expanded guides, workshops,</text>
+  <text x="358" y="830" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">and training materials.</text>
+
+  <!-- Arrow 6: Partnership -->
+  <line x1="310" y1="878" x2="338" y2="878" stroke="#4a4a6a" stroke-width="1" stroke-dasharray="3,2"/>
+  <polygon points="338,875 344,878 338,881" fill="#4a4a6a"/>
+  <rect x="348" y="862" width="196" height="40" rx="6" fill="#1e1e30" stroke="#4a4a6a" stroke-width="0.5"/>
+  <text x="358" y="878" font-family="Segoe UI, sans-serif" font-size="9" fill="#a78bfa" font-weight="600">Dialog Engineering</text>
+  <text x="358" y="890" font-family="Segoe UI, sans-serif" font-size="8" fill="#8888aa">How to partner effectively</text>
+
+</svg>

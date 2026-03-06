@@ -34,67 +34,15 @@ Four platforms. Focused, not scattered.
 
 ---
 
-## 🎯 v6.0.0 — The Partnership Release ✅ Shipped
+## ✅ Shipped Releases
 
-**Shipped**: 2026-02-28 · Commit `b690c20` · Tag `v6.0.0`
+| Version | Theme | Shipped |
+| --- | --- | --- |
+| **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued | 2026-03-05 |
+| **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle | 2026-03-04 |
+| **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine | 2026-02-28 |
 
-**Paradigm**: Autonomous Partnership — Alex doesn't wait to be asked. Alex anticipates, remembers, learns, and earns trust.
-
-**Foundation shipped in v5.9.x**: Agent hooks provide the event bus. Background File Watcher provides ambient awareness. The Forgetting Curve handles knowledge decay. Honest Uncertainty calibrates confidence. v6.0.0 adds the *decision-making* and *memory* layers that transform tools into partnership.
-
-### Core Partnership Capabilities
-
-| Feature                            |  Status   | Description                                                                                                                                                              | North Star Alignment        |
-| ---------------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| **Episodic memory**                | ✅ Shipped | Session records at `~/.alex/episodic/sessions.json`. Commands: `alex.recallSession`, `alex.showSessionHistory`.                                                          | *Partner remembers*         |
-| **Outcome learning loop**          | ✅ Shipped | 👍/👎 tracking with per-domain confidence scoring. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`.                          | *Partner learns what works* |
-| **Autonomous task detection**      | ✅ Shipped | Reads peripheral observations every 30 min, surfaces stalled work via notifications. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`.                          | *Partner shows up*          |
-| **Multi-step workflow engine**     | ✅ Shipped | JSON workflows at `.alex/workflows/`. 4 built-in: Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep. Commands: `alex.runWorkflow`, `alex.listWorkflows`. | *Partner handles any job*   |
-| **User expertise model**           | ✅ Shipped | 10-domain interaction tracking (novice→expert). Injects calibration hint into every `@alex` prompt. Command: `alex.showExpertiseModel`.                                  | *Partner adapts*            |
-| **Proactive code review triggers** | ✅ Shipped | On save, debounced 60s → `git diff --stat HEAD` → nudge if >200 lines changed. Built into task detector.                                                                 | *Partner brings context*    |
-
-### Definition of Done (v6.0.0)
-
-A version is **done** when ALL of the following are true:
-
-1. **Builds clean** — `npm run compile` exits 0 with zero errors
-2. **No dead code** — Every import resolves, every export is consumed
-3. **Local install smoke test passes** — Extension installed via vsix, activates cleanly, 3 random commands work
-4. **Version aligned** — package.json, CHANGELOG, copilot-instructions.md show same version
-5. **Heir sync clean** — `sync-architecture.js` runs with 0 errors
-6. **CHANGELOG documents the delta** — Every user-visible change has a line item
-7. **Partnership test**: Does Alex propose useful actions without being asked? Does Alex remember previous sessions? Does Alex adapt to the user?
-
-> **Principle**: Ship what makes Alex a better partner. Defer what doesn't.
-
-**Status**: ✅ All criteria met — v6.0.0 shipped 2026-02-28
-
----
-
-## ✅ v6.1.5 — M365 Schema + Agent Plugin + Polish (Shipped 2026-03-04)
-
-| Task | Description |
-| --- | --- |
-| Manifest v1.19 → v1.25 | Upgraded M365 app manifest schema to latest v1.25 |
-| GPT 5.1+ system prompt hardening | Literal-execution header, self-evaluation gate, atomic tasks |
-| Conversation starters v1.6 | Trimmed 11 → 6 starters (v1.6 schema max) |
-| Word & PowerPoint agent surfaces | Documented declarative agent support across docs |
-| Teams Toolkit → M365 Agents Toolkit | Renamed all references across 3 docs (10 refs) |
-| EmbeddedKnowledge readiness | knowledge/ folder pre-prepared for zero-delay adoption |
-| capabilities.md v1.6 features | Platform features, M365 capabilities table, agent surfaces |
-| Agent Plugin heir | Full platform: 84 skills, 7 agents, 22 instructions, 11 prompts |
-| AlexAgent distribution repo | Standalone public repo with install scripts, setup scripts, on-brand banner |
-| AI Writing Avoidance trifecta | Skill + instruction + prompt for detecting and fixing AI writing tells |
-| sync-plugin.ps1 AlexAgent publish | `-DistroRepo` param copies plugin bundle to distribution repo |
-| M365 heir version alignment | All files aligned to v6.1.5 (was scattered 5.7.7–6.1.0) |
-| M365 sync script | sync-m365.ps1 with backup/restore |
-| Thinking phrases | 15 cognitive-themed progress phrases via `chat.agent.thinking.phrases` |
-| Agent Plugin audit | 11 parity checks, 4 issues fixed |
-| M365 heir audit | 8-dimension audit, 4 fixes, 2 items deferred |
-| Banner redesign | 8 SVGs, 10 PNGs, brand doc tokens updated, roadmap banner |
-| Agent Debug Panel skill | Skill with 7 debug scenarios + WORKING-WITH-ALEX.md update |
-| Kitty terminal images | `terminal.integrated.enableImages` + skill with Node.js/imgcat/chafa |
-| MCP standalone bundle | 704KB self-contained esbuild bundle, zero dependencies |
+> Full details in the [Appendix: Completed Versions](#-appendix-completed-versions).
 
 ---
 
@@ -102,25 +50,21 @@ A version is **done** when ALL of the following are true:
 
 **Target**: Q2 2026
 
-**Paradigm**: Earn It — The North Star says "trusted." v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests, refactoring, CI/CD, and trifecta completion — the foundation that makes "trusted" a fact, not a promise.
+**Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests and refactoring — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-03): Trust scored 5/10. 6 test files for 42K lines of code. 13+ NASA R4 violations in the first 10 files sampled. 36/126 trifectas complete. No CI pipeline. This release closes those gaps.
+**North Star Assessment** (2026-03-05): Trust scored 5/10. 6 test files for 42K lines of code. 73 NASA R4 violations (functions >60 lines). 37/130 trifectas complete. Quality enforced via hooks + manual compile. This release closes the test and refactoring gaps.
 
-### Core
+### Core Trust Foundation
 
 | Task | Effort | Description |
 | --- | :---: | --- |
 | **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
 | **Break down the monoliths** | 3w | 62% reduction achieved on original 6 monoliths. Remaining: extension.ts (1,292), globalKnowledge.ts (916) + globalKnowledgeOps.ts (1,234) + globalKnowledgeContent.ts (982), participant.ts (973), welcomeView.ts (517) + welcomeViewHtml.ts (1,448), personaDetection.ts (1,062), tools.ts decomposed ✅. **New monoliths discovered**: contextMenu.ts (1,278), upgrade.ts (1,209), pptxGenerator.ts (1,035), commandsPresentation.ts (1,024). **73 functions >60 lines**: 11 critical (>200L), 22 major (100–200L), 40 minor (61–100L). Top offenders: `registerPresentationCommands` (1,148L), `activateInternal` (1,069L), `registerDeveloperCommands` (963L). See [alex_docs/audits/MONOLITH-ASSESSMENT.md](alex_docs/audits/MONOLITH-ASSESSMENT.md) |
-| ~~**Close the trifecta gap**~~ | ~~2w~~ | ✅ Done — 26 → 36 trifectas (+10). Recognized 4 hidden (image-handling, character-aging, visual-memory, code-review). Created 6 new (root-cause-analysis, refactoring, debugging, security-review, skill-building, global-knowledge) |
-| ~~**Add CI/CD pipeline**~~ | ~~1w~~ | ❌ Will not implement — quality gates enforced via hooks (`pre-tool-use.js`) and manual `npm run compile` |
-| ~~**Ship one heir to parity**~~ | ~~2w~~ | ❌ Discontinued — GitHub Copilot Web heir removed (not worth the effort; Agent Plugin covers the same use case better) |
 
-### Quick Wins (VS Code 1.110)
+### VS Code Platform Polish
 
 | Task | Effort | Description |
 | --- | :---: | --- |
-| ~~**Explore subagent model config**~~ | ~~1h~~ | ✅ Done — `chat.exploreAgent.defaultModel` set to `claude-sonnet-4` in setupEnvironment.ts, devcontainer.json, copilot-instructions.md, and docs |
 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
 | **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
 | **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
@@ -128,25 +72,18 @@ A version is **done** when ALL of the following are true:
 | **Terminal sandbox trust domains** | 1h | Configure `chat.tools.terminal.sandbox.network` trusted domains |
 | **OS notifications for confirmations** | 1h | Set `chat.notifyWindowOnConfirmation` to `always` |
 
-### M365 Polish
+### M365 Platform
 
 | Task | Effort | Description |
 | --- | :---: | --- |
-| **sensitivity_label support** | 2h | Deferred — v1.6 schema does not yet support this field |
-| ~~**GPT 5.1+ instruction patterns audit**~~ | ~~3h~~ | ✅ Done — All 9 GPT 5.1+ patterns already present |
-| ~~**Mobile support (iOS/Android)**~~ | ~~2h~~ | ✅ Done — Documented: declarative agent works in Teams mobile, Office Add-ins desktop-only |
-| ~~**Orphan plugin/OpenAPI files**~~ | ~~2h~~ | ✅ Done — Removed 4 unreferenced files (alex-knowledge-plugin.json, graph-api-plugin.json, openapi.yaml, graph-openapi.yaml) |
-| ~~**Instruction duplication**~~ | ~~1h~~ | ✅ No action needed — healthy separation (inline = decision tree, knowledge/ = reference) |
+| **sensitivity_label support** | 2h | Gated — v1.6 schema does not yet support this field |
 
 ### Definition of Done (v6.5.0)
 
 1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file (currently 73 violations)
-3. **No source file >1,500 lines** — 8 files currently exceed this (down from 6 original monoliths to 8 files >1K lines including new splits)
-4. ~~**CI green on main**~~ — Will not implement; quality enforced via hooks + manual compile
-5. **36+ complete trifectas** — ✅ Already achieved (37 as of 2026-03-05)
-6. ~~**GitHub Copilot Web heir at parity**~~ — Discontinued (heir removed)
-7. **North Star Trust score ≥7/10** — re-assessed at ship time
+3. **No source file >1,500 lines** — 8 files currently exceed this (8 files >1K lines including new splits)
+4. **North Star Trust score ≥7/10** — re-assessed at ship time
 
 > **Principle**: Don't add features. Prove the existing ones deserve trust.
 
@@ -160,7 +97,6 @@ A version is **done** when ALL of the following are true:
 | --- | :---: | --- |
 | Agentic browser testing | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
 | Office Add-in Phase 2 | 2w | Word templates, Excel trackers, PowerPoint gen |
-| ~~FLUX fine-tune for brand~~ | ~~3d~~ | ~~Custom LoRA for consistent Alex imagery~~ — **DONE** v6.2.0: `flux-brand-finetune` trifecta (skill + instruction + prompt) |
 | Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile |
 | Academic paper finalization | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
 
@@ -270,12 +206,12 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 ### Current State Summary (v6.2.0)
 
 Alex now has:
-- **128 Skills** (124 inheritable to heirs, fully synced)
-- **36 Complete Trifectas** — comprehensive domain coverage including north-star
-- **90 Registered Commands** — full command surface including 10 new v6.0.0 partnership commands
+- **130 Skills** (127 inheritable to heirs, fully synced)
+- **37 Complete Trifectas** — comprehensive domain coverage including north-star and flux-brand-finetune
+- **90 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
 - **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
-- **Agent Plugin** — 84 plugin-ready skills, 7 agents, 22 instructions, 11 prompts
+- **Agent Plugin** — 85 plugin-ready skills, 7 agents, 22 instructions, 11 prompts
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
 - **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
 - **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
@@ -283,13 +219,62 @@ Alex now has:
 - **User Expertise Model** — 10-domain expertise tracking (novice → expert) with automatic prompt calibration
 - **Proactive Code Review Triggers** — git diff threshold nudges on save
 - **CorreaX Brand System** — unified visual identity across all 5 properties
+- **FLUX Brand Fine-Tune** — custom LoRA training workflow for consistent brand imagery
 - **Background File Watcher** — ambient awareness of hot files, stalled work, TODO hotspots
 - **Honest Uncertainty** — confidence scoring on every request
 - **The Forgetting Curve** — usage-weighted knowledge decay
 - **Copilot Memory** — cross-session context persistence
 - **Avatar State System** — 9 cognitive states + 6 agent modes
 
-### v5.9.x Series (Q1 2026)
+### v6.2.0 — On-Brand Partnership Release (Shipped 2026-03-05)
+
+| Task | Description |
+| --- | --- |
+| FLUX brand fine-tune trifecta | 37th trifecta: skill + instruction + prompt for custom LoRA training on Replicate |
+| SVG-first banner strategy | Recraft v4 SVG generation for resolution-independent banners |
+| GH Copilot Web heir discontinued | Removed lowest-parity heir (1.5%); Agent Plugin covers same use case |
+| Script audit | 8 sync/build/release scripts audited, 3 fixed (dead regex, wrong exclusions, redundant compile) |
+| Sync verification | All 3 heirs verified in sync: VS Code (130 skills), M365 (90 skills), Agent Plugin (85 skills) |
+
+### v6.1.5 — M365 Schema + Agent Plugin + Polish (Shipped 2026-03-04)
+
+| Task | Description |
+| --- | --- |
+| Manifest v1.19 → v1.25 | Upgraded M365 app manifest schema to latest v1.25 |
+| GPT 5.1+ system prompt hardening | Literal-execution header, self-evaluation gate, atomic tasks |
+| Conversation starters v1.6 | Trimmed 11 → 6 starters (v1.6 schema max) |
+| Word & PowerPoint agent surfaces | Documented declarative agent support across docs |
+| Teams Toolkit → M365 Agents Toolkit | Renamed all references across 3 docs (10 refs) |
+| EmbeddedKnowledge readiness | knowledge/ folder pre-prepared for zero-delay adoption |
+| capabilities.md v1.6 features | Platform features, M365 capabilities table, agent surfaces |
+| Agent Plugin heir | Full platform: 84 skills, 7 agents, 22 instructions, 11 prompts |
+| AlexAgent distribution repo | Standalone public repo with install scripts, setup scripts, on-brand banner |
+| AI Writing Avoidance trifecta | Skill + instruction + prompt for detecting and fixing AI writing tells |
+| sync-plugin.ps1 AlexAgent publish | `-DistroRepo` param copies plugin bundle to distribution repo |
+| M365 heir version alignment | All files aligned to v6.1.5 (was scattered 5.7.7–6.1.0) |
+| M365 sync script | sync-m365.ps1 with backup/restore |
+| Thinking phrases | 15 cognitive-themed progress phrases via `chat.agent.thinking.phrases` |
+| Agent Plugin audit | 11 parity checks, 4 issues fixed |
+| M365 heir audit | 8-dimension audit, 4 fixes, 2 items deferred |
+| Banner redesign | 8 SVGs, 10 PNGs, brand doc tokens updated, roadmap banner |
+| Agent Debug Panel skill | Skill with 7 debug scenarios + WORKING-WITH-ALEX.md update |
+| Kitty terminal images | `terminal.integrated.enableImages` + skill with Node.js/imgcat/chafa |
+| MCP standalone bundle | 704KB self-contained esbuild bundle, zero dependencies |
+
+### v6.0.0 — The Partnership Release (Shipped 2026-02-28)
+
+**Paradigm**: Autonomous Partnership — Alex doesn't wait to be asked. Alex anticipates, remembers, learns, and earns trust.
+
+| Feature | Description | North Star Alignment |
+| --- | --- | --- |
+| **Episodic memory** | Session records at `~/.alex/episodic/sessions.json`. Commands: `alex.recallSession`, `alex.showSessionHistory`. | *Partner remembers* |
+| **Outcome learning loop** | 👍/👎 tracking with per-domain confidence scoring. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`. | *Partner learns what works* |
+| **Autonomous task detection** | Reads peripheral observations every 30 min, surfaces stalled work via notifications. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`. | *Partner shows up* |
+| **Multi-step workflow engine** | JSON workflows at `.alex/workflows/`. 4 built-in: Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep. | *Partner handles any job* |
+| **User expertise model** | 10-domain interaction tracking (novice→expert). Injects calibration hint into every `@alex` prompt. | *Partner adapts* |
+| **Proactive code review triggers** | On save, debounced 60s → `git diff --stat HEAD` → nudge if >200 lines changed. | *Partner brings context* |
+
+### v6.x and v5.9.x Series (Q1 2026)
 
 | Version | Theme                                       | Date       |
 | ------- | ------------------------------------------- | ---------- |

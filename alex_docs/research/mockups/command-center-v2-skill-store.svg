@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="812" viewBox="0 0 560 812">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="812" fill="#1e1e1e"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="320" height="42" fill="#252526"/>
+  <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+  <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">SKILL STORE</text>
+  <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">37 Trifectas · 12 Active</text>
+
+  <!-- Tab Bar — text labels -->
+  <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+  <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+  <text x="38" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mission Ctrl</text>
+  <text x="106" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Agents</text>
+  <!-- Active: Skill Store -->
+  <rect x="132" y="46" width="66" height="26" rx="4" fill="#1e1e1e"/>
+  <text x="165" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#e0e0e0" text-anchor="middle" font-weight="600">Skill Store</text>
+  <rect x="132" y="73" width="66" height="2" rx="1" fill="#6366f1"/>
+  <text x="234" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Mind</text>
+  <text x="296" y="63" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" text-anchor="middle">Docs</text>
+
+  <!-- Search -->
+  <g transform="translate(12, 86)">
+    <rect x="0" y="0" width="296" height="30" rx="6" fill="#3c3c3c"/>
+    <text x="12" y="19" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888">🔍 Search skills...</text>
+    <text x="240" y="19" font-family="Segoe UI, sans-serif" font-size="9" fill="#6366f1" font-weight="500">Filter ▾</text>
+  </g>
+
+  <!-- Catalog Toggle -->
+  <g transform="translate(12, 120)">
+    <rect x="0" y="0" width="296" height="26" rx="13" fill="#2d2d2d"/>
+    <rect x="2" y="2" width="96" height="22" rx="11" fill="#6366f1"/>
+    <text x="50" y="16" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500" text-anchor="middle">All (37)</text>
+    <text x="148" y="16" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888" text-anchor="middle">Active (12)</text>
+    <text x="246" y="16" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888" text-anchor="middle">Inactive (25)</text>
+  </g>
+
+  <!-- Skill Health Bar -->
+  <g transform="translate(12, 156)">
+    <rect x="0" y="0" width="296" height="26" rx="4" fill="#252526"/>
+    <text x="8" y="16" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Health:</text>
+    <rect x="52" y="8" width="180" height="8" rx="4" fill="#333333"/>
+    <rect x="52" y="8" width="162" height="8" rx="4" fill="url(#greenGrad)"/>
+    <text x="240" y="17" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e">90%</text>
+    <text x="268" y="17" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">healthy</text>
+  </g>
+
+  <!-- Category: Core (Tier 1) -->
+  <g transform="translate(12, 192)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#6366f1" letter-spacing="0.8" font-weight="600">CORE — Always Active</text>
+    <text x="252" y="0" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Tier 1</text>
+
+    <!-- Skill row: meditation -->
+    <rect x="0" y="10" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="12">🧘</text>
+    <text x="28" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">meditation</text>
+    <text x="28" y="40" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Knowledge consolidation sessions</text>
+    <rect x="256" y="18" width="32" height="16" rx="8" fill="#22c55e"/>
+    <circle cx="280" cy="26" r="6" fill="#ffffff"/>
+
+    <!-- Skill row: north-star -->
+    <rect x="0" y="52" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="68" font-family="Segoe UI, sans-serif" font-size="12">⭐</text>
+    <text x="28" y="68" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">north-star</text>
+    <text x="28" y="82" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Decision architecture alignment</text>
+    <rect x="256" y="60" width="32" height="16" rx="8" fill="#22c55e"/>
+    <circle cx="280" cy="68" r="6" fill="#ffffff"/>
+
+    <!-- Skill row: self-actualization -->
+    <rect x="0" y="94" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="110" font-family="Segoe UI, sans-serif" font-size="12">🌟</text>
+    <text x="28" y="110" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">self-actualization</text>
+    <text x="28" y="124" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Deep architecture assessment</text>
+    <rect x="256" y="102" width="32" height="16" rx="8" fill="#22c55e"/>
+    <circle cx="280" cy="110" r="6" fill="#ffffff"/>
+  </g>
+
+  <!-- Category: Development (Tier 2) -->
+  <g transform="translate(12, 342)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#818cf8" letter-spacing="0.8" font-weight="600">DEVELOPMENT — On Demand</text>
+    <text x="252" y="0" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Tier 2</text>
+
+    <!-- Skill row: vscode-extension-patterns (on) -->
+    <rect x="0" y="10" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="12">🧩</text>
+    <text x="28" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">vscode-extension-patterns</text>
+    <text x="28" y="40" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Reusable VS Code patterns</text>
+    <rect x="256" y="18" width="32" height="16" rx="8" fill="#22c55e"/>
+    <circle cx="280" cy="26" r="6" fill="#ffffff"/>
+
+    <!-- Skill row: testing-strategies (on) -->
+    <rect x="0" y="52" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="68" font-family="Segoe UI, sans-serif" font-size="12">🧪</text>
+    <text x="28" y="68" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="500">testing-strategies</text>
+    <text x="28" y="82" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">Right test at the right level</text>
+    <rect x="256" y="60" width="32" height="16" rx="8" fill="#22c55e"/>
+    <circle cx="280" cy="68" r="6" fill="#ffffff"/>
+
+    <!-- Skill row: code-review (off) -->
+    <rect x="0" y="94" width="296" height="38" rx="4" fill="#252526" opacity="0.6"/>
+    <text x="10" y="110" font-family="Segoe UI, sans-serif" font-size="12" opacity="0.6">📋</text>
+    <text x="28" y="110" font-family="Segoe UI, sans-serif" font-size="11" fill="#a0a0a0" font-weight="500">code-review</text>
+    <text x="28" y="124" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Systematic review for correctness</text>
+    <rect x="256" y="102" width="32" height="16" rx="8" fill="#444444"/>
+    <circle cx="264" cy="110" r="6" fill="#888888"/>
+
+    <!-- Skill row: debugging-patterns (off) -->
+    <rect x="0" y="136" width="296" height="38" rx="4" fill="#252526" opacity="0.6"/>
+    <text x="10" y="152" font-family="Segoe UI, sans-serif" font-size="12" opacity="0.6">🐛</text>
+    <text x="28" y="152" font-family="Segoe UI, sans-serif" font-size="11" fill="#a0a0a0" font-weight="500">debugging-patterns</text>
+    <text x="28" y="166" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Reproduce, isolate, hypothesize, fix</text>
+    <rect x="256" y="144" width="32" height="16" rx="8" fill="#444444"/>
+    <circle cx="264" cy="152" r="6" fill="#888888"/>
+  </g>
+
+  <!-- Category: Creative (Tier 3) -->
+  <g transform="translate(12, 530)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#a78bfa" letter-spacing="0.8" font-weight="600">CREATIVE — Persona-Driven</text>
+    <text x="252" y="0" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Tier 3</text>
+
+    <!-- Skill row: ai-generated-readme-banners (off) -->
+    <rect x="0" y="10" width="296" height="38" rx="4" fill="#252526" opacity="0.6"/>
+    <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="12" opacity="0.6">🎨</text>
+    <text x="28" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#a0a0a0" font-weight="500">ai-generated-readme-banners</text>
+    <text x="28" y="40" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">SVG-first cinematic banners</text>
+    <rect x="256" y="18" width="32" height="16" rx="8" fill="#444444"/>
+    <circle cx="264" cy="26" r="6" fill="#888888"/>
+
+    <!-- Skill row: image-handling (off) -->
+    <rect x="0" y="52" width="296" height="38" rx="4" fill="#252526" opacity="0.6"/>
+    <text x="10" y="68" font-family="Segoe UI, sans-serif" font-size="12" opacity="0.6">📸</text>
+    <text x="28" y="68" font-family="Segoe UI, sans-serif" font-size="11" fill="#a0a0a0" font-weight="500">image-handling</text>
+    <text x="28" y="82" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555">Right format, right size, right quality</text>
+    <rect x="256" y="60" width="32" height="16" rx="8" fill="#444444"/>
+    <circle cx="264" cy="68" r="6" fill="#888888"/>
+  </g>
+
+  <!-- Install from GitHub -->
+  <g transform="translate(12, 622)">
+    <rect x="0" y="0" width="296" height="36" rx="6" fill="transparent" stroke="#4c4c4c" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="148" y="22" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">+ Install Skill from GitHub</text>
+  </g>
+
+  <!-- Context Budget Impact -->
+  <g transform="translate(12, 670)">
+    <rect x="0" y="0" width="296" height="44" rx="6" fill="rgba(99,102,241,0.06)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.2"/>
+    <text x="10" y="16" font-family="Segoe UI, sans-serif" font-size="9" fill="#818cf8" font-weight="600">CONTEXT BUDGET IMPACT</text>
+    <text x="10" y="32" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">12 active skills using ~18% of context window.</text>
+    <text x="235" y="32" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e">✓ Healthy</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="160" y="798" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">v7.0.0 · Command Center</text>
+
+  <!-- ═══ ANNOTATION COLUMN ═══ -->
+  <rect x="320" y="0" width="240" height="812" fill="#181820"/>
+  <line x1="320" y1="0" x2="320" y2="812" stroke="#2a2a2a" stroke-width="1"/>
+  <text x="440" y="30" font-family="Segoe UI, sans-serif" font-size="8" fill="#555555" letter-spacing="2" font-weight="600" text-anchor="middle">ANNOTATIONS</text>
+  <g font-family="Segoe UI, sans-serif">
+    <!-- Search & Filter -->
+    <line x1="336" y1="101" x2="314" y2="101" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,98.5 308,101 314,103.5" fill="#4a4a6a"/>
+    <text x="340" y="98" font-size="9" fill="#a78bfa" font-weight="600">Search &amp; Filter</text>
+    <text x="340" y="109" font-size="8" fill="#888888">Find skills by name or category</text>
+
+    <!-- Catalog Toggle -->
+    <line x1="336" y1="135" x2="314" y2="135" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,132.5 308,135 314,137.5" fill="#4a4a6a"/>
+    <text x="340" y="132" font-size="9" fill="#a78bfa" font-weight="600">Catalog Toggle</text>
+    <text x="340" y="143" font-size="8" fill="#888888">All / Active / Inactive views</text>
+
+    <!-- Skill Health -->
+    <line x1="336" y1="169" x2="314" y2="169" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,166.5 308,169 314,171.5" fill="#4a4a6a"/>
+    <text x="340" y="166" font-size="9" fill="#a78bfa" font-weight="600">Skill Health</text>
+    <text x="340" y="177" font-size="8" fill="#888888">Aggregate trifecta health metric</text>
+
+    <!-- Core Skills (Tier 1) -->
+    <line x1="336" y1="250" x2="314" y2="250" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,247.5 308,250 314,252.5" fill="#4a4a6a"/>
+    <text x="340" y="247" font-size="9" fill="#a78bfa" font-weight="600">Core Skills (Tier 1)</text>
+    <text x="340" y="258" font-size="8" fill="#888888">Always-on foundational capabilities</text>
+
+    <!-- Dev Skills (Tier 2) -->
+    <line x1="336" y1="416" x2="314" y2="416" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,413.5 308,416 314,418.5" fill="#4a4a6a"/>
+    <text x="340" y="413" font-size="9" fill="#a78bfa" font-weight="600">Dev Skills (Tier 2)</text>
+    <text x="340" y="424" font-size="8" fill="#888888">On-demand — toggle to activate</text>
+
+    <!-- Creative Skills (Tier 3) -->
+    <line x1="336" y1="568" x2="314" y2="568" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,565.5 308,568 314,570.5" fill="#4a4a6a"/>
+    <text x="340" y="565" font-size="9" fill="#a78bfa" font-weight="600">Creative Skills (Tier 3)</text>
+    <text x="340" y="576" font-size="8" fill="#888888">Persona-driven, auto-activates</text>
+
+    <!-- Install from GitHub -->
+    <line x1="336" y1="640" x2="314" y2="640" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,637.5 308,640 314,642.5" fill="#4a4a6a"/>
+    <text x="340" y="637" font-size="9" fill="#a78bfa" font-weight="600">Install from GitHub</text>
+    <text x="340" y="648" font-size="8" fill="#888888">Community skill packages</text>
+
+    <!-- Context Budget Impact -->
+    <line x1="336" y1="692" x2="314" y2="692" stroke="#4a4a6a" stroke-width="0.7" stroke-dasharray="2 2"/>
+    <polygon points="314,689.5 308,692 314,694.5" fill="#4a4a6a"/>
+    <text x="340" y="689" font-size="9" fill="#a78bfa" font-weight="600">Context Budget Impact</text>
+    <text x="340" y="700" font-size="8" fill="#888888">Active skills' context window usage</text>
+  </g>
+</svg>

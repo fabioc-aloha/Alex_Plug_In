@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="780" viewBox="0 0 320 780">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="healthGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <clipPath id="avatarClip">
+      <circle cx="40" cy="40" r="28"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="780" fill="#1e1e1e" rx="0"/>
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="320" height="42" fill="#252526"/>
+  <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+  <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">COGNITIVE ARCHITECTURE</text>
+  <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Alex Cognitive</text>
+  <!-- Refresh button -->
+  <rect x="282" y="10" width="28" height="22" rx="3" fill="transparent"/>
+  <text x="290" y="26" font-family="Segoe UI, sans-serif" font-size="14" fill="#666666" text-anchor="middle">↻</text>
+
+  <!-- Tab Bar -->
+  <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+  <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+
+  <!-- Active tab: Home -->
+  <rect x="4" y="46" width="58" height="26" rx="4" fill="#1e1e1e"/>
+  <text x="33" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle" font-weight="600">Home</text>
+  <!-- Inactive tabs -->
+  <text x="92" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Tools</text>
+  <text x="148" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Skills</text>
+  <text x="206" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Status</text>
+  <text x="262" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">More</text>
+  <!-- Active indicator -->
+  <rect x="4" y="73" width="58" height="2" rx="1" fill="#6366f1"/>
+
+  <!-- Content area -->
+  <rect x="0" y="76" width="320" height="704" fill="#1e1e1e"/>
+
+  <!-- Compact Avatar + Status Row -->
+  <g transform="translate(12, 86)">
+    <!-- Avatar circle -->
+    <circle cx="28" cy="28" r="28" fill="#2d2d2d" stroke="#6366f1" stroke-width="2" stroke-opacity="0.4"/>
+    <circle cx="28" cy="20" r="10" fill="#8b7355"/>
+    <ellipse cx="28" cy="38" rx="16" ry="12" fill="#4a90d9"/>
+    <!-- Online indicator -->
+    <circle cx="48" cy="48" r="6" fill="#1e1e1e"/>
+    <circle cx="48" cy="48" r="4" fill="#22c55e"/>
+
+    <!-- Name + Persona -->
+    <text x="66" y="20" font-family="Segoe UI, sans-serif" font-size="13" fill="#e0e0e0" font-weight="600">Alex Finch</text>
+    <rect x="66" y="28" width="78" height="18" rx="9" fill="rgba(99,102,241,0.15)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="78" y="41" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">💻 Developer</text>
+
+    <!-- Health + Streak pills -->
+    <rect x="160" y="6" width="120" height="22" rx="4" fill="#252526"/>
+    <circle cx="174" cy="17" r="4" fill="#22c55e"/>
+    <text x="182" y="21" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">Healthy</text>
+    <text x="232" y="21" font-family="Segoe UI, sans-serif" font-size="10" fill="#f0883e">🔥 12d</text>
+
+    <rect x="160" y="32" width="120" height="18" rx="4" fill="#252526"/>
+    <text x="168" y="45" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">🤖 Level 3 · Ship</text>
+  </g>
+
+  <!-- Partnership Bar -->
+  <g transform="translate(12, 156)">
+    <rect x="0" y="0" width="296" height="30" rx="4" fill="rgba(99,102,241,0.06)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.15"/>
+    <text x="12" y="20" font-family="Segoe UI, sans-serif" font-size="11" fill="#a0a0a0">🤝 Your Trusted Partner for <tspan fill="#818cf8" font-weight="600">CODE</tspan></text>
+  </g>
+
+  <!-- Nudge -->
+  <g transform="translate(12, 196)">
+    <rect x="0" y="0" width="296" height="32" rx="4" fill="#252526"/>
+    <rect x="0" y="0" width="2" height="32" rx="1" fill="#f59e0b"/>
+    <text x="12" y="12" font-family="Segoe UI, sans-serif" font-size="10" fill="#f59e0b">⚠️</text>
+    <text x="30" y="14" font-family="Segoe UI, sans-serif" font-size="10" fill="#b0b0b0">4 broken synapses need repair</text>
+    <rect x="228" y="6" width="58" height="20" rx="3" fill="transparent"/>
+    <text x="238" y="20" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Run Dream</text>
+  </g>
+
+  <!-- Active Context Card -->
+  <g transform="translate(12, 238)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">ACTIVE CONTEXT</text>
+    <rect x="0" y="8" width="296" height="88" rx="5" fill="#252526"/>
+    <rect x="0" y="8" width="2" height="88" rx="1" fill="#6366f1"/>
+
+    <!-- Trifecta tags -->
+    <rect x="10" y="18" width="90" height="20" rx="10" fill="rgba(99,102,241,0.12)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="20" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Code Review</text>
+    <rect x="106" y="18" width="116" height="20" rx="10" fill="rgba(99,102,241,0.12)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="116" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">Testing Strategies</text>
+    <rect x="228" y="18" width="56" height="20" rx="10" fill="rgba(99,102,241,0.12)" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.25"/>
+    <text x="238" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">VS Code</text>
+
+    <!-- Meta badges -->
+    <rect x="10" y="46" width="74" height="16" rx="8" fill="rgba(99,102,241,0.2)"/>
+    <text x="18" y="57" font-family="Segoe UI, sans-serif" font-size="9" fill="#cccccc">💻 94% LLM</text>
+    <rect x="90" y="46" width="68" height="16" rx="8" fill="#333333"/>
+    <text x="98" y="57" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">✓ Mar 3</text>
+    <rect x="164" y="46" width="120" height="16" rx="8" fill="#333333"/>
+    <text x="172" y="57" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">KISS, DRY, Quality</text>
+
+    <!-- Objective -->
+    <rect x="10" y="70" width="276" height="20" rx="4" fill="rgba(99,102,241,0.08)"/>
+    <text x="18" y="84" font-family="Segoe UI, sans-serif" font-size="10" fill="#b0b0b0">🎯 Ship v6.5.0 with Command Center</text>
+  </g>
+
+  <!-- Quick Actions - 2x2 Grid -->
+  <g transform="translate(12, 342)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">QUICK ACTIONS</text>
+
+    <!-- Row 1 -->
+    <rect x="0" y="10" width="143" height="44" rx="5" fill="#0e639c" opacity="0.9"/>
+    <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="14">💬</text>
+    <text x="36" y="32" font-family="Segoe UI, sans-serif" font-size="12" fill="#ffffff" font-weight="500">Chat with Alex</text>
+    <text x="14" y="44" font-family="Segoe UI, sans-serif" font-size="9" fill="rgba(255,255,255,0.65)">Start a conversation</text>
+
+    <rect x="153" y="10" width="143" height="44" rx="5" fill="#252526"/>
+    <text x="167" y="30" font-family="Segoe UI, sans-serif" font-size="14">👀</text>
+    <text x="189" y="32" font-family="Segoe UI, sans-serif" font-size="12" fill="#cccccc" font-weight="500">Code Review</text>
+    <text x="167" y="44" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Correctness &amp; growth</text>
+
+    <!-- Row 2 -->
+    <rect x="0" y="62" width="143" height="44" rx="5" fill="#252526"/>
+    <text x="14" y="82" font-family="Segoe UI, sans-serif" font-size="14">🐛</text>
+    <text x="36" y="84" font-family="Segoe UI, sans-serif" font-size="12" fill="#cccccc" font-weight="500">Debug This</text>
+    <text x="14" y="96" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Find the issue together</text>
+
+    <rect x="153" y="62" width="143" height="44" rx="5" fill="#252526"/>
+    <text x="167" y="82" font-family="Segoe UI, sans-serif" font-size="14">🧪</text>
+    <text x="189" y="84" font-family="Segoe UI, sans-serif" font-size="12" fill="#cccccc" font-weight="500">Generate Tests</text>
+    <text x="167" y="96" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Build confidence</text>
+  </g>
+
+  <!-- Session Card -->
+  <g transform="translate(12, 468)">
+    <rect x="0" y="0" width="296" height="52" rx="5" fill="#252526"/>
+    <rect x="0" y="0" width="296" height="52" rx="5" fill="rgba(99,102,241,0.05)"/>
+    <text x="14" y="18" font-family="Segoe UI, sans-serif" font-size="13">🎯</text>
+    <text x="34" y="18" font-family="Segoe UI, sans-serif" font-size="12" fill="#e0e0e0" font-weight="500">Command Center Architecture</text>
+    <text x="14" y="38" font-family="Cascadia Code, Consolas, monospace" font-size="18" fill="#6366f1" font-weight="600">23:45</text>
+    <text x="70" y="38" font-family="Segoe UI, sans-serif" font-size="10" fill="#a0a0a0">▶️ Active · 🍅×3</text>
+    <text x="248" y="38" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Actions</text>
+  </g>
+
+  <!-- Learning Goals -->
+  <g transform="translate(12, 532)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">GOALS</text>
+    <text x="248" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#f0883e">🔥 12 day streak</text>
+
+    <!-- Goal 1 -->
+    <rect x="0" y="10" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Master VS Code Webview API</text>
+    <text x="250" y="26" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">7/10</text>
+    <rect x="10" y="32" width="276" height="3" rx="1.5" fill="#333333"/>
+    <rect x="10" y="32" width="193" height="3" rx="1.5" fill="#6366f1"/>
+
+    <!-- Goal 2 -->
+    <rect x="0" y="54" width="296" height="38" rx="4" fill="#252526"/>
+    <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Complete Testing Strategies skill</text>
+    <text x="250" y="70" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">3/5</text>
+    <rect x="10" y="76" width="276" height="3" rx="1.5" fill="#333333"/>
+    <rect x="10" y="76" width="166" height="3" rx="1.5" fill="#6366f1"/>
+  </g>
+
+  <!-- Stats bar at bottom -->
+  <g transform="translate(12, 640)">
+    <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RECOMMENDED SKILLS</text>
+    
+    <rect x="0" y="10" width="296" height="36" rx="4" fill="#252526"/>
+    <text x="10" y="28" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">🔒 Security Review</text>
+    <text x="10" y="40" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Detected .env file in workspace</text>
+    <text x="248" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Launch →</text>
+    
+    <rect x="0" y="52" width="296" height="36" rx="4" fill="#252526"/>
+    <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">📊 Markdown Mermaid</text>
+    <text x="10" y="82" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Active .md file detected</text>
+    <text x="248" y="74" font-family="Segoe UI, sans-serif" font-size="10" fill="#4fc1ff">Launch →</text>
+  </g>
+
+  <!-- Version footer -->
+  <text x="160" y="766" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">v6.5.0 · Alex Cognitive Architecture · CorreaX</text>
+</svg>

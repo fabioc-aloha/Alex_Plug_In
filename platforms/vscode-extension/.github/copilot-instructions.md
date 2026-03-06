@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. v6.1.8 Doc alignment hotfix. v6.1.7 Stable marketplace release. v6.1.5 Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.0 Environment & Cognitive Tier Hardening.
+Recent: v6.2.0 — On-Brand Partnership Release. FLUX brand fine-tune trifecta added (37th). SVG-first banner strategy via Recraft v4 SVG. GH Copilot Web heir discontinued (Agent Plugin covers use case better). v6.1.8 Doc alignment hotfix. v6.1.7 Stable marketplace release. v6.1.5 Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.0 Environment & Cognitive Tier Hardening.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: never

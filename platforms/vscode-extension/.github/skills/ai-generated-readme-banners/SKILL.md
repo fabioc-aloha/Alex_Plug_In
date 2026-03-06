@@ -21,32 +21,63 @@ description: "Create professional ultra-wide cinematic banners for GitHub README
 
 ## Implementation Strategy
 
-### 1. Aspect Ratio Selection
+### 1. Default Format: SVG via Recraft v4
+
+**SVG is the default banner format** — scalable, theme-aware, lightweight, and version-control friendly.
+
+Use Recraft v4 SVG on Replicate for AI-generated SVG banners:
+
+```javascript
+const output = await replicate.run("recraft-ai/recraft-v4-svg", {
+  input: {
+    prompt: "Professional ultra-wide banner for a cognitive AI project. Modern tech aesthetic, gradient from deep navy to electric blue, geometric patterns, clean composition.",
+    size: "1820x1024",       // Closest to 16:9 wide
+    style: "digital_illustration",  // or: "realistic_image", "vector_illustration"
+  }
+});
+// Output is native SVG — save directly
+import { writeFile } from "node:fs/promises";
+await writeFile("banner.svg", output);
+```
+
+**SVG Advantages for Banners**:
+- Infinite scalability — crisp at any display resolution
+- Theme-aware — can embed `prefers-color-scheme` media queries
+- Lightweight — typically < 100KB vs 500KB+ for raster
+- Version control friendly — diffs are meaningful
+- Editable — post-generation text/color tweaks in any editor
+
+### 2. Aspect Ratio Selection
 
 **Flux-supported ratios** (2026):
 - ✅ `21:9` — Ultra-wide cinematic (best for README banners)
 - ✅ `16:9` — Standard widescreen
 - ❌ `16:3` — NOT supported (causes 422 validation error)
 
-**Recommendation**: Use `21:9` for maximum banner width within API constraints.
+**Recraft SVG sizes**: `1820x1024` (wide), `1024x1024` (square), `1434x1024` (4:3)
 
-### 2. Model Selection
+**Recommendation**: Use Recraft SVG `1820x1024` as default; use Flux `21:9` for raster-only needs.
 
-| Model | Cost | Best For | Typography | Quality |
-|-------|------|----------|------------|----------|
-| **Flux Schnell** | $0.003 | Testing, iteration | No text | Good |
-| **Flux 1.1 Pro** | $0.04 | Production (clean) | No text | Excellent |
-| **Ideogram v2** | $0.08 | Production (with text, proven API) | ✅ Crystal clear | **Stunning** |
-| **Ideogram v3 Turbo** | $0.03 | Fast typography (63% cheaper than v2) | ✅ Crystal clear | **Excellent** |
-| **Ideogram v3 Balanced** | $0.06 | Balanced quality/speed | ✅ Crystal clear | **Stunning** |
-| **Ideogram v3 Quality** | $0.09 | Maximum quality + style references | ✅ Crystal clear + styles | **Best** |
+### 3. Model Selection
+
+| Model | Cost | Best For | Typography | Output | Quality |
+|-------|------|----------|------------|--------|----------|
+| **Recraft v4 SVG** | varies | **Default — SVG banners** | ✅ Text rendering | **SVG** | **Excellent** |
+| **Recraft v4 Pro SVG** | $0.30 | Premium SVG, detailed paths | ✅ Text rendering | **SVG** | **Best** |
+| **Flux Schnell** | $0.003 | Testing, iteration | No text | PNG | Good |
+| **Flux 1.1 Pro** | $0.04 | Production raster (clean) | No text | PNG | Excellent |
+| **Ideogram v2** | $0.08 | Raster with text (proven API) | ✅ Crystal clear | PNG | **Stunning** |
+| **Ideogram v3 Turbo** | $0.03 | Fast raster typography | ✅ Crystal clear | PNG | **Excellent** |
+| **Ideogram v3 Balanced** | $0.06 | Balanced quality/speed | ✅ Crystal clear | PNG | **Stunning** |
+| **Ideogram v3 Quality** | $0.09 | Maximum quality + style refs | ✅ Crystal clear + styles | PNG | **Best** |
 
 **v3 New Capabilities**: Style reference images (up to 3 uploads), `style_preset` field (80s Illustration, Art Deco, Watercolor, Oil Painting, Pop Art, Vintage Poster, etc.), style codes for reuse.
 
 **Recommendation**:
-- **Fastest / cheapest**: Ideogram v3 Turbo ($0.03, 75% cheaper than v2 for same quality class)
+- **Default**: Recraft v4 SVG — scalable, editable, lightweight
+- **Need photorealistic raster**: Ideogram v3 Turbo ($0.03) or Flux 1.1 Pro ($0.04)
 - **With style aesthetic**: Ideogram v3 Quality with `style_reference_images`
-- **Proven stable API**: Ideogram v2 (validated production pattern documented below)
+- **Proven raster API**: Ideogram v2 (validated production pattern documented below)
 
 ---
 

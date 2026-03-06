@@ -14,6 +14,20 @@
             "yields": "Shared prompt engineering patterns, retry logic, safety filter handling"
         },
         {
+            "target": ".github/skills/flux-brand-finetune/SKILL.md",
+            "type": "extends",
+            "strength": 0.8,
+            "when": "user has trained a custom LoRA and wants to generate brand-consistent banners",
+            "yields": "Fine-tuned model inference with trigger words for on-brand banner generation"
+        },
+        {
+            "target": ".github/skills/image-handling/SKILL.md",
+            "type": "requires",
+            "strength": 0.9,
+            "when": "selecting banner format (SVG default vs raster fallback) and model routing",
+            "yields": "Correct format selection, model priority, and size optimization for banners"
+        },
+        {
             "target": ".github/skills/prompt-engineering/SKILL.md",
             "type": "requires",
             "strength": 0.88,
@@ -57,6 +71,10 @@
         "banner generation",
         "replicate api",
         "replicate",
+        "recraft",
+        "recraft svg",
+        "svg banner",
+        "vector banner",
         "3:1 aspect ratio",
         "layout variations",
         "audience targeting",

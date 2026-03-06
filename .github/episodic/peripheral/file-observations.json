@@ -1,23 +1,16 @@
 {
-  "hotFiles": [],
+  "hotFiles": [
+    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
+  ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/m365-copilot/appPackage/declarativeAgent.json",
-    "platforms/m365-copilot/appPackage/knowledge/alex-protocols.md",
-    "platforms/m365-copilot/appPackage/knowledge/capabilities.md",
-    "platforms/m365-copilot/appPackage/knowledge/constitution.md",
-    "platforms/m365-copilot/appPackage/knowledge/help-commands.md",
-    "platforms/m365-copilot/appPackage/knowledge/m365-integration.md",
-    "platforms/m365-copilot/appPackage/knowledge/workflows.md",
-    "scripts/release-m365.ps1",
-    "platforms/m365-copilot/appPackage/knowledge/alex-protocols.txt"
+    "ROADMAP-UNIFIED.md",
+    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+    "alex_docs/research/CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md",
+    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
+    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
+    "alex_docs/research/mockups/"
   ],
-  "todoHotspots": [
-    {
-      "file": "platforms/vscode-extension/README.md",
-      "todoCount": 1,
-      "scannedAt": 1772745357349
-    }
-  ],
-  "lastUpdated": 1772745357349
+  "todoHotspots": [],
+  "lastUpdated": 1772762744996
 }

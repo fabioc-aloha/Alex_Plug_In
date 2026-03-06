@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="820" viewBox="0 0 680 820">
+  <defs>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="agentGreen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- LABELS -->
+  <text x="160" y="16" font-family="Segoe UI, sans-serif" font-size="12" fill="#6366f1" text-anchor="middle" font-weight="700" letter-spacing="2">ORIGINAL — TOOLS</text>
+  <text x="520" y="16" font-family="Segoe UI, sans-serif" font-size="12" fill="#22c55e" text-anchor="middle" font-weight="700" letter-spacing="2">REIMAGINED — AGENT HUB</text>
+
+  <!-- ============================================ -->
+  <!-- LEFT PANEL: ORIGINAL TOOLS TAB -->
+  <!-- ============================================ -->
+  <g transform="translate(0, 24)">
+    <rect width="320" height="780" fill="#1e1e1e" rx="8" stroke="#3c3c3c" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="320" height="42" fill="#252526" rx="8"/>
+    <rect x="0" y="34" width="320" height="8" fill="#252526"/>
+    <rect x="0" y="0" width="4" height="42" fill="url(#accentGrad)"/>
+    <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#6366f1" letter-spacing="3" font-weight="600">COGNITIVE ARCHITECTURE</text>
+    <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">Alex Cognitive</text>
+
+    <!-- Tab Bar -->
+    <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+    <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+    <text x="33" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Home</text>
+    <rect x="62" y="46" width="58" height="26" rx="4" fill="#1e1e1e"/>
+    <text x="92" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle" font-weight="600">Tools</text>
+    <rect x="62" y="73" width="58" height="2" rx="1" fill="#6366f1"/>
+    <text x="148" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Skills</text>
+    <text x="206" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">Status</text>
+    <text x="262" y="63" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">More</text>
+
+    <!-- Search -->
+    <g transform="translate(12, 86)">
+      <rect x="0" y="0" width="296" height="28" rx="4" fill="#3c3c3c"/>
+      <text x="12" y="18" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888">🔍 Search tools...</text>
+    </g>
+
+    <!-- Recently Used -->
+    <g transform="translate(12, 124)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RECENTLY USED</text>
+      <rect x="0" y="10" width="296" height="30" rx="4" fill="#252526"/>
+      <rect x="0" y="10" width="2" height="30" rx="1" fill="#6366f1"/>
+      <text x="14" y="24" font-family="Segoe UI, sans-serif" font-size="12">🐛</text>
+      <text x="34" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Debug This</text>
+      <text x="250" y="26" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">just now</text>
+      <rect x="0" y="44" width="296" height="30" rx="4" fill="#252526"/>
+      <rect x="0" y="44" width="2" height="30" rx="1" fill="#6366f1" opacity="0.6"/>
+      <text x="14" y="58" font-family="Segoe UI, sans-serif" font-size="12">👀</text>
+      <text x="34" y="60" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Code Review</text>
+      <text x="250" y="60" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">2h ago</text>
+      <rect x="0" y="78" width="296" height="30" rx="4" fill="#252526"/>
+      <rect x="0" y="78" width="2" height="30" rx="1" fill="#6366f1" opacity="0.3"/>
+      <text x="14" y="92" font-family="Segoe UI, sans-serif" font-size="12">📊</text>
+      <text x="34" y="94" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Generate Diagram</text>
+      <text x="244" y="94" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666">yesterday</text>
+    </g>
+
+    <!-- BUILD -->
+    <g transform="translate(12, 246)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">BUILD</text>
+      <rect x="0" y="10" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="28" font-family="Segoe UI, sans-serif" font-size="12">👀</text>
+      <text x="32" y="28" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Code Review</text>
+      <rect x="0" y="42" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="60" font-family="Segoe UI, sans-serif" font-size="12">🐛</text>
+      <text x="32" y="60" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Debug This</text>
+      <rect x="0" y="74" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="92" font-family="Segoe UI, sans-serif" font-size="12">🧪</text>
+      <text x="32" y="92" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Generate Tests</text>
+      <rect x="0" y="106" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="124" font-family="Segoe UI, sans-serif" font-size="12">🔍</text>
+      <text x="32" y="124" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Project Audit</text>
+      <rect x="0" y="138" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="156" font-family="Segoe UI, sans-serif" font-size="12">🚀</text>
+      <text x="32" y="156" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Release Preflight</text>
+    </g>
+
+    <!-- CREATE -->
+    <g transform="translate(12, 428)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">CREATE</text>
+      <rect x="0" y="10" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="28" font-family="Segoe UI, sans-serif" font-size="12">🖼️</text>
+      <text x="32" y="28" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Generate Image</text>
+      <rect x="0" y="42" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="60" font-family="Segoe UI, sans-serif" font-size="12">📊</text>
+      <text x="32" y="60" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Generate Diagram</text>
+      <rect x="0" y="74" width="296" height="28" rx="4" fill="#252526"/>
+      <text x="12" y="92" font-family="Segoe UI, sans-serif" font-size="12">🎨</text>
+      <text x="32" y="92" font-family="Segoe UI, sans-serif" font-size="11" fill="#cccccc">Gamma Presentation</text>
+    </g>
+
+    <!-- Limitations -->
+    <g transform="translate(12, 560)">
+      <rect x="0" y="0" width="296" height="80" rx="6" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="10" y="18" font-family="Segoe UI, sans-serif" font-size="10" fill="#f59e0b" font-weight="600">LIMITATIONS</text>
+      <text x="10" y="34" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• Flat list — no agent context</text>
+      <text x="10" y="46" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• No parallel agent visibility</text>
+      <text x="10" y="58" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• No thread detail / verbosity control</text>
+      <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">• Actions lack agent personality</text>
+    </g>
+
+    <text x="160" y="766" font-family="Segoe UI, sans-serif" font-size="9" fill="#555555" text-anchor="middle">v6.5.0 · Current Design</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- RIGHT PANEL: REIMAGINED AGENT HUB -->
+  <!-- ============================================ -->
+  <g transform="translate(360, 24)">
+    <rect width="320" height="780" fill="#1e1e1e" rx="8" stroke="#22c55e" stroke-width="1" stroke-opacity="0.4"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="320" height="42" fill="#252526" rx="8"/>
+    <rect x="0" y="34" width="320" height="8" fill="#252526"/>
+    <rect x="0" y="0" width="4" height="42" fill="url(#agentGreen)"/>
+    <text x="14" y="16" font-family="Segoe UI, sans-serif" font-size="8" fill="#22c55e" letter-spacing="3" font-weight="600">AGENT HUB</text>
+    <text x="14" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#cccccc" font-weight="600">7 Specialist Agents</text>
+
+    <!-- Icon Tab Bar -->
+    <rect x="0" y="42" width="320" height="34" fill="#2d2d2d"/>
+    <rect x="0" y="75" width="320" height="1" fill="#3c3c3c"/>
+    <text x="20" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🎛️</text>
+    <!-- Active: Agents -->
+    <rect x="40" y="46" width="32" height="26" rx="4" fill="#1e1e1e"/>
+    <text x="56" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🤖</text>
+    <rect x="40" y="73" width="32" height="2" rx="1" fill="#22c55e"/>
+    <text x="124" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🏪</text>
+    <text x="192" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">⚡</text>
+    <text x="260" y="63" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">📊</text>
+
+    <!-- Thread Detail Control (CODEX INSPIRED) -->
+    <g transform="translate(12, 86)">
+      <rect x="0" y="0" width="296" height="28" rx="4" fill="#2d2d2d" stroke="#3c3c3c" stroke-width="0.5"/>
+      <text x="10" y="18" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Detail:</text>
+      <rect x="50" y="4" width="58" height="20" rx="10" fill="#6366f1"/>
+      <text x="66" y="18" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Verbose</text>
+      <rect x="114" y="4" width="64" height="20" rx="10" fill="transparent"/>
+      <text x="130" y="18" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Standard</text>
+      <rect x="184" y="4" width="54" height="20" rx="10" fill="transparent"/>
+      <text x="198" y="18" font-family="Segoe UI, sans-serif" font-size="9" fill="#888888">Terse</text>
+    </g>
+
+    <!-- Agent Cards Grid -->
+    <g transform="translate(12, 122)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">SPECIALIST AGENTS</text>
+
+      <!-- Agent: Alex (Orchestrator) - full width -->
+      <rect x="0" y="12" width="296" height="54" rx="6" fill="#252526" stroke="#6366f1" stroke-width="0.5" stroke-opacity="0.4"/>
+      <rect x="0" y="12" width="3" height="54" rx="1.5" fill="#6366f1"/>
+      <circle cx="24" cy="38" r="14" fill="rgba(99,102,241,0.15)"/>
+      <text x="24" y="43" font-family="Segoe UI, sans-serif" font-size="14" text-anchor="middle">🧠</text>
+      <text x="46" y="32" font-family="Segoe UI, sans-serif" font-size="12" fill="#e0e0e0" font-weight="600">Alex</text>
+      <text x="82" y="32" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888">Orchestrator</text>
+      <text x="46" y="48" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Meta-cognitive awareness, routing, synthesis</text>
+      <circle cx="266" cy="38" r="4" fill="#22c55e"/>
+      <text x="276" y="42" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e">Live</text>
+
+      <!-- Agent pair: Builder + Validator -->
+      <rect x="0" y="74" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="0" y="74" width="3" height="80" rx="1.5" fill="#22c55e"/>
+      <circle cx="20" cy="96" r="12" fill="rgba(34,197,94,0.15)"/>
+      <text x="20" y="100" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">🔨</text>
+      <text x="38" y="96" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Builder</text>
+      <text x="8" y="112" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Constructive, optimistic</text>
+      <text x="8" y="124" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">implementation</text>
+      <!-- Launch button -->
+      <rect x="8" y="132" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="22" y="145" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+      <circle cx="126" cy="92" r="4" fill="#22c55e"/>
+
+      <rect x="153" y="74" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="153" y="74" width="3" height="80" rx="1.5" fill="#ef4444"/>
+      <circle cx="173" cy="96" r="12" fill="rgba(239,68,68,0.15)"/>
+      <text x="173" y="100" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">🛡️</text>
+      <text x="191" y="96" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Validator</text>
+      <text x="161" y="112" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Adversarial skepticism,</text>
+      <text x="161" y="124" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">quality assurance</text>
+      <rect x="161" y="132" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="175" y="145" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+
+      <!-- Agent pair: Researcher + Documentarian -->
+      <rect x="0" y="160" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="0" y="160" width="3" height="80" rx="1.5" fill="#f59e0b"/>
+      <circle cx="20" cy="182" r="12" fill="rgba(245,158,11,0.15)"/>
+      <text x="20" y="186" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">🔬</text>
+      <text x="38" y="182" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Researcher</text>
+      <text x="8" y="198" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Deep domain research</text>
+      <text x="8" y="210" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">and discovery</text>
+      <rect x="8" y="218" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="22" y="231" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+
+      <rect x="153" y="160" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="153" y="160" width="3" height="80" rx="1.5" fill="#3b82f6"/>
+      <circle cx="173" cy="182" r="12" fill="rgba(59,130,246,0.15)"/>
+      <text x="173" y="186" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">📝</text>
+      <text x="191" y="182" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Docs</text>
+      <text x="161" y="198" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Accurate, drift-free</text>
+      <text x="161" y="210" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">documentation</text>
+      <rect x="161" y="218" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="175" y="231" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+
+      <!-- Agent pair: Azure + M365 -->
+      <rect x="0" y="246" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="0" y="246" width="3" height="80" rx="1.5" fill="#0078d4"/>
+      <circle cx="20" cy="268" r="12" fill="rgba(0,120,212,0.15)"/>
+      <text x="20" y="272" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">☁️</text>
+      <text x="38" y="268" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">Azure</text>
+      <text x="8" y="284" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Cloud deployment,</text>
+      <text x="8" y="296" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">infrastructure</text>
+      <rect x="8" y="304" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="22" y="317" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+
+      <rect x="153" y="246" width="143" height="80" rx="6" fill="#252526"/>
+      <rect x="153" y="246" width="3" height="80" rx="1.5" fill="#5c2d91"/>
+      <circle cx="173" cy="268" r="12" fill="rgba(92,45,145,0.15)"/>
+      <text x="173" y="272" font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">📎</text>
+      <text x="191" y="268" font-family="Segoe UI, sans-serif" font-size="11" fill="#e0e0e0" font-weight="600">M365</text>
+      <text x="161" y="284" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">Teams, Graph API,</text>
+      <text x="161" y="296" font-family="Segoe UI, sans-serif" font-size="9" fill="#a0a0a0">M365 development</text>
+      <rect x="161" y="304" width="54" height="18" rx="4" fill="#0e639c"/>
+      <text x="175" y="317" font-family="Segoe UI, sans-serif" font-size="9" fill="#ffffff" font-weight="500">Launch</text>
+    </g>
+
+    <!-- Agent History / Recent Threads -->
+    <g transform="translate(12, 468)">
+      <text x="0" y="0" font-family="Segoe UI, sans-serif" font-size="10" fill="#888888" letter-spacing="0.8" font-weight="600">RECENT AGENT THREADS</text>
+
+      <rect x="0" y="10" width="296" height="36" rx="4" fill="#252526"/>
+      <rect x="0" y="10" width="2" height="36" rx="1" fill="#22c55e"/>
+      <text x="12" y="26" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🔨 Tab UI refactor — Builder</text>
+      <text x="12" y="40" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">3 min ago · 47 files changed · ✅ Tests pass</text>
+
+      <rect x="0" y="50" width="296" height="36" rx="4" fill="#252526"/>
+      <rect x="0" y="50" width="2" height="36" rx="1" fill="#ef4444"/>
+      <text x="12" y="66" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🛡️ Security audit — Validator</text>
+      <text x="12" y="80" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">1h ago · 2 findings · ⚠️ 1 critical</text>
+
+      <rect x="0" y="90" width="296" height="36" rx="4" fill="#252526"/>
+      <rect x="0" y="90" width="2" height="36" rx="1" fill="#f59e0b"/>
+      <text x="12" y="106" font-family="Segoe UI, sans-serif" font-size="10" fill="#cccccc">🔬 Codex analysis — Researcher</text>
+      <text x="12" y="120" font-family="Segoe UI, sans-serif" font-size="8" fill="#666666">2h ago · 1,400 lines · ✅ Complete</text>
+    </g>
+
+    <!-- Custom Agent (CODEX CREATE-YOUR-OWN INSPIRED) -->
+    <g transform="translate(12, 604)">
+      <rect x="0" y="0" width="296" height="44" rx="6" fill="transparent" stroke="#3c3c3c" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="148" y="18" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">+ Create Custom Agent</text>
+      <text x="148" y="34" font-family="Segoe UI, sans-serif" font-size="9" fill="#666666" text-anchor="middle">Combine skills + instructions + personality</text>
+    </g>
+
+    <!-- Annotations -->
+    <g transform="translate(12, 665)">
+      <rect x="0" y="0" width="296" height="80" rx="6" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="10" y="18" font-family="Segoe UI, sans-serif" font-size="10" fill="#22c55e" font-weight="600">NEW FROM CODEX</text>
+      <text x="10" y="34" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Thread detail control (Verbose/Standard/Terse)</text>
+      <text x="10" y="46" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Agent cards with color-coded personalities</text>
+      <text x="10" y="58" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Create Custom Agent (Codex Skill Creator pattern)</text>
+      <text x="10" y="70" font-family="Segoe UI, sans-serif" font-size="9" fill="#b0b0b0">✦ Thread history per agent with outcome tracking</text>
+    </g>
+
+    <text x="160" y="766" font-family="Segoe UI, sans-serif" font-size="9" fill="#22c55e" text-anchor="middle">v7.0.0 · Reimagined Design</text>
+  </g>
+</svg>
