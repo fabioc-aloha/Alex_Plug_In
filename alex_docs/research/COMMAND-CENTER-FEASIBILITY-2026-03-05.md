@@ -3,14 +3,263 @@
 **Author**: Alex Finch (Builder mode)
 **Date**: March 5, 2026
 **Classification**: Internal — Architecture Decision
-**Status**: Proposal — options for review
+**Status**: Approved — Implementation Specification
 **Related**: [CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md)
+
+---
+
+## Implementation Tracker
+
+| # | Task | Phase | Status | Notes |
+|---|------|-------|--------|-------|
+| | **Phase 0 — Clean Slate** | | | |
+| 0.1 | Archive `assets/avatars/` to `archive/avatars/` (112 PNGs, 26 MB) | 0 | Not Started | `.vsix` drops from ~28 MB to ~2 MB; originals preserved |
+| 0.2 | Extract `cognitiveState.ts` from avatarMappings | 0 | Not Started | Preserves `detectCognitiveState()`, triggers, interfaces |
+| 0.3 | Archive `avatarMappings.ts` to `archive/` (598 lines) | 0 | Not Started | Depends on 0.2 |
+| 0.4 | Gut `welcomeViewHtml.ts` → empty shell (~100 lines) | 0 | Not Started | Keep `getLoadingHtml()`, `getErrorHtml()` |
+| 0.5 | Gut `welcomeView.ts` → minimal provider (~80 lines) | 0 | Not Started | Keep core commands: refresh, setState, setAgent |
+| 0.6 | Remove `cognitiveDashboard` sidebar registration | 0 | Not Started | Keep file for editor panel; remove sidebar view |
+| 0.7 | Archive `memoryTreeProvider.ts` + test file to `archive/` | 0 | Not Started | Editor panel `memoryDashboard.ts` stays |
+| 0.8 | Update `extension.ts` (remove imports + registrations) | 0 | Not Started | Remove L69-70 imports, L213 + L497 calls |
+| 0.9 | Update `package.json` (views, commands) | 0 | Not Started | 3 views → 1, rename to "Command Center" |
+| 0.10 | Update references (`participant.ts`, `uxFeatures.ts`, `.vscodeignore`) | 0 | Not Started | Placeholder icon until Phase 1 SVG |
+| 0.11 | Establish Command Center shell (tab bar + CSS + switching) | 0 | Not Started | 5 empty tabs, working sidebar, no data fetch |
+| 0.12 | Tab state persistence + recently-used tracking | 0 | Not Started | `globalState` remembers last active tab |
+| 0.13 | Compile + smoke test | 0 | Not Started | Extension activates, sidebar shows empty shell |
+| | **Phase 1 — Mission Control + SVG Avatars** | | | |
+| 1.1 | Spike: validate SVG `iconPath` for `ChatParticipant` | 1 | Not Started | Blocking: type check confirms Uri accepted; runtime test needed for data-URI |
+| 1.2 | Design SVG icon set (~25 icons: 9 state, 6 agent, ~10 persona) | 1 | Not Started | Shape=category, color=state, CorreaX palette |
+| 1.3 | SVG template functions in `svgIcons.ts` | 1 | Not Started | Replaces PNG pipeline with inline SVG |
+| 1.4 | Update `chatAvatarBridge.ts` for SVG data-URI | 1 | Not Started | `participant.iconPath` gets SVG-based path |
+| 1.5 | Architecture Status Banner (3 states) | 1 | Not Started | Up to Date / Update Available / Not Initialized |
+| 1.6 | Smart Nudges (health, dream, streak) | 1 | Not Started | Migrate nudge logic from old welcomeView |
+| 1.7 | Quick Command Bar + Live Activity Feed | 1 | Not Started | Agent task display + inline chat |
+| 1.8 | Secret Manager + Settings Manager | 1 | Not Started | Token status, tiered settings sync |
+| 1.9 | Context Budget bar + Personality Toggle | 1 | Not Started | Context window % + Precise/Chatty switch |
+| | **Phase 2 — Agents Tab** | | | |
+| 2.1 | Agent Registry (7 agents with status badges) | 2 | Not Started | ACTIVE / QUEUED / ROUTING / IDLE |
+| 2.2 | Cognitive State display (mini avatar + reasoning meter) | 2 | Not Started | Received from Mission Control scope |
+| 2.3 | Search bar + filter + color-coded borders | 2 | Not Started | Green=active, indigo=queued, gray=idle |
+| 2.4 | Recent Agent Threads + thread detail toggle | 2 | Not Started | Verbose/Standard/Terse switch |
+| 2.5 | Create Custom Agent CTA | 2 | Not Started | Dashed-border placeholder |
+| | **Phase 3 — Skill Store** | | | |
+| 3.1 | Skill catalog data layer (scan `.github/skills/`) | 3 | Not Started | Trifecta completeness, health badges |
+| 3.2 | 3-tier catalog (Core / Development / Creative) | 3 | Not Started | Categories + toggle switches |
+| 3.3 | Skill cards with trifecta badges | 3 | Not Started | On/off toggle, dimmed when disabled |
+| 3.4 | Context Budget Impact display | 3 | Not Started | Active skill count + context % consumed |
+| 3.5 | Search + filter + Install from GitHub CTA | 3 | Not Started | |
+| | **Phase 4 — Mind Tab** | | | |
+| 4.1 | Brain Health banner (synapse count, broken, scanned) | 4 | Not Started | EXCELLENT/GOOD/DEGRADED + progress bar |
+| 4.2 | Memory Architecture cards (5 modalities) | 4 | Not Started | Semantic, Procedural, Episodic, Visual, Muscles |
+| 4.3 | Cognitive Age + Knowledge Freshness | 4 | Not Started | Age tier progression + forgetting curve |
+| 4.4 | Meditation & Growth + Honest Uncertainty | 4 | Not Started | Streak, emotional pattern, confidence bars |
+| 4.5 | Cognitive Actions (/meditate, /dream, /self-actualize) | 4 | Not Started | Quick-launch buttons |
+| 4.6 | Global Knowledge + Identity card | 4 | Not Started | Insight count, promoted this cycle, Alex Finch card |
+| | **Phase 5 — Docs Tab** | | | |
+| 5.1 | Tips & Nudges engine (context-aware suggestions) | 5 | Not Started | Health warnings, streak reminders, discovery |
+| 5.2 | Getting Started grid (4 key local docs) | 5 | Not Started | User Manual, Quick Ref, Env Setup, Use Cases |
+| 5.3 | Architecture + Operations doc grids | 5 | Not Started | 2×3 + 2×2 compact card layouts |
+| 5.4 | Learn Alex Online CTA + Partnership guide | 5 | Not Started | learnalex.correax.com link |
+| | **Phase 6 — Final Polish** | | | |
+| 6.1 | Redirect legacy commands to Command Center | 6 | Not Started | `showCognitiveDashboard` → Mind tab, etc. |
+| 6.2 | Verify sole-view state (no orphan registrations) | 6 | Not Started | Only `alex.welcomeView` in package.json |
+| 6.3 | Update documentation (README, CHANGELOG, guides) | 6 | Not Started | |
+| 6.4 | End-to-end testing + accessibility pass | 6 | Not Started | Keyboard navigation, screen reader, contrast |
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#d5c8e8', 'primaryTextColor': '#3c3553', 'primaryBorderColor': '#9b8ec4', 'secondaryColor': '#c8e6d5', 'tertiaryColor': '#fce4c8', 'lineColor': '#9b8ec4', 'sectionBkgColor': '#f3eff8', 'altSectionBkgColor': '#e8f3ee', 'taskBkgColor': '#d5c8e8', 'taskTextColor': '#3c3553', 'taskBorderColor': '#9b8ec4', 'activeTaskBkgColor': '#c8dae6', 'activeTaskBorderColor': '#82a4c4', 'doneTaskBkgColor': '#c8e6d5', 'doneTaskBorderColor': '#82c4a0'}}}%%
+gantt
+    title Command Center Implementation Phases
+    dateFormat X
+    axisFormat %s days
+
+    section Phase 0 — Clean Slate
+    Archive avatars + extract cognitiveState :p0a, 0, 1d
+    Archive avatarMappings.ts                :p0b, after p0a, 1d
+    Gut welcomeViewHtml.ts + welcomeView.ts  :p0c, 0, 1d
+    Remove dashboard + tree sidebar views    :p0d, after p0c, 1d
+    Update extension.ts + package.json       :p0e, after p0d, 1d
+    Update references (participant, ux, etc) :p0f, after p0b, 1d
+    Command Center shell (tabs + CSS)        :p0g, after p0e, 1d
+    Tab state persistence + recently-used    :p0h, after p0g, 1d
+    Compile + smoke test                     :p0i, after p0h, 1d
+
+    section Phase 1 — Mission Control + SVG Avatars
+    SVG iconPath spike                       :p1a, after p0i, 1d
+    SVG icon set (~25 icons)                 :p1b, after p1a, 2d
+    SVG templates + avatar bridge update     :p1c, after p1b, 1d
+    Architecture banner + Smart Nudges       :p1d, after p1c, 1d
+    Quick Command + Activity Feed            :p1e, after p1d, 1d
+    Secrets + Settings + Context + Personality :p1f, after p1e, 1d
+
+    section Phase 2 — Agents Tab
+    Agent Registry (7 agents + status)       :p2a, after p1f, 1d
+    Cognitive State + Parallel Agents        :p2b, after p2a, 1d
+    Search + filter + threads + custom CTA   :p2c, after p2b, 1d
+
+    section Phase 3 — Skill Store
+    Skill catalog data layer                 :p3a, after p2c, 1d
+    3-tier catalog + toggle switches         :p3b, after p3a, 1d
+    Skill cards + trifecta badges            :p3c, after p3b, 1d
+    Context impact + search + GitHub CTA     :p3d, after p3c, 1d
+
+    section Phase 4 — Mind Tab
+    Brain Health banner + synapse dashboard  :p4a, after p3d, 1d
+    Memory Architecture cards (5 modalities) :p4b, after p4a, 1d
+    Cognitive Age + Knowledge Freshness      :p4c, after p4b, 1d
+    Meditation + Uncertainty + Actions       :p4d, after p4c, 1d
+    Global Knowledge + Identity card         :p4e, after p4d, 1d
+
+    section Phase 5 — Docs Tab
+    Tips & Nudges engine                     :p5a, after p4e, 1d
+    Getting Started + Architecture grids     :p5b, after p5a, 1d
+    Operations + Learn Online + Partnership  :p5c, after p5b, 1d
+
+    section Phase 6 — Final Polish
+    Redirect legacy commands                 :p6a, after p5c, 1d
+    Verify sole-view + doc updates           :p6b, after p6a, 1d
+    End-to-end test + accessibility pass     :p6c, after p6b, 1d
+```
+
+---
+
+## Phase 0 — Clean Slate: Detailed Cleanup Plan
+
+Before building the Command Center, we gut the discontinued code and assets to start from a clean foundation. The extension must still compile and activate after each step — no broken intermediate states.
+
+### Step 1: Archive Avatar Assets
+
+Move all avatar assets from `assets/avatars/` to `archive/avatars/` — preserving originals outside the extension package while keeping them accessible in the repo.
+
+| Action | Target | Impact |
+|--------|--------|--------|
+| Move `assets/avatars/personas/` → `archive/avatars/personas/` | 62 PNGs (16.56 MB) | — |
+| Move `assets/avatars/ages/` → `archive/avatars/ages/` | 13 PNGs (3.57 MB) | — |
+| Move `assets/avatars/states/` → `archive/avatars/states/` | 9 PNGs (3.57 MB) | — |
+| Move `assets/avatars/agents/` → `archive/avatars/agents/` | 6 PNGs (1.51 MB) | — |
+| Move `assets/avatars/*.png/*.webp` (root) → `archive/avatars/` | 22 misc files (1.22 MB) | — |
+| **Total archived** | **112 files, 26.43 MB** | `.vsix` drops from ~28 MB to ~2 MB |
+
+**Archive location**: `archive/avatars/` (root-level `archive/` directory, already exists and is `.vscodeignore`d). Add `archive/avatars/` to `.gitignore` exclusion from `.vsix` packaging if not already covered.
+
+### Step 2: Gut Old Welcome View
+
+Replace the contents of these files (not delete — preserves git history and imports):
+
+| File | Current | After Gut | What Survives |
+|------|---------|-----------|---------------|
+| `welcomeViewHtml.ts` (1,488 lines) | Monolithic HTML generator with 600-line CSS, 35 action buttons, auto-refresh JS | ~100 lines | `getWelcomeHtmlContent()` returning empty tabbed shell with CSS design system variables. `getLoadingHtml()` and `getErrorHtml()` survive. |
+| `welcomeView.ts` (571 lines) | Provider with 32-command message router, nudge generator, avatar builder | ~80 lines | `WelcomeViewProvider` class with `resolveWebviewView()`, `refresh()`, `setCognitiveState()`, `setAgentMode()`. Message router reduced to core commands only. |
+
+### Step 3: Remove Deprecated Sidebar Views
+
+| File | Action | Reason |
+|------|--------|--------|
+| `cognitiveDashboard.ts` (621 lines) | Remove sidebar registration, keep file | Mind tab replaces sidebar view. `alex.openHealthDashboard` editor panel still works. |
+| `memoryTreeProvider.ts` (319 lines) | Archive file to `archive/`, remove registration | Mind tab replaces tree. `alex.openMemoryDashboard` editor panel still works. |
+| `extension.ts` (~1,397 lines) | Remove `registerCognitiveDashboard()` call (L497) + `registerMemoryTreeView()` call (L213) + their imports (L69-70) | Sidebar only has `alex.welcomeView` after cleanup |
+
+### Step 4: Archive Avatar Mapping Infrastructure
+
+| File | Action | What Moves Where |
+|------|--------|------------------|
+| `avatarMappings.ts` (598 lines) | Archive to `archive/src/` | `resolveAvatar()` logic replaced by SVG template functions in Phase 1. `detectCognitiveState()` and `COGNITIVE_STATE_TRIGGERS` move to a new lightweight `cognitiveState.ts` utility (~50 lines). |
+| `chatAvatarBridge.ts` (58 lines) | Keep but simplify | Still needed for participant.ts ↔ sidebar decoupling. Remove PNG-specific logic. |
+
+**Before archiving**: Extract `detectCognitiveState()`, `COGNITIVE_STATE_TRIGGERS`, `AvatarContext`, and `AvatarResult` interfaces into `src/chat/cognitiveState.ts` — these are reusable logic, not avatar-specific.
+
+### Step 5: Update package.json
+
+```jsonc
+// REMOVE from views.alex-sidebar:
+{
+  "id": "alex.cognitiveDashboard",
+  "type": "webview",
+  "name": "Cognitive Dashboard",
+  "visibility": "collapsed"
+},
+{
+  "id": "alex.memoryTree",
+  "type": "tree",
+  "name": "Memory Architecture",
+  "visibility": "collapsed"
+}
+
+// KEEP:
+{
+  "id": "alex.welcomeView",
+  "type": "webview",
+  "name": "Command Center"  // rename from "Welcome"
+}
+
+// REMOVE commands (redirect to Command Center in Phase 6):
+//   alex.showCognitiveDashboard → no longer a sidebar focus target
+//   alex.refreshMemoryTree → removed with tree view
+
+// KEEP commands (still functional):
+//   alex.refreshWelcomeView → refreshes Command Center
+//   alex.setCognitiveState → updates state
+//   alex.setAgentMode → updates mode
+//   alex.openHealthDashboard → editor panel (independent)
+//   alex.openMemoryDashboard → editor panel (independent)
+```
+
+### Step 6: Update References
+
+| File | Change |
+|------|--------|
+| `cognitiveStateUpdateTool.ts` (~77 lines) | Update to use `cognitiveState.ts` instead of `avatarMappings.ts` |
+| `participant.ts` | Replace `avatarMappings` import with `cognitiveState.ts`. Use placeholder icon until Phase 1 SVG. |
+| `uxFeatures.ts` | Remove `alex.showCognitiveDashboard` focus call |
+| `.vscodeignore` | Remove avatar glob exclusions |
+| `memoryTreeProvider.test.ts` | Archive test file to `archive/src/test/` (provider archived) |
+
+### Step 7: Establish Command Center Shell
+
+After cleanup, the gutted `welcomeViewHtml.ts` produces:
+
+```html
+<!-- Minimal Command Center shell -->
+<div class="command-center">
+  <header class="cc-header">
+    <span class="cc-title">Alex Cognitive v6.x</span>
+    <button class="cc-refresh" title="Refresh">↻</button>
+  </header>
+  <nav class="cc-tabs">
+    <button class="cc-tab active" data-tab="mission">Mission Ctrl</button>
+    <button class="cc-tab" data-tab="agents">Agents</button>
+    <button class="cc-tab" data-tab="skills">Skill Store</button>
+    <button class="cc-tab" data-tab="mind">Mind</button>
+    <button class="cc-tab" data-tab="docs">Docs</button>
+  </nav>
+  <main class="cc-content">
+    <section class="cc-panel active" data-panel="mission">
+      <p class="cc-placeholder">Mission Control — coming in Phase 1</p>
+    </section>
+    <!-- 4 more empty panels -->
+  </main>
+</div>
+```
+
+This shell ships as a working sidebar with tab switching (CSS + JS only, no data fetching yet). Each subsequent phase populates one tab.
+
+### Cleanup Scorecard
+
+| Metric | Before | After Phase 0 |
+|--------|--------|---------------|
+| Source files (sidebar) | 6 files, 3,555 lines | 3 files, ~230 lines |
+| Avatar assets | 112 files, 26.43 MB in `assets/` | 0 in package (archived to `archive/avatars/`) |
+| `.vsix` size | ~28 MB | ~2 MB |
+| Sidebar views | 3 (welcome + dashboard + tree) | 1 (Command Center) |
+| package.json view entries | 3 | 1 |
+| Files archived | — | 4 source files + 1 test + 112 assets → `archive/` |
+| **Net lines removed from active src** | — | **~3,900 lines** |
 
 ---
 
 ## The Opportunity
 
-The current Welcome sidebar is the most visible surface of the Alex Cognitive Architecture. It's the first thing users see, and it's where they spend 80% of their non-chat interaction time. Right now it's a **~1,950-line monolith** (517 lines HTML generation + 1,448 lines provider logic) that renders a flat, scrollable list of buttons grouped by category.
+The current Welcome sidebar is the most visible surface of the Alex Cognitive Architecture. It's the first thing users see, and it's where they spend 80% of their non-chat interaction time. Right now it's a **~1,950-line monolith** (1,448 lines HTML generation + 517 lines provider logic) that renders a flat, scrollable list of buttons grouped by category.
 
 It works. But "works" is not the same as "powerful."
 
@@ -49,21 +298,19 @@ The current welcome view renders **~36 action buttons** across 7 categories in a
 2. **Flat hierarchy** — Every button looks the same. "Chat with Alex" has the same visual weight as "Detect .env Secrets"
 3. **Static layout** — The view doesn't adapt to what the user is actually doing. A user debugging gets the same view as a user presenting
 4. **Underused real estate** — The avatar takes ~30% of above-the-fold space. Beautiful, but non-functional
-5. **Massive asset footprint** — 112 PNG avatar files (63 persona + 13 age + 8 state + 6 agent + 22 misc) total **26.4 MB** of raw assets. The packaged .vsix is 28.3 MB — avatar images are the dominant contributor to extension size
+5. **Massive asset footprint** — 112 PNG avatar files (62 persona + 13 age + 9 state + 6 agent + 22 misc) total **26.4 MB** of raw assets. The packaged .vsix is 28.3 MB — avatar images are the dominant contributor to extension size
 6. **No tabs/navigation** — Can't switch between "home" and "tools" and "status" views within the sidebar
 7. **Duplicate information** — Health Dashboard and Cognitive Dashboard show overlapping data in different places
 8. **No skill browsing** — 130+ skills exist but there's no way to discover or manage them from the sidebar
 
 ---
 
-## Options
-
-### Option A: Tabbed Sidebar Command Center (Recommended)
+## Design: Tabbed Sidebar Command Center
 
 **Concept**: Replace the single scrolling welcome view with a **tabbed navigation system** inside the same `WebviewViewProvider`. A tab bar at the top gives instant access to distinct "screens" without scrolling.
 
 ```mermaid
-graph TD
+graph LR
     subgraph Sidebar["Alex Cognitive v6.x  ↻"]
         TabBar["Mission Ctrl | Agents | Skill Store | Mind | Docs"]
         TabBar --> Content["← Tab content here →"]
@@ -154,12 +401,12 @@ After those resolve, it also:
 The tab that no other AI assistant has — Alex's introspective dashboard, a window into cognitive and physical architecture. Aligned directly with the North Star: "the most advanced and trusted AI partner."
 
 - **Brain Health** — EXCELLENT/GOOD/DEGRADED badge, synapse count (847), broken count (0), files scanned (126), health progress bar
-- **Memory Architecture (5 modalities)** — 3+2 card layout:
-  - **Semantic** (37 skills) — domain knowledge trifectas, purple accent
-  - **Procedural** (22 instructions) — auto-loaded rules, green accent
-  - **Episodic** (11 prompts) — reusable / commands, amber accent
-  - **Visual** (3 subjects) — base64 portraits for face-consistent generation, cyan accent
-  - **Muscles** (8 scripts) — execution scripts, hooks, motor cortex, red accent
+- **Memory Architecture (5 modalities)** — 3+2 card layout (counts are live from disk):
+  - **Semantic** (37 trifectas / 130 skill dirs) — domain knowledge trifectas, purple accent
+  - **Procedural** (64 instructions) — auto-loaded rules, green accent
+  - **Episodic** (49 prompts) — reusable / commands, amber accent
+  - **Visual** (1 subject) — base64 portraits for face-consistent generation, cyan accent
+  - **Muscles** (17 scripts) — execution scripts, hooks, motor cortex, red accent
 - **Cognitive Age** — Age 21 "Professional", tier 7/9 progression bar with milestone markers (0→60), next milestone: Age 30 "Mature" at 51 skills
 - **Knowledge Freshness** — Forgetting curve: 🌱 Thriving 24, 🌿 Active 18, 🍂 Fading 5, 💤 Dormant 2
 - **Meditation & Growth** — Last session (⚠ overdue), streak count, emotional pattern (satisfied, productive, curious), dream status
@@ -216,18 +463,16 @@ Alternatively, for a lighter initial payload: render only the active tab and sen
 
 #### Effort Estimate
 
-| Work Item | Effort | Risk |
-|-----------|--------|------|
-| Tab bar component + CSS | 1 day | Low |
-| Mission Control tab (refactor from current) | 1-2 days | Low — mostly extraction |
-| Agents tab (agent management + threads) | 2 days | Low |
-| Skill Store tab (browse + cards + toggles) | 2-3 days | Medium — needs skill catalog data |
-| Mind tab (cognitive architecture) | 2 days | Low — data sources exist |
-| Docs tab (documentation hub + nudges) | 0.5 day | Low |
-| Context-adaptive Quick Actions | 1-2 days | Medium — needs heuristics |
-| Recently Used tracking | 0.5 day | Low — simple state persistence |
-| Testing + polish | 2 days | Low |
-| **Total** | **~12-15 days** | **Low-Medium** |
+| Phase | Work Items | Effort | Risk |
+|-------|-----------|--------|------|
+| **0 — Clean Slate** | Archive avatars + stale code, gut welcome view, remove sidebar views, extract cognitiveState.ts, update extension.ts + package.json + references, establish Command Center shell with tab bar + CSS + persistence | 3-4 days | Low — archival + minimal new code |
+| **1 — Mission Control + SVG** | SVG iconPath spike, design ~25 SVG icons, SVG template functions, avatar bridge update, Architecture Banner, Smart Nudges, Quick Command Bar, Activity Feed, Secret/Settings Manager, Context Budget, Personality Toggle | 6-7 days | Medium — SVG spike is blocking |
+| **2 — Agents Tab** | Agent Registry (7 agents + badges), Cognitive State display, search + filter, Recent Threads, Custom Agent CTA | 3 days | Low |
+| **3 — Skill Store** | Skill catalog data layer, 3-tier catalog + toggles, skill cards + trifecta badges, Context Budget Impact, search + GitHub CTA | 3-4 days | Medium — needs data layer |
+| **4 — Mind Tab** | Brain Health banner, Memory Architecture cards (5 modalities), Cognitive Age, Knowledge Freshness, Meditation & Growth, Honest Uncertainty, Cognitive Actions, Global Knowledge, Identity card | 3-4 days | Low — data sources exist |
+| **5 — Docs Tab** | Tips & Nudges engine, Getting Started grid, Architecture + Operations grids, Learn Alex Online CTA, Partnership guide | 2 days | Low |
+| **6 — Final Polish** | Redirect legacy commands, verify sole-view state, update documentation, end-to-end testing, accessibility pass | 2-3 days | Low |
+| **Total** | **42 tasks across 7 phases** | **~22-25 days** | **Low-Medium** |
 
 #### Pros
 - Zero new infrastructure — stays inside existing WebviewViewProvider
@@ -245,123 +490,23 @@ Alternatively, for a lighter initial payload: render only the active tab and sen
 
 ---
 
-### Option B: Dedicated WebviewPanel Command Center
+## Alternatives Considered
 
-**Concept**: Keep the welcome sidebar simple (avatar + quick actions + nudges). Add a new full-panel `WebviewPanel` that opens in the editor area — like the Health Dashboard does today, but as a comprehensive Command Center.
+Three alternatives were evaluated during design:
 
-```mermaid
-graph LR
-    subgraph Panel["Editor Panel — Command Center"]
-        Tabs["Mission Ctrl | Agents | Skill Store | Mind | Docs"]
-        subgraph Row1[" "]
-            QA["Quick Actions\n💬 Chat  👀 Review\n🐛 Debug  🧪 Tests  🔍 Audit"]
-            AH["Architecture Health\nSynapses: 142 (138 healthy)\n██████████████░░ 97.2%\nLast Dream: 2 days ago"]
-        end
-        subgraph Row2[" "]
-            AC["Active Context\nPhase: Ship · Mode: Build · Persona: Developer (94%)\nTrifectas: code-review, testing, vscode-extension"]
-        end
-        subgraph Row3[" "]
-            RA["Agent Threads\n14:32 Builder — Code Review\n14:15 Validator — Dream QA\n13:50 Researcher — Insight saved"]
-            SR["Skill Recommendations\n👀 Code Review — Launch\n🧪 Testing — Launch\n🔒 Security — Launch"]
-        end
-    end
-    Tabs --> Row1
-    Row1 --> Row2
-    Row2 --> Row3
-    style Panel fill:#e8e0f0,stroke:#b4a7d6,color:#3c3553
-    style Tabs fill:#d5c8e8,stroke:#9b8ec4,color:#3c3553
-```
+| Option | Concept | Effort | Why Not Selected |
+|--------|---------|--------|-----------------|
+| **B: WebviewPanel** | Full-panel dashboard in editor area | ~18-22 days | Competes for editor tab space; requires two UI surfaces |
+| **C: Hybrid** | Tabbed sidebar + full editor panels | ~22-28 days | Most engineering effort; risk of "too many surfaces" |
+| **D: Standalone App** | Electron/Tauri desktop app | 4-8 weeks | New build pipeline and distribution; deferred until in-editor UX proves patterns |
 
-#### Effort Estimate
-
-| Work Item | Effort | Risk |
-|-----------|--------|------|
-| New WebviewPanel provider | 1 day | Low |
-| Multi-column responsive layout | 2-3 days | Medium |
-| Mission Control dashboard with grid cards | 2 days | Low |
-| Agents panel (agent management + threads) | 2-3 days | Medium |
-| Skill Store browser (full-width card grid) | 3-4 days | Medium |
-| Mind dashboard (consolidate 3 existing) | 2-3 days | Low |
-| Docs panel (documentation + learning hub) | 1-2 days | Low |
-| Sidebar → Panel launch button | 0.5 day | Low |
-| Testing + polish | 2-3 days | Low |
-| **Total** | **~18-22 days** | **Medium** |
-
-#### Pros
-- Full editor-width space — multi-column layouts, cards, charts
-- Can include visualizations (knowledge graph, timeline, network diagram)
-- Natural evolution path toward standalone app (same React components)
-- Users accustomed to VS Code editor-area panels (Settings, Extensions)
-- Can coexist with the simplified sidebar
-
-#### Cons
-- Competes for editor tab space (users must choose between code and dashboard)
-- More complex layout engineering (responsive multi-column in webview)
-- Must maintain sidebar AND panel (two UI surfaces)
-- Doesn't help when editor is hidden (presentation mode, etc.)
+Option D remains a future evolution path — build and validate UX patterns in the sidebar first, then extract to standalone when usage data confirms which views matter.
 
 ---
 
-### Option C: Hybrid — Tabbed Sidebar + Full Panel
+## Rationale
 
-**Concept**: Do both. The sidebar gets tabs (Option A) for day-to-day use. A "full screen" button on each tab opens the corresponding panel in the editor area for deeper interaction.
-
-```mermaid
-graph TD
-    subgraph Sidebar["Sidebar (always visible)"]
-        ST["Mission Ctrl | Agents | Skill Store | Mind | Docs"]
-        SL["Compact skill list\nwith search..."]
-    end
-    Sidebar -- "click ⛶ button" --> EditorPanel
-    subgraph EditorPanel["Editor Panel (on demand)"]
-        Title["Full Skill Store Browser"]
-        C1["Card"] ~~~ C2["Card"] ~~~ C3["Card"]
-    end
-    style Sidebar fill:#d5c8e8,stroke:#9b8ec4,color:#3c3553
-    style EditorPanel fill:#c8dae6,stroke:#82a4c4,color:#2d3d4a
-```
-
-This is the **progressive disclosure** pattern Alex already uses for skills (name → body → resources). The sidebar shows a compact summary; the panel shows the full experience.
-
-#### Effort Estimate
-
-Option A + Option B minus overlap ≈ **22-28 days** total, but can be shipped incrementally:
-- **Phase 1**: Tabbed sidebar only (Option A) — 12-15 days
-- **Phase 2**: Full panel for Skill Store tab — +4 days
-- **Phase 3**: Full panel for Mind tab — +3 days
-- **Phase 4**: Docs + Knowledge explorer panel — +4 days
-
-#### Pros
-- Best of both worlds — sidebar for quick access, panel for deep work
-- Incremental delivery — Phase 1 alone is a significant upgrade
-- Natural discovery path (sidebar → panel) matches user intent
-- The sidebar becomes a *navigation hub*, the panel becomes the *workspace*
-
-#### Cons
-- Most engineering effort overall
-- Must design shared component model early or face duplication
-- Risk of "too many surfaces" — sidebar, panel, chat, status bar
-
----
-
-### Option D: Standalone Companion App (Deferred)
-
-This is the Electron/Tauri option from the Codex report. **Not recommended now**, but kept for strategic context.
-
-| Factor | Assessment |
-|--------|------------|
-| **Effort** | 4-8 weeks minimum for MVP |
-| **Value** | Runs without VS Code — notifications, background monitoring |
-| **Risk** | High — new build pipeline, new repo, new distribution (Windows Store, Homebrew) |
-| **When** | After the in-VS-Code Command Center proves the UX patterns |
-
-The in-VS-Code Command Center (Options A/B/C) is the **proving ground** for what eventually becomes the standalone app. Build the UX patterns in the sidebar first, then extract them into Electron/Tauri when you have validated which views users actually use.
-
----
-
-## Recommendation
-
-**Option A (Tabbed Sidebar) as immediate next step.** Here's why:
+The tabbed sidebar is the right approach. Here's why:
 
 ### Mind-First Reasoning
 
@@ -377,45 +522,7 @@ The in-VS-Code Command Center (Options A/B/C) is the **proving ground** for what
 
 ### Implementation Order
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#d5c8e8', 'primaryTextColor': '#3c3553', 'primaryBorderColor': '#9b8ec4', 'secondaryColor': '#c8e6d5', 'tertiaryColor': '#fce4c8', 'lineColor': '#9b8ec4', 'sectionBkgColor': '#f3eff8', 'altSectionBkgColor': '#e8f3ee', 'taskBkgColor': '#d5c8e8', 'taskTextColor': '#3c3553', 'taskBorderColor': '#9b8ec4', 'activeTaskBkgColor': '#c8dae6', 'activeTaskBorderColor': '#82a4c4', 'doneTaskBkgColor': '#c8e6d5', 'doneTaskBorderColor': '#82c4a0'}}}%%
-gantt
-    title Command Center Implementation Phases
-    dateFormat X
-    axisFormat %s days
-
-    section Phase 0 — Foundation
-    Shared CSS design system variables     :p0a, 0, 1d
-    Tab bar component + switching           :p0b, 0, 1d
-    Tab state persistence                   :p0c, 0, 1d
-    Recently-used tracking                  :p0d, 0, 1d
-
-    section Phase 1 — Mission Control + SVG Avatars
-    SVG icon set (states, personas, agents) :p1a, after p0d, 2d
-    Replace PNG pipeline with inline SVG    :p1b, after p0d, 2d
-    Compact avatar + status indicators      :p1c, after p1a, 1d
-    Context-adaptive Quick Actions          :p1d, after p1c, 1d
-
-    section Phase 2 — Agents Tab
-    Search bar + filter                     :p2a, after p1d, 1d
-    Recently Used + categorized list        :p2b, after p2a, 1d
-
-    section Phase 3 — Skill Store Tab
-    Skill search + recommendations          :p3a, after p2b, 1d
-    Skill cards + categories + trifecta     :p3b, after p3a, 2d
-
-    section Phase 4 — Mind Tab
-    Brain health + synapse dashboard        :p4a, after p3b, 1d
-    Memory modalities + cognitive age       :p4b, after p4a, 1d
-    Meditation, uncertainty, global knowledge :p4c, after p4b, 1d
-
-    section Phase 5 — Docs Tab
-    Tips & nudges engine                    :p5a, after p4c, 1d
-    Local docs grid + learnalex.correax.com :p5b, after p5a, 1d
-
-    section Phase 6 — Sidebar Consolidation
-    Remove collapsible views + redirects    :p6, after p5, 1d
-```
+See [Gantt chart at top of document](#implementation-tracker).
 
 **Phase 6 details:**
 - Remove `alex.cognitiveDashboard` and `alex.memoryTree` from `package.json` views
@@ -491,6 +598,149 @@ This leaves `alex.welcomeView` as the **sole view** in the sidebar — the tabbe
 6. **No regressions** — all 36 existing commands remain accessible
 7. **Extension size < 5 MB** — down from 28.3 MB after avatar PNG elimination
 
+### Engineering Standards
+
+All Command Center code **must** follow the [NASA/JPL Power of 10](../../.github/instructions/nasa-code-standards.instructions.md) coding standards. The existing codebase already enforces these (see `nasaAssert` calls in `welcomeView.ts` and `welcomeViewHtml.ts`). New tab code must maintain the same rigor:
+
+| Rule | Application to Command Center |
+|------|------------------------------|
+| **R1: Bounded control flow** | Tab rendering must have bounded recursion (e.g., skill catalog traversal capped at `maxDepth`) |
+| **R2: Fixed upper bound on loops** | DOM iteration for skill toggles, agent cards, nudge lists — all must cap at a known maximum |
+| **R3: No dynamic memory after init** | Allocate tab data structures during `refresh()`, not during tab switches. Tab switching is pure CSS visibility |
+| **R4: Function length ≤ 60 lines** | Each `get*TabHtml()` function must stay under 60 lines; extract helpers for card rendering |
+| **R5: ≥ 2 assertions per function** | Entry-point assertions on every tab generator (validate data, bounds-check arrays) via `nasaAssert` / `nasaAssertBounded` |
+| **R6: Smallest possible scope** | Tab-specific variables scoped to their generator function; no shared mutable state between tabs |
+| **R7: Check all return values** | Every `postMessage` result, every async fetch in `refresh()` — handle failures explicitly |
+| **R9: Limit pointer/reference use** | Minimize DOM `querySelector` calls in client-side JS; prefer data attributes + event delegation (already in use) |
+| **R10: Compile with all warnings** | `strict: true` in `tsconfig.json` (already enforced); zero `any` in new tab code |
+
+**Assertion density target**: ≥ 2 `nasaAssert` calls per exported function, consistent with the existing codebase pattern.
+
+---
+
+## VS Code API Validation
+
+Research conducted against `@types/vscode` (VS Code 1.110+) to validate feasibility of all Command Center features before implementation begins. Each gap maps to a specific tracker task.
+
+### 1. IconPath & SVG Avatars (Task 1.1)
+
+**Finding**: `IconPath` accepts `Uri | { light: Uri; dark: Uri } | ThemeIcon`.
+
+- `ThemeIcon` is accepted but limited to VS Code's built-in **codicon** set (`id: string` from codicon library, optional `color: ThemeColor`). Cannot reference custom SVGs via ThemeIcon.
+- Custom SVGs for `ChatParticipant.iconPath` must use a **file URI** (`vscode.Uri.file(...)`) pointing to an on-disk `.svg`, or a **data URI** (`vscode.Uri.parse('data:image/svg+xml;base64,...')`).
+- **Runtime spike still required** (task 1.1) to confirm data URIs work with `ChatParticipant.iconPath` — the type accepts `Uri` but VS Code may reject non-file schemes at runtime.
+- **Implication**: SVG template functions (task 1.3) should generate both inline SVG (for webview HTML) and file/data-URI SVG (for `ChatParticipant.iconPath`).
+
+### 2. Context Budget Bar (Task 1.9)
+
+**Finding**: Fully feasible. `LanguageModelChat` exposes:
+
+| Property/Method | Type | Use |
+|----------------|------|-----|
+| `maxInputTokens` | `number` | Total context window size — denominator for budget bar |
+| `countTokens(text)` | `Thenable<number>` | Count tokens in a string or message — numerator for budget bar |
+| `name`, `family`, `vendor`, `version` | `string` | Display model info in Mission Control header |
+
+- `LanguageModelAccessInformation.canSendRequest(chat)` returns `boolean | undefined` — can show permission status.
+- `LanguageModelAccessInformation.onDidChange` fires when access changes — can reactively update the badge.
+- **Implication**: Context Budget bar (task 1.9) can show real token usage %. Skill Store (task 3.4) can show per-skill context impact.
+
+### 3. Agent Activity Lifecycle (Task 1.7)
+
+**Finding**: No VS Code API for agent activity lifecycle events.
+
+- `ChatParticipant` exposes only `onDidReceiveFeedback: Event<ChatResultFeedback>` — fires after user gives thumbs up/down.
+- No `onDidStartRequest`, `onDidCompleteRequest`, or task progress events exist in the type definitions.
+- **Implication**: Live Activity Feed (task 1.7) must rely on **internal tracking** within `participant.ts`'s `requestHandler` — log agent start/stop/error events to shared state, then push to sidebar via `postMessage`. This is not a blocker but means the feed reflects Alex's own tracking, not a VS Code-provided agent bus.
+
+### 4. Skill Activation API (Task 3.2)
+
+**Finding**: No programmatic API exists for skill management.
+
+- No `agentSkills`, `skillsLocations`, or `chat.agent` types found in `@types/vscode`.
+- Skills are loaded from paths declared in `settings.json` → `chat.agentSkillsLocations`.
+- **Implication**: Skill Store toggle switches (task 3.2) must manipulate `settings.json` via `workspace.getConfiguration('chat').update('agentSkillsLocations', ...)`. This works but is coarser than per-skill toggling — toggling a single skill means adding/removing its directory path from the array. Consider a local state file (`.github/config/skill-toggles.json`) to track which skills are "disabled" and rebuild the settings array on toggle.
+
+### 5. Webview Messaging & State (Tasks 0.11, 0.12)
+
+**Finding**: Messaging is functional but untyped. Built-in state persistence exists.
+
+- `Webview.postMessage(message: any)` — JSON serializable, supports `ArrayBuffer` since VS Code 1.57+.
+- `Webview.onDidReceiveMessage: Event<any>` — still untyped. Must implement own type guards for message routing.
+- **State persistence**: `WebviewViewResolveContext<T>.state` provides persisted state from `acquireVsCodeApi().setState()`/`getState()` — survives view deallocation **without** `retainContextWhenHidden: true`.
+- **Implication**: Tab state persistence (task 0.12) can use built-in `getState()/setState()` for lightweight tab memory (active tab, scroll position) alongside `globalState` for cross-session data (recently-used tracking).
+
+### 6. Bonus Discoveries
+
+| API | Location | Use in Command Center |
+|-----|----------|----------------------|
+| `WebviewView.badge: ViewBadge \| undefined` | WebviewView interface | Show notification count on sidebar icon (e.g., "3 broken synapses") |
+| `WebviewView.visible: boolean` | WebviewView interface | Skip refresh when sidebar is hidden — performance optimization |
+| `WebviewView.show(preserveFocus?)` | WebviewView interface | Programmatically reveal sidebar when nudge is triggered |
+| `WebviewView.title` / `description` | WebviewView interface | Dynamically set sidebar title (e.g., "Command Center — Building") |
+
+### Summary: API Feasibility Matrix
+
+| Feature | API Exists? | Approach | Risk |
+|---------|------------|----------|------|
+| SVG chat avatar | ✅ IconPath accepts Uri | File URI or data URI (runtime spike needed) | Low-Medium |
+| Context budget bar | ✅ maxInputTokens + countTokens | Direct API — fully supported | Low |
+| Agent activity feed | ❌ No lifecycle events | Internal tracking in requestHandler | Low |
+| Skill toggle switches | ❌ No skill API | settings.json manipulation via getConfiguration | Medium |
+| Tab state persistence | ✅ getState/setState | Built-in webview state + globalState | Low |
+| Sidebar badge | ✅ ViewBadge | Direct API — badge on sidebar icon | Low |
+| Typed messaging | ❌ Event\<any\> | Manual type guards (standard pattern) | Low |
+
+**Verdict**: All 42 tracker tasks are implementable with current VS Code APIs. No blockers. The SVG `iconPath` runtime spike (task 1.1) is the only item requiring empirical validation before committing to the data-URI approach.
+
+---
+
+## Deprecations & Removals
+
+The Command Center consolidates multiple UI surfaces into a single tabbed view. The following features are deprecated or removed as a result.
+
+### Sidebar Views Removed (Phase 6)
+
+| View ID | Current Purpose | Replacement |
+|---------|----------------|-------------|
+| `alex.cognitiveDashboard` | Collapsed webview showing brain health | Absorbed into Mind tab |
+| `alex.memoryTree` | TreeDataProvider showing memory architecture | Absorbed into Mind tab |
+
+After Phase 6, `alex.welcomeView` is the **sole sidebar view** — the tabbed Command Center replaces all three sections.
+
+### Commands Redirected
+
+| Command | Before | After |
+|---------|--------|-------|
+| `alex.showCognitiveDashboard` | Focuses collapsed sidebar section | Switches to Mind tab |
+| `alex.refreshMemoryTree` | Refreshes tree items | Triggers full refresh (Mind tab shows same data) |
+| `alex.openMemoryDashboard` | Opens editor panel | **Unchanged** — still opens full Memory Architecture panel |
+
+### Avatar Assets Archived
+
+| Item | Before | After |
+|------|--------|-------|
+| PNG avatar files | 112 files (62 persona + 13 age + 9 state + 6 agent + 22 misc) | ~10 inline SVG icons (PNGs archived to `archive/avatars/`) |
+| Asset size | 26.4 MB (93% of .vsix) | < 50 KB total (originals preserved in archive) |
+| Mapping system | `avatarMappings.ts` PNG filename maps | SVG template functions (`avatarMappings.ts` archived to `archive/src/`) |
+| `assets/avatars/` directory | 26.4 MB on disk | Moved to `archive/avatars/` (excluded from `.vsix`) |
+
+### Features Not Carried Forward
+
+| Feature | Reason |
+|---------|--------|
+| Session Timer / Pomodoro | Marketplace-saturated category; not core to partnership |
+| Recent Diffs panel | Agent-level UX already surfaces diffs in context |
+| Queued Messages list | Agent-level UX handles message queuing |
+| Activity tab concept | Replaced by Docs tab (documentation-first approach) |
+
+### Architecture Components Removed (Phase 6)
+
+- Remove `registerCognitiveDashboard()` registration from `extension.ts`
+- Remove `MemoryTreeProvider` registration from `extension.ts`
+- Remove two view entries from `package.json` `views.alex-sidebar`
+- Keep source files (`cognitiveDashboard.ts`, `memoryTreeProvider.ts`) — Mind tab's "Open Full Dashboard" still uses them
+
 ---
 
 ## Avatar Migration: PNG → SVG Icons
@@ -499,9 +749,9 @@ This leaves `alex.welcomeView` as the **sole view** in the sidebar — the tabbe
 
 | Category | Files | Size | Location |
 |----------|-------|------|----------|
-| Personas | 63 PNG | 16.56 MB | `assets/avatars/personas/PERSONA-*.png` |
+| Personas | 62 PNG | 16.56 MB | `assets/avatars/personas/PERSONA-*.png` |
 | Age progression | 13 PNG | 3.57 MB | `assets/avatars/ages/Alex-*.png` |
-| Cognitive states | 8 PNG | 3.57 MB | `assets/avatars/states/STATE-*.png` |
+| Cognitive states | 9 PNG | 3.57 MB | `assets/avatars/states/STATE-*.png` |
 | Agent modes | 6 PNG | 1.51 MB | `assets/avatars/agents/AGENT-*.png` |
 | Other (webp, misc) | 22 files | 1.22 MB | various |
 | **Total** | **112 files** | **26.43 MB** | — |
@@ -541,7 +791,7 @@ Replace all PNG avatars with a small set of **custom SVG icons** that:
 | `avatarMappings.ts` | Replace PNG filename maps with SVG template functions |
 | `welcomeViewHtml.ts` | Render inline `<svg>` instead of `<img src="...">` |
 | `updateChatAvatar()` | Generate SVG data URI for Copilot Chat participant icon |
-| `assets/avatars/` | Delete entire directory (63+13+8+6 PNGs) |
+| `assets/avatars/` | Archive to `archive/avatars/` (63+13+8+6 PNGs) |
 | `.vscodeignore` | Remove avatar glob exclusions |
 | `package.json` | No changes |
 
@@ -562,9 +812,9 @@ This is **the single highest-impact optimization possible** for extension distri
 
 ```mermaid
 graph TD
-    V65["v6.5.0 — Tabbed Sidebar Command Center (Option A)"] --> V70["v7.0.0 — Full-Panel Skill Store + Mind Dashboard (Option C, Phase 2-3)"]
-    V70 --> V75["v7.5.0 — Docs + Knowledge Panel (Option C, Phase 4)"]
-    V75 --> V80["v8.0.0 — Standalone Companion App (Option D) — extract proven UX patterns"]
+    V65["v6.5.0 — Tabbed Sidebar Command Center"] --> V70["v7.0.0 — Full-Panel Skill Store + Mind Dashboard"]
+    V70 --> V75["v7.5.0 — Docs + Knowledge Panel"]
+    V75 --> V80["v8.0.0 — Standalone Companion App — extract proven UX patterns"]
     style V65 fill:#b4a7d6,stroke:#9b8ec4,color:#3c3553
     style V70 fill:#d5c8e8,stroke:#9b8ec4,color:#3c3553
     style V75 fill:#c8dae6,stroke:#82a4c4,color:#2d3d4a
@@ -577,7 +827,7 @@ Each step validates the UX patterns before the next. No big-bang rewrites. The s
 
 ## Appendix: Reimagined Command Center (Codex-Inspired)
 
-After analyzing the [OpenAI Codex Competitive Analysis](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md), we created unconstrained reimaginations of each tab, borrowing the strongest Codex patterns. Side-by-side SVG mockups compare the current design (left) against the reimagined v7.0.0 concept (right).
+After analyzing the [OpenAI Codex Competitive Analysis](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md), the design borrows the strongest Codex patterns for each tab.
 
 ### Tab Mapping: Current → Reimagined
 
@@ -593,71 +843,17 @@ After analyzing the [OpenAI Codex Competitive Analysis](CODEX-COMPETITIVE-ANALYS
 
 The reimagined design replaces 5 text tab labels with 5 icon tabs (🎛️ 🤖 🏪 🧠 �), saving horizontal space and enabling notification badges per tab — a pattern proven by Codex's compact navigation.
 
-### Side-by-Side Comparison Mockups
+### Approved Tab Mockups
 
-All mockups are in [mockups/](mockups/) at 680×820px (320 original + 40 gap + 320 reimagined):
+See [mockups/](mockups/) for the 5 approved tab designs:
 
-1. **Home → Mission Control**: [comparison-home-vs-mission-control.svg](mockups/comparison-home-vs-mission-control.svg)
-
-![Home vs Mission Control](mockups/comparison-home-vs-mission-control.svg)
-
-   - Queue/Steer controls for active agent work
-   - Personality mode toggle (Precise / Chatty)
-   - Live reasoning effort meter + context budget visualization
-   - Smart nudges with action + dismiss buttons
-   - Inline diff preview with color-coded +/- counts
-
-2. **Tools → Agent Hub**: [comparison-tools-vs-agent-hub.svg](mockups/comparison-tools-vs-agent-hub.svg)
-
-![Tools vs Agent Hub](mockups/comparison-tools-vs-agent-hub.svg)
-
-   - Thread detail control: Verbose / Standard / Terse
-   - 7 specialist agent cards with color-coded left borders
-   - Agent personality descriptions + Launch buttons
-   - Recent agent thread history with outcomes
-   - "Create Custom Agent" placeholder
-
-3. **Skills → Skill Store**: [comparison-skills-vs-skill-store.svg](mockups/comparison-skills-vs-skill-store.svg)
-
-![Skills vs Skill Store](mockups/comparison-skills-vs-skill-store.svg)
-
-   - Toggle switches to enable/disable individual skills
-   - 3-tier catalog pills: Installed / Curated / Experimental
-   - Branded icon circles with usage frequency
-   - "Available to Install" section with GitHub catalog browse
-   - Skill health bar (trifecta coverage)
-
-   **Why toggle skills on/off?** Context budget is the key driver. Every active skill consumes tokens from the LLM's context window. With 130+ skills always loaded, a significant chunk of context is spent on skill definitions instead of actual code. Practical advantages:
-
-   - **Token savings** — Disabling irrelevant skills (e.g., `gamma-presentations` during TypeScript work) frees hundreds of tokens for code context.
-   - **Routing accuracy** — Fewer active skills means less ambiguity. The LLM picks the right skill faster when choosing from 30 relevant skills vs. parsing 130, reducing mis-routing.
-   - **Project profiles** — A Teams app project needs `teams-app-patterns` + `m365-agent-debugging` but not `character-aging-progression`. Toggles let users shape the skill set per workspace.
-   - **Faster responses** — Less context to process = lower latency, especially on efficient-tier models (Haiku, GPT-4o mini) where context limits are tighter.
-   - **Noise reduction** — Recommendations become more relevant when irrelevant skills are disabled rather than just deprioritized.
-
-   This mirrors Codex's skill enable/disable per environment — essentially **attention management for the AI**.
-
-4. **Status → Mind**: [command-center-v2-mind.svg](mockups/command-center-v2-mind.svg)
-
-![Mind Tab](mockups/command-center-v2-mind.svg)
-
-   - Brain health dashboard with synapse integrity metrics
-   - 5 memory modalities: Semantic, Procedural, Episodic, Visual, Muscles
-   - Cognitive age progression (tier 7/9) with milestone markers
-   - Knowledge freshness forgetting curve
-   - Meditation & growth tracking with emotional patterns
-   - Honest uncertainty stacked confidence bar
-   - Note: Original comparison mockup (`comparison-status-vs-automations.svg`) is obsolete — Mind tab represents a fundamentally different concept
-
-5. **More → Docs**: [command-center-v2-docs.svg](mockups/command-center-v2-docs.svg)
-
-![Docs Tab](mockups/command-center-v2-docs.svg)
-
-   - Context-aware tips & nudges with actionable links
-   - Local documentation hub: Getting Started (4 guides), Architecture (6 docs), Operations (4 docs)
-   - learnalex.correax.com portal for expanded learning, workshops, and training
-   - Partnership guide for dialog engineering
-   - Note: Original comparison mockup (`comparison-more-vs-activity.svg`) is obsolete — Docs tab replaces Activity with a documentation-first approach
+| Tab | Mockup |
+|-----|--------|
+| Mission Control | [command-center-v2-mission-control.svg](mockups/command-center-v2-mission-control.svg) |
+| Agent Hub | [command-center-v2-agent-hub.svg](mockups/command-center-v2-agent-hub.svg) |
+| Skill Store | [command-center-v2-skill-store.svg](mockups/command-center-v2-skill-store.svg) |
+| Mind | [command-center-v2-mind.svg](mockups/command-center-v2-mind.svg) |
+| Docs | [command-center-v2-docs.svg](mockups/command-center-v2-docs.svg) |
 
 ### Codex Features Adopted (Summary)
 
