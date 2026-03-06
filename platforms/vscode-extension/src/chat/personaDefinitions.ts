@@ -78,7 +78,7 @@ export interface LLMPersona {
  *   - personas/PERSONA-* for role-based avatars
  *   - ages/Alex-* for age-based fallback
  * Both .webp (primary) and .png (fallback) are shipped.
- * Fallback: ages/Alex-21 (current identity age).
+ * Fallback: logo (rocket brand mark).
  */
 export const PERSONA_AVATAR_MAP: Record<string, string> = {
     // Core developer personas
@@ -171,12 +171,12 @@ export const PERSONA_AVATAR_MAP: Record<string, string> = {
     'fabio-special':       'personas/PERSONA-FABIO-SPECIAL',
 };
 
-/** Default avatar path (no extension) when no persona match - age 21 Alex */
-export const DEFAULT_AVATAR = 'ages/Alex-21';
+/** Default avatar path (no extension) when no persona match - rocket logo */
+export const DEFAULT_AVATAR = 'logo';
 
 /**
  * Get avatar base name (no extension) for a persona ID.
- * Use with .webp (primary) and .png (fallback) in assets/avatars/.
+ * Use with .webp/.png in assets/avatars/ for persona entries, or assets/ for the rocket-logo fallback.
  * @returns Base name (e.g., 'ALEX-CODING') or DEFAULT_AVATAR
  */
 export function getAvatarForPersona(personaId: string): string {

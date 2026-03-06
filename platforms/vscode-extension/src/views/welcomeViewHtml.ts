@@ -10,13 +10,14 @@ import {
   HealthStatus,
 } from '../shared/healthCheck';
 import {
-  PersonaDetectionResult,
+    PersonaDetectionResult,
   getEasterEggOverride,
   EasterEgg,
 } from '../chat/personaDetection';
 import {
   resolveAvatar,
   AvatarContext,
+    getAvatarAssetRelativePath,
 } from '../chat/avatarMappings';
 import { ActiveContext } from '../shared/activeContextManager';
 import { LearningGoal } from '../commands/goals';
@@ -211,19 +212,19 @@ export function getWelcomeHtmlContent(
   } else {
     // Use unified avatar resolution for everything else
     const avatarResult = resolveAvatar(avatarContext);
-    avatarPath = avatarResult.path;
+        avatarPath = getAvatarAssetRelativePath(avatarResult, 'png').replace(/\.png$/, '');
     avatarSource = avatarResult.source;
   }
   
   const avatarWebpUri = getAssetUri(
     webview,
     extensionUri,
-    `avatars/${avatarPath}.webp`,
+        `${avatarPath}.webp`,
   );
   const avatarPngUri = getAssetUri(
     webview,
     extensionUri,
-    `avatars/${avatarPath}.png`,
+        `${avatarPath}.png`,
   );
   const easterEggBadge = easterEgg
     ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>`

@@ -5,22 +5,16 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/DK-correax-brand.md",
-    "alex_docs/features/GAMMA-PRESENTATIONS.md",
-    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
-    "alex_docs/research/mockups/command-center-v2-agent-hub.svg",
-    "alex_docs/research/mockups/command-center-v2-docs.svg",
-    "alex_docs/research/mockups/command-center-v2-mind.svg"
+    "alex_docs/research/mockups/icons/agents/alex-a.svg",
+    "alex_docs/research/mockups/icons/agents/alex-b.svg",
+    "alex_docs/research/mockups/icons/agents/alex-c.svg",
+    "alex_docs/research/mockups/icons/agents/azure-a.svg",
+    "alex_docs/research/mockups/icons/agents/azure-b.svg",
+    "alex_docs/research/mockups/icons/agents/azure-c.svg",
+    "alex_docs/research/mockups/icons/agents/azure-d.svg",
+    "alex_docs/research/mockups/icons/agents/azure-e.svg"
   ],
-  "todoHotspots": [
-    {
-      "file": "platforms/vscode-extension/README.md",
-      "todoCount": 1,
-      "scannedAt": 1772796697223
-    }
-  ],
-  "lastUpdated": 1772796697223
+  "todoHotspots": [],
+  "lastUpdated": 1772803863924
 }

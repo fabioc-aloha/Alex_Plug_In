@@ -14,11 +14,11 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
 // import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
-import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona, DEFAULT_AVATAR } from './personaDetection';
+import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
 import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBridge';
-import { resolveAvatar, getAvatarFullPath, detectCognitiveState } from './avatarMappings';
+import { resolveAvatar, getAvatarAssetRelativePath, detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 import { assertDefined } from '../shared/assertions';
 import { appendToEpisodicDraft } from '../services/episodicMemory';
@@ -1002,10 +1002,9 @@ export function updateChatAvatar(context?: ChatAvatarContext): void {
     
     // Build full path to avatar image
     const avatarPath = vscode.Uri.joinPath(
-        _extensionUri, 
-        'assets', 
-        'avatars', 
-        `${result.path}.png`
+        _extensionUri,
+        'assets',
+        ...getAvatarAssetRelativePath(result, 'png').split('/')
     );
 
     // Update the chat participant icon
@@ -1029,7 +1028,7 @@ export function registerChatParticipant(context: vscode.ExtensionContext): vscod
     registerAvatarUpdater(updateChatAvatar);
     
     // Initial avatar — will be updated by welcomeView on persona detection
-    // Start with default (Alex-21) which resolveAvatar returns when no context
+    // Start with the default Alex rocket logo when no context is available
     updateChatAvatar({});
     
     alex.followupProvider = alexFollowupProvider;

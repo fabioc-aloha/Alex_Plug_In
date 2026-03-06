@@ -210,7 +210,7 @@ Persona-category choices in this document should be evaluated against LearnAlex'
 
 Use the larger previews below for chat-based approval.
 
-These previews now point to the March 6 `fluxico` PNG concept pass. The older SVGs remain on disk for historical comparison, but the PNGs below are the active review images for tab-icon direction.
+These previews now point to the manual SVG tab set. The March 6 `fluxico` PNG concept pass remains on disk for historical comparison, but the SVGs below are the active review images for tab-icon direction.
 
 #### 11. Mission Command
 
@@ -218,9 +218,9 @@ Dashboard / status overview
 Approved: C
 
 <p>
-  <img src="mockups/icons/tabs/mission-a.png" alt="Mission Command option A" width="140" />
-  <img src="mockups/icons/tabs/mission-b.png" alt="Mission Command option B" width="140" />
-  <img src="mockups/icons/tabs/mission-c.png" alt="Mission Command option C" width="140" />
+  <img src="mockups/icons/tabs/mission-a.svg" alt="Mission Command option A" width="140" />
+  <img src="mockups/icons/tabs/mission-b.svg" alt="Mission Command option B" width="140" />
+  <img src="mockups/icons/tabs/mission-c.svg" alt="Mission Command option C" width="140" />
 </p>
 
 #### 12. Agents
@@ -229,9 +229,9 @@ Agent hub / team management
 Approved: A
 
 <p>
-  <img src="mockups/icons/tabs/agents-a.png" alt="Agents option A" width="140" />
-  <img src="mockups/icons/tabs/agents-b.png" alt="Agents option B" width="140" />
-  <img src="mockups/icons/tabs/agents-c.png" alt="Agents option C" width="140" />
+  <img src="mockups/icons/tabs/agents-a.svg" alt="Agents option A" width="140" />
+  <img src="mockups/icons/tabs/agents-b.svg" alt="Agents option B" width="140" />
+  <img src="mockups/icons/tabs/agents-c.svg" alt="Agents option C" width="140" />
 </p>
 
 #### 13. Skill Store
@@ -240,9 +240,9 @@ Skill catalog / capabilities
 Approved: B
 
 <p>
-  <img src="mockups/icons/tabs/skills-a.png" alt="Skill Store option A" width="140" />
-  <img src="mockups/icons/tabs/skills-b.png" alt="Skill Store option B" width="140" />
-  <img src="mockups/icons/tabs/skills-c.png" alt="Skill Store option C" width="140" />
+  <img src="mockups/icons/tabs/skills-a.svg" alt="Skill Store option A" width="140" />
+  <img src="mockups/icons/tabs/skills-b.svg" alt="Skill Store option B" width="140" />
+  <img src="mockups/icons/tabs/skills-c.svg" alt="Skill Store option C" width="140" />
 </p>
 
 #### 14. Mind
@@ -251,11 +251,11 @@ Brain / cognitive architecture
 Approved:
 
 <p>
-  <img src="mockups/icons/tabs/mind-f.png" alt="Mind option F" width="140" />
-  <img src="mockups/icons/tabs/mind-g.png" alt="Mind option G" width="140" />
-  <img src="mockups/icons/tabs/mind-h.png" alt="Mind option H" width="140" />
-  <img src="mockups/icons/tabs/mind-i.png" alt="Mind option I" width="140" />
-  <img src="mockups/icons/tabs/mind-j.png" alt="Mind option J" width="140" />
+  <img src="mockups/icons/tabs/mind-f.svg" alt="Mind option F" width="140" />
+  <img src="mockups/icons/tabs/mind-g.svg" alt="Mind option G" width="140" />
+  <img src="mockups/icons/tabs/mind-h.svg" alt="Mind option H" width="140" />
+  <img src="mockups/icons/tabs/mind-i.svg" alt="Mind option I" width="140" />
+  <img src="mockups/icons/tabs/mind-j.svg" alt="Mind option J" width="140" />
 </p>
 
 #### 15. Docs
@@ -264,9 +264,9 @@ Documentation / reference
 Approved: A
 
 <p>
-  <img src="mockups/icons/tabs/docs-a.png" alt="Docs option A" width="140" />
-  <img src="mockups/icons/tabs/docs-b.png" alt="Docs option B" width="140" />
-  <img src="mockups/icons/tabs/docs-c.png" alt="Docs option C" width="140" />
+  <img src="mockups/icons/tabs/docs-a.svg" alt="Docs option A" width="140" />
+  <img src="mockups/icons/tabs/docs-b.svg" alt="Docs option B" width="140" />
+  <img src="mockups/icons/tabs/docs-c.svg" alt="Docs option C" width="140" />
 </p>
 
 ### Agent Mode Icons

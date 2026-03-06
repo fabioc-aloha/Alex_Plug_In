@@ -449,8 +449,10 @@ export interface AvatarContext {
 }
 
 export interface AvatarResult {
-    /** Path relative to assets/avatars/ */
+    /** Path without extension, relative to the selected asset root */
     path: string;
+    /** True when the asset lives directly under assets/ instead of assets/avatars/ */
+    isRootAsset?: boolean;
     /** Avatar filename (without extension) */
     filename: string;
     /** Source of the avatar selection */
@@ -462,8 +464,8 @@ export interface AvatarResult {
 /**
  * Default avatar when all else fails.
  */
-export const DEFAULT_AVATAR = 'Alex-21';
-export const DEFAULT_AVATAR_PATH = 'ages/Alex-21';
+export const DEFAULT_AVATAR = 'logo';
+export const DEFAULT_AVATAR_PATH = 'logo';
 
 /**
  * Resolve the best avatar for the current context.
@@ -475,7 +477,7 @@ export const DEFAULT_AVATAR_PATH = 'ages/Alex-21';
  * 4. Skill-triggered persona
  * 5. Detected persona
  * 6. Age-based fallback
- * 7. Default (Alex-21)
+ * 7. Default (rocket logo)
  * 
  * @param context - Current avatar context
  * @returns Resolved avatar result
@@ -580,9 +582,21 @@ export function resolveAvatar(context: AvatarContext): AvatarResult {
     return {
         path: DEFAULT_AVATAR_PATH,
         filename: DEFAULT_AVATAR,
+        isRootAsset: true,
         source: 'default',
         label: 'Alex'
     };
+}
+
+/**
+ * Get asset path relative to the extension assets directory.
+ * @param result - Avatar result from resolveAvatar
+ * @param extension - File extension without leading dot
+ * @returns Relative path such as avatars/personas/PERSONA-DEVELOPER.png or logo.png
+ */
+export function getAvatarAssetRelativePath(result: AvatarResult, extension: string): string {
+    const assetBase = result.isRootAsset ? result.path : `avatars/${result.path}`;
+    return `${assetBase}.${extension}`;
 }
 
 /**
@@ -593,5 +607,6 @@ export function resolveAvatar(context: AvatarContext): AvatarResult {
  */
 export function getAvatarFullPath(result: AvatarResult, extensionPath: string): string {
     const path = require('path');
-    return path.join(extensionPath, 'assets', 'avatars', result.path + '.png');
+    const relativePath = getAvatarAssetRelativePath(result, 'png');
+    return path.join(extensionPath, 'assets', relativePath);
 }
