@@ -2,14 +2,7 @@
   "hotFiles": [
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
-  "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/DK-correax-brand.md",
-    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
-    "alex_docs/research/mockups/badges/"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [],
-  "lastUpdated": 1772770550191
+  "lastUpdated": 1772770570281
 }
