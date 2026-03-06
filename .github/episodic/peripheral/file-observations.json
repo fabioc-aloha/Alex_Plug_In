@@ -4,13 +4,16 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-    "alex_docs/research/CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/mockups/"
+    "alex_docs/research/mockups/comparison-home-vs-mission-control.svg",
+    "alex_docs/research/mockups/comparison-more-vs-activity.svg",
+    "alex_docs/research/mockups/comparison-skills-vs-skill-store.svg",
+    "alex_docs/research/mockups/comparison-status-vs-automations.svg",
+    "alex_docs/research/mockups/comparison-tools-vs-agent-hub.svg",
+    "alex_docs/audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md",
+    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1772762744996
+  "lastUpdated": 1772769809059
 }

@@ -1,7 +1,7 @@
 # Command Center Design Principles
 
 **Source**: Meditation consolidation (March 5, 2026)
-**Status**: Consolidated insights for implementation guidance
+**Status**: Consolidated insights for implementation guidance, polished after second-opinion audit
 **Session**: 5-tab iterative design review with per-tab approval cycle
 
 ---
@@ -28,9 +28,9 @@ The 300px sidebar constraint is a design *advantage*. Every element must justify
 
 ### 2. Data Layer Leads, Presentation Follows
 
-The data sources (health check, persona detection, skill recommendations, nudges, session tracking) are already implemented and parallelized. The Command Center is a *presentation refactor*, not a data engineering project. This dramatically reduces implementation risk.
+Several high-value data sources already exist (health check, persona detection, skill recommendations, nudges, session tracking), so the Command Center can start as a presentation-led refactor. But the richer tabs are **not** purely presentation work: status semantics, context budget, recent-usage history, and parts of the Mind model still require explicit runtime contracts.
 
-**Rule**: Never add a UI element that requires a new data source until existing data sources are fully surfaced.
+**Rule**: Prefer existing data first, surface derived data carefully, and do not present new telemetry until its contract is explicit and trustworthy.
 
 ### 3. Mind Tab — The Differentiator
 
@@ -51,7 +51,7 @@ One pattern, three applications:
 - **Navigation**: tab → sidebar compact → full panel (Option C)
 - **Actions**: Quick Actions → Agents tab → command palette
 
-**Rule**: No tab should require scrolling. If it does, content should move to a lower disclosure level.
+**Rule**: The default tab experience should fit comfortably in the sidebar without relying on long-scroll browsing. If a tab starts to feel dense, move more content to lower disclosure levels.
 
 ### 6. Context-Adaptive Over Static
 
@@ -88,7 +88,13 @@ The "recently used" tracker isn't a 0.5-day feature — it's the foundation for:
 - Future: personalized nudges
 - Future: usage analytics for tab prioritization
 
-**Rule**: Ship usage tracking in Phase 0 and start collecting data immediately.
+**Rule**: Treat usage tracking as foundational infrastructure for adaptive behavior, and implement it before shipping features that depend on it.
+
+## Execution Alignment
+
+These principles define the desired product behavior and interaction quality. They do not override the execution guardrails in the master plan.
+
+Implementation order, risk management, and contract gating are governed by `COMMAND-CENTER-MASTER-PLAN-2026-03-05.md`.
 
 ## Design Risk: Phase Coupling
 
@@ -196,15 +202,7 @@ After 3 rounds of tab renaming, the feasibility doc required 11+ replacements. *
 | `command-center-v2-mind.svg` | Mind | 560×960 | 9 |
 | `command-center-v2-docs.svg` | Docs | 560×920 | 6 |
 
-### v1 Originals (historical reference)
-`command-center-home.svg`, `command-center-tools.svg`, `command-center-skills.svg`, `command-center-status.svg`, `command-center-more.svg`
-
-### Comparisons (v1 → v2)
-`comparison-home-vs-mission-control.svg`, `comparison-tools-vs-agent-hub.svg`, `comparison-skills-vs-skill-store.svg`
-
-### Obsolete Comparisons
-- `comparison-status-vs-automations.svg` — Mind replaced Automations entirely
-- `comparison-more-vs-activity.svg` — Docs replaced Activity entirely
+Only the approved v2 mockups above should be treated as active design inputs. Historical and obsolete comparison assets remain useful for archaeology, but not for implementation review.
 
 ---
 
