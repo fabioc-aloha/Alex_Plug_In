@@ -29,7 +29,7 @@
     {
       "id": "AZURE-003",
       "source": "azure-architecture-patterns",
-      "target": ".github/skills/airs-integration/SKILL.md",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
       "type": "enables",
       "strength": 0.6,
       "description": "AIRS platform (airs.correax.com) runs on Azure architecture",

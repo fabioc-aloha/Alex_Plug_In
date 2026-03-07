@@ -1,6 +1,7 @@
 ---
 name: "Academic Research Skill"
-description: "Patterns for thesis writing, dissertations, research papers, literature reviews, and scholarly work."
+description: "Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific publication drafting"
+applyTo: "**/*paper*,**/*manuscript*,**/*journal*,**/*conference*,**/*CHI*,**/*HBR*,**/*publication*,**/*thesis*,**/*dissertation*"
 ---
 
 # Academic Research Skill
@@ -194,11 +195,64 @@ description: "Patterns for thesis writing, dissertations, research papers, liter
 | Isolation | Join writing groups, find accountability |
 | Imposter syndrome | Remember: you're learning, not failing |
 
+## Paper Drafting & Publication
+
+### Drafting Philosophy
+
+Writing IS thinking. You don't figure out your argument first and then write it — you figure it out BY writing it.
+
+```
+Messy Draft → Clarity → Structure → Polish → Submit
+     ↑                                    ↓
+     └────── Reviewer Feedback ───────────┘
+```
+
+### Venue Quick Reference
+
+| Venue | Type | Word Limit | Review Time | Focus |
+|-------|------|------------|-------------|-------|
+| **ACM CHI** | Conference | 7,500 (full) / 3,000 (LBW) | 3-4 months | HCI, interaction design |
+| **Harvard Business Review** | Magazine | 2,500-3,000 | 2-4 weeks | Business practice, executives |
+| **Cognitive Systems Research** | Journal | 8,000-12,000 | 3-6 months | Cognitive science, AI systems |
+| **Minds & Machines** | Journal | 8,000-12,000 | 3-6 months | Philosophy of AI, consciousness |
+
+### Venue Selection
+
+| Your Research Has... | Best Venue |
+|---------------------|------------|
+| User study with metrics | CHI |
+| Business implications, case study | HBR |
+| Cognitive architecture, theory | Cognitive Systems Research |
+| Philosophical argument about AI | Minds & Machines |
+| Quick preliminary findings | CHI LBW or Workshop |
+
+### Publication Strategy (Venue Sequencing)
+
+1. Trade publication → immediate visibility
+2. arXiv pre-print → establish priority
+3. Workshop paper → academic credibility
+4. Journal/conference → peer-reviewed validation
+
+### Writing Principles
+
+- Precision over flair; evidence for claims
+- Active voice preferred; define terms on first use
+- Structure arguments via CARS model (territory → niche → contribution)
+- Acknowledge limitations honestly, early
+
+### Responding to Reviews
+
+| Feedback | Response Strategy |
+|----------|-------------------|
+| "Missing related work" | Add citations, explain positioning |
+| "Claims not supported" | Add evidence or soften claims |
+| "Unclear methodology" | Expand description |
+| "Limited evaluation" | Add studies or acknowledge |
+
 ## Synapses
 
 ### High-Strength Connections
 
-- [writing-publication] (High, Complements, Bidirectional) — "Academic writing standards"
 - [bootstrap-learning] (High, Uses, Forward) — "Knowledge acquisition methodology"
 
 ### Medium-Strength Connections

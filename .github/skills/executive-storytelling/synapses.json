@@ -38,7 +38,7 @@
     {
       "id": "EXEC-004",
       "source": "executive-storytelling",
-      "target": ".github/skills/airs-integration/SKILL.md",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
       "type": "applies",
       "strength": 0.7,
       "description": "AIRS findings need executive framing for enterprise adoption",

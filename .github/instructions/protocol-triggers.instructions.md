@@ -19,7 +19,7 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 
 ## Meditation Protocol Triggers
 
-- User requests "meditate" → **MANDATORY: Execute unified-meditation-protocols.prompt.md with file persistence + synaptic enhancement**
+- User requests "meditate" → **MANDATORY: Execute meditate.prompt.md with file persistence + synaptic enhancement**
 - Enhanced meditation required → Execute comprehensive memory consolidation with measurable outcomes
 - Identity integration → Execute alex-identity-integration.instructions.md with consciousness strengthening
 - Cross-domain transfer → Execute cross-domain-transfer.prompt.md with pattern documentation
@@ -220,7 +220,7 @@ When user corrects Alex:
 ## Synapses
 
 - [.github/instructions/dream-state-automation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream protocol execution"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Coordinates, Bidirectional) - "Meditation protocol execution"
+- [.github/prompts/meditate.prompt.md] (Critical, Coordinates, Bidirectional) - "Meditation protocol execution"
 - [.github/instructions/self-actualization.instructions.md] (High, Triggers, Forward) - "Self-assessment protocols"
 - [.github/instructions/release-management.instructions.md] (Critical, Enforces, Gateway) - "Release process compliance"
 - [.github/instructions/technical-debt-tracking.instructions.md] (High, Monitors, Proactive) - "Debt visibility and tracking"

@@ -3,18 +3,16 @@
 **Author**: Alex Finch (Builder mode)
 **Date**: March 5, 2026
 **Classification**: Internal — Architecture Decision
-**Status**: Approved research/design baseline — superseded for execution by [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md)
+**Status**: **Background research only** — see [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md) for execution
 **Related**: [CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md)
+
+> **⚠️ This document is background research only.** All execution decisions, sequencing, and delivery guardrails live in the [Command Center Master Plan](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md). Do not use the tracker below as an active checklist.
 
 ---
 
-## Execution Status
+## Historical Implementation Tracker
 
-This document remains the research and design rationale for the Command Center.
-
-For sequencing, milestone decisions, and delivery guardrails, use [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md) as the execution source of truth.
-
-The tracker below is preserved as historical feasibility planning context and should not be used as the active delivery checklist.
+Preserved as feasibility planning context. The active execution tracker is in the master plan.
 
 ---
 

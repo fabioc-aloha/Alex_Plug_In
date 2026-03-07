@@ -11,23 +11,23 @@
       "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate"
     },
     {
-      "target": ".github/skills/architecture-health/SKILL.md",
+      "target": ".github/skills/brain-qa/SKILL.md",
       "type": "extends",
       "strength": 0.9,
       "note": "Deeper analysis beyond basic synapse validation"
     },
     {
-      "target": ".github/skills/skill-activation/SKILL.md",
+      "target": ".github/skills/memory-activation/SKILL.md",
       "type": "validates",
       "strength": 0.85,
       "note": "Checks trigger index coverage and semantic coherence"
     },
     {
-      "target": ".github/skills/master-alex-audit/SKILL.md",
+      "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "complements",
       "strength": 0.8,
       "bidirectional": true,
-      "note": "Brain QA for cognitive architecture, master-alex-audit for code/project"
+      "note": "Brain QA for cognitive architecture, architecture-audit for code/project"
     },
     {
       "target": ".github/instructions/dream-state-automation.instructions.md",

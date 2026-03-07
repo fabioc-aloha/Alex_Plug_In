@@ -1,9 +1,10 @@
 # Command Center Master Plan
 
 **Author**: Alex Finch + GitHub Copilot (GPT-5.4 second-opinion synthesis)
-**Date**: March 5, 2026
-**Classification**: Internal - UI-first implementation plan
-**Status**: Approved concept, tightened execution plan
+**Created**: March 5, 2026
+**Revised**: March 7, 2026 — Waves 0–5 complete
+**Classification**: Internal — UI-first implementation plan
+**Status**: Waves 0–5 ✔️ · Wave 6 (Advanced Tabs) deferred until runtime contracts defined
 **Based on**:
 - [COMMAND-CENTER-FEASIBILITY-2026-03-05.md](COMMAND-CENTER-FEASIBILITY-2026-03-05.md)
 - [COMMAND-CENTER-DESIGN-PRINCIPLES.md](COMMAND-CENTER-DESIGN-PRINCIPLES.md)
@@ -48,8 +49,154 @@ The Command Center will be built as a **staged UI refactor**, not as a single fu
   - Skill Store
   - Mind
   - Docs
-- The design system, approved mockups, and 38-position icon approval workflow remain valid.
+- The design system, approved mockups, and icon workflow remain valid. Icons now use the rocket-character system (33 final SVGs).
 - The long-term goal remains a single Command Center sidebar surface.
+
+---
+
+## Execution Tracker
+
+This is the step-by-step execution checklist. Each step is small enough to complete, verify, and check off in a single session. Review this tracker at the start of every work session.
+
+**Status**: `—` Not started · `►` In progress · `✓` Done · `✗` Blocked
+**Tracks**: **A** UI Surface · **B** Runtime Contracts · **C** Visual Identity
+
+### Wave 0 — Planning Hygiene ✔️
+
+> **Goal**: Clean foundation before any code changes.
+> **Depends on**: Nothing. **Unlocks**: Waves 1–6.
+> **Completed**: March 7, 2026
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 0.1 | Lock this master plan as the single execution source of truth | — | ✓ |
+| 0.2 | Mark feasibility doc header as "background research only" | — | ✓ |
+| 0.3 | Verify all baseline numbers match current source code | — | ✓ |
+| 0.4 | Confirm icon inventory reflects rocket-icons (33 SVGs, 4 categories) | C | ✓ |
+
+### Wave 1 — Critical Spikes
+
+> **Goal**: Prove the two biggest technical unknowns before committing to architecture.
+> **Depends on**: Wave 0. **Unlocks**: Waves 2–6.
+
+**Spike 1A — SVG Avatar Viability** (Track C)
+
+| # | Step | Status |
+|---|------|:------:|
+| 1.1 | Copy one rocket SVG into `platforms/vscode-extension/assets/avatars/` | ✓ |
+| 1.2 | Update `getAvatarAssetRelativePath()` to accept `'svg'` format parameter | ✓ |
+| 1.3 | Update `avatarMappings.ts` to resolve an SVG path for one test state | ✓ |
+| 1.4 | Set `ChatParticipant.iconPath` to the SVG `Uri` and verify it renders in chat | — |
+| 1.5 | Test SVG rendering inside a webview `<img>` tag | — |
+| 1.6 | **DECISION**: Record avatar strategy — full SVG / hybrid / PNG fallback | — |
+
+**Spike 1B — Tab Shell Viability** (Track A + B)
+
+| # | Step | Status |
+|---|------|:------:|
+| 1.7 | Add minimal tab-bar HTML to `welcomeViewHtml.ts` (5 text-label tabs) | ✓ |
+| 1.8 | Wire `postMessage` handler for tab switching in `welcomeView.ts` | ✓ |
+| 1.9 | Verify `resolveWebviewView` refresh preserves active tab selection | — |
+| 1.10 | Test keyboard navigation (arrow keys + Enter) on the tab bar | — |
+| 1.11 | **DECISION**: Record shell viability — pass / rework needed | — |
+
+**Spike 1C — Data Contract Triage** (Track B)
+
+| # | Step | Status |
+|---|------|:------:|
+| 1.12 | Classify each Mission Command card as existing / derived / new data | ✓ |
+| 1.13 | Classify each Mind tab element as existing / derived / new data | ✓ |
+| 1.14 | Document context-budget data availability and aggregation path | ✓ |
+| 1.15 | **DECISION**: Record contract triage results for all tabs | — |
+
+### Wave 2 — Command Center Shell
+
+> **Goal**: The welcome view hosts a working tabbed shell without demanding feature parity.
+> **Depends on**: Spike 1B pass. **Unlocks**: Waves 3–4 (parallel).
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 2.1 | Implement full tab-bar component (5 text-label tabs, active highlight) | A | ✓ |
+| 2.2 | Implement tab-content switching and active-tab rendering | A | ✓ |
+| 2.3 | Add `getState()/setState()` for active-tab persistence across refreshes | B | ✓ |
+| 2.4 | Design and implement empty-state panels for all 5 tabs | A | ✓ |
+| 2.5 | Test responsive layout at 300px sidebar width | A | ✓ |
+| 2.6 | Add per-tab scroll-position restoration | B | ✓ |
+| 2.7 | Compile clean · no sidebar regressions · manual smoke test | B | ✓ |
+
+### Wave 3 — Docs Tab
+
+> **Goal**: Ship the lowest-risk, highest-clarity tab to validate density and navigation.
+> **Depends on**: Wave 2. **Unlocks**: Wave 5.
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 3.1 | Build Getting Started card group | A | ✓ |
+| 3.2 | Build Workshop Study Guides persona grid (33 personas) | A | ✓ |
+| 3.3 | Build Self-Study and Exercises section | A | ✓ |
+| 3.4 | Build Facilitator Materials section | A | ✓ |
+| 3.5 | Add local architecture and operations doc entry points | A | ✓ |
+| 3.6 | Add Learn Alex Online CTA and Partnership guide link | A | ✓ |
+| 3.7 | Validate all links resolve and open correctly | B | ✓ |
+| 3.8 | Test layout at sidebar width — no cramping, primary content above fold | A | ✓ |
+
+### Wave 4 — Mission Command
+
+> **Goal**: The dashboard is immediately more useful than the current welcome view.
+> **Depends on**: Wave 2 + Spike 1C. **Unlocks**: Wave 5.
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 4.1 | Build Architecture Status banner card (existing data) | A | ✓ |
+| 4.2 | Port Smart Nudges logic from current welcome view into a card | A | ✓ |
+| 4.3 | Build Quick Command bar | A | ✓ |
+| 4.4 | Build Session / Goal summary area (existing data only) | A | ✓ |
+| 4.5 | Add Settings Manager and Secret Manager entry points | A | ✓ |
+| 4.6 | Tag every card with data classification (existing / derived / deferred) | B | ✓ |
+| 4.7 | Remove or defer any card that cannot defend its data source | B | ✓ |
+| 4.8 | Verify Mission Command is more useful than the current welcome view | A | ✓ |
+
+### Wave 5 — Controlled Consolidation
+
+> **Goal**: Remove old sidebar duplication only after the new surface is proven.
+> **Depends on**: Waves 3 + 4 both shipped. **Unlocks**: Wave 6.
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 5.1 | Audit user journeys covered by Command Center vs current three views | B | ✓ |
+| 5.2 | Redirect legacy commands to new tab destinations | B | deferred — Mind tab placeholder |
+| 5.3 | Remove redundant sidebar view registrations from `package.json` | A | deferred — no removals safe yet |
+| 5.4 | Preserve editor-panel dashboards that serve deeper use cases | A | ✓ kept both |
+| 5.5 | Verify no capability loss for normal workflows | B | ✓ |
+
+### Wave 6 — Advanced Tabs
+
+> **Goal**: Expand Agents, Skill Store, and Mind beyond placeholders on explicit contracts.
+> **Depends on**: Wave 5. **Unlocks**: Full Command Center vision.
+
+| # | Step | Track | Status |
+|---|------|:-----:|:------:|
+| 6.1 | Define Agent status contract (active / queued / routing / idle semantics) | B | — |
+| 6.2 | Implement Agents tab beyond placeholder state | A | — |
+| 6.3 | Define Skill Store catalog model and toggle behavior | B | — |
+| 6.4 | Implement Skill Store tab beyond placeholder state | A | — |
+| 6.5 | Define Mind tab runtime model and memory-modality mapping | B | — |
+| 6.6 | Implement Mind tab beyond reduced-scope state | A | — |
+
+**Total**: 50 steps across 7 waves · 3 decision gates · 3 parallel tracks
+
+### Completion Summary (Waves 0–5)
+
+| Wave | Title | Steps | Done | Key Deliverables |
+|------|-------|:-----:|:----:|------------------|
+| 0 | Planning Hygiene | 4 | 4 | Plan locked, baselines verified |
+| 1 | Critical Spikes | 15 | 9 | SVG code, tab shell JS, data triage (3 manual-test gates outstanding) |
+| 2 | Command Center Shell | 7 | 7 | 5-tab bar, ARIA, persistence, scroll restoration, responsive |
+| 3 | Docs Tab | 8 | 8 | 7 content groups, 33-persona workshop grid, 7 external URLs |
+| 4 | Mission Command | 8 | 8 | Session card wired, doc buttons migrated to Docs, features bloat removed |
+| 5 | Controlled Consolidation | 5 | 3 | Journey audit done, both legacy views preserved (Mind tab still placeholder) |
+| 6 | Advanced Tabs | 6 | 0 | Deferred — requires Agent Status, Skill Catalog, Mind Model contracts |
+| **Σ** | | **53** | **39** | **Wave 6 blocked on runtime contracts; 3 spike gates need manual vsix test** |
 
 ---
 
@@ -62,15 +209,15 @@ These facts are treated as fixed planning inputs because they were verified agai
 | Fact | Verified Value |
 |------|----------------|
 | Sidebar views currently registered | 3 |
-| `welcomeView.ts` line count | 571 |
-| `welcomeViewHtml.ts` line count | 1487 |
-| `avatarMappings.ts` line count | 597 |
+| `welcomeView.ts` line count | 588 (was 571 at plan start) |
+| `welcomeViewHtml.ts` line count | 1830 (was 1488 at plan start) |
+| `avatarMappings.ts` line count | 748 (was 612 at plan start; in `src/chat/`) |
 | `memoryTreeProvider.ts` line count | 319 |
 | `cognitiveDashboard.ts` line count | 621 |
-| Avatar asset files | 112 |
-| Avatar asset size | 27,713,118 bytes (~26.43 MB) |
+| Avatar asset files | 145 (was 112; +33 rocket SVGs) |
+| Avatar asset size | ~26.7 MB |
 | Welcome view currently uses retained context | Yes |
-| Chat participant avatar path currently PNG-based | Yes |
+| Chat participant avatar path | SVG-first (rocket-icons) with PNG fallback |
 | Extension compile state | Clean |
 
 ### AlexLearn baseline
@@ -85,202 +232,158 @@ These facts are treated as fixed planning inputs because they were verified agai
 
 ---
 
-## Self-Sufficient Artifact Bundle
+## Design Inputs
 
-This section embeds the key artifacts from the feasibility report so this master plan can stand alone as the working execution document.
+Artifacts from the feasibility report retained here so this plan stands alone. Implementation details are in Wave Detail Specifications below.
 
-### Final Target Tab Architecture
+### Approved Mockups
 
-| # | Tab | Purpose | First-wave Status |
-|---|-----|---------|-------------------|
-| 1 | Mission Command | Operational dashboard: status, nudges, commands, settings, actions | Build in early wave |
-| 2 | Agents | Agent management: registry, status, threads, routing context | Deferred to contract-backed wave |
-| 3 | Skill Store | Skill catalog: browse, toggle, search, organization | Deferred to contract-backed wave |
-| 4 | Mind | Cognitive architecture: health, memory, uncertainty, meditation | Reduced scope until runtime model is explicit |
-| 5 | Docs | Onboarding, study guides, self-study, facilitator resources, local docs, and LearnAlex bridge | Build in early wave |
+| File | Tab | Dimensions |
+|------|-----|------------|
+| `mockups/command-center-v2-mission-control.svg` | Mission Command | 560×800 |
+| `mockups/command-center-v2-agent-hub.svg` | Agents | 560×870 |
+| `mockups/command-center-v2-skill-store.svg` | Skill Store | 560×812 |
+| `mockups/command-center-v2-mind.svg` | Mind | 560×960 |
+| `mockups/command-center-v2-docs.svg` | Docs | 560×920 |
 
-### Approved Mockup Inventory
+All files under `alex_docs/research/mockups/`. Only v2 mockups are active design inputs.
 
-These are the visual source-of-truth artifacts for the UI direction.
+### Icon Inventory
 
-| File | Tab | Dimensions | Notes |
-|------|-----|------------|-------|
-| `mockups/command-center-v2-mission-control.svg` | Mission Command | 560x800 | Operational dashboard layout |
-| `mockups/command-center-v2-agent-hub.svg` | Agents | 560x870 | Agent registry and thread concepts |
-| `mockups/command-center-v2-skill-store.svg` | Skill Store | 560x812 | Skill browsing and toggles |
-| `mockups/command-center-v2-mind.svg` | Mind | 560x960 | Cognitive architecture dashboard |
-| `mockups/command-center-v2-docs.svg` | Docs | 560x920 | AlexLearn-aligned docs hub |
+| Property | Value |
+|----------|-------|
+| Total SVGs | 33 (9 states + 7 agents + 16 personas + 1 default) |
+| Source | `alex_docs/research/mockups/rocket-icons/` |
+| Generator | `alex_docs/research/mockups/generate-rocket-icons.js` |
+| Preview | `alex_docs/research/mockups/rocket-icons/preview.html` |
+| Tab bar icons | Not needed — tabs use text labels per approved mockups |
 
-Only the approved v2 mockups above should be treated as active design inputs for implementation and review.
+### Current Sidebar Architecture
 
-### Icon Artifact Inventory
+| View ID | Type | State | File |
+|---------|------|-------|------|
+| `alex.welcomeView` | webview | Active | `welcomeView.ts` (571 lines) + `welcomeViewHtml.ts` (1488 lines) |
+| `alex.cognitiveDashboard` | webview | Collapsed | `cognitiveDashboard.ts` (621 lines) |
+| `alex.memoryTree` | tree | Collapsed | `memoryTreeProvider.ts` (319 lines) |
 
-The icon-design artifacts are already generated and should be treated as design inputs, not implementation blockers.
+All registered under `alex-sidebar` container in `package.json`.
 
-| Artifact | Value |
-|---------|-------|
-| Total icon positions | 38 |
-| Options per position | 3 |
-| Total SVG options | 114 |
-| Categories | Tab Bar, Cognitive States, Agent Modes, Persona Categories, Default |
-| Source directory | `alex_docs/research/mockups/icons/` |
-| Generator script | `alex_docs/research/mockups/generate-icon-options.ps1` |
+### Current Welcome View HTML Sections
 
-### Icon Category Breakdown
-
-| Category | Count | Notes |
-|----------|-------|-------|
-| Tab bar icons | 5 | Mission Command, Agents, Skill Store, Mind, Docs |
-| Cognitive state icons | 9 | building, debugging, planning, reviewing, learning, teaching, meditation, dream, discovery |
-| Agent mode icons | 7 | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| Persona category icons | 16 | Mapped to the 33 AlexLearn workshop personas |
-| Default icon | 1 | Neutral fallback |
-
-### Current-to-Target UI Summary
-
-| Surface | Current State | Target State |
+| Section | HTML Structure | Runtime Data |
 |---------|---------------|--------------|
-| Sidebar views | 3 separate surfaces | 1 Command Center sidebar surface |
-| Main interaction model | Single long scroll | Tabbed navigation |
-| Welcome surface | Mixed operational + identity + docs content | Focused per-tab information architecture |
-| Docs discovery | Scattered commands and links | Dedicated Docs tab |
-| Learning portal alignment | Indirect | Direct LearnAlex companion-surface bridge |
-| Avatar system | 112 PNG/WebP assets | SVG-first or hybrid strategy after spike |
+| Header | CorreaX banner + persona avatar box | `avatarContext`, `personaResult` |
+| Workspace | Project name display | `workspaceName` |
+| Partnership bar | Status badges | `personaResult`, `activeContext` |
+| Nudge cards | Dynamic nudge cards (max 10) | `nudges: Nudge[]` |
+| Status | Health grid + streak | `health: HealthCheckResult`, `goals.streakDays` |
+| Active Context | Trifecta tags + context badges | `activeContext: ActiveContext` |
+| Action list | 7 groups, 37 buttons (see Wave 4 spec) | Commands via `data-cmd` → `commandMap` |
+| Goals | Active goals + progress bars | `goals` object |
+| Features | 9 collapsible categories + 6 feature links | Static content via `getFeaturesHtml()` |
 
-### Embedded Docs Artifact Summary
+### Current Message Protocol
 
-The Docs tab content model from the feasibility report is preserved here as the product reference.
+```
+webview → extension:  postMessage({ command: string, ...data })
+routing:              commandMap (41 entries) → vscode.commands.executeCommand()
+                      externalUrlMap (5 entries) → vscode.env.openExternal()
+                      special cases: openChat, launchRecommendedSkill, meditate, refresh
+script pattern:       Event delegation via data-cmd attributes
+                      Auto-refresh: setInterval(refresh, 30000)
+```
 
-**Docs tab content groups:**
-- Getting Started
-- Workshop Study Guides (33 personas)
-- Self-Study and Exercises
-- Facilitator Materials
-- Architecture docs
-- Operations docs
-- Learn Alex Online CTA
-- Partnership guide
+### CSS Design System (existing)
 
-**Product relationship:**
-- LearnAlex is the companion web surface for the Alex VS Code extension
-- The Docs tab is the intentional bridge between the extension and that companion surface
-- The tab should route users into LearnAlex's strongest pathways while also surfacing local extension documentation
+```css
+/* Tokens already defined in welcomeViewHtml.ts */
+--persona-accent: <dynamic per persona>
+/* Spacing scale */  4px | 8px | 16px | 24px | 32px
+/* Font scale */     13px | 14px | 16px | 18px
+/* Shadow scale */   sm | md | lg
+/* CSP */            default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src nonce-*; img-src ${webview.cspSource} https: data:
+```
 
-**Alignment rule:**
-- LearnAlex personas and targeted use cases are the source of truth for the new Docs-tab persona grid
-- Persona categories used in icons, badges, and companion-facing UI should stay aligned to that LearnAlex taxonomy
-- The extension should not create a parallel persona vocabulary for the new UI when a LearnAlex equivalent already exists
+### AlexLearn Surface Inventory
 
-**AlexLearn-aligned primary surfaces:**
-- `/setup-guide`
-- `/self-study`
-- `/exercises`
-- `/session-plan`
-- `/slides`
-- `/demo-scripts`
-- `/handout`
-- `/pre-read`
-- `/github-guide`
-- `/responsible-ai`
-- `/workshop/{persona}` for 33 personas
+The Docs tab links into these LearnAlex companion paths:
 
-### Embedded Mission Command Artifact Summary
+| Path | Content |
+|------|---------|
+| `/setup-guide` | Getting started |
+| `/self-study` | Self-paced learning |
+| `/exercises` | Practice exercises |
+| `/session-plan` | Facilitator session plan |
+| `/slides` | Presentation slides |
+| `/demo-scripts` | Demo scripts |
+| `/handout` | Workshop handout |
+| `/pre-read` | Pre-read materials |
+| `/github-guide` | GitHub integration guide |
+| `/responsible-ai` | Responsible AI guidance |
+| `/workshop/{persona}` | 33 persona-specific workshops |
 
-The Mission Command layout target from the feasibility report is preserved here as a design target, but implementation must respect the UI-first constraints of this master plan.
-
-**Mission Command candidate cards from the design target:**
-- Architecture Status Banner
-- Smart Nudges
-- Quick Command Bar
-- Live Activity area
-- Secret Manager
-- Settings Manager
-- Context Budget
-- Personality Toggle
-
-Implementation rule:
-- Build only cards backed by existing or clearly derived runtime data in early waves
-- Defer speculative cards until their contracts are documented
+**Alignment rule**: LearnAlex personas are the source of truth for the Docs-tab persona grid. Do not create a parallel persona vocabulary.
 
 ---
 
-## API Feasibility Snapshot
+## API Feasibility Reference
 
-This is the condensed API feasibility artifact pulled from the feasibility report and retained here so the master plan remains self-sufficient.
+| Feature | API Status | Code Reference | Planning Position |
+|---------|-----------|----------------|-------------------|
+| SVG chat avatar | `iconPath` accepts `Uri` | `participant.ts:1011` — `_alexParticipant.iconPath = avatarPath` | **Spike 1A** — untested with SVG |
+| Tab state persistence | `getState()/setState()` on `WebviewView.webview` | Not yet used in codebase | Wave 2 — use for active-tab + scroll |
+| Sidebar badge | `WebviewView.badge` property | Not yet used in codebase | Optional enhancement after shell stable |
+| Context budget | `maxInputTokens` on model object; `countTokens()` proposed API | Not used in codebase | **Defer** — proposed API not stable |
+| Agent activity feed | No direct lifecycle API | — | **Defer** — requires Contract A |
+| Skill toggle | No dedicated skill API | — | **Defer** — settings-driven approach needed |
+| Typed messaging | No — message channel is `any` | `welcomeView.ts:130-220` — `commandMap` + special cases | Use explicit type guards |
+| VS Code engine | `^1.109.0` in `package.json` | `package.json` engines field | Verify 1.110+ features before relying on them |
 
-| Feature | API Exists? | Current Planning Position |
-|---------|-------------|---------------------------|
-| SVG chat avatar | Yes, via `IconPath` using `Uri` | Blocking runtime spike still required |
-| Context budget bar | Yes, `maxInputTokens` and `countTokens()` exist | Treat as deferred until trustworthy aggregation is defined |
-| Agent activity feed | No direct lifecycle API | Requires internal tracking; not first-wave UI |
-| Skill toggle switches | No dedicated skill API | Requires settings-driven or local state approach |
-| Tab state persistence | Yes, `getState()/setState()` exists | Use built-in webview state first |
-| Sidebar badge | Yes, `WebviewView.badge` exists | Optional enhancement after shell proves stable |
-| Typed messaging | No, message channel is untyped | Use explicit type guards in implementation |
-
-### Planning Interpretation
-
-- API existence does **not** automatically mean first-wave scope
-- first-wave scope is determined by UI value, contract clarity, and implementation risk
-- the only true technical blocker identified so far is the SVG chat avatar runtime path
+**Rule**: API existence does not automatically mean first-wave scope. Scope is determined by data availability, UI value, and implementation risk.
 
 ---
 
 ## Planning Principles
 
-### 1. UI First Means UI First
+1. **UI first means UI first.** Early waves focus on visible structure, navigation, and content hierarchy. Do not block UI progress on advanced telemetry or dynamic status systems.
 
-The first waves focus on visible structure, navigation, density, layout, and content hierarchy.
+2. **Preserve working runtime paths until replacements exist.** The current welcome view, PNG avatar path, and 3 sidebar registrations coexist with new work until replacements are proven. No speculative cleanup.
 
-Do not block early UI progress on advanced telemetry, dynamic status systems, or complete avatar replacement.
+3. **Resolve blocking spikes before they become architecture.** The SVG chat avatar path is a real unknown (Spike 1A). It must be proven before the plan assumes it.
 
-### 2. Preserve Working Runtime Paths Until Their Replacements Exist
+4. **Classify every data source.** Every proposed UI element must be tagged:
 
-The current welcome view, PNG avatar path, and sidebar registrations are allowed to coexist with new work until the replacement path is proven.
+   | Class | Meaning | Gate |
+   |-------|---------|------|
+   | Existing | Available from current `getWelcomeHtmlContent()` parameters | Build immediately |
+   | Derived | Computable from current structures with modest glue code | Build when glue is written |
+   | New | Requires new instrumentation, tracking, or contracts | Defer until contract documented |
 
-No speculative cleanup in advance of proven functionality.
-
-### 3. Blocking Spikes Must Be Resolved Before They Become Architecture
-
-The SVG chat avatar path is a real technical unknown. It must be proven before the plan assumes it.
-
-### 4. Treat Existing Data, Derived Data, and New Data as Separate Classes
-
-Every proposed UI element must be classified as one of:
-
-| Class | Meaning |
-|------|---------|
-| Existing | Already available from current runtime structures |
-| Derived | Can be computed from current structures with modest glue code |
-| New | Requires new instrumentation, tracking, or contracts |
-
-This prevents hidden data work from being disguised as presentation work.
-
-### 5. Curate, Don’t Mirror
-
-The Docs tab should surface the strongest LearnAlex companion pathways, not duplicate the full website.
+5. **Curate, don't mirror.** The Docs tab surfaces the strongest LearnAlex pathways — not a full website clone.
 
 ---
 
-## In Scope vs Deferred
+## Scope Boundary
 
-### In Scope for the UI-first master plan
+### In Scope (Waves 0–5)
 
-- tabbed Command Center shell inside the existing welcome view surface
-- Mission Command visual layout
-- Docs tab aligned to AlexLearn's primary learning surfaces
-- approved icon system as design source of truth
-- keyboard-first tab navigation requirements
-- empty-state design for every tab
-- a clear migration path from three sidebar surfaces toward one
+- Tabbed Command Center shell inside `alex.welcomeView`
+- Mission Command tab with existing runtime data
+- Docs tab with curated AlexLearn alignment
+- Approved rocket-icon system as design input
+- Keyboard-first tab navigation (ARIA tablist pattern)
+- Empty-state design for every tab
+- Migration path from 3 sidebar views → 1 Command Center surface
+- SVG avatar spike and decision
 
-### Explicitly Deferred Until Later Waves
+### Explicitly Deferred (Wave 6+)
 
-- true real-time agent state model (`ACTIVE / QUEUED / ROUTING / IDLE`)
-- trustworthy context-budget percentage bar
-- full five-modality memory model as live runtime UI
-- full SVG replacement across all avatar paths if the spike fails or proves awkward
-- command redirection cleanup before the Command Center replacement is demonstrably stable
+- Real-time agent state model (Contracts A) — no lifecycle API exists
+- Context-budget percentage bar (Contract B) — `countTokens()` is proposed API
+- Full five-modality memory model as live UI (Contract C)
+- Full SVG replacement if spike fails
+- Command redirection cleanup before replacement is stable
+- Recently-used adaptive UX (Contract D)
 
 ---
 
@@ -288,436 +391,517 @@ The Docs tab should surface the strongest LearnAlex companion pathways, not dupl
 
 ### Final Target
 
-The final Command Center is a single sidebar surface with five tabs:
+A single sidebar surface (`alex.welcomeView`) with five tabs:
 
-1. **Mission Command** — status, nudges, commands, settings, actions
-2. **Agents** — agent registry, state, threads, routing context
-3. **Skill Store** — skill catalog, toggles, search, organization
-4. **Mind** — architecture, health, memory, uncertainty, meditation
-5. **Docs** — onboarding, study guides, self-study, facilitator resources, local docs
+| # | Tab | View Content | Primary Data Source |
+|---|-----|-------------|---------------------|
+| 1 | **Mission Command** | Status, nudges, commands, session, goals | `HealthCheckResult`, `Nudge[]`, `ActiveContext`, `session`, `goals` |
+| 2 | **Agents** | Agent registry, state, threads | Contract A (not yet defined) |
+| 3 | **Skill Store** | Skill catalog, toggles, search | Contract C variant (not yet defined) |
+| 4 | **Mind** | Health, memory, uncertainty, meditation | Contract C + `HealthCheckResult` |
+| 5 | **Docs** | Onboarding, study guides, local docs, LearnAlex CTA | Static content + external URLs |
 
-### First Valuable Release
+### First Valuable Release (Waves 0–4)
 
-The first meaningful release is smaller:
+The smallest release that proves the concept:
 
-1. Tab shell working inside the existing welcome view
-2. Mission Command tab implemented with current runtime data
-3. Docs tab implemented with AlexLearn-aligned content and local-doc entry points
-4. Remaining tabs present as structured placeholders or reduced-scope surfaces
-5. Existing avatar path still allowed if SVG migration is not yet proven
+1. Tab shell working inside `alex.welcomeView` (Wave 2)
+2. Mission Command tab showing existing runtime data — architecture status, nudges, context, commands (Wave 4)
+3. Docs tab showing curated AlexLearn content and local documentation entry points (Wave 3)
+4. Agents, Skill Store, Mind present as intentionally designed empty-state placeholders
+5. Existing PNG avatar path preserved if SVG spike is not yet proven
 
-This is the smallest release that proves the concept without forcing all downstream architecture at once.
+### Current-to-Target HTML Mapping
 
----
+This table maps the current `welcomeViewHtml.ts` HTML sections to their target tab:
 
-## Delivery Tracks
-
-The plan is organized into three tracks so visual progress and technical certainty can advance in parallel.
-
-### Track A - UI Surface
-
-Focus: layout, tab shell, cards, content hierarchy, interaction model, keyboard behavior
-
-### Track B - Runtime Contracts
-
-Focus: state persistence, data mapping, message routing, refresh strategy, status model definitions
-
-### Track C - Visual Identity
-
-Focus: icon approvals, SVG viability, avatar migration, fallback model
-
-The project should never stall because all three tracks are waiting on each other at once.
-
----
-
-## Master Sequence
-
-## Numbered Milestone Tracker
-
-This tracker is the execution checklist for the UI-first rollout. Use it for sequencing and readiness decisions; do not schedule directly from the older feasibility tracker.
-
-| # | Milestone | Primary Outcome | Depends On | Status |
-|---|-----------|-----------------|------------|--------|
-| 1 | Planning baseline locked | Master plan is the execution source of truth and feasibility doc is background-only for delivery sequencing | None | Planned |
-| 2 | SVG/avatar spike resolved | Avatar strategy is chosen: full SVG, hybrid, or compact PNG fallback | 1 | Planned |
-| 3 | Tab-shell spike resolved | Current welcome view can host the Command Center shell without breaking refresh or keyboard flow | 1 | Planned |
-| 4 | Contract triage complete | Status, context-budget, recently-used, and Mind-model work is split into existing, derived, and new data | 2, 3 | Planned |
-| 5 | Shell shipped | Stable tab bar, tab switching, empty states, and view-state restoration exist in-product | 3, 4 | Planned |
-| 6 | Docs tab shipped | AlexLearn-aligned learning pathways and local-doc entry points are usable in the shell | 5 | Planned |
-| 7 | Mission Command shipped | Operational dashboard replaces the current welcome-view core value with trustworthy data only | 5, 4 | Planned |
-| 8 | Consolidation approved | Redundant sidebar surfaces can be removed without regressing normal workflows | 6, 7 | Planned |
-| 9 | Advanced tabs expanded | Agents, Skill Store, and Mind move beyond placeholder or reduced-scope states on explicit contracts | 8 | Planned |
-
-## Wave 0 - Planning Hygiene
-
-**Goal**: Clean the plan before implementation starts.
-
-### Deliverables
-
-- This master plan becomes the execution source of truth
-- Feasibility plan remains as background research and design rationale
-- Stale counts and mixed assumptions are no longer used for scheduling
-
-### Exit Criteria
-
-- one execution document exists
-- blocking spikes are explicitly named
-- first milestone is narrow and testable
+| Current HTML Section | Current Location | Target Tab |
+|---------------------|-----------------|------------|
+| CorreaX header + persona avatar | Top of `<body>` | Stays global (above tab bar) |
+| Partnership bar | Below avatar | Removed — content distributed |
+| Nudge cards | Above Status section | Mission Command |
+| Status section (health + streak) | `<div class="section">` Status | Mission Command |
+| Active Context section | `<div class="section">` Active Context | Mission Command |
+| PARTNERSHIP action group (6 btns) | `<nav class="action-list">` | Split: 3 → Mission Command, 3 → Docs |
+| BUILD TOGETHER group (7 btns) | `<nav class="action-list">` | Mission Command |
+| LEARN & KNOWLEDGE group (5 btns) | `<nav class="action-list">` | Split: tools → Mission Command, docs → Docs |
+| PRESENT & SHARE group (3 btns) | `<nav class="action-list">` | Mission Command |
+| VISUALIZE group (2 btns) | `<nav class="action-list">` | Mission Command |
+| TRUST & GROWTH group (5 btns) | `<nav class="action-list">` | Mission Command |
+| SYSTEM group (9 btns) | `<nav class="action-list">` | Split: ops → Mission Command, docs → Docs |
+| Goals section | `getGoalsHtml()` | Mission Command |
+| Features/Documentation collapsible | `getFeaturesHtml()` | Docs |
 
 ---
 
-## Wave 1 - Critical Spikes
+## Wave Detail Specifications
 
-**Goal**: Resolve the technical assumptions that can invalidate major design choices.
+Each wave below expands the corresponding tracker section. The tracker is the checklist; these sections provide file-level implementation context and exit criteria.
 
-### 1.1 SVG chat avatar spike
+### Wave 0 — Planning Hygiene
 
-**Question**: Can the chat participant icon be updated using the intended SVG path cleanly in practice?
+**Goal**: One execution document, verified baseline, no stale assumptions.
 
-**Test outcomes:**
-- `PASS`: SVG path is stable and ergonomic for the intended use
-- `PARTIAL`: SVG works in webviews but not cleanly for chat participant updates
-- `FAIL`: SVG introduces enough friction that the participant path should stay PNG-based
+| Deliverable | Detail |
+|-------------|--------|
+| Lock this master plan | Mark feasibility doc header: *"background research only — see master plan"* |
+| Verify baseline numbers | Compare tables below against live source (last verified: March 6, 2026) |
+| Confirm icon inventory | 33 SVGs in `rocket-icons/` across 4 categories — verified |
 
-**Decision rule:**
-- If `PASS`: continue toward unified SVG identity
-- If `PARTIAL`: use hybrid strategy
-- If `FAIL`: keep chat avatars on compact PNG fallback set and use SVG only in webviews
-
-### 1.2 Minimal tab-shell spike
-
-**Question**: Can the current welcome view host the Command Center shell without destabilizing refresh, commands, or keyboard flow?
-
-### 1.3 Badge/status contract spike
-
-**Question**: What status indicators can be shown immediately from existing data, and what would require new tracking?
-
-### Exit Criteria
-
-- avatar decision made
-- shell viability proven
-- status model split into existing / derived / new categories
+**Exit**: This document is the sole execution reference. No other doc contradicts it.
 
 ---
 
-## Wave 2 - Command Center Shell
+### Wave 1 — Critical Spikes
 
-**Goal**: Replace the visual structure of the welcome view without yet demanding full feature parity across all tabs.
+**Goal**: Prove the three biggest unknowns before committing to architecture.
 
-### Includes
+#### Spike 1A — SVG Avatar Viability (steps 1.1–1.6)
 
-- tab bar
-- active-tab rendering
-- keyboard navigation model
-- responsive content zones for 300px sidebar width
-- empty states for all tabs
-- built-in webview state strategy for active tab and scroll restoration
+**Question**: Can `ChatParticipant.iconPath` render SVG?
 
-### Excludes
+**Current path** (verified):
+- `participant.ts:1011` → `_alexParticipant.iconPath = avatarPath`
+- `avatarMappings.ts` → `getAvatarAssetRelativePath(result, 'png')` — hardcoded PNG
+- 112 PNG/WebP files in `platforms/vscode-extension/assets/avatars/` (26.43 MB)
 
-- full Agents tab behavior
-- full Skill Store behavior
-- full Mind tab behavior
-- legacy sidebar removals
+**Spike procedure**:
+1. Copy one rocket SVG (e.g. `rocket-icons/states/building.svg`) into `assets/avatars/rocket-icons/states/`
+2. In `avatarMappings.ts`, add a format parameter to `getAvatarAssetRelativePath()`: `format: 'png' | 'svg' = 'png'`
+3. Temporarily resolve one test state (e.g. `building`) to the SVG path
+4. Set `ChatParticipant.iconPath` to the SVG `Uri` and open a chat conversation
+5. Test SVG inside a webview `<img>` tag in the welcome view
+6. Record decision in this plan
 
-### State Strategy
+| Outcome | Action |
+|---------|--------|
+| PASS — SVG renders in both chat and webview | Unified SVG identity (33 SVGs replace 112 PNGs) |
+| PARTIAL — SVG works in webview only | Hybrid: SVG in sidebar, PNG for `iconPath` |
+| FAIL — fragile or inconsistent | PNG stays, SVG only decorative in webviews |
 
-- use `getState()/setState()` for active tab and lightweight view restoration
-- use `globalState` only if needed for recently-used history or future personalization
+#### Spike 1B — Tab Shell Viability (steps 1.7–1.11)
 
-### Exit Criteria
+**Question**: Can the existing `WelcomeViewProvider` host a tabbed shell without destabilising refresh, commands, or keyboard flow?
 
-- one shell exists inside the current welcome view surface
-- tab switching is stable
-- refresh behavior is predictable
-- empty states are intentionally designed, not placeholders of neglect
+**Files to modify**:
+- `welcomeViewHtml.ts` — add tab-bar HTML above current content (5 text-label `<button>` tabs)
+- `welcomeView.ts` — add `tabSwitch` case to `webview.onDidReceiveMessage` handler
 
----
+**Implementation sketch** (HTML):
+```html
+<div class="tab-bar" role="tablist" aria-label="Command Center">
+  <button role="tab" class="tab active" data-tab="mission" aria-selected="true">Mission Ctrl</button>
+  <button role="tab" class="tab" data-tab="agents">Agents</button>
+  <button role="tab" class="tab" data-tab="skills">Skill Store</button>
+  <button role="tab" class="tab" data-tab="mind">Mind</button>
+  <button role="tab" class="tab" data-tab="docs">Docs</button>
+</div>
+<div class="tab-content" role="tabpanel" id="panel-mission">...</div>
+```
 
-## Wave 3 - Docs Tab (First Full Tab)
+**Key risks to test**:
+- Does `resolveWebviewView` refresh (triggered by `this._view.webview.html = ...`) preserve active tab?
+  - Mitigation: Use `getState()/setState()` to persist `activeTab` across refreshes
+- Does the 30-second auto-refresh interval (`setInterval(refresh, 30000)`) cause tab reset?
+  - Mitigation: Restore tab from state inside the refresh handler
+- Keyboard: Arrow keys between tabs + Enter to activate (ARIA tablist pattern)
 
-**Goal**: Ship the lowest-risk, highest-clarity tab first.
+**Exit**: Tab bar renders. Switching works. Refresh preserves selection. Keyboard navigable.
 
-### Why Docs first
+#### Spike 1C — Data Contract Triage (steps 1.12–1.15)
 
-- strongest content clarity
-- lowest dependence on new telemetry
-- real product value even before deeper architecture work
-- validates density, navigation, and information hierarchy in the sidebar
+**Question**: Which proposed UI elements have data available today?
 
-### Includes
+Classify every Mission Command and Mind tab element using the `getWelcomeHtmlContent()` parameter signature as evidence:
 
-- Getting Started cards
-- Workshop Study Guides grid for 33 personas
-- Self-Study and Exercises section
-- Facilitator Materials section
-- local architecture and operations doc entry points
-- Learn Alex Online CTA
-- Partnership guide entry point
+| Parameter | Supplies | Classification |
+|-----------|----------|----------------|
+| `health: HealthCheckResult` | Architecture status, synapse count, broken count | **Existing** |
+| `session` | Focus timer state, pomodoro count | **Existing** |
+| `goals` | Active goals, streak, completed today | **Existing** |
+| `nudges: Nudge[]` | Smart nudges (up to 10) | **Existing** |
+| `personaResult: PersonaDetectionResult` | Detected persona, confidence | **Existing** |
+| `activeContext: ActiveContext` | Focus trifectas, phase, mode | **Existing** |
+| `agentMode` / `cognitiveState` | Current agent and state strings | **Existing** |
+| `skillRecommendations` | Skill suggestions | **Existing** |
+| `userProfile` | Name, birthday | **Existing** |
+| Context budget (token usage %) | `maxInputTokens` exists; `countTokens()` is proposed API | **New** — defer |
+| Agent lifecycle (active/queued/idle) | No API — internal tracking needed | **New** — defer |
+| Memory modality health | Partially via `HealthCheckResult`; full model undefined | **Derived** |
+| Recently-used commands | Not tracked; needs `globalState` or `workspaceState` | **New** — defer |
 
-### Product framing
-
-The Docs tab is **curated AlexLearn alignment**, not a complete copy of learnalex.correax.com.
-
-### Exit Criteria
-
-- primary AlexLearn learning pathways are accessible from the sidebar
-- links are stable
-- layout is usable at sidebar width
-- content groups feel intentional rather than crowded
-
----
-
-## Wave 4 - Mission Command (First Operational Tab)
-
-**Goal**: Deliver the main operational dashboard using current runtime data.
-
-### Includes
-
-- architecture status banner
-- smart nudges from current welcome-view logic
-- quick command area
-- current session and goal summaries where already available
-- settings and secret-entry affordances only where backed by current commands
-
-### Excludes for this wave
-
-- speculative activity feed if no solid status model exists yet
-- context budget percentage if not backed by a trustworthy contract
-
-### Data policy
-
-Every Mission Command card must be tagged internally as:
-- existing data
-- derived data
-- deferred because it needs new tracking
-
-### Exit Criteria
-
-- Mission Command is immediately more useful than the current welcome view
-- no card depends on invented or misleading data
+**Exit**: Every proposed card tagged. New-data cards deferred.
 
 ---
 
-## Wave 5 - Controlled Consolidation
+### Wave 2 — Command Center Shell
+
+**Goal**: The welcome view hosts a working 5-tab shell. No feature parity required.
+
+**Primary file**: `welcomeViewHtml.ts` — refactor `getWelcomeHtmlContent()` from monolithic HTML to tab-panel architecture.
+
+**Structural change**:
+```
+BEFORE: <body> → header → avatar → status → context → action-list → goals → features
+AFTER:  <body> → header → avatar → tab-bar → tab-panel[active] → (content varies by tab)
+```
+
+**CSS additions** (extend existing design system):
+```css
+.tab-bar      { display: flex; border-bottom: 1px solid var(--vscode-panel-border); }
+.tab          { flex: 1; padding: 8px 0; background: none; border: none; cursor: pointer; }
+.tab.active   { border-bottom: 2px solid var(--persona-accent, #6366f1); font-weight: 600; }
+.tab-content  { display: none; }
+.tab-content.active { display: block; }
+```
+
+**State persistence** (in `welcomeView.ts`):
+
+```ts
+// In message handler:
+case "tabSwitch":
+  this._activeTab = message.tabId;
+  // Do NOT full-refresh — just acknowledge; JS handles panel swap
+  break;
+
+// In resolveWebviewView:
+webviewView.webview.options = { enableScripts: true, localResourceRoots: [...] };
+// pass activeTab to getWelcomeHtmlContent so it renders the right panel as .active
+```
+
+Use the built-in `webview.getState()/setState()` for client-side tab and scroll restoration across refresh cycles.
+
+**Empty states**: Every non-Mission-Command tab renders a designed empty state:
+- Icon from rocket-icons set (if integrated) or emoji fallback
+- One-sentence description of what the tab will contain
+- Optional CTA button where applicable (e.g. Docs → "Learn Alex Online")
+
+**Responsive**: Test at 300px sidebar width. Tab labels must not overflow — use truncation or abbreviation if needed.
+
+**Exit**: 5 tabs render. Switching works. Refresh preserves tab. Empty states are intentional. Compile clean. No regressions in existing functionality.
+
+---
+
+### Wave 3 — Docs Tab
+
+**Goal**: Ship the lowest-risk, highest-clarity tab to validate information density in a sidebar.
+
+**Why Docs first**: Strongest content clarity, zero dependency on new telemetry, real product value, and validates the information hierarchy pattern that all tabs will follow.
+
+**Content groups** (from approved mockup `command-center-v2-docs.svg`):
+
+| Group | Content | Command/URL |
+|-------|---------|-------------|
+| Getting Started | Setup guide, How We Work, Cognitive Levels | `alex.setupEnvironment`, `alex.workingWithAlex`, `alex.cognitiveLevels` |
+| Workshop Study Guides | 33 persona cards in a grid | `learnAlex` → `https://learnalex.correax.com/workshop/{persona}` |
+| Self-Study & Exercises | Self-study path, exercises | External URLs to `learnalex.correax.com/self-study`, `/exercises` |
+| Facilitator Materials | Session plan, slides, demo scripts, handout, pre-read | External URLs to `learnalex.correax.com/session-plan`, etc. |
+| Architecture & Ops | Brain Anatomy, architecture docs, operations docs | `alex.openDocs`, `openBrainAnatomy` (external URL) |
+| Learn Alex Online CTA | Prominent link to companion surface | External URL to `https://learnalex.correax.com/` |
+| Partnership Guide | Working with Alex deep-dive | `alex.workingWithAlex` |
+
+**Migration from current welcome view**: These commands currently live in the PARTNERSHIP and SYSTEM action groups. They move to the Docs tab; their spots in Mission Command are freed.
+
+| Current Group | Command | Moves To |
+|---------------|---------|----------|
+| PARTNERSHIP | `workingWithAlex` | Docs → Getting Started |
+| PARTNERSHIP | `learnAlex` | Docs → Learn Alex Online CTA |
+| PARTNERSHIP | `cognitiveLevels` | Docs → Getting Started |
+| SYSTEM | `openDocs` | Docs → Architecture & Ops |
+
+**Product framing**: Curated AlexLearn alignment — not a full website mirror. Surface the strongest learning pathways. The persona grid links into `learnalex.correax.com/workshop/{id}` for each of the 33 workshop personas.
+
+**Exit**: All content groups render. All links resolve. Layout usable at sidebar width. Primary content above fold. No cramping.
+
+---
+
+### Wave 4 — Mission Command
+
+**Goal**: The operational dashboard is immediately more useful than the current welcome view.
+
+**Content mapping**: Mission Command inherits the operational core of the current welcome view. Everything non-doc, non-advanced moves here.
+
+| Card / Section | Source Data | Current Location in `welcomeViewHtml.ts` |
+|----------------|-------------|------------------------------------------|
+| Architecture Status banner | `health: HealthCheckResult` | Status section (health + streak grid) |
+| Smart Nudges | `nudges: Nudge[]` | Nudge cards above Status section |
+| Active Context | `activeContext: ActiveContext` | Active Context section (trifectas + badges) |
+| Focus Session | `session` object | Session card (when active) |
+| Goals Summary | `goals` object | Goals section |
+| Quick Command bar | Action buttons (subset) | Action list nav (7 groups) |
+
+**Action button redistribution** — the 37 current buttons split across tabs:
+
+| Target Tab | Action Group | Buttons |
+|------------|-------------|---------|
+| **Mission Command** | Partnership (core) | Chat with Alex, North Star, Think Together |
+| **Mission Command** | Build Together (all) | Code Review, Debug This, Generate Tests, Project Audit, Release Preflight, Import Issues, Review PR |
+| **Mission Command** | Present & Share (all) | Marp PPTX, Gamma Cloud, Gamma Advanced |
+| **Mission Command** | Visualize (all) | Generate Image, Edit Image |
+| **Mission Command** | Trust & Growth (all) | Dream, Self-Actualize, How I Think, Focus Session, Goals |
+| **Mission Command** | System (core) | Initialize/Update, Environment Setup, API Keys, Diagnostics |
+| **Docs** | Docs-bound (from Partnership + System) | How We Work, Learn Alex, Cognitive Levels, Documentation |
+| **Mission Command** | Learn & Knowledge (tools) | Ask About Selection, Save Insight, Search Knowledge, Generate Diagram, Read Aloud |
+| **Mission Command** | System (export) | Export for M365, Memory Architecture, Detect .env Secrets, Feedback |
+
+**Data classification for proposed cards**:
+
+| Card | Classification | Note |
+|------|---------------|------|
+| Architecture Status | **Existing** — `HealthCheckResult` | Already rendered in current view |
+| Smart Nudges | **Existing** — `Nudge[]` | Already rendered; max 10 |
+| Active Context | **Existing** — `ActiveContext` | Already rendered |
+| Focus Session | **Existing** — `session` | Already rendered when active |
+| Goals Summary | **Existing** — `goals` | Already rendered |
+| Quick Command bar | **Existing** — action buttons | Redistribution only |
+| Context Budget % | **New** — needs Contract B | Defer |
+| Live Activity feed | **New** — needs Contract A | Defer |
+| Personality Toggle | **Derived** — needs UX design | Defer until contracts clear |
+| Settings Manager | **Existing** — `alex.setupEnvironment` | Command entry point exists |
+| Secret Manager | **Existing** — `alex.manageSecrets` | Command entry point exists |
+
+**Rule**: Remove or defer any card that cannot defend its data source (Guardrail #8).
+
+**Exit**: Mission Command is demonstrably more useful than current welcome view. Every card is backed by existing or derived data. No card shows invented values.
+
+---
+
+### Wave 5 — Controlled Consolidation
 
 **Goal**: Remove old sidebar duplication only after the new surface is proven.
 
-### Includes
+**Current sidebar registrations** (from `package.json` views):
 
-- remove redundant sidebar registrations only when the Command Center replacement is stable
-- redirect legacy commands only after their destination behavior is clear
-- preserve editor-panel dashboards if they still serve deeper use cases
+| View ID | Type | Current State |
+|---------|------|---------------|
+| `alex.welcomeView` | webview | Active — becomes the Command Center |
+| `alex.cognitiveDashboard` | webview | Collapsed — editor-panel dashboard |
+| `alex.memoryTree` | tree | Collapsed — tree view |
 
-### Rule
+**Consolidation plan**:
 
-Do not archive or gut working modules before their replacements are running in the product.
+| Step | Action | Condition |
+|------|--------|-----------|
+| Audit journeys | Map every user journey that currently touches `cognitiveDashboard` or `memoryTree` | — |
+| Redirect commands | Commands that opened `cognitiveDashboard` redirect to Mind tab (or Mission Command health card) | Mind tab exists with equivalent data |
+| Remove `cognitiveDashboard` | Delete view registration from `package.json`; remove `cognitiveDashboard.ts` | Replacement proven stable |
+| Keep or remove `memoryTree` | Tree view may serve deeper use cases not suited to webview tab | Decide per journey audit |
+| Legacy command cleanup | Update `commandMap` in `welcomeView.ts` for any redirected commands | All targets tested |
 
-### Exit Criteria
+**Rule**: Do not remove views before their replacements are running in-product (Guardrail #1, #9).
 
-- new sidebar surface handles the intended user journeys
-- redundant sidebar views can be removed without capability loss for normal workflows
-
----
-
-## Wave 6 - Advanced Tabs
-
-**Goal**: Expand Agents, Skill Store, and Mind only after their contracts are explicit.
-
-### Agents tab requires
-
-- explicit definition of status semantics
-- thread model and data source
-- what counts as active, queued, routing, and idle
-
-### Skill Store requires
-
-- stable skill catalog source and health model
-- clear distinction between display, enable/disable behavior, and future install behavior
-
-### Mind tab requires
-
-- explicit source of truth for memory groupings
-- clear separation between conceptual architecture and runtime metrics
-
-### Exit Criteria
-
-- advanced tabs are built on defined contracts rather than UI aspiration
+**Exit**: Command Center handles all intended user journeys. Redundant views removed. No capability loss.
 
 ---
 
-## Visual Identity Plan
+### Wave 6 — Advanced Tabs
 
-### Approved assets process
+**Goal**: Expand Agents, Skill Store, and Mind beyond placeholders using explicit runtime contracts.
 
-- 38 icon positions
-- 114 options total
-- icon approval remains a design artifact, not a hard blocker for shell work
+**Agents tab** requires Contract A (Agent Status):
+- Display agent registry with current state badges
+- Show thread count and last-active timestamp per agent
+- Requires explicit lifecycle hooks — no API exists today
 
-### Avatar strategy
+**Skill Store** requires Contract C variant (Skill Catalog):
+- Browse installed skills by category
+- Toggle enable/disable (settings-driven or local state)
+- Search across skill names and descriptions
+- Requires a stable skill inventory model — `HealthCheckResult` provides counts but not per-skill detail
 
-Use one of these only after the Wave 1 spike:
+**Mind tab** requires Contract C (Mind Model):
+- Memory modality breakdown (skills, instructions, prompts, synapses, global knowledge)
+- Cognitive age (character model constant, not computed)
+- Uncertainty areas (honest capability gaps)
+- Last meditation/dream timestamps
+- Hard rule: separate conceptual architecture from measured runtime state
 
-| Strategy | When to use |
-|---------|-------------|
-| Full SVG | Only if chat participant + webview paths both work cleanly |
-| Hybrid | SVG in webviews, compact PNG fallback for chat participant |
-| Compact PNG fallback | If SVG introduces unnecessary fragility |
+**Exit**: Advanced tabs built on documented contracts, not UI aspiration.
+
+---
+
+## Visual Identity Specification
+
+### Icon Assets (ready)
+
+| Property | Value |
+|----------|-------|
+| Total SVG files | 33 |
+| Categories | `states/` (9), `agents/` (7), `personas/` (16), `default/` (1) |
+| Source | `alex_docs/research/mockups/rocket-icons/` |
+| Generator | `alex_docs/research/mockups/generate-rocket-icons.js` |
+| Preview | `alex_docs/research/mockups/rocket-icons/preview.html` |
+| Tab bar icons | Not needed — tabs use text labels per approved mockups |
+
+Icons are a design input, not an implementation blocker. Shell and tab content work proceeds regardless of icon integration status.
+
+### Avatar Migration — Files to Touch
+
+The current avatar pipeline resolves PNG paths. SVG migration touches these files:
+
+| File | Current Role | Change Required |
+|------|-------------|-----------------|
+| `src/chat/avatarMappings.ts` | `resolveAvatar()` returns path via `getAvatarAssetRelativePath(result, 'png')` | Add `'svg'` format parameter; resolve from `assets/avatars/rocket-icons/` |
+| `src/chat/participant.ts` (line 1011) | Sets `_alexParticipant.iconPath` to PNG `Uri` | Test SVG `Uri` — if it renders, switch; if not, keep PNG for chat only |
+| `src/views/welcomeViewHtml.ts` | Uses `getAssetUri(webview, extensionUri, path)` for `<img>` tags | SVG works natively in `<img>` inside webviews — no blocker expected |
+| `platforms/vscode-extension/assets/avatars/` | 112 PNG/WebP files (26.43 MB) | Copy approved rocket SVGs into new `rocket-icons/` subdirectory |
+
+### Avatar Strategy Decision Matrix
+
+Decided by Spike 1A (steps 1.1–1.6):
+
+| Outcome | Chat Participant | Webview | Asset Size Impact |
+|---------|-----------------|---------|-------------------|
+| **Full SVG** | SVG `Uri` via `iconPath` | SVG `<img>` | 33 SVGs replace 112 PNGs — massive reduction |
+| **Hybrid** | Keep `'png'` for `iconPath` | SVG `<img>` for sidebar | Additive: 33 SVGs + existing PNGs |
+| **PNG fallback** | No change | No change | No change |
 
 ### Rule
 
-Do not let visual identity decisions block shell and Docs progress.
+Do not let visual identity decisions block shell and Docs progress (Guardrail #5).
 
 ---
 
 ## Data Contract Backlog
 
-These items must not be treated as solved until documented.
+Each contract below must be documented and implemented before its dependent tab moves beyond placeholder scope. TypeScript sketches show the target shape; they are not final API — refine during implementation.
 
-### Contract A - Agent status
+### Contract A — Agent Status
 
-Needs definition for:
-- active
-- queued
-- routing
-- idle
-- refresh timing
-- stale-state handling
+Required by: **Agents tab** (Wave 6).
 
-### Contract B - Context budget
+```ts
+interface AgentStatus {
+  agentId: string;          // e.g. "builder", "researcher"
+  state: 'active' | 'queued' | 'routing' | 'idle';
+  lastActiveMs: number;     // Date.now() of last activity
+  threadCount: number;      // open conversation threads
+}
 
-Needs definition for:
-- token-count source
-- aggregation point
-- refresh cadence
-- what is estimated vs exact
+interface AgentStatusProvider {
+  getAll(): AgentStatus[];
+  onDidChange: vscode.Event<AgentStatus[]>;
+  refreshIntervalMs: number; // cadence for polling or push
+  staleThresholdMs: number;  // mark idle after this silence
+}
+```
 
-### Contract C - Mind model
+Open questions: Is agent state derived from participant handler invocations, or does it need explicit lifecycle hooks? Which persistence scope (workspace vs global)?
 
-Needs definition for:
-- memory modality mapping
-- relationship between conceptual architecture and runtime files
-- what is measured live vs narrated conceptually
+### Contract B — Context Budget
 
-### Contract D - Recently used
+Required by: **Mission Command** context-budget card (Wave 6 or later).
 
-Needs definition for:
-- what events are tracked
-- where they persist
-- whether they are per workspace, per machine, or global
+```ts
+interface ContextBudget {
+  maxInputTokens: number;   // from model.maxInputTokens
+  estimatedUsed: number;    // aggregation of conversation + system prompt + tool context
+  isEstimate: boolean;      // true until countTokens() becomes stable API
+  refreshedAt: number;      // Date.now()
+}
+```
+
+`countTokens()` is a VS Code **proposed API** — not currently used in codebase. Until it stabilises, any budget display must be labelled "estimated". Do not present hard numbers.
+
+### Contract C — Mind Model
+
+Required by: **Mind tab** (Wave 6).
+
+```ts
+interface MindModel {
+  memoryModalities: {
+    skills: { count: number; healthPct: number };
+    instructions: { count: number; healthPct: number };
+    prompts: { count: number };
+    synapses: { totalConnections: number; brokenCount: number };
+    globalKnowledge: { insightCount: number };
+  };
+  cognitiveAge: string;              // e.g. "26" — from character model, not runtime
+  uncertaintyAreas: string[];        // honest list of capability gaps
+  lastMeditationIso: string | null;  // ISO date
+  lastDreamIso: string | null;
+}
+
+interface MindDataProvider {
+  getModel(): Promise<MindModel>;
+  onDidChange: vscode.Event<void>;
+}
+```
+
+Hard rule: Separate **conceptual architecture** (narrated in docs) from **measured runtime state** (live health check data). The Mind tab must never blur the two.
+
+### Contract D — Recently Used
+
+Required by: **Mission Command** Quick Command bar (adaptive ordering).
+
+```ts
+interface RecentEntry {
+  commandId: string;        // e.g. "alex.codeReview"
+  lastUsedMs: number;
+  useCount: number;
+}
+
+interface RecentUsageStore {
+  record(commandId: string): void;
+  getRecent(limit: number): RecentEntry[];
+  scope: 'workspace' | 'global';     // must be decided before implementation
+  persistenceKey: string;             // globalState key
+}
+```
+
+Decision needed: workspace-scoped (different projects = different frequent commands) vs global (one set across all projects). Recommend workspace as default with global fallback.
 
 ---
 
 ## Risk Register
 
-This register tracks the execution risks that can materially delay, derail, or distort the Command Center rollout. Review it at each milestone transition, especially before Wave 1, Wave 3, Wave 4, and Wave 5.
+| ID | Risk | P | I | Trigger | Response |
+|----|------|---|---|---------|----------|
+| R1 | SVG avatar brittle across chat + webview | H | H | Inconsistent rendering or update friction | Spike 1A decides: full SVG / hybrid / PNG fallback |
+| R2 | Hidden data work disguised as UI work | H | H | Card depends on undefined status or telemetry | Classify every card as existing/derived/new; defer new |
+| R3 | Sidebar density collapses at 300 px | M | H | Cards cramped, primary actions below fold | Ship Docs + Mission Command first; reduce density |
+| R4 | Plan drift via stale counts or renamed concepts | M | M | Milestones diverge across docs | This plan is sole source of truth |
+| R5 | Sidebar consolidation breaks user expectations | M | H | Commands lose discoverability, views removed too early | Delay removals until replacement is stable |
+| R6 | Mission Command shows misleading data | M | H | Cards use guessed or stale values | Gate cards behind classification; remove undefended cards |
+| R7 | Mind tab overpromises runtime introspection | M | H | Mockup concepts outpace actual metrics | Keep reduced-scope until contracts explicit |
+| R8 | Personalization ships without persistence model | M | M | Quick Actions behave inconsistently across workspaces | Define persistence scope before adaptive UX |
 
-| ID | Risk | Probability | Impact | Trigger / Early Warning | Response | Owner | Status |
-|----|------|-------------|--------|-------------------------|----------|-------|--------|
-| R1 | SVG avatar path proves awkward or brittle across chat participant and webview surfaces | High | High | SVG works inconsistently, adds update friction, or complicates runtime asset handling | Run the avatar spike first; choose full SVG, hybrid, or compact PNG fallback based on evidence | UI + runtime spike owner | Open |
-| R2 | Hidden backend or contract work is mistaken for simple UI work | High | High | A tab design depends on undefined status semantics, new telemetry, or unclear persistence behavior | Classify every card as existing, derived, or new data before implementation; defer contract-heavy elements | Feature lead | Open |
-| R3 | Sidebar density collapses usability at 300px width | Medium | High | Tabs require long-scroll browsing, cards feel cramped, or primary actions disappear below the fold | Prioritize Docs and Mission Command first; reduce default density; push overflow into lower disclosure levels | UX lead | Open |
-| R4 | Plan drift reappears through stale counts, renamed concepts, or conflicting docs | Medium | Medium | Milestones, tab names, or artifact counts diverge across planning docs | Keep this master plan as the execution source of truth and treat feasibility/design docs as supporting rationale only | Planning owner | Open |
-| R5 | Command migration or sidebar consolidation breaks user expectations | Medium | High | Existing commands lose discoverability, old views disappear too early, or replacement flows feel incomplete | Delay redirects and removals until replacement behavior is stable and tested in normal workflows | Extension owner | Open |
-| R6 | Mission Command shows untrustworthy or misleading operational data | Medium | High | Cards rely on guessed values, stale status, or mixed live and conceptual data | Gate Mission Command cards behind explicit data classification and remove any card that cannot defend its source | Runtime contract owner | Open |
-| R7 | Mind tab overpromises introspection that the runtime model cannot yet support | Medium | High | Mockup concepts outpace actual measurable architecture data or blur conceptual vs live signals | Keep Mind reduced-scope until model contracts are explicit; separate narrated architecture from measured runtime state | Cognitive model owner | Open |
-| R8 | Recently-used and personalization features ship without a stable persistence model | Medium | Medium | Quick Actions or recent sections behave inconsistently across workspace or machine boundaries | Define persistence scope before adaptive UX ships; implement tracking before dependent features go live | Personalization owner | Open |
-
-### Risk Review Rules
-
-1. Do not close a risk because the design looks settled; close it only when the implementation evidence exists.
-2. Any `High / High` risk must have an explicit spike, contract decision, or gating rule before dependent work starts.
-3. If a risk trigger is observed during implementation, stop expanding scope and resolve the risk before continuing downstream tabs.
-4. When a risk is retired, record the decision in the relevant milestone notes or linked implementation artifact.
+**Risk review rules:**
+1. Do not close a risk because the design looks settled — close only on implementation evidence.
+2. Any H/H risk must have a spike, contract decision, or gate before dependent work starts.
+3. If a trigger fires during implementation, stop scope expansion and resolve before continuing.
+4. Record retirement decisions in milestone notes or linked implementation artifacts.
 
 ---
 
-## Acceptance Criteria by Milestone
+## Versioning Strategy
 
-### Milestone A - Spikes complete
+| Release | Scope | Gate |
+|---------|-------|------|
+| v6.x patch | Master plan locked, spikes running | Plan approved |
+| v6.x minor | Tab shell + Docs tab + Mission Command tab | Spikes pass, smoke test clean |
+| v6.x minor+1 | Sidebar consolidation (remove 2 redundant views) | Replacement covers all journeys |
+| v7.0 | Agents, Skill Store, Mind with runtime contracts | Contracts B–D documented and implemented |
 
-- avatar strategy chosen
-- shell viability proven
-- status/data backlog classified
-
-### Milestone B - Shell complete
-
-- tab bar works
-- keyboard navigation works
-- tab state restoration works
-- all tabs have designed empty states
-
-### Milestone C - Docs complete
-
-- primary AlexLearn pathways accessible
-- local docs grouped clearly
-- no false "site mirror" obligation encoded
-
-### Milestone D - Mission Command complete
-
-- status and actions are clearer than the current welcome view
-- only trustworthy data is shown
-
-### Milestone E - Consolidation complete
-
-- duplicate sidebar surfaces can be removed without normal-user regression
-
----
-
-## Suggested Versioning Path
-
-This is intentionally conservative.
-
-| Candidate | Scope |
-|----------|-------|
-| v6.x planning cycle | master plan, spikes, shell groundwork |
-| v6.x UI milestone | shell + Docs + Mission Command |
-| v6.x consolidation milestone | sidebar simplification after proof |
-| v7.x advanced milestone | richer Agents / Skill Store / Mind once contracts are real |
-
-This avoids tying the entire concept to one large release jump.
-
----
-
-## Decision Summary
-
-### Build now
-
-- tab shell
-- Docs tab
-- Mission Command tab
-- keyboard-first interaction
-- empty states
-- curated AlexLearn integration
-
-### Prove first
-
-- SVG chat avatar viability
-- status badge model
-- context budget model
-- true memory modality mapping
-
-### Delay until stable
-
-- full sidebar consolidation
-- legacy command redirection
-- fully dynamic Agents / Skill Store / Mind experiences
+Do not tie the full vision to a single major release. Ship useful increments.
 
 ---
 
 ## Bottom Line
 
-The feasibility plan established the right destination. This master plan defines the safer path to get there.
+The Command Center is a **UI-first, proof-driven evolution** of the welcome view.
 
-The Command Center should be built as a **UI-first, proof-driven evolution** of the welcome view. The right first win is not total replacement. The right first win is a stable shell plus two genuinely useful tabs, backed by existing reality rather than hidden assumptions.
+**Build now**: Tab shell, Docs tab, Mission Command tab, keyboard-first navigation, empty states, curated AlexLearn integration.
+**Prove first**: SVG chat avatar viability, status badge model, context budget contract, memory-modality mapping.
+**Delay until stable**: Full sidebar consolidation, legacy command redirection, fully dynamic Agents / Skill Store / Mind.
 
-That approach preserves momentum, reduces risk, and gives the project room to mature the deeper systems behind the UI without pretending they already exist.
+The first win is a stable shell plus two genuinely useful tabs, built on existing runtime data.
 
 ---
 
 ## Implementation Guardrails
 
-These are the non-negotiables for UI-first delivery.
+Non-negotiable rules for every wave.
 
 1. Do not gut working sidebar surfaces before the replacement flow exists in-product.
 2. Do not treat SVG as an architectural dependency until the avatar spike is complete.

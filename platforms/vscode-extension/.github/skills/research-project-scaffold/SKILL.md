@@ -366,7 +366,7 @@ analysis/outputs/figure-1-demographics.png   # Matches paper reference
 - **practitioner-research**: Use for publication workflows (Ship→Document→Promote)
 - **project-scaffolding**: Base patterns for folder structure
 - **bootstrap-learning**: For learning new research methods
-- **writing-publication**: For manuscript preparation
+- **academic-research**: For manuscript preparation
 
 ---
 

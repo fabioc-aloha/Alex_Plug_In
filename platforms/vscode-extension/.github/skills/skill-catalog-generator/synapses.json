@@ -11,7 +11,7 @@
       "reason": "Validates skill structure during catalog generation",
       "type": "validates",
       "strength": 0.8,
-      "target": ".github/skills/architecture-health/SKILL.md"
+      "target": ".github/skills/brain-qa/SKILL.md"
     },
     {
       "reason": "Tracks learning progress for users",

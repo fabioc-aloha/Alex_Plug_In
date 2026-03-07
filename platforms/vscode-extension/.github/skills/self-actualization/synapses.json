@@ -3,13 +3,13 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": ".github/skills/architecture-health/SKILL.md",
+      "target": ".github/skills/brain-qa/SKILL.md",
       "type": "requires",
       "strength": 0.9,
       "reason": "Health check first"
     },
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "target": ".github/skills/meditation/SKILL.md",
       "type": "extends",
       "strength": 0.8,
       "reason": "Deeper than meditation"

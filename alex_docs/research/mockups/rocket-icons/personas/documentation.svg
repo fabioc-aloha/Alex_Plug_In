@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 6 116 116" width="128" height="128">
+
+    <defs>
+        <linearGradient id="rocketBodypersonas_documentation" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+        <linearGradient id="flameGradpersonas_documentation" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74"/>
+            <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+    </defs>
+<filter id="pop_personas_documentation" x="-5%" y="-5%" width="110%" height="110%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded"/>
+    <feFlood flood-color="#0a0e1a" result="dark"/>
+    <feComposite in="dark" in2="expanded" operator="in" result="outline"/>
+    <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+</filter>
+<g filter="url(#pop_personas_documentation)">
+<g transform="rotate(-5, 64, 64)">
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Rocket body -->
+        <path d="M64,14 C64,14 48,28 48,52 L48,80 L54,84 L54,76 L74,76 L74,84 L80,80 L80,52 C80,28 64,14 64,14 Z" 
+              fill="url(#rocketBodypersonas_documentation)" />
+        <!-- Left fin -->
+        <polygon points="48,68 34,88 48,80" fill="url(#rocketBodypersonas_documentation)" />
+        <!-- Right fin -->
+        <polygon points="80,68 94,88 80,80" fill="url(#rocketBodypersonas_documentation)" />
+        <!-- A cutout (negative space) -->
+        <path d="M64,26 L55,62 L58,62 L61,52 L67,52 L70,62 L73,62 Z M62.5,47 L64,36 L65.5,47 Z" 
+              fill="#ffffff" />
+        <!-- Exhaust flame -->
+        <polygon points="54,82 64,98 74,82" fill="url(#flameGradpersonas_documentation)" />
+    </g>
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Round reading glasses -->
+        <circle cx="57" cy="36" r="5.5" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <circle cx="71" cy="36" r="5.5" fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="62.5" y1="36" x2="65.5" y2="36" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="51.5" y1="36" x2="46" y2="34" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="76.5" y1="36" x2="82" y2="34" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <!-- Typewriter — foreground overlap -->
+    <g transform="translate(52, 50)">
+        <!-- Body -->
+        <rect x="0" y="6" width="44" height="20" rx="3" fill="#f59e0b" opacity="0.9"/>
+        <!-- Paper roller -->
+        <rect x="4" y="0" width="36" height="8" rx="2" fill="#f59e0b" opacity="0.7"/>
+        <!-- Paper coming out -->
+        <rect x="8" y="-12" width="28" height="16" rx="1" fill="#ffffff" opacity="0.85"/>
+        <!-- Text on paper -->
+        <line x1="11" y1="-8" x2="32" y2="-8" stroke="#f59e0b" stroke-width="1.2" opacity="0.5"/>
+        <line x1="11" y1="-4" x2="30" y2="-4" stroke="#f59e0b" stroke-width="1.2" opacity="0.45"/>
+        <line x1="11" y1="0" x2="28" y2="0" stroke="#f59e0b" stroke-width="1.2" opacity="0.4"/>
+        <!-- Keys row 1 -->
+        <circle cx="8" cy="14" r="2" fill="#0f172a" opacity="0.5"/>
+        <circle cx="14" cy="14" r="2" fill="#0f172a" opacity="0.5"/>
+        <circle cx="20" cy="14" r="2" fill="#0f172a" opacity="0.5"/>
+        <circle cx="26" cy="14" r="2" fill="#0f172a" opacity="0.5"/>
+        <circle cx="32" cy="14" r="2" fill="#0f172a" opacity="0.5"/>
+        <!-- Keys row 2 -->
+        <circle cx="11" cy="20" r="2" fill="#0f172a" opacity="0.4"/>
+        <circle cx="17" cy="20" r="2" fill="#0f172a" opacity="0.4"/>
+        <circle cx="23" cy="20" r="2" fill="#0f172a" opacity="0.4"/>
+        <circle cx="29" cy="20" r="2" fill="#0f172a" opacity="0.4"/>
+    </g>
+</g>
+</g>
+</svg>

@@ -190,7 +190,7 @@ applyTo: "**/*"
 | **Enables** | This skill makes another possible | slide-design → dissertation-defense |
 | **Enhances** | This skill improves another | coaching → executive-storytelling |
 | **Requires** | This skill depends on another | citation → literature-review |
-| **Extends** | This skill adds to another | airs-integration → appropriate-reliance |
+| **Extends** | This skill adds to another | airs-appropriate-reliance → appropriate-reliance |
 
 ### Strength Values
 
@@ -239,7 +239,7 @@ Before promoting to Master, verify:
 - [ ] **applyTo set**: Appropriate glob patterns
 - [ ] **Synapses defined**: 2-5 meaningful connections
 - [ ] **No duplication**: Doesn't overlap with existing skills
-- [ ] **Keywords identified**: For skill-activation index
+- [ ] **Keywords identified**: For memory-activation index
 
 ---
 
@@ -478,11 +478,11 @@ When related skills exist, merge rather than proliferate:
 
 ---
 
-## After Creation: Register with Skill-Activation
+## After Creation: Register with Memory-Activation
 
 Add your skill to the action-keyword index:
 
-**Location**: `.github/skills/skill-activation/SKILL.md`
+**Location**: `.github/skills/memory-activation/SKILL.md`
 
 **Format:**
 ```markdown
@@ -501,7 +501,7 @@ Add your skill to the action-keyword index:
 - [.github/instructions/skill-building.instructions.md] (Critical, Implements, Forward) - "Step-by-step procedure for creating and completing skills"
 - [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Learning becomes skill"
 - [.github/instructions/heir-skill-promotion.instructions.md] (Critical, Implements, Forward) - "Skill ready for promotion"
-- [.github/skills/skill-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
+- [.github/skills/memory-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
 - [.github/skills/skill-catalog-generator/SKILL.md] (Medium, Triggers, Forward) - "Regenerate catalog after creation"
 - [SYNAPSE-SCHEMA.md](../SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
 

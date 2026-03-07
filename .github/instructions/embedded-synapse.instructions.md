@@ -148,7 +148,7 @@ The dream protocol provides automated validation and optimization of embedded sy
 ### Migration Priority
 
 High-traffic synapses should be converted first:
-1. skill-activation (metacognitive router)
+1. memory-activation (metacognitive router)
 2. image-handling (incident skill)
 3. meditation (frequently used)
 4. awareness (self-monitoring)

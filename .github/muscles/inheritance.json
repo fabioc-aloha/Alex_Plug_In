@@ -8,7 +8,7 @@
             "inheritance": "master-only",
             "description": "22-check comprehensive audit for Master Alex only",
             "referencedBy": [
-                "master-alex-audit",
+                "architecture-audit",
                 "dream-state-automation"
             ]
         },

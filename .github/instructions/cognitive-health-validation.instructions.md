@@ -46,7 +46,7 @@ applyTo: "**/*brain-qa*,**/*audit*,**/*health*,**/*validation*"
 | 5 | Master-Heir Skill Sync | Skill missing from heir | 3 master-only skills (expected) |
 | 6 | Synapse Schema Format | Invalid JSON in synapses.json | - |
 | 7 | **Synapse File Sync** ⚠️ | synapses.json out of sync with heir | - |
-| 8 | Skill-Activation Index Sync | Index doesn't match disk | - |
+| 8 | Memory-Activation Index Sync | Index doesn't match disk | - |
 | 9 | Catalog Accuracy | Skill count mismatch | - |
 | 10 | Core File Token Budget | copilot-instructions.md > 16K tokens | - |
 | 11 | Boilerplate Descriptions | Generic "TBD" placeholders | - |
@@ -114,7 +114,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 
 **Intentional Warnings (MONITOR, DON'T FIX)**:
 - Trigger overlaps (Phase 4) - Related skills share activation patterns
-- Master-only skills (Phase 5) - global-knowledge-maintenance, heir-curation, master-alex-audit
+- Master-only skills (Phase 5) - global-knowledge, heir-curation, architecture-audit
 - Different heir versions (Phase 27) - M365 and VS Code on different release cycles
 - Cross-root path false positives - Some health tooling can misread valid references to sibling-platform files such as `platforms/m365-copilot/...` when resolution is performed from the wrong root
 - PII in master (Phase 33) - Stripped during heir sync, expected
@@ -346,7 +346,7 @@ Does it indicate unintended drift? (new warning)
 
 **Intentional Warnings to Monitor (Not Fix):**
 - Phase 4: Trigger overlaps (related skills share activation patterns)
-- Phase 5: Master-only skills (3 expected: global-knowledge-maintenance, heir-curation, master-alex-audit)
+- Phase 5: Master-only skills (3 expected: global-knowledge, heir-curation, architecture-audit)
 - Phase 19: Undated dream files (housekeeping, deferred)
 - Phase 27: M365 heir version ≠ VS Code heir version (different release cycles)
 - Cross-root path warnings on valid sibling-platform references (verify from repo root before treating as broken)

@@ -3,7 +3,7 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "target": ".github/skills/meditation/SKILL.md",
       "type": "guided-by",
       "strength": 0.75,
       "when": "user explicitly requests guided meditation",
@@ -24,7 +24,7 @@
       "yields": "Comprehensive architecture review protocol"
     },
     {
-      "target": ".github/skills/architecture-health/SKILL.md",
+      "target": ".github/skills/brain-qa/SKILL.md",
       "type": "uses",
       "strength": 0.8,
       "when": "validating synapses during meditation",

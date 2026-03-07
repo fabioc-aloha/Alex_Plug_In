@@ -31,18 +31,11 @@
             "yields": "Framework for explaining AI tells to learners"
         },
         {
-            "target": ".github/instructions/documentation-quality-assurance.instructions.md",
+            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
             "relationship": "pairs-with",
             "strength": 0.85,
             "when": "Running document audits",
             "yields": "Combined quality and authenticity checking"
-        },
-        {
-            "target": "alex_docs/research/AI-WRITING-TELLS.md",
-            "relationship": "references",
-            "strength": 0.8,
-            "when": "Understanding the research basis",
-            "yields": "Background context on AI detection patterns"
         }
     ],
     "activationContext": {

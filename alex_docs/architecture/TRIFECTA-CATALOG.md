@@ -46,7 +46,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 | Script                                        | Referenced By                               |
 | --------------------------------------------- | ------------------------------------------- |
-| `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, master-alex-audit   |
+| `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, architecture-audit  |
 | `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)              |
 | `.github/muscles/build-extension-package.ps1` | heir-curation, release-management           |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
@@ -79,8 +79,6 @@ Capabilities with all three memory system components — each justified by the "
 | Skill       | `.github/skills/meditation/SKILL.md`              | Domain knowledge: consolidation theory, pre-meditation optimization, session types                           |
 | Instruction | `.github/instructions/meditation.instructions.md` | 5-phase procedure: Content Analysis → Memory Creation → Synaptic Connection → Skill Validation → Integration |
 | Prompt      | `.github/prompts/meditate.prompt.md`              | `/meditate` — user invokes guided consolidation session                                                      |
-
-**Also has**: `unified-meditation-protocols.prompt.md` (comprehensive workflow prompt — the "deep dive" version)
 
 ### Self-Actualization
 
@@ -166,16 +164,16 @@ Capabilities with all three memory system components — each justified by the "
 
 **Muscle**: `brain-qa.ps1` — the structural validation engine. The trifecta adds the semantic layer the script can't automate.
 
-### Master Alex Audit
+### Architecture Audit (includes Master Alex Audit)
 
 | Component   | File                                                  | Why It Exists                                                                           |
 | ----------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/master-alex-audit/SKILL.md`           | Domain knowledge: 22-section audit, semantic/logic/code/architectural review dimensions |
+| Skill       | `.github/skills/architecture-audit/SKILL.md`          | Domain knowledge: 22-section audit, semantic/logic/code/architectural review dimensions |
 | Instruction | `.github/instructions/semantic-audit.instructions.md` | Shared procedure: same 4-dimension semantic audit methodology used by brain-qa          |
 | Prompt      | `.github/prompts/masteraudit.prompt.md`               | `/masteraudit` — user invokes guided project audit (script + semantic review)           |
 
-**Muscle**: `audit-master-alex.ps1` — the structural validation engine. Master-only inheritance.
-**Shared instruction**: Both brain-qa and master-alex-audit reference the same `semantic-audit.instructions.md` — the 4-dimension review methodology is universal.
+**Muscle**: `audit-master-alex.ps1` — the structural validation engine.
+**Shared instruction**: Both brain-qa and architecture-audit reference the same `semantic-audit.instructions.md`.
 
 ### UI/UX Design
 
@@ -489,7 +487,7 @@ These instructions intentionally lack one or more components. The "Why?" test de
 
 ### Skill-Only (No instruction or prompt, just domain expertise)
 
-The vast majority of skills are skill-only. This is correct — most skills are passive domain knowledge activated by `skill-activation` when needed. They don't need auto-loaded procedures or user commands.
+The vast majority of skills are skill-only. This is correct — most skills are passive domain knowledge activated by `memory-activation` when needed. They don't need auto-loaded procedures or user commands.
 
 Notable skill-only examples and why:
 - **`cognitive-load`**: Passive knowledge applied during any task — no procedure, no command

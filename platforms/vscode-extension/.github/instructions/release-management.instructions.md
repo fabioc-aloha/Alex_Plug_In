@@ -16,7 +16,7 @@ applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 - [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
 - [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
 - [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
-- [.github/muscles/sync-architecture.js] → (Critical, Enables, Forward) - "Master-to-heir sync runs during vsce package - validates skill inheritance"
+- [.github/muscles/sync-architecture.cjs] → (Critical, Enables, Forward) - "Master-to-heir sync runs during vsce package - validates skill inheritance"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [.github/instructions/automated-quality-gates.instructions.md] → (Critical, Automates, Bidirectional) - "Build-pipeline quality gates replace manual checklist items (v5.9.10 RCA)"
 - [.github/instructions/roadmap-maintenance.instructions.md] → (High, Coordinates, Bidirectional) - "Roadmap status updates when version ships"
@@ -171,6 +171,11 @@ These MUST be verified before releasing:
 | Changelog updated | CHANGELOG.md | Visual review |
 | No lint errors | *.md | `get_errors` tool |
 | Temporary skills handled | .github/skills/*/synapses.json | See below |
+
+**PowerShell replacement pitfall**:
+- When using `-replace` with backreferences like `$1` and appending a version string, do not concatenate naively if the version starts with a digit.
+- Prefer `${1}${version}`, a replacement callback, or `'{0}{1}' -f $matches[1], $version` style construction.
+- Example failure: `'$1' + $version` can become ambiguous and produce malformed version updates.
 
 ---
 

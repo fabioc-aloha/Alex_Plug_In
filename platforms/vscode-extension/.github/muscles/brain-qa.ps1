@@ -137,10 +137,10 @@ if (2 -in $runPhases) {
 if (3 -in $runPhases) {
     Write-Phase 3 "Skill Index Coverage"
     $skillDirs = (Get-ChildItem "$ghPath\skills" -Directory).Name
-    $indexContent = Get-Content "$ghPath\skills\skill-activation\SKILL.md" -Raw
+    $indexContent = Get-Content "$ghPath\skills\memory-activation\SKILL.md" -Raw
     $notIndexed = @()
     foreach ($s in $skillDirs) {
-        if ($s -ne "skill-activation" -and $indexContent -notmatch "$s \|") {
+        if ($s -ne "memory-activation" -and $indexContent -notmatch "$s \|") {
             $notIndexed += $s
         }
     }
@@ -158,7 +158,7 @@ if (3 -in $runPhases) {
 if (4 -in $runPhases) {
     Write-Phase 4 "Trigger Semantic Analysis"
     $triggers = @{}
-    Get-Content "$ghPath\skills\skill-activation\SKILL.md" | 
+    Get-Content "$ghPath\skills\memory-activation\SKILL.md" | 
     Select-String -Pattern "^\| .+ \| .+ \|$" | 
     ForEach-Object {
         if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
@@ -426,7 +426,7 @@ if (16 -in $runPhases) {
 # ============================================================
 if (17 -in $runPhases) {
     Write-Phase 17 "Internal Skills User-Invokable Check"
-    $internalSkills = @("skill-activation", "prompt-activation")
+    $internalSkills = @("memory-activation")
     $visibilityIssues = @()
     
     foreach ($skill in $internalSkills) {

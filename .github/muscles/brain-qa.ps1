@@ -234,10 +234,10 @@ if (2 -in $runPhases) {
 if (3 -in $runPhases) {
     Write-Phase 3 "Skill Index Coverage"
     $skillDirs = (Get-ChildItem "$ghPath\skills" -Directory).Name
-    $indexContent = Get-Content "$ghPath\skills\skill-activation\SKILL.md" -Raw
+    $indexContent = Get-Content "$ghPath\skills\memory-activation\SKILL.md" -Raw
     $notIndexed = @()
     foreach ($s in $skillDirs) {
-        if ($s -ne "skill-activation" -and $indexContent -notmatch "$s \|") {
+        if ($s -ne "memory-activation" -and $indexContent -notmatch "$s \|") {
             $notIndexed += $s
         }
     }
@@ -255,7 +255,7 @@ if (3 -in $runPhases) {
 if (4 -in $runPhases) {
     Write-Phase 4 "Trigger Semantic Analysis"
     $triggers = @{}
-    Get-Content "$ghPath\skills\skill-activation\SKILL.md" | 
+    Get-Content "$ghPath\skills\memory-activation\SKILL.md" | 
     Select-String -Pattern "^\| .+ \| .+ \|$" | 
     ForEach-Object {
         if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
@@ -408,26 +408,26 @@ if (7 -in $runPhases) {
 }
 
 # ============================================================
-# PHASE 8: Skill-Activation Index Sync
+# PHASE 8: Memory-Activation Index Sync
 # ============================================================
 if (8 -in $runPhases) {
-    Write-Phase 8 "Skill-Activation Index Sync"
-    if (Test-Path "$heirBase\.github\skills\skill-activation\SKILL.md") {
-        $masterHash = (Get-FileHash "$ghPath\skills\skill-activation\SKILL.md").Hash
-        $heirHash = (Get-FileHash "$heirBase\.github\skills\skill-activation\SKILL.md").Hash
+    Write-Phase 8 "Memory-Activation Index Sync"
+    if (Test-Path "$heirBase\.github\skills\memory-activation\SKILL.md") {
+        $masterHash = (Get-FileHash "$ghPath\skills\memory-activation\SKILL.md").Hash
+        $heirHash = (Get-FileHash "$heirBase\.github\skills\memory-activation\SKILL.md").Hash
         if ($masterHash -eq $heirHash) { 
             Write-Pass "Index in sync"
         }
         else { 
             Write-Fail "Index out of sync"
             if ($Fix) {
-                Copy-Item "$ghPath\skills\skill-activation\SKILL.md" "$heirBase\.github\skills\skill-activation\SKILL.md" -Force
-                $fixed += "Synced skill-activation/SKILL.md"
+                Copy-Item "$ghPath\skills\memory-activation\SKILL.md" "$heirBase\.github\skills\memory-activation\SKILL.md" -Force
+                $fixed += "Synced memory-activation/SKILL.md"
             }
         }
     }
     else {
-        Write-Warn "Heir skill-activation not found"
+        Write-Warn "Heir memory-activation not found"
     }
 }
 
@@ -724,7 +724,7 @@ if (16 -in $runPhases) {
 if (17 -in $runPhases) {
     Write-Phase 17 "Internal Skills User-Invokable Check"
     # These skills are internal metacognition - should have user-invokable: false
-    $internalSkills = @("skill-activation", "prompt-activation")
+    $internalSkills = @("memory-activation")
     $visibilityIssues = @()
     
     foreach ($skill in $internalSkills) {

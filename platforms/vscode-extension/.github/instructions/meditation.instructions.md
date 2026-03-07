@@ -12,7 +12,7 @@ description: "Procedural steps for knowledge consolidation meditation sessions"
 
 ## Synapses
 
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Implements, Bidirectional) - "Comprehensive meditation workflow this instruction supports"
+- [.github/prompts/meditate.prompt.md] (Critical, Implements, Bidirectional) - "Comprehensive meditation workflow this instruction supports"
 - [.github/instructions/dream-state-automation.instructions.md] (High, Coordinates, Bidirectional) - "Dream precedes meditation; Phase 5 validates via Dream"
 - [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture optimization through meditation"
 - [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Bidirectional) - "Connection strengthening through meditation"
@@ -104,7 +104,7 @@ Every meditation session MUST complete ALL three before concluding:
 
 Meditation is a complex operation (3+ phases). Before starting:
 1. SSO auto-activates to survey needed skills
-2. Pre-load: architecture-health, knowledge-synthesis, global-knowledge
+2. Pre-load: brain-qa, knowledge-synthesis, global-knowledge
 3. If synapse health unknown, run dream first
 
 ---

@@ -17,7 +17,7 @@
       "context": "Both require attention to character-level detail"
     },
     {
-      "target": ".github/skills/writing-publication/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "supports",
       "strength": 0.7,
       "context": "Visual diagrams enhance documentation quality"

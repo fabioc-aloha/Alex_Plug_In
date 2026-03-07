@@ -7,7 +7,7 @@
     "connections": [
         {
             "id": "connection-id",
-            "target": "../../skills/skill-activation/SKILL.md",
+            "target": "../../skills/memory-activation/SKILL.md",
             "relationship": "Uses",
             "strength": 0.8,
             "description": "Example: Replace with actual related skill path"

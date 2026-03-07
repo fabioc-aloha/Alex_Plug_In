@@ -160,6 +160,17 @@ Is this configuration update critical to feature functionality?
 | Registered key with wrong scope | Setting not persisted correctly | Use `machine` for global, `resource` for workspace |
 | Configuration read without default | `undefined` causes crashes | Always provide fallback: `.get(key, defaultValue)` |
 | Updating unregistered critical config | Silent failure, feature broken | Register in package.json |
+| Persisting Windows backslash paths directly | Escaped settings values, comparison mismatches, or invalid JSON-like path handling | Normalize with `path.replace(/\\/g, '/')` before `config.update()` |
+
+**Windows path normalization pattern**:
+```typescript
+const normalizedPath = filePath.replace(/\\/g, '/');
+await vscode.workspace.getConfiguration('alex.example').update(
+  'path',
+  normalizedPath,
+  vscode.ConfigurationTarget.Global
+);
+```
 
 ---
 
@@ -243,7 +254,7 @@ Add to build pipeline:
 
 - [extension-audit-methodology](extension-audit-methodology.instructions.md) — Dimension 6: Configuration validation
 - [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) — Extension development patterns
-- [code-review](code-review.instructions.md) — Configuration API usage review
+- [code-review-guidelines](code-review-guidelines.instructions.md) — Configuration API usage review
 
 ---
 

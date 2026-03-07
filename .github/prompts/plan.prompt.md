@@ -24,7 +24,7 @@ Invoke `/plan` for tasks that involve:
 
 Survey the available landscape before acting:
 
-1. **Skill discovery**: Are there existing skills relevant to this task? Check `.github/skills/` and the skill-activation index.
+1. **Skill discovery**: Are there existing skills relevant to this task? Check `.github/skills/` and the memory-activation index.
 2. **File archeology**: What files will be affected? Read them before touching them.
 3. **Dependency check**: What does this change depend on? What depends on it?
 4. **Constraint detection**: Are there safety imperatives or locked files involved?
@@ -80,7 +80,7 @@ Refinement: Identify brain-qa phases impacted, changelog entry needed
 ```
 Discovery:  Check SKILLS-CATALOG for existing coverage; read skill-building trifecta
 Alignment:  Confirm trifecta scope (SKILL.md + instructions + prompt + synapses)
-Design:     Create files in order → add to skill-activation index → run brain-qa
+Design:     Create files in order → add to memory-activation index → run brain-qa
 Refinement: Verify synapse schema compliance, heir sync, catalog count update
 ```
 

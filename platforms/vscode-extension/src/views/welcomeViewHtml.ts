@@ -204,6 +204,9 @@ export function getWelcomeHtmlContent(
   // Resolve avatar using unified priority chain
   let avatarPath: string;
   let avatarSource: string = 'default';
+  // Spike 1A: SVG override tracking
+  let avatarUseSvg = false;
+  let avatarSvgPath: string | null = null;
   
   if (easterEgg) {
     // Easter eggs use legacy flat structure (bypass unified resolution)
@@ -214,8 +217,18 @@ export function getWelcomeHtmlContent(
     const avatarResult = resolveAvatar(avatarContext);
         avatarPath = getAvatarAssetRelativePath(avatarResult, 'png').replace(/\.png$/, '');
     avatarSource = avatarResult.source;
+    // Spike 1A: Check for SVG rocket-icon override
+    const svgPath = getAvatarAssetRelativePath(avatarResult, 'svg');
+    avatarUseSvg = svgPath.includes('rocket-icons');
+    if (avatarUseSvg) {
+      avatarSvgPath = svgPath.replace(/\.svg$/, '');
+    }
   }
   
+  // Spike 1A: Build SVG URI if available
+  const avatarSvgUri = avatarUseSvg && avatarSvgPath
+    ? getAssetUri(webview, extensionUri, `${avatarSvgPath}.svg`)
+    : null;
   const avatarWebpUri = getAssetUri(
     webview,
     extensionUri,
@@ -1085,6 +1098,125 @@ export function getWelcomeHtmlContent(
       .feature-link-btn:hover {
           background: var(--vscode-button-secondaryHoverBackground);
       }
+
+      /* ── Spike 1B: Tab Bar ── */
+      .tab-bar {
+          display: flex;
+          border-bottom: 1px solid var(--vscode-panel-border);
+          margin: 0 -16px;
+          padding: 0 16px;
+          gap: 0;
+      }
+      .tab-bar .tab {
+          flex: 1;
+          padding: 8px 4px;
+          background: none;
+          border: none;
+          border-bottom: 2px solid transparent;
+          color: var(--vscode-foreground);
+          opacity: 0.6;
+          cursor: pointer;
+          font-size: 11px;
+          font-weight: 500;
+          text-align: center;
+          transition: all 0.15s ease;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+      .tab-bar .tab:hover {
+          opacity: 0.85;
+          background: var(--vscode-list-hoverBackground);
+      }
+      .tab-bar .tab:focus-visible {
+          outline: 1px solid var(--vscode-focusBorder);
+          outline-offset: -1px;
+      }
+      .tab-bar .tab.active {
+          opacity: 1;
+          font-weight: 600;
+          border-bottom-color: var(--persona-accent, #6366f1);
+      }
+      .tab-panel { display: none; }
+      .tab-panel.active { display: block; }
+      .empty-state {
+          text-align: center;
+          padding: 32px 16px;
+          opacity: 0.7;
+      }
+      .empty-state-icon { font-size: 32px; margin-bottom: 8px; }
+      .empty-state-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+      .empty-state-desc { font-size: 12px; line-height: 1.4; }
+
+      /* ── Docs Tab: Persona Grid ── */
+      .persona-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          gap: 6px;
+          margin: 8px 0;
+      }
+      .persona-card {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 8px;
+          background: var(--vscode-editor-widget-background, var(--vscode-sideBar-background));
+          border: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 11px;
+          line-height: 1.3;
+          transition: background 0.15s;
+          border-left: 3px solid var(--persona-accent, #6366f1);
+      }
+      .persona-card:hover {
+          background: var(--vscode-list-hoverBackground);
+      }
+      .persona-card .persona-tag {
+          font-size: 10px;
+          opacity: 0.6;
+      }
+      .persona-card .persona-name {
+          font-weight: 500;
+      }
+      .docs-section { margin-bottom: 12px; }
+      .docs-section-title {
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+          margin: 12px 0 6px;
+          padding-bottom: 4px;
+          border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
+      }
+      .docs-cta {
+          text-align: center;
+          padding: 16px 12px;
+          margin: 12px 0;
+          background: var(--vscode-editor-widget-background);
+          border: 1px solid var(--persona-accent, #6366f1);
+          border-radius: 6px;
+      }
+      .docs-cta-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+      .docs-cta-desc { font-size: 11px; opacity: 0.7; margin-bottom: 8px; }
+
+      /* Dashboard card styling for Mission Command */
+      .dashboard-card {
+          background: var(--vscode-editor-background, #1e1e1e);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 10px 12px;
+          margin-bottom: 8px;
+      }
+      .dashboard-card-title {
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.7;
+          margin-bottom: 6px;
+      }
   </style>
 </head>
 <body>
@@ -1104,16 +1236,30 @@ export function getWelcomeHtmlContent(
       </div>
 
       <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills" tabindex="0" role="button">
-          <img src="${avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
+          <img src="${avatarSvgUri || avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
           ${easterEggBadge}
       </div>
 
       ${workspaceName ? `<div class="project-name" title="Current workspace">${escapeHtml(workspaceName)}</div>` : ""}
 
-      <div class="partnership-bar" data-cmd="workingWithAlex" title="Your trusted AI partner — Click to learn how we work together" tabindex="0" role="button">
+      <!-- Spike 1B: Tab Bar -->
+      <div class="tab-bar" role="tablist" aria-label="Command Center">
+          <button role="tab" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission Ctrl</button>
+          <button role="tab" class="tab" data-tab="agents" aria-selected="false" aria-controls="panel-agents" tabindex="-1">Agents</button>
+          <button role="tab" class="tab" data-tab="skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1">Skill Store</button>
+          <button role="tab" class="tab" data-tab="mind" aria-selected="false" aria-controls="panel-mind" tabindex="-1">Mind</button>
+          <button role="tab" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
+      </div>
+
+      <!-- Tab Panel: Mission Command -->
+      <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
+
+      <div class="partnership-bar" data-cmd="openChat" title="Your trusted AI partner — Click to start chatting" tabindex="0" role="button">
           <span class="partner-icon">🤝</span>
           <span>Your Trusted Partner for <strong>${bannerNoun}</strong></span>
       </div>
+
+      ${sessionHtml}
       
       ${getNudgesHtml(nudges)}
       
@@ -1154,9 +1300,6 @@ export function getWelcomeHtmlContent(
               </button>
               ${actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
               ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
-              ${actionButton('workingWithAlex', '🎓', 'How We Work', 'Learn how to collaborate effectively')}
-              ${actionButton('learnAlex', '📖', 'Learn Alex', 'Guides and training at learnalex.correax.com')}
-              ${actionButton('cognitiveLevels', '🧬', 'Cognitive Levels', 'What unlocks at each tier')}
               
               <div class="action-group-label">BUILD TOGETHER</div>
               ${actionButton('codeReview', '👀', 'Code Review', 'Review for correctness and growth')}
@@ -1203,14 +1346,92 @@ export function getWelcomeHtmlContent(
               ${actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings')}
               ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
               ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
-              ${actionButton('openDocs', '📚', 'Documentation')}
               ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
               ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
           </nav>
       
       ${getGoalsHtml(goals)}
-      
-      ${getFeaturesHtml()}
+
+      </div><!-- /panel-mission -->
+
+      <!-- Tab Panel: Agents (empty state) -->
+      <div class="tab-panel" id="panel-agents" role="tabpanel" aria-labelledby="tab-agents">
+          <div class="empty-state">
+              <div class="empty-state-icon">🤖</div>
+              <div class="empty-state-title">Agents</div>
+              <div class="empty-state-desc">Agent registry, state, and threads will appear here once the runtime contracts are defined.</div>
+          </div>
+      </div>
+
+      <!-- Tab Panel: Skill Store (empty state) -->
+      <div class="tab-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills">
+          <div class="empty-state">
+              <div class="empty-state-icon">📦</div>
+              <div class="empty-state-title">Skill Store</div>
+              <div class="empty-state-desc">Browse, search, and toggle skills. Coming after data contracts are finalized.</div>
+          </div>
+      </div>
+
+      <!-- Tab Panel: Mind (empty state) -->
+      <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
+          <div class="empty-state">
+              <div class="empty-state-icon">🧠</div>
+              <div class="empty-state-title">Mind</div>
+              <div class="empty-state-desc">Memory modalities, cognitive health, and honest uncertainty — the tab no other AI has. Coming in Wave 6.</div>
+          </div>
+      </div>
+
+      <!-- Tab Panel: Docs -->
+      <div class="tab-panel" id="panel-docs" role="tabpanel" aria-labelledby="tab-docs">
+
+          <div class="docs-section">
+              <div class="docs-section-title">Getting Started</div>
+              ${actionButton('setupEnvironment', '⚙️', 'Setup Guide', 'Configure VS Code for Alex')}
+              ${actionButton('workingWithAlex', '🎓', 'How We Work', 'Learn how to collaborate effectively')}
+              ${actionButton('cognitiveLevels', '🧬', 'Cognitive Levels', 'What unlocks at each tier')}
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Workshop Study Guides</div>
+              <div class="persona-grid">
+                  ${getPersonaGridHtml()}
+              </div>
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Self-Study & Exercises</div>
+              ${actionButton('learnAlexSelfStudy', '📝', 'Self-Study Path', 'Self-paced learning at your own speed')}
+              ${actionButton('learnAlexExercises', '🏋️', 'Exercises', 'Hands-on practice exercises')}
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Facilitator Materials</div>
+              ${actionButton('learnAlexSessionPlan', '📋', 'Session Plan', 'Workshop session planning guide')}
+              ${actionButton('learnAlexSlides', '📊', 'Slides', 'Presentation slides for workshops')}
+              ${actionButton('learnAlexDemoScripts', '🎬', 'Demo Scripts', 'Live demo walkthroughs')}
+              ${actionButton('learnAlexHandout', '📄', 'Handout', 'Printable workshop handout')}
+              ${actionButton('learnAlexPreRead', '📖', 'Pre-Read', 'Pre-workshop reading material')}
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Architecture & Ops</div>
+              ${actionButton('openBrainAnatomy', '🧠', 'Brain Anatomy', 'Interactive 3D brain visualization')}
+              ${actionButton('openDocs', '📁', 'Architecture Docs', 'Open local architecture documentation')}
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Partnership</div>
+              ${actionButton('workingWithAlex', '🤝', 'Working with Alex', 'Deep-dive into our partnership model')}
+          </div>
+
+          <div class="docs-cta">
+              <div class="docs-cta-title">📚 Learn Alex Online</div>
+              <div class="docs-cta-desc">Comprehensive guides, workshops, and training at the companion site.</div>
+              <button class="action-btn primary" data-cmd="learnAlex" tabindex="0" style="display: inline-flex;">Visit learnalex.correax.com</button>
+          </div>
+
+      </div>
+
   </div>
   
   <script nonce="${nonce}">
@@ -1223,6 +1444,72 @@ export function getWelcomeHtmlContent(
       function refresh() {
           vscode.postMessage({ command: 'refresh' });
       }
+
+      // ── Tab switching with state persistence + scroll restoration ──
+      const tabs = document.querySelectorAll('.tab-bar .tab');
+      const panels = document.querySelectorAll('.tab-panel');
+      const scrollPositions = {};
+
+      function switchTab(tabId, restoreScroll) {
+          // Save current panel's scroll position before switching
+          const currentActive = document.querySelector('.tab.active');
+          if (currentActive) {
+              const currentId = currentActive.getAttribute('data-tab');
+              scrollPositions[currentId] = document.documentElement.scrollTop || document.body.scrollTop;
+          }
+          tabs.forEach(t => {
+              const isActive = t.getAttribute('data-tab') === tabId;
+              t.classList.toggle('active', isActive);
+              t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+              t.setAttribute('tabindex', isActive ? '0' : '-1');
+          });
+          panels.forEach(p => {
+              p.classList.toggle('active', p.id === 'panel-' + tabId);
+          });
+          // Restore scroll position for the newly active panel
+          const savedScroll = restoreScroll ? (scrollPositions[tabId] || 0) : 0;
+          requestAnimationFrame(() => {
+              document.documentElement.scrollTop = savedScroll;
+              document.body.scrollTop = savedScroll;
+          });
+          // Persist to webview state and notify extension
+          const state = vscode.getState() || {};
+          state.activeTab = tabId;
+          state.scrollPositions = scrollPositions;
+          vscode.setState(state);
+          vscode.postMessage({ command: 'tabSwitch', tabId });
+      }
+
+      // Click handler for tabs
+      tabs.forEach(tab => {
+          tab.addEventListener('click', () => switchTab(tab.getAttribute('data-tab'), true));
+      });
+
+      // Keyboard: arrow keys between tabs, Enter/Space to activate
+      document.querySelector('.tab-bar')?.addEventListener('keydown', (e) => {
+          const focused = document.activeElement;
+          if (!focused || !focused.classList.contains('tab')) return;
+          const tabList = Array.from(tabs);
+          const idx = tabList.indexOf(focused);
+          let newIdx = idx;
+          if (e.key === 'ArrowRight') newIdx = (idx + 1) % tabList.length;
+          else if (e.key === 'ArrowLeft') newIdx = (idx - 1 + tabList.length) % tabList.length;
+          else if (e.key === 'Home') newIdx = 0;
+          else if (e.key === 'End') newIdx = tabList.length - 1;
+          else return;
+          e.preventDefault();
+          tabList[newIdx].focus();
+          switchTab(tabList[newIdx].getAttribute('data-tab'), true);
+      });
+
+      // Restore tab + scroll from persisted state
+      const savedState = vscode.getState();
+      if (savedState?.scrollPositions) {
+          Object.assign(scrollPositions, savedState.scrollPositions);
+      }
+      if (savedState?.activeTab) {
+          switchTab(savedState.activeTab, true);
+      }
       
       // Event delegation for all data-cmd clicks (CSP-compliant)
       document.addEventListener('click', function(e) {
@@ -1232,8 +1519,11 @@ export function getWelcomeHtmlContent(
               const command = el.getAttribute('data-cmd');
               const skill = el.getAttribute('data-skill');
               const skillName = el.getAttribute('data-skill-name');
+              const workshop = el.getAttribute('data-workshop');
               if (skill) {
                   cmd(command, { skill, skillName });
+              } else if (workshop) {
+                  cmd(command, { workshop });
               } else {
                   cmd(command);
               }
@@ -1254,6 +1544,58 @@ export function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
   return `${mins}:${secs.toString().padStart(2, "0")}`;
+}
+
+/**
+ * AlexLearn workshop persona data for the Docs tab persona grid.
+ * Each entry maps to learnalex.correax.com/workshop/{id}
+ */
+const WORKSHOP_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
+  { id: 'job-seekers', tag: 'Career', name: 'Job Seekers' },
+  { id: 'ai-researchers', tag: 'AI Research', name: 'AI Researchers' },
+  { id: 'consultants', tag: 'Consulting', name: 'Consultants' },
+  { id: 'content-creators', tag: 'Content', name: 'Content Creators' },
+  { id: 'creative-writers', tag: 'Creative', name: 'Creative Writers' },
+  { id: 'cx-leaders', tag: 'CX', name: 'CX Leaders' },
+  { id: 'data-analysts', tag: 'Data', name: 'Data Analysts' },
+  { id: 'designers', tag: 'Design', name: 'Designers' },
+  { id: 'engineers', tag: 'Engineering', name: 'Engineers' },
+  { id: 'entrepreneurs', tag: 'Startup', name: 'Entrepreneurs' },
+  { id: 'executives', tag: 'Leadership', name: 'Executives' },
+  { id: 'finance-professionals', tag: 'Finance', name: 'Finance Pros' },
+  { id: 'healthcare-professionals', tag: 'Healthcare', name: 'Healthcare Pros' },
+  { id: 'hr-people-ops', tag: 'HR', name: 'HR & People Ops' },
+  { id: 'journalists', tag: 'Journalism', name: 'Journalists' },
+  { id: 'knowledge-workers', tag: 'Business', name: 'Knowledge Workers' },
+  { id: 'lawyers', tag: 'Legal', name: 'Lawyers' },
+  { id: 'marketing-professionals', tag: 'Marketing', name: 'Marketing Pros' },
+  { id: 'nonprofit-leaders', tag: 'Nonprofit', name: 'Nonprofit Leaders' },
+  { id: 'podcasters', tag: 'Podcasting', name: 'Podcasters' },
+  { id: 'product-managers', tag: 'Product', name: 'Product Managers' },
+  { id: 'project-managers', tag: 'PM', name: 'Project Managers' },
+  { id: 'psychology-counselors', tag: 'Counseling', name: 'Counselors' },
+  { id: 'real-estate', tag: 'Real Estate', name: 'Real Estate Pros' },
+  { id: 'researchers-professors', tag: 'Academic', name: 'Researchers' },
+  { id: 'sales-professionals', tag: 'Sales', name: 'Sales Pros' },
+  { id: 'scientists', tag: 'Science', name: 'Scientists' },
+  { id: 'software-developers', tag: 'Software', name: 'Developers' },
+  { id: 'standup-comics', tag: 'Comedy', name: 'Standup Comics' },
+  { id: 'students', tag: 'Learning', name: 'Students' },
+  { id: 'teachers-educators', tag: 'Teaching', name: 'Teachers' },
+  { id: 'technical-writers', tag: 'Docs', name: 'Technical Writers' },
+  { id: 'visual-storytellers', tag: 'Data Viz', name: 'Visual Storytellers' },
+];
+
+/**
+ * Generate the persona grid HTML for the Docs tab.
+ */
+export function getPersonaGridHtml(): string {
+  return WORKSHOP_PERSONAS.map(p =>
+    `<div class="persona-card" data-cmd="learnAlexWorkshop" data-workshop="${escapeHtml(p.id)}" tabindex="0" role="link" title="${escapeHtml(p.name)} study guide">
+        <span class="persona-tag">${escapeHtml(p.tag)}</span>
+        <span class="persona-name">${escapeHtml(p.name)}</span>
+    </div>`
+  ).join('\n                  ');
 }
 
 /**

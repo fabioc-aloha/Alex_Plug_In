@@ -130,13 +130,13 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
 
 ```typescript
 const CATEGORIES = {
-  'cognitive': { emoji: '🧠', skills: ['cognitive-load', 'learning-psychology', 'appropriate-reliance', 'bootstrap-learning', 'meditation', 'meditation-facilitation', 'knowledge-synthesis', 'global-knowledge'] },
+  'cognitive': { emoji: '🧠', skills: ['cognitive-load', 'learning-psychology', 'appropriate-reliance', 'bootstrap-learning', 'meditation', 'meditation', 'knowledge-synthesis', 'global-knowledge'] },
   'engineering': { emoji: '🔧', skills: ['testing-strategies', 'refactoring-patterns', 'debugging-patterns', 'code-review', 'git-workflow', 'project-scaffolding', 'vscode-environment'] },
   'operations': { emoji: '🚨', skills: ['error-recovery-patterns', 'root-cause-analysis', 'incident-response', 'release-preflight'] },
   'security': { emoji: '🔐', skills: ['privacy-responsible-ai', 'microsoft-sfi'] },
-  'documentation': { emoji: '📝', skills: ['writing-publication', 'markdown-mermaid', 'lint-clean-markdown', 'ascii-art-alignment', 'llm-model-selection'] },
+  'documentation': { emoji: '📝', skills: ['academic-research', 'markdown-mermaid', 'lint-clean-markdown', 'ascii-art-alignment', 'llm-model-selection'] },
   'visual': { emoji: '🎨', skills: ['svg-graphics', 'image-handling'] },
-  'architecture': { emoji: '🏗️', skills: ['architecture-refinement', 'architecture-health', 'self-actualization', 'heir-curation'] },
+  'architecture': { emoji: '🏗️', skills: ['architecture-refinement', 'brain-qa', 'self-actualization', 'heir-curation'] },
   'vscode': { emoji: '💻', skills: ['vscode-extension-patterns', 'chat-participant-patterns'] },
   'm365': { emoji: '☁️', skills: ['m365-agent-debugging', 'teams-app-patterns'] },
   'user': { emoji: '👤', skills: [] },  // Dynamically populated
@@ -457,7 +457,7 @@ interface LearningProgress {
 ## Related Skills
 
 - `markdown-mermaid` — Diagram generation
-- `architecture-health` — Skill validation
+- `brain-qa` — Skill validation
 - `knowledge-synthesis` — Pattern extraction
 
 ---

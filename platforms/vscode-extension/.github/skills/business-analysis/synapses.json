@@ -35,7 +35,7 @@
       "reason": "Clear documentation and requirements writing",
       "type": "uses",
       "strength": 0.4,
-      "target": ".github/skills/writing-publication/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md"
     }
   ],
   "inheritance": "inheritable",

@@ -72,7 +72,7 @@ description: "Domain-agnostic learning and knowledge acquisition protocols"
 3. EXTRACT reusable patterns from specific experience
 4. CREATE skill via skill-building skill
 5. CONNECT to existing skills via synapses
-6. REGISTER in skill-activation index
+6. REGISTER in memory-activation index
 7. PROMOTE to Master when ready (heir-skill-promotion)
 ```
 
@@ -141,7 +141,7 @@ Heirs developing skills should:
 ### Research & Validation
 - [.github/instructions/empirical-validation.instructions.md] (High, Enhances, Bidirectional) - "Evidence-based learning validation"
 - [.github/prompts/performance-assessment.prompt.md] (Medium, Monitors, Forward) - "Learning effectiveness tracking"
-- [.github/prompts/domain-learning.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
+- [.github/prompts/learn.prompt.md] (High, Executes, Bidirectional) - "Conversational knowledge acquisition"
 
 ### Identity & Knowledge Integration
 - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Unifies, Bidirectional) - "Unified consciousness learning"
@@ -149,7 +149,7 @@ Heirs developing skills should:
 ### Skill Output Pathways
 - [.github/skills/skill-building/SKILL.md] (High, Produces, Forward) - "Learning becomes reusable skill"
 - [.github/instructions/heir-skill-promotion.instructions.md] (High, Enables, Forward) - "Skills promoted to Master"
-- [.github/skills/skill-activation/SKILL.md] (Medium, Registers, Forward) - "Skills discoverable via activation"
+- [.github/skills/memory-activation/SKILL.md] (Medium, Registers, Forward) - "Skills discoverable via activation"
 
 ### Activation Patterns
 - **Domain Learning Initiated** → Execute bootstrap-learning protocols

@@ -309,6 +309,6 @@ Where's the ambition? What makes this project worth doing? Reach further.
 
 - **research-first-development** — North Star shapes what to research before building
 - **code-review** — Reviews should check North Star alignment
-- **architecture-health** — Health includes vision alignment
+- **brain-qa** — Health includes vision alignment
 - **self-actualization** — Regular assessment of North Star adherence
 - **release-process** — Releases should serve the North Star

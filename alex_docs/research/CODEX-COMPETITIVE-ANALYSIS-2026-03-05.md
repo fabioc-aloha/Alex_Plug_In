@@ -4,7 +4,7 @@
 **Date**: March 5, 2026
 **Classification**: Strategic Research
 **Prompt**: OpenAI released Codex as a Windows app today. Evaluate feature overlap with Alex and assess feasibility of a standalone UI / VS Code fork.
-**Status**: Complete — living document, updated as new Codex surfaces are analyzed.
+**Status**: Strategic research — execution decisions in [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md)
 
 ---
 

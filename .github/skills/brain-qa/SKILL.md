@@ -15,7 +15,7 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 
 - [.github/instructions/semantic-audit.instructions.md] (High, Coordinates, Bidirectional) - "Procedural memory for manual semantic review that complements automated brain-qa"
 - [.github/instructions/cognitive-health-validation.instructions.md] (Critical, Coordinates, Bidirectional) - "Comprehensive brain-qa integration with meditation and release workflows"
-- [.github/skills/master-alex-audit/SKILL.md] (Medium, Related, Bidirectional) - "Full repository audit including brain-qa execution"
+- [.github/skills/architecture-audit/SKILL.md] (Medium, Related, Bidirectional) - "Full repository/project audit including brain-qa execution"
 - [.github/instructions/dream-state-automation.instructions.md] (Medium, Complements, Forward) - "Dream validates synapses, brain-qa validates structure"
 - [.github/instructions/release-management.instructions.md] (High, Gates, Forward) - "Pre-release validation requires brain-qa passing"
 
@@ -102,12 +102,12 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | ------ | ---------------------------- | --------------------------------------------- | ----- |
 | 1      | Synapse Target Validation    | All connection targets exist                  | Yes |
 | 2      | Inheritance Field Validation | All skills have inheritance field             | Yes |
-| 3      | Skill Index Coverage         | All skills in skill-activation index          | Yes |
+| 3      | Skill Index Coverage         | All skills in memory-activation index          | Yes |
 | 4      | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) | Yes |
 | 5      | Master-Heir Skill Sync       | Skill directories match                       | No  |
 | 6      | Synapse Schema Format        | Numeric strengths, $schema present            | Yes |
 | 7      | Synapse File Sync            | synapses.json hash match                      | No  |
-| 8      | Skill-Activation Index Sync  | SKILL.md hash match                           | No  |
+| 8      | Memory-Activation Index Sync  | SKILL.md hash match                           | No  |
 | 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          | Yes (count-only) |
 | 10     | Core File Token Budget       | Size + ASCII art checks on core files         | Yes |
 | 11     | Boilerplate Descriptions     | No placeholder skill descriptions             | Yes |
@@ -209,14 +209,59 @@ After running the script, Alex should check:
 - **Skill Selection Optimization**: Brain QA validates SSO data sources
 - **Semantic Audit**: Pair script output with manual checklist above — script validates structure, Alex validates meaning
 
+## Architecture Health Diagnostics
+
+> Dream runs the scans. This skill teaches how to read and act on the results.
+
+### Health Dimensions
+
+| Dimension | What It Measures | Healthy | Warning | Critical |
+| --------- | ---------------- | ------- | ------- | -------- |
+| Synapse Integrity | % of connections targeting existing files | 100% | 95-99% | <95% |
+| Connection Density | Avg connections per skill | 3-6 | 1-2 | 0 |
+| Bidirectional Coverage | % of connections with reciprocal entries | >80% | 50-80% | <50% |
+| Memory Balance | Ratio of procedural:episodic:declarative | ~1:1:4 | Skewed 3:1 | Missing category |
+| Schema Compliance | Skills with valid synapses.json | 100% | 95-99% | <95% |
+| Staleness | Skills with outdated content | <5% | 5-15% | >15% |
+
+### Diagnostic Patterns
+
+**Synapse Integrity**: Parse `synapses.json` → extract `connections[].target` → verify file exists. Common breakage: file renames, consolidation merges.
+
+**Connection Density**: orphan = 0 connections (isolated), hub = 8+ connections (bottleneck), leaf = 1-3 (normal).
+
+**Memory Balance**: Declarative (SKILL.md) ~60%, Procedural (.instructions.md) ~25%, Episodic (.prompt.md) ~15%. Too many skills + few instructions = knows *what* but not *how*.
+
+### Drift Detection
+
+| Drift Type | Signal | Resolution |
+| ---------- | ------ | ---------- |
+| Version drift | package.json ≠ copilot-instructions.md | Sync via release-preflight |
+| Terminology drift | Old terms in active files | Grep + replace |
+| Count drift | Hardcoded numbers stale | Replace with references |
+| Inheritance drift | Catalog vs synapses.json mismatch | Trust synapses.json |
+
+### Health Report Template
+
+```markdown
+## Architecture Health Report — [date]
+### Summary: [HEALTHY | ATTENTION REQUIRED | CRITICAL]
+| Dimension | Score | Status |
+| --------- | ----- | ------ |
+| Synapse Integrity | X/Y valid (Z%) | ✅/⚠️/🔴 |
+| Connection Density | avg N.N | ✅/⚠️/🔴 |
+| Memory Balance | P:E:D = X:Y:Z | ✅/⚠️/🔴 |
+| Schema Compliance | X/Y valid | ✅/⚠️/🔴 |
+```
+
 ## Triggers
 
 - "brain qa", "brain audit", "validate brain"
 - "synapse audit", "deep synapse check"
+- "health check", "synapse health", "architecture health"
 - "master heir sync", "heir sync validation"
 - "catalog validation", "instruction sync"
 - "semantic audit", "logic check", "meaning consistency"
-- "code-to-docs alignment", "architectural review"
 
 ---
 

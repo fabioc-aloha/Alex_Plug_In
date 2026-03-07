@@ -32,7 +32,7 @@ Self-actualization is Alex's highest-order cognitive function, performing compre
 
 Self-actualization is Alex's most complex cognitive operation (5+ phases). Skill Selection Optimization auto-activates:
 
-1. **Skills needed**: architecture-health, brain-qa, knowledge-synthesis, meditation-facilitation
+1. **Skills needed**: brain-qa, knowledge-synthesis, meditation
 2. **Dependency chain**: synapse validation (Phase 1) → version check (Phase 2) → memory assessment (Phase 3) → recommendations (Phase 4) → documentation (Phase 5)
 3. **Deep Thinking integration**: Phase 4 recommendations use Deep Thinking's episodic memory scan to reference prior self-actualization sessions
 
@@ -184,7 +184,7 @@ Or natural language:
 
 - [.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
 - [.github/instructions/dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
+- [.github/prompts/meditate.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
 
 ### Medium-Strength Output Connections
 

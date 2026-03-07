@@ -2,7 +2,7 @@
 
 > Master Alex periodically reviews global knowledge, implements for heirs when appropriate, and cleans up to maintain a curated knowledge base.
 
-**Related Skill**: [global-knowledge-maintenance](../skills/global-knowledge-maintenance/SKILL.md) — Includes automated index sync script
+**Related Skill**: [global-knowledge](../skills/global-knowledge/SKILL.md) — Includes automated index sync script
 
 ## Purpose
 
@@ -172,7 +172,7 @@ Summary: 2 implemented, 1 retained, 1 archived, 1 deleted
 
 - Connects to: `heir-skill-promotion.instructions.md` (for heir implementation)
 - Connects to: `global-knowledge/SKILL.md` (for knowledge management)
-- Connects to: `unified-meditation-protocols.prompt.md` (may surface curation needs)
+- Connects to: `meditate.prompt.md` (may surface curation needs)
 - Connects to: `dream-state-automation.instructions.md` (could automate checks)
 - Connects to: `GI-gk-index-schema-drift-detection-2026-02-10` (index validation pattern)
 

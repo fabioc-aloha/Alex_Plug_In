@@ -17,7 +17,7 @@
       "context": "All architecture documentation must be lint-clean"
     },
     {
-      "target": ".github/skills/writing-publication/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "supports",
       "strength": 0.7,
       "context": "Lint-clean is baseline for documentation excellence"

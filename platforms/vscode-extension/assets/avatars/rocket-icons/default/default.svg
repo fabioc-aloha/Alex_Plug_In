@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 6 116 116" width="128" height="128">
+
+    <defs>
+        <linearGradient id="rocketBodydefault_default" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+        <linearGradient id="flameGraddefault_default" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74"/>
+            <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+    </defs>
+<filter id="pop_default_default" x="-5%" y="-5%" width="110%" height="110%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded"/>
+    <feFlood flood-color="#0a0e1a" result="dark"/>
+    <feComposite in="dark" in2="expanded" operator="in" result="outline"/>
+    <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+</filter>
+<g filter="url(#pop_default_default)">
+
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Rocket body -->
+        <path d="M64,14 C64,14 48,28 48,52 L48,80 L54,84 L54,76 L74,76 L74,84 L80,80 L80,52 C80,28 64,14 64,14 Z" 
+              fill="url(#rocketBodydefault_default)" />
+        <!-- Left fin -->
+        <polygon points="48,68 34,88 48,80" fill="url(#rocketBodydefault_default)" />
+        <!-- Right fin -->
+        <polygon points="80,68 94,88 80,80" fill="url(#rocketBodydefault_default)" />
+        <!-- A cutout (negative space) -->
+        <path d="M64,26 L55,62 L58,62 L61,52 L67,52 L70,62 L73,62 Z M62.5,47 L64,36 L65.5,47 Z" 
+              fill="#ffffff" />
+        <!-- Exhaust flame -->
+        <polygon points="54,82 64,98 74,82" fill="url(#flameGraddefault_default)" />
+    </g>
+
+
+</g>
+</svg>

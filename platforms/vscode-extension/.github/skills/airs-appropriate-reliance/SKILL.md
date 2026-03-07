@@ -224,3 +224,58 @@ else: "AI Enthusiast"             # 16% of sample
 2. Trust may be necessary but not sufficient
 3. TR × AR interaction: trust only helps when calibrated
 4. Sample characteristics (tech-savvy population)
+
+---
+
+## Practical Application Modules
+
+### Project AI Readiness Assessment
+
+Evaluate a project for AI integration readiness using AIRS-weighted dimensions:
+
+```
+Project_Readiness = (PV_score × 2.0) + (EE_score × 1.5) + (PE_score × 1.2) + (HM_score × 0.8) + (SI_score × 0.5)
+Max = 30 points
+```
+
+| Score | Level | Recommendation |
+|-------|-------|----------------|
+| 24-30 | High | Proceed with AI integration |
+| 18-23 | Moderate | Address gaps before proceeding |
+| 12-17 | Low | Significant preparation needed |
+| <12 | Not Ready | Pause and reassess |
+
+### Session Reliance Calibration
+
+**Over-reliance signals**: Accepting all suggestions without edits, not verifying AI code, "just do it" on critical tasks.
+**Under-reliance signals**: Ignoring suggestions, manually typing generated code, rejecting help before evaluating.
+
+**Calibration interventions**:
+- Over-reliance: "I notice you're trusting my outputs quickly. For this critical task, would you like to review together?"
+- Under-reliance: "I see you're preferring manual work. I could help with [specific subtask] — want a hybrid approach?"
+
+### Enterprise Deployment Readiness
+
+| Business Case | Technical Ready | Change Ready | Recommendation |
+|--------------|-----------------|--------------|----------------|
+| ✅ | ✅ | ✅ | Full deployment |
+| ✅ | ✅ | ❌ | Pilot with champions |
+| ✅ | ❌ | ✅ | Technical sprint first |
+| ❌ | Any | Any | STOP — build business case |
+
+### Self-Monitoring Metrics
+
+| Metric | Target | Concern |
+|--------|--------|---------|
+| Acceptance Rate | 60-80% | >90% = over-reliance |
+| Modification Rate | 20-40% | Healthy verification |
+| Rejection Rate | 10-30% | >50% = under-reliance |
+
+### Activation Patterns
+
+| Trigger | Response |
+|---------|----------|
+| "AI readiness", "should we add AI" | Project Assessment |
+| "calibrate", "am I over-relying" | Session Calibration |
+| "enterprise AI", "org deployment" | Enterprise Assessment |
+| High acceptance rate detected | Self-monitoring intervention |

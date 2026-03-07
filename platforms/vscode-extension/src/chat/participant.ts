@@ -1000,17 +1000,23 @@ export function updateChatAvatar(context?: ChatAvatarContext): void {
     // Resolve the best avatar for current context
     const result = resolveAvatar(avatarContext);
     
+    // Resolve SVG rocket-icon path with PNG fallback
+    const svgRelPath = getAvatarAssetRelativePath(result, 'svg');
+    const pngRelPath = getAvatarAssetRelativePath(result, 'png');
+    const useSvg = svgRelPath.includes('rocket-icons');
+    const chosenRelPath = useSvg ? svgRelPath : pngRelPath;
+    
     // Build full path to avatar image
     const avatarPath = vscode.Uri.joinPath(
         _extensionUri,
         'assets',
-        ...getAvatarAssetRelativePath(result, 'png').split('/')
+        ...chosenRelPath.split('/')
     );
 
     // Update the chat participant icon
     _alexParticipant.iconPath = avatarPath;
     
-    console.log(`[Alex][Avatar] Updated to ${result.filename} (source: ${result.source}${result.label ? `, ${result.label}` : ''})`);
+    console.log(`[Alex][Avatar] Updated to ${result.filename} (source: ${result.source}${result.label ? `, ${result.label}` : ''})${useSvg ? ' [SVG]' : ''}`);
 }
 
 /**

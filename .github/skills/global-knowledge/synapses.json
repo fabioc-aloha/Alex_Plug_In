@@ -10,7 +10,7 @@
       "reason": "Synthesis outputs go to global KB"
     },
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "target": ".github/skills/meditation/SKILL.md",
       "type": "informs",
       "strength": 0.65,
       "reason": "Meditation creates global insights"
@@ -40,7 +40,7 @@
       "reason": "Curation protocol uses promotion patterns"
     },
     {
-      "target": ".github/prompts/unified-meditation-protocols.prompt.md",
+      "target": ".github/prompts/meditate.prompt.md",
       "type": "triggers",
       "strength": 0.8,
       "reason": "Auto-promotion during meditation sessions"

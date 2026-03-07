@@ -29,7 +29,7 @@
     {
       "id": "DEVOPS-003",
       "source": "azure-devops-automation",
-      "target": ".github/skills/airs-integration/SKILL.md",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
       "type": "deploys",
       "strength": 0.6,
       "description": "AIRS platform (airs.correax.com) deployed via DevOps pipelines",

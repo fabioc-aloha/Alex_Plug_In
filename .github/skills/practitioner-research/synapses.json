@@ -9,7 +9,7 @@
       "bidirectional": true
     },
     {
-      "target": ".github/skills/writing-publication/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "enables",
       "strength": 0.85,
       "reason": "Research methodology produces publication-ready documents"

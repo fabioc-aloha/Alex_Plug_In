@@ -1,7 +1,7 @@
 # Command Center Design Principles
 
 **Source**: Meditation consolidation (March 5, 2026)
-**Status**: Consolidated insights for implementation guidance, polished after second-opinion audit
+**Status**: Design reference — execution decisions in [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md)
 **Session**: 5-tab iterative design review with per-tab approval cycle
 
 **Brand context**: CorreaX is the company brand, Alex is the product-family brand, and Command Center is one Alex UI surface inside the VS Code extension. LearnAlex is the best current reference for website-level on-brand UI in this ecosystem and acts as the extension's companion learning surface.

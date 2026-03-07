@@ -1,20 +1,41 @@
 {
   "hotFiles": [
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md"
+    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
+    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
-    "alex_docs/research/mockups/icons/agents/alex-a.svg",
-    "alex_docs/research/mockups/icons/agents/alex-b.svg",
-    "alex_docs/research/mockups/icons/agents/alex-c.svg",
-    "alex_docs/research/mockups/icons/agents/azure-a.svg",
-    "alex_docs/research/mockups/icons/agents/azure-b.svg",
-    "alex_docs/research/mockups/icons/agents/azure-c.svg",
-    "alex_docs/research/mockups/icons/agents/azure-d.svg",
-    "alex_docs/research/mockups/icons/agents/azure-e.svg"
+    "github/ALEX-INTEGRATION.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/research/CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md",
+    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
+    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
+    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
+    "alex_docs/research/mockups/command-center-home.svg",
+    "alex_docs/research/mockups/command-center-more.svg",
+    "alex_docs/research/mockups/command-center-skills.svg",
+    "alex_docs/research/mockups/command-center-status.svg"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1772803863924
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.2.0.vsix",
+      "todoCount": 16,
+      "scannedAt": 1772919315362
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1772919315362
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1772919315362
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1772919315362
+    }
+  ],
+  "lastUpdated": 1772919315362
 }

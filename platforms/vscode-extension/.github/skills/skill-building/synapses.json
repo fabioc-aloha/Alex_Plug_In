@@ -29,7 +29,7 @@
       "context": "Skills created by heirs need sync management for promotion"
     },
     {
-      "target": ".github/skills/skill-activation/SKILL.md",
+      "target": ".github/skills/memory-activation/SKILL.md",
       "type": "procedural",
       "strength": "strong",
       "direction": "outgoing",

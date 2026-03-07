@@ -6,7 +6,7 @@
       "reason": "Academic writing standards and publication workflows",
       "type": "complements",
       "strength": 0.85,
-      "target": ".github/skills/writing-publication/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md"
     },
     {
       "reason": "Knowledge acquisition methodology for literature reviews",

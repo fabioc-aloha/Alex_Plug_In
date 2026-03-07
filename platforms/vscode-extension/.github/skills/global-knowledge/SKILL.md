@@ -178,8 +178,76 @@ When curating from multiple projects:
 
 ---
 
+## First-Time Setup
+
+If you don't have a Global Knowledge repository yet:
+
+```powershell
+cd C:\Development  # or your projects folder
+gh repo create My-Global-Knowledge --private --description "Alex Global Knowledge Base" --clone
+cd My-Global-Knowledge
+mkdir patterns, insights, skills
+
+# Create index.json and README, then:
+git add -A
+git commit -m "feat: initialize global knowledge structure"
+git push
+```
+
+**Repository Location**: GK repo should be a sibling folder to your project workspace. Configure via `globalKnowledgeRepo` in `.github/config/alex-settings.json`.
+
+## Repository Maintenance
+
+### Index Integrity Audit
+
+**Script**: `~/.alex/global-knowledge/scripts/sync-index.ps1`
+
+```powershell
+cd ~/.alex/global-knowledge
+.\scripts\sync-index.ps1      # Report only
+.\scripts\sync-index.ps1 -Fix # Auto-fix
+```
+
+Scans all `GK-*.md` and `GI-*.md` files, deduplicates entries, adds missing files to index, removes orphaned entries.
+
+### Curation Triage
+
+| Decision | Action | When |
+|----------|--------|------|
+| **Keep** | Leave in GK | Still accumulating, not ready for integration |
+| **Promote to Master** | Create skill in Master Alex | Core capability for all projects |
+| **Document as Insight** | Convert to GI-* with archival note | One-time contribution, history-worthy |
+| **Archive** | Move to `scripts/archive/` | Outdated but worth keeping |
+| **Delete** | Remove entirely | No longer relevant, superseded |
+
+### Count Synchronization
+
+After curation, verify counts match between `copilot-instructions.md` and disk:
+
+```powershell
+$patterns = (Get-ChildItem patterns\GK-*.md).Count
+$insights = (Get-ChildItem insights\GI-*.md).Count
+```
+
+### Sync During Dream
+
+Automated sync during dream/meditation cycles: check for uncommitted changes, pull latest, regenerate `KNOWLEDGE-INDEX.md`, report sync status.
+
+### Skill Pull-Sync (For Heirs)
+
+Discover and pull new skills from GK via `skills/skill-registry.json`. Commands: `/checkskills` (discover), `/pullskill <id>` (pull on demand).
+
+### Quality Gates
+
+✅ `sync-index.ps1` reports 0 orphaned, 0 unindexed
+✅ Heir contributions documented as insights (if any)
+✅ Counts in copilot-instructions.md match disk
+✅ `git status` clean (or changes committed)
+
+---
+
 ## Synapses
 
 **Synapse**: [heir-skill-promotion.instructions.md](../../instructions/heir-skill-promotion.instructions.md) (0.9, procedural, bidirectional) — "How skills move from heirs to Master"
 **Synapse**: [global-knowledge-curation.instructions.md](../../instructions/global-knowledge-curation.instructions.md) (0.85, procedural, bidirectional) — "Periodic cleanup and implementation"
-**Synapse**: [unified-meditation-protocols.prompt.md](../../prompts/unified-meditation-protocols.prompt.md) (0.8, episodic, forward) — "Auto-promotion during meditation"
+**Synapse**: [meditate.prompt.md](../../prompts/meditate.prompt.md) (0.8, episodic, forward) — "Knowledge promotion during meditation"

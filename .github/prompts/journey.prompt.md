@@ -105,7 +105,7 @@ Phase 4: Security
 **Goal**: Documentation that developers actually read.
 ```
 Phase 1: Foundations
-  - doc-hygiene → Anti-drift, living documents
+  - documentation-quality-assurance → Anti-drift, living documents
   - markdown-mermaid → Diagrams that explain
   
 Phase 2: Technical Depth
@@ -113,7 +113,7 @@ Phase 2: Technical Depth
   - documentation-quality-assurance → Audit, preflight, quality
   
 Phase 3: Publication
-  - writing-publication → Style, voice, audience
+  - academic-research → Style, voice, audience
   - md-to-word → Professional document export
 ```
 
@@ -133,7 +133,7 @@ Phase 3: Analysis
   - knowledge-synthesis → Cross-domain pattern extraction
   
 Phase 4: Publication
-  - academic-paper-drafting → Structure, argumentation, peer review
+  - academic-research → Structure, argumentation, peer review
 ```
 
 ### ai-engineer

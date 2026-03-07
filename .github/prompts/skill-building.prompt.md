@@ -23,7 +23,7 @@ Before creating a skill, confirm:
 3. **Create SKILL.md**: Domain knowledge with tables, thresholds, examples
 4. **Add synapses.json**: 2-5 connections to related skills
 5. **Assess trifecta need**: Does it need an instruction and/or prompt?
-6. **Register**: Add to skill-activation index
+6. **Register**: Add to memory-activation index
 
 ## Start
 

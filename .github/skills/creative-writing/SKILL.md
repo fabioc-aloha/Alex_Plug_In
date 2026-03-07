@@ -466,7 +466,7 @@ Present tense. Active voice. Brief.
 
 ### High-Strength Connections
 
-- [writing-publication] (High, Extends, Bidirectional) — "Publishing creative work"
+- [academic-research] (High, Extends, Bidirectional) — "Publishing creative writing"
 - [academic-research] (Medium, Complements, Bidirectional) — "Research for historical fiction"
 
 ### Medium-Strength Connections
@@ -476,5 +476,5 @@ Present tense. Active voice. Brief.
 
 ### Supporting Connections
 
-- [meditation-facilitation] (Low, Supports, Forward) — "Creative reflection"
+- [meditation] (Low, Supports, Forward) — "Creative reflection"
 - [appropriate-reliance] (Low, Applies, Forward) — "Balancing AI assistance with creative voice"

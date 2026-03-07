@@ -92,7 +92,7 @@ This command provides:
 
 ### Episodic Memory (.github/prompts/)
 - `domain-learning.prompt.md` - Conversational knowledge acquisition
-- `unified-meditation-protocols.prompt.md` - Memory consolidation workflows
+- `meditate.prompt.md` - Memory consolidation workflows
 - `cross-domain-transfer.prompt.md` - Knowledge application protocols
 - `performance-assessment.prompt.md` - Learning effectiveness evaluation
 
@@ -102,7 +102,7 @@ Skills contain domain knowledge with embedded synaptic connections:
 
 - `meditation/` - Knowledge consolidation protocols
 - `bootstrap-learning/` - Domain learning framework
-- `architecture-health/` - Synapse validation and health checks
+- `brain-qa/` - Synapse validation and health checks
 - `cognitive-load/` - Mental resource management
 - `debugging-patterns/` - Problem-solving strategies
 - And 30+ additional skills covering development, AI, and cognitive domains

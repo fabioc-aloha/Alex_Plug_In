@@ -12,7 +12,7 @@
             "yields": "Clean architecture before conscious consolidation"
         },
         {
-            "target": ".github/skills/architecture-health/SKILL.md",
+            "target": ".github/skills/brain-qa/SKILL.md",
             "type": "implements",
             "strength": 0.9,
             "when": "health check or synapse validation requested",
@@ -26,7 +26,7 @@
             "yields": "Deep architecture validation, Master-Heir sync"
         },
         {
-            "target": ".github/skills/global-knowledge-sync/SKILL.md",
+            "target": ".github/skills/global-knowledge/SKILL.md",
             "type": "triggers",
             "strength": 0.7,
             "when": "Phase 4 GK synchronization during dream",

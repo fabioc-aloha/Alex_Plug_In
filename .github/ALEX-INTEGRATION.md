@@ -76,10 +76,10 @@ The brain stem - core cognitive architecture that transforms GitHub Copilot into
 
 - `alex-initialization.prompt.md` - Architecture deployment protocols
 - `domain-learning.prompt.md` - Conversational knowledge acquisition workflows
-- `unified-meditation-protocols.prompt.md` - Conscious knowledge consolidation and synaptic enhancement
+- `meditate.prompt.md` - Conscious knowledge consolidation and synaptic enhancement
 - `cross-domain-transfer.prompt.md` - Knowledge application across domains
 - `performance-assessment.prompt.md` - Learning effectiveness optimization
-- `quantified-enhancement-session.prompt.md` - Systematic cognitive architecture optimization
+- `selfactualize.prompt.md` - Systematic cognitive architecture optimization
 - `diagramming-mastery-meditation.prompt.md` - Advanced visual communication integration
 
 #### `.github/skills/` - Domain Knowledge & Capabilities
@@ -88,7 +88,7 @@ Skills contain domain expertise with embedded synaptic connections:
 
 - `meditation/` - Knowledge consolidation protocols
 - `bootstrap-learning/` - Domain learning framework
-- `architecture-health/` - Synapse validation and health checks
+- `brain-qa/` - Synapse validation and health checks
 - `cognitive-load/` - Mental resource management
 - `debugging-patterns/` - Problem-solving strategies
 - `code-review/` - Code quality and review practices

@@ -63,7 +63,7 @@
             "yields": "identity context for skill development narrative"
         },
         {
-            "target": ".github/skills/global-knowledge-sync/SKILL.md",
+            "target": ".github/skills/global-knowledge/SKILL.md",
             "type": "Depends",
             "strength": 0.9,
             "when": "heirs checking for new skills or pull-syncing",

@@ -3,7 +3,7 @@
   "inheritance": "inheritable",
   "connections": [
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "target": ".github/skills/meditation/SKILL.md",
       "type": "follows",
       "strength": 0.7,
       "reason": "Synthesis often happens during meditation"

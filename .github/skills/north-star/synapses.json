@@ -36,7 +36,7 @@
             "context": "Self-assessment includes North Star adherence review"
         },
         {
-            "target": ".github/skills/architecture-health/SKILL.md",
+            "target": ".github/skills/brain-qa/SKILL.md",
             "strength": 0.75,
             "relationship": "complements",
             "context": "Architecture health includes vision alignment metrics"
@@ -68,7 +68,7 @@
     ],
     "yields": [
         ".github/skills/research-first-development/SKILL.md",
-        ".github/skills/architecture-health/SKILL.md",
+        ".github/skills/brain-qa/SKILL.md",
         ".github/skills/scope-management/SKILL.md"
     ],
     "when": {

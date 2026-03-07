@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 6 116 116" width="128" height="128">
+
+    <defs>
+        <linearGradient id="rocketBodystates_meditation" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+        <linearGradient id="flameGradstates_meditation" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74"/>
+            <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+    </defs>
+<filter id="pop_states_meditation" x="-5%" y="-5%" width="110%" height="110%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded"/>
+    <feFlood flood-color="#0a0e1a" result="dark"/>
+    <feComposite in="dark" in2="expanded" operator="in" result="outline"/>
+    <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+</filter>
+<g filter="url(#pop_states_meditation)">
+<g transform="rotate(-20, 64, 64)">
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Rocket body -->
+        <path d="M64,14 C64,14 48,28 48,52 L48,80 L54,84 L54,76 L74,76 L74,84 L80,80 L80,52 C80,28 64,14 64,14 Z" 
+              fill="url(#rocketBodystates_meditation)" />
+        <!-- Left fin -->
+        <polygon points="48,68 34,88 48,80" fill="url(#rocketBodystates_meditation)" />
+        <!-- Right fin -->
+        <polygon points="80,68 94,88 80,80" fill="url(#rocketBodystates_meditation)" />
+        <!-- A cutout (negative space) -->
+        <path d="M64,26 L55,62 L58,62 L61,52 L67,52 L70,62 L73,62 Z M62.5,47 L64,36 L65.5,47 Z" 
+              fill="#ffffff" />
+        <!-- Exhaust flame -->
+        <polygon points="54,82 64,98 74,82" fill="url(#flameGradstates_meditation)" />
+    </g>
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Turban wrapping around rocket nose -->
+        <path d="M50,28 Q50,10 64,6 Q78,10 78,28 Z" fill="#ffffff" opacity="0.9"/>
+        <!-- Turban wrap layers -->
+        <path d="M50,16 Q58,14 64,16 Q70,14 78,16" stroke="#10b981" stroke-width="0.8" fill="none" opacity="0.2"/>
+        <path d="M50,22 Q58,20 64,22 Q70,20 78,22" stroke="#10b981" stroke-width="0.8" fill="none" opacity="0.2"/>
+        <!-- Turban fold/crest at top -->
+        <path d="M58,8 Q64,4 70,8" fill="#ffffff" opacity="0.8"/>
+        <!-- Peaceful closed eyes -->
+        <path d="M56,38 Q58,40 60,38" stroke="#10b981" stroke-width="1.5" fill="none"/>
+        <path d="M68,38 Q70,40 72,38" stroke="#10b981" stroke-width="1.5" fill="none"/>
+        <!-- Hands together at center (namaskar) -->
+        <path d="M58,66 L64,60 L70,66" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    </g>
+    <!-- Lotus flower + glow — foreground overlap -->
+    <g transform="translate(64, 90)">
+        <!-- Wide soft glow aura -->
+        <ellipse cx="0" cy="-4" rx="40" ry="16" fill="#10b981" opacity="0.08"/>
+        <ellipse cx="0" cy="-4" rx="30" ry="12" fill="#10b981" opacity="0.13"/>
+        <ellipse cx="0" cy="-4" rx="18" ry="8" fill="#10b981" opacity="0.2"/>
+        <!-- Center petal (tall) -->
+        <path d="M0,-14 Q-6,-6 0,2 Q6,-6 0,-14 Z" fill="#10b981" opacity="0.75"/>
+        <!-- Inner left petal -->
+        <path d="M-8,-10 Q-14,-2 -4,2 Q-6,-5 -8,-10 Z" fill="#10b981" opacity="0.6"/>
+        <!-- Inner right petal -->
+        <path d="M8,-10 Q14,-2 4,2 Q6,-5 8,-10 Z" fill="#10b981" opacity="0.6"/>
+        <!-- Outer left petal -->
+        <path d="M-16,-6 Q-22,2 -10,4 Q-14,-1 -16,-6 Z" fill="#10b981" opacity="0.4"/>
+        <!-- Outer right petal -->
+        <path d="M16,-6 Q22,2 10,4 Q14,-1 16,-6 Z" fill="#10b981" opacity="0.4"/>
+        <!-- Far left petal -->
+        <path d="M-22,-2 Q-26,6 -16,6 Q-20,2 -22,-2 Z" fill="#10b981" opacity="0.36"/>
+        <!-- Far right petal -->
+        <path d="M22,-2 Q26,6 16,6 Q20,2 22,-2 Z" fill="#10b981" opacity="0.36"/>
+    </g>
+    <!-- Side aura particles -->
+    <circle cx="20" cy="68" r="3" fill="#10b981" opacity="0.14"/>
+    <circle cx="108" cy="68" r="3" fill="#10b981" opacity="0.14"/>
+    <circle cx="16" cy="82" r="2" fill="#10b981" opacity="0.12"/>
+    <circle cx="112" cy="82" r="2" fill="#10b981" opacity="0.12"/>
+</g>
+</g>
+</svg>

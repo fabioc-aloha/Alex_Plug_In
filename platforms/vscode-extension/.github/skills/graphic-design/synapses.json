@@ -45,7 +45,7 @@
       "reason": "Document visual design and layout",
       "type": "supports",
       "strength": 0.4,
-      "target": ".github/skills/writing-publication/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md"
     },
     {
       "reason": "AI-generated illustrations, model selection, and image format handling",

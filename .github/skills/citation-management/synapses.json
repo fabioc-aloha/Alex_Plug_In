@@ -20,7 +20,7 @@
     {
       "id": "CITE-002",
       "source": "citation-management",
-      "target": ".github/skills/academic-paper-drafting/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "required-by",
       "strength": 0.95,
       "description": "Academic papers require impeccable citation formatting",

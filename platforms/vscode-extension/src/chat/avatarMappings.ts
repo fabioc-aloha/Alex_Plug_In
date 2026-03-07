@@ -262,6 +262,124 @@ export const COGNITIVE_STATE_MAP: Record<string, string> = {
 };
 
 /**
+ * Rocket-icon SVG overrides — maps cognitive state keys to SVG paths.
+ * All 9 states + code-review alias.
+ */
+export const ROCKET_STATE_SVGS: Record<string, string> = {
+    'building':    'rocket-icons/states/building',
+    'debugging':   'rocket-icons/states/debugging',
+    'discovery':   'rocket-icons/states/discovery',
+    'dream':       'rocket-icons/states/dream',
+    'learning':    'rocket-icons/states/learning',
+    'meditation':  'rocket-icons/states/meditation',
+    'planning':    'rocket-icons/states/planning',
+    'reviewing':   'rocket-icons/states/reviewing',
+    'code-review': 'rocket-icons/states/reviewing',
+    'teaching':    'rocket-icons/states/teaching',
+};
+
+/**
+ * Rocket-icon SVG overrides — maps agent names (lowercase) to SVG paths.
+ */
+export const ROCKET_AGENT_SVGS: Record<string, string> = {
+    'alex':          'rocket-icons/agents/alex',
+    'azure':         'rocket-icons/agents/azure',
+    'builder':       'rocket-icons/agents/builder',
+    'documentarian': 'rocket-icons/agents/documentarian',
+    'm365':          'rocket-icons/agents/m365',
+    'researcher':    'rocket-icons/agents/researcher',
+    'validator':     'rocket-icons/agents/validator',
+};
+
+/**
+ * Rocket-icon SVG overrides — maps persona IDs to category SVG paths.
+ * Many-to-one: multiple personas share a category icon.
+ */
+export const ROCKET_PERSONA_SVGS: Record<string, string> = {
+    // Engineering
+    'developer':           'rocket-icons/personas/engineering',
+    'fullstack-developer': 'rocket-icons/personas/engineering',
+    'mobile-developer':    'rocket-icons/personas/engineering',
+    'game-developer':      'rocket-icons/personas/engineering',
+    'code-reviewer':       'rocket-icons/personas/engineering',
+    'debugger':            'rocket-icons/personas/engineering',
+    'devops':              'rocket-icons/personas/engineering',
+    'sre':                 'rocket-icons/personas/engineering',
+    'hacker':              'rocket-icons/personas/engineering',
+    'coffee-coder':        'rocket-icons/personas/engineering',
+    'stack-overflow':      'rocket-icons/personas/engineering',
+    // Software & Architecture
+    'architect':           'rocket-icons/personas/software',
+    'solutions-architect': 'rocket-icons/personas/software',
+    'cloud-architect':     'rocket-icons/personas/software',
+    'microsoft-developer': 'rocket-icons/personas/software',
+    'aws-developer':       'rocket-icons/personas/software',
+    'openai-developer':    'rocket-icons/personas/software',
+    'oracle-developer':    'rocket-icons/personas/software',
+    'power-user':          'rocket-icons/personas/software',
+    // Data
+    'data-engineer':       'rocket-icons/personas/data',
+    'bi-analyst':          'rocket-icons/personas/data',
+    'dba':                 'rocket-icons/personas/data',
+    'database-developer':  'rocket-icons/personas/data',
+    'fabric-developer':    'rocket-icons/personas/data',
+    // Science & AI
+    'ai-engineer':         'rocket-icons/personas/science',
+    'ml-ops':              'rocket-icons/personas/science',
+    'cognitive-scientist': 'rocket-icons/personas/science',
+    'researcher':          'rocket-icons/personas/science',
+    'mad-scientist':       'rocket-icons/personas/science',
+    // Education
+    'academic':            'rocket-icons/personas/education',
+    'student':             'rocket-icons/personas/education',
+    'bootcamp-grad':       'rocket-icons/personas/education',
+    'teaching-assistant':  'rocket-icons/personas/education',
+    'presenter':           'rocket-icons/personas/education',
+    // Documentation & Writing
+    'technical-writer':    'rocket-icons/personas/documentation',
+    'documentarian':       'rocket-icons/personas/documentation',
+    'content-creator':     'rocket-icons/personas/documentation',
+    // Business
+    'business-analyst':    'rocket-icons/personas/business',
+    'consultant':          'rocket-icons/personas/business',
+    'startup-founder':     'rocket-icons/personas/business',
+    // People & Management
+    'project-manager':     'rocket-icons/personas/people',
+    'tech-lead':           'rocket-icons/personas/people',
+    'gcx-team':            'rocket-icons/personas/people',
+    'knowledge-worker':    'rocket-icons/personas/people',
+    'questionnaire-developer': 'rocket-icons/personas/people',
+    'rubber-duck':         'rocket-icons/personas/people',
+    // Product
+    'product-manager':     'rocket-icons/personas/product',
+    // Marketing
+    'marketer':            'rocket-icons/personas/marketing',
+    'copywriter':          'rocket-icons/personas/marketing',
+    // Design
+    'ux-researcher':       'rocket-icons/personas/design',
+    'cx-researcher':       'rocket-icons/personas/design',
+    // Creative
+    'fiction-writer':      'rocket-icons/personas/creative',
+    'book-author':         'rocket-icons/personas/creative',
+    'grant-writer':        'rocket-icons/personas/creative',
+    'night-owl':           'rocket-icons/personas/creative',
+    // Career
+    'job-seeker':          'rocket-icons/personas/career',
+    'oss-contributor':     'rocket-icons/personas/career',
+    'imposter':            'rocket-icons/personas/career',
+    // Legal & Security
+    'security':            'rocket-icons/personas/legal',
+    'auditor':             'rocket-icons/personas/legal',
+    'red-team':            'rocket-icons/personas/legal',
+    'qa-engineer':         'rocket-icons/personas/legal',
+    // Specials → default
+    'fabio-special':       'rocket-icons/default/default',
+};
+
+/** Rocket-icon SVG fallback for default/unmatched sources. */
+export const ROCKET_DEFAULT_SVG = 'rocket-icons/default/default';
+
+/**
  * Keywords that trigger cognitive state detection.
  * Maps user activity patterns to cognitive states.
  */
@@ -591,10 +709,28 @@ export function resolveAvatar(context: AvatarContext): AvatarResult {
 /**
  * Get asset path relative to the extension assets directory.
  * @param result - Avatar result from resolveAvatar
- * @param extension - File extension without leading dot
+ * @param extension - File extension without leading dot (e.g. 'png', 'svg')
  * @returns Relative path such as avatars/personas/PERSONA-DEVELOPER.png or logo.png
  */
 export function getAvatarAssetRelativePath(result: AvatarResult, extension: string): string {
+    // Rocket-icon SVG resolution: check each source type
+    if (extension === 'svg' && result.label) {
+    // Agent label includes " Agent" suffix — strip before lookup
+        const key = result.label.toLowerCase().replace(/ agent$/i, '').trim();
+        let svgPath: string | undefined;
+        if (result.source === 'state' || result.source === 'skill-state') {
+            svgPath = ROCKET_STATE_SVGS[key];
+        } else if (result.source === 'agent') {
+            svgPath = ROCKET_AGENT_SVGS[key];
+        } else if (result.source === 'persona' || result.source === 'skill-persona') {
+            svgPath = ROCKET_PERSONA_SVGS[key];
+        }
+        if (svgPath) {
+            return `avatars/${svgPath}.svg`;
+        }
+        // Fallback: default rocket icon for any unmatched SVG request
+        return `avatars/${ROCKET_DEFAULT_SVG}.svg`;
+    }
     const assetBase = result.isRootAsset ? result.path : `avatars/${result.path}`;
     return `${assetBase}.${extension}`;
 }

@@ -19,7 +19,7 @@
             "note": "Effective delegation requires well-crafted prompts"
         },
         {
-            "target": ".github/skills/skill-activation/SKILL.md",
+            "target": ".github/skills/memory-activation/SKILL.md",
             "type": "supports",
             "strength": 0.8,
             "note": "SSO is a form of self-orchestration"

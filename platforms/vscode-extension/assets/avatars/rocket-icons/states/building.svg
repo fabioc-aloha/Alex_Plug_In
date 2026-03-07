@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 6 116 116" width="128" height="128">
+
+    <defs>
+        <linearGradient id="rocketBodystates_building" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+        <linearGradient id="flameGradstates_building" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74"/>
+            <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+    </defs>
+<filter id="pop_states_building" x="-5%" y="-5%" width="110%" height="110%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded"/>
+    <feFlood flood-color="#0a0e1a" result="dark"/>
+    <feComposite in="dark" in2="expanded" operator="in" result="outline"/>
+    <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+</filter>
+<g filter="url(#pop_states_building)">
+<g transform="rotate(10, 64, 64)">
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Rocket body -->
+        <path d="M64,14 C64,14 48,28 48,52 L48,80 L54,84 L54,76 L74,76 L74,84 L80,80 L80,52 C80,28 64,14 64,14 Z" 
+              fill="url(#rocketBodystates_building)" />
+        <!-- Left fin -->
+        <polygon points="48,68 34,88 48,80" fill="url(#rocketBodystates_building)" />
+        <!-- Right fin -->
+        <polygon points="80,68 94,88 80,80" fill="url(#rocketBodystates_building)" />
+        <!-- A cutout (negative space) -->
+        <path d="M64,26 L55,62 L58,62 L61,52 L67,52 L70,62 L73,62 Z M62.5,47 L64,36 L65.5,47 Z" 
+              fill="#ffffff" />
+        <!-- Exhaust flame -->
+        <polygon points="54,82 64,98 74,82" fill="url(#flameGradstates_building)" />
+    </g>
+
+    <!-- Mortar trowel — foreground overlap -->
+    <g transform="translate(24, 22) rotate(-30)">
+        <!-- Blade — flat triangular -->
+        <path d="M0,0 L-12,28 L12,28 Z" fill="#64748b" opacity="0.9"/>
+        <!-- Blade highlight -->
+        <path d="M0,4 L-6,22 L0,20 Z" fill="#ffffff" opacity="0.15"/>
+        <!-- Neck -->
+        <rect x="-2" y="-6" width="4" height="8" rx="1" fill="#64748b" opacity="0.75"/>
+        <!-- Handle -->
+        <rect x="-3.5" y="-20" width="7" height="16" rx="2.5" fill="#6366f1" opacity="0.95"/>
+        <!-- Mortar smear on blade -->
+        <ellipse cx="2" cy="18" rx="5" ry="3" fill="#ffffff" opacity="0.25"/>
+    </g>
+    <!-- Brick stack bottom-right — larger -->
+    <g transform="translate(68, 72)">
+        <rect x="0" y="0" width="16" height="10" rx="1" fill="#f97316" opacity="0.8"/>
+        <rect x="18" y="0" width="16" height="10" rx="1" fill="#f97316" opacity="0.7"/>
+        <rect x="36" y="0" width="10" height="10" rx="1" fill="#f97316" opacity="0.6"/>
+        <rect x="8" y="-10" width="16" height="10" rx="1" fill="#f97316" opacity="0.85"/>
+        <rect x="26" y="-10" width="16" height="10" rx="1" fill="#f97316" opacity="0.75"/>
+        <rect x="16" y="-20" width="16" height="10" rx="1" fill="#f97316" opacity="0.8"/>
+    </g>
+</g>
+</g>
+</svg>

@@ -18,7 +18,7 @@ description: "Automated neural maintenance and dream state processing protocols"
 - [.github/instructions/meditation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream validates synapses during meditation Phase 5"
 - [.github/instructions/cognitive-health-validation.instructions.md] (High, Complements, Bidirectional) - "Dream validates synapses, brain-qa validates structure and sync"
 - [.github/instructions/embedded-synapse.instructions.md] (High, Implements, Bidirectional) - "Embedded synapse schema this automation validates"
-- [.github/skills/architecture-health/SKILL.md] (High, Implements, Forward) - "Architecture health diagnostics dream enables"
+- [.github/skills/brain-qa/SKILL.md] (High, Implements, Forward) - "Architecture health diagnostics dream enables"
 - [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture neural maintenance"
 
 ## 🌙 **Dream State Cognitive Function**
@@ -89,7 +89,7 @@ For broken connections, checks consolidation mappings:
 - Tracks repair history
 
 Example consolidation mappings:
-- `enhanced-meditation-protocol.prompt.md` → `unified-meditation-protocols.prompt.md`
+- `enhanced-meditation-protocol.prompt.md` → `meditate.prompt.md`
 - `self-identity-integration.prompt.md` → `alex-identity-integration.instructions.md`
 - `dream-protocol-integration.prompt.md` → `dream-state-automation.instructions.md`
 
@@ -152,7 +152,7 @@ Each dream execution generates a comprehensive report including:
 ## Repaired Synapses
 - Source: alex-core.instructions.md:45
   - Old Target: enhanced-meditation-protocol.prompt.md
-  - New Target: unified-meditation-protocols.prompt.md (Auto-repaired)
+  - New Target: meditate.prompt.md (Auto-repaired)
 
 ## Broken Synapses
 _None detected._

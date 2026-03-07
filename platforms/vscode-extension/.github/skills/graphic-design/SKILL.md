@@ -464,5 +464,5 @@ Every illustration should serve one of these purposes:
 
 ### Supporting Connections
 
-- [writing-publication] (Low, Supports, Forward) — "Document visual design"
-- [meditation-facilitation] (Low, Uses, Forward) — "Reflective design iteration"
+- [academic-research] (Low, Supports, Forward) — "Document visual design"
+- [meditation] (Low, Uses, Forward) — "Reflective design iteration"

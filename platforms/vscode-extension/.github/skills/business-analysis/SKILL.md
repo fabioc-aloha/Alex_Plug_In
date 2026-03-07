@@ -285,4 +285,4 @@ Low Value  │ Fill-ins   │ Avoid           │
 ### Supporting Connections
 
 - [architecture-refinement] (Low, Informs, Forward) — "Requirements shape architecture"
-- [writing-publication] (Low, Uses, Forward) — "Clear documentation writing"
+- [academic-research] (Low, Uses, Forward) — "Clear documentation writing"

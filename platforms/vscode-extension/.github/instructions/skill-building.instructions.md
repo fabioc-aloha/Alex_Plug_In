@@ -31,7 +31,7 @@ If any check fails, rewrite the section before continuing.
 
 ## Phase 2: Register the Skill
 
-5. **Add to skill-activation index**: `.github/skills/skill-activation/SKILL.md` — add action keywords
+5. **Add to memory-activation index**: `.github/skills/memory-activation/SKILL.md` — add action keywords
 6. **Update synapses.json** in connected skills (bidirectional links)
 
 ## Phase 3: Assess Trifecta Need
@@ -76,7 +76,7 @@ If any check fails, rewrite the section before continuing.
 13. **Create file**: `.github/prompts/{name}.prompt.md`
 14. **Write guided conversation flow** with user interaction points
 15. **Register as slash command** if user-invocable
-16. **Add to prompt-activation index** in `.github/skills/prompt-activation/SKILL.md`
+16. **Add to memory-activation prompt index** in `.github/skills/memory-activation/SKILL.md`
 
 ## Phase 5: Assess Muscle Need
 

@@ -48,3 +48,9 @@ Stack trace reading pattern:
 - Confirm the fix in the original scenario
 - Add a regression test if one didn't exist
 - Write a clear commit message: what was wrong, why, and what fixed it
+
+## Agent Tooling Pitfall
+
+- Avoid large parallel file-creation bursts when generating many text-heavy artifacts in VS Code.
+- More than 4 simultaneous file writes can trigger temporary UI freezes through explorer refresh, file watchers, and preview/render churn.
+- Prefer smaller batches or sequential writes when creating multiple SVG/Markdown/code files in one folder.

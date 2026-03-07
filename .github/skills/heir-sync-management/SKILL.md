@@ -304,7 +304,7 @@ Ask: "Is this skill ONLY useful for managing the Alex repo itself?"
 Only a few skills are genuinely master-only:
 
 - `heir-sync-management` — This skill
-- `master-alex-audit` — Master workspace auditing
+- `architecture-audit` — Master workspace auditing
 - `release-preflight` — Marketplace publishing
 - `release-process` — Release pipeline
 
@@ -427,7 +427,7 @@ After any skill rename:
 
 - [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
 - [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
-- [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
+- [brain-qa/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
 - [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
 
 ---
@@ -490,7 +490,7 @@ This is not documentation. It is a **handoff message** from Master to the heir's
 
 - [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
 - [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
-- [architecture-health/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
+- [brain-qa/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
 - [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
 
 ---

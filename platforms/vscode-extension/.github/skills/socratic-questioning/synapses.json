@@ -32,7 +32,7 @@
       "description": "Must balance questioning with cognitive load"
     },
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
+      "target": ".github/skills/meditation/SKILL.md",
       "type": "Relates",
       "strength": 0.7,
       "description": "Both guide self-discovery"

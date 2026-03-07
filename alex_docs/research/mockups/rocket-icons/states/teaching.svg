@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 6 116 116" width="128" height="128">
+
+    <defs>
+        <linearGradient id="rocketBodystates_teaching" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#0284c7"/>
+        </linearGradient>
+        <linearGradient id="flameGradstates_teaching" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74"/>
+            <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+    </defs>
+<filter id="pop_states_teaching" x="-5%" y="-5%" width="110%" height="110%">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="1.5" result="expanded"/>
+    <feFlood flood-color="#0a0e1a" result="dark"/>
+    <feComposite in="dark" in2="expanded" operator="in" result="outline"/>
+    <feMerge>
+        <feMergeNode in="outline"/>
+        <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+</filter>
+<g filter="url(#pop_states_teaching)">
+<g transform="rotate(15, 64, 64)">
+
+    <g transform="translate(64,64) rotate(30) translate(-64,-64)">
+        <!-- Rocket body -->
+        <path d="M64,14 C64,14 48,28 48,52 L48,80 L54,84 L54,76 L74,76 L74,84 L80,80 L80,52 C80,28 64,14 64,14 Z" 
+              fill="url(#rocketBodystates_teaching)" />
+        <!-- Left fin -->
+        <polygon points="48,68 34,88 48,80" fill="url(#rocketBodystates_teaching)" />
+        <!-- Right fin -->
+        <polygon points="80,68 94,88 80,80" fill="url(#rocketBodystates_teaching)" />
+        <!-- A cutout (negative space) -->
+        <path d="M64,26 L55,62 L58,62 L61,52 L67,52 L70,62 L73,62 Z M62.5,47 L64,36 L65.5,47 Z" 
+              fill="#ffffff" />
+        <!-- Exhaust flame -->
+        <polygon points="54,82 64,98 74,82" fill="url(#flameGradstates_teaching)" />
+    </g>
+
+    <!-- Large chalkboard behind rocket -->
+    <g transform="translate(6, 10)">
+        <!-- Board frame -->
+        <rect x="0" y="0" width="48" height="36" rx="3" fill="#f59e0b" opacity="0.45" stroke="#f59e0b" stroke-width="2"/>
+        <!-- Chalk writing -->
+        <line x1="6" y1="10" x2="28" y2="10" stroke="#f59e0b" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+        <line x1="6" y1="17" x2="34" y2="17" stroke="#f59e0b" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+        <line x1="6" y1="24" x2="20" y2="24" stroke="#f59e0b" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+        <!-- Chalk tray -->
+        <rect x="2" y="34" width="44" height="4" rx="1" fill="#f59e0b" opacity="0.5"/>
+        <rect x="6" y="34" width="8" height="3" rx="1" fill="#ffffff" opacity="0.5"/>
+    </g>
+    <!-- Pointer stick -->
+    <g transform="translate(98, 14) rotate(25)">
+        <rect x="-1.5" y="0" width="3" height="28" rx="1" fill="#f59e0b" opacity="0.75"/>
+        <circle cx="0" cy="0" r="3" fill="#f59e0b" opacity="0.9"/>
+    </g>
+    <!-- Lightbulb bottom-right -->
+    <g transform="translate(104, 72)">
+        <circle cx="0" cy="0" r="10" fill="#f59e0b" opacity="0.15"/>
+        <path d="M0,-7 Q-5,-7 -5,0 Q-5,4 -3,6 L3,6 Q5,4 5,0 Q5,-7 0,-7 Z" fill="#f59e0b" opacity="0.75"/>
+        <path d="M-1,0 L0,-2 L1,0" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.5"/>
+        <rect x="-2" y="6" width="4" height="3" rx="0.5" fill="#f59e0b" opacity="0.5"/>
+        <line x1="0" y1="-12" x2="0" y2="-15" stroke="#f59e0b" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+        <line x1="8" y1="-4" x2="11" y2="-6" stroke="#f59e0b" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+        <line x1="-8" y1="-4" x2="-11" y2="-6" stroke="#f59e0b" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+    </g>
+</g>
+</g>
+</svg>

@@ -181,6 +181,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
         provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
         learnAlex: "https://learnalex.correax.com/",
+        learnAlexSelfStudy: "https://learnalex.correax.com/self-study",
+        learnAlexExercises: "https://learnalex.correax.com/exercises",
+        learnAlexSessionPlan: "https://learnalex.correax.com/session-plan",
+        learnAlexSlides: "https://learnalex.correax.com/slides",
+        learnAlexDemoScripts: "https://learnalex.correax.com/demo-scripts",
+        learnAlexHandout: "https://learnalex.correax.com/handout",
+        learnAlexPreRead: "https://learnalex.correax.com/pre-read",
       };
 
       // Handle simple command execution
@@ -197,6 +204,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
       // Handle special cases
       switch (message.command) {
+        case "learnAlexWorkshop": {
+          const persona = message.workshop || 'software-developers';
+          const url = `https://learnalex.correax.com/workshop/${encodeURIComponent(persona)}`;
+          vscode.env.openExternal(vscode.Uri.parse(url));
+          break;
+        }
         case "openChat":
           console.log('[Alex] Opening chat panel');
           openChatPanel();
@@ -215,6 +228,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           console.log('[Alex] Entering meditation state');
           this.setCognitiveState('meditation');
           vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+          break;
+        case "tabSwitch":
+          // Spike 1B: Track active tab (no-op beyond logging for now)
+          console.log(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
           break;
         case "refresh":
           this.refresh();

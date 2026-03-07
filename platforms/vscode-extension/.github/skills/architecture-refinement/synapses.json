@@ -10,7 +10,7 @@
       "context": "Operationalizes the extract-and-document phase of bootstrap learning"
     },
     {
-      "target": ".github/prompts/unified-meditation-protocols.prompt.md",
+      "target": ".github/prompts/meditate.prompt.md",
       "type": "feeds",
       "strength": 0.7,
       "context": "Documented patterns become consolidation fodder during meditation"

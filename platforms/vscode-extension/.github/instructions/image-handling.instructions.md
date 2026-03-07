@@ -26,6 +26,7 @@ When a user asks to generate an image, video, or audio via Replicate, read `.git
 ### Image Generation Priority
 
 1. **Banner** → `recraft-ai/recraft-v4-svg` (SVG default — scalable, theme-aware, lightweight); fallback to Ideogram v3 Turbo for raster with text
+2. **Micro-icon concepting / emoji-style icon ideation** → `miike-ai/flux-ico:<version>` or `appmeloncreator/platmoji-beta:<version>` for PNG concept passes only; use required trigger words from the model page (`ICO`, `emoji`)
 2. **Has reference face images** → `google/nano-banana-pro` (`image_input` array, up to 14 refs)
 3. **Fast face generation** → `google/nano-banana-2` (same `image_input` API, Gemini 3.1 Flash)
 4. **Text must appear in image** → `ideogram-ai/ideogram-v3-turbo` ($0.03, 3:1 for banners)
@@ -33,6 +34,8 @@ When a user asks to generate an image, video, or audio via Replicate, read `.git
 6. **Production image, no text** → `black-forest-labs/flux-1.1-pro` or `flux-2-pro` (multi-ref)
 7. **Vector SVG output** → `recraft-ai/recraft-v4-svg` or `recraft-ai/recraft-v4-pro-svg`
 8. **Fast prototype** → `black-forest-labs/flux-schnell` ($0.003)
+
+For compact UI icons, do not assume SVG generation is the best fit. `recraft-ai/recraft-v4-svg` is strong for banners and larger vector compositions, but its prompt surface is too art-directed for deterministic sidebar micro-icons. Use raster concept models for ideation, then finalize approved iconography as clean SVG.
 
 ### Video Generation Priority
 
@@ -55,10 +58,14 @@ When a user asks to generate an image, video, or audio via Replicate, read `.git
 - `ideogram-v2`: `magic_prompt_option` is case-sensitive (`'On'`, not `'ON'`)
 - `ideogram-v3`: use `style_preset` instead of `style_type`; `aspect_ratio: '3:1'` for banners
 - Veo-3 duration: **ONLY accepts 4, 6, or 8** — other values rejected with error
+- Community Replicate models often require a versioned model ref (`owner/model:sha256...`), not just `owner/model`
+- Community LoRA models may require a trigger word from the model README (`ICO`, `emoji`, `GENMOJI`, etc.); prompts can fail stylistically without it
+- `recraft-ai/recraft-v4-svg` exposes a minimal control surface (`prompt`, `size`, `aspect_ratio`), so do not rely on it for literal micro-icon geometry
 
 ## Code Quality
 
 - Always handle Ideogram URL getter function quirk: `typeof output.url === 'function' ? output.url().toString() : output`
 - Add 2-second delay between Replicate API calls for rate limiting
 - Use exponential backoff retry for 429 errors (2s, 4s, 8s)
+- Prefer the model's `retry_after` hint when Replicate includes it in a 429 response
 - Store generation reports as JSON alongside output files
