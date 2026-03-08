@@ -4,7 +4,7 @@
 **Created**: March 5, 2026
 **Revised**: March 7, 2026 — Consolidated as single self-contained execution doc
 **Classification**: Internal — UI-first implementation plan
-**Status**: Waves 0–5 ✔️ · Wave 6 (Advanced Tabs) deferred until runtime contracts defined
+**Status**: Waves 0–6 ✔️ · Refinement phase next
 
 > **This is the single source of truth for Command Center work.** All context from the feasibility study, design principles, competitive analysis, and second-opinion audit has been consolidated here. Background research docs are archived for reference only.
 
@@ -55,9 +55,9 @@ The Command Center is a **staged UI refactor**, not a single full replacement.
 | # | Tab | Purpose | Wave |
 |---|-----|---------|------|
 | 1 | **Mission Command** | Operational dashboard — status, commands, nudges, settings | Wave 4 ✅ |
-| 2 | **Agents** | Agent management — state, registry, threads | Wave 6 (deferred) |
-| 3 | **Skill Store** | Skill catalog — browse, toggle, search | Wave 6 (deferred) |
-| 4 | **Mind** | Cognitive introspection — health, memory, age, uncertainty | Wave 6 (deferred) |
+| 2 | **Agents** | Agent management — state, registry, threads | Wave 6 ✅ |
+| 3 | **Skill Store** | Skill catalog — browse, toggle, search | Wave 6 ✅ |
+| 4 | **Mind** | Cognitive introspection — health, memory, age, uncertainty | Wave 6 ✅ |
 | 5 | **Docs** | Documentation hub + LearnAlex bridge | Wave 3 ✅ |
 
 ### Design Principles (consolidated from design doc)
@@ -205,23 +205,26 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 5.4 | Preserve editor-panel dashboards that serve deeper use cases | A | ✓ kept both |
 | 5.5 | Verify no capability loss for normal workflows | B | ✓ |
 
-### Wave 6 — Advanced Tabs
+### Wave 6 — Advanced Tabs ✔️
 
-> **Goal**: Expand Agents, Skill Store, and Mind beyond placeholders on explicit contracts.
+> **Goal**: Expand Agents, Skill Store, and Mind beyond placeholders with working data.
 > **Depends on**: Wave 5. **Unlocks**: Full Command Center vision.
+> **Completed**: March 7, 2026
 
 | # | Step | Track | Status |
 |---|------|:-----:|:------:|
-| 6.1 | Define Agent status contract (active / queued / routing / idle semantics) | B | — |
-| 6.2 | Implement Agents tab beyond placeholder state | A | — |
-| 6.3 | Define Skill Store catalog model and toggle behavior | B | — |
-| 6.4 | Implement Skill Store tab beyond placeholder state | A | — |
-| 6.5 | Define Mind tab runtime model and memory-modality mapping | B | — |
-| 6.6 | Implement Mind tab beyond reduced-scope state | A | — |
+| 6.1 | Define Agent status contract (AgentInfo interface — id, name, icon, description, role, installed) | B | ✓ |
+| 6.2 | Implement Agents tab — 7-agent registry cards with installed status badge from disk | A | ✓ |
+| 6.3 | Define Skill Store catalog model (SkillInfo — id, displayName, description, category, hasSynapses) | B | ✓ |
+| 6.4 | Implement Skill Store tab — clickable skill cards with category, description, synapse indicator | A | ✓ |
+| 6.5 | Define Mind tab runtime model (MindTabData — 5 modality counts, synapse health %, cognitive age, maintenance dates) | B | ✓ |
+| 6.6 | Implement Mind tab — cognitive age, synapse health %, 5 memory modality bars, maintenance timestamps, quick actions | A | ✓ |
+| 6.7 | Fix easter egg avatar to use unified SVG resolution instead of deleted PNG paths | C | ✓ |
+| 6.8 | Code review — 6 issues found and fixed (date formatting, sort, empty states, escaping, dedup I/O, perf) | B | ✓ |
 
-**Total**: 50 steps across 7 waves · 3 decision gates · 3 parallel tracks
+**Total**: 55 steps across 7 waves · 3 decision gates · 3 parallel tracks
 
-### Completion Summary (Waves 0–5)
+### Completion Summary (Waves 0–6)
 
 | Wave | Title | Steps | Done | Key Deliverables |
 |------|-------|:-----:|:----:|------------------|
@@ -230,9 +233,9 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 2 | Command Center Shell | 7 | 7 | 5-tab bar, ARIA, persistence, scroll restoration, responsive |
 | 3 | Docs Tab | 8 | 8 | 7 content groups, 33-persona workshop grid, 7 external URLs |
 | 4 | Mission Command | 8 | 8 | Session card wired, doc buttons migrated to Docs, features bloat removed |
-| 5 | Controlled Consolidation | 5 | 3 | Journey audit done, both legacy views preserved (Mind tab still placeholder) |
-| 6 | Advanced Tabs | 6 | 0 | Deferred — requires Agent Status, Skill Catalog, Mind Model contracts |
-| **Σ** | | **53** | **39** | **Wave 6 blocked on runtime contracts; 3 spike gates need manual vsix test** |
+| 5 | Controlled Consolidation | 5 | 3 | Journey audit done, both legacy views preserved |
+| 6 | Advanced Tabs | 8 | 8 | Agent registry, Skill Store, Mind dashboard, easter egg SVG fix, code review |
+| **Σ** | | **55** | **47** | **All 5 tabs functional. 3 spike manual-test gates + 2 Wave 5 deferrals remaining.** |
 
 ---
 
@@ -245,8 +248,8 @@ These facts are verified against the current repo (March 7, 2026) and treated as
 | Fact | Verified Value |
 |------|----------------|
 | Sidebar views registered | 3: `alex.welcomeView`, `alex.cognitiveDashboard`, `alex.memoryTree` |
-| `welcomeView.ts` | 588 lines |
-| `welcomeViewHtml.ts` | 1,830 lines (Command Center shell + tabs implemented) |
+| `welcomeView.ts` | ~700 lines (grew with 3 data collection methods) |
+| `welcomeViewHtml.ts` | ~2,100 lines (grew with 3 tab implementations + CSS) |
 | `avatarMappings.ts` | 748 lines (SVG format parameter added in Spike 1A) |
 | `memoryTreeProvider.ts` | 319 lines |
 | `cognitiveDashboard.ts` | 621 lines |
@@ -303,7 +306,7 @@ All files under `alex_docs/research/mockups/`. Only v2 mockups are active design
 
 | View ID | Type | State | File |
 |---------|------|-------|------|
-| `alex.welcomeView` | webview | Active — **is now the Command Center** (5-tab shell) | `welcomeView.ts` (588) + `welcomeViewHtml.ts` (1,830) |
+| `alex.welcomeView` | webview | Active — **is now the Command Center** (5-tab shell, all tabs functional) | `welcomeView.ts` (~700) + `welcomeViewHtml.ts` (~2,100) |
 | `alex.cognitiveDashboard` | webview | Collapsed — editor-panel dashboard | `cognitiveDashboard.ts` (621) |
 | `alex.memoryTree` | tree | Collapsed — tree view | `memoryTreeProvider.ts` (319) |
 
@@ -328,8 +331,8 @@ All registered under `alex-sidebar` container in `package.json`.
 ```
 webview → extension:  postMessage({ command: string, ...data })
 routing:              commandMap (41 entries) → vscode.commands.executeCommand()
-                      externalUrlMap (5 entries) → vscode.env.openExternal()
-                      special cases: openChat, launchRecommendedSkill, meditate, refresh
+                      externalUrlMap (12 entries) → vscode.env.openExternal()
+                      special cases: openChat, launchRecommendedSkill, openSkill, meditate, tabSwitch, refresh
 script pattern:       Event delegation via data-cmd attributes
                       Auto-refresh: setInterval(refresh, 30000)
 ```

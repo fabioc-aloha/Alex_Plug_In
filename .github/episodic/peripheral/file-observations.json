@@ -4,23 +4,15 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/config/user-profile.json",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/avatarMappings.ts",
-    "platforms/vscode-extension/src/commands/skillCatalog.ts",
-    "platforms/vscode-extension/src/commands/upgrade.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md"
   ],
   "todoHotspots": [
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772942657124
+      "scannedAt": 1772944880922
     }
   ],
-  "lastUpdated": 1772942657124
+  "lastUpdated": 1772944880922
 }
